@@ -25,9 +25,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal partial class AbstractAsynchronousTaggerProvider<TTag>
+    partial internal class AbstractAsynchronousTaggerProvider<TTag>
     {
-        private partial class TagSource
+        partial private class TagSource
         {
             private void OnCaretPositionChanged(object? _, CaretPositionChangedEventArgs e)
             {

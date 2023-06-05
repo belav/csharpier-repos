@@ -16,7 +16,7 @@ namespace System.Diagnostics
     [Designer(
         "System.Diagnostics.Design.ProcessThreadDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class ProcessThread : Component
+    partial public class ProcessThread : Component
     {
         private readonly bool _isRemoteMachine;
         private readonly int _processId;

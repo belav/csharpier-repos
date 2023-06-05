@@ -6,12 +6,12 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherCreate2")]
-        internal static partial SafeEvpCipherCtxHandle EvpCipherCreate(
+        partial internal static SafeEvpCipherCtxHandle EvpCipherCreate(
             IntPtr cipher,
             ref byte key,
             int keyLength,
@@ -20,11 +20,11 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherCreatePartial")]
-        internal static partial SafeEvpCipherCtxHandle EvpCipherCreatePartial(IntPtr cipher);
+        partial internal static SafeEvpCipherCtxHandle EvpCipherCreatePartial(IntPtr cipher);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetKeyAndIV")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EvpCipherSetKeyAndIV(
+        partial private static bool EvpCipherSetKeyAndIV(
             SafeEvpCipherCtxHandle ctx,
             ref byte key,
             ref byte iv,
@@ -56,7 +56,7 @@ internal static partial class Interop
             EntryPoint = "CryptoNative_EvpCipherSetGcmNonceLength"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool CryptoNative_EvpCipherSetGcmNonceLength(
+        partial private static bool CryptoNative_EvpCipherSetGcmNonceLength(
             SafeEvpCipherCtxHandle ctx,
             int nonceLength
         );
@@ -74,7 +74,7 @@ internal static partial class Interop
             EntryPoint = "CryptoNative_EvpCipherSetCcmNonceLength"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool CryptoNative_EvpCipherSetCcmNonceLength(
+        partial private static bool CryptoNative_EvpCipherSetCcmNonceLength(
             SafeEvpCipherCtxHandle ctx,
             int nonceLength
         );
@@ -88,11 +88,11 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherDestroy")]
-        internal static partial void EvpCipherDestroy(IntPtr ctx);
+        partial internal static void EvpCipherDestroy(IntPtr ctx);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherReset")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe partial bool EvpCipherReset(
+        partial private static unsafe bool EvpCipherReset(
             SafeEvpCipherCtxHandle ctx,
             byte* pIv,
             int cIv
@@ -111,11 +111,11 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherCtxSetPadding")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool EvpCipherCtxSetPadding(SafeEvpCipherCtxHandle x, int padding);
+        partial internal static bool EvpCipherCtxSetPadding(SafeEvpCipherCtxHandle x, int padding);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherUpdate")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EvpCipherUpdate(
+        partial private static bool EvpCipherUpdate(
             SafeEvpCipherCtxHandle ctx,
             ref byte output,
             out int outl,
@@ -157,7 +157,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherFinalEx")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EvpCipherFinalEx(
+        partial private static bool EvpCipherFinalEx(
             SafeEvpCipherCtxHandle ctx,
             ref byte outm,
             out int outl
@@ -174,7 +174,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherGetGcmTag")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EvpCipherGetGcmTag(
+        partial private static bool EvpCipherGetGcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
             int tagLength
@@ -190,7 +190,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherGetAeadTag")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EvpCipherGetAeadTag(
+        partial private static bool EvpCipherGetAeadTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
             int tagLength
@@ -206,7 +206,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetGcmTag")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EvpCipherSetGcmTag(
+        partial private static bool EvpCipherSetGcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
             int tagLength
@@ -222,7 +222,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetAeadTag")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EvpCipherSetAeadTag(
+        partial private static bool EvpCipherSetAeadTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
             int tagLength
@@ -238,7 +238,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherGetCcmTag")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EvpCipherGetCcmTag(
+        partial private static bool EvpCipherGetCcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
             int tagLength
@@ -254,7 +254,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetCcmTag")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EvpCipherSetCcmTag(
+        partial private static bool EvpCipherSetCcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
             int tagLength
@@ -277,88 +277,88 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes128Ecb")]
-        internal static partial IntPtr EvpAes128Ecb();
+        partial internal static IntPtr EvpAes128Ecb();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes128Cbc")]
-        internal static partial IntPtr EvpAes128Cbc();
+        partial internal static IntPtr EvpAes128Cbc();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes128Gcm")]
-        internal static partial IntPtr EvpAes128Gcm();
+        partial internal static IntPtr EvpAes128Gcm();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes128Cfb8")]
-        internal static partial IntPtr EvpAes128Cfb8();
+        partial internal static IntPtr EvpAes128Cfb8();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes128Cfb128")]
-        internal static partial IntPtr EvpAes128Cfb128();
+        partial internal static IntPtr EvpAes128Cfb128();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes128Ccm")]
-        internal static partial IntPtr EvpAes128Ccm();
+        partial internal static IntPtr EvpAes128Ccm();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes192Ecb")]
-        internal static partial IntPtr EvpAes192Ecb();
+        partial internal static IntPtr EvpAes192Ecb();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes192Cbc")]
-        internal static partial IntPtr EvpAes192Cbc();
+        partial internal static IntPtr EvpAes192Cbc();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes192Gcm")]
-        internal static partial IntPtr EvpAes192Gcm();
+        partial internal static IntPtr EvpAes192Gcm();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes192Cfb8")]
-        internal static partial IntPtr EvpAes192Cfb8();
+        partial internal static IntPtr EvpAes192Cfb8();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes192Cfb128")]
-        internal static partial IntPtr EvpAes192Cfb128();
+        partial internal static IntPtr EvpAes192Cfb128();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes192Ccm")]
-        internal static partial IntPtr EvpAes192Ccm();
+        partial internal static IntPtr EvpAes192Ccm();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes256Ecb")]
-        internal static partial IntPtr EvpAes256Ecb();
+        partial internal static IntPtr EvpAes256Ecb();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes256Cbc")]
-        internal static partial IntPtr EvpAes256Cbc();
+        partial internal static IntPtr EvpAes256Cbc();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes256Gcm")]
-        internal static partial IntPtr EvpAes256Gcm();
+        partial internal static IntPtr EvpAes256Gcm();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes256Cfb128")]
-        internal static partial IntPtr EvpAes256Cfb128();
+        partial internal static IntPtr EvpAes256Cfb128();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes256Cfb8")]
-        internal static partial IntPtr EvpAes256Cfb8();
+        partial internal static IntPtr EvpAes256Cfb8();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpAes256Ccm")]
-        internal static partial IntPtr EvpAes256Ccm();
+        partial internal static IntPtr EvpAes256Ccm();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDesCbc")]
-        internal static partial IntPtr EvpDesCbc();
+        partial internal static IntPtr EvpDesCbc();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDesEcb")]
-        internal static partial IntPtr EvpDesEcb();
+        partial internal static IntPtr EvpDesEcb();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDesCfb8")]
-        internal static partial IntPtr EvpDesCfb8();
+        partial internal static IntPtr EvpDesCfb8();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDes3Cbc")]
-        internal static partial IntPtr EvpDes3Cbc();
+        partial internal static IntPtr EvpDes3Cbc();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDes3Ecb")]
-        internal static partial IntPtr EvpDes3Ecb();
+        partial internal static IntPtr EvpDes3Ecb();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDes3Cfb8")]
-        internal static partial IntPtr EvpDes3Cfb8();
+        partial internal static IntPtr EvpDes3Cfb8();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDes3Cfb64")]
-        internal static partial IntPtr EvpDes3Cfb64();
+        partial internal static IntPtr EvpDes3Cfb64();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpRC2Cbc")]
-        internal static partial IntPtr EvpRC2Cbc();
+        partial internal static IntPtr EvpRC2Cbc();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpRC2Ecb")]
-        internal static partial IntPtr EvpRC2Ecb();
+        partial internal static IntPtr EvpRC2Ecb();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpChaCha20Poly1305")]
-        internal static partial IntPtr EvpChaCha20Poly1305();
+        partial internal static IntPtr EvpChaCha20Poly1305();
 
         internal enum EvpCipherDirection : int
         {

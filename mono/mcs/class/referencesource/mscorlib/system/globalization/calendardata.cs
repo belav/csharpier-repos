@@ -11,6 +11,7 @@ namespace System.Globalization
     using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
 
+    partial
     //
 
 
@@ -31,7 +32,7 @@ namespace System.Globalization
     // WARNING: The type loader will rearrange class member offsets so the mscorwks!CalendarDataBaseObject
     // WARNING: must be manually structured to match the true loaded class layout
     //
-    internal partial class CalendarData
+    internal class CalendarData
     {
         // Max calendars
         internal const int MAX_CALENDARS = 23;

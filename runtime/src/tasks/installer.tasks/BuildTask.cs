@@ -6,7 +6,7 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.DotNet.Build.Tasks
 {
-    public abstract partial class BuildTask : ITask
+    partial public abstract class BuildTask : ITask
     {
         private TaskLoggingHelper _log = null;
 

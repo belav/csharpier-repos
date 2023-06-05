@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal abstract partial class CSharpSyntaxVisitor<TResult>
+    partial internal abstract class CSharpSyntaxVisitor<TResult>
     {
         public virtual TResult Visit(CSharpSyntaxNode node)
         {
@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
     }
 
-    internal abstract partial class CSharpSyntaxVisitor
+    partial internal abstract class CSharpSyntaxVisitor
     {
         public virtual void Visit(CSharpSyntaxNode node)
         {

@@ -60,7 +60,7 @@ namespace System.IO.Pipes
         AccessSystemSecurity = 16777216,
     }
 
-    public sealed partial class PipeAccessRule : System.Security.AccessControl.AccessRule
+    partial public sealed class PipeAccessRule : System.Security.AccessControl.AccessRule
     {
         public PipeAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -96,7 +96,7 @@ namespace System.IO.Pipes
         }
     }
 
-    public sealed partial class PipeAuditRule : System.Security.AccessControl.AuditRule
+    partial public sealed class PipeAuditRule : System.Security.AccessControl.AuditRule
     {
         public PipeAuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -132,7 +132,7 @@ namespace System.IO.Pipes
         }
     }
 
-    public partial class PipeSecurity : System.Security.AccessControl.NativeObjectSecurity
+    partial public class PipeSecurity : System.Security.AccessControl.NativeObjectSecurity
     {
         public PipeSecurity()
             : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
@@ -205,7 +205,7 @@ namespace System.IO.Pipes
         public void SetAuditRule(System.IO.Pipes.PipeAuditRule rule) { }
     }
 
-    public static partial class PipesAclExtensions
+    partial public static class PipesAclExtensions
     {
         public static System.IO.Pipes.PipeSecurity GetAccessControl(
             this System.IO.Pipes.PipeStream stream

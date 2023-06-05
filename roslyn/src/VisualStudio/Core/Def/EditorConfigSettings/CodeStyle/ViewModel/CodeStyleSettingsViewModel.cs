@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle.ViewModel
 {
-    internal partial class CodeStyleSettingsViewModel
+    partial internal class CodeStyleSettingsViewModel
         : SettingsViewModelBase<
             CodeStyleSetting,
             CodeStyleSettingsViewModel.SettingsSnapshotFactory,

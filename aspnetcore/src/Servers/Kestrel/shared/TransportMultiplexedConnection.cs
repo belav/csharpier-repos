@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Connections;
 
-internal abstract partial class TransportMultiplexedConnection : MultiplexedConnectionContext
+partial internal abstract class TransportMultiplexedConnection : MultiplexedConnectionContext
 {
     private IDictionary<object, object?>? _items;
     private string? _connectionId;

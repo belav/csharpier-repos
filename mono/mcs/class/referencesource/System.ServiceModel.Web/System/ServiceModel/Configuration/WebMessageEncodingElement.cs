@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Text;
     using System.Xml;
 
-    public sealed partial class WebMessageEncodingElement : BindingElementExtensionElement
+    partial public sealed class WebMessageEncodingElement : BindingElementExtensionElement
     {
         const string ConfigurationStringsWebContentTypeMapperType = "webContentTypeMapperType";
 
@@ -159,7 +159,7 @@ namespace System.ServiceModel.Configuration
             this.ReaderQuotas.MaxStringContentLength = source.ReaderQuotas.MaxStringContentLength;
         }
 
-        internal protected override BindingElement CreateBindingElement()
+        protected internal override BindingElement CreateBindingElement()
         {
             WebMessageEncodingBindingElement binding = new WebMessageEncodingBindingElement();
             this.ApplyConfiguration(binding);

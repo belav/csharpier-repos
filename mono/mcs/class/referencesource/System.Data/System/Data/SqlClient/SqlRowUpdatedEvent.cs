@@ -24,7 +24,7 @@ namespace System.Data.SqlClient
         )
             : base(row, command, statementType, tableMapping) { }
 
-        new public SqlCommand Command
+        public new SqlCommand Command
         {
             get { return (SqlCommand)base.Command; }
         }

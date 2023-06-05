@@ -14,6 +14,7 @@ namespace System.Web.UI.HtmlControls
     using System.Web.UI;
     using System.Security.Permissions;
 
+    public
     /*
      *  A control representing an intrinsic Html tag.
      */
@@ -25,7 +26,7 @@ namespace System.Web.UI.HtmlControls
     /// available to all Html Server controls that must have a
     /// closing tag.</para>
     /// </devdoc>
-    abstract public class HtmlContainerControl : HtmlControl
+    abstract class HtmlContainerControl : HtmlControl
     {
         /*
          * Creates a new WebControl

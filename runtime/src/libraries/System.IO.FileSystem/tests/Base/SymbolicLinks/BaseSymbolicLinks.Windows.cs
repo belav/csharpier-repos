@@ -13,7 +13,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public abstract partial class BaseSymbolicLinks : FileSystemTest
+    partial public abstract class BaseSymbolicLinks : FileSystemTest
     {
         private const int OPEN_EXISTING = 3;
         private const int FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;

@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 {
-    internal partial class InvocationExpressionSignatureHelpProviderBase
+    partial internal class InvocationExpressionSignatureHelpProviderBase
     {
         internal virtual Task<(
             ImmutableArray<SignatureHelpItem> items,

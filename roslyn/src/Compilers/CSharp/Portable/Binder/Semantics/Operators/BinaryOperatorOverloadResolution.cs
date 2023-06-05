@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class OverloadResolution
+    partial internal sealed class OverloadResolution
     {
         public void BinaryOperatorOverloadResolution(
             BinaryOperatorKind kind,

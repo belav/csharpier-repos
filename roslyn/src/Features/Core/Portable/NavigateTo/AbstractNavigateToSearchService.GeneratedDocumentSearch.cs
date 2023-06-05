@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.NavigateTo
 {
-    internal abstract partial class AbstractNavigateToSearchService
+    partial internal abstract class AbstractNavigateToSearchService
     {
         public async Task SearchGeneratedDocumentsAsync(
             Project project,

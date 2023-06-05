@@ -12,8 +12,9 @@ using ConfigurationType = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
+    partial
     // ChannelEndpointElementCollection
-    public sealed partial class ChannelEndpointElementCollection
+    public sealed class ChannelEndpointElementCollection
         : ServiceModelEnhancedConfigurationElementCollection<ChannelEndpointElement>
     {
         protected override object GetElementKey(ConfigurationElement element)
@@ -23,8 +24,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // ClaimTypeElementCollection
-    public sealed partial class ClaimTypeElementCollection
+    public sealed class ClaimTypeElementCollection
         : ServiceModelConfigurationElementCollection<ClaimTypeElement>,
             ICollection,
             IEnumerable
@@ -35,8 +37,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // ComContractElementCollection
-    public sealed partial class ComContractElementCollection
+    public sealed class ComContractElementCollection
         : ServiceModelEnhancedConfigurationElementCollection<ComContractElement>
     {
         protected override object GetElementKey(ConfigurationElement element)
@@ -45,8 +48,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // ComMethodElementCollection
-    public sealed partial class ComMethodElementCollection
+    public sealed class ComMethodElementCollection
         : ServiceModelEnhancedConfigurationElementCollection<ComMethodElement>
     {
         protected override object GetElementKey(ConfigurationElement element)
@@ -55,8 +59,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // ComPersistableTypeElementCollection
-    public sealed partial class ComPersistableTypeElementCollection
+    public sealed class ComPersistableTypeElementCollection
         : ServiceModelEnhancedConfigurationElementCollection<ComPersistableTypeElement>
     {
         protected override object GetElementKey(ConfigurationElement element)
@@ -66,8 +71,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // ComUdtElementCollection
-    public sealed partial class ComUdtElementCollection
+    public sealed class ComUdtElementCollection
         : ServiceModelEnhancedConfigurationElementCollection<ComUdtElement>
     {
         protected override object GetElementKey(ConfigurationElement element)
@@ -77,8 +83,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // CustomBindingElementCollection
-    public sealed partial class CustomBindingElementCollection
+    public sealed class CustomBindingElementCollection
         : ServiceModelEnhancedConfigurationElementCollection<CustomBindingElement>,
             ICollection,
             IEnumerable
@@ -89,8 +96,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // IssuedTokenClientBehaviorsElementCollection
-    public sealed partial class IssuedTokenClientBehaviorsElementCollection
+    public sealed class IssuedTokenClientBehaviorsElementCollection
         : ServiceModelConfigurationElementCollection<IssuedTokenClientBehaviorsElement>
     {
         [MonoTODO]
@@ -100,8 +108,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // StandardBindingElementCollection
-    public sealed partial class StandardBindingElementCollection<TBindingConfiguration>
+    public sealed class StandardBindingElementCollection<TBindingConfiguration>
         : ServiceModelEnhancedConfigurationElementCollection<TBindingConfiguration>,
             ICollection,
             IEnumerable
@@ -113,8 +122,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // TransportConfigurationTypeElementCollection
-    public sealed partial class TransportConfigurationTypeElementCollection
+    public sealed class TransportConfigurationTypeElementCollection
         : ServiceModelConfigurationElementCollection<TransportConfigurationTypeElement>
     {
         protected override object GetElementKey(ConfigurationElement element)
@@ -123,8 +133,9 @@ namespace System.ServiceModel.Configuration
         }
     }
 
+    partial
     // XPathMessageFilterElementCollection
-    public sealed partial class XPathMessageFilterElementCollection
+    public sealed class XPathMessageFilterElementCollection
         : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>
     {
         [MonoTODO]

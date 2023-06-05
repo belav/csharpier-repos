@@ -40,7 +40,7 @@ using System.Text;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    abstract partial class SymbolType
+    partial abstract class SymbolType
     {
         internal Type m_baseType;
 

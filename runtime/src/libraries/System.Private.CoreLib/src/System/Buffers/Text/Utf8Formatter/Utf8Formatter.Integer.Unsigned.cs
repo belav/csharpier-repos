@@ -5,10 +5,11 @@ using System.Runtime.CompilerServices;
 
 namespace System.Buffers.Text
 {
+    partial
     /// <summary>
     /// Methods to format common data types as Utf8 strings.
     /// </summary>
-    public static partial class Utf8Formatter
+    public static class Utf8Formatter
     {
         //
         // Common worker for all unsigned integer TryFormat overloads

@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Generators
 {
-    public partial class EventSourceGenerator
+    partial public class EventSourceGenerator
     {
         private static EventSourceClass? GetSemanticTargetForGeneration(
             GeneratorAttributeSyntaxContext context,

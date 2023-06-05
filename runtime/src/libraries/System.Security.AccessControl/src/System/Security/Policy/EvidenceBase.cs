@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public abstract partial class EvidenceBase
+    partial public abstract class EvidenceBase
     {
         protected EvidenceBase() { }
 

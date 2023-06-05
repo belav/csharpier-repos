@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public sealed partial class SkippedTokensTriviaSyntax
+    partial public sealed class SkippedTokensTriviaSyntax
         : StructuredTriviaSyntax,
             ISkippedTokensTriviaSyntax { }
 }

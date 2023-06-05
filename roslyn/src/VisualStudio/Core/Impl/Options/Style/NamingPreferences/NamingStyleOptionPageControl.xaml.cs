@@ -22,7 +22,7 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 {
-    internal partial class NamingStyleOptionPageControl : AbstractOptionPageControl
+    partial internal class NamingStyleOptionPageControl : AbstractOptionPageControl
     {
         public static string ReorderHeader => ServicesVSResources.Reorder;
         public static string SpecificationHeader => ServicesVSResources.Specification;

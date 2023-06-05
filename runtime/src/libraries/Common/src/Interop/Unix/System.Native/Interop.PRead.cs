@@ -3,16 +3,16 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_PRead",
             SetLastError = true
         )]
-        internal static unsafe partial int PRead(
+        partial internal static unsafe int PRead(
             SafeHandle fd,
             byte* buffer,
             int bufferSize,

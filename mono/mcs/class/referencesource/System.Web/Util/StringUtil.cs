@@ -88,7 +88,7 @@ namespace System.Web.Util
             return false;
         }
 
-        unsafe internal static bool Equals(
+        internal static unsafe bool Equals(
             string s1,
             int offset1,
             string s2,
@@ -192,7 +192,12 @@ namespace System.Web.Util
          * Determines if the first string ends with the second string.
          * Fast, non-culture aware.
          */
-        unsafe internal static bool StringEndsWith(string s1, string s2)
+        internal static
+        /*
+         * Determines if the first string ends with the second string.
+         * Fast, non-culture aware.
+         */
+        unsafe bool StringEndsWith(string s1, string s2)
         {
             int offset = s1.Length - s2.Length;
             if (offset < 0)
@@ -247,7 +252,12 @@ namespace System.Web.Util
          * Determines if the first string starts with the second string.
          * Fast, non-culture aware.
          */
-        unsafe internal static bool StringStartsWith(string s1, string s2)
+        internal static
+        /*
+         * Determines if the first string starts with the second string.
+         * Fast, non-culture aware.
+         */
+        unsafe bool StringStartsWith(string s1, string s2)
         {
             if (s2.Length > s1.Length)
             {
@@ -292,7 +302,7 @@ namespace System.Web.Util
         }
 
 #if !MONO
-        internal unsafe static void UnsafeStringCopy(
+        internal static unsafe void UnsafeStringCopy(
             string src,
             int srcIndex,
             char[] dest,
@@ -459,7 +469,7 @@ namespace System.Web.Util
             return enc.GetBytes(s, 0, s.Length, bytes, 0);
         }
 
-        internal unsafe static void memcpyimpl(byte* src, byte* dest, int len)
+        internal static unsafe void memcpyimpl(byte* src, byte* dest, int len)
         {
 #if !MONO
             Debug.Assert(len >= 0, "Negative length in memcpyimpl!");

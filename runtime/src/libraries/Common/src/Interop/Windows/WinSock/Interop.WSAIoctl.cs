@@ -5,13 +5,13 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         // Used with SIOGETEXTENSIONFUNCTIONPOINTER - we're assuming that will never block.
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError WSAIoctl(
+        partial internal static SocketError WSAIoctl(
             SafeSocketHandle socketHandle,
             int ioControlCode,
             ref Guid guid,
@@ -24,7 +24,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, EntryPoint = "WSAIoctl", SetLastError = true)]
-        internal static partial SocketError WSAIoctl_Blocking(
+        partial internal static SocketError WSAIoctl_Blocking(
             SafeSocketHandle socketHandle,
             int ioControlCode,
             byte[]? inBuffer,

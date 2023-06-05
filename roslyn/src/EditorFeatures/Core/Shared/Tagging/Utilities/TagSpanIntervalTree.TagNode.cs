@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 {
-    internal partial class TagSpanIntervalTree<TTag>
+    partial internal class TagSpanIntervalTree<TTag>
     {
         private class TagNode
         {

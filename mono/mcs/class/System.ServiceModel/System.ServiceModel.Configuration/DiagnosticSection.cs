@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class DiagnosticSection : ConfigurationSection
+    partial public sealed class DiagnosticSection : ConfigurationSection
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class IpHlpApi
+    partial internal static class IpHlpApi
     {
         [LibraryImport(Interop.Libraries.IpHlpApi)]
-        internal static unsafe partial uint GetNetworkParams(IntPtr pFixedInfo, uint* pOutBufLen);
+        partial internal static unsafe uint GetNetworkParams(IntPtr pFixedInfo, uint* pOutBufLen);
     }
 }

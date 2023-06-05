@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.Security.Authentication.ExtendedProtection.Configuration;
 
-    public sealed partial class TcpTransportElement : ConnectionOrientedTransportElement
+    partial public sealed class TcpTransportElement : ConnectionOrientedTransportElement
     {
         public TcpTransportElement()
             : base() { }

@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         public enum SystemParametersAction : uint
         {
@@ -16,7 +16,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.User32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static unsafe partial bool SystemParametersInfoW(
+        partial public static unsafe bool SystemParametersInfoW(
             SystemParametersAction uiAction,
             uint uiParam,
             void* pvParam,

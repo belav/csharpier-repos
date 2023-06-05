@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace System.Security
 {
-    public sealed partial class SecureString
+    partial public sealed class SecureString
     {
         private static int GetAlignedByteSize(int length)
         {

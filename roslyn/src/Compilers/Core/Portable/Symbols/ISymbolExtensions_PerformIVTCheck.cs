@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Collections;
 
 namespace Microsoft.CodeAnalysis
 {
-    public static partial class ISymbolExtensions
+    partial public static class ISymbolExtensions
     {
         /// <summary>
         /// Given that an assembly with identity assemblyGrantingAccessIdentity granted access to assemblyWantingAccess,

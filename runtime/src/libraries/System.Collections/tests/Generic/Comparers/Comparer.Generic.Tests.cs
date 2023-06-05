@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Collections.Generic.Tests
 {
-    public abstract partial class ComparersGenericTests<T>
+    partial public abstract class ComparersGenericTests<T>
     {
         [Fact]
         public void Comparer_ComparerDefault()

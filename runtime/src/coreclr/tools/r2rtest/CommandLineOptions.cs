@@ -391,7 +391,7 @@ namespace R2RTest
                 .Invoke(args);
     }
 
-    public partial class BuildOptions
+    partial public class BuildOptions
     {
         public BuildOptions(R2RTestRootCommand cmd, ParseResult res)
         {

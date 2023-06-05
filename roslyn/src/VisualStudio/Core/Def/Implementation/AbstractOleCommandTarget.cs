@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
-    internal abstract partial class AbstractOleCommandTarget : IOleCommandTarget
+    partial internal abstract class AbstractOleCommandTarget : IOleCommandTarget
     {
         /// <summary>
         /// This is set only during Exec. Currently, this is required to disambiguate the editor calls to

@@ -22,7 +22,7 @@ namespace System.Net.NetworkInformation
             // it must be a byte array; a char array seems to want to be 2 bytes per element,
             // and a ByVal string doesn't want to seem to marshal properly for being written to
             [FieldOffset(0)]
-            public fixed byte ifr_name[16];
+            fixed public byte ifr_name[16];
 
             // you must peer into the family and length, then use ptr arith to get the rest
             [FieldOffset(16)]
@@ -33,7 +33,7 @@ namespace System.Net.NetworkInformation
         internal unsafe struct ifreq_addrin
         {
             [FieldOffset(0)]
-            public fixed byte ifr_name[16];
+            fixed public byte ifr_name[16];
 
             [FieldOffset(16)]
             public sockaddr_in ifru_addr;
@@ -44,7 +44,7 @@ namespace System.Net.NetworkInformation
         internal unsafe struct ifreq_flags
         {
             [FieldOffset(0)]
-            public fixed byte ifr_name[16];
+            fixed public byte ifr_name[16];
 
             [FieldOffset(16)]
             public uint ifru_flags;
@@ -55,7 +55,7 @@ namespace System.Net.NetworkInformation
         internal unsafe struct ifreq_mtu
         {
             [FieldOffset(0)]
-            public fixed byte ifr_name[16];
+            fixed public byte ifr_name[16];
 
             [FieldOffset(16)]
             public int ifru_mtu;

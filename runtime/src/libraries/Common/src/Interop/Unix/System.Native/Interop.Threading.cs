@@ -4,13 +4,13 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal unsafe partial class Sys
+    partial internal unsafe class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_CreateThread")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CreateThread(
+        partial internal static unsafe bool CreateThread(
             IntPtr stackSize,
             delegate* unmanaged<IntPtr, IntPtr> startAddress,
             IntPtr parameter

@@ -30,7 +30,7 @@ using System.Data;
 
 namespace Test_NUnit
 {
-    public abstract partial class TestBase
+    partial public abstract class TestBase
     {
         public const StringComparison stringComparisonType = StringComparison.InvariantCulture;
 

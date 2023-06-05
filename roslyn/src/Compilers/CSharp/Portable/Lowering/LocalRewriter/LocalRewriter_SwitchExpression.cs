@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class LocalRewriter
+    partial internal class LocalRewriter
     {
         public override BoundNode VisitConvertedSwitchExpression(
             BoundConvertedSwitchExpression node

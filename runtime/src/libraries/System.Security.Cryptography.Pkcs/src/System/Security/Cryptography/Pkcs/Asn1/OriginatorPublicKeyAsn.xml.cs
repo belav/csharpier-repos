@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct OriginatorPublicKeyAsn
+    partial internal struct OriginatorPublicKeyAsn
     {
         internal System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn Algorithm;
         internal ReadOnlyMemory<byte> PublicKey;

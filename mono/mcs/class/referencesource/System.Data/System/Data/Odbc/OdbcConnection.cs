@@ -25,7 +25,7 @@ using SysTx = System.Transactions;
 namespace System.Data.Odbc
 {
     [DefaultEvent("InfoMessage")]
-    public sealed partial class OdbcConnection : DbConnection, ICloneable
+    partial public sealed class OdbcConnection : DbConnection, ICloneable
     {
         private int connectionTimeout = ADP.DefaultConnectionTimeout;
 
@@ -73,7 +73,7 @@ namespace System.Data.Odbc
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.OdbcConnection_ConnectionString),
         ]
-        override public string ConnectionString
+        public override string ConnectionString
         {
             get { return ConnectionString_Get(); }
             set { ConnectionString_Set(value); }
@@ -85,7 +85,7 @@ namespace System.Data.Odbc
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.OdbcConnection_ConnectionTimeout),
         ]
-        new public int ConnectionTimeout
+        public new int ConnectionTimeout
         {
             get { return connectionTimeout; }
             set
@@ -102,7 +102,7 @@ namespace System.Data.Odbc
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.OdbcConnection_Database),
         ]
-        override public string Database
+        public override string Database
         {
             get
             {
@@ -124,7 +124,7 @@ namespace System.Data.Odbc
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.OdbcConnection_DataSource),
         ]
-        override public string DataSource
+        public override string DataSource
         {
             get
             {
@@ -144,7 +144,7 @@ namespace System.Data.Odbc
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.OdbcConnection_ServerVersion),
         ]
-        override public string ServerVersion
+        public override string ServerVersion
         {
             get { return InnerConnection.ServerVersion; }
         }
@@ -154,7 +154,7 @@ namespace System.Data.Odbc
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.DbConnection_State),
         ]
-        override public ConnectionState State
+        public override ConnectionState State
         {
             get { return InnerConnection.State; }
         }
@@ -301,12 +301,12 @@ namespace System.Data.Odbc
             return ProviderInfo.QuoteChar;
         }
 
-        new public OdbcTransaction BeginTransaction()
+        public new OdbcTransaction BeginTransaction()
         {
             return BeginTransaction(IsolationLevel.Unspecified);
         }
 
-        new public OdbcTransaction BeginTransaction(IsolationLevel isolevel)
+        public new OdbcTransaction BeginTransaction(IsolationLevel isolevel)
         {
             return (OdbcTransaction)InnerConnection.BeginTransaction(isolevel);
         }
@@ -321,7 +321,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override public void ChangeDatabase(string value)
+        public override void ChangeDatabase(string value)
         {
             InnerConnection.ChangeDatabase(value);
         }
@@ -364,7 +364,7 @@ namespace System.Data.Odbc
             return false;
         }
 
-        new public OdbcCommand CreateCommand()
+        public new OdbcCommand CreateCommand()
         {
             return new OdbcCommand(String.Empty, this);
         }
@@ -374,7 +374,7 @@ namespace System.Data.Odbc
             return new OdbcStatementHandle(ConnectionHandle);
         }
 
-        override public void Close()
+        public override void Close()
         {
             InnerConnection.CloseConnection(this, ConnectionFactory);
 
@@ -627,7 +627,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override public void Open()
+        public override void Open()
         {
             InnerConnection.OpenConnection(this, ConnectionFactory);
 
@@ -659,7 +659,7 @@ namespace System.Data.Odbc
             }
         }
 
-        static public void ReleaseObjectPool()
+        public static void ReleaseObjectPool()
         {
             (new OdbcPermission(PermissionState.Unrestricted)).Demand();
             OdbcEnvironment.ReleaseObjectPool();
@@ -948,7 +948,7 @@ namespace System.Data.Odbc
 
         // suppress this message - we cannot use SafeHandle here. Also, see notes in the code (VSTFDEVDIV# 560355)
         [SuppressMessage("Microsoft.Reliability", "CA2004:RemoveCallsToGCKeepAlive")]
-        override protected DbTransaction BeginDbTransaction(IsolationLevel isolationLevel)
+        protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel)
         {
             IntPtr hscp;
 

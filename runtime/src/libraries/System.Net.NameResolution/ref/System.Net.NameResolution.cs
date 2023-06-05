@@ -6,7 +6,7 @@
 
 namespace System.Net
 {
-    public static partial class Dns
+    partial public static class Dns
     {
         public static System.IAsyncResult BeginGetHostAddresses(
             string hostNameOrAddress,
@@ -205,7 +205,7 @@ namespace System.Net
         }
     }
 
-    public partial class IPHostEntry
+    partial public class IPHostEntry
     {
         public IPHostEntry() { }
 

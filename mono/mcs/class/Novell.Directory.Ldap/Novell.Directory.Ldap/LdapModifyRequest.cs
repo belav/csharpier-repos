@@ -52,22 +52,24 @@ namespace Novell.Directory.Ldap
      */
     public class LdapModifyRequest : LdapMessage
     {
+        public
         /// <summary> Returns of the dn of the entry to modify in the directory
         ///
         /// </summary>
         /// <returns> the dn of the entry to modify
         /// </returns>
-        virtual public System.String DN
+        virtual System.String DN
         {
             get { return Asn1Object.RequestDN; }
         }
 
+        public
         /// <summary> Constructs the modifications associated with this request
         ///
         /// </summary>
         /// <returns> an array of LdapModification objects
         /// </returns>
-        virtual public LdapModification[] Modifications
+        virtual LdapModification[] Modifications
         {
             get
             {
@@ -147,7 +149,16 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <returns> an Asn1SequenceOf object containing the modifications.
         /// </returns>
-        static private Asn1SequenceOf encodeModifications(LdapModification[] mods)
+        private
+        /// <summary> Encode an array of LdapModifications to ASN.1.
+        ///
+        /// </summary>
+        /// <param name="mods">an array of LdapModification objects
+        ///
+        /// </param>
+        /// <returns> an Asn1SequenceOf object containing the modifications.
+        /// </returns>
+        static Asn1SequenceOf encodeModifications(LdapModification[] mods)
         {
             // Convert Java-API LdapModification[] to RFC2251 SEQUENCE OF SEQUENCE
             Asn1SequenceOf rfcMods = new Asn1SequenceOf(mods.Length);

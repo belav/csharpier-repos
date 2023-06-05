@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class ValueSetFactory
+    partial internal static class ValueSetFactory
     {
         /// <summary>
         /// A value set that only supports equality and works by including or excluding specific values.

@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public partial class ImmutableHashSetTest : ImmutableSetTest
+    partial public class ImmutableHashSetTest : ImmutableSetTest
     {
         protected override bool IncludesGetHashCodeDerivative
         {

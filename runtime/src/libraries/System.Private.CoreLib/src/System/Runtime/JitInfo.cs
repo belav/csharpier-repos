@@ -3,10 +3,11 @@
 
 namespace System.Runtime
 {
+    partial
     /// <summary>
     /// A static class for getting information about the Just In Time compiler.
     /// </summary>
-    public static partial class JitInfo
+    public static class JitInfo
     {
         /// <summary>
         /// Get the amount of time the JIT Compiler has spent compiling methods. If <paramref name="currentThread"/> is true,

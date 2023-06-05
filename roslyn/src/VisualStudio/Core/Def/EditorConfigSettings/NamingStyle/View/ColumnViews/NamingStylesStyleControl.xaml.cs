@@ -7,10 +7,11 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingStyle.V
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingStyle.View
 {
+    partial
     /// <summary>
     /// Interaction logic for NamingStylesStyleControl.xaml
     /// </summary>
-    internal partial class NamingStylesStyleControl : UserControl
+    internal class NamingStylesStyleControl : UserControl
     {
         private readonly NamingStylesStyleViewModel _viewModel;
 

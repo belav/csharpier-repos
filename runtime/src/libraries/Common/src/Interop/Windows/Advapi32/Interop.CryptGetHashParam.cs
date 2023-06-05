@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         internal enum CryptHashProperty : int
         {
@@ -20,7 +20,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptGetHashParam(
+        partial public static bool CryptGetHashParam(
             SafeHashHandle hHash,
             CryptHashProperty dwParam,
             out int pbData,
@@ -30,7 +30,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptSetHashParam(
+        partial public static bool CryptSetHashParam(
             SafeHashHandle hHash,
             CryptHashProperty dwParam,
             byte[] buffer,

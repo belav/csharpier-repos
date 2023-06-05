@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 {
-    internal static partial class ConflictResolver
+    partial internal static class ConflictResolver
     {
         private static readonly SymbolDisplayFormat s_metadataSymbolDisplayFormat =
             new(

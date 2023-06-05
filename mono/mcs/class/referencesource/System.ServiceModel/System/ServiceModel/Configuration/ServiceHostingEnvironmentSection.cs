@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Security.Permissions;
     using System.ServiceModel;
 
-    public sealed partial class ServiceHostingEnvironmentSection : ConfigurationSection
+    partial public sealed class ServiceHostingEnvironmentSection : ConfigurationSection
     {
         public ServiceHostingEnvironmentSection() { }
 

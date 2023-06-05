@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class AssemblyTests
+    partial public static class AssemblyTests
     {
         [Fact]
         public static void CannotDoWithReflectionOnlyAssemblies()

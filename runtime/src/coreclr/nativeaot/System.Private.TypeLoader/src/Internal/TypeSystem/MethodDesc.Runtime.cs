@@ -7,7 +7,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace Internal.TypeSystem
 {
-    public partial class MethodDesc
+    partial public class MethodDesc
     {
         private IntPtr _functionPointer;
         private IntPtr _usgFunctionPointer;

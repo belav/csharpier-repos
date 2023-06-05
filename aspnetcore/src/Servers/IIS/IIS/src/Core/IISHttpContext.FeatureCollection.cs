@@ -17,7 +17,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-internal partial class IISHttpContext
+partial internal class IISHttpContext
     : IFeatureCollection,
         IHttpRequestFeature,
         IHttpRequestBodyDetectionFeature,

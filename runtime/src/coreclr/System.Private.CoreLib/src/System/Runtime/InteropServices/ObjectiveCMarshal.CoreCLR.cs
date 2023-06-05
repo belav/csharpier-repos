@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices.ObjectiveC
 {
-    public static partial class ObjectiveCMarshal
+    partial public static class ObjectiveCMarshal
     {
         /// <summary>
         /// Sets a pending exception to be thrown the next time the runtime is entered from an Objective-C msgSend P/Invoke.
@@ -26,7 +26,7 @@ namespace System.Runtime.InteropServices.ObjectiveC
             EntryPoint = "ObjCMarshal_TrySetGlobalMessageSendCallback"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool TrySetGlobalMessageSendCallback(
+        partial private static bool TrySetGlobalMessageSendCallback(
             MessageSendFunction msgSendFunction,
             IntPtr func
         );
@@ -36,7 +36,7 @@ namespace System.Runtime.InteropServices.ObjectiveC
             EntryPoint = "ObjCMarshal_TryInitializeReferenceTracker"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe partial bool TryInitializeReferenceTracker(
+        partial private static unsafe bool TryInitializeReferenceTracker(
             delegate* unmanaged<void> beginEndCallback,
             delegate* unmanaged<IntPtr, int> isReferencedCallback,
             delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization
@@ -46,7 +46,7 @@ namespace System.Runtime.InteropServices.ObjectiveC
             RuntimeHelpers.QCall,
             EntryPoint = "ObjCMarshal_CreateReferenceTrackingHandle"
         )]
-        private static partial IntPtr CreateReferenceTrackingHandleInternal(
+        partial private static IntPtr CreateReferenceTrackingHandleInternal(
             ObjectHandleOnStack obj,
             out int memInSizeT,
             out IntPtr mem

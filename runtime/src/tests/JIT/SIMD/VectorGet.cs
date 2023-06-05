@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
 
-internal partial class VectorTest
+partial internal class VectorTest
 {
     private const int Pass = 100;
     private const int Fail = -1;

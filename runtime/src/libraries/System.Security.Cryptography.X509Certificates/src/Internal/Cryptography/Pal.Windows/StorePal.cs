@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
+    partial internal sealed class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
     {
         private SafeCertStoreHandle _certStore;
 

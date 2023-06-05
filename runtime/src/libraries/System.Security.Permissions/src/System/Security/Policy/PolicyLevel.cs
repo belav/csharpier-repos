@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace System.Security.Policy
 {
-    public sealed partial class PolicyLevel
+    partial public sealed class PolicyLevel
     {
         internal PolicyLevel() { }
 

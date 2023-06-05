@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class LocalDeclarationStatementSyntax
+    partial public class LocalDeclarationStatementSyntax
     {
         public LocalDeclarationStatementSyntax Update(
             SyntaxTokenList modifiers,
@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static LocalDeclarationStatementSyntax LocalDeclarationStatement(
             SyntaxTokenList modifiers,

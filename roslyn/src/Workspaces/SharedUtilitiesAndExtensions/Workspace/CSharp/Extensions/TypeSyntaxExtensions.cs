@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class TypeSyntaxExtensions
+    partial internal static class TypeSyntaxExtensions
     {
         public static bool IsPotentialTypeName(
             [NotNullWhen(true)] this TypeSyntax? typeSyntax,

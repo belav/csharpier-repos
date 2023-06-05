@@ -10,7 +10,7 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    internal partial struct RequireDynamicallyAccessedMembersAction
+    partial internal struct RequireDynamicallyAccessedMembersAction
     {
         private readonly ReflectionMarker _reflectionMarker;
         private readonly Origin _memberWithRequirements;
@@ -26,7 +26,7 @@ namespace ILLink.Shared.TrimAnalysis
             _memberWithRequirements = memberWithRequirements;
         }
 
-        public partial bool TryResolveTypeNameAndMark(
+        partial public bool TryResolveTypeNameAndMark(
             string typeName,
             bool needsAssemblyName,
             out TypeProxy type
@@ -52,7 +52,7 @@ namespace ILLink.Shared.TrimAnalysis
             }
         }
 
-        private partial void MarkTypeForDynamicallyAccessedMembers(
+        partial private void MarkTypeForDynamicallyAccessedMembers(
             in TypeProxy type,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         )

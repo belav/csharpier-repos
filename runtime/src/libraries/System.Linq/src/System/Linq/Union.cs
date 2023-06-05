@@ -7,7 +7,7 @@ using static System.Linq.Utilities;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TSource> Union<TSource>(
             this IEnumerable<TSource> first,
@@ -119,11 +119,12 @@ namespace System.Linq
             }
         }
 
+        partial
         /// <summary>
         /// An iterator that yields distinct values from two or more <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerables.</typeparam>
-        private abstract partial class UnionIterator<TSource> : Iterator<TSource>
+        private abstract class UnionIterator<TSource> : Iterator<TSource>
         {
             internal readonly IEqualityComparer<TSource>? _comparer;
             private IEnumerator<TSource>? _enumerator;

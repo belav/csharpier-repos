@@ -12,10 +12,11 @@ using Microsoft.CodeAnalysis.StackTraceExplorer;
 
 namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 {
+    partial
     /// <summary>
     /// Interaction logic for CallstackExplorer.xaml
     /// </summary>
-    internal partial class StackTraceExplorer : UserControl
+    internal class StackTraceExplorer : UserControl
     {
         public readonly StackTraceExplorerViewModel ViewModel;
 

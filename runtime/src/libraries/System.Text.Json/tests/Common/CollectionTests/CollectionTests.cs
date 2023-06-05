@@ -3,7 +3,7 @@
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class CollectionTests : SerializerTests
+    partial public abstract class CollectionTests : SerializerTests
     {
         public CollectionTests(JsonSerializerWrapper stringSerializerWrapper)
             : base(stringSerializerWrapper) { }

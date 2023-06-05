@@ -6,7 +6,7 @@
 
 namespace System.Numerics
 {
-    public readonly partial struct BigInteger
+    partial public readonly struct BigInteger
         : System.IComparable,
             System.IComparable<System.Numerics.BigInteger>,
             System.IEquatable<System.Numerics.BigInteger>,
@@ -1353,7 +1353,7 @@ namespace System.Numerics
         }
     }
 
-    public readonly partial struct Complex
+    partial public readonly struct Complex
         : System.IEquatable<System.Numerics.Complex>,
             System.IFormattable,
             System.IParsable<System.Numerics.Complex>,

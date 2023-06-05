@@ -23,7 +23,7 @@ using System.Reflection;
 using System.Text;
 using DbLinq.Data.Linq;
 
-public partial class Demodb : DbLinq.Ingres.IngresDataContext
+partial public class Demodb : DbLinq.Ingres.IngresDataContext
 {
     //public demodb(string connectionString)
     //    : base(connectionString)
@@ -76,7 +76,7 @@ public partial class Demodb : DbLinq.Ingres.IngresDataContext
 }
 
 [Table(Name = "admin.airline")]
-public partial class AdminAirline : INotifyPropertyChanged
+partial public class AdminAirline : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -224,7 +224,7 @@ public partial class AdminAirline : INotifyPropertyChanged
 }
 
 [Table(Name = "admin.airport")]
-public partial class AdminAirport : INotifyPropertyChanged
+partial public class AdminAirport : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -372,7 +372,7 @@ public partial class AdminAirport : INotifyPropertyChanged
 }
 
 [Table(Name = "admin.country")]
-public partial class AdminCountry : INotifyPropertyChanged
+partial public class AdminCountry : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -478,7 +478,7 @@ public partial class AdminCountry : INotifyPropertyChanged
 }
 
 [Table(Name = "admin.flight_day")]
-public partial class AdminFlightDay : INotifyPropertyChanged
+partial public class AdminFlightDay : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -590,7 +590,7 @@ public partial class AdminFlightDay : INotifyPropertyChanged
 }
 
 [Table(Name = "admin.full_route")]
-public partial class AdminFullRoute : INotifyPropertyChanged
+partial public class AdminFullRoute : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -871,7 +871,7 @@ public partial class AdminFullRoute : INotifyPropertyChanged
 }
 
 [Table(Name = "admin.iietab_f5_f6")]
-public partial class AdminIietabF5f6 : INotifyPropertyChanged
+partial public class AdminIietabF5f6 : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1033,7 +1033,7 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
 }
 
 [Table(Name = "admin.route")]
-public partial class AdminRoute : INotifyPropertyChanged
+partial public class AdminRoute : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1299,7 +1299,7 @@ public partial class AdminRoute : INotifyPropertyChanged
 }
 
 [Table(Name = "admin.tz")]
-public partial class AdminTz : INotifyPropertyChanged
+partial public class AdminTz : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1420,7 +1420,7 @@ public partial class AdminTz : INotifyPropertyChanged
 }
 
 [Table(Name = "admin.user_profile")]
-public partial class AdminUserProfile : INotifyPropertyChanged
+partial public class AdminUserProfile : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1589,7 +1589,7 @@ public partial class AdminUserProfile : INotifyPropertyChanged
 }
 
 [Table(Name = "admin.version")]
-public partial class AdminVersion : INotifyPropertyChanged
+partial public class AdminVersion : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 

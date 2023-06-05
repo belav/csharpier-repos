@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.ServiceModel.Channels;
 
-    public abstract partial class MsmqElementBase : TransportElement
+    partial public abstract class MsmqElementBase : TransportElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.CustomDeadLetterQueue,

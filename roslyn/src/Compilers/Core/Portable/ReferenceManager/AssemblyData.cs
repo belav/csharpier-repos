@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class CommonReferenceManager<TCompilation, TAssemblySymbol>
+    partial internal class CommonReferenceManager<TCompilation, TAssemblySymbol>
     {
         /// <summary>
         /// Information about an assembly, used as an input for the Binder class.

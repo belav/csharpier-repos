@@ -10,7 +10,7 @@ using MethodSemanticsAttributes = Internal.Metadata.NativeFormat.MethodSemantics
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         private Event HandleEvent(
             Cts.Ecma.EcmaModule module,

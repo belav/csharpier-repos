@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class SyntaxNodeExtensions
+    partial internal static class SyntaxNodeExtensions
     {
         public static SyntaxNode WithPrependedNonIndentationTriviaFrom(
             this SyntaxNode to,

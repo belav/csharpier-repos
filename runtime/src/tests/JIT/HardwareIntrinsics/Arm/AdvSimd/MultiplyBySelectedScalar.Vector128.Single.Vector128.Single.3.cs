@@ -16,7 +16,7 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace JIT.HardwareIntrinsics.Arm
 {
-    public static partial class Program
+    partial public static class Program
     {
         private static void MultiplyBySelectedScalar_Vector128_Single_Vector128_Single_3()
         {

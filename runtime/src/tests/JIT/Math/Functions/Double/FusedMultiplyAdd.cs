@@ -5,7 +5,7 @@ using System;
 
 namespace System.MathBenchmarks
 {
-    public partial class Double
+    partial public class Double
     {
         // Tests Math.FusedMultiplyAdd(double, double, double) over 5000 iterations for the domain x: +2, +1; y: -2, -1, z: +1, -1
 

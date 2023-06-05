@@ -11,11 +11,12 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition.Hosting
 {
+    partial
     // This class guarantees thread-safety under the following conditions:
     // - Each composition is executed on a single thread
     // - No recomposition ever takes place
     // - The class is created with isThreadSafe=true
-    public partial class ImportEngine : ICompositionService, IDisposable
+    public class ImportEngine : ICompositionService, IDisposable
     {
         private const int MaximumNumberOfCompositionIterations = 100;
 

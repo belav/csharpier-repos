@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths.Predicates
 {
+    partial
     /// <summary>
     /// Location Paths - Predicates (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Verify: Returned node is correct (document order).

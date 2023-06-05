@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         Shared
     ]
     [ExtensionOrder(After = nameof(SymbolCompletionProvider))]
-    internal partial class UnnamedSymbolCompletionProvider : LSPCompletionProvider
+    partial internal class UnnamedSymbolCompletionProvider : LSPCompletionProvider
     {
         /// <summary>
         /// CompletionItems for indexers/operators should be sorted below other suggestions like methods or properties

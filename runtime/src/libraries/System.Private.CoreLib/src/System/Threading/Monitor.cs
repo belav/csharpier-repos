@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    public static partial class Monitor
+    partial public static class Monitor
     {
         public static bool TryEnter(object obj, TimeSpan timeout) =>
             TryEnter(obj, WaitHandle.ToTimeoutMilliseconds(timeout));

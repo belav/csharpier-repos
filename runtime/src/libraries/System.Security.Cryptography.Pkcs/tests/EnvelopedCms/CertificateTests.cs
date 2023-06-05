@@ -18,7 +18,7 @@ using System.Security.Cryptography.Pkcs.Tests;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class CertificateTests
+    partial public static class CertificateTests
     {
         [Fact]
         public static void DecodeCertificates0_RoundTrip()

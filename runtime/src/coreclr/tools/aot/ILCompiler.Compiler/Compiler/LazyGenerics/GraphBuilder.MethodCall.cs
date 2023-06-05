@@ -8,9 +8,9 @@ using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler
 {
-    internal static partial class LazyGenericsSupport
+    partial internal static class LazyGenericsSupport
     {
-        private sealed partial class GraphBuilder
+        partial private sealed class GraphBuilder
         {
             /// <summary>
             /// Found a method call inside a method body. Method calls may bind generic parameters of the target method. If so,

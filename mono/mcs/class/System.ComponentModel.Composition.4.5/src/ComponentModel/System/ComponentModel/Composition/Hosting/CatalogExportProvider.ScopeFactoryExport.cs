@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class CatalogExportProvider
+    partial public class CatalogExportProvider
     {
         internal class ScopeFactoryExport : FactoryExport
         {

@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class AesGcm
+    partial public sealed class AesGcm
     {
         private SafeEvpCipherCtxHandle _ctxHandle;
 

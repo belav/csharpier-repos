@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class CustomConverterTests
+    partial public static class CustomConverterTests
     {
         /// <summary>
         /// Pass additional information to a converter through an attribute on a property.

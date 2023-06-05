@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    internal unsafe partial class Number
+    partial internal unsafe class Number
     {
         public readonly struct FloatingPointInfo
         {

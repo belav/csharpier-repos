@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeAccessTokenHandle : System.Runtime.InteropServices.SafeHandle
+    partial public sealed class SafeAccessTokenHandle : System.Runtime.InteropServices.SafeHandle
     {
         public SafeAccessTokenHandle()
             : base(default(System.IntPtr), default(bool)) { }
@@ -32,7 +32,7 @@ namespace Microsoft.Win32.SafeHandles
 
 namespace System.Security.Principal
 {
-    public sealed partial class IdentityNotMappedException : System.SystemException
+    partial public sealed class IdentityNotMappedException : System.SystemException
     {
         public IdentityNotMappedException() { }
 
@@ -51,7 +51,7 @@ namespace System.Security.Principal
         ) { }
     }
 
-    public abstract partial class IdentityReference
+    partial public abstract class IdentityReference
     {
         internal IdentityReference() { }
 
@@ -82,7 +82,7 @@ namespace System.Security.Principal
         );
     }
 
-    public partial class IdentityReferenceCollection
+    partial public class IdentityReferenceCollection
         : System.Collections.Generic.ICollection<System.Security.Principal.IdentityReference>,
             System.Collections.Generic.IEnumerable<System.Security.Principal.IdentityReference>,
             System.Collections.IEnumerable
@@ -147,7 +147,7 @@ namespace System.Security.Principal
         }
     }
 
-    public sealed partial class NTAccount : System.Security.Principal.IdentityReference
+    partial public sealed class NTAccount : System.Security.Principal.IdentityReference
     {
         public NTAccount(string name) { }
 
@@ -204,7 +204,7 @@ namespace System.Security.Principal
         }
     }
 
-    public sealed partial class SecurityIdentifier
+    partial public sealed class SecurityIdentifier
         : System.Security.Principal.IdentityReference,
             System.IComparable<System.Security.Principal.SecurityIdentifier>
     {
@@ -454,7 +454,7 @@ namespace System.Security.Principal
         Replicator = 552,
     }
 
-    public partial class WindowsIdentity
+    partial public class WindowsIdentity
         : System.Security.Claims.ClaimsIdentity,
             System.IDisposable,
             System.Runtime.Serialization.IDeserializationCallback,
@@ -619,7 +619,7 @@ namespace System.Security.Principal
         ) { }
     }
 
-    public partial class WindowsPrincipal : System.Security.Claims.ClaimsPrincipal
+    partial public class WindowsPrincipal : System.Security.Claims.ClaimsPrincipal
     {
         public WindowsPrincipal(System.Security.Principal.WindowsIdentity ntIdentity) { }
 

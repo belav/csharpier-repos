@@ -12,10 +12,11 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// A value that came from the implicit this parameter of a method
     /// </summary>
-    internal partial record MethodThisParameterValue : IValueWithStaticType
+    internal record MethodThisParameterValue : IValueWithStaticType
     {
         public MethodThisParameterValue(
             MethodDesc method,

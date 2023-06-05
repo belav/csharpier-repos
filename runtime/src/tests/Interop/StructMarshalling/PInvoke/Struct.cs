@@ -382,7 +382,7 @@ public unsafe struct ExplicitFixedHFA
     public float f2;
 
     [FieldOffset(8)]
-    public fixed float fs[2];
+    fixed public float fs[2];
 }
 
 [StructLayout(LayoutKind.Explicit)]
@@ -494,14 +494,14 @@ public struct OverlappingMultipleEightbyte
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct FixedBufferClassificationTestBlittable
 {
-    public fixed int arr[3];
+    fixed public int arr[3];
     public float f;
 }
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct FixedBufferClassificationTest
 {
-    public fixed int arr[3];
+    fixed public int arr[3];
     public NonBlittableFloat f;
 }
 

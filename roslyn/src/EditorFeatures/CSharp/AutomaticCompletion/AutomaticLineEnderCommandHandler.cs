@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
     [ContentType(ContentTypeNames.CSharpContentType)]
     [Name(PredefinedCommandHandlerNames.AutomaticLineEnder)]
     [Order(After = PredefinedCompletionNames.CompletionCommandHandler)]
-    internal partial class AutomaticLineEnderCommandHandler
+    partial internal class AutomaticLineEnderCommandHandler
         : AbstractAutomaticLineEnderCommandHandler
     {
         private static readonly string s_semicolon = SyntaxFacts.GetText(SyntaxKind.SemicolonToken);

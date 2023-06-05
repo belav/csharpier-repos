@@ -16,7 +16,7 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class CatalogExportProvider : ExportProvider, IDisposable
+    partial public class CatalogExportProvider : ExportProvider, IDisposable
     {
         private sealed class InnerCatalogExportProvider : ExportProvider
         {

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 using Xunit;
 
-unsafe internal class CheckGCMode
+internal unsafe class CheckGCMode
 {
     internal static bool Enabled = false;
 

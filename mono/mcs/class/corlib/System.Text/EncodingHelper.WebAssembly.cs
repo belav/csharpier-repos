@@ -4,7 +4,7 @@ using System;
 
 namespace System.Text
 {
-    internal static partial class EncodingHelper
+    partial internal static class EncodingHelper
     {
         static volatile Encoding utf8Encoding;
 

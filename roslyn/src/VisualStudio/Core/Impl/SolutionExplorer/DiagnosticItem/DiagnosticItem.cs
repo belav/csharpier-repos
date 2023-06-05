@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.Imaging.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal partial class DiagnosticItem : BaseItem
+    partial internal class DiagnosticItem : BaseItem
     {
         private readonly AnalyzerReference _analyzerReference;
         private readonly IAnalyzersCommandHandler _commandHandler;

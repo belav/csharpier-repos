@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
     [Name(PredefinedCommandHandlerNames.FormatDocument)]
     [Order(After = PredefinedCommandHandlerNames.Rename)]
     [Order(Before = PredefinedCompletionNames.CompletionCommandHandler)]
-    internal partial class FormatCommandHandler
+    partial internal class FormatCommandHandler
         : ICommandHandler<FormatDocumentCommandArgs>,
             ICommandHandler<FormatSelectionCommandArgs>,
             IChainedCommandHandler<PasteCommandArgs>,

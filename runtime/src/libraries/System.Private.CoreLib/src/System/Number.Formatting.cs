@@ -10,6 +10,7 @@ using System.Text;
 
 namespace System
 {
+    partial
     // The Format methods provided by the numeric classes convert
     // the numeric value to a string using the format string given by the
     // format parameter. If the format parameter is null or
@@ -239,7 +240,7 @@ namespace System
     // PositiveInfinitySymbol, or NegativeInfinitySymbol property of
     // the NumberFormatInfo used to format the number.
 
-    internal static partial class Number
+    internal static class Number
     {
         internal const int DecimalPrecision = 29; // Decimal.DecCalc also uses this value
 

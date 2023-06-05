@@ -11,7 +11,7 @@ namespace Internal.Cryptography
         "CA5350",
         Justification = "We are providing the implementation for RC2, not consuming it."
     )]
-    internal sealed partial class RC2Implementation : RC2
+    partial internal sealed class RC2Implementation : RC2
     {
         private static UniversalCryptoTransform CreateTransformCore(
             CipherMode cipherMode,

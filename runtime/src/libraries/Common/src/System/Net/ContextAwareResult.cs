@@ -60,9 +60,10 @@ namespace System.Net
         }
     }
 
+    partial
     // This class will ensure that the correct context is restored on the thread before invoking
     // a user callback.
-    internal sealed partial class ContextAwareResult : LazyAsyncResult
+    internal sealed class ContextAwareResult : LazyAsyncResult
     {
         [Flags]
         private enum StateFlags : byte

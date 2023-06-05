@@ -3,11 +3,11 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial BOOL GlobalMemoryStatusEx(MEMORYSTATUSEX* lpBuffer);
+        partial internal static unsafe BOOL GlobalMemoryStatusEx(MEMORYSTATUSEX* lpBuffer);
     }
 }

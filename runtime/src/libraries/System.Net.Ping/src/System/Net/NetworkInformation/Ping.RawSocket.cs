@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.NetworkInformation
 {
-    public partial class Ping
+    partial public class Ping
     {
         private const int IcmpHeaderLengthInBytes = 8;
         private const int MinIpHeaderLengthInBytes = 20;

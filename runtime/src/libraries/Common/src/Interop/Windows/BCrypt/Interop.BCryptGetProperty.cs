@@ -6,12 +6,12 @@ using System.Security.Cryptography;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static unsafe partial NTSTATUS BCryptGetProperty(
+        partial internal static unsafe NTSTATUS BCryptGetProperty(
             SafeBCryptHandle hObject,
             string pszProperty,
             void* pbOutput,

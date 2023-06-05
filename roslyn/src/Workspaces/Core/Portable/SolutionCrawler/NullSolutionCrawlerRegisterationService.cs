@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         ExportWorkspaceService(typeof(ISolutionCrawlerRegistrationService), ServiceLayer.Default),
         Shared
     ]
-    internal partial class NullSolutionCrawlerRegistrationService
+    partial internal class NullSolutionCrawlerRegistrationService
         : ISolutionCrawlerRegistrationService
     {
         [ImportingConstructor]

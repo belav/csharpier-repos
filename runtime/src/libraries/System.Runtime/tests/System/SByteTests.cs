@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class SByteTests
+    partial public class SByteTests
     {
         [Fact]
         public static void Ctor_Empty()

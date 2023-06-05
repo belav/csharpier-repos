@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Tests
 {
-    public partial class EncodingTest : IClassFixture<CultureSetup>
+    partial public class EncodingTest : IClassFixture<CultureSetup>
     {
         private const string AsciiPrintable =
             " 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

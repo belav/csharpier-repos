@@ -6,13 +6,13 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(Interop.Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool OpenThreadToken(
+        partial internal static bool OpenThreadToken(
             IntPtr ThreadHandle,
             TokenAccessLevels dwDesiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool bOpenAsSelf,

@@ -6,19 +6,19 @@ using System.Runtime.InteropServices;
 
 namespace Demo
 {
-    internal static partial class NativeExportsNE
+    partial internal static class NativeExportsNE
     {
         public const string NativeExportsNE_Binary =
             "Microsoft.Interop.Tests." + nameof(NativeExportsNE);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sumi")]
-        public static partial int Sum(int a, int b);
+        partial public static int Sum(int a, int b);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sumouti")]
-        public static partial void Sum(int a, int b, out int c);
+        partial public static void Sum(int a, int b, out int c);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sumrefi")]
-        public static partial void Sum(int a, ref int b);
+        partial public static void Sum(int a, ref int b);
     }
 
     internal static class Program

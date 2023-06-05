@@ -38,7 +38,7 @@ using System.Web.Util;
 
 namespace System.Web.Configuration
 {
-    public partial class HttpCapabilitiesBase
+    partial public class HttpCapabilitiesBase
     {
         const int HaveActiveXControls = 1; // 1;
         const int HaveAdapters = 2;

@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
 {
-    internal abstract partial class AbstractGenerateDefaultConstructorsService<TService>
+    partial internal abstract class AbstractGenerateDefaultConstructorsService<TService>
     {
         private abstract class AbstractCodeAction : CodeAction
         {

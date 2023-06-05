@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCReadContentAsBinHex : TCXMLReaderBaseGeneral
+    partial public class TCReadContentAsBinHex : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCReadContentAsBinHex
         // Test Case

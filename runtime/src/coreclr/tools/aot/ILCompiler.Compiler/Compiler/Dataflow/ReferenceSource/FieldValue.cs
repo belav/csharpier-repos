@@ -11,10 +11,11 @@ using TypeDefinition = Mono.Cecil.TypeDefinition;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// A representation of a field. Typically a result of ldfld.
     /// </summary>
-    sealed partial record FieldValue : IValueWithStaticType
+    sealed record FieldValue : IValueWithStaticType
     {
         public FieldValue(
             TypeDefinition? staticType,

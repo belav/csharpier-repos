@@ -14,7 +14,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsMoveType)]
-    public partial class MoveTypeTests : CSharpMoveTypeTestsBase
+    partial public class MoveTypeTests : CSharpMoveTypeTestsBase
     {
         [WpfFact]
         public async Task TestMissing_OnMatchingFileName()

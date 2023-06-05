@@ -3,10 +3,10 @@
 
 namespace System.ComponentModel.Design
 {
-    public abstract partial class DesignerOptionService
+    partial public abstract class DesignerOptionService
     {
         [System.ComponentModel.TypeConverter(typeof(DesignerOptionConverter))]
-        public sealed partial class DesignerOptionCollection { }
+        partial public sealed class DesignerOptionCollection { }
 
         internal sealed class DesignerOptionConverter { }
     }

@@ -2,9 +2,9 @@ using System;
 
 class MainClass
 {
-    abstract public class Bar
+    public abstract class Bar
     {
-        abstract public bool Condition { get; }
+        public abstract bool Condition { get; }
     }
 
     class Baz : Bar

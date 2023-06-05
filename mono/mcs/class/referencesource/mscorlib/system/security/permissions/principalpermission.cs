@@ -128,7 +128,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class PrincipalPermission
+    public sealed class PrincipalPermission
         : IPermission,
             IUnrestrictedPermission,
             ISecurityEncodable,

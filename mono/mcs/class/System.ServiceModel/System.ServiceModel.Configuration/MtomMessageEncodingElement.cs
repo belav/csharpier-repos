@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MtomMessageEncodingElement : BindingElementExtensionElement
+    partial public sealed class MtomMessageEncodingElement : BindingElementExtensionElement
     {
         public MtomMessageEncodingElement() { }
 

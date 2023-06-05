@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class ChainPal : IDisposable, IChainPal
+    partial internal sealed class ChainPal : IDisposable, IChainPal
     {
         private SafeX509ChainHandle _chain;
 
@@ -16,7 +16,7 @@ namespace System.Security.Cryptography.X509Certificates
             _chain = chain;
         }
 
-        internal static partial IChainPal FromHandle(IntPtr chainContext)
+        partial internal static IChainPal FromHandle(IntPtr chainContext)
         {
             if (chainContext == IntPtr.Zero)
             {
@@ -136,7 +136,7 @@ namespace System.Security.Cryptography.X509Certificates
             get { return _chain; }
         }
 
-        internal static partial bool ReleaseSafeX509ChainHandle(IntPtr handle)
+        partial internal static bool ReleaseSafeX509ChainHandle(IntPtr handle)
         {
             Interop.Crypt32.CertFreeCertificateChain(handle);
             return true;

@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
     [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
-    public partial class AddFileBannerTests : AbstractCSharpCodeActionTest
+    partial public class AddFileBannerTests : AbstractCSharpCodeActionTest
     {
         [Fact]
         public async Task FixAllInProject()

@@ -22,7 +22,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal partial class RenameDashboard : InlineRenameAdornment
+    partial internal class RenameDashboard : InlineRenameAdornment
     {
         private readonly RenameDashboardViewModel _model;
         private readonly IWpfTextView _textView;

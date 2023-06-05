@@ -9,10 +9,11 @@ using NCRYPT_UI_POLICY = Interop.NCrypt.NCRYPT_UI_POLICY;
 
 namespace System.Security.Cryptography
 {
+    partial
     /// <summary>
     ///     Managed representation of an NCrypt key
     /// </summary>
-    public sealed partial class CngKey : IDisposable
+    public sealed class CngKey : IDisposable
     {
         //
         // Creation factory methods

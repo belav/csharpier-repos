@@ -17,6 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
+    partial
     // TODO : two alternative design possible for formatting engine
     //
     //        1. use AAL (TPL Dataflow) in .NET 4.5 to run things concurrently in sequential order
@@ -26,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Formatting
     //           run chunks that don't have dependency in parallel (kirill's idea)
     //           * this requires defining dependencies on each operations. can't use dependency between tokens since
     //             that would create too big graph. key for this approach is how to reduce size of graph.
-    internal abstract partial class AbstractFormatEngine
+    internal abstract class AbstractFormatEngine
     {
         private readonly ChainedFormattingRules _formattingRules;
 

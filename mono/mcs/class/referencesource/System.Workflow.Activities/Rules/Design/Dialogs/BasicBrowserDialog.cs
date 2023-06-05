@@ -22,9 +22,10 @@ using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules.Design
 {
+    partial
     #region class BasicBrowserDialog
 
-    internal abstract partial class BasicBrowserDialog : Form
+    internal abstract class BasicBrowserDialog : Form
     {
         #region members and constructors
 

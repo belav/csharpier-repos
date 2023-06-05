@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.OLE.Interop;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 {
-    internal abstract partial class CodeStyleSetting
+    partial internal abstract class CodeStyleSetting
     {
         private class EnumCodeStyleSetting<T> : EnumCodeStyleSettingBase<T>
             where T : Enum

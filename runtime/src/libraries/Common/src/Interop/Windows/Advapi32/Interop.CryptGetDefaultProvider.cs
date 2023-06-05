@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         internal enum GetDefaultProviderFlags : int
         {
@@ -22,7 +22,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptGetDefaultProvider(
+        partial public static bool CryptGetDefaultProvider(
             int dwProvType,
             IntPtr pdwReserved,
             GetDefaultProviderFlags dwFlags,

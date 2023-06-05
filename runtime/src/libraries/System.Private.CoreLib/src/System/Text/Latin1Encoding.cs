@@ -8,11 +8,12 @@ using System.Runtime.InteropServices;
 
 namespace System.Text
 {
+    partial
     //
     // Latin1Encoding is a simple override to optimize the GetString version of Latin1Encoding.
     // because of the best fit cases we can't do this when encoding the string, only when decoding
     //
-    internal partial class Latin1Encoding : Encoding
+    internal class Latin1Encoding : Encoding
     {
         // Used by Encoding.Latin1 for lazy initialization
         // The initialization code will not be run until a static member of the class is referenced

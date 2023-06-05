@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct PkiStatusInfo
+    partial internal struct PkiStatusInfo
     {
         internal int Status;
         internal ReadOnlyMemory<byte>? StatusString;

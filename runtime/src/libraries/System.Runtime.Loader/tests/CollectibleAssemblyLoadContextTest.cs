@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Runtime.Loader.Tests
 {
-    public partial class AssemblyLoadContextTest
+    partial public class AssemblyLoadContextTest
     {
         // Tests related to Collectible assemblies
 

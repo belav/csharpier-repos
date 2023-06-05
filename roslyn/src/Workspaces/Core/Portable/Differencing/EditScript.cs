@@ -10,10 +10,11 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Differencing
 {
+    partial
     /// <summary>
     /// Represents a sequence of tree edits.
     /// </summary>
-    public sealed partial class EditScript<TNode>
+    public sealed class EditScript<TNode>
     {
         private readonly Match<TNode> _match;
         private readonly ImmutableArray<Edit<TNode>> _edits;

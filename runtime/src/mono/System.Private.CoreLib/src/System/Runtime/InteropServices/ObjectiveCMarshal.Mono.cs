@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices.ObjectiveC
 {
-    public static partial class ObjectiveCMarshal
+    partial public static class ObjectiveCMarshal
     {
 #pragma warning disable IDE0060 // Remove when implemented
         /// <summary>

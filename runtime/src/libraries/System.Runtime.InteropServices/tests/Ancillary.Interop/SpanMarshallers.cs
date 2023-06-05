@@ -18,7 +18,7 @@ namespace System.Runtime.InteropServices.Marshalling
             | CustomTypeMarshallerFeatures.TwoStageMarshalling,
         BufferSize = 0x200
     )]
-    public unsafe ref struct ReadOnlySpanMarshaller<T>
+    ref public unsafe struct ReadOnlySpanMarshaller<T>
     {
         private ReadOnlySpan<T> _managedSpan;
         private readonly int _sizeOfNativeElement;
@@ -85,7 +85,7 @@ namespace System.Runtime.InteropServices.Marshalling
             | CustomTypeMarshallerFeatures.TwoStageMarshalling,
         BufferSize = 0x200
     )]
-    public unsafe ref struct SpanMarshaller<T>
+    ref public unsafe struct SpanMarshaller<T>
     {
         private Span<T> _managedSpan;
         private readonly int _sizeOfNativeElement;
@@ -162,7 +162,7 @@ namespace System.Runtime.InteropServices.Marshalling
             | CustomTypeMarshallerFeatures.TwoStageMarshalling,
         BufferSize = 0x200
     )]
-    public unsafe ref struct NeverNullSpanMarshaller<T>
+    ref public unsafe struct NeverNullSpanMarshaller<T>
     {
         private SpanMarshaller<T> _inner;
 
@@ -222,7 +222,7 @@ namespace System.Runtime.InteropServices.Marshalling
             | CustomTypeMarshallerFeatures.TwoStageMarshalling,
         BufferSize = 0x200
     )]
-    public unsafe ref struct NeverNullReadOnlySpanMarshaller<T>
+    ref public unsafe struct NeverNullReadOnlySpanMarshaller<T>
     {
         private ReadOnlySpanMarshaller<T> _inner;
 
@@ -272,7 +272,7 @@ namespace System.Runtime.InteropServices.Marshalling
             | CustomTypeMarshallerFeatures.TwoStageMarshalling,
         BufferSize = 0
     )]
-    public unsafe ref struct DirectSpanMarshaller<T>
+    ref public unsafe struct DirectSpanMarshaller<T>
         where T : unmanaged
     {
         private T* _allocatedMemory;

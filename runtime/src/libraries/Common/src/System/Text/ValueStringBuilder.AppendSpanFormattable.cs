@@ -3,7 +3,7 @@
 
 namespace System.Text
 {
-    internal ref partial struct ValueStringBuilder
+    ref partial internal struct ValueStringBuilder
     {
         internal void AppendSpanFormattable<T>(
             T value,

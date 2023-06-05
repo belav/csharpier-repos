@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class OverloadResolution
+    partial internal sealed class OverloadResolution
     {
         private NamedTypeSymbol MakeNullable(TypeSymbol type)
         {

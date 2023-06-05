@@ -80,7 +80,7 @@ public class Gen<T, U, V> : GenBase<T, U, V>
     public Gen(T fld1, U fld2, V fld3)
         : base(fld1, fld2, fld3) { }
 
-    new public bool InstVerify(System.Type t1, System.Type t2, System.Type t3)
+    public new bool InstVerify(System.Type t1, System.Type t2, System.Type t3)
     {
         return base.InstVerify(t1, t2, t3);
     }

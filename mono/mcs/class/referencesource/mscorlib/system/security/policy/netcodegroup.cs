@@ -242,7 +242,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class NetCodeGroup : CodeGroup, IUnionSemanticCodeGroup
+    public sealed class NetCodeGroup : CodeGroup, IUnionSemanticCodeGroup
     {
         [System.Security.SecurityCritical] // auto-generated
         [System.Diagnostics.Conditional("_DEBUG")]

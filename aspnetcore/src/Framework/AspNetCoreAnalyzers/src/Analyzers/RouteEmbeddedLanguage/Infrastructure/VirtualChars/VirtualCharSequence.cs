@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 
+partial
 /// <summary>
 /// Represents the individual characters that raw string token represents (i.e. with escapes collapsed).
 /// The difference between this and the result from token.ValueText is that for each collapsed character
@@ -25,7 +26,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 /// This allows for embedded language processing that can refer back to the user's original code
 /// instead of the escaped value we're processing.
 /// </summary>
-internal partial struct VirtualCharSequence
+internal struct VirtualCharSequence
 {
     public static readonly VirtualCharSequence Empty = Create(ImmutableList<VirtualChar>.Empty);
 

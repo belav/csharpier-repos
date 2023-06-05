@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports;
 
-internal sealed partial class LongPollingServerTransport : IHttpTransport
+partial internal sealed class LongPollingServerTransport : IHttpTransport
 {
     private readonly PipeReader _application;
     private readonly ILogger _logger;
@@ -124,7 +124,7 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -132,7 +132,7 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
             "Terminating Long Polling connection by sending 204 response.",
             EventName = "LongPolling204"
         )]
-        public static partial void LongPolling204(ILogger logger);
+        partial public static void LongPolling204(ILogger logger);
 
         [LoggerMessage(
             2,
@@ -140,7 +140,7 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
             "Poll request timed out. Sending 200 response to connection.",
             EventName = "PollTimedOut"
         )]
-        public static partial void PollTimedOut(ILogger logger);
+        partial public static void PollTimedOut(ILogger logger);
 
         [LoggerMessage(
             3,
@@ -148,7 +148,7 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
             "Writing a {Count} byte message to connection.",
             EventName = "LongPollingWritingMessage"
         )]
-        public static partial void LongPollingWritingMessage(ILogger logger, long count);
+        partial public static void LongPollingWritingMessage(ILogger logger, long count);
 
         [LoggerMessage(
             4,
@@ -156,7 +156,7 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
             "Client disconnected from Long Polling endpoint for connection.",
             EventName = "LongPollingDisconnected"
         )]
-        public static partial void LongPollingDisconnected(ILogger logger);
+        partial public static void LongPollingDisconnected(ILogger logger);
 
         [LoggerMessage(
             5,
@@ -164,6 +164,6 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
             "Long Polling transport was terminated due to an error on connection.",
             EventName = "LongPollingTerminated"
         )]
-        public static partial void LongPollingTerminated(ILogger logger, Exception ex);
+        partial public static void LongPollingTerminated(ILogger logger, Exception ex);
     }
 }

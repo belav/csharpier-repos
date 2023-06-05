@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         /// <summary>
         /// Split the elements of a sequence into chunks of size at most <paramref name="size"/>.

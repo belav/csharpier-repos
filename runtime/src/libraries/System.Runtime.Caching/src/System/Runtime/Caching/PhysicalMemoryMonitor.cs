@@ -9,10 +9,11 @@ using System.Security;
 
 namespace System.Runtime.Caching
 {
+    partial
     // PhysicalMemoryMonitor monitors the amound of physical memory used on the machine
     // and helps us determine when to drop entries to avoid paging and GC thrashing.
     // The limit is configurable (see ConfigUtil.cs).
-    internal sealed partial class PhysicalMemoryMonitor : MemoryMonitor
+    internal sealed class PhysicalMemoryMonitor : MemoryMonitor
     {
         private const int MinTotalMemoryTrimPercent = 10;
         private const long TargetTotalMemoryTrimIntervalTicks = 5 * TimeSpan.TicksPerMinute;

@@ -9,10 +9,11 @@ using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInte
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
+partial
 /// <summary>
 /// Default client-side implementation of <see cref="NavigationManager"/>.
 /// </summary>
-internal sealed partial class WebAssemblyNavigationManager : NavigationManager
+internal sealed class WebAssemblyNavigationManager : NavigationManager
 {
     private ILogger<WebAssemblyNavigationManager> _logger = default!;
 
@@ -106,7 +107,7 @@ internal sealed partial class WebAssemblyNavigationManager : NavigationManager
             value
         );
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -114,7 +115,7 @@ internal sealed partial class WebAssemblyNavigationManager : NavigationManager
             "Navigation canceled when changing the location to {Uri}",
             EventName = "NavigationCanceled"
         )]
-        public static partial void NavigationCanceled(ILogger logger, string uri);
+        partial public static void NavigationCanceled(ILogger logger, string uri);
 
         [LoggerMessage(
             2,
@@ -122,7 +123,7 @@ internal sealed partial class WebAssemblyNavigationManager : NavigationManager
             "Navigation failed when changing the location to {Uri}",
             EventName = "NavigationFailed"
         )]
-        public static partial void NavigationFailed(
+        partial public static void NavigationFailed(
             ILogger logger,
             string uri,
             Exception exception

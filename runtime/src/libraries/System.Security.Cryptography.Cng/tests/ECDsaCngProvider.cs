@@ -52,7 +52,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
         }
     }
 
-    public partial class ECDsaFactory
+    partial public class ECDsaFactory
     {
         private static readonly IECDsaProvider s_provider = new ECDsaProvider();
     }

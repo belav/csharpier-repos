@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    public sealed partial class CertificateRequest
+    partial public sealed class CertificateRequest
     {
         public CertificateRequest(
             X500DistinguishedName subjectName,

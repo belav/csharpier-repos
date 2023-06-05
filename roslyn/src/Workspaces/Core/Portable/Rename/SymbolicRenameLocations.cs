@@ -20,12 +20,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
+    partial
     /// <summary>
     /// Holds the Locations of a symbol that should be renamed, along with the symbol and Solution for the set. It is
     /// considered 'heavy weight' because it holds onto large entities (like Symbols) and thus should not be marshaled
     /// to/from a host to OOP.
     /// </summary>
-    internal sealed partial class SymbolicRenameLocations
+    internal sealed class SymbolicRenameLocations
     {
         public readonly Solution Solution;
         public readonly ISymbol Symbol;

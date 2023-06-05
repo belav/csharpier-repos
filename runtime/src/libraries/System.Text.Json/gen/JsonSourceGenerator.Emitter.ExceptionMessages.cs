@@ -7,9 +7,9 @@ using System.Text;
 
 namespace System.Text.Json.SourceGeneration
 {
-    public sealed partial class JsonSourceGenerator
+    partial public sealed class JsonSourceGenerator
     {
-        private sealed partial class Emitter
+        partial private sealed class Emitter
         {
             /// <summary>
             /// Unlike sourcegen warnings, exception messages should not be localized so we keep them in source.

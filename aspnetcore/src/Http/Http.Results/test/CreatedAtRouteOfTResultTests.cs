@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-public partial class CreatedAtRouteOfTResultTests
+partial public class CreatedAtRouteOfTResultTests
 {
     [Fact]
     public void CreatedAtRouteResult_ProblemDetails_SetsStatusCodeAndValue()

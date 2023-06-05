@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 {
     using static ConvertSwitchStatementToExpressionHelpers;
 
-    internal sealed partial class ConvertSwitchStatementToExpressionDiagnosticAnalyzer
+    partial internal sealed class ConvertSwitchStatementToExpressionDiagnosticAnalyzer
     {
         private sealed class Analyzer : CSharpSyntaxVisitor<SyntaxKind>
         {

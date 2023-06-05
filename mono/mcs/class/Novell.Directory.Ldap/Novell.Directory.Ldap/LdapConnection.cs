@@ -64,6 +64,7 @@ namespace Novell.Directory.Ldap
             responseCtlSemaphore = new System.Object();
         }
 
+        public
         /// <summary> Returns the protocol version uses to authenticate.
         ///
         ///  0 is returned if no authentication has been performed.
@@ -73,7 +74,7 @@ namespace Novell.Directory.Ldap
         /// not authenticated.
         ///
         /// </returns>
-        virtual public int ProtocolVersion
+        virtual int ProtocolVersion
         {
             get
             {
@@ -86,6 +87,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the distinguished name (DN) used for as the bind name during
         /// the last successful bind operation.  <code>null</code> is returned
         /// if no authentication has been performed or if the bind resulted in
@@ -95,7 +97,7 @@ namespace Novell.Directory.Ldap
         /// <returns> The distinguished name if authenticated; otherwise, null.
         ///
         /// </returns>
-        virtual public System.String AuthenticationDN
+        virtual System.String AuthenticationDN
         {
             get
             {
@@ -112,6 +114,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the method used to authenticate the connection. The return
         /// value is one of the following:
         ///
@@ -128,7 +131,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> The method used to authenticate the connection.
         /// </returns>
-        virtual public System.String AuthenticationMethod
+        virtual System.String AuthenticationMethod
         {
             get
             {
@@ -141,6 +144,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the properties if any specified on binding with a
         /// SASL mechanism.
         ///
@@ -152,7 +156,7 @@ namespace Novell.Directory.Ldap
         /// the connection is not present or not authenticated.
         ///
         /// </returns>
-        virtual public System.Collections.IDictionary SaslBindProperties
+        virtual System.Collections.IDictionary SaslBindProperties
         {
             get
             {
@@ -165,6 +169,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the call back handler if any specified on binding with a
         /// SASL mechanism.
         ///
@@ -176,7 +181,7 @@ namespace Novell.Directory.Ldap
         /// object is not present or not authenticated.
         ///
         /// </returns>
-        virtual public System.Object SaslBindCallbackHandler
+        virtual System.Object SaslBindCallbackHandler
         {
             get
             {
@@ -189,6 +194,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns a copy of the set of constraints associated with this
         /// connection. These constraints apply to all operations performed
         /// through this connection (unless a different set of constraints is
@@ -213,7 +219,7 @@ namespace Novell.Directory.Ldap
         /// </seealso>
         /// <seealso cref="SearchConstraints()">
         /// </seealso>
-        virtual public LdapConstraints Constraints
+        virtual LdapConstraints Constraints
         {
             get { return (LdapConstraints)(this.defSearchCons).Clone(); }
             set
@@ -247,6 +253,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the host name of the Ldap server to which the object is or
         /// was last connected, in the format originally specified.
         ///
@@ -255,11 +262,12 @@ namespace Novell.Directory.Ldap
         /// connected or null if the object has never connected.
         ///
         /// </returns>
-        virtual public System.String Host
+        virtual System.String Host
         {
             get { return conn.Host; }
         }
 
+        public
         /// <summary> Returns the port number of the Ldap server to which the object is or
         /// was last connected.
         ///
@@ -268,11 +276,12 @@ namespace Novell.Directory.Ldap
         /// connected or -1 if the object has never connected.
         ///
         /// </returns>
-        virtual public int Port
+        virtual int Port
         {
             get { return conn.Port; }
         }
 
+        public
         /// <summary> Returns a copy of the set of search constraints associated with this
         /// connection. These constraints apply to search operations performed
         /// through this connection (unless a different set of
@@ -287,7 +296,7 @@ namespace Novell.Directory.Ldap
         /// </seealso>
         /// <seealso cref="LdapSearchConstraints">
         /// </seealso>
-        virtual public LdapSearchConstraints SearchConstraints
+        virtual LdapSearchConstraints SearchConstraints
         {
             get { return (LdapSearchConstraints)this.defSearchCons.Clone(); }
         }
@@ -305,6 +314,7 @@ namespace Novell.Directory.Ldap
             set { conn.Ssl = value; }
         }
 
+        public
         /// <summary> Indicates whether the object has authenticated to the connected Ldap
         /// server.
         ///
@@ -313,22 +323,24 @@ namespace Novell.Directory.Ldap
         /// authenticated.
         ///
         /// </returns>
-        virtual public bool Bound
+        virtual bool Bound
         {
             get { return conn.Bound; }
         }
 
+        public
         /// <summary> Indicates whether the connection represented by this object is open
         /// at this time.
         ///
         /// </summary>
         /// <returns>  True if connection is open; false if the connection is closed.
         /// </returns>
-        virtual public bool Connected
+        virtual bool Connected
         {
             get { return conn.Connected; }
         }
 
+        public
         /// <summary> Indicatates if the connection is protected by TLS.
         ///
         /// </summary>
@@ -338,11 +350,12 @@ namespace Novell.Directory.Ldap
         /// <returns>  True if the connection is protected by TLS.
         ///
         /// </returns>
-        virtual public bool TLS
+        virtual bool TLS
         {
             get { return conn.TLS; }
         }
 
+        public
         /// <summary>  Returns the Server Controls associated with the most recent response
         /// to a synchronous request on this connection object, or null
         /// if the latest response contained no Server Controls. The method
@@ -357,7 +370,7 @@ namespace Novell.Directory.Ldap
         /// </returns>
         /// <seealso cref="LdapMessage.Controls">
         /// </seealso>
-        virtual public LdapControl[] ResponseControls
+        virtual LdapControl[] ResponseControls
         {
             get
             {
@@ -390,24 +403,26 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        internal
         /// <summary> Return the Connection object associated with this LdapConnection
         ///
         /// </summary>
         /// <returns> the Connection object
         /// </returns>
-        virtual internal Connection Connection
+        virtual Connection Connection
         {
             /* package */
 
             get { return conn; }
         }
 
+        internal
         /// <summary> Return the Connection object name associated with this LdapConnection
         ///
         /// </summary>
         /// <returns> the Connection object name
         /// </returns>
-        virtual internal System.String ConnectionName
+        virtual System.String ConnectionName
         {
             /* package */
 

@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace Internal.TypeSystem.Ecma
 {
-    public sealed partial class EcmaField : FieldDesc, EcmaModule.IEntityHandleObject
+    partial public sealed class EcmaField : FieldDesc, EcmaModule.IEntityHandleObject
     {
         private static class FieldFlags
         {

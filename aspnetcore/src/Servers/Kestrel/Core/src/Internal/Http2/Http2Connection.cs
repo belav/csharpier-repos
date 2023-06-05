@@ -21,7 +21,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-internal sealed partial class Http2Connection
+partial internal sealed class Http2Connection
     : IHttp2StreamLifetimeHandler,
         IHttpStreamHeadersHandler,
         IRequestProcessor

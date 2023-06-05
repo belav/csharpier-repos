@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(
             Libraries.Kernel32,
@@ -13,7 +13,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial uint ExpandEnvironmentStrings(
+        partial internal static uint ExpandEnvironmentStrings(
             string lpSrc,
             ref char lpDst,
             uint nSize

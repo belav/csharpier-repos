@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public sealed partial class WeakReference<T> : ISerializable
+    partial public sealed class WeakReference<T> : ISerializable
         where T : class?
     {
         // This field is not a regular GC handle. It can have a special values that are used to prevent a race condition between setting the target and finalization.

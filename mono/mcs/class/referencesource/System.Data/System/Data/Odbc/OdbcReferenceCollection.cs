@@ -14,19 +14,19 @@ using System.Diagnostics;
 
 namespace System.Data.Odbc
 {
-    sealed internal class OdbcReferenceCollection : DbReferenceCollection
+    internal sealed class OdbcReferenceCollection : DbReferenceCollection
     {
         internal const int Closing = 0;
         internal const int Recover = 1;
 
         internal const int CommandTag = 1;
 
-        override public void Add(object value, int tag)
+        public override void Add(object value, int tag)
         {
             base.AddItem(value, tag);
         }
 
-        override protected void NotifyItem(int message, int tag, object value)
+        protected override void NotifyItem(int message, int tag, object value)
         {
             switch (message)
             {
@@ -56,7 +56,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override public void Remove(object value)
+        public override void Remove(object value)
         {
             base.RemoveItem(value);
         }

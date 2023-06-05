@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
-    internal partial class CSharpProjectShim : ICSCompiler
+    partial internal class CSharpProjectShim : ICSCompiler
     {
         public ICSSourceModule CreateSourceModule(ICSSourceText text) =>
             throw new NotImplementedException();

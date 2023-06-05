@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class NetTcpBindingElement : StandardBindingElement, IBindingConfigurationElement
+    partial public class NetTcpBindingElement : StandardBindingElement, IBindingConfigurationElement
     {
         ConfigurationPropertyCollection _properties;
 

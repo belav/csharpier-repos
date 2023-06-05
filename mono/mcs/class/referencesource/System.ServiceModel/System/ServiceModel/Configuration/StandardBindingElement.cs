@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public abstract partial class StandardBindingElement
+    partial public abstract class StandardBindingElement
         : ServiceModelConfigurationElement,
             IBindingConfigurationElement,
             IConfigurationContextProviderInternal
@@ -132,7 +132,7 @@ namespace System.ServiceModel.Configuration
             this.OnApplyConfiguration(binding);
         }
 
-        protected virtual internal void InitializeFrom(Binding binding)
+        protected internal virtual void InitializeFrom(Binding binding)
         {
             if (null == binding)
             {

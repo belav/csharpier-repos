@@ -3,7 +3,7 @@
 
 namespace System.Text.Json
 {
-    internal static partial class JsonConstants
+    partial internal static class JsonConstants
     {
         public const string GlobalNamespaceValue = "<global namespace>";
 

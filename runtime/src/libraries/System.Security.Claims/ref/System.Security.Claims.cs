@@ -6,7 +6,7 @@
 
 namespace System.Security.Claims
 {
-    public partial class Claim
+    partial public class Claim
     {
         public Claim(System.IO.BinaryReader reader) { }
 
@@ -98,7 +98,7 @@ namespace System.Security.Claims
         protected virtual void WriteTo(System.IO.BinaryWriter writer, byte[]? userData) { }
     }
 
-    public partial class ClaimsIdentity : System.Security.Principal.IIdentity
+    partial public class ClaimsIdentity : System.Security.Principal.IIdentity
     {
         public const string DefaultIssuer = "LOCAL AUTHORITY";
         public const string DefaultNameClaimType =
@@ -267,7 +267,7 @@ namespace System.Security.Claims
         protected virtual void WriteTo(System.IO.BinaryWriter writer, byte[]? userData) { }
     }
 
-    public partial class ClaimsPrincipal : System.Security.Principal.IPrincipal
+    partial public class ClaimsPrincipal : System.Security.Principal.IPrincipal
     {
         public ClaimsPrincipal() { }
 
@@ -389,7 +389,7 @@ namespace System.Security.Claims
         protected virtual void WriteTo(System.IO.BinaryWriter writer, byte[]? userData) { }
     }
 
-    public static partial class ClaimTypes
+    partial public static class ClaimTypes
     {
         public const string Actor = "http://schemas.xmlsoap.org/ws/2009/09/identity/claims/actor";
         public const string Anonymous =
@@ -488,7 +488,7 @@ namespace System.Security.Claims
             "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/x500distinguishedname";
     }
 
-    public static partial class ClaimValueTypes
+    partial public static class ClaimValueTypes
     {
         public const string Base64Binary = "http://www.w3.org/2001/XMLSchema#base64Binary";
         public const string Base64Octet = "http://www.w3.org/2001/XMLSchema#base64Octet";
@@ -525,7 +525,7 @@ namespace System.Security.Claims
 
 namespace System.Security.Principal
 {
-    public partial class GenericIdentity : System.Security.Claims.ClaimsIdentity
+    partial public class GenericIdentity : System.Security.Claims.ClaimsIdentity
     {
         protected GenericIdentity(System.Security.Principal.GenericIdentity identity) { }
 
@@ -556,7 +556,7 @@ namespace System.Security.Principal
         }
     }
 
-    public partial class GenericPrincipal : System.Security.Claims.ClaimsPrincipal
+    partial public class GenericPrincipal : System.Security.Claims.ClaimsPrincipal
     {
         public GenericPrincipal(System.Security.Principal.IIdentity identity, string[]? roles) { }
 

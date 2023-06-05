@@ -57,7 +57,7 @@ class X
         return 0;
     }
 
-    async static Task<int> Test(int x, Exception e)
+    static async Task<int> Test(int x, Exception e)
     {
         try
         {
@@ -74,7 +74,7 @@ class X
         return x;
     }
 
-    async static Task<int> TestGeneric(int x)
+    static async Task<int> TestGeneric(int x)
     {
         try
         {

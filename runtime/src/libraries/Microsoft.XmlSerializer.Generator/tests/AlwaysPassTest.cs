@@ -4,7 +4,7 @@
 using System;
 using Xunit;
 
-public static partial class XmlSerializerTests
+partial public static class XmlSerializerTests
 {
     //This is a dummy test that runs on all platform. It is to make sure we have at least one test running in UWP platform, which will exclude all other SGENTESTS.
     [Fact]

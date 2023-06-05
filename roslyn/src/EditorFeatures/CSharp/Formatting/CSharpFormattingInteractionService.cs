@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
     [ExportLanguageService(typeof(IFormattingInteractionService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpFormattingInteractionService : IFormattingInteractionService
+    partial internal class CSharpFormattingInteractionService : IFormattingInteractionService
     {
         // All the characters that might potentially trigger formatting when typed
         private static readonly char[] _supportedChars = ";{}#nte:)".ToCharArray();

@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCSkip : TCXMLReaderBaseGeneral
+    partial public class TCSkip : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCSkip
         // Test Case

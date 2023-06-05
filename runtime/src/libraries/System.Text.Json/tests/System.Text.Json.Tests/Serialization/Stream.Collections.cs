@@ -13,7 +13,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public partial class StreamTests
+    partial public class StreamTests
     {
         // Empty class functioning as witness type for TElement
         public class Witness<T> { }

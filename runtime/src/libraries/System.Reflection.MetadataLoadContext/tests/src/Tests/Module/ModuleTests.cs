@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class ModuleTests
+    partial public static class ModuleTests
     {
         [Fact]
         public static void ModuleAssembly()

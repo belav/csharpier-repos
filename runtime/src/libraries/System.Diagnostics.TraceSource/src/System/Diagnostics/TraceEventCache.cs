@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace System.Diagnostics
 {
-    public partial class TraceEventCache
+    partial public class TraceEventCache
     {
         private long _timeStamp = -1;
         private DateTime _dateTime = DateTime.MinValue;

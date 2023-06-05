@@ -3,10 +3,11 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Represents an unmanaged pointer to a method with a signature compatible with the signature of the pointer.
     /// </summary>
-    public sealed partial class FunctionPointerType : TypeDesc
+    public sealed class FunctionPointerType : TypeDesc
     {
         private MethodSignature _signature;
         private int _hashCode;

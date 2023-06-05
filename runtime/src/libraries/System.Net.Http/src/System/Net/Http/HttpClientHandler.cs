@@ -18,7 +18,7 @@ using HttpHandlerType = System.Net.Http.SocketsHttpHandler;
 
 namespace System.Net.Http
 {
-    public partial class HttpClientHandler : HttpMessageHandler
+    partial public class HttpClientHandler : HttpMessageHandler
     {
         private readonly HttpHandlerType _underlyingHandler;
 

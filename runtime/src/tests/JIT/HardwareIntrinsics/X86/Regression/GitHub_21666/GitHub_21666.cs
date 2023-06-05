@@ -18,10 +18,10 @@ namespace GitHub_21666
         static uint uintSF = 1;
         static ulong ulongSF = 1;
 
-        readonly static byte[] byteArray = new byte[10];
-        readonly static ushort[] ushortArray = new ushort[10];
-        readonly static uint[] uintArray = new uint[10];
-        readonly static ulong[] ulongArray = new ulong[10];
+        static readonly byte[] byteArray = new byte[10];
+        static readonly ushort[] ushortArray = new ushort[10];
+        static readonly uint[] uintArray = new uint[10];
+        static readonly ulong[] ulongArray = new ulong[10];
 
         [Fact]
         public static void Test()

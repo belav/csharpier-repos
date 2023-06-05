@@ -11,11 +11,12 @@ using System.StubHelpers;
 
 namespace System.Runtime.InteropServices
 {
+    partial
     /// <summary>
     /// This class contains methods that are mainly used to marshal between unmanaged
     /// and managed types.
     /// </summary>
-    public static partial class Marshal
+    public static class Marshal
     {
 #if FEATURE_COMINTEROP
         /// <summary>
@@ -236,7 +237,7 @@ namespace System.Runtime.InteropServices
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "MarshalNative_Prelink")]
-        private static partial void InternalPrelink(RuntimeMethodHandleInternal m);
+        partial private static void InternalPrelink(RuntimeMethodHandleInternal m);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern /* struct _EXCEPTION_POINTERS* */
@@ -289,7 +290,7 @@ namespace System.Runtime.InteropServices
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "MarshalNative_IsBuiltInComSupported")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool IsBuiltInComSupportedInternal();
+        partial private static bool IsBuiltInComSupportedInternal();
 
         /// <summary>
         /// Returns the HInstance for this module.  Returns -1 if the module doesn't have
@@ -312,7 +313,7 @@ namespace System.Runtime.InteropServices
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "MarshalNative_GetHINSTANCE")]
-        private static partial IntPtr GetHINSTANCE(QCallModule m);
+        partial private static IntPtr GetHINSTANCE(QCallModule m);
 #endif // TARGET_WINDOWS
 
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -362,7 +363,7 @@ namespace System.Runtime.InteropServices
             EntryPoint = "MarshalNative_GetTypeFromCLSID",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial void GetTypeFromCLSID(
+        partial private static void GetTypeFromCLSID(
             in Guid clsid,
             string? server,
             ObjectHandleOnStack retType
@@ -870,10 +871,10 @@ namespace System.Runtime.InteropServices
         }
 
         [LibraryImport(Interop.Libraries.Ole32)]
-        private static partial int CreateBindCtx(uint reserved, out IntPtr ppbc);
+        partial private static int CreateBindCtx(uint reserved, out IntPtr ppbc);
 
         [LibraryImport(Interop.Libraries.Ole32)]
-        private static partial int MkParseDisplayName(
+        partial private static int MkParseDisplayName(
             IntPtr pbc,
             [MarshalAs(UnmanagedType.LPWStr)] string szUserName,
             out uint pchEaten,
@@ -881,7 +882,7 @@ namespace System.Runtime.InteropServices
         );
 
         [LibraryImport(Interop.Libraries.Ole32)]
-        private static partial int BindMoniker(
+        partial private static int BindMoniker(
             IntPtr pmk,
             uint grfOpt,
             ref Guid iidResult,
@@ -904,7 +905,7 @@ namespace System.Runtime.InteropServices
             RuntimeHelpers.QCall,
             EntryPoint = "MarshalNative_GetIsInCooperativeGCModeFunctionPointer"
         )]
-        internal static unsafe partial delegate* unmanaged<
+        partial internal static unsafe delegate* unmanaged<
             int> GetIsInCooperativeGCModeFunctionPointer();
 #endif
     }

@@ -8,7 +8,7 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class CompositionBatch
+    partial public class CompositionBatch
     {
         // Represents a part that exports a single export
         private sealed class SingleExportComposablePart : ComposablePart

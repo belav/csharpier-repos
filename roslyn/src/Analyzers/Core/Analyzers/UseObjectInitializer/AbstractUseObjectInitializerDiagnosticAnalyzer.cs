@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.UseObjectInitializer
 {
-    internal abstract partial class AbstractUseObjectInitializerDiagnosticAnalyzer<
+    partial internal abstract class AbstractUseObjectInitializerDiagnosticAnalyzer<
         TSyntaxKind,
         TExpressionSyntax,
         TStatementSyntax,

@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class GlobalStatementSyntax
+    partial public class GlobalStatementSyntax
     {
         public GlobalStatementSyntax Update(StatementSyntax statement) =>
             this.Update(this.AttributeLists, this.Modifiers, statement);

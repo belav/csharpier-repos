@@ -44,7 +44,7 @@ using DataContext = DbLinq.Data.Linq.DataContext;
 
 namespace DbLinq.Data.Linq.Sugar.Implementation
 {
-    internal partial class ExpressionDispatcher
+    partial internal class ExpressionDispatcher
     {
         /// <summary>
         /// Returns a registered column, or null if not found

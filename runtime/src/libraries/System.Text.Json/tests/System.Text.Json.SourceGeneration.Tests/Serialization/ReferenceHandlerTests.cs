@@ -32,7 +32,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             ) { }
     }
 
-    public abstract partial class ReferenceHandlerTests_Metadata : ReferenceHandlerTests
+    partial public abstract class ReferenceHandlerTests_Metadata : ReferenceHandlerTests
     {
         public ReferenceHandlerTests_Metadata(JsonSerializerWrapper serializer)
             : base(serializer) { }
@@ -139,7 +139,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(LinkedList<object[]>))]
         [JsonSerializable(typeof(LinkedList<Base[]>))]
         [JsonSerializable(typeof(LinkedList<Base[][]>))]
-        internal sealed partial class ReferenceHandlerTestsContext_Metadata
+        partial internal sealed class ReferenceHandlerTestsContext_Metadata
             : JsonSerializerContext { }
     }
 
@@ -176,7 +176,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             ) { }
     }
 
-    public abstract partial class ReferenceHandlerTests_Default : ReferenceHandlerTests
+    partial public abstract class ReferenceHandlerTests_Default : ReferenceHandlerTests
     {
         public ReferenceHandlerTests_Default(JsonSerializerWrapper serializer)
             : base(serializer) { }
@@ -282,7 +282,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(LinkedList<object[]>))]
         [JsonSerializable(typeof(LinkedList<Base[]>))]
         [JsonSerializable(typeof(LinkedList<Base[][]>))]
-        internal sealed partial class ReferenceHandlerTestsContext_Default
+        partial internal sealed class ReferenceHandlerTestsContext_Default
             : JsonSerializerContext { }
     }
 }

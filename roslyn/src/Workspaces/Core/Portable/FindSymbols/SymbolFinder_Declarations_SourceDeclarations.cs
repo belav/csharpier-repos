@@ -9,10 +9,11 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
+    partial
     // All the logic for finding source declarations in a given solution/project with some name
     // is in this file.
 
-    public static partial class SymbolFinder
+    public static class SymbolFinder
     {
         /// <summary>
         /// Find the symbols for declarations made in source with the specified name.

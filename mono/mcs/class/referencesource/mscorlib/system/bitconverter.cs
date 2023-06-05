@@ -75,7 +75,7 @@ namespace System
         // Converts a short into an array of bytes with length
         // two.
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static byte[] GetBytes(short value)
+        public static unsafe byte[] GetBytes(short value)
         {
             Contract.Ensures(Contract.Result<byte[]>() != null);
             Contract.Ensures(Contract.Result<byte[]>().Length == 2);
@@ -89,7 +89,7 @@ namespace System
         // Converts an int into an array of bytes with length
         // four.
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static byte[] GetBytes(int value)
+        public static unsafe byte[] GetBytes(int value)
         {
             Contract.Ensures(Contract.Result<byte[]>() != null);
             Contract.Ensures(Contract.Result<byte[]>().Length == 4);
@@ -103,7 +103,7 @@ namespace System
         // Converts a long into an array of bytes with length
         // eight.
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static byte[] GetBytes(long value)
+        public static unsafe byte[] GetBytes(long value)
         {
             Contract.Ensures(Contract.Result<byte[]>() != null);
             Contract.Ensures(Contract.Result<byte[]>().Length == 8);
@@ -150,7 +150,7 @@ namespace System
         // Converts a float into an array of bytes with length
         // four.
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static byte[] GetBytes(float value)
+        public static unsafe byte[] GetBytes(float value)
         {
             Contract.Ensures(Contract.Result<byte[]>() != null);
             Contract.Ensures(Contract.Result<byte[]>().Length == 4);
@@ -161,7 +161,7 @@ namespace System
         // Converts a double into an array of bytes with length
         // eight.
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static byte[] GetBytes(double value)
+        public static unsafe byte[] GetBytes(double value)
         {
             Contract.Ensures(Contract.Result<byte[]>() != null);
             Contract.Ensures(Contract.Result<byte[]>().Length == 8);
@@ -408,7 +408,7 @@ namespace System
 
         // Converts an array of bytes into a float.
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe public static float ToSingle(byte[] value, int startIndex)
+        public static unsafe float ToSingle(byte[] value, int startIndex)
         {
             if (value == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
@@ -427,7 +427,7 @@ namespace System
 
         // Converts an array of bytes into a double.
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe public static double ToDouble(byte[] value, int startIndex)
+        public static unsafe double ToDouble(byte[] value, int startIndex)
         {
             if (value == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);

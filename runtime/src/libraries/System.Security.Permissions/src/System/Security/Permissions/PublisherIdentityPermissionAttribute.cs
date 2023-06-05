@@ -11,7 +11,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
-    public sealed partial class PublisherIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    partial public sealed class PublisherIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public PublisherIdentityPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }

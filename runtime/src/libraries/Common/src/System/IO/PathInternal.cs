@@ -7,8 +7,9 @@ using System.Text;
 
 namespace System.IO
 {
+    partial
     /// <summary>Contains internal path helpers that are shared between many projects.</summary>
-    internal static partial class PathInternal
+    internal static class PathInternal
     {
         /// <summary>
         /// Returns true if the path starts in a directory separator.

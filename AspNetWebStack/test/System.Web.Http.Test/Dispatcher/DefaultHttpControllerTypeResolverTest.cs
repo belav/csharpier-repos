@@ -285,9 +285,9 @@ namespace System.Web.Http.Dispatcher
 
     public sealed class ValidSealedController : ApiController { }
 
-    public partial class ValidPartialController : ApiController { }
+    partial public class ValidPartialController : ApiController { }
 
-    public partial class ValidPartialController { }
+    partial public class ValidPartialController { }
 
     public class ValidInheritedController : InvalidAbstractController { }
 

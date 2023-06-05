@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.Cci
 {
-    internal sealed partial class RootModuleStaticConstructor : IMethodDefinition, IMethodBody
+    partial internal sealed class RootModuleStaticConstructor : IMethodDefinition, IMethodBody
     {
         public RootModuleStaticConstructor(
             ITypeDefinition containingTypeDefinition,

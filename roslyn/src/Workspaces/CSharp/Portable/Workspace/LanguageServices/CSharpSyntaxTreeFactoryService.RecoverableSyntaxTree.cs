@@ -14,9 +14,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class CSharpSyntaxTreeFactoryServiceFactory
+    partial internal class CSharpSyntaxTreeFactoryServiceFactory
     {
-        private partial class CSharpSyntaxTreeFactoryService
+        partial private class CSharpSyntaxTreeFactoryService
         {
             /// <summary>
             /// Represents a syntax tree that only has a weak reference to its

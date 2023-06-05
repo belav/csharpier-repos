@@ -6,7 +6,7 @@
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class DynamicILInfo
+    partial public sealed class DynamicILInfo
     {
         internal DynamicILInfo() { }
 
@@ -77,7 +77,7 @@ namespace System.Reflection.Emit
         public void SetLocalSignature(byte[]? localSignature) { }
     }
 
-    public sealed partial class DynamicMethod : System.Reflection.MethodInfo
+    partial public sealed class DynamicMethod : System.Reflection.MethodInfo
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Creating a DynamicMethod requires dynamic code."

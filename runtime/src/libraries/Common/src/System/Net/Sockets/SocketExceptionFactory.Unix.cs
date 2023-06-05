@@ -3,7 +3,7 @@
 
 namespace System.Net.Sockets
 {
-    internal static partial class SocketExceptionFactory
+    partial internal static class SocketExceptionFactory
     {
         public static SocketException CreateSocketException(int socketError, EndPoint endPoint)
         {

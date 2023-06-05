@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class Boolean_EditField : System.Web.DynamicData.FieldTemplateUserControl
+partial public class Boolean_EditField : System.Web.DynamicData.FieldTemplateUserControl
 {
     protected override void OnDataBinding(EventArgs e)
     {

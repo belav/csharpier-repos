@@ -12,9 +12,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
-        private partial class PackageReference : Reference
+        partial private class PackageReference : Reference
         {
             private readonly string _source;
             private readonly string _packageName;

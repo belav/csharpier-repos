@@ -12,7 +12,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Text.Unicode
 {
-    internal static unsafe partial class Utf8Utility
+    partial internal static unsafe class Utf8Utility
     {
         // On method return, pInputBufferRemaining and pOutputBufferRemaining will both point to where
         // the next byte would have been consumed from / the next char would have been written to.

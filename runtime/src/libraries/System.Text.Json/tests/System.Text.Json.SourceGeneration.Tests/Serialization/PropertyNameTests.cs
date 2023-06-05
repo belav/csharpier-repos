@@ -7,7 +7,7 @@ using System.Text.Json.Serialization.Tests;
 
 namespace System.Text.Json.SourceGeneration.Tests
 {
-    public sealed partial class PropertyNameTests_Metadata : PropertyNameTests
+    partial public sealed class PropertyNameTests_Metadata : PropertyNameTests
     {
         public PropertyNameTests_Metadata()
             : base(
@@ -31,10 +31,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ObjectPropertyNamesDifferentByCaseOnly_TestClass))]
         [JsonSerializable(typeof(OverridePropertyNameDesignTime_TestClass))]
         [JsonSerializable(typeof(SimpleTestClass))]
-        internal sealed partial class PropertyNameTestsContext_Metadata : JsonSerializerContext { }
+        partial internal sealed class PropertyNameTestsContext_Metadata : JsonSerializerContext { }
     }
 
-    public sealed partial class PropertyNameTests_Default : PropertyNameTests
+    partial public sealed class PropertyNameTests_Default : PropertyNameTests
     {
         public PropertyNameTests_Default()
             : base(
@@ -57,6 +57,6 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ObjectPropertyNamesDifferentByCaseOnly_TestClass))]
         [JsonSerializable(typeof(OverridePropertyNameDesignTime_TestClass))]
         [JsonSerializable(typeof(SimpleTestClass))]
-        internal sealed partial class PropertyNameTestsContext_Default : JsonSerializerContext { }
+        partial internal sealed class PropertyNameTestsContext_Default : JsonSerializerContext { }
     }
 }

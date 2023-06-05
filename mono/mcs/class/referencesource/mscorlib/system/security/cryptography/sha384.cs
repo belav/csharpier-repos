@@ -30,7 +30,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public SHA384 Create()
+        public static
+        //
+        // public methods
+        //
+
+        new SHA384 Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.SHA384Managed();
@@ -39,7 +44,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public SHA384 Create(String hashName)
+        public static new SHA384 Create(String hashName)
         {
             return (SHA384)CryptoConfig.CreateFromName(hashName);
         }

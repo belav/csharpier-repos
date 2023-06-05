@@ -20,10 +20,11 @@ using System.Windows.Shapes;
 
 namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 {
+    partial
     /// <summary>
     /// Interaction logic for CallstackExplorerRoot.xaml
     /// </summary>
-    internal partial class StackTraceExplorerRoot : UserControl
+    internal class StackTraceExplorerRoot : UserControl
     {
         public string CloseTab => ServicesVSResources.Close_tab;
         public string Clear_Text => ServicesVSResources.Clear;

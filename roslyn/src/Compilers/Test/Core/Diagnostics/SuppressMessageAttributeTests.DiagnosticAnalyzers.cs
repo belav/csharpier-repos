@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 {
-    public partial class SuppressMessageAttributeTests
+    partial public class SuppressMessageAttributeTests
     {
         protected const string TestDiagnosticCategory = "Test";
         protected const string TestDiagnosticMessageTemplate = "{0}";

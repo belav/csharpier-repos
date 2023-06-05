@@ -38,7 +38,7 @@ namespace System.Threading
     using System.Diagnostics.CodeAnalysis;
 
     [System.Runtime.InteropServices.ComVisible(true)]
-    public abstract partial class WaitHandle : MarshalByRefObject, IDisposable
+    partial public abstract class WaitHandle : MarshalByRefObject, IDisposable
     {
         public const int WaitTimeout = 0x102;
 

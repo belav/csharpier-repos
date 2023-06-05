@@ -13,7 +13,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeDelegate2))]
-    public sealed partial class CodeDelegate
+    partial public sealed class CodeDelegate
         : AbstractCodeType,
             ICodeElementContainer<CodeParameter>,
             EnvDTE.CodeDelegate,

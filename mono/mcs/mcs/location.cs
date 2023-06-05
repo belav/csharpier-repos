@@ -259,7 +259,7 @@ namespace Mono.CSharp
         static Checkpoint[] checkpoints;
         static int checkpoint_index;
 
-        public readonly static Location Null = new Location();
+        public static readonly Location Null = new Location();
         public static bool InEmacs;
 
         static Location()
@@ -284,7 +284,14 @@ namespace Mono.CSharp
         //   source file.  We reserve some extra space for files we encounter via #line
         //   directives while parsing.
         // </summary>
-        static public void Initialize(List<SourceFile> files)
+        public
+        // <summary>
+        //   After adding all source files we want to compile with AddFile(), this method
+        //   must be called to `reserve' an appropriate number of bits in the token for the
+        //   source file.  We reserve some extra space for files we encounter via #line
+        //   directives while parsing.
+        // </summary>
+        static void Initialize(List<SourceFile> files)
         {
             source_list.AddRange(files);
 

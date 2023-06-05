@@ -17,7 +17,7 @@ using Microsoft.Extensions.Caching.Memory;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore
 {
-    public partial class DbContextTest
+    partial public class DbContextTest
     {
         [ConditionalFact]
         public void Can_log_debug_events_with_OnConfiguring() =>

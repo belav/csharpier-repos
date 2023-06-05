@@ -14,7 +14,7 @@ using WorkspacesResources = Microsoft.CodeAnalysis.CodeStyleResources;
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
-    internal static partial class CSharpFormattingOptions2
+    partial internal static class CSharpFormattingOptions2
     {
         private const string PublicFeatureName = "CSharpFormattingOptions";
 

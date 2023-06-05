@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Test.Cryptography
 {
-    internal abstract partial class CertLoader
+    partial internal abstract class CertLoader
     {
         //
         // This helper is for loading test certificates with private keys.

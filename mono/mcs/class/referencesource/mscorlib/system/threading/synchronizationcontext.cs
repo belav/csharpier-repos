@@ -64,8 +64,9 @@ namespace System.Threading
         SecurityAction.InheritanceDemand,
         Flags = SecurityPermissionFlag.ControlPolicy | SecurityPermissionFlag.ControlEvidence
     )]
+    partial
 #endif
-    public partial class SynchronizationContext
+    public class SynchronizationContext
     {
 #if FEATURE_SYNCHRONIZATIONCONTEXT_WAIT
         SynchronizationContextProperties _props = SynchronizationContextProperties.None;

@@ -12,10 +12,11 @@ using System.Reflection.Runtime.TypeInfos;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
+    partial
     //
     // The runtime's implementation of TypeInfo's for the "HasElement" subclass of types.
     //
-    internal abstract partial class RuntimeHasElementTypeInfo
+    internal abstract class RuntimeHasElementTypeInfo
         : RuntimeTypeInfo,
             IKeyedItem<RuntimeHasElementTypeInfo.UnificationKey>,
             IRuntimeMemberInfoWithNoMetadataDefinition

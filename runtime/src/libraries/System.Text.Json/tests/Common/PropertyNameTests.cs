@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class PropertyNameTests : SerializerTests
+    partial public abstract class PropertyNameTests : SerializerTests
     {
         public PropertyNameTests(JsonSerializerWrapper serializerWrapper)
             : base(serializerWrapper) { }

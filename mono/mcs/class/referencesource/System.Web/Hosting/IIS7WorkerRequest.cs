@@ -79,7 +79,7 @@ namespace System.Web.Hosting
         private const int CONTENT_OTHER = 3;
         private const int MIN_ASYNC_SIZE = 2048;
 
-        private volatile static bool s_AuthenticationChecked;
+        private static volatile bool s_AuthenticationChecked;
         private static bool s_AuthenticationEnabled;
 
         private static readonly char[] s_ColonOrNL = { ':', '\n' };

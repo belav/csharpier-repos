@@ -25,7 +25,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
 {
-    internal partial class CSharpMetadataAsSourceService : AbstractMetadataAsSourceService
+    partial internal class CSharpMetadataAsSourceService : AbstractMetadataAsSourceService
     {
         private static readonly AbstractFormattingRule s_memberSeparationRule =
             new FormattingRule();

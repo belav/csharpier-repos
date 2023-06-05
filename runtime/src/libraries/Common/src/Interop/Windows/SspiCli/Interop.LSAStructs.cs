@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct LSA_TRANSLATED_NAME

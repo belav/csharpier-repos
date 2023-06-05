@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal partial class AggregateJsonConverter : JsonConverter
+    partial internal class AggregateJsonConverter : JsonConverter
     {
 #pragma warning disable CA1822 // Mark members as static
         // this type is shared by multiple teams such as Razor, LUT and etc which have either

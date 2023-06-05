@@ -7,13 +7,14 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Thunk to dynamically invoke a method using reflection. The method accepts an parameters as byrefs
     /// lays them out on the stack, and calls the target method. This thunk has heavy dependencies
     /// on the general dynamic invocation infrastructure in System.InvokeUtils and gets called from there
     /// at runtime. See comments in System.InvokeUtils for a more thorough explanation.
     /// </summary>
-    public sealed partial class DynamicInvokeMethodThunk : ILStubMethod
+    public sealed class DynamicInvokeMethodThunk : ILStubMethod
     {
         private TypeDesc _owningType;
         private MethodSignature _targetSignature;

@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
-    internal readonly partial struct ExpressionBinder
+    partial internal readonly struct ExpressionBinder
     {
         private static bool IsNullableConstructor(Expr expr, out ExprCall call)
         {

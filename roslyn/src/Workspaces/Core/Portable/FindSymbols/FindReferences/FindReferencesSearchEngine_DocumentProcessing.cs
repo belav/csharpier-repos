@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal partial class FindReferencesSearchEngine
+    partial internal class FindReferencesSearchEngine
     {
         private async Task ProcessDocumentQueueAsync(
             Document document,

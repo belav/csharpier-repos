@@ -10,15 +10,15 @@ using Microsoft.Win32.SafeHandles;
 // Declared as signed long, which has sizeof(void*) on OSX.
 using CFIndex = System.IntPtr;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class CoreFoundation
+    partial internal static class CoreFoundation
     {
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static partial CFIndex CFErrorGetCode(SafeCFErrorHandle cfError);
+        partial private static CFIndex CFErrorGetCode(SafeCFErrorHandle cfError);
 
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static partial SafeCFStringHandle CFErrorCopyDescription(SafeCFErrorHandle cfError);
+        partial private static SafeCFStringHandle CFErrorCopyDescription(SafeCFErrorHandle cfError);
 
         internal static int GetErrorCode(SafeCFErrorHandle cfError)
         {

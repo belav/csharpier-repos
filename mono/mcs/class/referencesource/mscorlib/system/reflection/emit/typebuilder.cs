@@ -1296,7 +1296,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int DefineType(
+        private static extern int DefineType(
             RuntimeModule module,
             String fullname,
             int tkParent,
@@ -1309,7 +1309,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int DefineGenericParam(
+        private static extern int DefineGenericParam(
             RuntimeModule module,
             String name,
             int tkParent,

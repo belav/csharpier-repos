@@ -6,9 +6,10 @@ using System.Collections.Generic;
 
 namespace System.Reflection.TypeLoading.Ecma
 {
+    partial
     // Low level support for the BindingFlag-driven enumerator apis. These return members declared (not inherited) on the current
     // type, possibly doing case-sensitive/case-insensitive filtering on a supplied name.
-    internal sealed partial class EcmaDefinitionType
+    internal sealed class EcmaDefinitionType
     {
         //
         // - It may sound odd to get a non-null name filter for a constructor search, but Type.GetMember() is an api that does this.

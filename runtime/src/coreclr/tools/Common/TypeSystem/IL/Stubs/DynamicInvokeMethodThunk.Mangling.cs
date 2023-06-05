@@ -5,7 +5,7 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
-    public partial class DynamicInvokeMethodThunk : IPrefixMangledSignature
+    partial public class DynamicInvokeMethodThunk : IPrefixMangledSignature
     {
         MethodSignature IPrefixMangledSignature.BaseSignature
         {

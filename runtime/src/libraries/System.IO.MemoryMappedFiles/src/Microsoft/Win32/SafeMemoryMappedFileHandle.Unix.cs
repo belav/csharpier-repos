@@ -8,7 +8,7 @@ using System.IO.MemoryMappedFiles;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeMemoryMappedFileHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeMemoryMappedFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         /// <summary>File handle.</summary>
         internal SafeFileHandle? _fileStreamHandle;

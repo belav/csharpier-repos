@@ -19,7 +19,7 @@ namespace System.Security.Cryptography.Dsa.Tests
         public bool SupportsKeyGeneration => true;
     }
 
-    public partial class DSAFactory
+    partial public class DSAFactory
     {
         private static readonly IDSAProvider s_provider = new DSACngProvider();
     }

@@ -39,7 +39,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
     [global::System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://www.onvif.org/ver10/schema"
     )]
-    public partial class VideoSource { }
+    partial public class VideoSource { }
 
     [global::System.Diagnostics.DebuggerStepThroughAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -51,7 +51,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
         WrapperNamespace = "http://www.onvif.org/ver10/media/wsdl",
         IsWrapped = true
     )]
-    public partial class GetVideoSourcesRequest { }
+    partial public class GetVideoSourcesRequest { }
 
     [global::System.Diagnostics.DebuggerStepThroughAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,7 +63,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
         WrapperNamespace = "http://www.onvif.org/ver10/media/wsdl",
         IsWrapped = true
     )]
-    public partial class GetVideoSourcesResponse
+    partial public class GetVideoSourcesResponse
     {
         [global::System.ServiceModel.MessageBodyMemberAttribute(
             Namespace = "http://www.onvif.org/ver10/media/wsdl",

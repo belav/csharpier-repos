@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Connections.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 
-internal sealed partial class QuicStreamContext
+partial internal sealed class QuicStreamContext
     : IPersistentStateFeature,
         IStreamDirectionFeature,
         IProtocolErrorCodeFeature,

@@ -19,7 +19,7 @@ namespace System.Data.Services.Client
     using System.Text;
     using System.Xml;
 
-    internal static partial class UriUtil
+    partial internal static class UriUtil
     {
         internal static string GetNameFromAtomLinkRelationAttribute(string value)
         {
@@ -55,7 +55,7 @@ namespace System.Data.Services.Client
         }
     }
 
-    internal static partial class XmlUtil
+    partial internal static class XmlUtil
     {
         private static NameTable CreateAtomNameTable()
         {

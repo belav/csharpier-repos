@@ -20,7 +20,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class DiagnosticTest : CSharpTestBase
+    partial public class DiagnosticTest : CSharpTestBase
     {
         /// <summary>
         /// Ensure string resources are included.

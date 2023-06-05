@@ -9,10 +9,11 @@ using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formatting.View
 {
+    partial
     /// <summary>
     /// Interaction logic for WhitespaceValueSettingControl.xaml
     /// </summary>
-    internal partial class FormattingBoolSettingView : UserControl
+    internal class FormattingBoolSettingView : UserControl
     {
         private readonly FormattingSetting _setting;
 

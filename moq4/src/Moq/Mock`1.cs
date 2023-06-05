@@ -15,6 +15,7 @@ using Moq.Properties;
 
 namespace Moq
 {
+    partial
     /// <summary>
     ///   Provides a mock implementation of <typeparamref name="T"/>.
     /// </summary>
@@ -68,7 +69,7 @@ namespace Moq
     ///     Assert.False(order.IsFilled);
     ///   </code>
     /// </example>
-    public partial class Mock<T> : Mock, IMock<T>
+    public class Mock<T> : Mock, IMock<T>
         where T : class
     {
         private static Type[] inheritedInterfaces;
@@ -280,7 +281,7 @@ namespace Moq
         /// <summary>
         ///   Exposes the mocked object instance.
         /// </summary>
-        public virtual new T Object
+        public new virtual T Object
         {
             get { return (T)base.Object; }
         }

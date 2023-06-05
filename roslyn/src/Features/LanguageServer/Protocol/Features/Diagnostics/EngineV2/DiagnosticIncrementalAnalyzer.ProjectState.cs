@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 {
-    internal partial class DiagnosticIncrementalAnalyzer
+    partial internal class DiagnosticIncrementalAnalyzer
     {
         /// <summary>
         /// State for diagnostics that belong to a project at given time.

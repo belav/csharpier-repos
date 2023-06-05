@@ -30,7 +30,7 @@
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class GenericTypeParameterBuilder : System.Reflection.TypeInfo
+    partial public sealed class GenericTypeParameterBuilder : System.Reflection.TypeInfo
     {
         internal GenericTypeParameterBuilder()
         {

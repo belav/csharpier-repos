@@ -9,13 +9,13 @@ using Xunit;
 
 namespace ComInterfaceGenerator.Tests
 {
-    internal unsafe partial class NativeExportsNE
+    partial internal unsafe class NativeExportsNE
     {
-        internal partial class ImplicitThis
+        partial internal class ImplicitThis
         {
             public readonly record struct NoCasting;
 
-            internal partial interface INativeObject
+            partial internal interface INativeObject
                 : IUnmanagedInterfaceType<INativeObject, NoCasting>
             {
                 static int IUnmanagedInterfaceType<
@@ -111,16 +111,16 @@ namespace ComInterfaceGenerator.Tests
             }
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "new_native_object")]
-            public static partial NativeObject NewNativeObject();
+            partial public static NativeObject NewNativeObject();
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "delete_native_object")]
-            public static partial void DeleteNativeObject(void* obj);
+            partial public static void DeleteNativeObject(void* obj);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "set_native_object_data")]
-            public static partial void SetNativeObjectData(void* obj, int data);
+            partial public static void SetNativeObjectData(void* obj, int data);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_native_object_data")]
-            public static partial int GetNativeObjectData(void* obj);
+            partial public static int GetNativeObjectData(void* obj);
         }
     }
 

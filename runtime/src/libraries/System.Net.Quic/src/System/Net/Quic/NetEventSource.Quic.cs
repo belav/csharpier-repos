@@ -7,9 +7,9 @@ using System.Net.Quic;
 namespace System.Net
 {
     [EventSource(Name = "Private.InternalDiagnostics.System.Net.Quic")]
-    internal sealed partial class NetEventSource
+    partial internal sealed class NetEventSource
     {
-        static partial void AdditionalCustomizedToString(object value, ref string? result)
+        partial static void AdditionalCustomizedToString(object value, ref string? result)
         {
             if (value is MsQuicSafeHandle safeHandle)
             {

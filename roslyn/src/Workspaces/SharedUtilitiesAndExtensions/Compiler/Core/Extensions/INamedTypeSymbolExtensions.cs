@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class INamedTypeSymbolExtensions
+    partial internal static class INamedTypeSymbolExtensions
     {
         public static IEnumerable<INamedTypeSymbol> GetBaseTypesAndThis(
             this INamedTypeSymbol? namedType

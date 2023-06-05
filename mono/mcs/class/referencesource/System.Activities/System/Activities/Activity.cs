@@ -83,7 +83,7 @@ namespace System.Activities
 
         [TypeConverter(typeof(ImplementationVersionConverter))]
         [DefaultValue(null)]
-        protected virtual internal Version ImplementationVersion { get; set; }
+        protected internal virtual Version ImplementationVersion { get; set; }
 
         [XamlDeferLoad(typeof(FuncDeferringLoader), typeof(Activity))]
         [DefaultValue(null)]

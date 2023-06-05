@@ -18,7 +18,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class NullableSemanticTests : SemanticModelTestBase
+    partial public class NullableSemanticTests : SemanticModelTestBase
     {
         [Fact, WorkItem(651624, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/651624")]
         public void NestedNullableWithAttemptedConversion()

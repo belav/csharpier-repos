@@ -5,9 +5,10 @@ using System.Runtime.InteropServices;
 
 namespace System.Net
 {
+    partial
     // This class is used to determine if NTLM or
     // Kerberos are used in the context of a Negotiate handshake
-    internal static partial class NegotiationInfoClass
+    internal static class NegotiationInfoClass
     {
         internal static string? GetAuthenticationPackageName(
             SafeHandle safeHandle,

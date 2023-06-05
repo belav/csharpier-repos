@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    public static partial class SymbolFinder
+    partial public static class SymbolFinder
     {
         /// <summary>
         /// Find the declared symbols from either source, referenced projects or metadata assemblies with the specified name.

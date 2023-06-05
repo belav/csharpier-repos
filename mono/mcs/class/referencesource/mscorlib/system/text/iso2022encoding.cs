@@ -118,7 +118,7 @@ namespace System.Text
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        protected unsafe override String GetMemorySectionName()
+        protected override unsafe String GetMemorySectionName()
         {
             int iUseCodePage = this.bFlagDataTable ? dataTableCodePage : CodePage;
 

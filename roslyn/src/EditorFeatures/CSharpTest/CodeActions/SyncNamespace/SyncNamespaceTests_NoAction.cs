@@ -14,7 +14,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespace
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsSyncNamespace)]
-    public partial class SyncNamespaceTests : CSharpSyncNamespaceTestsBase
+    partial public class SyncNamespaceTests : CSharpSyncNamespaceTestsBase
     {
         [WpfFact]
         public async Task NoAction_NotOnNamespaceDeclaration()

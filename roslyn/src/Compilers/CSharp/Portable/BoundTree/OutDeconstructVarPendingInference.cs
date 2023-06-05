@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class OutDeconstructVarPendingInference
+    partial internal class OutDeconstructVarPendingInference
     {
         public BoundDeconstructValuePlaceholder? Placeholder;
 

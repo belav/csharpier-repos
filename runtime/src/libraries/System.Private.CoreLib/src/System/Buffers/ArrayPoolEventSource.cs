@@ -11,7 +11,7 @@ namespace System.Buffers
         Name = "System.Buffers.ArrayPoolEventSource"
     )]
     [EventSourceAutoGenerate]
-    internal sealed partial class ArrayPoolEventSource : EventSource
+    partial internal sealed class ArrayPoolEventSource : EventSource
     {
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";

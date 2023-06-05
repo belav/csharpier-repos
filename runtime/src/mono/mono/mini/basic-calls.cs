@@ -84,12 +84,12 @@ class Tests
         return 0;
     }
 
-    unsafe static float GetFloat(byte* ptr)
+    static unsafe float GetFloat(byte* ptr)
     {
         return *(float*)ptr;
     }
 
-    unsafe public static float GetFloat(float value)
+    public static unsafe float GetFloat(float value)
     {
         return GetFloat((byte*)&value);
     }

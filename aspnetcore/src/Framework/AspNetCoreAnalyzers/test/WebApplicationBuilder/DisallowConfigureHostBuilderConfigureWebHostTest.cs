@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 
 namespace Microsoft.AspNetCore.Analyzers.WebApplicationBuilder;
 
-public partial class DisallowConfigureHostBuilderConfigureWebHostTest
+partial public class DisallowConfigureHostBuilderConfigureWebHostTest
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new WebApplicationBuilderAnalyzer());
 

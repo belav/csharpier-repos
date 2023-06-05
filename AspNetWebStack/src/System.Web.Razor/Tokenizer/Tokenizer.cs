@@ -15,7 +15,7 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Tokenizer
 {
-    public abstract partial class Tokenizer<TSymbol, TSymbolType>
+    partial public abstract class Tokenizer<TSymbol, TSymbolType>
         : StateMachine<TSymbol>,
             ITokenizer
         where TSymbol : SymbolBase<TSymbolType>
@@ -368,7 +368,7 @@ namespace System.Web.Razor.Tokenizer
 
 #if DEBUG
     [DebuggerDisplay("{DebugDisplay}")]
-    public partial class Tokenizer<TSymbol, TSymbolType>
+    partial public class Tokenizer<TSymbol, TSymbolType>
     {
         private StringBuilder _read = new StringBuilder();
 

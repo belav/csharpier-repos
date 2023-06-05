@@ -25,7 +25,7 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed partial class ServiceHubRemoteHostClient : RemoteHostClient
+    partial internal sealed class ServiceHubRemoteHostClient : RemoteHostClient
     {
         private readonly SolutionServices _services;
         private readonly SolutionAssetStorage _assetStorage;

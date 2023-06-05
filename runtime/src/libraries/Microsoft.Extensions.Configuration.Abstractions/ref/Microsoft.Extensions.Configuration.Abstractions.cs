@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public static partial class ConfigurationExtensions
+    partial public static class ConfigurationExtensions
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder Add<TSource>(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
@@ -62,7 +62,7 @@ namespace Microsoft.Extensions.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class ConfigurationKeyNameAttribute : System.Attribute
+    partial public sealed class ConfigurationKeyNameAttribute : System.Attribute
     {
         public ConfigurationKeyNameAttribute(string name) { }
 
@@ -72,7 +72,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public static partial class ConfigurationPath
+    partial public static class ConfigurationPath
     {
         public static readonly string KeyDelimiter;
 
@@ -98,7 +98,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public static partial class ConfigurationRootExtensions
+    partial public static class ConfigurationRootExtensions
     {
         public static string GetDebugView(
             this Microsoft.Extensions.Configuration.IConfigurationRoot root
@@ -116,7 +116,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public readonly partial struct ConfigurationDebugViewContext
+    partial public readonly struct ConfigurationDebugViewContext
     {
         public ConfigurationDebugViewContext(
             string path,
@@ -134,7 +134,7 @@ namespace Microsoft.Extensions.Configuration
         public IConfigurationProvider ConfigurationProvider { get; }
     }
 
-    public partial interface IConfiguration
+    partial public interface IConfiguration
     {
         string? this[string key] { get; set; }
         System.Collections.Generic.IEnumerable<Microsoft.Extensions.Configuration.IConfigurationSection> GetChildren();
@@ -142,7 +142,7 @@ namespace Microsoft.Extensions.Configuration
         Microsoft.Extensions.Configuration.IConfigurationSection GetSection(string key);
     }
 
-    public partial interface IConfigurationBuilder
+    partial public interface IConfigurationBuilder
     {
         System.Collections.Generic.IDictionary<string, object> Properties { get; }
         System.Collections.Generic.IList<Microsoft.Extensions.Configuration.IConfigurationSource> Sources { get; }
@@ -152,7 +152,7 @@ namespace Microsoft.Extensions.Configuration
         Microsoft.Extensions.Configuration.IConfigurationRoot Build();
     }
 
-    public partial interface IConfigurationProvider
+    partial public interface IConfigurationProvider
     {
         System.Collections.Generic.IEnumerable<string> GetChildKeys(
             System.Collections.Generic.IEnumerable<string> earlierKeys,
@@ -164,13 +164,13 @@ namespace Microsoft.Extensions.Configuration
         bool TryGet(string key, out string? value);
     }
 
-    public partial interface IConfigurationRoot : Microsoft.Extensions.Configuration.IConfiguration
+    partial public interface IConfigurationRoot : Microsoft.Extensions.Configuration.IConfiguration
     {
         System.Collections.Generic.IEnumerable<Microsoft.Extensions.Configuration.IConfigurationProvider> Providers { get; }
         void Reload();
     }
 
-    public partial interface IConfigurationSection
+    partial public interface IConfigurationSection
         : Microsoft.Extensions.Configuration.IConfiguration
     {
         string Key { get; }
@@ -178,7 +178,7 @@ namespace Microsoft.Extensions.Configuration
         string? Value { get; set; }
     }
 
-    public partial interface IConfigurationSource
+    partial public interface IConfigurationSource
     {
         Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder

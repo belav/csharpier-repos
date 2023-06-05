@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics.Metrics
 {
-    internal partial struct StringSequence1 : IEquatable<StringSequence1>, IStringSequence
+    partial internal struct StringSequence1 : IEquatable<StringSequence1>, IStringSequence
     {
         public string Value1;
 
@@ -29,7 +29,7 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    internal partial struct StringSequence2 : IEquatable<StringSequence2>, IStringSequence
+    partial internal struct StringSequence2 : IEquatable<StringSequence2>, IStringSequence
     {
         public string Value1;
         public string Value2;
@@ -52,7 +52,7 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    internal partial struct StringSequence3 : IEquatable<StringSequence3>, IStringSequence
+    partial internal struct StringSequence3 : IEquatable<StringSequence3>, IStringSequence
     {
         public string Value1;
         public string Value2;
@@ -77,7 +77,7 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    internal partial struct StringSequenceMany : IEquatable<StringSequenceMany>, IStringSequence
+    partial internal struct StringSequenceMany : IEquatable<StringSequenceMany>, IStringSequence
     {
         private readonly string[] _values;
 

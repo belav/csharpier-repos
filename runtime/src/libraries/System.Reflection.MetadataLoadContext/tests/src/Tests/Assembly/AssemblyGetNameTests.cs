@@ -9,11 +9,12 @@ namespace System.Reflection.Tests
     // in System.Reflection takes precedence.
     using AssemblyHashAlgorithm = global::System.Configuration.Assemblies.AssemblyHashAlgorithm;
 
+    partial
     //
     // This group of tests checks that Assembly.GetName() returns an AssemblyName compatible with the classic Reflection
     // behavior and that it will always round-trip though LoadFromAssemblyName() to retrieve the Assembly just loaded.
     //
-    public static partial class AssemblyTests
+    public static class AssemblyTests
     {
         [Fact]
         public static void AssemblyName_GetName_SimpleNameOnly()

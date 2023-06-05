@@ -27,7 +27,7 @@ struct StructWithInt128
     public Int128 value;
 }
 
-unsafe partial class Int128Native
+partial unsafe class Int128Native
 {
     [DllImport(nameof(Int128Native))]
     public static extern Int128 GetInt128(ulong upper, ulong lower);
@@ -194,7 +194,7 @@ unsafe partial class Int128Native
     public static extern Int128 AddInt128s(in Int128 pValues, int count);
 }
 
-unsafe partial class Int128Native
+partial unsafe class Int128Native
 {
     public static void TestInt128FieldLayout()
     {

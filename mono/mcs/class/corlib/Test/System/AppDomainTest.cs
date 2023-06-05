@@ -3697,7 +3697,7 @@ namespace MonoTests.System
             });
         }
 
-        public ref struct TestRefStruct
+        ref public struct TestRefStruct
         {
             public int i;
         }

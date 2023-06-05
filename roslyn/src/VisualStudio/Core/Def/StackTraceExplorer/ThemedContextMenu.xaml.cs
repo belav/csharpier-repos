@@ -19,10 +19,11 @@ using System.Windows.Shapes;
 
 namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 {
+    partial
     /// <summary>
     /// Interaction logic for ThemedContextMenu.xaml
     /// </summary>
-    internal partial class ThemedContextMenu : ContextMenu
+    internal class ThemedContextMenu : ContextMenu
     {
         public ThemedContextMenu()
         {

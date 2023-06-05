@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace System.Text.Json.Serialization.Tests
 {
+    partial
     /// <summary>
     /// Base class for abstracting streaming JsonSerializer method families.
     /// </summary>
-    public abstract partial class StreamingJsonSerializerWrapper : JsonSerializerWrapper
+    public abstract class StreamingJsonSerializerWrapper : JsonSerializerWrapper
     {
         /// <summary>
         /// True if the serializer is streaming data synchronously.

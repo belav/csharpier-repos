@@ -709,6 +709,7 @@ namespace System.Xml.Xsl.Qil
         {
             return NoReplace(n);
         }
+        internal
         #endregion
 
         #endregion
@@ -721,7 +722,7 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// A bit vector holding a set of rewrites.
         /// </summary>
-        sealed internal class QilPatterns
+        sealed class QilPatterns
         {
             private BitArray bits;
 

@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Recommendations;
 namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 {
     [ExportLanguageService(typeof(IRecommendationService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpRecommendationService
+    partial internal class CSharpRecommendationService
         : AbstractRecommendationService<CSharpSyntaxContext>
     {
         [ImportingConstructor]

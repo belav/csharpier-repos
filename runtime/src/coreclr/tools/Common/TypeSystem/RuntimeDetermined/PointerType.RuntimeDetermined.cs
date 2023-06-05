@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class PointerType
+    partial public class PointerType
     {
         public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
             Instantiation typeInstantiation,

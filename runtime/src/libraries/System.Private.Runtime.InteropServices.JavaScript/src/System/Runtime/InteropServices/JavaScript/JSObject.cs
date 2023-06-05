@@ -3,11 +3,12 @@
 
 namespace System.Runtime.InteropServices.JavaScript
 {
+    partial
     /// <summary>
     ///   JSObjects are wrappers for a native JavaScript object, and
     ///   they retain a reference to the JavaScript object for the lifetime of this C# object.
     /// </summary>
-    public partial class JSObject : IDisposable
+    public class JSObject : IDisposable
     {
         /// <summary>
         ///   Invoke a named method of the object, or throws a JSException on error.

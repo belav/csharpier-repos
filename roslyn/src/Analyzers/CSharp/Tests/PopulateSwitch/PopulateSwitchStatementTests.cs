@@ -16,7 +16,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwitch
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
-    public partial class PopulateSwitchStatementTests
+    partial public class PopulateSwitchStatementTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public PopulateSwitchStatementTests(ITestOutputHelper logger)

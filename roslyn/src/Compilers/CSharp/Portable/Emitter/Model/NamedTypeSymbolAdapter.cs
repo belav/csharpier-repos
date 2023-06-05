@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class
+    partial internal class
 #if DEBUG
     NamedTypeSymbolAdapter
         : SymbolAdapter,
@@ -1033,7 +1033,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal partial class NamedTypeSymbol
+    partial internal class NamedTypeSymbol
     {
 #if DEBUG
         private NamedTypeSymbolAdapter _lazyAdapter;
@@ -1177,8 +1177,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
+    partial
 #if DEBUG
-    internal partial class NamedTypeSymbolAdapter
+    internal class NamedTypeSymbolAdapter
     {
         internal NamedTypeSymbolAdapter(NamedTypeSymbol underlyingNamedTypeSymbol)
         {

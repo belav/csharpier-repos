@@ -251,7 +251,7 @@ namespace System.Web.Caching
             );
         }
 
-        override internal void ReadConfig(CacheSection cacheSection)
+        internal override void ReadConfig(CacheSection cacheSection)
         {
             // Read the percentagePhysicalMemoryUsedLimit set in config
             int limit = cacheSection.PercentagePhysicalMemoryUsedLimit;
@@ -285,7 +285,7 @@ namespace System.Web.Caching
 #endif
         }
 
-        override protected int GetCurrentPressure()
+        protected override int GetCurrentPressure()
         {
             UnsafeNativeMethods.MEMORYSTATUSEX memoryStatusEx =
                 new UnsafeNativeMethods.MEMORYSTATUSEX();
@@ -509,7 +509,7 @@ namespace System.Web.Caching
             }
         }
 
-        override internal void ReadConfig(CacheSection cacheSection)
+        internal override void ReadConfig(CacheSection cacheSection)
         {
             // Read the private bytes limit set in config
             long privateBytesLimit;
@@ -590,7 +590,7 @@ namespace System.Web.Caching
             get { return s_pollInterval; }
         }
 
-        override protected int GetCurrentPressure()
+        protected override int GetCurrentPressure()
         {
             // Call GetUpdatedTotalCacheSize to update the total
             // cache size, if there has been a recent Gen 2 Collection.

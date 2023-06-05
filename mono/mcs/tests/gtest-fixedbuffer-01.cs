@@ -10,11 +10,11 @@ using System.Runtime.InteropServices;
 [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 public unsafe struct TestNew
 {
-    private fixed char test_1[128];
-    public fixed bool test2[4];
+    fixed private char test_1[128];
+    fixed public bool test2[4];
 
-    public fixed int T[2];
-    public fixed bool test20[4],
+    fixed public int T[2];
+    fixed public bool test20[4],
         test21[40];
 
     private int foo,
@@ -31,12 +31,12 @@ public unsafe struct TestNew
 
 struct Struct2
 {
-    public unsafe fixed byte Pad[64];
+    fixed public unsafe byte Pad[64];
 }
 
 public class C
 {
-    unsafe static int Test()
+    static unsafe int Test()
     {
         TestNew tt = new TestNew();
         tt.SetTest();

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter
+    partial internal sealed class LocalRewriter
     {
         /// <summary>
         /// Rewrite a using statement into a try finally statement.  Four forms are possible:

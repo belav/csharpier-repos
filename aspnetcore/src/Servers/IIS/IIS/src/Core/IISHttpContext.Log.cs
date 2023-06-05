@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-internal abstract partial class IISHttpContext
+partial internal abstract class IISHttpContext
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -16,7 +16,7 @@ internal abstract partial class IISHttpContext
             @"Connection ID ""{ConnectionId}"" disconnecting.",
             EventName = "ConnectionDisconnect"
         )]
-        public static partial void ConnectionDisconnect(ILogger logger, string connectionId);
+        partial public static void ConnectionDisconnect(ILogger logger, string connectionId);
 
         [LoggerMessage(
             2,
@@ -24,7 +24,7 @@ internal abstract partial class IISHttpContext
             @"Connection ID ""{ConnectionId}"", Request ID ""{TraceIdentifier}"": An unhandled exception was thrown by the application.",
             EventName = "ApplicationError"
         )]
-        public static partial void ApplicationError(
+        partial public static void ApplicationError(
             ILogger logger,
             string connectionId,
             string traceIdentifier,
@@ -37,7 +37,7 @@ internal abstract partial class IISHttpContext
             @"Unexpected exception in ""{ClassName}.{MethodName}"".",
             EventName = "UnexpectedError"
         )]
-        public static partial void UnexpectedError(
+        partial public static void UnexpectedError(
             ILogger logger,
             string className,
             Exception ex,
@@ -56,7 +56,7 @@ internal abstract partial class IISHttpContext
             @"Connection id ""{ConnectionId}"" bad request data: ""{message}""",
             EventName = nameof(ConnectionBadRequest)
         )]
-        private static partial void ConnectionBadRequest(
+        partial private static void ConnectionBadRequest(
             ILogger logger,
             string connectionId,
             string message,

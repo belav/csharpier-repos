@@ -15,8 +15,8 @@ public static class DbConst
 [StructLayout(LayoutKind.Sequential, Size = 92)]
 internal unsafe struct hci_dev_info
 {
-    public fixed sbyte name[8];
-    private fixed byte bdaddr[6];
+    fixed public sbyte name[8];
+    fixed private byte bdaddr[6];
     hci_dev_info* foo;
 }
 

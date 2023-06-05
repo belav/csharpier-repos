@@ -43,7 +43,7 @@ namespace Internal.JitInterface
         CompilationRetryRequested
     }
 
-    internal sealed unsafe partial class CorInfoImpl
+    partial internal sealed unsafe class CorInfoImpl
     {
         //
         // Global initialization and state

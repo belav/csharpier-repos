@@ -20,7 +20,7 @@ using System.Transactions;
 namespace System.Data.OleDb
 {
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbCommand
+    partial public sealed class OleDbCommand
         : System.Data.Common.DbCommand,
             System.Data.IDbCommand,
             System.ICloneable,
@@ -122,7 +122,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbCommandBuilder : System.Data.Common.DbCommandBuilder
+    partial public sealed class OleDbCommandBuilder : System.Data.Common.DbCommandBuilder
     {
         public OleDbCommandBuilder() => throw ADP.OleDb();
 
@@ -179,7 +179,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbConnection
+    partial public sealed class OleDbConnection
         : System.Data.Common.DbConnection,
             System.Data.IDbConnection,
             System.ICloneable,
@@ -245,7 +245,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbConnectionStringBuilder
+    partial public sealed class OleDbConnectionStringBuilder
         : System.Data.Common.DbConnectionStringBuilder
     {
         public OleDbConnectionStringBuilder() => throw ADP.OleDb();
@@ -300,7 +300,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbDataAdapter
+    partial public sealed class OleDbDataAdapter
         : System.Data.Common.DbDataAdapter,
             System.Data.IDataAdapter,
             System.Data.IDbDataAdapter,
@@ -387,7 +387,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbDataReader : System.Data.Common.DbDataReader
+    partial public sealed class OleDbDataReader : System.Data.Common.DbDataReader
     {
         internal OleDbDataReader() { }
 
@@ -474,7 +474,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbEnumerator
+    partial public sealed class OleDbEnumerator
     {
         public DataTable GetElements() => throw ADP.OleDb();
 
@@ -484,7 +484,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbError
+    partial public sealed class OleDbError
     {
         internal OleDbError() { }
 
@@ -497,7 +497,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbErrorCollection
+    partial public sealed class OleDbErrorCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -517,7 +517,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbException : System.Data.Common.DbException
+    partial public sealed class OleDbException : System.Data.Common.DbException
     {
         internal OleDbException() { }
 
@@ -529,7 +529,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbFactory : System.Data.Common.DbProviderFactory
+    partial public sealed class OleDbFactory : System.Data.Common.DbProviderFactory
     {
         internal OleDbFactory() { }
 
@@ -555,7 +555,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbInfoMessageEventArgs : System.EventArgs
+    partial public sealed class OleDbInfoMessageEventArgs : System.EventArgs
     {
         internal OleDbInfoMessageEventArgs() => throw ADP.OleDb();
 
@@ -606,7 +606,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public static partial class OleDbMetaDataCollectionNames
+    partial public static class OleDbMetaDataCollectionNames
     {
         public static readonly string Catalogs;
         public static readonly string Collations;
@@ -620,7 +620,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public static partial class OleDbMetaDataColumnNames
+    partial public static class OleDbMetaDataColumnNames
     {
         public static readonly string BooleanFalseLiteral;
         public static readonly string BooleanTrueLiteral;
@@ -629,7 +629,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbParameter
+    partial public sealed class OleDbParameter
         : System.Data.Common.DbParameter,
             System.Data.IDataParameter,
             System.Data.IDbDataParameter,
@@ -835,7 +835,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbRowUpdatedEventArgs : System.Data.Common.RowUpdatedEventArgs
+    partial public sealed class OleDbRowUpdatedEventArgs : System.Data.Common.RowUpdatedEventArgs
     {
         public new OleDbCommand Command => throw ADP.OleDb();
 
@@ -856,7 +856,7 @@ namespace System.Data.OleDb
     public delegate void OleDbRowUpdatedEventHandler(object sender, OleDbRowUpdatedEventArgs e);
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbRowUpdatingEventArgs : System.Data.Common.RowUpdatingEventArgs
+    partial public sealed class OleDbRowUpdatingEventArgs : System.Data.Common.RowUpdatingEventArgs
     {
         protected override IDbCommand BaseCommand
         {
@@ -886,7 +886,7 @@ namespace System.Data.OleDb
     public delegate void OleDbRowUpdatingEventHandler(object sender, OleDbRowUpdatingEventArgs e);
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbSchemaGuid
+    partial public sealed class OleDbSchemaGuid
     {
         public static readonly System.Guid Assertions;
         public static readonly System.Guid Catalogs;
@@ -928,7 +928,7 @@ namespace System.Data.OleDb
     }
 
     [MonoTODO("OleDb is not implemented.")]
-    public sealed partial class OleDbTransaction : System.Data.Common.DbTransaction
+    partial public sealed class OleDbTransaction : System.Data.Common.DbTransaction
     {
         internal OleDbTransaction() { }
 

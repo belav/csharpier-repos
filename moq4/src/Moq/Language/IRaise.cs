@@ -10,7 +10,7 @@ namespace Moq.Language
     /// Defines the <c>Raises</c> verb.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public partial interface IRaise<T> : IFluentInterface
+    partial public interface IRaise<T> : IFluentInterface
     {
         /// <summary>
         /// Specifies the event that will be raised

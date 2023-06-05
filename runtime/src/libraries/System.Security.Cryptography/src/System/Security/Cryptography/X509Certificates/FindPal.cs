@@ -8,7 +8,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal partial class FindPal
+    partial internal class FindPal
     {
         private const int NamedKeyUsageFlagsCount = 9;
 
@@ -35,7 +35,15 @@ namespace System.Security.Cryptography.X509Certificates
         }
 #endif
 
-        private static partial IFindPal OpenPal(
+        partial
+#if DEBUG
+        static FindPal()
+        {
+            Debug.Assert(s_keyUsages.Count == NamedKeyUsageFlagsCount);
+        }
+#endif
+
+        private static IFindPal OpenPal(
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
             bool validOnly

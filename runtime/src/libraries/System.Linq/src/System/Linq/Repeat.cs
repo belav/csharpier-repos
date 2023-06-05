@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TResult> Repeat<TResult>(TResult element, int count)
         {
@@ -28,7 +28,7 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TResult">The type of the item.</typeparam>
         [DebuggerDisplay("Count = {_count}")]
-        private sealed partial class RepeatIterator<TResult> : Iterator<TResult>
+        partial private sealed class RepeatIterator<TResult> : Iterator<TResult>
         {
             private readonly int _count;
 

@@ -14,7 +14,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertLogical
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInvertLogical)]
-    public partial class InvertLogicalTests : AbstractCSharpCodeActionTest
+    partial public class InvertLogicalTests : AbstractCSharpCodeActionTest
     {
         private static readonly ParseOptions CSharp6 =
             CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6);

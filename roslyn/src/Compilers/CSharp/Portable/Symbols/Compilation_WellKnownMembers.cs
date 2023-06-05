@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class CSharpCompilation
+    partial public class CSharpCompilation
     {
         internal readonly WellKnownMembersSignatureComparer WellKnownMemberSignatureComparer;
 

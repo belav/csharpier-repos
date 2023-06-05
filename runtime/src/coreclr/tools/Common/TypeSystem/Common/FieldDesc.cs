@@ -7,7 +7,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class FieldDesc : TypeSystemEntity
+    partial public abstract class FieldDesc : TypeSystemEntity
     {
 #pragma warning disable CA1825 // avoid Array.Empty<T>() instantiation for TypeLoader
         public static readonly FieldDesc[] EmptyFields = new FieldDesc[0];

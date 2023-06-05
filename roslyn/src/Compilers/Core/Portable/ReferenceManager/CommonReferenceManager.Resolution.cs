@@ -19,12 +19,13 @@ namespace Microsoft.CodeAnalysis
 {
     using MetadataOrDiagnostic = System.Object;
 
+    partial
     /// <summary>
     /// The base class for language specific assembly managers.
     /// </summary>
     /// <typeparam name="TCompilation">Language specific representation for a compilation</typeparam>
     /// <typeparam name="TAssemblySymbol">Language specific representation for an assembly symbol.</typeparam>
-    internal abstract partial class CommonReferenceManager<TCompilation, TAssemblySymbol>
+    internal abstract class CommonReferenceManager<TCompilation, TAssemblySymbol>
         where TCompilation : Compilation
         where TAssemblySymbol : class, IAssemblySymbolInternal
     {

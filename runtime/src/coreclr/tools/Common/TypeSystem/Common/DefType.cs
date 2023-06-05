@@ -3,11 +3,12 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Type that is logically equivalent to a type which is defined by a TypeDef
     /// record in an ECMA 335 metadata stream - a class, an interface, or a value type.
     /// </summary>
-    public abstract partial class DefType : TypeDesc
+    public abstract class DefType : TypeDesc
     {
         /// <summary>
         /// Gets the namespace of the type.

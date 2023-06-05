@@ -195,7 +195,7 @@ namespace System.Text
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override int GetBytes(
+        public override unsafe int GetBytes(
             char[] chars,
             int charIndex,
             int charCount,
@@ -336,7 +336,7 @@ namespace System.Text
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override int GetChars(
+        public override unsafe int GetChars(
             byte[] bytes,
             int byteIndex,
             int byteCount,

@@ -42,17 +42,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         );
     }
 
+    partial
     /// <summary>
     /// Root type for both document and workspace diagnostic pull requests.
     /// </summary>
     /// <typeparam name="TDiagnosticsParams">The LSP input param type</typeparam>
     /// <typeparam name="TReport">The LSP type that is reported via IProgress</typeparam>
     /// <typeparam name="TReturn">The LSP type that is returned on completion of the request.</typeparam>
-    internal abstract partial class AbstractPullDiagnosticHandler<
-        TDiagnosticsParams,
-        TReport,
-        TReturn
-    > : ILspServiceRequestHandler<TDiagnosticsParams, TReturn?>
+    internal abstract class AbstractPullDiagnosticHandler<TDiagnosticsParams, TReport, TReturn>
+        : ILspServiceRequestHandler<TDiagnosticsParams, TReturn?>
         where TDiagnosticsParams : IPartialResultParams<TReport>
     {
         /// <summary>

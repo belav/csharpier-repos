@@ -3,7 +3,7 @@
 
 namespace System.Reflection
 {
-    public partial struct CustomAttributeTypedArgument
+    partial public struct CustomAttributeTypedArgument
     {
         private static object CanonicalizeValue(object value)
         {

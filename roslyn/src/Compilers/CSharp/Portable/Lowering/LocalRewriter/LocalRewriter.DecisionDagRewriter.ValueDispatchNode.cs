@@ -12,9 +12,9 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class LocalRewriter
+    partial internal class LocalRewriter
     {
-        private abstract partial class DecisionDagRewriter
+        partial private abstract class DecisionDagRewriter
         {
             /// <summary>
             /// A node in a tree representing the form of a generated decision tree for classifying an input value.

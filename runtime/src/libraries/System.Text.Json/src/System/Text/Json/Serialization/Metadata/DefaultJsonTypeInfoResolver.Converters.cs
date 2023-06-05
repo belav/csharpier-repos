@@ -10,7 +10,7 @@ using System.Text.Json.Serialization.Converters;
 
 namespace System.Text.Json.Serialization.Metadata
 {
-    public partial class DefaultJsonTypeInfoResolver
+    partial public class DefaultJsonTypeInfoResolver
     {
         private static Dictionary<Type, JsonConverter>? s_defaultSimpleConverters;
         private static JsonConverterFactory[]? s_defaultFactoryConverters;

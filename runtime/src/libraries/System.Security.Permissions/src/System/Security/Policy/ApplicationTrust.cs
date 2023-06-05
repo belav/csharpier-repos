@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Security.Policy
 {
-    public sealed partial class ApplicationTrust : EvidenceBase, ISecurityEncodable
+    partial public sealed class ApplicationTrust : EvidenceBase, ISecurityEncodable
     {
         public ApplicationTrust() { }
 

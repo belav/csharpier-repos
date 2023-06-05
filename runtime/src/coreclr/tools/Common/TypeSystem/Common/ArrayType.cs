@@ -6,11 +6,12 @@ using System.Threading;
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Represents an array type - either a multidimensional array, or a vector
     /// (a one-dimensional array with a zero lower bound).
     /// </summary>
-    public sealed partial class ArrayType : ParameterizedType
+    public sealed class ArrayType : ParameterizedType
     {
         private int _rank; // -1 for regular single dimensional arrays, > 0 for multidimensional arrays
 
@@ -157,6 +158,7 @@ namespace Internal.TypeSystem
         Ctor
     }
 
+    partial
     /// <summary>
     /// Represents one of the methods on array types. While array types are not typical
     /// classes backed by metadata, they do have methods that can be referenced from the IL
@@ -173,7 +175,7 @@ namespace Internal.TypeSystem
     /// When we compile the method body, we compile it as <see cref="ArrayMethodKind.AddressWithHiddenArg"/> that
     /// has the hidden argument explicitly listed in it's signature and is available as a regular parameter.
     /// </remarks>
-    public sealed partial class ArrayMethod : MethodDesc
+    public sealed class ArrayMethod : MethodDesc
     {
         private ArrayType _owningType;
         private ArrayMethodKind _kind;

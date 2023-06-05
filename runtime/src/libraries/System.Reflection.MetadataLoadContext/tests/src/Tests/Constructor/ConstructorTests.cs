@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class ConstructorTests
+    partial public static class ConstructorTests
     {
         [Fact]
         public static unsafe void TestConstructors1()

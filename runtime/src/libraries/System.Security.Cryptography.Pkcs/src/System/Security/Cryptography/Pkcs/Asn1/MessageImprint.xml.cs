@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct MessageImprint
+    partial internal struct MessageImprint
     {
         internal System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn HashAlgorithm;
         internal ReadOnlyMemory<byte> HashedMessage;

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetComObjectDataTests
+    partial public class GetComObjectDataTests
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]

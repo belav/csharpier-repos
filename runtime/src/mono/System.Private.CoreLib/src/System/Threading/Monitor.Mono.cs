@@ -6,7 +6,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    public static partial class Monitor
+    partial public static class Monitor
     {
         [Intrinsic]
         [MethodImplAttribute(MethodImplOptions.InternalCall)] // Interpreter is missing this intrinsic

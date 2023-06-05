@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Formats.Asn1.Tests.Writer
 {
-    public abstract partial class Asn1WriterTests
+    partial public abstract class Asn1WriterTests
     {
         internal static void Verify(AsnWriter writer, string expectedHex)
         {

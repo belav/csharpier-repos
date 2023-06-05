@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PreferFrameworkType
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseFrameworkType)]
-    public partial class PreferFrameworkTypeTests
+    partial public class PreferFrameworkTypeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public PreferFrameworkTypeTests(ITestOutputHelper logger)

@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Collections.Generic
 {
-    public abstract partial class EqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
+    partial public abstract class EqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
     {
         // To minimize generic instantiation overhead of creating the comparer per type, we keep the generic portion of the code as small
         // as possible and define most of the creation logic in a non-generic class.
@@ -17,7 +17,7 @@ namespace System.Collections.Generic
         } = (EqualityComparer<T>)ComparerHelpers.CreateDefaultEqualityComparer(typeof(T));
     }
 
-    public sealed partial class GenericEqualityComparer<T> : EqualityComparer<T>
+    partial public sealed class GenericEqualityComparer<T> : EqualityComparer<T>
         where T : IEquatable<T>?
     {
         internal override int IndexOf(T[] array, T value, int startIndex, int count)
@@ -65,7 +65,7 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class NullableEqualityComparer<T> : EqualityComparer<T?>
+    partial public sealed class NullableEqualityComparer<T> : EqualityComparer<T?>
         where T : struct
     {
         internal override int IndexOf(T?[] array, T? value, int startIndex, int count)
@@ -119,7 +119,7 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class ObjectEqualityComparer<T> : EqualityComparer<T>
+    partial public sealed class ObjectEqualityComparer<T> : EqualityComparer<T>
     {
         internal override int IndexOf(T[] array, T value, int startIndex, int count)
         {
@@ -166,7 +166,7 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class ByteEqualityComparer : EqualityComparer<byte>
+    partial public sealed class ByteEqualityComparer : EqualityComparer<byte>
     {
 #if DEBUG
         internal override int IndexOf(byte[] array, byte value, int startIndex, int count)
@@ -183,7 +183,7 @@ namespace System.Collections.Generic
 #endif
     }
 
-    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>
+    partial public sealed class EnumEqualityComparer<T> : EqualityComparer<T>
         where T : struct, Enum
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

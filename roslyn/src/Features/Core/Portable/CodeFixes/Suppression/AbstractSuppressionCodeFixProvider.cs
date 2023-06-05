@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
-    internal abstract partial class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
+    partial internal abstract class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
     {
         public const string SuppressMessageAttributeName =
             "System.Diagnostics.CodeAnalysis.SuppressMessage";

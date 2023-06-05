@@ -8,11 +8,12 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json.Serialization
 {
+    partial
     /// <summary>
     /// Converts an object or value to or from JSON.
     /// </summary>
     /// <typeparam name="T">The <see cref="Type"/> to convert.</typeparam>
-    public abstract partial class JsonConverter<T> : JsonConverter
+    public abstract class JsonConverter<T> : JsonConverter
     {
         /// <summary>
         /// When overridden, constructs a new <see cref="JsonConverter{T}"/> instance.

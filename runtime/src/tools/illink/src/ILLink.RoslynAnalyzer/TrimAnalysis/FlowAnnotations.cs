@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis;
 #nullable enable
 namespace ILLink.Shared.TrimAnalysis
 {
-    sealed partial class FlowAnnotations
+    partial sealed class FlowAnnotations
     {
         // In the analyzer there's no stateful data the flow annotations need to store
         // so we just create a singleton on demand.
@@ -99,22 +99,28 @@ namespace ILLink.Shared.TrimAnalysis
         // TODO: This is relatively expensive on the analyzer since it doesn't cache the annotation information
         // In linker this is an optimization to avoid the heavy lifting of analysis if there's no point
         // it's unclear if the same optimization makes sense for the analyzer.
-        internal partial bool MethodRequiresDataFlowAnalysis(MethodProxy method) =>
+        partial
+#pragma warning disable CA1822 // Mark members as static - the other partial implementations might need to be instance methods
+
+        // TODO: This is relatively expensive on the analyzer since it doesn't cache the annotation information
+        // In linker this is an optimization to avoid the heavy lifting of analysis if there's no point
+        // it's unclear if the same optimization makes sense for the analyzer.
+        internal bool MethodRequiresDataFlowAnalysis(MethodProxy method) =>
             RequiresDataFlowAnalysis(method.Method);
 
-        internal partial MethodReturnValue GetMethodReturnValue(
+        partial internal MethodReturnValue GetMethodReturnValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         ) => new MethodReturnValue(method.Method, dynamicallyAccessedMemberTypes);
 
-        internal partial MethodReturnValue GetMethodReturnValue(MethodProxy method) =>
+        partial internal MethodReturnValue GetMethodReturnValue(MethodProxy method) =>
             GetMethodReturnValue(method, GetMethodReturnValueAnnotation(method.Method));
 
-        internal partial GenericParameterValue GetGenericParameterValue(
+        partial internal GenericParameterValue GetGenericParameterValue(
             GenericParameterProxy genericParameter
         ) => new GenericParameterValue(genericParameter.TypeParameterSymbol);
 
-        internal partial MethodParameterValue GetMethodThisParameterValue(
+        partial internal MethodParameterValue GetMethodThisParameterValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         )
@@ -147,7 +153,7 @@ namespace ILLink.Shared.TrimAnalysis
             );
         }
 
-        internal partial MethodParameterValue GetMethodThisParameterValue(MethodProxy method)
+        partial internal MethodParameterValue GetMethodThisParameterValue(MethodProxy method)
         {
             if (!method.HasImplicitThis())
                 throw new InvalidOperationException(
@@ -164,10 +170,10 @@ namespace ILLink.Shared.TrimAnalysis
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         ) => new MethodParameterValue(new(method, parameterIndex), dynamicallyAccessedMemberTypes);
 
-        internal partial MethodParameterValue GetMethodParameterValue(ParameterProxy param) =>
+        partial internal MethodParameterValue GetMethodParameterValue(ParameterProxy param) =>
             new MethodParameterValue(param, GetMethodParameterAnnotation(param));
 
-        internal partial MethodParameterValue GetMethodParameterValue(
+        partial internal MethodParameterValue GetMethodParameterValue(
             ParameterProxy param,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         ) => new MethodParameterValue(param, dynamicallyAccessedMemberTypes);

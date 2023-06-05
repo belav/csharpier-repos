@@ -24,6 +24,7 @@ using System.Linq;
 
 namespace System.Data.Mapping.Update.Internal
 {
+    partial
     /// <summary>
     /// This class performs to following tasks to persist C-Space changes to the store:
     /// <list>
@@ -34,7 +35,7 @@ namespace System.Data.Mapping.Update.Internal
     /// <item>Produce S-Space commands implementating the modifications (insert, delete and update SQL statements)</item>
     /// </list>
     /// </summary>
-    internal partial class UpdateTranslator
+    internal class UpdateTranslator
     {
         #region Constructors
         /// <summary>

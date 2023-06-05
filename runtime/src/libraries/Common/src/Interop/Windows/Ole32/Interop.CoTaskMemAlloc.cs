@@ -4,17 +4,17 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         [LibraryImport(Libraries.Ole32)]
-        internal static partial IntPtr CoTaskMemAlloc(nuint cb);
+        partial internal static IntPtr CoTaskMemAlloc(nuint cb);
 
         [LibraryImport(Libraries.Ole32)]
-        internal static partial IntPtr CoTaskMemRealloc(IntPtr pv, nuint cb);
+        partial internal static IntPtr CoTaskMemRealloc(IntPtr pv, nuint cb);
 
         [LibraryImport(Libraries.Ole32)]
-        internal static partial void CoTaskMemFree(IntPtr ptr);
+        partial internal static void CoTaskMemFree(IntPtr ptr);
     }
 }

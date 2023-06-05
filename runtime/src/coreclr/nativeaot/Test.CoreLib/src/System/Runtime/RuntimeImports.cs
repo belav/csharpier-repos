@@ -9,6 +9,7 @@ using Internal.Runtime;
 
 namespace System.Runtime
 {
+    partial
     // CONTRACT with Runtime
     // This class lists all the static methods that the redhawk runtime exports to a class library
     // These are not expected to change much but are needed by the class library to implement its functionality
@@ -18,7 +19,7 @@ namespace System.Runtime
     //            but if a class library wants to factor differently (such as putting the GCHandle methods in an
     //            optional library, those methods can be moved to a different file/namespace/dll
 
-    public static partial class RuntimeImports
+    public static class RuntimeImports
     {
         private const string RuntimeLibrary = "*";
 

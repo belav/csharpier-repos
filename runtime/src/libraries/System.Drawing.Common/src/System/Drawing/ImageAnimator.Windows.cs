@@ -10,6 +10,7 @@ namespace System.Drawing
     using System.Drawing.Imaging;
     using System.Threading;
 
+    partial
     /// <summary>
     ///     Animates one or more images that have time-based frames.
     ///     See the ImageInfo.cs file for the helper nested ImageInfo class.
@@ -33,7 +34,7 @@ namespace System.Drawing
     ///     code.  If the user code locks on the image ref forever a deadlock will happen preventing the animation
     ///     from occurring.
     /// </summary>
-    public sealed partial class ImageAnimator
+    public sealed class ImageAnimator
     {
         /// <summary>
         ///     A list of images to be animated.

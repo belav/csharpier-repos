@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree;
 [System.Runtime.InteropServices.StructLayoutAttribute(
     System.Runtime.InteropServices.LayoutKind.Explicit
 )]
-public readonly partial struct RenderTreeFrame
+partial public readonly struct RenderTreeFrame
 {
     [System.Runtime.InteropServices.FieldOffsetAttribute(8)]
     public readonly int AttributeEventHandlerId;

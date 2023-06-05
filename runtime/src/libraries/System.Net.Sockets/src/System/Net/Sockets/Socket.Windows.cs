@@ -12,7 +12,7 @@ using System.Runtime.Versioning;
 
 namespace System.Net.Sockets
 {
-    public partial class Socket
+    partial public class Socket
     {
         private static CachedSerializedEndPoint? s_cachedAnyEndPoint;
         private static CachedSerializedEndPoint? s_cachedAnyV6EndPoint;

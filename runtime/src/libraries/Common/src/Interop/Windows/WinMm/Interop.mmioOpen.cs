@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         internal const int MMIO_READ = 0x00000000;
         internal const int MMIO_ALLOCBUF = 0x00010000;
@@ -16,6 +16,6 @@ internal static partial class Interop
             EntryPoint = "mmioOpenW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial IntPtr mmioOpen(string fileName, IntPtr not_used, int flags);
+        partial internal static IntPtr mmioOpen(string fileName, IntPtr not_used, int flags);
     }
 }

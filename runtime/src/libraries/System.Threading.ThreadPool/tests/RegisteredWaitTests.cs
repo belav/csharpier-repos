@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Threading.ThreadPools.Tests
 {
-    public partial class RegisteredWaitTests
+    partial public class RegisteredWaitTests
     {
         private const int UnexpectedTimeoutMilliseconds =
             ThreadTestHelpers.UnexpectedTimeoutMilliseconds;

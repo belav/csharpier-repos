@@ -52,7 +52,7 @@ namespace System.Security.Principal
             buffer = ParseSddlForm(sddlForm);
         }
 
-        unsafe public SecurityIdentifier(byte[] binaryForm, int offset)
+        public unsafe SecurityIdentifier(byte[] binaryForm, int offset)
         {
             if (binaryForm == null)
                 throw new ArgumentNullException("binaryForm");

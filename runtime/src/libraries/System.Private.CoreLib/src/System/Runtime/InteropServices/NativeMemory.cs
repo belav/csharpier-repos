@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
 {
-    public static unsafe partial class NativeMemory
+    partial public static unsafe class NativeMemory
     {
         /// <summary>Allocates a block of memory of the specified size, in elements.</summary>
         /// <param name="elementCount">The count, in elements, of the block to allocate.</param>

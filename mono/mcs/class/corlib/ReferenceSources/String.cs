@@ -251,13 +251,13 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static String FastAllocateString(int length);
+        internal static extern String FastAllocateString(int length);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static string InternalIsInterned(string str);
+        private static extern string InternalIsInterned(string str);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static string InternalIntern(string str);
+        private static extern string InternalIntern(string str);
 
         static unsafe int FastCompareStringHelper(
             uint* strAChars,

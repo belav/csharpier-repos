@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace System.Data.Common
 {
-    internal static partial class ADP
+    partial internal static class ADP
     {
         internal static Timer UnsafeCreateTimer(
             TimerCallback callback,

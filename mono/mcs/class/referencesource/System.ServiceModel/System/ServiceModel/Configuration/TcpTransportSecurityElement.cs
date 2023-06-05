@@ -15,7 +15,7 @@ namespace System.ServiceModel.Configuration
     using System.ComponentModel;
     using System.Security.Authentication;
 
-    public sealed partial class TcpTransportSecurityElement : ServiceModelConfigurationElement
+    partial public sealed class TcpTransportSecurityElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.ClientCredentialType,

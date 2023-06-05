@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public partial class TypeLoadException
+    partial public class TypeLoadException
     {
         internal TypeLoadException(string message, string typeName)
             : base(message)

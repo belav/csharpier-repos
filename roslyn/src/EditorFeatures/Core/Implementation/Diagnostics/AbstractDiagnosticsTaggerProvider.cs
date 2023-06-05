@@ -25,6 +25,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
 {
+    partial
     /// <summary>
     /// Diagnostics works slightly differently than the rest of the taggers.  For diagnostics,
     /// we want to try to have an individual tagger per diagnostic producer per buffer.
@@ -37,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
     /// Each of these taggers is nicely asynchronous and properly works within the async
     /// tagging infrastructure.
     /// </summary>
-    internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
+    internal abstract class AbstractDiagnosticsTaggerProvider<TTag>
         : AsynchronousTaggerProvider<TTag>
         where TTag : ITag
     {

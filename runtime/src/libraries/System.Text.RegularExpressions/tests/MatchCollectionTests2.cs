@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Text.RegularExpressions.Tests
 {
-    public static partial class MatchCollectionTests
+    partial public static class MatchCollectionTests
     {
         [Fact]
         public static void IListOfT_Item_Get()

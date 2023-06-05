@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace System.Text.Json.Reflection
 {
-    internal static partial class ReflectionExtensions
+    partial internal static class ReflectionExtensions
     {
         private static readonly Type s_nullableType = typeof(Nullable<>);
 

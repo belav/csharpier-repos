@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class LockStatementSyntax
+    partial public class LockStatementSyntax
     {
         public LockStatementSyntax Update(
             SyntaxToken lockKeyword,
@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static LockStatementSyntax LockStatement(
             SyntaxToken lockKeyword,

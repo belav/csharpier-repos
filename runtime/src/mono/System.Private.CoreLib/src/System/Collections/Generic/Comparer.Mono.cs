@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace System.Collections.Generic
 {
-    public partial class Comparer<T>
+    partial public class Comparer<T>
     {
         private static volatile Comparer<T>? defaultComparer;
 
@@ -56,7 +56,7 @@ namespace System.Collections.Generic
         }
     }
 
-    internal partial class EnumComparer<T>
+    partial internal class EnumComparer<T>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int Compare(T x, T y) => JitHelpers.EnumCompareTo(x, y);

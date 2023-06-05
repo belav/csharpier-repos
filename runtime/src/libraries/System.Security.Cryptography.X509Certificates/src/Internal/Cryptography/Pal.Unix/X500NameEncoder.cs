@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Internal.Cryptography.Pal
 {
-    internal static partial class X500NameEncoder
+    partial internal static class X500NameEncoder
     {
         private const string OidTagPrefix = "OID.";
 

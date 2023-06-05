@@ -17,11 +17,12 @@ namespace System.Workflow.Activities.Rules
     #region ArithmeticLiteral Class
     internal abstract class ArithmeticLiteral
     {
+        protected
         #region Properties
         /// <summary>
         /// The type of the literal
         /// </summary>
-        internal protected Type m_type;
+        internal Type m_type;
 
         /// <summary>
         /// Return the name of the type
@@ -108,7 +109,7 @@ namespace System.Workflow.Activities.Rules
             return dictionary;
         }
 
-        static private Dictionary<Type, TypeFlags> CreateSupportedTypesDictionary()
+        private static Dictionary<Type, TypeFlags> CreateSupportedTypesDictionary()
         {
             Dictionary<Type, TypeFlags> dictionary = new Dictionary<Type, TypeFlags>(26);
             dictionary.Add(typeof(byte), TypeFlags.UInt16);

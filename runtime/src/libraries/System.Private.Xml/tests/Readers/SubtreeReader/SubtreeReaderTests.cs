@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Xml.SubtreeReaderTests
 {
-    public partial class SubtreeReaderTest : CGenericTestModule
+    partial public class SubtreeReaderTest : CGenericTestModule
     {
         [Theory]
         [XmlTests(nameof(Create))]

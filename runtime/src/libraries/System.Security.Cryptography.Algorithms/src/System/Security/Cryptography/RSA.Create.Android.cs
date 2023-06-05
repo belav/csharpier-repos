@@ -10,7 +10,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public partial class RSA : AsymmetricAlgorithm
+    partial public class RSA : AsymmetricAlgorithm
     {
         public static new RSA Create() => new RSAImplementation.RSAAndroid();
     }

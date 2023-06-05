@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractMemberInsertingCompletionProvider
+    partial internal abstract class AbstractMemberInsertingCompletionProvider
         : LSPCompletionProvider
     {
         private readonly SyntaxAnnotation _annotation = new();

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct Rfc3161TimeStampResp
+    partial internal struct Rfc3161TimeStampResp
     {
         internal System.Security.Cryptography.Pkcs.Asn1.PkiStatusInfo Status;
         internal ReadOnlyMemory<byte>? TimeStampToken;

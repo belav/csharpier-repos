@@ -6,10 +6,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Runtime.InteropServices
 {
+    partial
     /// <summary>
     /// Provides a collection of methods for interoperating with <see cref="ReadOnlySequence{T}"/>
     /// </summary>
-    public static partial class SequenceMarshal
+    public static class SequenceMarshal
     {
         /// <summary>
         /// Get <see cref="ReadOnlySequenceSegment{T}"/> from the underlying <see cref="ReadOnlySequence{T}"/>.

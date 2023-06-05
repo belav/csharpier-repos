@@ -34,7 +34,7 @@ namespace System.Diagnostics
         internal bool isLastFrameFromForeignException;
     }
 
-    public partial class StackTrace
+    partial public class StackTrace
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern MonoStackFrame[] get_trace(

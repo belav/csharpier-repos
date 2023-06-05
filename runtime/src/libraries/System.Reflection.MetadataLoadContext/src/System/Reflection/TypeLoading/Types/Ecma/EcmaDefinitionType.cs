@@ -7,10 +7,11 @@ using System.Reflection.Metadata;
 
 namespace System.Reflection.TypeLoading.Ecma
 {
+    partial
     /// <summary>
     /// RoTypes that return true for IsTypeDefinition and get its metadata from a PEReader.
     /// </summary>
-    internal sealed partial class EcmaDefinitionType : RoDefinitionType
+    internal sealed class EcmaDefinitionType : RoDefinitionType
     {
         private readonly EcmaModule _module;
         private readonly TypeDefinitionHandle _handle;

@@ -17,7 +17,7 @@ namespace System.Text.Json.Serialization.Metadata
     /// Provides JSON serialization-related metadata about a type.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public abstract partial class JsonTypeInfo
+    partial public abstract class JsonTypeInfo
     {
         internal const string MetadataFactoryRequiresUnreferencedCode =
             "JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.";

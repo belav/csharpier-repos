@@ -10,10 +10,11 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
 {
+    partial
     /// <summary>
     /// An <see cref="ILsifJsonWriter"/> that writes in <see cref="LsifFormat.Line"/>.
     /// </summary>
-    internal sealed partial class LineModeLsifJsonWriter : ILsifJsonWriter
+    internal sealed class LineModeLsifJsonWriter : ILsifJsonWriter
     {
         private readonly object _writeGate = new object();
         private readonly TextWriter _outputWriter;

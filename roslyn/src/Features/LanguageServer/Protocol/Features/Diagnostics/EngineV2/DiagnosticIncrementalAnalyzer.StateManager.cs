@@ -15,12 +15,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 {
-    internal partial class DiagnosticIncrementalAnalyzer
+    partial internal class DiagnosticIncrementalAnalyzer
     {
+        partial
         /// <summary>
         /// This is in charge of anything related to <see cref="StateSet"/>
         /// </summary>
-        private partial class StateManager
+        private class StateManager
         {
             private readonly Workspace _workspace;
             private readonly DiagnosticAnalyzerInfoCache _analyzerInfoCache;

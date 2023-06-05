@@ -6,7 +6,7 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
 
-    public sealed partial class SynchronousReceiveElement : BehaviorExtensionElement
+    partial public sealed class SynchronousReceiveElement : BehaviorExtensionElement
     {
         public SynchronousReceiveElement() { }
 

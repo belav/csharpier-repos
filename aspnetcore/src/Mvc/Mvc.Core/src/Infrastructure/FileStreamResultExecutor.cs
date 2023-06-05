@@ -8,10 +8,11 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// An <see cref="IActionResultExecutor{FileStreamResult}"/> for a file stream result.
 /// </summary>
-public partial class FileStreamResultExecutor
+public class FileStreamResultExecutor
     : FileResultExecutorBase,
         IActionResultExecutor<FileStreamResult>
 {
@@ -100,7 +101,7 @@ public partial class FileStreamResultExecutor
         return WriteFileAsync(context.HttpContext, result.FileStream, range, rangeLength);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void ExecutingFileResult(ILogger logger, FileResult fileResult)
         {
@@ -122,7 +123,7 @@ public partial class FileStreamResultExecutor
             EventName = "ExecutingFileResultWithNoFileName",
             SkipEnabledCheck = true
         )]
-        private static partial void ExecutingFileResultWithNoFileName(
+        partial private static void ExecutingFileResultWithNoFileName(
             ILogger logger,
             string fileResultType,
             string fileDownloadName
@@ -134,6 +135,6 @@ public partial class FileStreamResultExecutor
             "Writing the requested range of bytes to the body...",
             EventName = "WritingRangeToBody"
         )]
-        public static partial void WritingRangeToBody(ILogger logger);
+        partial public static void WritingRangeToBody(ILogger logger);
     }
 }

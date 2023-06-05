@@ -13,9 +13,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class RSAImplementation
+    partial internal static class RSAImplementation
     {
-        public sealed partial class RSASecurityTransforms
+        partial public sealed class RSASecurityTransforms
         {
 #pragma warning disable IDE0060
             private static RSAParameters ExportParametersFromLegacyKey(

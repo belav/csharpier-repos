@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PreferFrameworkType
 {
-    public partial class PreferFrameworkTypeTests
+    partial public class PreferFrameworkTypeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         [Fact]

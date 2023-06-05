@@ -4,9 +4,9 @@
 using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(
             Libraries.Kernel32,
@@ -14,7 +14,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial SafeMemoryMappedFileHandle OpenFileMapping(
+        partial internal static SafeMemoryMappedFileHandle OpenFileMapping(
             int dwDesiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle,
             string lpName

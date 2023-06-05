@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
-public static partial class HubConnectionExtensions
+partial public static class HubConnectionExtensions
 {
     private static IDisposable On<TResult>(
         this HubConnection hubConnection,

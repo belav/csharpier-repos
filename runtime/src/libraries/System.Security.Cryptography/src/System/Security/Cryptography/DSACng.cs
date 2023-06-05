@@ -7,7 +7,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class DSACng : DSA
+    partial public sealed class DSACng : DSA
     {
         private CngAlgorithmCore _core = new CngAlgorithmCore(typeof(DSACng));
 

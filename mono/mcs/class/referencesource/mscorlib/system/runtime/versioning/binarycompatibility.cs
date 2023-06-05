@@ -205,7 +205,7 @@ namespace System.Runtime.Versioning
         // Version number is major * 10000 + minor * 100 + build (ie, 4.5.1.0 would be version 40501).
         private static int s_AppWasBuiltForVersion;
 
-        readonly static BinaryCompatibilityMap s_map = new BinaryCompatibilityMap();
+        static readonly BinaryCompatibilityMap s_map = new BinaryCompatibilityMap();
 
         // For parsing a target Framework moniker, from the FrameworkName class
         private const char c_componentSeparator = ',';

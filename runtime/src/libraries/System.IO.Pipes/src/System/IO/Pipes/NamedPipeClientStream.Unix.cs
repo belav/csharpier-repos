@@ -12,11 +12,12 @@ using System.Runtime.Versioning;
 
 namespace System.IO.Pipes
 {
+    partial
     /// <summary>
     /// Named pipe client. Use this to open the client end of a named pipes created with
     /// NamedPipeServerStream.
     /// </summary>
-    public sealed partial class NamedPipeClientStream : PipeStream
+    public sealed class NamedPipeClientStream : PipeStream
     {
         private bool TryConnect(
             int _ /* timeout */

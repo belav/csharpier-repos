@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Text.Json
 {
-    public sealed partial class JsonDocument
+    partial public sealed class JsonDocument
     {
         internal bool TryGetNamedPropertyValue(
             int index,

@@ -10,9 +10,9 @@ using Test.Cryptography;
 
 namespace System.Net.Test.Common
 {
-    public static partial class Configuration
+    partial public static class Configuration
     {
-        public static partial class Certificates
+        partial public static class Certificates
         {
             private static readonly X509KeyUsageExtension s_eeKeyUsage = new X509KeyUsageExtension(
                 X509KeyUsageFlags.DigitalSignature

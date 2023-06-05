@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    internal abstract partial class AbstractSyntaxTreeFactoryService : ISyntaxTreeFactoryService
+    partial internal abstract class AbstractSyntaxTreeFactoryService : ISyntaxTreeFactoryService
     {
         public abstract ParseOptions GetDefaultParseOptions();
         public abstract ParseOptions GetDefaultParseOptionsWithLatestLanguageVersion();

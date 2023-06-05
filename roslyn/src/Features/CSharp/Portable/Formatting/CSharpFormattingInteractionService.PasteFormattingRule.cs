@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Formatting.Rules;
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
-    internal partial class CSharpFormattingInteractionService : IFormattingInteractionService
+    partial internal class CSharpFormattingInteractionService : IFormattingInteractionService
     {
         internal class PasteFormattingRule : AbstractFormattingRule
         {

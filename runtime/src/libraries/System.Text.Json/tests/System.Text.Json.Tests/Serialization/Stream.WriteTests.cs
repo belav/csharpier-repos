@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public partial class StreamTests
+    partial public class StreamTests
     {
         [Fact]
         public async Task WriteNullArgumentFail()

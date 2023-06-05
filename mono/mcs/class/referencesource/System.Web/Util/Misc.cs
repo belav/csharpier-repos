@@ -120,7 +120,7 @@ namespace System.Web.Util
             return sb.ToString();
         }
 
-        internal unsafe static void CopyMemory(
+        internal static unsafe void CopyMemory(
             IntPtr src,
             int srcOffset,
             byte[] dest,
@@ -137,7 +137,7 @@ namespace System.Web.Util
             );
         }
 
-        internal unsafe static void CopyMemory(
+        internal static unsafe void CopyMemory(
             byte[] src,
             int srcOffset,
             IntPtr dest,
@@ -154,7 +154,7 @@ namespace System.Web.Util
             );
         }
 
-        internal unsafe static void CopyMemory(
+        internal static unsafe void CopyMemory(
             IntPtr src,
             int srcOffset,
             IntPtr dest,

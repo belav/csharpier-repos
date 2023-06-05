@@ -175,7 +175,7 @@ namespace System.Data.EntityClient
             "Microsoft.Globalization",
             "CA1308:NormalizeStringsToUppercase"
         )]
-        static private string GetKeyName(StringBuilder buffer)
+        private static string GetKeyName(StringBuilder buffer)
         {
             int count = buffer.Length;
             while ((0 < count) && Char.IsWhiteSpace(buffer[count - 1]))
@@ -185,7 +185,7 @@ namespace System.Data.EntityClient
             return buffer.ToString(0, count).ToLowerInvariant();
         }
 
-        static private string GetKeyValue(StringBuilder buffer, bool trimWhitespace)
+        private static string GetKeyValue(StringBuilder buffer, bool trimWhitespace)
         {
             int count = buffer.Length;
             int index = 0;
@@ -219,7 +219,7 @@ namespace System.Data.EntityClient
             NullTermination,
         };
 
-        static private int GetKeyValuePair(
+        private static int GetKeyValuePair(
             string connectionString,
             int currentPosition,
             StringBuilder buffer,
@@ -475,7 +475,9 @@ namespace System.Data.EntityClient
         }
 
 #if DEBUG
-        static private bool IsValueValidInternal(string keyvalue)
+        private
+#if DEBUG
+        static bool IsValueValidInternal(string keyvalue)
         {
             if (null != keyvalue)
             {
@@ -490,7 +492,24 @@ namespace System.Data.EntityClient
         }
 #endif
 
-        static private bool IsKeyNameValid(string keyname)
+        private private
+#if DEBUG
+        static bool IsValueValidInternal(string keyvalue)
+        {
+            if (null != keyvalue)
+            {
+                bool compValue = ConnectionStringValidValueRegex.IsMatch(keyvalue);
+                Debug.Assert(
+                    (-1 == keyvalue.IndexOf('\u0000')) == compValue,
+                    "IsValueValid mismatch with regex"
+                );
+                return (-1 == keyvalue.IndexOf('\u0000'));
+            }
+            return true;
+        }
+#endif
+
+        static bool IsKeyNameValid(string keyname)
         {
             if (null != keyname)
             {

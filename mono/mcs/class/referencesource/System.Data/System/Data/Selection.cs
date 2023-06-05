@@ -98,7 +98,7 @@ namespace System.Data
 
         private bool suspendEvents;
 
-        private readonly static object[] zeroObjects = new object[0];
+        private static readonly object[] zeroObjects = new object[0];
         private readonly bool isSharable;
         private readonly bool _hasRemoteAggregate;
 

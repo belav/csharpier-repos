@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis
 {
-    internal readonly partial struct SymbolKeyResolution
+    partial internal readonly struct SymbolKeyResolution
     {
         public readonly struct Enumerable<TSymbol>
             where TSymbol : ISymbol

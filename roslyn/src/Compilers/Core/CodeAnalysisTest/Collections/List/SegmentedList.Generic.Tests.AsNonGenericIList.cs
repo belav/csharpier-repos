@@ -14,11 +14,11 @@ using Microsoft.CodeAnalysis.Collections;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
+    partial
     /// <summary>
     /// Contains tests that ensure the correctness of the List class.
     /// </summary>
-    public abstract partial class SegmentedList_Generic_Tests_AsNonGenericIList
-        : IList_NonGeneric_Tests
+    public abstract class SegmentedList_Generic_Tests_AsNonGenericIList : IList_NonGeneric_Tests
     {
         #region IList_Generic_Tests
 

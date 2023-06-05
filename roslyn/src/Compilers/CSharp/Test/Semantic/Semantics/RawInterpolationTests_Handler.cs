@@ -16,7 +16,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics;
 
-public partial class RawInterpolationTests : CompilingTestBase
+partial public class RawInterpolationTests : CompilingTestBase
 {
     [Theory, WorkItem(54702, "https://github.com/dotnet/roslyn/issues/54702")]
     [InlineData(

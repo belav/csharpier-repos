@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace Internal.NativeFormat
 {
-    internal unsafe partial struct NativePrimitiveDecoder
+    partial internal unsafe struct NativePrimitiveDecoder
     {
         public static void ThrowBadImageFormatException()
         {
@@ -211,7 +211,7 @@ namespace Internal.NativeFormat
         }
     }
 
-    internal sealed unsafe partial class NativeReader
+    partial internal sealed unsafe class NativeReader
     {
         private readonly byte* _base;
         private readonly uint _size;
@@ -348,7 +348,7 @@ namespace Internal.NativeFormat
         }
     }
 
-    internal partial struct NativeParser
+    partial internal struct NativeParser
     {
         private readonly NativeReader _reader;
         private uint _offset;

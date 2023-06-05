@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem.Interop
 {
-    public partial class NativeStructType : IPrefixMangledType
+    partial public class NativeStructType : IPrefixMangledType
     {
         TypeDesc IPrefixMangledType.BaseType => ManagedStructType;
 

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Interactive
 {
-    internal partial class InteractiveWorkspace : Workspace
+    partial internal class InteractiveWorkspace : Workspace
     {
         private SourceTextContainer? _openTextContainer;
         private DocumentId? _openDocumentId;

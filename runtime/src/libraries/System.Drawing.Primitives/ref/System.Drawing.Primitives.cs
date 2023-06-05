@@ -13,7 +13,7 @@ namespace System.Drawing
     [System.ComponentModel.TypeConverterAttribute(
         "System.Drawing.ColorConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public readonly partial struct Color : System.IEquatable<System.Drawing.Color>
+    partial public readonly struct Color : System.IEquatable<System.Drawing.Color>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -711,7 +711,7 @@ namespace System.Drawing
         }
     }
 
-    public static partial class ColorTranslator
+    partial public static class ColorTranslator
     {
         public static System.Drawing.Color FromHtml(string htmlColor)
         {
@@ -926,7 +926,7 @@ namespace System.Drawing
     [System.ComponentModel.TypeConverterAttribute(
         "System.Drawing.PointConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial struct Point : System.IEquatable<System.Drawing.Point>
+    partial public struct Point : System.IEquatable<System.Drawing.Point>
     {
         private int _dummyPrimitive;
         public static readonly System.Drawing.Point Empty;
@@ -1050,7 +1050,7 @@ namespace System.Drawing
         }
     }
 
-    public partial struct PointF : System.IEquatable<System.Drawing.PointF>
+    partial public struct PointF : System.IEquatable<System.Drawing.PointF>
     {
         private int _dummyPrimitive;
         public static readonly System.Drawing.PointF Empty;
@@ -1190,7 +1190,7 @@ namespace System.Drawing
     [System.ComponentModel.TypeConverterAttribute(
         "System.Drawing.RectangleConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial struct Rectangle : System.IEquatable<System.Drawing.Rectangle>
+    partial public struct Rectangle : System.IEquatable<System.Drawing.Rectangle>
     {
         private int _dummyPrimitive;
         public static readonly System.Drawing.Rectangle Empty;
@@ -1379,7 +1379,7 @@ namespace System.Drawing
         }
     }
 
-    public partial struct RectangleF : System.IEquatable<System.Drawing.RectangleF>
+    partial public struct RectangleF : System.IEquatable<System.Drawing.RectangleF>
     {
         private int _dummyPrimitive;
         public static readonly System.Drawing.RectangleF Empty;
@@ -1590,7 +1590,7 @@ namespace System.Drawing
     [System.ComponentModel.TypeConverterAttribute(
         "System.Drawing.SizeConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial struct Size : System.IEquatable<System.Drawing.Size>
+    partial public struct Size : System.IEquatable<System.Drawing.Size>
     {
         private int _dummyPrimitive;
         public static readonly System.Drawing.Size Empty;
@@ -1739,7 +1739,7 @@ namespace System.Drawing
     [System.ComponentModel.TypeConverterAttribute(
         "System.Drawing.SizeFConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial struct SizeF : System.IEquatable<System.Drawing.SizeF>
+    partial public struct SizeF : System.IEquatable<System.Drawing.SizeF>
     {
         private int _dummyPrimitive;
         public static readonly System.Drawing.SizeF Empty;
@@ -1888,7 +1888,7 @@ namespace System.Drawing
         }
     }
 
-    public static partial class SystemColors
+    partial public static class SystemColors
     {
         public static System.Drawing.Color ActiveBorder
         {

@@ -4,11 +4,11 @@
 using System.Runtime.InteropServices;
 using System.Security;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WebSocket
+    partial internal static class WebSocket
     {
         [LibraryImport(Libraries.WebSocket)]
-        internal static partial void WebSocketAbortHandle(SafeHandle webSocketHandle);
+        partial internal static void WebSocketAbortHandle(SafeHandle webSocketHandle);
     }
 }

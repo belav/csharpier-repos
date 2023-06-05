@@ -20,9 +20,10 @@ using System.Workflow.ComponentModel.Design;
 
 namespace System.Workflow.Activities.Rules.Design
 {
+    partial
     #region class RuleSetDialog
 
-    public partial class RuleSetDialog : Form
+    public class RuleSetDialog : Form
     {
         #region members and constructors
 

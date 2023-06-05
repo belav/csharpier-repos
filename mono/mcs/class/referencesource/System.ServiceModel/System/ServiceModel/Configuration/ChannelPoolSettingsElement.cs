@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.ServiceModel.Channels;
 
-    public sealed partial class ChannelPoolSettingsElement : ServiceModelConfigurationElement
+    partial public sealed class ChannelPoolSettingsElement : ServiceModelConfigurationElement
     {
         public ChannelPoolSettingsElement() { }
 

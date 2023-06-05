@@ -19,9 +19,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Recommendations;
 
-internal partial class CSharpRecommendationService
+partial internal class CSharpRecommendationService
 {
-    private sealed partial class CSharpRecommendationServiceRunner
+    partial private sealed class CSharpRecommendationServiceRunner
         : AbstractRecommendationServiceRunner
     {
         public CSharpRecommendationServiceRunner(

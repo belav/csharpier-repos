@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class OleAut32
+    partial internal static class OleAut32
     {
         [LibraryImport(Libraries.OleAut32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial IntPtr SysAllocStringLen(IntPtr src, uint len);
+        partial internal static IntPtr SysAllocStringLen(IntPtr src, uint len);
 
         [LibraryImport(Libraries.OleAut32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial IntPtr SysAllocStringLen(string src, uint len);
+        partial internal static IntPtr SysAllocStringLen(string src, uint len);
     }
 }

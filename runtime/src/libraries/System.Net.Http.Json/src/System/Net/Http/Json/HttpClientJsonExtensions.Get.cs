@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {
+    partial
     /// <summary>
     /// Contains the extensions methods for using JSON as the content-type in HttpClient.
     /// </summary>
-    public static partial class HttpClientJsonExtensions
+    public static class HttpClientJsonExtensions
     {
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]

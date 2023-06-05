@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public partial class TarReader_ExtractToFileAsync_Tests : TarTestsBase
+    partial public class TarReader_ExtractToFileAsync_Tests : TarTestsBase
     {
         [Fact]
         public async Task ExtractEntriesWithSlashDotPrefix_Async()

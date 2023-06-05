@@ -16,10 +16,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Hosting
 {
+    partial
     /// <summary>
     /// A program initialization utility.
     /// </summary>
-    public partial class HostBuilder : IHostBuilder
+    public class HostBuilder : IHostBuilder
     {
         private const string HostBuildingDiagnosticListenerName = "Microsoft.Extensions.Hosting";
         private const string HostBuildingEventName = "HostBuilding";

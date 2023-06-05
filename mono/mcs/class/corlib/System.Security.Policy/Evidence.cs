@@ -249,7 +249,9 @@ namespace System.Security.Policy
         static extern bool IsAuthenticodePresent(Assembly a);
 
 #if MOBILE
-        static internal Evidence GetDefaultHostEvidence(Assembly a)
+        internal
+#if MOBILE
+        static Evidence GetDefaultHostEvidence(Assembly a)
         {
             return new Evidence();
         }
@@ -258,7 +260,7 @@ namespace System.Security.Policy
         // (i.e. multiple unmanaged->managed calls) and also allows
         // to delay their creation until (if) needed
         [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
-        static internal Evidence GetDefaultHostEvidence(Assembly a)
+        internal static Evidence GetDefaultHostEvidence(Assembly a)
         {
             Evidence e = new Evidence();
             string aname = a.EscapedCodeBase;

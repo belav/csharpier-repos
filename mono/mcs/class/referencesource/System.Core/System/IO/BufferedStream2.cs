@@ -395,7 +395,7 @@ namespace System.IO
             }
         }
 
-        public unsafe override int EndRead(IAsyncResult asyncResult)
+        public override unsafe int EndRead(IAsyncResult asyncResult)
         {
             if (asyncResult == null)
                 throw new ArgumentNullException("asyncResult");
@@ -476,7 +476,7 @@ namespace System.IO
             return BeginWriteCore(array, offset, numBytes, userCallback, stateObject);
         }
 
-        public unsafe override void EndWrite(IAsyncResult asyncResult)
+        public override unsafe void EndWrite(IAsyncResult asyncResult)
         {
             if (asyncResult == null)
                 throw new ArgumentNullException("asyncResult");
@@ -835,9 +835,10 @@ namespace System.IO
 #endif //_ENABLE_STREAM_FACTORING
     }
 
+    internal sealed
 #if _ENABLE_STREAM_FACTORING
     // Fake async result
-    unsafe internal sealed class BufferedStreamAsyncResult : IAsyncResult
+    unsafe class BufferedStreamAsyncResult : IAsyncResult
     {
         // User code callback
         internal AsyncCallback _userCallback;

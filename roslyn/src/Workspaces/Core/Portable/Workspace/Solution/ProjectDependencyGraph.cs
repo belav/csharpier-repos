@@ -12,10 +12,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// A <see cref="ProjectDependencyGraph"/> models the dependencies between projects in a solution.
     /// </summary>
-    public partial class ProjectDependencyGraph
+    public class ProjectDependencyGraph
     {
         private readonly ImmutableHashSet<ProjectId> _projectIds;
 

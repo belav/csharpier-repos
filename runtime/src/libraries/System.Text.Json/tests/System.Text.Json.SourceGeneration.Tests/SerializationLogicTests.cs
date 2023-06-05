@@ -282,7 +282,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             JsonTestHelper.AssertJsonEqual(@"{""FirstName"":""Jane"",""LastName"":""Doe""}", json);
         }
 
-        internal partial class NullablePersonContext : JsonSerializerContext
+        partial internal class NullablePersonContext : JsonSerializerContext
         {
             private static JsonSerializerOptions s_options = new JsonSerializerOptions();
 

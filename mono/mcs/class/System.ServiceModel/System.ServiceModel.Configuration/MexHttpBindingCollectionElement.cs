@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MexHttpBindingCollectionElement
+    partial public class MexHttpBindingCollectionElement
         : MexBindingBindingCollectionElement<WSHttpBinding, MexHttpBindingElement>
     {
         // Static Fields

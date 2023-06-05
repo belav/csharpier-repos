@@ -22,8 +22,9 @@ namespace System.Data.Mapping.Update.Internal
     // correspond to the join key).
     using JoinDictionary = Dictionary<CompositeKey, Tuple<CompositeKey, PropagatorResult>>;
 
-    internal partial class Propagator
+    partial internal class Propagator
     {
+        partial
         /// <summary>
         /// Performs join propagation. The basic strategy is to identify changes (inserts, deletes)
         /// on either side of the join that are related according to the join criteria. Support is restricted
@@ -40,7 +41,7 @@ namespace System.Data.Mapping.Update.Internal
         /// Propagation rules for joins are stored in static fields of the class (initialized in the static
         /// constructor for the class).
         /// </remarks>
-        private partial class JoinPropagator
+        private class JoinPropagator
         {
             #region Constructors
             /// <summary>

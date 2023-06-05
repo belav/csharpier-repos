@@ -3,14 +3,14 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [SuppressGCTransition]
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetThreadErrorMode(uint dwNewMode, out uint lpOldMode);
+        partial internal static bool SetThreadErrorMode(uint dwNewMode, out uint lpOldMode);
 
         internal const uint SEM_FAILCRITICALERRORS = 1;
     }

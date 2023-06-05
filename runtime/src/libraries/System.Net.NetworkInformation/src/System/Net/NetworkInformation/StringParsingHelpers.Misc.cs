@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Net.NetworkInformation
 {
-    internal static partial class StringParsingHelpers
+    partial internal static class StringParsingHelpers
     {
         // in some environments (restricted docker container, shared hosting etc.),
         // procfs is not accessible and we get UnauthorizedAccessException while the

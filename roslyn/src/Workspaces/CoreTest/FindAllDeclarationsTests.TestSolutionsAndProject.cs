@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
-    public partial class FindAllDeclarationsTests
+    partial public class FindAllDeclarationsTests
     {
         private readonly ITestOutputHelper _logger;
 

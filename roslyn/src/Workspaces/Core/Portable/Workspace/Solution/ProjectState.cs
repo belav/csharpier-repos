@@ -24,7 +24,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class ProjectState
+    partial internal class ProjectState
     {
         private readonly ProjectInfo _projectInfo;
         private readonly HostLanguageServices _languageServices;

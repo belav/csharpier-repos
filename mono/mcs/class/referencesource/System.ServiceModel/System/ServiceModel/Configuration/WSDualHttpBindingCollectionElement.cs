@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.Globalization;
 
-    public partial class WSDualHttpBindingCollectionElement
+    partial public class WSDualHttpBindingCollectionElement
         : StandardBindingCollectionElement<WSDualHttpBinding, WSDualHttpBindingElement>
     {
         internal static WSDualHttpBindingCollectionElement GetBindingCollectionElement()

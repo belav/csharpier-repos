@@ -40,7 +40,7 @@ using Mono;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    static partial class X509Helper
+    partial static class X509Helper
     {
         static ISystemCertificateProvider CertificateProvider =>
             DependencyInjector.SystemProvider.CertificateProvider;

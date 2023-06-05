@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Text.Operations;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 {
-    internal sealed partial class RenameTrackingTaggerProvider
+    partial internal sealed class RenameTrackingTaggerProvider
     {
         /// <summary>
         /// Clears or restores the state machine on relevant undo/redo actions.

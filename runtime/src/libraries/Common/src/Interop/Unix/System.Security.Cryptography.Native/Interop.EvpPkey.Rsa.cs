@@ -7,12 +7,12 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial SafeEvpPKeyHandle CryptoNative_EvpPKeyCreateRsa(IntPtr rsa);
+        partial private static SafeEvpPKeyHandle CryptoNative_EvpPKeyCreateRsa(IntPtr rsa);
 
         internal static SafeEvpPKeyHandle EvpPKeyCreateRsa(IntPtr rsa)
         {
@@ -30,7 +30,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial SafeEvpPKeyHandle CryptoNative_RsaGenerateKey(int keySize);
+        partial private static SafeEvpPKeyHandle CryptoNative_RsaGenerateKey(int keySize);
 
         internal static SafeEvpPKeyHandle RsaGenerateKey(int keySize)
         {
@@ -46,7 +46,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_RsaDecrypt(
+        partial private static int CryptoNative_RsaDecrypt(
             SafeEvpPKeyHandle pkey,
             ref byte source,
             int sourceLength,
@@ -84,7 +84,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_RsaEncrypt(
+        partial private static int CryptoNative_RsaEncrypt(
             SafeEvpPKeyHandle pkey,
             ref byte source,
             int sourceLength,
@@ -122,7 +122,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_RsaSignHash(
+        partial private static int CryptoNative_RsaSignHash(
             SafeEvpPKeyHandle pkey,
             RSASignaturePaddingMode paddingMode,
             IntPtr digestAlgorithm,
@@ -160,7 +160,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_RsaVerifyHash(
+        partial private static int CryptoNative_RsaVerifyHash(
             SafeEvpPKeyHandle pkey,
             RSASignaturePaddingMode paddingMode,
             IntPtr digestAlgorithm,

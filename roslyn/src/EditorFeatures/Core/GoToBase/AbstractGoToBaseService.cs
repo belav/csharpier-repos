@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.FindUsages;
 
 namespace Microsoft.CodeAnalysis.Editor.GoToBase
 {
-    internal abstract partial class AbstractGoToBaseService : IGoToBaseService
+    partial internal abstract class AbstractGoToBaseService : IGoToBaseService
     {
         public async Task FindBasesAsync(
             Document document,

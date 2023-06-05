@@ -7,7 +7,7 @@ using Xunit;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class PropertiesFunctionalTests : TestModule
+    partial public class PropertiesFunctionalTests : TestModule
     {
         // Type is CoreXml.Test.XLinq.FunctionalTests
         [Fact]
@@ -36,8 +36,9 @@ namespace CoreXml.Test.XLinq
             Assert.False(module.HasFailures, module.GetFailuresInfo());
         }
 
+        partial
         #region Class
-        public partial class PropertiesTests : XLinqTestCase
+        public class PropertiesTests : XLinqTestCase
         {
             // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests
             // Test Case
@@ -215,7 +216,7 @@ namespace CoreXml.Test.XLinq
                 );
             }
 
-            public partial class XElement_Op_Eplicit : XLinqTestCase
+            partial public class XElement_Op_Eplicit : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests+XElement_Op_Eplicit
                 // Test Case
@@ -296,14 +297,14 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class XElement_Op_Eplicit_Null : XLinqTestCase
+            partial public class XElement_Op_Eplicit_Null : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests+XElement_Op_Eplicit_Null
                 // Test Case
                 public override void AddChildren() { }
             }
 
-            public partial class XElementName : XLinqTestCase
+            partial public class XElementName : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests+XElementName
                 // Test Case
@@ -444,7 +445,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class XElementValue : XLinqTestCase
+            partial public class XElementValue : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+PropertiesTests+XElementValue
                 // Test Case

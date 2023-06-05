@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(
             this IEnumerable<TSource> source,
@@ -76,7 +76,7 @@ namespace System.Linq
 
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(SystemLinq_LookupDebugView<,>))]
-    public partial class Lookup<TKey, TElement> : ILookup<TKey, TElement>
+    partial public class Lookup<TKey, TElement> : ILookup<TKey, TElement>
     {
         private readonly IEqualityComparer<TKey> _comparer;
         private Grouping<TKey, TElement>[] _groupings;

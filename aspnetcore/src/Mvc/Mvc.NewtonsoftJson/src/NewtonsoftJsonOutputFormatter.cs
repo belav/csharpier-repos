@@ -12,10 +12,11 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+partial
 /// <summary>
 /// A <see cref="TextOutputFormatter"/> for JSON content.
 /// </summary>
-public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
+public class NewtonsoftJsonOutputFormatter : TextOutputFormatter
 {
     private readonly IArrayPool<char> _charPool;
     private readonly MvcOptions _mvcOptions;
@@ -259,7 +260,7 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         return copiedSettings;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -268,7 +269,7 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
             EventName = "BufferingAsyncEnumerable",
             SkipEnabledCheck = true
         )]
-        private static partial void BufferingAsyncEnumerable(ILogger logger, string? type);
+        partial private static void BufferingAsyncEnumerable(ILogger logger, string? type);
 
         public static void BufferingAsyncEnumerable(ILogger logger, object asyncEnumerable)
         {

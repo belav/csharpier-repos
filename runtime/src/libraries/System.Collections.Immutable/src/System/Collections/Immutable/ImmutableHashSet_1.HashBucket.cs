@@ -6,10 +6,11 @@ using System.Diagnostics;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableHashSet{T}.HashBucket"/> struct.
     /// </content>
-    public partial class ImmutableHashSet<T>
+    public class ImmutableHashSet<T>
     {
         /// <summary>
         /// The result of a mutation operation.

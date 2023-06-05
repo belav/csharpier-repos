@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
         internal static void AddRange<T>(this ICollection<T> coll, IEnumerable<T> newData)
         {

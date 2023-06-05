@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
-    public partial class TextInfo
+    partial public class TextInfo
     {
         private unsafe void NlsChangeCase(
             char* pSource,

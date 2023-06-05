@@ -645,7 +645,7 @@ namespace System.Runtime.InteropServices
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
-        internal extern static void LoadInMemoryTypeByName(RuntimeModule module, String className);
+        internal static extern void LoadInMemoryTypeByName(RuntimeModule module, String className);
 
         //
         // Helper class called when a resolve type event is fired.

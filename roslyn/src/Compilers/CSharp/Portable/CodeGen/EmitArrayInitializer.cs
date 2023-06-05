@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 {
-    internal partial class CodeGenerator
+    partial internal class CodeGenerator
     {
         private enum ArrayInitializerStyle
         {

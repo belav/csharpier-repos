@@ -7,12 +7,13 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Thunk to call the underlying type's GetHashCode method on enum types.
     /// This method prevents boxing of 'this' that would be required before a call to
     /// the System.Enum's default implementation.
     /// </summary>
-    internal sealed partial class EnumGetHashCodeThunk : ILStubMethod
+    internal sealed class EnumGetHashCodeThunk : ILStubMethod
     {
         private TypeDesc _owningType;
         private MethodSignature _signature;
@@ -85,12 +86,13 @@ namespace Internal.IL.Stubs
         }
     }
 
+    partial
     /// <summary>
     /// Thunk to compare underlying values of enums in the Equals method.
     /// This method prevents boxing of 'this' that would be required before a call to
     /// the System.Enum's default implementation.
     /// </summary>
-    internal sealed partial class EnumEqualsThunk : ILStubMethod
+    internal sealed class EnumEqualsThunk : ILStubMethod
     {
         private TypeDesc _owningType;
         private MethodSignature _signature;

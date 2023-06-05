@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class AnonymousTypeManager
+    partial internal sealed class AnonymousTypeManager
     {
         internal sealed class AnonymousDelegateTemplateSymbol
             : AnonymousTypeOrDelegateTemplateSymbol

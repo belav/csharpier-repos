@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class ObjectTests
+    partial public static class ObjectTests
     {
         [Fact]
         public static void VerifyTypeFail()

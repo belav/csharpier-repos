@@ -17,9 +17,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal partial class SolutionCrawlerRegistrationService
+    partial internal class SolutionCrawlerRegistrationService
     {
-        internal sealed partial class WorkCoordinator
+        partial internal sealed class WorkCoordinator
         {
             private readonly Registration _registration;
             private readonly object _gate = new();

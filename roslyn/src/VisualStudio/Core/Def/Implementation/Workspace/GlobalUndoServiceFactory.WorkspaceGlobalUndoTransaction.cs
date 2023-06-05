@@ -22,7 +22,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     using Workspace = Microsoft.CodeAnalysis.Workspace;
 
-    internal partial class GlobalUndoServiceFactory
+    partial internal class GlobalUndoServiceFactory
     {
         private class WorkspaceUndoTransaction
             : ForegroundThreadAffinitizedObject,

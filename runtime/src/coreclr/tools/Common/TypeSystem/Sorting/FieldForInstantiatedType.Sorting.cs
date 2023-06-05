@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Functionality related to deterministic ordering of types and members
-    public partial class FieldForInstantiatedType
+    public class FieldForInstantiatedType
     {
         protected internal override int ClassCode => 1140200283;
 

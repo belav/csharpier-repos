@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class IParameterSymbolExtensions
+    partial internal static class IParameterSymbolExtensions
     {
         public static IParameterSymbol RenameParameter(
             this IParameterSymbol parameter,

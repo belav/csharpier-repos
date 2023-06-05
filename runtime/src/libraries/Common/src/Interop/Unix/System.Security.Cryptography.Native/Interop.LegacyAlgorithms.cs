@@ -3,15 +3,15 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         private static volatile bool s_loadedLegacy;
         private static readonly object s_legacyLoadLock = new object();
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial void CryptoNative_RegisterLegacyAlgorithms();
+        partial private static void CryptoNative_RegisterLegacyAlgorithms();
 
         internal static void EnsureLegacyAlgorithmsRegistered()
         {

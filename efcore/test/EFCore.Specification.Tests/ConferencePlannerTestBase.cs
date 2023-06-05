@@ -11,7 +11,7 @@ using Track = Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner.Track;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixture<TFixture>
+partial public abstract class ConferencePlannerTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : ConferencePlannerTestBase<TFixture>.ConferencePlannerFixtureBase, new()
 {
     protected ConferencePlannerTestBase(TFixture fixture)

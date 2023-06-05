@@ -12,7 +12,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
 {
     [Trait(Traits.Feature, Traits.Features.LinkedFileDiffMerging)]
-    public partial class LinkedFileDiffMergingTests
+    partial public class LinkedFileDiffMergingTests
     {
         [Fact]
         public void TestIdenticalChanges()

@@ -25,13 +25,13 @@ namespace System.Web.Configuration
         private const string LMW3SVC_PREFIX = "/LM/W3SVC/";
         private const string ROOT_SUFFIX = "/ROOT";
 
-        static private MetabaseServerConfig s_instance;
-        static private object s_initLock = new Object();
+        private static MetabaseServerConfig s_instance;
+        private static object s_initLock = new Object();
 
         string _defaultSiteName;
         string _siteIdForCurrentApplication;
 
-        static internal IServerConfig GetInstance()
+        internal static IServerConfig GetInstance()
         {
             if (s_instance == null)
             {

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.Extensions.Logging.Generators
 {
-    public partial class LoggerMessageGenerator
+    partial public class LoggerMessageGenerator
     {
         internal class Parser
         {

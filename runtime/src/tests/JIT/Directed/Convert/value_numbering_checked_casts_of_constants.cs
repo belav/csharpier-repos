@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class ValueNumberingCheckedCastsOfConstants
+partial public class ValueNumberingCheckedCastsOfConstants
 {
     private static int _global = 0;
     private static int _counter = 100;

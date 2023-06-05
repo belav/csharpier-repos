@@ -44,12 +44,13 @@ namespace Novell.Directory.Ldap
      */
     public class LdapDeleteRequest : LdapMessage
     {
+        public
         /// <summary> Returns of the dn of the entry to delete from the directory
         ///
         /// </summary>
         /// <returns> the dn of the entry to delete
         /// </returns>
-        virtual public System.String DN
+        virtual System.String DN
         {
             get { return Asn1Object.RequestDN; }
         }

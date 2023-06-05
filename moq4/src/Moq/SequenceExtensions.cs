@@ -13,7 +13,7 @@ namespace Moq
     /// Helper for sequencing return values in the same method.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static partial class SequenceExtensions
+    partial public static class SequenceExtensions
     {
         /// <summary>
         /// Return a sequence of tasks, once per call.

@@ -4,13 +4,13 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetConsoleMode(IntPtr handle, out int mode);
+        partial internal static bool GetConsoleMode(IntPtr handle, out int mode);
 
         internal static bool IsGetConsoleModeCallSuccessful(IntPtr handle)
         {
@@ -19,7 +19,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetConsoleMode(IntPtr handle, int mode);
+        partial internal static bool SetConsoleMode(IntPtr handle, int mode);
 
         internal const int ENABLE_PROCESSED_INPUT = 0x0001;
         internal const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;

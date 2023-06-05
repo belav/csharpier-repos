@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+partial
 /// <summary>
 /// An <see cref="IResult"/> that on execution invokes <see cref="M:HttpContext.ForbidAsync"/>.
 /// </summary>
-public sealed partial class ForbidHttpResult : IResult
+public sealed class ForbidHttpResult : IResult
 {
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidHttpResult"/>.
@@ -96,7 +97,7 @@ public sealed partial class ForbidHttpResult : IResult
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void ForbidResultExecuting(
             ILogger logger,
@@ -116,6 +117,6 @@ public sealed partial class ForbidHttpResult : IResult
             EventName = "ChallengeResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ForbidResultExecuting(ILogger logger, string[] schemes);
+        partial private static void ForbidResultExecuting(ILogger logger, string[] schemes);
     }
 }

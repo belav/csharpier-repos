@@ -5,9 +5,9 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use CreateFile.
@@ -18,7 +18,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static unsafe partial IntPtr CreateFilePrivate_IntPtr(
+        partial private static unsafe IntPtr CreateFilePrivate_IntPtr(
             string lpFileName,
             int dwDesiredAccess,
             FileShare dwShareMode,

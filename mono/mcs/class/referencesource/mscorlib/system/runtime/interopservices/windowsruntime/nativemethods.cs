@@ -53,7 +53,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-        internal static unsafe extern int WindowsCreateString(
+        internal static extern unsafe int WindowsCreateString(
             [MarshalAs(UnmanagedType.LPWStr)] string sourceString,
             int length,
             [Out] IntPtr* hstring
@@ -66,7 +66,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-        internal static unsafe extern int WindowsCreateStringReference(
+        internal static extern unsafe int WindowsCreateStringReference(
             char* sourceString,
             int length,
             [Out] HSTRING_HEADER* hstringHeader,
@@ -89,7 +89,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-        internal static unsafe extern char* WindowsGetStringRawBuffer(
+        internal static extern unsafe char* WindowsGetStringRawBuffer(
             IntPtr hstring,
             [Out] uint* length
         );

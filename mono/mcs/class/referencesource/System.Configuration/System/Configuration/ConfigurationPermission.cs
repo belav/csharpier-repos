@@ -13,7 +13,7 @@ namespace System.Configuration
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     [Serializable]
-    sealed public class ConfigurationPermissionAttribute : CodeAccessSecurityAttribute
+    public sealed class ConfigurationPermissionAttribute : CodeAccessSecurityAttribute
     {
         public ConfigurationPermissionAttribute(SecurityAction action)
             : base(action) { }

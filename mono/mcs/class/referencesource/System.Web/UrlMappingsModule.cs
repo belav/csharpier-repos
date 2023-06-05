@@ -5,11 +5,12 @@ namespace System.Web
     using System.Web.Util;
     using System.Web.Configuration;
 
+    internal
     //
     // Module that implements the UrlMappings functionality
     // on IIS 7 in integrated mode, this takes the place of
     // the UrlMappings execution step and is listed in <modules/>
-    sealed internal class UrlMappingsModule : IHttpModule
+    sealed class UrlMappingsModule : IHttpModule
     {
         internal UrlMappingsModule() { }
 

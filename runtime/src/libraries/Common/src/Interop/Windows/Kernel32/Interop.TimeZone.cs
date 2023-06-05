@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal struct SYSTEMTIME
         {
@@ -33,13 +33,13 @@ internal static partial class Interop
         internal unsafe struct TIME_DYNAMIC_ZONE_INFORMATION
         {
             internal int Bias;
-            internal fixed char StandardName[32];
+            fixed internal char StandardName[32];
             internal SYSTEMTIME StandardDate;
             internal int StandardBias;
-            internal fixed char DaylightName[32];
+            fixed internal char DaylightName[32];
             internal SYSTEMTIME DaylightDate;
             internal int DaylightBias;
-            internal fixed char TimeZoneKeyName[128];
+            fixed internal char TimeZoneKeyName[128];
             internal byte DynamicDaylightTimeDisabled;
 
             internal string GetTimeZoneKeyName()
@@ -53,10 +53,10 @@ internal static partial class Interop
         internal unsafe struct TIME_ZONE_INFORMATION
         {
             internal int Bias;
-            internal fixed char StandardName[32];
+            fixed internal char StandardName[32];
             internal SYSTEMTIME StandardDate;
             internal int StandardBias;
-            internal fixed char DaylightName[32];
+            fixed internal char DaylightName[32];
             internal SYSTEMTIME DaylightDate;
             internal int DaylightBias;
 
@@ -84,12 +84,12 @@ internal static partial class Interop
         internal const uint TIME_ZONE_ID_INVALID = unchecked((uint)-1);
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial uint GetDynamicTimeZoneInformation(
+        partial internal static uint GetDynamicTimeZoneInformation(
             out TIME_DYNAMIC_ZONE_INFORMATION pTimeZoneInformation
         );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial uint GetTimeZoneInformation(
+        partial internal static uint GetTimeZoneInformation(
             out TIME_ZONE_INFORMATION lpTimeZoneInformation
         );
     }

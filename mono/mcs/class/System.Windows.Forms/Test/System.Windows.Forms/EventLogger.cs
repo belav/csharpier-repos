@@ -24,7 +24,7 @@ namespace MonoTests.System.Windows.Forms
         {
             public bool PrintAdds = false;
 
-            new public int Add(object obj)
+            public new int Add(object obj)
             {
                 if (PrintAdds)
                     Console.WriteLine("{1} EventLog: {0}", obj, DateTime.Now.ToLongTimeString());

@@ -11,10 +11,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
+partial
 /// <summary>
 /// A component that supplies route data corresponding to the current navigation state.
 /// </summary>
-public partial class Router : IComponent, IHandleAfterRender, IDisposable
+public class Router : IComponent, IHandleAfterRender, IDisposable
 {
     // Dictionary is intentionally used instead of ReadOnlyDictionary to reduce Blazor size
     static readonly IReadOnlyDictionary<string, object> _emptyParametersDictionary =
@@ -315,7 +316,7 @@ public partial class Router : IComponent, IHandleAfterRender, IDisposable
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -323,7 +324,7 @@ public partial class Router : IComponent, IHandleAfterRender, IDisposable
             $"Displaying {nameof(NotFound)} because path '{{Path}}' with base URI '{{BaseUri}}' does not match any component route",
             EventName = "DisplayingNotFound"
         )]
-        internal static partial void DisplayingNotFound(
+        partial internal static void DisplayingNotFound(
             ILogger logger,
             string path,
             string baseUri
@@ -335,7 +336,7 @@ public partial class Router : IComponent, IHandleAfterRender, IDisposable
             "Navigating to component {ComponentType} in response to path '{Path}' with base URI '{BaseUri}'",
             EventName = "NavigatingToComponent"
         )]
-        internal static partial void NavigatingToComponent(
+        partial internal static void NavigatingToComponent(
             ILogger logger,
             Type componentType,
             string path,
@@ -348,7 +349,7 @@ public partial class Router : IComponent, IHandleAfterRender, IDisposable
             "Navigating to non-component URI '{ExternalUri}' in response to path '{Path}' with base URI '{BaseUri}'",
             EventName = "NavigatingToExternalUri"
         )]
-        internal static partial void NavigatingToExternalUri(
+        partial internal static void NavigatingToExternalUri(
             ILogger logger,
             string externalUri,
             string path,

@@ -15,7 +15,7 @@ using static Microsoft.CodeAnalysis.Editor.UnitTests.Classification.FormattedCla
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
 {
     [Trait(Traits.Feature, Traits.Features.Classification)]
-    public partial class SyntacticClassifierTests
+    partial public class SyntacticClassifierTests
     {
         [Theory]
         [CombinatorialData]

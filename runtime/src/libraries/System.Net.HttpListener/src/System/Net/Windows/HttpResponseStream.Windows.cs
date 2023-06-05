@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Net
 {
-    internal sealed unsafe partial class HttpResponseStream : Stream
+    partial internal sealed unsafe class HttpResponseStream : Stream
     {
         private readonly HttpListenerContext _httpContext;
         private long _leftToWrite = long.MinValue;

@@ -14,16 +14,16 @@ namespace System
     static class BCLDebug
     {
         [Conditional("_DEBUG")]
-        static public void Assert(bool condition, string message) { }
+        public static void Assert(bool condition, string message) { }
 
         [Conditional("_DEBUG")]
         internal static void Correctness(bool expr, string msg) { }
 
         [Conditional("_DEBUG")]
-        static public void Log(string message) { }
+        public static void Log(string message) { }
 
         [Conditional("_DEBUG")]
-        static public void Log(string switchName, string message) { }
+        public static void Log(string switchName, string message) { }
 
         [Conditional("_DEBUG")]
         public static void Log(

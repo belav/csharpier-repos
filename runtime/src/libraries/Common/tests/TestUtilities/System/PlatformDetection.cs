@@ -15,7 +15,7 @@ using Xunit;
 
 namespace System
 {
-    public static partial class PlatformDetection
+    partial public static class PlatformDetection
     {
         //
         // Do not use the " { get; } = <expression> " pattern here. Having all the initialization happen in the type initializer

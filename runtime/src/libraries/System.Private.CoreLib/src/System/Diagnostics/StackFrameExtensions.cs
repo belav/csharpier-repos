@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Diagnostics
 {
-    public static partial class StackFrameExtensions
+    partial public static class StackFrameExtensions
     {
         public static bool HasNativeImage(this StackFrame stackFrame)
         {

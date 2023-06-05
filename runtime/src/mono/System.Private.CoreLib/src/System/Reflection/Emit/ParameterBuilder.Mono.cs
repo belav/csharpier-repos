@@ -41,7 +41,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public partial class ParameterBuilder
+    partial public class ParameterBuilder
     {
         #region Sync with MonoReflectionParamBuilder in object-internals.h
         private MethodBase methodb; /* MethodBuilder, ConstructorBuilder or DynamicMethod */

@@ -9,10 +9,11 @@ using System.Text;
 
 namespace Microsoft.CodeAnalysis.Scripting.Hosting
 {
+    partial
     /// <summary>
     /// Object pretty printer.
     /// </summary>
-    internal abstract partial class CommonObjectFormatter
+    internal abstract class CommonObjectFormatter
     {
         private sealed class Builder
         {

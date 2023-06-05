@@ -17,10 +17,11 @@ namespace Internal.TypeSystem.Interop
         Reverse, // unsafe-to-safe / native-to-managed
     }
 
+    partial
     // Each type of marshaller knows how to generate the marshalling code for the argument it marshals.
     // Marshallers contain method related marshalling information (which is common to all the Marshallers)
     // and also argument specific marshalling information.
-    internal abstract partial class Marshaller
+    internal abstract class Marshaller
     {
         #region Instance state information
         public TypeSystemContext Context;

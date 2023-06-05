@@ -10,7 +10,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Collections.Generic
 {
-    public abstract partial class Comparer<T> : IComparer, IComparer<T>
+    partial public abstract class Comparer<T> : IComparer, IComparer<T>
     {
         private static Comparer<T> s_default;
 
@@ -46,7 +46,7 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class EnumComparer<T> : Comparer<T>
+    partial internal sealed class EnumComparer<T> : Comparer<T>
         where T : struct, Enum
     {
         public override int Compare(T x, T y)

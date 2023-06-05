@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo;
 [ProducesResultType(CodeSearchResultType.OtherSymbol)]
 [ProducesResultType(CodeSearchResultType.Property)]
 [ProducesResultType(CodeSearchResultType.Structure)]
-internal sealed partial class RoslynSearchItemsSourceProvider : ISearchItemsSourceProvider
+partial internal sealed class RoslynSearchItemsSourceProvider : ISearchItemsSourceProvider
 {
     private readonly VisualStudioWorkspace _workspace;
     private readonly IThreadingContext _threadingContext;

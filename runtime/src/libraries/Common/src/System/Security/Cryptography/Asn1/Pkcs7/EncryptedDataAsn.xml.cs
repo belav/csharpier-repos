@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1.Pkcs7
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct EncryptedDataAsn
+    partial internal struct EncryptedDataAsn
     {
         internal int Version;
         internal System.Security.Cryptography.Asn1.Pkcs7.EncryptedContentInfoAsn EncryptedContentInfo;

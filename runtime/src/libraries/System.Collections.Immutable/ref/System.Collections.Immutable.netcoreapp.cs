@@ -6,12 +6,12 @@
 
 namespace System.Collections.Frozen
 {
-    public abstract partial class FrozenSet<T> : System.Collections.Generic.IReadOnlySet<T> { }
+    partial public abstract class FrozenSet<T> : System.Collections.Generic.IReadOnlySet<T> { }
 }
 
 namespace System.Collections.Immutable
 {
-    public readonly partial struct ImmutableArray<T>
+    partial public readonly struct ImmutableArray<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IList<T>,

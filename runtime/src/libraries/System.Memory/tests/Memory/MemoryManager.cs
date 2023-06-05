@@ -6,10 +6,11 @@ using Xunit;
 
 namespace System.MemoryTests
 {
+    partial
     //
     // Tests for Memory<T>.ctor(MemoryManager<T>, int , int)
     //
-    public static partial class MemoryTests
+    public static class MemoryTests
     {
         [Fact]
         public static void MemoryFromMemoryManagerInt()

@@ -7,7 +7,7 @@ using System.Security.Authentication;
 
 namespace System.Net.Security
 {
-    internal partial struct SslConnectionInfo
+    partial internal struct SslConnectionInfo
     {
         public void UpdateSslConnectionInfo(SafeSslHandle sslContext)
         {

@@ -7,9 +7,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class DSAImplementation
+    partial internal static class DSAImplementation
     {
-        public sealed partial class DSASecurityTransforms : DSA, IRuntimeAlgorithm
+        partial public sealed class DSASecurityTransforms : DSA, IRuntimeAlgorithm
         {
             private SecKeyPair? _keys;
             private bool _disposed;

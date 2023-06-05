@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class ComAwareEventInfoTests
+    partial public class ComAwareEventInfoTests
     {
         [ComEventInterface(typeof(DispAttributeClass), typeof(int))]
         public interface DispAttributeInterface

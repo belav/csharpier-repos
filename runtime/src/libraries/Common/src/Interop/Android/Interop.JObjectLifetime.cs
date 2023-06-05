@@ -6,21 +6,21 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class JObjectLifetime
+    partial internal static class JObjectLifetime
     {
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_NewGlobalReference"
         )]
-        internal static partial IntPtr NewGlobalReference(IntPtr obj);
+        partial internal static IntPtr NewGlobalReference(IntPtr obj);
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_DeleteGlobalReference"
         )]
-        internal static partial void DeleteGlobalReference(IntPtr obj);
+        partial internal static void DeleteGlobalReference(IntPtr obj);
 
         internal class SafeJObjectHandle : SafeHandle
         {

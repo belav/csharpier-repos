@@ -5,15 +5,15 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal delegate bool ConsoleCtrlHandlerRoutine(int controlType);
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetConsoleCtrlHandler(
+        partial internal static bool SetConsoleCtrlHandler(
             ConsoleCtrlHandlerRoutine handler,
             [MarshalAs(UnmanagedType.Bool)] bool addOrRemove
         );

@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Microsoft.Internal
 {
-    internal static partial class Requires
+    partial internal static class Requires
     {
         [DebuggerStepThrough]
         public static void NotNullOrNullElements<T>(IEnumerable<T> values, string parameterName)

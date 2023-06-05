@@ -17,7 +17,7 @@ namespace System.Data.Common
 
     internal static class HandlerBase
     {
-        static internal void CheckForChildNodes(XmlNode node)
+        internal static void CheckForChildNodes(XmlNode node)
         {
             if (node.HasChildNodes)
             {
@@ -25,7 +25,7 @@ namespace System.Data.Common
             }
         }
 
-        static private void CheckForNonElement(XmlNode node)
+        private static void CheckForNonElement(XmlNode node)
         {
             if (XmlNodeType.Element != node.NodeType)
             {
@@ -33,7 +33,7 @@ namespace System.Data.Common
             }
         }
 
-        static internal void CheckForUnrecognizedAttributes(XmlNode node)
+        internal static void CheckForUnrecognizedAttributes(XmlNode node)
         {
             if (0 != node.Attributes.Count)
             {
@@ -42,7 +42,9 @@ namespace System.Data.Common
         }
 
         // skip whitespace and comments, throws if non-element
-        static internal bool IsIgnorableAlsoCheckForNonElement(XmlNode node)
+        internal
+        // skip whitespace and comments, throws if non-element
+        static bool IsIgnorableAlsoCheckForNonElement(XmlNode node)
         {
             if ((XmlNodeType.Comment == node.NodeType) || (XmlNodeType.Whitespace == node.NodeType))
             {
@@ -52,7 +54,7 @@ namespace System.Data.Common
             return false;
         }
 
-        static internal string RemoveAttribute(
+        internal static string RemoveAttribute(
             XmlNode node,
             string name,
             bool required,
@@ -76,7 +78,7 @@ namespace System.Data.Common
             return value;
         }
 
-        static internal DataSet CloneParent(DataSet parentConfig, bool insenstive)
+        internal static DataSet CloneParent(DataSet parentConfig, bool insenstive)
         {
             if (null == parentConfig)
             {

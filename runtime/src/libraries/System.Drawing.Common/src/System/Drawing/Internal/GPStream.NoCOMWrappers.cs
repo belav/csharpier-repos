@@ -5,7 +5,7 @@ using System.Buffers;
 
 namespace System.Drawing.Internal
 {
-    internal sealed partial class GPStream : Interop.Ole32.IStream
+    partial internal sealed class GPStream : Interop.Ole32.IStream
     {
         public Interop.Ole32.IStream Clone()
         {

@@ -9,7 +9,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    public sealed partial class CertificateRevocationListBuilder
+    partial public sealed class CertificateRevocationListBuilder
     {
         /// <summary>
         ///   Builds a Certificate Revocation List (CRL) signed by the specified certificate.

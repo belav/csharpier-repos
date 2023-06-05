@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class ConversionsBase
+    partial internal class ConversionsBase
     {
         private UserDefinedConversionResult AnalyzeExplicitUserDefinedConversions(
             BoundExpression sourceExpression,

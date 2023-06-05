@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Tests
 {
-    public static partial class DesTests
+    partial public static class DesTests
     {
         [Fact]
         public static void EnsureLegalSizesValuesIsolated()

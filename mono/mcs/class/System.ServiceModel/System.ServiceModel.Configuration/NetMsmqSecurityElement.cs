@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class NetMsmqSecurityElement : ConfigurationElement
+    partial public sealed class NetMsmqSecurityElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

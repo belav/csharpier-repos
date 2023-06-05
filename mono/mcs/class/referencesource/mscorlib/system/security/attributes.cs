@@ -13,7 +13,7 @@ namespace System.Security
     //  object to be allocated on the callers stack. This attribute is only ever
     //  set on certain security methods defined within mscorlib.
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
-    sealed internal class DynamicSecurityMethodAttribute : System.Attribute { }
+    internal sealed class DynamicSecurityMethodAttribute : System.Attribute { }
 
     // SuppressUnmanagedCodeSecurityAttribute:
     //  Indicates that the target P/Invoke method(s) should skip the per-call
@@ -27,13 +27,13 @@ namespace System.Security
         Inherited = false
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class SuppressUnmanagedCodeSecurityAttribute : System.Attribute { }
+    public sealed class SuppressUnmanagedCodeSecurityAttribute : System.Attribute { }
 
     // UnverifiableCodeAttribute:
     //  Indicates that the target module contains unverifiable code.
     [AttributeUsage(AttributeTargets.Module, AllowMultiple = true, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class UnverifiableCodeAttribute : System.Attribute { }
+    public sealed class UnverifiableCodeAttribute : System.Attribute { }
 
     // AllowPartiallyTrustedCallersAttribute:
     //  Indicates that the Assembly is secure and can be used by untrusted
@@ -42,7 +42,7 @@ namespace System.Security
     //  include Module, Method, class
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class AllowPartiallyTrustedCallersAttribute : System.Attribute
+    public sealed class AllowPartiallyTrustedCallersAttribute : System.Attribute
     {
         private PartialTrustVisibilityLevel _visibilityLevel;
 
@@ -86,7 +86,7 @@ namespace System.Security
         AllowMultiple = false,
         Inherited = false
     )]
-    sealed public class SecurityCriticalAttribute : System.Attribute
+    public sealed class SecurityCriticalAttribute : System.Attribute
     {
 #pragma warning disable 618    // We still use SecurityCriticalScope for v2 compat
 
@@ -136,7 +136,7 @@ namespace System.Security
     [Obsolete(
         "SecurityTreatAsSafe is only used for .NET 2.0 transparency compatibility.  Please use the SecuritySafeCriticalAttribute instead."
     )]
-    sealed public class SecurityTreatAsSafeAttribute : System.Attribute
+    public sealed class SecurityTreatAsSafeAttribute : System.Attribute
     {
         public SecurityTreatAsSafeAttribute() { }
     }
@@ -162,7 +162,7 @@ namespace System.Security
         AllowMultiple = false,
         Inherited = false
     )]
-    sealed public class SecuritySafeCriticalAttribute : System.Attribute
+    public sealed class SecuritySafeCriticalAttribute : System.Attribute
     {
         public SecuritySafeCriticalAttribute() { }
     }
@@ -174,7 +174,7 @@ namespace System.Security
     // into Full-Demands.
 
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]
-    sealed public class SecurityTransparentAttribute : System.Attribute
+    public sealed class SecurityTransparentAttribute : System.Attribute
     {
         public SecurityTransparentAttribute() { }
     }

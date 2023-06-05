@@ -7,7 +7,7 @@ using static Interop.Crypt32;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECCng
+    partial internal static class ECCng
     {
         /// <summary>
         /// Get the ALG_ID from the given HashAlgorithmName

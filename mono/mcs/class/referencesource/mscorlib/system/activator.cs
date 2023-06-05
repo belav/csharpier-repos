@@ -53,7 +53,13 @@ namespace System
         // Full Binding Support
         // For all of these methods we need to get the underlying RuntimeType and
         //  call the Impl version.
-        static public Object CreateInstance(
+        public
+        // CreateInstance
+        // The following methods will create a new instance of an Object
+        // Full Binding Support
+        // For all of these methods we need to get the underlying RuntimeType and
+        //  call the Impl version.
+        static Object CreateInstance(
             Type type,
             BindingFlags bindingAttr,
             Binder binder,
@@ -66,7 +72,7 @@ namespace System
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        static public Object CreateInstance(
+        public static Object CreateInstance(
             Type type,
             BindingFlags bindingAttr,
             Binder binder,
@@ -134,12 +140,12 @@ namespace System
             );
         }
 
-        static public Object CreateInstance(Type type, params Object[] args)
+        public static Object CreateInstance(Type type, params Object[] args)
         {
             return CreateInstance(type, Activator.ConstructorDefault, null, args, null, null);
         }
 
-        static public Object CreateInstance(Type type, Object[] args, Object[] activationAttributes)
+        public static Object CreateInstance(Type type, Object[] args, Object[] activationAttributes)
         {
             return CreateInstance(
                 type,
@@ -151,7 +157,7 @@ namespace System
             );
         }
 
-        static public Object CreateInstance(Type type)
+        public static Object CreateInstance(Type type)
         {
             return Activator.CreateInstance(type, false);
         }
@@ -163,7 +169,7 @@ namespace System
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        static public ObjectHandle CreateInstance(String assemblyName, String typeName)
+        public static ObjectHandle CreateInstance(String assemblyName, String typeName)
         {
 #if MONO
             if (assemblyName == null)
@@ -186,7 +192,7 @@ namespace System
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        static public ObjectHandle CreateInstance(
+        public static ObjectHandle CreateInstance(
             String assemblyName,
             String typeName,
             Object[] activationAttributes
@@ -242,7 +248,7 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        static public T CreateInstance<T>()
+        public static T CreateInstance<T>()
         {
             RuntimeType rt = typeof(T) as RuntimeType;
 
@@ -295,14 +301,14 @@ namespace System
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        static public ObjectHandle CreateInstanceFrom(String assemblyFile, String typeName)
+        public static ObjectHandle CreateInstanceFrom(String assemblyFile, String typeName)
         {
             return CreateInstanceFrom(assemblyFile, typeName, null);
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        static public ObjectHandle CreateInstanceFrom(
+        public static ObjectHandle CreateInstanceFrom(
             String assemblyFile,
             String typeName,
             Object[] activationAttributes
@@ -325,7 +331,7 @@ namespace System
         [Obsolete(
             "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstance which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
-        static public ObjectHandle CreateInstance(
+        public static ObjectHandle CreateInstance(
             String assemblyName,
             String typeName,
             bool ignoreCase,
@@ -389,7 +395,7 @@ namespace System
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        static internal ObjectHandle CreateInstance(
+        internal static ObjectHandle CreateInstance(
             String assemblyString,
             String typeName,
             bool ignoreCase,
@@ -506,7 +512,7 @@ namespace System
         [Obsolete(
             "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstanceFrom which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
-        static public ObjectHandle CreateInstanceFrom(
+        public static ObjectHandle CreateInstanceFrom(
             String assemblyFile,
             String typeName,
             bool ignoreCase,
@@ -916,7 +922,7 @@ namespace System
         //  This method is a helper method and delegates to the remoting
         //  services to do the actual work.
         [System.Security.SecurityCritical] // auto-generated_required
-        static public Object GetObject(Type type, String url)
+        public static Object GetObject(Type type, String url)
         {
             return GetObject(type, url, null);
         }
@@ -924,7 +930,7 @@ namespace System
         //  This method is a helper method and delegates to the remoting
         //  services to do the actual work.
         [System.Security.SecurityCritical] // auto-generated_required
-        static public Object GetObject(Type type, String url, Object state)
+        public static Object GetObject(Type type, String url, Object state)
         {
             if (type == null)
                 throw new ArgumentNullException("type");

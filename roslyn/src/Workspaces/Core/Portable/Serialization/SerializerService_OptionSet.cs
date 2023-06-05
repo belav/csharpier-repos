@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Serialization
 {
-    internal partial class SerializerService
+    partial internal class SerializerService
     {
         public void SerializeOptionSet(
             SerializableOptionSet options,

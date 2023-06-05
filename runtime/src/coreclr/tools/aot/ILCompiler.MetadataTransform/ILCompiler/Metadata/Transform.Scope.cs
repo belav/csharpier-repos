@@ -16,7 +16,7 @@ using AssemblyName = System.Reflection.AssemblyName;
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         internal EntityMap<Cts.ModuleDesc, ScopeDefinition> _scopeDefs = new EntityMap<
             Cts.ModuleDesc,

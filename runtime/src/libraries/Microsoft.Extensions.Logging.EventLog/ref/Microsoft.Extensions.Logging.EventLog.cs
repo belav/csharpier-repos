@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Logging
 {
-    public static partial class EventLoggerFactoryExtensions
+    partial public static class EventLoggerFactoryExtensions
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddEventLog(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder
@@ -36,7 +36,7 @@ namespace Microsoft.Extensions.Logging
 namespace Microsoft.Extensions.Logging.EventLog
 {
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("EventLog")]
-    public partial class EventLogLoggerProvider
+    partial public class EventLogLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
             Microsoft.Extensions.Logging.ISupportExternalScope,
             System.IDisposable
@@ -63,7 +63,7 @@ namespace Microsoft.Extensions.Logging.EventLog
         ) { }
     }
 
-    public partial class EventLogSettings
+    partial public class EventLogSettings
     {
         public EventLogSettings() { }
 

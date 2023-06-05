@@ -20,7 +20,7 @@ namespace System.Data.Common
 
     internal sealed class ObjectStorage : DataStorage
     {
-        static private readonly Object defaultValue = null;
+        private static readonly Object defaultValue = null;
 
         private enum Families
         {
@@ -47,12 +47,12 @@ namespace System.Data.Common
             implementsIXmlSerializable = typeof(IXmlSerializable).IsAssignableFrom(type);
         }
 
-        override public Object Aggregate(int[] records, AggregateType kind)
+        public override Object Aggregate(int[] records, AggregateType kind)
         {
             throw ExceptionBuilder.AggregateException(kind, DataType);
         }
 
-        override public int Compare(int recordNo1, int recordNo2)
+        public override int Compare(int recordNo1, int recordNo2)
         {
             object valueNo1 = values[recordNo1];
             object valueNo2 = values[recordNo2];
@@ -79,7 +79,7 @@ namespace System.Data.Common
             return CompareWithFamilies(valueNo1, valueNo2);
         }
 
-        override public int CompareValueTo(int recordNo1, Object value)
+        public override int CompareValueTo(int recordNo1, Object value)
         {
             object valueNo1 = Get(recordNo1);
 
@@ -187,12 +187,12 @@ namespace System.Data.Common
             }
         }
 
-        override public void Copy(int recordNo1, int recordNo2)
+        public override void Copy(int recordNo1, int recordNo2)
         {
             values[recordNo2] = values[recordNo1];
         }
 
-        override public Object Get(int recordNo)
+        public override Object Get(int recordNo)
         {
             Object value = values[recordNo];
             if (null != value)
@@ -252,12 +252,12 @@ namespace System.Data.Common
             }
         }
 
-        override public bool IsNull(int record)
+        public override bool IsNull(int record)
         {
             return (null == values[record]);
         }
 
-        override public void Set(int recordNo, Object value)
+        public override void Set(int recordNo, Object value)
         {
             System.Diagnostics.Debug.Assert(null != value, "null value");
             if (NullValue == value)
@@ -329,7 +329,7 @@ namespace System.Data.Common
             }
         }
 
-        override public void SetCapacity(int capacity)
+        public override void SetCapacity(int capacity)
         {
             object[] newValues = new object[capacity];
             if (values != null)
@@ -341,7 +341,7 @@ namespace System.Data.Common
 
         // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
-        override public object ConvertXmlToObject(string s)
+        public override object ConvertXmlToObject(string s)
         {
             Type type = DataType; // real type of objects in this column
 
@@ -485,7 +485,7 @@ namespace System.Data.Common
             return retValue;
         }
 
-        override public string ConvertObjectToXml(object value)
+        public override string ConvertObjectToXml(object value)
         {
             if ((value == null) || (value == NullValue)) // this case wont happen,  this is added in case if code in xml saver changes
                 return String.Empty;
@@ -551,12 +551,12 @@ namespace System.Data.Common
             }
         }
 
-        override protected object GetEmptyStorage(int recordCount)
+        protected override object GetEmptyStorage(int recordCount)
         {
             return new Object[recordCount];
         }
 
-        override protected void CopyValue(
+        protected override void CopyValue(
             int record,
             object store,
             BitArray nullbits,
@@ -581,7 +581,7 @@ namespace System.Data.Common
             }
         }
 
-        override protected void SetStorage(object store, BitArray nullbits)
+        protected override void SetStorage(object store, BitArray nullbits)
         {
             values = (Object[])store;
             for (int i = 0; i < values.Length; i++)

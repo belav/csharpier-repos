@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 {
-    internal sealed partial class RenameTrackingTaggerProvider
+    partial internal sealed class RenameTrackingTaggerProvider
     {
         /// <summary>
         /// Tracks the solution before and after rename.

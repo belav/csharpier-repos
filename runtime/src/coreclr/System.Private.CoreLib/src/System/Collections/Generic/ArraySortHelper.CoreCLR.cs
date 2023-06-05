@@ -12,7 +12,7 @@ namespace System.Collections.Generic
         int BinarySearch(TKey[] keys, int index, int length, TKey value, IComparer<TKey>? comparer);
     }
 
-    internal sealed partial class ArraySortHelper<T> : IArraySortHelper<T>
+    partial internal sealed class ArraySortHelper<T> : IArraySortHelper<T>
     {
         private static readonly IArraySortHelper<T> s_defaultArraySortHelper =
             CreateArraySortHelper();
@@ -40,14 +40,14 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class GenericArraySortHelper<T> : IArraySortHelper<T> { }
+    partial internal sealed class GenericArraySortHelper<T> : IArraySortHelper<T> { }
 
     internal interface IArraySortHelper<TKey, TValue>
     {
         void Sort(Span<TKey> keys, Span<TValue> values, IComparer<TKey>? comparer);
     }
 
-    internal sealed partial class ArraySortHelper<TKey, TValue> : IArraySortHelper<TKey, TValue>
+    partial internal sealed class ArraySortHelper<TKey, TValue> : IArraySortHelper<TKey, TValue>
     {
         private static readonly IArraySortHelper<TKey, TValue> s_defaultArraySortHelper =
             CreateArraySortHelper();
@@ -76,6 +76,6 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class GenericArraySortHelper<TKey, TValue>
+    partial internal sealed class GenericArraySortHelper<TKey, TValue>
         : IArraySortHelper<TKey, TValue> { }
 }

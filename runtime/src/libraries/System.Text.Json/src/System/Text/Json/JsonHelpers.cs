@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonHelpers
+    partial internal static class JsonHelpers
     {
         /// <summary>
         /// Returns the span for the given reader.

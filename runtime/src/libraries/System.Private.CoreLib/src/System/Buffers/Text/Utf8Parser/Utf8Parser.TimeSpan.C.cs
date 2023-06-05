@@ -3,7 +3,7 @@
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Parser
+    partial public static class Utf8Parser
     {
         private static bool TryParseTimeSpanC(
             ReadOnlySpan<byte> source,

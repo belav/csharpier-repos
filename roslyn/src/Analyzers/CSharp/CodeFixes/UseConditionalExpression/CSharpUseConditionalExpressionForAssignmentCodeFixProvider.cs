@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
         ),
         Shared
     ]
-    internal partial class CSharpUseConditionalExpressionForAssignmentCodeFixProvider
+    partial internal class CSharpUseConditionalExpressionForAssignmentCodeFixProvider
         : AbstractUseConditionalExpressionForAssignmentCodeFixProvider<
             StatementSyntax,
             IfStatementSyntax,

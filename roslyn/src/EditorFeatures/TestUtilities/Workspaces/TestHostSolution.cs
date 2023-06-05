@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 {
-    internal partial class TestHostSolution
+    partial internal class TestHostSolution
     {
         public readonly SolutionId Id;
         public readonly VersionStamp Version;

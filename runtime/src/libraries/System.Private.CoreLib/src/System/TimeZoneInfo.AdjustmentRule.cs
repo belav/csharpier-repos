@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace System
 {
-    public sealed partial class TimeZoneInfo
+    partial public sealed class TimeZoneInfo
     {
         [Serializable]
         public sealed class AdjustmentRule

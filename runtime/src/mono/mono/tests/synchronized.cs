@@ -62,7 +62,7 @@ class Tests
 
     public delegate int Delegate1();
 
-    static public int Main(String[] args)
+    public static int Main(String[] args)
     {
         Tests b = new Tests();
         int res,

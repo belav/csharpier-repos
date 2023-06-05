@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundBinaryOperator
+    partial internal class BoundBinaryOperator
     {
         internal class UncommonData
         {

@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
-    internal partial class TriviaDataFactory
+    partial internal class TriviaDataFactory
     {
         private class ModifiedComplexTrivia : TriviaDataWithList
         {

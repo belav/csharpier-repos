@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Options
 {
-    internal static partial class EditorConfigFileGenerator
+    partial internal static class EditorConfigFileGenerator
     {
         public static string Generate(
             ImmutableArray<(string feature, ImmutableArray<IOption2> options)> groupedOptions,

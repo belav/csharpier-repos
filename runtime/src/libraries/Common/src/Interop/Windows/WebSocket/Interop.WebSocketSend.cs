@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 using System.Security;
 using static System.Net.WebSockets.WebSocketProtocolComponent;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WebSocket
+    partial internal static class WebSocket
     {
         [LibraryImport(Libraries.WebSocket, EntryPoint = "WebSocketSend")]
-        internal static partial int WebSocketSend_Raw(
+        partial internal static int WebSocketSend_Raw(
             SafeHandle webSocketHandle,
             BufferType bufferType,
             ref Buffer buffer,
@@ -19,7 +19,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.WebSocket, EntryPoint = "WebSocketSend")]
-        internal static partial int WebSocketSendWithoutBody_Raw(
+        partial internal static int WebSocketSendWithoutBody_Raw(
             SafeHandle webSocketHandle,
             BufferType bufferType,
             IntPtr buffer,

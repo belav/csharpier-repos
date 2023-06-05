@@ -5,7 +5,7 @@ using System.IO;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class CapiHelper
+    partial internal static class CapiHelper
     {
         /// <summary>
         /// Helper for RC2CryptoServiceProvider and DESCryptoServiceProvider

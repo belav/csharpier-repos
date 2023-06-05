@@ -5,7 +5,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    public static partial class File
+    partial public static class File
     {
         private static UnixFileMode GetUnixFileModeCore(string path) =>
             FileSystem.GetUnixFileMode(Path.GetFullPath(path));

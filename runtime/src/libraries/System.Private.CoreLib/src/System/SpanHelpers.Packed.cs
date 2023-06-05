@@ -14,9 +14,10 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System
 {
+    partial
     // This is a separate class instead of 'partial SpanHelpers' to hide the private helpers
     // included in this file which are specific to the packed implementation.
-    internal static partial class PackedSpanHelpers
+    internal static class PackedSpanHelpers
     {
         // We only do this optimization if we have support for X86 intrinsics (Sse2) as the packing is noticeably cheaper compared to ARM (AdvSimd).
         // While the impact on the worst-case (match at the start) is minimal on X86, it's prohibitively large on ARM.

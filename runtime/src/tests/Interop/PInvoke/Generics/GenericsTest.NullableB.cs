@@ -5,7 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-unsafe partial class GenericsNative
+partial unsafe class GenericsNative
 {
     [DllImport(nameof(GenericsNative))]
     public static extern bool? GetNullableB(bool hasValue, bool value);
@@ -29,7 +29,7 @@ unsafe partial class GenericsNative
     public static extern bool? AddNullableBs(in bool? pValues, int count);
 }
 
-unsafe partial class GenericsTest
+partial unsafe class GenericsTest
 {
     private static void TestNullableB()
     {

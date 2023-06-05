@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Text
 {
-    public sealed partial class CodePagesEncodingProvider : EncodingProvider
+    partial public sealed class CodePagesEncodingProvider : EncodingProvider
     {
         public override System.Collections.Generic.IEnumerable<System.Text.EncodingInfo> GetEncodings() =>
             BaseCodePageEncoding.GetEncodings(this);

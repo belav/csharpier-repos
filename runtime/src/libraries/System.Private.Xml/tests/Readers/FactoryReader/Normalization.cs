@@ -11,7 +11,7 @@ namespace System.Xml.FactoryReaderTests
     //
     ////////////////////////////////////////////////////////////////
     [TestCase(Name = "FactoryReader Normalization", Desc = "FactoryReader")]
-    public partial class TCNormalization : TCXMLReaderBaseGeneral
+    partial public class TCNormalization : TCXMLReaderBaseGeneral
     {
         protected const string ST_ATTR_TEST_NAME = "ATTRIBUTE5";
         protected const string ST_ATTR_EXP_STRING = "x x";

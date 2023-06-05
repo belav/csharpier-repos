@@ -11,9 +11,9 @@ using CFStringRef = System.IntPtr;
 using CFArrayRef = System.IntPtr;
 using CFIndex = System.IntPtr;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class CoreFoundation
+    partial internal static class CoreFoundation
     {
         /// <summary>
         /// Tells the OS what encoding the passed in String is in. These come from the CFString.h header file in the CoreFoundation framework.
@@ -48,7 +48,7 @@ internal static partial class Interop
         /// <param name="isExternalRepresentation">Whether or not a BOM is present.</param>
         /// <returns>A CFStringRef on success, otherwise a SafeCreateHandle(IntPtr.Zero).</returns>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        private static partial SafeCreateHandle CFStringCreateWithBytes(
+        partial private static SafeCreateHandle CFStringCreateWithBytes(
             IntPtr alloc,
             IntPtr bytes,
             CFIndex numBytes,
@@ -68,7 +68,7 @@ internal static partial class Interop
             Interop.Libraries.CoreFoundationLibrary,
             StringMarshalling = StringMarshalling.Utf8
         )]
-        private static partial SafeCreateHandle CFStringCreateWithCString(
+        partial private static SafeCreateHandle CFStringCreateWithCString(
             IntPtr allocator,
             string str,
             CFStringBuiltInEncodings encoding
@@ -86,7 +86,7 @@ internal static partial class Interop
             Interop.Libraries.CoreFoundationLibrary,
             StringMarshalling = StringMarshalling.Utf8
         )]
-        private static partial SafeCreateHandle CFStringCreateWithCString(
+        partial private static SafeCreateHandle CFStringCreateWithCString(
             IntPtr allocator,
             IntPtr str,
             CFStringBuiltInEncodings encoding
@@ -149,7 +149,7 @@ internal static partial class Interop
         /// <param name="callbacks">Should be IntPtr.Zero</param>
         /// <returns>Returns a pointer to a CFArray on success; otherwise, returns IntPtr.Zero</returns>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        private static unsafe partial SafeCreateHandle CFArrayCreate(
+        partial private static unsafe SafeCreateHandle CFArrayCreate(
             IntPtr allocator,
             IntPtr* values,
             UIntPtr numValues,
@@ -191,13 +191,13 @@ internal static partial class Interop
         /// <param name="ptr">The CFType object to retain. This value must not be NULL</param>
         /// <returns>The input value</returns>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        internal static partial IntPtr CFRetain(IntPtr ptr);
+        partial internal static IntPtr CFRetain(IntPtr ptr);
 
         /// <summary>
         /// Decrements the reference count on the specified object and, if the ref count hits 0, cleans up the object.
         /// </summary>
         /// <param name="ptr">The pointer on which to decrement the reference count.</param>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        internal static partial void CFRelease(IntPtr ptr);
+        partial internal static void CFRelease(IntPtr ptr);
     }
 }

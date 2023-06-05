@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 {
-    internal sealed partial class SettingsEditorPane
+    partial internal sealed class SettingsEditorPane
     {
         internal class SearchFilter : IEntryFilter
         {

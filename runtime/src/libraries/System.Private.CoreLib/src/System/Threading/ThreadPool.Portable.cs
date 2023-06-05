@@ -6,17 +6,18 @@ using System.Runtime.CompilerServices;
 
 namespace System.Threading
 {
+    partial
     //
     // Portable implementation of ThreadPool
     //
 
-    internal sealed partial class CompleteWaitThreadPoolWorkItem : IThreadPoolWorkItem
+    internal sealed class CompleteWaitThreadPoolWorkItem : IThreadPoolWorkItem
     {
         void IThreadPoolWorkItem.Execute() =>
             PortableThreadPool.CompleteWait(_registeredWaitHandle, _timedOut);
     }
 
-    public static partial class ThreadPool
+    partial public static class ThreadPool
     {
         // Indicates whether the thread pool should yield the thread from the dispatch loop to the runtime periodically so that
         // the runtime may use the thread for processing other work

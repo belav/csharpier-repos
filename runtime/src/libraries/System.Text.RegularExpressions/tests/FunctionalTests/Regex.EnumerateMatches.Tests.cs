@@ -180,7 +180,7 @@ namespace System.Text.RegularExpressions.Tests
         }
     }
 
-    public partial class RegexMultipleMatchTests
+    partial public class RegexMultipleMatchTests
     {
         [Theory]
         [MemberData(nameof(Matches_TestData))]
@@ -212,7 +212,7 @@ namespace System.Text.RegularExpressions.Tests
         }
     }
 
-    public partial class RegexMatchTests
+    partial public class RegexMatchTests
     {
         [Theory]
         [MemberData(nameof(Match_Count_TestData))]
@@ -233,7 +233,7 @@ namespace System.Text.RegularExpressions.Tests
         }
     }
 
-    public partial class RegexCountTests
+    partial public class RegexCountTests
     {
         [Theory]
         [MemberData(nameof(Count_ReturnsExpectedCount_TestData))]

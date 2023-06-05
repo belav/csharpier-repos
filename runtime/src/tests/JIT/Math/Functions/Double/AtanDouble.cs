@@ -5,7 +5,7 @@ using System;
 
 namespace System.MathBenchmarks
 {
-    public partial class Double
+    partial public class Double
     {
         // Tests Math.Atan(double) over 5000 iterations for the domain -1, +1
 

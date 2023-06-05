@@ -8,9 +8,9 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial struct SymbolKey
+    partial internal struct SymbolKey
     {
-        private ref struct PooledArrayBuilder<T>
+        ref private struct PooledArrayBuilder<T>
         {
             public readonly ArrayBuilder<T> Builder;
 

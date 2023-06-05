@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public static partial class ThrowHelper
+    partial public static class ThrowHelper
     {
         [System.Diagnostics.DebuggerHidden]
         private static void ThrowTypeLoadException(
@@ -92,7 +92,7 @@ namespace Internal.TypeSystem
             );
         }
 
-        private static partial class Format
+        partial private static class Format
         {
             public static string OwningModule(TypeDesc type)
             {

@@ -8,6 +8,7 @@ using System.Reflection.TypeLoading;
 
 namespace System.Reflection
 {
+    partial
     /// <summary>
     /// A MetadataLoadContext represents a closed universe of Type objects loaded for inspection-only purposes.
     /// Each MetadataLoadContext can have its own binding rules and is isolated from all other MetadataLoadContexts.
@@ -94,7 +95,7 @@ namespace System.Reflection
     ///   them will generate a NotImplementedException or NullReferenceException (unfortunately, we can't improve the exceptions thrown because
     ///   they are being thrown by code this library doesn't control.)
     /// </remarks>
-    public sealed partial class MetadataLoadContext : IDisposable
+    public sealed class MetadataLoadContext : IDisposable
     {
         /// <summary>
         /// Create a new MetadataLoadContext object.

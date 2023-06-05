@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace System.Collections.Immutable
 {
-    public sealed partial class ImmutableQueue<T>
+    partial public sealed class ImmutableQueue<T>
     {
         /// <summary>
         /// A memory allocation-free enumerator of <see cref="ImmutableQueue{T}"/>.

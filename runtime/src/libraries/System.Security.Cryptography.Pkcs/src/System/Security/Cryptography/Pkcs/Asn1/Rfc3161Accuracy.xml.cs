@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct Rfc3161Accuracy
+    partial internal struct Rfc3161Accuracy
     {
         internal int? Seconds;
         internal int? Millis;

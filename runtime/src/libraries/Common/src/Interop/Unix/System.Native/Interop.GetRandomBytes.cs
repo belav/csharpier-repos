@@ -4,15 +4,15 @@
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Interop.Libraries.SystemNative,
             EntryPoint = "SystemNative_GetNonCryptographicallySecureRandomBytes"
         )]
-        internal static unsafe partial void GetNonCryptographicallySecureRandomBytes(
+        partial internal static unsafe void GetNonCryptographicallySecureRandomBytes(
             byte* buffer,
             int length
         );
@@ -21,7 +21,7 @@ internal static partial class Interop
             Interop.Libraries.SystemNative,
             EntryPoint = "SystemNative_GetCryptographicallySecureRandomBytes"
         )]
-        internal static unsafe partial int GetCryptographicallySecureRandomBytes(
+        partial internal static unsafe int GetCryptographicallySecureRandomBytes(
             byte* buffer,
             int length
         );

@@ -29,7 +29,7 @@ internal sealed class AnalyzerConfigOptionsReader : IOptionsReader
         Options.TryGetEditorConfigOption(optionKey.Option, out value);
 }
 
-internal static partial class Extensions
+partial internal static class Extensions
 {
     public static IOptionsReader GetOptionsReader(this AnalyzerConfigOptions configOptions) =>
         configOptions as IOptionsReader ?? new AnalyzerConfigOptionsReader(configOptions);

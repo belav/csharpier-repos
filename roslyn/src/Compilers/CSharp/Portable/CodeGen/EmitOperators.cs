@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 {
-    internal partial class CodeGenerator
+    partial internal class CodeGenerator
     {
         private void EmitUnaryOperatorExpression(BoundUnaryOperator expression, bool used)
         {

@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
         Name = PredefinedCodeRefactoringProviderNames.EnableNullable
     )]
     [Shared]
-    internal partial class EnableNullableCodeRefactoringProvider : CodeRefactoringProvider
+    partial internal class EnableNullableCodeRefactoringProvider : CodeRefactoringProvider
     {
         private static readonly Func<
             DirectiveTriviaSyntax,

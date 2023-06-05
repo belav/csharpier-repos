@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
-    public partial class CodeGenMscorlibTests : EmitMetadataTestBase
+    partial public class CodeGenMscorlibTests : EmitMetadataTestBase
     {
         [WorkItem(544591, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544591")]
         [WorkItem(544609, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544609")]

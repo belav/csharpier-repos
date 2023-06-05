@@ -5,11 +5,12 @@ using System.Threading;
 
 namespace System.Net.Http
 {
+    partial
     /// <summary>
     /// Central repository for default values used in http handler settings.  Not all settings are relevant
     /// to or configurable by all handlers.
     /// </summary>
-    internal static partial class HttpHandlerDefaults
+    internal static class HttpHandlerDefaults
     {
         public const int DefaultMaxAutomaticRedirections = 50;
         public const int DefaultMaxResponseDrainSize = 1024 * 1024;

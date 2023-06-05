@@ -7,9 +7,10 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Ecma
 {
+    partial
     // This file has implementations of the .MethodImpl.cs logic from its base type.
 
-    public sealed partial class EcmaType : MetadataType
+    public sealed class EcmaType : MetadataType
     {
         // Virtual function related functionality
         public override MethodImplRecord[] FindMethodsImplWithMatchingDeclName(string declName)

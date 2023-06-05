@@ -8,7 +8,7 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
-    public static partial class JsonSerializer
+    partial public static class JsonSerializer
     {
         /// <summary>
         /// Parses the UTF-8 encoded text representing a single JSON value into a <typeparamref name="TValue"/>.

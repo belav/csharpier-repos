@@ -53,7 +53,7 @@ namespace System.ServiceModel.Diagnostics
             get { return (int)PerfCounters.TotalCounters; }
         }
 
-        static internal string CreateFriendlyInstanceName(ServiceHostBase serviceHost)
+        internal static string CreateFriendlyInstanceName(ServiceHostBase serviceHost)
         {
             // It is a shared instance across all services which have the default counter enabled
             return "_WCF_Admin";

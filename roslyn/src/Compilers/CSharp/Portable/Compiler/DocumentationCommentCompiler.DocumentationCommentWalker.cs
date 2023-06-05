@@ -17,9 +17,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     // Traverses the symbol table processing XML documentation comments and optionally writing them to
     // a provided stream.
-    internal partial class DocumentationCommentCompiler : CSharpSymbolVisitor
+    internal class DocumentationCommentCompiler : CSharpSymbolVisitor
     {
         /// <summary>
         /// Walks a DocumentationCommentTriviaSyntax, binding the semantically meaningful parts

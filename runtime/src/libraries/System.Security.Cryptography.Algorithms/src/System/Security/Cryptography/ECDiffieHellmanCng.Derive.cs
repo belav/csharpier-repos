@@ -6,9 +6,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECDiffieHellmanImplementation
+    partial internal static class ECDiffieHellmanImplementation
     {
-        public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+        partial public sealed class ECDiffieHellmanCng : ECDiffieHellman
         {
             // For the public ECDiffieHellmanCng this is exposed as the HashAlgorithm property
             // which is a CngAlgorithm type. We're not doing that, but we do need the default value

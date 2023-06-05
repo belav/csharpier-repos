@@ -25,11 +25,11 @@ namespace System.ServiceModel.Description
         const string StreamBodySchemaTypeName = "StreamBody";
         const string StreamBodySchemaTypeNamespace = GenericMessageSchemaTypeNamespace;
 
-        static internal XmlQualifiedName GenericMessageTypeName = new XmlQualifiedName(
+        internal static XmlQualifiedName GenericMessageTypeName = new XmlQualifiedName(
             GenericMessageSchemaTypeName,
             GenericMessageSchemaTypeNamespace
         );
-        static internal XmlQualifiedName StreamBodyTypeName = new XmlQualifiedName(
+        internal static XmlQualifiedName StreamBodyTypeName = new XmlQualifiedName(
             StreamBodySchemaTypeName,
             StreamBodySchemaTypeNamespace
         );

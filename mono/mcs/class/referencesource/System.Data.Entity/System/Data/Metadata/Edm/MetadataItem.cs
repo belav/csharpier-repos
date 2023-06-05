@@ -18,10 +18,11 @@ using System.Globalization;
 
 namespace System.Data.Metadata.Edm
 {
+    partial
     /// <summary>
     /// Represents the base item class for all the metadata
     /// </summary>
-    public abstract partial class MetadataItem
+    public abstract class MetadataItem
     {
         #region Constructors
         /// <summary>

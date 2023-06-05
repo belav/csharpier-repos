@@ -9,15 +9,15 @@ using Microsoft.Win32.SafeHandles;
 
 using CFRunLoopSourceRef = System.IntPtr;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class CoreFoundation
+    partial internal static class CoreFoundation
     {
         [LibraryImport(Libraries.CFNetworkLibrary)]
-        internal static partial SafeCFDictionaryHandle CFNetworkCopySystemProxySettings();
+        partial internal static SafeCFDictionaryHandle CFNetworkCopySystemProxySettings();
 
         [LibraryImport(Libraries.CFNetworkLibrary)]
-        internal static partial SafeCFArrayHandle CFNetworkCopyProxiesForURL(
+        partial internal static SafeCFArrayHandle CFNetworkCopyProxiesForURL(
             SafeCreateHandle url,
             SafeCFDictionaryHandle proxySettings
         );
@@ -29,7 +29,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.CFNetworkLibrary)]
-        internal static partial CFRunLoopSourceRef CFNetworkExecuteProxyAutoConfigurationURL(
+        partial internal static CFRunLoopSourceRef CFNetworkExecuteProxyAutoConfigurationURL(
             IntPtr proxyAutoConfigURL,
             SafeCreateHandle targetURL,
             CFProxyAutoConfigurationResultCallback cb,
@@ -37,7 +37,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.CFNetworkLibrary)]
-        internal static partial CFRunLoopSourceRef CFNetworkExecuteProxyAutoConfigurationScript(
+        partial internal static CFRunLoopSourceRef CFNetworkExecuteProxyAutoConfigurationScript(
             IntPtr proxyAutoConfigurationScript,
             SafeCreateHandle targetURL,
             CFProxyAutoConfigurationResultCallback cb,

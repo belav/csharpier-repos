@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class DirectiveTriviaSyntax
+    partial public class DirectiveTriviaSyntax
     {
         public SyntaxToken DirectiveNameToken
         {

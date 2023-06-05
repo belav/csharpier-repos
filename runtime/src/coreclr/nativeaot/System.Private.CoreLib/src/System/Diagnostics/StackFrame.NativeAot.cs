@@ -9,6 +9,7 @@ using Internal.DeveloperExperience;
 
 namespace System.Diagnostics
 {
+    partial
     /// <summary>
     /// Stack frame represents a single frame in a stack trace; frames
     /// corresponding to methods with available symbolic information
@@ -16,7 +17,7 @@ namespace System.Diagnostics
     /// offset information and / or MethodBase reflection information.
     /// There is no good reason for the methods of this class to be virtual.
     /// </summary>
-    public partial class StackFrame
+    public class StackFrame
     {
         /// <summary>
         /// IP address representing this stack frame.

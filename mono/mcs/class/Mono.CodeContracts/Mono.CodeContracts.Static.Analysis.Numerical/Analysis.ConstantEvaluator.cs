@@ -37,9 +37,9 @@ using Mono.CodeContracts.Static.Proving;
 
 namespace Mono.CodeContracts.Static.Analysis.Numerical
 {
-    static partial class AnalysisFacade
+    partial static class AnalysisFacade
     {
-        static partial class Bind<TVar, TExpr>
+        partial static class Bind<TVar, TExpr>
             where TExpr : IEquatable<TExpr>
             where TVar : IEquatable<TVar>
         {

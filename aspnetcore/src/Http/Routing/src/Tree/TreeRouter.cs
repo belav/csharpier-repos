@@ -10,10 +10,11 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
+partial
 /// <summary>
 /// An <see cref="IRouter"/> implementation for attribute routing.
 /// </summary>
-public partial class TreeRouter : IRouter
+public class TreeRouter : IRouter
 {
     /// <summary>
     /// Key used by routing and action selection to match an attribute
@@ -346,7 +347,7 @@ public partial class TreeRouter : IRouter
         return new VirtualPathData(this, path);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -354,7 +355,7 @@ public partial class TreeRouter : IRouter
             "Request successfully matched the route with name '{RouteName}' and template '{RouteTemplate}'",
             EventName = "RequestMatchedRoute"
         )]
-        public static partial void RequestMatchedRoute(
+        partial public static void RequestMatchedRoute(
             ILogger logger,
             string routeName,
             string routeTemplate

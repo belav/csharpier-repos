@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
         ),
         Shared
     ]
-    internal partial class CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider
+    partial internal class CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider
         : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]

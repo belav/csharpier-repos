@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class InstantiatedType
+    public class InstantiatedType
     {
         protected internal override int ClassCode => 1150020412;
 

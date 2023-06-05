@@ -11,7 +11,7 @@ namespace System.Threading
 {
     using OSThreadPriority = Interop.Kernel32.ThreadPriority;
 
-    public sealed partial class Thread
+    partial public sealed class Thread
     {
         [ThreadStatic]
         private static int t_reentrantWaitSuppressionCount;

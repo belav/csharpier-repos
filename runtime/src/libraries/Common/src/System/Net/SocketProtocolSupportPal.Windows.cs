@@ -9,7 +9,7 @@ using SocketType = System.Net.Internals.SocketType;
 
 namespace System.Net
 {
-    internal static partial class SocketProtocolSupportPal
+    partial internal static class SocketProtocolSupportPal
     {
         private static bool IsSupported(AddressFamily af)
         {

@@ -38,7 +38,7 @@ using System.Xml;
 namespace System.Configuration
 {
     [DebuggerDisplayAttribute("Count = {Count}")]
-    public abstract partial class ConfigurationElementCollection
+    partial public abstract class ConfigurationElementCollection
         : ConfigurationElement,
             ICollection,
             IEnumerable

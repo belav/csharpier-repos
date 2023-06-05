@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingStyle.ViewModel
 {
-    internal partial class NamingStyleSettingsViewModel
+    partial internal class NamingStyleSettingsViewModel
     {
         internal class SettingsEntriesSnapshot : SettingsEntriesSnapshotBase<NamingStyleSetting>
         {

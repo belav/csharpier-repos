@@ -9,11 +9,12 @@ using System.Reflection.Runtime.PropertyInfos;
 
 namespace System.Reflection.Runtime.ParameterInfos
 {
+    partial
     //
     // This implements ParameterInfo objects returned by PropertyInfo.GetIndexParameters(). Basically, they're identical to the underling accessor method's
     // ParameterInfo's except that the Member property returns the PropertyInfo rather than a MethodBase.
     //
-    internal sealed partial class RuntimePropertyIndexParameterInfo : RuntimeParameterInfo
+    internal sealed class RuntimePropertyIndexParameterInfo : RuntimeParameterInfo
     {
         private RuntimePropertyIndexParameterInfo(
             RuntimePropertyInfo member,

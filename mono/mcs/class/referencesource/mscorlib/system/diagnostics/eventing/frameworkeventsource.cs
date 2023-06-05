@@ -34,7 +34,7 @@ namespace System.Diagnostics.Tracing
         Guid = "8E9F5090-2D75-4d03-8A81-E5AFBF85DAF1",
         Name = "System.Diagnostics.Eventing.FrameworkEventSource"
     )]
-    sealed internal class FrameworkEventSource : EventSource
+    internal sealed class FrameworkEventSource : EventSource
     {
         // Defines the singleton instance for the Resources ETW provider
         public static readonly FrameworkEventSource Log = new FrameworkEventSource();

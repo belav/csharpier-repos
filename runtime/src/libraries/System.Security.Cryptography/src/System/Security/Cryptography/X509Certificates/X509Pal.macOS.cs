@@ -10,14 +10,14 @@ using System.Security.Cryptography.Asn1.Pkcs12;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal static partial class X509Pal
+    partial internal static class X509Pal
     {
-        private static partial IX509Pal BuildSingleton()
+        partial private static IX509Pal BuildSingleton()
         {
             return new AppleX509Pal();
         }
 
-        private sealed partial class AppleX509Pal : ManagedX509ExtensionProcessor, IX509Pal
+        partial private sealed class AppleX509Pal : ManagedX509ExtensionProcessor, IX509Pal
         {
             public AsymmetricAlgorithm DecodePublicKey(
                 Oid oid,

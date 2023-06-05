@@ -11,7 +11,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
-    public sealed partial class EnvironmentPermissionAttribute : CodeAccessSecurityAttribute
+    partial public sealed class EnvironmentPermissionAttribute : CodeAccessSecurityAttribute
     {
         public EnvironmentPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }

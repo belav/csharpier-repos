@@ -34,7 +34,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Internal;
 
-public partial class RequestDelegateFactoryTests : LoggedTest
+partial public class RequestDelegateFactoryTests : LoggedTest
 {
     public static IEnumerable<object[]> NoResult
     {
@@ -3744,7 +3744,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     [JsonSerializable(typeof(Todo))]
     [JsonSerializable(typeof(TodoChild))]
-    private partial class TestJsonContext : JsonSerializerContext { }
+    partial private class TestJsonContext : JsonSerializerContext { }
 
     [Theory]
     [MemberData(nameof(JsonContextActions))]

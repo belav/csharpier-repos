@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public partial class MsmqIntegrationBindingElement
+    partial public class MsmqIntegrationBindingElement
         : MsmqBindingElementBase,
             IBindingConfigurationElement
     {

@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Writes the specified buffer to the provided open file descriptor
@@ -22,6 +22,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_Write",
             SetLastError = true
         )]
-        internal static unsafe partial int Write(SafePipeHandle fd, byte* buffer, int bufferSize);
+        partial internal static unsafe int Write(SafePipeHandle fd, byte* buffer, int bufferSize);
     }
 }

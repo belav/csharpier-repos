@@ -16,10 +16,11 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
+    partial
     /// <summary>
     /// Interaction logic for InlineRenameAdornment.xaml
     /// </summary>
-    internal partial class RenameFlyout : InlineRenameAdornment
+    internal class RenameFlyout : InlineRenameAdornment
     {
         private readonly RenameFlyoutViewModel _viewModel;
         private readonly IWpfTextView _textView;

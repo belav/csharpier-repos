@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial struct SyntaxTriviaList
+    partial public struct SyntaxTriviaList
     {
         [StructLayout(LayoutKind.Auto)]
         public struct Enumerator

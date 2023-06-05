@@ -319,7 +319,7 @@ namespace System.Web.Services.Protocols
             type_to_manager = new Hashtable();
         }
 
-        static internal TypeStubInfo GetTypeStub(Type t, string protocolName)
+        internal static TypeStubInfo GetTypeStub(Type t, string protocolName)
         {
             LogicalTypeInfo tm = GetLogicalTypeInfo(t);
             return tm.GetTypeStub(protocolName);
@@ -328,7 +328,11 @@ namespace System.Web.Services.Protocols
         //
         // This needs to be thread safe
         //
-        static internal LogicalTypeInfo GetLogicalTypeInfo(Type t)
+        internal
+        //
+        // This needs to be thread safe
+        //
+        static LogicalTypeInfo GetLogicalTypeInfo(Type t)
         {
             lock (type_to_manager)
             {

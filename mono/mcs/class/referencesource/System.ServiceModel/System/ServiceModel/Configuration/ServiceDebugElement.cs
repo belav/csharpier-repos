@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Description;
     using System.Collections.Generic;
 
-    public sealed partial class ServiceDebugElement : BehaviorExtensionElement
+    partial public sealed class ServiceDebugElement : BehaviorExtensionElement
     {
         public ServiceDebugElement() { }
 

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class Binder
+    partial internal class Binder
     {
         // An anonymous function can be of the form:
         //

@@ -15,7 +15,7 @@ namespace ILLink.Shared.TypeSystemProxy
             Index = (ParameterIndex)parameter.Ordinal + (Method.HasImplicitThis() ? 1 : 0);
         }
 
-        public partial ReferenceKind GetReferenceKind() =>
+        partial public ReferenceKind GetReferenceKind() =>
             IsImplicitThis
                 ? Method.Method.ContainingType.IsValueType
                     ? ReferenceKind.Ref
@@ -48,14 +48,14 @@ namespace ILLink.Shared.TypeSystemProxy
                 ? new TypeProxy(Method.Method.ContainingType)
                 : new TypeProxy(Method.Method.Parameters[MetadataIndex].Type);
 
-        public partial string GetDisplayName()
+        partial public string GetDisplayName()
         {
             if (IsImplicitThis)
                 return "this";
             return ParameterSymbol!.GetDisplayName();
         }
 
-        public partial bool IsTypeOf(string typeName) =>
+        partial public bool IsTypeOf(string typeName) =>
             ParameterType.IsTypeOf(
                 typeName.Substring(0, typeName.LastIndexOf('.')),
                 typeName.Substring(1 + typeName.LastIndexOf('.'))

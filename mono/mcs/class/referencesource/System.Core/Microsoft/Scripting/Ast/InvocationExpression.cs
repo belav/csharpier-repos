@@ -144,7 +144,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         ///<summary>
         ///Creates an <see cref="T:System.Linq.Expressions.InvocationExpression" /> that

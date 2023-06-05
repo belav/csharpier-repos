@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class ComContractElement : ConfigurationElement
+    partial public sealed class ComContractElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct Rfc3161TimeStampReq
+    partial internal struct Rfc3161TimeStampReq
     {
         private static ReadOnlySpan<byte> DefaultCertReq => new byte[] { 0x01, 0x01, 0x00 };
 

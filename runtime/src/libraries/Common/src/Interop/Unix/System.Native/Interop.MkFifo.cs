@@ -3,10 +3,11 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
+    partial
     // mkfifo: https://man7.org/linux/man-pages/man3/mkfifo.3.html
-    internal static partial class Sys
+    internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
@@ -14,6 +15,6 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial int MkFifo(string pathName, uint mode);
+        partial internal static int MkFifo(string pathName, uint mode);
     }
 }

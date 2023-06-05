@@ -11,7 +11,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Pipes
 {
-    public abstract partial class PipeStream : Stream
+    partial public abstract class PipeStream : Stream
     {
         internal const bool CheckOperationsRequiresSetHandle = true;
         internal ThreadPoolBoundHandle? _threadPoolBinding;

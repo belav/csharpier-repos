@@ -53,35 +53,35 @@ namespace Mono.Btls
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_name_print_bio(IntPtr handle, IntPtr bio);
+        static extern int mono_btls_x509_name_print_bio(IntPtr handle, IntPtr bio);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_name_print_string(IntPtr handle, IntPtr buffer, int size);
+        static extern int mono_btls_x509_name_print_string(IntPtr handle, IntPtr buffer, int size);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_name_get_raw_data(
+        static extern int mono_btls_x509_name_get_raw_data(
             IntPtr handle,
             out IntPtr buffer,
             int use_canon_enc
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static long mono_btls_x509_name_hash(IntPtr handle);
+        static extern long mono_btls_x509_name_hash(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static long mono_btls_x509_name_hash_old(IntPtr handle);
+        static extern long mono_btls_x509_name_hash_old(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_name_get_entry_count(IntPtr handle);
+        static extern int mono_btls_x509_name_get_entry_count(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static MonoBtlsX509NameEntryType mono_btls_x509_name_get_entry_type(
+        static extern MonoBtlsX509NameEntryType mono_btls_x509_name_get_entry_type(
             IntPtr name,
             int index
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_name_get_entry_oid(
+        static extern int mono_btls_x509_name_get_entry_oid(
             IntPtr name,
             int index,
             IntPtr buffer,
@@ -89,14 +89,14 @@ namespace Mono.Btls
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_name_get_entry_oid_data(
+        static extern int mono_btls_x509_name_get_entry_oid_data(
             IntPtr name,
             int index,
             out IntPtr data
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_name_get_entry_value(
+        static extern int mono_btls_x509_name_get_entry_value(
             IntPtr name,
             int index,
             out int tag,
@@ -104,16 +104,16 @@ namespace Mono.Btls
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern unsafe static IntPtr mono_btls_x509_name_from_data(
+        static extern unsafe IntPtr mono_btls_x509_name_from_data(
             void* data,
             int len,
             int use_canon_enc
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_x509_name_free(IntPtr handle);
+        static extern void mono_btls_x509_name_free(IntPtr handle);
 
-        new internal BoringX509NameHandle Handle
+        internal new BoringX509NameHandle Handle
         {
             get { return (BoringX509NameHandle)base.Handle; }
         }

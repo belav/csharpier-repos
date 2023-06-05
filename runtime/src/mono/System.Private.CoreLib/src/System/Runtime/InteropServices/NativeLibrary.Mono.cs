@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
 {
-    public partial class NativeLibrary
+    partial public class NativeLibrary
     {
         private static IntPtr LoadLibraryByName(
             string libraryName,

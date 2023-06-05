@@ -44,6 +44,7 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     public class LdapConstraints : System.ICloneable
     {
+        public
         /// <summary> Returns the maximum number of referrals to follow during automatic
         /// referral following.  The operation will be abandoned and terminated by
         /// the API with a result code of LdapException.REFERRAL_LIMIT_EXCEEDED
@@ -74,7 +75,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <seealso cref="LdapException.REFERRAL_LIMIT_EXCEEDED">
         /// </seealso>
-        virtual public int HopLimit
+        virtual int HopLimit
         {
             get { return hopLimit; }
             set
@@ -84,6 +85,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        internal
         /// <summary> Gets all the properties of the constraints object which has been
         /// assigned with {@link #setProperty(String, Object)}.
         /// A value of <code>null</code> is returned if no properties are defined.
@@ -98,7 +100,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="props">the properties represented by the Hashtable object to set.
         /// </param>
-        virtual internal System.Collections.Hashtable Properties
+        virtual System.Collections.Hashtable Properties
         {
             /* package */
 
@@ -112,6 +114,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Specified whether or not referrals are followed automatically.
         ///
         /// </summary>
@@ -132,7 +135,7 @@ namespace Novell.Directory.Ldap
         /// False to throw an LdapReferralException if
         /// the server returns a referral.
         /// </param>
-        virtual public bool ReferralFollowing
+        virtual bool ReferralFollowing
         {
             get { return doReferrals; }
             set
@@ -142,6 +145,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the maximum number of milliseconds to wait for any operation
         /// under these constraints.
         ///
@@ -175,7 +179,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <seealso cref="LdapException.Ldap_TIMEOUT">
         /// </seealso>
-        virtual public int TimeLimit
+        virtual int TimeLimit
         {
             get { return msLimit; }
             set

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Net.Sockets
 {
-    internal static partial class SocketExceptionFactory
+    partial internal static class SocketExceptionFactory
     {
         private static string CreateMessage(int nativeSocketError, EndPoint endPoint)
         {

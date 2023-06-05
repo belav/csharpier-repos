@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {
+    partial
     /// <summary>
     /// Contains the extensions methods for using JSON as the content-type in HttpClient.
     /// </summary>
-    public static partial class HttpClientJsonExtensions
+    public static class HttpClientJsonExtensions
     {
         /// <summary>
         /// Sends a DELETE request to the specified Uri and returns the value that results from deserializing the response body as JSON in an asynchronous operation.

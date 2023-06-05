@@ -6,9 +6,9 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        private sealed partial class Concat2Iterator<TSource> : ConcatIterator<TSource>
+        partial private sealed class Concat2Iterator<TSource> : ConcatIterator<TSource>
         {
             public override int GetCount(bool onlyIfCheap)
             {
@@ -63,7 +63,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class ConcatNIterator<TSource> : ConcatIterator<TSource>
+        partial private sealed class ConcatNIterator<TSource> : ConcatIterator<TSource>
         {
             public override int GetCount(bool onlyIfCheap)
             {
@@ -193,7 +193,7 @@ namespace System.Linq
             }
         }
 
-        private abstract partial class ConcatIterator<TSource> : IIListProvider<TSource>
+        partial private abstract class ConcatIterator<TSource> : IIListProvider<TSource>
         {
             public abstract int GetCount(bool onlyIfCheap);
 

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal sealed partial class RequestQueue
+partial internal sealed class RequestQueue
 {
     private readonly RequestQueueMode _mode;
     private readonly ILogger _logger;
@@ -180,7 +180,7 @@ internal sealed partial class RequestQueue
         ObjectDisposedException.ThrowIf(_disposed, this);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.AttachedToQueue,
@@ -188,6 +188,6 @@ internal sealed partial class RequestQueue
             "Attached to an existing request queue '{RequestQueueName}', some options do not apply.",
             EventName = "AttachedToQueue"
         )]
-        public static partial void AttachedToQueue(ILogger logger, string? requestQueueName);
+        partial public static void AttachedToQueue(ILogger logger, string? requestQueueName);
     }
 }

@@ -73,7 +73,7 @@ namespace System.ServiceModel.Syndication
             get { return true; }
         }
 
-        internal protected virtual SyndicationCategory CreateCategory()
+        protected internal virtual SyndicationCategory CreateCategory()
         {
             return new SyndicationCategory();
         }

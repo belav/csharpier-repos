@@ -8,12 +8,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Threading
 {
+    partial
     //
     // WebAssembly-specific implementation of Timer
     // Based on TimerQueue.Portable.cs
     // Not thread safe
     //
-    internal partial class TimerQueue
+    internal class TimerQueue
     {
         private static List<TimerQueue>? s_scheduledTimers;
         private static List<TimerQueue>? s_scheduledTimersToFire;

@@ -6,10 +6,11 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
+partial
 /// <summary>
 /// Defines *all* the logger messages produced by static files
 /// </summary>
-internal static partial class LoggerExtensions
+internal static class LoggerExtensions
 {
     [LoggerMessage(
         1,
@@ -17,7 +18,7 @@ internal static partial class LoggerExtensions
         "{Method} requests are not supported",
         EventName = "MethodNotSupported"
     )]
-    public static partial void RequestMethodNotSupported(this ILogger logger, string method);
+    partial public static void RequestMethodNotSupported(this ILogger logger, string method);
 
     [LoggerMessage(
         2,
@@ -25,7 +26,7 @@ internal static partial class LoggerExtensions
         "Sending file. Request path: '{VirtualPath}'. Physical path: '{PhysicalPath}'",
         EventName = "FileServed"
     )]
-    private static partial void FileServedCore(
+    partial private static void FileServedCore(
         this ILogger logger,
         string virtualPath,
         string physicalPath
@@ -46,7 +47,7 @@ internal static partial class LoggerExtensions
         "Static files was skipped as the request already matched an endpoint.",
         EventName = "EndpointMatched"
     )]
-    public static partial void EndpointMatched(this ILogger logger);
+    partial public static void EndpointMatched(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -54,7 +55,7 @@ internal static partial class LoggerExtensions
         "The request path {Path} does not match the path filter",
         EventName = "PathMismatch"
     )]
-    public static partial void PathMismatch(this ILogger logger, string path);
+    partial public static void PathMismatch(this ILogger logger, string path);
 
     [LoggerMessage(
         4,
@@ -62,7 +63,7 @@ internal static partial class LoggerExtensions
         "The request path {Path} does not match a supported file type",
         EventName = "FileTypeNotSupported"
     )]
-    public static partial void FileTypeNotSupported(this ILogger logger, string path);
+    partial public static void FileTypeNotSupported(this ILogger logger, string path);
 
     [LoggerMessage(
         5,
@@ -70,7 +71,7 @@ internal static partial class LoggerExtensions
         "The request path {Path} does not match an existing file",
         EventName = "FileNotFound"
     )]
-    public static partial void FileNotFound(this ILogger logger, string path);
+    partial public static void FileNotFound(this ILogger logger, string path);
 
     [LoggerMessage(
         6,
@@ -78,7 +79,7 @@ internal static partial class LoggerExtensions
         "The file {Path} was not modified",
         EventName = "FileNotModified"
     )]
-    public static partial void FileNotModified(this ILogger logger, string path);
+    partial public static void FileNotModified(this ILogger logger, string path);
 
     [LoggerMessage(
         7,
@@ -86,7 +87,7 @@ internal static partial class LoggerExtensions
         "Precondition for {Path} failed",
         EventName = "PreconditionFailed"
     )]
-    public static partial void PreconditionFailed(this ILogger logger, string path);
+    partial public static void PreconditionFailed(this ILogger logger, string path);
 
     [LoggerMessage(
         8,
@@ -94,7 +95,7 @@ internal static partial class LoggerExtensions
         "Handled. Status code: {StatusCode} File: {Path}",
         EventName = "Handled"
     )]
-    public static partial void Handled(this ILogger logger, int statusCode, string path);
+    partial public static void Handled(this ILogger logger, int statusCode, string path);
 
     [LoggerMessage(
         9,
@@ -102,7 +103,7 @@ internal static partial class LoggerExtensions
         "Range not satisfiable for {Path}",
         EventName = "RangeNotSatisfiable"
     )]
-    public static partial void RangeNotSatisfiable(this ILogger logger, string path);
+    partial public static void RangeNotSatisfiable(this ILogger logger, string path);
 
     [LoggerMessage(
         10,
@@ -110,7 +111,7 @@ internal static partial class LoggerExtensions
         "Sending {Range} of file {Path}",
         EventName = "SendingFileRange"
     )]
-    public static partial void SendingFileRange(
+    partial public static void SendingFileRange(
         this ILogger logger,
         StringValues range,
         string path
@@ -122,7 +123,7 @@ internal static partial class LoggerExtensions
         "Copying {Range} of file {Path} to the response body",
         EventName = "CopyingFileRange"
     )]
-    public static partial void CopyingFileRange(
+    partial public static void CopyingFileRange(
         this ILogger logger,
         StringValues range,
         string path
@@ -134,7 +135,7 @@ internal static partial class LoggerExtensions
         "The file transmission was cancelled",
         EventName = "WriteCancelled"
     )]
-    public static partial void WriteCancelled(this ILogger logger, Exception ex);
+    partial public static void WriteCancelled(this ILogger logger, Exception ex);
 
     [LoggerMessage(
         16,
@@ -142,5 +143,5 @@ internal static partial class LoggerExtensions
         "The WebRootPath was not found: {WebRootPath}. Static files may be unavailable.",
         EventName = "WebRootPathNotFound"
     )]
-    public static partial void WebRootPathNotFound(this ILogger logger, string webRootPath);
+    partial public static void WebRootPathNotFound(this ILogger logger, string webRootPath);
 }

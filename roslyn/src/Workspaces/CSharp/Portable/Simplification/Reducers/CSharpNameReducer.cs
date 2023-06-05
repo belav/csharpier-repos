@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
-    internal partial class CSharpNameReducer : AbstractCSharpReducer
+    partial internal class CSharpNameReducer : AbstractCSharpReducer
     {
         private static readonly ObjectPool<IReductionRewriter> s_pool =
             new(() => new Rewriter(s_pool));

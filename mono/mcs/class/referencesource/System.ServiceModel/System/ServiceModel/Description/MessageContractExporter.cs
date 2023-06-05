@@ -20,12 +20,12 @@ namespace System.ServiceModel.Description
 
     abstract class MessageContractExporter
     {
-        readonly protected WsdlContractConversionContext contractContext;
-        readonly protected WsdlExporter exporter;
-        readonly protected OperationDescription operation;
-        readonly protected IOperationBehavior extension;
+        protected readonly WsdlContractConversionContext contractContext;
+        protected readonly WsdlExporter exporter;
+        protected readonly OperationDescription operation;
+        protected readonly IOperationBehavior extension;
 
-        static internal void ExportMessageBinding(
+        internal static void ExportMessageBinding(
             WsdlExporter exporter,
             WsdlEndpointConversionContext endpointContext,
             Type messageContractExporterType,
@@ -424,7 +424,7 @@ namespace System.ServiceModel.Description
             get { return exporter.GeneratedXmlSchemas; }
         }
 
-        static protected WsdlNS.MessagePart AddMessagePart(
+        protected static WsdlNS.MessagePart AddMessagePart(
             WsdlNS.Message message,
             string partName,
             XmlQualifiedName elementName,
@@ -506,7 +506,7 @@ namespace System.ServiceModel.Description
             return null;
         }
 
-        static protected bool IsNullOrEmpty(XmlQualifiedName qname)
+        protected static bool IsNullOrEmpty(XmlQualifiedName qname)
         {
             return qname == null || qname.IsEmpty;
         }
@@ -1222,7 +1222,7 @@ namespace System.ServiceModel.Description
 
         protected class MessageExportContext
         {
-            readonly internal Dictionary<
+            internal readonly Dictionary<
                 MessageDescriptionDictionaryKey,
                 WsdlNS.Message
             > WsdlMessages =
@@ -1230,7 +1230,7 @@ namespace System.ServiceModel.Description
                     MessageDescriptionDictionaryKey,
                     System.Web.Services.Description.Message
                 >();
-            readonly internal Dictionary<
+            internal readonly Dictionary<
                 MessageDescriptionDictionaryKey,
                 WsdlNS.Message
             > WsdlHeaderMessages =
@@ -1238,17 +1238,17 @@ namespace System.ServiceModel.Description
                     MessageDescriptionDictionaryKey,
                     System.Web.Services.Description.Message
                 >();
-            readonly internal Dictionary<
+            internal readonly Dictionary<
                 MessageDescriptionDictionaryKey,
                 string
             > WrapperNamespaces = new Dictionary<MessageDescriptionDictionaryKey, string>();
-            readonly internal Dictionary<TypedMessageKey, WsdlNS.Message> TypedMessages =
+            internal readonly Dictionary<TypedMessageKey, WsdlNS.Message> TypedMessages =
                 new Dictionary<TypedMessageKey, WsdlNS.Message>();
-            readonly internal Dictionary<TypedMessageKey, WsdlNS.Message> TypedHeaderMessages =
+            internal readonly Dictionary<TypedMessageKey, WsdlNS.Message> TypedHeaderMessages =
                 new Dictionary<TypedMessageKey, WsdlNS.Message>();
-            readonly internal Dictionary<OperationMessageKey, WsdlNS.Message> ParameterMessages =
+            internal readonly Dictionary<OperationMessageKey, WsdlNS.Message> ParameterMessages =
                 new Dictionary<OperationMessageKey, WsdlNS.Message>();
-            readonly internal Dictionary<XmlQualifiedName, OperationElement> ElementTypes =
+            internal readonly Dictionary<XmlQualifiedName, OperationElement> ElementTypes =
                 new Dictionary<XmlQualifiedName, OperationElement>();
         }
 
@@ -1470,7 +1470,7 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static internal bool IsTypeNullable(Type type)
+        internal static bool IsTypeNullable(Type type)
         {
             return !type.IsValueType
                 || (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));

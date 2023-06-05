@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    internal sealed partial class RuntimeModule : Module
+    partial internal sealed class RuntimeModule : Module
     {
         internal RuntimeModule()
         {
@@ -22,7 +22,7 @@ namespace System.Reflection
             EntryPoint = "RuntimeModule_GetType",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial void GetType(
+        partial private static void GetType(
             QCallModule module,
             string className,
             [MarshalAs(UnmanagedType.Bool)] bool throwOnError,
@@ -32,10 +32,10 @@ namespace System.Reflection
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "RuntimeModule_GetScopeName")]
-        private static partial void GetScopeName(QCallModule module, StringHandleOnStack retString);
+        partial private static void GetScopeName(QCallModule module, StringHandleOnStack retString);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "RuntimeModule_GetFullyQualifiedName")]
-        private static partial void GetFullyQualifiedName(
+        partial private static void GetFullyQualifiedName(
             QCallModule module,
             StringHandleOnStack retString
         );

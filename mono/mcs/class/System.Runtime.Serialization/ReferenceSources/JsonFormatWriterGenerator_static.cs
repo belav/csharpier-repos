@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace System.Runtime.Serialization.Json
 {
-    internal partial class JsonFormatWriterGenerator
+    partial internal class JsonFormatWriterGenerator
     {
         partial class CriticalHelper
         {

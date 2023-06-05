@@ -7,7 +7,7 @@
 namespace System.ComponentModel
 {
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class BrowsableAttribute : System.Attribute
+    partial public sealed class BrowsableAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.BrowsableAttribute Default;
         public static readonly System.ComponentModel.BrowsableAttribute No;
@@ -39,7 +39,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public partial class CategoryAttribute : System.Attribute
+    partial public class CategoryAttribute : System.Attribute
     {
         public CategoryAttribute() { }
 
@@ -130,7 +130,7 @@ namespace System.ComponentModel
     }
 
     [System.ComponentModel.DesignerCategoryAttribute("Component")]
-    public partial class Component
+    partial public class Component
         : System.MarshalByRefObject,
             System.ComponentModel.IComponent,
             System.IDisposable
@@ -201,7 +201,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class ComponentCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ComponentCollection : System.Collections.ReadOnlyCollectionBase
     {
         public ComponentCollection(System.ComponentModel.IComponent[] components) { }
 
@@ -218,7 +218,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public partial class DescriptionAttribute : System.Attribute
+    partial public class DescriptionAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DescriptionAttribute Default;
 
@@ -259,7 +259,7 @@ namespace System.ComponentModel
         AllowMultiple = true,
         Inherited = true
     )]
-    public sealed partial class DesignerAttribute : System.Attribute
+    partial public sealed class DesignerAttribute : System.Attribute
     {
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -384,7 +384,7 @@ namespace System.ComponentModel
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class DesignerCategoryAttribute : System.Attribute
+    partial public sealed class DesignerCategoryAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DesignerCategoryAttribute Component;
         public static readonly System.ComponentModel.DesignerCategoryAttribute Default;
@@ -435,7 +435,7 @@ namespace System.ComponentModel
             | System.AttributeTargets.Method
             | System.AttributeTargets.Property
     )]
-    public sealed partial class DesignerSerializationVisibilityAttribute : System.Attribute
+    partial public sealed class DesignerSerializationVisibilityAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DesignerSerializationVisibilityAttribute Content;
         public static readonly System.ComponentModel.DesignerSerializationVisibilityAttribute Default;
@@ -470,7 +470,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class DesignOnlyAttribute : System.Attribute
+    partial public sealed class DesignOnlyAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DesignOnlyAttribute Default;
         public static readonly System.ComponentModel.DesignOnlyAttribute No;
@@ -507,7 +507,7 @@ namespace System.ComponentModel
             | System.AttributeTargets.Method
             | System.AttributeTargets.Property
     )]
-    public partial class DisplayNameAttribute : System.Attribute
+    partial public class DisplayNameAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DisplayNameAttribute Default;
 
@@ -548,7 +548,7 @@ namespace System.ComponentModel
         AllowMultiple = true,
         Inherited = true
     )]
-    public sealed partial class EditorAttribute : System.Attribute
+    partial public sealed class EditorAttribute : System.Attribute
     {
         public EditorAttribute() { }
 
@@ -616,7 +616,7 @@ namespace System.ComponentModel
         }
     }
 
-    public sealed partial class EventHandlerList : System.IDisposable
+    partial public sealed class EventHandlerList : System.IDisposable
     {
         public EventHandlerList() { }
 
@@ -645,13 +645,13 @@ namespace System.ComponentModel
     [System.ComponentModel.TypeConverterAttribute(
         "System.ComponentModel.ComponentConverter, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial interface IComponent : System.IDisposable
+    partial public interface IComponent : System.IDisposable
     {
         System.ComponentModel.ISite? Site { get; set; }
         event System.EventHandler? Disposed;
     }
 
-    public partial interface IContainer : System.IDisposable
+    partial public interface IContainer : System.IDisposable
     {
         System.ComponentModel.ComponentCollection Components { get; }
         void Add(System.ComponentModel.IComponent? component);
@@ -664,7 +664,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class ImmutableObjectAttribute : System.Attribute
+    partial public sealed class ImmutableObjectAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.ImmutableObjectAttribute Default;
         public static readonly System.ComponentModel.ImmutableObjectAttribute No;
@@ -696,7 +696,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class InitializationEventAttribute : System.Attribute
+    partial public sealed class InitializationEventAttribute : System.Attribute
     {
         public InitializationEventAttribute(string eventName) { }
 
@@ -706,7 +706,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class InvalidAsynchronousStateException : System.ArgumentException
+    partial public class InvalidAsynchronousStateException : System.ArgumentException
     {
         public InvalidAsynchronousStateException() { }
 
@@ -721,7 +721,7 @@ namespace System.ComponentModel
         { }
     }
 
-    public partial class InvalidEnumArgumentException : System.ArgumentException
+    partial public class InvalidEnumArgumentException : System.ArgumentException
     {
         public InvalidEnumArgumentException() { }
 
@@ -741,7 +741,7 @@ namespace System.ComponentModel
         ) { }
     }
 
-    public partial interface ISite : System.IServiceProvider
+    partial public interface ISite : System.IServiceProvider
     {
         System.ComponentModel.IComponent Component { get; }
         System.ComponentModel.IContainer? Container { get; }
@@ -756,13 +756,13 @@ namespace System.ComponentModel
         }
     }
 
-    public partial interface ISupportInitialize
+    partial public interface ISupportInitialize
     {
         void BeginInit();
         void EndInit();
     }
 
-    public partial interface ISynchronizeInvoke
+    partial public interface ISynchronizeInvoke
     {
         bool InvokeRequired { get; }
         System.IAsyncResult BeginInvoke(System.Delegate method, object?[]? args);
@@ -771,7 +771,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class LocalizableAttribute : System.Attribute
+    partial public sealed class LocalizableAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.LocalizableAttribute Default;
         public static readonly System.ComponentModel.LocalizableAttribute No;
@@ -803,7 +803,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class MergablePropertyAttribute : System.Attribute
+    partial public sealed class MergablePropertyAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.MergablePropertyAttribute Default;
         public static readonly System.ComponentModel.MergablePropertyAttribute No;
@@ -835,7 +835,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class NotifyParentPropertyAttribute : System.Attribute
+    partial public sealed class NotifyParentPropertyAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.NotifyParentPropertyAttribute Default;
         public static readonly System.ComponentModel.NotifyParentPropertyAttribute No;
@@ -867,7 +867,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class ParenthesizePropertyNameAttribute : System.Attribute
+    partial public sealed class ParenthesizePropertyNameAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.ParenthesizePropertyNameAttribute Default;
 
@@ -899,7 +899,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class ReadOnlyAttribute : System.Attribute
+    partial public sealed class ReadOnlyAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.ReadOnlyAttribute Default;
         public static readonly System.ComponentModel.ReadOnlyAttribute No;
@@ -938,7 +938,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class RefreshPropertiesAttribute : System.Attribute
+    partial public sealed class RefreshPropertiesAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.RefreshPropertiesAttribute All;
         public static readonly System.ComponentModel.RefreshPropertiesAttribute Default;
@@ -977,7 +977,7 @@ namespace System.ComponentModel.Design.Serialization
         AllowMultiple = true,
         Inherited = true
     )]
-    public sealed partial class DesignerSerializerAttribute : System.Attribute
+    partial public sealed class DesignerSerializerAttribute : System.Attribute
     {
         public DesignerSerializerAttribute(
             string? serializerTypeName,

@@ -7,12 +7,13 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Thunk that replaces calls to MethodBase.GetCurrentMethod in user code. The purpose of the thunk
     /// is to LDTOKEN the method considered "current method" and call into the class library to
     /// retrieve the associated MethodBase object instance.
     /// </summary>
-    internal sealed partial class MethodBaseGetCurrentMethodThunk : ILStubMethod
+    internal sealed class MethodBaseGetCurrentMethodThunk : ILStubMethod
     {
         public MethodBaseGetCurrentMethodThunk(MethodDesc method)
         {

@@ -8,10 +8,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Pipes.Tests
 {
+    partial
     /// <summary>
     /// The class contains interop declarations and helpers methods for them.
     /// </summary>
-    internal static partial class InteropTest
+    internal static class InteropTest
     {
         [DllImport("libc", SetLastError = true)]
         private static extern unsafe int gethostname(byte* name, int len);

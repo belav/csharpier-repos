@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Microsoft.Extensions.Logging.Generators
 {
-    public partial class LoggerMessageGenerator
+    partial public class LoggerMessageGenerator
     {
         internal class Emitter
         {

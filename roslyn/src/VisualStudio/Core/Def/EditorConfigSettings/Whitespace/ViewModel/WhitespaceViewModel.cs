@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespace.ViewModel
 {
-    internal partial class WhitespaceViewModel
+    partial internal class WhitespaceViewModel
         : SettingsViewModelBase<
             Setting,
             WhitespaceViewModel.SettingsSnapshotFactory,

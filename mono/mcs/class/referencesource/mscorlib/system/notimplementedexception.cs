@@ -21,7 +21,7 @@ namespace System
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    public partial class NotImplementedException : SystemException
+    partial public class NotImplementedException : SystemException
     {
         public NotImplementedException()
             : base(Environment.GetResourceString("Arg_NotImplementedException"))

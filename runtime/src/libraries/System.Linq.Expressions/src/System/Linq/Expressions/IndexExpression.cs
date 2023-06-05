@@ -127,7 +127,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates an <see cref="IndexExpression"/> that represents accessing an indexed property in an object.

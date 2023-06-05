@@ -140,7 +140,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.partial04b.partial04b
 {
-    public partial class Parent
+    partial public class Parent
     {
         partial void Foo(int? i = 0);
     }
@@ -148,12 +148,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.partial04b.partial04b
 {
+    partial
     // <Area>Declaration of Methods with Optional Parameters</Area>
     // <Title>Declaration of Optional Params</Title>
     // <Description>Simple Declaration of a Partial class with OPs</Description>
     // <Expects status=success></Expects>
     // <Code>
-    public partial class Parent
+    public class Parent
     {
         public Parent()
         {

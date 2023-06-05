@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct CRYPT_OID_INFO
@@ -128,7 +128,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Interop.Libraries.Crypt32)]
-        private static unsafe partial CRYPT_OID_INFO* CryptFindOIDInfo(
+        partial private static unsafe CRYPT_OID_INFO* CryptFindOIDInfo(
             CryptOidInfoKeyType dwKeyType,
             IntPtr pvKey,
             OidGroup group

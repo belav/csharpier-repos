@@ -6,10 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorWpfApp
 {
+    partial
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public class MainWindow : Window
     {
         private readonly AppState _appState = new();
 
@@ -33,7 +34,8 @@ namespace BlazorWpfApp
         }
     }
 
+    partial
     // Workaround for compiler error "error MC3050: Cannot find the type 'local:Main'"
     // It seems that, although WPF's design-time build can see Razor components, its runtime build cannot.
-    public partial class Main { }
+    public class Main { }
 }

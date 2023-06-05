@@ -140,8 +140,9 @@ namespace System.Diagnostics
             _SetMaxNumberOfFiles(maximumNumberOfFiles, false);
         }
 
+        public
         // Hide base class version
-        new public TextWriter Writer
+        new TextWriter Writer
         {
             [System.Security.SecurityCritical]
             get

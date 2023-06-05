@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class IMethodSymbolExtensions
+    partial internal static class IMethodSymbolExtensions
     {
         public static bool CompatibleSignatureToDelegate(
             this IMethodSymbol method,

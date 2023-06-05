@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class File_Copy_str_str : FileSystemTest
+    partial public class File_Copy_str_str : FileSystemTest
     {
         protected virtual void Copy(string source, string dest)
         {

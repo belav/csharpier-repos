@@ -3,9 +3,9 @@
 
 namespace Microsoft.AspNetCore.BenchmarkDotNet.Runner;
 
-internal partial class Program
+partial internal class Program
 {
-    static partial void BeforeMain(string[] args)
+    partial static void BeforeMain(string[] args)
     {
         if (args.Length == 0 || args[0] != "--profile")
         {

@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter
+    partial internal sealed class LocalRewriter
     {
         /// <summary>
         /// If the condition has a constant value, then just use the selected branch.

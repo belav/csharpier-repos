@@ -28,10 +28,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
+    partial
     /// <summary>
     /// Base type of all asynchronous tagger providers (<see cref="ITaggerProvider"/> and <see cref="IViewTaggerProvider"/>).
     /// </summary>
-    internal abstract partial class AbstractAsynchronousTaggerProvider<TTag>
+    internal abstract class AbstractAsynchronousTaggerProvider<TTag>
         where TTag : ITag
     {
         private readonly object _uniqueKey = new();

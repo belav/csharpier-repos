@@ -957,7 +957,7 @@ namespace Mono.CSharp
     [System.Diagnostics.DebuggerDisplay("{DisplayDebugInfo()}")]
     public class TypeParameterSpec : TypeSpec
     {
-        public static readonly new TypeParameterSpec[] EmptyTypes = new TypeParameterSpec[0];
+        public static new readonly TypeParameterSpec[] EmptyTypes = new TypeParameterSpec[0];
 
         Variance variance;
         SpecialConstraint spec;

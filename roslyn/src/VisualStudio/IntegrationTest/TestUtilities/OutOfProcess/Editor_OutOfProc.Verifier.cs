@@ -11,10 +11,11 @@ using Xunit;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
+    partial
     /// <summary>
     /// Provides a means of interacting with the Visual Studio editor by remoting calls into Visual Studio.
     /// </summary>
-    public partial class Editor_OutOfProc : TextViewWindow_OutOfProc
+    public class Editor_OutOfProc : TextViewWindow_OutOfProc
     {
         public class Verifier : Verifier<Editor_OutOfProc>
         {

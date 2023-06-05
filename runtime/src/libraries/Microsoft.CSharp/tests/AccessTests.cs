@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Microsoft.CSharp.RuntimeBinder.Tests
 {
-    public partial class AccessTests
+    partial public class AccessTests
     {
         public abstract class PublicReferenceType
         {

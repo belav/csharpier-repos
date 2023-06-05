@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class CommonReferenceManager<TCompilation, TAssemblySymbol>
+    partial internal class CommonReferenceManager<TCompilation, TAssemblySymbol>
     {
         /// <summary>
         /// Result of binding an input assembly and its references.

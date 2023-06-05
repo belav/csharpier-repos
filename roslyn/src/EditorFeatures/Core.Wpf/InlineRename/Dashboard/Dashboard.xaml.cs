@@ -22,7 +22,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal partial class Dashboard : UserControl, IDisposable
+    partial internal class Dashboard : UserControl, IDisposable
     {
         private readonly DashboardViewModel _model;
         private readonly IWpfTextView _textView;

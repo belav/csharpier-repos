@@ -15,7 +15,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-internal sealed partial class DefaultHealthCheckService : HealthCheckService
+partial internal sealed class DefaultHealthCheckService : HealthCheckService
 {
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly IOptions<HealthCheckServiceOptions> _options;
@@ -222,7 +222,7 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
         );
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             EventIds.HealthCheckProcessingBeginId,
@@ -230,7 +230,7 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
             "Running health checks",
             EventName = EventIds.HealthCheckProcessingBeginName
         )]
-        public static partial void HealthCheckProcessingBegin(ILogger logger);
+        partial public static void HealthCheckProcessingBegin(ILogger logger);
 
         public static void HealthCheckProcessingEnd(
             ILogger logger,
@@ -244,7 +244,7 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
             "Health check processing with combined status {HealthStatus} completed after {ElapsedMilliseconds}ms",
             EventName = EventIds.HealthCheckProcessingEndName
         )]
-        private static partial void HealthCheckProcessingEnd(
+        partial private static void HealthCheckProcessingEnd(
             ILogger logger,
             HealthStatus HealthStatus,
             double ElapsedMilliseconds
@@ -256,7 +256,7 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
             "Running health check {HealthCheckName}",
             EventName = EventIds.HealthCheckBeginName
         )]
-        public static partial void HealthCheckBegin(ILogger logger, string HealthCheckName);
+        partial public static void HealthCheckBegin(ILogger logger, string HealthCheckName);
 
         // These are separate so they can have different log levels
         private const string HealthCheckEndText =
@@ -269,7 +269,7 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
             HealthCheckEndText,
             EventName = EventIds.HealthCheckEndName
         )]
-        private static partial void HealthCheckEndHealthy(
+        partial private static void HealthCheckEndHealthy(
             ILogger logger,
             string HealthCheckName,
             HealthStatus HealthStatus,
@@ -283,7 +283,7 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
             HealthCheckEndText,
             EventName = EventIds.HealthCheckEndName
         )]
-        private static partial void HealthCheckEndDegraded(
+        partial private static void HealthCheckEndDegraded(
             ILogger logger,
             string HealthCheckName,
             HealthStatus HealthStatus,
@@ -298,7 +298,7 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
             HealthCheckEndText,
             EventName = EventIds.HealthCheckEndName
         )]
-        private static partial void HealthCheckEndUnhealthy(
+        partial private static void HealthCheckEndUnhealthy(
             ILogger logger,
             string HealthCheckName,
             HealthStatus HealthStatus,
@@ -357,7 +357,7 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
             "Health check {HealthCheckName} threw an unhandled exception after {ElapsedMilliseconds}ms",
             EventName = EventIds.HealthCheckErrorName
         )]
-        private static partial void HealthCheckError(
+        partial private static void HealthCheckError(
             ILogger logger,
             string HealthCheckName,
             double ElapsedMilliseconds,

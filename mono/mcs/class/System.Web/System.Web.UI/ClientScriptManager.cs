@@ -42,7 +42,7 @@ using System.Globalization;
 
 namespace System.Web.UI
 {
-    public sealed partial class ClientScriptManager
+    partial public sealed class ClientScriptManager
     {
         internal const string EventStateFieldName = "__EVENTVALIDATION";
 

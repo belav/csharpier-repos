@@ -22,7 +22,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class PublisherMembershipCondition
+    public sealed class PublisherMembershipCondition
         : IMembershipCondition,
             IConstantMembershipCondition,
             IReportMatchMembershipCondition

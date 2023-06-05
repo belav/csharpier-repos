@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Json
 {
-    public ref partial struct Utf8JsonReader
+    ref partial public struct Utf8JsonReader
     {
         /// <summary>
         /// Parses the current JSON token value from the source, unescaped, and transcoded as a <see cref="string"/>.

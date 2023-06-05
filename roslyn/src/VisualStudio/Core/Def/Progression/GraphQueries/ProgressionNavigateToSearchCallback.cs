@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.NavigateTo;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
-    internal sealed partial class SearchGraphQuery
+    partial internal sealed class SearchGraphQuery
     {
         private class ProgressionNavigateToSearchCallback : INavigateToSearchCallback
         {

@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
-    internal static partial class TestExtensionsMethods
+    partial internal static class TestExtensionsMethods
     {
         internal static void ValidateDefaultThisBehavior(Action a)
         {

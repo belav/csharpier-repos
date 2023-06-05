@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-internal partial class DbContextScriptCommand : ContextCommandBase
+partial internal class DbContextScriptCommand : ContextCommandBase
 {
     private CommandOption? _output;
 

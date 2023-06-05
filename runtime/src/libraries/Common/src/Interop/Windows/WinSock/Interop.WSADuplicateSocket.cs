@@ -4,16 +4,16 @@
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(
             Interop.Libraries.Ws2_32,
             EntryPoint = "WSADuplicateSocketW",
             SetLastError = true
         )]
-        internal static unsafe partial int WSADuplicateSocket(
+        partial internal static unsafe int WSADuplicateSocket(
             SafeSocketHandle s,
             uint dwProcessId,
             WSAPROTOCOL_INFOW* lpProtocolInfo

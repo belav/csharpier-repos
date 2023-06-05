@@ -49,7 +49,7 @@ namespace System.Net.Http.Headers
             set { QualityValue.SetValue(ref parameters, value); }
         }
 
-        public new static TransferCodingWithQualityHeaderValue Parse(string input)
+        public static new TransferCodingWithQualityHeaderValue Parse(string input)
         {
             TransferCodingWithQualityHeaderValue value;
             if (TryParse(input, out value))

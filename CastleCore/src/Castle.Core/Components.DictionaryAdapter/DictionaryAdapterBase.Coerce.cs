@@ -17,7 +17,7 @@ namespace Castle.Components.DictionaryAdapter
     using System;
     using System.Reflection;
 
-    public abstract partial class DictionaryAdapterBase
+    partial public abstract class DictionaryAdapterBase
     {
         public T Coerce<T>()
             where T : class

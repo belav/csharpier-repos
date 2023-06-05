@@ -16,7 +16,7 @@ using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal static partial class X509Native
+    partial internal static class X509Native
     {
         /// <summary>
         ///     Determine if a certificate has a specific property
@@ -203,11 +203,12 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
+    partial
     /// <summary>
     ///     Native interop layer for X509 certificate and Authenticode functions. Native definitions can be
     ///     found in wincrypt.h or msaxlapi.h
     /// </summary>
-    internal static partial class X509Native
+    internal static class X509Native
     {
         /// <summary>
         ///     Flags for CertVerifyAuthenticodeLicense
@@ -465,7 +466,7 @@ namespace System.Security.Cryptography.X509Certificates
         [SecurityCritical]
 #endif
         [SecuritySafeCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return CertFreeCertificateContext(handle);
         }

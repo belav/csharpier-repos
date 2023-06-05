@@ -51,7 +51,7 @@ namespace System
 {
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe readonly struct IntPtr : ISerializable, IEquatable<IntPtr>
+    public readonly unsafe struct IntPtr : ISerializable, IEquatable<IntPtr>
     {
         private readonly void* m_value;
 
@@ -79,7 +79,7 @@ namespace System
 
         [CLSCompliant(false)]
         [ReliabilityContract(Consistency.MayCorruptInstance, Cer.MayFail)]
-        unsafe public IntPtr(void* value)
+        public unsafe IntPtr(void* value)
         {
             m_value = value;
         }
@@ -135,12 +135,12 @@ namespace System
 
         [CLSCompliant(false)]
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
-        unsafe public void* ToPointer()
+        public unsafe void* ToPointer()
         {
             return m_value;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return ToString(null);
         }
@@ -179,7 +179,7 @@ namespace System
 
         [ReliabilityContractAttribute(Consistency.MayCorruptInstance, Cer.MayFail)]
         [CLSCompliant(false)]
-        unsafe public static explicit operator IntPtr(void* value)
+        public static unsafe explicit operator IntPtr(void* value)
         {
             return new IntPtr(value);
         }
@@ -195,7 +195,7 @@ namespace System
         }
 
         [CLSCompliant(false)]
-        unsafe public static explicit operator void*(IntPtr value)
+        public static unsafe explicit operator void*(IntPtr value)
         {
             return value.m_value;
         }

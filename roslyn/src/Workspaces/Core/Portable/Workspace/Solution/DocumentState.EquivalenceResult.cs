@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class DocumentState
+    partial internal class DocumentState
     {
         internal class EquivalenceResult
         {

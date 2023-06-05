@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {
-    internal partial interface ISemanticFactsService : ISemanticFacts, ILanguageService
+    partial internal interface ISemanticFactsService : ISemanticFacts, ILanguageService
     {
         bool IsExpressionContext(
             SemanticModel semanticModel,

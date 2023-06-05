@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Description;
     using System.ServiceModel.Security;
 
-    public partial class ServiceCredentialsElement : BehaviorExtensionElement
+    partial public class ServiceCredentialsElement : BehaviorExtensionElement
     {
         public ServiceCredentialsElement() { }
 

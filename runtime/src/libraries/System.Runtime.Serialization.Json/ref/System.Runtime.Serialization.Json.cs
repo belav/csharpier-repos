@@ -6,7 +6,7 @@
 
 namespace System.Runtime.Serialization
 {
-    public partial class DateTimeFormat
+    partial public class DateTimeFormat
     {
         public DateTimeFormat(string formatString) { }
 
@@ -37,7 +37,7 @@ namespace System.Runtime.Serialization
 
 namespace System.Runtime.Serialization.Json
 {
-    public sealed partial class DataContractJsonSerializer
+    partial public sealed class DataContractJsonSerializer
         : System.Runtime.Serialization.XmlObjectSerializer
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
@@ -310,7 +310,7 @@ namespace System.Runtime.Serialization.Json
         public override void WriteStartObject(System.Xml.XmlWriter writer, object? graph) { }
     }
 
-    public partial class DataContractJsonSerializerSettings
+    partial public class DataContractJsonSerializerSettings
     {
         public DataContractJsonSerializerSettings() { }
 
@@ -356,7 +356,7 @@ namespace System.Runtime.Serialization.Json
         }
     }
 
-    public partial interface IXmlJsonReaderInitializer
+    partial public interface IXmlJsonReaderInitializer
     {
         void SetInput(
             byte[] buffer,
@@ -374,12 +374,12 @@ namespace System.Runtime.Serialization.Json
         );
     }
 
-    public partial interface IXmlJsonWriterInitializer
+    partial public interface IXmlJsonWriterInitializer
     {
         void SetOutput(System.IO.Stream stream, System.Text.Encoding encoding, bool ownsStream);
     }
 
-    public static partial class JsonReaderWriterFactory
+    partial public static class JsonReaderWriterFactory
     {
         public static System.Xml.XmlDictionaryReader CreateJsonReader(
             byte[] buffer,

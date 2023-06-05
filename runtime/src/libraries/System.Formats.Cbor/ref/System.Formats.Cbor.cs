@@ -14,7 +14,7 @@ namespace System.Formats.Cbor
         Ctap2Canonical = 3,
     }
 
-    public partial class CborContentException : System.Exception
+    partial public class CborContentException : System.Exception
     {
         protected CborContentException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -26,7 +26,7 @@ namespace System.Formats.Cbor
         public CborContentException(string? message, System.Exception? inner) { }
     }
 
-    public partial class CborReader
+    partial public class CborReader
     {
         public CborReader(
             System.ReadOnlyMemory<byte> data,
@@ -257,7 +257,7 @@ namespace System.Formats.Cbor
         SelfDescribeCbor = (ulong)55799,
     }
 
-    public partial class CborWriter
+    partial public class CborWriter
     {
         public CborWriter(
             System.Formats.Cbor.CborConformanceMode conformanceMode =

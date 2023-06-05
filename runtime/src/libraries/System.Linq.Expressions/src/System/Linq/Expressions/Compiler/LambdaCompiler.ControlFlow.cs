@@ -6,9 +6,10 @@ using System.Dynamic.Utils;
 
 namespace System.Linq.Expressions.Compiler
 {
+    partial
     // The part of the LambdaCompiler dealing with low level control flow
     // break, continue, return, exceptions, etc
-    internal sealed partial class LambdaCompiler
+    internal sealed class LambdaCompiler
     {
         private LabelInfo EnsureLabel(LabelTarget node)
         {

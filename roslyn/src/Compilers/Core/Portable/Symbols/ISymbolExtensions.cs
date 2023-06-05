@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis
 {
-    public static partial class ISymbolExtensions
+    partial public static class ISymbolExtensions
     {
         /// <summary>
         /// Returns the constructed form of the ReducedFrom property,

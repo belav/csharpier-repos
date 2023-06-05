@@ -3,7 +3,7 @@
 
 namespace System.Net.Http.HPack
 {
-    internal static partial class H2StaticTable
+    partial internal static class H2StaticTable
     {
         // Values for encoding.
         // Unused values are omitted.

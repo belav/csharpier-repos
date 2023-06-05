@@ -9,7 +9,7 @@ using SysTx = System.Transactions;
 
 namespace System.Data.OleDb
 {
-    public sealed partial class OleDbConnection : DbConnection
+    partial public sealed class OleDbConnection : DbConnection
     {
         private static readonly DbConnectionFactory _connectionFactory =
             OleDbConnectionFactory.SingletonInstance;

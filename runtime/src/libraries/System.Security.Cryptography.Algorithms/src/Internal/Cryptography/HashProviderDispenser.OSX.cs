@@ -8,7 +8,7 @@ using System.Security.Cryptography.Apple;
 
 namespace Internal.Cryptography
 {
-    internal static partial class HashProviderDispenser
+    partial internal static class HashProviderDispenser
     {
         public static HashProvider CreateHashProvider(string hashAlgorithmId)
         {

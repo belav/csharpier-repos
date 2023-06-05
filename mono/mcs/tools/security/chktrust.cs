@@ -21,12 +21,12 @@ namespace Mono.Tools
 {
     class CheckTrust
     {
-        static private void Header()
+        private static void Header()
         {
             Console.WriteLine(new AssemblyInfo().ToString());
         }
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine("Usage: chktrust [options] filename{0}", Environment.NewLine);
             Console.WriteLine("\t-q\tquiet mode (no gui)");
@@ -35,7 +35,9 @@ namespace Mono.Tools
         }
 
         // static methods
-        static public int Check(string fileName, bool quiet, bool verbose)
+        public
+        // static methods
+        static int Check(string fileName, bool quiet, bool verbose)
         {
             AuthenticodeDeformatter a = new AuthenticodeDeformatter(fileName);
 

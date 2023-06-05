@@ -34,7 +34,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
 {
-    internal partial class EventHookupCommandHandler : IChainedCommandHandler<TabKeyCommandArgs>
+    partial internal class EventHookupCommandHandler : IChainedCommandHandler<TabKeyCommandArgs>
     {
         public void ExecuteCommand(
             TabKeyCommandArgs args,

@@ -117,7 +117,7 @@ namespace System.Linq.Expressions
         public sealed override Type Type => _property.PropertyType;
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         #region Field
 

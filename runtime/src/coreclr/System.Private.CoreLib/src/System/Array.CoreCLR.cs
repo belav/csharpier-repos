@@ -11,13 +11,10 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
+    partial
     // Note that we make a T[] (single-dimensional w/ zero as the lower bound) implement both
     // IList<U> and IReadOnlyList<U>, where T : U dynamically.  See the SZArrayHelper class for details.
-    public abstract partial class Array
-        : ICloneable,
-            IList,
-            IStructuralComparable,
-            IStructuralEquatable
+    public abstract class Array : ICloneable, IList, IStructuralComparable, IStructuralEquatable
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern unsafe Array InternalCreate(
@@ -513,7 +510,7 @@ namespace System
             }
         }
 
-        private sealed unsafe partial class ArrayInitializeCache
+        partial private sealed unsafe class ArrayInitializeCache
         {
             internal readonly delegate* <ref byte, void> ConstructorEntrypoint;
 
@@ -521,7 +518,7 @@ namespace System
                 RuntimeHelpers.QCall,
                 EntryPoint = "Array_GetElementConstructorEntrypoint"
             )]
-            private static partial delegate* <ref byte, void> GetElementConstructorEntrypoint(
+            partial private static delegate* <ref byte, void> GetElementConstructorEntrypoint(
                 QCallTypeHandle arrayType
             );
 

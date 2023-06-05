@@ -8,9 +8,10 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System.IO.Enumeration
 {
+    partial
     /// <summary>Enumerates the file system elements of the provided type that are being searched and filtered by a <see cref="FileSystemEnumerable{T}" />.</summary>
     /// <typeparam name="TResult">The type of the result produced by this file system enumerator.</typeparam>
-    public abstract unsafe partial class FileSystemEnumerator<TResult>
+    public abstract unsafe class FileSystemEnumerator<TResult>
         : CriticalFinalizerObject,
             IEnumerator<TResult>
     {

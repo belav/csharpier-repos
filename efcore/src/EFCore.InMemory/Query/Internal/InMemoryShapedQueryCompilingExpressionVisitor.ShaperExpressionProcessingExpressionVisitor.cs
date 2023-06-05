@@ -5,7 +5,7 @@ using ExpressionExtensions = Microsoft.EntityFrameworkCore.Infrastructure.Expres
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
 
-public partial class InMemoryShapedQueryCompilingExpressionVisitor
+partial public class InMemoryShapedQueryCompilingExpressionVisitor
 {
     private sealed class ShaperExpressionProcessingExpressionVisitor : ExpressionVisitor
     {

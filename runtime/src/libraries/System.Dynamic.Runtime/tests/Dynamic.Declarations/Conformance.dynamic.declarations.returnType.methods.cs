@@ -277,13 +277,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.methods.staticmethod002.staticmethod002
 {
-    static // <Title> Having dynamic as a return type</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass
+    public static // <Title> Having dynamic as a return type</Title>
+    class MyClass
     {
         public static dynamic Foo(this int x)
         {

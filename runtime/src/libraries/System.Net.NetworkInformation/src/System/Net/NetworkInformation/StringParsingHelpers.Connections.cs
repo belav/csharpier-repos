@@ -7,7 +7,7 @@ using System.IO;
 
 namespace System.Net.NetworkInformation
 {
-    internal static partial class StringParsingHelpers
+    partial internal static class StringParsingHelpers
     {
         internal static int ParseNumSocketConnections(string filePath, string protocolName)
         {

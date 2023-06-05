@@ -29,7 +29,7 @@ namespace System.Data.Mapping
     /// Class for representing a collection of items in Storage Mapping( CS Mapping) space.
     /// </summary>
     [CLSCompliant(false)]
-    public partial class StorageMappingItemCollection : MappingItemCollection
+    partial public class StorageMappingItemCollection : MappingItemCollection
     {
         #region Fields
         //EdmItemCollection that is associated with the MSL Loader.

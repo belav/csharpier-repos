@@ -4,9 +4,9 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         /// <summary>
         /// COM IStream interface. <see href="https://docs.microsoft.com/windows/desktop/api/objidl/nn-objidl-istream"/>

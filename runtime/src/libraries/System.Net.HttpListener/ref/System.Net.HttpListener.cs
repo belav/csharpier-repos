@@ -10,7 +10,7 @@ namespace System.Net
         System.Net.HttpListenerRequest httpRequest
     );
 
-    public sealed partial class HttpListener : System.IDisposable
+    partial public sealed class HttpListener : System.IDisposable
     {
         public HttpListener() { }
 
@@ -107,7 +107,7 @@ namespace System.Net
         );
     }
 
-    public partial class HttpListenerBasicIdentity : System.Security.Principal.GenericIdentity
+    partial public class HttpListenerBasicIdentity : System.Security.Principal.GenericIdentity
     {
         public HttpListenerBasicIdentity(string username, string password)
             : base(default(System.Security.Principal.GenericIdentity)) { }
@@ -118,7 +118,7 @@ namespace System.Net
         }
     }
 
-    public sealed partial class HttpListenerContext
+    partial public sealed class HttpListenerContext
     {
         internal HttpListenerContext() { }
 
@@ -170,7 +170,7 @@ namespace System.Net
         }
     }
 
-    public partial class HttpListenerException : System.ComponentModel.Win32Exception
+    partial public class HttpListenerException : System.ComponentModel.Win32Exception
     {
         public HttpListenerException() { }
 
@@ -189,7 +189,7 @@ namespace System.Net
         }
     }
 
-    public partial class HttpListenerPrefixCollection
+    partial public class HttpListenerPrefixCollection
         : System.Collections.Generic.ICollection<string>,
             System.Collections.Generic.IEnumerable<string>,
             System.Collections.IEnumerable
@@ -238,7 +238,7 @@ namespace System.Net
         }
     }
 
-    public sealed partial class HttpListenerRequest
+    partial public sealed class HttpListenerRequest
     {
         internal HttpListenerRequest() { }
 
@@ -385,7 +385,7 @@ namespace System.Net
         }
     }
 
-    public sealed partial class HttpListenerResponse : System.IDisposable
+    partial public sealed class HttpListenerResponse : System.IDisposable
     {
         internal HttpListenerResponse() { }
 
@@ -472,7 +472,7 @@ namespace System.Net
         void System.IDisposable.Dispose() { }
     }
 
-    public partial class HttpListenerTimeoutManager
+    partial public class HttpListenerTimeoutManager
     {
         internal HttpListenerTimeoutManager() { }
 
@@ -515,7 +515,7 @@ namespace System.Net
 
 namespace System.Net.WebSockets
 {
-    public partial class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext
+    partial public class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext
     {
         internal HttpListenerWebSocketContext() { }
 

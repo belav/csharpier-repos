@@ -19,7 +19,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-public partial class HubConnectionTests : VerifiableLoggedTest
+partial public class HubConnectionTests : VerifiableLoggedTest
 {
     [Fact]
     public async Task InvokeThrowsIfSerializingMessageFails()

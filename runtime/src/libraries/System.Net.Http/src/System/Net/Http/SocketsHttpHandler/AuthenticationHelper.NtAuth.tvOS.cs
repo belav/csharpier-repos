@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal static partial class AuthenticationHelper
+    partial internal static class AuthenticationHelper
     {
         private static Task<HttpResponseMessage> InnerSendAsync(
             HttpRequestMessage request,

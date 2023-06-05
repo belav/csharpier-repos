@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Logcat
+    partial internal static class Logcat
     {
         [LibraryImport(Libraries.Liblog, StringMarshalling = StringMarshalling.Utf8)]
-        private static partial void __android_log_print(
+        partial private static void __android_log_print(
             LogLevel level,
             string? tag,
             string format,

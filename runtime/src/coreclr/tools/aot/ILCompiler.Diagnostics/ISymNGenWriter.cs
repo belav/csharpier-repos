@@ -105,7 +105,7 @@ namespace Microsoft.DiaSymReader
     /// </code>
     internal interface ISymNGenWriter2 : ISymNGenWriter
     {
-        public readonly static new Guid IID = new Guid("B029E51B-4C55-4fe2-B993-9F7BC1F10DB4");
+        public static new readonly Guid IID = new Guid("B029E51B-4C55-4fe2-B993-9F7BC1F10DB4");
 
         // Add a new public symbol to the NGEN PDB.
         new void AddSymbol(

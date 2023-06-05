@@ -11,7 +11,7 @@ using static System.TestHelpers;
 
 namespace System.SpanTests
 {
-    public static partial class SpanTests
+    partial public static class SpanTests
     {
         [Fact]
         public static void ReverseEmpty()

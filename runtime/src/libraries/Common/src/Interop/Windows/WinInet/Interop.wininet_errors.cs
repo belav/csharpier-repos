@@ -3,7 +3,7 @@
 
 namespace System.Net
 {
-    internal static partial class Interop
+    partial internal static class Interop
     {
         // WININET.DLL errors propagated as HRESULT's using FACILITY=WIN32
         // as returned by the WinRT Windows.Web.Http APIs.  These HRESULT values

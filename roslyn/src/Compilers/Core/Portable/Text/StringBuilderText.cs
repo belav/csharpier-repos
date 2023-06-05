@@ -9,10 +9,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Text
 {
+    partial
     /// <summary>
     /// Implementation of <see cref="SourceText"/> based on a <see cref="StringBuilder"/> input
     /// </summary>
-    internal sealed partial class StringBuilderText : SourceText
+    internal sealed class StringBuilderText : SourceText
     {
         /// <summary>
         /// Underlying string on which this SourceText instance is based

@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class SemanticModelExtensions
+    partial internal static class SemanticModelExtensions
     {
         public static ImmutableArray<ParameterName> GenerateParameterNames(
             this SemanticModel semanticModel,

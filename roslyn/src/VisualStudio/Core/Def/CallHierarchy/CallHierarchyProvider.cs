@@ -28,7 +28,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 {
     [Export(typeof(CallHierarchyProvider))]
-    internal partial class CallHierarchyProvider
+    partial internal class CallHierarchyProvider
     {
         public readonly IAsynchronousOperationListener AsyncListener;
         public readonly IUIThreadOperationExecutor ThreadOperationExecutor;

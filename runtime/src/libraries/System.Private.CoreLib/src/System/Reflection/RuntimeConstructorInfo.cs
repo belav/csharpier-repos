@@ -10,7 +10,7 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace System.Reflection
 {
-    internal sealed partial class RuntimeConstructorInfo : ConstructorInfo
+    partial internal sealed class RuntimeConstructorInfo : ConstructorInfo
     {
         [MethodImpl(MethodImplOptions.NoInlining)] // move lazy invocation flags population out of the hot path
         private static InvocationFlags ComputeAndUpdateInvocationFlags(

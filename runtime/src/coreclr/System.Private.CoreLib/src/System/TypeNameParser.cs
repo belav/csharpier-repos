@@ -15,11 +15,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System
 {
-    internal sealed partial class SafeTypeNameParserHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial internal sealed class SafeTypeNameParserHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         #region QCalls
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeName_ReleaseTypeNameParser")]
-        private static partial void Release(IntPtr pTypeNameParser);
+        partial private static void Release(IntPtr pTypeNameParser);
         #endregion
 
         public SafeTypeNameParserHandle()
@@ -33,7 +33,7 @@ namespace System
         }
     }
 
-    internal sealed partial class TypeNameParser : IDisposable
+    partial internal sealed class TypeNameParser : IDisposable
     {
         #region QCalls
         [LibraryImport(
@@ -41,32 +41,32 @@ namespace System
             EntryPoint = "TypeName_CreateTypeNameParser",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial void _CreateTypeNameParser(
+        partial private static void _CreateTypeNameParser(
             string typeName,
             ObjectHandleOnStack retHandle,
             [MarshalAs(UnmanagedType.Bool)] bool throwOnError
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeName_GetNames")]
-        private static partial void _GetNames(
+        partial private static void _GetNames(
             SafeTypeNameParserHandle pTypeNameParser,
             ObjectHandleOnStack retArray
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeName_GetTypeArguments")]
-        private static partial void _GetTypeArguments(
+        partial private static void _GetTypeArguments(
             SafeTypeNameParserHandle pTypeNameParser,
             ObjectHandleOnStack retArray
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeName_GetModifiers")]
-        private static partial void _GetModifiers(
+        partial private static void _GetModifiers(
             SafeTypeNameParserHandle pTypeNameParser,
             ObjectHandleOnStack retArray
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeName_GetAssemblyName")]
-        private static partial void _GetAssemblyName(
+        partial private static void _GetAssemblyName(
             SafeTypeNameParserHandle pTypeNameParser,
             StringHandleOnStack retString
         );

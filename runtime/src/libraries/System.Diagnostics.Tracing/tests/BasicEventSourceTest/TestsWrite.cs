@@ -69,7 +69,7 @@ namespace BasicEventSourceTests
         Green
     };
 
-    public partial class TestsWrite
+    partial public class TestsWrite
     {
         [EventData]
         private struct PartB_UserInfo
@@ -630,7 +630,7 @@ namespace BasicEventSourceTests
             TestUtilities.CheckNoEventSourcesRunning("Stop");
         }
 
-        static partial void Test_Write_T_AddEtwTests(
+        partial static void Test_Write_T_AddEtwTests(
             Listener listener,
             List<SubTest> tests,
             EventSource logger

@@ -1600,7 +1600,7 @@ namespace System.Threading.RateLimiting.Test
         private static readonly double TickFrequency =
             (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency;
 
-        static internal void Replenish(TokenBucketRateLimiter limiter, long addMilliseconds)
+        internal static void Replenish(TokenBucketRateLimiter limiter, long addMilliseconds)
         {
             var replenishInternalMethod = typeof(TokenBucketRateLimiter).GetMethod(
                 "ReplenishInternal",

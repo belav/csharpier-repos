@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class WhileStatementSyntax
+    partial public class WhileStatementSyntax
     {
         public WhileStatementSyntax Update(
             SyntaxToken whileKeyword,
@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static WhileStatementSyntax WhileStatement(
             SyntaxToken whileKeyword,

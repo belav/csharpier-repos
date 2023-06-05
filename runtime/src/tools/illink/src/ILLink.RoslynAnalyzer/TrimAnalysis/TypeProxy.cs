@@ -7,11 +7,11 @@ using Microsoft.CodeAnalysis;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct TypeProxy
+    partial internal readonly struct TypeProxy
     {
         public TypeProxy(ITypeSymbol type) => Type = type;
 
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters()
+        partial internal ImmutableArray<GenericParameterProxy> GetGenericParameters()
         {
             if (Type is not INamedTypeSymbol namedType || namedType.TypeParameters.IsEmpty)
                 return ImmutableArray<GenericParameterProxy>.Empty;

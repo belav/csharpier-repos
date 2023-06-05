@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SQLite.v2
 {
-    internal partial class SQLitePersistentStorage
+    partial internal class SQLitePersistentStorage
     {
         private static (byte[] bytes, int length, bool fromPool) GetBytes(Stream stream)
         {

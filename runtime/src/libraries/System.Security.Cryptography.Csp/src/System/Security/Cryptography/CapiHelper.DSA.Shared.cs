@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace Internal.NativeCrypto
 {
-    internal static partial class CapiHelper
+    partial internal static class CapiHelper
     {
         private const int DSS_Q_LEN = 20;
 

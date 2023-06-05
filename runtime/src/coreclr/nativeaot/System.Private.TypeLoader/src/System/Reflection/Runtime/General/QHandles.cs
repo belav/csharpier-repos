@@ -105,7 +105,7 @@ namespace System.Reflection.Runtime.General
         private readonly Handle _handle;
     }
 
-    public partial struct QMethodDefinition
+    partial public struct QMethodDefinition
     {
         private QMethodDefinition(object reader, int token)
         {
@@ -138,7 +138,7 @@ namespace System.Reflection.Runtime.General
         private readonly int _handle;
     }
 
-    public partial struct QTypeDefinition
+    partial public struct QTypeDefinition
     {
         public object Reader
         {
@@ -160,7 +160,7 @@ namespace System.Reflection.Runtime.General
         private readonly int _handle;
     }
 
-    public partial struct QTypeDefRefOrSpec
+    partial public struct QTypeDefRefOrSpec
     {
         public object Reader
         {

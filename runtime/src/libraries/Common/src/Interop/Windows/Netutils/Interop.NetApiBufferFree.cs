@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Netutils
+    partial internal static class Netutils
     {
         [LibraryImport(Libraries.Netutils)]
-        internal static partial int NetApiBufferFree(IntPtr buffer);
+        partial internal static int NetApiBufferFree(IntPtr buffer);
     }
 }

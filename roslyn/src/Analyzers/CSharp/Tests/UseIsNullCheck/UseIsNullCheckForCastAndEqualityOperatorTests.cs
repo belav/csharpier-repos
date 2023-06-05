@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
-    public partial class UseIsNullCheckForCastAndEqualityOperatorTests
+    partial public class UseIsNullCheckForCastAndEqualityOperatorTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseIsNullCheckForCastAndEqualityOperatorTests(ITestOutputHelper logger)

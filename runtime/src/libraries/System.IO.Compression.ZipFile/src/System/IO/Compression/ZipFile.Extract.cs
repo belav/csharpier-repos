@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.IO.Compression
 {
-    public static partial class ZipFile
+    partial public static class ZipFile
     {
         /// <summary>
         /// Extracts all of the files in the specified archive to a directory on the file system.

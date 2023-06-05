@@ -10,7 +10,7 @@ using ILCompiler.DependencyAnalysisFramework;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public abstract partial class SortableDependencyNode
+    partial public abstract class SortableDependencyNode
         : DependencyNodeCore<NodeFactory>,
             ISortableNode
     {
@@ -151,7 +151,7 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        static partial void ApplyCustomSort(
+        partial static void ApplyCustomSort(
             SortableDependencyNode x,
             SortableDependencyNode y,
             ref int result

@@ -10,22 +10,22 @@ using Internal.TypeSystem.Ecma;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal partial struct ParameterProxy
+    partial internal struct ParameterProxy
     {
-        public partial ReferenceKind GetReferenceKind() =>
+        partial public ReferenceKind GetReferenceKind() =>
             Method.Method.ParameterReferenceKind((int)Index);
 
         public TypeDesc ParameterType =>
             IsImplicitThis ? Method.Method.OwningType : Method.Method.Signature[MetadataIndex];
 
-        public partial string GetDisplayName() =>
+        partial public string GetDisplayName() =>
             IsImplicitThis
                 ? "this"
                 : (Method.Method is EcmaMethod ecmaMethod)
                     ? ecmaMethod.GetParameterDisplayName(MetadataIndex)
                     : $"#{Index}";
 
-        public partial bool IsTypeOf(string typeName) => ParameterType.IsTypeOf(typeName);
+        partial public bool IsTypeOf(string typeName) => ParameterType.IsTypeOf(typeName);
 
         public bool IsTypeOf(WellKnownType type) => ParameterType.IsTypeOf(type);
     }

@@ -10,11 +10,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Serialization
 {
+    partial
     /// <summary>
     /// serialize and deserialize objects to straem.
     /// some of these could be moved into actual object, but putting everything here is a bit easier to find I believe.
     /// </summary>
-    internal partial class SerializerService
+    internal class SerializerService
     {
         private const byte ChecksumKind = 0;
         private const byte ChecksumWithChildrenKind = 1;

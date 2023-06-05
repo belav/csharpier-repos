@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace JIT.HardwareIntrinsics.General._NotSupported
 {
-    public static partial class Program
+    partial public static class Program
     {
         static Program() { }
     }

@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.MemoryTests
 {
-    public static partial class MemoryPoolTests
+    partial public static class MemoryPoolTests
     {
         [Fact]
         public static void ThereIsOnlyOneSharedPool()

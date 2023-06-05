@@ -4,7 +4,7 @@
 namespace System.Runtime.InteropServices
 {
     [StructLayout(LayoutKind.Sequential)]
-    public partial class MarshalAsAttribute
+    partial public class MarshalAsAttribute
     {
         internal object CloneInternal() => MemberwiseClone();
     }

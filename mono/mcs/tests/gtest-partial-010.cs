@@ -7,7 +7,7 @@ namespace A
         int Foo(T value);
     }
 
-    internal partial class C : IA<C.NA>
+    partial internal class C : IA<C.NA>
     {
         private abstract class NA { }
 
@@ -22,7 +22,7 @@ namespace A
 
 namespace A
 {
-    internal partial class C : IA<C.NB>
+    partial internal class C : IA<C.NB>
     {
         private class NB { }
 

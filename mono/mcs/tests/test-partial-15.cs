@@ -1,6 +1,6 @@
 namespace Foo
 {
-    public partial class X
+    partial public class X
     {
         public static void Main() { }
     }
@@ -11,7 +11,7 @@ namespace Foo
     using System;
     using System.Collections;
 
-    public partial class X
+    partial public class X
     {
         public static IEnumerable Attempts2()
         {

@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ExpressionStatementSyntax
+    partial public class ExpressionStatementSyntax
     {
         /// <summary>
         /// Returns true if the <see cref="Expression"/> property is allowed by the rules of the
@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static ExpressionStatementSyntax ExpressionStatement(
             ExpressionSyntax expression,

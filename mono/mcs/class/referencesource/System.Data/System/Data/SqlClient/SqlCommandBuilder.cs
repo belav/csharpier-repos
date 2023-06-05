@@ -78,7 +78,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.SqlCommandBuilder_DataAdapter), // MDAC 60524
         ]
-        new public SqlDataAdapter DataAdapter
+        public new SqlDataAdapter DataAdapter
         {
             get { return (SqlDataAdapter)base.DataAdapter; }
             set { base.DataAdapter = value; }
@@ -143,37 +143,37 @@ namespace System.Data.SqlClient
             base.RowUpdatingHandler(ruevent);
         }
 
-        new public SqlCommand GetInsertCommand()
+        public new SqlCommand GetInsertCommand()
         {
             return (SqlCommand)base.GetInsertCommand();
         }
 
-        new public SqlCommand GetInsertCommand(bool useColumnsForParameterNames)
+        public new SqlCommand GetInsertCommand(bool useColumnsForParameterNames)
         {
             return (SqlCommand)base.GetInsertCommand(useColumnsForParameterNames);
         }
 
-        new public SqlCommand GetUpdateCommand()
+        public new SqlCommand GetUpdateCommand()
         {
             return (SqlCommand)base.GetUpdateCommand();
         }
 
-        new public SqlCommand GetUpdateCommand(bool useColumnsForParameterNames)
+        public new SqlCommand GetUpdateCommand(bool useColumnsForParameterNames)
         {
             return (SqlCommand)base.GetUpdateCommand(useColumnsForParameterNames);
         }
 
-        new public SqlCommand GetDeleteCommand()
+        public new SqlCommand GetDeleteCommand()
         {
             return (SqlCommand)base.GetDeleteCommand();
         }
 
-        new public SqlCommand GetDeleteCommand(bool useColumnsForParameterNames)
+        public new SqlCommand GetDeleteCommand(bool useColumnsForParameterNames)
         {
             return (SqlCommand)base.GetDeleteCommand(useColumnsForParameterNames);
         }
 
-        override protected void ApplyParameterInfo(
+        protected override void ApplyParameterInfo(
             DbParameter parameter,
             DataRow datarow,
             StatementType statementType,
@@ -209,18 +209,18 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected string GetParameterName(int parameterOrdinal)
+        protected override string GetParameterName(int parameterOrdinal)
         {
             return "@p"
                 + parameterOrdinal.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 
-        override protected string GetParameterName(string parameterName)
+        protected override string GetParameterName(string parameterName)
         {
             return "@" + parameterName;
         }
 
-        override protected string GetParameterPlaceholder(int parameterOrdinal)
+        protected override string GetParameterPlaceholder(int parameterOrdinal)
         {
             return "@p"
                 + parameterOrdinal.ToString(System.Globalization.CultureInfo.InvariantCulture);
@@ -238,7 +238,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        static public void DeriveParameters(SqlCommand command)
+        public static void DeriveParameters(SqlCommand command)
         { // MDAC 65927\
             SqlConnection.ExecutePermission.Demand();
 
@@ -363,7 +363,7 @@ namespace System.Data.SqlClient
             ;
         }
 
-        override protected void SetRowUpdatingHandler(DbDataAdapter adapter)
+        protected override void SetRowUpdatingHandler(DbDataAdapter adapter)
         {
             Debug.Assert(adapter is SqlDataAdapter, "!SqlDataAdapter");
             if (adapter == base.DataAdapter)

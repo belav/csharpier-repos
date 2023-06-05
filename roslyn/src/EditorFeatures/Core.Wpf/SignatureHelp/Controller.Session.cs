@@ -10,9 +10,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHelp
 {
-    internal partial class Controller
+    partial internal class Controller
     {
-        internal partial class Session : Session<Controller, Model, ISignatureHelpPresenterSession>
+        partial internal class Session : Session<Controller, Model, ISignatureHelpPresenterSession>
         {
             public Session(Controller controller, ISignatureHelpPresenterSession presenterSession)
                 : base(

@@ -262,7 +262,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
             return 12;
     }
 
-    new public int f7()
+    public new int f7()
     {
         GC.Collect();
         GC.WaitForPendingFinalizers();
@@ -273,7 +273,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
             return 15;
     }
 
-    new public int f8()
+    public new int f8()
     {
         GC.Collect();
         GC.WaitForPendingFinalizers();
@@ -284,7 +284,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
             return 17;
     }
 
-    override public int f9()
+    public override int f9()
     {
         GC.Collect();
         GC.WaitForPendingFinalizers();

@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.Tests
 {
-    public static partial class SignerInfoTests
+    partial public static class SignerInfoTests
     {
         private const string TokenAttributeOid = "1.2.840.113549.1.9.16.2.14";
 

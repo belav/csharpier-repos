@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace System.Collections.Tests
 {
+    partial
     /// <summary>
     /// Contains tests that ensure the correctness of the List class.
     /// </summary>
-    public abstract partial class List_Generic_Tests_AsNonGenericIList : IList_NonGeneric_Tests
+    public abstract class List_Generic_Tests_AsNonGenericIList : IList_NonGeneric_Tests
     {
         #region IList_Generic_Tests
 

@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace System
 {
-    public abstract partial class Type : MemberInfo, IReflect
+    partial public abstract class Type : MemberInfo, IReflect
     {
         protected Type() { }
 

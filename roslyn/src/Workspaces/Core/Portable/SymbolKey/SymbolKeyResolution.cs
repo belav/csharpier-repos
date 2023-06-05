@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// The result of <see cref="SymbolKey.Resolve"/>. If the <see cref="SymbolKey"/> could be uniquely mapped to a
     /// single <see cref="ISymbol"/> then that will be returned in <see cref="Symbol"/>.  Otherwise, if the key resolves
@@ -15,7 +16,7 @@ namespace Microsoft.CodeAnalysis
     /// If no symbol can be found <see cref="Symbol"/> will be <c>null</c> and <see cref="CandidateSymbols"/>
     /// will be empty.
     /// </summary>
-    internal partial struct SymbolKeyResolution
+    internal struct SymbolKeyResolution
     {
         private readonly ImmutableArray<ISymbol> _candidateSymbols;
 

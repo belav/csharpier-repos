@@ -13,11 +13,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// a bound node rewriter that rewrites types properly (which in some cases the automatically-generated
     /// base class does not).  This is used in the lambda rewriter, the iterator rewriter, and the async rewriter.
     /// </summary>
-    internal abstract partial class MethodToClassRewriter : BoundTreeRewriterWithStackGuard
+    internal abstract class MethodToClassRewriter : BoundTreeRewriterWithStackGuard
     {
         // For each captured variable, information about its replacement.  May be populated lazily (that is, not all
         // upfront) by subclasses.  Specifically, the async rewriter produces captured symbols for temps, including
@@ -866,11 +867,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && rewrittenReceiver is { Kind: not BoundKind.BaseReference };
         }
 
+        partial
         /// <summary>
         /// A wrapper method that is created for non-virtually calling a base-class
         /// virtual method from other classes (like those created for lambdas...).
         /// </summary>
-        private sealed partial class BaseMethodWrapperSymbol : SynthesizedMethodBaseSymbol
+        private sealed class BaseMethodWrapperSymbol : SynthesizedMethodBaseSymbol
         {
             internal BaseMethodWrapperSymbol(
                 NamedTypeSymbol containingType,

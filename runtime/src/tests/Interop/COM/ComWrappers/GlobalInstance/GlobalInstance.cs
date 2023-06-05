@@ -21,38 +21,38 @@ namespace ComWrappersTests.GlobalInstance
                 EntryPoint = "CreateTrackerObject_SkipTrackerRuntime"
             )]
             [return: MarshalAs(UnmanagedType.IUnknown)]
-            extern public static object CreateTrackerObjectAsIUnknown();
+            public static extern object CreateTrackerObjectAsIUnknown();
 
             [DllImport(
                 nameof(MockReferenceTrackerRuntime),
                 EntryPoint = "CreateTrackerObject_SkipTrackerRuntime"
             )]
             [return: MarshalAs(UnmanagedType.Interface)]
-            extern public static FakeWrapper CreateTrackerObjectAsInterface();
+            public static extern FakeWrapper CreateTrackerObjectAsInterface();
 
             [DllImport(
                 nameof(MockReferenceTrackerRuntime),
                 EntryPoint = "CreateTrackerObject_SkipTrackerRuntime"
             )]
             [return: MarshalAs(UnmanagedType.Interface)]
-            extern public static Test CreateTrackerObjectWrongType();
+            public static extern Test CreateTrackerObjectWrongType();
 
             [DllImport(nameof(MockReferenceTrackerRuntime))]
-            extern public static int UpdateTestObjectAsIUnknown(
+            public static extern int UpdateTestObjectAsIUnknown(
                 [MarshalAs(UnmanagedType.IUnknown)] object testObj,
                 int i,
                 [MarshalAs(UnmanagedType.IUnknown)] out object ret
             );
 
             [DllImport(nameof(MockReferenceTrackerRuntime))]
-            extern public static int UpdateTestObjectAsIDispatch(
+            public static extern int UpdateTestObjectAsIDispatch(
                 [MarshalAs(UnmanagedType.IDispatch)] object testObj,
                 int i,
                 [MarshalAs(UnmanagedType.IDispatch)] out object ret
             );
 
             [DllImport(nameof(MockReferenceTrackerRuntime))]
-            extern public static int UpdateTestObjectAsInterface(
+            public static extern int UpdateTestObjectAsInterface(
                 [MarshalAs(UnmanagedType.Interface)] ITest testObj,
                 int i,
                 [Out, MarshalAs(UnmanagedType.Interface)] out ITest ret
@@ -116,7 +116,7 @@ namespace ComWrappersTests.GlobalInstance
 
             public object LastComputeVtablesObject { get; private set; } = null;
 
-            protected unsafe override ComInterfaceEntry* ComputeVtables(
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
                 object obj,
                 CreateComInterfaceFlags flags,
                 out int count

@@ -4,9 +4,9 @@
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal const int NI_MAXHOST = 1025;
         internal const int NI_MAXSERV = 32;
@@ -37,13 +37,13 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetHostEntryForName",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static unsafe partial int GetHostEntryForName(
+        partial internal static unsafe int GetHostEntryForName(
             string address,
             AddressFamily family,
             HostEntry* entry
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_FreeHostEntry")]
-        internal static unsafe partial void FreeHostEntry(HostEntry* entry);
+        partial internal static unsafe void FreeHostEntry(HostEntry* entry);
     }
 }

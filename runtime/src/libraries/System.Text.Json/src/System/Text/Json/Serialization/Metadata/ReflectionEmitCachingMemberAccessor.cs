@@ -9,7 +9,7 @@ using System.Reflection;
 namespace System.Text.Json.Serialization.Metadata
 {
     [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-    internal sealed partial class ReflectionEmitCachingMemberAccessor : MemberAccessor
+    partial internal sealed class ReflectionEmitCachingMemberAccessor : MemberAccessor
     {
         private static readonly ReflectionEmitMemberAccessor s_sourceAccessor = new();
         private static readonly Cache<(string id, Type declaringType, MemberInfo? member)> s_cache =

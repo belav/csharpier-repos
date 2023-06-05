@@ -6,10 +6,11 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
+    partial
     /// <summary>
     ///     Wrapper for CNG's implementation of elliptic curve Diffie-Hellman key exchange
     /// </summary>
-    public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+    public sealed class ECDiffieHellmanCng : ECDiffieHellman
     {
         private CngAlgorithmCore _core = new CngAlgorithmCore(typeof(ECDiffieHellmanCng))
         {

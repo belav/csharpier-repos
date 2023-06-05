@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
-    internal abstract partial class AbstractCSharpReducer
+    partial internal abstract class AbstractCSharpReducer
     {
         protected abstract class AbstractReductionRewriter
             : CSharpSyntaxRewriter,

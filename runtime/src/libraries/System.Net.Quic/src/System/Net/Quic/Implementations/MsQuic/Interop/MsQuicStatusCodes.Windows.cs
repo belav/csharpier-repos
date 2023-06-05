@@ -3,7 +3,7 @@
 
 namespace System.Net.Quic.Implementations.MsQuic.Internal
 {
-    internal static partial class MsQuicStatusCodes
+    partial internal static class MsQuicStatusCodes
     {
         internal const uint Success = 0;
         internal const uint Pending = 0x703E5;

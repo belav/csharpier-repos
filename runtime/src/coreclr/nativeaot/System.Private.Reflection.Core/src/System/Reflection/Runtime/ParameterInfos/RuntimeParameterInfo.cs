@@ -8,10 +8,11 @@ using System.Collections.Generic;
 
 namespace System.Reflection.Runtime.ParameterInfos
 {
+    partial
     //
     // Abstract base for all ParameterInfo objects created by the Runtime.
     //
-    internal abstract partial class RuntimeParameterInfo : ParameterInfo
+    internal abstract class RuntimeParameterInfo : ParameterInfo
     {
         protected RuntimeParameterInfo(MemberInfo member, int position)
         {

@@ -22,7 +22,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 {
-    internal static partial class ConflictResolver
+    partial internal static class ConflictResolver
     {
         /// <summary>
         /// Helper class to track the state necessary for finding/resolving conflicts in a

@@ -17,13 +17,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 {
-    internal abstract partial class AbstractGenerateVariableService<
+    partial internal abstract class AbstractGenerateVariableService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax
     >
     {
-        private partial class GenerateVariableCodeAction : CodeAction
+        partial private class GenerateVariableCodeAction : CodeAction
         {
             private readonly State _state;
             private readonly bool _generateProperty;

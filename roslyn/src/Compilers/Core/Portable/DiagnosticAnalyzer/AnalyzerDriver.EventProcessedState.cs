@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class AnalyzerDriver
+    partial internal class AnalyzerDriver
     {
         /// <summary>
         /// Used to represent state of processing of a <see cref="CompilationEvent"/>.

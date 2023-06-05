@@ -35,7 +35,7 @@ using System.Windows.Forms;
 
 namespace Samples
 {
-    public partial class flatten : Form
+    partial public class flatten : Form
     {
         // default values
         private float translateX = 0f;

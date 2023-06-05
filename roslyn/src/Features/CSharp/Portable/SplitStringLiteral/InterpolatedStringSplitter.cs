@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.SplitStringLiteral
 {
-    internal abstract partial class StringSplitter
+    partial internal abstract class StringSplitter
     {
         private sealed class InterpolatedStringSplitter : StringSplitter
         {

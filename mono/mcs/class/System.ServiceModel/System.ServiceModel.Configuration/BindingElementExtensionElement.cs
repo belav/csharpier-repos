@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public abstract partial class BindingElementExtensionElement : ServiceModelExtensionElement
+    partial public abstract class BindingElementExtensionElement : ServiceModelExtensionElement
     {
         protected BindingElementExtensionElement() { }
 

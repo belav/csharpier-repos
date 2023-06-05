@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract partial class SelectionValidator
+    partial internal abstract class SelectionValidator
     {
         protected static readonly SelectionResult NullSelection = new NullSelectionResult();
 

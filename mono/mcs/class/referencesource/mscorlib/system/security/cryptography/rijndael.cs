@@ -36,7 +36,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public Rijndael Create()
+        public static
+        //
+        // public methods
+        //
+
+        new Rijndael Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.RijndaelManaged();
@@ -45,7 +50,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public Rijndael Create(String algName)
+        public static new Rijndael Create(String algName)
         {
             return (Rijndael)CryptoConfig.CreateFromName(algName);
         }

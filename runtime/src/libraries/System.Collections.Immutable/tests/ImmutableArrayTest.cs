@@ -15,7 +15,7 @@ using Xunit.Abstractions;
 
 namespace System.Collections.Immutable.Tests
 {
-    public partial class ImmutableArrayTest : SimpleElementImmutablesTestBase
+    partial public class ImmutableArrayTest : SimpleElementImmutablesTestBase
     {
         private static readonly ImmutableArray<int> s_emptyDefault = default; // init explicitly to avoid CS0649
         private static readonly ImmutableArray<int> s_empty = ImmutableArray.Create<int>();

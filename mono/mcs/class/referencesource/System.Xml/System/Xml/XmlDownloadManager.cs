@@ -15,10 +15,11 @@ namespace System.Xml
     using System.Net.Cache;
     using System.Runtime.Versioning;
 
+    partial
     //
     // XmlDownloadManager
     //
-    internal partial class XmlDownloadManager
+    internal class XmlDownloadManager
     {
         Hashtable connections;
 

@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService>
+    partial internal abstract class AbstractLanguageService<TPackage, TLanguageService>
         : IVsContainedLanguageFactory
     {
         private ProjectSystemProject FindMatchingProject(IVsHierarchy hierarchy, uint itemid)

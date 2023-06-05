@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace System.Runtime.Serialization
 {
-    internal partial class XmlFormatWriterGenerator
+    partial internal class XmlFormatWriterGenerator
     {
         partial class CriticalHelper
         {

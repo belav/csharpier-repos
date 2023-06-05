@@ -8,11 +8,12 @@ using System.Threading;
 
 namespace System.Runtime.InteropServices
 {
+    partial
     // This implementation does not employ critical execution regions and thus cannot
     // reliably guarantee handle release in the face of thread aborts.
 
     /// <summary>Represents a wrapper class for operating system handles.</summary>
-    public abstract partial class SafeHandle : CriticalFinalizerObject, IDisposable
+    public abstract class SafeHandle : CriticalFinalizerObject, IDisposable
     {
 #if DEBUG
         /// <summary>Indicates whether debug tracking and logging of SafeHandle finalization is enabled.</summary>

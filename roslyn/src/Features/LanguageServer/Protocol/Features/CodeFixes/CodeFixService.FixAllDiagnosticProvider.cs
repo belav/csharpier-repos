@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
-    internal partial class CodeFixService
+    partial internal class CodeFixService
     {
         private sealed class FixAllDiagnosticProvider : FixAllContext.SpanBasedDiagnosticProvider
         {

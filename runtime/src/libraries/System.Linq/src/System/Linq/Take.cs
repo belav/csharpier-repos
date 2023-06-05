@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TSource> Take<TSource>(
             this IEnumerable<TSource> source,

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class FileStream_ctor_str_fm_fa_fs
+    partial public class FileStream_ctor_str_fm_fa_fs
     {
         [Fact]
         public void FileShareWriteNew()

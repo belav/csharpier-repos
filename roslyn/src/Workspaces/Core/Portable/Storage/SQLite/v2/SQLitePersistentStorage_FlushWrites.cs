@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SQLite.v2
 {
-    internal partial class SQLitePersistentStorage
+    partial internal class SQLitePersistentStorage
     {
         /// <summary>
         /// A queue to batch up flush requests and ensure that we don't issue then more often than every <see

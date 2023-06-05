@@ -602,7 +602,9 @@ namespace System.Data.Mapping.ViewGeneration
         }
 
         // effects: Given two duplicate eliination choices, returns an OR of them
-        static private CellQuery.SelectDistinct MergeDupl(
+        private
+        // effects: Given two duplicate eliination choices, returns an OR of them
+        static CellQuery.SelectDistinct MergeDupl(
             CellQuery.SelectDistinct d1,
             CellQuery.SelectDistinct d2
         )
@@ -623,7 +625,14 @@ namespace System.Data.Mapping.ViewGeneration
         // effects: Given two cellqueries query1 and query2, merges their
         // boolean expressions while ANDING query1 bools with conjunct1 and
         // query2's bools with conjunct2 and returns the result
-        static private List<BoolExpression> MergeBoolExpressions(
+        private
+        // requires: query1 has the same number of boolean expressions as
+        // query2. There should be no  index i for which query1's bools[i] !=
+        // null and query2's bools[i] != null
+        // effects: Given two cellqueries query1 and query2, merges their
+        // boolean expressions while ANDING query1 bools with conjunct1 and
+        // query2's bools with conjunct2 and returns the result
+        static List<BoolExpression> MergeBoolExpressions(
             CellQuery query1,
             CellQuery query2,
             BoolExpression conjunct1,

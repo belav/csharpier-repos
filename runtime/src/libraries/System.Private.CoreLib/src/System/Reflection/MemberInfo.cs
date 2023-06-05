@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    public abstract partial class MemberInfo : ICustomAttributeProvider
+    partial public abstract class MemberInfo : ICustomAttributeProvider
     {
         protected MemberInfo() { }
 

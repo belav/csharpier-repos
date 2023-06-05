@@ -10,10 +10,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 
+partial
 /// <summary>
 /// Represents a handle to a Windows module (DLL).
 /// </summary>
-internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
+internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
     // Called by P/Invoke when returning SafeHandles
     private SafeLibraryHandle()
@@ -143,12 +144,12 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
     }
 
     [SuppressUnmanagedCodeSecurity]
-    private static partial class UnsafeNativeMethods
+    partial private static class UnsafeNativeMethods
     {
         // http://msdn.microsoft.com/en-us/library/windows/desktop/ms679351(v=vs.85).aspx
 #if NET7_0_OR_GREATER
         [LibraryImport("kernel32.dll", EntryPoint = "FormatMessageW", SetLastError = true)]
-        public static partial int FormatMessage(
+        partial public static int FormatMessage(
 #else
         [DllImport("kernel32.dll", EntryPoint = "FormatMessageW", SetLastError = true)]
         public static extern int FormatMessage(
@@ -169,7 +170,7 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
 #endif
 #if NET7_0_OR_GREATER
         [LibraryImport("kernel32.dll")]
-        internal static partial bool FreeLibrary(
+        partial internal static bool FreeLibrary(
 #else
         [DllImport("kernel32.dll")]
         internal static extern bool FreeLibrary(
@@ -180,7 +181,7 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
         [return: MarshalAs(UnmanagedType.Bool)]
 #if NET7_0_OR_GREATER
         [LibraryImport("kernel32.dll", EntryPoint = "GetModuleHandleExW", SetLastError = true)]
-        internal static partial bool GetModuleHandleEx(
+        partial internal static bool GetModuleHandleEx(
 #else
         [DllImport("kernel32.dll", EntryPoint = "GetModuleHandleExW", SetLastError = true)]
         internal static extern bool GetModuleHandleEx(
@@ -193,7 +194,7 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
         // http://msdn.microsoft.com/en-us/library/ms683212(v=vs.85).aspx
 #if NET7_0_OR_GREATER
         [LibraryImport("kernel32.dll", SetLastError = true)]
-        internal static partial IntPtr GetProcAddress(
+        partial internal static IntPtr GetProcAddress(
 #else
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern IntPtr GetProcAddress(
@@ -205,7 +206,7 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
         // http://msdn.microsoft.com/en-us/library/windows/desktop/ms684179(v=vs.85).aspx
 #if NET7_0_OR_GREATER
         [LibraryImport("kernel32.dll", EntryPoint = "LoadLibraryExW", SetLastError = true)]
-        internal static partial SafeLibraryHandle LoadLibraryEx(
+        partial internal static SafeLibraryHandle LoadLibraryEx(
 #else
         [DllImport("kernel32.dll", EntryPoint = "LoadLibraryExW", SetLastError = true)]
         internal static extern SafeLibraryHandle LoadLibraryEx(

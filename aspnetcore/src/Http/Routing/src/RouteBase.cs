@@ -10,10 +10,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing;
 
+partial
 /// <summary>
 /// Base class implementation of an <see cref="IRouter"/>.
 /// </summary>
-public abstract partial class RouteBase : IRouter, INamedRouter
+public abstract class RouteBase : IRouter, INamedRouter
 {
     private readonly object _loggersLock = new object();
 
@@ -366,7 +367,7 @@ public abstract partial class RouteBase : IRouter, INamedRouter
         return ParsedTemplate.TemplateText!;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -374,7 +375,7 @@ public abstract partial class RouteBase : IRouter, INamedRouter
             "Request successfully matched the route with name '{RouteName}' and template '{RouteTemplate}'",
             EventName = "RequestMatchedRoute"
         )]
-        public static partial void RequestMatchedRoute(
+        partial public static void RequestMatchedRoute(
             ILogger logger,
             string? routeName,
             string? routeTemplate

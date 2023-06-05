@@ -22,7 +22,7 @@ using DbLinq.Vendor;
 
 namespace nwind
 {
-    public partial class Northwind : DataContext
+    partial public class Northwind : DataContext
     {
         public Northwind(IDbConnection connection)
             : base(connection, new DbLinq.Oracle.OracleVendor()) { }
@@ -116,7 +116,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"Categories\"")]
-    public partial class Category
+    partial public class Category
     {
         #region decimal CategoryID
 
@@ -250,7 +250,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"Customers\"")]
-    public partial class Customer
+    partial public class Customer
     {
         #region string Address
 
@@ -522,7 +522,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"Employees\"")]
-    public partial class Employee
+    partial public class Employee
     {
         #region string Address
 
@@ -1031,7 +1031,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"EmployeeTerritories\"")]
-    public partial class EmployeeTerritory
+    partial public class EmployeeTerritory
     {
         #region decimal EmployeeID
 
@@ -1173,7 +1173,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"Orders\"")]
-    public partial class Order
+    partial public class Order
     {
         #region string CustomerID
 
@@ -1580,7 +1580,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"OrderDetails\"")]
-    public partial class OrderDetail
+    partial public class OrderDetail
     {
         #region float Discount
 
@@ -1787,7 +1787,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"Products\"")]
-    public partial class Product
+    partial public class Product
     {
         #region decimal? CategoryID
 
@@ -2124,7 +2124,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"Region\"")]
-    public partial class Region
+    partial public class Region
     {
         #region string RegionDescription
 
@@ -2218,7 +2218,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"Suppliers\"")]
-    public partial class Supplier
+    partial public class Supplier
     {
         #region string Address
 
@@ -2492,7 +2492,7 @@ namespace nwind
     }
 
     [Table(Name = "NORTHWIND.\"Territories\"")]
-    public partial class Territory
+    partial public class Territory
     {
         #region decimal RegionID
 

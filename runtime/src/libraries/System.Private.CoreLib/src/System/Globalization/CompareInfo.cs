@@ -18,7 +18,7 @@ namespace System.Globalization
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public sealed partial class CompareInfo : IDeserializationCallback
+    partial public sealed class CompareInfo : IDeserializationCallback
     {
         // Mask used to check if IndexOf()/LastIndexOf()/IsPrefix()/IsPostfix() has the right flags.
         private const CompareOptions ValidIndexMaskOffFlags = ~(

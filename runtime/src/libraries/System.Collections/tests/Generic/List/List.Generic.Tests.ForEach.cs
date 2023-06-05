@@ -6,10 +6,11 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
+    partial
     /// <summary>
     /// Contains tests that ensure the correctness of the List class.
     /// </summary>
-    public abstract partial class List_Generic_Tests<T> : IList_Generic_Tests<T>
+    public abstract class List_Generic_Tests<T> : IList_Generic_Tests<T>
     {
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]

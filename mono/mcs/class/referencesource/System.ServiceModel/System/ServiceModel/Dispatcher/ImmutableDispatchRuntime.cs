@@ -748,7 +748,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        static internal void GotDynamicInstanceContext(object state)
+        internal static void GotDynamicInstanceContext(object state)
         {
             bool alreadyResumedNoLock;
             ((IResumeMessageRpc)state).Resume(out alreadyResumedNoLock);

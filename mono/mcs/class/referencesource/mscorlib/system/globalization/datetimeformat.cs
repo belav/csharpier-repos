@@ -190,7 +190,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        internal unsafe static void FormatDigits(
+        internal static unsafe void FormatDigits(
             StringBuilder outputBuffer,
             int value,
             int len,

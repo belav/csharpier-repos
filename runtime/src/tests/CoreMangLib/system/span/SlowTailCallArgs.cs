@@ -153,7 +153,7 @@ internal static class ByRefLikeTest
     private delegate void ActionOfTestByRefLike(TestByRefLike x);
 
     [StructLayout(LayoutKind.Explicit)]
-    private ref struct TestByRefLike
+    ref private struct TestByRefLike
     {
         [FieldOffset(8 * 0)]
         private object obj;

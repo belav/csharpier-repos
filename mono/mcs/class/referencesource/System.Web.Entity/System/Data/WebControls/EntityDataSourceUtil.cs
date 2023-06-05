@@ -1363,21 +1363,21 @@ namespace System.Web.UI.WebControls
             }
         }
 
-        static private readonly Type StackOverflowType = typeof(System.StackOverflowException);
-        static private readonly Type OutOfMemoryType = typeof(System.OutOfMemoryException);
-        static private readonly Type ThreadAbortType =
+        private static readonly Type StackOverflowType = typeof(System.StackOverflowException);
+        private static readonly Type OutOfMemoryType = typeof(System.OutOfMemoryException);
+        private static readonly Type ThreadAbortType =
             typeof(System.Threading.ThreadAbortException);
-        static private readonly Type NullReferenceType = typeof(System.NullReferenceException);
-        static private readonly Type AccessViolationType = typeof(System.AccessViolationException);
-        static private readonly Type SecurityType = typeof(System.Security.SecurityException);
-        static private readonly Type AppDomainUnloadedType =
+        private static readonly Type NullReferenceType = typeof(System.NullReferenceException);
+        private static readonly Type AccessViolationType = typeof(System.AccessViolationException);
+        private static readonly Type SecurityType = typeof(System.Security.SecurityException);
+        private static readonly Type AppDomainUnloadedType =
             typeof(System.AppDomainUnloadedException);
-        static private readonly Type CannotUnloadAppDomainType =
+        private static readonly Type CannotUnloadAppDomainType =
             typeof(CannotUnloadAppDomainException);
-        static private readonly Type BadImageFormatType = typeof(BadImageFormatException);
-        static private readonly Type InvalidProgramType = typeof(InvalidProgramException);
+        private static readonly Type BadImageFormatType = typeof(BadImageFormatException);
+        private static readonly Type InvalidProgramType = typeof(InvalidProgramException);
 
-        static private bool IsCatchableExceptionType(Exception e)
+        private static bool IsCatchableExceptionType(Exception e)
         {
             // a 'catchable' exception is defined by what it is not.
             Debug.Assert(e != null, "Unexpected null exception!");

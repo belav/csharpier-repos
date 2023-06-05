@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-    internal static partial class NameResolutionPal
+    partial internal static class NameResolutionPal
     {
         public const bool SupportsGetAddrInfoAsync = false;
 

@@ -1967,7 +1967,7 @@ namespace System.Data.Services.Client
         }
     }
 
-    internal static partial class Error
+    partial internal static class Error
     {
         internal static Exception ArgumentNull(string paramName)
         {

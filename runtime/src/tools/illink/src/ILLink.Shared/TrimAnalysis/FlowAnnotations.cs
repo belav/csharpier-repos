@@ -9,34 +9,35 @@ using ILLink.Shared.TypeSystemProxy;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     // Shared helpers to go from MethodProxy to dataflow values.
-    public partial class FlowAnnotations
+    public class FlowAnnotations
     {
-        internal partial bool MethodRequiresDataFlowAnalysis(MethodProxy method);
+        partial internal bool MethodRequiresDataFlowAnalysis(MethodProxy method);
 
-        internal partial MethodReturnValue GetMethodReturnValue(
+        partial internal MethodReturnValue GetMethodReturnValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         );
 
-        internal partial MethodReturnValue GetMethodReturnValue(MethodProxy method);
+        partial internal MethodReturnValue GetMethodReturnValue(MethodProxy method);
 
-        internal partial GenericParameterValue GetGenericParameterValue(
+        partial internal GenericParameterValue GetGenericParameterValue(
             GenericParameterProxy genericParameter
         );
 
-        internal partial MethodParameterValue GetMethodThisParameterValue(
+        partial internal MethodParameterValue GetMethodThisParameterValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         );
 
-        internal partial MethodParameterValue GetMethodThisParameterValue(MethodProxy method);
+        partial internal MethodParameterValue GetMethodThisParameterValue(MethodProxy method);
 
-        internal partial MethodParameterValue GetMethodParameterValue(
+        partial internal MethodParameterValue GetMethodParameterValue(
             ParameterProxy param,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         );
 
-        internal partial MethodParameterValue GetMethodParameterValue(ParameterProxy param);
+        partial internal MethodParameterValue GetMethodParameterValue(ParameterProxy param);
     }
 }

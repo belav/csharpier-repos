@@ -3,7 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
-internal abstract partial class SyntaxVisitor<TResult>
+partial internal abstract class SyntaxVisitor<TResult>
 {
     public virtual TResult Visit(GreenNode node)
     {
@@ -31,7 +31,7 @@ internal abstract partial class SyntaxVisitor<TResult>
     }
 }
 
-internal abstract partial class SyntaxVisitor
+partial internal abstract class SyntaxVisitor
 {
     public virtual GreenNode Visit(GreenNode node)
     {

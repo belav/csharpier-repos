@@ -8,8 +8,8 @@ using System.Collections.Immutable;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct TypeProxy : IMemberProxy
+    partial internal readonly struct TypeProxy : IMemberProxy
     {
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters();
+        partial internal ImmutableArray<GenericParameterProxy> GetGenericParameters();
     }
 }

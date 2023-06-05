@@ -25,9 +25,9 @@ using System.Reflection;
 
 namespace System.Data.Objects.ELinq
 {
-    internal sealed partial class ExpressionConverter
+    partial internal sealed class ExpressionConverter
     {
-        private sealed partial class MethodCallTranslator : TypedTranslator<MethodCallExpression>
+        partial private sealed class MethodCallTranslator : TypedTranslator<MethodCallExpression>
         {
             private sealed class SpatialMethodCallTranslator : CallTranslator
             {

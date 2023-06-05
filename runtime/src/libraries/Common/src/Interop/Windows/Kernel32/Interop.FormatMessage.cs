@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         private const int FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
         private const int FORMAT_MESSAGE_FROM_HMODULE = 0x00000800;
@@ -16,7 +16,7 @@ internal static partial class Interop
         private const int ERROR_INSUFFICIENT_BUFFER = 0x7A;
 
         [LibraryImport(Libraries.Kernel32, EntryPoint = "FormatMessageW", SetLastError = true)]
-        private static unsafe partial int FormatMessage(
+        partial private static unsafe int FormatMessage(
             int dwFlags,
             IntPtr lpSource,
             uint dwMessageId,

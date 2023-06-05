@@ -19,7 +19,7 @@ namespace System.ServiceProcess
         ResumeAutomatic = 18,
     }
 
-    public partial class ServiceBase : System.ComponentModel.Component
+    partial public class ServiceBase : System.ComponentModel.Component
     {
         public const int MaxNameLength = 80;
 
@@ -134,7 +134,7 @@ namespace System.ServiceProcess
     [System.ComponentModel.DesignerAttribute(
         "System.ServiceProcess.Design.ServiceControllerDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class ServiceController : System.ComponentModel.Component
+    partial public class ServiceController : System.ComponentModel.Component
     {
         public ServiceController() { }
 
@@ -252,7 +252,7 @@ namespace System.ServiceProcess
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public partial class ServiceProcessDescriptionAttribute
+    partial public class ServiceProcessDescriptionAttribute
         : System.ComponentModel.DescriptionAttribute
     {
         public ServiceProcessDescriptionAttribute(string description) { }
@@ -284,7 +284,7 @@ namespace System.ServiceProcess
         InteractiveProcess = 256,
     }
 
-    public readonly partial struct SessionChangeDescription
+    partial public readonly struct SessionChangeDescription
     {
         private readonly int _dummyPrimitive;
         public System.ServiceProcess.SessionChangeReason Reason
@@ -343,7 +343,7 @@ namespace System.ServiceProcess
         SessionRemoteControl = 9,
     }
 
-    public partial class TimeoutException : System.SystemException
+    partial public class TimeoutException : System.SystemException
     {
         public TimeoutException() { }
 

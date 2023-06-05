@@ -137,11 +137,12 @@ namespace System.Runtime.CompilerServices
         }
     }
 
+    partial
     /// <summary>
     /// Dynamic site type.
     /// </summary>
     /// <typeparam name="T">The delegate type.</typeparam>
-    public partial class CallSite<T> : CallSite
+    public class CallSite<T> : CallSite
         where T : class
     {
         /// <summary>

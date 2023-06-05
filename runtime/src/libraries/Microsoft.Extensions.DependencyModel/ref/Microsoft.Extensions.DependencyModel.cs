@@ -10,7 +10,7 @@ namespace Microsoft.DotNet.PlatformAbstractions
         System.ComponentModel.EditorBrowsableState.Never
     )]
     [System.ObsoleteAttribute("HashCodeCombiner has been deprecated. Use System.HashCode instead.")]
-    public partial struct HashCodeCombiner
+    partial public struct HashCodeCombiner
     {
         private int _dummyPrimitive;
         public int CombinedHash
@@ -38,7 +38,7 @@ namespace Microsoft.DotNet.PlatformAbstractions
 
 namespace Microsoft.Extensions.DependencyModel
 {
-    public partial class CompilationLibrary : Microsoft.Extensions.DependencyModel.Library
+    partial public class CompilationLibrary : Microsoft.Extensions.DependencyModel.Library
     {
         public CompilationLibrary(
             string type,
@@ -96,7 +96,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class CompilationOptions
+    partial public class CompilationOptions
     {
         public CompilationOptions(
             System.Collections.Generic.IEnumerable<string?> defines,
@@ -167,7 +167,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public readonly partial struct Dependency
+    partial public readonly struct Dependency
         : System.IEquatable<Microsoft.Extensions.DependencyModel.Dependency>
     {
         private readonly object _dummy;
@@ -205,7 +205,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class DependencyContext
+    partial public class DependencyContext
     {
         public DependencyContext(
             Microsoft.Extensions.DependencyModel.TargetInfo target,
@@ -262,7 +262,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public static partial class DependencyContextExtensions
+    partial public static class DependencyContextExtensions
     {
         public static System.Collections.Generic.IEnumerable<System.Reflection.AssemblyName> GetDefaultAssemblyNames(
             this Microsoft.Extensions.DependencyModel.DependencyContext self
@@ -361,7 +361,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class DependencyContextJsonReader
+    partial public class DependencyContextJsonReader
         : Microsoft.Extensions.DependencyModel.IDependencyContextReader,
             System.IDisposable
     {
@@ -377,7 +377,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class DependencyContextLoader
+    partial public class DependencyContextLoader
     {
         public DependencyContextLoader() { }
 
@@ -397,7 +397,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class DependencyContextWriter
+    partial public class DependencyContextWriter
     {
         public DependencyContextWriter() { }
 
@@ -407,12 +407,12 @@ namespace Microsoft.Extensions.DependencyModel
         ) { }
     }
 
-    public partial interface IDependencyContextReader : System.IDisposable
+    partial public interface IDependencyContextReader : System.IDisposable
     {
         Microsoft.Extensions.DependencyModel.DependencyContext Read(System.IO.Stream stream);
     }
 
-    public partial class Library
+    partial public class Library
     {
         public Library(
             string type,
@@ -484,7 +484,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class ResourceAssembly
+    partial public class ResourceAssembly
     {
         public ResourceAssembly(string path, string locale) { }
 
@@ -500,7 +500,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class RuntimeAssembly
+    partial public class RuntimeAssembly
     {
         public RuntimeAssembly(string assemblyName, string path) { }
 
@@ -519,7 +519,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class RuntimeAssetGroup
+    partial public class RuntimeAssetGroup
     {
         public RuntimeAssetGroup(
             string? runtime,
@@ -547,7 +547,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class RuntimeFallbacks
+    partial public class RuntimeFallbacks
     {
         public RuntimeFallbacks(
             string runtime,
@@ -568,7 +568,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class RuntimeFile
+    partial public class RuntimeFile
     {
         public RuntimeFile(string path, string? assemblyVersion, string? fileVersion) { }
 
@@ -586,7 +586,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class RuntimeLibrary : Microsoft.Extensions.DependencyModel.Library
+    partial public class RuntimeLibrary : Microsoft.Extensions.DependencyModel.Library
     {
         public RuntimeLibrary(
             string type,
@@ -667,7 +667,7 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 
-    public partial class TargetInfo
+    partial public class TargetInfo
     {
         public TargetInfo(
             string framework,
@@ -697,7 +697,7 @@ namespace Microsoft.Extensions.DependencyModel
 
 namespace Microsoft.Extensions.DependencyModel.Resolution
 {
-    public partial class AppBaseCompilationAssemblyResolver
+    partial public class AppBaseCompilationAssemblyResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
         public AppBaseCompilationAssemblyResolver() { }
@@ -713,7 +713,7 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         }
     }
 
-    public partial class CompositeCompilationAssemblyResolver
+    partial public class CompositeCompilationAssemblyResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
         public CompositeCompilationAssemblyResolver(
@@ -729,7 +729,7 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         }
     }
 
-    public partial class DotNetReferenceAssembliesPathResolver
+    partial public class DotNetReferenceAssembliesPathResolver
     {
         public static readonly string DotNetReferenceAssembliesPathEnv;
 
@@ -741,7 +741,7 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         }
     }
 
-    public partial interface ICompilationAssemblyResolver
+    partial public interface ICompilationAssemblyResolver
     {
         bool TryResolveAssemblyPaths(
             Microsoft.Extensions.DependencyModel.CompilationLibrary library,
@@ -749,7 +749,7 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         );
     }
 
-    public partial class PackageCompilationAssemblyResolver
+    partial public class PackageCompilationAssemblyResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
         public PackageCompilationAssemblyResolver() { }
@@ -765,7 +765,7 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         }
     }
 
-    public partial class ReferenceAssemblyPathResolver
+    partial public class ReferenceAssemblyPathResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
         public ReferenceAssemblyPathResolver() { }
@@ -787,7 +787,7 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
 
 namespace System.Collections.Generic
 {
-    public static partial class CollectionExtensions
+    partial public static class CollectionExtensions
     {
         public static System.Collections.Generic.IEnumerable<string> GetDefaultAssets(
             this System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeAssetGroup> self

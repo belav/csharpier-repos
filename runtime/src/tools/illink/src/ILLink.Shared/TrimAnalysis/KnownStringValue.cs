@@ -8,10 +8,11 @@ using ILLink.Shared.DataFlow;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// A known string - such as the result of a ldstr.
     /// </summary>
-    internal sealed partial record KnownStringValue : SingleValue
+    internal sealed record KnownStringValue : SingleValue
     {
         public KnownStringValue(string contents) => Contents = contents;
 

@@ -14,7 +14,7 @@ using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal partial class AbstractLanguageService<TPackage, TLanguageService>
+    partial internal class AbstractLanguageService<TPackage, TLanguageService>
         : IVsLanguageDebugInfo
     {
         int IVsLanguageDebugInfo.GetLanguageID(

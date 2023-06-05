@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions
 {
-    public partial class Regex
+    partial public class Regex
     {
         /// <summary>The maximum allowed timeout duration.</summary>
         /// <remarks>

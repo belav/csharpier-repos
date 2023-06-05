@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
         Shared
     ]
     [ExtensionOrder(After = PredefinedConfigurationFixProviderNames.Suppression)]
-    internal sealed partial class ConfigureSeverityLevelCodeFixProvider : IConfigurationFixProvider
+    partial internal sealed class ConfigureSeverityLevelCodeFixProvider : IConfigurationFixProvider
     {
         private static readonly ImmutableArray<(
             string value,

@@ -23,7 +23,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
 {
     [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
-    public partial class ExtractMethodTests : ExtractMethodBase
+    partial public class ExtractMethodTests : ExtractMethodBase
     {
         [Fact]
         public async Task ExtractMethod1()

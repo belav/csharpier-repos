@@ -8,9 +8,9 @@ using System.Collections.Immutable;
 
 namespace Roslyn.Utilities
 {
-    internal partial class SpecializedCollections
+    partial internal class SpecializedCollections
     {
-        private partial class Empty
+        partial private class Empty
         {
             internal static class BoxedImmutableArray<T>
             {

@@ -16,7 +16,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MockDiagnosticAnalyzer
 {
-    public partial class MockDiagnosticAnalyzerTests
+    partial public class MockDiagnosticAnalyzerTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         private class MockDiagnosticAnalyzer : DiagnosticAnalyzer

@@ -5,7 +5,7 @@ using System;
 
 namespace System.Net
 {
-    public static partial class Dns
+    partial public static class Dns
     {
         public static string GetHostName()
         {

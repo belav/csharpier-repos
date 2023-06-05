@@ -829,7 +829,7 @@ namespace System.Security.Cryptography
             }
             return;
 
-            unsafe static int TransformBlock(
+            static unsafe int TransformBlock(
                 ICryptoTransform transform,
                 ReadOnlyMemory<byte> inputBuffer,
                 byte[] outputBuffer,

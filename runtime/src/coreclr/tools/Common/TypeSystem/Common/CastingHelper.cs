@@ -5,7 +5,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public static partial class CastingHelper
+    partial public static class CastingHelper
     {
         /// <summary>
         /// Returns true if '<paramref name="thisType"/>' can be cast to '<paramref name="otherType"/>'.

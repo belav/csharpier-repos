@@ -13,7 +13,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Net
 {
-    public sealed unsafe partial class HttpListenerResponse
+    partial public sealed unsafe class HttpListenerResponse
     {
         private enum ResponseState
         {

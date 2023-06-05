@@ -6,7 +6,7 @@ using Internal.Reflection.Augments;
 
 namespace System.Reflection
 {
-    public abstract partial class MethodBase : MemberInfo
+    partial public abstract class MethodBase : MemberInfo
     {
         public static MethodBase GetMethodFromHandle(RuntimeMethodHandle handle) =>
             ReflectionAugments.ReflectionCoreCallbacks.GetMethodFromHandle(handle);

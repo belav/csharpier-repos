@@ -34,7 +34,7 @@ using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq
 {
-    public abstract partial class JContainer
+    partial public abstract class JContainer
     {
         internal async Task ReadTokenFromAsync(
             JsonReader reader,

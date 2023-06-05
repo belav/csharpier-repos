@@ -13,7 +13,7 @@ namespace System.Security.Cryptography
         UrlFormat = Obsoletions.SharedUrlFormat
     )]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public sealed partial class RC2CryptoServiceProvider : RC2
+    partial public sealed class RC2CryptoServiceProvider : RC2
     {
         [SuppressMessage(
             "Microsoft.Security",

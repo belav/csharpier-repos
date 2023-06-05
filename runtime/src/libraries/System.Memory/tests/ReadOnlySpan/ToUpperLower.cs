@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.SpanTests
 {
-    public partial class ReadOnlySpanTests
+    partial public class ReadOnlySpanTests
     {
         public static IEnumerable<object[]> MemoryExtensionsToUpperLowerOverlapping()
         {

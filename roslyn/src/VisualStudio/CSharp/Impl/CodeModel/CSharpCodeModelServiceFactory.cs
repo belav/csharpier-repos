@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.Text.Editor;
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
     [ExportLanguageServiceFactory(typeof(ICodeModelService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpCodeModelServiceFactory : ILanguageServiceFactory
+    partial internal class CSharpCodeModelServiceFactory : ILanguageServiceFactory
     {
         private readonly EditorOptionsService _editorOptionsService;
         private readonly IEnumerable<IRefactorNotifyService> _refactorNotifyServices;

@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.IO.MemoryMappedFiles
 {
-    public partial class MemoryMappedFile
+    partial public class MemoryMappedFile
     {
         // This will verify file access.
         private static void VerifyMemoryMappedFileAccess(

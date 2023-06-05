@@ -10,10 +10,11 @@ using System.Windows.Input;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 {
+    partial
     /// <summary>
     /// Interaction logic for NewTypeDestinationSelection.xaml
     /// </summary>
-    internal partial class NewTypeDestinationSelection : UserControl
+    internal class NewTypeDestinationSelection : UserControl
     {
         // This allows for binding of the ViewModel as a property in XAML
         // which can be useful if control is being hosted

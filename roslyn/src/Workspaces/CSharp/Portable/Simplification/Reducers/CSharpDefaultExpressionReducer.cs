@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
-    internal partial class CSharpDefaultExpressionReducer : AbstractCSharpReducer
+    partial internal class CSharpDefaultExpressionReducer : AbstractCSharpReducer
     {
         private static readonly ObjectPool<IReductionRewriter> s_pool =
             new(() => new Rewriter(s_pool));

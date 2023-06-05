@@ -18,7 +18,7 @@ using Xunit;
 
 namespace JIT.HardwareIntrinsics.X86._Avx2.handwritten
 {
-    public static partial class Program
+    partial public static class Program
     {
         [Fact]
         public static void ConvertToVector256Int32UInt16()

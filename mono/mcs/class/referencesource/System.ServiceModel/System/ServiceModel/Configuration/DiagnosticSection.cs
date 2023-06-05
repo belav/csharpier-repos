@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Security;
     using System.ServiceModel.Diagnostics;
 
-    public sealed partial class DiagnosticSection : ConfigurationSection
+    partial public sealed class DiagnosticSection : ConfigurationSection
     {
         // These three constructors are used by the configuration system.
         public DiagnosticSection()

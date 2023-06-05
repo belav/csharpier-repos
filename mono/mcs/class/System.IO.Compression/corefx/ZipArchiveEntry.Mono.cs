@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace System.IO.Compression
 {
-    public partial class ZipArchiveEntry
+    partial public class ZipArchiveEntry
     {
         internal static readonly ZipVersionMadeByPlatform CurrentZipPlatform =
             Path.PathSeparator == '/'

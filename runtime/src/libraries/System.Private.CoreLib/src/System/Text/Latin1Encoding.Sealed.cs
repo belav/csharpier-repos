@@ -3,7 +3,7 @@
 
 namespace System.Text
 {
-    internal partial class Latin1Encoding : Encoding
+    partial internal class Latin1Encoding : Encoding
     {
         /// <summary>
         /// A special instance of <see cref="Latin1Encoding"/> that is initialized with "don't throw on invalid sequences;

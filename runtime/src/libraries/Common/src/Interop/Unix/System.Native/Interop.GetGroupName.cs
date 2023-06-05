@@ -8,9 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Gets the group name associated to the specified group ID.
@@ -26,6 +26,6 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        private static unsafe partial string? GetGroupNameInternal(uint uid);
+        partial private static unsafe string? GetGroupNameInternal(uint uid);
     }
 }

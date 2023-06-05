@@ -11,7 +11,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         private Dictionary<NamespaceKey, NamespaceDefinition> _namespaceDefs =
             new Dictionary<NamespaceKey, NamespaceDefinition>();

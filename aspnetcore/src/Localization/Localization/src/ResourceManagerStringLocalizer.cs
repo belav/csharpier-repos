@@ -12,12 +12,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Localization;
 
+partial
 /// <summary>
 /// An <see cref="IStringLocalizer"/> that uses the <see cref="ResourceManager"/> and
 /// <see cref="ResourceReader"/> to provide localized strings.
 /// </summary>
 /// <remarks>This type is thread-safe.</remarks>
-public partial class ResourceManagerStringLocalizer : IStringLocalizer
+public class ResourceManagerStringLocalizer : IStringLocalizer
 {
     private readonly ConcurrentDictionary<string, object?> _missingManifestCache =
         new ConcurrentDictionary<string, object?>();
@@ -273,7 +274,7 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
         return resourceNames;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -281,7 +282,7 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
             $"{nameof(ResourceManagerStringLocalizer)} searched for '{{Key}}' in '{{LocationSearched}}' with culture '{{Culture}}'.",
             EventName = "SearchedLocation"
         )]
-        public static partial void SearchedLocation(
+        partial public static void SearchedLocation(
             ILogger logger,
             string key,
             string locationSearched,

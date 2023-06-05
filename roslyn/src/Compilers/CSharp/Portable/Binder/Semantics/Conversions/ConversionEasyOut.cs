@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal abstract partial class ConversionsBase
+    partial internal abstract class ConversionsBase
     {
         private static class ConversionEasyOut
         {

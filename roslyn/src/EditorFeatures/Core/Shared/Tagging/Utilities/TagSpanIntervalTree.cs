@@ -12,13 +12,14 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 {
+    partial
     /// <summary>
     /// A tag span interval tree represents an ordered tree data structure to store tag spans in.  It
     /// allows you to efficiently find all tag spans that intersect a provided span.  Tag spans are
     /// tracked. That way you can query for intersecting/overlapping spans in a different snapshot
     /// than the one for the tag spans that were added.
     /// </summary>
-    internal partial class TagSpanIntervalTree<TTag>
+    internal class TagSpanIntervalTree<TTag>
         where TTag : ITag
     {
         private readonly IntervalTree<TagNode> _tree;

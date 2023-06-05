@@ -6,10 +6,11 @@ using System.Windows.Controls;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle.View
 {
+    partial
     /// <summary>
     /// Interaction logic for CodeStyleValueControl.xaml
     /// </summary>
-    internal partial class CodeStyleValueControl : UserControl
+    internal class CodeStyleValueControl : UserControl
     {
         private readonly CodeStyleValueViewModel _viewModel;
 

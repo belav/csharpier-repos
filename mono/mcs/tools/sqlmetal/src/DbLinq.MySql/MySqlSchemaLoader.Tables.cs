@@ -31,10 +31,10 @@ using DbLinq.Vendor.Implementation;
 
 namespace DbLinq.MySql
 {
-#if !MONO_STRICT
-    public
 #endif
-    partial class MySqlSchemaLoader
+    partial
+#if !MONO_STRICT
+    public class MySqlSchemaLoader
     {
         public override IList<IDataName> ReadTables(
             IDbConnection connectionString,

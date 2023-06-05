@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSACryptoServiceProvider : RSA, ICspAsymmetricAlgorithm
+    partial public sealed class RSACryptoServiceProvider : RSA, ICspAsymmetricAlgorithm
     {
         private const int DefaultKeySize = 1024;
 

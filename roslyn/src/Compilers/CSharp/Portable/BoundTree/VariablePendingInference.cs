@@ -12,19 +12,19 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class DeconstructionVariablePendingInference
+    partial internal class DeconstructionVariablePendingInference
     {
         protected override ErrorCode InferenceFailedError =>
             ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable;
     }
 
-    internal partial class OutVariablePendingInference
+    partial internal class OutVariablePendingInference
     {
         protected override ErrorCode InferenceFailedError =>
             ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedOutVariable;
     }
 
-    internal partial class VariablePendingInference : BoundExpression
+    partial internal class VariablePendingInference : BoundExpression
     {
         internal BoundExpression SetInferredTypeWithAnnotations(
             TypeWithAnnotations type,

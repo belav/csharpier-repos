@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         /// <summary>Creates a new LiteralExpressionSyntax instance.</summary>
         public static LiteralExpressionSyntax LiteralExpression(SyntaxKind kind) =>

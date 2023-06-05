@@ -11,11 +11,12 @@ using System.Threading;
 
 namespace System.ComponentModel
 {
+    partial
     /// <summary>
     /// Provides properties and methods to add a license
     /// to a component and to manage a <see cref='System.ComponentModel.LicenseProvider'/>. This class cannot be inherited.
     /// </summary>
-    public sealed partial class LicenseManager
+    public sealed class LicenseManager
     {
         private static readonly object s_selfLock = new object();
 

@@ -29,7 +29,7 @@ namespace System.Globalization
         AbbrevEraNames = 14,
     }
 
-    internal sealed partial class CalendarData
+    partial internal sealed class CalendarData
     {
         private bool IcuLoadCalendarDataFromSystem(string localeName, CalendarId calendarId)
         {

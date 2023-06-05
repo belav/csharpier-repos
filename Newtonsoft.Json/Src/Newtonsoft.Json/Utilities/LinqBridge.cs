@@ -38,11 +38,12 @@ using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Utilities.LinqBridge
 {
+    partial
     /// <summary>
     /// Provides a set of static (Shared in Visual Basic) methods for
     /// querying objects that implement <see cref="IEnumerable{T}" />.
     /// </summary>
-    internal static partial class Enumerable
+    internal static class Enumerable
     {
         /// <summary>
         /// Returns the input typed as <see cref="IEnumerable{T}"/>.
@@ -2010,7 +2011,7 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         }
     }
 
-    internal partial class Enumerable
+    partial internal class Enumerable
     {
         /// <summary>
         /// Computes the sum of a sequence of <see cref="System.Int32" /> values.
@@ -2962,10 +2963,11 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         }
     }
 
+    partial
     /// <summary>
     /// Represents a collection of objects that have a common key.
     /// </summary>
-    internal partial interface IGrouping<TKey, TElement> : IEnumerable<TElement>
+    internal interface IGrouping<TKey, TElement> : IEnumerable<TElement>
     {
         /// <summary>
         /// Gets the key of the <see cref="IGrouping{TKey,TElement}" />.
@@ -2974,22 +2976,24 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         TKey Key { get; }
     }
 
+    partial
     /// <summary>
     /// Defines an indexer, size property, and Boolean search method for
     /// data structures that map keys to <see cref="IEnumerable{T}"/>
     /// sequences of values.
     /// </summary>
-    internal partial interface ILookup<TKey, TElement> : IEnumerable<IGrouping<TKey, TElement>>
+    internal interface ILookup<TKey, TElement> : IEnumerable<IGrouping<TKey, TElement>>
     {
         bool Contains(TKey key);
         int Count { get; }
         IEnumerable<TElement> this[TKey key] { get; }
     }
 
+    partial
     /// <summary>
     /// Represents a sorted sequence.
     /// </summary>
-    internal partial interface IOrderedEnumerable<TElement> : IEnumerable<TElement>
+    internal interface IOrderedEnumerable<TElement> : IEnumerable<TElement>
     {
         /// <summary>
         /// Performs a subsequent ordering on the elements of an

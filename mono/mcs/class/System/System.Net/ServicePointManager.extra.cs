@@ -25,7 +25,7 @@ namespace System.Net
         IEnumerable<string> allCiphers
     );
 
-    public partial class ServicePointManager
+    partial public class ServicePointManager
     {
         [Obsolete("This API is no longer supported.", true)]
         public static CipherSuitesCallback ClientCipherSuitesCallback { get; set; }

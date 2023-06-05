@@ -1618,7 +1618,11 @@ namespace System.Globalization
         //
         // Check if a string array contains a null value, and throw ArgumentNullException with parameter name "value"
         //
-        static private void CheckNullValue(String[] values, int length)
+        private
+        //
+        // Check if a string array contains a null value, and throw ArgumentNullException with parameter name "value"
+        //
+        static void CheckNullValue(String[] values, int length)
         {
             Contract.Requires(values != null, "value != null");
             Contract.Requires(values.Length >= length);
@@ -1958,7 +1962,9 @@ namespace System.Globalization
         }
 
         // Get all possible combination of inputs
-        static private String[] GetCombinedPatterns(
+        private
+        // Get all possible combination of inputs
+        static String[] GetCombinedPatterns(
             String[] patterns1,
             String[] patterns2,
             String connectString

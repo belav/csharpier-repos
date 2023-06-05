@@ -13,12 +13,13 @@ using System.Diagnostics;
 
 namespace MS.Internal.Xml.Cache
 {
+    internal
     /// <summary>
     /// The 0th node in each page contains a non-null reference to an XPathNodePageInfo internal class that provides
     /// information about that node's page.  The other fields in the 0th node are undefined and should never
     /// be used.
     /// </summary>
-    sealed internal class XPathNodePageInfo
+    sealed class XPathNodePageInfo
     {
         private int pageNum;
         private int nodeCount;
@@ -70,6 +71,7 @@ namespace MS.Internal.Xml.Cache
         }
     }
 
+    internal
     /// <summary>
     /// There is a great deal of redundancy in typical Xml documents.  Even in documents with thousands or millions
     /// of nodes, there are a small number of common names and types.  And since nodes are allocated in pages in
@@ -79,7 +81,7 @@ namespace MS.Internal.Xml.Cache
     /// string.Intern() operation.  If a node's name, type, or parent/sibling pages are modified, then a new
     /// InfoAtom needs to be obtained, since other nodes may still be referencing the old InfoAtom.
     /// </summary>
-    sealed internal class XPathNodeInfoAtom
+    sealed class XPathNodeInfoAtom
     {
         private string localName;
         private string namespaceUri;
@@ -399,10 +401,11 @@ namespace MS.Internal.Xml.Cache
         }
     }
 
+    internal
     /// <summary>
     /// An atomization table for XPathNodeInfoAtom.
     /// </summary>
-    sealed internal class XPathNodeInfoTable
+    sealed class XPathNodeInfoTable
     {
         private XPathNodeInfoAtom[] hashTable;
         private int sizeTable;

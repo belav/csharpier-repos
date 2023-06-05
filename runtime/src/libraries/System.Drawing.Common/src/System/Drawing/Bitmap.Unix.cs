@@ -47,7 +47,7 @@ using System.ComponentModel;
 
 namespace System.Drawing
 {
-    public sealed partial class Bitmap
+    partial public sealed class Bitmap
     {
         // Usually called when cloning images that need to have
         // not only the handle saved, but also the underlying stream

@@ -9,7 +9,7 @@ using System.Text.Json.Serialization.Tests.Schemas.OrderPayload;
 
 namespace System.Text.Json.SourceGeneration.Tests
 {
-    public sealed partial class NodeInteropTests_Metadata : NodeInteropTests
+    partial public sealed class NodeInteropTests_Metadata : NodeInteropTests
     {
         public NodeInteropTests_Metadata()
             : base(
@@ -24,10 +24,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(JsonArray))]
         [JsonSerializable(typeof(Poco))]
         [JsonSerializable(typeof(string))]
-        internal sealed partial class NodeInteropTestsContext_Metadata : JsonSerializerContext { }
+        partial internal sealed class NodeInteropTestsContext_Metadata : JsonSerializerContext { }
     }
 
-    public sealed partial class NodeInteropTests_Default : NodeInteropTests
+    partial public sealed class NodeInteropTests_Default : NodeInteropTests
     {
         public NodeInteropTests_Default()
             : base(
@@ -41,6 +41,6 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(JsonArray))]
         [JsonSerializable(typeof(Poco))]
         [JsonSerializable(typeof(string))]
-        internal sealed partial class NodeInteropTestsContext_Default : JsonSerializerContext { }
+        partial internal sealed class NodeInteropTestsContext_Default : JsonSerializerContext { }
     }
 }

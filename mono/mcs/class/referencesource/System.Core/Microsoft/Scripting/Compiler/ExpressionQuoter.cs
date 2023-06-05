@@ -28,7 +28,7 @@ using System.Dynamic.Utils;
 
 namespace System.Runtime.CompilerServices
 {
-    public partial class RuntimeOps
+    partial public class RuntimeOps
     {
         /// <summary>
         /// Quotes the provided expression tree.

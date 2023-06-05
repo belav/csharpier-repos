@@ -18,7 +18,7 @@ using System.Workflow.ComponentModel.Design;
 
 namespace System.Workflow.Activities.Rules.Design
 {
-    public partial class RuleConditionDialog : Form
+    partial public class RuleConditionDialog : Form
     {
         RuleExpressionCondition ruleExpressionCondition = new RuleExpressionCondition();
         private IServiceProvider serviceProvider;

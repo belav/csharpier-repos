@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
-    internal static partial class FixAllContextHelper
+    partial internal static class FixAllContextHelper
     {
         public static async Task<
             ImmutableDictionary<Document, ImmutableArray<Diagnostic>>

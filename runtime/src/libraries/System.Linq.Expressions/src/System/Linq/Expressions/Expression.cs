@@ -12,10 +12,11 @@ using System.Threading;
 
 namespace System.Linq.Expressions
 {
+    partial
     /// <summary>
     /// The base type for all nodes in Expression Trees.
     /// </summary>
-    public abstract partial class Expression
+    public abstract class Expression
     {
         internal const string ExpressionRequiresUnreferencedCode =
             "Creating Expressions requires unreferenced code because the members being referenced by the Expression may be trimmed.";

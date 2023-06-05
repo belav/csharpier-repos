@@ -55,7 +55,7 @@ namespace System.ServiceModel.Activation
                 + "so caller must ensure that this is called in the right place."
         )]
         [SecurityCritical]
-        static public IAsyncResult BeginProcessRequest(
+        public static IAsyncResult BeginProcessRequest(
             object sender,
             EventArgs e,
             AsyncCallback cb,
@@ -138,7 +138,7 @@ namespace System.ServiceModel.Activation
         }
 
         [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called outside PermitOnly context.")]
-        static public void EndProcessRequest(IAsyncResult ar)
+        public static void EndProcessRequest(IAsyncResult ar)
         {
             //No need to call CompletedAsyncResult.End as the asyncResult has already completed.
             if (ar is HostedHttpRequestAsyncResult)

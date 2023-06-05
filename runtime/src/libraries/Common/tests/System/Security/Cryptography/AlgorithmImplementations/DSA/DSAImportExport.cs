@@ -9,7 +9,7 @@ namespace System.Security.Cryptography.Dsa.Tests
         TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
         "Not supported on Browser/iOS/tvOS/MacCatalyst"
     )]
-    public partial class DSAImportExport
+    partial public class DSAImportExport
     {
         public static bool SupportsFips186_3 => DSAFactory.SupportsFips186_3;
         public static bool SupportsKeyGeneration => DSAFactory.SupportsKeyGeneration;

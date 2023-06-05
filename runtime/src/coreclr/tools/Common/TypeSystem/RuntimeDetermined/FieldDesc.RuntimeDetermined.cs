@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class FieldDesc
+    partial public class FieldDesc
     {
         public FieldDesc GetNonRuntimeDeterminedFieldFromRuntimeDeterminedFieldViaSubstitution(
             Instantiation typeInstantiation,

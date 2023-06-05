@@ -9,11 +9,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+partial
 /// <summary>
 /// An <see cref="IResult"/> that returns a Found (302), Moved Permanently (301), Temporary Redirect (307),
 /// or Permanent Redirect (308) response with a Location header to the supplied local URL.
 /// </summary>
-internal sealed partial class LocalRedirectResult : IResult
+internal sealed class LocalRedirectResult : IResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values
@@ -98,7 +99,7 @@ internal sealed partial class LocalRedirectResult : IResult
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -106,6 +107,6 @@ internal sealed partial class LocalRedirectResult : IResult
             "Executing LocalRedirectResult, redirecting to {Destination}.",
             EventName = "LocalRedirectResultExecuting"
         )]
-        public static partial void LocalRedirectResultExecuting(ILogger logger, string destination);
+        partial public static void LocalRedirectResultExecuting(ILogger logger, string destination);
     }
 }

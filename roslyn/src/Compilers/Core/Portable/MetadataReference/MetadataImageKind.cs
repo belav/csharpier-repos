@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis
         Module = 1
     }
 
-    internal static partial class EnumBounds
+    partial internal static class EnumBounds
     {
         internal static bool IsValid(this MetadataImageKind kind)
         {

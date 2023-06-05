@@ -3,7 +3,7 @@ using System.Security.Permissions;
 
 namespace System.IO.Pipes
 {
-    public sealed partial class NamedPipeServerStream
+    partial public sealed class NamedPipeServerStream
     {
         public NamedPipeServerStream(
             string pipeName,

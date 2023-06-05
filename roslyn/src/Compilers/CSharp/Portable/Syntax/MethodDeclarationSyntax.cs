@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class MethodDeclarationSyntax
+    partial public class MethodDeclarationSyntax
     {
         public int Arity
         {
@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static MethodDeclarationSyntax MethodDeclaration(
             SyntaxList<AttributeListSyntax> attributeLists,

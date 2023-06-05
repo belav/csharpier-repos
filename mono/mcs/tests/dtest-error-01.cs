@@ -8,7 +8,7 @@ using Microsoft.CSharp.RuntimeBinder;
 
 class Helper
 {
-    public unsafe static int* Foo(int i)
+    public static unsafe int* Foo(int i)
     {
         return null;
     }

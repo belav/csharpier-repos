@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Text
 {
-    public static partial class Extensions
+    partial public static class Extensions
     {
         /// <summary>
         /// ITextSnapshot implementation of SourceText

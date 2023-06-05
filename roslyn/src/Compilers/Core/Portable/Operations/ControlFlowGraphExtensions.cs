@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    public static partial class ControlFlowGraphExtensions
+    partial public static class ControlFlowGraphExtensions
     {
         /// <summary>
         /// Gets or creates a control flow graph for the given <paramref name="localFunction"/> defined in

@@ -1,8 +1,8 @@
 namespace N
 {
-    public partial class A<T1, T2>
+    partial public class A<T1, T2>
     {
-        public partial class D
+        partial public class D
         {
             public class C : D
             {
@@ -13,7 +13,7 @@ namespace N
             }
         }
 
-        public partial class D2<U>
+        partial public class D2<U>
         {
             public class C2 : D2<int>
             {
@@ -25,11 +25,11 @@ namespace N
         }
     }
 
-    public partial class A<T1, T2>
+    partial public class A<T1, T2>
     {
-        public partial class D : X { }
+        partial public class D : X { }
 
-        public partial class D2<U> : X2<U> { }
+        partial public class D2<U> : X2<U> { }
     }
 
     public class X2<W>

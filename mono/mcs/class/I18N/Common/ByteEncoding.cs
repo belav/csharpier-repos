@@ -132,14 +132,14 @@ namespace I18N.Common
         }
 
         // Get the number of bytes needed to encode a character buffer.
-        public unsafe override int GetByteCountImpl(char* chars, int count)
+        public override unsafe int GetByteCountImpl(char* chars, int count)
         {
             return count;
         }
 
         // Convert an array of characters into a byte buffer,
         // once the parameters have been validated.
-        protected unsafe abstract void ToBytes(
+        protected abstract unsafe void ToBytes(
             char* chars,
             int charCount,
             byte* bytes,
@@ -161,7 +161,7 @@ namespace I18N.Common
 
         // Convert an array of characters into a byte buffer,
         // once the parameters have been validated.
-        protected unsafe virtual void ToBytes(
+        protected virtual unsafe void ToBytes(
             char[] chars,
             int charIndex,
             int charCount,
@@ -232,7 +232,7 @@ namespace I18N.Common
         */
 
         //[CLSCompliant (false)]
-        public unsafe override int GetBytesImpl(
+        public override unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,
@@ -417,7 +417,7 @@ namespace I18N.Common
         }
 
         // Decode a buffer of bytes into a string.
-        public unsafe override String GetString(byte[] bytes, int index, int count)
+        public override unsafe String GetString(byte[] bytes, int index, int count)
         {
             if (bytes == null)
             {

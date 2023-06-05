@@ -24,7 +24,7 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.CPS
 {
     [Export(typeof(IWorkspaceProjectContextFactory))]
-    internal partial class CPSProjectFactory : IWorkspaceProjectContextFactory
+    partial internal class CPSProjectFactory : IWorkspaceProjectContextFactory
     {
         private readonly IThreadingContext _threadingContext;
         private readonly VisualStudioProjectFactory _projectFactory;

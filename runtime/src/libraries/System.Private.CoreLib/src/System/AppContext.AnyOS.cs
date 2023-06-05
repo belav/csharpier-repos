@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace System
 {
-    public static partial class AppContext
+    partial public static class AppContext
     {
 #if !TARGET_BROWSER
         [UnconditionalSuppressMessage(

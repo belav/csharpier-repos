@@ -10,12 +10,13 @@ using XmlCoreTest.Common;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeReaderFunctionalTests : TestModule
+    partial public class XNodeReaderFunctionalTests : TestModule
     {
-        public partial class XNodeReaderTests : XLinqTestCase
+        partial public class XNodeReaderTests : XLinqTestCase
         {
+            partial
             //[TestCase(Name = "ReadContentAsBase64", Desc = "ReadContentAsBase64")]
-            public partial class TCReadContentAsBase64 : BridgeHelpers
+            public class TCReadContentAsBase64 : BridgeHelpers
             {
                 public const string ST_ELEM_NAME1 = "ElemAll";
                 public const string ST_ELEM_NAME2 = "ElemEmpty";
@@ -574,8 +575,9 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
+            partial
             //[TestCase(Name = "ReadElementContentAsBase64", Desc = "ReadElementContentAsBase64")]
-            public partial class TCReadElementContentAsBase64 : BridgeHelpers
+            public class TCReadElementContentAsBase64 : BridgeHelpers
             {
                 public const string ST_ELEM_NAME1 = "ElemAll";
                 public const string ST_ELEM_NAME2 = "ElemEmpty";

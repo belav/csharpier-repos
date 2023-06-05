@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    internal sealed partial class MethodInvoker
+    partial internal sealed class MethodInvoker
     {
         private readonly MethodBase _method;
 

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Operations;
 namespace Microsoft.AspNetCore.Analyzers.RenderTreeBuilder;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public partial class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
+partial public class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
 {
     private const int SequenceParameterOrdinal = 0;
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>

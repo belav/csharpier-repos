@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Encodings.Web.Tests
 {
-    public partial class JavaScriptEncoderTests
+    partial public class JavaScriptEncoderTests
     {
         [Fact]
         public void TestSurrogate_Relaxed()

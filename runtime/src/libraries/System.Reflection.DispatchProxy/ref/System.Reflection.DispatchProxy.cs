@@ -6,7 +6,7 @@
 
 namespace System.Reflection
 {
-    public abstract partial class DispatchProxy
+    partial public abstract class DispatchProxy
     {
         protected DispatchProxy() { }
 

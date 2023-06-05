@@ -15,7 +15,7 @@ using Xunit;
 
 namespace BasicEventSourceTests
 {
-    public partial class FuzzyTests
+    partial public class FuzzyTests
     {
         /// <summary>
         /// Tests the EventSource.Write[T] method (can only use the self-describing mechanism).
@@ -4686,6 +4686,6 @@ namespace BasicEventSourceTests
             }
         }
 
-        static partial void Test_Write_Fuzzy_TestEtw(List<SubTest> tests, EventSource logger);
+        partial static void Test_Write_Fuzzy_TestEtw(List<SubTest> tests, EventSource logger);
     }
 }

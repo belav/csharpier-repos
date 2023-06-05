@@ -16,7 +16,7 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace JIT.HardwareIntrinsics.Arm
 {
-    public static partial class Program
+    partial public static class Program
     {
         private static void TransposeOdd_Vector64_Int16()
         {

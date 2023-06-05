@@ -17,8 +17,9 @@ using System.IO;
 
 namespace System.ComponentModel.Composition.Hosting
 {
+    partial
 #if !MEF_FEATURE_INITIALIZATION
-    public partial class ApplicationCatalog : ComposablePartCatalog, ICompositionElement
+    public class ApplicationCatalog : ComposablePartCatalog, ICompositionElement
     {
         private bool _isDisposed = false;
         private volatile AggregateCatalog _innerCatalog = null;

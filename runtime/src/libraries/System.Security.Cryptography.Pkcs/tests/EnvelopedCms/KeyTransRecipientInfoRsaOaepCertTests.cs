@@ -8,7 +8,7 @@ using System.Security.Cryptography.Pkcs.Tests;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class KeyTransRecipientInfoRsaOaepCertTests
+    partial public static class KeyTransRecipientInfoRsaOaepCertTests
     {
         public static bool SupportsRsaOaepCerts => PlatformDetection.IsWindows;
         public static bool DoesNotSupportRsaOaepCerts => !SupportsRsaOaepCerts;

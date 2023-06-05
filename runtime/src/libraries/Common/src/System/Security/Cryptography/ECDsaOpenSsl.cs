@@ -10,7 +10,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDsaOpenSsl : ECDsa, IRuntimeAlgorithm
+    partial public sealed class ECDsaOpenSsl : ECDsa, IRuntimeAlgorithm
     {
         // secp521r1 maxes out at 139 bytes, so 256 should always be enough
         private const int SignatureStackBufSize = 256;
@@ -370,6 +370,6 @@ namespace System.Security.Cryptography
             }
         }
 
-        static partial void ThrowIfNotSupported();
+        partial static void ThrowIfNotSupported();
     }
 }

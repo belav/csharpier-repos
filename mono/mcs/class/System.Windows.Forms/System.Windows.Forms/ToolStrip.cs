@@ -216,7 +216,7 @@ namespace System.Windows.Forms
             set { base.AutoSize = value; }
         }
 
-        new public Color BackColor
+        public new Color BackColor
         {
             get { return this.back_color; }
             set { this.back_color = value; }

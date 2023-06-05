@@ -23,8 +23,9 @@ namespace System
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(_Attribute))]
     [System.Runtime.InteropServices.ComVisible(true)]
+    partial
 #endif
-    public abstract partial class Attribute
+    public abstract class Attribute
 #if !MOBILE && !NETCORE
         : _Attribute
 #endif

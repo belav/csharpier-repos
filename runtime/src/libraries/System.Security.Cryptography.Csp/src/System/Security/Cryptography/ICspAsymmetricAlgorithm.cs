@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    public partial interface ICspAsymmetricAlgorithm
+    partial public interface ICspAsymmetricAlgorithm
     {
         CspKeyContainerInfo CspKeyContainerInfo { get; }
         byte[] ExportCspBlob(bool includePrivateParameters);

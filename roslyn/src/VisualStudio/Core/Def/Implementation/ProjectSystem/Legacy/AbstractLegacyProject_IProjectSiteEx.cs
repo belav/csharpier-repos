@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy
 {
-    internal abstract partial class AbstractLegacyProject : IProjectSiteEx
+    partial internal abstract class AbstractLegacyProject : IProjectSiteEx
     {
         private readonly Stack<VisualStudioProject.BatchScope> _batchScopes = new();
 

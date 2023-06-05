@@ -444,7 +444,7 @@ public class CastClass
     private object _obj;
     private volatile object _objVolatile;
     private static object s_obj;
-    private volatile static object s_objVolatile;
+    private static volatile object s_objVolatile;
 
     private static object[] s_objs;
 
@@ -464,7 +464,7 @@ public class CastClass
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static public object GetObject()
+    public static object GetObject()
     {
         return s_obj;
     }
@@ -613,7 +613,7 @@ public class Unbox
     private object _obj;
     private volatile object _objVolatile;
     private static object s_obj;
-    private volatile static object s_objVolatile;
+    private static volatile object s_objVolatile;
 
     private static object[] s_objs;
 
@@ -633,7 +633,7 @@ public class Unbox
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static public object GetObject()
+    public static object GetObject()
     {
         return s_obj;
     }
@@ -811,7 +811,7 @@ public class GenericMethod2 : GenericMethod1
     private GenericMethod1 _obj;
     private volatile GenericMethod1 _objVolatile;
     private static GenericMethod1 s_obj;
-    private volatile static GenericMethod1 s_objVolatile;
+    private static volatile GenericMethod1 s_objVolatile;
 
     private static GenericMethod1[] s_objs;
 
@@ -837,7 +837,7 @@ public class GenericMethod2 : GenericMethod1
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static public GenericMethod1 GetObject()
+    public static GenericMethod1 GetObject()
     {
         return s_obj;
     }

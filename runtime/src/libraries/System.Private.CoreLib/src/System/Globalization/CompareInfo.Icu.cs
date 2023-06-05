@@ -9,7 +9,7 @@ using System.Text;
 
 namespace System.Globalization
 {
-    public partial class CompareInfo
+    partial public class CompareInfo
     {
         // Characters which require special handling are those in [0x00, 0x1F] and [0x7F, 0xFFFF] except \t\v\f
         // Matches HighCharTable below.

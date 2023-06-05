@@ -13,7 +13,7 @@ namespace System.Xml.NameTableTests
     //
     ////////////////////////////////////////////////////////////////
     [TestCase(Name = "XmlNameTable user scenario inheritance", Desc = "XmlNameTable inheritance")]
-    public partial class TCUserNameTable : CTestCase
+    partial public class TCUserNameTable : CTestCase
     {
         [Variation("Read xml file using custom name table")]
         public int v1()

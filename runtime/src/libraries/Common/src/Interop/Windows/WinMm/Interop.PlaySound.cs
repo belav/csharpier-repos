@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         internal const int SND_SYNC = 0x0;
         internal const int SND_ASYNC = 0x1;
@@ -23,10 +23,10 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool PlaySound(string soundName, IntPtr hmod, int soundFlags);
+        partial internal static bool PlaySound(string soundName, IntPtr hmod, int soundFlags);
 
         [LibraryImport(Libraries.WinMM, EntryPoint = "PlaySoundW")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool PlaySound(byte[]? soundName, IntPtr hmod, int soundFlags);
+        partial internal static bool PlaySound(byte[]? soundName, IntPtr hmod, int soundFlags);
     }
 }

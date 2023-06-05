@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.UseSystemHashCode
 {
-    internal partial struct Analyzer
+    partial internal struct Analyzer
     {
         /// <summary>
         /// Breaks down complex <see cref="IOperation"/> trees, looking for particular

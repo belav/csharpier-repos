@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
 {
-    internal sealed partial class CSharpInitializerExpressionWrapper
+    partial internal sealed class CSharpInitializerExpressionWrapper
         : AbstractCSharpSeparatedSyntaxListWrapper<InitializerExpressionSyntax, ExpressionSyntax>
     {
         protected override string Indent_all_items => FeaturesResources.Indent_all_elements;

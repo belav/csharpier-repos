@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal static partial class DependentTypeFinder
+    partial internal static class DependentTypeFinder
     {
         private static async Task<
             ImmutableArray<INamedTypeSymbol>

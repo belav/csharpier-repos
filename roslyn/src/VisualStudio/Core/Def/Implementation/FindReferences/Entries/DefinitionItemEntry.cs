@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 {
-    internal partial class StreamingFindUsagesPresenter
+    partial internal class StreamingFindUsagesPresenter
     {
         /// <summary>
         /// Shows a DefinitionItem as a Row in the FindReferencesWindow.  Only used for

@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    public abstract partial class ECDsa : AsymmetricAlgorithm
+    partial public abstract class ECDsa : AsymmetricAlgorithm
     {
         // There is currently not a standard XML format for ECC keys, so we will not implement the default
         // To/FromXmlString so that we're not tied to one format when a standard one does exist. Instead we'll

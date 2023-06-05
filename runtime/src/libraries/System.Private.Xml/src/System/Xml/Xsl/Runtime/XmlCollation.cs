@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 namespace System.Xml.Xsl.Runtime
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public sealed partial class XmlCollation
+    partial public sealed class XmlCollation
     {
         // lgid support for sort
         private const string deDE = "de-DE";

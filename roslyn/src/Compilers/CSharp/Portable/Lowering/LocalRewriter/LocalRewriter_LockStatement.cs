@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter
+    partial internal sealed class LocalRewriter
     {
         /// <summary>
         /// Lowers a lock statement to a try-finally block that calls Monitor.Enter and Monitor.Exit

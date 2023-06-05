@@ -51,12 +51,13 @@ namespace Novell.Directory.Ldap
     */
     public class LdapResponse : LdapMessage
     {
+        public
         /// <summary> Returns any error message in the response.
         ///
         /// </summary>
         /// <returns> Any error message in the response.
         /// </returns>
-        virtual public System.String ErrorMessage
+        virtual System.String ErrorMessage
         {
             get
             {
@@ -80,6 +81,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the partially matched DN field from the server response,
         /// if the response contains one.
         ///
@@ -87,7 +89,7 @@ namespace Novell.Directory.Ldap
         /// <returns> The partially matched DN field, if the response contains one.
         ///
         /// </returns>
-        virtual public System.String MatchedDN
+        virtual System.String MatchedDN
         {
             get
             {
@@ -99,12 +101,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns all referrals in a server response, if the response contains any.
         ///
         /// </summary>
         /// <returns> All the referrals in the server response.
         /// </returns>
-        virtual public System.String[] Referrals
+        virtual System.String[] Referrals
         {
             get
             {
@@ -156,6 +159,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the result code in a server response.
         ///
         ///  For a list of result codes, see the LdapException class.
@@ -163,7 +167,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> The result code.
         /// </returns>
-        virtual public int ResultCode
+        virtual int ResultCode
         {
             get
             {
@@ -177,10 +181,11 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        internal
         /// <summary> Checks the resultCode and generates the appropriate exception or
         /// null if success.
         /// </summary>
-        virtual internal LdapException ResultException
+        virtual LdapException ResultException
         {
             /* package */
 
@@ -217,12 +222,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns any controls in the message.
         ///
         /// </summary>
         /// <seealso cref="Novell.Directory.Ldap.LdapMessage.Controls">
         /// </seealso>
-        override public LdapControl[] Controls
+        override LdapControl[] Controls
         {
             get
             {
@@ -234,12 +240,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the message ID.
         ///
         /// </summary>
         /// <seealso cref="Novell.Directory.Ldap.LdapMessage.MessageID">
         /// </seealso>
-        override public int MessageID
+        override int MessageID
         {
             get
             {
@@ -251,6 +258,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the Ldap operation type of the message.
         ///
         /// </summary>
@@ -259,7 +267,7 @@ namespace Novell.Directory.Ldap
         /// </returns>
         /// <seealso cref="Novell.Directory.Ldap.LdapMessage.Type">
         /// </seealso>
-        override public int Type
+        override int Type
         {
             get
             {
@@ -271,25 +279,27 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        internal
         /// <summary> Returns an embedded exception response
         ///
         /// </summary>
         /// <returns> an embedded exception if any
         /// </returns>
-        virtual internal LdapException Exception
+        virtual LdapException Exception
         {
             /*package*/
 
             get { return exception; }
         }
 
+        internal
         /// <summary> Indicates the referral instance being followed if the
         /// connection created to follow referrals.
         ///
         /// </summary>
         /// <returns> the referral being followed
         /// </returns>
-        virtual internal ReferralInfo ActiveReferral
+        virtual ReferralInfo ActiveReferral
         {
             /*package*/
 

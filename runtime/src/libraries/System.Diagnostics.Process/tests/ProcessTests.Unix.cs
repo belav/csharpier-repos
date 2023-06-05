@@ -18,7 +18,7 @@ using Microsoft.DotNet.XUnitExtensions;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class ProcessTests : ProcessTestBase
+    partial public class ProcessTests : ProcessTestBase
     {
         private static bool IsRemoteExecutorSupportedAndPrivilegedProcess =>
             RemoteExecutor.IsSupported && PlatformDetection.IsPrivilegedProcess;

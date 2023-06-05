@@ -19,13 +19,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 {
-    internal abstract partial class AbstractGenerateVariableService<
+    partial internal abstract class AbstractGenerateVariableService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax
     >
     {
-        private partial class State
+        partial private class State
         {
             public INamedTypeSymbol ContainingType { get; private set; }
             public INamedTypeSymbol TypeToGenerateIn { get; private set; }

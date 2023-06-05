@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.Tools.Workspaces
 {
-    internal sealed partial class FolderWorkspace : Workspace
+    partial internal sealed class FolderWorkspace : Workspace
     {
         private abstract class ProjectLoader
         {

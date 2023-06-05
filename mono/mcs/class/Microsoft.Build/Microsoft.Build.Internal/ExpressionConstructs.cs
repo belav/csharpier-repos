@@ -98,7 +98,7 @@ namespace Microsoft.Build.Internal.Expressions
         }
     }
 
-    abstract partial class Expression : Locatable, ILocation
+    partial abstract class Expression : Locatable, ILocation
     {
         //public int Line {
         //	get { return Location.Line; }

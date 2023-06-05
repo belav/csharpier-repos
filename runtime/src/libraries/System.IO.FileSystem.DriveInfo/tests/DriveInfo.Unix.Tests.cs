@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.IO.FileSystem.Tests
 {
-    public partial class DriveInfoUnixTests
+    partial public class DriveInfoUnixTests
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]

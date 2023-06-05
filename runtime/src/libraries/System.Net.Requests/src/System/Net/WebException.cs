@@ -13,7 +13,7 @@ namespace System.Net
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial class WebException : InvalidOperationException, ISerializable
+    partial public class WebException : InvalidOperationException, ISerializable
     {
         private const WebExceptionStatus DefaultStatus = WebExceptionStatus.UnknownError;
 

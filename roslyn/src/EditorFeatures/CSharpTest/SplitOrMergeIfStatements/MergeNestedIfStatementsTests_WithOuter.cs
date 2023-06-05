@@ -14,7 +14,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatements
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsMergeNestedIfStatements)]
-    public sealed partial class MergeNestedIfStatementsTests : AbstractCSharpCodeActionTest
+    partial public sealed class MergeNestedIfStatementsTests : AbstractCSharpCodeActionTest
     {
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,

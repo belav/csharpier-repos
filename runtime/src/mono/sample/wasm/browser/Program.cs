@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Sample
 {
-    public partial class Test
+    partial public class Test
     {
         public static int Main(string[] args)
         {
@@ -16,6 +16,6 @@ namespace Sample
         }
 
         [JSImport("Sample.Test.displayMeaning", "main.js")]
-        internal static partial void DisplayMeaning(int meaning);
+        partial internal static void DisplayMeaning(int meaning);
     }
 }

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Linq.Expressions
 {
-    public partial class LambdaExpression
+    partial public class LambdaExpression
     {
         public void CompileToMethod(MethodBuilder method) =>
             throw new PlatformNotSupportedException();

@@ -4,12 +4,12 @@
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetSocketType")]
-        internal static partial Error GetSocketType(
+        partial internal static Error GetSocketType(
             SafeSocketHandle socket,
             out AddressFamily addressFamily,
             out SocketType socketType,

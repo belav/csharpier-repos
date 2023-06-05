@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter
+    partial internal sealed class LocalRewriter
     {
         /// <summary>
         /// A common base class for lowering constructs that use pattern-matching.

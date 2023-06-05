@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public abstract partial class LocalizableString
+    partial public abstract class LocalizableString
     {
         private sealed class FixedLocalizableString : LocalizableString
         {

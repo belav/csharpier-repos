@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class SspiCli
+    partial internal static class SspiCli
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct KERB_S4U_LOGON

@@ -19,11 +19,12 @@ namespace System.Data.Services.Client
     using System.Runtime.CompilerServices;
 #if !ASTORIA_LIGHT
     using System.Net;
+    partial
 #else
     using System.Data.Services.Http;
 #endif
 
-    internal static partial class WebUtil
+    internal static class WebUtil
     {
         private static bool? dataServiceCollectionAvailable = null;
 

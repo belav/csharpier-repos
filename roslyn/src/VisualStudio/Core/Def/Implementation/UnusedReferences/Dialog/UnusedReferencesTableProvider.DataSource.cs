@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReferences.Dialog
 {
-    internal partial class UnusedReferencesTableProvider
+    partial internal class UnusedReferencesTableProvider
     {
         internal class UnusedReferencesDataSource : ITableDataSource
         {

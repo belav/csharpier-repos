@@ -35,7 +35,7 @@
 
 namespace System.Drawing.Printing
 {
-    public partial class PreviewPrintController : PrintController
+    partial public class PreviewPrintController : PrintController
     {
         public override void OnEndPage(PrintDocument document, PrintPageEventArgs e) { }
 

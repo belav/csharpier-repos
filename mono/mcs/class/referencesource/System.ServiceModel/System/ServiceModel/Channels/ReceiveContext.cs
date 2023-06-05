@@ -14,7 +14,7 @@ namespace System.ServiceModel.Channels
 
     public abstract class ReceiveContext
     {
-        public readonly static string Name = "ReceiveContext";
+        public static readonly string Name = "ReceiveContext";
         ThreadNeutralSemaphore stateLock; // protects state that may be reverted
         bool contextFaulted;
         object thisLock;

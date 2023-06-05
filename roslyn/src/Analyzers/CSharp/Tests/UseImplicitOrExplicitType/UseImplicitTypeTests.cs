@@ -21,7 +21,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseImplicitType
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseImplicitType)]
-    public partial class UseImplicitTypeTests
+    partial public class UseImplicitTypeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseImplicitTypeTests(ITestOutputHelper logger = null)

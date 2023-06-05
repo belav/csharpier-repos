@@ -8,7 +8,7 @@ using System.Security.Cryptography.Asn1;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class RSAKeyFormatHelper
+    partial internal static class RSAKeyFormatHelper
     {
         private static readonly string[] s_validOids = { Oids.Rsa, };
 

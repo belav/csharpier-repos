@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
-    public partial class ECDiffieHellmanTests
+    partial public class ECDiffieHellmanTests
     {
         private static readonly byte[] s_sampleHmacKey = { 0, 1, 2, 3, 4, 5 };
 

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Net
 {
-    internal sealed partial class NetEventSource : EventSource
+    partial internal sealed class NetEventSource : EventSource
     {
         /// <summary>Logs the contents of a buffer </summary>
         /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for the operation.</param>

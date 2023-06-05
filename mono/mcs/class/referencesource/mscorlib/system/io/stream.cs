@@ -37,11 +37,12 @@ namespace System.IO
 {
     [Serializable]
     [ComVisible(true)]
+    partial
 #if CONTRACTS_FULL
     [ContractClass(typeof(StreamContract))]
 #endif
 #if FEATURE_REMOTING || MONO
-    public abstract partial class Stream : MarshalByRefObject, IDisposable
+    public abstract class Stream : MarshalByRefObject, IDisposable
     {
 #else // FEATURE_REMOTING
     public abstract class Stream : IDisposable
@@ -252,9 +253,9 @@ namespace System.IO
         }
 
 #if MONO
-        virtual
-#endif
-        public void CopyTo(Stream destination, int bufferSize)
+        public
+#if MONO
+        virtual void CopyTo(Stream destination, int bufferSize)
         {
             if (destination == null)
                 throw new ArgumentNullException("destination");

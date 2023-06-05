@@ -25,7 +25,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsImplementAbstractClass)]
-    public partial class ImplementAbstractClassTests
+    partial public class ImplementAbstractClassTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ImplementAbstractClassTests(ITestOutputHelper logger)

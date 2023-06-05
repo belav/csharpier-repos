@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ISolutionExtensions
+    partial internal static class ISolutionExtensions
     {
         public static IEnumerable<DocumentId> GetChangedDocuments(
             this Solution? newSolution,

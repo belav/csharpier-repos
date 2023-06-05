@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
-    internal partial class CSharpCodeModelService
+    partial internal class CSharpCodeModelService
     {
         protected override AbstractNodeNameGenerator CreateNodeNameGenerator() =>
             new NodeNameGenerator();

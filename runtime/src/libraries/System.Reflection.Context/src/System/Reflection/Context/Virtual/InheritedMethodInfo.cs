@@ -7,8 +7,9 @@ using System.Reflection.Context.Delegation;
 
 namespace System.Reflection.Context.Virtual
 {
+    partial
     // Represents a inherited method which is identical to the base method except for its ReflectedType.
-    internal sealed partial class InheritedMethodInfo : DelegatingMethodInfo
+    internal sealed class InheritedMethodInfo : DelegatingMethodInfo
     {
         private readonly Type _reflectedType;
 

@@ -15,9 +15,9 @@ using Internal.Cryptography.Pal.Native;
 using Microsoft.Win32.SafeHandles;
 using System.Diagnostics.CodeAnalysis;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    public static partial class crypt32
+    partial public static class crypt32
     {
         public static unsafe string CertGetNameString(
             SafeCertContextHandle certContext,
@@ -162,7 +162,7 @@ internal static partial class Interop
             CharSet = CharSet.Unicode,
             SetLastError = true
         )]
-        private static unsafe partial bool CryptDecodeObjectPointer(
+        partial private static unsafe bool CryptDecodeObjectPointer(
             Interop.Crypt32.CertEncodingType dwCertEncodingType,
             IntPtr lpszStructType,
             byte[] pbEncoded,
@@ -178,7 +178,7 @@ internal static partial class Interop
             CharSet = CharSet.Unicode,
             SetLastError = true
         )]
-        public static unsafe partial bool CryptDecodeObjectPointer(
+        partial public static unsafe bool CryptDecodeObjectPointer(
             Interop.Crypt32.CertEncodingType dwCertEncodingType,
             [MarshalAs(UnmanagedType.LPStr)] string lpszStructType,
             byte[] pbEncoded,
@@ -285,16 +285,16 @@ internal static partial class Interop
         }
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        private static partial bool CertCreateCertificateChainEngine(
+        partial private static bool CertCreateCertificateChainEngine(
             ref CERT_CHAIN_ENGINE_CONFIG pConfig,
             out SafeChainEngineHandle hChainEngineHandle
         );
 
         [GeneratedDllImport(Libraries.Crypt32)]
-        public static partial void CertFreeCertificateChainEngine(IntPtr hChainEngine);
+        partial public static void CertFreeCertificateChainEngine(IntPtr hChainEngine);
 
         [GeneratedDllImport(Libraries.Crypt32, SetLastError = true)]
-        public static unsafe partial bool CertGetCertificateChain(
+        partial public static unsafe bool CertGetCertificateChain(
             IntPtr hChainEngine,
             SafeCertContextHandle pCertContext,
             Interop.Crypt32.FILETIME* pTime,
@@ -306,7 +306,7 @@ internal static partial class Interop
         );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static partial bool CryptHashPublicKeyInfo(
+        partial public static bool CryptHashPublicKeyInfo(
             IntPtr hCryptProv,
             int algId,
             int dwFlags,
@@ -317,7 +317,7 @@ internal static partial class Interop
         );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static partial bool CertSaveStore(
+        partial public static bool CertSaveStore(
             SafeCertStoreHandle hCertStore,
             Interop.Crypt32.CertEncodingType dwMsgAndCertEncodingType,
             CertStoreSaveAs dwSaveAs,
@@ -354,7 +354,7 @@ internal static partial class Interop
         }
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        private static unsafe partial SafeCertContextHandle CertFindCertificateInStore(
+        partial private static unsafe SafeCertContextHandle CertFindCertificateInStore(
             SafeCertStoreHandle hCertStore,
             Interop.Crypt32.CertEncodingType dwCertEncodingType,
             CertFindFlags dwFindFlags,
@@ -364,13 +364,13 @@ internal static partial class Interop
         );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static unsafe partial int CertVerifyTimeValidity(
+        partial public static unsafe int CertVerifyTimeValidity(
             ref Interop.Crypt32.FILETIME pTimeToVerify,
             Interop.Crypt32.CERT_INFO* pCertInfo
         );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static unsafe partial Interop.Crypt32.CERT_EXTENSION* CertFindExtension(
+        partial public static unsafe Interop.Crypt32.CERT_EXTENSION* CertFindExtension(
             [MarshalAs(UnmanagedType.LPStr)] string pszObjId,
             int cExtensions,
             IntPtr rgExtensions
@@ -379,7 +379,7 @@ internal static partial class Interop
         // Note: It's somewhat unusual to use an API enum as a parameter type to a P/Invoke but in this case, X509KeyUsageFlags was intentionally designed as bit-wise
         // identical to the wincrypt CERT_*_USAGE values.
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static unsafe partial bool CertGetIntendedKeyUsage(
+        partial public static unsafe bool CertGetIntendedKeyUsage(
             Interop.Crypt32.CertEncodingType dwCertEncodingType,
             Interop.Crypt32.CERT_INFO* pCertInfo,
             out X509KeyUsageFlags pbKeyUsage,
@@ -387,7 +387,7 @@ internal static partial class Interop
         );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static unsafe partial bool CertGetValidUsages(
+        partial public static unsafe bool CertGetValidUsages(
             int cCerts,
             ref SafeCertContextHandle rghCerts,
             out int cNumOIDs,
@@ -396,7 +396,7 @@ internal static partial class Interop
         );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static partial bool CertControlStore(
+        partial public static bool CertControlStore(
             SafeCertStoreHandle hCertStore,
             CertControlStoreFlags dwFlags,
             CertControlStoreType dwControlType,
@@ -405,12 +405,12 @@ internal static partial class Interop
 
         // Note: CertDeleteCertificateFromStore always calls CertFreeCertificateContext on pCertContext, even if an error is encountered.
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static unsafe partial bool CertDeleteCertificateFromStore(
+        partial public static unsafe bool CertDeleteCertificateFromStore(
             Interop.Crypt32.CERT_CONTEXT* pCertContext
         );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static partial void CertFreeCertificateChain(IntPtr pChainContext);
+        partial public static void CertFreeCertificateChain(IntPtr pChainContext);
 
         public static bool CertVerifyCertificateChainPolicy(
             ChainPolicy pszPolicyOID,
@@ -428,7 +428,7 @@ internal static partial class Interop
         }
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        private static partial bool CertVerifyCertificateChainPolicy(
+        partial private static bool CertVerifyCertificateChainPolicy(
             IntPtr pszPolicyOID,
             SafeX509ChainHandle pChainContext,
             ref CERT_CHAIN_POLICY_PARA pPolicyPara,
@@ -436,7 +436,7 @@ internal static partial class Interop
         );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static unsafe partial bool CryptImportPublicKeyInfoEx2(
+        partial public static unsafe bool CryptImportPublicKeyInfoEx2(
             Interop.Crypt32.CertEncodingType dwCertEncodingType,
             Interop.Crypt32.CERT_PUBLIC_KEY_INFO* pInfo,
             CryptImportPublicKeyInfoFlags dwFlags,
@@ -445,7 +445,7 @@ internal static partial class Interop
         );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static partial bool CryptAcquireCertificatePrivateKey(
+        partial public static bool CryptAcquireCertificatePrivateKey(
             SafeCertContextHandle pCert,
             CryptAcquireFlags dwFlags,
             IntPtr pvParameters,

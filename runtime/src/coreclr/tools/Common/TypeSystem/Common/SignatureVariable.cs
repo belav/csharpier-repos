@@ -5,7 +5,7 @@ using Internal.NativeFormat;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class SignatureVariable : TypeDesc
+    partial public abstract class SignatureVariable : TypeDesc
     {
         private TypeSystemContext _context;
         private int _index;
@@ -29,7 +29,7 @@ namespace Internal.TypeSystem
         public abstract bool IsMethodSignatureVariable { get; }
     }
 
-    public sealed partial class SignatureTypeVariable : SignatureVariable
+    partial public sealed class SignatureTypeVariable : SignatureVariable
     {
         internal SignatureTypeVariable(TypeSystemContext context, int index)
             : base(context, index) { }
@@ -65,7 +65,7 @@ namespace Internal.TypeSystem
         }
     }
 
-    public sealed partial class SignatureMethodVariable : SignatureVariable
+    partial public sealed class SignatureMethodVariable : SignatureVariable
     {
         internal SignatureMethodVariable(TypeSystemContext context, int index)
             : base(context, index) { }

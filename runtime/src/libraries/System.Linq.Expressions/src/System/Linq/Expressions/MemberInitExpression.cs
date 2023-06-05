@@ -159,7 +159,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>Creates a <see cref="MemberInitExpression"/>.</summary>
         /// <returns>A <see cref="MemberInitExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.MemberInit"/> and the <see cref="MemberInitExpression.NewExpression"/> and <see cref="MemberInitExpression.Bindings"/> properties set to the specified values.</returns>

@@ -8,7 +8,7 @@ namespace Moq
 {
     internal sealed class DefaultExpressionCompiler : ExpressionCompiler
     {
-        new public static readonly DefaultExpressionCompiler Instance =
+        public static new readonly DefaultExpressionCompiler Instance =
             new DefaultExpressionCompiler();
 
         private DefaultExpressionCompiler() { }

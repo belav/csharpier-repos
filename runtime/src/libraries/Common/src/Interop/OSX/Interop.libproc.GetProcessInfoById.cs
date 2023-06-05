@@ -4,11 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
+partial
 #pragma warning disable CA1823 // analyzer incorrectly flags fixed buffer length const (https://github.com/dotnet/roslyn/issues/37593)
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class @libproc
+    partial internal static class @libproc
     {
         // Constants from sys\param.h
         private const int MAXCOMLEN = 16;
@@ -32,8 +33,8 @@ internal static partial class Interop
             internal uint pbi_svuid;
             internal uint pbi_svgid;
             internal uint reserved;
-            internal fixed byte pbi_comm[MAXCOMLEN];
-            internal fixed byte pbi_name[MAXCOMLEN * 2];
+            fixed internal byte pbi_comm[MAXCOMLEN];
+            fixed internal byte pbi_name[MAXCOMLEN * 2];
             internal uint pbi_nfiles;
             internal uint pbi_pgid;
             internal uint pbi_pjobc;
@@ -90,7 +91,7 @@ internal static partial class Interop
         /// to not having enough permissions to query for the data of that specific process
         /// </returns>
         [LibraryImport(Interop.Libraries.libproc, SetLastError = true)]
-        private static unsafe partial int proc_pidinfo(
+        partial private static unsafe int proc_pidinfo(
             int pid,
             int flavor,
             ulong arg,

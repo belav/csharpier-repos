@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Globalization
+    partial internal static class Globalization
     {
         [LibraryImport(
             Libraries.GlobalizationNative,
@@ -13,7 +13,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial void ChangeCase(
+        partial internal static unsafe void ChangeCase(
             char* src,
             int srcLen,
             char* dstBuffer,
@@ -27,7 +27,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial void ChangeCaseInvariant(
+        partial internal static unsafe void ChangeCaseInvariant(
             char* src,
             int srcLen,
             char* dstBuffer,
@@ -41,7 +41,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial void ChangeCaseTurkish(
+        partial internal static unsafe void ChangeCaseTurkish(
             char* src,
             int srcLen,
             char* dstBuffer,
@@ -54,6 +54,6 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_InitOrdinalCasingPage",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial void InitOrdinalCasingPage(int pageNumber, char* pTarget);
+        partial internal static unsafe void InitOrdinalCasingPage(int pageNumber, char* pTarget);
     }
 }

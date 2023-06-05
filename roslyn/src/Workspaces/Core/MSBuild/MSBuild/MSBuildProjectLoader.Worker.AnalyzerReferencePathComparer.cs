@@ -9,9 +9,9 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.MSBuild
 {
-    public partial class MSBuildProjectLoader
+    partial public class MSBuildProjectLoader
     {
-        private partial class Worker
+        partial private class Worker
         {
             private class AnalyzerReferencePathComparer : IEqualityComparer<AnalyzerReference?>
             {

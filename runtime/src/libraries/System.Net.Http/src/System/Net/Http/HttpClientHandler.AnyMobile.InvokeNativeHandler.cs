@@ -11,7 +11,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net.Http
 {
-    public partial class HttpClientHandler : HttpMessageHandler
+    partial public class HttpClientHandler : HttpMessageHandler
     {
         private static MethodInfo? _nativeHandlerMethod;
 

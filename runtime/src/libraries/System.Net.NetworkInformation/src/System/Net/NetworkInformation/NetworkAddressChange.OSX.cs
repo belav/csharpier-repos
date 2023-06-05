@@ -13,10 +13,11 @@ using CFRunLoopRef = System.IntPtr;
 
 namespace System.Net.NetworkInformation
 {
+    partial
     // OSX implementation of NetworkChange
     // See <SystemConfiguration/SystemConfiguration.h> and its documentation, as well as
     // the documentation for CFRunLoop for more information on the components involved.
-    public partial class NetworkChange
+    public class NetworkChange
     {
         private static object s_lockObj = new object();
 

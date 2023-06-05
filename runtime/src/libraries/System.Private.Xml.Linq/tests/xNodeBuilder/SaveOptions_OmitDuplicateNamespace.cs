@@ -13,11 +13,11 @@ using Xunit;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeBuilderFunctionalTests : TestModule
+    partial public class XNodeBuilderFunctionalTests : TestModule
     {
-        public partial class XNodeBuilderTests : XLinqTestCase
+        partial public class XNodeBuilderTests : XLinqTestCase
         {
-            public partial class NamespacehandlingSaveOptions : XLinqTestCase
+            partial public class NamespacehandlingSaveOptions : XLinqTestCase
             {
                 private string _mode;
                 private Type _type;

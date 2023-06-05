@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public static partial class BitConverter
+    partial public static class BitConverter
     {
         [Intrinsic]
         public static readonly bool IsLittleEndian;

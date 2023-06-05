@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.ValueTracking
 {
-    internal static partial class ValueTracker
+    partial internal static class ValueTracker
     {
         private class OperationCollector
         {

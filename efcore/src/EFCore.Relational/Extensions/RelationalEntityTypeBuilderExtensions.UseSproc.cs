@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
+partial
 /// <summary>
 ///     Relational database specific extension methods for <see cref="EntityTypeBuilder" />.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
 /// </remarks>
-public static partial class RelationalEntityTypeBuilderExtensions
+public static class RelationalEntityTypeBuilderExtensions
 {
     /// <summary>
     ///     Configures the stored procedure that the entity type uses for updates when targeting a relational database.

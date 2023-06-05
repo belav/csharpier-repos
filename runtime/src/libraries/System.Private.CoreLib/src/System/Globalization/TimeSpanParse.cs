@@ -82,7 +82,7 @@ namespace System.Globalization
             NumOverflow = 4, // Number that overflowed
         }
 
-        private ref struct TimeSpanToken
+        ref private struct TimeSpanToken
         {
             internal TTT _ttt;
             internal int _num; // Store the number that we are parsing (if any)
@@ -162,7 +162,7 @@ namespace System.Globalization
             }
         }
 
-        private ref struct TimeSpanTokenizer
+        ref private struct TimeSpanTokenizer
         {
             private readonly ReadOnlySpan<char> _value;
             private int _pos;
@@ -274,8 +274,9 @@ namespace System.Globalization
             }
         }
 
+        ref
         /// <summary>Stores intermediary parsing state for the standard formats.</summary>
-        private ref struct TimeSpanRawInfo
+        private struct TimeSpanRawInfo
         {
             internal TimeSpanFormat.FormatLiterals PositiveLocalized
             {
@@ -530,8 +531,9 @@ namespace System.Globalization
             }
         }
 
+        ref
         /// <summary>Store the result of the parsing.</summary>
-        private ref struct TimeSpanResult
+        private struct TimeSpanResult
         {
             internal TimeSpan parsedTimeSpan;
             private readonly bool _throwOnFailure;
@@ -1963,7 +1965,7 @@ namespace System.Globalization
             ref TimeSpanResult result
         ) => default(StringParser).TryParse(input, ref result);
 
-        private ref struct StringParser
+        ref private struct StringParser
         {
             private ReadOnlySpan<char> _str;
             private char _ch;

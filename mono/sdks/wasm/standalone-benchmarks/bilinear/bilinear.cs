@@ -11,9 +11,10 @@ using System.Numerics;
 #if !NETCOREAPP2_1 && !NETFRAMEWORK
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
+partial
 #endif
 
-public partial class Benchmark
+public class Benchmark
 {
     public const int WarmingIterationCount = 3;
     public const int IterationCount = 10;

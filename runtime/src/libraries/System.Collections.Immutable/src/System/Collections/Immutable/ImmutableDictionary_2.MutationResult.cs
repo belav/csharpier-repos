@@ -3,10 +3,11 @@
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableDictionary{TKey, TValue}.MutationResult"/> class.
     /// </content>
-    public partial class ImmutableDictionary<TKey, TValue>
+    public class ImmutableDictionary<TKey, TValue>
     {
         /// <summary>
         /// Describes the result of a mutation on the immutable data structure.

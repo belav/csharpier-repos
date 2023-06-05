@@ -8,7 +8,7 @@ using Log = Microsoft.AspNetCore.Server.HttpSys.RequestContextLog;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal sealed partial class RequestContext<TContext> : RequestContext
+partial internal sealed class RequestContext<TContext> : RequestContext
     where TContext : notnull
 {
     private readonly IHttpApplication<TContext> _application;

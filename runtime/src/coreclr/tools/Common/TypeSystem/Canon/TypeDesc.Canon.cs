@@ -5,8 +5,9 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Implements canonicalization for types
-    public partial class TypeDesc
+    public class TypeDesc
     {
         /// <summary>
         /// Stores a cached version of the canonicalized form of this type since

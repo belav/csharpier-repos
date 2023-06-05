@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
 {
     [Export(typeof(IGlobalOperationNotificationService)), Shared]
-    internal partial class VisualStudioGlobalOperationNotificationService
+    partial internal class VisualStudioGlobalOperationNotificationService
         : AbstractGlobalOperationNotificationService
     {
         [ImportingConstructor]

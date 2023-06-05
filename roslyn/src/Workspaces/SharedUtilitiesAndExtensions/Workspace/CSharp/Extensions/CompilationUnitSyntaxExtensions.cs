@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class CompilationUnitSyntaxExtensions
+    partial internal static class CompilationUnitSyntaxExtensions
     {
         public static bool CanAddUsingDirectives(
             this SyntaxNode contextNode,

@@ -5,7 +5,7 @@ using System;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeWaitHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeWaitHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" />.

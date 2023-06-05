@@ -3160,7 +3160,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Disposing control resoursec
         /// </summary>
-        public override sealed void Dispose()
+        public sealed override void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);

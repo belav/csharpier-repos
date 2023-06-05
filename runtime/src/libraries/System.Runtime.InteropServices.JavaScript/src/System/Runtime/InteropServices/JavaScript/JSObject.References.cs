@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    public partial class JSObject
+    partial public class JSObject
     {
         internal nint JSHandle;
 

@@ -14,7 +14,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class CustomColorField : System.Web.DynamicData.FieldTemplateUserControl
+partial public class CustomColorField : System.Web.DynamicData.FieldTemplateUserControl
 {
     public override Control DataControl
     {

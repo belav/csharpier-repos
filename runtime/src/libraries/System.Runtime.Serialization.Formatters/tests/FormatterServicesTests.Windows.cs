@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Runtime.Serialization.Formatters.Tests
 {
-    public partial class FormatterServicesTests
+    partial public class FormatterServicesTests
     {
         [Fact]
         [SkipOnMono("COM support is disabled on Mono runtime. Refer to issue #39704.")]

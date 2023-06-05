@@ -33,7 +33,7 @@ using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json
 {
-    public abstract partial class JsonReader
+    partial public abstract class JsonReader
 #if HAVE_ASYNC_DISPOSABLE
         : IAsyncDisposable
 #endif

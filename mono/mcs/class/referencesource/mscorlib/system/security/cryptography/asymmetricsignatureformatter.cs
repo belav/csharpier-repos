@@ -28,8 +28,13 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        abstract public void SetKey(AsymmetricAlgorithm key);
-        abstract public void SetHashAlgorithm(String strName);
+        public
+        //
+        // public methods
+        //
+
+        abstract void SetKey(AsymmetricAlgorithm key);
+        public abstract void SetHashAlgorithm(String strName);
 
         public virtual byte[] CreateSignature(HashAlgorithm hash)
         {
@@ -40,6 +45,6 @@ namespace System.Security.Cryptography
             return CreateSignature(hash.Hash);
         }
 
-        abstract public byte[] CreateSignature(byte[] rgbHash);
+        public abstract byte[] CreateSignature(byte[] rgbHash);
     }
 }

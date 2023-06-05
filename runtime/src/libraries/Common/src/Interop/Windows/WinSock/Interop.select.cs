@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static unsafe partial int select(
+        partial internal static unsafe int select(
             int ignoredParameter,
             IntPtr* readfds,
             IntPtr* writefds,
@@ -18,7 +18,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static unsafe partial int select(
+        partial internal static unsafe int select(
             int ignoredParameter,
             IntPtr* readfds,
             IntPtr* writefds,

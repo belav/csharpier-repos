@@ -11,7 +11,7 @@ namespace A
 
 namespace A
 {
-    public static partial class Test_B
+    partial public static class Test_B
     {
         public static string Test_2(this string s)
         {

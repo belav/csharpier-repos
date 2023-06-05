@@ -9,7 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlWellFormedWriter : XmlWriter
+    partial internal sealed class XmlWellFormedWriter : XmlWriter
     {
         //
         // Private types
@@ -41,7 +41,7 @@ namespace System.Xml
             }
         }
 
-        private partial struct ElementScope
+        partial private struct ElementScope
         {
             internal int prevNSTop;
             internal string prefix;
@@ -79,7 +79,7 @@ namespace System.Xml
             Special,
         }
 
-        private partial struct Namespace
+        partial private struct Namespace
         {
             internal string prefix;
             internal string namespaceUri;
@@ -151,7 +151,7 @@ namespace System.Xml
             XmlLang
         }
 
-        private sealed partial class AttributeValueCache
+        partial private sealed class AttributeValueCache
         {
             private enum ItemType
             {

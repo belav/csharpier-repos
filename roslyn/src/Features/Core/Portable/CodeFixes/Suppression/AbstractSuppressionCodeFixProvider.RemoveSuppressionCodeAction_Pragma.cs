@@ -15,9 +15,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
-    internal abstract partial class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
+    partial internal abstract class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
     {
-        internal abstract partial class RemoveSuppressionCodeAction
+        partial internal abstract class RemoveSuppressionCodeAction
         {
             /// <summary>
             /// Code action to edit/remove/add the pragma directives for removing diagnostic suppression.

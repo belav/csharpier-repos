@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 using Internal.NativeCrypto;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         // Note: input and output are allowed to be the same buffer. BCryptEncrypt will correctly do the encryption in place according to CNG documentation.
         internal static int BCryptEncrypt(
@@ -86,7 +86,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.BCrypt)]
-        public static unsafe partial NTSTATUS BCryptEncrypt(
+        partial public static unsafe NTSTATUS BCryptEncrypt(
             SafeKeyHandle hKey,
             byte* pbInput,
             int cbInput,
@@ -100,7 +100,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.BCrypt)]
-        public static unsafe partial NTSTATUS BCryptDecrypt(
+        partial public static unsafe NTSTATUS BCryptDecrypt(
             SafeKeyHandle hKey,
             byte* pbInput,
             int cbInput,

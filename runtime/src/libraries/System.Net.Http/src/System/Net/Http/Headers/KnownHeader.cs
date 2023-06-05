@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.Net.Http.Headers
 {
-    internal sealed partial class KnownHeader
+    partial internal sealed class KnownHeader
     {
         public KnownHeader(
             string name,

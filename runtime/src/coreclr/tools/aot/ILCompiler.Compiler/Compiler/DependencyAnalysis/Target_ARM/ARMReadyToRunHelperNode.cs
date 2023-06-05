@@ -8,10 +8,11 @@ using ILCompiler.DependencyAnalysis.ARM;
 
 namespace ILCompiler.DependencyAnalysis
 {
+    partial
     /// <summary>
     /// ARM specific portions of ReadyToRunHelperNode
     /// </summary>
-    public partial class ReadyToRunHelperNode
+    public class ReadyToRunHelperNode
     {
         protected override void EmitCode(
             NodeFactory factory,

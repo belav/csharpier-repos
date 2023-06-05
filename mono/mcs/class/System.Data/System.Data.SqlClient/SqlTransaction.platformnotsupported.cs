@@ -21,16 +21,16 @@ namespace System.Data.SqlClient
             SqlInternalTransaction internalTransaction
         ) => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public SqlConnection Connection =>
+        public new SqlConnection Connection =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override protected DbConnection DbConnection =>
+        protected override DbConnection DbConnection =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         internal SqlInternalTransaction InternalTransaction =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override public IsolationLevel IsolationLevel =>
+        public override IsolationLevel IsolationLevel =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         internal bool IsZombied => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -38,12 +38,12 @@ namespace System.Data.SqlClient
         internal SqlStatistics Statistics =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override public void Commit() => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        public override void Commit() => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         protected override void Dispose(bool disposing) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override public void Rollback() =>
+        public override void Rollback() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         public void Rollback(string transactionName) =>

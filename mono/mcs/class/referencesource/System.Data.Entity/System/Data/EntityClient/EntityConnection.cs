@@ -396,10 +396,11 @@ namespace System.Data.EntityClient
             }
         }
 
+        protected
         /// <summary>
         /// Gets the provider factory associated with EntityConnection
         /// </summary>
-        override protected DbProviderFactory DbProviderFactory
+        override DbProviderFactory DbProviderFactory
         {
             get { return EntityProviderFactory.Instance; }
         }

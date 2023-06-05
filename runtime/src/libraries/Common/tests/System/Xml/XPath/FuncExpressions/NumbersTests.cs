@@ -6,10 +6,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Expressions
 {
+    partial
     /// <summary>
     /// Expressions - Numbers
     /// </summary>
-    public static partial class NumbersTests
+    public static class NumbersTests
     {
         /// <summary>
         /// Verify result.

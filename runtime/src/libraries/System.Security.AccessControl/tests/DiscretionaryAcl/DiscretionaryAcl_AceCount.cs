@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class DiscretionaryAcl_AceCount
+    partial public class DiscretionaryAcl_AceCount
     {
         [Fact]
         public static void AceCount_BasicValidation()

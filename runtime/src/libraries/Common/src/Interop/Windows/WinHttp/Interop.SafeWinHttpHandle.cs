@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinHttp
+    partial internal static class WinHttp
     {
         internal class SafeWinHttpHandle : SafeHandleZeroOrMinusOneIsInvalid
         {

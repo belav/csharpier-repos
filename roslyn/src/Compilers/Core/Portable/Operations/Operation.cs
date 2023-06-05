@@ -13,10 +13,11 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// Root type for representing the abstract semantics of C# and VB statements and expressions.
     /// </summary>
-    internal abstract partial class Operation : IOperation
+    internal abstract class Operation : IOperation
     {
         protected static readonly IOperation s_unset = new EmptyOperation(
             semanticModel: null,

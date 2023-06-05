@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Diagnostics.Tracing;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         /// <summary>
         ///  Call the ETW native API EventWriteTransfer and checks for invalid argument error.
@@ -48,7 +48,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Interop.Libraries.Advapi32, EntryPoint = "EventWriteTransfer")]
-        private static unsafe partial int EventWriteTransfer_PInvoke(
+        partial private static unsafe int EventWriteTransfer_PInvoke(
             long registrationHandle,
             in EventDescriptor eventDescriptor,
             Guid* activityId,

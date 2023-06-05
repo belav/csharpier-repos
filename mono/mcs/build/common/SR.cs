@@ -1,6 +1,6 @@
 using System.Globalization;
 
-static partial class SR
+partial static class SR
 {
     internal static string GetString(string name, params object[] args)
     {

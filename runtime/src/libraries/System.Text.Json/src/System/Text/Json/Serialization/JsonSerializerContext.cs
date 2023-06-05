@@ -6,10 +6,11 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json.Serialization
 {
+    partial
     /// <summary>
     /// Provides metadata about a set of types that is relevant to JSON serialization.
     /// </summary>
-    public abstract partial class JsonSerializerContext : IJsonTypeInfoResolver
+    public abstract class JsonSerializerContext : IJsonTypeInfoResolver
     {
         private bool? _canUseSerializationLogic;
 

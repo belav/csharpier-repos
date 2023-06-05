@@ -13,12 +13,11 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Represents a namespace.
     /// </summary>
-    internal abstract partial class NamespaceSymbol
-        : NamespaceOrTypeSymbol,
-            INamespaceSymbolInternal
+    internal abstract class NamespaceSymbol : NamespaceOrTypeSymbol, INamespaceSymbolInternal
     {
         // PERF: initialization of the following fields will allocate, so we make them lazy
         private ImmutableArray<NamedTypeSymbol> _lazyTypesMightContainExtensionMethods;

@@ -61,7 +61,7 @@ internal interface SyntaxFormattingOptionsProvider
 #endif
         LineFormattingOptionsProvider { }
 
-internal static partial class SyntaxFormattingOptionsProviders
+partial internal static class SyntaxFormattingOptionsProviders
 {
     public static SyntaxFormattingOptions.CommonOptions GetCommonSyntaxFormattingOptions(
         this IOptionsReader options,

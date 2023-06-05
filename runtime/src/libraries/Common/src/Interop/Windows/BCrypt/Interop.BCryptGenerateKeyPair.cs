@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         [LibraryImport(Libraries.BCrypt)]
-        private static unsafe partial NTSTATUS BCryptGenerateKeyPair(
+        partial private static unsafe NTSTATUS BCryptGenerateKeyPair(
             SafeBCryptAlgorithmHandle hAlgorithm,
             out SafeBCryptKeyHandle phKey,
             int dwLength,

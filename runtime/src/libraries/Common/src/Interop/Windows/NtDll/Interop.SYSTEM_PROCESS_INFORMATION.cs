@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NtDll
+    partial internal static class NtDll
     {
         // From SYSTEM_INFORMATION_CLASS
         // Use for NtQuerySystemInformation
@@ -17,7 +17,7 @@ internal static partial class Interop
         {
             internal uint NextEntryOffset;
             internal uint NumberOfThreads;
-            private fixed byte Reserved1[48];
+            fixed private byte Reserved1[48];
             internal Interop.UNICODE_STRING ImageName;
             internal int BasePriority;
             internal IntPtr UniqueProcessId;
@@ -37,13 +37,13 @@ internal static partial class Interop
             internal UIntPtr PagefileUsage; // SIZE_T
             internal UIntPtr PeakPagefileUsage; // SIZE_T
             internal UIntPtr PrivatePageCount; // SIZE_T
-            private fixed long Reserved7[6];
+            fixed private long Reserved7[6];
         }
 
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct SYSTEM_THREAD_INFORMATION
         {
-            private fixed long Reserved1[3];
+            fixed private long Reserved1[3];
             private readonly uint Reserved2;
             internal void* StartAddress;
             internal CLIENT_ID ClientId;

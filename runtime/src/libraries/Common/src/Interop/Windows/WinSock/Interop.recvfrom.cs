@@ -5,13 +5,13 @@ using System;
 using System.Runtime.InteropServices;
 using System.Net.Sockets;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         // This method is always blocking, so it uses an IntPtr.
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static unsafe partial int recvfrom(
+        partial internal static unsafe int recvfrom(
             SafeSocketHandle socketHandle,
             byte* pinnedBuffer,
             int len,

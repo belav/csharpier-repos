@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ImplementInterface
 {
-    internal abstract partial class AbstractImplementInterfaceService
+    partial internal abstract class AbstractImplementInterfaceService
     {
         // Parts of the name `disposedValue`.  Used so we can generate a field correctly with
         // the naming style that the user has specified.

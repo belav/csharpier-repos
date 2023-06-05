@@ -851,7 +851,7 @@ namespace System.ServiceModel.Security
             }
         }
 
-        unsafe static class UnmanagedCertificateContext
+        static unsafe class UnmanagedCertificateContext
         {
             [StructLayout(LayoutKind.Sequential)]
             private struct _CERT_CONTEXT

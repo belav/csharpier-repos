@@ -17,7 +17,7 @@ namespace System.Data.Metadata.Edm
     internal static class AssemblyCache
     {
         // Global Assembly Cache
-        private readonly static Dictionary<
+        private static readonly Dictionary<
             Assembly,
             ImmutableAssemblyCacheEntry
         > s_globalAssemblyCache = new Dictionary<Assembly, ImmutableAssemblyCacheEntry>();

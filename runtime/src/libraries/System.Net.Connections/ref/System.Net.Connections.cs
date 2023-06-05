@@ -6,7 +6,7 @@
 
 namespace System.Net.Connections
 {
-    public abstract partial class Connection : System.Net.Connections.ConnectionBase
+    partial public abstract class Connection : System.Net.Connections.ConnectionBase
     {
         protected Connection() { }
 
@@ -52,7 +52,7 @@ namespace System.Net.Connections
         }
     }
 
-    public abstract partial class ConnectionBase : System.IAsyncDisposable, System.IDisposable
+    partial public abstract class ConnectionBase : System.IAsyncDisposable, System.IDisposable
     {
         protected ConnectionBase() { }
 
@@ -90,7 +90,7 @@ namespace System.Net.Connections
         Immediate = 2,
     }
 
-    public static partial class ConnectionExtensions
+    partial public static class ConnectionExtensions
     {
         public static System.Net.Connections.ConnectionFactory Filter(
             this System.Net.Connections.ConnectionFactory factory,
@@ -114,7 +114,7 @@ namespace System.Net.Connections
         }
     }
 
-    public abstract partial class ConnectionFactory : System.IAsyncDisposable, System.IDisposable
+    partial public abstract class ConnectionFactory : System.IAsyncDisposable, System.IDisposable
     {
         protected ConnectionFactory() { }
 
@@ -140,7 +140,7 @@ namespace System.Net.Connections
         }
     }
 
-    public abstract partial class ConnectionListener : System.IAsyncDisposable, System.IDisposable
+    partial public abstract class ConnectionListener : System.IAsyncDisposable, System.IDisposable
     {
         protected ConnectionListener() { }
 
@@ -167,7 +167,7 @@ namespace System.Net.Connections
         }
     }
 
-    public abstract partial class ConnectionListenerFactory
+    partial public abstract class ConnectionListenerFactory
         : System.IAsyncDisposable,
             System.IDisposable
     {
@@ -195,7 +195,7 @@ namespace System.Net.Connections
         }
     }
 
-    public partial interface IConnectionProperties
+    partial public interface IConnectionProperties
     {
         bool TryGet(
             System.Type propertyKey,
@@ -203,7 +203,7 @@ namespace System.Net.Connections
         );
     }
 
-    public partial class SocketsConnectionFactory : System.Net.Connections.ConnectionFactory
+    partial public class SocketsConnectionFactory : System.Net.Connections.ConnectionFactory
     {
         public SocketsConnectionFactory(
             System.Net.Sockets.AddressFamily addressFamily,

@@ -6,7 +6,7 @@ using System.Net.Http.HPack;
 
 namespace System.Net.Http.Headers
 {
-    internal sealed partial class KnownHeader
+    partial internal sealed class KnownHeader
     {
         [MemberNotNull(nameof(Http2EncodedName))]
         [MemberNotNull(nameof(Http3EncodedName))]

@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public sealed partial class MetadataElement : ConfigurationElement
+    partial public sealed class MetadataElement : ConfigurationElement
     {
         public MetadataElement() { }
 

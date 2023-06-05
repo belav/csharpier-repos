@@ -8,7 +8,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHelp
 {
-    internal partial class Controller
+    partial internal class Controller
     {
         internal override void OnTextViewBufferPostChanged(object sender, EventArgs args) =>
             Retrigger();

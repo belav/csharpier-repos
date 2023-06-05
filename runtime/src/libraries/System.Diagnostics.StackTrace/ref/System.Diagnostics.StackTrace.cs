@@ -7,7 +7,7 @@
 #if !BUILDING_CORELIB_REFERENCE
 namespace System.Diagnostics.SymbolStore
 {
-    public partial interface ISymbolBinder
+    partial public interface ISymbolBinder
     {
         [System.ObsoleteAttribute(
             "ISymbolBinder.GetReader has been deprecated because it is not 64-bit compatible. Use ISymbolBinder1.GetReader instead. ISymbolBinder1.GetReader accepts the importer interface pointer as an IntPtr instead of an Int32, and thus works on both 32-bit and 64-bit architectures."
@@ -19,7 +19,7 @@ namespace System.Diagnostics.SymbolStore
         );
     }
 
-    public partial interface ISymbolBinder1
+    partial public interface ISymbolBinder1
     {
         System.Diagnostics.SymbolStore.ISymbolReader? GetReader(
             System.IntPtr importer,
@@ -28,7 +28,7 @@ namespace System.Diagnostics.SymbolStore
         );
     }
 
-    public partial interface ISymbolDocument
+    partial public interface ISymbolDocument
     {
         System.Guid CheckSumAlgorithmId { get; }
         System.Guid DocumentType { get; }
@@ -42,7 +42,7 @@ namespace System.Diagnostics.SymbolStore
         byte[] GetSourceRange(int startLine, int startColumn, int endLine, int endColumn);
     }
 
-    public partial interface ISymbolMethod
+    partial public interface ISymbolMethod
     {
         System.Diagnostics.SymbolStore.ISymbolScope RootScope { get; }
         int SequencePointCount { get; }
@@ -75,14 +75,14 @@ namespace System.Diagnostics.SymbolStore
         );
     }
 
-    public partial interface ISymbolNamespace
+    partial public interface ISymbolNamespace
     {
         string Name { get; }
         System.Diagnostics.SymbolStore.ISymbolNamespace[] GetNamespaces();
         System.Diagnostics.SymbolStore.ISymbolVariable[] GetVariables();
     }
 
-    public partial interface ISymbolReader
+    partial public interface ISymbolReader
     {
         System.Diagnostics.SymbolStore.SymbolToken UserEntryPoint { get; }
         System.Diagnostics.SymbolStore.ISymbolDocument? GetDocument(
@@ -112,7 +112,7 @@ namespace System.Diagnostics.SymbolStore
         );
     }
 
-    public partial interface ISymbolScope
+    partial public interface ISymbolScope
     {
         int EndOffset { get; }
         System.Diagnostics.SymbolStore.ISymbolMethod Method { get; }
@@ -123,7 +123,7 @@ namespace System.Diagnostics.SymbolStore
         System.Diagnostics.SymbolStore.ISymbolNamespace[] GetNamespaces();
     }
 
-    public partial interface ISymbolVariable
+    partial public interface ISymbolVariable
     {
         int AddressField1 { get; }
         int AddressField2 { get; }
@@ -136,7 +136,7 @@ namespace System.Diagnostics.SymbolStore
         byte[] GetSignature();
     }
 
-    public partial interface ISymbolWriter
+    partial public interface ISymbolWriter
     {
         void Close();
         void CloseMethod();
@@ -232,7 +232,7 @@ namespace System.Diagnostics.SymbolStore
         NativeSectionOffset = 10,
     }
 
-    public readonly partial struct SymbolToken
+    partial public readonly struct SymbolToken
         : System.IEquatable<System.Diagnostics.SymbolStore.SymbolToken>
     {
         private readonly int _dummyPrimitive;
@@ -281,14 +281,14 @@ namespace System.Diagnostics.SymbolStore
         }
     }
 
-    public partial class SymDocumentType
+    partial public class SymDocumentType
     {
         public static readonly System.Guid Text;
 
         public SymDocumentType() { }
     }
 
-    public partial class SymLanguageType
+    partial public class SymLanguageType
     {
         public static readonly System.Guid Basic;
         public static readonly System.Guid C;
@@ -305,7 +305,7 @@ namespace System.Diagnostics.SymbolStore
         public SymLanguageType() { }
     }
 
-    public partial class SymLanguageVendor
+    partial public class SymLanguageVendor
     {
         public static readonly System.Guid Microsoft;
 
@@ -316,7 +316,7 @@ namespace System.Diagnostics.SymbolStore
 
 namespace System.Diagnostics
 {
-    public partial class StackFrame
+    partial public class StackFrame
     {
         public const int OFFSET_UNKNOWN = -1;
 
@@ -371,7 +371,7 @@ namespace System.Diagnostics
         }
     }
 
-    public static partial class StackFrameExtensions
+    partial public static class StackFrameExtensions
     {
         public static System.IntPtr GetNativeImageBase(
             this System.Diagnostics.StackFrame stackFrame
@@ -406,7 +406,7 @@ namespace System.Diagnostics
         }
     }
 
-    public partial class StackTrace
+    partial public class StackTrace
     {
         public const int METHODS_TO_SKIP = 0;
 
@@ -452,7 +452,7 @@ namespace System.Diagnostics
 
 namespace System.Diagnostics.SymbolStore
 {
-    public partial interface ISymbolDocumentWriter
+    partial public interface ISymbolDocumentWriter
     {
         void SetCheckSum(System.Guid algorithmId, byte[] checkSum);
         void SetSource(byte[] source);

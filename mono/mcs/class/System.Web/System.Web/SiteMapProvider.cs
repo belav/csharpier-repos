@@ -67,7 +67,7 @@ namespace System.Web
             AddNode(node, null);
         }
 
-        internal protected virtual void AddNode(SiteMapNode node, SiteMapNode parentNode)
+        protected internal virtual void AddNode(SiteMapNode node, SiteMapNode parentNode)
         {
             throw new NotImplementedException();
         }

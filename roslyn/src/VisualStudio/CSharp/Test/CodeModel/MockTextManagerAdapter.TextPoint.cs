@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.LanguageServices;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
 {
-    internal partial class MockTextManagerAdapter
+    partial internal class MockTextManagerAdapter
     {
         internal sealed class TextPoint : EnvDTE.TextPoint
         {

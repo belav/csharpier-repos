@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         ),
         Shared
     ]
-    internal partial class InitializerExpressionSignatureHelpProvider
+    partial internal class InitializerExpressionSignatureHelpProvider
         : AbstractOrdinaryMethodSignatureHelpProvider
     {
         [ImportingConstructor]

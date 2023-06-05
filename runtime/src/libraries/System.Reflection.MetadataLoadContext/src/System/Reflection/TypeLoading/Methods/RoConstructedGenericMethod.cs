@@ -7,10 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Class for all RoMethod objects created by a MetadataLoadContext for which IsConstructedGenericMethod returns true.
     /// </summary>
-    internal sealed partial class RoConstructedGenericMethod : RoMethod
+    internal sealed class RoConstructedGenericMethod : RoMethod
     {
         private readonly RoDefinitionMethod _genericMethodDefinition;
         private readonly RoType[] _genericMethodArguments;

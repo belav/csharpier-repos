@@ -17,7 +17,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeFunction2))]
-    public partial class CodeFunction
+    partial public class CodeFunction
         : AbstractCodeMember,
             ICodeElementContainer<CodeParameter>,
             ICodeElementContainer<CodeAttribute>,

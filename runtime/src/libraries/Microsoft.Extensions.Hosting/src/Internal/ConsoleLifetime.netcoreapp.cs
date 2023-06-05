@@ -7,13 +7,13 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Extensions.Hosting.Internal
 {
-    public partial class ConsoleLifetime : IHostLifetime
+    partial public class ConsoleLifetime : IHostLifetime
     {
         private PosixSignalRegistration? _sigIntRegistration;
         private PosixSignalRegistration? _sigQuitRegistration;
         private PosixSignalRegistration? _sigTermRegistration;
 
-        private partial void RegisterShutdownHandlers()
+        partial private void RegisterShutdownHandlers()
         {
             Action<PosixSignalContext> handler = HandlePosixSignal;
             _sigIntRegistration = PosixSignalRegistration.Create(PosixSignal.SIGINT, handler);
@@ -33,7 +33,7 @@ namespace Microsoft.Extensions.Hosting.Internal
             ApplicationLifetime.StopApplication();
         }
 
-        private partial void UnregisterShutdownHandlers()
+        partial private void UnregisterShutdownHandlers()
         {
             _sigIntRegistration?.Dispose();
             _sigQuitRegistration?.Dispose();

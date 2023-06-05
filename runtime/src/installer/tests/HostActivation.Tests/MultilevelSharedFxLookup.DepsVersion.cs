@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 {
-    public partial class MultilevelSharedFxLookup
+    partial public class MultilevelSharedFxLookup
     {
         [Fact]
         public void TPA_Version_Check_App_Wins()

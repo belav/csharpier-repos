@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {
-    public static partial class SystemFonts
+    partial public static class SystemFonts
     {
         private static unsafe bool GetNonClientMetrics(out Interop.User32.NONCLIENTMETRICS metrics)
         {

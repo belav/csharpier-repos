@@ -8,7 +8,7 @@ using Xunit.Sdk;
 
 namespace System.Text.RegularExpressions.Tests
 {
-    public partial class RegexParserTests
+    partial public class RegexParserTests
     {
         [Theory]
         // Avoid OutOfMemoryException
@@ -625,7 +625,14 @@ namespace System.Text.RegularExpressions.Tests
         /// </summary>
         /// <param name="error">The expected parse error</param>
         /// <param name="action">The action to invoke.</param>
-        static partial void Throws(
+        partial
+        /// <summary>
+        /// Checks if action throws either a RegexParseException or an ArgumentException depending on the
+        /// environment and the supplied error.
+        /// </summary>
+        /// <param name="error">The expected parse error</param>
+        /// <param name="action">The action to invoke.</param>
+        static void Throws(
             string pattern,
             RegexOptions options,
             RegexParseError error,
@@ -672,7 +679,13 @@ namespace System.Text.RegularExpressions.Tests
         // environment and the action.
         /// </summary>
         /// <param name="action">The action to invoke.</param>
-        static partial void MayThrow(Action action)
+        partial
+        /// <summary>
+        /// Checks that action succeeds or throws either a RegexParseException or an ArgumentException depending on the
+        // environment and the action.
+        /// </summary>
+        /// <param name="action">The action to invoke.</param>
+        static void MayThrow(Action action)
         {
             if (Record.Exception(action) is Exception e && e is not RegexParseException)
             {

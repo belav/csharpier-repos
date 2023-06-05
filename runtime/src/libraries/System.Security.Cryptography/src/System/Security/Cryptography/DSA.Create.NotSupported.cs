@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    public partial class DSA : AsymmetricAlgorithm
+    partial public class DSA : AsymmetricAlgorithm
     {
         private static DSA CreateCore()
         {

@@ -17,7 +17,7 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 {
-    public partial class DocumentChangesTests : AbstractLanguageServerProtocolTests
+    partial public class DocumentChangesTests : AbstractLanguageServerProtocolTests
     {
         public DocumentChangesTests(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper) { }

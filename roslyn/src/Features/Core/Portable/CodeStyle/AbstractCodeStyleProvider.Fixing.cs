@@ -13,12 +13,13 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
+    partial
     // This part contains all the logic for hooking up the CodeFixProvider to the CodeStyleProvider.
     // All the code in this part is an implementation detail and is intentionally private so that
     // subclasses cannot change anything.  All code relevant to subclasses relating to fixing is
     // contained in AbstractCodeStyleProvider.cs
 
-    internal abstract partial class AbstractCodeStyleProvider<TOptionValue, TCodeStyleProvider>
+    internal abstract class AbstractCodeStyleProvider<TOptionValue, TCodeStyleProvider>
     {
         private async Task RegisterCodeFixesAsync(CodeFixContext context)
         {

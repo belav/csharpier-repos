@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(
         10,
@@ -11,7 +11,7 @@ internal static partial class LoggingExtensions
         "AuthenticationScheme: {AuthenticationScheme} signed in.",
         EventName = "AuthenticationSchemeSignedIn"
     )]
-    public static partial void AuthenticationSchemeSignedIn(
+    partial public static void AuthenticationSchemeSignedIn(
         this ILogger logger,
         string authenticationScheme
     );
@@ -22,7 +22,7 @@ internal static partial class LoggingExtensions
         "AuthenticationScheme: {AuthenticationScheme} signed out.",
         EventName = "AuthenticationSchemeSignedOut"
     )]
-    public static partial void AuthenticationSchemeSignedOut(
+    partial public static void AuthenticationSchemeSignedOut(
         this ILogger logger,
         string authenticationScheme
     );

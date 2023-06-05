@@ -52,7 +52,7 @@ namespace System.Linq.Expressions
         internal override void ValidateAsDefinedHere(int index) { }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>Creates a <see cref="MemberListBinding"/> where the member is a field or property.</summary>
         /// <returns>A <see cref="MemberListBinding"/> that has the <see cref="MemberBinding.BindingType"/> property equal to <see cref="MemberBindingType.ListBinding"/> and the <see cref="MemberBinding.Member"/> and <see cref="MemberListBinding.Initializers"/> properties set to the specified values.</returns>

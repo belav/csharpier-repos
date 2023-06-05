@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.SymbolSearch;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
-    public partial class AutomationObject
+    partial public class AutomationObject
     {
         public int AddImport_SuggestForTypesInReferenceAssemblies
         {

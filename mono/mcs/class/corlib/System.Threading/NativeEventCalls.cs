@@ -44,7 +44,7 @@ namespace System.Threading
 {
     internal static class NativeEventCalls
     {
-        public unsafe static IntPtr CreateEvent_internal(
+        public static unsafe IntPtr CreateEvent_internal(
             bool manual,
             bool initial,
             string name,
@@ -63,7 +63,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe static extern IntPtr CreateEvent_icall(
+        private static extern unsafe IntPtr CreateEvent_icall(
             bool manual,
             bool initial,
             char* name,
@@ -111,7 +111,7 @@ namespace System.Threading
         public static extern void CloseEvent_internal(IntPtr handle);
 
 #if !MOBILE
-        public unsafe static IntPtr OpenEvent_internal(
+        public static unsafe IntPtr OpenEvent_internal(
             string name,
             EventWaitHandleRights rights,
             out int errorCode
@@ -123,7 +123,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe static extern IntPtr OpenEvent_icall(
+        private static extern unsafe IntPtr OpenEvent_icall(
             char* name,
             int name_length,
             EventWaitHandleRights rights,

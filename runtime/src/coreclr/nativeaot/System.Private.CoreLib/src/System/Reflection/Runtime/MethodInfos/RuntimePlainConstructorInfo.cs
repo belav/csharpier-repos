@@ -14,11 +14,11 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
+    partial
     //
     // The runtime's implementation of ConstructorInfo's represented in the metadata (this is the 99% case.)
     //
-    internal sealed partial class RuntimePlainConstructorInfo<TRuntimeMethodCommon>
-        : RuntimeConstructorInfo
+    internal sealed class RuntimePlainConstructorInfo<TRuntimeMethodCommon> : RuntimeConstructorInfo
         where TRuntimeMethodCommon : IRuntimeMethodCommon<TRuntimeMethodCommon>,
             IEquatable<TRuntimeMethodCommon>
     {

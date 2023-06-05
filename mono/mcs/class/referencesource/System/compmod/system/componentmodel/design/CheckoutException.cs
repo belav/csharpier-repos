@@ -43,7 +43,7 @@ namespace System.ComponentModel.Design
         ///       canceled. This field is read-only.
         ///    </para>
         /// </devdoc>
-        public readonly static CheckoutException Canceled = new CheckoutException(
+        public static readonly CheckoutException Canceled = new CheckoutException(
             SR.GetString(SR.CHECKOUTCanceled),
             NativeMethods.E_ABORT
         );

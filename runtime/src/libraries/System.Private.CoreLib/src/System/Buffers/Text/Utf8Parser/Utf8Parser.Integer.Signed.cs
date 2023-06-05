@@ -5,10 +5,11 @@ using System.Runtime.CompilerServices;
 
 namespace System.Buffers.Text
 {
+    partial
     /// <summary>
     /// Methods to parse common data types to Utf8 strings.
     /// </summary>
-    public static partial class Utf8Parser
+    public static class Utf8Parser
     {
         /// <summary>
         /// Parses a SByte at the start of a Utf8 string.

@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
-    internal partial class SuggestedAction
+    partial internal class SuggestedAction
     {
         internal class CaretPositionRestorer : IDisposable
         {

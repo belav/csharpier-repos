@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Internal.TypeSystem
 {
-    public partial class MethodSignature
+    partial public class MethodSignature
     {
         public override string ToString()
         {
@@ -47,7 +47,7 @@ namespace Internal.TypeSystem
         }
     }
 
-    public partial class MethodDesc
+    partial public class MethodDesc
     {
         public override string ToString()
         {

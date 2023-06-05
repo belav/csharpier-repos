@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlineCompletions;
 
-internal partial class XmlSnippetParser
+partial internal class XmlSnippetParser
 {
     internal class ParsedXmlSnippet
     {

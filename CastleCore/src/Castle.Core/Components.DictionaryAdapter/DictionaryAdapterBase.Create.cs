@@ -18,7 +18,7 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections;
     using System.Collections.Specialized;
 
-    public abstract partial class DictionaryAdapterBase : IDictionaryCreate
+    partial public abstract class DictionaryAdapterBase : IDictionaryCreate
     {
         public T Create<T>()
         {

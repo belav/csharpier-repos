@@ -25,7 +25,7 @@ using Xunit;
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     [TestService]
-    internal partial class EditorVerifierInProcess
+    partial internal class EditorVerifierInProcess
     {
         public async Task CurrentLineTextAsync(
             string expectedText,

@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         [LibraryImport(Libraries.User32, EntryPoint = "LoadStringW", SetLastError = true)]
-        internal static unsafe partial int LoadString(
+        partial internal static unsafe int LoadString(
             IntPtr hInstance,
             uint uID,
             char* lpBuffer,

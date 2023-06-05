@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class GotoStatementSyntax
+    partial public class GotoStatementSyntax
     {
         public GotoStatementSyntax Update(
             SyntaxToken gotoKeyword,
@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static GotoStatementSyntax GotoStatement(
             SyntaxKind kind,

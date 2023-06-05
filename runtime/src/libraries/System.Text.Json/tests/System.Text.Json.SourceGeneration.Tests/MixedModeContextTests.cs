@@ -154,7 +154,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         typeof(PolymorphicClass),
         GenerationMode = JsonSourceGenerationMode.Metadata | JsonSourceGenerationMode.Serialization
     )]
-    internal partial class MixedModeContext : JsonSerializerContext, ITestContext
+    partial internal class MixedModeContext : JsonSerializerContext, ITestContext
     {
         public JsonSourceGenerationMode JsonSourceGenerationMode =>
             JsonSourceGenerationMode.Metadata | JsonSourceGenerationMode.Serialization;

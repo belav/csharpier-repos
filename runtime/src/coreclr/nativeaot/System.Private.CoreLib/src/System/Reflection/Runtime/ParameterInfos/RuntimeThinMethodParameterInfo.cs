@@ -11,11 +11,12 @@ using Internal.Reflection.Core;
 
 namespace System.Reflection.Runtime.ParameterInfos
 {
+    partial
     //
     // This implements ParameterInfo objects owned by MethodBase objects that have no associated Parameter metadata. (In practice,
     // this means return type "Parameters" that don't have custom attributes.
     //
-    internal sealed partial class RuntimeThinMethodParameterInfo : RuntimeMethodParameterInfo
+    internal sealed class RuntimeThinMethodParameterInfo : RuntimeMethodParameterInfo
     {
         private RuntimeThinMethodParameterInfo(
             MethodBase member,

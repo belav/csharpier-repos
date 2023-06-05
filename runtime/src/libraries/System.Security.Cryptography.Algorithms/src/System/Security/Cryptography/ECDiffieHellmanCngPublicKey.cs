@@ -5,9 +5,9 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECDiffieHellmanImplementation
+    partial internal static class ECDiffieHellmanImplementation
     {
-        public sealed partial class ECDiffieHellmanCngPublicKey : ECDiffieHellmanPublicKey
+        partial public sealed class ECDiffieHellmanCngPublicKey : ECDiffieHellmanPublicKey
         {
             private byte[] _keyBlob;
             internal string? _curveName;

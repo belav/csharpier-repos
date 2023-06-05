@@ -119,7 +119,7 @@ namespace I18N.CJK
             );
         }
 
-        public unsafe override int GetByteCountImpl(char* chars, int count)
+        public override unsafe int GetByteCountImpl(char* chars, int count)
         {
             return new ISO2022JPEncoder(this, allow_1byte_kana, allow_shift_io).GetByteCountImpl(
                 chars,
@@ -128,7 +128,7 @@ namespace I18N.CJK
             );
         }
 
-        public unsafe override int GetBytesImpl(
+        public override unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,
@@ -256,7 +256,7 @@ namespace I18N.CJK
         }
 
 #if !DISABLE_UNSAFE
-        public unsafe override int GetByteCountImpl(char* chars, int charCount, bool flush)
+        public override unsafe int GetByteCountImpl(char* chars, int charCount, bool flush)
         {
             return GetBytesImpl(chars, charCount, null, 0, flush);
         }
@@ -448,7 +448,7 @@ namespace I18N.CJK
         };
 
 #if !DISABLE_UNSAFE
-        public unsafe override int GetBytesImpl(
+        public override unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,

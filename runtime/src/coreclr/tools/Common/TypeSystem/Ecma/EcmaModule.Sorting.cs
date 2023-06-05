@@ -7,7 +7,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Ecma
 {
-    public partial class EcmaModule
+    partial public class EcmaModule
     {
         public int CompareTo(EcmaModule other)
         {

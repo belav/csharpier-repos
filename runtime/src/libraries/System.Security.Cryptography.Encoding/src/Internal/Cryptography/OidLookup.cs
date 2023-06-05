@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    internal static partial class OidLookup
+    partial internal static class OidLookup
     {
         private static readonly ConcurrentDictionary<string, string> s_lateBoundOidToFriendlyName =
             new ConcurrentDictionary<string, string>();
@@ -305,6 +305,6 @@ namespace Internal.Cryptography
             AddEntry("1.2.840.10045.3.1.6", "x962P239v3");
         }
 
-        static partial void ExtraStaticDebugValidation();
+        partial static void ExtraStaticDebugValidation();
     }
 }

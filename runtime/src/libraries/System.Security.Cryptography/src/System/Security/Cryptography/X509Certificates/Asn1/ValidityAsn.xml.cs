@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct ValidityAsn
+    partial internal struct ValidityAsn
     {
         internal System.Security.Cryptography.X509Certificates.Asn1.TimeAsn NotBefore;
         internal System.Security.Cryptography.X509Certificates.Asn1.TimeAsn NotAfter;

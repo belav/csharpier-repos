@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.DataProvider
 {
-    public partial class DataProviderTests
+    partial public class DataProviderTests
     {
         private class TestViewModel : ISettingsEditorViewModel
         {

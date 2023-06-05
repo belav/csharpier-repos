@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Wrapping
 {
+    partial
     /// <summary>
     /// Common implementation of all <see cref="ISyntaxWrapper"/>.  This type takes care of a lot of common logic for
     /// all of them, including:
@@ -24,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
     /// Individual subclasses may be targeted at specific syntactic forms.  For example, wrapping
     /// lists, or wrapping logical expressions.
     /// </summary>
-    internal abstract partial class AbstractSyntaxWrapper : ISyntaxWrapper
+    internal abstract class AbstractSyntaxWrapper : ISyntaxWrapper
     {
         protected IIndentationService IndentationService { get; }
 

@@ -100,12 +100,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class PointAndFigureChart : RangeColumnChart
     {
+        private
         #region Fields
 
         /// <summary>
         /// Indicates that class subscribed fro the customize event.
         /// </summary>
-        static private bool _customizeSubscribed = false;
+        static bool _customizeSubscribed = false;
 
         #endregion // Fields
 
@@ -846,7 +847,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="sender">The source Chart object of this event.</param>
         /// <param name="e">The EventArgs object that contains the event data.</param>
-        static private void OnCustomize(Object sender, EventArgs e)
+        private
+        /// <summary>
+        /// Customize chart event, used to add empty points to make point and
+        /// figure chart symbols look proportional.
+        /// </summary>
+        /// <param name="sender">The source Chart object of this event.</param>
+        /// <param name="e">The EventArgs object that contains the event data.</param>
+        static void OnCustomize(Object sender, EventArgs e)
         {
             bool chartResized = false;
             Chart chart = (Chart)sender;
@@ -1071,6 +1079,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
+        public
         #endregion // Drawing methods
 
         #region IChartType interface implementation
@@ -1078,7 +1087,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.PointAndFigure; }
         }
@@ -1088,7 +1097,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");

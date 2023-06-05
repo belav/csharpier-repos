@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public partial class PrivacyNoticeElement : BindingElementExtensionElement
+    partial public class PrivacyNoticeElement : BindingElementExtensionElement
     {
         [ConfigurationProperty(ConfigurationStrings.Url)]
         public Uri Url

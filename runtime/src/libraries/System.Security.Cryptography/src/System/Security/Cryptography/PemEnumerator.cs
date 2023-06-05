@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal readonly ref struct PemEnumerator
+    ref internal readonly struct PemEnumerator
     {
         private readonly ReadOnlySpan<char> _contents;
 
@@ -18,7 +18,7 @@ namespace System.Security.Cryptography
 
         public Enumerator GetEnumerator() => new Enumerator(_contents);
 
-        internal ref struct Enumerator
+        ref internal struct Enumerator
         {
             private ReadOnlySpan<char> _contents;
             private PemFields _pemFields;
@@ -37,7 +37,7 @@ namespace System.Security.Cryptography
                 return PemEncoding.TryFind(_contents, out _pemFields);
             }
 
-            internal readonly ref struct PemFieldItem
+            ref internal readonly struct PemFieldItem
             {
                 private readonly ReadOnlySpan<char> _contents;
                 private readonly PemFields _pemFields;

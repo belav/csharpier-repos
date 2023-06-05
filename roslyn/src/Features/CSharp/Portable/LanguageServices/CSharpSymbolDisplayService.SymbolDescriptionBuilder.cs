@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 {
-    internal partial class CSharpSymbolDisplayService
+    partial internal class CSharpSymbolDisplayService
     {
         protected class SymbolDescriptionBuilder : AbstractSymbolDescriptionBuilder
         {

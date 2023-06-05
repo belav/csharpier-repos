@@ -205,7 +205,7 @@ namespace Microsoft.Build.Internal.Expressions
         }
     }
 
-    abstract partial class Expression
+    partial abstract class Expression
     {
         public abstract string ExpressionString { get; }
         public abstract string EvaluateAsString(EvaluationContext context);

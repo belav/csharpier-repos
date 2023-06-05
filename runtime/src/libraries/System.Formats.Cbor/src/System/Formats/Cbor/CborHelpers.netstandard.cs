@@ -12,7 +12,7 @@ using System.Text;
 
 namespace System.Formats.Cbor
 {
-    internal static partial class CborHelpers
+    partial internal static class CborHelpers
     {
         private const long UnixEpochTicks =
             719162L /*Number of days from 1/1/0001 to 12/31/1969*/

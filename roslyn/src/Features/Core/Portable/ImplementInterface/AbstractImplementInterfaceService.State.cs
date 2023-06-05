@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.ImplementInterface
 {
-    internal abstract partial class AbstractImplementInterfaceService
+    partial internal abstract class AbstractImplementInterfaceService
     {
         internal class State
         {

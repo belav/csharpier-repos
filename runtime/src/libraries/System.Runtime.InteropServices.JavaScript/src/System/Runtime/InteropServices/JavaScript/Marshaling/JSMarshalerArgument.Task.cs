@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    public partial struct JSMarshalerArgument
+    partial public struct JSMarshalerArgument
     {
         /// <summary>
         /// Assists in marshalling of Task results and Function arguments.

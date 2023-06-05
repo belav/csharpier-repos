@@ -17,6 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
 {
+    partial
     /// <summary>
     /// This code fixer helps remove version conflict markers in code by offering the choice
     /// of which version to keep and which version to discard.
@@ -30,7 +31,7 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
     /// diff has a start marker, followed by a middle marker, and terminates with an end marker.
     ///   We treat the middle marker as both the first and second middle markers (degenerate case with no baseline).
     /// </summary>
-    internal abstract partial class AbstractResolveConflictMarkerCodeFixProvider : CodeFixProvider
+    internal abstract class AbstractResolveConflictMarkerCodeFixProvider : CodeFixProvider
     {
         internal const string TakeTopEquivalenceKey = nameof(TakeTopEquivalenceKey);
         internal const string TakeBottomEquivalenceKey = nameof(TakeBottomEquivalenceKey);

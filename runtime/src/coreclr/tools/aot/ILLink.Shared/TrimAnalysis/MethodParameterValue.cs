@@ -11,7 +11,7 @@ using ILLink.Shared.TypeSystemProxy;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    internal sealed partial record MethodParameterValue : ValueWithDynamicallyAccessedMembers
+    partial internal sealed record MethodParameterValue : ValueWithDynamicallyAccessedMembers
     {
         // _overrideIsThis is needed for backwards compatibility with MakeGenericType/Method https://github.com/dotnet/linker/issues/2428
         private readonly bool _overrideIsThis;

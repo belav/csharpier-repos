@@ -99,89 +99,89 @@ namespace System.Xaml
             return xaml_namespaces;
         }
 
-        protected override sealed ICustomAttributeProvider LookupCustomAttributeProvider()
+        protected sealed override ICustomAttributeProvider LookupCustomAttributeProvider()
         {
             return null; // as documented.
         }
 
-        protected override sealed XamlValueConverter<XamlDeferringLoader> LookupDeferringLoader()
+        protected sealed override XamlValueConverter<XamlDeferringLoader> LookupDeferringLoader()
         {
             return null; // as documented.
         }
 
-        protected override sealed IList<XamlMember> LookupDependsOn()
+        protected sealed override IList<XamlMember> LookupDependsOn()
         {
             return null; // as documented.
         }
 
-        protected override sealed XamlMemberInvoker LookupInvoker()
+        protected sealed override XamlMemberInvoker LookupInvoker()
         {
             return invoker;
         }
 
-        protected override sealed bool LookupIsAmbient()
+        protected sealed override bool LookupIsAmbient()
         {
             return false;
         }
 
-        protected override sealed bool LookupIsEvent()
+        protected sealed override bool LookupIsEvent()
         {
             return false;
         }
 
-        protected override sealed bool LookupIsReadOnly()
+        protected sealed override bool LookupIsReadOnly()
         {
             return false;
         }
 
-        protected override sealed bool LookupIsReadPublic()
+        protected sealed override bool LookupIsReadPublic()
         {
             return true;
         }
 
-        protected override sealed bool LookupIsUnknown()
+        protected sealed override bool LookupIsUnknown()
         {
             return is_unknown;
         }
 
-        protected override sealed bool LookupIsWriteOnly()
+        protected sealed override bool LookupIsWriteOnly()
         {
             return false;
         }
 
-        protected override sealed bool LookupIsWritePublic()
+        protected sealed override bool LookupIsWritePublic()
         {
             return true;
         }
 
-        protected override sealed XamlType LookupTargetType()
+        protected sealed override XamlType LookupTargetType()
         {
             return null;
         }
 
-        protected override sealed XamlType LookupType()
+        protected sealed override XamlType LookupType()
         {
             return type;
         }
 
-        protected override sealed XamlValueConverter<TypeConverter> LookupTypeConverter()
+        protected sealed override XamlValueConverter<TypeConverter> LookupTypeConverter()
         {
             if (type_converter == null)
                 type_converter = base.LookupTypeConverter();
             return type_converter;
         }
 
-        protected override sealed MethodInfo LookupUnderlyingGetter()
+        protected sealed override MethodInfo LookupUnderlyingGetter()
         {
             return null;
         }
 
-        protected override sealed MemberInfo LookupUnderlyingMember()
+        protected sealed override MemberInfo LookupUnderlyingMember()
         {
             return null;
         }
 
-        protected override sealed MethodInfo LookupUnderlyingSetter()
+        protected sealed override MethodInfo LookupUnderlyingSetter()
         {
             return null;
         }

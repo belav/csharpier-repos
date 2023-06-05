@@ -61,12 +61,12 @@ namespace System.Security.Principal
             get { return m_roles; }
         }
 
-        override public IIdentity Identity
+        public override IIdentity Identity
         {
             get { return m_identity; }
         }
 
-        override public bool IsInRole(string role)
+        public override bool IsInRole(string role)
         {
             if (m_roles == null)
                 return false;

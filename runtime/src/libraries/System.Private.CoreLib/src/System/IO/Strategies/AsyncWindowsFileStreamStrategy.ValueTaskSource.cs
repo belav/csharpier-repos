@@ -10,7 +10,7 @@ using TaskSourceCodes = System.IO.Strategies.FileStreamHelpers.TaskSourceCodes;
 
 namespace System.IO.Strategies
 {
-    internal sealed partial class AsyncWindowsFileStreamStrategy : WindowsFileStreamStrategy
+    partial internal sealed class AsyncWindowsFileStreamStrategy : WindowsFileStreamStrategy
     {
         /// <summary>
         /// Type that helps reduce allocations for FileStream.ReadAsync and FileStream.WriteAsync.

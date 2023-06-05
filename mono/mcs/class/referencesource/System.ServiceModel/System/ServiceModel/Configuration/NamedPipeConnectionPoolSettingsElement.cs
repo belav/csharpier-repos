@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public sealed partial class NamedPipeConnectionPoolSettingsElement
+    partial public sealed class NamedPipeConnectionPoolSettingsElement
         : ServiceModelConfigurationElement
     {
         public NamedPipeConnectionPoolSettingsElement() { }

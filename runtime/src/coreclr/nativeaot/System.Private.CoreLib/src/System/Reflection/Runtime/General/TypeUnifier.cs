@@ -34,7 +34,7 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.General
 {
-    internal static partial class TypeUnifier
+    partial internal static class TypeUnifier
     {
         // This can be replaced at native compile time using a feature switch.
         internal static bool IsTypeConstructionEagerlyValidated => true;
@@ -223,11 +223,12 @@ namespace System.Reflection.Runtime.General
 
 namespace System.Reflection.Runtime.TypeInfos
 {
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // TypeInfos that represent type definitions (i.e. Foo or Foo<>) or constructed generic types (Foo<int>)
     // that can never be reflection-enabled due to the framework Reflection block.
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class RuntimeBlockedTypeInfo
+    internal sealed class RuntimeBlockedTypeInfo
     {
         internal static RuntimeBlockedTypeInfo GetRuntimeBlockedTypeInfo(
             RuntimeTypeHandle typeHandle,
@@ -266,10 +267,11 @@ namespace System.Reflection.Runtime.TypeInfos
         }
     }
 
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for Sz and multi-dim Array types.
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class RuntimeArrayTypeInfo : RuntimeHasElementTypeInfo
+    internal sealed class RuntimeArrayTypeInfo : RuntimeHasElementTypeInfo
     {
         internal static RuntimeArrayTypeInfo GetArrayTypeInfo(
             RuntimeTypeInfo elementType,
@@ -414,10 +416,11 @@ namespace System.Reflection.Runtime.TypeInfos
         }
     }
 
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for ByRef types.
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class RuntimeByRefTypeInfo : RuntimeHasElementTypeInfo
+    internal sealed class RuntimeByRefTypeInfo : RuntimeHasElementTypeInfo
     {
         internal static RuntimeByRefTypeInfo GetByRefTypeInfo(RuntimeTypeInfo elementType)
         {
@@ -471,10 +474,11 @@ namespace System.Reflection.Runtime.TypeInfos
         }
     }
 
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for Pointer types.
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class RuntimePointerTypeInfo : RuntimeHasElementTypeInfo
+    internal sealed class RuntimePointerTypeInfo : RuntimeHasElementTypeInfo
     {
         internal static RuntimePointerTypeInfo GetPointerTypeInfo(RuntimeTypeInfo elementType)
         {
@@ -531,10 +535,11 @@ namespace System.Reflection.Runtime.TypeInfos
         }
     }
 
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for Constructed generic types ("Foo<int>")
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class RuntimeConstructedGenericTypeInfo
+    internal sealed class RuntimeConstructedGenericTypeInfo
         : RuntimeTypeInfo,
             IKeyedItem<RuntimeConstructedGenericTypeInfo.UnificationKey>
     {
@@ -634,8 +639,9 @@ namespace System.Reflection.Runtime.TypeInfos
         }
     }
 
+    partial
 #if FEATURE_COMINTEROP
-    internal sealed partial class RuntimeCLSIDTypeInfo
+    internal sealed class RuntimeCLSIDTypeInfo
     {
         public static RuntimeCLSIDTypeInfo GetRuntimeCLSIDTypeInfo(Guid clsid, string server)
         {

@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetEGid")]
-        internal static partial uint GetEGid();
+        partial internal static uint GetEGid();
     }
 }

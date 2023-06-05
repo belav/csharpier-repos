@@ -378,7 +378,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbCommandBuilder_ConflictOption),
         ]
-        virtual public ConflictOption ConflictOption
+        public virtual ConflictOption ConflictOption
         { // V1.2.3300
             get { return _conflictDetection; }
             set
@@ -401,7 +401,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Schema),
             ResDescriptionAttribute(Res.DbCommandBuilder_CatalogLocation),
         ]
-        virtual public CatalogLocation CatalogLocation
+        public virtual CatalogLocation CatalogLocation
         { // V1.2.3300, MDAC 79449
             get { return _catalogLocation; }
             set
@@ -427,7 +427,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Schema),
             ResDescriptionAttribute(Res.DbCommandBuilder_CatalogSeparator),
         ]
-        virtual public string CatalogSeparator
+        public virtual string CatalogSeparator
         { // V1.2.3300,  MDAC 79449
             get
             {
@@ -498,7 +498,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Schema),
             ResDescriptionAttribute(Res.DbCommandBuilder_QuotePrefix),
         ]
-        virtual public string QuotePrefix
+        public virtual string QuotePrefix
         { // V1.2.3300, XXXCommandBuilder V1.0.3300
             get
             {
@@ -520,7 +520,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Schema),
             ResDescriptionAttribute(Res.DbCommandBuilder_QuoteSuffix),
         ]
-        virtual public string QuoteSuffix
+        public virtual string QuoteSuffix
         { // V1.2.3300, XXXCommandBuilder V1.0.3300
             get
             {
@@ -542,7 +542,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Schema),
             ResDescriptionAttribute(Res.DbCommandBuilder_SchemaSeparator),
         ]
-        virtual public string SchemaSeparator
+        public virtual string SchemaSeparator
         { // V1.2.3300, MDAC 79449
             get
             {
@@ -702,7 +702,7 @@ namespace System.Data.Common
             ADP.BuildSchemaTableInfoTableNames(srcColumnNames);
         }
 
-        virtual protected DataTable GetSchemaTable(DbCommand sourceCommand)
+        protected virtual DataTable GetSchemaTable(DbCommand sourceCommand)
         {
             using (
                 IDataReader dataReader = sourceCommand.ExecuteReader(
@@ -1368,7 +1368,7 @@ namespace System.Data.Common
             }
         }
 
-        override protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         { // V1.2.3300, XXXCommandBuilder V1.0.3300
             // MDAC 65459
             if (disposing)
@@ -1567,7 +1567,7 @@ namespace System.Data.Common
             return column;
         }
 
-        static private DbParameter GetNextParameter(DbCommand command, int pcount)
+        private static DbParameter GetNextParameter(DbCommand command, int pcount)
         {
             DbParameter p;
             if (pcount < command.Parameters.Count)
@@ -1644,7 +1644,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected DbCommand InitializeCommand(DbCommand command)
+        protected virtual DbCommand InitializeCommand(DbCommand command)
         { // V1.2.3300
             if (null == command)
             {
@@ -1676,7 +1676,7 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        virtual public void RefreshSchema()
+        public virtual void RefreshSchema()
         { // V1.2.3300, XXXCommandBuilder V1.0.3300
             _dbSchemaTable = null;
             _dbSchemaRows = null;
@@ -1717,7 +1717,7 @@ namespace System.Data.Common
             DeleteCommand = null;
         }
 
-        static private void RemoveExtraParameters(DbCommand command, int usedParameterCount)
+        private static void RemoveExtraParameters(DbCommand command, int usedParameterCount)
         {
             for (int i = command.Parameters.Count - 1; i >= usedParameterCount; --i)
             {
@@ -1841,26 +1841,27 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        abstract protected void ApplyParameterInfo(
+        protected abstract void ApplyParameterInfo(
             DbParameter parameter,
             DataRow row,
             StatementType statementType,
             bool whereClause
         ); // V1.2.3300
-        abstract protected string GetParameterName(int parameterOrdinal); // V1.2.3300
-        abstract protected string GetParameterName(string parameterName);
-        abstract protected string GetParameterPlaceholder(int parameterOrdinal); // V1.2.3300
-        abstract protected void SetRowUpdatingHandler(DbDataAdapter adapter); // V1.2.3300
+        protected abstract string GetParameterName(int parameterOrdinal); // V1.2.3300
+        protected abstract string GetParameterName(string parameterName);
+        protected abstract string GetParameterPlaceholder(int parameterOrdinal); // V1.2.3300
+        protected abstract void SetRowUpdatingHandler(DbDataAdapter adapter); // V1.2.3300
 
         //
 
 
 
-        static internal string[] ParseProcedureName(
-            string name,
-            string quotePrefix,
-            string quoteSuffix
-        )
+        internal
+        //
+
+
+
+        static string[] ParseProcedureName(string name, string quotePrefix, string quoteSuffix)
         {
             // Procedure may consist of up to four parts:
             // 0) Server

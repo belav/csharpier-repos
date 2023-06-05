@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
 {
-    internal partial class AbstractMoveDeclarationNearReferenceService<
+    partial internal class AbstractMoveDeclarationNearReferenceService<
         TService,
         TStatementSyntax,
         TLocalDeclarationStatementSyntax,

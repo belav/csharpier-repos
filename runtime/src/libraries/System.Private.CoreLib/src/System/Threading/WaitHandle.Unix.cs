@@ -5,7 +5,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Threading
 {
-    public abstract partial class WaitHandle
+    partial public abstract class WaitHandle
     {
         private static int WaitOneCore(IntPtr handle, int millisecondsTimeout) =>
             WaitSubsystem.Wait(handle, millisecondsTimeout, true);

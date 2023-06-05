@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     /// then those values will write back as false/true.
     /// </summary>
     [DataContract]
-    internal sealed partial class CodeStyleOption2<T>
+    partial internal sealed class CodeStyleOption2<T>
         : ICodeStyleOption2,
             IEquatable<CodeStyleOption2<T>?>
     {

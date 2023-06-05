@@ -3,7 +3,7 @@
 
 namespace System.Threading
 {
-    internal partial struct Win32ThreadPoolNativeOverlapped
+    partial internal struct Win32ThreadPoolNativeOverlapped
     {
         private unsafe class ExecutionContextCallbackArgs
         {

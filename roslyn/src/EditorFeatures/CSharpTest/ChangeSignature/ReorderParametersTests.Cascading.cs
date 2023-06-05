@@ -13,7 +13,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
 {
     [Trait(Traits.Feature, Traits.Features.ChangeSignature)]
-    public partial class ChangeSignatureTests : AbstractChangeSignatureTests
+    partial public class ChangeSignatureTests : AbstractChangeSignatureTests
     {
         [Fact]
         public async Task ReorderParameters_Cascade_ToImplementedMethod()

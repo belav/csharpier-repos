@@ -10,7 +10,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class EccSecurityTransforms
+    partial internal sealed class EccSecurityTransforms
     {
 #pragma warning disable IDE0060
         private static ECParameters ExportParametersFromLegacyKey(

@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class SolutionState
+    partial internal class SolutionState
     {
+        partial
         /// <summary>
         /// Represents a change that needs to be made to a <see cref="Compilation"/>, <see cref="GeneratorDriver"/>, or both in response to
         /// some user edit.
         /// </summary>
-        private abstract partial class CompilationAndGeneratorDriverTranslationAction
+        private abstract class CompilationAndGeneratorDriverTranslationAction
         {
             public virtual Task<Compilation> TransformCompilationAsync(
                 Compilation oldCompilation,

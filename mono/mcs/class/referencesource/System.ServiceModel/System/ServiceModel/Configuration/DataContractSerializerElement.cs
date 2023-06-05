@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Description;
 
-    public sealed partial class DataContractSerializerElement : BehaviorExtensionElement
+    partial public sealed class DataContractSerializerElement : BehaviorExtensionElement
     {
         public DataContractSerializerElement() { }
 

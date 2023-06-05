@@ -12,19 +12,21 @@ namespace System.Text.RegularExpressions
 {
     using System.ComponentModel;
 
+    internal
 #if !SILVERLIGHT
     /// <internalonly/>
     [EditorBrowsable(EditorBrowsableState.Never)]
+    public
 #endif
 #if !SILVERLIGHT
-    abstract public class RegexRunnerFactory
+    abstract class RegexRunnerFactory
     {
 #else
-    abstract internal class RegexRunnerFactory
+    abstract class RegexRunnerFactory
     {
 #endif
         protected RegexRunnerFactory() { }
 
-        abstract protected internal RegexRunner CreateInstance();
+        protected internal abstract RegexRunner CreateInstance();
     }
 }

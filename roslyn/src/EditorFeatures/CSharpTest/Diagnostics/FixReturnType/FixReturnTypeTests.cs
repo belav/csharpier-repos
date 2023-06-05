@@ -16,7 +16,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.FixReturnType
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsFixReturnType)]
-    public partial class FixReturnTypeTests
+    partial public class FixReturnTypeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public FixReturnTypeTests(ITestOutputHelper logger)

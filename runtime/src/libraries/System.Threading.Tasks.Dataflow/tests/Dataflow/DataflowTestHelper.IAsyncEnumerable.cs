@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace System.Threading.Tasks.Dataflow.Tests
 {
-    internal static partial class DataflowTestHelpers
+    partial internal static class DataflowTestHelpers
     {
         internal static Func<int, IAsyncEnumerable<int>> ToAsyncEnumerable = item =>
             AsyncEnumerable.Repeat(item, 1);
     }
 
-    internal static partial class AsyncEnumerable
+    partial internal static class AsyncEnumerable
     {
         internal static async IAsyncEnumerable<int> Repeat(int item, int count)
         {

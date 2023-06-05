@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         // Enum equivalent to MMSYSERR_*
         internal enum MMSYSERR : int

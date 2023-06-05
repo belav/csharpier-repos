@@ -7,10 +7,11 @@ using Xunit;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
+    partial
     /// <summary>
     /// Provides a means of interacting with the interactive window in the Visual Studio host.
     /// </summary>
-    public abstract partial class InteractiveWindow_OutOfProc : TextViewWindow_OutOfProc
+    public abstract class InteractiveWindow_OutOfProc : TextViewWindow_OutOfProc
     {
         public class Verifier : Verifier<InteractiveWindow_OutOfProc>
         {

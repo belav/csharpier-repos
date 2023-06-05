@@ -41,7 +41,7 @@ namespace System.Security.AccessControl
         Deny = 1,
     }
 
-    public abstract partial class AccessRule : System.Security.AccessControl.AuthorizationRule
+    partial public abstract class AccessRule : System.Security.AccessControl.AuthorizationRule
     {
         protected AccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -65,7 +65,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public partial class AccessRule<T> : System.Security.AccessControl.AccessRule
+    partial public class AccessRule<T> : System.Security.AccessControl.AccessRule
         where T : struct
     {
         public AccessRule(
@@ -134,7 +134,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public sealed partial class AceEnumerator : System.Collections.IEnumerator
+    partial public sealed class AceEnumerator : System.Collections.IEnumerator
     {
         internal AceEnumerator() { }
 
@@ -208,7 +208,7 @@ namespace System.Security.AccessControl
         Failure = 2,
     }
 
-    public abstract partial class AuditRule : System.Security.AccessControl.AuthorizationRule
+    partial public abstract class AuditRule : System.Security.AccessControl.AuthorizationRule
     {
         protected AuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -232,7 +232,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public partial class AuditRule<T> : System.Security.AccessControl.AuditRule
+    partial public class AuditRule<T> : System.Security.AccessControl.AuditRule
         where T : struct
     {
         public AuditRule(
@@ -297,7 +297,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public abstract partial class AuthorizationRule
+    partial public abstract class AuthorizationRule
     {
         protected internal AuthorizationRule(
             System.Security.Principal.IdentityReference identity,
@@ -329,7 +329,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public sealed partial class AuthorizationRuleCollection
+    partial public sealed class AuthorizationRuleCollection
         : System.Collections.ReadOnlyCollectionBase
     {
         public AuthorizationRuleCollection() { }
@@ -344,7 +344,7 @@ namespace System.Security.AccessControl
         public void CopyTo(System.Security.AccessControl.AuthorizationRule[] rules, int index) { }
     }
 
-    public sealed partial class CommonAce : System.Security.AccessControl.QualifiedAce
+    partial public sealed class CommonAce : System.Security.AccessControl.QualifiedAce
     {
         public CommonAce(
             System.Security.AccessControl.AceFlags flags,
@@ -368,7 +368,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public abstract partial class CommonAcl : System.Security.AccessControl.GenericAcl
+    partial public abstract class CommonAcl : System.Security.AccessControl.GenericAcl
     {
         internal CommonAcl() { }
 
@@ -409,7 +409,7 @@ namespace System.Security.AccessControl
         public void RemoveInheritedAces() { }
     }
 
-    public abstract partial class CommonObjectSecurity
+    partial public abstract class CommonObjectSecurity
         : System.Security.AccessControl.ObjectSecurity
     {
         protected CommonObjectSecurity(bool isContainer) { }
@@ -479,7 +479,7 @@ namespace System.Security.AccessControl
         protected void SetAuditRule(System.Security.AccessControl.AuditRule rule) { }
     }
 
-    public sealed partial class CommonSecurityDescriptor
+    partial public sealed class CommonSecurityDescriptor
         : System.Security.AccessControl.GenericSecurityDescriptor
     {
         public CommonSecurityDescriptor(bool isContainer, bool isDS, byte[] binaryForm, int offset)
@@ -557,7 +557,7 @@ namespace System.Security.AccessControl
         public void SetSystemAclProtection(bool isProtected, bool preserveInheritance) { }
     }
 
-    public sealed partial class CompoundAce : System.Security.AccessControl.KnownAce
+    partial public sealed class CompoundAce : System.Security.AccessControl.KnownAce
     {
         public CompoundAce(
             System.Security.AccessControl.AceFlags flags,
@@ -606,7 +606,7 @@ namespace System.Security.AccessControl
         SelfRelative = 32768,
     }
 
-    public sealed partial class CustomAce : System.Security.AccessControl.GenericAce
+    partial public sealed class CustomAce : System.Security.AccessControl.GenericAce
     {
         public static readonly int MaxOpaqueLength;
 
@@ -635,7 +635,7 @@ namespace System.Security.AccessControl
         public void SetOpaque(byte[]? opaque) { }
     }
 
-    public sealed partial class DiscretionaryAcl : System.Security.AccessControl.CommonAcl
+    partial public sealed class DiscretionaryAcl : System.Security.AccessControl.CommonAcl
     {
         public DiscretionaryAcl(bool isContainer, bool isDS, byte revision, int capacity) { }
 
@@ -757,7 +757,7 @@ namespace System.Security.AccessControl
         ) { }
     }
 
-    public abstract partial class GenericAce
+    partial public abstract class GenericAce
     {
         internal GenericAce() { }
 
@@ -832,7 +832,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public abstract partial class GenericAcl
+    partial public abstract class GenericAcl
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -872,7 +872,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public abstract partial class GenericSecurityDescriptor
+    partial public abstract class GenericSecurityDescriptor
     {
         internal GenericSecurityDescriptor() { }
 
@@ -911,7 +911,7 @@ namespace System.Security.AccessControl
         ObjectInherit = 2,
     }
 
-    public abstract partial class KnownAce : System.Security.AccessControl.GenericAce
+    partial public abstract class KnownAce : System.Security.AccessControl.GenericAce
     {
         internal KnownAce() { }
 
@@ -927,7 +927,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public abstract partial class NativeObjectSecurity
+    partial public abstract class NativeObjectSecurity
         : System.Security.AccessControl.CommonObjectSecurity
     {
         protected NativeObjectSecurity(
@@ -1010,7 +1010,7 @@ namespace System.Security.AccessControl
         );
     }
 
-    public abstract partial class ObjectAccessRule : System.Security.AccessControl.AccessRule
+    partial public abstract class ObjectAccessRule : System.Security.AccessControl.AccessRule
     {
         protected ObjectAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -1045,7 +1045,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public sealed partial class ObjectAce : System.Security.AccessControl.QualifiedAce
+    partial public sealed class ObjectAce : System.Security.AccessControl.QualifiedAce
     {
         public ObjectAce(
             System.Security.AccessControl.AceFlags aceFlags,
@@ -1095,7 +1095,7 @@ namespace System.Security.AccessControl
         InheritedObjectAceTypePresent = 2,
     }
 
-    public abstract partial class ObjectAuditRule : System.Security.AccessControl.AuditRule
+    partial public abstract class ObjectAuditRule : System.Security.AccessControl.AuditRule
     {
         protected ObjectAuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -1130,7 +1130,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public abstract partial class ObjectSecurity
+    partial public abstract class ObjectSecurity
     {
         protected ObjectSecurity() { }
 
@@ -1320,7 +1320,7 @@ namespace System.Security.AccessControl
         protected void WriteUnlock() { }
     }
 
-    public abstract partial class ObjectSecurity<T>
+    partial public abstract class ObjectSecurity<T>
         : System.Security.AccessControl.NativeObjectSecurity
         where T : struct
     {
@@ -1442,7 +1442,7 @@ namespace System.Security.AccessControl
         public virtual void SetAuditRule(System.Security.AccessControl.AuditRule<T> rule) { }
     }
 
-    public sealed partial class PrivilegeNotHeldException
+    partial public sealed class PrivilegeNotHeldException
         : System.UnauthorizedAccessException,
             System.Runtime.Serialization.ISerializable
     {
@@ -1471,7 +1471,7 @@ namespace System.Security.AccessControl
         InheritOnly = 2,
     }
 
-    public abstract partial class QualifiedAce : System.Security.AccessControl.KnownAce
+    partial public abstract class QualifiedAce : System.Security.AccessControl.KnownAce
     {
         internal QualifiedAce() { }
 
@@ -1496,7 +1496,7 @@ namespace System.Security.AccessControl
         public void SetOpaque(byte[]? opaque) { }
     }
 
-    public sealed partial class RawAcl : System.Security.AccessControl.GenericAcl
+    partial public sealed class RawAcl : System.Security.AccessControl.GenericAcl
     {
         public RawAcl(byte revision, int capacity) { }
 
@@ -1527,7 +1527,7 @@ namespace System.Security.AccessControl
         public void RemoveAce(int index) { }
     }
 
-    public sealed partial class RawSecurityDescriptor
+    partial public sealed class RawSecurityDescriptor
         : System.Security.AccessControl.GenericSecurityDescriptor
     {
         public RawSecurityDescriptor(byte[] binaryForm, int offset) { }
@@ -1601,7 +1601,7 @@ namespace System.Security.AccessControl
         SystemAcl = 8,
     }
 
-    public sealed partial class SystemAcl : System.Security.AccessControl.CommonAcl
+    partial public sealed class SystemAcl : System.Security.AccessControl.CommonAcl
     {
         public SystemAcl(bool isContainer, bool isDS, byte revision, int capacity) { }
 
@@ -1719,7 +1719,7 @@ namespace System.Security.AccessControl
 
 namespace System.Security.Policy
 {
-    public sealed partial class Evidence
+    partial public sealed class Evidence
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -1825,7 +1825,7 @@ namespace System.Security.Policy
         public void RemoveType(System.Type t) { }
     }
 
-    public abstract partial class EvidenceBase
+    partial public abstract class EvidenceBase
     {
         protected EvidenceBase() { }
 

@@ -6,7 +6,7 @@ using Xunit;
 namespace System.Security.Cryptography.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public partial class AesTests
+    partial public class AesTests
     {
         [Fact]
         public static void AesDefaultCtor()

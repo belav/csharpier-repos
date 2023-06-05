@@ -14,7 +14,7 @@ using System.Globalization;
 // ReSharper disable ImplicitlyCapturedClosure
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-public partial class EntityTypeTest
+partial public class EntityTypeTest
 {
     [ConditionalFact]
     public void Throws_when_model_is_readonly()

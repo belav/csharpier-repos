@@ -12,7 +12,7 @@ using Xunit;
 class Validate
 {
     [StructLayout(LayoutKind.Explicit)]
-    private ref struct Explicit
+    ref private struct Explicit
     {
         [FieldOffset(0)]
         public Span<byte> Bytes;

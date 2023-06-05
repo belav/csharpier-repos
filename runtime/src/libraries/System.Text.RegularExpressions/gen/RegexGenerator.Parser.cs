@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 
 namespace System.Text.RegularExpressions.Generator
 {
-    public partial class RegexGenerator
+    partial public class RegexGenerator
     {
         private const string RegexName = "System.Text.RegularExpressions.Regex";
         private const string GeneratedRegexAttributeName =

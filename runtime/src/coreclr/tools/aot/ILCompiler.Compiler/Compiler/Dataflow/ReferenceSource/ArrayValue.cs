@@ -45,7 +45,7 @@ namespace ILLink.Shared.TrimAnalysis
         public TypeReference ElementType { get; }
         public Dictionary<int, ValueBasicBlockPair> IndexValues { get; }
 
-        public partial bool TryGetValueByIndex(int index, out MultiValue value)
+        partial public bool TryGetValueByIndex(int index, out MultiValue value)
         {
             if (IndexValues.TryGetValue(index, out var valuePair))
             {

@@ -50,7 +50,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
     /// the data so it can be read from the background.
     /// </summary>
     [ExportWorkspaceService(typeof(IPackageInstallerService)), Shared]
-    internal partial class PackageInstallerService
+    partial internal class PackageInstallerService
         : AbstractDelayStartedService,
             IPackageInstallerService,
             IVsSearchProviderCallback

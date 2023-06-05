@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Organizing
 {
-    internal static partial class OrganizingService
+    partial internal static class OrganizingService
     {
         /// <summary>
         /// Organize the whole document.

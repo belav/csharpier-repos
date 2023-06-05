@@ -11,7 +11,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Diagnostics
 {
-    public partial class Process : IDisposable
+    partial public class Process : IDisposable
     {
         private bool _haveMainWindow;
         private IntPtr _mainWindowHandle;

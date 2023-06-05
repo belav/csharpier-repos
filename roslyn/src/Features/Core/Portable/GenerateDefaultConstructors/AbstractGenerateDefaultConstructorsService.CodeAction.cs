@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
 {
-    internal abstract partial class AbstractGenerateDefaultConstructorsService<TService>
+    partial internal abstract class AbstractGenerateDefaultConstructorsService<TService>
     {
         private sealed class GenerateDefaultConstructorCodeAction : AbstractCodeAction
         {

@@ -6,10 +6,11 @@ using System.Diagnostics;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base class for all ParameterInfo objects created by a MetadataLoadContext.
     /// </summary>
-    internal abstract partial class RoParameter : ParameterInfo
+    internal abstract class RoParameter : ParameterInfo
     {
         private readonly MemberInfo _member;
         private readonly int _position;

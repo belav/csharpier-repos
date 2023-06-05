@@ -6,7 +6,7 @@
 
 namespace System.Security.Cryptography
 {
-    public abstract partial class AsymmetricAlgorithm : System.IDisposable
+    partial public abstract class AsymmetricAlgorithm : System.IDisposable
     {
         protected int KeySizeValue;
 
@@ -186,7 +186,7 @@ namespace System.Security.Cryptography
         CTS = 5,
     }
 
-    public static partial class CryptographicOperations
+    partial public static class CryptographicOperations
     {
         public static bool FixedTimeEquals(
             System.ReadOnlySpan<byte> left,
@@ -199,7 +199,7 @@ namespace System.Security.Cryptography
         public static void ZeroMemory(System.Span<byte> buffer) { }
     }
 
-    public partial class CryptographicUnexpectedOperationException
+    partial public class CryptographicUnexpectedOperationException
         : System.Security.Cryptography.CryptographicException
     {
         public CryptographicUnexpectedOperationException() { }
@@ -217,7 +217,7 @@ namespace System.Security.Cryptography
         public CryptographicUnexpectedOperationException(string format, string? insert) { }
     }
 
-    public partial class CryptoStream : System.IO.Stream, System.IDisposable
+    partial public class CryptoStream : System.IO.Stream, System.IDisposable
     {
         public CryptoStream(
             System.IO.Stream stream,
@@ -393,7 +393,7 @@ namespace System.Security.Cryptography
         Write = 1,
     }
 
-    public abstract partial class HashAlgorithm
+    partial public abstract class HashAlgorithm
         : System.IDisposable,
             System.Security.Cryptography.ICryptoTransform
     {
@@ -514,7 +514,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public readonly partial struct HashAlgorithmName
+    partial public readonly struct HashAlgorithmName
         : System.IEquatable<System.Security.Cryptography.HashAlgorithmName>
     {
         private readonly object _dummy;
@@ -602,7 +602,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class HMAC : System.Security.Cryptography.KeyedHashAlgorithm
+    partial public abstract class HMAC : System.Security.Cryptography.KeyedHashAlgorithm
     {
         protected HMAC() { }
 
@@ -659,7 +659,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial interface ICryptoTransform : System.IDisposable
+    partial public interface ICryptoTransform : System.IDisposable
     {
         bool CanReuseTransform { get; }
         bool CanTransformMultipleBlocks { get; }
@@ -675,7 +675,7 @@ namespace System.Security.Cryptography
         byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount);
     }
 
-    public abstract partial class KeyedHashAlgorithm : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class KeyedHashAlgorithm : System.Security.Cryptography.HashAlgorithm
     {
         protected byte[] KeyValue;
 
@@ -708,7 +708,7 @@ namespace System.Security.Cryptography
         protected override void Dispose(bool disposing) { }
     }
 
-    public sealed partial class KeySizes
+    partial public sealed class KeySizes
     {
         public KeySizes(int minSize, int maxSize, int skipSize) { }
 
@@ -744,7 +744,7 @@ namespace System.Security.Cryptography
         TripleDes3KeyPkcs12 = 4,
     }
 
-    public sealed partial class PbeParameters
+    partial public sealed class PbeParameters
     {
         public PbeParameters(
             System.Security.Cryptography.PbeEncryptionAlgorithm encryptionAlgorithm,
@@ -766,7 +766,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class SymmetricAlgorithm : System.IDisposable
+    partial public abstract class SymmetricAlgorithm : System.IDisposable
     {
         protected int BlockSizeValue;
         protected int FeedbackSizeValue;

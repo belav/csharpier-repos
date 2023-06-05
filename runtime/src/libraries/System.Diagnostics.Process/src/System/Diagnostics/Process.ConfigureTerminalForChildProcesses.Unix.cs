@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics
 {
-    public partial class Process
+    partial public class Process
     {
         private static int s_childrenUsingTerminalCount;
 

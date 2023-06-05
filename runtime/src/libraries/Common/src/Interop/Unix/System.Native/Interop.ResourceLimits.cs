@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal const ulong RLIM_INFINITY = ulong.MaxValue;
 
@@ -35,13 +35,13 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetRLimit",
             SetLastError = true
         )]
-        internal static partial int GetRLimit(RlimitResources resourceType, out RLimit limits);
+        partial internal static int GetRLimit(RlimitResources resourceType, out RLimit limits);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_SetRLimit",
             SetLastError = true
         )]
-        internal static partial int SetRLimit(RlimitResources resourceType, ref RLimit limits);
+        partial internal static int SetRLimit(RlimitResources resourceType, ref RLimit limits);
     }
 }

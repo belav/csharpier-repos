@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    public static partial class cryptoapi
+    partial public static class cryptoapi
     {
         [GeneratedDllImport(
             Libraries.Advapi32,
@@ -15,7 +15,7 @@ internal static partial class Interop
             SetLastError = true
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static unsafe partial bool CryptAcquireContext(
+        partial public static unsafe bool CryptAcquireContext(
             out IntPtr psafeProvHandle,
             char* pszContainer,
             char* pszProvider,

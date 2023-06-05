@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace System.Xml
 {
-    internal partial class ReadContentAsBinaryHelper
+    partial internal class ReadContentAsBinaryHelper
     {
         // Private enums
         enum State

@@ -33,7 +33,7 @@ namespace System
     }
 
     [AttributeUsage(AttributeTargets.Field, Inherited = false)]
-    public partial class ContextStaticAttribute : Attribute
+    partial public class ContextStaticAttribute : Attribute
     {
         public ContextStaticAttribute() { }
     }

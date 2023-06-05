@@ -17,6 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Simplification
 {
+    partial
     /// <summary>
     /// Expands and Reduces subtrees.
     ///
@@ -36,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Simplification
     ///     5) Rewrites explicit calls to extension methods to use dot notation
     ///     6) Removes unnecessary tuple element names and anonymous type member names
     /// </summary>
-    public static partial class Simplifier
+    public static class Simplifier
     {
         /// <summary>
         /// The annotation the reducer uses to identify sub trees to be reduced.

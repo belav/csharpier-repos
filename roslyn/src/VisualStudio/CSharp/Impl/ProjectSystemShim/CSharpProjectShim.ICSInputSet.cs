@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
-    internal partial class CSharpProjectShim : ICSInputSet
+    partial internal class CSharpProjectShim : ICSInputSet
     {
         public ICSCompiler GetCompiler() => throw new NotImplementedException();
 

@@ -26,9 +26,9 @@ namespace ContextualReflectionTest
 
     public class TestResolve
     {
-        static public ResolveEvents ResolveEvent { get; set; }
+        public static ResolveEvents ResolveEvent { get; set; }
 
-        static public Assembly ResolvingTestDefault(
+        public static Assembly ResolvingTestDefault(
             AssemblyLoadContext alc,
             AssemblyName assemblyName
         )
@@ -43,7 +43,7 @@ namespace ContextualReflectionTest
             return null;
         }
 
-        static public Assembly ResolvingTestIsolated(
+        public static Assembly ResolvingTestIsolated(
             AssemblyLoadContext alc,
             AssemblyName assemblyName
         )
@@ -58,7 +58,7 @@ namespace ContextualReflectionTest
             return null;
         }
 
-        static public void Assert(ResolveEvents expected, Action action)
+        public static void Assert(ResolveEvents expected, Action action)
         {
             ResolveEvent = ResolveEvents.NoEvent;
             try

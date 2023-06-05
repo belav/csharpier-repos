@@ -5,7 +5,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public sealed partial class FieldForInstantiatedType : FieldDesc
+    partial public sealed class FieldForInstantiatedType : FieldDesc
     {
         private readonly FieldDesc _fieldDef;
         private readonly InstantiatedType _instantiatedType;

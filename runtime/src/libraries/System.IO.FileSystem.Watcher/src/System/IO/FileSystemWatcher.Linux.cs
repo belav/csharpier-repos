@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace System.IO
 {
+    partial
     // Note: This class has an OS Limitation where the inotify API can miss events if a directory is created and immediately has
     //       changes underneath. This is due to the inotify* APIs not being recursive and needing to call inotify_add_watch on
     //       each subdirectory, causing a race between adding the watch and file system events happening.
-    public partial class FileSystemWatcher
+    public class FileSystemWatcher
     {
         /// <summary>Starts a new watch operation if one is not currently running.</summary>
         private void StartRaisingEvents()

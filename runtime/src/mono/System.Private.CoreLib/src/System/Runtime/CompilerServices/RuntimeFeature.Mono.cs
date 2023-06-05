@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {
-    public partial class RuntimeFeature
+    partial public class RuntimeFeature
     {
         public static bool IsDynamicCodeSupported
         {

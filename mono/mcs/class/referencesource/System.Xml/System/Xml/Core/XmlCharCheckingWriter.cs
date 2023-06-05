@@ -35,10 +35,11 @@ using System.Diagnostics;
 
 namespace System.Xml
 {
+    partial
     //
     // XmlCharCheckingWriter
     //
-    internal partial class XmlCharCheckingWriter : XmlWrappingWriter
+    internal class XmlCharCheckingWriter : XmlWrappingWriter
     {
         //
         // Fields

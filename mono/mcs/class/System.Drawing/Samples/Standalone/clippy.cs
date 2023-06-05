@@ -35,7 +35,7 @@ using System.Windows.Forms;
 
 namespace Samples
 {
-    public partial class Clippy : Form
+    partial public class Clippy : Form
     {
         private GraphicsPath path;
         private Region clipping_region;

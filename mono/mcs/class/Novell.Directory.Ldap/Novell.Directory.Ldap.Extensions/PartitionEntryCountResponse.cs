@@ -49,12 +49,13 @@ namespace Novell.Directory.Ldap.Extensions
     /// </summary>
     public class PartitionEntryCountResponse : LdapExtendedResponse
     {
+        public
         /// <summary> Returns the number of entries in the naming context.
         ///
         /// </summary>
         /// <returns> The count of the number of objects returned.
         /// </returns>
-        virtual public int Count
+        virtual int Count
         {
             get { return count; }
         }

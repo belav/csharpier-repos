@@ -19,7 +19,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsQualifyMemberAccess)]
-    public partial class QualifyMemberAccessTests
+    partial public class QualifyMemberAccessTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public QualifyMemberAccessTests(ITestOutputHelper logger)

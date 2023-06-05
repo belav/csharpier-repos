@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.SimplifyTypeNames
 {
-    internal abstract partial class AbstractSimplifyTypeNamesCodeFixProvider<
+    partial internal abstract class AbstractSimplifyTypeNamesCodeFixProvider<
         TSyntaxKind,
         TSimplifierOptions
     > : SyntaxEditorBasedCodeFixProvider

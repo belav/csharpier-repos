@@ -8,8 +8,9 @@ using System.Runtime.InteropServices;
 
 namespace Internal.Runtime
 {
+    partial
     // Extensions to MethodTable that are specific to the use in the CoreLib.
-    internal unsafe partial struct MethodTable
+    internal unsafe struct MethodTable
     {
 #if !INPLACE_RUNTIME
         internal MethodTable* GetArrayEEType()

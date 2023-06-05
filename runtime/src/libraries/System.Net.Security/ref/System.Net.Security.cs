@@ -6,7 +6,7 @@
 
 namespace System.Net.Security
 {
-    public abstract partial class AuthenticatedStream : System.IO.Stream
+    partial public abstract class AuthenticatedStream : System.IO.Stream
     {
         protected AuthenticatedStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen) { }
 
@@ -32,7 +32,7 @@ namespace System.Net.Security
         }
     }
 
-    public sealed partial class CipherSuitesPolicy
+    partial public sealed class CipherSuitesPolicy
     {
         [System.CLSCompliantAttribute(false)]
         public CipherSuitesPolicy(
@@ -73,7 +73,7 @@ namespace System.Net.Security
         string[] acceptableIssuers
     );
 
-    public sealed partial class NegotiateAuthentication : System.IDisposable
+    partial public sealed class NegotiateAuthentication : System.IDisposable
     {
         public NegotiateAuthentication(
             System.Net.Security.NegotiateAuthenticationClientOptions clientOptions
@@ -172,7 +172,7 @@ namespace System.Net.Security
         }
     }
 
-    public partial class NegotiateAuthenticationClientOptions
+    partial public class NegotiateAuthenticationClientOptions
     {
         public NegotiateAuthenticationClientOptions() { }
 
@@ -213,7 +213,7 @@ namespace System.Net.Security
         }
     }
 
-    public partial class NegotiateAuthenticationServerOptions
+    partial public class NegotiateAuthenticationServerOptions
     {
         public NegotiateAuthenticationServerOptions() { }
 
@@ -270,7 +270,7 @@ namespace System.Net.Security
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public partial class NegotiateStream : System.Net.Security.AuthenticatedStream
+    partial public class NegotiateStream : System.Net.Security.AuthenticatedStream
     {
         public NegotiateStream(System.IO.Stream innerStream)
             : base(default(System.IO.Stream), default(bool)) { }
@@ -683,7 +683,7 @@ namespace System.Net.Security
         System.Threading.CancellationToken cancellationToken
     );
 
-    public readonly partial struct SslApplicationProtocol
+    partial public readonly struct SslApplicationProtocol
         : System.IEquatable<System.Net.Security.SslApplicationProtocol>
     {
         private readonly object _dummy;
@@ -746,7 +746,7 @@ namespace System.Net.Security
         }
     }
 
-    public sealed partial class SslCertificateTrust
+    partial public sealed class SslCertificateTrust
     {
         internal SslCertificateTrust() { }
 
@@ -767,7 +767,7 @@ namespace System.Net.Security
         }
     }
 
-    public partial class SslClientAuthenticationOptions
+    partial public class SslClientAuthenticationOptions
     {
         public SslClientAuthenticationOptions() { }
 
@@ -828,7 +828,7 @@ namespace System.Net.Security
         }
     }
 
-    public readonly partial struct SslClientHelloInfo
+    partial public readonly struct SslClientHelloInfo
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -842,7 +842,7 @@ namespace System.Net.Security
         }
     }
 
-    public partial class SslServerAuthenticationOptions
+    partial public class SslServerAuthenticationOptions
     {
         public SslServerAuthenticationOptions() { }
 
@@ -908,7 +908,7 @@ namespace System.Net.Security
         }
     }
 
-    public partial class SslStream : System.Net.Security.AuthenticatedStream
+    partial public class SslStream : System.Net.Security.AuthenticatedStream
     {
         public SslStream(System.IO.Stream innerStream)
             : base(default(System.IO.Stream), default(bool)) { }
@@ -1360,7 +1360,7 @@ namespace System.Net.Security
         }
     }
 
-    public partial class SslStreamCertificateContext
+    partial public class SslStreamCertificateContext
     {
         internal SslStreamCertificateContext() { }
 
@@ -1732,7 +1732,7 @@ namespace System.Net.Security
 
 namespace System.Security.Authentication
 {
-    public partial class AuthenticationException : System.SystemException
+    partial public class AuthenticationException : System.SystemException
     {
         public AuthenticationException() { }
 
@@ -1746,7 +1746,7 @@ namespace System.Security.Authentication
         public AuthenticationException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class InvalidCredentialException
+    partial public class InvalidCredentialException
         : System.Security.Authentication.AuthenticationException
     {
         public InvalidCredentialException() { }
@@ -1764,7 +1764,7 @@ namespace System.Security.Authentication
 
 namespace System.Security.Authentication.ExtendedProtection
 {
-    public partial class ExtendedProtectionPolicy : System.Runtime.Serialization.ISerializable
+    partial public class ExtendedProtectionPolicy : System.Runtime.Serialization.ISerializable
     {
         protected ExtendedProtectionPolicy(
             System.Runtime.Serialization.SerializationInfo info,
@@ -1837,7 +1837,7 @@ namespace System.Security.Authentication.ExtendedProtection
         TrustedProxy = 1,
     }
 
-    public partial class ServiceNameCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ServiceNameCollection : System.Collections.ReadOnlyCollectionBase
     {
         public ServiceNameCollection(System.Collections.ICollection items) { }
 

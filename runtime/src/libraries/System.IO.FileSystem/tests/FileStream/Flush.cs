@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class FileStream_Flush : FileSystemTest
+    partial public class FileStream_Flush : FileSystemTest
     {
         [Theory]
         [InlineData(null)]

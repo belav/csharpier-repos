@@ -11,7 +11,7 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    public partial class CryptoConfig
+    partial public class CryptoConfig
     {
 #if !BROWSER
         private const string AssemblyName_Pkcs = "System.Security.Cryptography.Pkcs";

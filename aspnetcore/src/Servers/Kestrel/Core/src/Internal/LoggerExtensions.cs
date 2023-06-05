@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-internal static partial class LoggerExtensions
+partial internal static class LoggerExtensions
 {
     private const string BadDeveloperCertificateStateMessage =
         "The ASP.NET Core developer certificate is in an invalid state. To fix this issue, run the following commands "
@@ -19,7 +19,7 @@ internal static partial class LoggerExtensions
         "Using development certificate: {certificateSubjectName} (Thumbprint: {certificateThumbprint})",
         EventName = "LocatedDevelopmentCertificate"
     )]
-    private static partial void LocatedDevelopmentCertificate(
+    partial private static void LocatedDevelopmentCertificate(
         this ILogger<KestrelServer> logger,
         string certificateSubjectName,
         string certificateThumbprint
@@ -36,7 +36,7 @@ internal static partial class LoggerExtensions
         "Unable to locate an appropriate development https certificate.",
         EventName = "UnableToLocateDevelopmentCertificate"
     )]
-    public static partial void UnableToLocateDevelopmentCertificate(
+    partial public static void UnableToLocateDevelopmentCertificate(
         this ILogger<KestrelServer> logger
     );
 
@@ -46,7 +46,7 @@ internal static partial class LoggerExtensions
         "Failed to locate the development https certificate at '{certificatePath}'.",
         EventName = "FailedToLocateDevelopmentCertificateFile"
     )]
-    public static partial void FailedToLocateDevelopmentCertificateFile(
+    partial public static void FailedToLocateDevelopmentCertificateFile(
         this ILogger<KestrelServer> logger,
         string certificatePath
     );
@@ -57,7 +57,7 @@ internal static partial class LoggerExtensions
         "Failed to load the development https certificate at '{certificatePath}'.",
         EventName = "FailedToLoadDevelopmentCertificate"
     )]
-    public static partial void FailedToLoadDevelopmentCertificate(
+    partial public static void FailedToLoadDevelopmentCertificate(
         this ILogger<KestrelServer> logger,
         string certificatePath
     );
@@ -68,10 +68,10 @@ internal static partial class LoggerExtensions
         BadDeveloperCertificateStateMessage,
         EventName = "BadDeveloperCertificateState"
     )]
-    public static partial void BadDeveloperCertificateState(this ILogger<KestrelServer> logger);
+    partial public static void BadDeveloperCertificateState(this ILogger<KestrelServer> logger);
 
     [LoggerMessage(5, LogLevel.Warning, "{Message}", EventName = "DeveloperCertificateFirstRun")]
-    public static partial void DeveloperCertificateFirstRun(
+    partial public static void DeveloperCertificateFirstRun(
         this ILogger<KestrelServer> logger,
         string message
     );
@@ -82,7 +82,7 @@ internal static partial class LoggerExtensions
         "The certificate file at '{CertificateFilePath}' can not be found, contains malformed data or does not contain a certificate.",
         EventName = "MissingOrInvalidCertificateFile"
     )]
-    public static partial void FailedToLoadCertificate(
+    partial public static void FailedToLoadCertificate(
         this ILogger<KestrelServer> logger,
         string certificateFilePath
     );
@@ -93,7 +93,7 @@ internal static partial class LoggerExtensions
         "The certificate key file at '{CertificateKeyFilePath}' can not be found, contains malformed data or does not contain a PEM encoded key in PKCS8 format.",
         EventName = "MissingOrInvalidCertificateKeyFile"
     )]
-    public static partial void FailedToLoadCertificateKey(
+    partial public static void FailedToLoadCertificateKey(
         this ILogger<KestrelServer> logger,
         string certificateKeyFilePath
     );
@@ -104,5 +104,5 @@ internal static partial class LoggerExtensions
         "The ASP.NET Core developer certificate is not trusted. For information about trusting the ASP.NET Core developer certificate, see https://aka.ms/aspnet/https-trust-dev-cert.",
         EventName = "DeveloperCertificateNotTrusted"
     )]
-    public static partial void DeveloperCertificateNotTrusted(this ILogger<KestrelServer> logger);
+    partial public static void DeveloperCertificateNotTrusted(this ILogger<KestrelServer> logger);
 }

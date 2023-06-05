@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Implements method canonicalization
-    public partial class MethodDesc
+    public class MethodDesc
     {
         public virtual bool IsCanonicalMethod(CanonicalFormKind policy)
         {

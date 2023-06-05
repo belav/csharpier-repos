@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
     [ContentType(ContentTypeNames.XamlContentType)]
     [TagType(typeof(NavigableHighlightTag))]
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
-    internal sealed partial class ReferenceHighlightingViewTaggerProvider
+    partial internal sealed class ReferenceHighlightingViewTaggerProvider
         : AsynchronousViewTaggerProvider<NavigableHighlightTag>
     {
         private readonly IGlobalOptionService _globalOptions;

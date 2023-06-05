@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    public sealed partial class Mutex
+    partial public sealed class Mutex
     {
         private void CreateMutexCore(bool initiallyOwned, string? name, out bool createdNew)
         {

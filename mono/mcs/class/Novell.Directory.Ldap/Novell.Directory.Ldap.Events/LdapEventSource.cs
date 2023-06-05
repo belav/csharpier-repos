@@ -50,7 +50,7 @@ namespace Novell.Directory.Ldap.Events
             MORE_THAN_ONE
         }
 
-        internal protected const int EVENT_TYPE_UNKNOWN = -1;
+        protected internal const int EVENT_TYPE_UNKNOWN = -1;
         protected const int DEFAULT_SLEEP_TIME = 1000;
 
         protected int sleep_interval = DEFAULT_SLEEP_TIME;

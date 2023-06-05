@@ -305,9 +305,9 @@ namespace System.Security.Cryptography.EcDsa.OpenSsl.Tests
     }
 }
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcKeyCreateByOid")]
         internal static extern IntPtr EcKeyCreateByOid(string oid);

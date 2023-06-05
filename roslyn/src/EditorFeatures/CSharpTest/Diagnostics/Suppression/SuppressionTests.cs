@@ -30,16 +30,16 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
 {
-    public abstract partial class CSharpSuppressionTests : AbstractSuppressionDiagnosticTest
+    partial public abstract class CSharpSuppressionTests : AbstractSuppressionDiagnosticTest
     {
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
         protected internal override string GetLanguage() => LanguageNames.CSharp;
 
+        partial
         #region "Pragma disable tests"
 
-        public abstract partial class CSharpPragmaWarningDisableSuppressionTests
-            : CSharpSuppressionTests
+        public abstract class CSharpPragmaWarningDisableSuppressionTests : CSharpSuppressionTests
         {
             protected sealed override int CodeActionIndex
             {
@@ -807,7 +807,7 @@ int Method()
                 }
             }
 
-            public partial class UserInfoDiagnosticSuppressionTests
+            partial public class UserInfoDiagnosticSuppressionTests
                 : CSharpPragmaWarningDisableSuppressionTests
             {
                 private class UserDiagnosticAnalyzer : DiagnosticAnalyzer
@@ -880,7 +880,7 @@ class Class
                 }
             }
 
-            public partial class FormattingDiagnosticSuppressionTests
+            partial public class FormattingDiagnosticSuppressionTests
                 : CSharpPragmaWarningDisableSuppressionTests
             {
                 internal override Tuple<
@@ -1088,7 +1088,7 @@ using System;
             }
         }
 
-        public partial class MultilineDiagnosticSuppressionTests
+        partial public class MultilineDiagnosticSuppressionTests
             : CSharpPragmaWarningDisableSuppressionTests
         {
             private class UserDiagnosticAnalyzer : DiagnosticAnalyzer
@@ -1150,12 +1150,12 @@ class Class
                 );
             }
         }
+        partial
         #endregion
 
         #region "SuppressMessageAttribute tests"
 
-        public abstract partial class CSharpGlobalSuppressMessageSuppressionTests
-            : CSharpSuppressionTests
+        public abstract class CSharpGlobalSuppressMessageSuppressionTests : CSharpSuppressionTests
         {
             protected sealed override int CodeActionIndex => 1;
 
@@ -1280,7 +1280,7 @@ class Class
             }
 
             [Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
-            public partial class UserInfoDiagnosticSuppressionTests
+            partial public class UserInfoDiagnosticSuppressionTests
                 : CSharpGlobalSuppressMessageSuppressionTests
             {
                 private class UserDiagnosticAnalyzer : DiagnosticAnalyzer
@@ -2814,12 +2814,12 @@ namespace ClassLibrary10
             }
         }
 
+        partial
         #endregion
 
         #region NoLocation Diagnostics tests
 
-        public partial class CSharpDiagnosticWithoutLocationSuppressionTests
-            : CSharpSuppressionTests
+        public class CSharpDiagnosticWithoutLocationSuppressionTests : CSharpSuppressionTests
         {
             private class UserDiagnosticAnalyzer : DiagnosticAnalyzer
             {

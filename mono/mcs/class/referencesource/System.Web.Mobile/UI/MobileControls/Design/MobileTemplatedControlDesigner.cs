@@ -583,7 +583,7 @@ namespace System.Web.UI.Design.MobileControls
 
         // We sealed this method because it will never be called
         // by our designers under current structure.
-        protected override sealed String GetErrorDesignTimeHtml(Exception e)
+        protected sealed override String GetErrorDesignTimeHtml(Exception e)
         {
             return base.GetErrorDesignTimeHtml(e);
         }

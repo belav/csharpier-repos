@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     using LanguageKind = String;
 
     [Export(typeof(ICodeFixService)), Shared]
-    internal partial class CodeFixService : ICodeFixService
+    partial internal class CodeFixService : ICodeFixService
     {
         private static readonly Comparison<DiagnosticData> s_diagnosticDataComparisonById =
             new((d1, d2) => DiagnosticId.CompareOrdinal(d1.Id, d2.Id));

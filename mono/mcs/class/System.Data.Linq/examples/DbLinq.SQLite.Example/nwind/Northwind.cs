@@ -22,7 +22,7 @@ namespace nwind
     using System.Data.Linq.Mapping;
     using System.Diagnostics;
 
-    public partial class Northwind : DataContext
+    partial public class Northwind : DataContext
     {
         #region Extensibility Method Declarations
         partial void OnCreated();
@@ -113,10 +113,11 @@ namespace nwind
         }
     }
 
+    partial partial
     #region Start MONO_STRICT
 #if MONO_STRICT
 
-    public partial class Northwind
+    public class Northwind
     {
         public Northwind(IDbConnection connection)
             : base(connection)
@@ -128,7 +129,7 @@ namespace nwind
     #endregion
 #else     // MONO_STRICT
 
-    public partial class Northwind
+    public class Northwind
     {
         public Northwind(IDbConnection connection)
             : base(connection, new DbLinq.Sqlite.SqliteVendor())
@@ -154,7 +155,7 @@ namespace nwind
     #endregion
 
     [Table(Name = "main.Categories")]
-    public partial class Category
+    partial public class Category
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -350,7 +351,7 @@ namespace nwind
     }
 
     [Table(Name = "main.Customers")]
-    public partial class Customer
+    partial public class Customer
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -779,7 +780,7 @@ namespace nwind
     }
 
     [Table(Name = "main.CustomerCustomerDemo")]
-    public partial class CustomerCustomerDemo
+    partial public class CustomerCustomerDemo
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -968,7 +969,7 @@ namespace nwind
     }
 
     [Table(Name = "main.CustomerDemographics")]
-    public partial class CustomerDemographic
+    partial public class CustomerDemographic
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -1104,7 +1105,7 @@ namespace nwind
     }
 
     [Table(Name = "main.Employees")]
-    public partial class Employee
+    partial public class Employee
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -1802,7 +1803,7 @@ namespace nwind
     }
 
     [Table(Name = "main.EmployeeTerritories")]
-    public partial class EmployeeTerritory
+    partial public class EmployeeTerritory
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -1990,7 +1991,7 @@ namespace nwind
     }
 
     [Table(Name = "main.Orders")]
-    public partial class Order
+    partial public class Order
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -2600,7 +2601,7 @@ namespace nwind
     }
 
     [Table(Name = "main.Order Details")]
-    public partial class OrderDetail
+    partial public class OrderDetail
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -2879,7 +2880,7 @@ namespace nwind
     }
 
     [Table(Name = "main.Products")]
-    public partial class Product
+    partial public class Product
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -3334,7 +3335,7 @@ namespace nwind
     }
 
     [Table(Name = "main.Region")]
-    public partial class Region
+    partial public class Region
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -3472,7 +3473,7 @@ namespace nwind
     }
 
     [Table(Name = "main.Shippers")]
-    public partial class Shipper
+    partial public class Shipper
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -3639,7 +3640,7 @@ namespace nwind
     }
 
     [Table(Name = "main.Suppliers")]
-    public partial class Supplier
+    partial public class Supplier
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -4067,7 +4068,7 @@ namespace nwind
     }
 
     [Table(Name = "main.Territories")]
-    public partial class Territory
+    partial public class Territory
         : System.ComponentModel.INotifyPropertyChanging,
             System.ComponentModel.INotifyPropertyChanged
     {

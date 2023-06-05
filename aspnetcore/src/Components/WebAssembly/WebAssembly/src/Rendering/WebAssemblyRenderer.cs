@@ -12,11 +12,12 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering;
 
+partial
 /// <summary>
 /// Provides mechanisms for rendering <see cref="IComponent"/> instances in a
 /// web browser, dispatching events to them, and refreshing the UI as required.
 /// </summary>
-internal sealed partial class WebAssemblyRenderer : WebRenderer
+internal sealed class WebAssemblyRenderer : WebRenderer
 {
     private readonly ILogger _logger;
 
@@ -146,7 +147,7 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             100,
@@ -154,7 +155,7 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
             "Unhandled exception rendering component: {Message}",
             EventName = "ExceptionRenderingComponent"
         )]
-        public static partial void UnhandledExceptionRenderingComponent(
+        partial public static void UnhandledExceptionRenderingComponent(
             ILogger logger,
             string message,
             Exception exception

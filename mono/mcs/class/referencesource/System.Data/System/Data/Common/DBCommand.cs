@@ -25,13 +25,13 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandText),
         ]
-        abstract public string CommandText { get; set; }
+        public abstract string CommandText { get; set; }
 
         [
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandTimeout),
         ]
-        abstract public int CommandTimeout { get; set; }
+        public abstract int CommandTimeout { get; set; }
 
         [
             DefaultValue(System.Data.CommandType.Text),
@@ -39,7 +39,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandType),
         ]
-        abstract public CommandType CommandType { get; set; }
+        public abstract CommandType CommandType { get; set; }
 
         [
             Browsable(false),
@@ -60,13 +60,13 @@ namespace System.Data.Common
             set { DbConnection = (DbConnection)value; }
         }
 
-        abstract protected DbConnection DbConnection { // V1.2.3300
+        protected abstract DbConnection DbConnection { // V1.2.3300
             get; set; }
 
-        abstract protected DbParameterCollection DbParameterCollection { // V1.2.3300
+        protected abstract DbParameterCollection DbParameterCollection { // V1.2.3300
             get; }
 
-        abstract protected DbTransaction DbTransaction { // V1.2.3300
+        protected abstract DbTransaction DbTransaction { // V1.2.3300
             get; set; }
 
         // @devnote: By default, the cmd object is visible on the design surface (i.e. VS7 Server Tray)
@@ -120,7 +120,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbCommand_UpdatedRowSource),
         ]
-        abstract public UpdateRowSource UpdatedRowSource { get; set; }
+        public abstract UpdateRowSource UpdatedRowSource { get; set; }
 
         internal void CancelIgnoreFailure()
         {
@@ -137,7 +137,7 @@ namespace System.Data.Common
             catch (Exception) { }
         }
 
-        abstract public void Cancel();
+        public abstract void Cancel();
 
         public DbParameter CreateParameter()
         { // V1.2.3300
@@ -149,11 +149,11 @@ namespace System.Data.Common
             return CreateDbParameter();
         }
 
-        abstract protected DbParameter CreateDbParameter();
+        protected abstract DbParameter CreateDbParameter();
 
-        abstract protected DbDataReader ExecuteDbDataReader(CommandBehavior behavior);
+        protected abstract DbDataReader ExecuteDbDataReader(CommandBehavior behavior);
 
-        abstract public int ExecuteNonQuery();
+        public abstract int ExecuteNonQuery();
 
         public DbDataReader ExecuteReader()
         {
@@ -289,8 +289,8 @@ namespace System.Data.Common
             }
         }
 
-        abstract public object ExecuteScalar();
+        public abstract object ExecuteScalar();
 
-        abstract public void Prepare();
+        public abstract void Prepare();
     }
 }

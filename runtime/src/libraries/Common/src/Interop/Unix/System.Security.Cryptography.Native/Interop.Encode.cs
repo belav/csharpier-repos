@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         internal delegate int GetEncodedSizeFunc<in THandle>(THandle handle);
 

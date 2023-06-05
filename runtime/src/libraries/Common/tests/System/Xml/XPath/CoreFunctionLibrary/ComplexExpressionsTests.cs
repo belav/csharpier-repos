@@ -6,10 +6,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.CoreFunctionLibrary
 {
+    partial
     /// <summary>
     /// Core Function Library - Complex Expressions
     /// </summary>
-    public static partial class ComplexExpressionsTests
+    public static class ComplexExpressionsTests
     {
         /// <summary>
         /// Complex expression for count(Utils.NavigatorKind kind)

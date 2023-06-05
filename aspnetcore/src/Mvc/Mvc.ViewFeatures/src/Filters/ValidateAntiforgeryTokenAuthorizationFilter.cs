@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-internal partial class ValidateAntiforgeryTokenAuthorizationFilter
+partial internal class ValidateAntiforgeryTokenAuthorizationFilter
     : IAsyncAuthorizationFilter,
         IAntiforgeryPolicy
 {
@@ -65,7 +65,7 @@ internal partial class ValidateAntiforgeryTokenAuthorizationFilter
         return true;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -73,7 +73,7 @@ internal partial class ValidateAntiforgeryTokenAuthorizationFilter
             "Antiforgery token validation failed. {Message}",
             EventName = "AntiforgeryTokenInvalid"
         )]
-        public static partial void AntiforgeryTokenInvalid(
+        partial public static void AntiforgeryTokenInvalid(
             ILogger logger,
             string message,
             Exception exception
@@ -85,6 +85,6 @@ internal partial class ValidateAntiforgeryTokenAuthorizationFilter
             "Skipping the execution of current filter as its not the most effective filter implementing the policy {FilterPolicy}.",
             EventName = "NotMostEffectiveFilter"
         )]
-        public static partial void NotMostEffectiveFilter(ILogger logger, Type filterPolicy);
+        partial public static void NotMostEffectiveFilter(ILogger logger, Type filterPolicy);
     }
 }

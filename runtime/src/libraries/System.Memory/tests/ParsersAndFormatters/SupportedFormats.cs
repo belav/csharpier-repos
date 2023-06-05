@@ -23,7 +23,7 @@ namespace System.Buffers.Text.Tests
         public char ParseSynonymFor { get; set; } = default;
     }
 
-    internal static partial class TestData
+    partial internal static class TestData
     {
         public static bool IsParsingImplemented<T>(this SupportedFormat f) =>
             f.IsParsingImplemented(typeof(T));

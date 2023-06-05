@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Security.Cryptography.X509Certificates;
 
-    public sealed partial class X509RecipientCertificateClientElement : ConfigurationElement
+    partial public sealed class X509RecipientCertificateClientElement : ConfigurationElement
     {
         public X509RecipientCertificateClientElement() { }
 

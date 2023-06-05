@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis
 {
-    internal static partial class NullableExtensions
+    partial internal static class NullableExtensions
     {
         public static ITypeSymbol? GetConvertedTypeWithAnnotatedNullability(
             this TypeInfo typeInfo

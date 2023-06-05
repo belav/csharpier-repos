@@ -47,7 +47,7 @@ namespace System.Xml.Xsl.Xslt
         }
     }
 
-    internal partial class QilGenerator : IErrorHelper
+    partial internal class QilGenerator : IErrorHelper
     {
         private CompilerScopeManager<QilIterator> scope;
         private OutputScopeManager outputScope;

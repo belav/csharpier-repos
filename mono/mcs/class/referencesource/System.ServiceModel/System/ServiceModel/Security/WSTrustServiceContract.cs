@@ -1870,7 +1870,7 @@ namespace System.ServiceModel.Security
                 get { return _serializationContext; }
             }
 
-            public new static Message End(IAsyncResult ar)
+            public static new Message End(IAsyncResult ar)
             {
                 AsyncResult.End(ar);
 
@@ -1980,7 +1980,7 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            public new static DispatchContext End(IAsyncResult ar)
+            public static new DispatchContext End(IAsyncResult ar)
             {
                 AsyncResult.End(ar);
 

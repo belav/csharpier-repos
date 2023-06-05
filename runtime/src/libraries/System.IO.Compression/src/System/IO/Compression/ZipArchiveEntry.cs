@@ -13,8 +13,9 @@ using static System.IO.Compression.ZipArchiveEntryConstants;
 
 namespace System.IO.Compression
 {
+    partial
     // The disposable fields that this class owns get disposed when the ZipArchive it belongs to gets disposed
-    public partial class ZipArchiveEntry
+    public class ZipArchiveEntry
     {
         private ZipArchive _archive;
         private readonly bool _originallyInArchive;

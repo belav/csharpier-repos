@@ -6,7 +6,7 @@ using System.Formats.Asn1;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class Oids
+    partial internal static class Oids
     {
         private static volatile Oid? s_rsaOid;
         private static volatile Oid? s_ecPublicKeyOid;

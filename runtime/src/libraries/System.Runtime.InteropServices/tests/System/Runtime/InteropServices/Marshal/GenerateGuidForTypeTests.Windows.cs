@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GenerateGuidForTypeTests
+    partial public class GenerateGuidForTypeTests
     {
         [Fact]
         public void GenerateGuidForType_ComObject_ReturnsComGuid()

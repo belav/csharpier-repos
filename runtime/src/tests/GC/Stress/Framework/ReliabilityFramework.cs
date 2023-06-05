@@ -621,13 +621,13 @@ public class ReliabilityFramework
     }
 
     [DllImport("kernel32.dll")]
-    private extern static void DebugBreak();
+    private static extern void DebugBreak();
 
     [DllImport("kernel32.dll")]
-    private extern static bool IsDebuggerPresent();
+    private static extern bool IsDebuggerPresent();
 
     [DllImport("kernel32.dll")]
-    private extern static void OutputDebugString(string debugStr);
+    private static extern void OutputDebugString(string debugStr);
 
     /// <summary>
     /// Checks to see if we should block all execution due to a fatal error

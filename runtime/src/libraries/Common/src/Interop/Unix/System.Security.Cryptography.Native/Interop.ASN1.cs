@@ -8,26 +8,26 @@ using System.Security.Cryptography;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_ObjTxt2Obj",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial SafeAsn1ObjectHandle ObjTxt2Obj(string s);
+        partial internal static SafeAsn1ObjectHandle ObjTxt2Obj(string s);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ObjObj2Txt")]
-        private static unsafe partial int ObjObj2Txt(byte* buf, int buf_len, IntPtr a);
+        partial private static unsafe int ObjObj2Txt(byte* buf, int buf_len, IntPtr a);
 
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_GetObjectDefinitionByName",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        private static partial IntPtr CryptoNative_GetObjectDefinitionByName(string friendlyName);
+        partial private static IntPtr CryptoNative_GetObjectDefinitionByName(string friendlyName);
 
         internal static IntPtr GetObjectDefinitionByName(string friendlyName)
         {
@@ -42,30 +42,30 @@ internal static partial class Interop
 
         // Returns shared pointers, should not be tracked as a SafeHandle.
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ObjNid2Obj")]
-        internal static partial IntPtr ObjNid2Obj(int nid);
+        partial internal static IntPtr ObjNid2Obj(int nid);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1ObjectFree")]
-        internal static partial void Asn1ObjectFree(IntPtr o);
+        partial internal static void Asn1ObjectFree(IntPtr o);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DecodeAsn1BitString")]
-        internal static partial SafeAsn1BitStringHandle DecodeAsn1BitString(byte[] buf, int len);
+        partial internal static SafeAsn1BitStringHandle DecodeAsn1BitString(byte[] buf, int len);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1BitStringFree")]
-        internal static partial void Asn1BitStringFree(IntPtr o);
+        partial internal static void Asn1BitStringFree(IntPtr o);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1OctetStringNew")]
-        internal static partial SafeAsn1OctetStringHandle Asn1OctetStringNew();
+        partial internal static SafeAsn1OctetStringHandle Asn1OctetStringNew();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1OctetStringSet")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool Asn1OctetStringSet(
+        partial internal static bool Asn1OctetStringSet(
             SafeAsn1OctetStringHandle o,
             byte[] d,
             int len
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1OctetStringFree")]
-        internal static partial void Asn1OctetStringFree(IntPtr o);
+        partial internal static void Asn1OctetStringFree(IntPtr o);
 
         internal static unsafe string GetOidValue(IntPtr asn1ObjectPtr)
         {

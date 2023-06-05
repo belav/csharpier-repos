@@ -33,7 +33,7 @@ using System.Text;
 namespace Newtonsoft.Json.Tests.LinqToSql
 {
     [MetadataType(typeof(PersonMetadata))]
-    public partial class Person
+    partial public class Person
     {
         public class PersonMetadata
         {

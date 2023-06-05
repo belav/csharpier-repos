@@ -9,10 +9,11 @@ using System.Reflection;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <summary>
     /// Extension methods for immutable types.
     /// </summary>
-    internal static partial class ImmutableExtensions
+    internal static class ImmutableExtensions
     {
         internal static bool IsValueType<T>()
         {

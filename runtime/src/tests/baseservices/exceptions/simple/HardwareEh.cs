@@ -436,7 +436,7 @@ public class HardwareEh
         return false;
     }
 
-    public volatile static int volatileReadWrite = 0;
+    public static volatile int volatileReadWrite = 0;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool GobbleStack()

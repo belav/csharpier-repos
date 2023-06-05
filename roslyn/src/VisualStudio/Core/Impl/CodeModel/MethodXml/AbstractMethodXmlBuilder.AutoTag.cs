@@ -8,7 +8,7 @@ using System;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.MethodXml
 {
-    internal abstract partial class AbstractMethodXmlBuilder
+    partial internal abstract class AbstractMethodXmlBuilder
     {
         private class AutoTag : IDisposable
         {

@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     [SuggestedActionPriority(DefaultOrderings.Highest)]
     [SuggestedActionPriority(DefaultOrderings.Default)]
     [SuggestedActionPriority(DefaultOrderings.Lowest)]
-    internal partial class SuggestedActionsSourceProvider : ISuggestedActionsSourceProvider
+    partial internal class SuggestedActionsSourceProvider : ISuggestedActionsSourceProvider
     {
         public static readonly ImmutableArray<string> Orderings = ImmutableArray.Create(
             DefaultOrderings.Highest,

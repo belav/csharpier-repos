@@ -704,7 +704,7 @@ namespace System.Reflection
         #endregion
     }
 
-    public readonly partial struct CustomAttributeTypedArgument
+    partial public readonly struct CustomAttributeTypedArgument
     {
         #region Private Static Methods
         private static Type CustomAttributeEncodingToType(CustomAttributeEncoding encodedType)

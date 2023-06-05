@@ -3,11 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
+    partial
     // mknod: https://man7.org/linux/man-pages/man2/mknod.2.html
     // makedev, major and minor: https://man7.org/linux/man-pages/man3/makedev.3.html
-    internal static partial class Sys
+    internal static class Sys
     {
         internal static int CreateBlockDevice(string pathName, uint mode, uint major, uint minor)
         {
@@ -30,14 +31,14 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        private static partial int MkNod(string pathName, uint mode, uint major, uint minor);
+        partial private static int MkNod(string pathName, uint mode, uint major, uint minor);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetDeviceIdentifiers",
             SetLastError = true
         )]
-        internal static unsafe partial void GetDeviceIdentifiers(
+        partial internal static unsafe void GetDeviceIdentifiers(
             ulong dev,
             uint* majorNumber,
             uint* minorNumber

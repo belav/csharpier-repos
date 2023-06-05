@@ -7,7 +7,7 @@ using static Interop.Crypt32;
 
 namespace Internal.Cryptography
 {
-    internal static partial class OidLookup
+    partial internal static class OidLookup
     {
         private static bool ShouldUseCache(OidGroup oidGroup)
         {

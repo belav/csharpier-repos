@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    public static partial class Runtime
+    partial public static class Runtime
     {
         private static object JSOwnedObjectLock = new object();
 

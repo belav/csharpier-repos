@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers.Text
 {
-    internal static partial class FormattingHelpers
+    partial internal static class FormattingHelpers
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CountDigits(UInt128 value)

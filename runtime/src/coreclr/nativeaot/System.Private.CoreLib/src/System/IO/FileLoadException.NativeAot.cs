@@ -3,7 +3,7 @@
 
 namespace System.IO
 {
-    public partial class FileLoadException
+    partial public class FileLoadException
     {
         internal static string FormatFileLoadExceptionMessage(
             string? fileName,

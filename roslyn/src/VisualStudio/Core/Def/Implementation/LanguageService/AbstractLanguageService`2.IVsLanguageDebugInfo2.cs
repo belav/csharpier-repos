@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal partial class AbstractLanguageService<TPackage, TLanguageService>
+    partial internal class AbstractLanguageService<TPackage, TLanguageService>
         : IVsLanguageDebugInfo2
     {
         int IVsLanguageDebugInfo2.QueryCatchLineSpan(

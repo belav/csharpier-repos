@@ -5,26 +5,26 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_CreateMemoryBio")]
-        internal static partial SafeBioHandle CreateMemoryBio();
+        partial internal static SafeBioHandle CreateMemoryBio();
 
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_BioNewFile",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial SafeBioHandle BioNewFile(string filename, string mode);
+        partial internal static SafeBioHandle BioNewFile(string filename, string mode);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioDestroy")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool BioDestroy(IntPtr a);
+        partial internal static bool BioDestroy(IntPtr a);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioGets")]
-        private static unsafe partial int BioGets(SafeBioHandle b, byte* buf, int size);
+        partial private static unsafe int BioGets(SafeBioHandle b, byte* buf, int size);
 
         internal static unsafe int BioGets(SafeBioHandle b, Span<byte> buf)
         {
@@ -35,21 +35,21 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioRead")]
-        internal static partial int BioRead(SafeBioHandle b, byte[] data, int len);
+        partial internal static int BioRead(SafeBioHandle b, byte[] data, int len);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioWrite")]
-        internal static partial int BioWrite(SafeBioHandle b, byte[] data, int len);
+        partial internal static int BioWrite(SafeBioHandle b, byte[] data, int len);
 
         internal static int BioWrite(SafeBioHandle b, ReadOnlySpan<byte> data) =>
             BioWrite(b, ref MemoryMarshal.GetReference(data), data.Length);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioWrite")]
-        private static partial int BioWrite(SafeBioHandle b, ref byte data, int len);
+        partial private static int BioWrite(SafeBioHandle b, ref byte data, int len);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetMemoryBioSize")]
-        internal static partial int GetMemoryBioSize(SafeBioHandle bio);
+        partial internal static int GetMemoryBioSize(SafeBioHandle bio);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BioCtrlPending")]
-        internal static partial int BioCtrlPending(SafeBioHandle bio);
+        partial internal static int BioCtrlPending(SafeBioHandle bio);
     }
 }

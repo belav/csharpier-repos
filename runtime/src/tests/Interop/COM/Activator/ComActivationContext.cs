@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace Activator
 {
     [StructLayout(LayoutKind.Sequential)]
-    public partial struct ComActivationContext
+    partial public struct ComActivationContext
     {
         public Guid ClassId;
         public Guid InterfaceId;

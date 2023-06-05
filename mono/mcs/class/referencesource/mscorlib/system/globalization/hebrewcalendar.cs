@@ -1543,7 +1543,18 @@ namespace System.Globalization
         **  We use a table for the Hebrew calendar calculation, so the year supported is limited.
         ============================================================================*/
 
-        static private void CheckHebrewYearValue(int y, int era, String varName)
+        private
+        /*=================================CheckHebrewYearValue==========================
+        **Action: Check if the Hebrew year value is supported in this class.
+        **Returns:  None.
+        **Arguments: y  Hebrew year value
+        **          ear Hebrew era value
+        **Exceptions: ArgumentOutOfRange_Range if the year value is not supported.
+        **Note:
+        **  We use a table for the Hebrew calendar calculation, so the year supported is limited.
+        ============================================================================*/
+
+        static void CheckHebrewYearValue(int y, int era, String varName)
         {
             CheckEraRange(era);
             if (y > MaxHebrewYear || y < MinHebrewYear)
@@ -1615,7 +1626,7 @@ namespace System.Globalization
             }
         }
 
-        static internal void CheckEraRange(int era)
+        internal static void CheckEraRange(int era)
         {
             if (era != CurrentEra && era != HebrewEra)
             {
@@ -1626,7 +1637,7 @@ namespace System.Globalization
             }
         }
 
-        static private void CheckTicksRange(long ticks)
+        private static void CheckTicksRange(long ticks)
         {
             if (ticks < calendarMinValue.Ticks || ticks > calendarMaxValue.Ticks)
             {
@@ -1643,7 +1654,7 @@ namespace System.Globalization
             }
         }
 
-        static internal int GetResult(__DateBuffer result, int part)
+        internal static int GetResult(__DateBuffer result, int part)
         {
             switch (part)
             {
@@ -1677,7 +1688,25 @@ namespace System.Globalization
         **Exceptions:
         ============================================================================*/
 
-        static internal int GetLunarMonthDay(int gregorianYear, __DateBuffer lunarDate)
+        internal
+        /*=================================GetLunarMonthDay==========================
+        **Action: Using the Hebrew table (HebrewTable) to get the Hebrew month/day value for Gregorian January 1st
+        ** in a given Gregorian year.
+        ** Greogrian January 1st falls usually in Tevet (4th month). Tevet has always 29 days.
+        **     That's why, there no nead to specify the lunar month in the table.  There are exceptions, and these
+        **     are coded by giving numbers above 29 and below 1.
+        **     Actual decoding is takenig place in the switch statement below.
+        **Returns:
+        **     The Hebrew year type. The value is from 1 to 6.
+        **     normal years : 1 = 353 days   2 = 354 days   3 = 355 days.
+        **     Leap years   : 4 = 383        5   384        6 = 385 days.
+        **Arguments:
+        **      gregorianYear   The year value in Gregorian calendar.  The value should be between 1500 and 2239.
+        **      lunarDate       Object to take the result of the Hebrew year/month/day.
+        **Exceptions:
+        ============================================================================*/
+
+        static int GetLunarMonthDay(int gregorianYear, __DateBuffer lunarDate)
         {
             //
             //  Get the offset into the LunarMonthLen array and the lunar day
@@ -1999,7 +2028,7 @@ namespace System.Globalization
             return ((DayOfWeek)((int)(time.Ticks / TicksPerDay + 1) % 7));
         }
 
-        static internal int GetHebrewYearType(int year, int era)
+        internal static int GetHebrewYearType(int year, int era)
         {
             CheckHebrewYearValue(year, era, "year");
             // The HebrewTable is indexed by Gregorian year and starts from FirstGregorianYear.

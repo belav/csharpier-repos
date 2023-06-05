@@ -9,7 +9,7 @@ using Xunit;
 namespace System.Linq.Parallel.Tests
 {
     [OuterLoop]
-    public static partial class ParallelQueryCombinationTests
+    partial public static class ParallelQueryCombinationTests
     {
         private const int DefaultStart = 8;
         private const int DefaultSize = 16;

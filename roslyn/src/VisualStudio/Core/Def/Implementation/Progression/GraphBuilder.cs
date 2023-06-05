@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
-    internal sealed partial class GraphBuilder
+    partial internal sealed class GraphBuilder
     {
         private readonly Graph _graph = new();
         private readonly SemaphoreSlim _gate = new(initialCount: 1);

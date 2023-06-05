@@ -4,15 +4,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal unsafe partial class Sys
+    partial internal unsafe class Sys
     {
         [LibraryImport(
             Interop.Libraries.SystemNative,
             StringMarshalling = StringMarshalling.Utf8,
             EntryPoint = "SystemNative_GetEnv"
         )]
-        internal static unsafe partial IntPtr GetEnv(string name);
+        partial internal static unsafe IntPtr GetEnv(string name);
     }
 }

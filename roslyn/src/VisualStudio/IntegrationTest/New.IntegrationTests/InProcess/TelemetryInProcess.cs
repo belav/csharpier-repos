@@ -15,7 +15,7 @@ using IAsyncDisposable = System.IAsyncDisposable;
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     [TestService]
-    internal partial class TelemetryInProcess
+    partial internal class TelemetryInProcess
     {
         internal async Task<TelemetryVerifier> EnableTestTelemetryChannelAsync(
             CancellationToken cancellationToken

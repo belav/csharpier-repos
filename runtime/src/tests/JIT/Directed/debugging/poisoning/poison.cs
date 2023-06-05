@@ -72,6 +72,6 @@ public class Program
 
     private unsafe struct Massive
     {
-        public fixed byte Bytes[0x10008];
+        fixed public byte Bytes[0x10008];
     }
 }

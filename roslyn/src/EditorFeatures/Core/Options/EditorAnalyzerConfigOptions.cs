@@ -66,7 +66,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
     }
 
-    internal static partial class EditorOptionsExtensions
+    partial internal static class EditorOptionsExtensions
     {
         public static StructuredAnalyzerConfigOptions ToAnalyzerConfigOptions(
             this IEditorOptions editorOptions

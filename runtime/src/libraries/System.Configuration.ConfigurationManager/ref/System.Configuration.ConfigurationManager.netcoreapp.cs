@@ -6,7 +6,7 @@
 
 namespace System.Diagnostics
 {
-    public static partial class TraceConfiguration
+    partial public static class TraceConfiguration
     {
         public static void Register() { }
     }

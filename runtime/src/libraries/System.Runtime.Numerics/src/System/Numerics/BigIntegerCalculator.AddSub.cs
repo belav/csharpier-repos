@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Numerics
 {
-    internal static partial class BigIntegerCalculator
+    partial internal static class BigIntegerCalculator
     {
         public static void Add(ReadOnlySpan<uint> left, uint right, Span<uint> bits)
         {

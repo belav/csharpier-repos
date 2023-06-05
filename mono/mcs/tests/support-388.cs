@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Schemas
 {
-    public partial class basefieldtype
+    partial public class basefieldtype
     {
         public virtual object Instantiate()
         {
@@ -15,7 +15,7 @@ namespace Schemas
         }
     }
 
-    public partial class fieldtype
+    partial public class fieldtype
     {
         public override object Instantiate()
         {
@@ -24,7 +24,7 @@ namespace Schemas
         }
     }
 
-    public partial class compoundfield
+    partial public class compoundfield
     {
         public override object Instantiate()
         {
@@ -33,7 +33,7 @@ namespace Schemas
         }
     }
 
-    public partial class field
+    partial public class field
     {
         public object Instantiate()
         {
@@ -42,7 +42,7 @@ namespace Schemas
         }
     }
 
-    public partial class formdata
+    partial public class formdata
     {
         public object Instantiate()
         {

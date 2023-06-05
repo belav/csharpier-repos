@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-internal partial class DbContextScaffoldCommand : ProjectCommandBase
+partial internal class DbContextScaffoldCommand : ProjectCommandBase
 {
     private CommandArgument? _connection;
     private CommandArgument? _provider;

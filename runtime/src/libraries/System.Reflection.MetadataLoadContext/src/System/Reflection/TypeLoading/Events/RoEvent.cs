@@ -6,10 +6,11 @@ using System.Collections.Generic;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base class for all EventInfo objects created by a MetadataLoadContext.
     /// </summary>
-    internal abstract partial class RoEvent : LeveledEventInfo
+    internal abstract class RoEvent : LeveledEventInfo
     {
         private readonly RoInstantiationProviderType _declaringType;
         private readonly Type _reflectedType;

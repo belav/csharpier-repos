@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCReadToDescendant : TCXMLReaderBaseGeneral
+    partial public class TCReadToDescendant : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCReadToDescendant
         // Test Case

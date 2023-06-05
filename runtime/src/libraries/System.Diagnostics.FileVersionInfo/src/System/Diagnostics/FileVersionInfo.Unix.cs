@@ -7,7 +7,7 @@ using System.Reflection.PortableExecutable;
 
 namespace System.Diagnostics
 {
-    public sealed partial class FileVersionInfo
+    partial public sealed class FileVersionInfo
     {
         private FileVersionInfo(string fileName)
         {

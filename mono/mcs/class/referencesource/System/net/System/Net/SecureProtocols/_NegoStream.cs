@@ -27,10 +27,11 @@ namespace System.Net.Security
     using System.Security.Permissions;
     using System.Threading;
 
+    partial
     //
     // This is a wrapping stream that does data encryption/decryption based on a successfully authenticated SSPI context.
     //
-    public partial class NegotiateStream : AuthenticatedStream
+    public class NegotiateStream : AuthenticatedStream
     {
         private static AsyncCallback _WriteCallback = new AsyncCallback(WriteCallback);
         private static AsyncProtocolCallback _ReadCallback = new AsyncProtocolCallback(

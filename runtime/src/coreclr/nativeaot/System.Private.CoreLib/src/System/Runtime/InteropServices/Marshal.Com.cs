@@ -11,7 +11,7 @@ using Internal.Reflection.Augments;
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class Marshal
+    partial public static class Marshal
     {
         internal static bool IsBuiltInComSupported => false;
 

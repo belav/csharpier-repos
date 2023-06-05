@@ -15,8 +15,8 @@ using Mono.Unix.Android;
 namespace Mono.Unix.Native
 {
     [CLSCompliant(false)]
-    public sealed /* static */
-    partial class NativeConvert
+    partial public sealed /* static */
+    class NativeConvert
     {
         //
         // Non-generated exports

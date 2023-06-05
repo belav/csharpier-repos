@@ -31,7 +31,7 @@ public class Runtime_59871
 
     unsafe struct LargeStruct
     {
-        public fixed byte F[0x10000];
+        fixed public byte F[0x10000];
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 8)]

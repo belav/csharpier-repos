@@ -24,12 +24,14 @@ namespace Roslyn.Utilities
     using Resources = CodeStyleResources;
 #else
     using Resources = WorkspacesResources;
+
+    partial
 #endif
 
     /// <summary>
     /// An <see cref="ObjectWriter"/> that serializes objects to a byte stream.
     /// </summary>
-    internal sealed partial class ObjectWriter : IDisposable
+    internal sealed class ObjectWriter : IDisposable
     {
         private readonly BinaryWriter _writer;
         private readonly CancellationToken _cancellationToken;

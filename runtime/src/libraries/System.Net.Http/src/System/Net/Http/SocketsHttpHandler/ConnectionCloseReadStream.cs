@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal sealed partial class HttpConnection : IDisposable
+    partial internal sealed class HttpConnection : IDisposable
     {
         private sealed class ConnectionCloseReadStream : HttpContentReadStream
         {

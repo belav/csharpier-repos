@@ -25,9 +25,10 @@ using System.Runtime.CompilerServices;
 
 namespace System.Threading
 {
+    partial
     #region class _IOCompletionCallback
 
-    internal sealed unsafe partial class _IOCompletionCallback
+    internal sealed unsafe class _IOCompletionCallback
     {
         // call back helper
         internal static void PerformIOCompletionCallback(

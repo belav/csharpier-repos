@@ -13,7 +13,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxKind;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public static partial class SyntaxFacts
+    partial public static class SyntaxFacts
     {
         /// <summary>
         /// Returns true if the node is the alias of an AliasQualifiedNameSyntax

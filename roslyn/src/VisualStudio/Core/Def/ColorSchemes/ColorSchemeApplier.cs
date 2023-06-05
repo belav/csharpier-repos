@@ -22,7 +22,7 @@ using Task = System.Threading.Tasks.Task;
 namespace Microsoft.CodeAnalysis.ColorSchemes
 {
     [Export(typeof(ColorSchemeApplier))]
-    internal sealed partial class ColorSchemeApplier
+    partial internal sealed class ColorSchemeApplier
     {
         private const string ColorThemeValueName = "Microsoft.VisualStudio.ColorTheme";
         private const string ColorThemeNewValueName = "Microsoft.VisualStudio.ColorThemeNew";

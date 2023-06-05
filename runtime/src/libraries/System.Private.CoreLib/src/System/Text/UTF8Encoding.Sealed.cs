@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Text
 {
-    public partial class UTF8Encoding
+    partial public class UTF8Encoding
     {
         /// <summary>
         /// A special instance of <see cref="UTF8Encoding"/> that is initialized with "don't throw on invalid sequences;

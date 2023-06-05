@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         ),
         Shared
     ]
-    internal partial class PrimaryConstructorBaseTypeSignatureHelpProvider
+    partial internal class PrimaryConstructorBaseTypeSignatureHelpProvider
         : AbstractCSharpSignatureHelpProvider
     {
         [ImportingConstructor]

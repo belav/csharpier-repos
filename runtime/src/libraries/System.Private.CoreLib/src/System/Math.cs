@@ -25,7 +25,7 @@ using System.Runtime.Versioning;
 
 namespace System
 {
-    public static partial class Math
+    partial public static class Math
     {
         public const double E = 2.7182818284590452354;
 

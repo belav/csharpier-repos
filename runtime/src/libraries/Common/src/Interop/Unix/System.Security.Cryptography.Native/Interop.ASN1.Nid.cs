@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         private static readonly ConcurrentDictionary<string, int> s_nidLookup =
             new ConcurrentDictionary<string, int>();
@@ -20,7 +20,7 @@ internal static partial class Interop
             EntryPoint = "CryptoNative_ObjTxt2Nid",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        private static partial int ObjTxt2Nid(string oid);
+        partial private static int ObjTxt2Nid(string oid);
 
         internal static int ResolveRequiredNid(string oid)
         {

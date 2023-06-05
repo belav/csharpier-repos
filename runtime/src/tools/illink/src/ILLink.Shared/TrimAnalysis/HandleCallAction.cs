@@ -19,7 +19,7 @@ using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.Single
 namespace ILLink.Shared.TrimAnalysis
 {
     [StructLayout(LayoutKind.Auto)] // A good way to avoid CS0282, we don't really care about field order
-    internal partial struct HandleCallAction
+    partial internal struct HandleCallAction
     {
         private static ValueSetLattice<SingleValue> MultiValueLattice => default;
 
@@ -2454,67 +2454,73 @@ namespace ILLink.Shared.TrimAnalysis
         /// <Summary>
         /// Returns true if the method is a .ctor for System.Type or a type that derives from System.Type (i.e. fields and params of this type can have DynamicallyAccessedMembers annotations)
         /// </Summary>
-        private partial bool MethodIsTypeConstructor(MethodProxy method);
+        partial
+        /// <Summary>
+        /// Returns true if the method is a .ctor for System.Type or a type that derives from System.Type (i.e. fields and params of this type can have DynamicallyAccessedMembers annotations)
+        /// </Summary>
+        private bool MethodIsTypeConstructor(MethodProxy method);
 
-        private partial IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy(
+        partial private IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
         );
 
-        private partial IEnumerable<SystemTypeValue> GetNestedTypesOnType(
+        partial private IEnumerable<SystemTypeValue> GetNestedTypesOnType(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
         );
 
-        private partial bool TryGetBaseType(
+        partial private bool TryGetBaseType(
             TypeProxy type,
             [NotNullWhen(true)] out TypeProxy? baseType
         );
 
-        private partial bool TryResolveTypeNameForCreateInstanceAndMark(
+        partial private bool TryResolveTypeNameForCreateInstanceAndMark(
             in MethodProxy calledMethod,
             string assemblyName,
             string typeName,
             out TypeProxy resolvedType
         );
 
-        private partial void MarkStaticConstructor(TypeProxy type);
+        partial private void MarkStaticConstructor(TypeProxy type);
 
-        private partial void MarkEventsOnTypeHierarchy(
+        partial private void MarkEventsOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
         );
 
-        private partial void MarkFieldsOnTypeHierarchy(
+        partial private void MarkFieldsOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
         );
 
-        private partial void MarkPropertiesOnTypeHierarchy(
+        partial private void MarkPropertiesOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
         );
 
-        private partial void MarkPublicParameterlessConstructorOnType(TypeProxy type);
+        partial private void MarkPublicParameterlessConstructorOnType(TypeProxy type);
 
-        private partial void MarkConstructorsOnType(
+        partial private void MarkConstructorsOnType(
             TypeProxy type,
             BindingFlags? bindingFlags,
             int? parameterCount
         );
 
-        private partial void MarkMethod(MethodProxy method);
+        partial private void MarkMethod(MethodProxy method);
 
-        private partial void MarkType(TypeProxy type);
+        partial private void MarkType(TypeProxy type);
 
-        private partial bool MarkAssociatedProperty(MethodProxy method);
+        partial private bool MarkAssociatedProperty(MethodProxy method);
 
         // Only used for internal diagnostic purposes (not even for warning messages)
-        private partial string GetContainingSymbolDisplayName();
+        partial
+        // Only used for internal diagnostic purposes (not even for warning messages)
+        private string GetContainingSymbolDisplayName();
     }
 }

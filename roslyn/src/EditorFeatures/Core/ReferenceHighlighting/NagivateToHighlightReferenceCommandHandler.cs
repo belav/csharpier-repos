@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
     [Export(typeof(ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.NavigateToHighlightedReference)]
-    internal partial class NavigateToHighlightReferenceCommandHandler
+    partial internal class NavigateToHighlightReferenceCommandHandler
         : ICommandHandler<NavigateToNextHighlightedReferenceCommandArgs>,
             ICommandHandler<NavigateToPreviousHighlightedReferenceCommandArgs>
     {

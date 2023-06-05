@@ -25,7 +25,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class UrlIdentityPermission : CodeAccessPermission, IBuiltInPermission
+    public sealed class UrlIdentityPermission : CodeAccessPermission, IBuiltInPermission
     {
         //------------------------------------------------------
         //

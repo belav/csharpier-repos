@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.PageDirectories.Controls1
 {
-    public partial class UserControl1 : System.Web.UI.UserControl
+    partial public class UserControl1 : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

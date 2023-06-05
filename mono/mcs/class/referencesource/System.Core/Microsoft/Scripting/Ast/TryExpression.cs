@@ -149,7 +149,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="TryExpression"/> representing a try block with a fault block and no catch statements.

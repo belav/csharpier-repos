@@ -11,6 +11,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+partial
 /// <summary>
 /// <see cref="CircuitRegistry"/> manages the lifetime of a <see cref="CircuitHost"/>.
 /// </summary>
@@ -34,7 +35,7 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits;
 /// To manage this, we use a critical section to manage all state transitions.
 /// </remarks>
 #pragma warning disable CA1852 // Seal internal types
-internal partial class CircuitRegistry
+internal class CircuitRegistry
 #pragma warning restore CA1852 // Seal internal types
 {
     private readonly object CircuitRegistryLock = new object();
@@ -400,7 +401,7 @@ internal partial class CircuitRegistry
         public CancellationTokenSource TokenSource { get; }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             100,
@@ -408,7 +409,7 @@ internal partial class CircuitRegistry
             "Unhandled exception disposing circuit host: {Message}",
             EventName = "ExceptionDisposingCircuit"
         )]
-        private static partial void UnhandledExceptionDisposingCircuitHost(
+        partial private static void UnhandledExceptionDisposingCircuitHost(
             ILogger logger,
             string message,
             Exception exception
@@ -425,7 +426,7 @@ internal partial class CircuitRegistry
             "Exception thrown when disposing token source: {Message}",
             EventName = "ExceptionDisposingTokenSource"
         )]
-        private static partial void ExceptionDisposingTokenSource(
+        partial private static void ExceptionDisposingTokenSource(
             ILogger logger,
             string message,
             Exception exception
@@ -440,7 +441,7 @@ internal partial class CircuitRegistry
             "Attempting to reconnect to Circuit with secret {CircuitHost}.",
             EventName = "AttemptingToReconnect"
         )]
-        public static partial void CircuitConnectStarted(ILogger logger, CircuitId circuitHost);
+        partial public static void CircuitConnectStarted(ILogger logger, CircuitId circuitHost);
 
         [LoggerMessage(
             104,
@@ -448,7 +449,7 @@ internal partial class CircuitRegistry
             "Failed to find a matching circuit for circuit secret {CircuitHost}.",
             EventName = "FailedToFindCircuit"
         )]
-        public static partial void FailedToFindCircuit(ILogger logger, CircuitId circuitHost);
+        partial public static void FailedToFindCircuit(ILogger logger, CircuitId circuitHost);
 
         [LoggerMessage(
             105,
@@ -456,7 +457,7 @@ internal partial class CircuitRegistry
             "Transferring active circuit {CircuitId} to connection {ConnectionId}.",
             EventName = "ConnectingToActiveCircuit"
         )]
-        public static partial void ConnectingToActiveCircuit(
+        partial public static void ConnectingToActiveCircuit(
             ILogger logger,
             CircuitId circuitId,
             string connectionId
@@ -468,7 +469,7 @@ internal partial class CircuitRegistry
             "Transferring disconnected circuit {CircuitId} to connection {ConnectionId}.",
             EventName = "ConnectingToDisconnectedCircuit"
         )]
-        public static partial void ConnectingToDisconnectedCircuit(
+        partial public static void ConnectingToDisconnectedCircuit(
             ILogger logger,
             CircuitId circuitId,
             string connectionId
@@ -480,7 +481,7 @@ internal partial class CircuitRegistry
             "Failed to reconnect to a circuit with id {CircuitId}.",
             EventName = "FailedToReconnectToCircuit"
         )]
-        public static partial void FailedToReconnectToCircuit(
+        partial public static void FailedToReconnectToCircuit(
             ILogger logger,
             CircuitId circuitId,
             Exception exception = null
@@ -492,7 +493,7 @@ internal partial class CircuitRegistry
             "Attempting to disconnect circuit with id {CircuitId} from connection {ConnectionId}.",
             EventName = "CircuitDisconnectStarted"
         )]
-        public static partial void CircuitDisconnectStarted(
+        partial public static void CircuitDisconnectStarted(
             ILogger logger,
             CircuitId circuitId,
             string connectionId
@@ -504,7 +505,7 @@ internal partial class CircuitRegistry
             "Failed to disconnect circuit with id {CircuitId}. The circuit is not active.",
             EventName = "CircuitNotActive"
         )]
-        public static partial void CircuitNotActive(ILogger logger, CircuitId circuitId);
+        partial public static void CircuitNotActive(ILogger logger, CircuitId circuitId);
 
         [LoggerMessage(
             110,
@@ -512,7 +513,7 @@ internal partial class CircuitRegistry
             "Failed to disconnect circuit with id {CircuitId}. The circuit is connected to {ConnectionId}.",
             EventName = "CircuitConnectedToDifferentConnection"
         )]
-        public static partial void CircuitConnectedToDifferentConnection(
+        partial public static void CircuitConnectedToDifferentConnection(
             ILogger logger,
             CircuitId circuitId,
             string connectionId
@@ -524,7 +525,7 @@ internal partial class CircuitRegistry
             "Circuit with id {CircuitId} is disconnected.",
             EventName = "CircuitMarkedDisconnected"
         )]
-        public static partial void CircuitMarkedDisconnected(ILogger logger, CircuitId circuitId);
+        partial public static void CircuitMarkedDisconnected(ILogger logger, CircuitId circuitId);
 
         [LoggerMessage(
             112,
@@ -532,7 +533,7 @@ internal partial class CircuitRegistry
             "Circuit with id {CircuitId} evicted due to {EvictionReason}.",
             EventName = "CircuitEvicted"
         )]
-        public static partial void CircuitEvicted(
+        partial public static void CircuitEvicted(
             ILogger logger,
             CircuitId circuitId,
             EvictionReason evictionReason
@@ -544,7 +545,7 @@ internal partial class CircuitRegistry
             "Circuit with id {CircuitId} has been removed from the registry for permanent disconnection.",
             EventName = "CircuitDisconnectedPermanently"
         )]
-        public static partial void CircuitDisconnectedPermanently(
+        partial public static void CircuitDisconnectedPermanently(
             ILogger logger,
             CircuitId circuitId
         );
@@ -555,7 +556,7 @@ internal partial class CircuitRegistry
             "Exception handler for {CircuitId} failed.",
             EventName = "CircuitExceptionHandlerFailed"
         )]
-        public static partial void CircuitExceptionHandlerFailed(
+        partial public static void CircuitExceptionHandlerFailed(
             ILogger logger,
             CircuitId circuitId,
             Exception exception
@@ -567,6 +568,6 @@ internal partial class CircuitRegistry
             "Reconnect to circuit with id {CircuitId} succeeded.",
             EventName = "FailedToReconnectToCircuit"
         )]
-        public static partial void ReconnectionSucceeded(ILogger logger, CircuitId circuitId);
+        partial public static void ReconnectionSucceeded(ILogger logger, CircuitId circuitId);
     }
 }

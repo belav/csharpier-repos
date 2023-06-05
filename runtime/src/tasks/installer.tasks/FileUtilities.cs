@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace Microsoft.DotNet.Build.Tasks
 {
-    internal static partial class FileUtilities
+    partial internal static class FileUtilities
     {
         private static readonly HashSet<string> s_assemblyExtensions = new HashSet<string>(
             new[] { ".dll", ".exe", ".winmd" },

@@ -19,7 +19,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
-    public abstract partial class ImmutablesTestBase
+    partial public abstract class ImmutablesTestBase
     {
         /// <summary>
         /// Gets the number of operations to perform in randomized tests.

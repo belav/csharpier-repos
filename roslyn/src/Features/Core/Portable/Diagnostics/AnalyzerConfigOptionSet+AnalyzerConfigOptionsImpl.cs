@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal sealed partial class AnalyzerConfigOptionSet
+    partial internal sealed class AnalyzerConfigOptionSet
     {
         private sealed class AnalyzerConfigOptionsImpl : AnalyzerConfigOptions
         {

@@ -7,11 +7,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
+partial
 #pragma warning disable CA1823 // analyzer incorrectly flags fixed buffer length const (https://github.com/dotnet/roslyn/issues/37593)
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class Process
+    partial internal static class Process
     {
         private const ulong SecondsToNanoseconds = 1000000000;
         private const ulong MicroSecondsToNanoSeconds = 1000;

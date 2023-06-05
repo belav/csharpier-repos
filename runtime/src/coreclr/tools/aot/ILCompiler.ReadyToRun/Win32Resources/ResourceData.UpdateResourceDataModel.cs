@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace ILCompiler.Win32Resources
 {
-    public unsafe partial class ResourceData
+    partial public unsafe class ResourceData
     {
         private void AddResource(object type, object name, ushort language, byte[] data)
         {

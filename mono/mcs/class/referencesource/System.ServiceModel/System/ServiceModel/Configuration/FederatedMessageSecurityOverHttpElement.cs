@@ -17,7 +17,7 @@ namespace System.ServiceModel.Configuration
     using System.ComponentModel;
     using System.Xml;
 
-    public sealed partial class FederatedMessageSecurityOverHttpElement
+    partial public sealed class FederatedMessageSecurityOverHttpElement
         : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(

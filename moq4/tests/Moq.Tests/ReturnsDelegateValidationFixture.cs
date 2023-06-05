@@ -107,7 +107,7 @@ namespace Moq.Tests
         }
     }
 
-    public partial class Instance
+    partial public class Instance
     {
         public bool Func(int x)
         {
@@ -115,7 +115,7 @@ namespace Moq.Tests
         }
     }
 
-    public static partial class Static
+    partial public static class Static
     {
         public static bool Func(int x)
         {
@@ -123,7 +123,7 @@ namespace Moq.Tests
         }
     }
 
-    public static partial class Extension
+    partial public static class Extension
     {
         public static bool Func(this IEnumerable<int> self, int x)
         {

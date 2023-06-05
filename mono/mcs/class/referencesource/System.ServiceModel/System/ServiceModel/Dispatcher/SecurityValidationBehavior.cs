@@ -346,7 +346,7 @@ namespace System.ServiceModel.Dispatcher
         // for example, GetWhitespace may be a problem if it�s called on unbounded data.
         static class NoStreamingWithSecurityRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -400,7 +400,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class WindowsIdentitySupportRule
         {
-            static public void Validate(ServiceDescription description)
+            public static void Validate(ServiceDescription description)
             {
                 bool impersonateCallerForAllServiceMethods = false;
                 ServiceAuthorizationBehavior authorizationBehavior =
@@ -538,7 +538,7 @@ namespace System.ServiceModel.Dispatcher
                 return false;
             }
 
-            static public void Validate(ServiceDescription description)
+            public static void Validate(ServiceDescription description)
             {
                 ServiceAuthorizationBehavior behavior =
                     description.Behaviors.Find<ServiceAuthorizationBehavior>();
@@ -602,7 +602,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class UnknownHeaderProtectionRequirementsRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -622,7 +622,7 @@ namespace System.ServiceModel.Dispatcher
                     ValidateContract(binding, contract, ProtectionLevel.None, ProtectionLevel.None);
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             )
@@ -729,7 +729,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class ContractProtectionRequirementsRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -749,7 +749,7 @@ namespace System.ServiceModel.Dispatcher
                     ValidateContract(binding, contract, ProtectionLevel.None, ProtectionLevel.None);
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             )
@@ -781,7 +781,7 @@ namespace System.ServiceModel.Dispatcher
                 );
             }
 
-            static internal void GetRequiredProtectionLevels(
+            internal static void GetRequiredProtectionLevels(
                 ContractDescription contract,
                 ProtectionLevel defaultRequestProtectionLevel,
                 ProtectionLevel defaultResponseProtectionLevel,
@@ -891,7 +891,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class BearerKeyTypeIssuanceRequirementRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -1022,7 +1022,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             ) { }
@@ -1039,7 +1039,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class CookieAndSessionProtectionRequirementsRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -1085,7 +1085,7 @@ namespace System.ServiceModel.Dispatcher
                     }
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             ) { }
@@ -1093,7 +1093,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class SoapOverSecureTransportRequirementsRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement securityBindingElement,
                 Binding binding,
                 ContractDescription contract
@@ -1160,7 +1160,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             ) { }
@@ -1168,7 +1168,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class IssuedKeySizeCompatibilityWithAlgorithmSuiteRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -1235,7 +1235,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             ) { }
@@ -1275,7 +1275,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void Validate(
+            public static void Validate(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract,
@@ -1375,7 +1375,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class SecurityVersionSupportForEncryptedKeyBindingRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -1404,7 +1404,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             ) { }
@@ -1412,7 +1412,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class SecurityVersionSupportForThumbprintKeyIdentifierClauseRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -1445,7 +1445,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             ) { }
@@ -1453,7 +1453,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class MessageSecurityAndManualAddressingRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -1476,7 +1476,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             ) { }
@@ -1484,7 +1484,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class SecurityBindingSupportForOneWayOnlyRule
         {
-            static public void ValidateSecurityBinding(
+            public static void ValidateSecurityBinding(
                 SecurityBindingElement sbe,
                 Binding binding,
                 ContractDescription contract
@@ -1514,7 +1514,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void ValidateNoSecurityBinding(
+            public static void ValidateNoSecurityBinding(
                 Binding binding,
                 ContractDescription contract
             ) { }
@@ -1575,7 +1575,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void Validate(ServiceDescription description)
+            public static void Validate(ServiceDescription description)
             {
                 //
                 // Verify if the service credentials are not customized
@@ -1639,7 +1639,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            static public void Validate(ServiceDescription description)
+            public static void Validate(ServiceDescription description)
             {
                 ServiceCredentials credentials = description.Behaviors.Find<ServiceCredentials>();
                 if (credentials == null)
@@ -1647,7 +1647,7 @@ namespace System.ServiceModel.Dispatcher
                 ValidateCore(description, credentials);
             }
 
-            static private void ValidateSecurityBindingElement(
+            private static void ValidateSecurityBindingElement(
                 SecurityBindingElement sbe,
                 ServiceEndpoint endpoint
             )
@@ -1691,7 +1691,7 @@ namespace System.ServiceModel.Dispatcher
 
         static class ValidatorUtils
         {
-            static public bool EndpointRequiresImpersonation(ServiceEndpoint endpoint)
+            public static bool EndpointRequiresImpersonation(ServiceEndpoint endpoint)
             {
                 if (endpoint == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpoint");
@@ -1713,7 +1713,7 @@ namespace System.ServiceModel.Dispatcher
                 return false;
             }
 
-            static public bool IsStandardBinding(Binding binding)
+            public static bool IsStandardBinding(Binding binding)
             {
                 return (binding is BasicHttpBinding)
                     || (binding is BasicHttpsBinding)

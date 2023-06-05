@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.NavigationBar
 {
-    internal abstract partial class RoslynNavigationBarItem
+    partial internal abstract class RoslynNavigationBarItem
     {
         /// <summary>
         /// An item that is displayed and can be chosen but which has no action.

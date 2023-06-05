@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.CPS
 {
-    internal sealed partial class CPSProject : IWorkspaceProjectContext
+    partial internal sealed class CPSProject : IWorkspaceProjectContext
     {
         private readonly ProjectSystemProject _projectSystemProject;
 

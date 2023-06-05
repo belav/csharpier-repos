@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
-    internal partial class CSharpProjectShim : ICSCompilerConfig
+    partial internal class CSharpProjectShim : ICSCompilerConfig
     {
         public int GetOptionCount()
         {

@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Xml;
 
-    public partial class CommonEndpointBehaviorElement
+    partial public class CommonEndpointBehaviorElement
         : ServiceModelExtensionCollectionElement<BehaviorExtensionElement>
     {
         public CommonEndpointBehaviorElement()

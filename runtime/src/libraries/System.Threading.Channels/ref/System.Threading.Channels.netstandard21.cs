@@ -6,7 +6,7 @@
 
 namespace System.Threading.Channels
 {
-    public partial class ChannelClosedException : System.InvalidOperationException
+    partial public class ChannelClosedException : System.InvalidOperationException
     {
         protected ChannelClosedException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -14,7 +14,7 @@ namespace System.Threading.Channels
         ) { }
     }
 
-    public abstract partial class ChannelReader<T>
+    partial public abstract class ChannelReader<T>
     {
         public virtual System.Collections.Generic.IAsyncEnumerable<T> ReadAllAsync(
             System.Threading.CancellationToken cancellationToken =

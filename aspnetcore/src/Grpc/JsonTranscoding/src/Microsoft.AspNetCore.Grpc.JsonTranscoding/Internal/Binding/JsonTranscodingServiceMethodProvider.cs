@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
-internal sealed partial class JsonTranscodingServiceMethodProvider<TService>
+partial internal sealed class JsonTranscodingServiceMethodProvider<TService>
     : IServiceMethodProvider<TService>
     where TService : class
 {
@@ -97,7 +97,7 @@ internal sealed partial class JsonTranscodingServiceMethodProvider<TService>
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -105,7 +105,7 @@ internal sealed partial class JsonTranscodingServiceMethodProvider<TService>
             "Could not find bind method for {ServiceType}.",
             EventName = "BindMethodNotFound"
         )]
-        public static partial void BindMethodNotFound(ILogger logger, Type serviceType);
+        partial public static void BindMethodNotFound(ILogger logger, Type serviceType);
 
         [LoggerMessage(
             2,
@@ -113,7 +113,7 @@ internal sealed partial class JsonTranscodingServiceMethodProvider<TService>
             "Error getting service descriptor for {ServiceType}.",
             EventName = "ServiceDescriptorError"
         )]
-        public static partial void ServiceDescriptorError(
+        partial public static void ServiceDescriptorError(
             ILogger logger,
             Type serviceType,
             Exception ex

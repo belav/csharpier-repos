@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSACng : RSA
+    partial public sealed class RSACng : RSA
     {
         /// <summary>
         ///     Gets the key that will be used by the RSA object for any cryptographic operation that it uses.

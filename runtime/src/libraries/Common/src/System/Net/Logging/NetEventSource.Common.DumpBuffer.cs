@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Net
 {
-    internal sealed partial class NetEventSource
+    partial internal sealed class NetEventSource
     {
         private const int DumpArrayEventId = 4;
         private const int MaxDumpSize = 1024;

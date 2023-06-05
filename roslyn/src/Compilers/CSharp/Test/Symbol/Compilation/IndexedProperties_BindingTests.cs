@@ -19,7 +19,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class IndexedProperties_BindingTests : SemanticModelTestBase
+    partial public class IndexedProperties_BindingTests : SemanticModelTestBase
     {
         [ClrOnlyFact]
         public void OldGetFormat_IndexedProperties()

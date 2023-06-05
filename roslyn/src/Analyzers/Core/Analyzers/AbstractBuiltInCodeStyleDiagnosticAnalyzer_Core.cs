@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
-    internal abstract partial class AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    partial internal abstract class AbstractBuiltInCodeStyleDiagnosticAnalyzer
         : DiagnosticAnalyzer,
             IBuiltInAnalyzer
     {

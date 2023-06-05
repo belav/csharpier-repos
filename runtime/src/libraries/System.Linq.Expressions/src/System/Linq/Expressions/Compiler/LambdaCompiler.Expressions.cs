@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Linq.Expressions.Compiler
 {
-    internal sealed partial class LambdaCompiler
+    partial internal sealed class LambdaCompiler
     {
         private static readonly FieldInfo s_callSiteTargetField = typeof(CallSite<>).GetField(
             "Target"

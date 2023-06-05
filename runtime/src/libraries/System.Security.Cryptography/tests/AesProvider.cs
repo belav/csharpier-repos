@@ -13,7 +13,7 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         }
     }
 
-    public partial class AesFactory
+    partial public class AesFactory
     {
         private static readonly IAesProvider s_provider = new AesProvider();
     }

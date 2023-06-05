@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class INamespaceSymbolExtensions
+    partial internal static class INamespaceSymbolExtensions
     {
         private static readonly ConditionalWeakTable<
             INamespaceSymbol,

@@ -650,9 +650,10 @@ namespace System.Linq.Expressions
         }
     }
 
+    partial
     #endregion
 
-    public partial class Expression
+    public class Expression
     {
         #region Call
 

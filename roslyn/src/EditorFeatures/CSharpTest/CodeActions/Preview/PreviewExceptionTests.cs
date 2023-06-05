@@ -23,7 +23,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
 {
-    public partial class PreviewTests
+    partial public class PreviewTests
     {
         [WpfFact]
         public async Task TestExceptionInComputePreview()

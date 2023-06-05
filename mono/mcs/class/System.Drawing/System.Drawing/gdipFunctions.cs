@@ -43,9 +43,9 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace System.Drawing
 {
-    internal partial class SafeNativeMethods
+    partial internal class SafeNativeMethods
     {
-        internal partial class Gdip : GDIPlus { }
+        partial internal class Gdip : GDIPlus { }
     }
 
     /// <summary>
@@ -67,14 +67,14 @@ namespace System.Drawing
 
         // startup / shutdown
         [DllImport(GdiPlus)]
-        static internal extern Status GdiplusStartup(
+        internal static extern Status GdiplusStartup(
             ref ulong token,
             ref GdiplusStartupInput input,
             ref GdiplusStartupOutput output
         );
 
         [DllImport(GdiPlus)]
-        static internal extern void GdiplusShutdown(ref ulong token);
+        internal static extern void GdiplusShutdown(ref ulong token);
 
         internal static ulong GdiPlusToken = 0;
 
@@ -164,18 +164,20 @@ namespace System.Drawing
 #endif
         }
 
-        static public bool RunningOnWindows()
+        public static bool RunningOnWindows()
         {
             return !UseX11Drawable && !UseCarbonDrawable && !UseCocoaDrawable;
         }
 
-        static public bool RunningOnUnix()
+        public static bool RunningOnUnix()
         {
             return UseX11Drawable || UseCarbonDrawable || UseCocoaDrawable;
         }
 
         // Copies a Ptr to an array of Points and releases the memory
-        static public void FromUnManagedMemoryToPointI(IntPtr prt, Point[] pts)
+        public
+        // Copies a Ptr to an array of Points and releases the memory
+        static void FromUnManagedMemoryToPointI(IntPtr prt, Point[] pts)
         {
             int nPointSize = Marshal.SizeOf(pts[0]);
             IntPtr pos = prt;
@@ -186,7 +188,9 @@ namespace System.Drawing
         }
 
         // Copies a Ptr to an array of Points and releases the memory
-        static public void FromUnManagedMemoryToPoint(IntPtr prt, PointF[] pts)
+        public
+        // Copies a Ptr to an array of Points and releases the memory
+        static void FromUnManagedMemoryToPoint(IntPtr prt, PointF[] pts)
         {
             int nPointSize = Marshal.SizeOf(pts[0]);
             IntPtr pos = prt;
@@ -197,7 +201,9 @@ namespace System.Drawing
         }
 
         // Copies an array of Points to unmanaged memory
-        static public IntPtr FromPointToUnManagedMemoryI(Point[] pts)
+        public
+        // Copies an array of Points to unmanaged memory
+        static IntPtr FromPointToUnManagedMemoryI(Point[] pts)
         {
             int nPointSize = Marshal.SizeOf(pts[0]);
             IntPtr dest = Marshal.AllocHGlobal(nPointSize * pts.Length);
@@ -209,7 +215,9 @@ namespace System.Drawing
         }
 
         // Copies a Ptr to an array of v and releases the memory
-        static public void FromUnManagedMemoryToRectangles(IntPtr prt, RectangleF[] pts)
+        public
+        // Copies a Ptr to an array of v and releases the memory
+        static void FromUnManagedMemoryToRectangles(IntPtr prt, RectangleF[] pts)
         {
             int nPointSize = Marshal.SizeOf(pts[0]);
             IntPtr pos = prt;
@@ -220,7 +228,9 @@ namespace System.Drawing
         }
 
         // Copies an array of Points to unmanaged memory
-        static public IntPtr FromPointToUnManagedMemory(PointF[] pts)
+        public
+        // Copies an array of Points to unmanaged memory
+        static IntPtr FromPointToUnManagedMemory(PointF[] pts)
         {
             int nPointSize = Marshal.SizeOf(pts[0]);
             IntPtr dest = Marshal.AllocHGlobal(nPointSize * pts.Length);
@@ -233,7 +243,10 @@ namespace System.Drawing
 
         // Converts a status into exception
         // TODO: Add more status code mappings here
-        static internal void CheckStatus(Status status)
+        internal
+        // Converts a status into exception
+        // TODO: Add more status code mappings here
+        static void CheckStatus(Status status)
         {
             string msg;
             switch (status)
@@ -317,55 +330,55 @@ namespace System.Drawing
 
         // Memory functions
         [DllImport(GdiPlus)]
-        static internal extern IntPtr GdipAlloc(int size);
+        internal static extern IntPtr GdipAlloc(int size);
 
         [DllImport(GdiPlus)]
-        static internal extern void GdipFree(IntPtr ptr);
+        internal static extern void GdipFree(IntPtr ptr);
 
         // Brush functions
         [DllImport(GdiPlus)]
-        static internal extern int GdipCloneBrush(HandleRef brush, out IntPtr clonedBrush);
+        internal static extern int GdipCloneBrush(HandleRef brush, out IntPtr clonedBrush);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipDeleteBrush(HandleRef brush);
+        internal static extern int GdipDeleteBrush(HandleRef brush);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetBrushType(HandleRef brush, out BrushType type);
+        internal static extern int GdipGetBrushType(HandleRef brush, out BrushType type);
 
         // Region functions
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateRegion(out IntPtr region);
+        internal static extern Status GdipCreateRegion(out IntPtr region);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateRegionRgnData(
+        internal static extern Status GdipCreateRegionRgnData(
             byte[] data,
             int size,
             out IntPtr region
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDeleteRegion(IntPtr region);
+        internal static extern Status GdipDeleteRegion(IntPtr region);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCloneRegion(IntPtr region, out IntPtr cloned);
+        internal static extern Status GdipCloneRegion(IntPtr region, out IntPtr cloned);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateRegionRect(ref RectangleF rect, out IntPtr region);
+        internal static extern Status GdipCreateRegionRect(ref RectangleF rect, out IntPtr region);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateRegionRectI(ref Rectangle rect, out IntPtr region);
+        internal static extern Status GdipCreateRegionRectI(ref Rectangle rect, out IntPtr region);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateRegionPath(IntPtr path, out IntPtr region);
+        internal static extern Status GdipCreateRegionPath(IntPtr path, out IntPtr region);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipTranslateRegion(IntPtr region, float dx, float dy);
+        internal static extern Status GdipTranslateRegion(IntPtr region, float dx, float dy);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipTranslateRegionI(IntPtr region, int dx, int dy);
+        internal static extern Status GdipTranslateRegionI(IntPtr region, int dx, int dy);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipIsVisibleRegionPoint(
+        internal static extern Status GdipIsVisibleRegionPoint(
             IntPtr region,
             float x,
             float y,
@@ -374,7 +387,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipIsVisibleRegionPointI(
+        internal static extern Status GdipIsVisibleRegionPointI(
             IntPtr region,
             int x,
             int y,
@@ -383,7 +396,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipIsVisibleRegionRect(
+        internal static extern Status GdipIsVisibleRegionRect(
             IntPtr region,
             float x,
             float y,
@@ -394,7 +407,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipIsVisibleRegionRectI(
+        internal static extern Status GdipIsVisibleRegionRectI(
             IntPtr region,
             int x,
             int y,
@@ -405,62 +418,62 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCombineRegionRect(
+        internal static extern Status GdipCombineRegionRect(
             IntPtr region,
             ref RectangleF rect,
             CombineMode combineMode
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCombineRegionRectI(
+        internal static extern Status GdipCombineRegionRectI(
             IntPtr region,
             ref Rectangle rect,
             CombineMode combineMode
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCombineRegionPath(
+        internal static extern Status GdipCombineRegionPath(
             IntPtr region,
             IntPtr path,
             CombineMode combineMode
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetRegionBounds(
+        internal static extern Status GdipGetRegionBounds(
             IntPtr region,
             IntPtr graphics,
             ref RectangleF rect
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetInfinite(IntPtr region);
+        internal static extern Status GdipSetInfinite(IntPtr region);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetEmpty(IntPtr region);
+        internal static extern Status GdipSetEmpty(IntPtr region);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipIsEmptyRegion(
+        internal static extern Status GdipIsEmptyRegion(
             IntPtr region,
             IntPtr graphics,
             out bool result
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipIsInfiniteRegion(
+        internal static extern Status GdipIsInfiniteRegion(
             IntPtr region,
             IntPtr graphics,
             out bool result
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCombineRegionRegion(
+        internal static extern Status GdipCombineRegionRegion(
             IntPtr region,
             IntPtr region2,
             CombineMode combineMode
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipIsEqualRegion(
+        internal static extern Status GdipIsEqualRegion(
             IntPtr region,
             IntPtr region2,
             IntPtr graphics,
@@ -468,10 +481,10 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetRegionDataSize(IntPtr region, out int bufferSize);
+        internal static extern Status GdipGetRegionDataSize(IntPtr region, out int bufferSize);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetRegionData(
+        internal static extern Status GdipGetRegionData(
             IntPtr region,
             byte[] buffer,
             int bufferSize,
@@ -479,14 +492,14 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetRegionScansCount(
+        internal static extern Status GdipGetRegionScansCount(
             IntPtr region,
             out int count,
             IntPtr matrix
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetRegionScans(
+        internal static extern Status GdipGetRegionScans(
             IntPtr region,
             IntPtr rects,
             out int count,
@@ -494,34 +507,34 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipTransformRegion(IntPtr region, IntPtr matrix);
+        internal static extern Status GdipTransformRegion(IntPtr region, IntPtr matrix);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillRegion(IntPtr graphics, IntPtr brush, IntPtr region);
+        internal static extern Status GdipFillRegion(IntPtr graphics, IntPtr brush, IntPtr region);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetRegionHRgn(
+        internal static extern Status GdipGetRegionHRgn(
             IntPtr region,
             IntPtr graphics,
             ref IntPtr hRgn
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateRegionHrgn(IntPtr hRgn, out IntPtr region);
+        internal static extern Status GdipCreateRegionHrgn(IntPtr hRgn, out IntPtr region);
 
         // Solid brush functions
         [DllImport(GdiPlus)]
-        static internal extern int GdipCreateSolidFill(int color, out IntPtr brush);
+        internal static extern int GdipCreateSolidFill(int color, out IntPtr brush);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetSolidFillColor(HandleRef brush, out int color);
+        internal static extern int GdipGetSolidFillColor(HandleRef brush, out int color);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipSetSolidFillColor(HandleRef brush, int color);
+        internal static extern int GdipSetSolidFillColor(HandleRef brush, int color);
 
         // Hatch Brush functions
         [DllImport(GdiPlus)]
-        static internal extern int GdipCreateHatchBrush( /*HatchStyle*/
+        internal static extern int GdipCreateHatchBrush( /*HatchStyle*/
             int hatchstyle,
             int foreColor,
             int backColor,
@@ -529,31 +542,31 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetHatchStyle(
+        internal static extern int GdipGetHatchStyle(
             HandleRef brush,
             out /*HatchStyle*/
             int hatchstyle
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetHatchForegroundColor(HandleRef brush, out int foreColor);
+        internal static extern int GdipGetHatchForegroundColor(HandleRef brush, out int foreColor);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetHatchBackgroundColor(HandleRef brush, out int backColor);
+        internal static extern int GdipGetHatchBackgroundColor(HandleRef brush, out int backColor);
 
         // Texture brush functions
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetTextureImage(HandleRef texture, out IntPtr image);
+        internal static extern int GdipGetTextureImage(HandleRef texture, out IntPtr image);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipCreateTexture(
+        internal static extern int GdipCreateTexture(
             HandleRef image, /*WrapMode*/
             int wrapMode,
             out IntPtr texture
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipCreateTextureIAI(
+        internal static extern int GdipCreateTextureIAI(
             HandleRef image,
             HandleRef imageAttributes,
             int x,
@@ -564,7 +577,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipCreateTextureIA(
+        internal static extern int GdipCreateTextureIA(
             HandleRef image,
             HandleRef imageAttributes,
             float x,
@@ -575,7 +588,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipCreateTexture2I(
+        internal static extern int GdipCreateTexture2I(
             HandleRef image, /*WrapMode*/
             int wrapMode,
             int x,
@@ -586,7 +599,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipCreateTexture2(
+        internal static extern int GdipCreateTexture2(
             HandleRef image, /*WrapMode*/
             int wrapMode,
             float x,
@@ -597,43 +610,43 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetTextureTransform(HandleRef texture, HandleRef matrix);
+        internal static extern int GdipGetTextureTransform(HandleRef texture, HandleRef matrix);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipSetTextureTransform(HandleRef texture, HandleRef matrix);
+        internal static extern int GdipSetTextureTransform(HandleRef texture, HandleRef matrix);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetTextureWrapMode(
+        internal static extern int GdipGetTextureWrapMode(
             HandleRef texture,
             out /*WrapMode*/
             int wrapMode
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipSetTextureWrapMode(
+        internal static extern int GdipSetTextureWrapMode(
             HandleRef texture, /*WrapMode*/
             int wrapMode
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipMultiplyTextureTransform(
+        internal static extern int GdipMultiplyTextureTransform(
             HandleRef texture,
             HandleRef matrix,
             MatrixOrder order
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipResetTextureTransform(HandleRef texture);
+        internal static extern int GdipResetTextureTransform(HandleRef texture);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipRotateTextureTransform(
+        internal static extern int GdipRotateTextureTransform(
             HandleRef texture,
             float angle,
             MatrixOrder order
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipScaleTextureTransform(
+        internal static extern int GdipScaleTextureTransform(
             HandleRef texture,
             float sx,
             float sy,
@@ -641,7 +654,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipTranslateTextureTransform(
+        internal static extern int GdipTranslateTextureTransform(
             HandleRef texture,
             float dx,
             float dy,
@@ -650,10 +663,10 @@ namespace System.Drawing
 
         // PathGradientBrush functions
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreatePathGradientFromPath(IntPtr path, out IntPtr brush);
+        internal static extern Status GdipCreatePathGradientFromPath(IntPtr path, out IntPtr brush);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreatePathGradientI(
+        internal static extern Status GdipCreatePathGradientI(
             Point[] points,
             int count,
             WrapMode wrapMode,
@@ -661,7 +674,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreatePathGradient(
+        internal static extern Status GdipCreatePathGradient(
             PointF[] points,
             int count,
             WrapMode wrapMode,
@@ -669,10 +682,10 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientBlendCount(IntPtr brush, out int count);
+        internal static extern Status GdipGetPathGradientBlendCount(IntPtr brush, out int count);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientBlend(
+        internal static extern Status GdipGetPathGradientBlend(
             IntPtr brush,
             float[] blend,
             float[] positions,
@@ -680,7 +693,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientBlend(
+        internal static extern Status GdipSetPathGradientBlend(
             IntPtr brush,
             float[] blend,
             float[] positions,
@@ -688,45 +701,45 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientCenterColor(IntPtr brush, out int color);
+        internal static extern Status GdipGetPathGradientCenterColor(IntPtr brush, out int color);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientCenterColor(IntPtr brush, int color);
+        internal static extern Status GdipSetPathGradientCenterColor(IntPtr brush, int color);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientCenterPoint(
+        internal static extern Status GdipGetPathGradientCenterPoint(
             IntPtr brush,
             out PointF point
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientCenterPoint(
+        internal static extern Status GdipSetPathGradientCenterPoint(
             IntPtr brush,
             ref PointF point
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientFocusScales(
+        internal static extern Status GdipGetPathGradientFocusScales(
             IntPtr brush,
             out float xScale,
             out float yScale
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientFocusScales(
+        internal static extern Status GdipSetPathGradientFocusScales(
             IntPtr brush,
             float xScale,
             float yScale
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientPresetBlendCount(
+        internal static extern Status GdipGetPathGradientPresetBlendCount(
             IntPtr brush,
             out int count
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientPresetBlend(
+        internal static extern Status GdipGetPathGradientPresetBlend(
             IntPtr brush,
             int[] blend,
             float[] positions,
@@ -734,7 +747,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientPresetBlend(
+        internal static extern Status GdipSetPathGradientPresetBlend(
             IntPtr brush,
             int[] blend,
             float[] positions,
@@ -742,76 +755,76 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientRect(IntPtr brush, out RectangleF rect);
+        internal static extern Status GdipGetPathGradientRect(IntPtr brush, out RectangleF rect);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientSurroundColorCount(
+        internal static extern Status GdipGetPathGradientSurroundColorCount(
             IntPtr brush,
             out int count
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientSurroundColorsWithCount(
+        internal static extern Status GdipGetPathGradientSurroundColorsWithCount(
             IntPtr brush,
             int[] color,
             ref int count
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientSurroundColorsWithCount(
+        internal static extern Status GdipSetPathGradientSurroundColorsWithCount(
             IntPtr brush,
             int[] color,
             ref int count
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientTransform(IntPtr brush, IntPtr matrix);
+        internal static extern Status GdipGetPathGradientTransform(IntPtr brush, IntPtr matrix);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientTransform(IntPtr brush, IntPtr matrix);
+        internal static extern Status GdipSetPathGradientTransform(IntPtr brush, IntPtr matrix);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetPathGradientWrapMode(
+        internal static extern Status GdipGetPathGradientWrapMode(
             IntPtr brush,
             out WrapMode wrapMode
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientWrapMode(IntPtr brush, WrapMode wrapMode);
+        internal static extern Status GdipSetPathGradientWrapMode(IntPtr brush, WrapMode wrapMode);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientLinearBlend(
+        internal static extern Status GdipSetPathGradientLinearBlend(
             IntPtr brush,
             float focus,
             float scale
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetPathGradientSigmaBlend(
+        internal static extern Status GdipSetPathGradientSigmaBlend(
             IntPtr brush,
             float focus,
             float scale
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipMultiplyPathGradientTransform(
+        internal static extern Status GdipMultiplyPathGradientTransform(
             IntPtr texture,
             IntPtr matrix,
             MatrixOrder order
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipResetPathGradientTransform(IntPtr brush);
+        internal static extern Status GdipResetPathGradientTransform(IntPtr brush);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipRotatePathGradientTransform(
+        internal static extern Status GdipRotatePathGradientTransform(
             IntPtr brush,
             float angle,
             MatrixOrder order
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipScalePathGradientTransform(
+        internal static extern Status GdipScalePathGradientTransform(
             IntPtr brush,
             float sx,
             float sy,
@@ -819,7 +832,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipTranslatePathGradientTransform(
+        internal static extern Status GdipTranslatePathGradientTransform(
             IntPtr brush,
             float dx,
             float dy,
@@ -828,7 +841,7 @@ namespace System.Drawing
 
         // LinearGradientBrush functions
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateLineBrushI(
+        internal static extern Status GdipCreateLineBrushI(
             ref Point point1,
             ref Point point2,
             int color1,
@@ -838,7 +851,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateLineBrush(
+        internal static extern Status GdipCreateLineBrush(
             ref PointF point1,
             ref PointF point2,
             int color1,
@@ -848,7 +861,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateLineBrushFromRectI(
+        internal static extern Status GdipCreateLineBrushFromRectI(
             ref Rectangle rect,
             int color1,
             int color2,
@@ -858,7 +871,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateLineBrushFromRect(
+        internal static extern Status GdipCreateLineBrushFromRect(
             ref RectangleF rect,
             int color1,
             int color2,
@@ -868,7 +881,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateLineBrushFromRectWithAngleI(
+        internal static extern Status GdipCreateLineBrushFromRectWithAngleI(
             ref Rectangle rect,
             int color1,
             int color2,
@@ -879,7 +892,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateLineBrushFromRectWithAngle(
+        internal static extern Status GdipCreateLineBrushFromRectWithAngle(
             ref RectangleF rect,
             int color1,
             int color2,
@@ -890,10 +903,10 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLineBlendCount(IntPtr brush, out int count);
+        internal static extern Status GdipGetLineBlendCount(IntPtr brush, out int count);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetLineBlend(
+        internal static extern Status GdipSetLineBlend(
             IntPtr brush,
             float[] blend,
             float[] positions,
@@ -901,7 +914,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLineBlend(
+        internal static extern Status GdipGetLineBlend(
             IntPtr brush,
             float[] blend,
             float[] positions,
@@ -909,22 +922,22 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetLineGammaCorrection(
+        internal static extern Status GdipSetLineGammaCorrection(
             IntPtr brush,
             bool useGammaCorrection
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLineGammaCorrection(
+        internal static extern Status GdipGetLineGammaCorrection(
             IntPtr brush,
             out bool useGammaCorrection
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLinePresetBlendCount(IntPtr brush, out int count);
+        internal static extern Status GdipGetLinePresetBlendCount(IntPtr brush, out int count);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetLinePresetBlend(
+        internal static extern Status GdipSetLinePresetBlend(
             IntPtr brush,
             int[] blend,
             float[] positions,
@@ -932,7 +945,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLinePresetBlend(
+        internal static extern Status GdipGetLinePresetBlend(
             IntPtr brush,
             int[] blend,
             float[] positions,
@@ -940,58 +953,58 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetLineColors(IntPtr brush, int color1, int color2);
+        internal static extern Status GdipSetLineColors(IntPtr brush, int color1, int color2);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLineColors(IntPtr brush, int[] colors);
+        internal static extern Status GdipGetLineColors(IntPtr brush, int[] colors);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLineRectI(IntPtr brush, out Rectangle rect);
+        internal static extern Status GdipGetLineRectI(IntPtr brush, out Rectangle rect);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLineRect(IntPtr brush, out RectangleF rect);
+        internal static extern Status GdipGetLineRect(IntPtr brush, out RectangleF rect);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetLineTransform(IntPtr brush, IntPtr matrix);
+        internal static extern Status GdipSetLineTransform(IntPtr brush, IntPtr matrix);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLineTransform(IntPtr brush, IntPtr matrix);
+        internal static extern Status GdipGetLineTransform(IntPtr brush, IntPtr matrix);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetLineWrapMode(IntPtr brush, WrapMode wrapMode);
+        internal static extern Status GdipSetLineWrapMode(IntPtr brush, WrapMode wrapMode);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetLineWrapMode(IntPtr brush, out WrapMode wrapMode);
+        internal static extern Status GdipGetLineWrapMode(IntPtr brush, out WrapMode wrapMode);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetLineLinearBlend(
+        internal static extern Status GdipSetLineLinearBlend(
             IntPtr brush,
             float focus,
             float scale
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetLineSigmaBlend(IntPtr brush, float focus, float scale);
+        internal static extern Status GdipSetLineSigmaBlend(IntPtr brush, float focus, float scale);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipMultiplyLineTransform(
+        internal static extern Status GdipMultiplyLineTransform(
             IntPtr brush,
             IntPtr matrix,
             MatrixOrder order
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipResetLineTransform(IntPtr brush);
+        internal static extern Status GdipResetLineTransform(IntPtr brush);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipRotateLineTransform(
+        internal static extern Status GdipRotateLineTransform(
             IntPtr brush,
             float angle,
             MatrixOrder order
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipScaleLineTransform(
+        internal static extern Status GdipScaleLineTransform(
             IntPtr brush,
             float sx,
             float sy,
@@ -999,7 +1012,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipTranslateLineTransform(
+        internal static extern Status GdipTranslateLineTransform(
             IntPtr brush,
             float dx,
             float dy,
@@ -1008,33 +1021,33 @@ namespace System.Drawing
 
         // Graphics functions
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateFromHDC(IntPtr hDC, out IntPtr graphics);
+        internal static extern Status GdipCreateFromHDC(IntPtr hDC, out IntPtr graphics);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDeleteGraphics(IntPtr graphics);
+        internal static extern Status GdipDeleteGraphics(IntPtr graphics);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipRestoreGraphics(IntPtr graphics, uint graphicsState);
+        internal static extern Status GdipRestoreGraphics(IntPtr graphics, uint graphicsState);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSaveGraphics(IntPtr graphics, out uint state);
+        internal static extern Status GdipSaveGraphics(IntPtr graphics, out uint state);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipMultiplyWorldTransform(
+        internal static extern Status GdipMultiplyWorldTransform(
             IntPtr graphics,
             IntPtr matrix,
             MatrixOrder order
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipRotateWorldTransform(
+        internal static extern Status GdipRotateWorldTransform(
             IntPtr graphics,
             float angle,
             MatrixOrder order
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipTranslateWorldTransform(
+        internal static extern Status GdipTranslateWorldTransform(
             IntPtr graphics,
             float dx,
             float dy,
@@ -1042,7 +1055,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawArc(
+        internal static extern Status GdipDrawArc(
             IntPtr graphics,
             IntPtr pen,
             float x,
@@ -1054,7 +1067,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawArcI(
+        internal static extern Status GdipDrawArcI(
             IntPtr graphics,
             IntPtr pen,
             int x,
@@ -1066,7 +1079,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawBezier(
+        internal static extern Status GdipDrawBezier(
             IntPtr graphics,
             IntPtr pen,
             float x1,
@@ -1080,7 +1093,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawBezierI(
+        internal static extern Status GdipDrawBezierI(
             IntPtr graphics,
             IntPtr pen,
             int x1,
@@ -1094,7 +1107,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawEllipseI(
+        internal static extern Status GdipDrawEllipseI(
             IntPtr graphics,
             IntPtr pen,
             int x,
@@ -1104,7 +1117,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawEllipse(
+        internal static extern Status GdipDrawEllipse(
             IntPtr graphics,
             IntPtr pen,
             float x,
@@ -1114,7 +1127,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawLine(
+        internal static extern Status GdipDrawLine(
             IntPtr graphics,
             IntPtr pen,
             float x1,
@@ -1124,7 +1137,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawLineI(
+        internal static extern Status GdipDrawLineI(
             IntPtr graphics,
             IntPtr pen,
             int x1,
@@ -1134,7 +1147,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawLines(
+        internal static extern Status GdipDrawLines(
             IntPtr graphics,
             IntPtr pen,
             PointF[] points,
@@ -1142,7 +1155,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawLinesI(
+        internal static extern Status GdipDrawLinesI(
             IntPtr graphics,
             IntPtr pen,
             Point[] points,
@@ -1150,10 +1163,10 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawPath(IntPtr graphics, IntPtr pen, IntPtr path);
+        internal static extern Status GdipDrawPath(IntPtr graphics, IntPtr pen, IntPtr path);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawPie(
+        internal static extern Status GdipDrawPie(
             IntPtr graphics,
             IntPtr pen,
             float x,
@@ -1165,7 +1178,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawPieI(
+        internal static extern Status GdipDrawPieI(
             IntPtr graphics,
             IntPtr pen,
             int x,
@@ -1177,7 +1190,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawPolygon(
+        internal static extern Status GdipDrawPolygon(
             IntPtr graphics,
             IntPtr pen,
             PointF[] points,
@@ -1185,7 +1198,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawPolygonI(
+        internal static extern Status GdipDrawPolygonI(
             IntPtr graphics,
             IntPtr pen,
             Point[] points,
@@ -1193,7 +1206,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawRectangle(
+        internal static extern Status GdipDrawRectangle(
             IntPtr graphics,
             IntPtr pen,
             float x,
@@ -1203,7 +1216,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawRectangleI(
+        internal static extern Status GdipDrawRectangleI(
             IntPtr graphics,
             IntPtr pen,
             int x,
@@ -1213,7 +1226,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawRectangles(
+        internal static extern Status GdipDrawRectangles(
             IntPtr graphics,
             IntPtr pen,
             RectangleF[] rects,
@@ -1221,7 +1234,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawRectanglesI(
+        internal static extern Status GdipDrawRectanglesI(
             IntPtr graphics,
             IntPtr pen,
             Rectangle[] rects,
@@ -1229,7 +1242,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillEllipseI(
+        internal static extern Status GdipFillEllipseI(
             IntPtr graphics,
             IntPtr pen,
             int x,
@@ -1239,7 +1252,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillEllipse(
+        internal static extern Status GdipFillEllipse(
             IntPtr graphics,
             IntPtr pen,
             float x,
@@ -1249,7 +1262,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillPolygon(
+        internal static extern Status GdipFillPolygon(
             IntPtr graphics,
             IntPtr brush,
             PointF[] points,
@@ -1258,7 +1271,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillPolygonI(
+        internal static extern Status GdipFillPolygonI(
             IntPtr graphics,
             IntPtr brush,
             Point[] points,
@@ -1267,7 +1280,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillPolygon2(
+        internal static extern Status GdipFillPolygon2(
             IntPtr graphics,
             IntPtr brush,
             PointF[] points,
@@ -1275,7 +1288,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillPolygon2I(
+        internal static extern Status GdipFillPolygon2I(
             IntPtr graphics,
             IntPtr brush,
             Point[] points,
@@ -1283,7 +1296,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillRectangle(
+        internal static extern Status GdipFillRectangle(
             IntPtr graphics,
             IntPtr brush,
             float x1,
@@ -1293,7 +1306,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillRectangleI(
+        internal static extern Status GdipFillRectangleI(
             IntPtr graphics,
             IntPtr brush,
             int x1,
@@ -1303,7 +1316,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillRectangles(
+        internal static extern Status GdipFillRectangles(
             IntPtr graphics,
             IntPtr brush,
             RectangleF[] rects,
@@ -1311,7 +1324,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipFillRectanglesI(
+        internal static extern Status GdipFillRectanglesI(
             IntPtr graphics,
             IntPtr brush,
             Rectangle[] rects,
@@ -1319,7 +1332,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus, CharSet = CharSet.Unicode)]
-        static internal extern Status GdipDrawString(
+        internal static extern Status GdipDrawString(
             IntPtr graphics,
             string text,
             int len,
@@ -1330,13 +1343,13 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetDC(IntPtr graphics, out IntPtr hdc);
+        internal static extern Status GdipGetDC(IntPtr graphics, out IntPtr hdc);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipReleaseDC(IntPtr graphics, IntPtr hdc);
+        internal static extern Status GdipReleaseDC(IntPtr graphics, IntPtr hdc);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipDrawImageRectI(
+        internal static extern Status GdipDrawImageRectI(
             IntPtr graphics,
             IntPtr image,
             int x,
@@ -1346,10 +1359,10 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetRenderingOrigin(IntPtr graphics, out int x, out int y);
+        internal static extern Status GdipGetRenderingOrigin(IntPtr graphics, out int x, out int y);
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSetRenderingOrigin(IntPtr graphics, int x, int y);
+        internal static extern Status GdipSetRenderingOrigin(IntPtr graphics, int x, int y);
 
         [DllImport(GdiPlus)]
         internal static extern Status GdipCloneBitmapArea(
@@ -2102,7 +2115,7 @@ namespace System.Drawing
         internal static extern Status GdipCreateFromHWND(IntPtr hwnd, out IntPtr graphics);
 
         [DllImport(GdiPlus, CharSet = CharSet.Unicode)]
-        internal unsafe static extern Status GdipMeasureString(
+        internal static extern unsafe Status GdipMeasureString(
             IntPtr graphics,
             string str,
             int length,
@@ -2366,7 +2379,7 @@ namespace System.Drawing
         internal static extern Status GdipRemovePropertyItem(IntPtr image, int propertyId);
 
         [DllImport(GdiPlus)]
-        internal unsafe static extern Status GdipSetPropertyItem(
+        internal static extern unsafe Status GdipSetPropertyItem(
             IntPtr image,
             GdipPropertyItem* propertyItem
         );
@@ -3408,22 +3421,22 @@ namespace System.Drawing
 
         // Some special X11 stuff
         [DllImport("libX11", EntryPoint = "XOpenDisplay")]
-        internal extern static IntPtr XOpenDisplay(IntPtr display);
+        internal static extern IntPtr XOpenDisplay(IntPtr display);
 
         [DllImport("libX11", EntryPoint = "XCloseDisplay")]
-        internal extern static int XCloseDisplay(IntPtr display);
+        internal static extern int XCloseDisplay(IntPtr display);
 
         [DllImport("libX11", EntryPoint = "XRootWindow")]
-        internal extern static IntPtr XRootWindow(IntPtr display, int screen);
+        internal static extern IntPtr XRootWindow(IntPtr display, int screen);
 
         [DllImport("libX11", EntryPoint = "XDefaultScreen")]
-        internal extern static int XDefaultScreen(IntPtr display);
+        internal static extern int XDefaultScreen(IntPtr display);
 
         [DllImport("libX11", EntryPoint = "XDefaultDepth")]
-        internal extern static uint XDefaultDepth(IntPtr display, int screen);
+        internal static extern uint XDefaultDepth(IntPtr display, int screen);
 
         [DllImport("libX11", EntryPoint = "XGetImage")]
-        internal extern static IntPtr XGetImage(
+        internal static extern IntPtr XGetImage(
             IntPtr display,
             IntPtr drawable,
             int src_x,
@@ -3435,16 +3448,16 @@ namespace System.Drawing
         );
 
         [DllImport("libX11", EntryPoint = "XGetPixel")]
-        internal extern static int XGetPixel(IntPtr image, int x, int y);
+        internal static extern int XGetPixel(IntPtr image, int x, int y);
 
         [DllImport("libX11", EntryPoint = "XDestroyImage")]
-        internal extern static int XDestroyImage(IntPtr image);
+        internal static extern int XDestroyImage(IntPtr image);
 
         [DllImport("libX11", EntryPoint = "XDefaultVisual")]
-        internal extern static IntPtr XDefaultVisual(IntPtr display, int screen);
+        internal static extern IntPtr XDefaultVisual(IntPtr display, int screen);
 
         [DllImport("libX11", EntryPoint = "XGetVisualInfo")]
-        internal extern static IntPtr XGetVisualInfo(
+        internal static extern IntPtr XGetVisualInfo(
             IntPtr display,
             int vinfo_mask,
             ref XVisualInfo vinfo_template,
@@ -3452,10 +3465,10 @@ namespace System.Drawing
         );
 
         [DllImport("libX11", EntryPoint = "XVisualIDFromVisual")]
-        internal extern static IntPtr XVisualIDFromVisual(IntPtr visual);
+        internal static extern IntPtr XVisualIDFromVisual(IntPtr visual);
 
         [DllImport("libX11", EntryPoint = "XFree")]
-        internal extern static void XFree(IntPtr data);
+        internal static extern void XFree(IntPtr data);
 
         // FontCollection
         [DllImport(GdiPlus)]
@@ -3839,20 +3852,20 @@ namespace System.Drawing
 
         //ImageCodecInfo functions
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetImageDecodersSize(out int decoderNums, out int arraySize);
+        internal static extern int GdipGetImageDecodersSize(out int decoderNums, out int arraySize);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetImageDecoders(
+        internal static extern int GdipGetImageDecoders(
             int decoderNums,
             int arraySize,
             IntPtr decoders
         );
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetImageEncodersSize(out int encoderNums, out int arraySize);
+        internal static extern int GdipGetImageEncodersSize(out int encoderNums, out int arraySize);
 
         [DllImport(GdiPlus)]
-        static internal extern int GdipGetImageEncoders(
+        internal static extern int GdipGetImageEncoders(
             int encoderNums,
             int arraySize,
             IntPtr encoders
@@ -4179,7 +4192,7 @@ namespace System.Drawing
 
         // Stream functions for non-Win32 (libgdiplus specific)
         [DllImport(GdiPlus)]
-        static internal extern Status GdipLoadImageFromDelegate_linux(
+        internal static extern Status GdipLoadImageFromDelegate_linux(
             StreamGetHeaderDelegate getHeader,
             StreamGetBytesDelegate getBytes,
             StreamPutBytesDelegate putBytes,
@@ -4190,7 +4203,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipSaveImageToDelegate_linux(
+        internal static extern Status GdipSaveImageToDelegate_linux(
             IntPtr image,
             StreamGetBytesDelegate getBytes,
             StreamPutBytesDelegate putBytes,
@@ -4202,7 +4215,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipCreateMetafileFromDelegate_linux(
+        internal static extern Status GdipCreateMetafileFromDelegate_linux(
             StreamGetHeaderDelegate getHeader,
             StreamGetBytesDelegate getBytes,
             StreamPutBytesDelegate putBytes,
@@ -4213,7 +4226,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipGetMetafileHeaderFromDelegate_linux(
+        internal static extern Status GdipGetMetafileHeaderFromDelegate_linux(
             StreamGetHeaderDelegate getHeader,
             StreamGetBytesDelegate getBytes,
             StreamPutBytesDelegate putBytes,
@@ -4224,7 +4237,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipRecordMetafileFromDelegate_linux(
+        internal static extern Status GdipRecordMetafileFromDelegate_linux(
             StreamGetHeaderDelegate getHeader,
             StreamGetBytesDelegate getBytes,
             StreamPutBytesDelegate putBytes,
@@ -4240,7 +4253,7 @@ namespace System.Drawing
         );
 
         [DllImport(GdiPlus)]
-        static internal extern Status GdipRecordMetafileFromDelegateI_linux(
+        internal static extern Status GdipRecordMetafileFromDelegateI_linux(
             StreamGetHeaderDelegate getHeader,
             StreamGetBytesDelegate getBytes,
             StreamPutBytesDelegate putBytes,

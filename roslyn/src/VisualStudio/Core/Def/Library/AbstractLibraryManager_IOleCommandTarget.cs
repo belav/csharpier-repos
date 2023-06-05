@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.OLE.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
 {
-    internal partial class AbstractLibraryManager : IOleCommandTarget
+    partial internal class AbstractLibraryManager : IOleCommandTarget
     {
         protected virtual bool TryQueryStatus(
             Guid commandGroup,

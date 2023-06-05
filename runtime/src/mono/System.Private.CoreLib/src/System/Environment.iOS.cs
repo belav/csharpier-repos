@@ -9,7 +9,7 @@ using NSSearchPathDirectory = Interop.Sys.NSSearchPathDirectory;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         private static Dictionary<SpecialFolder, string>? s_specialFolders;
 

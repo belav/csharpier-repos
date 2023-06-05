@@ -15,10 +15,11 @@ using CryptProvParam = Interop.Advapi32.CryptProvParam;
 
 namespace Internal.NativeCrypto
 {
+    partial
     /// <summary>
     /// Following part of CAPIHelper keeps the wrappers for all the PInvoke calls
     /// </summary>
-    internal static partial class CapiHelper
+    internal static class CapiHelper
     {
         private static ReadOnlySpan<byte> RgbPubKey =>
             new byte[]
@@ -2106,10 +2107,11 @@ namespace Internal.NativeCrypto
         }
     } //End of class CapiHelper : Wrappers
 
+    partial
     /// <summary>
     /// All the Crypto flags are capture in following
     /// </summary>
-    internal static partial class CapiHelper
+    internal static class CapiHelper
     {
         internal const int CALG_DES = (ALG_CLASS_DATA_ENCRYPT | ALG_TYPE_BLOCK | 1);
         internal const int CALG_RC2 = (ALG_CLASS_DATA_ENCRYPT | ALG_TYPE_BLOCK | 2);

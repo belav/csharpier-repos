@@ -6,7 +6,7 @@ namespace System.ServiceModel.Configuration
 {
     using System.ServiceModel;
 
-    public partial class BasicHttpsBindingCollectionElement
+    partial public class BasicHttpsBindingCollectionElement
         : StandardBindingCollectionElement<BasicHttpsBinding, BasicHttpsBindingElement>
     {
         internal static BasicHttpsBindingCollectionElement GetBindingCollectionElement()

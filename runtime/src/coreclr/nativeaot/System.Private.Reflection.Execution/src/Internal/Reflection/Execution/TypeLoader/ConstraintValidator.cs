@@ -8,7 +8,7 @@ using Debug = global::System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
 {
-    internal static partial class ConstraintValidator
+    partial internal static class ConstraintValidator
     {
         private static bool SatisfiesConstraints(
             this Type genericVariable,

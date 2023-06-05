@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal partial class SymbolTreeInfo
+    partial internal class SymbolTreeInfo
     {
         private const int RootNodeParentIndex = -1;
 

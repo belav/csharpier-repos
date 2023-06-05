@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class FileStream_ctor_options
+    partial public class FileStream_ctor_options
     {
         [ConditionalTheory(
             typeof(PlatformDetection),

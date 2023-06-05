@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CodeActions;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
 {
-    internal sealed partial class ConfigureSeverityLevelCodeFixProvider : IConfigurationFixProvider
+    partial internal sealed class ConfigureSeverityLevelCodeFixProvider : IConfigurationFixProvider
     {
         private sealed class TopLevelConfigureSeverityCodeAction
             : AbstractConfigurationActionWithNestedActions

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class SetComObjectDataTests
+    partial public class SetComObjectDataTests
     {
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void SetComObjectData_NonNullValue_Success()

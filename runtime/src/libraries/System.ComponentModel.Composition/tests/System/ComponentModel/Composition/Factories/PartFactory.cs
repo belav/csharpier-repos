@@ -5,7 +5,7 @@ using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.Factories
 {
-    internal static partial class PartFactory
+    partial internal static class PartFactory
     {
         public static Type GetAttributedExporterType()
         {

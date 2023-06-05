@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    public partial class ChaCha20Poly1305
+    partial public class ChaCha20Poly1305
     {
         public static bool IsSupported => false;
 

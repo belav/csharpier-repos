@@ -8,12 +8,13 @@ using Xunit;
 
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
+    partial
 #if NETCOREAPP
     // These test cases are from http://csrc.nist.gov/groups/STM/cavp/component-testing.html#test-vectors
     // SP 800-56A ECCCDH Primitive test vectors
     // ecccdhtestvectors.zip
     // KAS_ECC_CDH_PrimitiveTest.txt
-    public partial class ECDiffieHellmanTests
+    public class ECDiffieHellmanTests
     {
         [Fact]
         public static void ValidateNistP256_0()

@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WSFederationHttpSecurityElement : ConfigurationElement
+    partial public sealed class WSFederationHttpSecurityElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

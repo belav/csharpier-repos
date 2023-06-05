@@ -3,7 +3,7 @@
 
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     /// <summary>
     /// 100-nanosecond intervals (ticks) since January 1, 1601 (UTC).

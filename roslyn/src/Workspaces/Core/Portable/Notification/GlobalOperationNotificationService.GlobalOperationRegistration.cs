@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.Notification;
 
-internal partial class GlobalOperationNotificationService
+partial internal class GlobalOperationNotificationService
 {
     private class GlobalOperationRegistration : IDisposable
     {

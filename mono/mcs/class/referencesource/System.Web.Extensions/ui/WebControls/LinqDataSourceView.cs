@@ -28,7 +28,7 @@ namespace System.Web.UI.WebControls
     using DynamicValidatorEventArgs = System.Web.DynamicData.DynamicValidatorEventArgs;
     using DynamicDataSourceOperation = System.Web.DynamicData.DynamicDataSourceOperation;
 
-    public partial class LinqDataSourceView : ContextDataSourceView
+    partial public class LinqDataSourceView : ContextDataSourceView
     {
         private static readonly object EventDeleted = new object();
         private static readonly object EventDeleting = new object();

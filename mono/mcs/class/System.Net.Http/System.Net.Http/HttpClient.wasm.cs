@@ -1,6 +1,6 @@
 namespace System.Net.Http
 {
-    public partial class HttpClient
+    partial public class HttpClient
     {
         static HttpMessageHandler CreateDefaultHandler() =>
             new System.Net.Http.WebAssemblyHttpHandler();

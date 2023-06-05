@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 {
-    internal partial class LibuvConnection : TransportConnection
+    partial internal class LibuvConnection : TransportConnection
     {
         private static readonly int MinAllocBufferSize = PinnedBlockMemoryPool.BlockSize / 2;
 

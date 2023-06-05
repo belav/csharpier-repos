@@ -9,10 +9,11 @@ using Microsoft.Win32;
 
 namespace Microsoft.Extensions.Logging;
 
+partial
 /// <summary>
 /// Helpful extension methods on <see cref="ILogger"/>.
 /// </summary>
-internal static partial class LoggingExtensions
+internal static class LoggingExtensions
 {
     /// <summary>
     /// Returns a value stating whether the 'debug' log level is enabled.
@@ -46,7 +47,7 @@ internal static partial class LoggingExtensions
         "Policy resolution states that a new key should be added to the key ring, but automatic generation of keys is disabled. Using fallback key {KeyId:B} with expiration {ExpirationDate:u} as default key.",
         EventName = "UsingFallbackKeyWithExpirationAsDefaultKey"
     )]
-    public static partial void UsingFallbackKeyWithExpirationAsDefaultKey(
+    partial public static void UsingFallbackKeyWithExpirationAsDefaultKey(
         this ILogger logger,
         Guid keyId,
         DateTimeOffset expirationDate
@@ -58,7 +59,7 @@ internal static partial class LoggingExtensions
         "Using key {KeyId:B} as the default key.",
         EventName = "UsingKeyAsDefaultKey"
     )]
-    public static partial void UsingKeyAsDefaultKey(this ILogger logger, Guid keyId);
+    partial public static void UsingKeyAsDefaultKey(this ILogger logger, Guid keyId);
 
     [LoggerMessage(
         3,
@@ -66,7 +67,7 @@ internal static partial class LoggingExtensions
         "Opening CNG algorithm '{HashAlgorithm}' from provider '{HashAlgorithmProvider}' with HMAC.",
         EventName = "OpeningCNGAlgorithmFromProviderWithHMAC"
     )]
-    public static partial void OpeningCNGAlgorithmFromProviderWithHMAC(
+    partial public static void OpeningCNGAlgorithmFromProviderWithHMAC(
         this ILogger logger,
         string hashAlgorithm,
         string? hashAlgorithmProvider
@@ -78,7 +79,7 @@ internal static partial class LoggingExtensions
         "Opening CNG algorithm '{EncryptionAlgorithm}' from provider '{EncryptionAlgorithmProvider}' with chaining mode CBC.",
         EventName = "OpeningCNGAlgorithmFromProviderWithChainingModeCBC"
     )]
-    public static partial void OpeningCNGAlgorithmFromProviderWithChainingModeCBC(
+    partial public static void OpeningCNGAlgorithmFromProviderWithChainingModeCBC(
         this ILogger logger,
         string encryptionAlgorithm,
         string? encryptionAlgorithmProvider
@@ -90,7 +91,7 @@ internal static partial class LoggingExtensions
         "Performing unprotect operation to key {KeyId:B} with purposes {Purposes}.",
         EventName = "PerformingUnprotectOperationToKeyWithPurposes"
     )]
-    public static partial void PerformingUnprotectOperationToKeyWithPurposes(
+    partial public static void PerformingUnprotectOperationToKeyWithPurposes(
         this ILogger logger,
         Guid keyId,
         string purposes
@@ -102,7 +103,7 @@ internal static partial class LoggingExtensions
         "Key {KeyId:B} was not found in the key ring. Unprotect operation cannot proceed.",
         EventName = "KeyWasNotFoundInTheKeyRingUnprotectOperationCannotProceed"
     )]
-    public static partial void KeyWasNotFoundInTheKeyRingUnprotectOperationCannotProceed(
+    partial public static void KeyWasNotFoundInTheKeyRingUnprotectOperationCannotProceed(
         this ILogger logger,
         Guid keyId
     );
@@ -113,7 +114,7 @@ internal static partial class LoggingExtensions
         "Key {KeyId:B} was revoked. Caller requested unprotect operation proceed regardless.",
         EventName = "KeyWasRevokedCallerRequestedUnprotectOperationProceedRegardless"
     )]
-    public static partial void KeyWasRevokedCallerRequestedUnprotectOperationProceedRegardless(
+    partial public static void KeyWasRevokedCallerRequestedUnprotectOperationProceedRegardless(
         this ILogger logger,
         Guid keyId
     );
@@ -124,7 +125,7 @@ internal static partial class LoggingExtensions
         "Key {KeyId:B} was revoked. Unprotect operation cannot proceed.",
         EventName = "KeyWasRevokedUnprotectOperationCannotProceed"
     )]
-    public static partial void KeyWasRevokedUnprotectOperationCannotProceed(
+    partial public static void KeyWasRevokedUnprotectOperationCannotProceed(
         this ILogger logger,
         Guid keyId
     );
@@ -135,7 +136,7 @@ internal static partial class LoggingExtensions
         "Opening CNG algorithm '{EncryptionAlgorithm}' from provider '{EncryptionAlgorithmProvider}' with chaining mode GCM.",
         EventName = "OpeningCNGAlgorithmFromProviderWithChainingModeGCM"
     )]
-    public static partial void OpeningCNGAlgorithmFromProviderWithChainingModeGCM(
+    partial public static void OpeningCNGAlgorithmFromProviderWithChainingModeGCM(
         this ILogger logger,
         string encryptionAlgorithm,
         string? encryptionAlgorithmProvider
@@ -147,7 +148,7 @@ internal static partial class LoggingExtensions
         "Using managed keyed hash algorithm '{FullName}'.",
         EventName = "UsingManagedKeyedHashAlgorithm"
     )]
-    public static partial void UsingManagedKeyedHashAlgorithm(this ILogger logger, string fullName);
+    partial public static void UsingManagedKeyedHashAlgorithm(this ILogger logger, string fullName);
 
     [LoggerMessage(
         11,
@@ -155,7 +156,7 @@ internal static partial class LoggingExtensions
         "Using managed symmetric algorithm '{FullName}'.",
         EventName = "UsingManagedSymmetricAlgorithm"
     )]
-    public static partial void UsingManagedSymmetricAlgorithm(this ILogger logger, string fullName);
+    partial public static void UsingManagedSymmetricAlgorithm(this ILogger logger, string fullName);
 
     [LoggerMessage(
         12,
@@ -163,7 +164,7 @@ internal static partial class LoggingExtensions
         "Key {KeyId:B} is ineligible to be the default key because its {MethodName} method failed.",
         EventName = "KeyIsIneligibleToBeTheDefaultKeyBecauseItsMethodFailed"
     )]
-    public static partial void KeyIsIneligibleToBeTheDefaultKeyBecauseItsMethodFailed(
+    partial public static void KeyIsIneligibleToBeTheDefaultKeyBecauseItsMethodFailed(
         this ILogger logger,
         Guid keyId,
         string methodName,
@@ -176,7 +177,7 @@ internal static partial class LoggingExtensions
         "Considering key {KeyId:B} with expiration date {ExpirationDate:u} as default key.",
         EventName = "ConsideringKeyWithExpirationDateAsDefaultKey"
     )]
-    public static partial void ConsideringKeyWithExpirationDateAsDefaultKey(
+    partial public static void ConsideringKeyWithExpirationDateAsDefaultKey(
         this ILogger logger,
         Guid keyId,
         DateTimeOffset expirationDate
@@ -188,7 +189,7 @@ internal static partial class LoggingExtensions
         "Key {KeyId:B} is no longer under consideration as default key because it is expired, revoked, or cannot be deciphered.",
         EventName = "KeyIsNoLongerUnderConsiderationAsDefault"
     )]
-    public static partial void KeyIsNoLongerUnderConsiderationAsDefault(
+    partial public static void KeyIsNoLongerUnderConsiderationAsDefault(
         this ILogger logger,
         Guid keyId
     );
@@ -199,7 +200,7 @@ internal static partial class LoggingExtensions
         "Unknown element with name '{Name}' found in keyring, skipping.",
         EventName = "UnknownElementWithNameFoundInKeyringSkipping"
     )]
-    public static partial void UnknownElementWithNameFoundInKeyringSkipping(
+    partial public static void UnknownElementWithNameFoundInKeyringSkipping(
         this ILogger logger,
         XName name
     );
@@ -210,7 +211,7 @@ internal static partial class LoggingExtensions
         "Marked key {KeyId:B} as revoked in the keyring.",
         EventName = "MarkedKeyAsRevokedInTheKeyring"
     )]
-    public static partial void MarkedKeyAsRevokedInTheKeyring(this ILogger logger, Guid keyId);
+    partial public static void MarkedKeyAsRevokedInTheKeyring(this ILogger logger, Guid keyId);
 
     [LoggerMessage(
         17,
@@ -218,13 +219,13 @@ internal static partial class LoggingExtensions
         "Tried to process revocation of key {KeyId:B}, but no such key was found in keyring. Skipping.",
         EventName = "TriedToProcessRevocationOfKeyButNoSuchKeyWasFound"
     )]
-    public static partial void TriedToProcessRevocationOfKeyButNoSuchKeyWasFound(
+    partial public static void TriedToProcessRevocationOfKeyButNoSuchKeyWasFound(
         this ILogger logger,
         Guid keyId
     );
 
     [LoggerMessage(18, LogLevel.Debug, "Found key {KeyId:B}.", EventName = "FoundKey")]
-    public static partial void FoundKey(this ILogger logger, Guid keyId);
+    partial public static void FoundKey(this ILogger logger, Guid keyId);
 
     [LoggerMessage(
         19,
@@ -232,7 +233,7 @@ internal static partial class LoggingExtensions
         "Found revocation of all keys created prior to {RevocationDate:u}.",
         EventName = "FoundRevocationOfAllKeysCreatedPriorTo"
     )]
-    public static partial void FoundRevocationOfAllKeysCreatedPriorTo(
+    partial public static void FoundRevocationOfAllKeysCreatedPriorTo(
         this ILogger logger,
         DateTimeOffset revocationDate
     );
@@ -243,7 +244,7 @@ internal static partial class LoggingExtensions
         "Found revocation of key {KeyId:B}.",
         EventName = "FoundRevocationOfKey"
     )]
-    public static partial void FoundRevocationOfKey(this ILogger logger, Guid keyId);
+    partial public static void FoundRevocationOfKey(this ILogger logger, Guid keyId);
 
     [LoggerMessage(
         21,
@@ -251,7 +252,7 @@ internal static partial class LoggingExtensions
         "An exception occurred while processing the revocation element '{RevocationElement}'. Cannot continue keyring processing.",
         EventName = "ExceptionWhileProcessingRevocationElement"
     )]
-    public static partial void ExceptionWhileProcessingRevocationElement(
+    partial public static void ExceptionWhileProcessingRevocationElement(
         this ILogger logger,
         XElement revocationElement,
         Exception exception
@@ -263,7 +264,7 @@ internal static partial class LoggingExtensions
         "Revoking all keys as of {RevocationDate:u} for reason '{Reason}'.",
         EventName = "RevokingAllKeysAsOfForReason"
     )]
-    public static partial void RevokingAllKeysAsOfForReason(
+    partial public static void RevokingAllKeysAsOfForReason(
         this ILogger logger,
         DateTimeOffset revocationDate,
         string? reason
@@ -275,7 +276,7 @@ internal static partial class LoggingExtensions
         "Key cache expiration token triggered by '{OperationName}' operation.",
         EventName = "KeyCacheExpirationTokenTriggeredByOperation"
     )]
-    public static partial void KeyCacheExpirationTokenTriggeredByOperation(
+    partial public static void KeyCacheExpirationTokenTriggeredByOperation(
         this ILogger logger,
         string operationName
     );
@@ -286,7 +287,7 @@ internal static partial class LoggingExtensions
         "An exception occurred while processing the key element '{Element}'.",
         EventName = "ExceptionOccurredWhileProcessingTheKeyElement"
     )]
-    public static partial void ExceptionWhileProcessingKeyElement(
+    partial public static void ExceptionWhileProcessingKeyElement(
         this ILogger logger,
         XElement element,
         Exception exception
@@ -298,7 +299,7 @@ internal static partial class LoggingExtensions
         "An exception occurred while processing the key element '{Element}'.",
         EventName = "ExceptionOccurredWhileProcessingTheKeyElementDebug"
     )]
-    public static partial void AnExceptionOccurredWhileProcessingElementDebug(
+    partial public static void AnExceptionOccurredWhileProcessingElementDebug(
         this ILogger logger,
         XElement element,
         Exception exception
@@ -310,7 +311,7 @@ internal static partial class LoggingExtensions
         "Encrypting to Windows DPAPI for current user account ({Name}).",
         EventName = "EncryptingToWindowsDPAPIForCurrentUserAccount"
     )]
-    public static partial void EncryptingToWindowsDPAPIForCurrentUserAccount(
+    partial public static void EncryptingToWindowsDPAPIForCurrentUserAccount(
         this ILogger logger,
         string name
     );
@@ -321,7 +322,7 @@ internal static partial class LoggingExtensions
         "An error occurred while encrypting to X.509 certificate with thumbprint '{Thumbprint}'.",
         EventName = "ErrorOccurredWhileEncryptingToX509CertificateWithThumbprint"
     )]
-    public static partial void AnErrorOccurredWhileEncryptingToX509CertificateWithThumbprint(
+    partial public static void AnErrorOccurredWhileEncryptingToX509CertificateWithThumbprint(
         this ILogger logger,
         string thumbprint,
         Exception exception
@@ -333,7 +334,7 @@ internal static partial class LoggingExtensions
         "Encrypting to X.509 certificate with thumbprint '{Thumbprint}'.",
         EventName = "EncryptingToX509CertificateWithThumbprint"
     )]
-    public static partial void EncryptingToX509CertificateWithThumbprint(
+    partial public static void EncryptingToX509CertificateWithThumbprint(
         this ILogger logger,
         string thumbprint
     );
@@ -344,7 +345,7 @@ internal static partial class LoggingExtensions
         "An exception occurred while trying to resolve certificate with thumbprint '{Thumbprint}'.",
         EventName = "ExceptionOccurredWhileTryingToResolveCertificateWithThumbprint"
     )]
-    public static partial void ExceptionWhileTryingToResolveCertificateWithThumbprint(
+    partial public static void ExceptionWhileTryingToResolveCertificateWithThumbprint(
         this ILogger logger,
         string thumbprint,
         Exception exception
@@ -356,7 +357,7 @@ internal static partial class LoggingExtensions
         "Performing protect operation to key {KeyId:B} with purposes {Purposes}.",
         EventName = "PerformingProtectOperationToKeyWithPurposes"
     )]
-    public static partial void PerformingProtectOperationToKeyWithPurposes(
+    partial public static void PerformingProtectOperationToKeyWithPurposes(
         this ILogger logger,
         Guid keyId,
         string purposes
@@ -368,7 +369,7 @@ internal static partial class LoggingExtensions
         "Descriptor deserializer type for key {KeyId:B} is '{AssemblyQualifiedName}'.",
         EventName = "DescriptorDeserializerTypeForKeyIs"
     )]
-    public static partial void DescriptorDeserializerTypeForKeyIs(
+    partial public static void DescriptorDeserializerTypeForKeyIs(
         this ILogger logger,
         Guid keyId,
         string assemblyQualifiedName
@@ -380,7 +381,7 @@ internal static partial class LoggingExtensions
         "Key escrow sink found. Writing key {KeyId:B} to escrow.",
         EventName = "KeyEscrowSinkFoundWritingKeyToEscrow"
     )]
-    public static partial void KeyEscrowSinkFoundWritingKeyToEscrow(
+    partial public static void KeyEscrowSinkFoundWritingKeyToEscrow(
         this ILogger logger,
         Guid keyId
     );
@@ -391,7 +392,7 @@ internal static partial class LoggingExtensions
         "No key escrow sink found. Not writing key {KeyId:B} to escrow.",
         EventName = "NoKeyEscrowSinkFoundNotWritingKeyToEscrow"
     )]
-    public static partial void NoKeyEscrowSinkFoundNotWritingKeyToEscrow(
+    partial public static void NoKeyEscrowSinkFoundNotWritingKeyToEscrow(
         this ILogger logger,
         Guid keyId
     );
@@ -402,7 +403,7 @@ internal static partial class LoggingExtensions
         "No XML encryptor configured. Key {KeyId:B} may be persisted to storage in unencrypted form.",
         EventName = "NoXMLEncryptorConfiguredKeyMayBePersistedToStorageInUnencryptedForm"
     )]
-    public static partial void NoXMLEncryptorConfiguredKeyMayBePersistedToStorageInUnencryptedForm(
+    partial public static void NoXMLEncryptorConfiguredKeyMayBePersistedToStorageInUnencryptedForm(
         this ILogger logger,
         Guid keyId
     );
@@ -413,7 +414,7 @@ internal static partial class LoggingExtensions
         "Revoking key {KeyId:B} at {RevocationDate:u} for reason '{Reason}'.",
         EventName = "RevokingKeyForReason"
     )]
-    public static partial void RevokingKeyForReason(
+    partial public static void RevokingKeyForReason(
         this ILogger logger,
         Guid keyId,
         DateTimeOffset revocationDate,
@@ -426,7 +427,7 @@ internal static partial class LoggingExtensions
         "Reading data from file '{FullPath}'.",
         EventName = "ReadingDataFromFile"
     )]
-    public static partial void ReadingDataFromFile(this ILogger logger, string fullPath);
+    partial public static void ReadingDataFromFile(this ILogger logger, string fullPath);
 
     [LoggerMessage(
         38,
@@ -434,7 +435,7 @@ internal static partial class LoggingExtensions
         "The name '{FriendlyName}' is not a safe file name, using '{NewFriendlyName}' instead.",
         EventName = "NameIsNotSafeFileName"
     )]
-    public static partial void NameIsNotSafeFileName(
+    partial public static void NameIsNotSafeFileName(
         this ILogger logger,
         string friendlyName,
         string newFriendlyName
@@ -446,7 +447,7 @@ internal static partial class LoggingExtensions
         "Writing data to file '{FileName}'.",
         EventName = "WritingDataToFile"
     )]
-    public static partial void WritingDataToFile(this ILogger logger, string fileName);
+    partial public static void WritingDataToFile(this ILogger logger, string fileName);
 
     [LoggerMessage(
         40,
@@ -454,7 +455,7 @@ internal static partial class LoggingExtensions
         "Reading data from registry key '{RegistryKeyName}', value '{Value}'.",
         EventName = "ReadingDataFromRegistryKeyValue"
     )]
-    public static partial void ReadingDataFromRegistryKeyValue(
+    partial public static void ReadingDataFromRegistryKeyValue(
         this ILogger logger,
         RegistryKey registryKeyName,
         string value
@@ -466,7 +467,7 @@ internal static partial class LoggingExtensions
         "The name '{FriendlyName}' is not a safe registry value name, using '{NewFriendlyName}' instead.",
         EventName = "NameIsNotSafeRegistryValueName"
     )]
-    public static partial void NameIsNotSafeRegistryValueName(
+    partial public static void NameIsNotSafeRegistryValueName(
         this ILogger logger,
         string friendlyName,
         string newFriendlyName
@@ -478,7 +479,7 @@ internal static partial class LoggingExtensions
         "Decrypting secret element using Windows DPAPI-NG with protection descriptor rule '{DescriptorRule}'.",
         EventName = "DecryptingSecretElementUsingWindowsDPAPING"
     )]
-    public static partial void DecryptingSecretElementUsingWindowsDPAPING(
+    partial public static void DecryptingSecretElementUsingWindowsDPAPING(
         this ILogger logger,
         string? descriptorRule
     );
@@ -489,7 +490,7 @@ internal static partial class LoggingExtensions
         "Encrypting to Windows DPAPI-NG using protection descriptor rule '{DescriptorRule}'.",
         EventName = "EncryptingToWindowsDPAPINGUsingProtectionDescriptorRule"
     )]
-    public static partial void EncryptingToWindowsDPAPINGUsingProtectionDescriptorRule(
+    partial public static void EncryptingToWindowsDPAPINGUsingProtectionDescriptorRule(
         this ILogger logger,
         string descriptorRule
     );
@@ -500,7 +501,7 @@ internal static partial class LoggingExtensions
         "An exception occurred while trying to decrypt the element.",
         EventName = "ExceptionOccurredTryingToDecryptElement"
     )]
-    public static partial void ExceptionOccurredTryingToDecryptElement(
+    partial public static void ExceptionOccurredTryingToDecryptElement(
         this ILogger logger,
         Exception exception
     );
@@ -511,7 +512,7 @@ internal static partial class LoggingExtensions
         "Encrypting using a null encryptor; secret information isn't being protected.",
         EventName = "EncryptingUsingNullEncryptor"
     )]
-    public static partial void EncryptingUsingNullEncryptor(this ILogger logger);
+    partial public static void EncryptingUsingNullEncryptor(this ILogger logger);
 
     [LoggerMessage(
         45,
@@ -519,7 +520,7 @@ internal static partial class LoggingExtensions
         "Using ephemeral data protection provider. Payloads will be undecipherable upon application shutdown.",
         EventName = "UsingEphemeralDataProtectionProvider"
     )]
-    public static partial void UsingEphemeralDataProtectionProvider(this ILogger logger);
+    partial public static void UsingEphemeralDataProtectionProvider(this ILogger logger);
 
     [LoggerMessage(
         46,
@@ -527,7 +528,7 @@ internal static partial class LoggingExtensions
         "Existing cached key ring is expired. Refreshing.",
         EventName = "ExistingCachedKeyRingIsExpiredRefreshing"
     )]
-    public static partial void ExistingCachedKeyRingIsExpired(this ILogger logger);
+    partial public static void ExistingCachedKeyRingIsExpired(this ILogger logger);
 
     [LoggerMessage(
         47,
@@ -535,7 +536,7 @@ internal static partial class LoggingExtensions
         "An error occurred while refreshing the key ring. Will try again in 2 minutes.",
         EventName = "ErrorOccurredWhileRefreshingKeyRing"
     )]
-    public static partial void ErrorOccurredWhileRefreshingKeyRing(
+    partial public static void ErrorOccurredWhileRefreshingKeyRing(
         this ILogger logger,
         Exception exception
     );
@@ -546,7 +547,7 @@ internal static partial class LoggingExtensions
         "An error occurred while reading the key ring.",
         EventName = "ErrorOccurredWhileReadingKeyRing"
     )]
-    public static partial void ErrorOccurredWhileReadingKeyRing(
+    partial public static void ErrorOccurredWhileReadingKeyRing(
         this ILogger logger,
         Exception exception
     );
@@ -557,7 +558,7 @@ internal static partial class LoggingExtensions
         "The key ring does not contain a valid default key, and the key manager is configured with auto-generation of keys disabled.",
         EventName = "KeyRingDoesNotContainValidDefaultKey"
     )]
-    public static partial void KeyRingDoesNotContainValidDefaultKey(this ILogger logger);
+    partial public static void KeyRingDoesNotContainValidDefaultKey(this ILogger logger);
 
     [LoggerMessage(
         50,
@@ -565,7 +566,7 @@ internal static partial class LoggingExtensions
         "Using an in-memory repository. Keys will not be persisted to storage.",
         EventName = "UsingInMemoryRepository"
     )]
-    public static partial void UsingInmemoryRepository(this ILogger logger);
+    partial public static void UsingInmemoryRepository(this ILogger logger);
 
     [LoggerMessage(
         51,
@@ -573,7 +574,7 @@ internal static partial class LoggingExtensions
         "Decrypting secret element using Windows DPAPI.",
         EventName = "DecryptingSecretElementUsingWindowsDPAPI"
     )]
-    public static partial void DecryptingSecretElementUsingWindowsDPAPI(this ILogger logger);
+    partial public static void DecryptingSecretElementUsingWindowsDPAPI(this ILogger logger);
 
     [LoggerMessage(
         52,
@@ -581,7 +582,7 @@ internal static partial class LoggingExtensions
         "Default key expiration imminent and repository contains no viable successor. Caller should generate a successor.",
         EventName = "DefaultKeyExpirationImminentAndRepository"
     )]
-    public static partial void DefaultKeyExpirationImminentAndRepository(this ILogger logger);
+    partial public static void DefaultKeyExpirationImminentAndRepository(this ILogger logger);
 
     [LoggerMessage(
         53,
@@ -589,7 +590,7 @@ internal static partial class LoggingExtensions
         "Repository contains no viable default key. Caller should generate a key with immediate activation.",
         EventName = "RepositoryContainsNoViableDefaultKey"
     )]
-    public static partial void RepositoryContainsNoViableDefaultKey(this ILogger logger);
+    partial public static void RepositoryContainsNoViableDefaultKey(this ILogger logger);
 
     [LoggerMessage(
         54,
@@ -597,7 +598,7 @@ internal static partial class LoggingExtensions
         "An error occurred while encrypting to Windows DPAPI.",
         EventName = "ErrorOccurredWhileEncryptingToWindowsDPAPI"
     )]
-    public static partial void ErrorOccurredWhileEncryptingToWindowsDPAPI(
+    partial public static void ErrorOccurredWhileEncryptingToWindowsDPAPI(
         this ILogger logger,
         Exception exception
     );
@@ -608,7 +609,7 @@ internal static partial class LoggingExtensions
         "Encrypting to Windows DPAPI for local machine account.",
         EventName = "EncryptingToWindowsDPAPIForLocalMachineAccount"
     )]
-    public static partial void EncryptingToWindowsDPAPIForLocalMachineAccount(this ILogger logger);
+    partial public static void EncryptingToWindowsDPAPIForLocalMachineAccount(this ILogger logger);
 
     [LoggerMessage(
         56,
@@ -616,7 +617,7 @@ internal static partial class LoggingExtensions
         "An error occurred while encrypting to Windows DPAPI-NG.",
         EventName = "ErrorOccurredWhileEncryptingToWindowsDPAPING"
     )]
-    public static partial void ErrorOccurredWhileEncryptingToWindowsDPAPING(
+    partial public static void ErrorOccurredWhileEncryptingToWindowsDPAPING(
         this ILogger logger,
         Exception exception
     );
@@ -627,7 +628,7 @@ internal static partial class LoggingExtensions
         "Policy resolution states that a new key should be added to the key ring.",
         EventName = "PolicyResolutionStatesThatANewKeyShouldBeAddedToTheKeyRing"
     )]
-    public static partial void PolicyResolutionStatesThatANewKeyShouldBeAddedToTheKeyRing(
+    partial public static void PolicyResolutionStatesThatANewKeyShouldBeAddedToTheKeyRing(
         this ILogger logger
     );
 
@@ -637,7 +638,7 @@ internal static partial class LoggingExtensions
         "Creating key {KeyId:B} with creation date {CreationDate:u}, activation date {ActivationDate:u}, and expiration date {ExpirationDate:u}.",
         EventName = "CreatingKey"
     )]
-    public static partial void CreatingKey(
+    partial public static void CreatingKey(
         this ILogger logger,
         Guid keyId,
         DateTimeOffset creationDate,
@@ -651,7 +652,7 @@ internal static partial class LoggingExtensions
         "Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.",
         EventName = "UsingEphemeralKeyRepository"
     )]
-    public static partial void UsingEphemeralKeyRepository(this ILogger logger);
+    partial public static void UsingEphemeralKeyRepository(this ILogger logger);
 
     [LoggerMessage(
         61,
@@ -659,7 +660,7 @@ internal static partial class LoggingExtensions
         "User profile not available. Using '{Name}' as key repository and Windows DPAPI to encrypt keys at rest.",
         EventName = "UsingRegistryAsKeyRepositoryWithDPAPI"
     )]
-    public static partial void UsingRegistryAsKeyRepositoryWithDPAPI(
+    partial public static void UsingRegistryAsKeyRepositoryWithDPAPI(
         this ILogger logger,
         string name
     );
@@ -670,7 +671,7 @@ internal static partial class LoggingExtensions
         "User profile is available. Using '{FullName}' as key repository; keys will not be encrypted at rest.",
         EventName = "UsingProfileAsKeyRepository"
     )]
-    public static partial void UsingProfileAsKeyRepository(this ILogger logger, string fullName);
+    partial public static void UsingProfileAsKeyRepository(this ILogger logger, string fullName);
 
     [LoggerMessage(
         63,
@@ -678,7 +679,7 @@ internal static partial class LoggingExtensions
         "User profile is available. Using '{FullName}' as key repository and Windows DPAPI to encrypt keys at rest.",
         EventName = "UsingProfileAsKeyRepositoryWithDPAPI"
     )]
-    public static partial void UsingProfileAsKeyRepositoryWithDPAPI(
+    partial public static void UsingProfileAsKeyRepositoryWithDPAPI(
         this ILogger logger,
         string fullName
     );
@@ -689,7 +690,7 @@ internal static partial class LoggingExtensions
         "Azure Web Sites environment detected. Using '{FullName}' as key repository; keys will not be encrypted at rest.",
         EventName = "UsingAzureAsKeyRepository"
     )]
-    public static partial void UsingAzureAsKeyRepository(this ILogger logger, string fullName);
+    partial public static void UsingAzureAsKeyRepository(this ILogger logger, string fullName);
 
     [LoggerMessage(
         65,
@@ -697,7 +698,7 @@ internal static partial class LoggingExtensions
         "Key ring with default key {KeyId:B} was loaded during application startup.",
         EventName = "KeyRingWasLoadedOnStartup"
     )]
-    public static partial void KeyRingWasLoadedOnStartup(this ILogger logger, Guid keyId);
+    partial public static void KeyRingWasLoadedOnStartup(this ILogger logger, Guid keyId);
 
     [LoggerMessage(
         66,
@@ -705,7 +706,7 @@ internal static partial class LoggingExtensions
         "Key ring failed to load during application startup.",
         EventName = "KeyRingFailedToLoadOnStartup"
     )]
-    public static partial void KeyRingFailedToLoadOnStartup(
+    partial public static void KeyRingFailedToLoadOnStartup(
         this ILogger logger,
         Exception innerException
     );
@@ -716,7 +717,7 @@ internal static partial class LoggingExtensions
         "Storing keys in a directory '{path}' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.",
         EventName = "UsingEphemeralFileSystemLocationInContainer"
     )]
-    public static partial void UsingEphemeralFileSystemLocationInContainer(
+    partial public static void UsingEphemeralFileSystemLocationInContainer(
         this ILogger logger,
         string path
     );

@@ -12,7 +12,7 @@ namespace System.Security.Cryptography
         LocalMachine = 1,
     }
 
-    public static partial class ProtectedData
+    partial public static class ProtectedData
     {
         public static byte[] Protect(
             byte[] userData,

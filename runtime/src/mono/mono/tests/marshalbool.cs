@@ -105,7 +105,7 @@ public class marshalbool
         return TestDriver.RunTests(typeof(marshalbool), args);
     }
 
-    unsafe public static int test_0_Default_In_Native()
+    public static unsafe int test_0_Default_In_Native()
     {
         int ret;
 
@@ -127,7 +127,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_Bool_In_Native()
+    public static unsafe int test_0_Bool_In_Native()
     {
         int ret;
 
@@ -149,7 +149,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_I1_In_Native()
+    public static unsafe int test_0_I1_In_Native()
     {
         int ret;
 
@@ -171,7 +171,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_U1_In_Native()
+    public static unsafe int test_0_U1_In_Native()
     {
         int ret;
 
@@ -193,7 +193,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_VariantBool_In_Native()
+    public static unsafe int test_0_VariantBool_In_Native()
     {
         int ret;
         int m1 = -1;
@@ -216,7 +216,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_Default_Out_Native()
+    public static unsafe int test_0_Default_Out_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -244,7 +244,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_Bool_Out_Native()
+    public static unsafe int test_0_Bool_Out_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -272,7 +272,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_I1_Out_Native()
+    public static unsafe int test_0_I1_Out_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -300,7 +300,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_U1_Out_Native()
+    public static unsafe int test_0_U1_Out_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -328,7 +328,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_VariantBool_Out_Native()
+    public static unsafe int test_0_VariantBool_Out_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -356,7 +356,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_Default_Ref_Native()
+    public static unsafe int test_0_Default_Ref_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -412,7 +412,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_Bool_Ref_Native()
+    public static unsafe int test_0_Bool_Ref_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -468,7 +468,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_I1_Ref_Native()
+    public static unsafe int test_0_I1_Ref_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -524,7 +524,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_U1_Ref_Native()
+    public static unsafe int test_0_U1_Ref_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -580,7 +580,7 @@ public class marshalbool
         return 0;
     }
 
-    unsafe public static int test_0_VariantBool_Ref_Native()
+    public static unsafe int test_0_VariantBool_Ref_Native()
     {
         bool testVal = false;
         bool* ptestVal = &testVal;
@@ -963,7 +963,7 @@ public class marshalbool
     ///////////////////////////////////////////////////////////////////
 
     [MonoPInvokeCallback(typeof(MarshalBoolInDelegate))]
-    unsafe static int MarshalBoolInHelper(
+    static unsafe int MarshalBoolInHelper(
         int arg,
         uint expected,
         bool bDefaultMarsh,
@@ -1008,7 +1008,7 @@ public class marshalbool
     }
 
     [MonoPInvokeCallback(typeof(MarshalBoolOutDelegate))]
-    unsafe static int MarshalBoolOutHelper(
+    static unsafe int MarshalBoolOutHelper(
         int arg,
         uint testVal,
         out bool bDefaultMarsh,
@@ -1058,7 +1058,7 @@ public class marshalbool
     }
 
     [MonoPInvokeCallback(typeof(MarshalBoolRefDelegate))]
-    unsafe static int MarshalBoolRefHelper(
+    static unsafe int MarshalBoolRefHelper(
         int arg,
         uint expected,
         uint testVal,

@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         // NOTE: The out parameters are PULARGE_INTEGERs and may require
         // some byte munging magic.
@@ -16,7 +16,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetDiskFreeSpaceEx(
+        partial internal static bool GetDiskFreeSpaceEx(
             string drive,
             out long freeBytesForUser,
             out long totalBytes,

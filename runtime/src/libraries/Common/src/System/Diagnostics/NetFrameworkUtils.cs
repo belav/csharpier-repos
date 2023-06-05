@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace System.Diagnostics
 {
-    internal static partial class NetFrameworkUtils
+    partial internal static class NetFrameworkUtils
     {
         internal static void EnterMutex(string name, ref Mutex mutex)
         {

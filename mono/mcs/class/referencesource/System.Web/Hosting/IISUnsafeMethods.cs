@@ -17,13 +17,13 @@ namespace System.Web.Hosting
         System.Security.SuppressUnmanagedCodeSecurityAttribute()
     ]
     // contains only method decls and data, so no instantiation
-    internal unsafe static class UnsafeIISMethods
+    internal static unsafe class UnsafeIISMethods
     {
         const string _IIS_NATIVE_DLL = ModName.MGDENG_FULL_NAME;
-        static internal readonly IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
+        internal static readonly IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
 
         [DllImport(_IIS_NATIVE_DLL)]
-        internal unsafe static extern int MgdGetRequestBasics(
+        internal static extern unsafe int MgdGetRequestBasics(
             IntPtr pRequestContext,
             out int pContentType,
             out int pContentTotalLength,

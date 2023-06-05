@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
+    partial
     /// <remarks>
     /// Calendar support range:
     ///     Calendar    Minimum     Maximum
@@ -12,7 +13,7 @@ namespace System.Globalization
     ///     Gregorian   1900/04/30   2077/05/13
     ///     UmAlQura    1318/01/01   1500/12/30
     /// </remarks>
-    public partial class UmAlQuraCalendar : Calendar
+    public class UmAlQuraCalendar : Calendar
     {
         private const int MinCalendarYear = 1318;
         private const int MaxCalendarYear = 1500;

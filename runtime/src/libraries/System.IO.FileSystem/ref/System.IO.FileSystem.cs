@@ -6,7 +6,7 @@
 
 namespace System.IO
 {
-    public static partial class Directory
+    partial public static class Directory
     {
         public static System.IO.DirectoryInfo CreateDirectory(string path)
         {
@@ -272,7 +272,7 @@ namespace System.IO
         public static void SetLastWriteTimeUtc(string path, System.DateTime lastWriteTimeUtc) { }
     }
 
-    public sealed partial class DirectoryInfo : System.IO.FileSystemInfo
+    partial public sealed class DirectoryInfo : System.IO.FileSystemInfo
     {
         public DirectoryInfo(string path) { }
 
@@ -474,7 +474,7 @@ namespace System.IO
         }
     }
 
-    public partial class EnumerationOptions
+    partial public class EnumerationOptions
     {
         public EnumerationOptions() { }
 
@@ -520,7 +520,7 @@ namespace System.IO
         }
     }
 
-    public static partial class File
+    partial public static class File
     {
         public static void AppendAllLines(
             string path,
@@ -903,7 +903,7 @@ namespace System.IO
         }
     }
 
-    public sealed partial class FileInfo : System.IO.FileSystemInfo
+    partial public sealed class FileInfo : System.IO.FileSystemInfo
     {
         public FileInfo(string fileName) { }
 
@@ -1027,7 +1027,7 @@ namespace System.IO
         }
     }
 
-    public abstract partial class FileSystemInfo
+    partial public abstract class FileSystemInfo
         : System.MarshalByRefObject,
             System.Runtime.Serialization.ISerializable
     {
@@ -1123,7 +1123,7 @@ namespace System.IO
 
 namespace System.IO.Enumeration
 {
-    public ref partial struct FileSystemEntry
+    ref partial public struct FileSystemEntry
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -1188,7 +1188,7 @@ namespace System.IO.Enumeration
         }
     }
 
-    public partial class FileSystemEnumerable<TResult>
+    partial public class FileSystemEnumerable<TResult>
         : System.Collections.Generic.IEnumerable<TResult>,
             System.Collections.IEnumerable
     {
@@ -1223,7 +1223,7 @@ namespace System.IO.Enumeration
         public delegate TResult FindTransform(ref System.IO.Enumeration.FileSystemEntry entry);
     }
 
-    public abstract partial class FileSystemEnumerator<TResult>
+    partial public abstract class FileSystemEnumerator<TResult>
         : System.Runtime.ConstrainedExecution.CriticalFinalizerObject,
             System.Collections.Generic.IEnumerator<TResult>,
             System.Collections.IEnumerator,
@@ -1274,7 +1274,7 @@ namespace System.IO.Enumeration
         protected abstract TResult TransformEntry(ref System.IO.Enumeration.FileSystemEntry entry);
     }
 
-    public static partial class FileSystemName
+    partial public static class FileSystemName
     {
         public static bool MatchesSimpleExpression(
             System.ReadOnlySpan<char> expression,

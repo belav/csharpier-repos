@@ -56,7 +56,7 @@ namespace Mono.Btls
             }
         }
 
-        new internal BoringX509RevokedHandle Handle
+        internal new BoringX509RevokedHandle Handle
         {
             get { return (BoringX509RevokedHandle)base.Handle; }
         }
@@ -65,23 +65,23 @@ namespace Mono.Btls
             : base(handle) { }
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_revoked_get_serial_number(
+        static extern int mono_btls_x509_revoked_get_serial_number(
             IntPtr handle,
             IntPtr data,
             int size
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static long mono_btls_x509_revoked_get_revocation_date(IntPtr handle);
+        static extern long mono_btls_x509_revoked_get_revocation_date(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_revoked_get_reason(IntPtr handle);
+        static extern int mono_btls_x509_revoked_get_reason(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_revoked_get_sequence(IntPtr handle);
+        static extern int mono_btls_x509_revoked_get_sequence(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_x509_revoked_free(IntPtr handle);
+        static extern void mono_btls_x509_revoked_free(IntPtr handle);
 
         public byte[] GetSerialNumber()
         {

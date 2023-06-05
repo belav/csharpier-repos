@@ -3,9 +3,9 @@
 
 namespace System.Security.Cryptography
 {
-    public partial class RSA : AsymmetricAlgorithm
+    partial public class RSA : AsymmetricAlgorithm
     {
-        public static new partial RSA Create()
+        partial public static new RSA Create()
         {
             throw new PlatformNotSupportedException();
         }

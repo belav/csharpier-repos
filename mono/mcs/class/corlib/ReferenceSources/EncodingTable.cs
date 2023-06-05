@@ -14,7 +14,7 @@ namespace System.Globalization
     using System.Threading;
     using System.Diagnostics.Contracts;
 
-    internal static partial class EncodingTable
+    partial internal static class EncodingTable
     {
         static int GetNumEncodingItems()
         {
@@ -1024,6 +1024,7 @@ namespace System.Globalization
         #endregion
     }
 
+    partial
     #region "from referencesource/mscorlib/system/globalization/encodingtable.cs"
     //
     // Data table for encoding classes.  Used by System.Text.Encoding.
@@ -1032,7 +1033,7 @@ namespace System.Globalization
     //
 
     // Only statics, does not need to be marked with the serializable attribute
-    internal static partial class EncodingTable
+    internal static class EncodingTable
     {
         //This number is the size of the table in native.  The value is retrieved by
         //calling the native GetNumEncodingItems().
@@ -1074,7 +1075,7 @@ namespace System.Globalization
         // Find the data item by binary searching the table that we have in native.
         // nativeCompareOrdinalWC is an internal-only function.
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe private static int internalGetCodePageFromName(String name)
+        private static unsafe int internalGetCodePageFromName(String name)
         {
             int left = 0;
             int right = lastEncodingItem;
@@ -1205,7 +1206,7 @@ namespace System.Globalization
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe internal static CodePageDataItem GetCodePageDataItem(int codepage)
+        internal static unsafe CodePageDataItem GetCodePageDataItem(int codepage)
         {
             CodePageDataItem dataItem;
 

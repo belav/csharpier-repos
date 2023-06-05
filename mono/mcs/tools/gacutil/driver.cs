@@ -543,7 +543,9 @@ namespace Mono.Tools
         }
 
         //from MonoDevelop.Core.FileService
-        unsafe static string AbsoluteToRelativePath(string baseDirectoryPath, string absPath)
+        static
+        //from MonoDevelop.Core.FileService
+        unsafe string AbsoluteToRelativePath(string baseDirectoryPath, string absPath)
         {
             if (!Path.IsPathRooted(absPath) || string.IsNullOrEmpty(baseDirectoryPath))
                 return absPath;

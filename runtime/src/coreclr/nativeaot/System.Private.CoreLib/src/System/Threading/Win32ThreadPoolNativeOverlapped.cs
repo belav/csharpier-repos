@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace System.Threading
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct Win32ThreadPoolNativeOverlapped
+    partial internal struct Win32ThreadPoolNativeOverlapped
     {
         // Per-thread cache of the args object, so we don't have to allocate a new one each time.
         [ThreadStatic]

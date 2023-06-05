@@ -18,10 +18,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 {
     using static SQLitePersistentStorageConstants;
 
+    partial
     /// <summary>
     /// Implementation of an <see cref="IPersistentStorage"/> backed by SQLite.
     /// </summary>
-    internal sealed partial class SQLitePersistentStorage : AbstractPersistentStorage
+    internal sealed class SQLitePersistentStorage : AbstractPersistentStorage
     {
         private readonly CancellationTokenSource _shutdownTokenSource = new();
 

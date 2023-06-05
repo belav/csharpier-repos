@@ -24,7 +24,7 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 {
-    internal abstract partial class AbstractInProcLanguageClient
+    partial internal abstract class AbstractInProcLanguageClient
         : ILanguageClient,
             ILanguageServerFactory,
             ICapabilitiesProvider,

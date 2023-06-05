@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.Extensions.Logging.Generators
 {
     [Generator]
-    public partial class LoggerMessageGenerator : IIncrementalGenerator
+    partial public class LoggerMessageGenerator : IIncrementalGenerator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {

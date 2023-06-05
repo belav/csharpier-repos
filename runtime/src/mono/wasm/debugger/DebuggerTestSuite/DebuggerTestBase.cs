@@ -71,7 +71,7 @@ namespace DebuggerTests
             }
         }
 
-        static protected string FindTestPath()
+        protected static string FindTestPath()
         {
             string test_app_path = EnvironmentVariables.DebuggerTestPath;
 

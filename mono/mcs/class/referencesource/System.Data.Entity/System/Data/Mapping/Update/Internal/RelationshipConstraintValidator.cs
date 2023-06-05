@@ -18,7 +18,7 @@ namespace System.Data.Mapping.Update.Internal
     using System.Globalization;
     using System.Linq;
 
-    internal partial class UpdateTranslator
+    partial internal class UpdateTranslator
     {
         /// <summary>
         /// Class validating relationship cardinality constraints. Only reasons about constraints that can be inferred

@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 {
-    internal readonly partial struct SyntaxList<TNode> : IEquatable<SyntaxList<TNode>>
+    partial internal readonly struct SyntaxList<TNode> : IEquatable<SyntaxList<TNode>>
         where TNode : GreenNode
     {
         private readonly GreenNode? _node;

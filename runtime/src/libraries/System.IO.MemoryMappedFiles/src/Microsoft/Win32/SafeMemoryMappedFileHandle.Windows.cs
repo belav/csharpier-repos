@@ -3,7 +3,7 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeMemoryMappedFileHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeMemoryMappedFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         protected override bool ReleaseHandle()
         {

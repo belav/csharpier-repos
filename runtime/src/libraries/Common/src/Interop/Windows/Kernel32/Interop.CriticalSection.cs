@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct CRITICAL_SECTION
@@ -20,22 +20,22 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial void InitializeCriticalSection(
+        partial internal static unsafe void InitializeCriticalSection(
             CRITICAL_SECTION* lpCriticalSection
         );
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial void EnterCriticalSection(
+        partial internal static unsafe void EnterCriticalSection(
             CRITICAL_SECTION* lpCriticalSection
         );
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial void LeaveCriticalSection(
+        partial internal static unsafe void LeaveCriticalSection(
             CRITICAL_SECTION* lpCriticalSection
         );
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial void DeleteCriticalSection(
+        partial internal static unsafe void DeleteCriticalSection(
             CRITICAL_SECTION* lpCriticalSection
         );
     }

@@ -7,9 +7,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECDiffieHellmanImplementation
+    partial internal static class ECDiffieHellmanImplementation
     {
-        public sealed partial class ECDiffieHellmanAndroid : ECDiffieHellman
+        partial public sealed class ECDiffieHellmanAndroid : ECDiffieHellman
         {
             /// <summary>
             /// Given a second party's public key, derive shared key material

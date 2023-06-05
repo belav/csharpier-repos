@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal struct LingerOption
         {
@@ -16,18 +16,18 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetLingerOption")]
-        internal static unsafe partial Error GetLingerOption(
+        partial internal static unsafe Error GetLingerOption(
             SafeHandle socket,
             LingerOption* option
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetLingerOption")]
-        internal static unsafe partial Error SetLingerOption(
+        partial internal static unsafe Error SetLingerOption(
             SafeHandle socket,
             LingerOption* option
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetLingerOption")]
-        internal static unsafe partial Error SetLingerOption(IntPtr socket, LingerOption* option);
+        partial internal static unsafe Error SetLingerOption(IntPtr socket, LingerOption* option);
     }
 }

@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 {
-    internal abstract partial class AbstractGenerateEqualsAndGetHashCodeService
+    partial internal abstract class AbstractGenerateEqualsAndGetHashCodeService
         : IGenerateEqualsAndGetHashCodeService
     {
         private const string GetHashCodeName = nameof(object.GetHashCode);

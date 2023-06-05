@@ -5,11 +5,11 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         [LibraryImport(Libraries.BCrypt)]
-        internal static partial NTSTATUS BCryptDestroyKey(IntPtr hKey);
+        partial internal static NTSTATUS BCryptDestroyKey(IntPtr hKey);
     }
 }

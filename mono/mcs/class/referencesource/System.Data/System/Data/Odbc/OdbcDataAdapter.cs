@@ -27,8 +27,8 @@ namespace System.Data.Odbc
     ]
     public sealed class OdbcDataAdapter : DbDataAdapter, IDbDataAdapter, ICloneable
     {
-        static private readonly object EventRowUpdated = new object();
-        static private readonly object EventRowUpdating = new object();
+        private static readonly object EventRowUpdated = new object();
+        private static readonly object EventRowUpdating = new object();
 
         private OdbcCommand _deleteCommand,
             _insertCommand,
@@ -76,7 +76,7 @@ namespace System.Data.Odbc
                 "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
             ),
         ]
-        new public OdbcCommand DeleteCommand
+        public new OdbcCommand DeleteCommand
         {
             get { return _deleteCommand; }
             set { _deleteCommand = value; }
@@ -98,7 +98,7 @@ namespace System.Data.Odbc
                 "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
             ),
         ]
-        new public OdbcCommand InsertCommand
+        public new OdbcCommand InsertCommand
         {
             get { return _insertCommand; }
             set { _insertCommand = value; }
@@ -120,7 +120,7 @@ namespace System.Data.Odbc
                 "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
             ),
         ]
-        new public OdbcCommand SelectCommand
+        public new OdbcCommand SelectCommand
         {
             get { return _selectCommand; }
             set { _selectCommand = value; }
@@ -142,7 +142,7 @@ namespace System.Data.Odbc
                 "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
             ),
         ]
-        new public OdbcCommand UpdateCommand
+        public new OdbcCommand UpdateCommand
         {
             get { return _updateCommand; }
             set { _updateCommand = value; }
@@ -197,7 +197,7 @@ namespace System.Data.Odbc
             return new OdbcDataAdapter(this);
         }
 
-        override protected RowUpdatedEventArgs CreateRowUpdatedEvent(
+        protected override RowUpdatedEventArgs CreateRowUpdatedEvent(
             DataRow dataRow,
             IDbCommand command,
             StatementType statementType,
@@ -207,7 +207,7 @@ namespace System.Data.Odbc
             return new OdbcRowUpdatedEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-        override protected RowUpdatingEventArgs CreateRowUpdatingEvent(
+        protected override RowUpdatingEventArgs CreateRowUpdatingEvent(
             DataRow dataRow,
             IDbCommand command,
             StatementType statementType,
@@ -217,7 +217,7 @@ namespace System.Data.Odbc
             return new OdbcRowUpdatingEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-        override protected void OnRowUpdated(RowUpdatedEventArgs value)
+        protected override void OnRowUpdated(RowUpdatedEventArgs value)
         {
             OdbcRowUpdatedEventHandler handler = (OdbcRowUpdatedEventHandler)
                 Events[EventRowUpdated];
@@ -228,7 +228,7 @@ namespace System.Data.Odbc
             base.OnRowUpdated(value);
         }
 
-        override protected void OnRowUpdating(RowUpdatingEventArgs value)
+        protected override void OnRowUpdating(RowUpdatingEventArgs value)
         {
             OdbcRowUpdatingEventHandler handler = (OdbcRowUpdatingEventHandler)
                 Events[EventRowUpdating];

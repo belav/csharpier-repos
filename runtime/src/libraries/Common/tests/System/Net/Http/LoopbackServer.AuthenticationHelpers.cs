@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Test.Common
 {
-    public sealed partial class LoopbackServer
+    partial public sealed class LoopbackServer
     {
         internal enum AuthenticationProtocols
         {

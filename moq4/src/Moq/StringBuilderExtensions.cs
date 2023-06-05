@@ -12,7 +12,7 @@ using TypeNameFormatter;
 
 namespace Moq
 {
-    internal static partial class StringBuilderExtensions
+    partial internal static class StringBuilderExtensions
     {
         public static StringBuilder Append(
             this StringBuilder stringBuilder,

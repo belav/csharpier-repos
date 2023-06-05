@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.ComponentModel.Composition.Factories
 {
-    internal static partial class ErrorFactory
+    partial internal static class ErrorFactory
     {
         public static CompositionError Create(ICompositionElement element)
         {

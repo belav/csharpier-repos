@@ -89,7 +89,12 @@ namespace System.Data.Linq.SqlClient
             /// This method returns 'true' when the expression doesn't reference any parameters
             /// from outside the scope of the expression.
             /// </summary>
-            static public bool IsIndependent(Expression expression)
+            public
+            /// <summary>
+            /// This method returns 'true' when the expression doesn't reference any parameters
+            /// from outside the scope of the expression.
+            /// </summary>
+            static bool IsIndependent(Expression expression)
             {
                 var v = new DependenceChecker();
                 v.Visit(expression);

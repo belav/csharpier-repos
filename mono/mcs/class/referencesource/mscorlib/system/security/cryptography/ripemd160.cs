@@ -30,7 +30,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public RIPEMD160 Create()
+        public static
+        //
+        // public methods
+        //
+
+        new RIPEMD160 Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.RIPEMD160Managed();
@@ -39,7 +44,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public RIPEMD160 Create(String hashName)
+        public static new RIPEMD160 Create(String hashName)
         {
             return (RIPEMD160)CryptoConfig.CreateFromName(hashName);
         }

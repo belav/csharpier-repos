@@ -9,5 +9,5 @@ throw new InvalidOperationException("This application failed to start");
 
 namespace SimpleWebSiteWithWebApplicationBuilderException
 {
-    public partial class Program { }
+    partial public class Program { }
 }

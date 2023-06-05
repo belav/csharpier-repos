@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Xunit;
 
-public partial class ThreadPoolBoundHandleTests
+partial public class ThreadPoolBoundHandleTests
 {
     [Fact]
     [ActiveIssue("https://github.com/mono/mono/issues/15313", TestRuntimes.Mono)]

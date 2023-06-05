@@ -38,7 +38,7 @@ namespace System.IO
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static String NormalizePath(String path)
+        internal static unsafe String NormalizePath(String path)
         {
             Contract.Requires(path != null);
             return NormalizePath(path, true);
@@ -47,7 +47,7 @@ namespace System.IO
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static String NormalizePath(String path, bool fullCheck)
+        internal static unsafe String NormalizePath(String path, bool fullCheck)
         {
             Contract.Requires(path != null);
             return Path.NormalizePath(path, fullCheck, Path.MaxLongPath);
@@ -538,7 +538,7 @@ namespace System.IO
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private unsafe static void InternalCreateDirectory(
+        private static unsafe void InternalCreateDirectory(
             String fullPath,
             String path,
             Object dirSecurityObj

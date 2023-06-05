@@ -8,7 +8,7 @@ using LibraryNameVariation = System.Runtime.Loader.LibraryNameVariation;
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class NativeLibrary
+    partial public static class NativeLibrary
     {
         internal static IntPtr LoadLibraryByName(
             string libraryName,

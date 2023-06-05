@@ -14,7 +14,7 @@ namespace System.Security
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class XmlSyntaxException : SystemException
+    public sealed class XmlSyntaxException : SystemException
     {
         public XmlSyntaxException()
             : base(Environment.GetResourceString("XMLSyntax_InvalidSyntax"))

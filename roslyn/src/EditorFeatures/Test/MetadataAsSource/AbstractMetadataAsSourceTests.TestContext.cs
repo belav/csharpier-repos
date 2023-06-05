@@ -23,7 +23,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 {
-    public abstract partial class AbstractMetadataAsSourceTests
+    partial public abstract class AbstractMetadataAsSourceTests
     {
         public const string DefaultMetadataSource = "public class C {}";
         public const string DefaultSymbolMetadataName = "C";

@@ -54,23 +54,23 @@ namespace System.Runtime.CompilerServices
     // Indicates that the modified instance is pinned in memory.
     public static class IsPinned { }
 
-    public static partial class IsBoxed { }
+    partial public static class IsBoxed { }
 
-    public static partial class IsByValue { }
+    partial public static class IsByValue { }
 
-    public static partial class IsCopyConstructed { }
+    partial public static class IsCopyConstructed { }
 
-    public static partial class IsExplicitlyDereferenced { }
+    partial public static class IsExplicitlyDereferenced { }
 
-    public static partial class IsImplicitlyDereferenced { }
+    partial public static class IsImplicitlyDereferenced { }
 
-    public static partial class IsJitIntrinsic { }
+    partial public static class IsJitIntrinsic { }
 
-    public static partial class IsLong { }
+    partial public static class IsLong { }
 
-    public static partial class IsSignUnspecifiedByte { }
+    partial public static class IsSignUnspecifiedByte { }
 
-    public static partial class IsUdtReturn { }
+    partial public static class IsUdtReturn { }
 
     [AttributeUsage(AttributeTargets.Struct)]
     public sealed class HasCopySemanticsAttribute : Attribute

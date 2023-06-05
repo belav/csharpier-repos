@@ -18,7 +18,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInitializeParameter)]
-    public partial class InitializeMemberFromParameterTests : AbstractCSharpCodeActionTest
+    partial public class InitializeMemberFromParameterTests : AbstractCSharpCodeActionTest
     {
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,

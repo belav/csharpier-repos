@@ -4,16 +4,16 @@
 using System.Runtime.InteropServices;
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_CheckX509Hostname",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial int CheckX509Hostname(
+        partial internal static int CheckX509Hostname(
             IntPtr x509,
             string hostname,
             int cchHostname

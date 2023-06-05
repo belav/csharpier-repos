@@ -122,7 +122,7 @@ namespace System.Threading
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class Thread
+    partial public sealed class Thread
     {
 #pragma warning disable 414
         #region Sync with metadata/object-internals.h
@@ -165,10 +165,10 @@ namespace System.Threading
          * the argument is returned, otherwise a copy.
          */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static byte[] ByteArrayToRootDomain(byte[] arr);
+        private static extern byte[] ByteArrayToRootDomain(byte[] arr);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static byte[] ByteArrayToCurrentDomain(byte[] arr);
+        private static extern byte[] ByteArrayToCurrentDomain(byte[] arr);
 
 #if !DISABLE_REMOTING
         public static Context CurrentContext
@@ -346,7 +346,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void GetCurrentThread_icall(ref Thread thread);
+        private static extern void GetCurrentThread_icall(ref Thread thread);
 
         private static Thread GetCurrentThread()
         {
@@ -374,7 +374,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int GetDomainID();
+        public static extern int GetDomainID();
 
         // Returns the system thread handle
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -460,10 +460,10 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static string GetName_internal(InternalThread thread);
+        private static extern string GetName_internal(InternalThread thread);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern void SetName_icall(
+        private static extern unsafe void SetName_icall(
             InternalThread thread,
             char* name,
             int nameLength
@@ -493,7 +493,7 @@ namespace System.Threading
 
 #if MONO_FEATURE_THREAD_ABORT
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void Abort_internal(InternalThread thread, object stateInfo);
+        private static extern void Abort_internal(InternalThread thread, object stateInfo);
 
         public void Abort()
         {
@@ -551,7 +551,7 @@ namespace System.Threading
 #endif // MONO_FEATURE_THREAD_ABORT
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void SpinWait_nop();
+        private static extern void SpinWait_nop();
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         public static void SpinWait(int iterations)
@@ -578,104 +578,104 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private static void SetState(InternalThread thread, ThreadState set);
+        private static extern void SetState(InternalThread thread, ThreadState set);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private static void ClrState(InternalThread thread, ThreadState clr);
+        private static extern void ClrState(InternalThread thread, ThreadState clr);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private static ThreadState GetState(InternalThread thread);
+        private static extern ThreadState GetState(InternalThread thread);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static byte VolatileRead(ref byte address);
+        public static extern byte VolatileRead(ref byte address);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static double VolatileRead(ref double address);
+        public static extern double VolatileRead(ref double address);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static short VolatileRead(ref short address);
+        public static extern short VolatileRead(ref short address);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static int VolatileRead(ref int address);
+        public static extern int VolatileRead(ref int address);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static long VolatileRead(ref long address);
+        public static extern long VolatileRead(ref long address);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static IntPtr VolatileRead(ref IntPtr address);
+        public static extern IntPtr VolatileRead(ref IntPtr address);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static object VolatileRead(ref object address);
-
-        [CLSCompliant(false)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static sbyte VolatileRead(ref sbyte address);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static float VolatileRead(ref float address);
+        public static extern object VolatileRead(ref object address);
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static ushort VolatileRead(ref ushort address);
+        public static extern sbyte VolatileRead(ref sbyte address);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern float VolatileRead(ref float address);
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static uint VolatileRead(ref uint address);
+        public static extern ushort VolatileRead(ref ushort address);
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static ulong VolatileRead(ref ulong address);
+        public static extern uint VolatileRead(ref uint address);
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static UIntPtr VolatileRead(ref UIntPtr address);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref byte address, byte value);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref double address, double value);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref short address, short value);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref int address, int value);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref long address, long value);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref IntPtr address, IntPtr value);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref object address, object value);
+        public static extern ulong VolatileRead(ref ulong address);
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref sbyte address, sbyte value);
+        public static extern UIntPtr VolatileRead(ref UIntPtr address);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref float address, float value);
+        public static extern void VolatileWrite(ref byte address, byte value);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void VolatileWrite(ref double address, double value);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void VolatileWrite(ref short address, short value);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void VolatileWrite(ref int address, int value);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void VolatileWrite(ref long address, long value);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void VolatileWrite(ref IntPtr address, IntPtr value);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void VolatileWrite(ref object address, object value);
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref ushort address, ushort value);
+        public static extern void VolatileWrite(ref sbyte address, sbyte value);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void VolatileWrite(ref float address, float value);
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref uint address, uint value);
+        public static extern void VolatileWrite(ref ushort address, ushort value);
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref ulong address, ulong value);
+        public static extern void VolatileWrite(ref uint address, uint value);
 
         [CLSCompliant(false)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static void VolatileWrite(ref UIntPtr address, UIntPtr value);
+        public static extern void VolatileWrite(ref ulong address, ulong value);
+
+        [CLSCompliant(false)]
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void VolatileWrite(ref UIntPtr address, UIntPtr value);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static int SystemMaxStackStize();
+        static extern int SystemMaxStackStize();
 
         static int GetProcessDefaultStackSize(int maxStackSize)
         {

@@ -11,7 +11,7 @@ using System.Security.Principal;
 
 namespace System.Net
 {
-    internal static partial class CertificateValidationPal
+    partial internal static class CertificateValidationPal
     {
         internal static SslPolicyErrors VerifyCertificateProperties(
             SafeDeleteContext? _ /*securityContext*/

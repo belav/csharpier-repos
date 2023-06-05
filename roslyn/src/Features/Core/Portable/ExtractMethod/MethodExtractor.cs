@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract partial class MethodExtractor
+    partial internal abstract class MethodExtractor
     {
         protected readonly SelectionResult OriginalSelectionResult;
         protected readonly ExtractMethodGenerationOptions Options;

@@ -12,7 +12,7 @@ using Xunit;
 
 namespace IntelHardwareIntrinsicTest.General
 {
-    public partial class Program
+    partial public class Program
     {
         internal class VectorArg128
         {
@@ -87,7 +87,7 @@ namespace IntelHardwareIntrinsicTest.General
         }
 
         [Fact]
-        public unsafe static void VectorArgs()
+        public static unsafe void VectorArgs()
         {
             int returnVal = Pass;
 

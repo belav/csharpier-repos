@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    internal sealed partial class RuntimeType
+    partial internal sealed class RuntimeType
     {
         /// <summary>
         /// A cache which allows optimizing <see cref="Activator.CreateInstance"/>,

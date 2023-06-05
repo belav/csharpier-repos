@@ -7,7 +7,7 @@ using Xunit;
 
 namespace TypeSystemTests
 {
-    public partial class GCPointerMapTests
+    partial public class GCPointerMapTests
     {
         TestTypeSystemContext _context;
         ModuleDesc _testModule;

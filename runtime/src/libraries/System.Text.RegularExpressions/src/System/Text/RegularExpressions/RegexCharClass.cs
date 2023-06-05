@@ -10,6 +10,7 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions
 {
+    partial
     // The main function of RegexCharClass is as a builder to turn ranges, characters and
     // Unicode categories into a single string.  This string is used as a black box
     // representation of a character class by the rest of Regex.  The format is as follows.
@@ -29,7 +30,7 @@ namespace System.Text.RegularExpressions
     //              have the same positive/negative orientation.
 
     /// <summary>Provides the "set of Unicode chars" functionality used by the regexp engine.</summary>
-    internal sealed partial class RegexCharClass
+    internal sealed class RegexCharClass
     {
         // Constants
         internal const int FlagsIndex = 0;

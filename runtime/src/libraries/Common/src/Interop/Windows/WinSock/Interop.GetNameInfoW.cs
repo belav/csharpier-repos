@@ -5,9 +5,9 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [Flags]
         internal enum NameInfoFlags
@@ -24,7 +24,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial SocketError GetNameInfoW(
+        partial internal static unsafe SocketError GetNameInfoW(
             byte* pSockaddr,
             int SockaddrLength,
             char* pNodeBuffer,

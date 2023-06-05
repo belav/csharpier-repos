@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.Text;
     using System.Xml;
 
-    sealed partial class UnrecognizedPolicyAssertionElement : BindingElementExtensionElement
+    partial sealed class UnrecognizedPolicyAssertionElement : BindingElementExtensionElement
     {
         XmlQualifiedName wsdlBinding;
         ICollection<XmlElement> bindingAsserions;

@@ -15,7 +15,7 @@ using Unsafe = System.Runtime.CompilerServices.Unsafe;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal abstract partial class RuntimeTypeInfo
+    partial internal abstract class RuntimeTypeInfo
     {
         //================================================================================================================
         // TypeComponentsCache objects are allocated on-demand on a per-Type basis to cache hot data for key scenarios.

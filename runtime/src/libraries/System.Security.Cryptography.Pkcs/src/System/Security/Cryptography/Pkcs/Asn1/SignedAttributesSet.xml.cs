@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct SignedAttributesSet
+    partial internal struct SignedAttributesSet
     {
         internal System.Security.Cryptography.Asn1.AttributeAsn[]? SignedAttributes;
 

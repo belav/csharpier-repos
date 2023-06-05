@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-internal sealed partial class KestrelTrace : ILogger
+partial internal sealed class KestrelTrace : ILogger
 {
     public void Http3ConnectionError(string connectionId, Http3ConnectionErrorException ex)
     {
@@ -90,7 +90,7 @@ internal sealed partial class KestrelTrace : ILogger
         Http3Log.Http3GoAwayStreamId(_http3Logger, connectionId, goAwayStreamId);
     }
 
-    private static partial class Http3Log
+    partial private static class Http3Log
     {
         [LoggerMessage(
             42,
@@ -98,7 +98,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"": HTTP/3 connection error.",
             EventName = "Http3ConnectionError"
         )]
-        public static partial void Http3ConnectionError(
+        partial public static void Http3ConnectionError(
             ILogger logger,
             string connectionId,
             Http3ConnectionErrorException ex
@@ -110,7 +110,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"" is closing.",
             EventName = "Http3ConnectionClosing"
         )]
-        public static partial void Http3ConnectionClosing(ILogger logger, string connectionId);
+        partial public static void Http3ConnectionClosing(ILogger logger, string connectionId);
 
         [LoggerMessage(
             44,
@@ -118,7 +118,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"" is closed. The last processed stream ID was {HighestOpenedStreamId}.",
             EventName = "Http3ConnectionClosed"
         )]
-        public static partial void Http3ConnectionClosed(
+        partial public static void Http3ConnectionClosed(
             ILogger logger,
             string connectionId,
             long? highestOpenedStreamId
@@ -131,7 +131,7 @@ internal sealed partial class KestrelTrace : ILogger
             EventName = "Http3StreamAbort",
             SkipEnabledCheck = true
         )]
-        public static partial void Http3StreamAbort(
+        partial public static void Http3StreamAbort(
             ILogger logger,
             string traceIdentifier,
             string error,
@@ -145,7 +145,7 @@ internal sealed partial class KestrelTrace : ILogger
             EventName = "Http3FrameReceived",
             SkipEnabledCheck = true
         )]
-        public static partial void Http3FrameReceived(
+        partial public static void Http3FrameReceived(
             ILogger logger,
             string connectionId,
             string type,
@@ -160,7 +160,7 @@ internal sealed partial class KestrelTrace : ILogger
             EventName = "Http3FrameSending",
             SkipEnabledCheck = true
         )]
-        public static partial void Http3FrameSending(
+        partial public static void Http3FrameSending(
             ILogger logger,
             string connectionId,
             string type,
@@ -174,7 +174,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"": Unexpected error when initializing outbound control stream.",
             EventName = "Http3OutboundControlStreamError"
         )]
-        public static partial void Http3OutboundControlStreamError(
+        partial public static void Http3OutboundControlStreamError(
             ILogger logger,
             string connectionId,
             Exception ex
@@ -186,7 +186,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"": QPACK decoding error while decoding headers for stream ID {StreamId}.",
             EventName = "QPackDecodingError"
         )]
-        public static partial void QPackDecodingError(
+        partial public static void QPackDecodingError(
             ILogger logger,
             string connectionId,
             long streamId,
@@ -199,7 +199,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"": QPACK encoding error while encoding headers for stream ID {StreamId}.",
             EventName = "QPackEncodingError"
         )]
-        public static partial void QPackEncodingError(
+        partial public static void QPackEncodingError(
             ILogger logger,
             string connectionId,
             long streamId,
@@ -212,7 +212,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"": GOAWAY stream ID {GoAwayStreamId}.",
             EventName = "Http3GoAwayHighestOpenedStreamId"
         )]
-        public static partial void Http3GoAwayStreamId(
+        partial public static void Http3GoAwayStreamId(
             ILogger logger,
             string connectionId,
             long goAwayStreamId

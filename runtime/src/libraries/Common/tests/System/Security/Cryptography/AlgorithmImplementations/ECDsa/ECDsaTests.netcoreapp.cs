@@ -348,7 +348,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
         }
     }
 
-    public abstract partial class ECDsaTests : ECDsaTestsBase
+    partial public abstract class ECDsaTests : ECDsaTestsBase
     {
         [Fact]
         public void KeySizeProp()

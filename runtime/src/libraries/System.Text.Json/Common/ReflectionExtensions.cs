@@ -10,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.Json.Reflection
 {
-    internal static partial class ReflectionExtensions
+    partial internal static class ReflectionExtensions
     {
         // Immutable collection types.
         private const string ImmutableArrayGenericTypeName =

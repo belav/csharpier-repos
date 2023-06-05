@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(
         1,
@@ -14,7 +14,7 @@ internal static partial class LoggingExtensions
         "Authorization was successful.",
         EventName = "UserAuthorizationSucceeded"
     )]
-    public static partial void UserAuthorizationSucceeded(this ILogger logger);
+    partial public static void UserAuthorizationSucceeded(this ILogger logger);
 
     [LoggerMessage(
         2,
@@ -22,7 +22,7 @@ internal static partial class LoggingExtensions
         "Authorization failed. {Reason}",
         EventName = "UserAuthorizationFailed"
     )]
-    private static partial void UserAuthorizationFailed(this ILogger logger, string reason);
+    partial private static void UserAuthorizationFailed(this ILogger logger, string reason);
 
     public static void UserAuthorizationFailed(this ILogger logger, AuthorizationFailure failure)
     {

@@ -27,8 +27,9 @@ using Xunit;
     typeof(PlatformDetection),
     nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
 )]
+partial
 #endif
-public static partial class XmlSerializerTests
+public static class XmlSerializerTests
 {
 #if ReflectionOnly || XMLSERIALIZERGENERATORTESTS
     private static readonly string SerializationModeSetterName = "set_Mode";

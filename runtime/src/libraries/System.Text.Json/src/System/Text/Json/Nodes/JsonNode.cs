@@ -5,12 +5,13 @@ using System.Collections.Generic;
 
 namespace System.Text.Json.Nodes
 {
+    partial
     /// <summary>
     ///   The base class that represents a single node within a mutable JSON document.
     /// </summary>
     /// <seealso cref="JsonSerializerOptions.UnknownTypeHandling"/> to specify that a type
     /// declared as an <see cref="object"/> should be deserialized as a <see cref="JsonNode"/>.
-    public abstract partial class JsonNode
+    public abstract class JsonNode
     {
         private JsonNode? _parent;
         private JsonNodeOptions? _options;

@@ -1,9 +1,10 @@
+partial
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class HttpApi
+    partial internal static class HttpApi
     {
         public const uint ERROR_SUCCESS = 0;
         public const uint ERROR_HANDLE_EOF = 38;

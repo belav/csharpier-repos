@@ -8,11 +8,11 @@ using Internal.Win32.SafeHandles;
 #endif
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(Libraries.Advapi32)]
-        internal static partial int RegFlushKey(SafeRegistryHandle hKey);
+        partial internal static int RegFlushKey(SafeRegistryHandle hKey);
     }
 }

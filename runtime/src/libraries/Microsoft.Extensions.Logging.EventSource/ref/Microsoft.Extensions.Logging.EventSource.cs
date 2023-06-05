@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Logging
 {
-    public static partial class EventSourceLoggerFactoryExtensions
+    partial public static class EventSourceLoggerFactoryExtensions
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddEventSourceLogger(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder
@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Logging
 namespace Microsoft.Extensions.Logging.EventSource
 {
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("EventSource")]
-    public partial class EventSourceLoggerProvider
+    partial public class EventSourceLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
             System.IDisposable
     {
@@ -37,7 +37,7 @@ namespace Microsoft.Extensions.Logging.EventSource
     }
 
     [System.Diagnostics.Tracing.EventSourceAttribute(Name = "Microsoft-Extensions-Logging")]
-    public sealed partial class LoggingEventSource : System.Diagnostics.Tracing.EventSource
+    partial public sealed class LoggingEventSource : System.Diagnostics.Tracing.EventSource
     {
         internal LoggingEventSource() { }
 
@@ -45,7 +45,7 @@ namespace Microsoft.Extensions.Logging.EventSource
             System.Diagnostics.Tracing.EventCommandEventArgs command
         ) { }
 
-        public static partial class Keywords
+        partial public static class Keywords
         {
             public const System.Diagnostics.Tracing.EventKeywords FormattedMessage =
                 (System.Diagnostics.Tracing.EventKeywords)(4);

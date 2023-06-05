@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ISolutionExtensions
+    partial internal static class ISolutionExtensions
     {
         public static async Task<ImmutableArray<INamespaceSymbol>> GetGlobalNamespacesAsync(
             this Solution solution,

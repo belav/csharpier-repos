@@ -35,7 +35,7 @@ namespace System
         FormatSerialization = FormatNamespace | FormatGenericParam | FormatFullInst
     }
 
-    internal partial class RuntimeType
+    partial internal class RuntimeType
     {
         #region Definitions
 

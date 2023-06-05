@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal partial class UrlGroup
+partial internal class UrlGroup
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.CloseUrlGroupError,
@@ -15,7 +15,7 @@ internal partial class UrlGroup
             "HttpCloseUrlGroup; Result: {StatusCode}",
             EventName = "CloseUrlGroupError"
         )]
-        public static partial void CloseUrlGroupError(ILogger logger, uint statusCode);
+        partial public static void CloseUrlGroupError(ILogger logger, uint statusCode);
 
         [LoggerMessage(
             LoggerEventIds.RegisteringPrefix,
@@ -23,7 +23,7 @@ internal partial class UrlGroup
             "Listening on prefix: {UriPrefix}",
             EventName = "RegisteringPrefix"
         )]
-        public static partial void RegisteringPrefix(ILogger logger, string uriPrefix);
+        partial public static void RegisteringPrefix(ILogger logger, string uriPrefix);
 
         [LoggerMessage(
             LoggerEventIds.SetUrlPropertyError,
@@ -31,7 +31,7 @@ internal partial class UrlGroup
             "SetUrlGroupProperty",
             EventName = "SetUrlPropertyError"
         )]
-        public static partial void SetUrlPropertyError(ILogger logger, Exception exception);
+        partial public static void SetUrlPropertyError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.UnregisteringPrefix,
@@ -39,6 +39,6 @@ internal partial class UrlGroup
             "Stop listening on prefix: {UriPrefix}",
             EventName = "UnregisteringPrefix"
         )]
-        public static partial void UnregisteringPrefix(ILogger logger, string uriPrefix);
+        partial public static void UnregisteringPrefix(ILogger logger, string uriPrefix);
     }
 }

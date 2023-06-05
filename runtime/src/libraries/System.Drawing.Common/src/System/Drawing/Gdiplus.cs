@@ -9,10 +9,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {
-    internal static partial class SafeNativeMethods
+    partial internal static class SafeNativeMethods
     {
+        partial
         // We make this a nested class so that we don't have to initialize GDI+ to access SafeNativeMethods (mostly gdi/user32).
-        internal static partial class Gdip
+        internal static class Gdip
         {
             private static readonly IntPtr s_initToken;
 

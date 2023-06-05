@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Collections.Generic;
     using System.Globalization;
 
-    public sealed partial class MessageLoggingElement : ConfigurationElement
+    partial public sealed class MessageLoggingElement : ConfigurationElement
     {
         // These three constructors are used by the configuration system.
         public MessageLoggingElement()

@@ -17,7 +17,7 @@ namespace System.ServiceModel.Activation
         List<BaseUriWithWildcard> listenAddresses;
         string scheme;
 
-        internal protected HostedTransportConfigurationBase(string scheme)
+        protected internal HostedTransportConfigurationBase(string scheme)
         {
             this.scheme = scheme;
             this.listenAddresses = new List<BaseUriWithWildcard>();
@@ -28,7 +28,7 @@ namespace System.ServiceModel.Activation
             get { return scheme; }
         }
 
-        internal protected IList<BaseUriWithWildcard> ListenAddresses
+        protected internal IList<BaseUriWithWildcard> ListenAddresses
         {
             get { return listenAddresses; }
         }

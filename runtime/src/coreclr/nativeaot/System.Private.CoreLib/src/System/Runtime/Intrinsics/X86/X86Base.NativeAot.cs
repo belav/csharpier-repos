@@ -3,7 +3,7 @@
 
 namespace System.Runtime.Intrinsics.X86
 {
-    public abstract partial class X86Base
+    partial public abstract class X86Base
     {
         private static unsafe void __cpuidex(int* cpuInfo, int functionId, int subFunctionId) =>
             RuntimeImports.RhCpuIdEx(cpuInfo, functionId, subFunctionId);

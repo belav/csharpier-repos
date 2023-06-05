@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests
 {
-    public partial class SettingsUpdaterTests
+    partial public class SettingsUpdaterTests
     {
         private class TestAnalyzerConfigOptions : AnalyzerConfigOptions
         {

@@ -21,7 +21,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
 {
-    public abstract partial class AbstractMoveToNamespaceTests : AbstractCodeActionTest
+    partial public abstract class AbstractMoveToNamespaceTests : AbstractCodeActionTest
     {
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,

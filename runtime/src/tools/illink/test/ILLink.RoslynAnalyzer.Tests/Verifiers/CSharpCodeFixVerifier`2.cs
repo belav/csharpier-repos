@@ -13,13 +13,14 @@ using Microsoft.CodeAnalysis.Testing.Verifiers;
 
 namespace ILLink.RoslynAnalyzer.Tests
 {
+    partial
     /// <summary>
     /// A default verifier for diagnostic analyzers with code fixes.
     /// </summary>
     /// <typeparam name="TAnalyzer">The <see cref="DiagnosticAnalyzer"/> to test.</typeparam>
     /// <typeparam name="TCodeFix">The <see cref="CodeFixProvider"/> to test.</typeparam>
     /// <typeparam name="TTest">The test implementation to use.</typeparam>
-    public partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
+    public class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
         where TAnalyzer : DiagnosticAnalyzer, new()
         where TCodeFix : Microsoft.CodeAnalysis.CodeFixes.CodeFixProvider, new()
     {

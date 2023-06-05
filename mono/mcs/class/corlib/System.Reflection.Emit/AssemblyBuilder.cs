@@ -271,7 +271,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class AssemblyBuilder : Assembly
+    partial public sealed class AssemblyBuilder : Assembly
     {
         //
         // AssemblyBuilder inherits from Assembly, but the runtime thinks its layout inherits from RuntimeAssembly

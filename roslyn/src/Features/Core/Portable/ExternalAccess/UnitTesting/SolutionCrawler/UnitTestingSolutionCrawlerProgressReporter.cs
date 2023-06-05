@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 {
-    internal partial class UnitTestingSolutionCrawlerRegistrationService
+    partial internal class UnitTestingSolutionCrawlerRegistrationService
         : IUnitTestingSolutionCrawlerRegistrationService
     {
         /// <summary>

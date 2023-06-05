@@ -43,7 +43,7 @@ namespace System.ServiceModel.Channels
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport("Crypt32.dll", CallingConvention = CallingConvention.StdCall)]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertFreeCertificateContext(IntPtr pCertContext);
+        static extern bool CertFreeCertificateContext(IntPtr pCertContext);
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport(
@@ -52,7 +52,7 @@ namespace System.ServiceModel.Channels
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertDeleteCertificateFromStore(IntPtr pCertContext);
+        static extern bool CertDeleteCertificateFromStore(IntPtr pCertContext);
 
         #endregion
         protected bool delete = false;
@@ -245,7 +245,7 @@ namespace System.ServiceModel.Channels
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertStrToName(
+        static extern bool CertStrToName(
             CertEncodingType dwCertEncodingType,
             [MarshalAs(UnmanagedType.LPTStr)] string pszX500,
             StringType dwStrType,
@@ -337,7 +337,7 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    sealed partial class SelfSignedCertificate : IDisposable
+    partial sealed class SelfSignedCertificate : IDisposable
     {
         #region PInvoke declarations
         [DllImport(
@@ -346,7 +346,7 @@ namespace System.ServiceModel.Channels
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        extern static CertificateHandle CertCreateSelfSignCertificate(
+        static extern CertificateHandle CertCreateSelfSignCertificate(
             KeyContainerHandle hProv,
             CryptoApiBlob.InteropHelper pSubjectIssuerBlob,
             SelfSignFlags dwFlags,
@@ -363,7 +363,7 @@ namespace System.ServiceModel.Channels
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        extern static CertificateStoreHandle CertOpenStore(
+        static extern CertificateStoreHandle CertOpenStore(
             IntPtr lpszStoreProvider,
             int dwMsgAndCertEncodingType,
             IntPtr hCryptProv,
@@ -377,7 +377,7 @@ namespace System.ServiceModel.Channels
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertAddCertificateContextToStore(
+        static extern bool CertAddCertificateContextToStore(
             CertificateStoreHandle hCertStore,
             CertificateHandle pCertContext,
             AddDisposition dwAddDisposition,
@@ -390,7 +390,7 @@ namespace System.ServiceModel.Channels
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CryptAcquireContext(
+        static extern bool CryptAcquireContext(
             [Out] out KeyContainerHandle phProv,
             string pszContainer,
             string pszProvider,
@@ -404,7 +404,7 @@ namespace System.ServiceModel.Channels
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CryptGenKey(
+        static extern bool CryptGenKey(
             KeyContainerHandle hProv,
             AlgorithmType algId,
             KeyFlags dwFlags,
@@ -418,7 +418,7 @@ namespace System.ServiceModel.Channels
             CharSet = CharSet.Unicode
         )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool PFXExportCertStoreEx(
+        static extern bool PFXExportCertStoreEx(
             CertificateStoreHandle hStore,
             IntPtr pPFX,
             //IntPtr szPassword,
@@ -433,7 +433,7 @@ namespace System.ServiceModel.Channels
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertSetCertificateContextProperty(
+        static extern bool CertSetCertificateContextProperty(
             CertificateHandle context,
             int propId,
             int flags,

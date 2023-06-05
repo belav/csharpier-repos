@@ -51,7 +51,7 @@ using Mono.Interop;
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class Marshal
+    partial public static class Marshal
     {
         /* fields */
         public static readonly int SystemMaxDBCSCharSize = 2; // don't know what this is
@@ -59,7 +59,7 @@ namespace System.Runtime.InteropServices
 
 #if !MOBILE || WINAOT
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static int AddRefInternal(IntPtr pUnk);
+        private static extern int AddRefInternal(IntPtr pUnk);
 #endif
 
         public static int AddRef(IntPtr pUnk)
@@ -85,14 +85,14 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static IntPtr AllocCoTaskMem(int cb);
+        public static extern IntPtr AllocCoTaskMem(int cb);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static IntPtr AllocCoTaskMemSize(UIntPtr sizet);
+        internal static extern IntPtr AllocCoTaskMemSize(UIntPtr sizet);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.MayFail)]
-        public extern static IntPtr AllocHGlobal(IntPtr cb);
+        public static extern IntPtr AllocHGlobal(IntPtr cb);
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static IntPtr AllocHGlobal(int cb)
@@ -110,7 +110,7 @@ namespace System.Runtime.InteropServices
             throw new NotImplementedException();
         }
 
-        unsafe internal static void copy_to_unmanaged(
+        internal static unsafe void copy_to_unmanaged(
             Array source,
             int startIndex,
             IntPtr destination,
@@ -121,7 +121,7 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe private extern static void copy_to_unmanaged_fixed(
+        private static extern unsafe void copy_to_unmanaged_fixed(
             Array source,
             int startIndex,
             IntPtr destination,
@@ -129,13 +129,13 @@ namespace System.Runtime.InteropServices
             void* fixed_source_element
         );
 
-        static private bool skip_fixed(System.Array array, int startIndex)
+        private static bool skip_fixed(System.Array array, int startIndex)
         {
             // In particular, we see length == 0 && startIndex == array.Length, and fixed fails.
             return startIndex < 0 || startIndex >= array.Length;
         }
 
-        unsafe internal static void copy_to_unmanaged(
+        internal static unsafe void copy_to_unmanaged(
             byte[] source,
             int startIndex,
             IntPtr destination,
@@ -150,7 +150,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        unsafe internal static void copy_to_unmanaged(
+        internal static unsafe void copy_to_unmanaged(
             char[] source,
             int startIndex,
             IntPtr destination,
@@ -165,7 +165,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             byte[] source,
             int startIndex,
             IntPtr destination,
@@ -179,7 +179,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             char[] source,
             int startIndex,
             IntPtr destination,
@@ -193,7 +193,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             short[] source,
             int startIndex,
             IntPtr destination,
@@ -207,7 +207,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        public unsafe static void Copy(int[] source, int startIndex, IntPtr destination, int length)
+        public static unsafe void Copy(int[] source, int startIndex, IntPtr destination, int length)
         {
             if (skip_fixed(source, startIndex))
                 copy_to_unmanaged(source, startIndex, destination, length);
@@ -216,7 +216,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             long[] source,
             int startIndex,
             IntPtr destination,
@@ -230,7 +230,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             float[] source,
             int startIndex,
             IntPtr destination,
@@ -244,7 +244,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             double[] source,
             int startIndex,
             IntPtr destination,
@@ -258,7 +258,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             IntPtr[] source,
             int startIndex,
             IntPtr destination,
@@ -272,7 +272,7 @@ namespace System.Runtime.InteropServices
                     copy_to_unmanaged_fixed(source, startIndex, destination, length, fixed_source);
         }
 
-        unsafe internal static void copy_from_unmanaged(
+        internal static unsafe void copy_from_unmanaged(
             IntPtr source,
             int startIndex,
             Array destination,
@@ -283,7 +283,7 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe private extern static void copy_from_unmanaged_fixed(
+        private static extern unsafe void copy_from_unmanaged_fixed(
             IntPtr source,
             int startIndex,
             Array destination,
@@ -291,7 +291,7 @@ namespace System.Runtime.InteropServices
             void* fixed_destination_element
         );
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             IntPtr source,
             byte[] destination,
             int startIndex,
@@ -311,7 +311,7 @@ namespace System.Runtime.InteropServices
                     );
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             IntPtr source,
             char[] destination,
             int startIndex,
@@ -331,7 +331,7 @@ namespace System.Runtime.InteropServices
                     );
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             IntPtr source,
             short[] destination,
             int startIndex,
@@ -351,7 +351,7 @@ namespace System.Runtime.InteropServices
                     );
         }
 
-        public unsafe static void Copy(IntPtr source, int[] destination, int startIndex, int length)
+        public static unsafe void Copy(IntPtr source, int[] destination, int startIndex, int length)
         {
             if (skip_fixed(destination, startIndex))
                 copy_from_unmanaged(source, startIndex, destination, length);
@@ -366,7 +366,7 @@ namespace System.Runtime.InteropServices
                     );
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             IntPtr source,
             long[] destination,
             int startIndex,
@@ -386,7 +386,7 @@ namespace System.Runtime.InteropServices
                     );
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             IntPtr source,
             float[] destination,
             int startIndex,
@@ -406,7 +406,7 @@ namespace System.Runtime.InteropServices
                     );
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             IntPtr source,
             double[] destination,
             int startIndex,
@@ -426,7 +426,7 @@ namespace System.Runtime.InteropServices
                     );
         }
 
-        public unsafe static void Copy(
+        public static unsafe void Copy(
             IntPtr source,
             IntPtr[] destination,
             int startIndex,
@@ -485,7 +485,7 @@ namespace System.Runtime.InteropServices
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ComVisible(true)]
-        public extern static void DestroyStructure(IntPtr ptr, Type structuretype);
+        public static extern void DestroyStructure(IntPtr ptr, Type structuretype);
 
         public static void DestroyStructure<T>(IntPtr ptr)
         {
@@ -493,14 +493,14 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static void FreeBSTR(IntPtr ptr);
+        public static extern void FreeBSTR(IntPtr ptr);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static void FreeCoTaskMem(IntPtr ptr);
+        public static extern void FreeCoTaskMem(IntPtr ptr);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
-        public extern static void FreeHGlobal(IntPtr hglobal);
+        public static extern void FreeHGlobal(IntPtr hglobal);
 
         static void ClearBSTR(IntPtr ptr)
         {
@@ -594,7 +594,7 @@ namespace System.Runtime.InteropServices
 
 #if !MOBILE
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static IntPtr GetCCW(object o, Type T);
+        private static extern IntPtr GetCCW(object o, Type T);
 
         private static IntPtr GetComInterfaceForObjectInternal(object o, Type T)
         {
@@ -647,7 +647,7 @@ namespace System.Runtime.InteropServices
 
 #if !MOBILE
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static int GetComSlotForMethodInfoInternal(MemberInfo m);
+        private static extern int GetComSlotForMethodInfoInternal(MemberInfo m);
 #endif
 
         public static int GetComSlotForMethodInfo(MemberInfo m)
@@ -738,7 +738,7 @@ namespace System.Runtime.InteropServices
 
 #if !FULL_AOT_RUNTIME && !MONOTOUCH
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static IntPtr GetIDispatchForObjectInternal(object o);
+        private static extern IntPtr GetIDispatchForObjectInternal(object o);
 
         public static IntPtr GetIDispatchForObject(object o)
         {
@@ -783,7 +783,7 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static IntPtr GetIUnknownForObjectInternal(object o);
+        private static extern IntPtr GetIUnknownForObjectInternal(object o);
 #endif // !FULL_AOT_RUNTIME
 
         public static IntPtr GetIUnknownForObject(object o)
@@ -1025,7 +1025,7 @@ namespace System.Runtime.InteropServices
 
 #if !MOBILE
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static bool IsComObject(object o);
+        public static extern bool IsComObject(object o);
 #else
         public static bool IsComObject(object o)
         {
@@ -1038,7 +1038,7 @@ namespace System.Runtime.InteropServices
         public static extern int GetLastWin32Error();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static IntPtr OffsetOf(Type t, string fieldName);
+        public static extern IntPtr OffsetOf(Type t, string fieldName);
 
         public static IntPtr OffsetOf<T>(string fieldName)
         {
@@ -1046,16 +1046,16 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static void Prelink(MethodInfo m);
+        public static extern void Prelink(MethodInfo m);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static void PrelinkAll(Type c);
+        public static extern void PrelinkAll(Type c);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static string PtrToStringAnsi(IntPtr ptr);
+        public static extern string PtrToStringAnsi(IntPtr ptr);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static string PtrToStringAnsi(IntPtr ptr, int len);
+        public static extern string PtrToStringAnsi(IntPtr ptr, int len);
 
         public static string PtrToStringUTF8(IntPtr ptr)
         {
@@ -1080,21 +1080,21 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static string PtrToStringUni(IntPtr ptr);
+        public static extern string PtrToStringUni(IntPtr ptr);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static string PtrToStringUni(IntPtr ptr, int len);
+        public static extern string PtrToStringUni(IntPtr ptr, int len);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static string PtrToStringBSTR(IntPtr ptr);
-
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        [ComVisible(true)]
-        public extern static void PtrToStructure(IntPtr ptr, object structure);
+        public static extern string PtrToStringBSTR(IntPtr ptr);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ComVisible(true)]
-        public extern static object PtrToStructure(IntPtr ptr, Type structureType);
+        public static extern void PtrToStructure(IntPtr ptr, object structure);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        [ComVisible(true)]
+        public static extern object PtrToStructure(IntPtr ptr, Type structureType);
 
         public static void PtrToStructure<T>(IntPtr ptr, T structure)
         {
@@ -1108,7 +1108,7 @@ namespace System.Runtime.InteropServices
 
 #if !MOBILE || WINAOT
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static int QueryInterfaceInternal(IntPtr pUnk, ref Guid iid, out IntPtr ppv);
+        private static extern int QueryInterfaceInternal(IntPtr pUnk, ref Guid iid, out IntPtr ppv);
 #endif
 
         public static int QueryInterface(IntPtr pUnk, ref Guid iid, out IntPtr ppv)
@@ -1144,7 +1144,7 @@ namespace System.Runtime.InteropServices
             throw new NotImplementedException();
         }
 
-        public unsafe static short ReadInt16(IntPtr ptr)
+        public static unsafe short ReadInt16(IntPtr ptr)
         {
             byte* addr = (byte*)ptr;
 
@@ -1159,7 +1159,7 @@ namespace System.Runtime.InteropServices
             return s;
         }
 
-        public unsafe static short ReadInt16(IntPtr ptr, int ofs)
+        public static unsafe short ReadInt16(IntPtr ptr, int ofs)
         {
             byte* addr = ((byte*)ptr) + ofs;
 
@@ -1178,7 +1178,7 @@ namespace System.Runtime.InteropServices
         }
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
-        public unsafe static int ReadInt32(IntPtr ptr)
+        public static unsafe int ReadInt32(IntPtr ptr)
         {
             byte* addr = (byte*)ptr;
 
@@ -1191,7 +1191,7 @@ namespace System.Runtime.InteropServices
         }
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
-        public unsafe static int ReadInt32(IntPtr ptr, int ofs)
+        public static unsafe int ReadInt32(IntPtr ptr, int ofs)
         {
             byte* addr = ((byte*)ptr) + ofs;
 
@@ -1213,7 +1213,7 @@ namespace System.Runtime.InteropServices
         }
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
-        public unsafe static long ReadInt64(IntPtr ptr)
+        public static unsafe long ReadInt64(IntPtr ptr)
         {
             byte* addr = (byte*)ptr;
 
@@ -1227,7 +1227,7 @@ namespace System.Runtime.InteropServices
             return s;
         }
 
-        public unsafe static long ReadInt64(IntPtr ptr, int ofs)
+        public static unsafe long ReadInt64(IntPtr ptr, int ofs)
         {
             byte* addr = ((byte*)ptr) + ofs;
 
@@ -1271,15 +1271,15 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static IntPtr ReAllocCoTaskMem(IntPtr pv, int cb);
+        public static extern IntPtr ReAllocCoTaskMem(IntPtr pv, int cb);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static IntPtr ReAllocHGlobal(IntPtr pv, IntPtr cb);
+        public static extern IntPtr ReAllocHGlobal(IntPtr pv, IntPtr cb);
 
 #if !MOBILE || WINAOT
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static int ReleaseInternal(IntPtr pUnk);
+        private static extern int ReleaseInternal(IntPtr pUnk);
 #endif
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -1297,7 +1297,7 @@ namespace System.Runtime.InteropServices
 
 #if !FULL_AOT_RUNTIME
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static int ReleaseComObjectInternal(object co);
+        private static extern int ReleaseComObjectInternal(object co);
 #endif
 
         public static int ReleaseComObject(object o)
@@ -1335,7 +1335,7 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int SizeOf(Type t);
+        public static extern int SizeOf(Type t);
 
         public static int SizeOf<T>()
         {
@@ -1363,7 +1363,7 @@ namespace System.Runtime.InteropServices
             return (size + 3) & (~((uint)3));
         }
 
-        public unsafe static IntPtr StringToBSTR(string s)
+        public static unsafe IntPtr StringToBSTR(string s)
         {
             if (s == null)
                 return IntPtr.Zero;
@@ -1395,15 +1395,15 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe extern static IntPtr StringToHGlobalAnsi(char* s, int length);
+        static extern unsafe IntPtr StringToHGlobalAnsi(char* s, int length);
 
-        public unsafe static IntPtr StringToHGlobalAnsi(string s)
+        public static unsafe IntPtr StringToHGlobalAnsi(string s)
         {
             fixed (char* fixed_s = s)
                 return StringToHGlobalAnsi(fixed_s, (s != null) ? s.Length : 0);
         }
 
-        unsafe public static IntPtr StringToAllocatedMemoryUTF8(String s)
+        public static unsafe IntPtr StringToAllocatedMemoryUTF8(String s)
         {
             const int MAX_UTF8_CHAR_SIZE = 3;
             if (s == null)
@@ -1436,15 +1436,15 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe extern static IntPtr StringToHGlobalUni(char* s, int length);
+        static extern unsafe IntPtr StringToHGlobalUni(char* s, int length);
 
-        public unsafe static IntPtr StringToHGlobalUni(string s)
+        public static unsafe IntPtr StringToHGlobalUni(string s)
         {
             fixed (char* fixed_s = s)
                 return StringToHGlobalUni(fixed_s, (s != null) ? s.Length : 0);
         }
 
-        public unsafe static IntPtr SecureStringToBSTR(SecureString s)
+        public static unsafe IntPtr SecureStringToBSTR(SecureString s)
         {
             if (s == null)
                 throw new ArgumentNullException("s");
@@ -1570,7 +1570,7 @@ namespace System.Runtime.InteropServices
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ComVisible(true)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static void StructureToPtr(object structure, IntPtr ptr, bool fDeleteOld);
+        public static extern void StructureToPtr(object structure, IntPtr ptr, bool fDeleteOld);
 
         public static void StructureToPtr<T>(T structure, IntPtr ptr, bool fDeleteOld)
         {
@@ -1592,10 +1592,10 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern unsafe static IntPtr BufferToBSTR(char* ptr, int slen);
+        static extern unsafe IntPtr BufferToBSTR(char* ptr, int slen);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static IntPtr UnsafeAddrOfPinnedArrayElement(Array arr, int index);
+        public static extern IntPtr UnsafeAddrOfPinnedArrayElement(Array arr, int index);
 
         public static IntPtr UnsafeAddrOfPinnedArrayElement<T>(T[] arr, int index)
         {
@@ -1687,7 +1687,7 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        public unsafe static void WriteInt32(IntPtr ptr, int ofs, int val)
+        public static unsafe void WriteInt32(IntPtr ptr, int ofs, int val)
         {
             byte* addr = ((byte*)ptr) + ofs;
 

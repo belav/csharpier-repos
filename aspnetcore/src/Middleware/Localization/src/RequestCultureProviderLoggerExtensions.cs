@@ -6,7 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Localization;
 
-internal static partial class RequestCultureProviderLoggerExtensions
+partial internal static class RequestCultureProviderLoggerExtensions
 {
     [LoggerMessage(
         1,
@@ -14,7 +14,7 @@ internal static partial class RequestCultureProviderLoggerExtensions
         "{requestCultureProvider} returned the following unsupported cultures '{cultures}'.",
         EventName = "UnsupportedCulture"
     )]
-    public static partial void UnsupportedCultures(
+    partial public static void UnsupportedCultures(
         this ILogger logger,
         string requestCultureProvider,
         IList<StringSegment> cultures
@@ -26,7 +26,7 @@ internal static partial class RequestCultureProviderLoggerExtensions
         "{requestCultureProvider} returned the following unsupported UI Cultures '{uiCultures}'.",
         EventName = "UnsupportedUICulture"
     )]
-    public static partial void UnsupportedUICultures(
+    partial public static void UnsupportedUICultures(
         this ILogger logger,
         string requestCultureProvider,
         IList<StringSegment> uiCultures

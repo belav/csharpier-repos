@@ -7,11 +7,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
-internal sealed partial class ServerSentEventsTransport
+partial internal sealed class ServerSentEventsTransport
 {
+    partial
     // EventIds 100 - 106 used in SendUtils
 
-    private static partial class Log
+    private static class Log
     {
         [LoggerMessage(
             1,
@@ -19,13 +20,13 @@ internal sealed partial class ServerSentEventsTransport
             "Starting transport. Transfer mode: {TransferFormat}.",
             EventName = "StartTransport"
         )]
-        public static partial void StartTransport(ILogger logger, TransferFormat transferFormat);
+        partial public static void StartTransport(ILogger logger, TransferFormat transferFormat);
 
         [LoggerMessage(2, LogLevel.Debug, "Transport stopped.", EventName = "TransportStopped")]
-        public static partial void TransportStopped(ILogger logger, Exception? exception);
+        partial public static void TransportStopped(ILogger logger, Exception? exception);
 
         [LoggerMessage(3, LogLevel.Debug, "Starting receive loop.", EventName = "StartReceive")]
-        public static partial void StartReceive(ILogger logger);
+        partial public static void StartReceive(ILogger logger);
 
         [LoggerMessage(
             6,
@@ -33,7 +34,7 @@ internal sealed partial class ServerSentEventsTransport
             "Transport is stopping.",
             EventName = "TransportStopping"
         )]
-        public static partial void TransportStopping(ILogger logger);
+        partial public static void TransportStopping(ILogger logger);
 
         [LoggerMessage(
             7,
@@ -41,13 +42,13 @@ internal sealed partial class ServerSentEventsTransport
             "Passing message to application. Payload size: {Count}.",
             EventName = "MessageToApplication"
         )]
-        public static partial void MessageToApplication(ILogger logger, int count);
+        partial public static void MessageToApplication(ILogger logger, int count);
 
         [LoggerMessage(5, LogLevel.Debug, "Receive loop canceled.", EventName = "ReceiveCanceled")]
-        public static partial void ReceiveCanceled(ILogger logger);
+        partial public static void ReceiveCanceled(ILogger logger);
 
         [LoggerMessage(4, LogLevel.Debug, "Receive loop stopped.", EventName = "ReceiveStopped")]
-        public static partial void ReceiveStopped(ILogger logger);
+        partial public static void ReceiveStopped(ILogger logger);
 
         [LoggerMessage(
             8,
@@ -55,7 +56,7 @@ internal sealed partial class ServerSentEventsTransport
             "Server-Sent Event Stream ended.",
             EventName = "EventStreamEnded"
         )]
-        public static partial void EventStreamEnded(ILogger logger);
+        partial public static void EventStreamEnded(ILogger logger);
 
         [LoggerMessage(
             9,
@@ -63,6 +64,6 @@ internal sealed partial class ServerSentEventsTransport
             "Received {Count} bytes. Parsing SSE frame.",
             EventName = "ParsingSSE"
         )]
-        public static partial void ParsingSSE(ILogger logger, long count);
+        partial public static void ParsingSSE(ILogger logger, long count);
     }
 }

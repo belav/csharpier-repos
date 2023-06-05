@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 namespace System.Security.Policy
 {
-    public sealed partial class HashMembershipCondition
+    partial public sealed class HashMembershipCondition
         : IDeserializationCallback,
             ISerializable,
             ISecurityEncodable,

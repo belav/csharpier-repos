@@ -513,7 +513,7 @@ namespace System.Web.ClientServices.Providers
             return _KnownTypesArray;
         }
 
-        static private void InitKnownTypes()
+        private static void InitKnownTypes()
         {
             _KnownTypesHashtable = new Hashtable();
             _KnownTypesArray = new Type[]
@@ -530,7 +530,7 @@ namespace System.Web.ClientServices.Providers
                 _KnownTypesHashtable.Add(_KnownTypesArray[iter], string.Empty);
         }
 
-        static private void StoreKnownTypes(SettingsPropertyValueCollection propertyValueCollection)
+        private static void StoreKnownTypes(SettingsPropertyValueCollection propertyValueCollection)
         {
             if (_KnownTypesHashtable == null)
                 InitKnownTypes();
@@ -556,7 +556,7 @@ namespace System.Web.ClientServices.Providers
             }
         }
 
-        static private void StoreKnownTypes(SettingsPropertyCollection propertyCollection)
+        private static void StoreKnownTypes(SettingsPropertyCollection propertyCollection)
         {
             if (_KnownTypesHashtable == null)
                 InitKnownTypes();

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public partial class TarFile_ExtractToDirectory_File_Tests : TarTestsBase
+    partial public class TarFile_ExtractToDirectory_File_Tests : TarTestsBase
     {
         [Fact]
         public void Extract_SpecialFiles_Windows_ThrowsInvalidOperation()

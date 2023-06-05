@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Description;
 
-    public abstract partial class EndpointCollectionElement
+    partial public abstract class EndpointCollectionElement
         : ConfigurationElement,
             IConfigurationContextProviderInternal
     {

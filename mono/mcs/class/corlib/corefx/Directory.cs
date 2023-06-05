@@ -3,7 +3,7 @@ using System.Security.AccessControl;
 
 namespace System.IO
 {
-    public partial class Directory
+    partial public class Directory
     {
         public static DirectoryInfo CreateDirectory(
             string path,

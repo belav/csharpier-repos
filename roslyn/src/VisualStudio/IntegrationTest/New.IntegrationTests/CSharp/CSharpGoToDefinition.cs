@@ -16,7 +16,7 @@ using Xunit;
 namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 {
     [Trait(Traits.Feature, Traits.Features.GoToDefinition)]
-    public partial class CSharpGoToDefinition : AbstractEditorTest
+    partial public class CSharpGoToDefinition : AbstractEditorTest
     {
         protected override string LanguageName => LanguageNames.CSharp;
 

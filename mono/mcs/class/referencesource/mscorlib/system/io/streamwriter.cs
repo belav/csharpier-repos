@@ -54,7 +54,7 @@ namespace System.IO
 #endif
 
         // Bit bucket - Null has no backing store. Non closable.
-        public new static readonly StreamWriter Null = new StreamWriter(
+        public static new readonly StreamWriter Null = new StreamWriter(
             Stream.Null,
             new UTF8Encoding(false, true),
             MinBufferSize,

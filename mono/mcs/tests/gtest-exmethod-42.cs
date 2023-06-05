@@ -3,7 +3,7 @@ partial class C
     public static void Foo(this int t) { }
 }
 
-static partial class C
+partial static class C
 {
     public static void Foo() { }
 }

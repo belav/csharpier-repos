@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-internal partial class DatabaseUpdateCommand : ContextCommandBase
+partial internal class DatabaseUpdateCommand : ContextCommandBase
 {
     private CommandArgument? _migration;
     private CommandOption? _connection;

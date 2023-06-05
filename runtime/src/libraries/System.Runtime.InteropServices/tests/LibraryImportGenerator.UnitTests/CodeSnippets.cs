@@ -6,7 +6,7 @@ using Microsoft.Interop.UnitTests;
 
 namespace LibraryImportGenerator.UnitTests
 {
-    internal partial class CodeSnippets : ICustomMarshallingSignatureTestProvider
+    partial internal class CodeSnippets : ICustomMarshallingSignatureTestProvider
     {
         /// <summary>
         /// Partially define attribute for pre-.NET 7.0

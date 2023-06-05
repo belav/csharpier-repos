@@ -7,7 +7,7 @@ using Xunit;
 namespace System.Security.Cryptography.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public partial class ECDiffieHellmanTests
+    partial public class ECDiffieHellmanTests
     {
         [Fact]
         public static void ECCurve_ctor()

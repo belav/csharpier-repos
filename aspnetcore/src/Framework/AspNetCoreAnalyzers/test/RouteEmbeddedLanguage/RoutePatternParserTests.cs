@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
 using RoutePatternToken = EmbeddedSyntaxToken<RoutePatternKind>;
 
-public partial class RoutePatternParserTests
+partial public class RoutePatternParserTests
 {
     private const string _statmentPrefix = "var v = ";
     private readonly ITestOutputHelper _outputHelper;

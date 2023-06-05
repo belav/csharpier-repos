@@ -13,12 +13,12 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Quic
 {
-    internal unsafe partial struct QUIC_BUFFER
+    partial internal unsafe struct QUIC_BUFFER
     {
         public Span<byte> Span => new(Buffer, (int)Length);
     }
 
-    internal partial class MsQuic
+    partial internal class MsQuic
     {
         public static unsafe QUIC_API_TABLE* Open()
         {
@@ -317,7 +317,7 @@ namespace Microsoft.Quic
     {
         public QuicAddrFamilyAndLen sin_family;
         public ushort sin_port;
-        public fixed byte sin_addr[4];
+        fixed public byte sin_addr[4];
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -326,7 +326,7 @@ namespace Microsoft.Quic
         public QuicAddrFamilyAndLen sin6_family;
         public ushort sin6_port;
         public uint sin6_flowinfo;
-        public fixed byte sin6_addr[16];
+        fixed public byte sin6_addr[16];
         public uint sin6_scope_id;
     }
 

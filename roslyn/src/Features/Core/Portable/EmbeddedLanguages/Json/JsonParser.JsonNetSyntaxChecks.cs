@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
 
-    internal partial struct JsonParser
+    partial internal struct JsonParser
     {
         private static class JsonNetSyntaxChecker
         {

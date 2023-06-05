@@ -9,7 +9,7 @@ using static System.Text.Json.Serialization.Samples.JsonSerializerExtensions;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class CustomConverterTests
+    partial public static class CustomConverterTests
     {
         private const string ExpectedDomJson =
             "{\"MyString\":\"Hello!\",\"MyNull\":null,\"MyBoolean\":false,\"MyArray\":[2,3,42],"

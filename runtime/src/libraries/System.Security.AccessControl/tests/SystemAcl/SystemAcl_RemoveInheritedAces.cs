@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class SystemAcl_RemoveInheritedAces
+    partial public class SystemAcl_RemoveInheritedAces
     {
         [Fact]
         public static void BasicValidationTestCases()

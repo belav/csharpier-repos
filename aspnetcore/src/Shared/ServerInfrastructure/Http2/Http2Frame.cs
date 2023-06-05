@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+partial
 /* https://tools.ietf.org/html/rfc7540#section-4.1
     +-----------------------------------------------+
     |                 Length (24)                   |
@@ -14,7 +15,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     |                   Frame Payload (0...)                      ...
     +---------------------------------------------------------------+
 */
-internal partial class Http2Frame
+internal class Http2Frame
 {
     public int PayloadLength { get; set; }
 

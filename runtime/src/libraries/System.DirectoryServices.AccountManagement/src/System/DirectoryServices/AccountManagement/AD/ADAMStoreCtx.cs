@@ -15,7 +15,7 @@ using System.Text;
 
 namespace System.DirectoryServices.AccountManagement
 {
-    internal sealed partial class ADAMStoreCtx : ADStoreCtx
+    partial internal sealed class ADAMStoreCtx : ADStoreCtx
     {
         private const int mappingIndex = 1;
         private List<string> _cachedBindableObjectList;

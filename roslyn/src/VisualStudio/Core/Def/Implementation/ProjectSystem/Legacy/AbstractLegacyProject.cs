@@ -22,11 +22,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy
 {
+    partial
     /// <summary>
     /// Base type for legacy C# and VB project system shim implementations.
     /// These legacy shims are based on legacy project system interfaces defined in csproj/msvbprj.
     /// </summary>
-    internal abstract partial class AbstractLegacyProject : ForegroundThreadAffinitizedObject
+    internal abstract class AbstractLegacyProject : ForegroundThreadAffinitizedObject
     {
         public IVsHierarchy Hierarchy { get; }
         protected VisualStudioProject VisualStudioProject { get; }

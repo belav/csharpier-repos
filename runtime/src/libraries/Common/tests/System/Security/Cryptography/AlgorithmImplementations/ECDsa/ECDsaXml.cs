@@ -6,7 +6,7 @@ using Xunit;
 namespace System.Security.Cryptography.EcDsa.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public partial class ECDsaXml : ECDsaTestsBase
+    partial public class ECDsaXml : ECDsaTestsBase
     {
         [Fact]
         public static void TestNotImplementedException()

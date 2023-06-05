@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Net
 {
-    internal static partial class CertificateValidationPal
+    partial internal static class CertificateValidationPal
     {
         internal static SslPolicyErrors VerifyCertificateProperties(
             SafeDeleteContext securityContext,

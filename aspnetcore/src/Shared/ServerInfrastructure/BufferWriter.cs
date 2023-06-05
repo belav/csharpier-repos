@@ -5,11 +5,12 @@ using System.Runtime.CompilerServices;
 
 namespace System.Buffers;
 
+ref
 /// <summary>
 /// A fast access struct that wraps <see cref="IBufferWriter{T}"/>.
 /// </summary>
 /// <typeparam name="T">The type of element to be written.</typeparam>
-internal ref struct BufferWriter<T>
+internal struct BufferWriter<T>
     where T : IBufferWriter<byte>
 {
     /// <summary>

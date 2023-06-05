@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         private const int kSuccess = 1;
         private const int kErrorSeeError = -2;
@@ -24,7 +24,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial ulong AppleCryptoNative_SecKeyGetSimpleKeySizeInBytes(
+        partial private static ulong AppleCryptoNative_SecKeyGetSimpleKeySizeInBytes(
             SafeSecKeyRefHandle publicKey
         );
 
@@ -172,7 +172,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static unsafe partial int AppleCryptoNative_SecKeyCreateWithData(
+        partial private static unsafe int AppleCryptoNative_SecKeyCreateWithData(
             byte* pKey,
             int cbKey,
             PAL_KeyAlgorithm keyAlgorithm,
@@ -182,7 +182,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static unsafe partial int AppleCryptoNative_SecKeyCopyExternalRepresentation(
+        partial private static unsafe int AppleCryptoNative_SecKeyCopyExternalRepresentation(
             SafeSecKeyRefHandle key,
             out SafeCFDataHandle pDataOut,
             out SafeCFErrorHandle pErrorOut
@@ -192,7 +192,7 @@ internal static partial class Interop
             Libraries.AppleCryptoNative,
             EntryPoint = "AppleCryptoNative_SecKeyCopyPublicKey"
         )]
-        internal static unsafe partial SafeSecKeyRefHandle CopyPublicKey(
+        partial internal static unsafe SafeSecKeyRefHandle CopyPublicKey(
             SafeSecKeyRefHandle privateKey
         );
     }

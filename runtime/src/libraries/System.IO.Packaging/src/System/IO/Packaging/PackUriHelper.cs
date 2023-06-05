@@ -7,10 +7,11 @@ using System.Text;
 
 namespace System.IO.Packaging
 {
+    partial
     /// <summary>
     /// This class has the utility methods for composing and parsing an Uri of pack:// scheme
     /// </summary>
-    public static partial class PackUriHelper
+    public static class PackUriHelper
     {
         #region Public Methods
 

@@ -10,7 +10,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
-internal static partial class HttpResultsHelper
+partial internal static class HttpResultsHelper
 {
     internal const string DefaultContentType = "text/plain; charset=utf-8";
     private static readonly Encoding DefaultEncoding = Encoding.UTF8;
@@ -153,7 +153,7 @@ internal static partial class HttpResultsHelper
         }
     }
 
-    internal static partial class Log
+    partial internal static class Log
     {
         [LoggerMessage(
             1,
@@ -161,7 +161,7 @@ internal static partial class HttpResultsHelper
             "Setting HTTP status code {StatusCode}.",
             EventName = "WritingResultAsStatusCode"
         )]
-        public static partial void WritingResultAsStatusCode(ILogger logger, int statusCode);
+        partial public static void WritingResultAsStatusCode(ILogger logger, int statusCode);
 
         [LoggerMessage(
             2,
@@ -169,7 +169,7 @@ internal static partial class HttpResultsHelper
             "Write content with HTTP Response ContentType of {ContentType}",
             EventName = "WritingResultAsContent"
         )]
-        public static partial void WritingResultAsContent(ILogger logger, string contentType);
+        partial public static void WritingResultAsContent(ILogger logger, string contentType);
 
         [LoggerMessage(
             3,
@@ -177,7 +177,7 @@ internal static partial class HttpResultsHelper
             "Writing value of type '{Type}' as Json.",
             EventName = "WritingResultAsJson"
         )]
-        public static partial void WritingResultAsJson(ILogger logger, string type);
+        partial public static void WritingResultAsJson(ILogger logger, string type);
 
         [LoggerMessage(
             5,
@@ -185,6 +185,6 @@ internal static partial class HttpResultsHelper
             "Sending file with download name '{FileDownloadName}'.",
             EventName = "WritingResultAsFileWithNoFileName"
         )]
-        public static partial void WritingResultAsFile(ILogger logger, string fileDownloadName);
+        partial public static void WritingResultAsFile(ILogger logger, string fileDownloadName);
     }
 }

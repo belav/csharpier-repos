@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
 {
     using SymbolAndLineNumberArray = ImmutableArray<(ISymbol symbol, int lineNumber)>;
 
-    internal abstract partial class AbstractInheritanceMarginService
+    partial internal abstract class AbstractInheritanceMarginService
     {
         private static readonly SymbolDisplayFormat s_displayFormat =
             new(

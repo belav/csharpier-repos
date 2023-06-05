@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.AspNetCore.Testing;
 
-public static partial class DumpCollector
+partial public static class DumpCollector
 {
     private static class Windows
     {

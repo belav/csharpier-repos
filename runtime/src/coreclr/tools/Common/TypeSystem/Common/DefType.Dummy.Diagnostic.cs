@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Dummy implementation of diagnostic names that just forwards to Name/Namespace
-    abstract partial class DefType
+    abstract class DefType
     {
         /// <summary>
         /// Gets the Name of a type. This must not throw

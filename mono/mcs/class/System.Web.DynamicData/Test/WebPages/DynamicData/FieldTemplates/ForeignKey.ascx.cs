@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class ForeignKeyField : System.Web.DynamicData.FieldTemplateUserControl
+partial public class ForeignKeyField : System.Web.DynamicData.FieldTemplateUserControl
 {
     private bool _allowNavigation = true;
     private string _navigateUrl;

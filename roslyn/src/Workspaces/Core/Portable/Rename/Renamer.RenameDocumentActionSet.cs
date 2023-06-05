@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
-    public static partial class Renamer
+    partial public static class Renamer
     {
         /// <summary>
         /// Information about rename document calls that allows them to be applied as individual actions. Actions are individual units of work

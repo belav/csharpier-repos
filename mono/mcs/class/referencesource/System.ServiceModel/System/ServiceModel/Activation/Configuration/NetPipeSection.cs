@@ -9,7 +9,7 @@ namespace System.ServiceModel.Activation.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
 
-    public sealed partial class NetPipeSection : ConfigurationSection
+    partial public sealed class NetPipeSection : ConfigurationSection
     {
         PropertyInformationCollection propertyInfo;
 
@@ -29,7 +29,7 @@ namespace System.ServiceModel.Activation.Configuration
             }
         }
 
-        static internal NetPipeSection GetSection()
+        internal static NetPipeSection GetSection()
         {
             NetPipeSection retval = (NetPipeSection)
                 ConfigurationManager.GetSection(ConfigurationStrings.NetPipeSectionPath);

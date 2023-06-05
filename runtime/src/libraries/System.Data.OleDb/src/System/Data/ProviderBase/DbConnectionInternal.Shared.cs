@@ -9,7 +9,7 @@ using SysTx = System.Transactions;
 
 namespace System.Data.ProviderBase
 {
-    internal abstract partial class DbConnectionInternal // V1.1.3300
+    partial internal abstract class DbConnectionInternal // V1.1.3300
     {
         internal static readonly StateChangeEventArgs StateChangeClosed = new StateChangeEventArgs(
             ConnectionState.Open,

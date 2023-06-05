@@ -14,7 +14,7 @@ namespace System.Data.SqlClient
     using System.Diagnostics;
     using SysTx = System.Transactions;
 
-    sealed internal class SqlInternalConnectionSmi : SqlInternalConnection
+    internal sealed class SqlInternalConnectionSmi : SqlInternalConnection
     {
         private SmiContext _smiContext;
         private SmiConnection _smiConnection;
@@ -24,16 +24,16 @@ namespace System.Data.SqlClient
         private SqlInternalTransaction _pendingTransaction; // transaction awaiting event signalling that it is active
         private SqlInternalTransaction _currentTransaction; // currently active non-context transaction.
 
-        sealed private class EventSink : SmiEventSink_Default
+        private sealed class EventSink : SmiEventSink_Default
         {
             SqlInternalConnectionSmi _connection;
 
-            override internal string ServerVersion
+            internal override string ServerVersion
             {
                 get { return SmiContextFactory.Instance.ServerVersion; }
             }
 
-            override protected void DispatchMessages(bool ignoreNonFatalMessages)
+            protected override void DispatchMessages(bool ignoreNonFatalMessages)
             {
                 // Override this on the Connection event sink, since we can deal
                 // with info messages here.
@@ -194,12 +194,12 @@ namespace System.Data.SqlClient
             get { return _smiEventSink; }
         }
 
-        override internal SqlInternalTransaction CurrentTransaction
+        internal override SqlInternalTransaction CurrentTransaction
         {
             get { return _currentTransaction; }
         }
 
-        override internal bool IsLockedForBulkCopy
+        internal override bool IsLockedForBulkCopy
         {
             get
             {
@@ -207,7 +207,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override internal bool IsShiloh
+        internal override bool IsShiloh
         {
             get
             {
@@ -215,7 +215,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override internal bool IsYukonOrNewer
+        internal override bool IsYukonOrNewer
         {
             get
             {
@@ -223,7 +223,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override internal bool IsKatmaiOrNewer
+        internal override bool IsKatmaiOrNewer
         {
             get
             {
@@ -232,7 +232,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override internal SqlInternalTransaction PendingTransaction
+        internal override SqlInternalTransaction PendingTransaction
         {
             get
             {
@@ -240,7 +240,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override public string ServerVersion
+        public override string ServerVersion
         {
             get { return SmiContextFactory.Instance.ServerVersion; }
         }
@@ -286,7 +286,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected void Activate(SysTx.Transaction transaction)
+        protected override void Activate(SysTx.Transaction transaction)
         {
             Debug.Assert(false, "Activating an internal SMI connection?"); // we should never be activating, because that would indicate we're being pooled.
         }
@@ -371,13 +371,13 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected void ChangeDatabaseInternal(string database)
+        protected override void ChangeDatabaseInternal(string database)
         {
             _smiConnection.SetCurrentDatabase(database, _smiEventSink);
             _smiEventSink.ProcessMessagesAndThrow();
         }
 
-        override protected void InternalDeactivate()
+        protected override void InternalDeactivate()
         {
             if (Bid.AdvancedOn)
             {
@@ -411,7 +411,7 @@ namespace System.Data.SqlClient
             _isInUse = 0; // don't need compare-exchange.
         }
 
-        override internal void DelegatedTransactionEnded()
+        internal override void DelegatedTransactionEnded()
         {
             base.DelegatedTransactionEnded();
 
@@ -426,7 +426,7 @@ namespace System.Data.SqlClient
             _currentTransaction = null; // clean up our current transaction too
         }
 
-        override internal void DisconnectTransaction(SqlInternalTransaction internalTransaction)
+        internal override void DisconnectTransaction(SqlInternalTransaction internalTransaction)
         {
             if (Bid.AdvancedOn)
             {
@@ -449,13 +449,13 @@ namespace System.Data.SqlClient
             }
         }
 
-        override public void Dispose()
+        public override void Dispose()
         {
             _smiContext.OutOfScope -= new EventHandler(OnOutOfScope);
             base.Dispose();
         }
 
-        override internal void ExecuteTransaction(
+        internal override void ExecuteTransaction(
             TransactionRequest transactionRequest,
             string transactionName,
             IsolationLevel iso,
@@ -553,7 +553,7 @@ namespace System.Data.SqlClient
             _smiEventSink.ProcessMessagesAndThrow();
         }
 
-        override protected byte[] GetDTCAddress()
+        protected override byte[] GetDTCAddress()
         {
             byte[] whereAbouts = _smiConnection.GetDTCAddress(_smiEventSink); // might want to store this on the SmiLink because it doesn't change, but we want to be compatible with TDS which doesn't have a link yet.
 
@@ -632,7 +632,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected void PropagateTransactionCookie(byte[] transactionCookie)
+        protected override void PropagateTransactionCookie(byte[] transactionCookie)
         {
             if (Bid.AdvancedOn)
             {
@@ -728,7 +728,7 @@ namespace System.Data.SqlClient
             _currentTransaction.Activate(); // SQLBUDT #376531 -- ensure this is activated to prevent asserts later.
         }
 
-        override internal void ValidateConnectionForExecute(SqlCommand command)
+        internal override void ValidateConnectionForExecute(SqlCommand command)
         {
             SqlDataReader reader = FindLiveReader(null);
             if (null != reader)

@@ -157,7 +157,7 @@ namespace R2RDump
         }
     }
 
-    public partial class DumpOptions
+    partial public class DumpOptions
     {
         public FileInfo[] In { get; }
         public FileInfo Out { get; }

@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         ),
         Shared
     ]
-    internal partial class UnitTestingSolutionCrawlerRegistrationService
+    partial internal class UnitTestingSolutionCrawlerRegistrationService
         : IUnitTestingSolutionCrawlerRegistrationService
     {
         private const string Default = "*";

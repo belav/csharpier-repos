@@ -22,7 +22,7 @@ namespace System.Xml.Serialization.Configuration
             );
         }
 
-        static internal string SchemaImporterExtensionsSectionPath
+        internal static string SchemaImporterExtensionsSectionPath
         {
             get
             {
@@ -32,7 +32,7 @@ namespace System.Xml.Serialization.Configuration
             }
         }
 
-        static internal string DateTimeSerializationSectionPath
+        internal static string DateTimeSerializationSectionPath
         {
             get
             {
@@ -42,7 +42,7 @@ namespace System.Xml.Serialization.Configuration
             }
         }
 
-        static internal string XmlSerializerSectionPath
+        internal static string XmlSerializerSectionPath
         {
             get
             {

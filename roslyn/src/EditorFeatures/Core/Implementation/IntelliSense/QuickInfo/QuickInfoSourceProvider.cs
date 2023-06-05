@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Export(typeof(IAsyncQuickInfoSourceProvider))]
     [Name("RoslynQuickInfoProvider")]
-    internal partial class QuickInfoSourceProvider : IAsyncQuickInfoSourceProvider
+    partial internal class QuickInfoSourceProvider : IAsyncQuickInfoSourceProvider
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IUIThreadOperationExecutor _operationExecutor;

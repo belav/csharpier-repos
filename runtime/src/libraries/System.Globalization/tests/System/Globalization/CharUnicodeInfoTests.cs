@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace System.Globalization.Tests
 {
-    public partial class CharUnicodeInfoTests
+    partial public class CharUnicodeInfoTests
     {
         private const int HIGHEST_CODE_POINT = 0x10_FFFF;
 

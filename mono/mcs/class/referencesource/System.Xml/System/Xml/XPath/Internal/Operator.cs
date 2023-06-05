@@ -57,7 +57,7 @@ namespace MS.Internal.Xml.XPath
             /*GE     */Op.LE,
         };
 
-        static public Operator.Op InvertOperator(Operator.Op op)
+        public static Operator.Op InvertOperator(Operator.Op op)
         {
             Debug.Assert(Op.EQ <= op && op <= Op.GE);
             return invertOp[(int)op];

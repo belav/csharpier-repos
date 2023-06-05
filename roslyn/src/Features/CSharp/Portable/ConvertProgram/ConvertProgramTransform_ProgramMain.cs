@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
 {
     using static SyntaxFactory;
 
-    internal static partial class ConvertProgramTransform
+    partial internal static class ConvertProgramTransform
     {
         public static async Task<Document> ConvertToProgramMainAsync(
             Document document,

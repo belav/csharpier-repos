@@ -14,7 +14,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
-    public sealed partial class WSHttpTransportSecurityElement : ServiceModelConfigurationElement
+    partial public sealed class WSHttpTransportSecurityElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.ClientCredentialType,

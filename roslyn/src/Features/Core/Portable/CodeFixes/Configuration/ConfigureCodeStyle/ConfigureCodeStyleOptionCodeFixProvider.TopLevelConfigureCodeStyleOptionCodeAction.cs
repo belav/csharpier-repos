@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CodeActions;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
 {
-    internal sealed partial class ConfigureCodeStyleOptionCodeFixProvider
+    partial internal sealed class ConfigureCodeStyleOptionCodeFixProvider
         : IConfigurationFixProvider
     {
         private sealed class TopLevelConfigureCodeStyleOptionCodeAction

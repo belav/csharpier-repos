@@ -36,7 +36,7 @@ namespace System.IO.Tests
 
         public bool IsDisposed => _disposed;
 
-        public unsafe override Span<T> GetSpan() => new Span<T>((void*)_memory, _length);
+        public override unsafe Span<T> GetSpan() => new Span<T>((void*)_memory, _length);
 
         public override MemoryHandle Pin(int elementIndex = 0)
         {

@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text.PatternMatching;
 
 namespace Microsoft.CodeAnalysis.NavigateTo;
 
-internal sealed partial class RoslynSearchItemsSourceProvider
+partial internal sealed class RoslynSearchItemsSourceProvider
 {
     /// <summary>
     /// Trivial subclass of <see cref="CodeSearchResult"/>.  Exists just so we can hold onto the original <see

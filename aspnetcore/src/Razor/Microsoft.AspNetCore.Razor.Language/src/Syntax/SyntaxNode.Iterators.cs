@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-internal abstract partial class SyntaxNode
+partial internal abstract class SyntaxNode
 {
     private IEnumerable<SyntaxNode> DescendantNodesImpl(
         TextSpan span,

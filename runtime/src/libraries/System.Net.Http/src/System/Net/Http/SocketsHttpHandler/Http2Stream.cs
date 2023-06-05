@@ -17,7 +17,7 @@ using System.Threading.Tasks.Sources;
 
 namespace System.Net.Http
 {
-    internal sealed partial class Http2Connection
+    partial internal sealed class Http2Connection
     {
         private sealed class Http2Stream : IValueTaskSource, IHttpStreamHeadersHandler, IHttpTrace
         {

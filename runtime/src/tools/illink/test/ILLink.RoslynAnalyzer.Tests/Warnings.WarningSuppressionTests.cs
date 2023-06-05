@@ -6,7 +6,7 @@ using Xunit;
 
 namespace ILLink.RoslynAnalyzer.Tests.Warnings
 {
-    public sealed partial class WarningSuppressionTests : LinkerTestBase
+    partial public sealed class WarningSuppressionTests : LinkerTestBase
     {
         protected override string TestSuiteName => "Warnings.WarningSuppression";
 

@@ -17,6 +17,7 @@ using System.Linq;
 
 namespace System.Data.Common.Utils.Boolean
 {
+    partial
     /// <summary>
     /// Base type for Boolean expressions. Boolean expressions are immutable,
     /// and value-comparable using Equals. Services include local simplification
@@ -30,7 +31,7 @@ namespace System.Data.Common.Utils.Boolean
     ///     "!A" means "not A"
     /// </remarks>
     /// <typeparam name="T_Identifier">The type of leaf term identifiers in this expression.</typeparam>
-    internal abstract partial class BoolExpr<T_Identifier> : IEquatable<BoolExpr<T_Identifier>>
+    internal abstract class BoolExpr<T_Identifier> : IEquatable<BoolExpr<T_Identifier>>
     {
         /// <summary>
         /// Gets an enumeration value indicating the type of the expression node.

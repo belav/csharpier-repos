@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace System.IO.Ports
 {
-    internal sealed partial class SerialStream
+    partial internal sealed class SerialStream
     {
         private static SafeFileHandle OpenPort(uint portNumber)
         {

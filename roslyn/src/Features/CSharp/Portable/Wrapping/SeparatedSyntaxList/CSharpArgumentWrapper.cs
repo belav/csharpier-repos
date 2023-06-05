@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
 {
-    internal partial class CSharpArgumentWrapper
+    partial internal class CSharpArgumentWrapper
         : AbstractCSharpSeparatedSyntaxListWrapper<BaseArgumentListSyntax, ArgumentSyntax>
     {
         protected override string Align_wrapped_items => FeaturesResources.Align_wrapped_arguments;

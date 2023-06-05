@@ -117,7 +117,7 @@ namespace System.Threading
         }
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             CompressedStack.DestroyDelayedCompressedStack(handle);
             handle = IntPtr.Zero;
@@ -302,7 +302,7 @@ namespace System.Threading
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        static internal void runTryCode(Object userData)
+        internal static void runTryCode(Object userData)
         {
             CompressedStackRunData rData = (CompressedStackRunData)userData;
             rData.cssw = SetCompressedStack(rData.cs, GetCompressedStackThread());
@@ -311,14 +311,14 @@ namespace System.Threading
 
         [System.Security.SecurityCritical] // auto-generated
         [PrePrepareMethod]
-        static internal void runFinallyCode(Object userData, bool exceptionThrown)
+        internal static void runFinallyCode(Object userData, bool exceptionThrown)
         {
             CompressedStackRunData rData = (CompressedStackRunData)userData;
             rData.cssw.Undo();
         }
 
-        static internal volatile RuntimeHelpers.TryCode tryCode;
-        static internal volatile RuntimeHelpers.CleanupCode cleanupCode;
+        internal static volatile RuntimeHelpers.TryCode tryCode;
+        internal static volatile RuntimeHelpers.CleanupCode cleanupCode;
 
         [System.Security.SecurityCritical] // auto-generated
 #if FEATURE_CORRUPTING_EXCEPTIONS
@@ -516,7 +516,7 @@ namespace System.Threading
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        internal extern static SafeCompressedStackHandle GetDelayedCompressedStack(
+        internal static extern SafeCompressedStackHandle GetDelayedCompressedStack(
             ref StackCrawlMark stackMark,
             bool walkStack
         );
@@ -524,24 +524,24 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void DestroyDelayedCompressedStack(IntPtr unmanagedCompressedStack);
+        internal static extern void DestroyDelayedCompressedStack(IntPtr unmanagedCompressedStack);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern static void DestroyDCSList(SafeCompressedStackHandle compressedStack);
+        internal static extern void DestroyDCSList(SafeCompressedStackHandle compressedStack);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int GetDCSCount(SafeCompressedStackHandle compressedStack);
+        internal static extern int GetDCSCount(SafeCompressedStackHandle compressedStack);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern static bool IsImmediateCompletionCandidate(
+        internal static extern bool IsImmediateCompletionCandidate(
             SafeCompressedStackHandle compressedStack,
             out CompressedStack innerCS
         );
@@ -549,7 +549,7 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static DomainCompressedStack GetDomainCompressedStack(
+        internal static extern DomainCompressedStack GetDomainCompressedStack(
             SafeCompressedStackHandle compressedStack,
             int index
         );
@@ -557,7 +557,7 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void GetHomogeneousPLS(PermissionListSet hgPLS);
+        internal static extern void GetHomogeneousPLS(PermissionListSet hgPLS);
     }
 
     //**********************************************************
@@ -600,12 +600,12 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int GetDescCount(IntPtr dcs);
+        internal static extern int GetDescCount(IntPtr dcs);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void GetDomainPermissionSets(
+        internal static extern void GetDomainPermissionSets(
             IntPtr dcs,
             out PermissionSet granted,
             out PermissionSet refused
@@ -615,7 +615,7 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool GetDescriptorInfo(
+        internal static extern bool GetDescriptorInfo(
             IntPtr dcs,
             int index,
             out PermissionSet granted,
@@ -627,6 +627,6 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool IgnoreDomain(IntPtr dcs);
+        internal static extern bool IgnoreDomain(IntPtr dcs);
     }
 }

@@ -29,20 +29,20 @@ namespace System.ServiceModel.Security.Tokens
             this.InclusionMode = SecurityTokenInclusionMode.Never;
         }
 
-        internal protected override bool HasAsymmetricKey
+        protected internal override bool HasAsymmetricKey
         {
             get { return true; }
         }
 
-        internal protected override bool SupportsClientAuthentication
+        protected internal override bool SupportsClientAuthentication
         {
             get { return true; }
         }
-        internal protected override bool SupportsServerAuthentication
+        protected internal override bool SupportsServerAuthentication
         {
             get { return true; }
         }
-        internal protected override bool SupportsClientWindowsIdentity
+        protected internal override bool SupportsClientWindowsIdentity
         {
             get { return false; }
         }
@@ -52,7 +52,7 @@ namespace System.ServiceModel.Security.Tokens
             return new RsaSecurityTokenParameters(this);
         }
 
-        internal protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+        protected internal override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
             SecurityToken token,
             SecurityTokenReferenceStyle referenceStyle
         )

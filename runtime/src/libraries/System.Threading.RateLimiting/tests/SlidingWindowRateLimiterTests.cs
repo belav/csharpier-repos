@@ -1446,7 +1446,7 @@ namespace System.Threading.RateLimiting.Test
         private static readonly double TickFrequency =
             (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency;
 
-        static internal void Replenish(SlidingWindowRateLimiter limiter, long addMilliseconds)
+        internal static void Replenish(SlidingWindowRateLimiter limiter, long addMilliseconds)
         {
             var replenishInternalMethod = typeof(SlidingWindowRateLimiter).GetMethod(
                 "ReplenishInternal",

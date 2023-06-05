@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace JIT.HardwareIntrinsics.Arm._Crc32.Arm64
 {
-    public static partial class Program
+    partial public static class Program
     {
         static Program()
         {

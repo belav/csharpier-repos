@@ -16,7 +16,7 @@ namespace System.Data.Mapping.Update.Internal
     using System.Data.Spatial;
     using System.Diagnostics;
 
-    internal partial class Propagator
+    partial internal class Propagator
     {
         /// <summary>
         /// Class generating default records for extents. Has a single external entry point, the
@@ -34,10 +34,12 @@ namespace System.Data.Mapping.Update.Internal
                 EntityUtil.CheckArgumentNull(parent, "parent");
                 m_parent = parent;
             }
+
+            private
             #endregion
 
             #region Fields
-            static private Dictionary<PrimitiveTypeKind, object> s_typeDefaultMap =
+            static Dictionary<PrimitiveTypeKind, object> s_typeDefaultMap =
                 InitializeTypeDefaultMap();
             private UpdateTranslator m_parent;
             #endregion

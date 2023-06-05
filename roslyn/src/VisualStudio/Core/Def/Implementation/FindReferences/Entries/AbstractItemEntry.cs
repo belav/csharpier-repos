@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Shell.TableControl;
 
 namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 {
-    internal partial class StreamingFindUsagesPresenter
+    partial internal class StreamingFindUsagesPresenter
     {
         private abstract class AbstractItemEntry : Entry
         {

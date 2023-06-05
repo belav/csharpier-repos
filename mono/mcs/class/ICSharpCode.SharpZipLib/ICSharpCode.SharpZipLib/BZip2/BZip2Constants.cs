@@ -45,7 +45,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
         /// <summary>
         /// Random numbers used to randomise repetitive blocks
         /// </summary>
-        public readonly static int[] rNums =
+        public static readonly int[] rNums =
         {
             619,
             720,
@@ -565,52 +565,52 @@ namespace ICSharpCode.SharpZipLib.BZip2
         /// When multiplied by compression parameter (1-9) gives the block size for compression
         /// 9 gives the best compresssion but uses the most memory.
         /// </summary>
-        public readonly static int baseBlockSize = 100000;
+        public static readonly int baseBlockSize = 100000;
 
         /// <summary>
         /// Backend constant
         /// </summary>
-        public readonly static int MAX_ALPHA_SIZE = 258;
+        public static readonly int MAX_ALPHA_SIZE = 258;
 
         /// <summary>
         /// Backend constant
         /// </summary>
-        public readonly static int MAX_CODE_LEN = 23;
+        public static readonly int MAX_CODE_LEN = 23;
 
         /// <summary>
         /// Backend constant
         /// </summary>
-        public readonly static int RUNA = 0;
+        public static readonly int RUNA = 0;
 
         /// <summary>
         /// Backend constant
         /// </summary>
-        public readonly static int RUNB = 1;
+        public static readonly int RUNB = 1;
 
         /// <summary>
         /// Backend constant
         /// </summary>
-        public readonly static int N_GROUPS = 6;
+        public static readonly int N_GROUPS = 6;
 
         /// <summary>
         /// Backend constant
         /// </summary>
-        public readonly static int G_SIZE = 50;
+        public static readonly int G_SIZE = 50;
 
         /// <summary>
         /// Backend constant
         /// </summary>
-        public readonly static int N_ITERS = 4;
+        public static readonly int N_ITERS = 4;
 
         /// <summary>
         /// Backend constant
         /// </summary>
-        public readonly static int MAX_SELECTORS = (2 + (900000 / G_SIZE));
+        public static readonly int MAX_SELECTORS = (2 + (900000 / G_SIZE));
 
         /// <summary>
         /// Backend constant
         /// </summary>
-        public readonly static int NUM_OVERSHOOT_BYTES = 20;
+        public static readonly int NUM_OVERSHOOT_BYTES = 20;
 
         private BZip2Constants() { }
     }

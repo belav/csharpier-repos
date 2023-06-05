@@ -29,7 +29,7 @@ namespace System.Reflection.Runtime.FieldInfos.NativeFormat
     // The Runtime's implementation of fields.
     //
     [DebuggerDisplay("{_debugName}")]
-    internal sealed partial class NativeFormatRuntimeFieldInfo : RuntimeFieldInfo
+    partial internal sealed class NativeFormatRuntimeFieldInfo : RuntimeFieldInfo
     {
         //
         // fieldHandle    - the "tkFieldDef" that identifies the field.

@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.Extensions.Logging.Generators
 {
     [Generator]
-    public partial class LoggerMessageGenerator : ISourceGenerator
+    partial public class LoggerMessageGenerator : ISourceGenerator
     {
         [ExcludeFromCodeCoverage]
         public void Initialize(GeneratorInitializationContext context)

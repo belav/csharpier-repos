@@ -20,7 +20,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace System.Text.RegularExpressions.Generator
 {
-    public partial class RegexGenerator
+    partial public class RegexGenerator
     {
         /// <summary>Emits the definition of the partial method. This method just delegates to the property cache on the generated Regex-derived type.</summary>
         private static void EmitRegexPartialMethod(

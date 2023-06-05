@@ -18,7 +18,7 @@ using System.Diagnostics;
 
 namespace System.Threading.Tasks.Tests.FromAsync
 {
-    public partial class TaskFromAsyncTests
+    partial public class TaskFromAsyncTests
     {
         #region Test Methods
 

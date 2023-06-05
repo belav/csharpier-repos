@@ -11,7 +11,7 @@ using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Sse1
 {
-    public partial class Program
+    partial public class Program
     {
         const int Pass = 100;
         const int Fail = 0;

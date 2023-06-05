@@ -36,7 +36,7 @@ using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json
 {
-    public abstract partial class JsonWriter
+    partial public abstract class JsonWriter
 #if HAVE_ASYNC_DISPOSABLE
         : IAsyncDisposable
 #endif

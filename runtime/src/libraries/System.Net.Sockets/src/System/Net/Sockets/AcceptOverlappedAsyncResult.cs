@@ -3,8 +3,9 @@
 
 namespace System.Net.Sockets
 {
+    partial
     // AcceptOverlappedAsyncResult - used to take care of storage for async Socket BeginAccept call.
-    internal sealed partial class AcceptOverlappedAsyncResult : BaseOverlappedAsyncResult
+    internal sealed class AcceptOverlappedAsyncResult : BaseOverlappedAsyncResult
     {
         private readonly Socket _listenSocket;
         private byte[]? _buffer;

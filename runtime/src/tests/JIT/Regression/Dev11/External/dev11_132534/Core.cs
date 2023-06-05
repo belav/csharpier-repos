@@ -213,7 +213,7 @@ namespace Test
         }
     }
 
-    public static partial class CallerSide
+    partial public static class CallerSide
     {
         public static void MakeWrapperCallFor_Pass6Args_Maxstack_2()
         {

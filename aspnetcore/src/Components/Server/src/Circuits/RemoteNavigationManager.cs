@@ -9,12 +9,11 @@ using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInte
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+partial
 /// <summary>
 /// A Server-Side Blazor implementation of <see cref="NavigationManager"/>.
 /// </summary>
-internal sealed partial class RemoteNavigationManager
-    : NavigationManager,
-        IHostEnvironmentNavigationManager
+internal sealed class RemoteNavigationManager : NavigationManager, IHostEnvironmentNavigationManager
 {
     private readonly ILogger<RemoteNavigationManager> _logger;
     private IJSRuntime _jsRuntime;
@@ -150,7 +149,7 @@ internal sealed partial class RemoteNavigationManager
     private void SetHasLocationChangingListeners(bool value) =>
         _jsRuntime.InvokeVoidAsync(Interop.SetHasLocationChangingListeners, value).Preserve();
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -158,7 +157,7 @@ internal sealed partial class RemoteNavigationManager
             "Requesting navigation to URI {Uri} with forceLoad={ForceLoad}, replace={Replace}",
             EventName = "RequestingNavigation"
         )]
-        private static partial void RequestingNavigation(
+        partial private static void RequestingNavigation(
             ILogger logger,
             string uri,
             bool forceLoad,
@@ -177,7 +176,7 @@ internal sealed partial class RemoteNavigationManager
             "Received notification that the URI has changed to {Uri} with isIntercepted={IsIntercepted}",
             EventName = "ReceivedLocationChangedNotification"
         )]
-        public static partial void ReceivedLocationChangedNotification(
+        partial public static void ReceivedLocationChangedNotification(
             ILogger logger,
             string uri,
             bool isIntercepted
@@ -189,7 +188,7 @@ internal sealed partial class RemoteNavigationManager
             "Navigation canceled when changing the location to {Uri}",
             EventName = "NavigationCanceled"
         )]
-        public static partial void NavigationCanceled(ILogger logger, string uri);
+        partial public static void NavigationCanceled(ILogger logger, string uri);
 
         [LoggerMessage(
             4,
@@ -197,7 +196,7 @@ internal sealed partial class RemoteNavigationManager
             "Navigation failed when changing the location to {Uri}",
             EventName = "NavigationFailed"
         )]
-        public static partial void NavigationFailed(
+        partial public static void NavigationFailed(
             ILogger logger,
             string uri,
             Exception exception

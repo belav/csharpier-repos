@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 {
-    internal partial class PreviewUpdater
+    partial internal class PreviewUpdater
     {
         internal class PreviewTagger : ITagger<HighlightTag>
         {

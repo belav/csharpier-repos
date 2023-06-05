@@ -9,7 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis
 {
-    public readonly partial struct SyntaxList<TNode>
+    partial public readonly struct SyntaxList<TNode>
     {
         [SuppressMessage(
             "Performance",

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices.JavaScript;
 
 namespace Sample
 {
-    public partial class Test
+    partial public class Test
     {
         [JSExport]
         public static int Main()

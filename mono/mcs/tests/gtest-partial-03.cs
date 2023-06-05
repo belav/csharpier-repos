@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 class Variable { }
 
-internal partial class Test<T> { }
+partial internal class Test<T> { }
 
-internal partial class Test<T>
+partial internal class Test<T>
     where T : IList<Variable>
 {
     public Test(T t)
@@ -13,7 +13,7 @@ internal partial class Test<T>
     }
 }
 
-internal partial class Test<T> { }
+partial internal class Test<T> { }
 
 class CC
 {

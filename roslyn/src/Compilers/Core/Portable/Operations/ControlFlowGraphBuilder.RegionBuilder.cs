@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    internal sealed partial class ControlFlowGraphBuilder
+    partial internal sealed class ControlFlowGraphBuilder
     {
         private class RegionBuilder
         {

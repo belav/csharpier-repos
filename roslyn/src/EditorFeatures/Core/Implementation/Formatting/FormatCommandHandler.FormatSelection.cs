@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
 {
-    internal partial class FormatCommandHandler
+    partial internal class FormatCommandHandler
     {
         public CommandState GetCommandState(FormatSelectionCommandArgs args) =>
             GetCommandState(args.SubjectBuffer);

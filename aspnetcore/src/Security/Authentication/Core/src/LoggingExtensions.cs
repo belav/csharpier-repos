@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(
         4,
@@ -11,7 +11,7 @@ internal static partial class LoggingExtensions
         "Error from RemoteAuthentication: {ErrorMessage}.",
         EventName = "RemoteAuthenticationFailed"
     )]
-    public static partial void RemoteAuthenticationError(this ILogger logger, string errorMessage);
+    partial public static void RemoteAuthenticationError(this ILogger logger, string errorMessage);
 
     [LoggerMessage(
         5,
@@ -19,7 +19,7 @@ internal static partial class LoggingExtensions
         "The SigningIn event returned Handled.",
         EventName = "SignInHandled"
     )]
-    public static partial void SignInHandled(this ILogger logger);
+    partial public static void SignInHandled(this ILogger logger);
 
     [LoggerMessage(
         6,
@@ -27,7 +27,7 @@ internal static partial class LoggingExtensions
         "The SigningIn event returned Skipped.",
         EventName = "SignInSkipped"
     )]
-    public static partial void SignInSkipped(this ILogger logger);
+    partial public static void SignInSkipped(this ILogger logger);
 
     [LoggerMessage(
         7,
@@ -35,7 +35,7 @@ internal static partial class LoggingExtensions
         "{AuthenticationScheme} was not authenticated. Failure message: {FailureMessage}",
         EventName = "AuthenticationSchemeNotAuthenticatedWithFailure"
     )]
-    public static partial void AuthenticationSchemeNotAuthenticatedWithFailure(
+    partial public static void AuthenticationSchemeNotAuthenticatedWithFailure(
         this ILogger logger,
         string authenticationScheme,
         string failureMessage
@@ -47,7 +47,7 @@ internal static partial class LoggingExtensions
         "AuthenticationScheme: {AuthenticationScheme} was successfully authenticated.",
         EventName = "AuthenticationSchemeAuthenticated"
     )]
-    public static partial void AuthenticationSchemeAuthenticated(
+    partial public static void AuthenticationSchemeAuthenticated(
         this ILogger logger,
         string authenticationScheme
     );
@@ -58,7 +58,7 @@ internal static partial class LoggingExtensions
         "AuthenticationScheme: {AuthenticationScheme} was not authenticated.",
         EventName = "AuthenticationSchemeNotAuthenticated"
     )]
-    public static partial void AuthenticationSchemeNotAuthenticated(
+    partial public static void AuthenticationSchemeNotAuthenticated(
         this ILogger logger,
         string authenticationScheme
     );
@@ -69,7 +69,7 @@ internal static partial class LoggingExtensions
         "AuthenticationScheme: {AuthenticationScheme} was challenged.",
         EventName = "AuthenticationSchemeChallenged"
     )]
-    public static partial void AuthenticationSchemeChallenged(
+    partial public static void AuthenticationSchemeChallenged(
         this ILogger logger,
         string authenticationScheme
     );
@@ -80,7 +80,7 @@ internal static partial class LoggingExtensions
         "AuthenticationScheme: {AuthenticationScheme} was forbidden.",
         EventName = "AuthenticationSchemeForbidden"
     )]
-    public static partial void AuthenticationSchemeForbidden(
+    partial public static void AuthenticationSchemeForbidden(
         this ILogger logger,
         string authenticationScheme
     );
@@ -91,7 +91,7 @@ internal static partial class LoggingExtensions
         "{CorrelationProperty} state property not found.",
         EventName = "CorrelationPropertyNotFound"
     )]
-    public static partial void CorrelationPropertyNotFound(
+    partial public static void CorrelationPropertyNotFound(
         this ILogger logger,
         string correlationProperty
     );
@@ -102,7 +102,7 @@ internal static partial class LoggingExtensions
         "'{CorrelationCookieName}' cookie not found.",
         EventName = "CorrelationCookieNotFound"
     )]
-    public static partial void CorrelationCookieNotFound(
+    partial public static void CorrelationCookieNotFound(
         this ILogger logger,
         string correlationCookieName
     );
@@ -113,7 +113,7 @@ internal static partial class LoggingExtensions
         "The correlation cookie value '{CorrelationCookieName}' did not match the expected value '{CorrelationCookieValue}'.",
         EventName = "UnexpectedCorrelationCookieValue"
     )]
-    public static partial void UnexpectedCorrelationCookieValue(
+    partial public static void UnexpectedCorrelationCookieValue(
         this ILogger logger,
         string correlationCookieName,
         string correlationCookieValue
@@ -125,7 +125,7 @@ internal static partial class LoggingExtensions
         "Access was denied by the resource owner or by the remote server.",
         EventName = "AccessDenied"
     )]
-    public static partial void AccessDeniedError(this ILogger logger);
+    partial public static void AccessDeniedError(this ILogger logger);
 
     [LoggerMessage(
         18,
@@ -133,7 +133,7 @@ internal static partial class LoggingExtensions
         "The AccessDenied event returned Handled.",
         EventName = "AccessDeniedContextHandled"
     )]
-    public static partial void AccessDeniedContextHandled(this ILogger logger);
+    partial public static void AccessDeniedContextHandled(this ILogger logger);
 
     [LoggerMessage(
         19,
@@ -141,5 +141,5 @@ internal static partial class LoggingExtensions
         "The AccessDenied event returned Skipped.",
         EventName = "AccessDeniedContextSkipped"
     )]
-    public static partial void AccessDeniedContextSkipped(this ILogger logger);
+    partial public static void AccessDeniedContextSkipped(this ILogger logger);
 }

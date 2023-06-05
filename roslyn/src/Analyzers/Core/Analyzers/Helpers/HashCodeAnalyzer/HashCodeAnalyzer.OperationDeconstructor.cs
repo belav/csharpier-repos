@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial struct HashCodeAnalyzer
+    partial internal struct HashCodeAnalyzer
     {
         /// <summary>
         /// Breaks down complex <see cref="IOperation"/> trees, looking for particular

@@ -18,7 +18,7 @@ using TypeNameFormatter;
 
 namespace Moq
 {
-    internal sealed partial class MethodCall : SetupWithOutParameterSupport
+    partial internal sealed class MethodCall : SetupWithOutParameterSupport
     {
         private VerifyInvocationCount verifyInvocationCount;
         private Behavior callback;

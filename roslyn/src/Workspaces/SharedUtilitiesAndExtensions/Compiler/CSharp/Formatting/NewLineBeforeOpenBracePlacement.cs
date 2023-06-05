@@ -22,7 +22,7 @@ internal enum NewLineBeforeOpenBracePlacement
     All = (1 << 9) - 1
 }
 
-internal static partial class Extensions
+partial internal static class Extensions
 {
     public static NewLineBeforeOpenBracePlacement ToNewLineBeforeOpenBracePlacement(
         this NewLinePlacement value

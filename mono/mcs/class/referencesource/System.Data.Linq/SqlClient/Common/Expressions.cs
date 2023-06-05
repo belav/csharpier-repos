@@ -17,7 +17,7 @@ namespace System.Data.Linq.SqlClient
         LinkedTable = 2001
     }
 
-    abstract internal class InternalExpression : Expression
+    internal abstract class InternalExpression : Expression
     {
 #pragma warning disable 618 // Disable the 'obsolete' warning.
         internal InternalExpression(InternalExpressionType nt, Type type)

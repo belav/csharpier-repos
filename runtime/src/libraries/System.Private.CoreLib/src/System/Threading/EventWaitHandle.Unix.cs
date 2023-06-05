@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    public partial class EventWaitHandle
+    partial public class EventWaitHandle
     {
         private void CreateEventCore(
             bool initialState,

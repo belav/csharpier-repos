@@ -466,7 +466,7 @@ namespace Microsoft.Win32
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        public extern static int LookupAccountSid(
+        public static extern int LookupAccountSid(
             string systemName,
             byte[] pSid,
             StringBuilder szUserName,
@@ -628,7 +628,7 @@ namespace Microsoft.Win32
             SetLastError = true
         )]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern bool ReadDirectoryChangesW(
+        public static extern unsafe bool ReadDirectoryChangesW(
             SafeFileHandle hDirectory,
             HandleRef lpBuffer,
             int nBufferLength,
@@ -819,7 +819,7 @@ namespace Microsoft.Win32
         // All actual file Read/Write methods, which are declared to be unsafe.
         [DllImport(ExternDll.Kernel32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int ReadFile(
+        internal static extern unsafe int ReadFile(
             SafeFileHandle handle,
             byte* bytes,
             int numBytesToRead,
@@ -829,7 +829,7 @@ namespace Microsoft.Win32
 
         [DllImport(ExternDll.Kernel32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int ReadFile(
+        internal static extern unsafe int ReadFile(
             SafeFileHandle handle,
             byte* bytes,
             int numBytesToRead,
@@ -839,7 +839,7 @@ namespace Microsoft.Win32
 
         [DllImport(ExternDll.Kernel32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int WriteFile(
+        internal static extern unsafe int WriteFile(
             SafeFileHandle handle,
             byte* bytes,
             int numBytesToWrite,
@@ -849,7 +849,7 @@ namespace Microsoft.Win32
 
         [DllImport(ExternDll.Kernel32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int WriteFile(
+        internal static extern unsafe int WriteFile(
             SafeFileHandle handle,
             byte* bytes,
             int numBytesToWrite,
@@ -872,7 +872,7 @@ namespace Microsoft.Win32
 
         [DllImport(ExternDll.Kernel32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern bool WaitCommEvent(
+        internal static extern unsafe bool WaitCommEvent(
             SafeFileHandle hFile, // handle to comm device
             int* lpEvtMask, // event type
             NativeOverlapped* lpOverlapped // overlapped structure
@@ -880,11 +880,11 @@ namespace Microsoft.Win32
 
         [DllImport(ExternDll.Kernel32, SetLastError = true, CharSet = CharSet.Auto)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern bool SetCommMask(SafeFileHandle hFile, int dwEvtMask);
+        internal static extern unsafe bool SetCommMask(SafeFileHandle hFile, int dwEvtMask);
 
         [DllImport(ExternDll.Kernel32, SetLastError = true, CharSet = CharSet.Auto)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern bool GetOverlappedResult(
+        internal static extern unsafe bool GetOverlappedResult(
             SafeFileHandle hFile,
             NativeOverlapped* lpOverlapped,
             ref int lpNumberOfBytesTransferred,

@@ -25,7 +25,7 @@ namespace System.Xml.Xsl.XsltOld
         private bool head;
         private bool nameParent;
 
-        static public HtmlElementProps Create(
+        public static HtmlElementProps Create(
             bool empty,
             bool abrParent,
             bool uriParent,
@@ -75,11 +75,14 @@ namespace System.Xml.Xsl.XsltOld
             get { return this.nameParent; }
         }
 
-        static private Hashtable s_table = CreatePropsTable();
+        private static Hashtable s_table = CreatePropsTable();
 
         //        static private HtmlElementProps  s_otherElements = Create(false, false, false, false, false, false, false);
 
-        static public HtmlElementProps GetProps(string name)
+        public
+        //        static private HtmlElementProps  s_otherElements = Create(false, false, false, false, false, false, false);
+
+        static HtmlElementProps GetProps(string name)
         {
             HtmlElementProps result = (HtmlElementProps)s_table[name];
             return result;
@@ -176,7 +179,7 @@ namespace System.Xml.Xsl.XsltOld
         private bool uri;
         private bool name;
 
-        static public HtmlAttributeProps Create(bool abr, bool uri, bool name)
+        public static HtmlAttributeProps Create(bool abr, bool uri, bool name)
         {
             HtmlAttributeProps props = new HtmlAttributeProps();
             props.abr = abr;
@@ -198,11 +201,14 @@ namespace System.Xml.Xsl.XsltOld
             get { return this.name; }
         }
 
-        static private Hashtable s_table = CreatePropsTable();
+        private static Hashtable s_table = CreatePropsTable();
 
         //      static private HtmlElementProps  s_otherAttributes = Create(false, false, false);
 
-        static public HtmlAttributeProps GetProps(string name)
+        public
+        //      static private HtmlElementProps  s_otherAttributes = Create(false, false, false);
+
+        static HtmlAttributeProps GetProps(string name)
         {
             HtmlAttributeProps result = (HtmlAttributeProps)s_table[name];
             return result;

@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class EnumBuilder : TypeInfo
+    partial public sealed class EnumBuilder : TypeInfo
     {
         internal EnumBuilder()
         {

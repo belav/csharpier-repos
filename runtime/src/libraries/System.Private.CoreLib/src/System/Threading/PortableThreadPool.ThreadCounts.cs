@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Threading
 {
-    internal sealed partial class PortableThreadPool
+    partial internal sealed class PortableThreadPool
     {
         /// <summary>
         /// Tracks information on the number of threads we want/have in different states in our thread pool.

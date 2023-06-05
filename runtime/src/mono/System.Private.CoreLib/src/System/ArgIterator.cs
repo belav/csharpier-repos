@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace System
 {
     [StructLayout(LayoutKind.Auto)]
-    public ref struct ArgIterator
+    ref public struct ArgIterator
     {
 #pragma warning disable 169, 414
         private IntPtr sig;

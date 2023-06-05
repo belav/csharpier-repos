@@ -13,7 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-internal sealed partial class HealthCheckPublisherHostedService : IHostedService
+partial internal sealed class HealthCheckPublisherHostedService : IHostedService
 {
     private readonly HealthCheckService _healthCheckService;
     private readonly IOptions<HealthCheckPublisherOptions> _options;
@@ -223,7 +223,7 @@ internal sealed partial class HealthCheckPublisherHostedService : IHostedService
         public const string HealthCheckPublisherTimeoutName = "HealthCheckPublisherTimeout";
     }
 
-    private static partial class Logger
+    partial private static class Logger
     {
         [LoggerMessage(
             EventIds.HealthCheckPublisherProcessingBeginId,
@@ -231,7 +231,7 @@ internal sealed partial class HealthCheckPublisherHostedService : IHostedService
             "Running health check publishers",
             EventName = EventIds.HealthCheckPublisherProcessingBeginName
         )]
-        public static partial void HealthCheckPublisherProcessingBegin(ILogger logger);
+        partial public static void HealthCheckPublisherProcessingBegin(ILogger logger);
 
         public static void HealthCheckPublisherProcessingEnd(
             ILogger logger,
@@ -245,7 +245,7 @@ internal sealed partial class HealthCheckPublisherHostedService : IHostedService
             "Health check publisher processing completed after {ElapsedMilliseconds}ms",
             EventName = EventIds.HealthCheckPublisherProcessingEndName
         )]
-        private static partial void HealthCheckPublisherProcessingEnd(
+        partial private static void HealthCheckPublisherProcessingEnd(
             ILogger logger,
             double ElapsedMilliseconds,
             Exception? exception = null
@@ -257,7 +257,7 @@ internal sealed partial class HealthCheckPublisherHostedService : IHostedService
             "Running health check publisher '{HealthCheckPublisher}'",
             EventName = EventIds.HealthCheckPublisherBeginName
         )]
-        public static partial void HealthCheckPublisherBegin(
+        partial public static void HealthCheckPublisherBegin(
             ILogger logger,
             IHealthCheckPublisher HealthCheckPublisher
         );
@@ -274,7 +274,7 @@ internal sealed partial class HealthCheckPublisherHostedService : IHostedService
             "Health check '{HealthCheckPublisher}' completed after {ElapsedMilliseconds}ms",
             EventName = EventIds.HealthCheckPublisherEndName
         )]
-        private static partial void HealthCheckPublisherEnd(
+        partial private static void HealthCheckPublisherEnd(
             ILogger logger,
             IHealthCheckPublisher HealthCheckPublisher,
             double ElapsedMilliseconds
@@ -294,7 +294,7 @@ internal sealed partial class HealthCheckPublisherHostedService : IHostedService
             "Health check {HealthCheckPublisher} threw an unhandled exception after {ElapsedMilliseconds}ms",
             EventName = EventIds.HealthCheckPublisherErrorName
         )]
-        private static partial void HealthCheckPublisherError(
+        partial private static void HealthCheckPublisherError(
             ILogger logger,
             IHealthCheckPublisher HealthCheckPublisher,
             double ElapsedMilliseconds,
@@ -313,7 +313,7 @@ internal sealed partial class HealthCheckPublisherHostedService : IHostedService
             "Health check {HealthCheckPublisher} was canceled after {ElapsedMilliseconds}ms",
             EventName = EventIds.HealthCheckPublisherTimeoutName
         )]
-        private static partial void HealthCheckPublisherTimeout(
+        partial private static void HealthCheckPublisherTimeout(
             ILogger logger,
             IHealthCheckPublisher HealthCheckPublisher,
             double ElapsedMilliseconds

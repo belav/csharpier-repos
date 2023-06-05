@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
-internal sealed partial class HttpConnectionDispatcher
+partial internal sealed class HttpConnectionDispatcher
 {
-    internal static partial class Log
+    partial internal static class Log
     {
         [LoggerMessage(
             1,
@@ -15,7 +15,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Connection {TransportConnectionId} was disposed.",
             EventName = "ConnectionDisposed"
         )]
-        public static partial void ConnectionDisposed(ILogger logger, string transportConnectionId);
+        partial public static void ConnectionDisposed(ILogger logger, string transportConnectionId);
 
         [LoggerMessage(
             2,
@@ -23,7 +23,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Connection {TransportConnectionId} is already active via {RequestId}.",
             EventName = "ConnectionAlreadyActive"
         )]
-        public static partial void ConnectionAlreadyActive(
+        partial public static void ConnectionAlreadyActive(
             ILogger logger,
             string transportConnectionId,
             string requestId
@@ -35,7 +35,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Previous poll canceled for {TransportConnectionId} on {RequestId}.",
             EventName = "PollCanceled"
         )]
-        public static partial void PollCanceled(
+        partial public static void PollCanceled(
             ILogger logger,
             string transportConnectionId,
             string requestId
@@ -47,7 +47,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Establishing new connection.",
             EventName = "EstablishedConnection"
         )]
-        public static partial void EstablishedConnection(ILogger logger);
+        partial public static void EstablishedConnection(ILogger logger);
 
         [LoggerMessage(
             5,
@@ -55,10 +55,10 @@ internal sealed partial class HttpConnectionDispatcher
             "Resuming existing connection.",
             EventName = "ResumingConnection"
         )]
-        public static partial void ResumingConnection(ILogger logger);
+        partial public static void ResumingConnection(ILogger logger);
 
         [LoggerMessage(6, LogLevel.Trace, "Received {Count} bytes.", EventName = "ReceivedBytes")]
-        public static partial void ReceivedBytes(ILogger logger, long count);
+        partial public static void ReceivedBytes(ILogger logger, long count);
 
         [LoggerMessage(
             7,
@@ -66,7 +66,7 @@ internal sealed partial class HttpConnectionDispatcher
             "{TransportType} transport not supported by this connection handler.",
             EventName = "TransportNotSupported"
         )]
-        public static partial void TransportNotSupported(
+        partial public static void TransportNotSupported(
             ILogger logger,
             HttpTransportType transportType
         );
@@ -77,7 +77,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Cannot change transports mid-connection; currently using {TransportType}, requesting {RequestedTransport}.",
             EventName = "CannotChangeTransport"
         )]
-        public static partial void CannotChangeTransport(
+        partial public static void CannotChangeTransport(
             ILogger logger,
             HttpTransportType transportType,
             HttpTransportType requestedTransport
@@ -89,7 +89,7 @@ internal sealed partial class HttpConnectionDispatcher
             "POST requests are not allowed for websocket connections.",
             EventName = "PostNotAllowedForWebSockets"
         )]
-        public static partial void PostNotAllowedForWebSockets(ILogger logger);
+        partial public static void PostNotAllowedForWebSockets(ILogger logger);
 
         [LoggerMessage(
             10,
@@ -97,7 +97,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Sending negotiation response.",
             EventName = "NegotiationRequest"
         )]
-        public static partial void NegotiationRequest(ILogger logger);
+        partial public static void NegotiationRequest(ILogger logger);
 
         [LoggerMessage(
             11,
@@ -105,7 +105,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Received DELETE request for unsupported transport: {TransportType}.",
             EventName = "ReceivedDeleteRequestForUnsupportedTransport"
         )]
-        public static partial void ReceivedDeleteRequestForUnsupportedTransport(
+        partial public static void ReceivedDeleteRequestForUnsupportedTransport(
             ILogger logger,
             HttpTransportType transportType
         );
@@ -116,7 +116,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Terminating Long Polling connection due to a DELETE request.",
             EventName = "TerminatingConection"
         )]
-        public static partial void TerminatingConnection(ILogger logger);
+        partial public static void TerminatingConnection(ILogger logger);
 
         [LoggerMessage(
             13,
@@ -124,7 +124,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Connection {TransportConnectionId} was disposed while a write was in progress.",
             EventName = "ConnectionDisposedWhileWriteInProgress"
         )]
-        public static partial void ConnectionDisposedWhileWriteInProgress(
+        partial public static void ConnectionDisposedWhileWriteInProgress(
             ILogger logger,
             string transportConnectionId,
             Exception ex
@@ -136,7 +136,7 @@ internal sealed partial class HttpConnectionDispatcher
             "Connection {TransportConnectionId} failed to read the HTTP request body.",
             EventName = "FailedToReadHttpRequestBody"
         )]
-        public static partial void FailedToReadHttpRequestBody(
+        partial public static void FailedToReadHttpRequestBody(
             ILogger logger,
             string transportConnectionId,
             Exception ex
@@ -148,7 +148,7 @@ internal sealed partial class HttpConnectionDispatcher
             "The client requested version '{clientProtocolVersion}', but the server does not support this version.",
             EventName = "NegotiateProtocolVersionMismatch"
         )]
-        public static partial void NegotiateProtocolVersionMismatch(
+        partial public static void NegotiateProtocolVersionMismatch(
             ILogger logger,
             int clientProtocolVersion
         );
@@ -159,7 +159,7 @@ internal sealed partial class HttpConnectionDispatcher
             "The client requested an invalid protocol version '{queryStringVersionValue}'",
             EventName = "InvalidNegotiateProtocolVersion"
         )]
-        public static partial void InvalidNegotiateProtocolVersion(
+        partial public static void InvalidNegotiateProtocolVersion(
             ILogger logger,
             string queryStringVersionValue
         );

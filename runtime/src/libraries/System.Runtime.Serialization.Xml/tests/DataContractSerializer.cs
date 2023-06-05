@@ -20,7 +20,7 @@ using System.Xml.Schema;
 using Xunit;
 using System.Runtime.Serialization.Tests;
 
-public static partial class DataContractSerializerTests
+partial public static class DataContractSerializerTests
 {
 #if ReflectionOnly
     private static readonly string SerializationOptionSetterName = "set_Option";

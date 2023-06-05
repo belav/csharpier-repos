@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// The LineDirectiveMap is created to enable translating positions, using the #line directives
     /// in a file. The basic implementation creates an ordered array of line mapping entries, one
@@ -19,7 +20,7 @@ namespace Microsoft.CodeAnalysis
     /// directives, then the array has just one element in it. To map line numbers, a binary search
     /// of the mapping entries is done and nearest line mapping is applied.
     /// </summary>
-    internal abstract partial class LineDirectiveMap<TDirective>
+    internal abstract class LineDirectiveMap<TDirective>
         where TDirective : SyntaxNode
     {
         internal readonly ImmutableArray<LineMappingEntry> Entries;

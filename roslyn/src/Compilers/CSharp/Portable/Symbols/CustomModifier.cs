@@ -9,10 +9,11 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Represents a custom modifier (modopt/modreq).
     /// </summary>
-    internal abstract partial class CSharpCustomModifier : CustomModifier
+    internal abstract class CSharpCustomModifier : CustomModifier
     {
         protected readonly NamedTypeSymbol modifier;
 

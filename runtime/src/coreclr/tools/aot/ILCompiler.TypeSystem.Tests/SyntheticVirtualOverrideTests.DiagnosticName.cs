@@ -5,9 +5,9 @@ using Internal.TypeSystem;
 
 namespace TypeSystemTests
 {
-    public partial class SyntheticVirtualOverrideTests
+    partial public class SyntheticVirtualOverrideTests
     {
-        private partial class SyntheticMethod : MethodDesc
+        partial private class SyntheticMethod : MethodDesc
         {
             public override string DiagnosticName
             {

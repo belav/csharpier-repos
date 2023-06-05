@@ -229,7 +229,7 @@ namespace System.IO
 
         [HostProtection(ExternalThreading = true)]
         [ComVisible(false)]
-        public async virtual Task<String> ReadToEndAsync()
+        public virtual async Task<String> ReadToEndAsync()
         {
             char[] chars = new char[4096];
             int len;

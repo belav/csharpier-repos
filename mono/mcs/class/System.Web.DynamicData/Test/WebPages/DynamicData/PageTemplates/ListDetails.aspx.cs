@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class ListDetails : System.Web.UI.Page
+partial public class ListDetails : System.Web.UI.Page
 {
     protected void Page_Init(object sender, EventArgs e)
     {

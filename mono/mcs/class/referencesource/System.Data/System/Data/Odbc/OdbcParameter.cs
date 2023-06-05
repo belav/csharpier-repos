@@ -22,7 +22,7 @@ using System.Threading;
 namespace System.Data.Odbc
 {
     [TypeConverterAttribute(typeof(System.Data.Odbc.OdbcParameter.OdbcParameterConverter))]
-    public sealed partial class OdbcParameter : DbParameter, ICloneable, IDbDataParameter
+    partial public sealed class OdbcParameter : DbParameter, ICloneable, IDbDataParameter
     {
         private bool _hasChanged;
         private bool _userSpecifiedType;
@@ -169,7 +169,7 @@ namespace System.Data.Odbc
             this.Value = value;
         }
 
-        override public System.Data.DbType DbType
+        public override System.Data.DbType DbType
         {
             get
             {
@@ -244,7 +244,7 @@ namespace System.Data.Odbc
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbParameter_ParameterName),
         ]
-        override public string ParameterName
+        public override string ParameterName
         { // V1.2.3300, XXXParameter V1.0.3300
             get
             {
@@ -1278,7 +1278,7 @@ namespace System.Data.Odbc
             ResDescriptionAttribute(Res.DbParameter_Value),
             TypeConverterAttribute(typeof(StringConverter)),
         ]
-        override public object Value
+        public override object Value
         { // V1.2.3300, XXXParameter V1.0.3300
             get { return _value; }
             set
@@ -1303,8 +1303,9 @@ namespace System.Data.Odbc
             return ValueSizeCore(value);
         }
 
+        internal
         // implemented as nested class to take advantage of the private/protected ShouldSerializeXXX methods
-        sealed internal class OdbcParameterConverter : ExpandableObjectConverter
+        sealed class OdbcParameterConverter : ExpandableObjectConverter
         {
             // converter classes should have public ctor
             public OdbcParameterConverter() { }

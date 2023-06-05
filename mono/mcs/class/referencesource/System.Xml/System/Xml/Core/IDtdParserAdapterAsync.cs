@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial interface IDtdParserAdapter
+    partial internal interface IDtdParserAdapter
     {
         Task<int> ReadDataAsync();
 

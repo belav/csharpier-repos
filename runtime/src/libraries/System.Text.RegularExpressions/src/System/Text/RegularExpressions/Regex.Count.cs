@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.RegularExpressions
 {
-    public partial class Regex
+    partial public class Regex
     {
         /// <summary>Searches an input string for all occurrences of a regular expression and returns the number of matches.</summary>
         /// <param name="input">The string to search for a match.</param>

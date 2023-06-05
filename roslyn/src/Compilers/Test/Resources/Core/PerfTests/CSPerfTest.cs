@@ -1810,13 +1810,14 @@ namespace ns1
         new int method2();
     }
 
-    abstract public class c8 : i0<int>, i1<long, long>
+    public abstract class c8 : i0<int>, i1<long, long>
     {
         internal int _prop1 = 0;
 
+        public
         // Implement Read-Write Property
         // Virtual Property
-        virtual public int prop1
+        virtual int prop1
         {
             get
             {
@@ -2913,7 +2914,7 @@ namespace ns1
             )]
             internal class SecondAttribute : FirstAttribute
             {
-                new public long Value = default(int);
+                public new long Value = default(int);
                 public short Value2 = (short)default(int);
 
                 // Static Constructor
@@ -2966,8 +2967,8 @@ namespace ns1
             )]
             internal class ThirdAttribute : SecondAttribute
             {
-                new public short Value = default(byte);
-                new public long Value2 = (int)default(short);
+                public new short Value = default(byte);
+                public new long Value2 = (int)default(short);
                 public long Value3 = default(int);
 
                 // Static Constructor

@@ -42,7 +42,7 @@ using System.Runtime.Serialization;
 
 namespace System.Drawing.Imaging
 {
-    public sealed partial class Metafile : Image
+    partial public sealed class Metafile : Image
     {
         // Non-null if a graphics instance was created using
         // Graphics.FromImage(this) The metadata holder is responsible for

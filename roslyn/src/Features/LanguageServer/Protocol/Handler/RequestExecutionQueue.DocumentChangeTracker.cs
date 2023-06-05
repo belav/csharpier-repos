@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
-    internal partial class RequestExecutionQueue
+    partial internal class RequestExecutionQueue
     {
         /// <summary>
         /// Associates LSP document URIs with the roslyn source text containing the LSP document text.

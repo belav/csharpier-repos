@@ -51,7 +51,7 @@ using System.Diagnostics;
 namespace System.IO
 {
     [ComVisible(true)]
-    public static partial class Path
+    partial public static class Path
     {
         [Obsolete("see GetInvalidPathChars and GetInvalidFileNameChars methods.")]
         public static readonly char[] InvalidPathChars;
@@ -997,7 +997,10 @@ namespace System.IO
 
         // required for FileIOPermission (and most proibably reusable elsewhere too)
         // both path MUST be "full paths"
-        static internal bool IsPathSubsetOf(string subset, string path)
+        internal
+        // required for FileIOPermission (and most proibably reusable elsewhere too)
+        // both path MUST be "full paths"
+        static bool IsPathSubsetOf(string subset, string path)
         {
             if (subset.Length > path.Length)
                 return false;

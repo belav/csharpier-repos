@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Functional.Tests
 {
-    public partial class ThrowingContent : HttpContent
+    partial public class ThrowingContent : HttpContent
     {
         protected override void SerializeToStream(
             Stream stream,

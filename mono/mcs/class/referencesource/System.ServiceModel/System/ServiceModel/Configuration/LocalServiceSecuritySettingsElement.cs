@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
 
-    public sealed partial class LocalServiceSecuritySettingsElement
+    partial public sealed class LocalServiceSecuritySettingsElement
         : ServiceModelConfigurationElement
     {
         public LocalServiceSecuritySettingsElement() { }

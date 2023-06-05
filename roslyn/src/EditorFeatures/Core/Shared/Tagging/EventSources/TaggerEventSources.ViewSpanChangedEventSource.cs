@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 {
-    internal partial class TaggerEventSources
+    partial internal class TaggerEventSources
     {
         private class ViewSpanChangedEventSource : AbstractTaggerEventSource
         {

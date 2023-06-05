@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace System.Data.OleDb
 {
-    public sealed partial class OleDbParameterCollection : DbParameterCollection
+    partial public sealed class OleDbParameterCollection : DbParameterCollection
     {
         private List<OleDbParameter>? _items;
 

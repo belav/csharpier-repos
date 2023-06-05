@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.NavigateTo;
 
-internal sealed partial class RoslynSearchItemsSourceProvider
+partial internal sealed class RoslynSearchItemsSourceProvider
 {
     /// <summary>
     /// Roslyn preview for our nav-to result.  We just provide a code-editor with the caret positioned in the

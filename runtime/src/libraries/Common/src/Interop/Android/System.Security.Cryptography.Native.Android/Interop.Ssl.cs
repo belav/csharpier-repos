@@ -13,9 +13,9 @@ using Microsoft.Win32.SafeHandles;
 
 using SafeSslHandle = System.Net.SafeSslHandle;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AndroidCrypto
+    partial internal static class AndroidCrypto
     {
         private const int UNSUPPORTED_API_LEVEL = 2;
 
@@ -32,13 +32,13 @@ internal static partial class Interop
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamCreate"
         )]
-        internal static partial SafeSslHandle SSLStreamCreate();
+        partial internal static SafeSslHandle SSLStreamCreate();
 
         [LibraryImport(
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamCreateWithCertificates"
         )]
-        private static partial SafeSslHandle SSLStreamCreateWithCertificates(
+        partial private static SafeSslHandle SSLStreamCreateWithCertificates(
             ref byte pkcs8PrivateKey,
             int pkcs8PrivateKeyLen,
             PAL_KeyAlgorithm algorithm,
@@ -65,7 +65,7 @@ internal static partial class Interop
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamInitialize"
         )]
-        private static unsafe partial int SSLStreamInitializeImpl(
+        partial private static unsafe int SSLStreamInitializeImpl(
             SafeSslHandle sslHandle,
             [MarshalAs(UnmanagedType.U1)] bool isServer,
             IntPtr managedContextHandle,
@@ -102,7 +102,7 @@ internal static partial class Interop
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamSetTargetHost"
         )]
-        private static partial int SSLStreamSetTargetHostImpl(
+        partial private static int SSLStreamSetTargetHostImpl(
             SafeSslHandle sslHandle,
             [MarshalAs(UnmanagedType.LPUTF8Str)] string targetHost
         );
@@ -121,13 +121,13 @@ internal static partial class Interop
             EntryPoint = "AndroidCryptoNative_SSLStreamIsLocalCertificateUsed"
         )]
         [return: MarshalAs(UnmanagedType.U1)]
-        internal static partial bool SSLStreamIsLocalCertificateUsed(SafeSslHandle sslHandle);
+        partial internal static bool SSLStreamIsLocalCertificateUsed(SafeSslHandle sslHandle);
 
         [LibraryImport(
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamRequestClientAuthentication"
         )]
-        internal static partial void SSLStreamRequestClientAuthentication(SafeSslHandle sslHandle);
+        partial internal static void SSLStreamRequestClientAuthentication(SafeSslHandle sslHandle);
 
         [StructLayout(LayoutKind.Sequential)]
         private unsafe struct ApplicationProtocolData
@@ -140,7 +140,7 @@ internal static partial class Interop
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamSetApplicationProtocols"
         )]
-        private static unsafe partial int SSLStreamSetApplicationProtocols(
+        partial private static unsafe int SSLStreamSetApplicationProtocols(
             SafeSslHandle sslHandle,
             ApplicationProtocolData[] protocolData,
             int count
@@ -185,7 +185,7 @@ internal static partial class Interop
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamSetEnabledProtocols"
         )]
-        private static partial int SSLStreamSetEnabledProtocols(
+        partial private static int SSLStreamSetEnabledProtocols(
             SafeSslHandle sslHandle,
             ref SslProtocols protocols,
             int length
@@ -209,13 +209,13 @@ internal static partial class Interop
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamHandshake"
         )]
-        internal static partial PAL_SSLStreamStatus SSLStreamHandshake(SafeSslHandle sslHandle);
+        partial internal static PAL_SSLStreamStatus SSLStreamHandshake(SafeSslHandle sslHandle);
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamGetApplicationProtocol"
         )]
-        private static partial int SSLStreamGetApplicationProtocol(
+        partial private static int SSLStreamGetApplicationProtocol(
             SafeSslHandle ssl,
             byte[]? buf,
             ref int len
@@ -240,7 +240,7 @@ internal static partial class Interop
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamRead"
         )]
-        private static unsafe partial PAL_SSLStreamStatus SSLStreamRead(
+        partial private static unsafe PAL_SSLStreamStatus SSLStreamRead(
             SafeSslHandle sslHandle,
             byte* buffer,
             int length,
@@ -263,7 +263,7 @@ internal static partial class Interop
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamWrite"
         )]
-        private static unsafe partial PAL_SSLStreamStatus SSLStreamWrite(
+        partial private static unsafe PAL_SSLStreamStatus SSLStreamWrite(
             SafeSslHandle sslHandle,
             byte* buffer,
             int length
@@ -284,7 +284,7 @@ internal static partial class Interop
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamRelease"
         )]
-        internal static partial void SSLStreamRelease(IntPtr ptr);
+        partial internal static void SSLStreamRelease(IntPtr ptr);
 
         internal sealed class SslException : Exception
         {
@@ -300,7 +300,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamGetProtocol"
         )]
-        private static partial int SSLStreamGetProtocol(SafeSslHandle ssl, out IntPtr protocol);
+        partial private static int SSLStreamGetProtocol(SafeSslHandle ssl, out IntPtr protocol);
 
         internal static string SSLStreamGetProtocol(SafeSslHandle ssl)
         {
@@ -321,13 +321,13 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamGetPeerCertificate"
         )]
-        internal static partial SafeX509Handle SSLStreamGetPeerCertificate(SafeSslHandle ssl);
+        partial internal static SafeX509Handle SSLStreamGetPeerCertificate(SafeSslHandle ssl);
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamGetPeerCertificates"
         )]
-        private static partial void SSLStreamGetPeerCertificates(
+        partial private static void SSLStreamGetPeerCertificates(
             SafeSslHandle ssl,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] out IntPtr[] certs,
             out int count
@@ -344,7 +344,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamGetCipherSuite"
         )]
-        private static partial int SSLStreamGetCipherSuite(
+        partial private static int SSLStreamGetCipherSuite(
             SafeSslHandle ssl,
             out IntPtr cipherSuite
         );
@@ -369,14 +369,14 @@ internal static partial class Interop
             EntryPoint = "AndroidCryptoNative_SSLStreamShutdown"
         )]
         [return: MarshalAs(UnmanagedType.U1)]
-        internal static partial bool SSLStreamShutdown(SafeSslHandle ssl);
+        partial internal static bool SSLStreamShutdown(SafeSslHandle ssl);
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLStreamVerifyHostname"
         )]
         [return: MarshalAs(UnmanagedType.U1)]
-        internal static partial bool SSLStreamVerifyHostname(
+        partial internal static bool SSLStreamVerifyHostname(
             SafeSslHandle ssl,
             [MarshalAs(UnmanagedType.LPUTF8Str)] string hostname
         );

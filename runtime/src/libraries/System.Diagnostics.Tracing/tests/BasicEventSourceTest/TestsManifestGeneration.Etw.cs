@@ -22,7 +22,7 @@ using Microsoft.Diagnostics.Tracing;
 
 namespace BasicEventSourceTests
 {
-    public partial class TestsManifestGeneration
+    partial public class TestsManifestGeneration
     {
         // Specifies whether the process is elevated or not.
         private static bool IsProcessElevatedAndNotWindowsNanoServerAndRemoteExecutorSupported =>

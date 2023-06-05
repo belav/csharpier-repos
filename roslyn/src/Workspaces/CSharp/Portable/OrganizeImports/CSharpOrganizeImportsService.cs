@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.OrganizeImports;
 namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
 {
     [ExportLanguageService(typeof(IOrganizeImportsService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpOrganizeImportsService : IOrganizeImportsService
+    partial internal class CSharpOrganizeImportsService : IOrganizeImportsService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

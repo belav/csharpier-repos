@@ -10,48 +10,48 @@ namespace LibraryImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        public partial class IntEnum
+        partial public class IntEnum
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_return_int")]
-            public static partial EnumTests.IntEnum Subtract_Return(
+            partial public static EnumTests.IntEnum Subtract_Return(
                 EnumTests.IntEnum a,
                 EnumTests.IntEnum b
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_out_int")]
-            public static partial void Subtract_Out(
+            partial public static void Subtract_Out(
                 EnumTests.IntEnum a,
                 EnumTests.IntEnum b,
                 out EnumTests.IntEnum c
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_ref_int")]
-            public static partial void Subtract_Ref(EnumTests.IntEnum a, ref EnumTests.IntEnum b);
+            partial public static void Subtract_Ref(EnumTests.IntEnum a, ref EnumTests.IntEnum b);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_ref_int")]
-            public static partial void Subtract_In(EnumTests.IntEnum a, in EnumTests.IntEnum b);
+            partial public static void Subtract_In(EnumTests.IntEnum a, in EnumTests.IntEnum b);
         }
 
-        public partial class ByteEnum
+        partial public class ByteEnum
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_return_byte")]
-            public static partial EnumTests.ByteEnum Subtract_Return(
+            partial public static EnumTests.ByteEnum Subtract_Return(
                 EnumTests.ByteEnum a,
                 EnumTests.ByteEnum b
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_out_byte")]
-            public static partial void Subtract_Out(
+            partial public static void Subtract_Out(
                 EnumTests.ByteEnum a,
                 EnumTests.ByteEnum b,
                 out EnumTests.ByteEnum c
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_ref_byte")]
-            public static partial void Subtract_Ref(EnumTests.ByteEnum a, ref EnumTests.ByteEnum b);
+            partial public static void Subtract_Ref(EnumTests.ByteEnum a, ref EnumTests.ByteEnum b);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_ref_byte")]
-            public static partial void Subtract_In(EnumTests.ByteEnum a, in EnumTests.ByteEnum b);
+            partial public static void Subtract_In(EnumTests.ByteEnum a, in EnumTests.ByteEnum b);
         }
     }
 

@@ -5,16 +5,16 @@ using System;
 using System.Buffers;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetCwd",
             SetLastError = true
         )]
-        private static unsafe partial byte* GetCwd(byte* buffer, int bufferLength);
+        partial private static unsafe byte* GetCwd(byte* buffer, int bufferLength);
 
         internal static unsafe string GetCwd()
         {

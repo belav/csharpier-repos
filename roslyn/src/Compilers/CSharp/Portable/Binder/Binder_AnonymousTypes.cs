@@ -12,11 +12,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This portion of the binder converts a AnonymousObjectCreationExpressionSyntax into
     /// a bound anonymous object creation node
     /// </summary>
-    internal partial class Binder
+    internal class Binder
     {
         private BoundExpression BindAnonymousObjectCreation(
             AnonymousObjectCreationExpressionSyntax node,

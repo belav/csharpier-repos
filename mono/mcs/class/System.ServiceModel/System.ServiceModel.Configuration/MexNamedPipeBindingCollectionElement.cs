@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public partial class MexNamedPipeBindingCollectionElement
+    partial public class MexNamedPipeBindingCollectionElement
         : MexBindingBindingCollectionElement<CustomBinding, MexNamedPipeBindingElement>
     {
         // Static Fields

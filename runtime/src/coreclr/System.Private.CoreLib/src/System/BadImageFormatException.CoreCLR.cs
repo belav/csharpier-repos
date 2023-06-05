@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public partial class BadImageFormatException
+    partial public class BadImageFormatException
     {
         // Do not delete: this is invoked from native code.
         private BadImageFormatException(string? fileName, int hResult)

@@ -5,7 +5,7 @@ using Internal.NativeCrypto;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+    partial public sealed class ECDiffieHellmanCng : ECDiffieHellman
     {
         public override void ImportParameters(ECParameters parameters)
         {

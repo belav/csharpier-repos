@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class TypeTests
+    partial public static class TypeTests
     {
         public static IEnumerable<object[]> ImplementedInterfacesTestTheoryData =>
             ImplementedInterfacesTestTypeData.Wrap();

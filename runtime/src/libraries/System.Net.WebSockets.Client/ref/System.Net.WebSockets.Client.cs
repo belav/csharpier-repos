@@ -6,7 +6,7 @@
 
 namespace System.Net.WebSockets
 {
-    public sealed partial class ClientWebSocket : System.Net.WebSockets.WebSocket
+    partial public sealed class ClientWebSocket : System.Net.WebSockets.WebSocket
     {
         public ClientWebSocket() { }
 
@@ -129,7 +129,7 @@ namespace System.Net.WebSockets
         }
     }
 
-    public sealed partial class ClientWebSocketOptions
+    partial public sealed class ClientWebSocketOptions
     {
         internal ClientWebSocketOptions() { }
 

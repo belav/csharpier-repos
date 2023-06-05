@@ -30,7 +30,7 @@ namespace ILCompiler
         }
     }
 
-    public partial class ReadyToRunCompilerContext : CompilerTypeSystemContext
+    partial public class ReadyToRunCompilerContext : CompilerTypeSystemContext
     {
         private ReadyToRunMetadataFieldLayoutAlgorithm _r2rFieldLayoutAlgorithm;
         private SystemObjectFieldLayoutAlgorithm _systemObjectFieldLayoutAlgorithm;

@@ -9,11 +9,12 @@ using XmlCoreTest.Common;
 
 namespace System.Xml.RwFactoryWriterTests
 {
+    partial
     /// <summary>
     /// This is the CXmlDriver related code.
     /// </summary>
     //[TestModule("Reader and Writer Factory Tests")]
-    public partial class CFactoryModule : CXmlDriverModule
+    public class CFactoryModule : CXmlDriverModule
     {
         private string _testData;
 
@@ -32,13 +33,14 @@ namespace System.Xml.RwFactoryWriterTests
         }
     }
 
+    partial
     /// <summary>
     /// We will basically create two separate spec files and call the below method
     /// for each of the spec file separately.
     /// </summary>
     //[XmlDriverScenario("XmlReader", "ReaderCreateSpec.xml")]
     //[XmlDriverScenario("XmlWriter", "WriterCreateSpec.xml")]
-    public partial class CRWFactoryDriverScenario : CXmlDriverScenario
+    public class CRWFactoryDriverScenario : CXmlDriverScenario
     {
         public override int ExecuteVariation(CXmlDriverParam param)
         {

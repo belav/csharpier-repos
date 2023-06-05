@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {
-    internal abstract partial class AbstractSymbolDisplayService : ISymbolDisplayService
+    partial internal abstract class AbstractSymbolDisplayService : ISymbolDisplayService
     {
         protected readonly LanguageServices Services;
         protected readonly IStructuralTypeDisplayService AnonymousTypeDisplayService;

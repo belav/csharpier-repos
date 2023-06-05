@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct ParameterProxy
+    partial internal readonly struct ParameterProxy
     {
         public ParameterProxy(MethodProxy method, ParameterIndex index)
         {
@@ -46,13 +46,13 @@ namespace ILLink.Shared.TypeSystemProxy
             }
         }
 
-        public partial ReferenceKind GetReferenceKind();
+        partial public ReferenceKind GetReferenceKind();
 
-        public partial string GetDisplayName();
+        partial public string GetDisplayName();
 
         public bool IsImplicitThis => Method.HasImplicitThis() && Index == (ParameterIndex)0;
 
-        public partial bool IsTypeOf(string typeName);
+        partial public bool IsTypeOf(string typeName);
 
         public IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch() =>
             IsImplicitThis

@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class LanguageParser
+    partial internal class LanguageParser
     {
         private ExpressionSyntax ParseInterpolatedStringToken()
         {

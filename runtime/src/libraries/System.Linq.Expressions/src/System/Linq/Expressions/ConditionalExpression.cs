@@ -131,7 +131,7 @@ namespace System.Linq.Expressions
         public sealed override Type Type { get; }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="ConditionalExpression"/>.

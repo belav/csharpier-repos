@@ -12,10 +12,11 @@ using System.Windows.Media.Animation;
 
 namespace Roslyn.Hosting.Diagnostics.PerfMargin
 {
+    partial
     /// <summary>
     /// Interaction logic for StatusIndicator.xaml
     /// </summary>
-    public partial class StatusIndicator : UserControl
+    public class StatusIndicator : UserControl
     {
         private readonly ActivityLevel _activityLevel;
         private bool _changedSinceLastUpdate;

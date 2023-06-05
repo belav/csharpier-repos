@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis
         All = 2,
     }
 
-    internal static partial class EnumBounds
+    partial internal static class EnumBounds
     {
         internal static bool IsValid(this MetadataImportOptions value)
         {

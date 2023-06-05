@@ -22,7 +22,7 @@ namespace System.Web.UI.Design.MobileControls
     internal class DesignerCapabilities : MobileCapabilities
     {
         private static IDictionary _items = null;
-        private readonly static DesignerCapabilities _staticInstance = new DesignerCapabilities();
+        private static readonly DesignerCapabilities _staticInstance = new DesignerCapabilities();
 
         static DesignerCapabilities()
         {

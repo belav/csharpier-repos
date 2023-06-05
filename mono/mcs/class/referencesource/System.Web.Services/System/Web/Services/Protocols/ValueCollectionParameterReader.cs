@@ -83,7 +83,12 @@ namespace System.Web.Services.Protocols
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        static public bool IsSupported(LogicalMethodInfo methodInfo)
+        public
+        /// <include file='doc\ValueCollectionParameterReader.uex' path='docs/doc[@for="ValueCollectionParameterReader.IsSupported"]/*' />
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        static bool IsSupported(LogicalMethodInfo methodInfo)
         {
             if (methodInfo.OutParameters.Length > 0)
                 return false;
@@ -98,7 +103,12 @@ namespace System.Web.Services.Protocols
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        static public bool IsSupported(ParameterInfo paramInfo)
+        public
+        /// <include file='doc\ValueCollectionParameterReader.uex' path='docs/doc[@for="ValueCollectionParameterReader.IsSupported1"]/*' />
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        static bool IsSupported(ParameterInfo paramInfo)
         {
             Type type = paramInfo.ParameterType;
             if (type.IsArray)

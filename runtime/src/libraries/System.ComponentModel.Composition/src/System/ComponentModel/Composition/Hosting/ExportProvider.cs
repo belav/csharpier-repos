@@ -9,11 +9,12 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
+    partial
     /// <summary>
     ///     Defines the <see langword="abstract"/> base class for export providers, which provide
     ///     methods for retrieving <see cref="Export"/> objects.
     /// </summary>
-    public abstract partial class ExportProvider
+    public abstract class ExportProvider
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportProvider"/> class.

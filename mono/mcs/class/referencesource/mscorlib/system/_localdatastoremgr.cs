@@ -70,8 +70,9 @@ namespace System
         }
     }
 
+    internal
     // This class will not be marked serializable
-    sealed internal class LocalDataStoreMgr
+    sealed class LocalDataStoreMgr
     {
         private const int InitialSlotTableSize = 64;
         private const int SlotTableDoubleThreshold = 512;

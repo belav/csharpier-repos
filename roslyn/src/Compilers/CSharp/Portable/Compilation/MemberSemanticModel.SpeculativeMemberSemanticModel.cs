@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal abstract partial class MemberSemanticModel
+    partial internal abstract class MemberSemanticModel
     {
         /// <summary>
         /// Allows asking semantic questions about a TypeSyntax (or its descendants) within a member, that did not appear in the original source code.

@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     [UseExportProvider]
     [Trait(Traits.Feature, Traits.Features.Workspace)]
-    public partial class AdhocWorkspaceTests : TestBase
+    partial public class AdhocWorkspaceTests : TestBase
     {
         [Fact]
         public void TestAddProject_ProjectInfo()

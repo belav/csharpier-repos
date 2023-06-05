@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 {
     [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
-    internal partial class ContainedLanguage<TPackage, TLanguageService> : ContainedLanguage
+    partial internal class ContainedLanguage<TPackage, TLanguageService> : ContainedLanguage
         where TPackage : AbstractPackage<TPackage, TLanguageService>
         where TLanguageService : AbstractLanguageService<TPackage, TLanguageService>
     {

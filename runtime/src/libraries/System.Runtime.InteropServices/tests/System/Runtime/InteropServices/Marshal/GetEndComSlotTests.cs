@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetEndComSlotTests
+    partial public class GetEndComSlotTests
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]

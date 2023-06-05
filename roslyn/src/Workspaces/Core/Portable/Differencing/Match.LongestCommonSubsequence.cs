@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Differencing
 {
-    public partial class Match<TNode>
+    partial public class Match<TNode>
     {
         internal sealed class LongestCommonSubsequence
             : LongestCommonSubsequence<IReadOnlyList<TNode>>

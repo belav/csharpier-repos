@@ -9,10 +9,11 @@ using Microsoft.VisualStudio.Shell.TableControl;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingStyle.View
 {
+    partial
     /// <summary>
     /// Interaction logic for NamingStyleSettingsView.xaml
     /// </summary>
-    internal partial class NamingStyleSettingsView : UserControl, ISettingsEditorView
+    internal class NamingStyleSettingsView : UserControl, ISettingsEditorView
     {
         private readonly IWpfSettingsEditorViewModel _viewModel;
 

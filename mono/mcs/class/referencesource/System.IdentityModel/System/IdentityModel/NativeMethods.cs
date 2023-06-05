@@ -317,7 +317,7 @@ namespace System.IdentityModel
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal unsafe static extern bool CryptImportKey(
+        internal static extern unsafe bool CryptImportKey(
             [In] SafeProvHandle hProv,
             [In] void* pbData,
             [In] uint dwDataLen,
@@ -338,7 +338,7 @@ namespace System.IdentityModel
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern bool CryptSetKeyParam(
+        internal static extern unsafe bool CryptSetKeyParam(
             [In] SafeKeyHandle phKey,
             [In] uint dwParam,
             [In] void* pbData,
@@ -347,7 +347,7 @@ namespace System.IdentityModel
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern bool CryptEncrypt(
+        internal static extern unsafe bool CryptEncrypt(
             [In] SafeKeyHandle phKey,
             [In] IntPtr hHash,
             [In] bool final,
@@ -359,7 +359,7 @@ namespace System.IdentityModel
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern bool CryptDecrypt(
+        internal static extern unsafe bool CryptDecrypt(
             [In] SafeKeyHandle phKey,
             [In] IntPtr hHash,
             [In] bool final,
@@ -509,7 +509,7 @@ namespace System.IdentityModel
 
         [DllImport(CREDUI, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern uint SspiPromptForCredentials(
+        internal static extern unsafe uint SspiPromptForCredentials(
             string pszTargetName,
             ref CREDUI_INFO pUiInfo,
             uint dwAuthError,
@@ -523,11 +523,11 @@ namespace System.IdentityModel
         [DllImport(CREDUI, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         [return: MarshalAs(UnmanagedType.U1)]
-        internal unsafe static extern bool SspiIsPromptingNeeded(uint ErrorOrNtStatus);
+        internal static extern unsafe bool SspiIsPromptingNeeded(uint ErrorOrNtStatus);
 
         [DllImport(SECUR32, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        internal extern static bool TranslateName(
+        internal static extern bool TranslateName(
             string input,
             EXTENDED_NAME_FORMAT inputFormat,
             EXTENDED_NAME_FORMAT outputFormat,

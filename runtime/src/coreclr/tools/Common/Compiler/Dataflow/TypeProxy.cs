@@ -10,13 +10,13 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct TypeProxy
+    partial internal readonly struct TypeProxy
     {
         public TypeProxy(TypeDesc type) => Type = type;
 
         public static implicit operator TypeProxy(TypeDesc type) => new(type);
 
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters()
+        partial internal ImmutableArray<GenericParameterProxy> GetGenericParameters()
         {
             var typeDef = Type.GetTypeDefinition();
 

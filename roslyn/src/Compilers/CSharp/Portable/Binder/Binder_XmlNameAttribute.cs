@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class Binder
+    partial internal class Binder
     {
         // Diagnostics are generated in a separate pass when we emit.
         internal ImmutableArray<Symbol> BindXmlNameAttribute(

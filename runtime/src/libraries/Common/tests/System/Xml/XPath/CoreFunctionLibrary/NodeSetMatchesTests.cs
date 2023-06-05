@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
 {
+    partial
     /// <summary>
     /// Core Function Library - Node Set Functions (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Expected: Selects the last element child of the context node.

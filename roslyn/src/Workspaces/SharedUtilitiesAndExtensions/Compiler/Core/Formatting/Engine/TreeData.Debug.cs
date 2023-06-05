@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    internal abstract partial class TreeData
+    partial internal abstract class TreeData
     {
         private class Debug : NodeAndText
         {

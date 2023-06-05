@@ -25,8 +25,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         IncludeObjectId = 0x2,
     }
 
+    partial
     // This class provides implementation for the "displaying values as strings" aspect of the Formatter component.
-    internal abstract partial class Formatter
+    internal abstract class Formatter
     {
         private string GetValueString(
             DkmClrValue value,

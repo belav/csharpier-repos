@@ -10,7 +10,7 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    public abstract partial class ECDsa : ECAlgorithm
+    partial public abstract class ECDsa : ECAlgorithm
     {
         // secp521r1 maxes out at 139 bytes in the DER format, so 256 should always be enough
         private const int SignatureStackBufSize = 256;
@@ -22,13 +22,13 @@ namespace System.Security.Cryptography
         protected ECDsa() { }
 
         [UnsupportedOSPlatform("browser")]
-        public static new partial ECDsa Create();
+        partial public static new ECDsa Create();
 
         [UnsupportedOSPlatform("browser")]
-        public static partial ECDsa Create(ECCurve curve);
+        partial public static ECDsa Create(ECCurve curve);
 
         [UnsupportedOSPlatform("browser")]
-        public static partial ECDsa Create(ECParameters parameters);
+        partial public static ECDsa Create(ECParameters parameters);
 
         [Obsolete(
             Obsoletions.CryptoStringFactoryMessage,

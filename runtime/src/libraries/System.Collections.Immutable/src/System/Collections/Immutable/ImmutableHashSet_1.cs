@@ -14,8 +14,9 @@ namespace System.Collections.Immutable
     /// <typeparam name="T">The type of elements in the set.</typeparam>
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
+    partial partial
 #if NETCOREAPP
-    public sealed partial class ImmutableHashSet<T>
+    public sealed class ImmutableHashSet<T>
         : IImmutableSet<T>,
             IHashKeyCollection<T>,
             IReadOnlyCollection<T>,
@@ -25,7 +26,7 @@ namespace System.Collections.Immutable
             ICollection,
             IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
 #else
-    public sealed partial class ImmutableHashSet<T>
+    public sealed class ImmutableHashSet<T>
         : IImmutableSet<T>,
             IHashKeyCollection<T>,
             IReadOnlyCollection<T>,

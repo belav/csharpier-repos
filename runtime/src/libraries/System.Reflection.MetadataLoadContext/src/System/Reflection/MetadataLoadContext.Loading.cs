@@ -10,7 +10,7 @@ using System.Reflection.TypeLoading.Ecma;
 
 namespace System.Reflection
 {
-    public sealed partial class MetadataLoadContext
+    partial public sealed class MetadataLoadContext
     {
         // This maintains the canonical list of Assembly instances for a given def name. Each defname can only appear
         // once in the list and its appearance prevents further assemblies with the same identity from loading unless the Mvids's match.

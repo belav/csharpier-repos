@@ -17,7 +17,7 @@ using System.ComponentModel.Design.Serialization;
 
 namespace System.Data.SqlClient
 {
-    public sealed partial class SqlParameter : DbParameter, IDbDataParameter, ICloneable
+    partial public sealed class SqlParameter : DbParameter, IDbDataParameter, ICloneable
     {
         const string EXCEPTION_MESSAGE =
             "System.Data.SqlClient.SqlParameter is not supported on the current platform.";

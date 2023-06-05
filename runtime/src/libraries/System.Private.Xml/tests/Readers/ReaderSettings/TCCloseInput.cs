@@ -6,7 +6,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.ReaderSettingsTests
 {
-    public partial class TCCloseInput : TCXMLReaderBaseGeneral
+    partial public class TCCloseInput : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCCloseInput
         // Test Case

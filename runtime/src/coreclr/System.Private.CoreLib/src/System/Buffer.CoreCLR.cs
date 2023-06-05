@@ -7,13 +7,13 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public partial class Buffer
+    partial public class Buffer
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Buffer_Clear")]
-        private static unsafe partial void __ZeroMemory(void* b, nuint byteLength);
+        partial private static unsafe void __ZeroMemory(void* b, nuint byteLength);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Buffer_MemMove")]
-        private static unsafe partial void __Memmove(byte* dest, byte* src, nuint len);
+        partial private static unsafe void __Memmove(byte* dest, byte* src, nuint len);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void __BulkMoveWithWriteBarrier(

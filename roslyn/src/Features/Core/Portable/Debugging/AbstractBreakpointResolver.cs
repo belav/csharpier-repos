@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Debugging
 {
-    internal abstract partial class AbstractBreakpointResolver
+    partial internal abstract class AbstractBreakpointResolver
     {
         // I believe this is a close approximation of the IVsDebugName string format produced
         // by the native language service implementations:

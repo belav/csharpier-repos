@@ -22,13 +22,14 @@ namespace System.Data.Objects
     using System.Globalization;
     using System.Linq;
 
+    partial
     /// <summary>
     ///   ObjectQuery implements strongly-typed queries at the object-layer.
     ///   Queries are specified using Entity-SQL strings and may be created by calling
     ///   the Entity-SQL-based query builder methods declared by ObjectQuery.
     /// </summary>
     /// <typeparam name="T">The result type of this ObjectQuery</typeparam>
-    public partial class ObjectQuery<T> : IEnumerable<T>
+    public class ObjectQuery<T> : IEnumerable<T>
     {
         #region Private Static Members
 

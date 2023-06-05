@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Net.Security;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     internal struct Sec_Application_Protocols

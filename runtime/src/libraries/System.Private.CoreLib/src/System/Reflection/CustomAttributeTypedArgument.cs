@@ -7,7 +7,7 @@ using System.Text;
 
 namespace System.Reflection
 {
-    public readonly partial struct CustomAttributeTypedArgument
+    partial public readonly struct CustomAttributeTypedArgument
         : IEquatable<CustomAttributeTypedArgument>
     {
         public static bool operator ==(

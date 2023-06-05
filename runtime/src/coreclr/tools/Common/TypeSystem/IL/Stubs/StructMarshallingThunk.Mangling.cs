@@ -5,7 +5,7 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
-    public partial class StructMarshallingThunk : IPrefixMangledType
+    partial public class StructMarshallingThunk : IPrefixMangledType
     {
         TypeDesc IPrefixMangledType.BaseType
         {

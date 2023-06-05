@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.Text.Json.Nodes
 {
-    public sealed partial class JsonArray : JsonNode, IList<JsonNode?>
+    partial public sealed class JsonArray : JsonNode, IList<JsonNode?>
     {
         /// <summary>
         ///   Gets the number of elements contained in the <see cref="JsonArray"/>.

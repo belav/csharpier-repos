@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public sealed partial class PolicyStatement : ISecurityEncodable, ISecurityPolicyEncodable
+    partial public sealed class PolicyStatement : ISecurityEncodable, ISecurityPolicyEncodable
     {
 #if NETCOREAPP
         [Obsolete(

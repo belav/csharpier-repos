@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal abstract partial class AnalyzerDriver
+    partial internal abstract class AnalyzerDriver
     {
         private sealed class GeneratedCodeTokenWalker : SyntaxWalker
         {

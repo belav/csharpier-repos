@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public partial class RelationalShapedQueryCompilingExpressionVisitor
+partial public class RelationalShapedQueryCompilingExpressionVisitor
 {
-    private sealed partial class ShaperProcessingExpressionVisitor : ExpressionVisitor
+    partial private sealed class ShaperProcessingExpressionVisitor : ExpressionVisitor
     {
         private static readonly MethodInfo ThrowReadValueExceptionMethod =
             typeof(ShaperProcessingExpressionVisitor)

@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+partial
 /* https://tools.ietf.org/html/rfc7540#section-6.5.1
     List of:
     +-------------------------------+
@@ -11,7 +12,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     |                        Value (32)                             |
     +---------------------------------------------------------------+
 */
-internal partial class Http2Frame
+internal class Http2Frame
 {
     public Http2SettingsFrameFlags SettingsFlags
     {

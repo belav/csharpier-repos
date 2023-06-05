@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.Remote
 {
     [ExportWorkspaceServiceFactory(typeof(IProjectCacheHostService), ServiceLayer.Host), Shared]
-    internal partial class ProjectCacheHostServiceFactory : IWorkspaceServiceFactory
+    partial internal class ProjectCacheHostServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

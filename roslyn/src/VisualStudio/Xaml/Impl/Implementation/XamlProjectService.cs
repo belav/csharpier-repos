@@ -27,7 +27,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 namespace Microsoft.VisualStudio.LanguageServices.Xaml
 {
     [Export]
-    internal sealed partial class XamlProjectService
+    partial internal sealed class XamlProjectService
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly Workspace _workspace;

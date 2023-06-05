@@ -15,10 +15,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This portion of the binder converts StatementSyntax nodes into BoundStatements
     /// </summary>
-    internal partial class Binder
+    internal class Binder
     {
         /// <summary>
         /// This is the set of parameters and local variables that were used as arguments to

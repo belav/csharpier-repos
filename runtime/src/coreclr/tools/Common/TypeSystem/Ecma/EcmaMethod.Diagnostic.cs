@@ -5,7 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace Internal.TypeSystem.Ecma
 {
-    public sealed partial class EcmaMethod
+    partial public sealed class EcmaMethod
     {
         public override string DiagnosticName
         {

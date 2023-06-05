@@ -195,7 +195,7 @@ namespace System.Security.Cryptography.Dsa.Tests
         TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
         "Not supported on Browser/iOS/tvOS/MacCatalyst"
     )]
-    public abstract partial class DSASignVerify
+    partial public abstract class DSASignVerify
     {
         public abstract byte[] SignData(DSA dsa, byte[] data, HashAlgorithmName hashAlgorithm);
         public abstract bool VerifyData(

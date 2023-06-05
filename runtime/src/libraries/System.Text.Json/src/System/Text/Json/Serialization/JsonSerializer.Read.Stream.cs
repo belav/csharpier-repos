@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace System.Text.Json
 {
-    public static partial class JsonSerializer
+    partial public static class JsonSerializer
     {
         /// <summary>
         /// Reads the UTF-8 encoded text representing a single JSON value into a <typeparamref name="TValue"/>.

@@ -163,7 +163,7 @@ namespace Internal.Runtime
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct MethodTable
+    partial internal unsafe struct MethodTable
     {
 #if TARGET_64BIT
         private const int POINTER_SIZE = 8;

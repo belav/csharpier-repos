@@ -185,7 +185,12 @@ namespace System.Workflow.Activities
 
         #region Static Private Methods
 
-        static private bool ValidateParent(CompositeActivity parentActivity)
+        private
+        #endregion Protected Methods
+
+        #region Static Private Methods
+
+        static bool ValidateParent(CompositeActivity parentActivity)
         {
             if (parentActivity == null)
                 return false;

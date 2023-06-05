@@ -19,6 +19,7 @@ using StructLayoutAttribute = System.Runtime.InteropServices.StructLayoutAttribu
 
 namespace System.Reflection.Runtime.TypeInfos
 {
+    partial
     //
     // TypeInfos that represent type definitions (i.e. Foo or Foo<>) or constructed generic types (Foo<int>)
     // that can never be reflection-enabled due to the framework Reflection block.
@@ -28,7 +29,7 @@ namespace System.Reflection.Runtime.TypeInfos
     //
     // Since these represent "internal framework types", the app cannot prove we are lying.
     //
-    internal sealed partial class RuntimeBlockedTypeInfo : RuntimeTypeDefinitionTypeInfo
+    internal sealed class RuntimeBlockedTypeInfo : RuntimeTypeDefinitionTypeInfo
     {
         private RuntimeBlockedTypeInfo(RuntimeTypeHandle typeHandle, bool isGenericTypeDefinition)
         {

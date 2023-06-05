@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetIUnknownForObjectTests
+    partial public class GetIUnknownForObjectTests
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]

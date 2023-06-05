@@ -91,7 +91,7 @@ namespace System
     }
 
     [Serializable]
-    internal partial class RuntimeType : System.Reflection.TypeInfo, ISerializable, ICloneable
+    partial internal class RuntimeType : System.Reflection.TypeInfo, ISerializable, ICloneable
     {
         #region Definitions
 
@@ -2489,7 +2489,7 @@ namespace System
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static MethodBase GetMethodBase(
+        internal static unsafe MethodBase GetMethodBase(
             RuntimeType reflectedType,
             RuntimeMethodHandleInternal methodHandle
         )
@@ -2668,7 +2668,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        internal unsafe static FieldInfo GetFieldInfo(IRuntimeFieldInfo fieldHandle)
+        internal static unsafe FieldInfo GetFieldInfo(IRuntimeFieldInfo fieldHandle)
         {
             return GetFieldInfo(
                 RuntimeFieldHandle.GetApproxDeclaringType(fieldHandle),
@@ -2677,7 +2677,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        internal unsafe static FieldInfo GetFieldInfo(
+        internal static unsafe FieldInfo GetFieldInfo(
             RuntimeType reflectedType,
             IRuntimeFieldInfo field
         )
@@ -2717,7 +2717,7 @@ namespace System
         }
 
         // Called internally
-        private unsafe static PropertyInfo GetPropertyInfo(
+        private static unsafe PropertyInfo GetPropertyInfo(
             RuntimeType reflectedType,
             int tkProperty
         )
@@ -5534,7 +5534,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private extern bool CanValueSpecialCast(
+        private static extern bool CanValueSpecialCast(
             RuntimeType valueType,
             RuntimeType targetType
         );
@@ -5542,7 +5542,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private extern Object AllocateValueType(
+        private static extern Object AllocateValueType(
             RuntimeType type,
             object value,
             bool fForceTypeChange

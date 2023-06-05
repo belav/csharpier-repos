@@ -6,7 +6,7 @@
 
 namespace System.Runtime.Caching
 {
-    public abstract partial class CacheEntryChangeMonitor : System.Runtime.Caching.ChangeMonitor
+    partial public abstract class CacheEntryChangeMonitor : System.Runtime.Caching.ChangeMonitor
     {
         protected CacheEntryChangeMonitor() { }
 
@@ -15,7 +15,7 @@ namespace System.Runtime.Caching
         public abstract string RegionName { get; }
     }
 
-    public partial class CacheEntryRemovedArguments
+    partial public class CacheEntryRemovedArguments
     {
         public CacheEntryRemovedArguments(
             System.Runtime.Caching.ObjectCache source,
@@ -50,7 +50,7 @@ namespace System.Runtime.Caching
         CacheSpecificEviction = 4,
     }
 
-    public partial class CacheEntryUpdateArguments
+    partial public class CacheEntryUpdateArguments
     {
         public CacheEntryUpdateArguments(
             System.Runtime.Caching.ObjectCache source,
@@ -91,7 +91,7 @@ namespace System.Runtime.Caching
         System.Runtime.Caching.CacheEntryUpdateArguments arguments
     );
 
-    public partial class CacheItem
+    partial public class CacheItem
     {
         public CacheItem(string key) { }
 
@@ -116,7 +116,7 @@ namespace System.Runtime.Caching
         }
     }
 
-    public partial class CacheItemPolicy
+    partial public class CacheItemPolicy
     {
         public CacheItemPolicy() { }
 
@@ -157,7 +157,7 @@ namespace System.Runtime.Caching
         NotRemovable = 1,
     }
 
-    public abstract partial class ChangeMonitor : System.IDisposable
+    partial public abstract class ChangeMonitor : System.IDisposable
     {
         protected ChangeMonitor() { }
 
@@ -196,7 +196,7 @@ namespace System.Runtime.Caching
         CacheRegions = 128,
     }
 
-    public abstract partial class FileChangeMonitor : System.Runtime.Caching.ChangeMonitor
+    partial public abstract class FileChangeMonitor : System.Runtime.Caching.ChangeMonitor
     {
         protected FileChangeMonitor() { }
 
@@ -204,7 +204,7 @@ namespace System.Runtime.Caching
         public abstract System.DateTimeOffset LastModified { get; }
     }
 
-    public sealed partial class HostFileChangeMonitor : System.Runtime.Caching.FileChangeMonitor
+    partial public sealed class HostFileChangeMonitor : System.Runtime.Caching.FileChangeMonitor
     {
         public HostFileChangeMonitor(System.Collections.Generic.IList<string> filePaths) { }
 
@@ -224,7 +224,7 @@ namespace System.Runtime.Caching
         protected override void Dispose(bool disposing) { }
     }
 
-    public partial class MemoryCache
+    partial public class MemoryCache
         : System.Runtime.Caching.ObjectCache,
             System.Collections.IEnumerable,
             System.IDisposable
@@ -404,7 +404,7 @@ namespace System.Runtime.Caching
         }
     }
 
-    public abstract partial class ObjectCache
+    partial public abstract class ObjectCache
         : System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
             string,
             object
@@ -537,12 +537,12 @@ namespace System.Runtime.Caching
 
 namespace System.Runtime.Caching.Hosting
 {
-    public partial interface IApplicationIdentifier
+    partial public interface IApplicationIdentifier
     {
         string GetApplicationId();
     }
 
-    public partial interface IFileChangeNotificationSystem
+    partial public interface IFileChangeNotificationSystem
     {
         void StartMonitoring(
             string filePath,
@@ -554,7 +554,7 @@ namespace System.Runtime.Caching.Hosting
         void StopMonitoring(string filePath, object state);
     }
 
-    public partial interface IMemoryCacheManager
+    partial public interface IMemoryCacheManager
     {
         void ReleaseCache(System.Runtime.Caching.MemoryCache cache);
         void UpdateCacheSize(long size, System.Runtime.Caching.MemoryCache cache);

@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.Xml;
 
-    public sealed partial class StandardBindingOptionalReliableSessionElement
+    partial public sealed class StandardBindingOptionalReliableSessionElement
         : StandardBindingReliableSessionElement
     {
         public StandardBindingOptionalReliableSessionElement() { }

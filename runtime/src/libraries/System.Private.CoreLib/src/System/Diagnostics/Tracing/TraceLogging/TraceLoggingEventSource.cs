@@ -20,7 +20,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Diagnostics.Tracing
 {
-    public partial class EventSource
+    partial public class EventSource
     {
 #if FEATURE_MANAGED_ETW
         private byte[]? m_providerMetadata;

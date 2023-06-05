@@ -12,13 +12,13 @@ namespace System.ServiceModel.Description
 
     static class SchemaHelper
     {
-        static internal void AddElementForm(XmlSchemaElement element, XmlSchema schema)
+        internal static void AddElementForm(XmlSchemaElement element, XmlSchema schema)
         {
             if (schema.ElementFormDefault != XmlSchemaForm.Qualified)
                 element.Form = XmlSchemaForm.Qualified;
         }
 
-        static internal void AddElementToSchema(
+        internal static void AddElementToSchema(
             XmlSchemaElement element,
             XmlSchema schema,
             XmlSchemaSet schemaSet
@@ -53,7 +53,7 @@ namespace System.ServiceModel.Description
             schemaSet.Reprocess(schema);
         }
 
-        static internal void AddImportToSchema(string ns, XmlSchema schema)
+        internal static void AddImportToSchema(string ns, XmlSchema schema)
         {
             if (
                 NamespacesEqual(ns, schema.TargetNamespace)
@@ -77,7 +77,7 @@ namespace System.ServiceModel.Description
             schema.Includes.Add(import);
         }
 
-        static internal void AddTypeToSchema(
+        internal static void AddTypeToSchema(
             XmlSchemaType type,
             XmlSchema schema,
             XmlSchemaSet schemaSet
@@ -102,7 +102,7 @@ namespace System.ServiceModel.Description
             schemaSet.Reprocess(schema);
         }
 
-        static internal XmlSchema GetSchema(string ns, XmlSchemaSet schemaSet)
+        internal static XmlSchema GetSchema(string ns, XmlSchemaSet schemaSet)
         {
             if (ns == null)
             {
@@ -155,7 +155,7 @@ namespace System.ServiceModel.Description
             return true;
         }
 
-        static internal bool NamespacesEqual(string ns1, string ns2)
+        internal static bool NamespacesEqual(string ns1, string ns2)
         {
             if (ns1 == null || ns1.Length == 0)
                 return (ns2 == null || ns2.Length == 0);
@@ -163,7 +163,7 @@ namespace System.ServiceModel.Description
                 return ns1 == ns2;
         }
 
-        static internal void Compile(
+        internal static void Compile(
             XmlSchemaSet schemaSet,
             Collection<MetadataConversionError> errors
         )
@@ -179,7 +179,7 @@ namespace System.ServiceModel.Description
             schemaSet.ValidationEventHandler -= validationEventHandler;
         }
 
-        static internal void HandleSchemaValidationError(
+        internal static void HandleSchemaValidationError(
             object sender,
             ValidationEventArgs args,
             Collection<MetadataConversionError> errors

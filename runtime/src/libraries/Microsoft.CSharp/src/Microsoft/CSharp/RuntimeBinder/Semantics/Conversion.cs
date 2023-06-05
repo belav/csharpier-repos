@@ -40,7 +40,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Neither = 3,
     }
 
-    internal readonly partial struct ExpressionBinder
+    partial internal readonly struct ExpressionBinder
     {
         private delegate bool ConversionFunc(
             Expr pSourceExpr,

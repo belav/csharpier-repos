@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class BoundExpressionWithNullability : BoundExpression
+    partial internal sealed class BoundExpressionWithNullability : BoundExpression
     {
         public BoundExpressionWithNullability(
             SyntaxNode syntax,

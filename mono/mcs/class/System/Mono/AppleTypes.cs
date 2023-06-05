@@ -102,7 +102,7 @@ namespace Mono
         public IntPtr Handle { get; private set; }
 
         [DllImport(CoreFoundationLibrary)]
-        internal extern static IntPtr CFRetain(IntPtr handle);
+        internal static extern IntPtr CFRetain(IntPtr handle);
 
         void Retain()
         {
@@ -110,7 +110,7 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        internal extern static void CFRelease(IntPtr handle);
+        internal static extern void CFRelease(IntPtr handle);
 
         void Release()
         {
@@ -139,7 +139,7 @@ namespace Mono
             : base(handle, own) { }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFArrayCreate(
+        static extern IntPtr CFArrayCreate(
             IntPtr allocator,
             IntPtr values, /* CFIndex */
             IntPtr numValues,
@@ -218,8 +218,8 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static /* CFIndex */
-        IntPtr CFArrayGetCount(IntPtr handle);
+        static /* CFIndex */
+        extern IntPtr CFArrayGetCount(IntPtr handle);
 
         public int Count
         {
@@ -227,7 +227,7 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFArrayGetValueAtIndex(
+        static extern IntPtr CFArrayGetValueAtIndex(
             IntPtr handle, /* CFIndex */
             IntPtr index
         );
@@ -237,7 +237,7 @@ namespace Mono
             get { return CFArrayGetValueAtIndex(Handle, (IntPtr)index); }
         }
 
-        static public T[] ArrayFromHandle<T>(IntPtr handle, Func<IntPtr, T> creation)
+        public static T[] ArrayFromHandle<T>(IntPtr handle, Func<IntPtr, T> creation)
             where T : class, INativeObject
         {
             if (handle == IntPtr.Zero)
@@ -261,7 +261,7 @@ namespace Mono
 
         [DllImport(CoreFoundationLibrary)]
         [return: MarshalAs(UnmanagedType.I1)]
-        extern static bool CFNumberGetValue(
+        static extern bool CFNumberGetValue(
             IntPtr handle, /* CFNumberType */
             IntPtr type,
             [MarshalAs(UnmanagedType.I1)] out bool value
@@ -286,7 +286,7 @@ namespace Mono
 
         [DllImport(CoreFoundationLibrary)]
         [return: MarshalAs(UnmanagedType.I1)]
-        extern static bool CFNumberGetValue(
+        static extern bool CFNumberGetValue(
             IntPtr handle, /* CFNumberType */
             IntPtr type,
             out int value
@@ -306,7 +306,7 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFNumberCreate(IntPtr allocator, IntPtr theType, IntPtr valuePtr);
+        static extern IntPtr CFNumberCreate(IntPtr allocator, IntPtr theType, IntPtr valuePtr);
 
         public static CFNumber FromInt32(int number)
         {
@@ -340,7 +340,7 @@ namespace Mono
             : base(handle, own) { }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFStringCreateWithCharacters(
+        static extern IntPtr CFStringCreateWithCharacters(
             IntPtr alloc,
             IntPtr chars, /* CFIndex */
             IntPtr length
@@ -368,8 +368,8 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static /* CFIndex */
-        IntPtr CFStringGetLength(IntPtr handle);
+        static /* CFIndex */
+        extern IntPtr CFStringGetLength(IntPtr handle);
 
         public int Length
         {
@@ -383,7 +383,7 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static int CFStringCompare(IntPtr theString1, IntPtr theString2, int compareOptions);
+        static extern int CFStringCompare(IntPtr theString1, IntPtr theString2, int compareOptions);
 
         public static int Compare(IntPtr string1, IntPtr string2, int compareOptions = 0)
         {
@@ -391,10 +391,10 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFStringGetCharactersPtr(IntPtr handle);
+        static extern IntPtr CFStringGetCharactersPtr(IntPtr handle);
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFStringGetCharacters(IntPtr handle, CFRange range, IntPtr buffer);
+        static extern IntPtr CFStringGetCharacters(IntPtr handle, CFRange range, IntPtr buffer);
 
         public static string AsString(IntPtr handle)
         {
@@ -454,14 +454,14 @@ namespace Mono
             : base(handle, own) { }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static /* CFDataRef */
-        IntPtr CFDataCreate( /* CFAllocatorRef */
+        static /* CFDataRef */
+        extern IntPtr CFDataCreate( /* CFAllocatorRef */
             IntPtr allocator, /* UInt8* */
             IntPtr bytes, /* CFIndex */
             IntPtr length
         );
 
-        public unsafe static CFData FromData(byte[] buffer)
+        public static unsafe CFData FromData(byte[] buffer)
         {
             fixed (byte* p = buffer)
             {
@@ -480,14 +480,14 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        internal extern static /* CFIndex */
-        IntPtr CFDataGetLength( /* CFDataRef */
+        internal static /* CFIndex */
+        extern IntPtr CFDataGetLength( /* CFDataRef */
             IntPtr theData
         );
 
         [DllImport(CoreFoundationLibrary)]
-        internal extern static /* UInt8* */
-        IntPtr CFDataGetBytePtr( /* CFDataRef */
+        internal static /* UInt8* */
+        extern IntPtr CFDataGetBytePtr( /* CFDataRef */
             IntPtr theData
         );
 
@@ -579,7 +579,7 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFDictionaryCreate(
+        static extern IntPtr CFDictionaryCreate(
             IntPtr allocator,
             IntPtr[] keys,
             IntPtr[] vals,
@@ -589,10 +589,10 @@ namespace Mono
         );
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFDictionaryGetValue(IntPtr handle, IntPtr key);
+        static extern IntPtr CFDictionaryGetValue(IntPtr handle, IntPtr key);
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFDictionaryCreateCopy(IntPtr allocator, IntPtr handle);
+        static extern IntPtr CFDictionaryCreateCopy(IntPtr allocator, IntPtr handle);
 
         public CFDictionary Copy()
         {
@@ -608,7 +608,7 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFDictionaryCreateMutableCopy(
+        static extern IntPtr CFDictionaryCreateMutableCopy(
             IntPtr allocator,
             IntPtr capacity,
             IntPtr theDict
@@ -649,10 +649,10 @@ namespace Mono
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static void CFDictionarySetValue(IntPtr handle, IntPtr key, IntPtr val);
+        static extern void CFDictionarySetValue(IntPtr handle, IntPtr key, IntPtr val);
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFDictionaryCreateMutable(
+        static extern IntPtr CFDictionaryCreateMutable(
             IntPtr allocator,
             IntPtr capacity,
             IntPtr keyCallback,
@@ -732,8 +732,8 @@ namespace Mono
 
         [DllImport(CFObject.CoreFoundationLibrary)]
         [return: MarshalAs(UnmanagedType.I1)]
-        extern static /* Boolean */
-        bool CFBooleanGetValue( /* CFBooleanRef */
+        static /* Boolean */
+        extern bool CFBooleanGetValue( /* CFBooleanRef */
             IntPtr boolean
         );
 
@@ -765,7 +765,7 @@ namespace Mono
         }
 
         [DllImport(CFObject.CoreFoundationLibrary)]
-        extern static IntPtr CFDateCreate(
+        static extern IntPtr CFDateCreate(
             IntPtr allocator, /* CFAbsoluteTime */
             double at
         );

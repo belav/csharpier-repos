@@ -12,7 +12,7 @@ namespace System.Diagnostics.Metrics
         object? this[int i] { get; set; }
     }
 
-    internal partial struct ObjectSequence1 : IEquatable<ObjectSequence1>, IObjectSequence
+    partial internal struct ObjectSequence1 : IEquatable<ObjectSequence1>, IObjectSequence
     {
         public object? this[int i]
         {
@@ -38,7 +38,7 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    internal partial struct ObjectSequence2 : IEquatable<ObjectSequence2>, IObjectSequence
+    partial internal struct ObjectSequence2 : IEquatable<ObjectSequence2>, IObjectSequence
     {
         public object? this[int i]
         {
@@ -76,7 +76,7 @@ namespace System.Diagnostics.Metrics
             (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0 << 3);
     }
 
-    internal partial struct ObjectSequence3 : IEquatable<ObjectSequence3>, IObjectSequence
+    partial internal struct ObjectSequence3 : IEquatable<ObjectSequence3>, IObjectSequence
     {
         public object? this[int i]
         {
@@ -124,7 +124,7 @@ namespace System.Diagnostics.Metrics
             ^ (Value3?.GetHashCode() ?? 0 << 6);
     }
 
-    internal partial struct ObjectSequenceMany : IEquatable<ObjectSequenceMany>, IObjectSequence
+    partial internal struct ObjectSequenceMany : IEquatable<ObjectSequenceMany>, IObjectSequence
     {
         public object? this[int i]
         {

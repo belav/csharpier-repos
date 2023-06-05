@@ -10,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial struct ChildSyntaxList
+    partial public struct ChildSyntaxList
     {
         /// <summary>Enumerates the elements of a <see cref="ChildSyntaxList" />.</summary>
         public struct Enumerator

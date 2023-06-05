@@ -7,7 +7,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {
-    public partial class Process
+    partial public class Process
     {
         private const int NanosecondsTo100NanosecondsFactor = 100;
 

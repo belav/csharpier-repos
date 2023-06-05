@@ -11,7 +11,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class AppleCertificatePal : ICertificatePal
+    partial internal sealed class AppleCertificatePal : ICertificatePal
     {
         // Byte representation of "-----BEGIN "
         private static ReadOnlySpan<byte> PemBegin =>

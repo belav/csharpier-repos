@@ -16,7 +16,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 {
-    public abstract partial class DotNetSdkTestBase : TestBase
+    partial public abstract class DotNetSdkTestBase : TestBase
     {
         public sealed class DotNetSdkAvailable : ExecutionCondition
         {

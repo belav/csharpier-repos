@@ -8,7 +8,7 @@ namespace Bug
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public unsafe struct xxx
     {
-        internal fixed byte zzz[5];
+        fixed internal byte zzz[5];
     }
 
     internal class RedSkyTimeCode

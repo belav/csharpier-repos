@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace System.IO.Ports
 {
-    public partial class SerialPort : Component
+    partial public class SerialPort : Component
     {
         public static string[] GetPortNames()
         {

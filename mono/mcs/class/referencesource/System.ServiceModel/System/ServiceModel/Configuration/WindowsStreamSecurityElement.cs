@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Text;
     using System.ServiceModel.Channels;
 
-    public sealed partial class WindowsStreamSecurityElement : BindingElementExtensionElement
+    partial public sealed class WindowsStreamSecurityElement : BindingElementExtensionElement
     {
         public WindowsStreamSecurityElement() { }
 

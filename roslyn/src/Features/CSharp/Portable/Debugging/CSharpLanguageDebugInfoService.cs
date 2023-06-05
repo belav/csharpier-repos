@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.CSharp.Debugging
 {
     [ExportLanguageService(typeof(ILanguageDebugInfoService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpLanguageDebugInfoService : ILanguageDebugInfoService
+    partial internal class CSharpLanguageDebugInfoService : ILanguageDebugInfoService
     {
         [ImportingConstructor]
         [SuppressMessage(

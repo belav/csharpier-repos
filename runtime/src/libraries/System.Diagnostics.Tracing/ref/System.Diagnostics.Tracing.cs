@@ -16,7 +16,7 @@ namespace System.Diagnostics.Tracing
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method)]
-    public sealed partial class EventAttribute : System.Attribute
+    partial public sealed class EventAttribute : System.Attribute
     {
         public EventAttribute(int eventId) { }
 
@@ -88,7 +88,7 @@ namespace System.Diagnostics.Tracing
         Update = 0,
     }
 
-    public partial class EventCommandEventArgs : System.EventArgs
+    partial public class EventCommandEventArgs : System.EventArgs
     {
         internal EventCommandEventArgs() { }
 
@@ -116,7 +116,7 @@ namespace System.Diagnostics.Tracing
         System.AttributeTargets.Class | System.AttributeTargets.Struct,
         Inherited = false
     )]
-    public partial class EventDataAttribute : System.Attribute
+    partial public class EventDataAttribute : System.Attribute
     {
         public EventDataAttribute() { }
 
@@ -128,7 +128,7 @@ namespace System.Diagnostics.Tracing
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public partial class EventFieldAttribute : System.Attribute
+    partial public class EventFieldAttribute : System.Attribute
     {
         public EventFieldAttribute() { }
 
@@ -162,7 +162,7 @@ namespace System.Diagnostics.Tracing
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public partial class EventIgnoreAttribute : System.Attribute
+    partial public class EventIgnoreAttribute : System.Attribute
     {
         public EventIgnoreAttribute() { }
     }
@@ -192,7 +192,7 @@ namespace System.Diagnostics.Tracing
         Verbose = 5,
     }
 
-    public abstract partial class EventListener : System.IDisposable
+    partial public abstract class EventListener : System.IDisposable
     {
         protected EventListener() { }
 
@@ -271,7 +271,7 @@ namespace System.Diagnostics.Tracing
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
         System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
     )]
-    public partial class EventSource : System.IDisposable
+    partial public class EventSource : System.IDisposable
     {
         protected EventSource() { }
 
@@ -548,7 +548,7 @@ namespace System.Diagnostics.Tracing
         [System.Runtime.InteropServices.StructLayoutAttribute(
             System.Runtime.InteropServices.LayoutKind.Sequential
         )]
-        protected internal partial struct EventData
+        partial protected internal struct EventData
         {
             private int _dummyPrimitive;
             public System.IntPtr DataPointer
@@ -565,7 +565,7 @@ namespace System.Diagnostics.Tracing
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class EventSourceAttribute : System.Attribute
+    partial public sealed class EventSourceAttribute : System.Attribute
     {
         public EventSourceAttribute() { }
 
@@ -586,7 +586,7 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-    public partial class EventSourceCreatedEventArgs : System.EventArgs
+    partial public class EventSourceCreatedEventArgs : System.EventArgs
     {
         public EventSourceCreatedEventArgs() { }
 
@@ -596,7 +596,7 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-    public partial class EventSourceException : System.Exception
+    partial public class EventSourceException : System.Exception
     {
         public EventSourceException() { }
 
@@ -613,7 +613,7 @@ namespace System.Diagnostics.Tracing
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct EventSourceOptions
+    partial public struct EventSourceOptions
     {
         private int _dummyPrimitive;
         public System.Diagnostics.Tracing.EventActivityOptions ActivityOptions
@@ -663,7 +663,7 @@ namespace System.Diagnostics.Tracing
         None = 0,
     }
 
-    public partial class EventWrittenEventArgs : System.EventArgs
+    partial public class EventWrittenEventArgs : System.EventArgs
     {
         internal EventWrittenEventArgs() { }
 
@@ -738,7 +738,7 @@ namespace System.Diagnostics.Tracing
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method)]
-    public sealed partial class NonEventAttribute : System.Attribute
+    partial public sealed class NonEventAttribute : System.Attribute
     {
         public NonEventAttribute() { }
     }

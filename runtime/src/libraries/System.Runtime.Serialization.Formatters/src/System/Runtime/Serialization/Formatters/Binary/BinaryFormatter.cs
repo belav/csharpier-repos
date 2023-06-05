@@ -5,7 +5,7 @@ using System.Collections.Concurrent;
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
-    public sealed partial class BinaryFormatter : IFormatter
+    partial public sealed class BinaryFormatter : IFormatter
     {
         private static readonly ConcurrentDictionary<Type, TypeInformation> s_typeNameCache =
             new ConcurrentDictionary<Type, TypeInformation>();

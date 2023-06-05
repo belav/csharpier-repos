@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         // Systems without the Windows registry pretend that it's always empty.
 
@@ -16,7 +16,10 @@ namespace System
         ) => null;
 #pragma warning restore IDE0060
 
-        static partial void SetEnvironmentVariableFromRegistry(
+        partial
+#pragma warning restore IDE0060
+
+        static void SetEnvironmentVariableFromRegistry(
             string variable,
             string? value,
             bool fromMachine

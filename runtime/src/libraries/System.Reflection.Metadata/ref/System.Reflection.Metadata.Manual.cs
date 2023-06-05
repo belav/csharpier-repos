@@ -6,7 +6,7 @@
 
 namespace System.Reflection.Metadata
 {
-    public readonly partial struct AssemblyDefinition
+    partial public readonly struct AssemblyDefinition
     {
         public System.Reflection.AssemblyName GetAssemblyName()
         {
@@ -14,7 +14,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct AssemblyReference
+    partial public readonly struct AssemblyReference
     {
         public System.Reflection.AssemblyName GetAssemblyName()
         {
@@ -22,7 +22,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public partial class ImageFormatLimitationException : System.Exception
+    partial public class ImageFormatLimitationException : System.Exception
     {
         protected ImageFormatLimitationException(
             System.Runtime.Serialization.SerializationInfo info,

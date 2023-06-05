@@ -20,7 +20,7 @@ using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.General
 {
-    internal static partial class TypeResolver
+    partial internal static class TypeResolver
     {
         //
         // Main routine to resolve a typeDef/Ref/Spec. Also accepts ModifiedTypes (will unwrap and ignore the custom modifiers.)

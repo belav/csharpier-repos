@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    public abstract partial class FieldInfo : MemberInfo
+    partial public abstract class FieldInfo : MemberInfo
     {
         protected FieldInfo() { }
 

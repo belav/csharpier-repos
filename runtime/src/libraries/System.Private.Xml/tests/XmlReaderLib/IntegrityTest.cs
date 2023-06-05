@@ -29,7 +29,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public partial class TCXMLIntegrityBase : CDataReaderTestCase
+    partial public class TCXMLIntegrityBase : CDataReaderTestCase
     {
         private EINTEGRITY _eEIntegrity;
 

@@ -64,7 +64,7 @@ namespace Internal.TypeSystem
         AcceptByRefLike = 0x20,
     }
 
-    public abstract partial class GenericParameterDesc : TypeDesc
+    partial public abstract class GenericParameterDesc : TypeDesc
     {
         /// <summary>
         /// Gets the name of the generic parameter as defined in the metadata.

@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Text.Classification;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
-    internal static partial class ClassificationExtensions
+    partial internal static class ClassificationExtensions
     {
         public static IList<ClassificationSpan> ToClassificationSpans(
             this IEnumerable<TaggedText> parts,

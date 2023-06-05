@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class Object
+    partial public class Object
     {
         // Returns a Type object which represent this object instance.
         [Intrinsic]

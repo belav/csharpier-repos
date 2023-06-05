@@ -13,7 +13,7 @@ using WorkspacesResources = Microsoft.CodeAnalysis.CodeStyleResources;
 namespace Microsoft.CodeAnalysis.Options
 {
     [NonDefaultable]
-    internal readonly partial struct OptionKey2 : IEquatable<OptionKey2>
+    partial internal readonly struct OptionKey2 : IEquatable<OptionKey2>
     {
         public IOption2 Option { get; }
         public string? Language { get; }

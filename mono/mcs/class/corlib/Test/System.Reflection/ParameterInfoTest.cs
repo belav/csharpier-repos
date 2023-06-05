@@ -93,7 +93,7 @@ namespace MonoTests.System.Reflection
         ) { }
 
         [DllImport("foo")]
-        public extern static void marshalAsMethod(
+        public static extern void marshalAsMethod(
             [MarshalAs(UnmanagedType.Bool)] int p0,
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] p1,
             [MarshalAs(

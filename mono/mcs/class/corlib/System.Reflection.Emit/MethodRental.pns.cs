@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    public partial class MethodRental : _MethodRental
+    partial public class MethodRental : _MethodRental
     {
         private MethodRental() { }
 

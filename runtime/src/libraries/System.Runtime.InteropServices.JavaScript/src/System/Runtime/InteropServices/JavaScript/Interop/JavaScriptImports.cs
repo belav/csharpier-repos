@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    internal static unsafe partial class JavaScriptImports
+    partial internal static unsafe class JavaScriptImports
     {
         public static void MarshalPromise(Span<JSMarshalerArgument> arguments)
         {

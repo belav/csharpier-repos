@@ -52,21 +52,21 @@ namespace System.Web.UI.Design.MobileControls.Util
 
         private static ElementTable _endTagOptionalElement = null;
 
-        private readonly static Regex _tagRegex = new TagRegex();
-        private readonly static Regex _directiveRegex = new DirectiveRegex();
-        private readonly static Regex _endtagRegex = new EndTagRegex();
-        private readonly static Regex _aspCodeRegex = new AspCodeRegex();
-        private readonly static Regex _aspExprRegex = new AspExprRegex();
-        private readonly static Regex _databindExprRegex = new DatabindExprRegex();
-        private readonly static Regex _commentRegex = new CommentRegex();
-        private readonly static Regex _includeRegex = new IncludeRegex();
-        private readonly static Regex _textRegex = new TextRegex();
+        private static readonly Regex _tagRegex = new TagRegex();
+        private static readonly Regex _directiveRegex = new DirectiveRegex();
+        private static readonly Regex _endtagRegex = new EndTagRegex();
+        private static readonly Regex _aspCodeRegex = new AspCodeRegex();
+        private static readonly Regex _aspExprRegex = new AspExprRegex();
+        private static readonly Regex _databindExprRegex = new DatabindExprRegex();
+        private static readonly Regex _commentRegex = new CommentRegex();
+        private static readonly Regex _includeRegex = new IncludeRegex();
+        private static readonly Regex _textRegex = new TextRegex();
 
         // Regexes used in DetectSpecialServerTagError
-        private readonly static Regex _gtRegex = new GTRegex();
-        private readonly static Regex _ltRegex = new LTRegex();
-        private readonly static Regex _serverTagsRegex = new ServerTagsRegex();
-        private readonly static Regex _runatServerRegex = new RunatServerRegex();
+        private static readonly Regex _gtRegex = new GTRegex();
+        private static readonly Regex _ltRegex = new LTRegex();
+        private static readonly Regex _serverTagsRegex = new ServerTagsRegex();
+        private static readonly Regex _runatServerRegex = new RunatServerRegex();
 
         /* Regex patterns
                 AspCodeRegex : \G<%(?!@)(?<code>.*?)%>

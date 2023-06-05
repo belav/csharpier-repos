@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Forces a write of all modified I/O buffers to their storage mediums.
         /// </summary>
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Sync")]
-        internal static partial void Sync();
+        partial internal static void Sync();
     }
 }

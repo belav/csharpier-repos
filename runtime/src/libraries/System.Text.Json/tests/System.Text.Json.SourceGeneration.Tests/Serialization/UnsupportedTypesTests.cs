@@ -9,7 +9,7 @@ using System.Text.Json.Serialization.Tests;
 
 namespace System.Text.Json.SourceGeneration.Tests
 {
-    public sealed partial class UnsupportedTypesTests_Metadata : UnsupportedTypesTests
+    partial public sealed class UnsupportedTypesTests_Metadata : UnsupportedTypesTests
     {
         public UnsupportedTypesTests_Metadata()
             : base(
@@ -45,11 +45,11 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassThatImplementsIAsyncEnumerable))]
         [JsonSerializable(typeof(ClassWithType<ClassThatImplementsIAsyncEnumerable>))]
         [JsonSerializable(typeof(ClassWithAsyncEnumerableConverter))]
-        internal sealed partial class UnsupportedTypesTestsContext_Metadata
+        partial internal sealed class UnsupportedTypesTestsContext_Metadata
             : JsonSerializerContext { }
     }
 
-    public sealed partial class UnsupportedTypesTests_Default : UnsupportedTypesTests
+    partial public sealed class UnsupportedTypesTests_Default : UnsupportedTypesTests
     {
         public UnsupportedTypesTests_Default()
             : base(
@@ -84,7 +84,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassThatImplementsIAsyncEnumerable))]
         [JsonSerializable(typeof(ClassWithType<ClassThatImplementsIAsyncEnumerable>))]
         [JsonSerializable(typeof(ClassWithAsyncEnumerableConverter))]
-        internal sealed partial class UnsupportedTypesTestsContext_Default
+        partial internal sealed class UnsupportedTypesTestsContext_Default
             : JsonSerializerContext { }
     }
 }

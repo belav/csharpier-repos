@@ -15,9 +15,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 {
-    internal partial class CSharpMethodExtractor
+    partial internal class CSharpMethodExtractor
     {
-        private abstract partial class CSharpCodeGenerator
+        partial private abstract class CSharpCodeGenerator
         {
             private class CallSiteContainerRewriter : CSharpSyntaxRewriter
             {

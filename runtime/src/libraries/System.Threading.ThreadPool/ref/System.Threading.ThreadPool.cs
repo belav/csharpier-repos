@@ -6,15 +6,16 @@
 
 namespace System.Threading
 {
-    public partial interface IThreadPoolWorkItem
+    partial public interface IThreadPoolWorkItem
     {
         void Execute();
     }
 
 #if !FEATURE_WASM_THREADS
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
+    partial
 #endif
-    public sealed partial class RegisteredWaitHandle : System.MarshalByRefObject
+    public sealed class RegisteredWaitHandle : System.MarshalByRefObject
     {
         internal RegisteredWaitHandle() { }
 
@@ -24,7 +25,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class ThreadPool
+    partial public static class ThreadPool
     {
         public static long CompletedWorkItemCount
         {
@@ -157,7 +158,7 @@ namespace System.Threading
 
         [System.CLSCompliantAttribute(false)]
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public unsafe static bool UnsafeQueueNativeOverlapped(
+        public static unsafe bool UnsafeQueueNativeOverlapped(
             System.Threading.NativeOverlapped* overlapped
         )
         {

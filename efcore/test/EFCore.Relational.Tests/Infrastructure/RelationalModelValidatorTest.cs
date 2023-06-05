@@ -9,7 +9,7 @@ using Xunit.Sdk;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-public partial class RelationalModelValidatorTest : ModelValidatorTest
+partial public class RelationalModelValidatorTest : ModelValidatorTest
 {
     public override void Detects_key_property_which_cannot_be_compared()
     {

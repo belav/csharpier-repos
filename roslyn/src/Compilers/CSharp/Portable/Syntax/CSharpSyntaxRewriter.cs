@@ -10,11 +10,12 @@ using Microsoft.CodeAnalysis.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Represents a <see cref="CSharpSyntaxVisitor{TResult}"/> which descends an entire <see cref="CSharpSyntaxNode"/> graph and
     /// may replace or remove visited SyntaxNodes in depth-first order.
     /// </summary>
-    public abstract partial class CSharpSyntaxRewriter : CSharpSyntaxVisitor<SyntaxNode?>
+    public abstract class CSharpSyntaxRewriter : CSharpSyntaxVisitor<SyntaxNode?>
     {
         private readonly bool _visitIntoStructuredTrivia;
 

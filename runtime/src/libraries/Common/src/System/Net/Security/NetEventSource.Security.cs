@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net
 {
-    internal sealed partial class NetEventSource
+    partial internal sealed class NetEventSource
     {
         // Event ids are defined in NetEventSource.Common.cs.
 

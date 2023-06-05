@@ -3,7 +3,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class Process : IDisposable
+    partial public class Process : IDisposable
     {
         /// <summary>
         /// Creates an array of <see cref="Process"/> components that are associated with process resources on a

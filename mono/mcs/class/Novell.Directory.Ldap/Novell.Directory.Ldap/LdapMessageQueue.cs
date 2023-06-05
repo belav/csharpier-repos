@@ -42,30 +42,33 @@ namespace Novell.Directory.Ldap
     /// </summary>
     public abstract class LdapMessageQueue
     {
+        internal
         /// <summary> Returns the name used for debug
         ///
         /// </summary>
         /// <returns> name of object instance used for debug
         /// </returns>
-        virtual internal System.String DebugName
+        virtual System.String DebugName
         {
             /* package */
 
             get { return name; }
         }
 
+        internal
         /// <summary> Returns the internal client message agent
         ///
         /// </summary>
         /// <returns> The internal client message agent
         /// </returns>
-        virtual internal MessageAgent MessageAgent
+        virtual MessageAgent MessageAgent
         {
             /* package */
 
             get { return agent; }
         }
 
+        public
         /// <summary> Returns the message IDs for all outstanding requests. These are requests
         /// for which a response has not been received from the server or which
         /// still have messages to be retrieved with getResponse.
@@ -76,7 +79,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> The message IDs for all outstanding requests.
         /// </returns>
-        virtual public int[] MessageIDs
+        virtual int[] MessageIDs
         {
             get { return agent.MessageIDs; }
         }

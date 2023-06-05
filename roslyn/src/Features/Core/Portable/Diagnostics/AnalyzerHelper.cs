@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal static partial class AnalyzerHelper
+    partial internal static class AnalyzerHelper
     {
         // These are the error codes of the compiler warnings.
         // Keep the ids the same so that de-duplication against compiler errors

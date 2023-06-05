@@ -5,7 +5,7 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
-    internal partial class MethodBaseGetCurrentMethodThunk : IPrefixMangledMethod
+    partial internal class MethodBaseGetCurrentMethodThunk : IPrefixMangledMethod
     {
         MethodDesc IPrefixMangledMethod.BaseMethod
         {

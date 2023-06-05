@@ -9,10 +9,11 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
 {
+    partial
     /// <summary>
     /// Base type for all wrappers that involve wrapping a comma-separated list of items.
     /// </summary>
-    internal abstract partial class AbstractSeparatedSyntaxListWrapper<TListSyntax, TListItemSyntax>
+    internal abstract class AbstractSeparatedSyntaxListWrapper<TListSyntax, TListItemSyntax>
         : AbstractSyntaxWrapper
         where TListSyntax : SyntaxNode
         where TListItemSyntax : SyntaxNode

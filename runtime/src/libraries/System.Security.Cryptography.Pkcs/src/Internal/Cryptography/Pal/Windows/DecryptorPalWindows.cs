@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography.Pal.Windows
 {
-    internal sealed partial class DecryptorPalWindows : DecryptorPal
+    partial internal sealed class DecryptorPalWindows : DecryptorPal
     {
         private DecryptorPalWindows(
             SafeCryptMsgHandle hCryptMsg,

@@ -3,7 +3,7 @@
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    public partial struct JSMarshalerArgument
+    partial public struct JSMarshalerArgument
     {
         private sealed class ActionJS
         {

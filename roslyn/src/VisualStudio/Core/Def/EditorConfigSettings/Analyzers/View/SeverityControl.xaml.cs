@@ -7,10 +7,11 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers.Vie
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers.View
 {
+    partial
     /// <summary>
     /// Interaction logic for SeverityControl.xaml
     /// </summary>
-    internal partial class SeverityControl : UserControl
+    internal class SeverityControl : UserControl
     {
         private readonly SeverityViewModel _viewModel;
 

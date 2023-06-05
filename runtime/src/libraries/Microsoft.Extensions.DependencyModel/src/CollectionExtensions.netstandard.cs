@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace System.Collections.Generic
 {
-    public static partial class CollectionExtensions
+    partial public static class CollectionExtensions
     {
         /// <summary>
         /// Creates a Dictionary from List keyed off of the Library's name.

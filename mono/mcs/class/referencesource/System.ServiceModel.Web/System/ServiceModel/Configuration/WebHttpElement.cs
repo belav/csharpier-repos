@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Description;
     using System.ServiceModel.Web;
 
-    public sealed partial class WebHttpElement : BehaviorExtensionElement
+    partial public sealed class WebHttpElement : BehaviorExtensionElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -134,7 +134,7 @@ namespace System.ServiceModel.Configuration
             get { return typeof(WebHttpBehavior); }
         }
 
-        internal protected override object CreateBehavior()
+        protected internal override object CreateBehavior()
         {
             return new WebHttpBehavior()
             {

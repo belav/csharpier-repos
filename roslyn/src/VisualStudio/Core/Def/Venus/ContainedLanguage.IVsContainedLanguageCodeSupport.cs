@@ -17,7 +17,7 @@ using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 {
-    internal partial class ContainedLanguage : IVsContainedLanguageCodeSupport
+    partial internal class ContainedLanguage : IVsContainedLanguageCodeSupport
     {
         public int CreateUniqueEventName(
             string pszClassName,

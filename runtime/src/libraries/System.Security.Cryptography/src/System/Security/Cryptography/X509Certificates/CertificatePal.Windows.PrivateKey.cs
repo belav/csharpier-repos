@@ -8,7 +8,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class CertificatePal : IDisposable, ICertificatePal
+    partial internal sealed class CertificatePal : IDisposable, ICertificatePal
     {
         public bool HasPrivateKey
         {

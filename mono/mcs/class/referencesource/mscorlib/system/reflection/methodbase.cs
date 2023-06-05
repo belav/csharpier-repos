@@ -60,7 +60,7 @@ namespace System.Reflection
     [PermissionSetAttribute(SecurityAction.InheritanceDemand, Name = "FullTrust")]
 #pragma warning restore 618
     [System.Runtime.InteropServices.ComVisible(true)]
-    public abstract partial class MethodBase : MemberInfo, _MethodBase
+    partial public abstract class MethodBase : MemberInfo, _MethodBase
     {
         #region Static Members
         public static MethodBase GetMethodFromHandle(RuntimeMethodHandle handle)
@@ -118,7 +118,7 @@ namespace System.Reflection
 
 #if MONO
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static MethodBase GetCurrentMethod();
+        public static extern MethodBase GetCurrentMethod();
 #else
         [System.Security.DynamicSecurityMethod] // Specify DynamicSecurityMethod attribute to prevent inlining of the caller.
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable

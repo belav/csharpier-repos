@@ -11,7 +11,7 @@ namespace System.Runtime.InteropServices.ObjectiveC
     /// </summary>
     [SupportedOSPlatform("macos")]
     [CLSCompliant(false)]
-    public static partial class ObjectiveCMarshal
+    partial public static class ObjectiveCMarshal
     {
         /// <summary>
         /// Handler for unhandled Exceptions crossing the managed -> native boundary (that is, Reverse P/Invoke).

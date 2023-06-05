@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 namespace System
 {
-    internal static partial class AppContextDefaultValues
+    partial internal static class AppContextDefaultValues
     {
         public static void PopulateDefaultValues()
         {
@@ -189,7 +189,11 @@ namespace System
         // This is a partial method. Platforms (such as Desktop) can provide an implementation of it that will read override value
         // from whatever mechanism is available on that platform. If no implementation is provided, the compiler is going to remove the calls
         // to it from the code
-        static partial void TryGetSwitchOverridePartial(
+        partial
+        // This is a partial method. Platforms (such as Desktop) can provide an implementation of it that will read override value
+        // from whatever mechanism is available on that platform. If no implementation is provided, the compiler is going to remove the calls
+        // to it from the code
+        static void TryGetSwitchOverridePartial(
             string switchName,
             ref bool overrideFound,
             ref bool overrideValue
@@ -197,7 +201,10 @@ namespace System
 
         /// This is a partial method. This method is responsible for populating the default values based on a TFM.
         /// It is partial because each library should define this method in their code to contain their defaults.
-        static partial void PopulateDefaultValuesPartial(
+        partial
+        /// This is a partial method. This method is responsible for populating the default values based on a TFM.
+        /// It is partial because each library should define this method in their code to contain their defaults.
+        static void PopulateDefaultValuesPartial(
             string platformIdentifier,
             string profile,
             int version

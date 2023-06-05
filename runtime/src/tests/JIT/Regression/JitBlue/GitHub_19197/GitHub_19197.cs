@@ -12,7 +12,7 @@ public class GitHub_19171
 {
     static int returnVal = 100;
 
-    static public void Vector3EqualsTest()
+    public static void Vector3EqualsTest()
     {
         Vector3 a = new Vector3(1.0f, 2.0f, 3.0f);
         Vector3 b = new Vector3(1.0f, 2.0f, 3.0f);

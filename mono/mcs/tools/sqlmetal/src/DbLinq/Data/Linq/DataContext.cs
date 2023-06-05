@@ -61,7 +61,7 @@ namespace System.Data.Linq
 namespace DbLinq.Data.Linq
 #endif
 {
-    public partial class DataContext : IDisposable
+    partial public class DataContext : IDisposable
     {
         //private readonly Dictionary<string, ITable> _tableMap = new Dictionary<string, ITable>();
         private readonly Dictionary<Type, ITable> _tableMap = new Dictionary<Type, ITable>();

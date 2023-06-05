@@ -8,10 +8,11 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// This class proxies requests for option values first to the <see cref="AnalyzerConfigOptions" /> then to a backup <see cref="OptionSet" /> if provided.
     /// </summary>
-    internal sealed partial class AnalyzerConfigOptionSet : OptionSet
+    internal sealed class AnalyzerConfigOptionSet : OptionSet
     {
         private readonly AnalyzerConfigOptions _analyzerConfigOptions;
         private readonly OptionSet? _optionSet;

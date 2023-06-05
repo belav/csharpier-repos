@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {
-    internal abstract partial class AbstractStructuralTypeDisplayService
+    partial internal abstract class AbstractStructuralTypeDisplayService
         : IStructuralTypeDisplayService
     {
         protected static readonly SymbolDisplayFormat s_minimalWithoutExpandedTuples =

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace System.CodeDom.Compiler
 {
-    public partial class CompilerResults
+    partial public class CompilerResults
     {
         private Assembly _compiledAssembly;
 

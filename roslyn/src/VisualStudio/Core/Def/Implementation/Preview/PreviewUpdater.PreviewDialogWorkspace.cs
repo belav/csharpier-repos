@@ -15,7 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 {
     using Workspace = Microsoft.CodeAnalysis.Workspace;
 
-    internal partial class PreviewUpdater
+    partial internal class PreviewUpdater
     {
         // internal for testing
         internal class PreviewDialogWorkspace : PreviewWorkspace

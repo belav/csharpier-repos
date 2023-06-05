@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel;
 
-    public sealed partial class OneWayElement : BindingElementExtensionElement
+    partial public sealed class OneWayElement : BindingElementExtensionElement
     {
         public OneWayElement() { }
 

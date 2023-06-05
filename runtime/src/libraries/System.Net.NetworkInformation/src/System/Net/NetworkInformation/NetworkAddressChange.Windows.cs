@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System.Net.NetworkInformation
 {
-    public partial class NetworkChange
+    partial public class NetworkChange
     {
         private static readonly object s_globalLock = new object();
 

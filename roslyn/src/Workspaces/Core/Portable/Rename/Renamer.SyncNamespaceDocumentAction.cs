@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
-    public static partial class Renamer
+    partial public static class Renamer
     {
         /// <summary>
         /// Action that will sync the namespace of the document to match the folders property

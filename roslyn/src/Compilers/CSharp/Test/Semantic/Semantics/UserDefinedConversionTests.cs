@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class UserDefinedConversionTests : CompilingTestBase
+    partial public class UserDefinedConversionTests : CompilingTestBase
     {
         #region "Source"
         private readonly string _userDefinedConversionTestTemplate =

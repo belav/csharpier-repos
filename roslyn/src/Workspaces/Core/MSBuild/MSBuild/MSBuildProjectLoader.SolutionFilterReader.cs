@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.MSBuild
 {
-    public partial class MSBuildProjectLoader
+    partial public class MSBuildProjectLoader
     {
         private static class SolutionFilterReader
         {

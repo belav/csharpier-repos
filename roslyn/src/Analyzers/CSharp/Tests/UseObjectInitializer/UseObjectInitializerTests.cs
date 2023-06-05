@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
     >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
-    public partial class UseObjectInitializerTests
+    partial public class UseObjectInitializerTests
     {
         private static async Task TestInRegularAndScriptAsync(
             string testCode,

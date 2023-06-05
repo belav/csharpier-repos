@@ -95,7 +95,13 @@ namespace Mono.CSharp
         ///
         ///   Returns null if the expression can not be folded.
         /// </summary>
-        static public Constant BinaryFold(
+        public
+        /// <summary>
+        ///   Constant expression folder for binary operations.
+        ///
+        ///   Returns null if the expression can not be folded.
+        /// </summary>
+        static Constant BinaryFold(
             ResolveContext ec,
             Binary.Operator oper,
             Constant left,

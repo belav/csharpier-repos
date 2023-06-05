@@ -12,7 +12,7 @@ using Internal.TypeSystem.Ecma;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct MethodProxy : IEquatable<MethodProxy>
+    partial internal readonly struct MethodProxy : IEquatable<MethodProxy>
     {
         public MethodProxy(MethodDesc method) => Method = method;
 
@@ -27,27 +27,27 @@ namespace ILLink.Shared.TypeSystemProxy
 
         public string GetDisplayName() => Method.GetDisplayName();
 
-        internal partial bool IsDeclaredOnType(string fullTypeName) =>
+        partial internal bool IsDeclaredOnType(string fullTypeName) =>
             Method.IsDeclaredOnType(fullTypeName);
 
-        internal partial bool HasParameters() => Method.Signature.Length > 0;
+        partial internal bool HasParameters() => Method.Signature.Length > 0;
 
-        internal partial int GetParametersCount() => Method.Signature.Length;
+        partial internal int GetParametersCount() => Method.Signature.Length;
 
-        internal partial bool HasParameterOfType(int parameterIndex, string fullTypeName) =>
+        partial internal bool HasParameterOfType(int parameterIndex, string fullTypeName) =>
             Method.HasParameterOfType(parameterIndex, fullTypeName);
 
-        internal partial string GetParameterDisplayName(int parameterIndex) =>
+        partial internal string GetParameterDisplayName(int parameterIndex) =>
             (Method is EcmaMethod ecmaMethod)
                 ? ecmaMethod.GetParameterDisplayName(parameterIndex)
                 : $"#{parameterIndex}";
 
-        internal partial bool HasGenericParameters() => Method.HasInstantiation;
+        partial internal bool HasGenericParameters() => Method.HasInstantiation;
 
-        internal partial bool HasGenericParametersCount(int genericParameterCount) =>
+        partial internal bool HasGenericParametersCount(int genericParameterCount) =>
             Method.Instantiation.Length == genericParameterCount;
 
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters()
+        partial internal ImmutableArray<GenericParameterProxy> GetGenericParameters()
         {
             var methodDef = Method.GetMethodDefinition();
 
@@ -65,9 +65,9 @@ namespace ILLink.Shared.TypeSystemProxy
             return builder.ToImmutableArray();
         }
 
-        internal partial bool IsStatic() => Method.Signature.IsStatic;
+        partial internal bool IsStatic() => Method.Signature.IsStatic;
 
-        internal partial bool ReturnsVoid() => Method.Signature.ReturnType.IsVoid;
+        partial internal bool ReturnsVoid() => Method.Signature.ReturnType.IsVoid;
 
         public override string ToString() => Method.ToString();
 

@@ -7,7 +7,7 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
-    public partial class CalliMarshallingMethodThunk : IPrefixMangledSignature
+    partial public class CalliMarshallingMethodThunk : IPrefixMangledSignature
     {
         MethodSignature IPrefixMangledSignature.BaseSignature
         {

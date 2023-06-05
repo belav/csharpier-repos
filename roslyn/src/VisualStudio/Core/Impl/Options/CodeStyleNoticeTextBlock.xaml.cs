@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 {
-    internal partial class CodeStyleNoticeTextBlock : TextBlock
+    partial internal class CodeStyleNoticeTextBlock : TextBlock
     {
         private const string UseEditorConfigUrl = "https://go.microsoft.com/fwlink/?linkid=866541";
 

@@ -270,7 +270,7 @@ namespace System.ServiceModel.Security
             public DummyCloseAsyncResult(AsyncCallback callback, object state)
                 : base(callback, state) { }
 
-            new public static void End(IAsyncResult result)
+            public static new void End(IAsyncResult result)
             {
                 AsyncResult.End<DummyCloseAsyncResult>(result);
             }

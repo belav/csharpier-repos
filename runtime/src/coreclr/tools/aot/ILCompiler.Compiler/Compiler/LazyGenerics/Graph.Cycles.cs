@@ -8,11 +8,11 @@ using System.Linq;
 
 namespace ILCompiler
 {
-    internal static partial class LazyGenericsSupport
+    partial internal static class LazyGenericsSupport
     {
         private const long s_previousAlgorithmTimeout = 10000;
 
-        private sealed partial class Graph<P>
+        partial private sealed class Graph<P>
         {
             private sealed class TarjanWorkerClass
             {

@@ -14,29 +14,29 @@ namespace DllImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        public partial class Arrays
+        partial public class Arrays
         {
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int Sum(int[] values, int numValues);
+            partial public static int Sum(int[] values, int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int Sum(ref int values, int numValues);
+            partial public static int Sum(ref int values, int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array_ref")]
-            public static partial int SumInArray(in int[] values, int numValues);
+            partial public static int SumInArray(in int[] values, int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-            public static partial void Duplicate(
+            partial public static void Duplicate(
                 [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref int[] values,
                 int numValues
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "create_range_array")]
             [return: MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
-            public static partial int[] CreateRange(int start, int end, out int numValues);
+            partial public static int[] CreateRange(int start, int end, out int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "create_range_array_out")]
-            public static partial void CreateRange_Out(
+            partial public static void CreateRange_Out(
                 int start,
                 int end,
                 out int numValues,
@@ -48,33 +48,33 @@ namespace DllImportGenerator.IntegrationTests
                 EntryPoint = "sum_char_array",
                 CharSet = CharSet.Unicode
             )]
-            public static partial int SumChars(char[] chars, int numElements);
+            partial public static int SumChars(char[] chars, int numElements);
 
             [GeneratedDllImport(
                 NativeExportsNE_Binary,
                 EntryPoint = "fill_char_array",
                 CharSet = CharSet.Unicode
             )]
-            public static partial void FillChars([Out] char[] chars, int length, ushort start);
+            partial public static void FillChars([Out] char[] chars, int length, ushort start);
 
             [GeneratedDllImport(
                 NativeExportsNE_Binary,
                 EntryPoint = "reverse_char_array",
                 CharSet = CharSet.Unicode
             )]
-            public static partial void ReverseChars(
+            partial public static void ReverseChars(
                 [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ref char[] chars,
                 int numElements
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_string_lengths")]
-            public static partial int SumStringLengths(
+            partial public static int SumStringLengths(
                 [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
                     string[] strArray
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_replace")]
-            public static partial void ReverseStrings_Ref(
+            partial public static void ReverseStrings_Ref(
                 [MarshalAs(
                     UnmanagedType.LPArray,
                     ArraySubType = UnmanagedType.LPWStr,
@@ -90,14 +90,14 @@ namespace DllImportGenerator.IntegrationTests
                 ArraySubType = UnmanagedType.LPWStr,
                 SizeParamIndex = 1
             )]
-            public static partial string[] ReverseStrings_Return(
+            partial public static string[] ReverseStrings_Return(
                 [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
                     string[] strArray,
                 out int numElements
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_out")]
-            public static partial void ReverseStrings_Out(
+            partial public static void ReverseStrings_Out(
                 [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
                     string[] strArray,
                 out int numElements,
@@ -111,10 +111,10 @@ namespace DllImportGenerator.IntegrationTests
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes")]
             [return: MarshalAs(UnmanagedType.LPArray, SizeConst = sizeof(long))]
-            public static partial byte[] GetLongBytes(long l);
+            partial public static byte[] GetLongBytes(long l);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "append_int_to_array")]
-            public static partial void Append(
+            partial public static void Append(
                 [MarshalAs(UnmanagedType.LPArray, SizeConst = 1, SizeParamIndex = 1)]
                     ref int[] values,
                 int numOriginalValues,
@@ -123,23 +123,23 @@ namespace DllImportGenerator.IntegrationTests
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "fill_range_array")]
             [return: MarshalAs(UnmanagedType.U1)]
-            public static partial bool FillRangeArray(
+            partial public static bool FillRangeArray(
                 [Out] IntStructWrapper[] array,
                 int length,
                 int start
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "double_values")]
-            public static partial bool DoubleValues([In, Out] IntStructWrapper[] array, int length);
+            partial public static bool DoubleValues([In, Out] IntStructWrapper[] array, int length);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "and_all_members")]
             [return: MarshalAs(UnmanagedType.U1)]
-            public static partial bool AndAllMembers(BoolStruct[] pArray, int length);
+            partial public static bool AndAllMembers(BoolStruct[] pArray, int length);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "transpose_matrix")]
             [return: MarshalUsing(CountElementName = "numColumns")]
             [return: MarshalUsing(CountElementName = "numRows", ElementIndirectionLevel = 1)]
-            public static partial int[][] TransposeMatrix(
+            partial public static int[][] TransposeMatrix(
                 int[][] matrix,
                 int[] numRows,
                 int numColumns

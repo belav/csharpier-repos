@@ -12,7 +12,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class ReferenceHandlerTests_IgnoreCycles : SerializerTests
+    partial public abstract class ReferenceHandlerTests_IgnoreCycles : SerializerTests
     {
         public ReferenceHandlerTests_IgnoreCycles(JsonSerializerWrapper stringSerializer)
             : base(stringSerializer) { }

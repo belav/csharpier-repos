@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     /// "\\clrmain\tools\managed\etw\eventRegister\bin\Debug\eventRegister.exe" Microsoft.CodeAnalysis.Workspaces.dll
     /// </summary>
     [EventSource(Name = "RoslynEventSource")]
-    internal sealed partial class RoslynEventSource : EventSource
+    partial internal sealed class RoslynEventSource : EventSource
     {
         // might not "enabled" but we always have this singleton alive
         public static readonly RoslynEventSource Instance = new();

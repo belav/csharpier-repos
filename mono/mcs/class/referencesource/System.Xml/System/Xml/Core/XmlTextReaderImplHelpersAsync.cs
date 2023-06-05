@@ -21,16 +21,17 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial class XmlTextReaderImpl
+    partial internal class XmlTextReaderImpl
     {
+        partial partial
         //
         // DtdParserProxy: IDtdParserAdapter proxy for XmlTextReaderImpl
         //
 #if SILVERLIGHT
-        internal partial class DtdParserProxy : IDtdParserAdapter
+        internal class DtdParserProxy : IDtdParserAdapter
         {
 #else
-        internal partial class DtdParserProxy : IDtdParserAdapterV1
+        internal class DtdParserProxy : IDtdParserAdapterV1
         {
 #endif
 

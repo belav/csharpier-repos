@@ -9,10 +9,11 @@ using System.Collections.Generic;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base class for all Assembly objects created by a MetadataLoadContext.
     /// </summary>
-    internal abstract partial class RoAssembly
+    internal abstract class RoAssembly
     {
         public sealed override Module? GetModule(string name) => GetRoModule(name);
 

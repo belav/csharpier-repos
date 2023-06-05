@@ -4,13 +4,13 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Authz
+    partial internal static class Authz
     {
         [LibraryImport(Libraries.Authz, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool AuthzGetInformationFromContext(
+        partial internal static bool AuthzGetInformationFromContext(
             IntPtr hAuthzClientContext,
             int InfoClass,
             int BufferSize,

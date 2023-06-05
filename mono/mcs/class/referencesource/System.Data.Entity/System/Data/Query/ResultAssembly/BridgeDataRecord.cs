@@ -21,10 +21,11 @@ namespace System.Data.Query.ResultAssembly
     using System.Text;
     using System.Threading;
 
+    internal
     /// <summary>
     /// DbDataRecord functionality for the bridge.
     /// </summary>
-    sealed internal class BridgeDataRecord : DbDataRecord, IExtendedDataRecord
+    sealed class BridgeDataRecord : DbDataRecord, IExtendedDataRecord
     {
         #region state
 
@@ -335,10 +336,11 @@ namespace System.Data.Query.ResultAssembly
             }
         }
 
+        public
         /// <summary>
         /// implementation of DbDataRecord.FieldCount property
         /// </summary>
-        override public int FieldCount
+        override int FieldCount
         {
             get
             {
@@ -383,7 +385,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public string GetDataTypeName(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetDataTypeName() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override string GetDataTypeName(int ordinal)
         {
             AssertReaderIsOpenWithData();
             return TypeHelpers.GetFullName(GetTypeUsage(ordinal));
@@ -394,7 +402,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public Type GetFieldType(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetFieldType() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override Type GetFieldType(int ordinal)
         {
             AssertReaderIsOpenWithData();
             return BridgeDataReader.GetClrTypeFromTypeMetadata(GetTypeUsage(ordinal));
@@ -405,7 +419,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public string GetName(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetName() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override string GetName(int ordinal)
         {
             AssertReaderIsOpen();
             return _source.GetName(ordinal);
@@ -416,12 +436,19 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        override public int GetOrdinal(string name)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetOrdinal() method
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        override int GetOrdinal(string name)
         {
             AssertReaderIsOpen();
             return _source.GetOrdinal(name);
         }
 
+        public
         #endregion
 
         #region general getter methods and indexer properties
@@ -431,17 +458,18 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public object this[int ordinal]
+        override object this[int ordinal]
         {
             get { return GetValue(ordinal); }
         }
 
+        public
         /// <summary>
         /// implementation for DbDataRecord[name] indexer property
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        override public object this[string name]
+        override object this[string name]
         {
             get { return GetValue(GetOrdinal(name)); }
         }
@@ -457,7 +485,19 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public Object GetValue(int ordinal)
+        public
+        /// <summary>
+        /// implementation for DbDataRecord.GetValue() method
+        ///
+        /// This method is used by most of the column getters on this
+        /// class to retrieve the value from the source reader.  Therefore,
+        /// it asserts all the good things, like that the reader is open,
+        /// and that it has data, and that you're not trying to circumvent
+        /// sequential access requirements.
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override Object GetValue(int ordinal)
         {
             AssertReaderIsOpenWithData();
             AssertSequentialAccess(ordinal);
@@ -547,7 +587,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        override public int GetValues(object[] values)
+        public
+        /// <summary>
+        /// implementation for DbDataRecord.GetValues() method
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        override int GetValues(object[] values)
         {
             EntityUtil.CheckArgumentNull(values, "values");
 
@@ -568,7 +614,17 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public bool GetBoolean(int ordinal)
+        public
+        #endregion
+
+        #region simple scalar value getter methods
+
+        /// <summary>
+        /// implementation of DbDataRecord.GetBoolean() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override bool GetBoolean(int ordinal)
         {
             return (bool)GetValue(ordinal);
         }
@@ -578,7 +634,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public byte GetByte(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetByte() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override byte GetByte(int ordinal)
         {
             return (byte)GetValue(ordinal);
         }
@@ -588,7 +650,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public char GetChar(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetChar() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override char GetChar(int ordinal)
         {
             return (char)GetValue(ordinal);
         }
@@ -598,7 +666,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public DateTime GetDateTime(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetDateTime() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override DateTime GetDateTime(int ordinal)
         {
             return (DateTime)GetValue(ordinal);
         }
@@ -608,7 +682,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public Decimal GetDecimal(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetDecimal() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override Decimal GetDecimal(int ordinal)
         {
             return (Decimal)GetValue(ordinal);
         }
@@ -618,7 +698,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public double GetDouble(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetDouble() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override double GetDouble(int ordinal)
         {
             return (double)GetValue(ordinal);
         }
@@ -628,7 +714,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public float GetFloat(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetFloat() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override float GetFloat(int ordinal)
         {
             return (float)GetValue(ordinal);
         }
@@ -638,7 +730,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public Guid GetGuid(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetGuid() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override Guid GetGuid(int ordinal)
         {
             return (Guid)GetValue(ordinal);
         }
@@ -648,7 +746,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public Int16 GetInt16(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetInt16() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override Int16 GetInt16(int ordinal)
         {
             return (Int16)GetValue(ordinal);
         }
@@ -658,7 +762,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public Int32 GetInt32(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetInt32() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override Int32 GetInt32(int ordinal)
         {
             return (Int32)GetValue(ordinal);
         }
@@ -668,7 +778,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public Int64 GetInt64(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetInt64() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override Int64 GetInt64(int ordinal)
         {
             return (Int64)GetValue(ordinal);
         }
@@ -678,7 +794,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public String GetString(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.GetString() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override String GetString(int ordinal)
         {
             return (String)GetValue(ordinal);
         }
@@ -688,7 +810,13 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override public bool IsDBNull(int ordinal)
+        public
+        /// <summary>
+        /// implementation of DbDataRecord.IsDBNull() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override bool IsDBNull(int ordinal)
         {
             // This seems like a hack, but the the problem is that I need
             // to make sure I don't monkey with caching things, and if I
@@ -730,7 +858,21 @@ namespace System.Data.Query.ResultAssembly
         /// <param name="bufferOffset"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        override public long GetBytes(
+        public
+        #endregion
+
+        #region array scalar value getter methods
+
+        /// <summary>
+        /// implementation for DbDataRecord.GetBytes() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <param name="dataOffset"></param>
+        /// <param name="buffer"></param>
+        /// <param name="bufferOffset"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        override long GetBytes(
             int ordinal,
             long dataOffset,
             byte[] buffer,
@@ -759,7 +901,17 @@ namespace System.Data.Query.ResultAssembly
         /// <param name="bufferOffset"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        override public long GetChars(
+        public
+        /// <summary>
+        /// implementation for DbDataRecord.GetChars() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <param name="dataOffset"></param>
+        /// <param name="buffer"></param>
+        /// <param name="bufferOffset"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        override long GetChars(
             int ordinal,
             long dataOffset,
             char[] buffer,
@@ -788,7 +940,17 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        override protected DbDataReader GetDbDataReader(int ordinal)
+        protected
+        #endregion
+
+        #region complex type getters
+
+        /// <summary>
+        /// implementation for DbDataRecord.GetData() method
+        /// </summary>
+        /// <param name="ordinal"></param>
+        /// <returns></returns>
+        override DbDataReader GetDbDataReader(int ordinal)
         {
             return (DbDataReader)GetValue(ordinal);
         }

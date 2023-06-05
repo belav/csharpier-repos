@@ -5,7 +5,7 @@ using ILCompiler.DependencyAnalysis.X86;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public partial class ReadyToRunGenericHelperNode
+    partial public class ReadyToRunGenericHelperNode
     {
         protected sealed override void EmitCode(
             NodeFactory factory,

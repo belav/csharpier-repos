@@ -6,10 +6,11 @@ using System.Windows;
 
 namespace BlazorWpfApp
 {
+    partial
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public class App : Application
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {

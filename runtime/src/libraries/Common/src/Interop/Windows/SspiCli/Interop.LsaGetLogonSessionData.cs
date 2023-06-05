@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class SspiCli
+    partial internal static class SspiCli
     {
         [LibraryImport(Interop.Libraries.SspiCli, SetLastError = true)]
-        internal static partial int LsaGetLogonSessionData(
+        partial internal static int LsaGetLogonSessionData(
             ref LUID LogonId,
             out SafeLsaReturnBufferHandle ppLogonSessionData
         );

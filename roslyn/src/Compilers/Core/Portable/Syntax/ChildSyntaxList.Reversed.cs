@@ -11,9 +11,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public readonly partial struct ChildSyntaxList
+    partial public readonly struct ChildSyntaxList
     {
-        public readonly partial struct Reversed
+        partial public readonly struct Reversed
             : IEnumerable<SyntaxNodeOrToken>,
                 IEquatable<Reversed>
         {

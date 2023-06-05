@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
+    partial
     /// <summary>
     /// Provides a way to test two symbols for equivalence.  While there are ways to ask for
     /// different sorts of equivalence, the following must hold for two symbols to be considered
@@ -33,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     /// equivalent only if they come from the same assembly or different assemblies of the same simple name.
     /// However, one can ask if two symbols are equivalent even if their assemblies differ.
     /// </summary>
-    internal partial class SymbolEquivalenceComparer : IEqualityComparer<ISymbol?>
+    internal class SymbolEquivalenceComparer : IEqualityComparer<ISymbol?>
     {
         private readonly ImmutableArray<EquivalenceVisitor> _equivalenceVisitors;
         private readonly ImmutableArray<GetHashCodeVisitor> _getHashCodeVisitors;

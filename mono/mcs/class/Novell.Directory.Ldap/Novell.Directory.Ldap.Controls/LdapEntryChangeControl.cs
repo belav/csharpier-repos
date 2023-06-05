@@ -42,6 +42,7 @@ namespace Novell.Directory.Ldap.Controls
     /// </summary>
     public class LdapEntryChangeControl : LdapControl
     {
+        public
         /// <summary>  returns the record number of the change in the servers change log.
         ///
         /// </summary>
@@ -49,11 +50,12 @@ namespace Novell.Directory.Ldap.Controls
         /// The server may not return a change number. In this case the return
         /// value is -1
         /// </returns>
-        virtual public bool HasChangeNumber
+        virtual bool HasChangeNumber
         {
             get { return m_hasChangeNumber; }
         }
 
+        public
         /// <summary>  returns the record number of the change in the servers change log.
         ///
         /// </summary>
@@ -61,11 +63,12 @@ namespace Novell.Directory.Ldap.Controls
         /// The server may not return a change number. In this case the return
         /// value is -1
         /// </returns>
-        virtual public int ChangeNumber
+        virtual int ChangeNumber
         {
             get { return m_changeNumber; }
         }
 
+        public
         /// <summary>  Returns the type of change that occured
         ///
         /// </summary>
@@ -76,18 +79,19 @@ namespace Novell.Directory.Ldap.Controls
         /// LdapPersistSearchControl.MODIFY
         /// LdapPersistSearchControl.MODDN.
         /// </returns>
-        virtual public int ChangeType
+        virtual int ChangeType
         {
             get { return m_changeType; }
         }
 
+        public
         /// <summary>  Returns the previous DN of the entry, if it was renamed.
         ///
         /// </summary>
         /// <returns>  the previous DN of the entry if the entry was renamed (ie. if the
         /// change type is LdapersistSearchControl.MODDN.
         /// </returns>
-        virtual public System.String PreviousDN
+        virtual System.String PreviousDN
         {
             get { return m_previousDN; }
         }

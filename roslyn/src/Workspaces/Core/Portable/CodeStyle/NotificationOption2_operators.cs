@@ -6,7 +6,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
-    internal readonly partial record struct NotificationOption2
+    partial internal readonly record struct NotificationOption2
     {
         public static explicit operator NotificationOption(
             NotificationOption2 notificationOption
@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             };
     }
 
-    internal static partial class Extensions
+    partial internal static class Extensions
     {
         public static string GetDisplayString(this ReportDiagnostic severity) =>
             severity switch

@@ -16,12 +16,13 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     using System.Linq;
     using System.Text;
 
+    partial
     // This class represents a node in the update or query mapping view tree
     // (of course, the root node represents the full view)
     // Each node represents an expression of the form:
     // SELECT <Attributes> FROM <Expression> WHERE <Clause>
     // The WHERE clause is of the form X1 OR X2 OR ... where each Xi is a multiconstant
-    internal abstract partial class CellTreeNode : InternalBase
+    internal abstract class CellTreeNode : InternalBase
     {
         #region Constructor
         // effects: Creates a cell tree node with a reference to projectedSlotMap for

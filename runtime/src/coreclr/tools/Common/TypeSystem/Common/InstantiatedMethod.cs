@@ -6,7 +6,7 @@ using Internal.NativeFormat;
 
 namespace Internal.TypeSystem
 {
-    public sealed partial class InstantiatedMethod : MethodDesc
+    partial public sealed class InstantiatedMethod : MethodDesc
     {
         private MethodDesc _methodDef;
         private Instantiation _instantiation;

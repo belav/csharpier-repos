@@ -46,9 +46,9 @@ using System.Collections.Generic;
 namespace Mono
 {
 #if MONO_DATACONVERTER_PUBLIC
-    public
+    public abstract
 #endif
-    unsafe abstract class DataConverter
+    unsafe class DataConverter
     {
         // Disables the warning: CLS compliance checking will not be performed on
         //  `XXXX' because it is not visible from outside this assembly
@@ -59,8 +59,11 @@ namespace Mono
         public static readonly bool IsLittleEndian = BitConverter.IsLittleEndian;
 
         public abstract double GetDouble(byte[] data, int index);
+
         public abstract float GetFloat(byte[] data, int index);
+
         public abstract long GetInt64(byte[] data, int index);
+
         public abstract int GetInt32(byte[] data, int index);
 
         public abstract short GetInt16(byte[] data, int index);
@@ -75,9 +78,13 @@ namespace Mono
         public abstract ulong GetUInt64(byte[] data, int index);
 
         public abstract void PutBytes(byte[] dest, int destIdx, double value);
+
         public abstract void PutBytes(byte[] dest, int destIdx, float value);
+
         public abstract void PutBytes(byte[] dest, int destIdx, int value);
+
         public abstract void PutBytes(byte[] dest, int destIdx, long value);
+
         public abstract void PutBytes(byte[] dest, int destIdx, short value);
 
         [CLSCompliant(false)]
@@ -148,17 +155,17 @@ namespace Mono
             return ret;
         }
 
-        static public DataConverter LittleEndian
+        public static DataConverter LittleEndian
         {
             get { return BitConverter.IsLittleEndian ? CopyConv : SwapConv; }
         }
 
-        static public DataConverter BigEndian
+        public static DataConverter BigEndian
         {
             get { return BitConverter.IsLittleEndian ? SwapConv : CopyConv; }
         }
 
-        static public DataConverter Native
+        public static DataConverter Native
         {
             get { return CopyConv; }
         }
@@ -276,7 +283,48 @@ namespace Mono
         //   [N]  For numbers larger than 9, use brackets, for example [20]
         //   *    Repeat the next data type until the arguments are exhausted
         //
-        static public byte[] Pack(string description, params object[] args)
+        public
+        //
+        // Format includes:
+        // Control:
+        //   ^    Switch to big endian encoding
+        //   _    Switch to little endian encoding
+        //   %    Switch to host (native) encoding
+        //   !    aligns the next data type to its natural boundary (for strings this is 4).
+        //
+        // Types:
+        //   s    Int16
+        //   S    UInt16
+        //   i    Int32
+        //   I    UInt32
+        //   l    Int64
+        //   L    UInt64
+        //   f    float
+        //   d    double
+        //   b    byte
+        //   c    1-byte signed character
+        //   C    1-byte unsigned character
+        //   z8   string encoded as UTF8 with 1-byte null terminator
+        //   z6   string encoded as UTF16 with 2-byte null terminator
+        //   z7   string encoded as UTF7 with 1-byte null terminator
+        //   zb   string encoded as BigEndianUnicode with 2-byte null terminator
+        //   z3   string encoded as UTF32 with 4-byte null terminator
+        //   z4   string encoded as UTF32 big endian with 4-byte null terminator
+        //   $8   string encoded as UTF8
+        //   $6   string encoded as UTF16
+        //   $7   string encoded as UTF7
+        //   $b   string encoded as BigEndianUnicode
+        //   $3   string encoded as UTF32
+        //   $4   string encoded as UTF-32 big endian encoding
+        //   x    null byte
+        //
+        // Repeats, these are prefixes:
+        //   N    a number between 1 and 9, indicates a repeat count (process N items
+        //        with the following datatype
+        //   [N]  For numbers larger than 9, use brackets, for example [20]
+        //   *    Repeat the next data type until the arguments are exhausted
+        //
+        static byte[] Pack(string description, params object[] args)
         {
             int argn = 0;
             PackContext b = new PackContext();
@@ -318,7 +366,7 @@ namespace Mono
             return b.Get();
         }
 
-        static public byte[] PackEnumerable(string description, IEnumerable args)
+        public static byte[] PackEnumerable(string description, IEnumerable args)
         {
             PackContext b = new PackContext();
             b.conv = CopyConv;
@@ -562,7 +610,7 @@ namespace Mono
             return true;
         }
 
-        static public IList Unpack(string description, byte[] buffer, int startIndex)
+        public static IList Unpack(string description, byte[] buffer, int startIndex)
         {
             DataConverter conv = CopyConv;
             var result = new List<object>();
@@ -1397,7 +1445,7 @@ namespace Mono
                 dest[i - count] = *src++;
         }
 
-        static public unsafe double DoubleFromLE(byte[] data, int index)
+        public static unsafe double DoubleFromLE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1414,7 +1462,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe float FloatFromLE(byte[] data, int index)
+        public static unsafe float FloatFromLE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1431,7 +1479,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe long Int64FromLE(byte[] data, int index)
+        public static unsafe long Int64FromLE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1448,7 +1496,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe ulong UInt64FromLE(byte[] data, int index)
+        public static unsafe ulong UInt64FromLE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1465,7 +1513,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe int Int32FromLE(byte[] data, int index)
+        public static unsafe int Int32FromLE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1482,7 +1530,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe uint UInt32FromLE(byte[] data, int index)
+        public static unsafe uint UInt32FromLE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1499,7 +1547,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe short Int16FromLE(byte[] data, int index)
+        public static unsafe short Int16FromLE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1516,7 +1564,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe ushort UInt16FromLE(byte[] data, int index)
+        public static unsafe ushort UInt16FromLE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1533,7 +1581,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe double DoubleFromBE(byte[] data, int index)
+        public static unsafe double DoubleFromBE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1550,7 +1598,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe float FloatFromBE(byte[] data, int index)
+        public static unsafe float FloatFromBE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1567,7 +1615,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe long Int64FromBE(byte[] data, int index)
+        public static unsafe long Int64FromBE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1584,7 +1632,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe ulong UInt64FromBE(byte[] data, int index)
+        public static unsafe ulong UInt64FromBE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1601,7 +1649,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe int Int32FromBE(byte[] data, int index)
+        public static unsafe int Int32FromBE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1618,7 +1666,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe uint UInt32FromBE(byte[] data, int index)
+        public static unsafe uint UInt32FromBE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1635,7 +1683,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe short Int16FromBE(byte[] data, int index)
+        public static unsafe short Int16FromBE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1652,7 +1700,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe ushort UInt16FromBE(byte[] data, int index)
+        public static unsafe ushort UInt16FromBE(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1669,7 +1717,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe double DoubleFromNative(byte[] data, int index)
+        public static unsafe double DoubleFromNative(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1686,7 +1734,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe float FloatFromNative(byte[] data, int index)
+        public static unsafe float FloatFromNative(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1703,7 +1751,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe long Int64FromNative(byte[] data, int index)
+        public static unsafe long Int64FromNative(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1720,7 +1768,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe ulong UInt64FromNative(byte[] data, int index)
+        public static unsafe ulong UInt64FromNative(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1737,7 +1785,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe int Int32FromNative(byte[] data, int index)
+        public static unsafe int Int32FromNative(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1754,7 +1802,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe uint UInt32FromNative(byte[] data, int index)
+        public static unsafe uint UInt32FromNative(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1771,7 +1819,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe short Int16FromNative(byte[] data, int index)
+        public static unsafe short Int16FromNative(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1788,7 +1836,7 @@ namespace Mono
             return ret;
         }
 
-        static public unsafe ushort UInt16FromNative(byte[] data, int index)
+        public static unsafe ushort UInt16FromNative(byte[] data, int index)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -1805,7 +1853,7 @@ namespace Mono
             return ret;
         }
 
-        unsafe static byte[] GetBytesPtr(byte* ptr, int count)
+        static unsafe byte[] GetBytesPtr(byte* ptr, int count)
         {
             byte[] ret = new byte[count];
 
@@ -1817,7 +1865,7 @@ namespace Mono
             return ret;
         }
 
-        unsafe static byte[] GetBytesSwap(bool swap, byte* ptr, int count)
+        static unsafe byte[] GetBytesSwap(bool swap, byte* ptr, int count)
         {
             byte[] ret = new byte[count];
 
@@ -1839,161 +1887,161 @@ namespace Mono
             return ret;
         }
 
-        unsafe public static byte[] GetBytesNative(bool value)
+        public static unsafe byte[] GetBytesNative(bool value)
         {
             return GetBytesPtr((byte*)&value, 1);
         }
 
-        unsafe public static byte[] GetBytesNative(char value)
+        public static unsafe byte[] GetBytesNative(char value)
         {
             return GetBytesPtr((byte*)&value, 2);
         }
 
-        unsafe public static byte[] GetBytesNative(short value)
+        public static unsafe byte[] GetBytesNative(short value)
         {
             return GetBytesPtr((byte*)&value, 2);
         }
 
-        unsafe public static byte[] GetBytesNative(int value)
+        public static unsafe byte[] GetBytesNative(int value)
         {
             return GetBytesPtr((byte*)&value, 4);
         }
 
-        unsafe public static byte[] GetBytesNative(long value)
+        public static unsafe byte[] GetBytesNative(long value)
         {
             return GetBytesPtr((byte*)&value, 8);
         }
 
         [CLSCompliant(false)]
-        unsafe public static byte[] GetBytesNative(ushort value)
+        public static unsafe byte[] GetBytesNative(ushort value)
         {
             return GetBytesPtr((byte*)&value, 2);
         }
 
         [CLSCompliant(false)]
-        unsafe public static byte[] GetBytesNative(uint value)
+        public static unsafe byte[] GetBytesNative(uint value)
         {
             return GetBytesPtr((byte*)&value, 4);
         }
 
         [CLSCompliant(false)]
-        unsafe public static byte[] GetBytesNative(ulong value)
+        public static unsafe byte[] GetBytesNative(ulong value)
         {
             return GetBytesPtr((byte*)&value, 8);
         }
 
-        unsafe public static byte[] GetBytesNative(float value)
+        public static unsafe byte[] GetBytesNative(float value)
         {
             return GetBytesPtr((byte*)&value, 4);
         }
 
-        unsafe public static byte[] GetBytesNative(double value)
+        public static unsafe byte[] GetBytesNative(double value)
         {
             return GetBytesPtr((byte*)&value, 8);
         }
 
-        unsafe public static byte[] GetBytesLE(bool value)
+        public static unsafe byte[] GetBytesLE(bool value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 1);
         }
 
-        unsafe public static byte[] GetBytesLE(char value)
+        public static unsafe byte[] GetBytesLE(char value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 2);
         }
 
-        unsafe public static byte[] GetBytesLE(short value)
+        public static unsafe byte[] GetBytesLE(short value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 2);
         }
 
-        unsafe public static byte[] GetBytesLE(int value)
+        public static unsafe byte[] GetBytesLE(int value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 4);
         }
 
-        unsafe public static byte[] GetBytesLE(long value)
+        public static unsafe byte[] GetBytesLE(long value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 8);
         }
 
         [CLSCompliant(false)]
-        unsafe public static byte[] GetBytesLE(ushort value)
+        public static unsafe byte[] GetBytesLE(ushort value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 2);
         }
 
         [CLSCompliant(false)]
-        unsafe public static byte[] GetBytesLE(uint value)
+        public static unsafe byte[] GetBytesLE(uint value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 4);
         }
 
         [CLSCompliant(false)]
-        unsafe public static byte[] GetBytesLE(ulong value)
+        public static unsafe byte[] GetBytesLE(ulong value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 8);
         }
 
-        unsafe public static byte[] GetBytesLE(float value)
+        public static unsafe byte[] GetBytesLE(float value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 4);
         }
 
-        unsafe public static byte[] GetBytesLE(double value)
+        public static unsafe byte[] GetBytesLE(double value)
         {
             return GetBytesSwap(!BitConverter.IsLittleEndian, (byte*)&value, 8);
         }
 
-        unsafe public static byte[] GetBytesBE(bool value)
+        public static unsafe byte[] GetBytesBE(bool value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 1);
         }
 
-        unsafe public static byte[] GetBytesBE(char value)
+        public static unsafe byte[] GetBytesBE(char value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 2);
         }
 
-        unsafe public static byte[] GetBytesBE(short value)
+        public static unsafe byte[] GetBytesBE(short value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 2);
         }
 
-        unsafe public static byte[] GetBytesBE(int value)
+        public static unsafe byte[] GetBytesBE(int value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 4);
         }
 
-        unsafe public static byte[] GetBytesBE(long value)
+        public static unsafe byte[] GetBytesBE(long value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 8);
         }
 
         [CLSCompliant(false)]
-        unsafe public static byte[] GetBytesBE(ushort value)
+        public static unsafe byte[] GetBytesBE(ushort value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 2);
         }
 
         [CLSCompliant(false)]
-        unsafe public static byte[] GetBytesBE(uint value)
+        public static unsafe byte[] GetBytesBE(uint value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 4);
         }
 
         [CLSCompliant(false)]
-        unsafe public static byte[] GetBytesBE(ulong value)
+        public static unsafe byte[] GetBytesBE(ulong value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 8);
         }
 
-        unsafe public static byte[] GetBytesBE(float value)
+        public static unsafe byte[] GetBytesBE(float value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 4);
         }
 
-        unsafe public static byte[] GetBytesBE(double value)
+        public static unsafe byte[] GetBytesBE(double value)
         {
             return GetBytesSwap(BitConverter.IsLittleEndian, (byte*)&value, 8);
         }

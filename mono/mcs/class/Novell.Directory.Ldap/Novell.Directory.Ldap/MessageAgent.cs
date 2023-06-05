@@ -42,23 +42,25 @@ namespace Novell.Directory.Ldap
             messages = new MessageVector(5, 5);
         }
 
+        internal
         /// <summary> empty and return all messages owned by this agent
         ///
         ///
         /// </summary>
-        virtual internal System.Object[] MessageArray
+        virtual System.Object[] MessageArray
         {
             /* package */
 
             get { return messages.ObjectArray; }
         }
 
+        internal
         /// <summary> Get a list of message ids controlled by this agent
         ///
         /// </summary>
         /// <returns> an array of integers representing the message ids
         /// </returns>
-        virtual internal int[] MessageIDs
+        virtual int[] MessageIDs
         {
             /* package */
 
@@ -77,20 +79,22 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        internal
         /// <summary> Get the maessage agent number for debugging
         ///
         /// </summary>
         /// <returns> the agent number
         /// </returns>
-        virtual internal System.String AgentName
+        virtual System.String AgentName
         {
             /*packge*/
 
             get { return name; }
         }
 
+        internal
         /// <summary> Get a count of all messages queued</summary>
-        virtual internal int Count
+        virtual int Count
         {
             /* package */
 

@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct CHAR_INFO
@@ -22,7 +22,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool ReadConsoleOutput(
+        partial internal static unsafe bool ReadConsoleOutput(
             IntPtr hConsoleOutput,
             CHAR_INFO* pBuffer,
             COORD bufferSize,

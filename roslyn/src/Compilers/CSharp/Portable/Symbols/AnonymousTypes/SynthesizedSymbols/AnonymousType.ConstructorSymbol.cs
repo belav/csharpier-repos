@@ -10,12 +10,13 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class AnonymousTypeManager
+    partial internal sealed class AnonymousTypeManager
     {
+        partial
         /// <summary>
         /// Represents an anonymous type constructor.
         /// </summary>
-        private sealed partial class AnonymousTypeConstructorSymbol : SynthesizedMethodBase
+        private sealed class AnonymousTypeConstructorSymbol : SynthesizedMethodBase
         {
             private readonly ImmutableArray<ParameterSymbol> _parameters;
 

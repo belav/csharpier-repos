@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree
 {
-    internal sealed partial class SymbolTreeInfoCacheService
+    partial internal sealed class SymbolTreeInfoCacheService
     {
         private readonly struct MetadataInfo
         {

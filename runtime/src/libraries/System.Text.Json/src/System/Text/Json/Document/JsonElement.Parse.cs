@@ -7,7 +7,7 @@ using System.IO;
 
 namespace System.Text.Json
 {
-    public readonly partial struct JsonElement
+    partial public readonly struct JsonElement
     {
         /// <summary>
         ///   Parses one JSON value (including objects or arrays) from the provided reader.

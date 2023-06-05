@@ -9,7 +9,7 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal static partial class CustomMethodMapper
+    partial internal static class CustomMethodMapper
     {
         //
         // Certain types and methods are edge-cases that require special handling.

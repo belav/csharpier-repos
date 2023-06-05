@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Unicode
 {
-    internal static partial class Utf8Utility
+    partial internal static class Utf8Utility
     {
         /// <summary>
         /// Given a machine-endian DWORD which four bytes of UTF-8 data, interprets the

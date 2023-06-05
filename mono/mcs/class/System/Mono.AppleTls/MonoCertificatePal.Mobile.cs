@@ -36,7 +36,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Mono.AppleTls
 {
-    static partial class MonoCertificatePal
+    partial static class MonoCertificatePal
     {
         static int initialized;
         static CFString ImportExportPassphase;
@@ -105,7 +105,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(SecurityLibrary)]
-        extern static SecStatusCode SecPKCS12Import(
+        static extern SecStatusCode SecPKCS12Import(
             IntPtr pkcs12_data,
             IntPtr options,
             out IntPtr items
@@ -159,7 +159,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(SecurityLibrary)]
-        extern static SecStatusCode SecItemCopyMatching( /* CFDictionaryRef */
+        static extern SecStatusCode SecItemCopyMatching( /* CFDictionaryRef */
             IntPtr query, /* CFTypeRef* */
             out IntPtr result
         );

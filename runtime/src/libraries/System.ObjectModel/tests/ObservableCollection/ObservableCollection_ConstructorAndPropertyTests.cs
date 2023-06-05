@@ -9,10 +9,11 @@ using Xunit;
 
 namespace System.Collections.ObjectModel.Tests
 {
+    partial
     /// <summary>
     /// Tests the public properties and constructor in ObservableCollection<T>.
     /// </summary>
-    public partial class ConstructorAndPropertyTests
+    public class ConstructorAndPropertyTests
     {
         /// <summary>
         /// Tests that the parameterless constructor works.
@@ -174,7 +175,7 @@ namespace System.Collections.ObjectModel.Tests
             );
         }
 
-        private partial class ObservableCollectionSubclass<T> : ObservableCollection<T>
+        partial private class ObservableCollectionSubclass<T> : ObservableCollection<T>
         {
             public ObservableCollectionSubclass(IEnumerable<T> collection)
                 : base(collection) { }
@@ -211,7 +212,7 @@ namespace System.Collections.ObjectModel.Tests
             Assert.NotSame(collection, oc.InnerList);
         }
 
-        private partial class ObservableCollectionSubclass<T> : ObservableCollection<T>
+        partial private class ObservableCollectionSubclass<T> : ObservableCollection<T>
         {
             public ObservableCollectionSubclass(List<T> list)
                 : base(list) { }

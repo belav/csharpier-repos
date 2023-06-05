@@ -6,9 +6,9 @@ using System.Collections.Concurrent;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         internal static class BCryptAlgorithmCache
         {

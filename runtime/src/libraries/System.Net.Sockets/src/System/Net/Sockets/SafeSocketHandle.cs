@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace System.Net.Sockets
 {
+    partial
     // This class implements a safe socket handle.
     // It uses an inner and outer SafeHandle to do so.  The inner
     // SafeHandle holds the actual socket, but only ever has one
@@ -21,7 +22,7 @@ namespace System.Net.Sockets
     // to block the user thread in case a graceful close has been
     // requested.  (It's not legal to block any other thread - such closes
     // are always abortive.)
-    public sealed partial class SafeSocketHandle : SafeHandleMinusOneIsInvalid
+    public sealed class SafeSocketHandle : SafeHandleMinusOneIsInvalid
     {
 #if DEBUG
         private SocketError _closeSocketResult = unchecked((SocketError)0xdeadbeef);

@@ -4,15 +4,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [SuppressGCTransition]
         [GeneratedDllImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetProcessArchitecture"
         )]
-        internal static partial int GetProcessArchitecture();
+        partial internal static int GetProcessArchitecture();
     }
 }

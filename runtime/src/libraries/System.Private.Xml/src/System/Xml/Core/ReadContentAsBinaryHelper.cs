@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Xml
 {
-    internal sealed partial class ReadContentAsBinaryHelper
+    partial internal sealed class ReadContentAsBinaryHelper
     {
         // Private enums
         private enum State

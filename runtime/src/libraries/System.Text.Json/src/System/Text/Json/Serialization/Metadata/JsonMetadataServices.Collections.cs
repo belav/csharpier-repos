@@ -8,7 +8,7 @@ using System.Text.Json.Serialization.Converters;
 
 namespace System.Text.Json.Serialization.Metadata
 {
-    public static partial class JsonMetadataServices
+    partial public static class JsonMetadataServices
     {
         /// <summary>
         /// Creates serialization metadata for an array.

@@ -8,7 +8,7 @@ namespace System.Diagnostics
     // and uses ticks as a measurement.
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public partial class Stopwatch
+    partial public class Stopwatch
     {
         private const long TicksPerMillisecond = 10000;
         private const long TicksPerSecond = TicksPerMillisecond * 1000;

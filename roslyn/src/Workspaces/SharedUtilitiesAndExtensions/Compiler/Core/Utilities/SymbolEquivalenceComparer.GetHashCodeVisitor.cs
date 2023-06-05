@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial class SymbolEquivalenceComparer
+    partial internal class SymbolEquivalenceComparer
     {
         private class GetHashCodeVisitor
         {

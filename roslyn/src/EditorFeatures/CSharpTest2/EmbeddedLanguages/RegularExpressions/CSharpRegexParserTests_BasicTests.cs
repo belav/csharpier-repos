@@ -10,8 +10,9 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpressions
 {
+    partial
     // These tests were created by trying to enumerate all codepaths in the lexer/parser.
-    public partial class CSharpRegexParserTests
+    public class CSharpRegexParserTests
     {
         [Fact]
         public void TestEmpty()

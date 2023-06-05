@@ -8,7 +8,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Net.Sockets
 {
-    public partial class SocketAsyncEventArgs : EventArgs, IDisposable
+    partial public class SocketAsyncEventArgs : EventArgs, IDisposable
     {
         private IntPtr _acceptedFileDescriptor;
         private int _socketAddressSize;

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 {
-    internal partial class ChangeSignatureDialogViewModel
+    partial internal class ChangeSignatureDialogViewModel
     {
         public abstract class ParameterViewModel
         {

@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDiffieHellmanOpenSsl : ECDiffieHellman
+    partial public sealed class ECDiffieHellmanOpenSsl : ECDiffieHellman
     {
         private ECOpenSsl? _key;
 
@@ -141,6 +141,6 @@ namespace System.Security.Cryptography
             return _key.Value;
         }
 
-        static partial void ThrowIfNotSupported();
+        partial static void ThrowIfNotSupported();
     }
 }

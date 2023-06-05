@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CodeFixesAndRefactorings;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
-    internal partial class FixMultipleCodeAction : AbstractFixAllCodeFixCodeAction
+    partial internal class FixMultipleCodeAction : AbstractFixAllCodeFixCodeAction
     {
         private readonly string _title;
         private readonly string _computingFixWaitDialogMessage;

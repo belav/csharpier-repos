@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Text.Tests
 {
-    public partial class EncodingTest : IClassFixture<CultureSetup>
+    partial public class EncodingTest : IClassFixture<CultureSetup>
     {
         private class EncodingInformation
         {

@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-public partial class HubConnectionContext
+partial public class HubConnectionContext
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -15,7 +15,7 @@ public partial class HubConnectionContext
             "Completed connection handshake. Using HubProtocol '{Protocol}'.",
             EventName = "HandshakeComplete"
         )]
-        public static partial void HandshakeComplete(ILogger logger, string protocol);
+        partial public static void HandshakeComplete(ILogger logger, string protocol);
 
         [LoggerMessage(
             2,
@@ -23,7 +23,7 @@ public partial class HubConnectionContext
             "Handshake was canceled.",
             EventName = "HandshakeCanceled"
         )]
-        public static partial void HandshakeCanceled(ILogger logger);
+        partial public static void HandshakeCanceled(ILogger logger);
 
         [LoggerMessage(
             3,
@@ -31,7 +31,7 @@ public partial class HubConnectionContext
             "Sent a ping message to the client.",
             EventName = "SentPing"
         )]
-        public static partial void SentPing(ILogger logger);
+        partial public static void SentPing(ILogger logger);
 
         [LoggerMessage(
             4,
@@ -39,7 +39,7 @@ public partial class HubConnectionContext
             "Unable to send Ping message to client, the transport buffer is full.",
             EventName = "TransportBufferFull"
         )]
-        public static partial void TransportBufferFull(ILogger logger);
+        partial public static void TransportBufferFull(ILogger logger);
 
         [LoggerMessage(
             5,
@@ -47,7 +47,7 @@ public partial class HubConnectionContext
             "Failed connection handshake.",
             EventName = "HandshakeFailed"
         )]
-        public static partial void HandshakeFailed(ILogger logger, Exception? exception);
+        partial public static void HandshakeFailed(ILogger logger, Exception? exception);
 
         [LoggerMessage(
             6,
@@ -55,7 +55,7 @@ public partial class HubConnectionContext
             "Failed writing message. Aborting connection.",
             EventName = "FailedWritingMessage"
         )]
-        public static partial void FailedWritingMessage(ILogger logger, Exception exception);
+        partial public static void FailedWritingMessage(ILogger logger, Exception exception);
 
         [LoggerMessage(
             7,
@@ -63,14 +63,14 @@ public partial class HubConnectionContext
             "Server does not support version {Version} of the {Protocol} protocol.",
             EventName = "ProtocolVersionFailed"
         )]
-        public static partial void ProtocolVersionFailed(
+        partial public static void ProtocolVersionFailed(
             ILogger logger,
             string protocol,
             int version
         );
 
         [LoggerMessage(8, LogLevel.Trace, "Abort callback failed.", EventName = "AbortFailed")]
-        public static partial void AbortFailed(ILogger logger, Exception exception);
+        partial public static void AbortFailed(ILogger logger, Exception exception);
 
         [LoggerMessage(
             9,
@@ -78,7 +78,7 @@ public partial class HubConnectionContext
             "Client timeout ({ClientTimeout}ms) elapsed without receiving a message from the client. Closing connection.",
             EventName = "ClientTimeout"
         )]
-        public static partial void ClientTimeout(ILogger logger, TimeSpan clientTimeout);
+        partial public static void ClientTimeout(ILogger logger, TimeSpan clientTimeout);
 
         [LoggerMessage(
             10,
@@ -86,6 +86,6 @@ public partial class HubConnectionContext
             "The maximum message size of {MaxMessageSize}B was exceeded while parsing the Handshake. The message size can be configured in AddHubOptions.",
             EventName = "HandshakeSizeLimitExceeded"
         )]
-        public static partial void HandshakeSizeLimitExceeded(ILogger logger, long maxMessageSize);
+        partial public static void HandshakeSizeLimitExceeded(ILogger logger, long maxMessageSize);
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {
-    public static partial class HttpClientJsonExtensions
+    partial public static class HttpClientJsonExtensions
     {
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]

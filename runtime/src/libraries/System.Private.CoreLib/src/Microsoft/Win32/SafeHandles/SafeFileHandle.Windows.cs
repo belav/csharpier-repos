@@ -10,7 +10,7 @@ using System.Buffers;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeFileHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         internal const FileOptions NoBuffering = (FileOptions)0x20000000;
         private long _length = -1; // negative means that hasn't been fetched.

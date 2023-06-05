@@ -14,7 +14,7 @@ namespace System.Web.Razor.Parser
         "CA1005:AvoidExcessiveParametersOnGenericTypes",
         Justification = "All generic type parameters are required"
     )]
-    public abstract partial class TokenizerBackedParser<TTokenizer, TSymbol, TSymbolType>
+    partial public abstract class TokenizerBackedParser<TTokenizer, TSymbol, TSymbolType>
         : ParserBase
         where TTokenizer : Tokenizer<TSymbol, TSymbolType>
         where TSymbol : SymbolBase<TSymbolType>

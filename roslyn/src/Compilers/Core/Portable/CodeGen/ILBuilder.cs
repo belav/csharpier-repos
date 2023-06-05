@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CodeGen
 {
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
-    internal sealed partial class ILBuilder
+    partial internal sealed class ILBuilder
     {
         private readonly OptimizationLevel _optimizations;
         internal readonly LocalSlotManager LocalSlotManager;

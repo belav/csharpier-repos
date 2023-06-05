@@ -4,7 +4,7 @@
 
 namespace Microsoft.VisualStudio.LanguageServices
 {
-    internal static partial class ID
+    partial internal static class ID
     {
         /// <summary>
         /// Commands using the old Roslyn command set GUID.

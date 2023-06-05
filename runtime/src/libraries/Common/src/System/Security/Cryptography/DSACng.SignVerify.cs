@@ -9,7 +9,7 @@ using static Interop.NCrypt;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class DSACng : DSA
+    partial public sealed class DSACng : DSA
     {
         // As of FIPS 186-4 the maximum Q size is 32 bytes.
         //

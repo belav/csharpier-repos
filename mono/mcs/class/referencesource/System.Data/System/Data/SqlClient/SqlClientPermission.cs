@@ -72,7 +72,7 @@ namespace System.Data.SqlClient
             AddPermissionEntry(constr);
         }
 
-        override public IPermission Copy()
+        public override IPermission Copy()
         {
             return new SqlClientPermission(this);
         }
@@ -93,7 +93,7 @@ namespace System.Data.SqlClient
         public SqlClientPermissionAttribute(SecurityAction action)
             : base(action) { }
 
-        override public IPermission CreatePermission()
+        public override IPermission CreatePermission()
         {
             return new SqlClientPermission(this);
         }

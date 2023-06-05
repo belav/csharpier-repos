@@ -1,6 +1,6 @@
-public partial struct STuple<Ta> { }
+partial public struct STuple<Ta> { }
 
-public partial struct STuple<Ta>
+partial public struct STuple<Ta>
 {
     private readonly Ta a;
 

@@ -8,10 +8,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base class for all RoConstructors objects created by a MetadataLoadContext that appear on arrays.
     /// </summary>
-    internal sealed partial class RoSyntheticConstructor : RoConstructor
+    internal sealed class RoSyntheticConstructor : RoConstructor
     {
         private readonly RoType _declaringType;
         private readonly int _uniquifier; // Since all array methods have the same "MetadataToken", this serves as a distinguisher so they don't all compare Equal

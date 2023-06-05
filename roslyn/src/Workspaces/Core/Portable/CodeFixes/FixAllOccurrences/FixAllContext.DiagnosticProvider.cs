@@ -13,10 +13,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
+    partial
     /// <summary>
     /// Context for "Fix all occurrences" code fixes provided by a <see cref="FixAllProvider"/>.
     /// </summary>
-    public partial class FixAllContext
+    public class FixAllContext
     {
         /// <summary>
         /// Diagnostic provider to fetch document/project diagnostics to fix in a <see cref="FixAllContext"/>.

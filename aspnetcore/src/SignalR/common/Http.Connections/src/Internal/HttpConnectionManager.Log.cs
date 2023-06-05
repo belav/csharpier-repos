@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
-internal sealed partial class HttpConnectionManager
+partial internal sealed class HttpConnectionManager
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -15,7 +15,7 @@ internal sealed partial class HttpConnectionManager
             "New connection {TransportConnectionId} created.",
             EventName = "CreatedNewConnection"
         )]
-        public static partial void CreatedNewConnection(
+        partial public static void CreatedNewConnection(
             ILogger logger,
             string transportConnectionId
         );
@@ -26,7 +26,7 @@ internal sealed partial class HttpConnectionManager
             "Removing connection {TransportConnectionId} from the list of connections.",
             EventName = "RemovedConnection"
         )]
-        public static partial void RemovedConnection(ILogger logger, string transportConnectionId);
+        partial public static void RemovedConnection(ILogger logger, string transportConnectionId);
 
         [LoggerMessage(
             3,
@@ -34,7 +34,7 @@ internal sealed partial class HttpConnectionManager
             "Failed disposing connection {TransportConnectionId}.",
             EventName = "FailedDispose"
         )]
-        public static partial void FailedDispose(
+        partial public static void FailedDispose(
             ILogger logger,
             string transportConnectionId,
             Exception exception
@@ -46,7 +46,7 @@ internal sealed partial class HttpConnectionManager
             "Connection {TransportConnectionId} timed out.",
             EventName = "ConnectionTimedOut"
         )]
-        public static partial void ConnectionTimedOut(ILogger logger, string transportConnectionId);
+        partial public static void ConnectionTimedOut(ILogger logger, string transportConnectionId);
 
         [LoggerMessage(
             4,
@@ -54,7 +54,7 @@ internal sealed partial class HttpConnectionManager
             "Connection {TransportConnectionId} was reset.",
             EventName = "ConnectionReset"
         )]
-        public static partial void ConnectionReset(
+        partial public static void ConnectionReset(
             ILogger logger,
             string transportConnectionId,
             Exception exception
@@ -66,7 +66,7 @@ internal sealed partial class HttpConnectionManager
             "Scanning connections failed.",
             EventName = "ScanningConnectionsFailed"
         )]
-        public static partial void ScanningConnectionsFailed(ILogger logger, Exception exception);
+        partial public static void ScanningConnectionsFailed(ILogger logger, Exception exception);
 
         // 8, ScannedConnections - removed
 
@@ -76,7 +76,7 @@ internal sealed partial class HttpConnectionManager
             "Starting connection heartbeat.",
             EventName = "HeartBeatStarted"
         )]
-        public static partial void HeartBeatStarted(ILogger logger);
+        partial public static void HeartBeatStarted(ILogger logger);
 
         [LoggerMessage(
             10,
@@ -84,7 +84,7 @@ internal sealed partial class HttpConnectionManager
             "Ending connection heartbeat.",
             EventName = "HeartBeatEnded"
         )]
-        public static partial void HeartBeatEnded(ILogger logger);
+        partial public static void HeartBeatEnded(ILogger logger);
 
         [LoggerMessage(
             11,
@@ -92,7 +92,7 @@ internal sealed partial class HttpConnectionManager
             "Connection {TransportConnectionId} closing because the authentication token has expired.",
             EventName = "AuthenticationExpired"
         )]
-        public static partial void AuthenticationExpired(
+        partial public static void AuthenticationExpired(
             ILogger logger,
             string transportConnectionId
         );

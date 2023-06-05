@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
-    internal sealed partial class MemberSignatureParser
+    partial internal sealed class MemberSignatureParser
     {
         private enum TokenKind
         {

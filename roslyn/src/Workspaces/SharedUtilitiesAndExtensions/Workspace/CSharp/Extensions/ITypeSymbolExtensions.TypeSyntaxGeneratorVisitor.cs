@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal partial class ITypeSymbolExtensions
+    partial internal class ITypeSymbolExtensions
     {
         private class TypeSyntaxGeneratorVisitor : SymbolVisitor<TypeSyntax>
         {

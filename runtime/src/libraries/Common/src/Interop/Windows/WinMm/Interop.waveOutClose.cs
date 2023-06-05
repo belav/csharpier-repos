@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         /// <summary>
         /// This function closes the specified waveform output device.
@@ -15,6 +15,6 @@ internal static partial class Interop
         /// succeeds, the handle is no longer valid after this call.</param>
         /// <returns>MMSYSERR</returns>
         [LibraryImport(Libraries.WinMM)]
-        internal static partial MMSYSERR waveOutClose(IntPtr hwo);
+        partial internal static MMSYSERR waveOutClose(IntPtr hwo);
     }
 }

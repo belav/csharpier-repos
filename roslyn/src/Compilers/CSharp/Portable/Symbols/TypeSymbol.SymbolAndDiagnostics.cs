@@ -10,7 +10,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class TypeSymbol
+    partial internal class TypeSymbol
     {
         /// <summary>
         /// Represents the method by which this type implements a given interface type

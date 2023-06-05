@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
-public abstract partial class Renderer
+partial public abstract class Renderer
 {
-    internal static partial class Log
+    partial internal static class Log
     {
         [LoggerMessage(
             1,
@@ -17,7 +17,7 @@ public abstract partial class Renderer
             EventName = "InitializingChildComponent",
             SkipEnabledCheck = true
         )]
-        private static partial void InitializingChildComponent(
+        partial private static void InitializingChildComponent(
             ILogger logger,
             int componentId,
             Type componentType,
@@ -32,7 +32,7 @@ public abstract partial class Renderer
             EventName = "InitializingRootComponent",
             SkipEnabledCheck = true
         )]
-        private static partial void InitializingRootComponent(
+        partial private static void InitializingRootComponent(
             ILogger logger,
             int componentId,
             Type componentType
@@ -74,7 +74,7 @@ public abstract partial class Renderer
             EventName = "RenderingComponent",
             SkipEnabledCheck = true
         )]
-        private static partial void RenderingComponent(
+        partial private static void RenderingComponent(
             ILogger logger,
             int componentId,
             Type componentType
@@ -99,7 +99,7 @@ public abstract partial class Renderer
             EventName = "DisposingComponent",
             SkipEnabledCheck = true
         )]
-        private static partial void DisposingComponent(
+        partial private static void DisposingComponent(
             ILogger logger,
             int componentId,
             Type componentType
@@ -124,7 +124,7 @@ public abstract partial class Renderer
             EventName = "HandlingEvent",
             SkipEnabledCheck = true
         )]
-        public static partial void HandlingEvent(ILogger logger, ulong eventId, string eventType);
+        partial public static void HandlingEvent(ILogger logger, ulong eventId, string eventType);
 
         public static void HandlingEvent(ILogger logger, ulong eventHandlerId, EventArgs? eventArgs)
         {

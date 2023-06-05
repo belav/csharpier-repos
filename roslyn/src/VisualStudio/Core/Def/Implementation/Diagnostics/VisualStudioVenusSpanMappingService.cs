@@ -19,7 +19,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         ExportWorkspaceService(typeof(IWorkspaceVenusSpanMappingService), ServiceLayer.Default),
         Shared
     ]
-    internal partial class VisualStudioVenusSpanMappingService : IWorkspaceVenusSpanMappingService
+    partial internal class VisualStudioVenusSpanMappingService : IWorkspaceVenusSpanMappingService
     {
         private readonly VisualStudioWorkspaceImpl _workspace;
 

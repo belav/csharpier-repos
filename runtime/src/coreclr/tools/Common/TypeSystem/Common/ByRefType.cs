@@ -3,10 +3,11 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Represents a managed pointer type.
     /// </summary>
-    public sealed partial class ByRefType : ParameterizedType
+    public sealed class ByRefType : ParameterizedType
     {
         internal ByRefType(TypeDesc parameter)
             : base(parameter) { }

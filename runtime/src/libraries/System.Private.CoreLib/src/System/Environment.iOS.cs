@@ -9,7 +9,7 @@ using NSSearchPathDirectory = Interop.Sys.NSSearchPathDirectory;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
 #if !TARGET_MACCATALYST
         // iOS/tvOS aren't allowed to call libproc APIs so return 0 here, this also matches what we returned in earlier releases

@@ -139,7 +139,7 @@ namespace System.Configuration
             }
         }
 
-        static private ConfigurationException GetFirstException(
+        private static ConfigurationException GetFirstException(
             ICollection<ConfigurationException> coll
         )
         {
@@ -151,7 +151,7 @@ namespace System.Configuration
             return null;
         }
 
-        static private string GetBareMessage(ConfigurationException e)
+        private static string GetBareMessage(ConfigurationException e)
         {
             if (e != null)
             {
@@ -161,7 +161,7 @@ namespace System.Configuration
             return null;
         }
 
-        static private Exception GetInnerException(ConfigurationException e)
+        private static Exception GetInnerException(ConfigurationException e)
         {
             if (e != null)
             {
@@ -180,7 +180,7 @@ namespace System.Configuration
             "CA2106:SecureAsserts",
             Justification = "Our Filename property getter demands the appropriate permissions."
         )]
-        static private string GetUnsafeFilename(ConfigurationException e)
+        private static string GetUnsafeFilename(ConfigurationException e)
         {
             if (e != null)
             {
@@ -190,7 +190,7 @@ namespace System.Configuration
             return null;
         }
 
-        static private int GetLineNumber(ConfigurationException e)
+        private static int GetLineNumber(ConfigurationException e)
         {
             if (e != null)
             {

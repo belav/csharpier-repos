@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.Text;
 
-    public partial class UdpBindingElement : StandardBindingElement
+    partial public class UdpBindingElement : StandardBindingElement
     {
         public UdpBindingElement(string name)
             : base(name) { }

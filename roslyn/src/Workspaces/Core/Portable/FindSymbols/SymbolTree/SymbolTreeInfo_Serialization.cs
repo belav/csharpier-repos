@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal partial class SymbolTreeInfo : IObjectWritable
+    partial internal class SymbolTreeInfo : IObjectWritable
     {
         private const string PrefixSymbolTreeInfo = "<SymbolTreeInfo>";
         private static readonly Checksum SerializationFormatChecksum = Checksum.Create("24");
@@ -291,7 +291,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             return null;
         }
 
-        internal readonly partial struct TestAccessor
+        partial internal readonly struct TestAccessor
         {
             public static SymbolTreeInfo? ReadSymbolTreeInfo(
                 ObjectReader reader,

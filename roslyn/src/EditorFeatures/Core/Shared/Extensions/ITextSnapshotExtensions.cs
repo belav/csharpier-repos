@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
-    internal static partial class ITextSnapshotExtensions
+    partial internal static class ITextSnapshotExtensions
     {
         /// <summary>
         /// format given snapshot and apply text changes to buffer

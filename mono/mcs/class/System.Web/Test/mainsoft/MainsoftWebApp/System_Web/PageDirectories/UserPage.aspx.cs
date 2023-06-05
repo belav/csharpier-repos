@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.PageDirectories
 {
-    public partial class UserPage : GHTBaseWeb
+    partial public class UserPage : GHTBaseWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {

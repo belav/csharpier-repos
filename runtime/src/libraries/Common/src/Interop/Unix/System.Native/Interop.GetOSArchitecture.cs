@@ -3,12 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [SuppressGCTransition]
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetOSArchitecture")]
-        internal static partial int GetOSArchitecture();
+        partial internal static int GetOSArchitecture();
     }
 }

@@ -3,10 +3,11 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Represents an unmanaged pointer type.
     /// </summary>
-    public sealed partial class PointerType : ParameterizedType
+    public sealed class PointerType : ParameterizedType
     {
         internal PointerType(TypeDesc parameterType)
             : base(parameterType) { }

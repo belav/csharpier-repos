@@ -8,7 +8,7 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs.StartupCode
 {
-    public sealed partial class AppContextInitializerMethod : ILStubMethod
+    partial public sealed class AppContextInitializerMethod : ILStubMethod
     {
         private TypeDesc _owningType;
         private MethodSignature _signature;

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.ComponentModel.DataAnnotations.Tests
 {
-    public partial class DisplayFormatAttributeTests
+    partial public class DisplayFormatAttributeTests
     {
         [Fact]
         public void NullDisplayTextResourceType_GetDefault_ReturnsNull()

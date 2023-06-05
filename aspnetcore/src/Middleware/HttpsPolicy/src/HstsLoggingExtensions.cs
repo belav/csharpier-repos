@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.HttpsPolicy;
 
-internal static partial class HstsLoggingExtensions
+partial internal static class HstsLoggingExtensions
 {
     [LoggerMessage(
         1,
@@ -13,7 +13,7 @@ internal static partial class HstsLoggingExtensions
         "The request is insecure. Skipping HSTS header.",
         EventName = "NotSecure"
     )]
-    public static partial void SkippingInsecure(this ILogger logger);
+    partial public static void SkippingInsecure(this ILogger logger);
 
     [LoggerMessage(
         2,
@@ -21,7 +21,7 @@ internal static partial class HstsLoggingExtensions
         "The host '{host}' is excluded. Skipping HSTS header.",
         EventName = "ExcludedHost"
     )]
-    public static partial void SkippingExcludedHost(this ILogger logger, string host);
+    partial public static void SkippingExcludedHost(this ILogger logger, string host);
 
     [LoggerMessage(
         3,
@@ -29,5 +29,5 @@ internal static partial class HstsLoggingExtensions
         "Adding HSTS header to response.",
         EventName = "AddingHstsHeader"
     )]
-    public static partial void AddingHstsHeader(this ILogger logger);
+    partial public static void AddingHstsHeader(this ILogger logger);
 }

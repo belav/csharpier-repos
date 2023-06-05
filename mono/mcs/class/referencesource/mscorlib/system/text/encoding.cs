@@ -2027,7 +2027,7 @@ namespace System.Text
 
             [System.Security.SecurityCritical] // auto-generated
             [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
-            public unsafe override int GetByteCount(char* chars, int count, bool flush)
+            public override unsafe int GetByteCount(char* chars, int count, bool flush)
             {
                 return m_encoding.GetByteCount(chars, count);
             }
@@ -2066,7 +2066,7 @@ namespace System.Text
 
             [System.Security.SecurityCritical] // auto-generated
             [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
-            public unsafe override int GetBytes(
+            public override unsafe int GetBytes(
                 char* chars,
                 int charCount,
                 byte* bytes,
@@ -2169,7 +2169,7 @@ namespace System.Text
 
             [System.Security.SecurityCritical] // auto-generated
             [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
-            public unsafe override int GetCharCount(byte* bytes, int count, bool flush)
+            public override unsafe int GetCharCount(byte* bytes, int count, bool flush)
             {
                 // By default just call the encoding version, no flush by default
                 return m_encoding.GetCharCount(bytes, count);
@@ -2217,7 +2217,7 @@ namespace System.Text
 
             [System.Security.SecurityCritical] // auto-generated
             [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
-            public unsafe override int GetChars(
+            public override unsafe int GetChars(
                 byte* bytes,
                 int byteCount,
                 char* chars,

@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    internal sealed partial class CanonType
+    partial internal sealed class CanonType
     {
         public override string DiagnosticName
         {
@@ -15,7 +15,7 @@ namespace Internal.TypeSystem
         }
     }
 
-    internal sealed partial class UniversalCanonType
+    partial internal sealed class UniversalCanonType
     {
         public override string DiagnosticName
         {

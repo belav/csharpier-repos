@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.MethodXml
 {
-    internal abstract partial class AbstractMethodXmlBuilder
+    partial internal abstract class AbstractMethodXmlBuilder
     {
         private const string ArgumentElementName = "Argument";
         private const string ArrayElementName = "Array";

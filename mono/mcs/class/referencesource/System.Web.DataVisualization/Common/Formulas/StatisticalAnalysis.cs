@@ -32,6 +32,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class StatisticalAnalysis : IFormula
     {
+        public
         #region Error strings
 
         // Error strings
@@ -45,7 +46,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <summary>
         /// Formula Module name
         /// </summary>
-        virtual public string Name
+        virtual string Name
         {
             get { return SR.FormulaNameStatisticalAnalysis; }
         }
@@ -69,7 +70,18 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="parameterList">Array of strings - Formula parameters</param>
         /// <param name="extraParameterList">Array of strings - Extra Formula parameters from DataManipulator object</param>
         /// <param name="outLabels">Array of strings - Used for Labels. Description for output results.</param>
-        virtual public void Formula(
+        public
+        /// <summary>
+        /// The first method in the module, which converts a formula
+        /// name to the corresponding private method.
+        /// </summary>
+        /// <param name="formulaName">String which represent a formula name</param>
+        /// <param name="inputValues">Arrays of doubles - Input values</param>
+        /// <param name="outputValues">Arrays of doubles - Output values</param>
+        /// <param name="parameterList">Array of strings - Formula parameters</param>
+        /// <param name="extraParameterList">Array of strings - Extra Formula parameters from DataManipulator object</param>
+        /// <param name="outLabels">Array of strings - Used for Labels. Description for output results.</param>
+        virtual void Formula(
             string formulaName,
             double[][] inputValues,
             out double[][] outputValues,

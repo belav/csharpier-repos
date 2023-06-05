@@ -7,7 +7,7 @@
 
 namespace System.Xml
 {
-    internal static partial class BinHexEncoder
+    partial internal static class BinHexEncoder
     {
         private const string s_hexDigits = "0123456789ABCDEF";
         private const int CharsChunkSize = 128;

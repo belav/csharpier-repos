@@ -7,10 +7,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Pipes
 {
+    partial
     /// <summary>
     /// Anonymous pipe client. Use this to open the client end of an anonymous pipes created with AnonymousPipeServerStream.
     /// </summary>
-    public sealed partial class AnonymousPipeClientStream : PipeStream
+    public sealed class AnonymousPipeClientStream : PipeStream
     {
         public AnonymousPipeClientStream(string pipeHandleAsString)
             : this(PipeDirection.In, pipeHandleAsString) { }

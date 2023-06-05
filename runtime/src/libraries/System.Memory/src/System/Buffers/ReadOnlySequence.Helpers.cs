@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers
 {
-    public readonly partial struct ReadOnlySequence<T>
+    partial public readonly struct ReadOnlySequence<T>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal bool TryGetBuffer(

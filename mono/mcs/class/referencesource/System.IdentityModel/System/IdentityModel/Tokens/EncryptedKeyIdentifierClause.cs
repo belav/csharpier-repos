@@ -5,7 +5,7 @@ namespace System.IdentityModel.Tokens
 {
     using System.Globalization;
 
-    sealed public class EncryptedKeyIdentifierClause : BinaryKeyIdentifierClause
+    public sealed class EncryptedKeyIdentifierClause : BinaryKeyIdentifierClause
     {
         readonly string carriedKeyName;
         readonly string encryptionMethod;

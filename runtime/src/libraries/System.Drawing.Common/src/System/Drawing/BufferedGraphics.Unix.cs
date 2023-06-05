@@ -35,7 +35,7 @@ using System.Runtime.Serialization;
 
 namespace System.Drawing
 {
-    public sealed partial class BufferedGraphics
+    partial public sealed class BufferedGraphics
     {
         private Rectangle size;
         private Bitmap membmp;

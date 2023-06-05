@@ -3453,7 +3453,7 @@ namespace System.Data.Linq.SqlClient
 
             // This method is called from within this class's constructor (through a call to Buffer()) so it is sealed to prevent
             // derived classes from overriding it. See FxCop rule CA2214 for more information on why this is necessary.
-            public override sealed bool Read()
+            public sealed override bool Read()
             {
                 if (this.isFinished)
                 {

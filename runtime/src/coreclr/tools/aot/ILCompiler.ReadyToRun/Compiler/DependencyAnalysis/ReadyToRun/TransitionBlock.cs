@@ -637,7 +637,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private class Arm32ElTransitionBlock : Arm32TransitionBlock
         {
-            public new static TransitionBlock Instance = new Arm32ElTransitionBlock();
+            public static new TransitionBlock Instance = new Arm32ElTransitionBlock();
 
             public override bool IsArmhfABI => false;
             public override bool IsArmelABI => true;
@@ -696,7 +696,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private sealed class AppleArm64TransitionBlock : Arm64TransitionBlock
         {
-            public new static TransitionBlock Instance = new AppleArm64TransitionBlock();
+            public static new TransitionBlock Instance = new AppleArm64TransitionBlock();
             public override bool IsAppleArm64ABI => true;
 
             public sealed override int StackElemSize(

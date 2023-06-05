@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace System.Text.Json
 {
-    public sealed partial class JsonSerializerOptions
+    partial public sealed class JsonSerializerOptions
     {
         /// <summary>
         /// Encapsulates all cached metadata referenced by the current <see cref="JsonSerializerOptions" /> instance.

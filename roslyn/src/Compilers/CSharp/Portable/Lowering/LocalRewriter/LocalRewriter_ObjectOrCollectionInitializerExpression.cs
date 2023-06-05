@@ -12,9 +12,10 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     // Shared code for rewriting Object and Collection initializer expressions
 
-    internal sealed partial class LocalRewriter
+    internal sealed class LocalRewriter
     {
         private static BoundObjectInitializerExpressionBase UpdateInitializers(
             BoundObjectInitializerExpressionBase initializerExpression,

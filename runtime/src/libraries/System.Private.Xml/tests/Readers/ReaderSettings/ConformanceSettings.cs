@@ -11,7 +11,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.ReaderSettingsTests
 {
     [TestCase(Name = "Conformance Settings", Desc = "Conformance Settings")]
-    public partial class TCConformanceSettings : TCXMLReaderBaseGeneral
+    partial public class TCConformanceSettings : TCXMLReaderBaseGeneral
     {
         public string GetSimpleInvalidXml()
         {

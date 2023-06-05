@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    internal partial struct FileStatus
+    partial internal struct FileStatus
     {
         private const int NanosecondsPerTick = 100;
 

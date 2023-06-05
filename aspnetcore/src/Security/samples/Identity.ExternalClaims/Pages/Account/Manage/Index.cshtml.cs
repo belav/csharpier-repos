@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Identity.ExternalClaims.Pages.Account.Manage;
 
-public partial class IndexModel : PageModel
+partial public class IndexModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;

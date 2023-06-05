@@ -137,7 +137,7 @@ namespace Microsoft.Win32
         )]
         [SuppressMessage("Microsoft.Security", "CA2101:SpecifyMarshalingForPInvokeStringArguments")]
         [ResourceExposure(ResourceScope.None)]
-        public static unsafe extern int FormatMessage(
+        public static extern unsafe int FormatMessage(
             int dwFlags,
             IntPtr lpSource_mustBeNull,
             uint dwMessageId,
@@ -159,7 +159,7 @@ namespace Microsoft.Win32
         )]
         [SuppressMessage("Microsoft.Security", "CA2101:SpecifyMarshalingForPInvokeStringArguments")]
         [ResourceExposure(ResourceScope.None)]
-        public static unsafe extern int FormatMessage(
+        public static extern unsafe int FormatMessage(
             int dwFlags,
             SafeLibraryHandle lpSource,
             uint dwMessageId,
@@ -269,7 +269,7 @@ namespace Microsoft.Win32
 
         [DllImport(ExternDll.PerfCounter, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
         [ResourceExposure(ResourceScope.None)]
-        public static unsafe extern int FormatFromRawValue(
+        public static extern unsafe int FormatFromRawValue(
             uint dwCounterType,
             uint dwFormat,
             ref long pTimeBase,

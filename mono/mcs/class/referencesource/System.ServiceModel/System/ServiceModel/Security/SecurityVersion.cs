@@ -276,7 +276,7 @@ namespace System.ServiceModel.Security
             SecurityVersion11()
                 : base() { }
 
-            public new static SecurityVersion11 Instance
+            public static new SecurityVersion11 Instance
             {
                 get { return instance; }
             }

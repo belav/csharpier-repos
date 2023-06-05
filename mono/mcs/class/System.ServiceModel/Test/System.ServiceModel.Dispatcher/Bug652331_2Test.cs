@@ -318,7 +318,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
         Name = "DataType1",
         Namespace = "http://mynamespace"
     )]
-    public partial class DataType1 : object, System.ComponentModel.INotifyPropertyChanged
+    partial public class DataType1 : object, System.ComponentModel.INotifyPropertyChanged
     {
         private string IdField;
 
@@ -364,7 +364,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
     [System.Runtime.Serialization.KnownTypeAttribute(
         typeof(System.Collections.ObjectModel.ObservableCollection<object>)
     )]
-    public partial class DataType2 : object, System.ComponentModel.INotifyPropertyChanged
+    partial public class DataType2 : object, System.ComponentModel.INotifyPropertyChanged
     {
         private System.Collections.ObjectModel.ObservableCollection<object> ItemsField;
 
@@ -480,7 +480,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
         WrapperNamespace = "",
         IsWrapped = true
     )]
-    public partial class JSMGetDatabasesRequest
+    partial public class JSMGetDatabasesRequest
     {
         public JSMGetDatabasesRequest() { }
     }
@@ -492,7 +492,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
         WrapperNamespace = "",
         IsWrapped = true
     )]
-    public partial class JSMGetDatabasesResponse
+    partial public class JSMGetDatabasesResponse
     {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "", Order = 0)]
         [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
@@ -515,7 +515,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    partial public class GetDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         private object[] results;
 
@@ -542,7 +542,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetCollectionDataCompletedEventArgs
+    partial public class GetCollectionDataCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         private object[] results;
@@ -572,7 +572,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetNestedDataCompletedEventArgs
+    partial public class GetNestedDataCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         private object[] results;
@@ -600,7 +600,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class JSMGetDatabasesCompletedEventArgs
+    partial public class JSMGetDatabasesCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         private object[] results;
@@ -628,7 +628,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client
+    partial public class Service1Client
         : System.ServiceModel.ClientBase<WebServiceMoonlightTest.ServiceReference2.IService1>,
             WebServiceMoonlightTest.ServiceReference2.IService1
     {

@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToInterpolatedString
         ),
         Shared
     ]
-    internal partial class CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider
+    partial internal class CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider
         : AbstractConvertPlaceholderToInterpolatedStringRefactoringProvider<
             InvocationExpressionSyntax,
             ExpressionSyntax,

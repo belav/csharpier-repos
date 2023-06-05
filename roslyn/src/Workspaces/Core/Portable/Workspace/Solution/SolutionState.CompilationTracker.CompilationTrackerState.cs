@@ -12,9 +12,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class SolutionState
+    partial internal class SolutionState
     {
-        private partial class CompilationTracker
+        partial private class CompilationTracker
         {
             private readonly struct CompilationTrackerGeneratorInfo
             {

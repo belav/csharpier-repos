@@ -5,7 +5,7 @@ using System.Resources;
 
 namespace System
 {
-    internal static partial class SR
+    partial internal static class SR
     {
         private static readonly bool s_usingResourceKeys = AppContext.TryGetSwitch(
             "System.Resources.UseSystemResourceKeys",

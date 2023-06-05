@@ -336,7 +336,7 @@ namespace System.Net
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool GetHostByName_icall(
+        private static extern bool GetHostByName_icall(
             string host,
             out string h_name,
             out string[] h_aliases,
@@ -345,7 +345,7 @@ namespace System.Net
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool GetHostByAddr_icall(
+        private static extern bool GetHostByAddr_icall(
             string addr,
             out string h_name,
             out string[] h_aliases,
@@ -354,7 +354,7 @@ namespace System.Net
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool GetHostName_icall(out string h_name);
+        private static extern bool GetHostName_icall(out string h_name);
 
         static void Error_11001(string hostName)
         {

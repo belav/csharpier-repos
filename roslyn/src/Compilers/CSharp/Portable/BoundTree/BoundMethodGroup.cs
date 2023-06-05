@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class BoundMethodGroup : BoundMethodOrPropertyGroup
+    partial internal sealed class BoundMethodGroup : BoundMethodOrPropertyGroup
     {
         public BoundMethodGroup(
             SyntaxNode syntax,

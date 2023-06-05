@@ -7,7 +7,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 {
     [OuterLoop("Modifies system state")]
     [SkipOnPlatform(TestPlatforms.Browser, "Browser doesn't support X509Store")]
-    public static partial class X509StoreMutableTests
+    partial public static class X509StoreMutableTests
     {
         [ConditionalFact(nameof(PermissionsAllowStoreWrite))]
         public static void AddToStoreTwice()

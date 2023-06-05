@@ -30,7 +30,7 @@ namespace System.ComponentModel
     )]
     [Serializable]
     [SuppressUnmanagedCodeSecurity]
-    public partial class Win32Exception : ExternalException, ISerializable
+    partial public class Win32Exception : ExternalException, ISerializable
     {
         /// <devdoc>
         ///    <para>Represents the Win32 error code associated with this exception. This

@@ -13,7 +13,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class StreamReaderTests
+    partial public class StreamReaderTests
     {
         protected virtual Stream CreateStream()
         {

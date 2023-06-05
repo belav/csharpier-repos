@@ -13,7 +13,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class DefaultJsonTypeInfoResolverTests
+    partial public static class DefaultJsonTypeInfoResolverTests
     {
         [Fact]
         public static void JsonPropertyInfoOptionsAreSet()

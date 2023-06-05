@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public abstract partial class SyntaxNode
+    partial public abstract class SyntaxNode
     {
         private IEnumerable<SyntaxNode> DescendantNodesImpl(
             TextSpan span,

@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
 
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
 
-    internal partial struct RegexParser
+    partial internal struct RegexParser
     {
         /// <summary>
         /// Analyzes the first parsed tree to determine the set of capture numbers and names.  These are

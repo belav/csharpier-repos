@@ -9,7 +9,7 @@ using MetadataType = Internal.TypeSystem.DefType;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class ModuleDesc : TypeSystemEntity
+    partial public abstract class ModuleDesc : TypeSystemEntity
     {
         public override TypeSystemContext Context { get; }
 

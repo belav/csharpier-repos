@@ -85,7 +85,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class LocalBuilder : LocalVariableInfo
+    partial public sealed class LocalBuilder : LocalVariableInfo
     {
         // Some fields are already defined in LocalVariableInfo
         #region Sync with reflection.h

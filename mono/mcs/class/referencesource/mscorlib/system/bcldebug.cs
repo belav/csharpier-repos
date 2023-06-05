@@ -111,7 +111,7 @@ namespace System
 
         [Conditional("_DEBUG")]
         [ResourceExposure(ResourceScope.None)]
-        static public void Assert(bool condition, String message)
+        public static void Assert(bool condition, String message)
         {
 #if _DEBUG
             // Speed up debug builds marginally by avoiding the garbage from
@@ -125,7 +125,7 @@ namespace System
         [Conditional("_LOGGING")]
         [ResourceExposure(ResourceScope.None)]
         [SecuritySafeCritical]
-        static public void Log(String message)
+        public static void Log(String message)
         {
             if (AppDomain.CurrentDomain.IsUnloadingForcedFinalize())
                 return;
@@ -141,7 +141,7 @@ namespace System
         [Conditional("_LOGGING")]
         [ResourceExposure(ResourceScope.None)]
         [SecuritySafeCritical]
-        static public void Log(String switchName, String message)
+        public static void Log(String switchName, String message)
         {
             if (AppDomain.CurrentDomain.IsUnloadingForcedFinalize())
                 return;
@@ -179,7 +179,7 @@ namespace System
         //
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static int GetRegistryLoggingValues(
+        private static extern int GetRegistryLoggingValues(
             out bool loggingEnabled,
             out bool logToConsole,
             out int logLevel,

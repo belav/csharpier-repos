@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal abstract partial class CommonCompiler
+    partial internal abstract class CommonCompiler
     {
         internal sealed class LoggingSourceFileResolver : SourceFileResolver
         {

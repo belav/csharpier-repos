@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Threading
 {
-    internal sealed partial class PortableThreadPool
+    partial internal sealed class PortableThreadPool
     {
         public short MinThreadsGoal
         {

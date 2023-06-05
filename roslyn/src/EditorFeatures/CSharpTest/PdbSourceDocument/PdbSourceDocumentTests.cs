@@ -18,7 +18,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 {
-    public partial class PdbSourceDocumentTests : AbstractPdbSourceDocumentTests
+    partial public class PdbSourceDocumentTests : AbstractPdbSourceDocumentTests
     {
         [Theory]
         [CombinatorialData]

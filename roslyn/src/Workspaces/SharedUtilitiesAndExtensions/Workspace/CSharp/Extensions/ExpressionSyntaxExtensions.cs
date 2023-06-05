@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class ExpressionSyntaxExtensions
+    partial internal static class ExpressionSyntaxExtensions
     {
         public static ExpressionSyntax Parenthesize(
             this ExpressionSyntax expression,

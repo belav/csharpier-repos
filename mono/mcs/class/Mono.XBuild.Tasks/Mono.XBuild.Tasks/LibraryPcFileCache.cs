@@ -318,7 +318,7 @@ namespace Mono.PkgConfig
 
         internal List<PackageAssemblyInfo> Assemblies { get; set; }
 
-        internal protected override bool IsValidPackage
+        protected internal override bool IsValidPackage
         {
             get { return Assemblies != null && Assemblies.Count > 0; }
         }

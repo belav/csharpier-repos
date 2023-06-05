@@ -20,7 +20,7 @@ namespace X
 {
     using Foo;
 
-    public partial class Test
+    partial public class Test
     {
         public static int FooWorld()
         {
@@ -33,7 +33,7 @@ namespace X
 {
     using Bar;
 
-    public partial class Test
+    partial public class Test
     {
         public static int BarWorld()
         {

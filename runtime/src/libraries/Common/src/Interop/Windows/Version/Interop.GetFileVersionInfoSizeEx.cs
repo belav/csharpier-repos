@@ -3,16 +3,16 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Version
+    partial internal static class Version
     {
         [LibraryImport(
             Libraries.Version,
             EntryPoint = "GetFileVersionInfoSizeExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial uint GetFileVersionInfoSizeEx(
+        partial internal static uint GetFileVersionInfoSizeEx(
             uint dwFlags,
             string lpwstrFilename,
             out uint lpdwHandle

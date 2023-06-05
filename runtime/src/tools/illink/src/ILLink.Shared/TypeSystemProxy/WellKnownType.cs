@@ -23,7 +23,7 @@ namespace ILLink.Shared.TypeSystemProxy
         System_Void
     }
 
-    public static partial class WellKnownTypeExtensions
+    partial public static class WellKnownTypeExtensions
     {
         public static (string Namespace, string Name) GetNamespaceAndName(this WellKnownType type)
         {

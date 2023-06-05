@@ -15,10 +15,10 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 [AttributeUsage(AttributeTargets.Method)]
 internal class HubServerProxyAttribute : Attribute { }
 
-internal static partial class HubServerProxyExtensions
+partial internal static class HubServerProxyExtensions
 {
     [HubServerProxy]
-    public static partial T GetHubServer<T>(this HubConnection conn);
+    partial public static T GetHubServer<T>(this HubConnection conn);
 }
 
 public class HubServerProxyGeneratorTests

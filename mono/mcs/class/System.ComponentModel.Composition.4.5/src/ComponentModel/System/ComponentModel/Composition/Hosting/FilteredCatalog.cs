@@ -14,7 +14,7 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class FilteredCatalog
+    partial public class FilteredCatalog
         : ComposablePartCatalog,
             INotifyComposablePartCatalogChanged
     {

@@ -39,6 +39,7 @@ namespace System.Diagnostics
         public Activity? Current { get; init; }
     }
 
+    partial
     /// <summary>
     /// Activity represents operation with context to be used for logging.
     /// Activity has operation name, Id, start time and duration, tags and baggage.
@@ -56,7 +57,7 @@ namespace System.Diagnostics
     /// but the exception is suppressed, and the operation does something reasonable (typically
     /// doing nothing).
     /// </summary>
-    public partial class Activity : IDisposable
+    public class Activity : IDisposable
     {
 #pragma warning disable CA1825 // Array.Empty<T>() doesn't exist in all configurations
         private static readonly IEnumerable<KeyValuePair<string, string?>> s_emptyBaggageTags =

@@ -6,9 +6,10 @@ using System.Threading;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Api surface for TypeDesc that relates to interfaces
 
-    public partial class TypeDesc
+    public class TypeDesc
     {
         private DefType[] _runtimeInterfaces;
 

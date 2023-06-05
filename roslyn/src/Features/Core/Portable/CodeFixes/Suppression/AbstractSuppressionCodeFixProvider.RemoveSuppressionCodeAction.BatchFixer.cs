@@ -16,9 +16,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
-    internal abstract partial class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
+    partial internal abstract class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
     {
-        internal abstract partial class RemoveSuppressionCodeAction
+        partial internal abstract class RemoveSuppressionCodeAction
         {
             public static FixAllProvider GetBatchFixer(
                 AbstractSuppressionCodeFixProvider suppressionFixProvider

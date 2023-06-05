@@ -6,7 +6,7 @@
 
 namespace System.Formats.Cbor
 {
-    public partial class CborReader
+    partial public class CborReader
     {
         public System.Half ReadHalf()
         {
@@ -14,7 +14,7 @@ namespace System.Formats.Cbor
         }
     }
 
-    public partial class CborWriter
+    partial public class CborWriter
     {
         public void WriteHalf(System.Half value) { }
     }

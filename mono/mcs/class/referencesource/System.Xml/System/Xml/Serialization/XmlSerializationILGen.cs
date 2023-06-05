@@ -109,7 +109,7 @@ namespace System.Xml.Serialization
 
         static Dictionary<string, Regex> regexs = new Dictionary<string, Regex>();
 
-        static internal Regex NewRegex(string pattern)
+        internal static Regex NewRegex(string pattern)
         {
             Regex regex;
             lock (regexs)

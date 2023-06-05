@@ -171,7 +171,7 @@ namespace System.Text
         // object that the caller is using, so the caller could mess up the encoder for us
         // if they aren't careful.
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe virtual bool InternalFallback(char ch, ref char* chars)
+        internal virtual unsafe bool InternalFallback(char ch, ref char* chars)
         {
             // Shouldn't have null charStart
             Contract.Assert(

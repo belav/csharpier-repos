@@ -8,7 +8,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     using static BinaryOperatorKind;
 
-    internal static partial class ValueSetFactory
+    partial internal static class ValueSetFactory
     {
         private sealed class NintValueSetFactory : IValueSetFactory<int>, IValueSetFactory
         {

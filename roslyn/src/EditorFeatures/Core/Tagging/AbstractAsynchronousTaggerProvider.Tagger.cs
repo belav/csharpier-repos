@@ -9,14 +9,15 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal partial class AbstractAsynchronousTaggerProvider<TTag>
+    partial internal class AbstractAsynchronousTaggerProvider<TTag>
     {
+        partial
         /// <summary>
         /// <see cref="Tagger"/> is a thin wrapper we create around the single shared <see cref="TagSource"/>.
         /// Clients can request and dispose these at will.  Once the last wrapper is disposed, the underlying
         /// <see cref="TagSource"/> will finally be disposed as well.
         /// </summary>
-        private sealed partial class Tagger : ITagger<TTag>, IDisposable
+        private sealed class Tagger : ITagger<TTag>, IDisposable
         {
             private readonly TagSource _tagSource;
 

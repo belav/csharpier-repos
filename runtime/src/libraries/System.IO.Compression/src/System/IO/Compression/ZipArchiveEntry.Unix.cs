@@ -3,7 +3,7 @@
 
 namespace System.IO.Compression
 {
-    public partial class ZipArchiveEntry
+    partial public class ZipArchiveEntry
     {
         internal const ZipVersionMadeByPlatform CurrentZipPlatform = ZipVersionMadeByPlatform.Unix;
 

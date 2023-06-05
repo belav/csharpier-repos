@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.ServiceModel.Channels;
 
-    public abstract partial class TransportElement : BindingElementExtensionElement
+    partial public abstract class TransportElement : BindingElementExtensionElement
     {
         protected TransportElement() { }
 

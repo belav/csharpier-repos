@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace System.Runtime.Caching
 {
-    internal sealed partial class PhysicalMemoryMonitor : MemoryMonitor
+    partial internal sealed class PhysicalMemoryMonitor : MemoryMonitor
     {
         /* There are sysconf and /proc/meminfo ways to get this information before .Net Core 3,
          * but it is very complicated to do it correctly, especially when accounting for

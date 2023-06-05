@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal partial class OperationStatus
+    partial internal class OperationStatus
     {
         public static readonly OperationStatus Succeeded =
             new(OperationStatusFlag.Succeeded, reason: null);

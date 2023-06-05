@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator;
 
-internal partial class WpfBackgroundWorkIndicatorFactory
+partial internal class WpfBackgroundWorkIndicatorFactory
 {
     /// <summary>
     /// Implementation of an <see cref="IUIThreadOperationContext"/> for the background work indicator.

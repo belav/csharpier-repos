@@ -6,7 +6,7 @@
 
 namespace System.Text.Encodings.Web
 {
-    public abstract partial class HtmlEncoder : System.Text.Encodings.Web.TextEncoder
+    partial public abstract class HtmlEncoder : System.Text.Encodings.Web.TextEncoder
     {
         protected HtmlEncoder() { }
 
@@ -30,7 +30,7 @@ namespace System.Text.Encodings.Web
         }
     }
 
-    public abstract partial class JavaScriptEncoder : System.Text.Encodings.Web.TextEncoder
+    partial public abstract class JavaScriptEncoder : System.Text.Encodings.Web.TextEncoder
     {
         protected JavaScriptEncoder() { }
 
@@ -58,7 +58,7 @@ namespace System.Text.Encodings.Web
         }
     }
 
-    public abstract partial class TextEncoder
+    partial public abstract class TextEncoder
     {
         protected TextEncoder() { }
 
@@ -114,7 +114,7 @@ namespace System.Text.Encodings.Web
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public unsafe abstract int FindFirstCharacterToEncode(char* text, int textLength);
+        public abstract unsafe int FindFirstCharacterToEncode(char* text, int textLength);
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -128,7 +128,7 @@ namespace System.Text.Encodings.Web
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public unsafe abstract bool TryEncodeUnicodeScalar(
+        public abstract unsafe bool TryEncodeUnicodeScalar(
             int unicodeScalar,
             char* buffer,
             int bufferLength,
@@ -141,7 +141,7 @@ namespace System.Text.Encodings.Web
         public abstract bool WillEncode(int unicodeScalar);
     }
 
-    public partial class TextEncoderSettings
+    partial public class TextEncoderSettings
     {
         public TextEncoderSettings() { }
 
@@ -177,7 +177,7 @@ namespace System.Text.Encodings.Web
         }
     }
 
-    public abstract partial class UrlEncoder : System.Text.Encodings.Web.TextEncoder
+    partial public abstract class UrlEncoder : System.Text.Encodings.Web.TextEncoder
     {
         protected UrlEncoder() { }
 
@@ -204,7 +204,7 @@ namespace System.Text.Encodings.Web
 
 namespace System.Text.Unicode
 {
-    public sealed partial class UnicodeRange
+    partial public sealed class UnicodeRange
     {
         public UnicodeRange(int firstCodePoint, int length) { }
 
@@ -226,7 +226,7 @@ namespace System.Text.Unicode
         }
     }
 
-    public static partial class UnicodeRanges
+    partial public static class UnicodeRanges
     {
         public static System.Text.Unicode.UnicodeRange All
         {

@@ -34,7 +34,7 @@ using System.Text;
 namespace Newtonsoft.Json.Tests.LinqToSql
 {
     [MetadataType(typeof(DepartmentMetadata))]
-    public partial class Department
+    partial public class Department
     {
         [JsonConverter(typeof(DepartmentConverter))]
         public class DepartmentMetadata { }

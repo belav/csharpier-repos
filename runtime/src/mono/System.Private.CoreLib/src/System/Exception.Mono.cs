@@ -11,7 +11,7 @@ using System.Diagnostics.Tracing;
 namespace System
 {
     [StructLayout(LayoutKind.Sequential)]
-    public partial class Exception
+    partial public class Exception
     {
         internal static uint GetExceptionCount()
         {

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class CompilationErrorTests : CompilingTestBase
+    partial public class CompilationErrorTests : CompilingTestBase
     {
         [Fact]
         public void UserDefinedOperatorCollisionErrors()

@@ -907,7 +907,7 @@ namespace System.Runtime.Remoting.Messaging
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void OutToUnmanagedDebugger(String s);
+        internal static extern void OutToUnmanagedDebugger(String s);
 
         [System.Security.SecurityCritical] // auto-generated
         internal static LogicalCallContext PropagateCallContextFromMessageToThread(IMessage msg)
@@ -2858,7 +2858,7 @@ namespace System.Runtime.Remoting.Messaging
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        static internal bool IsCustomErrorEnabled()
+        internal static bool IsCustomErrorEnabled()
         {
             Object oIsCustomErrorEnabled = CallContext.GetData("__CustomErrorsEnabled");
             // The server side will always have this CallContext item set. If it is not set then

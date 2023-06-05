@@ -25,7 +25,7 @@ using CS = Microsoft.CodeAnalysis.CSharp;
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 {
     [Trait(Traits.Feature, Traits.Features.CodeGeneration)]
-    public partial class CodeGenerationTests
+    partial public class CodeGenerationTests
     {
         [UseExportProvider]
         public class CSharp

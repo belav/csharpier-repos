@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundInterpolatedStringArgumentPlaceholder
+    partial internal class BoundInterpolatedStringArgumentPlaceholder
     {
         public const int InstanceParameter = -1;
         public const int TrailingConstructorValidityParameter = -2;

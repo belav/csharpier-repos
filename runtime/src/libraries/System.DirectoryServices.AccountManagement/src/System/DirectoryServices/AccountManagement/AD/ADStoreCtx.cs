@@ -18,7 +18,7 @@ using System.DirectoryServices.ActiveDirectory;
 
 namespace System.DirectoryServices.AccountManagement
 {
-    internal partial class ADStoreCtx : StoreCtx
+    partial internal class ADStoreCtx : StoreCtx
     {
         protected DirectoryEntry ctxBase;
         private const int mappingIndex = 0;

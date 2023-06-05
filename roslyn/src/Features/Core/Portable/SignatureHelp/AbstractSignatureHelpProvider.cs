@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SignatureHelp
 {
-    internal abstract partial class AbstractSignatureHelpProvider : ISignatureHelpProvider
+    partial internal abstract class AbstractSignatureHelpProvider : ISignatureHelpProvider
     {
         protected static readonly SymbolDisplayFormat MinimallyQualifiedWithoutParametersFormat =
             SymbolDisplayFormat.MinimallyQualifiedFormat.WithMemberOptions(

@@ -11,7 +11,7 @@ namespace System.Diagnostics.Metrics
         Span<string> AsSpan();
     }
 
-    internal partial struct StringSequence1 : IEquatable<StringSequence1>, IStringSequence
+    partial internal struct StringSequence1 : IEquatable<StringSequence1>, IStringSequence
     {
         public Span<string> AsSpan()
         {
@@ -19,7 +19,7 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    internal partial struct StringSequence2 : IEquatable<StringSequence2>, IStringSequence
+    partial internal struct StringSequence2 : IEquatable<StringSequence2>, IStringSequence
     {
         public Span<string> AsSpan()
         {
@@ -29,7 +29,7 @@ namespace System.Diagnostics.Metrics
         public override int GetHashCode() => HashCode.Combine(Value1, Value2);
     }
 
-    internal partial struct StringSequence3 : IEquatable<StringSequence3>, IStringSequence
+    partial internal struct StringSequence3 : IEquatable<StringSequence3>, IStringSequence
     {
         public Span<string> AsSpan()
         {
@@ -39,7 +39,7 @@ namespace System.Diagnostics.Metrics
         public override int GetHashCode() => HashCode.Combine(Value1, Value2, Value3);
     }
 
-    internal partial struct StringSequenceMany : IEquatable<StringSequenceMany>, IStringSequence
+    partial internal struct StringSequenceMany : IEquatable<StringSequenceMany>, IStringSequence
     {
         public override int GetHashCode()
         {

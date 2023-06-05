@@ -10,7 +10,7 @@ namespace System.Drawing
         "System.Drawing.Design.BitmapEditor, System.Drawing.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public sealed partial class Bitmap : System.Drawing.Image
+    partial public sealed class Bitmap : System.Drawing.Image
     {
         public Bitmap(System.Drawing.Image original) { }
 
@@ -128,18 +128,18 @@ namespace System.Drawing
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly)]
-    public partial class BitmapSuffixInSameAssemblyAttribute : System.Attribute
+    partial public class BitmapSuffixInSameAssemblyAttribute : System.Attribute
     {
         public BitmapSuffixInSameAssemblyAttribute() { }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly)]
-    public partial class BitmapSuffixInSatelliteAssemblyAttribute : System.Attribute
+    partial public class BitmapSuffixInSatelliteAssemblyAttribute : System.Attribute
     {
         public BitmapSuffixInSatelliteAssemblyAttribute() { }
     }
 
-    public abstract partial class Brush
+    partial public abstract class Brush
         : System.MarshalByRefObject,
             System.ICloneable,
             System.IDisposable
@@ -157,7 +157,7 @@ namespace System.Drawing
         protected internal void SetNativeBrush(System.IntPtr brush) { }
     }
 
-    public static partial class Brushes
+    partial public static class Brushes
     {
         public static System.Drawing.Brush AliceBlue
         {
@@ -725,7 +725,7 @@ namespace System.Drawing
         }
     }
 
-    public sealed partial class BufferedGraphics : System.IDisposable
+    partial public sealed class BufferedGraphics : System.IDisposable
     {
         internal BufferedGraphics() { }
 
@@ -743,7 +743,7 @@ namespace System.Drawing
         public void Render(System.IntPtr targetDC) { }
     }
 
-    public sealed partial class BufferedGraphicsContext : System.IDisposable
+    partial public sealed class BufferedGraphicsContext : System.IDisposable
     {
         public BufferedGraphicsContext() { }
 
@@ -776,7 +776,7 @@ namespace System.Drawing
         public void Invalidate() { }
     }
 
-    public static partial class BufferedGraphicsManager
+    partial public static class BufferedGraphicsManager
     {
         public static System.Drawing.BufferedGraphicsContext Current
         {
@@ -784,7 +784,7 @@ namespace System.Drawing
         }
     }
 
-    public partial struct CharacterRange
+    partial public struct CharacterRange
     {
         private int _dummyPrimitive;
 
@@ -876,7 +876,7 @@ namespace System.Drawing
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
     [System.ComponentModel.TypeConverterAttribute(typeof(System.Drawing.FontConverter))]
-    public sealed partial class Font
+    partial public sealed class Font
         : System.MarshalByRefObject,
             System.ICloneable,
             System.IDisposable,
@@ -1142,7 +1142,7 @@ namespace System.Drawing
         }
     }
 
-    public partial class FontConverter : System.ComponentModel.TypeConverter
+    partial public class FontConverter : System.ComponentModel.TypeConverter
     {
         public FontConverter() { }
 
@@ -1215,7 +1215,7 @@ namespace System.Drawing
             throw null;
         }
 
-        public sealed partial class FontNameConverter
+        partial public sealed class FontNameConverter
             : System.ComponentModel.TypeConverter,
                 System.IDisposable
         {
@@ -1262,7 +1262,7 @@ namespace System.Drawing
             void System.IDisposable.Dispose() { }
         }
 
-        public partial class FontUnitConverter : System.ComponentModel.EnumConverter
+        partial public class FontUnitConverter : System.ComponentModel.EnumConverter
         {
             public FontUnitConverter()
                 : base(default(System.Type)) { }
@@ -1276,7 +1276,7 @@ namespace System.Drawing
         }
     }
 
-    public sealed partial class FontFamily : System.MarshalByRefObject, System.IDisposable
+    partial public sealed class FontFamily : System.MarshalByRefObject, System.IDisposable
     {
         public FontFamily(System.Drawing.Text.GenericFontFamilies genericFamily) { }
 
@@ -1375,7 +1375,7 @@ namespace System.Drawing
         Strikeout = 8,
     }
 
-    public sealed partial class Graphics
+    partial public sealed class Graphics
         : System.MarshalByRefObject,
             System.Drawing.IDeviceContext,
             System.IDisposable
@@ -2753,7 +2753,7 @@ namespace System.Drawing
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
     [System.ComponentModel.TypeConverterAttribute(typeof(System.Drawing.IconConverter))]
-    public sealed partial class Icon
+    partial public sealed class Icon
         : System.MarshalByRefObject,
             System.ICloneable,
             System.IDisposable,
@@ -2836,7 +2836,7 @@ namespace System.Drawing
         }
     }
 
-    public partial class IconConverter : System.ComponentModel.ExpandableObjectConverter
+    partial public class IconConverter : System.ComponentModel.ExpandableObjectConverter
     {
         public IconConverter() { }
 
@@ -2876,7 +2876,7 @@ namespace System.Drawing
         }
     }
 
-    public partial interface IDeviceContext : System.IDisposable
+    partial public interface IDeviceContext : System.IDisposable
     {
         System.IntPtr GetHdc();
         void ReleaseHdc();
@@ -2888,7 +2888,7 @@ namespace System.Drawing
     )]
     [System.ComponentModel.ImmutableObjectAttribute(true)]
     [System.ComponentModel.TypeConverterAttribute(typeof(System.Drawing.ImageConverter))]
-    public abstract partial class Image
+    partial public abstract class Image
         : System.MarshalByRefObject,
             System.ICloneable,
             System.IDisposable,
@@ -3137,7 +3137,7 @@ namespace System.Drawing
         public delegate bool GetThumbnailImageAbort();
     }
 
-    public sealed partial class ImageAnimator
+    partial public sealed class ImageAnimator
     {
         internal ImageAnimator() { }
 
@@ -3163,7 +3163,7 @@ namespace System.Drawing
         public static void UpdateFrames(System.Drawing.Image? image) { }
     }
 
-    public partial class ImageConverter : System.ComponentModel.TypeConverter
+    partial public class ImageConverter : System.ComponentModel.TypeConverter
     {
         public ImageConverter() { }
 
@@ -3222,7 +3222,7 @@ namespace System.Drawing
         }
     }
 
-    public partial class ImageFormatConverter : System.ComponentModel.TypeConverter
+    partial public class ImageFormatConverter : System.ComponentModel.TypeConverter
     {
         public ImageFormatConverter() { }
 
@@ -3276,7 +3276,7 @@ namespace System.Drawing
         }
     }
 
-    public sealed partial class Pen
+    partial public sealed class Pen
         : System.MarshalByRefObject,
             System.ICloneable,
             System.IDisposable
@@ -3419,7 +3419,7 @@ namespace System.Drawing
         ) { }
     }
 
-    public static partial class Pens
+    partial public static class Pens
     {
         public static System.Drawing.Pen AliceBlue
         {
@@ -3987,7 +3987,7 @@ namespace System.Drawing
         }
     }
 
-    public sealed partial class Region : System.MarshalByRefObject, System.IDisposable
+    partial public sealed class Region : System.MarshalByRefObject, System.IDisposable
     {
         public Region() { }
 
@@ -4202,7 +4202,7 @@ namespace System.Drawing
         Rotate90FlipY = 7,
     }
 
-    public sealed partial class SolidBrush : System.Drawing.Brush
+    partial public sealed class SolidBrush : System.Drawing.Brush
     {
         public SolidBrush(System.Drawing.Color color) { }
 
@@ -4235,7 +4235,7 @@ namespace System.Drawing
         Traditional = 3,
     }
 
-    public sealed partial class StringFormat
+    partial public sealed class StringFormat
         : System.MarshalByRefObject,
             System.ICloneable,
             System.IDisposable
@@ -4355,7 +4355,7 @@ namespace System.Drawing
         Em = 32,
     }
 
-    public static partial class SystemBrushes
+    partial public static class SystemBrushes
     {
         public static System.Drawing.Brush ActiveBorder
         {
@@ -4496,7 +4496,7 @@ namespace System.Drawing
         }
     }
 
-    public static partial class SystemFonts
+    partial public static class SystemFonts
     {
         public static System.Drawing.Font? CaptionFont
         {
@@ -4537,7 +4537,7 @@ namespace System.Drawing
         }
     }
 
-    public static partial class SystemIcons
+    partial public static class SystemIcons
     {
         public static System.Drawing.Icon Application
         {
@@ -4581,7 +4581,7 @@ namespace System.Drawing
         }
     }
 
-    public static partial class SystemPens
+    partial public static class SystemPens
     {
         public static System.Drawing.Pen ActiveBorder
         {
@@ -4722,7 +4722,7 @@ namespace System.Drawing
         }
     }
 
-    public sealed partial class TextureBrush : System.Drawing.Brush
+    partial public sealed class TextureBrush : System.Drawing.Brush
     {
         public TextureBrush(System.Drawing.Image bitmap) { }
 
@@ -4808,7 +4808,7 @@ namespace System.Drawing
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public partial class ToolboxBitmapAttribute : System.Attribute
+    partial public class ToolboxBitmapAttribute : System.Attribute
     {
         public static readonly System.Drawing.ToolboxBitmapAttribute Default;
 
@@ -4868,7 +4868,7 @@ namespace System.Drawing
 
 namespace System.Drawing.Design
 {
-    public sealed partial class CategoryNameCollection : System.Collections.ReadOnlyCollectionBase
+    partial public sealed class CategoryNameCollection : System.Collections.ReadOnlyCollectionBase
     {
         public CategoryNameCollection(System.Drawing.Design.CategoryNameCollection value) { }
 
@@ -4895,7 +4895,7 @@ namespace System.Drawing.Design
 
 namespace System.Drawing.Drawing2D
 {
-    public sealed partial class AdjustableArrowCap : System.Drawing.Drawing2D.CustomLineCap
+    partial public sealed class AdjustableArrowCap : System.Drawing.Drawing2D.CustomLineCap
     {
         public AdjustableArrowCap(float width, float height)
             : base(
@@ -4931,7 +4931,7 @@ namespace System.Drawing.Drawing2D
         }
     }
 
-    public sealed partial class Blend
+    partial public sealed class Blend
     {
         public Blend() { }
 
@@ -4949,7 +4949,7 @@ namespace System.Drawing.Drawing2D
         }
     }
 
-    public sealed partial class ColorBlend
+    partial public sealed class ColorBlend
     {
         public ColorBlend() { }
 
@@ -5000,7 +5000,7 @@ namespace System.Drawing.Drawing2D
         Device = 2,
     }
 
-    public partial class CustomLineCap
+    partial public class CustomLineCap
         : System.MarshalByRefObject,
             System.ICloneable,
             System.IDisposable
@@ -5098,12 +5098,12 @@ namespace System.Drawing.Drawing2D
         Sync = 1,
     }
 
-    public sealed partial class GraphicsContainer : System.MarshalByRefObject
+    partial public sealed class GraphicsContainer : System.MarshalByRefObject
     {
         internal GraphicsContainer() { }
     }
 
-    public sealed partial class GraphicsPath
+    partial public sealed class GraphicsPath
         : System.MarshalByRefObject,
             System.ICloneable,
             System.IDisposable
@@ -5509,7 +5509,7 @@ namespace System.Drawing.Drawing2D
         ) { }
     }
 
-    public sealed partial class GraphicsPathIterator : System.MarshalByRefObject, System.IDisposable
+    partial public sealed class GraphicsPathIterator : System.MarshalByRefObject, System.IDisposable
     {
         public GraphicsPathIterator(System.Drawing.Drawing2D.GraphicsPath? path) { }
 
@@ -5574,12 +5574,12 @@ namespace System.Drawing.Drawing2D
         public void Rewind() { }
     }
 
-    public sealed partial class GraphicsState : System.MarshalByRefObject
+    partial public sealed class GraphicsState : System.MarshalByRefObject
     {
         internal GraphicsState() { }
     }
 
-    public sealed partial class HatchBrush : System.Drawing.Brush
+    partial public sealed class HatchBrush : System.Drawing.Brush
     {
         public HatchBrush(
             System.Drawing.Drawing2D.HatchStyle hatchstyle,
@@ -5684,7 +5684,7 @@ namespace System.Drawing.Drawing2D
         HighQualityBicubic = 7,
     }
 
-    public sealed partial class LinearGradientBrush : System.Drawing.Brush
+    partial public sealed class LinearGradientBrush : System.Drawing.Brush
     {
         public LinearGradientBrush(
             System.Drawing.Point point1,
@@ -5853,7 +5853,7 @@ namespace System.Drawing.Drawing2D
         MiterClipped = 3,
     }
 
-    public sealed partial class Matrix : System.MarshalByRefObject, System.IDisposable
+    partial public sealed class Matrix : System.MarshalByRefObject, System.IDisposable
     {
         public Matrix() { }
 
@@ -5969,7 +5969,7 @@ namespace System.Drawing.Drawing2D
         Append = 1,
     }
 
-    public sealed partial class PathData
+    partial public sealed class PathData
     {
         public PathData() { }
 
@@ -5985,7 +5985,7 @@ namespace System.Drawing.Drawing2D
         }
     }
 
-    public sealed partial class PathGradientBrush : System.Drawing.Brush
+    partial public sealed class PathGradientBrush : System.Drawing.Brush
     {
         public PathGradientBrush(System.Drawing.Drawing2D.GraphicsPath path) { }
 
@@ -6139,7 +6139,7 @@ namespace System.Drawing.Drawing2D
         High = 2,
     }
 
-    public sealed partial class RegionData
+    partial public sealed class RegionData
     {
         internal RegionData() { }
 
@@ -6178,7 +6178,7 @@ namespace System.Drawing.Drawing2D
 
 namespace System.Drawing.Imaging
 {
-    public sealed partial class BitmapData
+    partial public sealed class BitmapData
     {
         public BitmapData() { }
 
@@ -6234,7 +6234,7 @@ namespace System.Drawing.Imaging
         ColorChannelLast = 4,
     }
 
-    public sealed partial class ColorMap
+    partial public sealed class ColorMap
     {
         public ColorMap() { }
 
@@ -6256,7 +6256,7 @@ namespace System.Drawing.Imaging
         Brush = 1,
     }
 
-    public sealed partial class ColorMatrix
+    partial public sealed class ColorMatrix
     {
         public ColorMatrix() { }
 
@@ -6408,7 +6408,7 @@ namespace System.Drawing.Imaging
         Argb64Mode = 1,
     }
 
-    public sealed partial class ColorPalette
+    partial public sealed class ColorPalette
     {
         internal ColorPalette() { }
 
@@ -6686,7 +6686,7 @@ namespace System.Drawing.Imaging
         EmfPlusDual = 5,
     }
 
-    public sealed partial class Encoder
+    partial public sealed class Encoder
     {
         public static readonly System.Drawing.Imaging.Encoder ChrominanceTable;
         public static readonly System.Drawing.Imaging.Encoder ColorDepth;
@@ -6710,7 +6710,7 @@ namespace System.Drawing.Imaging
         }
     }
 
-    public sealed partial class EncoderParameter : System.IDisposable
+    partial public sealed class EncoderParameter : System.IDisposable
     {
         public EncoderParameter(System.Drawing.Imaging.Encoder encoder, byte value) { }
 
@@ -6815,7 +6815,7 @@ namespace System.Drawing.Imaging
         ~EncoderParameter() { }
     }
 
-    public sealed partial class EncoderParameters : System.IDisposable
+    partial public sealed class EncoderParameters : System.IDisposable
     {
         public EncoderParameters() { }
 
@@ -6871,7 +6871,7 @@ namespace System.Drawing.Imaging
         FrameDimensionPage = 23,
     }
 
-    public sealed partial class FrameDimension
+    partial public sealed class FrameDimension
     {
         public FrameDimension(System.Guid guid) { }
 
@@ -6910,7 +6910,7 @@ namespace System.Drawing.Imaging
         }
     }
 
-    public sealed partial class ImageAttributes : System.ICloneable, System.IDisposable
+    partial public sealed class ImageAttributes : System.ICloneable, System.IDisposable
     {
         public ImageAttributes() { }
 
@@ -7064,7 +7064,7 @@ namespace System.Drawing.Imaging
         User = 262144,
     }
 
-    public sealed partial class ImageCodecInfo
+    partial public sealed class ImageCodecInfo
     {
         internal ImageCodecInfo() { }
 
@@ -7159,7 +7159,7 @@ namespace System.Drawing.Imaging
     }
 
     [System.ComponentModel.TypeConverterAttribute(typeof(System.Drawing.ImageFormatConverter))]
-    public sealed partial class ImageFormat
+    partial public sealed class ImageFormat
     {
         public ImageFormat(System.Guid guid) { }
 
@@ -7238,7 +7238,7 @@ namespace System.Drawing.Imaging
         "System.Drawing.Design.MetafileEditor, System.Drawing.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public sealed partial class Metafile : System.Drawing.Image
+    partial public sealed class Metafile : System.Drawing.Image
     {
         public Metafile(System.IntPtr henhmetafile, bool deleteEmf) { }
 
@@ -7532,7 +7532,7 @@ namespace System.Drawing.Imaging
         GdiCompatible = 7,
     }
 
-    public sealed partial class MetafileHeader
+    partial public sealed class MetafileHeader
     {
         internal MetafileHeader() { }
 
@@ -7628,7 +7628,7 @@ namespace System.Drawing.Imaging
         EmfPlusDual = 5,
     }
 
-    public sealed partial class MetaHeader
+    partial public sealed class MetaHeader
     {
         public MetaHeader() { }
 
@@ -7711,7 +7711,7 @@ namespace System.Drawing.Imaging
         System.IntPtr recordData
     );
 
-    public sealed partial class PropertyItem
+    partial public sealed class PropertyItem
     {
         internal PropertyItem() { }
 
@@ -7737,7 +7737,7 @@ namespace System.Drawing.Imaging
         }
     }
 
-    public sealed partial class WmfPlaceableFileHeader
+    partial public sealed class WmfPlaceableFileHeader
     {
         public WmfPlaceableFileHeader() { }
 
@@ -7799,7 +7799,7 @@ namespace System.Drawing.Printing
         Horizontal = 3,
     }
 
-    public partial class InvalidPrinterException : System.SystemException
+    partial public class InvalidPrinterException : System.SystemException
     {
         public InvalidPrinterException(System.Drawing.Printing.PrinterSettings settings) { }
 
@@ -7815,7 +7815,7 @@ namespace System.Drawing.Printing
     }
 
     [System.ComponentModel.TypeConverterAttribute(typeof(System.Drawing.Printing.MarginsConverter))]
-    public partial class Margins : System.ICloneable
+    partial public class Margins : System.ICloneable
     {
         public Margins() { }
 
@@ -7881,7 +7881,7 @@ namespace System.Drawing.Printing
         }
     }
 
-    public partial class MarginsConverter : System.ComponentModel.ExpandableObjectConverter
+    partial public class MarginsConverter : System.ComponentModel.ExpandableObjectConverter
     {
         public MarginsConverter() { }
 
@@ -7936,7 +7936,7 @@ namespace System.Drawing.Printing
         }
     }
 
-    public partial class PageSettings : System.ICloneable
+    partial public class PageSettings : System.ICloneable
     {
         public PageSettings() { }
 
@@ -8130,7 +8130,7 @@ namespace System.Drawing.Printing
         PrcEnvelopeNumber10Rotated = 118,
     }
 
-    public partial class PaperSize
+    partial public class PaperSize
     {
         public PaperSize() { }
 
@@ -8167,7 +8167,7 @@ namespace System.Drawing.Printing
         }
     }
 
-    public partial class PaperSource
+    partial public class PaperSource
     {
         public PaperSource() { }
 
@@ -8210,7 +8210,7 @@ namespace System.Drawing.Printing
         Custom = 257,
     }
 
-    public sealed partial class PreviewPageInfo
+    partial public sealed class PreviewPageInfo
     {
         public PreviewPageInfo(System.Drawing.Image image, System.Drawing.Size physicalSize) { }
 
@@ -8224,7 +8224,7 @@ namespace System.Drawing.Printing
         }
     }
 
-    public partial class PreviewPrintController : System.Drawing.Printing.PrintController
+    partial public class PreviewPrintController : System.Drawing.Printing.PrintController
     {
         public PreviewPrintController() { }
 
@@ -8274,7 +8274,7 @@ namespace System.Drawing.Printing
         PrintToPrinter = 2,
     }
 
-    public abstract partial class PrintController
+    partial public abstract class PrintController
     {
         protected PrintController() { }
 
@@ -8309,7 +8309,7 @@ namespace System.Drawing.Printing
 
     [System.ComponentModel.DefaultEventAttribute("PrintPage")]
     [System.ComponentModel.DefaultPropertyAttribute("DocumentName")]
-    public partial class PrintDocument : System.ComponentModel.Component
+    partial public class PrintDocument : System.ComponentModel.Component
     {
         public PrintDocument() { }
 
@@ -8397,7 +8397,7 @@ namespace System.Drawing.Printing
         }
     }
 
-    public partial class PrinterResolution
+    partial public class PrinterResolution
     {
         public PrinterResolution() { }
 
@@ -8432,7 +8432,7 @@ namespace System.Drawing.Printing
         Custom = 0,
     }
 
-    public partial class PrinterSettings : System.ICloneable
+    partial public class PrinterSettings : System.ICloneable
     {
         public PrinterSettings() { }
 
@@ -8604,7 +8604,7 @@ namespace System.Drawing.Printing
             throw null;
         }
 
-        public partial class PaperSizeCollection
+        partial public class PaperSizeCollection
             : System.Collections.ICollection,
                 System.Collections.IEnumerable
         {
@@ -8654,7 +8654,7 @@ namespace System.Drawing.Printing
             }
         }
 
-        public partial class PaperSourceCollection
+        partial public class PaperSourceCollection
             : System.Collections.ICollection,
                 System.Collections.IEnumerable
         {
@@ -8704,7 +8704,7 @@ namespace System.Drawing.Printing
             }
         }
 
-        public partial class PrinterResolutionCollection
+        partial public class PrinterResolutionCollection
             : System.Collections.ICollection,
                 System.Collections.IEnumerable
         {
@@ -8758,7 +8758,7 @@ namespace System.Drawing.Printing
             }
         }
 
-        public partial class StringCollection
+        partial public class StringCollection
             : System.Collections.ICollection,
                 System.Collections.IEnumerable
         {
@@ -8817,7 +8817,7 @@ namespace System.Drawing.Printing
         TenthsOfAMillimeter = 3,
     }
 
-    public sealed partial class PrinterUnitConvert
+    partial public sealed class PrinterUnitConvert
     {
         internal PrinterUnitConvert() { }
 
@@ -8876,7 +8876,7 @@ namespace System.Drawing.Printing
         }
     }
 
-    public partial class PrintEventArgs : System.ComponentModel.CancelEventArgs
+    partial public class PrintEventArgs : System.ComponentModel.CancelEventArgs
     {
         public PrintEventArgs() { }
 
@@ -8888,7 +8888,7 @@ namespace System.Drawing.Printing
 
     public delegate void PrintEventHandler(object sender, System.Drawing.Printing.PrintEventArgs e);
 
-    public partial class PrintPageEventArgs : System.EventArgs
+    partial public class PrintPageEventArgs : System.EventArgs
     {
         public PrintPageEventArgs(
             System.Drawing.Graphics? graphics,
@@ -8938,7 +8938,7 @@ namespace System.Drawing.Printing
         CurrentPage = 4194304,
     }
 
-    public partial class QueryPageSettingsEventArgs : System.Drawing.Printing.PrintEventArgs
+    partial public class QueryPageSettingsEventArgs : System.Drawing.Printing.PrintEventArgs
     {
         public QueryPageSettingsEventArgs(System.Drawing.Printing.PageSettings pageSettings) { }
 
@@ -8954,7 +8954,7 @@ namespace System.Drawing.Printing
         System.Drawing.Printing.QueryPageSettingsEventArgs e
     );
 
-    public partial class StandardPrintController : System.Drawing.Printing.PrintController
+    partial public class StandardPrintController : System.Drawing.Printing.PrintController
     {
         public StandardPrintController() { }
 
@@ -8985,7 +8985,7 @@ namespace System.Drawing.Printing
 
 namespace System.Drawing.Text
 {
-    public abstract partial class FontCollection : System.IDisposable
+    partial public abstract class FontCollection : System.IDisposable
     {
         internal FontCollection() { }
 
@@ -9015,12 +9015,12 @@ namespace System.Drawing.Text
         Hide = 2,
     }
 
-    public sealed partial class InstalledFontCollection : System.Drawing.Text.FontCollection
+    partial public sealed class InstalledFontCollection : System.Drawing.Text.FontCollection
     {
         public InstalledFontCollection() { }
     }
 
-    public sealed partial class PrivateFontCollection : System.Drawing.Text.FontCollection
+    partial public sealed class PrivateFontCollection : System.Drawing.Text.FontCollection
     {
         public PrivateFontCollection() { }
 

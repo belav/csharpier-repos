@@ -12,7 +12,7 @@ using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
-    internal sealed partial class CSharpFormatter : Formatter
+    partial internal sealed class CSharpFormatter : Formatter
     {
         public CSharpFormatter()
             : base(defaultFormat: "{{{0}}}", nullString: "null", thisString: "this") { }

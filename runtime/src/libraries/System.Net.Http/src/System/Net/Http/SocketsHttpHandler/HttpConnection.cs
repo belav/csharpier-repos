@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal sealed partial class HttpConnection : HttpConnectionBase
+    partial internal sealed class HttpConnection : HttpConnectionBase
     {
         /// <summary>Default size of the read buffer used for the connection.</summary>
         private const int InitialReadBufferSize =

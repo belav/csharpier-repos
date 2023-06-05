@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class NonStandardConfigurationTests
+    partial public class NonStandardConfigurationTests
     {
         [PlatformSpecific(TestPlatforms.AnyUnix)] // Uses P/Invokes
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

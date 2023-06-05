@@ -3064,7 +3064,7 @@ public class MobileServiceCollection<TTable, TCol>
         return results;
     }
 
-    protected async virtual Task<int> ProcessQueryAsync()
+    protected virtual async Task<int> ProcessQueryAsync()
     {
         await Task.Delay(1000);
         throw new Exception();

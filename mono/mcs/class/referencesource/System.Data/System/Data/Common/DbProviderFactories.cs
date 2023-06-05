@@ -35,10 +35,10 @@ namespace System.Data.Common
         private static DataTable _providerTable;
         private static object _lockobj = new object();
 
-        static public DbProviderFactory GetFactory(string providerInvariantName) =>
+        public static DbProviderFactory GetFactory(string providerInvariantName) =>
             GetFactory(providerInvariantName, true);
 
-        static public DbProviderFactory GetFactory(string providerInvariantName, bool throwOnError)
+        public static DbProviderFactory GetFactory(string providerInvariantName, bool throwOnError)
         {
             if (throwOnError)
                 ADP.CheckArgumentLength(providerInvariantName, "providerInvariantName");
@@ -72,7 +72,7 @@ namespace System.Data.Common
             return null;
         }
 
-        static public DbProviderFactory GetFactory(DataRow providerRow)
+        public static DbProviderFactory GetFactory(DataRow providerRow)
         {
             ADP.CheckArgumentNull(providerRow, "providerRow");
 
@@ -123,14 +123,14 @@ namespace System.Data.Common
             throw ADP.ConfigProviderMissing();
         }
 
-        static public DbProviderFactory GetFactory(DbConnection connection)
+        public static DbProviderFactory GetFactory(DbConnection connection)
         {
             ADP.CheckArgumentNull(connection, "connection");
 
             return connection.ProviderFactory;
         }
 
-        static public DataTable GetFactoryClasses()
+        public static DataTable GetFactoryClasses()
         { // V1.2.3300
             // NOTES: Include the Framework Providers and any other Providers listed in the config file.
             DataTable dataTable = GetProviderTable();
@@ -146,7 +146,9 @@ namespace System.Data.Common
         }
 
         // VSTFDevDiv # 624213: System.Data.Common.DbProviderFactories.GetFactoryClasses() still gets OracleClient provider in ClientSku environment.
-        static private DataTable IncludeFrameworkFactoryClasses(DataTable configDataTable)
+        private
+        // VSTFDevDiv # 624213: System.Data.Common.DbProviderFactories.GetFactoryClasses() still gets OracleClient provider in ClientSku environment.
+        static DataTable IncludeFrameworkFactoryClasses(DataTable configDataTable)
         {
             DataTable dataTable = DbProviderFactoriesConfigurationHandler.CreateProviderDataTable();
 
@@ -321,13 +323,13 @@ namespace System.Data.Common
             return dataTable;
         }
 
-        static private DataTable GetProviderTable()
+        private static DataTable GetProviderTable()
         {
             Initialize();
             return _providerTable;
         }
 
-        static private void Initialize()
+        private static void Initialize()
         {
             if (ConnectionState.Open != _initState)
             {

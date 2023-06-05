@@ -21,10 +21,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
 {
+    partial
     /// <summary>
     /// Helper class to configure diagnostic severity or code style option value based on .editorconfig file
     /// </summary>
-    internal sealed partial class ConfigurationUpdater
+    internal sealed class ConfigurationUpdater
     {
         private enum ConfigurationKind
         {

@@ -15,8 +15,9 @@ namespace Internal.TypeSystem
         }
     }
 
+    partial
     // MethodImpl api surface for types.
-    public partial class MetadataType
+    public class MetadataType
     {
         /// <summary>
         /// Compute an array of all MethodImpls that pertain to overriding virtual (non-interface methods) on this type.

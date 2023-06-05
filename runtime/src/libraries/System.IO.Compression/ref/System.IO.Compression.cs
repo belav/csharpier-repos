@@ -20,7 +20,7 @@ namespace System.IO.Compression
         Compress = 1,
     }
 
-    public partial class DeflateStream : System.IO.Stream
+    partial public class DeflateStream : System.IO.Stream
     {
         public DeflateStream(
             System.IO.Stream stream,
@@ -191,7 +191,7 @@ namespace System.IO.Compression
         public override void WriteByte(byte value) { }
     }
 
-    public partial class GZipStream : System.IO.Stream
+    partial public class GZipStream : System.IO.Stream
     {
         public GZipStream(
             System.IO.Stream stream,
@@ -361,7 +361,7 @@ namespace System.IO.Compression
         public override void WriteByte(byte value) { }
     }
 
-    public partial class ZipArchive : System.IDisposable
+    partial public class ZipArchive : System.IDisposable
     {
         public ZipArchive(System.IO.Stream stream) { }
 
@@ -418,7 +418,7 @@ namespace System.IO.Compression
         }
     }
 
-    public partial class ZipArchiveEntry
+    partial public class ZipArchiveEntry
     {
         internal ZipArchiveEntry() { }
 
@@ -490,7 +490,7 @@ namespace System.IO.Compression
         Update = 2,
     }
 
-    public sealed partial class ZLibStream : System.IO.Stream
+    partial public sealed class ZLibStream : System.IO.Stream
     {
         public ZLibStream(
             System.IO.Stream stream,

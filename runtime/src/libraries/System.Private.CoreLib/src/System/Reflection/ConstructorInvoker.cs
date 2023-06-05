@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    internal sealed partial class ConstructorInvoker
+    partial internal sealed class ConstructorInvoker
     {
         private readonly RuntimeConstructorInfo _method;
 

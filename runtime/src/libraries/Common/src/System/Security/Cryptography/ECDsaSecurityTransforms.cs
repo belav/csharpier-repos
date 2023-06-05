@@ -7,9 +7,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECDsaImplementation
+    partial internal static class ECDsaImplementation
     {
-        public sealed partial class ECDsaSecurityTransforms : ECDsa, IRuntimeAlgorithm
+        partial public sealed class ECDsaSecurityTransforms : ECDsa, IRuntimeAlgorithm
         {
             private readonly EccSecurityTransforms _ecc = new EccSecurityTransforms(nameof(ECDsa));
 

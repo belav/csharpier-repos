@@ -26,7 +26,7 @@ namespace System.Security
     using StringMaker = System.Security.Util.Tokenizer.StringMaker;
 #if !MONO
     [Serializable]
-    sealed internal class SecurityDocumentElement : ISecurityElementFactory
+    internal sealed class SecurityDocumentElement : ISecurityElementFactory
     {
         private int m_position;
         private SecurityDocument m_document;
@@ -60,7 +60,7 @@ namespace System.Security
 #endif
 
     [Serializable]
-    sealed internal class SecurityDocument
+    internal sealed class SecurityDocument
     {
         internal byte[] m_data;
 

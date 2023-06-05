@@ -6,24 +6,24 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_GetX509NameStackFieldCount"
         )]
-        internal static partial int GetX509NameStackFieldCount(SafeSharedX509NameStackHandle sk);
+        partial internal static int GetX509NameStackFieldCount(SafeSharedX509NameStackHandle sk);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetX509NameStackField")]
-        private static partial SafeSharedX509NameHandle GetX509NameStackField_private(
+        partial private static SafeSharedX509NameHandle GetX509NameStackField_private(
             SafeSharedX509NameStackHandle sk,
             int loc
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetX509NameRawBytes")]
-        private static partial int GetX509NameRawBytes(
+        partial private static int GetX509NameRawBytes(
             SafeSharedX509NameHandle x509Name,
             byte[]? buf,
             int cBuf

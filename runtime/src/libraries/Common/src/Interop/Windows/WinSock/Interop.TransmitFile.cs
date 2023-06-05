@@ -6,13 +6,13 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Mswsock
+    partial internal static class Mswsock
     {
         [LibraryImport(Interop.Libraries.Mswsock, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool TransmitFile(
+        partial internal static unsafe bool TransmitFile(
             SafeHandle socket,
             IntPtr fileHandle,
             int numberOfBytesToWrite,

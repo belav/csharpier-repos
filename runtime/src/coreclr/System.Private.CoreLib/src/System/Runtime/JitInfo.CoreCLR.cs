@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime
 {
-    public static partial class JitInfo
+    partial public static class JitInfo
     {
         /// <summary>
         /// Get the number of bytes of IL that have been compiled. If <paramref name="currentThread"/> is true,

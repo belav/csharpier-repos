@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// A <see cref="IActionResultExecutor{RedirectToPageResult}"/> for <see cref="RedirectToPageResult"/>.
 /// </summary>
-public partial class RedirectToPageResultExecutor : IActionResultExecutor<RedirectToPageResult>
+public class RedirectToPageResultExecutor : IActionResultExecutor<RedirectToPageResult>
 {
     private readonly ILogger _logger;
     private readonly IUrlHelperFactory _urlHelperFactory;
@@ -87,7 +88,7 @@ public partial class RedirectToPageResultExecutor : IActionResultExecutor<Redire
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -95,6 +96,6 @@ public partial class RedirectToPageResultExecutor : IActionResultExecutor<Redire
             "Executing RedirectToPageResult, redirecting to {Page}.",
             EventName = "RedirectToPageResultExecuting"
         )]
-        public static partial void RedirectToPageResultExecuting(ILogger logger, string? page);
+        partial public static void RedirectToPageResultExecuting(ILogger logger, string? page);
     }
 }

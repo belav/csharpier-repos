@@ -649,7 +649,7 @@ namespace System.Xml
             this.hash = Hash(array, start, len);
         }
 
-        static private Int64 Hash(String value)
+        private static Int64 Hash(String value)
         {
             Int64 hash = 0;
             int len = value.Length;
@@ -669,7 +669,7 @@ namespace System.Xml
             return hash;
         }
 
-        static private Int64 Hash(char[] key, int start, int len)
+        private static Int64 Hash(char[] key, int start, int len)
         {
             Int64 hash = 0;
 

@@ -12,10 +12,11 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
 {
+    partial
     /// <summary>
     /// Class for managing wrappers of COM IUnknown types.
     /// </summary>
-    public abstract partial class ComWrappers
+    public abstract class ComWrappers
     {
         private const int TrackerRefShift = 32;
         private const ulong TrackerRefCounter = 1UL << TrackerRefShift;
@@ -62,10 +63,11 @@ namespace System.Runtime.InteropServices
         private readonly ConditionalWeakTable<object, NativeObjectWrapper> _rcwTable =
             new ConditionalWeakTable<object, NativeObjectWrapper>();
 
+        partial
         /// <summary>
         /// ABI for function dispatch of a COM interface.
         /// </summary>
-        public unsafe partial struct ComInterfaceDispatch
+        public unsafe struct ComInterfaceDispatch
         {
             /// <summary>
             /// Given a <see cref="System.IntPtr"/> from a generated Vtable, convert to the target type.

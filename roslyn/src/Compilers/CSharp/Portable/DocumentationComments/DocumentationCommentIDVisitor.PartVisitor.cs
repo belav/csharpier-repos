@@ -18,7 +18,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class DocumentationCommentIDVisitor
+    partial internal sealed class DocumentationCommentIDVisitor
     {
         /// <summary>
         /// A visitor that generates the part of the documentation comment after the initial type

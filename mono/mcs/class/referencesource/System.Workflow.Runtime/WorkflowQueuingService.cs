@@ -37,7 +37,7 @@ namespace System.Workflow.Runtime
             "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
             Justification = "Design has been approved.  This is a false positive. DependencyProperty is an immutable type."
         )]
-        public readonly static DependencyProperty PendingMessagesProperty =
+        public static readonly DependencyProperty PendingMessagesProperty =
             DependencyProperty.RegisterAttached(
                 "PendingMessages",
                 typeof(Queue),

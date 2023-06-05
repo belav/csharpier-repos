@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem.Ecma
 {
-    public partial class EcmaField
+    partial public class EcmaField
     {
         public override bool IsIntrinsic
         {

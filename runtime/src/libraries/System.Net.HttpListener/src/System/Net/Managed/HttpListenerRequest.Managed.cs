@@ -41,7 +41,7 @@ using System.Text;
 
 namespace System.Net
 {
-    public sealed partial class HttpListenerRequest
+    partial public sealed class HttpListenerRequest
     {
         private sealed class Context : TransportContext
         {

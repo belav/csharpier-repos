@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class MetadataLoadContextTests
+    partial public static class MetadataLoadContextTests
     {
         [Fact]
         public static void DisposingReleasesFileLocks()

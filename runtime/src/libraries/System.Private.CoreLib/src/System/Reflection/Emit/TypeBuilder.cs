@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    public partial class TypeBuilder : TypeInfo
+    partial public class TypeBuilder : TypeInfo
     {
         public const int UnspecifiedTypeSize = 0;
 

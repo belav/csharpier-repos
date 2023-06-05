@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.ComponentModel.DataAnnotations.Tests
 {
-    public sealed partial class RegularExpressionAttributeTests : ValidationAttributeTestBase
+    partial public sealed class RegularExpressionAttributeTests : ValidationAttributeTestBase
     {
         protected override IEnumerable<TestCase> ValidValues()
         {

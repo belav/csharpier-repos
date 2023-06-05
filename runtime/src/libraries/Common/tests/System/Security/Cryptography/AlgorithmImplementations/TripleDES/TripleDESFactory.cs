@@ -11,7 +11,7 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         TripleDES Create();
     }
 
-    public static partial class TripleDESFactory
+    partial public static class TripleDESFactory
     {
         public static TripleDES Create()
         {

@@ -606,7 +606,14 @@ namespace System.Collections.Concurrent
             /// </summary>
             /// <param name="partitionCount">number of partitions requested</param>
             /// <returns>A list containing <paramref name="partitionCount"/> enumerators.</returns>
-            override public IList<IEnumerator<KeyValuePair<long, TSource>>> GetOrderablePartitions(
+            public
+            /// <summary>
+            /// Overrides OrderablePartitioner.GetOrderablePartitions.
+            /// Partitions the underlying collection into the given number of orderable partitions.
+            /// </summary>
+            /// <param name="partitionCount">number of partitions requested</param>
+            /// <returns>A list containing <paramref name="partitionCount"/> enumerators.</returns>
+            override IList<IEnumerator<KeyValuePair<long, TSource>>> GetOrderablePartitions(
                 int partitionCount
             )
             {
@@ -635,7 +642,12 @@ namespace System.Collections.Concurrent
             /// Overrides OrderablePartitioner.GetOrderableDyanmicPartitions
             /// </summary>
             /// <returns>a enumerable collection of orderable partitions</returns>
-            override public IEnumerable<KeyValuePair<long, TSource>> GetOrderableDynamicPartitions()
+            public
+            /// <summary>
+            /// Overrides OrderablePartitioner.GetOrderableDyanmicPartitions
+            /// </summary>
+            /// <returns>a enumerable collection of orderable partitions</returns>
+            override IEnumerable<KeyValuePair<long, TSource>> GetOrderableDynamicPartitions()
             {
                 return new InternalPartitionEnumerable(
                     m_source.GetEnumerator(),
@@ -644,10 +656,11 @@ namespace System.Collections.Concurrent
                 );
             }
 
+            public
             /// <summary>
             /// Whether additional partitions can be created dynamically.
             /// </summary>
-            override public bool SupportsDynamicPartitions
+            override bool SupportsDynamicPartitions
             {
                 get { return true; }
             }
@@ -1123,7 +1136,18 @@ namespace System.Collections.Concurrent
                 /// true if we successfully reserved at least one element (up to #=requestedChunkSize)
                 /// false if all elements in the source collection have been reserved.
                 /// </returns>
-                override protected bool GrabNextChunk(int requestedChunkSize)
+                protected
+                //overriding methods
+
+                /// <summary>
+                /// Reserves a contiguous range of elements from source data
+                /// </summary>
+                /// <param name="requestedChunkSize">specified number of elements requested</param>
+                /// <returns>
+                /// true if we successfully reserved at least one element (up to #=requestedChunkSize)
+                /// false if all elements in the source collection have been reserved.
+                /// </returns>
+                override bool GrabNextChunk(int requestedChunkSize)
                 {
                     Contract.Assert(requestedChunkSize > 0);
 
@@ -1146,6 +1170,7 @@ namespace System.Collections.Concurrent
                     );
                 }
 
+                protected
                 /// <summary>
                 /// Returns whether or not the shared reader has already read the last
                 /// element of the source data
@@ -1155,7 +1180,7 @@ namespace System.Collections.Concurrent
                 /// or not, because we can't undo MoveNext(). Thus we need to maintain a shared
                 /// boolean value m_hasNoElementsLeft across all partitions
                 /// </remarks>
-                override protected bool HasNoElementsLeft
+                override bool HasNoElementsLeft
                 {
                     get { return m_hasNoElementsLeft.Value; }
                     set
@@ -1168,7 +1193,7 @@ namespace System.Collections.Concurrent
                     }
                 }
 
-                override public KeyValuePair<long, TSource> Current
+                public override KeyValuePair<long, TSource> Current
                 {
                     get
                     {
@@ -1190,7 +1215,7 @@ namespace System.Collections.Concurrent
                     }
                 }
 
-                override public void Dispose()
+                public override void Dispose()
                 {
                     // If this is static partitioning, ie. m_activePartitionCount != null, since the current partition
                     // is disposed, we decrement the number of active partitions for the shared reader.
@@ -1250,7 +1275,14 @@ namespace System.Collections.Concurrent
             /// </summary>
             /// <param name="partitionCount">number of partitions requested</param>
             /// <returns>A list containing <paramref name="partitionCount"/> enumerators.</returns>
-            override public IList<IEnumerator<KeyValuePair<long, TSource>>> GetOrderablePartitions(
+            public
+            /// <summary>
+            /// Overrides OrderablePartitioner.GetOrderablePartitions.
+            /// Partitions the underlying collection into the given number of orderable partitions.
+            /// </summary>
+            /// <param name="partitionCount">number of partitions requested</param>
+            /// <returns>A list containing <paramref name="partitionCount"/> enumerators.</returns>
+            override IList<IEnumerator<KeyValuePair<long, TSource>>> GetOrderablePartitions(
                 int partitionCount
             )
             {
@@ -1274,15 +1306,21 @@ namespace System.Collections.Concurrent
             /// Overrides OrderablePartitioner.GetOrderableDyanmicPartitions
             /// </summary>
             /// <returns>a enumerable collection of orderable partitions</returns>
-            override public IEnumerable<KeyValuePair<long, TSource>> GetOrderableDynamicPartitions()
+            public
+            /// <summary>
+            /// Overrides OrderablePartitioner.GetOrderableDyanmicPartitions
+            /// </summary>
+            /// <returns>a enumerable collection of orderable partitions</returns>
+            override IEnumerable<KeyValuePair<long, TSource>> GetOrderableDynamicPartitions()
             {
                 return GetOrderableDynamicPartitions_Factory(m_data);
             }
 
+            public
             /// <summary>
             /// Whether additional partitions can be created dynamically.
             /// </summary>
-            override public bool SupportsDynamicPartitions
+            override bool SupportsDynamicPartitions
             {
                 get { return true; }
             }
@@ -1333,7 +1371,18 @@ namespace System.Collections.Concurrent
             /// true if we successfully reserved at least one element (up to #=requestedChunkSize)
             /// false if all elements in the source collection have been reserved.
             /// </returns>
-            override protected bool GrabNextChunk(int requestedChunkSize)
+            protected
+            //overriding methods
+
+            /// <summary>
+            /// Reserves a contiguous range of elements from source data
+            /// </summary>
+            /// <param name="requestedChunkSize">specified number of elements requested</param>
+            /// <returns>
+            /// true if we successfully reserved at least one element (up to #=requestedChunkSize)
+            /// false if all elements in the source collection have been reserved.
+            /// </returns>
+            override bool GrabNextChunk(int requestedChunkSize)
             {
                 Contract.Assert(requestedChunkSize > 0);
 
@@ -1380,11 +1429,12 @@ namespace System.Collections.Concurrent
                 return false;
             }
 
+            protected
             /// <summary>
             /// Returns whether or not the shared reader has already read the last
             /// element of the source data
             /// </summary>
-            override protected bool HasNoElementsLeft
+            override bool HasNoElementsLeft
             {
                 get
                 {
@@ -1399,7 +1449,12 @@ namespace System.Collections.Concurrent
             /// For source data type IList and Array, the type of the shared reader is just the data itself.
             /// We don't do anything in Dispose method for IList and Array.
             /// </summary>
-            override public void Dispose() { }
+            public
+            /// <summary>
+            /// For source data type IList and Array, the type of the shared reader is just the data itself.
+            /// We don't do anything in Dispose method for IList and Array.
+            /// </summary>
+            override void Dispose() { }
         }
 
         /// <summary>
@@ -1416,9 +1471,11 @@ namespace System.Collections.Concurrent
                 : base(source) { }
 
             //override methods
-            override protected IEnumerable<
-                KeyValuePair<long, TSource>
-            > GetOrderableDynamicPartitions_Factory(IList<TSource> m_data)
+            protected
+            //override methods
+            override IEnumerable<KeyValuePair<long, TSource>> GetOrderableDynamicPartitions_Factory(
+                IList<TSource> m_data
+            )
             {
                 //m_data itself serves as shared reader
                 return new InternalPartitionEnumerable(m_data);
@@ -1465,16 +1522,18 @@ namespace System.Collections.Concurrent
                 )
                     : base(sharedReader, sharedIndex) { }
 
+                protected
                 //overriding methods
-                override protected int SourceCount
+                override int SourceCount
                 {
                     get { return m_sharedReader.Count; }
                 }
 
+                public
                 /// <summary>
                 /// return a KeyValuePair of the current element and its key
                 /// </summary>
-                override public KeyValuePair<long, TSource> Current
+                override KeyValuePair<long, TSource> Current
                 {
                     get
                     {
@@ -1515,9 +1574,11 @@ namespace System.Collections.Concurrent
                 : base(source) { }
 
             //override methods
-            override protected IEnumerable<
-                KeyValuePair<long, TSource>
-            > GetOrderableDynamicPartitions_Factory(TSource[] m_data)
+            protected
+            //override methods
+            override IEnumerable<KeyValuePair<long, TSource>> GetOrderableDynamicPartitions_Factory(
+                TSource[] m_data
+            )
             {
                 return new InternalPartitionEnumerable(m_data);
             }
@@ -1560,13 +1621,14 @@ namespace System.Collections.Concurrent
                 internal InternalPartitionEnumerator(TSource[] sharedReader, SharedLong sharedIndex)
                     : base(sharedReader, sharedIndex) { }
 
+                protected
                 //overriding methods
-                override protected int SourceCount
+                override int SourceCount
                 {
                     get { return m_sharedReader.Length; }
                 }
 
-                override public KeyValuePair<long, TSource> Current
+                public override KeyValuePair<long, TSource> Current
                 {
                     get
                     {
@@ -1649,7 +1711,25 @@ namespace System.Collections.Concurrent
             /// </summary>
             /// <param name="partitionCount">specified number of partitions</param>
             /// <returns>a list of partitions</returns>
-            override public IList<IEnumerator<KeyValuePair<long, TSource>>> GetOrderablePartitions(
+            public
+            /// <summary>
+            /// Overrides OrderablePartitioner.GetOrderablePartitions
+            /// Return a list of partitions, each of which enumerate a fixed part of the source data
+            /// The elements of the source data are distributed to each partition as evenly as possible.
+            /// Specifically, if the total number of elements is N, and number of partitions is x, and N = a*x +b,
+            /// where a is the quotient, and b is the remainder. Then the first b partitions each has a + 1 elements,
+            /// and the last x-b partitions each has a elements.
+            /// For example, if N=10, x =3, then
+            ///    partition 0 ranges [0,3],
+            ///    partition 1 ranges [4,6],
+            ///    partition 2 ranges [7,9].
+            /// This also takes care of the situation of (x&gt;N), the last x-N partitions are empty enumerators.
+            /// An empty enumerator is indicated by
+            ///      (m_startIndex == list.Count &amp;&amp; m_endIndex == list.Count -1)
+            /// </summary>
+            /// <param name="partitionCount">specified number of partitions</param>
+            /// <returns>a list of partitions</returns>
+            override IList<IEnumerator<KeyValuePair<long, TSource>>> GetOrderablePartitions(
                 int partitionCount
             )
             {
@@ -1783,12 +1863,12 @@ namespace System.Collections.Concurrent
                 m_list = list;
             }
 
-            override protected int SourceCount
+            protected override int SourceCount
             {
                 get { return m_list.Count; }
             }
 
-            override protected IEnumerator<KeyValuePair<long, TSource>> CreatePartition(
+            protected override IEnumerator<KeyValuePair<long, TSource>> CreatePartition(
                 int startIndex,
                 int endIndex
             )
@@ -1819,7 +1899,7 @@ namespace System.Collections.Concurrent
                 m_list = list;
             }
 
-            override public KeyValuePair<long, TSource> Current
+            public override KeyValuePair<long, TSource> Current
             {
                 get
                 {
@@ -1857,12 +1937,12 @@ namespace System.Collections.Concurrent
                 m_array = array;
             }
 
-            override protected int SourceCount
+            protected override int SourceCount
             {
                 get { return m_array.Length; }
             }
 
-            override protected IEnumerator<KeyValuePair<long, TSource>> CreatePartition(
+            protected override IEnumerator<KeyValuePair<long, TSource>> CreatePartition(
                 int startIndex,
                 int endIndex
             )
@@ -1896,7 +1976,7 @@ namespace System.Collections.Concurrent
                 m_array = array;
             }
 
-            override public KeyValuePair<long, TSource> Current
+            public override KeyValuePair<long, TSource> Current
             {
                 get
                 {

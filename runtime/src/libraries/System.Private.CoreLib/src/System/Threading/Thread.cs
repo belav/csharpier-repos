@@ -12,7 +12,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    public sealed partial class Thread : CriticalFinalizerObject
+    partial public sealed class Thread : CriticalFinalizerObject
     {
         private static AsyncLocal<IPrincipal?>? s_asyncLocalPrincipal;
 

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Xml.CustomReaderTests
 {
-    public partial class CReaderTestModule : CGenericTestModule
+    partial public class CReaderTestModule : CGenericTestModule
     {
         [Theory]
         [XmlTests(nameof(Create))]

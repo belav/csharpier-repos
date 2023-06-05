@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.IO
 {
-    public static partial class Directory
+    partial public static class Directory
     {
 #pragma warning disable IDE0060
         private static DirectoryInfo CreateDirectoryCore(

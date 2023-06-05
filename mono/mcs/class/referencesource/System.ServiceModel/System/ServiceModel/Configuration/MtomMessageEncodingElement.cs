@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.Text;
 
-    public sealed partial class MtomMessageEncodingElement : BindingElementExtensionElement
+    partial public sealed class MtomMessageEncodingElement : BindingElementExtensionElement
     {
         public MtomMessageEncodingElement() { }
 

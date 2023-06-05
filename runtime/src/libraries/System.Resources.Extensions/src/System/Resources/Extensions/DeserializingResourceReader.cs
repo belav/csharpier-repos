@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace System.Resources.Extensions
 {
-    public partial class DeserializingResourceReader
+    partial public class DeserializingResourceReader
     {
         private bool _assumeBinaryFormatter;
         private BinaryFormatter? _formatter;

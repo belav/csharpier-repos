@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+partial
 /* https://tools.ietf.org/html/rfc7540#section-6.7
     +---------------------------------------------------------------+
     |                                                               |
@@ -10,7 +11,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     |                                                               |
     +---------------------------------------------------------------+
 */
-internal partial class Http2Frame
+internal class Http2Frame
 {
     public Http2PingFrameFlags PingFlags
     {

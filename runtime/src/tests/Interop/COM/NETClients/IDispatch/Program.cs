@@ -64,7 +64,7 @@ namespace NetClient
             Assert.Equal(ul1 * 2, ul2);
         }
 
-        static private bool EqualByBound(float expected, float actual)
+        private static bool EqualByBound(float expected, float actual)
         {
             float low = expected - 0.0001f;
             float high = expected + 0.0001f;
@@ -72,7 +72,7 @@ namespace NetClient
             return eps < float.Epsilon || (low < actual && actual < high);
         }
 
-        static private bool EqualByBound(double expected, double actual)
+        private static bool EqualByBound(double expected, double actual)
         {
             double low = expected - 0.00001;
             double high = expected + 0.00001;

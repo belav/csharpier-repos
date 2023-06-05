@@ -5,7 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-public partial class SafeHandleTests
+partial public class SafeHandleTests
 {
     private class MySafeHandle : SafeHandle
     {

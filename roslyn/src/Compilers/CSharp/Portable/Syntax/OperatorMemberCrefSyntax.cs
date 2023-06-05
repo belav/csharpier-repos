@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class OperatorMemberCrefSyntax
+    partial public class OperatorMemberCrefSyntax
     {
         public OperatorMemberCrefSyntax Update(
             SyntaxToken operatorKeyword,

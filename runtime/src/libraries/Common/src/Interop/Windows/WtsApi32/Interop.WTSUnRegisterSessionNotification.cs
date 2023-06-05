@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Wtsapi32
+    partial internal static class Wtsapi32
     {
         [LibraryImport(Libraries.Wtsapi32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool WTSUnRegisterSessionNotification(IntPtr hWnd);
+        partial public static bool WTSUnRegisterSessionNotification(IntPtr hWnd);
     }
 }

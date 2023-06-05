@@ -4,7 +4,7 @@ public class OneSourceWithMultipleDestinationsAndPreserveReferences : AutoMapper
 {
     ClientModel _destination;
 
-    public partial class Client
+    partial public class Client
     {
         public string Address1 { get; set; }
     }

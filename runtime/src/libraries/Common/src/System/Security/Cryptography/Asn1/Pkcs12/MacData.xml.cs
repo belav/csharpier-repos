@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1.Pkcs12
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct MacData
+    partial internal struct MacData
     {
         private static ReadOnlySpan<byte> DefaultIterationCount => new byte[] { 0x02, 0x01, 0x01 };
 

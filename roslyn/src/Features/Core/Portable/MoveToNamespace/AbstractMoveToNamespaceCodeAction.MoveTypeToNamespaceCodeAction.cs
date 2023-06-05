@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CodeCleanup;
 
 namespace Microsoft.CodeAnalysis.MoveToNamespace
 {
-    internal abstract partial class AbstractMoveToNamespaceCodeAction
+    partial internal abstract class AbstractMoveToNamespaceCodeAction
     {
         private class MoveTypeToNamespaceCodeAction : AbstractMoveToNamespaceCodeAction
         {

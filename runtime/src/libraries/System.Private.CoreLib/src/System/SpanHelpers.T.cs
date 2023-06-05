@@ -13,7 +13,7 @@ using System.Runtime.Intrinsics;
 
 namespace System
 {
-    internal static partial class SpanHelpers // .T
+    partial internal static class SpanHelpers // .T
     {
         public static unsafe void Fill<T>(ref T refData, nuint numElements, T value)
         {

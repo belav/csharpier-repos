@@ -15,7 +15,7 @@ using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
 {
-    internal partial class EnableNullableCodeRefactoringProvider : CodeRefactoringProvider
+    partial internal class EnableNullableCodeRefactoringProvider : CodeRefactoringProvider
     {
         internal sealed override CodeAnalysis.CodeRefactorings.FixAllProvider? GetFixAllProvider() =>
             FixAllProvider.Instance;

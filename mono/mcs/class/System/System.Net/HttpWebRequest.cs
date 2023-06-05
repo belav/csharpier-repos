@@ -374,7 +374,7 @@ namespace System.Net
             set { continueDelegate = value; }
         }
 
-        virtual public CookieContainer CookieContainer
+        public virtual CookieContainer CookieContainer
         {
             get { return cookieContainer; }
             set { cookieContainer = value; }
@@ -447,7 +447,7 @@ namespace System.Net
             }
         }
 
-        virtual public bool HaveResponse
+        public virtual bool HaveResponse
         {
             get { return haveResponse; }
         }

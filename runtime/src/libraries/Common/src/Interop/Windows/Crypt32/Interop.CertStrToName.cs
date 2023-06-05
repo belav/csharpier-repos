@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(
             Libraries.Crypt32,
@@ -15,7 +15,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CertStrToName(
+        partial internal static bool CertStrToName(
             CertEncodingType dwCertEncodingType,
             string pszX500,
             CertNameStrTypeAndFlags dwStrType,

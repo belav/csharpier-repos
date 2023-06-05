@@ -21,7 +21,7 @@ namespace System.Runtime
         NoGCRegion = 4
     }
 
-    public static partial class GCSettings
+    partial public static class GCSettings
     {
         private enum SetLatencyModeStatus
         {

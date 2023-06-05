@@ -3,7 +3,7 @@
 
 namespace System.Reflection
 {
-    internal sealed partial class RuntimeMethodBody : MethodBody
+    partial internal sealed class RuntimeMethodBody : MethodBody
     {
         // This class can only be created from inside the EE.
         private RuntimeMethodBody()

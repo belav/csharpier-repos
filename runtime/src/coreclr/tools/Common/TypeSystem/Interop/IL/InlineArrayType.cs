@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Internal.TypeSystem.Interop
 {
-    internal sealed partial class InlineArrayType : MetadataType
+    partial internal sealed class InlineArrayType : MetadataType
     {
         public MetadataType ElementType { get; }
 
@@ -244,7 +244,7 @@ namespace Internal.TypeSystem.Interop
             return _fields;
         }
 
-        private sealed partial class InlineArrayMethod : ILStubMethod
+        partial private sealed class InlineArrayMethod : ILStubMethod
         {
             private InlineArrayType _owningType;
             private InlineArrayMethodKind _kind;
@@ -372,7 +372,7 @@ namespace Internal.TypeSystem.Interop
             }
         }
 
-        private sealed partial class InlineArrayField : FieldDesc
+        partial private sealed class InlineArrayField : FieldDesc
         {
             private InlineArrayType _owningType;
 

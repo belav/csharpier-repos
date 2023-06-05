@@ -10,7 +10,7 @@ namespace System.Data.OleDb
         "Microsoft.VSDesigner.Data.VS.OleDbCommandDesigner, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
     [System.ComponentModel.ToolboxItemAttribute(true)]
-    public sealed partial class OleDbCommand
+    partial public sealed class OleDbCommand
         : System.Data.Common.DbCommand,
             System.Data.IDbCommand,
             System.ICloneable,
@@ -190,7 +190,7 @@ namespace System.Data.OleDb
         }
     }
 
-    public sealed partial class OleDbCommandBuilder : System.Data.Common.DbCommandBuilder
+    partial public sealed class OleDbCommandBuilder : System.Data.Common.DbCommandBuilder
     {
         public OleDbCommandBuilder() { }
 
@@ -287,7 +287,7 @@ namespace System.Data.OleDb
     }
 
     [System.ComponentModel.DefaultEventAttribute("InfoMessage")]
-    public sealed partial class OleDbConnection
+    partial public sealed class OleDbConnection
         : System.Data.Common.DbConnection,
             System.Data.IDbConnection,
             System.ICloneable,
@@ -443,7 +443,7 @@ namespace System.Data.OleDb
 
     [System.ComponentModel.DefaultPropertyAttribute("Provider")]
     [System.ComponentModel.RefreshPropertiesAttribute(System.ComponentModel.RefreshProperties.All)]
-    public sealed partial class OleDbConnectionStringBuilder
+    partial public sealed class OleDbConnectionStringBuilder
         : System.Data.Common.DbConnectionStringBuilder
     {
         public OleDbConnectionStringBuilder() { }
@@ -522,7 +522,7 @@ namespace System.Data.OleDb
     [System.ComponentModel.ToolboxItemAttribute(
         "Microsoft.VSDesigner.Data.VS.OleDbDataAdapterToolboxItem, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public sealed partial class OleDbDataAdapter
+    partial public sealed class OleDbDataAdapter
         : System.Data.Common.DbDataAdapter,
             System.Data.IDataAdapter,
             System.Data.IDbDataAdapter,
@@ -653,7 +653,7 @@ namespace System.Data.OleDb
         }
     }
 
-    public sealed partial class OleDbDataReader : System.Data.Common.DbDataReader
+    partial public sealed class OleDbDataReader : System.Data.Common.DbDataReader
     {
         internal OleDbDataReader() { }
 
@@ -851,7 +851,7 @@ namespace System.Data.OleDb
         }
     }
 
-    public sealed partial class OleDbEnumerator
+    partial public sealed class OleDbEnumerator
     {
         public OleDbEnumerator() { }
 
@@ -871,7 +871,7 @@ namespace System.Data.OleDb
         }
     }
 
-    public sealed partial class OleDbError
+    partial public sealed class OleDbError
     {
         internal OleDbError() { }
 
@@ -899,7 +899,7 @@ namespace System.Data.OleDb
     }
 
     [System.ComponentModel.ListBindableAttribute(false)]
-    public sealed partial class OleDbErrorCollection
+    partial public sealed class OleDbErrorCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -932,7 +932,7 @@ namespace System.Data.OleDb
         }
     }
 
-    public sealed partial class OleDbException : System.Data.Common.DbException
+    partial public sealed class OleDbException : System.Data.Common.DbException
     {
         internal OleDbException() { }
 
@@ -950,7 +950,7 @@ namespace System.Data.OleDb
         ) { }
     }
 
-    public sealed partial class OleDbFactory : System.Data.Common.DbProviderFactory
+    partial public sealed class OleDbFactory : System.Data.Common.DbProviderFactory
     {
         internal OleDbFactory() { }
 
@@ -987,7 +987,7 @@ namespace System.Data.OleDb
         }
     }
 
-    public sealed partial class OleDbInfoMessageEventArgs : System.EventArgs
+    partial public sealed class OleDbInfoMessageEventArgs : System.EventArgs
     {
         internal OleDbInfoMessageEventArgs() { }
 
@@ -1054,7 +1054,7 @@ namespace System.Data.OleDb
         Escape_Underscore_Suffix = 30,
     }
 
-    public static partial class OleDbMetaDataCollectionNames
+    partial public static class OleDbMetaDataCollectionNames
     {
         public static readonly string Catalogs;
         public static readonly string Collations;
@@ -1067,7 +1067,7 @@ namespace System.Data.OleDb
         public static readonly string Views;
     }
 
-    public static partial class OleDbMetaDataColumnNames
+    partial public static class OleDbMetaDataColumnNames
     {
         public static readonly string BooleanFalseLiteral;
         public static readonly string BooleanTrueLiteral;
@@ -1075,7 +1075,7 @@ namespace System.Data.OleDb
         public static readonly string NativeDataType;
     }
 
-    public sealed partial class OleDbParameter
+    partial public sealed class OleDbParameter
         : System.Data.Common.DbParameter,
             System.Data.IDataParameter,
             System.Data.IDbDataParameter,
@@ -1232,7 +1232,7 @@ namespace System.Data.OleDb
         "Microsoft.VSDesigner.Data.Design.DBParametersEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public sealed partial class OleDbParameterCollection : System.Data.Common.DbParameterCollection
+    partial public sealed class OleDbParameterCollection : System.Data.Common.DbParameterCollection
     {
         internal OleDbParameterCollection() { }
 
@@ -1403,7 +1403,7 @@ namespace System.Data.OleDb
         ) { }
     }
 
-    public sealed partial class OleDbRowUpdatedEventArgs : System.Data.Common.RowUpdatedEventArgs
+    partial public sealed class OleDbRowUpdatedEventArgs : System.Data.Common.RowUpdatedEventArgs
     {
         public OleDbRowUpdatedEventArgs(
             System.Data.DataRow dataRow,
@@ -1429,7 +1429,7 @@ namespace System.Data.OleDb
         System.Data.OleDb.OleDbRowUpdatedEventArgs e
     );
 
-    public sealed partial class OleDbRowUpdatingEventArgs : System.Data.Common.RowUpdatingEventArgs
+    partial public sealed class OleDbRowUpdatingEventArgs : System.Data.Common.RowUpdatingEventArgs
     {
         public OleDbRowUpdatingEventArgs(
             System.Data.DataRow dataRow,
@@ -1461,7 +1461,7 @@ namespace System.Data.OleDb
         System.Data.OleDb.OleDbRowUpdatingEventArgs e
     );
 
-    public sealed partial class OleDbSchemaGuid
+    partial public sealed class OleDbSchemaGuid
     {
         public static readonly System.Guid Assertions;
         public static readonly System.Guid Catalogs;
@@ -1504,7 +1504,7 @@ namespace System.Data.OleDb
         public OleDbSchemaGuid() { }
     }
 
-    public sealed partial class OleDbTransaction : System.Data.Common.DbTransaction
+    partial public sealed class OleDbTransaction : System.Data.Common.DbTransaction
     {
         internal OleDbTransaction() { }
 

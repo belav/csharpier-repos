@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
-    internal abstract partial class AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    partial internal abstract class AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         /// <summary>
         /// Constructor for a code style analyzer with a single diagnostic descriptor and

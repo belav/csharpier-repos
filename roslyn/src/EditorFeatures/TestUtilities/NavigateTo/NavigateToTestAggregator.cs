@@ -12,12 +12,13 @@ using Roslyn.Utilities;
 
 namespace Roslyn.Test.EditorUtilities.NavigateTo
 {
+    partial
     /// <summary>
     /// A helper class used when writing unit tests for Navigate To. Given a INavigateToItemProvider, this class will
     /// call StartSearch on the provider, collect the results, and return the results synchronously once the provider
     /// says it's results are complete.
     /// </summary>
-    public sealed partial class NavigateToTestAggregator
+    public sealed class NavigateToTestAggregator
     {
         private readonly INavigateToItemProvider _itemProvider;
 

@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Generators
 {
-    public partial class EventSourceGenerator
+    partial public class EventSourceGenerator
     {
         /// <summary>Code for a [GeneratedCode] attribute to put on the top-level generated members.</summary>
         private static readonly string s_generatedCodeAttribute =

@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHelp
 {
-    internal partial class Controller
+    partial internal class Controller
     {
         CommandState IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.GetCommandState(
             InvokeSignatureHelpCommandArgs args,

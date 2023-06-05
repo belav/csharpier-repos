@@ -3,7 +3,7 @@
 
 namespace System.IO
 {
-    internal static partial class FileSystem
+    partial internal static class FileSystem
     {
         internal const UnixFileMode ValidUnixFileModes =
             UnixFileMode.UserRead

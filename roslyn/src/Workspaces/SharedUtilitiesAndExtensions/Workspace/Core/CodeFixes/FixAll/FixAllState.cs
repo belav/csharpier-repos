@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
-    internal partial class FixAllState
+    partial internal class FixAllState
     {
         internal readonly int CorrelationId = LogAggregator.GetNextId();
 

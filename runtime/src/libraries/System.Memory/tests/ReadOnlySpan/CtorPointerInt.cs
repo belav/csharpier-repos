@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.SpanTests
 {
-    public static partial class ReadOnlySpanTests
+    partial public static class ReadOnlySpanTests
     {
         [Fact]
         public static void CtorPointerInt()

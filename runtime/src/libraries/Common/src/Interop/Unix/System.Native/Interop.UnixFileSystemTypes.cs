@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Internal FileSystem names and magic numbers taken from man(2) statfs
@@ -151,7 +151,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetFileSystemType")]
-        private static partial uint GetFileSystemType(SafeFileHandle fd);
+        partial private static uint GetFileSystemType(SafeFileHandle fd);
 
         internal static bool TryGetFileSystemType(
             SafeFileHandle fd,

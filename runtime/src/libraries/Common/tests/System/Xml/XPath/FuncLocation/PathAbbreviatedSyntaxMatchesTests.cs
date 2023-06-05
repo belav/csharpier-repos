@@ -6,10 +6,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
 {
+    partial
     /// <summary>
     /// Location Paths - Abbreviated Syntax (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Expected: True (based on context node).

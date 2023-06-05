@@ -28,7 +28,7 @@ using System.Net.Security;
 
 namespace System.Net
 {
-    public partial class ServicePointManager
+    partial public class ServicePointManager
     {
         const string EXCEPTION_MESSAGE =
             "System.Net.ServicePointManager is not supported on the current platform.";

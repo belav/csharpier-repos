@@ -105,7 +105,7 @@ namespace System.ServiceModel.Channels
                 this.listener = listener;
             }
 
-            override protected TChannel OnAcceptChannel(TChannel innerChannel)
+            protected override TChannel OnAcceptChannel(TChannel innerChannel)
             {
                 if (typeof(TChannel) == typeof(IInputSessionChannel))
                 {

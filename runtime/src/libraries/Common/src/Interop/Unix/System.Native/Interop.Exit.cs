@@ -5,12 +5,12 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal unsafe partial class Sys
+    partial internal unsafe class Sys
     {
         [DoesNotReturn]
         [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_Exit")]
-        internal static partial void Exit(int exitCode);
+        partial internal static void Exit(int exitCode);
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Extensibility.Testing;
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     [TestService]
-    internal partial class WorkaroundsInProcess
+    partial internal class WorkaroundsInProcess
     {
         public async Task WaitForNavigationAsync(CancellationToken cancellationToken)
         {

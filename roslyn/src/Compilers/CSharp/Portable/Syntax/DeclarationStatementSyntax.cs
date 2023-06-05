@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class LocalDeclarationStatementSyntax : StatementSyntax
+    partial public class LocalDeclarationStatementSyntax : StatementSyntax
     {
         public bool IsConst
         {

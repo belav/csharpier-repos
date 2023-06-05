@@ -26,11 +26,11 @@ namespace System.Data.Common
             get { return DbConnection; }
         }
 
-        abstract protected DbConnection DbConnection { get; }
+        protected abstract DbConnection DbConnection { get; }
 
-        abstract public IsolationLevel IsolationLevel { get; }
+        public abstract IsolationLevel IsolationLevel { get; }
 
-        abstract public void Commit();
+        public abstract void Commit();
 
         public void Dispose()
         {
@@ -39,6 +39,6 @@ namespace System.Data.Common
 
         protected virtual void Dispose(bool disposing) { }
 
-        abstract public void Rollback();
+        public abstract void Rollback();
     }
 }

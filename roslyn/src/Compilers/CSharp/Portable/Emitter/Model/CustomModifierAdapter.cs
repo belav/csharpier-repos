@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Emit;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class CSharpCustomModifier : Cci.ICustomModifier
+    partial internal class CSharpCustomModifier : Cci.ICustomModifier
     {
         bool Cci.ICustomModifier.IsOptional
         {

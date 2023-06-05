@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Text;
     using System.ServiceModel.Channels;
 
-    public partial class WSFederationHttpBindingElement : WSHttpBindingBaseElement
+    partial public class WSFederationHttpBindingElement : WSHttpBindingBaseElement
     {
         public WSFederationHttpBindingElement(string name)
             : base(name) { }

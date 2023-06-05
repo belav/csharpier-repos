@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal sealed partial class TopLevelSyntaxTreeIndex
+    partial internal sealed class TopLevelSyntaxTreeIndex
         : AbstractSyntaxIndex<TopLevelSyntaxTreeIndex>
     {
         private readonly DeclarationInfo _declarationInfo;

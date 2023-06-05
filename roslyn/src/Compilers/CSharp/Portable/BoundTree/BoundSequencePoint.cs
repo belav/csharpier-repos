@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundSequencePoint
+    partial internal class BoundSequencePoint
     {
         public static BoundStatement Create(
             SyntaxNode? syntax,

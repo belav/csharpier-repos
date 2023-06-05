@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract partial class MethodExtractor
+    partial internal abstract class MethodExtractor
     {
         protected abstract class TriviaResult
         {

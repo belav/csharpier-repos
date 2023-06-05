@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace System.Net.Sockets
 {
-    public partial class Socket
+    partial public class Socket
     {
         [SupportedOSPlatform("windows")]
         public Socket(SocketInformation socketInformation)

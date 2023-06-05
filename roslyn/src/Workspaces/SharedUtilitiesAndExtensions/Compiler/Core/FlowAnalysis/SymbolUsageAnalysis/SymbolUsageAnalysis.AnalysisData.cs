@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 {
-    internal static partial class SymbolUsageAnalysis
+    partial internal static class SymbolUsageAnalysis
     {
         /// <summary>
         /// Core analysis data to drive the operation <see cref="Walker"/>

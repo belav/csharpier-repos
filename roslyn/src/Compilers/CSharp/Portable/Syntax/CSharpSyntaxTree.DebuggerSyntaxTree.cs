@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class CSharpSyntaxTree
+    partial public class CSharpSyntaxTree
     {
         /// <summary>
         /// Use by Expression Evaluator.

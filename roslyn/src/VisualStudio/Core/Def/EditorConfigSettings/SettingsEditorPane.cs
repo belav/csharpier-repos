@@ -29,7 +29,7 @@ using static Microsoft.VisualStudio.VSConstants;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 {
-    internal sealed partial class SettingsEditorPane
+    partial internal sealed class SettingsEditorPane
         : WindowPane,
             IOleComponent,
             IVsDeferredDocView,

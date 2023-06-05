@@ -25,7 +25,7 @@ namespace System.Workflow.Activities.Design
     using Microsoft.CSharp;
     using Microsoft.VisualBasic;
 
-    internal partial class ServiceOperationDetailViewControl : ListItemViewControl
+    partial internal class ServiceOperationDetailViewControl : ListItemViewControl
     {
         static CodeDomProvider csharpProvider = null;
         static CodeDomProvider vbProvider = null;

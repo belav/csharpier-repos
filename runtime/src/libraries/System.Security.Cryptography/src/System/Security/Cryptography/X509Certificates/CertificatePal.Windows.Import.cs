@@ -9,9 +9,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class CertificatePal
+    partial internal sealed class CertificatePal
     {
-        internal static partial ICertificatePal FromBlob(
+        partial internal static ICertificatePal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
@@ -20,7 +20,7 @@ namespace System.Security.Cryptography.X509Certificates
             return FromBlobOrFile(rawData, null, password, keyStorageFlags);
         }
 
-        internal static partial ICertificatePal FromFile(
+        partial internal static ICertificatePal FromFile(
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags

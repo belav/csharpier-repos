@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 {
-    internal partial class PreviewUpdater
+    partial internal class PreviewUpdater
     {
         // internal for testing
         internal class PreviewDialogWorkspace : PreviewWorkspace

@@ -1007,10 +1007,10 @@ namespace System.ServiceModel.Channels
             unsafe NativeOverlapped* nativeOverlapped = null;
             MsmqQueueHandle handle;
             ReceiveResult receiveResult;
-            unsafe static IOCompletionCallback onPortedCompletion = Fx.ThunkCallback(
+            static unsafe IOCompletionCallback onPortedCompletion = Fx.ThunkCallback(
                 new IOCompletionCallback(OnPortedCompletion)
             );
-            unsafe static UnsafeNativeMethods.MQReceiveCallback onNonPortedCompletion;
+            static unsafe UnsafeNativeMethods.MQReceiveCallback onNonPortedCompletion;
 
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
             public TryReceiveAsyncResult(
@@ -1119,7 +1119,7 @@ namespace System.ServiceModel.Channels
             }
 
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-            unsafe static void OnNonPortedCompletion(
+            static unsafe void OnNonPortedCompletion(
                 int error,
                 IntPtr handle,
                 int timeout,
@@ -1133,7 +1133,7 @@ namespace System.ServiceModel.Channels
             }
 
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-            unsafe static void OnPortedCompletion(
+            static unsafe void OnPortedCompletion(
                 uint error,
                 uint numBytes,
                 NativeOverlapped* nativeOverlapped

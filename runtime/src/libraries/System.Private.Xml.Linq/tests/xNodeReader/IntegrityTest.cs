@@ -8,9 +8,9 @@ using Xunit;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeReaderFunctionalTests : TestModule
+    partial public class XNodeReaderFunctionalTests : TestModule
     {
-        public partial class XNodeReaderTests : XLinqTestCase
+        partial public class XNodeReaderTests : XLinqTestCase
         {
             public enum EINTEGRITY
             {
@@ -30,8 +30,9 @@ namespace CoreXml.Test.XLinq
                 CLOSE_IN_THE_MIDDLE,
             }
 
+            partial
             //[TestCase(Name = "XMLIntegrityBase", Desc = "XMLIntegrityBase")]
-            public partial class TCXMLIntegrityBase : BridgeHelpers
+            public class TCXMLIntegrityBase : BridgeHelpers
             {
                 private EINTEGRITY _eEIntegrity;
 

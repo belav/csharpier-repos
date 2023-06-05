@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    public partial class MsmqIntegrationBindingCollectionElement
+    partial public class MsmqIntegrationBindingCollectionElement
         : StandardBindingCollectionElement<
             System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding,
             MsmqIntegrationBindingElement

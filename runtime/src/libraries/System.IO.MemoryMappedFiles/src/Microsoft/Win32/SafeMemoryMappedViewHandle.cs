@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeMemoryMappedViewHandle : SafeBuffer
+    partial public sealed class SafeMemoryMappedViewHandle : SafeBuffer
     {
         public SafeMemoryMappedViewHandle()
             : base(true) { }

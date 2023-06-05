@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 {
-    internal partial class DiagnosticIncrementalAnalyzer
+    partial internal class DiagnosticIncrementalAnalyzer
     {
         public Task AnalyzeSyntaxAsync(
             Document document,

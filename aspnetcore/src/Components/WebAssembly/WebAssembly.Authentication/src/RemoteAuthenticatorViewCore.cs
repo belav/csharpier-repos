@@ -9,11 +9,12 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
+partial
 /// <summary>
 /// A component that handles remote authentication operations in an application.
 /// </summary>
 /// <typeparam name="TAuthenticationState">The user state type persisted while the operation is in progress. It must be serializable.</typeparam>
-public partial class RemoteAuthenticatorViewCore<
+public class RemoteAuthenticatorViewCore<
     [DynamicallyAccessedMembers(JsonSerialized)] TAuthenticationState
 > : ComponentBase
     where TAuthenticationState : RemoteAuthenticationState

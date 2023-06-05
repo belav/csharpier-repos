@@ -15,8 +15,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis;
 
-internal partial class SolutionState
+partial internal class SolutionState
 {
+    partial
     /// <summary>
     /// Caches the skeleton references produced for a given project/compilation under the varying <see
     /// cref="MetadataReferenceProperties"/> it might be referenced by.  Skeletons are used in the compilation tracker
@@ -56,7 +57,7 @@ internal partial class SolutionState
     /// memory.
     /// </para>
     /// </summary>
-    private partial class SkeletonReferenceCache
+    private class SkeletonReferenceCache
     {
         private static readonly EmitOptions s_metadataOnlyEmitOptions = new(metadataOnly: true);
 

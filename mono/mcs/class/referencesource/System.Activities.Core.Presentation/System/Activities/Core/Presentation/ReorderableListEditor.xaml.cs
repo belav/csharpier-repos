@@ -12,7 +12,7 @@ namespace System.Activities.Core.Presentation
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    internal partial class ReorderableListEditor : UserControl
+    partial internal class ReorderableListEditor : UserControl
     {
         public static readonly DependencyProperty ItemTemplateProperty =
             DependencyProperty.Register(

@@ -206,10 +206,11 @@ namespace ILCompiler
         private DefaultInterfaceMethodImplementationInstantiationThunkHashtable _dimThunkHashtable =
             new DefaultInterfaceMethodImplementationInstantiationThunkHashtable();
 
+        partial
         /// <summary>
         /// Represents a thunk to call shared instance method on generic interfaces.
         /// </summary>
-        private partial class DefaultInterfaceMethodImplementationInstantiationThunk
+        private class DefaultInterfaceMethodImplementationInstantiationThunk
             : ILStubMethod,
                 IPrefixMangledMethod
         {
@@ -311,12 +312,13 @@ namespace ILCompiler
             }
         }
 
+        partial
         /// <summary>
         /// Represents an instance method on a generic interface with an explicit instantiation parameter in the
         /// signature. This is so that we can refer to the parameter from IL. References to this method will
         /// be replaced by the actual instance method after codegen is done.
         /// </summary>
-        internal partial class DefaultInterfaceMethodImplementationWithHiddenParameter : MethodDesc
+        internal class DefaultInterfaceMethodImplementationWithHiddenParameter : MethodDesc
         {
             private readonly MethodDesc _methodRepresented;
             private readonly TypeDesc _owningType;

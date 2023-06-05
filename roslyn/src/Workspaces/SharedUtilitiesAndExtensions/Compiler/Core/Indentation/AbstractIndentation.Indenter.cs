@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Indentation
 {
-    internal abstract partial class AbstractIndentation<TSyntaxRoot>
+    partial internal abstract class AbstractIndentation<TSyntaxRoot>
     {
         protected readonly struct Indenter
         {

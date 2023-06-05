@@ -8,7 +8,7 @@ using Internal.TypeSystem.Ecma;
 
 namespace Internal.TypeSystem.Interop
 {
-    public static partial class MarshalHelpers
+    partial public static class MarshalHelpers
     {
         internal static TypeDesc GetNativeTypeFromMarshallerKind(
             TypeDesc type,

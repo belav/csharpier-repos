@@ -4,13 +4,13 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CertSerializeCertificateStoreElement(
+        partial internal static bool CertSerializeCertificateStoreElement(
             SafeCertContextHandle pCertContext,
             int dwFlags,
             byte[]? pbElement,

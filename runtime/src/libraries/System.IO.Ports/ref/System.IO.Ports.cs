@@ -29,7 +29,7 @@ namespace System.IO.Ports
         Eof = 2,
     }
 
-    public partial class SerialDataReceivedEventArgs : System.EventArgs
+    partial public class SerialDataReceivedEventArgs : System.EventArgs
     {
         internal SerialDataReceivedEventArgs() { }
 
@@ -53,7 +53,7 @@ namespace System.IO.Ports
         TXFull = 256,
     }
 
-    public partial class SerialErrorReceivedEventArgs : System.EventArgs
+    partial public class SerialErrorReceivedEventArgs : System.EventArgs
     {
         internal SerialErrorReceivedEventArgs() { }
 
@@ -77,7 +77,7 @@ namespace System.IO.Ports
         Ring = 256,
     }
 
-    public partial class SerialPinChangedEventArgs : System.EventArgs
+    partial public class SerialPinChangedEventArgs : System.EventArgs
     {
         internal SerialPinChangedEventArgs() { }
 
@@ -92,7 +92,7 @@ namespace System.IO.Ports
         System.IO.Ports.SerialPinChangedEventArgs e
     );
 
-    public partial class SerialPort : System.ComponentModel.Component
+    partial public class SerialPort : System.ComponentModel.Component
     {
         public const int InfiniteTimeout = -1;
 

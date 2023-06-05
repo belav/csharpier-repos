@@ -60,7 +60,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    internal partial interface IRecordVisitor
+    partial internal interface IRecordVisitor
     {
         // Adds edge
         DstT Visit<SrcT, DstT>(SrcT src, DstT dst)
@@ -296,7 +296,7 @@ namespace Internal.Metadata.NativeFormat.Writer
 
     internal sealed class RecordVisitor : RecordVisitorBase { }
 
-    internal sealed partial class MetadataHeader : MetadataRecord
+    partial internal sealed class MetadataHeader : MetadataRecord
     {
         public const uint Signature = 0xDEADDFFD;
         public List<ScopeDefinition> ScopeDefinitions = new List<ScopeDefinition>();
@@ -318,7 +318,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class MetadataWriter
+    partial public class MetadataWriter
     {
         internal MetadataHeader _metadataHeader = new MetadataHeader();
 
@@ -583,12 +583,13 @@ namespace Internal.Metadata.NativeFormat.Writer
         IList<CustomAttribute> GetCustomAttributes();
     }
 
-    public abstract partial class Blob : MetadataRecord { }
+    partial public abstract class Blob : MetadataRecord { }
 
+    partial
     /// <summary>
     /// Supplements generated class with convenient coversion operators
     /// </summary>
-    public partial class ConstantStringValue
+    public class ConstantStringValue
     {
         public static explicit operator string(ConstantStringValue value)
         {
@@ -604,7 +605,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ScopeDefinition
+    partial public class ScopeDefinition
     {
         public override string ToString()
         {
@@ -618,7 +619,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ScopeReference
+    partial public class ScopeReference
     {
         public override string ToString()
         {
@@ -632,7 +633,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class NamespaceDefinition
+    partial public class NamespaceDefinition
     {
         public override string ToString()
         {
@@ -668,7 +669,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class NamespaceReference
+    partial public class NamespaceReference
     {
         public override string ToString()
         {
@@ -708,7 +709,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class TypeDefinition
+    partial public class TypeDefinition
     {
         public override string ToString()
         {
@@ -739,7 +740,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class TypeReference
+    partial public class TypeReference
     {
         public override string ToString()
         {
@@ -760,7 +761,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class TypeForwarder
+    partial public class TypeForwarder
     {
         public override string ToString()
         {
@@ -768,7 +769,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class GenericParameter
+    partial public class GenericParameter
     {
         public override string ToString()
         {
@@ -776,7 +777,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class Field
+    partial public class Field
     {
         public override string ToString()
         {
@@ -784,7 +785,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class Method
+    partial public class Method
     {
         public override string ToString()
         {
@@ -792,7 +793,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class QualifiedMethod
+    partial public class QualifiedMethod
     {
         public override string ToString()
         {
@@ -800,7 +801,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class Property
+    partial public class Property
     {
         public override string ToString()
         {
@@ -808,7 +809,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class Event
+    partial public class Event
     {
         public override string ToString()
         {
@@ -816,7 +817,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class SZArraySignature
+    partial public class SZArraySignature
     {
         public override string ToString()
         {
@@ -824,7 +825,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ArraySignature
+    partial public class ArraySignature
     {
         public override string ToString()
         {
@@ -832,7 +833,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class TypeSpecification
+    partial public class TypeSpecification
     {
         public override string ToString()
         {
@@ -840,7 +841,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class TypeInstantiationSignature
+    partial public class TypeInstantiationSignature
     {
         public override string ToString()
         {
@@ -851,6 +852,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
+    partial
     /* COMPLETENESS
     public partial class MethodImpl
     {
@@ -860,7 +862,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }*/
 
-    public partial class MethodInstantiation
+    public class MethodInstantiation
     {
         public override string ToString()
         {
@@ -872,7 +874,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ByReferenceSignature
+    partial public class ByReferenceSignature
     {
         public override string ToString()
         {
@@ -880,7 +882,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class CustomAttribute
+    partial public class CustomAttribute
     {
         public override string ToString()
         {
@@ -895,7 +897,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class NamedArgument
+    partial public class NamedArgument
     {
         public override string ToString()
         {
@@ -903,7 +905,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class MemberReference
+    partial public class MemberReference
     {
         public override string ToString()
         {
@@ -916,7 +918,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class MethodSemantics
+    partial public class MethodSemantics
     {
         public override string ToString()
         {
@@ -925,7 +927,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class MethodSignature
+    partial public class MethodSignature
     {
         public override string ToString()
         {
@@ -951,7 +953,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class PropertySignature
+    partial public class PropertySignature
     {
         public override string ToString()
         {
@@ -966,7 +968,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class FieldSignature
+    partial public class FieldSignature
     {
         public override string ToString()
         {
@@ -974,7 +976,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ModifiedType
+    partial public class ModifiedType
     {
         public override string ToString()
         {
@@ -986,7 +988,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class TypeVariableSignature
+    partial public class TypeVariableSignature
     {
         public override string ToString()
         {
@@ -994,7 +996,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class MethodTypeVariableSignature
+    partial public class MethodTypeVariableSignature
     {
         public override string ToString()
         {
@@ -1002,7 +1004,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class Parameter
+    partial public class Parameter
     {
         public override string ToString()
         {
@@ -1017,7 +1019,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class PointerSignature
+    partial public class PointerSignature
     {
         public override string ToString()
         {
@@ -1066,7 +1068,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public static partial class DictionaryExtensions
+    partial public static class DictionaryExtensions
     {
         internal static T FirstOrDefault<T>(this Dictionary<string, T> dict)
         {
@@ -1091,7 +1093,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public static partial class SignatureHelpers
+    partial public static class SignatureHelpers
     {
         public static SZArraySignature AsSZArray(this MetadataRecord record)
         {

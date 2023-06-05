@@ -255,7 +255,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class ThreadPool
+    partial public static class ThreadPool
     {
         internal const bool IsWorkerTrackingEnabledInConfig = false;
 

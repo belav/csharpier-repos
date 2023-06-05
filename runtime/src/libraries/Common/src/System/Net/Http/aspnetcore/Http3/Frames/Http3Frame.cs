@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Net.Http
 {
-    internal static partial class Http3Frame
+    partial internal static class Http3Frame
     {
         public const int MaximumEncodedFrameEnvelopeLength =
             1 + VariableLengthIntegerHelper.MaximumEncodedLength; // Frame type + payload length.

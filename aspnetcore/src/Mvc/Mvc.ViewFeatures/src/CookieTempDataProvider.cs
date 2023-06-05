@@ -11,10 +11,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+partial
 /// <summary>
 /// Provides data from cookie to the current <see cref="ITempDataDictionary"/> object.
 /// </summary>
-public partial class CookieTempDataProvider : ITempDataProvider
+public class CookieTempDataProvider : ITempDataProvider
 {
     /// <summary>
     /// The name of the cookie.
@@ -155,7 +156,7 @@ public partial class CookieTempDataProvider : ITempDataProvider
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -163,7 +164,7 @@ public partial class CookieTempDataProvider : ITempDataProvider
             "The temp data cookie {CookieName} was not found.",
             EventName = "TempDataCookieNotFound"
         )]
-        public static partial void TempDataCookieNotFound(ILogger logger, string cookieName);
+        partial public static void TempDataCookieNotFound(ILogger logger, string cookieName);
 
         [LoggerMessage(
             2,
@@ -171,7 +172,7 @@ public partial class CookieTempDataProvider : ITempDataProvider
             "The temp data cookie {CookieName} was used to successfully load temp data.",
             EventName = "TempDataCookieLoadSuccess"
         )]
-        public static partial void TempDataCookieLoadSuccess(ILogger logger, string cookieName);
+        partial public static void TempDataCookieLoadSuccess(ILogger logger, string cookieName);
 
         [LoggerMessage(
             3,
@@ -179,7 +180,7 @@ public partial class CookieTempDataProvider : ITempDataProvider
             "The temp data cookie {CookieName} could not be loaded.",
             EventName = "TempDataCookieLoadFailure"
         )]
-        public static partial void TempDataCookieLoadFailure(
+        partial public static void TempDataCookieLoadFailure(
             ILogger logger,
             string cookieName,
             Exception exception

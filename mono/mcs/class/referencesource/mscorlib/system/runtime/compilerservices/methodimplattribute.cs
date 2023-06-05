@@ -45,7 +45,7 @@ namespace System.Runtime.CompilerServices
     [Serializable]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class MethodImplAttribute : Attribute
+    public sealed class MethodImplAttribute : Attribute
     {
         internal MethodImplOptions _val;
         public MethodCodeType MethodCodeType;

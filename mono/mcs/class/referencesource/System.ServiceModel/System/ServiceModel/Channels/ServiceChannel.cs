@@ -2837,7 +2837,7 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            static internal void SignalNextIfNonNull(CallOnceManager manager)
+            internal static void SignalNextIfNonNull(CallOnceManager manager)
             {
                 if (manager != null)
                 {
@@ -3026,7 +3026,7 @@ namespace System.ServiceModel.Channels
                 this.Complete(true);
             }
 
-            static internal void End(IAsyncResult result)
+            internal static void End(IAsyncResult result)
             {
                 AsyncResult.End<CallOnceCompletedAsyncResult>(result);
             }

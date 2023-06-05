@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class Edit : System.Web.UI.Page
+partial public class Edit : System.Web.UI.Page
 {
     protected MetaTable table;
 

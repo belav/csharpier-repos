@@ -16,7 +16,7 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace JIT.HardwareIntrinsics.Arm
 {
-    public static partial class Program
+    partial public static class Program
     {
         private static void DotProductBySelectedQuadruplet_Vector128_UInt32_Vector128_Byte_3()
         {

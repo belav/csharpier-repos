@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.Security;
 
-    public sealed partial class ServiceElement
+    partial public sealed class ServiceElement
         : ConfigurationElement,
             IConfigurationContextProviderInternal
     {

@@ -13,7 +13,7 @@ namespace System.Net.Security
     // user data encryption with NEGO SSPI package.
     //
     [UnsupportedOSPlatform("tvos")]
-    internal static partial class NegotiateStreamPal
+    partial internal static class NegotiateStreamPal
     {
 #pragma warning disable IDE0060
         internal static IIdentity GetIdentity(NTAuthentication context)

@@ -49,7 +49,7 @@ namespace System.Net.Http.Headers
             set { QualityValue.SetValue(ref parameters, value); }
         }
 
-        public new static MediaTypeWithQualityHeaderValue Parse(string input)
+        public static new MediaTypeWithQualityHeaderValue Parse(string input)
         {
             MediaTypeWithQualityHeaderValue value;
             if (TryParse(input, out value))

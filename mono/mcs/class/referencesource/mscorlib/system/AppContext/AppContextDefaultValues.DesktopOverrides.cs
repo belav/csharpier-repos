@@ -13,14 +13,14 @@ using System.Security;
 
 namespace System
 {
-    internal static partial class AppContextDefaultValues
+    partial internal static class AppContextDefaultValues
     {
         /// <summary>
         /// This method is going to parse the <paramref name="overrides"/> parameter and set the values corresponding to them
         /// in the AppContext object
         /// </summary>
         [SecuritySafeCritical]
-        static partial void PopulateOverrideValuesPartial()
+        partial static void PopulateOverrideValuesPartial()
         {
             // Retrieve the value from EE config.
             string overrides =
@@ -94,7 +94,7 @@ namespace System
 
         // Note -- partial methods cannot return a value so we use refs to return information
         [SecuritySafeCritical]
-        static partial void TryGetSwitchOverridePartial(
+        partial static void TryGetSwitchOverridePartial(
             string switchName,
             ref bool overrideFound,
             ref bool overrideValue
@@ -129,7 +129,7 @@ namespace System
             }
         }
 
-        private volatile static bool s_errorReadingRegistry;
+        private static volatile bool s_errorReadingRegistry;
 
         [SecuritySafeCritical]
         private static string GetSwitchValueFromRegistry(string switchName)

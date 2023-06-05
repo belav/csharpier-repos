@@ -133,7 +133,7 @@ namespace Runtime_45090
     {
         // Frame size is 4 bytes
         //   push eax
-        public unsafe override int VirtMethodEspBasedFrame()
+        public override unsafe int VirtMethodEspBasedFrame()
         {
             _4 tmp = new _4();
             *(int*)(&tmp) = 45090;

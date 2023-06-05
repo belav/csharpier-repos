@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.DirectoryServices.Protocols
 {
-    public static partial class BerConverter
+    partial public static class BerConverter
     {
         public static byte[] Encode(string format, params object[] value)
         {

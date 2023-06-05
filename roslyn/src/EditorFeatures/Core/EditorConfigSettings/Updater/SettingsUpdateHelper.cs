@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 {
-    internal static partial class SettingsUpdateHelper
+    partial internal static class SettingsUpdateHelper
     {
         private const string DiagnosticOptionPrefix = "dotnet_diagnostic.";
         private const string SeveritySuffix = ".severity";

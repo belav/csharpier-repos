@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class LocalRewriter
+    partial internal class LocalRewriter
     {
         /// <summary>
         /// A common base class for lowering the pattern switch statement and the pattern switch expression.

@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         [LibraryImport(Libraries.User32)]
-        public static partial int PostMessageW(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
+        partial public static int PostMessageW(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
     }
 }

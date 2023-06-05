@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal partial struct ImmutableSegmentedList<T>
+    partial internal struct ImmutableSegmentedList<T>
     {
         public struct Enumerator : IEnumerator<T>
         {

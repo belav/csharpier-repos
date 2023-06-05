@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Threading
 {
-    internal sealed unsafe partial class IOCompletionCallbackHelper
+    partial internal sealed unsafe class IOCompletionCallbackHelper
     {
         private readonly IOCompletionCallback _ioCompletionCallback;
         private readonly ExecutionContext _executionContext;

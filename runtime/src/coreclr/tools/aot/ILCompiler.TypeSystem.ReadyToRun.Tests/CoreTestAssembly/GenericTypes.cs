@@ -26,7 +26,7 @@ namespace GenericTypes
 
     public class DerivedGenericClass<T> : GenericClass<T>
     {
-        public override sealed T Foo()
+        public sealed override T Foo()
         {
             return default(T);
         }

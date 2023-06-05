@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Internal;
 
-internal abstract partial class InvocationRequest : IDisposable
+partial internal abstract class InvocationRequest : IDisposable
 {
     private readonly CancellationTokenRegistration _cancellationTokenRegistration;
 
@@ -232,7 +232,7 @@ internal abstract partial class InvocationRequest : IDisposable
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         // Category: Streaming and NonStreaming
 
@@ -242,7 +242,7 @@ internal abstract partial class InvocationRequest : IDisposable
             "Invocation {InvocationId} created.",
             EventName = "InvocationCreated"
         )]
-        public static partial void InvocationCreated(ILogger logger, string invocationId);
+        partial public static void InvocationCreated(ILogger logger, string invocationId);
 
         [LoggerMessage(
             2,
@@ -250,7 +250,7 @@ internal abstract partial class InvocationRequest : IDisposable
             "Invocation {InvocationId} disposed.",
             EventName = "InvocationDisposed"
         )]
-        public static partial void InvocationDisposed(ILogger logger, string invocationId);
+        partial public static void InvocationDisposed(ILogger logger, string invocationId);
 
         [LoggerMessage(
             3,
@@ -258,7 +258,7 @@ internal abstract partial class InvocationRequest : IDisposable
             "Invocation {InvocationId} marked as completed.",
             EventName = "InvocationCompleted"
         )]
-        public static partial void InvocationCompleted(ILogger logger, string invocationId);
+        partial public static void InvocationCompleted(ILogger logger, string invocationId);
 
         [LoggerMessage(
             4,
@@ -266,7 +266,7 @@ internal abstract partial class InvocationRequest : IDisposable
             "Invocation {InvocationId} marked as failed.",
             EventName = "InvocationFailed"
         )]
-        public static partial void InvocationFailed(ILogger logger, string invocationId);
+        partial public static void InvocationFailed(ILogger logger, string invocationId);
 
         // Category: Streaming
 
@@ -276,7 +276,7 @@ internal abstract partial class InvocationRequest : IDisposable
             "Invocation {InvocationId} caused an error trying to write a stream item.",
             EventName = "ErrorWritingStreamItem"
         )]
-        public static partial void ErrorWritingStreamItem(
+        partial public static void ErrorWritingStreamItem(
             ILogger logger,
             string invocationId,
             Exception exception
@@ -288,7 +288,7 @@ internal abstract partial class InvocationRequest : IDisposable
             "Invocation {InvocationId} received a completion result, but was invoked as a streaming invocation.",
             EventName = "ReceivedUnexpectedComplete"
         )]
-        public static partial void ReceivedUnexpectedComplete(ILogger logger, string invocationId);
+        partial public static void ReceivedUnexpectedComplete(ILogger logger, string invocationId);
 
         // Category: NonStreaming
 
@@ -298,7 +298,7 @@ internal abstract partial class InvocationRequest : IDisposable
             "Invocation {InvocationId} received stream item but was invoked as a non-streamed invocation.",
             EventName = "StreamItemOnNonStreamInvocation"
         )]
-        public static partial void StreamItemOnNonStreamInvocation(
+        partial public static void StreamItemOnNonStreamInvocation(
             ILogger logger,
             string invocationId
         );

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-    internal partial class HttpRequestStream : Stream
+    partial internal class HttpRequestStream : Stream
     {
         public override bool CanSeek => false;
         public override bool CanWrite => false;

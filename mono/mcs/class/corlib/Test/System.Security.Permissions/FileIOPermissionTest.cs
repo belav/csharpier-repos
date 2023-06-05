@@ -30,7 +30,7 @@ namespace MonoTests.System.Security.Permissions
             uint bufLength
         );
 
-        static public string GetLongPathName(string somePath)
+        public static string GetLongPathName(string somePath)
         {
             StringBuilder buffer = new StringBuilder(260);
             if (0 != GetLongPathName(somePath, buffer, (uint)buffer.Capacity))
@@ -46,7 +46,7 @@ namespace MonoTests.System.Security.Permissions
             uint bufLength
         );
 
-        static public string GetShortPathName(string somePath)
+        public static string GetShortPathName(string somePath)
         {
             StringBuilder buffer = new StringBuilder(260);
             if (0 != GetShortPathName(somePath, buffer, (uint)buffer.Capacity))

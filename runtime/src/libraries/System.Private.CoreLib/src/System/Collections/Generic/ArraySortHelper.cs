@@ -10,9 +10,10 @@ using System.Runtime.InteropServices;
 
 namespace System.Collections.Generic
 {
+    partial
     #region ArraySortHelper for single arrays
 
-    internal sealed partial class ArraySortHelper<T>
+    internal sealed class ArraySortHelper<T>
     {
         #region IArraySortHelper<T> Members
 
@@ -291,7 +292,7 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class GenericArraySortHelper<T>
+    partial internal sealed class GenericArraySortHelper<T>
         where T : IComparable<T>
     {
         // Do not add a constructor to this class because ArraySortHelper<T>.CreateSortHelper will not execute it
@@ -694,11 +695,12 @@ namespace System.Collections.Generic
         }
     }
 
+    partial
     #endregion
 
     #region ArraySortHelper for paired key and value arrays
 
-    internal sealed partial class ArraySortHelper<TKey, TValue>
+    internal sealed class ArraySortHelper<TKey, TValue>
     {
         public void Sort(Span<TKey> keys, Span<TValue> values, IComparer<TKey>? comparer)
         {
@@ -965,7 +967,7 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class GenericArraySortHelper<TKey, TValue>
+    partial internal sealed class GenericArraySortHelper<TKey, TValue>
         where TKey : IComparable<TKey>
     {
         public void Sort(Span<TKey> keys, Span<TValue> values, IComparer<TKey>? comparer)

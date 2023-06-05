@@ -12,7 +12,7 @@ namespace System.Timers
     /// Handles recurring events in an application.
     /// </summary>
     [DefaultProperty("Interval"), DefaultEvent("Elapsed")]
-    public partial class Timer : Component, ISupportInitialize
+    partial public class Timer : Component, ISupportInitialize
     {
         private double _interval;
         private bool _enabled;

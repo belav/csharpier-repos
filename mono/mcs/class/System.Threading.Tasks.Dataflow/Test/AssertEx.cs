@@ -5,7 +5,7 @@ namespace MonoTests
 {
     static class AssertEx
     {
-        static public T Throws<T>(Action code)
+        public static T Throws<T>(Action code)
             where T : Exception
         {
             T exception = null;

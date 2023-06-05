@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.IO
 {
-    internal static partial class PersistedFiles
+    partial internal static class PersistedFiles
     {
         private static string? s_userProductDirectory;
 

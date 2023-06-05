@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    public partial class MethodBase
+    partial public class MethodBase
     {
         public static MethodBase? GetMethodFromHandle(RuntimeMethodHandle handle)
         {

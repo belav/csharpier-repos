@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [Flags]
         internal enum MemoryMappedSyncFlags
@@ -21,6 +21,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_MSync",
             SetLastError = true
         )]
-        internal static partial int MSync(IntPtr addr, ulong len, MemoryMappedSyncFlags flags);
+        partial internal static int MSync(IntPtr addr, ulong len, MemoryMappedSyncFlags flags);
     }
 }

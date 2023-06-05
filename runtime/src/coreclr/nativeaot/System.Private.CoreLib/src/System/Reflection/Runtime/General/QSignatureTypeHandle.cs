@@ -15,7 +15,7 @@ namespace System.Reflection.Runtime.General
 {
     [ReflectionBlocked]
     [CLSCompliant(false)]
-    public partial struct QSignatureTypeHandle
+    partial public struct QSignatureTypeHandle
     {
         public object Reader
         {

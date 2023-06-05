@@ -9,12 +9,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// A <see cref="IActionFilter"/> that responds to invalid <see cref="ActionContext.ModelState"/>. This filter is
 /// added to all types and actions annotated with <see cref="ApiControllerAttribute"/>.
 /// See <see cref="ApiBehaviorOptions"/> for ways to configure this filter.
 /// </summary>
-public partial class ModelStateInvalidFilter : IActionFilter, IOrderedFilter
+public class ModelStateInvalidFilter : IActionFilter, IOrderedFilter
 {
     internal const int FilterOrder = -2000;
 
@@ -85,7 +86,7 @@ public partial class ModelStateInvalidFilter : IActionFilter, IOrderedFilter
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -93,6 +94,6 @@ public partial class ModelStateInvalidFilter : IActionFilter, IOrderedFilter
             "The request has model state errors, returning an error response.",
             EventName = "ModelStateInvalidFilterExecuting"
         )]
-        public static partial void ModelStateInvalidFilterExecuting(ILogger logger);
+        partial public static void ModelStateInvalidFilterExecuting(ILogger logger);
     }
 }

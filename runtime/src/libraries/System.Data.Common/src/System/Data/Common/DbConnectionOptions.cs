@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.Data.Common
 {
-    internal sealed partial class DbConnectionOptions
+    partial internal sealed class DbConnectionOptions
     {
         // instances of this class are intended to be immutable, i.e readonly
         // used by pooling classes so it is easier to verify correctness
@@ -198,7 +198,7 @@ namespace System.Data.Common
         }
 
         [Conditional("DEBUG")]
-        static partial void DebugTraceKeyValuePair(
+        partial static void DebugTraceKeyValuePair(
             string keyname,
             string? keyvalue,
             Dictionary<string, string>? synonyms

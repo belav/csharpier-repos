@@ -11,7 +11,7 @@ namespace System
     // eagerly constructed to avoid the cost of defered ctors. I can't imagine any app that doesn't use string
     //
     [EagerStaticClassConstruction]
-    public partial class String
+    partial public class String
     {
         [Intrinsic]
         public static readonly string Empty = "";

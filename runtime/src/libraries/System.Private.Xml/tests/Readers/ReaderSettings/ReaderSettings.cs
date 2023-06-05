@@ -10,7 +10,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.ReaderSettingsTests
 {
     [TestModule(Name = "ReaderSettings Test", Desc = "ReaderSettings Test")]
-    public partial class CReaderTestModule : CGenericTestModule
+    partial public class CReaderTestModule : CGenericTestModule
     {
         public override int Init(object objParam)
         {
@@ -69,13 +69,14 @@ namespace System.Xml.ReaderSettingsTests
         }
     }
 
+    partial
     //[TestCase("ReaderSettings Generic Tests.CoreReader", Param = "CoreReader")]
     //[TestCase("ReaderSettings Generic Tests.CharCheckingReader", Param = "CharCheckingReader")]
     //[TestCase("ReaderSettings Generic Tests.WrappedReader", Param = "WrappedReader")]
     //[TestCase("ReaderSettings Generic Tests.SubtreeReader", Param = "SubtreeReader")]
     //[TestCase("ReaderSettings Generic Tests.CoreValidatingReader", Param = "CoreValidatingReader")]
     //[TestCase("ReaderSettings Generic Tests.XsdValidatingReader", Param = "XsdValidatingReader")]
-    public partial class TCReaderSettings : TCXMLReaderBaseGeneral
+    public class TCReaderSettings : TCXMLReaderBaseGeneral
     {
         public int v1()
         {
@@ -95,6 +96,7 @@ namespace System.Xml.ReaderSettingsTests
         }
     }
 
+    partial
     //[TestCase("CloseInput.CoreReader", Param = "CoreReader")]
     //[TestCase("CloseInput.CharCheckingReader", Param = "CharCheckingReader")]
     //[TestCase("CloseInput.WrappedReader", Param = "WrappedReader")]
@@ -106,7 +108,7 @@ namespace System.Xml.ReaderSettingsTests
     //[TestCase("CloseInput.XsltReader", Param = "XsltReader")]
     //[TestCase("CloseInput.XmlNodeReader", Param = "XmlNodeReader")]
     //[TestCase("CloseInput.XmlBinaryReader", Param = "XmlBinaryReader")]
-    public partial class TCCloseInput : TCXMLReaderBaseGeneral
+    public class TCCloseInput : TCXMLReaderBaseGeneral
     {
         [Variation("Default Values", Priority = 0)]
         public int v1()
@@ -116,13 +118,14 @@ namespace System.Xml.ReaderSettingsTests
         }
     }
 
+    partial
     //[TestCase("ReaderSettings Generic Tests.CoreReader", Param = "CoreReader")]
     //[TestCase("ReaderSettings Generic Tests.CharCheckingReader", Param = "CharCheckingReader")]
     //[TestCase("ReaderSettings Generic Tests.WrappedReader", Param = "WrappedReader")]
     //[TestCase("ReaderSettings Generic Tests.SubtreeReader", Param = "SubtreeReader")]
     //[TestCase("ReaderSettings Generic Tests.CoreValidatingReader", Param = "CoreValidatingReader")]
     //[TestCase("ReaderSettings Generic Tests.XsdValidatingReader", Param = "XsdValidatingReader")]
-    public partial class TCRSGeneric : TCXMLReaderBaseGeneral
+    public class TCRSGeneric : TCXMLReaderBaseGeneral
     {
         [Variation("ReaderSettings not null", Priority = 0)]
         public int v1()
@@ -251,13 +254,14 @@ namespace System.Xml.ReaderSettingsTests
         }
     }
 
+    partial
     //[TestCase("TCDtdProcessingCoreReader.CoreReader", Param = "CoreReader")]
     //[TestCase("TCDtdProcessingCoreReader.CharCheckingReader", Param = "CharCheckingReader")]
     //[TestCase("TCDtdProcessingCoreReader.WrappedReader", Param = "WrappedReader")]
     //[TestCase("TCDtdProcessingCoreReader.SubtreeReader", Param = "SubtreeReader")]
     //[TestCase("TCDtdProcessingCoreReader.CoreValidatingReader", Param = "CoreValidatingReader")]
     //[TestCase("TCDtdProcessingCoreReader.XsdValidatingReader", Param = "XsdValidatingReader")]
-    public partial class TCDtdProcessingCoreReader : TCXMLReaderBaseGeneral
+    public class TCDtdProcessingCoreReader : TCXMLReaderBaseGeneral
     {
         //[Variation("Read xml without DTD.Parse", Param = DtdProcessing.Parse)]
         //[Variation("Read xml without DTD.Ignore", Param = DtdProcessing.Ignore)]
@@ -1328,11 +1332,12 @@ namespace System.Xml.ReaderSettingsTests
         }
     }
 
+    partial
     //[TestCase("TCDtdProcessingNonCoreReader.XmlTextReader", Param = "XmlTextReader")]
     //[TestCase("TCDtdProcessingNonCoreReader.XmlValidatingReader", Param = "XmlValidatingReader")]
     //[TestCase("TCDtdProcessingNonCoreReader.XmlNodeReader", Param = "XmlNodeReader")]
     //[TestCase("TCDtdProcessingNonCoreReader.XsltReader", Param = "XsltReader")]
-    public partial class TCDtdProcessingNonCoreReader : TCXMLReaderBaseGeneral
+    public class TCDtdProcessingNonCoreReader : TCXMLReaderBaseGeneral
     {
         //[Variation("Read xml without DTD.Parse", Param = DtdProcessing.Parse)]
         //[Variation("Read xml without DTD.Ignore", Param = DtdProcessing.Ignore)]
@@ -2538,6 +2543,7 @@ namespace System.Xml.ReaderSettingsTests
         }
     }
 
+    partial
     //[TestCase("Read xml as one byte stream.CoreReader", Param = "CoreReader")]
     //[TestCase("Read xml as one byte stream.CharCheckingReader", Param = "CharCheckingReader")]
     //[TestCase("Read xml as one byte stream.WrappedReader", Param = "WrappedReader")]
@@ -2550,7 +2556,7 @@ namespace System.Xml.ReaderSettingsTests
     //[TestCase("Read xml as one byte stream.XPathNavigatorReader", Param = "XPathNavigatorReader")]
     //[TestCase("Read xml as one byte stream.XmlTextReader", Param = "XmlTextReader")]
     //[TestCase("Read xml as one byte stream.XmlBinaryReader", Param = "XmlBinaryReader")]
-    public partial class TCOneByteStream : TCXMLReaderBaseGeneral
+    public class TCOneByteStream : TCXMLReaderBaseGeneral
     {
         [Variation("445370: Parsing this 'some]' as fragment fails with 'Unexpected EOF' error")]
         public int v0()

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace System
 {
-    public static partial class StringNormalizationExtensions
+    partial public static class StringNormalizationExtensions
     {
         public static bool IsNormalized(this string strInput)
         {

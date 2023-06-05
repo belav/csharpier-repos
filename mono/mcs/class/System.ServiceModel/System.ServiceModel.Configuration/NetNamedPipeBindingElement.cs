@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class NetNamedPipeBindingElement
+    partial public class NetNamedPipeBindingElement
         : StandardBindingElement,
             IBindingConfigurationElement
     {

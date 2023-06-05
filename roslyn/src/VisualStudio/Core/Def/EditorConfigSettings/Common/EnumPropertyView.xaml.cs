@@ -7,10 +7,11 @@ using System.Windows.Controls;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 {
+    partial
     /// <summary>
     /// Interaction logic for EnumPropertyView.xaml
     /// </summary>
-    internal partial class EnumSettingView : UserControl
+    internal class EnumSettingView : UserControl
     {
         private readonly IEnumSettingViewModel _model;
 

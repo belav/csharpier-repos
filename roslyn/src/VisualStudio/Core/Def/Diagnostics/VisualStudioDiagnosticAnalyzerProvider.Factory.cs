@@ -14,7 +14,7 @@ using System.Threading;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 {
-    internal partial class VisualStudioDiagnosticAnalyzerProvider
+    partial internal class VisualStudioDiagnosticAnalyzerProvider
     {
         [Export(typeof(IVisualStudioDiagnosticAnalyzerProviderFactory)), Shared]
         internal sealed class Factory : IVisualStudioDiagnosticAnalyzerProviderFactory

@@ -6,13 +6,14 @@ using System.Collections.Generic;
 
 namespace System.Reflection.Runtime.BindingFlagSupport
 {
+    partial
     //
     // Stores the result of a member filtering that's further filtered by the Public, NonPublic, Instance, Static and FlatternHierarchy bits of BindingFlags.
     // This object is not considered a candidate for long term caching.
     //
     // Note: The uninitialized state ("qr = default(QueryResult<M>)) is considered a valid state for this object, and represents an empty list of members.
     //
-    internal partial struct QueryResult<M>
+    internal struct QueryResult<M>
         where M : MemberInfo
     {
         public QueryResult(BindingFlags bindingAttr, QueriedMemberList<M> queriedMembers)

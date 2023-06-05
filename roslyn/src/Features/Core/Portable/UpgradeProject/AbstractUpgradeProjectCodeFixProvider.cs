@@ -17,7 +17,7 @@ using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 
 namespace Microsoft.CodeAnalysis.UpgradeProject
 {
-    internal abstract partial class AbstractUpgradeProjectCodeFixProvider : CodeFixProvider
+    partial internal abstract class AbstractUpgradeProjectCodeFixProvider : CodeFixProvider
     {
         public abstract string SuggestedVersion(ImmutableArray<Diagnostic> diagnostics);
         public abstract Solution UpgradeProject(Project project, string version);

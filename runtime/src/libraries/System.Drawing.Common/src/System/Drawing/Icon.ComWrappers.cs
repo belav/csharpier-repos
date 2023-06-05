@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 
 namespace System.Drawing
 {
-    public sealed partial class Icon : MarshalByRefObject, ICloneable, IDisposable, ISerializable
+    partial public sealed class Icon : MarshalByRefObject, ICloneable, IDisposable, ISerializable
     {
         public unsafe void Save(Stream outputStream)
         {
@@ -70,7 +70,7 @@ namespace System.Drawing
         }
 
         [LibraryImport(Interop.Libraries.Oleaut32)]
-        private static unsafe partial int OleCreatePictureIndirect(
+        partial private static unsafe int OleCreatePictureIndirect(
             PICTDESC* pictdesc,
             Guid* refiid,
             int fOwn,

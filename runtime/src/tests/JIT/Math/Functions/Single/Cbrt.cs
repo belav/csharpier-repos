@@ -5,7 +5,7 @@ using System;
 
 namespace System.MathBenchmarks
 {
-    public partial class Single
+    partial public class Single
     {
         // Tests MathF.Cbrt(float) over 5000 iterations for the domain +0, +PI
 

@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class CompilationEventTests : CompilingTestBase
+    partial public class CompilationEventTests : CompilingTestBase
     {
         internal static void VerifyEvents(
             AsyncQueue<CompilationEvent> queue,

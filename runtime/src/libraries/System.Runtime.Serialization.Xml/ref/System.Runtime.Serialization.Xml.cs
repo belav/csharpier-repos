@@ -6,7 +6,7 @@
 
 namespace System.Runtime.Serialization
 {
-    public abstract partial class DataContractResolver
+    partial public abstract class DataContractResolver
     {
         protected DataContractResolver() { }
 
@@ -38,7 +38,7 @@ namespace System.Runtime.Serialization
         );
     }
 
-    public sealed partial class DataContractSerializer
+    partial public sealed class DataContractSerializer
         : System.Runtime.Serialization.XmlObjectSerializer
     {
         public DataContractSerializer(System.Type type) { }
@@ -248,7 +248,7 @@ namespace System.Runtime.Serialization
         public override void WriteStartObject(System.Xml.XmlWriter writer, object? graph) { }
     }
 
-    public static partial class DataContractSerializerExtensions
+    partial public static class DataContractSerializerExtensions
     {
         public static System.Runtime.Serialization.ISerializationSurrogateProvider? GetSerializationSurrogateProvider(
             this System.Runtime.Serialization.DataContractSerializer serializer
@@ -263,7 +263,7 @@ namespace System.Runtime.Serialization
         ) { }
     }
 
-    public partial class DataContractSerializerSettings
+    partial public class DataContractSerializerSettings
     {
         public DataContractSerializerSettings() { }
 
@@ -309,7 +309,7 @@ namespace System.Runtime.Serialization
         }
     }
 
-    public partial class ExportOptions
+    partial public class ExportOptions
     {
         public ExportOptions() { }
 
@@ -324,17 +324,17 @@ namespace System.Runtime.Serialization
         }
     }
 
-    public sealed partial class ExtensionDataObject
+    partial public sealed class ExtensionDataObject
     {
         internal ExtensionDataObject() { }
     }
 
-    public partial interface IExtensibleDataObject
+    partial public interface IExtensibleDataObject
     {
         System.Runtime.Serialization.ExtensionDataObject? ExtensionData { get; set; }
     }
 
-    public abstract partial class XmlObjectSerializer
+    partial public abstract class XmlObjectSerializer
     {
         protected XmlObjectSerializer() { }
 
@@ -488,7 +488,7 @@ namespace System.Runtime.Serialization
         public virtual void WriteStartObject(System.Xml.XmlWriter writer, object? graph) { }
     }
 
-    public static partial class XmlSerializableServices
+    partial public static class XmlSerializableServices
     {
         public static void AddDefaultSchema(
             System.Xml.Schema.XmlSchemaSet schemas,
@@ -506,7 +506,7 @@ namespace System.Runtime.Serialization
         ) { }
     }
 
-    public static partial class XPathQueryGenerator
+    partial public static class XPathQueryGenerator
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -540,7 +540,7 @@ namespace System.Runtime.Serialization
         }
     }
 
-    public partial class XsdDataContractExporter
+    partial public class XsdDataContractExporter
     {
         public XsdDataContractExporter() { }
 
@@ -654,7 +654,7 @@ namespace System.Runtime.Serialization
 
 namespace System.Xml
 {
-    public partial interface IFragmentCapableXmlDictionaryWriter
+    partial public interface IFragmentCapableXmlDictionaryWriter
     {
         bool CanFragment { get; }
         void EndFragment();
@@ -662,13 +662,13 @@ namespace System.Xml
         void WriteFragment(byte[] buffer, int offset, int count);
     }
 
-    public partial interface IStreamProvider
+    partial public interface IStreamProvider
     {
         System.IO.Stream GetStream();
         void ReleaseStream(System.IO.Stream stream);
     }
 
-    public partial interface IXmlBinaryReaderInitializer
+    partial public interface IXmlBinaryReaderInitializer
     {
         void SetInput(
             byte[] buffer,
@@ -688,7 +688,7 @@ namespace System.Xml
         );
     }
 
-    public partial interface IXmlBinaryWriterInitializer
+    partial public interface IXmlBinaryWriterInitializer
     {
         void SetOutput(
             System.IO.Stream stream,
@@ -698,7 +698,7 @@ namespace System.Xml
         );
     }
 
-    public partial interface IXmlDictionary
+    partial public interface IXmlDictionary
     {
         bool TryLookup(
             int key,
@@ -717,7 +717,7 @@ namespace System.Xml
         );
     }
 
-    public partial interface IXmlTextReaderInitializer
+    partial public interface IXmlTextReaderInitializer
     {
         void SetInput(
             byte[] buffer,
@@ -735,14 +735,14 @@ namespace System.Xml
         );
     }
 
-    public partial interface IXmlTextWriterInitializer
+    partial public interface IXmlTextWriterInitializer
     {
         void SetOutput(System.IO.Stream stream, System.Text.Encoding encoding, bool ownsStream);
     }
 
     public delegate void OnXmlDictionaryReaderClose(System.Xml.XmlDictionaryReader reader);
 
-    public partial class UniqueId
+    partial public class UniqueId
     {
         public UniqueId() { }
 
@@ -808,7 +808,7 @@ namespace System.Xml
         }
     }
 
-    public partial class XmlBinaryReaderSession : System.Xml.IXmlDictionary
+    partial public class XmlBinaryReaderSession : System.Xml.IXmlDictionary
     {
         public XmlBinaryReaderSession() { }
 
@@ -847,7 +847,7 @@ namespace System.Xml
         }
     }
 
-    public partial class XmlBinaryWriterSession
+    partial public class XmlBinaryWriterSession
     {
         public XmlBinaryWriterSession() { }
 
@@ -859,7 +859,7 @@ namespace System.Xml
         }
     }
 
-    public partial class XmlDictionary : System.Xml.IXmlDictionary
+    partial public class XmlDictionary : System.Xml.IXmlDictionary
     {
         public XmlDictionary() { }
 
@@ -903,7 +903,7 @@ namespace System.Xml
         }
     }
 
-    public abstract partial class XmlDictionaryReader : System.Xml.XmlReader
+    partial public abstract class XmlDictionaryReader : System.Xml.XmlReader
     {
         protected XmlDictionaryReader() { }
 
@@ -1801,7 +1801,7 @@ namespace System.Xml
         }
     }
 
-    public sealed partial class XmlDictionaryReaderQuotas
+    partial public sealed class XmlDictionaryReaderQuotas
     {
         public XmlDictionaryReaderQuotas() { }
 
@@ -1862,7 +1862,7 @@ namespace System.Xml
         MaxNameTableCharCount = 16,
     }
 
-    public partial class XmlDictionaryString
+    partial public class XmlDictionaryString
     {
         public XmlDictionaryString(System.Xml.IXmlDictionary dictionary, string value, int key) { }
 
@@ -1889,7 +1889,7 @@ namespace System.Xml
         }
     }
 
-    public abstract partial class XmlDictionaryWriter : System.Xml.XmlWriter
+    partial public abstract class XmlDictionaryWriter : System.Xml.XmlWriter
     {
         protected XmlDictionaryWriter() { }
 
@@ -2277,7 +2277,7 @@ namespace System.Xml
 
 namespace System.Runtime.Serialization.DataContracts
 {
-    public abstract partial class DataContract
+    partial public abstract class DataContract
     {
         internal const System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes DataContractPreserveMemberTypes =
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
@@ -2404,9 +2404,9 @@ namespace System.Runtime.Serialization.DataContracts
         }
     }
 
-    internal abstract partial class DataContractCriticalHelper { }
+    partial internal abstract class DataContractCriticalHelper { }
 
-    public sealed partial class DataContractSet
+    partial public sealed class DataContractSet
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed."
@@ -2521,7 +2521,7 @@ namespace System.Runtime.Serialization.DataContracts
         }
     }
 
-    public sealed partial class DataMember
+    partial public sealed class DataMember
     {
         internal DataMember() { }
 
@@ -2557,7 +2557,7 @@ namespace System.Runtime.Serialization.DataContracts
         }
     }
 
-    public sealed partial class XmlDataContract : DataContract
+    partial public sealed class XmlDataContract : DataContract
     {
         internal XmlDataContract(Type type)
             : base(default) { }

@@ -6,7 +6,7 @@
 
 namespace System.Web.UI.WebControls
 {
-    public partial class Menu
+    partial public class Menu
     {
         internal abstract class MenuRenderer
         {

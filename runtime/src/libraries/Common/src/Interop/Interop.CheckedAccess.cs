@@ -3,7 +3,7 @@
 
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     public static unsafe void CheckBounds(
         byte* buffer,

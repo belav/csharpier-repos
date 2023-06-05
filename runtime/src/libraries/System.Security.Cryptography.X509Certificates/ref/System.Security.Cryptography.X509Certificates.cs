@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeX509ChainHandle
+    partial public sealed class SafeX509ChainHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeX509ChainHandle()
@@ -23,7 +23,7 @@ namespace Microsoft.Win32.SafeHandles
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    public sealed partial class CertificateRequest
+    partial public sealed class CertificateRequest
     {
         public CertificateRequest(
             System.Security.Cryptography.X509Certificates.X500DistinguishedName subjectName,
@@ -139,7 +139,7 @@ namespace System.Security.Cryptography.X509Certificates
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public static partial class DSACertificateExtensions
+    partial public static class DSACertificateExtensions
     {
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
@@ -164,7 +164,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public static partial class ECDsaCertificateExtensions
+    partial public static class ECDsaCertificateExtensions
     {
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
@@ -199,7 +199,7 @@ namespace System.Security.Cryptography.X509Certificates
         IncludeArchived = 8,
     }
 
-    public sealed partial class PublicKey
+    partial public sealed class PublicKey
     {
         public PublicKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
 
@@ -276,7 +276,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public static partial class RSACertificateExtensions
+    partial public static class RSACertificateExtensions
     {
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
@@ -319,7 +319,7 @@ namespace System.Security.Cryptography.X509Certificates
         TrustedPublisher = 8,
     }
 
-    public sealed partial class SubjectAlternativeNameBuilder
+    partial public sealed class SubjectAlternativeNameBuilder
     {
         public SubjectAlternativeNameBuilder() { }
 
@@ -341,7 +341,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X500DistinguishedName : System.Security.Cryptography.AsnEncodedData
+    partial public sealed class X500DistinguishedName : System.Security.Cryptography.AsnEncodedData
     {
         public X500DistinguishedName(byte[] encodedDistinguishedName) { }
 
@@ -395,7 +395,7 @@ namespace System.Security.Cryptography.X509Certificates
         ForceUTF8Encoding = 16384,
     }
 
-    public sealed partial class X509BasicConstraintsExtension
+    partial public sealed class X509BasicConstraintsExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509BasicConstraintsExtension() { }
@@ -430,7 +430,7 @@ namespace System.Security.Cryptography.X509Certificates
         ) { }
     }
 
-    public partial class X509Certificate
+    partial public class X509Certificate
         : System.IDisposable,
             System.Runtime.Serialization.IDeserializationCallback,
             System.Runtime.Serialization.ISerializable
@@ -763,7 +763,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public partial class X509Certificate2
+    partial public class X509Certificate2
         : System.Security.Cryptography.X509Certificates.X509Certificate
     {
         [System.ObsoleteAttribute(
@@ -1091,7 +1091,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public partial class X509Certificate2Collection
+    partial public class X509Certificate2Collection
         : System.Security.Cryptography.X509Certificates.X509CertificateCollection,
             System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509Certificate2>,
             System.Collections.IEnumerable
@@ -1257,7 +1257,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509Certificate2Enumerator
+    partial public sealed class X509Certificate2Enumerator
         : System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509Certificate2>,
             System.Collections.IEnumerator,
             System.IDisposable
@@ -1290,7 +1290,7 @@ namespace System.Security.Cryptography.X509Certificates
         void System.IDisposable.Dispose() { }
     }
 
-    public partial class X509CertificateCollection : System.Collections.CollectionBase
+    partial public class X509CertificateCollection : System.Collections.CollectionBase
     {
         public X509CertificateCollection() { }
 
@@ -1355,7 +1355,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         public void Remove(System.Security.Cryptography.X509Certificates.X509Certificate value) { }
 
-        public partial class X509CertificateEnumerator : System.Collections.IEnumerator
+        partial public class X509CertificateEnumerator : System.Collections.IEnumerator
         {
             public X509CertificateEnumerator(
                 System.Security.Cryptography.X509Certificates.X509CertificateCollection mappings
@@ -1386,7 +1386,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public partial class X509Chain : System.IDisposable
+    partial public class X509Chain : System.IDisposable
     {
         public X509Chain() { }
 
@@ -1436,7 +1436,7 @@ namespace System.Security.Cryptography.X509Certificates
         public void Reset() { }
     }
 
-    public partial class X509ChainElement
+    partial public class X509ChainElement
     {
         internal X509ChainElement() { }
 
@@ -1454,7 +1454,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509ChainElementCollection
+    partial public sealed class X509ChainElementCollection
         : System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509ChainElement>,
             System.Collections.ICollection,
             System.Collections.IEnumerable
@@ -1501,7 +1501,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509ChainElementEnumerator
+    partial public sealed class X509ChainElementEnumerator
         : System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509ChainElement>,
             System.Collections.IEnumerator,
             System.IDisposable
@@ -1527,7 +1527,7 @@ namespace System.Security.Cryptography.X509Certificates
         void System.IDisposable.Dispose() { }
     }
 
-    public sealed partial class X509ChainPolicy
+    partial public sealed class X509ChainPolicy
     {
         public X509ChainPolicy() { }
 
@@ -1586,7 +1586,7 @@ namespace System.Security.Cryptography.X509Certificates
         public void Reset() { }
     }
 
-    public partial struct X509ChainStatus
+    partial public struct X509ChainStatus
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -1653,7 +1653,7 @@ namespace System.Security.Cryptography.X509Certificates
         Authenticode = 6,
     }
 
-    public sealed partial class X509EnhancedKeyUsageExtension
+    partial public sealed class X509EnhancedKeyUsageExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509EnhancedKeyUsageExtension() { }
@@ -1678,7 +1678,7 @@ namespace System.Security.Cryptography.X509Certificates
         ) { }
     }
 
-    public partial class X509Extension : System.Security.Cryptography.AsnEncodedData
+    partial public class X509Extension : System.Security.Cryptography.AsnEncodedData
     {
         protected X509Extension() { }
 
@@ -1711,7 +1711,7 @@ namespace System.Security.Cryptography.X509Certificates
         ) { }
     }
 
-    public sealed partial class X509ExtensionCollection
+    partial public sealed class X509ExtensionCollection
         : System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509Extension>,
             System.Collections.ICollection,
             System.Collections.IEnumerable
@@ -1767,7 +1767,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509ExtensionEnumerator
+    partial public sealed class X509ExtensionEnumerator
         : System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509Extension>,
             System.Collections.IEnumerator,
             System.IDisposable
@@ -1832,7 +1832,7 @@ namespace System.Security.Cryptography.X509Certificates
         EphemeralKeySet = 32,
     }
 
-    public sealed partial class X509KeyUsageExtension
+    partial public sealed class X509KeyUsageExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509KeyUsageExtension() { }
@@ -1896,7 +1896,7 @@ namespace System.Security.Cryptography.X509Certificates
         Offline = 2,
     }
 
-    public abstract partial class X509SignatureGenerator
+    partial public abstract class X509SignatureGenerator
     {
         protected X509SignatureGenerator() { }
 
@@ -1930,7 +1930,7 @@ namespace System.Security.Cryptography.X509Certificates
         );
     }
 
-    public sealed partial class X509Store : System.IDisposable
+    partial public sealed class X509Store : System.IDisposable
     {
         public X509Store() { }
 
@@ -2009,7 +2009,7 @@ namespace System.Security.Cryptography.X509Certificates
         ) { }
     }
 
-    public sealed partial class X509SubjectKeyIdentifierExtension
+    partial public sealed class X509SubjectKeyIdentifierExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509SubjectKeyIdentifierExtension() { }

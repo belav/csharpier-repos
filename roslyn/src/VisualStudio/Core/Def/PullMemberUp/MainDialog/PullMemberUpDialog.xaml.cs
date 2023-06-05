@@ -16,10 +16,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.MainDialog
 {
+    partial
     /// <summary>
     /// Interaction logic for PullMemberUpDialog.xaml
     /// </summary>
-    internal partial class PullMemberUpDialog : DialogWindow
+    internal class PullMemberUpDialog : DialogWindow
     {
         public string OK => ServicesVSResources.OK;
         public string Cancel => ServicesVSResources.Cancel;

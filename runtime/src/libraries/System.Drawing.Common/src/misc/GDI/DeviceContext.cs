@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Internal
 {
+    partial
     /// <summary>
     /// Represents a Win32 device context.  Provides operations for setting some of the properties of a device context.
     /// It's the managed wrapper for an HDC.
@@ -14,7 +15,7 @@ namespace System.Drawing.Internal
     /// This class is divided into two files separating the code that needs to be compiled into retail builds and
     /// debugging code.
     /// </summary>
-    internal sealed partial class DeviceContext : MarshalByRefObject, IDisposable
+    internal sealed class DeviceContext : MarshalByRefObject, IDisposable
     {
         /// <summary>
         /// This class is a wrapper to a Win32 device context, and the Hdc property is the way to get a

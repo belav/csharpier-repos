@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class ComAwareEventInfoTests
+    partial public class ComAwareEventInfoTests
     {
         [Fact]
         public void Ctor_Type_EventName()

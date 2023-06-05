@@ -6,8 +6,9 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
 {
+    partial
     /// <summary>This class contains methods that are mainly used to manage native memory.</summary>
-    public static unsafe partial class NativeMemory
+    public static unsafe class NativeMemory
     {
         /// <summary>Allocates an aligned block of memory of the specified size and alignment, in bytes.</summary>
         /// <param name="byteCount">The size, in bytes, of the block to allocate.</param>

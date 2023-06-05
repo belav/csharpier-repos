@@ -14,7 +14,7 @@ namespace System.Collections.Immutable
     /// <typeparam name="T">The type of element stored by the stack.</typeparam>
     [DebuggerDisplay("IsEmpty = {IsEmpty}; Top = {_head}")]
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
-    public sealed partial class ImmutableStack<T> : IImmutableStack<T>
+    partial public sealed class ImmutableStack<T> : IImmutableStack<T>
     {
         /// <summary>
         /// The singleton empty stack.

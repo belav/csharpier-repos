@@ -10,7 +10,7 @@ namespace System.Runtime.Intrinsics.X86
     /// This class provides access to the x86 base hardware instructions via intrinsics
     /// </summary>
     [Intrinsic]
-    public abstract partial class X86Base
+    partial public abstract class X86Base
     {
         internal X86Base() { }
 

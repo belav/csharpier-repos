@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace System.Reflection.Metadata
 {
     [Serializable]
-    public partial class ImageFormatLimitationException : Exception
+    partial public class ImageFormatLimitationException : Exception
     {
         protected ImageFormatLimitationException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }

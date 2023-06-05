@@ -3,7 +3,7 @@
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal sealed partial class RuntimeCLSIDTypeInfo
+    partial internal sealed class RuntimeCLSIDTypeInfo
     {
         //
         // Key for unification.

@@ -1,6 +1,6 @@
 namespace Test
 {
-    public partial class Test
+    partial public class Test
     {
         public override bool Equals(object obj)
         {
@@ -8,7 +8,7 @@ namespace Test
         }
     }
 
-    public partial class Test
+    partial public class Test
     {
         public override int GetHashCode()
         {

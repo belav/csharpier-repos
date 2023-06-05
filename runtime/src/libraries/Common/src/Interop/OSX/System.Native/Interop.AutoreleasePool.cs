@@ -5,14 +5,14 @@ using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_CreateAutoreleasePool")]
-        internal static partial IntPtr CreateAutoreleasePool();
+        partial internal static IntPtr CreateAutoreleasePool();
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_DrainAutoreleasePool")]
-        internal static partial void DrainAutoreleasePool(IntPtr ptr);
+        partial internal static void DrainAutoreleasePool(IntPtr ptr);
     }
 }

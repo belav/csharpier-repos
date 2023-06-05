@@ -13,7 +13,7 @@ namespace System.Text.Json.Node
     /// </summary>
     [DebuggerDisplay("JsonObject[{Dictionary.Count}]")]
     [DebuggerTypeProxy(typeof(DebugView))]
-    public sealed partial class JsonObject : JsonNode
+    partial public sealed class JsonObject : JsonNode
     {
         private JsonElement? _jsonElement;
         private IDictionary<string, JsonNode?>? _dictionary;

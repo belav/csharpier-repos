@@ -7,7 +7,7 @@ using System.Text;
 
 namespace System.Diagnostics
 {
-    public partial class StackTrace
+    partial public class StackTrace
     {
 #if !TARGET_WASM
         /// <summary>

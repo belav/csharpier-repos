@@ -2302,7 +2302,9 @@ namespace System.Xml
             public const byte Comment = 0x40;
 
 #if GENERATE_CHARTYPE
-            static public void Generate()
+            public
+#if GENERATE_CHARTYPE
+            static void Generate()
             {
                 bool[] isFirstNameChar = new bool[256];
                 bool[] isNameChar = new bool[256];

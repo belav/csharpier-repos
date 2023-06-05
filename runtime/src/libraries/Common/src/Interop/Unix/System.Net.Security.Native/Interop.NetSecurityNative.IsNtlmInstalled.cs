@@ -4,22 +4,22 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NetSecurityNative
+    partial internal static class NetSecurityNative
     {
         [LibraryImport(
             Interop.Libraries.NetSecurityNative,
             EntryPoint = "NetSecurityNative_IsNtlmInstalled"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool IsNtlmInstalled();
+        partial internal static bool IsNtlmInstalled();
 
         [LibraryImport(
             Interop.Libraries.NetSecurityNative,
             EntryPoint = "NetSecurityNative_EnsureGssInitialized"
         )]
-        private static partial int EnsureGssInitialized();
+        partial private static int EnsureGssInitialized();
 
         static NetSecurityNative()
         {

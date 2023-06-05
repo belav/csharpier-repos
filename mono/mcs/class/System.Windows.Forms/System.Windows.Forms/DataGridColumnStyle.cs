@@ -542,9 +542,13 @@ namespace System.Windows.Forms
         #endregion	// Public Instance Methods
 
         #region Private Instance Methods
-        virtual internal void OnMouseDown(MouseEventArgs e, int row, int column) { }
+        internal
+        #endregion	// Public Instance Methods
 
-        virtual internal void OnKeyDown(KeyEventArgs ke, int row, int column) { }
+        #region Private Instance Methods
+        virtual void OnMouseDown(MouseEventArgs e, int row, int column) { }
+
+        internal virtual void OnKeyDown(KeyEventArgs ke, int row, int column) { }
 
         internal void PaintHeader(Graphics g, Rectangle bounds, int colNum)
         {

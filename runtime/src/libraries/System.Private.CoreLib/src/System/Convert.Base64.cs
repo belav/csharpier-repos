@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public static partial class Convert
+    partial public static class Convert
     {
         /// <summary>
         /// Decode the span of UTF-16 encoded text represented as base 64 into binary data.

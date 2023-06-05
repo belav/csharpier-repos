@@ -6,13 +6,14 @@ using System.Security;
 
 namespace System.IO.Compression
 {
+    partial
     /// <summary>
     /// This class provides declaration for constants and PInvokes as well as some basic tools for exposing the
     /// native System.IO.Compression.Native.dll (effectively, ZLib) library to managed code.
     ///
     /// See also: How to choose a compression level (in comments to <code>CompressionLevel</code>.
     /// </summary>
-    internal static partial class ZLibNative
+    internal static class ZLibNative
     {
         // This is the NULL pointer for using with ZLib pointers;
         // we prefer it to IntPtr.Zero to mimic the definition of Z_NULL in zlib.h:

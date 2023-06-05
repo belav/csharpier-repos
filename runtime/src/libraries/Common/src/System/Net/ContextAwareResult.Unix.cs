@@ -3,7 +3,7 @@
 
 namespace System.Net
 {
-    internal sealed partial class ContextAwareResult
+    partial internal sealed class ContextAwareResult
     {
         partial void SafeCaptureIdentity();
 

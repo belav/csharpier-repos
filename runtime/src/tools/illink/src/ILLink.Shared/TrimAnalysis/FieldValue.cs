@@ -6,5 +6,5 @@
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    internal sealed partial record FieldValue : ValueWithDynamicallyAccessedMembers;
+    partial internal sealed record FieldValue : ValueWithDynamicallyAccessedMembers;
 }

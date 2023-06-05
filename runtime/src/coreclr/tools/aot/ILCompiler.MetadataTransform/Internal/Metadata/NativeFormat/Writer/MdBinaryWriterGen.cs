@@ -11,7 +11,7 @@ using Internal.NativeFormat;
 
 namespace Internal.Metadata.NativeFormat.Writer
 {
-    internal static partial class MdBinaryWriter
+    partial internal static class MdBinaryWriter
     {
         public static void Write(this NativeWriter writer, bool[] values)
         {

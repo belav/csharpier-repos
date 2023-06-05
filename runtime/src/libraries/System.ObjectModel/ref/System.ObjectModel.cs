@@ -6,7 +6,7 @@
 
 namespace System.Collections.ObjectModel
 {
-    public abstract partial class KeyedCollection<TKey, TItem>
+    partial public abstract class KeyedCollection<TKey, TItem>
         : System.Collections.ObjectModel.Collection<TItem>
         where TKey : notnull
     {
@@ -63,7 +63,7 @@ namespace System.Collections.ObjectModel
         }
     }
 
-    public partial class ObservableCollection<T>
+    partial public class ObservableCollection<T>
         : System.Collections.ObjectModel.Collection<T>,
             System.Collections.Specialized.INotifyCollectionChanged,
             System.ComponentModel.INotifyPropertyChanged
@@ -118,7 +118,7 @@ namespace System.Collections.ObjectModel
         protected override void SetItem(int index, T item) { }
     }
 
-    public partial class ReadOnlyObservableCollection<T>
+    partial public class ReadOnlyObservableCollection<T>
         : System.Collections.ObjectModel.ReadOnlyCollection<T>,
             System.Collections.Specialized.INotifyCollectionChanged,
             System.ComponentModel.INotifyPropertyChanged
@@ -165,7 +165,7 @@ namespace System.Collections.ObjectModel
 
 namespace System.Collections.Specialized
 {
-    public partial interface INotifyCollectionChanged
+    partial public interface INotifyCollectionChanged
     {
         event System.Collections.Specialized.NotifyCollectionChangedEventHandler? CollectionChanged;
     }
@@ -179,7 +179,7 @@ namespace System.Collections.Specialized
         Reset = 4,
     }
 
-    public partial class NotifyCollectionChangedEventArgs : System.EventArgs
+    partial public class NotifyCollectionChangedEventArgs : System.EventArgs
     {
         public NotifyCollectionChangedEventArgs(
             System.Collections.Specialized.NotifyCollectionChangedAction action
@@ -277,7 +277,7 @@ namespace System.Collections.Specialized
 
 namespace System.ComponentModel
 {
-    public partial class DataErrorsChangedEventArgs : System.EventArgs
+    partial public class DataErrorsChangedEventArgs : System.EventArgs
     {
         public DataErrorsChangedEventArgs(string? propertyName) { }
 
@@ -287,24 +287,24 @@ namespace System.ComponentModel
         }
     }
 
-    public partial interface INotifyDataErrorInfo
+    partial public interface INotifyDataErrorInfo
     {
         bool HasErrors { get; }
         event System.EventHandler<System.ComponentModel.DataErrorsChangedEventArgs>? ErrorsChanged;
         System.Collections.IEnumerable GetErrors(string? propertyName);
     }
 
-    public partial interface INotifyPropertyChanged
+    partial public interface INotifyPropertyChanged
     {
         event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
     }
 
-    public partial interface INotifyPropertyChanging
+    partial public interface INotifyPropertyChanging
     {
         event System.ComponentModel.PropertyChangingEventHandler? PropertyChanging;
     }
 
-    public partial class PropertyChangedEventArgs : System.EventArgs
+    partial public class PropertyChangedEventArgs : System.EventArgs
     {
         public PropertyChangedEventArgs(string? propertyName) { }
 
@@ -319,7 +319,7 @@ namespace System.ComponentModel
         System.ComponentModel.PropertyChangedEventArgs e
     );
 
-    public partial class PropertyChangingEventArgs : System.EventArgs
+    partial public class PropertyChangingEventArgs : System.EventArgs
     {
         public PropertyChangingEventArgs(string? propertyName) { }
 
@@ -335,7 +335,7 @@ namespace System.ComponentModel
     );
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class TypeConverterAttribute : System.Attribute
+    partial public sealed class TypeConverterAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.TypeConverterAttribute Default;
 
@@ -375,7 +375,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, Inherited = true)]
-    public sealed partial class TypeDescriptionProviderAttribute : System.Attribute
+    partial public sealed class TypeDescriptionProviderAttribute : System.Attribute
     {
         public TypeDescriptionProviderAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -415,7 +415,7 @@ namespace System.ComponentModel
 
 namespace System.Reflection
 {
-    public partial interface ICustomTypeProvider
+    partial public interface ICustomTypeProvider
     {
         System.Type GetCustomType();
     }
@@ -429,7 +429,7 @@ namespace System.Windows.Input
     [System.Windows.Markup.ValueSerializerAttribute(
         "System.Windows.Input.CommandValueSerializer, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, Custom=null"
     )]
-    public partial interface ICommand
+    partial public interface ICommand
     {
         event System.EventHandler? CanExecuteChanged;
         bool CanExecute(object? parameter);
@@ -449,7 +449,7 @@ namespace System.Windows.Markup
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class ValueSerializerAttribute : System.Attribute
+    partial public sealed class ValueSerializerAttribute : System.Attribute
     {
         public ValueSerializerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(

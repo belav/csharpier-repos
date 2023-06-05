@@ -3,10 +3,10 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(0, LogLevel.Debug, "No client certificate found.", EventName = "NoCertificate")]
-    public static partial void NoCertificate(this ILogger logger);
+    partial public static void NoCertificate(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -14,7 +14,7 @@ internal static partial class LoggingExtensions
         "Not https, skipping certificate authentication.",
         EventName = "NotHttps"
     )]
-    public static partial void NotHttps(this ILogger logger);
+    partial public static void NotHttps(this ILogger logger);
 
     [LoggerMessage(
         1,
@@ -22,7 +22,7 @@ internal static partial class LoggingExtensions
         "{CertificateType} certificate rejected, subject was {Subject}.",
         EventName = "CertificateRejected"
     )]
-    public static partial void CertificateRejected(
+    partial public static void CertificateRejected(
         this ILogger logger,
         string certificateType,
         string subject
@@ -34,7 +34,7 @@ internal static partial class LoggingExtensions
         "Certificate validation failed, subject was {Subject}. {ChainErrors}",
         EventName = "CertificateFailedValidation"
     )]
-    public static partial void CertificateFailedValidation(
+    partial public static void CertificateFailedValidation(
         this ILogger logger,
         string subject,
         IList<string> chainErrors

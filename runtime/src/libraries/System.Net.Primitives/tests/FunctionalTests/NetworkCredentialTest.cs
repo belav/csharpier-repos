@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
 {
-    public static partial class NetworkCredentialTest
+    partial public static class NetworkCredentialTest
     {
         [Fact]
         public static void Ctor_Empty_Success()

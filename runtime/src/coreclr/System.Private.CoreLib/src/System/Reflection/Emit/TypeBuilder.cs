@@ -10,7 +10,7 @@ using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class TypeBuilder : TypeInfo
+    partial public sealed class TypeBuilder : TypeInfo
     {
         public override bool IsAssignableFrom([NotNullWhen(true)] TypeInfo? typeInfo)
         {
@@ -174,10 +174,10 @@ namespace System.Reflection.Emit
 
         #region Private Static FCalls
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_SetParentType")]
-        private static partial void SetParentType(QCallModule module, int tdTypeDef, int tkParent);
+        partial private static void SetParentType(QCallModule module, int tdTypeDef, int tkParent);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_AddInterfaceImpl")]
-        private static partial void AddInterfaceImpl(
+        partial private static void AddInterfaceImpl(
             QCallModule module,
             int tdTypeDef,
             int tkInterface
@@ -190,7 +190,7 @@ namespace System.Reflection.Emit
             EntryPoint = "TypeBuilder_DefineMethod",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DefineMethod(
+        partial internal static int DefineMethod(
             QCallModule module,
             int tkParent,
             string name,
@@ -200,7 +200,7 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_DefineMethodSpec")]
-        internal static partial int DefineMethodSpec(
+        partial internal static int DefineMethodSpec(
             QCallModule module,
             int tkParent,
             byte[] signature,
@@ -212,7 +212,7 @@ namespace System.Reflection.Emit
             EntryPoint = "TypeBuilder_DefineField",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DefineField(
+        partial internal static int DefineField(
             QCallModule module,
             int tkParent,
             string name,
@@ -222,7 +222,7 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_SetMethodIL")]
-        private static partial void SetMethodIL(
+        partial private static void SetMethodIL(
             QCallModule module,
             int tk,
             [MarshalAs(UnmanagedType.Bool)] bool isInitLocals,
@@ -238,7 +238,7 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_DefineCustomAttribute")]
-        private static partial void DefineCustomAttribute(
+        partial private static void DefineCustomAttribute(
             QCallModule module,
             int tkAssociate,
             int tkConstructor,
@@ -275,7 +275,7 @@ namespace System.Reflection.Emit
             EntryPoint = "TypeBuilder_DefineProperty",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DefineProperty(
+        partial internal static int DefineProperty(
             QCallModule module,
             int tkParent,
             string name,
@@ -289,7 +289,7 @@ namespace System.Reflection.Emit
             EntryPoint = "TypeBuilder_DefineEvent",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DefineEvent(
+        partial internal static int DefineEvent(
             QCallModule module,
             int tkParent,
             string name,
@@ -298,7 +298,7 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_DefineMethodSemantics")]
-        internal static partial void DefineMethodSemantics(
+        partial internal static void DefineMethodSemantics(
             QCallModule module,
             int tkAssociation,
             MethodSemanticsAttributes semantics,
@@ -306,7 +306,7 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_DefineMethodImpl")]
-        internal static partial void DefineMethodImpl(
+        partial internal static void DefineMethodImpl(
             QCallModule module,
             int tkType,
             int tkBody,
@@ -314,7 +314,7 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_SetMethodImpl")]
-        internal static partial void SetMethodImpl(
+        partial internal static void SetMethodImpl(
             QCallModule module,
             int tkMethod,
             MethodImplAttributes MethodImplAttributes
@@ -325,7 +325,7 @@ namespace System.Reflection.Emit
             EntryPoint = "TypeBuilder_SetParamInfo",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int SetParamInfo(
+        partial internal static int SetParamInfo(
             QCallModule module,
             int tkMethod,
             int iSequence,
@@ -334,21 +334,21 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_GetTokenFromSig")]
-        internal static partial int GetTokenFromSig(
+        partial internal static int GetTokenFromSig(
             QCallModule module,
             byte[] signature,
             int sigLength
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_SetFieldLayoutOffset")]
-        internal static partial void SetFieldLayoutOffset(
+        partial internal static void SetFieldLayoutOffset(
             QCallModule module,
             int fdToken,
             int iOffset
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_SetClassLayout")]
-        internal static partial void SetClassLayout(
+        partial internal static void SetClassLayout(
             QCallModule module,
             int tk,
             PackingSize iPackingSize,
@@ -356,7 +356,7 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_SetConstantValue")]
-        private static unsafe partial void SetConstantValue(
+        partial private static unsafe void SetConstantValue(
             QCallModule module,
             int tk,
             int corType,
@@ -368,7 +368,7 @@ namespace System.Reflection.Emit
             EntryPoint = "TypeBuilder_SetPInvokeData",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial void SetPInvokeData(
+        partial private static void SetPInvokeData(
             QCallModule module,
             string DllName,
             string name,
@@ -871,7 +871,7 @@ namespace System.Reflection.Emit
             EntryPoint = "TypeBuilder_DefineType",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial int DefineType(
+        partial private static int DefineType(
             QCallModule module,
             string fullname,
             int tkParent,
@@ -885,7 +885,7 @@ namespace System.Reflection.Emit
             EntryPoint = "TypeBuilder_DefineGenericParam",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial int DefineGenericParam(
+        partial private static int DefineGenericParam(
             QCallModule module,
             string name,
             int tkParent,
@@ -895,7 +895,7 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "TypeBuilder_TermCreateClass")]
-        private static partial void TermCreateClass(
+        partial private static void TermCreateClass(
             QCallModule module,
             int tk,
             ObjectHandleOnStack type

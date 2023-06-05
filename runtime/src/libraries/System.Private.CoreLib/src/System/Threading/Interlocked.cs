@@ -5,8 +5,9 @@ using System.Runtime.CompilerServices;
 
 namespace System.Threading
 {
+    partial
     /// <summary>Provides atomic operations for variables that are shared by multiple threads.</summary>
-    public static partial class Interlocked
+    public static class Interlocked
     {
         #region Increment
         /// <summary>Increments a specified variable and stores the result, as an atomic operation.</summary>

@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCReadToFollowing : TCXMLReaderBaseGeneral
+    partial public class TCReadToFollowing : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCReadToFollowing
         // Test Case

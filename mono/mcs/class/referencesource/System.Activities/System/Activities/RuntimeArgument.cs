@@ -578,7 +578,7 @@ namespace System.Activities
                 Safe = "Safe because we aren't leaking anything. We are just using pointers to get into the string."
             )]
             [SecuritySafeCritical]
-            public unsafe static UInt32 Calculate(string s)
+            public static unsafe UInt32 Calculate(string s)
             {
                 UInt32 result = 0xffffffff;
                 int byteLength = s.Length * sizeof(char);

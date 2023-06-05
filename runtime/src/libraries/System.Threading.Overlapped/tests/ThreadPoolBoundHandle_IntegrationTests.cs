@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Xunit;
 
-public partial class ThreadPoolBoundHandleTests
+partial public class ThreadPoolBoundHandleTests
 {
     [Fact]
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class PropertyTests
+    partial public static class PropertyTests
     {
         [Fact]
         public static void TestProperties_GetterSetter()

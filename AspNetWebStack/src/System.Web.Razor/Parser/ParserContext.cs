@@ -14,7 +14,7 @@ using System.Web.Razor.Utils;
 
 namespace System.Web.Razor.Parser
 {
-    public partial class ParserContext
+    partial public class ParserContext
     {
         private int? _ownerTaskId;
 
@@ -277,7 +277,7 @@ namespace System.Web.Razor.Parser
 
 #if DEBUG
     [DebuggerDisplay("{Unparsed}")]
-    public partial class ParserContext
+    partial public class ParserContext
     {
         private const int InfiniteLoopCountThreshold = 1000;
         private int _infiniteLoopGuardCount = 0;

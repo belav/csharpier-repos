@@ -3,7 +3,7 @@
 
 namespace Char
 {
-    public partial class PInvoke_Default
+    partial public class PInvoke_Default
     {
         public static void RunTest()
         {
@@ -14,7 +14,7 @@ namespace Char
 
 namespace LPStr
 {
-    public partial class PInvoke_Default
+    partial public class PInvoke_Default
     {
         public static void RunTest()
         {

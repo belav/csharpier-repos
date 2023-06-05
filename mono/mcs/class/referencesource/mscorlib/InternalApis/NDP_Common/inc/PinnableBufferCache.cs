@@ -733,13 +733,13 @@ namespace System
             int gen0BuffersInFreeList
         ) { }
 
-        static internal ulong AddressOf(object obj)
+        internal static ulong AddressOf(object obj)
         {
             return 0;
         }
 
         [System.Security.SecuritySafeCritical]
-        static internal unsafe long AddressOfObject(byte[] array)
+        internal static unsafe long AddressOfObject(byte[] array)
         {
             return 0;
         }
@@ -937,7 +937,7 @@ namespace System
                 WriteEvent(22, cacheName, freeCountBefore);
         }
 
-        static internal ulong AddressOf(object obj)
+        internal static ulong AddressOf(object obj)
         {
             var asByteArray = obj as byte[];
             if (asByteArray != null)
@@ -946,7 +946,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical]
-        static internal unsafe long AddressOfByteArray(byte[] array)
+        internal static unsafe long AddressOfByteArray(byte[] array)
         {
             if (array == null)
                 return 0;

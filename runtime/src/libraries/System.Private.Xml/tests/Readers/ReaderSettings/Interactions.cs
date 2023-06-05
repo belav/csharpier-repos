@@ -7,7 +7,7 @@ using OLEDB.Test.ModuleCore;
 namespace System.Xml.ReaderSettingsTests
 {
     [TestCase(Name = "LineInfo", Desc = "LineInfo")]
-    public partial class TCLineInfo : TCXMLReaderBaseGeneral
+    partial public class TCLineInfo : TCXMLReaderBaseGeneral
     {
         [Variation("Line Number Offset negative values", Pri = 1)]
         public int ln02()

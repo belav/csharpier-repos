@@ -14,7 +14,7 @@ using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests
 {
-    public partial class Atom10FeedFormatterTests
+    partial public class Atom10FeedFormatterTests
     {
         [Fact]
         public void Ctor_Default()

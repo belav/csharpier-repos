@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class TextDocumentState
+    partial internal class TextDocumentState
     {
         public bool TryGetStateChecksums(
             [NotNullWhen(returnValue: true)] out DocumentStateChecksums? stateChecksums

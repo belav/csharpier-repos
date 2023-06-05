@@ -3,7 +3,7 @@
 
 namespace System.Net.Quic;
 
-public sealed partial class QuicConnection
+partial public sealed class QuicConnection
 {
     public static bool IsSupported => false;
 }

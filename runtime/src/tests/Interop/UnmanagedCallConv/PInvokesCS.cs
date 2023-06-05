@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Xunit;
 
-public unsafe static class PInvokesCS
+public static unsafe class PInvokesCS
 {
     private const string UnmanagedCallConvNative = nameof(UnmanagedCallConvNative);
 

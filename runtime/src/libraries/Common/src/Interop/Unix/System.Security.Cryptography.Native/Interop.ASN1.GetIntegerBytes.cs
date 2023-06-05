@@ -7,15 +7,15 @@ using System.Formats.Asn1;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetAsn1IntegerDerSize")]
-        private static partial int GetAsn1IntegerDerSize(SafeSharedAsn1IntegerHandle i);
+        partial private static int GetAsn1IntegerDerSize(SafeSharedAsn1IntegerHandle i);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EncodeAsn1Integer")]
-        private static partial int EncodeAsn1Integer(SafeSharedAsn1IntegerHandle i, byte[] buf);
+        partial private static int EncodeAsn1Integer(SafeSharedAsn1IntegerHandle i, byte[] buf);
 
         internal static byte[] GetAsn1IntegerBytes(SafeSharedAsn1IntegerHandle asn1Integer)
         {

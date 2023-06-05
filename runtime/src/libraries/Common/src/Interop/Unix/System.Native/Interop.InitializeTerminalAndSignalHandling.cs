@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
@@ -13,13 +13,13 @@ internal static partial class Interop
             SetLastError = true
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool InitializeTerminalAndSignalHandling();
+        partial internal static bool InitializeTerminalAndSignalHandling();
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_SetKeypadXmit",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial void SetKeypadXmit(string terminfoString);
+        partial internal static void SetKeypadXmit(string terminfoString);
     }
 }

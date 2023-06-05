@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundDiscardExpression
+    partial internal class BoundDiscardExpression
     {
         public BoundExpression SetInferredTypeWithAnnotations(TypeWithAnnotations type)
         {

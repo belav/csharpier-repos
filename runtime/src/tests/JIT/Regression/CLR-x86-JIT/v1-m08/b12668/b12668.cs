@@ -113,7 +113,7 @@ namespace DefaultNamespace
             return id;
         }
 
-        virtual public void remove()
+        public virtual void remove()
         {
             changeCount(-1);
         }

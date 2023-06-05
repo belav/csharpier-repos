@@ -54,7 +54,7 @@ namespace Novell.Directory.Ldap
         /// <returns> The distinguished name of the entry.
         /// </returns>
         [CLSCompliantAttribute(false)]
-        virtual public System.String DN
+        public virtual System.String DN
         {
             get { return dn; }
         }

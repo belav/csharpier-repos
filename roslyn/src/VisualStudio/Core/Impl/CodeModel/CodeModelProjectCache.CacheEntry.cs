@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
-    internal sealed partial class CodeModelProjectCache
+    partial internal sealed class CodeModelProjectCache
     {
         private readonly struct CacheEntry
         {

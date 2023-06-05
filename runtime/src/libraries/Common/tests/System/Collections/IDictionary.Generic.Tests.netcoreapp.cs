@@ -6,11 +6,12 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
+    partial
     /// <summary>
     /// Contains tests that ensure the correctness of any class that implements the generic
     /// IDictionary interface
     /// </summary>
-    public abstract partial class IDictionary_Generic_Tests<TKey, TValue>
+    public abstract class IDictionary_Generic_Tests<TKey, TValue>
         : ICollection_Generic_Tests<KeyValuePair<TKey, TValue>>
     {
         [Theory]

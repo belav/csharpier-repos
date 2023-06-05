@@ -18,10 +18,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Traverses the symbol table checking for CLS compliance.
     /// </summary>
-    internal partial class ClsComplianceChecker : CSharpSymbolVisitor
+    internal class ClsComplianceChecker : CSharpSymbolVisitor
     {
         private readonly CSharpCompilation _compilation;
         private readonly SyntaxTree _filterTree; //if not null, limit analysis to types residing in this tree

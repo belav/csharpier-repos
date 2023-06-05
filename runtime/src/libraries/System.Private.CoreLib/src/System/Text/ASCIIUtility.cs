@@ -10,7 +10,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Text
 {
-    internal static partial class ASCIIUtility
+    partial internal static class ASCIIUtility
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool AllBytesInUInt64AreAscii(ulong value)

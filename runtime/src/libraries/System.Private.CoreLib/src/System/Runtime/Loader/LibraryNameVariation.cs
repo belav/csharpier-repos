@@ -3,7 +3,7 @@
 
 namespace System.Runtime.Loader
 {
-    internal partial struct LibraryNameVariation
+    partial internal struct LibraryNameVariation
     {
         public string Prefix;
         public string Suffix;

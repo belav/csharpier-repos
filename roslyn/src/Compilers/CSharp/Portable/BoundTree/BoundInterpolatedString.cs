@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundInterpolatedString
+    partial internal class BoundInterpolatedString
     {
         public const string AppendFormattedMethod = "AppendFormatted";
         public const string AppendLiteralMethod = "AppendLiteral";

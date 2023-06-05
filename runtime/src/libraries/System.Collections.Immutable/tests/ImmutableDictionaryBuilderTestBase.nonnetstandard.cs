@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public abstract partial class ImmutableDictionaryBuilderTestBase : ImmutablesTestBase
+    partial public abstract class ImmutableDictionaryBuilderTestBase : ImmutablesTestBase
     {
         [Fact]
         public void TryGetKey()

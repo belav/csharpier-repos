@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class FilterUserControl : System.Web.DynamicData.FilterUserControlBase
+partial public class FilterUserControl : System.Web.DynamicData.FilterUserControlBase
 {
     public event EventHandler SelectedIndexChanged
     {

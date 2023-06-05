@@ -6,10 +6,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
+partial public class RemoteAuthenticatorViewCore<TAuthenticationState>
     where TAuthenticationState : RemoteAuthenticationState
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -17,7 +17,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Processing action {Action}.",
             EventName = nameof(ProcessingAuthenticatorAction)
         )]
-        public static partial void ProcessingAuthenticatorAction(ILogger logger, string? action);
+        partial public static void ProcessingAuthenticatorAction(ILogger logger, string? action);
 
         [LoggerMessage(
             2,
@@ -25,7 +25,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Login completed successfully.",
             EventName = nameof(LoginCompletedSuccessfully)
         )]
-        public static partial void LoginCompletedSuccessfully(ILogger logger);
+        partial public static void LoginCompletedSuccessfully(ILogger logger);
 
         [LoggerMessage(
             3,
@@ -33,7 +33,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Login requires redirect to the identity provider.",
             EventName = nameof(LoginRequiresRedirect)
         )]
-        public static partial void LoginRequiresRedirect(ILogger logger);
+        partial public static void LoginRequiresRedirect(ILogger logger);
 
         [LoggerMessage(
             4,
@@ -41,7 +41,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Navigating to {Url}.",
             EventName = nameof(NavigatingToUrl)
         )]
-        public static partial void NavigatingToUrl(
+        partial public static void NavigatingToUrl(
             ILogger logger,
             [StringSyntax(StringSyntaxAttribute.Uri)] string url
         );
@@ -52,7 +52,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Raising LoginCompleted event.",
             EventName = nameof(InvokingLoginCompletedCallback)
         )]
-        public static partial void InvokingLoginCompletedCallback(ILogger logger);
+        partial public static void InvokingLoginCompletedCallback(ILogger logger);
 
         [LoggerMessage(
             6,
@@ -60,7 +60,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Login operation failed with error '{ErrorMessage}'.",
             EventName = nameof(LoginFailed)
         )]
-        public static partial void LoginFailed(ILogger logger, string errorMessage);
+        partial public static void LoginFailed(ILogger logger, string errorMessage);
 
         [LoggerMessage(
             7,
@@ -68,7 +68,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Login callback failed with error '{ErrorMessage}'.",
             EventName = nameof(LoginCallbackFailed)
         )]
-        public static partial void LoginCallbackFailed(ILogger logger, string errorMessage);
+        partial public static void LoginCallbackFailed(ILogger logger, string errorMessage);
 
         [LoggerMessage(
             8,
@@ -76,7 +76,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Login redirect completed successfully.",
             EventName = nameof(LoginRedirectCompletedSuccessfully)
         )]
-        public static partial void LoginRedirectCompletedSuccessfully(ILogger logger);
+        partial public static void LoginRedirectCompletedSuccessfully(ILogger logger);
 
         [LoggerMessage(
             9,
@@ -84,7 +84,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "The logout was not initiated from within the page.",
             EventName = nameof(LogoutOperationInitiatedExternally)
         )]
-        public static partial void LogoutOperationInitiatedExternally(ILogger logger);
+        partial public static void LogoutOperationInitiatedExternally(ILogger logger);
 
         [LoggerMessage(
             10,
@@ -92,7 +92,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Login completed successfully.",
             EventName = nameof(LoginCompletedSuccessfully)
         )]
-        public static partial void LogoutCompletedSuccessfully(ILogger logger);
+        partial public static void LogoutCompletedSuccessfully(ILogger logger);
 
         [LoggerMessage(
             11,
@@ -100,7 +100,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Logout requires redirect to the identity provider.",
             EventName = nameof(LogoutRequiresRedirect)
         )]
-        public static partial void LogoutRequiresRedirect(ILogger logger);
+        partial public static void LogoutRequiresRedirect(ILogger logger);
 
         [LoggerMessage(
             12,
@@ -108,7 +108,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Raising LogoutCompleted event.",
             EventName = nameof(InvokingLogoutCompletedCallback)
         )]
-        public static partial void InvokingLogoutCompletedCallback(ILogger logger);
+        partial public static void InvokingLogoutCompletedCallback(ILogger logger);
 
         [LoggerMessage(
             13,
@@ -116,7 +116,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Logout operation failed with error '{ErrorMessage}'.",
             EventName = nameof(LogoutFailed)
         )]
-        public static partial void LogoutFailed(ILogger logger, string errorMessage);
+        partial public static void LogoutFailed(ILogger logger, string errorMessage);
 
         [LoggerMessage(
             14,
@@ -124,7 +124,7 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Logout callback failed with error '{ErrorMessage}'.",
             EventName = nameof(LogoutCallbackFailed)
         )]
-        public static partial void LogoutCallbackFailed(ILogger logger, string errorMessage);
+        partial public static void LogoutCallbackFailed(ILogger logger, string errorMessage);
 
         [LoggerMessage(
             15,
@@ -132,6 +132,6 @@ public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
             "Logout redirect completed successfully.",
             EventName = nameof(LogoutRedirectCompletedSuccessfully)
         )]
-        public static partial void LogoutRedirectCompletedSuccessfully(ILogger logger);
+        partial public static void LogoutRedirectCompletedSuccessfully(ILogger logger);
     }
 }

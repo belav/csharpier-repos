@@ -7,7 +7,7 @@ using System.Text;
 
 namespace System.Formats.Cbor
 {
-    public partial class CborWriter
+    partial public class CborWriter
     {
         // Implements major type 2,3 encoding per https://tools.ietf.org/html/rfc7049#section-2.1
 

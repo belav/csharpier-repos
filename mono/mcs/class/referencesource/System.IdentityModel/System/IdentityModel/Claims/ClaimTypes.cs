@@ -41,129 +41,130 @@ namespace System.IdentityModel.Claims
         const string authentication = claimTypeNamespace + "/authentication";
         const string authorizationdecision = claimTypeNamespace + "/authorizationdecision";
 
-        static public string Anonymous
+        public static string Anonymous
         {
             get { return anonymous; }
         }
-        static public string DenyOnlySid
+        public static string DenyOnlySid
         {
             get { return denyOnlySid; }
         }
-        static public string Dns
+        public static string Dns
         {
             get { return dns; }
         }
-        static public string Email
+        public static string Email
         {
             get { return email; }
         }
-        static public string Hash
+        public static string Hash
         {
             get { return hash; }
         }
-        static public string Name
+        public static string Name
         {
             get { return name; }
         }
-        static public string Rsa
+        public static string Rsa
         {
             get { return rsa; }
         }
-        static public string Sid
+        public static string Sid
         {
             get { return sid; }
         }
-        static public string Spn
+        public static string Spn
         {
             get { return spn; }
         }
-        static public string System
+        public static string System
         {
             get { return system; }
         }
-        static public string Thumbprint
+        public static string Thumbprint
         {
             get { return thumbprint; }
         }
-        static public string Upn
+        public static string Upn
         {
             get { return upn; }
         }
-        static public string Uri
+        public static string Uri
         {
             get { return uri; }
         }
-        static public string X500DistinguishedName
+        public static string X500DistinguishedName
         {
             get { return x500DistinguishedName; }
         }
-        static public string NameIdentifier
+        public static string NameIdentifier
         {
             get { return nameidentifier; }
         }
-        static public string Authentication
+        public static string Authentication
         {
             get { return authentication; }
         }
-        static public string AuthorizationDecision
+        public static string AuthorizationDecision
         {
             get { return authorizationdecision; }
         }
 
+        public
         // used in info card
-        static public string GivenName
+        static string GivenName
         {
             get { return givenname; }
         }
-        static public string Surname
+        public static string Surname
         {
             get { return surname; }
         }
-        static public string StreetAddress
+        public static string StreetAddress
         {
             get { return streetaddress; }
         }
-        static public string Locality
+        public static string Locality
         {
             get { return locality; }
         }
-        static public string StateOrProvince
+        public static string StateOrProvince
         {
             get { return stateorprovince; }
         }
-        static public string PostalCode
+        public static string PostalCode
         {
             get { return postalcode; }
         }
-        static public string Country
+        public static string Country
         {
             get { return country; }
         }
-        static public string HomePhone
+        public static string HomePhone
         {
             get { return homephone; }
         }
-        static public string OtherPhone
+        public static string OtherPhone
         {
             get { return otherphone; }
         }
-        static public string MobilePhone
+        public static string MobilePhone
         {
             get { return mobilephone; }
         }
-        static public string DateOfBirth
+        public static string DateOfBirth
         {
             get { return dateofbirth; }
         }
-        static public string Gender
+        public static string Gender
         {
             get { return gender; }
         }
-        static public string PPID
+        public static string PPID
         {
             get { return ppid; }
         }
-        static public string Webpage
+        public static string Webpage
         {
             get { return webpage; }
         }

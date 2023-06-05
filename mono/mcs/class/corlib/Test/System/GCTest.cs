@@ -93,7 +93,7 @@ namespace MonoTests.System
     {
         class MyFinalizeObject
         {
-            public volatile static int finalized;
+            public static volatile int finalized;
 
             ~MyFinalizeObject()
             {

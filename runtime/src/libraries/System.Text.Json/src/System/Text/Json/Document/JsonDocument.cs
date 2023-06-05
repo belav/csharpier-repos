@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.Json
 {
+    partial
     /// <summary>
     ///   Represents the structure of a JSON value in a lightweight, read-only form.
     /// </summary>
@@ -19,7 +20,7 @@ namespace System.Text.Json
     ///   the memory not being returned to the pool, which will cause an increase in GC impact across
     ///   various parts of the framework.
     /// </remarks>
-    public sealed partial class JsonDocument : IDisposable
+    public sealed class JsonDocument : IDisposable
     {
         private ReadOnlyMemory<byte> _utf8Json;
         private MetadataDb _parsedData;

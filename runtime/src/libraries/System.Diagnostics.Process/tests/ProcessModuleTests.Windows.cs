@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class ProcessModuleTests : ProcessTestBase
+    partial public class ProcessModuleTests : ProcessTestBase
     {
         [ConditionalFact(typeof(PathFeatures), nameof(PathFeatures.AreAllLongPathsAvailable))]
         public void LongModuleFileNamesAreSupported()

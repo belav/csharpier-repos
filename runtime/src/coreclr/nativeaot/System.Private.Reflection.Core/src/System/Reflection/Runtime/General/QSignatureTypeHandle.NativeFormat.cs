@@ -14,7 +14,7 @@ using Internal.Runtime.TypeLoader;
 
 namespace System.Reflection.Runtime.General
 {
-    public partial struct QSignatureTypeHandle
+    partial public struct QSignatureTypeHandle
     {
         public QSignatureTypeHandle(MetadataReader reader, Handle handle, bool skipCheck = false)
         {

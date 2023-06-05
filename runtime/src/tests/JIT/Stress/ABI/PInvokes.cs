@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace ABIStress
 {
-    internal partial class Program
+    partial internal class Program
     {
         private static readonly List<DynamicMethod> s_keepRooted = new List<DynamicMethod>();
         private static readonly Dictionary<int, Callee> s_pinvokees = new Dictionary<int, Callee>();

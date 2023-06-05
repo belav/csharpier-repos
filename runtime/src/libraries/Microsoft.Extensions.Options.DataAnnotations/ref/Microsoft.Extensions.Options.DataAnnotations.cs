@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class OptionsBuilderDataAnnotationsExtensions
+    partial public static class OptionsBuilderDataAnnotationsExtensions
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Uses DataAnnotationValidateOptions which is unsafe given that the options type passed in when calling Validate cannot be statically analyzed so its members may be trimmed."
@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
 namespace Microsoft.Extensions.Options
 {
-    public partial class DataAnnotationValidateOptions<
+    partial public class DataAnnotationValidateOptions<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties

@@ -210,6 +210,7 @@ namespace System.Diagnostics.Contracts
         public string? Value => _value;
     }
 
+    partial
     #endregion Attributes
 
     /// <summary>
@@ -222,7 +223,7 @@ namespace System.Diagnostics.Contracts
     /// symbol CONTRACTS_PRECONDITIONS will include all preconditions expressed using Contract.Requires in your
     /// build.  The symbol CONTRACTS_FULL will include postconditions and object invariants, and requires the binary rewriter.
     /// </remarks>
-    public static partial class Contract
+    public static class Contract
     {
         #region User Methods
 

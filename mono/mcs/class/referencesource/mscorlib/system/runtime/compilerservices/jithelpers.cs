@@ -70,7 +70,7 @@ namespace System.Runtime.CompilerServices
         // Wraps object variable into a handle. Used to return managed strings from QCalls.
         // s has to be a local variable on the stack.
         [SecurityCritical]
-        static internal StringHandleOnStack GetStringHandleOnStack(ref string s)
+        internal static StringHandleOnStack GetStringHandleOnStack(ref string s)
         {
             return new StringHandleOnStack(UnsafeCastToStackPointer(ref s));
         }
@@ -78,7 +78,7 @@ namespace System.Runtime.CompilerServices
         // Wraps object variable into a handle. Used to pass managed object references in and out of QCalls.
         // o has to be a local variable on the stack.
         [SecurityCritical]
-        static internal ObjectHandleOnStack GetObjectHandleOnStack<T>(ref T o)
+        internal static ObjectHandleOnStack GetObjectHandleOnStack<T>(ref T o)
             where T : class
         {
             return new ObjectHandleOnStack(UnsafeCastToStackPointer(ref o));
@@ -87,7 +87,7 @@ namespace System.Runtime.CompilerServices
         // Wraps StackCrawlMark into a handle. Used to pass StackCrawlMark to QCalls.
         // stackMark has to be a local variable on the stack.
         [SecurityCritical]
-        static internal StackCrawlMarkHandle GetStackCrawlMarkHandle(ref StackCrawlMark stackMark)
+        internal static StackCrawlMarkHandle GetStackCrawlMarkHandle(ref StackCrawlMark stackMark)
         {
             return new StackCrawlMarkHandle(UnsafeCastToStackPointer(ref stackMark));
         }
@@ -95,7 +95,7 @@ namespace System.Runtime.CompilerServices
 #if _DEBUG
         [SecurityCritical]
         [FriendAccessAllowed]
-        static internal T UnsafeCast<T>(Object o)
+        internal static T UnsafeCast<T>(Object o)
             where T : class
         {
             T ret = UnsafeCastInternal<T>(o);
@@ -106,7 +106,7 @@ namespace System.Runtime.CompilerServices
         // The IL body of this method is not critical, but its body will be replaced with unsafe code, so
         // this method is effectively critical
         [SecurityCritical]
-        static private T UnsafeCastInternal<T>(Object o)
+        private static T UnsafeCastInternal<T>(Object o)
             where T : class
         {
             // The body of this function will be replaced by the EE with unsafe code that just returns o!!!
@@ -114,7 +114,7 @@ namespace System.Runtime.CompilerServices
             throw new InvalidOperationException();
         }
 
-        static internal int UnsafeEnumCast<T>(T val)
+        internal static int UnsafeEnumCast<T>(T val)
             where T : struct // Actually T must be 4 byte (or less) enum
         {
             Contract.Assert(
@@ -132,7 +132,7 @@ namespace System.Runtime.CompilerServices
             return UnsafeEnumCastInternal<T>(val);
         }
 
-        static private int UnsafeEnumCastInternal<T>(T val)
+        private static int UnsafeEnumCastInternal<T>(T val)
             where T : struct // Actually T must be 4 (or less) byte enum
         {
             // should be return (int) val; but C# does not allow, runtime does this magically
@@ -140,7 +140,7 @@ namespace System.Runtime.CompilerServices
             throw new InvalidOperationException();
         }
 
-        static internal long UnsafeEnumCastLong<T>(T val)
+        internal static long UnsafeEnumCastLong<T>(T val)
             where T : struct // Actually T must be 8 byte enum
         {
             Contract.Assert(
@@ -154,7 +154,7 @@ namespace System.Runtime.CompilerServices
             return UnsafeEnumCastLongInternal<T>(val);
         }
 
-        static private long UnsafeEnumCastLongInternal<T>(T val)
+        private static long UnsafeEnumCastLongInternal<T>(T val)
             where T : struct // Actually T must be 8 byte enum
         {
             // should be return (int) val; but C# does not allow, runtime does this magically
@@ -165,7 +165,7 @@ namespace System.Runtime.CompilerServices
         // Internal method for getting a raw pointer for handles in JitHelpers.
         // The reference has to point into a local stack variable in order so it can not be moved by the GC.
         [SecurityCritical]
-        static internal IntPtr UnsafeCastToStackPointer<T>(ref T val)
+        internal static IntPtr UnsafeCastToStackPointer<T>(ref T val)
         {
             IntPtr p = UnsafeCastToStackPointerInternal<T>(ref val);
             Contract.Assert(IsAddressInStack(p), "Pointer not in the stack!");
@@ -173,7 +173,7 @@ namespace System.Runtime.CompilerServices
         }
 
         [SecurityCritical]
-        static private IntPtr UnsafeCastToStackPointerInternal<T>(ref T val)
+        private static IntPtr UnsafeCastToStackPointerInternal<T>(ref T val)
         {
             // The body of this function will be replaced by the EE with unsafe code that just returns val!!!
             // See getILIntrinsicImplementation for how this happens.
@@ -184,7 +184,7 @@ namespace System.Runtime.CompilerServices
         // this method is effectively critical
         [SecurityCritical]
         [FriendAccessAllowed]
-        static internal T UnsafeCast<T>(Object o)
+        internal static T UnsafeCast<T>(Object o)
             where T : class
         {
             // The body of this function will be replaced by the EE with unsafe code that just returns o!!!
@@ -192,7 +192,7 @@ namespace System.Runtime.CompilerServices
             throw new InvalidOperationException();
         }
 
-        static internal int UnsafeEnumCast<T>(T val)
+        internal static int UnsafeEnumCast<T>(T val)
             where T : struct // Actually T must be 4 byte (or less) enum
         {
             // should be return (int) val; but C# does not allow, runtime does this magically
@@ -200,7 +200,7 @@ namespace System.Runtime.CompilerServices
             throw new InvalidOperationException();
         }
 
-        static internal long UnsafeEnumCastLong<T>(T val)
+        internal static long UnsafeEnumCastLong<T>(T val)
             where T : struct // Actually T must be 8 byte enum
         {
             // should be return (long) val; but C# does not allow, runtime does this magically
@@ -209,7 +209,7 @@ namespace System.Runtime.CompilerServices
         }
 
         [SecurityCritical]
-        static internal IntPtr UnsafeCastToStackPointer<T>(ref T val)
+        internal static IntPtr UnsafeCastToStackPointer<T>(ref T val)
         {
             // The body of this function will be replaced by the EE with unsafe code that just returns o!!!
             // See getILIntrinsicImplementation for how this happens.
@@ -221,7 +221,7 @@ namespace System.Runtime.CompilerServices
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static internal void UnsafeSetArrayElement(
+        internal static extern void UnsafeSetArrayElement(
             Object[] target,
             int index,
             Object element
@@ -229,7 +229,7 @@ namespace System.Runtime.CompilerServices
 
         // Used for unsafe pinning of arbitrary objects.
         [System.Security.SecurityCritical] // auto-generated
-        static internal PinningHelper GetPinningHelper(Object o)
+        internal static PinningHelper GetPinningHelper(Object o)
         {
             // This cast is really unsafe - call the private version that does not assert in debug
 #if _DEBUG
@@ -243,7 +243,7 @@ namespace System.Runtime.CompilerServices
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static bool IsAddressInStack(IntPtr ptr);
+        static extern bool IsAddressInStack(IntPtr ptr);
 #endif
     }
 }

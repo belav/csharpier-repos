@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
-    internal sealed partial class CalendarData
+    partial internal sealed class CalendarData
     {
         private bool LoadCalendarDataFromSystemCore(string localeName, CalendarId calendarId) =>
             IcuLoadCalendarDataFromSystem(localeName, calendarId);

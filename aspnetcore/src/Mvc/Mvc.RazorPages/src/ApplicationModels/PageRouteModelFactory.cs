@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-internal sealed partial class PageRouteModelFactory
+partial internal sealed class PageRouteModelFactory
 {
     private static readonly string IndexFileName = "Index" + RazorViewEngine.ViewExtension;
     private readonly RazorPagesOptions _options;
@@ -212,7 +212,7 @@ internal sealed partial class PageRouteModelFactory
         return directory;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -220,6 +220,6 @@ internal sealed partial class PageRouteModelFactory
             "The page at '{FilePath}' is located under the area root directory '/Areas/' but does not follow the path format '/Areas/AreaName/Pages/Directory/FileName.cshtml",
             EventName = "UnsupportedAreaPath"
         )]
-        public static partial void UnsupportedAreaPath(ILogger log, string filePath);
+        partial public static void UnsupportedAreaPath(ILogger log, string filePath);
     }
 }

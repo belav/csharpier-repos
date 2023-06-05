@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class UsingStatementSyntax
+    partial public class UsingStatementSyntax
     {
         public UsingStatementSyntax Update(
             SyntaxToken usingKeyword,
@@ -50,7 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static UsingStatementSyntax UsingStatement(
             SyntaxToken usingKeyword,

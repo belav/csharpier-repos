@@ -8,12 +8,12 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_EcdhKeyAgree(
+        partial private static int AppleCryptoNative_EcdhKeyAgree(
             SafeSecKeyRefHandle privateKey,
             SafeSecKeyRefHandle publicKey,
             out SafeCFDataHandle cfDataOut,

@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class SolutionState
+    partial internal class SolutionState
     {
         /// <summary>
         /// A helper type for mapping <see cref="ISymbol"/> back to an originating <see cref="Project"/>.

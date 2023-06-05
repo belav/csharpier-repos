@@ -12,7 +12,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public abstract partial class BaseSymbolicLinks : FileSystemTest
+    partial public abstract class BaseSymbolicLinks : FileSystemTest
     {
         private string GetTestDirectoryActualCasing() => TestDirectory;
     }

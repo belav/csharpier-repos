@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class PropertyVisibilityTests
+    partial public abstract class PropertyVisibilityTests
     {
         [Theory]
         [InlineData(typeof(ClassWithInitOnlyProperty))]

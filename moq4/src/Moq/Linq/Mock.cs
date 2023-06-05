@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-    public partial class Mock
+    partial public class Mock
     {
         /// <summary>
         /// Creates a mock object of the indicated type.

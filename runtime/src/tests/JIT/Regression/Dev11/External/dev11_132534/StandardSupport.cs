@@ -137,7 +137,7 @@ namespace Test
         }
     }
 
-    public static partial class CallerSide
+    partial public static class CallerSide
     {
         private static string s_lastExecutedCaller;
 

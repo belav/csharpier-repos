@@ -3,12 +3,13 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+partial
 /* https://tools.ietf.org/html/rfc7540#section-6.9
     +-+-------------------------------------------------------------+
     |R|              Window Size Increment (31)                     |
     +-+-------------------------------------------------------------+
 */
-internal partial class Http2Frame
+internal class Http2Frame
 {
     public int WindowUpdateSizeIncrement { get; set; }
 

@@ -18,11 +18,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Manages anonymous types created on module level. All requests for anonymous type symbols
     /// go via the instance of this class, the symbol will be either created or returned from cache.
     /// </summary>
-    internal sealed partial class AnonymousTypeManager
+    internal sealed class AnonymousTypeManager
     {
         /// <summary>
         /// Cache of created anonymous type templates used as an implementation of anonymous

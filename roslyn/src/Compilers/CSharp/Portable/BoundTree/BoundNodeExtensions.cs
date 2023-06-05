@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class BoundNodeExtensions
+    partial internal static class BoundNodeExtensions
     {
         // Return if any node in an array of nodes has errors.
         public static bool HasErrors<T>(this ImmutableArray<T> nodeArray)

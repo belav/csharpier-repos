@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        private abstract partial class UnionIterator<TSource> : IIListProvider<TSource>
+        partial private abstract class UnionIterator<TSource> : IIListProvider<TSource>
         {
             private HashSet<TSource> FillSet()
             {

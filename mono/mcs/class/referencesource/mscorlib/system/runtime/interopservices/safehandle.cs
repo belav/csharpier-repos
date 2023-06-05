@@ -141,8 +141,9 @@ namespace System.Runtime.InteropServices
     [System.Security.SecurityCritical] // auto-generated_required
 #if !FEATURE_CORECLR && !MONO
     [SecurityPermission(SecurityAction.InheritanceDemand, UnmanagedCode = true)]
+    partial
 #endif
-    public abstract partial class SafeHandle : CriticalFinalizerObject, IDisposable
+    public abstract class SafeHandle : CriticalFinalizerObject, IDisposable
     {
         // ! Do not add or rearrange fields as the EE depends on this layout.
         //------------------------------------------------------------------

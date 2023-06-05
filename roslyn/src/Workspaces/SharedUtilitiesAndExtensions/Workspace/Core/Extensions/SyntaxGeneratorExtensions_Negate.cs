@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class SyntaxGeneratorExtensions
+    partial internal static class SyntaxGeneratorExtensions
     {
         private static readonly ImmutableDictionary<
             BinaryOperatorKind,

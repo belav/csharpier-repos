@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    internal static partial class Oids
+    partial internal static class Oids
     {
         // Symmetric encryption algorithms
         internal const string Rc2Cbc = "1.2.840.113549.3.2";

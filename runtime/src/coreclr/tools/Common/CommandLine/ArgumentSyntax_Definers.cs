@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace Internal.CommandLine
 {
-    public partial class ArgumentSyntax
+    partial public class ArgumentSyntax
     {
         private static readonly Func<string, string> s_stringParser = v => v;
         private static readonly Func<string, bool> s_booleanParser = v => bool.Parse(v);

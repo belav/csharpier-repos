@@ -34,7 +34,7 @@ namespace Samples.Common
 {
     public class Shapes
     {
-        static public object[] GetList()
+        public static object[] GetList()
         {
             return new object[]
             {
@@ -55,7 +55,7 @@ namespace Samples.Common
             };
         }
 
-        static public GraphicsPath GetShape(int index)
+        public static GraphicsPath GetShape(int index)
         {
             switch (index)
             {
@@ -93,14 +93,14 @@ namespace Samples.Common
             }
         }
 
-        static private GraphicsPath Arc()
+        private static GraphicsPath Arc()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddArc(20, 20, 200, 200, 60, 120);
             return path;
         }
 
-        static private GraphicsPath Bezier()
+        private static GraphicsPath Bezier()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddBezier(
@@ -112,7 +112,7 @@ namespace Samples.Common
             return path;
         }
 
-        static private GraphicsPath Beziers()
+        private static GraphicsPath Beziers()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddBeziers(
@@ -130,7 +130,7 @@ namespace Samples.Common
             return path;
         }
 
-        static private GraphicsPath ClosedCurve()
+        private static GraphicsPath ClosedCurve()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddClosedCurve(
@@ -145,7 +145,7 @@ namespace Samples.Common
             return path;
         }
 
-        static private GraphicsPath Curve()
+        private static GraphicsPath Curve()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddCurve(
@@ -160,21 +160,21 @@ namespace Samples.Common
             return path;
         }
 
-        static private GraphicsPath Ellipse()
+        private static GraphicsPath Ellipse()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(20, 20, 200, 100);
             return path;
         }
 
-        static private GraphicsPath Line()
+        private static GraphicsPath Line()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddLine(20, 20, 200, 100);
             return path;
         }
 
-        static private GraphicsPath Lines()
+        private static GraphicsPath Lines()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddLines(
@@ -189,14 +189,14 @@ namespace Samples.Common
             return path;
         }
 
-        static private GraphicsPath Pie()
+        private static GraphicsPath Pie()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddPie(20, 20, 200, 200, 60, 120);
             return path;
         }
 
-        static private GraphicsPath Polygon()
+        private static GraphicsPath Polygon()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddPolygon(
@@ -211,14 +211,14 @@ namespace Samples.Common
             return path;
         }
 
-        static private GraphicsPath Rectangle()
+        private static GraphicsPath Rectangle()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddRectangle(new Rectangle(20, 20, 200, 200));
             return path;
         }
 
-        static private GraphicsPath Rectangles()
+        private static GraphicsPath Rectangles()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddRectangles(
@@ -231,7 +231,7 @@ namespace Samples.Common
             return path;
         }
 
-        static private GraphicsPath String()
+        private static GraphicsPath String()
         {
             GraphicsPath path = new GraphicsPath();
             try
@@ -252,7 +252,7 @@ namespace Samples.Common
             return path;
         }
 
-        static private GraphicsPath Complex()
+        private static GraphicsPath Complex()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddPath(Pie(), false);

@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Returns the pid of a terminated child without reaping it.
@@ -21,6 +21,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_WaitIdAnyExitedNoHangNoWait",
             SetLastError = true
         )]
-        internal static partial int WaitIdAnyExitedNoHangNoWait();
+        partial internal static int WaitIdAnyExitedNoHangNoWait();
     }
 }

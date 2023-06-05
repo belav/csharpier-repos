@@ -16,12 +16,12 @@ using BenchmarkDotNet.Toolchains.DotNetCli;
 
 namespace Microsoft.AspNetCore.BenchmarkDotNet.Runner;
 
-sealed partial class Program
+partial sealed class Program
 {
     private static TextWriter _standardOutput;
     private static StringBuilder _standardOutputText;
 
-    static partial void BeforeMain(string[] args);
+    partial static void BeforeMain(string[] args);
 
     private static int Main(string[] args)
     {

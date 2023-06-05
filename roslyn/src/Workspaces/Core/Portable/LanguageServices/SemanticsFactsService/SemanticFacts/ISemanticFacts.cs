@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {
-    internal partial interface ISemanticFacts
+    partial internal interface ISemanticFacts
     {
         string GenerateNameForExpression(
             SemanticModel semanticModel,

@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal abstract partial class CommonCompiler
+    partial internal abstract class CommonCompiler
     {
         /// <summary>
         /// Special informational diagnostic for each programmatic <see cref="Diagnostics.Suppression"/> reported by a <see cref="Diagnostics.DiagnosticSuppressor"/>.

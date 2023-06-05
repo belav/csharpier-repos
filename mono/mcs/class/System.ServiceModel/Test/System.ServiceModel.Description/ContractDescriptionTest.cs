@@ -1193,7 +1193,7 @@ namespace MonoTests.System.ServiceModel.Description
         }
 
         [MessageContract(IsWrapped = true)]
-        public partial class BugX206Response { }
+        partial public class BugX206Response { }
 
         [Test]
         public void TestInterfaceInheritance()

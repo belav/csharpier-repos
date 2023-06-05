@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Numerics
 {
-    internal static partial class BigIntegerCalculator
+    partial internal static class BigIntegerCalculator
     {
         // Executes different exponentiation algorithms, which are
         // based on the classic square-and-multiply method.

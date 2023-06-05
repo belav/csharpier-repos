@@ -6,7 +6,7 @@
 
 namespace System.Dynamic
 {
-    public abstract partial class BinaryOperationBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class BinaryOperationBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected BinaryOperationBinder(System.Linq.Expressions.ExpressionType operation) { }
 
@@ -42,7 +42,7 @@ namespace System.Dynamic
         );
     }
 
-    public abstract partial class BindingRestrictions
+    partial public abstract class BindingRestrictions
     {
         internal BindingRestrictions() { }
 
@@ -91,7 +91,7 @@ namespace System.Dynamic
         }
     }
 
-    public sealed partial class CallInfo
+    partial public sealed class CallInfo
     {
         public CallInfo(int argCount, System.Collections.Generic.IEnumerable<string> argNames) { }
 
@@ -117,7 +117,7 @@ namespace System.Dynamic
         }
     }
 
-    public abstract partial class ConvertBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class ConvertBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected ConvertBinder(System.Type type, bool @explicit) { }
 
@@ -155,7 +155,7 @@ namespace System.Dynamic
         );
     }
 
-    public abstract partial class CreateInstanceBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class CreateInstanceBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected CreateInstanceBinder(System.Dynamic.CallInfo callInfo) { }
 
@@ -191,7 +191,7 @@ namespace System.Dynamic
         );
     }
 
-    public abstract partial class DeleteIndexBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class DeleteIndexBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected DeleteIndexBinder(System.Dynamic.CallInfo callInfo) { }
 
@@ -227,7 +227,7 @@ namespace System.Dynamic
         );
     }
 
-    public abstract partial class DeleteMemberBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class DeleteMemberBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected DeleteMemberBinder(string name, bool ignoreCase) { }
 
@@ -265,7 +265,7 @@ namespace System.Dynamic
         );
     }
 
-    public partial class DynamicMetaObject
+    partial public class DynamicMetaObject
     {
         public static readonly System.Dynamic.DynamicMetaObject[] EmptyMetaObjects;
 
@@ -412,7 +412,7 @@ namespace System.Dynamic
         }
     }
 
-    public abstract partial class DynamicMetaObjectBinder
+    partial public abstract class DynamicMetaObjectBinder
         : System.Runtime.CompilerServices.CallSiteBinder
     {
         protected DynamicMetaObjectBinder() { }
@@ -456,7 +456,7 @@ namespace System.Dynamic
         }
     }
 
-    public partial class DynamicObject : System.Dynamic.IDynamicMetaObjectProvider
+    partial public class DynamicObject : System.Dynamic.IDynamicMetaObjectProvider
     {
         protected DynamicObject() { }
 
@@ -563,7 +563,7 @@ namespace System.Dynamic
         }
     }
 
-    public sealed partial class ExpandoObject
+    partial public sealed class ExpandoObject
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             string,
             object?
@@ -699,7 +699,7 @@ namespace System.Dynamic
         }
     }
 
-    public abstract partial class GetIndexBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class GetIndexBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected GetIndexBinder(System.Dynamic.CallInfo callInfo) { }
 
@@ -735,7 +735,7 @@ namespace System.Dynamic
         );
     }
 
-    public abstract partial class GetMemberBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class GetMemberBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected GetMemberBinder(string name, bool ignoreCase) { }
 
@@ -773,19 +773,19 @@ namespace System.Dynamic
         );
     }
 
-    public partial interface IDynamicMetaObjectProvider
+    partial public interface IDynamicMetaObjectProvider
     {
         System.Dynamic.DynamicMetaObject GetMetaObject(
             System.Linq.Expressions.Expression parameter
         );
     }
 
-    public partial interface IInvokeOnGetBinder
+    partial public interface IInvokeOnGetBinder
     {
         bool InvokeOnGet { get; }
     }
 
-    public abstract partial class InvokeBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class InvokeBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected InvokeBinder(System.Dynamic.CallInfo callInfo) { }
 
@@ -821,7 +821,7 @@ namespace System.Dynamic
         );
     }
 
-    public abstract partial class InvokeMemberBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class InvokeMemberBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected InvokeMemberBinder(string name, bool ignoreCase, System.Dynamic.CallInfo callInfo)
         { }
@@ -872,7 +872,7 @@ namespace System.Dynamic
         );
     }
 
-    public abstract partial class SetIndexBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class SetIndexBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected SetIndexBinder(System.Dynamic.CallInfo callInfo) { }
 
@@ -910,7 +910,7 @@ namespace System.Dynamic
         );
     }
 
-    public abstract partial class SetMemberBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class SetMemberBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected SetMemberBinder(string name, bool ignoreCase) { }
 
@@ -950,7 +950,7 @@ namespace System.Dynamic
         );
     }
 
-    public abstract partial class UnaryOperationBinder : System.Dynamic.DynamicMetaObjectBinder
+    partial public abstract class UnaryOperationBinder : System.Dynamic.DynamicMetaObjectBinder
     {
         protected UnaryOperationBinder(System.Linq.Expressions.ExpressionType operation) { }
 
@@ -987,30 +987,30 @@ namespace System.Dynamic
 
 namespace System.Linq
 {
-    public partial interface IOrderedQueryable
+    partial public interface IOrderedQueryable
         : System.Collections.IEnumerable,
             System.Linq.IQueryable { }
 
-    public partial interface IOrderedQueryable<out T>
+    partial public interface IOrderedQueryable<out T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable,
             System.Linq.IOrderedQueryable,
             System.Linq.IQueryable,
             System.Linq.IQueryable<T> { }
 
-    public partial interface IQueryable : System.Collections.IEnumerable
+    partial public interface IQueryable : System.Collections.IEnumerable
     {
         System.Type ElementType { get; }
         System.Linq.Expressions.Expression Expression { get; }
         System.Linq.IQueryProvider Provider { get; }
     }
 
-    public partial interface IQueryable<out T>
+    partial public interface IQueryable<out T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable,
             System.Linq.IQueryable { }
 
-    public partial interface IQueryProvider
+    partial public interface IQueryProvider
     {
         System.Linq.IQueryable CreateQuery(System.Linq.Expressions.Expression expression);
         System.Linq.IQueryable<TElement> CreateQuery<TElement>(
@@ -1023,7 +1023,7 @@ namespace System.Linq
 
 namespace System.Linq.Expressions
 {
-    public partial class BinaryExpression : System.Linq.Expressions.Expression
+    partial public class BinaryExpression : System.Linq.Expressions.Expression
     {
         internal BinaryExpression() { }
 
@@ -1078,7 +1078,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class BlockExpression : System.Linq.Expressions.Expression
+    partial public class BlockExpression : System.Linq.Expressions.Expression
     {
         internal BlockExpression() { }
 
@@ -1119,7 +1119,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class CatchBlock
+    partial public sealed class CatchBlock
     {
         internal CatchBlock() { }
 
@@ -1155,7 +1155,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class ConditionalExpression : System.Linq.Expressions.Expression
+    partial public class ConditionalExpression : System.Linq.Expressions.Expression
     {
         internal ConditionalExpression() { }
 
@@ -1197,7 +1197,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class ConstantExpression : System.Linq.Expressions.Expression
+    partial public class ConstantExpression : System.Linq.Expressions.Expression
     {
         internal ConstantExpression() { }
 
@@ -1222,7 +1222,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class DebugInfoExpression : System.Linq.Expressions.Expression
+    partial public class DebugInfoExpression : System.Linq.Expressions.Expression
     {
         internal DebugInfoExpression() { }
 
@@ -1267,7 +1267,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class DefaultExpression : System.Linq.Expressions.Expression
+    partial public sealed class DefaultExpression : System.Linq.Expressions.Expression
     {
         internal DefaultExpression() { }
 
@@ -1288,7 +1288,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class DynamicExpression
+    partial public class DynamicExpression
         : System.Linq.Expressions.Expression,
             System.Linq.Expressions.IArgumentProvider,
             System.Linq.Expressions.IDynamicExpression
@@ -1474,7 +1474,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public abstract partial class DynamicExpressionVisitor
+    partial public abstract class DynamicExpressionVisitor
         : System.Linq.Expressions.ExpressionVisitor
     {
         protected DynamicExpressionVisitor() { }
@@ -1487,7 +1487,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class ElementInit : System.Linq.Expressions.IArgumentProvider
+    partial public sealed class ElementInit : System.Linq.Expressions.IArgumentProvider
     {
         internal ElementInit() { }
 
@@ -1524,7 +1524,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public abstract partial class Expression
+    partial public abstract class Expression
     {
         protected Expression() { }
 
@@ -4349,7 +4349,7 @@ namespace System.Linq.Expressions
         IsFalse = 84,
     }
 
-    public abstract partial class ExpressionVisitor
+    partial public abstract class ExpressionVisitor
     {
         protected ExpressionVisitor() { }
 
@@ -4632,7 +4632,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class Expression<TDelegate> : System.Linq.Expressions.LambdaExpression
+    partial public sealed class Expression<TDelegate> : System.Linq.Expressions.LambdaExpression
     {
         internal Expression() { }
 
@@ -4669,7 +4669,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class GotoExpression : System.Linq.Expressions.Expression
+    partial public sealed class GotoExpression : System.Linq.Expressions.Expression
     {
         internal GotoExpression() { }
 
@@ -4718,20 +4718,20 @@ namespace System.Linq.Expressions
         Continue = 3,
     }
 
-    public partial interface IArgumentProvider
+    partial public interface IArgumentProvider
     {
         int ArgumentCount { get; }
         System.Linq.Expressions.Expression GetArgument(int index);
     }
 
-    public partial interface IDynamicExpression : System.Linq.Expressions.IArgumentProvider
+    partial public interface IDynamicExpression : System.Linq.Expressions.IArgumentProvider
     {
         System.Type DelegateType { get; }
         object CreateCallSite();
         System.Linq.Expressions.Expression Rewrite(System.Linq.Expressions.Expression[] args);
     }
 
-    public sealed partial class IndexExpression
+    partial public sealed class IndexExpression
         : System.Linq.Expressions.Expression,
             System.Linq.Expressions.IArgumentProvider
     {
@@ -4785,7 +4785,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class InvocationExpression
+    partial public sealed class InvocationExpression
         : System.Linq.Expressions.Expression,
             System.Linq.Expressions.IArgumentProvider
     {
@@ -4835,7 +4835,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class LabelExpression : System.Linq.Expressions.Expression
+    partial public sealed class LabelExpression : System.Linq.Expressions.Expression
     {
         internal LabelExpression() { }
 
@@ -4872,7 +4872,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class LabelTarget
+    partial public sealed class LabelTarget
     {
         internal LabelTarget() { }
 
@@ -4891,7 +4891,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public abstract partial class LambdaExpression : System.Linq.Expressions.Expression
+    partial public abstract class LambdaExpression : System.Linq.Expressions.Expression
     {
         internal LambdaExpression() { }
 
@@ -4942,7 +4942,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class ListInitExpression : System.Linq.Expressions.Expression
+    partial public sealed class ListInitExpression : System.Linq.Expressions.Expression
     {
         internal ListInitExpression() { }
 
@@ -4988,7 +4988,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class LoopExpression : System.Linq.Expressions.Expression
+    partial public sealed class LoopExpression : System.Linq.Expressions.Expression
     {
         internal LoopExpression() { }
 
@@ -5030,7 +5030,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class MemberAssignment : System.Linq.Expressions.MemberBinding
+    partial public sealed class MemberAssignment : System.Linq.Expressions.MemberBinding
     {
         internal MemberAssignment()
             : base(
@@ -5051,7 +5051,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public abstract partial class MemberBinding
+    partial public abstract class MemberBinding
     {
         [System.ObsoleteAttribute("This constructor has been deprecated and is not supported.")]
         protected MemberBinding(
@@ -5081,7 +5081,7 @@ namespace System.Linq.Expressions
         ListBinding = 2,
     }
 
-    public partial class MemberExpression : System.Linq.Expressions.Expression
+    partial public class MemberExpression : System.Linq.Expressions.Expression
     {
         internal MemberExpression() { }
 
@@ -5113,7 +5113,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class MemberInitExpression : System.Linq.Expressions.Expression
+    partial public sealed class MemberInitExpression : System.Linq.Expressions.Expression
     {
         internal MemberInitExpression() { }
 
@@ -5159,7 +5159,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class MemberListBinding : System.Linq.Expressions.MemberBinding
+    partial public sealed class MemberListBinding : System.Linq.Expressions.MemberBinding
     {
         internal MemberListBinding()
             : base(
@@ -5180,7 +5180,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class MemberMemberBinding : System.Linq.Expressions.MemberBinding
+    partial public sealed class MemberMemberBinding : System.Linq.Expressions.MemberBinding
     {
         internal MemberMemberBinding()
             : base(
@@ -5201,7 +5201,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class MethodCallExpression
+    partial public class MethodCallExpression
         : System.Linq.Expressions.Expression,
             System.Linq.Expressions.IArgumentProvider
     {
@@ -5255,7 +5255,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class NewArrayExpression : System.Linq.Expressions.Expression
+    partial public class NewArrayExpression : System.Linq.Expressions.Expression
     {
         internal NewArrayExpression() { }
 
@@ -5283,7 +5283,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class NewExpression
+    partial public class NewExpression
         : System.Linq.Expressions.Expression,
             System.Linq.Expressions.IArgumentProvider
     {
@@ -5336,7 +5336,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class ParameterExpression : System.Linq.Expressions.Expression
+    partial public class ParameterExpression : System.Linq.Expressions.Expression
     {
         internal ParameterExpression() { }
 
@@ -5365,7 +5365,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class RuntimeVariablesExpression : System.Linq.Expressions.Expression
+    partial public sealed class RuntimeVariablesExpression : System.Linq.Expressions.Expression
     {
         internal RuntimeVariablesExpression() { }
 
@@ -5397,7 +5397,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class SwitchCase
+    partial public sealed class SwitchCase
     {
         internal SwitchCase() { }
 
@@ -5424,7 +5424,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class SwitchExpression : System.Linq.Expressions.Expression
+    partial public sealed class SwitchExpression : System.Linq.Expressions.Expression
     {
         internal SwitchExpression() { }
 
@@ -5470,7 +5470,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class SymbolDocumentInfo
+    partial public class SymbolDocumentInfo
     {
         internal SymbolDocumentInfo() { }
 
@@ -5492,7 +5492,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class TryExpression : System.Linq.Expressions.Expression
+    partial public sealed class TryExpression : System.Linq.Expressions.Expression
     {
         internal TryExpression() { }
 
@@ -5539,7 +5539,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class TypeBinaryExpression : System.Linq.Expressions.Expression
+    partial public sealed class TypeBinaryExpression : System.Linq.Expressions.Expression
     {
         internal TypeBinaryExpression() { }
 
@@ -5575,7 +5575,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public sealed partial class UnaryExpression : System.Linq.Expressions.Expression
+    partial public sealed class UnaryExpression : System.Linq.Expressions.Expression
     {
         internal UnaryExpression() { }
 
@@ -5631,7 +5631,7 @@ namespace System.Linq.Expressions
 
 namespace System.Runtime.CompilerServices
 {
-    public partial class CallSite
+    partial public class CallSite
     {
         internal CallSite() { }
 
@@ -5649,7 +5649,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    public abstract partial class CallSiteBinder
+    partial public abstract class CallSiteBinder
     {
         protected CallSiteBinder() { }
 
@@ -5676,7 +5676,7 @@ namespace System.Runtime.CompilerServices
             where T : class { }
     }
 
-    public static partial class CallSiteHelpers
+    partial public static class CallSiteHelpers
     {
         public static bool IsInternalFrame(System.Reflection.MethodBase mb)
         {
@@ -5684,7 +5684,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    public partial class CallSite<T> : System.Runtime.CompilerServices.CallSite
+    partial public class CallSite<T> : System.Runtime.CompilerServices.CallSite
         where T : class
     {
         internal CallSite() { }
@@ -5703,7 +5703,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    public abstract partial class DebugInfoGenerator
+    partial public abstract class DebugInfoGenerator
     {
         protected DebugInfoGenerator() { }
 
@@ -5732,7 +5732,7 @@ namespace System.Runtime.CompilerServices
             | System.AttributeTargets.ReturnValue
             | System.AttributeTargets.Struct
     )]
-    public sealed partial class DynamicAttribute : System.Attribute
+    partial public sealed class DynamicAttribute : System.Attribute
     {
         public DynamicAttribute() { }
 
@@ -5744,13 +5744,13 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    public partial interface IRuntimeVariables
+    partial public interface IRuntimeVariables
     {
         int Count { get; }
         object? this[int index] { get; set; }
     }
 
-    public sealed partial class ReadOnlyCollectionBuilder<T>
+    partial public sealed class ReadOnlyCollectionBuilder<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IList<T>,
@@ -5878,7 +5878,7 @@ namespace System.Runtime.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial class RuleCache<T>
+    partial public class RuleCache<T>
         where T : class
     {
         internal RuleCache() { }

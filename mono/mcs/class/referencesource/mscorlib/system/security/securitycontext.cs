@@ -180,8 +180,9 @@ namespace System.Security
 #endif
 #if FEATURE_COMPRESSEDSTACK
         private volatile CompressedStack _compressedStack;
+        private
 #endif
-        static private volatile SecurityContext _fullTrustSC;
+        static volatile SecurityContext _fullTrustSC;
 
         internal volatile bool isNewCapture = false;
         internal volatile SecurityContextDisableFlow _disableFlow =
@@ -237,7 +238,7 @@ namespace System.Security
             }
         }
 
-        static internal SecurityContext FullTrustSecurityContext
+        internal static SecurityContext FullTrustSecurityContext
         {
             [System.Security.SecurityCritical] // auto-generated
             get
@@ -468,7 +469,7 @@ namespace System.Security
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Process)]
-        static internal void runTryCode(Object userData)
+        internal static void runTryCode(Object userData)
         {
             SecurityContextRunData rData = (SecurityContextRunData)userData;
             rData.scsw = SetSecurityContext(
@@ -481,14 +482,14 @@ namespace System.Security
 
         [System.Security.SecurityCritical] // auto-generated
         [PrePrepareMethod]
-        static internal void runFinallyCode(Object userData, bool exceptionThrown)
+        internal static void runFinallyCode(Object userData, bool exceptionThrown)
         {
             SecurityContextRunData rData = (SecurityContextRunData)userData;
             rData.scsw.Undo();
         }
 
-        static volatile internal RuntimeHelpers.TryCode tryCode;
-        static volatile internal RuntimeHelpers.CleanupCode cleanupCode;
+        internal static volatile RuntimeHelpers.TryCode tryCode;
+        internal static volatile RuntimeHelpers.CleanupCode cleanupCode;
 
         // Internal API that gets called from public SetSecurityContext and from SetExecutionContext
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
@@ -645,7 +646,7 @@ namespace System.Security
         // create a clone from a non-existing SecurityContext
         [System.Security.SecurityCritical] // auto-generated
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static internal SecurityContext Capture(
+        internal static SecurityContext Capture(
             ExecutionContext.Reader currThreadEC,
             ref StackCrawlMark stackMark
         )
@@ -662,7 +663,7 @@ namespace System.Security
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        static private SecurityContext CaptureCore(
+        private static SecurityContext CaptureCore(
             ExecutionContext.Reader currThreadEC,
             ref StackCrawlMark stackMark
         )
@@ -690,7 +691,7 @@ namespace System.Security
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        static internal SecurityContext CreateFullTrustSecurityContext()
+        internal static SecurityContext CreateFullTrustSecurityContext()
         {
             SecurityContext sc = new SecurityContext();
             sc.isNewCapture = true;
@@ -708,9 +709,10 @@ namespace System.Security
             return sc;
         }
 
+        internal
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
 
-        static internal bool AlwaysFlowImpersonationPolicy
+        static bool AlwaysFlowImpersonationPolicy
         {
             get { return _alwaysFlowImpersonationPolicy; }
         }
@@ -720,7 +722,7 @@ namespace System.Security
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static internal WindowsIdentity GetCurrentWI(ExecutionContext.Reader threadEC)
+        internal static WindowsIdentity GetCurrentWI(ExecutionContext.Reader threadEC)
         {
             return GetCurrentWI(threadEC, _alwaysFlowImpersonationPolicy);
         }
@@ -729,7 +731,7 @@ namespace System.Security
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static internal WindowsIdentity GetCurrentWI(
+        internal static WindowsIdentity GetCurrentWI(
             ExecutionContext.Reader threadEC,
             bool cachedAlwaysFlowImpersonationPolicy
         )
@@ -747,7 +749,7 @@ namespace System.Security
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        static internal void RestoreCurrentWI(
+        internal static void RestoreCurrentWI(
             ExecutionContext.Reader currentEC,
             ExecutionContext.Reader prevEC,
             WindowsIdentity targetWI,
@@ -778,7 +780,7 @@ namespace System.Security
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        static private void RestoreCurrentWIInternal(WindowsIdentity targetWI)
+        private static void RestoreCurrentWIInternal(WindowsIdentity targetWI)
         {
             int hr = Win32.RevertToSelf();
             if (hr < 0)
@@ -807,7 +809,7 @@ namespace System.Security
 
         [System.Security.SecurityCritical] // auto-generated
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static internal bool CurrentlyInDefaultFTSecurityContext(ExecutionContext.Reader threadEC)
+        internal static bool CurrentlyInDefaultFTSecurityContext(ExecutionContext.Reader threadEC)
         {
             return (IsDefaultThreadSecurityInfo() && GetCurrentWI(threadEC) == null);
         }
@@ -818,7 +820,7 @@ namespace System.Security
             return (CompressedStack == null || CompressedStack.CompressedStackHandle == null);
         }
 
-        static internal bool CurrentlyInDefaultFTSecurityContext(ExecutionContext threadEC)
+        internal static bool CurrentlyInDefaultFTSecurityContext(ExecutionContext threadEC)
         {
             return (IsDefaultThreadSecurityInfo());
         }
@@ -830,7 +832,7 @@ namespace System.Security
             MethodImplAttribute(MethodImplOptions.InternalCall),
             ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
         ]
-        internal extern static WindowsImpersonationFlowMode GetImpersonationFlowMode();
+        internal static extern WindowsImpersonationFlowMode GetImpersonationFlowMode();
 #endif
 
         [System.Security.SecurityCritical] // auto-generated
@@ -839,7 +841,7 @@ namespace System.Security
             MethodImplAttribute(MethodImplOptions.InternalCall),
             ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
         ]
-        internal extern static bool IsDefaultThreadSecurityInfo();
+        internal static extern bool IsDefaultThreadSecurityInfo();
     }
 #endif // FEATURE_COMPRESSEDSTACK
 }

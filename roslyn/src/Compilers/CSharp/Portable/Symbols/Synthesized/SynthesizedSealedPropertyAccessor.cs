@@ -15,13 +15,13 @@ using Cci = Microsoft.Cci;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// If a sealed override property defines fewer accessors than the
     /// original virtual property, it is necessary to synthesize a sealed
     /// accessor so that the accessor will not be overridable from metadata.
     /// </summary>
-    internal sealed partial class SynthesizedSealedPropertyAccessor
-        : SynthesizedInstanceMethodSymbol
+    internal sealed class SynthesizedSealedPropertyAccessor : SynthesizedInstanceMethodSymbol
     {
         private readonly PropertySymbol _property;
         private readonly MethodSymbol _overriddenAccessor;

@@ -3,14 +3,14 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         // Note: CertDeleteCertificateFromStore always calls CertFreeCertificateContext on pCertContext, even if an error is encountered.
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CertDeleteCertificateFromStore(
+        partial internal static unsafe bool CertDeleteCertificateFromStore(
             CERT_CONTEXT* pCertContext
         );
     }

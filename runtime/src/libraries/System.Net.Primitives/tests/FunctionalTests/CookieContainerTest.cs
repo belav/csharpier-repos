@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
 {
-    public partial class CookieContainerTest
+    partial public class CookieContainerTest
     {
         private const string u1 = ".url1.com"; // Basic domain
         private const string u2 = "127.0.0.1"; // Local domain

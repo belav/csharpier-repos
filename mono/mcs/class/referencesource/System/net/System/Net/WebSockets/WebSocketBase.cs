@@ -1815,7 +1815,7 @@ namespace System.Net.WebSockets
             }
         }
 
-        private async static void OnKeepAlive(object sender)
+        private static async void OnKeepAlive(object sender)
         {
             Contract.Assert(sender != null, "'sender' MUST NOT be NULL.");
             Contract.Assert(

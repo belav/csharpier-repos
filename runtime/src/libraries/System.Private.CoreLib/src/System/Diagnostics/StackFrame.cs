@@ -8,10 +8,11 @@ using System.Runtime.CompilerServices;
 
 namespace System.Diagnostics
 {
+    partial
     /// <summary>
     /// There is no good reason for the methods of this class to be virtual.
     /// </summary>
-    public partial class StackFrame
+    public class StackFrame
     {
         /// <summary>
         /// Reflection information for the method if available, null otherwise.

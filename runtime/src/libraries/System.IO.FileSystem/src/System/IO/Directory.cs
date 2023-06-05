@@ -17,7 +17,7 @@ using System.IO.Enumeration;
 namespace System.IO
 #endif
 {
-    public static partial class Directory
+    partial public static class Directory
     {
         public static DirectoryInfo? GetParent(string path)
         {

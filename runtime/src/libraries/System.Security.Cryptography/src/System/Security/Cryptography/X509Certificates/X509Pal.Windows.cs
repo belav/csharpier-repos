@@ -3,9 +3,9 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal partial class X509Pal : IX509Pal
+    partial internal class X509Pal : IX509Pal
     {
-        private static partial IX509Pal BuildSingleton()
+        partial private static IX509Pal BuildSingleton()
         {
             return new X509Pal();
         }

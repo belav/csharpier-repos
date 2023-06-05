@@ -15,11 +15,12 @@ using Internal.Reflection.Execution.MethodInvokers;
 
 namespace Internal.Reflection.Execution
 {
+    partial
     //==========================================================================================================
     // These ExecutionEnvironment entrypoints provide basic runtime allocation and policy services to
     // Reflection. Our implementation merely forwards to System.Private.CoreLib.
     //==========================================================================================================
-    internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
+    internal sealed class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
         public sealed override object NewObject(RuntimeTypeHandle typeHandle)
         {

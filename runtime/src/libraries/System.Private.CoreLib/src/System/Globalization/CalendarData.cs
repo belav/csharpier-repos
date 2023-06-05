@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
+    partial
     // List of calendar data
     // Note the we cache overrides.
     // Note that localized names (resource names) aren't available from here.
@@ -12,7 +13,7 @@ namespace System.Globalization
     //  NOTE: Calendars depend on the locale name that creates it.  Only a few
     //        properties are available without locales using CalendarData.GetCalendar(CalendarData)
     //
-    internal sealed partial class CalendarData
+    internal sealed class CalendarData
     {
         // Max calendars
         internal const int MAX_CALENDARS = 23;

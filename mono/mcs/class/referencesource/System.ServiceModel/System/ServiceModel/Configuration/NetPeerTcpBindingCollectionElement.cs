@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
 
     [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
-    public partial class NetPeerTcpBindingCollectionElement
+    partial public class NetPeerTcpBindingCollectionElement
         : StandardBindingCollectionElement<NetPeerTcpBinding, NetPeerTcpBindingElement>
     {
         internal static NetPeerTcpBindingCollectionElement GetBindingCollectionElement()

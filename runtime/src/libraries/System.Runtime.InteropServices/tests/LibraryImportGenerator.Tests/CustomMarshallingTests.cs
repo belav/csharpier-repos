@@ -14,48 +14,48 @@ namespace LibraryImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        internal partial class Stateless
+        partial internal class Stateless
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "stringcontainer_deepduplicate")]
-            public static partial void DeepDuplicateStrings(
+            partial public static void DeepDuplicateStrings(
                 StringContainer strings,
                 out StringContainer pStringsOut
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "stringcontainer_reverse_strings")]
-            public static partial void ReverseStrings(ref StringContainer strings);
+            partial public static void ReverseStrings(ref StringContainer strings);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes_as_double")]
-            public static partial double GetLongBytesAsDouble(
+            partial public static double GetLongBytesAsDouble(
                 [MarshalUsing(typeof(DoubleToLongMarshaller))] double d
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_bytes_as_double_big_endian")]
-            public static partial double GetBytesAsDoubleBigEndian(
+            partial public static double GetBytesAsDoubleBigEndian(
                 [MarshalUsing(typeof(DoubleToBytesBigEndianMarshaller))] double d
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "negate_bools")]
-            public static partial void NegateBools(
+            partial public static void NegateBools(
                 BoolStruct boolStruct,
                 out BoolStruct pBoolStructOut
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_bools_ref")]
             [return: MarshalAs(UnmanagedType.U1)]
-            public static partial bool AndBoolsRef(in BoolStruct boolStruct);
+            partial public static bool AndBoolsRef(in BoolStruct boolStruct);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
-            public static partial IntWrapper DoubleIntRef(IntWrapper pInt);
+            partial public static IntWrapper DoubleIntRef(IntWrapper pInt);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
-            public static partial IntWrapperWithoutGetPinnableReference DoubleIntRef(
+            partial public static IntWrapperWithoutGetPinnableReference DoubleIntRef(
                 IntWrapperWithoutGetPinnableReference pInt
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
             [return: MarshalUsing(typeof(IntGuaranteedUnmarshal))]
-            public static partial int GuaranteedUnmarshal(
+            partial public static int GuaranteedUnmarshal(
                 [MarshalUsing(typeof(ExceptionOnUnmarshal))] out int ret
             );
 
@@ -76,41 +76,41 @@ namespace LibraryImportGenerator.IntegrationTests
             }
         }
 
-        internal partial class Stateful
+        partial internal class Stateful
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_return_int")]
-            public static partial IntWrapperWithNotification SubtractInts(
+            partial public static IntWrapperWithNotification SubtractInts(
                 IntWrapperWithNotification x,
                 IntWrapperWithNotification y
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_out_int")]
-            public static partial void SubtractInts(
+            partial public static void SubtractInts(
                 IntWrapperWithNotification x,
                 IntWrapperWithNotification y,
                 out IntWrapperWithNotification result
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "negate_bools")]
-            public static partial void NegateBools(
+            partial public static void NegateBools(
                 [MarshalUsing(typeof(BoolStructMarshallerStateful))] BoolStruct boolStruct,
                 [MarshalUsing(typeof(BoolStructMarshallerStateful))] out BoolStruct pBoolStructOut
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_bools_ref")]
             [return: MarshalAs(UnmanagedType.U1)]
-            public static partial bool AndBoolsRef(
+            partial public static bool AndBoolsRef(
                 [MarshalUsing(typeof(BoolStructMarshallerStateful))] in BoolStruct boolStruct
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
-            public static partial IntWrapperWithoutGetPinnableReference DoubleIntRef(
+            partial public static IntWrapperWithoutGetPinnableReference DoubleIntRef(
                 [MarshalUsing(typeof(IntWrapperWithoutGetPinnableReferenceStatefulMarshaller))]
                     IntWrapperWithoutGetPinnableReference pInt
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
-            public static partial IntWrapperWithoutGetPinnableReference DoubleIntRefNoAlloc(
+            partial public static IntWrapperWithoutGetPinnableReference DoubleIntRefNoAlloc(
                 [MarshalUsing(
                     typeof(IntWrapperWithoutGetPinnableReferenceStatefulNoAllocMarshaller)
                 )]
@@ -119,13 +119,13 @@ namespace LibraryImportGenerator.IntegrationTests
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
             [return: MarshalUsing(typeof(IntWrapperMarshallerStateful))]
-            public static partial IntWrapper DoubleIntRef(
+            partial public static IntWrapper DoubleIntRef(
                 [MarshalUsing(typeof(IntWrapperMarshallerStateful))] IntWrapper pInt
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
             [return: MarshalUsing(typeof(IntGuaranteedUnmarshal))]
-            public static partial int GuaranteedUnmarshal(
+            partial public static int GuaranteedUnmarshal(
                 [MarshalUsing(typeof(ExceptionOnUnmarshal))] out int ret
             );
 
@@ -154,12 +154,12 @@ namespace LibraryImportGenerator.IntegrationTests
         }
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "reverse_replace_ref_ushort")]
-        public static partial void ReverseReplaceString(
+        partial public static void ReverseReplaceString(
             [MarshalUsing(typeof(Utf16StringMarshaller))] ref string s
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_length_ushort")]
-        public static partial int ReturnStringLength(
+        partial public static int ReturnStringLength(
             [MarshalUsing(typeof(Utf16StringMarshaller))] string s
         );
     }

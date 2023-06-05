@@ -46,7 +46,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class WebHttpBindingCollectionElement
+    partial public class WebHttpBindingCollectionElement
         : StandardBindingCollectionElement<WebHttpBinding, WebHttpBindingElement>
     {
         // Static Fields

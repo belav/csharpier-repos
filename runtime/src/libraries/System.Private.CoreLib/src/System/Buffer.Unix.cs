@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public static partial class Buffer
+    partial public static class Buffer
     {
 #if TARGET_ARM64 || TARGET_LOONGARCH64
         // Managed code is currently faster than glibc unoptimized memmove

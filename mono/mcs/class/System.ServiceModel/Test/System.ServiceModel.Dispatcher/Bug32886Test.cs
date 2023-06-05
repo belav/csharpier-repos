@@ -237,7 +237,7 @@ public interface TempConvertSoap
     System.ComponentModel.EditorBrowsableState.Advanced
 )]
 [System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
-public partial class FahrenheitToCelsiusRequest
+partial public class FahrenheitToCelsiusRequest
 {
     [System.ServiceModel.MessageBodyMemberAttribute(
         Name = "FahrenheitToCelsius",
@@ -262,7 +262,7 @@ public partial class FahrenheitToCelsiusRequest
 [System.Runtime.Serialization.DataContractAttribute(
     Namespace = "http://www.w3schools.com/webservices/"
 )]
-public partial class FahrenheitToCelsiusRequestBody
+partial public class FahrenheitToCelsiusRequestBody
 {
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public string Fahrenheit;
@@ -281,7 +281,7 @@ public partial class FahrenheitToCelsiusRequestBody
     System.ComponentModel.EditorBrowsableState.Advanced
 )]
 [System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
-public partial class FahrenheitToCelsiusResponse
+partial public class FahrenheitToCelsiusResponse
 {
     [System.ServiceModel.MessageBodyMemberAttribute(
         Name = "FahrenheitToCelsiusResponse",
@@ -306,7 +306,7 @@ public partial class FahrenheitToCelsiusResponse
 [System.Runtime.Serialization.DataContractAttribute(
     Namespace = "http://www.w3schools.com/webservices/"
 )]
-public partial class FahrenheitToCelsiusResponseBody
+partial public class FahrenheitToCelsiusResponseBody
 {
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public string FahrenheitToCelsiusResult;
@@ -325,7 +325,7 @@ public partial class FahrenheitToCelsiusResponseBody
     System.ComponentModel.EditorBrowsableState.Advanced
 )]
 [System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
-public partial class CelsiusToFahrenheitRequest
+partial public class CelsiusToFahrenheitRequest
 {
     [System.ServiceModel.MessageBodyMemberAttribute(
         Name = "CelsiusToFahrenheit",
@@ -350,7 +350,7 @@ public partial class CelsiusToFahrenheitRequest
 [System.Runtime.Serialization.DataContractAttribute(
     Namespace = "http://www.w3schools.com/webservices/"
 )]
-public partial class CelsiusToFahrenheitRequestBody
+partial public class CelsiusToFahrenheitRequestBody
 {
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public string Celsius;
@@ -369,7 +369,7 @@ public partial class CelsiusToFahrenheitRequestBody
     System.ComponentModel.EditorBrowsableState.Advanced
 )]
 [System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
-public partial class CelsiusToFahrenheitResponse
+partial public class CelsiusToFahrenheitResponse
 {
     [System.ServiceModel.MessageBodyMemberAttribute(
         Name = "CelsiusToFahrenheitResponse",
@@ -394,7 +394,7 @@ public partial class CelsiusToFahrenheitResponse
 [System.Runtime.Serialization.DataContractAttribute(
     Namespace = "http://www.w3schools.com/webservices/"
 )]
-public partial class CelsiusToFahrenheitResponseBody
+partial public class CelsiusToFahrenheitResponseBody
 {
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public string CelsiusToFahrenheitResult;
@@ -412,7 +412,7 @@ public interface TempConvertSoapChannel : TempConvertSoap, System.ServiceModel.I
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-public partial class FahrenheitToCelsiusCompletedEventArgs
+partial public class FahrenheitToCelsiusCompletedEventArgs
     : System.ComponentModel.AsyncCompletedEventArgs
 {
     private object[] results;
@@ -440,7 +440,7 @@ public partial class FahrenheitToCelsiusCompletedEventArgs
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-public partial class CelsiusToFahrenheitCompletedEventArgs
+partial public class CelsiusToFahrenheitCompletedEventArgs
     : System.ComponentModel.AsyncCompletedEventArgs
 {
     private object[] results;
@@ -468,7 +468,7 @@ public partial class CelsiusToFahrenheitCompletedEventArgs
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-public partial class TempConvertSoapClient
+partial public class TempConvertSoapClient
     : System.ServiceModel.ClientBase<TempConvertSoap>,
         TempConvertSoap
 {

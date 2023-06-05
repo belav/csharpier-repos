@@ -7,7 +7,7 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
-    public static partial class JsonSerializer
+    partial public static class JsonSerializer
     {
         /// <summary>
         /// Sync, strongly typed root value serialization helper.

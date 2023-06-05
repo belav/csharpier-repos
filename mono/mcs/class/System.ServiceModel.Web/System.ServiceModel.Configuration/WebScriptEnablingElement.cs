@@ -46,7 +46,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WebScriptEnablingElement : BehaviorExtensionElement
+    partial public sealed class WebScriptEnablingElement : BehaviorExtensionElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

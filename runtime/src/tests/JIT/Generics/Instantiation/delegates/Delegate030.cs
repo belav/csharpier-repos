@@ -8,7 +8,7 @@ internal delegate T GenDelegate<T>(T p1, out T p2);
 
 internal struct Foo<T>
 {
-    static public T Function(T i, out T j)
+    public static T Function(T i, out T j)
     {
         j = i;
         return i;

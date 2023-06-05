@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class Binder
+    partial internal class Binder
     {
         /// <summary>
         /// Represents a small change from the enclosing/next binder.

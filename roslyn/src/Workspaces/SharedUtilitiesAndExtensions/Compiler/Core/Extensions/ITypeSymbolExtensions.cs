@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ITypeSymbolExtensions
+    partial internal static class ITypeSymbolExtensions
     {
         public const string DefaultParameterName = "value";
 

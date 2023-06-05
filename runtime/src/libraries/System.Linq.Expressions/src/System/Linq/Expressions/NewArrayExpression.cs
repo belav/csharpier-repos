@@ -104,7 +104,7 @@ namespace System.Linq.Expressions
         public sealed override ExpressionType NodeType => ExpressionType.NewArrayBounds;
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         #region NewArrayInit
 

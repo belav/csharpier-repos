@@ -5,7 +5,7 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core.IO;
 
-internal sealed partial class WebSocketsAsyncIOEngine : IAsyncIOEngine
+partial internal sealed class WebSocketsAsyncIOEngine : IAsyncIOEngine
 {
     private readonly IISHttpContext _context;
 

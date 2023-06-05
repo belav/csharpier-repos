@@ -9,13 +9,14 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Buffers.Text
 {
+    partial
     // AVX2 version based on https://github.com/aklomp/base64/tree/e516d769a2a432c08404f1981e73b431566057be/lib/arch/avx2
     // Vector128 version based on https://github.com/aklomp/base64/tree/e516d769a2a432c08404f1981e73b431566057be/lib/arch/ssse3
 
     /// <summary>
     /// Convert between binary data and UTF-8 encoded text that is represented in base 64.
     /// </summary>
-    public static partial class Base64
+    public static class Base64
     {
         /// <summary>
         /// Encode the span of binary data into UTF-8 encoded text represented as base64.

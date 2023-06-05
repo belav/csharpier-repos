@@ -3,10 +3,11 @@
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base class for all Type and TypeInfo objects created by a MetadataLoadContext.
     /// </summary>
-    internal abstract partial class RoType
+    internal abstract class RoType
     {
         public sealed override Type? GetInterface(string name, bool ignoreCase)
         {

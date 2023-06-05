@@ -5,7 +5,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public partial class GenericParameterDesc
+    partial public class GenericParameterDesc
     {
         public sealed override bool IsRuntimeDeterminedSubtype
         {

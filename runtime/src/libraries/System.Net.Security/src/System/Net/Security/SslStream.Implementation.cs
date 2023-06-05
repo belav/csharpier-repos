@@ -14,7 +14,7 @@ using Microsoft.Extensions.Internal;
 
 namespace System.Net.Security
 {
-    public partial class SslStream
+    partial public class SslStream
     {
         private SslAuthenticationOptions? _sslAuthenticationOptions;
 

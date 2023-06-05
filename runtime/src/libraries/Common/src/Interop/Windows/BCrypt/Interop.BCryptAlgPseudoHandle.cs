@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         // Pseudo-handles, as defined in bcrypt.h
         // TODO: This really should be backed by 'nuint' (see https://github.com/dotnet/roslyn/issues/44110)

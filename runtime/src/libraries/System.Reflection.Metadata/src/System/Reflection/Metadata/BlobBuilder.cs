@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Metadata
 {
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public partial class BlobBuilder
+    partial public class BlobBuilder
     {
         // The implementation is akin to StringBuilder.
         // The differences:

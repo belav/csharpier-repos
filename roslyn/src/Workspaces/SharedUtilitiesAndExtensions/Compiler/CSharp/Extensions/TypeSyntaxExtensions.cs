@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class TypeSyntaxExtensions
+    partial internal static class TypeSyntaxExtensions
     {
         public static bool IsVoid(this TypeSyntax typeSyntax) =>
             typeSyntax is PredefinedTypeSyntax predefinedType

@@ -12,7 +12,7 @@ using Internal.Runtime.CompilerHelpers;
 
 namespace System.Runtime.CompilerServices
 {
-    internal static partial class ClassConstructorRunner
+    partial internal static class ClassConstructorRunner
     {
         //==============================================================================================================
         // Ensures the class constructor for the given type has run.

@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 {
-    internal static partial class AddAccessibilityModifiersConstants
+    partial internal static class AddAccessibilityModifiersConstants
     {
         public const string ModifiersAdded = nameof(ModifiersAdded);
     }

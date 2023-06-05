@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
-    public sealed partial class WSDualHttpSecurityElement : ServiceModelConfigurationElement
+    partial public sealed class WSDualHttpSecurityElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.Mode,

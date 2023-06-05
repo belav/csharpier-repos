@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection
 {
-    public static partial class RuntimeReflectionExtensions
+    partial public static class RuntimeReflectionExtensions
     {
         private const BindingFlags Everything =
             BindingFlags.NonPublic

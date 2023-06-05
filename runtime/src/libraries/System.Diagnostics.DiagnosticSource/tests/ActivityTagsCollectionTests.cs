@@ -15,7 +15,7 @@ namespace System.Diagnostics.Tests
 {
     public class ActivityTagsCollectionTests : IDisposable
     {
-        private readonly static KeyValuePair<string, object>[] s_list = new KeyValuePair<
+        private static readonly KeyValuePair<string, object>[] s_list = new KeyValuePair<
             string,
             object
         >[]

@@ -5,7 +5,7 @@ using static Interop.BCrypt;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECCng
+    partial internal static class ECCng
     {
         internal static CngKey ImportKeyBlob(
             byte[] ecBlob,

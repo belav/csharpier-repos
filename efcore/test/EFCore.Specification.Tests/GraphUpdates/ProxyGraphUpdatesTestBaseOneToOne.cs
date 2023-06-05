@@ -7,7 +7,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixture<TFixture>
+partial public abstract class ProxyGraphUpdatesTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : ProxyGraphUpdatesTestBase<TFixture>.ProxyGraphUpdatesFixtureBase, new()
 {
     [ConditionalFact]

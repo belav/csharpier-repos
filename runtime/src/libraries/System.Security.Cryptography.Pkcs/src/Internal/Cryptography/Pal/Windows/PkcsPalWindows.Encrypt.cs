@@ -17,7 +17,7 @@ using static Interop.Crypt32;
 
 namespace Internal.Cryptography.Pal.Windows
 {
-    internal sealed partial class PkcsPalWindows : PkcsPal
+    partial internal sealed class PkcsPalWindows : PkcsPal
     {
         public sealed override unsafe byte[] Encrypt(
             CmsRecipientCollection recipients,

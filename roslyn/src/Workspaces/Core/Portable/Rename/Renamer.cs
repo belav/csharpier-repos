@@ -22,7 +22,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
-    public static partial class Renamer
+    partial public static class Renamer
     {
         [Obsolete]
         private static SymbolRenameOptions GetSymbolRenameOptions(OptionSet optionSet) =>

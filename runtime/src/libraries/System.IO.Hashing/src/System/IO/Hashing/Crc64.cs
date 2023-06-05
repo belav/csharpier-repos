@@ -5,6 +5,7 @@ using System.Buffers.Binary;
 
 namespace System.IO.Hashing
 {
+    partial
     /// <summary>
     ///   Provides an implementation of the CRC-64 algorithm as described in ECMA-182, Annex B.
     /// </summary>
@@ -23,7 +24,7 @@ namespace System.IO.Hashing
     ///     compatible with the cyclic redundancy check described in ISO 3309.
     ///   </para>
     /// </remarks>
-    public sealed partial class Crc64 : NonCryptographicHashAlgorithm
+    public sealed class Crc64 : NonCryptographicHashAlgorithm
     {
         private const ulong InitialState = 0UL;
         private const int Size = sizeof(ulong);

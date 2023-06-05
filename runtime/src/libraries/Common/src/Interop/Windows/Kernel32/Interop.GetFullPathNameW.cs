@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use GetFullPathName or PathHelper.
@@ -16,7 +16,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial uint GetFullPathNameW(
+        partial internal static uint GetFullPathNameW(
             ref char lpFileName,
             uint nBufferLength,
             ref char lpBuffer,

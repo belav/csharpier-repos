@@ -8,18 +8,19 @@ using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 #else
 using Internal.Win32.SafeHandles;
+partial
 #endif
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Libraries.Advapi32,
             EntryPoint = "RegConnectRegistryW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int RegConnectRegistry(
+        partial internal static int RegConnectRegistry(
             string machineName,
             IntPtr key,
             out SafeRegistryHandle result

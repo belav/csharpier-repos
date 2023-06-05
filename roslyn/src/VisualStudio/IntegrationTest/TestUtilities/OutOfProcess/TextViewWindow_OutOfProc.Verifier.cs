@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
-    public abstract partial class TextViewWindow_OutOfProc : OutOfProcComponent
+    partial public abstract class TextViewWindow_OutOfProc : OutOfProcComponent
     {
         public class Verifier<TTextViewWindow>
             where TTextViewWindow : TextViewWindow_OutOfProc

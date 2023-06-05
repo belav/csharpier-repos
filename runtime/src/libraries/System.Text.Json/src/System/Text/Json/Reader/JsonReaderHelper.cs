@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonReaderHelper
+    partial internal static class JsonReaderHelper
     {
         public static (int, int) CountNewLines(ReadOnlySpan<byte> data)
         {

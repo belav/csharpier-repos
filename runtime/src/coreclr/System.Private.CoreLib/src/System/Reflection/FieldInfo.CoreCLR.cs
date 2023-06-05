@@ -3,7 +3,7 @@
 
 namespace System.Reflection
 {
-    public abstract partial class FieldInfo : MemberInfo
+    partial public abstract class FieldInfo : MemberInfo
     {
         public static FieldInfo GetFieldFromHandle(RuntimeFieldHandle handle)
         {

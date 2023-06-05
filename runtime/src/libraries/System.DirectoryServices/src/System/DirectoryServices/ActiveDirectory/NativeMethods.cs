@@ -278,7 +278,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public string? callerName;
     }
 
-    internal sealed partial class NativeMethods
+    partial internal sealed class NativeMethods
     {
         // disable public constructor
         private NativeMethods() { }
@@ -314,7 +314,7 @@ namespace System.DirectoryServices.ActiveDirectory
             EntryPoint = "DsGetDcNameW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DsGetDcName(
+        partial internal static int DsGetDcName(
             string? computerName,
             string? domainName,
             IntPtr domainGuid,
@@ -337,7 +337,7 @@ namespace System.DirectoryServices.ActiveDirectory
             EntryPoint = "DsGetDcOpenW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DsGetDcOpen(
+        partial internal static int DsGetDcOpen(
             string? dnsName,
             int optionFlags,
             string? siteName,
@@ -358,7 +358,7 @@ namespace System.DirectoryServices.ActiveDirectory
             EntryPoint = "DsGetDcNextW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DsGetDcNext(
+        partial internal static int DsGetDcNext(
             IntPtr getDcContextHandle,
             ref IntPtr sockAddressCount,
             out IntPtr sockAddresses,
@@ -373,13 +373,13 @@ namespace System.DirectoryServices.ActiveDirectory
             EntryPoint = "DsGetDcCloseW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial void DsGetDcClose(IntPtr getDcContextHandle);
+        partial internal static void DsGetDcClose(IntPtr getDcContextHandle);
 
         /*NET_API_STATUS NetApiBufferFree(
                 LPVOID Buffer
                 );*/
         [LibraryImport(global::Interop.Libraries.Netapi32)]
-        internal static partial int NetApiBufferFree(IntPtr buffer);
+        partial internal static int NetApiBufferFree(IntPtr buffer);
 
         internal const int DsDomainControllerInfoLevel2 = 2;
         internal const int DsDomainControllerInfoLevel3 = 3;
@@ -402,7 +402,7 @@ namespace System.DirectoryServices.ActiveDirectory
             EntryPoint = "DnsQuery_W",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DnsQuery(
+        partial internal static int DnsQuery(
             string recordName,
             short recordType,
             int options,
@@ -416,7 +416,7 @@ namespace System.DirectoryServices.ActiveDirectory
             DNS_FREE_TYPE FreeType
             );*/
         [LibraryImport(global::Interop.Libraries.Dnsapi)]
-        internal static partial void DnsRecordListFree(
+        partial internal static void DnsRecordListFree(
             IntPtr dnsResultList,
             [MarshalAs(UnmanagedType.Bool)] bool dnsFreeType
         );
@@ -425,7 +425,7 @@ namespace System.DirectoryServices.ActiveDirectory
               PHANDLE LsaHandle
             );*/
         [LibraryImport(global::Interop.Libraries.Secur32)]
-        internal static partial uint LsaConnectUntrusted(out LsaLogonProcessSafeHandle lsaHandle);
+        partial internal static uint LsaConnectUntrusted(out LsaLogonProcessSafeHandle lsaHandle);
 
         internal const int NegGetCallerName = 1;
 
@@ -439,7 +439,7 @@ namespace System.DirectoryServices.ActiveDirectory
               PNTSTATUS ProtocolStatus
             );*/
         [LibraryImport(global::Interop.Libraries.Secur32)]
-        internal static partial uint LsaCallAuthenticationPackage(
+        partial internal static uint LsaCallAuthenticationPackage(
             LsaLogonProcessSafeHandle lsaHandle,
             int authenticationPackage,
             in NegotiateCallerNameRequest protocolSubmitBuffer,
@@ -453,13 +453,13 @@ namespace System.DirectoryServices.ActiveDirectory
               PVOID Buffer
             );*/
         [LibraryImport(global::Interop.Libraries.Secur32)]
-        internal static partial uint LsaFreeReturnBuffer(IntPtr buffer);
+        partial internal static uint LsaFreeReturnBuffer(IntPtr buffer);
 
         /*NTSTATUS LsaDeregisterLogonProcess(
               HANDLE LsaHandle
             );*/
         [LibraryImport(global::Interop.Libraries.Secur32)]
-        internal static partial int LsaDeregisterLogonProcess(IntPtr lsaHandle);
+        partial internal static int LsaDeregisterLogonProcess(IntPtr lsaHandle);
 
         /*int CompareString(LCID Locale,
             DWORD dwCmpFlags,
@@ -474,7 +474,7 @@ namespace System.DirectoryServices.ActiveDirectory
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int CompareString(
+        partial internal static int CompareString(
             uint locale,
             uint dwCmpFlags,
             IntPtr lpString1,

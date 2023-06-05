@@ -28,7 +28,7 @@ using static Roslyn.Test.Utilities.TestMetadata;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
 {
-    public partial class CompilationEmitTests : EmitMetadataTestBase
+    partial public class CompilationEmitTests : EmitMetadataTestBase
     {
         [Fact]
         public void CompilationEmitDiagnostics()

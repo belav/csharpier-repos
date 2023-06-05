@@ -15,7 +15,7 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.Interactive
 {
-    internal partial class InteractiveHost
+    partial internal class InteractiveHost
     {
         internal sealed class RemoteService
         {

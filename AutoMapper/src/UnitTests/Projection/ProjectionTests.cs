@@ -74,7 +74,7 @@ public class InMemoryMapObjectPropertyFromSubQuery : AutoMapperSpecBase
         productModel.Id.ShouldBe(1);
     }
 
-    public partial class Article
+    partial public class Article
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -83,7 +83,7 @@ public class InMemoryMapObjectPropertyFromSubQuery : AutoMapperSpecBase
         public virtual Product Product { get; set; }
     }
 
-    public partial class Product
+    partial public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }

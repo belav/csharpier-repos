@@ -6,8 +6,9 @@ using Xunit;
 
 namespace System.IO.MemoryMappedFiles.Tests
 {
+    partial
     /// <summary>Base class from which all of the memory mapped files test classes derive.</summary>
-    public abstract partial class MemoryMappedFilesTestBase : FileCleanupTestBase
+    public abstract class MemoryMappedFilesTestBase : FileCleanupTestBase
     {
         /// <summary>Gets the system's page size.</summary>
         protected static Lazy<int> s_pageSize = new Lazy<int>(() =>
@@ -22,12 +23,12 @@ namespace System.IO.MemoryMappedFiles.Tests
 
         [LibraryImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool GetHandleInformation(IntPtr hObject, out uint lpdwFlags);
+        partial private static bool GetHandleInformation(IntPtr hObject, out uint lpdwFlags);
 
         private const uint HANDLE_FLAG_INHERIT = 0x00000001;
 
         [LibraryImport("kernel32.dll")]
-        private static partial void GetSystemInfo(out SYSTEM_INFO input);
+        partial private static void GetSystemInfo(out SYSTEM_INFO input);
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SYSTEM_INFO

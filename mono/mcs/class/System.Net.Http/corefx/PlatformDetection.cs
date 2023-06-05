@@ -1,6 +1,6 @@
 namespace System
 {
-    static partial class PlatformDetection
+    partial static class PlatformDetection
     {
         public static bool IsOSX => true;
         public static bool IsDebian => false;

@@ -10,7 +10,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class HashProviderDispenser
+    partial internal static class HashProviderDispenser
     {
         internal static HashProvider CreateHashProvider(string hashAlgorithmId)
         {

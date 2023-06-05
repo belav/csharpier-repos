@@ -4,7 +4,7 @@ public class aClass
 {
     public unsafe struct foo_t
     {
-        public fixed char b[16];
+        fixed public char b[16];
     }
 
     public static unsafe void Main(string[] args)

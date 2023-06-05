@@ -9,11 +9,12 @@ using System.IO;
 
 namespace Internal.IO
 {
+    partial
     //
     // Subsetted clone of System.IO.File for internal runtime use.
     // Keep in sync with https://github.com/dotnet/runtime/tree/main/src/libraries/System.IO.FileSystem.
     //
-    internal static partial class File
+    internal static class File
     {
         // Tests if a file exists. The result is true if the file
         // given by the specified path exists; otherwise, the result is

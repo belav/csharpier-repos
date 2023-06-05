@@ -13,11 +13,11 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace System.Text.Json.SourceGeneration
 {
-    public sealed partial class JsonSourceGenerator
+    partial public sealed class JsonSourceGenerator
     {
         private const string OptionsLocalVariableName = "options";
 
-        private sealed partial class Emitter
+        partial private sealed class Emitter
         {
             // Literals in generated source
             private const string CreateValueInfoMethodName = "CreateValueInfo";

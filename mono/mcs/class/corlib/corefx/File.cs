@@ -3,7 +3,7 @@ using System.Security.AccessControl;
 
 namespace System.IO
 {
-    public partial class File
+    partial public class File
     {
         public static FileStream Create(
             string path,

@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddMissingReference
 {
-    internal abstract partial class AbstractAddMissingReferenceCodeFixProvider
+    partial internal abstract class AbstractAddMissingReferenceCodeFixProvider
         : AbstractAddPackageCodeFixProvider
     {
         /// <summary>

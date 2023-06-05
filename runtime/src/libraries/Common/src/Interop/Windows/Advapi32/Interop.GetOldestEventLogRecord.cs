@@ -4,13 +4,13 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool GetOldestEventLogRecord(
+        partial public static bool GetOldestEventLogRecord(
             SafeEventLogReadHandle hEventLog,
             out int OldestRecord
         );

@@ -102,7 +102,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override public Type GetProviderSpecificFieldType(int ordinal)
+        public override Type GetProviderSpecificFieldType(int ordinal)
         {
             EnsureCanGetMetaData("GetProviderSpecificFieldType");
 
@@ -226,7 +226,7 @@ namespace System.Data.SqlClient
             );
         }
 
-        override internal SqlBuffer.StorageType GetVariantInternalStorageType(int ordinal)
+        internal override SqlBuffer.StorageType GetVariantInternalStorageType(int ordinal)
         {
             Debug.Assert(
                 null != _currentColumnValuesV3,
@@ -1526,7 +1526,15 @@ namespace System.Data.SqlClient
         //
         //  Assumes that if there were any results, the first chunk of them are in the data stream
         //      (up to the first actual row or the end of the resultsets).
-        unsafe internal SqlDataReaderSmi(
+        internal
+        //
+        // Internal methods for use by other classes in project
+        //
+        // Constructor
+        //
+        //  Assumes that if there were any results, the first chunk of them are in the data stream
+        //      (up to the first actual row or the end of the resultsets).
+        unsafe SqlDataReaderSmi(
             SmiEventStream eventStream, // the event stream that receives the events from the execution engine
             SqlCommand parent, // command that owns reader
             CommandBehavior behavior, // behavior specified for this execution

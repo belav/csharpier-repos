@@ -12,7 +12,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml
 {
-    internal sealed partial class XsdCachingReader : XmlReader, IXmlLineInfo
+    partial internal sealed class XsdCachingReader : XmlReader, IXmlLineInfo
     {
         private enum CachingReaderState
         {

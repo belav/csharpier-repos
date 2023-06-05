@@ -1,6 +1,6 @@
 ﻿using System;
 
-public partial class Benchmark
+partial public class Benchmark
 {
     public const int WarmingIterationCount = 300;
     public const int IterationCount = 300;

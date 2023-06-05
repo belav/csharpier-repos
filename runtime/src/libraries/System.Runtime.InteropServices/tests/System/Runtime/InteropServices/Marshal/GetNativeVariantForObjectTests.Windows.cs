@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetNativeVariantForObjectTests
+    partial public class GetNativeVariantForObjectTests
     {
         public static IEnumerable<object[]> GetNativeVariantForObject_ComObject_TestData()
         {

@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Completion
 {
-    public abstract partial class CompletionServiceWithProviders
+    partial public abstract class CompletionServiceWithProviders
     {
         private class ProjectCompletionProvider
             : AbstractProjectExtensionProvider<

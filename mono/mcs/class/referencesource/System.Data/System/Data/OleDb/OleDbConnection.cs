@@ -32,9 +32,9 @@ namespace System.Data.OleDb
     //    it won't happen if you directly create the provider and set its properties
     // 3. First call on IDBInitialize must be Initialize, can't QI for any other interfaces before that
     [DefaultEvent("InfoMessage")]
-    public sealed partial class OleDbConnection : DbConnection, ICloneable, IDbConnection
+    partial public sealed class OleDbConnection : DbConnection, ICloneable, IDbConnection
     {
-        static private readonly object EventInfoMessage = new object();
+        private static readonly object EventInfoMessage = new object();
 
         public OleDbConnection(string connectionString)
             : this()
@@ -63,7 +63,7 @@ namespace System.Data.OleDb
             ),
             ResDescriptionAttribute(Res.OleDbConnection_ConnectionString),
         ]
-        override public string ConnectionString
+        public override string ConnectionString
         {
             get { return ConnectionString_Get(); }
             set { ConnectionString_Set(value); }
@@ -78,7 +78,7 @@ namespace System.Data.OleDb
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.OleDbConnection_ConnectionTimeout),
         ]
-        override public int ConnectionTimeout
+        public override int ConnectionTimeout
         {
             get
             {
@@ -124,7 +124,7 @@ namespace System.Data.OleDb
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.OleDbConnection_Database),
         ]
-        override public string Database
+        public override string Database
         {
             get
             {
@@ -180,7 +180,7 @@ namespace System.Data.OleDb
         }
 
         [Browsable(true), ResDescriptionAttribute(Res.OleDbConnection_DataSource),]
-        override public string DataSource
+        public override string DataSource
         {
             get
             {
@@ -277,7 +277,7 @@ namespace System.Data.OleDb
         }
 
         [ResDescriptionAttribute(Res.OleDbConnection_ServerVersion),]
-        override public string ServerVersion
+        public override string ServerVersion
         { // MDAC 55481
             get { return InnerConnection.ServerVersion; }
         }
@@ -287,7 +287,7 @@ namespace System.Data.OleDb
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.DbConnection_State),
         ]
-        override public ConnectionState State
+        public override ConnectionState State
         {
             get { return InnerConnection.State; }
         }
@@ -418,17 +418,17 @@ namespace System.Data.OleDb
             return quotedIdentifierCase;
         }
 
-        new public OleDbTransaction BeginTransaction()
+        public new OleDbTransaction BeginTransaction()
         {
             return BeginTransaction(IsolationLevel.Unspecified);
         }
 
-        new public OleDbTransaction BeginTransaction(IsolationLevel isolationLevel)
+        public new OleDbTransaction BeginTransaction(IsolationLevel isolationLevel)
         {
             return (OleDbTransaction)InnerConnection.BeginTransaction(isolationLevel);
         }
 
-        override public void ChangeDatabase(string value)
+        public override void ChangeDatabase(string value)
         {
             OleDbConnection.ExecutePermission.Demand();
 
@@ -480,13 +480,13 @@ namespace System.Data.OleDb
             return clone;
         }
 
-        override public void Close()
+        public override void Close()
         {
             InnerConnection.CloseConnection(this, ConnectionFactory);
             // does not require GC.KeepAlive(this) because of OnStateChange
         }
 
-        new public OleDbCommand CreateCommand()
+        public new OleDbCommand CreateCommand()
         {
             return new OleDbCommand("", this);
         }
@@ -506,7 +506,7 @@ namespace System.Data.OleDb
 
         // suppress this message - we cannot use SafeHandle here. Also, see notes in the code (VSTFDEVDIV# 560355)
         [SuppressMessage("Microsoft.Reliability", "CA2004:RemoveCallsToGCKeepAlive")]
-        override protected DbTransaction BeginDbTransaction(IsolationLevel isolationLevel)
+        protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel)
         {
             IntPtr hscp;
 
@@ -727,7 +727,7 @@ namespace System.Data.OleDb
 #endif
         }
 
-        override public void Open()
+        public override void Open()
         {
             InnerConnection.OpenConnection(this, ConnectionFactory);
 
@@ -813,7 +813,7 @@ namespace System.Data.OleDb
             return GetOpenConnection().ValidateTransaction(transaction, method);
         }
 
-        static internal Exception ProcessResults(
+        internal static Exception ProcessResults(
             OleDbHResult hresult,
             OleDbConnection connection,
             object src
@@ -891,7 +891,9 @@ namespace System.Data.OleDb
         }
 
         // @devnote: should be multithread safe
-        static public void ReleaseObjectPool()
+        public
+        // @devnote: should be multithread safe
+        static void ReleaseObjectPool()
         {
             (new OleDbPermission(PermissionState.Unrestricted)).Demand();
 
@@ -909,7 +911,7 @@ namespace System.Data.OleDb
             }
         }
 
-        static private void ResetState(OleDbConnection connection)
+        private static void ResetState(OleDbConnection connection)
         {
             if (null != connection)
             {

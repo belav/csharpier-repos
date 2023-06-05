@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    public abstract partial class DependencyInjectionSpecificationTests
+    partial public abstract class DependencyInjectionSpecificationTests
     {
         protected abstract IServiceProvider CreateServiceProvider(
             IServiceCollection serviceCollection

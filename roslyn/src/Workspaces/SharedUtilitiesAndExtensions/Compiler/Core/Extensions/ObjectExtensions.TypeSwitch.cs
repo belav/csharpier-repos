@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ObjectExtensions
+    partial internal static class ObjectExtensions
     {
         public static TResult? TypeSwitch<
             TBaseType,

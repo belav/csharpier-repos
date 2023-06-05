@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.DirectoryServices.Protocols
 {
-    public partial class LdapConnection
+    partial public class LdapConnection
     {
         // Linux doesn't support setting FQDN so we mark the flag as if it is already set so we don't make a call to set it again.
         private bool _setFQDNDone = true;

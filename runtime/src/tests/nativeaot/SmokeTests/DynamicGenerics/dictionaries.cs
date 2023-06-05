@@ -782,13 +782,13 @@ namespace BaseTypeDict
     public class MyClass1
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        virtual public string M1()
+        public virtual string M1()
         {
             return "MyClass1.M1()";
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        virtual public string M2()
+        public virtual string M2()
         {
             return "MyClass1.M2()";
         }
@@ -812,7 +812,7 @@ namespace BaseTypeDict
     public class MyClass3<T> : MyClass2<T>
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        new virtual public string M1()
+        public new virtual string M1()
         {
             return "MyClass3`1<" + typeof(T).Name + ">.M1() - " + base.M1();
         }
@@ -842,7 +842,7 @@ namespace BaseTypeDict
     public class MyClass3_2 : MyClass2<MyClass1>
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        new virtual public string M1()
+        public new virtual string M1()
         {
             return "MyClass3_2.M1() - " + base.M1();
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Functional.Tests
 {
-    internal partial class CustomContent : HttpContent
+    partial internal class CustomContent : HttpContent
     {
         internal class SlowTestStream : CustomStream
         {
@@ -47,7 +47,7 @@ namespace System.Net.Http.Functional.Tests
                 }
             }
 
-            public async override ValueTask<int> ReadAsync(
+            public override async ValueTask<int> ReadAsync(
                 Memory<byte> destination,
                 CancellationToken cancellationToken
             )

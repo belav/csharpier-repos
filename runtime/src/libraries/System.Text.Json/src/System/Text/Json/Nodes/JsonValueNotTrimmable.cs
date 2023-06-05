@@ -9,7 +9,7 @@ namespace System.Text.Json.Nodes
     /// Not trim-safe since it calls JsonSerializer.Serialize(JsonSerializerOptions).
     /// </summary>
     [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-    internal sealed partial class JsonValueNotTrimmable<TValue> : JsonValue<TValue>
+    partial internal sealed class JsonValueNotTrimmable<TValue> : JsonValue<TValue>
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         public JsonValueNotTrimmable(TValue value, JsonNodeOptions? options = null)

@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-internal sealed partial class WebHost : IWebHost, IAsyncDisposable
+partial internal sealed class WebHost : IWebHost, IAsyncDisposable
 {
     private const string DeprecatedServerUrlsKey = "server.urls";
 
@@ -392,16 +392,16 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(3, LogLevel.Debug, "Hosting starting", EventName = "Starting")]
-        public static partial void Starting(ILogger logger);
+        partial public static void Starting(ILogger logger);
 
         [LoggerMessage(4, LogLevel.Debug, "Hosting started", EventName = "Started")]
-        public static partial void Started(ILogger logger);
+        partial public static void Started(ILogger logger);
 
         [LoggerMessage(5, LogLevel.Debug, "Hosting shutdown", EventName = "Shutdown")]
-        public static partial void Shutdown(ILogger logger);
+        partial public static void Shutdown(ILogger logger);
 
         [LoggerMessage(
             12,
@@ -409,7 +409,7 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
             "Server shutdown exception",
             EventName = "ServerShutdownException"
         )]
-        public static partial void ServerShutdownException(ILogger logger, Exception ex);
+        partial public static void ServerShutdownException(ILogger logger, Exception ex);
 
         [LoggerMessage(
             13,
@@ -418,6 +418,6 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
             EventName = "HostingStartupAssemblyLoaded",
             SkipEnabledCheck = true
         )]
-        public static partial void StartupAssemblyLoaded(ILogger logger, string assemblyName);
+        partial public static void StartupAssemblyLoaded(ILogger logger, string assemblyName);
     }
 }

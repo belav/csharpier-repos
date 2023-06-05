@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.ValueTracking
 {
     [ExportWorkspaceService(typeof(IValueTrackingService)), Shared]
-    internal partial class ValueTrackingService : IValueTrackingService
+    partial internal class ValueTrackingService : IValueTrackingService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

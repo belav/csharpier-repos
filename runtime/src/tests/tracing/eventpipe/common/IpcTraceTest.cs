@@ -368,7 +368,16 @@ namespace Tracing.Tests.Common
         // run into these zombie pipes if there are failures over time.
         // Note: Windows has some guarantees about named pipes not living longer
         // the process that created them, so we don't need to check on that platform.
-        static public bool EnsureCleanEnvironment()
+        public
+        // Ensure that we have a clean environment for running the test.
+        // Specifically check that we don't have more than one match for
+        // Diagnostic IPC sockets in the TempPath.  These can be left behind
+        // by bugs, catastrophic test failures, etc. from previous testing.
+        // The tmp directory is only cleared on reboot, so it is possible to
+        // run into these zombie pipes if there are failures over time.
+        // Note: Windows has some guarantees about named pipes not living longer
+        // the process that created them, so we don't need to check on that platform.
+        static bool EnsureCleanEnvironment()
         {
             if (!OperatingSystem.IsWindows())
             {

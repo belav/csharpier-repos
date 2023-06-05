@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class SystemAcl_Constructor2
+    partial public class SystemAcl_Constructor2
     {
         public static IEnumerable<object[]> SystemAcl_Constructor2_TestData()
         {

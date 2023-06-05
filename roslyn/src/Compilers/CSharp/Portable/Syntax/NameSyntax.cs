@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public abstract partial class NameSyntax
+    partial public abstract class NameSyntax
     {
         public int Arity
         {

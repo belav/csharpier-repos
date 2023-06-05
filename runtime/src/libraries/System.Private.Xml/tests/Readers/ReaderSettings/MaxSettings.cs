@@ -10,7 +10,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.ReaderSettingsTests
 {
     [TestCase(Name = "MaxCharacters Settings", Desc = "MaxCharacters Settings")]
-    public partial class TCMaxSettings : TCXMLReaderBaseGeneral
+    partial public class TCMaxSettings : TCXMLReaderBaseGeneral
     {
         private long _defaultCharsEnt = (long)1e7; // By default, entity resolving is limited to 10 million characters (On .NET Framework the default used to be zero (=unlimited) as LegacyXmlSettings was enabled)
         private long _defaultCharsDoc = 0;

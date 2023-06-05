@@ -21,7 +21,7 @@ namespace System.Net.Http
         UseCustomProxy = 3,
     }
 
-    public partial class WinHttpHandler : System.Net.Http.HttpMessageHandler
+    partial public class WinHttpHandler : System.Net.Http.HttpMessageHandler
     {
         public WinHttpHandler() { }
 

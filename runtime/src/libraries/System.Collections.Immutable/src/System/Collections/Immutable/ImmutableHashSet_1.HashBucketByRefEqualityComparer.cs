@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableHashSet{T}.HashBucketByRefEqualityComparer"/> class.
     /// </content>
-    public sealed partial class ImmutableHashSet<T>
+    public sealed class ImmutableHashSet<T>
         : IImmutableSet<T>,
             IHashKeyCollection<T>,
             IReadOnlyCollection<T>,

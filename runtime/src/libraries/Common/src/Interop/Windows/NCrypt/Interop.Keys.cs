@@ -7,9 +7,9 @@ using System.Security.Cryptography;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NCrypt
+    partial internal static class NCrypt
     {
         internal const string NCRYPT_CIPHER_KEY_BLOB = "CipherKeyBlob";
         internal const string NCRYPT_PKCS8_PRIVATE_KEY_BLOB = "PKCS8_PRIVATEKEY";
@@ -17,7 +17,7 @@ internal static partial class Interop
         internal const int NCRYPT_CIPHER_KEY_BLOB_MAGIC = 0x52485043; //'CPHR'
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ErrorCode NCryptOpenKey(
+        partial internal static ErrorCode NCryptOpenKey(
             SafeNCryptProviderHandle hProvider,
             out SafeNCryptKeyHandle phKey,
             string pszKeyName,
@@ -26,7 +26,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ErrorCode NCryptImportKey(
+        partial internal static ErrorCode NCryptImportKey(
             SafeNCryptProviderHandle hProvider,
             IntPtr hImportKey,
             string pszBlobType,
@@ -38,7 +38,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ErrorCode NCryptImportKey(
+        partial internal static ErrorCode NCryptImportKey(
             SafeNCryptProviderHandle hProvider,
             IntPtr hImportKey,
             string pszBlobType,
@@ -50,7 +50,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ErrorCode NCryptExportKey(
+        partial internal static ErrorCode NCryptExportKey(
             SafeNCryptKeyHandle hKey,
             IntPtr hExportKey,
             string pszBlobType,
@@ -62,7 +62,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ErrorCode NCryptExportKey(
+        partial internal static ErrorCode NCryptExportKey(
             SafeNCryptKeyHandle hKey,
             IntPtr hExportKey,
             string pszBlobType,
@@ -74,7 +74,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ErrorCode NCryptExportKey(
+        partial internal static ErrorCode NCryptExportKey(
             SafeNCryptKeyHandle hKey,
             IntPtr hExportKey,
             string pszBlobType,
@@ -86,10 +86,10 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ErrorCode NCryptDeleteKey(SafeNCryptKeyHandle hKey, int dwFlags);
+        partial internal static ErrorCode NCryptDeleteKey(SafeNCryptKeyHandle hKey, int dwFlags);
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ErrorCode NCryptCreatePersistedKey(
+        partial internal static ErrorCode NCryptCreatePersistedKey(
             SafeNCryptProviderHandle hProvider,
             out SafeNCryptKeyHandle phKey,
             string pszAlgId,
@@ -99,7 +99,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ErrorCode NCryptFinalizeKey(SafeNCryptKeyHandle hKey, int dwFlags);
+        partial internal static ErrorCode NCryptFinalizeKey(SafeNCryptKeyHandle hKey, int dwFlags);
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct CRYPT_PKCS12_PBE_PARAMS
@@ -114,7 +114,7 @@ internal static partial class Interop
             internal const int RgbSaltSize = 8;
 
             internal CRYPT_PKCS12_PBE_PARAMS Params;
-            internal fixed byte rgbSalt[RgbSaltSize];
+            fixed internal byte rgbSalt[RgbSaltSize];
         }
     }
 }

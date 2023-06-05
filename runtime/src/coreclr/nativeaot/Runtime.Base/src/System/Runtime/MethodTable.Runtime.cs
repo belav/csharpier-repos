@@ -8,8 +8,9 @@ using System.Runtime.CompilerServices;
 
 namespace Internal.Runtime
 {
+    partial
     // Extensions to MethodTable that are specific to the use in Runtime.Base.
-    internal unsafe partial struct MethodTable
+    internal unsafe struct MethodTable
     {
 #pragma warning disable CA1822
         internal MethodTable* GetArrayEEType()

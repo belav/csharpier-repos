@@ -13,7 +13,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Net.Sockets
 {
-    internal static partial class SocketPal
+    partial internal static class SocketPal
     {
         public const bool SupportsMultipleConnectAttempts = false;
         public static readonly int MaximumAddressSize = Interop.Sys.GetMaximumAddressSize();

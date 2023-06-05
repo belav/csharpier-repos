@@ -15,8 +15,9 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.ParameterInfos
 {
+    partial
     // This class is used for the "Get/Set" methods on array types.
-    internal sealed partial class RuntimeSyntheticParameterInfo : RuntimeParameterInfo
+    internal sealed class RuntimeSyntheticParameterInfo : RuntimeParameterInfo
     {
         private RuntimeSyntheticParameterInfo(
             MemberInfo memberInfo,

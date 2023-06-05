@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class
+    partial internal class
 #if DEBUG
     PointerTypeSymbolAdapter : SymbolAdapter,
 #else
@@ -124,7 +124,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal partial class PointerTypeSymbol
+    partial internal class PointerTypeSymbol
     {
 #if DEBUG
         private PointerTypeSymbolAdapter? _lazyAdapter;
@@ -153,8 +153,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #endif
     }
 
+    partial
 #if DEBUG
-    internal partial class PointerTypeSymbolAdapter
+    internal class PointerTypeSymbolAdapter
     {
         internal PointerTypeSymbolAdapter(PointerTypeSymbol underlyingPointerTypeSymbol)
         {

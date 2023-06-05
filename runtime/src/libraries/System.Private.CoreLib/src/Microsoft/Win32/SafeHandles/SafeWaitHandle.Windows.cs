@@ -3,7 +3,7 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeWaitHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeWaitHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         protected override bool ReleaseHandle() => Interop.Kernel32.CloseHandle(handle);
     }

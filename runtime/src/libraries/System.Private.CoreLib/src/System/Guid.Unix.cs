@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial struct Guid
+    partial public struct Guid
     {
         // This will create a new random guid based on the https://www.ietf.org/rfc/rfc4122.txt
         public static unsafe Guid NewGuid()

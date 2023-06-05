@@ -21,7 +21,7 @@ namespace System.Reflection.Emit
         Throw = 8,
     }
 
-    public readonly partial struct OpCode : System.IEquatable<System.Reflection.Emit.OpCode>
+    partial public readonly struct OpCode : System.IEquatable<System.Reflection.Emit.OpCode>
     {
         private readonly int _dummyPrimitive;
         public System.Reflection.Emit.FlowControl FlowControl
@@ -96,7 +96,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public partial class OpCodes
+    partial public class OpCodes
     {
         internal OpCodes() { }
 

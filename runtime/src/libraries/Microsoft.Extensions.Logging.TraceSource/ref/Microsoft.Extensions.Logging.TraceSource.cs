@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Logging
 {
-    public static partial class TraceSourceFactoryExtensions
+    partial public static class TraceSourceFactoryExtensions
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddTraceSource(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
@@ -47,7 +47,7 @@ namespace Microsoft.Extensions.Logging
 namespace Microsoft.Extensions.Logging.TraceSource
 {
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("TraceSource")]
-    public partial class TraceSourceLoggerProvider
+    partial public class TraceSourceLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
             System.IDisposable
     {

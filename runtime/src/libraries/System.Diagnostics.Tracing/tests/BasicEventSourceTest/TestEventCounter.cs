@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace BasicEventSourceTests
 {
-    public partial class TestEventCounter
+    partial public class TestEventCounter
     {
         private sealed class MyEventSource : EventSource
         {

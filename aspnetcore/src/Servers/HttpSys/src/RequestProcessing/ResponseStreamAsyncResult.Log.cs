@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal partial class ResponseStreamAsyncResult
+partial internal class ResponseStreamAsyncResult
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.WriteCancelled,
@@ -15,7 +15,7 @@ internal partial class ResponseStreamAsyncResult
             "FlushAsync.IOCompleted; Write cancelled with error code: {ErrorCode}",
             EventName = "WriteCancelled"
         )]
-        public static partial void WriteCancelled(ILogger logger, uint errorCode);
+        partial public static void WriteCancelled(ILogger logger, uint errorCode);
 
         [LoggerMessage(
             LoggerEventIds.WriteError,
@@ -23,7 +23,7 @@ internal partial class ResponseStreamAsyncResult
             "FlushAsync.IOCompleted",
             EventName = "WriteError"
         )]
-        public static partial void WriteError(ILogger logger, Exception exception);
+        partial public static void WriteError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.WriteErrorIgnored,
@@ -31,6 +31,6 @@ internal partial class ResponseStreamAsyncResult
             "FlushAsync.IOCompleted; Ignored write exception: {ErrorCode}",
             EventName = "WriteErrorIgnored"
         )]
-        public static partial void WriteErrorIgnored(ILogger logger, uint errorCode);
+        partial public static void WriteErrorIgnored(ILogger logger, uint errorCode);
     }
 }

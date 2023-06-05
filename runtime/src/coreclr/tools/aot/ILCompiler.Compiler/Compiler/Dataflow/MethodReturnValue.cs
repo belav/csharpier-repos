@@ -11,10 +11,11 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// Return value from a method
     /// </summary>
-    internal partial record MethodReturnValue : IValueWithStaticType
+    internal record MethodReturnValue : IValueWithStaticType
     {
         public MethodReturnValue(
             MethodDesc method,

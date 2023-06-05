@@ -6,7 +6,7 @@
 
 namespace System.Reflection.Emit
 {
-    public partial class CustomAttributeBuilder
+    partial public class CustomAttributeBuilder
     {
         public CustomAttributeBuilder(
             System.Reflection.ConstructorInfo con,
@@ -37,7 +37,7 @@ namespace System.Reflection.Emit
         ) { }
     }
 
-    public partial class ILGenerator
+    partial public class ILGenerator
     {
         internal ILGenerator() { }
 
@@ -182,7 +182,7 @@ namespace System.Reflection.Emit
         public virtual void UsingNamespace(string usingNamespace) { }
     }
 
-    public readonly partial struct Label : System.IEquatable<System.Reflection.Emit.Label>
+    partial public readonly struct Label : System.IEquatable<System.Reflection.Emit.Label>
     {
         private readonly int _dummyPrimitive;
 
@@ -220,7 +220,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public sealed partial class LocalBuilder : System.Reflection.LocalVariableInfo
+    partial public sealed class LocalBuilder : System.Reflection.LocalVariableInfo
     {
         internal LocalBuilder() { }
 
@@ -238,7 +238,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public partial class ParameterBuilder
+    partial public class ParameterBuilder
     {
         internal ParameterBuilder() { }
 
@@ -279,7 +279,7 @@ namespace System.Reflection.Emit
         ) { }
     }
 
-    public sealed partial class SignatureHelper
+    partial public sealed class SignatureHelper
     {
         internal SignatureHelper() { }
 

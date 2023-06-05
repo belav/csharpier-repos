@@ -1347,7 +1347,7 @@ namespace System.Net
             );
         }
 
-        private unsafe static IPHostEntry GetAddrInfo(string name)
+        private static unsafe IPHostEntry GetAddrInfo(string name)
         {
             IPHostEntry hostEntry;
             SocketError errorCode = TryGetAddrInfo(name, out hostEntry);
@@ -1361,13 +1361,13 @@ namespace System.Net
         //
         // IPv6 Changes: Add getaddrinfo and getnameinfo methods.
         //
-        private unsafe static SocketError TryGetAddrInfo(string name, out IPHostEntry hostinfo)
+        private static unsafe SocketError TryGetAddrInfo(string name, out IPHostEntry hostinfo)
         {
             // gets the resolved name
             return TryGetAddrInfo(name, AddressInfoHints.AI_CANONNAME, out hostinfo);
         }
 
-        private unsafe static SocketError TryGetAddrInfo(
+        private static unsafe SocketError TryGetAddrInfo(
             string name,
             AddressInfoHints flags,
             out IPHostEntry hostinfo

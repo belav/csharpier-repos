@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 {
-    internal partial class SyntaxList
+    partial internal class SyntaxList
     {
         internal sealed class WithLotsOfChildren : WithManyChildrenBase
         {

@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
 {
     [ExportWorkspaceServiceFactory(typeof(IProjectCacheHostService), ServiceLayer.Host)]
     [Shared]
-    internal partial class VisualStudioProjectCacheHostServiceFactory : IWorkspaceServiceFactory
+    partial internal class VisualStudioProjectCacheHostServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial class Matcher<T>
+    partial internal class Matcher<T>
     {
         private class SingleMatcher : Matcher<T>
         {

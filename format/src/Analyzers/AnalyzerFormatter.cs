@@ -181,7 +181,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
             return solution;
 
-            async static Task<ImmutableHashSet<string>> GetFormattablePathsAsync(
+            static async Task<ImmutableHashSet<string>> GetFormattablePathsAsync(
                 Solution solution,
                 ImmutableArray<DocumentId> formattableDocuments,
                 CancellationToken cancellationToken

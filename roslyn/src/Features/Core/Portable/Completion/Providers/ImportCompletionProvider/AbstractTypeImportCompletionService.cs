@@ -22,7 +22,7 @@ using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractTypeImportCompletionService
+    partial internal abstract class AbstractTypeImportCompletionService
         : ITypeImportCompletionService
     {
         private IImportCompletionCacheService<

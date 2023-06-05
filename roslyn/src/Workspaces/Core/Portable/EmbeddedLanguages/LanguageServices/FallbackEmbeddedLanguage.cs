@@ -8,11 +8,12 @@ using Microsoft.CodeAnalysis.Classification.Classifiers;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.LanguageServices
 {
+    partial
     /// <summary>
     /// A 'fallback' embedded language that can classify normal escape sequences in
     /// C# or VB strings if no other embedded languages produce results.
     /// </summary>
-    internal partial class FallbackEmbeddedLanguage : IEmbeddedLanguage
+    internal class FallbackEmbeddedLanguage : IEmbeddedLanguage
     {
         public ISyntaxClassifier Classifier { get; }
 

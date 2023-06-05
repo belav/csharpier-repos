@@ -14,7 +14,7 @@ using System.Runtime.InteropServices.JavaScript;
 
 namespace Sample
 {
-    public partial class Test
+    partial public class Test
     {
         static bool JsonResults = false;
 
@@ -254,17 +254,17 @@ namespace Sample
 
     public class PlainFormatter : Formatter
     {
-        override public string NewLine => "\n";
-        override public string NonBreakingSpace => " ";
-        override public string CodeStart => "";
-        override public string CodeEnd => "";
+        public override string NewLine => "\n";
+        public override string NonBreakingSpace => " ";
+        public override string CodeStart => "";
+        public override string CodeEnd => "";
     }
 
     public class HTMLFormatter : Formatter
     {
-        override public string NewLine => "<br/>";
-        override public string NonBreakingSpace => "&nbsp;";
-        override public string CodeStart => "<code>";
-        override public string CodeEnd => "</code>";
+        public override string NewLine => "<br/>";
+        public override string NonBreakingSpace => "&nbsp;";
+        public override string CodeStart => "<code>";
+        public override string CodeEnd => "</code>";
     }
 }

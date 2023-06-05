@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Description;
 
-    public sealed partial class ServiceEndpointElement
+    partial public sealed class ServiceEndpointElement
         : ConfigurationElement,
             IConfigurationContextProviderInternal
     {

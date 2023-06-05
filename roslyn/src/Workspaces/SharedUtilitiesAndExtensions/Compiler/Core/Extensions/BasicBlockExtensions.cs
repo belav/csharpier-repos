@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    internal static partial class BasicBlockExtensions
+    partial internal static class BasicBlockExtensions
     {
         public static IEnumerable<IOperation> DescendantOperations(this BasicBlock basicBlock)
         {

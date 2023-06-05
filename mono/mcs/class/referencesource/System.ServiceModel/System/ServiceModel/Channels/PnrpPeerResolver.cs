@@ -952,7 +952,7 @@ namespace System.ServiceModel.Channels
                 bytes[offset++] = b;
             }
 
-            static internal string Encode(int version, string protocolName, Guid[] guids)
+            internal static string Encode(int version, string protocolName, Guid[] guids)
             {
                 byte[] bytes = new byte[CommentLength];
                 int i = 0;
@@ -998,7 +998,7 @@ namespace System.ServiceModel.Channels
                 return b;
             }
 
-            static internal void Decode(
+            internal static void Decode(
                 string buffer,
                 out int version,
                 out string protocolName,
@@ -1650,7 +1650,7 @@ namespace System.ServiceModel.Channels
                 public CsAddrInfo[] CsAddrInfos;
                 public object Blob;
 
-                static public WsaQuerySetSafe ToWsaQuerySetSafe(WsaQuerySet input)
+                public static WsaQuerySetSafe ToWsaQuerySetSafe(WsaQuerySet input)
                 {
                     WsaQuerySetSafe result = new WsaQuerySetSafe();
                     if (input == null)
@@ -1837,7 +1837,7 @@ namespace System.ServiceModel.Channels
                     disposed = true;
                 }
 
-                static public void StructureToPtr(WsaQuerySetSafe input, IntPtr target)
+                public static void StructureToPtr(WsaQuerySetSafe input, IntPtr target)
                 {
                     WsaQuerySetNative native = new WsaQuerySetNative();
                     native.dwSize = input.dwSize;
@@ -2107,7 +2107,7 @@ namespace System.ServiceModel.Channels
 
             public class PeerCloudEnumerator : DiscoveryBase
             {
-                static public CloudInfo[] GetClouds()
+                public static CloudInfo[] GetClouds()
                 {
                     int retval = 0;
                     ArrayList clouds = new ArrayList();
@@ -2552,14 +2552,14 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                static internal WsaQuerySet MarshalWsaQuerySetNativeToWsaQuerySet(
+                internal static WsaQuerySet MarshalWsaQuerySetNativeToWsaQuerySet(
                     IntPtr pNativeData
                 )
                 {
                     return MarshalWsaQuerySetNativeToWsaQuerySet(pNativeData, 0);
                 }
 
-                static internal WsaQuerySet MarshalWsaQuerySetNativeToWsaQuerySet(
+                internal static WsaQuerySet MarshalWsaQuerySetNativeToWsaQuerySet(
                     IntPtr pNativeData,
                     uint scopeId
                 )

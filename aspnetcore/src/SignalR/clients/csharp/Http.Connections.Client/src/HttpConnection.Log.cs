@@ -8,12 +8,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client;
 
-public partial class HttpConnection
+partial public class HttpConnection
 {
-    internal static partial class Log
+    partial internal static class Log
     {
         [LoggerMessage(1, LogLevel.Debug, "Starting HttpConnection.", EventName = "Starting")]
-        public static partial void Starting(ILogger logger);
+        partial public static void Starting(ILogger logger);
 
         [LoggerMessage(
             2,
@@ -21,10 +21,10 @@ public partial class HttpConnection
             "Skipping start, connection is already started.",
             EventName = "SkippingStart"
         )]
-        public static partial void SkippingStart(ILogger logger);
+        partial public static void SkippingStart(ILogger logger);
 
         [LoggerMessage(3, LogLevel.Information, "HttpConnection Started.", EventName = "Started")]
-        public static partial void Started(ILogger logger);
+        partial public static void Started(ILogger logger);
 
         [LoggerMessage(
             4,
@@ -32,7 +32,7 @@ public partial class HttpConnection
             "Disposing HttpConnection.",
             EventName = "DisposingHttpConnection"
         )]
-        public static partial void DisposingHttpConnection(ILogger logger);
+        partial public static void DisposingHttpConnection(ILogger logger);
 
         [LoggerMessage(
             5,
@@ -40,10 +40,10 @@ public partial class HttpConnection
             "Skipping dispose, connection is already disposed.",
             EventName = "SkippingDispose"
         )]
-        public static partial void SkippingDispose(ILogger logger);
+        partial public static void SkippingDispose(ILogger logger);
 
         [LoggerMessage(6, LogLevel.Information, "HttpConnection Disposed.", EventName = "Disposed")]
-        public static partial void Disposed(ILogger logger);
+        partial public static void Disposed(ILogger logger);
 
         public static void StartingTransport(
             ILogger logger,
@@ -64,7 +64,7 @@ public partial class HttpConnection
             EventName = "StartingTransport",
             SkipEnabledCheck = true
         )]
-        private static partial void StartingTransport(ILogger logger, string transport, Uri url);
+        partial private static void StartingTransport(ILogger logger, string transport, Uri url);
 
         [LoggerMessage(
             8,
@@ -72,7 +72,7 @@ public partial class HttpConnection
             "Establishing connection with server at '{Url}'.",
             EventName = "EstablishingConnection"
         )]
-        public static partial void EstablishingConnection(ILogger logger, Uri url);
+        partial public static void EstablishingConnection(ILogger logger, Uri url);
 
         [LoggerMessage(
             9,
@@ -80,7 +80,7 @@ public partial class HttpConnection
             "Established connection '{ConnectionId}' with the server.",
             EventName = "Established"
         )]
-        public static partial void ConnectionEstablished(ILogger logger, string connectionId);
+        partial public static void ConnectionEstablished(ILogger logger, string connectionId);
 
         [LoggerMessage(
             10,
@@ -88,7 +88,7 @@ public partial class HttpConnection
             "Failed to start connection. Error getting negotiation response from '{Url}'.",
             EventName = "ErrorWithNegotiation"
         )]
-        public static partial void ErrorWithNegotiation(
+        partial public static void ErrorWithNegotiation(
             ILogger logger,
             Uri url,
             Exception exception
@@ -100,7 +100,7 @@ public partial class HttpConnection
             "Failed to start connection. Error starting transport '{Transport}'.",
             EventName = "ErrorStartingTransport"
         )]
-        public static partial void ErrorStartingTransport(
+        partial public static void ErrorStartingTransport(
             ILogger logger,
             HttpTransportType transport,
             Exception exception
@@ -112,7 +112,7 @@ public partial class HttpConnection
             "Skipping transport {TransportName} because it is not supported by this client.",
             EventName = "TransportNotSupported"
         )]
-        public static partial void TransportNotSupported(ILogger logger, string transportName);
+        partial public static void TransportNotSupported(ILogger logger, string transportName);
 
         public static void TransportDoesNotSupportTransferFormat(
             ILogger logger,
@@ -137,7 +137,7 @@ public partial class HttpConnection
             EventName = "TransportDoesNotSupportTransferFormat",
             SkipEnabledCheck = true
         )]
-        private static partial void TransportDoesNotSupportTransferFormat(
+        partial private static void TransportDoesNotSupportTransferFormat(
             ILogger logger,
             string transportName,
             string transferFormat
@@ -158,7 +158,7 @@ public partial class HttpConnection
             EventName = "TransportDisabledByClient",
             SkipEnabledCheck = true
         )]
-        public static partial void TransportDisabledByClient(ILogger logger, string transportName);
+        partial public static void TransportDisabledByClient(ILogger logger, string transportName);
 
         public static void TransportFailed(
             ILogger logger,
@@ -179,7 +179,7 @@ public partial class HttpConnection
             EventName = "TransportFailed",
             SkipEnabledCheck = true
         )]
-        public static partial void TransportFailed(
+        partial public static void TransportFailed(
             ILogger logger,
             string transportName,
             Exception ex
@@ -191,7 +191,7 @@ public partial class HttpConnection
             "Skipping WebSockets because they are not supported by the operating system.",
             EventName = "WebSocketsNotSupportedByOperatingSystem"
         )]
-        public static partial void WebSocketsNotSupportedByOperatingSystem(ILogger logger);
+        partial public static void WebSocketsNotSupportedByOperatingSystem(ILogger logger);
 
         [LoggerMessage(
             17,
@@ -199,7 +199,7 @@ public partial class HttpConnection
             "The transport threw an exception while stopping.",
             EventName = "TransportThrewExceptionOnStop"
         )]
-        public static partial void TransportThrewExceptionOnStop(ILogger logger, Exception ex);
+        partial public static void TransportThrewExceptionOnStop(ILogger logger, Exception ex);
 
         [LoggerMessage(
             18,
@@ -207,7 +207,7 @@ public partial class HttpConnection
             "Transport '{Transport}' started.",
             EventName = "TransportStarted"
         )]
-        public static partial void TransportStarted(ILogger logger, HttpTransportType transport);
+        partial public static void TransportStarted(ILogger logger, HttpTransportType transport);
 
         [LoggerMessage(
             19,
@@ -215,7 +215,7 @@ public partial class HttpConnection
             "Skipping ServerSentEvents because they are not supported by the browser.",
             EventName = "ServerSentEventsNotSupportedByBrowser"
         )]
-        public static partial void ServerSentEventsNotSupportedByBrowser(ILogger logger);
+        partial public static void ServerSentEventsNotSupportedByBrowser(ILogger logger);
 
         [LoggerMessage(
             20,
@@ -223,7 +223,7 @@ public partial class HttpConnection
             "Cookies are not supported on this platform.",
             EventName = "CookiesNotSupported"
         )]
-        public static partial void CookiesNotSupported(ILogger logger);
+        partial public static void CookiesNotSupported(ILogger logger);
 
         [LoggerMessage(
             21,
@@ -231,6 +231,6 @@ public partial class HttpConnection
             "{StatusCode} received, getting a new access token and retrying request.",
             EventName = "RetryAccessToken"
         )]
-        public static partial void RetryAccessToken(ILogger logger, HttpStatusCode statusCode);
+        partial public static void RetryAccessToken(ILogger logger, HttpStatusCode statusCode);
     }
 }

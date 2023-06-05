@@ -20,7 +20,7 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace System
 {
-    public static partial class MathF
+    partial public static class MathF
     {
         public const float E = 2.71828183f;
 

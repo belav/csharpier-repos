@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         internal const int EVENT_CONTROL_CODE_DISABLE_PROVIDER = 0;
         internal const int EVENT_CONTROL_CODE_ENABLE_PROVIDER = 1;

@@ -294,9 +294,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
+    partial
     // And this extension method makes it easy to localize MessageIDs:
 
-    internal static partial class MessageIDExtensions
+    internal static class MessageIDExtensions
     {
         public static LocalizableErrorArgument Localize(this MessageID id)
         {

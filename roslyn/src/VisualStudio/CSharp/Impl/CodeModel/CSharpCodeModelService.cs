@@ -35,7 +35,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
-    internal partial class CSharpCodeModelService : AbstractCodeModelService
+    partial internal class CSharpCodeModelService : AbstractCodeModelService
     {
         private static readonly SyntaxTree s_emptyTree = SyntaxFactory.ParseSyntaxTree(
             SourceText.From("", encoding: null, SourceHashAlgorithms.Default)

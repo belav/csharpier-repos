@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.Extensions.Internal
 {
-    internal static partial class ParameterDefaultValue
+    partial internal static class ParameterDefaultValue
     {
         public static bool CheckHasDefaultValue(
             ParameterInfo parameter,

@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
-    internal static partial class EventNameTestExtensions
+    partial internal static class EventNameTestExtensions
     {
         [LoggerMessage(
             EventId = 0,
@@ -11,6 +11,6 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
             Message = "M0",
             EventName = "CustomEventName"
         )]
-        public static partial void M0(ILogger logger);
+        partial public static void M0(ILogger logger);
     }
 }

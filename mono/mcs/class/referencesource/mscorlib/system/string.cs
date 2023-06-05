@@ -46,7 +46,7 @@ namespace System
     //
     [ComVisible(true)]
     [Serializable]
-    public sealed partial class String : IComparable, ICloneable, IConvertible, IEnumerable
+    partial public sealed class String : IComparable, ICloneable, IConvertible, IEnumerable
 #if GENERICS_WORK
             ,
             IComparable<String>,
@@ -219,7 +219,7 @@ namespace System
         // Joins an array of strings together as one string with a separator between each original string.
         //
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static String Join(
+        public static unsafe String Join(
             String separator,
             String[] value,
             int startIndex,
@@ -321,7 +321,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        private unsafe static int CompareOrdinalIgnoreCaseHelper(String strA, String strB)
+        private static unsafe int CompareOrdinalIgnoreCaseHelper(String strA, String strB)
         {
             Contract.Requires(strA != null);
             Contract.Requires(strB != null);
@@ -379,7 +379,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe internal static extern int nativeCompareOrdinalIgnoreCaseWC(
+        internal static extern unsafe int nativeCompareOrdinalIgnoreCaseWC(
             String strA,
             sbyte* strBBytes
         );
@@ -391,7 +391,7 @@ namespace System
         // from the assembly.  This provides a workaround for that problem and should NOT be used anywhere else.
         //
         [System.Security.SecuritySafeCritical] // auto-generated
-        internal unsafe static string SmallCharToUpper(string strIn)
+        internal static unsafe string SmallCharToUpper(string strIn)
         {
             Contract.Requires(strIn != null);
             Contract.EndContractBlock();
@@ -437,7 +437,7 @@ namespace System
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        private unsafe static bool EqualsHelper(String strA, String strB)
+        private static unsafe bool EqualsHelper(String strA, String strB)
         {
             Contract.Requires(strA != null);
             Contract.Requires(strB != null);
@@ -511,7 +511,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        private unsafe static int CompareOrdinalHelper(String strA, String strB)
+        private static unsafe int CompareOrdinalHelper(String strA, String strB)
         {
             Contract.Requires(strA != null);
             Contract.Requires(strB != null);
@@ -877,7 +877,7 @@ namespace System
         // at bufferStartIndex.
         //
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe public void CopyTo(
+        public unsafe void CopyTo(
             int sourceIndex,
             char[] destination,
             int destinationIndex,
@@ -919,7 +919,7 @@ namespace System
 
         // Returns the entire string as an array of characters.
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe public char[] ToCharArray()
+        public unsafe char[] ToCharArray()
         {
             // <
             int length = Length;
@@ -938,7 +938,7 @@ namespace System
         // Returns a substring of this string as an array of characters.
         //
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe public char[] ToCharArray(int startIndex, int length)
+        public unsafe char[] ToCharArray(int startIndex, int length)
         {
             // Range check everything.
             if (startIndex < 0 || startIndex > Length || startIndex > Length - length)
@@ -1653,31 +1653,31 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [CLSCompliant(false), MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe public extern String(char* value);
+        public extern unsafe String(char* value);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [CLSCompliant(false), MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe public extern String(char* value, int startIndex, int length);
+        public extern unsafe String(char* value, int startIndex, int length);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [CLSCompliant(false), MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe public extern String(sbyte* value);
+        public extern unsafe String(sbyte* value);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [CLSCompliant(false), MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe public extern String(sbyte* value, int startIndex, int length);
+        public extern unsafe String(sbyte* value, int startIndex, int length);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [CLSCompliant(false), MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe public extern String(sbyte* value, int startIndex, int length, Encoding enc);
+        public extern unsafe String(sbyte* value, int startIndex, int length, Encoding enc);
 
 #if !MONO
         [System.Security.SecurityCritical] // auto-generated
-        unsafe static private String CreateString(
+        private static unsafe String CreateString(
             sbyte* value,
             int startIndex,
             int length,
@@ -1729,7 +1729,7 @@ namespace System
         // Helper for encodings so they can talk to our buffer directly
         // stringLength must be the exact size we'll expect
         [System.Security.SecurityCritical] // auto-generated
-        unsafe static internal String CreateStringFromEncoding(
+        internal static unsafe String CreateStringFromEncoding(
             byte* bytes,
             int byteLength,
             Encoding encoding
@@ -1766,7 +1766,7 @@ namespace System
             return s;
         }
 
-        unsafe internal int GetBytesFromEncoding(
+        internal unsafe int GetBytesFromEncoding(
             byte* pbNativeBuffer,
             int cbNativeBuffer,
             Encoding encoding
@@ -1781,7 +1781,7 @@ namespace System
 
 #if !MONO
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe internal int GetBytesFromEncoding(
+        internal unsafe int GetBytesFromEncoding(
             byte* pbNativeBuffer,
             int cbNativeBuffer,
             Encoding encoding
@@ -1795,7 +1795,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe internal int ConvertToAnsi(
+        internal unsafe int ConvertToAnsi(
             byte* pbNativeBuffer,
             int cbNativeBuffer,
             bool fBestFit,
@@ -1906,10 +1906,10 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static String FastAllocateString(int length);
+        internal static extern String FastAllocateString(int length);
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe private static void FillStringChecked(String dest, int destPos, String src)
+        private static unsafe void FillStringChecked(String dest, int destPos, String src)
         {
             Contract.Requires(dest != null);
             Contract.Requires(src != null);
@@ -4024,7 +4024,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe public static String Copy(String str)
+        public static unsafe String Copy(String str)
         {
             if (str == null)
             {
@@ -4577,7 +4577,7 @@ namespace System
 
         // Copies the source String (byte buffer) to the destination IntPtr memory allocated with len bytes.
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static void InternalCopy(String src, IntPtr dest, int len)
+        internal static unsafe void InternalCopy(String src, IntPtr dest, int len)
         {
             if (len == 0)
                 return;

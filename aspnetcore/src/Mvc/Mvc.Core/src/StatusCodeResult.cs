@@ -7,11 +7,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+partial
 /// <summary>
 /// Represents an <see cref="ActionResult"/> that when executed will
 /// produce an HTTP response with the given response status code.
 /// </summary>
-public partial class StatusCodeResult : ActionResult, IClientErrorActionResult
+public class StatusCodeResult : ActionResult, IClientErrorActionResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="StatusCodeResult"/> class
@@ -46,7 +47,7 @@ public partial class StatusCodeResult : ActionResult, IClientErrorActionResult
         httpContext.Response.StatusCode = StatusCode;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -54,6 +55,6 @@ public partial class StatusCodeResult : ActionResult, IClientErrorActionResult
             "Executing StatusCodeResult, setting HTTP status code {StatusCode}",
             EventName = "HttpStatusCodeResultExecuting"
         )]
-        public static partial void HttpStatusCodeResultExecuting(ILogger logger, int statusCode);
+        partial public static void HttpStatusCodeResultExecuting(ILogger logger, int statusCode);
     }
 }

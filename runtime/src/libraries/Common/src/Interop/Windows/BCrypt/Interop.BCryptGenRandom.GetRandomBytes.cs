@@ -4,7 +4,7 @@
 using System;
 using System.Diagnostics;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     internal static unsafe void GetRandomBytes(byte* buffer, int length)
     {

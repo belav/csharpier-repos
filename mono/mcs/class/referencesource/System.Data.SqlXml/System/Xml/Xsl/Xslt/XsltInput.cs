@@ -886,7 +886,7 @@ namespace System.Xml.Xsl.Xslt
         // to there's numbers in actual stylesheet as they ordered in 'records' array
         private int[] xsltAttributeNumber = new int[21];
 
-        static private XsltAttribute[] noAttributes = new XsltAttribute[] { };
+        private static XsltAttribute[] noAttributes = new XsltAttribute[] { };
 
         public ContextInfo GetAttributes()
         {

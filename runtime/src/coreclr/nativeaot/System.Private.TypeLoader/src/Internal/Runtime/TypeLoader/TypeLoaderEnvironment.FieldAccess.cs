@@ -41,7 +41,7 @@ namespace Internal.Runtime.TypeLoader
         public int Offset;
     }
 
-    public sealed partial class TypeLoaderEnvironment
+    partial public sealed class TypeLoaderEnvironment
     {
         /// <summary>
         /// Try to look up field access info for given canon in metadata blobs for all available modules.

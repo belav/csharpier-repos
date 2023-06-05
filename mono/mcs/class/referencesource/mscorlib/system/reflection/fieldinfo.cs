@@ -428,7 +428,7 @@ namespace System.Reflection
         #endregion
 
         #region Object Overrides
-        public unsafe override String ToString()
+        public override unsafe String ToString()
         {
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
                 return FieldType.ToString() + " " + Name;
@@ -507,13 +507,13 @@ namespace System.Reflection
     }
 
     [Serializable]
-    internal unsafe sealed class RtFieldInfo : RuntimeFieldInfo, IRuntimeFieldInfo
+    internal sealed unsafe class RtFieldInfo : RuntimeFieldInfo, IRuntimeFieldInfo
     {
         #region FCalls
         [System.Security.SecurityCritical] // auto-generated
         [System.Runtime.Versioning.ResourceExposure(System.Runtime.Versioning.ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private extern void PerformVisibilityCheckOnField(
+        private static extern void PerformVisibilityCheckOnField(
             IntPtr field,
             Object target,
             RuntimeType declaringType,
@@ -1215,12 +1215,12 @@ namespace System.Reflection
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
-        public unsafe override Object GetValue(Object obj)
+        public override unsafe Object GetValue(Object obj)
         {
             return GetValue(false);
         }
 
-        public unsafe override Object GetRawConstantValue()
+        public override unsafe Object GetRawConstantValue()
         {
             return GetValue(true);
         }

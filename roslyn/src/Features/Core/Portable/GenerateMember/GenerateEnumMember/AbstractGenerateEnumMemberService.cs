@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
 {
-    internal abstract partial class AbstractGenerateEnumMemberService<
+    partial internal abstract class AbstractGenerateEnumMemberService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax

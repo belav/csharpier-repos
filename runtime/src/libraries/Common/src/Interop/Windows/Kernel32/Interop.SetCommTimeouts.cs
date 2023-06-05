@@ -4,15 +4,15 @@
 using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal const int MAXDWORD = -1; // This is 0xfffffff, or UInt32.MaxValue, here used as an int
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetCommTimeouts(
+        partial internal static bool SetCommTimeouts(
             SafeFileHandle hFile,
             ref COMMTIMEOUTS lpCommTimeouts
         );

@@ -26,7 +26,7 @@ using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal abstract partial class AbstractIntroduceVariableService<
+    partial internal abstract class AbstractIntroduceVariableService<
         TService,
         TExpressionSyntax,
         TTypeSyntax,

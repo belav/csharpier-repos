@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Text;
     using System.ServiceModel.Channels;
 
-    public sealed partial class TextMessageEncodingElement : BindingElementExtensionElement
+    partial public sealed class TextMessageEncodingElement : BindingElementExtensionElement
     {
         public TextMessageEncodingElement() { }
 

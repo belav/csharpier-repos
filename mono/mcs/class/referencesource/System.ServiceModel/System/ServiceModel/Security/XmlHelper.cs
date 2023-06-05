@@ -440,7 +440,9 @@ namespace System.ServiceModel.Security
         }
 
 #if NO
-        static public void WriteAttributeStringAsUniqueId(
+        public
+#if NO
+        static void WriteAttributeStringAsUniqueId(
             XmlWriter writer,
             string localName,
             string ns,
@@ -455,7 +457,7 @@ namespace System.ServiceModel.Security
             );
         }
 
-        static public void WriteAttributeStringAsUniqueId(
+        public static void WriteAttributeStringAsUniqueId(
             XmlWriter writer,
             string prefix,
             string localName,
@@ -472,7 +474,7 @@ namespace System.ServiceModel.Security
             );
         }
 
-        static public void WriteAttributeStringAsUniqueId(
+        public static void WriteAttributeStringAsUniqueId(
             XmlDictionaryWriter writer,
             string localName,
             string ns,
@@ -482,7 +484,7 @@ namespace System.ServiceModel.Security
             WriteAttributeStringAsUniqueId(writer, null, localName, ns, id);
         }
 
-        static public void WriteAttributeStringAsUniqueId(
+        public static void WriteAttributeStringAsUniqueId(
             XmlDictionaryWriter writer,
             string prefix,
             string localName,
@@ -495,7 +497,7 @@ namespace System.ServiceModel.Security
             writer.WriteEndAttribute();
         }
 
-        static public void WriteAttributeStringAsUniqueId(
+        public static void WriteAttributeStringAsUniqueId(
             XmlDictionaryWriter writer,
             XmlDictionaryString localName,
             XmlDictionaryString ns,
@@ -506,7 +508,75 @@ namespace System.ServiceModel.Security
         }
 #endif
 
-        static public void WriteAttributeStringAsUniqueId(
+        public public
+#if NO
+        static void WriteAttributeStringAsUniqueId(
+            XmlWriter writer,
+            string localName,
+            string ns,
+            UniqueId id
+        )
+        {
+            WriteAttributeStringAsUniqueId(
+                XmlDictionaryWriter.CreateDictionaryWriter(writer),
+                localName,
+                ns,
+                id
+            );
+        }
+
+        public static void WriteAttributeStringAsUniqueId(
+            XmlWriter writer,
+            string prefix,
+            string localName,
+            string ns,
+            UniqueId id
+        )
+        {
+            WriteAttributeStringAsUniqueId(
+                XmlDictionaryWriter.CreateDictionaryWriter(writer),
+                prefix,
+                localName,
+                ns,
+                id
+            );
+        }
+
+        public static void WriteAttributeStringAsUniqueId(
+            XmlDictionaryWriter writer,
+            string localName,
+            string ns,
+            UniqueId id
+        )
+        {
+            WriteAttributeStringAsUniqueId(writer, null, localName, ns, id);
+        }
+
+        public static void WriteAttributeStringAsUniqueId(
+            XmlDictionaryWriter writer,
+            string prefix,
+            string localName,
+            string ns,
+            UniqueId id
+        )
+        {
+            writer.WriteStartAttribute(prefix, localName, ns);
+            writer.WriteValue(id);
+            writer.WriteEndAttribute();
+        }
+
+        public static void WriteAttributeStringAsUniqueId(
+            XmlDictionaryWriter writer,
+            XmlDictionaryString localName,
+            XmlDictionaryString ns,
+            UniqueId id
+        )
+        {
+            WriteAttributeStringAsUniqueId(writer, null, localName, ns, id);
+        }
+#endif
+
+        static void WriteAttributeStringAsUniqueId(
             XmlDictionaryWriter writer,
             string prefix,
             XmlDictionaryString localName,
@@ -519,7 +589,7 @@ namespace System.ServiceModel.Security
             writer.WriteEndAttribute();
         }
 
-        static public void WriteElementStringAsUniqueId(
+        public static void WriteElementStringAsUniqueId(
             XmlWriter writer,
             string localName,
             UniqueId id
@@ -531,7 +601,9 @@ namespace System.ServiceModel.Security
         }
 
 #if NO
-        static public void WriteElementStringAsUniqueId(
+        public
+#if NO
+        static void WriteElementStringAsUniqueId(
             XmlDictionaryWriter writer,
             string localName,
             UniqueId id
@@ -540,7 +612,7 @@ namespace System.ServiceModel.Security
             WriteElementStringAsUniqueId(writer, localName, null, id);
         }
 
-        static public void WriteElementStringAsUniqueId(
+        public static void WriteElementStringAsUniqueId(
             XmlDictionaryWriter writer,
             string localName,
             string ns,
@@ -553,7 +625,31 @@ namespace System.ServiceModel.Security
         }
 #endif
 
-        static public void WriteElementStringAsUniqueId(
+        public public
+#if NO
+        static void WriteElementStringAsUniqueId(
+            XmlDictionaryWriter writer,
+            string localName,
+            UniqueId id
+        )
+        {
+            WriteElementStringAsUniqueId(writer, localName, null, id);
+        }
+
+        public static void WriteElementStringAsUniqueId(
+            XmlDictionaryWriter writer,
+            string localName,
+            string ns,
+            UniqueId id
+        )
+        {
+            writer.WriteStartElement(localName, ns);
+            writer.WriteValue(id);
+            writer.WriteEndElement();
+        }
+#endif
+
+        static void WriteElementStringAsUniqueId(
             XmlDictionaryWriter writer,
             XmlDictionaryString localName,
             XmlDictionaryString ns,
@@ -565,7 +661,7 @@ namespace System.ServiceModel.Security
             writer.WriteEndElement();
         }
 
-        static public void WriteElementContentAsInt64(
+        public static void WriteElementContentAsInt64(
             XmlDictionaryWriter writer,
             XmlDictionaryString localName,
             XmlDictionaryString ns,
@@ -577,7 +673,7 @@ namespace System.ServiceModel.Security
             writer.WriteEndElement();
         }
 
-        static public Int64 ReadElementContentAsInt64(XmlDictionaryReader reader)
+        public static Int64 ReadElementContentAsInt64(XmlDictionaryReader reader)
         {
             reader.ReadFullStartElement();
             Int64 i = reader.ReadContentAsLong();
@@ -585,12 +681,12 @@ namespace System.ServiceModel.Security
             return i;
         }
 
-        static public void WriteStringAsUniqueId(XmlDictionaryWriter writer, UniqueId id)
+        public static void WriteStringAsUniqueId(XmlDictionaryWriter writer, UniqueId id)
         {
             writer.WriteValue(id);
         }
 
-        static public UniqueId ReadElementStringAsUniqueId(
+        public static UniqueId ReadElementStringAsUniqueId(
             XmlDictionaryReader reader,
             XmlDictionaryString localName,
             XmlDictionaryString ns
@@ -608,7 +704,7 @@ namespace System.ServiceModel.Security
             return id;
         }
 
-        static public UniqueId ReadElementStringAsUniqueId(XmlDictionaryReader reader)
+        public static UniqueId ReadElementStringAsUniqueId(XmlDictionaryReader reader)
         {
             if (reader.IsStartElement() && reader.IsEmptyElement)
             {
@@ -645,23 +741,51 @@ namespace System.ServiceModel.Security
             return new UniqueId(s);
         }
 
-        static public UniqueId ReadTextElementAsUniqueId(XmlDictionaryReader reader)
+        public static UniqueId ReadTextElementAsUniqueId(XmlDictionaryReader reader)
         {
             return new UniqueId(ReadTextElement(reader));
         }
 #endif
 
-        static public UniqueId ReadTextElementAsUniqueId(XmlElement element)
+        public
+#if NO
+        internal static UniqueId ReadEmptyElementAndRequiredAttributeAsUniqueId(
+            XmlDictionaryReader reader,
+            XmlDictionaryString name,
+            XmlDictionaryString namespaceUri,
+            XmlDictionaryString attributeName,
+            out string prefix
+        )
+        {
+            string s = ReadEmptyElementAndRequiredAttribute(
+                reader,
+                name,
+                namespaceUri,
+                attributeName,
+                out prefix
+            );
+
+            if (s == null)
+                return null;
+
+            return new UniqueId(s);
+        }
+
+        public static UniqueId ReadTextElementAsUniqueId(XmlDictionaryReader reader)
+        {
+            return new UniqueId(ReadTextElement(reader));
+        }
+#endif
+
+        static UniqueId ReadTextElementAsUniqueId(XmlElement element)
         {
             return new UniqueId(ReadTextElementAsTrimmedString(element));
         }
 
 #if NO
-        static public UniqueId GetAttributeAsUniqueId(
-            XmlElement element,
-            string localName,
-            string ns
-        )
+        public
+#if NO
+        static UniqueId GetAttributeAsUniqueId(XmlElement element, string localName, string ns)
         {
             XmlAttribute attr = element.Attributes[localName, ns];
 

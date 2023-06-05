@@ -20,7 +20,7 @@ namespace BundleProbeTester
             IntPtr compressedSize
         );
 
-        unsafe static bool Probe(BundleProbeDelegate bundleProbe, string path, bool isExpected)
+        static unsafe bool Probe(BundleProbeDelegate bundleProbe, string path, bool isExpected)
         {
             Int64 size,
                 offset,

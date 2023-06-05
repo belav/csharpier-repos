@@ -10,8 +10,9 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Buffers
 {
+    partial partial
 #if !__MonoCS__
-    public static partial class SequenceReaderExtensions
+    public static class SequenceReaderExtensions
     {
         /// <summary>
         /// Try to read the given type out of the buffer if possible. Warning: this is dangerous to use with arbitrary
@@ -188,7 +189,7 @@ namespace System.Buffers
         }
     }
 #else
-    public static partial class SequenceReaderExtensions
+    public static class SequenceReaderExtensions
     {
         public static bool TryReadBigEndian(
             this System.Buffers.SequenceReader<byte> reader,

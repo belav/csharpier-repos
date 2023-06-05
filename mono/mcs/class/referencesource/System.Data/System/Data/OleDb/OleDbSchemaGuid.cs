@@ -17,9 +17,10 @@ namespace System.Data.OleDb
         // so we can NOT remove the now explict public ctor
         public OleDbSchemaGuid() { }
 
+        public
         // MDAC 2.0
 
-        static public readonly Guid Tables_Info = new Guid(
+        static readonly Guid Tables_Info = new Guid(
             0xc8b522e0,
             0x5cf3,
             0x11ce,
@@ -33,9 +34,10 @@ namespace System.Data.OleDb
             0x3d
         );
 
+        public
         // MDAC 2.1
 
-        static public readonly Guid Trustee = new Guid(
+        static readonly Guid Trustee = new Guid(
             0xc8b522ef,
             0x5cf3,
             0x11ce,
@@ -49,7 +51,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Assertions = new Guid(
+        public static readonly Guid Assertions = new Guid(
             0xc8b52210,
             0x5cf3,
             0x11ce,
@@ -63,7 +65,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Catalogs = new Guid(
+        public static readonly Guid Catalogs = new Guid(
             0xc8b52211,
             0x5cf3,
             0x11ce,
@@ -77,7 +79,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Character_Sets = new Guid(
+        public static readonly Guid Character_Sets = new Guid(
             0xc8b52212,
             0x5cf3,
             0x11ce,
@@ -91,7 +93,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Collations = new Guid(
+        public static readonly Guid Collations = new Guid(
             0xc8b52213,
             0x5cf3,
             0x11ce,
@@ -105,7 +107,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Columns = new Guid(
+        public static readonly Guid Columns = new Guid(
             0xc8b52214,
             0x5cf3,
             0x11ce,
@@ -119,7 +121,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Check_Constraints = new Guid(
+        public static readonly Guid Check_Constraints = new Guid(
             0xc8b52215,
             0x5cf3,
             0x11ce,
@@ -133,7 +135,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Constraint_Column_Usage = new Guid(
+        public static readonly Guid Constraint_Column_Usage = new Guid(
             0xc8b52216,
             0x5cf3,
             0x11ce,
@@ -147,7 +149,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Constraint_Table_Usage = new Guid(
+        public static readonly Guid Constraint_Table_Usage = new Guid(
             0xc8b52217,
             0x5cf3,
             0x11ce,
@@ -161,7 +163,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Key_Column_Usage = new Guid(
+        public static readonly Guid Key_Column_Usage = new Guid(
             0xc8b52218,
             0x5cf3,
             0x11ce,
@@ -175,7 +177,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Referential_Constraints = new Guid(
+        public static readonly Guid Referential_Constraints = new Guid(
             0xc8b52219,
             0x5cf3,
             0x11ce,
@@ -189,7 +191,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Table_Constraints = new Guid(
+        public static readonly Guid Table_Constraints = new Guid(
             0xc8b5221a,
             0x5cf3,
             0x11ce,
@@ -203,7 +205,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Column_Domain_Usage = new Guid(
+        public static readonly Guid Column_Domain_Usage = new Guid(
             0xc8b5221b,
             0x5cf3,
             0x11ce,
@@ -217,7 +219,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Indexes = new Guid(
+        public static readonly Guid Indexes = new Guid(
             0xc8b5221e,
             0x5cf3,
             0x11ce,
@@ -231,7 +233,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Column_Privileges = new Guid(
+        public static readonly Guid Column_Privileges = new Guid(
             0xc8b52221,
             0x5cf3,
             0x11ce,
@@ -245,7 +247,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Table_Privileges = new Guid(
+        public static readonly Guid Table_Privileges = new Guid(
             0xc8b52222,
             0x5cf3,
             0x11ce,
@@ -259,7 +261,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Usage_Privileges = new Guid(
+        public static readonly Guid Usage_Privileges = new Guid(
             0xc8b52223,
             0x5cf3,
             0x11ce,
@@ -273,7 +275,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Procedures = new Guid(
+        public static readonly Guid Procedures = new Guid(
             0xc8b52224,
             0x5cf3,
             0x11ce,
@@ -287,7 +289,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Schemata = new Guid(
+        public static readonly Guid Schemata = new Guid(
             0xc8b52225,
             0x5cf3,
             0x11ce,
@@ -301,7 +303,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Sql_Languages = new Guid(
+        public static readonly Guid Sql_Languages = new Guid(
             0xc8b52226,
             0x5cf3,
             0x11ce,
@@ -315,7 +317,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Statistics = new Guid(
+        public static readonly Guid Statistics = new Guid(
             0xc8b52227,
             0x5cf3,
             0x11ce,
@@ -329,7 +331,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Tables = new Guid(
+        public static readonly Guid Tables = new Guid(
             0xc8b52229,
             0x5cf3,
             0x11ce,
@@ -343,7 +345,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Translations = new Guid(
+        public static readonly Guid Translations = new Guid(
             0xc8b5222a,
             0x5cf3,
             0x11ce,
@@ -357,7 +359,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Provider_Types = new Guid(
+        public static readonly Guid Provider_Types = new Guid(
             0xc8b5222c,
             0x5cf3,
             0x11ce,
@@ -371,7 +373,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Views = new Guid(
+        public static readonly Guid Views = new Guid(
             0xc8b5222d,
             0x5cf3,
             0x11ce,
@@ -385,7 +387,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid View_Column_Usage = new Guid(
+        public static readonly Guid View_Column_Usage = new Guid(
             0xc8b5222e,
             0x5cf3,
             0x11ce,
@@ -399,7 +401,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid View_Table_Usage = new Guid(
+        public static readonly Guid View_Table_Usage = new Guid(
             0xc8b5222f,
             0x5cf3,
             0x11ce,
@@ -413,7 +415,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Procedure_Parameters = new Guid(
+        public static readonly Guid Procedure_Parameters = new Guid(
             0xc8b522b8,
             0x5cf3,
             0x11ce,
@@ -427,7 +429,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Foreign_Keys = new Guid(
+        public static readonly Guid Foreign_Keys = new Guid(
             0xc8b522c4,
             0x5cf3,
             0x11ce,
@@ -441,7 +443,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Primary_Keys = new Guid(
+        public static readonly Guid Primary_Keys = new Guid(
             0xc8b522c5,
             0x5cf3,
             0x11ce,
@@ -455,7 +457,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Procedure_Columns = new Guid(
+        public static readonly Guid Procedure_Columns = new Guid(
             0xc8b522c9,
             0x5cf3,
             0x11ce,
@@ -469,9 +471,10 @@ namespace System.Data.OleDb
             0x3d
         );
 
+        public
         // MDAC 2.6
 
-        static public readonly Guid Table_Statistics = new Guid(
+        static readonly Guid Table_Statistics = new Guid(
             0xc8b522ff,
             0x5cf3,
             0x11ce,
@@ -485,7 +488,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid Check_Constraints_By_Table = new Guid(
+        public static readonly Guid Check_Constraints_By_Table = new Guid(
             0xc8b52301,
             0x5cf3,
             0x11ce,
@@ -499,7 +502,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static public readonly Guid SchemaGuids = new Guid(
+        public static readonly Guid SchemaGuids = new Guid(
             0xf3264c9b,
             0x1860,
             0x4dfe,
@@ -513,7 +516,7 @@ namespace System.Data.OleDb
             0xbd
         );
 
-        static public readonly Guid DbInfoKeywords = new Guid(
+        public static readonly Guid DbInfoKeywords = new Guid(
             0xf3264c9c,
             0x1860,
             0x4dfe,
@@ -527,7 +530,7 @@ namespace System.Data.OleDb
             0xbd
         );
 
-        static public readonly Guid DbInfoLiterals = new Guid(
+        public static readonly Guid DbInfoLiterals = new Guid(
             0xf3264c9d,
             0x1860,
             0x4dfe,
@@ -541,7 +544,7 @@ namespace System.Data.OleDb
             0xbd
         );
 
-        static internal string GetTextFromValue(Guid guid)
+        internal static string GetTextFromValue(Guid guid)
         { // MDAC 74085
             // it is correct that SchemaGuids, DbInfoKeywords, DbInfoLiterals don't appear below
             // those are manufactured guids for calling methods other than IDBSchemaRowset.GetRowset

@@ -206,6 +206,7 @@ namespace Microsoft.Diagnostics.Tracing
 namespace System.Diagnostics.Tracing
 #endif
 {
+    partial
     /// <summary>
     /// This class is meant to be inherited by a user-defined event source in order to define a managed
     /// ETW provider.   Please See DESIGN NOTES above for the internal architecture.
@@ -241,7 +242,7 @@ namespace System.Diagnostics.Tracing
     /// }
     /// </code>
     /// </remarks>
-    public partial class EventSource : IDisposable
+    public class EventSource : IDisposable
     {
         /// <summary>
         /// The human-friendly name of the eventSource.  It defaults to the simple name of the class
@@ -2498,7 +2499,7 @@ namespace System.Diagnostics.Tracing
         }
 
         [SecurityCritical]
-        unsafe private object[] SerializeEventArgs(int eventId, object[] args)
+        private unsafe object[] SerializeEventArgs(int eventId, object[] args)
         {
             TraceLoggingEventTypes eventTypes = m_eventData[eventId].TraceLoggingEventTypes;
             if (eventTypes == null)
@@ -2591,7 +2592,7 @@ namespace System.Diagnostics.Tracing
         }
 
         [SecurityCritical]
-        unsafe private void WriteToAllListeners(
+        private unsafe void WriteToAllListeners(
             int eventId,
             Guid* childActivityID,
             int eventDataCount,
@@ -2630,7 +2631,7 @@ namespace System.Diagnostics.Tracing
 
         // helper for writing to all EventListeners attached the current eventSource.
         [SecurityCritical]
-        unsafe private void WriteToAllListeners(
+        private unsafe void WriteToAllListeners(
             int eventId,
             Guid* childActivityID,
             params object[] args
@@ -2834,7 +2835,7 @@ namespace System.Diagnostics.Tracing
 
 #if FEATURE_ACTIVITYSAMPLING
         [SecurityCritical]
-        unsafe private SessionMask GetEtwSessionMask(int eventId, Guid* childActivityID)
+        private unsafe SessionMask GetEtwSessionMask(int eventId, Guid* childActivityID)
         {
             SessionMask etwSessions = new SessionMask();
 
@@ -4858,7 +4859,7 @@ namespace System.Diagnostics.Tracing
             "CA1502:AvoidExcessiveComplexity",
             Justification = "Switch statement is clearer than alternatives"
         )]
-        static private int GetHelperCallFirstArg(MethodInfo method)
+        private static int GetHelperCallFirstArg(MethodInfo method)
         {
 #if !ES_BUILD_PCL
             // Currently searches for the following pattern
@@ -5188,7 +5189,7 @@ namespace System.Diagnostics.Tracing
         private List<EtwSession> m_legacySessions; // the legacy ETW sessions listening to this source
         internal long m_keywordTriggers; // a bit is set if it corresponds to a keyword that's part of an enabled triggering event
         internal SessionMask m_activityFilteringForETWEnabled; // does THIS EventSource have activity filtering turned on for each ETW session
-        static internal Action<Guid> s_activityDying; // Fires when something calls SetCurrentThreadToActivity()
+        internal static Action<Guid> s_activityDying; // Fires when something calls SetCurrentThreadToActivity()
         // Also used to mark that activity tracing is on for some case
 #endif // FEATURE_ACTIVITYSAMPLING
 
@@ -5534,7 +5535,21 @@ namespace System.Diagnostics.Tracing
         /// for a particular eventSource to occur BEFORE the OnEventSourceCreated is issued.
         /// </summary>
         /// <param name="eventSource"></param>
-        internal protected virtual void OnEventSourceCreated(EventSource eventSource)
+        protected
+        /// <summary>
+        /// This method is called whenever a new eventSource is 'attached' to the dispatcher.
+        /// This can happen for all existing EventSources when the EventListener is created
+        /// as well as for any EventSources that come into existence after the EventListener
+        /// has been created.
+        ///
+        /// These 'catch up' events are called during the construction of the EventListener.
+        /// Subclasses need to be prepared for that.
+        ///
+        /// In a multi-threaded environment, it is possible that 'OnEventWritten' callbacks
+        /// for a particular eventSource to occur BEFORE the OnEventSourceCreated is issued.
+        /// </summary>
+        /// <param name="eventSource"></param>
+        internal virtual void OnEventSourceCreated(EventSource eventSource)
         {
             EventHandler<EventSourceCreatedEventArgs> callBack = this._EventSourceCreated;
             if (callBack != null)
@@ -5550,7 +5565,13 @@ namespace System.Diagnostics.Tracing
         /// the EventListener has enabled events.
         /// </summary>
         /// <param name="eventData"></param>
-        internal protected virtual void OnEventWritten(EventWrittenEventArgs eventData)
+        protected
+        /// <summary>
+        /// This method is called whenever an event has been written by a EventSource for which
+        /// the EventListener has enabled events.
+        /// </summary>
+        /// <param name="eventData"></param>
+        internal virtual void OnEventWritten(EventWrittenEventArgs eventData)
         {
             EventHandler<EventWrittenEventArgs> callBack = this.EventWritten;
             if (callBack != null)
@@ -6621,7 +6642,7 @@ namespace System.Diagnostics.Tracing
         /// current activity is active.
         /// </summary>
         [SecurityCritical]
-        unsafe public static bool PassesActivityFilter(
+        public static unsafe bool PassesActivityFilter(
             ActivityFilter filterList,
             Guid* childActivityID,
             bool triggeringEvent,
@@ -6751,7 +6772,7 @@ namespace System.Diagnostics.Tracing
         /// that the current activity is active.
         /// </summary>
         [SecurityCritical]
-        unsafe public static void FlowActivityIfNeeded(
+        public static unsafe void FlowActivityIfNeeded(
             ActivityFilter filterList,
             Guid* currentActivityId,
             Guid* childActivityID
@@ -7281,8 +7302,9 @@ namespace System.Diagnostics.Tracing
             m_Listener = listener;
         }
 
+        internal
         // Instance fields
-        readonly internal EventListener m_Listener; // The dispatcher this entry is for
+        readonly EventListener m_Listener; // The dispatcher this entry is for
         internal bool[] m_EventEnabled; // For every event in a the eventSource, is it enabled?
 #if FEATURE_ACTIVITYSAMPLING
         internal bool m_activityFilteringEnabled; // does THIS EventSource have activity filtering turned on for this listener?

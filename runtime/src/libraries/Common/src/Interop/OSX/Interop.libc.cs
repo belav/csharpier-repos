@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class @libc
+    partial internal static class @libc
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct AttrList
@@ -29,7 +29,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static unsafe partial int setattrlist(
+        partial internal static unsafe int setattrlist(
             string path,
             AttrList* attrList,
             void* attrBuf,
@@ -40,7 +40,7 @@ internal static partial class Interop
         internal const uint FSOPT_NOFOLLOW = 0x00000001;
 
         [LibraryImport(Libraries.libc, EntryPoint = "fsetattrlist", SetLastError = true)]
-        private static unsafe partial int fsetattrlist(
+        partial private static unsafe int fsetattrlist(
             int fd,
             AttrList* attrList,
             void* attrBuf,

@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public abstract partial class TransportElement : BindingElementExtensionElement
+    partial public abstract class TransportElement : BindingElementExtensionElement
     {
         // Static Fields
         ConfigurationPropertyCollection _properties;

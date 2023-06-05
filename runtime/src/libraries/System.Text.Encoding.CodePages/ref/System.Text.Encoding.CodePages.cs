@@ -6,7 +6,7 @@
 
 namespace System.Text
 {
-    public sealed partial class CodePagesEncodingProvider : System.Text.EncodingProvider
+    partial public sealed class CodePagesEncodingProvider : System.Text.EncodingProvider
     {
         internal CodePagesEncodingProvider() { }
 

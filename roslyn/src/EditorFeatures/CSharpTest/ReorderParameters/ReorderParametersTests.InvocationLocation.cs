@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReorderParameters
 {
-    public partial class ReorderParametersTests
+    partial public class ReorderParametersTests
     {
         #region Methods
 

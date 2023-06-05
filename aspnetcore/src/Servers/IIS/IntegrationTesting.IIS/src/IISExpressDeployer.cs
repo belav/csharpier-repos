@@ -14,10 +14,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
+partial
 /// <summary>
 /// Deployment helper for IISExpress.
 /// </summary>
-public partial class IISExpressDeployer : IISDeployerBase
+public class IISExpressDeployer : IISDeployerBase
 {
     private const string IISExpressRunningMessage = "IIS Express is running.";
     private const string FailedToInitializeBindingsMessage = "Failed to initialize site bindings";
@@ -561,16 +562,16 @@ public partial class IISExpressDeployer : IISDeployerBase
         }
     }
 
-    private sealed partial class WindowsNativeMethods
+    partial private sealed class WindowsNativeMethods
     {
         internal delegate bool EnumWindowProc(IntPtr hwnd, IntPtr lParam);
 
         [LibraryImport("user32.dll")]
-        internal static partial uint GetWindowThreadProcessId(IntPtr hwnd, out uint lpdwProcessId);
+        partial internal static uint GetWindowThreadProcessId(IntPtr hwnd, out uint lpdwProcessId);
 
         [LibraryImport("user32.dll", EntryPoint = "PostMessageW")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool PostMessage(
+        partial internal static bool PostMessage(
             [MarshalUsing(typeof(HandleRefMarshaller))] HandleRef hWnd,
             uint Msg,
             IntPtr wParam,
@@ -579,10 +580,10 @@ public partial class IISExpressDeployer : IISDeployerBase
 
         [LibraryImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool EnumWindows(EnumWindowProc callback, IntPtr lParam);
+        partial internal static bool EnumWindows(EnumWindowProc callback, IntPtr lParam);
 
         [LibraryImport("user32.dll", EntryPoint = "GetClassNameW", SetLastError = true)]
-        internal static partial int GetClassName(
+        partial internal static int GetClassName(
             IntPtr hWnd,
             [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U2)]
                 char[] lpClassName,

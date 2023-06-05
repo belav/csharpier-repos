@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class NamedPipeConnectionPoolSettingsElement : ConfigurationElement
+    partial public sealed class NamedPipeConnectionPoolSettingsElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

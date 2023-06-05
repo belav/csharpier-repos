@@ -3,7 +3,7 @@
 
 namespace IntelHardwareIntrinsicTest.General
 {
-    public partial class Program
+    partial public class Program
     {
         private const int Pass = 100;
         private const int Fail = -1;

@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class
+    partial internal class
 #if DEBUG
     ParameterSymbolAdapter : SymbolAdapter,
 #else
@@ -210,7 +210,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal partial class ParameterSymbol
+    partial internal class ParameterSymbol
     {
 #if DEBUG
         private ParameterSymbolAdapter _lazyAdapter;
@@ -271,8 +271,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
+    partial
 #if DEBUG
-    internal partial class ParameterSymbolAdapter
+    internal class ParameterSymbolAdapter
     {
         internal ParameterSymbolAdapter(ParameterSymbol underlyingParameterSymbol)
         {

@@ -11,7 +11,7 @@ using Internal.TypeSystem;
 
 namespace Internal.Runtime.TypeLoader
 {
-    public sealed partial class TypeLoaderEnvironment
+    partial public sealed class TypeLoaderEnvironment
     {
         // Container data structures with info on dynamically created method and type instantiations that need registration.
         // More convinient to pass around in calls, instead of passing the individual components

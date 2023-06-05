@@ -11,7 +11,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
-    public sealed partial class GacIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    partial public sealed class GacIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public GacIdentityPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }

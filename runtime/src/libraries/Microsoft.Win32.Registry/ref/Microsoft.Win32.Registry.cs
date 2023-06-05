@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32
 {
-    public static partial class Registry
+    partial public static class Registry
     {
         public static readonly Microsoft.Win32.RegistryKey ClassesRoot;
         public static readonly Microsoft.Win32.RegistryKey CurrentConfig;
@@ -40,7 +40,7 @@ namespace Microsoft.Win32
         CurrentConfig = -2147483643,
     }
 
-    public sealed partial class RegistryKey : System.MarshalByRefObject, System.IDisposable
+    partial public sealed class RegistryKey : System.MarshalByRefObject, System.IDisposable
     {
         internal RegistryKey() { }
 
@@ -322,7 +322,7 @@ namespace Microsoft.Win32
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeRegistryHandle
+    partial public sealed class SafeRegistryHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeRegistryHandle()
@@ -340,7 +340,7 @@ namespace Microsoft.Win32.SafeHandles
 
 namespace System.Security.AccessControl
 {
-    public sealed partial class RegistryAccessRule : System.Security.AccessControl.AccessRule
+    partial public sealed class RegistryAccessRule : System.Security.AccessControl.AccessRule
     {
         public RegistryAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -408,7 +408,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public sealed partial class RegistryAuditRule : System.Security.AccessControl.AuditRule
+    partial public sealed class RegistryAuditRule : System.Security.AccessControl.AuditRule
     {
         public RegistryAuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -467,7 +467,7 @@ namespace System.Security.AccessControl
         FullControl = 983103,
     }
 
-    public sealed partial class RegistrySecurity
+    partial public sealed class RegistrySecurity
         : System.Security.AccessControl.NativeObjectSecurity
     {
         public RegistrySecurity()

@@ -23,11 +23,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 {
-    internal partial class UnitTestingSolutionCrawlerRegistrationService
+    partial internal class UnitTestingSolutionCrawlerRegistrationService
     {
-        internal partial class UnitTestingWorkCoordinator
+        partial internal class UnitTestingWorkCoordinator
         {
-            private partial class UnitTestingIncrementalAnalyzerProcessor
+            partial private class UnitTestingIncrementalAnalyzerProcessor
             {
                 private static readonly Func<int, object, bool, string> s_enqueueLogger =
                     EnqueueLogger;

@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
-    internal partial class MethodDebugInfo<TTypeSymbol, TLocalSymbol>
+    partial internal class MethodDebugInfo<TTypeSymbol, TLocalSymbol>
     {
         /// <exception cref="BadImageFormatException">Invalid data format.</exception>
         public static MethodDebugInfo<TTypeSymbol, TLocalSymbol> ReadFromPortable(

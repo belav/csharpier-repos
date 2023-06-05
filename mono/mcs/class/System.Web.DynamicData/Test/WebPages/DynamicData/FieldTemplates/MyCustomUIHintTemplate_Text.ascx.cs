@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class DynamicData_FieldTemplates_MyCustomUIHintTemplate_Text
+partial public class DynamicData_FieldTemplates_MyCustomUIHintTemplate_Text
     : System.Web.DynamicData.FieldTemplateUserControl
 {
     public override Control DataControl

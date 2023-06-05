@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace System.Formats.Cbor
 {
-    public partial class CborWriter
+    partial public class CborWriter
     {
         /// <summary>Assign a semantic tag (major type 6) to the next data item.</summary>
         /// <param name="tag">The value to write.</param>

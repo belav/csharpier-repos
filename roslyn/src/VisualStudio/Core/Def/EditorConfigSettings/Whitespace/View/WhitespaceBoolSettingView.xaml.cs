@@ -8,10 +8,11 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespace.Vi
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespace.View
 {
+    partial
     /// <summary>
     /// Interaction logic for WhitespaceValueSettingControl.xaml
     /// </summary>
-    internal partial class WhitespaceBoolSettingView : UserControl
+    internal class WhitespaceBoolSettingView : UserControl
     {
         public WhitespaceBoolSettingView(WhitespaceSettingBoolViewModel viewModel)
         {

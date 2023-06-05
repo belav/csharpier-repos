@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 {
-    internal partial class CSharpIntroduceVariableService
+    partial internal class CSharpIntroduceVariableService
     {
         protected override async Task<Document> IntroduceLocalAsync(
             SemanticDocument document,

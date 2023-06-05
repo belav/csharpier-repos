@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-static partial class StaticClass
+partial static class StaticClass
 {
     public static string Name()
     {
@@ -11,7 +11,7 @@ static partial class StaticClass
 
 partial class StaticClass2 { }
 
-static partial class StaticClass2 { }
+partial static class StaticClass2 { }
 
 public class MainClass
 {

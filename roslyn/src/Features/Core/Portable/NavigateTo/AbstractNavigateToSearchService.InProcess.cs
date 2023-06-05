@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.NavigateTo
 {
-    internal abstract partial class AbstractNavigateToSearchService
+    partial internal abstract class AbstractNavigateToSearchService
     {
         private static readonly ImmutableArray<(
             PatternMatchKind roslynKind,

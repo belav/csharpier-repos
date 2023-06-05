@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    public abstract partial class XmlResolver
+    partial public abstract class XmlResolver
     {
         public virtual Task<object> GetEntityAsync(
             Uri absoluteUri,

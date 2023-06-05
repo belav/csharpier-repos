@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum SeekWhence
         {
@@ -20,6 +20,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_LSeek",
             SetLastError = true
         )]
-        internal static partial long LSeek(SafeFileHandle fd, long offset, SeekWhence whence);
+        partial internal static long LSeek(SafeFileHandle fd, long offset, SeekWhence whence);
     }
 }

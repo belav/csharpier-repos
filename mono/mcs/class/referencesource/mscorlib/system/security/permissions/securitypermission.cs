@@ -55,7 +55,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class SecurityPermission
+    public sealed class SecurityPermission
         : CodeAccessPermission,
             IUnrestrictedPermission,
             IBuiltInPermission

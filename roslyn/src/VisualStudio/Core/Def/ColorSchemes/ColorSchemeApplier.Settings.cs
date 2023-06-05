@@ -18,7 +18,7 @@ using NativeMethods = Microsoft.CodeAnalysis.Editor.Wpf.Utilities.NativeMethods;
 
 namespace Microsoft.CodeAnalysis.ColorSchemes
 {
-    internal partial class ColorSchemeApplier
+    partial internal class ColorSchemeApplier
     {
         private class ColorSchemeSettings
         {

@@ -5,7 +5,7 @@ using System;
 
 namespace Functions
 {
-    public static partial class MathTests
+    partial public static class MathTests
     {
         // Tests MathF.Atan2(float, float) over 5000 iterations for the domain y: -1, +1; x: +1, -1
 

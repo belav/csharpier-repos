@@ -1139,7 +1139,7 @@ namespace System.DirectoryServices.Protocols
     }
 
     [SupportedOSPlatform("windows")]
-    public partial class QuotaControl : DirectoryControl
+    partial public class QuotaControl : DirectoryControl
     {
         private byte[] _sid;
 

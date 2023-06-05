@@ -141,7 +141,7 @@ namespace System.Data.Mapping.Update.Internal
             FixSet(ref IncludedValueEnds);
         }
 
-        static private void AddEnd(ref Set<AssociationEndMember> set, AssociationEndMember element)
+        private static void AddEnd(ref Set<AssociationEndMember> set, AssociationEndMember element)
         {
             if (null == set)
             {
@@ -150,7 +150,7 @@ namespace System.Data.Mapping.Update.Internal
             set.Add(element);
         }
 
-        static private void FixSet(ref Set<AssociationEndMember> set)
+        private static void FixSet(ref Set<AssociationEndMember> set)
         {
             if (null == set)
             {

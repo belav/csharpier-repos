@@ -36,7 +36,7 @@ using Mono.Security.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public partial class RSACryptoServiceProvider
+    partial public class RSACryptoServiceProvider
     {
         private const int PROV_RSA_FULL = 1; // from WinCrypt.h
         private const int AT_KEYEXCHANGE = 1;

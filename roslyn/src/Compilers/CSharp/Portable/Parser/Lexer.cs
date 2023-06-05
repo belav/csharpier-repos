@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         Delimited = 1
     }
 
-    internal partial class Lexer : AbstractLexer
+    partial internal class Lexer : AbstractLexer
     {
         private const int TriviaListInitialCapacity = 8;
 

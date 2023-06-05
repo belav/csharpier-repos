@@ -14,7 +14,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         "These tests run serially at about 1 second each, and the code shouldn't change that often."
     )]
     [ConditionalClass(typeof(DynamicRevocationTests), nameof(SupportsDynamicRevocation))]
-    public static partial class DynamicRevocationTests
+    partial public static class DynamicRevocationTests
     {
         // The CI machines are doing an awful lot of things at once, be generous with the timeout;
         internal static readonly TimeSpan s_urlRetrievalLimit = TimeSpan.FromSeconds(30);

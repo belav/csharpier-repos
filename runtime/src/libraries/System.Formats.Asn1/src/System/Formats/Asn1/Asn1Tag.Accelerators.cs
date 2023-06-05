@@ -3,7 +3,7 @@
 
 namespace System.Formats.Asn1
 {
-    public partial struct Asn1Tag
+    partial public struct Asn1Tag
     {
         /// <summary>
         ///   Represents the End-of-Contents meta-tag.

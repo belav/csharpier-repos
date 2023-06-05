@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using Xunit;
 
-public partial class SafeWaitHandleExtensionsTests
+partial public class SafeWaitHandleExtensionsTests
 {
     public class MyWaitHandle : WaitHandle
     {

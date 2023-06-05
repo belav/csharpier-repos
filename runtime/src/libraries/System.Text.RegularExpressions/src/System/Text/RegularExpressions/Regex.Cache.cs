@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions
 {
-    public partial class Regex
+    partial public class Regex
     {
         public static int CacheSize
         {

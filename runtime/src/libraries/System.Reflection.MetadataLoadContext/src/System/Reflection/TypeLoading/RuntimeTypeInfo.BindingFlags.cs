@@ -7,7 +7,7 @@ using System.Reflection.Runtime.General;
 
 namespace System.Reflection.TypeLoading
 {
-    internal abstract partial class RoType
+    partial internal abstract class RoType
     {
         public sealed override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr) =>
             Query<ConstructorInfo>(bindingAttr).ToArray();

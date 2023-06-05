@@ -3,14 +3,14 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static unsafe partial class Kernel32
+    partial internal static unsafe class Kernel32
     {
         internal const int LOCALE_NAME_MAX_LENGTH = 85;
 
         [LibraryImport("kernel32.dll", StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial int ResolveLocaleName(
+        partial internal static int ResolveLocaleName(
             string lpNameToResolve,
             char* lpLocaleName,
             int cchLocaleName

@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static unsafe partial uint GetConsoleTitleW(char* title, uint nSize);
+        partial internal static unsafe uint GetConsoleTitleW(char* title, uint nSize);
     }
 }

@@ -142,32 +142,32 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
             internal MyWebControlAdapter(WebControl wc)
                 : base(wc) { }
 
-            new internal void RenderBeginTag(HtmlTextWriter w)
+            internal new void RenderBeginTag(HtmlTextWriter w)
             {
                 base.RenderBeginTag(w);
             }
 
-            new internal void RenderContents(HtmlTextWriter w)
+            internal new void RenderContents(HtmlTextWriter w)
             {
                 base.RenderContents(w);
             }
 
-            new internal void RenderEndTag(HtmlTextWriter w)
+            internal new void RenderEndTag(HtmlTextWriter w)
             {
                 base.RenderEndTag(w);
             }
 
-            new internal void Render(HtmlTextWriter w)
+            internal new void Render(HtmlTextWriter w)
             {
                 base.Render(w);
             }
 
-            new internal WebControl Control
+            internal new WebControl Control
             {
                 get { return base.Control; }
             }
 
-            new internal bool IsEnabled
+            internal new bool IsEnabled
             {
                 get { return base.IsEnabled; }
             }

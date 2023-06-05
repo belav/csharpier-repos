@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum PathConfName : int
         {
@@ -26,6 +26,6 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        private static partial int PathConf(string path, PathConfName name);
+        partial private static int PathConf(string path, PathConfName name);
     }
 }

@@ -14,7 +14,7 @@ using WellKnownType = ILLink.Shared.TypeSystemProxy.WellKnownType;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    internal partial struct HandleCallAction
+    partial internal struct HandleCallAction
     {
 #pragma warning disable CA1822 // Mark members as static - the other partial implementations might need to be instance methods
 
@@ -42,7 +42,7 @@ namespace ILLink.Shared.TrimAnalysis
             );
         }
 
-        private partial bool MethodIsTypeConstructor(MethodProxy method)
+        partial private bool MethodIsTypeConstructor(MethodProxy method)
         {
             if (!method.Method.IsConstructor)
                 return false;
@@ -56,7 +56,7 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy(
+        partial private IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -68,7 +68,7 @@ namespace ILLink.Shared.TrimAnalysis
                 yield return new SystemReflectionMethodBaseValue(new MethodProxy(method));
         }
 
-        private partial IEnumerable<SystemTypeValue> GetNestedTypesOnType(
+        partial private IEnumerable<SystemTypeValue> GetNestedTypesOnType(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -80,7 +80,7 @@ namespace ILLink.Shared.TrimAnalysis
                 yield return new SystemTypeValue(new TypeProxy(nestedType));
         }
 
-        private partial bool TryGetBaseType(TypeProxy type, out TypeProxy? baseType)
+        partial private bool TryGetBaseType(TypeProxy type, out TypeProxy? baseType)
         {
             if (type.Type.BaseType != null)
             {
@@ -93,7 +93,9 @@ namespace ILLink.Shared.TrimAnalysis
         }
 
 #pragma warning disable IDE0060
-        private partial bool TryResolveTypeNameForCreateInstanceAndMark(
+        partial
+#pragma warning disable IDE0060
+        private bool TryResolveTypeNameForCreateInstanceAndMark(
             in MethodProxy calledMethod,
             string assemblyName,
             string typeName,
@@ -115,10 +117,13 @@ namespace ILLink.Shared.TrimAnalysis
         }
 #pragma warning restore IDE0060
 
-        private partial void MarkStaticConstructor(TypeProxy type) =>
+        partial
+#pragma warning restore IDE0060
+
+        private void MarkStaticConstructor(TypeProxy type) =>
             _reflectionMarker.MarkStaticConstructor(_diagnosticContext.Origin, type.Type);
 
-        private partial void MarkEventsOnTypeHierarchy(
+        partial private void MarkEventsOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -131,7 +136,7 @@ namespace ILLink.Shared.TrimAnalysis
                 bindingFlags
             );
 
-        private partial void MarkFieldsOnTypeHierarchy(
+        partial private void MarkFieldsOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -144,7 +149,7 @@ namespace ILLink.Shared.TrimAnalysis
                 bindingFlags
             );
 
-        private partial void MarkPropertiesOnTypeHierarchy(
+        partial private void MarkPropertiesOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -157,7 +162,7 @@ namespace ILLink.Shared.TrimAnalysis
                 bindingFlags
             );
 
-        private partial void MarkPublicParameterlessConstructorOnType(TypeProxy type) =>
+        partial private void MarkPublicParameterlessConstructorOnType(TypeProxy type) =>
             _reflectionMarker.MarkConstructorsOnType(
                 _diagnosticContext.Origin,
                 type.Type,
@@ -165,7 +170,7 @@ namespace ILLink.Shared.TrimAnalysis
                 _memberWithRequirements
             );
 
-        private partial void MarkConstructorsOnType(
+        partial private void MarkConstructorsOnType(
             TypeProxy type,
             BindingFlags? bindingFlags,
             int? parameterCount
@@ -180,21 +185,21 @@ namespace ILLink.Shared.TrimAnalysis
                 bindingFlags
             );
 
-        private partial void MarkMethod(MethodProxy method) =>
+        partial private void MarkMethod(MethodProxy method) =>
             _reflectionMarker.MarkMethod(
                 _diagnosticContext.Origin,
                 method.Method,
                 _memberWithRequirements
             );
 
-        private partial void MarkType(TypeProxy type) =>
+        partial private void MarkType(TypeProxy type) =>
             _reflectionMarker.MarkType(
                 _diagnosticContext.Origin,
                 type.Type,
                 _memberWithRequirements
             );
 
-        private partial bool MarkAssociatedProperty(MethodProxy method)
+        partial private bool MarkAssociatedProperty(MethodProxy method)
         {
             var propertyDefinition = method.Method.GetPropertyForAccessor();
             if (propertyDefinition is null)
@@ -210,6 +215,6 @@ namespace ILLink.Shared.TrimAnalysis
             return true;
         }
 
-        private partial string GetContainingSymbolDisplayName() => _callingMethod.GetDisplayName();
+        partial private string GetContainingSymbolDisplayName() => _callingMethod.GetDisplayName();
     }
 }

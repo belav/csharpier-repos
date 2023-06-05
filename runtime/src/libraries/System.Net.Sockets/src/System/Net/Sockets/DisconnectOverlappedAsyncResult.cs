@@ -3,8 +3,9 @@
 
 namespace System.Net.Sockets
 {
+    partial
     // DisconnectOverlappedAsyncResult - used to take care of storage for async Socket BeginDisconnect call.
-    internal sealed partial class DisconnectOverlappedAsyncResult : BaseOverlappedAsyncResult
+    internal sealed class DisconnectOverlappedAsyncResult : BaseOverlappedAsyncResult
     {
         internal DisconnectOverlappedAsyncResult(
             Socket socket,

@@ -18,13 +18,14 @@ namespace System.Xml
 #endif
     using System.Runtime.Versioning;
 
+    partial
     /// <include file='doc\XmlResolver.uex' path='docs/doc[@for="XmlResolver"]/*' />
     /// <devdoc>
     ///    <para>Resolves external XML resources named by a Uniform
     ///       Resource Identifier (URI). This class is <see langword='abstract'/>
     ///       .</para>
     /// </devdoc>
-    public abstract partial class XmlResolver
+    public abstract class XmlResolver
     {
         /// <include file='doc\XmlResolver.uex' path='docs/doc[@for="XmlResolver.GetEntity1"]/*' />
         /// <devdoc>

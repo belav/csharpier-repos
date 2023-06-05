@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal partial class INamespaceSymbolExtensions
+    partial internal class INamespaceSymbolExtensions
     {
         private class Comparer : IEqualityComparer<INamespaceSymbol?>
         {

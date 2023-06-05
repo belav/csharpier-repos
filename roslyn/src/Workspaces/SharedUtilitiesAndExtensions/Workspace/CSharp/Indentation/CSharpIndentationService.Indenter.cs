@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Indentation
 {
-    internal partial class CSharpIndentationService
+    partial internal class CSharpIndentationService
     {
         protected override bool ShouldUseTokenIndenter(
             Indenter indenter,

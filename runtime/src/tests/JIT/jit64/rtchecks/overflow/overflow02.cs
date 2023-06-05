@@ -5,7 +5,7 @@ using System;
 
 internal class OVFTest
 {
-    static public volatile bool rtv;
+    public static volatile bool rtv;
 
     static OVFTest()
     {

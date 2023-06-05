@@ -3,13 +3,13 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
         [SuppressGCTransition]
-        internal static unsafe partial Interop.BOOL FileTimeToSystemTime(
+        partial internal static unsafe Interop.BOOL FileTimeToSystemTime(
             ulong* lpFileTime,
             Interop.Kernel32.SYSTEMTIME* lpSystemTime
         );

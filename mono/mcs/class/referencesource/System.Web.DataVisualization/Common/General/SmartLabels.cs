@@ -255,7 +255,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeEnabled13"),
             ParenthesizePropertyNameAttribute(true),
         ]
-        virtual public bool Enabled
+        public virtual bool Enabled
         {
             get { return _enabled; }
             set
@@ -274,7 +274,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(false),
             SRDescription("DescriptionAttributeMarkerOverlapping"),
         ]
-        virtual public bool IsMarkerOverlappingAllowed
+        public virtual bool IsMarkerOverlappingAllowed
         {
             get { return _isMarkerOverlappingAllowed; }
             set
@@ -293,7 +293,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(true),
             SRDescription("DescriptionAttributeHideOverlapped"),
         ]
-        virtual public bool IsOverlappedHidden
+        public virtual bool IsOverlappedHidden
         {
             get { return _isOverlappedHidden; }
             set
@@ -316,7 +316,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeMovingDirection"),
             Editor(Editors.FlagsEnumUITypeEditor.Editor, Editors.FlagsEnumUITypeEditor.Base),
         ]
-        virtual public LabelAlignmentStyles MovingDirection
+        public virtual LabelAlignmentStyles MovingDirection
         {
             get { return _movingDirection; }
             set
@@ -342,7 +342,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(0.0),
             SRDescription("DescriptionAttributeMinMovingDistance"),
         ]
-        virtual public double MinMovingDistance
+        public virtual double MinMovingDistance
         {
             get { return _minMovingDistance; }
             set
@@ -369,7 +369,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(30.0),
             SRDescription("DescriptionAttributeMaxMovingDistance"),
         ]
-        virtual public double MaxMovingDistance
+        public virtual double MaxMovingDistance
         {
             get { return _maxMovingDistance; }
             set
@@ -396,7 +396,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(LabelOutsidePlotAreaStyle.Partial),
             SRDescription("DescriptionAttributeAllowOutsidePlotArea"),
         ]
-        virtual public LabelOutsidePlotAreaStyle AllowOutsidePlotArea
+        public virtual LabelOutsidePlotAreaStyle AllowOutsidePlotArea
         {
             get { return _allowOutsidePlotArea; }
             set
@@ -415,7 +415,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(LabelCalloutStyle.Underlined),
             SRDescription("DescriptionAttributeCalloutStyle3"),
         ]
-        virtual public LabelCalloutStyle CalloutStyle
+        public virtual LabelCalloutStyle CalloutStyle
         {
             get { return _calloutStyle; }
             set
@@ -436,7 +436,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(ColorConverter)),
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
         ]
-        virtual public Color CalloutLineColor
+        public virtual Color CalloutLineColor
         {
             get { return _calloutLineColor; }
             set
@@ -458,7 +458,7 @@ namespace System.Web.UI.DataVisualization.Charting
             PersistenceMode(PersistenceMode.Attribute)
 #endif
         ]
-        virtual public ChartDashStyle CalloutLineDashStyle
+        public virtual ChartDashStyle CalloutLineDashStyle
         {
             get { return _calloutLineDashStyle; }
             set
@@ -479,7 +479,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(ColorConverter)),
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
         ]
-        virtual public Color CalloutBackColor
+        public virtual Color CalloutBackColor
         {
             get { return _calloutBackColor; }
             set
@@ -498,7 +498,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(1),
             SRDescription("DescriptionAttributeLineWidth"),
         ]
-        virtual public int CalloutLineWidth
+        public virtual int CalloutLineWidth
         {
             get { return _calloutLineWidth; }
             set
@@ -517,7 +517,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(LineAnchorCapStyle.Arrow),
             SRDescription(SR.Keys.DescriptionAttributeCalloutLineAnchorCap),
         ]
-        virtual public LineAnchorCapStyle CalloutLineAnchorCapStyle
+        public virtual LineAnchorCapStyle CalloutLineAnchorCapStyle
         {
             get { return _calloutLineAnchorCapStyle; }
             set
@@ -921,7 +921,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="markerSize">Marker size.</param>
         /// <param name="labelAlignment">Label alignment.</param>
         /// <returns>Adjusted position of the label.</returns>
-        virtual internal void DrawCallout(
+        internal
+        /// <summary>
+        /// Process single SmartLabelStyle by adjusting it's position in case of collision.
+        /// </summary>
+        /// <param name="common">Reference to common elements.</param>
+        /// <param name="graph">Reference to chart graphics object.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="smartLabelStyle">Smart labels style.</param>
+        /// <param name="labelPosition">Original label position.</param>
+        /// <param name="labelSize">Label text size.</param>
+        /// <param name="format">Label string format.</param>
+        /// <param name="markerPosition">Marker position.</param>
+        /// <param name="markerSize">Marker size.</param>
+        /// <param name="labelAlignment">Label alignment.</param>
+        /// <returns>Adjusted position of the label.</returns>
+        virtual void DrawCallout(
             CommonElements common,
             ChartGraphics graph,
             ChartArea area,
@@ -1088,7 +1103,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="labelAlignment">Label alignment.</param>
         /// <param name="checkCalloutLineOverlapping">Indicates that labels overlapping by callout line must be checked.</param>
         /// <returns>True if label collides.</returns>
-        virtual internal bool IsSmartLabelCollide(
+        internal
+        /// <summary>
+        /// Checks SmartLabelStyle collision.
+        /// </summary>
+        /// <param name="common">Reference to common elements.</param>
+        /// <param name="graph">Reference to chart graphics object.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="smartLabelStyle">Smart labels style.</param>
+        /// <param name="position">Original label position.</param>
+        /// <param name="size">Label text size.</param>
+        /// <param name="markerPosition">Marker position.</param>
+        /// <param name="format">Label string format.</param>
+        /// <param name="labelAlignment">Label alignment.</param>
+        /// <param name="checkCalloutLineOverlapping">Indicates that labels overlapping by callout line must be checked.</param>
+        /// <returns>True if label collides.</returns>
+        virtual bool IsSmartLabelCollide(
             CommonElements common,
             ChartGraphics graph,
             ChartArea area,
@@ -1423,7 +1453,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="common">Reference to common elements.</param>
         /// <param name="area">Chart area.</param>
-        virtual internal void AddMarkersPosition(CommonElements common, ChartArea area)
+        internal
+        /// <summary>
+        /// Adds positions of the series markers into the list.
+        /// </summary>
+        /// <param name="common">Reference to common elements.</param>
+        /// <param name="area">Chart area.</param>
+        virtual void AddMarkersPosition(CommonElements common, ChartArea area)
         {
             // Proceed only if there is no items in the list yet
             if (this.smartLabelsPositions.Count == 0 && area != null)
@@ -1692,7 +1728,26 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="labelAlignment">Label alignment.</param>
         /// <param name="checkCalloutLineOverlapping">Indicates that labels overlapping by callout line must be checked.</param>
         /// <returns>True if label collides.</returns>
-        override internal bool IsSmartLabelCollide(
+        internal
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Checks SmartLabelStyle collision.
+        /// </summary>
+        /// <param name="common">Reference to common elements.</param>
+        /// <param name="graph">Reference to chart graphics object.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="smartLabelStyle">Smart labels style.</param>
+        /// <param name="position">Original label position.</param>
+        /// <param name="size">Label text size.</param>
+        /// <param name="markerPosition">Marker position.</param>
+        /// <param name="format">Label string format.</param>
+        /// <param name="labelAlignment">Label alignment.</param>
+        /// <param name="checkCalloutLineOverlapping">Indicates that labels overlapping by callout line must be checked.</param>
+        /// <returns>True if label collides.</returns>
+        override bool IsSmartLabelCollide(
             CommonElements common,
             ChartGraphics graph,
             ChartArea area,
@@ -1793,7 +1848,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="common">Reference to common elements.</param>
         /// <param name="area">Chart area.</param>
-        override internal void AddMarkersPosition(CommonElements common, ChartArea area)
+        internal
+        /// <summary>
+        /// Adds positions of the series markers into the list.
+        /// </summary>
+        /// <param name="common">Reference to common elements.</param>
+        /// <param name="area">Chart area.</param>
+        override void AddMarkersPosition(CommonElements common, ChartArea area)
         {
             // Proceed only if there is no items in the list yet
             if (this.smartLabelsPositions.Count == 0 && common != null && common.Chart != null)
@@ -1820,7 +1881,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="markerSize">Marker size.</param>
         /// <param name="labelAlignment">Label alignment.</param>
         /// <returns>Adjusted position of the label.</returns>
-        override internal void DrawCallout(
+        internal
+        /// <summary>
+        /// Process single SmartLabelStyle by adjusting it's position in case of collision.
+        /// </summary>
+        /// <param name="common">Reference to common elements.</param>
+        /// <param name="graph">Reference to chart graphics object.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="smartLabelStyle">Smart labels style.</param>
+        /// <param name="labelPosition">Original label position.</param>
+        /// <param name="labelSize">Label text size.</param>
+        /// <param name="format">Label string format.</param>
+        /// <param name="markerPosition">Marker position.</param>
+        /// <param name="markerSize">Marker size.</param>
+        /// <param name="labelAlignment">Label alignment.</param>
+        /// <returns>Adjusted position of the label.</returns>
+        override void DrawCallout(
             CommonElements common,
             ChartGraphics graph,
             ChartArea area,

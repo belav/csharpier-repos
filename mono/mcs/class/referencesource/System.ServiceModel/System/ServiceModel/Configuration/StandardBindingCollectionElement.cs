@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public partial class StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>
+    partial public class StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>
         : BindingCollectionElement
         where TStandardBinding : Binding
         where TBindingConfiguration : StandardBindingElement, new()

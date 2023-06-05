@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.IO.Compression
 {
-    internal static partial class ZipFileUtils
+    partial internal static class ZipFileUtils
     {
         // Per the .ZIP File Format Specification 4.4.17.1 all slashes should be forward slashes
         private const char PathSeparatorChar = '/';

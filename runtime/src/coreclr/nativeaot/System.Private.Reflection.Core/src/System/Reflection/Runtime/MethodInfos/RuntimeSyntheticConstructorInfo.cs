@@ -14,10 +14,11 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
+    partial
     //
     // The runtime's implementation of constructors exposed on array types.
     //
-    internal sealed partial class RuntimeSyntheticConstructorInfo
+    internal sealed class RuntimeSyntheticConstructorInfo
         : RuntimeConstructorInfo,
             IRuntimeMemberInfoWithNoMetadataDefinition
     {

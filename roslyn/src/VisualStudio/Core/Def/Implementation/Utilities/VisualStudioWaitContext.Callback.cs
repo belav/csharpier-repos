@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 {
-    internal partial class VisualStudioWaitContext
+    partial internal class VisualStudioWaitContext
     {
         /// <summary>
         /// Note: this is a COM interface, however it is also free threaded.  This is necessary and

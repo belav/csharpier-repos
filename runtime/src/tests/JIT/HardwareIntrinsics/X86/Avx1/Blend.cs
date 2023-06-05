@@ -11,7 +11,7 @@ using Xunit;
 
 namespace IntelHardwareIntrinsicTest.Avx1
 {
-    public partial class Program
+    partial public class Program
     {
         [Fact]
         public static unsafe void Blend()

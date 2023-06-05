@@ -6,7 +6,7 @@
 
 namespace System.ComponentModel.Composition.Registration
 {
-    public sealed partial class ExportBuilder
+    partial public sealed class ExportBuilder
     {
         public ExportBuilder() { }
 
@@ -51,7 +51,7 @@ namespace System.ComponentModel.Composition.Registration
         }
     }
 
-    public sealed partial class ImportBuilder
+    partial public sealed class ImportBuilder
     {
         public ImportBuilder() { }
 
@@ -106,7 +106,7 @@ namespace System.ComponentModel.Composition.Registration
         }
     }
 
-    public partial class ParameterImportBuilder
+    partial public class ParameterImportBuilder
     {
         public ParameterImportBuilder() { }
 
@@ -123,7 +123,7 @@ namespace System.ComponentModel.Composition.Registration
         }
     }
 
-    public partial class PartBuilder
+    partial public class PartBuilder
     {
         internal PartBuilder() { }
 
@@ -294,7 +294,7 @@ namespace System.ComponentModel.Composition.Registration
         }
     }
 
-    public partial class PartBuilder<T> : System.ComponentModel.Composition.Registration.PartBuilder
+    partial public class PartBuilder<T> : System.ComponentModel.Composition.Registration.PartBuilder
     {
         internal PartBuilder() { }
 
@@ -369,7 +369,7 @@ namespace System.ComponentModel.Composition.Registration
         }
     }
 
-    public partial class RegistrationBuilder : System.Reflection.Context.CustomReflectionContext
+    partial public class RegistrationBuilder : System.Reflection.Context.CustomReflectionContext
     {
         public RegistrationBuilder() { }
 

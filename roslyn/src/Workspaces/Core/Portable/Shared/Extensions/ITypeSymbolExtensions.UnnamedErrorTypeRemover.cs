@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal partial class ITypeSymbolExtensions
+    partial internal class ITypeSymbolExtensions
     {
         private class UnnamedErrorTypeRemover : SymbolVisitor<ITypeSymbol>
         {

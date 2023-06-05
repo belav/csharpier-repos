@@ -5,9 +5,9 @@ using System.ComponentModel;
 
 namespace System.DirectoryServices.Protocols
 {
-    public partial class LdapSessionOptions
+    partial public class LdapSessionOptions
     {
-        static partial void PALCertFreeCRLContext(IntPtr certPtr);
+        partial static void PALCertFreeCRLContext(IntPtr certPtr);
 
         private bool _secureSocketLayer;
 

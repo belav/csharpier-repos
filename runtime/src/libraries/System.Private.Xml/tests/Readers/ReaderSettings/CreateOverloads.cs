@@ -9,7 +9,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.ReaderSettingsTests
 {
     [TestCase(Name = "Create Overloads", Desc = "Create Overloads")]
-    public partial class TCCreateOverloads : TCXMLReaderBaseGeneral
+    partial public class TCCreateOverloads : TCXMLReaderBaseGeneral
     {
         private string _sampleFileName = @"sample.xml";
         private string _sampleXml = "<root><a/></root>";

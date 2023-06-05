@@ -8,9 +8,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-public partial class ParameterBinder
+partial public class ParameterBinder
 {
-    private static partial class Log
+    partial private static class Log
     {
         public static void AttemptingToBindParameterOrProperty(
             ILogger logger,
@@ -66,7 +66,7 @@ public partial class ParameterBinder
             EventName = "AttemptingToBindParameter",
             SkipEnabledCheck = true
         )]
-        private static partial void AttemptingToBindParameter(
+        partial private static void AttemptingToBindParameter(
             ILogger logger,
             string? parameterName,
             Type modelType
@@ -79,7 +79,7 @@ public partial class ParameterBinder
             EventName = "AttemptingToBindProperty",
             SkipEnabledCheck = true
         )]
-        private static partial void AttemptingToBindProperty(
+        partial private static void AttemptingToBindProperty(
             ILogger logger,
             Type? propertyContainerType,
             string? propertyName,
@@ -144,7 +144,7 @@ public partial class ParameterBinder
             EventName = "DoneAttemptingToBindParameter",
             SkipEnabledCheck = true
         )]
-        private static partial void DoneAttemptingToBindParameter(
+        partial private static void DoneAttemptingToBindParameter(
             ILogger logger,
             string? parameterName,
             Type modelType
@@ -157,7 +157,7 @@ public partial class ParameterBinder
             EventName = "DoneAttemptingToBindProperty",
             SkipEnabledCheck = true
         )]
-        private static partial void DoneAttemptingToBindProperty(
+        partial private static void DoneAttemptingToBindProperty(
             ILogger logger,
             Type? propertyContainerType,
             string? propertyName,
@@ -223,7 +223,7 @@ public partial class ParameterBinder
             EventName = "AttemptingToValidateParameter",
             SkipEnabledCheck = true
         )]
-        private static partial void AttemptingToValidateParameter(
+        partial private static void AttemptingToValidateParameter(
             ILogger logger,
             string? parameterName,
             Type modelType
@@ -236,7 +236,7 @@ public partial class ParameterBinder
             EventName = "AttemptingToValidateProperty",
             SkipEnabledCheck = true
         )]
-        private static partial void AttemptingToValidateProperty(
+        partial private static void AttemptingToValidateProperty(
             ILogger logger,
             Type? propertyContainerType,
             string? propertyName,
@@ -301,7 +301,7 @@ public partial class ParameterBinder
             "Done attempting to validate the bound parameter '{ParameterName}' of type '{ModelType}'.",
             EventName = "DoneAttemptingToValidateParameter"
         )]
-        private static partial void DoneAttemptingToValidateParameter(
+        partial private static void DoneAttemptingToValidateParameter(
             ILogger logger,
             string? parameterName,
             Type modelType
@@ -313,7 +313,7 @@ public partial class ParameterBinder
             "Done attempting to validate the bound property '{PropertyContainerType}.{PropertyName}' of type '{ModelType}'.",
             EventName = "DoneAttemptingToValidateProperty"
         )]
-        private static partial void DoneAttemptingToValidateProperty(
+        partial private static void DoneAttemptingToValidateProperty(
             ILogger logger,
             Type? propertyContainerType,
             string? propertyName,
@@ -375,7 +375,7 @@ public partial class ParameterBinder
             EventName = "ParameterBinderRequestPredicateShortCircuitOfProperty",
             SkipEnabledCheck = true
         )]
-        private static partial void ParameterBinderRequestPredicateShortCircuitOfProperty(
+        partial private static void ParameterBinderRequestPredicateShortCircuitOfProperty(
             ILogger logger,
             Type? propertyContainerType,
             string? propertyName
@@ -388,7 +388,7 @@ public partial class ParameterBinder
             EventName = "ParameterBinderRequestPredicateShortCircuitOfParameter",
             SkipEnabledCheck = true
         )]
-        private static partial void ParameterBinderRequestPredicateShortCircuitOfParameter(
+        partial private static void ParameterBinderRequestPredicateShortCircuitOfParameter(
             ILogger logger,
             string? parameterName
         );

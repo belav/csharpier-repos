@@ -579,32 +579,32 @@ namespace System.DirectoryServices.ActiveDirectory
         public IntPtr DomainSid;
     }
 
-    internal static partial class UnsafeNativeMethods
+    partial internal static class UnsafeNativeMethods
     {
         [LibraryImport(
             global::Interop.Libraries.Activeds,
             EntryPoint = "ADsEncodeBinaryData",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial int ADsEncodeBinaryData(byte[] data, int length, ref IntPtr result);
+        partial public static int ADsEncodeBinaryData(byte[] data, int length, ref IntPtr result);
 
         [LibraryImport(global::Interop.Libraries.Activeds, EntryPoint = "FreeADsMem")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool FreeADsMem(IntPtr pVoid);
+        partial public static bool FreeADsMem(IntPtr pVoid);
 
         [LibraryImport(
             global::Interop.Libraries.Netapi32,
             EntryPoint = "DsGetSiteNameW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial int DsGetSiteName(string? dcName, ref IntPtr ptr);
+        partial public static int DsGetSiteName(string? dcName, ref IntPtr ptr);
 
         [LibraryImport(
             global::Interop.Libraries.Netapi32,
             EntryPoint = "DsEnumerateDomainTrustsW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial int DsEnumerateDomainTrustsW(
+        partial public static int DsEnumerateDomainTrustsW(
             string serverName,
             int flags,
             out IntPtr domains,
@@ -612,13 +612,13 @@ namespace System.DirectoryServices.ActiveDirectory
         );
 
         [LibraryImport(global::Interop.Libraries.Netapi32, EntryPoint = "NetApiBufferFree")]
-        public static partial int NetApiBufferFree(IntPtr buffer);
+        partial public static int NetApiBufferFree(IntPtr buffer);
 
         [LibraryImport(
             global::Interop.Libraries.Advapi32,
             EntryPoint = "LsaSetForestTrustInformation"
         )]
-        public static partial uint LsaSetForestTrustInformation(
+        partial public static uint LsaSetForestTrustInformation(
             SafeLsaPolicyHandle handle,
             in global::Interop.UNICODE_STRING target,
             IntPtr forestTrustInfo,
@@ -630,7 +630,7 @@ namespace System.DirectoryServices.ActiveDirectory
             global::Interop.Libraries.Advapi32,
             EntryPoint = "LsaQueryForestTrustInformation"
         )]
-        public static partial uint LsaQueryForestTrustInformation(
+        partial public static uint LsaQueryForestTrustInformation(
             SafeLsaPolicyHandle handle,
             in global::Interop.UNICODE_STRING target,
             ref IntPtr ForestTrustInfo
@@ -640,7 +640,7 @@ namespace System.DirectoryServices.ActiveDirectory
             global::Interop.Libraries.Advapi32,
             EntryPoint = "LsaQueryTrustedDomainInfoByName"
         )]
-        public static partial uint LsaQueryTrustedDomainInfoByName(
+        partial public static uint LsaQueryTrustedDomainInfoByName(
             SafeLsaPolicyHandle handle,
             in global::Interop.UNICODE_STRING trustedDomain,
             TRUSTED_INFORMATION_CLASS infoClass,
@@ -651,7 +651,7 @@ namespace System.DirectoryServices.ActiveDirectory
             global::Interop.Libraries.Advapi32,
             EntryPoint = "LsaSetTrustedDomainInfoByName"
         )]
-        public static partial uint LsaSetTrustedDomainInfoByName(
+        partial public static uint LsaSetTrustedDomainInfoByName(
             SafeLsaPolicyHandle handle,
             in global::Interop.UNICODE_STRING trustedDomain,
             TRUSTED_INFORMATION_CLASS infoClass,
@@ -659,14 +659,14 @@ namespace System.DirectoryServices.ActiveDirectory
         );
 
         [LibraryImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaDeleteTrustedDomain")]
-        public static partial uint LsaDeleteTrustedDomain(SafeLsaPolicyHandle handle, IntPtr pSid);
+        partial public static uint LsaDeleteTrustedDomain(SafeLsaPolicyHandle handle, IntPtr pSid);
 
         [LibraryImport(
             global::Interop.Libraries.Netapi32,
             EntryPoint = "I_NetLogonControl2",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial int I_NetLogonControl2(
+        partial public static int I_NetLogonControl2(
             string serverName,
             int FunctionCode,
             int QueryLevel,
@@ -675,10 +675,10 @@ namespace System.DirectoryServices.ActiveDirectory
         );
 
         [LibraryImport(global::Interop.Libraries.Kernel32, EntryPoint = "GetSystemTimeAsFileTime")]
-        public static partial void GetSystemTimeAsFileTime(IntPtr fileTime);
+        partial public static void GetSystemTimeAsFileTime(IntPtr fileTime);
 
         [LibraryImport(global::Interop.Libraries.Advapi32, EntryPoint = "LsaCreateTrustedDomainEx")]
-        public static partial uint LsaCreateTrustedDomainEx(
+        partial public static uint LsaCreateTrustedDomainEx(
             SafeLsaPolicyHandle handle,
             in TRUSTED_DOMAIN_INFORMATION_EX domainEx,
             in TRUSTED_DOMAIN_AUTH_INFORMATION authInfo,
@@ -691,7 +691,7 @@ namespace System.DirectoryServices.ActiveDirectory
             EntryPoint = "OpenThread",
             SetLastError = true
         )]
-        public static partial IntPtr OpenThread(
+        partial public static IntPtr OpenThread(
             uint desiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool inheirted,
             int threadID
@@ -702,10 +702,10 @@ namespace System.DirectoryServices.ActiveDirectory
             EntryPoint = "ImpersonateAnonymousToken",
             SetLastError = true
         )]
-        public static partial int ImpersonateAnonymousToken(IntPtr token);
+        partial public static int ImpersonateAnonymousToken(IntPtr token);
 
         [LibraryImport(global::Interop.Libraries.NtDll, EntryPoint = "RtlInitUnicodeString")]
-        public static partial int RtlInitUnicodeString(
+        partial public static int RtlInitUnicodeString(
             out global::Interop.UNICODE_STRING result,
             IntPtr s
         );
@@ -722,7 +722,7 @@ namespace System.DirectoryServices.ActiveDirectory
             EntryPoint = "DsRoleGetPrimaryDomainInformation",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial int DsRoleGetPrimaryDomainInformation(
+        partial public static int DsRoleGetPrimaryDomainInformation(
             [MarshalAs(UnmanagedType.LPTStr)] string lpServer,
             DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
             out IntPtr Buffer
@@ -733,7 +733,7 @@ namespace System.DirectoryServices.ActiveDirectory
             EntryPoint = "DsRoleGetPrimaryDomainInformation",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial int DsRoleGetPrimaryDomainInformation(
+        partial public static int DsRoleGetPrimaryDomainInformation(
             IntPtr lpServer,
             DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
             out IntPtr Buffer
@@ -745,6 +745,6 @@ namespace System.DirectoryServices.ActiveDirectory
         );
         */
         [LibraryImport(global::Interop.Libraries.Netapi32)]
-        public static partial int DsRoleFreeMemory(IntPtr buffer);
+        partial public static int DsRoleFreeMemory(IntPtr buffer);
     }
 }

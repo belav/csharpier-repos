@@ -17,7 +17,7 @@ using System.Threading;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class AssemblyBuilder : Assembly
+    partial public sealed class AssemblyBuilder : Assembly
     {
         #region Internal Data Members
 
@@ -129,7 +129,7 @@ namespace System.Reflection.Emit
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AppDomain_CreateDynamicAssembly")]
-        private static unsafe partial void CreateDynamicAssembly(
+        partial private static unsafe void CreateDynamicAssembly(
             ObjectHandleOnStack assemblyLoadContext,
             NativeAssemblyNameParts* pAssemblyName,
             AssemblyHashAlgorithm hashAlgId,

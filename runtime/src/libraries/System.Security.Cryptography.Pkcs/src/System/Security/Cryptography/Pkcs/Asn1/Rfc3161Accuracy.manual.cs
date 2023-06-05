@@ -6,7 +6,7 @@ using System.Security.Cryptography.Asn1;
 
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
-    internal partial struct Rfc3161Accuracy
+    partial internal struct Rfc3161Accuracy
     {
         // Parameter name (and exception) match the Rfc3161TimestampTokenInfo ctor.
         internal Rfc3161Accuracy(long accuracyInMicroseconds)

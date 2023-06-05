@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct DistributionPointNameAsn
+    partial internal struct DistributionPointNameAsn
     {
         internal System.Security.Cryptography.Asn1.GeneralNameAsn[]? FullName;
         internal ReadOnlyMemory<byte>? NameRelativeToCRLIssuer;

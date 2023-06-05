@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ColorSchemes
 {
-    internal partial class ColorSchemeApplier
+    partial internal class ColorSchemeApplier
     {
         private sealed class ClassificationVerifier
         {

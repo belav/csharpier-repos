@@ -3,7 +3,7 @@
 
 namespace System.Reflection.Metadata
 {
-    public static partial class ILOpCodeExtensions
+    partial public static class ILOpCodeExtensions
     {
         /// <summary>
         /// Returns true of the specified op-code is a branch to a label.

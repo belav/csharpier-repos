@@ -21,9 +21,10 @@ using EETypeElementType = Internal.Runtime.EETypeElementType;
 
 namespace System
 {
+    partial
     // Note that we make a T[] (single-dimensional w/ zero as the lower bound) implement both
     // IList<U> and IReadOnlyList<U>, where T : U dynamically.  See the SZArrayHelper class for details.
-    public abstract partial class Array
+    public abstract class Array
         : ICollection,
             IEnumerable,
             IList,

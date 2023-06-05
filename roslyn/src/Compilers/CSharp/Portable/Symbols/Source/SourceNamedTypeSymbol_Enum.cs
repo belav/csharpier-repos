@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class SourceNamedTypeSymbol
+    partial internal class SourceNamedTypeSymbol
     {
         private SynthesizedEnumValueFieldSymbol _lazyEnumValueField;
         private NamedTypeSymbol _lazyEnumUnderlyingType = ErrorTypeSymbol.UnknownResultType;

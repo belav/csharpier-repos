@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 {
-    internal sealed partial class VisualStudioWaitContext : IWaitContext
+    partial internal sealed class VisualStudioWaitContext : IWaitContext
     {
         private const int DelayToShowDialogSecs = 2;
 

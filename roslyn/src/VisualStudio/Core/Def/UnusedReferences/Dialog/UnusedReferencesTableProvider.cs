@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.Shell.TableManager;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReferences.Dialog
 {
     [Export(typeof(UnusedReferencesTableProvider))]
-    internal partial class UnusedReferencesTableProvider
+    partial internal class UnusedReferencesTableProvider
     {
         private readonly ITableManager _tableManager;
         private readonly IWpfTableControlProvider _tableControlProvider;

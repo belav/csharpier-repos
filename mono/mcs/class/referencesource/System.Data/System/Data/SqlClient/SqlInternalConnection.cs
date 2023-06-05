@@ -25,7 +25,7 @@ namespace System.Data.SqlClient
     using System.Threading;
     using SysTx = System.Transactions;
 
-    abstract internal class SqlInternalConnection : DbConnectionInternal
+    internal abstract class SqlInternalConnection : DbConnectionInternal
     {
         private readonly SqlConnectionString _connectionOptions;
         private bool _isEnlistedInTransaction; // is the server-side connection enlisted? true while we're enlisted, reset only after we send a null...
@@ -78,20 +78,21 @@ namespace System.Data.SqlClient
             get { return _connectionOptions; }
         }
 
-        abstract internal SqlInternalTransaction CurrentTransaction { get; }
+        internal abstract SqlInternalTransaction CurrentTransaction { get; }
 
+        internal
         // SQLBU 415870
         //  Get the internal transaction that should be hooked to a new outer transaction
         //  during a BeginTransaction API call.  In some cases (i.e. connection is going to
         //  be reset), CurrentTransaction should not be hooked up this way.
-        virtual internal SqlInternalTransaction AvailableInternalTransaction
+        virtual SqlInternalTransaction AvailableInternalTransaction
         {
             get { return CurrentTransaction; }
         }
 
-        abstract internal SqlInternalTransaction PendingTransaction { get; }
+        internal abstract SqlInternalTransaction PendingTransaction { get; }
 
-        override protected internal bool IsNonPoolableTransactionRoot
+        protected internal override bool IsNonPoolableTransactionRoot
         {
             get
             {
@@ -99,7 +100,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override internal bool IsTransactionRoot
+        internal override bool IsTransactionRoot
         {
             get
             {
@@ -135,13 +136,13 @@ namespace System.Data.SqlClient
             get { return _isEnlistedInTransaction; }
         }
 
-        abstract internal bool IsLockedForBulkCopy { get; }
+        internal abstract bool IsLockedForBulkCopy { get; }
 
-        abstract internal bool IsShiloh { get; }
+        internal abstract bool IsShiloh { get; }
 
-        abstract internal bool IsYukonOrNewer { get; }
+        internal abstract bool IsYukonOrNewer { get; }
 
-        abstract internal bool IsKatmaiOrNewer { get; }
+        internal abstract bool IsKatmaiOrNewer { get; }
 
         internal byte[] PromotedDTCToken
         {
@@ -161,12 +162,12 @@ namespace System.Data.SqlClient
             set { _isGlobalTransactionEnabledForServer = value; }
         }
 
-        override public DbTransaction BeginTransaction(IsolationLevel iso)
+        public override DbTransaction BeginTransaction(IsolationLevel iso)
         {
             return BeginSqlTransaction(iso, null, false);
         }
 
-        virtual internal SqlTransaction BeginSqlTransaction(
+        internal virtual SqlTransaction BeginSqlTransaction(
             IsolationLevel iso,
             string transactionName,
             bool shouldReconnect
@@ -251,7 +252,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override public void ChangeDatabase(string database)
+        public override void ChangeDatabase(string database)
         {
             SqlConnection.ExecutePermission.Demand(); // MDAC 80961
 
@@ -265,9 +266,9 @@ namespace System.Data.SqlClient
             ChangeDatabaseInternal(database); // do the real work...
         }
 
-        abstract protected void ChangeDatabaseInternal(string database);
+        protected abstract void ChangeDatabaseInternal(string database);
 
-        override protected void CleanupTransactionOnCompletion(SysTx.Transaction transaction)
+        protected override void CleanupTransactionOnCompletion(SysTx.Transaction transaction)
         {
             // Note: unlocked, potentially multi-threaded code, so pull delegate to local to
             //  ensure it doesn't change between test and call.
@@ -278,12 +279,12 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected DbReferenceCollection CreateReferenceCollection()
+        protected override DbReferenceCollection CreateReferenceCollection()
         {
             return new SqlReferenceCollection();
         }
 
-        override protected void Deactivate()
+        protected override void Deactivate()
         {
             if (Bid.AdvancedOn)
             {
@@ -360,9 +361,9 @@ namespace System.Data.SqlClient
             }
         }
 
-        abstract internal void DisconnectTransaction(SqlInternalTransaction internalTransaction);
+        internal abstract void DisconnectTransaction(SqlInternalTransaction internalTransaction);
 
-        override public void Dispose()
+        public override void Dispose()
         {
             _whereAbouts = null;
             base.Dispose();
@@ -697,7 +698,7 @@ namespace System.Data.SqlClient
             ); // verify it!
         }
 
-        override public void EnlistTransaction(SysTx.Transaction transaction)
+        public override void EnlistTransaction(SysTx.Transaction transaction)
         {
             SqlConnection.VerifyExecutePermission();
 
@@ -772,7 +773,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        abstract internal void ExecuteTransaction(
+        internal abstract void ExecuteTransaction(
             TransactionRequest transactionRequest,
             string name,
             IsolationLevel iso,
@@ -804,7 +805,7 @@ namespace System.Data.SqlClient
             return command;
         }
 
-        static internal TdsParser GetBestEffortCleanupTarget(SqlConnection connection)
+        internal static TdsParser GetBestEffortCleanupTarget(SqlConnection connection)
         {
             if (null != connection)
             {
@@ -821,7 +822,7 @@ namespace System.Data.SqlClient
         }
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        static internal void BestEffortCleanup(TdsParser target)
+        internal static void BestEffortCleanup(TdsParser target)
         {
             if (null != target)
             {
@@ -829,9 +830,9 @@ namespace System.Data.SqlClient
             }
         }
 
-        abstract protected byte[] GetDTCAddress();
+        protected abstract byte[] GetDTCAddress();
 
-        static private byte[] GetTransactionCookie(
+        private static byte[] GetTransactionCookie(
             SysTx.Transaction transaction,
             byte[] whereAbouts
         )
@@ -847,7 +848,7 @@ namespace System.Data.SqlClient
             return transactionCookie;
         }
 
-        virtual protected void InternalDeactivate() { }
+        protected virtual void InternalDeactivate() { }
 
         // If wrapCloseInAction is defined, then the action it defines will be run with the connection close action passed in as a parameter
         // The close action also supports being run asynchronously
@@ -875,8 +876,8 @@ namespace System.Data.SqlClient
             }
         }
 
-        abstract protected void PropagateTransactionCookie(byte[] transactionCookie);
+        protected abstract void PropagateTransactionCookie(byte[] transactionCookie);
 
-        abstract internal void ValidateConnectionForExecute(SqlCommand command);
+        internal abstract void ValidateConnectionForExecute(SqlCommand command);
     }
 }

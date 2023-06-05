@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class SyntaxTokenExtensions
+    partial internal static class SyntaxTokenExtensions
     {
         public static void Deconstruct(this SyntaxToken token, out SyntaxKind kind) =>
             kind = token.Kind();

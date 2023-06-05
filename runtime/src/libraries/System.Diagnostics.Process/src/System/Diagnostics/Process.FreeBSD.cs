@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {
-    public partial class Process
+    partial public class Process
     {
         /// <summary>Gets the time the associated process was started.</summary>
         internal DateTime StartTimeCore

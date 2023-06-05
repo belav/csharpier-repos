@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
-    public partial class UseLocalFunctionTests
+    partial public class UseLocalFunctionTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseLocalFunctionTests(ITestOutputHelper logger)

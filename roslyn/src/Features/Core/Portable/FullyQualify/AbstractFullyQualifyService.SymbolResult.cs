@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify;
 
-internal abstract partial class AbstractFullyQualifyService<TSimpleNameSyntax>
+partial internal abstract class AbstractFullyQualifyService<TSimpleNameSyntax>
     where TSimpleNameSyntax : SyntaxNode
 {
     private readonly struct SymbolResult : IEquatable<SymbolResult>, IComparable<SymbolResult>

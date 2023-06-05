@@ -3,12 +3,13 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+partial
 /* https://tools.ietf.org/html/rfc7540#section-6.4
     +---------------------------------------------------------------+
     |                        Error Code (32)                        |
     +---------------------------------------------------------------+
 */
-internal partial class Http2Frame
+internal class Http2Frame
 {
     public Http2ErrorCode RstStreamErrorCode { get; set; }
 

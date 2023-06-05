@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         Equal
     }
 
-    internal sealed partial class OverloadResolution
+    partial internal sealed class OverloadResolution
     {
         private readonly Binder _binder;
 

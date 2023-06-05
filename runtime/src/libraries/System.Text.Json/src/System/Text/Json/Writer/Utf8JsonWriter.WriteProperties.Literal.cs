@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Json
 {
-    public sealed partial class Utf8JsonWriter
+    partial public sealed class Utf8JsonWriter
     {
         /// <summary>
         /// Writes the pre-encoded property name and the JSON literal "null" as part of a name/value pair of a JSON object.

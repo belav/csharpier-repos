@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {
-    public static partial class HttpClientJsonExtensions
+    partial public static class HttpClientJsonExtensions
     {
         private static HttpMethod HttpPatch => s_httpPatch ??= new HttpMethod("PATCH");
         private static HttpMethod? s_httpPatch;

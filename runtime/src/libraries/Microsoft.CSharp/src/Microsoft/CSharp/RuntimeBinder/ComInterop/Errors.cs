@@ -5,10 +5,11 @@ using System;
 
 namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {
+    partial
     /// <summary>
     ///    Strongly-typed and parameterized exception factory.
     /// </summary>
-    internal static partial class Error
+    internal static class Error
     {
         /// <summary>
         /// InvalidOperationException with message like "Marshal.SetComObjectData failed."

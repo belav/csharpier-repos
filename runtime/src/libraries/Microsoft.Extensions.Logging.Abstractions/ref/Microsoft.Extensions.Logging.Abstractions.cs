@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Logging
 {
-    public readonly partial struct EventId : System.IEquatable<Microsoft.Extensions.Logging.EventId>
+    partial public readonly struct EventId : System.IEquatable<Microsoft.Extensions.Logging.EventId>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -69,13 +69,13 @@ namespace Microsoft.Extensions.Logging
         }
     }
 
-    public partial interface IExternalScopeProvider
+    partial public interface IExternalScopeProvider
     {
         void ForEachScope<TState>(System.Action<object?, TState> callback, TState state);
         System.IDisposable Push(object? state);
     }
 
-    public partial interface ILogger
+    partial public interface ILogger
     {
         System.IDisposable? BeginScope<TState>(TState state)
             where TState : notnull;
@@ -89,25 +89,25 @@ namespace Microsoft.Extensions.Logging
         );
     }
 
-    public partial interface ILoggerFactory : System.IDisposable
+    partial public interface ILoggerFactory : System.IDisposable
     {
         void AddProvider(Microsoft.Extensions.Logging.ILoggerProvider provider);
         Microsoft.Extensions.Logging.ILogger CreateLogger(string categoryName);
     }
 
-    public partial interface ILoggerProvider : System.IDisposable
+    partial public interface ILoggerProvider : System.IDisposable
     {
         Microsoft.Extensions.Logging.ILogger CreateLogger(string categoryName);
     }
 
-    public partial interface ILogger<out TCategoryName> : Microsoft.Extensions.Logging.ILogger { }
+    partial public interface ILogger<out TCategoryName> : Microsoft.Extensions.Logging.ILogger { }
 
-    public partial interface ISupportExternalScope
+    partial public interface ISupportExternalScope
     {
         void SetScopeProvider(Microsoft.Extensions.Logging.IExternalScopeProvider scopeProvider);
     }
 
-    public partial class LogDefineOptions
+    partial public class LogDefineOptions
     {
         public LogDefineOptions() { }
 
@@ -118,7 +118,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 
-    public static partial class LoggerExtensions
+    partial public static class LoggerExtensions
     {
         public static System.IDisposable? BeginScope(
             this Microsoft.Extensions.Logging.ILogger logger,
@@ -330,7 +330,7 @@ namespace Microsoft.Extensions.Logging
         ) { }
     }
 
-    public partial class LoggerExternalScopeProvider
+    partial public class LoggerExternalScopeProvider
         : Microsoft.Extensions.Logging.IExternalScopeProvider
     {
         public LoggerExternalScopeProvider() { }
@@ -343,7 +343,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 
-    public static partial class LoggerFactoryExtensions
+    partial public static class LoggerFactoryExtensions
     {
         public static Microsoft.Extensions.Logging.ILogger CreateLogger(
             this Microsoft.Extensions.Logging.ILoggerFactory factory,
@@ -361,7 +361,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 
-    public static partial class LoggerMessage
+    partial public static class LoggerMessage
     {
         public static System.Action<Microsoft.Extensions.Logging.ILogger, System.Exception?> Define(
             Microsoft.Extensions.Logging.LogLevel logLevel,
@@ -653,7 +653,7 @@ namespace Microsoft.Extensions.Logging
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method)]
-    public sealed partial class LoggerMessageAttribute : System.Attribute
+    partial public sealed class LoggerMessageAttribute : System.Attribute
     {
         public LoggerMessageAttribute() { }
 
@@ -690,7 +690,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 
-    public partial class Logger<T>
+    partial public class Logger<T>
         : Microsoft.Extensions.Logging.ILogger,
             Microsoft.Extensions.Logging.ILogger<T>
     {
@@ -731,7 +731,7 @@ namespace Microsoft.Extensions.Logging
 
 namespace Microsoft.Extensions.Logging.Abstractions
 {
-    public readonly partial struct LogEntry<TState>
+    partial public readonly struct LogEntry<TState>
     {
         private readonly TState _State_k__BackingField;
         private readonly object _dummy;
@@ -775,7 +775,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
         }
     }
 
-    public partial class NullLogger : Microsoft.Extensions.Logging.ILogger
+    partial public class NullLogger : Microsoft.Extensions.Logging.ILogger
     {
         internal NullLogger() { }
 
@@ -804,7 +804,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
         ) { }
     }
 
-    public partial class NullLoggerFactory
+    partial public class NullLoggerFactory
         : Microsoft.Extensions.Logging.ILoggerFactory,
             System.IDisposable
     {
@@ -822,7 +822,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
         public void Dispose() { }
     }
 
-    public partial class NullLoggerProvider
+    partial public class NullLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
             System.IDisposable
     {
@@ -841,7 +841,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
         public void Dispose() { }
     }
 
-    public partial class NullLogger<T>
+    partial public class NullLogger<T>
         : Microsoft.Extensions.Logging.ILogger,
             Microsoft.Extensions.Logging.ILogger<T>
     {

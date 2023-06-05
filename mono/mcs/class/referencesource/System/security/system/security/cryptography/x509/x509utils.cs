@@ -314,7 +314,7 @@ namespace System.Security.Cryptography.X509Certificates
 #if FEATURE_CORESYSTEM
         [SecuritySafeCritical]
 #endif
-        internal unsafe static void memcpy(IntPtr source, IntPtr dest, uint size)
+        internal static unsafe void memcpy(IntPtr source, IntPtr dest, uint size)
         {
             for (uint index = 0; index < size; index++)
             {

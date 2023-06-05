@@ -7,9 +7,9 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal unsafe struct Passwd
         {
@@ -103,7 +103,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetPwUidR",
             SetLastError = false
         )]
-        internal static unsafe partial int GetPwUidR(
+        partial internal static unsafe int GetPwUidR(
             uint uid,
             out Passwd pwd,
             byte* buf,
@@ -116,7 +116,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = false
         )]
-        internal static unsafe partial int GetPwNamR(
+        partial internal static unsafe int GetPwNamR(
             string name,
             out Passwd pwd,
             byte* buf,

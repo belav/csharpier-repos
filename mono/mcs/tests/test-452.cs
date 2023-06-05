@@ -1,6 +1,6 @@
 class Foo
 {
-    static public Foo x;
+    public static Foo x;
 }
 
 class Test

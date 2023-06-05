@@ -10,7 +10,7 @@ using System.Text;
 
 namespace System.Net.Http.Json
 {
-    public sealed partial class JsonContent : System.Net.Http.HttpContent
+    partial public sealed class JsonContent : System.Net.Http.HttpContent
     {
         protected override void SerializeToStream(
             System.IO.Stream stream,

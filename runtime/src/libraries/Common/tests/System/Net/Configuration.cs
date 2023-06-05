@@ -3,7 +3,7 @@
 
 namespace System.Net.Test.Common
 {
-    public static partial class Configuration
+    partial public static class Configuration
     {
 #pragma warning disable 414
         private static readonly string DefaultAzureServer = "corefx-net-http11.azurewebsites.net";

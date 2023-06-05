@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.NetworkInformation
 {
-    public partial class Ping
+    partial public class Ping
     {
         private static bool SendIpHeader => OperatingSystem.IsFreeBSD();
         private static bool NeedsConnect => OperatingSystem.IsLinux();

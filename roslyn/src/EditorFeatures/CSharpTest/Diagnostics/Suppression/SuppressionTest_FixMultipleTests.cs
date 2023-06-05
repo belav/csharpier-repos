@@ -19,7 +19,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
 {
-    public partial class CSharpSuppressionTests : AbstractSuppressionDiagnosticTest
+    partial public class CSharpSuppressionTests : AbstractSuppressionDiagnosticTest
     {
         #region "Fix selected occurrences tests"
 

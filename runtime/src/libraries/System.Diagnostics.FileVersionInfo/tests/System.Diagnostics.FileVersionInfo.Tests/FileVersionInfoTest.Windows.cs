@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class FileVersionInfoTest
+    partial public class FileVersionInfoTest
     {
         private const string NativeConsoleAppFileName = "NativeConsoleApp.exe";
         private const string NativeLibraryFileName = "NativeLibrary.dll";

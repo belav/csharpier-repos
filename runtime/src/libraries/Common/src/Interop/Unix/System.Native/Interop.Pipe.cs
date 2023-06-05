@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [Flags]
         internal enum PipeFlags
@@ -29,6 +29,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_Pipe",
             SetLastError = true
         )]
-        internal static unsafe partial int Pipe(int* pipefd, PipeFlags flags = 0); // pipefd is an array of two ints
+        partial internal static unsafe int Pipe(int* pipefd, PipeFlags flags = 0); // pipefd is an array of two ints
     }
 }

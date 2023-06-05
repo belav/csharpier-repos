@@ -15,7 +15,7 @@ using Aliases = System.Collections.Generic.ValueListBuilder<(string aliasName, s
 
 namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 
-internal static partial class SyntaxValueProviderExtensions
+partial internal static class SyntaxValueProviderExtensions
 {
     // Normal class as Runtime does not seem to support records currently.
 

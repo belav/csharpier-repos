@@ -53,14 +53,14 @@ namespace System
 
         [Pure]
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static bool IsInfinity(float f)
+        public static unsafe bool IsInfinity(float f)
         {
             return (*(int*)(&f) & 0x7FFFFFFF) == 0x7F800000;
         }
 
         [Pure]
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static bool IsPositiveInfinity(float f)
+        public static unsafe bool IsPositiveInfinity(float f)
         {
             return *(int*)(&f) == 0x7F800000;
         }
@@ -68,7 +68,7 @@ namespace System
         [Pure]
         [System.Security.SecuritySafeCritical] // auto-generated
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static bool IsNegativeInfinity(float f)
+        public static unsafe bool IsNegativeInfinity(float f)
         {
             return *(int*)(&f) == unchecked((int)0xFF800000);
         }
@@ -77,7 +77,7 @@ namespace System
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Security.SecuritySafeCritical]
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static bool IsNaN(float f)
+        public static unsafe bool IsNaN(float f)
         {
             return (*(int*)(&f) & 0x7FFFFFFF) > 0x7F800000;
         }
@@ -85,7 +85,7 @@ namespace System
 #if MONO
         [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public unsafe static bool IsFinite(float f)
+        public static unsafe bool IsFinite(float f)
         {
             return (*(int*)(&f) & 0x7FFFFFFF) < 0x7F800000;
         }
@@ -209,7 +209,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe override int GetHashCode()
+        public override unsafe int GetHashCode()
         {
             float f = m_value;
             if (f == 0)

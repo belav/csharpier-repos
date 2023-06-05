@@ -18,6 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// An abstract flow pass that takes some shortcuts in analyzing finally blocks, in order to enable
     /// the analysis to take place without tracking exceptions or repeating the analysis of a finally block
@@ -33,8 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// href="https://en.wikipedia.org/wiki/Data-flow_analysis"/>) that moves upward through the <see cref="Join(ref
     /// TLocalState, ref TLocalState)"/> operation.
     /// </remarks>
-    internal abstract partial class AbstractFlowPass<TLocalState, TLocalFunctionState>
-        : BoundTreeVisitor
+    internal abstract class AbstractFlowPass<TLocalState, TLocalFunctionState> : BoundTreeVisitor
         where TLocalState : AbstractFlowPass<TLocalState, TLocalFunctionState>.ILocalState
         where TLocalFunctionState : AbstractFlowPass<
                 TLocalState,

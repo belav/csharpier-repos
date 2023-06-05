@@ -17,12 +17,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Options
 {
+    partial
     /// <summary>
     /// Serializable implementation of <see cref="OptionSet"/> for <see cref="Solution.Options"/>.
     /// It contains prepopulated fetched option values for all serializable options and values, and delegates to <see cref="WorkspaceOptionSet"/> for non-serializable values.
     /// It ensures a contract that values are immutable from this instance once observed.
     /// </summary>
-    internal sealed partial class SerializableOptionSet : OptionSet
+    internal sealed class SerializableOptionSet : OptionSet
     {
         /// <summary>
         /// Fallback option set for non-serializable options. See comments on <see cref="WorkspaceOptionSet"/> for more details.

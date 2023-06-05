@@ -67,7 +67,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 #region JsonConverterContractResolver
     public class ConverterContractResolver : DefaultContractResolver
     {
-        public new static readonly ConverterContractResolver Instance =
+        public static new readonly ConverterContractResolver Instance =
             new ConverterContractResolver();
 
         protected override JsonContract CreateContract(Type objectType)

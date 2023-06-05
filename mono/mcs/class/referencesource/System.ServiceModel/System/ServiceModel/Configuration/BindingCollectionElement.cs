@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public abstract partial class BindingCollectionElement
+    partial public abstract class BindingCollectionElement
         : ConfigurationElement,
             IConfigurationContextProviderInternal
     {

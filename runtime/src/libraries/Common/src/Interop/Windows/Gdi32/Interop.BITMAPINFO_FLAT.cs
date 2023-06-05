@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         internal const int BITMAPINFO_MAX_COLORSIZE = 256;
 
@@ -24,7 +24,7 @@ internal static partial class Interop
             public int bmiHeader_biClrUsed;
             public int bmiHeader_biClrImportant;
 
-            public fixed byte bmiColors[BITMAPINFO_MAX_COLORSIZE * 4]; // RGBQUAD structs... Blue-Green-Red-Reserved, repeat...
+            fixed public byte bmiColors[BITMAPINFO_MAX_COLORSIZE * 4]; // RGBQUAD structs... Blue-Green-Red-Reserved, repeat...
         }
     }
 }

@@ -11,13 +11,14 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
-    internal partial class SuggestedActionWithNestedFlavors
+    partial internal class SuggestedActionWithNestedFlavors
     {
+        partial
         /// <summary>
         /// Suggested action for showing the preview-changes dialog.  Note: this is only used
         /// as a 'flavor' inside CodeFixSuggestionAction and CodeRefactoringSuggestedAction.
         /// </summary>
-        private sealed partial class PreviewChangesSuggestedAction : SuggestedAction
+        private sealed class PreviewChangesSuggestedAction : SuggestedAction
         {
             private PreviewChangesSuggestedAction(
                 IThreadingContext threadingContext,

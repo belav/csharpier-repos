@@ -28,7 +28,9 @@ namespace MonoTests.Security.Cryptography
         protected MD5 hash;
 
         // because most crypto stuff works with byte[] buffers
-        static public void AssertEquals(string msg, byte[] array1, byte[] array2)
+        public
+        // because most crypto stuff works with byte[] buffers
+        static void AssertEquals(string msg, byte[] array1, byte[] array2)
         {
             if ((array1 == null) && (array2 == null))
                 return;

@@ -13,11 +13,12 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
+    partial
     /// <summary>
     /// Suggested action for fix all occurrences code fix.  Note: this is only used
     /// as a 'flavor' inside CodeFixSuggestionAction.
     /// </summary>
-    internal sealed partial class FixAllCodeFixSuggestedAction
+    internal sealed class FixAllCodeFixSuggestedAction
         : AbstractFixAllSuggestedAction,
             ITelemetryDiagnosticID<string>,
             IFixAllCodeFixSuggestedAction

@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SpellCheck
         Shared
     ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.RemoveUnnecessaryCast)]
-    internal partial class CSharpSpellCheckCodeFixProvider
+    partial internal class CSharpSpellCheckCodeFixProvider
         : AbstractSpellCheckCodeFixProvider<SimpleNameSyntax>
     {
         private const string CS0426 = nameof(CS0426); // The type name '0' does not exist in the type '1'

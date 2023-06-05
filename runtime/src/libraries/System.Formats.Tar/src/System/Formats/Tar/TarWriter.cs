@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace System.Formats.Tar
 {
+    partial
     /// <summary>
     /// Writes a tar archive into a stream.
     /// </summary>
-    public sealed partial class TarWriter : IDisposable, IAsyncDisposable
+    public sealed class TarWriter : IDisposable, IAsyncDisposable
     {
         private bool _wroteEntries;
         private bool _isDisposed;

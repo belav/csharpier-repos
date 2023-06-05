@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.Buffers.Text.Tests
 {
-    internal static partial class TestData
+    partial internal static class TestData
     {
         public static IEnumerable<ParserTestData<Guid>> GuidParserTestData
         {

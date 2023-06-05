@@ -6,7 +6,7 @@
 
 namespace System.Threading.RateLimiting
 {
-    public sealed partial class ConcurrencyLimiter : System.Threading.RateLimiting.RateLimiter
+    partial public sealed class ConcurrencyLimiter : System.Threading.RateLimiting.RateLimiter
     {
         public ConcurrencyLimiter(System.Threading.RateLimiting.ConcurrencyLimiterOptions options)
         { }
@@ -45,7 +45,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public sealed partial class ConcurrencyLimiterOptions
+    partial public sealed class ConcurrencyLimiterOptions
     {
         public ConcurrencyLimiterOptions() { }
 
@@ -66,7 +66,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public sealed partial class FixedWindowRateLimiter
+    partial public sealed class FixedWindowRateLimiter
         : System.Threading.RateLimiting.ReplenishingRateLimiter
     {
         public FixedWindowRateLimiter(
@@ -120,7 +120,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public sealed partial class FixedWindowRateLimiterOptions
+    partial public sealed class FixedWindowRateLimiterOptions
     {
         public FixedWindowRateLimiterOptions() { }
 
@@ -151,7 +151,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public static partial class MetadataName
+    partial public static class MetadataName
     {
         public static System.Threading.RateLimiting.MetadataName<string> ReasonPhrase
         {
@@ -168,7 +168,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public sealed partial class MetadataName<T>
+    partial public sealed class MetadataName<T>
         : System.IEquatable<System.Threading.RateLimiting.MetadataName<T>>
     {
         public MetadataName(string name) { }
@@ -217,7 +217,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public static partial class PartitionedRateLimiter
+    partial public static class PartitionedRateLimiter
     {
         public static System.Threading.RateLimiting.PartitionedRateLimiter<TResource> CreateChained<TResource>(
             params System.Threading.RateLimiting.PartitionedRateLimiter<TResource>[] limiters
@@ -242,7 +242,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public abstract partial class PartitionedRateLimiter<TResource>
+    partial public abstract class PartitionedRateLimiter<TResource>
         : System.IAsyncDisposable,
             System.IDisposable
     {
@@ -310,7 +310,7 @@ namespace System.Threading.RateLimiting
         NewestFirst = 1,
     }
 
-    public abstract partial class RateLimiter : System.IAsyncDisposable, System.IDisposable
+    partial public abstract class RateLimiter : System.IAsyncDisposable, System.IDisposable
     {
         protected RateLimiter() { }
 
@@ -356,7 +356,7 @@ namespace System.Threading.RateLimiting
         public abstract System.Threading.RateLimiting.RateLimiterStatistics? GetStatistics();
     }
 
-    public partial class RateLimiterStatistics
+    partial public class RateLimiterStatistics
     {
         public RateLimiterStatistics() { }
 
@@ -382,7 +382,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public abstract partial class RateLimitLease : System.IDisposable
+    partial public abstract class RateLimitLease : System.IDisposable
     {
         protected RateLimitLease() { }
 
@@ -412,7 +412,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public static partial class RateLimitPartition
+    partial public static class RateLimitPartition
     {
         public static System.Threading.RateLimiting.RateLimitPartition<TKey> GetConcurrencyLimiter<TKey>(
             TKey partitionKey,
@@ -462,7 +462,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public partial struct RateLimitPartition<TKey>
+    partial public struct RateLimitPartition<TKey>
     {
         private readonly TKey _PartitionKey_k__BackingField;
         private object _dummy;
@@ -486,7 +486,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public abstract partial class ReplenishingRateLimiter
+    partial public abstract class ReplenishingRateLimiter
         : System.Threading.RateLimiting.RateLimiter
     {
         protected ReplenishingRateLimiter() { }
@@ -496,7 +496,7 @@ namespace System.Threading.RateLimiting
         public abstract bool TryReplenish();
     }
 
-    public sealed partial class SlidingWindowRateLimiter
+    partial public sealed class SlidingWindowRateLimiter
         : System.Threading.RateLimiting.ReplenishingRateLimiter
     {
         public SlidingWindowRateLimiter(
@@ -550,7 +550,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public sealed partial class SlidingWindowRateLimiterOptions
+    partial public sealed class SlidingWindowRateLimiterOptions
     {
         public SlidingWindowRateLimiterOptions() { }
 
@@ -586,7 +586,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public sealed partial class TokenBucketRateLimiter
+    partial public sealed class TokenBucketRateLimiter
         : System.Threading.RateLimiting.ReplenishingRateLimiter
     {
         public TokenBucketRateLimiter(
@@ -640,7 +640,7 @@ namespace System.Threading.RateLimiting
         }
     }
 
-    public sealed partial class TokenBucketRateLimiterOptions
+    partial public sealed class TokenBucketRateLimiterOptions
     {
         public TokenBucketRateLimiterOptions() { }
 

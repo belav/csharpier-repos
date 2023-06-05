@@ -9,7 +9,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.Tests
 {
     [InheritRequired()]
-    public abstract partial class TCReadContentAsBase64 : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadContentAsBase64 : TCXMLReaderBaseGeneral
     {
         public const string ST_ELEM_NAME1 = "ElemAll";
         public const string ST_ELEM_NAME2 = "ElemEmpty";
@@ -612,7 +612,7 @@ namespace System.Xml.Tests
     }
 
     [InheritRequired()]
-    public abstract partial class TCReadElementContentAsBase64 : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadElementContentAsBase64 : TCXMLReaderBaseGeneral
     {
         public const string ST_ELEM_NAME1 = "ElemAll";
         public const string ST_ELEM_NAME2 = "ElemEmpty";

@@ -9,7 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net.Http
 {
-    public partial class ByteArrayContent : System.Net.Http.HttpContent
+    partial public class ByteArrayContent : System.Net.Http.HttpContent
     {
         public ByteArrayContent(byte[] content) { }
 
@@ -62,7 +62,7 @@ namespace System.Net.Http
         Automatic = 1,
     }
 
-    public abstract partial class DelegatingHandler : System.Net.Http.HttpMessageHandler
+    partial public abstract class DelegatingHandler : System.Net.Http.HttpMessageHandler
     {
         protected DelegatingHandler() { }
 
@@ -94,7 +94,7 @@ namespace System.Net.Http
         }
     }
 
-    public partial class FormUrlEncodedContent : System.Net.Http.ByteArrayContent
+    partial public class FormUrlEncodedContent : System.Net.Http.ByteArrayContent
     {
         public FormUrlEncodedContent(
             System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
@@ -121,7 +121,7 @@ namespace System.Net.Http
         TContext context
     );
 
-    public partial class HttpClient : System.Net.Http.HttpMessageInvoker
+    partial public class HttpClient : System.Net.Http.HttpMessageInvoker
     {
         public HttpClient()
             : base(default(System.Net.Http.HttpMessageHandler)) { }
@@ -518,7 +518,7 @@ namespace System.Net.Http
         }
     }
 
-    public partial class HttpClientHandler : System.Net.Http.HttpMessageHandler
+    partial public class HttpClientHandler : System.Net.Http.HttpMessageHandler
     {
         public HttpClientHandler() { }
 
@@ -718,7 +718,7 @@ namespace System.Net.Http
         ResponseHeadersRead = 1,
     }
 
-    public abstract partial class HttpContent : System.IDisposable
+    partial public abstract class HttpContent : System.IDisposable
     {
         protected HttpContent() { }
 
@@ -865,7 +865,7 @@ namespace System.Net.Http
         protected internal abstract bool TryComputeLength(out long length);
     }
 
-    public abstract partial class HttpMessageHandler : System.IDisposable
+    partial public abstract class HttpMessageHandler : System.IDisposable
     {
         protected HttpMessageHandler() { }
 
@@ -887,7 +887,7 @@ namespace System.Net.Http
         );
     }
 
-    public partial class HttpMessageInvoker : System.IDisposable
+    partial public class HttpMessageInvoker : System.IDisposable
     {
         public HttpMessageInvoker(System.Net.Http.HttpMessageHandler handler) { }
 
@@ -916,7 +916,7 @@ namespace System.Net.Http
         }
     }
 
-    public partial class HttpMethod : System.IEquatable<System.Net.Http.HttpMethod>
+    partial public class HttpMethod : System.IEquatable<System.Net.Http.HttpMethod>
     {
         public HttpMethod(string method) { }
 
@@ -1014,7 +1014,7 @@ namespace System.Net.Http
         }
     }
 
-    public partial class HttpRequestException : System.Exception
+    partial public class HttpRequestException : System.Exception
     {
         public HttpRequestException() { }
 
@@ -1034,7 +1034,7 @@ namespace System.Net.Http
         }
     }
 
-    public partial class HttpRequestMessage : System.IDisposable
+    partial public class HttpRequestMessage : System.IDisposable
     {
         public HttpRequestMessage() { }
 
@@ -1238,7 +1238,7 @@ namespace System.Net.Http
         }
     }
 
-    public partial class HttpResponseMessage : System.IDisposable
+    partial public class HttpResponseMessage : System.IDisposable
     {
         public HttpResponseMessage() { }
 
@@ -1305,7 +1305,7 @@ namespace System.Net.Http
         RequestVersionExact = 2,
     }
 
-    public abstract partial class MessageProcessingHandler : System.Net.Http.DelegatingHandler
+    partial public abstract class MessageProcessingHandler : System.Net.Http.DelegatingHandler
     {
         protected MessageProcessingHandler() { }
 
@@ -1337,7 +1337,7 @@ namespace System.Net.Http
         }
     }
 
-    public partial class MultipartContent
+    partial public class MultipartContent
         : System.Net.Http.HttpContent,
             System.Collections.Generic.IEnumerable<System.Net.Http.HttpContent>,
             System.Collections.IEnumerable
@@ -1416,7 +1416,7 @@ namespace System.Net.Http
         }
     }
 
-    public partial class MultipartFormDataContent : System.Net.Http.MultipartContent
+    partial public class MultipartFormDataContent : System.Net.Http.MultipartContent
     {
         public MultipartFormDataContent() { }
 
@@ -1438,7 +1438,7 @@ namespace System.Net.Http
         }
     }
 
-    public sealed partial class ReadOnlyMemoryContent : System.Net.Http.HttpContent
+    partial public sealed class ReadOnlyMemoryContent : System.Net.Http.HttpContent
     {
         public ReadOnlyMemoryContent(System.ReadOnlyMemory<byte> content) { }
 
@@ -1484,7 +1484,7 @@ namespace System.Net.Http
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public sealed partial class SocketsHttpHandler : System.Net.Http.HttpMessageHandler
+    partial public sealed class SocketsHttpHandler : System.Net.Http.HttpMessageHandler
     {
         public SocketsHttpHandler() { }
 
@@ -1716,7 +1716,7 @@ namespace System.Net.Http
         Always
     }
 
-    public partial class StreamContent : System.Net.Http.HttpContent
+    partial public class StreamContent : System.Net.Http.HttpContent
     {
         public StreamContent(System.IO.Stream content) { }
 
@@ -1765,7 +1765,7 @@ namespace System.Net.Http
         }
     }
 
-    public partial class StringContent : System.Net.Http.ByteArrayContent
+    partial public class StringContent : System.Net.Http.ByteArrayContent
     {
         public StringContent(string content)
             : base(default(byte[])) { }
@@ -1799,7 +1799,7 @@ namespace System.Net.Http
 
 namespace System.Net.Http.Headers
 {
-    public partial class AuthenticationHeaderValue : System.ICloneable
+    partial public class AuthenticationHeaderValue : System.ICloneable
     {
         public AuthenticationHeaderValue(string scheme) { }
 
@@ -1849,7 +1849,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class CacheControlHeaderValue : System.ICloneable
+    partial public class CacheControlHeaderValue : System.ICloneable
     {
         public CacheControlHeaderValue() { }
 
@@ -1966,7 +1966,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class ContentDispositionHeaderValue : System.ICloneable
+    partial public class ContentDispositionHeaderValue : System.ICloneable
     {
         protected ContentDispositionHeaderValue(
             System.Net.Http.Headers.ContentDispositionHeaderValue source
@@ -2054,7 +2054,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class ContentRangeHeaderValue : System.ICloneable
+    partial public class ContentRangeHeaderValue : System.ICloneable
     {
         public ContentRangeHeaderValue(long length) { }
 
@@ -2123,7 +2123,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class EntityTagHeaderValue : System.ICloneable
+    partial public class EntityTagHeaderValue : System.ICloneable
     {
         public EntityTagHeaderValue(string tag) { }
 
@@ -2177,7 +2177,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public readonly partial struct HeaderStringValues
+    partial public readonly struct HeaderStringValues
         : System.Collections.Generic.IEnumerable<string>,
             System.Collections.Generic.IReadOnlyCollection<string>,
             System.Collections.IEnumerable
@@ -2209,7 +2209,7 @@ namespace System.Net.Http.Headers
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<string>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -2236,7 +2236,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public sealed partial class HttpContentHeaders : System.Net.Http.Headers.HttpHeaders
+    partial public sealed class HttpContentHeaders : System.Net.Http.Headers.HttpHeaders
     {
         internal HttpContentHeaders() { }
 
@@ -2294,7 +2294,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public abstract partial class HttpHeaders
+    partial public abstract class HttpHeaders
         : System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
             string,
             System.Collections.Generic.IEnumerable<string>
@@ -2370,7 +2370,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public readonly partial struct HttpHeadersNonValidated
+    partial public readonly struct HttpHeadersNonValidated
         : System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
             string,
             System.Net.Http.Headers.HeaderStringValues
@@ -2460,7 +2460,7 @@ namespace System.Net.Http.Headers
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
                 string,
                 System.Net.Http.Headers.HeaderStringValues
@@ -2493,7 +2493,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public sealed partial class HttpHeaderValueCollection<T>
+    partial public sealed class HttpHeaderValueCollection<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable
@@ -2549,7 +2549,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public sealed partial class HttpRequestHeaders : System.Net.Http.Headers.HttpHeaders
+    partial public sealed class HttpRequestHeaders : System.Net.Http.Headers.HttpHeaders
     {
         internal HttpRequestHeaders() { }
 
@@ -2699,7 +2699,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public sealed partial class HttpResponseHeaders : System.Net.Http.Headers.HttpHeaders
+    partial public sealed class HttpResponseHeaders : System.Net.Http.Headers.HttpHeaders
     {
         internal HttpResponseHeaders() { }
 
@@ -2793,7 +2793,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class MediaTypeHeaderValue : System.ICloneable
+    partial public class MediaTypeHeaderValue : System.ICloneable
     {
         protected MediaTypeHeaderValue(System.Net.Http.Headers.MediaTypeHeaderValue source) { }
 
@@ -2853,7 +2853,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public sealed partial class MediaTypeWithQualityHeaderValue
+    partial public sealed class MediaTypeWithQualityHeaderValue
         : System.Net.Http.Headers.MediaTypeHeaderValue,
             System.ICloneable
     {
@@ -2891,7 +2891,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class NameValueHeaderValue : System.ICloneable
+    partial public class NameValueHeaderValue : System.ICloneable
     {
         protected NameValueHeaderValue(System.Net.Http.Headers.NameValueHeaderValue source) { }
 
@@ -2944,7 +2944,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class NameValueWithParametersHeaderValue
+    partial public class NameValueWithParametersHeaderValue
         : System.Net.Http.Headers.NameValueHeaderValue,
             System.ICloneable
     {
@@ -3001,7 +3001,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class ProductHeaderValue : System.ICloneable
+    partial public class ProductHeaderValue : System.ICloneable
     {
         public ProductHeaderValue(string name) { }
 
@@ -3051,7 +3051,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class ProductInfoHeaderValue : System.ICloneable
+    partial public class ProductInfoHeaderValue : System.ICloneable
     {
         public ProductInfoHeaderValue(System.Net.Http.Headers.ProductHeaderValue product) { }
 
@@ -3103,7 +3103,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class RangeConditionHeaderValue : System.ICloneable
+    partial public class RangeConditionHeaderValue : System.ICloneable
     {
         public RangeConditionHeaderValue(System.DateTimeOffset date) { }
 
@@ -3155,7 +3155,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class RangeHeaderValue : System.ICloneable
+    partial public class RangeHeaderValue : System.ICloneable
     {
         public RangeHeaderValue() { }
 
@@ -3206,7 +3206,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class RangeItemHeaderValue : System.ICloneable
+    partial public class RangeItemHeaderValue : System.ICloneable
     {
         public RangeItemHeaderValue(long? from, long? to) { }
 
@@ -3240,7 +3240,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class RetryConditionHeaderValue : System.ICloneable
+    partial public class RetryConditionHeaderValue : System.ICloneable
     {
         public RetryConditionHeaderValue(System.DateTimeOffset date) { }
 
@@ -3290,7 +3290,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class StringWithQualityHeaderValue : System.ICloneable
+    partial public class StringWithQualityHeaderValue : System.ICloneable
     {
         public StringWithQualityHeaderValue(string value) { }
 
@@ -3340,7 +3340,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class TransferCodingHeaderValue : System.ICloneable
+    partial public class TransferCodingHeaderValue : System.ICloneable
     {
         protected TransferCodingHeaderValue(
             System.Net.Http.Headers.TransferCodingHeaderValue source
@@ -3392,7 +3392,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public sealed partial class TransferCodingWithQualityHeaderValue
+    partial public sealed class TransferCodingWithQualityHeaderValue
         : System.Net.Http.Headers.TransferCodingHeaderValue,
             System.ICloneable
     {
@@ -3430,7 +3430,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class ViaHeaderValue : System.ICloneable
+    partial public class ViaHeaderValue : System.ICloneable
     {
         public ViaHeaderValue(string protocolVersion, string receivedBy) { }
 
@@ -3495,7 +3495,7 @@ namespace System.Net.Http.Headers
         }
     }
 
-    public partial class WarningHeaderValue : System.ICloneable
+    partial public class WarningHeaderValue : System.ICloneable
     {
         public WarningHeaderValue(int code, string agent, string text) { }
 

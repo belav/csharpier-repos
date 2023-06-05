@@ -20,7 +20,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
-    internal partial class CSharpCodeModelService
+    partial internal class CSharpCodeModelService
     {
         protected override AbstractNodeLocator CreateNodeLocator() => new NodeLocator();
 

@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class IdentifierCollection
+    partial internal class IdentifierCollection
     {
         private abstract class CollectionBase : ICollection<string>
         {

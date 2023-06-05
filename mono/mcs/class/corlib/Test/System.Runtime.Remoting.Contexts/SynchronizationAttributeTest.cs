@@ -113,7 +113,7 @@ namespace MonoTests.System.Runtime.Remoting.Contexts
             Assert.IsFalse(sa.Locked, "Locked");
         }
 
-        static private byte[] serialized_sync_attr =
+        private static byte[] serialized_sync_attr =
         {
             0x00,
             0x01,

@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
         ),
         Shared
     ]
-    internal partial class ConvertRegularStringToRawStringCodeRefactoringProvider
+    partial internal class ConvertRegularStringToRawStringCodeRefactoringProvider
         : SyntaxEditorBasedCodeRefactoringProvider
     {
         private enum ConvertToRawKind

@@ -7,7 +7,7 @@ using OLEDB.Test.ModuleCore;
 namespace System.Xml.Tests
 {
     [InheritRequired()]
-    public abstract partial class TCXMLException : TCXMLReaderBaseGeneral
+    partial public abstract class TCXMLException : TCXMLReaderBaseGeneral
     {
         private void CompareException(XmlException e, string ec, Exception inner, int ln, int lp)
         {

@@ -7,7 +7,7 @@ using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {
-    public sealed partial class Bitmap
+    partial public sealed class Bitmap
     {
         public unsafe Bitmap(Stream stream, bool useIcm)
         {

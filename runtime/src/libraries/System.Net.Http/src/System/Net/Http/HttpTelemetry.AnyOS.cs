@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace System.Net.Http
 {
-    internal sealed partial class HttpTelemetry
+    partial internal sealed class HttpTelemetry
     {
         private IncrementingPollingCounter? _startedRequestsPerSecondCounter;
         private IncrementingPollingCounter? _failedRequestsPerSecondCounter;

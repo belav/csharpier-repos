@@ -6,8 +6,9 @@ using System.Diagnostics;
 
 namespace System.IO
 {
+    partial
     /// <summary>Provides an implementation of FileSystem for Unix systems.</summary>
-    internal static partial class FileSystem
+    internal static class FileSystem
     {
         internal const int DefaultBufferSize = 4096;
 

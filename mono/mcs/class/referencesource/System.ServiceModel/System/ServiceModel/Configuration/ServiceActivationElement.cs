@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Diagnostics.Application;
     using System.Text;
 
-    public sealed partial class ServiceActivationElement : ConfigurationElement
+    partial public sealed class ServiceActivationElement : ConfigurationElement
     {
         const string PathSeparatorString = "/";
         const string ReversSlashString = @"\";

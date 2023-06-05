@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-internal static partial class HubConnectionHandlerLog
+partial internal static class HubConnectionHandlerLog
 {
     [LoggerMessage(
         1,
@@ -13,7 +13,7 @@ internal static partial class HubConnectionHandlerLog
         "Error when dispatching '{HubMethod}' on hub.",
         EventName = "ErrorDispatchingHubEvent"
     )]
-    public static partial void ErrorDispatchingHubEvent(
+    partial public static void ErrorDispatchingHubEvent(
         ILogger logger,
         string hubMethod,
         Exception exception
@@ -25,10 +25,10 @@ internal static partial class HubConnectionHandlerLog
         "Error when processing requests.",
         EventName = "ErrorProcessingRequest"
     )]
-    public static partial void ErrorProcessingRequest(ILogger logger, Exception exception);
+    partial public static void ErrorProcessingRequest(ILogger logger, Exception exception);
 
     [LoggerMessage(3, LogLevel.Trace, "Abort callback failed.", EventName = "AbortFailed")]
-    public static partial void AbortFailed(ILogger logger, Exception exception);
+    partial public static void AbortFailed(ILogger logger, Exception exception);
 
     [LoggerMessage(
         4,
@@ -36,11 +36,11 @@ internal static partial class HubConnectionHandlerLog
         "Error when sending Close message.",
         EventName = "ErrorSendingClose"
     )]
-    public static partial void ErrorSendingClose(ILogger logger, Exception exception);
+    partial public static void ErrorSendingClose(ILogger logger, Exception exception);
 
     [LoggerMessage(5, LogLevel.Debug, "OnConnectedAsync started.", EventName = "ConnectedStarting")]
-    public static partial void ConnectedStarting(ILogger logger);
+    partial public static void ConnectedStarting(ILogger logger);
 
     [LoggerMessage(6, LogLevel.Debug, "OnConnectedAsync ending.", EventName = "ConnectedEnding")]
-    public static partial void ConnectedEnding(ILogger logger);
+    partial public static void ConnectedEnding(ILogger logger);
 }

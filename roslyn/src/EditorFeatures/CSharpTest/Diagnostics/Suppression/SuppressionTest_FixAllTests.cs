@@ -11,16 +11,16 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
 {
-    public abstract partial class CSharpSuppressionTests : AbstractSuppressionDiagnosticTest
+    partial public abstract class CSharpSuppressionTests : AbstractSuppressionDiagnosticTest
     {
+        partial
         #region "Fix all occurrences tests"
 
         #region "Pragma disable tests"
 
-        public abstract partial class CSharpPragmaWarningDisableSuppressionTests
-            : CSharpSuppressionTests
+        public abstract class CSharpPragmaWarningDisableSuppressionTests : CSharpSuppressionTests
         {
-            public partial class UserInfoDiagnosticSuppressionTests
+            partial public class UserInfoDiagnosticSuppressionTests
                 : CSharpPragmaWarningDisableSuppressionTests
             {
                 [Fact]
@@ -454,14 +454,14 @@ class Class4
             }
         }
 
+        partial
         #endregion
 
         #region "SuppressMessageAttribute tests"
 
-        public abstract partial class CSharpGlobalSuppressMessageSuppressionTests
-            : CSharpSuppressionTests
+        public abstract class CSharpGlobalSuppressMessageSuppressionTests : CSharpSuppressionTests
         {
-            public partial class UserInfoDiagnosticSuppressionTests
+            partial public class UserInfoDiagnosticSuppressionTests
                 : CSharpGlobalSuppressMessageSuppressionTests
             {
                 [Fact]
@@ -936,7 +936,7 @@ class Class3
             }
         }
 
-        public partial class CSharpDiagnosticWithoutLocationSuppressionTests
+        partial public class CSharpDiagnosticWithoutLocationSuppressionTests
             : CSharpSuppressionTests
         {
             [Fact]

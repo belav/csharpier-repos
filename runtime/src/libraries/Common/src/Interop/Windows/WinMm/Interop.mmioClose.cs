@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         [LibraryImport(Interop.Libraries.WinMM)]
-        internal static partial int mmioClose(IntPtr hMIO, int flags);
+        partial internal static int mmioClose(IntPtr hMIO, int flags);
     }
 }

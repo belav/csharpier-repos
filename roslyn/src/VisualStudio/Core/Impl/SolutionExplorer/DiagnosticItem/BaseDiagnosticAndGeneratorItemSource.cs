@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal abstract partial class BaseDiagnosticAndGeneratorItemSource : IAttachedCollectionSource
+    partial internal abstract class BaseDiagnosticAndGeneratorItemSource : IAttachedCollectionSource
     {
         private static readonly DiagnosticDescriptorComparer s_comparer =
             new DiagnosticDescriptorComparer();

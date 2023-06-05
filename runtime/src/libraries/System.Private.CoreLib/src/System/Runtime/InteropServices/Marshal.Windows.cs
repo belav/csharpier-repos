@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class Marshal
+    partial public static class Marshal
     {
         public static string? PtrToStringAuto(IntPtr ptr, int len)
         {

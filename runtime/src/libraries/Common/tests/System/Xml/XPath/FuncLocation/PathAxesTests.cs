@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths
 {
+    partial
     /// <summary>
     /// Location Paths - Axes
     /// </summary>
-    public static partial class AxesTests
+    public static class AxesTests
     {
         /// <summary>
         /// Expected: Selects all element ancestors of the context node.

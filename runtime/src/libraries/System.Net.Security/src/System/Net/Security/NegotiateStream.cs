@@ -20,7 +20,7 @@ namespace System.Net.Security
     /// Provides a stream that uses the Negotiate security protocol to authenticate the client, and optionally the server, in client-server communication.
     /// </summary>
     [UnsupportedOSPlatform("tvos")]
-    public partial class NegotiateStream : AuthenticatedStream
+    partial public class NegotiateStream : AuthenticatedStream
     {
         /// <summary>Set as the _exception when the instance is disposed.</summary>
         private static readonly ExceptionDispatchInfo s_disposedSentinel =

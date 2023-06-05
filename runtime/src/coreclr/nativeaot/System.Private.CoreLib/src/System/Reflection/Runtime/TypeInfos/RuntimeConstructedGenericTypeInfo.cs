@@ -16,11 +16,12 @@ using StructLayoutAttribute = System.Runtime.InteropServices.StructLayoutAttribu
 
 namespace System.Reflection.Runtime.TypeInfos
 {
+    partial
     //
     // TypeInfos that represent constructed generic types.
     //
     //
-    internal sealed partial class RuntimeConstructedGenericTypeInfo
+    internal sealed class RuntimeConstructedGenericTypeInfo
         : RuntimeTypeInfo,
             IKeyedItem<RuntimeConstructedGenericTypeInfo.UnificationKey>
     {

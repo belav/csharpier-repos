@@ -6,16 +6,16 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AndroidCrypto
+    partial internal static class AndroidCrypto
     {
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_EcKeyCreateByOid",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        private static partial SafeEcKeyHandle AndroidCryptoNative_EcKeyCreateByOid(string oid);
+        partial private static SafeEcKeyHandle AndroidCryptoNative_EcKeyCreateByOid(string oid);
 
         internal static SafeEcKeyHandle? EcKeyCreateByOid(string oid)
         {
@@ -28,17 +28,17 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_EcKeyDestroy"
         )]
-        internal static partial void EcKeyDestroy(IntPtr a);
+        partial internal static void EcKeyDestroy(IntPtr a);
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_EcKeyUpRef"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool EcKeyUpRef(IntPtr r);
+        partial internal static bool EcKeyUpRef(IntPtr r);
 
         [LibraryImport(Libraries.AndroidCryptoNative)]
-        private static partial int AndroidCryptoNative_EcKeyGetSize(
+        partial private static int AndroidCryptoNative_EcKeyGetSize(
             SafeEcKeyHandle ecKey,
             out int keySize
         );
@@ -58,7 +58,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_EcKeyGetCurveName"
         )]
-        private static partial int AndroidCryptoNative_EcKeyGetCurveName(
+        partial private static int AndroidCryptoNative_EcKeyGetCurveName(
             SafeEcKeyHandle ecKey,
             out IntPtr curveName
         );

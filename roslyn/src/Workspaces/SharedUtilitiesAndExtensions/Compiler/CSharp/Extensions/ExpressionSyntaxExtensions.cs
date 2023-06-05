@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class ExpressionSyntaxExtensions
+    partial internal static class ExpressionSyntaxExtensions
     {
         [return: NotNullIfNotNull(nameof(expression))]
         public static ExpressionSyntax? WalkUpParentheses(this ExpressionSyntax? expression)

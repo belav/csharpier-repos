@@ -3,7 +3,7 @@
 
 namespace System.Reflection.Metadata
 {
-    public readonly partial struct AssemblyReference
+    partial public readonly struct AssemblyReference
     {
         public AssemblyName GetAssemblyName()
         {

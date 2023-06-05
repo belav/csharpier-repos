@@ -19,9 +19,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     // This is a type symbol associated with a type definition in source code.
     // That is, for a generic type C<T> this is the instance type C<T>.
-    internal sealed partial class SourceNamedTypeSymbol
+    internal sealed class SourceNamedTypeSymbol
         : SourceMemberContainerTypeSymbol,
             IAttributeTargetSymbol
     {

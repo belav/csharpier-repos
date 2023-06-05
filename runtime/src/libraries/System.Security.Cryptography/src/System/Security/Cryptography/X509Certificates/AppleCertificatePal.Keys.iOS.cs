@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class AppleCertificatePal : ICertificatePal
+    partial internal sealed class AppleCertificatePal : ICertificatePal
     {
         public DSA? GetDSAPrivateKey()
         {

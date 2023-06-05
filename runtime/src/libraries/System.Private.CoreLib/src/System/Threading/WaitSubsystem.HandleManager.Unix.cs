@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    internal static partial class WaitSubsystem
+    partial internal static class WaitSubsystem
     {
         private static class HandleManager
         {

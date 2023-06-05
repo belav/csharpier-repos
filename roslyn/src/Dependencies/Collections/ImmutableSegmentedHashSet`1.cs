@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Collections.Internal;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal readonly partial struct ImmutableSegmentedHashSet<T>
+    partial internal readonly struct ImmutableSegmentedHashSet<T>
         : IImmutableSet<T>,
             ISet<T>,
             ICollection,

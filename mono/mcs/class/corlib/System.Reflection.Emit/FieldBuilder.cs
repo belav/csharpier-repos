@@ -84,7 +84,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class FieldBuilder : FieldInfo
+    partial public sealed class FieldBuilder : FieldInfo
     {
 #pragma warning disable 169, 414
         private FieldAttributes attrs;

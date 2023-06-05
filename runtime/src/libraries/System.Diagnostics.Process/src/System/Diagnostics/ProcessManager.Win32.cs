@@ -14,7 +14,7 @@ using SYSTEM_THREAD_INFORMATION = Interop.NtDll.SYSTEM_THREAD_INFORMATION;
 
 namespace System.Diagnostics
 {
-    internal static partial class ProcessManager
+    partial internal static class ProcessManager
     {
         public static IntPtr GetMainWindowHandle(int processId)
         {
@@ -63,7 +63,7 @@ namespace System.Diagnostics
         }
     }
 
-    internal static partial class NtProcessManager
+    partial internal static class NtProcessManager
     {
         private static ProcessModuleCollection GetModules(int processId, bool firstModuleOnly)
         {

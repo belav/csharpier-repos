@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal abstract partial class AbstractAsynchronousTaggerProvider<TTag>
+    partial internal abstract class AbstractAsynchronousTaggerProvider<TTag>
     {
         /// <summary>
         /// Handles the job of batching up change notifications so that don't spam the editor with too

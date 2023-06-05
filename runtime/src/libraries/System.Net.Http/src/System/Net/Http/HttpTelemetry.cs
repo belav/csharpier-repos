@@ -9,7 +9,7 @@ using System.Threading;
 namespace System.Net.Http
 {
     [EventSource(Name = "System.Net.Http")]
-    internal sealed partial class HttpTelemetry : EventSource
+    partial internal sealed class HttpTelemetry : EventSource
     {
         public static readonly HttpTelemetry Log = new HttpTelemetry();
 

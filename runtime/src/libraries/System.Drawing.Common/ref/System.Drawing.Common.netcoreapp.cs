@@ -6,7 +6,7 @@
 
 namespace System.Drawing
 {
-    public partial struct CharacterRange : System.IEquatable<System.Drawing.CharacterRange>
+    partial public struct CharacterRange : System.IEquatable<System.Drawing.CharacterRange>
     {
         public bool Equals(System.Drawing.CharacterRange other)
         {
@@ -14,7 +14,7 @@ namespace System.Drawing
         }
     }
 
-    public sealed partial class Graphics
+    partial public sealed class Graphics
     {
         public void DrawRectangle(System.Drawing.Pen pen, System.Drawing.RectangleF rect) { }
 
@@ -67,7 +67,7 @@ namespace System.Drawing
 
 namespace System.Drawing.Drawing2D
 {
-    public sealed partial class Matrix
+    partial public sealed class Matrix
     {
         public Matrix(System.Numerics.Matrix3x2 matrix) { }
 
@@ -81,7 +81,7 @@ namespace System.Drawing.Drawing2D
 
 namespace System.Drawing.Imaging
 {
-    public sealed partial class ImageFormat
+    partial public sealed class ImageFormat
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows10.0.17763.0")]
         public static ImageFormat Heif

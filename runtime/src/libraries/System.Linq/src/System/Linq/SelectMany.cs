@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TResult> SelectMany<TSource, TResult>(
             this IEnumerable<TSource> source,
@@ -148,7 +148,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class SelectManySingleSelectorIterator<TSource, TResult>
+        partial private sealed class SelectManySingleSelectorIterator<TSource, TResult>
             : Iterator<TResult>
         {
             private readonly IEnumerable<TSource> _source;

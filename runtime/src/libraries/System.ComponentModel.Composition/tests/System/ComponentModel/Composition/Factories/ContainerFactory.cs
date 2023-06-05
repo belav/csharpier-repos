@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.ComponentModel.Composition.Factories
 {
-    internal static partial class ContainerFactory
+    partial internal static class ContainerFactory
     {
         public static CompositionContainer Create()
         {

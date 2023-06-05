@@ -20,7 +20,7 @@ namespace System.Diagnostics.Tracing
         "CA1822:Mark members as static",
         Justification = "NativeRuntimeEventSource is a special case where event methods don't use WriteEvent/WriteEventCore but still need to be instance methods."
     )]
-    internal sealed partial class NativeRuntimeEventSource : EventSource
+    partial internal sealed class NativeRuntimeEventSource : EventSource
     {
         // This value does not seem to be used, leaving it as zero for now. It may be useful for a scenario that may involve
         // multiple instances of the runtime within the same process, but then it seems unlikely that both instances' thread

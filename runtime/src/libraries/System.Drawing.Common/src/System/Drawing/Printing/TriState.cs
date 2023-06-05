@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Drawing.Printing
 {
-    internal readonly partial struct TriState : IEquatable<TriState>
+    partial internal readonly struct TriState : IEquatable<TriState>
     {
         private readonly byte _value; // 0 is "default", not false
 

@@ -23,7 +23,7 @@ namespace System.Data.Common
         public SByteStorage(DataColumn column)
             : base(column, typeof(SByte), defaultValue, StorageType.SByte) { }
 
-        override public Object Aggregate(int[] records, AggregateType kind)
+        public override Object Aggregate(int[] records, AggregateType kind)
         {
             bool hasData = false;
             try
@@ -162,7 +162,7 @@ namespace System.Data.Common
             throw ExceptionBuilder.AggregateException(kind, DataType);
         }
 
-        override public int Compare(int recordNo1, int recordNo2)
+        public override int Compare(int recordNo1, int recordNo2)
         {
             SByte valueNo1 = values[recordNo1];
             SByte valueNo2 = values[recordNo2];
@@ -216,13 +216,13 @@ namespace System.Data.Common
             return value;
         }
 
-        override public void Copy(int recordNo1, int recordNo2)
+        public override void Copy(int recordNo1, int recordNo2)
         {
             CopyBits(recordNo1, recordNo2);
             values[recordNo2] = values[recordNo1];
         }
 
-        override public Object Get(int record)
+        public override Object Get(int record)
         {
             SByte value = values[record];
             if (!value.Equals(defaultValue))
@@ -232,7 +232,7 @@ namespace System.Data.Common
             return GetBits(record);
         }
 
-        override public void Set(int record, Object value)
+        public override void Set(int record, Object value)
         {
             System.Diagnostics.Debug.Assert(null != value, "null value");
             if (NullValue == value)
@@ -247,7 +247,7 @@ namespace System.Data.Common
             }
         }
 
-        override public void SetCapacity(int capacity)
+        public override void SetCapacity(int capacity)
         {
             SByte[] newValues = new SByte[capacity];
             if (null != values)
@@ -258,22 +258,22 @@ namespace System.Data.Common
             base.SetCapacity(capacity);
         }
 
-        override public object ConvertXmlToObject(string s)
+        public override object ConvertXmlToObject(string s)
         {
             return XmlConvert.ToSByte(s);
         }
 
-        override public string ConvertObjectToXml(object value)
+        public override string ConvertObjectToXml(object value)
         {
             return XmlConvert.ToString((SByte)value);
         }
 
-        override protected object GetEmptyStorage(int recordCount)
+        protected override object GetEmptyStorage(int recordCount)
         {
             return new SByte[recordCount];
         }
 
-        override protected void CopyValue(
+        protected override void CopyValue(
             int record,
             object store,
             BitArray nullbits,
@@ -285,7 +285,7 @@ namespace System.Data.Common
             nullbits.Set(storeIndex, IsNull(record));
         }
 
-        override protected void SetStorage(object store, BitArray nullbits)
+        protected override void SetStorage(object store, BitArray nullbits)
         {
             values = (SByte[])store;
             SetNullStorage(nullbits);

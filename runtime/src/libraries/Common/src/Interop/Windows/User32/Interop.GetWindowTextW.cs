@@ -5,11 +5,11 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         [LibraryImport(Libraries.User32, SetLastError = true)]
-        public static unsafe partial int GetWindowTextW(IntPtr hWnd, char* lpString, int nMaxCount);
+        partial public static unsafe int GetWindowTextW(IntPtr hWnd, char* lpString, int nMaxCount);
     }
 }

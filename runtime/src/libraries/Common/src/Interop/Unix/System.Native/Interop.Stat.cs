@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         // Even though csc will by default use a sequential layout, a CS0649 warning as error
         // is produced for un-assigned fields when no StructLayout is specified.
@@ -60,7 +60,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_FStat",
             SetLastError = true
         )]
-        internal static partial int FStat(SafeHandle fd, out FileStatus output);
+        partial internal static int FStat(SafeHandle fd, out FileStatus output);
 
         [LibraryImport(
             Libraries.SystemNative,
@@ -68,7 +68,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial int Stat(string path, out FileStatus output);
+        partial internal static int Stat(string path, out FileStatus output);
 
         [LibraryImport(
             Libraries.SystemNative,
@@ -76,6 +76,6 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial int LStat(string path, out FileStatus output);
+        partial internal static int LStat(string path, out FileStatus output);
     }
 }

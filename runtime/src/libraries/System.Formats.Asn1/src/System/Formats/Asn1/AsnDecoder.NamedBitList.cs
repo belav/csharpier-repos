@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace System.Formats.Asn1
 {
-    public static partial class AsnDecoder
+    partial public static class AsnDecoder
     {
         /// <summary>
         ///   Reads a NamedBitList from <paramref name="source"/> with a specified tag under
@@ -423,7 +423,7 @@ namespace System.Formats.Asn1
         }
     }
 
-    public partial class AsnReader
+    partial public class AsnReader
     {
         /// <summary>
         ///   Reads the next value as a NamedBitList with a specified tag, converting it to the

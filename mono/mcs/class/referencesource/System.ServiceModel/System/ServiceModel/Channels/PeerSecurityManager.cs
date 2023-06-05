@@ -165,7 +165,7 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static public PeerSecurityManager Create(
+        public static PeerSecurityManager Create(
             PeerSecuritySettings security,
             BindingContext context,
             XmlDictionaryReaderQuotas readerQuotas
@@ -177,7 +177,7 @@ namespace System.ServiceModel.Channels
             return Create(authMode, signing, context, readerQuotas);
         }
 
-        static public PeerSecurityManager Create(
+        public static PeerSecurityManager Create(
             PeerAuthenticationMode authenticationMode,
             bool signMessages,
             BindingContext context,
@@ -314,7 +314,7 @@ namespace System.ServiceModel.Channels
             return manager;
         }
 
-        static public PeerSecurityManager Create(
+        public static PeerSecurityManager Create(
             PeerAuthenticationMode authenticationMode,
             bool messageAuthentication,
             PeerSecurityCredentialsManager credman,

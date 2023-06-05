@@ -6,7 +6,7 @@
 
 namespace System.Text.Json.Serialization.Metadata
 {
-    public static partial class JsonMetadataServices
+    partial public static class JsonMetadataServices
     {
         public static System.Text.Json.Serialization.JsonConverter<System.DateOnly> DateOnlyConverter
         {

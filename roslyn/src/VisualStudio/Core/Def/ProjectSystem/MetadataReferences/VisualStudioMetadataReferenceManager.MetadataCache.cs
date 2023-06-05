@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal sealed partial class VisualStudioMetadataReferenceManager
+    partial internal sealed class VisualStudioMetadataReferenceManager
     {
         private sealed class MetadataCache
         {

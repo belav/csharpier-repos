@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Security.Policy
 {
-    public sealed partial class PublisherMembershipCondition
+    partial public sealed class PublisherMembershipCondition
         : ISecurityEncodable,
             ISecurityPolicyEncodable,
             IMembershipCondition

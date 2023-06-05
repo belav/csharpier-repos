@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.MemoryMappedFiles
 {
-    public partial class MemoryMappedFile
+    partial public class MemoryMappedFile
     {
         // This will verify file access and return file size. fileSize will return -1 for special devices.
         private static void VerifyMemoryMappedFileAccess(

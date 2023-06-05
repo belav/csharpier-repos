@@ -14,10 +14,11 @@ using static Microsoft.CodeAnalysis.Scripting.Hosting.ObjectFormatterHelpers;
 
 namespace Microsoft.CodeAnalysis.Scripting.Hosting
 {
+    partial
     /// <summary>
     /// Object pretty printer.
     /// </summary>
-    internal abstract partial class CommonObjectFormatter : ObjectFormatter
+    internal abstract class CommonObjectFormatter : ObjectFormatter
     {
         public override string FormatObject(object obj, PrintOptions options)
         {

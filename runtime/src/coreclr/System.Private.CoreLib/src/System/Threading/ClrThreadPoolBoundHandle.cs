@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
+    partial
     //
     // Implementation of ThreadPoolBoundHandle that sits on top of the CLR's ThreadPool and Overlapped infrastructure
     //
@@ -14,7 +15,7 @@ namespace System.Threading
     ///     Represents an I/O handle that is bound to the system thread pool and enables low-level
     ///     components to receive notifications for asynchronous I/O operations.
     /// </summary>
-    public sealed partial class ThreadPoolBoundHandle : IDisposable
+    public sealed class ThreadPoolBoundHandle : IDisposable
     {
         private readonly SafeHandle _handle;
         private bool _isDisposed;

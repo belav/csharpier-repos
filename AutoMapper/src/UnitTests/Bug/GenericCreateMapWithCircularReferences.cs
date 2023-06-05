@@ -26,7 +26,7 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         var result = Mapper.Map<UserPoco<int>>(user);
     }
 
-    public partial class Role<T>
+    partial public class Role<T>
     {
         public Role()
         {
@@ -36,7 +36,7 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         public virtual IList<UsersInRole<T>> UsersInRoles { get; set; }
     }
 
-    public partial class RolePoco<T>
+    partial public class RolePoco<T>
     {
         public RolePoco()
         {
@@ -46,7 +46,7 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         public virtual IList<UsersInRolePoco<T>> UsersInRoles { get; set; }
     }
 
-    public partial class User<T>
+    partial public class User<T>
     {
         public User()
         {
@@ -56,7 +56,7 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         public virtual IList<UsersInRole<T>> UsersInRoles { get; set; }
     }
 
-    public partial class UserPoco<T>
+    partial public class UserPoco<T>
     {
         public UserPoco()
         {
@@ -66,13 +66,13 @@ public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
         public virtual IList<UsersInRolePoco<T>> UsersInRoles { get; set; }
     }
 
-    public partial class UsersInRole<T>
+    partial public class UsersInRole<T>
     {
         public virtual Role<T> Role { get; set; }
         public virtual User<T> User { get; set; }
     }
 
-    public partial class UsersInRolePoco<T>
+    partial public class UsersInRolePoco<T>
     {
         public virtual RolePoco<T> Role { get; set; }
         public virtual UserPoco<T> User { get; set; }

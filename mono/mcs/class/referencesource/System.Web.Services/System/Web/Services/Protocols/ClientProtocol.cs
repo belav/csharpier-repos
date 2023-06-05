@@ -299,7 +299,7 @@ namespace System.Web.Services.Protocols
             return asyncResult;
         }
 
-        static private void ProcessAsyncException(
+        private static void ProcessAsyncException(
             WebClientAsyncResult client,
             Exception e,
             string method
@@ -327,7 +327,7 @@ namespace System.Web.Services.Protocols
             }
         }
 
-        static private void GetRequestStreamAsyncCallback(IAsyncResult asyncResult)
+        private static void GetRequestStreamAsyncCallback(IAsyncResult asyncResult)
         {
             WebClientAsyncResult client = (WebClientAsyncResult)asyncResult.AsyncState;
             client.CombineCompletedSynchronously(asyncResult.CompletedSynchronously);
@@ -376,7 +376,7 @@ namespace System.Web.Services.Protocols
             }
         }
 
-        static private void GetResponseAsyncCallback(IAsyncResult asyncResult)
+        private static void GetResponseAsyncCallback(IAsyncResult asyncResult)
         {
             WebClientAsyncResult client = (WebClientAsyncResult)asyncResult.AsyncState;
             client.CombineCompletedSynchronously(asyncResult.CompletedSynchronously);
@@ -402,7 +402,7 @@ namespace System.Web.Services.Protocols
             ReadAsyncResponse(client);
         }
 
-        static private void ReadAsyncResponse(WebClientAsyncResult client)
+        private static void ReadAsyncResponse(WebClientAsyncResult client)
         {
             if (client.Response.ContentLength == 0)
             {
@@ -428,7 +428,7 @@ namespace System.Web.Services.Protocols
             }
         }
 
-        static private void ReadAsyncResponseStream(WebClientAsyncResult client)
+        private static void ReadAsyncResponseStream(WebClientAsyncResult client)
         {
             IAsyncResult asyncResult;
             do
@@ -451,7 +451,7 @@ namespace System.Web.Services.Protocols
             } while (!ProcessAsyncResponseStreamResult(client, asyncResult));
         }
 
-        static private bool ProcessAsyncResponseStreamResult(
+        private static bool ProcessAsyncResponseStreamResult(
             WebClientAsyncResult client,
             IAsyncResult asyncResult
         )
@@ -485,7 +485,7 @@ namespace System.Web.Services.Protocols
             return complete;
         }
 
-        static private void ReadResponseAsyncCallback(IAsyncResult asyncResult)
+        private static void ReadResponseAsyncCallback(IAsyncResult asyncResult)
         {
             WebClientAsyncResult client = (WebClientAsyncResult)asyncResult.AsyncState;
             client.CombineCompletedSynchronously(asyncResult.CompletedSynchronously);

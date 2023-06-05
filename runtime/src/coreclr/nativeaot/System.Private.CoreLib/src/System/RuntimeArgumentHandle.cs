@@ -6,5 +6,5 @@ using System.Runtime.InteropServices;
 namespace System
 {
     [StructLayout(LayoutKind.Sequential)]
-    public ref struct RuntimeArgumentHandle { }
+    ref public struct RuntimeArgumentHandle { }
 }

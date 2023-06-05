@@ -28,7 +28,7 @@ using System.Collections.Generic;
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public partial class BusRun
+    partial public class BusRun
     {
         public IEnumerable<DateTime?> Departures { get; set; }
         public Boolean WheelchairAccessible { get; set; }

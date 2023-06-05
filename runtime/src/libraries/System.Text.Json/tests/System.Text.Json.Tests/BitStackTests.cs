@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Text.Json.Tests
 {
-    public static partial class BitStackTests
+    partial public static class BitStackTests
     {
         private static readonly Random s_random = new Random(42);
 

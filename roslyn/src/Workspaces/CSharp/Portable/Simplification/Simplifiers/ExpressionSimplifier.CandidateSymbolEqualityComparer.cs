@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 {
-    internal partial class ExpressionSimplifier
+    partial internal class ExpressionSimplifier
     {
         /// <summary>
         /// Compares symbols by their original definition.

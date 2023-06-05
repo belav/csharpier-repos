@@ -5,16 +5,16 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(
             Interop.Libraries.Ws2_32,
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial IntPtr WSASocketW(
+        partial internal static IntPtr WSASocketW(
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType,

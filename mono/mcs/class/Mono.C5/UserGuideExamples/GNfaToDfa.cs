@@ -580,7 +580,7 @@ namespace GNfaToDfa
 
     abstract class Regex
     {
-        abstract public Nfa MkNfa(Nfa.NameSource names);
+        public abstract Nfa MkNfa(Nfa.NameSource names);
     }
 
     class Eps : Regex

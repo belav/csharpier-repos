@@ -7,7 +7,7 @@ using System.IO;
 
 namespace System.Diagnostics
 {
-    public sealed partial class ProcessStartInfo
+    partial public sealed class ProcessStartInfo
     {
         public string[] Verbs
         {

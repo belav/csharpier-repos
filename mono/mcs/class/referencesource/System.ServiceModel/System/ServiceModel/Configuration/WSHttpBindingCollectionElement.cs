@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.Globalization;
 
-    public partial class WSHttpBindingCollectionElement
+    partial public class WSHttpBindingCollectionElement
         : StandardBindingCollectionElement<WSHttpBinding, WSHttpBindingElement>
     {
         internal static WSHttpBindingCollectionElement GetBindingCollectionElement()

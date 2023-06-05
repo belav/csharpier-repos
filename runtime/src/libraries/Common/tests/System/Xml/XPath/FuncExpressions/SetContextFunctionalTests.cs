@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Expressions
 {
+    partial
     /// <summary>
     /// XPathExpression - SetContext Functional Tests
     /// </summary>
-    public static partial class SetContextFunctionalTestsTests
+    public static class SetContextFunctionalTestsTests
     {
         /// <summary>
         /// Select node with qname

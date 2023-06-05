@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Quic;
 
-public sealed partial class QuicListener
+partial public sealed class QuicListener
 {
     /// <summary>
     /// Represents a connection that's been received via NEW_CONNECTION but not accepted yet.

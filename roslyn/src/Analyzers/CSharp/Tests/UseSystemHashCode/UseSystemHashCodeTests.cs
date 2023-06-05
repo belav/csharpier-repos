@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseSystemHashCode)]
-    public partial class UseSystemHashCodeTests
+    partial public class UseSystemHashCodeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseSystemHashCodeTests(ITestOutputHelper logger)

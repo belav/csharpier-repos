@@ -5,10 +5,11 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Thunk to marshal calli PInvoke parameters and invoke the appropriate function pointer
     /// </summary>
-    public partial class CalliMarshallingMethodThunk : ILStubMethod
+    public class CalliMarshallingMethodThunk : ILStubMethod
     {
         private readonly MethodSignature _targetSignature;
         private readonly InteropStateManager _interopStateManager;

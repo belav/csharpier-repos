@@ -298,6 +298,6 @@ namespace Microsoft.Win32
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static bool CloseProcess(IntPtr handle);
+        public static extern bool CloseProcess(IntPtr handle);
     }
 }

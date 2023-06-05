@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 
 namespace UpdatePanelUserControl
 {
-    public partial class EmployeeInfo : System.Web.UI.UserControl
+    partial public class EmployeeInfo : System.Web.UI.UserControl
     {
         private int _EmployeeID;
 

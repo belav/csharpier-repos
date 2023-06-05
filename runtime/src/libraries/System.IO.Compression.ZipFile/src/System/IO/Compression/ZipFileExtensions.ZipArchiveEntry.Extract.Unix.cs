@@ -3,9 +3,9 @@
 
 namespace System.IO.Compression
 {
-    public static partial class ZipFileExtensions
+    partial public static class ZipFileExtensions
     {
-        static partial void ExtractExternalAttributes(FileStream fs, ZipArchiveEntry entry)
+        partial static void ExtractExternalAttributes(FileStream fs, ZipArchiveEntry entry)
         {
             // Only extract USR, GRP, and OTH file permissions, and ignore
             // S_ISUID, S_ISGID, and S_ISVTX bits. This matches unzip's default behavior.

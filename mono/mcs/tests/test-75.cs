@@ -6,7 +6,7 @@ class X
 {
     public static bool called = false;
 
-    static public X operator +(X a, X b)
+    public static X operator +(X a, X b)
     {
         called = true;
         return null;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    public partial class XmlUrlResolver : XmlResolver
+    partial public class XmlUrlResolver : XmlResolver
     {
         // Maps a URI to an Object containing the actual resource.
         public override async Task<object> GetEntityAsync(

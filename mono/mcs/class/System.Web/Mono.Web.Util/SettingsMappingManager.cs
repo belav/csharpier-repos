@@ -78,7 +78,7 @@ namespace Mono.Web.Util
             _runningOnWindows = ((int)pid != 128 && (int)pid != 4 && (int)pid != 6);
         }
 
-        static public void Init()
+        public static void Init()
         {
             if (_instance != null)
                 return;

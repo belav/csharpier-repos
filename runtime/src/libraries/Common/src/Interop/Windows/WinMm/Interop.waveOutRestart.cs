@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         /// <summary>
         /// This function restarts a paused waveform output device.
@@ -14,6 +14,6 @@ internal static partial class Interop
         /// <param name="hwo">Handle to the waveform-audio output device.</param>
         /// <returns>MMSYSERR</returns>
         [LibraryImport(Libraries.WinMM)]
-        internal static partial MMSYSERR waveOutRestart(IntPtr hwo);
+        partial internal static MMSYSERR waveOutRestart(IntPtr hwo);
     }
 }

@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlWellFormedWriter : XmlWriter
+    partial internal sealed class XmlWellFormedWriter : XmlWriter
     {
         public override Task WriteStartDocumentAsync()
         {

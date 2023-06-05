@@ -26,7 +26,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 {
-    internal partial class StringCopyPasteCommandHandler
+    partial internal class StringCopyPasteCommandHandler
         : IChainedCommandHandler<CutCommandArgs>,
             IChainedCommandHandler<CopyCommandArgs>
     {

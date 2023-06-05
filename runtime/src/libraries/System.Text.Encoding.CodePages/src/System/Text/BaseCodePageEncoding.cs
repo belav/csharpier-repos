@@ -11,6 +11,7 @@ using System.Runtime.Serialization;
 
 namespace System.Text
 {
+    partial
     // Our input file data structures look like:
     //
     // Header structure looks like:
@@ -41,7 +42,7 @@ namespace System.Text
     //       WORD        byteReplace;    // 2 bytes = 48     // default replacement byte(s)
     //       BYTE[]      data;           // data section
     //   }
-    internal abstract partial class BaseCodePageEncoding : EncodingNLS, ISerializable
+    internal abstract class BaseCodePageEncoding : EncodingNLS, ISerializable
     {
         internal const string CODE_PAGE_DATA_FILE_NAME = "codepages.nlp";
 

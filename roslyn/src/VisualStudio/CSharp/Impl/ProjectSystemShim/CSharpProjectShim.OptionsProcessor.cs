@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
-    internal partial class CSharpProjectShim
+    partial internal class CSharpProjectShim
     {
         private class OptionsProcessor : ProjectSystemProjectOptionsProcessor
         {

@@ -4791,7 +4791,7 @@ namespace TypeLayout
 #endif
         }
 
-        public unsafe static void AssertSameGCDesc(Type left, Type right)
+        public static unsafe void AssertSameGCDesc(Type left, Type right)
         {
             RuntimeTypeHandle rthLeft = left.TypeHandle;
             RuntimeTypeHandle rthRight = right.TypeHandle;
@@ -6373,7 +6373,7 @@ namespace FieldLayoutBugRepro
 
     public sealed class EventPattern<TEventArgs> { }
 
-    public partial class Runner
+    partial public class Runner
     {
         [TestMethod]
         public static unsafe void EntryPoint()
@@ -6475,7 +6475,7 @@ namespace DelegateTest
         }
     }
 
-    public partial class TestRunner
+    partial public class TestRunner
     {
         [TestMethod]
         public static unsafe void TestMethodCellsWithUSGTargetsUsedOnNonUSGInstantiations()

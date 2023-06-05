@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Roslyn.Utilities
 {
-    internal static partial class Contract
+    partial internal static class Contract
     {
         [InterpolatedStringHandler]
         public readonly struct ThrowIfTrueInterpolatedStringHandler

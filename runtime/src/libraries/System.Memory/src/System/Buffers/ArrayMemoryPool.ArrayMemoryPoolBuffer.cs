@@ -3,7 +3,7 @@
 
 namespace System.Buffers
 {
-    internal sealed partial class ArrayMemoryPool<T> : MemoryPool<T>
+    partial internal sealed class ArrayMemoryPool<T> : MemoryPool<T>
     {
         private sealed class ArrayMemoryPoolBuffer : IMemoryOwner<T>
         {

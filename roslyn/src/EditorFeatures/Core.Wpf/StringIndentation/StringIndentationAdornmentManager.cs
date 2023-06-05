@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.StringIndentation
 {
-    internal partial class StringIndentationAdornmentManager
+    partial internal class StringIndentationAdornmentManager
         : AbstractAdornmentManager<StringIndentationTag>
     {
         public StringIndentationAdornmentManager(

@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NCrypt
+    partial internal static class NCrypt
     {
         [LibraryImport(Interop.Libraries.NCrypt)]
-        internal static unsafe partial ErrorCode NCryptEncrypt(
+        partial internal static unsafe ErrorCode NCryptEncrypt(
             SafeNCryptKeyHandle hKey,
             ReadOnlySpan<byte> pbInput,
             int cbInput,
@@ -22,7 +22,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.NCrypt)]
-        internal static unsafe partial ErrorCode NCryptDecrypt(
+        partial internal static unsafe ErrorCode NCryptDecrypt(
             SafeNCryptKeyHandle hKey,
             ReadOnlySpan<byte> pbInput,
             int cbInput,

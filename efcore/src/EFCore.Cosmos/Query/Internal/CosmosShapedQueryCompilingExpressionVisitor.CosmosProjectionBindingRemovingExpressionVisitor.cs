@@ -5,7 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal;
 
-public partial class CosmosShapedQueryCompilingExpressionVisitor
+partial public class CosmosShapedQueryCompilingExpressionVisitor
 {
     private sealed class CosmosProjectionBindingRemovingExpressionVisitor
         : CosmosProjectionBindingRemovingExpressionVisitorBase

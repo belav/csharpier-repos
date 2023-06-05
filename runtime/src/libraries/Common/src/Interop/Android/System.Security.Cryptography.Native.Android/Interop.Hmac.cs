@@ -6,34 +6,34 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_HmacCreate")]
-        internal static partial SafeHmacCtxHandle HmacCreate(ref byte key, int keyLen, IntPtr md);
+        partial internal static SafeHmacCtxHandle HmacCreate(ref byte key, int keyLen, IntPtr md);
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_HmacDestroy")]
-        internal static partial void HmacDestroy(IntPtr ctx);
+        partial internal static void HmacDestroy(IntPtr ctx);
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_HmacReset")]
-        internal static partial int HmacReset(SafeHmacCtxHandle ctx);
+        partial internal static int HmacReset(SafeHmacCtxHandle ctx);
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_HmacUpdate")]
-        internal static partial int HmacUpdate(
+        partial internal static int HmacUpdate(
             SafeHmacCtxHandle ctx,
             ReadOnlySpan<byte> data,
             int len
         );
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_HmacFinal")]
-        internal static partial int HmacFinal(SafeHmacCtxHandle ctx, ref byte data, ref int len);
+        partial internal static int HmacFinal(SafeHmacCtxHandle ctx, ref byte data, ref int len);
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_HmacCurrent")]
-        internal static partial int HmacCurrent(SafeHmacCtxHandle ctx, ref byte data, ref int len);
+        partial internal static int HmacCurrent(SafeHmacCtxHandle ctx, ref byte data, ref int len);
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_HmacOneShot")]
-        private static unsafe partial int HmacOneShot(
+        partial private static unsafe int HmacOneShot(
             IntPtr type,
             byte* key,
             int keySize,

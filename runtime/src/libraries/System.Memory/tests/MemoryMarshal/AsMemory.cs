@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.MemoryTests
 {
-    public static partial class MemoryMarshalTests
+    partial public static class MemoryMarshalTests
     {
         public static IEnumerable<object[]> ReadOnlyMemoryInt32Instances()
         {

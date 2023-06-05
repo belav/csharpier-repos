@@ -3,7 +3,7 @@
 
 namespace System
 {
-    internal static partial class SR
+    partial internal static class SR
     {
         internal static string GetString(string value)
         {

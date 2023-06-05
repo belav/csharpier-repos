@@ -4,32 +4,32 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
-        internal static partial class Fcntl
+        partial internal static class Fcntl
         {
             [LibraryImport(
                 Libraries.SystemNative,
                 EntryPoint = "SystemNative_FcntlSetIsNonBlocking",
                 SetLastError = true
             )]
-            internal static partial int DangerousSetIsNonBlocking(IntPtr fd, int isNonBlocking);
+            partial internal static int DangerousSetIsNonBlocking(IntPtr fd, int isNonBlocking);
 
             [LibraryImport(
                 Libraries.SystemNative,
                 EntryPoint = "SystemNative_FcntlSetIsNonBlocking",
                 SetLastError = true
             )]
-            internal static partial int SetIsNonBlocking(SafeHandle fd, int isNonBlocking);
+            partial internal static int SetIsNonBlocking(SafeHandle fd, int isNonBlocking);
 
             [LibraryImport(
                 Libraries.SystemNative,
                 EntryPoint = "SystemNative_FcntlGetIsNonBlocking",
                 SetLastError = true
             )]
-            internal static partial int GetIsNonBlocking(
+            partial internal static int GetIsNonBlocking(
                 SafeHandle fd,
                 [MarshalAs(UnmanagedType.Bool)] out bool isNonBlocking
             );
@@ -39,21 +39,21 @@ internal static partial class Interop
                 EntryPoint = "SystemNative_FcntlSetFD",
                 SetLastError = true
             )]
-            internal static partial int SetFD(SafeHandle fd, int flags);
+            partial internal static int SetFD(SafeHandle fd, int flags);
 
             [LibraryImport(
                 Libraries.SystemNative,
                 EntryPoint = "SystemNative_FcntlGetFD",
                 SetLastError = true
             )]
-            internal static partial int GetFD(SafeHandle fd);
+            partial internal static int GetFD(SafeHandle fd);
 
             [LibraryImport(
                 Libraries.SystemNative,
                 EntryPoint = "SystemNative_FcntlGetFD",
                 SetLastError = true
             )]
-            internal static partial int GetFD(IntPtr fd);
+            partial internal static int GetFD(IntPtr fd);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace GitHub_17435
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public unsafe static (uint, uint) Repro()
+        public static unsafe (uint, uint) Repro()
         {
             uint* a = stackalloc uint[4];
             a[0] = 1;

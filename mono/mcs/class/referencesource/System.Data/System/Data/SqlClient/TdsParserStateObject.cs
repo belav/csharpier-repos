@@ -25,12 +25,12 @@ namespace System.Data.SqlClient
     using System.Security;
     using System.Text;
 
-    sealed internal class LastIOTimer
+    internal sealed class LastIOTimer
     {
         internal long _value;
     }
 
-    sealed internal class TdsParserStateObject
+    internal sealed class TdsParserStateObject
     {
         const int AttentionTimeoutSeconds = 5;
 
@@ -222,9 +222,9 @@ namespace System.Data.SqlClient
         internal SqlErrorCollection _preAttentionErrors;
         internal SqlErrorCollection _preAttentionWarnings;
 
-        volatile private TaskCompletionSource<object> _writeCompletionSource = null;
-        volatile private int _asyncWriteCount = 0;
-        volatile private Exception _delayedWriteAsyncCallbackException = null; // set by write async callback if completion source is not yet created
+        private volatile TaskCompletionSource<object> _writeCompletionSource = null;
+        private volatile int _asyncWriteCount = 0;
+        private volatile Exception _delayedWriteAsyncCallbackException = null; // set by write async callback if completion source is not yet created
 
         // _readingcount is incremented when we are about to read.
         // We check the parser state afterwards.

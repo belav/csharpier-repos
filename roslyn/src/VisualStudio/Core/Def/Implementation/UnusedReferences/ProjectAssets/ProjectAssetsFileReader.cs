@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
 {
-    internal static partial class ProjectAssetsFileReader
+    partial internal static class ProjectAssetsFileReader
     {
         /// <summary>
         /// Enhances references with the assemblies they bring into the compilation and their dependency hierarchy.

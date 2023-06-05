@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Components
         AllowMultiple = true,
         Inherited = true
     )]
-    public sealed partial class BindInputElementAttribute : System.Attribute
+    partial public sealed class BindInputElementAttribute : System.Attribute
     {
         public BindInputElementAttribute(
             string type,
@@ -54,7 +54,7 @@ namespace Microsoft.AspNetCore.Components
 
 namespace Microsoft.AspNetCore.Components.Forms
 {
-    public static partial class EditContextFieldClassExtensions
+    partial public static class EditContextFieldClassExtensions
     {
         public static string FieldCssClass(
             this Microsoft.AspNetCore.Components.Forms.EditContext editContext,
@@ -73,7 +73,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
     }
 
-    public partial class EditForm : Microsoft.AspNetCore.Components.ComponentBase
+    partial public class EditForm : Microsoft.AspNetCore.Components.ComponentBase
     {
         public EditForm() { }
 
@@ -147,7 +147,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         protected override void OnParametersSet() { }
     }
 
-    public abstract partial class InputBase<TValue> : Microsoft.AspNetCore.Components.ComponentBase
+    partial public abstract class InputBase<TValue> : Microsoft.AspNetCore.Components.ComponentBase
     {
         protected InputBase() { }
 
@@ -234,7 +234,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         );
     }
 
-    public partial class InputCheckbox : Microsoft.AspNetCore.Components.Forms.InputBase<bool>
+    partial public class InputCheckbox : Microsoft.AspNetCore.Components.Forms.InputBase<bool>
     {
         public InputCheckbox() { }
 
@@ -252,7 +252,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
     }
 
-    public partial class InputDate<TValue> : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
+    partial public class InputDate<TValue> : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
     {
         public InputDate() { }
 
@@ -284,7 +284,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
     }
 
-    public partial class InputNumber<TValue>
+    partial public class InputNumber<TValue>
         : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
     {
         public InputNumber() { }
@@ -317,7 +317,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
     }
 
-    public partial class InputSelect<TValue>
+    partial public class InputSelect<TValue>
         : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
     {
         public InputSelect() { }
@@ -345,7 +345,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
     }
 
-    public partial class InputText : Microsoft.AspNetCore.Components.Forms.InputBase<string>
+    partial public class InputText : Microsoft.AspNetCore.Components.Forms.InputBase<string>
     {
         public InputText() { }
 
@@ -363,7 +363,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
     }
 
-    public partial class InputTextArea : Microsoft.AspNetCore.Components.Forms.InputBase<string>
+    partial public class InputTextArea : Microsoft.AspNetCore.Components.Forms.InputBase<string>
     {
         public InputTextArea() { }
 
@@ -381,7 +381,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
     }
 
-    public partial class ValidationMessage<TValue>
+    partial public class ValidationMessage<TValue>
         : Microsoft.AspNetCore.Components.ComponentBase,
             System.IDisposable
     {
@@ -416,7 +416,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         void System.IDisposable.Dispose() { }
     }
 
-    public partial class ValidationSummary
+    partial public class ValidationSummary
         : Microsoft.AspNetCore.Components.ComponentBase,
             System.IDisposable
     {
@@ -445,7 +445,7 @@ namespace Microsoft.AspNetCore.Components.Forms
 
 namespace Microsoft.AspNetCore.Components.RenderTree
 {
-    public sealed partial class WebEventDescriptor
+    partial public sealed class WebEventDescriptor
     {
         public WebEventDescriptor() { }
 
@@ -482,7 +482,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
 
 namespace Microsoft.AspNetCore.Components.Routing
 {
-    public partial class NavLink : Microsoft.AspNetCore.Components.ComponentBase, System.IDisposable
+    partial public class NavLink : Microsoft.AspNetCore.Components.ComponentBase, System.IDisposable
     {
         public NavLink() { }
 
@@ -663,9 +663,9 @@ namespace Microsoft.AspNetCore.Components.Web
         false,
         null
     )]
-    public static partial class BindAttributes { }
+    partial public static class BindAttributes { }
 
-    public partial class ClipboardEventArgs : System.EventArgs
+    partial public class ClipboardEventArgs : System.EventArgs
     {
         public ClipboardEventArgs() { }
 
@@ -678,7 +678,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class DataTransfer
+    partial public class DataTransfer
     {
         public DataTransfer() { }
 
@@ -719,7 +719,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class DataTransferItem
+    partial public class DataTransferItem
     {
         public DataTransferItem() { }
 
@@ -739,7 +739,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class DragEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
+    partial public class DragEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
     {
         public DragEventArgs() { }
 
@@ -752,7 +752,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class ErrorEventArgs : System.EventArgs
+    partial public class ErrorEventArgs : System.EventArgs
     {
         public ErrorEventArgs() { }
 
@@ -1339,9 +1339,9 @@ namespace Microsoft.AspNetCore.Components.Web
         true,
         true
     )]
-    public static partial class EventHandlers { }
+    partial public static class EventHandlers { }
 
-    public partial class FocusEventArgs : System.EventArgs
+    partial public class FocusEventArgs : System.EventArgs
     {
         public FocusEventArgs() { }
 
@@ -1354,7 +1354,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class KeyboardEventArgs : System.EventArgs
+    partial public class KeyboardEventArgs : System.EventArgs
     {
         public KeyboardEventArgs() { }
 
@@ -1423,7 +1423,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class MouseEventArgs : System.EventArgs
+    partial public class MouseEventArgs : System.EventArgs
     {
         public MouseEventArgs() { }
 
@@ -1513,7 +1513,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class PointerEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
+    partial public class PointerEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
     {
         public PointerEventArgs() { }
 
@@ -1575,7 +1575,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class ProgressEventArgs : System.EventArgs
+    partial public class ProgressEventArgs : System.EventArgs
     {
         public ProgressEventArgs() { }
 
@@ -1609,7 +1609,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class TouchEventArgs : System.EventArgs
+    partial public class TouchEventArgs : System.EventArgs
     {
         public TouchEventArgs() { }
 
@@ -1678,7 +1678,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public partial class TouchPoint
+    partial public class TouchPoint
     {
         public TouchPoint() { }
 
@@ -1733,7 +1733,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public static partial class WebEventCallbackFactoryEventArgsExtensions
+    partial public static class WebEventCallbackFactoryEventArgsExtensions
     {
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
@@ -1946,7 +1946,7 @@ namespace Microsoft.AspNetCore.Components.Web
         }
     }
 
-    public static partial class WebRenderTreeBuilderExtensions
+    partial public static class WebRenderTreeBuilderExtensions
     {
         public static void AddEventPreventDefaultAttribute(
             this Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder,
@@ -1963,7 +1963,7 @@ namespace Microsoft.AspNetCore.Components.Web
         ) { }
     }
 
-    public partial class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
+    partial public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
     {
         public WheelEventArgs() { }
 

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class CatalogExportProvider
+    partial public class CatalogExportProvider
     {
         internal abstract class FactoryExport : Export
         {

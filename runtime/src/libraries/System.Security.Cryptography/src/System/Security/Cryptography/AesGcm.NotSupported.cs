@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    public partial class AesGcm
+    partial public class AesGcm
     {
         public static bool IsSupported => false;
         public static KeySizes TagByteSizes { get; } = new KeySizes(12, 16, 1);

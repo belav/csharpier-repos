@@ -25,6 +25,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// A workspace provides access to a active set of source code projects and documents and their
     /// associated syntax trees, compilations and semantic models. A workspace has a current solution
@@ -32,7 +33,7 @@ namespace Microsoft.CodeAnalysis
     /// as the workspace is updated either from live interactions in the environment or via call to the
     /// workspace's <see cref="TryApplyChanges(Solution)"/> method.
     /// </summary>
-    public abstract partial class Workspace : IDisposable
+    public abstract class Workspace : IDisposable
     {
         private readonly string? _workspaceKind;
         private readonly HostWorkspaceServices _services;

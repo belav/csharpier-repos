@@ -11,7 +11,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
-    public sealed partial class ZoneIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    partial public sealed class ZoneIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public ZoneIdentityPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }

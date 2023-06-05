@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(Libraries.Gdi32)]
-        public static partial RegionType GetRgnBox(IntPtr hrgn, ref RECT lprc);
+        partial public static RegionType GetRgnBox(IntPtr hrgn, ref RECT lprc);
 
         public static RegionType GetRgnBox(HandleRef hrgn, ref RECT lprc)
         {

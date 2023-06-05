@@ -11,7 +11,7 @@ using SslStress.Utils;
 
 namespace SslStress
 {
-    public abstract partial class SslClientBase
+    partial public abstract class SslClientBase
     {
         private class StressResultAggregator
         {

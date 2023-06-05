@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         "CA1200:Avoid using cref tags with a prefix",
         Justification = "Required to avoid ambiguous reference warnings."
     )]
-    internal sealed partial class CSharpUseIndexOperatorDiagnosticAnalyzer
+    partial internal sealed class CSharpUseIndexOperatorDiagnosticAnalyzer
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseIndexOperatorDiagnosticAnalyzer()

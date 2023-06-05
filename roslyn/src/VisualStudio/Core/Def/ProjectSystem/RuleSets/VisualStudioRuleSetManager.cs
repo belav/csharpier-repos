@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal sealed partial class VisualStudioRuleSetManager : IRuleSetManager
+    partial internal sealed class VisualStudioRuleSetManager : IRuleSetManager
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IFileChangeWatcher _fileChangeWatcher;

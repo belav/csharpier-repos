@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Utilities
 {
-    internal partial class CSharpTypeStyleHelper
+    partial internal class CSharpTypeStyleHelper
     {
         protected readonly struct State
         {

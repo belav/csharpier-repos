@@ -34,7 +34,7 @@ public abstract class Modifiers2 : Modifiers1
 
     public abstract override void M2();
 
-    public virtual new void M3() { }
+    public new virtual void M3() { }
 }
 
 public abstract class Modifiers3 : Modifiers1
@@ -43,7 +43,7 @@ public abstract class Modifiers3 : Modifiers1
 
     public new void M3() { }
 
-    public abstract new void M4();
+    public new abstract void M4();
 }
 
 public class DefaultParameterValues

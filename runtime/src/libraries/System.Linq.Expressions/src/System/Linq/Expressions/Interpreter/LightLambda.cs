@@ -13,7 +13,7 @@ using AstUtils = System.Linq.Expressions.Utils;
 namespace System.Linq.Expressions.Interpreter
 {
     [DebuggerDisplay("{DebugView,nq}")]
-    public partial class LightLambda
+    partial public class LightLambda
     {
         private readonly IStrongBox[]? _closure;
         private readonly Interpreter _interpreter;

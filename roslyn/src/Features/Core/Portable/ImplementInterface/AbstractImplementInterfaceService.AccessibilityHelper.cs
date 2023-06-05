@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.ImplementInterface
 {
-    internal abstract partial class AbstractImplementInterfaceService
+    partial internal abstract class AbstractImplementInterfaceService
     {
         private static class AccessibilityHelper
         {

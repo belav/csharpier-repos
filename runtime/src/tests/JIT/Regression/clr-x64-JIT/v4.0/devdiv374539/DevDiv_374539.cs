@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 public class Test_DevDiv_374539
 {
     [DllImport("kernel32.dll")]
-    private extern static IntPtr GetModuleHandle(string lpModuleName);
+    private static extern IntPtr GetModuleHandle(string lpModuleName);
 
     [DllImport("kernel32.dll")]
-    private extern static IntPtr VirtualAlloc(
+    private static extern IntPtr VirtualAlloc(
         IntPtr lpAddress,
         IntPtr dwSize,
         int flAllocationType,

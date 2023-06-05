@@ -863,7 +863,7 @@ namespace Internal.IL.Stubs
         }
     }
 
-    public abstract partial class ILStubMethod : MethodDesc
+    partial public abstract class ILStubMethod : MethodDesc
     {
         public abstract MethodIL EmitIL();
 

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences.ProjectAssets
 {
-    internal static partial class TestProjectAssetsFile
+    partial internal static class TestProjectAssetsFile
     {
         public static ProjectAssetsFile Create(
             int version,

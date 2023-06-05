@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Completion;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
-    public partial class AutomationObject
+    partial public class AutomationObject
     {
         /// <summary>
         /// Unused.  But kept around for back compat.  Note this option is not about

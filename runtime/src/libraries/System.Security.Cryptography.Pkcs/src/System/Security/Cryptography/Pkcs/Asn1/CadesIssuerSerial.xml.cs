@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct CadesIssuerSerial
+    partial internal struct CadesIssuerSerial
     {
         internal System.Security.Cryptography.Asn1.GeneralNameAsn[] Issuer;
         internal ReadOnlyMemory<byte> SerialNumber;

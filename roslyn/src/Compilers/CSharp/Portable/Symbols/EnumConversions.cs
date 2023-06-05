@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal static partial class EnumConversions
+    partial internal static class EnumConversions
     {
         internal static TypeKind ToTypeKind(this DeclarationKind kind)
         {

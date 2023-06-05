@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
@@ -15,6 +15,6 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial string GetPeerUserName(SafeHandle socket);
+        partial internal static string GetPeerUserName(SafeHandle socket);
     }
 }

@@ -7,7 +7,7 @@ using ExpressionExtensions = Microsoft.EntityFrameworkCore.Infrastructure.Expres
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
-public partial class NavigationExpandingExpressionVisitor
+partial public class NavigationExpandingExpressionVisitor
 {
     /// <summary>
     ///     Expands navigations in the given tree for given source.

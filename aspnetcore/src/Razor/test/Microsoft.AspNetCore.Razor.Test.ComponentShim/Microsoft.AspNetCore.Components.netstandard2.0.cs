@@ -5,7 +5,7 @@ using System;
 
 namespace Microsoft.AspNetCore.Components
 {
-    public static partial class BindConverter
+    partial public static class BindConverter
     {
         public static bool FormatValue(bool value, System.Globalization.CultureInfo culture = null)
         {
@@ -389,7 +389,7 @@ namespace Microsoft.AspNetCore.Components
         AllowMultiple = true,
         Inherited = true
     )]
-    public sealed partial class BindElementAttribute : System.Attribute
+    partial public sealed class BindElementAttribute : System.Attribute
     {
         public BindElementAttribute(
             string element,
@@ -425,7 +425,7 @@ namespace Microsoft.AspNetCore.Components
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class CascadingParameterAttribute : System.Attribute
+    partial public sealed class CascadingParameterAttribute : System.Attribute
     {
         public CascadingParameterAttribute() { }
 
@@ -443,7 +443,7 @@ namespace Microsoft.AspNetCore.Components
         AllowMultiple = true,
         Inherited = false
     )]
-    public sealed partial class CascadingTypeParameterAttribute : System.Attribute
+    partial public sealed class CascadingTypeParameterAttribute : System.Attribute
     {
         public CascadingTypeParameterAttribute(string name) { }
 
@@ -454,7 +454,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public partial class CascadingValue<TValue> : Microsoft.AspNetCore.Components.IComponent
+    partial public class CascadingValue<TValue> : Microsoft.AspNetCore.Components.IComponent
     {
         public CascadingValue() { }
 
@@ -504,7 +504,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public partial class ChangeEventArgs : System.EventArgs
+    partial public class ChangeEventArgs : System.EventArgs
     {
         public ChangeEventArgs() { }
 
@@ -517,7 +517,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public abstract partial class ComponentBase
+    partial public abstract class ComponentBase
         : Microsoft.AspNetCore.Components.IComponent,
             Microsoft.AspNetCore.Components.IHandleAfterRender,
             Microsoft.AspNetCore.Components.IHandleEvent
@@ -593,7 +593,7 @@ namespace Microsoft.AspNetCore.Components
         protected void StateHasChanged() { }
     }
 
-    public abstract partial class Dispatcher
+    partial public abstract class Dispatcher
     {
         protected Dispatcher() { }
 
@@ -623,7 +623,7 @@ namespace Microsoft.AspNetCore.Components
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct ElementReference
+    partial public readonly struct ElementReference
     {
         private readonly object _dummy;
 
@@ -642,7 +642,7 @@ namespace Microsoft.AspNetCore.Components
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct EventCallback
+    partial public readonly struct EventCallback
     {
         private readonly object _dummy;
         public static readonly Microsoft.AspNetCore.Components.EventCallback Empty;
@@ -667,7 +667,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public sealed partial class EventCallbackFactory
+    partial public sealed class EventCallbackFactory
     {
         public EventCallbackFactory() { }
 
@@ -793,7 +793,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public static partial class EventCallbackFactoryBinderExtensions
+    partial public static class EventCallbackFactoryBinderExtensions
     {
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.ChangeEventArgs> CreateBinder(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
@@ -1042,7 +1042,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public static partial class EventCallbackFactoryEventArgsExtensions
+    partial public static class EventCallbackFactoryEventArgsExtensions
     {
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.ChangeEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
@@ -1087,7 +1087,7 @@ namespace Microsoft.AspNetCore.Components
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct EventCallbackWorkItem
+    partial public readonly struct EventCallbackWorkItem
     {
         private readonly object _dummy;
         public static readonly Microsoft.AspNetCore.Components.EventCallbackWorkItem Empty;
@@ -1106,7 +1106,7 @@ namespace Microsoft.AspNetCore.Components
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct EventCallback<TValue>
+    partial public readonly struct EventCallback<TValue>
     {
         private readonly object _dummy;
         public static readonly Microsoft.AspNetCore.Components.EventCallback<TValue> Empty;
@@ -1135,7 +1135,7 @@ namespace Microsoft.AspNetCore.Components
         AllowMultiple = true,
         Inherited = true
     )]
-    public sealed partial class EventHandlerAttribute : System.Attribute
+    partial public sealed class EventHandlerAttribute : System.Attribute
     {
         public EventHandlerAttribute(string attributeName, System.Type eventArgsType) { }
 
@@ -1168,7 +1168,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public partial interface IComponent
+    partial public interface IComponent
     {
         void Attach(Microsoft.AspNetCore.Components.RenderHandle renderHandle);
         System.Threading.Tasks.Task SetParametersAsync(
@@ -1176,12 +1176,12 @@ namespace Microsoft.AspNetCore.Components
         );
     }
 
-    public partial interface IHandleAfterRender
+    partial public interface IHandleAfterRender
     {
         System.Threading.Tasks.Task OnAfterRenderAsync();
     }
 
-    public partial interface IHandleEvent
+    partial public interface IHandleEvent
     {
         System.Threading.Tasks.Task HandleEventAsync(
             Microsoft.AspNetCore.Components.EventCallbackWorkItem item,
@@ -1194,7 +1194,7 @@ namespace Microsoft.AspNetCore.Components
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class InjectAttribute : System.Attribute
+    partial public sealed class InjectAttribute : System.Attribute
     {
         public InjectAttribute() { }
     }
@@ -1204,7 +1204,7 @@ namespace Microsoft.AspNetCore.Components
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class LayoutAttribute : System.Attribute
+    partial public sealed class LayoutAttribute : System.Attribute
     {
         public LayoutAttribute(System.Type layoutType) { }
 
@@ -1215,7 +1215,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public abstract partial class LayoutComponentBase
+    partial public abstract class LayoutComponentBase
         : Microsoft.AspNetCore.Components.ComponentBase
     {
         protected LayoutComponentBase() { }
@@ -1230,7 +1230,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public partial class LayoutView : Microsoft.AspNetCore.Components.IComponent
+    partial public class LayoutView : Microsoft.AspNetCore.Components.IComponent
     {
         public LayoutView() { }
 
@@ -1262,7 +1262,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public sealed partial class LocationChangeException : System.Exception
+    partial public sealed class LocationChangeException : System.Exception
     {
         public LocationChangeException(string message, System.Exception innerException) { }
     }
@@ -1270,7 +1270,7 @@ namespace Microsoft.AspNetCore.Components
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct MarkupString
+    partial public readonly struct MarkupString
     {
         private readonly object _dummy;
 
@@ -1296,7 +1296,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public partial class NavigationException : System.Exception
+    partial public class NavigationException : System.Exception
     {
         public NavigationException(string uri) { }
 
@@ -1307,7 +1307,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public abstract partial class NavigationManager
+    partial public abstract class NavigationManager
     {
         protected NavigationManager() { }
 
@@ -1348,7 +1348,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public abstract partial class OwningComponentBase
+    partial public abstract class OwningComponentBase
         : Microsoft.AspNetCore.Components.ComponentBase,
             System.IDisposable
     {
@@ -1369,7 +1369,7 @@ namespace Microsoft.AspNetCore.Components
         void System.IDisposable.Dispose() { }
     }
 
-    public abstract partial class OwningComponentBase<TService>
+    partial public abstract class OwningComponentBase<TService>
         : Microsoft.AspNetCore.Components.OwningComponentBase,
             System.IDisposable
     {
@@ -1386,7 +1386,7 @@ namespace Microsoft.AspNetCore.Components
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class ParameterAttribute : System.Attribute
+    partial public sealed class ParameterAttribute : System.Attribute
     {
         public ParameterAttribute() { }
 
@@ -1402,7 +1402,7 @@ namespace Microsoft.AspNetCore.Components
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct ParameterValue
+    partial public readonly struct ParameterValue
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1426,7 +1426,7 @@ namespace Microsoft.AspNetCore.Components
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct ParameterView
+    partial public readonly struct ParameterView
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1472,7 +1472,7 @@ namespace Microsoft.AspNetCore.Components
         [System.Runtime.InteropServices.StructLayoutAttribute(
             System.Runtime.InteropServices.LayoutKind.Sequential
         )]
-        public partial struct Enumerator
+        partial public struct Enumerator
         {
             private readonly object _dummy;
             private readonly int _dummyPrimitive;
@@ -1498,7 +1498,7 @@ namespace Microsoft.AspNetCore.Components
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct RenderHandle
+    partial public readonly struct RenderHandle
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1519,7 +1519,7 @@ namespace Microsoft.AspNetCore.Components
         AllowMultiple = true,
         Inherited = false
     )]
-    public sealed partial class RouteAttribute : System.Attribute
+    partial public sealed class RouteAttribute : System.Attribute
     {
         public RouteAttribute(string template) { }
 
@@ -1530,7 +1530,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public sealed partial class RouteData
+    partial public sealed class RouteData
     {
         public RouteData(
             System.Type pageType,
@@ -1549,7 +1549,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 
-    public partial class RouteView : Microsoft.AspNetCore.Components.IComponent
+    partial public class RouteView : Microsoft.AspNetCore.Components.IComponent
     {
         public RouteView() { }
 
@@ -1586,7 +1586,7 @@ namespace Microsoft.AspNetCore.Components
     }
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public partial class EditorRequiredAttribute : Attribute
+    partial public class EditorRequiredAttribute : Attribute
     {
         public EditorRequiredAttribute() { }
     }
@@ -1594,7 +1594,7 @@ namespace Microsoft.AspNetCore.Components
 
 namespace Microsoft.AspNetCore.Components.CompilerServices
 {
-    public static partial class RuntimeHelpers
+    partial public static class RuntimeHelpers
     {
         public static Microsoft.AspNetCore.Components.EventCallback<T> CreateInferredEventCallback<T>(
             object receiver,
@@ -1623,7 +1623,7 @@ namespace Microsoft.AspNetCore.Components.CompilerServices
 
 namespace Microsoft.AspNetCore.Components.Rendering
 {
-    public sealed partial class RenderTreeBuilder : System.IDisposable
+    partial public sealed class RenderTreeBuilder : System.IDisposable
     {
         public RenderTreeBuilder() { }
 
@@ -1729,7 +1729,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct ArrayBuilderSegment<T>
+    partial public readonly struct ArrayBuilderSegment<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable
     {
@@ -1766,7 +1766,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct ArrayRange<T>
+    partial public readonly struct ArrayRange<T>
     {
         public readonly T[] Array;
         public readonly int Count;
@@ -1782,7 +1782,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         }
     }
 
-    public partial class EventFieldInfo
+    partial public class EventFieldInfo
     {
         public EventFieldInfo() { }
 
@@ -1805,7 +1805,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct RenderBatch
+    partial public readonly struct RenderBatch
     {
         private readonly object _dummy;
         public Microsoft.AspNetCore.Components.RenderTree.ArrayRange<int> DisposedComponentIDs
@@ -1833,7 +1833,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct RenderTreeDiff
+    partial public readonly struct RenderTreeDiff
     {
         public readonly int ComponentId;
         public readonly Microsoft.AspNetCore.Components.RenderTree.ArrayBuilderSegment<Microsoft.AspNetCore.Components.RenderTree.RenderTreeEdit> Edits;
@@ -1842,7 +1842,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Explicit
     )]
-    public readonly partial struct RenderTreeEdit
+    partial public readonly struct RenderTreeEdit
     {
         [System.Runtime.InteropServices.FieldOffsetAttribute(8)]
         public readonly int MoveToSiblingIndex;
@@ -1890,17 +1890,17 @@ namespace Microsoft.AspNetCore.Components.RenderTree
 
 namespace Microsoft.AspNetCore.Components.Routing
 {
-    public partial interface IHostEnvironmentNavigationManager
+    partial public interface IHostEnvironmentNavigationManager
     {
         void Initialize(string baseUri, string uri);
     }
 
-    public partial interface INavigationInterception
+    partial public interface INavigationInterception
     {
         System.Threading.Tasks.Task EnableNavigationInterceptionAsync();
     }
 
-    public partial class LocationChangedEventArgs : System.EventArgs
+    partial public class LocationChangedEventArgs : System.EventArgs
     {
         public LocationChangedEventArgs(string location, bool isNavigationIntercepted) { }
 
@@ -1916,7 +1916,7 @@ namespace Microsoft.AspNetCore.Components.Routing
         }
     }
 
-    public partial class Router
+    partial public class Router
         : Microsoft.AspNetCore.Components.IComponent,
             Microsoft.AspNetCore.Components.IHandleAfterRender,
             System.IDisposable

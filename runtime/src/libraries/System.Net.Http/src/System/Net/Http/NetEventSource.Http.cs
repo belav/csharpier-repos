@@ -11,7 +11,7 @@ namespace System.Net
         Name = "Private.InternalDiagnostics.System.Net.Http",
         LocalizationResources = "FxResources.System.Net.Http.SR"
     )]
-    internal sealed partial class NetEventSource
+    partial internal sealed class NetEventSource
     {
         private const int UriBaseAddressId = NextAvailableEventId;
         private const int ContentNullId = UriBaseAddressId + 1;

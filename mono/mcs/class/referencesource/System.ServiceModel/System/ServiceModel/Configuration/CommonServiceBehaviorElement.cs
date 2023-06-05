@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Xml;
 
-    public partial class CommonServiceBehaviorElement
+    partial public class CommonServiceBehaviorElement
         : ServiceModelExtensionCollectionElement<BehaviorExtensionElement>
     {
         public CommonServiceBehaviorElement()

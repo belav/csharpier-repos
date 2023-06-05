@@ -5,10 +5,11 @@ using System.Runtime.Versioning;
 
 namespace System.Net.NetworkInformation
 {
+    partial
     /// <summary>
     /// Provides statistical data for a network interface on the local computer.
     /// </summary>
-    public abstract partial class IPv4InterfaceStatistics
+    public abstract class IPv4InterfaceStatistics
     {
         protected IPv4InterfaceStatistics() { }
 

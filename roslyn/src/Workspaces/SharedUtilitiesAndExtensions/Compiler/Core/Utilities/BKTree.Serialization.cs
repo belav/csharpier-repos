@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Roslyn.Utilities
 {
-    internal partial class BKTree
+    partial internal class BKTree
     {
         internal void WriteTo(ObjectWriter writer)
         {

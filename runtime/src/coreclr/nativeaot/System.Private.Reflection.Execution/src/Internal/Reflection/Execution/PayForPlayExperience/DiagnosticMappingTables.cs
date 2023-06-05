@@ -13,7 +13,7 @@ using System.Reflection.Runtime.General;
 
 namespace Internal.Reflection.Execution.PayForPlayExperience
 {
-    internal static partial class DiagnosticMappingTables
+    partial internal static class DiagnosticMappingTables
     {
         // Get the diagnostic name string for a type.
         //  Returns true if the function is successful.
@@ -67,7 +67,7 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
             return false;
         }
 
-        static partial void TryGetFullNameFromTypeDefEcma(
+        partial static void TryGetFullNameFromTypeDefEcma(
             QTypeDefinition qTypeDefinition,
             ref string result
         );

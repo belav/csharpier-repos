@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
     ///
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal partial class CSharpUseNotPatternDiagnosticAnalyzer
+    partial internal class CSharpUseNotPatternDiagnosticAnalyzer
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseNotPatternDiagnosticAnalyzer()

@@ -1,10 +1,11 @@
+partial
 // The standard says this doesn't have to have the 'sealed' modifier
-public partial class Foo
+public class Foo
 {
     public string myId;
 }
 
-public sealed partial class Foo
+partial public sealed class Foo
 {
     public string Id
     {

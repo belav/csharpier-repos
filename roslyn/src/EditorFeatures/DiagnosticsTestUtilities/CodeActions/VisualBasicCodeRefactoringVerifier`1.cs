@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Testing;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
-    public static partial class VisualBasicCodeRefactoringVerifier<TCodeRefactoring>
+    partial public static class VisualBasicCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()
     {
         /// <inheritdoc cref="CodeRefactoringVerifier{TCodeRefactoring, TTest, TVerifier}.VerifyRefactoringAsync(string, string)"/>

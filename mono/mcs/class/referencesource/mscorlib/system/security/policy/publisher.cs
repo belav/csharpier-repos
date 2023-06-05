@@ -25,7 +25,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class Publisher : EvidenceBase, IIdentityPermissionFactory
+    public sealed class Publisher : EvidenceBase, IIdentityPermissionFactory
     {
         private X509Certificate m_cert;
 

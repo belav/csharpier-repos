@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    public partial class EventWaitHandle : WaitHandle
+    partial public class EventWaitHandle : WaitHandle
     {
         public EventWaitHandle(bool initialState, EventResetMode mode)
             : this(initialState, mode, null, out _) { }

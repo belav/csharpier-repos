@@ -8,7 +8,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System
 {
-    public static partial class Buffer
+    partial public static class Buffer
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static unsafe void __ZeroMemory(void* b, nuint byteLength) =>

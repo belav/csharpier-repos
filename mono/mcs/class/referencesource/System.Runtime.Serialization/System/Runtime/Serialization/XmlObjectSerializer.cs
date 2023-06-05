@@ -600,13 +600,13 @@ namespace System.Runtime.Serialization
             );
         }
 
-        static internal SerializationException CreateSerializationException(string errorMessage)
+        internal static SerializationException CreateSerializationException(string errorMessage)
         {
             return XmlObjectSerializer.CreateSerializationException(errorMessage, null);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static internal SerializationException CreateSerializationException(
+        internal static SerializationException CreateSerializationException(
             string errorMessage,
             Exception innerException
         )
@@ -645,7 +645,7 @@ namespace System.Runtime.Serialization
         )]
         [SecurityCritical]
         static IFormatterConverter formatterConverter;
-        static internal IFormatterConverter FormatterConverter
+        internal static IFormatterConverter FormatterConverter
         {
             [Fx.Tag.SecurityNote(
                 Critical = "Fetches the critical formatterConverter field.",

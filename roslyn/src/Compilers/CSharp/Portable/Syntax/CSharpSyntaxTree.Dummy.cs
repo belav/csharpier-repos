@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class CSharpSyntaxTree
+    partial public class CSharpSyntaxTree
     {
         internal sealed class DummySyntaxTree : CSharpSyntaxTree
         {

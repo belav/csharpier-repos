@@ -4,14 +4,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
+    partial
     // Initialization of libcrypto threading support is done in a static constructor.
     // This enables a project simply to include this file, and any usage of any of
     // the System.Security.Cryptography.Native functions will trigger
     // initialization of the threading support.
 
-    internal static partial class Crypto
+    internal static class Crypto
     {
         static Crypto()
         {
@@ -19,7 +20,7 @@ internal static partial class Interop
         }
     }
 
-    internal static partial class OpenSsl
+    partial internal static class OpenSsl
     {
         static OpenSsl()
         {
@@ -27,7 +28,7 @@ internal static partial class Interop
         }
     }
 
-    internal static partial class CryptoInitializer
+    partial internal static class CryptoInitializer
     {
         static CryptoInitializer()
         {
@@ -52,6 +53,6 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "CryptoNative_EnsureOpenSslInitialized"
         )]
-        private static partial int EnsureOpenSslInitialized();
+        partial private static int EnsureOpenSslInitialized();
     }
 }

@@ -26,14 +26,14 @@ using OperatingSystem = ILCompiler.Reflection.ReadyToRun.OperatingSystem;
 
 namespace R2RDump
 {
-    public partial class DumpOptions : IAssemblyResolver
+    partial public class DumpOptions : IAssemblyResolver
     {
         private SignatureFormattingOptions signatureFormattingOptions;
 
         /// <summary>
         /// Probing extensions to use when looking up assemblies under reference paths.
         /// </summary>
-        private readonly static string[] ProbeExtensions = new string[]
+        private static readonly string[] ProbeExtensions = new string[]
         {
             ".ni.exe",
             ".ni.dll",
@@ -180,31 +180,39 @@ namespace R2RDump
         /// <summary>
         /// Run right before printing output
         /// </summary>
-        abstract internal void Begin();
+        internal
+        /// <summary>
+        /// Run right before printing output
+        /// </summary>
+        abstract void Begin();
 
         /// <summary>
         /// Run right after printing output
         /// </summary>
-        abstract internal void End();
-        abstract internal void WriteDivider(string title);
-        abstract internal void WriteSubDivider();
-        abstract internal void SkipLine();
-        abstract internal void DumpHeader(bool dumpSections);
-        abstract internal void DumpSection(ReadyToRunSection section);
-        abstract internal void DumpEntryPoints();
-        abstract internal void DumpAllMethods();
-        abstract internal void DumpMethod(ReadyToRunMethod method);
-        abstract internal void DumpRuntimeFunction(RuntimeFunction rtf);
-        abstract internal void DumpDisasm(RuntimeFunction rtf, int imageOffset);
-        abstract internal void DumpBytes(
+        internal
+        /// <summary>
+        /// Run right after printing output
+        /// </summary>
+        abstract void End();
+        internal abstract void WriteDivider(string title);
+        internal abstract void WriteSubDivider();
+        internal abstract void SkipLine();
+        internal abstract void DumpHeader(bool dumpSections);
+        internal abstract void DumpSection(ReadyToRunSection section);
+        internal abstract void DumpEntryPoints();
+        internal abstract void DumpAllMethods();
+        internal abstract void DumpMethod(ReadyToRunMethod method);
+        internal abstract void DumpRuntimeFunction(RuntimeFunction rtf);
+        internal abstract void DumpDisasm(RuntimeFunction rtf, int imageOffset);
+        internal abstract void DumpBytes(
             int rva,
             uint size,
             string name = "Raw",
             bool convertToOffset = true
         );
-        abstract internal void DumpSectionContents(ReadyToRunSection section);
-        abstract internal void DumpQueryCount(string q, string title, int count);
-        abstract internal void DumpFixupStats();
+        internal abstract void DumpSectionContents(ReadyToRunSection section);
+        internal abstract void DumpQueryCount(string q, string title, int count);
+        internal abstract void DumpFixupStats();
 
         public TextWriter Writer => _writer;
 

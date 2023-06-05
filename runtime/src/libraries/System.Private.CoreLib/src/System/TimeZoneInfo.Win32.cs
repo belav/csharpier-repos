@@ -17,7 +17,7 @@ using TIME_DYNAMIC_ZONE_INFORMATION = Interop.Kernel32.TIME_DYNAMIC_ZONE_INFORMA
 
 namespace System
 {
-    public sealed partial class TimeZoneInfo
+    partial public sealed class TimeZoneInfo
     {
         // registry constants for the 'Time Zones' hive
         //
@@ -36,7 +36,7 @@ namespace System
         private const int MaxKeyLength = 255;
         private const string InvariantUtcStandardDisplayName = "Coordinated Universal Time";
 
-        private sealed partial class CachedData
+        partial private sealed class CachedData
         {
             private static TimeZoneInfo GetCurrentOneYearLocal()
             {

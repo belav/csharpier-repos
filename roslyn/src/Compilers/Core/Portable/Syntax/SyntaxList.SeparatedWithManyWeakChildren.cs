@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Syntax
 {
-    internal partial class SyntaxList
+    partial internal class SyntaxList
     {
         internal class SeparatedWithManyWeakChildren : SyntaxList
         {

@@ -105,7 +105,7 @@ namespace System.Net.Sockets
         AddressListSort = (long)3355443225,
     }
 
-    public partial struct IPPacketInformation
+    partial public struct IPPacketInformation
         : System.IEquatable<System.Net.Sockets.IPPacketInformation>
     {
         private object _dummy;
@@ -161,7 +161,7 @@ namespace System.Net.Sockets
         Restricted = 30,
     }
 
-    public partial class IPv6MulticastOption
+    partial public class IPv6MulticastOption
     {
         public IPv6MulticastOption(System.Net.IPAddress group) { }
 
@@ -179,7 +179,7 @@ namespace System.Net.Sockets
         }
     }
 
-    public partial class LingerOption
+    partial public class LingerOption
     {
         public LingerOption(bool enable, int seconds) { }
 
@@ -195,7 +195,7 @@ namespace System.Net.Sockets
         }
     }
 
-    public partial class MulticastOption
+    partial public class MulticastOption
     {
         public MulticastOption(System.Net.IPAddress group) { }
 
@@ -220,7 +220,7 @@ namespace System.Net.Sockets
         }
     }
 
-    public partial class NetworkStream : System.IO.Stream
+    partial public class NetworkStream : System.IO.Stream
     {
         public NetworkStream(System.Net.Sockets.Socket socket) { }
 
@@ -467,7 +467,7 @@ namespace System.Net.Sockets
         SpxII = 1257,
     }
 
-    public sealed partial class SafeSocketHandle
+    partial public sealed class SafeSocketHandle
         : Microsoft.Win32.SafeHandles.SafeHandleMinusOneIsInvalid
     {
         public SafeSocketHandle()
@@ -494,7 +494,7 @@ namespace System.Net.Sockets
         SelectError = 2,
     }
 
-    public partial class SendPacketsElement
+    partial public class SendPacketsElement
     {
         public SendPacketsElement(byte[] buffer) { }
 
@@ -561,7 +561,7 @@ namespace System.Net.Sockets
         }
     }
 
-    public partial class Socket : System.IDisposable
+    partial public class Socket : System.IDisposable
     {
         public Socket(
             System.Net.Sockets.AddressFamily addressFamily,
@@ -1831,7 +1831,7 @@ namespace System.Net.Sockets
         public void Shutdown(System.Net.Sockets.SocketShutdown how) { }
     }
 
-    public partial class SocketAsyncEventArgs : System.EventArgs, System.IDisposable
+    partial public class SocketAsyncEventArgs : System.EventArgs, System.IDisposable
     {
         public SocketAsyncEventArgs() { }
 
@@ -1970,7 +1970,7 @@ namespace System.Net.Sockets
         Partial = 32768,
     }
 
-    public partial struct SocketInformation
+    partial public struct SocketInformation
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -2064,13 +2064,13 @@ namespace System.Net.Sockets
         MaxConnections = 2147483647,
     }
 
-    public partial struct SocketReceiveFromResult
+    partial public struct SocketReceiveFromResult
     {
         public int ReceivedBytes;
         public System.Net.EndPoint RemoteEndPoint;
     }
 
-    public partial struct SocketReceiveMessageFromResult
+    partial public struct SocketReceiveMessageFromResult
     {
         public System.Net.Sockets.IPPacketInformation PacketInformation;
         public int ReceivedBytes;
@@ -2088,7 +2088,7 @@ namespace System.Net.Sockets
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public static partial class SocketTaskExtensions
+    partial public static class SocketTaskExtensions
     {
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -2335,7 +2335,7 @@ namespace System.Net.Sockets
         Seqpacket = 5,
     }
 
-    public partial class TcpClient : System.IDisposable
+    partial public class TcpClient : System.IDisposable
     {
         public TcpClient() { }
 
@@ -2510,7 +2510,7 @@ namespace System.Net.Sockets
         }
     }
 
-    public partial class TcpListener
+    partial public class TcpListener
     {
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use TcpListener(IPAddress localaddr, int port) instead."
@@ -2633,7 +2633,7 @@ namespace System.Net.Sockets
         UseKernelApc = 32,
     }
 
-    public partial class UdpClient : System.IDisposable
+    partial public class UdpClient : System.IDisposable
     {
         public UdpClient() { }
 
@@ -2875,7 +2875,7 @@ namespace System.Net.Sockets
         }
     }
 
-    public partial struct UdpReceiveResult : System.IEquatable<System.Net.Sockets.UdpReceiveResult>
+    partial public struct UdpReceiveResult : System.IEquatable<System.Net.Sockets.UdpReceiveResult>
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -2928,7 +2928,7 @@ namespace System.Net.Sockets
         }
     }
 
-    public sealed partial class UnixDomainSocketEndPoint : System.Net.EndPoint
+    partial public sealed class UnixDomainSocketEndPoint : System.Net.EndPoint
     {
         public UnixDomainSocketEndPoint(string path) { }
 

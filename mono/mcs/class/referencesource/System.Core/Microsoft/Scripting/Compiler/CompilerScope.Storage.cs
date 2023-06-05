@@ -24,9 +24,10 @@ namespace Microsoft.Scripting.Ast.Compiler
 #else
 namespace System.Linq.Expressions.Compiler
 {
+    partial
 #endif
 
-    internal sealed partial class CompilerScope
+    internal sealed class CompilerScope
     {
         private abstract class Storage
         {

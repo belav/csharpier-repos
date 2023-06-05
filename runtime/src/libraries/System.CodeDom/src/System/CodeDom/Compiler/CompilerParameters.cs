@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 
 namespace System.CodeDom.Compiler
 {
-    public partial class CompilerParameters
+    partial public class CompilerParameters
     {
         private TempFileCollection _tempFiles;
 

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices.Marshalling;
 #endif
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinHttp
+    partial internal static class WinHttp
     {
         public const uint ERROR_SUCCESS = 0;
         public const uint ERROR_FILE_NOT_FOUND = 2;

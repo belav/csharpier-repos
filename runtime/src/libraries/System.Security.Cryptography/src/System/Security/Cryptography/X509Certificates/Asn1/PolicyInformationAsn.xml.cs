@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct PolicyInformationAsn
+    partial internal struct PolicyInformationAsn
     {
         internal string PolicyIdentifier;
         internal ReadOnlyMemory<byte>? PolicyQualifiers;

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace IntelHardwareIntrinsicTest.General
 {
-    public partial class Program
+    partial public class Program
     {
         [Xunit.ActiveIssue(
             "https://github.com/dotnet/runtime/issues/75767",

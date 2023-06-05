@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     [CLSCompliant(false)]
-    public ref partial struct TypedReference
+    ref partial public struct TypedReference
     {
         public static TypedReference MakeTypedReference(object target, FieldInfo[] flds)
         {

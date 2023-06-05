@@ -25,11 +25,12 @@ namespace System.Reflection.TypeLoading
         internal abstract MethodBody? SpecializeMethodBody(IRoMethodBase owner);
     }
 
+    partial
     /// <summary>
     /// Class for all RoMethod objects created by a MetadataLoadContext that has a MethodDef token associated with it
     /// and for which IsConstructedGenericMethod returns false.
     /// </summary>
-    internal sealed partial class RoDefinitionMethod<TMethodDecoder> : RoDefinitionMethod
+    internal sealed class RoDefinitionMethod<TMethodDecoder> : RoDefinitionMethod
         where TMethodDecoder : IMethodDecoder
     {
         private readonly RoInstantiationProviderType _declaringType;

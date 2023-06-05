@@ -7,7 +7,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {
-    public partial class Process : IDisposable
+    partial public class Process : IDisposable
     {
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]

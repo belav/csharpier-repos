@@ -7,11 +7,12 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.X509Certificates
 {
+    partial
     /// <summary>
     /// A singleton class that encapsulates the native implementation of various X509 services. (Implementing this as a singleton makes it
     /// easier to split the class into abstract and implementation classes if desired.)
     /// </summary>
-    internal sealed partial class X509Pal : IX509Pal
+    internal sealed class X509Pal : IX509Pal
     {
         public byte[] EncodeX509KeyUsageExtension(X509KeyUsageFlags keyUsages)
         {

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace System.Diagnostics
 {
-    public partial class StackFrame
+    partial public class StackFrame
     {
         internal StackFrame(MonoStackFrame monoStackFrame, bool needFileInfo)
         {

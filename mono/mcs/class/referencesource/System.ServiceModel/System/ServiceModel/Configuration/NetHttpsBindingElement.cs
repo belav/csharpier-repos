@@ -10,10 +10,11 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
+    partial
     /// <summary>
     /// NetHttpsBindingElement for NetHttpsBinding
     /// </summary>
-    public partial class NetHttpsBindingElement : HttpBindingBaseElement
+    public class NetHttpsBindingElement : HttpBindingBaseElement
     {
         public NetHttpsBindingElement(string name)
             : base(name) { }

@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public static partial class ChainedBuilderExtensions
+    partial public static class ChainedBuilderExtensions
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddConfiguration(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder,
@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public partial class ChainedConfigurationProvider
+    partial public class ChainedConfigurationProvider
         : Microsoft.Extensions.Configuration.IConfigurationProvider,
             System.IDisposable
     {
@@ -64,7 +64,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public partial class ChainedConfigurationSource
+    partial public class ChainedConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
         public ChainedConfigurationSource() { }
@@ -89,7 +89,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public partial class ConfigurationBuilder
+    partial public class ConfigurationBuilder
         : Microsoft.Extensions.Configuration.IConfigurationBuilder
     {
         public ConfigurationBuilder() { }
@@ -116,7 +116,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public partial class ConfigurationKeyComparer : System.Collections.Generic.IComparer<string>
+    partial public class ConfigurationKeyComparer : System.Collections.Generic.IComparer<string>
     {
         public ConfigurationKeyComparer() { }
 
@@ -131,7 +131,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public sealed partial class ConfigurationManager
+    partial public sealed class ConfigurationManager
         : Microsoft.Extensions.Configuration.IConfiguration,
             Microsoft.Extensions.Configuration.IConfigurationBuilder,
             Microsoft.Extensions.Configuration.IConfigurationRoot,
@@ -192,7 +192,7 @@ namespace Microsoft.Extensions.Configuration
         void Microsoft.Extensions.Configuration.IConfigurationRoot.Reload() { }
     }
 
-    public abstract partial class ConfigurationProvider
+    partial public abstract class ConfigurationProvider
         : Microsoft.Extensions.Configuration.IConfigurationProvider
     {
         protected ConfigurationProvider() { }
@@ -233,7 +233,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public partial class ConfigurationReloadToken : Microsoft.Extensions.Primitives.IChangeToken
+    partial public class ConfigurationReloadToken : Microsoft.Extensions.Primitives.IChangeToken
     {
         public ConfigurationReloadToken() { }
 
@@ -257,7 +257,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public partial class ConfigurationRoot
+    partial public class ConfigurationRoot
         : Microsoft.Extensions.Configuration.IConfiguration,
             Microsoft.Extensions.Configuration.IConfigurationRoot,
             System.IDisposable
@@ -296,7 +296,7 @@ namespace Microsoft.Extensions.Configuration
         public void Reload() { }
     }
 
-    public partial class ConfigurationSection
+    partial public class ConfigurationSection
         : Microsoft.Extensions.Configuration.IConfiguration,
             Microsoft.Extensions.Configuration.IConfigurationSection
     {
@@ -340,7 +340,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public static partial class MemoryConfigurationBuilderExtensions
+    partial public static class MemoryConfigurationBuilderExtensions
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddInMemoryCollection(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder
@@ -361,7 +361,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public abstract partial class StreamConfigurationProvider
+    partial public abstract class StreamConfigurationProvider
         : Microsoft.Extensions.Configuration.ConfigurationProvider
     {
         public StreamConfigurationProvider(
@@ -378,7 +378,7 @@ namespace Microsoft.Extensions.Configuration
         public abstract void Load(System.IO.Stream stream);
     }
 
-    public abstract partial class StreamConfigurationSource
+    partial public abstract class StreamConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
         protected StreamConfigurationSource() { }
@@ -397,7 +397,7 @@ namespace Microsoft.Extensions.Configuration
 
 namespace Microsoft.Extensions.Configuration.Memory
 {
-    public partial class MemoryConfigurationProvider
+    partial public class MemoryConfigurationProvider
         : Microsoft.Extensions.Configuration.ConfigurationProvider,
             System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
                 string,
@@ -425,7 +425,7 @@ namespace Microsoft.Extensions.Configuration.Memory
         }
     }
 
-    public partial class MemoryConfigurationSource
+    partial public class MemoryConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
         public MemoryConfigurationSource() { }

@@ -13,14 +13,14 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal abstract partial class AbstractGenerateParameterizedMemberService<
+    partial internal abstract class AbstractGenerateParameterizedMemberService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax,
         TInvocationExpressionSyntax
     >
     {
-        private partial class GenerateParameterizedMemberCodeAction : CodeAction
+        partial private class GenerateParameterizedMemberCodeAction : CodeAction
         {
             private readonly TService _service;
             private readonly Document _document;

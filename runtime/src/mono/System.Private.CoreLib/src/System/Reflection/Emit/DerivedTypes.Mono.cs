@@ -39,7 +39,7 @@ using System.Text;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal abstract partial class SymbolType : TypeInfo
+    partial internal abstract class SymbolType : TypeInfo
     {
         #region Sync with MonoReflectionDerivedType in object-internals.h
         private protected Type m_baseType;

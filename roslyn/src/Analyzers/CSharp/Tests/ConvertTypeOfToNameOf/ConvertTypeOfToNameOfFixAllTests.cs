@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
         CSharpConvertTypeOfToNameOfCodeFixProvider
     >;
 
-    public partial class ConvertTypeOfToNameOfTests
+    partial public class ConvertTypeOfToNameOfTests
     {
         [Fact]
         [Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]

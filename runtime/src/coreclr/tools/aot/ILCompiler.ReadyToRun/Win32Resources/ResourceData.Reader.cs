@@ -7,7 +7,7 @@ using System.Reflection.PortableExecutable;
 
 namespace ILCompiler.Win32Resources
 {
-    public unsafe partial class ResourceData
+    partial public unsafe class ResourceData
     {
         private void ReadResourceData(
             BlobReader resourceReader,

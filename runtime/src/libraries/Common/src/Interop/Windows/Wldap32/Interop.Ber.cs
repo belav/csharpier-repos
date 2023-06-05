@@ -5,9 +5,9 @@ using System;
 using System.DirectoryServices.Protocols;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ldap
+    partial internal static class Ldap
     {
         [LibraryImport(
             Libraries.Wldap32,
@@ -17,7 +17,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ber_free(IntPtr berelement, int option);
+        partial public static IntPtr ber_free(IntPtr berelement, int option);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -27,7 +27,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ber_alloc(int option);
+        partial public static IntPtr ber_alloc(int option);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -37,7 +37,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_printf(SafeBerHandle berElement, string format, IntPtr value);
+        partial public static int ber_printf(SafeBerHandle berElement, string format, IntPtr value);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -47,7 +47,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_printf(
+        partial public static int ber_printf(
             SafeBerHandle berElement,
             string format,
             HGlobalMemHandle value,
@@ -62,7 +62,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_printf(SafeBerHandle berElement, string format);
+        partial public static int ber_printf(SafeBerHandle berElement, string format);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -72,7 +72,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_printf(SafeBerHandle berElement, string format, int value);
+        partial public static int ber_printf(SafeBerHandle berElement, string format, int value);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -82,7 +82,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_printf(SafeBerHandle berElement, string format, uint tag);
+        partial public static int ber_printf(SafeBerHandle berElement, string format, uint tag);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -92,7 +92,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_flatten(SafeBerHandle berElement, ref IntPtr value);
+        partial public static int ber_flatten(SafeBerHandle berElement, ref IntPtr value);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -102,7 +102,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ber_init(BerVal value);
+        partial public static IntPtr ber_init(BerVal value);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -112,7 +112,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_scanf(SafeBerHandle berElement, string format);
+        partial public static int ber_scanf(SafeBerHandle berElement, string format);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -122,7 +122,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_scanf(
+        partial public static int ber_scanf(
             SafeBerHandle berElement,
             string format,
             ref IntPtr ptrResult,
@@ -137,7 +137,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_scanf(
+        partial public static int ber_scanf(
             SafeBerHandle berElement,
             string format,
             ref int result
@@ -151,7 +151,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_scanf(
+        partial public static int ber_scanf(
             SafeBerHandle berElement,
             string format,
             ref IntPtr value
@@ -165,7 +165,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_bvfree(IntPtr value);
+        partial public static int ber_bvfree(IntPtr value);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -175,6 +175,6 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ber_bvecfree(IntPtr value);
+        partial public static int ber_bvecfree(IntPtr value);
     }
 }

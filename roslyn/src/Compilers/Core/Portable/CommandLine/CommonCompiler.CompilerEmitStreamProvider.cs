@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal abstract partial class CommonCompiler
+    partial internal abstract class CommonCompiler
     {
         /// <summary>
         /// This implementation of <see cref="Compilation.EmitStreamProvider"/> will delay the creation

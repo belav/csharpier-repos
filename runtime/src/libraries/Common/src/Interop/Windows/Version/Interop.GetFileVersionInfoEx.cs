@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Version
+    partial internal static class Version
     {
         [LibraryImport(
             Libraries.Version,
@@ -14,7 +14,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool GetFileVersionInfoEx(
+        partial internal static unsafe bool GetFileVersionInfoEx(
             uint dwFlags,
             string lpwstrFilename,
             uint dwHandle,

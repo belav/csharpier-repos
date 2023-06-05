@@ -400,7 +400,9 @@ namespace System.Resources
         }
 
         //adapted from MonoDevelop.Core
-        unsafe static string AbsoluteToRelativePath(string baseDirectoryPath, string absPath)
+        static
+        //adapted from MonoDevelop.Core
+        unsafe string AbsoluteToRelativePath(string baseDirectoryPath, string absPath)
         {
             if (string.IsNullOrEmpty(baseDirectoryPath))
                 return absPath;

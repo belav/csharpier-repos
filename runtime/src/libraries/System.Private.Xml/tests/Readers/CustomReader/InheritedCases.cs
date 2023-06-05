@@ -8,7 +8,7 @@ using OLEDB.Test.ModuleCore;
 namespace System.Xml.CustomReaderTests
 {
     [TestModule(Name = "CustomReader Test", Desc = "CustomReader Test")]
-    public partial class CReaderTestModule : CGenericTestModule
+    partial public class CReaderTestModule : CGenericTestModule
     {
         public override int Init(object objParam)
         {

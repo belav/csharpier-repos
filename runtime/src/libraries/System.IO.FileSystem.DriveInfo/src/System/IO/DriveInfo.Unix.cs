@@ -7,7 +7,7 @@ using System.Security;
 
 namespace System.IO
 {
-    public sealed partial class DriveInfo
+    partial public sealed class DriveInfo
     {
         public DriveType DriveType
         {

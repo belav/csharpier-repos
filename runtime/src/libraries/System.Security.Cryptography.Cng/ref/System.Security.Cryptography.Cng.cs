@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public abstract partial class SafeNCryptHandle
+    partial public abstract class SafeNCryptHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         protected SafeNCryptHandle()
@@ -31,7 +31,7 @@ namespace Microsoft.Win32.SafeHandles
         protected abstract bool ReleaseNativeHandle();
     }
 
-    public sealed partial class SafeNCryptKeyHandle : Microsoft.Win32.SafeHandles.SafeNCryptHandle
+    partial public sealed class SafeNCryptKeyHandle : Microsoft.Win32.SafeHandles.SafeNCryptHandle
     {
         public SafeNCryptKeyHandle() { }
 
@@ -46,7 +46,7 @@ namespace Microsoft.Win32.SafeHandles
         }
     }
 
-    public sealed partial class SafeNCryptProviderHandle
+    partial public sealed class SafeNCryptProviderHandle
         : Microsoft.Win32.SafeHandles.SafeNCryptHandle
     {
         public SafeNCryptProviderHandle() { }
@@ -57,7 +57,7 @@ namespace Microsoft.Win32.SafeHandles
         }
     }
 
-    public sealed partial class SafeNCryptSecretHandle
+    partial public sealed class SafeNCryptSecretHandle
         : Microsoft.Win32.SafeHandles.SafeNCryptHandle
     {
         public SafeNCryptSecretHandle() { }
@@ -71,7 +71,7 @@ namespace Microsoft.Win32.SafeHandles
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class AesCng : System.Security.Cryptography.Aes
+    partial public sealed class AesCng : System.Security.Cryptography.Aes
     {
         public AesCng() { }
 
@@ -129,7 +129,7 @@ namespace System.Security.Cryptography
         public override void GenerateKey() { }
     }
 
-    public sealed partial class CngAlgorithm
+    partial public sealed class CngAlgorithm
         : System.IEquatable<System.Security.Cryptography.CngAlgorithm>
     {
         public CngAlgorithm(string algorithm) { }
@@ -237,7 +237,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class CngAlgorithmGroup
+    partial public sealed class CngAlgorithmGroup
         : System.IEquatable<System.Security.Cryptography.CngAlgorithmGroup>
     {
         public CngAlgorithmGroup(string algorithmGroup) { }
@@ -319,7 +319,7 @@ namespace System.Security.Cryptography
         AllowPlaintextArchiving = 8,
     }
 
-    public sealed partial class CngKey : System.IDisposable
+    partial public sealed class CngKey : System.IDisposable
     {
         internal CngKey() { }
 
@@ -499,7 +499,7 @@ namespace System.Security.Cryptography
         public void SetProperty(System.Security.Cryptography.CngProperty property) { }
     }
 
-    public sealed partial class CngKeyBlobFormat
+    partial public sealed class CngKeyBlobFormat
         : System.IEquatable<System.Security.Cryptography.CngKeyBlobFormat>
     {
         public CngKeyBlobFormat(string format) { }
@@ -591,7 +591,7 @@ namespace System.Security.Cryptography
         OverwriteExistingKey = 128,
     }
 
-    public sealed partial class CngKeyCreationParameters
+    partial public sealed class CngKeyCreationParameters
     {
         public CngKeyCreationParameters() { }
 
@@ -657,7 +657,7 @@ namespace System.Security.Cryptography
         AllUsages = 16777215,
     }
 
-    public partial struct CngProperty : System.IEquatable<System.Security.Cryptography.CngProperty>
+    partial public struct CngProperty : System.IEquatable<System.Security.Cryptography.CngProperty>
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -719,7 +719,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class CngPropertyCollection
+    partial public sealed class CngPropertyCollection
         : System.Collections.ObjectModel.Collection<System.Security.Cryptography.CngProperty>
     {
         public CngPropertyCollection() { }
@@ -733,7 +733,7 @@ namespace System.Security.Cryptography
         CustomProperty = 1073741824,
     }
 
-    public sealed partial class CngProvider
+    partial public sealed class CngProvider
         : System.IEquatable<System.Security.Cryptography.CngProvider>
     {
         public CngProvider(string provider) { }
@@ -797,7 +797,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class CngUIPolicy
+    partial public sealed class CngUIPolicy
     {
         public CngUIPolicy(System.Security.Cryptography.CngUIProtectionLevels protectionLevel) { }
 
@@ -857,7 +857,7 @@ namespace System.Security.Cryptography
         ForceHighProtection = 2,
     }
 
-    public sealed partial class DSACng : System.Security.Cryptography.DSA
+    partial public sealed class DSACng : System.Security.Cryptography.DSA
     {
         public DSACng() { }
 
@@ -924,7 +924,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class ECDiffieHellmanCng : System.Security.Cryptography.ECDiffieHellman
+    partial public sealed class ECDiffieHellmanCng : System.Security.Cryptography.ECDiffieHellman
     {
         public ECDiffieHellmanCng() { }
 
@@ -1076,7 +1076,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class ECDiffieHellmanCngPublicKey
+    partial public sealed class ECDiffieHellmanCngPublicKey
         : System.Security.Cryptography.ECDiffieHellmanPublicKey
     {
         // ECDiffieHellmanPublicKey parameter-less ctor only exist on .NET Framework 4.7+
@@ -1133,7 +1133,7 @@ namespace System.Security.Cryptography
         Tls = 2,
     }
 
-    public sealed partial class ECDsaCng : System.Security.Cryptography.ECDsa
+    partial public sealed class ECDsaCng : System.Security.Cryptography.ECDsa
     {
         public ECDsaCng() { }
 
@@ -1258,7 +1258,7 @@ namespace System.Security.Cryptography
         Rfc4050 = 0,
     }
 
-    public sealed partial class RSACng : System.Security.Cryptography.RSA
+    partial public sealed class RSACng : System.Security.Cryptography.RSA
     {
         public RSACng() { }
 
@@ -1342,7 +1342,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class TripleDESCng : System.Security.Cryptography.TripleDES
+    partial public sealed class TripleDESCng : System.Security.Cryptography.TripleDES
     {
         public TripleDESCng() { }
 

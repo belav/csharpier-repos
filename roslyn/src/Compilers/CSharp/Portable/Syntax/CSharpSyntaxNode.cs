@@ -14,6 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Represents a non-terminal node in the syntax tree.
     /// </summary>
@@ -22,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     //to defer the realization of strings. Often diagnostics generated while binding
     //in service of a SemanticModel API are never realized. So this
     //deferral can result in meaningful savings of strings.
-    public abstract partial class CSharpSyntaxNode : SyntaxNode, IFormattable
+    public abstract class CSharpSyntaxNode : SyntaxNode, IFormattable
     {
         internal CSharpSyntaxNode(GreenNode green, SyntaxNode? parent, int position)
             : base(green, parent, position) { }

@@ -11,12 +11,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 {
+    partial
     /// <summary>
     /// Analysis to compute all the symbol writes for local and parameter
     /// symbols in an executable code block, along with the information of whether or not the definition
     /// may be read on some control flow path.
     /// </summary>
-    internal static partial class SymbolUsageAnalysis
+    internal static class SymbolUsageAnalysis
     {
         /// <summary>
         /// Runs dataflow analysis on the given control flow graph to compute symbol usage results

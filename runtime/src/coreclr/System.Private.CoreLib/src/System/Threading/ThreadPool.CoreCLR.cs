@@ -18,7 +18,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    internal sealed partial class CompleteWaitThreadPoolWorkItem : IThreadPoolWorkItem
+    partial internal sealed class CompleteWaitThreadPoolWorkItem : IThreadPoolWorkItem
     {
         void IThreadPoolWorkItem.Execute() => CompleteWait();
 
@@ -44,7 +44,7 @@ namespace System.Threading
             ((delegate* unmanaged<IntPtr, int>)_callback)(_state);
     }
 
-    public static partial class ThreadPool
+    partial public static class ThreadPool
     {
         internal static bool EnsureConfigInitialized()
         {

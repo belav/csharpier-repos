@@ -81,9 +81,10 @@ namespace System.Reflection.Emit
             throw new NotImplementedException();
         }
     }
+    partial
 #endif
 
-    public sealed partial class EnumBuilder : TypeInfo
+    public sealed class EnumBuilder : TypeInfo
     {
         private TypeBuilder _tb;
         private FieldBuilder _underlyingField;

@@ -6,7 +6,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDiffieHellmanOpenSsl : ECDiffieHellman
+    partial public sealed class ECDiffieHellmanOpenSsl : ECDiffieHellman
     {
         /// <summary>
         /// Given a second party's public key, derive shared key material

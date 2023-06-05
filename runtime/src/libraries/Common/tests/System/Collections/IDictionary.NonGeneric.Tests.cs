@@ -7,11 +7,12 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
+    partial
     /// <summary>
     /// Contains tests that ensure the correctness of any class that implements the nongeneric
     /// IDictionary interface
     /// </summary>
-    public abstract partial class IDictionary_NonGeneric_Tests : ICollection_NonGeneric_Tests
+    public abstract class IDictionary_NonGeneric_Tests : ICollection_NonGeneric_Tests
     {
         #region IDictionary Helper Methods
 

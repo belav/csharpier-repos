@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.RegularExpressions.Symbolic
 {
-    internal sealed partial class SymbolicRegexMatcher<TSet>
+    partial internal sealed class SymbolicRegexMatcher<TSet>
     {
         /// <summary>
         /// The probability of stopping match sampling when a candidate is found. This influences the expected length

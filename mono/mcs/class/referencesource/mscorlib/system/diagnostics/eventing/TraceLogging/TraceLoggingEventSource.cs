@@ -37,7 +37,7 @@ namespace Microsoft.Diagnostics.Tracing
 namespace System.Diagnostics.Tracing
 #endif
 {
-    public partial class EventSource
+    partial public class EventSource
     {
         private byte[] providerMetadata;
 

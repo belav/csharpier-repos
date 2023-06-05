@@ -33,7 +33,7 @@ namespace System.Collections.Immutable
     /// </devremarks>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [NonVersionable] // Applies to field layout
-    public partial struct ImmutableArray<T>
+    partial public struct ImmutableArray<T>
         : IEnumerable<T>,
             IEquatable<ImmutableArray<T>>,
             IImmutableArray

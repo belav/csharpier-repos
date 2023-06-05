@@ -1,8 +1,8 @@
 partial class B
 {
-    static partial void Test(int a);
+    partial static void Test(int a);
 
-    static partial void Test(int x) { }
+    partial static void Test(int x) { }
 
     public static int Main()
     {

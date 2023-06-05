@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct TimeAsn
+    partial internal struct TimeAsn
     {
         internal DateTimeOffset? UtcTime;
         internal DateTimeOffset? GeneralTime;

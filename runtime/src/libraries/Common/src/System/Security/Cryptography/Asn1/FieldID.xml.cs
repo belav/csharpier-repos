@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct FieldID
+    partial internal struct FieldID
     {
         internal string FieldType;
         internal ReadOnlyMemory<byte> Parameters;

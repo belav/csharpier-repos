@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetComInterfaceForObjectTests
+    partial public class GetComInterfaceForObjectTests
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]

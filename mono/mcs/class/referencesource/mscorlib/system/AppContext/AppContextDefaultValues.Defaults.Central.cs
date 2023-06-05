@@ -11,7 +11,7 @@
 
 namespace System
 {
-    internal static partial class AppContextDefaultValues
+    partial internal static class AppContextDefaultValues
     {
         /// <summary>
         /// This method allows reading the override for a switch.

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Roslyn.Utilities
 {
-    internal static partial class SpecializedCollections
+    partial internal static class SpecializedCollections
     {
         public static IEnumerator<T> EmptyEnumerator<T>()
         {

@@ -18,9 +18,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 {
+    partial
     // Code for the CodeRefactoringProvider ("Refactoring") portion of the feature.
 
-    internal partial class UseExpressionBodyForLambdaCodeStyleProvider
+    internal class UseExpressionBodyForLambdaCodeStyleProvider
     {
         protected override async Task<
             ImmutableArray<CodeAction>

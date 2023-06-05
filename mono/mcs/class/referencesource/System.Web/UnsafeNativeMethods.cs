@@ -24,7 +24,7 @@ namespace System.Web
     ]
     internal static class UnsafeNativeMethods
     {
-        static internal readonly IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
+        internal static readonly IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
 
         /*
          * ADVAPI32.dll
@@ -75,10 +75,10 @@ namespace System.Web
         );
 
         [DllImport(ModName.ADVAPI32_FULL_NAME, SetLastError = true, CharSet = CharSet.Unicode)]
-        public extern static int ConvertStringSidToSid(string stringSid, out IntPtr pSid);
+        public static extern int ConvertStringSidToSid(string stringSid, out IntPtr pSid);
 
         [DllImport(ModName.ADVAPI32_FULL_NAME, SetLastError = true, CharSet = CharSet.Unicode)]
-        public extern static int LookupAccountSid(
+        public static extern int LookupAccountSid(
             string systemName,
             IntPtr pSid,
             StringBuilder szName,
@@ -280,22 +280,22 @@ namespace System.Web
 
 #if !FEATURE_PAL // FEATURE_PAL native imports
         [DllImport(ModName.KERNEL32_FULL_NAME)]
-        internal extern static int GetProcessAffinityMask(
+        internal static extern int GetProcessAffinityMask(
             IntPtr handle,
             out IntPtr processAffinityMask,
             out IntPtr systemAffinityMask
         );
 
         [DllImport(ModName.KERNEL32_FULL_NAME, CharSet = CharSet.Unicode)]
-        internal extern static int GetComputerName(StringBuilder nameBuffer, ref int bufferSize);
+        internal static extern int GetComputerName(StringBuilder nameBuffer, ref int bufferSize);
 
         [DllImport(ModName.KERNEL32_FULL_NAME, CharSet = CharSet.Unicode)]
         internal /*public*/
-        extern static int GetModuleFileName(IntPtr module, StringBuilder filename, int size);
+        static extern int GetModuleFileName(IntPtr module, StringBuilder filename, int size);
 
         [DllImport(ModName.KERNEL32_FULL_NAME, CharSet = CharSet.Unicode)]
         internal /*public*/
-        extern static IntPtr GetModuleHandle(string moduleName);
+        static extern IntPtr GetModuleHandle(string moduleName);
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct SYSTEM_INFO
@@ -335,7 +335,7 @@ namespace System.Web
         internal static extern IntPtr LockResource(IntPtr hResData);
 
         [DllImport(ModName.KERNEL32_FULL_NAME, CharSet = CharSet.Unicode)]
-        public extern static IntPtr LocalFree(IntPtr pMem);
+        public static extern IntPtr LocalFree(IntPtr pMem);
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct MEMORYSTATUSEX
@@ -357,7 +357,7 @@ namespace System.Web
         }
 
         [DllImport(ModName.KERNEL32_FULL_NAME, CharSet = CharSet.Unicode)]
-        internal extern static int GlobalMemoryStatusEx(ref MEMORYSTATUSEX memoryStatusEx);
+        internal static extern int GlobalMemoryStatusEx(ref MEMORYSTATUSEX memoryStatusEx);
 #else // !FEATURE_PAL
         internal static int GetProcessAffinityMask(
             IntPtr handle,
@@ -401,7 +401,7 @@ namespace System.Web
             SetLastError = true,
             EntryPoint = "PAL_GetUserTempDirectoryW"
         )]
-        internal extern static bool GetUserTempDirectory(
+        internal static extern bool GetUserTempDirectory(
             DeploymentDirectoryType ddt,
             StringBuilder sb,
             ref UInt32 length
@@ -420,7 +420,7 @@ namespace System.Web
             SetLastError = true,
             EntryPoint = "PAL_GetMachineConfigurationDirectoryW"
         )]
-        internal extern static bool GetMachineConfigurationDirectory(
+        internal static extern bool GetMachineConfigurationDirectory(
             StringBuilder sb,
             ref UInt32 length
         );

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    public sealed partial class Semaphore
+    partial public sealed class Semaphore
     {
         private const uint AccessRights =
             (uint)Interop.Kernel32.MAXIMUM_ALLOWED

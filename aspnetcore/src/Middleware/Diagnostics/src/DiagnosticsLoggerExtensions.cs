@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-internal static partial class DiagnosticsLoggerExtensions
+partial internal static class DiagnosticsLoggerExtensions
 {
     // ExceptionHandlerMiddleware & DeveloperExceptionPageMiddleware
     [LoggerMessage(
@@ -14,7 +14,7 @@ internal static partial class DiagnosticsLoggerExtensions
         "An unhandled exception has occurred while executing the request.",
         EventName = "UnhandledException"
     )]
-    public static partial void UnhandledException(this ILogger logger, Exception exception);
+    partial public static void UnhandledException(this ILogger logger, Exception exception);
 
     // ExceptionHandlerMiddleware
     [LoggerMessage(
@@ -23,7 +23,7 @@ internal static partial class DiagnosticsLoggerExtensions
         "The response has already started, the error handler will not be executed.",
         EventName = "ResponseStarted"
     )]
-    public static partial void ResponseStartedErrorHandler(this ILogger logger);
+    partial public static void ResponseStartedErrorHandler(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -31,10 +31,10 @@ internal static partial class DiagnosticsLoggerExtensions
         "An exception was thrown attempting to execute the error handler.",
         EventName = "Exception"
     )]
-    public static partial void ErrorHandlerException(this ILogger logger, Exception exception);
+    partial public static void ErrorHandlerException(this ILogger logger, Exception exception);
 }
 
-internal static partial class DeveloperExceptionPageMiddlewareLoggerExtensions
+partial internal static class DeveloperExceptionPageMiddlewareLoggerExtensions
 {
     [LoggerMessage(
         2,
@@ -42,7 +42,7 @@ internal static partial class DeveloperExceptionPageMiddlewareLoggerExtensions
         "The response has already started, the error page middleware will not be executed.",
         EventName = "ResponseStarted"
     )]
-    public static partial void ResponseStartedErrorPageMiddleware(this ILogger logger);
+    partial public static void ResponseStartedErrorPageMiddleware(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -50,5 +50,5 @@ internal static partial class DeveloperExceptionPageMiddlewareLoggerExtensions
         "An exception was thrown attempting to display the error page.",
         EventName = "DisplayErrorPageException"
     )]
-    public static partial void DisplayErrorPageException(this ILogger logger, Exception exception);
+    partial public static void DisplayErrorPageException(this ILogger logger, Exception exception);
 }

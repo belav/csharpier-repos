@@ -6,11 +6,12 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
+    partial
     /// <summary>
     /// Represents a pseudo-random number generator, which is an algorithm that produces a sequence of numbers
     /// that meet certain statistical requirements for randomness.
     /// </summary>
-    public partial class Random
+    public class Random
     {
         /// <summary>The underlying generator implementation.</summary>
         /// <remarks>

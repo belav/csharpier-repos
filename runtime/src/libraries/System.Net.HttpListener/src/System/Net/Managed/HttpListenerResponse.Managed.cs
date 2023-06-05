@@ -35,7 +35,7 @@ using System.Text;
 
 namespace System.Net
 {
-    public sealed partial class HttpListenerResponse : IDisposable
+    partial public sealed class HttpListenerResponse : IDisposable
     {
         private long _contentLength;
         private Version _version = HttpVersion.Version11;

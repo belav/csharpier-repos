@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Libraries.Advapi32,
@@ -15,7 +15,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CryptAcquireContext(
+        partial internal static unsafe bool CryptAcquireContext(
             out IntPtr psafeProvHandle,
             char* pszContainer,
             char* pszProvider,

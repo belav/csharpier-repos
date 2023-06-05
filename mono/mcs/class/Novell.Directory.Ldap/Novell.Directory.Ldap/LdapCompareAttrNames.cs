@@ -57,6 +57,7 @@ namespace Novell.Directory.Ldap
             collator = System.Globalization.CultureInfo.CurrentCulture.CompareInfo;
         }
 
+        public
         /// <summary> Returns the locale to be used for sorting, if a locale has been
         /// specified.
         ///
@@ -71,7 +72,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="locale">  The locale to be used for sorting.
         /// </param>
-        virtual public System.Globalization.CultureInfo Locale
+        virtual System.Globalization.CultureInfo Locale
         {
             get
             {

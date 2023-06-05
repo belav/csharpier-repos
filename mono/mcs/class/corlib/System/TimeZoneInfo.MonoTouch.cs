@@ -42,10 +42,10 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public partial class TimeZoneInfo
+    partial public class TimeZoneInfo
     {
         [DllImport("__Internal")]
-        extern static string xamarin_timezone_get_local_name();
+        static extern string xamarin_timezone_get_local_name();
 
         static TimeZoneInfo CreateLocal()
         {
@@ -77,7 +77,7 @@ namespace System
         }
 
         [DllImport("__Internal")]
-        extern static IntPtr xamarin_timezone_get_names(ref uint count);
+        static extern IntPtr xamarin_timezone_get_names(ref uint count);
 
         static ReadOnlyCollection<string> GetMonoTouchNames()
         {
@@ -95,7 +95,7 @@ namespace System
         }
 
         [DllImport("__Internal")]
-        extern static IntPtr xamarin_timezone_get_data(string name, ref uint size);
+        static extern IntPtr xamarin_timezone_get_data(string name, ref uint size);
 
         static Stream GetMonoTouchData(string name, bool throw_on_error = true)
         {

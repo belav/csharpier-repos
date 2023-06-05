@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Logging
 {
-    public static partial class LoggingBuilderExtensions
+    partial public static class LoggingBuilderExtensions
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddConfiguration(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
@@ -20,19 +20,19 @@ namespace Microsoft.Extensions.Logging
 
 namespace Microsoft.Extensions.Logging.Configuration
 {
-    public partial interface ILoggerProviderConfigurationFactory
+    partial public interface ILoggerProviderConfigurationFactory
     {
         Microsoft.Extensions.Configuration.IConfiguration GetConfiguration(
             System.Type providerType
         );
     }
 
-    public partial interface ILoggerProviderConfiguration<T>
+    partial public interface ILoggerProviderConfiguration<T>
     {
         Microsoft.Extensions.Configuration.IConfiguration Configuration { get; }
     }
 
-    public static partial class LoggerProviderOptions
+    partial public static class LoggerProviderOptions
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding TOptions to configuration values may require generating dynamic code at runtime."
@@ -50,7 +50,7 @@ namespace Microsoft.Extensions.Logging.Configuration
             where TOptions : class { }
     }
 
-    public partial class LoggerProviderOptionsChangeTokenSource<TOptions, TProvider>
+    partial public class LoggerProviderOptionsChangeTokenSource<TOptions, TProvider>
         : Microsoft.Extensions.Options.ConfigurationChangeTokenSource<TOptions>
     {
         public LoggerProviderOptionsChangeTokenSource(
@@ -59,7 +59,7 @@ namespace Microsoft.Extensions.Logging.Configuration
             : base(default(Microsoft.Extensions.Configuration.IConfiguration)) { }
     }
 
-    public static partial class LoggingBuilderConfigurationExtensions
+    partial public static class LoggingBuilderConfigurationExtensions
     {
         public static void AddConfiguration(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder

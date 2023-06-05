@@ -3,7 +3,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class DebugProvider
+    partial public class DebugProvider
     {
         public static void FailCore(
             string stackTrace,

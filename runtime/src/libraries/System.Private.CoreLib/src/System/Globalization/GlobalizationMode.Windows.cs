@@ -3,7 +3,7 @@
 
 namespace System.Globalization
 {
-    internal static partial class GlobalizationMode
+    partial internal static class GlobalizationMode
     {
         internal static bool UseNls { get; } =
             !Invariant

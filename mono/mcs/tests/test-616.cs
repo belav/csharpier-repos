@@ -49,7 +49,7 @@ namespace System
 
     public class Exception { }
 
-    public partial class Type { }
+    partial public class Type { }
 
     public class ValueType { }
 

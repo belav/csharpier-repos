@@ -312,7 +312,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.partial01
 
     public class Tiger : Animal { }
 
-    public partial class C
+    partial public class C
     {
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -332,7 +332,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.partial01
         }
     }
 
-    public partial class C
+    partial public class C
     {
         private delegate T Foo<out T>();
     }

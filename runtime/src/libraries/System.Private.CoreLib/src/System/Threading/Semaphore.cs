@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    public sealed partial class Semaphore : WaitHandle
+    partial public sealed class Semaphore : WaitHandle
     {
         // creates a nameless semaphore object
         // Win32 only takes maximum count of int.MaxValue

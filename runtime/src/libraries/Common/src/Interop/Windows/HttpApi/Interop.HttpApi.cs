@@ -10,9 +10,9 @@ using System.Runtime.InteropServices;
 using System.Security.Authentication.ExtendedProtection;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class HttpApi
+    partial internal static class HttpApi
     {
         internal static readonly HTTPAPI_VERSION s_version = new HTTPAPI_VERSION()
         {
@@ -464,14 +464,14 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static partial uint HttpInitialize(
+        partial internal static uint HttpInitialize(
             HTTPAPI_VERSION version,
             uint flags,
             IntPtr pReserved
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpSetUrlGroupProperty(
+        partial internal static unsafe uint HttpSetUrlGroupProperty(
             ulong urlGroupId,
             HTTP_SERVER_PROPERTY serverProperty,
             void* pPropertyInfo,
@@ -479,28 +479,28 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpCreateServerSession(
+        partial internal static unsafe uint HttpCreateServerSession(
             HTTPAPI_VERSION version,
             ulong* serverSessionId,
             uint reserved
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpCreateUrlGroup(
+        partial internal static unsafe uint HttpCreateUrlGroup(
             ulong serverSessionId,
             ulong* urlGroupId,
             uint reserved
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static partial uint HttpCloseUrlGroup(ulong urlGroupId);
+        partial internal static uint HttpCloseUrlGroup(ulong urlGroupId);
 
         [LibraryImport(
             Libraries.HttpApi,
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial uint HttpCreateRequestQueue(
+        partial internal static unsafe uint HttpCreateRequestQueue(
             HTTPAPI_VERSION version,
             string pName,
             Interop.Kernel32.SECURITY_ATTRIBUTES* pSecurityAttributes,
@@ -513,7 +513,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial uint HttpAddUrlToUrlGroup(
+        partial internal static uint HttpAddUrlToUrlGroup(
             ulong urlGroupId,
             string pFullyQualifiedUrl,
             ulong context,
@@ -525,14 +525,14 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial uint HttpRemoveUrlFromUrlGroup(
+        partial internal static uint HttpRemoveUrlFromUrlGroup(
             ulong urlGroupId,
             string pFullyQualifiedUrl,
             uint flags
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpReceiveHttpRequest(
+        partial internal static unsafe uint HttpReceiveHttpRequest(
             SafeHandle requestQueueHandle,
             ulong requestId,
             uint flags,
@@ -543,7 +543,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpSendHttpResponse(
+        partial internal static unsafe uint HttpSendHttpResponse(
             SafeHandle requestQueueHandle,
             ulong requestId,
             uint flags,
@@ -557,14 +557,14 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpWaitForDisconnect(
+        partial internal static unsafe uint HttpWaitForDisconnect(
             SafeHandle requestQueueHandle,
             ulong connectionId,
             NativeOverlapped* pOverlapped
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpReceiveRequestEntityBody(
+        partial internal static unsafe uint HttpReceiveRequestEntityBody(
             SafeHandle requestQueueHandle,
             ulong requestId,
             uint flags,
@@ -575,7 +575,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpSendResponseEntityBody(
+        partial internal static unsafe uint HttpSendResponseEntityBody(
             SafeHandle requestQueueHandle,
             ulong requestId,
             uint flags,
@@ -589,17 +589,17 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static partial uint HttpCloseRequestQueue(IntPtr pReqQueueHandle);
+        partial internal static uint HttpCloseRequestQueue(IntPtr pReqQueueHandle);
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static partial uint HttpCancelHttpRequest(
+        partial internal static uint HttpCancelHttpRequest(
             SafeHandle requestQueueHandle,
             ulong requestId,
             IntPtr pOverlapped
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static partial uint HttpCloseServerSession(ulong serverSessionId);
+        partial internal static uint HttpCloseServerSession(ulong serverSessionId);
 
         internal sealed class SafeLocalFreeChannelBinding : ChannelBinding
         {
@@ -628,7 +628,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpReceiveClientCertificate(
+        partial internal static unsafe uint HttpReceiveClientCertificate(
             SafeHandle requestQueueHandle,
             ulong connectionId,
             uint flags,
@@ -639,7 +639,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.HttpApi, SetLastError = true)]
-        internal static unsafe partial uint HttpReceiveClientCertificate(
+        partial internal static unsafe uint HttpReceiveClientCertificate(
             SafeHandle requestQueueHandle,
             ulong connectionId,
             uint flags,

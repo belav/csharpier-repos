@@ -15,7 +15,7 @@ using System.ComponentModel.Composition.ReflectionModel;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public abstract partial class ExportProvider
+    partial public abstract class ExportProvider
     {
         /// <summary>
         ///     Returns the export with the contract name derived from the specified type parameter,

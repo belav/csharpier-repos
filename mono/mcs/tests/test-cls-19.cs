@@ -4,9 +4,9 @@ using System;
 
 [assembly: CLSCompliant(true)]
 
-public partial class A
+partial public class A
 {
-    public partial class PartialClass
+    partial public class PartialClass
     {
         public void Method1(int arg) { }
 

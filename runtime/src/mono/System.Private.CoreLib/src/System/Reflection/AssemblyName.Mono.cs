@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection
 {
-    public partial class AssemblyName
+    partial public class AssemblyName
     {
         internal static AssemblyName Create(IntPtr monoAssembly, string? codeBase)
         {

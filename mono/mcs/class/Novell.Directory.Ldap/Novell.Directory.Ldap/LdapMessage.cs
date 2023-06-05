@@ -44,16 +44,18 @@ namespace Novell.Directory.Ldap
     /// </summary>
     public class LdapMessage
     {
+        internal
         /// <summary> Returns the LdapMessage request associated with this response</summary>
-        virtual internal LdapMessage RequestingMessage
+        virtual LdapMessage RequestingMessage
         {
             /* package */
 
             get { return message.RequestingMessage; }
         }
 
+        public
         /// <summary> Returns any controls in the message.</summary>
-        virtual public LdapControl[] Controls
+        virtual LdapControl[] Controls
         {
             get
             {
@@ -114,10 +116,11 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the message ID.  The message ID is an integer value
         /// identifying the Ldap request and its response.
         /// </summary>
-        virtual public int MessageID
+        virtual int MessageID
         {
             get
             {
@@ -129,6 +132,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the Ldap operation type of the message.
         ///
         /// The type is one of the following:
@@ -159,7 +163,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> The operation type of the message.
         /// </returns>
-        virtual public int Type
+        virtual int Type
         {
             get
             {
@@ -171,19 +175,21 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Indicates whether the message is a request or a response
         ///
         /// </summary>
         /// <returns> true if the message is a request, false if it is a response,
         /// a search result, or a search result reference.
         /// </returns>
-        virtual public bool Request
+        virtual bool Request
         {
             get { return message.isRequest(); }
         }
 
+        internal
         /// <summary> Returns the RFC 2251 LdapMessage composed in this object.</summary>
-        virtual internal RfcLdapMessage Asn1Object
+        virtual RfcLdapMessage Asn1Object
         {
             /* package */
 
@@ -287,6 +293,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Retrieves the identifier tag for this message.
         ///
         /// An identifier can be associated with a message with the
@@ -324,7 +331,7 @@ namespace Novell.Directory.Ldap
         /// <param name="stringTag"> the String assigned to identify this message.
         ///
         /// </param>
-        virtual public System.String Tag
+        virtual System.String Tag
         {
             get
             {

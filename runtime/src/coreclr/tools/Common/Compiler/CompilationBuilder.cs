@@ -11,7 +11,7 @@ using Internal.IL;
 
 namespace ILCompiler
 {
-    public abstract partial class CompilationBuilder
+    partial public abstract class CompilationBuilder
     {
         protected readonly CompilerTypeSystemContext _context;
         protected readonly CompilationModuleGroup _compilationGroup;

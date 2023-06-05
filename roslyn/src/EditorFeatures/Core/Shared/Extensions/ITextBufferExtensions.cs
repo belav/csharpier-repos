@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
-    internal static partial class ITextBufferExtensions
+    partial internal static class ITextBufferExtensions
     {
         internal static bool IsInLspEditorContext(this ITextBuffer buffer)
         {

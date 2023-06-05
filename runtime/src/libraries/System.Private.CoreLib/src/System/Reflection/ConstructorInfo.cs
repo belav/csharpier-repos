@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    public abstract partial class ConstructorInfo : MethodBase
+    partial public abstract class ConstructorInfo : MethodBase
     {
         protected ConstructorInfo() { }
 

@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace System.Net
 {
-    public partial class WebProxy : IWebProxy, ISerializable
+    partial public class WebProxy : IWebProxy, ISerializable
     {
         private ChangeTrackingArrayList? _bypassList;
         private Regex[]? _regexBypassList;

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    internal static partial class TestExtensionsMethods
+    partial internal static class TestExtensionsMethods
     {
         internal static IDictionary<TKey, TValue> ToReadOnlyDictionary<TKey, TValue>(
             this IImmutableDictionary<TKey, TValue> dictionary

@@ -4,7 +4,7 @@
 
 namespace System.Net.Http
 {
-    public sealed partial class ReadOnlyMemoryContent : System.Net.Http.HttpContent
+    partial public sealed class ReadOnlyMemoryContent : System.Net.Http.HttpContent
     {
         public ReadOnlyMemoryContent(System.ReadOnlyMemory<byte> content) =>
             throw new PlatformNotSupportedException();

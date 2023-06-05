@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace System.Reflection
 {
-    public abstract partial class MethodBase : MemberInfo
+    partial public abstract class MethodBase : MemberInfo
     {
         #region Static Members
         public static MethodBase? GetMethodFromHandle(RuntimeMethodHandle handle)

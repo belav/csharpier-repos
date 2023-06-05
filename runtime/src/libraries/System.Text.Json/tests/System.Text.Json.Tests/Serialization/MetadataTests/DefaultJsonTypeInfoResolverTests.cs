@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class DefaultJsonTypeInfoResolverTests
+    partial public static class DefaultJsonTypeInfoResolverTests
     {
         [Fact]
         public static void GetTypeInfoNullArguments()
@@ -217,7 +217,7 @@ namespace System.Text.Json.Serialization.Tests
 
         [JsonSerializable(typeof(SomeClass))]
         [JsonSerializable(typeof(SomeOtherClass))]
-        private partial class SomeClassContext : JsonSerializerContext { }
+        partial private class SomeClassContext : JsonSerializerContext { }
 
         private class CustomThrowingConverter<T> : JsonConverter<T>
         {

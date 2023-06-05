@@ -5,7 +5,7 @@ using System;
 
 unsafe class X
 {
-    unsafe public X(sbyte* value, int startIndex, int length) { }
+    public unsafe X(sbyte* value, int startIndex, int length) { }
 
     public static void Main()
     {

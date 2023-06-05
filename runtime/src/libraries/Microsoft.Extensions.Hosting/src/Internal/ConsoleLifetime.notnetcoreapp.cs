@@ -7,11 +7,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Hosting.Internal
 {
-    public partial class ConsoleLifetime : IHostLifetime
+    partial public class ConsoleLifetime : IHostLifetime
     {
         private readonly ManualResetEvent _shutdownBlock = new ManualResetEvent(false);
 
-        private partial void RegisterShutdownHandlers()
+        partial private void RegisterShutdownHandlers()
         {
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
             Console.CancelKeyPress += OnCancelKeyPress;
@@ -45,7 +45,7 @@ namespace Microsoft.Extensions.Hosting.Internal
             System.Environment.ExitCode = 0;
         }
 
-        private partial void UnregisterShutdownHandlers()
+        partial private void UnregisterShutdownHandlers()
         {
             _shutdownBlock.Set();
 

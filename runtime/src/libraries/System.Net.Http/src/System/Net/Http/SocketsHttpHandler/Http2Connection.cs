@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal sealed partial class Http2Connection : HttpConnectionBase
+    partial internal sealed class Http2Connection : HttpConnectionBase
     {
         // Equivalent to the bytes returned from HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewNameToAllocatedArray(":protocol")
         private static ReadOnlySpan<byte> ProtocolLiteralHeaderBytes =>

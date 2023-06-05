@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class DoStatementSyntax
+    partial public class DoStatementSyntax
     {
         public DoStatementSyntax Update(
             SyntaxToken doKeyword,
@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static DoStatementSyntax DoStatement(
             SyntaxToken doKeyword,

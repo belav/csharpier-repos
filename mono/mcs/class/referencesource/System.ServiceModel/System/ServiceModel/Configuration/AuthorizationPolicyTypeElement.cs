@@ -6,7 +6,7 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
 
-    public sealed partial class AuthorizationPolicyTypeElement : ConfigurationElement
+    partial public sealed class AuthorizationPolicyTypeElement : ConfigurationElement
     {
         public AuthorizationPolicyTypeElement() { }
 

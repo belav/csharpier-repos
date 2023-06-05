@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Caching.Distributed
 {
-    public static partial class DistributedCacheEntryExtensions
+    partial public static class DistributedCacheEntryExtensions
     {
         public static Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions SetAbsoluteExpiration(
             this Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions options,
@@ -33,7 +33,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         }
     }
 
-    public partial class DistributedCacheEntryOptions
+    partial public class DistributedCacheEntryOptions
     {
         public DistributedCacheEntryOptions() { }
 
@@ -54,7 +54,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         }
     }
 
-    public static partial class DistributedCacheExtensions
+    partial public static class DistributedCacheExtensions
     {
         public static string? GetString(
             this Microsoft.Extensions.Caching.Distributed.IDistributedCache cache,
@@ -124,7 +124,7 @@ namespace Microsoft.Extensions.Caching.Distributed
         }
     }
 
-    public partial interface IDistributedCache
+    partial public interface IDistributedCache
     {
         byte[]? Get(string key);
         System.Threading.Tasks.Task<byte[]?> GetAsync(
@@ -157,7 +157,7 @@ namespace Microsoft.Extensions.Caching.Distributed
 
 namespace Microsoft.Extensions.Caching.Memory
 {
-    public static partial class CacheEntryExtensions
+    partial public static class CacheEntryExtensions
     {
         public static Microsoft.Extensions.Caching.Memory.ICacheEntry AddExpirationToken(
             this Microsoft.Extensions.Caching.Memory.ICacheEntry entry,
@@ -241,7 +241,7 @@ namespace Microsoft.Extensions.Caching.Memory
         }
     }
 
-    public static partial class CacheExtensions
+    partial public static class CacheExtensions
     {
         public static object? Get(
             this Microsoft.Extensions.Caching.Memory.IMemoryCache cache,
@@ -357,7 +357,7 @@ namespace Microsoft.Extensions.Caching.Memory
         Capacity = 5,
     }
 
-    public partial interface ICacheEntry : System.IDisposable
+    partial public interface ICacheEntry : System.IDisposable
     {
         System.DateTimeOffset? AbsoluteExpiration { get; set; }
         System.TimeSpan? AbsoluteExpirationRelativeToNow { get; set; }
@@ -370,14 +370,14 @@ namespace Microsoft.Extensions.Caching.Memory
         object? Value { get; set; }
     }
 
-    public partial interface IMemoryCache : System.IDisposable
+    partial public interface IMemoryCache : System.IDisposable
     {
         Microsoft.Extensions.Caching.Memory.ICacheEntry CreateEntry(object key);
         void Remove(object key);
         bool TryGetValue(object key, out object? value);
     }
 
-    public static partial class MemoryCacheEntryExtensions
+    partial public static class MemoryCacheEntryExtensions
     {
         public static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions AddExpirationToken(
             this Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions options,
@@ -445,7 +445,7 @@ namespace Microsoft.Extensions.Caching.Memory
         }
     }
 
-    public partial class MemoryCacheEntryOptions
+    partial public class MemoryCacheEntryOptions
     {
         public MemoryCacheEntryOptions() { }
 
@@ -484,7 +484,7 @@ namespace Microsoft.Extensions.Caching.Memory
         }
     }
 
-    public partial class MemoryCacheStatistics
+    partial public class MemoryCacheStatistics
     {
         public MemoryCacheStatistics() { }
 
@@ -510,7 +510,7 @@ namespace Microsoft.Extensions.Caching.Memory
         }
     }
 
-    public partial class PostEvictionCallbackRegistration
+    partial public class PostEvictionCallbackRegistration
     {
         public PostEvictionCallbackRegistration() { }
 
@@ -536,12 +536,12 @@ namespace Microsoft.Extensions.Caching.Memory
 
 namespace Microsoft.Extensions.Internal
 {
-    public partial interface ISystemClock
+    partial public interface ISystemClock
     {
         System.DateTimeOffset UtcNow { get; }
     }
 
-    public partial class SystemClock : Microsoft.Extensions.Internal.ISystemClock
+    partial public class SystemClock : Microsoft.Extensions.Internal.ISystemClock
     {
         public SystemClock() { }
 

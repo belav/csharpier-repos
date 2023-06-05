@@ -39,7 +39,7 @@ using IVsTextBufferCoordinator = Microsoft.VisualStudio.TextManager.Interop.IVsT
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 {
-    internal sealed partial class ContainedDocument
+    partial internal sealed class ContainedDocument
         : ForegroundThreadAffinitizedObject,
             IContainedDocument
     {

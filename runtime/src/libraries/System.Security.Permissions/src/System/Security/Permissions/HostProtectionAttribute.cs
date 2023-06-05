@@ -11,7 +11,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [AttributeUsage((AttributeTargets)(4205), AllowMultiple = true, Inherited = false)]
-    public sealed partial class HostProtectionAttribute : CodeAccessSecurityAttribute
+    partial public sealed class HostProtectionAttribute : CodeAccessSecurityAttribute
     {
         public HostProtectionAttribute()
             : base(default(SecurityAction)) { }

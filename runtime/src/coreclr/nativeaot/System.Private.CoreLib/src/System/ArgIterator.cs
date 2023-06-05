@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace System
 {
     [StructLayout(LayoutKind.Sequential)]
-    public ref struct ArgIterator
+    ref public struct ArgIterator
     {
         public ArgIterator(RuntimeArgumentHandle arglist)
         {

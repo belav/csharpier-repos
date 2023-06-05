@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
     >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseCollectionInitializer)]
-    public partial class UseCollectionInitializerTests
+    partial public class UseCollectionInitializerTests
     {
         private static async Task TestInRegularAndScriptAsync(
             string testCode,

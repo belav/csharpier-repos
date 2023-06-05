@@ -40,7 +40,7 @@ using MonoTests.Helpers;
 namespace MonoTests.System.Xaml
 {
     [TestFixture]
-    public partial class XamlBackgroundReaderTest : XamlReaderTestBase
+    partial public class XamlBackgroundReaderTest : XamlReaderTestBase
     {
         XamlReader GetReader(string filename)
         {

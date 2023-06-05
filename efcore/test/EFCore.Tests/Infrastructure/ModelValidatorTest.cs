@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-public partial class ModelValidatorTest : ModelValidatorTestBase
+partial public class ModelValidatorTest : ModelValidatorTestBase
 {
     [ConditionalFact]
     public virtual void Detects_key_property_which_cannot_be_compared()

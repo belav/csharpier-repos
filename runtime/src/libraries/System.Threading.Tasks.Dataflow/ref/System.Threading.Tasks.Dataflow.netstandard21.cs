@@ -6,7 +6,7 @@
 
 namespace System.Threading.Tasks.Dataflow
 {
-    public static partial class DataflowBlock
+    partial public static class DataflowBlock
     {
         public static System.Collections.Generic.IAsyncEnumerable<TOutput> ReceiveAllAsync<TOutput>(
             this System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput> source,

@@ -41,7 +41,7 @@ using System.Runtime.ConstrainedExecution;
 namespace System.Threading
 {
     [StructLayout(LayoutKind.Sequential)]
-    public abstract partial class WaitHandle
+    partial public abstract class WaitHandle
     {
         protected static readonly IntPtr InvalidHandle = (IntPtr)(-1);
 
@@ -186,7 +186,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal unsafe static extern int Wait_internal(
+        internal static extern unsafe int Wait_internal(
             IntPtr* handles,
             int numHandles,
             bool waitAll,

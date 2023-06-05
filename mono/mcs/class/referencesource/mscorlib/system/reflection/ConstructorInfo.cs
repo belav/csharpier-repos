@@ -38,10 +38,10 @@ namespace System.Reflection
     {
         #region Static Members
         [System.Runtime.InteropServices.ComVisible(true)]
-        public readonly static String ConstructorName = ".ctor";
+        public static readonly String ConstructorName = ".ctor";
 
         [System.Runtime.InteropServices.ComVisible(true)]
-        public readonly static String TypeConstructorName = ".cctor";
+        public static readonly String TypeConstructorName = ".cctor";
         #endregion
 
         #region Constructor

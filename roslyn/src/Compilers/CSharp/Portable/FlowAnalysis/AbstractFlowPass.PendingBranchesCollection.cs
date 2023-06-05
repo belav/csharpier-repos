@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class AbstractFlowPass<TLocalState, TLocalFunctionState>
+    partial internal class AbstractFlowPass<TLocalState, TLocalFunctionState>
     {
         internal sealed class PendingBranchesCollection
         {

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
 {
-    internal sealed partial class CSharpConvertIfToSwitchCodeRefactoringProvider
+    partial internal sealed class CSharpConvertIfToSwitchCodeRefactoringProvider
     {
         private sealed class CSharpAnalyzer : Analyzer
         {

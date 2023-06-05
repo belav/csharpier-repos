@@ -13,7 +13,7 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    public partial class CSharpCodeParser
+    partial public class CSharpCodeParser
         : TokenizerBackedParser<CSharpTokenizer, CSharpSymbol, CSharpSymbolType>
     {
         internal static readonly int UsingKeywordLength = 5; // using

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class CommonReferenceManager<TCompilation, TAssemblySymbol>
+    partial internal class CommonReferenceManager<TCompilation, TAssemblySymbol>
     {
         protected sealed class AssemblyDataForAssemblyBeingBuilt : AssemblyData
         {

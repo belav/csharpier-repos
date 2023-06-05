@@ -3,7 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
-internal abstract partial class SyntaxRewriter : SyntaxVisitor<GreenNode>
+partial internal abstract class SyntaxRewriter : SyntaxVisitor<GreenNode>
 {
     public override GreenNode VisitToken(SyntaxToken token)
     {

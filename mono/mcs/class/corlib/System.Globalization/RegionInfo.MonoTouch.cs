@@ -39,10 +39,10 @@ using System.Runtime.InteropServices;
 
 namespace System.Globalization
 {
-    public partial class RegionInfo
+    partial public class RegionInfo
     {
         [DllImport("__Internal")]
-        extern static string xamarin_get_locale_country_code();
+        static extern string xamarin_get_locale_country_code();
 
         static RegionInfo CreateFromNSLocale()
         {

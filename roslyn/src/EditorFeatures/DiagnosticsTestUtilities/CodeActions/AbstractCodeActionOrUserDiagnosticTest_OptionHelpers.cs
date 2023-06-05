@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
-    public abstract partial class AbstractCodeActionOrUserDiagnosticTest
+    partial public abstract class AbstractCodeActionOrUserDiagnosticTest
     {
         internal static (OptionKey2, object?) SingleOption<T>(Option2<T> option, T enabled) =>
             (new OptionKey2(option), enabled);

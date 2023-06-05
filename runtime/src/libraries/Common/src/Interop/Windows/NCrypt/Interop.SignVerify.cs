@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NCrypt
+    partial internal static class NCrypt
     {
         [LibraryImport(Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static unsafe partial ErrorCode NCryptSignHash(
+        partial internal static unsafe ErrorCode NCryptSignHash(
             SafeNCryptKeyHandle hKey,
             void* pPaddingInfo,
             ReadOnlySpan<byte> pbHashValue,
@@ -22,7 +22,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static unsafe partial ErrorCode NCryptVerifySignature(
+        partial internal static unsafe ErrorCode NCryptVerifySignature(
             SafeNCryptKeyHandle hKey,
             void* pPaddingInfo,
             ReadOnlySpan<byte> pbHashValue,

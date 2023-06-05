@@ -7,6 +7,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Represents a runtime determined type. Runtime determined types are used to represent types
     /// within shared generic method bodies and generic dictionaries. The concrete type will only
@@ -24,7 +25,7 @@ namespace Internal.TypeSystem
     /// Runtime determined types also behave like signature variables in the sense that they allow being
     /// substituted during signature instantiation.
     /// </remarks>
-    public sealed partial class RuntimeDeterminedType : DefType
+    public sealed class RuntimeDeterminedType : DefType
     {
         private DefType _rawCanonType;
         private GenericParameterDesc _runtimeDeterminedDetailsType;

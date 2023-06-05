@@ -64,7 +64,7 @@ namespace EventCounterRegressionTests
         }
     }
 
-    public partial class TestEventCounter
+    partial public class TestEventCounter
     {
         public static int Main()
         {

@@ -8,7 +8,7 @@ namespace System.Runtime.CompilerServices
 {
     [SupportedOSPlatform("windows")]
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited = false)]
-    public sealed partial class IDispatchConstantAttribute : CustomConstantAttribute
+    partial public sealed class IDispatchConstantAttribute : CustomConstantAttribute
     {
         public IDispatchConstantAttribute() { }
 

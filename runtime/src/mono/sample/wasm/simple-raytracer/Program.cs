@@ -331,7 +331,7 @@ public static unsafe class Raytrace
     }
 }
 
-public static partial class Program
+partial public static class Program
 {
     public static void Main()
     {
@@ -340,7 +340,7 @@ public static partial class Program
     }
 
     [JSImport("renderCanvas", "main.js")]
-    static partial void RenderCanvas([JSMarshalAs<JSType.MemoryView>] ArraySegment<byte> rgba);
+    partial static void RenderCanvas([JSMarshalAs<JSType.MemoryView>] ArraySegment<byte> rgba);
 
     [JSExport]
     internal static void OnClick()

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited = false)]
-    public sealed partial class IUnknownConstantAttribute : CustomConstantAttribute
+    partial public sealed class IUnknownConstantAttribute : CustomConstantAttribute
     {
         public IUnknownConstantAttribute() { }
 

@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.ServiceModel.Security;
 
-    public sealed partial class ServiceSecurityAuditElement : BehaviorExtensionElement
+    partial public sealed class ServiceSecurityAuditElement : BehaviorExtensionElement
     {
         public ServiceSecurityAuditElement() { }
 

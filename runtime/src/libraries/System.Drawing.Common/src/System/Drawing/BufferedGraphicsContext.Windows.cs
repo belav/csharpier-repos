@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace System.Drawing
 {
-    public sealed partial class BufferedGraphicsContext : IDisposable
+    partial public sealed class BufferedGraphicsContext : IDisposable
     {
         private Size _bufferSize = Size.Empty;
         private Size _virtualSize;

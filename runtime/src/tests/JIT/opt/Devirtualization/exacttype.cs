@@ -19,7 +19,7 @@ public class Base
 
 public class Derived : Base
 {
-    public override sealed void Foo()
+    public sealed override void Foo()
     {
         Console.WriteLine("Derived:Foo");
     }

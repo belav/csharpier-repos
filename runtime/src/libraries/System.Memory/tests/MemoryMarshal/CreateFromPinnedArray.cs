@@ -8,7 +8,7 @@ using System.Buffers;
 
 namespace System.SpanTests
 {
-    public static partial class MemoryMarshalTests
+    partial public static class MemoryMarshalTests
     {
         [Fact]
         public static void CreateFromPinnedArrayInt()

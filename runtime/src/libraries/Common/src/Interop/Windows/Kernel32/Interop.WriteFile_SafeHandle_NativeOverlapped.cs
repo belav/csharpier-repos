@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         // Note there are two different WriteFile prototypes - this is to use
         // the type system to force you to not trip across a "feature" in
@@ -16,7 +16,7 @@ internal static partial class Interop
         // struct in a callback (or an EndWrite method called by that callback),
         // and pass in an address for the numBytesRead parameter.
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static unsafe partial int WriteFile(
+        partial internal static unsafe int WriteFile(
             SafeHandle handle,
             byte* bytes,
             int numBytesToWrite,
@@ -25,7 +25,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static unsafe partial int WriteFile(
+        partial internal static unsafe int WriteFile(
             SafeHandle handle,
             byte* bytes,
             int numBytesToWrite,

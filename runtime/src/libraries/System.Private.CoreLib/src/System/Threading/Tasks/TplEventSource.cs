@@ -19,7 +19,7 @@ namespace System.Threading.Tasks
 #endif
     )]
     [EventSourceAutoGenerate]
-    internal sealed partial class TplEventSource : EventSource
+    partial internal sealed class TplEventSource : EventSource
     {
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";

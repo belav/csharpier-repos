@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal static partial class DependentTypeFinder
+    partial internal static class DependentTypeFinder
     {
         private class ProjectIndex
         {

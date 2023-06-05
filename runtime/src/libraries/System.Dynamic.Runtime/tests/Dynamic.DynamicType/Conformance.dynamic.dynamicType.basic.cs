@@ -2483,7 +2483,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     public class MyEvent2 : MyEvent1
     {
         internal override event MyEventHandler1 myEvent1;
-        new internal event MyEventHandler2 myEvent2;
+        internal new event MyEventHandler2 myEvent2;
 
         // public event MyEventHandler3 myEvent3;
         public void Fire1(EventArgs e)
@@ -2492,7 +2492,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
                 myEvent1(this, e);
         }
 
-        new internal void Fire2(EventArgs e)
+        internal new void Fire2(EventArgs e)
         {
             if (myEvent2 != null)
                 myEvent2(this);

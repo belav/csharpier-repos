@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Json
 {
-    public sealed partial class Utf8JsonWriter
+    partial public sealed class Utf8JsonWriter
     {
         private void ValidateWritingValue()
         {

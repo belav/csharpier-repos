@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace System.Reflection.Runtime.BindingFlagSupport
 {
-    internal abstract partial class NameFilter
+    partial internal abstract class NameFilter
     {
         protected NameFilter(string expectedName)
         {
@@ -16,7 +16,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         protected string ExpectedName { get; }
     }
 
-    internal sealed partial class NameFilterCaseSensitive : NameFilter
+    partial internal sealed class NameFilterCaseSensitive : NameFilter
     {
         public NameFilterCaseSensitive(string expectedName)
             : base(expectedName) { }
@@ -25,7 +25,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             name.Equals(ExpectedName, StringComparison.Ordinal);
     }
 
-    internal sealed partial class NameFilterCaseInsensitive : NameFilter
+    partial internal sealed class NameFilterCaseInsensitive : NameFilter
     {
         public NameFilterCaseInsensitive(string expectedName)
             : base(expectedName) { }

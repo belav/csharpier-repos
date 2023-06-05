@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
     using Microsoft.CodeAnalysis.Syntax.InternalSyntax;
 
-    internal partial class LanguageParser : SyntaxParser
+    partial internal class LanguageParser : SyntaxParser
     {
         /// <summary>
         /// Parses the type, or pattern, right-hand operand of an is expression.

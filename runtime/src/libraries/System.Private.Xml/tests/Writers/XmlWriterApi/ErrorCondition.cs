@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Xml.XmlWriterApiTests
 {
-    public partial class TCErrorConditionWriter // : XmlWriterTestCaseBase
+    partial public class TCErrorConditionWriter // : XmlWriterTestCaseBase
     {
         public static string file = "writerErr.out";
 

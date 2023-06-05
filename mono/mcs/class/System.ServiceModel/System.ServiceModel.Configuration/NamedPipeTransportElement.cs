@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NamedPipeTransportElement : ConnectionOrientedTransportElement
+    partial public sealed class NamedPipeTransportElement : ConnectionOrientedTransportElement
     {
         ConfigurationPropertyCollection _properties;
 

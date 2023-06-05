@@ -17,10 +17,10 @@ namespace System.Data.OleDb
     [Serializable]
     public sealed class OleDbError
     {
-        readonly private string message;
-        readonly private string source;
-        readonly private string sqlState;
-        readonly private int nativeError;
+        private readonly string message;
+        private readonly string source;
+        private readonly string sqlState;
+        private readonly int nativeError;
 
         internal OleDbError(UnsafeNativeMethods.IErrorRecords errorRecords, int index)
         {
@@ -152,7 +152,7 @@ namespace System.Data.OleDb
             }
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return Message;
         }

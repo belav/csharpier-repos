@@ -24,7 +24,7 @@ using Internal.Reflection.Core.Execution;
 //
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal abstract partial class RuntimeTypeInfo
+    partial internal abstract class RuntimeTypeInfo
     {
         internal IEnumerable<ConstructorInfo> CoreGetDeclaredConstructors(
             NameFilter optionalNameFilter
@@ -156,7 +156,7 @@ namespace System.Reflection.Runtime.TypeInfos
         }
     }
 
-    internal abstract partial class RuntimeNamedTypeInfo
+    partial internal abstract class RuntimeNamedTypeInfo
     {
         // Metadata providing implementations of RuntimeNamedTypeInfo implement the following methods
         // to provide filtered access to the various reflection objects by reading metadata directly.
@@ -187,7 +187,7 @@ namespace System.Reflection.Runtime.TypeInfos
         );
     }
 
-    internal sealed partial class RuntimeConstructedGenericTypeInfo
+    partial internal sealed class RuntimeConstructedGenericTypeInfo
     {
         internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(
             NameFilter optionalNameFilter
@@ -197,7 +197,7 @@ namespace System.Reflection.Runtime.TypeInfos
         }
     }
 
-    internal sealed partial class RuntimeBlockedTypeInfo
+    partial internal sealed class RuntimeBlockedTypeInfo
     {
         internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(
             NameFilter optionalNameFilter
@@ -207,7 +207,7 @@ namespace System.Reflection.Runtime.TypeInfos
         }
     }
 
-    internal sealed partial class RuntimeNoMetadataNamedTypeInfo
+    partial internal sealed class RuntimeNoMetadataNamedTypeInfo
     {
         internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(
             NameFilter optionalNameFilter

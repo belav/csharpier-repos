@@ -2052,7 +2052,7 @@ namespace Moq.Tests.Regressions
                 Assert.IsType<MockException>(exception);
             }
 
-            public partial class MyDbContext : System.Data.Entity.DbContext
+            partial public class MyDbContext : System.Data.Entity.DbContext
             {
                 public virtual System.Data.Entity.DbSet<MyEntity> MyEntity { get; set; }
             }
@@ -2882,7 +2882,7 @@ namespace Moq.Tests.Regressions
                 Assert.Equal("value", mock.Object.Item);
             }
 
-            public abstract partial class HttpContext
+            partial public abstract class HttpContext
             {
                 public abstract IDictionary<object, object> Items { get; set; }
             }

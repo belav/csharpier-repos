@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Metadata
 {
-    public static partial class MetadataUpdater
+    partial public static class MetadataUpdater
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_ApplyUpdate")]
-        private static unsafe partial void ApplyUpdate(
+        partial private static unsafe void ApplyUpdate(
             QCallAssembly assembly,
             byte* metadataDelta,
             int metadataDeltaLength,
@@ -22,7 +22,7 @@ namespace System.Reflection.Metadata
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_IsApplyUpdateSupported")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe partial bool IsApplyUpdateSupported();
+        partial private static unsafe bool IsApplyUpdateSupported();
 
         /// <summary>
         /// Updates the specified assembly using the provided metadata, IL and PDB deltas.

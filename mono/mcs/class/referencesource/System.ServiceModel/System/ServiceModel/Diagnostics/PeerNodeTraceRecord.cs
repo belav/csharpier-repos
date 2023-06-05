@@ -283,7 +283,7 @@ namespace System.ServiceModel.Diagnostics
                 );
         }
 
-        static internal void WriteClaimSet(XmlWriter writer, ClaimSet claimSet)
+        internal static void WriteClaimSet(XmlWriter writer, ClaimSet claimSet)
         {
             writer.WriteStartElement("NeighborCredentials");
             if (claimSet != null)

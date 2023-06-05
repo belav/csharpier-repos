@@ -5,8 +5,9 @@ using Xunit;
 
 namespace System.SpanTests
 {
+    partial
     // Adapted from IndexOf.T.cs
-    public static partial class ReadOnlySpanTests // .Contains<T>
+    public static class ReadOnlySpanTests // .Contains<T>
     {
         [Fact]
         public static void ZeroLengthContains()

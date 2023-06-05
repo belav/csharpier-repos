@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.ServiceModel.Description;
 
-    public sealed partial class ServiceTimeoutsElement : BehaviorExtensionElement
+    partial public sealed class ServiceTimeoutsElement : BehaviorExtensionElement
     {
         public ServiceTimeoutsElement() { }
 

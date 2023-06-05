@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class CustomConverterTests
+    partial public static class CustomConverterTests
     {
         /// <summary>
         /// Demonstrates a <see cref="Dictionary{TKey, TValue}"> converter where TKey is an <see cref="Enum"/> with the string

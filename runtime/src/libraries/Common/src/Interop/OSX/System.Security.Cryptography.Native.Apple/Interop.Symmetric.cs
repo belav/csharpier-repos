@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         internal enum PAL_SymmetricAlgorithm
         {
@@ -43,10 +43,10 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_CryptorFree")]
-        internal static partial void CryptorFree(IntPtr handle);
+        partial internal static void CryptorFree(IntPtr handle);
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_CryptorCreate")]
-        internal static unsafe partial int CryptorCreate(
+        partial internal static unsafe int CryptorCreate(
             PAL_SymmetricOperation operation,
             PAL_SymmetricAlgorithm algorithm,
             PAL_ChainingMode chainingMode,
@@ -60,7 +60,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_CryptorUpdate")]
-        internal static unsafe partial int CryptorUpdate(
+        partial internal static unsafe int CryptorUpdate(
             SafeAppleCryptorHandle cryptor,
             byte* pbData,
             int cbData,
@@ -71,7 +71,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_CryptorReset")]
-        internal static unsafe partial int CryptorReset(
+        partial internal static unsafe int CryptorReset(
             SafeAppleCryptorHandle cryptor,
             byte* pbIv,
             out int ccStatus

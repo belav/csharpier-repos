@@ -27,8 +27,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class GacIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class GacIdentityPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
 #pragma warning disable 618
@@ -44,7 +45,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class GacIdentityPermission : CodeAccessPermission, IBuiltInPermission
+    public sealed class GacIdentityPermission : CodeAccessPermission, IBuiltInPermission
     {
         //------------------------------------------------------
         //

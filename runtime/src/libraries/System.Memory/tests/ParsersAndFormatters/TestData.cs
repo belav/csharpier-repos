@@ -7,10 +7,11 @@ using System.Collections.Generic;
 
 namespace System.Buffers.Text.Tests
 {
+    partial
     //
     // General purpose raw test data.
     //
-    internal static partial class TestData
+    internal static class TestData
     {
         public static readonly IEnumerable<byte> s_precisions = new byte[]
         {

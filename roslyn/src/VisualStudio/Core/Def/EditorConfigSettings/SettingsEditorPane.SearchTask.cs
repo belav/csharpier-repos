@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 {
-    internal sealed partial class SettingsEditorPane
+    partial internal sealed class SettingsEditorPane
     {
         internal class SearchTask : VsSearchTask
         {

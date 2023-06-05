@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwitch
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
-    public partial class PopulateSwitchExpressionTests
+    partial public class PopulateSwitchExpressionTests
     {
         [Fact]
         public async Task TestFixAllInDocument()

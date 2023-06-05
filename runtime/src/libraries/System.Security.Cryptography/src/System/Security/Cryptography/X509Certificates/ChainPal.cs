@@ -3,13 +3,13 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal partial class ChainPal
+    partial internal class ChainPal
     {
-        internal static partial IChainPal FromHandle(IntPtr chainContext);
+        partial internal static IChainPal FromHandle(IntPtr chainContext);
 
-        internal static partial bool ReleaseSafeX509ChainHandle(IntPtr handle);
+        partial internal static bool ReleaseSafeX509ChainHandle(IntPtr handle);
 
-        internal static partial IChainPal? BuildChain(
+        partial internal static IChainPal? BuildChain(
             bool useMachineContext,
             ICertificatePal cert,
             X509Certificate2Collection? extraStore,

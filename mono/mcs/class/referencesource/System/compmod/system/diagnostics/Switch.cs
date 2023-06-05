@@ -344,7 +344,7 @@ namespace System.Diagnostics
             return true;
         }
 
-        virtual protected internal string[] GetSupportedAttributes()
+        protected internal virtual string[] GetSupportedAttributes()
         {
             return null;
         }

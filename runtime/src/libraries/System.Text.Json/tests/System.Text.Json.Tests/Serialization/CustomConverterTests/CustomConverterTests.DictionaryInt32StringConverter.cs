@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class CustomConverterTests
+    partial public static class CustomConverterTests
     {
         /// <summary>
         /// Demonstrates a <see cref="Dictionary{int, string}"> converter using a JSON object with property names representing keys.

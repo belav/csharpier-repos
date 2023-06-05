@@ -12,11 +12,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
+    partial
     // This file contains the current FindReferences APIs.  The current APIs allow for OOP
     // implementation and will defer to the oop server if it is available.  If not, it will
     // compute the results in process.
 
-    public static partial class SymbolFinder
+    public static class SymbolFinder
     {
         internal static async Task FindReferencesAsync(
             ISymbol symbol,

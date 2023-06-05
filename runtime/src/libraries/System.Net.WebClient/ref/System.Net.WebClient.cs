@@ -6,7 +6,7 @@
 
 namespace System.Net
 {
-    public partial class DownloadDataCompletedEventArgs
+    partial public class DownloadDataCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal DownloadDataCompletedEventArgs()
@@ -23,7 +23,7 @@ namespace System.Net
         System.Net.DownloadDataCompletedEventArgs e
     );
 
-    public partial class DownloadProgressChangedEventArgs
+    partial public class DownloadProgressChangedEventArgs
         : System.ComponentModel.ProgressChangedEventArgs
     {
         internal DownloadProgressChangedEventArgs()
@@ -44,7 +44,7 @@ namespace System.Net
         System.Net.DownloadProgressChangedEventArgs e
     );
 
-    public partial class DownloadStringCompletedEventArgs
+    partial public class DownloadStringCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal DownloadStringCompletedEventArgs()
@@ -61,7 +61,7 @@ namespace System.Net
         System.Net.DownloadStringCompletedEventArgs e
     );
 
-    public partial class OpenReadCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    partial public class OpenReadCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal OpenReadCompletedEventArgs()
             : base(default(System.Exception), default(bool), default(object)) { }
@@ -77,7 +77,7 @@ namespace System.Net
         System.Net.OpenReadCompletedEventArgs e
     );
 
-    public partial class OpenWriteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    partial public class OpenWriteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal OpenWriteCompletedEventArgs()
             : base(default(System.Exception), default(bool), default(object)) { }
@@ -93,7 +93,7 @@ namespace System.Net
         System.Net.OpenWriteCompletedEventArgs e
     );
 
-    public partial class UploadDataCompletedEventArgs
+    partial public class UploadDataCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal UploadDataCompletedEventArgs()
@@ -110,7 +110,7 @@ namespace System.Net
         System.Net.UploadDataCompletedEventArgs e
     );
 
-    public partial class UploadFileCompletedEventArgs
+    partial public class UploadFileCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal UploadFileCompletedEventArgs()
@@ -127,7 +127,7 @@ namespace System.Net
         System.Net.UploadFileCompletedEventArgs e
     );
 
-    public partial class UploadProgressChangedEventArgs
+    partial public class UploadProgressChangedEventArgs
         : System.ComponentModel.ProgressChangedEventArgs
     {
         internal UploadProgressChangedEventArgs()
@@ -156,7 +156,7 @@ namespace System.Net
         System.Net.UploadProgressChangedEventArgs e
     );
 
-    public partial class UploadStringCompletedEventArgs
+    partial public class UploadStringCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal UploadStringCompletedEventArgs()
@@ -173,7 +173,7 @@ namespace System.Net
         System.Net.UploadStringCompletedEventArgs e
     );
 
-    public partial class UploadValuesCompletedEventArgs
+    partial public class UploadValuesCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal UploadValuesCompletedEventArgs()
@@ -190,7 +190,7 @@ namespace System.Net
         System.Net.UploadValuesCompletedEventArgs e
     );
 
-    public partial class WebClient : System.ComponentModel.Component
+    partial public class WebClient : System.ComponentModel.Component
     {
         [System.ObsoleteAttribute(
             "WebRequest, HttpWebRequest, ServicePoint, and WebClient are obsolete. Use HttpClient instead.",
@@ -839,7 +839,7 @@ namespace System.Net
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial class WriteStreamClosedEventArgs : System.EventArgs
+    partial public class WriteStreamClosedEventArgs : System.EventArgs
     {
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never

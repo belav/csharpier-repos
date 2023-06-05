@@ -13,7 +13,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml
 {
-    internal sealed partial class DtdParser : IDtdParser
+    partial internal sealed class DtdParser : IDtdParser
     {
         //
         // Private types

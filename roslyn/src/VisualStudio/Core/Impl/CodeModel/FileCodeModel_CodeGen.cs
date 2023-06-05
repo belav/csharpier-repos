@@ -19,10 +19,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
+    partial
     /// <summary>
     /// Implementations of EnvDTE.FileCodeModel for both languages.
     /// </summary>
-    public sealed partial class FileCodeModel
+    public sealed class FileCodeModel
     {
         private SyntaxNode InsertAttribute(
             SyntaxNode containerNode,

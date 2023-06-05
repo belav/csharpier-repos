@@ -6,8 +6,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Formats.Tar
 {
+    partial
     // Windows specific methods for the TarEntry class.
-    public abstract partial class TarEntry
+    public abstract class TarEntry
     {
 #pragma warning disable IDE0060
         // Throws on Windows. Block devices are not supported on this platform.

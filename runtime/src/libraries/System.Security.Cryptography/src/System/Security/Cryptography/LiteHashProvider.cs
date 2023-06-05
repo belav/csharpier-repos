@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class LiteHashProvider
+    partial internal static class LiteHashProvider
     {
         internal static int HashStream(
             string hashAlgorithmId,

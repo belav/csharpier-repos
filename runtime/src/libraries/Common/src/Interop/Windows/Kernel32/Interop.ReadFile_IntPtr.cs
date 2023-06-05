@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static unsafe partial int ReadFile(
+        partial internal static unsafe int ReadFile(
             IntPtr handle,
             byte* bytes,
             int numBytesToRead,

@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class TryStatementSyntax
+    partial public class TryStatementSyntax
     {
         public TryStatementSyntax Update(
             SyntaxToken tryKeyword,
@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static TryStatementSyntax TryStatement(
             BlockSyntax block,

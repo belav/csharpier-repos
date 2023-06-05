@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings
 {
-    internal partial class SettingsAggregator : ISettingsAggregator
+    partial internal class SettingsAggregator : ISettingsAggregator
     {
         private readonly Workspace _workspace;
         private readonly ISettingsProviderFactory<AnalyzerSetting> _analyzerProvider;

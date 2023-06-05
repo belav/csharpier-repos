@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-public partial class HubConnectionTests
+partial public class HubConnectionTests
 {
     private static HubConnection CreateHubConnection(
         TestConnection connection,

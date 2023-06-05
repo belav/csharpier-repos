@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 namespace System.IO
 {
-    public sealed partial class DriveInfo : ISerializable
+    partial public sealed class DriveInfo : ISerializable
     {
         private readonly string _name;
 

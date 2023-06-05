@@ -15,7 +15,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System
 {
-    public abstract partial class Type : MemberInfo, IReflect
+    partial public abstract class Type : MemberInfo, IReflect
     {
         public bool IsInterface =>
             (GetAttributeFlagsImpl() & TypeAttributes.ClassSemanticsMask)

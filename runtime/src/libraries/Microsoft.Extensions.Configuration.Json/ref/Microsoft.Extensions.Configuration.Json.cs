@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public static partial class JsonConfigurationExtensions
+    partial public static class JsonConfigurationExtensions
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddJsonFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
@@ -66,7 +66,7 @@ namespace Microsoft.Extensions.Configuration
 
 namespace Microsoft.Extensions.Configuration.Json
 {
-    public partial class JsonConfigurationProvider
+    partial public class JsonConfigurationProvider
         : Microsoft.Extensions.Configuration.FileConfigurationProvider
     {
         public JsonConfigurationProvider(
@@ -77,7 +77,7 @@ namespace Microsoft.Extensions.Configuration.Json
         public override void Load(System.IO.Stream stream) { }
     }
 
-    public partial class JsonConfigurationSource
+    partial public class JsonConfigurationSource
         : Microsoft.Extensions.Configuration.FileConfigurationSource
     {
         public JsonConfigurationSource() { }
@@ -90,7 +90,7 @@ namespace Microsoft.Extensions.Configuration.Json
         }
     }
 
-    public partial class JsonStreamConfigurationProvider
+    partial public class JsonStreamConfigurationProvider
         : Microsoft.Extensions.Configuration.StreamConfigurationProvider
     {
         public JsonStreamConfigurationProvider(
@@ -101,7 +101,7 @@ namespace Microsoft.Extensions.Configuration.Json
         public override void Load(System.IO.Stream stream) { }
     }
 
-    public partial class JsonStreamConfigurationSource
+    partial public class JsonStreamConfigurationSource
         : Microsoft.Extensions.Configuration.StreamConfigurationSource
     {
         public JsonStreamConfigurationSource() { }

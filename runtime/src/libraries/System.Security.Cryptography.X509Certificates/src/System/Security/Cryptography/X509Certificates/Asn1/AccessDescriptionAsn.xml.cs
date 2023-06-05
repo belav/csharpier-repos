@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct AccessDescriptionAsn
+    partial internal struct AccessDescriptionAsn
     {
         internal string AccessMethod;
         internal System.Security.Cryptography.Asn1.GeneralNameAsn AccessLocation;

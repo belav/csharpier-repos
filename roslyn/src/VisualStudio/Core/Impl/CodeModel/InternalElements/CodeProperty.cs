@@ -15,7 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeProperty2))]
-    public sealed partial class CodeProperty
+    partial public sealed class CodeProperty
         : AbstractCodeMember,
             ICodeElementContainer<CodeParameter>,
             ICodeElementContainer<CodeAttribute>,

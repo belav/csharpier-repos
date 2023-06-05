@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.ComponentModel;
     using System.ServiceModel.Channels;
 
-    public sealed partial class XmlDictionaryReaderQuotasElement : ServiceModelConfigurationElement
+    partial public sealed class XmlDictionaryReaderQuotasElement : ServiceModelConfigurationElement
     {
         // for all properties, a value of 0 means "just use the default"
         [ConfigurationProperty(ConfigurationStrings.MaxDepth, DefaultValue = 0)]

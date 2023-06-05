@@ -6,10 +6,11 @@ using System.Globalization;
 
 namespace System.Drawing.Printing
 {
+    partial
     /// <summary>
     /// Retrieves the resolution supported by a printer.
     /// </summary>
-    public partial class PrinterResolution
+    public class PrinterResolution
     {
         private int _x;
         private int _y;

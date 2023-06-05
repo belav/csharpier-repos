@@ -97,12 +97,13 @@ namespace System.ServiceModel
         }
     }
 
+    partial
     /// <summary>
     ///    This is a stub for auto-generated resource class, providing GetString function. Usage:
     ///
     ///        string s = SR2.GetString(SR2.MyIdenfitier);
     /// </summary>
-    sealed partial class SR2
+    sealed class SR2
     {
         internal static string GetString(string name, params object[] args)
         {

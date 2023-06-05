@@ -7,8 +7,9 @@ using Xunit;
 
 namespace System.IO.Tests
 {
+    partial
     // Contains helper methods that are shared by all symbolic link test classes.
-    public abstract partial class BaseSymbolicLinks : FileSystemTest
+    public abstract class BaseSymbolicLinks : FileSystemTest
     {
         public BaseSymbolicLinks()
         {

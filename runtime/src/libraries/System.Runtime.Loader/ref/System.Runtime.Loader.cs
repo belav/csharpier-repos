@@ -6,10 +6,10 @@
 
 namespace System.Reflection.Metadata
 {
-    public static partial class AssemblyExtensions
+    partial public static class AssemblyExtensions
     {
         [System.CLSCompliantAttribute(false)]
-        public unsafe static bool TryGetRawMetadata(
+        public static unsafe bool TryGetRawMetadata(
             this System.Reflection.Assembly assembly,
             out byte* blob,
             out int length
@@ -19,7 +19,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public static partial class MetadataUpdater
+    partial public static class MetadataUpdater
     {
         public static void ApplyUpdate(
             Assembly assembly,
@@ -90,7 +90,7 @@ namespace System.Runtime.Loader
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public sealed partial class AssemblyDependencyResolver
+    partial public sealed class AssemblyDependencyResolver
     {
         public AssemblyDependencyResolver(string componentAssemblyPath) { }
 
@@ -105,7 +105,7 @@ namespace System.Runtime.Loader
         }
     }
 
-    public partial class AssemblyLoadContext
+    partial public class AssemblyLoadContext
     {
         protected AssemblyLoadContext() { }
 
@@ -263,7 +263,7 @@ namespace System.Runtime.Loader
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public partial struct ContextualReflectionScope : System.IDisposable
+        partial public struct ContextualReflectionScope : System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;

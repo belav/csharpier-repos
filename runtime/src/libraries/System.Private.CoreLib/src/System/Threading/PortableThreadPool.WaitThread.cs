@@ -7,10 +7,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Threading
 {
+    partial
     /// <summary>
     /// The info for a completed wait on a specific <see cref="RegisteredWaitHandle"/>.
     /// </summary>
-    internal sealed partial class CompleteWaitThreadPoolWorkItem : IThreadPoolWorkItem
+    internal sealed class CompleteWaitThreadPoolWorkItem : IThreadPoolWorkItem
     {
         private RegisteredWaitHandle _registeredWaitHandle;
         private bool _timedOut;
@@ -25,7 +26,7 @@ namespace System.Threading
         }
     }
 
-    internal sealed partial class PortableThreadPool
+    partial internal sealed class PortableThreadPool
     {
         /// <summary>
         /// A linked list of <see cref="WaitThread"/>s.

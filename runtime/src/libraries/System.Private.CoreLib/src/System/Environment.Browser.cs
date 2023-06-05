@@ -5,7 +5,7 @@ using System.IO;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         // Emscripten VFS mounts at / and is the only drive
         public static string[] GetLogicalDrives() => DriveInfoInternal.GetLogicalDrives();

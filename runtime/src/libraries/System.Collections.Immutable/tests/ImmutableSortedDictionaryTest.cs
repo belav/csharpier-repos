@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public partial class ImmutableSortedDictionaryTest : ImmutableDictionaryTestBase
+    partial public class ImmutableSortedDictionaryTest : ImmutableDictionaryTestBase
     {
         private enum Operation
         {

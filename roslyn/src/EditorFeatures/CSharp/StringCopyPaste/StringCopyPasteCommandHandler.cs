@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
     [ContentType(ContentTypeNames.CSharpContentType)]
     [Name(PredefinedCommandHandlerNames.StringCopyPaste)]
     [Order(After = PredefinedCommandHandlerNames.FormatDocument)]
-    internal partial class StringCopyPasteCommandHandler
+    partial internal class StringCopyPasteCommandHandler
         : IChainedCommandHandler<CutCommandArgs>,
             IChainedCommandHandler<CopyCommandArgs>,
             IChainedCommandHandler<PasteCommandArgs>

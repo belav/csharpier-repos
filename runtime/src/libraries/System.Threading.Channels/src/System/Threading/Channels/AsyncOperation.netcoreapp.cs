@@ -3,7 +3,7 @@
 
 namespace System.Threading.Channels
 {
-    internal partial class AsyncOperation<TResult> : IThreadPoolWorkItem
+    partial internal class AsyncOperation<TResult> : IThreadPoolWorkItem
     {
         void IThreadPoolWorkItem.Execute() => SetCompletionAndInvokeContinuation();
 

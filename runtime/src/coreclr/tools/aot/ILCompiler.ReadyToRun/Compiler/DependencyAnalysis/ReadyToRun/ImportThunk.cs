@@ -7,11 +7,12 @@ using System.Diagnostics;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
+    partial
     /// <summary>
     /// This node emits a thunk calling DelayLoad_Helper with a given instance signature
     /// to populate its indirection cell.
     /// </summary>
-    public partial class ImportThunk : AssemblyStubNode, ISymbolDefinitionNode
+    public class ImportThunk : AssemblyStubNode, ISymbolDefinitionNode
     {
         enum Kind
         {

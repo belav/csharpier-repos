@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatements
 {
-    public sealed partial class MergeConsecutiveIfStatementsTests
+    partial public sealed class MergeConsecutiveIfStatementsTests
     {
         [Theory]
         [InlineData("[||]if (a)")]

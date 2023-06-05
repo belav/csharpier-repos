@@ -3,10 +3,11 @@
 
 namespace System.Buffers.Text
 {
+    partial
     //
     // Parsing unsigned integers for the 'N' format. Emulating int.TryParse(NumberStyles.AllowThousands | NumberStyles.Integer | NumberStyles.AllowDecimalPoint)
     //
-    public static partial class Utf8Parser
+    public static class Utf8Parser
     {
         private static bool TryParseByteN(
             ReadOnlySpan<byte> source,

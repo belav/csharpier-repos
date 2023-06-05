@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
 {
-    internal partial class EventHookupCommandHandler : IChainedCommandHandler<TypeCharCommandArgs>
+    partial internal class EventHookupCommandHandler : IChainedCommandHandler<TypeCharCommandArgs>
     {
         public void ExecuteCommand(
             TypeCharCommandArgs args,

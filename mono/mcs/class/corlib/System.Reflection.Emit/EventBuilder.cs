@@ -84,7 +84,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class EventBuilder
+    partial public sealed class EventBuilder
     {
 #pragma warning disable 169, 414
         internal string name;

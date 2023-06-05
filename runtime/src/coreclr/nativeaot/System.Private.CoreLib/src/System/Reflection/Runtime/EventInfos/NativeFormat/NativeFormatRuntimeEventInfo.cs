@@ -22,7 +22,7 @@ using Internal.Reflection.Core.Execution;
 namespace System.Reflection.Runtime.EventInfos.NativeFormat
 {
     [DebuggerDisplay("{_debugName}")]
-    internal sealed partial class NativeFormatRuntimeEventInfo : RuntimeEventInfo
+    partial internal sealed class NativeFormatRuntimeEventInfo : RuntimeEventInfo
     {
         //
         // eventHandle    - the "tkEventDef" that identifies the event.

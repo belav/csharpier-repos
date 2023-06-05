@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace System.Formats.Asn1
 {
-    public sealed partial class AsnWriter
+    partial public sealed class AsnWriter
     {
         /// <summary>
         ///   Write an Integer value with a specified tag.

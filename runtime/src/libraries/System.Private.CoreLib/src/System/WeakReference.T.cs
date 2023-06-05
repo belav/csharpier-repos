@@ -15,8 +15,9 @@ namespace System
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
+    partial
     // This class is sealed to mitigate security issues caused by Object::MemberwiseClone.
-    public sealed partial class WeakReference<T> : ISerializable
+    public sealed class WeakReference<T> : ISerializable
         where T : class?
     {
         // If you fix bugs here, please fix them in WeakReference at the same time.

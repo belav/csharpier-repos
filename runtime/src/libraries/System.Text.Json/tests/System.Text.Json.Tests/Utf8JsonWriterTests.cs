@@ -17,7 +17,7 @@ using Xunit;
 
 namespace System.Text.Json.Tests
 {
-    public partial class Utf8JsonWriterTests
+    partial public class Utf8JsonWriterTests
     {
         private const int MaxExpansionFactorWhileEscaping = 6;
         private const int MaxEscapedTokenSize = 1_000_000_000; // Max size for already escaped value.

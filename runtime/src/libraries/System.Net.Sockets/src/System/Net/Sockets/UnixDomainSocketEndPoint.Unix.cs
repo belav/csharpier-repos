@@ -6,8 +6,9 @@ using System.Text;
 
 namespace System.Net.Sockets
 {
+    partial
     /// <summary>Represents a Unix Domain Socket endpoint as a path.</summary>
-    public sealed partial class UnixDomainSocketEndPoint : EndPoint
+    public sealed class UnixDomainSocketEndPoint : EndPoint
     {
         private static readonly int s_nativePathOffset;
         private static readonly int s_nativePathLength;

@@ -7,10 +7,11 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Runtime;
 
+    partial
     /// <summary>
     /// HttpMessageHandlerFactoryElement for HttpMessageHandlerFactory
     /// </summary>
-    public sealed partial class HttpMessageHandlerFactoryElement : ConfigurationElement
+    public sealed class HttpMessageHandlerFactoryElement : ConfigurationElement
     {
         public HttpMessageHandlerFactoryElement() { }
 

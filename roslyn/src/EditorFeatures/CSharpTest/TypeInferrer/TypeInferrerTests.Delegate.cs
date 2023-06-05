@@ -15,7 +15,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
 {
     [Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-    public partial class TypeInferrerTests
+    partial public class TypeInferrerTests
     {
         private async Task TestDelegateAsync(string text, string expectedType)
         {

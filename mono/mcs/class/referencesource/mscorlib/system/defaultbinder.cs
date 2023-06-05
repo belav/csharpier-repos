@@ -20,7 +20,7 @@ namespace System
 
     //Marked serializable even though it has no state.
     [Serializable]
-    internal partial class DefaultBinder : Binder
+    partial internal class DefaultBinder : Binder
     {
         // This method is passed a set of methods and must choose the best
         // fit.  The methods all have the same number of arguments and the object
@@ -1326,7 +1326,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern bool CanConvertPrimitiveObjectToType(
+        internal static extern bool CanConvertPrimitiveObjectToType(
             Object source,
             RuntimeType type
         );

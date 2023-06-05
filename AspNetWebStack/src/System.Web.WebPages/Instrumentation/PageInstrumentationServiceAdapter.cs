@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace System.Web.WebPages.Instrumentation
 {
-    internal partial class PageInstrumentationServiceAdapter
+    partial internal class PageInstrumentationServiceAdapter
     {
         private static readonly Type _targetType = typeof(HttpContext).Assembly.GetType(
             "System.Web.Instrumentation.PageInstrumentationService"

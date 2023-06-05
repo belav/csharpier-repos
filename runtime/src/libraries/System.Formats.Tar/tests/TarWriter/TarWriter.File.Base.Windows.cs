@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public partial class TarWriter_File_Base : TarTestsBase
+    partial public class TarWriter_File_Base : TarTestsBase
     {
         protected void VerifyPlatformSpecificMetadata(string filePath, TarEntry entry)
         {

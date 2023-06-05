@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
     [BracePair(DoubleQuote.OpenCharacter, DoubleQuote.CloseCharacter)]
     [BracePair(Parenthesis.OpenCharacter, Parenthesis.CloseCharacter)]
     [BracePair(LessAndGreaterThan.OpenCharacter, LessAndGreaterThan.CloseCharacter)]
-    internal partial class BraceCompletionSessionProvider : IBraceCompletionSessionProvider
+    partial internal class BraceCompletionSessionProvider : IBraceCompletionSessionProvider
     {
         private readonly IThreadingContext _threadingContext;
         private readonly ITextBufferUndoManagerProvider _undoManager;

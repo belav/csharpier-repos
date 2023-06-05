@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class SourceNamespaceSymbol
+    partial internal class SourceNamespaceSymbol
     {
         internal override void ForceComplete(
             SourceLocation locationOpt,

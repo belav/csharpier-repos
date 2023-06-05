@@ -31,7 +31,7 @@ using Formatter = Microsoft.CodeAnalysis.Formatting.Formatter;
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
 {
     [ExportLanguageService(typeof(IRemoveUnnecessaryImportsService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpRemoveUnnecessaryImportsService
+    partial internal class CSharpRemoveUnnecessaryImportsService
         : AbstractRemoveUnnecessaryImportsService<UsingDirectiveSyntax>
     {
         [ImportingConstructor]

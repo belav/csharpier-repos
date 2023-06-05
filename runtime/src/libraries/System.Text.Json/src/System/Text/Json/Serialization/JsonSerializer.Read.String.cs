@@ -9,11 +9,12 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
+    partial
     /// <summary>
     /// Provides functionality to serialize objects or value types to JSON and
     /// deserialize JSON into objects or value types.
     /// </summary>
-    public static partial class JsonSerializer
+    public static class JsonSerializer
     {
         /// <summary>
         /// Parses the text representing a single JSON value into a <typeparamref name="TValue"/>.

@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
-public abstract partial class ModelBuilderTest
+partial public abstract class ModelBuilderTest
 {
     protected class BigMak
     {

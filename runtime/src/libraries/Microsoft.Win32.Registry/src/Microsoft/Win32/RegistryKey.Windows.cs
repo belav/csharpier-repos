@@ -58,7 +58,7 @@ using System.Text;
 
 namespace Microsoft.Win32
 {
-    public sealed partial class RegistryKey : MarshalByRefObject, IDisposable
+    partial public sealed class RegistryKey : MarshalByRefObject, IDisposable
     {
         private static void ClosePerfDataKey()
         {

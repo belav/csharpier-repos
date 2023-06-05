@@ -418,12 +418,12 @@ namespace SampleMetadata
         public class N2 { }
     }
 
-    public ref struct SampleByRefLikeStruct1 { }
+    ref public struct SampleByRefLikeStruct1 { }
 
-    public ref struct SampleByRefLikeStruct2<T> { }
+    ref public struct SampleByRefLikeStruct2<T> { }
 
     [SampleCustom("Yeah")]
-    public ref struct SampleByRefLikeStruct3 { }
+    ref public struct SampleByRefLikeStruct3 { }
 
     [Guid("E73CFD63-6BD8-432D-A71B-E1E54AD55914")]
     public class ClassWithGuid { };

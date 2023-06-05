@@ -10,11 +10,12 @@ using System.Diagnostics;
 
 namespace System.IO.Pipes
 {
+    partial
     /// <summary>
     /// Named pipe client. Use this to open the client end of a named pipes created with
     /// NamedPipeServerStream.
     /// </summary>
-    public sealed partial class NamedPipeClientStream : PipeStream
+    public sealed class NamedPipeClientStream : PipeStream
     {
         // Maximum interval in milliseconds between which cancellation is checked.
         // Used by ConnectInternal. 50ms is fairly responsive time but really long time for processor.

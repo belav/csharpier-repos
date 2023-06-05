@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths.Axes
 {
+    partial
     /// <summary>
     /// Location Paths - Axes (Complex expressions)
     /// </summary>
-    public static partial class ComplexExpressionsTests
+    public static class ComplexExpressionsTests
     {
         /// <summary>
         /// Expression combines child,ancestor and attribute axes

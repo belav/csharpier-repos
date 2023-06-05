@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
 {
-    internal partial class SmartIndent : ISmartIndent
+    partial internal class SmartIndent : ISmartIndent
     {
         private readonly ITextView _textView;
         private readonly EditorOptionsService _editorOptionsService;

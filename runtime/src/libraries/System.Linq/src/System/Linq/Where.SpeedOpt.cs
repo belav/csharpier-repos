@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        private sealed partial class WhereEnumerableIterator<TSource> : IIListProvider<TSource>
+        partial private sealed class WhereEnumerableIterator<TSource> : IIListProvider<TSource>
         {
             public int GetCount(bool onlyIfCheap)
             {
@@ -63,7 +63,7 @@ namespace System.Linq
             }
         }
 
-        internal sealed partial class WhereArrayIterator<TSource> : IIListProvider<TSource>
+        partial internal sealed class WhereArrayIterator<TSource> : IIListProvider<TSource>
         {
             public int GetCount(bool onlyIfCheap)
             {
@@ -119,7 +119,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class WhereListIterator<TSource>
+        partial private sealed class WhereListIterator<TSource>
             : Iterator<TSource>,
                 IIListProvider<TSource>
         {
@@ -180,7 +180,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class WhereSelectArrayIterator<TSource, TResult>
+        partial private sealed class WhereSelectArrayIterator<TSource, TResult>
             : IIListProvider<TResult>
         {
             public int GetCount(bool onlyIfCheap)
@@ -241,7 +241,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class WhereSelectListIterator<TSource, TResult>
+        partial private sealed class WhereSelectListIterator<TSource, TResult>
             : IIListProvider<TResult>
         {
             public int GetCount(bool onlyIfCheap)
@@ -305,7 +305,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class WhereSelectEnumerableIterator<TSource, TResult>
+        partial private sealed class WhereSelectEnumerableIterator<TSource, TResult>
             : IIListProvider<TResult>
         {
             public int GetCount(bool onlyIfCheap)

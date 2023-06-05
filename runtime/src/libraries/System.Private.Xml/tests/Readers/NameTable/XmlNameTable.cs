@@ -13,7 +13,7 @@ namespace System.Xml.NameTableTests
     //
     ////////////////////////////////////////////////////////////////
     [TestModule(Name = "Name Table", Desc = "Test for Get and Add methods")]
-    public partial class CNameTableTestModule : CTestModule
+    partial public class CNameTableTestModule : CTestModule
     {
         //Accessors
         private string _TestData = null;
@@ -41,11 +41,12 @@ namespace System.Xml.NameTableTests
         }
     }
 
+    partial
     ////////////////////////////////////////////////////////////////
     // TestCase TCBase
     //
     ////////////////////////////////////////////////////////////////
-    public partial class TCBase : CTestCase
+    public class TCBase : CTestCase
     {
         public enum ENAMETABLE_VER
         {
@@ -178,6 +179,7 @@ namespace System.Xml.NameTableTests
         }
     }
 
+    partial
     ////////////////////////////////////////////////////////////////
     // TestCase TCRecord    NameTable.Get
     //
@@ -186,7 +188,7 @@ namespace System.Xml.NameTableTests
     //[TestCase(Name="NameTable(Get) VerifyWGetString", Desc="VerifyWGetString")]
     //[TestCase(Name="NameTable(Get) VerifyWAddString", Desc="VerifyWAddString")]
     //[TestCase(Name="NameTable(Get) VerifyWAddChar", Desc="VerifyWAddChar")]
-    public partial class TCRecordNameTableGet : TCBase
+    public class TCRecordNameTableGet : TCBase
     {
         public static char[] chInv = { 'U', 'n', 'a', 't', 'o', 'm', 'i', 'z', 'e', 'd' };
         public static char[] chVal = { 'P', 'L', 'A', 'Y' };
@@ -674,6 +676,7 @@ namespace System.Xml.NameTableTests
         }
     }
 
+    partial
     ////////////////////////////////////////////////////////////////
     // TestCase TCRecord    NameTable.Add
     //
@@ -682,7 +685,7 @@ namespace System.Xml.NameTableTests
     //[TestCase(Name="NameTable(Add) VerifyWGetChar", Desc="VerifyWGetChar")]
     //[TestCase(Name="NameTable(Add) VerifyWAddString", Desc="VerifyWAddString")]
     //[TestCase(Name="NameTable(Add) VerifyWAddChar", Desc="VerifyWAddChar")]
-    public partial class TCRecordNameTableAdd : TCBase
+    public class TCRecordNameTableAdd : TCBase
     {
         public static char[] chVal = { 'F', 'O', 'O' };
         public static char[] chValW1EndExtra = { 'F', 'O', 'O', 'O' };

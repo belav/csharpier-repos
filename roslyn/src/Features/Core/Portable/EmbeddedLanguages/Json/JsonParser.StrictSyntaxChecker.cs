@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
     using JsonTrivia = EmbeddedSyntaxTrivia<JsonKind>;
 
-    internal partial struct JsonParser
+    partial internal struct JsonParser
     {
         /// <summary>
         /// Checks the superset-tree for constructs that aren't allowed in strict rfc8259

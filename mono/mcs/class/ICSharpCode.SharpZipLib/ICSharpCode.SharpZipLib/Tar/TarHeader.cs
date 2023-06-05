@@ -83,27 +83,27 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// The length of the name field in a header buffer.
         /// </summary>
-        public readonly static int NAMELEN = 100;
+        public static readonly int NAMELEN = 100;
 
         /// <summary>
         /// The length of the mode field in a header buffer.
         /// </summary>
-        public readonly static int MODELEN = 8;
+        public static readonly int MODELEN = 8;
 
         /// <summary>
         /// The length of the user id field in a header buffer.
         /// </summary>
-        public readonly static int UIDLEN = 8;
+        public static readonly int UIDLEN = 8;
 
         /// <summary>
         /// The length of the group id field in a header buffer.
         /// </summary>
-        public readonly static int GIDLEN = 8;
+        public static readonly int GIDLEN = 8;
 
         /// <summary>
         /// The length of the checksum field in a header buffer.
         /// </summary>
-        public readonly static int CHKSUMLEN = 8;
+        public static readonly int CHKSUMLEN = 8;
 
         /// <summary>
         /// Offset of checksum in a header buffer.
@@ -113,37 +113,37 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// The length of the size field in a header buffer.
         /// </summary>
-        public readonly static int SIZELEN = 12;
+        public static readonly int SIZELEN = 12;
 
         /// <summary>
         /// The length of the magic field in a header buffer.
         /// </summary>
-        public readonly static int MAGICLEN = 6;
+        public static readonly int MAGICLEN = 6;
 
         /// <summary>
         /// The length of the version field in a header buffer.
         /// </summary>
-        public readonly static int VERSIONLEN = 2;
+        public static readonly int VERSIONLEN = 2;
 
         /// <summary>
         /// The length of the modification time field in a header buffer.
         /// </summary>
-        public readonly static int MODTIMELEN = 12;
+        public static readonly int MODTIMELEN = 12;
 
         /// <summary>
         /// The length of the user name field in a header buffer.
         /// </summary>
-        public readonly static int UNAMELEN = 32;
+        public static readonly int UNAMELEN = 32;
 
         /// <summary>
         /// The length of the group name field in a header buffer.
         /// </summary>
-        public readonly static int GNAMELEN = 32;
+        public static readonly int GNAMELEN = 32;
 
         /// <summary>
         /// The length of the devices field in a header buffer.
         /// </summary>
-        public readonly static int DEVLEN = 8;
+        public static readonly int DEVLEN = 8;
 
         //
         // LF_ constants represent the "type" of an entry
@@ -202,7 +202,7 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// Posix.1 2001 extended header
         /// </summary>
-        public readonly static byte LF_XHDR = (byte)'x';
+        public static readonly byte LF_XHDR = (byte)'x';
 
         // POSIX allows for upper case ascii type as extensions
 
@@ -261,12 +261,12 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// The magic tag representing a POSIX tar archive.  (includes trailing NULL)
         /// </summary>
-        public readonly static string TMAGIC = "ustar ";
+        public static readonly string TMAGIC = "ustar ";
 
         /// <summary>
         /// The magic tag representing an old GNU tar archive where version is included in magic and overwrites it
         /// </summary>
-        public readonly static string GNU_TMAGIC = "ustar  ";
+        public static readonly string GNU_TMAGIC = "ustar  ";
 
         string name;
 
@@ -562,18 +562,19 @@ namespace ICSharpCode.SharpZipLib.Tar
             this.Size = 0;
         }
 
+        internal
         // Values used during recursive operations.
-        static internal int userIdAsSet = 0;
-        static internal int groupIdAsSet = 0;
-        static internal string userNameAsSet = null;
-        static internal string groupNameAsSet = "None";
+        static int userIdAsSet = 0;
+        internal static int groupIdAsSet = 0;
+        internal static string userNameAsSet = null;
+        internal static string groupNameAsSet = "None";
 
-        static internal int defaultUserId = 0;
-        static internal int defaultGroupId = 0;
-        static internal string defaultGroupName = "None";
-        static internal string defaultUser = null;
+        internal static int defaultUserId = 0;
+        internal static int defaultGroupId = 0;
+        internal static string defaultGroupName = "None";
+        internal static string defaultUser = null;
 
-        static internal void RestoreSetValues()
+        internal static void RestoreSetValues()
         {
             defaultUserId = userIdAsSet;
             defaultUser = userNameAsSet;
@@ -588,12 +589,15 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <param name="userName">Value to apply as a default for userName.</param>
         /// <param name="groupId">Value to apply as a default for groupId.</param>
         /// <param name="groupName">Value to apply as a default for groupName.</param>
-        static public void SetValueDefaults(
-            int userId,
-            string userName,
-            int groupId,
-            string groupName
-        )
+        public
+        /// <summary>
+        /// Set defaults for values used when constructing a TarHeader instance.
+        /// </summary>
+        /// <param name="userId">Value to apply as a default for userId.</param>
+        /// <param name="userName">Value to apply as a default for userName.</param>
+        /// <param name="groupId">Value to apply as a default for groupId.</param>
+        /// <param name="groupName">Value to apply as a default for groupName.</param>
+        static void SetValueDefaults(int userId, string userName, int groupId, string groupName)
         {
             defaultUserId = userIdAsSet = userId;
             defaultUser = userNameAsSet = userName;
@@ -601,7 +605,7 @@ namespace ICSharpCode.SharpZipLib.Tar
             defaultGroupName = groupNameAsSet = groupName;
         }
 
-        static internal void SetActiveDefaults(
+        internal static void SetActiveDefaults(
             int userId,
             string userName,
             int groupId,
@@ -622,7 +626,16 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// When the default user name is null the value from Environment.UserName is used. Or "PocketPC" for the Compact framework.
         /// When the default group name is null the value "None" is used.
         /// </remarks>
-        static public void ResetValueDefaults()
+        public
+        /// <summary>
+        /// Reset value defaults to initial values.
+        /// </summary>
+        /// <remarks>
+        /// The default values are user id=0, group id=0, groupname="None", user name=null.
+        /// When the default user name is null the value from Environment.UserName is used. Or "PocketPC" for the Compact framework.
+        /// When the default group name is null the value "None" is used.
+        /// </remarks>
+        static void ResetValueDefaults()
         {
             defaultUserId = 0;
             defaultGroupId = 0;
@@ -1008,8 +1021,8 @@ namespace ICSharpCode.SharpZipLib.Tar
             return sum;
         }
 
-        readonly static long timeConversionFactor = 10000000L; // 1 tick == 100 nanoseconds
-        readonly static DateTime dateTime1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        static readonly long timeConversionFactor = 10000000L; // 1 tick == 100 nanoseconds
+        static readonly DateTime dateTime1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0);
 
         static int GetCTime(System.DateTime dateTime)
         {

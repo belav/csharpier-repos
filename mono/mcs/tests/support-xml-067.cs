@@ -1,6 +1,6 @@
 namespace Testing
 {
-    public partial class Test
+    partial public class Test
     {
         /// test 3
         public void OneMore() { }

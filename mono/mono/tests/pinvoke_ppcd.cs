@@ -167,7 +167,7 @@ public class Test_double
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct double_array4
     {
-        public fixed double f1[4];
+        fixed public double f1[4];
     }
 
     public static int Main(string[] args)

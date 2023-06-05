@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct SigningCertificateV2Asn
+    partial internal struct SigningCertificateV2Asn
     {
         internal System.Security.Cryptography.Pkcs.Asn1.EssCertIdV2[] Certs;
         internal System.Security.Cryptography.Pkcs.Asn1.PolicyInformation[]? Policies;

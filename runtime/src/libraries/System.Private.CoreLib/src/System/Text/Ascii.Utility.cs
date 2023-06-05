@@ -10,7 +10,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Text
 {
-    public static partial class Ascii
+    partial public static class Ascii
     {
         /// <summary>
         /// Returns <see langword="true"/> iff all bytes in <paramref name="value"/> are ASCII.

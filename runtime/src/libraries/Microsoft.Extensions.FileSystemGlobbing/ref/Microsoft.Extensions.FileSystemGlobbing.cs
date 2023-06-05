@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.FileSystemGlobbing
 {
-    public partial struct FilePatternMatch
+    partial public struct FilePatternMatch
         : System.IEquatable<Microsoft.Extensions.FileSystemGlobbing.FilePatternMatch>
     {
         private object _dummy;
@@ -44,7 +44,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         }
     }
 
-    public partial class InMemoryDirectoryInfo
+    partial public class InMemoryDirectoryInfo
         : Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase
     {
         public InMemoryDirectoryInfo(
@@ -85,7 +85,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         }
     }
 
-    public partial class Matcher
+    partial public class Matcher
     {
         public Matcher() { }
 
@@ -109,7 +109,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         }
     }
 
-    public static partial class MatcherExtensions
+    partial public static class MatcherExtensions
     {
         public static void AddExcludePatterns(
             this Microsoft.Extensions.FileSystemGlobbing.Matcher matcher,
@@ -164,7 +164,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         }
     }
 
-    public partial class PatternMatchingResult
+    partial public class PatternMatchingResult
     {
         public PatternMatchingResult(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileSystemGlobbing.FilePatternMatch> files
@@ -189,7 +189,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing
 
 namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
 {
-    public abstract partial class DirectoryInfoBase
+    partial public abstract class DirectoryInfoBase
         : Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileSystemInfoBase
     {
         protected DirectoryInfoBase() { }
@@ -203,7 +203,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
         );
     }
 
-    public partial class DirectoryInfoWrapper
+    partial public class DirectoryInfoWrapper
         : Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase
     {
         public DirectoryInfoWrapper(System.IO.DirectoryInfo directoryInfo) { }
@@ -241,13 +241,13 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
         }
     }
 
-    public abstract partial class FileInfoBase
+    partial public abstract class FileInfoBase
         : Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileSystemInfoBase
     {
         protected FileInfoBase() { }
     }
 
-    public partial class FileInfoWrapper
+    partial public class FileInfoWrapper
         : Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase
     {
         public FileInfoWrapper(System.IO.FileInfo fileInfo) { }
@@ -266,7 +266,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
         }
     }
 
-    public abstract partial class FileSystemInfoBase
+    partial public abstract class FileSystemInfoBase
     {
         protected FileSystemInfoBase() { }
 
@@ -278,25 +278,25 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
 
 namespace Microsoft.Extensions.FileSystemGlobbing.Internal
 {
-    public partial interface ILinearPattern
+    partial public interface ILinearPattern
         : Microsoft.Extensions.FileSystemGlobbing.Internal.IPattern
     {
         System.Collections.Generic.IList<Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment> Segments { get; }
     }
 
-    public partial interface IPathSegment
+    partial public interface IPathSegment
     {
         bool CanProduceStem { get; }
         bool Match(string value);
     }
 
-    public partial interface IPattern
+    partial public interface IPattern
     {
         Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext CreatePatternContextForExclude();
         Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext CreatePatternContextForInclude();
     }
 
-    public partial interface IPatternContext
+    partial public interface IPatternContext
     {
         void Declare(
             System.Action<
@@ -314,7 +314,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
         );
     }
 
-    public partial interface IRaggedPattern
+    partial public interface IRaggedPattern
         : Microsoft.Extensions.FileSystemGlobbing.Internal.IPattern
     {
         System.Collections.Generic.IList<System.Collections.Generic.IList<Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment>> Contains { get; }
@@ -323,7 +323,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
         System.Collections.Generic.IList<Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment> StartsWith { get; }
     }
 
-    public partial class MatcherContext
+    partial public class MatcherContext
     {
         public MatcherContext(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileSystemGlobbing.Internal.IPattern> includePatterns,
@@ -338,7 +338,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
         }
     }
 
-    public partial struct PatternTestResult
+    partial public struct PatternTestResult
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -363,7 +363,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
 
 namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
 {
-    public partial class CurrentPathSegment
+    partial public class CurrentPathSegment
         : Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment
     {
         public CurrentPathSegment() { }
@@ -379,7 +379,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
         }
     }
 
-    public partial class LiteralPathSegment
+    partial public class LiteralPathSegment
         : Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment
     {
         public LiteralPathSegment(string value, System.StringComparison comparisonType) { }
@@ -411,7 +411,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
         }
     }
 
-    public partial class ParentPathSegment
+    partial public class ParentPathSegment
         : Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment
     {
         public ParentPathSegment() { }
@@ -427,7 +427,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
         }
     }
 
-    public partial class RecursiveWildcardSegment
+    partial public class RecursiveWildcardSegment
         : Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment
     {
         public RecursiveWildcardSegment() { }
@@ -443,7 +443,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
         }
     }
 
-    public partial class WildcardPathSegment
+    partial public class WildcardPathSegment
         : Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment
     {
         public static readonly Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments.WildcardPathSegment MatchAll;
@@ -481,7 +481,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
 
 namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
 {
-    public abstract partial class PatternContextLinear
+    partial public abstract class PatternContextLinear
         : Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext<Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContextLinear.FrameData>
     {
         public PatternContextLinear(
@@ -521,7 +521,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
             throw null;
         }
 
-        public partial struct FrameData
+        partial public struct FrameData
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -539,7 +539,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         }
     }
 
-    public partial class PatternContextLinearExclude
+    partial public class PatternContextLinearExclude
         : Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContextLinear
     {
         public PatternContextLinearExclude(
@@ -555,7 +555,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         }
     }
 
-    public partial class PatternContextLinearInclude
+    partial public class PatternContextLinearInclude
         : Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContextLinear
     {
         public PatternContextLinearInclude(
@@ -578,7 +578,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         }
     }
 
-    public abstract partial class PatternContextRagged
+    partial public abstract class PatternContextRagged
         : Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext<Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContextRagged.FrameData>
     {
         public PatternContextRagged(
@@ -632,7 +632,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
             throw null;
         }
 
-        public partial struct FrameData
+        partial public struct FrameData
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -653,7 +653,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         }
     }
 
-    public partial class PatternContextRaggedExclude
+    partial public class PatternContextRaggedExclude
         : Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContextRagged
     {
         public PatternContextRaggedExclude(
@@ -669,7 +669,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         }
     }
 
-    public partial class PatternContextRaggedInclude
+    partial public class PatternContextRaggedInclude
         : Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContextRagged
     {
         public PatternContextRaggedInclude(
@@ -692,7 +692,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
         }
     }
 
-    public abstract partial class PatternContext<TFrame>
+    partial public abstract class PatternContext<TFrame>
         : Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext
         where TFrame : struct
     {
@@ -730,7 +730,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
 
 namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 {
-    public partial class PatternBuilder
+    partial public class PatternBuilder
     {
         public PatternBuilder() { }
 

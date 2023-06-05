@@ -373,17 +373,21 @@ namespace System.Data.SqlClient
         //
         // map COM+ Type to MetaType class
         //
-        static internal MetaType GetMetaTypeFromType(Type dataType)
+        internal
+        //
+        // map COM+ Type to MetaType class
+        //
+        static MetaType GetMetaTypeFromType(Type dataType)
         {
             return GetMetaTypeFromValue(dataType, null, false, true);
         }
 
-        static internal MetaType GetMetaTypeFromValue(object value, bool streamAllowed = true)
+        internal static MetaType GetMetaTypeFromValue(object value, bool streamAllowed = true)
         {
             return GetMetaTypeFromValue(value.GetType(), value, true, streamAllowed);
         }
 
-        static private MetaType GetMetaTypeFromValue(
+        private static MetaType GetMetaTypeFromValue(
             Type dataType,
             object value,
             bool inferLen,

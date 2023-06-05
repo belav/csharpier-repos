@@ -7,11 +7,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.Json
 {
+    partial
     /// <summary>
     /// Keeps both a List and Dictionary in sync to enable deterministic enumeration ordering of List
     /// and performance benefits of Dictionary once a threshold is hit.
     /// </summary>
-    internal sealed partial class JsonPropertyDictionary<T>
+    internal sealed class JsonPropertyDictionary<T>
         where T : class?
     {
         private const int ListToDictionaryThreshold = 9;

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class
+    partial internal class
 #if DEBUG
     EventSymbolAdapter : SymbolAdapter,
 #else
@@ -162,7 +162,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         #endregion
     }
 
-    internal partial class EventSymbol
+    partial internal class EventSymbol
     {
 #if DEBUG
         private EventSymbolAdapter? _lazyAdapter;
@@ -200,8 +200,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
+    partial
 #if DEBUG
-    internal partial class EventSymbolAdapter
+    internal class EventSymbolAdapter
     {
         internal EventSymbolAdapter(EventSymbol underlyingEventSymbol)
         {

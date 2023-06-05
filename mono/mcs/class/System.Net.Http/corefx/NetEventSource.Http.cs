@@ -3,7 +3,7 @@ using System.Net.Http;
 
 namespace System.Net
 {
-    internal sealed partial class NetEventSource : EventSource
+    partial internal sealed class NetEventSource : EventSource
     {
         public static NetEventSource Log => throw new PlatformNotSupportedException();
 

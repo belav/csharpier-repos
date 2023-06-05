@@ -16,7 +16,7 @@ using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
 {
-    internal abstract partial class AbstractPullMemberUpRefactoringProvider
+    partial internal abstract class AbstractPullMemberUpRefactoringProvider
         : CodeRefactoringProvider
     {
         private IPullMemberUpOptionsService? _service;

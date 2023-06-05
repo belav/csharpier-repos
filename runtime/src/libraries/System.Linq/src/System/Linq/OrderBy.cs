@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         /// <summary>
         /// Sorts the elements of a sequence in ascending order.

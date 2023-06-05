@@ -63,7 +63,7 @@ namespace Mono
         internal IntPtr culture;
         internal IntPtr hash_value;
         internal IntPtr public_key;
-        internal fixed byte public_key_token[MONO_PUBLIC_KEY_TOKEN_LENGTH];
+        fixed internal byte public_key_token[MONO_PUBLIC_KEY_TOKEN_LENGTH];
         internal uint hash_alg;
         internal uint hash_len;
         internal uint flags;

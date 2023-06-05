@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class CommonSecurityDescriptor_Constructor
+    partial public class CommonSecurityDescriptor_Constructor
     {
         public static IEnumerable<object[]> CommonSecurityDescriptor_Constructor_TestData()
         {

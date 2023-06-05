@@ -4,13 +4,13 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CryptEncodeObject(
+        partial internal static unsafe bool CryptEncodeObject(
             CertEncodingType dwCertEncodingType,
             IntPtr lpszStructType,
             void* pvStructInfo,
@@ -20,7 +20,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CryptEncodeObject(
+        partial internal static unsafe bool CryptEncodeObject(
             CertEncodingType dwCertEncodingType,
             [MarshalAs(UnmanagedType.LPStr)] string lpszStructType,
             void* pvStructInfo,

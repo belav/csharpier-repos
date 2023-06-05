@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace System.Net.Http
 {
-    internal static partial class SR
+    partial internal static class SR
     {
         // The resource generator used in AspNetCore does not create this method. This file fills in that functional gap
         // so we don't have to modify the shared source.

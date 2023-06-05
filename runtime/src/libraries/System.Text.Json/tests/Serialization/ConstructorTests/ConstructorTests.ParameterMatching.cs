@@ -26,7 +26,7 @@ namespace System.Text.Json.Serialization.Tests
             : base(DeserializationWrapper.SpanDeserializer) { }
     }
 
-    public abstract partial class ConstructorTests
+    partial public abstract class ConstructorTests
     {
         private DeserializationWrapper Serializer { get; }
 

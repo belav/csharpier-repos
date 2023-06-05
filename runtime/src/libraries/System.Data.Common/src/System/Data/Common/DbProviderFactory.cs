@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Data.Common
 {
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-    public abstract partial class DbProviderFactory
+    partial public abstract class DbProviderFactory
     {
         private bool? _canCreateDataAdapter;
         private bool? _canCreateCommandBuilder;

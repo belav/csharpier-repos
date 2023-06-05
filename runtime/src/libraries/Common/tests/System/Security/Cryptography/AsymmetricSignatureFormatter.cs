@@ -6,10 +6,11 @@ using Xunit;
 
 namespace System.Security.Cryptography.Tests
 {
+    partial
     /// <summary>
     /// Helper methods for DSASignatureFormatterTests and RSASignatureFormatterTests
     /// </summary>
-    public partial class AsymmetricSignatureFormatterTests
+    public class AsymmetricSignatureFormatterTests
     {
         private static readonly byte[] HelloBytes = new ASCIIEncoding().GetBytes("Hello");
 

@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
         ExportLanguageService(typeof(IReplacePropertyWithMethodsService), LanguageNames.CSharp),
         Shared
     ]
-    internal partial class CSharpReplacePropertyWithMethodsService
+    partial internal class CSharpReplacePropertyWithMethodsService
         : AbstractReplacePropertyWithMethodsService<
             IdentifierNameSyntax,
             ExpressionSyntax,

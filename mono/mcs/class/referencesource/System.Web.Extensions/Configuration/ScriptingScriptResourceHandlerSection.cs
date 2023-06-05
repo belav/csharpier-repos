@@ -61,7 +61,7 @@ namespace System.Web.Configuration
 
         internal static class ApplicationSettings
         {
-            private volatile static bool s_sectionLoaded;
+            private static volatile bool s_sectionLoaded;
             private static bool s_enableCaching;
             private static bool s_enableCompression;
 

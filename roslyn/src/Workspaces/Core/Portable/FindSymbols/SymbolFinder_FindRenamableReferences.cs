@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    public static partial class SymbolFinder
+    partial public static class SymbolFinder
     {
         internal static async Task<ImmutableArray<ReferencedSymbol>> FindRenamableReferencesAsync(
             ImmutableArray<ISymbol> symbols,

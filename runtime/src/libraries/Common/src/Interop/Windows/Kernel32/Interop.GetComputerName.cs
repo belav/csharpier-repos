@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, EntryPoint = "GetComputerNameW")]
-        private static unsafe partial int GetComputerName(char* lpBuffer, uint* nSize);
+        partial private static unsafe int GetComputerName(char* lpBuffer, uint* nSize);
 
         // maximum length of the NETBIOS name (not including NULL)
         private const int MAX_COMPUTERNAME_LENGTH = 15;

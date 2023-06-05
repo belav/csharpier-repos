@@ -48,7 +48,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
         static string p7DataOid = "1.2.840.113549.1.7.1";
         static string p7DataName = "PKCS 7 Data";
 
-        static public byte[] farscape_p12_pfx =
+        public static byte[] farscape_p12_pfx =
         {
             0x30,
             0x82,

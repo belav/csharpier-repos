@@ -17,7 +17,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class DiagnosticAnalyzerTests
+    partial public class DiagnosticAnalyzerTests
     {
         [Fact]
         public void DiagnosticAnalyzerAllInOne()

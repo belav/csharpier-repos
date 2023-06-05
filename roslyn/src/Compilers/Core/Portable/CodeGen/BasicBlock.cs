@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeGen
 {
-    internal partial class ILBuilder
+    partial internal class ILBuilder
     {
         internal enum BlockType
         {

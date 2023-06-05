@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Globalization;
 
-    public sealed partial class IssuedTokenClientBehaviorsElement : ConfigurationElement
+    partial public sealed class IssuedTokenClientBehaviorsElement : ConfigurationElement
     {
         public IssuedTokenClientBehaviorsElement() { }
 

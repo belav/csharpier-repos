@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 
 namespace Internal.Cryptography
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
 #if NET5_0_OR_GREATER
         [UnsupportedOSPlatformGuard("ios")]

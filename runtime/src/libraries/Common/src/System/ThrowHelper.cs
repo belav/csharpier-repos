@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    internal static partial class ThrowHelper
+    partial internal static class ThrowHelper
     {
         /// <summary>Throws an <see cref="ArgumentNullException"/> if <paramref name="argument"/> is null.</summary>
         /// <param name="argument">The reference type argument to validate as non-null.</param>

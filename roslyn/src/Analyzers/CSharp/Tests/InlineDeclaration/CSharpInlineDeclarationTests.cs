@@ -20,7 +20,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInlineDeclaration)]
-    public partial class CSharpInlineDeclarationTests
+    partial public class CSharpInlineDeclarationTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public CSharpInlineDeclarationTests(ITestOutputHelper logger)

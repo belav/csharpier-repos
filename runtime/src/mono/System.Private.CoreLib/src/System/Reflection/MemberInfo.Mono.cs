@@ -3,7 +3,7 @@
 
 namespace System.Reflection
 {
-    public abstract partial class MemberInfo
+    partial public abstract class MemberInfo
     {
         internal bool HasSameMetadataDefinitionAsCore<TOther>(MemberInfo other)
             where TOther : MemberInfo

@@ -71,10 +71,11 @@ namespace System.Globalization
             get { return CalendarAlgorithmType.SolarCalendar; }
         }
 
+        internal
         //
         // Using a field initializer rather than a static constructor so that the whole class can be lazy
         // init.
-        static internal volatile EraInfo[] japaneseEraInfo;
+        static volatile EraInfo[] japaneseEraInfo;
 
         private const string c_japaneseErasHive =
             @"System\CurrentControlSet\Control\Nls\Calendars\Japanese\Eras";

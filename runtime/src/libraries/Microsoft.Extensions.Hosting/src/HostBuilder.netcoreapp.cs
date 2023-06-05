@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting.Internal;
 
 namespace Microsoft.Extensions.Hosting
 {
-    public partial class HostBuilder
+    partial public class HostBuilder
     {
         private static void AddLifetime(IServiceCollection services)
         {

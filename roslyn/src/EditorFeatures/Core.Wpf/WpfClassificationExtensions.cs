@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
-    internal static partial class WpfClassificationExtensions
+    partial internal static class WpfClassificationExtensions
     {
         public static Run ToRun(
             this ClassifiedText part,

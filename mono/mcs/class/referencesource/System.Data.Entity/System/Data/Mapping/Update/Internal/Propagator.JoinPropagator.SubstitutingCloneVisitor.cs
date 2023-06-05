@@ -12,9 +12,9 @@ using System.Data.Common;
 
 namespace System.Data.Mapping.Update.Internal
 {
-    internal partial class Propagator
+    partial internal class Propagator
     {
-        private partial class JoinPropagator
+        partial private class JoinPropagator
         {
             /// <summary>
             /// Describes the mode of behavior for the <see cref="PlaceholderPopulator"/>.

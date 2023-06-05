@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace swf_texture
 {
-    public partial class TextureForm : Form
+    partial public class TextureForm : Form
     {
         TextureBrush tb;
         private string filename;

@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         internal enum CryptProvParam : int
         {
@@ -24,7 +24,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptSetProvParam(
+        partial public static bool CryptSetProvParam(
             SafeHandle safeProvHandle,
             CryptProvParam dwParam,
             IntPtr pbData,
@@ -33,7 +33,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptSetProvParam(
+        partial public static bool CryptSetProvParam(
             SafeProvHandle hProv,
             CryptProvParam dwParam,
             ref IntPtr pbData,
@@ -42,7 +42,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptGetProvParam(
+        partial public static bool CryptGetProvParam(
             SafeHandle safeProvHandle,
             CryptProvParam dwParam,
             IntPtr pbData,

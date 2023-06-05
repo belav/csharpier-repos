@@ -260,12 +260,12 @@ namespace System.Web.UI.WebControls
                 includePaths
             ) { }
 
-        static internal EntityDataSourceQueryBuilder<T>.Creator GetCreator()
+        internal static EntityDataSourceQueryBuilder<T>.Creator GetCreator()
         {
             return Create;
         }
 
-        static internal EntityDataSourceQueryBuilder<T> Create(
+        internal static EntityDataSourceQueryBuilder<T> Create(
             DataSourceSelectArguments arguments,
             string commandText,
             ObjectParameter[] commandParameters,
@@ -338,7 +338,7 @@ namespace System.Web.UI.WebControls
             _selectParameters = selectParameters;
         }
 
-        static internal EntityDataSourceQueryBuilder<DbDataRecord> Create(
+        internal static EntityDataSourceQueryBuilder<DbDataRecord> Create(
             DataSourceSelectArguments arguments,
             string commandText,
             ObjectParameter[] commandParameters,

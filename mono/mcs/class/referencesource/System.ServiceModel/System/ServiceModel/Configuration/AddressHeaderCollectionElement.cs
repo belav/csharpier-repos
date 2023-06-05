@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Security;
     using System.Runtime;
 
-    public sealed partial class AddressHeaderCollectionElement : ServiceModelConfigurationElement
+    partial public sealed class AddressHeaderCollectionElement : ServiceModelConfigurationElement
     {
         public AddressHeaderCollectionElement() { }
 

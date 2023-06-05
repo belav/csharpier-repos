@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
-    internal static partial class IcuLocaleData
+    partial internal static class IcuLocaleData
     {
         /*
         // Program used to generate and validate the culture data

@@ -14,11 +14,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml
 {
+    partial
     // Concrete implementation of XmlWriter abstract class that serializes events as encoded XML
     // text.  The general-purpose XmlEncodedTextWriter uses the Encoder class to output to any
     // encoding.  The XmlUtf8TextWriter class combined the encoding operation with serialization
     // in order to achieve better performance.
-    internal partial class XmlUtf8RawTextWriter : XmlRawWriter
+    internal class XmlUtf8RawTextWriter : XmlRawWriter
     {
         //
         // Fields
@@ -1795,8 +1796,9 @@ namespace System.Xml
         }
     }
 
+    partial
     // Same as base text writer class except that elements, attributes, comments, and pi's are indented.
-    internal sealed partial class XmlUtf8RawTextWriterIndent : XmlUtf8RawTextWriter
+    internal sealed class XmlUtf8RawTextWriterIndent : XmlUtf8RawTextWriter
     {
         //
         // Fields

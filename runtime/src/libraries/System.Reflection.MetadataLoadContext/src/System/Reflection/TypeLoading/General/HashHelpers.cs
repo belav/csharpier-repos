@@ -3,7 +3,7 @@
 
 namespace System.Reflection.TypeLoading
 {
-    internal static partial class HashHelpers
+    partial internal static class HashHelpers
     {
         public const int HashPrime = 101;
 

@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
     using Microsoft.CodeAnalysis.Syntax.InternalSyntax;
 
-    internal partial class SyntaxToken : CSharpSyntaxNode
+    partial internal class SyntaxToken : CSharpSyntaxNode
     {
         //====================
         // Optimization: Normally, we wouldn't accept this much duplicate code, but these constructors

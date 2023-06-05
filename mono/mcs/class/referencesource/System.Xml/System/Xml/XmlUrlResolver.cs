@@ -13,8 +13,9 @@ using System.Runtime.Versioning;
 
 namespace System.Xml
 {
+    partial
     // Resolves external XML resources named by a Uniform Resource Identifier (URI).
-    public partial class XmlUrlResolver : XmlResolver
+    public class XmlUrlResolver : XmlResolver
     {
         private static object s_DownloadManager;
         private ICredentials _credentials;

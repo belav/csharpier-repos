@@ -15,7 +15,7 @@ namespace System
 
 namespace System.Web
 {
-    public partial class HttpBrowserCapabilities
+    partial public class HttpBrowserCapabilities
     {
         [MonoTODO]
         public Version A

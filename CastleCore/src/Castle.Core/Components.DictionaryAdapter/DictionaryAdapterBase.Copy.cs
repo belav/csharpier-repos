@@ -18,7 +18,7 @@ namespace Castle.Components.DictionaryAdapter
     using System.Linq;
     using System.Reflection;
 
-    public abstract partial class DictionaryAdapterBase
+    partial public abstract class DictionaryAdapterBase
     {
         public void CopyTo(IDictionaryAdapter other)
         {

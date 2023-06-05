@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 {
-    internal partial class CSharpSymbolDisplayService : AbstractSymbolDisplayService
+    partial internal class CSharpSymbolDisplayService : AbstractSymbolDisplayService
     {
         public CSharpSymbolDisplayService(Host.LanguageServices services)
             : base(services) { }

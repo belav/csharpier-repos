@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial struct SymbolKey
+    partial internal struct SymbolKey
     {
         private sealed class DynamicTypeSymbolKey : AbstractSymbolKey<IDynamicTypeSymbol>
         {

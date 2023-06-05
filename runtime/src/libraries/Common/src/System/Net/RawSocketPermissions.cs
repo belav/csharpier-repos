@@ -5,7 +5,7 @@ using System.Net.Sockets;
 
 namespace System.Net
 {
-    internal static partial class RawSocketPermissions
+    partial internal static class RawSocketPermissions
     {
         private static readonly Lazy<bool> s_canUseRawIPv4Sockets = new Lazy<bool>(
             () => CheckRawSocketPermissions(AddressFamily.InterNetwork)

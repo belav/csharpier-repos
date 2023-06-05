@@ -8,7 +8,7 @@ using System.IO;
 
 namespace R2RTest
 {
-    public partial class BuildOptions
+    partial public class BuildOptions
     {
         public string ConfigurationSuffix => (Release ? "-ret.out" : "-chk.out");
 

@@ -45,7 +45,7 @@ namespace CoreclrTestLib
             public int ParentProcessID;
             public int PriClassBase;
             public int Flags;
-            public fixed char ExeFile[MAX_PATH];
+            fixed public char ExeFile[MAX_PATH];
         }
 
         [DllImport("kernel32.dll")]
@@ -76,7 +76,7 @@ namespace CoreclrTestLib
 
     internal static class ProcessExtensions
     {
-        public unsafe static IEnumerable<Process> GetChildren(this Process process)
+        public static unsafe IEnumerable<Process> GetChildren(this Process process)
         {
             var children = new List<Process>();
             if (OperatingSystem.IsWindows())
@@ -94,7 +94,7 @@ namespace CoreclrTestLib
             return children;
         }
 
-        private unsafe static IEnumerable<Process> Windows_GetChildren(Process process)
+        private static unsafe IEnumerable<Process> Windows_GetChildren(Process process)
         {
             var children = new List<Process>();
             IntPtr snapshot = Kernel32.CreateToolhelp32Snapshot(

@@ -169,7 +169,7 @@ namespace TestXamarin4WCFService
         Name = "HelloWorldData",
         Namespace = "http://schemas.datacontract.org/2004/07/TestXamarin4WCFService"
     )]
-    public partial class HelloWorldData : object
+    partial public class HelloWorldData : object
     {
         private string NameField;
 
@@ -229,7 +229,7 @@ public interface IHelloWorldServiceChannel
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-public partial class SayHelloToCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+partial public class SayHelloToCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
 {
     private object[] results;
 
@@ -256,7 +256,7 @@ public partial class SayHelloToCompletedEventArgs : System.ComponentModel.AsyncC
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-public partial class GetHelloDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+partial public class GetHelloDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
 {
     private object[] results;
 
@@ -283,7 +283,7 @@ public partial class GetHelloDataCompletedEventArgs : System.ComponentModel.Asyn
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-public partial class HelloWorldServiceClient
+partial public class HelloWorldServiceClient
     : System.ServiceModel.ClientBase<IHelloWorldService>,
         IHelloWorldService
 {

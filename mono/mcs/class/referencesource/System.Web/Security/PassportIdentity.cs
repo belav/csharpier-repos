@@ -1206,7 +1206,16 @@ namespace System.Web.Security
         ///    Encrypts data using the Passport
         ///    participant keycfor the current site. Maximum input size is 2045 characters.
         /// </devdoc>
-        static public String Encrypt(String strData)
+        public
+        ////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////
+
+        /// <devdoc>
+        ///    Encrypts data using the Passport
+        ///    participant keycfor the current site. Maximum input size is 2045 characters.
+        /// </devdoc>
+        static String Encrypt(String strData)
         {
             return CallPassportCryptFunction(0, strData);
         }
@@ -1215,22 +1224,27 @@ namespace System.Web.Security
         ///    Decrypts data using the Passport
         ///    participant key for the current site.
         /// </devdoc>
-        static public String Decrypt(String strData)
+        public
+        /// <devdoc>
+        ///    Decrypts data using the Passport
+        ///    participant key for the current site.
+        /// </devdoc>
+        static String Decrypt(String strData)
         {
             return CallPassportCryptFunction(1, strData);
         }
 
-        static public String Compress(String strData)
+        public static String Compress(String strData)
         {
             return CallPassportCryptFunction(2, strData);
         }
 
-        static public String Decompress(String strData)
+        public static String Decompress(String strData)
         {
             return CallPassportCryptFunction(3, strData);
         }
 
-        static public int CryptPutHost(String strHost)
+        public static int CryptPutHost(String strHost)
         {
             int iRet = UnsafeNativeMethods.PassportCryptPut(0, strHost);
             if (iRet < 0)
@@ -1239,7 +1253,7 @@ namespace System.Web.Security
             return iRet;
         }
 
-        static public int CryptPutSite(String strSite)
+        public static int CryptPutSite(String strSite)
         {
             int iRet = UnsafeNativeMethods.PassportCryptPut(1, strSite);
             if (iRet < 0)
@@ -1248,7 +1262,7 @@ namespace System.Web.Security
             return iRet;
         }
 
-        static public bool CryptIsValid()
+        public static bool CryptIsValid()
         {
             int iRet = UnsafeNativeMethods.PassportCryptIsValid();
             if (iRet < 0)
@@ -1256,7 +1270,7 @@ namespace System.Web.Security
             return (iRet == 0);
         }
 
-        static private String CallPassportCryptFunction(int iFunctionID, String strData)
+        private static String CallPassportCryptFunction(int iFunctionID, String strData)
         {
             int iRet = 0;
             int iSize = ((strData == null || strData.Length < 512) ? 512 : strData.Length);

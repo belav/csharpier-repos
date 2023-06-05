@@ -12,10 +12,11 @@ using System.Threading;
 
 namespace System.Diagnostics
 {
+    partial
     /// <summary>
     /// Provides a set of properties and methods for debugging code.
     /// </summary>
-    public static partial class Debug
+    public static class Debug
     {
         private static volatile DebugProvider s_provider = new DebugProvider();
 

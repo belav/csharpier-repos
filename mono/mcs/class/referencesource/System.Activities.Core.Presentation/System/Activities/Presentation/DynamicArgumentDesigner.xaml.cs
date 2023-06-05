@@ -22,7 +22,7 @@ namespace System.Activities.Presentation
     using System.Windows.Threading;
     using System.Reflection;
 
-    internal sealed partial class DynamicArgumentDesigner : UserControl
+    partial internal sealed class DynamicArgumentDesigner : UserControl
     {
         public static readonly DependencyProperty ContextProperty = DependencyProperty.Register(
             "Context",

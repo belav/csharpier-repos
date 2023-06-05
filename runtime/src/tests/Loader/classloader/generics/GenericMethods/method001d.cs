@@ -5,7 +5,7 @@ using System;
 
 public class Foo
 {
-    internal protected T Function<T>(T i)
+    protected internal T Function<T>(T i)
     {
         return i;
     }

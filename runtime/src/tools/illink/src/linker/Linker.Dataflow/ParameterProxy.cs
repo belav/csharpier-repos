@@ -6,9 +6,9 @@ using Mono.Linker;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal partial struct ParameterProxy
+    partial internal struct ParameterProxy
     {
-        public partial ReferenceKind GetReferenceKind()
+        partial public ReferenceKind GetReferenceKind()
         {
             if (IsImplicitThis)
                 return Method.Method.DeclaringType.IsValueType
@@ -39,7 +39,9 @@ namespace ILLink.Shared.TypeSystemProxy
         }
 
 #pragma warning disable RS0030 // MethodReference.Parameters is banned -- this class provides wrappers to use
-        public partial string GetDisplayName() =>
+        partial
+#pragma warning disable RS0030 // MethodReference.Parameters is banned -- this class provides wrappers to use
+        public string GetDisplayName() =>
             IsImplicitThis
                 ? "this"
                 : !string.IsNullOrEmpty(Method.Method.Parameters[MetadataIndex].Name)
@@ -56,7 +58,7 @@ namespace ILLink.Shared.TypeSystemProxy
 #pragma warning restore RS0030 // Do not used banned APIs
         }
 
-        public partial bool IsTypeOf(string typeName) => ParameterType.IsTypeOf(typeName);
+        partial public bool IsTypeOf(string typeName) => ParameterType.IsTypeOf(typeName);
 
         public bool IsTypeOf(WellKnownType type) => ParameterType.IsTypeOf(type);
     }

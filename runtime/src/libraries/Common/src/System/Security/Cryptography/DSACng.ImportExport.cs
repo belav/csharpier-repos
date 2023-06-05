@@ -11,7 +11,7 @@ using KeyBlobMagicNumber = Interop.BCrypt.KeyBlobMagicNumber;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class DSACng : DSA
+    partial public sealed class DSACng : DSA
     {
         // For keysizes up to and including 1024 bits, CNG's blob format is BCRYPT_DSA_KEY_BLOB.
         // For keysizes exceeding 1024 bits, CNG's blob format is BCRYPT_DSA_KEY_BLOB_V2.

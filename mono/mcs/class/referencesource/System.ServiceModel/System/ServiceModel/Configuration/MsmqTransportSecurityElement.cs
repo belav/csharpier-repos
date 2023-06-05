@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
-    public sealed partial class MsmqTransportSecurityElement : ServiceModelConfigurationElement
+    partial public sealed class MsmqTransportSecurityElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.MsmqAuthenticationMode,

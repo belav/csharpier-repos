@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal static partial class ExtensionOrderer
+    partial internal static class ExtensionOrderer
     {
         internal static IList<Lazy<TExtension, TMetadata>> Order<TExtension, TMetadata>(
             IEnumerable<Lazy<TExtension, TMetadata>> extensions

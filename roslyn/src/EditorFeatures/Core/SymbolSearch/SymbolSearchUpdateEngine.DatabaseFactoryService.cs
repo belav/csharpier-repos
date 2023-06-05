@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Elfie.Model;
 
 namespace Microsoft.CodeAnalysis.SymbolSearch
 {
-    internal partial class SymbolSearchUpdateEngine
+    partial internal class SymbolSearchUpdateEngine
     {
         private class DatabaseFactoryService : IDatabaseFactoryService
         {

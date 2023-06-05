@@ -38,7 +38,7 @@ namespace System.Security.Cryptography.Rsa.Tests
         public bool SupportsSha1Signatures => true;
     }
 
-    public partial class RSAFactory
+    partial public class RSAFactory
     {
         private static readonly IRSAProvider s_provider = new RSACngProvider();
     }

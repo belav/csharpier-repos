@@ -41,12 +41,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class DoughnutChart : PieChart
     {
+        public
         #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.Doughnut; }
         }
@@ -56,83 +57,98 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
+        public
         /// <summary>
         /// True if chart type is stacked
         /// </summary>
-        override public bool Stacked
+        override bool Stacked
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart type supports axeses
         /// </summary>
-        override public bool RequireAxes
+        override bool RequireAxes
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart type supports logarithmic axes
         /// </summary>
-        override public bool SupportLogarithmicAxes
+        override bool SupportLogarithmicAxes
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart type requires to switch the value (Y) axes position
         /// </summary>
-        override public bool SwitchValueAxes
+        override bool SwitchValueAxes
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart series can be placed side-by-side.
         /// </summary>
-        override public bool SideBySideSeries
+        override bool SideBySideSeries
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// If the crossing value is auto Crossing value should be
         /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        override public bool ZeroCrossing
+        override bool ZeroCrossing
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if each data point of a chart must be represented in the legend
         /// </summary>
-        override public bool DataPointsInLegend
+        override bool DataPointsInLegend
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// Indicates that extra Y values are connected to the scale of the Y axis
         /// </summary>
-        override public bool ExtraYValuesConnectedToYAxis
+        override bool ExtraYValuesConnectedToYAxis
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if palette colors should be applied for each data paint.
         /// Otherwise the color is applied to the series.
         /// </summary>
-        override public bool ApplyPaletteColorsToPoints
+        override bool ApplyPaletteColorsToPoints
         {
             get { return true; }
         }
@@ -143,23 +159,32 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="series">Legend item series.</param>
         /// <returns>Legend item style.</returns>
-        override public LegendImageStyle GetLegendImageStyle(Series series)
+        public
+        /// <summary>
+        /// How to draw series/points in legend:
+        /// Filled rectangle, Line or Marker
+        /// </summary>
+        /// <param name="series">Legend item series.</param>
+        /// <returns>Legend item style.</returns>
+        override LegendImageStyle GetLegendImageStyle(Series series)
         {
             return LegendImageStyle.Rectangle;
         }
 
+        public
         /// <summary>
         /// Number of supported Y value(s) per point
         /// </summary>
-        override public int YValuesPerPoint
+        override int YValuesPerPoint
         {
             get { return 1; }
         }
 
+        public
         /// <summary>
         /// Chart is Doughnut or Pie type
         /// </summary>
-        override public bool Doughnut
+        override bool Doughnut
         {
             get { return true; }
         }

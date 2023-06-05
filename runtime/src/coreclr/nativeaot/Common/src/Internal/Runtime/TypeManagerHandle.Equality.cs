@@ -5,7 +5,7 @@ using System;
 
 namespace Internal.Runtime
 {
-    public unsafe partial struct TypeManagerHandle : IEquatable<TypeManagerHandle>
+    partial public unsafe struct TypeManagerHandle : IEquatable<TypeManagerHandle>
     {
         public static bool operator ==(TypeManagerHandle left, TypeManagerHandle right)
         {

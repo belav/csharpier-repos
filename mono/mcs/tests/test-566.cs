@@ -44,7 +44,7 @@ class CA
 
 class CB : CA
 {
-    new public string Spec
+    public new string Spec
     {
         set { }
     }

@@ -16,7 +16,7 @@ using System.Text;
 
 namespace System.Net
 {
-    public sealed unsafe partial class HttpListenerRequest
+    partial public sealed unsafe class HttpListenerRequest
     {
         private readonly ulong _requestId;
         internal ulong _connectionId;

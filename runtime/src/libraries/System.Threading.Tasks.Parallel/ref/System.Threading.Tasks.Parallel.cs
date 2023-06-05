@@ -6,7 +6,7 @@
 
 namespace System.Threading.Tasks
 {
-    public static partial class Parallel
+    partial public static class Parallel
     {
         public static System.Threading.Tasks.ParallelLoopResult For(
             int fromInclusive,
@@ -400,7 +400,7 @@ namespace System.Threading.Tasks
         ) { }
     }
 
-    public partial struct ParallelLoopResult
+    partial public struct ParallelLoopResult
     {
         private int _dummyPrimitive;
         public bool IsCompleted
@@ -413,7 +413,7 @@ namespace System.Threading.Tasks
         }
     }
 
-    public partial class ParallelLoopState
+    partial public class ParallelLoopState
     {
         internal ParallelLoopState() { }
 
@@ -439,7 +439,7 @@ namespace System.Threading.Tasks
         public void Stop() { }
     }
 
-    public partial class ParallelOptions
+    partial public class ParallelOptions
     {
         public ParallelOptions() { }
 

@@ -15,12 +15,13 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
+    partial
     /// <summary>
     /// Cache FileCodeModel instances for a given project (we are using WeakReference for now,
     /// so that we can more or less match the semantics of the former native implementation, which
     /// offered reference equality until all instances were collected by the GC)
     /// </summary>
-    internal sealed partial class CodeModelProjectCache
+    internal sealed class CodeModelProjectCache
     {
         private readonly ProjectId _projectId;
         private readonly ICodeModelInstanceFactory _codeModelInstanceFactory;

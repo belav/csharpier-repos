@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Dsa.Tests
 {
-    public partial class DSASignatureFormatterTests : AsymmetricSignatureFormatterTests
+    partial public class DSASignatureFormatterTests : AsymmetricSignatureFormatterTests
     {
         [Fact]
         public static void InvalidFormatterArguments_DSA()

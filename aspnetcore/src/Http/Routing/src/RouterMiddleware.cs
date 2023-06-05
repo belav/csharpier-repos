@@ -7,10 +7,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Builder;
 
+partial
 /// <summary>
 /// Middleware responsible for routing.
 /// </summary>
-public partial class RouterMiddleware
+public class RouterMiddleware
 {
     private readonly ILogger _logger;
     private readonly RequestDelegate _next;
@@ -59,7 +60,7 @@ public partial class RouterMiddleware
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -67,6 +68,6 @@ public partial class RouterMiddleware
             "Request did not match any routes",
             EventName = "RequestNotMatched"
         )]
-        public static partial void RequestNotMatched(ILogger logger);
+        partial public static void RequestNotMatched(ILogger logger);
     }
 }

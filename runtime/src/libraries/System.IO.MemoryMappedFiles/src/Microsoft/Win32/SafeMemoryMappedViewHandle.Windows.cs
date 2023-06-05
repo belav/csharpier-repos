@@ -5,7 +5,7 @@ using System;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeMemoryMappedViewHandle
+    partial public sealed class SafeMemoryMappedViewHandle
     {
         protected override bool ReleaseHandle()
         {

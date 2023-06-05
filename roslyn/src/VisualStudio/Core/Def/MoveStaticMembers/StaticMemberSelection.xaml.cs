@@ -7,10 +7,11 @@ using System.Windows.Controls;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembers
 {
+    partial
     /// <summary>
     /// Interaction logic for StaticMemberSelection.xaml
     /// </summary>
-    internal partial class StaticMemberSelection : UserControl
+    internal class StaticMemberSelection : UserControl
     {
         public string SelectDependents => ServicesVSResources.Select_Dependents;
         public string MembersHeader => ServicesVSResources.Members;

@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.MetadataAsSource
 {
-    internal partial class AbstractMetadataAsSourceService
+    partial internal class AbstractMetadataAsSourceService
     {
         internal class DocCommentFormatter
         {

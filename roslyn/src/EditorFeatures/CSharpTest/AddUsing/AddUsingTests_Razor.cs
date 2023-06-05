@@ -12,7 +12,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddImport)]
-    public partial class AddUsingTests_Razor : AbstractAddUsingTests
+    partial public class AddUsingTests_Razor : AbstractAddUsingTests
     {
         [Theory]
         [CombinatorialData]

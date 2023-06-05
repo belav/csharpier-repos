@@ -4,15 +4,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Globalization
+    partial internal static class Globalization
     {
         [LibraryImport(
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_LoadICUData",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial int LoadICUData(string path);
+        partial internal static int LoadICUData(string path);
     }
 }

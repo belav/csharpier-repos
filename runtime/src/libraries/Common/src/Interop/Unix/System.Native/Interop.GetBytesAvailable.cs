@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetBytesAvailable")]
-        internal static unsafe partial Error GetBytesAvailable(SafeHandle socket, int* available);
+        partial internal static unsafe Error GetBytesAvailable(SafeHandle socket, int* available);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetAtOutOfBandMark")]
-        internal static unsafe partial Error GetAtOutOfBandMark(SafeHandle socket, int* atMark);
+        partial internal static unsafe Error GetAtOutOfBandMark(SafeHandle socket, int* atMark);
     }
 }

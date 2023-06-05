@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 
 namespace System.Collections
 {
-    internal static partial class HashHelpers
+    partial internal static class HashHelpers
     {
         private static ConditionalWeakTable<object, SerializationInfo>? s_serializationInfoTable;
 

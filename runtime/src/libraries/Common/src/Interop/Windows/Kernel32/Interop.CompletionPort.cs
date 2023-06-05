@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial IntPtr CreateIoCompletionPort(
+        partial internal static IntPtr CreateIoCompletionPort(
             IntPtr FileHandle,
             IntPtr ExistingCompletionPort,
             UIntPtr CompletionKey,
@@ -19,7 +19,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool PostQueuedCompletionStatus(
+        partial internal static bool PostQueuedCompletionStatus(
             IntPtr CompletionPort,
             uint dwNumberOfBytesTransferred,
             UIntPtr CompletionKey,
@@ -28,7 +28,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetQueuedCompletionStatus(
+        partial internal static bool GetQueuedCompletionStatus(
             IntPtr CompletionPort,
             out uint lpNumberOfBytesTransferred,
             out UIntPtr CompletionKey,
@@ -38,7 +38,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool GetQueuedCompletionStatusEx(
+        partial internal static unsafe bool GetQueuedCompletionStatusEx(
             IntPtr CompletionPort,
             OVERLAPPED_ENTRY* lpCompletionPortEntries,
             int ulCount,

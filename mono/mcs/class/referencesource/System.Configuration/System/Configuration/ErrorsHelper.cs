@@ -10,19 +10,19 @@ namespace System.Configuration
     using System.Collections.Specialized;
     using System.Collections.Generic;
 
-    static internal class ErrorsHelper
+    internal static class ErrorsHelper
     {
-        static internal int GetErrorCount(List<ConfigurationException> errors)
+        internal static int GetErrorCount(List<ConfigurationException> errors)
         {
             return (errors != null) ? errors.Count : 0;
         }
 
-        static internal bool GetHasErrors(List<ConfigurationException> errors)
+        internal static bool GetHasErrors(List<ConfigurationException> errors)
         {
             return GetErrorCount(errors) > 0;
         }
 
-        static internal void AddError(
+        internal static void AddError(
             ref List<ConfigurationException> errors,
             ConfigurationException e
         )
@@ -54,7 +54,7 @@ namespace System.Configuration
             }
         }
 
-        static internal void AddErrors(
+        internal static void AddErrors(
             ref List<ConfigurationException> errors,
             ICollection<ConfigurationException> coll
         )
@@ -71,7 +71,7 @@ namespace System.Configuration
             }
         }
 
-        static internal ConfigurationErrorsException GetErrorsException(
+        internal static ConfigurationErrorsException GetErrorsException(
             List<ConfigurationException> errors
         )
         {
@@ -84,7 +84,7 @@ namespace System.Configuration
             return new ConfigurationErrorsException(errors);
         }
 
-        static internal void ThrowOnErrors(List<ConfigurationException> errors)
+        internal static void ThrowOnErrors(List<ConfigurationException> errors)
         {
             ConfigurationErrorsException e = GetErrorsException(errors);
             if (e != null)

@@ -36,7 +36,7 @@ internal class Color
     }
 }
 
-internal partial class VectorTest
+partial internal class VectorTest
 {
     private static int VectorArgs()
     {

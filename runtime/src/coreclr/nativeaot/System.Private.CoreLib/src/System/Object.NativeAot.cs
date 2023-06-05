@@ -8,10 +8,11 @@ using Internal.Runtime;
 
 namespace System
 {
+    partial
     // CONTRACT with Runtime
     // The Object type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type MethodTable*
-    public unsafe partial class Object
+    public unsafe class Object
     {
         // CS0649: Field '{blah}' is never assigned to, and will always have its default value
 #pragma warning disable 649

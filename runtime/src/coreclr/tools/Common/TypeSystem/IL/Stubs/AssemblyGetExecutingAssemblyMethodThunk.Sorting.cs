@@ -6,8 +6,9 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     // Functionality related to deterministic ordering of types
-    internal partial class AssemblyGetExecutingAssemblyMethodThunk
+    internal class AssemblyGetExecutingAssemblyMethodThunk
     {
         protected override int ClassCode => 1459986716;
 

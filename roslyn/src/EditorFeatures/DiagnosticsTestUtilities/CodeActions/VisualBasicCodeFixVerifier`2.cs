@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Testing;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
-    public static partial class VisualBasicCodeFixVerifier<TAnalyzer, TCodeFix>
+    partial public static class VisualBasicCodeFixVerifier<TAnalyzer, TCodeFix>
         where TAnalyzer : DiagnosticAnalyzer, new()
         where TCodeFix : CodeFixProvider, new()
     {

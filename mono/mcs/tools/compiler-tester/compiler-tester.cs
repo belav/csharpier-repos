@@ -899,7 +899,7 @@ namespace TestRunner
     class PositiveChecker : Checker
     {
         readonly string files_folder;
-        readonly static object[] default_args = new object[1] { new string[] { } };
+        static readonly object[] default_args = new object[1] { new string[] { } };
         string doc_output;
         string verif_file;
         bool update_verif_file;

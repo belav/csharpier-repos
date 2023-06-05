@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
     [Shared]
     [Export(typeof(IAsynchronousOperationListenerProvider))]
     [Export(typeof(AsynchronousOperationListenerProvider))]
-    internal sealed partial class AsynchronousOperationListenerProvider
+    partial internal sealed class AsynchronousOperationListenerProvider
         : IAsynchronousOperationListenerProvider
     {
         public static readonly IAsynchronousOperationListenerProvider NullProvider =

@@ -11,7 +11,7 @@ namespace System.IO.Tests
     // consumes entire available free space on the disk (only on Linux, this is how posix_fallocate works)
     // and if we try to run other disk-writing test in the meantime we are going to get "No space left on device" exception.
     [Collection(nameof(DisableParallelization))]
-    public partial class FileStream_ctor_options : FileStream_ctor_str_fm_fa_fs_buffer_fo
+    partial public class FileStream_ctor_options : FileStream_ctor_str_fm_fa_fs_buffer_fo
     {
         protected override string GetExpectedParamName(string paramName) => "value";
 

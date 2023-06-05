@@ -21,7 +21,7 @@ namespace Mono.Data.Sqlite
         internal SQLiteBase(SQLiteDateFormats fmt)
             : base(fmt) { }
 
-        static internal object _lock = new object();
+        internal static object _lock = new object();
 
         /// <summary>
         /// Returns a string representing the active version of SQLite

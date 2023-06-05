@@ -135,19 +135,19 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool CheckCurrentDomain(IntPtr handle);
+        private static extern bool CheckCurrentDomain(IntPtr handle);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static object GetTarget(IntPtr handle);
+        private static extern object GetTarget(IntPtr handle);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static IntPtr GetTargetHandle(object obj, IntPtr handle, GCHandleType type);
+        private static extern IntPtr GetTargetHandle(object obj, IntPtr handle, GCHandleType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void FreeHandle(IntPtr handle);
+        private static extern void FreeHandle(IntPtr handle);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static IntPtr GetAddrOfPinnedObject(IntPtr handle);
+        private static extern IntPtr GetAddrOfPinnedObject(IntPtr handle);
 
         public static bool operator ==(GCHandle a, GCHandle b)
         {

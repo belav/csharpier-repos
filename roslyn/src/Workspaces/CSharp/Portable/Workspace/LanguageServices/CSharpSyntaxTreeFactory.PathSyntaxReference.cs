@@ -13,9 +13,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class CSharpSyntaxTreeFactoryServiceFactory
+    partial internal class CSharpSyntaxTreeFactoryServiceFactory
     {
-        private partial class CSharpSyntaxTreeFactoryService
+        partial private class CSharpSyntaxTreeFactoryService
         {
             /// <summary>
             /// Represents a syntax reference that doesn't actually hold onto the

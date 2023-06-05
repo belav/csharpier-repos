@@ -7,7 +7,7 @@ using System.IO;
 
 namespace System.Diagnostics
 {
-    internal static partial class ProcessManager
+    partial internal static class ProcessManager
     {
         /// <summary>Gets the IDs of all processes on the current machine.</summary>
         public static int[] GetProcessIds() => new List<int>(EnumerateProcessIds()).ToArray();

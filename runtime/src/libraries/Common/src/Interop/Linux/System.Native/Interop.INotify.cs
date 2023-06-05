@@ -6,16 +6,16 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_INotifyInit",
             SetLastError = true
         )]
-        internal static partial SafeFileHandle INotifyInit();
+        partial internal static SafeFileHandle INotifyInit();
 
         [LibraryImport(
             Libraries.SystemNative,
@@ -23,14 +23,14 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial int INotifyAddWatch(SafeFileHandle fd, string pathName, uint mask);
+        partial internal static int INotifyAddWatch(SafeFileHandle fd, string pathName, uint mask);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_INotifyRemoveWatch",
             SetLastError = true
         )]
-        private static partial int INotifyRemoveWatch_private(SafeFileHandle fd, int wd);
+        partial private static int INotifyRemoveWatch_private(SafeFileHandle fd, int wd);
 
         internal static int INotifyRemoveWatch(SafeFileHandle fd, int wd)
         {

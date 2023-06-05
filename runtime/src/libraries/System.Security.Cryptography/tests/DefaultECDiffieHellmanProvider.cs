@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
-    public partial class ECDiffieHellmanProvider : IECDiffieHellmanProvider
+    partial public class ECDiffieHellmanProvider : IECDiffieHellmanProvider
     {
         public ECDiffieHellman Create()
         {
@@ -23,7 +23,7 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         }
     }
 
-    public partial class ECDiffieHellmanFactory
+    partial public class ECDiffieHellmanFactory
     {
         private static readonly IECDiffieHellmanProvider s_provider = new ECDiffieHellmanProvider();
     }

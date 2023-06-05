@@ -1211,9 +1211,10 @@ namespace System.Threading.Tasks.Tests.FromAsync
         }
     }
 
+    partial
     #endregion
 
-    public partial class TaskFromAsyncTests
+    public class TaskFromAsyncTests
     {
         #region Test Methods
 

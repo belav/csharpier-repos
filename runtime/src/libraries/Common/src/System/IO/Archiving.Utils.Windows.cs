@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.IO
 {
-    internal static partial class ArchivingUtils
+    partial internal static class ArchivingUtils
     {
         private static readonly IndexOfAnyValues<char> s_illegalChars = IndexOfAnyValues.Create(
             "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000A\u000B\u000C\u000D\u000E\u000F"

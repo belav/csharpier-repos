@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public partial class TrustManagerContext
+    partial public class TrustManagerContext
     {
         public TrustManagerContext() { }
 

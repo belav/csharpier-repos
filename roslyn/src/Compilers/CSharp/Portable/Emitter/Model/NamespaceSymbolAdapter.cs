@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class
+    partial internal class
 #if DEBUG
     NamespaceSymbolAdapter : SymbolAdapter,
 #else
@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             AdaptedNamespaceSymbol;
     }
 
-    internal partial class NamespaceSymbol
+    partial internal class NamespaceSymbol
     {
 #if DEBUG
         private NamespaceSymbolAdapter _lazyAdapter;
@@ -54,8 +54,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #endif
     }
 
+    partial
 #if DEBUG
-    internal partial class NamespaceSymbolAdapter
+    internal class NamespaceSymbolAdapter
     {
         internal NamespaceSymbolAdapter(NamespaceSymbol underlyingNamespaceSymbol)
         {

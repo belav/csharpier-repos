@@ -7,14 +7,15 @@ using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 
+partial
 #pragma warning disable 8500 // takes address of managed type
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetAllMountPoints")]
-        private static unsafe partial int GetAllMountPoints(
+        partial private static unsafe int GetAllMountPoints(
             delegate* unmanaged<void*, byte*, void> onFound,
             void* context
         );

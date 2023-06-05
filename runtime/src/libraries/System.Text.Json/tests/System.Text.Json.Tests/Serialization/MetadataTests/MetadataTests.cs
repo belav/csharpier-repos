@@ -55,7 +55,7 @@ namespace System.Text.Json.Serialization.Tests
             : base(JsonSerializerWrapper.NodeSerializer) { }
     }
 
-    public abstract partial class MetadataTests
+    partial public abstract class MetadataTests
     {
         protected JsonSerializerWrapper Serializer { get; }
 
@@ -83,5 +83,5 @@ namespace System.Text.Json.Serialization.Tests
     }
 
     [JsonSerializable(typeof(WeatherForecastWithPOCOs))]
-    internal sealed partial class JsonContext : JsonSerializerContext { }
+    partial internal sealed class JsonContext : JsonSerializerContext { }
 }

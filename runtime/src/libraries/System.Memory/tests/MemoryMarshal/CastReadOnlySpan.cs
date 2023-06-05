@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.SpanTests
 {
-    public static partial class MemoryMarshalTests
+    partial public static class MemoryMarshalTests
     {
         [Fact]
         public static void CastReadOnlySpanUIntToUShort()

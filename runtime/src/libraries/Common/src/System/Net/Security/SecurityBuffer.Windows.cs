@@ -8,7 +8,7 @@ using System.Security.Authentication.ExtendedProtection;
 namespace System.Net.Security
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal ref struct InputSecurityBuffers
+    ref internal struct InputSecurityBuffers
     {
         internal int Count;
         internal InputSecurityBuffer _item0;
@@ -36,7 +36,7 @@ namespace System.Net.Security
     }
 
     [StructLayout(LayoutKind.Auto)]
-    internal readonly ref struct InputSecurityBuffer
+    ref internal readonly struct InputSecurityBuffer
     {
         public readonly SecurityBufferType Type;
         public readonly ReadOnlySpan<byte> Token;

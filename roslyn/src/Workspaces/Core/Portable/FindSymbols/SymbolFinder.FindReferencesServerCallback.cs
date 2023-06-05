@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    public static partial class SymbolFinder
+    partial public static class SymbolFinder
     {
         /// <summary>
         /// Callback object we pass to the OOP server to hear about the result

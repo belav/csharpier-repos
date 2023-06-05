@@ -25,7 +25,7 @@ namespace System.Data.Common
         public SqlXmlStorage(DataColumn column)
             : base(column, typeof(SqlXml), SqlXml.Null, SqlXml.Null, StorageType.Empty) { }
 
-        override public Object Aggregate(int[] records, AggregateType kind)
+        public override Object Aggregate(int[] records, AggregateType kind)
         {
             try
             {
@@ -55,35 +55,35 @@ namespace System.Data.Common
             throw ExceptionBuilder.AggregateException(kind, _dataType);
         }
 
-        override public int Compare(int recordNo1, int recordNo2)
+        public override int Compare(int recordNo1, int recordNo2)
         {
             //return values[recordNo1].CompareTo(values[recordNo2]);
             return 0;
         }
 
-        override public int CompareValueTo(int recordNo, Object value)
+        public override int CompareValueTo(int recordNo, Object value)
         {
             // SqlXml valueNo2 = ((value == null)||(value == DBNull.Value))? SqlXml.Null : (SqlXml)value;
             // return values[recordNo].CompareTo(valueNo2);
             return 0;
         }
 
-        override public void Copy(int recordNo1, int recordNo2)
+        public override void Copy(int recordNo1, int recordNo2)
         {
             values[recordNo2] = values[recordNo1];
         }
 
-        override public Object Get(int record)
+        public override Object Get(int record)
         {
             return values[record];
         }
 
-        override public bool IsNull(int record)
+        public override bool IsNull(int record)
         {
             return (values[record].IsNull);
         }
 
-        override public void Set(int record, Object value)
+        public override void Set(int record, Object value)
         {
             if ((value == DBNull.Value) || (value == null))
             {
@@ -95,7 +95,7 @@ namespace System.Data.Common
             }
         }
 
-        override public void SetCapacity(int capacity)
+        public override void SetCapacity(int capacity)
         {
             SqlXml[] newValues = new SqlXml[capacity];
             if (null != values)
@@ -105,7 +105,7 @@ namespace System.Data.Common
             values = newValues;
         }
 
-        override public object ConvertXmlToObject(string s)
+        public override object ConvertXmlToObject(string s)
         {
             XmlTextReader reader = new XmlTextReader(s, XmlNodeType.Element, null);
             return (new SqlXml(reader));
@@ -120,7 +120,7 @@ namespace System.Data.Common
             */
         }
 
-        override public string ConvertObjectToXml(object value)
+        public override string ConvertObjectToXml(object value)
         {
             SqlXml reader = (SqlXml)value;
             if (reader.IsNull)
@@ -129,12 +129,12 @@ namespace System.Data.Common
                 return reader.Value; // SqlXml.Value returns string
         }
 
-        override protected object GetEmptyStorage(int recordCount)
+        protected override object GetEmptyStorage(int recordCount)
         {
             return new SqlXml[recordCount];
         }
 
-        override protected void CopyValue(
+        protected override void CopyValue(
             int record,
             object store,
             BitArray nullbits,
@@ -146,7 +146,7 @@ namespace System.Data.Common
             nullbits.Set(storeIndex, IsNull(record));
         }
 
-        override protected void SetStorage(object store, BitArray nullbits)
+        protected override void SetStorage(object store, BitArray nullbits)
         {
             values = (SqlXml[])store;
             //SetNullStorage(nullbits);

@@ -8,7 +8,7 @@ using System.Threading.Tasks.Sources;
 
 namespace System.IO.Pipes
 {
-    public abstract partial class PipeStream : Stream
+    partial public abstract class PipeStream : Stream
     {
         internal abstract unsafe class PipeValueTaskSource : IValueTaskSource<int>, IValueTaskSource
         {

@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    public static partial class SymbolFinder
+    partial public static class SymbolFinder
     {
         /// <summary>
         /// Find symbols for members that override the specified member symbol.

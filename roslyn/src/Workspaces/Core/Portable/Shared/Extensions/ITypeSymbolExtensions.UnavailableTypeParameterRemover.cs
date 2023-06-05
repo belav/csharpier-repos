@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ITypeSymbolExtensions
+    partial internal static class ITypeSymbolExtensions
     {
         private class UnavailableTypeParameterRemover : SymbolVisitor<ITypeSymbol>
         {

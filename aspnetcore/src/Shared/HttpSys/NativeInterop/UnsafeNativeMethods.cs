@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
-internal static unsafe partial class UnsafeNclNativeMethods
+partial internal static unsafe class UnsafeNclNativeMethods
 {
     private const string sspicli_LIB = "sspicli.dll";
     private const string api_ms_win_core_io_LIB = "api-ms-win-core-io-l1-1-0.dll";
@@ -40,14 +40,14 @@ internal static unsafe partial class UnsafeNclNativeMethods
     }
 
     [LibraryImport(api_ms_win_core_io_LIB, SetLastError = true)]
-    internal static unsafe partial uint CancelIoEx(
+    partial internal static unsafe uint CancelIoEx(
         SafeHandle handle,
         SafeNativeOverlapped overlapped
     );
 
     [LibraryImport(api_ms_win_core_kernel32_legacy_LIB, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    internal static unsafe partial bool SetFileCompletionNotificationModes(
+    partial internal static unsafe bool SetFileCompletionNotificationModes(
         SafeHandle handle,
         FileCompletionNotificationModes modes
     );
@@ -61,7 +61,7 @@ internal static unsafe partial class UnsafeNclNativeMethods
     }
 
     [LibraryImport(TOKENBINDING)]
-    public static partial int TokenBindingVerifyMessage(
+    partial public static int TokenBindingVerifyMessage(
         byte* tokenBindingMessage,
         uint tokenBindingMessageSize,
         char* keyType,
@@ -72,34 +72,34 @@ internal static unsafe partial class UnsafeNclNativeMethods
 
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa366569(v=vs.85).aspx
     [LibraryImport(api_ms_win_core_heap_LIB, SetLastError = true)]
-    internal static partial IntPtr GetProcessHeap();
+    partial internal static IntPtr GetProcessHeap();
 
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa366701(v=vs.85).aspx
     [LibraryImport(api_ms_win_core_heap_LIB, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    internal static partial bool HeapFree(IntPtr hHeap, uint dwFlags, IntPtr lpMem);
+    partial internal static bool HeapFree(IntPtr hHeap, uint dwFlags, IntPtr lpMem);
 
-    internal static partial class SafeNetHandles
+    partial internal static class SafeNetHandles
     {
         [LibraryImport(sspicli_LIB, SetLastError = true)]
-        internal static partial int FreeContextBuffer(IntPtr contextBuffer);
+        partial internal static int FreeContextBuffer(IntPtr contextBuffer);
 
         [LibraryImport(api_ms_win_core_handle_LIB, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CloseHandle(IntPtr handle);
+        partial internal static bool CloseHandle(IntPtr handle);
 
         [LibraryImport(
             api_ms_win_core_heap_obsolete_LIB,
             EntryPoint = "LocalAlloc",
             SetLastError = true
         )]
-        internal static partial SafeLocalFreeChannelBinding LocalAllocChannelBinding(
+        partial internal static SafeLocalFreeChannelBinding LocalAllocChannelBinding(
             int uFlags,
             UIntPtr sizetdwBytes
         );
 
         [LibraryImport(api_ms_win_core_heap_obsolete_LIB, SetLastError = true)]
-        internal static partial IntPtr LocalFree(IntPtr handle);
+        partial internal static IntPtr LocalFree(IntPtr handle);
     }
 
     // from tokenbinding.h

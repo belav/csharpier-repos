@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlWellFormedWriter : XmlWriter
+    partial internal sealed class XmlWellFormedWriter : XmlWriter
     {
-        private partial struct ElementScope
+        partial private struct ElementScope
         {
             internal Task WriteEndElementAsync(XmlRawWriter rawWriter)
             {
@@ -25,7 +25,7 @@ namespace System.Xml
             }
         }
 
-        private partial struct Namespace
+        partial private struct Namespace
         {
             internal async Task WriteDeclAsync(XmlWriter writer, XmlRawWriter? rawWriter)
             {
@@ -56,7 +56,7 @@ namespace System.Xml
             }
         }
 
-        private sealed partial class AttributeValueCache
+        partial private sealed class AttributeValueCache
         {
             internal async Task ReplayAsync(XmlWriter writer)
             {

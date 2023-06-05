@@ -3,7 +3,7 @@
 
 namespace System.Net.Security
 {
-    internal partial struct SslConnectionInfo
+    partial internal struct SslConnectionInfo
     {
 #pragma warning disable CA1823
         private static readonly byte[] s_http1 = SslApplicationProtocol.Http11.Protocol.ToArray();

@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class AttributeSyntax
+    partial public class AttributeSyntax
     {
         /// <summary>
         /// Return the name used in syntax for the attribute. This is typically the class

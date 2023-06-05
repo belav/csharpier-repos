@@ -5,7 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-unsafe partial class GenericsNative
+partial unsafe class GenericsNative
 {
     [DllImport(nameof(GenericsNative), EntryPoint = "GetSpanU")]
     public static extern ReadOnlySpan<uint> GetReadOnlySpanU(uint e00);
@@ -29,7 +29,7 @@ unsafe partial class GenericsNative
     );
 }
 
-unsafe partial class GenericsTest
+partial unsafe class GenericsTest
 {
     private static void TestReadOnlySpanU()
     {

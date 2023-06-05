@@ -11,6 +11,7 @@
 
 namespace System
 {
+    partial
     // Note: FACILITY_URT is defined as 0x13 (0x8013xxxx).  Within that
     // range, 0x1yyy is for Runtime errors (used for Security, Metadata, etc).
     // In that subrange, 0x15zz and 0x16zz have been allocated for classlib-type
@@ -22,7 +23,7 @@ namespace System
     // Reflection will use 0x1600 -> 0x161f.  IO will use 0x1620 -> 0x163f.
     // Security will use 0x1640 -> 0x165f
 
-    internal static partial class HResults
+    internal static class HResults
     {
         internal const int S_OK = unchecked((int)0x00000000);
         internal const int S_FALSE = unchecked((int)0x1);

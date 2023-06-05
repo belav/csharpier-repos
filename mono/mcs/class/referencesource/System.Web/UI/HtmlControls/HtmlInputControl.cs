@@ -32,7 +32,7 @@ namespace System.Web.UI.HtmlControls
     ///    </para>
     /// </devdoc>
     [ControlBuilderAttribute(typeof(HtmlEmptyTagControlBuilder))]
-    abstract public class HtmlInputControl : HtmlControl
+    public abstract class HtmlInputControl : HtmlControl
     {
         private string _type;
 

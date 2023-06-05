@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis
     /// Represents a read-only list of <see cref="SyntaxTrivia"/>.
     /// </summary>
     [StructLayout(LayoutKind.Auto)]
-    public readonly partial struct SyntaxTriviaList
+    partial public readonly struct SyntaxTriviaList
         : IEquatable<SyntaxTriviaList>,
             IReadOnlyList<SyntaxTrivia>
     {

@@ -70,7 +70,7 @@ namespace System.Activities
             context.Cancel();
         }
 
-        sealed internal override void OnInternalCacheMetadata(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadata(bool createEmptyBindings)
         {
             NativeActivityMetadata metadata = new NativeActivityMetadata(
                 this,
@@ -307,7 +307,7 @@ namespace System.Activities
             context.Cancel();
         }
 
-        sealed internal override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
         {
             NativeActivityMetadata metadata = new NativeActivityMetadata(
                 this,

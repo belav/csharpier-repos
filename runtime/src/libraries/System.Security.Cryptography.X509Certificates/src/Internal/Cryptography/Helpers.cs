@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
         internal static ReadOnlySpan<byte> AsSpanParameter(this byte[] array, string paramName)
         {

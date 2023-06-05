@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
     [UnsupportedOSPlatform("ios")]
     [UnsupportedOSPlatform("maccatalyst")]
     [UnsupportedOSPlatform("tvos")]
-    public partial class SystemdLifetime : IHostLifetime, IDisposable
+    partial public class SystemdLifetime : IHostLifetime, IDisposable
     {
         private CancellationTokenRegistration _applicationStartedRegistration;
         private CancellationTokenRegistration _applicationStoppingRegistration;
@@ -78,7 +78,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
             return Task.CompletedTask;
         }
 
-        private partial void RegisterShutdownHandlers();
+        partial private void RegisterShutdownHandlers();
 
         private void OnApplicationStarted()
         {
@@ -106,6 +106,6 @@ namespace Microsoft.Extensions.Hosting.Systemd
             _applicationStoppingRegistration.Dispose();
         }
 
-        private partial void UnregisterShutdownHandlers();
+        partial private void UnregisterShutdownHandlers();
     }
 }

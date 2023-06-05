@@ -14,11 +14,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 {
+    partial
     /// <summary>
     /// This service provides diagnostic analyzers from the analyzer assets specified in the manifest files of installed VSIX extensions.
     /// These analyzers are used across this workspace session.
     /// </summary>
-    internal partial class VisualStudioDiagnosticAnalyzerProvider : IHostDiagnosticAnalyzerProvider
+    internal class VisualStudioDiagnosticAnalyzerProvider : IHostDiagnosticAnalyzerProvider
     {
         private const string AnalyzerContentTypeName = "Microsoft.VisualStudio.Analyzer";
 

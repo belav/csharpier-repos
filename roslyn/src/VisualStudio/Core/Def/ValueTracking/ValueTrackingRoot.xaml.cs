@@ -19,10 +19,11 @@ using System.Windows.Shapes;
 
 namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 {
+    partial
     /// <summary>
     /// Interaction logic for ValueTrackingRoot.xaml
     /// </summary>
-    internal partial class ValueTrackingRoot : UserControl
+    internal class ValueTrackingRoot : UserControl
     {
         public string EmptyText =>
             ServicesVSResources.Select_an_appropriate_symbol_to_start_value_tracking;

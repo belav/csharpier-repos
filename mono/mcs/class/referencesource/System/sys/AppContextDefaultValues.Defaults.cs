@@ -7,9 +7,9 @@ using System;
 
 namespace System
 {
-    internal static partial class AppContextDefaultValues
+    partial internal static class AppContextDefaultValues
     {
-        static partial void PopulateDefaultValuesPartial(
+        partial static void PopulateDefaultValuesPartial(
             string platformIdentifier,
             string profile,
             int version

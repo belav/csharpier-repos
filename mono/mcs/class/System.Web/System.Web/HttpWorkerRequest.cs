@@ -48,7 +48,7 @@ namespace System.Web
     )]
     // attributes
     [ComVisible(false)]
-    public abstract partial class HttpWorkerRequest
+    partial public abstract class HttpWorkerRequest
     {
         public delegate void EndOfSendNotification(HttpWorkerRequest wr, object extraData);
 

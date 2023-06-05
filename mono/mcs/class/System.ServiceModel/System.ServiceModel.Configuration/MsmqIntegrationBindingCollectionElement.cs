@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public partial class MsmqIntegrationBindingCollectionElement
+    partial public class MsmqIntegrationBindingCollectionElement
         : StandardBindingCollectionElement<MsmqIntegrationBinding, MsmqIntegrationBindingElement>
     {
         // Static Fields

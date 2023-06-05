@@ -39,7 +39,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
     [global::System.Xml.Serialization.XmlRootAttribute("CustomerDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class CustomerDataSet : global::System.Data.DataSet
+    partial public class CustomerDataSet : global::System.Data.DataSet
     {
         private CustomersDataTable tableCustomers;
 
@@ -434,7 +434,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CustomersDataTable
+        partial public class CustomersDataTable
             : global::System.Data.DataTable,
                 global::System.Collections.IEnumerable
         {
@@ -836,10 +836,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
             }
         }
 
+        partial
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class CustomersRow : global::System.Data.DataRow
+        public class CustomersRow : global::System.Data.DataRow
         {
             private CustomersDataTable tableCustomers;
 

@@ -16,9 +16,9 @@ using System.Runtime.Intrinsics;
 
 namespace JIT.HardwareIntrinsics.General
 {
-    public static partial class Program
+    partial public static class Program
     {
-        private unsafe static void ToStringSByte()
+        private static unsafe void ToStringSByte()
         {
             int size = Unsafe.SizeOf<Vector256<SByte>>() / sizeof(SByte);
             SByte[] values = new SByte[size];

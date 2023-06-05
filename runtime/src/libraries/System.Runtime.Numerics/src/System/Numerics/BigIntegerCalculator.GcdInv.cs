@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Numerics
 {
-    internal static partial class BigIntegerCalculator
+    partial internal static class BigIntegerCalculator
     {
         public static uint Gcd(uint left, uint right)
         {

@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
         Shared
     ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.ImplementInterface)]
-    internal partial class CSharpRemoveUnnecessaryCastCodeFixProvider
+    partial internal class CSharpRemoveUnnecessaryCastCodeFixProvider
         : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]

@@ -12,9 +12,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class AnonymousTypeManager
+    partial internal sealed class AnonymousTypeManager
     {
-        private sealed partial class AnonymousTypeConstructorSymbol : SynthesizedMethodBase
+        partial private sealed class AnonymousTypeConstructorSymbol : SynthesizedMethodBase
         {
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
@@ -88,7 +88,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             protected override bool HasSetsRequiredMembersImpl => false;
         }
 
-        private sealed partial class AnonymousTypePropertyGetAccessorSymbol : SynthesizedMethodBase
+        partial private sealed class AnonymousTypePropertyGetAccessorSymbol : SynthesizedMethodBase
         {
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
@@ -114,7 +114,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private sealed partial class AnonymousTypeEqualsMethodSymbol : SynthesizedMethodBase
+        partial private sealed class AnonymousTypeEqualsMethodSymbol : SynthesizedMethodBase
         {
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
@@ -203,7 +203,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private sealed partial class AnonymousTypeGetHashCodeMethodSymbol : SynthesizedMethodBase
+        partial private sealed class AnonymousTypeGetHashCodeMethodSymbol : SynthesizedMethodBase
         {
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,
@@ -285,7 +285,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private sealed partial class AnonymousTypeToStringMethodSymbol : SynthesizedMethodBase
+        partial private sealed class AnonymousTypeToStringMethodSymbol : SynthesizedMethodBase
         {
             internal override void GenerateMethodBody(
                 TypeCompilationState compilationState,

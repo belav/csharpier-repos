@@ -5,7 +5,7 @@ using global::Internal.Reflection.Core.Execution;
 
 namespace Internal.Reflection.Execution
 {
-    internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
+    partial internal sealed class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
         public unsafe ExecutionEnvironmentImplementation() { }
     }

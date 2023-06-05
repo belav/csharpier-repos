@@ -6,7 +6,7 @@ using Microsoft.CSharp.RuntimeBinder.Syntax;
 
 namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
-    internal readonly partial struct ExpressionBinder
+    partial internal readonly struct ExpressionBinder
     {
         private sealed class BinOpArgInfo
         {

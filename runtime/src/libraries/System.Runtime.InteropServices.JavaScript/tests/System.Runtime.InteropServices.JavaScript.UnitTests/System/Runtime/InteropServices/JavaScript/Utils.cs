@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    public static unsafe partial class Utils
+    partial public static unsafe class Utils
     {
         // replaces legacy Runtime.InvokeJS
         [JSImport("globalThis.App.invoke_js")]
-        public static partial string InvokeJS(string code);
+        partial public static string InvokeJS(string code);
 
         [JSImport("INTERNAL.set_property")]
-        public static partial void SetProperty(
+        partial public static void SetProperty(
             JSObject self,
             string propertyName,
             [JSMarshalAs<JSType.Function<JSType.Object>>] Action<JSObject> value
@@ -24,164 +24,164 @@ namespace System.Runtime.InteropServices.JavaScript
 
         [JSImport("INTERNAL.get_property")]
         [return: JSMarshalAs<JSType.Function<JSType.Object>>]
-        public static partial Action<JSObject> GetActionOfJSObjectProperty(
+        partial public static Action<JSObject> GetActionOfJSObjectProperty(
             JSObject self,
             string propertyName
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function>]
-        public static partial Action CreateAction([JSMarshalAs<JSType.String>] string code);
+        partial public static Action CreateAction([JSMarshalAs<JSType.String>] string code);
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Boolean>>]
-        public static partial Func<bool> CreateFunctionBool(
+        partial public static Func<bool> CreateFunctionBool(
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number>>]
-        public static partial Func<int> CreateFunctionInt([JSMarshalAs<JSType.String>] string code);
+        partial public static Func<int> CreateFunctionInt([JSMarshalAs<JSType.String>] string code);
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number>>]
-        public static partial Func<long> CreateFunctionLong(
+        partial public static Func<long> CreateFunctionLong(
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number>>]
-        public static partial Func<double> CreateFunctionDouble(
+        partial public static Func<double> CreateFunctionDouble(
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.String>>]
-        public static partial Func<string> CreateFunctionString(
+        partial public static Func<string> CreateFunctionString(
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Object>>]
-        public static partial Func<JSObject> CreateFunctionJSObject(
+        partial public static Func<JSObject> CreateFunctionJSObject(
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Boolean>>]
-        public static partial Action<bool> CreateActionBool(
+        partial public static Action<bool> CreateActionBool(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number>>]
-        public static partial Action<int> CreateActionInt(
+        partial public static Action<int> CreateActionInt(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number>>]
-        public static partial Action<long> CreateActionLong(
+        partial public static Action<long> CreateActionLong(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number>>]
-        public static partial Action<double> CreateActionDouble(
+        partial public static Action<double> CreateActionDouble(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.String>>]
-        public static partial Action<string> CreateActionString(
+        partial public static Action<string> CreateActionString(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Object>>]
-        public static partial Action<JSObject> CreateActionJSObject(
+        partial public static Action<JSObject> CreateActionJSObject(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Boolean, JSType.Boolean>>]
-        public static partial Func<bool, bool> CreateFunctionBoolBool(
+        partial public static Func<bool, bool> CreateFunctionBoolBool(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number>>]
-        public static partial Func<int, int> CreateFunctionIntInt(
+        partial public static Func<int, int> CreateFunctionIntInt(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number>>]
-        public static partial Func<long, long> CreateFunctionLongLong(
+        partial public static Func<long, long> CreateFunctionLongLong(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number>>]
-        public static partial Func<double, double> CreateFunctionDoubleDouble(
+        partial public static Func<double, double> CreateFunctionDoubleDouble(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.String, JSType.String>>]
-        public static partial Func<string, string> CreateFunctionStringString(
+        partial public static Func<string, string> CreateFunctionStringString(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Object, JSType.Object>>]
-        public static partial Func<JSObject, JSObject> CreateFunctionJSObjectJSObject(
+        partial public static Func<JSObject, JSObject> CreateFunctionJSObjectJSObject(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Boolean, JSType.Object>>]
-        public static partial Func<bool, JSObject> CreateFunctionBoolJSObject(
+        partial public static Func<bool, JSObject> CreateFunctionBoolJSObject(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Object>>]
-        public static partial Func<int, JSObject> CreateFunctionIntJSObject(
+        partial public static Func<int, JSObject> CreateFunctionIntJSObject(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Object>>]
-        public static partial Func<long, JSObject> CreateFunctionLongJSObject(
+        partial public static Func<long, JSObject> CreateFunctionLongJSObject(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Object>>]
-        public static partial Func<double, JSObject> CreateFunctionDoubleJSObject(
+        partial public static Func<double, JSObject> CreateFunctionDoubleJSObject(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.String, JSType.Object>>]
-        public static partial Func<string, JSObject> CreateFunctionStringJSObject(
+        partial public static Func<string, JSObject> CreateFunctionStringJSObject(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string code
         );
@@ -208,7 +208,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number>>]
-        public static partial Action<int, int> CreateActionIntInt(
+        partial public static Action<int, int> CreateActionIntInt(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string arg2Name,
             [JSMarshalAs<JSType.String>] string code
@@ -216,7 +216,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number>>]
-        public static partial Action<long, long> CreateActionLongLong(
+        partial public static Action<long, long> CreateActionLongLong(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string arg2Name,
             [JSMarshalAs<JSType.String>] string code
@@ -224,7 +224,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number>>]
-        public static partial Action<double, double> CreateActionDoubleDouble(
+        partial public static Action<double, double> CreateActionDoubleDouble(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string arg2Name,
             [JSMarshalAs<JSType.String>] string code
@@ -232,7 +232,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.String, JSType.String>>]
-        public static partial Action<string, string> CreateActionStringString(
+        partial public static Action<string, string> CreateActionStringString(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string arg2Name,
             [JSMarshalAs<JSType.String>] string code
@@ -240,7 +240,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number, JSType.Number>>]
-        public static partial Func<int, int, int> CreateFunctionIntIntInt(
+        partial public static Func<int, int, int> CreateFunctionIntIntInt(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string arg2Name,
             [JSMarshalAs<JSType.String>] string code
@@ -248,7 +248,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number, JSType.Number>>]
-        public static partial Func<long, long, long> CreateFunctionLongLongLong(
+        partial public static Func<long, long, long> CreateFunctionLongLongLong(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string arg2Name,
             [JSMarshalAs<JSType.String>] string code
@@ -256,7 +256,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number, JSType.Number>>]
-        public static partial Func<double, double, double> CreateFunctionDoubleDoubleDouble(
+        partial public static Func<double, double, double> CreateFunctionDoubleDoubleDouble(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string arg2Name,
             [JSMarshalAs<JSType.String>] string code
@@ -264,7 +264,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.String, JSType.String, JSType.String>>]
-        public static partial Func<string, string, string> CreateFunctionStringStringString(
+        partial public static Func<string, string, string> CreateFunctionStringStringString(
             [JSMarshalAs<JSType.String>] string arg1Name,
             [JSMarshalAs<JSType.String>] string arg2Name,
             [JSMarshalAs<JSType.String>] string code

@@ -13,7 +13,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    public static partial class RandomAccess
+    partial public static class RandomAccess
     {
         // IovStackThreshold matches Linux's UIO_FASTIOV, which is the number of 'struct iovec'
         // that get stackalloced in the Linux kernel.

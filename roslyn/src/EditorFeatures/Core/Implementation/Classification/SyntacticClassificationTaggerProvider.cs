@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
     [ContentType(ContentTypeNames.RoslynContentType)]
     [TextViewRole(PredefinedTextViewRoles.Document)]
     [TagType(typeof(IClassificationTag))]
-    internal partial class SyntacticClassificationTaggerProvider
+    partial internal class SyntacticClassificationTaggerProvider
         : ForegroundThreadAffinitizedObject,
             ITaggerProvider
     {

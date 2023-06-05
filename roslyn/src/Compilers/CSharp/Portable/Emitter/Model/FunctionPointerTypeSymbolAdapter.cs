@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class
+    partial internal sealed class
 #if DEBUG
     FunctionPointerTypeSymbolAdapter : SymbolAdapter,
 #else
@@ -112,7 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal partial class FunctionPointerTypeSymbol
+    partial internal class FunctionPointerTypeSymbol
     {
 #if DEBUG
         private FunctionPointerTypeSymbolAdapter? _lazyAdapter;
@@ -141,8 +141,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #endif
     }
 
+    partial
 #if DEBUG
-    internal partial class FunctionPointerTypeSymbolAdapter
+    internal class FunctionPointerTypeSymbolAdapter
     {
         internal FunctionPointerTypeSymbolAdapter(
             FunctionPointerTypeSymbol underlyingFunctionPointerTypeSymbol

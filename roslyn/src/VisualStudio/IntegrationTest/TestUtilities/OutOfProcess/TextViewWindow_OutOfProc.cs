@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
-    public abstract partial class TextViewWindow_OutOfProc : OutOfProcComponent
+    partial public abstract class TextViewWindow_OutOfProc : OutOfProcComponent
     {
         public Verifier<TextViewWindow_OutOfProc> Verify { get; }
 

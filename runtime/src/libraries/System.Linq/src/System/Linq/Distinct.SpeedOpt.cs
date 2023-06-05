@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        private sealed partial class DistinctIterator<TSource> : IIListProvider<TSource>
+        partial private sealed class DistinctIterator<TSource> : IIListProvider<TSource>
         {
             public TSource[] ToArray() =>
                 Enumerable.HashSetToArray(new HashSet<TSource>(_source, _comparer));

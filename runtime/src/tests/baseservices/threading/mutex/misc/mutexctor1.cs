@@ -17,7 +17,7 @@ public class MutexCtor1
     #region Public Fields
     public const int c_DEFAULT_INT_VALUE = 0;
 
-    public volatile static int m_SharedResource = c_DEFAULT_INT_VALUE;
+    public static volatile int m_SharedResource = c_DEFAULT_INT_VALUE;
     #endregion
 
     #region Private Fields

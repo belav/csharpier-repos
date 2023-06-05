@@ -14,7 +14,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class ActivatorTests
+    partial public class ActivatorTests
     {
         [Fact]
         public static void CreateInstance()

@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
         /// <summary>
         /// This is the top level 'Install Nuget Package' code action we show in

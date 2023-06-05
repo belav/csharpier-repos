@@ -19,7 +19,7 @@ class C
         }
     }
 
-    unsafe static void Test2()
+    static unsafe void Test2()
     {
         byte* b = null;
         b = b + (byte)1;
@@ -30,7 +30,7 @@ class C
         b = b + (ulong)1;
     }
 
-    unsafe static void Test2(sbyte sb, short s, int i, long l, ulong ul)
+    static unsafe void Test2(sbyte sb, short s, int i, long l, ulong ul)
     {
         short* b = null;
         b = b + sb;

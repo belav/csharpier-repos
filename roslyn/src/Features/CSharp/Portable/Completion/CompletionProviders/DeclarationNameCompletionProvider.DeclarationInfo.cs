@@ -15,7 +15,7 @@ using static Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles.SymbolSpe
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    internal partial class DeclarationNameCompletionProvider
+    partial internal class DeclarationNameCompletionProvider
     {
         internal readonly struct NameDeclarationInfo
         {

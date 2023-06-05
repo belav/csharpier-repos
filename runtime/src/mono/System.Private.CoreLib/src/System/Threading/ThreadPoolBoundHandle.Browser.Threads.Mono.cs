@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    public sealed partial class ThreadPoolBoundHandle : IDisposable
+    partial public sealed class ThreadPoolBoundHandle : IDisposable
     {
 #pragma warning disable IDE0060
         private static ThreadPoolBoundHandle BindHandleCore(SafeHandle handle)

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace System.IO
 {
-    public static partial class Path
+    partial public static class Path
     {
         public static char[] GetInvalidFileNameChars() => new char[] { '\0', '/' };
 

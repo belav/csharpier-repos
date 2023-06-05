@@ -48,7 +48,7 @@ namespace Novell.Directory.Ldap.Asn1
         /// any basic type can be passed in.
         /// </param>
         [CLSCompliantAttribute(false)]
-        virtual protected internal Asn1Object ChoiceValue
+        protected internal virtual Asn1Object ChoiceValue
         {
             set
             {

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
-    public partial class FrameworkResolutionBase
+    partial public class FrameworkResolutionBase
     {
         public class TestSettings
         {

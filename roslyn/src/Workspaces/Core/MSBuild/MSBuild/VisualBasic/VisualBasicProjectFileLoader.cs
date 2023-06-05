@@ -9,7 +9,7 @@ using MSB = Microsoft.Build;
 
 namespace Microsoft.CodeAnalysis.VisualBasic
 {
-    internal partial class VisualBasicProjectFileLoader : ProjectFileLoader
+    partial internal class VisualBasicProjectFileLoader : ProjectFileLoader
     {
         public override string Language => LanguageNames.VisualBasic;
 

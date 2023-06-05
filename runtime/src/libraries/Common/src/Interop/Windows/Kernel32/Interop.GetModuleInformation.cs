@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(
             Libraries.Kernel32,
@@ -16,7 +16,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool GetModuleInformation(
+        partial private static bool GetModuleInformation(
             SafeProcessHandle processHandle,
             IntPtr moduleHandle,
             out NtModuleInfo ntModuleInfo,

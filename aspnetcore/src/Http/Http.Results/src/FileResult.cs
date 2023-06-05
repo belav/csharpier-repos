@@ -7,7 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-internal abstract partial class FileResult
+partial internal abstract class FileResult
 {
     private string? _fileDownloadName;
 
@@ -51,7 +51,7 @@ internal abstract partial class FileResult
     /// </summary>
     public bool EnableRangeProcessing { get; init; }
 
-    protected static partial class Log
+    partial protected static class Log
     {
         public static void ExecutingFileResult(ILogger logger, FileResult fileResult)
         {
@@ -86,7 +86,7 @@ internal abstract partial class FileResult
             EventName = "ExecutingFileResultWithNoFileName",
             SkipEnabledCheck = true
         )]
-        private static partial void ExecutingFileResultWithNoFileName(
+        partial private static void ExecutingFileResultWithNoFileName(
             ILogger logger,
             string fileResultType,
             string fileDownloadName
@@ -99,7 +99,7 @@ internal abstract partial class FileResult
             EventName = "ExecutingFileResult",
             SkipEnabledCheck = true
         )]
-        private static partial void ExecutingFileResult(
+        partial private static void ExecutingFileResult(
             ILogger logger,
             string fileResultType,
             string fileDownloadPath,

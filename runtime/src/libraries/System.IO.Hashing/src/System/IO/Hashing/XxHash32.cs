@@ -8,6 +8,7 @@ using System.Buffers.Binary;
 
 namespace System.IO.Hashing
 {
+    partial
     /// <summary>
     ///   Provides an implementation of the XxHash32 algorithm.
     /// </summary>
@@ -15,7 +16,7 @@ namespace System.IO.Hashing
     /// For methods that persist the computed numerical hash value as bytes,
     /// the value is written in the Big Endian byte order.
     /// </remarks>
-    public sealed partial class XxHash32 : NonCryptographicHashAlgorithm
+    public sealed class XxHash32 : NonCryptographicHashAlgorithm
     {
         private const int HashSize = sizeof(uint);
         private const int StripeSize = 4 * sizeof(uint);

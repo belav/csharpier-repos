@@ -59,8 +59,9 @@ using Debug = System.Diagnostics.Debug;
 // the instantiating thunk in this shape can be shared.
 namespace ILCompiler
 {
+    partial
     // Contains functionality related to instantiating thunks for default interface methods
-    public partial class CompilerTypeSystemContext
+    public class CompilerTypeSystemContext
     {
         private const int UseContextFromRuntime = -1;
 
@@ -204,10 +205,11 @@ namespace ILCompiler
         private DefaultInterfaceMethodImplementationInstantiationThunkHashtable _dimThunkHashtable =
             new DefaultInterfaceMethodImplementationInstantiationThunkHashtable();
 
+        partial
         /// <summary>
         /// Represents a thunk to call shared instance method on generic interfaces.
         /// </summary>
-        private sealed partial class DefaultInterfaceMethodImplementationInstantiationThunk
+        private sealed class DefaultInterfaceMethodImplementationInstantiationThunk
             : ILStubMethod,
                 IPrefixMangledMethod
         {
@@ -309,13 +311,13 @@ namespace ILCompiler
             }
         }
 
+        partial
         /// <summary>
         /// Represents an instance method on a generic interface with an explicit instantiation parameter in the
         /// signature. This is so that we can refer to the parameter from IL. References to this method will
         /// be replaced by the actual instance method after codegen is done.
         /// </summary>
-        internal sealed partial class DefaultInterfaceMethodImplementationWithHiddenParameter
-            : MethodDesc
+        internal sealed class DefaultInterfaceMethodImplementationWithHiddenParameter : MethodDesc
         {
             private readonly MethodDesc _methodRepresented;
             private readonly TypeDesc _owningType;

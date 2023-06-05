@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace System.Security.Policy
 {
-    public abstract partial class CodeGroup
+    partial public abstract class CodeGroup
     {
         protected CodeGroup(IMembershipCondition membershipCondition, PolicyStatement policy) { }
 

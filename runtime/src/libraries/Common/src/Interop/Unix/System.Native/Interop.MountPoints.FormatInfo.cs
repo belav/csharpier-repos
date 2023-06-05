@@ -5,9 +5,9 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
 #if DEBUG
         static Sys()
@@ -37,7 +37,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetSpaceInfoForMountPoint",
             SetLastError = true
         )]
-        internal static partial int GetSpaceInfoForMountPoint(
+        partial internal static int GetSpaceInfoForMountPoint(
             [MarshalAs(UnmanagedType.LPUTF8Str)] string name,
             out MountPointInformation mpi
         );
@@ -47,7 +47,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetFormatInfoForMountPoint",
             SetLastError = true
         )]
-        private static unsafe partial int GetFormatInfoForMountPoint(
+        partial private static unsafe int GetFormatInfoForMountPoint(
             [MarshalAs(UnmanagedType.LPUTF8Str)] string name,
             byte* formatNameBuffer,
             int bufferLength,

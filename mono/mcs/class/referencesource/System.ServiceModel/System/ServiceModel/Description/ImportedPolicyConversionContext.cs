@@ -11,7 +11,7 @@ namespace System.ServiceModel.Description
     using System.ServiceModel.Channels;
     using System.Xml;
 
-    public abstract partial class MetadataImporter
+    partial public abstract class MetadataImporter
     {
         //Consider, Microsoft: make this public
         internal static IEnumerable<PolicyConversionContext> GetPolicyConversionContextEnumerator(

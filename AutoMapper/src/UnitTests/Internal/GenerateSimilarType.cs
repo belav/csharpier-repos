@@ -4,7 +4,7 @@ namespace AutoMapper.UnitTests;
 
 public class GenerateSimilarType
 {
-    public partial class Article
+    partial public class Article
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -13,7 +13,7 @@ public class GenerateSimilarType
         public virtual Product Product { get; set; }
     }
 
-    public partial class Product
+    partial public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }

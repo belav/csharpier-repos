@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_SearchPath",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial string? SearchPath(NSSearchPathDirectory folderId);
+        partial internal static string? SearchPath(NSSearchPathDirectory folderId);
 
         internal enum NSSearchPathDirectory
         {

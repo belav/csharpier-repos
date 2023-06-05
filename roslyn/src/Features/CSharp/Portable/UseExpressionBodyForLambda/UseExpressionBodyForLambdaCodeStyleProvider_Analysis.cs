@@ -14,9 +14,10 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 {
+    partial
     // Code for the DiagnosticAnalyzer ("Analysis") portion of the feature.
 
-    internal partial class UseExpressionBodyForLambdaCodeStyleProvider
+    internal class UseExpressionBodyForLambdaCodeStyleProvider
     {
         protected override void DiagnosticAnalyzerInitialize(AnalysisContext context) =>
             context.RegisterSyntaxNodeAction(

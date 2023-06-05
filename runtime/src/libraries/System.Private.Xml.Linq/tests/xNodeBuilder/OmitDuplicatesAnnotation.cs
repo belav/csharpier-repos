@@ -14,11 +14,11 @@ using XmlCoreTest.Common;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeBuilderFunctionalTests : TestModule
+    partial public class XNodeBuilderFunctionalTests : TestModule
     {
-        public partial class XNodeBuilderTests : XLinqTestCase
+        partial public class XNodeBuilderTests : XLinqTestCase
         {
-            public partial class OmitAnotation : XLinqTestCase
+            partial public class OmitAnotation : XLinqTestCase
             {
                 private static string s_MyPath = Path.Combine(
                     FilePathUtil.GetTestDataPath(),

@@ -67,7 +67,7 @@ public abstract class JsonSerializerApiValidation
 {
     private class MyPoco { }
 
-    internal partial class MyDummyContext : JsonSerializerContext
+    partial internal class MyDummyContext : JsonSerializerContext
     {
         public MyDummyContext()
             : base(new JsonSerializerOptions()) { }

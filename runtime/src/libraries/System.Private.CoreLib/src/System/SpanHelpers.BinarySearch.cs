@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    internal static partial class SpanHelpers
+    partial internal static class SpanHelpers
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BinarySearch<T, TComparable>(

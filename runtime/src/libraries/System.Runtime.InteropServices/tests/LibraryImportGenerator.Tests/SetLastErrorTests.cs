@@ -27,14 +27,14 @@ namespace LibraryImportGenerator.IntegrationTests
 
     partial class NativeExportsNE
     {
-        public partial class SetLastError
+        partial public class SetLastError
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "set_error", SetLastError = true)]
-            public static partial int SetError(int error, byte shouldSetError);
+            partial public static int SetError(int error, byte shouldSetError);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "set_error", SetLastError = true)]
             [return: MarshalUsing(typeof(SetLastErrorMarshaller))]
-            public static partial int SetError_CustomMarshallingSetsError(
+            partial public static int SetError_CustomMarshallingSetsError(
                 int error,
                 byte shouldSetError
             );
@@ -45,7 +45,7 @@ namespace LibraryImportGenerator.IntegrationTests
                 SetLastError = true
             )]
             [return: MarshalAs(UnmanagedType.LPWStr)]
-            public static partial string SetError_NonBlittableSignature(
+            partial public static string SetError_NonBlittableSignature(
                 int error,
                 [MarshalAs(UnmanagedType.U1)] bool shouldSetError,
                 [MarshalAs(UnmanagedType.LPWStr)] string errorString

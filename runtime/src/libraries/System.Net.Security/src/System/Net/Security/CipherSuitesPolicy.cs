@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace System.Net.Security
 {
+    partial
     /// <summary>
     /// Specifies allowed cipher suites.
     /// </summary>
-    public sealed partial class CipherSuitesPolicy
+    public sealed class CipherSuitesPolicy
     {
         internal CipherSuitesPolicyPal Pal { get; private set; }
 

@@ -193,7 +193,7 @@ namespace Internal.Runtime.TypeLoader
         }
     }
 
-    public sealed partial class TypeLoaderEnvironment
+    partial public sealed class TypeLoaderEnvironment
     {
         [ThreadStatic]
         private static bool t_isReentrant;

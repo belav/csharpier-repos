@@ -11,7 +11,7 @@ using System.Text;
 
 namespace System.Data.Common
 {
-    internal partial class DbConnectionOptions
+    partial internal class DbConnectionOptions
     {
         // SxS notes:
         // * this method queries "DataDirectory" value from the current AppDomain.

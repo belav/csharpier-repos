@@ -23,12 +23,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion
 {
+    partial
     /// <summary>
     /// A per language service for constructing context dependent list of completions that
     /// can be presented to a user during typing in an editor. It aggregates completions from
     /// one or more <see cref="CompletionProvider"/>s.
     /// </summary>
-    public abstract partial class CompletionService : ILanguageService
+    public abstract class CompletionService : ILanguageService
     {
         private readonly SolutionServices _services;
         private readonly ProviderManager _providerManager;

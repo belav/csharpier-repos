@@ -24,7 +24,7 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="TOutput">Specifies the type of data output by this <see cref="TransformManyBlock{TInput,TOutput}"/>.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
     [DebuggerTypeProxy(typeof(TransformManyBlock<,>.DebugView))]
-    public sealed partial class TransformManyBlock<TInput, TOutput>
+    partial public sealed class TransformManyBlock<TInput, TOutput>
         : IPropagatorBlock<TInput, TOutput>,
             IReceivableSourceBlock<TOutput>,
             IDebuggerDisplay

@@ -4,19 +4,19 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial IntPtr CreateThreadpoolTimer(
+        partial internal static unsafe IntPtr CreateThreadpoolTimer(
             delegate* unmanaged<void*, void*, void*, void> pfnti,
             IntPtr pv,
             IntPtr pcbe
         );
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial IntPtr SetThreadpoolTimer(
+        partial internal static unsafe IntPtr SetThreadpoolTimer(
             IntPtr pti,
             long* pftDueTime,
             uint msPeriod,

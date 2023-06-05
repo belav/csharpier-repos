@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public abstract partial class FileSystemTest
+    partial public abstract class FileSystemTest
     {
         protected static int mkfifo(string path, int mode)
         {

@@ -11,7 +11,7 @@ using System.Threading.Tasks.Sources;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeFileHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         private OverlappedValueTaskSource? _reusableOverlappedValueTaskSource; // reusable OverlappedValueTaskSource that is currently NOT being used
 

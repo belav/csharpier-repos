@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public static partial class SyntaxFacts
+    partial public static class SyntaxFacts
     {
         public static bool IsKeywordKind(SyntaxKind kind)
         {

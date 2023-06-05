@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public static partial class Buffer
+    partial public static class Buffer
     {
         // Copies from one primitive array to another primitive array without
         // respecting types.  This calls memmove internally.  The count and

@@ -10,7 +10,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSACryptoServiceProvider
+    partial public sealed class RSACryptoServiceProvider
         : RSA,
             ICspAsymmetricAlgorithm,
             IRuntimeAlgorithm

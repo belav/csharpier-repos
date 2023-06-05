@@ -51,12 +51,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
+    partial
     /// <summary>
     /// ChartAreaAxes class represents axes (X, Y, X2 and Y2) in the chart area.
     /// It contains methods that collect statistical information on the series data and
     /// other axes related methods.
     /// </summary>
-    public partial class ChartArea
+    public class ChartArea
     {
         #region Fields
 

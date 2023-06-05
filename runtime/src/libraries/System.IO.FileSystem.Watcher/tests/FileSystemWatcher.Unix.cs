@@ -15,7 +15,7 @@ using Xunit.Abstractions;
 
 namespace System.IO.Tests
 {
-    public partial class DangerousFileSystemWatcherTests
+    partial public class DangerousFileSystemWatcherTests
     {
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [OuterLoop("Slow test with significant resource usage.")]

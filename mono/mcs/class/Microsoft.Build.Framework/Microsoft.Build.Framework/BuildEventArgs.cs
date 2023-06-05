@@ -67,7 +67,7 @@ namespace Microsoft.Build.Framework
             get { return helpKeyword; }
         }
 
-        virtual public string Message
+        public virtual string Message
         {
             get { return message; }
             protected set { message = value; }

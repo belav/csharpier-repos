@@ -100,7 +100,7 @@ namespace Microsoft.NET.HostModel.AppHost
         {
             public Command cmd;
             public uint cmdsize;
-            public fixed byte segname[16];
+            fixed public byte segname[16];
             public ulong vmaddr;
             public ulong vmsize;
             public ulong fileoff;

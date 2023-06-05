@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.SymbolSearch;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportCodeFixProvider : CodeFixProvider
+    partial internal abstract class AbstractAddImportCodeFixProvider : CodeFixProvider
     {
         private const int MaxResults = 5;
 

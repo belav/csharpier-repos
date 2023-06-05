@@ -294,7 +294,7 @@ namespace MonoTests.System
             Assert.AreEqual(tz.StandardName, clone.StandardName, "StandardName");
         }
 
-        static private byte[] serialized_timezone =
+        private static byte[] serialized_timezone =
         {
             0x00,
             0x01,

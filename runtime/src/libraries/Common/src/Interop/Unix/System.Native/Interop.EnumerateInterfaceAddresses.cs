@@ -3,15 +3,15 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [StructLayout(LayoutKind.Sequential)]
         public unsafe struct LinkLayerAddressInfo
         {
             public int InterfaceIndex;
-            public fixed byte AddressBytes[8];
+            fixed public byte AddressBytes[8];
             public byte NumAddressBytes;
             private byte __padding; // For native struct-size padding. Does not contain useful data.
             public ushort HardwareType;
@@ -21,32 +21,32 @@ internal static partial class Interop
         public unsafe struct IpAddressInfo
         {
             public int InterfaceIndex;
-            public fixed byte AddressBytes[16];
+            fixed public byte AddressBytes[16];
             public byte NumAddressBytes;
             public byte PrefixLength;
-            private fixed byte __padding[2];
+            fixed private byte __padding[2];
         }
 
         [StructLayout(LayoutKind.Sequential)]
         public unsafe struct NetworkInterfaceInfo
         {
-            public fixed byte Name[16];
+            fixed public byte Name[16];
             public long Speed;
             public int InterfaceIndex;
             public int Mtu;
             public ushort HardwareType;
             public byte OperationalState;
             public byte NumAddressBytes;
-            public fixed byte AddressBytes[8];
+            fixed public byte AddressBytes[8];
             public byte SupportsMulticast;
-            private fixed byte __padding[3];
+            fixed private byte __padding[3];
         }
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_EnumerateInterfaceAddresses"
         )]
-        public static unsafe partial int EnumerateInterfaceAddresses(
+        partial public static unsafe int EnumerateInterfaceAddresses(
             void* context,
             delegate* unmanaged<void*, byte*, IpAddressInfo*, void> ipv4Found,
             delegate* unmanaged<void*, byte*, IpAddressInfo*, uint*, void> ipv6Found,
@@ -57,7 +57,7 @@ internal static partial class Interop
             Libraries.SystemNative,
             EntryPoint = "SystemNative_EnumerateGatewayAddressesForInterface"
         )]
-        public static unsafe partial int EnumerateGatewayAddressesForInterface(
+        partial public static unsafe int EnumerateGatewayAddressesForInterface(
             void* context,
             uint interfaceIndex,
             delegate* unmanaged<void*, IpAddressInfo*, void> onGatewayFound
@@ -68,7 +68,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetNetworkInterfaces",
             SetLastError = true
         )]
-        public static unsafe partial int GetNetworkInterfaces(
+        partial public static unsafe int GetNetworkInterfaces(
             int* count,
             NetworkInterfaceInfo** addrs,
             int* addressCount,

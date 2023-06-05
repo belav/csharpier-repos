@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.Net.Http.QPack
 {
-    internal static partial class H3StaticTable
+    partial internal static class H3StaticTable
     {
         private static readonly Dictionary<HttpMethod, int> s_methodIndex = new Dictionary<
             HttpMethod,

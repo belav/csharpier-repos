@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace System.Buffers.Text.Tests
 {
-    public static partial class ParserTests
+    partial public static class ParserTests
     {
         private static void ValidateParser<T>(ParserTestData<T> testData)
         {

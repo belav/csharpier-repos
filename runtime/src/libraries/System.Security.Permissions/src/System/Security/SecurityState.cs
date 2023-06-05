@@ -3,7 +3,7 @@
 
 namespace System.Security
 {
-    public abstract partial class SecurityState
+    partial public abstract class SecurityState
     {
         protected SecurityState() { }
 

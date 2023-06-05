@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System
 {
-    public static partial class PlatformDetection
+    partial public static class PlatformDetection
     {
         //
         // Do not use the " { get; } = <expression> " pattern here. Having all the initialization happen in the type initializer
@@ -181,7 +181,7 @@ namespace System
 
         [LibraryImport("kernel32.dll", SetLastError = false)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool GetProductInfo(
+        partial private static bool GetProductInfo(
             int dwOSMajorVersion,
             int dwOSMinorVersion,
             int dwSpMajorVersion,
@@ -190,7 +190,7 @@ namespace System
         );
 
         [LibraryImport("kernel32.dll")]
-        private static partial int GetCurrentApplicationUserModelId(
+        partial private static int GetCurrentApplicationUserModelId(
             ref uint applicationUserModelIdLength,
             byte[] applicationUserModelId
         );

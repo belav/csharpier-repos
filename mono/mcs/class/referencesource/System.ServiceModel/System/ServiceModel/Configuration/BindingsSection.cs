@@ -14,7 +14,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Runtime.Diagnostics;
 
-    public sealed partial class BindingsSection
+    partial public sealed class BindingsSection
         : ConfigurationSection,
             IConfigurationContextProviderInternal
     {
@@ -39,7 +39,7 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        new public BindingCollectionElement this[string binding]
+        public new BindingCollectionElement this[string binding]
         {
             get { return (BindingCollectionElement)base[binding]; }
         }

@@ -11,9 +11,9 @@ using CFRunLoopRef = System.IntPtr;
 using CFRunLoopSourceRef = System.IntPtr;
 using CFStringRef = System.IntPtr;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class RunLoop
+    partial internal static class RunLoop
     {
         /// <summary>
         /// This constant specifies that we want to use the default Run mode for the thread's Run loop.
@@ -32,14 +32,14 @@ internal static partial class Interop
         internal static extern void CFRunLoopRun();
 #else
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        internal static partial void CFRunLoopRun();
+        partial internal static void CFRunLoopRun();
 #endif
 
         /// <summary>
         /// Runs the current thread's CFRunLoop object in a particular mode.
         /// </summary>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        internal static partial int CFRunLoopRunInMode(
+        partial internal static int CFRunLoopRunInMode(
             CFStringRef mode,
             double seconds,
             int returnAfterSourceHandled
@@ -50,7 +50,7 @@ internal static partial class Interop
         /// </summary>
         /// <param name="rl">The RunLoop to notify to stop</param>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        internal static partial void CFRunLoopStop(CFRunLoopRef rl);
+        partial internal static void CFRunLoopStop(CFRunLoopRef rl);
 
         /// <summary>
         /// Retrieves the RunLoop associated with the current thread; all threads automatically have a RunLoop.
@@ -58,7 +58,7 @@ internal static partial class Interop
         /// </summary>
         /// <returns>Returns a pointer to a CFRunLoop on success; otherwise, returns IntPtr.Zero</returns>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        internal static partial CFRunLoopRef CFRunLoopGetCurrent();
+        partial internal static CFRunLoopRef CFRunLoopGetCurrent();
 
         /// <summary>
         /// Adds a CFRunLoopSource object to a run loop mode.
@@ -67,7 +67,7 @@ internal static partial class Interop
         /// <param name="source">The run loop source to add. The source is retained by the run loop.</param>
         /// <param name="mode">The run loop mode to which to add source.</param>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        internal static partial void CFRunLoopAddSource(
+        partial internal static void CFRunLoopAddSource(
             CFRunLoopRef rl,
             CFRunLoopSourceRef source,
             CFStringRef mode
@@ -80,7 +80,7 @@ internal static partial class Interop
         /// <param name="source">The run loop source to remove.</param>
         /// <param name="mode">The run loop mode of rl from which to remove source.</param>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        internal static partial void CFRunLoopRemoveSource(
+        partial internal static void CFRunLoopRemoveSource(
             CFRunLoopRef rl,
             CFRunLoopSourceRef source,
             CFStringRef mode
@@ -91,7 +91,7 @@ internal static partial class Interop
         /// </summary>
         /// <param name="source">The run loop source to invalidate.</param>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
-        internal static partial void CFRunLoopSourceInvalidate(CFRunLoopSourceRef source);
+        partial internal static void CFRunLoopSourceInvalidate(CFRunLoopSourceRef source);
 
         /// <summary>
         /// Returns a bool that indicates whether the run loop is waiting for an event.
@@ -103,6 +103,6 @@ internal static partial class Interop
         /// a source, timer, or observer.</returns>
         [LibraryImport(Interop.Libraries.CoreFoundationLibrary)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CFRunLoopIsWaiting(CFRunLoopRef rl);
+        partial internal static bool CFRunLoopIsWaiting(CFRunLoopRef rl);
     }
 }

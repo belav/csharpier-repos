@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-public partial class CreatedAtRouteResultTests
+partial public class CreatedAtRouteResultTests
 {
     public static IEnumerable<object[]> CreatedAtRouteData
     {

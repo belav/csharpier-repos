@@ -8,11 +8,12 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Represents a bitmap of GC pointers within a memory region divided into
     /// pointer-sized cells.
     /// </summary>
-    public partial struct GCPointerMap : IEquatable<GCPointerMap>, IComparable<GCPointerMap>
+    public struct GCPointerMap : IEquatable<GCPointerMap>, IComparable<GCPointerMap>
     {
         // Each bit in this array represents a pointer-sized cell.
         private uint[] _gcFlags;

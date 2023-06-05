@@ -5,7 +5,7 @@ using System.ComponentModel.Composition.Hosting;
 
 namespace System.ComponentModel.Composition.Factories
 {
-    internal partial class ExportProviderFactory
+    partial internal class ExportProviderFactory
     {
         public static ExportProvider Create()
         {

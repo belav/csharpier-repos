@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Options
 {
-    internal partial class Option2<T>
+    partial internal class Option2<T>
     {
         [return: NotNullIfNotNull("option")]
         public static explicit operator Option<T>?(Option2<T>? option)

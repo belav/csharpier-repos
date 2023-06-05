@@ -6,12 +6,12 @@ namespace Test2
 {
     public interface Base { }
 
-    public partial class Foo : Base
+    partial public class Foo : Base
     {
         public static int f = 10;
     }
 
-    public partial class Foo : Base
+    partial public class Foo : Base
     {
         public static int f2 = 9;
     }
@@ -21,12 +21,12 @@ namespace Test3
 {
     public interface Base { }
 
-    public partial struct Foo : Base
+    partial public struct Foo : Base
     {
         public static int f = 10;
     }
 
-    public partial struct Foo : Base
+    partial public struct Foo : Base
     {
         public static int f2 = 9;
     }

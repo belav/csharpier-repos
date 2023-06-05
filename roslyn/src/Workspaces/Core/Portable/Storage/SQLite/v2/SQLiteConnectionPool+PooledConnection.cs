@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.SQLite.v2.Interop;
 
 namespace Microsoft.CodeAnalysis.SQLite.v2
 {
-    internal partial class SQLiteConnectionPool
+    partial internal class SQLiteConnectionPool
     {
         internal readonly struct PooledConnection : IDisposable
         {

@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class SymbolDisplayVisitor : AbstractSymbolDisplayVisitor
+    partial internal class SymbolDisplayVisitor : AbstractSymbolDisplayVisitor
     {
         private readonly bool _escapeKeywordIdentifiers;
         private IDictionary<INamespaceOrTypeSymbol, IAliasSymbol> _lazyAliasMap;

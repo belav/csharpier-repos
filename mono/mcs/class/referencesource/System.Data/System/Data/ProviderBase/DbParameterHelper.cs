@@ -13,7 +13,7 @@ namespace NAMESPACE
     using System.Data.Common;
     using System.Globalization;
 
-    public sealed partial class PARAMETEROBJECTNAME : DbParameter
+    partial public sealed class PARAMETEROBJECTNAME : DbParameter
     { // V1.2.3300
         private object _value;
 
@@ -57,7 +57,7 @@ namespace NAMESPACE
             RESNAMESPACE.ResCategoryAttribute(Res.DataCategory_Data),
             RESNAMESPACE.ResDescriptionAttribute(Res.DbParameter_Direction),
         ]
-        override public ParameterDirection Direction
+        public override ParameterDirection Direction
         { // V1.2.3300, XXXParameter V1.0.3300
             get
             {
@@ -84,7 +84,7 @@ namespace NAMESPACE
             }
         }
 
-        override public bool IsNullable
+        public override bool IsNullable
         { // V1.2.3300, XXXParameter V1.0.3300
             get { return _isNullable; }
             set { _isNullable = value; }
@@ -120,7 +120,7 @@ namespace NAMESPACE
             RESNAMESPACE.ResCategoryAttribute(Res.DataCategory_Data),
             RESNAMESPACE.ResDescriptionAttribute(Res.DbParameter_Size),
         ]
-        override public int Size
+        public override int Size
         { // V1.2.3300, XXXParameter V1.0.3300
             get
             {
@@ -163,7 +163,7 @@ namespace NAMESPACE
             RESNAMESPACE.ResCategoryAttribute(Res.DataCategory_Update),
             RESNAMESPACE.ResDescriptionAttribute(Res.DbParameter_SourceColumn),
         ]
-        override public string SourceColumn
+        public override string SourceColumn
         { // V1.2.3300, XXXParameter V1.0.3300
             get
             {
@@ -183,7 +183,7 @@ namespace NAMESPACE
             RESNAMESPACE.ResCategoryAttribute(Res.DataCategory_Update),
             RESNAMESPACE.ResDescriptionAttribute(Res.DbParameter_SourceVersion),
         ]
-        override public DataRowVersion SourceVersion
+        public override DataRowVersion SourceVersion
         { // V1.2.3300, XXXParameter V1.0.3300
             get
             {
@@ -246,7 +246,7 @@ namespace NAMESPACE
             _parent = null;
         }
 
-        override public string ToString()
+        public override string ToString()
         { // V1.2.3300, XXXParameter V1.0.3300
             return ParameterName;
         }

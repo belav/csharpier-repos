@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+partial
 /* https://tools.ietf.org/html/rfc7540#section-6.8
     +-+-------------------------------------------------------------+
     |R|                  Last-Stream-ID (31)                        |
@@ -12,7 +13,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     |                  Additional Debug Data (*)                    |
     +---------------------------------------------------------------+
 */
-internal partial class Http2Frame
+internal class Http2Frame
 {
     public int GoAwayLastStreamId { get; set; }
 

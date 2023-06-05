@@ -9,10 +9,11 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
+partial
 /// <summary>
 /// A wrapper for the response Set-Cookie header.
 /// </summary>
-internal sealed partial class ResponseCookies : IResponseCookies
+internal sealed class ResponseCookies : IResponseCookies
 {
     private readonly IFeatureCollection _features;
     private ILogger? _logger;
@@ -185,7 +186,7 @@ internal sealed partial class ResponseCookies : IResponseCookies
         );
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -193,6 +194,6 @@ internal sealed partial class ResponseCookies : IResponseCookies
             "The cookie '{name}' has set 'SameSite=None' and must also set 'Secure'.",
             EventName = "SameSiteNotSecure"
         )]
-        public static partial void SameSiteCookieNotSecure(ILogger logger, string name);
+        partial public static void SameSiteCookieNotSecure(ILogger logger, string name);
     }
 }

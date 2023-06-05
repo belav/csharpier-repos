@@ -9,13 +9,13 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.Loader
 {
-    public partial class AssemblyLoadContext
+    partial public class AssemblyLoadContext
     {
         [LibraryImport(
             RuntimeHelpers.QCall,
             EntryPoint = "AssemblyNative_InitializeAssemblyLoadContext"
         )]
-        private static partial IntPtr InitializeAssemblyLoadContext(
+        partial private static IntPtr InitializeAssemblyLoadContext(
             IntPtr ptrAssemblyLoadContext,
             [MarshalAs(UnmanagedType.Bool)] bool fRepresentsTPALoadContext,
             [MarshalAs(UnmanagedType.Bool)] bool isCollectible
@@ -25,7 +25,7 @@ namespace System.Runtime.Loader
             RuntimeHelpers.QCall,
             EntryPoint = "AssemblyNative_PrepareForAssemblyLoadContextRelease"
         )]
-        private static partial void PrepareForAssemblyLoadContextRelease(
+        partial private static void PrepareForAssemblyLoadContextRelease(
             IntPtr ptrNativeAssemblyBinder,
             IntPtr ptrAssemblyLoadContextStrong
         );
@@ -34,7 +34,7 @@ namespace System.Runtime.Loader
             "Types and members the loaded assembly depends on might be removed"
         )]
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_LoadFromStream")]
-        private static partial void LoadFromStream(
+        partial private static void LoadFromStream(
             IntPtr ptrNativeAssemblyBinder,
             IntPtr ptrAssemblyArray,
             int iAssemblyArrayLen,
@@ -48,14 +48,14 @@ namespace System.Runtime.Loader
             EntryPoint = "MultiCoreJIT_InternalSetProfileRoot",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial void InternalSetProfileRoot(string directoryPath);
+        partial internal static void InternalSetProfileRoot(string directoryPath);
 
         [LibraryImport(
             RuntimeHelpers.QCall,
             EntryPoint = "MultiCoreJIT_InternalStartProfile",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial void InternalStartProfile(
+        partial internal static void InternalStartProfile(
             string? profile,
             IntPtr ptrNativeAssemblyBinder
         );
@@ -68,7 +68,7 @@ namespace System.Runtime.Loader
             EntryPoint = "AssemblyNative_LoadFromPath",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial void LoadFromPath(
+        partial private static void LoadFromPath(
             IntPtr ptrNativeAssemblyBinder,
             string? ilPath,
             string? niPath,
@@ -87,7 +87,7 @@ namespace System.Runtime.Loader
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool TraceResolvingHandlerInvoked(
+        partial internal static bool TraceResolvingHandlerInvoked(
             string assemblyName,
             string handlerName,
             string? alcName,
@@ -101,7 +101,7 @@ namespace System.Runtime.Loader
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool TraceAssemblyResolveHandlerInvoked(
+        partial internal static bool TraceAssemblyResolveHandlerInvoked(
             string assemblyName,
             string handlerName,
             string? resultAssemblyName,
@@ -114,7 +114,7 @@ namespace System.Runtime.Loader
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool TraceAssemblyLoadFromResolveHandlerInvoked(
+        partial internal static bool TraceAssemblyLoadFromResolveHandlerInvoked(
             string assemblyName,
             [MarshalAs(UnmanagedType.Bool)] bool isTrackedAssembly,
             string requestingAssemblyPath,
@@ -127,7 +127,7 @@ namespace System.Runtime.Loader
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool TraceSatelliteSubdirectoryPathProbed(
+        partial internal static bool TraceSatelliteSubdirectoryPathProbed(
             string filePath,
             int hResult
         );
@@ -177,7 +177,7 @@ namespace System.Runtime.Loader
 
 #if TARGET_WINDOWS
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_LoadFromInMemoryModule")]
-        private static partial IntPtr LoadFromInMemoryModuleInternal(
+        partial private static IntPtr LoadFromInMemoryModuleInternal(
             IntPtr ptrNativeAssemblyBinder,
             IntPtr hModule,
             ObjectHandleOnStack retAssembly
@@ -261,7 +261,7 @@ namespace System.Runtime.Loader
             RuntimeHelpers.QCall,
             EntryPoint = "AssemblyNative_GetLoadContextForAssembly"
         )]
-        private static partial IntPtr GetLoadContextForAssembly(QCallAssembly assembly);
+        partial private static IntPtr GetLoadContextForAssembly(QCallAssembly assembly);
 
         // Returns the load context in which the specified assembly has been loaded
         public static AssemblyLoadContext? GetLoadContext(Assembly assembly)

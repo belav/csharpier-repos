@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Serialization
 {
-    internal partial class SerializerService
+    partial internal class SerializerService
     {
         private const int MetadataFailed = int.MaxValue;
 

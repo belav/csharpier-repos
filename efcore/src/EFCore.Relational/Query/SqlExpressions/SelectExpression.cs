@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
+partial
 /// <summary>
 ///     <para>
 ///         An expression that represents a SELECT in a SQL tree.
@@ -22,7 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///     an issue at <see href="https://github.com/dotnet/efcore">github.com/dotnet/efcore</see>.
 /// </remarks>
 // Class is sealed because there are no public/protected constructors. Can be unsealed if this is changed.
-public sealed partial class SelectExpression : TableExpressionBase
+public sealed class SelectExpression : TableExpressionBase
 {
     private const string DiscriminatorColumnAlias = "Discriminator";
     private const string SqlQuerySingleColumnAlias = "Value";

@@ -3,11 +3,11 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         [LibraryImport(Libraries.User32, SetLastError = true)]
-        public static partial short RegisterClassW(ref WNDCLASS wc);
+        partial public static short RegisterClassW(ref WNDCLASS wc);
     }
 }

@@ -19,7 +19,7 @@ namespace System
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial struct Nullable<T>
+    partial public struct Nullable<T>
         where T : struct
     {
         private readonly bool hasValue; // Do not rename (binary serialization)

@@ -8,10 +8,11 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// This class basically holds onto a set of services and gets reused across solution instances.
     /// </summary>
-    internal partial class SolutionServices
+    internal class SolutionServices
     {
         internal readonly Workspace Workspace;
         internal readonly ITemporaryStorageService TemporaryStorage;

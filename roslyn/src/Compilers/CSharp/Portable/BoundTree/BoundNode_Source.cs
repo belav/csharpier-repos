@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal abstract partial class BoundNode
+    partial internal abstract class BoundNode
     {
 #if DEBUG
         /// <summary>

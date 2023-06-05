@@ -5,10 +5,11 @@ using Internal.TypeSystem;
 
 namespace ILCompiler
 {
+    partial
     // Functionality related to deterministic ordering of types and members
-    public partial class CompilerTypeSystemContext
+    public class CompilerTypeSystemContext
     {
-        private partial class BoxedValueType
+        partial private class BoxedValueType
         {
             protected override int ClassCode => 1062019524;
 
@@ -21,7 +22,7 @@ namespace ILCompiler
             }
         }
 
-        private partial class GenericUnboxingThunk
+        partial private class GenericUnboxingThunk
         {
             protected override int ClassCode => -247515475;
 
@@ -32,7 +33,7 @@ namespace ILCompiler
             }
         }
 
-        private partial class UnboxingThunk
+        partial private class UnboxingThunk
         {
             protected override int ClassCode => 446545583;
 
@@ -43,7 +44,7 @@ namespace ILCompiler
             }
         }
 
-        internal partial class ValueTypeInstanceMethodWithHiddenParameter
+        partial internal class ValueTypeInstanceMethodWithHiddenParameter
         {
             protected override int ClassCode => 2131875345;
 
@@ -54,7 +55,7 @@ namespace ILCompiler
             }
         }
 
-        private partial class DefaultInterfaceMethodImplementationInstantiationThunk
+        partial private class DefaultInterfaceMethodImplementationInstantiationThunk
         {
             protected override int ClassCode => -789598;
 
@@ -73,7 +74,7 @@ namespace ILCompiler
             }
         }
 
-        internal partial class DefaultInterfaceMethodImplementationWithHiddenParameter
+        partial internal class DefaultInterfaceMethodImplementationWithHiddenParameter
         {
             protected override int ClassCode => 4903209;
 

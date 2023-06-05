@@ -39,7 +39,7 @@ namespace MonoTests.Mono.Security.X509
     [TestFixture]
     public class X509CertificateTest
     {
-        static public byte[] DSACACert_crt =
+        public static byte[] DSACACert_crt =
         {
             0x30,
             0x82,
@@ -949,7 +949,7 @@ namespace MonoTests.Mono.Security.X509
             0x36
         };
 
-        static public byte[] DSAParametersInheritedCACert_crt =
+        public static byte[] DSAParametersInheritedCACert_crt =
         {
             0x30,
             0x82,
@@ -1489,7 +1489,7 @@ namespace MonoTests.Mono.Security.X509
             0xD8
         };
 
-        static public byte[] ValidDSASignaturesTest4EE_crt =
+        public static byte[] ValidDSASignaturesTest4EE_crt =
         {
             0x30,
             0x82,
@@ -2319,7 +2319,7 @@ namespace MonoTests.Mono.Security.X509
             0xEA
         };
 
-        static public byte[] ValidDSAParameterInheritanceTest5EE_crt =
+        public static byte[] ValidDSAParameterInheritanceTest5EE_crt =
         {
             0x30,
             0x82,
@@ -2889,7 +2889,7 @@ namespace MonoTests.Mono.Security.X509
             0xEB
         };
 
-        static public byte[] InvalidDSASignatureTest6EE_crt =
+        public static byte[] InvalidDSASignatureTest6EE_crt =
         {
             0x30,
             0x82,
@@ -3720,7 +3720,7 @@ namespace MonoTests.Mono.Security.X509
             0x6C
         };
 
-        static public byte[] UIDCACert_crt =
+        public static byte[] UIDCACert_crt =
         {
             0x30,
             0x82,
@@ -4353,7 +4353,7 @@ namespace MonoTests.Mono.Security.X509
             0x38
         };
 
-        static public byte[] ValidNameUIDsTest6EE_crt =
+        public static byte[] ValidNameUIDsTest6EE_crt =
         {
             0x30,
             0x82,
@@ -5164,7 +5164,7 @@ namespace MonoTests.Mono.Security.X509
             Assert.AreEqual(3, ca.Version, "Version");
         }
 
-        static public byte[] bad_but_supported_date =
+        public static byte[] bad_but_supported_date =
         {
             0x30,
             0x82,

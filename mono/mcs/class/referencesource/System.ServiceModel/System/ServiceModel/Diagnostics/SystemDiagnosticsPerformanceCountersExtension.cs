@@ -9,7 +9,7 @@ namespace System.ServiceModel.Diagnostics
 
     static class SystemDiagnosticsPerformanceCountersExtension
     {
-        static internal void Increment(
+        internal static void Increment(
             this PerformanceCountersBase thisPtr,
             PerformanceCounter[] counters,
             int counterIndex
@@ -44,7 +44,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void IncrementBy(
+        internal static void IncrementBy(
             this PerformanceCountersBase thisPtr,
             PerformanceCounter[] counters,
             int counterIndex,
@@ -80,7 +80,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void Set(
+        internal static void Set(
             this PerformanceCountersBase thisPtr,
             PerformanceCounter[] counters,
             int counterIndex,
@@ -113,7 +113,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void Decrement(
+        internal static void Decrement(
             this PerformanceCountersBase thisPtr,
             PerformanceCounter[] counters,
             int counterIndex

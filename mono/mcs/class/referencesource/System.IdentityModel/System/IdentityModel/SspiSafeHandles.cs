@@ -841,7 +841,7 @@ namespace System.IdentityModel
             return status;
         }
 
-        public unsafe static int DecryptMessage(
+        public static unsafe int DecryptMessage(
             SafeDeleteContext context,
             SecurityBufferDescriptor inputOutput,
             uint sequenceNumber
@@ -943,7 +943,7 @@ namespace System.IdentityModel
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        extern static int QuerySecurityContextToken(
+        static extern int QuerySecurityContextToken(
             ref SSPIHandle phContext,
             [Out] out SafeCloseHandle handle
         );
@@ -951,7 +951,7 @@ namespace System.IdentityModel
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static unsafe int InitializeSecurityContextW(
+        internal static extern unsafe int InitializeSecurityContextW(
             ref SSPIHandle credentialHandle,
             [In] void* inContextPtr,
             [In] byte* targetName,
@@ -969,7 +969,7 @@ namespace System.IdentityModel
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static unsafe int AcceptSecurityContext(
+        internal static extern unsafe int AcceptSecurityContext(
             ref SSPIHandle credentialHandle,
             [In] void* inContextPtr,
             [In] SecurityBufferDescriptor inputBuffer,
@@ -985,16 +985,16 @@ namespace System.IdentityModel
         [SuppressUnmanagedCodeSecurity]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern static int DeleteSecurityContext(ref SSPIHandle handlePtr);
+        internal static extern int DeleteSecurityContext(ref SSPIHandle handlePtr);
 
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int ImpersonateSecurityContext(ref SSPIHandle handlePtr);
+        internal static extern int ImpersonateSecurityContext(ref SSPIHandle handlePtr);
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int EncryptMessage(
+        internal static extern int EncryptMessage(
             ref SSPIHandle contextHandle,
             [In] uint qualityOfProtection,
             [In, Out] SecurityBufferDescriptor inputOutput,
@@ -1004,7 +1004,7 @@ namespace System.IdentityModel
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe extern static int DecryptMessage(
+        internal static extern unsafe int DecryptMessage(
             ref SSPIHandle contextHandle,
             [In, Out] SecurityBufferDescriptor inputOutput,
             [In] uint sequenceNumber,
@@ -1207,7 +1207,7 @@ namespace System.IdentityModel
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(SECURITY, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal extern static unsafe int AcquireCredentialsHandleW(
+        internal static extern unsafe int AcquireCredentialsHandleW(
             [In] string principal,
             [In] string moduleName,
             [In] int usage,
@@ -1221,7 +1221,7 @@ namespace System.IdentityModel
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(SECURITY, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal extern static unsafe int AcquireCredentialsHandleW(
+        internal static extern unsafe int AcquireCredentialsHandleW(
             [In] string principal,
             [In] string moduleName,
             [In] int usage,
@@ -1235,7 +1235,7 @@ namespace System.IdentityModel
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(SECURITY, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal extern static unsafe int AcquireCredentialsHandleW(
+        internal static extern unsafe int AcquireCredentialsHandleW(
             [In] string principal,
             [In] string moduleName,
             [In] int usage,
@@ -1251,7 +1251,7 @@ namespace System.IdentityModel
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int FreeCredentialsHandle(ref SSPIHandle handlePtr);
+        internal static extern int FreeCredentialsHandle(ref SSPIHandle handlePtr);
     }
 
     sealed class SafeFreeCertContext : SafeHandleZeroOrMinusOneIsInvalid
@@ -1275,7 +1275,7 @@ namespace System.IdentityModel
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertFreeCertificateContext( // Suppressing returned status check, it's always==TRUE,
+        static extern bool CertFreeCertificateContext( // Suppressing returned status check, it's always==TRUE,
             [In] IntPtr certContext
         );
 
@@ -1412,7 +1412,7 @@ namespace System.IdentityModel
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static unsafe int QueryContextAttributesW(
+        internal static extern unsafe int QueryContextAttributesW(
             ref SSPIHandle contextHandle,
             [In] ContextAttribute attribute,
             [In] void* buffer
@@ -1420,7 +1420,7 @@ namespace System.IdentityModel
 
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int EnumerateSecurityPackagesW(
+        internal static extern int EnumerateSecurityPackagesW(
             [Out] out int pkgnum,
             [Out] out SafeFreeContextBuffer handle
         );
@@ -1429,7 +1429,7 @@ namespace System.IdentityModel
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        extern static int FreeContextBuffer([In] IntPtr contextBuffer);
+        static extern int FreeContextBuffer([In] IntPtr contextBuffer);
     }
 
     sealed class SafeCloseHandle : SafeHandleZeroOrMinusOneIsInvalid
@@ -1460,7 +1460,7 @@ namespace System.IdentityModel
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CloseHandle(IntPtr handle);
+        static extern bool CloseHandle(IntPtr handle);
     }
 
 #pragma warning disable 618 // have not moved to the v4 security model yet
@@ -1554,7 +1554,7 @@ namespace System.IdentityModel
             get { return new SafeLsaLogonProcessHandle(IntPtr.Zero); }
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             // LsaDeregisterLogonProcess returns an NTSTATUS
             return NativeMethods.LsaDeregisterLogonProcess(handle) >= 0;
@@ -1578,7 +1578,7 @@ namespace System.IdentityModel
             get { return new SafeLsaReturnBufferHandle(IntPtr.Zero); }
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             // LsaFreeReturnBuffer returns an NTSTATUS
             return NativeMethods.LsaFreeReturnBuffer(handle) >= 0;

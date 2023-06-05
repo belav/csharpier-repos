@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
-    internal partial class AbstractCodeModelService : ICodeModelService
+    partial internal class AbstractCodeModelService : ICodeModelService
     {
         protected abstract AbstractNodeNameGenerator CreateNodeNameGenerator();
 

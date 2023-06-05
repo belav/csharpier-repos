@@ -16,10 +16,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// SymbolExtensions for member symbols.
     /// </summary>
-    internal static partial class SymbolExtensions
+    internal static class SymbolExtensions
     {
         internal static bool HasParamsParameter(this Symbol member)
         {

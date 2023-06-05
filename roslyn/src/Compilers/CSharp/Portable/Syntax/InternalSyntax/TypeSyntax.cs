@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal abstract partial class TypeSyntax
+    partial internal abstract class TypeSyntax
     {
         public bool IsVar => IsIdentifierName("var");
         public bool IsUnmanaged => IsIdentifierName("unmanaged");

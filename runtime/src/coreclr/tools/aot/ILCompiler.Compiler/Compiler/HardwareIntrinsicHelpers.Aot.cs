@@ -12,7 +12,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
 {
-    public static partial class HardwareIntrinsicHelpers
+    partial public static class HardwareIntrinsicHelpers
     {
         public static bool IsIsSupportedMethod(MethodDesc method)
         {

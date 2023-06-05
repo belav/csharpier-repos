@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Collections.Generic;
     using System.ServiceModel.Description;
 
-    public partial class StandardEndpointCollectionElement<
+    partial public class StandardEndpointCollectionElement<
         TStandardEndpoint,
         TEndpointConfiguration
     > : EndpointCollectionElement

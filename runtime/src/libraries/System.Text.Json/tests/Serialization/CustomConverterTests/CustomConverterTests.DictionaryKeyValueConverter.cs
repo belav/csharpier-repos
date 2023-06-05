@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class CustomConverterTests
+    partial public static class CustomConverterTests
     {
         /// <summary>
         /// Demonstrates a <see cref="Dictionary{TKey, TValue}"> converter using a JSON array containing KeyValuePair objects.

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.Text.Json.Serialization.Metadata
 {
-    public partial class JsonTypeInfo<T>
+    partial public class JsonTypeInfo<T>
     {
         // This section provides helper methods guiding root-level deserialization
         // of values corresponding according to the current JsonTypeInfo configuration.

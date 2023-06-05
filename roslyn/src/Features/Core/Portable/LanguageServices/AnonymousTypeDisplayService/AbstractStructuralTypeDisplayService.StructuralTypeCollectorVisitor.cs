@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {
-    internal partial class AbstractStructuralTypeDisplayService
+    partial internal class AbstractStructuralTypeDisplayService
     {
         private class StructuralTypeCollectorVisitor : SymbolVisitor
         {

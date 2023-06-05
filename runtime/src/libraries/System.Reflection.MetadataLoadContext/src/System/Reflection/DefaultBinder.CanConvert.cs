@@ -3,7 +3,7 @@
 
 namespace System
 {
-    internal sealed partial class DefaultBinder
+    partial internal sealed class DefaultBinder
     {
         // CanChangePrimitive
         // This will determine if the source can be converted to the target type

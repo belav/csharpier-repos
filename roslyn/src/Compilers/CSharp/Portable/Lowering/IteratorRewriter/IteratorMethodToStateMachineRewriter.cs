@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class IteratorMethodToStateMachineRewriter
+    partial internal sealed class IteratorMethodToStateMachineRewriter
         : MethodToStateMachineRewriter
     {
         /// <summary>

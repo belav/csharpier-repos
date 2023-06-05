@@ -13,10 +13,11 @@ using BCryptAlgorithmCache = Interop.BCrypt.BCryptAlgorithmCache;
 
 namespace Internal.Cryptography
 {
+    partial
     //
     // Provides hash services via the native provider (CNG).
     //
-    internal static partial class HashProviderDispenser
+    internal static class HashProviderDispenser
     {
         public static HashProvider CreateHashProvider(string hashAlgorithmId)
         {

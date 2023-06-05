@@ -4,9 +4,9 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         internal static unsafe bool GetRandomBytes(byte* pbBuffer, int count)
         {
@@ -17,6 +17,6 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.AndroidCryptoNative)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe partial bool CryptoNative_GetRandomBytes(byte* buf, int num);
+        partial private static unsafe bool CryptoNative_GetRandomBytes(byte* buf, int num);
     }
 }

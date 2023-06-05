@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.RuntimeMembers;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class AnonymousTypeManager
+    partial internal sealed class AnonymousTypeManager
     {
         /// <summary>
         /// Reports all use site errors in special or well known symbols required for anonymous types

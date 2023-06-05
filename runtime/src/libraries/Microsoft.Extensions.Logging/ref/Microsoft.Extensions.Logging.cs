@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class LoggingServiceCollectionExtensions
+    partial public static class LoggingServiceCollectionExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddLogging(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
@@ -40,7 +40,7 @@ namespace Microsoft.Extensions.Logging
         Baggage = 64,
     }
 
-    public static partial class FilterLoggingBuilderExtensions
+    partial public static class FilterLoggingBuilderExtensions
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddFilter(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
@@ -203,12 +203,12 @@ namespace Microsoft.Extensions.Logging
         }
     }
 
-    public partial interface ILoggingBuilder
+    partial public interface ILoggingBuilder
     {
         Microsoft.Extensions.DependencyInjection.IServiceCollection Services { get; }
     }
 
-    public partial class LoggerFactory
+    partial public class LoggerFactory
         : Microsoft.Extensions.Logging.ILoggerFactory,
             System.IDisposable
     {
@@ -267,7 +267,7 @@ namespace Microsoft.Extensions.Logging
         public void Dispose() { }
     }
 
-    public partial class LoggerFactoryOptions
+    partial public class LoggerFactoryOptions
     {
         public LoggerFactoryOptions() { }
 
@@ -278,7 +278,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 
-    public partial class LoggerFilterOptions
+    partial public class LoggerFilterOptions
     {
         public LoggerFilterOptions() { }
 
@@ -298,7 +298,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 
-    public partial class LoggerFilterRule
+    partial public class LoggerFilterRule
     {
         public LoggerFilterRule(
             string? providerName,
@@ -330,7 +330,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 
-    public static partial class LoggingBuilderExtensions
+    partial public static class LoggingBuilderExtensions
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddProvider(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
@@ -369,7 +369,7 @@ namespace Microsoft.Extensions.Logging
         AllowMultiple = false,
         Inherited = false
     )]
-    public partial class ProviderAliasAttribute : System.Attribute
+    partial public class ProviderAliasAttribute : System.Attribute
     {
         public ProviderAliasAttribute(string alias) { }
 

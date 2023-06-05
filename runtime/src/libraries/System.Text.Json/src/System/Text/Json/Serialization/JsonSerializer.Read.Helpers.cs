@@ -7,7 +7,7 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
-    public static partial class JsonSerializer
+    partial public static class JsonSerializer
     {
         private static TValue? ReadCore<TValue>(
             ref Utf8JsonReader reader,

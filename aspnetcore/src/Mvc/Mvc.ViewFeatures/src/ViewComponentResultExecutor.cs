@@ -20,10 +20,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+partial
 /// <summary>
 /// A <see cref="IActionResultExecutor{ViewComponentResult}"/> for <see cref="ViewComponentResult"/>.
 /// </summary>
-public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewComponentResult>
+public class ViewComponentResultExecutor : IActionResultExecutor<ViewComponentResult>
 {
     private readonly HtmlEncoder _htmlEncoder;
     private readonly HtmlHelperOptions _htmlHelperOptions;
@@ -209,7 +210,7 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -217,7 +218,7 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
             "Executing ViewComponentResult, running {ViewComponentName}.",
             EventName = "ViewComponentResultExecuting"
         )]
-        public static partial void ViewComponentResultExecuting(
+        partial public static void ViewComponentResultExecuting(
             ILogger logger,
             string? viewComponentName
         );

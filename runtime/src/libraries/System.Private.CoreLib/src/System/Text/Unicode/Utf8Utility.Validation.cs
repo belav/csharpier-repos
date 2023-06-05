@@ -11,7 +11,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Text.Unicode
 {
-    internal static unsafe partial class Utf8Utility
+    partial internal static unsafe class Utf8Utility
     {
         // Returns &inputBuffer[inputLength] if the input buffer is valid.
         /// <summary>

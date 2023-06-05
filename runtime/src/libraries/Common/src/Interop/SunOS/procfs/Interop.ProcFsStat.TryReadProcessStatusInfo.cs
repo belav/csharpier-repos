@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class @procfs
+    partial internal static class @procfs
     {
         /// <summary>
         /// Attempts to get status info for the specified process ID.
@@ -21,7 +21,7 @@ internal static partial class Interop
             SetLastError = true
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe partial bool TryReadProcessStatusInfo(
+        partial private static unsafe bool TryReadProcessStatusInfo(
             int pid,
             ProcessStatusInfo* processStatus
         );

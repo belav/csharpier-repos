@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
     using JsonTrivia = EmbeddedSyntaxTrivia<JsonKind>;
 
-    public partial class CSharpJsonParserTests
+    partial public class CSharpJsonParserTests
     {
         private const string SupportedLanguage = "en-US";
 

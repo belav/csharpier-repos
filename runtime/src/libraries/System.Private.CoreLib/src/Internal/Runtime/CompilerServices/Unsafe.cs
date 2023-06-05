@@ -24,7 +24,7 @@ namespace Internal.Runtime.CompilerServices
     /// For internal use only. Contains generic, low-level functionality for manipulating pointers.
     /// </summary>
     [CLSCompliant(false)]
-    public static unsafe partial class Unsafe
+    partial public static unsafe class Unsafe
     {
         /// <summary>
         /// Returns a pointer to the given by-ref parameter.

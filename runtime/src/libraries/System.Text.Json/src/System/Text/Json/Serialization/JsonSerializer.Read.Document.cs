@@ -7,7 +7,7 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
-    public static partial class JsonSerializer
+    partial public static class JsonSerializer
     {
         /// <summary>
         /// Converts the <see cref="JsonDocument"/> representing a single JSON value into a <typeparamref name="TValue"/>.

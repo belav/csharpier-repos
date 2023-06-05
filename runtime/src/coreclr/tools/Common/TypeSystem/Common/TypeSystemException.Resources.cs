@@ -10,7 +10,7 @@ using System.Reflection;
 // need to support accessing these strings via the ResourceManager
 namespace Internal.TypeSystem
 {
-    public partial class TypeSystemException : Exception
+    partial public class TypeSystemException : Exception
     {
         private static Lazy<ResourceManager> s_stringResourceManager = new Lazy<ResourceManager>(
             () =>

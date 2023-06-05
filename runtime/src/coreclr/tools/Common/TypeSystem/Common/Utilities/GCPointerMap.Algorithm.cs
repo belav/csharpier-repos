@@ -5,7 +5,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public partial struct GCPointerMap
+    partial public struct GCPointerMap
     {
         /// <summary>
         /// Computes the GC pointer map for the instance fields of <paramref name="type"/>.

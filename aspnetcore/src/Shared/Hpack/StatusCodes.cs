@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.Net.Http.HPack;
 
-internal static partial class StatusCodes
+partial internal static class StatusCodes
 {
     public static string ToStatusString(int statusCode)
     {

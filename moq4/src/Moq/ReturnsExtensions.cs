@@ -15,7 +15,7 @@ namespace Moq
     /// Defines async extension methods on IReturns.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static partial class ReturnsExtensions
+    partial public static class ReturnsExtensions
     {
         /// <summary>
         /// Specifies the value to return from an asynchronous method.

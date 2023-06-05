@@ -75,7 +75,7 @@ namespace MonoTests.System.Linq.Expressions
             throw new Exception("No method found: " + n);
         }
 
-        static public int MyCompare(OpStruct a, OpStruct b)
+        public static int MyCompare(OpStruct a, OpStruct b)
         {
             return 1;
         }

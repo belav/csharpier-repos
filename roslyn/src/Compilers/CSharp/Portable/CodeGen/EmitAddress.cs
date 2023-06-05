@@ -16,7 +16,7 @@ using static Microsoft.CodeAnalysis.CSharp.Binder;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 {
-    internal partial class CodeGenerator
+    partial internal class CodeGenerator
     {
         /// <summary>
         /// Emits address as in &amp;

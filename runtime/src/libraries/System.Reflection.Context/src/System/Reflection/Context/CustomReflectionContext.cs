@@ -21,7 +21,7 @@ namespace System.Reflection.Context
         }
     }
 
-    public abstract partial class CustomReflectionContext : ReflectionContext
+    partial public abstract class CustomReflectionContext : ReflectionContext
     {
         private readonly ReflectionContextProjector _projector;
 

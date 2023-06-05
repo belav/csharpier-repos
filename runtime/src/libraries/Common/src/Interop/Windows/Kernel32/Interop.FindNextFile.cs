@@ -4,9 +4,9 @@
 using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(
             Libraries.Kernel32,
@@ -15,7 +15,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool FindNextFile(
+        partial internal static bool FindNextFile(
             SafeFindHandle hndFindFile,
             ref WIN32_FIND_DATA lpFindFileData
         );

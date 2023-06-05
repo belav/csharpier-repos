@@ -33,7 +33,7 @@ using Mono.CodeContracts.Static.DataFlowAnalysis;
 
 namespace Mono.CodeContracts.Static.Analysis.Numerical
 {
-    static partial class AnalysisFacade
+    partial static class AnalysisFacade
     {
         public static IMethodResult<TVar> RunArithmeticAnalysis<TVar, TExpr>(
             string methodName,
@@ -45,7 +45,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             return Bind<TVar, TExpr>.RunArithmeticAnalysis(methodName, methodDriver);
         }
 
-        static partial class Bind<TVar, TExpr>
+        partial static class Bind<TVar, TExpr>
             where TExpr : IEquatable<TExpr>
             where TVar : IEquatable<TVar>
         {

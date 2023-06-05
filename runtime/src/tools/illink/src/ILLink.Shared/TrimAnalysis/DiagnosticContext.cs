@@ -6,6 +6,7 @@
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// The diagnostic context may be entirely disabled or some kinds of warnings may be suppressed.
     /// The suppressions are determined based on the <paramref name="id"/>.
@@ -15,17 +16,25 @@ namespace ILLink.Shared.TrimAnalysis
     ///  - Single-file warnings (suppressed by RequiresAssemblyFilesAttribute)
     /// Note that not all categories are used/supported by all tools, for example the ILLink only handles trimmer warnings and ignores the rest.
     /// </summary>
-    public readonly partial struct DiagnosticContext
+    public readonly struct DiagnosticContext
     {
         /// <param name="id">The diagnostic ID, this will be used to determine the category of diagnostic (trimmer, AOT, single-file)</param>
         /// <param name="args">The arguments for diagnostic message.</param>
-        public partial void AddDiagnostic(DiagnosticId id, params string[] args);
+        partial
+        /// <param name="id">The diagnostic ID, this will be used to determine the category of diagnostic (trimmer, AOT, single-file)</param>
+        /// <param name="args">The arguments for diagnostic message.</param>
+        public void AddDiagnostic(DiagnosticId id, params string[] args);
 
         /// <param name="id">The diagnostic ID, this will be used to determine the category of diagnostic (trimmer, AOT, single-file)</param>
         /// <param name="actualValue">The value for the source of the diagnostic</param>
         /// <param name="expectedAnnotationsValue">The value for the symbol causing the diagnostic</param>
         /// <param name="args">The arguments for diagnostic message.</param>
-        public partial void AddDiagnostic(
+        partial
+        /// <param name="id">The diagnostic ID, this will be used to determine the category of diagnostic (trimmer, AOT, single-file)</param>
+        /// <param name="actualValue">The value for the source of the diagnostic</param>
+        /// <param name="expectedAnnotationsValue">The value for the symbol causing the diagnostic</param>
+        /// <param name="args">The arguments for diagnostic message.</param>
+        public void AddDiagnostic(
             DiagnosticId id,
             ValueWithDynamicallyAccessedMembers actualValue,
             ValueWithDynamicallyAccessedMembers expectedAnnotationsValue,

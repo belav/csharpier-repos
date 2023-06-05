@@ -8,7 +8,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Text
 {
-    internal static partial class ASCIIUtility
+    partial internal static class ASCIIUtility
     {
         /// <summary>
         /// A mask which selects only the high bit of each byte of the given <see cref="uint"/>.

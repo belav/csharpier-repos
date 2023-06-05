@@ -23,10 +23,10 @@ namespace System.Data.Metadata.Edm
     /// </summary>
     internal abstract class MetadataArtifactLoader
     {
-        protected readonly static string resPathPrefix = @"res://";
-        protected readonly static string resPathSeparator = @"/";
-        protected readonly static string altPathSeparator = @"\";
-        protected readonly static string wildcard = @"*";
+        protected static readonly string resPathPrefix = @"res://";
+        protected static readonly string resPathSeparator = @"/";
+        protected static readonly string altPathSeparator = @"\";
+        protected static readonly string wildcard = @"*";
 
         /// <summary>
         /// Read-only access to the resource/file path
@@ -492,7 +492,7 @@ namespace System.Data.Metadata.Edm
         /// <returns>The normalized file path</returns>
         [ResourceExposure(ResourceScope.Machine)] //Exposes the file name which is a Machine resource
         [ResourceConsumption(ResourceScope.Machine)] //For Path.GetFullPath method call. But the path is not created in this method.
-        static internal string NormalizeFilePaths(string path)
+        internal static string NormalizeFilePaths(string path)
         {
             bool getFullPath = true; // used to determine whether we need to invoke GetFullPath()
 

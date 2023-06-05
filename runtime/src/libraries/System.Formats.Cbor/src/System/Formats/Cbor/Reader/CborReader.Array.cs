@@ -3,7 +3,7 @@
 
 namespace System.Formats.Cbor
 {
-    public partial class CborReader
+    partial public class CborReader
     {
         /// <summary>Reads the next data item as the start of an array (major type 4).</summary>
         /// <returns>The length of the definite-length array, or <see langword="null" /> if the array is indefinite-length.</returns>

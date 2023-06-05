@@ -9,8 +9,9 @@ using Xunit;
 
 namespace System.Xml.XmlWriterApiTests
 {
+    partial
     //[TestCase(Name = "XmlWriterSettings: NamespaceHandling")]
-    public partial class TCNamespaceHandling
+    public class TCNamespaceHandling
     {
         private static NamespaceHandling[] s_nlHandlingMembers =
         {

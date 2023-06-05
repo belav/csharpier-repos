@@ -11,7 +11,7 @@ using static Interop.Advapi32;
 
 namespace System.Diagnostics
 {
-    internal static partial class ProcessManager
+    partial internal static class ProcessManager
     {
         /// <summary>Gets whether the process with the specified ID is currently running.</summary>
         /// <param name="processId">The process ID.</param>
@@ -365,13 +365,14 @@ namespace System.Diagnostics
         }
     }
 
+    partial
     /// <devdoc>
     ///     This static class provides the process api for the WinNt platform.
     ///     We use the performance counter api to query process and thread
     ///     information.  Module information is obtained using PSAPI.
     /// </devdoc>
     /// <internalonly/>
-    internal static partial class NtProcessManager
+    internal static class NtProcessManager
     {
         private const int ProcessPerfCounterId = 230;
         private const int ThreadPerfCounterId = 232;

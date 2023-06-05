@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.JavaScript.Tests
 {
-    public partial class SecondRuntimeTest
+    partial public class SecondRuntimeTest
     {
         [ConditionalFact(
             typeof(PlatformDetection),
@@ -25,7 +25,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             Assert.Equal(3, state2);
         }
 
-        public static partial class Interop
+        partial public static class Interop
         {
             public static int State { get; set; }
 
@@ -34,7 +34,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
             [JSImport("runSecondRuntimeAndTestStaticState", "SecondRuntimeTest")]
             [return: JSMarshalAs<JSType.Promise<JSType.Number>>]
-            internal static partial Task<int> RunSecondRuntimeAndTestStaticState();
+            partial internal static Task<int> RunSecondRuntimeAndTestStaticState();
         }
     }
 }

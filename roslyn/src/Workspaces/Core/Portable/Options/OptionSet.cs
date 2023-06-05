@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Options
 {
-    public abstract partial class OptionSet : IOptionsReader
+    partial public abstract class OptionSet : IOptionsReader
     {
         internal static readonly OptionSet Empty = new EmptyOptionSet();
 

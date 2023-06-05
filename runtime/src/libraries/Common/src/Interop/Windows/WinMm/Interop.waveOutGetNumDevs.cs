@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         /// <summary>
         /// This function retrieves the number of waveform output devices present
@@ -15,6 +15,6 @@ internal static partial class Interop
         /// <returns>The number of devices indicates success. Zero indicates that
         /// no devices are present or that an error occurred.</returns>
         [LibraryImport(Libraries.WinMM)]
-        internal static partial int waveOutGetNumDevs();
+        partial internal static int waveOutGetNumDevs();
     }
 }

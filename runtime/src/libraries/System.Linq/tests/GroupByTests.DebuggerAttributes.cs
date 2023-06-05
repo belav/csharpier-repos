@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Linq.Tests
 {
-    public partial class GroupByTests : EnumerableTests
+    partial public class GroupByTests : EnumerableTests
     {
         [ConditionalTheory(
             typeof(PlatformDetection),

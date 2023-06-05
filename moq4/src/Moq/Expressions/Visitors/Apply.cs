@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-    static partial class ExpressionExtensions
+    partial static class ExpressionExtensions
     {
         /// <summary>
         ///   Applies the specified <see cref="ExpressionVisitor"/> to this expression tree.

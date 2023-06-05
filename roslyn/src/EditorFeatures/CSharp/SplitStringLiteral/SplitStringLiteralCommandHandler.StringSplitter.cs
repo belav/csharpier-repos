@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 {
     using Microsoft.CodeAnalysis.Indentation;
 
-    internal partial class SplitStringLiteralCommandHandler
+    partial internal class SplitStringLiteralCommandHandler
     {
         private abstract class StringSplitter
         {

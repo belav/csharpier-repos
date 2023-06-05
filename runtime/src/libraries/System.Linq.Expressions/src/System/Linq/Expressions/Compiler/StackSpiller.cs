@@ -11,12 +11,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Linq.Expressions.Compiler
 {
+    partial
     /// <summary>
     /// Expression rewriting to spill the CLR stack into temporary variables
     /// in order to guarantee some properties of code generation, for
     /// example that we always enter try block on empty stack.
     /// </summary>
-    internal sealed partial class StackSpiller
+    internal sealed class StackSpiller
     {
         /// <summary>
         /// Indicates whether the evaluation stack is empty.

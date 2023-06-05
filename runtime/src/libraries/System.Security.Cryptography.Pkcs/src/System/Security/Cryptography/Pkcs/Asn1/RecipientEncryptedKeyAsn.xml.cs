@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct RecipientEncryptedKeyAsn
+    partial internal struct RecipientEncryptedKeyAsn
     {
         internal System.Security.Cryptography.Pkcs.Asn1.KeyAgreeRecipientIdentifierAsn Rid;
         internal ReadOnlyMemory<byte> EncryptedKey;

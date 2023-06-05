@@ -6,13 +6,14 @@ using static System.TestHelpers;
 
 namespace System.SpanTests
 {
+    partial
     //
     // Tests for Span<T>.ctor(T[])
     //
     // These tests will also exercise the matching codepaths in Span<T>.ctor(T[], int) and .ctor(T[], int, int). This makes it easier to ensure
     // that these parallel tests stay consistent, and avoid excess repetition in the files devoted to those specific overloads.
     //
-    public static partial class ReadOnlySpanTests
+    public static class ReadOnlySpanTests
     {
         [Fact]
         public static void CtorArray1()

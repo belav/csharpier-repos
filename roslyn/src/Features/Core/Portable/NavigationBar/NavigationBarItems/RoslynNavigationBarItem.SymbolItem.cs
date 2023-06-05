@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.NavigationBar
 {
-    internal abstract partial class RoslynNavigationBarItem
+    partial internal abstract class RoslynNavigationBarItem
     {
         public sealed class SymbolItem : RoslynNavigationBarItem, IEquatable<SymbolItem>
         {

@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace System.Net
 {
-    internal partial class ContextAwareResult : IAsyncResult
+    partial internal class ContextAwareResult : IAsyncResult
     {
         private AsyncCallback _callback;
 

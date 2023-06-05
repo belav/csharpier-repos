@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct OtherKeyAttributeAsn
+    partial internal struct OtherKeyAttributeAsn
     {
         internal string KeyAttrId;
         internal ReadOnlyMemory<byte>? KeyAttr;

@@ -24,7 +24,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
 
-internal abstract partial class IISHttpContext
+partial internal abstract class IISHttpContext
     : NativeRequestContext,
         IThreadPoolWorkItem,
         IDisposable

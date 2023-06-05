@@ -14,7 +14,7 @@ using LanguageServiceGuids = Microsoft.VisualStudio.LanguageServices.Guids;
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
 {
     [Guid(LanguageServiceGuids.CSharpReplPackageIdString)]
-    internal sealed partial class CSharpVsInteractiveWindowPackage
+    partial internal sealed class CSharpVsInteractiveWindowPackage
         : VsInteractiveWindowPackage<CSharpVsInteractiveWindowProvider>
     {
         private const string IdString = "CA8CC5C7-0231-406A-95CD-AA5ED6AC0190";

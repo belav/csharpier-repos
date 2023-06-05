@@ -15,7 +15,7 @@ using Xunit;
 
 namespace Roslyn.Test.Utilities
 {
-    internal sealed partial class SourceWithMarkedNodes
+    partial internal sealed class SourceWithMarkedNodes
     {
         /// <summary>
         /// The source with markers stripped out, that was used to produce the tree

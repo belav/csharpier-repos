@@ -269,7 +269,10 @@ namespace System.IO.Compression
 
         // Calculate CRC based on the old CRC and the new bytes
         // See RFC1952 for details.
-        static public uint UpdateCrc32(uint crc32, byte[] buffer, int offset, int length)
+        public
+        // Calculate CRC based on the old CRC and the new bytes
+        // See RFC1952 for details.
+        static uint UpdateCrc32(uint crc32, byte[] buffer, int offset, int length)
         {
             Debug.Assert(
                 (buffer != null)

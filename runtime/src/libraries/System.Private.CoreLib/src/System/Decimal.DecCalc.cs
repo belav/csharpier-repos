@@ -10,7 +10,7 @@ using X86 = System.Runtime.Intrinsics.X86;
 
 namespace System
 {
-    public partial struct Decimal
+    partial public struct Decimal
     {
         // Low level accessors used by a DecCalc and formatting
         internal uint High => _hi32;

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class MethodTests
+    partial public static class MethodTests
     {
         [Fact]
         public static unsafe void TestMethods1()

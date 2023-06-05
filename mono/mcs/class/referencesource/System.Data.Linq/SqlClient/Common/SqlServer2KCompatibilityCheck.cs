@@ -4,11 +4,12 @@ using System.Text;
 
 namespace System.Data.Linq.SqlClient
 {
+    internal
     /// <summary>
     /// Methods for checking whethe a query was compatible with the
     /// server it will be sent to.
     /// </summary>
-    static internal class SqlServerCompatibilityCheck
+    static class SqlServerCompatibilityCheck
     {
         /// <summary>
         /// Private visitor class checks each node for compatibility annotations.

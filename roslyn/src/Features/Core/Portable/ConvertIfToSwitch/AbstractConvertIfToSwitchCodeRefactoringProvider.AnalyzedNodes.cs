@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 {
-    internal abstract partial class AbstractConvertIfToSwitchCodeRefactoringProvider<
+    partial internal abstract class AbstractConvertIfToSwitchCodeRefactoringProvider<
         TIfStatementSyntax,
         TExpressionSyntax,
         TIsExpressionSyntax,

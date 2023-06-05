@@ -1,6 +1,6 @@
 namespace System.IO
 {
-    internal static partial class FileSystem
+    partial internal static class FileSystem
     {
         public static void CopyFile(string sourceFullPath, string destFullPath, bool overwrite) =>
             throw new PlatformNotSupportedException();

@@ -715,7 +715,7 @@ namespace System.Web.Caching
         static int s_activePolling = 0;
         static bool s_shutdown = false;
 
-        static internal string GetMoniterKey(string database, string table)
+        internal static string GetMoniterKey(string database, string table)
         {
             if (database.IndexOf(CacheKeySeparatorChar) != -1)
             {
@@ -734,7 +734,7 @@ namespace System.Web.Caching
             return CacheInternal.PrefixSqlCacheDependency + database + CacheKeySeparator + table;
         }
 
-        static internal void Dispose(int waitTimeoutMs)
+        internal static void Dispose(int waitTimeoutMs)
         {
             try
             {
@@ -1258,7 +1258,9 @@ namespace System.Web.Caching
         }
 
         // Called by SqlCacheDependency.GetDependKey
-        static internal void EnsureTableIsRegisteredAndPolled(string database, string table)
+        internal
+        // Called by SqlCacheDependency.GetDependKey
+        static void EnsureTableIsRegisteredAndPolled(string database, string table)
         {
             bool doubleChecked = false;
 

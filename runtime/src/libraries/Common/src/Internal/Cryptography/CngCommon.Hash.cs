@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    internal static partial class CngCommon
+    partial internal static class CngCommon
     {
         public static byte[] HashData(
             byte[] data,

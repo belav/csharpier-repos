@@ -4,11 +4,12 @@
 
 namespace Microsoft.CodeAnalysis.Operations
 {
+    partial
     /// <summary>
     /// Represents a <see cref="IOperation"/> visitor that visits only the single IOperation
     /// passed into its Visit method.
     /// </summary>
-    public abstract partial class OperationVisitor
+    public abstract class OperationVisitor
     {
         // Make public after review: https://github.com/dotnet/roslyn/issues/21281
         internal virtual void VisitFixed(IFixedOperation operation) =>
@@ -17,6 +18,7 @@ namespace Microsoft.CodeAnalysis.Operations
             VisitNoneOperation(operation);
     }
 
+    partial
     /// <summary>
     /// Represents a <see cref="IOperation"/> visitor that visits only the single IOperation
     /// passed into its Visit method with an additional argument of the type specified by the
@@ -29,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Operations
     /// <typeparam name="TResult">
     /// The type of the return value of this visitor's Visit method.
     /// </typeparam>
-    public abstract partial class OperationVisitor<TArgument, TResult>
+    public abstract class OperationVisitor<TArgument, TResult>
     {
         // Make public after review: https://github.com/dotnet/roslyn/issues/21281
         internal virtual TResult? VisitFixed(IFixedOperation operation, TArgument argument) =>

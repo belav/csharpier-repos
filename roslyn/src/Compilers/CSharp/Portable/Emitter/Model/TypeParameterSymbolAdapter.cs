@@ -15,7 +15,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class
+    partial internal class
 #if DEBUG
     TypeParameterSymbolAdapter
         : SymbolAdapter,
@@ -370,7 +370,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal partial class TypeParameterSymbol
+    partial internal class TypeParameterSymbol
     {
 #if DEBUG
         private TypeParameterSymbolAdapter _lazyAdapter;
@@ -399,8 +399,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #endif
     }
 
+    partial
 #if DEBUG
-    internal partial class TypeParameterSymbolAdapter
+    internal class TypeParameterSymbolAdapter
     {
         internal TypeParameterSymbolAdapter(TypeParameterSymbol underlyingTypeParameterSymbol)
         {

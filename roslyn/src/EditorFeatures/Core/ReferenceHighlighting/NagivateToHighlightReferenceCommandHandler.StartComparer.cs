@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
 {
-    internal partial class NavigateToHighlightReferenceCommandHandler
+    partial internal class NavigateToHighlightReferenceCommandHandler
     {
         private class StartComparer : IComparer<SnapshotSpan>
         {

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public abstract partial class Diagnostic
+    partial public abstract class Diagnostic
     {
         private sealed class DiagnosticWithProgrammaticSuppression : Diagnostic
         {

@@ -43,7 +43,7 @@ namespace System.IO
 {
     [DefaultEvent("Changed")]
     [IODescription("")]
-    public partial class FileSystemWatcher : Component, ISupportInitialize
+    partial public class FileSystemWatcher : Component, ISupportInitialize
     {
         #region Fields
 

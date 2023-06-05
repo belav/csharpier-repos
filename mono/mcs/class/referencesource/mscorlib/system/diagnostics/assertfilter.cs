@@ -15,14 +15,20 @@ namespace System.Diagnostics
     // The default filter brings up a simple Win32 dialog with 3 buttons.
 
     [Serializable]
-    abstract internal class AssertFilter
+    internal abstract class AssertFilter
     {
         // Called when an assert fails.  This should be overridden with logic which
         // determines whether the program should terminate or not.  Typically this
         // is done by asking the user.
         //
         // The windowTitle can be null.
-        abstract public AssertFilters AssertFailure(
+        public
+        // Called when an assert fails.  This should be overridden with logic which
+        // determines whether the program should terminate or not.  Typically this
+        // is done by asking the user.
+        //
+        // The windowTitle can be null.
+        abstract AssertFilters AssertFailure(
             String condition,
             String message,
             StackTrace location,

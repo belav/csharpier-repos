@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace System.Text.Tests
 {
-    public static partial class RuneTests
+    partial public static class RuneTests
     {
         public static IEnumerable<Rune> AllRunes()
         {

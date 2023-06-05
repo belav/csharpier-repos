@@ -90,7 +90,7 @@ namespace System.Web.Profile
             base.Add(provider);
         }
 
-        new public ProfileProvider this[string name]
+        public new ProfileProvider this[string name]
         {
             get { return (ProfileProvider)base[name]; }
         }

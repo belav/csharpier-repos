@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Formats.Asn1
 {
-    public sealed partial class AsnWriter
+    partial public sealed class AsnWriter
     {
         /// <summary>
         ///   Begin writing a Set-Of with a specified tag.

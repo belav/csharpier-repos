@@ -38,7 +38,7 @@ class FixedTest
         }
     }
 
-    unsafe public static int Main()
+    public static unsafe int Main()
     {
         TValue[] values = new TValue[10];
         values[0] = new TValue(0L);

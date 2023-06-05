@@ -5,7 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-public partial class RelationalModelValidatorTest
+partial public class RelationalModelValidatorTest
 {
     [ConditionalFact]
     public void Throws_when_added_property_is_not_mapped_to_store()

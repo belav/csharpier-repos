@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal const byte VER_GREATER_EQUAL = 0x3;
         internal const uint VER_MAJORVERSION = 0x0000002;
@@ -15,7 +15,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool VerifyVersionInfoW(
+        partial internal static bool VerifyVersionInfoW(
             ref OSVERSIONINFOEX lpVersionInfo,
             uint dwTypeMask,
             ulong dwlConditionMask

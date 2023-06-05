@@ -5,7 +5,7 @@ using Roslyn.Services.Internal.Extensions;
 
 namespace Roslyn.Services.CSharp.Debugging
 {
-    internal partial class ProximityExpressionsGetter
+    partial internal class ProximityExpressionsGetter
     {
         private static string ConvertToString(ExpressionSyntax expression)
         {

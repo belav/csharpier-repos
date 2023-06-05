@@ -11,7 +11,7 @@ using System.Security.Cryptography.Pkcs.Tests;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class UnprotectedAttributeTests
+    partial public static class UnprotectedAttributeTests
     {
         [Fact]
         public static void TestUnprotectedAttributes0_RoundTrip()

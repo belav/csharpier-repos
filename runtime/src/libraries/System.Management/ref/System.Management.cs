@@ -60,7 +60,7 @@ namespace System.Management
         IgnoreFlavor = 32,
     }
 
-    public partial class CompletedEventArgs : System.Management.ManagementEventArgs
+    partial public class CompletedEventArgs : System.Management.ManagementEventArgs
     {
         internal CompletedEventArgs() { }
 
@@ -79,7 +79,7 @@ namespace System.Management
         System.Management.CompletedEventArgs e
     );
 
-    public partial class ConnectionOptions : System.Management.ManagementOptions
+    partial public class ConnectionOptions : System.Management.ManagementOptions
     {
         public ConnectionOptions() { }
 
@@ -152,7 +152,7 @@ namespace System.Management
         }
     }
 
-    public partial class DeleteOptions : System.Management.ManagementOptions
+    partial public class DeleteOptions : System.Management.ManagementOptions
     {
         public DeleteOptions() { }
 
@@ -167,7 +167,7 @@ namespace System.Management
         }
     }
 
-    public partial class EnumerationOptions : System.Management.ManagementOptions
+    partial public class EnumerationOptions : System.Management.ManagementOptions
     {
         public EnumerationOptions() { }
 
@@ -231,7 +231,7 @@ namespace System.Management
         }
     }
 
-    public partial class EventArrivedEventArgs : System.Management.ManagementEventArgs
+    partial public class EventArrivedEventArgs : System.Management.ManagementEventArgs
     {
         internal EventArrivedEventArgs() { }
 
@@ -246,7 +246,7 @@ namespace System.Management
         System.Management.EventArrivedEventArgs e
     );
 
-    public partial class EventQuery : System.Management.ManagementQuery
+    partial public class EventQuery : System.Management.ManagementQuery
     {
         public EventQuery() { }
 
@@ -260,7 +260,7 @@ namespace System.Management
         }
     }
 
-    public partial class EventWatcherOptions : System.Management.ManagementOptions
+    partial public class EventWatcherOptions : System.Management.ManagementOptions
     {
         public EventWatcherOptions() { }
 
@@ -291,7 +291,7 @@ namespace System.Management
         Delegate = 4,
     }
 
-    public partial class InvokeMethodOptions : System.Management.ManagementOptions
+    partial public class InvokeMethodOptions : System.Management.ManagementOptions
     {
         public InvokeMethodOptions() { }
 
@@ -307,7 +307,7 @@ namespace System.Management
     }
 
     [System.ComponentModel.ToolboxItemAttribute(false)]
-    public partial class ManagementBaseObject
+    partial public class ManagementBaseObject
         : System.ComponentModel.Component,
             System.ICloneable,
             System.Runtime.Serialization.ISerializable
@@ -412,7 +412,7 @@ namespace System.Management
         ) { }
     }
 
-    public partial class ManagementClass : System.Management.ManagementObject
+    partial public class ManagementClass : System.Management.ManagementObject
     {
         public ManagementClass() { }
 
@@ -614,7 +614,7 @@ namespace System.Management
         ) { }
     }
 
-    public sealed partial class ManagementDateTimeConverter
+    partial public sealed class ManagementDateTimeConverter
     {
         internal ManagementDateTimeConverter() { }
 
@@ -639,7 +639,7 @@ namespace System.Management
         }
     }
 
-    public abstract partial class ManagementEventArgs : System.EventArgs
+    partial public abstract class ManagementEventArgs : System.EventArgs
     {
         internal ManagementEventArgs() { }
 
@@ -650,7 +650,7 @@ namespace System.Management
     }
 
     [System.ComponentModel.ToolboxItemAttribute(false)]
-    public partial class ManagementEventWatcher : System.ComponentModel.Component
+    partial public class ManagementEventWatcher : System.ComponentModel.Component
     {
         public ManagementEventWatcher() { }
 
@@ -715,7 +715,7 @@ namespace System.Management
         }
     }
 
-    public partial class ManagementException : System.SystemException
+    partial public class ManagementException : System.SystemException
     {
         public ManagementException() { }
 
@@ -743,7 +743,7 @@ namespace System.Management
         ) { }
     }
 
-    public partial class ManagementNamedValueCollection
+    partial public class ManagementNamedValueCollection
         : System.Collections.Specialized.NameObjectCollectionBase
     {
         public ManagementNamedValueCollection() { }
@@ -770,7 +770,7 @@ namespace System.Management
         public void RemoveAll() { }
     }
 
-    public partial class ManagementObject
+    partial public class ManagementObject
         : System.Management.ManagementBaseObject,
             System.ICloneable
     {
@@ -1065,7 +1065,7 @@ namespace System.Management
         }
     }
 
-    public partial class ManagementObjectCollection
+    partial public class ManagementObjectCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.IDisposable
@@ -1103,7 +1103,7 @@ namespace System.Management
             throw null;
         }
 
-        public partial class ManagementObjectEnumerator
+        partial public class ManagementObjectEnumerator
             : System.Collections.IEnumerator,
                 System.IDisposable
         {
@@ -1132,7 +1132,7 @@ namespace System.Management
     }
 
     [System.ComponentModel.ToolboxItemAttribute(false)]
-    public partial class ManagementObjectSearcher : System.ComponentModel.Component
+    partial public class ManagementObjectSearcher : System.ComponentModel.Component
     {
         public ManagementObjectSearcher() { }
 
@@ -1183,7 +1183,7 @@ namespace System.Management
         public void Get(System.Management.ManagementOperationObserver watcher) { }
     }
 
-    public partial class ManagementOperationObserver
+    partial public class ManagementOperationObserver
     {
         public ManagementOperationObserver() { }
 
@@ -1214,7 +1214,7 @@ namespace System.Management
     [System.ComponentModel.TypeConverterAttribute(
         typeof(System.ComponentModel.ExpandableObjectConverter)
     )]
-    public abstract partial class ManagementOptions : System.ICloneable
+    partial public abstract class ManagementOptions : System.ICloneable
     {
         internal ManagementOptions() { }
 
@@ -1232,7 +1232,7 @@ namespace System.Management
         public abstract object Clone();
     }
 
-    public partial class ManagementPath : System.ICloneable
+    partial public class ManagementPath : System.ICloneable
     {
         public ManagementPath() { }
 
@@ -1320,7 +1320,7 @@ namespace System.Management
         }
     }
 
-    public abstract partial class ManagementQuery : System.ICloneable
+    partial public abstract class ManagementQuery : System.ICloneable
     {
         internal ManagementQuery() { }
 
@@ -1339,7 +1339,7 @@ namespace System.Management
         protected internal virtual void ParseQuery(string query) { }
     }
 
-    public partial class ManagementScope : System.ICloneable
+    partial public class ManagementScope : System.ICloneable
     {
         public ManagementScope() { }
 
@@ -1494,7 +1494,7 @@ namespace System.Management
         PartialResults = 262160,
     }
 
-    public partial class MethodData
+    partial public class MethodData
     {
         internal MethodData() { }
 
@@ -1520,7 +1520,7 @@ namespace System.Management
         }
     }
 
-    public partial class MethodDataCollection
+    partial public class MethodDataCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -1567,7 +1567,7 @@ namespace System.Management
             throw null;
         }
 
-        public partial class MethodDataEnumerator : System.Collections.IEnumerator
+        partial public class MethodDataEnumerator : System.Collections.IEnumerator
         {
             internal MethodDataEnumerator() { }
 
@@ -1589,7 +1589,7 @@ namespace System.Management
         }
     }
 
-    public partial class ObjectGetOptions : System.Management.ManagementOptions
+    partial public class ObjectGetOptions : System.Management.ManagementOptions
     {
         public ObjectGetOptions() { }
 
@@ -1613,7 +1613,7 @@ namespace System.Management
         }
     }
 
-    public partial class ObjectPutEventArgs : System.Management.ManagementEventArgs
+    partial public class ObjectPutEventArgs : System.Management.ManagementEventArgs
     {
         internal ObjectPutEventArgs() { }
 
@@ -1628,7 +1628,7 @@ namespace System.Management
         System.Management.ObjectPutEventArgs e
     );
 
-    public partial class ObjectQuery : System.Management.ManagementQuery
+    partial public class ObjectQuery : System.Management.ManagementQuery
     {
         public ObjectQuery() { }
 
@@ -1642,7 +1642,7 @@ namespace System.Management
         }
     }
 
-    public partial class ObjectReadyEventArgs : System.Management.ManagementEventArgs
+    partial public class ObjectReadyEventArgs : System.Management.ManagementEventArgs
     {
         internal ObjectReadyEventArgs() { }
 
@@ -1657,7 +1657,7 @@ namespace System.Management
         System.Management.ObjectReadyEventArgs e
     );
 
-    public partial class ProgressEventArgs : System.Management.ManagementEventArgs
+    partial public class ProgressEventArgs : System.Management.ManagementEventArgs
     {
         internal ProgressEventArgs() { }
 
@@ -1677,7 +1677,7 @@ namespace System.Management
 
     public delegate void ProgressEventHandler(object sender, System.Management.ProgressEventArgs e);
 
-    public partial class PropertyData
+    partial public class PropertyData
     {
         internal PropertyData() { }
 
@@ -1712,7 +1712,7 @@ namespace System.Management
         }
     }
 
-    public partial class PropertyDataCollection
+    partial public class PropertyDataCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -1765,7 +1765,7 @@ namespace System.Management
             throw null;
         }
 
-        public partial class PropertyDataEnumerator : System.Collections.IEnumerator
+        partial public class PropertyDataEnumerator : System.Collections.IEnumerator
         {
             internal PropertyDataEnumerator() { }
 
@@ -1787,7 +1787,7 @@ namespace System.Management
         }
     }
 
-    public partial class PutOptions : System.Management.ManagementOptions
+    partial public class PutOptions : System.Management.ManagementOptions
     {
         public PutOptions() { }
 
@@ -1825,7 +1825,7 @@ namespace System.Management
         UpdateOrCreate = 3,
     }
 
-    public partial class QualifierData
+    partial public class QualifierData
     {
         internal QualifierData() { }
 
@@ -1864,7 +1864,7 @@ namespace System.Management
         }
     }
 
-    public partial class QualifierDataCollection
+    partial public class QualifierDataCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -1914,7 +1914,7 @@ namespace System.Management
             throw null;
         }
 
-        public partial class QualifierDataEnumerator : System.Collections.IEnumerator
+        partial public class QualifierDataEnumerator : System.Collections.IEnumerator
         {
             internal QualifierDataEnumerator() { }
 
@@ -1936,7 +1936,7 @@ namespace System.Management
         }
     }
 
-    public partial class RelatedObjectQuery : System.Management.WqlObjectQuery
+    partial public class RelatedObjectQuery : System.Management.WqlObjectQuery
     {
         public RelatedObjectQuery() { }
 
@@ -2022,7 +2022,7 @@ namespace System.Management
         protected internal override void ParseQuery(string query) { }
     }
 
-    public partial class RelationshipQuery : System.Management.WqlObjectQuery
+    partial public class RelationshipQuery : System.Management.WqlObjectQuery
     {
         public RelationshipQuery() { }
 
@@ -2087,7 +2087,7 @@ namespace System.Management
         protected internal override void ParseQuery(string query) { }
     }
 
-    public partial class SelectQuery : System.Management.WqlObjectQuery
+    partial public class SelectQuery : System.Management.WqlObjectQuery
     {
         public SelectQuery() { }
 
@@ -2135,7 +2135,7 @@ namespace System.Management
         protected internal override void ParseQuery(string query) { }
     }
 
-    public partial class StoppedEventArgs : System.Management.ManagementEventArgs
+    partial public class StoppedEventArgs : System.Management.ManagementEventArgs
     {
         internal StoppedEventArgs() { }
 
@@ -2154,7 +2154,7 @@ namespace System.Management
         WmiDtd20 = 2,
     }
 
-    public partial class WqlEventQuery : System.Management.EventQuery
+    partial public class WqlEventQuery : System.Management.EventQuery
     {
         public WqlEventQuery() { }
 
@@ -2242,7 +2242,7 @@ namespace System.Management
         protected internal override void ParseQuery(string query) { }
     }
 
-    public partial class WqlObjectQuery : System.Management.ObjectQuery
+    partial public class WqlObjectQuery : System.Management.ObjectQuery
     {
         public WqlObjectQuery() { }
 

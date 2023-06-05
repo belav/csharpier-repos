@@ -158,7 +158,7 @@ namespace System.Web.UI
             }
         }
 
-        public override sealed ControlCollection Controls
+        public sealed override ControlCollection Controls
         {
             get { return base.Controls; }
         }
@@ -247,7 +247,7 @@ namespace System.Web.UI
             return new Control();
         }
 
-        protected override sealed ControlCollection CreateControlCollection()
+        protected sealed override ControlCollection CreateControlCollection()
         {
             return new SingleChildControlCollection(this);
         }

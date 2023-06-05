@@ -24,7 +24,7 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
-    internal partial class DetailedErrorInfoDialog : DialogWindow
+    partial internal class DetailedErrorInfoDialog : DialogWindow
     {
         private readonly string errorInfo;
 

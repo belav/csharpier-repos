@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
         /// <summary>
         /// Code action for adding an import when we find a symbol in source in either our

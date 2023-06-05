@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal abstract partial class AnalyzerDriver : IDisposable
+    partial internal abstract class AnalyzerDriver : IDisposable
     {
         /// <summary>
         /// Stores <see cref="DeclarationAnalysisData"/> for symbols declared in the compilation.

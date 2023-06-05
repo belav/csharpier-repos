@@ -12,6 +12,7 @@ using System.Diagnostics.Contracts;
 
 namespace System.IO
 {
+    internal
     // ABOUT:
     // Helps with path normalization; support allocating on the stack or heap
     //
@@ -37,7 +38,7 @@ namespace System.IO
     //   than Path.MaxPath if they can be normalized down to Path.MaxPath. This
     //   can happen if the path contains escape characters "..".
     //
-    unsafe internal struct PathHelper
+    unsafe struct PathHelper
     { // should not be serialized
         // maximum size, max be greater than max path if contains escape sequence
         private int m_capacity;

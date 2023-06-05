@@ -506,7 +506,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern int ConnectNamedPipe(
+        internal static extern unsafe int ConnectNamedPipe(
             PipeHandle handle,
             NativeOverlapped* lpOverlapped
         );
@@ -536,7 +536,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal unsafe static extern PipeHandle CreateNamedPipe(
+        internal static extern unsafe PipeHandle CreateNamedPipe(
             string name,
             int openMode,
             int pipeMode,
@@ -549,7 +549,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern int DisconnectNamedPipe(PipeHandle handle);
+        internal static extern unsafe int DisconnectNamedPipe(PipeHandle handle);
 
         [DllImport(KERNEL32, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -589,7 +589,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int GetOverlappedResult(
+        internal static extern unsafe int GetOverlappedResult(
             PipeHandle handle,
             NativeOverlapped* overlapped,
             out int bytesTransferred,
@@ -599,7 +599,7 @@ namespace System.ServiceModel.Channels
         // This p/invoke is for perf-sensitive codepaths which can guarantee a valid handle via custom locking.
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int GetOverlappedResult(
+        internal static extern unsafe int GetOverlappedResult(
             IntPtr handle,
             NativeOverlapped* overlapped,
             out int bytesTransferred,
@@ -608,7 +608,7 @@ namespace System.ServiceModel.Channels
 
         // NOTE: a macro in win32
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        internal unsafe static bool HasOverlappedIoCompleted(NativeOverlapped* overlapped)
+        internal static unsafe bool HasOverlappedIoCompleted(NativeOverlapped* overlapped)
         {
             return overlapped->InternalLow != (IntPtr)STATUS_PENDING;
         }
@@ -639,7 +639,7 @@ namespace System.ServiceModel.Channels
         // This p/invoke is for perf-sensitive codepaths which can guarantee a valid handle via custom locking.
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int ReadFile(
+        internal static extern unsafe int ReadFile(
             IntPtr handle,
             byte* bytes,
             int numBytesToRead,
@@ -659,7 +659,7 @@ namespace System.ServiceModel.Channels
         // This p/invoke is for perf-sensitive codepaths which can guarantee a valid handle via custom locking.
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern int WriteFile(
+        internal static extern unsafe int WriteFile(
             IntPtr handle,
             byte* bytes,
             int numBytesToWrite,
@@ -669,14 +669,14 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern bool GetNamedPipeClientProcessId(
+        internal static extern unsafe bool GetNamedPipeClientProcessId(
             PipeHandle handle,
             out int id
         );
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern bool GetNamedPipeServerProcessId(
+        internal static extern unsafe bool GetNamedPipeServerProcessId(
             PipeHandle handle,
             out int id
         );
@@ -710,7 +710,7 @@ namespace System.ServiceModel.Channels
 #if WSARECV
         [DllImport(WS2_32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern int WSARecv(
+        internal static extern unsafe int WSARecv(
             IntPtr handle,
             WSABuffer* buffers,
             int bufferCount,
@@ -722,7 +722,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(WS2_32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern bool WSAGetOverlappedResult(
+        internal static extern unsafe bool WSAGetOverlappedResult(
             IntPtr socketHandle,
             NativeOverlapped* overlapped,
             out int bytesTransferred,
@@ -1007,7 +1007,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(
+        public static extern unsafe int MQReceiveMessage(
             MsmqQueueHandle handle,
             int timeout,
             int action,
@@ -1020,7 +1020,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(
+        public static extern unsafe int MQReceiveMessage(
             IntPtr handle,
             int timeout,
             int action,
@@ -1033,7 +1033,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(
+        public static extern unsafe int MQReceiveMessage(
             MsmqQueueHandle handle,
             int timeout,
             int action,
@@ -1046,7 +1046,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(
+        public static extern unsafe int MQReceiveMessage(
             IntPtr handle,
             int timeout,
             int action,
@@ -1059,7 +1059,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(
+        public static extern unsafe int MQReceiveMessage(
             MsmqQueueHandle handle,
             int timeout,
             int action,
@@ -1072,7 +1072,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(
+        public static extern unsafe int MQReceiveMessage(
             IntPtr handle,
             int timeout,
             int action,
@@ -1085,7 +1085,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessageByLookupId(
+        public static extern unsafe int MQReceiveMessageByLookupId(
             MsmqQueueHandle handle,
             long lookupId,
             int action,
@@ -1097,7 +1097,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessageByLookupId(
+        public static extern unsafe int MQReceiveMessageByLookupId(
             MsmqQueueHandle handle,
             long lookupId,
             int action,
@@ -1109,7 +1109,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessageByLookupId(
+        public static extern unsafe int MQReceiveMessageByLookupId(
             MsmqQueueHandle handle,
             long lookupId,
             int action,
@@ -1121,14 +1121,14 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQGetPrivateComputerInformation(
+        public static extern unsafe int MQGetPrivateComputerInformation(
             string computerName,
             IntPtr properties
         );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQMarkMessageRejected(
+        public static extern unsafe int MQMarkMessageRejected(
             MsmqQueueHandle handle,
             long lookupId
         );
@@ -1153,15 +1153,15 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQGetOverlappedResult(NativeOverlapped* nativeOverlapped);
+        public static extern unsafe int MQGetOverlappedResult(NativeOverlapped* nativeOverlapped);
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQGetQueueProperties(string formatName, IntPtr properties);
+        public static extern unsafe int MQGetQueueProperties(string formatName, IntPtr properties);
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQPathNameToFormatName(
+        public static extern unsafe int MQPathNameToFormatName(
             string pathName,
             StringBuilder formatName,
             ref int count
@@ -1169,7 +1169,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQMgmtGetInfo(
+        public static extern unsafe int MQMgmtGetInfo(
             string computerName,
             string objectName,
             IntPtr properties
@@ -1177,11 +1177,11 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern void MQFreeMemory(IntPtr nativeBuffer);
+        public static extern unsafe void MQFreeMemory(IntPtr nativeBuffer);
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int GetHandleInformation(MsmqQueueHandle handle, out int flags);
+        public static extern unsafe int GetHandleInformation(MsmqQueueHandle handle, out int flags);
 
         [StructLayout(LayoutKind.Sequential)]
         public struct MEMORYSTATUSEX
@@ -1396,7 +1396,7 @@ namespace System.ServiceModel.Channels
         internal SafeFileMappingHandle()
             : base(true) { }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return UnsafeNativeMethods.CloseHandle(handle) != 0;
         }
@@ -1422,7 +1422,7 @@ namespace System.ServiceModel.Channels
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         private static extern bool FreeLibrary(IntPtr hModule);
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             if (doNotfreeLibraryOnRelease)
             {
@@ -1440,7 +1440,7 @@ namespace System.ServiceModel.Channels
         internal SafeViewOfFileHandle()
             : base(true) { }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             if (UnsafeNativeMethods.UnmapViewOfFile(handle) != 0)
             {

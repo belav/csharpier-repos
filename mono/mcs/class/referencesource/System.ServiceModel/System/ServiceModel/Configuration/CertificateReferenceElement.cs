@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.Security.Cryptography.X509Certificates;
     using System.Xml;
 
-    public sealed partial class CertificateReferenceElement : ConfigurationElement
+    partial public sealed class CertificateReferenceElement : ConfigurationElement
     {
         public CertificateReferenceElement() { }
 

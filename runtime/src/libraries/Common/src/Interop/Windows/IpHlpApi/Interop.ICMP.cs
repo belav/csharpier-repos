@@ -6,9 +6,9 @@ using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class IpHlpApi
+    partial internal static class IpHlpApi
     {
         internal const int IP_STATUS_BASE = 11000;
 
@@ -59,8 +59,9 @@ internal static partial class Interop
             internal ushort port;
             internal uint flowinfo;
 
+            fixed
             // Replying address.
-            private fixed byte _Address[16];
+            private byte _Address[16];
             internal byte[] Address =>
                 MemoryMarshal.CreateReadOnlySpan(ref _Address[0], 16).ToArray();
 
@@ -91,17 +92,17 @@ internal static partial class Interop
         }
 
         [LibraryImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
-        internal static partial SafeCloseIcmpHandle IcmpCreateFile();
+        partial internal static SafeCloseIcmpHandle IcmpCreateFile();
 
         [LibraryImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
-        internal static partial SafeCloseIcmpHandle Icmp6CreateFile();
+        partial internal static SafeCloseIcmpHandle Icmp6CreateFile();
 
         [LibraryImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool IcmpCloseHandle(IntPtr handle);
+        partial internal static bool IcmpCloseHandle(IntPtr handle);
 
         [LibraryImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
-        internal static partial uint IcmpSendEcho2(
+        partial internal static uint IcmpSendEcho2(
             SafeCloseIcmpHandle icmpHandle,
             SafeWaitHandle Event,
             IntPtr apcRoutine,
@@ -116,7 +117,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
-        internal static partial uint Icmp6SendEcho2(
+        partial internal static uint Icmp6SendEcho2(
             SafeCloseIcmpHandle icmpHandle,
             SafeWaitHandle Event,
             IntPtr apcRoutine,

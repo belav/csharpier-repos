@@ -7,8 +7,9 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     // Functionality related to deterministic ordering of types
-    internal partial class TypeGetTypeMethodThunk
+    internal class TypeGetTypeMethodThunk
     {
         protected override int ClassCode => -949164050;
 

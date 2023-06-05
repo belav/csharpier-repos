@@ -14,10 +14,11 @@ using System.Text.RegularExpressions;
 
 namespace BasicEventSourceTests
 {
+    partial
     /// <summary>
     /// Tests the user experience for common user errors.
     /// </summary>
-    public partial class TestsUserErrors
+    public class TestsUserErrors
     {
         /// <summary>
         /// Try to pass a user defined class (even with EventData)

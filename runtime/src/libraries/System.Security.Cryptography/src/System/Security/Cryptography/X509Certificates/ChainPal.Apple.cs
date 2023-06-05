@@ -595,10 +595,12 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    internal sealed partial class ChainPal
+    partial internal sealed class ChainPal
     {
 #pragma warning disable IDE0060
-        internal static partial IChainPal FromHandle(IntPtr chainContext)
+        partial
+#pragma warning disable IDE0060
+        internal static IChainPal FromHandle(IntPtr chainContext)
         {
             // This is possible to do on Apple's platform, but is tricky in execution.
             // In Windows, CertGetCertificateChain is what allocates the handle, and it does
@@ -628,13 +630,13 @@ namespace System.Security.Cryptography.X509Certificates
             throw new PlatformNotSupportedException();
         }
 
-        internal static partial bool ReleaseSafeX509ChainHandle(IntPtr handle)
+        partial internal static bool ReleaseSafeX509ChainHandle(IntPtr handle)
         {
             Interop.CoreFoundation.CFRelease(handle);
             return true;
         }
 
-        internal static partial IChainPal? BuildChain(
+        partial internal static IChainPal? BuildChain(
             bool useMachineContext,
             ICertificatePal cert,
             X509Certificate2Collection? extraStore,

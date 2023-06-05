@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal partial class SolutionCrawlerRegistrationService : ISolutionCrawlerRegistrationService
+    partial internal class SolutionCrawlerRegistrationService : ISolutionCrawlerRegistrationService
     {
         internal static readonly Option2<bool> EnableSolutionCrawler =
             new("InternalSolutionCrawlerOptions_Solution Crawler", defaultValue: true);

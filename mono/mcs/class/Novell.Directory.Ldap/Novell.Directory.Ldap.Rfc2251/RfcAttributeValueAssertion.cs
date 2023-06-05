@@ -44,12 +44,13 @@ namespace Novell.Directory.Ldap.Rfc2251
     /// </summary>
     public class RfcAttributeValueAssertion : Asn1Sequence
     {
+        public
         /// <summary> Returns the attribute description.
         ///
         /// </summary>
         /// <returns> the attribute description
         /// </returns>
-        virtual public System.String AttributeDescription
+        virtual System.String AttributeDescription
         {
             get { return ((RfcAttributeDescription)get_Renamed(0)).stringValue(); }
         }
@@ -60,7 +61,7 @@ namespace Novell.Directory.Ldap.Rfc2251
         /// <returns> the assertion value.
         /// </returns>
         [CLSCompliantAttribute(false)]
-        virtual public sbyte[] AssertionValue
+        public virtual sbyte[] AssertionValue
         {
             get { return ((RfcAssertionValue)get_Renamed(1)).byteValue(); }
         }

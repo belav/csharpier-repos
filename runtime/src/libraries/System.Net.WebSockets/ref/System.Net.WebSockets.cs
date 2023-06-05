@@ -6,7 +6,7 @@
 
 namespace System.Net.WebSockets
 {
-    public readonly partial struct ValueWebSocketReceiveResult
+    partial public readonly struct ValueWebSocketReceiveResult
     {
         private readonly int _dummyPrimitive;
 
@@ -33,7 +33,7 @@ namespace System.Net.WebSockets
         }
     }
 
-    public abstract partial class WebSocket : System.IDisposable
+    partial public abstract class WebSocket : System.IDisposable
     {
         protected WebSocket() { }
 
@@ -190,7 +190,7 @@ namespace System.Net.WebSockets
         InternalServerError = 1011,
     }
 
-    public abstract partial class WebSocketContext
+    partial public abstract class WebSocketContext
     {
         protected WebSocketContext() { }
 
@@ -222,7 +222,7 @@ namespace System.Net.WebSockets
         InvalidState = 9,
     }
 
-    public sealed partial class WebSocketException : System.ComponentModel.Win32Exception
+    partial public sealed class WebSocketException : System.ComponentModel.Win32Exception
     {
         public WebSocketException() { }
 
@@ -294,7 +294,7 @@ namespace System.Net.WebSockets
         Close = 2,
     }
 
-    public partial class WebSocketReceiveResult
+    partial public class WebSocketReceiveResult
     {
         public WebSocketReceiveResult(
             int count,
@@ -343,7 +343,7 @@ namespace System.Net.WebSockets
         Aborted = 6,
     }
 
-    public sealed partial class WebSocketCreationOptions
+    partial public sealed class WebSocketCreationOptions
     {
         public bool IsServer
         {
@@ -367,7 +367,7 @@ namespace System.Net.WebSockets
         }
     }
 
-    public sealed partial class WebSocketDeflateOptions
+    partial public sealed class WebSocketDeflateOptions
     {
         public int ClientMaxWindowBits
         {

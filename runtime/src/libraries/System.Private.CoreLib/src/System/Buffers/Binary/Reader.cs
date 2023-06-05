@@ -17,13 +17,14 @@ using nuint_t = System.UInt32;
 
 namespace System.Buffers.Binary
 {
+    partial
     /// <summary>
     /// Reads bytes as primitives with specific endianness
     /// </summary>
     /// <remarks>
     /// Use these helpers when you need to read specific endianness.
     /// </remarks>
-    public static partial class BinaryPrimitives
+    public static class BinaryPrimitives
     {
         /// <summary>
         /// This is a no-op and added only for consistency.

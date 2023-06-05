@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 {
     using static BinaryOperatorKind;
 
-    internal abstract partial class AbstractConvertIfToSwitchCodeRefactoringProvider<
+    partial internal abstract class AbstractConvertIfToSwitchCodeRefactoringProvider<
         TIfStatementSyntax,
         TExpressionSyntax,
         TIsExpressionSyntax,

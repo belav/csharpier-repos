@@ -14,7 +14,7 @@ using System.Reflection; //Missing
 
 namespace System.Data.Odbc
 {
-    sealed internal class DbSchemaInfo
+    internal sealed class DbSchemaInfo
     {
         internal DbSchemaInfo() { }
 
@@ -34,6 +34,7 @@ namespace System.Data.Odbc
         internal ODBC32.SQL_TYPE _sql_type; // need that to properly marshal the value
     }
 
+    internal
     /////////////////////////////////////////////////////////////////////////////
     // Cache
     //
@@ -53,7 +54,7 @@ namespace System.Data.Odbc
     //  We do not cache all columns, so reading out of order is still not
     //
     /////////////////////////////////////////////////////////////////////////////
-    sealed internal class DbCache
+    sealed class DbCache
     {
         //Data
 

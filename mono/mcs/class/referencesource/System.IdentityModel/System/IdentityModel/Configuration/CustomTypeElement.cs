@@ -7,8 +7,9 @@ using System.Configuration;
 
 namespace System.IdentityModel.Configuration
 {
+    partial
 #pragma warning disable 1591
-    public sealed partial class CustomTypeElement : ConfigurationElementInterceptor
+    public sealed class CustomTypeElement : ConfigurationElementInterceptor
     {
         public CustomTypeElement() { }
 

@@ -13,9 +13,10 @@ using System.Reflection.Metadata;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     // TODO: Consider reducing the table memory footprint.
 
-    public partial class DesktopAssemblyIdentityComparer
+    public class DesktopAssemblyIdentityComparer
     {
         private sealed class FrameworkAssemblyDictionary
             : Dictionary<string, FrameworkAssemblyDictionary.Value>

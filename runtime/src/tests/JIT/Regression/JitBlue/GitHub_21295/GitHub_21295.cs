@@ -16,7 +16,7 @@ sealed class D : B
 
 public class X
 {
-    volatile static bool p;
+    static volatile bool p;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static B GB() => new B();

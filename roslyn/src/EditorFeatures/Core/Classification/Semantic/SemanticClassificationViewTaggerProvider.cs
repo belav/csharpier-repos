@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Classification
     [Export(typeof(IViewTaggerProvider))]
     [TagType(typeof(IClassificationTag))]
     [ContentType(ContentTypeNames.RoslynContentType)]
-    internal partial class SemanticClassificationViewTaggerProvider
+    partial internal class SemanticClassificationViewTaggerProvider
         : AbstractSemanticOrEmbeddedClassificationViewTaggerProvider
     {
         [ImportingConstructor]

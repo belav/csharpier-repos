@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text
 {
-    internal ref partial struct ValueStringBuilder
+    ref partial internal struct ValueStringBuilder
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Append(Rune rune)

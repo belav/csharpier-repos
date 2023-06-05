@@ -52,10 +52,10 @@ namespace System.Net
             SetLastError = true,
             BestFitMapping = false
         )]
-        internal extern static IntPtr GetProcAddress(SafeLoadLibrary hModule, string entryPoint);
+        internal static extern IntPtr GetProcAddress(SafeLoadLibrary hModule, string entryPoint);
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
-        internal extern static uint FormatMessage(
+        internal static extern uint FormatMessage(
             FormatMessageFlags dwFlags,
             IntPtr lpSource,
             UInt32 dwMessageId,
@@ -66,7 +66,7 @@ namespace System.Net
         );
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
-        internal extern static uint LocalFree(IntPtr lpMem);
+        internal static extern uint LocalFree(IntPtr lpMem);
     }
 
     // <SecurityKernel Critical="True" Ring="0">
@@ -86,7 +86,7 @@ namespace System.Net
         //private SafeLoadLibrary(bool ownsHandle) : base(ownsHandle) { }
 
         //internal static readonly SafeLoadLibrary Zero = new SafeLoadLibrary(false);
-        internal unsafe static SafeLoadLibrary LoadLibraryEx(string library)
+        internal static unsafe SafeLoadLibrary LoadLibraryEx(string library)
         {
             SafeLoadLibrary result = UnsafeSystemNativeMethods.LoadLibraryExW(library, null, 0);
             if (result.IsInvalid)

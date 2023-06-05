@@ -6,7 +6,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.ReaderSettingsTests
 {
-    public partial class TCOneByteStream : TCXMLReaderBaseGeneral
+    partial public class TCOneByteStream : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCOneByteStream
         // Test Case

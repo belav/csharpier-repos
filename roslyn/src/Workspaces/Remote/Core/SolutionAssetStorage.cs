@@ -11,10 +11,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote;
 
+partial
 /// <summary>
 /// Stores solution snapshots available to remote services.
 /// </summary>
-internal partial class SolutionAssetStorage
+internal class SolutionAssetStorage
 {
     /// <summary>
     /// Lock over <see cref="_checksumToScope"/>.  Note: We could consider making this a SemaphoreSlim if

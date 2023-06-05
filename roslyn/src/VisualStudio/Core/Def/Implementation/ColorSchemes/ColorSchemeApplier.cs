@@ -27,7 +27,7 @@ using Task = System.Threading.Tasks.Task;
 namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
 {
     [Export(typeof(ColorSchemeApplier))]
-    internal sealed partial class ColorSchemeApplier
+    partial internal sealed class ColorSchemeApplier
         : ForegroundThreadAffinitizedObject,
             IDisposable
     {

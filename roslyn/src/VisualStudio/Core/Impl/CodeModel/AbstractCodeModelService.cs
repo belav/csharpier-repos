@@ -37,7 +37,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
-    internal abstract partial class AbstractCodeModelService : ICodeModelService
+    partial internal abstract class AbstractCodeModelService : ICodeModelService
     {
         private readonly ConditionalWeakTable<
             SyntaxTree,

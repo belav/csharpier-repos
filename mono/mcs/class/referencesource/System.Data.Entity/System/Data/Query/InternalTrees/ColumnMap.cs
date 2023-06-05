@@ -268,11 +268,12 @@ namespace System.Data.Query.InternalTrees
             m_properties = properties;
         }
 
+        internal
         /// <summary>
         /// Get the null sentinel column, if any.  Virtual so only derived column map
         /// types that can have NullSentinel have to provide storage, etc.
         /// </summary>
-        virtual internal SimpleColumnMap NullSentinel
+        virtual SimpleColumnMap NullSentinel
         {
             get { return null; }
         }

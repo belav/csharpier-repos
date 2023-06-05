@@ -1630,7 +1630,7 @@ namespace System.Windows.Forms
         );
 
         [DllImport("libX11")]
-        internal extern static void XFreeFontSet(IntPtr data);
+        internal static extern void XFreeFontSet(IntPtr data);
 
         [DllImport("libX11")]
         private static extern void XFreeStringList(IntPtr ptr);
@@ -1684,7 +1684,7 @@ namespace System.Windows.Forms
         private static extern bool XSetLocaleModifiers(string mods);
 
         [DllImport("libX11")]
-        internal extern static int XLookupString(
+        internal static extern int XLookupString(
             ref XEvent xevent,
             byte[] buffer,
             int num_bytes,
@@ -1693,7 +1693,7 @@ namespace System.Windows.Forms
         );
 
         [DllImport("libX11")]
-        internal extern static int Xutf8LookupString(
+        internal static extern int Xutf8LookupString(
             IntPtr xic,
             ref XEvent xevent,
             byte[] buffer,
@@ -1725,12 +1725,12 @@ namespace System.Windows.Forms
         }
 
         [DllImport("libX11")]
-        internal extern static IntPtr XGetModifierMapping(IntPtr display);
+        internal static extern IntPtr XGetModifierMapping(IntPtr display);
 
         [DllImport("libX11")]
-        internal extern static int XFreeModifiermap(IntPtr modmap);
+        internal static extern int XFreeModifiermap(IntPtr modmap);
 
-        private readonly static int[] nonchar_key_vkey = new int[]
+        private static readonly int[] nonchar_key_vkey = new int[]
         {
             /* unused */
             0,
@@ -2266,7 +2266,7 @@ namespace System.Windows.Forms
             0x153 /* FFF8 */
         };
 
-        private readonly static int[] nonchar_vkey_key = new int[]
+        private static readonly int[] nonchar_vkey_key = new int[]
         {
             0,
             0,

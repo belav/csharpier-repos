@@ -5,7 +5,7 @@ using System;
 
 namespace Functions
 {
-    public static partial class MathTests
+    partial public static class MathTests
     {
         // Tests MathF.Sinh(float) over 5000 iterations for the domain -1, +1
 

@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.X509Certificates.Tests
 {
-    public partial class X509StoreTests : FileCleanupTestBase
+    partial public class X509StoreTests : FileCleanupTestBase
     {
         [Fact]
         public static void OpenMyStore()

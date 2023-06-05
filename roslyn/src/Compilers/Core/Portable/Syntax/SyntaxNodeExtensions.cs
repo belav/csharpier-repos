@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis
 {
-    public static partial class SyntaxNodeExtensions
+    partial public static class SyntaxNodeExtensions
     {
         /// <summary>
         /// Creates a new tree of nodes with the specified nodes, tokens and trivia replaced.

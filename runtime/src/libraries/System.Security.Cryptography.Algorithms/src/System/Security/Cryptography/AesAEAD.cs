@@ -5,7 +5,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class AesAEAD
+    partial internal static class AesAEAD
     {
         public static void CheckKeySize(int keySizeInBytes)
         {

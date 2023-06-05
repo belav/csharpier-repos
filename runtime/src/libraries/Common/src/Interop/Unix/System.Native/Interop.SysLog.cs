@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum SysLogPriority : int
         {
@@ -34,6 +34,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_SysLog",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial void SysLog(SysLogPriority priority, string message, string arg1);
+        partial internal static void SysLog(SysLogPriority priority, string message, string arg1);
     }
 }

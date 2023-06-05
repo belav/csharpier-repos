@@ -20,6 +20,7 @@ namespace System
         InsertLineBreaks = 1
     }
 
+    partial
     // The Convert class provides conversion and querying methods for values. The
     // Convert class contains static members only, and it is not possible to create
     // instances of the class.
@@ -72,7 +73,7 @@ namespace System
     // cast to IConvertible fails, and that exception is simply allowed to propagate out
     // of the conversion method.
 
-    public static partial class Convert
+    public static class Convert
     {
         // A typeof operation is fairly expensive (does a system call), so we'll cache these here
         // statically.  These are exactly lined up with the TypeCode, eg. ConvertType[TypeCode.Int16]

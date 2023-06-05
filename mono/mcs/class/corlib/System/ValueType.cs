@@ -63,7 +63,7 @@ namespace System
         protected ValueType() { }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool InternalEquals(object o1, object o2, out object[] fields);
+        private static extern bool InternalEquals(object o1, object o2, out object[] fields);
 
         // This is also used by RuntimeHelpers
         internal static bool DefaultEquals(object o1, object o2)
@@ -113,7 +113,7 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int InternalGetHashCode(object o, out object[] fields);
+        internal static extern int InternalGetHashCode(object o, out object[] fields);
 
         // <summary>
         //   Gets a hashcode for this value type using the

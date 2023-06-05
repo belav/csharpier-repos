@@ -7,7 +7,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
 {
-    public static unsafe partial class MemoryMarshal
+    partial public static unsafe class MemoryMarshal
     {
         /// <summary>
         /// Returns a reference to the 0th element of <paramref name="array"/>. If the array is empty, returns a reference to where the 0th element

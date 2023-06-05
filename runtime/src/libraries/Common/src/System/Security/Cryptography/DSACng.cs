@@ -9,7 +9,7 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class DSACng : DSA, IRuntimeAlgorithm
+    partial public sealed class DSACng : DSA, IRuntimeAlgorithm
     {
         /// <summary>
         ///     Create a DSACng algorithm with a random 2048 bit key pair.

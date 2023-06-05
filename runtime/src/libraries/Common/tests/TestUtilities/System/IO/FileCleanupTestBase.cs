@@ -11,8 +11,9 @@ using Xunit;
 
 namespace System.IO
 {
+    partial
     /// <summary>Base class for test classes the use temporary files that need to be cleaned up.</summary>
-    public abstract partial class FileCleanupTestBase : IDisposable
+    public abstract class FileCleanupTestBase : IDisposable
     {
         private string fallbackGuid = Guid.NewGuid().ToString("N").Substring(0, 10);
 

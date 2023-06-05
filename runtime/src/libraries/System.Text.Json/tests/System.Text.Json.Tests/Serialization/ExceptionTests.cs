@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class ExceptionTests
+    partial public static class ExceptionTests
     {
         [Fact]
         public static void RootThrownFromReaderFails()

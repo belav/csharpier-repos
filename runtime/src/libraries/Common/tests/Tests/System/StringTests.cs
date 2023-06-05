@@ -19,8 +19,9 @@ using static System.Text.Tests.StringBuilderTests;
 
 namespace System.Tests
 {
+    partial
     //When add new tests make sure to add checks for both string and span APIs where relevant.
-    public partial class StringTests
+    public class StringTests
     {
         private const string SoftHyphen = "\u00AD";
         private const string ZeroWidthJoiner = "\u200D"; // weightless in both ICU and NLS

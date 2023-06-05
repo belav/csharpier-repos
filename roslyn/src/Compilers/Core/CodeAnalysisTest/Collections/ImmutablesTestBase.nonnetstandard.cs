@@ -16,7 +16,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
-    public abstract partial class ImmutablesTestBase
+    partial public abstract class ImmutablesTestBase
     {
         /// <summary>
         /// Tests the EqualsStructurally public method and the IStructuralEquatable.Equals method.

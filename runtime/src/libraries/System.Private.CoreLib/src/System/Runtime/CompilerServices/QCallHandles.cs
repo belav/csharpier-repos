@@ -7,8 +7,9 @@ using System.Threading;
 
 namespace System.Runtime.CompilerServices
 {
+    ref
     // Wrapper for address of a string variable on stack
-    internal unsafe ref struct StringHandleOnStack
+    internal unsafe struct StringHandleOnStack
     {
         private void* _ptr;
 
@@ -18,8 +19,9 @@ namespace System.Runtime.CompilerServices
         }
     }
 
+    ref
     // Wrapper for address of a object variable on stack
-    internal unsafe ref struct ObjectHandleOnStack
+    internal unsafe struct ObjectHandleOnStack
     {
         private void* _ptr;
 
@@ -35,8 +37,9 @@ namespace System.Runtime.CompilerServices
         }
     }
 
+    ref
     // Wrapper for StackCrawlMark
-    internal unsafe ref struct StackCrawlMarkHandle
+    internal unsafe struct StackCrawlMarkHandle
     {
         private void* _ptr;
 
@@ -46,8 +49,9 @@ namespace System.Runtime.CompilerServices
         }
     }
 
+    ref
     // Wraps RuntimeModule into a handle. Used to pass RuntimeModule to native code without letting it be collected
-    internal unsafe ref struct QCallModule
+    internal unsafe struct QCallModule
     {
         private void* _ptr;
         private IntPtr _module;
@@ -65,8 +69,9 @@ namespace System.Runtime.CompilerServices
         }
     }
 
+    ref
     // Wraps RuntimeAssembly into a handle. Used to pass RuntimeAssembly to native code without letting it be collected
-    internal unsafe ref struct QCallAssembly
+    internal unsafe struct QCallAssembly
     {
         private void* _ptr;
         private IntPtr _assembly;
@@ -78,8 +83,9 @@ namespace System.Runtime.CompilerServices
         }
     }
 
+    ref
     // Wraps RuntimeType into a handle. Used to pass RuntimeType to native code without letting it be collected
-    internal unsafe ref struct QCallTypeHandle
+    internal unsafe struct QCallTypeHandle
     {
         private void* _ptr;
         private IntPtr _handle;

@@ -5,7 +5,7 @@ using System.Net.Sockets;
 
 namespace System.Net.Internals
 {
-    internal static partial class SocketExceptionFactory
+    partial internal static class SocketExceptionFactory
     {
         private sealed class ExtendedSocketException : SocketException
         {

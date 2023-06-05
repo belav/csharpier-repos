@@ -16,10 +16,11 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
+    partial
     /// <summary>
     /// Contains tests that ensure the correctness of the List class.
     /// </summary>
-    public abstract partial class SegmentedList_Generic_Tests<T> : IList_Generic_Tests<T>
+    public abstract class SegmentedList_Generic_Tests<T> : IList_Generic_Tests<T>
     {
         public static IEnumerable<object[]> ValidCollectionSizes_GreaterThanOne()
         {

@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static double Average(this IEnumerable<int> source)
         {

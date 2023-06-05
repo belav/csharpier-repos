@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
-        public static unsafe partial CERT_CONTEXT* CertEnumCertificatesInStore(
+        partial public static unsafe CERT_CONTEXT* CertEnumCertificatesInStore(
             IntPtr hCertStore,
             CERT_CONTEXT* pPrevCertContext
         );

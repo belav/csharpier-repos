@@ -3,15 +3,15 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetSignalForBreak")]
         [SuppressGCTransition]
-        internal static partial int GetSignalForBreak();
+        partial internal static int GetSignalForBreak();
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetSignalForBreak")]
-        internal static partial int SetSignalForBreak(int signalForBreak);
+        partial internal static int SetSignalForBreak(int signalForBreak);
     }
 }

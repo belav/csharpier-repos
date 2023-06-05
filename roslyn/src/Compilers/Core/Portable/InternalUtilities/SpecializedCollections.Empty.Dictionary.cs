@@ -8,9 +8,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Roslyn.Utilities
 {
-    internal partial class SpecializedCollections
+    partial internal class SpecializedCollections
     {
-        private partial class Empty
+        partial private class Empty
         {
             internal class Dictionary<TKey, TValue>
 #nullable disable

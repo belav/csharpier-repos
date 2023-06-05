@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.InteropServices
 {
+    ref
     /// <summary>
     /// Information about a virtual method table and the unmanaged instance pointer.
     /// </summary>
-    public readonly ref struct VirtualMethodTableInfo
+    public readonly struct VirtualMethodTableInfo
     {
         /// <summary>
         /// Construct a <see cref="VirtualMethodTableInfo"/> from a given instance pointer and table memory.

@@ -919,7 +919,11 @@ namespace System.Web.DynamicData
         /// <summary>
         /// Perform initialization logic for this table
         /// </summary>
-        internal protected virtual void Initialize()
+        protected
+        /// <summary>
+        /// Perform initialization logic for this table
+        /// </summary>
+        internal virtual void Initialize()
         {
             foreach (MetaColumn column in Columns)
             {

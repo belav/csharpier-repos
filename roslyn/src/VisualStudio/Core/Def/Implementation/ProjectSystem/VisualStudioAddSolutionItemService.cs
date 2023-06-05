@@ -21,7 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
     [Export]
     [ExportWorkspaceService(typeof(IAddSolutionItemService)), Shared]
-    internal partial class VisualStudioAddSolutionItemService : IAddSolutionItemService
+    partial internal class VisualStudioAddSolutionItemService : IAddSolutionItemService
     {
         private const string SolutionItemsFolderName = "Solution Items";
 

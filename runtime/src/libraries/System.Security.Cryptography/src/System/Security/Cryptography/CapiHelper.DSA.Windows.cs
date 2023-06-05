@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    internal static partial class CapiHelper
+    partial internal static class CapiHelper
     {
         // Provider type to use by default for DSS operations.
         internal const int DefaultDssProviderType = (int)ProviderType.PROV_DSS_DH;

@@ -16,10 +16,11 @@ using Internal.NativeFormat;
 
 namespace Internal.Reflection.Execution
 {
+    partial
     //==========================================================================================================
     // These ExecutionEnvironment entrypoints implement support for manifest resource streams on the Assembly class.
     //==========================================================================================================
-    internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
+    internal sealed class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
         public sealed override ManifestResourceInfo GetManifestResourceInfo(
             Assembly assembly,

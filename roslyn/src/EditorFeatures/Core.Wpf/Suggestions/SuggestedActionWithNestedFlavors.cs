@@ -22,6 +22,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
+    partial
     /// <summary>
     /// Base type for all SuggestedActions that have 'flavors'.  'Flavors' are child actions that
     /// are presented as simple links, not as menu-items, in the light-bulb.  Examples of 'flavors'
@@ -30,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     ///
     /// Because all derivations support 'preview changes', we bake that logic into this base type.
     /// </summary>
-    internal abstract partial class SuggestedActionWithNestedFlavors
+    internal abstract class SuggestedActionWithNestedFlavors
         : SuggestedAction,
             ISuggestedActionWithFlavors
     {

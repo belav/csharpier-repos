@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
 {
-    internal partial class CSharpUseRangeOperatorDiagnosticAnalyzer
+    partial internal class CSharpUseRangeOperatorDiagnosticAnalyzer
     {
         public enum ResultKind
         {

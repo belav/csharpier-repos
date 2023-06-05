@@ -5,7 +5,7 @@ using System;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class GenericParameterDesc
+    partial public abstract class GenericParameterDesc
     {
         /// <summary>
         /// Gets the name of the generic parameter as defined in the metadata. This must not throw

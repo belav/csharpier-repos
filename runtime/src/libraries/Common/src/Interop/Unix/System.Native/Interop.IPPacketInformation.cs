@@ -3,11 +3,12 @@
 
 using System.Runtime.InteropServices;
 
+partial
 #pragma warning disable CA1823 // unused private padding fields in MulticastOption structs
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal struct IPPacketInformation
         {
@@ -21,14 +22,14 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetControlMessageBufferSize"
         )]
         [SuppressGCTransition]
-        internal static partial int GetControlMessageBufferSize(int isIPv4, int isIPv6);
+        partial internal static int GetControlMessageBufferSize(int isIPv4, int isIPv6);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_TryGetIPPacketInformation"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool TryGetIPPacketInformation(
+        partial internal static unsafe bool TryGetIPPacketInformation(
             MessageHeader* messageHeader,
             [MarshalAs(UnmanagedType.Bool)] bool isIPv4,
             IPPacketInformation* packetInfo

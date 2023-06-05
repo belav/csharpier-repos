@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace System.Xml.Xsl.Runtime
 {
-    public sealed partial class XmlCollation
+    partial public sealed class XmlCollation
     {
         /// <summary>
         /// Create a sort key that can be compared quickly with other keys.

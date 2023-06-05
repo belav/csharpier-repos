@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers
 {
-    public static unsafe partial class BoundedMemory
+    partial public static unsafe class BoundedMemory
     {
         private static UnixImplementation<T> AllocateWithoutDataPopulationUnix<T>(
             int elementCount,

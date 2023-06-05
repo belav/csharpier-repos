@@ -18,8 +18,8 @@ namespace System.ServiceModel.Dispatcher
 
     class ProxyOperationRuntime
     {
-        static internal readonly ParameterInfo[] NoParams = new ParameterInfo[0];
-        static internal readonly object[] EmptyArray = new object[0];
+        internal static readonly ParameterInfo[] NoParams = new ParameterInfo[0];
+        internal static readonly object[] EmptyArray = new object[0];
 
         readonly IClientMessageFormatter formatter;
         readonly bool isInitiating;
@@ -464,7 +464,7 @@ namespace System.ServiceModel.Dispatcher
             return args;
         }
 
-        static internal bool IsValidAction(Message message, string action)
+        internal static bool IsValidAction(Message message, string action)
         {
             if (message == null)
             {

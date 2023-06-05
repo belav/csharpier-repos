@@ -14,7 +14,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.PeerResolvers;
     using System.ComponentModel;
 
-    public sealed partial class PeerCustomResolverElement : ServiceModelConfigurationElement
+    partial public sealed class PeerCustomResolverElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.Address,

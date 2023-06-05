@@ -17,12 +17,13 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class AnonymousTypeManager
+    partial internal sealed class AnonymousTypeManager
     {
+        partial
         /// <summary>
         /// Represents an anonymous type 'ToString' method.
         /// </summary>
-        private sealed partial class AnonymousTypeToStringMethodSymbol : SynthesizedMethodBase
+        private sealed class AnonymousTypeToStringMethodSymbol : SynthesizedMethodBase
         {
             internal AnonymousTypeToStringMethodSymbol(NamedTypeSymbol container)
                 : base(container, WellKnownMemberNames.ObjectToString) { }

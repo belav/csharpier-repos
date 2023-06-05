@@ -15,14 +15,14 @@ namespace System.Net.NetworkInformation
         Preferred = 4,
     }
 
-    public abstract partial class GatewayIPAddressInformation
+    partial public abstract class GatewayIPAddressInformation
     {
         protected GatewayIPAddressInformation() { }
 
         public abstract System.Net.IPAddress Address { get; }
     }
 
-    public partial class GatewayIPAddressInformationCollection
+    partial public class GatewayIPAddressInformationCollection
         : System.Collections.Generic.ICollection<System.Net.NetworkInformation.GatewayIPAddressInformation>,
             System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.GatewayIPAddressInformation>,
             System.Collections.IEnumerable
@@ -78,7 +78,7 @@ namespace System.Net.NetworkInformation
         }
     }
 
-    public abstract partial class IcmpV4Statistics
+    partial public abstract class IcmpV4Statistics
     {
         protected IcmpV4Statistics() { }
 
@@ -130,7 +130,7 @@ namespace System.Net.NetworkInformation
         public abstract long TimestampRequestsSent { get; }
     }
 
-    public abstract partial class IcmpV6Statistics
+    partial public abstract class IcmpV6Statistics
     {
         protected IcmpV6Statistics() { }
 
@@ -188,7 +188,7 @@ namespace System.Net.NetworkInformation
         public abstract long TimeExceededMessagesSent { get; }
     }
 
-    public abstract partial class IPAddressInformation
+    partial public abstract class IPAddressInformation
     {
         protected IPAddressInformation() { }
 
@@ -201,7 +201,7 @@ namespace System.Net.NetworkInformation
         public abstract bool IsTransient { get; }
     }
 
-    public partial class IPAddressInformationCollection
+    partial public class IPAddressInformationCollection
         : System.Collections.Generic.ICollection<System.Net.NetworkInformation.IPAddressInformation>,
             System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.IPAddressInformation>,
             System.Collections.IEnumerable
@@ -251,7 +251,7 @@ namespace System.Net.NetworkInformation
         }
     }
 
-    public abstract partial class IPGlobalProperties
+    partial public abstract class IPGlobalProperties
     {
         protected IPGlobalProperties() { }
 
@@ -332,7 +332,7 @@ namespace System.Net.NetworkInformation
         }
     }
 
-    public abstract partial class IPGlobalStatistics
+    partial public abstract class IPGlobalStatistics
     {
         protected IPGlobalStatistics() { }
 
@@ -399,7 +399,7 @@ namespace System.Net.NetworkInformation
         public abstract long ReceivedPacketsWithUnknownProtocol { get; }
     }
 
-    public abstract partial class IPInterfaceProperties
+    partial public abstract class IPInterfaceProperties
     {
         protected IPInterfaceProperties() { }
 
@@ -444,7 +444,7 @@ namespace System.Net.NetworkInformation
         public abstract System.Net.NetworkInformation.IPv6InterfaceProperties GetIPv6Properties();
     }
 
-    public abstract partial class IPInterfaceStatistics
+    partial public abstract class IPInterfaceStatistics
     {
         protected IPInterfaceStatistics() { }
 
@@ -471,7 +471,7 @@ namespace System.Net.NetworkInformation
         public abstract long UnicastPacketsSent { get; }
     }
 
-    public abstract partial class IPv4InterfaceProperties
+    partial public abstract class IPv4InterfaceProperties
     {
         protected IPv4InterfaceProperties() { }
 
@@ -496,7 +496,7 @@ namespace System.Net.NetworkInformation
         public abstract bool UsesWins { get; }
     }
 
-    public abstract partial class IPv4InterfaceStatistics
+    partial public abstract class IPv4InterfaceStatistics
     {
         protected IPv4InterfaceStatistics() { }
 
@@ -519,7 +519,7 @@ namespace System.Net.NetworkInformation
         public abstract long UnicastPacketsSent { get; }
     }
 
-    public abstract partial class IPv6InterfaceProperties
+    partial public abstract class IPv6InterfaceProperties
     {
         protected IPv6InterfaceProperties() { }
 
@@ -536,7 +536,7 @@ namespace System.Net.NetworkInformation
         }
     }
 
-    public abstract partial class MulticastIPAddressInformation
+    partial public abstract class MulticastIPAddressInformation
         : System.Net.NetworkInformation.IPAddressInformation
     {
         protected MulticastIPAddressInformation() { }
@@ -560,7 +560,7 @@ namespace System.Net.NetworkInformation
         public abstract System.Net.NetworkInformation.SuffixOrigin SuffixOrigin { get; }
     }
 
-    public partial class MulticastIPAddressInformationCollection
+    partial public class MulticastIPAddressInformationCollection
         : System.Collections.Generic.ICollection<System.Net.NetworkInformation.MulticastIPAddressInformation>,
             System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.MulticastIPAddressInformation>,
             System.Collections.IEnumerable
@@ -631,7 +631,7 @@ namespace System.Net.NetworkInformation
         System.Net.NetworkInformation.NetworkAvailabilityEventArgs e
     );
 
-    public partial class NetworkAvailabilityEventArgs : System.EventArgs
+    partial public class NetworkAvailabilityEventArgs : System.EventArgs
     {
         internal NetworkAvailabilityEventArgs() { }
 
@@ -641,7 +641,7 @@ namespace System.Net.NetworkInformation
         }
     }
 
-    public partial class NetworkChange
+    partial public class NetworkChange
     {
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -678,7 +678,7 @@ namespace System.Net.NetworkInformation
         public static void RegisterNetworkChange(System.Net.NetworkInformation.NetworkChange nc) { }
     }
 
-    public partial class NetworkInformationException : System.ComponentModel.Win32Exception
+    partial public class NetworkInformationException : System.ComponentModel.Win32Exception
     {
         public NetworkInformationException() { }
 
@@ -695,7 +695,7 @@ namespace System.Net.NetworkInformation
         }
     }
 
-    public abstract partial class NetworkInterface
+    partial public abstract class NetworkInterface
     {
         protected NetworkInterface() { }
 
@@ -839,7 +839,7 @@ namespace System.Net.NetworkInformation
         LowerLayerDown = 7,
     }
 
-    public partial class PhysicalAddress
+    partial public class PhysicalAddress
     {
         public static readonly System.Net.NetworkInformation.PhysicalAddress None;
 
@@ -929,7 +929,7 @@ namespace System.Net.NetworkInformation
         Random = 5,
     }
 
-    public abstract partial class TcpConnectionInformation
+    partial public abstract class TcpConnectionInformation
     {
         protected TcpConnectionInformation() { }
 
@@ -955,7 +955,7 @@ namespace System.Net.NetworkInformation
         DeleteTcb = 12,
     }
 
-    public abstract partial class TcpStatistics
+    partial public abstract class TcpStatistics
     {
         protected TcpStatistics() { }
 
@@ -975,7 +975,7 @@ namespace System.Net.NetworkInformation
         public abstract long SegmentsSent { get; }
     }
 
-    public abstract partial class UdpStatistics
+    partial public abstract class UdpStatistics
     {
         protected UdpStatistics() { }
 
@@ -986,7 +986,7 @@ namespace System.Net.NetworkInformation
         public abstract int UdpListeners { get; }
     }
 
-    public abstract partial class UnicastIPAddressInformation
+    partial public abstract class UnicastIPAddressInformation
         : System.Net.NetworkInformation.IPAddressInformation
     {
         protected UnicastIPAddressInformation() { }
@@ -1015,7 +1015,7 @@ namespace System.Net.NetworkInformation
         public abstract System.Net.NetworkInformation.SuffixOrigin SuffixOrigin { get; }
     }
 
-    public partial class UnicastIPAddressInformationCollection
+    partial public class UnicastIPAddressInformationCollection
         : System.Collections.Generic.ICollection<System.Net.NetworkInformation.UnicastIPAddressInformation>,
             System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.UnicastIPAddressInformation>,
             System.Collections.IEnumerable

@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MexHttpBindingElement
+    partial public class MexHttpBindingElement
         : MexBindingElement<WSHttpBinding>,
             IBindingConfigurationElement
     {

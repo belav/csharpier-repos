@@ -7,13 +7,13 @@ using Mono.Linker;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct TypeProxy
+    partial internal readonly struct TypeProxy
     {
         public TypeProxy(TypeDefinition type) => Type = type;
 
         public static implicit operator TypeProxy(TypeDefinition type) => new(type);
 
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters()
+        partial internal ImmutableArray<GenericParameterProxy> GetGenericParameters()
         {
             if (!Type.HasGenericParameters)
                 return ImmutableArray<GenericParameterProxy>.Empty;

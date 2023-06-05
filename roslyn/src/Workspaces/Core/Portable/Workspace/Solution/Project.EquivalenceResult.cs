@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial class Project
+    partial public class Project
     {
         private class EquivalenceResult
         {

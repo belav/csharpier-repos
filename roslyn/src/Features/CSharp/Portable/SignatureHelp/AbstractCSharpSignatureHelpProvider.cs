@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 {
-    internal abstract partial class AbstractCSharpSignatureHelpProvider
+    partial internal abstract class AbstractCSharpSignatureHelpProvider
         : AbstractSignatureHelpProvider
     {
         private static readonly SymbolDisplayFormat s_allowDefaultLiteralFormat =

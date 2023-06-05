@@ -88,7 +88,7 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public abstract partial class DefaultJsonPropertyInfoTests
+    partial public abstract class DefaultJsonPropertyInfoTests
     {
         protected virtual bool ModifiersNotSupported => false;
         protected abstract IJsonTypeInfoResolver CreateResolverWithModifiers(
@@ -912,6 +912,6 @@ namespace System.Text.Json.Serialization.Tests
         [JsonSerializable(typeof(BaseClassWithoutRequiredProperties))]
         [JsonSerializable(typeof(BaseClassWithRequiredProperties))]
         [JsonSerializable(typeof(StructWithRequiredProperties))]
-        internal partial class Context : JsonSerializerContext { }
+        partial internal class Context : JsonSerializerContext { }
     }
 }

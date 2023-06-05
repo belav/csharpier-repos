@@ -29,6 +29,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
 {
+    partial
     //==========================================================================================================
     // These ExecutionEnvironment entrypoints provide access to the NUTC-generated blob information that
     // enables Reflection invoke and tie-ins to native Type artifacts.
@@ -38,7 +39,7 @@ namespace Internal.Reflection.Execution
     // - All methods on this class must be multi-thread-safe. Reflection can and does invoke them on different threads with no synchronization of its own.
     //
     //==========================================================================================================
-    internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
+    internal sealed class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
         private static RuntimeTypeHandle GetOpenTypeDefinition(
             RuntimeTypeHandle typeHandle,

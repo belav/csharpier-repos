@@ -9,10 +9,11 @@ using System.Reflection.Runtime.General;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
+    partial
     //
     // The runtime's implementation of TypeInfo's for byref types.
     //
-    internal sealed partial class RuntimeByRefTypeInfo : RuntimeHasElementTypeInfo
+    internal sealed class RuntimeByRefTypeInfo : RuntimeHasElementTypeInfo
     {
         private RuntimeByRefTypeInfo(UnificationKey key)
             : base(key) { }

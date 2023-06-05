@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Reflection.Metadata
 {
-    public readonly partial struct AssemblyDefinition
+    partial public readonly struct AssemblyDefinition
     {
         private readonly MetadataReader _reader;
 

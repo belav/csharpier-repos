@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection
 {
-    public partial class FieldInfo
+    partial public class FieldInfo
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern FieldInfo internal_from_handle_type(

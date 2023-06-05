@@ -23,10 +23,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion
 {
+    partial
     /// <summary>
     /// A subtype of <see cref="CompletionService"/> that aggregates completions from one or more <see cref="CompletionProvider"/>s.
     /// </summary>
-    public abstract partial class CompletionServiceWithProviders : CompletionService
+    public abstract class CompletionServiceWithProviders : CompletionService
     {
         private readonly Workspace _workspace;
         private readonly ProviderManager _providerManager;

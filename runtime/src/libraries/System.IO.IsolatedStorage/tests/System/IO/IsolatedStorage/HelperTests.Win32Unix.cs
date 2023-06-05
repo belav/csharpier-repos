@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.IO.IsolatedStorage
 {
-    public partial class HelperTests
+    partial public class HelperTests
     {
         [Fact]
         public void GetExistingRandomDirectory()

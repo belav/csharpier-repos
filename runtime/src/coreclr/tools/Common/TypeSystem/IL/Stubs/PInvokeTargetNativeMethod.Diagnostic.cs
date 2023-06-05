@@ -3,7 +3,7 @@
 
 namespace Internal.IL.Stubs
 {
-    public partial class PInvokeTargetNativeMethod
+    partial public class PInvokeTargetNativeMethod
     {
         public override string DiagnosticName
         {

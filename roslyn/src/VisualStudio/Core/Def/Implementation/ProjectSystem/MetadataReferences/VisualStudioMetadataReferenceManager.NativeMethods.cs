@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal sealed partial class VisualStudioMetadataReferenceManager
+    partial internal sealed class VisualStudioMetadataReferenceManager
     {
         [ComImport]
         [Guid("7998EA64-7F95-48B8-86FC-17CAF48BF5CB")]

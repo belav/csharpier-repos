@@ -20,7 +20,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.UnitTests
 {
     [UseExportProvider]
-    public partial class FindAllDeclarationsTests : TestBase
+    partial public class FindAllDeclarationsTests : TestBase
     {
         #region FindDeclarationsAsync
 

@@ -18,7 +18,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.UnitTests
 {
     [UseExportProvider]
-    public partial class SyntaxNodeTests : TestBase
+    partial public class SyntaxNodeTests : TestBase
     {
         [Fact]
         public async Task TestReplaceOneNodeAsync()

@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(
         13,
@@ -11,7 +11,7 @@ internal static partial class LoggingExtensions
         "Updating configuration",
         EventName = "UpdatingConfiguration"
     )]
-    public static partial void UpdatingConfiguration(this ILogger logger);
+    partial public static void UpdatingConfiguration(this ILogger logger);
 
     [LoggerMessage(
         18,
@@ -19,7 +19,7 @@ internal static partial class LoggingExtensions
         "Exception of type 'SecurityTokenSignatureKeyNotFoundException' thrown, Options.ConfigurationManager.RequestRefresh() called.",
         EventName = "ConfigurationManagerRequestRefreshCalled"
     )]
-    public static partial void ConfigurationManagerRequestRefreshCalled(this ILogger logger);
+    partial public static void ConfigurationManagerRequestRefreshCalled(this ILogger logger);
 
     [LoggerMessage(
         27,
@@ -27,7 +27,7 @@ internal static partial class LoggingExtensions
         "Authorization code received.",
         EventName = "AuthorizationCodeReceived"
     )]
-    public static partial void AuthorizationCodeReceived(this ILogger logger);
+    partial public static void AuthorizationCodeReceived(this ILogger logger);
 
     [LoggerMessage(
         30,
@@ -35,10 +35,10 @@ internal static partial class LoggingExtensions
         "Token response received.",
         EventName = "TokenResponseReceived"
     )]
-    public static partial void TokenResponseReceived(this ILogger logger);
+    partial public static void TokenResponseReceived(this ILogger logger);
 
     [LoggerMessage(21, LogLevel.Debug, "Received 'id_token'", EventName = "ReceivedIdToken")]
-    public static partial void ReceivedIdToken(this ILogger logger);
+    partial public static void ReceivedIdToken(this ILogger logger);
 
     [LoggerMessage(
         19,
@@ -46,7 +46,7 @@ internal static partial class LoggingExtensions
         "Redeeming code for tokens.",
         EventName = "RedeemingCodeForTokens"
     )]
-    public static partial void RedeemingCodeForTokens(this ILogger logger);
+    partial public static void RedeemingCodeForTokens(this ILogger logger);
 
     [LoggerMessage(
         15,
@@ -54,7 +54,7 @@ internal static partial class LoggingExtensions
         "TokenValidated.HandledResponse",
         EventName = "TokenValidatedHandledResponse"
     )]
-    public static partial void TokenValidatedHandledResponse(this ILogger logger);
+    partial public static void TokenValidatedHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         16,
@@ -62,7 +62,7 @@ internal static partial class LoggingExtensions
         "TokenValidated.Skipped",
         EventName = "TokenValidatedSkipped"
     )]
-    public static partial void TokenValidatedSkipped(this ILogger logger);
+    partial public static void TokenValidatedSkipped(this ILogger logger);
 
     [LoggerMessage(
         28,
@@ -70,7 +70,7 @@ internal static partial class LoggingExtensions
         "AuthorizationCodeReceivedContext.HandledResponse",
         EventName = "AuthorizationCodeReceivedContextHandledResponse"
     )]
-    public static partial void AuthorizationCodeReceivedContextHandledResponse(this ILogger logger);
+    partial public static void AuthorizationCodeReceivedContextHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         29,
@@ -78,7 +78,7 @@ internal static partial class LoggingExtensions
         "AuthorizationCodeReceivedContext.Skipped",
         EventName = "AuthorizationCodeReceivedContextSkipped"
     )]
-    public static partial void AuthorizationCodeReceivedContextSkipped(this ILogger logger);
+    partial public static void AuthorizationCodeReceivedContextSkipped(this ILogger logger);
 
     [LoggerMessage(
         31,
@@ -86,7 +86,7 @@ internal static partial class LoggingExtensions
         "TokenResponseReceived.HandledResponse",
         EventName = "TokenResponseReceivedHandledResponse"
     )]
-    public static partial void TokenResponseReceivedHandledResponse(this ILogger logger);
+    partial public static void TokenResponseReceivedHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         32,
@@ -94,7 +94,7 @@ internal static partial class LoggingExtensions
         "TokenResponseReceived.Skipped",
         EventName = "TokenResponseReceivedSkipped"
     )]
-    public static partial void TokenResponseReceivedSkipped(this ILogger logger);
+    partial public static void TokenResponseReceivedSkipped(this ILogger logger);
 
     [LoggerMessage(
         38,
@@ -102,7 +102,7 @@ internal static partial class LoggingExtensions
         "AuthenticationFailedContext.HandledResponse",
         EventName = "AuthenticationFailedContextHandledResponse"
     )]
-    public static partial void AuthenticationFailedContextHandledResponse(this ILogger logger);
+    partial public static void AuthenticationFailedContextHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         39,
@@ -110,7 +110,7 @@ internal static partial class LoggingExtensions
         "AuthenticationFailedContext.Skipped",
         EventName = "AuthenticationFailedContextSkipped"
     )]
-    public static partial void AuthenticationFailedContextSkipped(this ILogger logger);
+    partial public static void AuthenticationFailedContextSkipped(this ILogger logger);
 
     [LoggerMessage(
         24,
@@ -118,7 +118,7 @@ internal static partial class LoggingExtensions
         "MessageReceived: '{RedirectUrl}'.",
         EventName = "MessageReceived"
     )]
-    public static partial void MessageReceived(this ILogger logger, string redirectUrl);
+    partial public static void MessageReceived(this ILogger logger, string redirectUrl);
 
     [LoggerMessage(
         25,
@@ -126,7 +126,7 @@ internal static partial class LoggingExtensions
         "MessageReceivedContext.HandledResponse",
         EventName = "MessageReceivedContextHandledResponse"
     )]
-    public static partial void MessageReceivedContextHandledResponse(this ILogger logger);
+    partial public static void MessageReceivedContextHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         26,
@@ -134,7 +134,7 @@ internal static partial class LoggingExtensions
         "MessageReceivedContext.Skipped",
         EventName = "MessageReceivedContextSkipped"
     )]
-    public static partial void MessageReceivedContextSkipped(this ILogger logger);
+    partial public static void MessageReceivedContextSkipped(this ILogger logger);
 
     [LoggerMessage(
         1,
@@ -142,7 +142,7 @@ internal static partial class LoggingExtensions
         "RedirectToIdentityProviderForSignOut.HandledResponse",
         EventName = "RedirectToIdentityProviderForSignOutHandledResponse"
     )]
-    public static partial void RedirectToIdentityProviderForSignOutHandledResponse(
+    partial public static void RedirectToIdentityProviderForSignOutHandledResponse(
         this ILogger logger
     );
 
@@ -152,7 +152,7 @@ internal static partial class LoggingExtensions
         "RedirectToIdentityProvider.HandledResponse",
         EventName = "RedirectToIdentityProviderHandledResponse"
     )]
-    public static partial void RedirectToIdentityProviderHandledResponse(this ILogger logger);
+    partial public static void RedirectToIdentityProviderHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         50,
@@ -160,7 +160,7 @@ internal static partial class LoggingExtensions
         "RedirectToSignedOutRedirectUri.HandledResponse",
         EventName = "SignOutCallbackRedirectHandledResponse"
     )]
-    public static partial void SignOutCallbackRedirectHandledResponse(this ILogger logger);
+    partial public static void SignOutCallbackRedirectHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         51,
@@ -168,7 +168,7 @@ internal static partial class LoggingExtensions
         "RedirectToSignedOutRedirectUri.Skipped",
         EventName = "SignOutCallbackRedirectSkipped"
     )]
-    public static partial void SignOutCallbackRedirectSkipped(this ILogger logger);
+    partial public static void SignOutCallbackRedirectSkipped(this ILogger logger);
 
     [LoggerMessage(
         36,
@@ -176,7 +176,7 @@ internal static partial class LoggingExtensions
         "The UserInformationReceived event returned Handled.",
         EventName = "UserInformationReceivedHandledResponse"
     )]
-    public static partial void UserInformationReceivedHandledResponse(this ILogger logger);
+    partial public static void UserInformationReceivedHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         37,
@@ -184,7 +184,7 @@ internal static partial class LoggingExtensions
         "The UserInformationReceived event returned Skipped.",
         EventName = "UserInformationReceivedSkipped"
     )]
-    public static partial void UserInformationReceivedSkipped(this ILogger logger);
+    partial public static void UserInformationReceivedSkipped(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -192,7 +192,7 @@ internal static partial class LoggingExtensions
         "The query string for Logout is not a well-formed URI. Redirect URI: '{RedirectUrl}'.",
         EventName = "InvalidLogoutQueryStringRedirectUrl"
     )]
-    public static partial void InvalidLogoutQueryStringRedirectUrl(
+    partial public static void InvalidLogoutQueryStringRedirectUrl(
         this ILogger logger,
         string redirectUrl
     );
@@ -203,7 +203,7 @@ internal static partial class LoggingExtensions
         "message.State is null or empty.",
         EventName = "NullOrEmptyAuthorizationResponseState"
     )]
-    public static partial void NullOrEmptyAuthorizationResponseState(this ILogger logger);
+    partial public static void NullOrEmptyAuthorizationResponseState(this ILogger logger);
 
     [LoggerMessage(
         11,
@@ -211,7 +211,7 @@ internal static partial class LoggingExtensions
         "Unable to read the message.State.",
         EventName = "UnableToReadAuthorizationResponseState"
     )]
-    public static partial void UnableToReadAuthorizationResponseState(this ILogger logger);
+    partial public static void UnableToReadAuthorizationResponseState(this ILogger logger);
 
     [LoggerMessage(
         12,
@@ -219,7 +219,7 @@ internal static partial class LoggingExtensions
         "Message contains error: '{Error}', error_description: '{ErrorDescription}', error_uri: '{ErrorUri}'.",
         EventName = "ResponseError"
     )]
-    public static partial void ResponseError(
+    partial public static void ResponseError(
         this ILogger logger,
         string error,
         string errorDescription,
@@ -232,7 +232,7 @@ internal static partial class LoggingExtensions
         "Message contains error: '{Error}', error_description: '{ErrorDescription}', error_uri: '{ErrorUri}', status code '{StatusCode}'.",
         EventName = "ResponseErrorWithStatusCode"
     )]
-    public static partial void ResponseErrorWithStatusCode(
+    partial public static void ResponseErrorWithStatusCode(
         this ILogger logger,
         string error,
         string errorDescription,
@@ -246,7 +246,7 @@ internal static partial class LoggingExtensions
         "Exception occurred while processing message.",
         EventName = "ExceptionProcessingMessage"
     )]
-    public static partial void ExceptionProcessingMessage(this ILogger logger, Exception ex);
+    partial public static void ExceptionProcessingMessage(this ILogger logger, Exception ex);
 
     [LoggerMessage(
         42,
@@ -254,7 +254,7 @@ internal static partial class LoggingExtensions
         "The access_token is not available. Claims cannot be retrieved.",
         EventName = "AccessTokenNotAvailable"
     )]
-    public static partial void AccessTokenNotAvailable(this ILogger logger);
+    partial public static void AccessTokenNotAvailable(this ILogger logger);
 
     [LoggerMessage(
         20,
@@ -262,7 +262,7 @@ internal static partial class LoggingExtensions
         "Retrieving claims from the user info endpoint.",
         EventName = "RetrievingClaims"
     )]
-    public static partial void RetrievingClaims(this ILogger logger);
+    partial public static void RetrievingClaims(this ILogger logger);
 
     [LoggerMessage(
         22,
@@ -270,7 +270,7 @@ internal static partial class LoggingExtensions
         "UserInfoEndpoint is not set. Claims cannot be retrieved.",
         EventName = "UserInfoEndpointNotSet"
     )]
-    public static partial void UserInfoEndpointNotSet(this ILogger logger);
+    partial public static void UserInfoEndpointNotSet(this ILogger logger);
 
     [LoggerMessage(
         23,
@@ -278,7 +278,7 @@ internal static partial class LoggingExtensions
         "Failed to un-protect the nonce cookie.",
         EventName = "UnableToProtectNonceCookie"
     )]
-    public static partial void UnableToProtectNonceCookie(this ILogger logger, Exception ex);
+    partial public static void UnableToProtectNonceCookie(this ILogger logger, Exception ex);
 
     [LoggerMessage(
         8,
@@ -286,7 +286,7 @@ internal static partial class LoggingExtensions
         "The redirect URI is not well-formed. The URI is: '{AuthenticationRequestUrl}'.",
         EventName = "InvalidAuthenticationRequestUrl"
     )]
-    public static partial void InvalidAuthenticationRequestUrl(
+    partial public static void InvalidAuthenticationRequestUrl(
         this ILogger logger,
         string authenticationRequestUrl
     );
@@ -297,7 +297,7 @@ internal static partial class LoggingExtensions
         "Unable to read the 'id_token', no suitable ISecurityTokenValidator was found for: '{IdToken}'.",
         EventName = "UnableToReadIdToken"
     )]
-    public static partial void UnableToReadIdToken(this ILogger logger, string idToken);
+    partial public static void UnableToReadIdToken(this ILogger logger, string idToken);
 
     [LoggerMessage(
         40,
@@ -305,7 +305,7 @@ internal static partial class LoggingExtensions
         "The Validated Security Token must be of type JwtSecurityToken, but instead its type is: '{SecurityTokenType}'",
         EventName = "InvalidSecurityTokenType"
     )]
-    public static partial void InvalidSecurityTokenType(
+    partial public static void InvalidSecurityTokenType(
         this ILogger logger,
         string? securityTokenType
     );
@@ -316,7 +316,7 @@ internal static partial class LoggingExtensions
         "Unable to validate the 'id_token', no suitable ISecurityTokenValidator was found for: '{IdToken}'.",
         EventName = "UnableToValidateIdToken"
     )]
-    public static partial void UnableToValidateIdToken(this ILogger logger, string idToken);
+    partial public static void UnableToValidateIdToken(this ILogger logger, string idToken);
 
     [LoggerMessage(
         9,
@@ -324,7 +324,7 @@ internal static partial class LoggingExtensions
         "Entering {OpenIdConnectHandlerType}'s HandleRemoteAuthenticateAsync.",
         EventName = "EnteringOpenIdAuthenticationHandlerHandleRemoteAuthenticateAsync"
     )]
-    public static partial void EnteringOpenIdAuthenticationHandlerHandleRemoteAuthenticateAsync(
+    partial public static void EnteringOpenIdAuthenticationHandlerHandleRemoteAuthenticateAsync(
         this ILogger logger,
         string openIdConnectHandlerType
     );
@@ -335,7 +335,7 @@ internal static partial class LoggingExtensions
         "Entering {OpenIdConnectHandlerType}'s HandleUnauthorizedAsync.",
         EventName = "EnteringOpenIdAuthenticationHandlerHandleUnauthorizedAsync"
     )]
-    public static partial void EnteringOpenIdAuthenticationHandlerHandleUnauthorizedAsync(
+    partial public static void EnteringOpenIdAuthenticationHandlerHandleUnauthorizedAsync(
         this ILogger logger,
         string openIdConnectHandlerType
     );
@@ -346,7 +346,7 @@ internal static partial class LoggingExtensions
         "Entering {OpenIdConnectHandlerType}'s HandleSignOutAsync.",
         EventName = "EnteringOpenIdAuthenticationHandlerHandleSignOutAsync"
     )]
-    public static partial void EnteringOpenIdAuthenticationHandlerHandleSignOutAsync(
+    partial public static void EnteringOpenIdAuthenticationHandlerHandleSignOutAsync(
         this ILogger logger,
         string openIdConnectHandlerType
     );
@@ -357,7 +357,7 @@ internal static partial class LoggingExtensions
         "User information received: {User}",
         EventName = "UserInformationReceived"
     )]
-    public static partial void UserInformationReceived(this ILogger logger, string user);
+    partial public static void UserInformationReceived(this ILogger logger, string user);
 
     [LoggerMessage(
         5,
@@ -365,7 +365,7 @@ internal static partial class LoggingExtensions
         "Using properties.RedirectUri for 'local redirect' post authentication: '{RedirectUri}'.",
         EventName = "PostAuthenticationLocalRedirect"
     )]
-    public static partial void PostAuthenticationLocalRedirect(
+    partial public static void PostAuthenticationLocalRedirect(
         this ILogger logger,
         string redirectUri
     );
@@ -376,7 +376,7 @@ internal static partial class LoggingExtensions
         "Using properties.RedirectUri for redirect post authentication: '{RedirectUri}'.",
         EventName = "PostSignOutRedirect"
     )]
-    public static partial void PostSignOutRedirect(this ILogger logger, string redirectUri);
+    partial public static void PostSignOutRedirect(this ILogger logger, string redirectUri);
 
     [LoggerMessage(
         44,
@@ -384,7 +384,7 @@ internal static partial class LoggingExtensions
         "RemoteSignOutContext.HandledResponse",
         EventName = "RemoteSignOutHandledResponse"
     )]
-    public static partial void RemoteSignOutHandledResponse(this ILogger logger);
+    partial public static void RemoteSignOutHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         45,
@@ -392,7 +392,7 @@ internal static partial class LoggingExtensions
         "RemoteSignOutContext.Skipped",
         EventName = "RemoteSignOutSkipped"
     )]
-    public static partial void RemoteSignOutSkipped(this ILogger logger);
+    partial public static void RemoteSignOutSkipped(this ILogger logger);
 
     [LoggerMessage(
         46,
@@ -400,7 +400,7 @@ internal static partial class LoggingExtensions
         "Remote signout request processed.",
         EventName = "RemoteSignOut"
     )]
-    public static partial void RemoteSignOut(this ILogger logger);
+    partial public static void RemoteSignOut(this ILogger logger);
 
     [LoggerMessage(
         47,
@@ -409,7 +409,7 @@ internal static partial class LoggingExtensions
             + "was missing, which may indicate an unsolicited logout.",
         EventName = "RemoteSignOutSessionIdMissing"
     )]
-    public static partial void RemoteSignOutSessionIdMissing(this ILogger logger);
+    partial public static void RemoteSignOutSessionIdMissing(this ILogger logger);
 
     [LoggerMessage(
         48,
@@ -418,7 +418,7 @@ internal static partial class LoggingExtensions
             + "the expected value, which may indicate an unsolicited logout.",
         EventName = "RemoteSignOutSessionIdInvalid"
     )]
-    public static partial void RemoteSignOutSessionIdInvalid(this ILogger logger);
+    partial public static void RemoteSignOutSessionIdInvalid(this ILogger logger);
 
     [LoggerMessage(
         49,
@@ -426,7 +426,7 @@ internal static partial class LoggingExtensions
         "AuthenticationScheme: {AuthenticationScheme} signed out.",
         EventName = "AuthenticationSchemeSignedOut"
     )]
-    public static partial void AuthenticationSchemeSignedOut(
+    partial public static void AuthenticationSchemeSignedOut(
         this ILogger logger,
         string authenticationScheme
     );
@@ -437,7 +437,7 @@ internal static partial class LoggingExtensions
         "HandleChallenge with Location: {Location}; and Set-Cookie: {Cookie}.",
         EventName = "HandleChallenge"
     )]
-    public static partial void HandleChallenge(this ILogger logger, string location, string cookie);
+    partial public static void HandleChallenge(this ILogger logger, string location, string cookie);
 
     [LoggerMessage(
         54,
@@ -446,7 +446,7 @@ internal static partial class LoggingExtensions
             + "was missing, which may indicate an unsolicited logout.",
         EventName = "RemoteSignOutIssuerMissing"
     )]
-    public static partial void RemoteSignOutIssuerMissing(this ILogger logger);
+    partial public static void RemoteSignOutIssuerMissing(this ILogger logger);
 
     [LoggerMessage(
         55,
@@ -455,5 +455,5 @@ internal static partial class LoggingExtensions
             + "the expected value, which may indicate an unsolicited logout.",
         EventName = "RemoteSignOutIssuerInvalid"
     )]
-    public static partial void RemoteSignOutIssuerInvalid(this ILogger logger);
+    partial public static void RemoteSignOutIssuerInvalid(this ILogger logger);
 }

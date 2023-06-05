@@ -12,7 +12,7 @@ namespace System.ServiceModel
     // Static Xml Dictionary
     static class XD
     {
-        static public ServiceModelDictionary Dictionary
+        public static ServiceModelDictionary Dictionary
         {
             get { return ServiceModelDictionary.CurrentVersion; }
         }
@@ -51,7 +51,7 @@ namespace System.ServiceModel
         static XmlEncryptionDictionary xmlEncryptionDictionary;
         static XmlSignatureDictionary xmlSignatureDictionary;
 
-        static public ActivityIdFlowDictionary ActivityIdFlowDictionary
+        public static ActivityIdFlowDictionary ActivityIdFlowDictionary
         {
             get
             {
@@ -61,7 +61,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public AddressingDictionary AddressingDictionary
+        public static AddressingDictionary AddressingDictionary
         {
             get
             {
@@ -71,7 +71,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public Addressing10Dictionary Addressing10Dictionary
+        public static Addressing10Dictionary Addressing10Dictionary
         {
             get
             {
@@ -81,7 +81,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public Addressing200408Dictionary Addressing200408Dictionary
+        public static Addressing200408Dictionary Addressing200408Dictionary
         {
             get
             {
@@ -91,7 +91,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public AddressingNoneDictionary AddressingNoneDictionary
+        public static AddressingNoneDictionary AddressingNoneDictionary
         {
             get
             {
@@ -101,7 +101,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public AtomicTransactionExternalDictionary AtomicTransactionExternalDictionary
+        public static AtomicTransactionExternalDictionary AtomicTransactionExternalDictionary
         {
             get
             {
@@ -113,7 +113,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public AtomicTransactionExternal10Dictionary AtomicTransactionExternal10Dictionary
+        public static AtomicTransactionExternal10Dictionary AtomicTransactionExternal10Dictionary
         {
             get
             {
@@ -124,7 +124,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public CoordinationExternalDictionary CoordinationExternalDictionary
+        public static CoordinationExternalDictionary CoordinationExternalDictionary
         {
             get
             {
@@ -134,7 +134,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public CoordinationExternal10Dictionary CoordinationExternal10Dictionary
+        public static CoordinationExternal10Dictionary CoordinationExternal10Dictionary
         {
             get
             {
@@ -146,7 +146,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public DotNetAddressingDictionary DotNetAddressingDictionary
+        public static DotNetAddressingDictionary DotNetAddressingDictionary
         {
             get
             {
@@ -156,7 +156,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public DotNetAtomicTransactionExternalDictionary DotNetAtomicTransactionExternalDictionary
+        public static DotNetAtomicTransactionExternalDictionary DotNetAtomicTransactionExternalDictionary
         {
             get
             {
@@ -167,7 +167,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public DotNetOneWayDictionary DotNetOneWayDictionary
+        public static DotNetOneWayDictionary DotNetOneWayDictionary
         {
             get
             {
@@ -177,7 +177,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public DotNetSecurityDictionary DotNetSecurityDictionary
+        public static DotNetSecurityDictionary DotNetSecurityDictionary
         {
             get
             {
@@ -187,7 +187,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public ExclusiveC14NDictionary ExclusiveC14NDictionary
+        public static ExclusiveC14NDictionary ExclusiveC14NDictionary
         {
             get
             {
@@ -197,7 +197,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public MessageDictionary MessageDictionary
+        public static MessageDictionary MessageDictionary
         {
             get
             {
@@ -207,7 +207,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public Message11Dictionary Message11Dictionary
+        public static Message11Dictionary Message11Dictionary
         {
             get
             {
@@ -217,7 +217,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public Message12Dictionary Message12Dictionary
+        public static Message12Dictionary Message12Dictionary
         {
             get
             {
@@ -227,7 +227,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public OleTxTransactionExternalDictionary OleTxTransactionExternalDictionary
+        public static OleTxTransactionExternalDictionary OleTxTransactionExternalDictionary
         {
             get
             {
@@ -239,7 +239,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public PeerWireStringsDictionary PeerWireStringsDictionary
+        public static PeerWireStringsDictionary PeerWireStringsDictionary
         {
             get
             {
@@ -249,7 +249,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public PolicyDictionary PolicyDictionary
+        public static PolicyDictionary PolicyDictionary
         {
             get
             {
@@ -259,7 +259,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public SamlDictionary SamlDictionary
+        public static SamlDictionary SamlDictionary
         {
             get
             {
@@ -269,7 +269,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public SecureConversationApr2004Dictionary SecureConversationApr2004Dictionary
+        public static SecureConversationApr2004Dictionary SecureConversationApr2004Dictionary
         {
             get
             {
@@ -281,7 +281,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public SecureConversationFeb2005Dictionary SecureConversationFeb2005Dictionary
+        public static SecureConversationFeb2005Dictionary SecureConversationFeb2005Dictionary
         {
             get
             {
@@ -293,7 +293,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public SecurityAlgorithmDictionary SecurityAlgorithmDictionary
+        public static SecurityAlgorithmDictionary SecurityAlgorithmDictionary
         {
             get
             {
@@ -303,7 +303,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public SecurityJan2004Dictionary SecurityJan2004Dictionary
+        public static SecurityJan2004Dictionary SecurityJan2004Dictionary
         {
             get
             {
@@ -313,7 +313,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public SecurityXXX2005Dictionary SecurityXXX2005Dictionary
+        public static SecurityXXX2005Dictionary SecurityXXX2005Dictionary
         {
             get
             {
@@ -323,7 +323,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public SerializationDictionary SerializationDictionary
+        public static SerializationDictionary SerializationDictionary
         {
             get
             {
@@ -333,7 +333,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public TrustApr2004Dictionary TrustApr2004Dictionary
+        public static TrustApr2004Dictionary TrustApr2004Dictionary
         {
             get
             {
@@ -343,7 +343,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public TrustFeb2005Dictionary TrustFeb2005Dictionary
+        public static TrustFeb2005Dictionary TrustFeb2005Dictionary
         {
             get
             {
@@ -353,7 +353,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public UtilityDictionary UtilityDictionary
+        public static UtilityDictionary UtilityDictionary
         {
             get
             {
@@ -363,7 +363,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public WsrmFeb2005Dictionary WsrmFeb2005Dictionary
+        public static WsrmFeb2005Dictionary WsrmFeb2005Dictionary
         {
             get
             {
@@ -373,7 +373,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public XmlEncryptionDictionary XmlEncryptionDictionary
+        public static XmlEncryptionDictionary XmlEncryptionDictionary
         {
             get
             {
@@ -383,7 +383,7 @@ namespace System.ServiceModel
             }
         }
 
-        static public XmlSignatureDictionary XmlSignatureDictionary
+        public static XmlSignatureDictionary XmlSignatureDictionary
         {
             get
             {

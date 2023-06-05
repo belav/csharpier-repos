@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal static partial class AuthenticationHelper
+    partial internal static class AuthenticationHelper
     {
         // Define digest constants
         private const string Qop = "qop";

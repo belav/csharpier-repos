@@ -8,7 +8,7 @@ using System;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal abstract partial class AbstractLanguageService
+    partial internal abstract class AbstractLanguageService
     {
         public abstract Guid LanguageServiceId { get; }
         public abstract IServiceProvider SystemServiceProvider { get; }

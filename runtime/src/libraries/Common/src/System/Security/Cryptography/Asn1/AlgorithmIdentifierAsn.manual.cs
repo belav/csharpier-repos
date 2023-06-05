@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Cryptography.Asn1
 {
-    internal partial struct AlgorithmIdentifierAsn
+    partial internal struct AlgorithmIdentifierAsn
     {
         internal static readonly ReadOnlyMemory<byte> ExplicitDerNull = new byte[] { 0x05, 0x00 };
 

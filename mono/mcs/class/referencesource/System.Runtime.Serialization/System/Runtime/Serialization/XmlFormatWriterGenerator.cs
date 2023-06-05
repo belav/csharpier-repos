@@ -44,7 +44,7 @@ namespace System.Runtime.Serialization
         CollectionDataContract dataContract
     );
 
-    internal sealed partial class XmlFormatWriterGenerator
+    partial internal sealed class XmlFormatWriterGenerator
 #endif
     {
         [Fx.Tag.SecurityNote(

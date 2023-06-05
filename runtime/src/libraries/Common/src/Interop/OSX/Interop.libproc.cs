@@ -7,11 +7,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
+partial
 #pragma warning disable CA1823 // analyzer incorrectly flags fixed buffer length const (https://github.com/dotnet/roslyn/issues/37593)
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class @libproc
+    partial internal static class @libproc
     {
         // Constants from sys\param.h
         private const int MAXPATHLEN = 1024;
@@ -50,7 +51,7 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct rusage_info_v3
         {
-            internal fixed byte ri_uuid[16];
+            fixed internal byte ri_uuid[16];
             internal ulong ri_user_time;
             internal ulong ri_system_time;
             internal ulong ri_pkg_idle_wkups;
@@ -94,7 +95,7 @@ internal static partial class Interop
             internal int pth_curpri;
             internal int pth_priority;
             internal int pth_maxpriority;
-            internal fixed byte pth_name[MAXTHREADNAMESIZE];
+            fixed internal byte pth_name[MAXTHREADNAMESIZE];
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -111,7 +112,7 @@ internal static partial class Interop
         /// <param name="buffersize">The length of the block of memory allocated for the PID array</param>
         /// <returns>Returns the number of elements (PIDs) in the buffer</returns>
         [LibraryImport(Interop.Libraries.libproc, SetLastError = true)]
-        private static unsafe partial int proc_listallpids(int* pBuffer, int buffersize);
+        partial private static unsafe int proc_listallpids(int* pBuffer, int buffersize);
 
         /// <summary>
         /// Queries the OS for the list of all running processes and returns the PID for each
@@ -174,7 +175,7 @@ internal static partial class Interop
         /// to not having enough permissions to query for the data of that specific process
         /// </returns>
         [LibraryImport(Interop.Libraries.libproc, SetLastError = true)]
-        private static unsafe partial int proc_pidinfo(
+        partial private static unsafe int proc_pidinfo(
             int pid,
             int flavor,
             ulong arg,
@@ -196,7 +197,7 @@ internal static partial class Interop
         /// to not having enough permissions to query for the data of that specific process
         /// </returns>
         [LibraryImport(Interop.Libraries.libproc, SetLastError = true)]
-        private static unsafe partial int proc_pidinfo(
+        partial private static unsafe int proc_pidinfo(
             int pid,
             int flavor,
             ulong arg,
@@ -218,7 +219,7 @@ internal static partial class Interop
         /// to not having enough permissions to query for the data of that specific process
         /// </returns>
         [LibraryImport(Interop.Libraries.libproc, SetLastError = true)]
-        private static unsafe partial int proc_pidinfo(
+        partial private static unsafe int proc_pidinfo(
             int pid,
             int flavor,
             ulong arg,
@@ -321,7 +322,7 @@ internal static partial class Interop
         /// <param name="bufferSize">The size of the buffer, should be PROC_PIDPATHINFO_MAXSIZE</param>
         /// <returns>Returns the length of the path returned on success</returns>
         [LibraryImport(Interop.Libraries.libproc, SetLastError = true)]
-        private static unsafe partial int proc_pidpath(int pid, byte* buffer, uint bufferSize);
+        partial private static unsafe int proc_pidpath(int pid, byte* buffer, uint bufferSize);
 
         /// <summary>
         /// Gets the full path to the executable file identified by the specified PID
@@ -354,7 +355,7 @@ internal static partial class Interop
         /// <param name="buffer">A buffer to be filled with rusage_info data</param>
         /// <returns>Returns 0 on success; on fail, -1 and errno is set with the error code</returns>
         [LibraryImport(Interop.Libraries.libproc, SetLastError = true)]
-        private static unsafe partial int proc_pid_rusage(
+        partial private static unsafe int proc_pid_rusage(
             int pid,
             int flavor,
             rusage_info_v3* buffer

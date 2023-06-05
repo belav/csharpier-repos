@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.HttpsPolicy;
 
-internal static partial class HttpsLoggingExtensions
+partial internal static class HttpsLoggingExtensions
 {
     [LoggerMessage(
         1,
@@ -13,7 +13,7 @@ internal static partial class HttpsLoggingExtensions
         "Redirecting to '{redirect}'.",
         EventName = "RedirectingToHttps"
     )]
-    public static partial void RedirectingToHttps(this ILogger logger, string redirect);
+    partial public static void RedirectingToHttps(this ILogger logger, string redirect);
 
     [LoggerMessage(
         2,
@@ -21,7 +21,7 @@ internal static partial class HttpsLoggingExtensions
         "Https port '{port}' loaded from configuration.",
         EventName = "PortLoadedFromConfig"
     )]
-    public static partial void PortLoadedFromConfig(this ILogger logger, int port);
+    partial public static void PortLoadedFromConfig(this ILogger logger, int port);
 
     [LoggerMessage(
         3,
@@ -29,7 +29,7 @@ internal static partial class HttpsLoggingExtensions
         "Failed to determine the https port for redirect.",
         EventName = "FailedToDeterminePort"
     )]
-    public static partial void FailedToDeterminePort(this ILogger logger);
+    partial public static void FailedToDeterminePort(this ILogger logger);
 
     [LoggerMessage(
         5,
@@ -37,5 +37,5 @@ internal static partial class HttpsLoggingExtensions
         "Https port '{httpsPort}' discovered from server endpoints.",
         EventName = "PortFromServer"
     )]
-    public static partial void PortFromServer(this ILogger logger, int httpsPort);
+    partial public static void PortFromServer(this ILogger logger, int httpsPort);
 }

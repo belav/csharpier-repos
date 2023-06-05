@@ -14,7 +14,7 @@ using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForMethods
+    partial internal sealed class NativeFormatRuntimeGenericParameterTypeInfoForMethods
         : NativeFormatRuntimeGenericParameterTypeInfo,
             IKeyedItem<NativeFormatRuntimeGenericParameterTypeInfoForMethods.UnificationKey>
     {

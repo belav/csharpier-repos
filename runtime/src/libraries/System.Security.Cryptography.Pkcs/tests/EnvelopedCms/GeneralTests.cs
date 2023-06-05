@@ -11,7 +11,7 @@ using Test.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class GeneralTests
+    partial public static class GeneralTests
     {
         public static bool SupportsDiffieHellman { get; } =
             KeyAgreeRecipientInfoTests.SupportsDiffieHellman;

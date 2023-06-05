@@ -114,7 +114,7 @@ namespace System.Workflow.Activities
             return string.Empty;
         }
 
-        internal protected override Type GetContractType(IServiceProvider provider)
+        protected internal override Type GetContractType(IServiceProvider provider)
         {
             if (this.ContractType == null)
             {
@@ -155,7 +155,7 @@ namespace System.Workflow.Activities
             return this.ContractType;
         }
 
-        internal protected override bool GetIsOneWay(IServiceProvider provider)
+        protected internal override bool GetIsOneWay(IServiceProvider provider)
         {
             MethodInfo methodInfo = this.GetMethodInfo(provider);
             if (methodInfo != null)
@@ -187,7 +187,7 @@ namespace System.Workflow.Activities
             return false;
         }
 
-        internal protected override MethodInfo GetMethodInfo(IServiceProvider provider)
+        protected internal override MethodInfo GetMethodInfo(IServiceProvider provider)
         {
             if (string.IsNullOrEmpty(this.Name))
             {
@@ -222,7 +222,7 @@ namespace System.Workflow.Activities
             return methodInfo;
         }
 
-        internal protected override OperationParameterInfoCollection GetParameters(
+        protected internal override OperationParameterInfoCollection GetParameters(
             IServiceProvider provider
         )
         {

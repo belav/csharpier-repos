@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal sealed partial class Http2Connection
+    partial internal sealed class Http2Connection
     {
         // Maintains a dynamically-sized stream receive window, and sends WINDOW_UPDATE frames to the server.
         private struct Http2StreamWindowManager

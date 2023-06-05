@@ -6,7 +6,7 @@
 
 namespace System
 {
-    public partial interface IServiceProvider
+    partial public interface IServiceProvider
     {
         object? GetService(System.Type serviceType);
     }
@@ -14,7 +14,7 @@ namespace System
 
 namespace System.ComponentModel
 {
-    public partial class CancelEventArgs : System.EventArgs
+    partial public class CancelEventArgs : System.EventArgs
     {
         public CancelEventArgs() { }
 
@@ -27,20 +27,20 @@ namespace System.ComponentModel
         }
     }
 
-    public partial interface IChangeTracking
+    partial public interface IChangeTracking
     {
         bool IsChanged { get; }
         void AcceptChanges();
     }
 
-    public partial interface IEditableObject
+    partial public interface IEditableObject
     {
         void BeginEdit();
         void CancelEdit();
         void EndEdit();
     }
 
-    public partial interface IRevertibleChangeTracking : System.ComponentModel.IChangeTracking
+    partial public interface IRevertibleChangeTracking : System.ComponentModel.IChangeTracking
     {
         void RejectChanges();
     }

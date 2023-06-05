@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.SimplifyLinqExpressi
     >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsInlineDeclaration)]
-    public partial class CSharpSimplifyLinqExpressionTests
+    partial public class CSharpSimplifyLinqExpressionTests
     {
         [Fact]
         public async Task FixAllInDocument()

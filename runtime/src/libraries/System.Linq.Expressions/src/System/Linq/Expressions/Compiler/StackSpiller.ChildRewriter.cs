@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace System.Linq.Expressions.Compiler
 {
-    internal sealed partial class StackSpiller
+    partial internal sealed class StackSpiller
     {
         /// <summary>
         /// Rewrites child expressions, spilling them into temps if needed. The

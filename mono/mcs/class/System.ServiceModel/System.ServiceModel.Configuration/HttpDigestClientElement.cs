@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class HttpDigestClientElement : ConfigurationElement
+    partial public sealed class HttpDigestClientElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

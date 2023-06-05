@@ -10,7 +10,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Threading
 {
-    public static partial class Interlocked
+    partial public static class Interlocked
     {
         #region CompareExchange
 

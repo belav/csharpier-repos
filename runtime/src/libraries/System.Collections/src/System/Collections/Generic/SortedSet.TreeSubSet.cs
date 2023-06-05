@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace System.Collections.Generic
 {
-    public partial class SortedSet<T>
+    partial public class SortedSet<T>
     {
         /// <summary>
         /// This class represents a subset view into the tree. Any changes to this view

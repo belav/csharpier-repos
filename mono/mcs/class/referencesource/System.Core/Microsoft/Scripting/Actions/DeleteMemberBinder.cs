@@ -57,7 +57,7 @@ namespace System.Dynamic
         /// <summary>
         /// The result type of the operation.
         /// </summary>
-        public override sealed Type ReturnType
+        public sealed override Type ReturnType
         {
             get { return typeof(void); }
         }
@@ -101,7 +101,7 @@ namespace System.Dynamic
         }
 
         // this is a standard DynamicMetaObjectBinder
-        internal override sealed bool IsStandardBinder
+        internal sealed override bool IsStandardBinder
         {
             get { return true; }
         }

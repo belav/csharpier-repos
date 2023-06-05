@@ -48,11 +48,11 @@ class MyCollection<T> : IMyCollection<T>
 
 class P
 {
-    static protected MyCollection<String> foo = new MyCollection<String>();
+    protected static MyCollection<String> foo = new MyCollection<String>();
 
-    static protected MyCollection<String> bar = new MyCollection<String>();
+    protected static MyCollection<String> bar = new MyCollection<String>();
 
-    static public MyCollection<String> IgnoreTokens
+    public static MyCollection<String> IgnoreTokens
     {
         get
         {

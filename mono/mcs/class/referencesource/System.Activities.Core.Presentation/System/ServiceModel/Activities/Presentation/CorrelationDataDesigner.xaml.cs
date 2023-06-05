@@ -18,7 +18,7 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Globalization;
     using System.Linq;
 
-    internal partial class CorrelationDataDesigner
+    partial internal class CorrelationDataDesigner
     {
         const string KeyPrefix = "key";
 

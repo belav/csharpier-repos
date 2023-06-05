@@ -687,7 +687,22 @@ namespace TestLibrary
         /// Thrown if <paramref name="expected"/> does not refer to the same object
         /// as <paramref name="actual"/>.
         /// </exception>
-        static public void AreSame(object expected, object actual)
+        public
+        /// <summary>
+        /// Tests whether the specified objects both refer to the same object and
+        /// throws an exception if the two inputs do not refer to the same object.
+        /// </summary>
+        /// <param name="expected">
+        /// The first object to compare. This is the value the test expects.
+        /// </param>
+        /// <param name="actual">
+        /// The second object to compare. This is the value produced by the code under test.
+        /// </param>
+        /// <exception cref="AssertFailedException">
+        /// Thrown if <paramref name="expected"/> does not refer to the same object
+        /// as <paramref name="actual"/>.
+        /// </exception>
+        static void AreSame(object expected, object actual)
         {
             Assert.AreSame(expected, actual, string.Empty);
         }
@@ -711,7 +726,27 @@ namespace TestLibrary
         /// Thrown if <paramref name="expected"/> does not refer to the same object
         /// as <paramref name="actual"/>.
         /// </exception>
-        static public void AreSame(object expected, object actual, string message)
+        public
+        /// <summary>
+        /// Tests whether the specified objects both refer to the same object and
+        /// throws an exception if the two inputs do not refer to the same object.
+        /// </summary>
+        /// <param name="expected">
+        /// The first object to compare. This is the value the test expects.
+        /// </param>
+        /// <param name="actual">
+        /// The second object to compare. This is the value produced by the code under test.
+        /// </param>
+        /// <param name="message">
+        /// The message to include in the exception when <paramref name="actual"/>
+        /// is not the same as <paramref name="expected"/>. The message is shown
+        /// in test results.
+        /// </param>
+        /// <exception cref="AssertFailedException">
+        /// Thrown if <paramref name="expected"/> does not refer to the same object
+        /// as <paramref name="actual"/>.
+        /// </exception>
+        static void AreSame(object expected, object actual, string message)
         {
             if (!Object.ReferenceEquals(expected, actual))
             {
@@ -746,7 +781,23 @@ namespace TestLibrary
         /// Thrown if <paramref name="notExpected"/> refers to the same object
         /// as <paramref name="actual"/>.
         /// </exception>
-        static public void AreNotSame(object notExpected, object actual)
+        public
+        /// <summary>
+        /// Tests whether the specified objects refer to different objects and
+        /// throws an exception if the two inputs refer to the same object.
+        /// </summary>
+        /// <param name="notExpected">
+        /// The first object to compare. This is the value the test expects not
+        /// to match <paramref name="actual"/>.
+        /// </param>
+        /// <param name="actual">
+        /// The second object to compare. This is the value produced by the code under test.
+        /// </param>
+        /// <exception cref="AssertFailedException">
+        /// Thrown if <paramref name="notExpected"/> refers to the same object
+        /// as <paramref name="actual"/>.
+        /// </exception>
+        static void AreNotSame(object notExpected, object actual)
         {
             Assert.AreNotSame(notExpected, actual, string.Empty);
         }
@@ -771,7 +822,28 @@ namespace TestLibrary
         /// Thrown if <paramref name="notExpected"/> refers to the same object
         /// as <paramref name="actual"/>.
         /// </exception>
-        static public void AreNotSame(object notExpected, object actual, string message)
+        public
+        /// <summary>
+        /// Tests whether the specified objects refer to different objects and
+        /// throws an exception if the two inputs refer to the same object.
+        /// </summary>
+        /// <param name="notExpected">
+        /// The first object to compare. This is the value the test expects not
+        /// to match <paramref name="actual"/>.
+        /// </param>
+        /// <param name="actual">
+        /// The second object to compare. This is the value produced by the code under test.
+        /// </param>
+        /// <param name="message">
+        /// The message to include in the exception when <paramref name="actual"/>
+        /// is the same as <paramref name="notExpected"/>. The message is shown in
+        /// test results.
+        /// </param>
+        /// <exception cref="AssertFailedException">
+        /// Thrown if <paramref name="notExpected"/> refers to the same object
+        /// as <paramref name="actual"/>.
+        /// </exception>
+        static void AreNotSame(object notExpected, object actual, string message)
         {
             if (Object.ReferenceEquals(notExpected, actual))
             {
@@ -779,7 +851,7 @@ namespace TestLibrary
             }
         }
 
-        static public void OfType<T>(object obj)
+        public static void OfType<T>(object obj)
         {
             if (!(obj is T))
             {

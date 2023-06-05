@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net.Security
 {
-    public partial class SslStreamCertificateContext
+    partial public class SslStreamCertificateContext
     {
         public readonly X509Certificate2 Certificate;
         public readonly X509Certificate2[] IntermediateCertificates;

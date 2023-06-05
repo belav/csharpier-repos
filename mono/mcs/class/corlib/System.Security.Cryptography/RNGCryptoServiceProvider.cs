@@ -54,13 +54,13 @@ namespace System.Security.Cryptography
                 _lock = new object();
         }
 
-        unsafe public RNGCryptoServiceProvider()
+        public unsafe RNGCryptoServiceProvider()
         {
             _handle = RngInitialize(null, IntPtr.Zero);
             Check();
         }
 
-        unsafe public RNGCryptoServiceProvider(byte[] rgb)
+        public unsafe RNGCryptoServiceProvider(byte[] rgb)
         {
             fixed (byte* fixed_rgb = rgb)
                 _handle = RngInitialize(
@@ -70,7 +70,7 @@ namespace System.Security.Cryptography
             Check();
         }
 
-        unsafe public RNGCryptoServiceProvider(CspParameters cspParams)
+        public unsafe RNGCryptoServiceProvider(CspParameters cspParams)
         {
             // CSP selection isn't supported but we still return
             // random data (no exception) for compatibility
@@ -78,7 +78,7 @@ namespace System.Security.Cryptography
             Check();
         }
 
-        unsafe public RNGCryptoServiceProvider(string str)
+        public unsafe RNGCryptoServiceProvider(string str)
         {
             if (str == null)
                 _handle = RngInitialize(null, IntPtr.Zero);
@@ -103,10 +103,10 @@ namespace System.Security.Cryptography
         private static extern bool RngOpen();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe private static extern IntPtr RngInitialize(byte* seed, IntPtr seed_length);
+        private static extern unsafe IntPtr RngInitialize(byte* seed, IntPtr seed_length);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe private static extern IntPtr RngGetBytes(
+        private static extern unsafe IntPtr RngGetBytes(
             IntPtr handle,
             byte* data,
             IntPtr data_length
@@ -115,7 +115,7 @@ namespace System.Security.Cryptography
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void RngClose(IntPtr handle);
 
-        unsafe public override void GetBytes(byte[] data)
+        public override unsafe void GetBytes(byte[] data)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -138,7 +138,7 @@ namespace System.Security.Cryptography
             Check();
         }
 
-        unsafe internal void GetBytes(byte* data, IntPtr data_length)
+        internal unsafe void GetBytes(byte* data, IntPtr data_length)
         {
             if (_lock == null)
             {
@@ -155,7 +155,7 @@ namespace System.Security.Cryptography
             Check();
         }
 
-        unsafe public override void GetNonZeroBytes(byte[] data)
+        public override unsafe void GetNonZeroBytes(byte[] data)
         {
             if (data == null)
                 throw new ArgumentNullException("data");

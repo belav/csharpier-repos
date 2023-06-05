@@ -10,10 +10,11 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace TestHelper;
 
+partial
 /// <summary>
 /// Superclass of all Unit Tests for DiagnosticAnalyzers
 /// </summary>
-public abstract partial class DiagnosticVerifier
+public abstract class DiagnosticVerifier
 {
     #region To be implemented by Test classes
     /// <summary>

@@ -11,25 +11,25 @@ namespace DllImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        public partial class FunctionPointer
+        partial public class FunctionPointer
         {
             [GeneratedDllImport(
                 NativeExportsNE_Binary,
                 EntryPoint = "invoke_managed_callback_after_gc"
             )]
-            public static unsafe partial void InvokeAfterGC(delegate* <void> cb);
+            partial public static unsafe void InvokeAfterGC(delegate* <void> cb);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "invoke_callback_after_gc")]
-            public static unsafe partial void InvokeAfterGC(delegate* unmanaged<void> cb);
+            partial public static unsafe void InvokeAfterGC(delegate* unmanaged<void> cb);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "invoke_callback_after_gc")]
-            public static unsafe partial void InvokeAfterGC(delegate* unmanaged[Stdcall]<void> cb);
+            partial public static unsafe void InvokeAfterGC(delegate* unmanaged[Stdcall]<void> cb);
 
             [GeneratedDllImport(
                 NativeExportsNE_Binary,
                 EntryPoint = "invoke_managed_callback_blittable_args"
             )]
-            public static unsafe partial int InvokeWithBlittableArgument(
+            partial public static unsafe int InvokeWithBlittableArgument(
                 delegate* <int, int, int> cb,
                 int a,
                 int b
@@ -39,7 +39,7 @@ namespace DllImportGenerator.IntegrationTests
                 NativeExportsNE_Binary,
                 EntryPoint = "invoke_callback_blittable_args"
             )]
-            public static unsafe partial int InvokeWithBlittableArgument(
+            partial public static unsafe int InvokeWithBlittableArgument(
                 delegate* unmanaged<int, int, int> cb,
                 int a,
                 int b
@@ -49,7 +49,7 @@ namespace DllImportGenerator.IntegrationTests
                 NativeExportsNE_Binary,
                 EntryPoint = "invoke_callback_blittable_args"
             )]
-            public static unsafe partial int InvokeWithBlittableArgument(
+            partial public static unsafe int InvokeWithBlittableArgument(
                 delegate* unmanaged[Stdcall]<int, int, int> cb,
                 int a,
                 int b

@@ -5,12 +5,13 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
+    partial
     /// <summary>
     /// BCrypt types related to asymmetric encryption algorithms
     /// </summary>
-    internal static partial class BCrypt
+    internal static class BCrypt
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct BCRYPT_OAEP_PADDING_INFO

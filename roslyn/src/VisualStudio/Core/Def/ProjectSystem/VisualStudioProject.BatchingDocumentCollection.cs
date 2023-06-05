@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal sealed partial class VisualStudioProject
+    partial internal sealed class VisualStudioProject
     {
         /// <summary>
         /// Helper class to manage collections of source-file like things; this exists just to avoid duplicating all the logic for regular source files

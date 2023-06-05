@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TResult> Empty<TResult>() => EmptyPartition<TResult>.Instance;
     }

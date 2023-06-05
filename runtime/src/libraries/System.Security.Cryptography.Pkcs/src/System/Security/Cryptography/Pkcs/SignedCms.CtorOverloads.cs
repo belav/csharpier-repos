@@ -5,7 +5,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs
 {
-    public sealed partial class SignedCms
+    partial public sealed class SignedCms
     {
         private static ContentInfo MakeEmptyContentInfo() =>
             new ContentInfo(Oids.Pkcs7DataOid.CopyOid(), Array.Empty<byte>());

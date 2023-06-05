@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
-    internal partial class ActiveStatementTaggerProvider
+    partial internal class ActiveStatementTaggerProvider
     {
         private sealed class EventSource : AbstractWorkspaceTrackingTaggerEventSource
         {

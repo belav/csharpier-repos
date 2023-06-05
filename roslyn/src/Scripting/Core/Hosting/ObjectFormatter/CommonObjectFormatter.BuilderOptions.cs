@@ -8,10 +8,11 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Scripting.Hosting
 {
+    partial
     /// <summary>
     /// Object pretty printer.
     /// </summary>
-    internal abstract partial class CommonObjectFormatter
+    internal abstract class CommonObjectFormatter
     {
         /// <remarks>
         /// Internal for testing.

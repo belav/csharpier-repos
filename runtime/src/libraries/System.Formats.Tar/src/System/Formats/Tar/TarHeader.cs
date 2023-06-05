@@ -7,6 +7,7 @@ using System.IO;
 
 namespace System.Formats.Tar
 {
+    partial
     // Describes the header attributes from a tar archive entry.
     // Supported formats:
     // - 1979 Version 7 AT&T Unix Tar Command Format (v7).
@@ -14,7 +15,7 @@ namespace System.Formats.Tar
     // - POSIX IEEE 1003.1-2001 ("POSIX.1") Pax Interchange Tar Format (pax).
     // - GNU Tar Format (gnu).
     // Documentation: https://www.freebsd.org/cgi/man.cgi?query=tar&sektion=5
-    internal sealed partial class TarHeader
+    internal sealed class TarHeader
     {
         // POSIX fields (shared by Ustar and PAX)
         private const string UstarMagic = "ustar\0";

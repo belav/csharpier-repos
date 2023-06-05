@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Security;
     using System.ServiceModel;
 
-    public partial class BehaviorsSection : ConfigurationSection
+    partial public class BehaviorsSection : ConfigurationSection
     {
         [ConfigurationProperty(
             ConfigurationStrings.EndpointBehaviors,

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public partial class TarWriter_Tests : TarTestsBase
+    partial public class TarWriter_Tests : TarTestsBase
     {
         [Fact]
         public void Constructors_NullStream()

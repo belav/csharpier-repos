@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonWriterHelper
+    partial internal static class JsonWriterHelper
     {
         // TODO: Replace this with publicly shipping implementation: https://github.com/dotnet/runtime/issues/28204
         /// <summary>

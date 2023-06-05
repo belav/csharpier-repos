@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal sealed partial class DocumentAnalysisExecutor
+    partial internal sealed class DocumentAnalysisExecutor
     {
         // These are the error codes of the compiler warnings.
         // Keep the ids the same so that de-duplication against compiler errors

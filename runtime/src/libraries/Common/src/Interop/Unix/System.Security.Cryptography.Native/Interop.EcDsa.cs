@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         internal static bool EcDsaSign(
             ReadOnlySpan<byte> dgst,
@@ -25,7 +25,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcDsaSign")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EcDsaSign(
+        partial private static bool EcDsaSign(
             ref byte dgst,
             int dlen,
             ref byte sig,
@@ -62,7 +62,7 @@ internal static partial class Interop
          *     -1: error
          */
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcDsaVerify")]
-        private static partial int EcDsaVerify(
+        partial private static int EcDsaVerify(
             ref byte dgst,
             int dgst_len,
             ref byte sigbuf,
@@ -72,7 +72,7 @@ internal static partial class Interop
 
         // returns the maximum length of a DER encoded ECDSA signature created with this key.
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcDsaSize")]
-        private static partial int CryptoNative_EcDsaSize(SafeEcKeyHandle ecKey);
+        partial private static int CryptoNative_EcDsaSize(SafeEcKeyHandle ecKey);
 
         internal static int EcDsaSize(SafeEcKeyHandle ecKey)
         {

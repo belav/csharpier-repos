@@ -6,10 +6,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Internal
 {
+    partial
     /// <summary>
     /// Encapsulates a GDI Region object.
     /// </summary>
-    internal sealed partial class WindowsRegion : MarshalByRefObject, ICloneable, IDisposable
+    internal sealed class WindowsRegion : MarshalByRefObject, ICloneable, IDisposable
     {
         private IntPtr _nativeHandle; // The hRegion, this class always takes ownership of the hRegion.
         private bool _ownHandle;

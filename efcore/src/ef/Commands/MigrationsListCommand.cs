@@ -8,8 +8,9 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
+partial
 // ReSharper disable once ArrangeTypeModifiers
-internal partial class MigrationsListCommand
+internal class MigrationsListCommand
 {
     protected override int Execute(string[] args)
     {

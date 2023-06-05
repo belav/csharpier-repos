@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace System.Text
 {
-    public sealed partial class CodePagesEncodingProvider : EncodingProvider
+    partial public sealed class CodePagesEncodingProvider : EncodingProvider
     {
         private static readonly EncodingProvider s_singleton = new CodePagesEncodingProvider();
         private readonly Dictionary<int, Encoding> _encodings = new Dictionary<int, Encoding>();

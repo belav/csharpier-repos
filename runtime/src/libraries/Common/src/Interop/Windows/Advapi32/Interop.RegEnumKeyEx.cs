@@ -8,16 +8,16 @@ using Internal.Win32.SafeHandles;
 #endif
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Libraries.Advapi32,
             EntryPoint = "RegEnumKeyExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int RegEnumKeyEx(
+        partial internal static unsafe int RegEnumKeyEx(
             SafeRegistryHandle hKey,
             int dwIndex,
             ref char lpName,

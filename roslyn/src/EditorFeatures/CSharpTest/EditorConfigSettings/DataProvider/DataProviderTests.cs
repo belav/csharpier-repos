@@ -16,7 +16,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.DataProvider
 {
     [UseExportProvider]
-    public partial class DataProviderTests
+    partial public class DataProviderTests
     {
         private static Workspace GetWorkspace()
         {

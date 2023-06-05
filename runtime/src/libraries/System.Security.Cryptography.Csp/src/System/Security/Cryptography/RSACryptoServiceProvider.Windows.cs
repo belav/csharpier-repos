@@ -12,7 +12,7 @@ using static Internal.NativeCrypto.CapiHelper;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSACryptoServiceProvider : RSA, ICspAsymmetricAlgorithm
+    partial public sealed class RSACryptoServiceProvider : RSA, ICspAsymmetricAlgorithm
     {
         private int _keySize;
         private readonly CspParameters _parameters;

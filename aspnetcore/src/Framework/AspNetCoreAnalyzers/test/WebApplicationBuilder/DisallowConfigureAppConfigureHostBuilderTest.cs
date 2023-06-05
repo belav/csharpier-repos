@@ -9,7 +9,7 @@ using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpCodeFixVerifier<
 
 namespace Microsoft.AspNetCore.Analyzers.WebApplicationBuilder;
 
-public partial class DisallowConfigureAppConfigureHostBuilderTest
+partial public class DisallowConfigureAppConfigureHostBuilderTest
 {
     [Fact]
     public async Task ConfigurationBuilderRunsWithoutDiagnostic()

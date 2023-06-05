@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
         ),
         Shared
     ]
-    internal partial class SemanticModelReuseWorkspaceServiceFactory : IWorkspaceServiceFactory
+    partial internal class SemanticModelReuseWorkspaceServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

@@ -62,7 +62,7 @@ namespace System.ServiceModel.Security
             get { return this.isReadOnly; }
         }
 
-        static public MessagePartSpecification NoParts
+        public static MessagePartSpecification NoParts
         {
             get
             {

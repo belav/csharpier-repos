@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [Flags]
         internal enum PolicyRights
@@ -32,7 +32,7 @@ internal static partial class Interop
             EntryPoint = "LsaOpenPolicy",
             SetLastError = true
         )]
-        private static partial uint LsaOpenPolicy(
+        partial private static uint LsaOpenPolicy(
             ref UNICODE_STRING SystemName,
             ref OBJECT_ATTRIBUTES ObjectAttributes,
             int AccessMask,

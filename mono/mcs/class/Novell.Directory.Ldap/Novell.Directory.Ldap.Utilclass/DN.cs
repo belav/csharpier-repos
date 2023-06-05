@@ -61,10 +61,11 @@ namespace Novell.Directory.Ldap.Utilclass
             rdnList = new System.Collections.ArrayList();
         }
 
+        public
         /// <summary> Retrieves a list of RDN Objects, or individual names of the DN</summary>
         /// <returns> list of RDNs
         /// </returns>
-        virtual public System.Collections.ArrayList RDNs
+        virtual System.Collections.ArrayList RDNs
         {
             get
             {
@@ -78,10 +79,11 @@ namespace Novell.Directory.Ldap.Utilclass
             }
         }
 
+        public
         /// <summary> Returns the Parent of this DN</summary>
         /// <returns> Parent DN
         /// </returns>
-        virtual public DN Parent
+        virtual DN Parent
         {
             get
             {

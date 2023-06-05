@@ -7,8 +7,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics
 {
+    partial
     /// <summary>Base class used for all tests that need to spawn a remote process.</summary>
-    public abstract partial class RemoteExecutorTestBase : FileCleanupTestBase
+    public abstract class RemoteExecutorTestBase : FileCleanupTestBase
     {
         // protected static readonly string HostRunnerName = "mono";
         protected static readonly string HostRunner = Process

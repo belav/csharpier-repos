@@ -11,7 +11,7 @@ namespace Microsoft.Cci.Pdb
 {
     internal class PdbFunction
     {
-        static internal readonly Guid msilMetaData = new Guid(
+        internal static readonly Guid msilMetaData = new Guid(
             0xc6ea3fc9,
             0x59b3,
             0x49d6,
@@ -24,8 +24,8 @@ namespace Microsoft.Cci.Pdb
             0xb4,
             0x60
         );
-        static internal readonly IComparer byAddress = new PdbFunctionsByAddress();
-        static internal readonly IComparer byToken = new PdbFunctionsByToken();
+        internal static readonly IComparer byAddress = new PdbFunctionsByAddress();
+        internal static readonly IComparer byToken = new PdbFunctionsByToken();
 
         internal uint token;
         internal uint slotToken;

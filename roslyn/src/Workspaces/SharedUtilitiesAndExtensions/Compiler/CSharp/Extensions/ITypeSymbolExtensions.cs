@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class ITypeSymbolExtensions
+    partial internal static class ITypeSymbolExtensions
     {
         public static bool IsIntrinsicType(this ITypeSymbol typeSymbol)
         {

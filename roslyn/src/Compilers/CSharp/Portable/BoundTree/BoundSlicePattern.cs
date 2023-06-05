@@ -6,9 +6,9 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundSlicePattern
+    partial internal class BoundSlicePattern
     {
-        private partial void Validate()
+        partial private void Validate()
         {
             Debug.Assert(
                 IndexerAccess

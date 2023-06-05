@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct CurveAsn
+    partial internal struct CurveAsn
     {
         internal ReadOnlyMemory<byte> A;
         internal ReadOnlyMemory<byte> B;

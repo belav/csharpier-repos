@@ -5,7 +5,7 @@ using System;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class TypeSystemContext
+    partial public abstract class TypeSystemContext
     {
         /// <summary>
         /// Abstraction to allow the type system context to affect the field layout

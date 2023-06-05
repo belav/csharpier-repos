@@ -18,7 +18,7 @@ using MethodOptions = global::Grpc.Shared.Server.MethodOptions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
-internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : ServiceBinderBase
+partial internal sealed class JsonTranscodingProviderServiceBinder<TService> : ServiceBinderBase
     where TService : class
 {
     private delegate (RequestDelegate RequestDelegate, List<object> Metadata) CreateRequestDelegate<
@@ -398,7 +398,7 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
         return false;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -406,7 +406,7 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
             "Unable to find method descriptor for {MethodName} on {ServiceType}.",
             EventName = "MethodDescriptorNotFound"
         )]
-        public static partial void MethodDescriptorNotFound(
+        partial public static void MethodDescriptorNotFound(
             ILogger logger,
             string methodName,
             Type serviceType
@@ -418,7 +418,7 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
             "Unable to bind {MethodName} on {ServiceName} to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported.",
             EventName = "StreamingMethodNotSupported"
         )]
-        public static partial void StreamingMethodNotSupported(
+        partial public static void StreamingMethodNotSupported(
             ILogger logger,
             string methodName,
             string serviceName
@@ -431,7 +431,7 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
             EventName = "HttpRuleFound",
             SkipEnabledCheck = true
         )]
-        public static partial void HttpRuleFound(
+        partial public static void HttpRuleFound(
             ILogger logger,
             string methodName,
             string serviceName,

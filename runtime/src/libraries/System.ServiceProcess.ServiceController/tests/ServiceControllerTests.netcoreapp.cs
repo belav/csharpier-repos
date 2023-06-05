@@ -8,7 +8,7 @@ namespace System.ServiceProcess.Tests
     [OuterLoop( /* Modifies machine state */
 
     )]
-    public partial class ServiceControllerTests : IDisposable
+    partial public class ServiceControllerTests : IDisposable
     {
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
         public void Stop_FalseArg_WithDependentServices_ThrowsInvalidOperationException()

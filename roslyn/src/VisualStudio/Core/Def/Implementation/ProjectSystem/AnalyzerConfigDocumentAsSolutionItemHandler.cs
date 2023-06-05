@@ -22,7 +22,7 @@ using Task = System.Threading.Tasks.Task;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
     [Export, Shared]
-    internal partial class AnalyzerConfigDocumentAsSolutionItemHandler : IDisposable
+    partial internal class AnalyzerConfigDocumentAsSolutionItemHandler : IDisposable
     {
         private const string LocalRegistryPath =
             $@"Roslyn\Internal\{nameof(AnalyzerConfigDocumentAsSolutionItemHandler)}\";

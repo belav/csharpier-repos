@@ -6,13 +6,14 @@ using Mono.Cecil;
 
 namespace Mono.Linker
 {
+    partial
     /// <summary>
     ///  Generates a signature for a member, in the format used for C# Documentation Comments:
     ///  https://github.com/dotnet/csharplang/blob/master/spec/documentation-comments.md#id-string-format
     ///  Adapted from Roslyn's DocumentationCommentIDVisitor:
     ///  https://github.com/dotnet/roslyn/blob/master/src/Compilers/CSharp/Portable/DocumentationComments/DocumentationCommentIDVisitor.cs
     /// </summary>
-    public sealed partial class DocumentationSignatureGenerator
+    public sealed class DocumentationSignatureGenerator
     {
         internal const string MethodPrefix = "M:";
         internal const string FieldPrefix = "F:";

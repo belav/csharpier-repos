@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    public partial struct JSMarshalerArgument
+    partial public struct JSMarshalerArgument
     {
         /// <summary>
         /// Implementation of the argument marshaling.

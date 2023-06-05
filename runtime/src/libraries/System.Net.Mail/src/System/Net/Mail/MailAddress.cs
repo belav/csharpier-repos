@@ -9,11 +9,12 @@ using System.Text;
 
 namespace System.Net.Mail
 {
+    partial
     //
     // This class stores the basic components of an e-mail address as described in RFC 2822 Section 3.4.
     // Any parsing required is done with the MailAddressParser class.
     //
-    public partial class MailAddress
+    public class MailAddress
     {
         // These components form an e-mail address when assembled as follows:
         // "EncodedDisplayname" <userName@host>

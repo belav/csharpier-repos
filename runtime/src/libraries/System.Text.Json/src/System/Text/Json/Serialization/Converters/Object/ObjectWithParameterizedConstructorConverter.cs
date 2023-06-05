@@ -23,11 +23,12 @@ using FoundPropertyAsync = System.ValueTuple<
 
 namespace System.Text.Json.Serialization.Converters
 {
+    partial
     /// <summary>
     /// Implementation of <cref>JsonObjectConverter{T}</cref> that supports the deserialization
     /// of JSON objects using parameterized constructors.
     /// </summary>
-    internal abstract partial class ObjectWithParameterizedConstructorConverter<T>
+    internal abstract class ObjectWithParameterizedConstructorConverter<T>
         : ObjectDefaultConverter<T>
         where T : notnull
     {

@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net.Http
 {
-    internal sealed partial class HttpEnvironmentProxy : IWebProxy
+    partial internal sealed class HttpEnvironmentProxy : IWebProxy
     {
         private const string EnvAllProxyLC = "all_proxy";
         private const string EnvHttpProxyLC = "http_proxy";

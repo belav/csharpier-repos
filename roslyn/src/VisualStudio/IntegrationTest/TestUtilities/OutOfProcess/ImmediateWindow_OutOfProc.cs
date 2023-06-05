@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
-    public partial class ImmediateWindow_OutOfProc : OutOfProcComponent
+    partial public class ImmediateWindow_OutOfProc : OutOfProcComponent
     {
         private readonly ImmediateWindow_InProc _immediateWindowInProc;
 

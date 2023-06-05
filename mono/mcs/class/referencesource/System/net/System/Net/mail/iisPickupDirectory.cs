@@ -308,7 +308,7 @@ namespace System.Net.Mail
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static string GetPickupDirectory()
+        internal static unsafe string GetPickupDirectory()
         {
             int hr;
             UInt32 reqLength = 0;

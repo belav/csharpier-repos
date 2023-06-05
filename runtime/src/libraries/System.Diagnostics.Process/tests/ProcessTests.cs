@@ -21,7 +21,7 @@ using Xunit.Sdk;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class ProcessTests : ProcessTestBase
+    partial public class ProcessTests : ProcessTestBase
     {
         // -rwxr-xr-x (755 octal)
         const UnixFileMode ExecutablePermissions =

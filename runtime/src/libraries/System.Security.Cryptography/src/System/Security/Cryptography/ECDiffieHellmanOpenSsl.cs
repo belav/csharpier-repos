@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDiffieHellmanOpenSsl : ECDiffieHellman
+    partial public sealed class ECDiffieHellmanOpenSsl : ECDiffieHellman
     {
         /// <summary>
         /// Create an ECDiffieHellmanOpenSsl from an <see cref="SafeEvpPKeyHandle"/> whose value is an existing
@@ -97,7 +97,7 @@ namespace System.Security.Cryptography
             }
         }
 
-        static partial void ThrowIfNotSupported()
+        partial static void ThrowIfNotSupported()
         {
             if (!Interop.OpenSslNoInit.OpenSslIsAvailable)
             {

@@ -11,7 +11,7 @@ using System.Runtime.Versioning;
 
 namespace Internal.Runtime.InteropServices
 {
-    internal static partial class ComponentActivator
+    partial internal static class ComponentActivator
     {
         private const string TrimIncompatibleWarningMessage =
             "Native hosting is not trim compatible and this warning will be seen if trimming is enabled.";

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace ILLink.RoslynAnalyzer.Tests
 {
-    public sealed partial class UnreachableBlockTests : LinkerTestBase
+    partial public sealed class UnreachableBlockTests : LinkerTestBase
     {
         protected override string TestSuiteName => "UnreachableBlock";
 

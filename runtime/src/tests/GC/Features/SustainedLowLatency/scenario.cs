@@ -65,7 +65,7 @@ class request
         pin.Free();
     }
 
-    static public int Main(String[] args)
+    public static int Main(String[] args)
     {
         int n_requests = 600;
         int allocation_volume = 100000; // 1 mil

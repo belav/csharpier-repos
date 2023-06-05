@@ -8,7 +8,7 @@ using System.Text.Encodings.Web;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonHelpers
+    partial internal static class JsonHelpers
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] GetEscapedPropertyNameSection(

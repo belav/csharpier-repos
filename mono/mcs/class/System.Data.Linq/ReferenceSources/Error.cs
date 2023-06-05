@@ -1347,8 +1347,9 @@ namespace System.Data.Linq
 
 namespace System.Data.Linq.SqlClient
 {
+    partial
     // in the generated class in referencesource this seems to be in two different namespaces, we just forward to the other
-    internal partial class Error
+    internal class Error
     {
         public static Exception ArgumentNull(string paramName)
         {

@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 {
-    internal partial class SyntaxList
+    partial internal class SyntaxList
     {
         internal class WithThreeChildren : SyntaxList
         {

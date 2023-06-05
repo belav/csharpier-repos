@@ -13,9 +13,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial interface IOperation
+    partial public interface IOperation
     {
-        public readonly partial struct OperationList
+        partial public readonly struct OperationList
         {
             /// <summary>
             /// Implements a reverse-order struct-based collection of <see cref="Operation"/> nodes.

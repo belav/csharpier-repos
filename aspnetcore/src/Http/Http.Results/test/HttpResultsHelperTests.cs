@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-public partial class HttpResultsHelperTests
+partial public class HttpResultsHelperTests
 {
     [Theory]
     [InlineData(true)]
@@ -122,7 +122,7 @@ public partial class HttpResultsHelperTests
     [JsonSerializable(typeof(Todo))]
     [JsonSerializable(typeof(TodoChild))]
     [JsonSerializable(typeof(TodoStruct))]
-    private partial class TestJsonContext : JsonSerializerContext { }
+    partial private class TestJsonContext : JsonSerializerContext { }
 
     private class Todo
     {

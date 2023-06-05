@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class ProcessTestBase : FileCleanupTestBase
+    partial public class ProcessTestBase : FileCleanupTestBase
     {
         protected static readonly int WaitInMS =
             30 * 1000 * PlatformDetection.SlowRuntimeTimeoutModifier;

@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
 {
-    internal readonly partial struct SectionMatcher
+    partial internal readonly struct SectionMatcher
     {
         public static bool TryParseSection(string headerText, out SectionMatcher matcher)
         {

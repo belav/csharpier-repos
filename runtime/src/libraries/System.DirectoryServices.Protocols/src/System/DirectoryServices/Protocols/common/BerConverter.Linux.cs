@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace System.DirectoryServices.Protocols
 {
-    public static partial class BerConverter
+    partial public static class BerConverter
     {
         private static int DecodeBitStringHelper(ArrayList resultList, SafeBerHandle berElement)
         {

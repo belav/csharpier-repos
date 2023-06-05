@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class Decimal_EditField : System.Web.DynamicData.FieldTemplateUserControl
+partial public class Decimal_EditField : System.Web.DynamicData.FieldTemplateUserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {

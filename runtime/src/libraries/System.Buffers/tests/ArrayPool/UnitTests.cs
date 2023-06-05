@@ -13,7 +13,7 @@ using Xunit;
 
 namespace System.Buffers.ArrayPool.Tests
 {
-    public partial class ArrayPoolUnitTests : ArrayPoolTest
+    partial public class ArrayPoolUnitTests : ArrayPoolTest
     {
         private const int MaxEventWaitTimeoutInMs = 200;
 

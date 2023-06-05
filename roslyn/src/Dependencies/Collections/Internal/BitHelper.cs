@@ -12,7 +12,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Collections.Internal
 {
-    internal ref struct BitHelper
+    ref internal struct BitHelper
     {
         private const int IntSize = sizeof(int) * 8;
         private readonly Span<int> _span;

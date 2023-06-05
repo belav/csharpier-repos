@@ -6,10 +6,11 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Json.Serialization
 {
+    partial
     /// <summary>
     /// Converts an object or value to or from JSON.
     /// </summary>
-    public abstract partial class JsonConverter
+    public abstract class JsonConverter
     {
         /// <summary>
         /// Perform a Read() and if read-ahead is required, also read-ahead (to the end of the current JSON level).

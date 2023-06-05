@@ -18,10 +18,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
+    partial
     /// <summary>
     /// Provides helper methods for finding dependent projects across a solution that a given symbol can be referenced within.
     /// </summary>
-    internal static partial class DependentProjectsFinder
+    internal static class DependentProjectsFinder
     {
         public static async Task<ImmutableArray<Project>> GetDependentProjectsAsync(
             Solution solution,

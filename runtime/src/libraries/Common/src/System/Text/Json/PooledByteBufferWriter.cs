@@ -226,7 +226,7 @@ namespace System.Text.Json
         }
     }
 
-    internal static partial class ThrowHelper
+    partial internal static class ThrowHelper
     {
         [DoesNotReturn]
         [MethodImpl(MethodImplOptions.NoInlining)]

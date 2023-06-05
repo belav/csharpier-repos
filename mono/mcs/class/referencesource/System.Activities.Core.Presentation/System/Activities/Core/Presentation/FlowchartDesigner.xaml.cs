@@ -3447,18 +3447,18 @@ namespace System.Activities.Core.Presentation
             );
         }
 
-        static private bool IsFlowStepAction(ModelItem modelItem)
+        private static bool IsFlowStepAction(ModelItem modelItem)
         {
             // modelItem.CurrentValue is an Activity which is an Action of a FlowStep
             return typeof(Activity).IsAssignableFrom(modelItem.ItemType);
         }
 
-        static private bool IsFlowNode(ModelItem modelItem)
+        private static bool IsFlowNode(ModelItem modelItem)
         {
             return typeof(FlowNode).IsAssignableFrom(modelItem.ItemType);
         }
 
-        sealed private class ShapeOffsetter
+        private sealed class ShapeOffsetter
         {
             private Point lastShape;
             private bool isFirstShape = true;

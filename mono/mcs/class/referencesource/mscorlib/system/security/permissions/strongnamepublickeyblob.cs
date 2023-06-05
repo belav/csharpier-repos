@@ -16,7 +16,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class StrongNamePublicKeyBlob
+    public sealed class StrongNamePublicKeyBlob
     {
         internal byte[] PublicKey;
 
@@ -70,7 +70,7 @@ namespace System.Security.Permissions
             return this.Equals((StrongNamePublicKeyBlob)obj);
         }
 
-        static private int GetByteArrayHashCode(byte[] baData)
+        private static int GetByteArrayHashCode(byte[] baData)
         {
             if (baData == null)
                 return 0;

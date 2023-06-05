@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.SpanTests
 {
-    public static partial class SpanTests
+    partial public static class SpanTests
     {
         // newline chars given by Unicode Standard, Sec. 5.8, Recommendation R4 and Table 5-2
         public static IEnumerable<object[]> NewLineChars =>

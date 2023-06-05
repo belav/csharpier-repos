@@ -29,7 +29,7 @@
 
 namespace System.Security.Cryptography.Pkcs
 {
-    public sealed partial class EnvelopedCms
+    partial public sealed class EnvelopedCms
     {
         public EnvelopedCms(SubjectIdentifierType recipientIdentifierType, ContentInfo contentInfo)
             : this(contentInfo)

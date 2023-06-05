@@ -513,7 +513,7 @@ public class Managed
 
     #region Marshal struct method in PInvoke
     [SecuritySafeCritical]
-    unsafe private static void MarshalStructAsParam_AsSeqByVal(StructID id)
+    private static unsafe void MarshalStructAsParam_AsSeqByVal(StructID id)
     {
         try
         {
@@ -1128,7 +1128,7 @@ public class Managed
     }
 
     [SecuritySafeCritical]
-    unsafe private static void MarshalStructAsParam_AsSeqByRef(StructID id)
+    private static unsafe void MarshalStructAsParam_AsSeqByRef(StructID id)
     {
         try
         {
@@ -1496,7 +1496,7 @@ public class Managed
     }
 
     [SecuritySafeCritical]
-    unsafe private static void MarshalStructAsParam_AsSeqByValIn(StructID id)
+    private static unsafe void MarshalStructAsParam_AsSeqByValIn(StructID id)
     {
         try
         {
@@ -1866,7 +1866,7 @@ public class Managed
     }
 
     [SecuritySafeCritical]
-    unsafe private static void MarshalStructAsParam_AsSeqByRefIn(StructID id)
+    private static unsafe void MarshalStructAsParam_AsSeqByRefIn(StructID id)
     {
         try
         {
@@ -2235,7 +2235,7 @@ public class Managed
     }
 
     [SecuritySafeCritical]
-    unsafe private static void MarshalStructAsParam_AsSeqByValOut(StructID id)
+    private static unsafe void MarshalStructAsParam_AsSeqByValOut(StructID id)
     {
         try
         {
@@ -2616,7 +2616,7 @@ public class Managed
     }
 
     [SecuritySafeCritical]
-    unsafe private static void MarshalStructAsParam_AsSeqByRefOut(StructID id)
+    private static unsafe void MarshalStructAsParam_AsSeqByRefOut(StructID id)
     {
         try
         {
@@ -3009,7 +3009,7 @@ public class Managed
     }
 
     [SecuritySafeCritical]
-    unsafe private static void MarshalStructAsParam_AsSeqByValInOut(StructID id)
+    private static unsafe void MarshalStructAsParam_AsSeqByValInOut(StructID id)
     {
         try
         {
@@ -3398,7 +3398,7 @@ public class Managed
     }
 
     [SecuritySafeCritical]
-    unsafe private static void MarshalStructAsParam_AsSeqByRefInOut(StructID id)
+    private static unsafe void MarshalStructAsParam_AsSeqByRefInOut(StructID id)
     {
         try
         {

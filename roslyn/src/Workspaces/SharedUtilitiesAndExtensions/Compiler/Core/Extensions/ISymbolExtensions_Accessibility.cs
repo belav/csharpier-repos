@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ISymbolExtensions
+    partial internal static class ISymbolExtensions
     {
         /// <summary>
         /// Checks if 'symbol' is accessible from within 'within'.

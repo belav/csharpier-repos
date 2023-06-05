@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     using static CSharpInferredMemberNameSimplifier;
 
-    internal partial class CSharpInferredMemberNameReducer
+    partial internal class CSharpInferredMemberNameReducer
     {
         private class Rewriter : AbstractReductionRewriter
         {

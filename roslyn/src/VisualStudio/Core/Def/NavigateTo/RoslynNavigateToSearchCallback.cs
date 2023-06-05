@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.NavigateTo;
 
-internal sealed partial class RoslynSearchItemsSourceProvider
+partial internal sealed class RoslynSearchItemsSourceProvider
 {
     /// <summary>
     /// A callback to be passed to the <see cref="NavigateToSearcher"/>.  Results it pushes into us will then be

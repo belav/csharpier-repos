@@ -29,7 +29,7 @@ namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
     // The runtime's implementation of PropertyInfo's
     //
     [DebuggerDisplay("{_debugName}")]
-    internal sealed partial class NativeFormatRuntimePropertyInfo : RuntimePropertyInfo
+    partial internal sealed class NativeFormatRuntimePropertyInfo : RuntimePropertyInfo
     {
         //
         // propertyHandle - the "tkPropertyDef" that identifies the property.

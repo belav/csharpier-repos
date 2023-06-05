@@ -3,7 +3,7 @@
 
 namespace System.IO.Compression
 {
-    internal static partial class BrotliUtils
+    partial internal static class BrotliUtils
     {
         public const int WindowBits_Min = 10;
         public const int WindowBits_Default = 22;

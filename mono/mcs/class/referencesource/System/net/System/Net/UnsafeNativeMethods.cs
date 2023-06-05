@@ -134,7 +134,7 @@ namespace System.Net
             CallingConvention = CallingConvention.StdCall,
             SetLastError = true
         )]
-        internal static unsafe extern uint CancelIoEx(
+        internal static extern unsafe uint CancelIoEx(
             CriticalHandle handle,
             NativeOverlapped* overlapped
         );
@@ -150,7 +150,7 @@ namespace System.Net
             CallingConvention = CallingConvention.StdCall,
             SetLastError = true
         )]
-        internal static unsafe extern bool SetFileCompletionNotificationModes(
+        internal static extern unsafe bool SetFileCompletionNotificationModes(
             CriticalHandle handle,
             FileCompletionNotificationModes modes
         );
@@ -167,7 +167,7 @@ namespace System.Net
 
         [System.Security.SecurityCritical]
         [DllImport(KERNEL32, CallingConvention = CallingConvention.Winapi, SetLastError = true)]
-        internal extern static IntPtr GetProcAddress(SafeLoadLibrary hModule, string entryPoint);
+        internal static extern IntPtr GetProcAddress(SafeLoadLibrary hModule, string entryPoint);
 
         [Flags]
         internal enum FileCompletionNotificationModes : byte
@@ -199,7 +199,7 @@ namespace System.Net
 
 #if !FEATURE_PAL
         [SuppressUnmanagedCodeSecurity]
-        internal unsafe static class RegistryHelper
+        internal static unsafe class RegistryHelper
         {
             internal const uint REG_NOTIFY_CHANGE_LAST_SET = 4;
             internal const uint REG_BINARY = 3;
@@ -711,7 +711,7 @@ namespace System.Net
 
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int AcceptSecurityContext(
+            internal static extern unsafe int AcceptSecurityContext(
                 ref SSPIHandle credentialHandle,
                 [In] void* inContextPtr,
                 [In] SecurityBufferDescriptor inputBuffer,
@@ -725,7 +725,7 @@ namespace System.Net
 
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int QueryContextAttributesW(
+            internal static extern unsafe int QueryContextAttributesW(
                 ref SSPIHandle contextHandle,
                 [In] ContextAttribute attribute,
                 [In] void* buffer
@@ -733,7 +733,7 @@ namespace System.Net
 
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int SetContextAttributesW(
+            internal static extern unsafe int SetContextAttributesW(
                 ref SSPIHandle contextHandle,
                 [In] ContextAttribute attribute,
                 [In] byte[] buffer,
@@ -752,7 +752,7 @@ namespace System.Net
                 CharSet = CharSet.Unicode,
                 SetLastError = true
             )]
-            internal unsafe static extern int AcquireCredentialsHandleW(
+            internal static extern unsafe int AcquireCredentialsHandleW(
                 [In] string principal,
                 [In] string moduleName,
                 [In] int usage,
@@ -770,7 +770,7 @@ namespace System.Net
                 CharSet = CharSet.Unicode,
                 SetLastError = true
             )]
-            internal unsafe static extern int AcquireCredentialsHandleW(
+            internal static extern unsafe int AcquireCredentialsHandleW(
                 [In] string principal,
                 [In] string moduleName,
                 [In] int usage,
@@ -789,7 +789,7 @@ namespace System.Net
                 CharSet = CharSet.Unicode,
                 SetLastError = true
             )]
-            internal unsafe static extern int AcquireCredentialsHandleW(
+            internal static extern unsafe int AcquireCredentialsHandleW(
                 [In] string principal,
                 [In] string moduleName,
                 [In] int usage,
@@ -807,7 +807,7 @@ namespace System.Net
                 CharSet = CharSet.Unicode,
                 SetLastError = true
             )]
-            internal unsafe static extern int AcquireCredentialsHandleW(
+            internal static extern unsafe int AcquireCredentialsHandleW(
                 [In] string principal,
                 [In] string moduleName,
                 [In] int usage,
@@ -821,7 +821,7 @@ namespace System.Net
 
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int InitializeSecurityContextW(
+            internal static extern unsafe int InitializeSecurityContextW(
                 ref SSPIHandle credentialHandle,
                 [In] void* inContextPtr,
                 [In] byte* targetName,
@@ -838,14 +838,14 @@ namespace System.Net
 
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int CompleteAuthToken(
+            internal static extern unsafe int CompleteAuthToken(
                 [In] void* inContextPtr,
                 [In, Out] SecurityBufferDescriptor inputBuffers
             );
 
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern int ApplyControlToken(
+            internal static extern unsafe int ApplyControlToken(
                 [In] void* inContextPtr,
                 [In, Out] SecurityBufferDescriptor inputBuffers
             );
@@ -1059,7 +1059,7 @@ namespace System.Net
 #if !FEATURE_PAL
             [DllImport(WININET, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            unsafe internal static extern bool RetrieveUrlCacheEntryFileW(
+            internal static extern unsafe bool RetrieveUrlCacheEntryFileW(
                 [In] char* urlName,
                 [In] byte* entryPtr, //was [Out]
                 [In, Out] ref int entryBufSize,
@@ -1068,7 +1068,7 @@ namespace System.Net
 
             [DllImport(WININET, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            unsafe internal static extern bool UnlockUrlCacheEntryFileW(
+            internal static extern unsafe bool UnlockUrlCacheEntryFileW(
                 [In] char* urlName,
                 [In] int dwReserved //must be 0
             );
@@ -1315,7 +1315,7 @@ namespace System.Net
             );
 
             [DllImport(WS2_32, CharSet = CharSet.Auto, SetLastError = true)]
-            internal unsafe static extern SafeCloseSocket.InnerSafeCloseSocket WSASocket(
+            internal static extern unsafe SafeCloseSocket.InnerSafeCloseSocket WSASocket(
                 [In] AddressFamily addressFamily,
                 [In] SocketType socketType,
                 [In] ProtocolType protocolType,
@@ -1534,7 +1534,7 @@ namespace System.Net
 
             // This method is always blocking, so it uses an IntPtr.
             [DllImport(WS2_32, SetLastError = true)]
-            internal unsafe static extern int send(
+            internal static extern unsafe int send(
                 [In] IntPtr socketHandle,
                 [In] byte* pinnedBuffer,
                 [In] int len,
@@ -1543,7 +1543,7 @@ namespace System.Net
 
             // This method is always blocking, so it uses an IntPtr.
             [DllImport(WS2_32, SetLastError = true)]
-            internal unsafe static extern int recv(
+            internal static extern unsafe int recv(
                 [In] IntPtr socketHandle,
                 [In] byte* pinnedBuffer,
                 [In] int len,
@@ -1571,7 +1571,7 @@ namespace System.Net
 
             // This method is always blocking, so it uses an IntPtr.
             [DllImport(WS2_32, SetLastError = true)]
-            internal unsafe static extern int sendto(
+            internal static extern unsafe int sendto(
                 [In] IntPtr socketHandle,
                 [In] byte* pinnedBuffer,
                 [In] int len,
@@ -1582,7 +1582,7 @@ namespace System.Net
 
             // This method is always blocking, so it uses an IntPtr.
             [DllImport(WS2_32, SetLastError = true)]
-            internal unsafe static extern int recvfrom(
+            internal static extern unsafe int recvfrom(
                 [In] IntPtr socketHandle,
                 [In] byte* pinnedBuffer,
                 [In] int len,
@@ -1809,7 +1809,7 @@ namespace System.Net
 
 #if !FEATURE_PAL
             [DllImport(WS2_32, SetLastError = true)]
-            internal unsafe static extern int WSADuplicateSocket(
+            internal static extern unsafe int WSADuplicateSocket(
                 [In] SafeCloseSocket socketHandle,
                 [In] uint targetProcessID,
                 [In] byte* pinnedBuffer
@@ -2103,7 +2103,7 @@ namespace System.Net
 
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
-            internal static unsafe extern int DecryptMessage(
+            internal static extern unsafe int DecryptMessage(
                 [In] ref SSPIHandle contextHandle,
                 [In, Out] SecurityBufferDescriptor inputOutput,
                 [In] uint sequenceNumber,
@@ -2316,7 +2316,7 @@ namespace System.Net
                 ExactSpelling = true,
                 SetLastError = true
             )]
-            unsafe internal static extern bool CommitUrlCacheEntryW(
+            internal static extern unsafe bool CommitUrlCacheEntryW(
                 [In] string urlName,
                 [In] string localFileName,
                 [In] _WinInetCache.FILETIME expireTime,
@@ -2334,7 +2334,7 @@ namespace System.Net
                 ExactSpelling = true,
                 SetLastError = true
             )]
-            unsafe internal static extern bool GetUrlCacheEntryInfoW(
+            internal static extern unsafe bool GetUrlCacheEntryInfoW(
                 [In] string urlName,
                 [In] byte* entryPtr, //was [Out]
                 [In, Out] ref int bufferSz
@@ -2346,7 +2346,7 @@ namespace System.Net
                 ExactSpelling = true,
                 SetLastError = true
             )]
-            unsafe internal static extern bool SetUrlCacheEntryInfoW(
+            internal static extern unsafe bool SetUrlCacheEntryInfoW(
                 [In] string lpszUrlName,
                 [In] byte* EntryPtr,
                 [In] _WinInetCache.Entry_FC fieldControl
@@ -2501,7 +2501,7 @@ namespace System.Net
         {
             [DllImport(SECUR32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            internal unsafe static extern SecurityStatus SspiFreeAuthIdentity([In] IntPtr authData);
+            internal static extern unsafe SecurityStatus SspiFreeAuthIdentity([In] IntPtr authData);
 
             [SuppressMessage(
                 "Microsoft.Security",
@@ -2514,7 +2514,7 @@ namespace System.Net
                 SetLastError = true,
                 CharSet = CharSet.Unicode
             )]
-            internal unsafe static extern SecurityStatus SspiEncodeStringsAsAuthIdentity(
+            internal static extern unsafe SecurityStatus SspiEncodeStringsAsAuthIdentity(
                 [In] string userName,
                 [In] string domainName,
                 [In] string password,
@@ -3842,7 +3842,7 @@ namespace System.Net
                 }
             }
 
-            private unsafe static string GetVerb(HTTP_REQUEST* request, long fixup)
+            private static unsafe string GetVerb(HTTP_REQUEST* request, long fixup)
             {
                 GlobalLog.Enter("HttpApi::GetVerb()");
                 string verb = null;
@@ -3865,12 +3865,12 @@ namespace System.Net
                 return verb;
             }
 
-            internal unsafe static string GetVerb(HTTP_REQUEST* request)
+            internal static unsafe string GetVerb(HTTP_REQUEST* request)
             {
                 return GetVerb(request, 0);
             }
 
-            internal unsafe static string GetVerb(byte[] memoryBlob, IntPtr originalAddress)
+            internal static unsafe string GetVerb(byte[] memoryBlob, IntPtr originalAddress)
             {
                 fixed (byte* pMemoryBlob = memoryBlob)
                 {
@@ -4178,7 +4178,7 @@ namespace System.Net
         }
 
         [SuppressUnmanagedCodeSecurity]
-        internal unsafe static class SecureStringHelper
+        internal static unsafe class SecureStringHelper
         {
 #if DEBUG
             // this method is only called as part of an assert

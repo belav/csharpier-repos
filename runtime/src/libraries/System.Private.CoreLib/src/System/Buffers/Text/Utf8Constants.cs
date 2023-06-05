@@ -3,7 +3,7 @@
 
 namespace System.Buffers.Text
 {
-    internal static partial class Utf8Constants
+    partial internal static class Utf8Constants
     {
         public const byte Colon = (byte)':';
         public const byte Comma = (byte)',';

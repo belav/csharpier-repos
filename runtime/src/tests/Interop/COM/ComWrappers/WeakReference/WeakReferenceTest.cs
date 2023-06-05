@@ -120,7 +120,7 @@ namespace ComWrappersTests
             Registration = reg;
         }
 
-        protected unsafe override ComInterfaceEntry* ComputeVtables(
+        protected override unsafe ComInterfaceEntry* ComputeVtables(
             object obj,
             CreateComInterfaceFlags flags,
             out int count

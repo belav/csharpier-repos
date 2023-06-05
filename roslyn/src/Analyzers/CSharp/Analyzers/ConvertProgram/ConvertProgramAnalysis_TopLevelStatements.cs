@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
 {
-    internal static partial class ConvertProgramAnalysis
+    partial internal static class ConvertProgramAnalysis
     {
         public static bool CanOfferUseTopLevelStatements(
             CodeStyleOption2<bool> option,

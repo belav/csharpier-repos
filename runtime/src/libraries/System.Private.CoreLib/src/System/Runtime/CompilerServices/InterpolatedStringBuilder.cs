@@ -7,8 +7,9 @@ using System.Globalization;
 
 namespace System.Runtime.CompilerServices
 {
+    ref
     /// <summary>Provides a builder used by the language compiler to process interpolated strings into <see cref="string"/> instances.</summary>
-    public ref struct InterpolatedStringBuilder
+    public struct InterpolatedStringBuilder
     {
         // Implementation note:
         // As this type lives in CompilerServices and is only intended to be targeted by the compiler,

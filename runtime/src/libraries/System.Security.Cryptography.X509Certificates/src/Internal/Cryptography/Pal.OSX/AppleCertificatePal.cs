@@ -15,7 +15,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class AppleCertificatePal : ICertificatePal
+    partial internal sealed class AppleCertificatePal : ICertificatePal
     {
         private SafeSecIdentityHandle? _identityHandle;
         private SafeSecCertificateHandle _certHandle;

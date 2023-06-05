@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace System.Formats.Tar
 {
+    partial
     // Reads the header attributes from a tar archive entry.
-    internal sealed partial class TarHeader
+    internal sealed class TarHeader
     {
         // Attempts to retrieve the next header from the specified tar archive stream.
         // Throws if end of stream is reached or if any data type conversion fails.

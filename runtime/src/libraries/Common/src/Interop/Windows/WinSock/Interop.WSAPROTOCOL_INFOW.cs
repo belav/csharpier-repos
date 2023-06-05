@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Net.Sockets;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         public const int SO_PROTOCOL_INFOW = 0x2005;
 
@@ -35,7 +35,7 @@ internal static partial class Interop
             internal int iSecurityScheme;
             internal uint dwMessageSize;
             internal uint dwProviderReserved;
-            internal fixed char szProtocol[WSAPROTOCOL_LEN + 1];
+            fixed internal char szProtocol[WSAPROTOCOL_LEN + 1];
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -44,7 +44,7 @@ internal static partial class Interop
             private const int MAX_PROTOCOL_CHAIN = 7;
 
             internal int ChainLen;
-            internal fixed uint ChainEntries[MAX_PROTOCOL_CHAIN];
+            fixed internal uint ChainEntries[MAX_PROTOCOL_CHAIN];
         }
     }
 }

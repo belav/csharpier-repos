@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class IParameterSymbolExtensions
+    partial internal static class IParameterSymbolExtensions
     {
         public static bool IsRefOrOut(this IParameterSymbol symbol)
         {

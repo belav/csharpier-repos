@@ -15,7 +15,7 @@ namespace System.IO.Tests
 {
     // Run these tests on their own as they use a lot of disk space
     [Collection(nameof(DisableParallelization))]
-    public partial class StreamReaderTests_Serial : FileCleanupTestBase
+    partial public class StreamReaderTests_Serial : FileCleanupTestBase
     {
         [OuterLoop("It creates 1GB file")]
         [Fact]

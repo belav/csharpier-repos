@@ -211,7 +211,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="ParameterExpression" /> node that can be used to identify a parameter or a variable in an expression tree.

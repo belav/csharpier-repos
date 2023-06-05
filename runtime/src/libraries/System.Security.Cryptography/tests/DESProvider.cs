@@ -10,7 +10,7 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
         public bool OneShotSupported => true;
     }
 
-    public partial class DESFactory
+    partial public class DESFactory
     {
         private static readonly IDESProvider s_provider = new DesProvider();
     }

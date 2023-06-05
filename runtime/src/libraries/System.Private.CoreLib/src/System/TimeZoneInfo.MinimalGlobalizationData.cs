@@ -3,10 +3,12 @@
 
 namespace System
 {
-    public sealed partial class TimeZoneInfo
+    partial public sealed class TimeZoneInfo
     {
 #pragma warning disable IDE0060
-        static partial void TryPopulateTimeZoneDisplayNamesFromGlobalizationData(
+        partial
+#pragma warning disable IDE0060
+        static void TryPopulateTimeZoneDisplayNamesFromGlobalizationData(
             string timeZoneId,
             TimeSpan baseUtcOffset,
             ref string? standardDisplayName,

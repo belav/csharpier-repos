@@ -4,15 +4,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_iOSSupportVersion",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial string iOSSupportVersion();
+        partial internal static string iOSSupportVersion();
     }
 }

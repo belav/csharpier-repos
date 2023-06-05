@@ -34,7 +34,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
 {
-    internal abstract partial class AbstractConvertTupleToStructCodeRefactoringProvider<
+    partial internal abstract class AbstractConvertTupleToStructCodeRefactoringProvider<
         TExpressionSyntax,
         TNameSyntax,
         TIdentifierNameSyntax,

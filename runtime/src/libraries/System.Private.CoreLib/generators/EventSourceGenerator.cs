@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Generators
 {
     [Generator]
-    public partial class EventSourceGenerator : ISourceGenerator
+    partial public class EventSourceGenerator : ISourceGenerator
     {
         // Example input:
         //

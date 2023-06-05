@@ -216,11 +216,12 @@ namespace Mono.CSharp
         }
     }
 
+    public
     //
     // Properties and Indexers both generate PropertyBuilders, we use this to share
     // their common bits.
     //
-    abstract public class PropertyBase : PropertyBasedMember
+    abstract class PropertyBase : PropertyBasedMember
     {
         public class GetMethod : PropertyMethod
         {

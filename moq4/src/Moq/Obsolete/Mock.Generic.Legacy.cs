@@ -10,13 +10,14 @@ using Moq.Protected;
 
 namespace Moq
 {
+    partial
     // Keeps legacy members that are hidden and are provided
     // for backwards compatibility (so that existing projects
     // still compile, but people don't see them).
     // A bug in EditorBrowsable actually prevents us from moving these members
     // completely to extension methods, as the attribute is not honored and
     // therefore the members are always visible.
-    public partial class Mock<T>
+    public class Mock<T>
     {
         /// <summary>
         /// Obsolete.

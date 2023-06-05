@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-internal sealed partial class KestrelTrace : ILogger
+partial internal sealed class KestrelTrace : ILogger
 {
     public void ConnectionBadRequest(
         string connectionId,
@@ -61,7 +61,7 @@ internal sealed partial class KestrelTrace : ILogger
         }
     }
 
-    private static partial class BadRequestsLog
+    partial private static class BadRequestsLog
     {
         [LoggerMessage(
             17,
@@ -69,7 +69,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"" bad request data: ""{message}""",
             EventName = "ConnectionBadRequest"
         )]
-        public static partial void ConnectionBadRequest(
+        partial public static void ConnectionBadRequest(
             ILogger logger,
             string connectionId,
             string message,
@@ -82,7 +82,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"" request processing ended abnormally.",
             EventName = "RequestProcessingError"
         )]
-        public static partial void RequestProcessingError(
+        partial public static void RequestProcessingError(
             ILogger logger,
             string connectionId,
             Exception ex
@@ -94,7 +94,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"", Request id ""{TraceIdentifier}"": the request timed out because it was not sent by the client at a minimum of {Rate} bytes/second.",
             EventName = "RequestBodyMinimumDataRateNotSatisfied"
         )]
-        public static partial void RequestBodyMinimumDataRateNotSatisfied(
+        partial public static void RequestBodyMinimumDataRateNotSatisfied(
             ILogger logger,
             string connectionId,
             string? traceIdentifier,
@@ -107,7 +107,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"", Request id ""{TraceIdentifier}"": the connection was closed because the response was not read by the client at the specified minimum data rate.",
             EventName = "ResponseMinimumDataRateNotSatisfied"
         )]
-        public static partial void ResponseMinimumDataRateNotSatisfied(
+        partial public static void ResponseMinimumDataRateNotSatisfied(
             ILogger logger,
             string connectionId,
             string? traceIdentifier
@@ -120,7 +120,7 @@ internal sealed partial class KestrelTrace : ILogger
             EventName = "PossibleInvalidHttpVersionDetected",
             SkipEnabledCheck = true
         )]
-        public static partial void PossibleInvalidHttpVersionDetected(
+        partial public static void PossibleInvalidHttpVersionDetected(
             ILogger logger,
             string connectionId,
             string expectedHttpVersion,

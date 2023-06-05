@@ -11,7 +11,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public abstract partial class DSA : AsymmetricAlgorithm
+    partial public abstract class DSA : AsymmetricAlgorithm
     {
         // As of FIPS 186-4 the maximum Q size is 256 bits (32 bytes).
         // The DER signature format thus maxes out at 2 + 3 + 33 + 3 + 33 => 74 bytes.

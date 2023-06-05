@@ -51,11 +51,12 @@ using System.Data.Entity;
 //#####################################################################
 namespace System.Data.Common.EntitySql
 {
+    partial
     //#####################################################################
     // class: CqlParser
     // does : encapsulates yacc() parser functionality in a C# class
     //#####################################################################
-    internal partial class CqlParser
+    internal class CqlParser
     {
         Boolean yydebug; //do I want debug output?
         static int YYMAJOR = 1;

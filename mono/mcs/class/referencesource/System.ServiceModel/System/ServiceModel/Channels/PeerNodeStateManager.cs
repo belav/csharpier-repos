@@ -530,7 +530,7 @@ namespace System.ServiceModel.Channels
                     get { return stateManager.thisLock; }
                 }
 
-                static public void End(IAsyncResult result)
+                public static void End(IAsyncResult result)
                 {
                     AsyncResult.End<OperationBase>(result);
                 }

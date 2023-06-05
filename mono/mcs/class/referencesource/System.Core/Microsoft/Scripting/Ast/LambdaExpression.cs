@@ -297,7 +297,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates an Expression{T} given the delegate type. Caches the

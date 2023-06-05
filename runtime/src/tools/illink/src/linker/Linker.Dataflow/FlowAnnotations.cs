@@ -15,7 +15,7 @@ using Mono.Linker.Dataflow;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    sealed partial class FlowAnnotations
+    partial sealed class FlowAnnotations
     {
         readonly LinkContext _context;
         readonly Dictionary<TypeDefinition, TypeAnnotations> _annotations =
@@ -1082,10 +1082,10 @@ namespace ILLink.Shared.TrimAnalysis
             ) => (Field, Annotation) = (field, annotation);
         }
 
-        internal partial bool MethodRequiresDataFlowAnalysis(MethodProxy method) =>
+        partial internal bool MethodRequiresDataFlowAnalysis(MethodProxy method) =>
             RequiresDataFlowAnalysis(method.Method);
 
-        internal partial MethodReturnValue GetMethodReturnValue(
+        partial internal MethodReturnValue GetMethodReturnValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         ) =>
@@ -1095,10 +1095,10 @@ namespace ILLink.Shared.TrimAnalysis
                 dynamicallyAccessedMemberTypes
             );
 
-        internal partial MethodReturnValue GetMethodReturnValue(MethodProxy method) =>
+        partial internal MethodReturnValue GetMethodReturnValue(MethodProxy method) =>
             GetMethodReturnValue(method, GetReturnParameterAnnotation(method.Method));
 
-        internal partial GenericParameterValue GetGenericParameterValue(
+        partial internal GenericParameterValue GetGenericParameterValue(
             GenericParameterProxy genericParameter
         ) =>
             new GenericParameterValue(
@@ -1106,7 +1106,7 @@ namespace ILLink.Shared.TrimAnalysis
                 GetGenericParameterAnnotation(genericParameter.GenericParameter)
             );
 
-        internal partial MethodParameterValue GetMethodParameterValue(
+        partial internal MethodParameterValue GetMethodParameterValue(
             ParameterProxy param,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         ) =>
@@ -1116,7 +1116,7 @@ namespace ILLink.Shared.TrimAnalysis
                 dynamicallyAccessedMemberTypes
             );
 
-        internal partial MethodParameterValue GetMethodParameterValue(ParameterProxy param) =>
+        partial internal MethodParameterValue GetMethodParameterValue(ParameterProxy param) =>
             GetMethodParameterValue(param, GetParameterAnnotation(param));
 
 #pragma warning disable CA1822 // Mark members as static - Should be an instance method for consistency
@@ -1140,12 +1140,15 @@ namespace ILLink.Shared.TrimAnalysis
         }
 #pragma warning restore CA1822 // Mark members as static
 
-        internal partial MethodParameterValue GetMethodThisParameterValue(
+        partial
+#pragma warning restore CA1822 // Mark members as static
+
+        internal MethodParameterValue GetMethodThisParameterValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         ) => GetMethodThisParameterValue(method, dynamicallyAccessedMemberTypes, false);
 
-        internal partial MethodParameterValue GetMethodThisParameterValue(MethodProxy method)
+        partial internal MethodParameterValue GetMethodThisParameterValue(MethodProxy method)
         {
             if (!method.HasImplicitThis())
                 throw new InvalidOperationException(

@@ -3,9 +3,9 @@
 
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal unsafe struct CREATEFILE2_EXTENDED_PARAMETERS
         {

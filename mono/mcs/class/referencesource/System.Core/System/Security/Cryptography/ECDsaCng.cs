@@ -18,7 +18,7 @@ namespace System.Security.Cryptography
     ///     Wrapper for NCrypt's implementation of elliptic curve DSA
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed partial class ECDsaCng : ECDsa
+    partial public sealed class ECDsaCng : ECDsa
     {
 #if MONO
         public ECDsaCng()

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Tests
 {
-    public partial class RSASignatureFormatterTests : AsymmetricSignatureFormatterTests
+    partial public class RSASignatureFormatterTests : AsymmetricSignatureFormatterTests
     {
         [Fact]
         public static void InvalidFormatterArguments_RSA()

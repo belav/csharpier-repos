@@ -15,13 +15,14 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
 {
+    partial
     /// <summary>
     /// Custom fix all provider for namespace sync. Does fix all on per document level. Since
     /// multiple documents may be updated when changing a single namespace, it happens
     /// on a sequential level instead of batch fixing and merging the changes. This prevents
     /// collissions that the batch fixer won't handle correctly but is slower.
     /// </summary>
-    internal abstract partial class AbstractChangeNamespaceToMatchFolderCodeFixProvider
+    internal abstract class AbstractChangeNamespaceToMatchFolderCodeFixProvider
     {
         private class CustomFixAllProvider : FixAllProvider
         {

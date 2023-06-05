@@ -8,10 +8,11 @@ using System.Runtime.CompilerServices;
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Represents the fundamental base type of all types within the type system.
     /// </summary>
-    public abstract partial class TypeDesc : TypeSystemEntity
+    public abstract class TypeDesc : TypeSystemEntity
     {
 #pragma warning disable CA1825 // avoid Array.Empty<T>() instantiation for TypeLoader
         public static readonly TypeDesc[] EmptyTypes = new TypeDesc[0];

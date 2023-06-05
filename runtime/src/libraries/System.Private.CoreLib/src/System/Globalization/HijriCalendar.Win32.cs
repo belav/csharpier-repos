@@ -5,7 +5,7 @@ using Internal.Win32;
 
 namespace System.Globalization
 {
-    public partial class HijriCalendar : Calendar
+    partial public class HijriCalendar : Calendar
     {
         private int GetHijriDateAdjustment()
         {

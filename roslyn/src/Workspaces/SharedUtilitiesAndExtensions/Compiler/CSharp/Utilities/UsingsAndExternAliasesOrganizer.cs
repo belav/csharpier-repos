@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Utilities
 {
-    internal static partial class UsingsAndExternAliasesOrganizer
+    partial internal static class UsingsAndExternAliasesOrganizer
     {
         public static void Organize(
             SyntaxList<ExternAliasDirectiveSyntax> externAliasList,

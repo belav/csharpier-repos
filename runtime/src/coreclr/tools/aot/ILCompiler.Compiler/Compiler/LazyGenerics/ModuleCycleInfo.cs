@@ -14,7 +14,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
 {
-    internal static partial class LazyGenericsSupport
+    partial internal static class LazyGenericsSupport
     {
         private sealed class ModuleCycleInfo
         {

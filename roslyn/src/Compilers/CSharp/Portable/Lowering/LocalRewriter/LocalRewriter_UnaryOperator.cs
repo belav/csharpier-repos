@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter
+    partial internal sealed class LocalRewriter
     {
         /// <summary>
         /// This rewriter lowers pre-/post- increment/decrement operations (initially represented as

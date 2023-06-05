@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     [TagType(typeof(ActiveStatementTag))]
     [ContentType(ContentTypeNames.CSharpContentType)]
     [ContentType(ContentTypeNames.VisualBasicContentType)]
-    internal partial class ActiveStatementTaggerProvider
+    partial internal class ActiveStatementTaggerProvider
         : AsynchronousTaggerProvider<ITextMarkerTag>
     {
         // We want to track text changes so that we can try to only reclassify a method body if

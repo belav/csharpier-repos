@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     [System.Runtime.Versioning.NonVersionable] // This only applies to field layout
-    public ref partial struct TypedReference
+    ref partial public struct TypedReference
     {
         private readonly ref byte _value;
         private readonly IntPtr _type;

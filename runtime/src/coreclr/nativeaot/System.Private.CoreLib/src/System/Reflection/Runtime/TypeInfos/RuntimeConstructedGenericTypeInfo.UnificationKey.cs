@@ -9,7 +9,7 @@ using System.Collections.Concurrent;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal sealed partial class RuntimeConstructedGenericTypeInfo
+    partial internal sealed class RuntimeConstructedGenericTypeInfo
         : RuntimeTypeInfo,
             IKeyedItem<RuntimeConstructedGenericTypeInfo.UnificationKey>
     {

@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ForEachStatementSyntax
+    partial public class ForEachStatementSyntax
     {
         public ForEachStatementSyntax Update(
             SyntaxToken forEachKeyword,
@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static ForEachStatementSyntax ForEachStatement(
             SyntaxToken forEachKeyword,

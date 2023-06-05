@@ -9,7 +9,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-internal partial class HttpResponseTrailers : HttpHeaders
+partial internal class HttpResponseTrailers : HttpHeaders
 {
     public Func<string, Encoding?> EncodingSelector { get; set; }
 
@@ -50,7 +50,7 @@ internal partial class HttpResponseTrailers : HttpHeaders
         set => throw new NotSupportedException();
     }
 
-    public partial struct Enumerator : IEnumerator<KeyValuePair<string, StringValues>>
+    partial public struct Enumerator : IEnumerator<KeyValuePair<string, StringValues>>
     {
         private readonly HttpResponseTrailers _collection;
         private long _currentBits;

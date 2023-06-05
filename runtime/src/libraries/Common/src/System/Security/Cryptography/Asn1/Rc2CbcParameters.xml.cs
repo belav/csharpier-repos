@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct Rc2CbcParameters
+    partial internal struct Rc2CbcParameters
     {
         internal int Rc2Version;
         internal ReadOnlyMemory<byte> Iv;

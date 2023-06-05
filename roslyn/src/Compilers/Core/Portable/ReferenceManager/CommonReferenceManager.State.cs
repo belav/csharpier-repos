@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis
         > ImplicitReferenceResolutions { get; }
     }
 
-    internal partial class CommonReferenceManager<TCompilation, TAssemblySymbol>
+    partial internal class CommonReferenceManager<TCompilation, TAssemblySymbol>
         : CommonReferenceManager
     {
         /// <summary>

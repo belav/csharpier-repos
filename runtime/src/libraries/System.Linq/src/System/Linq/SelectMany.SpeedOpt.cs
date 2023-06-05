@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        private sealed partial class SelectManySingleSelectorIterator<TSource, TResult>
+        partial private sealed class SelectManySingleSelectorIterator<TSource, TResult>
             : IIListProvider<TResult>
         {
             public int GetCount(bool onlyIfCheap)

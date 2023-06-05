@@ -12,7 +12,7 @@ using SysTx = System.Transactions;
 
 namespace System.Data.Odbc
 {
-    public sealed partial class OdbcConnection : DbConnection, ICloneable
+    partial public sealed class OdbcConnection : DbConnection, ICloneable
     {
         private int _connectionTimeout = ADP.DefaultConnectionTimeout;
 

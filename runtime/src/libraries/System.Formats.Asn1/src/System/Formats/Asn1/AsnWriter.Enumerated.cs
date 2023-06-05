@@ -3,7 +3,7 @@
 
 namespace System.Formats.Asn1
 {
-    public sealed partial class AsnWriter
+    partial public sealed class AsnWriter
     {
         /// <summary>
         ///   Write a non-[<see cref="FlagsAttribute"/>] enum value as an Enumerated with

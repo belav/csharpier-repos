@@ -17,9 +17,9 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 {
-    internal partial class GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider
+    partial internal class GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider
     {
-        private partial class GenerateEqualsAndGetHashCodeAction : CodeAction
+        partial private class GenerateEqualsAndGetHashCodeAction : CodeAction
         {
             // https://docs.microsoft.com/dotnet/standard/design-guidelines/naming-parameters#naming-operator-overload-parameters
             //  DO use left and right for binary operator overload parameter names if there is no meaning to the parameters.

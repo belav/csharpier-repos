@@ -18,7 +18,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureSeverity
 {
-    public abstract partial class MultipleCodeStyleOptionBasedSeverityConfigurationTests
+    partial public abstract class MultipleCodeStyleOptionBasedSeverityConfigurationTests
         : AbstractSuppressionDiagnosticTest
     {
         protected internal override string GetLanguage() => LanguageNames.CSharp;

@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class SspiCli
+    partial internal static class SspiCli
     {
         [LibraryImport(Libraries.SspiCli)]
-        internal static partial int LsaLogonUser(
+        partial internal static int LsaLogonUser(
             SafeLsaHandle LsaHandle,
             in Advapi32.LSA_STRING OriginName,
             SECURITY_LOGON_TYPE LogonType,

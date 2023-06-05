@@ -11,7 +11,7 @@ using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.Single
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    internal static partial class ValueExtensions
+    partial internal static class ValueExtensions
     {
         internal static string ValueToString(this SingleValue value, params object[] args)
         {

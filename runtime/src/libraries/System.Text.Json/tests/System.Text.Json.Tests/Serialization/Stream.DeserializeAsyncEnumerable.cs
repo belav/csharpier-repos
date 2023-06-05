@@ -12,7 +12,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class StreamTests_DeserializeAsyncEnumerable
+    partial public static class StreamTests_DeserializeAsyncEnumerable
     {
         [Theory]
         [InlineData(0, 1)]

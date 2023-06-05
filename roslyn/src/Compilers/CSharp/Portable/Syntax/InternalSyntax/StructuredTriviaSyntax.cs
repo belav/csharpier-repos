@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal abstract partial class StructuredTriviaSyntax : CSharpSyntaxNode
+    partial internal abstract class StructuredTriviaSyntax : CSharpSyntaxNode
     {
         internal StructuredTriviaSyntax(
             SyntaxKind kind,

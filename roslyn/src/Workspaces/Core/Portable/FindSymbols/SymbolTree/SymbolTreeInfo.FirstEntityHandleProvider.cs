@@ -8,7 +8,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal partial class SymbolTreeInfo
+    partial internal class SymbolTreeInfo
     {
         /// <summary>
         /// Used to produce the simple-full-name components of a type from metadata.

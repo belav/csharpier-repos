@@ -18,7 +18,7 @@ namespace System.ServiceModel.Channels
 
     class ChannelDemuxer
     {
-        public readonly static TimeSpan UseDefaultReceiveTimeout = TimeSpan.MinValue;
+        public static readonly TimeSpan UseDefaultReceiveTimeout = TimeSpan.MinValue;
 
         TypedChannelDemuxer inputDemuxer;
         TypedChannelDemuxer replyDemuxer;

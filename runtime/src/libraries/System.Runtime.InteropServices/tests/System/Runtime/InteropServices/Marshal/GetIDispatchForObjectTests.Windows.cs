@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetIDispatchForObjectTests
+    partial public class GetIDispatchForObjectTests
     {
         public static IEnumerable<object[]> GetIDispatchForObject_ComObject_TestData()
         {

@@ -8,8 +8,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Formats.Cbor
 {
+    partial
     /// <summary>A writer for Concise Binary Object Representation (CBOR) encoded data.</summary>
-    public partial class CborWriter
+    public class CborWriter
     {
         private static readonly ArrayPool<byte> s_bufferPool = ArrayPool<byte>.Create();
 

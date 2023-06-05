@@ -9,7 +9,7 @@ using Microsoft.CSharp.RuntimeBinder.ComInterop;
 
 namespace System.Runtime.InteropServices
 {
-    internal sealed partial class ComEventsSink
+    partial internal sealed class ComEventsSink
     {
         private void Initialize(object rcw, Guid iid)
         {

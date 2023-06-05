@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Parser
+    partial public static class Utf8Parser
     {
         //
         // Roundtrippable format. One of

@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Text.Json
 {
-    public sealed partial class Utf8JsonWriter
+    partial public sealed class Utf8JsonWriter
     {
         /// <summary>
         /// Writes the JSON literal "null" as an element of a JSON array.

@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractSymbolCompletionProvider<TSyntaxContext>
+    partial internal abstract class AbstractSymbolCompletionProvider<TSyntaxContext>
     {
         private sealed class CompletionLinkedFilesSymbolEquivalenceComparer
             : IEqualityComparer<(ISymbol symbol, bool preselect)>

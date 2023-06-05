@@ -15,10 +15,11 @@ using System.Data.Metadata.Edm;
 
 namespace System.Data.EntityClient
 {
+    partial
     /// <summary>
     /// Class representing a parameter collection used in EntityCommand
     /// </summary>
-    public sealed partial class EntityParameterCollection : DbParameterCollection
+    public sealed class EntityParameterCollection : DbParameterCollection
     {
         private static Type ItemType = typeof(EntityParameter);
         private bool _isDirty;

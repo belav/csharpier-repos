@@ -12,7 +12,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-internal sealed partial class DefaultActionDescriptorCollectionProvider
+partial internal sealed class DefaultActionDescriptorCollectionProvider
     : ActionDescriptorCollectionProvider
 {
     private readonly IActionDescriptorProvider[] _actionDescriptorProviders;
@@ -168,7 +168,7 @@ internal sealed partial class DefaultActionDescriptorCollectionProvider
         }
     }
 
-    public static partial class Log
+    partial public static class Log
     {
         [LoggerMessage(
             EventId = 1,
@@ -176,6 +176,6 @@ internal sealed partial class DefaultActionDescriptorCollectionProvider
             Level = LogLevel.Information,
             Message = "No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts"
         )]
-        public static partial void NoActionDescriptors(ILogger logger);
+        partial public static void NoActionDescriptors(ILogger logger);
     }
 }

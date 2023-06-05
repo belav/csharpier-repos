@@ -42,32 +42,32 @@ namespace System.ServiceModel
             wsrm11Dictionary = new Wsrm11Dictionary(dictionary);
         }
 
-        static public AtomicTransactionExternal11Dictionary AtomicTransactionExternal11Dictionary
+        public static AtomicTransactionExternal11Dictionary AtomicTransactionExternal11Dictionary
         {
             get { return atomicTransactionExternal11Dictionary; }
         }
 
-        static public CoordinationExternal11Dictionary CoordinationExternal11Dictionary
+        public static CoordinationExternal11Dictionary CoordinationExternal11Dictionary
         {
             get { return coordinationExternal11Dictionary; }
         }
 
-        static public SecureConversationDec2005Dictionary SecureConversationDec2005Dictionary
+        public static SecureConversationDec2005Dictionary SecureConversationDec2005Dictionary
         {
             get { return secureConversationDec2005Dictionary; }
         }
 
-        static public SecurityAlgorithmDec2005Dictionary SecurityAlgorithmDec2005Dictionary
+        public static SecurityAlgorithmDec2005Dictionary SecurityAlgorithmDec2005Dictionary
         {
             get { return securityAlgorithmDec2005Dictionary; }
         }
 
-        static public TrustDec2005Dictionary TrustDec2005Dictionary
+        public static TrustDec2005Dictionary TrustDec2005Dictionary
         {
             get { return trustDec2005Dictionary; }
         }
 
-        static public Wsrm11Dictionary Wsrm11Dictionary
+        public static Wsrm11Dictionary Wsrm11Dictionary
         {
             get { return wsrm11Dictionary; }
         }

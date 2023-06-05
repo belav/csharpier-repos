@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class ValueTests
+    partial public static class ValueTests
     {
         [Fact]
         public static void WriteStringWithRelaxedEscaper()

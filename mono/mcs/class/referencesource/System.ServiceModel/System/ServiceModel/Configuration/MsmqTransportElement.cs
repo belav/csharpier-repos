@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Net.Security;
     using System.ServiceModel.Channels;
 
-    public sealed partial class MsmqTransportElement : MsmqElementBase
+    partial public sealed class MsmqTransportElement : MsmqElementBase
     {
         [ConfigurationProperty(
             ConfigurationStrings.MaxPoolSize,

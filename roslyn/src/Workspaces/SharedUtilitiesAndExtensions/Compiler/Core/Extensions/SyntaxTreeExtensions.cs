@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class SyntaxTreeExtensions
+    partial internal static class SyntaxTreeExtensions
     {
         public static bool OverlapsHiddenPosition(
             [NotNullWhen(returnValue: true)] this SyntaxTree? tree,

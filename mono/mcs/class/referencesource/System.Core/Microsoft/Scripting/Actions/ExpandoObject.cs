@@ -48,7 +48,7 @@ namespace System.Dynamic
         private ExpandoData _data; // the data currently being held by the Expando object
         private int _count; // the count of available members
 
-        internal readonly static object Uninitialized = new object(); // A marker object used to identify that a value is uninitialized.
+        internal static readonly object Uninitialized = new object(); // A marker object used to identify that a value is uninitialized.
 
         internal const int AmbiguousMatchFound = -2; // The value is used to indicate there exists ambiguous match in the Expando object
         internal const int NoMatch = -1; // The value is used to indicate there is no matching member
@@ -1240,11 +1240,12 @@ namespace System.Dynamic
 
 namespace System.Runtime.CompilerServices
 {
+    partial
     //
     // Note: these helpers are kept as simple wrappers so they have a better
     // chance of being inlined.
     //
-    public static partial class RuntimeOps
+    public static class RuntimeOps
     {
         /// <summary>
         /// Gets the value of an item in an expando object.

@@ -6,10 +6,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.CoreFunctionLibrary
 {
+    partial
     /// <summary>
     /// Core Function Library - Parameter Type Coercion
     /// </summary>
-    public static partial class ParameterTypeCoercionTests
+    public static class ParameterTypeCoercionTests
     {
         /// <summary>
         /// count() can only take node sets as arguments.

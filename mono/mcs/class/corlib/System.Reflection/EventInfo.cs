@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection
 {
     [Serializable]
-    public abstract partial class EventInfo : MemberInfo
+    partial public abstract class EventInfo : MemberInfo
     {
         // Field needed by runtime, just disable warning.
 #pragma warning disable CS0169

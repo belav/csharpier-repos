@@ -8,8 +8,9 @@ using System.Text;
 
 namespace System.Globalization
 {
-    internal partial class FormatProvider
+    partial internal class FormatProvider
     {
+        partial
         // The Number class implements methods for formatting and parsing
         // numeric values. To format and parse numeric values, applications should
         // use the Format and Parse methods provided by the numeric
@@ -281,7 +282,7 @@ namespace System.Globalization
         //
         // This class contains only static members and does not need to be serializable
 
-        private static partial class Number
+        private static class Number
         {
             // Constants used by number parsing
             private const int NumberMaxDigits = 32;

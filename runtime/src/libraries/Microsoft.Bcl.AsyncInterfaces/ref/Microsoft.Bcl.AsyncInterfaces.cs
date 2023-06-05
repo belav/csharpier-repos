@@ -6,7 +6,7 @@
 
 namespace System
 {
-    public partial interface IAsyncDisposable
+    partial public interface IAsyncDisposable
     {
         System.Threading.Tasks.ValueTask DisposeAsync();
     }
@@ -14,7 +14,7 @@ namespace System
 
 namespace System.Collections.Generic
 {
-    public partial interface IAsyncEnumerable<out T>
+    partial public interface IAsyncEnumerable<out T>
     {
         System.Collections.Generic.IAsyncEnumerator<T> GetAsyncEnumerator(
             System.Threading.CancellationToken cancellationToken =
@@ -22,7 +22,7 @@ namespace System.Collections.Generic
         );
     }
 
-    public partial interface IAsyncEnumerator<out T> : System.IAsyncDisposable
+    partial public interface IAsyncEnumerator<out T> : System.IAsyncDisposable
     {
         T Current { get; }
         System.Threading.Tasks.ValueTask<bool> MoveNextAsync();
@@ -31,7 +31,7 @@ namespace System.Collections.Generic
 
 namespace System.Runtime.CompilerServices
 {
-    public partial struct AsyncIteratorMethodBuilder
+    partial public struct AsyncIteratorMethodBuilder
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -66,14 +66,14 @@ namespace System.Runtime.CompilerServices
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class AsyncIteratorStateMachineAttribute
+    partial public sealed class AsyncIteratorStateMachineAttribute
         : System.Runtime.CompilerServices.StateMachineAttribute
     {
         public AsyncIteratorStateMachineAttribute(System.Type stateMachineType)
             : base(default(System.Type)) { }
     }
 
-    public readonly partial struct ConfiguredAsyncDisposable
+    partial public readonly struct ConfiguredAsyncDisposable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -84,7 +84,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    public readonly partial struct ConfiguredCancelableAsyncEnumerable<T>
+    partial public readonly struct ConfiguredCancelableAsyncEnumerable<T>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -108,7 +108,7 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        public readonly partial struct Enumerator
+        partial public readonly struct Enumerator
         {
             private readonly object _dummy;
             private readonly int _dummyPrimitive;
@@ -130,7 +130,7 @@ namespace System.Runtime.CompilerServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Parameter, Inherited = false)]
-    public sealed partial class EnumeratorCancellationAttribute : System.Attribute
+    partial public sealed class EnumeratorCancellationAttribute : System.Attribute
     {
         public EnumeratorCancellationAttribute() { }
     }
@@ -138,7 +138,7 @@ namespace System.Runtime.CompilerServices
 
 namespace System.Threading.Tasks
 {
-    public static partial class TaskAsyncEnumerableExtensions
+    partial public static class TaskAsyncEnumerableExtensions
     {
         public static System.Runtime.CompilerServices.ConfiguredAsyncDisposable ConfigureAwait(
             this System.IAsyncDisposable source,
@@ -168,7 +168,7 @@ namespace System.Threading.Tasks
 
 namespace System.Threading.Tasks.Sources
 {
-    public partial struct ManualResetValueTaskSourceCore<TResult>
+    partial public struct ManualResetValueTaskSourceCore<TResult>
     {
         private TResult _result;
         private object _dummy;

@@ -21,7 +21,7 @@ using Internal.Reflection.Extensions.NonPortable;
 
 namespace System.Reflection.Runtime.General
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
         // This helper helps reduce the temptation to write "h == default(RuntimeTypeHandle)" which causes boxing.
         public static bool IsNull(this RuntimeTypeHandle h)

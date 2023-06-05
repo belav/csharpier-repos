@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
-    internal readonly partial struct ConflictResolution
+    partial internal readonly struct ConflictResolution
     {
         /// <summary>
         /// A flag indicate if the rename operation is successful or not.

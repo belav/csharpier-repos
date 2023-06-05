@@ -6,8 +6,9 @@ using Xunit;
 
 namespace System.SpanTests
 {
+    partial
     // Adapted from IndexOf.byte.cs
-    public static partial class ReadOnlySpanTests // .Contains<Byte>
+    public static class ReadOnlySpanTests // .Contains<Byte>
     {
         [Fact]
         public static void ZeroLengthContains_Byte()

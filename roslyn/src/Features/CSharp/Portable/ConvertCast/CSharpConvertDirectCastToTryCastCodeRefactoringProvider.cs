@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
         ),
         Shared
     ]
-    internal partial class CSharpConvertDirectCastToTryCastCodeRefactoringProvider
+    partial internal class CSharpConvertDirectCastToTryCastCodeRefactoringProvider
         : AbstractConvertCastCodeRefactoringProvider<
             TypeSyntax,
             CastExpressionSyntax,

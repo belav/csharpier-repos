@@ -10,9 +10,10 @@ using System.Text.Json.Serialization;
 
 namespace System.Text.Json.Tests.SourceGenRegressionTests.Net60
 {
+    partial
     //[JsonSerializable(typeof(WeatherForecastWithPOCOs))]
     //[JsonSerializable(typeof(ClassWithCustomConverter))]
-    public partial class Net60GeneratedContext : JsonSerializerContext { }
+    public class Net60GeneratedContext : JsonSerializerContext { }
 
     public class WeatherForecastWithPOCOs
     {

@@ -6,7 +6,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class MetadataTypeSystemContext : TypeSystemContext
+    partial public abstract class MetadataTypeSystemContext : TypeSystemContext
     {
         private static readonly string[] s_wellKnownTypeNames = new string[]
         {

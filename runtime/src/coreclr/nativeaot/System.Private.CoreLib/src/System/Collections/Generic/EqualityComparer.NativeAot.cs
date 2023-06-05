@@ -10,7 +10,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Collections.Generic
 {
-    public abstract partial class EqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
+    partial public abstract class EqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
     {
         private static EqualityComparer<T> s_default;
 
@@ -48,7 +48,7 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>
+    partial public sealed class EnumEqualityComparer<T> : EqualityComparer<T>
         where T : struct, Enum
     {
         public sealed override bool Equals(T x, T y)

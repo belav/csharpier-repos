@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Tests
 {
-    public partial class RSAKeyExchangeFormatterTests
+    partial public class RSAKeyExchangeFormatterTests
     {
         [Fact]
         public static void RSAOAEPFormatterArguments()

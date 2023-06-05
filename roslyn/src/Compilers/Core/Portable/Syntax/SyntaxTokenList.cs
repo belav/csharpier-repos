@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis
     /// Represents a read-only list of <see cref="SyntaxToken"/>.
     /// </summary>
     [StructLayout(LayoutKind.Auto)]
-    public readonly partial struct SyntaxTokenList
+    partial public readonly struct SyntaxTokenList
         : IEquatable<SyntaxTokenList>,
             IReadOnlyList<SyntaxToken>
     {

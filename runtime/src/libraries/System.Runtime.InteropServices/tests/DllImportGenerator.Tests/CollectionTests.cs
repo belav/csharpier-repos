@@ -14,25 +14,25 @@ namespace DllImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        public partial class Collections
+        partial public class Collections
         {
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int Sum(
+            partial public static int Sum(
                 [MarshalUsing(typeof(ListMarshaller<int>))] List<int> values,
                 int numValues
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int Sum(ref int values, int numValues);
+            partial public static int Sum(ref int values, int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array_ref")]
-            public static partial int SumInArray(
+            partial public static int SumInArray(
                 [MarshalUsing(typeof(ListMarshaller<int>))] in List<int> values,
                 int numValues
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-            public static partial void Duplicate(
+            partial public static void Duplicate(
                 [MarshalUsing(typeof(ListMarshaller<int>), CountElementName = "numValues")]
                     ref List<int> values,
                 int numValues
@@ -40,10 +40,10 @@ namespace DllImportGenerator.IntegrationTests
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "create_range_array")]
             [return: MarshalUsing(typeof(ListMarshaller<int>), CountElementName = "numValues")]
-            public static partial List<int> CreateRange(int start, int end, out int numValues);
+            partial public static List<int> CreateRange(int start, int end, out int numValues);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "create_range_array_out")]
-            public static partial void CreateRange_Out(
+            partial public static void CreateRange_Out(
                 int start,
                 int end,
                 out int numValues,
@@ -52,7 +52,7 @@ namespace DllImportGenerator.IntegrationTests
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "sum_string_lengths")]
-            public static partial int SumStringLengths(
+            partial public static int SumStringLengths(
                 [
                     MarshalUsing(typeof(ListMarshaller<string>)),
                     MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
@@ -61,7 +61,7 @@ namespace DllImportGenerator.IntegrationTests
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_replace")]
-            public static partial void ReverseStrings_Ref(
+            partial public static void ReverseStrings_Ref(
                 [
                     MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"),
                     MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
@@ -75,7 +75,7 @@ namespace DllImportGenerator.IntegrationTests
                 MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"),
                 MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
             ]
-            public static partial List<string> ReverseStrings_Return(
+            partial public static List<string> ReverseStrings_Return(
                 [
                     MarshalUsing(typeof(ListMarshaller<string>), CountElementName = "numElements"),
                     MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
@@ -85,7 +85,7 @@ namespace DllImportGenerator.IntegrationTests
             );
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_out")]
-            public static partial void ReverseStrings_Out(
+            partial public static void ReverseStrings_Out(
                 [
                     MarshalUsing(typeof(ListMarshaller<string>)),
                     MarshalUsing(typeof(Utf16StringMarshaler), ElementIndirectionLevel = 1)
@@ -104,11 +104,11 @@ namespace DllImportGenerator.IntegrationTests
                 typeof(ListMarshaller<byte>),
                 ConstantElementCount = sizeof(long)
             )]
-            public static partial List<byte> GetLongBytes(long l);
+            partial public static List<byte> GetLongBytes(long l);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "and_all_members")]
             [return: MarshalAs(UnmanagedType.U1)]
-            public static partial bool AndAllMembers(
+            partial public static bool AndAllMembers(
                 [MarshalUsing(typeof(ListMarshaller<BoolStruct>))] List<BoolStruct> pArray,
                 int length
             );

@@ -62,7 +62,7 @@ namespace System
         [Pure]
         [System.Security.SecuritySafeCritical] // auto-generated
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static bool IsInfinity(double d)
+        public static unsafe bool IsInfinity(double d)
         {
             return (*(long*)(&d) & 0x7FFFFFFFFFFFFFFF) == 0x7FF0000000000000;
         }
@@ -99,7 +99,7 @@ namespace System
 
         [Pure]
         [System.Security.SecuritySafeCritical] // auto-generated
-        internal unsafe static bool IsNegative(double d)
+        internal static unsafe bool IsNegative(double d)
         {
             return (*(UInt64*)(&d) & 0x8000000000000000) == 0x8000000000000000;
         }
@@ -108,7 +108,7 @@ namespace System
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Security.SecuritySafeCritical]
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static bool IsNaN(double d)
+        public static unsafe bool IsNaN(double d)
         {
             return (*(UInt64*)(&d) & 0x7FFFFFFFFFFFFFFFL) > 0x7FF0000000000000L;
         }
@@ -117,7 +117,7 @@ namespace System
         [Pure]
         [System.Runtime.Versioning.NonVersionable]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public unsafe static bool IsFinite(double d)
+        public static unsafe bool IsFinite(double d)
         {
             var bits = BitConverter.DoubleToInt64Bits(d);
             return (bits & 0x7FFFFFFFFFFFFFFF) < 0x7FF0000000000000;
@@ -238,7 +238,7 @@ namespace System
         //of that double.
         //
         [System.Security.SecuritySafeCritical]
-        public unsafe override int GetHashCode()
+        public override unsafe int GetHashCode()
         {
             double d = m_value;
             if (d == 0)

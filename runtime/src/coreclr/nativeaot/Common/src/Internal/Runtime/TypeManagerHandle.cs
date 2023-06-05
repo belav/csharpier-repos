@@ -6,11 +6,12 @@ using System.Runtime.InteropServices;
 
 namespace Internal.Runtime
 {
+    partial
     /// <summary>
     /// TypeManagerHandle represents an AOT module in MRT based runtimes.
     /// These handles are a pointer to a TypeManager
     /// </summary>
-    public unsafe partial struct TypeManagerHandle
+    public unsafe struct TypeManagerHandle
     {
         private TypeManager* _handleValue;
 

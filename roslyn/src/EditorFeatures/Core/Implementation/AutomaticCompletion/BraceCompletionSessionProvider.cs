@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
     [BracePair(DoubleQuote.OpenCharacter, DoubleQuote.CloseCharacter)]
     [BracePair(Parenthesis.OpenCharacter, Parenthesis.CloseCharacter)]
     [BracePair(LessAndGreaterThan.OpenCharacter, LessAndGreaterThan.CloseCharacter)]
-    internal partial class BraceCompletionSessionProvider
+    partial internal class BraceCompletionSessionProvider
         : ForegroundThreadAffinitizedObject,
             IBraceCompletionSessionProvider
     {

@@ -11,7 +11,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCResolveEntity : TCXMLReaderBaseGeneral
+    partial public abstract class TCResolveEntity : TCXMLReaderBaseGeneral
     {
         [Variation("ResolveEntity On None")]
         public int TestResolveEntityNodeType_None()
@@ -340,7 +340,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCReadAttributeValue : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadAttributeValue : TCXMLReaderBaseGeneral
     {
         private bool VerifyAttribute(string strName, string strValue)
         {

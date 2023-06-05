@@ -9,7 +9,7 @@ namespace System.Drawing.Printing
     /// Represents the exception that is thrown when trying to access a printer using invalid printer settings.
     /// </summary>
     [Serializable]
-    public partial class InvalidPrinterException : SystemException
+    partial public class InvalidPrinterException : SystemException
     {
         private readonly PrinterSettings? _settings;
 

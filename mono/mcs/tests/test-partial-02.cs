@@ -4,27 +4,27 @@ namespace Test1
 {
     public class Base { }
 
-    public partial class Foo : Base { }
+    partial public class Foo : Base { }
 
-    public partial class Foo : Base { }
+    partial public class Foo : Base { }
 }
 
 namespace Test2
 {
     public interface Base { }
 
-    public partial class Foo : Base { }
+    partial public class Foo : Base { }
 
-    public partial class Foo : Base { }
+    partial public class Foo : Base { }
 }
 
-public partial class ReflectedType { }
+partial public class ReflectedType { }
 
 partial class ReflectedType { }
 
 partial class D { }
 
-public partial class D { }
+partial public class D { }
 
 partial class D { }
 

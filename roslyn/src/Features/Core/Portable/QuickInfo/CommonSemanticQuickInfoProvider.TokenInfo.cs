@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.QuickInfo
 {
-    internal abstract partial class CommonSemanticQuickInfoProvider
+    partial internal abstract class CommonSemanticQuickInfoProvider
     {
         public readonly struct TokenInformation
         {

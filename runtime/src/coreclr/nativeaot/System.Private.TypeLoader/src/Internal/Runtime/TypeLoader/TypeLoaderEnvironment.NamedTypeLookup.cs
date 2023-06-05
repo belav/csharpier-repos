@@ -21,7 +21,7 @@ using Internal.TypeSystem;
 
 namespace Internal.Runtime.TypeLoader
 {
-    public sealed partial class TypeLoaderEnvironment
+    partial public sealed class TypeLoaderEnvironment
     {
         private class NamedTypeLookupResult
         {

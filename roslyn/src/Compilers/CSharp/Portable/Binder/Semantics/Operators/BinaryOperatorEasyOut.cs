@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class OverloadResolution
+    partial internal sealed class OverloadResolution
     {
         internal static class BinopEasyOut
         {

@@ -21,7 +21,7 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class ProcessStartInfoTests : ProcessTestBase
+    partial public class ProcessStartInfoTests : ProcessTestBase
     {
         private const string ItemSeparator = "CAFF9451396B4EEF8A5155A15BDC2080"; // random string that shouldn't be in any env vars; used instead of newline to separate env var strings
 

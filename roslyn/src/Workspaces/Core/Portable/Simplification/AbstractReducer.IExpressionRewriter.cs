@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.Simplification
 {
-    internal abstract partial class AbstractReducer
+    partial internal abstract class AbstractReducer
     {
         internal interface IReductionRewriter : IDisposable
         {

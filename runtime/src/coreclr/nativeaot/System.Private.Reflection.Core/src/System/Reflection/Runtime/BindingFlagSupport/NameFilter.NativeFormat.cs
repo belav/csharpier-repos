@@ -6,12 +6,12 @@ using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.BindingFlagSupport
 {
-    internal abstract partial class NameFilter
+    partial internal abstract class NameFilter
     {
         public abstract bool Matches(ConstantStringValueHandle stringHandle, MetadataReader reader);
     }
 
-    internal sealed partial class NameFilterCaseSensitive : NameFilter
+    partial internal sealed class NameFilterCaseSensitive : NameFilter
     {
         public sealed override bool Matches(
             ConstantStringValueHandle stringHandle,
@@ -19,7 +19,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         ) => stringHandle.StringEquals(ExpectedName, reader);
     }
 
-    internal sealed partial class NameFilterCaseInsensitive : NameFilter
+    partial internal sealed class NameFilterCaseInsensitive : NameFilter
     {
         public sealed override bool Matches(
             ConstantStringValueHandle stringHandle,

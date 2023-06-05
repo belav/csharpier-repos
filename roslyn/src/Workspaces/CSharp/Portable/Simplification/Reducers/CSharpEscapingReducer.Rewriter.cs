@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
-    internal partial class CSharpEscapingReducer
+    partial internal class CSharpEscapingReducer
     {
         private class Rewriter : AbstractReductionRewriter
         {

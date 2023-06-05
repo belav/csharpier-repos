@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class SystemAcl_Purge
+    partial public class SystemAcl_Purge
     {
         [Fact]
         public static void BasicValidationTestCases()

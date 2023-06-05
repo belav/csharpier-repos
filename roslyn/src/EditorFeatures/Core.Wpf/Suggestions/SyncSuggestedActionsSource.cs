@@ -10,9 +10,9 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
-    internal partial class SuggestedActionsSourceProvider
+    partial internal class SuggestedActionsSourceProvider
     {
-        private partial class SyncSuggestedActionsSource : SuggestedActionsSource
+        partial private class SyncSuggestedActionsSource : SuggestedActionsSource
         {
             public SyncSuggestedActionsSource(
                 IThreadingContext threadingContext,

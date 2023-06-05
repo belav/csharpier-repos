@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public sealed partial class CrefParameterSyntax
+    partial public sealed class CrefParameterSyntax
     {
         /// <summary>
         /// Pre C# 7.2 back-compat overload, which simply calls the replacement property <see cref="RefKindKeyword"/>.

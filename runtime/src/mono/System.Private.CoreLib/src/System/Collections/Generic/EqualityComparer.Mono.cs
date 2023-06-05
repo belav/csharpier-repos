@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace System.Collections.Generic
 {
-    public partial class EqualityComparer<T>
+    partial public class EqualityComparer<T>
     {
         private static volatile EqualityComparer<T>? defaultComparer;
 
@@ -77,7 +77,7 @@ namespace System.Collections.Generic
         }
     }
 
-    public partial class EnumEqualityComparer<T>
+    partial public class EnumEqualityComparer<T>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(T x, T y) => JitHelpers.EnumEquals(x, y);

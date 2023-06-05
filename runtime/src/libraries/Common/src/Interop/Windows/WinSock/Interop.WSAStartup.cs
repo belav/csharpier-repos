@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 using System.Net.Sockets;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         private static int s_initialized;
 
@@ -44,13 +44,13 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Ws2_32)]
-        private static unsafe partial SocketError WSAStartup(
+        partial private static unsafe SocketError WSAStartup(
             short wVersionRequested,
             WSAData* lpWSAData
         );
 
         [LibraryImport(Libraries.Ws2_32)]
-        private static partial SocketError WSACleanup();
+        partial private static SocketError WSACleanup();
 
         [StructLayout(LayoutKind.Sequential, Size = 408)]
         private struct WSAData

@@ -7,7 +7,7 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class CatalogExportProvider
+    partial public class CatalogExportProvider
     {
         internal class ScopeManager : ExportProvider
         {

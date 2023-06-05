@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
     >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
-    public partial class UseTupleSwapTests
+    partial public class UseTupleSwapTests
     {
         [Fact]
         public async Task TestMissingBeforeCSharp7()

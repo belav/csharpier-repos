@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class FileVersionInfoTest : FileCleanupTestBase
+    partial public class FileVersionInfoTest : FileCleanupTestBase
     {
         private const string TestAssemblyFileName =
             "System.Diagnostics.FileVersionInfo.TestAssembly.dll";

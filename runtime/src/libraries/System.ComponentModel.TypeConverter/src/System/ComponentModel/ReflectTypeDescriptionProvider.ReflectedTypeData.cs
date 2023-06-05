@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace System.ComponentModel
 {
-    internal sealed partial class ReflectTypeDescriptionProvider : TypeDescriptionProvider
+    partial internal sealed class ReflectTypeDescriptionProvider : TypeDescriptionProvider
     {
         /// <summary>
         /// This class contains all the reflection information for a

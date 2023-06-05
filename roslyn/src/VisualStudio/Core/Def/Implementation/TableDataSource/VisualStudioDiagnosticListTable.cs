@@ -23,7 +23,7 @@ using Microsoft.VisualStudio.Shell.TableManager;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     [ExportEventListener(WellKnownEventListeners.DiagnosticService, WorkspaceKind.Host), Shared]
-    internal partial class VisualStudioDiagnosticListTableWorkspaceEventListener
+    partial internal class VisualStudioDiagnosticListTableWorkspaceEventListener
         : IEventListener<IDiagnosticService>
     {
         internal const string IdentifierString = nameof(VisualStudioDiagnosticListTable);
@@ -79,7 +79,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             );
         }
 
-        internal partial class VisualStudioDiagnosticListTable : VisualStudioBaseDiagnosticListTable
+        partial internal class VisualStudioDiagnosticListTable : VisualStudioBaseDiagnosticListTable
         {
             private readonly LiveTableDataSource _liveTableSource;
             private readonly BuildTableDataSource _buildTableSource;

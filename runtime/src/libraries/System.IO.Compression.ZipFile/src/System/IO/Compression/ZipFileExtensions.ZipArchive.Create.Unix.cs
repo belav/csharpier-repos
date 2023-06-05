@@ -7,9 +7,9 @@ using static System.IO.Compression.ZipArchiveEntryConstants;
 
 namespace System.IO.Compression
 {
-    public static partial class ZipFileExtensions
+    partial public static class ZipFileExtensions
     {
-        static partial void SetExternalAttributes(FileStream fs, ZipArchiveEntry entry)
+        partial static void SetExternalAttributes(FileStream fs, ZipArchiveEntry entry)
         {
             Debug.Assert(!OperatingSystem.IsWindows());
 

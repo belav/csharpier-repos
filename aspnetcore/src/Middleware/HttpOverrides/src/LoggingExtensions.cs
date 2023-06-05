@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(
         0,
@@ -11,5 +11,5 @@ internal static partial class LoggingExtensions
         "Could not read certificate from header.",
         EventName = "NoCertificate"
     )]
-    public static partial void NoCertificate(this ILogger logger, Exception exception);
+    partial public static void NoCertificate(this ILogger logger, Exception exception);
 }

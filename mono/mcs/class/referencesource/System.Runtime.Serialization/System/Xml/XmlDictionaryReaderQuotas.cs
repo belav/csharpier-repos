@@ -77,7 +77,7 @@ namespace System.Xml
             MakeReadOnly();
         }
 
-        static public XmlDictionaryReaderQuotas Max
+        public static XmlDictionaryReaderQuotas Max
         {
             get { return maxQuota; }
         }

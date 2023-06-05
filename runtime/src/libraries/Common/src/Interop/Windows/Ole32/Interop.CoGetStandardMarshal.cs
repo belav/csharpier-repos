@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         [LibraryImport(Interop.Libraries.Ole32)]
-        internal static partial int CoGetStandardMarshal(
+        partial internal static int CoGetStandardMarshal(
             ref Guid riid,
             IntPtr pv,
             int dwDestContext,

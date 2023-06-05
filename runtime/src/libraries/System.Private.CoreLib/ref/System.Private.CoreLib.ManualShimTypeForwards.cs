@@ -6,7 +6,7 @@
 
 namespace System
 {
-    public sealed partial class CultureAwareComparer
+    partial public sealed class CultureAwareComparer
         : System.StringComparer,
             System.Runtime.Serialization.ISerializable
     {
@@ -45,7 +45,7 @@ namespace System
         ) { }
     }
 
-    public partial class OrdinalComparer : System.StringComparer
+    partial public class OrdinalComparer : System.StringComparer
     {
         internal OrdinalComparer() { }
 
@@ -77,7 +77,7 @@ namespace System
         }
     }
 
-    public sealed partial class UnitySerializationHolder
+    partial public sealed class UnitySerializationHolder
         : System.Runtime.Serialization.IObjectReference,
             System.Runtime.Serialization.ISerializable
     {
@@ -100,7 +100,7 @@ namespace System
 
 namespace System.Collections
 {
-    public partial class ListDictionaryInternal
+    partial public class ListDictionaryInternal
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable
@@ -168,7 +168,7 @@ namespace System.Collections
 
 namespace System.Collections.Generic
 {
-    public sealed partial class ByteEqualityComparer
+    partial public sealed class ByteEqualityComparer
         : System.Collections.Generic.EqualityComparer<byte>
     {
         public ByteEqualityComparer() { }
@@ -196,7 +196,7 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class EnumEqualityComparer<T>
+    partial public sealed class EnumEqualityComparer<T>
         : System.Collections.Generic.EqualityComparer<T>,
             System.Runtime.Serialization.ISerializable
         where T : struct
@@ -231,7 +231,7 @@ namespace System.Collections.Generic
         ) { }
     }
 
-    public sealed partial class GenericComparer<T> : System.Collections.Generic.Comparer<T>
+    partial public sealed class GenericComparer<T> : System.Collections.Generic.Comparer<T>
         where T : System.IComparable<T>
     {
         public GenericComparer() { }
@@ -254,7 +254,7 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class GenericEqualityComparer<T>
+    partial public sealed class GenericEqualityComparer<T>
         : System.Collections.Generic.EqualityComparer<T>
         where T : System.IEquatable<T>
     {
@@ -285,7 +285,7 @@ namespace System.Collections.Generic
         }
     }
 
-    public partial class NonRandomizedStringEqualityComparer
+    partial public class NonRandomizedStringEqualityComparer
         : System.Collections.Generic.IEqualityComparer<string?>,
             System.Runtime.Serialization.ISerializable
     {
@@ -322,7 +322,7 @@ namespace System.Collections.Generic
         ) { }
     }
 
-    public sealed partial class NullableComparer<T>
+    partial public sealed class NullableComparer<T>
         : System.Collections.Generic.Comparer<T?>,
             System.Runtime.Serialization.ISerializable
         where T : struct
@@ -352,7 +352,7 @@ namespace System.Collections.Generic
         ) { }
     }
 
-    public sealed partial class NullableEqualityComparer<T>
+    partial public sealed class NullableEqualityComparer<T>
         : System.Collections.Generic.EqualityComparer<T?>,
             System.Runtime.Serialization.ISerializable
         where T : struct
@@ -387,7 +387,7 @@ namespace System.Collections.Generic
         ) { }
     }
 
-    public sealed partial class ObjectComparer<T> : System.Collections.Generic.Comparer<T>
+    partial public sealed class ObjectComparer<T> : System.Collections.Generic.Comparer<T>
     {
         public ObjectComparer() { }
 
@@ -409,7 +409,7 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class ObjectEqualityComparer<T>
+    partial public sealed class ObjectEqualityComparer<T>
         : System.Collections.Generic.EqualityComparer<T>
     {
         public ObjectEqualityComparer() { }
@@ -442,7 +442,7 @@ namespace System.Collections.Generic
 
 namespace System.Diagnostics.Contracts
 {
-    public sealed partial class ContractException : System.Exception
+    partial public sealed class ContractException : System.Exception
     {
         public ContractException(
             System.Diagnostics.Contracts.ContractFailureKind kind,

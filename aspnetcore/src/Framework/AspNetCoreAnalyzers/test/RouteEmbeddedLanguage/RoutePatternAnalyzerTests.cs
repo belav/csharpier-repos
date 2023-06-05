@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
-public partial class RoutePatternAnalyzerTests
+partial public class RoutePatternAnalyzerTests
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new RoutePatternAnalyzer());
 

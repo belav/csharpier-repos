@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NtDll
+    partial internal static class NtDll
     {
         // https://msdn.microsoft.com/en-us/library/windows/hardware/ff556633.aspx
         // https://msdn.microsoft.com/en-us/library/windows/hardware/ff567047.aspx
         [LibraryImport(Libraries.NtDll)]
-        public static unsafe partial int NtQueryDirectoryFile(
+        partial public static unsafe int NtQueryDirectoryFile(
             IntPtr FileHandle,
             IntPtr Event,
             IntPtr ApcRoutine,

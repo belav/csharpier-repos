@@ -7,13 +7,14 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32.SafeHandles
 {
+    partial
     /// <summary>
     /// This class is a wrapper around the EventStream and Create pattern.
     /// Usually, the Create pattern has the caller call Create* to allocate
     /// and CFRelease to free; however, FSEventStream has it's own release
     /// function, so we need to extend the pattern to account for that.
     /// </summary>
-    internal sealed partial class SafeEventStreamHandle : SafeHandle
+    internal sealed class SafeEventStreamHandle : SafeHandle
     {
         public SafeEventStreamHandle()
             : base(IntPtr.Zero, true) { }

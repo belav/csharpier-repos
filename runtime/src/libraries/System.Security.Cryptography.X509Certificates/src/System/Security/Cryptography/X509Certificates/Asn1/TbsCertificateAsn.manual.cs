@@ -6,6 +6,7 @@ using System.Security.Cryptography.Asn1;
 
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
+    partial
     // https://tools.ietf.org/html/rfc5280#section-4.1
     //
     // TBSCertificate  ::=  SEQUENCE  {
@@ -23,7 +24,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
     //     extensions      [3]  Extensions OPTIONAL
     //                          -- If present, version MUST be v3 --
     // }
-    internal partial struct TbsCertificateAsn
+    internal struct TbsCertificateAsn
     {
         /// <summary>
         /// Validate semantics by the specified version.

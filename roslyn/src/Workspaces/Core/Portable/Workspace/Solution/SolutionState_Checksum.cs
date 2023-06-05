@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class SolutionState
+    partial internal class SolutionState
     {
         public bool TryGetStateChecksums(
             [NotNullWhen(true)] out SolutionStateChecksums? stateChecksums

@@ -7,7 +7,7 @@ using System.Net.Security;
 
 namespace System.Net
 {
-    internal sealed partial class NetEventSource
+    partial internal sealed class NetEventSource
     {
         private const int EnumerateSecurityPackagesId = NextAvailableEventId;
         private const int SspiPackageNotFoundId = EnumerateSecurityPackagesId + 1;

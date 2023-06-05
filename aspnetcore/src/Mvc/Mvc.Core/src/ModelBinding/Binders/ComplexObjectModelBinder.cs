@@ -12,10 +12,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+partial
 /// <summary>
 /// <see cref="IModelBinder"/> implementation for binding complex types.
 /// </summary>
-public sealed partial class ComplexObjectModelBinder : IModelBinder
+public sealed class ComplexObjectModelBinder : IModelBinder
 {
     // Don't want a new public enum because communication between the private and internal methods of this class
     // should not be exposed. Can't use an internal enum because types of [TheoryData] values must be public.
@@ -835,7 +836,7 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             17,
@@ -844,7 +845,7 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
                 + "public settable properties or constructor parameters.",
             EventName = "NoPublicSettableItems"
         )]
-        public static partial void NoPublicSettableItems(
+        partial public static void NoPublicSettableItems(
             ILogger logger,
             string modelName,
             Type modelType
@@ -866,6 +867,6 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
             "Could not bind to model of type '{ModelType}' as there were no values in the request for any of the properties.",
             EventName = "CannotBindToComplexType"
         )]
-        private static partial void CannotBindToComplexType(ILogger logger, Type modelType);
+        partial private static void CannotBindToComplexType(ILogger logger, Type modelType);
     }
 }

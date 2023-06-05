@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Authz
+    partial internal static class Authz
     {
         internal const int AUTHZ_RM_FLAG_NO_AUDIT = 0x1;
         internal const int AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION = 0x2;
@@ -16,7 +16,7 @@ internal static partial class Interop
 
         [LibraryImport(Interop.Libraries.Authz, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool AuthzInitializeContextFromSid(
+        partial internal static bool AuthzInitializeContextFromSid(
             int Flags,
             IntPtr UserSid,
             IntPtr AuthzResourceManager,
@@ -28,6 +28,6 @@ internal static partial class Interop
 
         [LibraryImport(Interop.Libraries.Authz)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool AuthzFreeContext(IntPtr AuthzClientContext);
+        partial internal static bool AuthzFreeContext(IntPtr AuthzClientContext);
     }
 }

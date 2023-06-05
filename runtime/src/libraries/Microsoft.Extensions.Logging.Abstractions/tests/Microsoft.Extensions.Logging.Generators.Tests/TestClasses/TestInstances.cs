@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
-    public partial class TestInstances
+    partial public class TestInstances
     {
         private readonly ILogger _myLogger;
 
@@ -13,9 +13,9 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         }
 
         [LoggerMessage(EventId = 0, Level = LogLevel.Error, Message = "M0")]
-        public partial void M0();
+        partial public void M0();
 
         [LoggerMessage(EventId = 1, Level = LogLevel.Trace, Message = "M1 {p1}")]
-        public partial void M1(string p1);
+        partial public void M1(string p1);
     }
 }

@@ -79,7 +79,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
             return header;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return $"{{ Magic={Magic}; Size={Size}; CommandSet={CommandSet}; CommandId={CommandId}; Reserved={Reserved} }}";
         }

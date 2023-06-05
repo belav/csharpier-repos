@@ -552,7 +552,7 @@ namespace DebuggerTests
             bool stop = true;
         }
 
-        public async static Task RunAsync()
+        public static async Task RunAsync()
         {
             await Task.FromResult(0);
         }

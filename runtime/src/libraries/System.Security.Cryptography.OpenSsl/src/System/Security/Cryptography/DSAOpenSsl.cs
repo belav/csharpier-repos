@@ -5,7 +5,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class DSAOpenSsl : DSA
+    partial public sealed class DSAOpenSsl : DSA
     {
         public DSAOpenSsl(DSAParameters parameters)
         {
@@ -93,7 +93,7 @@ namespace System.Security.Cryptography
             }
         }
 
-        static partial void ThrowIfNotSupported()
+        partial static void ThrowIfNotSupported()
         {
             if (!Interop.OpenSslNoInit.OpenSslIsAvailable)
             {

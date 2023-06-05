@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal static partial class RequestContextLog
+partial internal static class RequestContextLog
 {
     [LoggerMessage(
         LoggerEventIds.RequestError,
@@ -13,7 +13,7 @@ internal static partial class RequestContextLog
         "ProcessRequestAsync",
         EventName = "RequestError"
     )]
-    public static partial void RequestError(ILogger logger, Exception exception);
+    partial public static void RequestError(ILogger logger, Exception exception);
 
     [LoggerMessage(
         LoggerEventIds.RequestProcessError,
@@ -21,7 +21,7 @@ internal static partial class RequestContextLog
         "ProcessRequestAsync",
         EventName = "RequestProcessError"
     )]
-    public static partial void RequestProcessError(ILogger logger, Exception exception);
+    partial public static void RequestProcessError(ILogger logger, Exception exception);
 
     [LoggerMessage(
         LoggerEventIds.RequestsDrained,
@@ -29,5 +29,5 @@ internal static partial class RequestContextLog
         "All requests drained.",
         EventName = "RequestsDrained"
     )]
-    public static partial void RequestsDrained(ILogger logger);
+    partial public static void RequestsDrained(ILogger logger);
 }

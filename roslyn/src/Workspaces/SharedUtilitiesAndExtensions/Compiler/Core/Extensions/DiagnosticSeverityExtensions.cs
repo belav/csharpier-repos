@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal static partial class DiagnosticSeverityExtensions
+    partial internal static class DiagnosticSeverityExtensions
     {
         /// <summary>
         /// Returns the equivalent <see cref="ReportDiagnostic"/> for a <see cref="DiagnosticSeverity"/> value.

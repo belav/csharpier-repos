@@ -26,9 +26,10 @@ namespace System.Data.SqlClient
 
     using MSS = Microsoft.SqlServer.Server;
 
+    internal
     // The TdsParser Object controls reading/writing to the netlib, parsing the tds,
     // and surfacing objects to the user.
-    sealed internal class TdsParser
+    sealed class TdsParser
     {
         private static int _objectTypeCount; // Bid counter
         internal readonly int _objectID = System.Threading.Interlocked.Increment(
@@ -222,7 +223,7 @@ namespace System.Data.SqlClient
         // SSPI variables
         private static bool s_fSSPILoaded = false; // bool to indicate whether library has been loaded
 
-        private volatile static UInt32 s_maxSSPILength = 0; // variable to hold max SSPI data size, keep for token from server
+        private static volatile UInt32 s_maxSSPILength = 0; // variable to hold max SSPI data size, keep for token from server
 
         // ADAL variables
         private static bool s_fADALLoaded = false; // bool to indicate whether ADAL library has been loaded
@@ -8564,7 +8565,7 @@ namespace System.Data.SqlClient
             return true;
         }
 
-        static internal SqlDecimal AdjustSqlDecimalScale(SqlDecimal d, int newScale)
+        internal static SqlDecimal AdjustSqlDecimalScale(SqlDecimal d, int newScale)
         {
             if (d.Scale != newScale)
             {
@@ -8578,7 +8579,7 @@ namespace System.Data.SqlClient
             return d;
         }
 
-        static internal decimal AdjustDecimalScale(decimal value, int newScale)
+        internal static decimal AdjustDecimalScale(decimal value, int newScale)
         {
             int oldScale = (Decimal.GetBits(value)[3] & 0x00ff0000) >> 0x10;
 
@@ -8839,7 +8840,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        private unsafe static void CopyCharsToBytes(
+        private static unsafe void CopyCharsToBytes(
             char[] source,
             int sourceOffset,
             byte[] dest,
@@ -8881,7 +8882,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        private unsafe static void CopyStringToBytes(
+        private static unsafe void CopyStringToBytes(
             string source,
             int sourceOffset,
             byte[] dest,
@@ -9213,7 +9214,7 @@ namespace System.Data.SqlClient
             );
         }
 
-        static private int StateValueLength(int dataLen)
+        private static int StateValueLength(int dataLen)
         {
             return dataLen < 0xFF ? (dataLen + 1) : (dataLen + 5);
         }

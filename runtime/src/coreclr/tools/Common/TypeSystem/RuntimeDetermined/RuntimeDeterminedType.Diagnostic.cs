@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class RuntimeDeterminedType
+    partial public class RuntimeDeterminedType
     {
         public override string DiagnosticName
         {

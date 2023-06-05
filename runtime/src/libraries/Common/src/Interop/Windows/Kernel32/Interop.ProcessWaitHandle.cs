@@ -6,9 +6,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal sealed class ProcessWaitHandle : WaitHandle
         {

@@ -11,7 +11,7 @@ using BCRYPT_OAEP_PADDING_INFO = Interop.BCrypt.BCRYPT_OAEP_PADDING_INFO;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSACng : RSA
+    partial public sealed class RSACng : RSA
     {
         private const int Pkcs1PaddingOverhead = 11;
         private const int StatusUnsuccessfulRetryCount = 1;

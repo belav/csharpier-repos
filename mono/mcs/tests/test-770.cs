@@ -20,7 +20,7 @@ public class MyClass
         }
     }
 
-    static public void Main()
+    public static void Main()
     {
         C myclass = new C();
         myclass.MouseClick();

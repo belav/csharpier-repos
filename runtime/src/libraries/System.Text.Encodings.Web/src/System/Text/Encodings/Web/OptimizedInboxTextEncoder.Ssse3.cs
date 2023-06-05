@@ -8,7 +8,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Text.Encodings.Web
 {
-    internal sealed partial class OptimizedInboxTextEncoder
+    partial internal sealed class OptimizedInboxTextEncoder
     {
         private unsafe nuint GetIndexOfFirstByteToEncodeSsse3(byte* pData, nuint lengthInBytes)
         {

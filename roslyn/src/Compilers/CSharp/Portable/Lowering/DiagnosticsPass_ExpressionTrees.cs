@@ -11,12 +11,13 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This pass detects and reports diagnostics that do not affect lambda convertibility.
     /// This part of the partial class focuses on features that cannot be used in expression trees.
     /// CAVEAT: Errors may be produced for ObsoleteAttribute, but such errors don't affect lambda convertibility.
     /// </summary>
-    internal sealed partial class DiagnosticsPass
+    internal sealed class DiagnosticsPass
     {
         private readonly BindingDiagnosticBag _diagnostics;
         private readonly CSharpCompilation _compilation;

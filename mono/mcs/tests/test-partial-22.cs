@@ -1,6 +1,6 @@
 partial class C
 {
-    static partial void Partial(int i);
+    partial static void Partial(int i);
 
     public static int Main()
     {

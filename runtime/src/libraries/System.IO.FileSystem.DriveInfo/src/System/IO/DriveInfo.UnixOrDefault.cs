@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 
 namespace System.IO
 {
-    public sealed partial class DriveInfo
+    partial public sealed class DriveInfo
     {
         public static DriveInfo[] GetDrives()
         {

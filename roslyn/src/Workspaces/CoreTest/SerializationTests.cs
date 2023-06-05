@@ -20,7 +20,7 @@ using CS = Microsoft.CodeAnalysis.CSharp;
 namespace Microsoft.CodeAnalysis.UnitTests
 {
     [UseExportProvider]
-    public partial class SerializationTests : TestBase
+    partial public class SerializationTests : TestBase
     {
         private static Document CreateSolutionDocument(string sourceText)
         {

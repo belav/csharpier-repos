@@ -10,8 +10,9 @@ using System.Runtime.ExceptionServices;
 
 namespace System.Linq.Expressions.Interpreter
 {
+    partial
 #if FEATURE_MAKE_RUN_METHODS
-    internal static partial class DelegateHelpers
+    internal static class DelegateHelpers
     {
         private const int MaximumArity = 17;
 

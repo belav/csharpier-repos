@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {
-    internal static partial class SafeNativeMethods
+    partial internal static class SafeNativeMethods
     {
-        internal unsafe partial class Gdip
+        partial internal unsafe class Gdip
         {
             internal const string LibraryName = "libgdiplus";
             public static IntPtr Display = IntPtr.Zero;

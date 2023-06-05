@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class MissingMemberException : MemberAccessException, ISerializable
+    partial public class MissingMemberException : MemberAccessException, ISerializable
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern string FormatSignature(byte[]? signature);

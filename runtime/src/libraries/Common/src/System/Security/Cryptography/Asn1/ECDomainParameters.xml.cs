@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct ECDomainParameters
+    partial internal struct ECDomainParameters
     {
         internal System.Security.Cryptography.Asn1.SpecifiedECDomain? Specified;
         internal string? Named;

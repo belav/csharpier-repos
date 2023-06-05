@@ -6,10 +6,11 @@ using System.Diagnostics;
 
 namespace Microsoft.Extensions.Logging.Debug
 {
+    partial
     /// <summary>
     /// A logger that writes messages in the debug output window only when a debugger is attached.
     /// </summary>
-    internal sealed partial class DebugLogger : ILogger
+    internal sealed class DebugLogger : ILogger
     {
         private readonly string _name;
 

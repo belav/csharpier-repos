@@ -6,7 +6,7 @@
 
 namespace System.Net
 {
-    public partial class AuthenticationManager
+    partial public class AuthenticationManager
     {
         internal AuthenticationManager() { }
 
@@ -58,7 +58,7 @@ namespace System.Net
         public static void Unregister(string authenticationScheme) { }
     }
 
-    public partial class Authorization
+    partial public class Authorization
     {
         public Authorization(string? token) { }
 
@@ -90,7 +90,7 @@ namespace System.Net
         }
     }
 
-    public partial class FileWebRequest
+    partial public class FileWebRequest
         : System.Net.WebRequest,
             System.Runtime.Serialization.ISerializable
     {
@@ -215,7 +215,7 @@ namespace System.Net
         ) { }
     }
 
-    public partial class FileWebResponse
+    partial public class FileWebResponse
         : System.Net.WebResponse,
             System.Runtime.Serialization.ISerializable
     {
@@ -307,7 +307,7 @@ namespace System.Net
         ActionNotTakenFilenameNotAllowed = 553,
     }
 
-    public sealed partial class FtpWebRequest : System.Net.WebRequest
+    partial public sealed class FtpWebRequest : System.Net.WebRequest
     {
         internal FtpWebRequest() { }
 
@@ -458,7 +458,7 @@ namespace System.Net
         }
     }
 
-    public partial class FtpWebResponse : System.Net.WebResponse, System.IDisposable
+    partial public class FtpWebResponse : System.Net.WebResponse, System.IDisposable
     {
         internal FtpWebResponse() { }
 
@@ -514,7 +514,7 @@ namespace System.Net
     [System.ObsoleteAttribute(
         "GlobalProxySelection has been deprecated. Use WebRequest.DefaultWebProxy instead to access and set the global default proxy. Use 'null' instead of GetEmptyWebProxy."
     )]
-    public partial class GlobalProxySelection
+    partial public class GlobalProxySelection
     {
         public GlobalProxySelection() { }
 
@@ -536,7 +536,7 @@ namespace System.Net
         System.Net.WebHeaderCollection httpHeaders
     );
 
-    public partial class HttpWebRequest
+    partial public class HttpWebRequest
         : System.Net.WebRequest,
             System.Runtime.Serialization.ISerializable
     {
@@ -851,7 +851,7 @@ namespace System.Net
         ) { }
     }
 
-    public partial class HttpWebResponse
+    partial public class HttpWebResponse
         : System.Net.WebResponse,
             System.Runtime.Serialization.ISerializable
     {
@@ -959,7 +959,7 @@ namespace System.Net
         ) { }
     }
 
-    public partial interface IAuthenticationModule
+    partial public interface IAuthenticationModule
     {
         string AuthenticationType { get; }
         bool CanPreAuthenticate { get; }
@@ -974,7 +974,7 @@ namespace System.Net
         );
     }
 
-    public partial interface ICredentialPolicy
+    partial public interface ICredentialPolicy
     {
         bool ShouldSendCredential(
             System.Uri challengeUri,
@@ -984,12 +984,12 @@ namespace System.Net
         );
     }
 
-    public partial interface IWebRequestCreate
+    partial public interface IWebRequestCreate
     {
         System.Net.WebRequest Create(System.Uri uri);
     }
 
-    public partial class ProtocolViolationException
+    partial public class ProtocolViolationException
         : System.InvalidOperationException,
             System.Runtime.Serialization.ISerializable
     {
@@ -1013,7 +1013,7 @@ namespace System.Net
         ) { }
     }
 
-    public partial class WebException
+    partial public class WebException
         : System.InvalidOperationException,
             System.Runtime.Serialization.ISerializable
     {
@@ -1082,7 +1082,7 @@ namespace System.Net
         RequestProhibitedByProxy = 20,
     }
 
-    public abstract partial class WebRequest
+    partial public abstract class WebRequest
         : System.MarshalByRefObject,
             System.Runtime.Serialization.ISerializable
     {
@@ -1306,15 +1306,15 @@ namespace System.Net
         ) { }
     }
 
-    public static partial class WebRequestMethods
+    partial public static class WebRequestMethods
     {
-        public static partial class File
+        partial public static class File
         {
             public const string DownloadFile = "GET";
             public const string UploadFile = "PUT";
         }
 
-        public static partial class Ftp
+        partial public static class Ftp
         {
             public const string AppendFile = "APPE";
             public const string DeleteFile = "DELE";
@@ -1331,7 +1331,7 @@ namespace System.Net
             public const string UploadFileWithUniqueName = "STOU";
         }
 
-        public static partial class Http
+        partial public static class Http
         {
             public const string Connect = "CONNECT";
             public const string Get = "GET";
@@ -1342,7 +1342,7 @@ namespace System.Net
         }
     }
 
-    public abstract partial class WebResponse
+    partial public abstract class WebResponse
         : System.MarshalByRefObject,
             System.IDisposable,
             System.Runtime.Serialization.ISerializable
@@ -1436,7 +1436,7 @@ namespace System.Net.Cache
         Refresh = 8,
     }
 
-    public partial class HttpRequestCachePolicy : System.Net.Cache.RequestCachePolicy
+    partial public class HttpRequestCachePolicy : System.Net.Cache.RequestCachePolicy
     {
         public HttpRequestCachePolicy() { }
 

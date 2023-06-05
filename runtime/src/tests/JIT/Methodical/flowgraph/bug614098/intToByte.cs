@@ -33,7 +33,7 @@ namespace Test_intToByte_cs
             }
         };
 
-        static private MyStruct[] s_myObjects = { new MyStruct(0x0100) };
+        private static MyStruct[] s_myObjects = { new MyStruct(0x0100) };
 
         [Fact]
         public static int TestEntryPoint()

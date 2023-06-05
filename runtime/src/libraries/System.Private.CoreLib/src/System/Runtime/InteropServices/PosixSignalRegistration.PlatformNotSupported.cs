@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Runtime.InteropServices
 {
-    public sealed partial class PosixSignalRegistration
+    partial public sealed class PosixSignalRegistration
     {
         private PosixSignalRegistration() { }
 

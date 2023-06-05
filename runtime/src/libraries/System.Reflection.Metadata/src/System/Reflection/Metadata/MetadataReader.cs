@@ -10,10 +10,11 @@ using System.Text;
 
 namespace System.Reflection.Metadata
 {
+    partial
     /// <summary>
     /// Reads metadata as defined byte the ECMA 335 CLI specification.
     /// </summary>
-    public sealed partial class MetadataReader
+    public sealed class MetadataReader
     {
         internal readonly NamespaceCache NamespaceCache;
         internal readonly MemoryBlock Block;

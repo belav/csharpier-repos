@@ -58,10 +58,11 @@ namespace System
         //      KeepTailLWS             = 0x8000000,
     }
 
+    partial
     //
     // Only internal members are included here
     //
-    public abstract partial class UriParser
+    public abstract class UriParser
     {
         private static readonly Dictionary<String, UriParser> m_Table;
         private static Dictionary<String, UriParser> m_TempTable;

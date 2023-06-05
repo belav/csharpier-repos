@@ -15,11 +15,12 @@ using Moq.Properties;
 
 namespace Moq
 {
+    partial
     /// <summary>
     ///   Base class for mocks and static helper class with methods that apply to mocked objects,
     ///   such as <see cref="Get"/> to retrieve a <see cref="Mock{T}"/> from an object instance.
     /// </summary>
-    public abstract partial class Mock : IFluentInterface
+    public abstract class Mock : IFluentInterface
     {
         internal static readonly MethodInfo GetMethod = typeof(Mock).GetMethod(
             nameof(Get),

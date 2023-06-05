@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace System.Formats.Asn1
 {
-    public sealed partial class AsnWriter
+    partial public sealed class AsnWriter
     {
         /// <summary>
         ///   Write the provided string using the specified encoding type using the specified

@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.NameTableTests
 {
-    public partial class TCUserNameTable : CTestCase
+    partial public class TCUserNameTable : CTestCase
     {
         // Type is NameTableTest.TCUserNameTable
         // Test Case

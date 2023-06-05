@@ -12,11 +12,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This pass detects and reports diagnostics that do not affect lambda convertibility.
     /// This part of the partial class focuses on expression and operator warnings.
     /// </summary>
-    internal sealed partial class DiagnosticsPass : BoundTreeWalkerWithStackGuard
+    internal sealed class DiagnosticsPass : BoundTreeWalkerWithStackGuard
     {
         private void CheckArguments(
             ImmutableArray<RefKind> argumentRefKindsOpt,

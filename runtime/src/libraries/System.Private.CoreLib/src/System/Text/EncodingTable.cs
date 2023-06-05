@@ -8,12 +8,13 @@ using System.Threading;
 
 namespace System.Text
 {
+    partial
     //
     // Data table for encoding classes.  Used by System.Text.Encoding.
     // This class contains two hashtables to allow System.Text.Encoding
     // to retrieve the data item either by codepage value or by webName.
     //
-    internal static partial class EncodingTable
+    internal static class EncodingTable
     {
         private static readonly Hashtable s_nameToCodePage = Hashtable.Synchronized(
             new Hashtable(StringComparer.OrdinalIgnoreCase)

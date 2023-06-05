@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class FunctionPointerTypeSymbol : TypeSymbol
+    partial internal sealed class FunctionPointerTypeSymbol : TypeSymbol
     {
         public static FunctionPointerTypeSymbol CreateFromSource(
             FunctionPointerTypeSyntax syntax,

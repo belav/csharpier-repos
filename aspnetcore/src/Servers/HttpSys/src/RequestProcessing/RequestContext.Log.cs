@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal partial class RequestContext
+partial internal class RequestContext
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.AbortError,
@@ -15,7 +15,7 @@ internal partial class RequestContext
             "Abort",
             EventName = "AbortError"
         )]
-        public static partial void AbortError(ILogger logger, Exception exception);
+        partial public static void AbortError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.ChannelBindingNeedsHttps,
@@ -23,7 +23,7 @@ internal partial class RequestContext
             "TryGetChannelBinding; Channel binding requires HTTPS.",
             EventName = "ChannelBindingNeedsHttps"
         )]
-        public static partial void ChannelBindingNeedsHttps(ILogger logger);
+        partial public static void ChannelBindingNeedsHttps(ILogger logger);
 
         [LoggerMessage(
             LoggerEventIds.ChannelBindingRetrieved,
@@ -31,6 +31,6 @@ internal partial class RequestContext
             "Channel binding retrieved.",
             EventName = "ChannelBindingRetrieved"
         )]
-        public static partial void ChannelBindingRetrieved(ILogger logger);
+        partial public static void ChannelBindingRetrieved(ILogger logger);
     }
 }

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public partial class WeakReference
+    partial public class WeakReference
     {
         private bool trackResurrection;
         private GCHandle handle;

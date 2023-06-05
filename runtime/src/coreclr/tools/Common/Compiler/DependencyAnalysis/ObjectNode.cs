@@ -8,7 +8,7 @@ using ILCompiler.DependencyAnalysisFramework;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public abstract partial class ObjectNode : SortableDependencyNode
+    partial public abstract class ObjectNode : SortableDependencyNode
     {
         public class ObjectData
         {

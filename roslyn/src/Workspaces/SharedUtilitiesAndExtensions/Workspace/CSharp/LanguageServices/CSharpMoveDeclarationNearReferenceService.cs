@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MoveDeclarationNearReference
         ExportLanguageService(typeof(IMoveDeclarationNearReferenceService), LanguageNames.CSharp),
         Shared
     ]
-    internal partial class CSharpMoveDeclarationNearReferenceService
+    partial internal class CSharpMoveDeclarationNearReferenceService
         : AbstractMoveDeclarationNearReferenceService<
             CSharpMoveDeclarationNearReferenceService,
             StatementSyntax,

@@ -16,9 +16,9 @@ using System.Runtime.Intrinsics;
 
 namespace JIT.HardwareIntrinsics.General
 {
-    public static partial class Program
+    partial public static class Program
     {
-        private unsafe static void ToStringSingle()
+        private static unsafe void ToStringSingle()
         {
             int size = Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
             Single[] values = new Single[size];

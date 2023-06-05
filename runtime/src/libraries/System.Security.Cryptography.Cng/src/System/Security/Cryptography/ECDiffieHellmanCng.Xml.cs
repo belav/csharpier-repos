@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+    partial public sealed class ECDiffieHellmanCng : ECDiffieHellman
     {
         public void FromXmlString(string xml, ECKeyXmlFormat format)
         {

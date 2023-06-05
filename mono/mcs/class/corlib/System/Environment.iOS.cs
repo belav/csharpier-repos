@@ -7,13 +7,13 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         static string ns_document;
         static string ns_library;
 
         [DllImport("__Internal")]
-        extern static string xamarin_GetFolderPath(int folder);
+        static extern string xamarin_GetFolderPath(int folder);
 
         static string NSDocumentDirectory
         {

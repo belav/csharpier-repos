@@ -19,7 +19,7 @@ namespace System.Configuration
     {
         internal static readonly ConfigurationValidatorBase NonEmptyStringValidator =
             new StringValidator(1);
-        private readonly static ConfigurationValidatorBase DefaultValidatorInstance =
+        private static readonly ConfigurationValidatorBase DefaultValidatorInstance =
             new DefaultValidator();
         internal static readonly string DefaultCollectionPropertyName = "";
         private string _name;

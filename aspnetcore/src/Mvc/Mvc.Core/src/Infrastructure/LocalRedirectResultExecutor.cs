@@ -10,10 +10,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// A <see cref="IActionResultExecutor{LocalRedirectResult}"/> that handles <see cref="LocalRedirectResult"/>.
 /// </summary>
-public partial class LocalRedirectResultExecutor : IActionResultExecutor<LocalRedirectResult>
+public class LocalRedirectResultExecutor : IActionResultExecutor<LocalRedirectResult>
 {
     private readonly ILogger _logger;
     private readonly IUrlHelperFactory _urlHelperFactory;
@@ -81,7 +82,7 @@ public partial class LocalRedirectResultExecutor : IActionResultExecutor<LocalRe
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -89,6 +90,6 @@ public partial class LocalRedirectResultExecutor : IActionResultExecutor<LocalRe
             "Executing LocalRedirectResult, redirecting to {Destination}.",
             EventName = "LocalRedirectResultExecuting"
         )]
-        public static partial void LocalRedirectResultExecuting(ILogger logger, string destination);
+        partial public static void LocalRedirectResultExecuting(ILogger logger, string destination);
     }
 }

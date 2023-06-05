@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class SyntaxNodeExtensions
+    partial internal static class SyntaxNodeExtensions
     {
         public static LanguageVersion GetLanguageVersion(this SyntaxNode node) =>
             ((CSharpParseOptions)node.SyntaxTree.Options).LanguageVersion;

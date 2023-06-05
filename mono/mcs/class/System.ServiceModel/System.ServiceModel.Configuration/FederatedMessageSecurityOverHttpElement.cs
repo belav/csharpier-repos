@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class FederatedMessageSecurityOverHttpElement : ConfigurationElement
+    partial public sealed class FederatedMessageSecurityOverHttpElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

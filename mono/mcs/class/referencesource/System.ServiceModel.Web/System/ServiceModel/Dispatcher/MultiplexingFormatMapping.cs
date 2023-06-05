@@ -14,10 +14,10 @@ namespace System.ServiceModel.Dispatcher
         protected string writeCharset;
         protected WebContentTypeMapper contentTypeMapper;
 
-        abstract public WebMessageFormat MessageFormat { get; }
-        abstract public WebContentFormat ContentFormat { get; }
-        abstract public string DefaultMediaType { get; }
-        abstract protected MessageEncoder Encoder { get; }
+        public abstract WebMessageFormat MessageFormat { get; }
+        public abstract WebContentFormat ContentFormat { get; }
+        public abstract string DefaultMediaType { get; }
+        protected abstract MessageEncoder Encoder { get; }
 
         ContentType defaultContentType;
 

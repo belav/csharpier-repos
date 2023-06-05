@@ -27,7 +27,7 @@ namespace System.Data
         private OperationAbortedException(SerializationInfo si, StreamingContext sc)
             : base(si, sc) { }
 
-        static internal OperationAbortedException Aborted(Exception inner)
+        internal static OperationAbortedException Aborted(Exception inner)
         {
             OperationAbortedException e;
             if (inner == null)

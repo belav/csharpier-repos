@@ -13,7 +13,7 @@ using System.Text.Json.Nodes;
 
 namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 {
-    internal partial class DotNetSdkMSBuildInstalled : ExecutionCondition
+    partial internal class DotNetSdkMSBuildInstalled : ExecutionCondition
     {
         public static string? SdkPath { get; private set; } = null;
 

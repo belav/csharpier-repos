@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlineCompletions;
 
-internal partial class XmlSnippetParser
+partial internal class XmlSnippetParser
 {
     /// <summary>
     /// Shamelessly copied from the editor

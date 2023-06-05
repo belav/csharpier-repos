@@ -15,11 +15,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+partial
 /// <summary>
 /// <see cref="IModelBinder"/> implementation for binding collection values.
 /// </summary>
 /// <typeparam name="TElement">Type of elements in the collection.</typeparam>
-public partial class CollectionModelBinder<TElement> : ICollectionModelBinder
+public class CollectionModelBinder<TElement> : ICollectionModelBinder
 {
     private static readonly IValueProvider EmptyValueProvider = new CompositeValueProvider();
     private readonly int _maxModelBindingCollectionSize =
@@ -517,7 +518,7 @@ public partial class CollectionModelBinder<TElement> : ICollectionModelBinder
         return (indexes == null || indexes.Length == 0) ? null : indexes;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void AttemptingToBindCollectionUsingIndices(
             ILogger logger,
@@ -561,7 +562,7 @@ public partial class CollectionModelBinder<TElement> : ICollectionModelBinder
             EventName = "AttemptingToBindCollectionUsingIndices",
             SkipEnabledCheck = true
         )]
-        private static partial void AttemptingToBindCollectionUsingIndices(
+        partial private static void AttemptingToBindCollectionUsingIndices(
             ILogger logger,
             string modelName
         );
@@ -576,7 +577,7 @@ public partial class CollectionModelBinder<TElement> : ICollectionModelBinder
             EventName = "AttemptingToBindCollectionOfKeyValuePair",
             SkipEnabledCheck = true
         )]
-        private static partial void AttemptingToBindCollectionOfKeyValuePair(
+        partial private static void AttemptingToBindCollectionOfKeyValuePair(
             ILogger logger,
             string modelName
         );
@@ -592,7 +593,7 @@ public partial class CollectionModelBinder<TElement> : ICollectionModelBinder
             "Could not bind to collection using a format like {ModelName}=value1&{ModelName}=value2",
             EventName = "NoNonIndexBasedFormatFoundForCollection"
         )]
-        private static partial void NoNonIndexBasedFormatFoundForCollection(
+        partial private static void NoNonIndexBasedFormatFoundForCollection(
             ILogger logger,
             string modelName
         );

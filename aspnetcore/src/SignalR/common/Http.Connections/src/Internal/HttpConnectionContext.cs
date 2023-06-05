@@ -17,7 +17,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
-internal sealed partial class HttpConnectionContext
+partial internal sealed class HttpConnectionContext
     : ConnectionContext,
         IConnectionIdFeature,
         IConnectionItemsFeature,
@@ -663,7 +663,7 @@ internal sealed partial class HttpConnectionContext
         );
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -671,7 +671,7 @@ internal sealed partial class HttpConnectionContext
             "Disposing connection {TransportConnectionId}.",
             EventName = "DisposingConnection"
         )]
-        public static partial void DisposingConnection(
+        partial public static void DisposingConnection(
             ILogger logger,
             string transportConnectionId
         );
@@ -682,7 +682,7 @@ internal sealed partial class HttpConnectionContext
             "Waiting for application to complete.",
             EventName = "WaitingForApplication"
         )]
-        public static partial void WaitingForApplication(ILogger logger);
+        partial public static void WaitingForApplication(ILogger logger);
 
         [LoggerMessage(
             3,
@@ -690,7 +690,7 @@ internal sealed partial class HttpConnectionContext
             "Application complete.",
             EventName = "ApplicationComplete"
         )]
-        public static partial void ApplicationComplete(ILogger logger);
+        partial public static void ApplicationComplete(ILogger logger);
 
         [LoggerMessage(
             4,
@@ -698,7 +698,7 @@ internal sealed partial class HttpConnectionContext
             "Waiting for {TransportType} transport to complete.",
             EventName = "WaitingForTransport"
         )]
-        public static partial void WaitingForTransport(
+        partial public static void WaitingForTransport(
             ILogger logger,
             HttpTransportType transportType
         );
@@ -709,7 +709,7 @@ internal sealed partial class HttpConnectionContext
             "{TransportType} transport complete.",
             EventName = "TransportComplete"
         )]
-        public static partial void TransportComplete(
+        partial public static void TransportComplete(
             ILogger logger,
             HttpTransportType transportType
         );
@@ -720,7 +720,7 @@ internal sealed partial class HttpConnectionContext
             "Shutting down both the application and the {TransportType} transport.",
             EventName = "ShuttingDownTransportAndApplication"
         )]
-        public static partial void ShuttingDownTransportAndApplication(
+        partial public static void ShuttingDownTransportAndApplication(
             ILogger logger,
             HttpTransportType transportType
         );
@@ -731,7 +731,7 @@ internal sealed partial class HttpConnectionContext
             "Waiting for both the application and {TransportType} transport to complete.",
             EventName = "WaitingForTransportAndApplication"
         )]
-        public static partial void WaitingForTransportAndApplication(
+        partial public static void WaitingForTransportAndApplication(
             ILogger logger,
             HttpTransportType transportType
         );
@@ -742,7 +742,7 @@ internal sealed partial class HttpConnectionContext
             "The application and {TransportType} transport are both complete.",
             EventName = "TransportAndApplicationComplete"
         )]
-        public static partial void TransportAndApplicationComplete(
+        partial public static void TransportAndApplicationComplete(
             ILogger logger,
             HttpTransportType transportType
         );
@@ -753,7 +753,7 @@ internal sealed partial class HttpConnectionContext
             "{Timeout}ms elapsed attempting to send a message to the transport. Closing connection {TransportConnectionId}.",
             EventName = "TransportSendTimeout"
         )]
-        public static partial void TransportSendTimeout(
+        partial public static void TransportSendTimeout(
             ILogger logger,
             TimeSpan timeout,
             string transportConnectionId

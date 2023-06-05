@@ -8,11 +8,12 @@ using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing.Imaging
 {
+    partial
     /// <summary>
     /// Defines a graphic metafile. A metafile contains records that describe a sequence of graphics operations that
     /// can be recorded and played back.
     /// </summary>
-    public sealed partial class Metafile : Image
+    public sealed class Metafile : Image
     {
         /// <summary>
         /// Initializes a new instance of the <see cref='Metafile'/> class from the specified handle and

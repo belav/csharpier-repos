@@ -6,8 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Additional extensions to MethodDesc related to interop
-    public partial class MethodDesc
+    public class MethodDesc
     {
         /// <summary>
         /// Gets a value indicating whether this method is a (native unmanaged) platform invoke.
@@ -382,7 +383,7 @@ namespace Internal.TypeSystem
         }
     }
 
-    public partial class InstantiatedMethod
+    partial public class InstantiatedMethod
     {
         public override ParameterMetadata[] GetParameterMetadata()
         {
@@ -390,7 +391,7 @@ namespace Internal.TypeSystem
         }
     }
 
-    public partial class MethodForInstantiatedType
+    partial public class MethodForInstantiatedType
     {
         public override ParameterMetadata[] GetParameterMetadata()
         {

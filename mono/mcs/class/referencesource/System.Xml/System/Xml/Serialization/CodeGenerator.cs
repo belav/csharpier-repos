@@ -2058,7 +2058,7 @@ namespace System.Xml.Serialization
             return ifState;
         }
 
-        static internal AssemblyBuilder CreateAssemblyBuilder(AppDomain appDomain, string name)
+        internal static AssemblyBuilder CreateAssemblyBuilder(AppDomain appDomain, string name)
         {
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = name;
@@ -2111,7 +2111,7 @@ namespace System.Xml.Serialization
             set { tempFilesLocation = value; }
         }
 
-        static internal ModuleBuilder CreateModuleBuilder(
+        internal static ModuleBuilder CreateModuleBuilder(
             AssemblyBuilder assemblyBuilder,
             string name
         )
@@ -2122,7 +2122,7 @@ namespace System.Xml.Serialization
                 return assemblyBuilder.DefineDynamicModule(name);
         }
 
-        static internal TypeBuilder CreateTypeBuilder(
+        internal static TypeBuilder CreateTypeBuilder(
             ModuleBuilder moduleBuilder,
             string name,
             TypeAttributes attributes,

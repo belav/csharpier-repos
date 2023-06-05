@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection
 {
-    public readonly partial struct CustomAttributeNamedArgument
+    partial public readonly struct CustomAttributeNamedArgument
         : IEquatable<CustomAttributeNamedArgument>
     {
         public static bool operator ==(

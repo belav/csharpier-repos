@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
 {
-    internal partial class ColorSchemeApplier
+    partial internal class ColorSchemeApplier
     {
         /// <summary>
         /// A ColorScheme represents a style to be applied to VS themes in

@@ -5,7 +5,7 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
-    public partial class DelegateMarshallingMethodThunk : IPrefixMangledType
+    partial public class DelegateMarshallingMethodThunk : IPrefixMangledType
     {
         TypeDesc IPrefixMangledType.BaseType
         {

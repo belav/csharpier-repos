@@ -10,7 +10,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace XmlCoreTest.Common
 {
-    public static partial class FilePathUtil
+    partial public static class FilePathUtil
     {
         public static string GetDataPath()
         {

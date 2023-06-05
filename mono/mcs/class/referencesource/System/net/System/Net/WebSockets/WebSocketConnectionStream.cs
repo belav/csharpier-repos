@@ -230,7 +230,7 @@ namespace System.Net.WebSockets
             }
         }
 
-        public async override Task<int> ReadAsync(
+        public override async Task<int> ReadAsync(
             byte[] buffer,
             int offset,
             int count,
@@ -300,7 +300,7 @@ namespace System.Net.WebSockets
             return bytesRead;
         }
 
-        public async override Task WriteAsync(
+        public override async Task WriteAsync(
             byte[] buffer,
             int offset,
             int count,

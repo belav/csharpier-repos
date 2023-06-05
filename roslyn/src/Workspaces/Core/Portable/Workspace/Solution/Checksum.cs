@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis
     /// without actually comparing data itself
     /// </summary>
     [DataContract]
-    internal sealed partial class Checksum : IObjectWritable, IEquatable<Checksum>
+    partial internal sealed class Checksum : IObjectWritable, IEquatable<Checksum>
     {
         /// <summary>
         /// The intended size of the <see cref="HashData"/> structure.

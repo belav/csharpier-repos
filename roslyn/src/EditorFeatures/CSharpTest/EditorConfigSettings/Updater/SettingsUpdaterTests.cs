@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 {
     [UseExportProvider]
     [Trait(Traits.Feature, Traits.Features.EditorConfigUI)]
-    public partial class SettingsUpdaterTests : TestBase
+    partial public class SettingsUpdaterTests : TestBase
     {
         private const string EditorconfigPath = "/a/b/config";
 

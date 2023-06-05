@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CodeGeneration;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class INamedTypeSymbolExtensions
+    partial internal static class INamedTypeSymbolExtensions
     {
         public static INamespaceOrTypeSymbol GenerateRootNamespaceOrType(
             this INamedTypeSymbol namedType,

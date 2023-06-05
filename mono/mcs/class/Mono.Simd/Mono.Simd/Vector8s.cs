@@ -270,7 +270,7 @@ namespace Mono.Simd
         }
 
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static bool operator ==(Vector8s va, Vector8s vb)
+        public static unsafe bool operator ==(Vector8s va, Vector8s vb)
         {
             short* a = &va.v0;
             short* b = &vb.v0;
@@ -281,7 +281,7 @@ namespace Mono.Simd
         }
 
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static bool operator !=(Vector8s va, Vector8s vb)
+        public static unsafe bool operator !=(Vector8s va, Vector8s vb)
         {
             short* a = &va.v0;
             short* b = &vb.v0;

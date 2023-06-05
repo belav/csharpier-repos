@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class LiteHashProvider
+    partial internal static class LiteHashProvider
     {
         internal static LiteHash CreateHash(string hashAlgorithmId)
         {

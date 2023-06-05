@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Security;
     using System.Xml;
 
-    public sealed partial class XmlElementElement : ConfigurationElement
+    partial public sealed class XmlElementElement : ConfigurationElement
     {
         public XmlElementElement() { }
 

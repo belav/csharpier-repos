@@ -11,9 +11,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal partial class AbstractAsynchronousTaggerProvider<TTag>
+    partial internal class AbstractAsynchronousTaggerProvider<TTag>
     {
-        private sealed partial class TagSource
+        partial private sealed class TagSource
         {
             private class TagSourceState : IDisposable
             {

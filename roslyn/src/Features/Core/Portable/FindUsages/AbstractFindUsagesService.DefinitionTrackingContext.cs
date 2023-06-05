@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindUsages
 {
-    internal abstract partial class AbstractFindUsagesService
+    partial internal abstract class AbstractFindUsagesService
     {
         /// <summary>
         /// Forwards <see cref="IFindUsagesContext"/> notifications to an underlying <see cref="IFindUsagesContext"/>

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-internal partial class DbContextOptimizeCommand : ContextCommandBase
+partial internal class DbContextOptimizeCommand : ContextCommandBase
 {
     private CommandOption? _outputDir;
     private CommandOption? _namespace;

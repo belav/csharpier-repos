@@ -99,7 +99,7 @@ namespace System.Web.Services.Protocols
             get { return type; }
         }
 
-        protected virtual internal object Target
+        protected internal virtual object Target
         {
             get { return target; }
         }

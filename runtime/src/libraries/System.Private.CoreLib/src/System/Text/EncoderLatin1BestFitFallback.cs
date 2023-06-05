@@ -25,7 +25,7 @@ namespace System.Text
         public override int MaxCharCount => 1;
     }
 
-    internal sealed partial class EncoderLatin1BestFitFallbackBuffer : EncoderFallbackBuffer
+    partial internal sealed class EncoderLatin1BestFitFallbackBuffer : EncoderFallbackBuffer
     {
         // Our variables
         private char _cBestFit;

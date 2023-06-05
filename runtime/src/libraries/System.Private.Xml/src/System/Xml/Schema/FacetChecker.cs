@@ -1770,10 +1770,10 @@ namespace System.Xml.Schema
         }
     }
 
-    internal sealed partial class StringFacetsChecker : FacetsChecker
+    partial internal sealed class StringFacetsChecker : FacetsChecker
     { //All types derived from string & anyURI
         [GeneratedRegex("^([a-zA-Z]{1,8})(-[a-zA-Z0-9]{1,8})*$", RegexOptions.ExplicitCapture)]
-        private static partial Regex LanguageRegex();
+        partial private static Regex LanguageRegex();
 
         internal override Exception? CheckValueFacets(object value, XmlSchemaDatatype datatype)
         {

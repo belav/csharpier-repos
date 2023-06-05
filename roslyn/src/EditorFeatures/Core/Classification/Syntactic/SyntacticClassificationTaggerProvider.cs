@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Classification
     [ContentType(ContentTypeNames.RoslynContentType)]
     [TextViewRole(PredefinedTextViewRoles.Document)]
     [TagType(typeof(IClassificationTag))]
-    internal partial class SyntacticClassificationTaggerProvider : ITaggerProvider
+    partial internal class SyntacticClassificationTaggerProvider : ITaggerProvider
     {
         private readonly IAsynchronousOperationListener _listener;
         private readonly IThreadingContext _threadingContext;

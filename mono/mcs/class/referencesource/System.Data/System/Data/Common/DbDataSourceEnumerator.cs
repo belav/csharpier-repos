@@ -21,7 +21,7 @@ namespace System.Data.Common
         { // V1.2.3300
         }
 
-        abstract public DataTable GetDataSources(); // V1.2.3300
+        public abstract DataTable GetDataSources(); // V1.2.3300
 
         /*
         virtual public IAsyncResult BeginGetDataSources(AsyncCallback callback, object asyncStateObject) { // V1.2.3300

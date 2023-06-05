@@ -23,7 +23,7 @@ internal sealed class tagDBPROPSET
 
 public class a
 {
-    static public int Main()
+    public static int Main()
     {
         try
         {

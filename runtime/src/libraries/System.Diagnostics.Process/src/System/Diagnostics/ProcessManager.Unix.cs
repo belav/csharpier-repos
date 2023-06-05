@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.Diagnostics
 {
-    internal static partial class ProcessManager
+    partial internal static class ProcessManager
     {
         /// <summary>Gets whether the process with the specified ID on the specified machine is currently running.</summary>
         /// <param name="processId">The process ID.</param>

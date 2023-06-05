@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 
 namespace UpdatePanelUserControl
 {
-    public partial class Default : System.Web.UI.Page
+    partial public class Default : System.Web.UI.Page
     {
         protected void EmployeeList1_OnSelectedIndexChanged(object sender, EventArgs e)
         {

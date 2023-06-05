@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class ChannelEndpointElement : ConfigurationElement
+    partial public sealed class ChannelEndpointElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

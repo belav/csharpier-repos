@@ -79,7 +79,7 @@ namespace System.Web.UI
             + Consts.AssemblyMicrosoft_VisualStudio_Web,
         "System.ComponentModel.Design.Serialization.TypeCodeDomSerializer, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class Page : TemplateControl, IHttpHandler
+    partial public class Page : TemplateControl, IHttpHandler
     {
         //	static string machineKeyConfigPath = "system.web/machineKey";
         bool _eventValidation = true;

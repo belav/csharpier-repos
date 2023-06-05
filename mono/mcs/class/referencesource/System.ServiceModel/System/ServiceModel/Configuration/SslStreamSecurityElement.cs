@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
 
-    public sealed partial class SslStreamSecurityElement : BindingElementExtensionElement
+    partial public sealed class SslStreamSecurityElement : BindingElementExtensionElement
     {
         public SslStreamSecurityElement() { }
 

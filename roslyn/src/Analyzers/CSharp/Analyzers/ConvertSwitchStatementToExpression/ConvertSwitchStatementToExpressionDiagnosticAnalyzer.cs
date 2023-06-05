@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
     using Constants = ConvertSwitchStatementToExpressionConstants;
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed partial class ConvertSwitchStatementToExpressionDiagnosticAnalyzer
+    partial internal sealed class ConvertSwitchStatementToExpressionDiagnosticAnalyzer
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConvertSwitchStatementToExpressionDiagnosticAnalyzer()

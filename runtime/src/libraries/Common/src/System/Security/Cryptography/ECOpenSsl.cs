@@ -6,7 +6,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class ECOpenSsl : IDisposable
+    partial internal sealed class ECOpenSsl : IDisposable
     {
         private Lazy<SafeEcKeyHandle> _key = null!; // Always initialized
 

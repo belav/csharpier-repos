@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1.Pkcs12
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct SafeBagAsn
+    partial internal struct SafeBagAsn
     {
         internal string BagId;
         internal ReadOnlyMemory<byte> BagValue;

@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 {
-    internal partial class StreamingFindUsagesPresenter
+    partial internal class StreamingFindUsagesPresenter
     {
         /// <summary>
         /// Base type of all <see cref="Entry"/>s that represent some source location in

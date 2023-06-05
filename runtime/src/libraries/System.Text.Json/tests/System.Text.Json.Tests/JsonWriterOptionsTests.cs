@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Text.Json.Tests
 {
-    public static partial class JsonWriterOptionsTests
+    partial public static class JsonWriterOptionsTests
     {
         [Fact]
         public static void JsonWriterOptionsDefaultCtor()

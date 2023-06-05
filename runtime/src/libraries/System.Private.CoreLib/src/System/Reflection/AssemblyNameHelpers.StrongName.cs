@@ -6,7 +6,7 @@ using System.Security;
 
 namespace System.Reflection
 {
-    internal static partial class AssemblyNameHelpers
+    partial internal static class AssemblyNameHelpers
     {
         public static byte[]? ComputePublicKeyToken(byte[]? publicKey)
         {

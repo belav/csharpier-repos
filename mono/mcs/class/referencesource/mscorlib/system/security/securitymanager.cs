@@ -44,7 +44,7 @@ namespace System.Security
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
-    static public class SecurityManager
+    public static class SecurityManager
     {
 #if FEATURE_CAS_POLICY
         private static volatile SecurityPermission executionSecurityPermission = null;
@@ -164,7 +164,7 @@ namespace System.Security
         /// <internalonly/>
         [System.Security.SecurityCritical] // auto-generated_required
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        static public void GetZoneAndOrigin(out ArrayList zone, out ArrayList origin)
+        public static void GetZoneAndOrigin(out ArrayList zone, out ArrayList origin)
         {
             StackCrawlMark mark = StackCrawlMark.LookForMyCaller;
             CodeAccessSecurityEngine.GetZoneAndOrigin(ref mark, out zone, out origin);
@@ -180,7 +180,7 @@ namespace System.Security
         [Obsolete(
             "This method is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
-        static public PolicyLevel LoadPolicyLevelFromFile(string path, PolicyLevelType type)
+        public static PolicyLevel LoadPolicyLevelFromFile(string path, PolicyLevelType type)
         {
             if (path == null)
                 throw new ArgumentNullException("path");
@@ -225,7 +225,7 @@ namespace System.Security
         [Obsolete(
             "This method is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
-        static public PolicyLevel LoadPolicyLevelFromString(string str, PolicyLevelType type)
+        public static PolicyLevel LoadPolicyLevelFromString(string str, PolicyLevelType type)
         {
             return LoadPolicyLevelFromStringHelper(str, null, type);
         }
@@ -308,7 +308,7 @@ namespace System.Security
         [Obsolete(
             "This method is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
-        static public void SavePolicyLevel(PolicyLevel level)
+        public static void SavePolicyLevel(PolicyLevel level)
         {
             if (!AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled)
             {
@@ -324,7 +324,7 @@ namespace System.Security
         [Obsolete(
             "This method is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
-        static public PermissionSet ResolvePolicy(
+        public static PermissionSet ResolvePolicy(
             Evidence evidence,
             PermissionSet reqdPset,
             PermissionSet optPset,
@@ -346,7 +346,7 @@ namespace System.Security
         [Obsolete(
             "This method is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
-        static public PermissionSet ResolvePolicy(Evidence evidence)
+        public static PermissionSet ResolvePolicy(Evidence evidence)
         {
             if (!AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled)
             {
@@ -367,7 +367,7 @@ namespace System.Security
         [Obsolete(
             "This method is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
-        static public PermissionSet ResolvePolicy(Evidence[] evidences)
+        public static PermissionSet ResolvePolicy(Evidence[] evidences)
         {
             if (!AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled)
             {
@@ -456,7 +456,7 @@ namespace System.Security
         [Obsolete(
             "This method is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
         )]
-        static public IEnumerator ResolvePolicyGroups(Evidence evidence)
+        public static IEnumerator ResolvePolicyGroups(Evidence evidence)
         {
             if (!AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled)
             {
@@ -533,7 +533,7 @@ namespace System.Security
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        static private PermissionSet ResolvePolicy(
+        private static PermissionSet ResolvePolicy(
             Evidence evidence,
             PermissionSet reqdPset,
             PermissionSet optPset,
@@ -649,7 +649,7 @@ namespace System.Security
         [Obsolete(
             "Because execution permission checks can no longer be turned off, the CheckExecutionRights property no longer has any effect."
         )]
-        static public bool CheckExecutionRights
+        public static bool CheckExecutionRights
         {
             get { return true; }
             set

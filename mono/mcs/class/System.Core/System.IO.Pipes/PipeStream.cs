@@ -2,7 +2,7 @@ using System.Security.AccessControl;
 
 namespace System.IO.Pipes
 {
-    public partial class PipeStream
+    partial public class PipeStream
     {
         public PipeSecurity GetAccessControl()
         {

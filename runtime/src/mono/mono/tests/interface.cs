@@ -57,7 +57,7 @@ namespace Obj
 
     class Test
     {
-        static public int Main()
+        public static int Main()
         {
             Obj rect,
                 circle;

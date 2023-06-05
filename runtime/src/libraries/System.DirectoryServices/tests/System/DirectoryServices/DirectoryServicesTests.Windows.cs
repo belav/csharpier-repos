@@ -9,7 +9,7 @@ using ActiveDirectoryComInterop;
 
 namespace System.DirectoryServices.Tests
 {
-    public partial class DirectoryServicesTests
+    partial public class DirectoryServicesTests
     {
         [ConditionalFact(nameof(IsActiveDirectoryServer))]
         public void TestComInterfaces()

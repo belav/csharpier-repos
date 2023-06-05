@@ -5,7 +5,7 @@ using Internal.LowLevelLinq;
 
 namespace Internal.Metadata.NativeFormat.Writer
 {
-    public partial class ConstantBooleanValue
+    partial public class ConstantBooleanValue
     {
         public override string ToString()
         {
@@ -14,7 +14,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantBooleanArray
+    partial public class ConstantBooleanArray
     {
         public override string ToString()
         {
@@ -23,7 +23,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantCharValue
+    partial public class ConstantCharValue
     {
         public override string ToString()
         {
@@ -33,7 +33,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantCharArray
+    partial public class ConstantCharArray
     {
         public override string ToString()
         {
@@ -42,7 +42,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantStringValue
+    partial public class ConstantStringValue
     {
         public override string ToString()
         {
@@ -54,7 +54,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantStringArray
+    partial public class ConstantStringArray
     {
         public override string ToString()
         {
@@ -63,7 +63,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantByteValue
+    partial public class ConstantByteValue
     {
         public override string ToString()
         {
@@ -72,7 +72,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantByteArray
+    partial public class ConstantByteArray
     {
         public override string ToString()
         {
@@ -81,7 +81,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantSByteValue
+    partial public class ConstantSByteValue
     {
         public override string ToString()
         {
@@ -90,7 +90,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantSByteArray
+    partial public class ConstantSByteArray
     {
         public override string ToString()
         {
@@ -99,7 +99,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantInt16Value
+    partial public class ConstantInt16Value
     {
         public override string ToString()
         {
@@ -108,7 +108,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantInt16Array
+    partial public class ConstantInt16Array
     {
         public override string ToString()
         {
@@ -117,7 +117,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantUInt16Value
+    partial public class ConstantUInt16Value
     {
         public override string ToString()
         {
@@ -126,7 +126,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantUInt16Array
+    partial public class ConstantUInt16Array
     {
         public override string ToString()
         {
@@ -135,7 +135,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantInt32Value
+    partial public class ConstantInt32Value
     {
         public override string ToString()
         {
@@ -144,7 +144,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantInt32Array
+    partial public class ConstantInt32Array
     {
         public override string ToString()
         {
@@ -153,7 +153,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantUInt32Value
+    partial public class ConstantUInt32Value
     {
         public override string ToString()
         {
@@ -162,7 +162,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantUInt32Array
+    partial public class ConstantUInt32Array
     {
         public override string ToString()
         {
@@ -171,7 +171,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantInt64Value
+    partial public class ConstantInt64Value
     {
         public override string ToString()
         {
@@ -180,7 +180,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantInt64Array
+    partial public class ConstantInt64Array
     {
         public override string ToString()
         {
@@ -189,7 +189,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantUInt64Value
+    partial public class ConstantUInt64Value
     {
         public override string ToString()
         {
@@ -198,7 +198,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantUInt64Array
+    partial public class ConstantUInt64Array
     {
         public override string ToString()
         {
@@ -207,7 +207,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantSingleValue
+    partial public class ConstantSingleValue
     {
         public override string ToString()
         {
@@ -216,7 +216,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantSingleArray
+    partial public class ConstantSingleArray
     {
         public override string ToString()
         {
@@ -225,7 +225,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantDoubleValue
+    partial public class ConstantDoubleValue
     {
         public override string ToString()
         {
@@ -234,7 +234,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantDoubleArray
+    partial public class ConstantDoubleArray
     {
         public override string ToString()
         {
@@ -243,7 +243,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
     }
 
-    public partial class ConstantReferenceValue
+    partial public class ConstantReferenceValue
     {
         public override string ToString()
         {

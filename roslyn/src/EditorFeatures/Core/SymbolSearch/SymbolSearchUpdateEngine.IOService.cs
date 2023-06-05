@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Microsoft.CodeAnalysis.SymbolSearch
 {
-    internal partial class SymbolSearchUpdateEngine
+    partial internal class SymbolSearchUpdateEngine
     {
         private class IOService : IIOService
         {

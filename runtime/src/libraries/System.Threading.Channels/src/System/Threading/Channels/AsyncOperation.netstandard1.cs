@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace System.Threading.Channels
 {
-    internal partial class AsyncOperation<TResult>
+    partial internal class AsyncOperation<TResult>
     {
         private void UnsafeQueueSetCompletionAndInvokeContinuation() =>
             Task.Factory.StartNew(

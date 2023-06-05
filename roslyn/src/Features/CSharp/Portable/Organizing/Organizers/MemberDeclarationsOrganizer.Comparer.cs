@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 {
-    internal partial class MemberDeclarationsOrganizer
+    partial internal class MemberDeclarationsOrganizer
     {
         private class Comparer : IComparer<MemberDeclarationSyntax>
         {

@@ -11,7 +11,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.StaticWebAssets;
 
-internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
+partial internal sealed class ManifestStaticWebAssetFileProvider : IFileProvider
 {
     private static readonly StringComparison _fsComparison = OperatingSystem.IsWindows()
         ? StringComparison.OrdinalIgnoreCase
@@ -364,7 +364,7 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
     [JsonSourceGenerationOptions]
     [JsonSerializable(typeof(StaticWebAssetManifest))]
     [JsonSerializable(typeof(IDictionary<string, StaticWebAssetNode>))]
-    internal sealed partial class SourceGenerationContext : JsonSerializerContext
+    partial internal sealed class SourceGenerationContext : JsonSerializerContext
     {
         public static readonly SourceGenerationContext DefaultWithConverter =
             new SourceGenerationContext(

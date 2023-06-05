@@ -12,9 +12,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 {
-    internal partial class DiagnosticIncrementalAnalyzer
+    partial internal class DiagnosticIncrementalAnalyzer
     {
-        private sealed partial class IncrementalMemberEditAnalyzer
+        partial private sealed class IncrementalMemberEditAnalyzer
         {
             /// <summary>
             /// Spans of member nodes for incremental analysis.

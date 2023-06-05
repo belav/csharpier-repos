@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class HostPolicy
+    partial internal static class HostPolicy
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         internal delegate void corehost_resolve_component_dependencies_result_fn(
@@ -27,7 +27,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        internal static partial int corehost_resolve_component_dependencies(
+        partial internal static int corehost_resolve_component_dependencies(
             string componentMainAssemblyPath,
             corehost_resolve_component_dependencies_result_fn result
         );
@@ -36,7 +36,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        internal static partial IntPtr corehost_set_error_writer(IntPtr errorWriter);
+        partial internal static IntPtr corehost_set_error_writer(IntPtr errorWriter);
 #pragma warning restore CS3016 // Arrays as attribute arguments is not CLS-compliant
     }
 }

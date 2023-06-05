@@ -23,7 +23,7 @@ namespace System.Data.Common.EntitySql
     using System.Data.Common.EntitySql.AST;
     using System.Data.Entity;
 
-    internal partial class CqlLexer
+    partial internal class CqlLexer
     {
         private const int YY_BUFFER_SIZE = 512;
         private const int YY_F = -1;

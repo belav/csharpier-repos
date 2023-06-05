@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.Xml;
 
-    public partial class EndpointAddressElementBase : ServiceModelConfigurationElement
+    partial public class EndpointAddressElementBase : ServiceModelConfigurationElement
     {
         protected EndpointAddressElementBase() { }
 
@@ -37,7 +37,7 @@ namespace System.ServiceModel.Configuration
             get { return (IdentityElement)base[ConfigurationStrings.Identity]; }
         }
 
-        internal protected void Copy(EndpointAddressElementBase source)
+        protected internal void Copy(EndpointAddressElementBase source)
         {
             if (this.IsReadOnly())
             {

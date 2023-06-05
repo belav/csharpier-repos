@@ -9,7 +9,7 @@ using System.Security.Cryptography.Asn1;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class KeyFormatHelper
+    partial internal static class KeyFormatHelper
     {
         internal static unsafe void ReadEncryptedPkcs8<TRet>(
             string[] validOids,

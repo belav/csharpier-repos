@@ -18,7 +18,9 @@ namespace MonoTests.System.Security.Cryptography.Xml
     public class AssertCrypto
     {
         // because most crypto stuff works with byte[] buffers
-        static public void AssertEquals(string msg, byte[] array1, byte[] array2)
+        public
+        // because most crypto stuff works with byte[] buffers
+        static void AssertEquals(string msg, byte[] array1, byte[] array2)
         {
             if ((array1 == null) && (array2 == null))
                 return;
@@ -47,7 +49,9 @@ namespace MonoTests.System.Security.Cryptography.Xml
         private const string xmldsig = " xmlns=\"http://www.w3.org/2000/09/xmldsig#\"";
 
         // not to be used to test C14N output
-        static public void AssertXmlEquals(string msg, string expected, string actual)
+        public
+        // not to be used to test C14N output
+        static void AssertXmlEquals(string msg, string expected, string actual)
         {
             expected = expected.Replace(xmldsig, String.Empty);
             actual = actual.Replace(xmldsig, String.Empty);

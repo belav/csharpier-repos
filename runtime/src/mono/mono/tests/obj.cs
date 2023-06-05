@@ -2,7 +2,7 @@ using System;
 
 public class TestObj
 {
-    static public int sbah = 5;
+    public static int sbah = 5;
     public int bah = 1;
     public int boh;
 

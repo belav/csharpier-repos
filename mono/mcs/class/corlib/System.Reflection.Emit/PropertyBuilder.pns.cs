@@ -30,7 +30,7 @@
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class PropertyBuilder : System.Reflection.PropertyInfo
+    partial public sealed class PropertyBuilder : System.Reflection.PropertyInfo
     {
         internal PropertyBuilder()
         {

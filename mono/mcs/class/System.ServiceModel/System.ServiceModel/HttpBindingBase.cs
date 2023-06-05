@@ -148,7 +148,7 @@ namespace System.ServiceModel
             set { use_default_web_proxy = value; }
         }
 
-        public override abstract BindingElementCollection CreateBindingElements();
+        public abstract override BindingElementCollection CreateBindingElements();
 
         // explicit interface implementations
 

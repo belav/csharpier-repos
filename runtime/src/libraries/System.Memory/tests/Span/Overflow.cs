@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.SpanTests
 {
-    public static partial class SpanTests
+    partial public static class SpanTests
     {
         // NOTE: IndexOverflow test is constrained to run on Windows and MacOSX because it
         //       causes problems on Linux due to the way deferred memory allocation works.

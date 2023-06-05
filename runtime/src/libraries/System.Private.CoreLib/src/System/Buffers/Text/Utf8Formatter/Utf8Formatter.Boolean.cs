@@ -5,7 +5,7 @@ using System.Buffers.Binary;
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Formatter
+    partial public static class Utf8Formatter
     {
         /// <summary>
         /// Formats a Boolean as a UTF8 string.

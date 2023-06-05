@@ -12,9 +12,10 @@ using VsTextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy
 {
+    partial
     // Dev11 implementation: csharp\radmanaged\Features\EditAndContinue\EncProject.cs
 
-    internal partial class AbstractLegacyProject
+    internal class AbstractLegacyProject
         : EncInterop.IVsENCRebuildableProjectCfg2,
             EncInterop.IVsENCRebuildableProjectCfg4
     {

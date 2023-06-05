@@ -48,7 +48,7 @@ namespace System.Workflow.ComponentModel
             base.Initialize(provider);
         }
 
-        protected internal override sealed ActivityExecutionStatus Execute(
+        protected internal sealed override ActivityExecutionStatus Execute(
             ActivityExecutionContext executionContext
         )
         {

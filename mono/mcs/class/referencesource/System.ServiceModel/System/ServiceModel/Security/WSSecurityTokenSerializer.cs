@@ -658,7 +658,7 @@ namespace System.ServiceModel.Security
             );
         }
 
-        internal abstract new class TokenEntry
+        internal new abstract class TokenEntry
         {
             Type[] tokenTypes = null;
 
@@ -769,7 +769,7 @@ namespace System.ServiceModel.Security
             public abstract void WriteTokenCore(XmlDictionaryWriter writer, SecurityToken token);
         }
 
-        internal abstract new class SerializerEntries
+        internal new abstract class SerializerEntries
         {
             public virtual void PopulateTokenEntries(IList<TokenEntry> tokenEntries) { }
         }

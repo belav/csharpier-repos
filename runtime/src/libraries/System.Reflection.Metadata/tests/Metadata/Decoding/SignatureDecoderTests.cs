@@ -12,7 +12,7 @@ using Xunit;
 
 namespace System.Reflection.Metadata.Decoding.Tests
 {
-    public partial class SignatureDecoderTests
+    partial public class SignatureDecoderTests
     {
         [Fact]
         public unsafe void VerifyMultipleOptionalModifiers()

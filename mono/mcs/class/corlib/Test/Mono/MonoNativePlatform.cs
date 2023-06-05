@@ -37,7 +37,7 @@ namespace Mono
     static class MonoNativePlatform
     {
         [DllImport("System.Native")]
-        extern static int mono_native_get_platform_type();
+        static extern int mono_native_get_platform_type();
 
         public static MonoNativePlatformType GetPlatformType()
         {
@@ -48,13 +48,13 @@ namespace Mono
          * Test Suite Use Only.
          */
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static int IncrementInternalCounter();
+        static extern int IncrementInternalCounter();
 
         [DllImport("System.Native")]
-        extern static int mono_native_is_initialized();
+        static extern int mono_native_is_initialized();
 
         [DllImport("System.Native")]
-        extern static int mono_native_initialize();
+        static extern int mono_native_initialize();
 
         /*
          * This method is called by the xamarin-macios test suite

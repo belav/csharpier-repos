@@ -399,7 +399,10 @@ namespace System.Diagnostics
 
         // This method refreshes all the data from the configuration file, so that updated to the configuration file are mirrored
         // in the System.Diagnostics.Trace class
-        static internal void Refresh()
+        internal
+        // This method refreshes all the data from the configuration file, so that updated to the configuration file are mirrored
+        // in the System.Diagnostics.Trace class
+        static void Refresh()
         {
             lock (critSec)
             {

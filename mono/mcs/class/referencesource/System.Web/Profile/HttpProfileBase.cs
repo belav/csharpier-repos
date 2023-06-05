@@ -240,12 +240,19 @@ namespace System.Web.Profile
         // static public Properties and functions
 
 
-        static public ProfileBase Create(string username)
+        public
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        // static public Properties and functions
+
+
+        static ProfileBase Create(string username)
         {
             return Create(username, true);
         }
 
-        static public ProfileBase Create(string username, bool isAuthenticated)
+        public static ProfileBase Create(string username, bool isAuthenticated)
         {
             if (!ProfileManager.Enabled)
                 throw new ProviderException(SR.GetString(SR.Profile_not_enabled));
@@ -268,7 +275,7 @@ namespace System.Web.Profile
             return CreateMyInstance(username, isAuthenticated);
         }
 
-        new static public SettingsPropertyCollection Properties
+        public static new SettingsPropertyCollection Properties
         {
             get
             {
@@ -470,7 +477,14 @@ namespace System.Web.Profile
         // Private static functions and properties
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
-        static private ProfileBase CreateMyInstance(string username, bool isAuthenticated)
+        private
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        // Private static functions and properties
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        static ProfileBase CreateMyInstance(string username, bool isAuthenticated)
         {
             Type t;
             if (HostingEnvironment.IsHosted)
@@ -485,7 +499,11 @@ namespace System.Web.Profile
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
-        static private void InitializeStatic()
+        private
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        static void InitializeStatic()
         {
             if (!ProfileManager.Enabled || s_Initialized)
             {
@@ -776,7 +794,11 @@ namespace System.Web.Profile
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
-        static private void SetProviderForProperty(ProfilePropertySettings pps)
+        private
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        static void SetProviderForProperty(ProfilePropertySettings pps)
         {
             if (pps.Provider == null || pps.Provider.Length < 1)
             {
@@ -799,7 +821,11 @@ namespace System.Web.Profile
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
-        static private Type ResolvePropertyTypeForCommonTypes(string typeName)
+        private
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
+        static Type ResolvePropertyTypeForCommonTypes(string typeName)
         {
             switch (typeName)
             {
@@ -868,7 +894,7 @@ namespace System.Web.Profile
             }
         }
 
-        static private Type ResolvePropertyType(string typeName)
+        private static Type ResolvePropertyType(string typeName)
         {
             Type t = ResolvePropertyTypeForCommonTypes(
                 typeName.ToLower(System.Globalization.CultureInfo.InvariantCulture)
@@ -882,7 +908,7 @@ namespace System.Web.Profile
                 return GetPropType(typeName);
         }
 
-        static private Type GetPropType(string typeName)
+        private static Type GetPropType(string typeName)
         {
             return Type.GetType(typeName, true, true);
         }

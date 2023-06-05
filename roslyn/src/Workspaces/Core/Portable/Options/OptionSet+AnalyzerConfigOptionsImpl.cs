@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Options
 {
-    public abstract partial class OptionSet
+    partial public abstract class OptionSet
     {
         private sealed class AnalyzerConfigOptionsImpl : AnalyzerConfigOptions
         {

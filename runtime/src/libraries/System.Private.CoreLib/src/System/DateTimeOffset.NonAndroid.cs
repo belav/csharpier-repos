@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public readonly partial struct DateTimeOffset
+    partial public readonly struct DateTimeOffset
     {
         // Returns a DateTimeOffset representing the current date and time. The
         // resolution of the returned value depends on the system timer.

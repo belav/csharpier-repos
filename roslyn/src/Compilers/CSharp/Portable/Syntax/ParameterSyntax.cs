@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ParameterSyntax
+    partial public class ParameterSyntax
     {
         internal bool IsArgList
         {

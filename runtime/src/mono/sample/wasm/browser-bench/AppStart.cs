@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 
 namespace Sample
 {
+    partial
     // http://localhost:8000/?task=AppStart
-    public partial class AppStartTask : BenchTask
+    public class AppStartTask : BenchTask
     {
         public override string Name => "AppStart";
         public override bool BrowserOnly => true;
@@ -51,19 +52,19 @@ namespace Sample
             }
         }
 
-        public partial class MainApp
+        partial public class MainApp
         {
             [JSImport("globalThis.mainApp.PageShow")]
-            public static partial Task PageShow();
+            partial public static Task PageShow();
 
             [JSImport("globalThis.mainApp.FrameReachedManaged")]
-            public static partial Task FrameReachedManaged();
+            partial public static Task FrameReachedManaged();
         }
 
-        public partial class FrameApp
+        partial public class FrameApp
         {
             [JSImport("globalThis.frameApp.ReachedCallback")]
-            public static partial Task ReachedCallback();
+            partial public static Task ReachedCallback();
 
             [JSExport]
             public static void ReachedManaged()

@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class StorePal
+    partial internal sealed class StorePal
     {
         private sealed class AppleKeychainStore : IStorePal
         {

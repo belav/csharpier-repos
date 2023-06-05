@@ -17,7 +17,7 @@ using static Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles.EditorConf
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 {
-    internal partial class NamingStyleSettingsUpdater
+    partial internal class NamingStyleSettingsUpdater
         : SettingsUpdaterBase<
             (Action<(object, object?)> onSettingChange, NamingStyleSetting option),
             object

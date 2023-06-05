@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class CommonReferenceManager<TCompilation, TAssemblySymbol>
+    partial internal class CommonReferenceManager<TCompilation, TAssemblySymbol>
     {
         /// <summary>
         /// Private helper class to capture information about AssemblySymbol instance we

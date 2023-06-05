@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System
 {
-    internal static partial class Number
+    partial internal static class Number
     {
         // This is a port of the `Grisu3` implementation here: https://github.com/google/double-conversion/blob/a711666ddd063eb1e4b181a6cb981d39a1fc8bac/double-conversion/fast-dtoa.cc
         // The backing algorithm and the proofs behind it are described in more detail here: http://www.cs.tufts.edu/~nr/cs257/archive/florian-loitsch/printf.pdf

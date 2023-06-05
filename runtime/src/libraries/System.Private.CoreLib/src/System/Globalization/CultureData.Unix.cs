@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
-    internal sealed partial class CultureData
+    partial internal sealed class CultureData
     {
         private bool InitCultureDataCore() => InitIcuCultureDataCore();
 

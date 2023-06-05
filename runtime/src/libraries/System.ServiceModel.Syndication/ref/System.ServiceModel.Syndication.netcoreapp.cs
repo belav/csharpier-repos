@@ -6,7 +6,7 @@
 
 namespace System.ServiceModel.Syndication
 {
-    public partial class SyndicationFeed
+    partial public class SyndicationFeed
     {
         public System.ServiceModel.Syndication.SyndicationLink Documentation
         {
@@ -33,7 +33,7 @@ namespace System.ServiceModel.Syndication
         }
     }
 
-    public abstract partial class SyndicationFeedFormatter
+    partial public abstract class SyndicationFeedFormatter
     {
         public System.ServiceModel.Syndication.TryParseDateTimeCallback DateTimeParser
         {
@@ -47,7 +47,7 @@ namespace System.ServiceModel.Syndication
         }
     }
 
-    public partial class SyndicationTextInput
+    partial public class SyndicationTextInput
     {
         public SyndicationTextInput() { }
 
@@ -82,7 +82,7 @@ namespace System.ServiceModel.Syndication
         out System.Uri uri
     );
 
-    public partial struct XmlDateTimeData
+    partial public struct XmlDateTimeData
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -105,7 +105,7 @@ namespace System.ServiceModel.Syndication
         }
     }
 
-    public partial struct XmlUriData
+    partial public struct XmlUriData
     {
         private object _dummy;
         private int _dummyPrimitive;

@@ -8,11 +8,12 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Manages anonymous types created in owning compilation. All requests for
     /// anonymous type symbols go via the instance of this class.
     /// </summary>
-    internal sealed partial class AnonymousTypeManager : CommonAnonymousTypeManager
+    internal sealed class AnonymousTypeManager : CommonAnonymousTypeManager
     {
         internal AnonymousTypeManager(CSharpCompilation compilation)
         {

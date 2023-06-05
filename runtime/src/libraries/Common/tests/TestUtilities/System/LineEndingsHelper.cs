@@ -13,7 +13,7 @@ namespace System
             Environment.NewLine
         );
 
-        static public bool IsNewLineConsistent
+        public static bool IsNewLineConsistent
         {
             get { return s_consistentNewlines; }
         }

@@ -29,7 +29,7 @@ using System.Collections.Generic;
 
 namespace System.Reflection.Runtime.Assemblies
 {
-    internal partial class RuntimeAssemblyInfo
+    partial internal class RuntimeAssemblyInfo
     {
 #if DEBUG
         [RequiresUnreferencedCode(
@@ -79,7 +79,7 @@ namespace System.Reflection.Runtime.Assemblies
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal abstract partial class RuntimeConstructorInfo
+    partial internal abstract class RuntimeConstructorInfo
     {
 #if DEBUG
         public sealed override MemberTypes MemberType => base.MemberType;
@@ -89,7 +89,7 @@ namespace System.Reflection.Runtime.MethodInfos
 
 namespace System.Reflection.Runtime.CustomAttributes
 {
-    internal abstract partial class RuntimeCustomAttributeData
+    partial internal abstract class RuntimeCustomAttributeData
     {
 #if DEBUG
         public sealed override bool Equals(object obj) => base.Equals(obj);
@@ -101,7 +101,7 @@ namespace System.Reflection.Runtime.CustomAttributes
 
 namespace System.Reflection.Runtime.EventInfos
 {
-    internal abstract partial class RuntimeEventInfo
+    partial internal abstract class RuntimeEventInfo
     {
 #if DEBUG
         public sealed override MemberTypes MemberType => base.MemberType;
@@ -118,7 +118,7 @@ namespace System.Reflection.Runtime.EventInfos
 
 namespace System.Reflection.Runtime.FieldInfos
 {
-    internal abstract partial class RuntimeFieldInfo
+    partial internal abstract class RuntimeFieldInfo
     {
 #if DEBUG
         public sealed override MemberTypes MemberType => base.MemberType;
@@ -131,7 +131,7 @@ namespace System.Reflection.Runtime.FieldInfos
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal abstract partial class RuntimeMethodInfo
+    partial internal abstract class RuntimeMethodInfo
     {
 #if DEBUG
         public sealed override MemberTypes MemberType => base.MemberType;
@@ -141,7 +141,7 @@ namespace System.Reflection.Runtime.MethodInfos
 
 namespace System.Reflection.Runtime.Modules
 {
-    internal abstract partial class RuntimeModule
+    partial internal abstract class RuntimeModule
     {
 #if DEBUG
         [RequiresUnreferencedCode("Types might be removed")]
@@ -162,7 +162,7 @@ namespace System.Reflection.Runtime.Modules
 
 namespace System.Reflection.Runtime.ParameterInfos
 {
-    internal abstract partial class RuntimeParameterInfo
+    partial internal abstract class RuntimeParameterInfo
     {
 #if DEBUG
 #endif //DEBUG
@@ -171,7 +171,7 @@ namespace System.Reflection.Runtime.ParameterInfos
 
 namespace System.Reflection.Runtime.PropertyInfos
 {
-    internal abstract partial class RuntimePropertyInfo
+    partial internal abstract class RuntimePropertyInfo
     {
 #if DEBUG
         public sealed override MemberTypes MemberType => base.MemberType;
@@ -187,7 +187,7 @@ namespace System.Reflection.Runtime.PropertyInfos
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal abstract partial class RuntimeTypeInfo
+    partial internal abstract class RuntimeTypeInfo
     {
 #if DEBUG
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]

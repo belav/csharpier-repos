@@ -130,7 +130,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal WebRequestModulesSectionInternal GetSection()
+        internal static WebRequestModulesSectionInternal GetSection()
         {
             lock (WebRequestModulesSectionInternal.ClassSyncObject)
             {

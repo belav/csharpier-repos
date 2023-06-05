@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct AttributeAsn
+    partial internal struct AttributeAsn
     {
         internal string AttrType;
         internal ReadOnlyMemory<byte>[] AttrValues;

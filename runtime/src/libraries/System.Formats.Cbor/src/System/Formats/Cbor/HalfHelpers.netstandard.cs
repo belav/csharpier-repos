@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Formats.Cbor
 {
-    internal static partial class HalfHelpers
+    partial internal static class HalfHelpers
     {
         // Half constants
         private const ushort HalfExponentMask = 0x7C00;

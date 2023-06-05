@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class FilteredCatalog
+    partial public class FilteredCatalog
     {
         internal sealed class DependenciesTraversal : IComposablePartCatalogTraversal
         {

@@ -7,7 +7,7 @@ using Internal.NativeCrypto;
 
 namespace System.Security.Cryptography
 {
-    public partial class ChaCha20Poly1305
+    partial public class ChaCha20Poly1305
     {
         private SafeKeyHandle _keyHandle;
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.IO.Pipes
 {
-    public abstract partial class PipeStream : Stream
+    partial public abstract class PipeStream : Stream
     {
         internal const string AnonymousPipeName = "anonymous";
 

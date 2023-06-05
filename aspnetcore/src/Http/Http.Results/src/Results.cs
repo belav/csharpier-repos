@@ -14,10 +14,11 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
+partial
 /// <summary>
 /// A factory for <see cref="IResult"/>.
 /// </summary>
-public static partial class Results
+public static class Results
 {
     /// <summary>
     /// Creates an <see cref="IResult"/> that on execution invokes <see cref="AuthenticationHttpContextExtensions.ChallengeAsync(HttpContext, string?, AuthenticationProperties?)" />.

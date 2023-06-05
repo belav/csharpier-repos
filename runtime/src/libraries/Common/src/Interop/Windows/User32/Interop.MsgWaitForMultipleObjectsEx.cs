@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         [LibraryImport(Libraries.User32)]
-        public static partial int MsgWaitForMultipleObjectsEx(
+        partial public static int MsgWaitForMultipleObjectsEx(
             int nCount,
             IntPtr pHandles,
             int dwMilliseconds,

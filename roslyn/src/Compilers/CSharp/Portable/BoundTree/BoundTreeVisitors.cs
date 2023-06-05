@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal abstract partial class BoundTreeVisitor<A, R>
+    partial internal abstract class BoundTreeVisitor<A, R>
     {
         protected BoundTreeVisitor() { }
 
@@ -147,7 +147,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal abstract partial class BoundTreeVisitor
+    partial internal abstract class BoundTreeVisitor
     {
         protected BoundTreeVisitor() { }
 

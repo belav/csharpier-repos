@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text.Json
 {
-    public sealed partial class Utf8JsonWriter
+    partial public sealed class Utf8JsonWriter
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ValidatePropertyNameAndDepth(ReadOnlySpan<char> propertyName)

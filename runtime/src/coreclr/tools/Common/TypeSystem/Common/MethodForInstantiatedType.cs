@@ -5,7 +5,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public sealed partial class MethodForInstantiatedType : MethodDesc
+    partial public sealed class MethodForInstantiatedType : MethodDesc
     {
         private readonly MethodDesc _typicalMethodDef;
         private readonly InstantiatedType _instantiatedType;

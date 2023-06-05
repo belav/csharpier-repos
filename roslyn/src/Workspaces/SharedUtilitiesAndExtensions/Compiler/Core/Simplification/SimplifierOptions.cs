@@ -93,7 +93,7 @@ namespace Microsoft.CodeAnalysis.Simplification
 #endif
     { }
 
-    internal static partial class SimplifierOptionsProviders
+    partial internal static class SimplifierOptionsProviders
     {
         internal static SimplifierOptions.CommonOptions GetCommonSimplifierOptions(
             this IOptionsReader options,

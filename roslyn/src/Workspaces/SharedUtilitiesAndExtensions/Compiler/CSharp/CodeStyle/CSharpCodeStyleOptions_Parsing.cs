@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
 {
-    internal static partial class CSharpCodeStyleOptions
+    partial internal static class CSharpCodeStyleOptions
     {
         public static CodeStyleOption2<ExpressionBodyPreference> ParseExpressionBodyPreference(
             string optionString,

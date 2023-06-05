@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial class SemanticMap
+    partial internal class SemanticMap
     {
         private readonly Dictionary<SyntaxNode, SymbolInfo> _expressionToInfoMap = new();
 

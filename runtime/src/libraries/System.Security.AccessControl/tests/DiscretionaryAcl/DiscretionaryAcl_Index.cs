@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class DiscretionaryAcl_Index
+    partial public class DiscretionaryAcl_Index
     {
         private static bool TestIndex(GenericAce gAce, GenericAce verifierGAce)
         {

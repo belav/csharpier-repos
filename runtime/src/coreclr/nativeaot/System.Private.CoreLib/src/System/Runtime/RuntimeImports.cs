@@ -22,18 +22,18 @@ namespace System.Runtime
     //            but if a class library wants to factor differently (such as putting the GCHandle methods in an
     //            optional library, those methods can be moved to a different file/namespace/dll
     [ReflectionBlocked]
-    public static partial class RuntimeImports
+    partial public static class RuntimeImports
     {
         private const string RuntimeLibrary = "*";
 
         [LibraryImport(RuntimeLibrary)]
         [SuppressGCTransition]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static partial ulong RhpGetTickCount64();
+        partial internal static ulong RhpGetTickCount64();
 
         [LibraryImport(RuntimeLibrary)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static partial IntPtr RhpGetCurrentThread();
+        partial internal static IntPtr RhpGetCurrentThread();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpInitiateThreadAbort")]
@@ -74,7 +74,7 @@ namespace System.Runtime
 
         // Wait for all pending finalizers. This must be a p/invoke to avoid starving the GC.
         [LibraryImport(RuntimeLibrary)]
-        private static partial void RhWaitForPendingFinalizers(int allowReentrantWait);
+        partial private static void RhWaitForPendingFinalizers(int allowReentrantWait);
 
         // Temporary workaround to unblock shareable assembly bring-up - without shared interop,
         // we must prevent RhWaitForPendingFinalizers from using marshaling because it would
@@ -87,7 +87,7 @@ namespace System.Runtime
         }
 
         [LibraryImport(RuntimeLibrary)]
-        internal static partial void RhInitializeFinalizerThread();
+        partial internal static void RhInitializeFinalizerThread();
 
         // Get maximum GC generation number.
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -204,21 +204,21 @@ namespace System.Runtime
 
         [LibraryImport(RuntimeLibrary)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static unsafe partial void RhEnumerateConfigurationValues(
+        partial internal static unsafe void RhEnumerateConfigurationValues(
             void* configurationContext,
             delegate* unmanaged<void*, void*, void*, GCConfigurationType, long, void> callback
         );
 
         [LibraryImport(RuntimeLibrary)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static partial long RhGetTotalAllocatedBytesPrecise();
+        partial internal static long RhGetTotalAllocatedBytesPrecise();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhGetMemoryInfo")]
         internal static extern void RhGetMemoryInfo(ref byte info, GCKind kind);
 
         [LibraryImport(RuntimeLibrary)]
-        internal static unsafe partial void RhAllocateNewArray(
+        partial internal static unsafe void RhAllocateNewArray(
             IntPtr pArrayEEType,
             uint numElements,
             uint flags,
@@ -226,7 +226,7 @@ namespace System.Runtime
         );
 
         [LibraryImport(RuntimeLibrary)]
-        internal static unsafe partial void RhAllocateNewObject(
+        partial internal static unsafe void RhAllocateNewObject(
             IntPtr pEEType,
             uint flags,
             void* pResult
@@ -430,17 +430,17 @@ namespace System.Runtime
         [LibraryImport(RuntimeLibrary, EntryPoint = "RhSpinWait")]
         [SuppressGCTransition]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static partial void RhSpinWait(int iterations);
+        partial internal static void RhSpinWait(int iterations);
 
         // Call RhSpinWait with a GC transition
         [LibraryImport(RuntimeLibrary, EntryPoint = "RhSpinWait")]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static partial void RhLongSpinWait(int iterations);
+        partial internal static void RhLongSpinWait(int iterations);
 
         // Yield the cpu to another thread ready to process, if one is available.
         [LibraryImport(RuntimeLibrary, EntryPoint = "RhYield")]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        private static partial int _RhYield();
+        partial private static int _RhYield();
 
         internal static bool RhYield()
         {
@@ -449,13 +449,13 @@ namespace System.Runtime
 
         [LibraryImport(RuntimeLibrary, EntryPoint = "RhFlushProcessWriteBuffers")]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static partial void RhFlushProcessWriteBuffers();
+        partial internal static void RhFlushProcessWriteBuffers();
 
 #if !TARGET_UNIX
         // Wait for any object to be signalled, in a way that's compatible with the CLR's behavior in an STA.
         // ExactSpelling = 'true' to force MCG to resolve it to default
         [LibraryImport(RuntimeLibrary)]
-        private static unsafe partial int RhCompatibleReentrantWaitAny(
+        partial private static unsafe int RhCompatibleReentrantWaitAny(
             int alertable,
             int timeout,
             int count,
@@ -788,7 +788,7 @@ namespace System.Runtime
 
         // For Managed to Native calls
         [LibraryImport(RuntimeLibrary, EntryPoint = "RhCallDescrWorker")]
-        internal static partial void RhCallDescrWorkerNative(IntPtr callDescr);
+        partial internal static void RhCallDescrWorkerNative(IntPtr callDescr);
 
         // Moves memory from smem to dmem. Size must be a positive value.
         // This copy uses an intrinsic to be safe for copying arbitrary bits of
@@ -1132,15 +1132,15 @@ namespace System.Runtime
         internal static extern unsafe float modff(float x, float* intptr);
 
         [LibraryImport(RuntimeImports.RuntimeLibrary)]
-        internal static unsafe partial void* memmove(byte* dmem, byte* smem, nuint size);
+        partial internal static unsafe void* memmove(byte* dmem, byte* smem, nuint size);
 
         [LibraryImport(RuntimeImports.RuntimeLibrary)]
-        internal static unsafe partial void* memset(byte* mem, int value, nuint size);
+        partial internal static unsafe void* memset(byte* mem, int value, nuint size);
 
 #if TARGET_X86 || TARGET_AMD64
         [LibraryImport(RuntimeLibrary)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static unsafe partial void RhCpuIdEx(
+        partial internal static unsafe void RhCpuIdEx(
             int* cpuInfo,
             int functionId,
             int subFunctionId

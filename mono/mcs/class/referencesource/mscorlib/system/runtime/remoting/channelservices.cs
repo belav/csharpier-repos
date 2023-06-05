@@ -87,10 +87,10 @@ namespace System.Runtime.Remoting.Channels
         [System.Security.SecurityCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ResourceExposure(ResourceScope.None)]
-        static unsafe extern Perf_Contexts* GetPrivateContextsPerfCounters();
+        static extern unsafe Perf_Contexts* GetPrivateContextsPerfCounters();
 
         [SecurityCritical]
-        unsafe private static volatile Perf_Contexts* perf_Contexts =
+        private static unsafe volatile Perf_Contexts* perf_Contexts =
             GetPrivateContextsPerfCounters();
 
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -123,7 +123,7 @@ namespace System.Runtime.Remoting.Channels
         static bool unloadHandlerRegistered = false;
 
         [System.Security.SecurityCritical] // auto-generated
-        unsafe internal static void RegisterChannelInternal(IChannel chnl, bool ensureSecurity)
+        internal static unsafe void RegisterChannelInternal(IChannel chnl, bool ensureSecurity)
         {
             // Validate arguments
             if (null == chnl)
@@ -248,7 +248,7 @@ namespace System.Runtime.Remoting.Channels
             SecurityAction.Demand,
             Flags = SecurityPermissionFlag.RemotingConfiguration
         )]
-        unsafe public static void UnregisterChannel(IChannel chnl)
+        public static unsafe void UnregisterChannel(IChannel chnl)
         {
             // we allow null to be passed in, so we can use this api to trigger the
             //   refresh of the channel data <
@@ -560,7 +560,7 @@ namespace System.Runtime.Remoting.Channels
 #endif //DEBUG
 
         [System.Security.SecurityCritical] // auto-generated
-        unsafe internal static void IncrementRemoteCalls(long cCalls)
+        internal static unsafe void IncrementRemoteCalls(long cCalls)
         {
             remoteCalls += cCalls;
             if (perf_Contexts != null)

@@ -14,7 +14,7 @@ namespace System.Xml
     using System.Runtime.Versioning;
 
     [PermissionSetAttribute(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-    public partial class XmlSecureResolver : XmlResolver
+    partial public class XmlSecureResolver : XmlResolver
     {
         XmlResolver resolver;
 #if MONO_FEATURE_CAS

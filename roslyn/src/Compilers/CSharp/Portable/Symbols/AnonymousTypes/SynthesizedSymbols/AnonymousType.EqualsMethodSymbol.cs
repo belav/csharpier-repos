@@ -9,12 +9,13 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class AnonymousTypeManager
+    partial internal sealed class AnonymousTypeManager
     {
+        partial
         /// <summary>
         /// Represents an anonymous type 'Equals' method.
         /// </summary>
-        private sealed partial class AnonymousTypeEqualsMethodSymbol : SynthesizedMethodBase
+        private sealed class AnonymousTypeEqualsMethodSymbol : SynthesizedMethodBase
         {
             private readonly ImmutableArray<ParameterSymbol> _parameters;
 

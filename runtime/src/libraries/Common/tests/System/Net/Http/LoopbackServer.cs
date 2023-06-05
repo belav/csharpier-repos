@@ -16,7 +16,7 @@ using Xunit;
 
 namespace System.Net.Test.Common
 {
-    public sealed partial class LoopbackServer : GenericLoopbackServer, IDisposable
+    partial public sealed class LoopbackServer : GenericLoopbackServer, IDisposable
     {
         private static readonly byte[] s_newLineBytes = new byte[] { (byte)'\r', (byte)'\n' };
         private static readonly byte[] s_colonSpaceBytes = new byte[] { (byte)':', (byte)' ' };

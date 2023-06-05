@@ -5,10 +5,11 @@ using System.Runtime.InteropServices;
 
 namespace System.IO.Pipes
 {
+    partial
     /// <summary>
     /// Named pipe server
     /// </summary>
-    public sealed partial class NamedPipeServerStream : PipeStream
+    public sealed class NamedPipeServerStream : PipeStream
     {
         // Depending on the Windows platform, we will try to reload a potentially missing DLL
         // and reattempt the retrieval of the impersonation username.

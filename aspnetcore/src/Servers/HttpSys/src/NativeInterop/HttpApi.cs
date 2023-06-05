@@ -8,19 +8,19 @@ using static Microsoft.AspNetCore.HttpSys.Internal.HttpApiTypes;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal static unsafe partial class HttpApi
+partial internal static unsafe class HttpApi
 {
     private const string HTTPAPI = "httpapi.dll";
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpInitialize(
+    partial internal static uint HttpInitialize(
         HTTPAPI_VERSION version,
         uint flags,
         void* pReserved
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpReceiveRequestEntityBody(
+    partial internal static uint HttpReceiveRequestEntityBody(
         SafeHandle requestQueueHandle,
         ulong requestId,
         uint flags,
@@ -31,7 +31,7 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpReceiveClientCertificate(
+    partial internal static uint HttpReceiveClientCertificate(
         SafeHandle requestQueueHandle,
         ulong connectionId,
         uint flags,
@@ -42,7 +42,7 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpReceiveClientCertificate(
+    partial internal static uint HttpReceiveClientCertificate(
         SafeHandle requestQueueHandle,
         ulong connectionId,
         uint flags,
@@ -53,7 +53,7 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpReceiveHttpRequest(
+    partial internal static uint HttpReceiveHttpRequest(
         SafeHandle requestQueueHandle,
         ulong requestId,
         uint flags,
@@ -64,7 +64,7 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpSendHttpResponse(
+    partial internal static uint HttpSendHttpResponse(
         SafeHandle requestQueueHandle,
         ulong requestId,
         uint flags,
@@ -78,7 +78,7 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpSendResponseEntityBody(
+    partial internal static uint HttpSendResponseEntityBody(
         SafeHandle requestQueueHandle,
         ulong requestId,
         uint flags,
@@ -92,14 +92,14 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpCancelHttpRequest(
+    partial internal static uint HttpCancelHttpRequest(
         SafeHandle requestQueueHandle,
         ulong requestId,
         IntPtr pOverlapped
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpWaitForDisconnectEx(
+    partial internal static uint HttpWaitForDisconnectEx(
         SafeHandle requestQueueHandle,
         ulong connectionId,
         uint reserved,
@@ -107,28 +107,28 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpCreateServerSession(
+    partial internal static uint HttpCreateServerSession(
         HTTPAPI_VERSION version,
         ulong* serverSessionId,
         uint reserved
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpCreateUrlGroup(
+    partial internal static uint HttpCreateUrlGroup(
         ulong serverSessionId,
         ulong* urlGroupId,
         uint reserved
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-    internal static partial uint HttpFindUrlGroupId(
+    partial internal static uint HttpFindUrlGroupId(
         string pFullyQualifiedUrl,
         SafeHandle requestQueueHandle,
         ulong* urlGroupId
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-    internal static partial uint HttpAddUrlToUrlGroup(
+    partial internal static uint HttpAddUrlToUrlGroup(
         ulong urlGroupId,
         string pFullyQualifiedUrl,
         ulong context,
@@ -136,7 +136,7 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpSetUrlGroupProperty(
+    partial internal static uint HttpSetUrlGroupProperty(
         ulong urlGroupId,
         HTTP_SERVER_PROPERTY serverProperty,
         IntPtr pPropertyInfo,
@@ -144,20 +144,20 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-    internal static partial uint HttpRemoveUrlFromUrlGroup(
+    partial internal static uint HttpRemoveUrlFromUrlGroup(
         ulong urlGroupId,
         string pFullyQualifiedUrl,
         uint flags
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpCloseServerSession(ulong serverSessionId);
+    partial internal static uint HttpCloseServerSession(ulong serverSessionId);
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpCloseUrlGroup(ulong urlGroupId);
+    partial internal static uint HttpCloseUrlGroup(ulong urlGroupId);
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static partial uint HttpSetRequestQueueProperty(
+    partial internal static uint HttpSetRequestQueueProperty(
         SafeHandle requestQueueHandle,
         HTTP_SERVER_PROPERTY serverProperty,
         IntPtr pPropertyInfo,
@@ -167,7 +167,7 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-    internal static unsafe partial uint HttpCreateRequestQueue(
+    partial internal static unsafe uint HttpCreateRequestQueue(
         HTTPAPI_VERSION version,
         string? pName,
         IntPtr pSecurityAttributes,
@@ -176,14 +176,14 @@ internal static unsafe partial class HttpApi
     );
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static unsafe partial uint HttpCloseRequestQueue(IntPtr pReqQueueHandle);
+    partial internal static unsafe uint HttpCloseRequestQueue(IntPtr pReqQueueHandle);
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    internal static partial bool HttpIsFeatureSupported(HTTP_FEATURE_ID feature);
+    partial internal static bool HttpIsFeatureSupported(HTTP_FEATURE_ID feature);
 
     [LibraryImport(HTTPAPI, SetLastError = true)]
-    internal static unsafe partial uint HttpDelegateRequestEx(
+    partial internal static unsafe uint HttpDelegateRequestEx(
         SafeHandle pReqQueueHandle,
         SafeHandle pDelegateQueueHandle,
         ulong requestId,

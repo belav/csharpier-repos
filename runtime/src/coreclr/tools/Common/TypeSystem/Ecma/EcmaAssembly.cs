@@ -7,7 +7,7 @@ using System.Reflection.PortableExecutable;
 
 namespace Internal.TypeSystem.Ecma
 {
-    public sealed partial class EcmaAssembly : EcmaModule, IAssemblyDesc
+    partial public sealed class EcmaAssembly : EcmaModule, IAssemblyDesc
     {
         private AssemblyName _assemblyName;
         private AssemblyDefinition _assemblyDefinition;

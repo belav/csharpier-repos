@@ -9,7 +9,7 @@ using System.Drawing.Printing;
 
 public class PrintingTextFile
 {
-    static private void PrintPageEvent(object sender, PrintPageEventArgs e)
+    private static void PrintPageEvent(object sender, PrintPageEventArgs e)
     {
         float left = e.MarginBounds.Left;
         float top = e.MarginBounds.Top;

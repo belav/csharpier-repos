@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.Utilities;
 
 namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
 {
-    internal abstract partial class AbstractMoveDeclarationNearReferenceService<
+    partial internal abstract class AbstractMoveDeclarationNearReferenceService<
         TService,
         TStatementSyntax,
         TLocalDeclarationStatementSyntax,

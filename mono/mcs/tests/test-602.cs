@@ -22,7 +22,7 @@ public class C
         return 0;
     }
 
-    static public int Error(string format, params object[] args)
+    public static int Error(string format, params object[] args)
     {
         return Format(format, args);
     }

@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 {
-    internal abstract partial class SyntaxList : GreenNode
+    partial internal abstract class SyntaxList : GreenNode
     {
         internal SyntaxList()
             : base(GreenNode.ListKind) { }

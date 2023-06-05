@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
         ),
         Shared
     ]
-    internal sealed partial class CSharpConvertIfToSwitchCodeRefactoringProvider
+    partial internal sealed class CSharpConvertIfToSwitchCodeRefactoringProvider
         : AbstractConvertIfToSwitchCodeRefactoringProvider<
             IfStatementSyntax,
             ExpressionSyntax,

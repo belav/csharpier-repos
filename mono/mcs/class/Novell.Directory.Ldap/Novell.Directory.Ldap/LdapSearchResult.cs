@@ -42,12 +42,13 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     public class LdapSearchResult : LdapMessage
     {
+        public
         /// <summary> Returns the entry of a server's search response.
         ///
         /// </summary>
         /// <returns> The LdapEntry associated with this LdapSearchResult
         /// </returns>
-        virtual public LdapEntry Entry
+        virtual LdapEntry Entry
         {
             get
             {

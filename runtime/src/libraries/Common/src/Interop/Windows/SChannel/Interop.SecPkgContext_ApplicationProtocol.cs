@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     internal enum ApplicationProtocolNegotiationStatus
     {
@@ -28,7 +28,7 @@ internal static partial class Interop
         public ApplicationProtocolNegotiationStatus ProtoNegoStatus;
         public ApplicationProtocolNegotiationExt ProtoNegoExt;
         public byte ProtocolIdSize;
-        public fixed byte ProtocolId[MaxProtocolIdSize];
+        fixed public byte ProtocolId[MaxProtocolIdSize];
         public ReadOnlySpan<byte> Protocol =>
             MemoryMarshal.CreateReadOnlySpan(ref ProtocolId[0], ProtocolIdSize);
     }

@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class SignatureVariable
+    public class SignatureVariable
     {
         protected internal sealed override int CompareToImpl(
             TypeDesc other,
@@ -15,7 +16,7 @@ namespace Internal.TypeSystem
         }
     }
 
-    public partial class SignatureTypeVariable
+    partial public class SignatureTypeVariable
     {
         protected internal override int ClassCode
         {
@@ -23,7 +24,7 @@ namespace Internal.TypeSystem
         }
     }
 
-    public partial class SignatureMethodVariable
+    partial public class SignatureMethodVariable
     {
         protected internal override int ClassCode
         {

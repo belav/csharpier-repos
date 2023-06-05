@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    internal sealed partial class PortableThreadPool
+    partial internal sealed class PortableThreadPool
     {
         // Continuations of IO completions are dispatched to the ThreadPool from IO completion poller threads. This avoids
         // continuations blocking/stalling the IO completion poller threads. Setting UnsafeInlineIOCompletionCallbacks allows

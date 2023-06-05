@@ -14,7 +14,7 @@ public class Test_b119294
     public static int m_coSourceLength = 100;
     public static int m_coDestLength = 100;
 
-    static public int Main()
+    public static int Main()
     {
         String testenv = Environment.GetEnvironmentVariable("URTBUILDENV");
         if ((testenv == null) || (testenv.ToUpper() != "FRE"))

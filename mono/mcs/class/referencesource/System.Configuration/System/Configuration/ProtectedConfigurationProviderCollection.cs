@@ -37,7 +37,7 @@ namespace System.Configuration
             base.Add(provider);
         }
 
-        new public ProtectedConfigurationProvider this[string name]
+        public new ProtectedConfigurationProvider this[string name]
         {
             get { return (ProtectedConfigurationProvider)base[name]; }
         }

@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public abstract partial class ImmutablesTestBase
+    partial public abstract class ImmutablesTestBase
     {
         /// <summary>
         /// Tests the EqualsStructurally public method and the IStructuralEquatable.Equals method.

@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class AsyncRewriter : StateMachineRewriter
+    partial internal class AsyncRewriter : StateMachineRewriter
     {
         /// <summary>
         /// This rewriter rewrites an async-iterator method. See async-streams.md for design overview.

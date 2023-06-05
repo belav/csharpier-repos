@@ -16,6 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindUsages
 {
+    partial
     /// <summary>
     /// Information about a symbol's definition that can be displayed in an editor
     /// and used for navigation.
@@ -26,7 +27,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
     /// Subclassing is also supported for scenarios that fall outside the bounds of
     /// these common cases.
     /// </summary>
-    internal abstract partial class DefinitionItem
+    internal abstract class DefinitionItem
     {
         /// <summary>
         /// The definition item corresponding to the initial symbol the user was trying to find. This item should get

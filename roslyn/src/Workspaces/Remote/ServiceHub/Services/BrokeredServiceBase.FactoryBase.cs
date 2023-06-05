@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal abstract partial class BrokeredServiceBase
+    partial internal abstract class BrokeredServiceBase
     {
         private static int s_cultureInitialized;
 

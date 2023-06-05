@@ -20,7 +20,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    public static partial class Monitor
+    partial public static class Monitor
     {
         /*=========================================================================
         ** Obtain the monitor lock of obj. Will block if another thread holds the lock
@@ -194,6 +194,6 @@ namespace System.Threading
             RuntimeHelpers.QCall,
             EntryPoint = "ObjectNative_GetMonitorLockContentionCount"
         )]
-        private static partial long GetLockContentionCount();
+        partial private static long GetLockContentionCount();
     }
 }

@@ -57,7 +57,7 @@ namespace System.Data.ProviderBase
             get { return _performanceCounters; }
         }
 
-        abstract public DbProviderFactory ProviderFactory { get; }
+        public abstract DbProviderFactory ProviderFactory { get; }
 
         internal int ObjectID
         {
@@ -146,7 +146,7 @@ namespace System.Data.ProviderBase
             return null;
         }
 
-        virtual protected DbMetaDataFactory CreateMetaDataFactory(
+        protected virtual DbMetaDataFactory CreateMetaDataFactory(
             DbConnectionInternal internalConnection,
             out bool cacheMetaDataFactory
         )
@@ -225,7 +225,7 @@ namespace System.Data.ProviderBase
             return newConnection;
         }
 
-        virtual internal DbConnectionPoolGroupProviderInfo CreateConnectionPoolGroupProviderInfo(
+        internal virtual DbConnectionPoolGroupProviderInfo CreateConnectionPoolGroupProviderInfo(
             DbConnectionOptions connectionOptions
         )
         {
@@ -867,7 +867,7 @@ namespace System.Data.ProviderBase
 #endif
         }
 
-        virtual protected DbConnectionInternal CreateConnection(
+        protected virtual DbConnectionInternal CreateConnection(
             DbConnectionOptions options,
             DbConnectionPoolKey poolKey,
             object poolGroupProviderInfo,
@@ -885,7 +885,7 @@ namespace System.Data.ProviderBase
             );
         }
 
-        abstract protected DbConnectionInternal CreateConnection(
+        protected abstract DbConnectionInternal CreateConnection(
             DbConnectionOptions options,
             DbConnectionPoolKey poolKey,
             object poolGroupProviderInfo,
@@ -893,40 +893,40 @@ namespace System.Data.ProviderBase
             DbConnection owningConnection
         );
 
-        abstract protected DbConnectionOptions CreateConnectionOptions(
+        protected abstract DbConnectionOptions CreateConnectionOptions(
             string connectionString,
             DbConnectionOptions previous
         );
 
-        abstract protected DbConnectionPoolGroupOptions CreateConnectionPoolGroupOptions(
+        protected abstract DbConnectionPoolGroupOptions CreateConnectionPoolGroupOptions(
             DbConnectionOptions options
         );
 
-        abstract internal DbConnectionPoolGroup GetConnectionPoolGroup(DbConnection connection);
+        internal abstract DbConnectionPoolGroup GetConnectionPoolGroup(DbConnection connection);
 
-        abstract internal DbConnectionInternal GetInnerConnection(DbConnection connection);
+        internal abstract DbConnectionInternal GetInnerConnection(DbConnection connection);
 
-        abstract protected int GetObjectId(DbConnection connection);
+        protected abstract int GetObjectId(DbConnection connection);
 
-        abstract internal void PermissionDemand(DbConnection outerConnection);
+        internal abstract void PermissionDemand(DbConnection outerConnection);
 
-        abstract internal void SetConnectionPoolGroup(
+        internal abstract void SetConnectionPoolGroup(
             DbConnection outerConnection,
             DbConnectionPoolGroup poolGroup
         );
 
-        abstract internal void SetInnerConnectionEvent(
+        internal abstract void SetInnerConnectionEvent(
             DbConnection owningObject,
             DbConnectionInternal to
         );
 
-        abstract internal bool SetInnerConnectionFrom(
+        internal abstract bool SetInnerConnectionFrom(
             DbConnection owningObject,
             DbConnectionInternal to,
             DbConnectionInternal from
         );
 
-        abstract internal void SetInnerConnectionTo(
+        internal abstract void SetInnerConnectionTo(
             DbConnection owningObject,
             DbConnectionInternal to
         );

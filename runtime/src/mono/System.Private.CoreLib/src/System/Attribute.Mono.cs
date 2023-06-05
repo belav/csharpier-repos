@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace System
 {
-    public partial class Attribute
+    partial public class Attribute
     {
         private static Attribute? GetAttr(
             ICustomAttributeProvider element,

@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using Xunit;
 
-unsafe partial class GenericsNative
+partial unsafe class GenericsNative
 {
     [DllImport(nameof(GenericsNative))]
     public static extern Vector<float> GetVectorF128(float e00, float e01, float e02, float e03);
@@ -138,7 +138,7 @@ unsafe partial class GenericsNative
     public static extern Vector<float> AddVectorF256s(in Vector<float> pValues, int count);
 }
 
-unsafe partial class GenericsTest
+partial unsafe class GenericsTest
 {
     private static void TestVectorF()
     {

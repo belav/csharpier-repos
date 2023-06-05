@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Moq
 {
-    static partial class MockExtensions
+    partial static class MockExtensions
     {
         /// <summary>
         /// Resets all invocations recorded for this mock.

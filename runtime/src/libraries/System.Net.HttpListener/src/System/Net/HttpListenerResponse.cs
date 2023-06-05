@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.Net
 {
-    public sealed unsafe partial class HttpListenerResponse : IDisposable
+    partial public sealed unsafe class HttpListenerResponse : IDisposable
     {
         private BoundaryType _boundaryType = BoundaryType.None;
         private CookieCollection? _cookies;

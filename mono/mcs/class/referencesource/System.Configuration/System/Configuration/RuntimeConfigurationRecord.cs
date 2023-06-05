@@ -22,7 +22,7 @@ namespace System.Configuration
 
     internal sealed class RuntimeConfigurationRecord : BaseConfigurationRecord
     {
-        static internal IInternalConfigRecord Create(
+        internal static IInternalConfigRecord Create(
             InternalConfigRoot configRoot,
             IInternalConfigRecord parent,
             string configPath
@@ -43,19 +43,23 @@ namespace System.Configuration
                 | ClassSupportsDelayedInit
         );
 
-        override protected SimpleBitVector32 ClassFlags
+        protected override SimpleBitVector32 ClassFlags
         {
             get { return RuntimeClassFlags; }
         }
 
         // Create the factory that will evaluate configuration
-        override protected object CreateSectionFactory(FactoryRecord factoryRecord)
+        protected
+        // Create the factory that will evaluate configuration
+        override object CreateSectionFactory(FactoryRecord factoryRecord)
         {
             return new RuntimeConfigurationFactory(this, factoryRecord);
         }
 
         // parentConfig contains the config that we'd merge with.
-        override protected object CreateSection(
+        protected
+        // parentConfig contains the config that we'd merge with.
+        override object CreateSection(
             bool inputIsTrusted,
             FactoryRecord factoryRecord,
             SectionRecord sectionRecord,
@@ -82,7 +86,7 @@ namespace System.Configuration
             return config;
         }
 
-        override protected object UseParentResult(
+        protected override object UseParentResult(
             string configKey,
             object parentResult,
             SectionRecord sectionRecord
@@ -128,7 +132,7 @@ namespace System.Configuration
             }
         }
 
-        override protected object GetRuntimeObject(object result)
+        protected override object GetRuntimeObject(object result)
         {
             object runtimeObject;
             ConfigurationSection section = result as ConfigurationSection;

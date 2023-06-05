@@ -12,7 +12,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class FindPal : IFindPal
+    partial internal sealed class FindPal : IFindPal
     {
         private readonly StorePal _storePal;
         private readonly X509Certificate2Collection _copyTo;

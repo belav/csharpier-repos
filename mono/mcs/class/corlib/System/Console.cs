@@ -40,7 +40,7 @@ using System.Threading;
 
 namespace System
 {
-    public static partial class Console
+    partial public static class Console
     {
 #if MONO_FEATURE_CONSOLE
         private class WindowsConsole

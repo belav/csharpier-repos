@@ -12,7 +12,7 @@ namespace System.Runtime.CompilerServices
         System.AttributeTargets.Field | System.AttributeTargets.Parameter,
         Inherited = false
     )]
-    public sealed partial class IDispatchConstantAttribute
+    partial public sealed class IDispatchConstantAttribute
         : System.Runtime.CompilerServices.CustomConstantAttribute
     {
         public IDispatchConstantAttribute() { }
@@ -27,7 +27,7 @@ namespace System.Runtime.CompilerServices
         System.AttributeTargets.Field | System.AttributeTargets.Parameter,
         Inherited = false
     )]
-    public sealed partial class IUnknownConstantAttribute
+    partial public sealed class IUnknownConstantAttribute
         : System.Runtime.CompilerServices.CustomConstantAttribute
     {
         public IUnknownConstantAttribute() { }
@@ -47,7 +47,7 @@ namespace System.Runtime.InteropServices
             | System.AttributeTargets.Interface,
         Inherited = false
     )]
-    public sealed partial class AutomationProxyAttribute : System.Attribute
+    partial public sealed class AutomationProxyAttribute : System.Attribute
     {
         public AutomationProxyAttribute(bool val) { }
 
@@ -64,7 +64,7 @@ namespace System.Runtime.InteropServices
             | System.AttributeTargets.ReturnValue,
         Inherited = false
     )]
-    public sealed partial class ComAliasNameAttribute : System.Attribute
+    partial public sealed class ComAliasNameAttribute : System.Attribute
     {
         public ComAliasNameAttribute(string alias) { }
 
@@ -77,7 +77,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial class ComAwareEventInfo : System.Reflection.EventInfo
+    partial public class ComAwareEventInfo : System.Reflection.EventInfo
     {
         public ComAwareEventInfo(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -160,7 +160,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly, Inherited = false)]
-    public sealed partial class ComCompatibleVersionAttribute : System.Attribute
+    partial public sealed class ComCompatibleVersionAttribute : System.Attribute
     {
         public ComCompatibleVersionAttribute(int major, int minor, int build, int revision) { }
 
@@ -183,24 +183,24 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All, Inherited = false)]
-    public sealed partial class ComConversionLossAttribute : System.Attribute
+    partial public sealed class ComConversionLossAttribute : System.Attribute
     {
         public ComConversionLossAttribute() { }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
-    public sealed partial class ComRegisterFunctionAttribute : System.Attribute
+    partial public sealed class ComRegisterFunctionAttribute : System.Attribute
     {
         public ComRegisterFunctionAttribute() { }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
-    public sealed partial class ComUnregisterFunctionAttribute : System.Attribute
+    partial public sealed class ComUnregisterFunctionAttribute : System.Attribute
     {
         public ComUnregisterFunctionAttribute() { }
     }
 
-    public sealed partial class HandleCollector
+    partial public sealed class HandleCollector
     {
         public HandleCollector(string? name, int initialThreshold) { }
 
@@ -229,7 +229,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly, Inherited = false)]
-    public sealed partial class ImportedFromTypeLibAttribute : System.Attribute
+    partial public sealed class ImportedFromTypeLibAttribute : System.Attribute
     {
         public ImportedFromTypeLibAttribute(string tlbFile) { }
 
@@ -244,7 +244,7 @@ namespace System.Runtime.InteropServices
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class ManagedToNativeComInteropStubAttribute : System.Attribute
+    partial public sealed class ManagedToNativeComInteropStubAttribute : System.Attribute
     {
         public ManagedToNativeComInteropStubAttribute(System.Type classType, string methodName) { }
 
@@ -263,7 +263,7 @@ namespace System.Runtime.InteropServices
         Inherited = false,
         AllowMultiple = true
     )]
-    public sealed partial class PrimaryInteropAssemblyAttribute : System.Attribute
+    partial public sealed class PrimaryInteropAssemblyAttribute : System.Attribute
     {
         public PrimaryInteropAssemblyAttribute(int major, int minor) { }
 
@@ -277,7 +277,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public static partial class RuntimeEnvironment
+    partial public static class RuntimeEnvironment
     {
         [System.ObsoleteAttribute(
             "RuntimeEnvironment members SystemConfigurationFile, GetRuntimeInterfaceAsIntPtr, and GetRuntimeInterfaceAsObject are not supported and throw PlatformNotSupportedException.",
@@ -326,7 +326,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
-    public sealed partial class TypeLibFuncAttribute : System.Attribute
+    partial public sealed class TypeLibFuncAttribute : System.Attribute
     {
         public TypeLibFuncAttribute(short flags) { }
 
@@ -357,7 +357,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
-    public sealed partial class TypeLibImportClassAttribute : System.Attribute
+    partial public sealed class TypeLibImportClassAttribute : System.Attribute
     {
         public TypeLibImportClassAttribute(System.Type importClass) { }
 
@@ -374,7 +374,7 @@ namespace System.Runtime.InteropServices
             | System.AttributeTargets.Struct,
         Inherited = false
     )]
-    public sealed partial class TypeLibTypeAttribute : System.Attribute
+    partial public sealed class TypeLibTypeAttribute : System.Attribute
     {
         public TypeLibTypeAttribute(short flags) { }
 
@@ -406,7 +406,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Field, Inherited = false)]
-    public sealed partial class TypeLibVarAttribute : System.Attribute
+    partial public sealed class TypeLibVarAttribute : System.Attribute
     {
         public TypeLibVarAttribute(short flags) { }
 
@@ -437,7 +437,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly, Inherited = false)]
-    public sealed partial class TypeLibVersionAttribute : System.Attribute
+    partial public sealed class TypeLibVersionAttribute : System.Attribute
     {
         public TypeLibVersionAttribute(int major, int minor) { }
 
@@ -496,7 +496,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct FORMATETC
+    partial public struct FORMATETC
     {
         public short cfFormat;
         public System.Runtime.InteropServices.ComTypes.DVASPECT dwAspect;
@@ -511,7 +511,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IAdviseSink
+    partial public interface IAdviseSink
     {
         void OnClose();
         void OnDataChange(
@@ -527,7 +527,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IDataObject
+    partial public interface IDataObject
     {
         int DAdvise(
             ref System.Runtime.InteropServices.ComTypes.FORMATETC pFormatetc,
@@ -566,7 +566,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IEnumFORMATETC
+    partial public interface IEnumFORMATETC
     {
         void Clone(out System.Runtime.InteropServices.ComTypes.IEnumFORMATETC newEnum);
         int Next(
@@ -581,7 +581,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IEnumSTATDATA
+    partial public interface IEnumSTATDATA
     {
         void Clone(out System.Runtime.InteropServices.ComTypes.IEnumSTATDATA newEnum);
         int Next(
@@ -599,7 +599,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct STATDATA
+    partial public struct STATDATA
     {
         public System.Runtime.InteropServices.ComTypes.ADVF advf;
         public System.Runtime.InteropServices.ComTypes.IAdviseSink advSink;
@@ -613,7 +613,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct STGMEDIUM
+    partial public struct STGMEDIUM
     {
         public object? pUnkForRelease;
         public System.Runtime.InteropServices.ComTypes.TYMED tymed;
@@ -639,7 +639,7 @@ namespace System.Runtime.InteropServices.ComTypes
 
 namespace System.Security
 {
-    public static partial class SecureStringMarshal
+    partial public static class SecureStringMarshal
     {
         public static System.IntPtr SecureStringToCoTaskMemAnsi(System.Security.SecureString s)
         {
@@ -666,7 +666,7 @@ namespace System.Security
 
 namespace System
 {
-    public sealed partial class DataMisalignedException : System.SystemException
+    partial public sealed class DataMisalignedException : System.SystemException
     {
         public DataMisalignedException() { }
 
@@ -675,7 +675,7 @@ namespace System
         public DataMisalignedException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class DllNotFoundException : System.TypeLoadException
+    partial public class DllNotFoundException : System.TypeLoadException
     {
         public DllNotFoundException() { }
 
@@ -692,7 +692,7 @@ namespace System
 
 namespace System.IO
 {
-    public partial class UnmanagedMemoryAccessor : System.IDisposable
+    partial public class UnmanagedMemoryAccessor : System.IDisposable
     {
         protected UnmanagedMemoryAccessor() { }
 
@@ -868,12 +868,12 @@ namespace System.Runtime.InteropServices
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class AllowReversePInvokeCallsAttribute : System.Attribute
+    partial public sealed class AllowReversePInvokeCallsAttribute : System.Attribute
     {
         public AllowReversePInvokeCallsAttribute() { }
     }
 
-    public readonly partial struct ArrayWithOffset
+    partial public readonly struct ArrayWithOffset
         : System.IEquatable<System.Runtime.InteropServices.ArrayWithOffset>
     {
         private readonly object _dummy;
@@ -935,7 +935,7 @@ namespace System.Runtime.InteropServices
             | System.AttributeTargets.Struct,
         Inherited = false
     )]
-    public sealed partial class BestFitMappingAttribute : System.Attribute
+    partial public sealed class BestFitMappingAttribute : System.Attribute
     {
         public bool ThrowOnUnmappableChar;
 
@@ -950,7 +950,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class BStrWrapper
+    partial public sealed class BStrWrapper
     {
         public BStrWrapper(object? value) { }
 
@@ -975,7 +975,7 @@ namespace System.Runtime.InteropServices
         System.AttributeTargets.Assembly | System.AttributeTargets.Class,
         Inherited = false
     )]
-    public sealed partial class ClassInterfaceAttribute : System.Attribute
+    partial public sealed class ClassInterfaceAttribute : System.Attribute
     {
         public ClassInterfaceAttribute(short classInterfaceType) { }
 
@@ -997,7 +997,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.CLSCompliantAttribute(false)]
-    public readonly partial struct CLong : System.IEquatable<System.Runtime.InteropServices.CLong>
+    partial public readonly struct CLong : System.IEquatable<System.Runtime.InteropServices.CLong>
     {
         private readonly int _dummyPrimitive;
 
@@ -1040,7 +1040,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
-    public sealed partial class CoClassAttribute : System.Attribute
+    partial public sealed class CoClassAttribute : System.Attribute
     {
         public CoClassAttribute(System.Type coClass) { }
 
@@ -1050,7 +1050,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public static partial class CollectionsMarshal
+    partial public static class CollectionsMarshal
     {
         public static System.Span<T> AsSpan<T>(System.Collections.Generic.List<T>? list)
         {
@@ -1078,7 +1078,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, Inherited = false)]
-    public sealed partial class ComDefaultInterfaceAttribute : System.Attribute
+    partial public sealed class ComDefaultInterfaceAttribute : System.Attribute
     {
         public ComDefaultInterfaceAttribute(System.Type defaultInterface) { }
 
@@ -1092,7 +1092,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class ComEventInterfaceAttribute : System.Attribute
+    partial public sealed class ComEventInterfaceAttribute : System.Attribute
     {
         public ComEventInterfaceAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -1144,7 +1144,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public static partial class ComEventsHelper
+    partial public static class ComEventsHelper
     {
         public static void Combine(object rcw, System.Guid iid, int dispid, System.Delegate d) { }
 
@@ -1159,7 +1159,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public partial class COMException : System.Runtime.InteropServices.ExternalException
+    partial public class COMException : System.Runtime.InteropServices.ExternalException
     {
         public COMException() { }
 
@@ -1184,7 +1184,7 @@ namespace System.Runtime.InteropServices
         System.AttributeTargets.Class | System.AttributeTargets.Interface,
         Inherited = false
     )]
-    public sealed partial class ComImportAttribute : System.Attribute
+    partial public sealed class ComImportAttribute : System.Attribute
     {
         public ComImportAttribute() { }
     }
@@ -1208,7 +1208,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class ComSourceInterfacesAttribute : System.Attribute
+    partial public sealed class ComSourceInterfacesAttribute : System.Attribute
     {
         public ComSourceInterfacesAttribute(string sourceInterfaces) { }
 
@@ -1255,7 +1255,7 @@ namespace System.Runtime.InteropServices
         {
             public System.IntPtr Vtable;
 
-            public unsafe static T GetInstance<T>(ComInterfaceDispatch* dispatchPtr)
+            public static unsafe T GetInstance<T>(ComInterfaceDispatch* dispatchPtr)
                 where T : class
             {
                 throw null;
@@ -1270,7 +1270,7 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        protected unsafe abstract ComInterfaceEntry* ComputeVtables(
+        protected abstract unsafe ComInterfaceEntry* ComputeVtables(
             object obj,
             CreateComInterfaceFlags flags,
             out int count
@@ -1344,7 +1344,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.CLSCompliantAttribute(false)]
-    public readonly partial struct CULong : System.IEquatable<System.Runtime.InteropServices.CULong>
+    partial public readonly struct CULong : System.IEquatable<System.Runtime.InteropServices.CULong>
     {
         private readonly int _dummyPrimitive;
 
@@ -1392,7 +1392,7 @@ namespace System.Runtime.InteropServices
     [System.ObsoleteAttribute(
         "CurrencyWrapper and support for marshalling to the VARIANT type may be unavailable in future releases."
     )]
-    public sealed partial class CurrencyWrapper
+    partial public sealed class CurrencyWrapper
     {
         public CurrencyWrapper(decimal obj) { }
 
@@ -1424,7 +1424,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Module, Inherited = false)]
-    public sealed partial class DefaultCharSetAttribute : System.Attribute
+    partial public sealed class DefaultCharSetAttribute : System.Attribute
     {
         public DefaultCharSetAttribute(System.Runtime.InteropServices.CharSet charSet) { }
 
@@ -1438,7 +1438,7 @@ namespace System.Runtime.InteropServices
         System.AttributeTargets.Assembly | System.AttributeTargets.Method,
         AllowMultiple = false
     )]
-    public sealed partial class DefaultDllImportSearchPathsAttribute : System.Attribute
+    partial public sealed class DefaultDllImportSearchPathsAttribute : System.Attribute
     {
         public DefaultDllImportSearchPathsAttribute(
             System.Runtime.InteropServices.DllImportSearchPath paths
@@ -1451,7 +1451,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Parameter)]
-    public sealed partial class DefaultParameterValueAttribute : System.Attribute
+    partial public sealed class DefaultParameterValueAttribute : System.Attribute
     {
         public DefaultParameterValueAttribute(object? value) { }
 
@@ -1465,7 +1465,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class DispatchWrapper
+    partial public sealed class DispatchWrapper
     {
         public DispatchWrapper(object? obj) { }
 
@@ -1482,7 +1482,7 @@ namespace System.Runtime.InteropServices
             | System.AttributeTargets.Property,
         Inherited = false
     )]
-    public sealed partial class DispIdAttribute : System.Attribute
+    partial public sealed class DispIdAttribute : System.Attribute
     {
         public DispIdAttribute(int dispId) { }
 
@@ -1493,7 +1493,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
-    public sealed partial class DllImportAttribute : System.Attribute
+    partial public sealed class DllImportAttribute : System.Attribute
     {
         public bool BestFitMapping;
         public System.Runtime.InteropServices.CallingConvention CallingConvention;
@@ -1543,7 +1543,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class ErrorWrapper
+    partial public sealed class ErrorWrapper
     {
         public ErrorWrapper(System.Exception e) { }
 
@@ -1566,7 +1566,7 @@ namespace System.Runtime.InteropServices
             | System.AttributeTargets.Struct,
         Inherited = false
     )]
-    public sealed partial class GuidAttribute : System.Attribute
+    partial public sealed class GuidAttribute : System.Attribute
     {
         public GuidAttribute(string guid) { }
 
@@ -1576,7 +1576,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public readonly partial struct HandleRef
+    partial public readonly struct HandleRef
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1611,17 +1611,17 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial interface ICustomAdapter
+    partial public interface ICustomAdapter
     {
         object GetUnderlyingObject();
     }
 
-    public partial interface ICustomFactory
+    partial public interface ICustomFactory
     {
         System.MarshalByRefObject CreateInstance(System.Type serverType);
     }
 
-    public partial interface ICustomMarshaler
+    partial public interface ICustomMarshaler
     {
         void CleanUpManagedData(object ManagedObj);
         void CleanUpNativeData(System.IntPtr pNativeData);
@@ -1633,7 +1633,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial interface ICustomQueryInterface
+    partial public interface ICustomQueryInterface
     {
         System.Runtime.InteropServices.CustomQueryInterfaceResult GetInterface(
             ref System.Guid iid,
@@ -1641,7 +1641,7 @@ namespace System.Runtime.InteropServices
         );
     }
 
-    public partial interface IDynamicInterfaceCastable
+    partial public interface IDynamicInterfaceCastable
     {
         bool IsInterfaceImplemented(
             System.RuntimeTypeHandle interfaceType,
@@ -1651,7 +1651,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Interface, Inherited = false)]
-    public sealed partial class InterfaceTypeAttribute : System.Attribute
+    partial public sealed class InterfaceTypeAttribute : System.Attribute
     {
         public InterfaceTypeAttribute(short interfaceType) { }
 
@@ -1664,7 +1664,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public partial class InvalidComObjectException : System.SystemException
+    partial public class InvalidComObjectException : System.SystemException
     {
         public InvalidComObjectException() { }
 
@@ -1678,7 +1678,7 @@ namespace System.Runtime.InteropServices
         public InvalidComObjectException(string? message, System.Exception? inner) { }
     }
 
-    public partial class InvalidOleVariantTypeException : System.SystemException
+    partial public class InvalidOleVariantTypeException : System.SystemException
     {
         public InvalidOleVariantTypeException() { }
 
@@ -1693,7 +1693,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
-    public sealed partial class LCIDConversionAttribute : System.Attribute
+    partial public sealed class LCIDConversionAttribute : System.Attribute
     {
         public LCIDConversionAttribute(int lcid) { }
 
@@ -1708,7 +1708,7 @@ namespace System.Runtime.InteropServices
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class LibraryImportAttribute : System.Attribute
+    partial public sealed class LibraryImportAttribute : System.Attribute
     {
         public LibraryImportAttribute(string libraryName) { }
 
@@ -1738,7 +1738,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public static partial class Marshal
+    partial public static class Marshal
     {
         public static readonly int SystemDefaultCharSize;
         public static readonly int SystemMaxDBCSCharSize;
@@ -2733,7 +2733,7 @@ namespace System.Runtime.InteropServices
             | System.AttributeTargets.ReturnValue,
         Inherited = false
     )]
-    public sealed partial class MarshalAsAttribute : System.Attribute
+    partial public sealed class MarshalAsAttribute : System.Attribute
     {
         public System.Runtime.InteropServices.UnmanagedType ArraySubType;
         public int IidParameterIndex;
@@ -2755,7 +2755,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public partial class MarshalDirectiveException : System.SystemException
+    partial public class MarshalDirectiveException : System.SystemException
     {
         public MarshalDirectiveException() { }
 
@@ -2769,7 +2769,7 @@ namespace System.Runtime.InteropServices
         public MarshalDirectiveException(string? message, System.Exception? inner) { }
     }
 
-    public static partial class NativeLibrary
+    partial public static class NativeLibrary
     {
         public static void Free(System.IntPtr handle) { }
 
@@ -2827,7 +2827,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public static unsafe partial class NativeMemory
+    partial public static unsafe class NativeMemory
     {
         [System.CLSCompliantAttribute(false)]
         public static void* AlignedAlloc(nuint byteCount, nuint alignment)
@@ -2896,7 +2896,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public readonly partial struct NFloat
+    partial public readonly struct NFloat
         : System.IComparable,
             System.IComparable<System.Runtime.InteropServices.NFloat>,
             System.IEquatable<System.Runtime.InteropServices.NFloat>,
@@ -4441,7 +4441,7 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Parameter, Inherited = false)]
-    public sealed partial class OptionalAttribute : System.Attribute
+    partial public sealed class OptionalAttribute : System.Attribute
     {
         public OptionalAttribute() { }
     }
@@ -4471,7 +4471,7 @@ namespace System.Runtime.InteropServices
         SIGHUP = -1,
     }
 
-    public sealed partial class PosixSignalContext
+    partial public sealed class PosixSignalContext
     {
         public PosixSignalContext(System.Runtime.InteropServices.PosixSignal signal) { }
 
@@ -4486,7 +4486,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public sealed partial class PosixSignalRegistration : System.IDisposable
+    partial public sealed class PosixSignalRegistration : System.IDisposable
     {
         internal PosixSignalRegistration() { }
 
@@ -4508,13 +4508,13 @@ namespace System.Runtime.InteropServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, Inherited = false)]
-    public sealed partial class PreserveSigAttribute : System.Attribute
+    partial public sealed class PreserveSigAttribute : System.Attribute
     {
         public PreserveSigAttribute() { }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, Inherited = false)]
-    public sealed partial class ProgIdAttribute : System.Attribute
+    partial public sealed class ProgIdAttribute : System.Attribute
     {
         public ProgIdAttribute(string progId) { }
 
@@ -4524,7 +4524,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public partial class SafeArrayRankMismatchException : System.SystemException
+    partial public class SafeArrayRankMismatchException : System.SystemException
     {
         public SafeArrayRankMismatchException() { }
 
@@ -4538,7 +4538,7 @@ namespace System.Runtime.InteropServices
         public SafeArrayRankMismatchException(string? message, System.Exception? inner) { }
     }
 
-    public partial class SafeArrayTypeMismatchException : System.SystemException
+    partial public class SafeArrayTypeMismatchException : System.SystemException
     {
         public SafeArrayTypeMismatchException() { }
 
@@ -4552,7 +4552,7 @@ namespace System.Runtime.InteropServices
         public SafeArrayTypeMismatchException(string? message, System.Exception? inner) { }
     }
 
-    public partial class SEHException : System.Runtime.InteropServices.ExternalException
+    partial public class SEHException : System.Runtime.InteropServices.ExternalException
     {
         public SEHException() { }
 
@@ -4571,7 +4571,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public partial class StandardOleMarshalObject : System.MarshalByRefObject
+    partial public class StandardOleMarshalObject : System.MarshalByRefObject
     {
         protected StandardOleMarshalObject() { }
     }
@@ -4591,7 +4591,7 @@ namespace System.Runtime.InteropServices
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class TypeIdentifierAttribute : System.Attribute
+    partial public sealed class TypeIdentifierAttribute : System.Attribute
     {
         public TypeIdentifierAttribute() { }
 
@@ -4610,7 +4610,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class UnknownWrapper
+    partial public sealed class UnknownWrapper
     {
         public UnknownWrapper(object? obj) { }
 
@@ -4646,7 +4646,7 @@ namespace System.Runtime.InteropServices
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class UnmanagedFunctionPointerAttribute : System.Attribute
+    partial public sealed class UnmanagedFunctionPointerAttribute : System.Attribute
     {
         public bool BestFitMapping;
         public System.Runtime.InteropServices.CharSet CharSet;
@@ -4717,7 +4717,7 @@ namespace System.Runtime.InteropServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class VariantWrapper
+    partial public sealed class VariantWrapper
     {
         public VariantWrapper(object? obj) { }
 
@@ -4736,7 +4736,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Explicit
     )]
-    public partial struct BINDPTR
+    partial public struct BINDPTR
     {
         [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
         public System.IntPtr lpfuncdesc;
@@ -4754,7 +4754,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct BIND_OPTS
+    partial public struct BIND_OPTS
     {
         public int cbStruct;
         public int dwTickCountDeadline;
@@ -4785,7 +4785,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct CONNECTDATA
+    partial public struct CONNECTDATA
     {
         public int dwCookie;
         public object pUnk;
@@ -4810,7 +4810,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct DISPPARAMS
+    partial public struct DISPPARAMS
     {
         public int cArgs;
         public int cNamedArgs;
@@ -4824,7 +4824,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct ELEMDESC
+    partial public struct ELEMDESC
     {
         public System.Runtime.InteropServices.ComTypes.ELEMDESC.DESCUNION desc;
         public System.Runtime.InteropServices.ComTypes.TYPEDESC tdesc;
@@ -4832,7 +4832,7 @@ namespace System.Runtime.InteropServices.ComTypes
         [System.Runtime.InteropServices.StructLayoutAttribute(
             System.Runtime.InteropServices.LayoutKind.Explicit
         )]
-        public partial struct DESCUNION
+        partial public struct DESCUNION
         {
             [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
             public System.Runtime.InteropServices.ComTypes.IDLDESC idldesc;
@@ -4848,7 +4848,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct EXCEPINFO
+    partial public struct EXCEPINFO
     {
         public string bstrDescription;
         public string bstrHelpFile;
@@ -4867,7 +4867,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct FILETIME
+    partial public struct FILETIME
     {
         public int dwHighDateTime;
         public int dwLowDateTime;
@@ -4879,7 +4879,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct FUNCDESC
+    partial public struct FUNCDESC
     {
         public System.Runtime.InteropServices.ComTypes.CALLCONV callconv;
         public short cParams;
@@ -4934,7 +4934,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IBindCtx
+    partial public interface IBindCtx
     {
         void EnumObjectParam(out System.Runtime.InteropServices.ComTypes.IEnumString? ppenum);
         void GetBindOptions(ref System.Runtime.InteropServices.ComTypes.BIND_OPTS pbindopts);
@@ -4956,7 +4956,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IConnectionPoint
+    partial public interface IConnectionPoint
     {
         void Advise(object pUnkSink, out int pdwCookie);
         void EnumConnections(out System.Runtime.InteropServices.ComTypes.IEnumConnections ppEnum);
@@ -4973,7 +4973,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IConnectionPointContainer
+    partial public interface IConnectionPointContainer
     {
         void EnumConnectionPoints(
             out System.Runtime.InteropServices.ComTypes.IEnumConnectionPoints ppEnum
@@ -4990,7 +4990,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct IDLDESC
+    partial public struct IDLDESC
     {
         public System.IntPtr dwReserved;
         public System.Runtime.InteropServices.ComTypes.IDLFLAG wIDLFlags;
@@ -5015,7 +5015,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IEnumConnectionPoints
+    partial public interface IEnumConnectionPoints
     {
         void Clone(out System.Runtime.InteropServices.ComTypes.IEnumConnectionPoints ppenum);
         int Next(
@@ -5033,7 +5033,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IEnumConnections
+    partial public interface IEnumConnections
     {
         void Clone(out System.Runtime.InteropServices.ComTypes.IEnumConnections ppenum);
         int Next(
@@ -5051,7 +5051,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IEnumMoniker
+    partial public interface IEnumMoniker
     {
         void Clone(out System.Runtime.InteropServices.ComTypes.IEnumMoniker ppenum);
         int Next(
@@ -5069,7 +5069,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IEnumString
+    partial public interface IEnumString
     {
         void Clone(out System.Runtime.InteropServices.ComTypes.IEnumString ppenum);
         int Next(int celt, string[] rgelt, System.IntPtr pceltFetched);
@@ -5083,7 +5083,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IEnumVARIANT
+    partial public interface IEnumVARIANT
     {
         System.Runtime.InteropServices.ComTypes.IEnumVARIANT Clone();
         int Next(int celt, object?[] rgVar, System.IntPtr pceltFetched);
@@ -5097,7 +5097,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IMoniker
+    partial public interface IMoniker
     {
         void BindToObject(
             System.Runtime.InteropServices.ComTypes.IBindCtx pbc,
@@ -5197,7 +5197,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IPersistFile
+    partial public interface IPersistFile
     {
         void GetClassID(out System.Guid pClassID);
         void GetCurFile(out string ppszFileName);
@@ -5213,7 +5213,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IRunningObjectTable
+    partial public interface IRunningObjectTable
     {
         void EnumRunning(out System.Runtime.InteropServices.ComTypes.IEnumMoniker ppenumMoniker);
         int GetObject(
@@ -5243,7 +5243,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IStream
+    partial public interface IStream
     {
         void Clone(out System.Runtime.InteropServices.ComTypes.IStream ppstm);
         void Commit(int grfCommitFlags);
@@ -5269,7 +5269,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface ITypeComp
+    partial public interface ITypeComp
     {
         void Bind(
             string szName,
@@ -5293,7 +5293,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface ITypeInfo
+    partial public interface ITypeInfo
     {
         void AddressOfMember(
             int memid,
@@ -5352,7 +5352,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface ITypeInfo2 : System.Runtime.InteropServices.ComTypes.ITypeInfo
+    partial public interface ITypeInfo2 : System.Runtime.InteropServices.ComTypes.ITypeInfo
     {
         new void AddressOfMember(
             int memid,
@@ -5443,7 +5443,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface ITypeLib
+    partial public interface ITypeLib
     {
         void FindName(
             string szNameBuf,
@@ -5481,7 +5481,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface ITypeLib2 : System.Runtime.InteropServices.ComTypes.ITypeLib
+    partial public interface ITypeLib2 : System.Runtime.InteropServices.ComTypes.ITypeLib
     {
         new void FindName(
             string szNameBuf,
@@ -5540,7 +5540,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct PARAMDESC
+    partial public struct PARAMDESC
     {
         public System.IntPtr lpVarValue;
         public System.Runtime.InteropServices.ComTypes.PARAMFLAG wParamFlags;
@@ -5568,7 +5568,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct STATSTG
+    partial public struct STATSTG
     {
         public System.Runtime.InteropServices.ComTypes.FILETIME atime;
         public long cbSize;
@@ -5600,7 +5600,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct TYPEATTR
+    partial public struct TYPEATTR
     {
         public short cbAlignment;
         public int cbSizeInstance;
@@ -5629,7 +5629,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct TYPEDESC
+    partial public struct TYPEDESC
     {
         public System.IntPtr lpValue;
         public short vt;
@@ -5680,7 +5680,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct TYPELIBATTR
+    partial public struct TYPELIBATTR
     {
         public System.Guid guid;
         public int lcid;
@@ -5696,7 +5696,7 @@ namespace System.Runtime.InteropServices.ComTypes
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public partial struct VARDESC
+    partial public struct VARDESC
     {
         public System.Runtime.InteropServices.ComTypes.VARDESC.DESCUNION desc;
         public System.Runtime.InteropServices.ComTypes.ELEMDESC elemdescVar;
@@ -5708,7 +5708,7 @@ namespace System.Runtime.InteropServices.ComTypes
         [System.Runtime.InteropServices.StructLayoutAttribute(
             System.Runtime.InteropServices.LayoutKind.Explicit
         )]
-        public partial struct DESCUNION
+        partial public struct DESCUNION
         {
             [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
             public System.IntPtr lpvarValue;
@@ -5832,7 +5832,7 @@ namespace System.Runtime.InteropServices.Marshalling
             throw null;
         }
 
-        public ref struct ManagedToUnmanagedIn
+        ref public struct ManagedToUnmanagedIn
         {
             public static int BufferSize
             {
@@ -5915,7 +5915,7 @@ namespace System.Runtime.InteropServices.Marshalling
 
         public static void Free(TUnmanagedElement* unmanaged) { }
 
-        public unsafe ref struct ManagedToUnmanagedIn
+        ref public unsafe struct ManagedToUnmanagedIn
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -5983,7 +5983,7 @@ namespace System.Runtime.InteropServices.Marshalling
             throw null;
         }
 
-        public ref struct ManagedToUnmanagedIn
+        ref public struct ManagedToUnmanagedIn
         {
             public static int BufferSize
             {
@@ -6011,7 +6011,7 @@ namespace System.Runtime.InteropServices.Marshalling
         System.AttributeTargets.Parameter | System.AttributeTargets.ReturnValue,
         AllowMultiple = true
     )]
-    public sealed partial class MarshalUsingAttribute : System.Attribute
+    partial public sealed class MarshalUsingAttribute : System.Attribute
     {
         public MarshalUsingAttribute() { }
 
@@ -6099,7 +6099,7 @@ namespace System.Runtime.InteropServices.Marshalling
 
         public static void Free(TUnmanagedElement* unmanaged) { }
 
-        public unsafe ref struct ManagedToUnmanagedIn
+        ref public unsafe struct ManagedToUnmanagedIn
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -6167,7 +6167,7 @@ namespace System.Runtime.InteropServices.Marshalling
             throw null;
         }
 
-        public ref struct ManagedToUnmanagedIn
+        ref public struct ManagedToUnmanagedIn
         {
             public static int BufferSize
             {
@@ -6223,7 +6223,7 @@ namespace System.Runtime.InteropServices.Marshalling
 
 namespace System.Security
 {
-    public sealed partial class SecureString : System.IDisposable
+    partial public sealed class SecureString : System.IDisposable
     {
         public SecureString() { }
 

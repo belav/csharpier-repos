@@ -61,7 +61,7 @@ using System.Threading;
 namespace System.Runtime.InteropServices
 {
     [StructLayout(LayoutKind.Sequential)]
-    public abstract partial class SafeHandle
+    partial public abstract class SafeHandle
     {
         const int RefCount_Mask = 0x7ffffffc;
         const int RefCount_One = 0x4;

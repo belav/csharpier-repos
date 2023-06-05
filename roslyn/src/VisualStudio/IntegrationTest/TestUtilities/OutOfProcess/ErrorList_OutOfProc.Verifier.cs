@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
-    public partial class ErrorList_OutOfProc : OutOfProcComponent
+    partial public class ErrorList_OutOfProc : OutOfProcComponent
     {
         public class Verifier
         {

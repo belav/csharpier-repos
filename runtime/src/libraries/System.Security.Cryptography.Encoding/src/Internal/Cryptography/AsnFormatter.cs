@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    internal abstract partial class AsnFormatter
+    partial internal abstract class AsnFormatter
     {
         internal static AsnFormatter Instance
         {

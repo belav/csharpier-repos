@@ -9,7 +9,7 @@ namespace System.Security.Cryptography.Dsa.Tests
         TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
         "Not supported on Browser/iOS/tvOS/MacCatalyst"
     )]
-    public partial class DSAKeyGeneration
+    partial public class DSAKeyGeneration
     {
         public static bool SupportsKeyGeneration => DSAFactory.SupportsKeyGeneration;
         public static bool HasSecondMinSize { get; } = GetHasSecondMinSize();

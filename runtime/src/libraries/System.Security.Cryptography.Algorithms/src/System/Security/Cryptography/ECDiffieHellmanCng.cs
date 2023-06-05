@@ -7,9 +7,9 @@ using static Internal.NativeCrypto.BCryptNative;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECDiffieHellmanImplementation
+    partial internal static class ECDiffieHellmanImplementation
     {
-        public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+        partial public sealed class ECDiffieHellmanCng : ECDiffieHellman
         {
             protected override void Dispose(bool disposing)
             {

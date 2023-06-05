@@ -190,10 +190,10 @@ class MonoSdksTextUI : TextUI, ITestListener
 class Interop
 {
     [System.Runtime.InteropServices.DllImport("__Internal")]
-    public extern static void mono_sdks_ui_increment_testcase_result(int resultType);
+    public static extern void mono_sdks_ui_increment_testcase_result(int resultType);
 
     [System.Runtime.InteropServices.DllImport("__Internal")]
-    public extern static void mono_sdks_ui_set_test_summary_message(string summaryMessage);
+    public static extern void mono_sdks_ui_set_test_summary_message(string summaryMessage);
 }
 
 public class TestRunner

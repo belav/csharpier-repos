@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis
         Diagnose = 2,
     }
 
-    internal static partial class DocumentationModeEnumBounds
+    partial internal static class DocumentationModeEnumBounds
     {
         internal static bool IsValid(this DocumentationMode value)
         {

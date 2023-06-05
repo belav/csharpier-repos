@@ -14,7 +14,7 @@ namespace Mono.Data.Sqlite
     using System.Globalization;
     using System.ComponentModel;
 
-    public sealed partial class SqliteConnection
+    partial public sealed class SqliteConnection
     {
         /// <summary>
         /// Returns a SQLiteProviderFactory object.

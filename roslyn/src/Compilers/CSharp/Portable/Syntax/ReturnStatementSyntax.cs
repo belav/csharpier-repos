@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ReturnStatementSyntax
+    partial public class ReturnStatementSyntax
     {
         public ReturnStatementSyntax Update(
             SyntaxToken returnKeyword,
@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static ReturnStatementSyntax ReturnStatement(
             SyntaxToken returnKeyword,

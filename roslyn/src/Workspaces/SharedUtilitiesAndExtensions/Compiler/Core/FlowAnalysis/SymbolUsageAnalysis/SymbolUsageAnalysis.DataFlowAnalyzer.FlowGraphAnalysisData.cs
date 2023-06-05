@@ -17,9 +17,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 {
-    internal static partial class SymbolUsageAnalysis
+    partial internal static class SymbolUsageAnalysis
     {
-        private sealed partial class DataFlowAnalyzer : DataFlowAnalyzer<BasicBlockAnalysisData>
+        partial private sealed class DataFlowAnalyzer : DataFlowAnalyzer<BasicBlockAnalysisData>
         {
             private sealed class FlowGraphAnalysisData : AnalysisData
             {

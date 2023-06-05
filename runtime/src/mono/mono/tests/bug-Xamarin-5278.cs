@@ -113,7 +113,7 @@ public class Tests
     public class _TestClass : ITest
     {
         // properties need to go first since mcs puts them there
-        public virtual extern ITest Test
+        public extern virtual ITest Test
         {
             [return: MarshalAs(UnmanagedType.Interface)]
             [
@@ -127,73 +127,73 @@ public class Tests
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void SByteIn(sbyte val);
+        public extern virtual void SByteIn(sbyte val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void ByteIn(byte val);
+        public extern virtual void ByteIn(byte val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void ShortIn(short val);
+        public extern virtual void ShortIn(short val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void UShortIn(ushort val);
+        public extern virtual void UShortIn(ushort val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void IntIn(int val);
+        public extern virtual void IntIn(int val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void UIntIn(uint val);
+        public extern virtual void UIntIn(uint val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void LongIn(long val);
+        public extern virtual void LongIn(long val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void ULongIn(ulong val);
+        public extern virtual void ULongIn(ulong val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void FloatIn(float val);
+        public extern virtual void FloatIn(float val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void DoubleIn(double val);
+        public extern virtual void DoubleIn(double val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void ITestIn([MarshalAs(UnmanagedType.Interface)] ITest val);
+        public extern virtual void ITestIn([MarshalAs(UnmanagedType.Interface)] ITest val);
 
         [MethodImplAttribute(
             MethodImplOptions.InternalCall,
             MethodCodeType = MethodCodeType.Runtime
         )]
-        public virtual extern void ITestOut([MarshalAs(UnmanagedType.Interface)] out ITest val);
+        public extern virtual void ITestOut([MarshalAs(UnmanagedType.Interface)] out ITest val);
     }
 
     [System.Runtime.InteropServices.GuidAttribute("00000000-0000-0000-0000-000000000002")]

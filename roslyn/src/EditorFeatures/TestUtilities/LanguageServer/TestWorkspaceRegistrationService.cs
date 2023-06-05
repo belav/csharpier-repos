@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Composition;
 
 namespace Roslyn.Test.Utilities
 {
-    public abstract partial class AbstractLanguageServerProtocolTests
+    partial public abstract class AbstractLanguageServerProtocolTests
     {
         [Export(typeof(LspWorkspaceRegistrationService)), Shared, PartNotDiscoverable]
         internal class TestWorkspaceRegistrationService : LspWorkspaceRegistrationService

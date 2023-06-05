@@ -818,7 +818,7 @@ namespace SerializationTypes
 
         public new string Name3 { get; set; }
 
-        new internal string Name4 { get; set; }
+        internal new string Name4 { get; set; }
 
         public new string Name5 { get; set; }
 
@@ -838,11 +838,11 @@ namespace SerializationTypes
 
         public new string Name3 { get; set; }
 
-        new internal string Name4 { get; set; }
+        internal new string Name4 { get; set; }
 
-        new internal string Name5 { get; set; }
+        internal new string Name5 { get; set; }
 
-        new internal string Name6 { get; set; }
+        internal new string Name6 { get; set; }
     }
 
     [DataContract]
@@ -3548,7 +3548,7 @@ public class MySpecialOrder2 : MyOrder
 }
 
 [System.Runtime.Serialization.DataContractAttribute(Namespace = "http://tempuri.org/")]
-public partial class GetDataRequestBody
+partial public class GetDataRequestBody
 {
     [System.Runtime.Serialization.DataMemberAttribute(Order = 0)]
     public int value;
@@ -3562,7 +3562,7 @@ public partial class GetDataRequestBody
 }
 
 [System.Runtime.Serialization.DataContractAttribute(Namespace = "http://tempuri.org/")]
-public partial class GetDataUsingDataContractRequestBody
+partial public class GetDataUsingDataContractRequestBody
 {
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public CompositeTypeForXmlMembersMapping composite;
@@ -3580,7 +3580,7 @@ public partial class GetDataUsingDataContractRequestBody
     Namespace = "http://tempuri.org/"
 )]
 [System.SerializableAttribute()]
-public partial class CompositeTypeForXmlMembersMapping
+partial public class CompositeTypeForXmlMembersMapping
 {
     private bool BoolValueField;
 

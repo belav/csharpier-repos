@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System
 {
-    public partial class String
+    partial public class String
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern string FastAllocateString(int length);

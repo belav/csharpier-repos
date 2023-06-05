@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions.Symbolic
 {
-    internal sealed partial class SymbolicRegexMatcher<TSet>
+    partial internal sealed class SymbolicRegexMatcher<TSet>
     {
         /// <summary>
         /// Initial capacity for DFA related arrays.

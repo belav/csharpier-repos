@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Dsrole
+    partial internal static class Dsrole
     {
         [LibraryImport(Libraries.Dsrole)]
-        public static partial int DsRoleFreeMemory(IntPtr buffer);
+        partial public static int DsRoleFreeMemory(IntPtr buffer);
     }
 }

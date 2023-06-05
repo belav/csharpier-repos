@@ -6,8 +6,9 @@ using System.Numerics;
 
 namespace System
 {
-    internal static partial class Number
+    partial internal static class Number
     {
+        ref
         // This is a port of the `DiyFp` implementation here: https://github.com/google/double-conversion/blob/a711666ddd063eb1e4b181a6cb981d39a1fc8bac/double-conversion/diy-fp.h
         // The backing structure and how it is used is described in more detail here: http://www.cs.tufts.edu/~nr/cs257/archive/florian-loitsch/printf.pdf
 
@@ -15,7 +16,7 @@ namespace System
         // Normalized DiyFp numbers will have the most significant bit of the significand set.
         // Multiplication and Subtraction do not normalize their results.
         // DiyFp are not designed to contain special doubles (NaN and Infinity).
-        internal readonly ref struct DiyFp
+        internal readonly struct DiyFp
         {
             public const int DoubleImplicitBitIndex = 52;
             public const int SingleImplicitBitIndex = 23;

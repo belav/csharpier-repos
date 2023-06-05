@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Data.Common
 {
-    internal static partial class UnsafeNativeMethods
+    partial internal static class UnsafeNativeMethods
     {
         //
         // Oleaut32

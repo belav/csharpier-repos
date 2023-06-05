@@ -8,7 +8,7 @@ using Xunit;
 
 namespace BasicEventSourceTests
 {
-    public partial class TestsWrite
+    partial public class TestsWrite
     {
         // Specifies whether the process is elevated or not.
         private static bool IsProcessElevatedAndNotWindowsNanoServer =>
@@ -48,7 +48,7 @@ namespace BasicEventSourceTests
             }
         }
 
-        static partial void Test_Write_T_AddEtwTests(
+        partial static void Test_Write_T_AddEtwTests(
             Listener listener,
             List<SubTest> tests,
             EventSource logger

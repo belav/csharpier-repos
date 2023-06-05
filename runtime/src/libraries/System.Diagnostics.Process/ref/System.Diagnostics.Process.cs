@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeProcessHandle
+    partial public sealed class SafeProcessHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeProcessHandle()
@@ -24,7 +24,7 @@ namespace Microsoft.Win32.SafeHandles
 
 namespace System.Diagnostics
 {
-    public partial class DataReceivedEventArgs : System.EventArgs
+    partial public class DataReceivedEventArgs : System.EventArgs
     {
         internal DataReceivedEventArgs() { }
 
@@ -40,7 +40,7 @@ namespace System.Diagnostics
     );
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public partial class MonitoringDescriptionAttribute : System.ComponentModel.DescriptionAttribute
+    partial public class MonitoringDescriptionAttribute : System.ComponentModel.DescriptionAttribute
     {
         public MonitoringDescriptionAttribute(string description) { }
 
@@ -53,7 +53,7 @@ namespace System.Diagnostics
     [System.ComponentModel.DesignerAttribute(
         "System.Diagnostics.Design.ProcessDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class Process : System.ComponentModel.Component, System.IDisposable
+    partial public class Process : System.ComponentModel.Component, System.IDisposable
     {
         public Process() { }
 
@@ -557,7 +557,7 @@ namespace System.Diagnostics
     [System.ComponentModel.DesignerAttribute(
         "System.Diagnostics.Design.ProcessModuleDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class ProcessModule : System.ComponentModel.Component
+    partial public class ProcessModule : System.ComponentModel.Component
     {
         internal ProcessModule() { }
 
@@ -592,7 +592,7 @@ namespace System.Diagnostics
         }
     }
 
-    public partial class ProcessModuleCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ProcessModuleCollection : System.Collections.ReadOnlyCollectionBase
     {
         protected ProcessModuleCollection() { }
 
@@ -626,7 +626,7 @@ namespace System.Diagnostics
         AboveNormal = 32768,
     }
 
-    public sealed partial class ProcessStartInfo
+    partial public sealed class ProcessStartInfo
     {
         public ProcessStartInfo() { }
 
@@ -798,7 +798,7 @@ namespace System.Diagnostics
     [System.ComponentModel.DesignerAttribute(
         "System.Diagnostics.Design.ProcessThreadDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class ProcessThread : System.ComponentModel.Component
+    partial public class ProcessThread : System.ComponentModel.Component
     {
         internal ProcessThread() { }
 
@@ -885,7 +885,7 @@ namespace System.Diagnostics
         public void ResetIdealProcessor() { }
     }
 
-    public partial class ProcessThreadCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ProcessThreadCollection : System.Collections.ReadOnlyCollectionBase
     {
         protected ProcessThreadCollection() { }
 

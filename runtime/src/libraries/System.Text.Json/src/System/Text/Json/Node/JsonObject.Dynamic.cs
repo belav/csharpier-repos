@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace System.Text.Json.Node
 {
-    public partial class JsonObject
+    partial public class JsonObject
     {
         internal bool TryGetMemberCallback(GetMemberBinder binder, out object? result)
         {

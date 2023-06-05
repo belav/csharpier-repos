@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.QuickInfo
 {
-    internal abstract partial class CommonSemanticQuickInfoProvider
+    partial internal abstract class CommonSemanticQuickInfoProvider
     {
         private class ErrorVisitor : SymbolVisitor<bool>
         {

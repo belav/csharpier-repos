@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class SystemAcl_RemoveAudit
+    partial public class SystemAcl_RemoveAudit
     {
         public static IEnumerable<object[]> SystemAcl_RemoveAudit_TestData()
         {

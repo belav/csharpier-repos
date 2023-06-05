@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Globalization
 {
-    internal sealed partial class CalendarData
+    partial internal sealed class CalendarData
     {
         private static bool NlsSystemSupportsTaiwaneseCalendar()
         {

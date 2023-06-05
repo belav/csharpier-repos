@@ -206,7 +206,7 @@ public class ForPathWithoutSettersShouldBehaveAsForMember : AutoMapperSpecBase
 
 public class ForPathWithIgnoreShouldNotSetValue : AutoMapperSpecBase
 {
-    public partial class TimesheetModel
+    partial public class TimesheetModel
     {
         public int ID { get; set; }
         public DateTime? StartDate { get; set; }

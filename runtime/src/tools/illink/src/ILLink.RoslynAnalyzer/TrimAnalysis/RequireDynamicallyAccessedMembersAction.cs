@@ -22,7 +22,7 @@ namespace ILLink.Shared.TrimAnalysis
             _reflectionAccessAnalyzer = reflectionAccessAnalyzer;
         }
 
-        public partial bool TryResolveTypeNameAndMark(
+        partial public bool TryResolveTypeNameAndMark(
             string typeName,
             bool needsAssemblyName,
             out TypeProxy type
@@ -38,7 +38,7 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial void MarkTypeForDynamicallyAccessedMembers(
+        partial private void MarkTypeForDynamicallyAccessedMembers(
             in TypeProxy type,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         ) =>

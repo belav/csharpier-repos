@@ -910,13 +910,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial021
 {
+    partial
     // <Area>Dynamic bind to special name</Area>
     // <Title>op_RightShift, op_LeftShift in class</Title>
     // <Description></Description>
     // <Expects status=success></Expects>
     // <Code>
 
-    public partial class Test
+    public class Test
     {
         public static Test op_RightShift(dynamic t, byte i)
         {
@@ -929,7 +930,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
         }
     }
 
-    public partial class Test
+    partial public class Test
     {
         public int Field;
 

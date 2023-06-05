@@ -120,7 +120,11 @@ namespace System.Workflow.Runtime.Hosting
         #endregion Accessors
 
         #region WorkflowRuntimeService
-        override protected internal void Start()
+        protected internal
+        #endregion Accessors
+
+        #region WorkflowRuntimeService
+        override void Start()
         {
             WorkflowTrace.Host.TraceEvent(
                 TraceEventType.Information,

@@ -19,10 +19,11 @@ namespace System.Runtime.Serialization
 
     internal delegate IXmlSerializable CreateXmlSerializableDelegate();
 
+    partial
 #if USE_REFEMIT
     public sealed class XmlDataContract : DataContract
 #else
-    internal sealed partial class XmlDataContract : DataContract
+    internal sealed class XmlDataContract : DataContract
 #endif
     {
         [Fx.Tag.SecurityNote(

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.SQLite.v2.Interop;
 
 namespace Microsoft.CodeAnalysis.SQLite.v2
 {
-    internal sealed partial class SQLiteConnectionPool : IDisposable
+    partial internal sealed class SQLiteConnectionPool : IDisposable
     {
         // We pool connections to the DB so that we don't have to take the hit of
         // reconnecting.  The connections also cache the prepared statements used

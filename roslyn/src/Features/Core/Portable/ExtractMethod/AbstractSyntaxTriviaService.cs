@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract partial class AbstractSyntaxTriviaService : ISyntaxTriviaService
+    partial internal abstract class AbstractSyntaxTriviaService : ISyntaxTriviaService
     {
         private const int TriviaLocationsCount = 4;
 

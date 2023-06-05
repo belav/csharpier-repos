@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Collections.Internal;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal partial struct ImmutableSegmentedList<T>
+    partial internal struct ImmutableSegmentedList<T>
     {
         private struct ValueBuilder : IList<T>, IReadOnlyList<T>, IList
         {

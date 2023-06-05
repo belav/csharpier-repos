@@ -18,7 +18,7 @@ namespace System.Net
         Anonymous = 32768,
     }
 
-    public sealed partial class Cookie
+    partial public sealed class Cookie
     {
         public Cookie() { }
 
@@ -125,7 +125,7 @@ namespace System.Net
         }
     }
 
-    public partial class CookieCollection
+    partial public class CookieCollection
         : System.Collections.Generic.ICollection<System.Net.Cookie>,
             System.Collections.Generic.IEnumerable<System.Net.Cookie>,
             System.Collections.Generic.IReadOnlyCollection<System.Net.Cookie>,
@@ -190,7 +190,7 @@ namespace System.Net
         }
     }
 
-    public partial class CookieContainer
+    partial public class CookieContainer
     {
         public const int DefaultCookieLengthLimit = 4096;
         public const int DefaultCookieLimit = 300;
@@ -248,7 +248,7 @@ namespace System.Net
         public void SetCookies(System.Uri uri, string cookieHeader) { }
     }
 
-    public partial class CookieException
+    partial public class CookieException
         : System.FormatException,
             System.Runtime.Serialization.ISerializable
     {
@@ -270,7 +270,7 @@ namespace System.Net
         ) { }
     }
 
-    public partial class CredentialCache
+    partial public class CredentialCache
         : System.Collections.IEnumerable,
             System.Net.ICredentials,
             System.Net.ICredentialsByHost
@@ -333,7 +333,7 @@ namespace System.Net
         Brotli = 4,
     }
 
-    public partial class DnsEndPoint : System.Net.EndPoint
+    partial public class DnsEndPoint : System.Net.EndPoint
     {
         public DnsEndPoint(string host, int port) { }
 
@@ -371,7 +371,7 @@ namespace System.Net
         }
     }
 
-    public abstract partial class EndPoint
+    partial public abstract class EndPoint
     {
         protected EndPoint() { }
 
@@ -461,7 +461,7 @@ namespace System.Net
         NetworkAuthenticationRequired = 511,
     }
 
-    public static partial class HttpVersion
+    partial public static class HttpVersion
     {
         public static readonly System.Version Unknown;
         public static readonly System.Version Version10;
@@ -470,12 +470,12 @@ namespace System.Net
         public static readonly System.Version Version30;
     }
 
-    public partial interface ICredentials
+    partial public interface ICredentials
     {
         System.Net.NetworkCredential? GetCredential(System.Uri uri, string authType);
     }
 
-    public partial interface ICredentialsByHost
+    partial public interface ICredentialsByHost
     {
         System.Net.NetworkCredential? GetCredential(
             string host,
@@ -484,7 +484,7 @@ namespace System.Net
         );
     }
 
-    public partial class IPAddress
+    partial public class IPAddress
     {
         public static readonly System.Net.IPAddress Any;
         public static readonly System.Net.IPAddress Broadcast;
@@ -652,7 +652,7 @@ namespace System.Net
         }
     }
 
-    public partial class IPEndPoint : System.Net.EndPoint
+    partial public class IPEndPoint : System.Net.EndPoint
     {
         public const int MaxPort = 65535;
         public const int MinPort = 0;
@@ -732,14 +732,14 @@ namespace System.Net
         }
     }
 
-    public partial interface IWebProxy
+    partial public interface IWebProxy
     {
         System.Net.ICredentials? Credentials { get; set; }
         System.Uri? GetProxy(System.Uri destination);
         bool IsBypassed(System.Uri host);
     }
 
-    public partial class NetworkCredential : System.Net.ICredentials, System.Net.ICredentialsByHost
+    partial public class NetworkCredential : System.Net.ICredentials, System.Net.ICredentialsByHost
     {
         public NetworkCredential() { }
 
@@ -804,7 +804,7 @@ namespace System.Net
         }
     }
 
-    public partial class SocketAddress
+    partial public class SocketAddress
     {
         public SocketAddress(System.Net.Sockets.AddressFamily family) { }
 
@@ -840,7 +840,7 @@ namespace System.Net
         }
     }
 
-    public abstract partial class TransportContext
+    partial public abstract class TransportContext
     {
         protected TransportContext() { }
 
@@ -863,7 +863,7 @@ namespace System.Net.Cache
         NoCacheNoStore = 6,
     }
 
-    public partial class RequestCachePolicy
+    partial public class RequestCachePolicy
     {
         public RequestCachePolicy() { }
 
@@ -883,7 +883,7 @@ namespace System.Net.Cache
 
 namespace System.Net.NetworkInformation
 {
-    public partial class IPAddressCollection
+    partial public class IPAddressCollection
         : System.Collections.Generic.ICollection<System.Net.IPAddress>,
             System.Collections.Generic.IEnumerable<System.Net.IPAddress>,
             System.Collections.IEnumerable
@@ -1040,7 +1040,7 @@ namespace System.Net.Sockets
         NoData = 11004,
     }
 
-    public partial class SocketException : System.ComponentModel.Win32Exception
+    partial public class SocketException : System.ComponentModel.Win32Exception
     {
         public SocketException() { }
 
@@ -1136,7 +1136,7 @@ namespace System.Security.Authentication
 
 namespace System.Security.Authentication.ExtendedProtection
 {
-    public abstract partial class ChannelBinding
+    partial public abstract class ChannelBinding
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         protected ChannelBinding()

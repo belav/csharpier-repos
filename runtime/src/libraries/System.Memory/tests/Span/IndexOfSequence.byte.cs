@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.SpanTests
 {
-    public static partial class SpanTests
+    partial public static class SpanTests
     {
         [Fact]
         public static void IndexOfSequenceMatchAtStart_Byte()

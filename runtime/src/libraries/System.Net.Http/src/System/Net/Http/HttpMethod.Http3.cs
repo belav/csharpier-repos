@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace System.Net.Http
 {
-    public partial class HttpMethod
+    partial public class HttpMethod
     {
         private byte[]? _http3EncodedBytes;
 

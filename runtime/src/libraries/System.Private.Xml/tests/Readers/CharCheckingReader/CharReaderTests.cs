@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Xml.CharCheckingReaderTests
 {
-    public partial class CharCheckingReaderTest : CGenericTestModule
+    partial public class CharCheckingReaderTest : CGenericTestModule
     {
         [Theory]
         [XmlTests(nameof(Create))]

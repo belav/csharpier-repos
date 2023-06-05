@@ -20,7 +20,7 @@ namespace System.Runtime.InteropServices
     /// implementation for all things related to P/Invoke marshalling
     /// </summary>
     [CLSCompliant(false)]
-    public partial class PInvokeMarshal
+    partial public class PInvokeMarshal
     {
         [ThreadStatic]
         internal static int t_lastError;

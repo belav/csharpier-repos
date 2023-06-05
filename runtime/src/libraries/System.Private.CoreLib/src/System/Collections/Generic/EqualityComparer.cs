@@ -11,7 +11,7 @@ namespace System.Collections.Generic
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public abstract partial class EqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
+    partial public abstract class EqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
     {
         // public static EqualityComparer<T> Default is runtime-specific
 
@@ -127,8 +127,9 @@ namespace System.Collections.Generic
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
+    partial
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class GenericEqualityComparer<T> : EqualityComparer<T>
+    public sealed class GenericEqualityComparer<T> : EqualityComparer<T>
         where T : IEquatable<T>?
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -159,8 +160,9 @@ namespace System.Collections.Generic
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
+    partial
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class NullableEqualityComparer<T> : EqualityComparer<T?>, ISerializable
+    public sealed class NullableEqualityComparer<T> : EqualityComparer<T?>, ISerializable
         where T : struct
     {
         public NullableEqualityComparer() { }
@@ -204,8 +206,9 @@ namespace System.Collections.Generic
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
+    partial
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class ObjectEqualityComparer<T> : EqualityComparer<T>
+    public sealed class ObjectEqualityComparer<T> : EqualityComparer<T>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(T? x, T? y)
@@ -235,8 +238,9 @@ namespace System.Collections.Generic
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
+    partial
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class ByteEqualityComparer : EqualityComparer<byte>
+    public sealed class ByteEqualityComparer : EqualityComparer<byte>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(byte x, byte y) => x == y;
@@ -255,8 +259,9 @@ namespace System.Collections.Generic
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
+    partial
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>, ISerializable
+    public sealed class EnumEqualityComparer<T> : EqualityComparer<T>, ISerializable
         where T : struct, Enum
     {
         public EnumEqualityComparer() { }

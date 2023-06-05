@@ -75,6 +75,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         // Array of total points values
         double[] _totalPerPoint = null;
         int _seriesCount = -1;
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -82,16 +83,17 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.OneHundredPercentStackedArea; }
         }
 
+        public
         /// <summary>
         /// Indicates that it's a hundredred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        override public bool HundredPercent
+        override bool HundredPercent
         {
             get { return true; }
         }
@@ -107,7 +109,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="common">The Common elements object</param>
         /// <param name="area">Chart area for this chart</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        override public void Paint(
+        public
+        #endregion
+
+        #region Painting and Selection methods
+
+        /// <summary>
+        /// Paint HundredPercentStackedAreaChart Chart
+        /// </summary>
+        /// <param name="graph">The Chart Graphics object</param>
+        /// <param name="common">The Common elements object</param>
+        /// <param name="area">Chart area for this chart</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        override void Paint(
             ChartGraphics graph,
             CommonElements common,
             ChartArea area,
@@ -169,7 +183,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointIndex">Index of the point.</param>
         /// <param name="yValueIndex">Index of the Y value to get.</param>
         /// <returns>Y value of the point.</returns>
-        override public double GetYValue(
+        public
+        /// <summary>
+        /// Helper function, which returns the Y value of the point
+        /// </summary>
+        /// <param name="common">Chart common elements.</param>
+        /// <param name="area">Chart area the series belongs to.</param>
+        /// <param name="series">Sereis of the point.</param>
+        /// <param name="point">Point object.</param>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="yValueIndex">Index of the Y value to get.</param>
+        /// <returns>Y value of the point.</returns>
+        override double GetYValue(
             CommonElements common,
             ChartArea area,
             Series series,
@@ -407,7 +432,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// Gets default line tension.
         /// </summary>
         /// <returns>Line tension.</returns>
-        override protected float GetDefaultTension()
+        protected
+        #endregion
+
+        #region Default tension method
+
+        /// <summary>
+        /// Gets default line tension.
+        /// </summary>
+        /// <returns>Line tension.</returns>
+        override float GetDefaultTension()
         {
             return 0f;
         }
@@ -437,7 +471,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
@@ -480,7 +520,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        override protected void ProcessChartType(
+        protected
+        /// <summary>
+        /// This method calculates position of the area and either draws it or checks selection.
+        /// </summary>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        override void ProcessChartType(
             bool selection,
             ChartGraphics graph,
             CommonElements common,
@@ -1650,7 +1699,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="selection">Selection indicator.</param>
         /// <param name="pointsArray">Points array list.</param>
         /// <returns>Number of loops (1 or 2).</returns>
-        override protected int GetPointLoopNumber(bool selection, ArrayList pointsArray)
+        protected
+        /// <summary>
+        /// Returns how many loops through all data points is required (1 or 2)
+        /// </summary>
+        /// <param name="selection">Selection indicator.</param>
+        /// <param name="pointsArray">Points array list.</param>
+        /// <returns>Number of loops (1 or 2).</returns>
+        override int GetPointLoopNumber(bool selection, ArrayList pointsArray)
         {
             // Always one loop for selection
             if (selection)
@@ -1828,7 +1884,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointIndex">Index of the point.</param>
         /// <param name="yValueIndex">Index of the Y value to get.  Set to -1 to get the height.</param>
         /// <returns>Y value of the point.</returns>
-        override public double GetYValue(
+        public
+        #endregion
+
+        #region Y values methods
+
+        /// <summary>
+        /// Helper function, which returns the Y value of the point.
+        /// </summary>
+        /// <param name="common">Chart common elements.</param>
+        /// <param name="area">Chart area the series belongs to.</param>
+        /// <param name="series">Sereis of the point.</param>
+        /// <param name="point">Point object.</param>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="yValueIndex">Index of the Y value to get.  Set to -1 to get the height.</param>
+        /// <returns>Y value of the point.</returns>
+        override double GetYValue(
             CommonElements common,
             ChartArea area,
             Series series,

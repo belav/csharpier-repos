@@ -6,10 +6,11 @@ using System.Diagnostics;
 
 namespace System.Threading
 {
+    partial
     //
     // Portable implementation of Timer
     //
-    internal sealed partial class TimerQueue : IThreadPoolWorkItem
+    internal sealed class TimerQueue : IThreadPoolWorkItem
     {
         private static List<TimerQueue>? s_scheduledTimers;
         private static List<TimerQueue>? s_scheduledTimersToFire;

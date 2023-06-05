@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 {
-    public partial class CodeGenerationTests
+    partial public class CodeGenerationTests
     {
         [UseExportProvider]
         public class Shared

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct PolicyInformation
+    partial internal struct PolicyInformation
     {
         internal string PolicyIdentifier;
         internal System.Security.Cryptography.Pkcs.Asn1.PolicyQualifierInfo[]? PolicyQualifiers;

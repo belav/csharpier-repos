@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.WebSockets
 {
+    partial
     /// <summary>A managed implementation of a web socket that sends and receives data via a <see cref="Stream"/>.</summary>
     /// <remarks>
     /// Thread-safety:
@@ -24,7 +25,7 @@ namespace System.Net.WebSockets
     ///   a send operation while another is in progress or a receive operation while another is in progress will
     ///   result in an exception.
     /// </remarks>
-    internal sealed partial class ManagedWebSocket : WebSocket
+    internal sealed class ManagedWebSocket : WebSocket
     {
         /// <summary>Encoding for the payload of text messages: UTF8 encoding that throws if invalid bytes are discovered, per the RFC.</summary>
         private static readonly UTF8Encoding s_textEncoding = new UTF8Encoding(

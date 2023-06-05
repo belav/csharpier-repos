@@ -24,9 +24,10 @@ namespace Microsoft.Scripting.Ast
 #else
 namespace System.Linq.Expressions
 {
+    partial
 #endif
 #if !SILVERLIGHT
-    public partial class Expression
+    public class Expression
     {
         #region Generated Expression Debugger Proxies
 

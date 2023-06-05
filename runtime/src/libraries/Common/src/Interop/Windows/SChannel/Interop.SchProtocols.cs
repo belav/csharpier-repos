@@ -1,9 +1,10 @@
+partial
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class SChannel
+    partial internal static class SChannel
     {
         // Most constants below are taken from schannel.h; those that are not are
         // called out explicitly.

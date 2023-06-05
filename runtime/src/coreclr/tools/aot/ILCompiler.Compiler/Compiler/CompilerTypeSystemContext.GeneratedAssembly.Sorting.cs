@@ -7,10 +7,11 @@ using Internal.TypeSystem;
 
 namespace ILCompiler
 {
-    public partial class CompilerTypeSystemContext
+    partial public class CompilerTypeSystemContext
     {
+        partial
         // Functionality related to deterministic ordering of types and members
-        internal partial class CompilerGeneratedType : MetadataType
+        internal class CompilerGeneratedType : MetadataType
         {
             protected override int ClassCode => -1036681447;
 

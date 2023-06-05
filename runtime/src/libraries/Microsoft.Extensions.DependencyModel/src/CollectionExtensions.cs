@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace System.Collections.Generic
 {
-    public static partial class CollectionExtensions
+    partial public static class CollectionExtensions
     {
         public static RuntimeAssetGroup? GetDefaultGroup(
             this IEnumerable<RuntimeAssetGroup> self

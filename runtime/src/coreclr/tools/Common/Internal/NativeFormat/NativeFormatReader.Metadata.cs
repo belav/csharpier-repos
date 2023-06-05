@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace Internal.NativeFormat
 {
-    internal partial struct NativeParser
+    partial internal struct NativeParser
     {
         public BagElementKind GetBagElementKind()
         {

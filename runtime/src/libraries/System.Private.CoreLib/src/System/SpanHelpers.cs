@@ -10,7 +10,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System
 {
-    internal static partial class SpanHelpers
+    partial internal static class SpanHelpers
     {
         public static unsafe void ClearWithoutReferences(ref byte b, nuint byteLength)
         {

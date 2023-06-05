@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CodeActions;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 {
-    internal abstract partial class AbstractMoveTypeService<
+    partial internal abstract class AbstractMoveTypeService<
         TService,
         TTypeDeclarationSyntax,
         TNamespaceDeclarationSyntax,

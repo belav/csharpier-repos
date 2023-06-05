@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public static partial class PlatformDetection
+    partial public static class PlatformDetection
     {
         //
         // Do not use the " { get; } = <expression> " pattern here. Having all the initialization happen in the type initializer
@@ -437,16 +437,16 @@ namespace System
             public Version VersionId { get; set; }
         }
 
-        private static partial class @libc
+        partial private static class @libc
         {
             [LibraryImport("libc", SetLastError = true)]
-            public static unsafe partial uint geteuid();
+            partial public static unsafe uint geteuid();
 
             [LibraryImport("libc")]
-            public static partial IntPtr gnu_get_libc_release();
+            partial public static IntPtr gnu_get_libc_release();
 
             [LibraryImport("libc")]
-            public static partial IntPtr gnu_get_libc_version();
+            partial public static IntPtr gnu_get_libc_version();
         }
     }
 }

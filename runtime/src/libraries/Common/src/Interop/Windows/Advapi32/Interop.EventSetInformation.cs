@@ -3,12 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(Libraries.Advapi32)]
-        internal static unsafe partial int EventSetInformation(
+        partial internal static unsafe int EventSetInformation(
             long registrationHandle,
             EVENT_INFO_CLASS informationClass,
             void* eventInformation,

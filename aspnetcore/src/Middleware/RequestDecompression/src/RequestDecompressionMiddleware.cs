@@ -9,10 +9,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
+partial
 /// <summary>
 /// Enables HTTP request decompression.
 /// </summary>
-internal sealed partial class RequestDecompressionMiddleware
+internal sealed class RequestDecompressionMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<RequestDecompressionMiddleware> _logger;
@@ -129,7 +130,7 @@ internal sealed partial class RequestDecompressionMiddleware
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -137,7 +138,7 @@ internal sealed partial class RequestDecompressionMiddleware
             $"The endpoint does not specify the {nameof(IRequestSizeLimitMetadata)}.",
             EventName = "MetadataNotFound"
         )]
-        public static partial void MetadataNotFound(ILogger logger);
+        partial public static void MetadataNotFound(ILogger logger);
 
         [LoggerMessage(
             2,
@@ -145,7 +146,7 @@ internal sealed partial class RequestDecompressionMiddleware
             $"A request body size limit could not be applied. This server does not support the {nameof(IHttpMaxRequestBodySizeFeature)}.",
             EventName = "FeatureNotFound"
         )]
-        public static partial void FeatureNotFound(ILogger logger);
+        partial public static void FeatureNotFound(ILogger logger);
 
         [LoggerMessage(
             3,
@@ -153,7 +154,7 @@ internal sealed partial class RequestDecompressionMiddleware
             $"A request body size limit could not be applied. The {nameof(IHttpMaxRequestBodySizeFeature)} for the server is read-only.",
             EventName = "FeatureIsReadOnly"
         )]
-        public static partial void FeatureIsReadOnly(ILogger logger);
+        partial public static void FeatureIsReadOnly(ILogger logger);
 
         [LoggerMessage(
             4,
@@ -161,7 +162,7 @@ internal sealed partial class RequestDecompressionMiddleware
             "The maximum request body size has been set to {RequestSize}.",
             EventName = "MaxRequestBodySizeSet"
         )]
-        public static partial void MaxRequestBodySizeSet(ILogger logger, string requestSize);
+        partial public static void MaxRequestBodySizeSet(ILogger logger, string requestSize);
 
         [LoggerMessage(
             5,
@@ -169,6 +170,6 @@ internal sealed partial class RequestDecompressionMiddleware
             "The maximum request body size as been disabled.",
             EventName = "MaxRequestBodySizeDisabled"
         )]
-        public static partial void MaxRequestBodySizeDisabled(ILogger logger);
+        partial public static void MaxRequestBodySizeDisabled(ILogger logger);
     }
 }

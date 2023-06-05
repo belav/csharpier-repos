@@ -6,7 +6,7 @@
 
 namespace System
 {
-    public static partial class Console
+    partial public static class Console
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -504,7 +504,7 @@ namespace System
         public static void WriteLine(ulong value) { }
     }
 
-    public sealed partial class ConsoleCancelEventArgs : System.EventArgs
+    partial public sealed class ConsoleCancelEventArgs : System.EventArgs
     {
         internal ConsoleCancelEventArgs() { }
 
@@ -689,7 +689,7 @@ namespace System
         OemClear = 254,
     }
 
-    public readonly partial struct ConsoleKeyInfo : System.IEquatable<System.ConsoleKeyInfo>
+    partial public readonly struct ConsoleKeyInfo : System.IEquatable<System.ConsoleKeyInfo>
     {
         private readonly int _dummyPrimitive;
 

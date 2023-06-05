@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.Formats.Cbor
 {
-    public partial class CborReader
+    partial public class CborReader
     {
         // Implements major type 2,3 decoding per https://tools.ietf.org/html/rfc7049#section-2.1
 

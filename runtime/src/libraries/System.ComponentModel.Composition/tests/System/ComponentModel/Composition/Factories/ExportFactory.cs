@@ -6,9 +6,10 @@ using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.Factories
 {
+    partial
     // This class deliberately does not create instances of Lazy<T, TMetadataView>,
     // so as to test other derived classes from Lazy<T, TMetadataView>.
-    internal static partial class ExportFactory
+    internal static class ExportFactory
     {
         public static IEnumerable<Export> Create(string contractName, int count)
         {

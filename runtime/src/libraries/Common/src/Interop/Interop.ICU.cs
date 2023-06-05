@@ -5,12 +5,12 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Globalization
+    partial internal static class Globalization
     {
         [LibraryImport(Libraries.GlobalizationNative, EntryPoint = "GlobalizationNative_LoadICU")]
-        internal static partial int LoadICU();
+        partial internal static int LoadICU();
 
         internal static void InitICUFunctions(
             IntPtr icuuc,
@@ -35,7 +35,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_InitICUFunctions",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial void InitICUFunctions(
+        partial internal static void InitICUFunctions(
             IntPtr icuuc,
             IntPtr icuin,
             string version,
@@ -46,6 +46,6 @@ internal static partial class Interop
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_GetICUVersion"
         )]
-        internal static partial int GetICUVersion();
+        partial internal static int GetICUVersion();
     }
 }

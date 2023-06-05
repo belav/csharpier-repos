@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class PosixSignalRegistrationTests
+    partial public class PosixSignalRegistrationTests
     {
         private static TimeSpan SuccessTimeout => TimeSpan.FromSeconds(30);
 

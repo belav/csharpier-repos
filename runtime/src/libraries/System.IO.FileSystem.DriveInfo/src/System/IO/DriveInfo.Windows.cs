@@ -10,7 +10,7 @@ using System.Runtime.Versioning;
 
 namespace System.IO
 {
-    public sealed partial class DriveInfo
+    partial public sealed class DriveInfo
     {
         private static string NormalizeDriveName(string driveName)
         {

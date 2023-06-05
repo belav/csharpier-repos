@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class ValueSetFactory
+    partial internal static class ValueSetFactory
     {
         private struct StringTC : IEquatableValueTC<string>
         {

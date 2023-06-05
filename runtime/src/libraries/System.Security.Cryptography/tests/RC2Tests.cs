@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Tests
 {
-    public static partial class RC2Tests
+    partial public static class RC2Tests
     {
         [Fact]
         public static void RC2KeySize()

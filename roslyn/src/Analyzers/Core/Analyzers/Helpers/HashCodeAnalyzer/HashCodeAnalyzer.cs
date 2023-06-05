@@ -11,10 +11,11 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
+    partial
     /// <summary>
     /// Helper code to support analysis of HashCode methods
     /// </summary>
-    internal readonly partial struct HashCodeAnalyzer
+    internal readonly struct HashCodeAnalyzer
     {
         private readonly Compilation _compilation;
         private readonly IMethodSymbol _objectGetHashCodeMethod;

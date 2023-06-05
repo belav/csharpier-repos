@@ -6,7 +6,7 @@
 
 namespace System.Drawing
 {
-    public static partial class ColorTranslator
+    partial public static class ColorTranslator
     {
         public static System.Drawing.Color FromHtml(string htmlColor)
         {
@@ -39,7 +39,7 @@ namespace System.Drawing
         }
     }
 
-    public sealed partial class Graphics
+    partial public sealed class Graphics
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public object GetContextInfo()
@@ -48,7 +48,7 @@ namespace System.Drawing
         }
     }
 
-    public static partial class SystemColors
+    partial public static class SystemColors
     {
         public static System.Drawing.Color ActiveBorder
         {

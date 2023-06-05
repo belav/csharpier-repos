@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter
+    partial internal sealed class LocalRewriter
     {
         private BoundExpression MakeDynamicIndexerAccessReceiver(
             BoundDynamicIndexerAccess indexerAccess,

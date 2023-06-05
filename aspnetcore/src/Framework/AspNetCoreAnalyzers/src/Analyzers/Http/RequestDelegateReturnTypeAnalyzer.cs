@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Operations;
 namespace Microsoft.AspNetCore.Analyzers.Http;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
+partial public class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
 {
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
         ImmutableArray.Create(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate);

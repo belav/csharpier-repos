@@ -40,7 +40,7 @@ using Mono.Cecil.Cil;
 
 namespace Mono.Linker
 {
-    public partial class AnnotationStore
+    partial public class AnnotationStore
     {
         protected readonly LinkContext context;
 

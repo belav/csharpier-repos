@@ -43,100 +43,100 @@ namespace Novell.Directory.Ldap.Utilclass
             qualifiers = new System.Collections.ArrayList();
         }
 
-        virtual public System.String RawString
+        public virtual System.String RawString
         {
             get { return rawString; }
             set { this.rawString = value; }
         }
-        virtual public System.String[] Names
+        public virtual System.String[] Names
         {
             get { return names; }
         }
-        virtual public System.Collections.IEnumerator Qualifiers
+        public virtual System.Collections.IEnumerator Qualifiers
         {
             get { return qualifiers.GetEnumerator(); }
         }
-        virtual public System.String ID
+        public virtual System.String ID
         {
             get { return id; }
         }
-        virtual public System.String Description
+        public virtual System.String Description
         {
             get { return description; }
         }
-        virtual public System.String Syntax
+        public virtual System.String Syntax
         {
             get { return syntax; }
         }
-        virtual public System.String Superior
+        public virtual System.String Superior
         {
             get { return superior; }
         }
-        virtual public bool Single
+        public virtual bool Single
         {
             get { return single; }
         }
-        virtual public bool Obsolete
+        public virtual bool Obsolete
         {
             get { return obsolete; }
         }
-        virtual public System.String Equality
+        public virtual System.String Equality
         {
             get { return equality; }
         }
-        virtual public System.String Ordering
+        public virtual System.String Ordering
         {
             get { return ordering; }
         }
-        virtual public System.String Substring
+        public virtual System.String Substring
         {
             get { return substring; }
         }
-        virtual public bool Collective
+        public virtual bool Collective
         {
             get { return collective; }
         }
-        virtual public bool UserMod
+        public virtual bool UserMod
         {
             get { return userMod; }
         }
-        virtual public int Usage
+        public virtual int Usage
         {
             get { return usage; }
         }
-        virtual public int Type
+        public virtual int Type
         {
             get { return type; }
         }
-        virtual public System.String[] Superiors
+        public virtual System.String[] Superiors
         {
             get { return superiors; }
         }
-        virtual public System.String[] Required
+        public virtual System.String[] Required
         {
             get { return required; }
         }
-        virtual public System.String[] Optional
+        public virtual System.String[] Optional
         {
             get { return optional; }
         }
-        virtual public System.String[] Auxiliary
+        public virtual System.String[] Auxiliary
         {
             get { return auxiliary; }
         }
-        virtual public System.String[] Precluded
+        public virtual System.String[] Precluded
         {
             get { return precluded; }
         }
-        virtual public System.String[] Applies
+        public virtual System.String[] Applies
         {
             get { return applies; }
         }
-        virtual public System.String NameForm
+        public virtual System.String NameForm
         {
             get { return nameForm; }
         }
-        virtual public System.String ObjectClass
+        public virtual System.String ObjectClass
         {
             get { return nameForm; }
         }

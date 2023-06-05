@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
 {
-    internal abstract partial class AbstractMakeMethodAsynchronousCodeFixProvider : CodeFixProvider
+    partial internal abstract class AbstractMakeMethodAsynchronousCodeFixProvider : CodeFixProvider
     {
         protected abstract bool IsAsyncSupportingFunctionSyntax(SyntaxNode node);
 

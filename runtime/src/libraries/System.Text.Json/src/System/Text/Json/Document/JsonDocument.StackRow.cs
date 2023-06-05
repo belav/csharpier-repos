@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text.Json
 {
-    public sealed partial class JsonDocument
+    partial public sealed class JsonDocument
     {
         // SizeOrLength - offset - 0 - size - 4
         // NumberOfRows - offset - 4 - size - 4

@@ -14,10 +14,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterface
 {
+    partial
     /// <summary>
     /// Interaction logic for ExtractInterfaceDialog.xaml
     /// </summary>
-    internal partial class ExtractInterfaceDialog : DialogWindow
+    internal class ExtractInterfaceDialog : DialogWindow
     {
         public ExtractInterfaceDialogViewModel ViewModel { get; }
 

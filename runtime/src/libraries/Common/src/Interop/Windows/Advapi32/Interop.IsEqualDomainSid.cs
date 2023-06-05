@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
             EntryPoint = "EqualDomainSid",
             SetLastError = true
         )]
-        internal static partial int IsEqualDomainSid(
+        partial internal static int IsEqualDomainSid(
             byte[] sid1,
             byte[] sid2,
             [MarshalAs(UnmanagedType.Bool)] out bool result

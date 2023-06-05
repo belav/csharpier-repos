@@ -1216,11 +1216,12 @@ namespace System.Dynamic
 
 namespace System.Runtime.CompilerServices
 {
+    partial
     //
     // Note: these helpers are kept as simple wrappers so they have a better
     // chance of being inlined.
     //
-    public static partial class RuntimeOps
+    public static class RuntimeOps
     {
         /// <summary>
         /// Gets the value of an item in an expando object.

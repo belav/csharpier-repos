@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class ConstructorBuilder : ConstructorInfo
+    partial public sealed class ConstructorBuilder : ConstructorInfo
     {
         #region Sync with MonoReflectionCtorBuilder in object-internals.h
         private RuntimeMethodHandle mhandle;

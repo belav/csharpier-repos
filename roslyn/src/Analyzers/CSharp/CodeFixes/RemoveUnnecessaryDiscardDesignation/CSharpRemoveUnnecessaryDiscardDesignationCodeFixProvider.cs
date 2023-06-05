@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
         ),
         Shared
     ]
-    internal partial class CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider
+    partial internal class CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider
         : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]

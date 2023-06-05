@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace System.Web.WebPages.Instrumentation
 {
-    internal partial class HttpContextAdapter
+    partial internal class HttpContextAdapter
     {
         private static readonly bool _isInstrumentationAvailable =
             typeof(HttpContext).GetProperty(

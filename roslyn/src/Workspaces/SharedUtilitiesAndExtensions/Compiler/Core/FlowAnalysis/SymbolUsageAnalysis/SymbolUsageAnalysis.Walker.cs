@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 {
-    internal static partial class SymbolUsageAnalysis
+    partial internal static class SymbolUsageAnalysis
     {
         /// <summary>
         /// Operations walker used for walking high-level operation tree

@@ -18,7 +18,7 @@ namespace System
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
     [System.Runtime.Versioning.NonVersionable] // This only applies to field layout
-    public partial struct Guid : IFormattable, IComparable
+    partial public struct Guid : IFormattable, IComparable
 #if GENERICS_WORK
             , IComparable<Guid>, IEquatable<Guid>
 #endif
@@ -1614,13 +1614,13 @@ namespace System
         }
 
         [System.Security.SecurityCritical]
-        unsafe private static int HexsToChars(char* guidChars, int offset, int a, int b)
+        private static unsafe int HexsToChars(char* guidChars, int offset, int a, int b)
         {
             return HexsToChars(guidChars, offset, a, b, false);
         }
 
         [System.Security.SecurityCritical]
-        unsafe private static int HexsToChars(char* guidChars, int offset, int a, int b, bool hex)
+        private static unsafe int HexsToChars(char* guidChars, int offset, int a, int b, bool hex)
         {
             if (hex)
             {

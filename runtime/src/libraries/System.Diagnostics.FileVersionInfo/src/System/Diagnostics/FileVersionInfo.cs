@@ -6,10 +6,11 @@ using System.Text;
 
 namespace System.Diagnostics
 {
+    partial
     /// <summary>
     /// Provides version information for a physical file on disk.
     /// </summary>
-    public sealed partial class FileVersionInfo
+    public sealed class FileVersionInfo
     {
         private readonly string _fileName;
 

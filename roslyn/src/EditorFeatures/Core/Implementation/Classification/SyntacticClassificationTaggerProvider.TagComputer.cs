@@ -24,8 +24,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 {
-    internal partial class SyntacticClassificationTaggerProvider
+    partial internal class SyntacticClassificationTaggerProvider
     {
+        partial
         /// <summary>
         /// A classifier that operates only on the syntax of the source and not the semantics.  Note:
         /// this class operates in a hybrid sync/async manner.  Specifically, while classification
@@ -34,7 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         /// will determine which sections of the file changed and we will use that to notify the editor
         /// about what needs to be reclassified.
         /// </summary>
-        internal partial class TagComputer : ForegroundThreadAffinitizedObject
+        internal class TagComputer : ForegroundThreadAffinitizedObject
         {
             private readonly SyntacticClassificationTaggerProvider _taggerProvider;
             private readonly ITextBuffer2 _subjectBuffer;

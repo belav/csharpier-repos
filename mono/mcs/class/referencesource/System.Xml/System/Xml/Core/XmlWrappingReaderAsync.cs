@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial class XmlWrappingReader : XmlReader, IXmlLineInfo
+    partial internal class XmlWrappingReader : XmlReader, IXmlLineInfo
     {
         public override Task<string> GetValueAsync()
         {

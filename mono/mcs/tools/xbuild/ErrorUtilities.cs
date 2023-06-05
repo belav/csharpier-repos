@@ -39,20 +39,20 @@ namespace Mono.XBuild.CommandLine
             "Copyright (C) 2005-2013 Various Mono authors",
         };
 
-        static public void ReportError(int errorNum, string msg)
+        public static void ReportError(int errorNum, string msg)
         {
             Console.WriteLine(String.Format("MSBUILD: error MSBUILD{0:0000}: {1}", errorNum, msg));
             Environment.Exit(1);
         }
 
-        static public void ReportWarning(int errorNum, string msg)
+        public static void ReportWarning(int errorNum, string msg)
         {
             Console.WriteLine(
                 String.Format("MSBUILD: warning MSBUILD{0:0000}: {1}", errorNum, msg)
             );
         }
 
-        static public void ReportInvalidArgument(string option, string value)
+        public static void ReportInvalidArgument(string option, string value)
         {
             ReportError(
                 1012,
@@ -60,7 +60,7 @@ namespace Mono.XBuild.CommandLine
             );
         }
 
-        static public void ReportMissingArgument(string option)
+        public static void ReportMissingArgument(string option)
         {
             ReportError(
                 1003,
@@ -68,12 +68,12 @@ namespace Mono.XBuild.CommandLine
             );
         }
 
-        static public void ReportNotImplemented(string option)
+        public static void ReportNotImplemented(string option)
         {
             ReportError(0, String.Format("Compiler option '{0}' is not implemented", option));
         }
 
-        static public void ReportMissingFileSpec(string option)
+        public static void ReportMissingFileSpec(string option)
         {
             ReportError(
                 1008,
@@ -81,12 +81,12 @@ namespace Mono.XBuild.CommandLine
             );
         }
 
-        static public void ReportMissingText(string option)
+        public static void ReportMissingText(string option)
         {
             ReportError(1010, String.Format("Missing ':<text>' for '{0}' option", option));
         }
 
-        static public void ShowUsage()
+        public static void ShowUsage()
         {
             Display(version);
             Console.WriteLine("xbuild [options] [project-file]");
@@ -112,14 +112,14 @@ namespace Mono.XBuild.CommandLine
             Environment.Exit(0);
         }
 
-        static public void ShowVersion(bool exit)
+        public static void ShowVersion(bool exit)
         {
             Display(version);
             if (exit)
                 Environment.Exit(0);
         }
 
-        static private void Display(string[] array)
+        private static void Display(string[] array)
         {
             foreach (string s in array)
                 Console.WriteLine(s);

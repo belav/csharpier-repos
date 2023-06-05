@@ -21,7 +21,7 @@ namespace MonoTests.Mono.Security.Cryptography
     [TestFixture]
     public class PKCS8Test
     {
-        static public byte[] pkcs8_der =
+        public static byte[] pkcs8_der =
         {
             0x30,
             0x82,
@@ -738,7 +738,7 @@ namespace MonoTests.Mono.Security.Cryptography
             Assert.AreEqual(2000, p8.IterationCount, "IterationCount");
         }
 
-        static public byte[] End_Certificate_CP_01_01_crtx =
+        public static byte[] End_Certificate_CP_01_01_crtx =
         {
             0x30,
             0x82,
@@ -1378,7 +1378,7 @@ namespace MonoTests.Mono.Security.Cryptography
             0x84
         };
 
-        static public byte[] End_Certificate_CP_01_01_pki =
+        public static byte[] End_Certificate_CP_01_01_pki =
         {
             0x30,
             0x82,
@@ -1992,7 +1992,7 @@ namespace MonoTests.Mono.Security.Cryptography
             0x84
         };
 
-        static public byte[] End_Certificate_CP_01_02_crtx =
+        public static byte[] End_Certificate_CP_01_02_crtx =
         {
             0x30,
             0x82,

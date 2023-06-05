@@ -11,7 +11,7 @@ namespace System.Runtime.Serialization
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class CollectionDataContractAttribute : System.Attribute
+    partial public sealed class CollectionDataContractAttribute : System.Attribute
     {
         public CollectionDataContractAttribute() { }
 
@@ -76,7 +76,7 @@ namespace System.Runtime.Serialization
         Inherited = false,
         AllowMultiple = true
     )]
-    public sealed partial class ContractNamespaceAttribute : System.Attribute
+    partial public sealed class ContractNamespaceAttribute : System.Attribute
     {
         public ContractNamespaceAttribute(string contractNamespace) { }
 
@@ -98,7 +98,7 @@ namespace System.Runtime.Serialization
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class DataContractAttribute : System.Attribute
+    partial public sealed class DataContractAttribute : System.Attribute
     {
         public DataContractAttribute() { }
 
@@ -136,7 +136,7 @@ namespace System.Runtime.Serialization
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class DataMemberAttribute : System.Attribute
+    partial public sealed class DataMemberAttribute : System.Attribute
     {
         public DataMemberAttribute() { }
 
@@ -171,7 +171,7 @@ namespace System.Runtime.Serialization
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class EnumMemberAttribute : System.Attribute
+    partial public sealed class EnumMemberAttribute : System.Attribute
     {
         public EnumMemberAttribute() { }
 
@@ -191,12 +191,12 @@ namespace System.Runtime.Serialization
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class IgnoreDataMemberAttribute : System.Attribute
+    partial public sealed class IgnoreDataMemberAttribute : System.Attribute
     {
         public IgnoreDataMemberAttribute() { }
     }
 
-    public partial class InvalidDataContractException : System.Exception
+    partial public class InvalidDataContractException : System.Exception
     {
         public InvalidDataContractException() { }
 
@@ -210,7 +210,7 @@ namespace System.Runtime.Serialization
         public InvalidDataContractException(string? message, System.Exception? innerException) { }
     }
 
-    public partial interface ISerializationSurrogateProvider
+    partial public interface ISerializationSurrogateProvider
     {
         object GetDeserializedObject(object obj, System.Type targetType);
         object GetObjectToSerialize(object obj, System.Type targetType);
@@ -230,7 +230,7 @@ namespace System.Runtime.Serialization
         Inherited = true,
         AllowMultiple = true
     )]
-    public sealed partial class KnownTypeAttribute : System.Attribute
+    partial public sealed class KnownTypeAttribute : System.Attribute
     {
         public KnownTypeAttribute(string methodName) { }
 

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace System.CommandLine.Invocation
 {
+    partial
     /// <summary>
     /// Provides methods for creating and working with command handlers.
     /// </summary>
-    public static partial class CommandHandler
+    public static class CommandHandler
     {
         /// <summary>
         /// Creates a command handler based on an <see cref="Action"/>.

@@ -154,7 +154,7 @@ namespace System.Data.Odbc
             _cmdWrapper = null;
         }
 
-        override protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         { // MDAC 65459
             if (disposing)
             {
@@ -186,7 +186,7 @@ namespace System.Data.Odbc
                 "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
             )
         ]
-        override public string CommandText
+        public override string CommandText
         {
             get
             {
@@ -213,7 +213,7 @@ namespace System.Data.Odbc
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandTimeout),
         ]
-        override public int CommandTimeout
+        public override int CommandTimeout
         { // V1.2.3300, XXXCommand V1.0.5000
             get { return _commandTimeout; }
             set
@@ -251,7 +251,7 @@ namespace System.Data.Odbc
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandType),
         ]
-        override public CommandType CommandType
+        public override CommandType CommandType
         {
             get
             {
@@ -286,7 +286,7 @@ namespace System.Data.Odbc
                 "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
             ),
         ]
-        new public OdbcConnection Connection
+        public new OdbcConnection Connection
         {
             get { return _connection; }
             set
@@ -302,18 +302,18 @@ namespace System.Data.Odbc
             }
         }
 
-        override protected DbConnection DbConnection
+        protected override DbConnection DbConnection
         { // V1.2.3300
             get { return Connection; }
             set { Connection = (OdbcConnection)value; }
         }
 
-        override protected DbParameterCollection DbParameterCollection
+        protected override DbParameterCollection DbParameterCollection
         { // V1.2.3300
             get { return Parameters; }
         }
 
-        override protected DbTransaction DbTransaction
+        protected override DbTransaction DbTransaction
         { // V1.2.3300
             get { return Transaction; }
             set { Transaction = (OdbcTransaction)value; }
@@ -349,7 +349,7 @@ namespace System.Data.Odbc
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_Parameters),
         ]
-        new public OdbcParameterCollection Parameters
+        public new OdbcParameterCollection Parameters
         {
             get
             {
@@ -366,7 +366,7 @@ namespace System.Data.Odbc
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.DbCommand_Transaction),
         ]
-        new public OdbcTransaction Transaction
+        public new OdbcTransaction Transaction
         {
             get
             {
@@ -391,7 +391,7 @@ namespace System.Data.Odbc
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbCommand_UpdatedRowSource),
         ]
-        override public UpdateRowSource UpdatedRowSource
+        public override UpdateRowSource UpdatedRowSource
         { // V1.2.3300, XXXCommand V1.0.5000
             get { return _updatedRowSource; }
             set
@@ -461,7 +461,14 @@ namespace System.Data.Odbc
         // (ODBC Programmer's Reference ...)
         //
 
-        override public void Cancel()
+        public
+        // OdbcCommand.Cancel()
+        //
+        // In ODBC3.0 ... a call to SQLCancel when no processing is done has no effect at all
+        // (ODBC Programmer's Reference ...)
+        //
+
+        override void Cancel()
         {
             CMDWrapper wrapper = _cmdWrapper;
             if (null != wrapper)
@@ -557,22 +564,22 @@ namespace System.Data.Odbc
             this.cmdState = ConnectionState.Closed;
         }
 
-        new public OdbcParameter CreateParameter()
+        public new OdbcParameter CreateParameter()
         {
             return new OdbcParameter();
         }
 
-        override protected DbParameter CreateDbParameter()
+        protected override DbParameter CreateDbParameter()
         {
             return CreateParameter();
         }
 
-        override protected DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
+        protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
         {
             return ExecuteReader(behavior);
         }
 
-        override public int ExecuteNonQuery()
+        public override int ExecuteNonQuery()
         {
             OdbcConnection.ExecutePermission.Demand();
             using (OdbcDataReader reader = ExecuteReaderObject(0, ADP.ExecuteNonQuery, false))
@@ -582,14 +589,14 @@ namespace System.Data.Odbc
             }
         }
 
-        new public OdbcDataReader ExecuteReader()
+        public new OdbcDataReader ExecuteReader()
         {
             return ExecuteReader(
                 0 /*CommandBehavior*/
             );
         }
 
-        new public OdbcDataReader ExecuteReader(CommandBehavior behavior)
+        public new OdbcDataReader ExecuteReader(CommandBehavior behavior)
         {
             OdbcConnection.ExecutePermission.Demand();
             return ExecuteReaderObject(behavior, ADP.ExecuteReader, true);
@@ -950,7 +957,7 @@ namespace System.Data.Odbc
             return localReader;
         }
 
-        override public object ExecuteScalar()
+        public override object ExecuteScalar()
         {
             OdbcConnection.ExecutePermission.Demand();
 
@@ -986,7 +993,18 @@ namespace System.Data.Odbc
         // if the connection is not set
         // if the connection is not open
         //
-        override public void Prepare()
+        public
+        // Prepare
+        //
+        // if the CommandType property is set to TableDirect Prepare does nothing.
+        // if the CommandType property is set to StoredProcedure Prepare should succeed but result
+        // in a no-op
+        //
+        // throw InvalidOperationException
+        // if the connection is not set
+        // if the connection is not open
+        //
+        override void Prepare()
         {
             OdbcConnection.ExecutePermission.Demand();
             ODBC32.RetCode retcode;
@@ -1075,7 +1093,7 @@ namespace System.Data.Odbc
         }
     }
 
-    sealed internal class CMDWrapper
+    internal sealed class CMDWrapper
     {
         private OdbcStatementHandle _stmt; // hStmt
         private OdbcStatementHandle _keyinfostmt; // hStmt for keyinfo

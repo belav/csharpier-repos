@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace Roslyn.Utilities
 {
-    internal static partial class Contract
+    partial internal static class Contract
     {
         // Guidance on inlining:
         // ThrowXxx methods are used heavily across the code base.

@@ -11,7 +11,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public partial class ReadyToRunGenericHelperNode
+    partial public class ReadyToRunGenericHelperNode
     {
         protected Register GetContextRegister(
             ref /* readonly */
@@ -353,7 +353,7 @@ namespace ILCompiler.DependencyAnalysis
         }
     }
 
-    public partial class ReadyToRunGenericLookupFromTypeNode
+    partial public class ReadyToRunGenericLookupFromTypeNode
     {
         protected override void EmitLoadGenericContext(
             NodeFactory factory,

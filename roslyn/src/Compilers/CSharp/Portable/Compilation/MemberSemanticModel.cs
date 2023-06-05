@@ -18,11 +18,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Binding info for expressions and statements that are part of a member declaration.
     /// Instances of this class should not be exposed to external consumers.
     /// </summary>
-    internal abstract partial class MemberSemanticModel : CSharpSemanticModel
+    internal abstract class MemberSemanticModel : CSharpSemanticModel
     {
         private readonly Symbol _memberSymbol;
         private readonly CSharpSyntaxNode _root;

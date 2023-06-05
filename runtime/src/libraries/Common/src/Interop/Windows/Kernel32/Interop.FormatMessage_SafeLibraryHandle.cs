@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         public const int FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
         public const int FORMAT_MESSAGE_FROM_HMODULE = 0x00000800;
@@ -19,7 +19,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial int FormatMessage(
+        partial public static int FormatMessage(
             int dwFlags,
             SafeLibraryHandle lpSource,
             uint dwMessageId,

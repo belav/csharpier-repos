@@ -57,7 +57,7 @@ namespace System.Web
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
     )]
-    public sealed partial class HttpContext : IServiceProvider
+    partial public sealed class HttpContext : IServiceProvider
     {
         internal HttpWorkerRequest WorkerRequest;
         HttpApplication app_instance;

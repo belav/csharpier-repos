@@ -24,7 +24,7 @@ using SetTriad = System.Tuple<
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
-    public abstract partial class ImmutableSetTest : ImmutablesTestBase
+    partial public abstract class ImmutableSetTest : ImmutablesTestBase
     {
         [Fact]
         public void AddTest()

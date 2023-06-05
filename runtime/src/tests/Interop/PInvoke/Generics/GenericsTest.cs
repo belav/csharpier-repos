@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-unsafe partial class GenericsNative
+partial unsafe class GenericsNative
 {
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IComInterface<T>
@@ -48,7 +48,7 @@ unsafe partial class GenericsNative
     }
 }
 
-unsafe partial class GenericsTest
+partial unsafe class GenericsTest
 {
     public static int Main()
     {

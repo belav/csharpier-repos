@@ -8,7 +8,7 @@ using System.Reflection.TypeLoading;
 
 namespace System.Reflection
 {
-    public sealed partial class MetadataLoadContext
+    partial public sealed class MetadataLoadContext
     {
         //
         // List of ref AssemblyNames to successfully bound assemblies. This is not the same as _loadedAssemblies.

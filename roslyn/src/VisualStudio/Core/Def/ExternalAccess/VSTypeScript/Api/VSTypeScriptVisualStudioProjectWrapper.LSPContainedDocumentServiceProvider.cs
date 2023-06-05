@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Api
 {
-    internal sealed partial class VSTypeScriptVisualStudioProjectWrapper
+    partial internal sealed class VSTypeScriptVisualStudioProjectWrapper
     {
         private sealed class LspContainedDocumentServiceProvider
             : IDocumentServiceProvider,

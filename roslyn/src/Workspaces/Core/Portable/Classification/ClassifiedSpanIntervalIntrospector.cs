@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Shared.Collections;
 
 namespace Microsoft.CodeAnalysis.Classification
 {
-    internal static partial class ClassifierHelper
+    partial internal static class ClassifierHelper
     {
         private readonly struct ClassifiedSpanIntervalIntrospector
             : IIntervalIntrospector<ClassifiedSpan>

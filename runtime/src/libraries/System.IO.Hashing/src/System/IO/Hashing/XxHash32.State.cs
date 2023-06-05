@@ -12,7 +12,7 @@ using static System.IO.Hashing.XxHashShared;
 
 namespace System.IO.Hashing
 {
-    public sealed partial class XxHash32
+    partial public sealed class XxHash32
     {
         private struct State
         {

@@ -57,7 +57,7 @@ namespace System.Security.AccessControl
             get { return typeof(CryptoKeyAuditRule); }
         }
 
-        public override sealed AccessRule AccessRuleFactory(
+        public sealed override AccessRule AccessRuleFactory(
             IdentityReference identityReference,
             int accessMask,
             bool isInherited,
@@ -99,7 +99,7 @@ namespace System.Security.AccessControl
             SetAccessRule((AccessRule)rule);
         }
 
-        public override sealed AuditRule AuditRuleFactory(
+        public sealed override AuditRule AuditRuleFactory(
             IdentityReference identityReference,
             int accessMask,
             bool isInherited,

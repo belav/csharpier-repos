@@ -3,7 +3,7 @@
 
 namespace System.Net
 {
-    internal partial struct StreamSizes
+    partial internal struct StreamSizes
     {
         public int Header { get; private set; }
 

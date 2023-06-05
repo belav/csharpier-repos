@@ -9,8 +9,9 @@ using System.Diagnostics;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Includes functionality for runtime type loading
-    public partial class DefType
+    public class DefType
     {
         internal static readonly LayoutInt MaximumAlignmentPossible = new LayoutInt(8);
 

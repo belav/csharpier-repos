@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
-    public partial class ErrorList_OutOfProc : OutOfProcComponent
+    partial public class ErrorList_OutOfProc : OutOfProcComponent
     {
         private readonly ErrorList_InProc _inProc;
         private readonly VisualStudioInstance _instance;

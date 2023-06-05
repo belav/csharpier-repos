@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 {
-    internal partial class ContainedLanguage
+    partial internal class ContainedLanguage
     {
         private readonly IVsEditorAdaptersFactoryService _editorAdaptersFactoryService;
         private readonly IDiagnosticAnalyzerService _diagnosticAnalyzerService;

@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         [LibraryImport(
             Libraries.User32,
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial IntPtr CreateWindowExW(
+        partial public static IntPtr CreateWindowExW(
             int exStyle,
             string lpszClassName,
             string lpszWindowName,

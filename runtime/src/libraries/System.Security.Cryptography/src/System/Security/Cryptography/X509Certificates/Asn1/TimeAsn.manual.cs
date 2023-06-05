@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
-    internal partial struct TimeAsn
+    partial internal struct TimeAsn
     {
         public TimeAsn(DateTimeOffset dateTimeOffset)
         {

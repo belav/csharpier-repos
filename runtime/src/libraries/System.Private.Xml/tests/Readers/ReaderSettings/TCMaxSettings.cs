@@ -6,7 +6,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.ReaderSettingsTests
 {
-    public partial class TCMaxSettings : TCXMLReaderBaseGeneral
+    partial public class TCMaxSettings : TCXMLReaderBaseGeneral
     {
         // Type is XmlReaderTest.Common.TCMaxSettings
         // Test Case

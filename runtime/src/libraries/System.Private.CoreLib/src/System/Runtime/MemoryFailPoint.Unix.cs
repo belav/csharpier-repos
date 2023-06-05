@@ -3,7 +3,7 @@
 
 namespace System.Runtime
 {
-    public sealed partial class MemoryFailPoint
+    partial public sealed class MemoryFailPoint
     {
         private static ulong GetTopOfMemory()
         {

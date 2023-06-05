@@ -1578,7 +1578,7 @@ namespace System.Web.UI.WebControls
             return new EmptyControlCollection(this);
         }
 
-        protected virtual internal TreeNode CreateNode()
+        protected internal virtual TreeNode CreateNode()
         {
             return new TreeNode(this, false);
         }
@@ -1603,7 +1603,7 @@ namespace System.Web.UI.WebControls
         /// of DataBind.  If DataBind if overridden, the OnDataBinding and OnDataBound events will
         /// fire in the wrong order.  However, for backwards compat on ListControl and AdRotator, we
         /// can't seal this method.  It is sealed on all new BaseDataBoundControl-derived controls.
-        public override sealed void DataBind()
+        public sealed override void DataBind()
         {
             base.DataBind();
         }

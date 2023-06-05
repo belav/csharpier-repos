@@ -14,7 +14,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {
-    public partial class Process : IDisposable
+    partial public class Process : IDisposable
     {
         private static volatile bool s_initialized;
         private static readonly object s_initializedGate = new object();

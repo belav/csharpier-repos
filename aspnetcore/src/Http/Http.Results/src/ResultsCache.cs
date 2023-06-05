@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Microsoft.AspNetCore.Http;
 
-internal static partial class ResultsCache
+partial internal static class ResultsCache
 {
     public static NotFound NotFound { get; } = new();
     public static UnauthorizedHttpResult Unauthorized { get; } = new();

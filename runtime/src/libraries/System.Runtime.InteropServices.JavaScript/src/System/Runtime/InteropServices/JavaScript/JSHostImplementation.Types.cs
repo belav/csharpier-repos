@@ -3,7 +3,7 @@
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    internal static partial class JSHostImplementation
+    partial internal static class JSHostImplementation
     {
         internal unsafe delegate void ToManagedCallback(JSMarshalerArgument* arguments_buffer);
 

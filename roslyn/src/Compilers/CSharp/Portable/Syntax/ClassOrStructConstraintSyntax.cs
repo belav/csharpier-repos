@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ClassOrStructConstraintSyntax
+    partial public class ClassOrStructConstraintSyntax
     {
         public ClassOrStructConstraintSyntax Update(SyntaxToken classOrStructKeyword)
         {

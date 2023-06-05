@@ -17,7 +17,7 @@ using static Roslyn.Test.Utilities.TestMetadata;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
 {
-    public partial class SymbolKeyTest : SymbolKeyTestBase
+    partial public class SymbolKeyTest : SymbolKeyTestBase
     {
         #region "Metadata vs. Source"
 

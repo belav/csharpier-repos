@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 using System.Security.Cryptography.X509Certificates;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_X509StoreAddCertificate(

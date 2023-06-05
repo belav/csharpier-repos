@@ -9,9 +9,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal partial class AbstractAsynchronousTaggerProvider<TTag>
+    partial internal class AbstractAsynchronousTaggerProvider<TTag>
     {
-        private partial class TagSource
+        partial private class TagSource
         {
             /// <summary>How many taggers are currently using us.</summary>
             private int _taggers = 0;

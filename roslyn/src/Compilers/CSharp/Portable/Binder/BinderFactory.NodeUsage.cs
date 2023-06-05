@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BinderFactory
+    partial internal class BinderFactory
     {
         internal enum NodeUsage : byte
         {

@@ -6,7 +6,7 @@ using System.Reflection.Metadata;
 
 namespace System.Reflection.TypeLoading.Ecma
 {
-    internal sealed partial class EcmaModule
+    partial internal sealed class EcmaModule
     {
         /// <summary>
         /// Helper routine for the more general Module.GetType() family of apis. Also used in typeRef resolution.

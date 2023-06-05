@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Functional.Tests
 {
-    internal partial class CustomContent : HttpContent
+    partial internal class CustomContent : HttpContent
     {
         private readonly Stream _stream;
 

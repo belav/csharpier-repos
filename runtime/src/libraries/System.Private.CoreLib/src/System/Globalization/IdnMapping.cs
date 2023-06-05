@@ -30,8 +30,9 @@ using System.Text;
 
 namespace System.Globalization
 {
+    partial
     // IdnMapping class used to map names to Punycode
-    public sealed partial class IdnMapping
+    public sealed class IdnMapping
     {
         private bool _allowUnassigned;
         private bool _useStd3AsciiRules;

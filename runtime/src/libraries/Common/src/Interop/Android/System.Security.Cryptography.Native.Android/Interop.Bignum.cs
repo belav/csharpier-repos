@@ -5,22 +5,23 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
+    partial
     // TODO: [AndroidCrypto] Rename class to AndroidCrypto once all consumers are split in Android vs. Unix
-    internal static partial class Crypto
+    internal static class Crypto
     {
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_BigNumToBinary"
         )]
-        private static unsafe partial int BigNumToBinary(SafeBignumHandle a, byte* to);
+        partial private static unsafe int BigNumToBinary(SafeBignumHandle a, byte* to);
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_GetBigNumBytes"
         )]
-        private static partial int GetBigNumBytes(SafeBignumHandle a);
+        partial private static int GetBigNumBytes(SafeBignumHandle a);
 
         internal static unsafe byte[]? ExtractBignum(SafeBignumHandle? bignum, int targetSize)
         {

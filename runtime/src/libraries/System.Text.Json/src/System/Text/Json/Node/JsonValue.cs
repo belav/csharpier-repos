@@ -7,10 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.Json.Node
 {
+    partial
     /// <summary>
     /// Represents a mutable JSON value.
     /// </summary>
-    public abstract partial class JsonValue : JsonNode
+    public abstract class JsonValue : JsonNode
     {
         private protected JsonValue(JsonNodeOptions? options = null)
             : base(options) { }

@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeWaitHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeWaitHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         protected override bool ReleaseHandle()
         {

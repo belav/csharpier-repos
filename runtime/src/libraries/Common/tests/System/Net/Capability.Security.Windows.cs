@@ -3,7 +3,7 @@
 
 namespace System.Net.Test.Common
 {
-    public static partial class Capability
+    partial public static class Capability
     {
         public static bool IsNtlmInstalled()
         {

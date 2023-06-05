@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public partial class NetPeerTcpBindingCollectionElement
+    partial public class NetPeerTcpBindingCollectionElement
         : StandardBindingCollectionElement<NetPeerTcpBinding, NetPeerTcpBindingElement>
     {
         // Static Fields

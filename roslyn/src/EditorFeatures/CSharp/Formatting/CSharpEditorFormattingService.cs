@@ -32,7 +32,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
 {
     [ExportLanguageService(typeof(IEditorFormattingService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpEditorFormattingService : IEditorFormattingService
+    partial internal class CSharpEditorFormattingService : IEditorFormattingService
     {
         // All the characters that might potentially trigger formatting when typed
         private readonly char[] _supportedChars = ";{}#nte:)".ToCharArray();

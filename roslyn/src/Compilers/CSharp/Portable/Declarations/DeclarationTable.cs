@@ -11,6 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// A declaration table is a device which keeps track of type and namespace declarations from
     /// parse trees. It is optimized for the case where there is one set of declarations that stays
@@ -19,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// "merging" the root declarations into one big summary declaration; this cache is efficiently
     /// re-used provided that the pattern of adds and removes is as we expect.
     /// </summary>
-    internal sealed partial class DeclarationTable
+    internal sealed class DeclarationTable
     {
         public static readonly DeclarationTable Empty = new DeclarationTable(
             allOlderRootDeclarations: ImmutableSetWithInsertionOrder<

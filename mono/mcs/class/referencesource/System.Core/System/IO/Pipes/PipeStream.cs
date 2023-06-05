@@ -73,7 +73,7 @@ namespace System.IO.Pipes
         );
 
         [SecurityCritical]
-        private unsafe static readonly IOCompletionCallback IOCallback = new IOCompletionCallback(
+        private static readonly unsafe IOCompletionCallback IOCallback = new IOCompletionCallback(
             PipeStream.AsyncPSCallback
         );
 
@@ -373,7 +373,7 @@ namespace System.IO.Pipes
         }
 
         [System.Security.SecurityCritical]
-        unsafe private PipeStreamAsyncResult BeginReadCore(
+        private unsafe PipeStreamAsyncResult BeginReadCore(
             byte[] buffer,
             int offset,
             int count,
@@ -460,7 +460,7 @@ namespace System.IO.Pipes
         }
 
         [System.Security.SecurityCritical]
-        public unsafe override int EndRead(IAsyncResult asyncResult)
+        public override unsafe int EndRead(IAsyncResult asyncResult)
         {
             // There are 3 significantly different IAsyncResults we'll accept
             // here.  One is from Stream::BeginRead.  The other two are variations
@@ -644,7 +644,7 @@ namespace System.IO.Pipes
         }
 
         [System.Security.SecurityCritical]
-        unsafe private PipeStreamAsyncResult BeginWriteCore(
+        private unsafe PipeStreamAsyncResult BeginWriteCore(
             byte[] buffer,
             int offset,
             int count,
@@ -720,7 +720,7 @@ namespace System.IO.Pipes
         }
 
         [System.Security.SecurityCritical]
-        public unsafe override void EndWrite(IAsyncResult asyncResult)
+        public override unsafe void EndWrite(IAsyncResult asyncResult)
         {
             if (asyncResult == null)
             {
@@ -1433,7 +1433,7 @@ namespace System.IO.Pipes
         // anonymous pipe ends and named pipe server can get/set properties when broken
         // or connected. Named client overrides
         [System.Security.SecurityCritical]
-        protected virtual internal void CheckPipePropertyOperations()
+        protected internal virtual void CheckPipePropertyOperations()
         {
             if (m_handle == null)
             {
@@ -1588,7 +1588,7 @@ namespace System.IO.Pipes
         // ************************ Static Methods ************************ //
 
         [System.Security.SecurityCritical]
-        internal unsafe static UnsafeNativeMethods.SECURITY_ATTRIBUTES GetSecAttrs(
+        internal static unsafe UnsafeNativeMethods.SECURITY_ATTRIBUTES GetSecAttrs(
             HandleInheritability inheritability,
             PipeSecurity pipeSecurity,
             out Object pinningHandle
@@ -1639,7 +1639,7 @@ namespace System.IO.Pipes
         // called by a free thread in the threadpool when the IO operation
         // completes.
         [System.Security.SecurityCritical]
-        unsafe private static void AsyncPSCallback(
+        private static unsafe void AsyncPSCallback(
             uint errorCode,
             uint numBytes,
             NativeOverlapped* pOverlapped
@@ -1709,7 +1709,7 @@ namespace System.IO.Pipes
         }
     }
 
-    unsafe internal sealed class PipeStreamAsyncResult : IAsyncResult
+    internal sealed unsafe class PipeStreamAsyncResult : IAsyncResult
     {
         internal AsyncCallback _userCallback; // User callback
         internal Object _userStateObject;

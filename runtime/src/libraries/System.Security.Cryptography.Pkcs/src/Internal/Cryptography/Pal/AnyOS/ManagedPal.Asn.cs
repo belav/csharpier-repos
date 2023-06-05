@@ -9,7 +9,7 @@ using System.Security.Cryptography.Asn1.Pkcs7;
 
 namespace Internal.Cryptography.Pal.AnyOS
 {
-    internal sealed partial class ManagedPkcsPal : PkcsPal
+    partial internal sealed class ManagedPkcsPal : PkcsPal
     {
         public override unsafe Oid GetEncodedMessageType(ReadOnlySpan<byte> encodedMessage)
         {

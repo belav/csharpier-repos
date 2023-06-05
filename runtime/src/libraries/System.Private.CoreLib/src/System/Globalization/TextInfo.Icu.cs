@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
-    public partial class TextInfo
+    partial public class TextInfo
     {
         private Tristate _needsTurkishCasing = Tristate.NotInitialized;
 

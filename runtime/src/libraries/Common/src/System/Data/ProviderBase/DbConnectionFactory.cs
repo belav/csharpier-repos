@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.Data.ProviderBase
 {
-    internal abstract partial class DbConnectionFactory
+    partial internal abstract class DbConnectionFactory
     {
         private Dictionary<DbConnectionPoolKey, DbConnectionPoolGroup> _connectionPoolGroups;
         private readonly List<DbConnectionPool> _poolsToRelease;

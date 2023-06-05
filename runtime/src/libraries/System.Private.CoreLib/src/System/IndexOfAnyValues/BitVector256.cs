@@ -9,7 +9,7 @@ namespace System.Buffers
 {
     internal unsafe struct BitVector256
     {
-        private fixed uint _values[8];
+        fixed private uint _values[8];
 
         public void Set(int c)
         {

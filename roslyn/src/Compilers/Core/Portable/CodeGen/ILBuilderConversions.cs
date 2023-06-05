@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeGen
 {
-    internal partial class ILBuilder
+    partial internal class ILBuilder
     {
         public void EmitNumericConversion(
             Microsoft.Cci.PrimitiveTypeCode fromPredefTypeKind,

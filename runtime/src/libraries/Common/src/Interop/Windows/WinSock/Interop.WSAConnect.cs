@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using System.Net.Sockets;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError WSAConnect(
+        partial internal static SocketError WSAConnect(
             SafeSocketHandle socketHandle,
             byte[] socketAddress,
             int socketAddressSize,

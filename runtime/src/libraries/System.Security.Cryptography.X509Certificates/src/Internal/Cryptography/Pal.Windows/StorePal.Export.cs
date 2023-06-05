@@ -11,7 +11,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
+    partial internal sealed class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
     {
         public void MoveTo(X509Certificate2Collection collection)
         {

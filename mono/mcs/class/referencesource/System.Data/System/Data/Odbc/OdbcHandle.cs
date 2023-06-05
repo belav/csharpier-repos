@@ -164,7 +164,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             // NOTE: The SafeHandle class guarantees this will be called exactly once and is non-interrutible.
             IntPtr handle = base.handle;
@@ -277,7 +277,7 @@ namespace System.Data.Odbc
         }
     }
 
-    sealed internal class OdbcDescriptorHandle : OdbcHandle
+    internal sealed class OdbcDescriptorHandle : OdbcHandle
     {
         internal OdbcDescriptorHandle(
             OdbcStatementHandle statementHandle,

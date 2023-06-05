@@ -7,12 +7,13 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Helps model the behavior of calls to various Type.GetType overloads. Type.GetType is required to search
     /// the calling assembly for a matching type if the type name supplied by the user code was not assembly qualified.
     /// This thunk calls a helper method, passing it a string for what should be considered the "calling assembly".
     /// </summary>
-    internal sealed partial class TypeGetTypeMethodThunk : ILStubMethod
+    internal sealed class TypeGetTypeMethodThunk : ILStubMethod
     {
         private readonly MethodDesc _helperMethod;
 

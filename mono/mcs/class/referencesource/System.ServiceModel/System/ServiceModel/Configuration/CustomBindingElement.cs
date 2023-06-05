@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.ServiceModel.Channels;
 
-    public partial class CustomBindingElement
+    partial public class CustomBindingElement
         : NamedServiceModelExtensionCollectionElement<BindingElementExtensionElement>,
             ICollection<BindingElementExtensionElement>,
             IBindingConfigurationElement

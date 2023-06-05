@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Wasm.Authentication.Server.Data.Migrations
 {
-    public partial class IdentityServer4 : Migration
+    partial public class IdentityServer4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace System.Runtime.Loader
 {
-    public partial class AssemblyLoadContext
+    partial public class AssemblyLoadContext
     {
         // Keep in sync with MonoManagedAssemblyLoadContextInternalState in object-internals.h
         private enum InternalState

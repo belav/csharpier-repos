@@ -5,7 +5,7 @@ using Internal.Cryptography.Pal.AnyOS;
 
 namespace Internal.Cryptography
 {
-    internal abstract partial class PkcsPal
+    partial internal abstract class PkcsPal
     {
         private static readonly PkcsPal s_instance = new ManagedPkcsPal();
     }

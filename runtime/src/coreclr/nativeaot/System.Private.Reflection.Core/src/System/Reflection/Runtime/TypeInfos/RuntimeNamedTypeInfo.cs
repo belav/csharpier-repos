@@ -14,11 +14,12 @@ using Internal.Reflection.Tracing;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
+    partial
     //
     // TypeInfos that represent type definitions (i.e. Foo or Foo<>, but not Foo<int> or arrays/pointers/byrefs.)
     //
     //
-    internal abstract partial class RuntimeNamedTypeInfo
+    internal abstract class RuntimeNamedTypeInfo
         : RuntimeTypeDefinitionTypeInfo,
             IEquatable<RuntimeNamedTypeInfo>
     {

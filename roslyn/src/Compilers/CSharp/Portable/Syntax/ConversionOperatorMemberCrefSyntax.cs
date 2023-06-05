@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ConversionOperatorMemberCrefSyntax
+    partial public class ConversionOperatorMemberCrefSyntax
     {
         public ConversionOperatorMemberCrefSyntax Update(
             SyntaxToken implicitOrExplicitKeyword,

@@ -44,7 +44,7 @@ namespace System.Web.Management
 
         internal MailWebEventProvider() { }
 
-        override public void Initialize(string name, NameValueCollection config)
+        public override void Initialize(string name, NameValueCollection config)
         {
             Debug.Trace("MailWebEventProvider", "Initializing: name=" + name);
 

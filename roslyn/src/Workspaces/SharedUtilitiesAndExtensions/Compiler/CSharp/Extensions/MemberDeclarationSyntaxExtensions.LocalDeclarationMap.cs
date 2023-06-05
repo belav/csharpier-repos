@@ -9,7 +9,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal partial class MemberDeclarationSyntaxExtensions
+    partial internal class MemberDeclarationSyntaxExtensions
     {
         public readonly struct LocalDeclarationMap
         {

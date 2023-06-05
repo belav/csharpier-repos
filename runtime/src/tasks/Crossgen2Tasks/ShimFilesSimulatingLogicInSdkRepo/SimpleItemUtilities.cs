@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Microsoft.NET.Build.Tasks
 {
-    internal static partial class ItemUtilities
+    partial internal static class ItemUtilities
     {
         public static bool? GetBooleanMetadata(this ITaskItem item, string metadataName)
         {

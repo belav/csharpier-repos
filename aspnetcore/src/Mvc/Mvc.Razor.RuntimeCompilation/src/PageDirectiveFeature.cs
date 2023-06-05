@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-internal static partial class PageDirectiveFeature
+partial internal static class PageDirectiveFeature
 {
     private static readonly RazorProjectEngine PageDirectiveEngine = RazorProjectEngine.Create(
         RazorConfiguration.Default,
@@ -129,7 +129,7 @@ internal static partial class PageDirectiveFeature
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             104,
@@ -138,7 +138,7 @@ internal static partial class PageDirectiveFeature
             EventName = "MalformedPageDirective",
             SkipEnabledCheck = true
         )]
-        private static partial void MalformedPageDirective(
+        partial private static void MalformedPageDirective(
             ILogger logger,
             string filePath,
             string[] diagnostics

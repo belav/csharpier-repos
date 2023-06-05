@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics
 {
-    public sealed partial class FileVersionInfo
+    partial public sealed class FileVersionInfo
     {
         private unsafe FileVersionInfo(string fileName)
         {

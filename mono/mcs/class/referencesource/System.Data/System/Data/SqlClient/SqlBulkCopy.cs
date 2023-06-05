@@ -42,6 +42,8 @@ namespace System.Data.SqlClient
 
 #if !PROJECTK
     using MSS = Microsoft.SqlServer.Server;
+
+    internal
 #else
     using Res = System.SR;
 #endif //PROJECTK
@@ -50,7 +52,7 @@ namespace System.Data.SqlClient
     // this internal class helps us to associate the metadata (from the target)
     // with columnordinals (from the source)
     //
-    sealed internal class _ColumnMapping
+    sealed class _ColumnMapping
     {
         internal int _sourceColumnOrdinal;
         internal _SqlMetaData _metadata;
@@ -62,7 +64,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class Row
+    internal sealed class Row
     {
         private object[] _dataFields;
 
@@ -82,9 +84,10 @@ namespace System.Data.SqlClient
         }
     }
 
+    internal
     // the controlling class for one result (metadata + rows)
     //
-    sealed internal class Result
+    sealed class Result
     {
         private _SqlMetaDataSet _metadata;
         private ArrayList _rowset;
@@ -116,9 +119,10 @@ namespace System.Data.SqlClient
         }
     }
 
+    internal
     // A wrapper object for metadata and rowsets returned by our initial queries
     //
-    sealed internal class BulkCopySimpleResultSet
+    sealed class BulkCopySimpleResultSet
     {
         private ArrayList _results; // the list of results
         private Result resultSet; // the current result

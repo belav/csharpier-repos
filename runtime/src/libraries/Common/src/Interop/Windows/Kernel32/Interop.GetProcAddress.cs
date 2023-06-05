@@ -6,18 +6,18 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
-        public static partial IntPtr GetProcAddress(
+        partial public static IntPtr GetProcAddress(
             SafeLibraryHandle hModule,
             [MarshalAs(UnmanagedType.LPStr)] string lpProcName
         );
 
         [LibraryImport(Libraries.Kernel32)]
-        public static partial IntPtr GetProcAddress(
+        partial public static IntPtr GetProcAddress(
             IntPtr hModule,
             [MarshalAs(UnmanagedType.LPStr)] string lpProcName
         );

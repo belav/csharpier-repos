@@ -45,7 +45,7 @@ using System.Runtime.Versioning;
 
 namespace System.Drawing
 {
-    public sealed partial class Graphics : MarshalByRefObject, IDisposable, IDeviceContext
+    partial public sealed class Graphics : MarshalByRefObject, IDisposable, IDeviceContext
     {
         internal IMacContext? maccontext;
         private bool disposed;

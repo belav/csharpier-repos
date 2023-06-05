@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-internal sealed partial class GenericWebHostService : IHostedService
+partial internal sealed class GenericWebHostService : IHostedService
 {
     public GenericWebHostService(
         IOptions<GenericWebHostServiceOptions> options,
@@ -224,7 +224,7 @@ internal sealed partial class GenericWebHostService : IHostedService
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             14,
@@ -232,7 +232,7 @@ internal sealed partial class GenericWebHostService : IHostedService
             "Now listening on: {address}",
             EventName = "ListeningOnAddress"
         )]
-        public static partial void ListeningOnAddress(ILogger logger, string address);
+        partial public static void ListeningOnAddress(ILogger logger, string address);
 
         [LoggerMessage(
             13,
@@ -241,6 +241,6 @@ internal sealed partial class GenericWebHostService : IHostedService
             EventName = "HostingStartupAssemblyLoaded",
             SkipEnabledCheck = true
         )]
-        public static partial void StartupAssemblyLoaded(ILogger logger, string assemblyName);
+        partial public static void StartupAssemblyLoaded(ILogger logger, string assemblyName);
     }
 }

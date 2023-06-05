@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal partial class AbstractGenerateConversionService<
+    partial internal class AbstractGenerateConversionService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax,

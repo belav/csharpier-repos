@@ -13,7 +13,7 @@ using static System.Linq.Expressions.CachedReflectionInfo;
 
 namespace System.Linq.Expressions.Compiler
 {
-    internal sealed partial class LambdaCompiler
+    partial internal sealed class LambdaCompiler
     {
         private void EmitBlockExpression(Expression expr, CompilationFlags flags)
         {

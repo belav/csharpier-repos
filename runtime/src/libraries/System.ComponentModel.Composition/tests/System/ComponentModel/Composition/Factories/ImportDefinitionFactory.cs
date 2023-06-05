@@ -7,9 +7,10 @@ using System.Linq.Expressions;
 
 namespace System.ComponentModel.Composition.Factories
 {
+    partial
     // This class deliberately does not create instances of ImportDefinition,
     // so as to test other derived classes from ImportDefinition.
-    internal static partial class ImportDefinitionFactory
+    internal static class ImportDefinitionFactory
     {
         public static ImportDefinition Create(Type contractType, ImportCardinality cardinality)
         {

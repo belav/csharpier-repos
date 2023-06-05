@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Globalization
 {
-    public partial class CompareInfo
+    partial public class CompareInfo
     {
         private SortKey InvariantCreateSortKey(string source, CompareOptions options)
         {

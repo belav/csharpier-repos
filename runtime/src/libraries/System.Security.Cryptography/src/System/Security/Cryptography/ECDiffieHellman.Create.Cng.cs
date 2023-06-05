@@ -3,19 +3,19 @@
 
 namespace System.Security.Cryptography
 {
-    public abstract partial class ECDiffieHellman : ECAlgorithm
+    partial public abstract class ECDiffieHellman : ECAlgorithm
     {
-        public static new partial ECDiffieHellman Create()
+        partial public static new ECDiffieHellman Create()
         {
             return new ECDiffieHellmanWrapper(new ECDiffieHellmanCng());
         }
 
-        public static partial ECDiffieHellman Create(ECCurve curve)
+        partial public static ECDiffieHellman Create(ECCurve curve)
         {
             return new ECDiffieHellmanWrapper(new ECDiffieHellmanCng(curve));
         }
 
-        public static partial ECDiffieHellman Create(ECParameters parameters)
+        partial public static ECDiffieHellman Create(ECParameters parameters)
         {
             ECDiffieHellman ecdh = new ECDiffieHellmanCng();
 

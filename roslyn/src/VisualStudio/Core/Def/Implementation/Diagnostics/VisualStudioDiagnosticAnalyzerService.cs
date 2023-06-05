@@ -28,7 +28,7 @@ using Task = System.Threading.Tasks.Task;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 {
     [Export(typeof(IVisualStudioDiagnosticAnalyzerService))]
-    internal partial class VisualStudioDiagnosticAnalyzerService
+    partial internal class VisualStudioDiagnosticAnalyzerService
         : IVisualStudioDiagnosticAnalyzerService
     {
         // "Run Code Analysis on <%ProjectName%>" command for Top level "Build" and "Analyze" menus.

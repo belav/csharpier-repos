@@ -13,13 +13,13 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
 {
-    internal abstract partial class AbstractGenerateEnumMemberService<
+    partial internal abstract class AbstractGenerateEnumMemberService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax
     >
     {
-        private partial class GenerateEnumMemberCodeAction : CodeAction
+        partial private class GenerateEnumMemberCodeAction : CodeAction
         {
             private readonly Document _document;
             private readonly State _state;

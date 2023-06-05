@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net.Security
 {
-    public partial class SslStreamCertificateContext
+    partial public class SslStreamCertificateContext
     {
         // No leaf, include root.
         private const bool TrimRootCertificate = false;

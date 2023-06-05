@@ -8,9 +8,10 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
+    partial
     //Contains the information about a SyntaxNode that is difficult to get from a variable
     //just typed as SyntaxNode. This is name/type/value information for all fields and children.
-    public partial class NodeInfo
+    public class NodeInfo
     {
         private readonly string _className;
         private readonly FieldInfo[] _fieldInfos;

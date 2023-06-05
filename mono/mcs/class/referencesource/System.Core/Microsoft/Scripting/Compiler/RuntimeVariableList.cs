@@ -29,7 +29,7 @@ namespace System.Runtime.CompilerServices
     /// Contains helper methods called from dynamically generated methods.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never), DebuggerStepThrough]
-    public static partial class RuntimeOps
+    partial public static class RuntimeOps
     {
         /// <summary>
         /// Creates an interface that can be used to modify closed over variables at runtime.

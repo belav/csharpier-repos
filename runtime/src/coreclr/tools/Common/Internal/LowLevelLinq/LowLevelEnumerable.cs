@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Internal.LowLevelLinq
 {
-    internal static partial class LowLevelEnumerable
+    partial internal static class LowLevelEnumerable
     {
         public static bool Any<T>(this IEnumerable<T> values)
         {

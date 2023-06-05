@@ -4033,7 +4033,7 @@ namespace System.Xml.Linq
             }
         }
 
-        static internal object GetContentSnapshot(object content)
+        internal static object GetContentSnapshot(object content)
         {
             if (content is string || !(content is IEnumerable))
                 return content;

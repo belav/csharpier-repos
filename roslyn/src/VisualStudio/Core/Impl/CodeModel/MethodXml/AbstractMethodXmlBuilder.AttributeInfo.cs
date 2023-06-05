@@ -6,7 +6,7 @@
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.MethodXml
 {
-    internal abstract partial class AbstractMethodXmlBuilder
+    partial internal abstract class AbstractMethodXmlBuilder
     {
         private readonly struct AttributeInfo
         {

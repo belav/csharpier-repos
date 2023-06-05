@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         AsyncLazy<TopLevelSyntaxTreeIndex?>
     >;
 
-    internal abstract partial class AbstractNavigateToSearchService
+    partial internal abstract class AbstractNavigateToSearchService
     {
         /// <summary>
         /// Cached map from document key to the (potentially stale) syntax tree index for it we use prior to the

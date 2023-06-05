@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class ImplicitlyTypedLocalTests : CompilingTestBase
+    partial public class ImplicitlyTypedLocalTests : CompilingTestBase
     {
         [Fact]
         public void ConstVarField1()

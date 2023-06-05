@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace System
 {
-    public readonly partial struct DateTimeOffset
+    partial public readonly struct DateTimeOffset
     {
         // 0 == in process of being loaded, 1 == loaded
         private static volatile int s_androidTZDataLoaded = -1;

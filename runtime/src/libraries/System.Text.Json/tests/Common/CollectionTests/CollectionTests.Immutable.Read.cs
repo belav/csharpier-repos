@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class CollectionTests
+    partial public abstract class CollectionTests
     {
         [Fact]
         public async Task ReadImmutableArrayOfImmutableArray()

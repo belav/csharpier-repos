@@ -10,7 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Security.Cryptography.Pkcs
 {
-    internal abstract partial class CmsSignature
+    partial internal abstract class CmsSignature
     {
         private static readonly Dictionary<string, CmsSignature> s_lookup =
             new Dictionary<string, CmsSignature>();
@@ -22,11 +22,11 @@ namespace System.Security.Cryptography.Pkcs
             PrepareRegistrationECDsa(s_lookup);
         }
 
-        static partial void PrepareRegistrationRsa(Dictionary<string, CmsSignature> lookup);
+        partial static void PrepareRegistrationRsa(Dictionary<string, CmsSignature> lookup);
 
-        static partial void PrepareRegistrationDsa(Dictionary<string, CmsSignature> lookup);
+        partial static void PrepareRegistrationDsa(Dictionary<string, CmsSignature> lookup);
 
-        static partial void PrepareRegistrationECDsa(Dictionary<string, CmsSignature> lookup);
+        partial static void PrepareRegistrationECDsa(Dictionary<string, CmsSignature> lookup);
 
         internal abstract RSASignaturePadding? SignaturePadding { get; }
         protected abstract bool VerifyKeyType(AsymmetricAlgorithm key);

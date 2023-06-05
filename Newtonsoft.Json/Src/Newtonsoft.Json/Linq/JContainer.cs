@@ -44,19 +44,17 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Linq
 {
+    partial
     /// <summary>
     /// Represents a token that can contain other tokens.
     /// </summary>
-    public abstract partial class JContainer : JToken, IList<JToken>
+    public abstract class JContainer : JToken, IList<JToken>
 #if HAVE_COMPONENT_MODEL
-            ,
-            ITypedList,
-            IBindingList
+            , ITypedList, IBindingList
 #endif
             , IList
 #if HAVE_INOTIFY_COLLECTION_CHANGED
-            ,
-            INotifyCollectionChanged
+            , INotifyCollectionChanged
 #endif
     {
 #if HAVE_COMPONENT_MODEL

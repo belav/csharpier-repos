@@ -18,7 +18,7 @@ namespace System.Text.Encodings.Web.Tests
 
 namespace System.Text.Encodings.Web
 {
-    internal partial class OptimizedInboxTextEncoder
+    partial internal class OptimizedInboxTextEncoder
     {
         internal static void _RunAllowedAsciiCodePointsTestBattery()
         {

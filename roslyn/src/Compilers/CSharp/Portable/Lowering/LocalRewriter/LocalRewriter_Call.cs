@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.CSharp.CodeGen;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter
+    partial internal sealed class LocalRewriter
     {
         public override BoundNode VisitDynamicInvocation(BoundDynamicInvocation node)
         {

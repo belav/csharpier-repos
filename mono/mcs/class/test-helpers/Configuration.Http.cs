@@ -1,8 +1,8 @@
 namespace System.Net.Test.Common
 {
-    public static partial class Configuration
+    partial public static class Configuration
     {
-        public static partial class Http
+        partial public static class Http
         {
             static Http()
             {

@@ -11,7 +11,7 @@ namespace System.Workflow.Activities.Design
     using System.Text;
     using System.Windows.Forms;
 
-    internal partial class ServiceOperationViewControl : ListItemViewControl
+    partial internal class ServiceOperationViewControl : ListItemViewControl
     {
         private object item;
 

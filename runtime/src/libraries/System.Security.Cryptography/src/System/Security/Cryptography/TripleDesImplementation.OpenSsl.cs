@@ -5,7 +5,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class TripleDesImplementation
+    partial internal sealed class TripleDesImplementation
     {
         private static UniversalCryptoTransform CreateTransformCore(
             CipherMode cipherMode,

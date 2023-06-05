@@ -9,9 +9,9 @@ using System.Runtime.InteropServices.Marshalling;
 #endif
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class CryptUI
+    partial internal static class CryptUI
     {
 #if NET7_0_OR_GREATER
         [NativeMarshalling(typeof(Marshaller))]
@@ -247,13 +247,13 @@ internal static partial class Interop
 
         [LibraryImport(Interop.Libraries.CryptUI, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptUIDlgViewCertificateW(
+        partial internal static bool CryptUIDlgViewCertificateW(
             in CRYPTUI_VIEWCERTIFICATE_STRUCTW ViewInfo,
             IntPtr pfPropertiesChanged
         );
 
         [LibraryImport(Interop.Libraries.CryptUI, SetLastError = true)]
-        internal static partial SafeCertContextHandle CryptUIDlgSelectCertificateW(
+        partial internal static SafeCertContextHandle CryptUIDlgSelectCertificateW(
             ref CRYPTUI_SELECTCERTIFICATE_STRUCTW csc
         );
     }

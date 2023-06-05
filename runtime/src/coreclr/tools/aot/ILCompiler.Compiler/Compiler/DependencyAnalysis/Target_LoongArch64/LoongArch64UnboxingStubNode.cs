@@ -5,7 +5,7 @@ using ILCompiler.DependencyAnalysis.LoongArch64;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public partial class UnboxingStubNode
+    partial public class UnboxingStubNode
     {
         protected override void EmitCode(
             NodeFactory factory,

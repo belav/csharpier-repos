@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.MemoryTests
 {
-    public static partial class ReadOnlyMemoryTests
+    partial public static class ReadOnlyMemoryTests
     {
         [Fact]
         public static void MemoryPin()

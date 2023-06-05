@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace System.Web.UI.Design.WebControls
 {
-    internal partial class EntityDataSourceConfigureObjectContextPanel : WizardPanel
+    partial internal class EntityDataSourceConfigureObjectContextPanel : WizardPanel
     {
         private EntityDataSourceConfigureObjectContext _configureObjectContext;
         private bool _ignoreEvents; // used when a control value is set by the wizard, tells the event handlers to do nothing

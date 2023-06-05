@@ -21,7 +21,7 @@ using Microsoft.CodeAnalysis.CodeCleanup;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
-    internal abstract partial class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
+    partial internal abstract class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
     {
         internal sealed class GlobalSuppressMessageFixAllCodeAction
             : AbstractGlobalSuppressMessageCodeAction

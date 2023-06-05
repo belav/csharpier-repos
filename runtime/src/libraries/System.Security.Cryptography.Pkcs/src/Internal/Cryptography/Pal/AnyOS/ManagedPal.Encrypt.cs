@@ -13,7 +13,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography.Pal.AnyOS
 {
-    internal sealed partial class ManagedPkcsPal : PkcsPal
+    partial internal sealed class ManagedPkcsPal : PkcsPal
     {
         public override unsafe byte[] Encrypt(
             CmsRecipientCollection recipients,

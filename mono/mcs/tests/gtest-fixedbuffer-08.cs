@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
 struct S
 {
-    public unsafe fixed byte o[6];
+    fixed public unsafe byte o[6];
 }
 
 class A

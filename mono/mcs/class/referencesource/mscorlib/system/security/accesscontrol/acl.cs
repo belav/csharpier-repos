@@ -1576,7 +1576,7 @@ namespace System.Security.AccessControl
             return true;
         }
 
-        static private bool AceOpaquesMatch(QualifiedAce ace, QualifiedAce newAce)
+        private static bool AceOpaquesMatch(QualifiedAce ace, QualifiedAce newAce)
         {
             byte[] aceOpaque = ace.GetOpaque();
             byte[] newAceOpaque = newAce.GetOpaque();
@@ -1602,7 +1602,7 @@ namespace System.Security.AccessControl
             return true;
         }
 
-        static private bool AcesAreMergeable(QualifiedAce ace, QualifiedAce newAce)
+        private static bool AcesAreMergeable(QualifiedAce ace, QualifiedAce newAce)
         {
             //
             // Only interested in ACEs with the specified type
@@ -3539,8 +3539,9 @@ namespace System.Security.AccessControl
 
     public sealed class DiscretionaryAcl : CommonAcl
     {
+        private
         #region
-        static private SecurityIdentifier _sidEveryone = new SecurityIdentifier(
+        static SecurityIdentifier _sidEveryone = new SecurityIdentifier(
             WellKnownSidType.WorldSid,
             null
         );
@@ -3936,7 +3937,16 @@ namespace System.Security.AccessControl
         /// <returns>The single ACE DACL</returns>
         /// Note: This method is created to get the best behavior for using "allow everyone full access"
         /// single ACE DACL to replace null DACL from CommonSecurityObject.
-        static internal DiscretionaryAcl CreateAllowEveryoneFullAccess(bool isDS, bool isContainer)
+        internal
+        /// <summary>
+        /// This static method will create an "allow everyone full control" single ACE DACL.
+        /// </summary>
+        /// <param name="isDS">whether it is a DS DACL</param>
+        /// <param name="isContainer">whether it is a container</param>
+        /// <returns>The single ACE DACL</returns>
+        /// Note: This method is created to get the best behavior for using "allow everyone full access"
+        /// single ACE DACL to replace null DACL from CommonSecurityObject.
+        static DiscretionaryAcl CreateAllowEveryoneFullAccess(bool isDS, bool isContainer)
         {
             DiscretionaryAcl dcl = new DiscretionaryAcl(isContainer, isDS, 1);
             dcl.AddAccess(

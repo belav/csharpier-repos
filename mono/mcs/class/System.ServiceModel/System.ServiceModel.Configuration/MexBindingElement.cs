@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public abstract partial class MexBindingElement<TStandardBinding>
+    partial public abstract class MexBindingElement<TStandardBinding>
         : StandardBindingElement,
             IBindingConfigurationElement
         where TStandardBinding : Binding

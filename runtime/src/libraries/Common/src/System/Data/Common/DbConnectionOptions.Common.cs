@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace System.Data.Common
 {
-    internal partial class DbConnectionOptions
+    partial internal class DbConnectionOptions
     {
 #if DEBUG
         /*private const string ConnectionStringPatternV1 =
@@ -171,7 +171,7 @@ namespace System.Data.Common
             (0 == StringComparer.OrdinalIgnoreCase.Compare(strvalue, strconst));
 
         [System.Diagnostics.Conditional("DEBUG")]
-        static partial void DebugTraceKeyValuePair(
+        partial static void DebugTraceKeyValuePair(
             string keyname,
             string? keyvalue,
             Dictionary<string, string>? synonyms

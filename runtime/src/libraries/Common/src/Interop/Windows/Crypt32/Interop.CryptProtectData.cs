@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(
             Libraries.Crypt32,
@@ -15,7 +15,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptProtectData(
+        partial internal static bool CryptProtectData(
             in DATA_BLOB pDataIn,
             string? szDataDescr,
             ref DATA_BLOB pOptionalEntropy,

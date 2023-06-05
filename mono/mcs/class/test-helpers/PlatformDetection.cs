@@ -1,6 +1,6 @@
 namespace System
 {
-    static partial class PlatformDetection
+    partial static class PlatformDetection
     {
         public static readonly bool IsNetNative = false;
         public static readonly bool IsNotWinRT = true;

@@ -8,7 +8,7 @@ using System.Reflection.Context.Projection;
 
 namespace System.Reflection.Context
 {
-    public partial class CustomReflectionContext
+    partial public class CustomReflectionContext
     {
         private sealed class ReflectionContextProjector : Projector
         {

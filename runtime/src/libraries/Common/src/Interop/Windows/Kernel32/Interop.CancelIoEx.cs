@@ -5,20 +5,20 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CancelIoEx(
+        partial internal static unsafe bool CancelIoEx(
             SafeHandle handle,
             NativeOverlapped* lpOverlapped
         );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CancelIoEx(
+        partial internal static unsafe bool CancelIoEx(
             IntPtr handle,
             NativeOverlapped* lpOverlapped
         );

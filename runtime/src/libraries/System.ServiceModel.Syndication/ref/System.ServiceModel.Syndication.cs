@@ -10,7 +10,7 @@ namespace System.ServiceModel.Syndication
         ElementName = "feed",
         Namespace = "http://www.w3.org/2005/Atom"
     )]
-    public partial class Atom10FeedFormatter
+    partial public class Atom10FeedFormatter
         : System.ServiceModel.Syndication.SyndicationFeedFormatter,
             System.Xml.Serialization.IXmlSerializable
     {
@@ -96,7 +96,7 @@ namespace System.ServiceModel.Syndication
         ElementName = "feed",
         Namespace = "http://www.w3.org/2005/Atom"
     )]
-    public partial class Atom10FeedFormatter<TSyndicationFeed>
+    partial public class Atom10FeedFormatter<TSyndicationFeed>
         : System.ServiceModel.Syndication.Atom10FeedFormatter
         where TSyndicationFeed : System.ServiceModel.Syndication.SyndicationFeed, new()
     {
@@ -114,7 +114,7 @@ namespace System.ServiceModel.Syndication
         ElementName = "entry",
         Namespace = "http://www.w3.org/2005/Atom"
     )]
-    public partial class Atom10ItemFormatter
+    partial public class Atom10ItemFormatter
         : System.ServiceModel.Syndication.SyndicationItemFormatter,
             System.Xml.Serialization.IXmlSerializable
     {
@@ -171,7 +171,7 @@ namespace System.ServiceModel.Syndication
         ElementName = "entry",
         Namespace = "http://www.w3.org/2005/Atom"
     )]
-    public partial class Atom10ItemFormatter<TSyndicationItem>
+    partial public class Atom10ItemFormatter<TSyndicationItem>
         : System.ServiceModel.Syndication.Atom10ItemFormatter
         where TSyndicationItem : System.ServiceModel.Syndication.SyndicationItem, new()
     {
@@ -189,7 +189,7 @@ namespace System.ServiceModel.Syndication
         ElementName = "categories",
         Namespace = "http://www.w3.org/2007/app"
     )]
-    public partial class AtomPub10CategoriesDocumentFormatter
+    partial public class AtomPub10CategoriesDocumentFormatter
         : System.ServiceModel.Syndication.CategoriesDocumentFormatter,
             System.Xml.Serialization.IXmlSerializable
     {
@@ -242,7 +242,7 @@ namespace System.ServiceModel.Syndication
         ElementName = "service",
         Namespace = "http://www.w3.org/2007/app"
     )]
-    public partial class AtomPub10ServiceDocumentFormatter
+    partial public class AtomPub10ServiceDocumentFormatter
         : System.ServiceModel.Syndication.ServiceDocumentFormatter,
             System.Xml.Serialization.IXmlSerializable
     {
@@ -287,7 +287,7 @@ namespace System.ServiceModel.Syndication
         ElementName = "service",
         Namespace = "http://www.w3.org/2007/app"
     )]
-    public partial class AtomPub10ServiceDocumentFormatter<TServiceDocument>
+    partial public class AtomPub10ServiceDocumentFormatter<TServiceDocument>
         : System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter
         where TServiceDocument : System.ServiceModel.Syndication.ServiceDocument, new()
     {
@@ -301,7 +301,7 @@ namespace System.ServiceModel.Syndication
         }
     }
 
-    public abstract partial class CategoriesDocument
+    partial public abstract class CategoriesDocument
     {
         internal CategoriesDocument() { }
 
@@ -391,7 +391,7 @@ namespace System.ServiceModel.Syndication
     }
 
     [System.Runtime.Serialization.DataContractAttribute]
-    public abstract partial class CategoriesDocumentFormatter
+    partial public abstract class CategoriesDocumentFormatter
     {
         protected CategoriesDocumentFormatter() { }
 
@@ -425,7 +425,7 @@ namespace System.ServiceModel.Syndication
         public abstract void WriteTo(System.Xml.XmlWriter writer);
     }
 
-    public partial class InlineCategoriesDocument
+    partial public class InlineCategoriesDocument
         : System.ServiceModel.Syndication.CategoriesDocument
     {
         public InlineCategoriesDocument() { }
@@ -461,7 +461,7 @@ namespace System.ServiceModel.Syndication
         }
     }
 
-    public partial class ReferencedCategoriesDocument
+    partial public class ReferencedCategoriesDocument
         : System.ServiceModel.Syndication.CategoriesDocument
     {
         public ReferencedCategoriesDocument() { }
@@ -475,7 +475,7 @@ namespace System.ServiceModel.Syndication
         }
     }
 
-    public partial class ResourceCollectionInfo
+    partial public class ResourceCollectionInfo
     {
         public ResourceCollectionInfo() { }
 
@@ -572,7 +572,7 @@ namespace System.ServiceModel.Syndication
     }
 
     [System.Xml.Serialization.XmlRootAttribute(ElementName = "rss", Namespace = "")]
-    public partial class Rss20FeedFormatter
+    partial public class Rss20FeedFormatter
         : System.ServiceModel.Syndication.SyndicationFeedFormatter,
             System.Xml.Serialization.IXmlSerializable
     {
@@ -669,7 +669,7 @@ namespace System.ServiceModel.Syndication
     }
 
     [System.Xml.Serialization.XmlRootAttribute(ElementName = "rss", Namespace = "")]
-    public partial class Rss20FeedFormatter<TSyndicationFeed>
+    partial public class Rss20FeedFormatter<TSyndicationFeed>
         : System.ServiceModel.Syndication.Rss20FeedFormatter
         where TSyndicationFeed : System.ServiceModel.Syndication.SyndicationFeed, new()
     {
@@ -686,7 +686,7 @@ namespace System.ServiceModel.Syndication
     }
 
     [System.Xml.Serialization.XmlRootAttribute(ElementName = "item", Namespace = "")]
-    public partial class Rss20ItemFormatter
+    partial public class Rss20ItemFormatter
         : System.ServiceModel.Syndication.SyndicationItemFormatter,
             System.Xml.Serialization.IXmlSerializable
     {
@@ -750,7 +750,7 @@ namespace System.ServiceModel.Syndication
     }
 
     [System.Xml.Serialization.XmlRootAttribute(ElementName = "item", Namespace = "")]
-    public partial class Rss20ItemFormatter<TSyndicationItem>
+    partial public class Rss20ItemFormatter<TSyndicationItem>
         : System.ServiceModel.Syndication.Rss20ItemFormatter,
             System.Xml.Serialization.IXmlSerializable
         where TSyndicationItem : System.ServiceModel.Syndication.SyndicationItem, new()
@@ -767,7 +767,7 @@ namespace System.ServiceModel.Syndication
         }
     }
 
-    public partial class ServiceDocument
+    partial public class ServiceDocument
     {
         public ServiceDocument() { }
 
@@ -853,7 +853,7 @@ namespace System.ServiceModel.Syndication
     }
 
     [System.Runtime.Serialization.DataContractAttribute]
-    public abstract partial class ServiceDocumentFormatter
+    partial public abstract class ServiceDocumentFormatter
     {
         protected ServiceDocumentFormatter() { }
 
@@ -1069,7 +1069,7 @@ namespace System.ServiceModel.Syndication
         public abstract void WriteTo(System.Xml.XmlWriter writer);
     }
 
-    public partial class SyndicationCategory
+    partial public class SyndicationCategory
     {
         public SyndicationCategory() { }
 
@@ -1138,7 +1138,7 @@ namespace System.ServiceModel.Syndication
         ) { }
     }
 
-    public abstract partial class SyndicationContent
+    partial public abstract class SyndicationContent
     {
         protected SyndicationContent() { }
 
@@ -1222,7 +1222,7 @@ namespace System.ServiceModel.Syndication
         ) { }
     }
 
-    public partial class SyndicationElementExtension
+    partial public class SyndicationElementExtension
     {
         public SyndicationElementExtension(object dataContractExtension) { }
 
@@ -1285,7 +1285,7 @@ namespace System.ServiceModel.Syndication
         public void WriteTo(System.Xml.XmlWriter writer) { }
     }
 
-    public sealed partial class SyndicationElementExtensionCollection
+    partial public sealed class SyndicationElementExtensionCollection
         : System.Collections.ObjectModel.Collection<System.ServiceModel.Syndication.SyndicationElementExtension>
     {
         internal SyndicationElementExtensionCollection() { }
@@ -1359,7 +1359,7 @@ namespace System.ServiceModel.Syndication
         ) { }
     }
 
-    public partial class SyndicationFeed
+    partial public class SyndicationFeed
     {
         public SyndicationFeed() { }
 
@@ -1562,7 +1562,7 @@ namespace System.ServiceModel.Syndication
     }
 
     [System.Runtime.Serialization.DataContractAttribute]
-    public abstract partial class SyndicationFeedFormatter
+    partial public abstract class SyndicationFeedFormatter
     {
         protected SyndicationFeedFormatter() { }
 
@@ -1843,7 +1843,7 @@ namespace System.ServiceModel.Syndication
         public abstract void WriteTo(System.Xml.XmlWriter writer);
     }
 
-    public partial class SyndicationItem
+    partial public class SyndicationItem
     {
         public SyndicationItem() { }
 
@@ -2033,7 +2033,7 @@ namespace System.ServiceModel.Syndication
     }
 
     [System.Runtime.Serialization.DataContractAttribute]
-    public abstract partial class SyndicationItemFormatter
+    partial public abstract class SyndicationItemFormatter
     {
         protected SyndicationItemFormatter() { }
 
@@ -2248,7 +2248,7 @@ namespace System.ServiceModel.Syndication
         public abstract void WriteTo(System.Xml.XmlWriter writer);
     }
 
-    public partial class SyndicationLink
+    partial public class SyndicationLink
     {
         public SyndicationLink() { }
 
@@ -2379,7 +2379,7 @@ namespace System.ServiceModel.Syndication
         ) { }
     }
 
-    public partial class SyndicationPerson
+    partial public class SyndicationPerson
     {
         public SyndicationPerson() { }
 
@@ -2447,13 +2447,13 @@ namespace System.ServiceModel.Syndication
         ) { }
     }
 
-    public static partial class SyndicationVersions
+    partial public static class SyndicationVersions
     {
         public const string Atom10 = "Atom10";
         public const string Rss20 = "Rss20";
     }
 
-    public partial class TextSyndicationContent : System.ServiceModel.Syndication.SyndicationContent
+    partial public class TextSyndicationContent : System.ServiceModel.Syndication.SyndicationContent
     {
         protected TextSyndicationContent(
             System.ServiceModel.Syndication.TextSyndicationContent source
@@ -2490,7 +2490,7 @@ namespace System.ServiceModel.Syndication
         XHtml = 2,
     }
 
-    public partial class UrlSyndicationContent : System.ServiceModel.Syndication.SyndicationContent
+    partial public class UrlSyndicationContent : System.ServiceModel.Syndication.SyndicationContent
     {
         protected UrlSyndicationContent(
             System.ServiceModel.Syndication.UrlSyndicationContent source
@@ -2515,7 +2515,7 @@ namespace System.ServiceModel.Syndication
         protected override void WriteContentsTo(System.Xml.XmlWriter writer) { }
     }
 
-    public partial class Workspace
+    partial public class Workspace
     {
         public Workspace() { }
 
@@ -2586,7 +2586,7 @@ namespace System.ServiceModel.Syndication
         ) { }
     }
 
-    public partial class XmlSyndicationContent : System.ServiceModel.Syndication.SyndicationContent
+    partial public class XmlSyndicationContent : System.ServiceModel.Syndication.SyndicationContent
     {
         protected XmlSyndicationContent(
             System.ServiceModel.Syndication.XmlSyndicationContent source

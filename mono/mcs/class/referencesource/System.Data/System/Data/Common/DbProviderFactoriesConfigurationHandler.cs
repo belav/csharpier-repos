@@ -146,7 +146,7 @@ namespace System.Data.Common
         { // V1.2.3300
         }
 
-        virtual public object Create(object parent, object configContext, XmlNode section)
+        public virtual object Create(object parent, object configContext, XmlNode section)
         { // V1.2.3300
 #if DEBUG
             try
@@ -163,7 +163,7 @@ namespace System.Data.Common
 #endif
         }
 
-        static internal object CreateStatic(object parent, object configContext, XmlNode section)
+        internal static object CreateStatic(object parent, object configContext, XmlNode section)
         {
             object config = parent;
             if (null != section)
@@ -233,11 +233,17 @@ namespace System.Data.Common
             }
             */
 
-            static internal DataTable CreateStatic(
-                DataTable config,
-                Object context,
-                XmlNode section
-            )
+            internal
+            /*
+            internal DbProviderDictionarySectionHandler() {
+            }
+
+            public object Create(Object parent, Object context, XmlNode section) {
+                return CreateStatic(parent, context, section);
+            }
+            */
+
+            static DataTable CreateStatic(DataTable config, Object context, XmlNode section)
             {
                 if (null != section)
                 {
@@ -275,7 +281,7 @@ namespace System.Data.Common
                 return config;
             }
 
-            static private void HandleAdd(XmlNode child, DataTable config)
+            private static void HandleAdd(XmlNode child, DataTable config)
             {
                 HandlerBase.CheckForChildNodes(child);
                 DataRow values = config.NewRow();
@@ -292,7 +298,7 @@ namespace System.Data.Common
                 config.Rows.Add(values);
             }
 
-            static private void HandleRemove(XmlNode child, DataTable config)
+            private static void HandleRemove(XmlNode child, DataTable config)
             {
                 HandlerBase.CheckForChildNodes(child);
                 String invr = HandlerBase.RemoveAttribute(child, "invariant", true, false);
@@ -304,7 +310,7 @@ namespace System.Data.Common
                 }
             }
 
-            static private void HandleClear(XmlNode child, DataTable config)
+            private static void HandleClear(XmlNode child, DataTable config)
             {
                 HandlerBase.CheckForChildNodes(child);
                 HandlerBase.CheckForUnrecognizedAttributes(child);

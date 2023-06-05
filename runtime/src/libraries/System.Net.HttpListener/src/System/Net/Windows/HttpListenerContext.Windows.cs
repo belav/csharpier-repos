@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-    public sealed unsafe partial class HttpListenerContext
+    partial public sealed unsafe class HttpListenerContext
     {
         private string? _mutualAuthentication;
         internal HttpListenerSession ListenerSession { get; private set; }

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class ValueTests
+    partial public static class ValueTests
     {
         public static bool IsX64 { get; } = Environment.Is64BitProcess;
 

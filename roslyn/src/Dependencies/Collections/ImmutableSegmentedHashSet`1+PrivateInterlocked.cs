@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal readonly partial struct ImmutableSegmentedHashSet<T>
+    partial internal readonly struct ImmutableSegmentedHashSet<T>
     {
         /// <summary>
         /// Private helper class for use only by <see cref="RoslynImmutableInterlocked"/>.

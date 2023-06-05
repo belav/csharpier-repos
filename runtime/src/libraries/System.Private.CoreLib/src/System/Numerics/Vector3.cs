@@ -17,7 +17,7 @@ namespace System.Numerics
     /// [!INCLUDE[vectors-are-rows-paragraph](~/includes/system-numerics-vectors-are-rows.md)]
     /// ]]></format></remarks>
     [Intrinsic]
-    public partial struct Vector3 : IEquatable<Vector3>, IFormattable
+    partial public struct Vector3 : IEquatable<Vector3>, IFormattable
     {
         /// <summary>The X component of the vector.</summary>
         public float X;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.Shared.TestHooks
 {
-    internal sealed partial class AsynchronousOperationListener
+    partial internal sealed class AsynchronousOperationListener
     {
         /// <summary>
         /// Stores the source information for an <see cref="IAsyncToken"/> value.  Helpful when

@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         Dictionary<Document, HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)>>
     >;
 
-    internal partial class FindReferencesSearchEngine
+    partial internal class FindReferencesSearchEngine
     {
         private static readonly Func<Project, DocumentMap> s_createDocumentMap = _ =>
             new DocumentMap();

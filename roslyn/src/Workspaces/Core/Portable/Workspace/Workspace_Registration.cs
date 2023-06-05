@@ -9,8 +9,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /* This is the static API on Workspace that lets you associate text containers with workspace instances */
-    public abstract partial class Workspace
+    public abstract class Workspace
     {
         private static readonly ConditionalWeakTable<
             SourceTextContainer,

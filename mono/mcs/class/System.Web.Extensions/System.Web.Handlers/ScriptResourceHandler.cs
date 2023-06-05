@@ -45,7 +45,7 @@ using System.Web.Util;
 
 namespace System.Web.Handlers
 {
-    public partial class ScriptResourceHandler : IHttpHandler
+    partial public class ScriptResourceHandler : IHttpHandler
     {
         protected virtual bool IsReusable
         {

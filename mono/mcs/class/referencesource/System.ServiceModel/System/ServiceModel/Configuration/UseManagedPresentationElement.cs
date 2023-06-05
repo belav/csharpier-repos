@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public partial class UseManagedPresentationElement : BindingElementExtensionElement
+    partial public class UseManagedPresentationElement : BindingElementExtensionElement
     {
         public override Type BindingElementType
         {

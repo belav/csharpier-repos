@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.UseConditionalExpression
 {
-    internal static partial class UseConditionalExpressionHelpers
+    partial internal static class UseConditionalExpressionHelpers
     {
         public const string CanSimplifyName = nameof(CanSimplifyName);
 

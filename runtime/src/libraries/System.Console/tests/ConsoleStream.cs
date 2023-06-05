@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class ConsoleTests
+    partial public class ConsoleTests
     {
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void OpenStandardInput_AsyncRead_CompletesAsynchronouslyIfDataNotAvailable()

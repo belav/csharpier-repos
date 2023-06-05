@@ -16,7 +16,7 @@ using Moq.Protected;
 
 namespace Moq
 {
-    internal static partial class ExpressionExtensions
+    partial internal static class ExpressionExtensions
     {
         /// <summary>
         ///   Wraps this <paramref name="expression"/> in a <see cref="ExpressionType.Convert"/> node if needed.

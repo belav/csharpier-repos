@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class CustomConverterTests
+    partial public static class CustomConverterTests
     {
         // Test class for a contravariant converter (IDictionary->Dictionary).
         private class ContravariantDictionaryConverter : JsonConverter<IDictionary<string, long>>

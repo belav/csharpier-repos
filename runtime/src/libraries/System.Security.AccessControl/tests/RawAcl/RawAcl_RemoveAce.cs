@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class RawAcl_RemoveAce
+    partial public class RawAcl_RemoveAce
     {
         public static IEnumerable<object[]> RawAcl_RemoveAce_TestData()
         {

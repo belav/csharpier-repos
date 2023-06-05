@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace WinFormsTestApp
 {
-    public partial class Form1 : Form
+    partial public class Form1 : Form
     {
         public Form1()
         {

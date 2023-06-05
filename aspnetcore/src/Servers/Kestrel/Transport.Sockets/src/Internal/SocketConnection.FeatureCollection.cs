@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Connections.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 
-internal sealed partial class SocketConnection : IConnectionSocketFeature
+partial internal sealed class SocketConnection : IConnectionSocketFeature
 {
     public Socket Socket => _socket;
 

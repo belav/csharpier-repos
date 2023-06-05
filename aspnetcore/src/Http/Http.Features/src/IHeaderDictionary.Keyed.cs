@@ -5,7 +5,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
-public partial interface IHeaderDictionary
+partial public interface IHeaderDictionary
 {
     /// <summary>Gets or sets the <c>Accept</c> HTTP header.</summary>
     StringValues Accept

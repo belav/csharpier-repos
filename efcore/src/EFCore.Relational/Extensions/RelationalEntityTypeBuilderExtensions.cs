@@ -7,13 +7,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
+partial
 /// <summary>
 ///     Relational database specific extension methods for <see cref="EntityTypeBuilder" />.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
 /// </remarks>
-public static partial class RelationalEntityTypeBuilderExtensions
+public static class RelationalEntityTypeBuilderExtensions
 {
     /// <summary>
     ///     Configures TPC as the mapping strategy for the derived types. Each type will be mapped to a different database object.

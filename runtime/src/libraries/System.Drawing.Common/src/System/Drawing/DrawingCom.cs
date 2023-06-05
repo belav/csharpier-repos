@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {
-    internal sealed partial class DrawingCom
+    partial internal sealed class DrawingCom
     {
         internal readonly struct IStreamWrapper : IDisposable
         {

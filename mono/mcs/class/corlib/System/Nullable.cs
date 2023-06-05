@@ -38,7 +38,7 @@ using System.Diagnostics;
 
 namespace System
 {
-    public partial struct Nullable<T>
+    partial public struct Nullable<T>
         where T : struct
     {
         //

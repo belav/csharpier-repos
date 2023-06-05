@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
 {
-    internal partial class AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax>
+    partial internal class AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax>
     {
         private class BinaryExpressionCodeActionComputer
             : AbstractCodeActionComputer<AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax>>

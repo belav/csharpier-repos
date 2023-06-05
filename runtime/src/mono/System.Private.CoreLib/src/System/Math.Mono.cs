@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class Math
+    partial public class Math
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern double Acos(double d);

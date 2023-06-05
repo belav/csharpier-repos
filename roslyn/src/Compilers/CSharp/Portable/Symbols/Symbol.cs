@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// exposed by the compiler.
     /// </summary>
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
-    internal abstract partial class Symbol : ISymbolInternal, IFormattable
+    partial internal abstract class Symbol : ISymbolInternal, IFormattable
     {
         private ISymbol _lazyISymbol;
 

@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
     using System.ServiceModel;
 
-    public sealed partial class ComContractsSection : ConfigurationSection
+    partial public sealed class ComContractsSection : ConfigurationSection
     {
         [ConfigurationProperty(
             ConfigurationStrings.DefaultCollectionName,

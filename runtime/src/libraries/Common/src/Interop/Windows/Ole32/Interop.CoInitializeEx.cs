@@ -5,14 +5,14 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         internal const uint COINIT_APARTMENTTHREADED = 2;
         internal const uint COINIT_MULTITHREADED = 0;
 
         [LibraryImport(Interop.Libraries.Ole32)]
-        internal static partial int CoInitializeEx(IntPtr reserved, uint dwCoInit);
+        partial internal static int CoInitializeEx(IntPtr reserved, uint dwCoInit);
     }
 }

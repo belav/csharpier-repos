@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.IO
 {
-    internal static partial class ArchivingUtils
+    partial internal static class ArchivingUtils
     {
         public static void EnsureCapacity(ref char[] buffer, int min)
         {

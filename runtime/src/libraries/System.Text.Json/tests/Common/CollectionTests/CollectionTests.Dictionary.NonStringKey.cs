@@ -11,8 +11,9 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
+    partial
 #if !BUILDING_SOURCE_GENERATOR_TESTS
-    public partial class CollectionTests
+    public class CollectionTests
     {
         [Theory]
         [MemberData(nameof(GetTestDictionaries))]

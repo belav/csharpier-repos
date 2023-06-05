@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateEnumMember
 {
     [ExportLanguageService(typeof(IGenerateEnumMemberService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpGenerateEnumMemberService
+    partial internal class CSharpGenerateEnumMemberService
         : AbstractGenerateEnumMemberService<
             CSharpGenerateEnumMemberService,
             SimpleNameSyntax,

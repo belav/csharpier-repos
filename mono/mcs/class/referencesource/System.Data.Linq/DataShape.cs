@@ -10,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data.Linq
 {
-    sealed public class DataLoadOptions
+    public sealed class DataLoadOptions
     {
         bool frozen;
         Dictionary<MetaPosition, MemberInfo> includes = new Dictionary<MetaPosition, MemberInfo>();
@@ -237,7 +237,7 @@ namespace System.Data.Linq
 
         private static class Searcher
         {
-            static internal MemberInfo MemberInfoOf(LambdaExpression lambda)
+            internal static MemberInfo MemberInfoOf(LambdaExpression lambda)
             {
                 Visitor v = new Visitor();
                 v.VisitLambda(lambda);

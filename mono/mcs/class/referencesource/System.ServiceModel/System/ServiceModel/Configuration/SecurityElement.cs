@@ -18,7 +18,7 @@ namespace System.ServiceModel.Configuration
     using System.Collections.Generic;
     using System.IO;
 
-    public sealed partial class SecurityElement : SecurityElementBase
+    partial public sealed class SecurityElement : SecurityElementBase
     {
         public SecurityElement()
         {

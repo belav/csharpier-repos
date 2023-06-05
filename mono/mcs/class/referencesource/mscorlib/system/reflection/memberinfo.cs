@@ -63,7 +63,7 @@ namespace System.Reflection
         }
 
 #if MONO
-        public virtual extern int MetadataToken
+        public extern virtual int MetadataToken
         {
             [System.Runtime.CompilerServices.MethodImplAttribute(
                 System.Runtime.CompilerServices.MethodImplOptions.InternalCall

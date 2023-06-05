@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
-    public sealed partial class PeerTransportSecurityElement : ServiceModelConfigurationElement
+    partial public sealed class PeerTransportSecurityElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.PeerTransportCredentialType,

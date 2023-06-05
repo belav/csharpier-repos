@@ -6,8 +6,9 @@ using System.IO;
 
 namespace System.IO.Enumeration
 {
+    ref partial
     /// <summary>Provides a lower level view of <see cref="System.IO.FileSystemInfo" /> to help process and filter find results.</summary>
-    public unsafe ref partial struct FileSystemEntry
+    public unsafe struct FileSystemEntry
     {
         internal static void Initialize(
             ref FileSystemEntry entry,

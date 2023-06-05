@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.IO.Pipelines.Tests
 {
-    public partial class PipeResetTests : IDisposable
+    partial public class PipeResetTests : IDisposable
     {
         public PipeResetTests()
         {

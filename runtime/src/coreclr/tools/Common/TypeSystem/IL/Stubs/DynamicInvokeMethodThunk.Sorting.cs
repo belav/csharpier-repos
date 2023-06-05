@@ -5,8 +5,9 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class DynamicInvokeMethodThunk
+    public class DynamicInvokeMethodThunk
     {
         protected override int ClassCode => -1980933220;
 

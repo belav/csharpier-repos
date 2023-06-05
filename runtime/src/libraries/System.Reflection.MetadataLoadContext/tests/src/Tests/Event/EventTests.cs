@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class EventTests
+    partial public static class EventTests
     {
         [Fact]
         public static void EventTest1()

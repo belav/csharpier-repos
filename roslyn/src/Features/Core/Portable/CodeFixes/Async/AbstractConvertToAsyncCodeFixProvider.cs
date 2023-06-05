@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Async
 {
-    internal abstract partial class AbstractConvertToAsyncCodeFixProvider : CodeFixProvider
+    partial internal abstract class AbstractConvertToAsyncCodeFixProvider : CodeFixProvider
     {
         protected abstract Task<string> GetDescriptionAsync(
             Diagnostic diagnostic,

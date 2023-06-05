@@ -41,7 +41,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class LocalBuilder : LocalVariableInfo
+    partial public sealed class LocalBuilder : LocalVariableInfo
     {
         #region Sync with MonoReflectionLocalBuilder in object-internals.h
         internal Type type;

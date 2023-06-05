@@ -9,8 +9,9 @@ using Microsoft.CodeAnalysis.FlowAnalysis;
 
 namespace ILLink.RoslynAnalyzer.DataFlow
 {
+    partial
     // Copied from https://github.com/dotnet/roslyn/blob/fdd40b21d59c13e8fa6c718c7aaf9d50634da754/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ControlFlowGraphExtensions.cs
-    internal static partial class ControlFlowGraphExtensions
+    internal static class ControlFlowGraphExtensions
     {
         public static BasicBlock EntryBlock(this ControlFlowGraph cfg)
         {

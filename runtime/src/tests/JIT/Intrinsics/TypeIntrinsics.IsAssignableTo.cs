@@ -8,7 +8,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 
-public partial class Program
+partial public class Program
 {
     public static void TestIsAssignableTo()
     {

@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.Operations
 {
-    public static partial class OperationExtensions
+    partial public static class OperationExtensions
     {
         /// <summary>
         /// Helper function to simplify the access to the function pointer signature of an FunctionPointerInvocationOperation

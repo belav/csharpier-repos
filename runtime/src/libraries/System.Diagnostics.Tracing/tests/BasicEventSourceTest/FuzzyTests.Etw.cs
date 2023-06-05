@@ -11,9 +11,9 @@ using System.Diagnostics.Tracing;
 
 namespace BasicEventSourceTests
 {
-    public partial class FuzzyTests
+    partial public class FuzzyTests
     {
-        static partial void Test_Write_Fuzzy_TestEtw(List<SubTest> tests, EventSource logger)
+        partial static void Test_Write_Fuzzy_TestEtw(List<SubTest> tests, EventSource logger)
         {
             if (PlatformDetection.IsPrivilegedProcess)
             {

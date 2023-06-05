@@ -20,10 +20,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// Executes analyzers on a document for computing local syntax/semantic/additional file diagnostics for a specific <see cref="DocumentAnalysisScope"/>.
     /// </summary>
-    internal sealed partial class DocumentAnalysisExecutor
+    internal sealed class DocumentAnalysisExecutor
     {
         private readonly CompilationWithAnalyzers? _compilationWithAnalyzers;
         private readonly InProcOrRemoteHostAnalyzerRunner _diagnosticAnalyzerRunner;

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components;
 
-public partial class ParameterViewTest
+partial public class ParameterViewTest
 {
     [Fact]
     public void IncomingParameterMatchesAnnotatedPrivateProperty_SetsValue()

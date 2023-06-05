@@ -6,10 +6,11 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
+    partial
     /// <summary>
     /// It's a non terminal Trivia CSharpSyntaxNode that has a tree underneath it.
     /// </summary>
-    public abstract partial class StructuredTriviaSyntax : CSharpSyntaxNode, IStructuredTriviaSyntax
+    public abstract class StructuredTriviaSyntax : CSharpSyntaxNode, IStructuredTriviaSyntax
     {
         private SyntaxTrivia _parent;
 

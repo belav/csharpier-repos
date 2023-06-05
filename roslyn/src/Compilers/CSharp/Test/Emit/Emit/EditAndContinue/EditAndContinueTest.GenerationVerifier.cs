@@ -12,7 +12,7 @@ using static Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests.EditAndCont
 
 namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
 {
-    internal partial class EditAndContinueTest
+    partial internal class EditAndContinueTest
     {
         internal sealed class GenerationVerifier
         {

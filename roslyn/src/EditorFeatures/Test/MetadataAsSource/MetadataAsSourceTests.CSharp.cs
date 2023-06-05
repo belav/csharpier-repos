@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 {
-    public partial class MetadataAsSourceTests
+    partial public class MetadataAsSourceTests
     {
         [Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public class CSharp : AbstractMetadataAsSourceTests

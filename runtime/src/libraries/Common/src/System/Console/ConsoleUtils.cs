@@ -3,7 +3,7 @@
 
 namespace System
 {
-    internal static partial class ConsoleUtils
+    partial internal static class ConsoleUtils
     {
         /// <summary>Whether to output ansi color strings.</summary>
         private static volatile int s_emitAnsiColorCodes = -1;

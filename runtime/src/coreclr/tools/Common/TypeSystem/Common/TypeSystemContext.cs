@@ -13,7 +13,7 @@ using MetadataType = Internal.TypeSystem.DefType;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class TypeSystemContext
+    partial public abstract class TypeSystemContext
     {
         public TypeSystemContext()
             : this(

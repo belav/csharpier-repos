@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class AesCcm
+    partial public sealed class AesCcm
     {
         private byte[] _key;
 

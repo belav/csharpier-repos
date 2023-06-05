@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net.Http
 {
-    internal sealed partial class HttpEnvironmentProxy : IWebProxy
+    partial internal sealed class HttpEnvironmentProxy : IWebProxy
     {
         public static bool TryCreate([NotNullWhen(true)] out IWebProxy? proxy)
         {

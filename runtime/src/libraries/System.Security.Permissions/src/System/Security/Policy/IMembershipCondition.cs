@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public partial interface IMembershipCondition : ISecurityEncodable, ISecurityPolicyEncodable
+    partial public interface IMembershipCondition : ISecurityEncodable, ISecurityPolicyEncodable
     {
         bool Check(Evidence evidence);
         IMembershipCondition Copy();

@@ -20,7 +20,7 @@ using IOPath = System.IO.Path;
 namespace System.ComponentModel.Composition.Hosting
 {
     [DebuggerTypeProxy(typeof(DirectoryCatalogDebuggerProxy))]
-    public partial class DirectoryCatalog
+    partial public class DirectoryCatalog
         : ComposablePartCatalog,
             INotifyComposablePartCatalogChanged,
             ICompositionElement

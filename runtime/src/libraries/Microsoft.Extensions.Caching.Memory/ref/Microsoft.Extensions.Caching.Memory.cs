@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Caching.Distributed
 {
-    public partial class MemoryDistributedCache
+    partial public class MemoryDistributedCache
         : Microsoft.Extensions.Caching.Distributed.IDistributedCache
     {
         public MemoryDistributedCache(
@@ -71,7 +71,7 @@ namespace Microsoft.Extensions.Caching.Distributed
 
 namespace Microsoft.Extensions.Caching.Memory
 {
-    public partial class MemoryCache
+    partial public class MemoryCache
         : Microsoft.Extensions.Caching.Memory.IMemoryCache,
             System.IDisposable
     {
@@ -117,7 +117,7 @@ namespace Microsoft.Extensions.Caching.Memory
         }
     }
 
-    public partial class MemoryCacheOptions
+    partial public class MemoryCacheOptions
         : Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions>
     {
         public MemoryCacheOptions() { }
@@ -158,7 +158,7 @@ namespace Microsoft.Extensions.Caching.Memory
         }
     }
 
-    public partial class MemoryDistributedCacheOptions
+    partial public class MemoryDistributedCacheOptions
         : Microsoft.Extensions.Caching.Memory.MemoryCacheOptions
     {
         public MemoryDistributedCacheOptions() { }
@@ -167,7 +167,7 @@ namespace Microsoft.Extensions.Caching.Memory
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class MemoryCacheServiceCollectionExtensions
+    partial public static class MemoryCacheServiceCollectionExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddDistributedMemoryCache(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services

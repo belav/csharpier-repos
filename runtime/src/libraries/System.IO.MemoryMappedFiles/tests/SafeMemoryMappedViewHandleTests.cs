@@ -7,10 +7,11 @@ using Xunit;
 
 namespace System.IO.MemoryMappedFiles.Tests
 {
+    partial
     /// <summary>
     /// Tests for SafeMemoryMappedViewHandle
     /// </summary>
-    public partial class SafeMemoryMappedViewHandleTests : MemoryMappedFilesTestBase
+    public class SafeMemoryMappedViewHandleTests : MemoryMappedFilesTestBase
     {
         /// <summary>
         /// Tests that external code can use SafeMemoryMappedViewHandle as the result of a P/Invoke on Windows.
@@ -70,7 +71,7 @@ namespace System.IO.MemoryMappedFiles.Tests
         }
 
         [LibraryImport("libc")]
-        private static unsafe partial SafeMemoryMappedViewHandle mmap(
+        partial private static unsafe SafeMemoryMappedViewHandle mmap(
             IntPtr addr,
             nint lengthint,
             int prot,

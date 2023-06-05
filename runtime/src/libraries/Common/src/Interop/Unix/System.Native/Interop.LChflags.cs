@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [Flags]
         internal enum UserFlags : uint
@@ -20,14 +20,14 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial int LChflags(string path, uint flags);
+        partial internal static int LChflags(string path, uint flags);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_FChflags",
             SetLastError = true
         )]
-        internal static partial int FChflags(SafeHandle fd, uint flags);
+        partial internal static int FChflags(SafeHandle fd, uint flags);
 
         internal static readonly bool CanSetHiddenFlag = (LChflagsCanSetHiddenFlag() != 0);
 
@@ -36,12 +36,12 @@ internal static partial class Interop
             EntryPoint = "SystemNative_LChflagsCanSetHiddenFlag"
         )]
         [SuppressGCTransition]
-        private static partial int LChflagsCanSetHiddenFlag();
+        partial private static int LChflagsCanSetHiddenFlag();
 
         internal static readonly bool SupportsHiddenFlag = (CanGetHiddenFlag() != 0);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_CanGetHiddenFlag")]
         [SuppressGCTransition]
-        private static partial int CanGetHiddenFlag();
+        partial private static int CanGetHiddenFlag();
     }
 }

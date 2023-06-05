@@ -1,6 +1,6 @@
 partial class X
 {
-    static partial void Main();
+    partial static void Main();
 
-    static partial void Main() { }
+    partial static void Main() { }
 }

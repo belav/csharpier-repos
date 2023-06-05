@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<
+    partial internal class AbstractIntroduceVariableService<
         TService,
         TExpressionSyntax,
         TTypeSyntax,
@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
         TNameSyntax
     >
     {
-        private partial class State
+        partial private class State
         {
             private bool IsInConstructorInitializerContext(CancellationToken cancellationToken)
             {

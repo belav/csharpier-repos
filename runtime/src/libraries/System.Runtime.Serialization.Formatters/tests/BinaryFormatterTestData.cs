@@ -66,7 +66,7 @@ using System.Text.Json;
 
 namespace System.Runtime.Serialization.Formatters.Tests
 {
-    public partial class BinaryFormatterTests
+    partial public class BinaryFormatterTests
     {
         private static DateTime s_fixedTimestamp = DateTime.Parse(
             "11/3/1989 04:50:29 AM",

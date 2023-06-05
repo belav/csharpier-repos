@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class AsymmetricAlgorithmHelpers
+    partial internal static class AsymmetricAlgorithmHelpers
     {
         // Encodes a EC key as an uncompressed set of concatenated scalars,
         // optionally including the private key. To omit the private parameter,

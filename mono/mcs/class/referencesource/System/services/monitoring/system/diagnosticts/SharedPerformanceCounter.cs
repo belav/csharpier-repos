@@ -620,7 +620,7 @@ namespace System.Diagnostics
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private unsafe static void PopulateLifetimeEntry(
+        private static unsafe void PopulateLifetimeEntry(
             ProcessLifetimeEntry* lifetimeEntry,
             PerformanceCounterInstanceLifetime lifetime
         )
@@ -1807,7 +1807,7 @@ namespace System.Diagnostics
             return DecrementUnaligned(this.counterEntryPointer);
         }
 
-        internal unsafe static void RemoveAllInstances(string categoryName)
+        internal static unsafe void RemoveAllInstances(string categoryName)
         {
             SharedPerformanceCounter spc = new SharedPerformanceCounter(categoryName, null, null);
             spc.RemoveAllInstances();

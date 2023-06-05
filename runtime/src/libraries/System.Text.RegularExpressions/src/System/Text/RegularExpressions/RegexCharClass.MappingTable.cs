@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Text.RegularExpressions
 {
-    internal sealed partial class RegexCharClass
+    partial internal sealed class RegexCharClass
     {
         /**************************************************************************
             Let U be the set of Unicode character values and let L be the lowercase

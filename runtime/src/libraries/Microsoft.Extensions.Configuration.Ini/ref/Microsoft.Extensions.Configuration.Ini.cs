@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public static partial class IniConfigurationExtensions
+    partial public static class IniConfigurationExtensions
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddIniFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
@@ -66,7 +66,7 @@ namespace Microsoft.Extensions.Configuration
 
 namespace Microsoft.Extensions.Configuration.Ini
 {
-    public partial class IniConfigurationProvider
+    partial public class IniConfigurationProvider
         : Microsoft.Extensions.Configuration.FileConfigurationProvider
     {
         public IniConfigurationProvider(
@@ -77,7 +77,7 @@ namespace Microsoft.Extensions.Configuration.Ini
         public override void Load(System.IO.Stream stream) { }
     }
 
-    public partial class IniConfigurationSource
+    partial public class IniConfigurationSource
         : Microsoft.Extensions.Configuration.FileConfigurationSource
     {
         public IniConfigurationSource() { }
@@ -90,7 +90,7 @@ namespace Microsoft.Extensions.Configuration.Ini
         }
     }
 
-    public partial class IniStreamConfigurationProvider
+    partial public class IniStreamConfigurationProvider
         : Microsoft.Extensions.Configuration.StreamConfigurationProvider
     {
         public IniStreamConfigurationProvider(
@@ -108,7 +108,7 @@ namespace Microsoft.Extensions.Configuration.Ini
         }
     }
 
-    public partial class IniStreamConfigurationSource
+    partial public class IniStreamConfigurationSource
         : Microsoft.Extensions.Configuration.StreamConfigurationSource
     {
         public IniStreamConfigurationSource() { }

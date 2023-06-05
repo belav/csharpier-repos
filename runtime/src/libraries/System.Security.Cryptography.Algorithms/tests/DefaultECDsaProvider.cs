@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Cryptography.EcDsa.Tests
 {
-    public partial class ECDsaProvider : IECDsaProvider
+    partial public class ECDsaProvider : IECDsaProvider
     {
         public ECDsa Create()
         {
@@ -27,7 +27,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
 #endif
     }
 
-    public partial class ECDsaFactory
+    partial public class ECDsaFactory
     {
         private static readonly IECDsaProvider s_provider = new ECDsaProvider();
     }

@@ -37,10 +37,11 @@ using System.Diagnostics;
 
 namespace Newtonsoft.Json
 {
+    partial
     /// <summary>
     /// Represents a writer that provides a fast, non-cached, forward-only way of generating JSON data.
     /// </summary>
-    public partial class JsonTextWriter : JsonWriter
+    public class JsonTextWriter : JsonWriter
     {
         private const int IndentCharBufferSize = 12;
         private readonly TextWriter _writer;

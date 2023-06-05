@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace System.Net.Quic;
 
+partial
 // Boilerplate implementation of Stream methods.
-public partial class QuicStream : Stream
+public class QuicStream : Stream
 {
     // Seek and length.
     /// <inheritdoc />

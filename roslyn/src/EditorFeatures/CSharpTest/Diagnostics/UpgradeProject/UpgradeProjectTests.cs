@@ -22,7 +22,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UpgradeProject
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUpgradeProject)]
-    public partial class UpgradeProjectTests
+    partial public class UpgradeProjectTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UpgradeProjectTests(ITestOutputHelper logger)

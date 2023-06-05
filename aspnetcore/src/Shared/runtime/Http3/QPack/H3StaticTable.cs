@@ -3,7 +3,7 @@
 
 namespace System.Net.Http.QPack
 {
-    internal static partial class H3StaticTable
+    partial internal static class H3StaticTable
     {
         public const int Authority = 0;
         public const int PathSlash = 1;

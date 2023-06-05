@@ -386,7 +386,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="dataSource">Data source object to test.</param>
         /// <returns>True if valid data source object.</returns>
-        static internal bool IsValidDataSource(object dataSource)
+        internal
+        #endregion // Image Manipulation
+
+        #region Data Binding
+
+        /// <summary>
+        /// Checks if the type of the data source is valid.
+        /// </summary>
+        /// <param name="dataSource">Data source object to test.</param>
+        /// <returns>True if valid data source object.</returns>
+        static bool IsValidDataSource(object dataSource)
         {
             if (
                 null != dataSource
@@ -423,7 +433,7 @@ namespace System.Web.UI.DataVisualization.Charting
             "CA1800:DoNotCastUnnecessarily",
             Justification = "Too large of a code change to justify making this change"
         )]
-        static internal ArrayList GetDataSourceMemberNames(object dataSource, bool usedForYValue)
+        internal static ArrayList GetDataSourceMemberNames(object dataSource, bool usedForYValue)
         {
             ArrayList names = new ArrayList();
             if (dataSource != null)

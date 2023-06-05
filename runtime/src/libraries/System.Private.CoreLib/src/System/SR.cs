@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System
 {
-    internal static partial class SR
+    partial internal static class SR
     {
         private static readonly object _lock = new object();
         private static List<string>? _currentlyLoading;

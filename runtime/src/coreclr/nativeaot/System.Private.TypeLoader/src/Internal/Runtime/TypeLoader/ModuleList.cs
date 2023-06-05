@@ -738,7 +738,7 @@ namespace Internal.Runtime.TypeLoader
         }
     }
 
-    public static partial class RuntimeSignatureHelper
+    partial public static class RuntimeSignatureHelper
     {
         public static ModuleInfo GetModuleInfo(
             this Internal.Runtime.CompilerServices.RuntimeSignature methodSignature

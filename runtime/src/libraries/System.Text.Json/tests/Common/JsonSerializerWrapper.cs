@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace System.Text.Json.Serialization.Tests
 {
+    partial
     /// <summary>
     /// Base class for abstracting JsonSerializer method families behind an async/string serialization facade.
     /// </summary>
-    public abstract partial class JsonSerializerWrapper
+    public abstract class JsonSerializerWrapper
     {
         /// <summary>
         /// Do the deserialize methods allow a value of 'null'.

@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
         ),
         Shared
     ]
-    internal partial class CSharpUseConditionalExpressionForReturnCodeFixProvider
+    partial internal class CSharpUseConditionalExpressionForReturnCodeFixProvider
         : AbstractUseConditionalExpressionForReturnCodeFixProvider<
             StatementSyntax,
             IfStatementSyntax,

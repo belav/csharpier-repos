@@ -12,7 +12,7 @@ using Moq.Linq;
 
 namespace Moq
 {
-    public partial class MockRepository
+    partial public class MockRepository
     {
         /// <summary>
         /// Access the universe of mocks of the given type, to retrieve those

@@ -25,7 +25,7 @@ using BufferBuilder = System.Text.StringBuilder;
 
 namespace System.Xml
 {
-    internal partial class XmlTextReaderImpl : XmlReader, IXmlLineInfo, IXmlNamespaceResolver
+    partial internal class XmlTextReaderImpl : XmlReader, IXmlLineInfo, IXmlNamespaceResolver
     {
         private void CheckAsyncCall()
         {

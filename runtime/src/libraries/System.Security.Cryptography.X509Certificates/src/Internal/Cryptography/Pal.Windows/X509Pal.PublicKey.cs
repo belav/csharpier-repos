@@ -16,11 +16,12 @@ using static Interop.Crypt32;
 
 namespace Internal.Cryptography.Pal
 {
+    partial
     /// <summary>
     /// A singleton class that encapsulates the native implementation of various X509 services. (Implementing this as a singleton makes it
     /// easier to split the class into abstract and implementation classes if desired.)
     /// </summary>
-    internal sealed partial class X509Pal : IX509Pal
+    internal sealed class X509Pal : IX509Pal
     {
         private const string BCRYPT_ECC_CURVE_NAME_PROPERTY = "ECCCurveName";
         private const string BCRYPT_ECC_PARAMETERS_PROPERTY = "ECCParameters";

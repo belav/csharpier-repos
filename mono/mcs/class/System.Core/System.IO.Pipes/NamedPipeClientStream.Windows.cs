@@ -2,7 +2,7 @@ using System.Security.Principal;
 
 namespace System.IO.Pipes
 {
-    public sealed partial class NamedPipeClientStream
+    partial public sealed class NamedPipeClientStream
     {
         int _access;
 

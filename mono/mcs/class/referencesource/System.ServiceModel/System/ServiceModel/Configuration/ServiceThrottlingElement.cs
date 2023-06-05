@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Description;
     using System.ServiceModel;
 
-    public sealed partial class ServiceThrottlingElement : BehaviorExtensionElement
+    partial public sealed class ServiceThrottlingElement : BehaviorExtensionElement
     {
         public ServiceThrottlingElement() { }
 

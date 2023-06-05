@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net
 {
-    internal static partial class CertificateValidationPal
+    partial internal static class CertificateValidationPal
     {
         internal static SslPolicyErrors VerifyCertificateProperties(
             SafeDeleteContext? _ /*securityContext*/
@@ -156,7 +156,7 @@ namespace System.Net
             }
         }
 
-        static partial void CheckSupportsStore(StoreLocation storeLocation, ref bool hasSupport)
+        partial static void CheckSupportsStore(StoreLocation storeLocation, ref bool hasSupport)
         {
             // There's not currently a LocalMachine\My store on Unix, so don't bother trying
             // and having to deal with the exception.

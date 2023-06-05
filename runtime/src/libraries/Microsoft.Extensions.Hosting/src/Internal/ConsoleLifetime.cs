@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.Hosting.Internal
     [UnsupportedOSPlatform("browser")]
     [UnsupportedOSPlatform("ios")]
     [UnsupportedOSPlatform("tvos")]
-    public partial class ConsoleLifetime : IHostLifetime, IDisposable
+    partial public class ConsoleLifetime : IHostLifetime, IDisposable
     {
         private CancellationTokenRegistration _applicationStartedRegistration;
         private CancellationTokenRegistration _applicationStoppingRegistration;
@@ -93,7 +93,7 @@ namespace Microsoft.Extensions.Hosting.Internal
             return Task.CompletedTask;
         }
 
-        private partial void RegisterShutdownHandlers();
+        partial private void RegisterShutdownHandlers();
 
         private void OnApplicationStarted()
         {
@@ -121,6 +121,6 @@ namespace Microsoft.Extensions.Hosting.Internal
             _applicationStoppingRegistration.Dispose();
         }
 
-        private partial void UnregisterShutdownHandlers();
+        partial private void UnregisterShutdownHandlers();
     }
 }

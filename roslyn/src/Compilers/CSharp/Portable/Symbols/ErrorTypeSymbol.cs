@@ -10,12 +10,13 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// An ErrorSymbol is used when the compiler cannot determine a symbol object to return because
     /// of an error. For example, if a field is declared "Goo x;", and the type "Goo" cannot be
     /// found, an ErrorSymbol is returned when asking the field "x" what it's type is.
     /// </summary>
-    internal abstract partial class ErrorTypeSymbol : NamedTypeSymbol
+    internal abstract class ErrorTypeSymbol : NamedTypeSymbol
     {
         internal static readonly ErrorTypeSymbol UnknownResultType =
             new UnsupportedMetadataTypeSymbol();

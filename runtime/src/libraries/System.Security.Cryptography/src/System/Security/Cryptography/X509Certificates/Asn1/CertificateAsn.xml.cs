@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct CertificateAsn
+    partial internal struct CertificateAsn
     {
         internal System.Security.Cryptography.X509Certificates.Asn1.TbsCertificateAsn TbsCertificate;
         internal System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn SignatureAlgorithm;

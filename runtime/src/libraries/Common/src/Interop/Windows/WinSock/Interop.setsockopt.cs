@@ -5,12 +5,12 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError setsockopt(
+        partial internal static SocketError setsockopt(
             IntPtr handle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -19,7 +19,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError setsockopt(
+        partial internal static SocketError setsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -28,7 +28,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static unsafe partial SocketError setsockopt(
+        partial internal static unsafe SocketError setsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -37,7 +37,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError setsockopt(
+        partial internal static SocketError setsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -46,7 +46,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError setsockopt(
+        partial internal static SocketError setsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -55,7 +55,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError setsockopt(
+        partial internal static SocketError setsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -64,7 +64,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError setsockopt(
+        partial internal static SocketError setsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,

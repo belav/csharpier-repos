@@ -4,7 +4,7 @@
 
 namespace System.IO
 {
-    internal static partial class DriveInfoInternal
+    partial internal static class DriveInfoInternal
     {
         internal static string[] GetLogicalDrives() => Environment.GetLogicalDrivesInternal();
     }

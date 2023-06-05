@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.CodeAnalysis.ColorSchemes
 {
-    internal partial class ColorSchemeApplier
+    partial internal class ColorSchemeApplier
     {
         private static class RegistryItemConverter
         {

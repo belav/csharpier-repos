@@ -3,7 +3,7 @@
 
 namespace System.Security
 {
-    public partial interface ISecurityEncodable
+    partial public interface ISecurityEncodable
     {
         void FromXml(SecurityElement e);
         SecurityElement? ToXml();

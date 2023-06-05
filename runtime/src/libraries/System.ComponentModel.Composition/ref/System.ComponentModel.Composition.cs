@@ -6,7 +6,7 @@
 
 namespace System.ComponentModel.Composition
 {
-    public static partial class AdaptationConstants
+    partial public static class AdaptationConstants
     {
         public const string AdapterContractName =
             "System.ComponentModel.Composition.AdapterContract";
@@ -14,7 +14,7 @@ namespace System.ComponentModel.Composition
         public const string AdapterToContractMetadataName = "ToContract";
     }
 
-    public static partial class AttributedModelServices
+    partial public static class AttributedModelServices
     {
         public static System.ComponentModel.Composition.Primitives.ComposablePart AddExportedValue<T>(
             this System.ComponentModel.Composition.Hosting.CompositionBatch batch,
@@ -189,7 +189,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = false,
         Inherited = true
     )]
-    public partial class CatalogReflectionContextAttribute : System.Attribute
+    partial public class CatalogReflectionContextAttribute : System.Attribute
     {
         public CatalogReflectionContextAttribute(System.Type reflectionContextType) { }
 
@@ -199,7 +199,7 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public partial class ChangeRejectedException
+    partial public class ChangeRejectedException
         : System.ComponentModel.Composition.CompositionException
     {
         public ChangeRejectedException() { }
@@ -218,7 +218,7 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public partial class CompositionContractMismatchException : System.Exception
+    partial public class CompositionContractMismatchException : System.Exception
     {
         public CompositionContractMismatchException() { }
 
@@ -235,7 +235,7 @@ namespace System.ComponentModel.Composition
         ) { }
     }
 
-    public partial class CompositionError
+    partial public class CompositionError
     {
         public CompositionError(string? message) { }
 
@@ -271,7 +271,7 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public partial class CompositionException : System.Exception
+    partial public class CompositionException : System.Exception
     {
         public CompositionException() { }
 
@@ -312,7 +312,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = true,
         Inherited = false
     )]
-    public partial class ExportAttribute : System.Attribute
+    partial public class ExportAttribute : System.Attribute
     {
         public ExportAttribute() { }
 
@@ -332,7 +332,7 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public partial class ExportFactory<T>
+    partial public class ExportFactory<T>
     {
         public ExportFactory(
             System.Func<System.Tuple<T, System.Action>> exportLifetimeContextCreator
@@ -344,7 +344,7 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public partial class ExportFactory<T, TMetadata>
+    partial public class ExportFactory<T, TMetadata>
         : System.ComponentModel.Composition.ExportFactory<T>
     {
         public ExportFactory(
@@ -359,7 +359,7 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public sealed partial class ExportLifetimeContext<T> : System.IDisposable
+    partial public sealed class ExportLifetimeContext<T> : System.IDisposable
     {
         public ExportLifetimeContext(T value, System.Action disposeAction) { }
 
@@ -380,7 +380,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = true,
         Inherited = false
     )]
-    public sealed partial class ExportMetadataAttribute : System.Attribute
+    partial public sealed class ExportMetadataAttribute : System.Attribute
     {
         public ExportMetadataAttribute(string? name, object? value) { }
 
@@ -399,7 +399,7 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public partial interface ICompositionService
+    partial public interface ICompositionService
     {
         void SatisfyImportsOnce(System.ComponentModel.Composition.Primitives.ComposablePart part);
     }
@@ -411,7 +411,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = false,
         Inherited = false
     )]
-    public partial class ImportAttribute : System.Attribute
+    partial public class ImportAttribute : System.Attribute
     {
         public ImportAttribute() { }
 
@@ -451,7 +451,7 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public partial class ImportCardinalityMismatchException : System.Exception
+    partial public class ImportCardinalityMismatchException : System.Exception
     {
         public ImportCardinalityMismatchException() { }
 
@@ -471,7 +471,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = false,
         Inherited = false
     )]
-    public partial class ImportingConstructorAttribute : System.Attribute
+    partial public class ImportingConstructorAttribute : System.Attribute
     {
         public ImportingConstructorAttribute() { }
     }
@@ -483,7 +483,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = false,
         Inherited = false
     )]
-    public partial class ImportManyAttribute : System.Attribute
+    partial public class ImportManyAttribute : System.Attribute
     {
         public ImportManyAttribute() { }
 
@@ -530,7 +530,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = true,
         Inherited = true
     )]
-    public partial class InheritedExportAttribute
+    partial public class InheritedExportAttribute
         : System.ComponentModel.Composition.ExportAttribute
     {
         public InheritedExportAttribute() { }
@@ -542,7 +542,7 @@ namespace System.ComponentModel.Composition
         public InheritedExportAttribute(System.Type? contractType) { }
     }
 
-    public partial interface IPartImportsSatisfiedNotification
+    partial public interface IPartImportsSatisfiedNotification
     {
         void OnImportsSatisfied();
     }
@@ -552,7 +552,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class MetadataAttributeAttribute : System.Attribute
+    partial public sealed class MetadataAttributeAttribute : System.Attribute
     {
         public MetadataAttributeAttribute() { }
     }
@@ -562,7 +562,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class MetadataViewImplementationAttribute : System.Attribute
+    partial public sealed class MetadataViewImplementationAttribute : System.Attribute
     {
         public MetadataViewImplementationAttribute(System.Type? implementationType) { }
 
@@ -577,7 +577,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class PartCreationPolicyAttribute : System.Attribute
+    partial public sealed class PartCreationPolicyAttribute : System.Attribute
     {
         public PartCreationPolicyAttribute(
             System.ComponentModel.Composition.CreationPolicy creationPolicy
@@ -594,7 +594,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = true,
         Inherited = false
     )]
-    public sealed partial class PartMetadataAttribute : System.Attribute
+    partial public sealed class PartMetadataAttribute : System.Attribute
     {
         public PartMetadataAttribute(string? name, object? value) { }
 
@@ -613,7 +613,7 @@ namespace System.ComponentModel.Composition
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class PartNotDiscoverableAttribute : System.Attribute
+    partial public sealed class PartNotDiscoverableAttribute : System.Attribute
     {
         public PartNotDiscoverableAttribute() { }
     }
@@ -621,7 +621,7 @@ namespace System.ComponentModel.Composition
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class AggregateCatalog
+    partial public class AggregateCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
             System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
     {
@@ -674,7 +674,7 @@ namespace System.ComponentModel.Composition.Hosting
         ) { }
     }
 
-    public partial class AggregateExportProvider
+    partial public class AggregateExportProvider
         : System.ComponentModel.Composition.Hosting.ExportProvider,
             System.IDisposable
     {
@@ -704,7 +704,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class ApplicationCatalog
+    partial public class ApplicationCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
             System.ComponentModel.Composition.Primitives.ICompositionElement
     {
@@ -751,7 +751,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class AssemblyCatalog
+    partial public class AssemblyCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
             System.ComponentModel.Composition.Primitives.ICompositionElement
     {
@@ -825,7 +825,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class AtomicComposition : System.IDisposable
+    partial public class AtomicComposition : System.IDisposable
     {
         public AtomicComposition() { }
 
@@ -863,7 +863,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class CatalogExportProvider
+    partial public class CatalogExportProvider
         : System.ComponentModel.Composition.Hosting.ExportProvider,
             System.IDisposable
     {
@@ -906,7 +906,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public static partial class CatalogExtensions
+    partial public static class CatalogExtensions
     {
         public static System.ComponentModel.Composition.Hosting.CompositionService CreateCompositionService(
             this System.ComponentModel.Composition.Primitives.ComposablePartCatalog composablePartCatalog
@@ -916,7 +916,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class ComposablePartCatalogChangeEventArgs : System.EventArgs
+    partial public class ComposablePartCatalogChangeEventArgs : System.EventArgs
     {
         public ComposablePartCatalogChangeEventArgs(
             System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.ComposablePartDefinition> addedDefinitions,
@@ -938,7 +938,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class ComposablePartExportProvider
+    partial public class ComposablePartExportProvider
         : System.ComponentModel.Composition.Hosting.ExportProvider,
             System.IDisposable
     {
@@ -972,7 +972,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class CompositionBatch
+    partial public class CompositionBatch
     {
         public CompositionBatch() { }
 
@@ -1002,7 +1002,7 @@ namespace System.ComponentModel.Composition.Hosting
         public void RemovePart(System.ComponentModel.Composition.Primitives.ComposablePart part) { }
     }
 
-    public static partial class CompositionConstants
+    partial public static class CompositionConstants
     {
         public const string ExportTypeIdentityMetadataName = "ExportTypeIdentity";
         public const string GenericContractMetadataName =
@@ -1017,7 +1017,7 @@ namespace System.ComponentModel.Composition.Hosting
             "System.ComponentModel.Composition.CreationPolicy";
     }
 
-    public partial class CompositionContainer
+    partial public class CompositionContainer
         : System.ComponentModel.Composition.Hosting.ExportProvider,
             System.ComponentModel.Composition.ICompositionService,
             System.IDisposable
@@ -1103,7 +1103,7 @@ namespace System.ComponentModel.Composition.Hosting
         ExportCompositionService = 4,
     }
 
-    public partial class CompositionScopeDefinition
+    partial public class CompositionScopeDefinition
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
             System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
     {
@@ -1163,7 +1163,7 @@ namespace System.ComponentModel.Composition.Hosting
         ) { }
     }
 
-    public partial class CompositionService
+    partial public class CompositionService
         : System.ComponentModel.Composition.ICompositionService,
             System.IDisposable
     {
@@ -1176,7 +1176,7 @@ namespace System.ComponentModel.Composition.Hosting
         ) { }
     }
 
-    public partial class DirectoryCatalog
+    partial public class DirectoryCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
             System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged,
             System.ComponentModel.Composition.Primitives.ICompositionElement
@@ -1284,7 +1284,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public abstract partial class ExportProvider
+    partial public abstract class ExportProvider
     {
         protected ExportProvider() { }
 
@@ -1424,7 +1424,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class ExportsChangeEventArgs : System.EventArgs
+    partial public class ExportsChangeEventArgs : System.EventArgs
     {
         public ExportsChangeEventArgs(
             System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.ExportDefinition> addedExports,
@@ -1450,7 +1450,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class FilteredCatalog
+    partial public class FilteredCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
             System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
     {
@@ -1531,7 +1531,7 @@ namespace System.ComponentModel.Composition.Hosting
         ) { }
     }
 
-    public partial class ImportEngine
+    partial public class ImportEngine
         : System.ComponentModel.Composition.ICompositionService,
             System.IDisposable
     {
@@ -1571,13 +1571,13 @@ namespace System.ComponentModel.Composition.Hosting
         ) { }
     }
 
-    public partial interface INotifyComposablePartCatalogChanged
+    partial public interface INotifyComposablePartCatalogChanged
     {
         event System.EventHandler<System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs>? Changed;
         event System.EventHandler<System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs>? Changing;
     }
 
-    public static partial class ScopingExtensions
+    partial public static class ScopingExtensions
     {
         public static bool ContainsPartMetadataWithKey(
             this System.ComponentModel.Composition.Primitives.ComposablePartDefinition part,
@@ -1633,7 +1633,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
     }
 
-    public partial class TypeCatalog
+    partial public class TypeCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
             System.ComponentModel.Composition.Primitives.ICompositionElement
     {
@@ -1682,7 +1682,7 @@ namespace System.ComponentModel.Composition.Hosting
 
 namespace System.ComponentModel.Composition.Primitives
 {
-    public abstract partial class ComposablePart
+    partial public abstract class ComposablePart
     {
         protected ComposablePart() { }
 
@@ -1704,7 +1704,7 @@ namespace System.ComponentModel.Composition.Primitives
         );
     }
 
-    public abstract partial class ComposablePartCatalog
+    partial public abstract class ComposablePartCatalog
         : System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.ComposablePartDefinition>,
             System.Collections.IEnumerable,
             System.IDisposable
@@ -1742,7 +1742,7 @@ namespace System.ComponentModel.Composition.Primitives
         }
     }
 
-    public abstract partial class ComposablePartDefinition
+    partial public abstract class ComposablePartDefinition
     {
         protected ComposablePartDefinition() { }
 
@@ -1755,7 +1755,7 @@ namespace System.ComponentModel.Composition.Primitives
         public abstract System.ComponentModel.Composition.Primitives.ComposablePart CreatePart();
     }
 
-    public partial class ComposablePartException : System.Exception
+    partial public class ComposablePartException : System.Exception
     {
         public ComposablePartException() { }
 
@@ -1790,7 +1790,7 @@ namespace System.ComponentModel.Composition.Primitives
         ) { }
     }
 
-    public partial class ContractBasedImportDefinition
+    partial public class ContractBasedImportDefinition
         : System.ComponentModel.Composition.Primitives.ImportDefinition
     {
         protected ContractBasedImportDefinition() { }
@@ -1858,7 +1858,7 @@ namespace System.ComponentModel.Composition.Primitives
         }
     }
 
-    public partial class Export
+    partial public class Export
     {
         protected Export() { }
 
@@ -1894,7 +1894,7 @@ namespace System.ComponentModel.Composition.Primitives
         }
     }
 
-    public partial class ExportDefinition
+    partial public class ExportDefinition
     {
         protected ExportDefinition() { }
 
@@ -1918,7 +1918,7 @@ namespace System.ComponentModel.Composition.Primitives
         }
     }
 
-    public partial class ExportedDelegate
+    partial public class ExportedDelegate
     {
         protected ExportedDelegate() { }
 
@@ -1930,7 +1930,7 @@ namespace System.ComponentModel.Composition.Primitives
         }
     }
 
-    public partial interface ICompositionElement
+    partial public interface ICompositionElement
     {
         string DisplayName { get; }
         System.ComponentModel.Composition.Primitives.ICompositionElement? Origin { get; }
@@ -1943,7 +1943,7 @@ namespace System.ComponentModel.Composition.Primitives
         ZeroOrMore = 2,
     }
 
-    public partial class ImportDefinition
+    partial public class ImportDefinition
     {
         protected ImportDefinition() { }
 
@@ -2014,7 +2014,7 @@ namespace System.ComponentModel.Composition.Primitives
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
-    public partial struct LazyMemberInfo
+    partial public struct LazyMemberInfo
         : System.IEquatable<System.ComponentModel.Composition.ReflectionModel.LazyMemberInfo>
     {
         private object _dummy;
@@ -2083,7 +2083,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         }
     }
 
-    public static partial class ReflectionModelServices
+    partial public static class ReflectionModelServices
     {
         public static System.ComponentModel.Composition.Primitives.ExportDefinition CreateExportDefinition(
             System.ComponentModel.Composition.ReflectionModel.LazyMemberInfo exportingMember,

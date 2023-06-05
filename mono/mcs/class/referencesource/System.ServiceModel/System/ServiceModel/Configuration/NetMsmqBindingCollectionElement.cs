@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.Globalization;
 
-    public partial class NetMsmqBindingCollectionElement
+    partial public class NetMsmqBindingCollectionElement
         : StandardBindingCollectionElement<NetMsmqBinding, NetMsmqBindingElement>
     {
         internal static NetMsmqBindingCollectionElement GetBindingCollectionElement()

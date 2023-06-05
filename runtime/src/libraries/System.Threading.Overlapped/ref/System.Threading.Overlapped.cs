@@ -13,7 +13,7 @@ namespace System.Threading
         System.Threading.NativeOverlapped* pOVERLAP
     );
 
-    public partial struct NativeOverlapped
+    partial public struct NativeOverlapped
     {
         public System.IntPtr EventHandle;
         public System.IntPtr InternalHigh;
@@ -22,7 +22,7 @@ namespace System.Threading
         public int OffsetLow;
     }
 
-    public partial class Overlapped
+    partial public class Overlapped
     {
         public Overlapped() { }
 
@@ -65,7 +65,7 @@ namespace System.Threading
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe static void Free(System.Threading.NativeOverlapped* nativeOverlappedPtr) { }
+        public static unsafe void Free(System.Threading.NativeOverlapped* nativeOverlappedPtr) { }
 
         [System.CLSCompliantAttribute(false)]
         [System.ObsoleteAttribute(
@@ -88,7 +88,7 @@ namespace System.Threading
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe static System.Threading.Overlapped Unpack(
+        public static unsafe System.Threading.Overlapped Unpack(
             System.Threading.NativeOverlapped* nativeOverlappedPtr
         )
         {
@@ -116,7 +116,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class PreAllocatedOverlapped : System.IDisposable
+    partial public sealed class PreAllocatedOverlapped : System.IDisposable
     {
         [System.CLSCompliantAttribute(false)]
         public PreAllocatedOverlapped(
@@ -140,7 +140,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class ThreadPoolBoundHandle : System.IDisposable
+    partial public sealed class ThreadPoolBoundHandle : System.IDisposable
     {
         internal ThreadPoolBoundHandle() { }
 
@@ -180,7 +180,7 @@ namespace System.Threading
         public unsafe void FreeNativeOverlapped(System.Threading.NativeOverlapped* overlapped) { }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe static object? GetNativeOverlappedState(
+        public static unsafe object? GetNativeOverlappedState(
             System.Threading.NativeOverlapped* overlapped
         )
         {

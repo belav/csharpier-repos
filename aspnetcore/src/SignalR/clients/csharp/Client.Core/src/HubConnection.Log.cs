@@ -8,9 +8,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
-public partial class HubConnection
+partial public class HubConnection
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -18,7 +18,7 @@ public partial class HubConnection
             "Preparing non-blocking invocation of '{Target}', with {ArgumentCount} argument(s).",
             EventName = "PreparingNonBlockingInvocation"
         )]
-        public static partial void PreparingNonBlockingInvocation(
+        partial public static void PreparingNonBlockingInvocation(
             ILogger logger,
             string target,
             int argumentCount
@@ -30,7 +30,7 @@ public partial class HubConnection
             "Preparing blocking invocation '{InvocationId}' of '{Target}', with return type '{ReturnType}' and {ArgumentCount} argument(s).",
             EventName = "PreparingBlockingInvocation"
         )]
-        public static partial void PreparingBlockingInvocation(
+        partial public static void PreparingBlockingInvocation(
             ILogger logger,
             string invocationId,
             string target,
@@ -44,7 +44,7 @@ public partial class HubConnection
             "Registering Invocation ID '{InvocationId}' for tracking.",
             EventName = "RegisteringInvocation"
         )]
-        public static partial void RegisteringInvocation(ILogger logger, string invocationId);
+        partial public static void RegisteringInvocation(ILogger logger, string invocationId);
 
         [LoggerMessage(
             4,
@@ -53,7 +53,7 @@ public partial class HubConnection
             EventName = "IssuingInvocation",
             SkipEnabledCheck = true
         )]
-        private static partial void IssuingInvocation(
+        partial private static void IssuingInvocation(
             ILogger logger,
             string invocationId,
             string returnType,
@@ -101,7 +101,7 @@ public partial class HubConnection
             EventName = "SendingMessage",
             SkipEnabledCheck = true
         )]
-        private static partial void SendingMessage(
+        partial private static void SendingMessage(
             ILogger logger,
             string messageType,
             string? invocationId
@@ -114,7 +114,7 @@ public partial class HubConnection
             EventName = "SendingMessageGeneric",
             SkipEnabledCheck = true
         )]
-        private static partial void SendingMessageGeneric(ILogger logger, string messageType);
+        partial private static void SendingMessageGeneric(ILogger logger, string messageType);
 
         public static void MessageSent(ILogger logger, HubMessage message)
         {
@@ -138,7 +138,7 @@ public partial class HubConnection
             EventName = "MessageSent",
             SkipEnabledCheck = true
         )]
-        private static partial void MessageSent(
+        partial private static void MessageSent(
             ILogger logger,
             string messageType,
             string? invocationId
@@ -151,7 +151,7 @@ public partial class HubConnection
             EventName = "MessageSentGeneric",
             SkipEnabledCheck = true
         )]
-        private static partial void MessageSentGeneric(ILogger logger, string messageType);
+        partial private static void MessageSentGeneric(ILogger logger, string messageType);
 
         [LoggerMessage(
             7,
@@ -159,7 +159,7 @@ public partial class HubConnection
             "Sending Invocation '{InvocationId}' failed.",
             EventName = "FailedToSendInvocation"
         )]
-        public static partial void FailedToSendInvocation(
+        partial public static void FailedToSendInvocation(
             ILogger logger,
             string invocationId,
             Exception exception
@@ -172,7 +172,7 @@ public partial class HubConnection
             EventName = "ReceivedInvocation",
             SkipEnabledCheck = true
         )]
-        private static partial void ReceivedInvocation(
+        partial private static void ReceivedInvocation(
             ILogger logger,
             string? invocationId,
             string methodName,
@@ -202,7 +202,7 @@ public partial class HubConnection
             "Dropped unsolicited Completion message for invocation '{InvocationId}'.",
             EventName = "DroppedCompletionMessage"
         )]
-        public static partial void DroppedCompletionMessage(ILogger logger, string invocationId);
+        partial public static void DroppedCompletionMessage(ILogger logger, string invocationId);
 
         [LoggerMessage(
             10,
@@ -210,7 +210,7 @@ public partial class HubConnection
             "Dropped unsolicited StreamItem message for invocation '{InvocationId}'.",
             EventName = "DroppedStreamMessage"
         )]
-        public static partial void DroppedStreamMessage(ILogger logger, string invocationId);
+        partial public static void DroppedStreamMessage(ILogger logger, string invocationId);
 
         [LoggerMessage(
             11,
@@ -218,7 +218,7 @@ public partial class HubConnection
             "Shutting down connection.",
             EventName = "ShutdownConnection"
         )]
-        public static partial void ShutdownConnection(ILogger logger);
+        partial public static void ShutdownConnection(ILogger logger);
 
         [LoggerMessage(
             12,
@@ -226,7 +226,7 @@ public partial class HubConnection
             "Connection is shutting down due to an error.",
             EventName = "ShutdownWithError"
         )]
-        public static partial void ShutdownWithError(ILogger logger, Exception exception);
+        partial public static void ShutdownWithError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             13,
@@ -234,7 +234,7 @@ public partial class HubConnection
             "Removing pending invocation {InvocationId}.",
             EventName = "RemovingInvocation"
         )]
-        public static partial void RemovingInvocation(ILogger logger, string invocationId);
+        partial public static void RemovingInvocation(ILogger logger, string invocationId);
 
         [LoggerMessage(
             14,
@@ -242,7 +242,7 @@ public partial class HubConnection
             "Failed to find handler for '{Target}' method.",
             EventName = "MissingHandler"
         )]
-        public static partial void MissingHandler(ILogger logger, string target);
+        partial public static void MissingHandler(ILogger logger, string target);
 
         [LoggerMessage(
             15,
@@ -250,7 +250,7 @@ public partial class HubConnection
             "Received StreamItem for Invocation {InvocationId}.",
             EventName = "ReceivedStreamItem"
         )]
-        public static partial void ReceivedStreamItem(ILogger logger, string invocationId);
+        partial public static void ReceivedStreamItem(ILogger logger, string invocationId);
 
         [LoggerMessage(
             16,
@@ -258,7 +258,7 @@ public partial class HubConnection
             "Canceling dispatch of StreamItem message for Invocation {InvocationId}. The invocation was canceled.",
             EventName = "CancelingStreamItem"
         )]
-        public static partial void CancelingStreamItem(ILogger logger, string invocationId);
+        partial public static void CancelingStreamItem(ILogger logger, string invocationId);
 
         [LoggerMessage(
             17,
@@ -266,7 +266,7 @@ public partial class HubConnection
             "Invocation {InvocationId} received stream item after channel was closed.",
             EventName = "ReceivedStreamItemAfterClose"
         )]
-        public static partial void ReceivedStreamItemAfterClose(
+        partial public static void ReceivedStreamItemAfterClose(
             ILogger logger,
             string invocationId
         );
@@ -277,7 +277,7 @@ public partial class HubConnection
             "Received Completion for Invocation {InvocationId}.",
             EventName = "ReceivedInvocationCompletion"
         )]
-        public static partial void ReceivedInvocationCompletion(
+        partial public static void ReceivedInvocationCompletion(
             ILogger logger,
             string invocationId
         );
@@ -288,13 +288,13 @@ public partial class HubConnection
             "Canceling dispatch of Completion message for Invocation {InvocationId}. The invocation was canceled.",
             EventName = "CancelingInvocationCompletion"
         )]
-        public static partial void CancelingInvocationCompletion(
+        partial public static void CancelingInvocationCompletion(
             ILogger logger,
             string invocationId
         );
 
         [LoggerMessage(21, LogLevel.Debug, "HubConnection stopped.", EventName = "Stopped")]
-        public static partial void Stopped(ILogger logger);
+        partial public static void Stopped(ILogger logger);
 
         [LoggerMessage(
             22,
@@ -302,7 +302,7 @@ public partial class HubConnection
             "Invocation ID '{InvocationId}' is already in use.",
             EventName = "InvocationAlreadyInUse"
         )]
-        public static partial void InvocationAlreadyInUse(ILogger logger, string invocationId);
+        partial public static void InvocationAlreadyInUse(ILogger logger, string invocationId);
 
         [LoggerMessage(
             23,
@@ -310,7 +310,7 @@ public partial class HubConnection
             "Unsolicited response received for invocation '{InvocationId}'.",
             EventName = "ReceivedUnexpectedResponse"
         )]
-        public static partial void ReceivedUnexpectedResponse(ILogger logger, string invocationId);
+        partial public static void ReceivedUnexpectedResponse(ILogger logger, string invocationId);
 
         [LoggerMessage(
             24,
@@ -318,7 +318,7 @@ public partial class HubConnection
             "Using HubProtocol '{Protocol} v{Version}'.",
             EventName = "HubProtocol"
         )]
-        public static partial void HubProtocol(ILogger logger, string protocol, int version);
+        partial public static void HubProtocol(ILogger logger, string protocol, int version);
 
         [LoggerMessage(
             25,
@@ -326,7 +326,7 @@ public partial class HubConnection
             "Preparing streaming invocation '{InvocationId}' of '{Target}', with return type '{ReturnType}' and {ArgumentCount} argument(s).",
             EventName = "PreparingStreamingInvocation"
         )]
-        public static partial void PreparingStreamingInvocation(
+        partial public static void PreparingStreamingInvocation(
             ILogger logger,
             string invocationId,
             string target,
@@ -340,7 +340,7 @@ public partial class HubConnection
             "Resetting keep-alive timer, received a message from the server.",
             EventName = "ResettingKeepAliveTimer"
         )]
-        public static partial void ResettingKeepAliveTimer(ILogger logger);
+        partial public static void ResettingKeepAliveTimer(ILogger logger);
 
         [LoggerMessage(
             27,
@@ -348,7 +348,7 @@ public partial class HubConnection
             "An exception was thrown in the handler for the Closed event.",
             EventName = "ErrorDuringClosedEvent"
         )]
-        public static partial void ErrorDuringClosedEvent(ILogger logger, Exception exception);
+        partial public static void ErrorDuringClosedEvent(ILogger logger, Exception exception);
 
         [LoggerMessage(
             28,
@@ -356,10 +356,10 @@ public partial class HubConnection
             "Sending Hub Handshake.",
             EventName = "SendingHubHandshake"
         )]
-        public static partial void SendingHubHandshake(ILogger logger);
+        partial public static void SendingHubHandshake(ILogger logger);
 
         [LoggerMessage(31, LogLevel.Trace, "Received a ping message.", EventName = "ReceivedPing")]
-        public static partial void ReceivedPing(ILogger logger);
+        partial public static void ReceivedPing(ILogger logger);
 
         [LoggerMessage(
             34,
@@ -367,7 +367,7 @@ public partial class HubConnection
             "Invoking client side method '{MethodName}' failed.",
             EventName = "ErrorInvokingClientSideMethod"
         )]
-        public static partial void ErrorInvokingClientSideMethod(
+        partial public static void ErrorInvokingClientSideMethod(
             ILogger logger,
             string methodName,
             Exception exception
@@ -379,7 +379,7 @@ public partial class HubConnection
             "The underlying connection closed while processing the handshake response. See exception for details.",
             EventName = "ErrorReceivingHandshakeResponse"
         )]
-        public static partial void ErrorReceivingHandshakeResponse(
+        partial public static void ErrorReceivingHandshakeResponse(
             ILogger logger,
             Exception exception
         );
@@ -390,10 +390,10 @@ public partial class HubConnection
             "Server returned handshake error: {Error}",
             EventName = "HandshakeServerError"
         )]
-        public static partial void HandshakeServerError(ILogger logger, string error);
+        partial public static void HandshakeServerError(ILogger logger, string error);
 
         [LoggerMessage(37, LogLevel.Debug, "Received close message.", EventName = "ReceivedClose")]
-        public static partial void ReceivedClose(ILogger logger);
+        partial public static void ReceivedClose(ILogger logger);
 
         [LoggerMessage(
             38,
@@ -401,7 +401,7 @@ public partial class HubConnection
             "Received close message with an error: {Error}",
             EventName = "ReceivedCloseWithError"
         )]
-        public static partial void ReceivedCloseWithError(ILogger logger, string error);
+        partial public static void ReceivedCloseWithError(ILogger logger, string error);
 
         [LoggerMessage(
             39,
@@ -409,7 +409,7 @@ public partial class HubConnection
             "Handshake with server complete.",
             EventName = "HandshakeComplete"
         )]
-        public static partial void HandshakeComplete(ILogger logger);
+        partial public static void HandshakeComplete(ILogger logger);
 
         [LoggerMessage(
             40,
@@ -417,7 +417,7 @@ public partial class HubConnection
             "Registering handler for client method '{MethodName}'.",
             EventName = "RegisteringHandler"
         )]
-        public static partial void RegisteringHandler(ILogger logger, string methodName);
+        partial public static void RegisteringHandler(ILogger logger, string methodName);
 
         [LoggerMessage(
             58,
@@ -425,10 +425,10 @@ public partial class HubConnection
             "Removing handlers for client method '{MethodName}'.",
             EventName = "RemovingHandlers"
         )]
-        public static partial void RemovingHandlers(ILogger logger, string methodName);
+        partial public static void RemovingHandlers(ILogger logger, string methodName);
 
         [LoggerMessage(41, LogLevel.Debug, "Starting HubConnection.", EventName = "Starting")]
-        public static partial void Starting(ILogger logger);
+        partial public static void Starting(ILogger logger);
 
         [LoggerMessage(
             43,
@@ -436,10 +436,10 @@ public partial class HubConnection
             "Error starting connection.",
             EventName = "ErrorStartingConnection"
         )]
-        public static partial void ErrorStartingConnection(ILogger logger, Exception ex);
+        partial public static void ErrorStartingConnection(ILogger logger, Exception ex);
 
         [LoggerMessage(44, LogLevel.Information, "HubConnection started.", EventName = "Started")]
-        public static partial void Started(ILogger logger);
+        partial public static void Started(ILogger logger);
 
         [LoggerMessage(
             45,
@@ -447,7 +447,7 @@ public partial class HubConnection
             "Sending Cancellation for Invocation '{InvocationId}'.",
             EventName = "SendingCancellation"
         )]
-        public static partial void SendingCancellation(ILogger logger, string invocationId);
+        partial public static void SendingCancellation(ILogger logger, string invocationId);
 
         [LoggerMessage(
             46,
@@ -455,7 +455,7 @@ public partial class HubConnection
             "Canceling all outstanding invocations.",
             EventName = "CancelingOutstandingInvocations"
         )]
-        public static partial void CancelingOutstandingInvocations(ILogger logger);
+        partial public static void CancelingOutstandingInvocations(ILogger logger);
 
         [LoggerMessage(
             47,
@@ -463,7 +463,7 @@ public partial class HubConnection
             "Receive loop starting.",
             EventName = "ReceiveLoopStarting"
         )]
-        public static partial void ReceiveLoopStarting(ILogger logger);
+        partial public static void ReceiveLoopStarting(ILogger logger);
 
         [LoggerMessage(
             48,
@@ -472,7 +472,7 @@ public partial class HubConnection
             EventName = "StartingServerTimeoutTimer",
             SkipEnabledCheck = true
         )]
-        public static partial void StartingServerTimeoutTimer(ILogger logger, double serverTimeout);
+        partial public static void StartingServerTimeoutTimer(ILogger logger, double serverTimeout);
 
         public static void StartingServerTimeoutTimer(ILogger logger, TimeSpan serverTimeout)
         {
@@ -488,7 +488,7 @@ public partial class HubConnection
             "Not using server timeout because the transport inherently tracks server availability.",
             EventName = "NotUsingServerTimeout"
         )]
-        public static partial void NotUsingServerTimeout(ILogger logger);
+        partial public static void NotUsingServerTimeout(ILogger logger);
 
         [LoggerMessage(
             50,
@@ -496,7 +496,7 @@ public partial class HubConnection
             "The server connection was terminated with an error.",
             EventName = "ServerDisconnectedWithError"
         )]
-        public static partial void ServerDisconnectedWithError(ILogger logger, Exception ex);
+        partial public static void ServerDisconnectedWithError(ILogger logger, Exception ex);
 
         [LoggerMessage(
             51,
@@ -504,10 +504,10 @@ public partial class HubConnection
             "Invoking the Closed event handler.",
             EventName = "InvokingClosedEventHandler"
         )]
-        public static partial void InvokingClosedEventHandler(ILogger logger);
+        partial public static void InvokingClosedEventHandler(ILogger logger);
 
         [LoggerMessage(52, LogLevel.Debug, "Stopping HubConnection.", EventName = "Stopping")]
-        public static partial void Stopping(ILogger logger);
+        partial public static void Stopping(ILogger logger);
 
         [LoggerMessage(
             53,
@@ -515,7 +515,7 @@ public partial class HubConnection
             "Terminating receive loop.",
             EventName = "TerminatingReceiveLoop"
         )]
-        public static partial void TerminatingReceiveLoop(ILogger logger);
+        partial public static void TerminatingReceiveLoop(ILogger logger);
 
         [LoggerMessage(
             54,
@@ -523,7 +523,7 @@ public partial class HubConnection
             "Waiting for the receive loop to terminate.",
             EventName = "WaitingForReceiveLoopToTerminate"
         )]
-        public static partial void WaitingForReceiveLoopToTerminate(ILogger logger);
+        partial public static void WaitingForReceiveLoopToTerminate(ILogger logger);
 
         [LoggerMessage(
             56,
@@ -531,7 +531,7 @@ public partial class HubConnection
             "Processing {MessageLength} byte message from server.",
             EventName = "ProcessingMessage"
         )]
-        public static partial void ProcessingMessage(ILogger logger, long messageLength);
+        partial public static void ProcessingMessage(ILogger logger, long messageLength);
 
         [LoggerMessage(
             42,
@@ -539,7 +539,7 @@ public partial class HubConnection
             "Waiting on Connection Lock in {MethodName} ({FilePath}:{LineNumber}).",
             EventName = "WaitingOnConnectionLock"
         )]
-        public static partial void WaitingOnConnectionLock(
+        partial public static void WaitingOnConnectionLock(
             ILogger logger,
             string? methodName,
             string? filePath,
@@ -552,7 +552,7 @@ public partial class HubConnection
             "Releasing Connection Lock in {MethodName} ({FilePath}:{LineNumber}).",
             EventName = "ReleasingConnectionLock"
         )]
-        public static partial void ReleasingConnectionLock(
+        partial public static void ReleasingConnectionLock(
             ILogger logger,
             string? methodName,
             string? filePath,
@@ -565,7 +565,7 @@ public partial class HubConnection
             "Unable to send cancellation for invocation '{InvocationId}'. The connection is inactive.",
             EventName = "UnableToSendCancellation"
         )]
-        public static partial void UnableToSendCancellation(ILogger logger, string invocationId);
+        partial public static void UnableToSendCancellation(ILogger logger, string invocationId);
 
         [LoggerMessage(
             57,
@@ -573,7 +573,7 @@ public partial class HubConnection
             "Failed to bind arguments received in invocation '{InvocationId}' of '{MethodName}'.",
             EventName = "ArgumentBindingFailure"
         )]
-        public static partial void ArgumentBindingFailure(
+        partial public static void ArgumentBindingFailure(
             ILogger logger,
             string? invocationId,
             string methodName,
@@ -586,7 +586,7 @@ public partial class HubConnection
             "Acquired the Connection Lock in order to ping the server.",
             EventName = "AcquiredConnectionLockForPing"
         )]
-        public static partial void AcquiredConnectionLockForPing(ILogger logger);
+        partial public static void AcquiredConnectionLockForPing(ILogger logger);
 
         [LoggerMessage(
             62,
@@ -594,7 +594,7 @@ public partial class HubConnection
             "Skipping ping because a send is already in progress.",
             EventName = "UnableToAcquireConnectionLockForPing"
         )]
-        public static partial void UnableToAcquireConnectionLockForPing(ILogger logger);
+        partial public static void UnableToAcquireConnectionLockForPing(ILogger logger);
 
         [LoggerMessage(
             63,
@@ -602,7 +602,7 @@ public partial class HubConnection
             "Initiating stream '{StreamId}'.",
             EventName = "StartingStream"
         )]
-        public static partial void StartingStream(ILogger logger, string streamId);
+        partial public static void StartingStream(ILogger logger, string streamId);
 
         [LoggerMessage(
             64,
@@ -610,7 +610,7 @@ public partial class HubConnection
             "Sending item for stream '{StreamId}'.",
             EventName = "StreamItemSent"
         )]
-        public static partial void SendingStreamItem(ILogger logger, string streamId);
+        partial public static void SendingStreamItem(ILogger logger, string streamId);
 
         [LoggerMessage(
             65,
@@ -618,7 +618,7 @@ public partial class HubConnection
             "Stream '{StreamId}' has been canceled by client.",
             EventName = "CancelingStream"
         )]
-        public static partial void CancelingStream(ILogger logger, string streamId);
+        partial public static void CancelingStream(ILogger logger, string streamId);
 
         [LoggerMessage(
             66,
@@ -626,7 +626,7 @@ public partial class HubConnection
             "Sending completion message for stream '{StreamId}'.",
             EventName = "CompletingStream"
         )]
-        public static partial void CompletingStream(ILogger logger, string streamId);
+        partial public static void CompletingStream(ILogger logger, string streamId);
 
         [LoggerMessage(
             67,
@@ -634,7 +634,7 @@ public partial class HubConnection
             "The HubConnection failed to transition from the {ExpectedState} state to the {NewState} state because it was actually in the {ActualState} state.",
             EventName = "StateTransitionFailed"
         )]
-        public static partial void StateTransitionFailed(
+        partial public static void StateTransitionFailed(
             ILogger logger,
             HubConnectionState expectedState,
             HubConnectionState newState,
@@ -647,7 +647,7 @@ public partial class HubConnection
             "HubConnection reconnecting.",
             EventName = "Reconnecting"
         )]
-        public static partial void Reconnecting(ILogger logger);
+        partial public static void Reconnecting(ILogger logger);
 
         [LoggerMessage(
             69,
@@ -655,7 +655,7 @@ public partial class HubConnection
             "HubConnection reconnecting due to an error.",
             EventName = "ReconnectingWithError"
         )]
-        public static partial void ReconnectingWithError(ILogger logger, Exception exception);
+        partial public static void ReconnectingWithError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             70,
@@ -663,7 +663,7 @@ public partial class HubConnection
             "HubConnection reconnected successfully after {ReconnectAttempts} attempts and {ElapsedTime} elapsed.",
             EventName = "Reconnected"
         )]
-        public static partial void Reconnected(
+        partial public static void Reconnected(
             ILogger logger,
             long reconnectAttempts,
             TimeSpan elapsedTime
@@ -675,7 +675,7 @@ public partial class HubConnection
             "Reconnect retries have been exhausted after {ReconnectAttempts} failed attempts and {ElapsedTime} elapsed. Disconnecting.",
             EventName = "ReconnectAttemptsExhausted"
         )]
-        public static partial void ReconnectAttemptsExhausted(
+        partial public static void ReconnectAttemptsExhausted(
             ILogger logger,
             long reconnectAttempts,
             TimeSpan elapsedTime
@@ -687,7 +687,7 @@ public partial class HubConnection
             "Reconnect attempt number {ReconnectAttempts} will start in {RetryDelay}.",
             EventName = "AwaitingReconnectRetryDelay"
         )]
-        public static partial void AwaitingReconnectRetryDelay(
+        partial public static void AwaitingReconnectRetryDelay(
             ILogger logger,
             long reconnectAttempts,
             TimeSpan retryDelay
@@ -699,7 +699,7 @@ public partial class HubConnection
             "Reconnect attempt failed.",
             EventName = "ReconnectAttemptFailed"
         )]
-        public static partial void ReconnectAttemptFailed(ILogger logger, Exception exception);
+        partial public static void ReconnectAttemptFailed(ILogger logger, Exception exception);
 
         [LoggerMessage(
             74,
@@ -707,7 +707,7 @@ public partial class HubConnection
             "An exception was thrown in the handler for the Reconnecting event.",
             EventName = "ErrorDuringReconnectingEvent"
         )]
-        public static partial void ErrorDuringReconnectingEvent(
+        partial public static void ErrorDuringReconnectingEvent(
             ILogger logger,
             Exception exception
         );
@@ -718,7 +718,7 @@ public partial class HubConnection
             "An exception was thrown in the handler for the Reconnected event.",
             EventName = "ErrorDuringReconnectedEvent"
         )]
-        public static partial void ErrorDuringReconnectedEvent(ILogger logger, Exception exception);
+        partial public static void ErrorDuringReconnectedEvent(ILogger logger, Exception exception);
 
         [LoggerMessage(
             76,
@@ -726,7 +726,7 @@ public partial class HubConnection
             $"An exception was thrown from {nameof(IRetryPolicy)}.{nameof(IRetryPolicy.NextRetryDelay)}().",
             EventName = "ErrorDuringNextRetryDelay"
         )]
-        public static partial void ErrorDuringNextRetryDelay(ILogger logger, Exception exception);
+        partial public static void ErrorDuringNextRetryDelay(ILogger logger, Exception exception);
 
         [LoggerMessage(
             77,
@@ -734,7 +734,7 @@ public partial class HubConnection
             "Connection not reconnecting because the IRetryPolicy returned null on the first reconnect attempt.",
             EventName = "FirstReconnectRetryDelayNull"
         )]
-        public static partial void FirstReconnectRetryDelayNull(ILogger logger);
+        partial public static void FirstReconnectRetryDelayNull(ILogger logger);
 
         [LoggerMessage(
             78,
@@ -742,7 +742,7 @@ public partial class HubConnection
             "Connection stopped during reconnect delay. Done reconnecting.",
             EventName = "ReconnectingStoppedDueToStateChangeDuringRetryDelay"
         )]
-        public static partial void ReconnectingStoppedDuringRetryDelay(ILogger logger);
+        partial public static void ReconnectingStoppedDuringRetryDelay(ILogger logger);
 
         [LoggerMessage(
             79,
@@ -750,7 +750,7 @@ public partial class HubConnection
             "Connection stopped during reconnect attempt. Done reconnecting.",
             EventName = "ReconnectingStoppedDueToStateChangeDuringReconnectAttempt"
         )]
-        public static partial void ReconnectingStoppedDuringReconnectAttempt(ILogger logger);
+        partial public static void ReconnectingStoppedDuringReconnectAttempt(ILogger logger);
 
         [LoggerMessage(
             80,
@@ -758,7 +758,7 @@ public partial class HubConnection
             "The HubConnection is attempting to transition from the {ExpectedState} state to the {NewState} state.",
             EventName = "AttemptingStateTransition"
         )]
-        public static partial void AttemptingStateTransition(
+        partial public static void AttemptingStateTransition(
             ILogger logger,
             HubConnectionState expectedState,
             HubConnectionState newState
@@ -770,7 +770,7 @@ public partial class HubConnection
             "Received an invalid handshake response.",
             EventName = "ErrorInvalidHandshakeResponse"
         )]
-        public static partial void ErrorInvalidHandshakeResponse(
+        partial public static void ErrorInvalidHandshakeResponse(
             ILogger logger,
             Exception exception
         );
@@ -787,7 +787,7 @@ public partial class HubConnection
             "The handshake timed out after {HandshakeTimeoutSeconds} seconds.",
             EventName = "ErrorHandshakeTimedOut"
         )]
-        private static partial void ErrorHandshakeTimedOut(
+        partial private static void ErrorHandshakeTimedOut(
             ILogger logger,
             double HandshakeTimeoutSeconds,
             Exception exception
@@ -799,7 +799,7 @@ public partial class HubConnection
             "The handshake was canceled by the client.",
             EventName = "ErrorHandshakeCanceled"
         )]
-        public static partial void ErrorHandshakeCanceled(ILogger logger, Exception exception);
+        partial public static void ErrorHandshakeCanceled(ILogger logger, Exception exception);
 
         [LoggerMessage(
             84,
@@ -807,7 +807,7 @@ public partial class HubConnection
             "Client threw an error for stream '{StreamId}'.",
             EventName = "ErroredStream"
         )]
-        public static partial void ErroredStream(
+        partial public static void ErroredStream(
             ILogger logger,
             string streamId,
             Exception exception
@@ -819,7 +819,7 @@ public partial class HubConnection
             "Failed to find a value returning handler for '{Target}' method. Sending error to server.",
             EventName = "MissingResultHandler"
         )]
-        public static partial void MissingResultHandler(ILogger logger, string target);
+        partial public static void MissingResultHandler(ILogger logger, string target);
 
         [LoggerMessage(
             86,
@@ -827,7 +827,7 @@ public partial class HubConnection
             "Result given for '{Target}' method but server is not expecting a result.",
             EventName = "ResultNotExpected"
         )]
-        public static partial void ResultNotExpected(ILogger logger, string target);
+        partial public static void ResultNotExpected(ILogger logger, string target);
 
         [LoggerMessage(
             87,
@@ -835,7 +835,7 @@ public partial class HubConnection
             "Completion message for stream '{StreamId}' was not sent because the connection is closed.",
             EventName = "CompletingStreamNotSent"
         )]
-        public static partial void CompletingStreamNotSent(ILogger logger, string streamId);
+        partial public static void CompletingStreamNotSent(ILogger logger, string streamId);
 
         [LoggerMessage(
             88,
@@ -843,7 +843,7 @@ public partial class HubConnection
             "Error returning result for invocation '{InvocationId}' for method '{Target}' because the underlying connection is closed.",
             EventName = "ErrorSendingInvocationResult"
         )]
-        public static partial void ErrorSendingInvocationResult(
+        partial public static void ErrorSendingInvocationResult(
             ILogger logger,
             string invocationId,
             string target,

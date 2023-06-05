@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Internal.Log
 {
-    internal static partial class Logger
+    partial internal static class Logger
     {
         // Regardless of how many tasks we can run in parallel on the machine, we likely won't need more than 256
         // instrumentation points in flight at a given time.

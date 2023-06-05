@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ConstructorDeclarationSyntax
+    partial public class ConstructorDeclarationSyntax
     {
         public ConstructorDeclarationSyntax Update(
             SyntaxList<AttributeListSyntax> attributeLists,
@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static ConstructorDeclarationSyntax ConstructorDeclaration(
             SyntaxList<AttributeListSyntax> attributeLists,

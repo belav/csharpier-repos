@@ -19,8 +19,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     // The parts of a workspace that deal with open documents
-    public abstract partial class Workspace
+    public abstract class Workspace
     {
         // open documents
         private readonly Dictionary<ProjectId, HashSet<DocumentId>> _projectToOpenDocumentsMap =

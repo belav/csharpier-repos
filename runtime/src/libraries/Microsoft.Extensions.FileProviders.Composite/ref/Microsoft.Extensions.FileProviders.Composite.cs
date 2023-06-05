@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.FileProviders
 {
-    public partial class CompositeFileProvider : Microsoft.Extensions.FileProviders.IFileProvider
+    partial public class CompositeFileProvider : Microsoft.Extensions.FileProviders.IFileProvider
     {
         public CompositeFileProvider(
             params Microsoft.Extensions.FileProviders.IFileProvider[]? fileProviders
@@ -42,7 +42,7 @@ namespace Microsoft.Extensions.FileProviders
 
 namespace Microsoft.Extensions.FileProviders.Composite
 {
-    public partial class CompositeDirectoryContents
+    partial public class CompositeDirectoryContents
         : Microsoft.Extensions.FileProviders.IDirectoryContents,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
             System.Collections.IEnumerable

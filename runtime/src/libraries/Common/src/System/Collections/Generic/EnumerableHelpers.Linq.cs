@@ -6,10 +6,11 @@ using System.Linq;
 
 namespace System.Collections.Generic
 {
+    partial
     /// <summary>
     /// Internal helper functions for working with enumerables.
     /// </summary>
-    internal static partial class EnumerableHelpers
+    internal static class EnumerableHelpers
     {
         /// <summary>
         /// Copies items from an enumerable to an array.

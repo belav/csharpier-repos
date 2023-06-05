@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Classification
 {
-    internal static partial class ClassifierHelper
+    partial internal static class ClassifierHelper
     {
         /// <summary>
         /// Classifies the provided <paramref name="span"/> in the given <paramref name="document"/>. This will do this

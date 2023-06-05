@@ -83,7 +83,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public partial class CustomAttributeBuilder
+    partial public class CustomAttributeBuilder
     {
         ConstructorInfo ctor;
         byte[] data;

@@ -10,9 +10,9 @@ using System.Security.Cryptography.X509Certificates;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         private static readonly SafeCreateHandle s_emptyExportString =
             CoreFoundation.CFStringCreateWithCString("");
@@ -42,7 +42,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509ImportCertificate(
+        partial private static int AppleCryptoNative_X509ImportCertificate(
             ref byte pbKeyBlob,
             int cbKeyBlob,
             X509ContentType contentType,
@@ -55,7 +55,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509ImportCollection(
+        partial private static int AppleCryptoNative_X509ImportCollection(
             ref byte pbKeyBlob,
             int cbKeyBlob,
             X509ContentType contentType,
@@ -67,7 +67,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509ExportData(
+        partial private static int AppleCryptoNative_X509ExportData(
             SafeCreateHandle data,
             X509ContentType type,
             SafeCreateHandle cfExportPassphrase,
@@ -76,7 +76,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509CopyWithPrivateKey(
+        partial private static int AppleCryptoNative_X509CopyWithPrivateKey(
             SafeSecCertificateHandle certHandle,
             SafeSecKeyRefHandle privateKeyHandle,
             SafeKeychainHandle targetKeychain,
@@ -85,7 +85,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509MoveToKeychain(
+        partial private static int AppleCryptoNative_X509MoveToKeychain(
             SafeSecCertificateHandle certHandle,
             SafeKeychainHandle targetKeychain,
             SafeSecKeyRefHandle privateKeyHandle,

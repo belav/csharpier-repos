@@ -28,7 +28,7 @@ namespace System
     using System.Runtime.InteropServices;
     using System.Diagnostics;
 
-    public partial class Uri
+    partial public class Uri
     {
         //
         // All public ctors go through here

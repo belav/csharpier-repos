@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-unsafe partial class Int128NativeFieldLayout
+partial unsafe class Int128NativeFieldLayout
 {
     public static int Main()
     {

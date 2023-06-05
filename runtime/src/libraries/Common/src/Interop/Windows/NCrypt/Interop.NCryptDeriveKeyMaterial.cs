@@ -8,15 +8,15 @@ using Internal.Cryptography;
 using Microsoft.Win32.SafeHandles;
 using Internal.NativeCrypto;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NCrypt
+    partial internal static class NCrypt
     {
         /// <summary>
         ///     Generate a key from a secret agreement
         /// </summary>
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        private static partial ErrorCode NCryptDeriveKey(
+        partial private static ErrorCode NCryptDeriveKey(
             SafeNCryptSecretHandle hSharedSecret,
             string pwszKDF,
             ref NCryptBufferDesc pParameterList,

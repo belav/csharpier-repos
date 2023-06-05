@@ -68,7 +68,7 @@ namespace Internal.Metadata.NativeFormat
         MaxValue = 0xFFFF,
     }
 
-    public partial struct Handle
+    partial public struct Handle
     {
         public override bool Equals(object obj)
         {
@@ -166,11 +166,12 @@ namespace Internal.Metadata.NativeFormat
         }
     }
 
+    partial
     /// <summary>
     /// ConstantReferenceValue can only be used to encapsulate null reference values,
     /// and therefore does not actually store the value.
     /// </summary>
-    public partial struct ConstantReferenceValue
+    public struct ConstantReferenceValue
     {
         /// Always returns null value.
         public object Value
@@ -179,7 +180,7 @@ namespace Internal.Metadata.NativeFormat
         }
     } // ConstantReferenceValue
 
-    public partial struct ConstantStringValueHandle
+    partial public struct ConstantStringValueHandle
     {
         public bool StringEquals(string value, MetadataReader reader)
         {
@@ -187,7 +188,7 @@ namespace Internal.Metadata.NativeFormat
         }
     }
 
-    public sealed partial class MetadataReader
+    partial public sealed class MetadataReader
     {
         private MetadataHeader _header;
 
@@ -244,7 +245,7 @@ namespace Internal.Metadata.NativeFormat
         }
     }
 
-    internal sealed partial class MetadataHeader
+    partial internal sealed class MetadataHeader
     {
         /// <todo>
         /// Signature should be updated every time the metadata schema changes.

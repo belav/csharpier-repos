@@ -3,9 +3,10 @@
 
 namespace System.Net.Sockets.Tests
 {
+    partial
     // Each individual test must configure this class by defining s_implementationType within
     // SocketTestServer.DefaultFactoryConfiguration.cs
-    public abstract partial class SocketTestServer : IDisposable
+    public abstract class SocketTestServer : IDisposable
     {
         private const int DefaultNumConnections = 5;
         private const int DefaultReceiveBufferSize = 1024;

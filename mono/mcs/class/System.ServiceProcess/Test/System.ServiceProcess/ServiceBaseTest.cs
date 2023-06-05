@@ -38,7 +38,7 @@ namespace MonoTests.System.ServiceProcess
     {
         const int SOME_ERROR_CODE = 1;
 
-        public partial class ServiceFoo : ServiceBase
+        partial public class ServiceFoo : ServiceBase
         {
             public ServiceFoo()
             {

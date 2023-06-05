@@ -375,7 +375,7 @@ namespace System.Runtime.InteropServices.Tests
         public unsafe struct HasFixedBuffer
         {
             public short member;
-            public fixed byte buffer[2];
+            fixed public byte buffer[2];
             public short member2;
         }
 
@@ -389,7 +389,7 @@ namespace System.Runtime.InteropServices.Tests
 
         unsafe struct NonBlittableWithBlittableBuffer
         {
-            public fixed int f[100];
+            fixed public int f[100];
             public string s;
         }
 

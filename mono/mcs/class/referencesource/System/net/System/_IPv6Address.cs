@@ -47,7 +47,7 @@ namespace System
             }
         }
 
-        internal unsafe static string CreateCanonicalName(ushort* numbers)
+        internal static unsafe string CreateCanonicalName(ushort* numbers)
         {
             if (UriParser.ShouldUseLegacyV2Quirks)
             {
@@ -121,7 +121,7 @@ namespace System
         // Longest consecutive sequence of zero segments, minimum 2.
         // On equal, first sequence wins.
         // <-1, -1> for no compression.
-        private unsafe static KeyValuePair<int, int> FindCompressionRange(ushort* numbers)
+        private static unsafe KeyValuePair<int, int> FindCompressionRange(ushort* numbers)
         {
             int longestSequenceLength = 0;
             int longestSequenceStart = -1;
@@ -157,7 +157,7 @@ namespace System
 
         // Returns true if the IPv6 address should be formated with an embedded IPv4 address:
         // ::192.168.1.1
-        private unsafe static bool ShouldHaveIpv4Embedded(ushort* numbers)
+        private static unsafe bool ShouldHaveIpv4Embedded(ushort* numbers)
         {
             // 0:0 : 0:0 : x:x : x.x.x.x
             if (
@@ -221,12 +221,41 @@ namespace System
 
         //  Remarks: MUST NOT be used unless all input indexes are verified and trusted.
         //           start must be next to '[' position, or error is reported
-        unsafe private static bool InternalIsValid(
-            char* name,
-            int start,
-            ref int end,
-            bool validateStrictAddress
-        )
+        private static
+        //
+        // InternalIsValid
+        //
+        //  Determine whether a name is a valid IPv6 address. Rules are:
+        //
+        //   *  8 groups of 16-bit hex numbers, separated by ':'
+        //   *  a *single* run of zeros can be compressed using the symbol '::'
+        //   *  an optional string of a ScopeID delimited by '%'
+        //   *  an optional (last) 1 or 2 character prefix length field delimited by '/'
+        //   *  the last 32 bits in an address can be represented as an IPv4 address
+        //
+        // Inputs:
+        //  <argument>  name
+        //      Domain name field of a URI to check for pattern match with
+        //      IPv6 address
+        //  validateStrictAddress: if set to true, it expects strict ipv6 address. Otherwise it expects
+        //      part of the string in ipv6 format.
+        //
+        // Outputs:
+        //  Nothing
+        //
+        // Assumes:
+        //  the correct name is terminated by  ']' character
+        //
+        // Returns:
+        //  true if <name> has IPv6 format/ipv6 address based on validateStrictAddress, else false
+        //
+        // Throws:
+        //  Nothing
+        //
+
+        //  Remarks: MUST NOT be used unless all input indexes are verified and trusted.
+        //           start must be next to '[' position, or error is reported
+        unsafe bool InternalIsValid(char* name, int start, ref int end, bool validateStrictAddress)
         {
             int sequenceCount = 0;
             int sequenceLength = 0;
@@ -414,7 +443,7 @@ namespace System
         //  Remarks: MUST NOT be used unless all input indexes are are verified and trusted.
         //           start must be next to '[' position, or error is reported
 
-        internal unsafe static bool IsValid(char* name, int start, ref int end)
+        internal static unsafe bool IsValid(char* name, int start, ref int end)
         {
             return InternalIsValid(name, start, ref end, false);
         }
@@ -451,7 +480,7 @@ namespace System
 
         //  Remarks: MUST NOT be used unless all input indexes are verified and trusted.
         //           start must be next to '[' position, or error is reported
-        internal unsafe static bool IsValidStrict(char* name, int start, ref int end)
+        internal static unsafe bool IsValidStrict(char* name, int start, ref int end)
         {
             return InternalIsValid(name, start, ref end, true);
         }
@@ -484,12 +513,36 @@ namespace System
         //  Nothing
         //
 
-        unsafe internal static bool Parse(
-            string address,
-            ushort* numbers,
-            int start,
-            ref string scopeId
-        )
+        internal static
+        //
+        // Parse
+        //
+        //  Convert this IPv6 address into a sequence of 8 16-bit numbers
+        //
+        // Inputs:
+        //  <member>    Name
+        //      The validated IPv6 address
+        //
+        // Outputs:
+        //  <member>    numbers
+        //      Array filled in with the numbers in the IPv6 groups
+        //
+        //  <member>    PrefixLength
+        //      Set to the number after the prefix separator (/) if found
+        //
+        // Assumes:
+        //  <Name> has been validated and contains only hex digits in groups of
+        //  16-bit numbers, the characters ':' and '/', and a possible IPv4
+        //  address
+        //
+        // Returns:
+        //  true if this is a loopback, false otherwise. There is no falure indication as the sting must be a valid one.
+        //
+        // Throws:
+        //  Nothing
+        //
+
+        unsafe bool Parse(string address, ushort* numbers, int start, ref string scopeId)
         {
             int number = 0;
             int index = 0;

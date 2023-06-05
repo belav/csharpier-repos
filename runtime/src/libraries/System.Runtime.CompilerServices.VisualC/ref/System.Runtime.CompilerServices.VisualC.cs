@@ -6,7 +6,7 @@
 
 namespace System.Runtime.CompilerServices
 {
-    public static partial class CompilerMarshalOverride { }
+    partial public static class CompilerMarshalOverride { }
 
     [AttributeUsageAttribute(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class CppInlineNamespaceAttribute : Attribute
@@ -15,33 +15,33 @@ namespace System.Runtime.CompilerServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Struct)]
-    public sealed partial class HasCopySemanticsAttribute : System.Attribute
+    partial public sealed class HasCopySemanticsAttribute : System.Attribute
     {
         public HasCopySemanticsAttribute() { }
     }
 
-    public static partial class IsBoxed { }
+    partial public static class IsBoxed { }
 
-    public static partial class IsByValue { }
+    partial public static class IsByValue { }
 
-    public static partial class IsCopyConstructed { }
+    partial public static class IsCopyConstructed { }
 
-    public static partial class IsExplicitlyDereferenced { }
+    partial public static class IsExplicitlyDereferenced { }
 
-    public static partial class IsImplicitlyDereferenced { }
+    partial public static class IsImplicitlyDereferenced { }
 
-    public static partial class IsJitIntrinsic { }
+    partial public static class IsJitIntrinsic { }
 
-    public static partial class IsLong { }
+    partial public static class IsLong { }
 
-    public static partial class IsPinned { }
+    partial public static class IsPinned { }
 
-    public static partial class IsSignUnspecifiedByte { }
+    partial public static class IsSignUnspecifiedByte { }
 
-    public static partial class IsUdtReturn { }
+    partial public static class IsUdtReturn { }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Struct, Inherited = true)]
-    public sealed partial class NativeCppClassAttribute : System.Attribute
+    partial public sealed class NativeCppClassAttribute : System.Attribute
     {
         public NativeCppClassAttribute() { }
     }
@@ -54,7 +54,7 @@ namespace System.Runtime.CompilerServices
         AllowMultiple = true,
         Inherited = false
     )]
-    public sealed partial class RequiredAttributeAttribute : System.Attribute
+    partial public sealed class RequiredAttributeAttribute : System.Attribute
     {
         public RequiredAttributeAttribute(System.Type requiredContract) { }
 
@@ -65,7 +65,7 @@ namespace System.Runtime.CompilerServices
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Enum)]
-    public sealed partial class ScopelessEnumAttribute : System.Attribute
+    partial public sealed class ScopelessEnumAttribute : System.Attribute
     {
         public ScopelessEnumAttribute() { }
     }

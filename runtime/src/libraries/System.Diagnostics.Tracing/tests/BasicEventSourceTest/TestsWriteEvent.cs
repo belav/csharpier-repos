@@ -15,7 +15,7 @@ using SdtEventSources;
 
 namespace BasicEventSourceTests
 {
-    public partial class TestsWriteEvent
+    partial public class TestsWriteEvent
     {
         /// <summary>
         /// Tests WriteEvent using the manifest based mechanism.
@@ -496,7 +496,7 @@ namespace BasicEventSourceTests
             }
         }
 
-        static partial void Test_WriteEvent_AddEtwTests(
+        partial static void Test_WriteEvent_AddEtwTests(
             List<SubTest> tests,
             EventSourceTest logger
         );

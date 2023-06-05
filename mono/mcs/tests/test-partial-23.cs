@@ -20,12 +20,12 @@ partial class C
 
     static byte s;
 
-    static partial void Partial_S()
+    partial static void Partial_S()
     {
         s += 5;
     }
 
-    static partial void Partial_S();
+    partial static void Partial_S();
 
     public static int Main()
     {

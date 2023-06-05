@@ -7,7 +7,7 @@
 namespace System.Media
 {
     [System.ComponentModel.ToolboxItemAttribute(false)]
-    public partial class SoundPlayer
+    partial public class SoundPlayer
         : System.ComponentModel.Component,
             System.Runtime.Serialization.ISerializable
     {
@@ -86,14 +86,14 @@ namespace System.Media
         ) { }
     }
 
-    public partial class SystemSound
+    partial public class SystemSound
     {
         internal SystemSound() { }
 
         public void Play() { }
     }
 
-    public static partial class SystemSounds
+    partial public static class SystemSounds
     {
         public static System.Media.SystemSound Asterisk
         {
@@ -120,7 +120,7 @@ namespace System.Media
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    public sealed partial class X509Certificate2UI
+    partial public sealed class X509Certificate2UI
     {
         public X509Certificate2UI() { }
 
@@ -164,7 +164,7 @@ namespace System.Security.Cryptography.X509Certificates
 
 namespace System.Xaml.Permissions
 {
-    public partial class XamlAccessLevel
+    partial public class XamlAccessLevel
     {
         internal XamlAccessLevel() { }
 

@@ -12,7 +12,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter
+    partial internal sealed class LocalRewriter
     {
         public override BoundNode VisitRangeExpression(BoundRangeExpression node)
         {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-internal partial class MigrationsRemoveCommand : ContextCommandBase
+partial internal class MigrationsRemoveCommand : ContextCommandBase
 {
     private CommandOption? _force;
     private CommandOption? _json;

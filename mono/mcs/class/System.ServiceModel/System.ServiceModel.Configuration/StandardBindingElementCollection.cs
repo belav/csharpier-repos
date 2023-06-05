@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class StandardBindingElementCollection<TBindingConfiguration>
+    partial public sealed class StandardBindingElementCollection<TBindingConfiguration>
         : ServiceModelEnhancedConfigurationElementCollection<TBindingConfiguration>,
             ICollection,
             IEnumerable

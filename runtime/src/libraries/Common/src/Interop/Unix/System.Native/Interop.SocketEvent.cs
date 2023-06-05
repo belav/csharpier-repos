@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [Flags]
         internal enum SocketEvents : int
@@ -28,25 +28,25 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_CreateSocketEventPort")]
-        internal static unsafe partial Error CreateSocketEventPort(IntPtr* port);
+        partial internal static unsafe Error CreateSocketEventPort(IntPtr* port);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_CloseSocketEventPort")]
-        internal static partial Error CloseSocketEventPort(IntPtr port);
+        partial internal static Error CloseSocketEventPort(IntPtr port);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_CreateSocketEventBuffer")]
-        internal static unsafe partial Error CreateSocketEventBuffer(
+        partial internal static unsafe Error CreateSocketEventBuffer(
             int count,
             SocketEvent** buffer
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_FreeSocketEventBuffer")]
-        internal static unsafe partial Error FreeSocketEventBuffer(SocketEvent* buffer);
+        partial internal static unsafe Error FreeSocketEventBuffer(SocketEvent* buffer);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_TryChangeSocketEventRegistration"
         )]
-        internal static partial Error TryChangeSocketEventRegistration(
+        partial internal static Error TryChangeSocketEventRegistration(
             IntPtr port,
             SafeHandle socket,
             SocketEvents currentEvents,
@@ -58,7 +58,7 @@ internal static partial class Interop
             Libraries.SystemNative,
             EntryPoint = "SystemNative_TryChangeSocketEventRegistration"
         )]
-        internal static partial Error TryChangeSocketEventRegistration(
+        partial internal static Error TryChangeSocketEventRegistration(
             IntPtr port,
             IntPtr socket,
             SocketEvents currentEvents,
@@ -67,7 +67,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_WaitForSocketEvents")]
-        internal static unsafe partial Error WaitForSocketEvents(
+        partial internal static unsafe Error WaitForSocketEvents(
             IntPtr port,
             SocketEvent* buffer,
             int* count

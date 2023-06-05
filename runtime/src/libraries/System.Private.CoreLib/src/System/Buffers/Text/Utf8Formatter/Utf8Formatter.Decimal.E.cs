@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Formatter
+    partial public static class Utf8Formatter
     {
         private static bool TryFormatDecimalE(
             ref Number.NumberBuffer number,

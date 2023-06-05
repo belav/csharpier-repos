@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    public partial class PasswordDeriveBytes : DeriveBytes
+    partial public class PasswordDeriveBytes : DeriveBytes
     {
         [SupportedOSPlatform("windows")]
         public byte[] CryptDeriveKey(

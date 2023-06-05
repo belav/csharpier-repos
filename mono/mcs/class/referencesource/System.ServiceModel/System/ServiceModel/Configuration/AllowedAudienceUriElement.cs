@@ -6,7 +6,7 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
 
-    public sealed partial class AllowedAudienceUriElement : ConfigurationElement
+    partial public sealed class AllowedAudienceUriElement : ConfigurationElement
     {
         public AllowedAudienceUriElement()
             : base() { }

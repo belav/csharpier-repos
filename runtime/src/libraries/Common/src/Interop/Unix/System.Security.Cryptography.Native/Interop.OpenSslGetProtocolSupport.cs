@@ -3,14 +3,14 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class OpenSsl
+    partial internal static class OpenSsl
     {
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_OpenSslGetProtocolSupport"
         )]
-        internal static partial int OpenSslGetProtocolSupport(int protocol);
+        partial internal static int OpenSslGetProtocolSupport(int protocol);
     }
 }

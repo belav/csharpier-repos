@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ProjectExtensions
+    partial internal static class ProjectExtensions
     {
         public static TLanguageService? GetLanguageService<TLanguageService>(this Project? project)
             where TLanguageService : class, ILanguageService

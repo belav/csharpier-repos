@@ -9,12 +9,13 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
+    partial
     // The native project system requires that project sites implement IVsEditorFactoryNotify, and
     // the project system stores an internal list of the interface pointers to them. The old editor
     // factory would then call each implementation from it's own IVsEditorFactoryNotify methods.
     // Since we now supply our own editor factory that doesn't do this, these methods will never be
     // called. Still, we must implement the interface or we'll never load at all.
-    internal partial class CSharpProjectShim : IVsEditorFactoryNotify
+    internal class CSharpProjectShim : IVsEditorFactoryNotify
     {
         public int NotifyDependentItemSaved(
             IVsHierarchy hier,

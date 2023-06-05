@@ -17,35 +17,35 @@ namespace DllImportGenerator.IntegrationTests
             EntryPoint = "unicode_return_as_uint",
             CharSet = CharSet.Unicode
         )]
-        public static partial uint ReturnUnicodeAsUInt(char input);
+        partial public static uint ReturnUnicodeAsUInt(char input);
 
         [GeneratedDllImport(
             NativeExportsNE_Binary,
             EntryPoint = "char_return_as_uint",
             CharSet = CharSet.Unicode
         )]
-        public static partial char ReturnUIntAsUnicode(uint input);
+        partial public static char ReturnUIntAsUnicode(uint input);
 
         [GeneratedDllImport(
             NativeExportsNE_Binary,
             EntryPoint = "char_return_as_refuint",
             CharSet = CharSet.Unicode
         )]
-        public static partial void ReturnUIntAsUnicode_Ref(uint input, ref char res);
+        partial public static void ReturnUIntAsUnicode_Ref(uint input, ref char res);
 
         [GeneratedDllImport(
             NativeExportsNE_Binary,
             EntryPoint = "char_return_as_refuint",
             CharSet = CharSet.Unicode
         )]
-        public static partial void ReturnUIntAsUnicode_Out(uint input, out char res);
+        partial public static void ReturnUIntAsUnicode_Out(uint input, out char res);
 
         [GeneratedDllImport(
             NativeExportsNE_Binary,
             EntryPoint = "char_return_as_refuint",
             CharSet = CharSet.Unicode
         )]
-        public static partial void ReturnUIntAsUnicode_In(uint input, in char res);
+        partial public static void ReturnUIntAsUnicode_In(uint input, in char res);
 
         [GeneratedDllImport(
             NativeExportsNE_Binary,
@@ -53,7 +53,7 @@ namespace DllImportGenerator.IntegrationTests
             CharSet = CharSet.None
         )]
         [return: MarshalAs(UnmanagedType.U2)]
-        public static partial char ReturnU2AsU2IgnoreCharSet(
+        partial public static char ReturnU2AsU2IgnoreCharSet(
             [MarshalAs(UnmanagedType.U2)] char input
         );
 
@@ -63,7 +63,7 @@ namespace DllImportGenerator.IntegrationTests
             CharSet = CharSet.Ansi
         )]
         [return: MarshalAs(UnmanagedType.I2)]
-        public static partial char ReturnI2AsI2IgnoreCharSet(
+        partial public static char ReturnI2AsI2IgnoreCharSet(
             [MarshalAs(UnmanagedType.I2)] char input
         );
 
@@ -72,7 +72,7 @@ namespace DllImportGenerator.IntegrationTests
             EntryPoint = "char_reverse_buffer_ref",
             CharSet = CharSet.Unicode
         )]
-        public static partial void ReverseBuffer(ref char buffer, int len);
+        partial public static void ReverseBuffer(ref char buffer, int len);
     }
 
     public class CharacterTests

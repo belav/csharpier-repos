@@ -12,7 +12,7 @@ namespace System.Xml
 {
     // Represents a reader that provides fast, non-cached forward only stream access to XML data.
     [DebuggerDisplay($"{{{nameof(DebuggerDisplayProxy)}}}")]
-    public abstract partial class XmlReader : IDisposable
+    partial public abstract class XmlReader : IDisposable
     {
         public virtual Task<string> GetValueAsync()
         {

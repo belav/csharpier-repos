@@ -18,7 +18,7 @@ namespace System.Workflow.Runtime
 
         public abstract string WorkflowName { get; }
 
-        internal protected WorkflowRuntime WorkflowRuntime
+        protected internal WorkflowRuntime WorkflowRuntime
         {
             get
             {

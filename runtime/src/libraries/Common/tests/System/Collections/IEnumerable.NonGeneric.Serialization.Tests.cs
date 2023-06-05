@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
-    public abstract partial class IEnumerable_NonGeneric_Tests : TestBase
+    partial public abstract class IEnumerable_NonGeneric_Tests : TestBase
     {
         [ConditionalTheory(
             typeof(PlatformDetection),

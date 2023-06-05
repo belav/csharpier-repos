@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
         typeof(BaseAddressElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap
     )]
-    public sealed partial class BaseAddressElementCollection
+    partial public sealed class BaseAddressElementCollection
         : ServiceModelConfigurationElementCollection<BaseAddressElement>
     {
         public BaseAddressElementCollection()

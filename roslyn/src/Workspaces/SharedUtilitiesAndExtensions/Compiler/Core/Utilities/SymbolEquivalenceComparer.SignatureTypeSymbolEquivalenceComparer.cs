@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial class SymbolEquivalenceComparer
+    partial internal class SymbolEquivalenceComparer
     {
         internal class SignatureTypeSymbolEquivalenceComparer : IEqualityComparer<ITypeSymbol?>
         {

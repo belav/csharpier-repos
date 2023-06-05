@@ -8,39 +8,65 @@ using System.Collections.Immutable;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct MethodProxy : IMemberProxy
+    partial internal readonly struct MethodProxy : IMemberProxy
     {
         // Currently this only needs to work on non-nested, non-generic types.
         // The format of the fullTypeName parameter is 'namespace.typename', so for example 'System.Reflection.Assembly'
-        internal partial bool IsDeclaredOnType(string fullTypeName);
+        partial
+        // Currently this only needs to work on non-nested, non-generic types.
+        // The format of the fullTypeName parameter is 'namespace.typename', so for example 'System.Reflection.Assembly'
+        internal bool IsDeclaredOnType(string fullTypeName);
 
         /// <summary>
         /// Returns the number of the parameters in the 'parameters' metadata section. This should map directly to the number of parameters in the C# source declaration as well.
         /// </summary>
-        internal partial int GetMetadataParametersCount();
+        partial
+        /// <summary>
+        /// Returns the number of the parameters in the 'parameters' metadata section. This should map directly to the number of parameters in the C# source declaration as well.
+        /// </summary>
+        internal int GetMetadataParametersCount();
 
         /// <summary>
         /// Returns true if the method has parameters in the 'parameters' metadata section (i.e. has parameters besides the implicit 'this' parameter)
         /// </summary>
-        internal partial bool HasMetadataParameters();
+        partial
+        /// <summary>
+        /// Returns true if the method has parameters in the 'parameters' metadata section (i.e. has parameters besides the implicit 'this' parameter)
+        /// </summary>
+        internal bool HasMetadataParameters();
 
         /// <summary>
         /// Returns the number of parameters that are passed to the method in IL (including the implicit 'this' parameter).
         /// In pseudocode: <code>method.HasImplicitThis() ? 1 + MetadataParametersCount : MetadataParametersCount;</code>
         /// </summary>
-        internal partial int GetParametersCount();
+        partial
+        /// <summary>
+        /// Returns the number of parameters that are passed to the method in IL (including the implicit 'this' parameter).
+        /// In pseudocode: <code>method.HasImplicitThis() ? 1 + MetadataParametersCount : MetadataParametersCount;</code>
+        /// </summary>
+        internal int GetParametersCount();
 
         /// <summary>
         /// Returns a List of <see cref="ParameterProxy"/> representing the parameters the method takes, including the implicit 'this' parameters.
         /// </summary>
-        internal partial ParameterProxyEnumerable GetParameters();
+        partial
+        /// <summary>
+        /// Returns a List of <see cref="ParameterProxy"/> representing the parameters the method takes, including the implicit 'this' parameters.
+        /// </summary>
+        internal ParameterProxyEnumerable GetParameters();
 
         /// <summary>
         /// Returns the ParameterProxy corresponding to the parameter at <paramref name="index"/>, and throws if the index is out of bounds for the method.
         /// <paramref name="index"/> is the index of the parameters as they are passed to the method, with 0 being the implicit this parameter if it exists.
         /// See <see cref="ParameterIndex"/> for more info.
         /// </summary>
-        internal partial ParameterProxy GetParameter(ParameterIndex index);
+        partial
+        /// <summary>
+        /// Returns the ParameterProxy corresponding to the parameter at <paramref name="index"/>, and throws if the index is out of bounds for the method.
+        /// <paramref name="index"/> is the index of the parameters as they are passed to the method, with 0 being the implicit this parameter if it exists.
+        /// See <see cref="ParameterIndex"/> for more info.
+        /// </summary>
+        internal ParameterProxy GetParameter(ParameterIndex index);
 
         /// <summary>
         /// Returns true if the 'parameters' metadata section has <paramref name="parameterCount"/> number of parameters.
@@ -56,16 +82,16 @@ namespace ILLink.Shared.TypeSystemProxy
             (int)parameterIndex < GetParametersCount()
             && GetParameter(parameterIndex).IsTypeOf(fullTypeName);
 
-        internal partial bool HasGenericParameters();
+        partial internal bool HasGenericParameters();
 
-        internal partial bool HasGenericParametersCount(int genericParameterCount);
+        partial internal bool HasGenericParametersCount(int genericParameterCount);
 
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters();
+        partial internal ImmutableArray<GenericParameterProxy> GetGenericParameters();
 
-        internal partial bool IsStatic();
+        partial internal bool IsStatic();
 
-        internal partial bool HasImplicitThis();
+        partial internal bool HasImplicitThis();
 
-        internal partial bool ReturnsVoid();
+        partial internal bool ReturnsVoid();
     }
 }

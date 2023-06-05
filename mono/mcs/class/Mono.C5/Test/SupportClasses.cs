@@ -452,7 +452,7 @@ namespace C5UnitTests
 
     public class CHC
     {
-        static public int unsequencedhashcode(params int[] a)
+        public static int unsequencedhashcode(params int[] a)
         {
             int h = 0;
             foreach (int i in a)
@@ -464,7 +464,7 @@ namespace C5UnitTests
             return h;
         }
 
-        static public int sequencedhashcode(params int[] a)
+        public static int sequencedhashcode(params int[] a)
         {
             int h = 0;
             foreach (int i in a)

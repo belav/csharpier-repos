@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.RegularExpressions
 {
-    public partial class Regex
+    partial public class Regex
     {
         /// <summary>
         /// Searches the input string for one or more occurrences of the text supplied in the given pattern.

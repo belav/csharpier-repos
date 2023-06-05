@@ -44,7 +44,7 @@ using System.Runtime.CompilerServices;
 namespace System.Security.Cryptography
 {
     [ComVisible(true)]
-    public partial class CryptoConfig
+    partial public class CryptoConfig
     {
         public static void AddOID(string oid, params string[] names)
         {

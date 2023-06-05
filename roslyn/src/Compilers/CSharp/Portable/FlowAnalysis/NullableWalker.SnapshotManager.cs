@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class NullableWalker
+    partial internal sealed class NullableWalker
     {
 #nullable enable
         internal sealed class SnapshotManager

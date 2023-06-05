@@ -451,7 +451,9 @@ namespace System.Runtime.Serialization
             Safe = "Does not let caller influence isNonAttributedType calculation; no harm in leaking value."
         )]
         // check whether a corresponding update is required in DataContractCriticalHelper.CreateDataContract
-        static internal bool IsNonAttributedTypeValidForSerialization(Type type)
+        internal
+        // check whether a corresponding update is required in DataContractCriticalHelper.CreateDataContract
+        static bool IsNonAttributedTypeValidForSerialization(Type type)
         {
             if (type.IsArray)
                 return false;

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
-internal abstract partial class AbstractVirtualCharService : IVirtualCharService
+partial internal abstract class AbstractVirtualCharService : IVirtualCharService
 {
     public abstract bool TryGetEscapeCharacter(VirtualChar ch, out char escapedChar);
 

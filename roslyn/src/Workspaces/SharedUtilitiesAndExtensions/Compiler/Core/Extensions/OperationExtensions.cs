@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal static partial class OperationExtensions
+    partial internal static class OperationExtensions
     {
         public static bool IsTargetOfObjectMemberInitializer(this IOperation operation) =>
             operation.Parent is IAssignmentOperation assignmentOperation

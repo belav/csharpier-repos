@@ -4,7 +4,7 @@
 
 namespace System.Web.Services
 {
-    static partial class Res
+    partial static class Res
     {
         public static string GetString(string name)
         {

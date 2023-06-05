@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
     >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
-    public partial class UseConditionalExpressionForAssignmentTests
+    partial public class UseConditionalExpressionForAssignmentTests
     {
         private static async Task TestMissingAsync(
             string testCode,

@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public abstract partial class TypeDeclarationSyntax
+    partial public abstract class TypeDeclarationSyntax
     {
         public int Arity
         {
@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public static partial class SyntaxFactory
+    partial public static class SyntaxFactory
     {
         internal static SyntaxKind GetTypeDeclarationKeywordKind(DeclarationKind kind)
         {

@@ -11,11 +11,12 @@ using System.Text;
 
 namespace System.Diagnostics
 {
+    partial
     /// <summary>
     /// Class which represents a description of a stack trace
     /// There is no good reason for the methods of this class to be virtual.
     /// </summary>
-    public partial class StackTrace
+    public class StackTrace
     {
         public const int METHODS_TO_SKIP = 0;
 

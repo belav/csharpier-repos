@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace System.IO.Compression
 {
+    partial
     // DeflateManagedStream supports decompression of Deflate64 format only.
-    internal sealed partial class DeflateManagedStream : Stream
+    internal sealed class DeflateManagedStream : Stream
     {
         internal const int DefaultBufferSize = 8192;
 

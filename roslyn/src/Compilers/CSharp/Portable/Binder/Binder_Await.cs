@@ -12,10 +12,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This portion of the binder converts an AwaitExpressionSyntax into a BoundExpression
     /// </summary>
-    internal partial class Binder
+    internal class Binder
     {
         private BoundExpression BindAwait(
             AwaitExpressionSyntax node,

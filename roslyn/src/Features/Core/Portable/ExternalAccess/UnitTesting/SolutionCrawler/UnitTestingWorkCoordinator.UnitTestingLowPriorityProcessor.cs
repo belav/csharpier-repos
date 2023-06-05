@@ -15,11 +15,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 {
-    internal sealed partial class UnitTestingSolutionCrawlerRegistrationService
+    partial internal sealed class UnitTestingSolutionCrawlerRegistrationService
     {
-        internal sealed partial class UnitTestingWorkCoordinator
+        partial internal sealed class UnitTestingWorkCoordinator
         {
-            private sealed partial class UnitTestingIncrementalAnalyzerProcessor
+            partial private sealed class UnitTestingIncrementalAnalyzerProcessor
             {
                 private sealed class UnitTestingLowPriorityProcessor
                     : AbstractUnitTestingPriorityProcessor

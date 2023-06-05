@@ -8,10 +8,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Threading
 {
+    partial
     /// <summary>
     /// A LIFO semaphore implemented using the PAL's semaphore with uninterruptible waits.
     /// </summary>
-    internal sealed partial class LowLevelLifoSemaphore : IDisposable
+    internal sealed class LowLevelLifoSemaphore : IDisposable
     {
         private Semaphore? _semaphore;
 
@@ -34,7 +35,7 @@ namespace System.Threading
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "WaitHandle_CorWaitOnePrioritizedNative")]
-        private static partial int WaitNative(SafeWaitHandle handle, int timeoutMs);
+        partial private static int WaitNative(SafeWaitHandle handle, int timeoutMs);
 
         public void ReleaseCore(int count)
         {

@@ -16,7 +16,7 @@ using TypeOfRepo;
 
 namespace TypeOfRepo
 {
-    public partial class TypeOf
+    partial public class TypeOf
     {
         static bool s_typeOfForPartialUniversalGenericsTests = InitPartialUniversalGenericTypes();
 
@@ -357,7 +357,7 @@ namespace PartialUniversalGen
         static volatile object s_o;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static public object UnwrapWrapperGeneric<T, U>(T t)
+        public static object UnwrapWrapperGeneric<T, U>(T t)
         {
             // Some logic that will force the use of the method's generic dictionary.
             s_o = t;
@@ -385,7 +385,7 @@ namespace PartialUniversalGen
     public class HandleWrapperGenericMethodClass2
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static public object UnwrapWrapperGeneric<T, U>(T t)
+        public static object UnwrapWrapperGeneric<T, U>(T t)
         {
             // Some logic that will force the use of the method's generic dictionary.
             object o = Activator.CreateInstance<T>();

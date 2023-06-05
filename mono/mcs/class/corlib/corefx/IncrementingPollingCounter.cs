@@ -4,7 +4,7 @@
 
 namespace System.Diagnostics.Tracing
 {
-    public partial class IncrementingPollingCounter : DiagnosticCounter
+    partial public class IncrementingPollingCounter : DiagnosticCounter
     {
         public IncrementingPollingCounter(
             string name,

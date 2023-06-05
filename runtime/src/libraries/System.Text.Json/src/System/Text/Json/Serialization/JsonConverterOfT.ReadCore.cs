@@ -3,7 +3,7 @@
 
 namespace System.Text.Json.Serialization
 {
-    public partial class JsonConverter<T>
+    partial public class JsonConverter<T>
     {
         internal T? ReadCore(
             ref Utf8JsonReader reader,

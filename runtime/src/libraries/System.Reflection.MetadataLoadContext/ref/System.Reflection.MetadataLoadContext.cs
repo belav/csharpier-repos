@@ -6,7 +6,7 @@
 
 namespace System.Reflection
 {
-    public abstract partial class MetadataAssemblyResolver
+    partial public abstract class MetadataAssemblyResolver
     {
         protected MetadataAssemblyResolver() { }
 
@@ -16,7 +16,7 @@ namespace System.Reflection
         );
     }
 
-    public sealed partial class MetadataLoadContext : System.IDisposable
+    partial public sealed class MetadataLoadContext : System.IDisposable
     {
         public MetadataLoadContext(
             System.Reflection.MetadataAssemblyResolver resolver,
@@ -63,7 +63,7 @@ namespace System.Reflection
         }
     }
 
-    public partial class PathAssemblyResolver : System.Reflection.MetadataAssemblyResolver
+    partial public class PathAssemblyResolver : System.Reflection.MetadataAssemblyResolver
     {
         public PathAssemblyResolver(System.Collections.Generic.IEnumerable<string> assemblyPaths)
         { }

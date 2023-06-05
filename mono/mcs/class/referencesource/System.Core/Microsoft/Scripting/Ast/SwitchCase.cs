@@ -86,7 +86,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="T:SwitchCase">SwitchCase</see> for use in a <see cref="SwitchExpression"/>.

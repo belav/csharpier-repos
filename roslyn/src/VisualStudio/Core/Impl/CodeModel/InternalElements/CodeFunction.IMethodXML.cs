@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.InternalElements
 {
-    public partial class CodeFunction
+    partial public class CodeFunction
     {
         public string GetXML()
         {

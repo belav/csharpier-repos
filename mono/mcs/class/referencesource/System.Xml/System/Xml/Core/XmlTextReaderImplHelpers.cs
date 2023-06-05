@@ -26,7 +26,7 @@ using BufferBuilder = System.Text.StringBuilder;
 
 namespace System.Xml
 {
-    internal partial class XmlTextReaderImpl
+    partial internal class XmlTextReaderImpl
     {
         //
         // ParsingState
@@ -152,6 +152,7 @@ namespace System.Xml
             }
         }
 
+        partial
 #if !SILVERLIGHT // Needed only for XmlTextReader
         //
         // NoNamespaceManager
@@ -204,16 +205,17 @@ namespace System.Xml
                 return false;
             }
         }
+        partial
 #endif
 
         //
         // DtdParserProxy: IDtdParserAdapter proxy for XmlTextReaderImpl
         //
 #if SILVERLIGHT
-        internal partial class DtdParserProxy : IDtdParserAdapter
+        internal class DtdParserProxy : IDtdParserAdapter
         {
 #else
-        internal partial class DtdParserProxy : IDtdParserAdapterV1
+        internal class DtdParserProxy : IDtdParserAdapterV1
         {
 #endif
 

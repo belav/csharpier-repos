@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests
 {
+    partial
     /// <summary>
     /// Globalization
     /// </summary>
-    public static partial class GlobalizationTests
+    public static class GlobalizationTests
     {
         /// <summary>
         /// surrogates : xpath testing, return 7 nodes

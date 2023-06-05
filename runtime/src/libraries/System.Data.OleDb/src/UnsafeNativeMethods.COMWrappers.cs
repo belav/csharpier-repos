@@ -6,14 +6,14 @@ using System.Runtime.InteropServices;
 
 namespace System.Data.Common
 {
-    internal static partial class UnsafeNativeMethods
+    partial internal static class UnsafeNativeMethods
     {
         //
         // Oleaut32
         //
 
         [LibraryImport(Interop.Libraries.OleAut32)]
-        internal static unsafe partial OleDbHResult GetErrorInfo(
+        partial internal static unsafe OleDbHResult GetErrorInfo(
             int dwReserved,
             System.IntPtr* ppIErrorInfo
         );

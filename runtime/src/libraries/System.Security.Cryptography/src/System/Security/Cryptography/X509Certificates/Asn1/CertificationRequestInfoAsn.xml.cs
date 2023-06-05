@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct CertificationRequestInfoAsn
+    partial internal struct CertificationRequestInfoAsn
     {
         internal System.Numerics.BigInteger Version;
         internal ReadOnlyMemory<byte> Subject;

@@ -54,7 +54,7 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         }
     }
 
-    public partial class ECDiffieHellmanFactory
+    partial public class ECDiffieHellmanFactory
     {
         private static readonly IECDiffieHellmanProvider s_provider = new ECDiffieHellmanProvider();
     }

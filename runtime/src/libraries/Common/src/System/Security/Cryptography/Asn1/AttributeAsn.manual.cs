@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography.Asn1
 {
-    internal partial struct AttributeAsn
+    partial internal struct AttributeAsn
     {
         public AttributeAsn(AsnEncodedData attribute)
         {

@@ -126,9 +126,9 @@ namespace System.Security.Cryptography.X509Certificates
 
 namespace System.Net.Http
 {
-    internal partial class X509ResourceClient
+    partial internal class X509ResourceClient
     {
-        static partial void ReportNoClient()
+        partial static void ReportNoClient()
         {
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
             {
@@ -136,7 +136,7 @@ namespace System.Net.Http
             }
         }
 
-        static partial void ReportNegativeTimeout()
+        partial static void ReportNegativeTimeout()
         {
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
             {
@@ -144,7 +144,7 @@ namespace System.Net.Http
             }
         }
 
-        static partial void ReportDownloadStart(long totalMillis, string uri)
+        partial static void ReportDownloadStart(long totalMillis, string uri)
         {
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
             {
@@ -152,7 +152,7 @@ namespace System.Net.Http
             }
         }
 
-        static partial void ReportDownloadStop(int bytesDownloaded)
+        partial static void ReportDownloadStop(int bytesDownloaded)
         {
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
             {
@@ -160,7 +160,7 @@ namespace System.Net.Http
             }
         }
 
-        static partial void ReportRedirectsExceeded()
+        partial static void ReportRedirectsExceeded()
         {
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
             {
@@ -168,7 +168,7 @@ namespace System.Net.Http
             }
         }
 
-        static partial void ReportRedirected(Uri newUri)
+        partial static void ReportRedirected(Uri newUri)
         {
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
             {
@@ -176,7 +176,7 @@ namespace System.Net.Http
             }
         }
 
-        static partial void ReportRedirectNotFollowed(Uri redirectUri)
+        partial static void ReportRedirectNotFollowed(Uri redirectUri)
         {
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
             {

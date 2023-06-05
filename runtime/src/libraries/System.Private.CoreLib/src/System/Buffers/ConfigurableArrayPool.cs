@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace System.Buffers
 {
-    internal sealed partial class ConfigurableArrayPool<T> : ArrayPool<T>
+    partial internal sealed class ConfigurableArrayPool<T> : ArrayPool<T>
     {
         /// <summary>The default maximum length of each array in the pool (2^20).</summary>
         private const int DefaultMaxArrayLength = 1024 * 1024;

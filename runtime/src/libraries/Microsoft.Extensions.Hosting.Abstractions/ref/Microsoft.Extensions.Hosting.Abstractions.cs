@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class ServiceCollectionHostedServiceExtensions
+    partial public static class ServiceCollectionHostedServiceExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddHostedService<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -32,7 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
 namespace Microsoft.Extensions.Hosting
 {
-    public abstract partial class BackgroundService
+    partial public abstract class BackgroundService
         : Microsoft.Extensions.Hosting.IHostedService,
             System.IDisposable
     {
@@ -67,21 +67,21 @@ namespace Microsoft.Extensions.Hosting
     [System.ObsoleteAttribute(
         "EnvironmentName has been deprecated. Use Microsoft.Extensions.Hosting.Environments instead."
     )]
-    public static partial class EnvironmentName
+    partial public static class EnvironmentName
     {
         public static readonly string Development;
         public static readonly string Production;
         public static readonly string Staging;
     }
 
-    public static partial class Environments
+    partial public static class Environments
     {
         public static readonly string Development;
         public static readonly string Production;
         public static readonly string Staging;
     }
 
-    public sealed partial class HostAbortedException : System.Exception
+    partial public sealed class HostAbortedException : System.Exception
     {
         public HostAbortedException() { }
 
@@ -90,7 +90,7 @@ namespace Microsoft.Extensions.Hosting
         public HostAbortedException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class HostBuilderContext
+    partial public class HostBuilderContext
     {
         public HostBuilderContext(System.Collections.Generic.IDictionary<object, object> properties)
         { }
@@ -111,14 +111,14 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public static partial class HostDefaults
+    partial public static class HostDefaults
     {
         public static readonly string ApplicationKey;
         public static readonly string ContentRootKey;
         public static readonly string EnvironmentKey;
     }
 
-    public static partial class HostEnvironmentEnvExtensions
+    partial public static class HostEnvironmentEnvExtensions
     {
         public static bool IsDevelopment(
             this Microsoft.Extensions.Hosting.IHostEnvironment hostEnvironment
@@ -150,7 +150,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public static partial class HostingAbstractionsHostBuilderExtensions
+    partial public static class HostingAbstractionsHostBuilderExtensions
     {
         public static Microsoft.Extensions.Hosting.IHost Start(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder
@@ -169,7 +169,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public static partial class HostingAbstractionsHostExtensions
+    partial public static class HostingAbstractionsHostExtensions
     {
         public static void Run(this Microsoft.Extensions.Hosting.IHost host) { }
 
@@ -202,7 +202,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public static partial class HostingEnvironmentExtensions
+    partial public static class HostingEnvironmentExtensions
     {
         public static bool IsDevelopment(
             this Microsoft.Extensions.Hosting.IHostingEnvironment hostingEnvironment
@@ -237,7 +237,7 @@ namespace Microsoft.Extensions.Hosting
     [System.ObsoleteAttribute(
         "IApplicationLifetime has been deprecated. Use Microsoft.Extensions.Hosting.IHostApplicationLifetime instead."
     )]
-    public partial interface IApplicationLifetime
+    partial public interface IApplicationLifetime
     {
         System.Threading.CancellationToken ApplicationStarted { get; }
         System.Threading.CancellationToken ApplicationStopped { get; }
@@ -245,7 +245,7 @@ namespace Microsoft.Extensions.Hosting
         void StopApplication();
     }
 
-    public partial interface IHost : System.IDisposable
+    partial public interface IHost : System.IDisposable
     {
         System.IServiceProvider Services { get; }
         System.Threading.Tasks.Task StartAsync(
@@ -258,7 +258,7 @@ namespace Microsoft.Extensions.Hosting
         );
     }
 
-    public partial interface IHostApplicationLifetime
+    partial public interface IHostApplicationLifetime
     {
         System.Threading.CancellationToken ApplicationStarted { get; }
         System.Threading.CancellationToken ApplicationStopped { get; }
@@ -266,7 +266,7 @@ namespace Microsoft.Extensions.Hosting
         void StopApplication();
     }
 
-    public partial interface IHostBuilder
+    partial public interface IHostBuilder
     {
         System.Collections.Generic.IDictionary<object, object> Properties { get; }
         Microsoft.Extensions.Hosting.IHost Build();
@@ -304,7 +304,7 @@ namespace Microsoft.Extensions.Hosting
             where TContainerBuilder : notnull;
     }
 
-    public partial interface IHostedService
+    partial public interface IHostedService
     {
         System.Threading.Tasks.Task StartAsync(
             System.Threading.CancellationToken cancellationToken
@@ -312,7 +312,7 @@ namespace Microsoft.Extensions.Hosting
         System.Threading.Tasks.Task StopAsync(System.Threading.CancellationToken cancellationToken);
     }
 
-    public partial interface IHostEnvironment
+    partial public interface IHostEnvironment
     {
         string ApplicationName { get; set; }
         Microsoft.Extensions.FileProviders.IFileProvider ContentRootFileProvider { get; set; }
@@ -323,7 +323,7 @@ namespace Microsoft.Extensions.Hosting
     [System.ObsoleteAttribute(
         "IHostingEnvironment has been deprecated. Use Microsoft.Extensions.Hosting.IHostEnvironment instead."
     )]
-    public partial interface IHostingEnvironment
+    partial public interface IHostingEnvironment
     {
         string ApplicationName { get; set; }
         Microsoft.Extensions.FileProviders.IFileProvider ContentRootFileProvider { get; set; }
@@ -331,7 +331,7 @@ namespace Microsoft.Extensions.Hosting
         string EnvironmentName { get; set; }
     }
 
-    public partial interface IHostLifetime
+    partial public interface IHostLifetime
     {
         System.Threading.Tasks.Task StopAsync(System.Threading.CancellationToken cancellationToken);
         System.Threading.Tasks.Task WaitForStartAsync(

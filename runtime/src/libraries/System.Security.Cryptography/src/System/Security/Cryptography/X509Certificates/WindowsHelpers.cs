@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Internal.Cryptography
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
         /// <summary>
         /// Convert each Oid's value to an ASCII string, then create an unmanaged array of "numOids" LPSTR pointers, one for each Oid.

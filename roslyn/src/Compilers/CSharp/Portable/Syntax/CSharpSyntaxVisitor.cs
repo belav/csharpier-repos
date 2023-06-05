@@ -4,6 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Represents a <see cref="CSharpSyntaxNode"/> visitor that visits only the single CSharpSyntaxNode
     /// passed into its Visit method and produces
@@ -12,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <typeparam name="TResult">
     /// The type of the return value this visitor's Visit method.
     /// </typeparam>
-    public abstract partial class CSharpSyntaxVisitor<TResult>
+    public abstract class CSharpSyntaxVisitor<TResult>
     {
         public virtual TResult? Visit(SyntaxNode? node)
         {
@@ -31,11 +32,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
+    partial
     /// <summary>
     /// Represents a <see cref="CSharpSyntaxNode"/> visitor that visits only the single CSharpSyntaxNode
     /// passed into its Visit method.
     /// </summary>
-    public abstract partial class CSharpSyntaxVisitor
+    public abstract class CSharpSyntaxVisitor
     {
         public virtual void Visit(SyntaxNode? node)
         {

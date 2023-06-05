@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Notification
 {
-    internal abstract partial class AbstractGlobalOperationNotificationService
+    partial internal abstract class AbstractGlobalOperationNotificationService
         : IGlobalOperationNotificationService
     {
         private readonly object _gate = new();

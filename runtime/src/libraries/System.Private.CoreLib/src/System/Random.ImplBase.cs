@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public partial class Random
+    partial public class Random
     {
         /// <summary>Base type for all generator implementations that plug into the base Random.</summary>
         internal abstract class ImplBase

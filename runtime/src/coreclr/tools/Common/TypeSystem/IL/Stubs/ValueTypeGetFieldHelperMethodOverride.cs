@@ -7,12 +7,13 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Synthetic method override of "int ValueType.__GetFieldHelper(Int32, out EETypePtr)". This method is injected
     /// into all value types that cannot have their Equals(object) and GetHashCode() methods operate on individual
     /// bytes. The purpose of the override is to provide access to the value types' fields and their types.
     /// </summary>
-    public sealed partial class ValueTypeGetFieldHelperMethodOverride : ILStubMethod
+    public sealed class ValueTypeGetFieldHelperMethodOverride : ILStubMethod
     {
         private DefType _owningType;
         private MethodSignature _signature;

@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     )]
     [ExtensionOrder(After = nameof(ExplicitInterfaceMemberCompletionProvider))]
     [Shared]
-    internal partial class ExplicitInterfaceTypeCompletionProvider
+    partial internal class ExplicitInterfaceTypeCompletionProvider
         : AbstractSymbolCompletionProvider<CSharpSyntaxContext>
     {
         [ImportingConstructor]

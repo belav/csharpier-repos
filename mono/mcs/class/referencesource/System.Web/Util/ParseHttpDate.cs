@@ -238,7 +238,30 @@ namespace System.Web.Util
             Johnl       24-Jan-1995     Modified from WWW library
         
         --*/
-        static internal DateTime UtcParse(string time)
+        internal
+        /*++
+        
+          Converts a string representation of a GMT time (three different
+          varieties) to an NT representation of a file time.
+        
+          We handle the following variations:
+        
+            Sun, 06 Nov 1994 08:49:37 GMT   (RFC 822 updated by RFC 1123)
+            Sunday, 06-Nov-94 08:49:37 GMT  (RFC 850)
+            Sun Nov 06 08:49:37 1994        (ANSI C's asctime() format
+        
+          Arguments:
+            time                String representation of time field
+        
+          Returns:
+            TRUE on success and FALSE on failure.
+        
+          History:
+        
+            Johnl       24-Jan-1995     Modified from WWW library
+        
+        --*/
+        static DateTime UtcParse(string time)
         {
             int i;
             int year,

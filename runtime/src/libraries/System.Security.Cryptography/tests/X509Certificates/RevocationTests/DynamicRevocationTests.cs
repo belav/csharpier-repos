@@ -15,7 +15,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
     )]
     [ConditionalClass(typeof(DynamicRevocationTests), nameof(SupportsDynamicRevocation))]
     [SkipOnPlatform(TestPlatforms.Browser, "Browser doesn't support X.509 certificates")]
-    public static partial class DynamicRevocationTests
+    partial public static class DynamicRevocationTests
     {
         // The CI machines are doing an awful lot of things at once, be generous with the timeout;
         internal static readonly TimeSpan s_urlRetrievalLimit = TimeSpan.FromSeconds(30);

@@ -3,7 +3,7 @@
 
 namespace System.Drawing.Text
 {
-    public partial class PrivateFontCollection
+    partial public class PrivateFontCollection
     {
         private void GdiAddFontFile(string filename)
         {

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct TbsCertificateAsn
+    partial internal struct TbsCertificateAsn
     {
         private static ReadOnlySpan<byte> DefaultVersion => new byte[] { 0x02, 0x01, 0x00 };
 

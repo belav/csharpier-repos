@@ -12,7 +12,7 @@ using static Microsoft.CodeAnalysis.Formatting.FormattingOptions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 {
-    internal partial class SplitStringLiteralCommandHandler
+    partial internal class SplitStringLiteralCommandHandler
     {
         private class SimpleStringSplitter : StringSplitter
         {

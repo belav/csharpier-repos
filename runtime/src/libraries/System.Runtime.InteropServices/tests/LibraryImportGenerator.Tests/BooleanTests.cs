@@ -12,87 +12,87 @@ namespace LibraryImportGenerator.IntegrationTests
     partial class NativeExportsNE
     {
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "bytebool_return_as_uint")]
-        public static partial uint ReturnByteBoolAsUInt([MarshalAs(UnmanagedType.U1)] bool input);
+        partial public static uint ReturnByteBoolAsUInt([MarshalAs(UnmanagedType.U1)] bool input);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "bytebool_return_as_uint")]
-        public static partial uint ReturnSByteBoolAsUInt([MarshalAs(UnmanagedType.I1)] bool input);
+        partial public static uint ReturnSByteBoolAsUInt([MarshalAs(UnmanagedType.I1)] bool input);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "variantbool_return_as_uint")]
-        public static partial uint ReturnVariantBoolAsUInt(
+        partial public static uint ReturnVariantBoolAsUInt(
             [MarshalAs(UnmanagedType.VariantBool)] bool input
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "winbool_return_as_uint")]
-        public static partial uint ReturnIntBoolAsUInt([MarshalAs(UnmanagedType.I4)] bool input);
+        partial public static uint ReturnIntBoolAsUInt([MarshalAs(UnmanagedType.I4)] bool input);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "winbool_return_as_uint")]
-        public static partial uint ReturnUIntBoolAsUInt([MarshalAs(UnmanagedType.U4)] bool input);
+        partial public static uint ReturnUIntBoolAsUInt([MarshalAs(UnmanagedType.U4)] bool input);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "winbool_return_as_uint")]
-        public static partial uint ReturnWinBoolAsUInt([MarshalAs(UnmanagedType.Bool)] bool input);
+        partial public static uint ReturnWinBoolAsUInt([MarshalAs(UnmanagedType.Bool)] bool input);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "winbool_return_as_uint")]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static partial bool ReturnUIntAsByteBool(uint input);
+        partial public static bool ReturnUIntAsByteBool(uint input);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "winbool_return_as_uint")]
         [return: MarshalAs(UnmanagedType.VariantBool)]
-        public static partial bool ReturnUIntAsVariantBool(uint input);
+        partial public static bool ReturnUIntAsVariantBool(uint input);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "winbool_return_as_uint")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool ReturnUIntAsWinBool(uint input);
+        partial public static bool ReturnUIntAsWinBool(uint input);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "uint_return_as_refbool")]
-        public static partial void ReturnUIntAsByteBool_Ref(
+        partial public static void ReturnUIntAsByteBool_Ref(
             uint input,
             [MarshalAs(UnmanagedType.U1)] ref bool res
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "uint_return_as_refbool")]
-        public static partial void ReturnUIntAsByteBool_Out(
+        partial public static void ReturnUIntAsByteBool_Out(
             uint input,
             [MarshalAs(UnmanagedType.U1)] out bool res
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "uint_return_as_refbool")]
-        public static partial void ReturnUIntAsByteBool_In(
+        partial public static void ReturnUIntAsByteBool_In(
             uint input,
             [MarshalAs(UnmanagedType.U1)] in bool res
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "uint_return_as_refvariantbool")]
-        public static partial void ReturnUIntAsVariantBool_Ref(
+        partial public static void ReturnUIntAsVariantBool_Ref(
             uint input,
             [MarshalAs(UnmanagedType.VariantBool)] ref bool res
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "uint_return_as_refvariantbool")]
-        public static partial void ReturnUIntAsVariantBool_Out(
+        partial public static void ReturnUIntAsVariantBool_Out(
             uint input,
             [MarshalAs(UnmanagedType.VariantBool)] out bool res
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "uint_return_as_refvariantbool")]
-        public static partial void ReturnUIntAsVariantBool_In(
+        partial public static void ReturnUIntAsVariantBool_In(
             uint input,
             [MarshalAs(UnmanagedType.VariantBool)] in bool res
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "uint_return_as_refwinbool")]
-        public static partial void ReturnUIntAsWinBool_Ref(
+        partial public static void ReturnUIntAsWinBool_Ref(
             uint input,
             [MarshalAs(UnmanagedType.Bool)] ref bool res
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "uint_return_as_refwinbool")]
-        public static partial void ReturnUIntAsWinBool_Out(
+        partial public static void ReturnUIntAsWinBool_Out(
             uint input,
             [MarshalAs(UnmanagedType.Bool)] out bool res
         );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "uint_return_as_refwinbool")]
-        public static partial void ReturnUIntAsWinBool_In(
+        partial public static void ReturnUIntAsWinBool_In(
             uint input,
             [MarshalAs(UnmanagedType.Bool)] in bool res
         );

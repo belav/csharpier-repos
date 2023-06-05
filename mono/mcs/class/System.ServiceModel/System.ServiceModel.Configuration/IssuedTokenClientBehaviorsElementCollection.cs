@@ -62,7 +62,7 @@ namespace System.ServiceModel.Configuration
         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
     )]
     [MonoTODO]
-    public sealed partial class IssuedTokenClientBehaviorsElementCollection
+    partial public sealed class IssuedTokenClientBehaviorsElementCollection
         : ServiceModelConfigurationElementCollection<IssuedTokenClientBehaviorsElement>,
             ICollection,
             IEnumerable

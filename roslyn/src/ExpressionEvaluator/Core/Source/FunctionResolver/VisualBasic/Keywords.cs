@@ -9,7 +9,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
 {
-    internal sealed partial class MemberSignatureParser
+    partial internal sealed class MemberSignatureParser
     {
         // From SyntaxFacts.GetReservedKeywordKinds(). (See
         // VisualBasicParsingTests.Keywords() which verifies the lists are in sync.)

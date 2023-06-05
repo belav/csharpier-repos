@@ -7,7 +7,7 @@ using System;
 
 namespace System
 {
-    internal static partial class AppContextDefaultValues
+    partial internal static class AppContextDefaultValues
     {
         internal static readonly string SwitchNoAsyncCurrentCulture =
             "Switch.System.Globalization.NoAsyncCurrentCulture";
@@ -28,9 +28,15 @@ namespace System
         // to it from the code
         // We are going to have an implementation of this method for the Desktop platform that will read the overrides from app.config, registry and
         // the shim database. Additional implementation can be provided for other platforms.
-        static partial void PopulateOverrideValuesPartial();
+        partial
+        // This is a partial method. Platforms can provide an implementation of it that will set override values
+        // from whatever mechanism is available on that platform. If no implementation is provided, the compiler is going to remove the calls
+        // to it from the code
+        // We are going to have an implementation of this method for the Desktop platform that will read the overrides from app.config, registry and
+        // the shim database. Additional implementation can be provided for other platforms.
+        static void PopulateOverrideValuesPartial();
 
-        static partial void PopulateDefaultValuesPartial(
+        partial static void PopulateDefaultValuesPartial(
             string platformIdentifier,
             string profile,
             int version

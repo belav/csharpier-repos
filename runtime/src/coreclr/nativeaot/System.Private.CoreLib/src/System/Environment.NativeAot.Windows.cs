@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         public static long TickCount64 => (long)Interop.Kernel32.GetTickCount64();
 

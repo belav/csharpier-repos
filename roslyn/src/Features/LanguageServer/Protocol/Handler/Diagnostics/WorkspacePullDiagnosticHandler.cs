@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 {
     [Method(VSInternalMethods.WorkspacePullDiagnosticName)]
-    internal sealed partial class WorkspacePullDiagnosticHandler
+    partial internal sealed class WorkspacePullDiagnosticHandler
         : AbstractPullDiagnosticHandler<
             VSInternalWorkspaceDiagnosticsParams,
             VSInternalWorkspaceDiagnosticReport[],

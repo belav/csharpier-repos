@@ -8,7 +8,7 @@ namespace System.Security
         DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
         UrlFormat = Obsoletions.SharedUrlFormat
     )]
-    public partial interface IPermission : ISecurityEncodable
+    partial public interface IPermission : ISecurityEncodable
     {
         IPermission Copy();
         void Demand();

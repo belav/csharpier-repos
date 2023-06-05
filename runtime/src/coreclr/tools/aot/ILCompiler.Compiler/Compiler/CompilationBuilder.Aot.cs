@@ -5,7 +5,7 @@ using System;
 
 namespace ILCompiler
 {
-    public partial class CompilationBuilder
+    partial public class CompilationBuilder
     {
         private PreinitializationManager _preinitializationManager;
 

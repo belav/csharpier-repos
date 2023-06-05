@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Operations;
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
+partial public class RouteHandlerAnalyzer : DiagnosticAnalyzer
 {
     private const int DelegateParameterOrdinal = 2;
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =

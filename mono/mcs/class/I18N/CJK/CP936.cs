@@ -30,13 +30,13 @@ namespace I18N.CJK
 
 #if !DISABLE_UNSAFE
         // Get the bytes that result from encoding a character buffer.
-        public unsafe override int GetByteCountImpl(char* chars, int count)
+        public override unsafe int GetByteCountImpl(char* chars, int count)
         {
             return GetBytesImpl(chars, count, null, 0);
         }
 
         // Get the bytes that result from encoding a character buffer.
-        public unsafe override int GetBytesImpl(
+        public override unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,

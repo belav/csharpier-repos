@@ -1108,7 +1108,7 @@ namespace Microsoft.SqlServer.Server
             return TraceString(0);
         }
 
-        virtual internal string TraceString(int indent)
+        internal virtual string TraceString(int indent)
         {
             string indentStr = new String(' ', indent);
             string fields = String.Empty;

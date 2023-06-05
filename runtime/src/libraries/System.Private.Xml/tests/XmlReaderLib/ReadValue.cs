@@ -12,7 +12,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCReadValue : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadValue : TCXMLReaderBaseGeneral
     {
         public const string ST_TEST_NAME = "CHARS1";
         public const string ST_GEN_ENT_NAME = "e1";

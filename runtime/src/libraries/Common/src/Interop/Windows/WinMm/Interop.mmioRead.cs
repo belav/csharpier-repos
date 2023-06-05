@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         [StructLayout(LayoutKind.Sequential)]
         internal sealed class WAVEFORMATEX
@@ -25,7 +25,7 @@ internal static partial class Interop
         internal const int WAVE_FORMAT_IEEE_FLOAT = 0x0003;
 
         [LibraryImport(Libraries.WinMM)]
-        internal static partial int mmioRead(
+        partial internal static int mmioRead(
             IntPtr hMIO,
             [MarshalAs(UnmanagedType.LPArray)] byte[] wf,
             int cch

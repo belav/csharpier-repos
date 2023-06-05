@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winspool
+    partial internal static class Winspool
     {
         [LibraryImport(
             Libraries.Winspool,
@@ -14,7 +14,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DeviceCapabilities(
+        partial internal static int DeviceCapabilities(
             string pDevice,
             string pPort,
             short fwCapabilities,

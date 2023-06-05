@@ -7,7 +7,7 @@ using ProjectUtils = Microsoft.VisualStudio.IntegrationTest.Utilities.Common.Pro
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
-    public partial class SolutionExplorer_OutOfProc : OutOfProcComponent
+    partial public class SolutionExplorer_OutOfProc : OutOfProcComponent
     {
         public class Verifier
         {

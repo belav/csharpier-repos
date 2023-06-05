@@ -43,7 +43,7 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 namespace Roslyn.Test.Utilities
 {
     [UseExportProvider]
-    public abstract partial class AbstractLanguageServerProtocolTests
+    partial public abstract class AbstractLanguageServerProtocolTests
     {
         private protected readonly ILspServiceLogger TestOutputLspLogger;
 

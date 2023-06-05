@@ -7,12 +7,13 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.RegularExpressions
 {
+    partial
     /// <summary>
     /// This class will perform fast lookups for case-insensitive searches in order to find which characters should
     /// be considered equivalent. The mappings are generated based on Unicode ToLower() mappings and we generate the table
     /// using the GenerateRegexCasingTable program located under the Tools folder for this library.
     /// </summary>
-    internal static partial class RegexCaseEquivalences
+    internal static class RegexCaseEquivalences
     {
         public const int CharactersPerRange = 1024;
 

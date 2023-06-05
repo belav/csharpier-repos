@@ -5,9 +5,10 @@ using System.Diagnostics;
 
 namespace System
 {
+    partial
     // The class designed as to keep minimal the working set of Uri class.
     // The idea is to stay with static helper methods and strings
-    internal static partial class IPv6AddressHelper
+    internal static class IPv6AddressHelper
     {
         internal static unsafe string ParseCanonicalName(
             string str,

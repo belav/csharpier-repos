@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class ArrayMethod
+    partial public class ArrayMethod
     {
         public override string DiagnosticName
         {

@@ -162,7 +162,7 @@ namespace System.DirectoryServices.Protocols
         public IntPtr Upper;
     }
 
-    public partial class LdapSessionOptions
+    partial public class LdapSessionOptions
     {
         private readonly LdapConnection _connection;
         private ReferralCallback _callbackRoutine = new ReferralCallback();

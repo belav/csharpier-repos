@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-internal sealed partial class ClientErrorResultFilter : IAlwaysRunResultFilter, IOrderedFilter
+partial internal sealed class ClientErrorResultFilter : IAlwaysRunResultFilter, IOrderedFilter
 {
     internal const int FilterOrder = -2000;
     private readonly IClientErrorFactory _clientErrorFactory;
@@ -63,7 +63,7 @@ internal sealed partial class ClientErrorResultFilter : IAlwaysRunResultFilter, 
         context.Result = result;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             49,
@@ -71,7 +71,7 @@ internal sealed partial class ClientErrorResultFilter : IAlwaysRunResultFilter, 
             "Replacing {InitialActionResultType} with status code {StatusCode} with {ReplacedActionResultType}.",
             EventName = "ClientErrorResultFilter"
         )]
-        public static partial void TransformingClientError(
+        partial public static void TransformingClientError(
             ILogger logger,
             Type initialActionResultType,
             Type replacedActionResultType,

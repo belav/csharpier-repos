@@ -23,7 +23,7 @@ namespace System.Management.Instrumentation
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementEntityAttribute : Attribute
+    public sealed class ManagementEntityAttribute : Attribute
     {
         public ManagementEntityAttribute() { }
 
@@ -85,7 +85,7 @@ namespace System.Management.Instrumentation
 
     [AttributeUsage(AttributeTargets.Assembly)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class WmiConfigurationAttribute : Attribute
+    public sealed class WmiConfigurationAttribute : Attribute
     {
         private string _Scope = null;
         private string _SecurityRestriction = null;
@@ -207,7 +207,7 @@ namespace System.Management.Instrumentation
 
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementBindAttribute : ManagementNewInstanceAttribute
+    public sealed class ManagementBindAttribute : ManagementNewInstanceAttribute
     {
         /// <summary>
         /// Declares the type that the output should be
@@ -227,7 +227,7 @@ namespace System.Management.Instrumentation
 
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementCreateAttribute : ManagementNewInstanceAttribute
+    public sealed class ManagementCreateAttribute : ManagementNewInstanceAttribute
     {
         ///// <summary>
         ///// Declares the type that the output should be
@@ -244,7 +244,7 @@ namespace System.Management.Instrumentation
     ///
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementRemoveAttribute : ManagementMemberAttribute
+    public sealed class ManagementRemoveAttribute : ManagementMemberAttribute
     {
         /// <summary>
         /// Declares the type that the output should be
@@ -266,7 +266,7 @@ namespace System.Management.Instrumentation
     ///
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementEnumeratorAttribute : ManagementNewInstanceAttribute
+    public sealed class ManagementEnumeratorAttribute : ManagementNewInstanceAttribute
     {
         /*        /// <summary>
                 /// Declares the member as an enumerator for other classes.  The other
@@ -302,7 +302,7 @@ namespace System.Management.Instrumentation
     ///
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementProbeAttribute : ManagementMemberAttribute
+    public sealed class ManagementProbeAttribute : ManagementMemberAttribute
     {
         /// <summary>
         /// Declares the type that the output should be
@@ -336,7 +336,7 @@ namespace System.Management.Instrumentation
     ///
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementTaskAttribute : ManagementMemberAttribute
+    public sealed class ManagementTaskAttribute : ManagementMemberAttribute
     {
         public ManagementTaskAttribute() { }
 
@@ -370,7 +370,7 @@ namespace System.Management.Instrumentation
     ///
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementKeyAttribute : ManagementMemberAttribute
+    public sealed class ManagementKeyAttribute : ManagementMemberAttribute
     {
         public ManagementKeyAttribute() { }
     }
@@ -380,7 +380,7 @@ namespace System.Management.Instrumentation
         AllowMultiple = false
     )]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementReferenceAttribute : Attribute
+    public sealed class ManagementReferenceAttribute : Attribute
     {
         public ManagementReferenceAttribute() { }
 
@@ -408,7 +408,7 @@ namespace System.Management.Instrumentation
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementConfigurationAttribute : ManagementMemberAttribute
+    public sealed class ManagementConfigurationAttribute : ManagementMemberAttribute
     {
         /// <summary>
         /// Declares the type that the output should be
@@ -439,7 +439,7 @@ namespace System.Management.Instrumentation
 
     [AttributeUsage(AttributeTargets.Method)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementCommitAttribute : ManagementMemberAttribute { }
+    public sealed class ManagementCommitAttribute : ManagementMemberAttribute { }
 
     /// <summary>
     /// This attribute defines the naming (user friendly name) of method parameters
@@ -447,7 +447,7 @@ namespace System.Management.Instrumentation
     ///
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementNameAttribute : Attribute
+    public sealed class ManagementNameAttribute : Attribute
     {
         public ManagementNameAttribute(string name)
         {

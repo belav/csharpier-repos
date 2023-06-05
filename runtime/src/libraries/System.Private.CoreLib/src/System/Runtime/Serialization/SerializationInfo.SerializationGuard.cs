@@ -7,8 +7,9 @@ using System.Diagnostics;
 
 namespace System.Runtime.Serialization
 {
+    partial
     /// <summary>The structure for holding all of the data needed for object serialization and deserialization.</summary>
-    public sealed partial class SerializationInfo
+    public sealed class SerializationInfo
     {
         internal static AsyncLocal<bool> AsyncDeserializationInProgress { get; } =
             new AsyncLocal<bool>();

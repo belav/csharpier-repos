@@ -6,7 +6,7 @@
 
 namespace System.Xml.XPath
 {
-    public static partial class Extensions
+    partial public static class Extensions
     {
         public static System.Xml.XPath.XPathNavigator CreateNavigator(
             this System.Xml.Linq.XNode node
@@ -72,7 +72,7 @@ namespace System.Xml.XPath
         }
     }
 
-    public static partial class XDocumentExtensions
+    partial public static class XDocumentExtensions
     {
         public static System.Xml.XPath.IXPathNavigable ToXPathNavigable(
             this System.Xml.Linq.XNode node

@@ -87,7 +87,7 @@ namespace RabbitMQ.Client
         ///<summary>Regular expression used to extract the
         ///exchange-type, exchange-name and routing-key from a
         ///string.</summary>
-        public readonly static Regex PSEUDO_URI_PARSER = new Regex("^([^:]+)://([^/]*)/(.*)$");
+        public static readonly Regex PSEUDO_URI_PARSER = new Regex("^([^:]+)://([^/]*)/(.*)$");
 
         private string m_exchangeType;
         private string m_exchangeName;

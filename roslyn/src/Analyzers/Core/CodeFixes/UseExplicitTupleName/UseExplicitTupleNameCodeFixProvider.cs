@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
         ),
         Shared
     ]
-    internal partial class UseExplicitTupleNameCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    partial internal class UseExplicitTupleNameCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

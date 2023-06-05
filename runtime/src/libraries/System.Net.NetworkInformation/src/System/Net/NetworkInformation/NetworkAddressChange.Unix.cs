@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace System.Net.NetworkInformation
 {
+    partial
     // Linux implementation of NetworkChange
-    public partial class NetworkChange
+    public class NetworkChange
     {
         private static Socket? s_socket;
 

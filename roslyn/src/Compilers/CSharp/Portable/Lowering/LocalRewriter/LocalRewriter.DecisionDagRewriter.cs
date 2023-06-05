@@ -17,12 +17,13 @@ using static Microsoft.CodeAnalysis.CSharp.SyntheticBoundNodeFactory;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class LocalRewriter
+    partial internal class LocalRewriter
     {
+        partial
         /// <summary>
         /// A common base class for lowering a decision dag.
         /// </summary>
-        private abstract partial class DecisionDagRewriter : PatternLocalRewriter
+        private abstract class DecisionDagRewriter : PatternLocalRewriter
         {
             /// <summary>
             /// Get the builder for code in the given section of the switch.

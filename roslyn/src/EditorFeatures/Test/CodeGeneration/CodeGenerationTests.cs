@@ -34,7 +34,7 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 {
     [UseExportProvider]
-    public partial class CodeGenerationTests
+    partial public class CodeGenerationTests
     {
         internal static async Task TestAddNamespaceAsync(
             string initial,

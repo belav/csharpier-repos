@@ -55,8 +55,9 @@ namespace System.Reflection
     [ClassInterfaceAttribute(ClassInterfaceType.None)]
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
+    partial
 #if MOBILE
-    public sealed partial class AssemblyName : ICloneable, ISerializable, IDeserializationCallback
+    public sealed class AssemblyName : ICloneable, ISerializable, IDeserializationCallback
     {
 #else
     public sealed class AssemblyName
@@ -372,7 +373,7 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern unsafe static void get_public_token(byte* token, byte* pubkey, int len);
+        static extern unsafe void get_public_token(byte* token, byte* pubkey, int len);
 
         private unsafe byte[] ComputePublicKeyToken()
         {

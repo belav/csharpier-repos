@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 public unsafe struct ShadowParam
 {
     public int a;
-    public fixed int data[2];
+    fixed public int data[2];
     public int b;
 
     [MethodImpl(MethodImplOptions.NoInlining)]

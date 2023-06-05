@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
-    public static partial class Renamer
+    partial public static class Renamer
     {
         /// <summary>
         /// Action that will rename a type to match the current document name. Works by finding a type matching the origanl name of the document (case insensitive)

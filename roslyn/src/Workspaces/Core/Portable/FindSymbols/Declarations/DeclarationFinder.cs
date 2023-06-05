@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal static partial class DeclarationFinder
+    partial internal static class DeclarationFinder
     {
         private static async Task AddCompilationSourceDeclarationsWithNormalQueryAsync(
             Project project,

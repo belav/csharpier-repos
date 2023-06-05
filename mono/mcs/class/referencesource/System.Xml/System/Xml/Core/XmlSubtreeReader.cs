@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlSubtreeReader
+    partial internal sealed class XmlSubtreeReader
         : XmlWrappingReader,
             IXmlLineInfo,
             IXmlNamespaceResolver

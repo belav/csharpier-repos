@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonHelpers
+    partial internal static class JsonHelpers
     {
         /// <summary>
         /// Emulates Dictionary.TryAdd on netstandard.

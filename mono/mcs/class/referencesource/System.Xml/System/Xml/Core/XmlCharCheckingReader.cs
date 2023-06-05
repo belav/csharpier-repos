@@ -13,10 +13,11 @@ using System.Collections.Generic;
 
 namespace System.Xml
 {
+    partial
     //
     // XmlCharCheckingReaderWithNS
     //
-    internal partial class XmlCharCheckingReader : XmlWrappingReader
+    internal class XmlCharCheckingReader : XmlWrappingReader
     {
         //
         // Private types

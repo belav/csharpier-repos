@@ -5,7 +5,7 @@ using System.Security.Principal;
 
 namespace System.DirectoryServices.Protocols
 {
-    public partial class QuotaControl : DirectoryControl
+    partial public class QuotaControl : DirectoryControl
     {
         public SecurityIdentifier QuerySid
         {

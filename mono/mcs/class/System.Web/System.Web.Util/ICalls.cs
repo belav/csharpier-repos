@@ -38,20 +38,22 @@ namespace System.Web.Util
         ICalls() { }
 
 #if TARGET_DOTNET
-        static public string GetMachineConfigPath()
+        public
+#if TARGET_DOTNET
+        static string GetMachineConfigPath()
         {
             return System.Runtime.InteropServices.RuntimeEnvironment.SystemConfigurationFile;
         }
 #else
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static public string GetMachineConfigPath();
+        public static extern string GetMachineConfigPath();
 #endif
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static public string GetMachineInstallDirectory();
+        public static extern string GetMachineInstallDirectory();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static public bool GetUnmanagedResourcesPtr(
+        public static extern bool GetUnmanagedResourcesPtr(
             Assembly assembly,
             out IntPtr ptr,
             out int length

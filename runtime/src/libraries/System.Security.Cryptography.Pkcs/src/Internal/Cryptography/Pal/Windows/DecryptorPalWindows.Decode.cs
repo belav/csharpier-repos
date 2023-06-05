@@ -14,7 +14,7 @@ using static Interop.Crypt32;
 
 namespace Internal.Cryptography.Pal.Windows
 {
-    internal sealed partial class DecryptorPalWindows : DecryptorPal
+    partial internal sealed class DecryptorPalWindows : DecryptorPal
     {
         internal static DecryptorPalWindows Decode(
             ReadOnlySpan<byte> encodedMessage,

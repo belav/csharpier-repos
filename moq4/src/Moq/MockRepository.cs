@@ -3,6 +3,7 @@
 
 namespace Moq
 {
+    partial
     /// <summary>
     /// Utility repository class to use to construct multiple
     /// mocks when consistent verification is
@@ -89,7 +90,7 @@ namespace Moq
     /// </example>
     /// <seealso cref="MockBehavior"/>
 #pragma warning disable 618
-    public partial class MockRepository : MockFactory
+    public class MockRepository : MockFactory
     {
         /// <summary>
         /// Initializes the repository with the given <paramref name="defaultBehavior"/>

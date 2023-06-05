@@ -12,6 +12,6 @@ namespace System.Security.Cryptography
     public abstract class MaskGenerationMethod
     {
         [System.Runtime.InteropServices.ComVisible(true)]
-        abstract public byte[] GenerateMask(byte[] rgbSeed, int cbReturn);
+        public abstract byte[] GenerateMask(byte[] rgbSeed, int cbReturn);
     }
 }

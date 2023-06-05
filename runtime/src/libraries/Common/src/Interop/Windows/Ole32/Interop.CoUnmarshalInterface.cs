@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         [DllImport(Libraries.Ole32, PreserveSig = false)]
         internal static extern IntPtr CoUnmarshalInterface(

@@ -14,6 +14,7 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
+partial
 /// <summary>
 /// Types in the Microsoft.AspNetCore.Components.RenderTree are not recommended for use outside
 /// of the Blazor framework. These types will change in a future release.
@@ -21,7 +22,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree;
 //
 // Provides mechanisms for rendering hierarchies of <see cref="IComponent"/> instances,
 // dispatching events to them, and notifying when the user interface is being updated.
-public abstract partial class Renderer : IDisposable, IAsyncDisposable
+public abstract class Renderer : IDisposable, IAsyncDisposable
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly Dictionary<int, ComponentState> _componentStateById =

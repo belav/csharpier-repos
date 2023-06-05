@@ -12,11 +12,11 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal sealed partial class SolutionCrawlerRegistrationService
+    partial internal sealed class SolutionCrawlerRegistrationService
     {
-        internal sealed partial class WorkCoordinator
+        partial internal sealed class WorkCoordinator
         {
-            private sealed partial class IncrementalAnalyzerProcessor
+            partial private sealed class IncrementalAnalyzerProcessor
             {
                 private abstract class AbstractPriorityProcessor : GlobalOperationAwareIdleProcessor
                 {

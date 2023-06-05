@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace System.Security.Policy
 {
-    public sealed partial class Hash : EvidenceBase, System.Runtime.Serialization.ISerializable
+    partial public sealed class Hash : EvidenceBase, System.Runtime.Serialization.ISerializable
     {
         public Hash(System.Reflection.Assembly assembly) { }
 

@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-internal static partial class AnalyzerOptionsProviders
+partial internal static class AnalyzerOptionsProviders
 {
     public static async ValueTask<AnalyzerOptionsProvider> GetAnalyzerOptionsProviderAsync(
         this Document document,

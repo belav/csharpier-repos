@@ -10,8 +10,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+partial
 #pragma warning disable CA1852 // Seal internal types
-internal partial class RemoteRenderer : WebRenderer
+internal class RemoteRenderer : WebRenderer
 #pragma warning restore CA1852 // Seal internal types
 {
     private static readonly Task CanceledTask = Task.FromCanceled(
@@ -382,7 +383,7 @@ internal partial class RemoteRenderer : WebRenderer
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             100,
@@ -390,7 +391,7 @@ internal partial class RemoteRenderer : WebRenderer
             "Unhandled exception rendering component: {Message}",
             EventName = "ExceptionRenderingComponent"
         )]
-        private static partial void UnhandledExceptionRenderingComponent(
+        partial private static void UnhandledExceptionRenderingComponent(
             ILogger logger,
             string message,
             Exception exception
@@ -407,7 +408,7 @@ internal partial class RemoteRenderer : WebRenderer
             "Sending render batch {BatchId} of size {DataLength} bytes to client {ConnectionId}.",
             EventName = "BeginUpdateDisplayAsync"
         )]
-        public static partial void BeginUpdateDisplayAsync(
+        partial public static void BeginUpdateDisplayAsync(
             ILogger logger,
             long batchId,
             int dataLength,
@@ -420,7 +421,7 @@ internal partial class RemoteRenderer : WebRenderer
             "Buffering remote render because the client on connection {ConnectionId} is disconnected.",
             EventName = "SkipUpdateDisplayAsync"
         )]
-        public static partial void BufferingRenderDisconnectedClient(
+        partial public static void BufferingRenderDisconnectedClient(
             ILogger logger,
             string connectionId
         );
@@ -431,7 +432,7 @@ internal partial class RemoteRenderer : WebRenderer
             "Sending data for batch failed: {Message}",
             EventName = "SendBatchDataFailed"
         )]
-        private static partial void SendBatchDataFailed(
+        partial private static void SendBatchDataFailed(
             ILogger logger,
             string message,
             Exception exception
@@ -446,7 +447,7 @@ internal partial class RemoteRenderer : WebRenderer
             "Completing batch {BatchId} with error: {ErrorMessage} in {ElapsedMilliseconds}ms.",
             EventName = "CompletingBatchWithError"
         )]
-        private static partial void CompletingBatchWithError(
+        partial private static void CompletingBatchWithError(
             ILogger logger,
             long batchId,
             string errorMessage,
@@ -466,7 +467,7 @@ internal partial class RemoteRenderer : WebRenderer
             "Completing batch {BatchId} without error in {ElapsedMilliseconds}ms.",
             EventName = "CompletingBatchWithoutError"
         )]
-        private static partial void CompletingBatchWithoutError(
+        partial private static void CompletingBatchWithoutError(
             ILogger logger,
             long batchId,
             double elapsedMilliseconds
@@ -484,7 +485,7 @@ internal partial class RemoteRenderer : WebRenderer
             "Received a duplicate ACK for batch id '{IncomingBatchId}'.",
             EventName = "ReceivedDuplicateBatchAcknowledgement"
         )]
-        public static partial void ReceivedDuplicateBatchAck(ILogger logger, long incomingBatchId);
+        partial public static void ReceivedDuplicateBatchAck(ILogger logger, long incomingBatchId);
 
         [LoggerMessage(
             107,
@@ -492,7 +493,7 @@ internal partial class RemoteRenderer : WebRenderer
             "The queue of unacknowledged render batches is full.",
             EventName = "FullUnacknowledgedRenderBatchesQueue"
         )]
-        public static partial void FullUnacknowledgedRenderBatchesQueue(ILogger logger);
+        partial public static void FullUnacknowledgedRenderBatchesQueue(ILogger logger);
     }
 }
 

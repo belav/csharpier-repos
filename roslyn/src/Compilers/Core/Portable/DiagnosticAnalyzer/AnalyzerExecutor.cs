@@ -26,10 +26,11 @@ using SyntaxNodeAnalyzerStateData = Microsoft.CodeAnalysis.Diagnostics.AnalysisS
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// Contains the core execution logic for callbacks into analyzers.
     /// </summary>
-    internal partial class AnalyzerExecutor
+    internal class AnalyzerExecutor
     {
         private const string DiagnosticCategory = "Compiler";
 

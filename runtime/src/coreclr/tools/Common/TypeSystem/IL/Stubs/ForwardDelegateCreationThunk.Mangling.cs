@@ -5,10 +5,11 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// contains functionality related to name mangling
     /// </summary>
-    public partial class ForwardDelegateCreationThunk : IPrefixMangledType
+    public class ForwardDelegateCreationThunk : IPrefixMangledType
     {
         TypeDesc IPrefixMangledType.BaseType
         {

@@ -22,7 +22,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Hosting.Tests
 {
-    public partial class HostTests
+    partial public class HostTests
     {
         [Fact]
         public async Task StopAsyncWithCancellation()

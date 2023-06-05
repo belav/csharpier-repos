@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             "Microsoft.CodeAnalysis.Diagnostics.VisualBasic.VisualBasicCompilerDiagnosticAnalyzer";
     }
 
-    internal static partial class DiagnosticAnalyzerExtensions
+    partial internal static class DiagnosticAnalyzerExtensions
     {
         public static bool IsCompilerAnalyzer(this DiagnosticAnalyzer analyzer)
         {

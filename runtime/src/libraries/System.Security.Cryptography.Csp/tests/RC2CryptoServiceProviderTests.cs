@@ -9,7 +9,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
     using Csp.Tests;
     using RC2 = System.Security.Cryptography.RC2;
 
-    public static partial class RC2CryptoServiceProviderTests
+    partial public static class RC2CryptoServiceProviderTests
     {
         [Fact]
         public static void RC2KeySize()

@@ -3,16 +3,16 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(
             Libraries.Kernel32,
             EntryPoint = "GetCPInfoExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static unsafe partial Interop.BOOL GetCPInfoExW(
+        partial private static unsafe Interop.BOOL GetCPInfoExW(
             uint CodePage,
             uint dwFlags,
             CPINFOEXW* lpCPInfoEx
@@ -22,11 +22,11 @@ internal static partial class Interop
         private unsafe struct CPINFOEXW
         {
             internal uint MaxCharSize;
-            internal fixed byte DefaultChar[2];
-            internal fixed byte LeadByte[12];
+            fixed internal byte DefaultChar[2];
+            fixed internal byte LeadByte[12];
             internal char UnicodeDefaultChar;
             internal uint CodePage;
-            internal fixed char CodePageName[MAX_PATH];
+            fixed internal char CodePageName[MAX_PATH];
         }
 
         internal static unsafe int GetLeadByteRanges(int codePage, byte[] leadByteRanges)

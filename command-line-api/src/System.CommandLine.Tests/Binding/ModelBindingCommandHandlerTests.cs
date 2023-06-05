@@ -14,7 +14,7 @@ using Xunit;
 
 namespace System.CommandLine.Tests.Binding
 {
-    public partial class ModelBindingCommandHandlerTests
+    partial public class ModelBindingCommandHandlerTests
     {
         [Theory]
         [InlineData(typeof(string), null)]

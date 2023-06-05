@@ -12,7 +12,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetNativeVariantForObjectTests
+    partial public class GetNativeVariantForObjectTests
     {
         private void GetNativeVariantForObject_RoundtrippingPrimitives_Success(
             object primitive,

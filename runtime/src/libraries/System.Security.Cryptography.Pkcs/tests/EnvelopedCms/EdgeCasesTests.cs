@@ -10,7 +10,7 @@ using System.Security.Cryptography.Pkcs.Tests;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class EdgeCasesTests
+    partial public static class EdgeCasesTests
     {
         public static bool SupportsRc4 { get; } = ContentEncryptionAlgorithmTests.SupportsRc4;
 

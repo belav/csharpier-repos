@@ -60,15 +60,15 @@ namespace System.Numerics
     }
 }
 
-internal static partial class Interop
+partial internal static class Interop
 {
     [SuppressUnmanagedCodeSecurityAttribute]
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(nameof(Kernel32))]
-        internal static partial int GetCurrentThreadId();
+        partial internal static int GetCurrentThreadId();
 
         [LibraryImport(nameof(Kernel32))]
-        internal static partial uint GetCurrentProcessId();
+        partial internal static uint GetCurrentProcessId();
     }
 }

@@ -13,9 +13,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal partial class SolutionCrawlerRegistrationService
+    partial internal class SolutionCrawlerRegistrationService
     {
-        internal partial class WorkCoordinator
+        partial internal class WorkCoordinator
         {
             private abstract class AsyncWorkItemQueue<TKey> : IDisposable
                 where TKey : class

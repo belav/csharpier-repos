@@ -7,10 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base class for all RoMethod objects created by a MetadataLoadContext that appear on arrays.
     /// </summary>
-    internal sealed partial class RoSyntheticMethod : RoMethod
+    internal sealed class RoSyntheticMethod : RoMethod
     {
         private readonly RoType _declaringType;
         private readonly int _uniquifier; // Since all array methods have the same "MetadataToken", this serves as a distinguisher so they don't all compare Equal

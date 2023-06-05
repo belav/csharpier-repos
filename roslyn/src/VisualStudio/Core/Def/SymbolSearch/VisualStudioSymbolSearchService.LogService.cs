@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
 {
-    internal partial class VisualStudioSymbolSearchService
+    partial internal class VisualStudioSymbolSearchService
     {
         private class LogService : ForegroundThreadAffinitizedObject, ISymbolSearchLogService
         {

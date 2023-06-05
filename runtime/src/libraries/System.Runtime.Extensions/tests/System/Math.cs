@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Tests
 {
-    public static partial class MathTests
+    partial public static class MathTests
     {
         // binary64 (double) has a machine epsilon of 2^-52 (approx. 2.22e-16). However, this
         // is slightly too accurate when writing tests meant to run against libm implementations

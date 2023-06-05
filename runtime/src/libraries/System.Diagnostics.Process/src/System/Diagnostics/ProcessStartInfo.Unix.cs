@@ -7,10 +7,11 @@ using System.Security;
 
 namespace System.Diagnostics
 {
+    partial
     // We know of no way to achieve this on Unix, particularly providing the password
     // without a prompt. If we find a way, we should implement it. It may make more sense to provide
     // similar functionality through an API specific to Unix.
-    public sealed partial class ProcessStartInfo
+    public sealed class ProcessStartInfo
     {
         [SupportedOSPlatform("windows")]
         public string? PasswordInClearText

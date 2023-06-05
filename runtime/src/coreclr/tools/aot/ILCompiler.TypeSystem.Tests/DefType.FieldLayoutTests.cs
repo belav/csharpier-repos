@@ -7,7 +7,7 @@ using Xunit;
 
 namespace TypeSystemTests
 {
-    public partial class DefTypeTests
+    partial public class DefTypeTests
     {
         private ModuleDesc _testModule;
 

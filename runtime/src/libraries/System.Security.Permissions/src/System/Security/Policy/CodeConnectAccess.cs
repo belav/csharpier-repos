@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public partial class CodeConnectAccess
+    partial public class CodeConnectAccess
     {
         public static readonly string AnyScheme;
         public static readonly int DefaultPort;

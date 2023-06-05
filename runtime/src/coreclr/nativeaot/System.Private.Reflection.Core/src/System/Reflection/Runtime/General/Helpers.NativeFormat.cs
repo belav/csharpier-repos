@@ -7,7 +7,7 @@ using System.Reflection.Runtime.TypeInfos.NativeFormat;
 
 namespace System.Reflection.Runtime.General
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NativeFormatRuntimeNamedTypeInfo CastToNativeFormatRuntimeNamedTypeInfo(

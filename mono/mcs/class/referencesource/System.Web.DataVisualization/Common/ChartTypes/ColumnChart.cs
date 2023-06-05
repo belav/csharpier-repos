@@ -82,6 +82,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         protected COPCoordinates coordinates = COPCoordinates.X;
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -89,7 +90,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.Column; }
         }
@@ -99,73 +100,87 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
+        public
         /// <summary>
         /// True if chart type is stacked
         /// </summary>
-        override public bool Stacked
+        override bool Stacked
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart type supports axeses
         /// </summary>
-        override public bool RequireAxes
+        override bool RequireAxes
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// True if chart type supports logarithmic axes
         /// </summary>
-        override public bool SupportLogarithmicAxes
+        override bool SupportLogarithmicAxes
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// True if chart type requires to switch the value (Y) axes position
         /// </summary>
-        override public bool SwitchValueAxes
+        override bool SwitchValueAxes
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart series can be placed side-by-side.
         /// </summary>
-        override public bool SideBySideSeries
+        override bool SideBySideSeries
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// True if each data point of a chart must be represented in the legend
         /// </summary>
-        override public bool DataPointsInLegend
+        override bool DataPointsInLegend
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// Indicates that extra Y values are connected to the scale of the Y axis
         /// </summary>
-        override public bool ExtraYValuesConnectedToYAxis
+        override bool ExtraYValuesConnectedToYAxis
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if palette colors should be applied for each data paoint.
         /// Otherwise the color is applied to the series.
         /// </summary>
-        override public bool ApplyPaletteColorsToPoints
+        override bool ApplyPaletteColorsToPoints
         {
             get { return false; }
         }
@@ -176,25 +191,34 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="series">Legend item series.</param>
         /// <returns>Legend item style.</returns>
-        override public LegendImageStyle GetLegendImageStyle(Series series)
+        public
+        /// <summary>
+        /// How to draw series/points in legend:
+        /// Filled rectangle, Line or Marker
+        /// </summary>
+        /// <param name="series">Legend item series.</param>
+        /// <returns>Legend item style.</returns>
+        override LegendImageStyle GetLegendImageStyle(Series series)
         {
             return LegendImageStyle.Rectangle;
         }
 
+        public
         /// <summary>
         /// Number of supported Y value(s) per point
         /// </summary>
-        override public int YValuesPerPoint
+        override int YValuesPerPoint
         {
             get { return 1; }
         }
 
+        public
         /// <summary>
         /// If the crossing value is auto Crossing value should be
         /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        override public bool ZeroCrossing
+        override bool ZeroCrossing
         {
             get { return true; }
         }
@@ -209,6 +233,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         public ColumnChart()
             : base(false) { }
 
+        public
         #endregion
 
         #region Properties
@@ -217,19 +242,20 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// Labels and markers have to be shifted if there
         /// is more than one series for column chart.
         /// </summary>
-        override public double ShiftedX
+        override double ShiftedX
         {
             get { return _shiftedX; }
             set { _shiftedX = value; }
         }
 
+        public
         /// <summary>
         /// Labels and markers have to be shifted if there
         /// is more than one series for column chart. This property
         /// will give a name of the series, which is used, for
         /// labels and markers.
         /// </summary>
-        override public string ShiftedSerName
+        override string ShiftedSerName
         {
             get { return _shiftedSerName; }
             set { _shiftedSerName = value; }
@@ -246,7 +272,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        override public void Paint(
+        public
+        #endregion
+
+        #region Painting and selection methods
+
+        /// <summary>
+        /// Paint Column Chart.
+        /// </summary>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        override void Paint(
             ChartGraphics graph,
             CommonElements common,
             ChartArea area,
@@ -711,7 +749,15 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="series">Data series.</param>
         /// <param name="pointIndex">Point index.</param>
         /// <returns>Label aligning.</returns>
-        override protected LabelAlignmentStyles GetAutoLabelPosition(Series series, int pointIndex)
+        protected
+        /// <summary>
+        /// Gets label position for the column depending on the Y value.
+        /// </summary>
+        /// <returns>Return automaticly detected label position.</returns>
+        /// <param name="series">Data series.</param>
+        /// <param name="pointIndex">Point index.</param>
+        /// <returns>Label aligning.</returns>
+        override LabelAlignmentStyles GetAutoLabelPosition(Series series, int pointIndex)
         {
             if (series.Points[pointIndex].YValues[0] >= 0)
                 return LabelAlignmentStyles.Top;
@@ -723,7 +769,12 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// Indicates that markers are drawnd on the X edge of the data scaleView.
         /// </summary>
         /// <returns>False. Column chart never draws markers on the edge.</returns>
-        override protected bool ShouldDrawMarkerOnViewEdgeX()
+        protected
+        /// <summary>
+        /// Indicates that markers are drawnd on the X edge of the data scaleView.
+        /// </summary>
+        /// <returns>False. Column chart never draws markers on the edge.</returns>
+        override bool ShouldDrawMarkerOnViewEdgeX()
         {
             return false;
         }
@@ -1149,6 +1200,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             this.YValueIndex = 1;
         }
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -1156,33 +1208,36 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.RangeColumn; }
         }
 
+        public
         /// <summary>
         /// If the crossing value is auto Crossing value should be
         /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        override public bool ZeroCrossing
+        override bool ZeroCrossing
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// Number of supported Y value(s) per point
         /// </summary>
-        override public int YValuesPerPoint
+        override int YValuesPerPoint
         {
             get { return 2; }
         }
 
+        public
         /// <summary>
         /// Indicates that extra Y values are connected to the scale of the Y axis
         /// </summary>
-        override public bool ExtraYValuesConnectedToYAxis
+        override bool ExtraYValuesConnectedToYAxis
         {
             get { return true; }
         }
@@ -1201,7 +1256,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointIndex">Index of the point.</param>
         /// <param name="yValueIndex">Index of the Y value to get.</param>
         /// <returns>Y value of the point.</returns>
-        override public double GetYValue(
+        public
+        #endregion
+
+        #region Y values related methods
+
+        /// <summary>
+        /// Helper function, which returns the Y value of the point.
+        /// </summary>
+        /// <param name="common">Chart common elements.</param>
+        /// <param name="area">Chart area the series belongs to.</param>
+        /// <param name="series">Sereis of the point.</param>
+        /// <param name="point">Point object.</param>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="yValueIndex">Index of the Y value to get.</param>
+        /// <returns>Y value of the point.</returns>
+        override double GetYValue(
             CommonElements common,
             ChartArea area,
             Series series,

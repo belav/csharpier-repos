@@ -3,7 +3,7 @@
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Parser
+    partial public static class Utf8Parser
     {
         /// <summary>
         /// Parses a Decimal at the start of a Utf8 string.

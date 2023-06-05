@@ -13,7 +13,7 @@ using Internal.Cryptography.Pal.Native;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class CertificatePal : IDisposable, ICertificatePal
+    partial internal sealed class CertificatePal : IDisposable, ICertificatePal
     {
         public static ICertificatePal FromBlob(
             ReadOnlySpan<byte> rawData,

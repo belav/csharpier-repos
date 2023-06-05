@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.Caching
 {
-    internal abstract partial class MemoryMonitor
+    partial internal abstract class MemoryMonitor
     {
 #pragma warning disable CA1810 // explicit static cctor
         static unsafe MemoryMonitor()

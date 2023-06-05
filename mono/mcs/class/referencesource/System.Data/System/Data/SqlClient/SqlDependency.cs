@@ -66,7 +66,7 @@ namespace System.Data.SqlClient
                 get { return _userName; }
             }
 
-            override public bool Equals(object value)
+            public override bool Equals(object value)
             {
                 IdentityUserNamePair temp = (IdentityUserNamePair)value;
 
@@ -98,7 +98,7 @@ namespace System.Data.SqlClient
                 return result;
             }
 
-            override public int GetHashCode()
+            public override int GetHashCode()
             {
                 int hashValue = 0;
 
@@ -145,7 +145,7 @@ namespace System.Data.SqlClient
                 get { return _service; }
             }
 
-            override public bool Equals(object value)
+            public override bool Equals(object value)
             {
                 DatabaseServicePair temp = (DatabaseServicePair)value;
 
@@ -167,7 +167,7 @@ namespace System.Data.SqlClient
                 return result;
             }
 
-            override public int GetHashCode()
+            public override int GetHashCode()
             {
                 return _database.GetHashCode();
             }
@@ -188,7 +188,7 @@ namespace System.Data.SqlClient
             private SqlDependency _dependency;
             private SqlNotificationEventArgs _args;
 
-            static private ContextCallback _contextCallback = new ContextCallback(InvokeCallback);
+            private static ContextCallback _contextCallback = new ContextCallback(InvokeCallback);
 
             internal EventContextPair(OnChangeEventHandler eventHandler, SqlDependency dependency)
             {
@@ -198,7 +198,7 @@ namespace System.Data.SqlClient
                 _dependency = dependency;
             }
 
-            override public bool Equals(object value)
+            public override bool Equals(object value)
             {
                 EventContextPair temp = (EventContextPair)value;
 
@@ -223,7 +223,7 @@ namespace System.Data.SqlClient
                 return result;
             }
 
-            override public int GetHashCode()
+            public override int GetHashCode()
             {
                 return _eventHandler.GetHashCode();
             }
@@ -1726,7 +1726,11 @@ namespace System.Data.SqlClient
         // Basic copy of function in SqlConnection.cs for ChangeDatabase and similar functionality.  Since this will
         // only be used for default service and database provided by server, we do not need to worry about an already
         // quoted value.
-        static internal string FixupServiceOrDatabaseName(string name)
+        internal
+        // Basic copy of function in SqlConnection.cs for ChangeDatabase and similar functionality.  Since this will
+        // only be used for default service and database provided by server, we do not need to worry about an already
+        // quoted value.
+        static string FixupServiceOrDatabaseName(string name)
         {
             if (!ADP.IsEmpty(name))
             {

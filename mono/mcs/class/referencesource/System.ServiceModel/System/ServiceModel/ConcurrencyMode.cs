@@ -15,7 +15,7 @@ namespace System.ServiceModel
 
     static class ConcurrencyModeHelper
     {
-        static public bool IsDefined(ConcurrencyMode x)
+        public static bool IsDefined(ConcurrencyMode x)
         {
             return x == ConcurrencyMode.Single
                 || x == ConcurrencyMode.Reentrant

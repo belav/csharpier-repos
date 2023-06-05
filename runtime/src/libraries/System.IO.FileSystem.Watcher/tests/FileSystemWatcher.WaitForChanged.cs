@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class WaitForChangedTests : FileSystemWatcherTest
+    partial public class WaitForChangedTests : FileSystemWatcherTest
     {
         private const int BetweenOperationsDelayMilliseconds = 100;
 

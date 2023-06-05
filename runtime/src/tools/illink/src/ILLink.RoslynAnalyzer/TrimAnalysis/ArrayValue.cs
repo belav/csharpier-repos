@@ -30,7 +30,7 @@ namespace ILLink.Shared.TrimAnalysis
             IndexValues = new Dictionary<int, MultiValue>();
         }
 
-        public partial bool TryGetValueByIndex(int index, out MultiValue value)
+        partial public bool TryGetValueByIndex(int index, out MultiValue value)
         {
             if (IndexValues.TryGetValue(index, out value))
                 return true;

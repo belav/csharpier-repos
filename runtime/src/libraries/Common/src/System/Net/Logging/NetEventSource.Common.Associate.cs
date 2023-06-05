@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace System.Net
 {
-    internal sealed partial class NetEventSource
+    partial internal sealed class NetEventSource
     {
         private const int AssociateEventId = 3;
 

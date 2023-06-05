@@ -55,7 +55,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ClaimTypeElement : ConfigurationElement
+    partial public sealed class ClaimTypeElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

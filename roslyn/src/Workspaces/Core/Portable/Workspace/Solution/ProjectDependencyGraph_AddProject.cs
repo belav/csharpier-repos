@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial class ProjectDependencyGraph
+    partial public class ProjectDependencyGraph
     {
         internal ProjectDependencyGraph WithAdditionalProject(ProjectId projectId)
         {

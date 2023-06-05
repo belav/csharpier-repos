@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
         ),
         Shared
     ]
-    internal partial class UseThrowExpressionCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    partial internal class UseThrowExpressionCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [SuppressMessage(

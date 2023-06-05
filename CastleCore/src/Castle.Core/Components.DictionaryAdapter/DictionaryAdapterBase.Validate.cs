@@ -18,7 +18,7 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class DictionaryAdapterBase : IDictionaryValidate
+    partial public class DictionaryAdapterBase : IDictionaryValidate
     {
         private ICollection<IDictionaryValidator> validators;
 

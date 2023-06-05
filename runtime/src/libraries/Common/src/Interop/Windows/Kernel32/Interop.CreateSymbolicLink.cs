@@ -5,9 +5,9 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         /// <summary>
         /// The link target is a directory.
@@ -27,7 +27,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.U1)]
-        private static partial bool CreateSymbolicLinkPrivate(
+        partial private static bool CreateSymbolicLinkPrivate(
             string lpSymlinkFileName,
             string lpTargetFileName,
             int dwFlags

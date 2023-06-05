@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Diagnostics
 {
-    public abstract partial class DiagnosticSource
+    partial public abstract class DiagnosticSource
     {
         /// <summary>
         /// Starts an Activity and writes start event.
@@ -121,7 +121,7 @@ namespace System.Diagnostics
         public virtual void OnActivityExport(Activity activity, object? payload) { }
     }
 
-    public partial class DiagnosticListener
+    partial public class DiagnosticListener
     {
         public override void OnActivityImport(Activity activity, object? payload)
         {

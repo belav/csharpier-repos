@@ -29,7 +29,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.EncapsulateField
 {
-    internal abstract partial class AbstractEncapsulateFieldService : ILanguageService
+    partial internal abstract class AbstractEncapsulateFieldService : ILanguageService
     {
         protected abstract Task<SyntaxNode> RewriteFieldNameAndAccessibilityAsync(
             string originalFieldName,

@@ -7,7 +7,7 @@ using System.Net.Security;
 
 namespace System.Net
 {
-    internal sealed partial class NetEventSource
+    partial internal sealed class NetEventSource
     {
 #if !ES_BUILD_STANDALONE
         [UnconditionalSuppressMessage(

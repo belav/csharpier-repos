@@ -3,7 +3,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class Stopwatch
+    partial public class Stopwatch
     {
         private static long QueryPerformanceFrequency()
         {

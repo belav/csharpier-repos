@@ -4,7 +4,7 @@ using System;
 
 namespace Test1
 {
-    public partial class Foo
+    partial public class Foo
     {
         internal static System.Collections.IEnumerable E()
         {

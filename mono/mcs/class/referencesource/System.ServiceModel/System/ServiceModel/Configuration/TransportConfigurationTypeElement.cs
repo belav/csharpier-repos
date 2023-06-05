@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System;
     using System.Configuration;
 
-    public sealed partial class TransportConfigurationTypeElement : ConfigurationElement
+    partial public sealed class TransportConfigurationTypeElement : ConfigurationElement
     {
         public TransportConfigurationTypeElement() { }
 

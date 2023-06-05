@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal abstract partial class AbstractGenerateDeconstructMethodService<
+    partial internal abstract class AbstractGenerateDeconstructMethodService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax,

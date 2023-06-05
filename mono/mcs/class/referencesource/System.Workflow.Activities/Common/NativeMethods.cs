@@ -277,10 +277,10 @@ namespace System.Workflow.Activities.Common
         );
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public extern static bool IsWindowVisible(IntPtr hWnd);
+        public static extern bool IsWindowVisible(IntPtr hWnd);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public extern static IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("gdi32.dll", SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern bool LineTo(HandleRef hdc, int x, int y);

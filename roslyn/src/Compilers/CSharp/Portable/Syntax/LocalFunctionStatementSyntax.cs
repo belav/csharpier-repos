@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class LocalFunctionStatementSyntax
+    partial public class LocalFunctionStatementSyntax
     {
         // Preserved as shipped public API for binary compatibility
         public LocalFunctionStatementSyntax Update(
@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         // Preserved as shipped public API for binary compatibility
         public static LocalFunctionStatementSyntax LocalFunctionStatement(

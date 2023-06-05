@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInterpolatedVerbatimString
         ),
         Shared
     ]
-    internal partial class CSharpUseInterpolatedVerbatimStringCodeFixProvider
+    partial internal class CSharpUseInterpolatedVerbatimStringCodeFixProvider
         : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]

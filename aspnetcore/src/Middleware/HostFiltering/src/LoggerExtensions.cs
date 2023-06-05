@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.HostFiltering;
 
-internal static partial class LoggerExtensions
+partial internal static class LoggerExtensions
 {
     [LoggerMessage(
         0,
@@ -13,7 +13,7 @@ internal static partial class LoggerExtensions
         "Wildcard detected, all requests with hosts will be allowed.",
         EventName = "WildcardDetected"
     )]
-    public static partial void WildcardDetected(this ILogger logger);
+    partial public static void WildcardDetected(this ILogger logger);
 
     [LoggerMessage(
         1,
@@ -22,10 +22,10 @@ internal static partial class LoggerExtensions
         EventName = "AllowedHosts",
         SkipEnabledCheck = true
     )]
-    public static partial void AllowedHosts(this ILogger logger, string hosts);
+    partial public static void AllowedHosts(this ILogger logger, string hosts);
 
     [LoggerMessage(2, LogLevel.Trace, "All hosts are allowed.", EventName = "AllHostsAllowed")]
-    public static partial void AllHostsAllowed(this ILogger logger);
+    partial public static void AllHostsAllowed(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -33,7 +33,7 @@ internal static partial class LoggerExtensions
         "{Protocol} request rejected due to missing or empty host header.",
         EventName = "RequestRejectedMissingHost"
     )]
-    public static partial void RequestRejectedMissingHost(this ILogger logger, string protocol);
+    partial public static void RequestRejectedMissingHost(this ILogger logger, string protocol);
 
     [LoggerMessage(
         4,
@@ -41,7 +41,7 @@ internal static partial class LoggerExtensions
         "{Protocol} request allowed with missing or empty host header.",
         EventName = "RequestAllowedMissingHost"
     )]
-    public static partial void RequestAllowedMissingHost(this ILogger logger, string protocol);
+    partial public static void RequestAllowedMissingHost(this ILogger logger, string protocol);
 
     [LoggerMessage(
         5,
@@ -49,7 +49,7 @@ internal static partial class LoggerExtensions
         "The host '{Host}' matches an allowed host.",
         EventName = "AllowedHostMatched"
     )]
-    public static partial void AllowedHostMatched(this ILogger logger, string host);
+    partial public static void AllowedHostMatched(this ILogger logger, string host);
 
     [LoggerMessage(
         6,
@@ -57,5 +57,5 @@ internal static partial class LoggerExtensions
         "The host '{Host}' does not match an allowed host.",
         EventName = "NoAllowedHostMatched"
     )]
-    public static partial void NoAllowedHostMatched(this ILogger logger, string host);
+    partial public static void NoAllowedHostMatched(this ILogger logger, string host);
 }

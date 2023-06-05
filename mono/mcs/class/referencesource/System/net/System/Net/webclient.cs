@@ -1532,7 +1532,7 @@ namespace System.Net
             }
         }
 
-        static private void DownloadBitsResponseCallback(IAsyncResult result)
+        private static void DownloadBitsResponseCallback(IAsyncResult result)
         {
             DownloadBitsState state = (DownloadBitsState)result.AsyncState;
             WebRequest request = (WebRequest)state.Request;
@@ -1574,13 +1574,13 @@ namespace System.Net
             }
         }
 
-        static private void DownloadBitsReadCallback(IAsyncResult result)
+        private static void DownloadBitsReadCallback(IAsyncResult result)
         {
             DownloadBitsState state = (DownloadBitsState)result.AsyncState;
             DownloadBitsReadCallbackState(state, result);
         }
 
-        static private void DownloadBitsReadCallbackState(
+        private static void DownloadBitsReadCallbackState(
             DownloadBitsState state,
             IAsyncResult result
         )
@@ -1895,7 +1895,7 @@ namespace System.Net
             }
         }
 
-        static private void UploadBitsRequestCallback(IAsyncResult result)
+        private static void UploadBitsRequestCallback(IAsyncResult result)
         {
             UploadBitsState state = (UploadBitsState)result.AsyncState;
             WebRequest request = (WebRequest)state.Request;
@@ -1937,7 +1937,7 @@ namespace System.Net
             }
         }
 
-        static private void UploadBitsWriteCallback(IAsyncResult result)
+        private static void UploadBitsWriteCallback(IAsyncResult result)
         {
             UploadBitsState state = (UploadBitsState)result.AsyncState;
             Stream stream = (Stream)state.WriteStream;

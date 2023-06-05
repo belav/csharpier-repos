@@ -3,8 +3,9 @@
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     // Lazy-cached storage of group identification apis such as IsEnum and IsValueType
-    internal abstract partial class RoType
+    internal abstract class RoType
     {
         //
         // Splitting these bits into two latches - those that requires acquiring the BaseType (which could trigger a FileNotFoundException)

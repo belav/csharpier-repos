@@ -11,9 +11,9 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
-    internal partial class SuggestedActionWithNestedFlavors
+    partial internal class SuggestedActionWithNestedFlavors
     {
-        private partial class PreviewChangesSuggestedAction
+        partial private class PreviewChangesSuggestedAction
         {
             private sealed class PreviewChangesCodeAction : CodeAction
             {

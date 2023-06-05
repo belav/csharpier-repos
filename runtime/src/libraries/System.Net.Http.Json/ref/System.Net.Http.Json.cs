@@ -6,7 +6,7 @@
 
 namespace System.Net.Http.Json
 {
-    public static partial class HttpClientJsonExtensions
+    partial public static class HttpClientJsonExtensions
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
@@ -649,7 +649,7 @@ namespace System.Net.Http.Json
         }
     }
 
-    public static partial class HttpContentJsonExtensions
+    partial public static class HttpContentJsonExtensions
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext."
@@ -737,7 +737,7 @@ namespace System.Net.Http.Json
         }
     }
 
-    public sealed partial class JsonContent : System.Net.Http.HttpContent
+    partial public sealed class JsonContent : System.Net.Http.HttpContent
     {
         internal JsonContent() { }
 

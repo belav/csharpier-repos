@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System
 {
-    public static partial class MemoryExtensions
+    partial public static class MemoryExtensions
     {
         /// <summary>
         /// Removes all leading and trailing occurrences of a specified element from the memory.

@@ -6,7 +6,7 @@ using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing.Drawing2D
 {
-    public sealed partial class AdjustableArrowCap : CustomLineCap
+    partial public sealed class AdjustableArrowCap : CustomLineCap
     {
         internal AdjustableArrowCap(IntPtr nativeCap)
             : base(nativeCap) { }

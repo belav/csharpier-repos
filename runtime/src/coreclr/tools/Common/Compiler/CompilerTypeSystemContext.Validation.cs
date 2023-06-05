@@ -7,9 +7,10 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
 {
+    partial
     // Validates types to the extent that is required to make sure the compilation won't fail
     // in unpredictable spots.
-    public partial class CompilerTypeSystemContext
+    public class CompilerTypeSystemContext
     {
         /// <summary>
         /// Ensures that the type can be fully loaded. The method will throw one of the type system

@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class NullableWalker
+    partial internal class NullableWalker
     {
         /// <summary>
         /// A symbol to be used as a placeholder for an instance being constructed by

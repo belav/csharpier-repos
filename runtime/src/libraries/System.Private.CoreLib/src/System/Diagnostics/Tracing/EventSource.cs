@@ -233,7 +233,7 @@ namespace System.Diagnostics.Tracing
             + "This includes Delegate and MulticastDelegate methods which have dynamically accessed members requirements, but "
             + "EnsureDescriptorsInitialized does not access these members and is safe to call."
     )]
-    public partial class EventSource : IDisposable
+    partial public class EventSource : IDisposable
     {
         internal static bool IsSupported { get; } = InitializeIsSupported();
 
@@ -2808,6 +2808,7 @@ namespace System.Diagnostics.Tracing
             return opcode;
         }
 
+        partial
 #if FEATURE_MANAGED_ETW
         /// <summary>
         /// This class lets us hook the 'OnEventCommand' from the eventSource.
@@ -2854,7 +2855,7 @@ namespace System.Diagnostics.Tracing
         /// code:m_eventData for where we use this.
         /// </summary>
 
-        internal partial struct EventMetadata
+        internal struct EventMetadata
         {
             public EventDescriptor Descriptor;
             public IntPtr EventHandle; // EventPipeEvent handle.

@@ -10,10 +10,11 @@ using System.ServiceModel.Security;
 
 namespace System.IdentityModel.Configuration
 {
+    partial
     /// <summary>
     /// Manages the configuration of a X509CertificateValidation element in IdentityConfiguration.
     /// </summary>
-    public sealed partial class X509CertificateValidationElement : ConfigurationElement
+    public sealed class X509CertificateValidationElement : ConfigurationElement
     {
         const X509CertificateValidationMode DefaultX509CertificateValidationMode =
             X509CertificateValidationMode.PeerOrChainTrust;

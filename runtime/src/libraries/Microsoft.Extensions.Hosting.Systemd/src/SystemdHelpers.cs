@@ -11,10 +11,11 @@ using System.Diagnostics;
 
 namespace Microsoft.Extensions.Hosting.Systemd
 {
+    partial
     /// <summary>
     /// Helper methods for systemd Services.
     /// </summary>
-    public static partial class SystemdHelpers
+    public static class SystemdHelpers
     {
         private static bool? _isSystemdService;
 

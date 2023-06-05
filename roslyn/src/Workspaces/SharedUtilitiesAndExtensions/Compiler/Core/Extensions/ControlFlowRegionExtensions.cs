@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    internal static partial class ControlFlowRegionExtensions
+    partial internal static class ControlFlowRegionExtensions
     {
         internal static bool ContainsBlock(this ControlFlowRegion region, int destinationOrdinal) =>
             region.FirstBlockOrdinal <= destinationOrdinal

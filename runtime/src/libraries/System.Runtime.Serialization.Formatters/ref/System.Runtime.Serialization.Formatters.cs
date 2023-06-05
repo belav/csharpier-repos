@@ -7,7 +7,7 @@
 namespace System.Runtime.Serialization
 {
     [System.CLSCompliantAttribute(false)]
-    public abstract partial class Formatter : System.Runtime.Serialization.IFormatter
+    partial public abstract class Formatter : System.Runtime.Serialization.IFormatter
     {
         protected System.Runtime.Serialization.ObjectIDGenerator m_idGenerator;
         protected System.Collections.Queue m_objectQueue;
@@ -81,7 +81,7 @@ namespace System.Runtime.Serialization
         protected abstract void WriteValueType(object obj, string name, System.Type memberType);
     }
 
-    public partial class FormatterConverter : System.Runtime.Serialization.IFormatterConverter
+    partial public class FormatterConverter : System.Runtime.Serialization.IFormatterConverter
     {
         public FormatterConverter() { }
 
@@ -175,7 +175,7 @@ namespace System.Runtime.Serialization
         }
     }
 
-    public static partial class FormatterServices
+    partial public static class FormatterServices
     {
         public static void CheckTypeSecurity(
             System.Type t,
@@ -266,7 +266,7 @@ namespace System.Runtime.Serialization
         }
     }
 
-    public partial interface IFormatter
+    partial public interface IFormatter
     {
         System.Runtime.Serialization.SerializationBinder? Binder { get; set; }
         System.Runtime.Serialization.StreamingContext Context { get; set; }
@@ -296,7 +296,7 @@ namespace System.Runtime.Serialization
         void Serialize(System.IO.Stream serializationStream, object graph);
     }
 
-    public partial interface ISerializationSurrogate
+    partial public interface ISerializationSurrogate
     {
         void GetObjectData(
             object obj,
@@ -311,7 +311,7 @@ namespace System.Runtime.Serialization
         );
     }
 
-    public partial interface ISurrogateSelector
+    partial public interface ISurrogateSelector
     {
         void ChainSelector(System.Runtime.Serialization.ISurrogateSelector selector);
         System.Runtime.Serialization.ISurrogateSelector? GetNextSelector();
@@ -322,7 +322,7 @@ namespace System.Runtime.Serialization
         );
     }
 
-    public partial class ObjectIDGenerator
+    partial public class ObjectIDGenerator
     {
         public ObjectIDGenerator() { }
 
@@ -337,7 +337,7 @@ namespace System.Runtime.Serialization
         }
     }
 
-    public partial class ObjectManager
+    partial public class ObjectManager
     {
         public ObjectManager(
             System.Runtime.Serialization.ISurrogateSelector? selector,
@@ -423,7 +423,7 @@ namespace System.Runtime.Serialization
         ) { }
     }
 
-    public abstract partial class SerializationBinder
+    partial public abstract class SerializationBinder
     {
         protected SerializationBinder() { }
 
@@ -439,7 +439,7 @@ namespace System.Runtime.Serialization
         public abstract System.Type? BindToType(string assemblyName, string typeName);
     }
 
-    public sealed partial class SerializationObjectManager
+    partial public sealed class SerializationObjectManager
     {
         public SerializationObjectManager(System.Runtime.Serialization.StreamingContext context) { }
 
@@ -451,7 +451,7 @@ namespace System.Runtime.Serialization
         public void RegisterObject(object obj) { }
     }
 
-    public partial class SurrogateSelector : System.Runtime.Serialization.ISurrogateSelector
+    partial public class SurrogateSelector : System.Runtime.Serialization.ISurrogateSelector
     {
         public SurrogateSelector() { }
 
@@ -501,7 +501,7 @@ namespace System.Runtime.Serialization.Formatters
         XsdString = 2,
     }
 
-    public partial interface IFieldInfo
+    partial public interface IFieldInfo
     {
         string[]? FieldNames { get; set; }
         System.Type[]? FieldTypes { get; set; }
@@ -516,7 +516,7 @@ namespace System.Runtime.Serialization.Formatters
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
-    public sealed partial class BinaryFormatter : System.Runtime.Serialization.IFormatter
+    partial public sealed class BinaryFormatter : System.Runtime.Serialization.IFormatter
     {
         public BinaryFormatter() { }
 

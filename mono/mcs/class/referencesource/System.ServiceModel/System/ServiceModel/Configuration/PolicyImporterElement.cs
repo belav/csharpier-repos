@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.ServiceModel.Description;
 
-    public sealed partial class PolicyImporterElement : ConfigurationElement
+    partial public sealed class PolicyImporterElement : ConfigurationElement
     {
         public PolicyImporterElement() { }
 

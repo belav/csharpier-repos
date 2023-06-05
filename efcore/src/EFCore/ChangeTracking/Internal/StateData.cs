@@ -3,7 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-public sealed partial class InternalEntityEntry
+partial public sealed class InternalEntityEntry
 {
     internal enum PropertyFlag
     {

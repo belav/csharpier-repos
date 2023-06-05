@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing;
 
-internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
+partial internal sealed class DefaultLinkParser : LinkParser, IDisposable
 {
     private readonly ParameterPolicyFactory _parameterPolicyFactory;
     private readonly ILogger<DefaultLinkParser> _logger;
@@ -204,7 +204,7 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void EndpointsFound(
             ILogger logger,
@@ -226,7 +226,7 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
             EventName = "EndpointsFound",
             SkipEnabledCheck = true
         )]
-        private static partial void EndpointsFound(
+        partial private static void EndpointsFound(
             ILogger logger,
             IEnumerable<string?> endpoints,
             object? address
@@ -238,7 +238,7 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
             "No endpoints found for address {Address}",
             EventName = "EndpointsNotFound"
         )]
-        public static partial void EndpointsNotFound(ILogger logger, object? address);
+        partial public static void EndpointsNotFound(ILogger logger, object? address);
 
         public static void PathParsingSucceeded(ILogger logger, PathString path, Endpoint endpoint)
         {
@@ -256,7 +256,7 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
             EventName = "PathParsingSucceeded",
             SkipEnabledCheck = true
         )]
-        private static partial void PathParsingSucceeded(
+        partial private static void PathParsingSucceeded(
             ILogger logger,
             string? endpoint,
             string? uri
@@ -282,7 +282,7 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
             EventName = "PathParsingFailed",
             SkipEnabledCheck = true
         )]
-        private static partial void PathParsingFailed(
+        partial private static void PathParsingFailed(
             ILogger logger,
             IEnumerable<string?> endpoints,
             string? uri

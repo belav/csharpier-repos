@@ -9,12 +9,13 @@ using System.Configuration;
 
 namespace System.IdentityModel.Configuration
 {
+    partial
 #pragma warning disable 1591
     /// <summary>
     /// Manages the configuration of an audience uri element within the audienceUris
     /// configuration collection.
     /// </summary>
-    public sealed partial class AudienceUriElement : ConfigurationElement
+    public sealed class AudienceUriElement : ConfigurationElement
     {
         const string DefaultValue = " ";
 

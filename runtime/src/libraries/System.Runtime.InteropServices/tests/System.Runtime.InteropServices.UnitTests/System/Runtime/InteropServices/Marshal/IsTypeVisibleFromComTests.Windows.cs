@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class IsTypeVisibleFromComTests
+    partial public class IsTypeVisibleFromComTests
     {
         public static IEnumerable<object[]> IsTypeVisibleFromCom_Windows_TestData()
         {

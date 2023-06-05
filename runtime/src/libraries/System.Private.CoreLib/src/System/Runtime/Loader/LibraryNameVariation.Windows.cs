@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Runtime.Loader
 {
-    internal partial struct LibraryNameVariation
+    partial internal struct LibraryNameVariation
     {
         private const string LibraryNameSuffix = ".dll";
 

@@ -7,10 +7,11 @@ using System.Globalization;
 
 namespace Roslyn.Utilities
 {
+    partial
     /// <summary>
     /// Defines a set of helper methods to classify Unicode characters.
     /// </summary>
-    internal static partial class UnicodeCharacterUtilities
+    internal static class UnicodeCharacterUtilities
     {
         public static bool IsIdentifierStartCharacter(char ch)
         {

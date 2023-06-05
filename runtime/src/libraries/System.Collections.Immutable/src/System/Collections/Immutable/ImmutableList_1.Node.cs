@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Immutable
 {
-    public sealed partial class ImmutableList<T>
+    partial public sealed class ImmutableList<T>
     {
         /// <summary>
         /// A node in the AVL tree storing this set.

@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.AddAwait
         ),
         Shared
     ]
-    internal partial class CSharpAddAwaitCodeRefactoringProvider
+    partial internal class CSharpAddAwaitCodeRefactoringProvider
         : AbstractAddAwaitCodeRefactoringProvider<ExpressionSyntax>
     {
         [ImportingConstructor]

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Linq
 {
-    internal abstract partial class OrderedEnumerable<TElement> : IPartition<TElement>
+    partial internal abstract class OrderedEnumerable<TElement> : IPartition<TElement>
     {
         public virtual TElement[] ToArray()
         {
@@ -260,7 +260,7 @@ namespace System.Linq
         }
     }
 
-    internal sealed partial class OrderedImplicitlyStableEnumerable<TElement>
+    partial internal sealed class OrderedImplicitlyStableEnumerable<TElement>
         : OrderedEnumerable<TElement>
     {
         public override TElement[] ToArray()

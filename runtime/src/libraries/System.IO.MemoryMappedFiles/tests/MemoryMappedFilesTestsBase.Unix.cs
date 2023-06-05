@@ -8,8 +8,9 @@ using Xunit;
 
 namespace System.IO.MemoryMappedFiles.Tests
 {
+    partial
     /// <summary>Base class from which all of the memory mapped files test classes derive.</summary>
-    public abstract partial class MemoryMappedFilesTestBase : FileCleanupTestBase
+    public abstract class MemoryMappedFilesTestBase : FileCleanupTestBase
     {
         /// <summary>Gets the system's page size.</summary>
         protected static Lazy<int> s_pageSize = new Lazy<int>(() =>
@@ -36,10 +37,10 @@ namespace System.IO.MemoryMappedFiles.Tests
         });
 
         [LibraryImport("libc", SetLastError = true)]
-        private static partial int sysconf(int name);
+        partial private static int sysconf(int name);
 
         [LibraryImport("libc", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
-        protected static partial int mkfifo(string path, int mode);
+        partial protected static int mkfifo(string path, int mode);
 
         /// <summary>Asserts that the handle's inheritability matches the specified value.</summary>
         protected static void AssertInheritability(

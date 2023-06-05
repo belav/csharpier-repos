@@ -117,7 +117,7 @@ namespace System.Security.Permissions
             set { m_unrestricted = value; }
         }
 
-        abstract public IPermission CreatePermission();
+        public abstract IPermission CreatePermission();
 
         [System.Security.SecurityCritical] // auto-generated
         internal static unsafe IntPtr FindSecurityAttributeTypeHandle(String typeName)
@@ -168,8 +168,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class EnvironmentPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class EnvironmentPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private String m_read = null;
@@ -236,8 +237,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class FileDialogPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class FileDialogPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private FileDialogPermissionAccess m_access;
@@ -293,8 +295,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class FileIOPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class FileIOPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private String m_read = null;
@@ -556,7 +559,7 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class PrincipalPermissionAttribute : CodeAccessSecurityAttribute
+    public sealed class PrincipalPermissionAttribute : CodeAccessSecurityAttribute
     {
         private String m_name = null;
         private String m_role = null;
@@ -608,8 +611,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class ReflectionPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class ReflectionPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private ReflectionPermissionFlag m_flag = ReflectionPermissionFlag.NoFlags;
@@ -700,8 +704,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class RegistryPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class RegistryPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private String m_read = null;
@@ -820,8 +825,9 @@ namespace System.Security.Permissions
 #if !FEATURE_CAS_POLICY
     // The csharp compiler requires these types to be public, but they are not used elsewhere.
     [Obsolete("SecurityPermissionAttribute is no longer accessible to application code.")]
+    public
 #endif
-    sealed public class SecurityPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class SecurityPermissionAttribute : CodeAccessSecurityAttribute
     {
         private SecurityPermissionFlag m_flag = SecurityPermissionFlag.NoFlags;
 
@@ -1013,8 +1019,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class UIPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class UIPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private UIPermissionWindow m_windowFlag = UIPermissionWindow.NoWindows;
@@ -1061,8 +1068,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class ZoneIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class ZoneIdentityPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private SecurityZone m_flag = SecurityZone.NoZone;
@@ -1102,8 +1110,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private String m_name = null;
@@ -1168,8 +1177,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class SiteIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    sealed class SiteIdentityPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private String m_site = null;
@@ -1213,7 +1223,7 @@ namespace System.Security.Permissions
     [System.Runtime.InteropServices.ComVisible(true)]
 #pragma warning disable 618
     [Serializable]
-    sealed public class UrlIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    public sealed class UrlIdentityPermissionAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private String m_url = null;
@@ -1257,7 +1267,7 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class PublisherIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    public sealed class PublisherIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         private String m_x509cert = null;
         private String m_certFile = null;
@@ -1414,7 +1424,7 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class IsolatedStorageFilePermissionAttribute : IsolatedStoragePermissionAttribute
+    public sealed class IsolatedStorageFilePermissionAttribute : IsolatedStoragePermissionAttribute
     {
         public IsolatedStorageFilePermissionAttribute(SecurityAction action)
             : base(action) { }
@@ -1453,8 +1463,9 @@ namespace System.Security.Permissions
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
+    public
 #pragma warning disable 618
-    sealed public class PermissionSetAttribute : CodeAccessSecurityAttribute
+    sealed class PermissionSetAttribute : CodeAccessSecurityAttribute
 #pragma warning restore 618
     {
         private String m_file;

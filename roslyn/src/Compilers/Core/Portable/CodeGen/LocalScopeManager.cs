@@ -17,7 +17,7 @@ using Cci = Microsoft.Cci;
 
 namespace Microsoft.CodeAnalysis.CodeGen
 {
-    internal partial class ILBuilder
+    partial internal class ILBuilder
     {
         private sealed class LocalScopeManager
         {

@@ -28,7 +28,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
+partial internal abstract class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
     where TTag : ITag
 {
     private sealed class PushDiagnosticsTaggerProvider : AsynchronousTaggerProvider<TTag>

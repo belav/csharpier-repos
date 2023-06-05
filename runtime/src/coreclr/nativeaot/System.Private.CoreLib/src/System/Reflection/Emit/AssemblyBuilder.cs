@@ -7,7 +7,7 @@ using System.IO;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class AssemblyBuilder : Assembly
+    partial public sealed class AssemblyBuilder : Assembly
     {
         internal AssemblyBuilder()
         {

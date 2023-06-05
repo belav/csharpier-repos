@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 {
-    internal abstract partial class AbstractGenerateVariableService<
+    partial internal abstract class AbstractGenerateVariableService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax

@@ -55,7 +55,7 @@ public readonly struct GeneratorAttributeSyntaxContext
     }
 }
 
-public partial struct SyntaxValueProvider
+partial public struct SyntaxValueProvider
 {
     private static readonly char[] s_nestedTypeNameSeparators = new char[] { '+' };
     private static readonly SymbolDisplayFormat s_metadataDisplayFormat =

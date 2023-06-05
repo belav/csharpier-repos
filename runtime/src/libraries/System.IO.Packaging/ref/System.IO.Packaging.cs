@@ -6,7 +6,7 @@
 
 namespace System.IO
 {
-    public partial class FileFormatException : System.FormatException
+    partial public class FileFormatException : System.FormatException
     {
         public FileFormatException() { }
 
@@ -50,7 +50,7 @@ namespace System.IO.Packaging
         RightsManagement = 1,
     }
 
-    public abstract partial class Package : System.IDisposable
+    partial public abstract class Package : System.IDisposable
     {
         protected Package(System.IO.FileAccess openFileAccess) { }
 
@@ -211,7 +211,7 @@ namespace System.IO.Packaging
         void System.IDisposable.Dispose() { }
     }
 
-    public abstract partial class PackagePart
+    partial public abstract class PackagePart
     {
         protected PackagePart(System.IO.Packaging.Package package, System.Uri partUri) { }
 
@@ -314,7 +314,7 @@ namespace System.IO.Packaging
         }
     }
 
-    public partial class PackagePartCollection
+    partial public class PackagePartCollection
         : System.Collections.Generic.IEnumerable<System.IO.Packaging.PackagePart>,
             System.Collections.IEnumerable
     {
@@ -336,7 +336,7 @@ namespace System.IO.Packaging
         }
     }
 
-    public abstract partial class PackageProperties : System.IDisposable
+    partial public abstract class PackageProperties : System.IDisposable
     {
         protected PackageProperties() { }
 
@@ -362,7 +362,7 @@ namespace System.IO.Packaging
         protected virtual void Dispose(bool disposing) { }
     }
 
-    public partial class PackageRelationship
+    partial public class PackageRelationship
     {
         internal PackageRelationship() { }
 
@@ -392,7 +392,7 @@ namespace System.IO.Packaging
         }
     }
 
-    public partial class PackageRelationshipCollection
+    partial public class PackageRelationshipCollection
         : System.Collections.Generic.IEnumerable<System.IO.Packaging.PackageRelationship>,
             System.Collections.IEnumerable
     {
@@ -409,7 +409,7 @@ namespace System.IO.Packaging
         }
     }
 
-    public sealed partial class PackageRelationshipSelector
+    partial public sealed class PackageRelationshipSelector
     {
         public PackageRelationshipSelector(
             System.Uri sourceUri,
@@ -444,7 +444,7 @@ namespace System.IO.Packaging
         Type = 1,
     }
 
-    public static partial class PackUriHelper
+    partial public static class PackUriHelper
     {
         public static readonly string UriSchemePack;
 
@@ -497,7 +497,7 @@ namespace System.IO.Packaging
         External = 1,
     }
 
-    public sealed partial class ZipPackage : System.IO.Packaging.Package
+    partial public sealed class ZipPackage : System.IO.Packaging.Package
     {
         internal ZipPackage()
             : base(default(System.IO.FileAccess)) { }
@@ -528,7 +528,7 @@ namespace System.IO.Packaging
         }
     }
 
-    public sealed partial class ZipPackagePart : System.IO.Packaging.PackagePart
+    partial public sealed class ZipPackagePart : System.IO.Packaging.PackagePart
     {
         internal ZipPackagePart()
             : base(default(System.IO.Packaging.Package), default(System.Uri)) { }

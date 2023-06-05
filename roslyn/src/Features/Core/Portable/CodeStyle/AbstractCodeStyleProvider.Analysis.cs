@@ -10,12 +10,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
+    partial
     // This part contains all the logic for hooking up the DiagnosticAnalyzer to the CodeStyleProvider.
     // All the code in this part is an implementation detail and is intentionally private so that
     // subclasses cannot change anything.  All code relevant to subclasses relating to analysis
     // is contained in AbstractCodeStyleProvider.cs
 
-    internal abstract partial class AbstractCodeStyleProvider<TOptionValue, TCodeStyleProvider>
+    internal abstract class AbstractCodeStyleProvider<TOptionValue, TCodeStyleProvider>
     {
         public abstract class DiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         {

@@ -12,7 +12,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCAttributeAccess : TCXMLReaderBaseGeneral
+    partial public abstract class TCAttributeAccess : TCXMLReaderBaseGeneral
     {
         [Variation("Attribute Access test using ordinal (Ascending Order)", Pri = 0)]
         public int TestAttributeAccess1()
@@ -742,7 +742,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCThisName : TCXMLReaderBaseGeneral
+    partial public abstract class TCThisName : TCXMLReaderBaseGeneral
     {
         [Variation("This[Name] Verify with GetAttribute(Name)", Pri = 0)]
         public int ThisWithName1()
@@ -1065,7 +1065,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCMoveToAttribute : TCXMLReaderBaseGeneral
+    partial public abstract class TCMoveToAttribute : TCXMLReaderBaseGeneral
     {
         [Variation("MoveToAttribute(String.Empty)")]
         public int MoveToAttributeWithName1()
@@ -1105,7 +1105,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCGetAttributeOrdinal : TCXMLReaderBaseGeneral
+    partial public abstract class TCGetAttributeOrdinal : TCXMLReaderBaseGeneral
     {
         [Variation("GetAttribute(i) Verify with This[i] - Double Quote", Pri = 0)]
         public int GetAttributeWithGetAttrDoubleQ()
@@ -1273,7 +1273,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCGetAttributeName : TCXMLReaderBaseGeneral
+    partial public abstract class TCGetAttributeName : TCXMLReaderBaseGeneral
     {
         [Variation("GetAttribute(Name) Verify with This[Name]", Pri = 0)]
         public int GetAttributeWithName1()
@@ -1555,7 +1555,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCThisOrdinal : TCXMLReaderBaseGeneral
+    partial public abstract class TCThisOrdinal : TCXMLReaderBaseGeneral
     {
         [Variation("This[i] Verify with GetAttribute[i] - Double Quote", Pri = 0)]
         public int OrdinalWithGetAttrDoubleQ()
@@ -1723,7 +1723,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCMoveToAttributeOrdinal : TCXMLReaderBaseGeneral
+    partial public abstract class TCMoveToAttributeOrdinal : TCXMLReaderBaseGeneral
     {
         [Variation("MoveToAttribute(i) Verify with This[i] - Double Quote", Pri = 0)]
         public int MoveToAttributeWithGetAttrDoubleQ()
@@ -1881,7 +1881,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCMoveToFirstAttribute : TCXMLReaderBaseGeneral
+    partial public abstract class TCMoveToFirstAttribute : TCXMLReaderBaseGeneral
     {
         [Variation("MoveToFirstAttribute() When AttributeCount=0, <EMPTY1/> ", Pri = 0)]
         public int MoveToFirstAttribute1()
@@ -2005,7 +2005,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCMoveToNextAttribute : TCXMLReaderBaseGeneral
+    partial public abstract class TCMoveToNextAttribute : TCXMLReaderBaseGeneral
     {
         [Variation("MoveToNextAttribute() When AttributeCount=0, <EMPTY1/> ", Pri = 0)]
         public int MoveToNextAttribute1()
@@ -2176,7 +2176,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCAttributeTest : TCXMLReaderBaseGeneral
+    partial public abstract class TCAttributeTest : TCXMLReaderBaseGeneral
     {
         [Variation("Attribute Test On None")]
         public int TestAttributeTestNodeType_None()
@@ -2463,7 +2463,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCAttributeXmlDeclaration : TCXMLReaderBaseGeneral
+    partial public abstract class TCAttributeXmlDeclaration : TCXMLReaderBaseGeneral
     {
         private static string[] s_attrNames = { "version", "encoding", "standalone" };
         private static string[] s_attrValues = { "1.0", "UTF-8", "no" };
@@ -2928,7 +2928,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCXmlns : TCXMLReaderBaseGeneral
+    partial public abstract class TCXmlns : TCXMLReaderBaseGeneral
     {
         private string _ST_ENS1 = "EMPTY_NAMESPACE1"; //<EMPTY_NAMESPACE1 Attr0="0" xmlns="14"/>
         private string _ST_NS2 = "NAMESPACE2"; //<NAMESPACE2 xmlns:bar="1">
@@ -3069,7 +3069,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCXmlnsPrefix : TCXMLReaderBaseGeneral
+    partial public abstract class TCXmlnsPrefix : TCXMLReaderBaseGeneral
     {
         private string _ST_ENS1 = "EMPTY_NAMESPACE1"; //<EMPTY_NAMESPACE1 Attr0="0" xmlns="14"/>
         private string _ST_NS2 = "NAMESPACE2"; //<NAMESPACE2 xmlns:bar="1">

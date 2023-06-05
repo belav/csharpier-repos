@@ -6,12 +6,13 @@ using System.Security.Principal;
 
 namespace System.Net.Security
 {
+    partial
     //
     // The class maintains the state of the authentication process and the security context.
     // It encapsulates security context and does the real work in authentication and
     // user data encryption with NEGO SSPI package.
     //
-    internal static partial class NegotiateStreamPal
+    internal static class NegotiateStreamPal
     {
         internal static IIdentity GetIdentity(NTAuthentication context)
         {

@@ -31,7 +31,7 @@ namespace System.Reflection.Runtime.PropertyInfos.EcmaFormat
     // The runtime's implementation of PropertyInfo's
     //
     [DebuggerDisplay("{_debugName}")]
-    internal sealed partial class EcmaFormatRuntimePropertyInfo : RuntimePropertyInfo
+    partial internal sealed class EcmaFormatRuntimePropertyInfo : RuntimePropertyInfo
     {
         //
         // propertyHandle - the "tkPropertyDef" that identifies the property.

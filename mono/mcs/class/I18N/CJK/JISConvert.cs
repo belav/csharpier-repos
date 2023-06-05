@@ -31,7 +31,7 @@ namespace I18N.CJK
     // several large tables to do this, some of which are stored in
     // the resource section of the assembly for efficient access.
 
-    internal unsafe sealed class JISConvert
+    internal sealed unsafe class JISConvert
     {
         // Table identifiers.
         private const int JISX0208_To_Unicode = 1;

@@ -45,7 +45,7 @@ using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.Xaml
 {
-    public partial class XamlReaderTestBase
+    partial public class XamlReaderTestBase
     {
         protected void Read_String(XamlReader r)
         {

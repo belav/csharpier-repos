@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct CRYPT_ATTRIBUTE

@@ -17,7 +17,7 @@ namespace System.ServiceModel.Configuration
     using System.Text;
     using System.Xml;
 
-    public sealed partial class IssuedTokenParametersElement : ServiceModelConfigurationElement
+    partial public sealed class IssuedTokenParametersElement : ServiceModelConfigurationElement
     {
         Collection<IssuedTokenParametersElement> optionalIssuedTokenParameters = null;
 

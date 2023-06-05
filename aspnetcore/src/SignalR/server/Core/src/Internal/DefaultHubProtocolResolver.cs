@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-internal sealed partial class DefaultHubProtocolResolver : IHubProtocolResolver
+partial internal sealed class DefaultHubProtocolResolver : IHubProtocolResolver
 {
     private readonly ILogger<DefaultHubProtocolResolver> _logger;
     private readonly List<IHubProtocol> _hubProtocols;
@@ -55,7 +55,7 @@ internal sealed partial class DefaultHubProtocolResolver : IHubProtocolResolver
         return null;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -63,7 +63,7 @@ internal sealed partial class DefaultHubProtocolResolver : IHubProtocolResolver
             "Registered SignalR Protocol: {ProtocolName}, implemented by {ImplementationType}.",
             EventName = "RegisteredSignalRProtocol"
         )]
-        public static partial void RegisteredSignalRProtocol(
+        partial public static void RegisteredSignalRProtocol(
             ILogger logger,
             string protocolName,
             Type implementationType
@@ -75,7 +75,7 @@ internal sealed partial class DefaultHubProtocolResolver : IHubProtocolResolver
             "Found protocol implementation for requested protocol: {ProtocolName}.",
             EventName = "FoundImplementationForProtocol"
         )]
-        public static partial void FoundImplementationForProtocol(
+        partial public static void FoundImplementationForProtocol(
             ILogger logger,
             string protocolName
         );

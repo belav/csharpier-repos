@@ -487,7 +487,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             return new AssumeBlock<Label>(this, pc, tag, ref this.BlockIdGenerator);
         }
 
-        public override sealed void AddEdgeSubroutine(
+        public sealed override void AddEdgeSubroutine(
             CFGBlock from,
             CFGBlock to,
             Subroutine subroutine,

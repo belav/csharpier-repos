@@ -13,7 +13,7 @@ namespace System.Data.Sql
     using System.Data.Common;
     using System.Diagnostics;
 
-    sealed internal class SqlGenericUtil
+    internal sealed class SqlGenericUtil
     {
         private SqlGenericUtil()
         { /* prevent utility class from being insantiated*/
@@ -27,12 +27,21 @@ namespace System.Data.Sql
         // Sql.Definition
         //
 
-        static internal Exception NullCommandText()
+        internal
+        //
+        // Sql generic exceptions
+        //
+
+        //
+        // Sql.Definition
+        //
+
+        static Exception NullCommandText()
         {
             return ADP.Argument(Res.GetString(Res.Sql_NullCommandText));
         }
 
-        static internal Exception MismatchedMetaDataDirectionArrayLengths()
+        internal static Exception MismatchedMetaDataDirectionArrayLengths()
         {
             return ADP.Argument(Res.GetString(Res.Sql_MismatchedMetaDataDirectionArrayLengths));
         }

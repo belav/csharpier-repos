@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace System.Formats.Tar
 {
+    partial
     // Unix specific methods for the TarWriter class.
-    public sealed partial class TarWriter : IDisposable
+    public sealed class TarWriter : IDisposable
     {
         private readonly Dictionary<uint, string> _userIdentifiers = new Dictionary<uint, string>();
         private readonly Dictionary<uint, string> _groupIdentifiers =

@@ -15,11 +15,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.BuildTasks
 {
+    partial
     /// <summary>
     /// This task exists to help us validate our bootstrap build is loading the correct binary from disk. Ensuring
     /// it loads the bootstrap binaries and not the standard build binaries.
     /// </summary>
-    public sealed partial class ValidateBootstrap : Task
+    public sealed class ValidateBootstrap : Task
     {
         private string? _tasksAssemblyFullPath;
 

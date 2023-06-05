@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-internal partial class DbContextInfoCommand : ContextCommandBase
+partial internal class DbContextInfoCommand : ContextCommandBase
 {
     private CommandOption? _json;
 

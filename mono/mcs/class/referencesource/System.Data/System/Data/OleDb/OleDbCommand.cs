@@ -142,7 +142,7 @@ namespace System.Data.OleDb
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandText),
         ]
-        override public string CommandText
+        public override string CommandText
         {
             get
             {
@@ -169,7 +169,7 @@ namespace System.Data.OleDb
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandTimeout),
         ]
-        override public int CommandTimeout
+        public override int CommandTimeout
         { // V1.2.3300, XXXCommand V1.0.5000
             get { return _commandTimeout; }
             set
@@ -207,7 +207,7 @@ namespace System.Data.OleDb
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandType),
         ]
-        override public CommandType CommandType
+        public override CommandType CommandType
         {
             get
             {
@@ -240,7 +240,7 @@ namespace System.Data.OleDb
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_Connection),
         ]
-        new public OleDbConnection Connection
+        public new OleDbConnection Connection
         {
             get { return _connection; }
             set
@@ -278,18 +278,18 @@ namespace System.Data.OleDb
             _connection = null;
         }
 
-        override protected DbConnection DbConnection
+        protected override DbConnection DbConnection
         { // V1.2.3300
             get { return Connection; }
             set { Connection = (OleDbConnection)value; }
         }
 
-        override protected DbParameterCollection DbParameterCollection
+        protected override DbParameterCollection DbParameterCollection
         { // V1.2.3300
             get { return Parameters; }
         }
 
-        override protected DbTransaction DbTransaction
+        protected override DbTransaction DbTransaction
         { // V1.2.3300
             get { return Transaction; }
             set { Transaction = (OleDbTransaction)value; }
@@ -320,7 +320,7 @@ namespace System.Data.OleDb
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_Parameters),
         ]
-        new public OleDbParameterCollection Parameters
+        public new OleDbParameterCollection Parameters
         {
             get
             {
@@ -347,7 +347,7 @@ namespace System.Data.OleDb
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.DbCommand_Transaction),
         ]
-        new public OleDbTransaction Transaction
+        public new OleDbTransaction Transaction
         {
             get
             {
@@ -373,7 +373,7 @@ namespace System.Data.OleDb
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbCommand_UpdatedRowSource),
         ]
-        override public UpdateRowSource UpdatedRowSource
+        public override UpdateRowSource UpdatedRowSource
         { // V1.2.3300, XXXCommand V1.0.5000
             get { return _updatedRowSource; }
             set
@@ -510,7 +510,7 @@ namespace System.Data.OleDb
             }
         }
 
-        override public void Cancel()
+        public override void Cancel()
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<oledb.OleDbCommand.Cancel|API> %d#\n", ObjectID);
@@ -644,17 +644,17 @@ namespace System.Data.OleDb
             }
         }
 
-        new public OleDbParameter CreateParameter()
+        public new OleDbParameter CreateParameter()
         {
             return new OleDbParameter();
         }
 
-        override protected DbParameter CreateDbParameter()
+        protected override DbParameter CreateDbParameter()
         {
             return CreateParameter();
         }
 
-        override protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         { // MDAC 65459
             if (disposing)
             { // release mananged objects
@@ -677,7 +677,7 @@ namespace System.Data.OleDb
             base.Dispose(disposing); // notify base classes
         }
 
-        new public OleDbDataReader ExecuteReader()
+        public new OleDbDataReader ExecuteReader()
         {
             return ExecuteReader(CommandBehavior.Default);
         }
@@ -687,7 +687,7 @@ namespace System.Data.OleDb
             return ExecuteReader(CommandBehavior.Default);
         }
 
-        new public OleDbDataReader ExecuteReader(CommandBehavior behavior)
+        public new OleDbDataReader ExecuteReader(CommandBehavior behavior)
         {
             OleDbConnection.ExecutePermission.Demand();
 
@@ -714,7 +714,7 @@ namespace System.Data.OleDb
             return ExecuteReader(behavior);
         }
 
-        override protected DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
+        protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
         {
             return ExecuteReader(behavior);
         }
@@ -1129,7 +1129,7 @@ namespace System.Data.OleDb
             return e;
         }
 
-        override public int ExecuteNonQuery()
+        public override int ExecuteNonQuery()
         {
             OleDbConnection.ExecutePermission.Demand();
 
@@ -1147,7 +1147,7 @@ namespace System.Data.OleDb
             }
         }
 
-        override public object ExecuteScalar()
+        public override object ExecuteScalar()
         {
             OleDbConnection.ExecutePermission.Demand();
 
@@ -1474,7 +1474,7 @@ namespace System.Data.OleDb
             }
         }
 
-        override public void Prepare()
+        public override void Prepare()
         {
             OleDbConnection.ExecutePermission.Demand();
 

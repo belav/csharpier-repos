@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace System.Collections.Generic
 {
-    public static partial class CollectionExtensions
+    partial public static class CollectionExtensions
     {
         internal static Dictionary<string, T> LibraryCollectionToDictionary<T>(
             this IReadOnlyList<T> collection

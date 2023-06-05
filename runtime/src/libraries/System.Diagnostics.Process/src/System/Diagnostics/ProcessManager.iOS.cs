@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {
-    internal static partial class ProcessManager
+    partial internal static class ProcessManager
     {
 #pragma warning disable IDE0060
         /// <summary>Gets the IDs of all processes on the current machine.</summary>

@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
 
     [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
-    public partial class NetPeerTcpBindingElement : StandardBindingElement
+    partial public class NetPeerTcpBindingElement : StandardBindingElement
     {
         public NetPeerTcpBindingElement(string name)
             : base(name) { }

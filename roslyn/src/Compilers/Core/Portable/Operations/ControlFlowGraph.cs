@@ -14,6 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
+    partial
     /// <summary>
     /// Control flow graph representation for a given executable code block <see cref="OriginalOperation"/>.
     /// This graph contains a set of <see cref="BasicBlock"/>s, with an entry block, zero
@@ -21,7 +22,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
     /// Each basic block contains zero or more <see cref="BasicBlock.Operations"/> and
     /// explicit <see cref="ControlFlowBranch"/>(s) to other basic block(s).
     /// </summary>
-    public sealed partial class ControlFlowGraph
+    public sealed class ControlFlowGraph
     {
         private readonly ControlFlowGraphBuilder.CaptureIdDispenser _captureIdDispenser;
         private readonly ImmutableDictionary<

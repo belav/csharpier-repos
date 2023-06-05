@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 {
-    public partial class LoadAssemblyAndGetFunctionPointer
+    partial public class LoadAssemblyAndGetFunctionPointer
         : IClassFixture<LoadAssemblyAndGetFunctionPointer.SharedTestState>
     {
         private const string ComponentLoadAssemblyAndGetFunctionPointerArg =

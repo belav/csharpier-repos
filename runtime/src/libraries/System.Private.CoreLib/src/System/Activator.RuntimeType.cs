@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System
 {
-    public static partial class Activator
+    partial public static class Activator
     {
         //
         // Note: CreateInstance returns null for Nullable<T>, e.g. CreateInstance(typeof(int?)) returns null.

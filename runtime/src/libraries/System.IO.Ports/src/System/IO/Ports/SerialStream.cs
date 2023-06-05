@@ -10,8 +10,9 @@ using System.Net.Sockets;
 
 namespace System.IO.Ports
 {
+    partial
 #pragma warning disable CA1844
-    internal sealed partial class SerialStream : Stream
+    internal sealed class SerialStream : Stream
 #pragma warning restore CA1844
     {
         private const int MaxDataBits = 8;

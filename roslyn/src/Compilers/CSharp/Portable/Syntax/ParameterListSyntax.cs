@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ParameterListSyntax
+    partial public class ParameterListSyntax
     {
         internal int ParameterCount
         {

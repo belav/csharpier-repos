@@ -35,7 +35,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 {
-    public partial class TestWorkspace : Workspace
+    partial public class TestWorkspace : Workspace
     {
         public ExportProvider ExportProvider { get; }
         public TestComposition? Composition { get; }

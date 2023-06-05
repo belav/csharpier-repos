@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Net.Tests
 {
-    public partial class WebHeaderCollectionTest
+    partial public class WebHeaderCollectionTest
     {
         [Fact]
         public void Ctor_Success()

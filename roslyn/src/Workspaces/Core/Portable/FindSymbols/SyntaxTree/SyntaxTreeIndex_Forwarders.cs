@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Shared.Collections;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal sealed partial class SyntaxTreeIndex
+    partial internal sealed class SyntaxTreeIndex
     {
         public bool ProbablyContainsIdentifier(string identifier) =>
             _identifierInfo.ProbablyContainsIdentifier(identifier);

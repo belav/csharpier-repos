@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace IOperationGenerator
 {
-    internal sealed partial class IOperationClassWriter
+    partial internal sealed class IOperationClassWriter
     {
         private bool ModelHasErrors(Tree tree)
         {

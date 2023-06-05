@@ -14,7 +14,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal abstract partial class AbstractLanguageService : IVsAutoOutliningClient
+    partial internal abstract class AbstractLanguageService : IVsAutoOutliningClient
     {
         public int QueryWaitForAutoOutliningCallback(out int fWait)
         {

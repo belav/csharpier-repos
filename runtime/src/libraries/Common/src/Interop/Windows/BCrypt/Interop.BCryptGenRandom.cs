@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         internal const int BCRYPT_USE_SYSTEM_PREFERRED_RNG = 0x00000002;
 
         [LibraryImport(Libraries.BCrypt)]
-        internal static unsafe partial NTSTATUS BCryptGenRandom(
+        partial internal static unsafe NTSTATUS BCryptGenRandom(
             IntPtr hAlgorithm,
             byte* pbBuffer,
             int cbBuffer,

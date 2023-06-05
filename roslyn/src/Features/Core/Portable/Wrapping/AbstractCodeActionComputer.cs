@@ -21,7 +21,7 @@ using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 
 namespace Microsoft.CodeAnalysis.Wrapping
 {
-    internal abstract partial class AbstractSyntaxWrapper
+    partial internal abstract class AbstractSyntaxWrapper
     {
         /// <summary>
         /// Class responsible for actually computing the entire set of code actions to offer the

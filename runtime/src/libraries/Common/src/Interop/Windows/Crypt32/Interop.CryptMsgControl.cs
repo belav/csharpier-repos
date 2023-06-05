@@ -4,13 +4,13 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptMsgControl(
+        partial internal static bool CryptMsgControl(
             SafeCryptMsgHandle hCryptMsg,
             int dwFlags,
             MsgControlType dwCtrlType,
@@ -19,7 +19,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptMsgControl(
+        partial internal static bool CryptMsgControl(
             SafeCryptMsgHandle hCryptMsg,
             int dwFlags,
             MsgControlType dwCtrlType,

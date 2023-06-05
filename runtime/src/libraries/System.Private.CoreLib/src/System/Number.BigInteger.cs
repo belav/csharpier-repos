@@ -8,10 +8,10 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    internal static partial class Number
+    partial internal static class Number
     {
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        internal unsafe ref struct BigInteger
+        ref internal unsafe struct BigInteger
         {
             // The longest binary mantissa requires: explicit mantissa bits + abs(min exponent)
             // * Half:     10 +    14 =    24
@@ -308,7 +308,7 @@ namespace System
             };
 
             private int _length;
-            private fixed uint _blocks[MaxBlockCount];
+            fixed private uint _blocks[MaxBlockCount];
 
             public static void Add(
                 scoped ref BigInteger lhs,

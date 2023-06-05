@@ -9,7 +9,7 @@ using System.Web.WebPages.Scope;
 
 namespace System.Web.WebPages.Html
 {
-    public partial class HtmlHelper
+    partial public class HtmlHelper
     {
         internal const string DefaultValidationInputErrorCssClass = "input-validation-error";
         private const string DefaultValidationInputValidCssClass = "input-validation-valid";

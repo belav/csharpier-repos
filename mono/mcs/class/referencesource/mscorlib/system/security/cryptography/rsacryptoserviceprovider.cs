@@ -41,7 +41,7 @@ namespace System.Security.Cryptography
 #endif
 
     [System.Runtime.InteropServices.ComVisible(true)]
-    public sealed partial class RSACryptoServiceProvider : RSA, ICspAsymmetricAlgorithm
+    partial public sealed class RSACryptoServiceProvider : RSA, ICspAsymmetricAlgorithm
     {
 #if !MONO
         private int _dwKeySize;

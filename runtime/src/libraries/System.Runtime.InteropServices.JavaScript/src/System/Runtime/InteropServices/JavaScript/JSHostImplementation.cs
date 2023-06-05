@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    internal static partial class JSHostImplementation
+    partial internal static class JSHostImplementation
     {
         private const string TaskGetResultName = "get_Result";
         private static MethodInfo? s_taskGetResultMethodInfo;

@@ -174,7 +174,7 @@ class Tests
         }
     }
 
-    static public long add_two_LongClass(BaseClass l1, BaseClass l2)
+    public static long add_two_LongClass(BaseClass l1, BaseClass l2)
     {
         long l = checked(((LongClass)l1).Value + ((LongClass)l2).Value);
         return l;

@@ -46,7 +46,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class WebHttpBindingElement
+    partial public class WebHttpBindingElement
         : StandardBindingElement,
             IBindingConfigurationElement
     {

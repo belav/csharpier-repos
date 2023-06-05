@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct CONDITION_VARIABLE
@@ -15,18 +15,18 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial void InitializeConditionVariable(
+        partial internal static unsafe void InitializeConditionVariable(
             CONDITION_VARIABLE* ConditionVariable
         );
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial void WakeConditionVariable(
+        partial internal static unsafe void WakeConditionVariable(
             CONDITION_VARIABLE* ConditionVariable
         );
 
         [LibraryImport(Libraries.Kernel32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool SleepConditionVariableCS(
+        partial internal static unsafe bool SleepConditionVariableCS(
             CONDITION_VARIABLE* ConditionVariable,
             CRITICAL_SECTION* CriticalSection,
             int dwMilliseconds

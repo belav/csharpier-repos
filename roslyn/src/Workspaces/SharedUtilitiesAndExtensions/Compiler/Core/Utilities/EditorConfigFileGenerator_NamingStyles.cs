@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.NamingStyles;
 
 namespace Microsoft.CodeAnalysis.Options
 {
-    internal static partial class EditorConfigFileGenerator
+    partial internal static class EditorConfigFileGenerator
     {
         public static void AppendNamingStylePreferencesToEditorConfig(
             IEnumerable<NamingRule> namingRules,

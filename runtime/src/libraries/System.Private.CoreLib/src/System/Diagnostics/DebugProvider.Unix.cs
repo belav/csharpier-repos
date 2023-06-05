@@ -3,7 +3,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class DebugProvider
+    partial public class DebugProvider
     {
         private static readonly bool s_shouldWriteToStdErr =
             Environment.GetEnvironmentVariable("COMPlus_DebugWriteToStdErr") == "1";

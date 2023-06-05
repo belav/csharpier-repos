@@ -13,7 +13,7 @@ using System.Diagnostics;
 
 namespace System.Resources
 {
-    public partial class ResourceWriter
+    partial public class ResourceWriter
     {
         // Set this delegate to allow multi-targeting for .resources files.
         // not used by .NETCore since ResourceWriter doesn't support BinaryFormatted resources.

@@ -42,7 +42,7 @@ namespace Microsoft.Win32.SafeHandles
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             if (Win32Native.UnmapViewOfFile(handle))
             {

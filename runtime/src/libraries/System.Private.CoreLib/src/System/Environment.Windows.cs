@@ -10,7 +10,7 @@ using System.Text;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         private static string CurrentDirectoryCore
         {

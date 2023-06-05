@@ -74,7 +74,11 @@ namespace System.Reflection.Emit
         #endregion
 
         #region Internal Static Members
-        static internal String UnmangleTypeName(String typeName)
+        internal
+        #endregion
+
+        #region Internal Static Members
+        static String UnmangleTypeName(String typeName)
         {
             // Gets the original type name, without '+' name mangling.
 
@@ -181,7 +185,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int GetTypeRef(
+        private static extern int GetTypeRef(
             RuntimeModule module,
             String strFullName,
             RuntimeModule refedModule,
@@ -193,7 +197,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int GetMemberRef(
+        private static extern int GetMemberRef(
             RuntimeModule module,
             RuntimeModule refedModule,
             int tr,
@@ -215,7 +219,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int GetMemberRefFromSignature(
+        private static extern int GetMemberRefFromSignature(
             RuntimeModule module,
             int tr,
             String methodName,
@@ -238,7 +242,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int GetMemberRefOfMethodInfo(
+        private static extern int GetMemberRefOfMethodInfo(
             RuntimeModule module,
             int tr,
             IRuntimeMethodInfo method
@@ -294,7 +298,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int GetMemberRefOfFieldInfo(
+        private static extern int GetMemberRefOfFieldInfo(
             RuntimeModule module,
             int tkType,
             RuntimeTypeHandle declaringType,
@@ -340,7 +344,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int GetTokenFromTypeSpec(
+        private static extern int GetTokenFromTypeSpec(
             RuntimeModule pModule,
             byte[] signature,
             int length
@@ -356,7 +360,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int GetArrayMethodToken(
+        private static extern int GetArrayMethodToken(
             RuntimeModule module,
             int tkTypeSpec,
             String methodName,
@@ -368,13 +372,13 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static int GetStringConstant(RuntimeModule module, String str, int length);
+        private static extern int GetStringConstant(RuntimeModule module, String str, int length);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void PreSavePEFile(
+        private static extern void PreSavePEFile(
             RuntimeModule module,
             int portableExecutableKind,
             int imageFileMachine
@@ -384,7 +388,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void SavePEFile(
+        private static extern void SavePEFile(
             RuntimeModule module,
             String fileName,
             int entryPoint,
@@ -396,7 +400,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void AddResource(
+        private static extern void AddResource(
             RuntimeModule module,
             String strName,
             byte[] resBytes,
@@ -411,13 +415,13 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void SetModuleName(RuntimeModule module, String strModuleName);
+        private static extern void SetModuleName(RuntimeModule module, String strModuleName);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        internal extern static void SetFieldRVAContent(
+        internal static extern void SetFieldRVAContent(
             RuntimeModule module,
             int fdToken,
             byte[] data,
@@ -429,7 +433,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void DefineNativeResourceFile(
+        private static extern void DefineNativeResourceFile(
             RuntimeModule module,
             String strFilename,
             int portableExecutableKind,
@@ -440,7 +444,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void DefineNativeResourceBytes(
+        private static extern void DefineNativeResourceBytes(
             RuntimeModule module,
             byte[] pbResource,
             int cbResource,

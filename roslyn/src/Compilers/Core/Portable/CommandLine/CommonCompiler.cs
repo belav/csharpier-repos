@@ -57,10 +57,11 @@ namespace Microsoft.CodeAnalysis
         }
     }
 
+    partial
     /// <summary>
     /// Base class for csc.exe, csi.exe, vbc.exe and vbi.exe implementations.
     /// </summary>
-    internal abstract partial class CommonCompiler
+    internal abstract class CommonCompiler
     {
         internal const int Failed = 1;
         internal const int Succeeded = 0;

@@ -27,12 +27,13 @@ using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.Assemblies
 {
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // Assemblies (maps 1-1 with a MetadataReader/ScopeDefinitionHandle.
     //-----------------------------------------------------------------------------------------------------------
-    internal partial class RuntimeAssemblyInfo
+    internal class RuntimeAssemblyInfo
     {
-        static partial void GetNativeFormatRuntimeAssembly(
+        partial static void GetNativeFormatRuntimeAssembly(
             AssemblyBindResult bindResult,
             ref RuntimeAssembly runtimeAssembly
         )
@@ -49,7 +50,7 @@ namespace System.Reflection.Runtime.Assemblies
 
 namespace System.Reflection.Runtime.Assemblies.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeAssembly
+    partial internal sealed class NativeFormatRuntimeAssembly
     {
         internal static RuntimeAssembly GetRuntimeAssembly(
             MetadataReader reader,
@@ -147,10 +148,11 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
 
 namespace System.Reflection.Runtime.FieldInfos.NativeFormat
 {
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // FieldInfos
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class NativeFormatRuntimeFieldInfo
+    internal sealed class NativeFormatRuntimeFieldInfo
     {
         internal static RuntimeFieldInfo GetRuntimeFieldInfo(
             FieldHandle fieldHandle,
@@ -171,10 +173,11 @@ namespace System.Reflection.Runtime.FieldInfos.NativeFormat
 
 namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
 {
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // PropertyInfos
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class NativeFormatRuntimePropertyInfo
+    internal sealed class NativeFormatRuntimePropertyInfo
     {
         internal static RuntimePropertyInfo GetRuntimePropertyInfo(
             PropertyHandle propertyHandle,
@@ -195,10 +198,11 @@ namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
 
 namespace System.Reflection.Runtime.EventInfos.NativeFormat
 {
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // EventInfos
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class NativeFormatRuntimeEventInfo
+    internal sealed class NativeFormatRuntimeEventInfo
     {
         internal static RuntimeEventInfo GetRuntimeEventInfo(
             EventHandle eventHandle,
@@ -219,11 +223,12 @@ namespace System.Reflection.Runtime.EventInfos.NativeFormat
 
 namespace System.Reflection.Runtime.Modules.NativeFormat
 {
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // Modules (these exist only because Modules still exist in the Win8P surface area. There is a 1-1
     //          mapping between Assemblies and Modules.)
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class NativeFormatRuntimeModule
+    internal sealed class NativeFormatRuntimeModule
     {
         internal static RuntimeModule GetRuntimeModule(NativeFormatRuntimeAssembly assembly)
         {
@@ -234,10 +239,11 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
 
 namespace System.Reflection.Runtime.ParameterInfos.NativeFormat
 {
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // ParameterInfos for MethodBase objects with Parameter metadata.
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class NativeFormatMethodParameterInfo
+    internal sealed class NativeFormatMethodParameterInfo
     {
         internal static NativeFormatMethodParameterInfo GetNativeFormatMethodParameterInfo(
             MethodBase member,
@@ -264,10 +270,11 @@ namespace System.Reflection.Runtime.CustomAttributes
 {
     using NativeFormat;
 
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // CustomAttributeData objects returned by various CustomAttributes properties.
     //-----------------------------------------------------------------------------------------------------------
-    internal abstract partial class RuntimeCustomAttributeData
+    internal abstract class RuntimeCustomAttributeData
     {
         internal static IEnumerable<CustomAttributeData> GetCustomAttributes(
             MetadataReader reader,

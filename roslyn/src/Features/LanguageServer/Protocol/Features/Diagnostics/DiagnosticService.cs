@@ -22,7 +22,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     [Export(typeof(IDiagnosticService)), Shared]
-    internal partial class DiagnosticService : IDiagnosticService
+    partial internal class DiagnosticService : IDiagnosticService
     {
         private const string DiagnosticsUpdatedEventName = "DiagnosticsUpdated";
 

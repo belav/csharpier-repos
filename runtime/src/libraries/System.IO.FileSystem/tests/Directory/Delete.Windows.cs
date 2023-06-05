@@ -9,7 +9,7 @@ using System.Security.AccessControl;
 
 namespace System.IO.Tests
 {
-    public partial class Directory_Delete_str_bool : Directory_Delete_str
+    partial public class Directory_Delete_str_bool : Directory_Delete_str
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]

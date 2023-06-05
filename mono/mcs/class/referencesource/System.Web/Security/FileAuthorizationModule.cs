@@ -375,7 +375,7 @@ namespace System.Web.Security
             context.Response.GenerateResponseHeadersForHandler();
         }
 
-        static internal bool RequestRequiresAuthorization(HttpContext context)
+        internal static bool RequestRequiresAuthorization(HttpContext context)
         {
             Object sec;
             FileSecurityDescriptorWrapper oSecDesc;

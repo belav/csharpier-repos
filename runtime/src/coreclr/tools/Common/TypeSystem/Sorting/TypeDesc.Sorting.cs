@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Functionality related to deterministic ordering of types and members
-    public partial class TypeDesc
+    public class TypeDesc
     {
         /// <summary>
         /// Gets an identifier that is the same for all instances of this <see cref="TypeDesc"/>

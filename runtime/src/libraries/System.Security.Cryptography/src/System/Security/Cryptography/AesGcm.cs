@@ -9,7 +9,7 @@ namespace System.Security.Cryptography
     [UnsupportedOSPlatform("browser")]
     [UnsupportedOSPlatform("ios")]
     [UnsupportedOSPlatform("tvos")]
-    public sealed partial class AesGcm : IDisposable
+    partial public sealed class AesGcm : IDisposable
     {
         private const int NonceSize = 12;
         public static KeySizes NonceByteSizes { get; } = new KeySizes(NonceSize, NonceSize, 1);

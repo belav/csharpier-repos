@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
     [Export(typeof(ITaggerProvider))]
     [TagType(typeof(IStructureTag))]
     [ContentType(ContentTypeNames.RoslynContentType)]
-    internal partial class StructureTaggerProvider : AbstractStructureTaggerProvider
+    partial internal class StructureTaggerProvider : AbstractStructureTaggerProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

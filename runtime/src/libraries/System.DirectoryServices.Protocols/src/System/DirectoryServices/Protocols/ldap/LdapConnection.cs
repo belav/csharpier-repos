@@ -29,7 +29,7 @@ namespace System.DirectoryServices.Protocols
         IntPtr* certificateHandle
     );
 
-    public partial class LdapConnection : DirectoryConnection, IDisposable
+    partial public class LdapConnection : DirectoryConnection, IDisposable
     {
         internal enum LdapResult
         {

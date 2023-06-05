@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.CSharp.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
 {
-    internal static partial class ConvertProgramAnalysis
+    partial internal static class ConvertProgramAnalysis
     {
         public static bool IsApplication(Compilation compilation) =>
             IsApplication(compilation.Options);

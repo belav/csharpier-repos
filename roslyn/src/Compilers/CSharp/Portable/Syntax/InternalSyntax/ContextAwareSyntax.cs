@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class ContextAwareSyntax
+    partial internal class ContextAwareSyntax
     {
         public GlobalStatementSyntax GlobalStatement(StatementSyntax statement) =>
             GlobalStatement(attributeLists: default, modifiers: default, statement);

@@ -14,9 +14,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class SolutionState
+    partial internal class SolutionState
     {
-        private abstract partial class CompilationAndGeneratorDriverTranslationAction
+        partial private abstract class CompilationAndGeneratorDriverTranslationAction
         {
             internal sealed class TouchDocumentAction
                 : CompilationAndGeneratorDriverTranslationAction

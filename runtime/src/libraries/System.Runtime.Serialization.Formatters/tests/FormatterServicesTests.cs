@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Runtime.Serialization.Formatters.Tests
 {
-    public partial class FormatterServicesTests
+    partial public class FormatterServicesTests
     {
         [Fact]
         public void CheckTypeSecurity_Nop()
@@ -161,8 +161,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
             yield return new object[] { typeof(StructWithSpanField) };
         }
 
+        ref
 #pragma warning disable 0169 // The private field 'class member' is never used
-        private ref struct StructWithSpanField
+        private struct StructWithSpanField
         {
             Span<byte> _bytes;
             int _position;

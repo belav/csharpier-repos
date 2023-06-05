@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Returns the full path to the executable for the current process, resolving symbolic links.
@@ -16,6 +16,6 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial string? GetProcessPath();
+        partial internal static string? GetProcessPath();
     }
 }

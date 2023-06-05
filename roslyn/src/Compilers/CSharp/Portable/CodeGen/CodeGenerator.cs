@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 {
-    internal sealed partial class CodeGenerator
+    partial internal sealed class CodeGenerator
     {
         private readonly MethodSymbol _method;
 

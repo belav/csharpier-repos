@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NCrypt
+    partial internal static class NCrypt
     {
         [LibraryImport(Interop.Libraries.NCrypt)]
-        internal static partial ErrorCode NCryptFreeObject(IntPtr hObject);
+        partial internal static ErrorCode NCryptFreeObject(IntPtr hObject);
     }
 }

@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
 
-    public partial class ExtensionsSection : ConfigurationSection
+    partial public class ExtensionsSection : ConfigurationSection
     {
         [ConfigurationProperty(ConfigurationStrings.BehaviorExtensions)]
         public ExtensionElementCollection BehaviorExtensions

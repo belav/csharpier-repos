@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    internal partial class TemporaryStorageService
+    partial internal class TemporaryStorageService
     {
         [
             ExportWorkspaceServiceFactory(
@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Host
             ),
             Shared
         ]
-        internal partial class Factory : IWorkspaceServiceFactory
+        partial internal class Factory : IWorkspaceServiceFactory
         {
             private readonly IWorkspaceThreadingService? _workspaceThreadingService;
 

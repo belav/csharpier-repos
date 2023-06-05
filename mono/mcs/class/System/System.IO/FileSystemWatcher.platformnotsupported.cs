@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace System.IO
 {
-    public partial class FileSystemWatcher : Component, ISupportInitialize
+    partial public class FileSystemWatcher : Component, ISupportInitialize
     {
         internal const string EXCEPTION_MESSAGE =
             "System.IO.FileSystemWatcher is not supported on the current platform.";

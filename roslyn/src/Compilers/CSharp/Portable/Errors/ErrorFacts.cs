@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class ErrorFacts
+    partial internal static class ErrorFacts
     {
         private const string s_titleSuffix = "_Title";
         private const string s_descriptionSuffix = "_Description";

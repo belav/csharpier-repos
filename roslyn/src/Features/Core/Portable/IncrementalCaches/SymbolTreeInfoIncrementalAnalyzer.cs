@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.IncrementalCaches
 {
-    internal partial class SymbolTreeInfoIncrementalAnalyzerProvider
+    partial internal class SymbolTreeInfoIncrementalAnalyzerProvider
     {
         private class SymbolTreeInfoIncrementalAnalyzer : IncrementalAnalyzerBase
         {

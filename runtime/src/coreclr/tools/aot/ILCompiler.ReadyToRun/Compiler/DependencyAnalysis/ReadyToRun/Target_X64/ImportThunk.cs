@@ -9,11 +9,12 @@ using ILCompiler.DependencyAnalysis.X64;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
+    partial
     /// <summary>
     /// This node emits a thunk calling DelayLoad_Helper with a given instance signature
     /// to populate its indirection cell.
     /// </summary>
-    public partial class ImportThunk
+    public class ImportThunk
     {
         protected override void EmitCode(
             NodeFactory factory,

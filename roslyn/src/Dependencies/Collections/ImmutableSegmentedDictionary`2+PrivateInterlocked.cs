@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal readonly partial struct ImmutableSegmentedDictionary<TKey, TValue>
+    partial internal readonly struct ImmutableSegmentedDictionary<TKey, TValue>
     {
         /// <summary>
         /// Private helper class for use only by <see cref="RoslynImmutableInterlocked"/>.

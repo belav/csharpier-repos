@@ -8,9 +8,9 @@ using System.Collections.Generic;
 
 namespace Roslyn.Utilities
 {
-    internal static partial class SpecializedCollections
+    partial internal static class SpecializedCollections
     {
-        private static partial class Singleton
+        partial private static class Singleton
         {
             internal sealed class List<T> : IReadOnlyList<T>, IList<T>, IReadOnlyCollection<T>
             {

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers.Binary
 {
-    public static partial class BinaryPrimitives
+    partial public static class BinaryPrimitives
     {
         /// <summary>
         /// Reads a <see cref="double" /> from the beginning of a read-only span of bytes, as big endian.

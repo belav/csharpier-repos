@@ -34,7 +34,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             ) { }
     }
 
-    public abstract partial class ReferenceHandlerTests_IgnoreCycles_Metadata
+    partial public abstract class ReferenceHandlerTests_IgnoreCycles_Metadata
         : ReferenceHandlerTests_IgnoreCycles
     {
         public ReferenceHandlerTests_IgnoreCycles_Metadata(JsonSerializerWrapper serializer)
@@ -96,7 +96,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(TreeNode<List<string>>))]
         [JsonSerializable(typeof(TreeNode<object>))]
         [JsonSerializable(typeof(int))]
-        internal sealed partial class ReferenceHandlerTests_IgnoreCyclesContext_Metadata
+        partial internal sealed class ReferenceHandlerTests_IgnoreCyclesContext_Metadata
             : JsonSerializerContext { }
     }
 
@@ -124,7 +124,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             ) { }
     }
 
-    public abstract partial class ReferenceHandlerTests_IgnoreCycles_Default
+    partial public abstract class ReferenceHandlerTests_IgnoreCycles_Default
         : ReferenceHandlerTests_IgnoreCycles
     {
         public ReferenceHandlerTests_IgnoreCycles_Default(JsonSerializerWrapper serializer)
@@ -185,7 +185,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(TreeNode<List<string>>))]
         [JsonSerializable(typeof(TreeNode<object>))]
         [JsonSerializable(typeof(int))]
-        internal sealed partial class ReferenceHandlerTests_IgnoreCyclesContext_Default
+        partial internal sealed class ReferenceHandlerTests_IgnoreCyclesContext_Default
             : JsonSerializerContext { }
     }
 }

@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetComInterfaceForObjectTests
+    partial public class GetComInterfaceForObjectTests
     {
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetComInterfaceForObject_GenericWithValidClass_ReturnsExpected()

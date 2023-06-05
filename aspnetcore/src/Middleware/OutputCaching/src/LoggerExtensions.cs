@@ -6,10 +6,11 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
+partial
 /// <summary>
 /// Defines the logger messages produced by output caching
 /// </summary>
-internal static partial class LoggerExtensions
+internal static class LoggerExtensions
 {
     [LoggerMessage(
         1,
@@ -17,7 +18,7 @@ internal static partial class LoggerExtensions
         "The 'IfNoneMatch' header of the request contains a value of *.",
         EventName = "NotModifiedIfNoneMatchStar"
     )]
-    internal static partial void NotModifiedIfNoneMatchStar(this ILogger logger);
+    partial internal static void NotModifiedIfNoneMatchStar(this ILogger logger);
 
     [LoggerMessage(
         2,
@@ -25,7 +26,7 @@ internal static partial class LoggerExtensions
         "The ETag {ETag} in the 'IfNoneMatch' header matched the ETag of a cached entry.",
         EventName = "NotModifiedIfNoneMatchMatched"
     )]
-    internal static partial void NotModifiedIfNoneMatchMatched(
+    partial internal static void NotModifiedIfNoneMatchMatched(
         this ILogger logger,
         EntityTagHeaderValue etag
     );
@@ -36,7 +37,7 @@ internal static partial class LoggerExtensions
         "The last modified date of {LastModified} is before the date {IfModifiedSince} specified in the 'IfModifiedSince' header.",
         EventName = "NotModifiedIfModifiedSinceSatisfied"
     )]
-    internal static partial void NotModifiedIfModifiedSinceSatisfied(
+    partial internal static void NotModifiedIfModifiedSinceSatisfied(
         this ILogger logger,
         DateTimeOffset lastModified,
         DateTimeOffset ifModifiedSince
@@ -48,7 +49,7 @@ internal static partial class LoggerExtensions
         "The content requested has not been modified.",
         EventName = "NotModifiedServed"
     )]
-    internal static partial void NotModifiedServed(this ILogger logger);
+    partial internal static void NotModifiedServed(this ILogger logger);
 
     [LoggerMessage(
         5,
@@ -56,7 +57,7 @@ internal static partial class LoggerExtensions
         "Serving response from cache.",
         EventName = "CachedResponseServed"
     )]
-    internal static partial void CachedResponseServed(this ILogger logger);
+    partial internal static void CachedResponseServed(this ILogger logger);
 
     [LoggerMessage(
         6,
@@ -64,7 +65,7 @@ internal static partial class LoggerExtensions
         "No cached response available for this request and the 'only-if-cached' cache directive was specified.",
         EventName = "GatewayTimeoutServed"
     )]
-    internal static partial void GatewayTimeoutServed(this ILogger logger);
+    partial internal static void GatewayTimeoutServed(this ILogger logger);
 
     [LoggerMessage(
         7,
@@ -72,7 +73,7 @@ internal static partial class LoggerExtensions
         "No cached response available for this request.",
         EventName = "NoResponseServed"
     )]
-    internal static partial void NoResponseServed(this ILogger logger);
+    partial internal static void NoResponseServed(this ILogger logger);
 
     [LoggerMessage(
         8,
@@ -80,7 +81,7 @@ internal static partial class LoggerExtensions
         "The response has been cached.",
         EventName = "ResponseCached"
     )]
-    internal static partial void ResponseCached(this ILogger logger);
+    partial internal static void ResponseCached(this ILogger logger);
 
     [LoggerMessage(
         9,
@@ -88,7 +89,7 @@ internal static partial class LoggerExtensions
         "The response could not be cached for this request.",
         EventName = "ResponseNotCached"
     )]
-    internal static partial void ResponseNotCached(this ILogger logger);
+    partial internal static void ResponseNotCached(this ILogger logger);
 
     [LoggerMessage(
         10,
@@ -96,7 +97,7 @@ internal static partial class LoggerExtensions
         "The response could not be cached for this request because the 'Content-Length' did not match the body length.",
         EventName = "ResponseContentLengthMismatchNotCached"
     )]
-    internal static partial void ResponseContentLengthMismatchNotCached(this ILogger logger);
+    partial internal static void ResponseContentLengthMismatchNotCached(this ILogger logger);
 
     [LoggerMessage(
         11,
@@ -104,7 +105,7 @@ internal static partial class LoggerExtensions
         "The response time of the entry is {ResponseTime} and has exceeded its expiry date.",
         EventName = "ExpirationExpiresExceeded"
     )]
-    internal static partial void ExpirationExpiresExceeded(
+    partial internal static void ExpirationExpiresExceeded(
         this ILogger logger,
         DateTimeOffset responseTime
     );

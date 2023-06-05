@@ -6,7 +6,7 @@ using System.Security.Cryptography.Pkcs;
 
 namespace System.Security.Cryptography.Asn1.Pkcs12
 {
-    internal partial struct PfxAsn
+    partial internal struct PfxAsn
     {
         internal bool VerifyMac(ReadOnlySpan<char> macPassword, ReadOnlySpan<byte> authSafeContents)
         {

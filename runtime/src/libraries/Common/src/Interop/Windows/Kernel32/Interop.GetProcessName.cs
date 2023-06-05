@@ -6,9 +6,9 @@ using System.Buffers;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(
             Libraries.Kernel32,
@@ -16,7 +16,7 @@ internal static partial class Interop
             SetLastError = true
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe partial bool QueryFullProcessImageName(
+        partial private static unsafe bool QueryFullProcessImageName(
             SafeHandle hProcess,
             uint dwFlags,
             char* lpBuffer,

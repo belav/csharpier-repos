@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
 {
-    internal partial class RawStringLiteralCommandHandler : ICommandHandler<ReturnKeyCommandArgs>
+    partial internal class RawStringLiteralCommandHandler : ICommandHandler<ReturnKeyCommandArgs>
     {
         public CommandState GetCommandState(ReturnKeyCommandArgs args) => CommandState.Unspecified;
 

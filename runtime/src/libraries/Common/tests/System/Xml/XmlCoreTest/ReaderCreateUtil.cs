@@ -18,6 +18,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace XmlCoreTest.Common
 {
+    partial
     /// <summary>
     /// This class contains helper methods for Readers.
     /// ConvertToBinaryStream : Converts the given xml string to the binary equivalent of the string and returns it
@@ -25,7 +26,7 @@ namespace XmlCoreTest.Common
     /// Common usage pattern would be something like :
     /// XmlReader.Create( new MemoryStream(ReaderHelper.ConvertToBinaryStream("<elem>abc</elem>", true, false)), "baseUri", readerSettings );
     /// </summary>
-    public static partial class ReaderHelper
+    public static class ReaderHelper
     {
         //All possible enum strings are listed here.
         //Some of them are duplicates reader types for legacy readers.

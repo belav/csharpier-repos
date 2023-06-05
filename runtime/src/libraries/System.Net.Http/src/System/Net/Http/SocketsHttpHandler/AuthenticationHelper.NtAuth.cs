@@ -13,7 +13,7 @@ using System.Security.Authentication.ExtendedProtection;
 
 namespace System.Net.Http
 {
-    internal static partial class AuthenticationHelper
+    partial internal static class AuthenticationHelper
     {
         private const string UsePortInSpnCtxSwitch = "System.Net.Http.UsePortInSpn";
         private const string UsePortInSpnEnvironmentVariable =

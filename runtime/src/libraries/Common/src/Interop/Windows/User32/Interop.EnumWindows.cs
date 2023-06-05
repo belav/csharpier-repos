@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         [LibraryImport(Libraries.User32)]
-        public static unsafe partial Interop.BOOL EnumWindows(
+        partial public static unsafe Interop.BOOL EnumWindows(
             delegate* unmanaged<IntPtr, IntPtr, Interop.BOOL> callback,
             IntPtr extraData
         );

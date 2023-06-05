@@ -527,7 +527,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCMoveToContent : TCXMLReaderBaseGeneral
+    partial public abstract class TCMoveToContent : TCXMLReaderBaseGeneral
     {
         public const string ST_TEST_NAME1 = "GOTOCONTENT";
         public const string ST_TEST_NAME2 = "SKIPCONTENT";
@@ -600,7 +600,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCIsStartElement : TCXMLReaderBaseGeneral
+    partial public abstract class TCIsStartElement : TCXMLReaderBaseGeneral
     {
         private const string ST_TEST_ELEM = "DOCNAMESPACE";
         private const string ST_TEST_EMPTY_ELEM = "NOSPACE";
@@ -870,7 +870,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCReadStartElement : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadStartElement : TCXMLReaderBaseGeneral
     {
         private const string ST_TEST_ELEM = "DOCNAMESPACE";
         private const string ST_TEST_EMPTY_ELEM = "NOSPACE";
@@ -1166,7 +1166,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCReadEndElement : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadEndElement : TCXMLReaderBaseGeneral
     {
         private const string ST_TEST_ELEM = "DOCNAMESPACE";
         private const string ST_TEST_EMPTY_ELEM = "NOSPACE";
@@ -1405,7 +1405,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCMoveToElement : TCXMLReaderBaseGeneral
+    partial public abstract class TCMoveToElement : TCXMLReaderBaseGeneral
     {
         [Variation("Attribute node")]
         public int v1()

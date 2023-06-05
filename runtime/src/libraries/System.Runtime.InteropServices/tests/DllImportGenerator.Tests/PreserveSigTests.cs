@@ -10,37 +10,37 @@ namespace DllImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        public partial class PreserveSig
+        partial public class PreserveSig
         {
-            public partial class False
+            partial public class False
             {
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_return",
                     PreserveSig = false
                 )]
-                public static partial void NoReturnValue(int i);
+                partial public static void NoReturnValue(int i);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_int",
                     PreserveSig = false
                 )]
-                public static partial void Int_Out(int i, out int ret);
+                partial public static void Int_Out(int i, out int ret);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_int",
                     PreserveSig = false
                 )]
-                public static partial int Int_AsReturn(int i);
+                partial public static int Int_AsReturn(int i);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_int",
                     PreserveSig = false
                 )]
-                public static partial void Bool_Out(
+                partial public static void Bool_Out(
                     int i,
                     [MarshalAs(UnmanagedType.U4)] out bool ret
                 );
@@ -51,14 +51,14 @@ namespace DllImportGenerator.IntegrationTests
                     PreserveSig = false
                 )]
                 [return: MarshalAs(UnmanagedType.U4)]
-                public static partial bool Bool_AsReturn(int i);
+                partial public static bool Bool_AsReturn(int i);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_ushort",
                     PreserveSig = false
                 )]
-                public static partial void Char_Out(
+                partial public static void Char_Out(
                     int i,
                     [MarshalAs(UnmanagedType.U2)] out char ret
                 );
@@ -69,14 +69,14 @@ namespace DllImportGenerator.IntegrationTests
                     PreserveSig = false
                 )]
                 [return: MarshalAs(UnmanagedType.U2)]
-                public static partial char Char_AsReturn(int i);
+                partial public static char Char_AsReturn(int i);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_ushort_string",
                     PreserveSig = false
                 )]
-                public static partial void String_Out(
+                partial public static void String_Out(
                     int i,
                     [MarshalAs(UnmanagedType.LPWStr)] out string ret
                 );
@@ -87,14 +87,14 @@ namespace DllImportGenerator.IntegrationTests
                     PreserveSig = false
                 )]
                 [return: MarshalAs(UnmanagedType.LPWStr)]
-                public static partial string String_AsReturn(int i);
+                partial public static string String_AsReturn(int i);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_int_array",
                     PreserveSig = false
                 )]
-                public static partial void IntArray_Out(
+                partial public static void IntArray_Out(
                     int i,
                     [MarshalAs(UnmanagedType.LPArray, SizeConst = sizeof(int))] out int[] ret
                 );
@@ -105,14 +105,14 @@ namespace DllImportGenerator.IntegrationTests
                     PreserveSig = false
                 )]
                 [return: MarshalAs(UnmanagedType.LPArray, SizeConst = sizeof(int))]
-                public static partial int[] IntArray_AsReturn(int i);
+                partial public static int[] IntArray_AsReturn(int i);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_ushort_string_array",
                     PreserveSig = false
                 )]
-                public static partial void StringArray_Out(
+                partial public static void StringArray_Out(
                     int i,
                     [MarshalAs(
                         UnmanagedType.LPArray,
@@ -132,21 +132,21 @@ namespace DllImportGenerator.IntegrationTests
                     ArraySubType = UnmanagedType.LPWStr,
                     SizeConst = sizeof(int)
                 )]
-                public static partial string[] StringArray_AsReturn(int i);
+                partial public static string[] StringArray_AsReturn(int i);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_handle",
                     PreserveSig = false
                 )]
-                public static partial void SafeHandle_Out(int hr, out DummySafeHandle ret);
+                partial public static void SafeHandle_Out(int hr, out DummySafeHandle ret);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_handle",
                     PreserveSig = false
                 )]
-                public static partial DummySafeHandle SafeHandle_AsReturn(int hr);
+                partial public static DummySafeHandle SafeHandle_AsReturn(int hr);
             }
 
             public class DummySafeHandle : Microsoft.Win32.SafeHandles.SafeHandleMinusOneIsInvalid
@@ -157,21 +157,21 @@ namespace DllImportGenerator.IntegrationTests
                 protected override bool ReleaseHandle() => true;
             }
 
-            public partial class True
+            partial public class True
             {
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_return",
                     PreserveSig = true
                 )]
-                public static partial int NoReturnValue(int i);
+                partial public static int NoReturnValue(int i);
 
                 [GeneratedDllImport(
                     NativeExportsNE_Binary,
                     EntryPoint = "hresult_out_int",
                     PreserveSig = true
                 )]
-                public static partial int Int_Out(int i, out int ret);
+                partial public static int Int_Out(int i, out int ret);
             }
         }
     }

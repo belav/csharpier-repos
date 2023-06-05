@@ -4,15 +4,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
             EntryPoint = "IsWellKnownSid",
             SetLastError = true
         )]
-        internal static partial int IsWellKnownSid(byte[] sid, int type);
+        partial internal static int IsWellKnownSid(byte[] sid, int type);
     }
 }

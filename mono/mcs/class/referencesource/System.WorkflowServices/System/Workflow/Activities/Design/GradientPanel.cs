@@ -13,7 +13,7 @@ namespace System.Workflow.Activities.Design
     using System.Windows.Forms;
     using System.Drawing.Drawing2D;
 
-    internal partial class GradientPanel : Panel
+    partial internal class GradientPanel : Panel
     {
         protected Rectangle frameRect;
         private Color baseColor;

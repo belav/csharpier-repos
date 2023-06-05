@@ -31,7 +31,7 @@ namespace System
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public sealed partial class TimeZoneInfo
+    partial public sealed class TimeZoneInfo
         : IEquatable<TimeZoneInfo?>,
             ISerializable,
             IDeserializationCallback
@@ -62,13 +62,14 @@ namespace System
         private static readonly TimeZoneInfo s_utcTimeZone = CreateUtcTimeZone();
         private static CachedData s_cachedData = new CachedData();
 
+        partial
         //
         // All cached data are encapsulated in a helper class to allow consistent view even when the data are refreshed using ClearCachedData()
         //
         // For example, TimeZoneInfo.Local can be cleared by another thread calling TimeZoneInfo.ClearCachedData. Without the consistent snapshot,
         // there is a chance that the internal ConvertTime calls will throw since 'source' won't be reference equal to the new TimeZoneInfo.Local.
         //
-        private sealed partial class CachedData
+        private sealed class CachedData
         {
             private volatile TimeZoneInfo? _localTimeZone;
 

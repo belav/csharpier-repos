@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class MethodInvariants
+    partial public static class MethodInvariants
     {
         public static void TestMethodBaseInvariants(this MethodBase mb)
         {

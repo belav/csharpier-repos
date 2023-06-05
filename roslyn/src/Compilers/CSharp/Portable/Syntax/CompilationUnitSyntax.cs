@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public sealed partial class CompilationUnitSyntax : CSharpSyntaxNode, ICompilationUnitSyntax
+    partial public sealed class CompilationUnitSyntax : CSharpSyntaxNode, ICompilationUnitSyntax
     {
         /// <summary>
         /// Returns #r directives specified in the compilation.

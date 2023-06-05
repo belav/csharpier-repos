@@ -17,7 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicitCast
 {
-    public partial class AddExplicitCastTests
+    partial public class AddExplicitCastTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddExplicitCastTests(ITestOutputHelper logger)

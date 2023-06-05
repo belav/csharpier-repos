@@ -33,22 +33,22 @@ namespace System.DirectoryServices.ActiveDirectory
             throw new NotImplementedException();
         }
 
-        public new static GlobalCatalog FindOne(DirectoryContext context)
+        public static new GlobalCatalog FindOne(DirectoryContext context)
         {
             throw new NotImplementedException();
         }
 
-        public new static GlobalCatalog FindOne(DirectoryContext context, string siteName)
+        public static new GlobalCatalog FindOne(DirectoryContext context, string siteName)
         {
             throw new NotImplementedException();
         }
 
-        public new static GlobalCatalog FindOne(DirectoryContext context, LocatorOptions flag)
+        public static new GlobalCatalog FindOne(DirectoryContext context, LocatorOptions flag)
         {
             throw new NotImplementedException();
         }
 
-        public new static GlobalCatalog FindOne(
+        public static new GlobalCatalog FindOne(
             DirectoryContext context,
             string siteName,
             LocatorOptions flag
@@ -57,12 +57,12 @@ namespace System.DirectoryServices.ActiveDirectory
             throw new NotImplementedException();
         }
 
-        public new static GlobalCatalogCollection FindAll(DirectoryContext context)
+        public static new GlobalCatalogCollection FindAll(DirectoryContext context)
         {
             throw new NotImplementedException();
         }
 
-        public new static GlobalCatalogCollection FindAll(DirectoryContext context, string siteName)
+        public static new GlobalCatalogCollection FindAll(DirectoryContext context, string siteName)
         {
             throw new NotImplementedException();
         }

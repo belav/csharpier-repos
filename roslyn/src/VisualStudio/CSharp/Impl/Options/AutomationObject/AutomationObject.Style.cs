@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
-    public partial class AutomationObject
+    partial public class AutomationObject
     {
         public string Style_PreferIntrinsicPredefinedTypeKeywordInDeclaration_CodeStyle
         {

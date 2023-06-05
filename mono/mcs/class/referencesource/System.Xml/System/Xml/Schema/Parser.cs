@@ -14,7 +14,7 @@ namespace System.Xml.Schema
     using System.IO;
     using System.Diagnostics;
 
-    internal sealed partial class Parser
+    partial internal sealed class Parser
     {
         SchemaType schemaType;
         XmlNameTable nameTable;

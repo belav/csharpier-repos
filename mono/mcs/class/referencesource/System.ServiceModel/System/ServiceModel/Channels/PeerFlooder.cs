@@ -600,7 +600,9 @@ namespace System.ServiceModel.Channels
         }
 
         // Guaranteed not to throw anything other than fatal exceptions
-        static internal Exception CloseNeighborIfKnownException(
+        internal
+        // Guaranteed not to throw anything other than fatal exceptions
+        static Exception CloseNeighborIfKnownException(
             PeerNeighborManager neighborManager,
             Exception exception,
             IPeerNeighbor peer

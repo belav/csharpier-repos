@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [Flags]
         internal enum CryptAcquireContextFlags : uint
@@ -27,7 +27,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptAcquireContext(
+        partial public static bool CryptAcquireContext(
             out SafeProvHandle phProv,
             string? szContainer,
             string? szProvider,

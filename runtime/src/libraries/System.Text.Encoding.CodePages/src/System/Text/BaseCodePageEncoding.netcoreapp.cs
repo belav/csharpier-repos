@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 
 namespace System.Text
 {
-    internal abstract partial class BaseCodePageEncoding : EncodingNLS, ISerializable
+    partial internal abstract class BaseCodePageEncoding : EncodingNLS, ISerializable
     {
         private static unsafe void ReadCodePageIndex(Stream stream, Span<byte> codePageIndex)
         {

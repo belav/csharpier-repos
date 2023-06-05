@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {
-    internal abstract partial class AbstractSemanticFactsService : ISemanticFacts
+    partial internal abstract class AbstractSemanticFactsService : ISemanticFacts
     {
         public string GenerateNameForExpression(
             SemanticModel semanticModel,

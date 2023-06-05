@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 namespace Roslyn.Utilities
 {
     [SuppressMessage("ApiDesign", "CA1068", Justification = "Matching TPL Signatures")]
-    internal static partial class TaskExtensions
+    partial internal static class TaskExtensions
     {
         public static T WaitAndGetResult<T>(this Task<T> task, CancellationToken cancellationToken)
         {

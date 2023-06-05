@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal abstract partial class CommonCompiler
+    partial internal abstract class CommonCompiler
     {
         /// <summary>
         /// Looks for metadata references among the assembly file references given to the compilation when constructed.

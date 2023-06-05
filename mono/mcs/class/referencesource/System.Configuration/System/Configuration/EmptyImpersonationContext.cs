@@ -24,7 +24,7 @@ namespace System.Configuration
     {
         static volatile IDisposable s_emptyImpersonationContext;
 
-        static internal IDisposable GetStaticInstance()
+        internal static IDisposable GetStaticInstance()
         {
             if (s_emptyImpersonationContext == null)
             {

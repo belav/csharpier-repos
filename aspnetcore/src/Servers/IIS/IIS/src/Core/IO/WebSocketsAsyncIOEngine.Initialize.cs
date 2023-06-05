@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core.IO;
 
-internal partial class WebSocketsAsyncIOEngine
+partial internal class WebSocketsAsyncIOEngine
 {
     internal sealed class AsyncInitializeOperation : AsyncIOOperation
     {

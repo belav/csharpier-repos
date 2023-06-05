@@ -3,7 +3,7 @@
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public sealed partial class NodeInteropTestsDynamic : NodeInteropTests
+    partial public sealed class NodeInteropTestsDynamic : NodeInteropTests
     {
         public NodeInteropTestsDynamic()
             : base(JsonSerializerWrapper.StringSerializer) { }

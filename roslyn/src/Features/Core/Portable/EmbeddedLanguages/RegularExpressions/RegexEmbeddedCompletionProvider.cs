@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
     using static FeaturesResources;
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
 
-    internal sealed partial class RegexEmbeddedCompletionProvider
+    partial internal sealed class RegexEmbeddedCompletionProvider
         : EmbeddedLanguageCompletionProvider
     {
         private const string StartKey = nameof(StartKey);

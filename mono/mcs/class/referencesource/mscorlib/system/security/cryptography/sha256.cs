@@ -30,7 +30,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public SHA256 Create()
+        public static
+        //
+        // public methods
+        //
+
+        new SHA256 Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.SHA256Managed();
@@ -39,7 +44,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public SHA256 Create(String hashName)
+        public static new SHA256 Create(String hashName)
         {
             return (SHA256)CryptoConfig.CreateFromName(hashName);
         }

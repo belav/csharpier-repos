@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         internal enum TRACE_QUERY_INFO_CLASS
         {
@@ -46,7 +46,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Interop.Libraries.Advapi32)]
-        internal static unsafe partial int EnumerateTraceGuidsEx(
+        partial internal static unsafe int EnumerateTraceGuidsEx(
             TRACE_QUERY_INFO_CLASS TraceQueryInfoClass,
             void* InBuffer,
             int InBufferSize,

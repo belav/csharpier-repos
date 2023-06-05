@@ -111,7 +111,7 @@ public class Tests
         return i;
     }
 
-    public unsafe static int test_0_volatile()
+    public static unsafe int test_0_volatile()
     {
         int i = 1;
         int* p = &i;
@@ -132,7 +132,7 @@ public class Tests
         return 0;
     }
 
-    public unsafe static int test_0_volatile_unused()
+    public static unsafe int test_0_volatile_unused()
     {
         int i = 1;
         int* p = &i;
@@ -143,7 +143,7 @@ public class Tests
         return 0;
     }
 
-    public unsafe static int test_0_volatile_unused_2()
+    public static unsafe int test_0_volatile_unused_2()
     {
         int i = 1;
         int* p = &i;
@@ -380,7 +380,7 @@ public class Tests
         return -1;
     }
 
-    public unsafe static int test_0_spill_regress_4()
+    public static unsafe int test_0_spill_regress_4()
     {
         object o = new Object();
         new Tests().LastIndexOfSortKey("", 10, 0, 5, null, 0, false, ref o);

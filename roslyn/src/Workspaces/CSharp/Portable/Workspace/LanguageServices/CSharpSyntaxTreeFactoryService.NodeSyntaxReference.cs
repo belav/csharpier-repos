@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class CSharpSyntaxTreeFactoryService
+    partial internal class CSharpSyntaxTreeFactoryService
     {
         internal sealed class NodeSyntaxReference : SyntaxReference
         {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Text.Json.Node.Tests
 {
-    public static partial class JsonNodeTests
+    partial public static class JsonNodeTests
     {
         internal const string ExpectedDomJson =
             "{\"MyString\":\"Hello!\",\"MyNull\":null,\"MyBoolean\":false,\"MyArray\":[2,3,42],"

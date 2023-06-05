@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.Net
 {
-    internal sealed unsafe partial class HttpRequestStream : Stream
+    partial internal sealed unsafe class HttpRequestStream : Stream
     {
         private bool _closed;
         private readonly HttpListenerContext _httpContext;

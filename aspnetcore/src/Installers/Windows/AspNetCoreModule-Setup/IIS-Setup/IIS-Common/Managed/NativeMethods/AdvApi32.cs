@@ -417,7 +417,7 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         }
 
         [SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return (
                 Microsoft.Web.Management.PInvoke.AdvApi32.NativeMethods.RegCloseKey(handle) == 0

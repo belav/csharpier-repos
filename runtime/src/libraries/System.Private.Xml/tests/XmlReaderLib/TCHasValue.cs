@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCHasValue : TCXMLReaderBaseGeneral
+    partial public class TCHasValue : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCHasValue
         // Test Case

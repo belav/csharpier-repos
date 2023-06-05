@@ -354,7 +354,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        private unsafe static double InternalTruncate(double d)
+        private static unsafe double InternalTruncate(double d)
         {
             SplitFractionDouble(&d);
             return d;
@@ -446,7 +446,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern double SplitFractionDouble(double* value);
+        private static extern unsafe double SplitFractionDouble(double* value);
 
         public static Decimal Truncate(Decimal d)
         {
@@ -627,7 +627,7 @@ namespace System
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static float Abs(float value);
+        public static extern float Abs(float value);
 
         // This is special code to handle NaN (We need to make sure NaN's aren't
         // negated).  In CSharp, the else clause here should always be taken if
@@ -641,7 +641,7 @@ namespace System
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern public static double Abs(double value);
+        public static extern double Abs(double value);
 
         // This is special code to handle NaN (We need to make sure NaN's aren't
         // negated).  In CSharp, the else clause here should always be taken if

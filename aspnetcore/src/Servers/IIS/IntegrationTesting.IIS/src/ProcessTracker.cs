@@ -7,8 +7,9 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
+partial
 // Uses Windows Job Objects to ensure external processes are killed if the current process is terminated non-gracefully.
-internal static partial class ProcessTracker
+internal static class ProcessTracker
 {
     private static readonly IntPtr _jobHandle = IntiailizeProcessTracker();
 
@@ -80,11 +81,11 @@ internal static partial class ProcessTracker
         EntryPoint = "CreateJobObjectW",
         StringMarshalling = StringMarshalling.Utf16
     )]
-    private static partial IntPtr CreateJobObject(IntPtr lpJobAttributes, string name);
+    partial private static IntPtr CreateJobObject(IntPtr lpJobAttributes, string name);
 
     [LibraryImport("kernel32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
-    private static partial bool SetInformationJobObject(
+    partial private static bool SetInformationJobObject(
         IntPtr job,
         JobObjectInfoType infoType,
         IntPtr lpJobObjectInfo,
@@ -93,7 +94,7 @@ internal static partial class ProcessTracker
 
     [LibraryImport("kernel32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    private static partial bool AssignProcessToJobObject(IntPtr job, IntPtr process);
+    partial private static bool AssignProcessToJobObject(IntPtr job, IntPtr process);
 
     private enum JobObjectInfoType
     {

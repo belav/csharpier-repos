@@ -38,7 +38,7 @@ namespace Novell.Directory.Ldap.Utilclass
     /// </summary>
     public class AttributeQualifier
     {
-        virtual public System.String Name
+        public virtual System.String Name
         {
             /*
             public void addValue( String value )
@@ -50,7 +50,7 @@ namespace Novell.Directory.Ldap.Utilclass
 
             get { return name; }
         }
-        virtual public System.String[] Values
+        public virtual System.String[] Values
         {
             get
             {

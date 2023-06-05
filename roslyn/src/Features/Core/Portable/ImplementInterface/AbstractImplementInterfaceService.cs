@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.ImplementInterface
 {
-    internal abstract partial class AbstractImplementInterfaceService : IImplementInterfaceService
+    partial internal abstract class AbstractImplementInterfaceService : IImplementInterfaceService
     {
         protected const string DisposingName = "disposing";
 

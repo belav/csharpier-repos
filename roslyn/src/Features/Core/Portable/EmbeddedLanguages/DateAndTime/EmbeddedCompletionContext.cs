@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
 {
-    internal partial class DateAndTimeEmbeddedCompletionProvider
+    partial internal class DateAndTimeEmbeddedCompletionProvider
     {
         private readonly struct EmbeddedCompletionContext
         {

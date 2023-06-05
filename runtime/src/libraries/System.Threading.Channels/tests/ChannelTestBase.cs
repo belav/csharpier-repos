@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Threading.Channels.Tests
 {
-    public abstract partial class ChannelTestBase : TestBase
+    partial public abstract class ChannelTestBase : TestBase
     {
         protected Channel<int> CreateChannel() => CreateChannel<int>();
 

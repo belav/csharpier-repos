@@ -13,9 +13,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote;
 
-internal partial class SolutionAssetStorage
+partial internal class SolutionAssetStorage
 {
-    internal sealed partial class Scope : IDisposable
+    partial internal sealed class Scope : IDisposable
     {
         private readonly SolutionAssetStorage _storage;
 

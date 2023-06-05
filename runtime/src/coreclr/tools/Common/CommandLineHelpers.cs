@@ -18,10 +18,11 @@ namespace System.CommandLine
             : base(message) { }
     }
 
+    partial
     //
     // Helpers for command line processing
     //
-    internal static partial class Helpers
+    internal static class Helpers
     {
         public const string DefaultSystemModule = "System.Private.CoreLib";
 

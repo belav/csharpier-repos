@@ -24,7 +24,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 {
-    internal partial class UseExpressionBodyForLambdaCodeStyleProvider
+    partial internal class UseExpressionBodyForLambdaCodeStyleProvider
         : AbstractCodeStyleProvider<
             ExpressionBodyPreference,
             UseExpressionBodyForLambdaCodeStyleProvider

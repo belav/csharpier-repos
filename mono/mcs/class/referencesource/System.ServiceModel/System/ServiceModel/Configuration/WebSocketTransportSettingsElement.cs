@@ -10,10 +10,11 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.ServiceModel.Channels;
 
+    partial
     /// <summary>
     /// WebSocketTransportSettingsElement for WebSocketTransportSettings
     /// </summary>
-    public partial class WebSocketTransportSettingsElement : ServiceModelConfigurationElement
+    public class WebSocketTransportSettingsElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.TransportUsage,

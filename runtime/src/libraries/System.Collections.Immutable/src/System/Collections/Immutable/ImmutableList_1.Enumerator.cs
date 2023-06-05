@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Collections.Immutable
 {
-    public sealed partial class ImmutableList<T>
+    partial public sealed class ImmutableList<T>
     {
         /// <summary>
         /// Enumerates the contents of a binary tree.

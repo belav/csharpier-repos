@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
-        public static partial int BitBlt(
+        partial public static int BitBlt(
             IntPtr hdc,
             int x,
             int y,

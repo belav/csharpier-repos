@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
 {
-    internal abstract partial class AbstractGenerateDefaultConstructorsService<TService>
+    partial internal abstract class AbstractGenerateDefaultConstructorsService<TService>
         : IGenerateDefaultConstructorsService
         where TService : AbstractGenerateDefaultConstructorsService<TService>
     {

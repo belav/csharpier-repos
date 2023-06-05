@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct CertificateTemplateAsn
+    partial internal struct CertificateTemplateAsn
     {
         internal string TemplateID;
         internal int TemplateMajorVersion;

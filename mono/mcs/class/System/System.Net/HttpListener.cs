@@ -40,7 +40,7 @@ using System.Security.Cryptography.X509Certificates;
 //TODO: logging
 namespace System.Net
 {
-    public sealed partial class HttpListener : IDisposable
+    partial public sealed class HttpListener : IDisposable
     {
         AuthenticationSchemes auth_schemes;
         HttpListenerPrefixCollection prefixes;

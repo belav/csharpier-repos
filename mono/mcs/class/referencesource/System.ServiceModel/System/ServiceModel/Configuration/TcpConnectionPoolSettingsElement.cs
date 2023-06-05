@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public sealed partial class TcpConnectionPoolSettingsElement : ServiceModelConfigurationElement
+    partial public sealed class TcpConnectionPoolSettingsElement : ServiceModelConfigurationElement
     {
         public TcpConnectionPoolSettingsElement() { }
 

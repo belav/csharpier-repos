@@ -7,11 +7,11 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.ServiceModel.Channels;
 
+    partial
     /// <summary>
     /// NetHttpWebSocketTransportSettingsElement for WebSocketTransportSettings
     /// </summary>
-    public sealed partial class NetHttpWebSocketTransportSettingsElement
-        : WebSocketTransportSettingsElement
+    public sealed class NetHttpWebSocketTransportSettingsElement : WebSocketTransportSettingsElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.TransportUsage,

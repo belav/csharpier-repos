@@ -9,7 +9,7 @@ namespace System
     // ByReference is meant to be used to represent a tracked reference in cases where C#
     // proves difficult. See use in Reflection.
     [NonVersionable]
-    internal readonly ref struct ByReference
+    ref internal readonly struct ByReference
     {
         public readonly ref byte Value;
 

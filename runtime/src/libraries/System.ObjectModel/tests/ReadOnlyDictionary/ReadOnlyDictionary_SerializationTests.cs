@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Collections.ObjectModel.Tests
 {
-    public partial class ReadOnlyDictionary_Serialization
+    partial public class ReadOnlyDictionary_Serialization
     {
         public static IEnumerable<object[]> SerializeDeserialize_Roundtrips_MemberData()
         {

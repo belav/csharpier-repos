@@ -3,7 +3,7 @@
 
 namespace System.Runtime.InteropServices
 {
-    public partial struct GCHandle
+    partial public struct GCHandle
     {
         internal static IntPtr InternalAlloc(object value, GCHandleType type) =>
             RuntimeImports.RhHandleAlloc(value, type);

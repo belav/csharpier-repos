@@ -14,10 +14,11 @@ using DbLinq.SqlServer;
 
 namespace nwind
 {
+    partial
     /// <summary>
     /// This class represents Microsoft database Northwind.
     /// </summary>
-    public partial class Northwind : DataContext
+    public class Northwind : DataContext
     {
         public Northwind(string connStr)
             : base(new System.Data.SqlClient.SqlConnection(connStr), new SqlServerVendor()) { }
@@ -79,7 +80,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Categories")]
-    public partial class Categories : IModified
+    partial public class Categories : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -197,7 +198,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.CustomerCustomerDemo")]
-    public partial class CustomerCustomerDemo : IModified
+    partial public class CustomerCustomerDemo : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -297,7 +298,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.CustomerDemographics")]
-    public partial class CustomerDemographics : IModified
+    partial public class CustomerDemographics : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -378,7 +379,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Customers")]
-    public partial class Customers : IModified
+    partial public class Customers : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -612,7 +613,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Employees")]
-    public partial class Employees : IModified
+    partial public class Employees : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -984,7 +985,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.EmployeeTerritories")]
-    public partial class EmployeeTerritories : IModified
+    partial public class EmployeeTerritories : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -1084,7 +1085,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Order Details")]
-    public partial class OrderDetails : IModified
+    partial public class OrderDetails : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -1231,7 +1232,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Orders")]
-    public partial class Orders : IModified
+    partial public class Orders : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -1539,7 +1540,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Products")]
-    public partial class Products : IModified
+    partial public class Products : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -1781,7 +1782,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Region")]
-    public partial class Region : IModified
+    partial public class Region : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -1858,7 +1859,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Shippers")]
-    public partial class Shippers : IModified
+    partial public class Shippers : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -1956,7 +1957,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Suppliers")]
-    public partial class Suppliers : IModified
+    partial public class Suppliers : IModified
     {
         bool _isModified_;
         public bool IsModified
@@ -2202,7 +2203,7 @@ namespace nwind
     }
 
     [Table(Name = "dbo.Territories")]
-    public partial class Territories : IModified
+    partial public class Territories : IModified
     {
         bool _isModified_;
         public bool IsModified

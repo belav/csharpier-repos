@@ -85,12 +85,12 @@ namespace I18N.CJK
         }
 
 #if !DISABLE_UNSAFE
-        public unsafe override int GetByteCountImpl(char* chars, int count)
+        public override unsafe int GetByteCountImpl(char* chars, int count)
         {
             return new GB18030Encoder(this).GetByteCountImpl(chars, count, true);
         }
 
-        public unsafe override int GetBytesImpl(
+        public override unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,
@@ -365,7 +365,7 @@ namespace I18N.CJK
         char incomplete_bytes;
 
 #if !DISABLE_UNSAFE
-        public unsafe override int GetByteCountImpl(char* chars, int count, bool refresh)
+        public override unsafe int GetByteCountImpl(char* chars, int count, bool refresh)
         {
             int start = 0;
             int end = count;
@@ -432,7 +432,7 @@ namespace I18N.CJK
             return ret;
         }
 
-        public unsafe override int GetBytesImpl(
+        public override unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,

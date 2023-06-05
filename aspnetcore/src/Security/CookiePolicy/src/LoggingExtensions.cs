@@ -3,19 +3,19 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(1, LogLevel.Trace, "Needs consent: {needsConsent}.", EventName = "NeedsConsent")]
-    public static partial void NeedsConsent(this ILogger logger, bool needsConsent);
+    partial public static void NeedsConsent(this ILogger logger, bool needsConsent);
 
     [LoggerMessage(2, LogLevel.Trace, "Has consent: {hasConsent}.", EventName = "HasConsent")]
-    public static partial void HasConsent(this ILogger logger, bool hasConsent);
+    partial public static void HasConsent(this ILogger logger, bool hasConsent);
 
     [LoggerMessage(3, LogLevel.Debug, "Consent granted.", EventName = "ConsentGranted")]
-    public static partial void ConsentGranted(this ILogger logger);
+    partial public static void ConsentGranted(this ILogger logger);
 
     [LoggerMessage(4, LogLevel.Debug, "Consent withdrawn.", EventName = "ConsentWithdrawn")]
-    public static partial void ConsentWithdrawn(this ILogger logger);
+    partial public static void ConsentWithdrawn(this ILogger logger);
 
     [LoggerMessage(
         5,
@@ -23,7 +23,7 @@ internal static partial class LoggingExtensions
         "Cookie '{key}' suppressed due to consent policy.",
         EventName = "CookieSuppressed"
     )]
-    public static partial void CookieSuppressed(this ILogger logger, string key);
+    partial public static void CookieSuppressed(this ILogger logger, string key);
 
     [LoggerMessage(
         6,
@@ -31,7 +31,7 @@ internal static partial class LoggingExtensions
         "Delete cookie '{key}' suppressed due to developer policy.",
         EventName = "DeleteCookieSuppressed"
     )]
-    public static partial void DeleteCookieSuppressed(this ILogger logger, string key);
+    partial public static void DeleteCookieSuppressed(this ILogger logger, string key);
 
     [LoggerMessage(
         7,
@@ -39,7 +39,7 @@ internal static partial class LoggingExtensions
         "Cookie '{key}' upgraded to 'secure'.",
         EventName = "UpgradedToSecure"
     )]
-    public static partial void CookieUpgradedToSecure(this ILogger logger, string key);
+    partial public static void CookieUpgradedToSecure(this ILogger logger, string key);
 
     [LoggerMessage(
         8,
@@ -47,7 +47,7 @@ internal static partial class LoggingExtensions
         "Cookie '{key}' same site mode upgraded to '{mode}'.",
         EventName = "UpgradedSameSite"
     )]
-    public static partial void CookieSameSiteUpgraded(this ILogger logger, string key, string mode);
+    partial public static void CookieSameSiteUpgraded(this ILogger logger, string key, string mode);
 
     [LoggerMessage(
         9,
@@ -55,5 +55,5 @@ internal static partial class LoggingExtensions
         "Cookie '{key}' upgraded to 'httponly'.",
         EventName = "UpgradedToHttpOnly"
     )]
-    public static partial void CookieUpgradedToHttpOnly(this ILogger logger, string key);
+    partial public static void CookieUpgradedToHttpOnly(this ILogger logger, string key);
 }

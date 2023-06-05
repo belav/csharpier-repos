@@ -24,7 +24,7 @@ namespace System.Data.OleDb
         ),
         ListBindable(false)
     ]
-    public sealed partial class OleDbParameterCollection : DbParameterCollection
+    partial public sealed class OleDbParameterCollection : DbParameterCollection
     {
         private int _changeID;
 
@@ -39,14 +39,14 @@ namespace System.Data.OleDb
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public OleDbParameter this[int index]
+        public new OleDbParameter this[int index]
         {
             get { return (OleDbParameter)GetParameter(index); }
             set { SetParameter(index, value); }
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public OleDbParameter this[string parameterName]
+        public new OleDbParameter this[string parameterName]
         {
             get { return (OleDbParameter)GetParameter(parameterName); }
             set { SetParameter(parameterName, value); }
@@ -98,7 +98,7 @@ namespace System.Data.OleDb
             AddRange((Array)values);
         }
 
-        override public bool Contains(string value)
+        public override bool Contains(string value)
         { // WebData 97349
             return (-1 != IndexOf(value));
         }

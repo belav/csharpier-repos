@@ -10,10 +10,11 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop;
 
+partial
 /// <summary>
 /// Abstract base class for a JavaScript runtime.
 /// </summary>
-public abstract partial class JSRuntime : IJSRuntime, IDisposable
+public abstract class JSRuntime : IJSRuntime, IDisposable
 {
     private long _nextObjectReferenceId; // Initial value of 0 signals no object, but we increment prior to assignment. The first tracked object should have id 1
     private long _nextPendingTaskId = 1; // Start at 1 because zero signals "no response needed"

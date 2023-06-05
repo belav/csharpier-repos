@@ -32,12 +32,12 @@ using System.IO;
 
 namespace Test_NUnit
 {
-    public abstract partial class TestBase
+    partial public abstract class TestBase
     {
         static bool doRecreate = true;
         public const StringComparison stringComparisonType = StringComparison.Ordinal;
 
-        static partial void CheckRecreateSqlite()
+        partial static void CheckRecreateSqlite()
         {
             if (doRecreate)
             {

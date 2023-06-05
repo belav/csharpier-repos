@@ -9,7 +9,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.ReaderSettingsTests
 {
     [TestCase(Name = "Filter Settings", Desc = "Filter Settings")]
-    public partial class TCFilterSettings : TCXMLReaderBaseGeneral
+    partial public class TCFilterSettings : TCXMLReaderBaseGeneral
     {
         [Variation("FilterSettings Default Values", Pri = 0)]
         public int pi00()

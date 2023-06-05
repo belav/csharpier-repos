@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.DesignerAttribute
 {
     [ExportWorkspaceService(typeof(IDesignerAttributeDiscoveryService)), Shared]
-    internal sealed partial class DesignerAttributeDiscoveryService
+    partial internal sealed class DesignerAttributeDiscoveryService
         : IDesignerAttributeDiscoveryService
     {
         /// <summary>

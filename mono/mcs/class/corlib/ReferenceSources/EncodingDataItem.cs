@@ -30,7 +30,7 @@ namespace System.Globalization
         internal uint m_flags;
 
         [SecurityCritical]
-        unsafe internal CodePageDataItem(int dataIndex)
+        internal unsafe CodePageDataItem(int dataIndex)
         {
             m_dataIndex = dataIndex;
             m_uiFamilyCodePage = EncodingTable.codePageDataPtr[dataIndex].uiFamilyCodePage;
@@ -40,7 +40,7 @@ namespace System.Globalization
         static readonly char[] sep = { '|' };
 
         [System.Security.SecurityCritical]
-        unsafe internal static String CreateString(string pStrings, uint index)
+        internal static unsafe String CreateString(string pStrings, uint index)
         {
             if (pStrings[0] == '|') // |str1|str2|str3
             {
@@ -79,7 +79,7 @@ namespace System.Globalization
             }
         }
 
-        unsafe public String WebName
+        public unsafe String WebName
         {
             [System.Security.SecuritySafeCritical] // auto-generated
             get
@@ -97,7 +97,7 @@ namespace System.Globalization
             get { return m_uiFamilyCodePage; }
         }
 
-        unsafe public String HeaderName
+        public unsafe String HeaderName
         {
             [System.Security.SecuritySafeCritical] // auto-generated
             get
@@ -113,7 +113,7 @@ namespace System.Globalization
             }
         }
 
-        unsafe public String BodyName
+        public unsafe String BodyName
         {
             [System.Security.SecuritySafeCritical] // auto-generated
             get
@@ -126,7 +126,7 @@ namespace System.Globalization
             }
         }
 
-        unsafe public uint Flags
+        public unsafe uint Flags
         {
             get { return (m_flags); }
         }

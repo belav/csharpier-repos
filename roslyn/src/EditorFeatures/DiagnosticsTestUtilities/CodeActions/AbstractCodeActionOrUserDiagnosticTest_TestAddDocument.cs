@@ -18,7 +18,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
-    public abstract partial class AbstractCodeActionOrUserDiagnosticTest
+    partial public abstract class AbstractCodeActionOrUserDiagnosticTest
     {
         protected async Task TestAddDocumentInRegularAndScriptAsync(
             string initialMarkup,

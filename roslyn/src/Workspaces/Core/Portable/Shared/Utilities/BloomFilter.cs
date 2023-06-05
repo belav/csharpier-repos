@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial class BloomFilter
+    partial internal class BloomFilter
     {
         // From MurmurHash:
         // 'm' and 'r' are mixing constants generated off-line.

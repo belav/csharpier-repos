@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Security.Cryptography.X509Certificates;
 
-    public sealed partial class X509PeerCertificateElement : ConfigurationElement
+    partial public sealed class X509PeerCertificateElement : ConfigurationElement
     {
         public X509PeerCertificateElement() { }
 

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class ProcessTests
+    partial public class ProcessTests
     {
         private string WriteScriptFile(string directory, string name, int returnValue)
         {

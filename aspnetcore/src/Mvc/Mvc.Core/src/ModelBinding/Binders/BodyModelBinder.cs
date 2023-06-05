@@ -13,11 +13,12 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+partial
 /// <summary>
 /// An <see cref="IModelBinder"/> which binds models from the request body using an <see cref="IInputFormatter"/>
 /// when a model has the binding source <see cref="BindingSource.Body"/>.
 /// </summary>
-public partial class BodyModelBinder : IModelBinder
+public class BodyModelBinder : IModelBinder
 {
     private readonly IList<IInputFormatter> _formatters;
     private readonly Func<Stream, Encoding, TextReader> _readerFactory;
@@ -222,7 +223,7 @@ public partial class BodyModelBinder : IModelBinder
         return policy == InputFormatterExceptionPolicy.AllExceptions;
     }
 
-    private sealed partial class Log
+    partial private sealed class Log
     {
         public static void InputFormatterSelected(
             ILogger logger,
@@ -244,7 +245,7 @@ public partial class BodyModelBinder : IModelBinder
             EventName = "InputFormatterSelected",
             SkipEnabledCheck = true
         )]
-        private static partial void InputFormatterSelected(
+        partial private static void InputFormatterSelected(
             ILogger logger,
             IInputFormatter inputFormatter,
             string? contentType
@@ -270,7 +271,7 @@ public partial class BodyModelBinder : IModelBinder
             EventName = "InputFormatterRejected",
             SkipEnabledCheck = true
         )]
-        private static partial void InputFormatterRejected(
+        partial private static void InputFormatterRejected(
             ILogger logger,
             IInputFormatter inputFormatter,
             string? contentType
@@ -301,7 +302,7 @@ public partial class BodyModelBinder : IModelBinder
             EventName = "NoInputFormatterSelected",
             SkipEnabledCheck = true
         )]
-        private static partial void NoInputFormatterSelected(ILogger logger, string? contentType);
+        partial private static void NoInputFormatterSelected(ILogger logger, string? contentType);
 
         [LoggerMessage(
             4,
@@ -310,7 +311,7 @@ public partial class BodyModelBinder : IModelBinder
             EventName = "RemoveFromBodyAttribute",
             SkipEnabledCheck = true
         )]
-        private static partial void RemoveFromBodyAttribute(
+        partial private static void RemoveFromBodyAttribute(
             ILogger logger,
             string modelName,
             string? modelType

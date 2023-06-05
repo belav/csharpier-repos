@@ -10,7 +10,7 @@ using TaskSourceCodes = System.IO.Strategies.FileStreamHelpers.TaskSourceCodes;
 
 namespace System.IO.Strategies
 {
-    internal sealed partial class Net5CompatFileStreamStrategy : FileStreamStrategy
+    partial internal sealed class Net5CompatFileStreamStrategy : FileStreamStrategy
     {
         // This is an internal object extending TaskCompletionSource with fields
         // for all of the relevant data necessary to complete the IO operation.

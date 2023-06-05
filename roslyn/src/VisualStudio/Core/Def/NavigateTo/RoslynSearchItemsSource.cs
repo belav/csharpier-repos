@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Search.Data;
 
 namespace Microsoft.CodeAnalysis.NavigateTo;
 
-internal sealed partial class RoslynSearchItemsSourceProvider
+partial internal sealed class RoslynSearchItemsSourceProvider
 {
     /// <summary>
     /// Roslyn implementation of <see cref="ISearchItemsSource"/>.  This is the type actually responsible for

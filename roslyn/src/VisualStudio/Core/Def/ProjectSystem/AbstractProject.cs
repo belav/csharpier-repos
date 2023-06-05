@@ -24,7 +24,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     using Workspace = Microsoft.CodeAnalysis.Workspace;
 
     [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
-    internal abstract partial class AbstractProject
+    partial internal abstract class AbstractProject
         : ForegroundThreadAffinitizedObject,
             IVisualStudioHostProject
     {

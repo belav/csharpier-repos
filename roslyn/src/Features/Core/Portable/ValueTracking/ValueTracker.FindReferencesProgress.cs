@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.ValueTracking
 {
-    internal static partial class ValueTracker
+    partial internal static class ValueTracker
     {
         private class FindReferencesProgress
             : IStreamingFindReferencesProgress,

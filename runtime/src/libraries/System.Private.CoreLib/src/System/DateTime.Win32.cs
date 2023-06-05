@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public readonly partial struct DateTime
+    partial public readonly struct DateTime
     {
         private static unsafe bool SystemSupportsLeapSeconds()
         {

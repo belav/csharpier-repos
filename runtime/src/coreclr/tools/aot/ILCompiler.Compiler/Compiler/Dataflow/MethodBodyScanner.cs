@@ -46,7 +46,7 @@ namespace ILCompiler.Dataflow
         }
     }
 
-    internal abstract partial class MethodBodyScanner
+    partial internal abstract class MethodBodyScanner
     {
         protected readonly InterproceduralStateLattice InterproceduralStateLattice;
         protected static ValueSetLattice<SingleValue> MultiValueLattice => default;

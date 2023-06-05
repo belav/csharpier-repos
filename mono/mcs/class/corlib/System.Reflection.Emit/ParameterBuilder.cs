@@ -85,7 +85,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public partial class ParameterBuilder
+    partial public class ParameterBuilder
     {
 #pragma warning disable 169, 414
         private MethodBase methodb; /* MethodBuilder, ConstructorBuilder or DynamicMethod */

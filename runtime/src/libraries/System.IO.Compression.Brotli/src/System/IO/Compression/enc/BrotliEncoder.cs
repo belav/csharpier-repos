@@ -8,8 +8,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Compression
 {
+    partial
     /// <summary>Provides methods and static methods to encode and decode data in a streamless, non-allocating, and performant manner using the Brotli data format specification.</summary>
-    public partial struct BrotliEncoder : IDisposable
+    public struct BrotliEncoder : IDisposable
     {
         internal SafeBrotliEncoderHandle? _state;
         private bool _disposed;

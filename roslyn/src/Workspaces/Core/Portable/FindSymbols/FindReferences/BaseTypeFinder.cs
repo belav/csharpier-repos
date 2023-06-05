@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.FindReferences
 {
-    internal static partial class BaseTypeFinder
+    partial internal static class BaseTypeFinder
     {
         public static ImmutableArray<INamedTypeSymbol> FindBaseTypesAndInterfaces(
             INamedTypeSymbol type

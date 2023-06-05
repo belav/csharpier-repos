@@ -9726,7 +9726,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0xD8
         };
 
-        static public byte[] farscape_pfx =
+        public static byte[] farscape_pfx =
         {
             0x30,
             0x82,
@@ -11433,7 +11433,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0xF5
         };
 
-        static public byte[] farscape_nopwd_pfx =
+        public static byte[] farscape_nopwd_pfx =
         {
             0x30,
             0x82,
@@ -13140,7 +13140,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x8C
         };
 
-        static public byte[] farscape_path_pfx =
+        public static byte[] farscape_path_pfx =
         {
             0x30,
             0x82,
@@ -16047,7 +16047,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x11
         };
 
-        static public byte[] farscape_strong_pfx =
+        public static byte[] farscape_strong_pfx =
         {
             0x30,
             0x82,
@@ -17758,7 +17758,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0xD0
         };
 
-        static public byte[] farscape_strong_path_pfx =
+        public static byte[] farscape_strong_path_pfx =
         {
             0x30,
             0x82,
@@ -22282,7 +22282,7 @@ WYpnKQqsKIzlSqv9wwXs7B1iA7ZdvHk3TAnSnLP1o2H7ME05UnZPKCvraONdezon
 /yvWCu++B/xSVQ/i8F3U/NL3tLLZyw==
 -----END CERTIFICATE-----";
 
-        static public byte[] farscape_pkcs7 =
+        public static byte[] farscape_pkcs7 =
         {
             0x30,
             0x82,

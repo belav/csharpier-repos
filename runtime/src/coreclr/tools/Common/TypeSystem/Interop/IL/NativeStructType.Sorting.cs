@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem.Interop
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class NativeStructType
+    public class NativeStructType
     {
         protected override int ClassCode => -377751537;
 
@@ -13,7 +14,7 @@ namespace Internal.TypeSystem.Interop
             return comparer.Compare(ManagedStructType, ((NativeStructType)other).ManagedStructType);
         }
 
-        private sealed partial class NativeStructField
+        partial private sealed class NativeStructField
         {
             protected override int ClassCode => 1580219745;
 

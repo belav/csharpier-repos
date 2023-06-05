@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class JsonSerializerWrapperForString
+    partial public abstract class JsonSerializerWrapperForString
     {
         /// <summary>
         /// Do the deserialize methods allow a value of 'null'.

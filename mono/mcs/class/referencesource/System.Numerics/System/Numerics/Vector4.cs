@@ -7,10 +7,11 @@ using System.Text;
 
 namespace System.Numerics
 {
+    partial
     /// <summary>
     /// A structure encapsulating four single precision floating point values and provides hardware accelerated methods.
     /// </summary>
-    public partial struct Vector4 : IEquatable<Vector4>, IFormattable
+    public struct Vector4 : IEquatable<Vector4>, IFormattable
     {
         #region Public Static Properties
         /// <summary>

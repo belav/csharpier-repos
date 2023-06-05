@@ -22,7 +22,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
 {
     [Export]
-    internal sealed partial class EventHookupSessionManager
+    partial internal sealed class EventHookupSessionManager
     {
         public readonly IThreadingContext ThreadingContext;
         private readonly IToolTipService _toolTipService;

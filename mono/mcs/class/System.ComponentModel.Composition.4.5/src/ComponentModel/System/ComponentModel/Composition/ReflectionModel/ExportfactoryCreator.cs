@@ -11,7 +11,7 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
-    internal sealed partial class ExportFactoryCreator
+    partial internal sealed class ExportFactoryCreator
     {
         private static readonly MethodInfo _createStronglyTypedExportFactoryOfT =
             typeof(ExportFactoryCreator).GetMethod(

@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.Net.NetworkInformation
 {
-    public partial class NetworkChange
+    partial public class NetworkChange
     {
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         [Obsolete(

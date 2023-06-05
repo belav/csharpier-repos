@@ -3,11 +3,11 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial uint GetTempPathW(int bufferLen, ref char buffer);
+        partial internal static uint GetTempPathW(int bufferLen, ref char buffer);
     }
 }

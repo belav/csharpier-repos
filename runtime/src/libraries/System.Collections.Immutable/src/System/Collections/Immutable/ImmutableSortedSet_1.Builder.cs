@@ -7,10 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableSortedSet{T}.Builder"/> class.
     /// </content>
-    public sealed partial class ImmutableSortedSet<T>
+    public sealed class ImmutableSortedSet<T>
     {
         /// <summary>
         /// A sorted set that mutates with little or no memory allocations,

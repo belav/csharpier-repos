@@ -3,16 +3,16 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_PWriteV",
             SetLastError = true
         )]
-        internal static unsafe partial long PWriteV(
+        partial internal static unsafe long PWriteV(
             SafeHandle fd,
             IOVector* vectors,
             int vectorCount,

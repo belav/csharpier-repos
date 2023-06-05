@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 {
-    internal partial class StreamingFindUsagesPresenter
+    partial internal class StreamingFindUsagesPresenter
     {
         /// <summary>
         /// Context to be used for FindAllReferences (as opposed to FindImplementations/GoToDef).

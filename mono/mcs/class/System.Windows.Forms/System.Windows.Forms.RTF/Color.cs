@@ -95,7 +95,11 @@ namespace System.Windows.Forms.RTF
         #endregion	// Properties
 
         #region Methods
-        static public Color GetColor(RTF rtf, int color_number)
+        public
+        #endregion	// Properties
+
+        #region Methods
+        static Color GetColor(RTF rtf, int color_number)
         {
             Color c;
 
@@ -106,7 +110,7 @@ namespace System.Windows.Forms.RTF
             return c;
         }
 
-        static private Color GetColor(Color start, int color_number)
+        private static Color GetColor(Color start, int color_number)
         {
             Color c;
 

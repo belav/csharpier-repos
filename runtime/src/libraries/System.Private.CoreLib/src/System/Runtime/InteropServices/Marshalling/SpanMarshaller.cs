@@ -115,10 +115,11 @@ namespace System.Runtime.InteropServices.Marshalling
         public static void Free(TUnmanagedElement* unmanaged) =>
             Marshal.FreeCoTaskMem((IntPtr)unmanaged);
 
+        ref
         /// <summary>
         /// Supports marshalling from managed into unmanaged in a call from managed code to unmanaged code.
         /// </summary>
-        public ref struct ManagedToUnmanagedIn
+        public struct ManagedToUnmanagedIn
         {
             // We'll keep the buffer size at a maximum of 200 bytes to avoid overflowing the stack.
             public static int BufferSize { get; } = 0x200 / sizeof(TUnmanagedElement);

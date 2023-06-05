@@ -5,16 +5,16 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetHostName",
             SetLastError = true
         )]
-        private static unsafe partial int GetHostName(byte* name, int nameLength);
+        partial private static unsafe int GetHostName(byte* name, int nameLength);
 
         internal static unsafe string GetHostName()
         {

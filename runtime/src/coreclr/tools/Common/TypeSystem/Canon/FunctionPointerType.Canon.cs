@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Holds code for canonicalizing a function pointer type
-    public partial class FunctionPointerType
+    public class FunctionPointerType
     {
         public override bool IsCanonicalSubtype(CanonicalFormKind policy)
         {

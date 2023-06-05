@@ -34,7 +34,7 @@ namespace System.Data.Linq
 namespace DbLinq.Data.Linq
 #endif
 {
-    public partial interface ITable : IEnumerable, IQueryable
+    partial public interface ITable : IEnumerable, IQueryable
     {
         /// <summary>
         /// Gets the context.

@@ -8,7 +8,7 @@ using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System
 {
-    internal sealed partial class DefaultBinder : Binder
+    partial internal sealed class DefaultBinder : Binder
     {
         private readonly MetadataLoadContext _loader;
         private readonly Type? _objectType;

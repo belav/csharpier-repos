@@ -6,24 +6,24 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BigNumDestroy")]
-        internal static partial void BigNumDestroy(IntPtr a);
+        partial internal static void BigNumDestroy(IntPtr a);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BigNumFromBinary")]
-        private static unsafe partial SafeBignumHandle BigNumFromBinary(
+        partial private static unsafe SafeBignumHandle BigNumFromBinary(
             ReadOnlySpan<byte> bigEndianValue,
             int len
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BigNumToBinary")]
-        private static unsafe partial int BigNumToBinary(SafeBignumHandle a, byte* to);
+        partial private static unsafe int BigNumToBinary(SafeBignumHandle a, byte* to);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetBigNumBytes")]
-        private static partial int GetBigNumBytes(SafeBignumHandle a);
+        partial private static int GetBigNumBytes(SafeBignumHandle a);
 
         internal static SafeBignumHandle CreateBignum(ReadOnlySpan<byte> bigEndianValue)
         {

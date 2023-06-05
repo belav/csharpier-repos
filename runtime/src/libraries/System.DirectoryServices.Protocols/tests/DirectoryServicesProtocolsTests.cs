@@ -12,7 +12,7 @@ using Xunit;
 
 namespace System.DirectoryServices.Protocols.Tests
 {
-    public partial class DirectoryServicesProtocolsTests
+    partial public class DirectoryServicesProtocolsTests
     {
         internal static bool IsLdapConfigurationExist => LdapConfiguration.Configuration != null;
         internal static bool IsActiveDirectoryServer =>

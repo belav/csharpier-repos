@@ -207,7 +207,7 @@ namespace System.Globalization
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern int internal_compare_icall(
+        private static extern unsafe int internal_compare_icall(
             char* str1,
             int length1,
             char* str2,
@@ -239,7 +239,7 @@ namespace System.Globalization
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern int internal_index_icall(
+        private static extern unsafe int internal_index_icall(
             char* source,
             int sindex,
             int count,

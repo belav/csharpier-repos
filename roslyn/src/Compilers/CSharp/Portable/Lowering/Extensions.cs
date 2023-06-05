@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class OperatorKindExtensions
+    partial internal static class OperatorKindExtensions
     {
         public static RefKind RefKinds(this ImmutableArray<RefKind> ArgumentRefKinds, int index)
         {
@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal static partial class BoundExpressionExtensions
+    partial internal static class BoundExpressionExtensions
     {
         public static bool NullableAlwaysHasValue(this BoundExpression expr)
         {

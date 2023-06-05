@@ -10,7 +10,7 @@ using System.Threading;
 namespace System.Data.Common
 {
     [SuppressUnmanagedCodeSecurity]
-    internal static partial class SafeNativeMethods
+    partial internal static class SafeNativeMethods
     {
         internal static void ZeroMemory(IntPtr ptr, int length)
         {

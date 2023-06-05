@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    internal static partial class OidLookup
+    partial internal static class OidLookup
     {
         private static bool ShouldUseCache(OidGroup oidGroup)
         {
@@ -88,7 +88,9 @@ namespace Internal.Cryptography
         }
 
 #if DEBUG
-        static partial void ExtraStaticDebugValidation()
+        partial
+#if DEBUG
+        static void ExtraStaticDebugValidation()
         {
             // Validate we hardcoded the right dictionary size
             Debug.Assert(

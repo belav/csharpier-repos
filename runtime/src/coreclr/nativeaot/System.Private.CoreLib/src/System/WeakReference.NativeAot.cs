@@ -11,7 +11,7 @@ using Internal.Runtime.Augments;
 
 namespace System
 {
-    public partial class WeakReference
+    partial public class WeakReference
     {
         // If you fix bugs here, please fix them in WeakReference<T> at the same time.
 

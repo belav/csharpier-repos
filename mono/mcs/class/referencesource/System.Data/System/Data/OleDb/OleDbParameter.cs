@@ -19,7 +19,7 @@ namespace System.Data.OleDb
     [System.ComponentModel.TypeConverterAttribute(
         typeof(System.Data.OleDb.OleDbParameter.OleDbParameterConverter)
     )]
-    public sealed partial class OleDbParameter : DbParameter, ICloneable, IDbDataParameter
+    partial public sealed class OleDbParameter : DbParameter, ICloneable, IDbDataParameter
     {
         private NativeDBType _metaType;
         private int _changeID;
@@ -129,7 +129,7 @@ namespace System.Data.OleDb
             get { return _changeID; }
         }
 
-        override public DbType DbType
+        public override DbType DbType
         {
             get { return GetBindType(Value).enumDbType; }
             set
@@ -186,7 +186,7 @@ namespace System.Data.OleDb
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbParameter_ParameterName),
         ]
-        override public string ParameterName
+        public override string ParameterName
         { // V1.2.3300, XXXParameter V1.0.3300
             get
             {
@@ -632,7 +632,7 @@ namespace System.Data.OleDb
             ResDescriptionAttribute(Res.DbParameter_Value),
             TypeConverterAttribute(typeof(StringConverter)),
         ]
-        override public object Value
+        public override object Value
         { // V1.2.3300, XXXParameter V1.0.3300
             get { return _value; }
             set
@@ -657,7 +657,7 @@ namespace System.Data.OleDb
             return ValueSizeCore(value);
         }
 
-        static private int GetBindDirection(ParameterDirection direction)
+        private static int GetBindDirection(ParameterDirection direction)
         {
             return (ODB.ParameterDirectionFlag & (int)direction);
             /*switch(Direction) {
@@ -672,7 +672,7 @@ namespace System.Data.OleDb
             }*/
         }
 
-        static private int GetBindFlags(ParameterDirection direction)
+        private static int GetBindFlags(ParameterDirection direction)
         {
             return (ODB.ParameterDirectionFlag & (int)direction);
             /*switch(Direction) {
@@ -687,9 +687,9 @@ namespace System.Data.OleDb
             }*/
         }
 
+        internal
         // implemented as nested class to take advantage of the private/protected ShouldSerializeXXX methods
-        sealed internal class OleDbParameterConverter
-            : System.ComponentModel.ExpandableObjectConverter
+        sealed class OleDbParameterConverter : System.ComponentModel.ExpandableObjectConverter
         {
             // converter classes should have public ctor
             public OleDbParameterConverter() { }

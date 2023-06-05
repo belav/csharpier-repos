@@ -12,7 +12,7 @@ using System.Reflection.Runtime.TypeInfos;
 
 namespace System.Reflection.Runtime.General
 {
-    public partial struct QSignatureTypeHandle
+    partial public struct QSignatureTypeHandle
     {
         public object Reader
         {

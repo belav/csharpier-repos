@@ -14,6 +14,7 @@ using GenericVariance = Internal.Runtime.GenericVariance;
 
 namespace ILCompiler.DependencyAnalysis
 {
+    partial
     /// <summary>
     /// Given a type, EETypeNode writes an MethodTable data structure in the format expected by the runtime.
     ///
@@ -60,7 +61,7 @@ namespace ILCompiler.DependencyAnalysis
     ///                 |
     /// [Relative ptr]  | Pointer to the generic argument and variance info (optional)
     /// </summary>
-    public partial class EETypeNode
+    public class EETypeNode
         : DehydratableObjectNode,
             IEETypeNode,
             ISymbolDefinitionNode,

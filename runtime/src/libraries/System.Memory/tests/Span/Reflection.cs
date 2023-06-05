@@ -10,7 +10,7 @@ using System.MemoryTests;
 
 namespace System.SpanTests
 {
-    public static partial class SpanTests
+    partial public static class SpanTests
     {
         // Calling Span APIs via Reflection is not supported yet.
         // These tests check that using reflection results in graceful failures. See https://github.com/dotnet/runtime/issues/10057

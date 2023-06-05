@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class Random
+    partial public class Random
     {
         /// <summary>
         /// Provides an implementation used for compatibility with cases where a seed is specified

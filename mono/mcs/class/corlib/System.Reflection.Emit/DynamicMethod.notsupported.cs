@@ -172,12 +172,12 @@ namespace System.Reflection.Emit
             get { throw new PlatformNotSupportedException(); }
         }
 
-        public override sealed Delegate CreateDelegate(Type delegateType)
+        public sealed override Delegate CreateDelegate(Type delegateType)
         {
             throw new PlatformNotSupportedException();
         }
 
-        public override sealed Delegate CreateDelegate(Type delegateType, object target)
+        public sealed override Delegate CreateDelegate(Type delegateType, object target)
         {
             throw new PlatformNotSupportedException();
         }

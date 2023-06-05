@@ -12,7 +12,7 @@ using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {
-    public abstract partial class Image
+    partial public abstract class Image
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();

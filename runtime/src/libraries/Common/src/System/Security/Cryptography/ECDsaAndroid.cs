@@ -9,9 +9,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECDsaImplementation
+    partial internal static class ECDsaImplementation
     {
-        public sealed partial class ECDsaAndroid : ECDsa, IRuntimeAlgorithm
+        partial public sealed class ECDsaAndroid : ECDsa, IRuntimeAlgorithm
         {
             // secp521r1 maxes out at 139 bytes, so 256 should always be enough
             private const int SignatureStackBufSize = 256;

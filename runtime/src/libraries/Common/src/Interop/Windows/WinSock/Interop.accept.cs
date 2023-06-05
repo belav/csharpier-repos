@@ -5,12 +5,12 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial IntPtr accept(
+        partial internal static IntPtr accept(
             SafeSocketHandle socketHandle,
             byte[] socketAddress,
             ref int socketAddressSize

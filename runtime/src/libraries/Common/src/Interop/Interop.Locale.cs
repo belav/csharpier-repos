@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Globalization
+    partial internal static class Globalization
     {
         [LibraryImport(
             Libraries.GlobalizationNative,
@@ -13,7 +13,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool GetLocaleName(
+        partial internal static unsafe bool GetLocaleName(
             string localeName,
             char* value,
             int valueLength
@@ -25,7 +25,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool GetLocaleInfoString(
+        partial internal static unsafe bool GetLocaleInfoString(
             string localeName,
             uint localeStringData,
             char* value,
@@ -39,7 +39,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool GetDefaultLocaleName(char* value, int valueLength);
+        partial internal static unsafe bool GetDefaultLocaleName(char* value, int valueLength);
 
         [LibraryImport(
             Libraries.GlobalizationNative,
@@ -47,7 +47,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool IsPredefinedLocale(string localeName);
+        partial internal static bool IsPredefinedLocale(string localeName);
 
         [LibraryImport(
             Libraries.GlobalizationNative,
@@ -55,7 +55,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool GetLocaleTimeFormat(
+        partial internal static unsafe bool GetLocaleTimeFormat(
             string localeName,
             [MarshalAs(UnmanagedType.Bool)] bool shortFormat,
             char* value,
@@ -68,7 +68,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetLocaleInfoInt(
+        partial internal static bool GetLocaleInfoInt(
             string localeName,
             uint localeNumberData,
             ref int value
@@ -80,7 +80,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetLocaleInfoGroupingSizes(
+        partial internal static bool GetLocaleInfoGroupingSizes(
             string localeName,
             uint localeGroupingData,
             ref int primaryGroupSize,
@@ -92,6 +92,6 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_GetLocales",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int GetLocales([Out] char[]? value, int valueLength);
+        partial internal static int GetLocales([Out] char[]? value, int valueLength);
     }
 }

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
-    internal partial class FixAllState
+    partial internal class FixAllState
     {
         /// <summary>
         /// Diagnostic provider to fetch document/project diagnostics to fix in a <see cref="FixAllContext"/>.

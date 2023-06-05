@@ -5,7 +5,7 @@ using System.Buffers.Binary;
 
 namespace System.Formats.Cbor
 {
-    public partial class CborWriter
+    partial public class CborWriter
     {
         // Implements major type 0,1 encoding per https://tools.ietf.org/html/rfc7049#section-2.1
 

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class TypeTests
+    partial public class TypeTests
     {
         public static IEnumerable<object[]> GetInterface_TestData()
         {

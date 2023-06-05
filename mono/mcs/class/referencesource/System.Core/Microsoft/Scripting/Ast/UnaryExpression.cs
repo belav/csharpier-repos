@@ -353,7 +353,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="UnaryExpression"></see>, given an operand, by calling the appropriate factory method.

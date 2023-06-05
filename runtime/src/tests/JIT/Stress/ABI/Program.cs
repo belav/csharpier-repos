@@ -15,7 +15,7 @@ using System.Text;
 
 namespace ABIStress
 {
-    internal partial class Program
+    partial internal class Program
     {
         private static int Main(string[] args)
         {

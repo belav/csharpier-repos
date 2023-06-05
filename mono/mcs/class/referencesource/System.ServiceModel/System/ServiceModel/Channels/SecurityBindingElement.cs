@@ -1154,7 +1154,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsMutualCertificateBinding() method.
-        static public SecurityBindingElement CreateMutualCertificateBindingElement()
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsMutualCertificateBinding() method.
+        static SecurityBindingElement CreateMutualCertificateBindingElement()
         {
             return CreateMutualCertificateBindingElement(
                 MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11
@@ -1167,7 +1170,7 @@ namespace System.ServiceModel.Channels
             return IsMutualCertificateBinding(sbe, false);
         }
 
-        static public AsymmetricSecurityBindingElement CreateCertificateSignatureBindingElement()
+        public static AsymmetricSecurityBindingElement CreateCertificateSignatureBindingElement()
         {
             AsymmetricSecurityBindingElement result;
 
@@ -1194,7 +1197,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsMutualCertificateBinding() method.
-        static public SecurityBindingElement CreateMutualCertificateBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsMutualCertificateBinding() method.
+        static SecurityBindingElement CreateMutualCertificateBindingElement(
             MessageSecurityVersion version
         )
         {
@@ -1203,7 +1209,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsMutualCertificateBinding() method.
-        static public SecurityBindingElement CreateMutualCertificateBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsMutualCertificateBinding() method.
+        static SecurityBindingElement CreateMutualCertificateBindingElement(
             MessageSecurityVersion version,
             bool allowSerializedSigningTokenOnReply
         )
@@ -1369,7 +1378,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsAnonymousForCertificateBinding() method.
-        static public SymmetricSecurityBindingElement CreateAnonymousForCertificateBindingElement()
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsAnonymousForCertificateBinding() method.
+        static SymmetricSecurityBindingElement CreateAnonymousForCertificateBindingElement()
         {
             SymmetricSecurityBindingElement result;
 
@@ -1413,14 +1425,14 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        static public AsymmetricSecurityBindingElement CreateMutualCertificateDuplexBindingElement()
+        public static AsymmetricSecurityBindingElement CreateMutualCertificateDuplexBindingElement()
         {
             return CreateMutualCertificateDuplexBindingElement(
                 MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11
             );
         }
 
-        static public AsymmetricSecurityBindingElement CreateMutualCertificateDuplexBindingElement(
+        public static AsymmetricSecurityBindingElement CreateMutualCertificateDuplexBindingElement(
             MessageSecurityVersion version
         )
         {
@@ -1468,7 +1480,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsUserNameForCertificateBinding() method.
-        static public SymmetricSecurityBindingElement CreateUserNameForCertificateBindingElement()
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsUserNameForCertificateBinding() method.
+        static SymmetricSecurityBindingElement CreateUserNameForCertificateBindingElement()
         {
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
                 new X509SecurityTokenParameters(
@@ -1522,7 +1537,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsKerberosBinding() method.
-        static public SymmetricSecurityBindingElement CreateKerberosBindingElement()
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsKerberosBinding() method.
+        static SymmetricSecurityBindingElement CreateKerberosBindingElement()
         {
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
                 new KerberosSecurityTokenParameters()
@@ -1550,7 +1568,7 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        static public SymmetricSecurityBindingElement CreateSspiNegotiationBindingElement()
+        public static SymmetricSecurityBindingElement CreateSspiNegotiationBindingElement()
         {
             return CreateSspiNegotiationBindingElement(
                 SspiSecurityTokenParameters.defaultRequireCancellation
@@ -1559,7 +1577,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSspiNegotiationBinding() method.
-        static public SymmetricSecurityBindingElement CreateSspiNegotiationBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsSspiNegotiationBinding() method.
+        static SymmetricSecurityBindingElement CreateSspiNegotiationBindingElement(
             bool requireCancellation
         )
         {
@@ -1591,7 +1612,7 @@ namespace System.ServiceModel.Channels
             return sspiParameters.RequireCancellation == requireCancellation;
         }
 
-        static public SymmetricSecurityBindingElement CreateSslNegotiationBindingElement(
+        public static SymmetricSecurityBindingElement CreateSslNegotiationBindingElement(
             bool requireClientCertificate
         )
         {
@@ -1603,7 +1624,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSslNegotiationBinding() method.
-        static public SymmetricSecurityBindingElement CreateSslNegotiationBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsSslNegotiationBinding() method.
+        static SymmetricSecurityBindingElement CreateSslNegotiationBindingElement(
             bool requireClientCertificate,
             bool requireCancellation
         )
@@ -1637,7 +1661,7 @@ namespace System.ServiceModel.Channels
                 && sslParameters.RequireCancellation == requireCancellation;
         }
 
-        static public SymmetricSecurityBindingElement CreateIssuedTokenBindingElement(
+        public static SymmetricSecurityBindingElement CreateIssuedTokenBindingElement(
             IssuedSecurityTokenParameters issuedTokenParameters
         )
         {
@@ -1657,7 +1681,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsIssuedTokenForCertificateBinding() method.
-        static public SymmetricSecurityBindingElement CreateIssuedTokenForCertificateBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsIssuedTokenForCertificateBinding() method.
+        static SymmetricSecurityBindingElement CreateIssuedTokenForCertificateBindingElement(
             IssuedSecurityTokenParameters issuedTokenParameters
         )
         {
@@ -1746,7 +1773,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsIssuedTokenForSslBinding() method.
-        static public SymmetricSecurityBindingElement CreateIssuedTokenForSslBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsIssuedTokenForSslBinding() method.
+        static SymmetricSecurityBindingElement CreateIssuedTokenForSslBindingElement(
             IssuedSecurityTokenParameters issuedTokenParameters
         )
         {
@@ -1771,7 +1801,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsIssuedTokenForSslBinding() method.
-        static public SymmetricSecurityBindingElement CreateIssuedTokenForSslBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsIssuedTokenForSslBinding() method.
+        static SymmetricSecurityBindingElement CreateIssuedTokenForSslBindingElement(
             IssuedSecurityTokenParameters issuedTokenParameters,
             bool requireCancellation
         )
@@ -1859,7 +1892,7 @@ namespace System.ServiceModel.Channels
             return (issuedTokenParameters != null);
         }
 
-        static public SymmetricSecurityBindingElement CreateUserNameForSslBindingElement()
+        public static SymmetricSecurityBindingElement CreateUserNameForSslBindingElement()
         {
             return CreateUserNameForSslBindingElement(
                 SslSecurityTokenParameters.defaultRequireCancellation
@@ -1868,7 +1901,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsUserNameForSslBinding() method.
-        static public SymmetricSecurityBindingElement CreateUserNameForSslBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsUserNameForSslBinding() method.
+        static SymmetricSecurityBindingElement CreateUserNameForSslBindingElement(
             bool requireCancellation
         )
         {
@@ -1919,7 +1955,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsUserNameOverTransportBinding() method.
-        static public TransportSecurityBindingElement CreateUserNameOverTransportBindingElement()
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsUserNameOverTransportBinding() method.
+        static TransportSecurityBindingElement CreateUserNameOverTransportBindingElement()
         {
             TransportSecurityBindingElement result = new TransportSecurityBindingElement();
             result.EndpointSupportingTokenParameters.SignedEncrypted.Add(
@@ -1960,14 +1999,20 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsCertificateOverTransportBinding() method.
-        static public TransportSecurityBindingElement CreateCertificateOverTransportBindingElement()
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsCertificateOverTransportBinding() method.
+        static TransportSecurityBindingElement CreateCertificateOverTransportBindingElement()
         {
             return CreateCertificateOverTransportBindingElement(MessageSecurityVersion.Default);
         }
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsCertificateOverTransportBinding() method.
-        static public TransportSecurityBindingElement CreateCertificateOverTransportBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsCertificateOverTransportBinding() method.
+        static TransportSecurityBindingElement CreateCertificateOverTransportBindingElement(
             MessageSecurityVersion version
         )
         {
@@ -2032,7 +2077,7 @@ namespace System.ServiceModel.Channels
                 || x509Parameters.X509ReferenceStyle == X509KeyIdentifierClauseType.Thumbprint;
         }
 
-        static public TransportSecurityBindingElement CreateKerberosOverTransportBindingElement()
+        public static TransportSecurityBindingElement CreateKerberosOverTransportBindingElement()
         {
             TransportSecurityBindingElement result = new TransportSecurityBindingElement();
             KerberosSecurityTokenParameters kerberosParameters =
@@ -2083,14 +2128,54 @@ namespace System.ServiceModel.Channels
         }
 #endif
 
-        static public TransportSecurityBindingElement CreateSspiNegotiationOverTransportBindingElement()
+        public
+#if NO
+        // this is reversing of the CreateKerberosOverTransportBindingElement() logic
+        static bool IsKerberosOverTransportBinding(SecurityBindingElement sbe)
+        {
+            if (sbe.DefaultAlgorithmSuite != SecurityAlgorithmSuite.KerberosDefault)
+                return false;
+
+            // do not check local settings: sbe.LocalServiceSettings and sbe.LocalClientSettings
+
+            if (!sbe.IncludeTimestamp)
+                return false;
+
+            if (!(sbe is TransportSecurityBindingElement))
+                return false;
+
+            SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
+            if (
+                parameters.Signed.Count != 0
+                || parameters.SignedEncrypted.Count != 0
+                || parameters.Endorsing.Count != 1
+                || parameters.SignedEndorsing.Count != 0
+            )
+                return false;
+
+            KerberosSecurityTokenParameters kerberosParameters =
+                parameters.Endorsing[0] as KerberosSecurityTokenParameters;
+            if (kerberosParameters == null)
+                return false;
+
+            if (kerberosParameters.RequireDerivedKeys)
+                return false;
+
+            return true;
+        }
+#endif
+
+        static TransportSecurityBindingElement CreateSspiNegotiationOverTransportBindingElement()
         {
             return CreateSspiNegotiationOverTransportBindingElement(true);
         }
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSspiNegotiationOverTransportBinding() method.
-        static public TransportSecurityBindingElement CreateSspiNegotiationOverTransportBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsSspiNegotiationOverTransportBinding() method.
+        static TransportSecurityBindingElement CreateSspiNegotiationOverTransportBindingElement(
             bool requireCancellation
         )
         {
@@ -2146,7 +2231,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsIssuedTokenOverTransportBinding() method.
-        static public TransportSecurityBindingElement CreateIssuedTokenOverTransportBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsIssuedTokenOverTransportBinding() method.
+        static TransportSecurityBindingElement CreateIssuedTokenOverTransportBindingElement(
             IssuedSecurityTokenParameters issuedTokenParameters
         )
         {
@@ -2227,7 +2315,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSecureConversationBinding() method.
-        static public SecurityBindingElement CreateSecureConversationBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsSecureConversationBinding() method.
+        static SecurityBindingElement CreateSecureConversationBindingElement(
             SecurityBindingElement bootstrapSecurity
         )
         {
@@ -2251,7 +2342,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static public SecurityBindingElement CreateSecureConversationBindingElement(
+        public static SecurityBindingElement CreateSecureConversationBindingElement(
             SecurityBindingElement bootstrapSecurity,
             bool requireCancellation
         )
@@ -2265,7 +2356,10 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSecureConversationBinding() method.
-        static public SecurityBindingElement CreateSecureConversationBindingElement(
+        public
+        // If any changes are made to this method, please make sure that they are
+        // reflected in the corresponding IsSecureConversationBinding() method.
+        static SecurityBindingElement CreateSecureConversationBindingElement(
             SecurityBindingElement bootstrapSecurity,
             bool requireCancellation,
             ChannelProtectionRequirements bootstrapProtectionRequirements

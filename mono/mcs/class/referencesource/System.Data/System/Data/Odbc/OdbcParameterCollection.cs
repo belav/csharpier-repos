@@ -25,7 +25,7 @@ namespace System.Data.Odbc
         ),
         ListBindable(false)
     ]
-    public sealed partial class OdbcParameterCollection : DbParameterCollection
+    partial public sealed class OdbcParameterCollection : DbParameterCollection
     {
         private bool _rebindCollection; // The collection needs to be (re)bound
 
@@ -41,14 +41,14 @@ namespace System.Data.Odbc
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public OdbcParameter this[int index]
+        public new OdbcParameter this[int index]
         {
             get { return (OdbcParameter)GetParameter(index); }
             set { SetParameter(index, value); }
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public OdbcParameter this[string parameterName]
+        public new OdbcParameter this[string parameterName]
         {
             get { return (OdbcParameter)GetParameter(parameterName); }
             set { SetParameter(parameterName, value); }
@@ -154,7 +154,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override public bool Contains(string value)
+        public override bool Contains(string value)
         { // WebData 97349
             return (-1 != IndexOf(value));
         }

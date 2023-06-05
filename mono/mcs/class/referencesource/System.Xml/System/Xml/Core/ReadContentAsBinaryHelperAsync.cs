@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial class ReadContentAsBinaryHelper
+    partial internal class ReadContentAsBinaryHelper
     {
         // Internal methods
 

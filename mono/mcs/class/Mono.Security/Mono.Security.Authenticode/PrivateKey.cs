@@ -246,12 +246,12 @@ namespace Mono.Security.Authenticode
             }
         }
 
-        static public PrivateKey CreateFromFile(string filename)
+        public static PrivateKey CreateFromFile(string filename)
         {
             return CreateFromFile(filename, null);
         }
 
-        static public PrivateKey CreateFromFile(string filename, string password)
+        public static PrivateKey CreateFromFile(string filename, string password)
         {
             if (filename == null)
                 throw new ArgumentNullException("filename");

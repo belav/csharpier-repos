@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
     [TagType(typeof(StringIndentationTag))]
     [VisualStudio.Utilities.ContentType(ContentTypeNames.CSharpContentType)]
     [VisualStudio.Utilities.ContentType(ContentTypeNames.VisualBasicContentType)]
-    internal sealed partial class StringIndentationTaggerProvider
+    partial internal sealed class StringIndentationTaggerProvider
         : AsynchronousTaggerProvider<StringIndentationTag>
     {
         private readonly IEditorFormatMap _editorFormatMap;

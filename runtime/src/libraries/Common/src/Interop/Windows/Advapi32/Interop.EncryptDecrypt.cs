@@ -4,9 +4,9 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use EncryptFile.
@@ -18,7 +18,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EncryptFilePrivate(string lpFileName);
+        partial private static bool EncryptFilePrivate(string lpFileName);
 
         internal static bool EncryptFile(string path)
         {
@@ -36,7 +36,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool DecryptFileFilePrivate(string lpFileName, int dwReserved);
+        partial private static bool DecryptFileFilePrivate(string lpFileName, int dwReserved);
 
         internal static bool DecryptFile(string path)
         {

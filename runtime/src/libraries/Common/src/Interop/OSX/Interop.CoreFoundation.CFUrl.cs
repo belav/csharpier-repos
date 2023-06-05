@@ -7,12 +7,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class CoreFoundation
+    partial internal static class CoreFoundation
     {
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static partial SafeCreateHandle CFURLCreateWithString(
+        partial private static SafeCreateHandle CFURLCreateWithString(
             IntPtr allocator,
             SafeCreateHandle str,
             IntPtr baseUrl

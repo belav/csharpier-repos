@@ -9,12 +9,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+partial
 /// <summary>
 /// An <see cref="IResult"/> that returns a Found (302), Moved Permanently (301), Temporary Redirect (307),
 /// or Permanent Redirect (308) response with a Location header.
 /// Targets a registered route.
 /// </summary>
-internal sealed partial class RedirectToRouteResult : IResult
+internal sealed class RedirectToRouteResult : IResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -170,7 +171,7 @@ internal sealed partial class RedirectToRouteResult : IResult
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -178,7 +179,7 @@ internal sealed partial class RedirectToRouteResult : IResult
             "Executing RedirectToRouteResult, redirecting to {Destination} from route {RouteName}.",
             EventName = "RedirectToRouteResultExecuting"
         )]
-        public static partial void RedirectToRouteResultExecuting(
+        partial public static void RedirectToRouteResultExecuting(
             ILogger logger,
             string destination,
             string? routeName

@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System;
     using System.Configuration;
 
-    public partial class ExtensionElement : ConfigurationElement
+    partial public class ExtensionElement : ConfigurationElement
     {
         string typeName;
 

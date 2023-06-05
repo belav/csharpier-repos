@@ -67,17 +67,17 @@ namespace System.Windows.Forms
         #region Subclasses
         public class State
         {
-            static public Keys ModifierKeys
+            public static Keys ModifierKeys
             {
                 get { return driver.ModifierKeys; }
             }
 
-            static public MouseButtons MouseButtons
+            public static MouseButtons MouseButtons
             {
                 get { return driver.MouseButtons; }
             }
 
-            static public Point MousePosition
+            public static Point MousePosition
             {
                 get { return driver.MousePosition; }
             }
@@ -174,22 +174,22 @@ namespace System.Windows.Forms
             return "SWFClass" + Thread.GetDomainID().ToString() + "." + type.ToString();
         }
 
-        static public Size Border3DSize
+        public static Size Border3DSize
         {
             get { return driver.Border3DSize; }
         }
 
-        static public Size BorderSize
+        public static Size BorderSize
         {
             get { return driver.BorderSize; }
         }
 
-        static public Size CaptionButtonSize
+        public static Size CaptionButtonSize
         {
             get { return driver.CaptionButtonSize; }
         }
 
-        static public int CaptionHeight
+        public static int CaptionHeight
         {
             get { return driver.CaptionHeight; }
         }
@@ -203,32 +203,32 @@ namespace System.Windows.Forms
             get { return driver.CaretWidth; }
         }
 
-        static public Size CursorSize
+        public static Size CursorSize
         {
             get { return driver.CursorSize; }
         }
 
-        static public Size DoubleClickSize
+        public static Size DoubleClickSize
         {
             get { return driver.DoubleClickSize; }
         }
 
-        static public int DoubleClickTime
+        public static int DoubleClickTime
         {
             get { return driver.DoubleClickTime; }
         }
 
-        static public bool DragFullWindows
+        public static bool DragFullWindows
         {
             get { return driver.DragFullWindows; }
         }
 
-        static public Size DragSize
+        public static Size DragSize
         {
             get { return driver.DragSize; }
         }
 
-        static public Size FixedFrameBorderSize
+        public static Size FixedFrameBorderSize
         {
             get { return driver.FixedFrameBorderSize; }
         }
@@ -252,12 +252,12 @@ namespace System.Windows.Forms
             get { return driver.HorizontalResizeBorderThickness; }
         }
 
-        static public int HorizontalScrollBarHeight
+        public static int HorizontalScrollBarHeight
         {
             get { return driver.HorizontalScrollBarHeight; }
         }
 
-        static public Size IconSize
+        public static Size IconSize
         {
             get { return driver.IconSize; }
         }
@@ -323,27 +323,27 @@ namespace System.Windows.Forms
             get { return driver.IsToolTipAnimationEnabled; }
         }
 
-        static public int KeyboardSpeed
+        public static int KeyboardSpeed
         {
             get { return driver.KeyboardSpeed; }
         }
 
-        static public int KeyboardDelay
+        public static int KeyboardDelay
         {
             get { return driver.KeyboardDelay; }
         }
 
-        static public Size MaxWindowTrackSize
+        public static Size MaxWindowTrackSize
         {
             get { return driver.MaxWindowTrackSize; }
         }
 
-        static public bool MenuAccessKeysUnderlined
+        public static bool MenuAccessKeysUnderlined
         {
             get { return driver.MenuAccessKeysUnderlined; }
         }
 
-        static public Size MenuBarButtonSize
+        public static Size MenuBarButtonSize
         {
             get { return driver.MenuBarButtonSize; }
         }
@@ -353,42 +353,42 @@ namespace System.Windows.Forms
             get { return driver.MenuButtonSize; }
         }
 
-        static public int MenuShowDelay
+        public static int MenuShowDelay
         {
             get { return driver.MenuShowDelay; }
         }
 
-        static public Size MinimizedWindowSize
+        public static Size MinimizedWindowSize
         {
             get { return driver.MinimizedWindowSize; }
         }
 
-        static public Size MinimizedWindowSpacingSize
+        public static Size MinimizedWindowSpacingSize
         {
             get { return driver.MinimizedWindowSpacingSize; }
         }
 
-        static public Size MinimumWindowSize
+        public static Size MinimumWindowSize
         {
             get { return driver.MinimumWindowSize; }
         }
 
-        static public Size MinimumFixedToolWindowSize
+        public static Size MinimumFixedToolWindowSize
         {
             get { return driver.MinimumFixedToolWindowSize; }
         }
 
-        static public Size MinimumSizeableToolWindowSize
+        public static Size MinimumSizeableToolWindowSize
         {
             get { return driver.MinimumSizeableToolWindowSize; }
         }
 
-        static public Size MinimumNoBorderWindowSize
+        public static Size MinimumNoBorderWindowSize
         {
             get { return driver.MinimumNoBorderWindowSize; }
         }
 
-        static public Size MinWindowTrackSize
+        public static Size MinWindowTrackSize
         {
             get { return driver.MinWindowTrackSize; }
         }
@@ -398,42 +398,42 @@ namespace System.Windows.Forms
             get { return driver.MouseSpeed; }
         }
 
-        static public Size SmallIconSize
+        public static Size SmallIconSize
         {
             get { return driver.SmallIconSize; }
         }
 
-        static public int MenuHeight
+        public static int MenuHeight
         {
             get { return driver.MenuHeight; }
         }
 
-        static public int MouseButtonCount
+        public static int MouseButtonCount
         {
             get { return driver.MouseButtonCount; }
         }
 
-        static public bool MouseButtonsSwapped
+        public static bool MouseButtonsSwapped
         {
             get { return driver.MouseButtonsSwapped; }
         }
 
-        static public Size MouseHoverSize
+        public static Size MouseHoverSize
         {
             get { return driver.MouseHoverSize; }
         }
 
-        static public int MouseHoverTime
+        public static int MouseHoverTime
         {
             get { return driver.MouseHoverTime; }
         }
 
-        static public int MouseWheelScrollDelta
+        public static int MouseWheelScrollDelta
         {
             get { return driver.MouseWheelScrollDelta; }
         }
 
-        static public bool MouseWheelPresent
+        public static bool MouseWheelPresent
         {
             get { return driver.MouseWheelPresent; }
         }
@@ -468,7 +468,7 @@ namespace System.Windows.Forms
             get { return driver.UIEffectsEnabled; }
         }
 
-        static public bool UserClipWontExposeParent
+        public static bool UserClipWontExposeParent
         {
             get { return driver.UserClipWontExposeParent; }
         }
@@ -478,17 +478,17 @@ namespace System.Windows.Forms
             get { return driver.VerticalResizeBorderThickness; }
         }
 
-        static public int VerticalScrollBarWidth
+        public static int VerticalScrollBarWidth
         {
             get { return driver.VerticalScrollBarWidth; }
         }
 
-        static public Rectangle VirtualScreen
+        public static Rectangle VirtualScreen
         {
             get { return driver.VirtualScreen; }
         }
 
-        static public Rectangle WorkingArea
+        public static Rectangle WorkingArea
         {
             get { return driver.WorkingArea; }
         }

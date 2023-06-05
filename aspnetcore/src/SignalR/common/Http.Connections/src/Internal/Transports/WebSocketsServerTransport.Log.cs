@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports;
 
-internal sealed partial class WebSocketsServerTransport
+partial internal sealed class WebSocketsServerTransport
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -16,10 +16,10 @@ internal sealed partial class WebSocketsServerTransport
             "Socket opened using Sub-Protocol: '{SubProtocol}'.",
             EventName = "SocketOpened"
         )]
-        public static partial void SocketOpened(ILogger logger, string? subProtocol);
+        partial public static void SocketOpened(ILogger logger, string? subProtocol);
 
         [LoggerMessage(2, LogLevel.Debug, "Socket closed.", EventName = "SocketClosed")]
-        public static partial void SocketClosed(ILogger logger);
+        partial public static void SocketClosed(ILogger logger);
 
         [LoggerMessage(
             3,
@@ -27,7 +27,7 @@ internal sealed partial class WebSocketsServerTransport
             "Client closed connection with status code '{Status}' ({Description}). Signaling end-of-input to application.",
             EventName = "ClientClosed"
         )]
-        public static partial void ClientClosed(
+        partial public static void ClientClosed(
             ILogger logger,
             WebSocketCloseStatus? status,
             string description
@@ -39,7 +39,7 @@ internal sealed partial class WebSocketsServerTransport
             "Waiting for the application to finish sending data.",
             EventName = "WaitingForSend"
         )]
-        public static partial void WaitingForSend(ILogger logger);
+        partial public static void WaitingForSend(ILogger logger);
 
         [LoggerMessage(
             5,
@@ -47,7 +47,7 @@ internal sealed partial class WebSocketsServerTransport
             "Application failed during sending. Sending InternalServerError close frame.",
             EventName = "FailedSending"
         )]
-        public static partial void FailedSending(ILogger logger);
+        partial public static void FailedSending(ILogger logger);
 
         [LoggerMessage(
             6,
@@ -55,7 +55,7 @@ internal sealed partial class WebSocketsServerTransport
             "Application finished sending. Sending close frame.",
             EventName = "FinishedSending"
         )]
-        public static partial void FinishedSending(ILogger logger);
+        partial public static void FinishedSending(ILogger logger);
 
         [LoggerMessage(
             7,
@@ -63,7 +63,7 @@ internal sealed partial class WebSocketsServerTransport
             "Waiting for the client to close the socket.",
             EventName = "WaitingForClose"
         )]
-        public static partial void WaitingForClose(ILogger logger);
+        partial public static void WaitingForClose(ILogger logger);
 
         [LoggerMessage(
             8,
@@ -71,7 +71,7 @@ internal sealed partial class WebSocketsServerTransport
             "Timed out waiting for client to send the close frame, aborting the connection.",
             EventName = "CloseTimedOut"
         )]
-        public static partial void CloseTimedOut(ILogger logger);
+        partial public static void CloseTimedOut(ILogger logger);
 
         [LoggerMessage(
             9,
@@ -79,7 +79,7 @@ internal sealed partial class WebSocketsServerTransport
             "Message received. Type: {MessageType}, size: {Size}, EndOfMessage: {EndOfMessage}.",
             EventName = "MessageReceived"
         )]
-        public static partial void MessageReceived(
+        partial public static void MessageReceived(
             ILogger logger,
             WebSocketMessageType messageType,
             int size,
@@ -92,7 +92,7 @@ internal sealed partial class WebSocketsServerTransport
             "Passing message to application. Payload size: {Size}.",
             EventName = "MessageToApplication"
         )]
-        public static partial void MessageToApplication(ILogger logger, int size);
+        partial public static void MessageToApplication(ILogger logger, int size);
 
         [LoggerMessage(
             11,
@@ -100,10 +100,10 @@ internal sealed partial class WebSocketsServerTransport
             "Sending payload: {Size} bytes.",
             EventName = "SendPayload"
         )]
-        public static partial void SendPayload(ILogger logger, long size);
+        partial public static void SendPayload(ILogger logger, long size);
 
         [LoggerMessage(12, LogLevel.Debug, "Error writing frame.", EventName = "ErrorWritingFrame")]
-        public static partial void ErrorWritingFrame(ILogger logger, Exception ex);
+        partial public static void ErrorWritingFrame(ILogger logger, Exception ex);
 
         [LoggerMessage(
             14,
@@ -111,7 +111,7 @@ internal sealed partial class WebSocketsServerTransport
             "Socket connection closed prematurely.",
             EventName = "ClosedPrematurely"
         )]
-        public static partial void ClosedPrematurely(ILogger logger, Exception ex);
+        partial public static void ClosedPrematurely(ILogger logger, Exception ex);
 
         [LoggerMessage(
             15,
@@ -119,6 +119,6 @@ internal sealed partial class WebSocketsServerTransport
             "Closing webSocket failed.",
             EventName = "ClosingWebSocketFailed"
         )]
-        public static partial void ClosingWebSocketFailed(ILogger logger, Exception ex);
+        partial public static void ClosingWebSocketFailed(ILogger logger, Exception ex);
     }
 }

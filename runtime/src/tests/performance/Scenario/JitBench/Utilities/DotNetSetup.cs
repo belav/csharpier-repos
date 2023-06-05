@@ -80,7 +80,7 @@ namespace JitBench
             }
         }
 
-        async public Task<DotNetInstallation> Run(ITestOutputHelper output)
+        public async Task<DotNetInstallation> Run(ITestOutputHelper output)
         {
             using (var acquireOutput = new IndentedTestOutputHelper("Acquiring DotNet", output))
             {

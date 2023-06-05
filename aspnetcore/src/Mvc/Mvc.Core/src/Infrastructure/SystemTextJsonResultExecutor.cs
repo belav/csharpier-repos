@@ -13,7 +13,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecutor<JsonResult>
+partial internal sealed class SystemTextJsonResultExecutor : IActionResultExecutor<JsonResult>
 {
     private static readonly string DefaultContentType = new MediaTypeHeaderValue("application/json")
     {
@@ -156,7 +156,7 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -165,7 +165,7 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
             EventName = "JsonResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void JsonResultExecuting(ILogger logger, string? type);
+        partial private static void JsonResultExecuting(ILogger logger, string? type);
 
         public static void JsonResultExecuting(ILogger logger, object? value)
         {

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics
 {
-    public partial class StackFrame
+    partial public class StackFrame
     {
         /// <summary>
         /// Called from the class "StackTrace"
@@ -58,7 +58,7 @@ namespace System.Diagnostics
 #pragma warning restore IDE0060
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "StackFrame_GetMethodDescFromNativeIP")]
-        private static partial RuntimeMethodHandleInternal GetMethodDescFromNativeIP(IntPtr ip);
+        partial private static RuntimeMethodHandleInternal GetMethodDescFromNativeIP(IntPtr ip);
 
         /// <summary>
         /// Returns the MethodBase instance for the managed code IP address.

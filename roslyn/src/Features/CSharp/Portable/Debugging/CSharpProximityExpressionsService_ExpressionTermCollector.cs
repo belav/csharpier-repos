@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Debugging
 {
-    internal partial class CSharpProximityExpressionsService
+    partial internal class CSharpProximityExpressionsService
     {
         private static string ConvertToString(ExpressionSyntax expression)
         {

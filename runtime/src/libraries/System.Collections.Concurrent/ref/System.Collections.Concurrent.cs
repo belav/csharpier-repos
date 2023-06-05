@@ -8,7 +8,7 @@
 namespace System.Collections.Concurrent
 {
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
-    public partial class BlockingCollection<T>
+    partial public class BlockingCollection<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IReadOnlyCollection<T>,
             System.Collections.ICollection,
@@ -267,7 +267,7 @@ namespace System.Collections.Concurrent
         }
     }
 
-    public partial class ConcurrentBag<T>
+    partial public class ConcurrentBag<T>
         : System.Collections.Concurrent.IProducerConsumerCollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IReadOnlyCollection<T>,
@@ -338,7 +338,7 @@ namespace System.Collections.Concurrent
         }
     }
 
-    public partial class ConcurrentDictionary<TKey, TValue>
+    partial public class ConcurrentDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
@@ -624,7 +624,7 @@ namespace System.Collections.Concurrent
         }
     }
 
-    public partial class ConcurrentStack<T>
+    partial public class ConcurrentStack<T>
         : System.Collections.Concurrent.IProducerConsumerCollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IReadOnlyCollection<T>,
@@ -723,7 +723,7 @@ namespace System.Collections.Concurrent
         NoBuffering = 1,
     }
 
-    public abstract partial class OrderablePartitioner<TSource>
+    partial public abstract class OrderablePartitioner<TSource>
         : System.Collections.Concurrent.Partitioner<TSource>
     {
         protected OrderablePartitioner(
@@ -771,7 +771,7 @@ namespace System.Collections.Concurrent
         }
     }
 
-    public static partial class Partitioner
+    partial public static class Partitioner
     {
         public static System.Collections.Concurrent.OrderablePartitioner<System.Tuple<
             int,
@@ -837,7 +837,7 @@ namespace System.Collections.Concurrent
         }
     }
 
-    public abstract partial class Partitioner<TSource>
+    partial public abstract class Partitioner<TSource>
     {
         protected Partitioner() { }
 
@@ -860,7 +860,7 @@ namespace System.Collections.Concurrent
 
 namespace System.Collections.Concurrent
 {
-    public partial class ConcurrentQueue<T>
+    partial public class ConcurrentQueue<T>
         : System.Collections.Concurrent.IProducerConsumerCollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IReadOnlyCollection<T>,
@@ -938,7 +938,7 @@ namespace System.Collections.Concurrent
         }
     }
 
-    public partial interface IProducerConsumerCollection<T>
+    partial public interface IProducerConsumerCollection<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.ICollection,
             System.Collections.IEnumerable

@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     [Flags]
     internal enum PollEvents : short

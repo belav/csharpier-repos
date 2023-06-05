@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Hosting
 {
-    public static partial class SystemdHostBuilderExtensions
+    partial public static class SystemdHostBuilderExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddSystemd(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
@@ -26,13 +26,13 @@ namespace Microsoft.Extensions.Hosting
 
 namespace Microsoft.Extensions.Hosting.Systemd
 {
-    public partial interface ISystemdNotifier
+    partial public interface ISystemdNotifier
     {
         bool IsEnabled { get; }
         void Notify(Microsoft.Extensions.Hosting.Systemd.ServiceState state);
     }
 
-    public partial struct ServiceState
+    partial public struct ServiceState
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -50,7 +50,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
         }
     }
 
-    public static partial class SystemdHelpers
+    partial public static class SystemdHelpers
     {
         public static bool IsSystemdService()
         {
@@ -63,7 +63,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("maccatalyst")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public partial class SystemdLifetime
+    partial public class SystemdLifetime
         : Microsoft.Extensions.Hosting.IHostLifetime,
             System.IDisposable
     {
@@ -92,7 +92,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class SystemdNotifier : Microsoft.Extensions.Hosting.Systemd.ISystemdNotifier
+    partial public class SystemdNotifier : Microsoft.Extensions.Hosting.Systemd.ISystemdNotifier
     {
         public SystemdNotifier() { }
 

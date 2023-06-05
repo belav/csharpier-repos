@@ -6,10 +6,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.CustomerScenarios
 {
+    partial
     /// <summary>
     /// Customer Scenarios (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Expected: The last line element of the first section of the last chapter of the context node.

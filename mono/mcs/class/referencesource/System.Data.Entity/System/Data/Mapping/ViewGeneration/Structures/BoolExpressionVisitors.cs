@@ -28,8 +28,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     using DomainTreeExpr = TreeExpr<DomainConstraint<BoolLiteral, Constant>>;
     using DomainTrueExpr = TrueExpr<DomainConstraint<BoolLiteral, Constant>>;
 
+    partial
     // This class represents an arbitrary boolean expression
-    internal partial class BoolExpression : InternalBase
+    internal class BoolExpression : InternalBase
     {
         #region FixRangeVisitor
         // A visitor that "fixes" the OneOfConsts according to the value of

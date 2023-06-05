@@ -12,10 +12,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// Executes an <see cref="ObjectResult"/> to write to the response.
 /// </summary>
-public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
+public class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
 {
     /// <summary>
     /// Creates a new <see cref="ObjectResultExecutor"/>.
@@ -171,8 +172,9 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
         }
     }
 
+    partial
     // Internal for unit testing
-    internal static partial class Log
+    internal static class Log
     {
         // Removed Log.
         // new EventId(1, "BufferingAsyncEnumerable")
@@ -194,7 +196,7 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
             EventName = "ObjectResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ObjectResultExecuting(
+        partial private static void ObjectResultExecuting(
             ILogger logger,
             string objectResultType,
             string? type
@@ -228,6 +230,6 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
             EventName = "NoFormatter",
             SkipEnabledCheck = true
         )]
-        private static partial void NoFormatter(ILogger logger, List<string?> contentTypes);
+        partial private static void NoFormatter(ILogger logger, List<string?> contentTypes);
     }
 }

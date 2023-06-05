@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.Json
 {
-    public sealed partial class Utf8JsonWriter
+    partial public sealed class Utf8JsonWriter
     {
         /// <summary>
         /// Writes the input as JSON content. It is expected that the input content is a single complete JSON value.

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Json
 {
-    internal static partial class ThrowHelper
+    partial internal static class ThrowHelper
     {
         [DoesNotReturn]
         public static void ThrowArgumentException_NodeValueNotAllowed(string paramName)

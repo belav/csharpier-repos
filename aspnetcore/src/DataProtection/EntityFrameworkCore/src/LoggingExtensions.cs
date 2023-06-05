@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(
         1,
@@ -11,7 +11,7 @@ internal static partial class LoggingExtensions
         "Reading data with key '{FriendlyName}', value '{Value}'.",
         EventName = "ReadKeyFromElement"
     )]
-    public static partial void ReadingXmlFromKey(
+    partial public static void ReadingXmlFromKey(
         this ILogger logger,
         string? friendlyName,
         string? value
@@ -23,7 +23,7 @@ internal static partial class LoggingExtensions
         "Saving key '{FriendlyName}' to '{DbContext}'.",
         EventName = "SavingKeyToDbContext"
     )]
-    public static partial void LogSavingKeyToDbContext(
+    partial public static void LogSavingKeyToDbContext(
         this ILogger logger,
         string friendlyName,
         string dbContext

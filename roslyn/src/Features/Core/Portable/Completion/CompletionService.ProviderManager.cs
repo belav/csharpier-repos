@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion
 {
-    public abstract partial class CompletionService
+    partial public abstract class CompletionService
     {
         private sealed class ProviderManager : IEqualityComparer<ImmutableHashSet<string>>
         {

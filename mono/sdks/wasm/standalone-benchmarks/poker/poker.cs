@@ -537,7 +537,7 @@ public class PlayerExpectation
     }
 }
 
-public partial class Benchmark
+partial public class Benchmark
 {
     public const int WarmingIterationCount = 3;
     public const int IterationCount = 10;

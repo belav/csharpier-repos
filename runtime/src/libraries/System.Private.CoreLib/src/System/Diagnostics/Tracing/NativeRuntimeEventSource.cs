@@ -16,7 +16,7 @@ namespace System.Diagnostics.Tracing
     /// </summary>
     [EventSource(Guid = "E13C0D23-CCBC-4E12-931B-D9CC2EEE27E4", Name = EventSourceName)]
     [EventSourceAutoGenerate]
-    internal sealed partial class NativeRuntimeEventSource : EventSource
+    partial internal sealed class NativeRuntimeEventSource : EventSource
     {
         internal const string EventSourceName = "Microsoft-Windows-DotNETRuntime";
         public static readonly NativeRuntimeEventSource Log = new NativeRuntimeEventSource();

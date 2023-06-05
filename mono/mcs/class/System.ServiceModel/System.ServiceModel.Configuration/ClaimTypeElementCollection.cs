@@ -61,7 +61,7 @@ namespace System.ServiceModel.Configuration
         ClearItemsName = "clear",
         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
     )]
-    public sealed partial class ClaimTypeElementCollection
+    partial public sealed class ClaimTypeElementCollection
         : ServiceModelConfigurationElementCollection<ClaimTypeElement>,
             ICollection,
             IEnumerable

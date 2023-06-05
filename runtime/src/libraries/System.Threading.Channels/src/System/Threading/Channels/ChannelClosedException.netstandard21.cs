@@ -7,7 +7,7 @@ namespace System.Threading.Channels
 {
     /// <summary>Exception thrown when a channel is used after it's been closed.</summary>
     [Serializable]
-    public partial class ChannelClosedException : InvalidOperationException
+    partial public class ChannelClosedException : InvalidOperationException
     {
         /// <summary>Initializes a new instance of the <see cref="ChannelClosedException"/> class with serialized data.</summary>
         /// <param name="info">The object that holds the serialized object data.</param>

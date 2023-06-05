@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class CustomAttributeTests
+    partial public static class CustomAttributeTests
     {
         [Fact]
         [ActiveIssue(

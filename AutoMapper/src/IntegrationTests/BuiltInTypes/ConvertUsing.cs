@@ -98,7 +98,7 @@ public class ConvertUsingBug : IntegrationTest<ConvertUsingBug.DatabaseInitializ
         public List<int> Children { get; set; }
     }
 
-    public partial class ApplicationDBContext : LocalDbContext
+    partial public class ApplicationDBContext : LocalDbContext
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -159,13 +159,13 @@ public class StringTypeConverter : IntegrationTest<StringTypeConverter.DatabaseI
         public Service Service { get; set; }
     }
 
-    public partial class Service
+    partial public class Service
     {
         public int Id { get; set; }
         public string Libelle { get; set; }
     }
 
-    public partial class ApplicationDBContext : LocalDbContext
+    partial public class ApplicationDBContext : LocalDbContext
     {
         public DbSet<Planning> Planning { get; set; }
         public DbSet<Service> Service { get; set; }

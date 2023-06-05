@@ -10,12 +10,12 @@ namespace System.ServiceModel.Activation.Configuration
     using System.Diagnostics;
     using System.Globalization;
 
-    public sealed partial class DiagnosticSection : ConfigurationSection
+    partial public sealed class DiagnosticSection : ConfigurationSection
     {
         public DiagnosticSection()
             : base() { }
 
-        static internal DiagnosticSection GetSection()
+        internal static DiagnosticSection GetSection()
         {
             DiagnosticSection retval = (DiagnosticSection)
                 ConfigurationManager.GetSection(ConfigurationStrings.DiagnosticSectionPath);

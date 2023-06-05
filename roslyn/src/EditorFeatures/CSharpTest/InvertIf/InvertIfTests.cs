@@ -14,7 +14,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
-    public partial class InvertIfTests : AbstractCSharpCodeActionTest
+    partial public class InvertIfTests : AbstractCSharpCodeActionTest
     {
         private async Task TestFixOneAsync(string initial, string expected)
         {

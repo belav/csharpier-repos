@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlazorServerWeb_CSharp.Data.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    partial public class CreateIdentitySchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

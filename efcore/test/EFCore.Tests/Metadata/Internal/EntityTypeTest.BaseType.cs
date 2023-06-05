@@ -5,7 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-public partial class EntityTypeTest
+partial public class EntityTypeTest
 {
     [ConditionalFact]
     public void Can_configure_base_type()

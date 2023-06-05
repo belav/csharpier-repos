@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         internal const string CCCryptorStatus = "CCCryptorStatus";
         internal const string CCRNGStatus = "CCRNGStatus";

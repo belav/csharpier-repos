@@ -48,12 +48,13 @@ namespace Novell.Directory.Ldap.Extensions
     /// </summary>
     public class ListReplicasResponse : LdapExtendedResponse
     {
+        public
         /// <summary> Returns a list of distinguished names for the replicas on the server.
         ///
         /// </summary>
         /// <returns> String value specifying the identity returned by the server
         /// </returns>
-        virtual public System.String[] ReplicaList
+        virtual System.String[] ReplicaList
         {
             get { return replicaList; }
         }

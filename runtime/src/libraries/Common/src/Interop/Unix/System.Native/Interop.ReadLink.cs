@@ -6,9 +6,9 @@ using System.Buffers;
 using System.Text;
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Takes a path to a symbolic link and attempts to place the link target path into the buffer. If the buffer is too
@@ -25,7 +25,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_ReadLink",
             SetLastError = true
         )]
-        private static partial int ReadLink(ref byte path, ref byte buffer, int bufferSize);
+        partial private static int ReadLink(ref byte path, ref byte buffer, int bufferSize);
 
         /// <summary>
         /// Takes a path to a symbolic link and returns the link target path.

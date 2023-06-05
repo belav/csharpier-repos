@@ -28,7 +28,7 @@ public static class GitHub_23159
     }
 
     [MethodImpl(MethodImplOptions.AggressiveOptimization)]
-    public unsafe static bool BytesOrdinalEqualsStringAndAscii(
+    public static unsafe bool BytesOrdinalEqualsStringAndAscii(
         string previousValue,
         Span<byte> newValue
     )

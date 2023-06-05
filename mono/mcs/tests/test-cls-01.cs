@@ -24,9 +24,9 @@ public class Big
 }
 
 [CLSCompliant(false)]
-public partial class C1 { }
+partial public class C1 { }
 
-public partial class C1
+partial public class C1
 {
     public void method(uint u) { }
 }

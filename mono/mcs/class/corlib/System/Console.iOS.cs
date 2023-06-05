@@ -16,16 +16,16 @@ using System.Text;
 
 namespace System
 {
-    public static partial class Console
+    partial public static class Console
     {
         class NSLogWriter : TextWriter
         {
             [DllImport("__Internal", CharSet = CharSet.Unicode)]
-            extern static void xamarin_log(string s);
+            static extern void xamarin_log(string s);
 
             [DllImport("/usr/lib/libSystem.dylib")]
-            extern static /* ssize_t */
-            IntPtr write(
+            static /* ssize_t */
+            extern IntPtr write(
                 int fd,
                 byte[] buffer, /* size_t */
                 IntPtr n

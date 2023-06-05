@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class ConstructorTests
+    partial public abstract class ConstructorTests
     {
         [Fact]
         [SkipOnCoreClr(

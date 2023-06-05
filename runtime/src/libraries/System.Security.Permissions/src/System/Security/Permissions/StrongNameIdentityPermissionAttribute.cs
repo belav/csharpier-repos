@@ -11,7 +11,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
-    public sealed partial class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    partial public sealed class StrongNameIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public StrongNameIdentityPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }

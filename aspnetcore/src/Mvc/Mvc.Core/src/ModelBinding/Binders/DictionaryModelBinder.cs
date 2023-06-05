@@ -10,12 +10,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+partial
 /// <summary>
 /// <see cref="IModelBinder"/> implementation for binding dictionary values.
 /// </summary>
 /// <typeparam name="TKey">Type of keys in the dictionary.</typeparam>
 /// <typeparam name="TValue">Type of values in the dictionary.</typeparam>
-public partial class DictionaryModelBinder<TKey, TValue>
+public class DictionaryModelBinder<TKey, TValue>
     : CollectionModelBinder<KeyValuePair<TKey, TValue?>>
     where TKey : notnull
 {
@@ -289,7 +290,7 @@ public partial class DictionaryModelBinder<TKey, TValue>
         return base.CanCreateInstance(targetType);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void NoKeyValueFormatForDictionaryModelBinder(
             ILogger logger,
@@ -302,7 +303,7 @@ public partial class DictionaryModelBinder<TKey, TValue>
             "Attempting to bind model with name '{ModelName}' using the format {ModelName}[key1]=value1&{ModelName}[key2]=value2",
             EventName = "NoKeyValueFormatForDictionaryModelBinder"
         )]
-        private static partial void NoKeyValueFormatForDictionaryModelBinder(
+        partial private static void NoKeyValueFormatForDictionaryModelBinder(
             ILogger logger,
             string modelName
         );

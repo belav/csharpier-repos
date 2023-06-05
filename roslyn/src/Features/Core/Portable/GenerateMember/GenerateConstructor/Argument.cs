@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
 {
-    internal abstract partial class AbstractGenerateConstructorService<TService, TExpressionSyntax>
+    partial internal abstract class AbstractGenerateConstructorService<TService, TExpressionSyntax>
     {
         protected readonly struct Argument
         {

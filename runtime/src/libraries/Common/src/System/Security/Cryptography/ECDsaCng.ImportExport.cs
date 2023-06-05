@@ -5,7 +5,7 @@ using Internal.NativeCrypto;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDsaCng : ECDsa
+    partial public sealed class ECDsaCng : ECDsa
     {
         /// <summary>
         ///         ImportParameters will replace the existing key that ECDsaCng is working with by creating a

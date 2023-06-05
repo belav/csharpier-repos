@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Implementation of MethodImpl api surface implemented without metadata access.
-    public partial class InstantiatedType
+    public class InstantiatedType
     {
         /// <summary>
         /// Instantiate a MethodImplRecord from uninstantiated form to instantiated form

@@ -71,12 +71,12 @@ interface GI2<TC>
     int HF2<TF>(GI1<TF> i1, long counter, long initial_stack, long current_stack = 0);
 }
 
-unsafe public class C1 : I1
+public unsafe class C1 : I1
 {
     void I1.perturb_interface_offset1() { }
 
     static int i;
-    static public int errors;
+    public static int errors;
 
     public static int check(long stack1, long stack2)
     {
@@ -109,7 +109,7 @@ unsafe public class C1 : I1
     }
 }
 
-unsafe public class GC1<TC> : GI1<TC>
+public unsafe class GC1<TC> : GI1<TC>
 {
     void GI1<TC>.perturb_interface_offset1() { }
 
@@ -145,7 +145,7 @@ unsafe public class GC1<TC> : GI1<TC>
     }
 }
 
-unsafe public class C2 : I2
+public unsafe class C2 : I2
 {
     void I2.perturb_interface_offset1() { }
 
@@ -175,7 +175,7 @@ unsafe public class C2 : I2
     }
 }
 
-unsafe public class GC2<TC> : GI2<TC>
+public unsafe class GC2<TC> : GI2<TC>
 {
     void GI2<TC>.perturb_interface_offset1() { }
 
@@ -237,7 +237,7 @@ interface IC
     T[] cast5<T>(object o, long counter = 100, long stack = 0);
 }
 
-unsafe public class C
+public unsafe class C
 {
     [MethodImpl(NoInlining)]
     public static void check(long stack1, long stack2)
@@ -291,7 +291,7 @@ unsafe public class C
     }
 }
 
-unsafe public class D<T1>
+public unsafe class D<T1>
 {
     [MethodImpl(NoInlining)]
     public static void check(long stack1, long stack2)

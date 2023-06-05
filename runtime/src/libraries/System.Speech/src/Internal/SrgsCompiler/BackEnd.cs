@@ -10,7 +10,7 @@ using System.Text;
 
 namespace System.Speech.Internal.SrgsCompiler
 {
-    internal sealed partial class Backend
+    partial internal sealed class Backend
     {
         #region Constructors
 

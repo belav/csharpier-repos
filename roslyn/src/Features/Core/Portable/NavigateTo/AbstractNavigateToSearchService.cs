@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.NavigateTo
 {
-    internal abstract partial class AbstractNavigateToSearchService : INavigateToSearchService
+    partial internal abstract class AbstractNavigateToSearchService : INavigateToSearchService
     {
         public IImmutableSet<string> KindsProvided { get; } =
             ImmutableHashSet.Create(

@@ -23,10 +23,11 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMargin
 {
+    partial
     /// <summary>
     /// Manager controls all the glyphs of Inheritance Margin in <see cref="InheritanceMarginViewMargin"/>.
     /// </summary>
-    internal partial class InheritanceGlyphManager : ForegroundThreadAffinitizedObject, IDisposable
+    internal class InheritanceGlyphManager : ForegroundThreadAffinitizedObject, IDisposable
     {
         // We want to our glyphs to have the same background color as the glyphs in GlyphMargin.
         private const string GlyphMarginName = "Indicator Margin";

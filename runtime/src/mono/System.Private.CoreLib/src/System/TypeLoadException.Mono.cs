@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public partial class TypeLoadException
+    partial public class TypeLoadException
     {
         // Called by runtime
         internal TypeLoadException(string className, string assemblyName)

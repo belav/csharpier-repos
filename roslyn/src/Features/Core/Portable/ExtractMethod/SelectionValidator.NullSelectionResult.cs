@@ -8,7 +8,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal partial class SelectionValidator
+    partial internal class SelectionValidator
     {
         // null object
         protected class NullSelectionResult : SelectionResult

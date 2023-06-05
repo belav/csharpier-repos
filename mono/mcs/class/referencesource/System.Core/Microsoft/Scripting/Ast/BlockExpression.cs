@@ -755,9 +755,10 @@ namespace System.Linq.Expressions
         #endregion
     }
 
+    partial
     #endregion
 
-    public partial class Expression
+    public class Expression
     {
         /// <summary>
         /// Creates a <see cref="BlockExpression"/> that contains two expressions and has no variables.

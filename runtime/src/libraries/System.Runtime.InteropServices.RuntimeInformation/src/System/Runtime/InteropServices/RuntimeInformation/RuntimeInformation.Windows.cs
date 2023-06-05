@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class RuntimeInformation
+    partial public static class RuntimeInformation
     {
         private static string? s_osDescription;
         private static volatile int s_osArch = -1;

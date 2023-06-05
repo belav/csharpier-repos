@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal sealed partial class ReadContentAsBinaryHelper
+    partial internal sealed class ReadContentAsBinaryHelper
     {
         // Internal methods
 

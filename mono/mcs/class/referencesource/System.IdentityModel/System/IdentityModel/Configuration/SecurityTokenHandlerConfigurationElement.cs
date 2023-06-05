@@ -9,11 +9,12 @@ using System.IdentityModel.Tokens;
 
 namespace System.IdentityModel.Configuration
 {
+    partial
 #pragma warning disable 1591
     /// <summary>
     /// Manages configuration for all the Security Token Handlers.
     /// </summary>
-    public sealed partial class SecurityTokenHandlerConfigurationElement : ConfigurationElement
+    public sealed class SecurityTokenHandlerConfigurationElement : ConfigurationElement
     {
         public SecurityTokenHandlerConfigurationElement() { }
 

@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace System.Data.Metadata.Edm
 {
-    internal partial class MutableAssemblyCacheEntry : AssemblyCacheEntry
+    partial internal class MutableAssemblyCacheEntry : AssemblyCacheEntry
     {
         // types in "this" assembly
         private readonly List<EdmType> _typesInAssembly = new List<EdmType>();

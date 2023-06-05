@@ -18,10 +18,11 @@ using System.Reflection;
 
 namespace System.Data.SqlClient
 {
+    partial
     /// <summary>
     /// SqlClient specific implementation of <see cref="DbSpatialDataReader"/>
     /// </summary>
-    internal sealed partial class SqlSpatialDataReader : DbSpatialDataReader
+    internal sealed class SqlSpatialDataReader : DbSpatialDataReader
     {
         private readonly SqlDataReader reader;
         private const string geometrySqlType = "sys.geometry";

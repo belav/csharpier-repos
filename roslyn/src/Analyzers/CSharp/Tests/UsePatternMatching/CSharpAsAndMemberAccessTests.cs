@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
     >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternMatchingForAsAndMemberAccess)]
-    public partial class CSharpAsAndMemberAccessTests
+    partial public class CSharpAsAndMemberAccessTests
     {
         [Fact]
         public async Task TestCoreCase()

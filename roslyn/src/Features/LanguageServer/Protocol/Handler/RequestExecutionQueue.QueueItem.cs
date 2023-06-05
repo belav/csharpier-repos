@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
-    internal partial class RequestExecutionQueue
+    partial internal class RequestExecutionQueue
     {
         private interface IQueueItem
         {

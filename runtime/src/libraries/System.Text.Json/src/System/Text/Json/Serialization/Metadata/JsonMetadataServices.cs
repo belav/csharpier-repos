@@ -10,7 +10,7 @@ namespace System.Text.Json.Serialization.Metadata
     /// </summary>
     /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static partial class JsonMetadataServices
+    partial public static class JsonMetadataServices
     {
         /// <summary>
         /// Creates metadata for a property or field.

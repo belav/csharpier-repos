@@ -11,15 +11,16 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
-internal partial struct VirtualCharSequence
+partial internal struct VirtualCharSequence
 {
+    partial
     /// <summary>
     /// Abstraction over a contiguous chunk of <see cref="VirtualChar"/>s.  This
     /// is used so we can expose <see cref="VirtualChar"/>s over an <see cref="ImmutableArray{VirtualChar}"/>
     /// or over a <see cref="string"/>.  The latter is especially useful for reducing
     /// memory usage in common cases of string tokens without escapes.
     /// </summary>
-    private abstract partial class Chunk
+    private abstract class Chunk
     {
         protected Chunk() { }
 

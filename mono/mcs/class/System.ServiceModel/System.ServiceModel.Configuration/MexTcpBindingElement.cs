@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MexTcpBindingElement
+    partial public class MexTcpBindingElement
         : MexBindingElement<CustomBinding>,
             IBindingConfigurationElement
     {

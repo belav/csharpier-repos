@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 public sealed class C
 {
     [DllImport("nonexistent.dll")]
-    extern static double GetDouble();
+    static extern double GetDouble();
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void UseDouble(double d) { }

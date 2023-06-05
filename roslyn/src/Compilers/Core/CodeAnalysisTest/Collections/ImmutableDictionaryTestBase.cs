@@ -17,7 +17,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
-    public abstract partial class ImmutableDictionaryTestBase : ImmutablesTestBase
+    partial public abstract class ImmutableDictionaryTestBase : ImmutablesTestBase
     {
         [Fact]
         public virtual void EmptyTest()

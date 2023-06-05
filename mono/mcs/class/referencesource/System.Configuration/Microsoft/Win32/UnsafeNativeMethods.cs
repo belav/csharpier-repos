@@ -56,7 +56,7 @@ namespace Microsoft.Win32
 
 #if !FEATURE_PAL
         [DllImport(ExternDll.Crypt32, SetLastError = true, CharSet = CharSet.Unicode)]
-        internal extern static bool CryptProtectData(
+        internal static extern bool CryptProtectData(
             ref DATA_BLOB inputData,
             string description,
             ref DATA_BLOB entropy,
@@ -67,7 +67,7 @@ namespace Microsoft.Win32
         );
 
         [DllImport(ExternDll.Crypt32, SetLastError = true, CharSet = CharSet.Unicode)]
-        internal extern static bool CryptUnprotectData(
+        internal static extern bool CryptUnprotectData(
             ref DATA_BLOB inputData,
             IntPtr description,
             ref DATA_BLOB entropy,
@@ -78,7 +78,7 @@ namespace Microsoft.Win32
         );
 
         [DllImport(ExternDll.Advapi32, SetLastError = true, CharSet = CharSet.Unicode)]
-        internal extern static int CryptAcquireContext(
+        internal static extern int CryptAcquireContext(
             out SafeCryptContextHandle phProv,
             string pszContainer,
             string pszProvider,
@@ -87,10 +87,10 @@ namespace Microsoft.Win32
         );
 
         [DllImport(ExternDll.Advapi32, SetLastError = true, CharSet = CharSet.Unicode)]
-        internal extern static int CryptReleaseContext(SafeCryptContextHandle hProv, uint dwFlags);
+        internal static extern int CryptReleaseContext(SafeCryptContextHandle hProv, uint dwFlags);
 
         [DllImport(ExternDll.Kernel32, CharSet = CharSet.Auto)]
-        internal extern static IntPtr LocalFree(IntPtr buf);
+        internal static extern IntPtr LocalFree(IntPtr buf);
 #endif
 
         // MoveFile Parameter

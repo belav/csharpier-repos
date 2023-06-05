@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public abstract partial class TypeSyntax
+    partial public abstract class TypeSyntax
     {
         public bool IsVar => ((InternalSyntax.TypeSyntax)this.Green).IsVar;
 

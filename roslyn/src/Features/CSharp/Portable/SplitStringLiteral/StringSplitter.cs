@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.SplitStringLiteral
 {
-    internal abstract partial class StringSplitter
+    partial internal abstract class StringSplitter
     {
         protected readonly SyntaxAnnotation RightNodeAnnotation = new();
 

@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial class Workspace
+    partial public class Workspace
     {
         /// <summary>
         /// A class that responds to text buffer changes

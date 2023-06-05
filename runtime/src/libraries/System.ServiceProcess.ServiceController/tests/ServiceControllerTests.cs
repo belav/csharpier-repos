@@ -12,7 +12,7 @@ namespace System.ServiceProcess.Tests
         TargetFrameworkMonikers.NetFramework,
         "Persistent issues starting test service on NETFX"
     )]
-    public partial class ServiceControllerTests : IDisposable
+    partial public class ServiceControllerTests : IDisposable
     {
         private const int connectionTimeout = 30000;
         private readonly TestServiceProvider _testService;

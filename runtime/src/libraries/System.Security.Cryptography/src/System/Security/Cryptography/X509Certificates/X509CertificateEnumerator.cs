@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    public partial class X509CertificateCollection : System.Collections.CollectionBase
+    partial public class X509CertificateCollection : System.Collections.CollectionBase
     {
         public class X509CertificateEnumerator : IEnumerator
         {

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Formats.Cbor.Tests
 {
-    public partial class CborReaderTests
+    partial public class CborReaderTests
     {
         // Data points taken from https://tools.ietf.org/html/rfc7049#appendix-A
 

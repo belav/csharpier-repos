@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class ContinuationTests
+    partial public static class ContinuationTests
     {
         private static readonly (Func<string, string>, Func<string, int>, int)[] s_payloadTweaks =
             new (Func<string, string>, Func<string, int>, int)[]

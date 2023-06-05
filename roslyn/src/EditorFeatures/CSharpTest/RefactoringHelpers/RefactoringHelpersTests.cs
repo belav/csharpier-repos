@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
 {
-    public partial class RefactoringHelpersTests
+    partial public class RefactoringHelpersTests
         : RefactoringHelpersTestBase<CSharpTestWorkspaceFixture>
     {
         #region Locations

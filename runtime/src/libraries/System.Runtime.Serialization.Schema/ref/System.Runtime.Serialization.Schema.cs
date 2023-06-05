@@ -6,7 +6,7 @@
 
 namespace System.Runtime.Serialization
 {
-    public partial interface ISerializationCodeDomSurrogateProvider
+    partial public interface ISerializationCodeDomSurrogateProvider
     {
         System.CodeDom.CodeTypeDeclaration ProcessImportedType(
             System.CodeDom.CodeTypeDeclaration typeDeclaration,
@@ -14,7 +14,7 @@ namespace System.Runtime.Serialization
         );
     }
 
-    public partial class ImportOptions
+    partial public class ImportOptions
     {
         public System.CodeDom.Compiler.CodeDomProvider? CodeProvider
         {
@@ -60,7 +60,7 @@ namespace System.Runtime.Serialization
         }
     }
 
-    public partial class XsdDataContractImporter
+    partial public class XsdDataContractImporter
     {
         public XsdDataContractImporter()
         {

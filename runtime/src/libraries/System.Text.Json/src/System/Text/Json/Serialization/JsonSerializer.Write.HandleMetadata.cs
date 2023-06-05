@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace System.Text.Json
 {
-    public static partial class JsonSerializer
+    partial public static class JsonSerializer
     {
         // Pre-encoded metadata properties.
         internal static readonly JsonEncodedText s_metadataId = JsonEncodedText.Encode(

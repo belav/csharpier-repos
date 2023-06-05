@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundIsPatternExpression
+    partial internal class BoundIsPatternExpression
     {
         public BoundDecisionDag GetDecisionDagForLowering(CSharpCompilation compilation)
         {

@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal abstract partial class AnalyzerDriver
+    partial internal abstract class AnalyzerDriver
     {
         internal sealed class DeclarationAnalysisData
         {

@@ -9,10 +9,11 @@ namespace System.Xml
     using System.Runtime.Versioning;
     using System.Threading.Tasks;
 
+    partial
     //
     // XmlDownloadManager
     //
-    internal partial class XmlDownloadManager
+    internal class XmlDownloadManager
     {
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]

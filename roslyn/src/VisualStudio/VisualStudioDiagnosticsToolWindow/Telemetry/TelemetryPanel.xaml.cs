@@ -19,10 +19,11 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Roslyn.VisualStudio.DiagnosticsWindow.Telemetry
 {
+    partial
     /// <summary>
     /// Interaction logic for TelemetryPanel.xaml
     /// </summary>
-    public partial class TelemetryPanel : UserControl
+    public class TelemetryPanel : UserControl
     {
         public TelemetryPanel()
         {

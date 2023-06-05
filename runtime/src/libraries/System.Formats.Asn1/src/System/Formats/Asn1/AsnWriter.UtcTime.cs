@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Formats.Asn1
 {
-    public sealed partial class AsnWriter
+    partial public sealed class AsnWriter
     {
         /// <summary>
         ///   Write the provided value as a UTCTime with a specified tag,

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlValidatingReaderImpl
+    partial internal sealed class XmlValidatingReaderImpl
         : XmlReader,
             IXmlLineInfo,
             IXmlNamespaceResolver

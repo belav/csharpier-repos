@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class TextDocumentState
+    partial internal class TextDocumentState
     {
         protected readonly HostWorkspaceServices solutionServices;
 

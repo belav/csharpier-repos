@@ -21,7 +21,7 @@ using static Microsoft.CodeAnalysis.CSharp.Binder;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 {
-    internal partial class CodeGenerator
+    partial internal class CodeGenerator
     {
         private void EmitStatement(BoundStatement statement)
         {

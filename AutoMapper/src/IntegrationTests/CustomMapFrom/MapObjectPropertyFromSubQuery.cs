@@ -235,7 +235,7 @@ public class MapObjectPropertyFromSubQueryTypeNameMax
         }
     }
 
-    public partial class Article
+    partial public class Article
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -244,7 +244,7 @@ public class MapObjectPropertyFromSubQueryTypeNameMax
         public virtual Product Product { get; set; }
     }
 
-    public partial class Product
+    partial public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -377,7 +377,7 @@ public class MapObjectPropertyFromSubQueryExplicitExpansion
         }
     }
 
-    public partial class Article
+    partial public class Article
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -386,7 +386,7 @@ public class MapObjectPropertyFromSubQueryExplicitExpansion
         public virtual Product Product { get; set; }
     }
 
-    public partial class Product
+    partial public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -494,7 +494,7 @@ public class MapObjectPropertyFromSubQuery
         }
     }
 
-    public partial class Article
+    partial public class Article
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -503,7 +503,7 @@ public class MapObjectPropertyFromSubQuery
         public virtual Product Product { get; set; }
     }
 
-    public partial class Product
+    partial public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -620,7 +620,7 @@ public class MapObjectPropertyFromSubQueryWithInnerObject
         public ProductModel OtherProduct { get; set; }
     }
 
-    public partial class Article
+    partial public class Article
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -629,7 +629,7 @@ public class MapObjectPropertyFromSubQueryWithInnerObject
         public virtual Product Product { get; set; }
     }
 
-    public partial class Product
+    partial public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -767,7 +767,7 @@ public class MapObjectPropertyFromSubQueryWithCollection
         public ICollection<ProductModel> Products { get; set; }
     }
 
-    public partial class Article
+    partial public class Article
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -776,7 +776,7 @@ public class MapObjectPropertyFromSubQueryWithCollection
         public virtual Product Product { get; set; }
     }
 
-    public partial class Product
+    partial public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -908,7 +908,7 @@ public class MapObjectPropertyFromSubQueryWithCollectionSameName
         public ICollection<ProductModel> Products { get; set; }
     }
 
-    public partial class Article
+    partial public class Article
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -917,7 +917,7 @@ public class MapObjectPropertyFromSubQueryWithCollectionSameName
         public virtual Product Product { get; set; }
     }
 
-    public partial class Product
+    partial public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }

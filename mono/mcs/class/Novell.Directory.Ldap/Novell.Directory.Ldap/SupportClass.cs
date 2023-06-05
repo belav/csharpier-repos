@@ -424,7 +424,7 @@ public class SupportClass
     /// </summary>
     public class DateTimeFormatManager
     {
-        static public DateTimeFormatHashTable manager = new DateTimeFormatHashTable();
+        public static DateTimeFormatHashTable manager = new DateTimeFormatHashTable();
 
         /// <summary>
         /// Hashtable class to provide functionality for dateformat properties

@@ -13,7 +13,7 @@ using Xunit;
 
 namespace IntelHardwareIntrinsicTest.General;
 
-public partial class Program
+partial public class Program
 {
     private static Vector128<float>[] s_v128_array;
     private static Vector128<float> s_v128_0;

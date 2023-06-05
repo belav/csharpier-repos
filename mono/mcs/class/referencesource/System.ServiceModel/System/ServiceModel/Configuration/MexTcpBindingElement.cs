@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.ComponentModel;
     using System.ServiceModel.Channels;
 
-    public partial class MexTcpBindingElement : MexBindingElement<CustomBinding>
+    partial public class MexTcpBindingElement : MexBindingElement<CustomBinding>
     {
         public MexTcpBindingElement(string name)
             : base(name) { }

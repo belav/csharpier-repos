@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class Binder
+    partial internal class Binder
     {
         private BoundExpression BindInterpolatedString(
             InterpolatedStringExpressionSyntax node,

@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 
 namespace System
 {
-    public abstract partial class Delegate : ICloneable, ISerializable
+    partial public abstract class Delegate : ICloneable, ISerializable
     {
         public virtual object Clone() => MemberwiseClone();
 

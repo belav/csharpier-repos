@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractPartialMethodCompletionProvider
+    partial internal abstract class AbstractPartialMethodCompletionProvider
         : AbstractMemberInsertingCompletionProvider
     {
         protected static readonly SymbolDisplayFormat SignatureDisplayFormat =

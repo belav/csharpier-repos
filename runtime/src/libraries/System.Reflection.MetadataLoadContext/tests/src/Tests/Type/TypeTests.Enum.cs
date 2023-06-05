@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class TypeTests
+    partial public static class TypeTests
     {
         [Fact]
         public static void EnumUnderlyingTypeTest()

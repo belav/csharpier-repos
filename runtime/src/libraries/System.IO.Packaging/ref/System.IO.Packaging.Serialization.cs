@@ -6,7 +6,7 @@
 
 namespace System.IO
 {
-    public partial class FileFormatException : System.FormatException
+    partial public class FileFormatException : System.FormatException
     {
         protected FileFormatException(
             System.Runtime.Serialization.SerializationInfo info,

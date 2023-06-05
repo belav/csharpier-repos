@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Inter
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy
 {
-    internal abstract partial class AbstractLegacyProject : IAnalyzerConfigFileHost
+    partial internal abstract class AbstractLegacyProject : IAnalyzerConfigFileHost
     {
         void IAnalyzerConfigFileHost.AddAnalyzerConfigFile(string filePath) =>
             ProjectSystemProject.AddAnalyzerConfigFile(filePath);

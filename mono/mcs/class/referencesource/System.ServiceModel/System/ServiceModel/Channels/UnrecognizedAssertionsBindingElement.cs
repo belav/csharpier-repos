@@ -18,7 +18,7 @@ namespace System.ServiceModel.Channels
         IDictionary<OperationDescription, ICollection<XmlElement>> operationAssertions;
         IDictionary<MessageDescription, ICollection<XmlElement>> messageAssertions;
 
-        internal protected UnrecognizedAssertionsBindingElement(
+        protected internal UnrecognizedAssertionsBindingElement(
             XmlQualifiedName wsdlBinding,
             ICollection<XmlElement> bindingAsserions
         )

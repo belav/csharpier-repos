@@ -29,7 +29,7 @@ using static Microsoft.CodeAnalysis.CommonDiagnosticAnalyzers;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class DiagnosticAnalyzerTests : CompilingTestBase
+    partial public class DiagnosticAnalyzerTests : CompilingTestBase
     {
         private class ComplainAboutX : DiagnosticAnalyzer
         {

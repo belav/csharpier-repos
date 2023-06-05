@@ -9,7 +9,7 @@ using System.Security;
 
 namespace System.Data.Common
 {
-    internal static partial class UnsafeNativeMethods
+    partial internal static class UnsafeNativeMethods
     {
         //
         // Oleaut32

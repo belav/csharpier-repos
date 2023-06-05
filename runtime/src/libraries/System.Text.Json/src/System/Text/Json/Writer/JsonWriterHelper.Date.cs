@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonWriterHelper
+    partial internal static class JsonWriterHelper
     {
         private static readonly StandardFormat s_dateTimeStandardFormat = new StandardFormat('O');
 

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Numerics.Tests
 {
-    public partial class ExtractBytesMembersTests
+    partial public class ExtractBytesMembersTests
     {
         // int => signed little endian byte representation
         // the matrix of unsigned / big-endian is built from this.

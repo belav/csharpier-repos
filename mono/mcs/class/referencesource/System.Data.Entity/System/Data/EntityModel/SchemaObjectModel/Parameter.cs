@@ -86,9 +86,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
             }
         }
 
+        internal
         #endregion
 
-        new internal SchemaType Type
+        new SchemaType Type
         {
             get { return _type; }
         }

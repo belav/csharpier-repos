@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
 
-internal partial class VectorTest
+partial internal class VectorTest
 {
     private const int Pass = 100;
     private const int Fail = -1;
@@ -21,7 +21,7 @@ internal partial class VectorTest
                 pos[i] += delta;
         }
 
-        static public int VectorArray(T deltaValue)
+        public static int VectorArray(T deltaValue)
         {
             const int Pass = 100;
             const int Fail = -1;
@@ -55,7 +55,7 @@ internal partial class VectorTest
                 pos[i] += delta;
         }
 
-        static public int VectorArray(float deltaValue)
+        public static int VectorArray(float deltaValue)
         {
             const int Pass = 100;
             const int Fail = -1;
@@ -92,7 +92,7 @@ internal partial class VectorTest
                 pos[i] += delta;
         }
 
-        static public int VectorArray(float deltaValue)
+        public static int VectorArray(float deltaValue)
         {
             const int Pass = 100;
             const int Fail = -1;
@@ -127,7 +127,7 @@ internal partial class VectorTest
                 pos[i] += delta;
         }
 
-        static public int VectorArray(float deltaValue)
+        public static int VectorArray(float deltaValue)
         {
             const int Pass = 100;
             const int Fail = -1;

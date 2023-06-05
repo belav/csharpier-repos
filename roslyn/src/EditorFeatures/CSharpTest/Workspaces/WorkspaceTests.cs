@@ -30,7 +30,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 {
     [UseExportProvider]
-    public partial class WorkspaceTests : TestBase
+    partial public class WorkspaceTests : TestBase
     {
         private static TestWorkspace CreateWorkspace(
             string workspaceKind = null,

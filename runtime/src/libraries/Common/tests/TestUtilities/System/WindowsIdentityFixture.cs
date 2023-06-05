@@ -29,7 +29,7 @@ namespace System
         }
     }
 
-    public sealed partial class WindowsTestAccount : IDisposable
+    partial public sealed class WindowsTestAccount : IDisposable
     {
         private readonly string _userName;
         private SafeAccessTokenHandle _accountTokenHandle;
@@ -133,7 +133,7 @@ namespace System
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool LogonUser(
+        partial private static bool LogonUser(
             string userName,
             string domain,
             string password,
@@ -143,7 +143,7 @@ namespace System
         );
 
         [LibraryImport("netapi32.dll", SetLastError = true)]
-        internal static partial uint NetUserAdd(
+        partial internal static uint NetUserAdd(
             [MarshalAs(UnmanagedType.LPWStr)] string servername,
             uint level,
             ref USER_INFO_1 buf,
@@ -151,7 +151,7 @@ namespace System
         );
 
         [LibraryImport("netapi32.dll")]
-        internal static partial uint NetUserDel(
+        partial internal static uint NetUserDel(
             [MarshalAs(UnmanagedType.LPWStr)] string servername,
             [MarshalAs(UnmanagedType.LPWStr)] string username
         );

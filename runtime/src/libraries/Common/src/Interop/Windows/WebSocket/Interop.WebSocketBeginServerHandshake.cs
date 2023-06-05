@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WebSocket
+    partial internal static class WebSocket
     {
         [LibraryImport(Libraries.WebSocket)]
-        internal static partial int WebSocketBeginServerHandshake(
+        partial internal static int WebSocketBeginServerHandshake(
             SafeHandle webSocketHandle,
             IntPtr subProtocol,
             IntPtr extensions,

@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Security.Cryptography.X509Certificates;
 
-    public sealed partial class WindowsServiceElement : ConfigurationElement
+    partial public sealed class WindowsServiceElement : ConfigurationElement
     {
         public WindowsServiceElement() { }
 

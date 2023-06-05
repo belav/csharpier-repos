@@ -7,7 +7,7 @@ using System.Security;
 
 namespace System.Diagnostics
 {
-    public partial class Activity
+    partial public class Activity
     {
         /// <summary>
         /// Gets or sets the current operation (Activity) for the current thread.  This flows

@@ -6,7 +6,7 @@
 
 namespace System.Diagnostics.Contracts
 {
-    public static partial class Contract
+    partial public static class Contract
     {
         public static event System.EventHandler<System.Diagnostics.Contracts.ContractFailedEventArgs>? ContractFailed
         {
@@ -127,14 +127,14 @@ namespace System.Diagnostics.Contracts
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, AllowMultiple = false)]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-    public sealed partial class ContractAbbreviatorAttribute : System.Attribute
+    partial public sealed class ContractAbbreviatorAttribute : System.Attribute
     {
         public ContractAbbreviatorAttribute() { }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method, AllowMultiple = false)]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-    public sealed partial class ContractArgumentValidatorAttribute : System.Attribute
+    partial public sealed class ContractArgumentValidatorAttribute : System.Attribute
     {
         public ContractArgumentValidatorAttribute() { }
     }
@@ -148,7 +148,7 @@ namespace System.Diagnostics.Contracts
     )]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
     [System.Diagnostics.ConditionalAttribute("DEBUG")]
-    public sealed partial class ContractClassAttribute : System.Attribute
+    partial public sealed class ContractClassAttribute : System.Attribute
     {
         public ContractClassAttribute(System.Type typeContainingContracts) { }
 
@@ -164,7 +164,7 @@ namespace System.Diagnostics.Contracts
         Inherited = false
     )]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-    public sealed partial class ContractClassForAttribute : System.Attribute
+    partial public sealed class ContractClassForAttribute : System.Attribute
     {
         public ContractClassForAttribute(System.Type typeContractsAreFor) { }
 
@@ -174,7 +174,7 @@ namespace System.Diagnostics.Contracts
         }
     }
 
-    public sealed partial class ContractFailedEventArgs : System.EventArgs
+    partial public sealed class ContractFailedEventArgs : System.EventArgs
     {
         public ContractFailedEventArgs(
             System.Diagnostics.Contracts.ContractFailureKind failureKind,
@@ -229,7 +229,7 @@ namespace System.Diagnostics.Contracts
         Inherited = false
     )]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-    public sealed partial class ContractInvariantMethodAttribute : System.Attribute
+    partial public sealed class ContractInvariantMethodAttribute : System.Attribute
     {
         public ContractInvariantMethodAttribute() { }
     }
@@ -240,7 +240,7 @@ namespace System.Diagnostics.Contracts
         Inherited = false
     )]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-    public sealed partial class ContractOptionAttribute : System.Attribute
+    partial public sealed class ContractOptionAttribute : System.Attribute
     {
         public ContractOptionAttribute(string category, string setting, bool enabled) { }
 
@@ -266,7 +266,7 @@ namespace System.Diagnostics.Contracts
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Field)]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-    public sealed partial class ContractPublicPropertyNameAttribute : System.Attribute
+    partial public sealed class ContractPublicPropertyNameAttribute : System.Attribute
     {
         public ContractPublicPropertyNameAttribute(string name) { }
 
@@ -277,7 +277,7 @@ namespace System.Diagnostics.Contracts
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly)]
-    public sealed partial class ContractReferenceAssemblyAttribute : System.Attribute
+    partial public sealed class ContractReferenceAssemblyAttribute : System.Attribute
     {
         public ContractReferenceAssemblyAttribute() { }
     }
@@ -288,7 +288,7 @@ namespace System.Diagnostics.Contracts
         Inherited = true
     )]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-    public sealed partial class ContractRuntimeIgnoredAttribute : System.Attribute
+    partial public sealed class ContractRuntimeIgnoredAttribute : System.Attribute
     {
         public ContractRuntimeIgnoredAttribute() { }
     }
@@ -302,7 +302,7 @@ namespace System.Diagnostics.Contracts
             | System.AttributeTargets.Struct
     )]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-    public sealed partial class ContractVerificationAttribute : System.Attribute
+    partial public sealed class ContractVerificationAttribute : System.Attribute
     {
         public ContractVerificationAttribute(bool value) { }
 
@@ -324,7 +324,7 @@ namespace System.Diagnostics.Contracts
         Inherited = true
     )]
     [System.Diagnostics.ConditionalAttribute("CONTRACTS_FULL")]
-    public sealed partial class PureAttribute : System.Attribute
+    partial public sealed class PureAttribute : System.Attribute
     {
         public PureAttribute() { }
     }
@@ -332,7 +332,7 @@ namespace System.Diagnostics.Contracts
 
 namespace System.Runtime.CompilerServices
 {
-    public static partial class ContractHelper
+    partial public static class ContractHelper
     {
         public static string? RaiseContractFailedEvent(
             System.Diagnostics.Contracts.ContractFailureKind failureKind,

@@ -9,7 +9,7 @@ namespace Schemas
         System.Xml.Serialization.XmlInclude(typeof(compoundfield)),
         System.Xml.Serialization.XmlInclude(typeof(fieldtype))
     ]
-    public partial class basefieldtype
+    partial public class basefieldtype
     {
         [System.Xml.Serialization.XmlAttribute(DataType = "ID")]
         public string id;
@@ -19,12 +19,12 @@ namespace Schemas
     }
 
     [System.Xml.Serialization.XmlType("field-type")]
-    public partial class fieldtype : basefieldtype { }
+    partial public class fieldtype : basefieldtype { }
 
     [System.Xml.Serialization.XmlType("compound-field")]
-    public partial class compoundfield : basefieldtype { }
+    partial public class compoundfield : basefieldtype { }
 
-    public partial class field
+    partial public class field
     {
         [System.Xml.Serialization.XmlAttribute()]
         public string id;
@@ -34,7 +34,7 @@ namespace Schemas
     }
 
     [System.Xml.Serialization.XmlType("form-data")]
-    public partial class formdata
+    partial public class formdata
     {
         [
             System.Xml.Serialization.XmlArray(ElementName = "form-fields"),

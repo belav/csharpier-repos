@@ -16,7 +16,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpression
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
-    public partial class UseConditionalExpressionForReturnTests
+    partial public class UseConditionalExpressionForReturnTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         private static readonly ParseOptions CSharp8 =

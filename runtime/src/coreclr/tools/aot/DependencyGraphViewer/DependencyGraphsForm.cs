@@ -7,7 +7,7 @@ using Microsoft.Diagnostics.Tracing.Session;
 
 namespace DependencyLogViewer
 {
-    public partial class DependencyGraphs : Form
+    partial public class DependencyGraphs : Form
     {
         private int _fileCount = -1;
 

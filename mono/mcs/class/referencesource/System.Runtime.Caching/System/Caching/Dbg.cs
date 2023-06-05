@@ -45,7 +45,7 @@ namespace System.Runtime.Caching
                 Justification = "Grandfathered suppression from original caching code checkin"
             )]
             [DllImport("kernel32.dll")]
-            internal extern static void DebugBreak();
+            internal static extern void DebugBreak();
 
             [SuppressMessage(
                 "Microsoft.Security",
@@ -53,7 +53,7 @@ namespace System.Runtime.Caching
                 Justification = "Grandfathered suppression from original caching code checkin"
             )]
             [DllImport("kernel32.dll")]
-            internal extern static int GetCurrentProcessId();
+            internal static extern int GetCurrentProcessId();
 
             [SuppressMessage(
                 "Microsoft.Security",
@@ -61,7 +61,7 @@ namespace System.Runtime.Caching
                 Justification = "Grandfathered suppression from original caching code checkin"
             )]
             [DllImport("kernel32.dll")]
-            internal extern static int GetCurrentThreadId();
+            internal static extern int GetCurrentThreadId();
 
             [SuppressMessage(
                 "Microsoft.Security",
@@ -69,7 +69,7 @@ namespace System.Runtime.Caching
                 Justification = "Grandfathered suppression from original caching code checkin"
             )]
             [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            internal extern static IntPtr GetCurrentProcess();
+            internal static extern IntPtr GetCurrentProcess();
 
             [SuppressMessage(
                 "Microsoft.Security",
@@ -77,7 +77,7 @@ namespace System.Runtime.Caching
                 Justification = "Grandfathered suppression from original caching code checkin"
             )]
             [DllImport("kernel32.dll")]
-            internal extern static bool IsDebuggerPresent();
+            internal static extern bool IsDebuggerPresent();
 
             [SuppressMessage(
                 "Microsoft.Security",
@@ -85,7 +85,7 @@ namespace System.Runtime.Caching
                 Justification = "Grandfathered suppression from original caching code checkin"
             )]
             [DllImport("kernel32.dll", SetLastError = true)]
-            internal extern static bool TerminateProcess(HandleRef processHandle, int exitCode);
+            internal static extern bool TerminateProcess(HandleRef processHandle, int exitCode);
 
             [SuppressMessage(
                 "Microsoft.Security",
@@ -93,7 +93,7 @@ namespace System.Runtime.Caching
                 Justification = "Grandfathered suppression from original caching code checkin"
             )]
             [DllImport("kernel32.dll", CharSet = CharSet.Auto, BestFitMapping = false)]
-            internal extern static void OutputDebugString(string message);
+            internal static extern void OutputDebugString(string message);
 
             internal const int PM_NOREMOVE = 0x0000;
             internal const int PM_REMOVE = 0x0001;
@@ -111,7 +111,7 @@ namespace System.Runtime.Caching
             }
 
             [DllImport("user32.dll", CharSet = CharSet.Auto)]
-            internal extern static bool PeekMessage(
+            internal static extern bool PeekMessage(
                 [In, Out] ref MSG msg,
                 HandleRef hwnd,
                 int msgMin,
@@ -166,7 +166,7 @@ namespace System.Runtime.Caching
                 IDHELP = 9;
 
             [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false)]
-            internal extern static int MessageBox(
+            internal static extern int MessageBox(
                 HandleRef hWnd,
                 string text,
                 string caption,
@@ -203,7 +203,7 @@ namespace System.Runtime.Caching
                 BestFitMapping = false,
                 SetLastError = true
             )]
-            internal extern static int RegOpenKeyEx(
+            internal static extern int RegOpenKeyEx(
                 IntPtr hKey,
                 string lpSubKey,
                 int ulOptions,
@@ -217,7 +217,7 @@ namespace System.Runtime.Caching
                 Justification = "Grandfathered suppression from original caching code checkin"
             )]
             [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
-            internal extern static int RegNotifyChangeKeyValue(
+            internal static extern int RegNotifyChangeKeyValue(
                 SafeRegistryHandle hKey,
                 bool watchSubTree,
                 uint notifyFilter,
@@ -1324,7 +1324,7 @@ A=Exit process R=Debug I=Continue";
             "CA1811:AvoidUncalledPrivateCode",
             Justification = "Grandfathered suppression from original caching code checkin"
         )]
-        static internal string FormatLocalDate(DateTime localTime)
+        internal static string FormatLocalDate(DateTime localTime)
         {
 #if DBG
             return localTime.ToString(DATE_FORMAT, CultureInfo.InvariantCulture);

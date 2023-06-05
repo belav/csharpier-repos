@@ -4,21 +4,21 @@
 using System.Runtime.InteropServices;
 using System.Security.Authentication;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AndroidCrypto
+    partial internal static class AndroidCrypto
     {
         [LibraryImport(
             Interop.Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLGetSupportedProtocols"
         )]
-        internal static partial SslProtocols SSLGetSupportedProtocols();
+        partial internal static SslProtocols SSLGetSupportedProtocols();
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_SSLSupportsApplicationProtocolsConfiguration"
         )]
         [return: MarshalAs(UnmanagedType.U1)]
-        internal static partial bool SSLSupportsApplicationProtocolsConfiguration();
+        partial internal static bool SSLSupportsApplicationProtocolsConfiguration();
     }
 }

@@ -20,7 +20,7 @@ using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
-    internal partial class Editor_InProc
+    partial internal class Editor_InProc
     {
         public string[] GetNavBarItems(int comboBoxIndex) =>
             ExecuteOnActiveView(

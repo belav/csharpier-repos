@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Xml.NameTableTests
 {
-    public partial class CNameTableTestModule : CTestModule
+    partial public class CNameTableTestModule : CTestModule
     {
         [Theory]
         [XmlTests(nameof(Create))]

@@ -36,12 +36,12 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Mono.AppleTls
 {
-    static partial class MonoCertificatePal
+    partial static class MonoCertificatePal
     {
         const string SecurityLibrary = OSX509Certificates.SecurityLibrary;
 
         [DllImport(SecurityLibrary)]
-        extern static IntPtr SecCertificateCreateWithData(IntPtr allocator, IntPtr cfData);
+        static extern IntPtr SecCertificateCreateWithData(IntPtr allocator, IntPtr cfData);
 
         public static SafeSecCertificateHandle FromOtherCertificate(X509Certificate certificate)
         {
@@ -69,7 +69,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(SecurityLibrary)]
-        extern static IntPtr SecIdentityGetTypeID();
+        static extern IntPtr SecIdentityGetTypeID();
 
         public static bool IsSecIdentity(IntPtr ptr)
         {
@@ -79,7 +79,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(SecurityLibrary)]
-        public extern static IntPtr SecKeyGetTypeID();
+        public static extern IntPtr SecKeyGetTypeID();
 
         public static bool IsSecKey(IntPtr ptr)
         {
@@ -89,8 +89,8 @@ namespace Mono.AppleTls
         }
 
         [DllImport(SecurityLibrary)]
-        extern static /* OSStatus */
-        SecStatusCode SecIdentityCopyCertificate( /* SecIdentityRef */
+        static /* OSStatus */
+        extern SecStatusCode SecIdentityCopyCertificate( /* SecIdentityRef */
             IntPtr identityRef, /* SecCertificateRef* */
             out IntPtr certificateRef
         );
@@ -106,7 +106,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(SecurityLibrary)]
-        extern static IntPtr SecCertificateCopySubjectSummary(IntPtr cert);
+        static extern IntPtr SecCertificateCopySubjectSummary(IntPtr cert);
 
         public static string GetSubjectSummary(SafeSecCertificateHandle certificate)
         {
@@ -129,8 +129,8 @@ namespace Mono.AppleTls
         }
 
         [DllImport(SecurityLibrary)]
-        extern static /* CFDataRef */
-        IntPtr SecCertificateCopyData( /* SecCertificateRef */
+        static /* CFDataRef */
+        extern IntPtr SecCertificateCopyData( /* SecCertificateRef */
             IntPtr cert
         );
 

@@ -13,10 +13,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// Represents a single EditorConfig file, see https://editorconfig.org for details about the format.
     /// </summary>
-    public sealed partial class AnalyzerConfig
+    public sealed class AnalyzerConfig
     {
         // Matches EditorConfig section header such as "[*.{js,py}]", see https://editorconfig.org for details
         private static readonly Regex s_sectionMatcher = new Regex(

@@ -125,7 +125,7 @@ namespace ILCompiler.Diagnostics
             DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.SafeDirectories
         )]
         [DllImport(DiaSymReaderLibrary, PreserveSig = false)]
-        private extern static void CreateNGenPdbWriter(
+        private static extern void CreateNGenPdbWriter(
             [MarshalAs(UnmanagedType.LPWStr)] string ngenImagePath,
             [MarshalAs(UnmanagedType.LPWStr)] string pdbPath,
             out IntPtr ngenPdbWriterPtr

@@ -40,16 +40,18 @@ namespace Novell.Directory.Ldap.Controls
     /// </summary>
     public class LdapSortResponse : LdapControl
     {
+        public
         /// <summary>  If not null, this returns the attribute that caused the sort
         /// operation to fail.
         /// </summary>
-        virtual public System.String FailedAttribute
+        virtual System.String FailedAttribute
         {
             get { return failedAttribute; }
         }
 
+        public
         /// <summary> Returns the result code from the sort</summary>
-        virtual public int ResultCode
+        virtual int ResultCode
         {
             get { return resultCode; }
         }

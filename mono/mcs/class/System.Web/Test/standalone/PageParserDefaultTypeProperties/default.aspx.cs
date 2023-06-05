@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace PageParserDefaultTypeProperties
 {
-    public partial class _default : MyPage
+    partial public class _default : MyPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

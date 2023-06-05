@@ -6,7 +6,7 @@ using Xunit;
 namespace System.Security.Cryptography.X509Certificates.Tests
 {
     [PlatformSpecific(TestPlatforms.OSX)]
-    public static partial class X509StoreMutableTests
+    partial public static class X509StoreMutableTests
     {
         public static bool PermissionsAllowStoreWrite { get; } = TestPermissions();
 

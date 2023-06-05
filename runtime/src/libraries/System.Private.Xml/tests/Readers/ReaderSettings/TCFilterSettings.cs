@@ -6,7 +6,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.ReaderSettingsTests
 {
-    public partial class TCFilterSettings : TCXMLReaderBaseGeneral
+    partial public class TCFilterSettings : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCFilterSettings
         // Test Case

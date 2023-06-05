@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.SpanTests
 {
-    public static partial class ReadOnlySpanTests
+    partial public static class ReadOnlySpanTests
     {
         [Theory]
         [InlineData("a", "a", 'a', 0)]

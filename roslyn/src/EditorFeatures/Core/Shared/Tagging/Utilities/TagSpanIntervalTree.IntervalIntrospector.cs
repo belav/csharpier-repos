@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 {
-    internal partial class TagSpanIntervalTree<TTag>
+    partial internal class TagSpanIntervalTree<TTag>
     {
         private readonly struct IntervalIntrospector : IIntervalIntrospector<TagNode>
         {

@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing.LinkGeneration;
 
-public partial class LinkGenerationGithubBenchmark
+partial public class LinkGenerationGithubBenchmark
 {
     private LinkGenerator _linkGenerator;
     private TreeRouter _treeRouter;

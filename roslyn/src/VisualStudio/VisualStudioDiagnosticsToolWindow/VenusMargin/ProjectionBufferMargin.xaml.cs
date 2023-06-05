@@ -15,7 +15,7 @@ using Microsoft.VisualStudio.Text.Projection;
 
 namespace Roslyn.Hosting.Diagnostics.VenusMargin
 {
-    public partial class ProjectionBufferMargin : UserControl
+    partial public class ProjectionBufferMargin : UserControl
     {
         public static event EventHandler SelectionChanged;
 

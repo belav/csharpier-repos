@@ -25,7 +25,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AutomaticCompletion
 {
-    internal partial class BraceCompletionSessionProvider
+    partial internal class BraceCompletionSessionProvider
     {
         // ported and modified from "Platform\Text\Impl\BraceCompletion\BraceCompletionDefaultSession.cs"
         //

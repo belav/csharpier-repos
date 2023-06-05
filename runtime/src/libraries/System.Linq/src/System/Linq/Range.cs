@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<int> Range(int start, int count)
         {
@@ -28,7 +28,7 @@ namespace System.Linq
         /// An iterator that yields a range of consecutive integers.
         /// </summary>
         [DebuggerDisplay("Count = {CountForDebugger}")]
-        private sealed partial class RangeIterator : Iterator<int>
+        partial private sealed class RangeIterator : Iterator<int>
         {
             private readonly int _start;
             private readonly int _end;

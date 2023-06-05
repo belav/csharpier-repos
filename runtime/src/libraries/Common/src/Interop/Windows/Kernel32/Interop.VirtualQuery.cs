@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial UIntPtr VirtualQuery(
+        partial internal static UIntPtr VirtualQuery(
             SafeHandle lpAddress,
             ref MEMORY_BASIC_INFORMATION lpBuffer,
             UIntPtr dwLength

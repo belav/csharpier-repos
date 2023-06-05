@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.ResponseCompression;
 
-internal static partial class ResponseCompressionLoggingExtensions
+partial internal static class ResponseCompressionLoggingExtensions
 {
     [LoggerMessage(
         1,
@@ -13,7 +13,7 @@ internal static partial class ResponseCompressionLoggingExtensions
         "No response compression available, the Accept-Encoding header is missing or invalid.",
         EventName = "NoAcceptEncoding"
     )]
-    public static partial void NoAcceptEncoding(this ILogger logger);
+    partial public static void NoAcceptEncoding(this ILogger logger);
 
     [LoggerMessage(
         2,
@@ -21,7 +21,7 @@ internal static partial class ResponseCompressionLoggingExtensions
         "No response compression available for HTTPS requests. See ResponseCompressionOptions.EnableForHttps.",
         EventName = "NoCompressionForHttps"
     )]
-    public static partial void NoCompressionForHttps(this ILogger logger);
+    partial public static void NoCompressionForHttps(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -29,7 +29,7 @@ internal static partial class ResponseCompressionLoggingExtensions
         "This request accepts compression.",
         EventName = "RequestAcceptsCompression"
     )]
-    public static partial void RequestAcceptsCompression(this ILogger logger);
+    partial public static void RequestAcceptsCompression(this ILogger logger);
 
     [LoggerMessage(
         4,
@@ -37,7 +37,7 @@ internal static partial class ResponseCompressionLoggingExtensions
         "Response compression disabled due to the {header} header.",
         EventName = "NoCompressionDueToHeader"
     )]
-    public static partial void NoCompressionDueToHeader(this ILogger logger, string header);
+    partial public static void NoCompressionDueToHeader(this ILogger logger, string header);
 
     [LoggerMessage(
         5,
@@ -45,7 +45,7 @@ internal static partial class ResponseCompressionLoggingExtensions
         "Response compression is not enabled for the Content-Type '{header}'.",
         EventName = "NoCompressionForContentType"
     )]
-    public static partial void NoCompressionForContentType(this ILogger logger, string header);
+    partial public static void NoCompressionForContentType(this ILogger logger, string header);
 
     [LoggerMessage(
         6,
@@ -53,7 +53,7 @@ internal static partial class ResponseCompressionLoggingExtensions
         "Response compression is available for this Content-Type.",
         EventName = "ShouldCompressResponse"
     )]
-    public static partial void ShouldCompressResponse(this ILogger logger);
+    partial public static void ShouldCompressResponse(this ILogger logger);
 
     [LoggerMessage(
         7,
@@ -61,7 +61,7 @@ internal static partial class ResponseCompressionLoggingExtensions
         "No matching response compression provider found.",
         EventName = "NoCompressionProvider"
     )]
-    public static partial void NoCompressionProvider(this ILogger logger);
+    partial public static void NoCompressionProvider(this ILogger logger);
 
     [LoggerMessage(
         8,
@@ -69,5 +69,5 @@ internal static partial class ResponseCompressionLoggingExtensions
         "The response will be compressed with '{provider}'.",
         EventName = "CompressWith"
     )]
-    public static partial void CompressingWith(this ILogger logger, string provider);
+    partial public static void CompressingWith(this ILogger logger, string provider);
 }

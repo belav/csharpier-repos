@@ -40,10 +40,11 @@ using System.Data.Linq;
 
 namespace DbMetal.Generator.Implementation.CodeTextGenerator
 {
+    partial
 #if !MONO_STRICT
     public
 #endif
-    abstract partial class CodeGenerator : ICodeGenerator
+    abstract class CodeGenerator : ICodeGenerator
     {
         public abstract string LanguageCode { get; }
         public abstract string Extension { get; }

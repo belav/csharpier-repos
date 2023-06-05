@@ -6,10 +6,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.CoreFunctionLibrary
 {
+    partial
     /// <summary>
     /// Core Function Library - Number Functions
     /// </summary>
-    public static partial class NumberFunctionsTests
+    public static class NumberFunctionsTests
     {
         /// <summary>
         /// Verify result.

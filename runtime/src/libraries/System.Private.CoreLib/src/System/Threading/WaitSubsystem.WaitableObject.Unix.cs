@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Threading
 {
-    internal static partial class WaitSubsystem
+    partial internal static class WaitSubsystem
     {
         /// <summary>
         /// A synchronization object that can participate in <see cref="WaitSubsystem"/>'s wait operations.

@@ -3,15 +3,15 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_PlatformSupportsDualModeIPv4PacketInfo"
         )]
         [SuppressGCTransition]
-        internal static partial int PlatformSupportsDualModeIPv4PacketInfo();
+        partial internal static int PlatformSupportsDualModeIPv4PacketInfo();
     }
 }

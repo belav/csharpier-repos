@@ -12,7 +12,7 @@ public class Program
 
 public unsafe struct TestStruct
 {
-    private fixed byte symbol[30];
+    fixed private byte symbol[30];
 
     public TestStruct(string a) { }
 

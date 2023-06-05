@@ -6,8 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Net.Sockets
 {
+    partial
     // AcceptOverlappedAsyncResult - used to take care of storage for async Socket BeginAccept call.
-    internal sealed partial class AcceptOverlappedAsyncResult : BaseOverlappedAsyncResult
+    internal sealed class AcceptOverlappedAsyncResult : BaseOverlappedAsyncResult
     {
         private Socket? _acceptSocket;
         private int _addressBufferLength;

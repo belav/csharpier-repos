@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.FindUsages
 {
-    internal abstract partial class AbstractFindUsagesService
+    partial internal abstract class AbstractFindUsagesService
     {
         async Task IFindUsagesService.FindReferencesAsync(
             Document document,

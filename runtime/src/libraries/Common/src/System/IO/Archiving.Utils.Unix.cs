@@ -3,7 +3,7 @@
 
 namespace System.IO
 {
-    internal static partial class ArchivingUtils
+    partial internal static class ArchivingUtils
     {
         internal static string SanitizeEntryFilePath(string entryPath) =>
             entryPath.Replace('\0', '_');

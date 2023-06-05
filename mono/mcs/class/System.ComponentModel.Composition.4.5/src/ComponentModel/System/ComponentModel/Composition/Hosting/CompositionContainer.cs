@@ -13,7 +13,7 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class CompositionContainer : ExportProvider, ICompositionService, IDisposable
+    partial public class CompositionContainer : ExportProvider, ICompositionService, IDisposable
     {
         private CompositionOptions _compositionOptions;
         private ImportEngine _importEngine;

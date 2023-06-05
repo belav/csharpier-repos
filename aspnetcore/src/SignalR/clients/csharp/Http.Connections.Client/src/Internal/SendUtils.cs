@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
-internal static partial class SendUtils
+partial internal static class SendUtils
 {
     public static async Task SendMessages(
         Uri sendUrl,
@@ -129,18 +129,19 @@ internal static partial class SendUtils
         }
     }
 
+    partial
     // When adding a new log message make sure to check with LongPollingTransport and ServerSentEventsTransport that share these logs to not have conflicting EventIds
     // We start the IDs at 100 to make it easy to avoid conflicting IDs
-    private static partial class Log
+    private static class Log
     {
         [LoggerMessage(100, LogLevel.Debug, "Starting the send loop.", EventName = "SendStarted")]
-        public static partial void SendStarted(ILogger logger);
+        partial public static void SendStarted(ILogger logger);
 
         [LoggerMessage(102, LogLevel.Debug, "Send loop canceled.", EventName = "SendCanceled")]
-        public static partial void SendCanceled(ILogger logger);
+        partial public static void SendCanceled(ILogger logger);
 
         [LoggerMessage(101, LogLevel.Debug, "Send loop stopped.", EventName = "SendStopped")]
-        public static partial void SendStopped(ILogger logger);
+        partial public static void SendStopped(ILogger logger);
 
         [LoggerMessage(
             103,
@@ -148,7 +149,7 @@ internal static partial class SendUtils
             "Sending {Count} bytes to the server using url: {Url}.",
             EventName = "SendingMessages"
         )]
-        public static partial void SendingMessages(ILogger logger, long count, Uri url);
+        partial public static void SendingMessages(ILogger logger, long count, Uri url);
 
         [LoggerMessage(
             104,
@@ -156,7 +157,7 @@ internal static partial class SendUtils
             "Message(s) sent successfully.",
             EventName = "SentSuccessfully"
         )]
-        public static partial void SentSuccessfully(ILogger logger);
+        partial public static void SentSuccessfully(ILogger logger);
 
         [LoggerMessage(
             105,
@@ -164,7 +165,7 @@ internal static partial class SendUtils
             "No messages in batch to send.",
             EventName = "NoMessages"
         )]
-        public static partial void NoMessages(ILogger logger);
+        partial public static void NoMessages(ILogger logger);
 
         [LoggerMessage(
             106,
@@ -172,6 +173,6 @@ internal static partial class SendUtils
             "Error while sending to '{Url}'.",
             EventName = "ErrorSending"
         )]
-        public static partial void ErrorSending(ILogger logger, Uri url, Exception exception);
+        partial public static void ErrorSending(ILogger logger, Uri url, Exception exception);
     }
 }

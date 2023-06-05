@@ -44,7 +44,7 @@ using Microsoft.CodeAnalysis.Editor.UnitTests.Extensions;
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
     [UseExportProvider]
-    public abstract partial class AbstractCodeActionOrUserDiagnosticTest
+    partial public abstract class AbstractCodeActionOrUserDiagnosticTest
     {
         public sealed class TestParameters
         {

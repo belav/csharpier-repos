@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class FindPal
+    partial internal sealed class FindPal
     {
         internal static IFindPal OpenPal(
             X509Certificate2Collection findFrom,

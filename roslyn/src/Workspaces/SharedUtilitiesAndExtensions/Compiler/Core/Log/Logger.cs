@@ -13,10 +13,11 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Internal.Log
 {
+    partial
     /// <summary>
     /// provide a way to log activities to various back end such as etl, code marker and etc
     /// </summary>
-    internal static partial class Logger
+    internal static class Logger
     {
         private static ILogger? s_currentLogger;
 

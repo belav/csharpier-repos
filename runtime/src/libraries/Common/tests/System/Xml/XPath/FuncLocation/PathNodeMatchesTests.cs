@@ -6,10 +6,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths.NodeTests
 {
+    partial
     /// <summary>
     /// Location Paths - Node Tests (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Expected: True (based on context node).

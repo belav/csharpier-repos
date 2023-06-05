@@ -92,7 +92,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // a VM-implemented helper that creates a WinRT NotifyCollectionChangedEventArgs instance.
         // This method is called from IL stubs and needs to have its token stabilized.
         [SecurityCritical]
-        static internal IntPtr ConvertToNative(NotifyCollectionChangedEventArgs managedArgs)
+        internal static IntPtr ConvertToNative(NotifyCollectionChangedEventArgs managedArgs)
         {
             if (managedArgs == null)
                 return IntPtr.Zero;
@@ -110,7 +110,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // managed NotifyCollectionChangedEventArgs instance.
         // This method is called from IL stubs and needs to have its token stabilized.
         [SecurityCritical]
-        static internal NotifyCollectionChangedEventArgs ConvertToManaged(IntPtr nativeArgsIP)
+        internal static NotifyCollectionChangedEventArgs ConvertToManaged(IntPtr nativeArgsIP)
         {
             if (nativeArgsIP == IntPtr.Zero)
                 return null;
@@ -136,7 +136,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // a VM-implemented helper that creates a WinRT PropertyChangedEventArgs instance.
         // This method is called from IL stubs and needs to have its token stabilized.
         [SecurityCritical]
-        static internal IntPtr ConvertToNative(PropertyChangedEventArgs managedArgs)
+        internal static IntPtr ConvertToNative(PropertyChangedEventArgs managedArgs)
         {
             if (managedArgs == null)
                 return IntPtr.Zero;
@@ -150,7 +150,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // managed PropertyChangedEventArgs instance.
         // This method is called from IL stubs and needs to have its token stabilized.
         [SecurityCritical]
-        static internal PropertyChangedEventArgs ConvertToManaged(IntPtr nativeArgsIP)
+        internal static PropertyChangedEventArgs ConvertToManaged(IntPtr nativeArgsIP)
         {
             if (nativeArgsIP == IntPtr.Zero)
                 return null;

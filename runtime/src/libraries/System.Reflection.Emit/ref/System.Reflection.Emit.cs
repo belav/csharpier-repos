@@ -6,7 +6,7 @@
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class AssemblyBuilder : System.Reflection.Assembly
+    partial public sealed class AssemblyBuilder : System.Reflection.Assembly
     {
         internal AssemblyBuilder() { }
 
@@ -232,7 +232,7 @@ namespace System.Reflection.Emit
         RunAndCollect = 9,
     }
 
-    public sealed partial class ConstructorBuilder : System.Reflection.ConstructorInfo
+    partial public sealed class ConstructorBuilder : System.Reflection.ConstructorInfo
     {
         internal ConstructorBuilder() { }
 
@@ -356,7 +356,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public sealed partial class EnumBuilder : System.Reflection.TypeInfo
+    partial public sealed class EnumBuilder : System.Reflection.TypeInfo
     {
         internal EnumBuilder() { }
 
@@ -816,7 +816,7 @@ namespace System.Reflection.Emit
         ) { }
     }
 
-    public sealed partial class EventBuilder
+    partial public sealed class EventBuilder
     {
         internal EventBuilder() { }
 
@@ -838,7 +838,7 @@ namespace System.Reflection.Emit
         public void SetRemoveOnMethod(System.Reflection.Emit.MethodBuilder mdBuilder) { }
     }
 
-    public sealed partial class FieldBuilder : System.Reflection.FieldInfo
+    partial public sealed class FieldBuilder : System.Reflection.FieldInfo
     {
         internal FieldBuilder() { }
 
@@ -917,7 +917,7 @@ namespace System.Reflection.Emit
         ) { }
     }
 
-    public sealed partial class GenericTypeParameterBuilder : System.Reflection.TypeInfo
+    partial public sealed class GenericTypeParameterBuilder : System.Reflection.TypeInfo
     {
         internal GenericTypeParameterBuilder() { }
 
@@ -1437,7 +1437,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public sealed partial class MethodBuilder : System.Reflection.MethodInfo
+    partial public sealed class MethodBuilder : System.Reflection.MethodInfo
     {
         internal MethodBuilder() { }
 
@@ -1645,7 +1645,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public partial class ModuleBuilder : System.Reflection.Module
+    partial public class ModuleBuilder : System.Reflection.Module
     {
         internal ModuleBuilder() { }
 
@@ -2070,7 +2070,7 @@ namespace System.Reflection.Emit
         ) { }
     }
 
-    public sealed partial class PropertyBuilder : System.Reflection.PropertyInfo
+    partial public sealed class PropertyBuilder : System.Reflection.PropertyInfo
     {
         internal PropertyBuilder() { }
 
@@ -2187,7 +2187,7 @@ namespace System.Reflection.Emit
         ) { }
     }
 
-    public sealed partial class TypeBuilder : System.Reflection.TypeInfo
+    partial public sealed class TypeBuilder : System.Reflection.TypeInfo
     {
         internal TypeBuilder() { }
 

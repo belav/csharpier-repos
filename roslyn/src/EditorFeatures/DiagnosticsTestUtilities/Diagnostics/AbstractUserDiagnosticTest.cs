@@ -28,7 +28,7 @@ using Microsoft.CodeAnalysis.CodeFixesAndRefactorings;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 {
-    public abstract partial class AbstractUserDiagnosticTest
+    partial public abstract class AbstractUserDiagnosticTest
         : AbstractCodeActionOrUserDiagnosticTest
     {
         protected AbstractUserDiagnosticTest(ITestOutputHelper logger)

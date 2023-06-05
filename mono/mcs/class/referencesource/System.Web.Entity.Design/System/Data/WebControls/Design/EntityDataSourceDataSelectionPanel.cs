@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace System.Web.UI.Design.WebControls
 {
-    internal partial class EntityDataSourceDataSelectionPanel : WizardPanel
+    partial internal class EntityDataSourceDataSelectionPanel : WizardPanel
     {
         private EntityDataSourceDataSelection _dataSelection;
         private bool _ignoreEvents; // used when a control is set by the wizard, tells the event handlers to do nothing

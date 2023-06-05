@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Rename.ConflictEngine;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed partial class RemoteRenamerService : BrokeredServiceBase, IRemoteRenamerService
+    partial internal sealed class RemoteRenamerService : BrokeredServiceBase, IRemoteRenamerService
     {
         internal sealed class Factory
             : FactoryBase<IRemoteRenamerService, IRemoteRenamerService.ICallback>

@@ -54,6 +54,7 @@ namespace Novell.Directory.Ldap
             hashQualifier = new System.Collections.Hashtable();
         }
 
+        public
         /// <summary> Returns an array of names for the element, or null if
         /// none is found.
         ///
@@ -65,7 +66,7 @@ namespace Novell.Directory.Ldap
         /// <returns> An array of names for the element, or null if none
         /// is found.
         /// </returns>
-        virtual public System.String[] Names
+        virtual System.String[] Names
         {
             get
             {
@@ -77,6 +78,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the description of the element.
         ///
         /// The getDescription method returns the value of the DESC qualifier
@@ -86,28 +88,30 @@ namespace Novell.Directory.Ldap
         /// <returns> The description of the element.
         ///
         /// </returns>
-        virtual public System.String Description
+        virtual System.String Description
         {
             get { return description; }
         }
 
+        public
         /// <summary> Returns the unique object identifier (OID) of the element.
         ///
         /// </summary>
         /// <returns> The OID of the element.
         /// </returns>
-        virtual public System.String ID
+        virtual System.String ID
         {
             get { return oid; }
         }
 
+        public
         /// <summary> Returns an enumeration of all qualifiers of the element which are
         /// vendor specific (begin with "X-").
         ///
         /// </summary>
         /// <returns> An enumeration of all qualifiers of the element.
         /// </returns>
-        virtual public System.Collections.IEnumerator QualifierNames
+        virtual System.Collections.IEnumerator QualifierNames
         {
             get
             {
@@ -117,6 +121,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns whether the element has the OBSOLETE qualifier
         /// in its Ldap definition.
         ///
@@ -124,7 +129,7 @@ namespace Novell.Directory.Ldap
         /// <returns> True if the Ldap definition contains the OBSOLETE qualifier;
         /// false if OBSOLETE qualifier is not present.
         /// </returns>
-        virtual public bool Obsolete
+        virtual bool Obsolete
         {
             get { return obsolete; }
         }
@@ -215,7 +220,14 @@ namespace Novell.Directory.Ldap
         /// setQualifier requires reconstructing the string value of the schema
         /// element.
         /// </summary>
-        abstract protected internal System.String formatString();
+        protected internal
+        /// <summary> Implementations of formatString format a schema element into a string
+        /// suitable for using in a modify (ADD) operation to the directory.
+        /// toString uses this method.  This method is needed because a call to
+        /// setQualifier requires reconstructing the string value of the schema
+        /// element.
+        /// </summary>
+        abstract System.String formatString();
 
         /// <summary> Sets the values of a specified optional or non-standard qualifier of
         /// the element.

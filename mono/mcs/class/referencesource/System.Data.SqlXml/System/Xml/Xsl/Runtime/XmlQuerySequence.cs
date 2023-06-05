@@ -419,7 +419,7 @@ namespace System.Xml.Xsl.Runtime
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class XmlQueryItemSequence : XmlQuerySequence<XPathItem>
     {
-        public new static readonly XmlQueryItemSequence Empty = new XmlQueryItemSequence();
+        public static new readonly XmlQueryItemSequence Empty = new XmlQueryItemSequence();
 
         /// <summary>
         /// If "seq" is non-null, then clear it and reuse it.  Otherwise, create a new XmlQueryItemSequence.
@@ -490,7 +490,7 @@ namespace System.Xml.Xsl.Runtime
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class XmlQueryNodeSequence : XmlQuerySequence<XPathNavigator>, IList<XPathItem>
     {
-        public new static readonly XmlQueryNodeSequence Empty = new XmlQueryNodeSequence();
+        public static new readonly XmlQueryNodeSequence Empty = new XmlQueryNodeSequence();
 
         private XmlQueryNodeSequence docOrderDistinct;
 

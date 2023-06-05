@@ -24,7 +24,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Interactive
 {
-    internal abstract partial class VsInteractiveWindowPackage<TVsInteractiveWindowProvider>
+    partial internal abstract class VsInteractiveWindowPackage<TVsInteractiveWindowProvider>
         : AsyncPackage,
             IVsToolWindowFactory
         where TVsInteractiveWindowProvider : VsInteractiveWindowProvider

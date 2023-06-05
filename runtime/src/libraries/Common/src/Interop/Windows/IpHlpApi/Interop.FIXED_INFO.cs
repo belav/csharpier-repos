@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class IpHlpApi
+    partial internal static class IpHlpApi
     {
         public const int MAX_HOSTNAME_LEN = 128;
         public const int MAX_DOMAIN_NAME_LEN = 128;
@@ -15,17 +15,17 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         public unsafe struct FIXED_INFO
         {
-            private fixed byte _hostName[MAX_HOSTNAME_LEN + 4];
+            fixed private byte _hostName[MAX_HOSTNAME_LEN + 4];
             public string HostName => CreateString(ref _hostName[0], MAX_HOSTNAME_LEN + 4);
 
-            private fixed byte _domainName[MAX_DOMAIN_NAME_LEN + 4];
+            fixed private byte _domainName[MAX_DOMAIN_NAME_LEN + 4];
             public string DomainName => CreateString(ref _domainName[0], MAX_DOMAIN_NAME_LEN + 4);
 
             public IntPtr currentDnsServer; // IpAddressList*
             public IP_ADDR_STRING DnsServerList;
             public uint nodeType;
 
-            private fixed byte _scopeId[MAX_SCOPE_ID_LEN + 4];
+            fixed private byte _scopeId[MAX_SCOPE_ID_LEN + 4];
             public string ScopeId => CreateString(ref _scopeId[0], MAX_SCOPE_ID_LEN + 4);
 
             public uint enableRouting;

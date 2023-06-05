@@ -16,16 +16,16 @@ namespace System.Net
         private readonly int dwProtocol;
         public readonly int dwCipherSuite;
         private readonly int dwBaseCipherSuite;
-        private fixed char szCipherSuite[SZ_ALG_MAX_SIZE];
-        private fixed char szCipher[SZ_ALG_MAX_SIZE];
+        fixed private char szCipherSuite[SZ_ALG_MAX_SIZE];
+        fixed private char szCipher[SZ_ALG_MAX_SIZE];
         private readonly int dwCipherLen;
         private readonly int dwCipherBlockLen; // in bytes
-        private fixed char szHash[SZ_ALG_MAX_SIZE];
+        fixed private char szHash[SZ_ALG_MAX_SIZE];
         private readonly int dwHashLen;
-        private fixed char szExchange[SZ_ALG_MAX_SIZE];
+        fixed private char szExchange[SZ_ALG_MAX_SIZE];
         private readonly int dwMinExchangeLen;
         private readonly int dwMaxExchangeLen;
-        private fixed char szCertificate[SZ_ALG_MAX_SIZE];
+        fixed private char szCertificate[SZ_ALG_MAX_SIZE];
         private readonly int dwKeyType;
     }
 }

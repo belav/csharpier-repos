@@ -7,7 +7,7 @@ using Microsoft.ServiceHub.Framework;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal abstract partial class BrokeredServiceBase
+    partial internal abstract class BrokeredServiceBase
     {
         internal readonly struct ServiceConstructionArguments
         {

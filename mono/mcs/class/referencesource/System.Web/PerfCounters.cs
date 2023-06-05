@@ -28,7 +28,7 @@ namespace System.Web
             get { return handle == IntPtr.Zero; }
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             UnsafeNativeMethods.PerfCloseAppCounters(handle);
             handle = IntPtr.Zero;

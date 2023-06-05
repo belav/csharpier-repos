@@ -10,9 +10,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
 {
+    partial
     // This class will read the dependency heirarchy from the project.assets.json file. The format of this file
     // is subject to change and in the future this information will be provided by an API.  See https://github.com/dotnet/roslyn/issues/50054
-    internal static partial class ProjectAssetsReader
+    internal static class ProjectAssetsReader
     {
         // NuGet will include entries to keep empty folders from being removed. These entries can be ignored.
         private const string NuGetEmptyFileName = "_._";

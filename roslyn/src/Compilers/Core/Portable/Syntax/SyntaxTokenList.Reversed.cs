@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial struct SyntaxTokenList
+    partial public struct SyntaxTokenList
     {
         /// <summary>
         /// Reversed enumerable.

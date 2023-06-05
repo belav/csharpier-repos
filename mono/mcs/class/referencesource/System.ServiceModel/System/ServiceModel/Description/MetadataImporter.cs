@@ -13,7 +13,7 @@ namespace System.ServiceModel.Description
     using System.ServiceModel.Configuration;
     using System.Xml;
 
-    public abstract partial class MetadataImporter
+    partial public abstract class MetadataImporter
     {
         readonly KeyedByTypeCollection<IPolicyImportExtension> policyExtensions;
         readonly Dictionary<XmlQualifiedName, ContractDescription> knownContracts =

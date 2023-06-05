@@ -13,7 +13,7 @@ using Signals = Interop.Termios.Signals;
 
 namespace System.IO.Ports
 {
-    internal sealed partial class SerialStream : Stream
+    partial internal sealed class SerialStream : Stream
     {
         private const int TimeoutResolution = 30;
 

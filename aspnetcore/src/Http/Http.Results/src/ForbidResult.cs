@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-internal sealed partial class ForbidResult : IResult
+partial internal sealed class ForbidResult : IResult
 {
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/>.
@@ -97,7 +97,7 @@ internal sealed partial class ForbidResult : IResult
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void ForbidResultExecuting(
             ILogger logger,
@@ -117,6 +117,6 @@ internal sealed partial class ForbidResult : IResult
             EventName = "ChallengeResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ForbidResultExecuting(ILogger logger, string[] schemes);
+        partial private static void ForbidResultExecuting(ILogger logger, string[] schemes);
     }
 }

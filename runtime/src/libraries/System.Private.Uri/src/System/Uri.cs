@@ -18,7 +18,7 @@ namespace System
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial class Uri : ISerializable
+    partial public class Uri : ISerializable
     {
         public static readonly string UriSchemeFile = UriParser.FileUri.SchemeName;
         public static readonly string UriSchemeFtp = UriParser.FtpUri.SchemeName;

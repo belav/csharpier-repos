@@ -14,7 +14,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics.Tracing
 {
-    internal sealed partial class XplatEventLogger : EventListener
+    partial internal sealed class XplatEventLogger : EventListener
     {
         public XplatEventLogger() { }
 
@@ -46,10 +46,10 @@ namespace System.Diagnostics.Tracing
 
         [LibraryImport(RuntimeHelpers.QCall)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool IsEventSourceLoggingEnabled();
+        partial private static bool IsEventSourceLoggingEnabled();
 
         [LibraryImport(RuntimeHelpers.QCall, StringMarshalling = StringMarshalling.Utf16)]
-        private static partial void LogEventSource(
+        partial private static void LogEventSource(
             int eventID,
             string? eventName,
             string eventSourceName,

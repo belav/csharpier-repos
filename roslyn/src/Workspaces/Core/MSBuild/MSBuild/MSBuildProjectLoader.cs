@@ -15,10 +15,11 @@ using MSB = Microsoft.Build;
 
 namespace Microsoft.CodeAnalysis.MSBuild
 {
+    partial
     /// <summary>
     /// An API for loading msbuild project files.
     /// </summary>
-    public partial class MSBuildProjectLoader
+    public class MSBuildProjectLoader
     {
         // the services for the projects and solutions are intended to be loaded into.
         private readonly SolutionServices _solutionServices;

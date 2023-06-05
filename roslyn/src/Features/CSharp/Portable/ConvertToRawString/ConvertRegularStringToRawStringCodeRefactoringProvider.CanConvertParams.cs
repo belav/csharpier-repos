@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
 {
-    internal partial class ConvertRegularStringToRawStringCodeRefactoringProvider
+    partial internal class ConvertRegularStringToRawStringCodeRefactoringProvider
     {
         private readonly struct CanConvertParams
         {

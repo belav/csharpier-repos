@@ -40,7 +40,7 @@ namespace System.Workflow.Activities.Rules.Design
                 );
         }
 
-        static internal string GetRulePreview(Rule rule)
+        internal static string GetRulePreview(Rule rule)
         {
             StringBuilder rulePreview = new StringBuilder();
 
@@ -71,7 +71,7 @@ namespace System.Workflow.Activities.Rules.Design
             return rulePreview.ToString();
         }
 
-        static internal string GetRuleSetPreview(RuleSet ruleSet)
+        internal static string GetRuleSetPreview(RuleSet ruleSet)
         {
             StringBuilder preview = new StringBuilder();
             bool first = true;

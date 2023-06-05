@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class Lexer
+    partial internal class Lexer
     {
         internal readonly struct Interpolation
         {

@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafePipeHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafePipeHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         private const int DefaultInvalidHandle = -1;
 

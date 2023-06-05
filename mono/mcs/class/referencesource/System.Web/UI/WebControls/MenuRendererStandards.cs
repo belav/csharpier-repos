@@ -13,7 +13,7 @@ namespace System.Web.UI.WebControls
     using System.Linq;
     using System.Web.Util;
 
-    public partial class Menu
+    partial public class Menu
     {
         /// <devdoc>The standards-compliant Menu renderer</devdoc>
         internal class MenuRendererStandards : MenuRenderer

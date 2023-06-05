@@ -3,10 +3,11 @@
 
 namespace System.Net.Quic;
 
+partial
 /// <summary>
 /// Default values for <see cref="QuicListenerOptions" />, <see cref="QuicClientConnectionOptions" /> and <see cref="QuicServerConnectionOptions" />.
 /// </summary>
-internal static partial class QuicDefaults
+internal static class QuicDefaults
 {
     /// <summary>
     /// <see cref="QuicListenerOptions.ListenBacklog" />.

@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
         After = PredefinedCodeRefactoringProviderNames.GenerateConstructorFromMembers,
         Before = PredefinedCodeRefactoringProviderNames.AddConstructorParametersFromMembers
     )]
-    internal partial class GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider
+    partial internal class GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider
         : AbstractGenerateFromMembersCodeRefactoringProvider
     {
         public const string GenerateOperatorsId = nameof(GenerateOperatorsId);

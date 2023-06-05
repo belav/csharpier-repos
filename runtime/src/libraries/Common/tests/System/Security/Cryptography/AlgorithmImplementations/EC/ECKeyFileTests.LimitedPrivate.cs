@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Tests
 {
-    public abstract partial class ECKeyFileTests<T>
+    partial public abstract class ECKeyFileTests<T>
     {
         private const int NTE_PERM = unchecked((int)0x80090010);
 

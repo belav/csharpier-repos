@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
 {
     [ExportWorkspaceServiceFactory(typeof(IProjectCacheHostService), ServiceLayer.Editor)]
     [Shared]
-    internal partial class ProjectCacheHostServiceFactory : IWorkspaceServiceFactory
+    partial internal class ProjectCacheHostServiceFactory : IWorkspaceServiceFactory
     {
         private static readonly TimeSpan s_implicitCacheTimeout = TimeSpan.FromMilliseconds(10000);
 

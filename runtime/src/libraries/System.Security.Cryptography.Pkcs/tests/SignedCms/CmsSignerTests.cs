@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.Tests
 {
-    public static partial class CmsSignerTests
+    partial public static class CmsSignerTests
     {
         [Theory]
         [InlineData((SubjectIdentifierType)0)]

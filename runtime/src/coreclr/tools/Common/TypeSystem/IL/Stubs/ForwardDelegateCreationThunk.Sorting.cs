@@ -5,8 +5,9 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class ForwardDelegateCreationThunk
+    public class ForwardDelegateCreationThunk
     {
         protected override int ClassCode => 1026039617;
 

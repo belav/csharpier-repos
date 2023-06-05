@@ -31,7 +31,7 @@ namespace System.Data.Common
                 StorageType.SqlBoolean
             ) { }
 
-        override public Object Aggregate(int[] records, AggregateType kind)
+        public override Object Aggregate(int[] records, AggregateType kind)
         {
             bool hasData = false;
             try
@@ -94,17 +94,17 @@ namespace System.Data.Common
             throw ExceptionBuilder.AggregateException(kind, DataType);
         }
 
-        override public int Compare(int recordNo1, int recordNo2)
+        public override int Compare(int recordNo1, int recordNo2)
         {
             return values[recordNo1].CompareTo(values[recordNo2]);
         }
 
-        override public int CompareValueTo(int recordNo, Object value)
+        public override int CompareValueTo(int recordNo, Object value)
         {
             return values[recordNo].CompareTo((SqlBoolean)value);
         }
 
-        override public object ConvertValue(object value)
+        public override object ConvertValue(object value)
         {
             if (null != value)
             {
@@ -113,27 +113,27 @@ namespace System.Data.Common
             return NullValue;
         }
 
-        override public void Copy(int recordNo1, int recordNo2)
+        public override void Copy(int recordNo1, int recordNo2)
         {
             values[recordNo2] = values[recordNo1];
         }
 
-        override public Object Get(int record)
+        public override Object Get(int record)
         {
             return values[record];
         }
 
-        override public bool IsNull(int record)
+        public override bool IsNull(int record)
         {
             return (values[record].IsNull);
         }
 
-        override public void Set(int record, Object value)
+        public override void Set(int record, Object value)
         {
             values[record] = SqlConvert.ConvertToSqlBoolean(value);
         }
 
-        override public void SetCapacity(int capacity)
+        public override void SetCapacity(int capacity)
         {
             SqlBoolean[] newValues = new SqlBoolean[capacity];
             if (null != values)
@@ -143,7 +143,7 @@ namespace System.Data.Common
             values = newValues;
         }
 
-        override public object ConvertXmlToObject(string s)
+        public override object ConvertXmlToObject(string s)
         {
             SqlBoolean newValue = new SqlBoolean();
             string tempStr = string.Concat("<col>", s, "</col>"); // this is done since you can give fragmet to reader, bug 98767
@@ -158,7 +158,7 @@ namespace System.Data.Common
             return ((SqlBoolean)tmp);
         }
 
-        override public string ConvertObjectToXml(object value)
+        public override string ConvertObjectToXml(object value)
         {
             Debug.Assert(!DataStorage.IsObjectNull(value), "we should have null here");
             Debug.Assert((value.GetType() == typeof(SqlBoolean)), "wrong input type");
@@ -172,12 +172,12 @@ namespace System.Data.Common
             return (strwriter.ToString());
         }
 
-        override protected object GetEmptyStorage(int recordCount)
+        protected override object GetEmptyStorage(int recordCount)
         {
             return new SqlBoolean[recordCount];
         }
 
-        override protected void CopyValue(
+        protected override void CopyValue(
             int record,
             object store,
             BitArray nullbits,
@@ -189,7 +189,7 @@ namespace System.Data.Common
             nullbits.Set(storeIndex, IsNull(record));
         }
 
-        override protected void SetStorage(object store, BitArray nullbits)
+        protected override void SetStorage(object store, BitArray nullbits)
         {
             values = (SqlBoolean[])store;
             //SetNullStorage(nullbits);

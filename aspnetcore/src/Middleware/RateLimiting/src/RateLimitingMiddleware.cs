@@ -8,10 +8,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
+partial
 /// <summary>
 /// Limits the rate of requests allowed in the application, based on limits set by a user-provided <see cref="PartitionedRateLimiter{TResource}"/>.
 /// </summary>
-internal sealed partial class RateLimitingMiddleware
+internal sealed class RateLimitingMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly Func<OnRejectedContext, CancellationToken, ValueTask>? _defaultOnRejected;
@@ -301,7 +302,7 @@ internal sealed partial class RateLimitingMiddleware
         );
     }
 
-    private static partial class RateLimiterLog
+    partial private static class RateLimiterLog
     {
         [LoggerMessage(
             1,
@@ -309,7 +310,7 @@ internal sealed partial class RateLimitingMiddleware
             "Rate limits exceeded, rejecting this request.",
             EventName = "RequestRejectedLimitsExceeded"
         )]
-        internal static partial void RequestRejectedLimitsExceeded(ILogger logger);
+        partial internal static void RequestRejectedLimitsExceeded(ILogger logger);
 
         [LoggerMessage(
             2,
@@ -317,7 +318,7 @@ internal sealed partial class RateLimitingMiddleware
             "This endpoint requires a rate limiting policy with name {PolicyName}, but no such policy exists.",
             EventName = "WarnMissingPolicy"
         )]
-        internal static partial void WarnMissingPolicy(ILogger logger, string policyName);
+        partial internal static void WarnMissingPolicy(ILogger logger, string policyName);
 
         [LoggerMessage(
             3,
@@ -325,6 +326,6 @@ internal sealed partial class RateLimitingMiddleware
             "The request was canceled.",
             EventName = "RequestCanceled"
         )]
-        internal static partial void RequestCanceled(ILogger logger);
+        partial internal static void RequestCanceled(ILogger logger);
     }
 }

@@ -24,12 +24,11 @@ using System.Security;
 
 namespace System.Reflection.Runtime.Assemblies
 {
+    partial
     //
     // The runtime's implementation of an Assembly.
     //
-    internal abstract partial class RuntimeAssemblyInfo
-        : RuntimeAssembly,
-            IEquatable<RuntimeAssemblyInfo>
+    internal abstract class RuntimeAssemblyInfo : RuntimeAssembly, IEquatable<RuntimeAssemblyInfo>
     {
         public bool Equals(RuntimeAssemblyInfo? other)
         {

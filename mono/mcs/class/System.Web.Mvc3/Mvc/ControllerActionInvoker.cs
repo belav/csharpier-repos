@@ -12,7 +12,7 @@
 
     public class ControllerActionInvoker : IActionInvoker
     {
-        private readonly static ControllerDescriptorCache _staticDescriptorCache =
+        private static readonly ControllerDescriptorCache _staticDescriptorCache =
             new ControllerDescriptorCache();
 
         private ModelBinderDictionary _binders;

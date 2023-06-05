@@ -3,7 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
-internal abstract partial class RazorSyntaxNode : GreenNode
+partial internal abstract class RazorSyntaxNode : GreenNode
 {
     protected RazorSyntaxNode(SyntaxKind kind)
         : base(kind) { }

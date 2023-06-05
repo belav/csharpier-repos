@@ -5,10 +5,11 @@ using System.Threading;
 
 namespace System.Net.Http
 {
+    partial
     /// <summary>
     /// Additional default values used used only in this assembly.
     /// </summary>
-    internal static partial class HttpHandlerDefaults
+    internal static class HttpHandlerDefaults
     {
         public static readonly int DefaultMaxConnectionsPerServer = GlobalHttpSettings
             .SocketsHttpHandler

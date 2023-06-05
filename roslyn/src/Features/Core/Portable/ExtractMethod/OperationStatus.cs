@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal partial class OperationStatus
+    partial internal class OperationStatus
     {
         public OperationStatus(OperationStatusFlag flag, string reason)
         {

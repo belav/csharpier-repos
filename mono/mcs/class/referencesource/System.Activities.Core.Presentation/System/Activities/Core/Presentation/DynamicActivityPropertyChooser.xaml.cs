@@ -12,7 +12,7 @@ namespace System.Activities.Core.Presentation
     using System.ComponentModel;
     using System.Windows.Controls;
 
-    internal partial class DynamicActivityPropertyChooser : UserControl
+    partial internal class DynamicActivityPropertyChooser : UserControl
     {
         private DynamicActivityPropertyChooserViewModel model;
 

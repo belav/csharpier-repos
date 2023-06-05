@@ -31,7 +31,7 @@ using static Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles.SymbolSpe
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
 {
-    internal sealed partial class EventHookupSessionManager
+    partial internal sealed class EventHookupSessionManager
     {
         /// <summary>
         /// A session begins when an '=' is typed after a '+' and requires determining whether the

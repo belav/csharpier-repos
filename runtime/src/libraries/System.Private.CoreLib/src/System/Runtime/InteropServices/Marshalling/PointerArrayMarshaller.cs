@@ -113,10 +113,11 @@ namespace System.Runtime.InteropServices.Marshalling
         public static void Free(TUnmanagedElement* unmanaged) =>
             Marshal.FreeCoTaskMem((IntPtr)unmanaged);
 
+        ref
         /// <summary>
         /// Represents a marshaller for marshalling an array from managed to unmanaged.
         /// </summary>
-        public ref struct ManagedToUnmanagedIn
+        public struct ManagedToUnmanagedIn
         {
             /// <summary>
             /// Gets the requested caller-allocated buffer size.

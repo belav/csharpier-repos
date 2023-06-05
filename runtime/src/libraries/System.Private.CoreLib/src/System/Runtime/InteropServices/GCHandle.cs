@@ -22,7 +22,7 @@ namespace System.Runtime.InteropServices
     /// Pinned - same as Normal, but allows the address of the actual object to be taken.
     /// </remarks>
     [StructLayout(LayoutKind.Sequential)]
-    public partial struct GCHandle : IEquatable<GCHandle>
+    partial public struct GCHandle : IEquatable<GCHandle>
     {
         // The actual integer handle value that the EE uses internally.
         private IntPtr _handle;

@@ -32,7 +32,7 @@
 
 namespace System.Drawing.Printing
 {
-    public abstract partial class PrintController
+    partial public abstract class PrintController
     {
         public virtual void OnStartPrint(PrintDocument document, PrintEventArgs e) { }
 

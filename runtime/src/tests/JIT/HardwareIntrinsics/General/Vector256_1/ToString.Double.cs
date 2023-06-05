@@ -16,9 +16,9 @@ using System.Runtime.Intrinsics;
 
 namespace JIT.HardwareIntrinsics.General
 {
-    public static partial class Program
+    partial public static class Program
     {
-        private unsafe static void ToStringDouble()
+        private static unsafe void ToStringDouble()
         {
             int size = Unsafe.SizeOf<Vector256<Double>>() / sizeof(Double);
             Double[] values = new Double[size];

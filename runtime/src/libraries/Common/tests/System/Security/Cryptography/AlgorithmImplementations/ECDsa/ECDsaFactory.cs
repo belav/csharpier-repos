@@ -14,7 +14,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
         bool ExplicitCurvesSupported { get; }
     }
 
-    public static partial class ECDsaFactory
+    partial public static class ECDsaFactory
     {
         public static ECDsa Create()
         {

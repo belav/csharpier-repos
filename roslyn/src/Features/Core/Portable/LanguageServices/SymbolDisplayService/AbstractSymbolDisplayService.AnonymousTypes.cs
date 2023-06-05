@@ -8,9 +8,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {
-    internal partial class AbstractSymbolDisplayService
+    partial internal class AbstractSymbolDisplayService
     {
-        protected abstract partial class AbstractSymbolDescriptionBuilder
+        partial protected abstract class AbstractSymbolDescriptionBuilder
         {
             private void FixAllStructuralTypes(ISymbol firstSymbol)
             {

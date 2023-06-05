@@ -14,9 +14,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class ClosureConversion
+    partial internal class ClosureConversion
     {
-        internal sealed partial class Analysis
+        partial internal sealed class Analysis
             : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
         {
             /// <summary>

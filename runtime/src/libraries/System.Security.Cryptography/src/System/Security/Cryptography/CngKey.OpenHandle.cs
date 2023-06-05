@@ -7,10 +7,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
+    partial
     /// <summary>
     ///     Managed representation of an NCrypt key
     /// </summary>
-    public sealed partial class CngKey : IDisposable
+    public sealed class CngKey : IDisposable
     {
         /// <summary>
         ///     Wrap an existing key handle with a CngKey object

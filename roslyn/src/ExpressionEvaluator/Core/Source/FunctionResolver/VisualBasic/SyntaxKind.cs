@@ -9,7 +9,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
 {
-    internal sealed partial class MemberSignatureParser
+    partial internal sealed class MemberSignatureParser
     {
         // A subset of the VB compiler SyntaxKind enum, containing
         // just those values recognized by the signature parser.

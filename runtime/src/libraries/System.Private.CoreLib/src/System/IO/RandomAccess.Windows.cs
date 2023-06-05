@@ -14,7 +14,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    public static partial class RandomAccess
+    partial public static class RandomAccess
     {
         private static readonly IOCompletionCallback s_callback = AllocateCallback();
 

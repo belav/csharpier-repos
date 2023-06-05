@@ -14,11 +14,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// Represents an immutable snapshot of module CLI metadata.
     /// </summary>
     /// <remarks>This object may allocate significant resources or lock files depending upon how it is constructed.</remarks>
-    public sealed partial class ModuleMetadata : Metadata
+    public sealed class ModuleMetadata : Metadata
     {
         private readonly PEModule _module;
 

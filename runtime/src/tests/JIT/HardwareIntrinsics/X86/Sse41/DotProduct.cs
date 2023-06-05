@@ -12,7 +12,7 @@ using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Sse41
 {
-    public partial class Program
+    partial public class Program
     {
         [Fact]
         public static unsafe void DotProduct()

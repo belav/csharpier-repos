@@ -15,7 +15,7 @@ using SysTx = System.Transactions;
 
 namespace System.Data.Odbc
 {
-    sealed internal class OdbcConnectionOpen : DbConnectionInternal
+    internal sealed class OdbcConnectionOpen : DbConnectionInternal
     {
         // Construct from a compiled connection string
         internal OdbcConnectionOpen(
@@ -65,19 +65,19 @@ namespace System.Data.Odbc
             }
         }
 
-        override public string ServerVersion
+        public override string ServerVersion
         {
             get { return OuterConnection.Open_GetServerVersion(); }
         }
 
-        override protected void Activate(SysTx.Transaction transaction)
+        protected override void Activate(SysTx.Transaction transaction)
         {
 #if !COREFX
             OdbcConnection.ExecutePermission.Demand();
 #endif
         }
 
-        override public DbTransaction BeginTransaction(IsolationLevel isolevel)
+        public override DbTransaction BeginTransaction(IsolationLevel isolevel)
         {
             return BeginOdbcTransaction(isolevel);
         }
@@ -87,22 +87,22 @@ namespace System.Data.Odbc
             return OuterConnection.Open_BeginTransaction(isolevel);
         }
 
-        override public void ChangeDatabase(string value)
+        public override void ChangeDatabase(string value)
         {
             OuterConnection.Open_ChangeDatabase(value);
         }
 
-        override protected DbReferenceCollection CreateReferenceCollection()
+        protected override DbReferenceCollection CreateReferenceCollection()
         {
             return new OdbcReferenceCollection();
         }
 
-        override protected void Deactivate()
+        protected override void Deactivate()
         {
             NotifyWeakReference(OdbcReferenceCollection.Closing);
         }
 
-        override public void EnlistTransaction(SysTx.Transaction transaction)
+        public override void EnlistTransaction(SysTx.Transaction transaction)
         {
 #if !COREFX
             OuterConnection.Open_EnlistTransaction(transaction);

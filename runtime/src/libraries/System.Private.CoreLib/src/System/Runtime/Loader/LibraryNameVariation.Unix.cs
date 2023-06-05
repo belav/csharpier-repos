@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Runtime.Loader
 {
-    internal partial struct LibraryNameVariation
+    partial internal struct LibraryNameVariation
     {
         private const string LibraryNamePrefix = "lib";
 #if TARGET_OSX || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS

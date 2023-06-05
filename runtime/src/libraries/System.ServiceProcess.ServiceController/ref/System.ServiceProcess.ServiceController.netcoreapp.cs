@@ -6,16 +6,16 @@
 
 namespace System.ServiceProcess
 {
-    public partial class ServiceBase : System.ComponentModel.Component
+    partial public class ServiceBase : System.ComponentModel.Component
     {
         public void RequestAdditionalTime(System.TimeSpan time) { }
     }
 
-    public partial class ServiceController : System.ComponentModel.Component
+    partial public class ServiceController : System.ComponentModel.Component
     {
         public void Stop(bool stopDependentServices) { }
     }
 
-    public readonly partial struct SessionChangeDescription
+    partial public readonly struct SessionChangeDescription
         : System.IEquatable<System.ServiceProcess.SessionChangeDescription> { }
 }

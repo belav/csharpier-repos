@@ -208,7 +208,7 @@ namespace System.Runtime.Remoting.Messaging
             return methRef.Resolve();
         }
 
-        static protected Type[] GetSignature(MethodBase methodBase, bool load)
+        protected static Type[] GetSignature(MethodBase methodBase, bool load)
         {
             ParameterInfo[] pars = methodBase.GetParameters();
             Type[] signature = new Type[pars.Length];
@@ -500,7 +500,7 @@ namespace System.Runtime.Remoting.Messaging
             get { return _uri; }
         }
 
-        static internal CADMethodCallMessage Create(IMessage callMsg)
+        internal static CADMethodCallMessage Create(IMessage callMsg)
         {
             IMethodCallMessage msg = callMsg as IMethodCallMessage;
             if (null == msg)
@@ -571,7 +571,10 @@ namespace System.Runtime.Remoting.Messaging
         Type[] _sig;
 #pragma warning restore
 
-        static internal CADMethodReturnMessage Create(IMessage callMsg)
+        internal
+#pragma warning restore
+
+        static CADMethodReturnMessage Create(IMessage callMsg)
         {
             IMethodReturnMessage msg = callMsg as IMethodReturnMessage;
             if (null == msg)

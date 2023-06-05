@@ -150,7 +150,7 @@ namespace System.Memory.Tests
 
                 public CustomMemoryManager(T[] content) => _buffer = content;
 
-                public unsafe override Span<T> GetSpan() => _buffer;
+                public override unsafe Span<T> GetSpan() => _buffer;
 
                 public override unsafe MemoryHandle Pin(int elementIndex = 0)
                 {

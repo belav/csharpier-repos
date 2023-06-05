@@ -21,7 +21,7 @@ namespace System.Text.Json.Serialization.Tests
             : base(JsonSerializerWrapper.SyncStreamSerializer) { }
     }
 
-    public abstract partial class StreamTests
+    partial public abstract class StreamTests
     {
         /// <summary>
         /// The System Under Test for the test suite.

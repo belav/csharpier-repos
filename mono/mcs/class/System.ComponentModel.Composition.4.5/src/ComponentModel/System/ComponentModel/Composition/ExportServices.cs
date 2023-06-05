@@ -15,8 +15,9 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition
 {
+    partial
     // Provides helpers for creating and dealing with Exports
-    internal static partial class ExportServices
+    internal static class ExportServices
     {
         private static readonly MethodInfo _createStronglyTypedLazyOfTM =
             typeof(ExportServices).GetMethod(

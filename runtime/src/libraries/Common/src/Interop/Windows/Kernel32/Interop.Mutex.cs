@@ -5,9 +5,9 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal const uint CREATE_MUTEX_INITIAL_OWNER = 0x1;
 
@@ -17,7 +17,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial SafeWaitHandle OpenMutex(
+        partial internal static SafeWaitHandle OpenMutex(
             uint desiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool inheritHandle,
             string name
@@ -29,7 +29,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial SafeWaitHandle CreateMutexEx(
+        partial internal static SafeWaitHandle CreateMutexEx(
             IntPtr lpMutexAttributes,
             string? name,
             uint flags,
@@ -38,6 +38,6 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool ReleaseMutex(SafeWaitHandle handle);
+        partial internal static bool ReleaseMutex(SafeWaitHandle handle);
     }
 }

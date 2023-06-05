@@ -24,7 +24,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     using WrapperTrueExpr = TrueExpr<LeftCellWrapper>;
     using WrapperFalseExpr = FalseExpr<LeftCellWrapper>;
 
-    internal partial class CellTreeNode
+    partial internal class CellTreeNode
     {
         #region Abstract Visitors
         // Abstract visitor implementation for Cell trees

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Data.ProviderBase
 {
-    internal abstract partial class DbConnectionClosed : DbConnectionInternal
+    partial internal abstract class DbConnectionClosed : DbConnectionInternal
     {
         // Construct an "empty" connection
         protected DbConnectionClosed(

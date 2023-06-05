@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Formatting.Rules;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
 {
-    internal partial class CSharpEditorFormattingService : IEditorFormattingService
+    partial internal class CSharpEditorFormattingService : IEditorFormattingService
     {
         internal class PasteFormattingRule : AbstractFormattingRule
         {

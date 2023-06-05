@@ -132,7 +132,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         GenerationMode = JsonSourceGenerationMode.Metadata
     )]
     [JsonSerializable(typeof(PolymorphicClass), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    internal partial class MetadataWithPerTypeAttributeContext : JsonSerializerContext, ITestContext
+    partial internal class MetadataWithPerTypeAttributeContext : JsonSerializerContext, ITestContext
     {
         public JsonSourceGenerationMode JsonSourceGenerationMode =>
             JsonSourceGenerationMode.Metadata;
@@ -347,7 +347,7 @@ namespace System.Text.Json.SourceGeneration.Tests
     [JsonSerializable(typeof(TypeWithValidationAttributes))]
     [JsonSerializable(typeof(TypeWithDerivedAttribute))]
     [JsonSerializable(typeof(PolymorphicClass))]
-    internal partial class MetadataContext : JsonSerializerContext, ITestContext
+    partial internal class MetadataContext : JsonSerializerContext, ITestContext
     {
         public JsonSourceGenerationMode JsonSourceGenerationMode =>
             JsonSourceGenerationMode.Metadata;
@@ -363,7 +363,7 @@ namespace System.Text.Json.SourceGeneration.Tests
     }
 
     [JsonSerializable(typeof(EnumWrittenAsString))]
-    public partial class ContextWithExplicitStringEnum : JsonSerializerContext { }
+    partial public class ContextWithExplicitStringEnum : JsonSerializerContext { }
 
     public class PocoWithEnum
     {
@@ -371,7 +371,7 @@ namespace System.Text.Json.SourceGeneration.Tests
     }
 
     [JsonSerializable(typeof(PocoWithEnum))]
-    public partial class ContextWithImplicitStringEnum : JsonSerializerContext { }
+    partial public class ContextWithImplicitStringEnum : JsonSerializerContext { }
 
     public sealed class MetadataContextTests : RealWorldContextTests
     {

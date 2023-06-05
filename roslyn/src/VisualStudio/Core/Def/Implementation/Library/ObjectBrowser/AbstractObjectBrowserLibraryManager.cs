@@ -25,7 +25,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectBrowser
 {
-    internal abstract partial class AbstractObjectBrowserLibraryManager
+    partial internal abstract class AbstractObjectBrowserLibraryManager
         : AbstractLibraryManager,
             IDisposable
     {

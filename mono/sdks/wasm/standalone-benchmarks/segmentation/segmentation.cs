@@ -1088,7 +1088,7 @@ public class SampleVarianceUpperTriangularMatrix
     }
 }
 
-public partial class Benchmark
+partial public class Benchmark
 {
     public const int WarmingIterationCount = 2;
     public const int IterationCount = 7;

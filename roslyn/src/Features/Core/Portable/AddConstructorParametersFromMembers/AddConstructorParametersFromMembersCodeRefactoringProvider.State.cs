@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
 {
-    internal partial class AddConstructorParametersFromMembersCodeRefactoringProvider
+    partial internal class AddConstructorParametersFromMembersCodeRefactoringProvider
     {
         private class State
         {

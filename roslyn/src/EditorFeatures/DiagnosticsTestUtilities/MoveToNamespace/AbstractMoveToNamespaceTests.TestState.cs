@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
 {
-    public abstract partial class AbstractMoveToNamespaceTests
+    partial public abstract class AbstractMoveToNamespaceTests
     {
         internal class TestState : IDisposable
         {

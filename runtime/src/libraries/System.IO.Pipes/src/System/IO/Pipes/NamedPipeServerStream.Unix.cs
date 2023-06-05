@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace System.IO.Pipes
 {
-    public sealed partial class NamedPipeServerStream : PipeStream
+    partial public sealed class NamedPipeServerStream : PipeStream
     {
         private SharedServer? _instance;
         private PipeDirection _direction;

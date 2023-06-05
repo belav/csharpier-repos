@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class BinderFactory
+    partial internal sealed class BinderFactory
     {
         // key in the binder cache.
         // PERF: we are not using ValueTuple because its Equals is relatively slow.

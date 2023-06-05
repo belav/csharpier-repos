@@ -13,7 +13,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Internal.NativeCrypto
 {
-    internal static partial class BCryptNative
+    partial internal static class BCryptNative
     {
         /// <summary>
         ///     Well known algorithm names
@@ -46,10 +46,11 @@ namespace Internal.NativeCrypto
         }
     }
 
+    partial
     //
     // Interop layer around Windows CNG api.
     //
-    internal static partial class Cng
+    internal static class Cng
     {
         [Flags]
         public enum OpenAlgorithmProviderFlags : int
@@ -144,12 +145,12 @@ namespace Internal.NativeCrypto
         }
     }
 
-    internal static partial class Cng
+    partial internal static class Cng
     {
-        internal static partial class Interop
+        partial internal static class Interop
         {
             [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-            public static partial NTSTATUS BCryptOpenAlgorithmProvider(
+            partial public static NTSTATUS BCryptOpenAlgorithmProvider(
                 out SafeAlgorithmHandle phAlgorithm,
                 string pszAlgId,
                 string? pszImplementation,
@@ -157,7 +158,7 @@ namespace Internal.NativeCrypto
             );
 
             [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-            public static partial NTSTATUS BCryptSetProperty(
+            partial public static NTSTATUS BCryptSetProperty(
                 SafeAlgorithmHandle hObject,
                 string pszProperty,
                 string pbInput,
@@ -170,7 +171,7 @@ namespace Internal.NativeCrypto
                 EntryPoint = "BCryptSetProperty",
                 StringMarshalling = StringMarshalling.Utf16
             )]
-            private static partial NTSTATUS BCryptSetIntPropertyPrivate(
+            partial private static NTSTATUS BCryptSetIntPropertyPrivate(
                 SafeBCryptHandle hObject,
                 string pszProperty,
                 ref int pdwInput,
@@ -196,7 +197,7 @@ namespace Internal.NativeCrypto
         }
     }
 
-    internal sealed partial class SafeAlgorithmHandle : SafeBCryptHandle
+    partial internal sealed class SafeAlgorithmHandle : SafeBCryptHandle
     {
         protected sealed override bool ReleaseHandle()
         {
@@ -205,10 +206,10 @@ namespace Internal.NativeCrypto
         }
 
         [LibraryImport(Libraries.BCrypt)]
-        private static partial uint BCryptCloseAlgorithmProvider(IntPtr hAlgorithm, int dwFlags);
+        partial private static uint BCryptCloseAlgorithmProvider(IntPtr hAlgorithm, int dwFlags);
     }
 
-    internal sealed partial class SafeKeyHandle : SafeBCryptHandle
+    partial internal sealed class SafeKeyHandle : SafeBCryptHandle
     {
         private SafeAlgorithmHandle? _parentHandle;
 
@@ -237,6 +238,6 @@ namespace Internal.NativeCrypto
         }
 
         [LibraryImport(Libraries.BCrypt)]
-        private static partial uint BCryptDestroyKey(IntPtr hKey);
+        partial private static uint BCryptDestroyKey(IntPtr hKey);
     }
 }

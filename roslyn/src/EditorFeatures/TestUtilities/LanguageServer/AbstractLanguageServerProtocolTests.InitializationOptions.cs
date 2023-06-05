@@ -9,7 +9,7 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Roslyn.Test.Utilities
 {
-    public abstract partial class AbstractLanguageServerProtocolTests
+    partial public abstract class AbstractLanguageServerProtocolTests
     {
         internal readonly record struct InitializationOptions()
         {

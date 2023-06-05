@@ -3,7 +3,7 @@
 
 namespace System.Text.Json
 {
-    internal static partial class JsonConstants
+    partial internal static class JsonConstants
     {
         // Standard format for double and single on non-inbox frameworks.
         public const string DoubleFormatString = "G17";

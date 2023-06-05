@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 {
-    internal partial class ContainedLanguage : IVsContainedLanguage
+    partial internal class ContainedLanguage : IVsContainedLanguage
     {
         public int GetColorizer(out IVsColorizer colorizer)
         {

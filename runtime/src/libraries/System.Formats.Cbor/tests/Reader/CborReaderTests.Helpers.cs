@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Formats.Cbor.Tests
 {
-    public partial class CborReaderTests
+    partial public class CborReaderTests
     {
         internal static class Helpers
         {

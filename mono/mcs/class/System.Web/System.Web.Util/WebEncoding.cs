@@ -58,7 +58,7 @@ namespace System.Web.Util
             }
         }
 
-        static public Encoding FileEncoding
+        public static Encoding FileEncoding
         {
             get
             {
@@ -68,7 +68,7 @@ namespace System.Web.Util
             }
         }
 
-        static public Encoding ResponseEncoding
+        public static Encoding ResponseEncoding
         {
             get
             {
@@ -78,7 +78,7 @@ namespace System.Web.Util
             }
         }
 
-        static public Encoding RequestEncoding
+        public static Encoding RequestEncoding
         {
             get
             {

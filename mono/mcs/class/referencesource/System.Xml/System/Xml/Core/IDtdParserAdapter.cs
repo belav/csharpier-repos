@@ -19,7 +19,7 @@ using BufferBuilder = System.Text.StringBuilder;
 
 namespace System.Xml
 {
-    internal partial interface IDtdParserAdapter
+    partial internal interface IDtdParserAdapter
     {
         XmlNameTable NameTable { get; }
         IXmlNamespaceResolver NamespaceResolver { get; }

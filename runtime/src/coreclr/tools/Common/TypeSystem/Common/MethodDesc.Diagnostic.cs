@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class MethodDesc
+    partial public class MethodDesc
     {
         public abstract string DiagnosticName { get; }
     }

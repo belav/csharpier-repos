@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.Text.Json
 {
-    public sealed partial class JsonDocument
+    partial public sealed class JsonDocument
     {
         // The database for the parsed structure of a JSON document.
         //

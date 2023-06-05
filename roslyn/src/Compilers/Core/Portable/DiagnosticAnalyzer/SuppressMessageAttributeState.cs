@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class SuppressMessageAttributeState
+    partial internal class SuppressMessageAttributeState
     {
         private static readonly SmallDictionary<string, TargetScope> s_suppressMessageScopeTypes =
             new SmallDictionary<string, TargetScope>(StringComparer.OrdinalIgnoreCase)

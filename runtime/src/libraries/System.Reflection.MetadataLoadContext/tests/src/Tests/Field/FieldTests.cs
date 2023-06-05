@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class FieldTests
+    partial public static class FieldTests
     {
         [Fact]
         public static unsafe void TestFields1()

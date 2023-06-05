@@ -8,8 +8,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Text;
 
+ref partial
 // Copied from https://github.com/dotnet/runtime/blob/a9c5eadd951dcba73167f72cc624eb790573663a/src/libraries/Common/src/System/Text/ValueStringBuilder.cs
-internal ref partial struct ValueStringBuilder
+internal struct ValueStringBuilder
 {
     private char[]? _arrayToReturnToPool;
     private Span<char> _chars;

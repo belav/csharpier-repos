@@ -24,7 +24,7 @@ using RoslynLogger = Microsoft.CodeAnalysis.Internal.Log.Logger;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed partial class RemoteProcessTelemetryService
+    partial internal sealed class RemoteProcessTelemetryService
         : BrokeredServiceBase,
             IRemoteProcessTelemetryService
     {

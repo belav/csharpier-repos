@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace System.Xml
 {
-    internal partial class XmlWrappingWriter : XmlWriter
+    partial internal class XmlWrappingWriter : XmlWriter
     {
         //
         // Fields

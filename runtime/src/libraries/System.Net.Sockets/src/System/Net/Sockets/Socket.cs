@@ -17,8 +17,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Net.Sockets
 {
+    partial
     // The Sockets.Socket class implements the Berkeley sockets interface.
-    public partial class Socket : IDisposable
+    public class Socket : IDisposable
     {
         internal const int DefaultCloseTimeout = -1; // NOTE: changing this default is a breaking change.
 

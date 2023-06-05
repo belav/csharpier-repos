@@ -13,7 +13,7 @@ using Internal.Runtime.CompilerHelpers;
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class Marshal
+    partial public static class Marshal
     {
         internal static int SizeOfHelper(Type t, bool throwIfNotMarshalable)
         {
@@ -251,7 +251,9 @@ namespace System.Runtime.InteropServices
         }
 
         // This method is effectively a no-op for NativeAOT, everything pre-generated.
-        static partial void PrelinkCore(MethodInfo m);
+        partial
+        // This method is effectively a no-op for NativeAOT, everything pre-generated.
+        static void PrelinkCore(MethodInfo m);
 
         internal static Delegate GetDelegateForFunctionPointerInternal(IntPtr ptr, Type t)
         {

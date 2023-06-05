@@ -4,17 +4,17 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Comdlg32
+    partial internal static class Comdlg32
     {
         [LibraryImport(Libraries.Comdlg32, EntryPoint = "PrintDlgW", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool PrintDlg(ref PRINTDLG lppd);
+        partial internal static bool PrintDlg(ref PRINTDLG lppd);
 
         [LibraryImport(Libraries.Comdlg32, EntryPoint = "PrintDlgW", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool PrintDlg(ref PRINTDLGX86 lppd);
+        partial internal static bool PrintDlg(ref PRINTDLGX86 lppd);
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct PRINTDLG

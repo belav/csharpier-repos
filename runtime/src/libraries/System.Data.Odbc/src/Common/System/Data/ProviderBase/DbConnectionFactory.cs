@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace System.Data.ProviderBase
 {
-    internal abstract partial class DbConnectionFactory
+    partial internal abstract class DbConnectionFactory
     {
         internal bool TryGetConnection(
             DbConnection owningConnection,

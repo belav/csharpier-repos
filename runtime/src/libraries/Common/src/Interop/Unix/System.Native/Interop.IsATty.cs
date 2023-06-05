@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
@@ -15,6 +15,6 @@ internal static partial class Interop
             SetLastError = true
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool IsATty(SafeFileHandle fd);
+        partial internal static bool IsATty(SafeFileHandle fd);
     }
 }

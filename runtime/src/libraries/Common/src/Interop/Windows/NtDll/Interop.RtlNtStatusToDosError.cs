@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NtDll
+    partial internal static class NtDll
     {
         // https://msdn.microsoft.com/en-us/library/windows/desktop/ms680600(v=vs.85).aspx
         [LibraryImport(Libraries.NtDll)]
-        public static partial uint RtlNtStatusToDosError(int Status);
+        partial public static uint RtlNtStatusToDosError(int Status);
     }
 }

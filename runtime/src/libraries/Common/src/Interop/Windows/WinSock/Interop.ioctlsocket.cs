@@ -5,15 +5,15 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError ioctlsocket(IntPtr handle, int cmd, ref int argp);
+        partial internal static SocketError ioctlsocket(IntPtr handle, int cmd, ref int argp);
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError ioctlsocket(
+        partial internal static SocketError ioctlsocket(
             SafeSocketHandle socketHandle,
             int cmd,
             ref int argp

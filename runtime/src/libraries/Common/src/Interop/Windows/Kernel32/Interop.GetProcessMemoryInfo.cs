@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct PROCESS_MEMORY_COUNTERS
@@ -25,7 +25,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, EntryPoint = "K32GetProcessMemoryInfo")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetProcessMemoryInfo(
+        partial internal static bool GetProcessMemoryInfo(
             IntPtr Process,
             ref PROCESS_MEMORY_COUNTERS ppsmemCounters,
             uint cb

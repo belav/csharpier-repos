@@ -13,10 +13,10 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public abstract partial class RSA : AsymmetricAlgorithm
+    partial public abstract class RSA : AsymmetricAlgorithm
     {
         [UnsupportedOSPlatform("browser")]
-        public static new partial RSA Create();
+        partial public static new RSA Create();
 
         [Obsolete(
             Obsoletions.CryptoStringFactoryMessage,

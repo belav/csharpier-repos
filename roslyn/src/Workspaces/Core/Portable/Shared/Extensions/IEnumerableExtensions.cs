@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class IEnumerableExtensions
+    partial internal static class IEnumerableExtensions
     {
         public static Task<IEnumerable<S>> SelectManyAsync<T, S>(
             this IEnumerable<T> sequence,

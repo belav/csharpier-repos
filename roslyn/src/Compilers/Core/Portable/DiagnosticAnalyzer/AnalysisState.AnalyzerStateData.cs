@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class AnalysisState
+    partial internal class AnalysisState
     {
         /// <summary>
         /// Stores the partial analysis state for a specific event/symbol/tree for a specific analyzer.

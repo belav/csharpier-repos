@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Linq.Parallel.Tests
 {
-    public static partial class ParallelQueryCombinationTests
+    partial public static class ParallelQueryCombinationTests
     {
         [Theory]
         [MemberData(nameof(UnaryFailingOperators))]

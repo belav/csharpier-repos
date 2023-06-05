@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class ArrayTests
+    partial public static class ArrayTests
     {
         [Fact]
         public static void WritePrimitiveArray()

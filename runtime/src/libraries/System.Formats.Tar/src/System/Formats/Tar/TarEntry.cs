@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace System.Formats.Tar
 {
+    partial
     /// <summary>
     /// Abstract class that represents a tar entry from an archive.
     /// </summary>
     /// <remarks>All the properties exposed by this class are supported by the <see cref="TarEntryFormat.V7"/>, <see cref="TarEntryFormat.Ustar"/>, <see cref="TarEntryFormat.Pax"/> and <see cref="TarEntryFormat.Gnu"/> formats.</remarks>
-    public abstract partial class TarEntry
+    public abstract class TarEntry
     {
         internal TarHeader _header;
 

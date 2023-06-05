@@ -11,7 +11,7 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    public partial class CryptoConfig
+    partial public class CryptoConfig
     {
         [UnsupportedOSPlatform("browser")]
         public static void AddAlgorithm(Type algorithm, params string[] names) =>

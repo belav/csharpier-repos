@@ -3,7 +3,7 @@
 
 namespace System.IO
 {
-    public partial class FileLoadException
+    partial public class FileLoadException
     {
 #pragma warning disable IDE0060
         internal static string FormatFileLoadExceptionMessage(string? fileName, int hResult)

@@ -12,8 +12,9 @@ using Microsoft.JSInterop.Infrastructure;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
+partial
 #pragma warning disable CA1852 // Seal internal types
-internal partial class CircuitHost : IAsyncDisposable
+internal class CircuitHost : IAsyncDisposable
 #pragma warning restore CA1852 // Seal internal types
 {
     private readonly AsyncServiceScope _scope;
@@ -826,7 +827,7 @@ internal partial class CircuitHost : IAsyncDisposable
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         // 100s used for lifecycle stuff
         // 200s used for interactive stuff
@@ -837,7 +838,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Circuit initialization started.",
             EventName = "InitializationStarted"
         )]
-        public static partial void InitializationStarted(ILogger logger);
+        partial public static void InitializationStarted(ILogger logger);
 
         [LoggerMessage(
             101,
@@ -845,7 +846,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Circuit initialization succeeded.",
             EventName = "InitializationSucceeded"
         )]
-        public static partial void InitializationSucceeded(ILogger logger);
+        partial public static void InitializationSucceeded(ILogger logger);
 
         [LoggerMessage(
             102,
@@ -853,7 +854,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Circuit initialization failed.",
             EventName = "InitializationFailed"
         )]
-        public static partial void InitializationFailed(ILogger logger, Exception exception);
+        partial public static void InitializationFailed(ILogger logger, Exception exception);
 
         [LoggerMessage(
             103,
@@ -861,7 +862,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Disposing circuit '{CircuitId}' started.",
             EventName = "DisposeStarted"
         )]
-        public static partial void DisposeStarted(ILogger logger, CircuitId circuitId);
+        partial public static void DisposeStarted(ILogger logger, CircuitId circuitId);
 
         [LoggerMessage(
             104,
@@ -869,7 +870,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Disposing circuit '{CircuitId}' succeeded.",
             EventName = "DisposeSucceeded"
         )]
-        public static partial void DisposeSucceeded(ILogger logger, CircuitId circuitId);
+        partial public static void DisposeSucceeded(ILogger logger, CircuitId circuitId);
 
         [LoggerMessage(
             105,
@@ -877,7 +878,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Disposing circuit '{CircuitId}' failed.",
             EventName = "DisposeFailed"
         )]
-        public static partial void DisposeFailed(
+        partial public static void DisposeFailed(
             ILogger logger,
             CircuitId circuitId,
             Exception exception
@@ -889,7 +890,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Opening circuit with id '{CircuitId}'.",
             EventName = "OnCircuitOpened"
         )]
-        public static partial void CircuitOpened(ILogger logger, CircuitId circuitId);
+        partial public static void CircuitOpened(ILogger logger, CircuitId circuitId);
 
         [LoggerMessage(
             107,
@@ -897,7 +898,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Circuit id '{CircuitId}' connected using connection '{ConnectionId}'.",
             EventName = "OnConnectionUp"
         )]
-        public static partial void ConnectionUp(
+        partial public static void ConnectionUp(
             ILogger logger,
             CircuitId circuitId,
             string connectionId
@@ -909,7 +910,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Circuit id '{CircuitId}' disconnected from connection '{ConnectionId}'.",
             EventName = "OnConnectionDown"
         )]
-        public static partial void ConnectionDown(
+        partial public static void ConnectionDown(
             ILogger logger,
             CircuitId circuitId,
             string connectionId
@@ -921,7 +922,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Closing circuit with id '{CircuitId}'.",
             EventName = "OnCircuitClosed"
         )]
-        public static partial void CircuitClosed(ILogger logger, CircuitId circuitId);
+        partial public static void CircuitClosed(ILogger logger, CircuitId circuitId);
 
         [LoggerMessage(
             110,
@@ -929,7 +930,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Unhandled error invoking circuit handler type {handlerType}.{handlerMethod}: {Message}",
             EventName = "CircuitHandlerFailed"
         )]
-        private static partial void CircuitHandlerFailed(
+        partial private static void CircuitHandlerFailed(
             ILogger logger,
             Type handlerType,
             string handlerMethod,
@@ -959,7 +960,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Unhandled exception in circuit '{CircuitId}'.",
             EventName = "CircuitUnhandledException"
         )]
-        public static partial void CircuitUnhandledException(
+        partial public static void CircuitUnhandledException(
             ILogger logger,
             CircuitId circuitId,
             Exception exception
@@ -971,7 +972,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "About to notify client of an error in circuit '{CircuitId}'.",
             EventName = "CircuitTransmittingClientError"
         )]
-        public static partial void CircuitTransmittingClientError(
+        partial public static void CircuitTransmittingClientError(
             ILogger logger,
             CircuitId circuitId
         );
@@ -982,7 +983,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Successfully transmitted error to client in circuit '{CircuitId}'.",
             EventName = "CircuitTransmittedClientErrorSuccess"
         )]
-        public static partial void CircuitTransmittedClientErrorSuccess(
+        partial public static void CircuitTransmittedClientErrorSuccess(
             ILogger logger,
             CircuitId circuitId
         );
@@ -993,7 +994,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Failed to transmit exception to client in circuit '{CircuitId}'.",
             EventName = "CircuitTransmitErrorFailed"
         )]
-        public static partial void CircuitTransmitErrorFailed(
+        partial public static void CircuitTransmitErrorFailed(
             ILogger logger,
             CircuitId circuitId,
             Exception exception
@@ -1005,7 +1006,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "An exception occurred on the circuit host '{CircuitId}' while the client is disconnected.",
             EventName = "UnhandledExceptionClientDisconnected"
         )]
-        public static partial void UnhandledExceptionClientDisconnected(
+        partial public static void UnhandledExceptionClientDisconnected(
             ILogger logger,
             CircuitId circuitId,
             Exception exception
@@ -1017,7 +1018,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Failed to parse the event data when trying to dispatch an event.",
             EventName = "DispatchEventFailedToParseEventData"
         )]
-        public static partial void DispatchEventFailedToParseEventData(
+        partial public static void DispatchEventFailedToParseEventData(
             ILogger logger,
             Exception ex
         );
@@ -1028,7 +1029,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "There was an error dispatching the event '{EventHandlerId}' to the application.",
             EventName = "DispatchEventFailedToDispatchEvent"
         )]
-        public static partial void DispatchEventFailedToDispatchEvent(
+        partial public static void DispatchEventFailedToDispatchEvent(
             ILogger logger,
             string eventHandlerId,
             Exception ex
@@ -1040,7 +1041,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Invoking instance method '{MethodIdentifier}' on instance '{DotNetObjectId}' with callback id '{CallId}'.",
             EventName = "BeginInvokeDotNet"
         )]
-        private static partial void BeginInvokeDotNet(
+        partial private static void BeginInvokeDotNet(
             ILogger logger,
             string methodIdentifier,
             long dotNetObjectId,
@@ -1053,7 +1054,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Failed to invoke instance method '{MethodIdentifier}' on instance '{DotNetObjectId}' with callback id '{CallId}'.",
             EventName = "BeginInvokeDotNetFailed"
         )]
-        private static partial void BeginInvokeDotNetFailed(
+        partial private static void BeginInvokeDotNetFailed(
             ILogger logger,
             string methodIdentifier,
             long dotNetObjectId,
@@ -1067,7 +1068,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "There was an error invoking 'Microsoft.JSInterop.DotNetDispatcher.EndInvoke'.",
             EventName = "EndInvokeDispatchException"
         )]
-        public static partial void EndInvokeDispatchException(ILogger logger, Exception ex);
+        partial public static void EndInvokeDispatchException(ILogger logger, Exception ex);
 
         [LoggerMessage(
             205,
@@ -1075,7 +1076,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "The JS interop call with callback id '{AsyncCall}' with arguments {Arguments}.",
             EventName = "EndInvokeJSFailed"
         )]
-        public static partial void EndInvokeJSFailed(
+        partial public static void EndInvokeJSFailed(
             ILogger logger,
             long asyncCall,
             string arguments
@@ -1087,7 +1088,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "The JS interop call with callback id '{AsyncCall}' succeeded.",
             EventName = "EndInvokeJSSucceeded"
         )]
-        public static partial void EndInvokeJSSucceeded(ILogger logger, long asyncCall);
+        partial public static void EndInvokeJSSucceeded(ILogger logger, long asyncCall);
 
         [LoggerMessage(
             208,
@@ -1095,7 +1096,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Location changing to {URI} in circuit '{CircuitId}'.",
             EventName = "LocationChange"
         )]
-        public static partial void LocationChange(ILogger logger, string uri, CircuitId circuitId);
+        partial public static void LocationChange(ILogger logger, string uri, CircuitId circuitId);
 
         [LoggerMessage(
             209,
@@ -1103,7 +1104,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Location change to '{URI}' in circuit '{CircuitId}' succeeded.",
             EventName = "LocationChangeSucceeded"
         )]
-        public static partial void LocationChangeSucceeded(
+        partial public static void LocationChangeSucceeded(
             ILogger logger,
             string uri,
             CircuitId circuitId
@@ -1115,7 +1116,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Location change to '{URI}' in circuit '{CircuitId}' failed.",
             EventName = "LocationChangeFailed"
         )]
-        public static partial void LocationChangeFailed(
+        partial public static void LocationChangeFailed(
             ILogger logger,
             string uri,
             CircuitId circuitId,
@@ -1128,7 +1129,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Location is about to change to {URI} in ciruit '{CircuitId}'.",
             EventName = "LocationChanging"
         )]
-        public static partial void LocationChanging(
+        partial public static void LocationChanging(
             ILogger logger,
             string uri,
             CircuitId circuitId
@@ -1140,7 +1141,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Failed to complete render batch '{RenderId}' in circuit host '{CircuitId}'.",
             EventName = "OnRenderCompletedFailed"
         )]
-        public static partial void OnRenderCompletedFailed(
+        partial public static void OnRenderCompletedFailed(
             ILogger logger,
             long renderId,
             CircuitId circuitId,
@@ -1153,7 +1154,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "The ReceiveByteArray call with id '{id}' succeeded.",
             EventName = "ReceiveByteArraySucceeded"
         )]
-        public static partial void ReceiveByteArraySuccess(ILogger logger, long id);
+        partial public static void ReceiveByteArraySuccess(ILogger logger, long id);
 
         [LoggerMessage(
             214,
@@ -1161,7 +1162,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "The ReceiveByteArray call with id '{id}' failed.",
             EventName = "ReceiveByteArrayException"
         )]
-        public static partial void ReceiveByteArrayException(ILogger logger, long id, Exception ex);
+        partial public static void ReceiveByteArrayException(ILogger logger, long id, Exception ex);
 
         [LoggerMessage(
             215,
@@ -1169,7 +1170,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "The ReceiveJSDataChunk call with stream id '{streamId}' failed.",
             EventName = "ReceiveJSDataChunkException"
         )]
-        public static partial void ReceiveJSDataChunkException(
+        partial public static void ReceiveJSDataChunkException(
             ILogger logger,
             long streamId,
             Exception ex
@@ -1181,7 +1182,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "The SendDotNetStreamAsync call with id '{id}' failed.",
             EventName = "SendDotNetStreamException"
         )]
-        public static partial void SendDotNetStreamException(ILogger logger, long id, Exception ex);
+        partial public static void SendDotNetStreamException(ILogger logger, long id, Exception ex);
 
         [LoggerMessage(
             217,
@@ -1189,7 +1190,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Invoking static method with identifier '{MethodIdentifier}' on assembly '{Assembly}' with callback id '{CallId}'.",
             EventName = "BeginInvokeDotNetStatic"
         )]
-        private static partial void BeginInvokeDotNetStatic(
+        partial private static void BeginInvokeDotNetStatic(
             ILogger logger,
             string methodIdentifier,
             string assembly,
@@ -1220,7 +1221,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Failed to invoke static method with identifier '{MethodIdentifier}' on assembly '{Assembly}' with callback id '{CallId}'.",
             EventName = "BeginInvokeDotNetFailed"
         )]
-        private static partial void BeginInvokeDotNetStaticFailed(
+        partial private static void BeginInvokeDotNetStaticFailed(
             ILogger logger,
             string methodIdentifier,
             string assembly,
@@ -1265,7 +1266,7 @@ internal partial class CircuitHost : IAsyncDisposable
             "Location change to '{URI}' in circuit '{CircuitId}' failed.",
             EventName = "LocationChangeFailed"
         )]
-        public static partial void LocationChangeFailedInCircuit(
+        partial public static void LocationChangeFailedInCircuit(
             ILogger logger,
             string uri,
             CircuitId circuitId,

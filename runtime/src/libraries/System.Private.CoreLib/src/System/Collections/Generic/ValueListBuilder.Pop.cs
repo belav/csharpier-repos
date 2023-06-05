@@ -5,10 +5,11 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Generic
 {
+    ref partial
     /// <summary>
     /// These public methods are required by RegexWriter.
     /// </summary>
-    internal ref partial struct ValueListBuilder<T>
+    internal struct ValueListBuilder<T>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public T Pop()

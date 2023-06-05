@@ -3,13 +3,14 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
+partial
 /* https://tools.ietf.org/html/rfc7540#section-6.10
     +---------------------------------------------------------------+
     |                   Header Block Fragment (*)                 ...
     +---------------------------------------------------------------+
 */
 #pragma warning disable CA1852 // Seal internal types
-internal partial class Http2Frame
+internal class Http2Frame
 #pragma warning restore CA1852 // Seal internal types
 {
     public Http2ContinuationFrameFlags ContinuationFlags

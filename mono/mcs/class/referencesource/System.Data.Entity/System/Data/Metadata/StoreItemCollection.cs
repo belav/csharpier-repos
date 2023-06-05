@@ -21,7 +21,7 @@ namespace System.Data.Metadata.Edm
     /// Class for representing a collection of items in Store space.
     /// </summary>
     [CLSCompliant(false)]
-    public sealed partial class StoreItemCollection : ItemCollection
+    partial public sealed class StoreItemCollection : ItemCollection
     {
         #region Fields
 

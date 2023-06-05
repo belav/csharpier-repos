@@ -53,16 +53,16 @@ namespace Mono.Btls
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_key_new();
+        static extern IntPtr mono_btls_key_new();
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_key_free(IntPtr handle);
+        static extern void mono_btls_key_free(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_key_up_ref(IntPtr handle);
+        static extern IntPtr mono_btls_key_up_ref(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_key_get_bytes(
+        static extern int mono_btls_key_get_bytes(
             IntPtr handle,
             out IntPtr data,
             out int size,
@@ -70,19 +70,19 @@ namespace Mono.Btls
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_key_get_bits(IntPtr handle);
+        static extern int mono_btls_key_get_bits(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_key_is_rsa(IntPtr handle);
+        static extern int mono_btls_key_is_rsa(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_key_assign_rsa_private_key(
+        static extern int mono_btls_key_assign_rsa_private_key(
             IntPtr handle,
             byte[] der,
             int der_length
         );
 
-        new internal BoringKeyHandle Handle
+        internal new BoringKeyHandle Handle
         {
             get { return (BoringKeyHandle)base.Handle; }
         }

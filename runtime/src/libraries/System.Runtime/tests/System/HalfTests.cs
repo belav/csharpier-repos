@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class HalfTests
+    partial public class HalfTests
     {
         // binary32 (float) has a machine epsilon of 2^-10 (approx. 9.77e-04). However, this
         // is slightly too accurate when writing tests meant to run against libm implementations

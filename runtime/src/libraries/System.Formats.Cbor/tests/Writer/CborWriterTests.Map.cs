@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Formats.Cbor.Tests
 {
-    public partial class CborWriterTests
+    partial public class CborWriterTests
     {
         // Data points taken from https://tools.ietf.org/html/rfc7049#appendix-A
         // Additional pairs generated using http://cbor.me/

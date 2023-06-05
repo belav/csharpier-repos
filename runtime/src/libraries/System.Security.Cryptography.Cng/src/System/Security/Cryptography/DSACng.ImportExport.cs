@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class DSACng : DSA
+    partial public sealed class DSACng : DSA
     {
         private byte[] ExportKeyBlob(bool includePrivateParameters)
         {

@@ -12,7 +12,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    internal static partial class TestUtils
+    partial internal static class TestUtils
     {
         public static int GetMark(this MemberInfo m)
         {

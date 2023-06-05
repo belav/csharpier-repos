@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
-    public abstract partial class LinkedList_Generic_Tests<T> : ICollection_Generic_Tests<T>
+    partial public abstract class LinkedList_Generic_Tests<T> : ICollection_Generic_Tests<T>
     {
         [Fact]
         public static void CtorTest()

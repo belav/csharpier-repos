@@ -5,7 +5,7 @@ using System.Net.Sockets;
 
 namespace System.Net
 {
-    internal static partial class SocketProtocolSupportPal
+    partial internal static class SocketProtocolSupportPal
     {
         private const string DisableIPv6AppCtxSwitch = "System.Net.DisableIPv6";
         private const string DisableIPv6EnvironmentVariable = "DOTNET_SYSTEM_NET_DISABLEIPV6";

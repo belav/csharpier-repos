@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class SynthesizedStringSwitchHashMethod : SynthesizedGlobalMethodSymbol
+    partial internal sealed class SynthesizedStringSwitchHashMethod : SynthesizedGlobalMethodSymbol
     {
         /// <summary>
         /// Compute the hashcode of a sub string using FNV-1a
@@ -161,11 +161,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
+    partial
     /// <summary>
     /// The synthesized method for computing the hash from a ReadOnlySpan&lt;char&gt; or Span&lt;char&gt;.
     /// Matches the corresponding method for string <see cref="SynthesizedStringSwitchHashMethod"/>.
     /// </summary>
-    internal sealed partial class SynthesizedSpanSwitchHashMethod : SynthesizedGlobalMethodSymbol
+    internal sealed class SynthesizedSpanSwitchHashMethod : SynthesizedGlobalMethodSymbol
     {
         /// <remarks>
         /// This method should be kept consistent with <see cref="SynthesizedStringSwitchHashMethod.ComputeStringHash"/>
@@ -284,7 +285,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal sealed partial class SynthesizedExplicitImplementationForwardingMethod
+    partial internal sealed class SynthesizedExplicitImplementationForwardingMethod
         : SynthesizedImplementationMethod
     {
         internal override bool SynthesizesLoweredBoundBody
@@ -339,7 +340,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal sealed partial class SynthesizedSealedPropertyAccessor
+    partial internal sealed class SynthesizedSealedPropertyAccessor
         : SynthesizedInstanceMethodSymbol
     {
         internal override bool SynthesizesLoweredBoundBody
@@ -390,9 +391,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             throw ExceptionUtilities.Unreachable();
     }
 
-    internal abstract partial class MethodToClassRewriter
+    partial internal abstract class MethodToClassRewriter
     {
-        private sealed partial class BaseMethodWrapperSymbol : SynthesizedMethodBaseSymbol
+        partial private sealed class BaseMethodWrapperSymbol : SynthesizedMethodBaseSymbol
         {
             internal sealed override bool GenerateDebugInfo
             {

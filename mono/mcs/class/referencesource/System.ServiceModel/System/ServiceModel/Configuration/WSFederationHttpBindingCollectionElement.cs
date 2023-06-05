@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    public partial class WSFederationHttpBindingCollectionElement
+    partial public class WSFederationHttpBindingCollectionElement
         : StandardBindingCollectionElement<WSFederationHttpBinding, WSFederationHttpBindingElement>
     {
         internal static WSFederationHttpBindingCollectionElement GetBindingCollectionElement()

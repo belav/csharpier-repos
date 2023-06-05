@@ -11,7 +11,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System
 {
-    internal static partial class SpanHelpers // helpers used by Mono
+    partial internal static class SpanHelpers // helpers used by Mono
     {
         [MethodImpl(MethodImplOptions.AggressiveOptimization)]
         internal static unsafe int IndexOfValueType(ref byte searchSpace, byte value, int length)

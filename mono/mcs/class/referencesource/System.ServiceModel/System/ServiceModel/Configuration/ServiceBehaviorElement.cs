@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
     using System.Xml;
 
-    public partial class ServiceBehaviorElement
+    partial public class ServiceBehaviorElement
         : NamedServiceModelExtensionCollectionElement<BehaviorExtensionElement>
     {
         public ServiceBehaviorElement()

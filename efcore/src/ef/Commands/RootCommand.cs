@@ -9,7 +9,7 @@ using static Microsoft.EntityFrameworkCore.Tools.AnsiConstants;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-internal partial class RootCommand : HelpCommandBase
+partial internal class RootCommand : HelpCommandBase
 {
     public override void Configure(CommandLineApplication command)
     {

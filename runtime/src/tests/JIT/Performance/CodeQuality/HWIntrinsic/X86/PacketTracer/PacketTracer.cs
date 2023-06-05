@@ -287,7 +287,7 @@ internal class Packet256Tracer
         return scene.Reflect(things, pos) * TraceRay(new RayPacket256(pos, rds), scene, depth + 1);
     }
 
-    private readonly static Vector256<float> ConstTwo = Vector256.Create(2.0f);
+    private static readonly Vector256<float> ConstTwo = Vector256.Create(2.0f);
 
     private VectorPacket256 GetPoints(Vector256<float> x, Vector256<float> y, Camera camera)
     {

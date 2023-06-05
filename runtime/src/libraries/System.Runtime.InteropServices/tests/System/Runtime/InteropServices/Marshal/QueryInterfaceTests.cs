@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class QueryInterfaceTests
+    partial public class QueryInterfaceTests
     {
         public const int E_NOINTERFACE = unchecked((int)0x80004002);
         public const string IID_IUNKNOWN = "00000000-0000-0000-C000-000000000046";

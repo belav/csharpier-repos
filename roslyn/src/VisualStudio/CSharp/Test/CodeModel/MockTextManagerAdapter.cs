@@ -9,10 +9,11 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
 {
+    partial
     /// <summary>
     /// A test-only implementation of ITextManagerAdapter used for testing CodeModel.
     /// </summary>
-    internal partial class MockTextManagerAdapter : ITextManagerAdapter
+    internal class MockTextManagerAdapter : ITextManagerAdapter
     {
         public EnvDTE.TextPoint CreateTextPoint(FileCodeModel fileCodeModel, VirtualTreePoint point)
         {

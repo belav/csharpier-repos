@@ -12,7 +12,7 @@ namespace ConsoleApplication1
             return GetTaskResult(t);
         }
 
-        async static Task<TResult> GetTaskResult<TResult>(Task<Task<TResult>> task)
+        static async Task<TResult> GetTaskResult<TResult>(Task<Task<TResult>> task)
         {
             return await task.Result;
         }

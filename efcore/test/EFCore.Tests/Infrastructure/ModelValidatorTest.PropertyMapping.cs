@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-public partial class ModelValidatorTest
+partial public class ModelValidatorTest
 {
     [ConditionalFact]
     public virtual void Throws_when_added_property_is_not_of_primitive_type()

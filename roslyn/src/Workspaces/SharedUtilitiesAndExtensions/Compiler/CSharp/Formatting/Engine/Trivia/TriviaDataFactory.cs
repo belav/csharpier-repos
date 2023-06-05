@@ -11,12 +11,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
+    partial
     /// <summary>
     /// trivia factory.
     ///
     /// it will cache some commonly used trivia to reduce memory footprint and heap allocation
     /// </summary>
-    internal partial class TriviaDataFactory : AbstractTriviaDataFactory
+    internal class TriviaDataFactory : AbstractTriviaDataFactory
     {
         public TriviaDataFactory(TreeData treeInfo, SyntaxFormattingOptions options)
             : base(treeInfo, options) { }

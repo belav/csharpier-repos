@@ -17,7 +17,7 @@ using System.Reflection;
 
 namespace JIT.HardwareIntrinsics.X86
 {
-    public static partial class Program
+    partial public static class Program
     {
         private static void MaskLoadInt64()
         {

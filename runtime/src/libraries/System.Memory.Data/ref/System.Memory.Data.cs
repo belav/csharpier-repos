@@ -7,7 +7,7 @@
 namespace System
 {
     [System.Text.Json.Serialization.JsonConverter(typeof(BinaryDataConverter))]
-    public partial class BinaryData
+    partial public class BinaryData
     {
         public BinaryData(byte[] data) { }
 

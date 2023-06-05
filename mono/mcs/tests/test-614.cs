@@ -4,7 +4,7 @@ class C
 {
     public static int value;
 
-    static internal void And()
+    internal static void And()
     {
         if ((false & (value++ == 1)) != (false & (++value == 1)))
             return;
@@ -19,7 +19,7 @@ class C
             return;
     }
 
-    static internal void Or()
+    internal static void Or()
     {
         if ((false | (value++ == 1)) != (false | (++value == 1)))
             return;

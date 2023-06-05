@@ -25,7 +25,7 @@ namespace System.Reflection.Runtime.PropertyInfos
     // The runtime's implementation of PropertyInfo's
     //
     [DebuggerDisplay("{_debugName}")]
-    internal abstract partial class RuntimePropertyInfo : PropertyInfo, ITraceableTypeMember
+    partial internal abstract class RuntimePropertyInfo : PropertyInfo, ITraceableTypeMember
     {
         //
         // propertyHandle - the "tkPropertyDef" that identifies the property.

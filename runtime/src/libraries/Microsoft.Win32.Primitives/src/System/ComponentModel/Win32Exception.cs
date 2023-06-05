@@ -15,7 +15,7 @@ namespace System.ComponentModel
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial class Win32Exception : ExternalException, ISerializable
+    partial public class Win32Exception : ExternalException, ISerializable
     {
         private const int E_FAIL = unchecked((int)0x80004005);
 

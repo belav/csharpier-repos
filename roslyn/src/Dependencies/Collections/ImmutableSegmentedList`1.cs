@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Collections.Internal;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
+    partial
     /// <summary>
     /// Represents a segmented list that is immutable; meaning it cannot be changed once it is created.
     /// </summary>
@@ -68,7 +69,7 @@ namespace Microsoft.CodeAnalysis.Collections
     /// This effectively copies the one field in the struct to a local variable so that it is insulated from other
     /// threads.</para>
     /// </devremarks>
-    internal readonly partial struct ImmutableSegmentedList<T>
+    internal readonly struct ImmutableSegmentedList<T>
         : IImmutableList<T>,
             IReadOnlyList<T>,
             IList<T>,

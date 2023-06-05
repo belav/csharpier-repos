@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.GraphModel;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
-    internal sealed partial class SearchGraphQuery : IGraphQuery
+    partial internal sealed class SearchGraphQuery : IGraphQuery
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IAsynchronousOperationListener _asyncListener;

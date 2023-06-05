@@ -13,7 +13,7 @@ using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
 
 namespace System.Reflection
 {
-    internal sealed partial class RuntimeConstructorInfo : ConstructorInfo, IRuntimeMethodInfo
+    partial internal sealed class RuntimeConstructorInfo : ConstructorInfo, IRuntimeMethodInfo
     {
         #region Private Data Members
         private volatile RuntimeType m_declaringType;

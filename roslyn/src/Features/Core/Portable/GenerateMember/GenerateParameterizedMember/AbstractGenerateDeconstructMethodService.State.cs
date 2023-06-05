@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal partial class AbstractGenerateDeconstructMethodService<
+    partial internal class AbstractGenerateDeconstructMethodService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax,

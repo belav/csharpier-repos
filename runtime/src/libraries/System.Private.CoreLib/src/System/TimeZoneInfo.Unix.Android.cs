@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace System
 {
-    public sealed partial class TimeZoneInfo
+    partial public sealed class TimeZoneInfo
     {
         private const string TimeZoneFileName = "tzdata";
 

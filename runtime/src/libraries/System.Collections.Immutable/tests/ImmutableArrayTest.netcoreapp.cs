@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public partial class ImmutableArrayTest : SimpleElementImmutablesTestBase
+    partial public class ImmutableArrayTest : SimpleElementImmutablesTestBase
     {
         [Fact]
         public void AsSpanRoundTripEmptyArrayTests_RangeInput()

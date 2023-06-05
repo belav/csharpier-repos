@@ -9,7 +9,7 @@ using GenericParameterAttributes = System.Reflection.GenericParameterAttributes;
 
 namespace Internal.TypeSystem.Ecma
 {
-    public sealed partial class EcmaGenericParameter : GenericParameterDesc
+    partial public sealed class EcmaGenericParameter : GenericParameterDesc
     {
         private EcmaModule _module;
         private GenericParameterHandle _handle;

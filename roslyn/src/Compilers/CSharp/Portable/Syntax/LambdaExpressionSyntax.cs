@@ -7,7 +7,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class LambdaExpressionSyntax
+    partial public class LambdaExpressionSyntax
     {
         public new LambdaExpressionSyntax WithBody(CSharpSyntaxNode body) =>
             body is BlockSyntax block

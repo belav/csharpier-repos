@@ -108,7 +108,7 @@ namespace System.Net.Http.Headers
 
         public static class DateTime
         {
-            public new static readonly Func<object, string> ToString = l =>
+            public static new readonly Func<object, string> ToString = l =>
                 ((DateTimeOffset)l).ToString("r", CultureInfo.InvariantCulture);
 
             public static bool TryParse(string input, out DateTimeOffset result)
@@ -174,7 +174,7 @@ namespace System.Net.Http.Headers
 
         public static class MD5
         {
-            public new static readonly Func<object, string> ToString = l =>
+            public static new readonly Func<object, string> ToString = l =>
                 Convert.ToBase64String((byte[])l);
 
             public static bool TryParse(string input, out byte[] result)

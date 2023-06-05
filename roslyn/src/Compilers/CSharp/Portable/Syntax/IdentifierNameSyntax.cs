@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class IdentifierNameSyntax
+    partial public class IdentifierNameSyntax
     {
         internal override string ErrorDisplayName()
         {

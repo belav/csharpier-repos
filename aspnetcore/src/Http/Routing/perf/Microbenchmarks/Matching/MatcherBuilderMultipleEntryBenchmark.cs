@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBenchmarkBase
+partial public class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBenchmarkBase
 {
     private IServiceProvider _services;
     private List<MatcherPolicy> _policies;

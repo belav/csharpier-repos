@@ -5,36 +5,36 @@ using System;
 
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
-    internal static partial class ArgTestExtensions
+    partial internal static class ArgTestExtensions
     {
         [LoggerMessage(EventId = 0, Level = LogLevel.Error, Message = "M1")]
-        public static partial void Method1(ILogger logger);
+        partial public static void Method1(ILogger logger);
 
         [LoggerMessage(EventId = 1, Level = LogLevel.Error, Message = "M2 {p1}")]
-        public static partial void Method2(ILogger logger, string p1);
+        partial public static void Method2(ILogger logger, string p1);
 
         [LoggerMessage(EventId = 2, Level = LogLevel.Error, Message = "M3 {p1} {p2}")]
-        public static partial void Method3(ILogger logger, string p1, int p2);
+        partial public static void Method3(ILogger logger, string p1, int p2);
 
         [LoggerMessage(EventId = 3, Level = LogLevel.Error, Message = "M4")]
-        public static partial void Method4(ILogger logger, InvalidOperationException p1);
+        partial public static void Method4(ILogger logger, InvalidOperationException p1);
 
         [LoggerMessage(EventId = 4, Level = LogLevel.Error, Message = "M5 {p2}")]
-        public static partial void Method5(
+        partial public static void Method5(
             ILogger logger,
             System.InvalidOperationException p1,
             System.InvalidOperationException p2
         );
 
         [LoggerMessage(EventId = 5, Level = LogLevel.Error, Message = "M6 {p2}")]
-        public static partial void Method6(
+        partial public static void Method6(
             ILogger logger,
             System.InvalidOperationException p1,
             int p2
         );
 
         [LoggerMessage(EventId = 6, Level = LogLevel.Error, Message = "M7 {p1}")]
-        public static partial void Method7(
+        partial public static void Method7(
             ILogger logger,
             int p1,
             System.InvalidOperationException p2
@@ -45,7 +45,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
             Level = LogLevel.Error,
             Message = "M8{p1}{p2}{p3}{p4}{p5}{p6}{p7}"
         )]
-        public static partial void Method8(
+        partial public static void Method8(
             ILogger logger,
             int p1,
             int p2,
@@ -61,7 +61,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
             Level = LogLevel.Error,
             Message = "M9 {p1} {p2} {p3} {p4} {p5} {p6} {p7}"
         )]
-        public static partial void Method9(
+        partial public static void Method9(
             ILogger logger,
             int p1,
             int p2,
@@ -73,6 +73,6 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         );
 
         [LoggerMessage(EventId = 9, Level = LogLevel.Error, Message = "M10{p1}")]
-        public static partial void Method10(ILogger logger, int p1);
+        partial public static void Method10(ILogger logger, int p1);
     }
 }

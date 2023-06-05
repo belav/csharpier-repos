@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class NumberHandlingTests
+    partial public static class NumberHandlingTests
     {
         private static readonly JsonSerializerOptions s_optionReadFromStr =
             new JsonSerializerOptions

@@ -10,7 +10,7 @@ using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {
-    public sealed partial class Font
+    partial public sealed class Font
     {
         ///<summary>
         /// Creates the GDI+ native font object.

@@ -3,7 +3,7 @@
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class RuntimeInformation
+    partial public static class RuntimeInformation
     {
         public static string OSDescription => "Browser";
 

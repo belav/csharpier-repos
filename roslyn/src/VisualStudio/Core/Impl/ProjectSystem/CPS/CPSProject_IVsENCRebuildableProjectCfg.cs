@@ -12,7 +12,7 @@ using VsTextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.CPS
 {
-    internal partial class CPSProject
+    partial internal class CPSProject
         : EncInterop.IVsENCRebuildableProjectCfg2,
             EncInterop.IVsENCRebuildableProjectCfg4
     {

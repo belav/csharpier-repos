@@ -2,7 +2,7 @@ namespace SD
 {
     public class Sd
     {
-        static public void F(bool b) { }
+        public static void F(bool b) { }
     }
 }
 

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {
-    public sealed partial class JsonContent : HttpContent
+    partial public sealed class JsonContent : HttpContent
     {
         private readonly JsonSerializerOptions? _jsonSerializerOptions;
         public Type ObjectType { get; }

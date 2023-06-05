@@ -5,10 +5,11 @@ using Xunit;
 
 namespace System.SpanTests
 {
+    partial
     //
     // Tests for Span<T>.ctor(T[], int, int). If the test is not specific to this overload, consider putting it in CtorArray.cs instread.
     //
-    public static partial class ReadOnlySpanTests
+    public static class ReadOnlySpanTests
     {
         [Fact]
         public static void CtorArrayIntInt1()

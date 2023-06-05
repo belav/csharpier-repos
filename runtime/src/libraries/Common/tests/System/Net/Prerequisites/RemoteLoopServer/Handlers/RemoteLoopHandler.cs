@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace RemoteLoopServer
 {
-    public partial class RemoteLoopHandler
+    partial public class RemoteLoopHandler
     {
         public static async Task InvokeAsync(HttpContext context, ILogger logger)
         {

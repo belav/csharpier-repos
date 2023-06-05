@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
-public partial class CancelKeyPressTests
+partial public class CancelKeyPressTests
 {
     [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
     [InlineData(false)]
@@ -139,7 +139,7 @@ public partial class CancelKeyPressTests
             .Dispose();
     }
 
-    private unsafe static bool IsSignalIgnored(int signal)
+    private static unsafe bool IsSignalIgnored(int signal)
     {
         struct_sigaction current;
         if (sigaction(signal, null, &current) == 0)
@@ -153,10 +153,10 @@ public partial class CancelKeyPressTests
     }
 
     [LibraryImport("libc", SetLastError = true)]
-    private static partial int kill(int pid, int sig);
+    partial private static int kill(int pid, int sig);
 
     [LibraryImport("libc", SetLastError = true)]
-    private static unsafe partial int sigaction(
+    partial private static unsafe int sigaction(
         int signum,
         struct_sigaction* act,
         struct_sigaction* oldact
@@ -164,11 +164,11 @@ public partial class CancelKeyPressTests
 
     private const int SIGINT = 2;
     private const int SIGQUIT = 3;
-    private unsafe static void* SIG_IGN => (void*)1;
+    private static unsafe void* SIG_IGN => (void*)1;
 
     private unsafe struct struct_sigaction
     {
         public void* handler;
-        private fixed long __pad[128]; // ensure this struct is larger than native 'struct sigaction'
+        fixed private long __pad[128]; // ensure this struct is larger than native 'struct sigaction'
     }
 }

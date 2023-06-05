@@ -7,7 +7,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace Internal.TypeSystem
 {
-    public sealed partial class MethodForInstantiatedType : MethodDesc
+    partial public sealed class MethodForInstantiatedType : MethodDesc
     {
         public override MethodNameAndSignature NameAndSignature
         {

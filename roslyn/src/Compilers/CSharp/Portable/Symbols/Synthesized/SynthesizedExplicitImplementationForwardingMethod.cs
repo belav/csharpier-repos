@@ -6,6 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// When C# interface implementation differs from CLR interface implementation,
     /// we insert a synthesized explicit interface implementation that delegates
@@ -20,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     ///    non-source method, we introduce an explicit implementation that delegates
     ///    to it instead.
     /// </summary>
-    internal sealed partial class SynthesizedExplicitImplementationForwardingMethod
+    internal sealed class SynthesizedExplicitImplementationForwardingMethod
         : SynthesizedImplementationMethod
     {
         private readonly MethodSymbol _implementingMethod;

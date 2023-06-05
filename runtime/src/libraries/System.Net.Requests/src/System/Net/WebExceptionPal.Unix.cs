@@ -5,7 +5,7 @@ using System.Net.Http;
 
 namespace System.Net
 {
-    public partial class WebException : InvalidOperationException
+    partial public class WebException : InvalidOperationException
     {
         internal static WebExceptionStatus GetStatusFromException(HttpRequestException ex)
         {

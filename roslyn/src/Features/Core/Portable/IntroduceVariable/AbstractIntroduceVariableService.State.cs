@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<
+    partial internal class AbstractIntroduceVariableService<
         TService,
         TExpressionSyntax,
         TTypeSyntax,
@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
         TNameSyntax
     >
     {
-        private sealed partial class State
+        partial private sealed class State
         {
             public SemanticDocument Document { get; }
             public CodeCleanupOptions Options { get; }

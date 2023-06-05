@@ -22,7 +22,7 @@ namespace System.Data.OleDb
         )
             : base(dataRow, command, statementType, tableMapping) { }
 
-        new public OleDbCommand Command
+        public new OleDbCommand Command
         {
             get { return (OleDbCommand)base.Command; }
         }

@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace System.Threading
 {
-    internal sealed partial class ThreadPoolWorkQueue
+    partial internal sealed class ThreadPoolWorkQueue
     {
         internal static class WorkStealingQueueList
         {
@@ -1412,7 +1412,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class ThreadPool
+    partial public static class ThreadPool
     {
         internal const string WorkerThreadName = ".NET TP Worker";
 

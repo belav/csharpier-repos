@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.IO.Compression
 {
-    internal static partial class ZLibNative
+    partial internal static class ZLibNative
     {
         /// <summary>
         /// ZLib stream descriptor data structure

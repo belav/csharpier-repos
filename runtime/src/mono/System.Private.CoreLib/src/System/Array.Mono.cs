@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public partial class Array
+    partial public class Array
     {
         [StructLayout(LayoutKind.Sequential)]
         internal sealed class RawData

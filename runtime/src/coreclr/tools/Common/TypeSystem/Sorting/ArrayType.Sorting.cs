@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class ArrayType
+    public class ArrayType
     {
         protected internal override int ClassCode => -1274559616;
 
@@ -19,7 +20,7 @@ namespace Internal.TypeSystem
         }
     }
 
-    public partial class ArrayMethod
+    partial public class ArrayMethod
     {
         protected internal override int ClassCode => 487354154;
 

@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
-    internal sealed partial class CodeStyleOption2<T>
+    partial internal sealed class CodeStyleOption2<T>
     {
         [return: NotNullIfNotNull(nameof(option))]
         public static explicit operator CodeStyleOption<T>?(CodeStyleOption2<T>? option)

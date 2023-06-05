@@ -12,7 +12,7 @@ using Xunit;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonTestHelper
+    partial internal static class JsonTestHelper
     {
         public static void AssertJsonEqual(string expected, string actual)
         {

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text
 {
-    public static partial class Ascii
+    partial public static class Ascii
     {
         /// <summary>
         /// Returns the index of the first non-ASCII byte in a buffer.

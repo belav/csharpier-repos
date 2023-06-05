@@ -248,7 +248,7 @@ internal readonly struct AnalyzerOptionsProvider
     internal IdeAnalyzerOptions GetFallbackOptions() => _fallbackOptions;
 }
 
-internal static partial class AnalyzerOptionsProviders
+partial internal static class AnalyzerOptionsProviders
 {
     public static IdeAnalyzerOptions GetIdeOptions(this AnalyzerOptions options)
 #if CODE_STYLE

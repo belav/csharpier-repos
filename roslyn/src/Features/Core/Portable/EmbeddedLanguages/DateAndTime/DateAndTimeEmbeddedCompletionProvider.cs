@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
 {
-    internal sealed partial class DateAndTimeEmbeddedCompletionProvider
+    partial internal sealed class DateAndTimeEmbeddedCompletionProvider
         : EmbeddedLanguageCompletionProvider
     {
         private const string StartKey = nameof(StartKey);

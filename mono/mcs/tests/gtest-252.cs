@@ -2,7 +2,7 @@ using System;
 
 public static class EqualityComparer<T>
 {
-    readonly static Type sequencedequalityComparer = typeof(SequencedEqualityComparer<,>);
+    static readonly Type sequencedequalityComparer = typeof(SequencedEqualityComparer<,>);
 
     public static void Test() { }
 }

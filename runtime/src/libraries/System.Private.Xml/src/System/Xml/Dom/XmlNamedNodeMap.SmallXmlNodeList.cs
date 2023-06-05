@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Xml
 {
-    public partial class XmlNamedNodeMap
+    partial public class XmlNamedNodeMap
     {
         // Optimized to minimize space in the zero or one element cases.
         internal struct SmallXmlNodeList

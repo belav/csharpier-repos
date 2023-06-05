@@ -5,7 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace System.Reflection.Metadata
 {
-    public partial class ImageFormatLimitationException : Exception
+    partial public class ImageFormatLimitationException : Exception
     {
         public ImageFormatLimitationException()
             : base() { }

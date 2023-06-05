@@ -17,7 +17,7 @@ namespace System.Runtime.Serialization.Configuration
             return string.Concat(ConfigurationStrings.SectionGroupName, "/", sectionName);
         }
 
-        static internal string DataContractSerializerSectionPath
+        internal static string DataContractSerializerSectionPath
         {
             get
             {
@@ -27,7 +27,7 @@ namespace System.Runtime.Serialization.Configuration
             }
         }
 
-        static internal string NetDataContractSerializerSectionPath
+        internal static string NetDataContractSerializerSectionPath
         {
             get
             {

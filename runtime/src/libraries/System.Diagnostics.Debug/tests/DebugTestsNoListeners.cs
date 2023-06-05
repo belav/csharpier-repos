@@ -9,7 +9,7 @@ namespace System.Diagnostics.Tests
     // These tests test the static Debug class. They cannot be run in parallel
     // DebugTestsNoListeners: tests Debug behavior before Debug is set with Trace Listeners.
     [Collection("System.Diagnostics.Debug")]
-    public partial class DebugTestsNoListeners : DebugTests
+    partial public class DebugTestsNoListeners : DebugTests
     {
         protected override bool DebugUsesTraceListeners
         {

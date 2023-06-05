@@ -9,9 +9,9 @@ using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class MiscFunctionalTests : TestModule
+    partial public class MiscFunctionalTests : TestModule
     {
-        public partial class MiscTests : XLinqTestCase
+        partial public class MiscTests : XLinqTestCase
         {
             public enum GetNameType
             {
@@ -21,11 +21,12 @@ namespace CoreXml.Test.XLinq
                 XNamespacePlusOperator
             }
 
+            partial
             //[TestCase(Name = "XName API - expanded name", Param = GetNameType.ExpandedName)]
             //[TestCase(Name = "XName API - expanded name (From string)", Param = GetNameType.FromString)]
             //[TestCase(Name = "XName API - two param Get", Param = GetNameType.TwoParamGet)]
             //[TestCase(Name = "XName API - XNamespace + string", Param = GetNameType.XNamespacePlusOperator)]
-            public partial class XNameAPI : XLinqTestCase
+            public class XNameAPI : XLinqTestCase
             {
                 //[Variation(Priority = 0, Desc = "XName.Get: No Namespace")]
                 public void Variation1()

@@ -10,7 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class ChainPal : IDisposable, IChainPal
+    partial internal sealed class ChainPal : IDisposable, IChainPal
     {
         private SafeX509ChainHandle _chain;
 

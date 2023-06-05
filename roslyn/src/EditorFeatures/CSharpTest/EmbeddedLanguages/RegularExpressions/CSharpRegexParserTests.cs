@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
     using RegexTrivia = EmbeddedSyntaxTrivia<RegexKind>;
 
-    public partial class CSharpRegexParserTests
+    partial public class CSharpRegexParserTests
     {
         private readonly IVirtualCharService _service = CSharpVirtualCharService.Instance;
         private const string _statmentPrefix = "var v = ";

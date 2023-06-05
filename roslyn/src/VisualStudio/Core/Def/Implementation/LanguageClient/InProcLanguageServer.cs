@@ -31,11 +31,12 @@ using VSShell = Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 {
+    partial
     /// <summary>
     /// Defines the language server to be hooked up to an <see cref="ILanguageClient"/> using StreamJsonRpc.  This runs
     /// in proc as not all features provided by this server are available out of proc (e.g. some diagnostics).
     /// </summary>
-    internal partial class InProcLanguageServer : IAsyncDisposable
+    internal class InProcLanguageServer : IAsyncDisposable
     {
         /// <summary>
         /// A unique, always increasing, ID we use to identify this server in our loghub logs.  Needed so that if our

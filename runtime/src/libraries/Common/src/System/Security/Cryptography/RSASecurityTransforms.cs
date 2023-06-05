@@ -12,9 +12,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class RSAImplementation
+    partial internal static class RSAImplementation
     {
-        public sealed partial class RSASecurityTransforms : RSA, IRuntimeAlgorithm
+        partial public sealed class RSASecurityTransforms : RSA, IRuntimeAlgorithm
         {
             private SecKeyPair? _keys;
 

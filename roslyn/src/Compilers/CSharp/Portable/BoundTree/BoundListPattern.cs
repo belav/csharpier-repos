@@ -6,9 +6,9 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundListPattern
+    partial internal class BoundListPattern
     {
-        private partial void Validate()
+        partial private void Validate()
         {
             Debug.Assert(LengthAccess is null or BoundPropertyAccess or BoundBadExpression);
             Debug.Assert(

@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Exten
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.CPS
 {
-    internal sealed partial class CPSProject
+    partial internal sealed class CPSProject
     {
         public EnvDTE.CodeModel GetCodeModel(EnvDTE.Project parent) =>
             _projectCodeModel.GetOrCreateRootCodeModel(parent);

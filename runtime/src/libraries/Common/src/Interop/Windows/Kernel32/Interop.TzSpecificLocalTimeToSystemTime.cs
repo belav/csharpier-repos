@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial Interop.BOOL TzSpecificLocalTimeToSystemTime(
+        partial internal static unsafe Interop.BOOL TzSpecificLocalTimeToSystemTime(
             IntPtr lpTimeZoneInformation,
             Interop.Kernel32.SYSTEMTIME* lpLocalTime,
             Interop.Kernel32.SYSTEMTIME* lpUniversalTime

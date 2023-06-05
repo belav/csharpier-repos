@@ -6,14 +6,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NtDll
+    partial internal static class NtDll
     {
         // https://msdn.microsoft.com/en-us/library/bb432380.aspx
         // https://msdn.microsoft.com/en-us/library/windows/hardware/ff566424.aspx
         [LibraryImport(Libraries.NtDll)]
-        private static unsafe partial uint NtCreateFile(
+        partial private static unsafe uint NtCreateFile(
             IntPtr* FileHandle,
             DesiredAccess DesiredAccess,
             OBJECT_ATTRIBUTES* ObjectAttributes,

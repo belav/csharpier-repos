@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         internal enum KeySpec : int
         {
@@ -31,7 +31,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptSignHash(
+        partial public static bool CryptSignHash(
             SafeHashHandle hHash,
             KeySpec dwKeySpec,
             string? szDescription,
@@ -47,7 +47,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptVerifySignature(
+        partial public static bool CryptVerifySignature(
             SafeHashHandle hHash,
             byte[] pbSignature,
             int dwSigLen,

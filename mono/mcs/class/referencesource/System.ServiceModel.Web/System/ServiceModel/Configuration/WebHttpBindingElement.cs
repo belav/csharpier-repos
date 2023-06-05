@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Diagnostics.CodeAnalysis;
 
-    public partial class WebHttpBindingElement : StandardBindingElement
+    partial public class WebHttpBindingElement : StandardBindingElement
     {
         static readonly Type WebContentTypeMapperType = typeof(WebContentTypeMapper);
 
@@ -348,7 +348,7 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        internal protected override void InitializeFrom(Binding binding)
+        protected internal override void InitializeFrom(Binding binding)
         {
             base.InitializeFrom(binding);
             WebHttpBinding webBinding = (WebHttpBinding)binding;

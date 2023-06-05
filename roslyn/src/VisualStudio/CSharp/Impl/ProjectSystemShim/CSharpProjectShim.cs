@@ -17,6 +17,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
+    partial
     /// <summary>
     /// The representation of a project to both the project factory and workspace API.
     /// </summary>
@@ -25,9 +26,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
     /// are in a separate files. Methods that are shared across multiple interfaces (which are
     /// effectively methods that just QI from one interface to another), are implemented here.
     /// </remarks>
-    internal sealed partial class CSharpProjectShim
-        : AbstractLegacyProject,
-            ICodeModelInstanceFactory
+    internal sealed class CSharpProjectShim : AbstractLegacyProject, ICodeModelInstanceFactory
     {
         /// <summary>
         /// This member is used to store a raw array of warning numbers, which is needed to properly implement

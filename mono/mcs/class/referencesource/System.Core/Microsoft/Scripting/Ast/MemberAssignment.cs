@@ -68,7 +68,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="MemberAssignment"/> binding the specified value to the given member.

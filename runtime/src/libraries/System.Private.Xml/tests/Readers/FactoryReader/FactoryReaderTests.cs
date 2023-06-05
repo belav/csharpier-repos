@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Xml.FactoryReaderTests
 {
-    public partial class FactoryReaderTest : CGenericTestModule
+    partial public class FactoryReaderTest : CGenericTestModule
     {
         [Theory]
         [XmlTests(nameof(Create))]

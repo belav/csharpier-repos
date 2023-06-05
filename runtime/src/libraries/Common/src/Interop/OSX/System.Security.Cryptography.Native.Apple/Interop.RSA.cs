@@ -8,12 +8,12 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_RsaGenerateKey(
+        partial private static int AppleCryptoNative_RsaGenerateKey(
             int keySizeInBits,
             out SafeSecKeyRefHandle pPublicKey,
             out SafeSecKeyRefHandle pPrivateKey,
@@ -21,7 +21,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_RsaSignaturePrimitive(
+        partial private static int AppleCryptoNative_RsaSignaturePrimitive(
             SafeSecKeyRefHandle privateKey,
             ref byte pbData,
             int cbData,
@@ -30,7 +30,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_RsaVerificationPrimitive(
+        partial private static int AppleCryptoNative_RsaVerificationPrimitive(
             SafeSecKeyRefHandle publicKey,
             ref byte pbData,
             int cbData,
@@ -39,7 +39,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_RsaEncryptionPrimitive(
+        partial private static int AppleCryptoNative_RsaEncryptionPrimitive(
             SafeSecKeyRefHandle publicKey,
             ref byte pbData,
             int cbData,
@@ -51,7 +51,7 @@ internal static partial class Interop
             Libraries.AppleCryptoNative,
             EntryPoint = "AppleCryptoNative_RsaEncryptOaep"
         )]
-        private static partial int RsaEncryptOaep(
+        partial private static int RsaEncryptOaep(
             SafeSecKeyRefHandle publicKey,
             ReadOnlySpan<byte> pbData,
             int cbData,
@@ -64,7 +64,7 @@ internal static partial class Interop
             Libraries.AppleCryptoNative,
             EntryPoint = "AppleCryptoNative_RsaEncryptPkcs"
         )]
-        private static partial int RsaEncryptPkcs(
+        partial private static int RsaEncryptPkcs(
             SafeSecKeyRefHandle publicKey,
             ReadOnlySpan<byte> pbData,
             int cbData,
@@ -76,7 +76,7 @@ internal static partial class Interop
             Libraries.AppleCryptoNative,
             EntryPoint = "AppleCryptoNative_RsaDecryptOaep"
         )]
-        private static partial int RsaDecryptOaep(
+        partial private static int RsaDecryptOaep(
             SafeSecKeyRefHandle publicKey,
             ReadOnlySpan<byte> pbData,
             int cbData,
@@ -89,7 +89,7 @@ internal static partial class Interop
             Libraries.AppleCryptoNative,
             EntryPoint = "AppleCryptoNative_RsaDecryptPkcs"
         )]
-        private static partial int RsaDecryptPkcs(
+        partial private static int RsaDecryptPkcs(
             SafeSecKeyRefHandle publicKey,
             ReadOnlySpan<byte> pbData,
             int cbData,

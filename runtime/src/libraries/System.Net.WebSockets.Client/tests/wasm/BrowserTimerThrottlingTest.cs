@@ -176,7 +176,7 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
             );
         }
 
-        private async static Task SendAndReceive(ClientWebSocket cws, string message)
+        private static async Task SendAndReceive(ClientWebSocket cws, string message)
         {
             try
             {

@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
 {
     [ExportLanguageService(typeof(IGenerateVariableService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpGenerateVariableService
+    partial internal class CSharpGenerateVariableService
         : AbstractGenerateVariableService<
             CSharpGenerateVariableService,
             SimpleNameSyntax,

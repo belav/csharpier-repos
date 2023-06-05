@@ -659,7 +659,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static void SetCreationTimeUtc(String path, DateTime creationTimeUtc)
+        public static unsafe void SetCreationTimeUtc(String path, DateTime creationTimeUtc)
         {
             SafeFileHandle handle;
             using (OpenFile(path, FileAccess.Write, out handle))
@@ -732,7 +732,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static void SetLastAccessTimeUtc(String path, DateTime lastAccessTimeUtc)
+        public static unsafe void SetLastAccessTimeUtc(String path, DateTime lastAccessTimeUtc)
         {
             SafeFileHandle handle;
             using (OpenFile(path, FileAccess.Write, out handle))
@@ -805,7 +805,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static void SetLastWriteTimeUtc(String path, DateTime lastWriteTimeUtc)
+        public static unsafe void SetLastWriteTimeUtc(String path, DateTime lastWriteTimeUtc)
         {
             SafeFileHandle handle;
             using (OpenFile(path, FileAccess.Write, out handle))

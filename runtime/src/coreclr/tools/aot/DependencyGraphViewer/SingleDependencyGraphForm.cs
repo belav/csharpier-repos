@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DependencyLogViewer
 {
-    public partial class SingleDependencyGraphForm : Form
+    partial public class SingleDependencyGraphForm : Form
     {
         private Graph _graph;
 

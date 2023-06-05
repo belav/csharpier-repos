@@ -4,12 +4,12 @@
 using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NtDll
+    partial internal static class NtDll
     {
         [LibraryImport(Libraries.NtDll)]
-        internal static unsafe partial int NtQueryInformationFile(
+        partial internal static unsafe int NtQueryInformationFile(
             SafeFileHandle FileHandle,
             out IO_STATUS_BLOCK IoStatusBlock,
             void* FileInformation,

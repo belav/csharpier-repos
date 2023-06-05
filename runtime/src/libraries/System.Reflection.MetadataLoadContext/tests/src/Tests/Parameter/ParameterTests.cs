@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    public static partial class ParameterTests
+    partial public static class ParameterTests
     {
         [Fact]
         public static void TestRawDefaultValue1()

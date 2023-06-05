@@ -23,98 +23,98 @@ namespace System.Data.ProviderBase
     {
         private static class CreationData
         {
-            static internal readonly CounterCreationData HardConnectsPerSecond =
+            internal static readonly CounterCreationData HardConnectsPerSecond =
                 new CounterCreationData(
                     "HardConnectsPerSecond",
                     "The number of actual connections per second that are being made to servers",
                     PerformanceCounterType.RateOfCountsPerSecond32
                 );
 
-            static internal readonly CounterCreationData HardDisconnectsPerSecond =
+            internal static readonly CounterCreationData HardDisconnectsPerSecond =
                 new CounterCreationData(
                     "HardDisconnectsPerSecond",
                     "The number of actual disconnects per second that are being made to servers",
                     PerformanceCounterType.RateOfCountsPerSecond32
                 );
 
-            static internal readonly CounterCreationData SoftConnectsPerSecond =
+            internal static readonly CounterCreationData SoftConnectsPerSecond =
                 new CounterCreationData(
                     "SoftConnectsPerSecond",
                     "The number of connections we get from the pool per second",
                     PerformanceCounterType.RateOfCountsPerSecond32
                 );
 
-            static internal readonly CounterCreationData SoftDisconnectsPerSecond =
+            internal static readonly CounterCreationData SoftDisconnectsPerSecond =
                 new CounterCreationData(
                     "SoftDisconnectsPerSecond",
                     "The number of connections we return to the pool per second",
                     PerformanceCounterType.RateOfCountsPerSecond32
                 );
 
-            static internal readonly CounterCreationData NumberOfNonPooledConnections =
+            internal static readonly CounterCreationData NumberOfNonPooledConnections =
                 new CounterCreationData(
                     "NumberOfNonPooledConnections",
                     "The number of connections that are not using connection pooling",
                     PerformanceCounterType.NumberOfItems32
                 );
 
-            static internal readonly CounterCreationData NumberOfPooledConnections =
+            internal static readonly CounterCreationData NumberOfPooledConnections =
                 new CounterCreationData(
                     "NumberOfPooledConnections",
                     "The number of connections that are managed by the connection pooler",
                     PerformanceCounterType.NumberOfItems32
                 );
 
-            static internal readonly CounterCreationData NumberOfActiveConnectionPoolGroups =
+            internal static readonly CounterCreationData NumberOfActiveConnectionPoolGroups =
                 new CounterCreationData(
                     "NumberOfActiveConnectionPoolGroups",
                     "The number of unique connection strings",
                     PerformanceCounterType.NumberOfItems32
                 );
 
-            static internal readonly CounterCreationData NumberOfInactiveConnectionPoolGroups =
+            internal static readonly CounterCreationData NumberOfInactiveConnectionPoolGroups =
                 new CounterCreationData(
                     "NumberOfInactiveConnectionPoolGroups",
                     "The number of unique connection strings waiting for pruning",
                     PerformanceCounterType.NumberOfItems32
                 );
 
-            static internal readonly CounterCreationData NumberOfActiveConnectionPools =
+            internal static readonly CounterCreationData NumberOfActiveConnectionPools =
                 new CounterCreationData(
                     "NumberOfActiveConnectionPools",
                     "The number of connection pools",
                     PerformanceCounterType.NumberOfItems32
                 );
 
-            static internal readonly CounterCreationData NumberOfInactiveConnectionPools =
+            internal static readonly CounterCreationData NumberOfInactiveConnectionPools =
                 new CounterCreationData(
                     "NumberOfInactiveConnectionPools",
                     "The number of connection pools",
                     PerformanceCounterType.NumberOfItems32
                 );
 
-            static internal readonly CounterCreationData NumberOfActiveConnections =
+            internal static readonly CounterCreationData NumberOfActiveConnections =
                 new CounterCreationData(
                     "NumberOfActiveConnections",
                     "The number of connections currently in-use",
                     PerformanceCounterType.NumberOfItems32
                 );
 
-            static internal readonly CounterCreationData NumberOfFreeConnections =
+            internal static readonly CounterCreationData NumberOfFreeConnections =
                 new CounterCreationData(
                     "NumberOfFreeConnections",
                     "The number of connections currently available for use",
                     PerformanceCounterType.NumberOfItems32
                 );
 
-            static internal readonly CounterCreationData NumberOfStasisConnections =
+            internal static readonly CounterCreationData NumberOfStasisConnections =
                 new CounterCreationData(
                     "NumberOfStasisConnections",
                     "The number of connections currently waiting to be made ready for use",
                     PerformanceCounterType.NumberOfItems32
                 );
 
-            static internal readonly CounterCreationData NumberOfReclaimedConnections =
+            internal static readonly CounterCreationData NumberOfReclaimedConnections =
                 new CounterCreationData(
                     "NumberOfReclaimedConnections",
                     "The number of connections we reclaim from GC'd external connections",
@@ -122,7 +122,7 @@ namespace System.Data.ProviderBase
                 );
         };
 
-        sealed internal class Counter
+        internal sealed class Counter
         {
             private PerformanceCounter _instance;
 
@@ -469,7 +469,7 @@ namespace System.Data.ProviderBase
         }
     }
 
-    sealed internal class DbConnectionPoolCountersNoCounters : DbConnectionPoolCounters
+    internal sealed class DbConnectionPoolCountersNoCounters : DbConnectionPoolCounters
     {
         public static readonly DbConnectionPoolCountersNoCounters SingletonInstance =
             new DbConnectionPoolCountersNoCounters();

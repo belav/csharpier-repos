@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace System.Security.Policy
 {
-    public sealed partial class ApplicationTrustEnumerator : IEnumerator
+    partial public sealed class ApplicationTrustEnumerator : IEnumerator
     {
         internal ApplicationTrustEnumerator() { }
 

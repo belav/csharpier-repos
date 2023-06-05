@@ -10,7 +10,7 @@ using Roslyn.Test.Utilities;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
-    public static partial class WorkspaceExtensions
+    partial public static class WorkspaceExtensions
     {
         public static DocumentId AddDocument(
             this Workspace workspace,

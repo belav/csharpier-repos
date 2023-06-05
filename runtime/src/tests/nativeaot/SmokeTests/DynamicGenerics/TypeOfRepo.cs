@@ -62,7 +62,7 @@ public class CommonType11 { }
 
 namespace TypeOfRepo
 {
-    public partial class TypeOf
+    partial public class TypeOf
     {
         static Dictionary<string, Type> s_TypeRepo;
 

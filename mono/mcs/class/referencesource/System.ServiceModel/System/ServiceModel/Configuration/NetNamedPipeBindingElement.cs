@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.Net.Security;
 
-    public partial class NetNamedPipeBindingElement : StandardBindingElement
+    partial public class NetNamedPipeBindingElement : StandardBindingElement
     {
         public NetNamedPipeBindingElement(string name)
             : base(name) { }

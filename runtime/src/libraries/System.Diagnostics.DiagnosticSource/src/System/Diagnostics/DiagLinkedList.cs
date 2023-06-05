@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.Diagnostics
 {
-    internal sealed partial class DiagNode<T>
+    partial internal sealed class DiagNode<T>
     {
         public DiagNode(T value) => Value = value;
 

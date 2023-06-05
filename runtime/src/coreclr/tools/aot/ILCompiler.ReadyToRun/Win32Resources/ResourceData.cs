@@ -12,11 +12,12 @@ using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.Win32Resources
 {
+    partial
     /// <summary>
     /// Resource abstraction to allow examination
     /// of a PE file that contains resources.
     /// </summary>
-    public unsafe partial class ResourceData
+    public unsafe class ResourceData
     {
         /// <summary>
         /// Initialize a ResourceData instance from a PE file

@@ -77,7 +77,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public int FieldCount
+        public override int FieldCount
         {
             get
             {
@@ -85,26 +85,26 @@ namespace System.Data.Objects
                 return _cacheEntry.GetFieldCount(_metadata);
             }
         }
-        override public object this[int ordinal]
+        public override object this[int ordinal]
         {
             get { return GetValue(ordinal); }
         }
-        override public object this[string name]
+        public override object this[string name]
         {
             get { return GetValue(GetOrdinal(name)); }
         }
 
-        override public bool GetBoolean(int ordinal)
+        public override bool GetBoolean(int ordinal)
         {
             return (bool)GetValue(ordinal);
         }
 
-        override public byte GetByte(int ordinal)
+        public override byte GetByte(int ordinal)
         {
             return (byte)GetValue(ordinal);
         }
 
-        override public long GetBytes(
+        public override long GetBytes(
             int ordinal,
             long dataIndex,
             byte[] buffer,
@@ -149,12 +149,12 @@ namespace System.Data.Objects
             return byteCount;
         }
 
-        override public char GetChar(int ordinal)
+        public override char GetChar(int ordinal)
         {
             return (char)GetValue(ordinal);
         }
 
-        override public long GetChars(
+        public override long GetChars(
             int ordinal,
             long dataIndex,
             char[] buffer,
@@ -204,27 +204,27 @@ namespace System.Data.Objects
             return charCount;
         }
 
-        override protected DbDataReader GetDbDataReader(int ordinal)
+        protected override DbDataReader GetDbDataReader(int ordinal)
         {
             throw EntityUtil.NotSupported();
         }
 
-        override public string GetDataTypeName(int ordinal)
+        public override string GetDataTypeName(int ordinal)
         {
             return (GetFieldType(ordinal)).Name;
         }
 
-        override public DateTime GetDateTime(int ordinal)
+        public override DateTime GetDateTime(int ordinal)
         {
             return (DateTime)GetValue(ordinal);
         }
 
-        override public Decimal GetDecimal(int ordinal)
+        public override Decimal GetDecimal(int ordinal)
         {
             return (Decimal)GetValue(ordinal);
         }
 
-        override public double GetDouble(int ordinal)
+        public override double GetDouble(int ordinal)
         {
             return (Double)GetValue(ordinal);
         }
@@ -234,37 +234,37 @@ namespace System.Data.Objects
             return _cacheEntry.GetFieldType(ordinal, _metadata);
         }
 
-        override public float GetFloat(int ordinal)
+        public override float GetFloat(int ordinal)
         {
             return (float)GetValue(ordinal);
         }
 
-        override public Guid GetGuid(int ordinal)
+        public override Guid GetGuid(int ordinal)
         {
             return (Guid)GetValue(ordinal);
         }
 
-        override public Int16 GetInt16(int ordinal)
+        public override Int16 GetInt16(int ordinal)
         {
             return (Int16)GetValue(ordinal);
         }
 
-        override public Int32 GetInt32(int ordinal)
+        public override Int32 GetInt32(int ordinal)
         {
             return (Int32)GetValue(ordinal);
         }
 
-        override public Int64 GetInt64(int ordinal)
+        public override Int64 GetInt64(int ordinal)
         {
             return (Int64)GetValue(ordinal);
         }
 
-        override public string GetName(int ordinal)
+        public override string GetName(int ordinal)
         {
             return _cacheEntry.GetCLayerName(ordinal, _metadata);
         }
 
-        override public int GetOrdinal(string name)
+        public override int GetOrdinal(string name)
         {
             int ordinal = _cacheEntry.GetOrdinalforCLayerName(name, _metadata);
             if (ordinal == -1)
@@ -274,12 +274,12 @@ namespace System.Data.Objects
             return ordinal;
         }
 
-        override public string GetString(int ordinal)
+        public override string GetString(int ordinal)
         {
             return (string)GetValue(ordinal);
         }
 
-        override public object GetValue(int ordinal)
+        public override object GetValue(int ordinal)
         {
             if (_cacheEntry.IsRelationship)
             {
@@ -296,7 +296,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public int GetValues(object[] values)
+        public override int GetValues(object[] values)
         {
             if (values == null)
             {
@@ -310,7 +310,7 @@ namespace System.Data.Objects
             return minValue;
         }
 
-        override public bool IsDBNull(int ordinal)
+        public override bool IsDBNull(int ordinal)
         {
             return (GetValue(ordinal) == DBNull.Value);
         }

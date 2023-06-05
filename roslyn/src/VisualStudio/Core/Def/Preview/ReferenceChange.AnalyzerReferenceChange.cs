@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 {
-    internal abstract partial class ReferenceChange : AbstractChange
+    partial internal abstract class ReferenceChange : AbstractChange
     {
         private sealed class AnalyzerReferenceChange : ReferenceChange
         {

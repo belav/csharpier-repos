@@ -16,9 +16,9 @@ using System.Runtime.Intrinsics;
 
 namespace JIT.HardwareIntrinsics.General
 {
-    public static partial class Program
+    partial public static class Program
     {
-        private unsafe static void ToStringUInt64()
+        private static unsafe void ToStringUInt64()
         {
             int size = Unsafe.SizeOf<Vector64<UInt64>>() / sizeof(UInt64);
             UInt64[] values = new UInt64[size];

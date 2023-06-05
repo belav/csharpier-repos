@@ -9,7 +9,7 @@ namespace System.ServiceModel.Activation.Configuration
     using System.Configuration;
     using System.Security.Principal;
 
-    public sealed partial class SecurityIdentifierElement : ConfigurationElement
+    partial public sealed class SecurityIdentifierElement : ConfigurationElement
     {
         public SecurityIdentifierElement()
             : base() { }

@@ -4,15 +4,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_MkdTemp",
             SetLastError = true
         )]
-        internal static unsafe partial byte* MkdTemp(byte* template);
+        partial internal static unsafe byte* MkdTemp(byte* template);
     }
 }

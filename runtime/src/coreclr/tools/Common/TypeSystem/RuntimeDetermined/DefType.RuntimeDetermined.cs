@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class DefType
+    partial public class DefType
     {
         public override bool IsRuntimeDeterminedSubtype
         {

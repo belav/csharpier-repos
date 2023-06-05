@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class String
+    partial public class String
     {
         public bool Contains(string value)
         {

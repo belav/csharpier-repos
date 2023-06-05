@@ -14,7 +14,7 @@ using Xunit.Sdk;
 
 namespace System.Text.RegularExpressions.Tests
 {
-    public partial class RegexMatchTests
+    partial public class RegexMatchTests
     {
         public static IEnumerable<object[]> Match_MemberData()
         {

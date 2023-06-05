@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Collections.ObjectModel.Tests
 {
-    public partial class ObservableCollectionTests
+    partial public class ObservableCollectionTests
     {
         [Fact]
         public void Reentrancy_SingleListener_DoesNotThrow()

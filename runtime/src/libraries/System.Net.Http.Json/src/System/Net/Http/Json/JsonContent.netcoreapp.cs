@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {
-    public sealed partial class JsonContent
+    partial public sealed class JsonContent
     {
         protected override void SerializeToStream(
             Stream stream,

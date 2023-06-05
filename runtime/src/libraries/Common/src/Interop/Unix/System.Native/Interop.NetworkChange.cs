@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         public enum NetworkChangeKind
         {
@@ -21,10 +21,10 @@ internal static partial class Interop
             EntryPoint = "SystemNative_CreateNetworkChangeListenerSocket",
             SetLastError = true
         )]
-        public static unsafe partial Error CreateNetworkChangeListenerSocket(IntPtr* socket);
+        partial public static unsafe Error CreateNetworkChangeListenerSocket(IntPtr* socket);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_ReadEvents")]
-        public static unsafe partial Error ReadEvents(
+        partial public static unsafe Error ReadEvents(
             SafeHandle socket,
             delegate* unmanaged<IntPtr, NetworkChangeKind, void> onNetworkChange
         );

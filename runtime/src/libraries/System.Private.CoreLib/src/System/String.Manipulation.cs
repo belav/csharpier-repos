@@ -15,7 +15,7 @@ using System.Text;
 
 namespace System
 {
-    public partial class String
+    partial public class String
     {
         // Avoid paying the init cost of all the IndexOfAnyValues unless they are actually used.
         private static class IndexOfAnyValuesStorage

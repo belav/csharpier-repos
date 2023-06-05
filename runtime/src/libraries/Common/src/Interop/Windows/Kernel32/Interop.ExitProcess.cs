@@ -6,12 +6,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static unsafe partial class Kernel32
+    partial internal static unsafe class Kernel32
     {
         [DoesNotReturn]
         [LibraryImport(Libraries.Kernel32, EntryPoint = "ExitProcess")]
-        internal static partial void ExitProcess(int exitCode);
+        partial internal static void ExitProcess(int exitCode);
     }
 }

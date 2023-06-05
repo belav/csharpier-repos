@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed partial class RemoteSemanticClassificationService
+    partial internal sealed class RemoteSemanticClassificationService
         : BrokeredServiceBase,
             IRemoteSemanticClassificationService
     {

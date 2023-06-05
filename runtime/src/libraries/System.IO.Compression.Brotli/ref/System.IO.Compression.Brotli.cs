@@ -6,7 +6,7 @@
 
 namespace System.IO.Compression
 {
-    public partial struct BrotliDecoder : System.IDisposable
+    partial public struct BrotliDecoder : System.IDisposable
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -33,7 +33,7 @@ namespace System.IO.Compression
         }
     }
 
-    public partial struct BrotliEncoder : System.IDisposable
+    partial public struct BrotliEncoder : System.IDisposable
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -90,7 +90,7 @@ namespace System.IO.Compression
         }
     }
 
-    public sealed partial class BrotliStream : System.IO.Stream
+    partial public sealed class BrotliStream : System.IO.Stream
     {
         public BrotliStream(
             System.IO.Stream stream,

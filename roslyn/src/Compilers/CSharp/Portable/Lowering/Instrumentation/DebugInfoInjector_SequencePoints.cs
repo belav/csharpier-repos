@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class DebugInfoInjector
+    partial internal class DebugInfoInjector
     {
         private static BoundStatement AddSequencePoint(BoundStatement node)
         {

@@ -9,7 +9,7 @@ using System.Runtime.Intrinsics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         private interface IMinMaxCalc<T>
             where T : struct, IBinaryInteger<T>

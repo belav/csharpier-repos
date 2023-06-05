@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindUsages
 {
-    internal abstract partial class AbstractFindUsagesService
+    partial internal abstract class AbstractFindUsagesService
     {
         public async Task FindImplementationsAsync(
             IFindUsagesContext context,

@@ -18,10 +18,10 @@ public class SimpleTestRunner : iOSApplicationEntryPoint, IDevice
 {
     // to be wired once https://github.com/dotnet/xharness/pull/46 is merged
     [DllImport("__Internal")]
-    public extern static void mono_ios_append_output(string value);
+    public static extern void mono_ios_append_output(string value);
 
     [DllImport("__Internal")]
-    public extern static void mono_ios_set_summary(string value);
+    public static extern void mono_ios_set_summary(string value);
 
     private static List<string> s_testLibs = new List<string>();
     private static string? s_MainTestName;

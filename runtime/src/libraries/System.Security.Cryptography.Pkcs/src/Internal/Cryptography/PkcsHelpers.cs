@@ -17,7 +17,7 @@ using X509IssuerSerial = System.Security.Cryptography.Xml.X509IssuerSerial;
 
 namespace Internal.Cryptography
 {
-    internal static partial class PkcsHelpers
+    partial internal static class PkcsHelpers
     {
         private static readonly bool s_oidIsInitOnceOnly = DetectInitOnlyOid();
 

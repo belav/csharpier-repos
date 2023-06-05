@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
-    internal partial class CSharpNameReducer
+    partial internal class CSharpNameReducer
     {
         private class Rewriter : AbstractReductionRewriter
         {

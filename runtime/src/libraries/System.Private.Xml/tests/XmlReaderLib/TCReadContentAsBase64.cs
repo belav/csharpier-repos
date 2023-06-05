@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCReadContentAsBase64 : TCXMLReaderBaseGeneral
+    partial public class TCReadContentAsBase64 : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCReadContentAsBase64
         // Test Case

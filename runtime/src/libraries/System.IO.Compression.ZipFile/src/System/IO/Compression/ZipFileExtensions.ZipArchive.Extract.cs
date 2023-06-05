@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace System.IO.Compression
 {
-    public static partial class ZipFileExtensions
+    partial public static class ZipFileExtensions
     {
         /// <summary>
         /// Extracts all of the files in the archive to a directory on the file system. The specified directory may already exist.

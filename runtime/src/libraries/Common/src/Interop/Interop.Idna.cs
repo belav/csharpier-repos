@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Globalization
+    partial internal static class Globalization
     {
         internal const int AllowUnassigned = 0x1;
         internal const int UseStd3AsciiRules = 0x2;
@@ -15,7 +15,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_ToAscii",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int ToAscii(
+        partial internal static unsafe int ToAscii(
             uint flags,
             char* src,
             int srcLen,
@@ -28,7 +28,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_ToUnicode",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int ToUnicode(
+        partial internal static unsafe int ToUnicode(
             uint flags,
             char* src,
             int srcLen,

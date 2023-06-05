@@ -14,6 +14,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
+    partial
     /// <summary>
     /// Tests for the region analysis APIs.
     /// </summary>
@@ -24,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     ///     * TryLockUsingStatementTests.cs - try-catch-finally, lock, &amp; using statement
     ///     * PatternsVsRegions.cs - region analysis tests for pattern matching
     /// </remarks>
-    public partial class RegionAnalysisTests : FlowTestBase
+    public class RegionAnalysisTests : FlowTestBase
     {
         #region "Expressions"
 

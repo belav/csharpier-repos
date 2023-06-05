@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCErrorCondition : TCXMLReaderBaseGeneral
+    partial public class TCErrorCondition : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCErrorCondition
         // Test Case

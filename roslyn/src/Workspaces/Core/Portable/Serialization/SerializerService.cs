@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Serialization
 {
-    internal partial class SerializerService : ISerializerService
+    partial internal class SerializerService : ISerializerService
     {
         [
             ExportWorkspaceServiceFactory(typeof(ISerializerService), layer: ServiceLayer.Default),

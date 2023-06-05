@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.IO.Pipelines.Tests
 {
-    public partial class PipePoolTests
+    partial public class PipePoolTests
     {
         [Fact]
         public async Task WritesToArrayPoolByDefault()

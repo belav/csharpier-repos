@@ -22,7 +22,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 {
-    internal partial class ChangeSignatureDialogViewModel : AbstractNotifyPropertyChanged
+    partial internal class ChangeSignatureDialogViewModel : AbstractNotifyPropertyChanged
     {
         private readonly IClassificationFormatMap _classificationFormatMap;
         private readonly ClassificationTypeMap _classificationTypeMap;

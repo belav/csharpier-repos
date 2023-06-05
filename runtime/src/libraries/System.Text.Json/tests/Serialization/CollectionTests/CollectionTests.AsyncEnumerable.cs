@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Json.Tests.Serialization
 {
-    public static partial class CollectionTests
+    partial public static class CollectionTests
     {
         [Theory]
         [MemberData(nameof(GetAsyncEnumerableSources))]

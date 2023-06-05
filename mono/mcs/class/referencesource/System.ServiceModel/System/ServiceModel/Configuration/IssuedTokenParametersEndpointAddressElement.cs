@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Runtime;
 
-    public sealed partial class IssuedTokenParametersEndpointAddressElement
+    partial public sealed class IssuedTokenParametersEndpointAddressElement
         : EndpointAddressElementBase,
             IConfigurationContextProviderInternal
     {

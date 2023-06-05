@@ -4,7 +4,7 @@
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ClearBehaviorElement : BehaviorExtensionElement
+    partial public sealed class ClearBehaviorElement : BehaviorExtensionElement
     {
         public ClearBehaviorElement() { }
 

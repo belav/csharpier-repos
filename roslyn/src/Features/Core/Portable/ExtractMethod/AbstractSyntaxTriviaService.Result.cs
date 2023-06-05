@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract partial class AbstractSyntaxTriviaService
+    partial internal abstract class AbstractSyntaxTriviaService
     {
         private class Result : ITriviaSavedResult
         {

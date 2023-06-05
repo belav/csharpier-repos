@@ -170,7 +170,7 @@ namespace System.Net.NetworkInformation
         public long CompressedPacketsTransmitted;
     }
 
-    internal static partial class StringParsingHelpers
+    partial internal static class StringParsingHelpers
     {
         // Parses ICMP v4 statistics from /proc/net/snmp
         public static Icmpv4StatisticsTable ParseIcmpv4FromSnmpFile(string filePath)

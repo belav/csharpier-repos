@@ -4,9 +4,9 @@
 using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal static class CommEvents
         {
@@ -17,6 +17,6 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetCommMask(SafeFileHandle hFile, int dwEvtMask);
+        partial internal static bool SetCommMask(SafeFileHandle hFile, int dwEvtMask);
     }
 }

@@ -3,7 +3,7 @@
 
 namespace System.Reflection.TypeLoading
 {
-    internal sealed partial class RoLocalVariableInfo : LocalVariableInfo
+    partial internal sealed class RoLocalVariableInfo : LocalVariableInfo
     {
         private readonly int _localIndex;
         private readonly bool _isPinned;

@@ -8,16 +8,16 @@ using Internal.Win32.SafeHandles;
 #endif
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Libraries.Advapi32,
             EntryPoint = "RegSetValueExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int RegSetValueEx(
+        partial internal static int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,
@@ -31,7 +31,7 @@ internal static partial class Interop
             EntryPoint = "RegSetValueExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int RegSetValueEx(
+        partial internal static int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,
@@ -45,7 +45,7 @@ internal static partial class Interop
             EntryPoint = "RegSetValueExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int RegSetValueEx(
+        partial internal static int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,
@@ -59,7 +59,7 @@ internal static partial class Interop
             EntryPoint = "RegSetValueExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int RegSetValueEx(
+        partial internal static int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,
@@ -73,7 +73,7 @@ internal static partial class Interop
             EntryPoint = "RegSetValueExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int RegSetValueEx(
+        partial internal static int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,

@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public partial class WSHttpBindingCollectionElement
+    partial public class WSHttpBindingCollectionElement
         : StandardBindingCollectionElement<WSHttpBinding, WSHttpBindingElement>
     {
         // Static Fields

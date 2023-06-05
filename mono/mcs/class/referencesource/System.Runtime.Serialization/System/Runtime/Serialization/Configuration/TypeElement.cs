@@ -11,7 +11,7 @@ namespace System.Runtime.Serialization.Configuration
     using System.ServiceModel.Diagnostics;
     using System.Security;
 
-    public sealed partial class TypeElement : ConfigurationElement
+    partial public sealed class TypeElement : ConfigurationElement
     {
         public TypeElement() { }
 

@@ -12,7 +12,7 @@ namespace Microsoft.IO.Enumeration
 namespace System.IO.Enumeration
 #endif
 {
-    public partial class FileSystemEnumerator<TResult>
+    partial public class FileSystemEnumerator<TResult>
     {
         /// <returns>'true' if new data was found</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

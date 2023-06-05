@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<IGrouping<TKey, TSource>> GroupBy<TSource, TKey>(
             this IEnumerable<TSource> source,
@@ -204,7 +204,7 @@ namespace System.Linq
         }
     }
 
-    internal sealed partial class GroupedResultEnumerable<TSource, TKey, TElement, TResult>
+    partial internal sealed class GroupedResultEnumerable<TSource, TKey, TElement, TResult>
         : IEnumerable<TResult>
     {
         private readonly IEnumerable<TSource> _source;
@@ -259,7 +259,7 @@ namespace System.Linq
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
-    internal sealed partial class GroupedResultEnumerable<TSource, TKey, TResult>
+    partial internal sealed class GroupedResultEnumerable<TSource, TKey, TResult>
         : IEnumerable<TResult>
     {
         private readonly IEnumerable<TSource> _source;
@@ -306,7 +306,7 @@ namespace System.Linq
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
-    internal sealed partial class GroupedEnumerable<TSource, TKey, TElement>
+    partial internal sealed class GroupedEnumerable<TSource, TKey, TElement>
         : IEnumerable<IGrouping<TKey, TElement>>
     {
         private readonly IEnumerable<TSource> _source;
@@ -348,7 +348,7 @@ namespace System.Linq
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
-    internal sealed partial class GroupedEnumerable<TSource, TKey>
+    partial internal sealed class GroupedEnumerable<TSource, TKey>
         : IEnumerable<IGrouping<TKey, TSource>>
     {
         private readonly IEnumerable<TSource> _source;

@@ -21,7 +21,7 @@ using Microsoft.VisualStudio.Text.Differencing;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
 {
-    internal partial class PreviewPane : UserControl, IDisposable
+    partial internal class PreviewPane : UserControl, IDisposable
     {
         private const double DefaultWidth = 400;
 

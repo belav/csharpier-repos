@@ -5,13 +5,13 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CertGetCertificateChain(
+        partial internal static unsafe bool CertGetCertificateChain(
             IntPtr hChainEngine,
             SafeCertContextHandle pCertContext,
             FILETIME* pTime,

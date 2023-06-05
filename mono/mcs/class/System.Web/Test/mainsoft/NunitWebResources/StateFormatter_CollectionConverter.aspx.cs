@@ -15,7 +15,7 @@ using System.Web.UI.HtmlControls;
 
 using MonoTests.SystemWeb.Framework;
 
-public partial class Sections_ECCN_test : System.Web.UI.Page
+partial public class Sections_ECCN_test : System.Web.UI.Page
 {
     //protected override void OnPreInit (EventArgs e)
     public Sections_ECCN_test()

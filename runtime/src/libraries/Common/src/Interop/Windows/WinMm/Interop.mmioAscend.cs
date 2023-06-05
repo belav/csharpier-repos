@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         [LibraryImport(Libraries.WinMM)]
-        internal static unsafe partial int mmioAscend(IntPtr hMIO, MMCKINFO* lpck, int flags);
+        partial internal static unsafe int mmioAscend(IntPtr hMIO, MMCKINFO* lpck, int flags);
     }
 }

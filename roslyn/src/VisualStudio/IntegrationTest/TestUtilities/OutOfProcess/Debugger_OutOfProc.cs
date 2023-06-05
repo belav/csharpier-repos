@@ -7,10 +7,11 @@ using Xunit;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
+    partial
     /// <summary>
     /// Provides a means of interacting with the Visual Studio debugger by remoting calls into Visual Studio.
     /// </summary>
-    public partial class Debugger_OutOfProc : OutOfProcComponent
+    public class Debugger_OutOfProc : OutOfProcComponent
     {
         private readonly Debugger_InProc _debuggerInProc;
         private readonly VisualStudioInstance _instance;

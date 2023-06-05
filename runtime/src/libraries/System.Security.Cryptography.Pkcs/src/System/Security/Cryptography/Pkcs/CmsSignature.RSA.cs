@@ -11,9 +11,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs
 {
-    internal partial class CmsSignature
+    partial internal class CmsSignature
     {
-        static partial void PrepareRegistrationRsa(Dictionary<string, CmsSignature> lookup)
+        partial static void PrepareRegistrationRsa(Dictionary<string, CmsSignature> lookup)
         {
             lookup.Add(Oids.Rsa, new RSAPkcs1CmsSignature(null, null));
             lookup.Add(

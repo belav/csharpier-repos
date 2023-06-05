@@ -8,11 +8,12 @@ namespace System.IdentityModel
     using System.Xml;
     using System.Configuration;
 
+    partial
     /// <summary>
     /// This is the Management utility class.
     /// Adding Xml
     /// </summary>
-    static partial class DiagnosticUtility
+    static class DiagnosticUtility
     {
         public static Exception ThrowHelperArgumentNullOrEmptyString(string arg)
         {

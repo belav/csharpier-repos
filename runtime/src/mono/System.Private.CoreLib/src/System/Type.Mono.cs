@@ -11,7 +11,7 @@ using System.Threading;
 namespace System
 {
     [StructLayout(LayoutKind.Sequential)]
-    public partial class Type
+    partial public class Type
     {
         #region keep in sync with object-internals.h
         internal RuntimeTypeHandle _impl;

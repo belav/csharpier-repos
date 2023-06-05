@@ -6,7 +6,7 @@
 
 namespace System.IO.Compression
 {
-    public static partial class ZipFile
+    partial public static class ZipFile
     {
         public static void CreateFromDirectory(
             string sourceDirectoryName,
@@ -78,7 +78,7 @@ namespace System.IO.Compression
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public static partial class ZipFileExtensions
+    partial public static class ZipFileExtensions
     {
         public static System.IO.Compression.ZipArchiveEntry CreateEntryFromFile(
             this System.IO.Compression.ZipArchive destination,

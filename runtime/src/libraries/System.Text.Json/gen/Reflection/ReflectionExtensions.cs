@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis;
 
 namespace System.Text.Json.Reflection
 {
-    internal static partial class ReflectionExtensions
+    partial internal static class ReflectionExtensions
     {
         public static CustomAttributeData? GetCustomAttributeData(
             this MemberInfo memberInfo,

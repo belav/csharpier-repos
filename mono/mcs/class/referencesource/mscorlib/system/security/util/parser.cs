@@ -27,7 +27,7 @@ namespace System.Security.Util
     using StreamReader = System.IO.StreamReader;
     using Encoding = System.Text.Encoding;
 
-    sealed internal class Parser
+    internal sealed class Parser
     {
         private SecurityDocument _doc;
         private Tokenizer _t;

@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Polls a set of file descriptors for signals and returns what signals have been set
@@ -18,7 +18,7 @@ internal static partial class Interop
         /// <param name="triggered">The number of events triggered (i.e. the number of entries in pollEvents with a non-zero TriggeredEvents). May be zero in the event of a timeout.</param>
         /// <returns>An error or Error.SUCCESS.</returns>
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Poll")]
-        internal static unsafe partial Error Poll(
+        partial internal static unsafe Error Poll(
             PollEvent* pollEvents,
             uint eventCount,
             int timeout,

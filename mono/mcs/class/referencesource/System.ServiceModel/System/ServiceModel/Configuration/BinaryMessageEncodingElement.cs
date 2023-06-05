@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.ServiceModel.Channels;
 
-    public sealed partial class BinaryMessageEncodingElement : BindingElementExtensionElement
+    partial public sealed class BinaryMessageEncodingElement : BindingElementExtensionElement
     {
         public BinaryMessageEncodingElement() { }
 

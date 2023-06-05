@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Json.SourceGeneration.Tests
 {
-    public partial class PropertyVisibilityTests_Metadata : PropertyVisibilityTests
+    partial public class PropertyVisibilityTests_Metadata : PropertyVisibilityTests
     {
         public PropertyVisibilityTests_Metadata()
             : this(
@@ -349,11 +349,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             typeof(IDiamondInterfaceHierarchyWithNamingConflictUsingAttribute.IJoinInterface),
             TypeInfoPropertyName = "IDiamondInterfaceHierarchyWithNamingConflictUsingAttributeIJoinInterface"
         )]
-        internal sealed partial class PropertyVisibilityTestsContext_Metadata
+        partial internal sealed class PropertyVisibilityTestsContext_Metadata
             : JsonSerializerContext { }
     }
 
-    public partial class PropertyVisibilityTests_Default : PropertyVisibilityTests_Metadata
+    partial public class PropertyVisibilityTests_Default : PropertyVisibilityTests_Metadata
     {
         public PropertyVisibilityTests_Default()
             : base(
@@ -631,7 +631,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             typeof(IDiamondInterfaceHierarchyWithNamingConflictUsingAttribute.IJoinInterface),
             TypeInfoPropertyName = "IDiamondInterfaceHierarchyWithNamingConflictUsingAttributeIJoinInterface"
         )]
-        internal sealed partial class PropertyVisibilityTestsContext_Default
+        partial internal sealed class PropertyVisibilityTestsContext_Default
             : JsonSerializerContext { }
     }
 }

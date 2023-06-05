@@ -33,7 +33,7 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static int GetMaxStackTraceFrames();
+        static extern int GetMaxStackTraceFrames();
 
         public static int MaxStackTraceFrames
         {
@@ -41,10 +41,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static int GetStackTraceFrames();
+        static extern int GetStackTraceFrames();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetStackTraceFrames(int value);
+        static extern void SetStackTraceFrames(int value);
 
         public static int StackTraceFrames
         {
@@ -65,10 +65,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static LogHeapshotMode GetHeapshotMode();
+        static extern LogHeapshotMode GetHeapshotMode();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetHeapshotMode(LogHeapshotMode value);
+        static extern void SetHeapshotMode(LogHeapshotMode value);
 
         public static LogHeapshotMode HeapshotMode
         {
@@ -83,10 +83,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static int GetHeapshotMillisecondsFrequency();
+        static extern int GetHeapshotMillisecondsFrequency();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetHeapshotMillisecondsFrequency(int value);
+        static extern void SetHeapshotMillisecondsFrequency(int value);
 
         public static int HeapshotMillisecondsFrequency
         {
@@ -105,10 +105,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static int GetHeapshotCollectionsFrequency();
+        static extern int GetHeapshotCollectionsFrequency();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetHeapshotCollectionsFrequency(int value);
+        static extern void SetHeapshotCollectionsFrequency(int value);
 
         public static int HeapshotCollectionsFrequency
         {
@@ -127,13 +127,13 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        public extern static void TriggerHeapshot();
+        public static extern void TriggerHeapshot();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static int GetCallDepth();
+        static extern int GetCallDepth();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetCallDepth(int value);
+        static extern void SetCallDepth(int value);
 
         public static int CallDepth
         {
@@ -152,10 +152,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void GetSampleMode(out LogSampleMode mode, out int frequency);
+        static extern void GetSampleMode(out LogSampleMode mode, out int frequency);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool SetSampleMode(LogSampleMode value, int frequency);
+        static extern bool SetSampleMode(LogSampleMode value, int frequency);
 
         public static LogSampleMode SampleMode
         {
@@ -193,10 +193,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetExceptionEvents();
+        static extern bool GetExceptionEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetExceptionEvents(bool value);
+        static extern void SetExceptionEvents(bool value);
 
         public static bool ExceptionEventsEnabled
         {
@@ -205,10 +205,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetMonitorEvents();
+        static extern bool GetMonitorEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetMonitorEvents(bool value);
+        static extern void SetMonitorEvents(bool value);
 
         public static bool MonitorEventsEnabled
         {
@@ -217,10 +217,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetGCEvents();
+        static extern bool GetGCEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetGCEvents(bool value);
+        static extern void SetGCEvents(bool value);
 
         public static bool GCEventsEnabled
         {
@@ -229,10 +229,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetGCAllocationEvents();
+        static extern bool GetGCAllocationEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetGCAllocationEvents(bool value);
+        static extern void SetGCAllocationEvents(bool value);
 
         public static bool GCAllocationEventsEnabled
         {
@@ -241,10 +241,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetGCMoveEvents();
+        static extern bool GetGCMoveEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetGCMoveEvents(bool value);
+        static extern void SetGCMoveEvents(bool value);
 
         public static bool GCMoveEventsEnabled
         {
@@ -253,10 +253,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetGCRootEvents();
+        static extern bool GetGCRootEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetGCRootEvents(bool value);
+        static extern void SetGCRootEvents(bool value);
 
         public static bool GCRootEventsEnabled
         {
@@ -265,10 +265,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetGCHandleEvents();
+        static extern bool GetGCHandleEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetGCHandleEvents(bool value);
+        static extern void SetGCHandleEvents(bool value);
 
         public static bool GCHandleEventsEnabled
         {
@@ -277,10 +277,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetGCFinalizationEvents();
+        static extern bool GetGCFinalizationEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetGCFinalizationEvents(bool value);
+        static extern void SetGCFinalizationEvents(bool value);
 
         public static bool GCFinalizationEventsEnabled
         {
@@ -289,10 +289,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetCounterEvents();
+        static extern bool GetCounterEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetCounterEvents(bool value);
+        static extern void SetCounterEvents(bool value);
 
         public static bool CounterEventsEnabled
         {
@@ -301,10 +301,10 @@ namespace Mono.Profiler.Log
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static bool GetJitEvents();
+        static extern bool GetJitEvents();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void SetJitEvents(bool value);
+        static extern void SetJitEvents(bool value);
 
         public static bool JitEventsEnabled
         {

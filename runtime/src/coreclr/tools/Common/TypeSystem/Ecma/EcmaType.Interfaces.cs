@@ -5,9 +5,10 @@ using System;
 
 namespace Internal.TypeSystem.Ecma
 {
+    partial
     // This file has implementations of the .Interfaces.cs logic from its base type.
 
-    public sealed partial class EcmaType : MetadataType
+    public sealed class EcmaType : MetadataType
     {
         private DefType[] _implementedInterfaces;
 

@@ -56,11 +56,12 @@ using System.Reflection;
 
 namespace Mono.Net.Security
 {
+    partial
     /*
      * Keep in sync with Mono.Security/Mono.Security.Interface/MonoTlsProvider.cs.
      *
      */
-    static partial class MonoTlsProviderFactory
+    static class MonoTlsProviderFactory
     {
         #region Internal API
 
@@ -318,7 +319,7 @@ namespace Mono.Net.Security
 
 #if MONO_FEATURE_BTLS
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal extern static bool IsBtlsSupported();
+        internal static extern bool IsBtlsSupported();
 #endif
 
         static MobileTlsProvider CreateDefaultProviderImpl()

@@ -80,7 +80,7 @@ namespace System.Security
         }
 
         [Obsolete("The security manager cannot be turned off on MS runtime")]
-        extern public static bool SecurityEnabled
+        public static extern bool SecurityEnabled
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
@@ -279,7 +279,7 @@ namespace System.Security
             return ps;
         }
 
-        static private SecurityPermission _execution = new SecurityPermission(
+        private static SecurityPermission _execution = new SecurityPermission(
             SecurityPermissionFlag.Execution
         );
 

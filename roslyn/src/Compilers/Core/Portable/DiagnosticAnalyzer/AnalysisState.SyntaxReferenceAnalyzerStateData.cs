@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class AnalysisState
+    partial internal class AnalysisState
     {
         /// <summary>
         /// Stores the partial analysis state for a specific symbol declaration for a specific analyzer.

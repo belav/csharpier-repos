@@ -3,9 +3,9 @@
 
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NCrypt
+    partial internal static class NCrypt
     {
         internal const string NCRYPT_3DES_ALGORITHM = "3DES";
         internal const string NCRYPT_AES_ALGORITHM = "AES";

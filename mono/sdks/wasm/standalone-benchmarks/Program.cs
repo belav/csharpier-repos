@@ -46,7 +46,7 @@ class Program
     static void WakeUp() { }
 }
 
-public partial class Benchmark
+partial public class Benchmark
 {
     public void Step()
     {

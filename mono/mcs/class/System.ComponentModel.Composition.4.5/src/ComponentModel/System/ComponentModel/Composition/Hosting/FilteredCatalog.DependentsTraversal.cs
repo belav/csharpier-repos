@@ -10,7 +10,7 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class FilteredCatalog
+    partial public class FilteredCatalog
     {
         /// <summary>
         /// Implementation of IComposablePartTraversal supporting the Dependents traveral pattern.

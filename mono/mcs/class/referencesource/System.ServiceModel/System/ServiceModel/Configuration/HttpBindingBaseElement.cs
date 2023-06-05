@@ -11,10 +11,11 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.Text;
 
+    partial
     /// <summary>
     /// HttpBindingBaseElement for HttpBindingBase
     /// </summary>
-    public abstract partial class HttpBindingBaseElement : StandardBindingElement
+    public abstract class HttpBindingBaseElement : StandardBindingElement
     {
         protected HttpBindingBaseElement(string name)
             : base(name) { }

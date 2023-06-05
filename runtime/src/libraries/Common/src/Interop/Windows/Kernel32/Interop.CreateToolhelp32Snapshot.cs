@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [Flags]
         internal enum SnapshotFlags : uint
@@ -33,12 +33,12 @@ internal static partial class Interop
             internal int th32ParentProcessID;
             internal int pcPriClassBase;
             internal int dwFlags;
-            internal fixed char szExeFile[MAX_PATH];
+            fixed internal char szExeFile[MAX_PATH];
         }
 
         // https://docs.microsoft.com/windows/desktop/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial nint CreateToolhelp32Snapshot(
+        partial internal static nint CreateToolhelp32Snapshot(
             SnapshotFlags dwFlags,
             uint th32ProcessID
         );
@@ -46,11 +46,11 @@ internal static partial class Interop
         // https://docs.microsoft.com/windows/desktop/api/tlhelp32/nf-tlhelp32-process32first
         [LibraryImport(Libraries.Kernel32, EntryPoint = "Process32FirstW", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool Process32First(nint hSnapshot, PROCESSENTRY32* lppe);
+        partial internal static unsafe bool Process32First(nint hSnapshot, PROCESSENTRY32* lppe);
 
         // https://docs.microsoft.com/windows/desktop/api/tlhelp32/nf-tlhelp32-process32next
         [LibraryImport(Libraries.Kernel32, EntryPoint = "Process32NextW", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool Process32Next(nint hSnapshot, PROCESSENTRY32* lppe);
+        partial internal static unsafe bool Process32Next(nint hSnapshot, PROCESSENTRY32* lppe);
     }
 }

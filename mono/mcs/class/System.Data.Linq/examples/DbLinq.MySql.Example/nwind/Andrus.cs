@@ -16,10 +16,11 @@ using DataContext = DBLinq.vendor.mysql.MysqlDataContext;
 
 namespace andrusDB
 {
+    partial
     /// <summary>
     /// This class represents MySql database Andrus.
     /// </summary>
-    public partial class Andrus : DataContext
+    public class Andrus : DataContext
     {
         public Andrus(string connStr)
             : base(connStr) { }
@@ -52,7 +53,7 @@ namespace andrusDB
     }
 
     [Table(Name = "t2")]
-    public partial class T2 : IModified
+    partial public class T2 : IModified
     {
         protected int? _f1;
         protected int? _f2;
@@ -97,7 +98,7 @@ namespace andrusDB
     }
 
     [Table(Name = "tcompositepk")]
-    public partial class Tcompositepk : IModified
+    partial public class Tcompositepk : IModified
     {
         protected int _f1;
         protected string _f2;
@@ -170,7 +171,7 @@ namespace andrusDB
     }
 
     [Table(Name = "t1")]
-    public partial class T1 : IModified
+    partial public class T1 : IModified
     {
         protected int _private;
 
@@ -217,7 +218,7 @@ namespace andrusDB
     }
 
     [Table(Name = "char_pk")]
-    public partial class Char_Pk : IModified
+    partial public class Char_Pk : IModified
     {
         protected string _col1;
         protected int? _val1;
@@ -277,7 +278,7 @@ namespace andrusDB
     }
 
     [Table(Name = "employee")]
-    public partial class Employee : IModified
+    partial public class Employee : IModified
     {
         [DBLinq.Linq.Mapping.AutoGenId]
         protected int _employeeID;

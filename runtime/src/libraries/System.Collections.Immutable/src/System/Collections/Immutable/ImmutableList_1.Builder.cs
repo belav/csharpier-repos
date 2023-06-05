@@ -7,10 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner Builder class.
     /// </content>
-    public sealed partial class ImmutableList<T>
+    public sealed class ImmutableList<T>
     {
         /// <summary>
         /// A list that mutates with little or no memory allocations,

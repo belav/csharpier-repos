@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCBufferBoundaries : TCXMLReaderBaseGeneral
+    partial public class TCBufferBoundaries : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCBufferBoundaries
         // Test Case

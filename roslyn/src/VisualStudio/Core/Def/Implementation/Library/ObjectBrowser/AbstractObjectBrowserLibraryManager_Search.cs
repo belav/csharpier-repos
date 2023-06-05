@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectBrowser
 {
-    internal abstract partial class AbstractObjectBrowserLibraryManager
+    partial internal abstract class AbstractObjectBrowserLibraryManager
     {
         private static string GetSearchText(VSOBSEARCHCRITERIA2[] pobSrch)
         {

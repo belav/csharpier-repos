@@ -618,7 +618,12 @@ namespace Mono
         // IEnumerator and yet, throw an exception when we
         // try to use them, helper function to check for that
         // condition
-        static internal bool WorksAsEnumerable(object obj)
+        internal
+        // Some types (System.Json.JsonPrimitive) implement
+        // IEnumerator and yet, throw an exception when we
+        // try to use them, helper function to check for that
+        // condition
+        static bool WorksAsEnumerable(object obj)
         {
             IEnumerable enumerable = obj as IEnumerable;
             if (enumerable != null)
@@ -1144,7 +1149,7 @@ namespace Mono
     public class UnixUtils
     {
         [System.Runtime.InteropServices.DllImport("libc", EntryPoint = "isatty")]
-        extern static int _isatty(int fd);
+        static extern int _isatty(int fd);
 
         public static bool isatty(int fd)
         {

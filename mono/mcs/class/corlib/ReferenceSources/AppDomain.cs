@@ -4,7 +4,7 @@ using System.Runtime.Versioning;
 
 namespace System
 {
-    public partial class AppDomain
+    partial public class AppDomain
     {
         internal static bool IsAppXModel()
         {

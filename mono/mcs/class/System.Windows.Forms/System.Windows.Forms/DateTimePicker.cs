@@ -2072,7 +2072,7 @@ namespace System.Windows.Forms
                 return DateTimePart.Literal;
             }
 
-            static internal string GetText(DateTime date, string format)
+            internal static string GetText(DateTime date, string format)
             {
                 if (format.StartsWith("g"))
                     return " ";

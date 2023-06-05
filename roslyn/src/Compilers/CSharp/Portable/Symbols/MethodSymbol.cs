@@ -17,11 +17,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Represents a method or method-like symbol (including constructor,
     /// destructor, operator, or property/event accessor).
     /// </summary>
-    internal abstract partial class MethodSymbol : Symbol, IMethodSymbolInternal
+    internal abstract class MethodSymbol : Symbol, IMethodSymbolInternal
     {
         internal const MethodSymbol None = null;
 

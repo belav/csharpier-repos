@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    public partial class HttpClientHandler : HttpMessageHandler
+    partial public class HttpClientHandler : HttpMessageHandler
     {
         readonly IMonoHttpClientHandler _delegatingHandler;
         ClientCertificateOption _clientCertificateOptions;

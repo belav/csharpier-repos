@@ -4,7 +4,7 @@
 
 namespace System.Diagnostics.Tracing
 {
-    public partial class IncrementingEventCounter : DiagnosticCounter
+    partial public class IncrementingEventCounter : DiagnosticCounter
     {
         public IncrementingEventCounter(string name, EventSource eventSource)
             : base(name, eventSource) { }

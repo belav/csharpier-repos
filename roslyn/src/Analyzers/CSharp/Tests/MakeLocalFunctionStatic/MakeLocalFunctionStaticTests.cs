@@ -19,7 +19,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
 {
-    public partial class MakeLocalFunctionStaticTests
+    partial public class MakeLocalFunctionStaticTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public MakeLocalFunctionStaticTests(ITestOutputHelper logger)

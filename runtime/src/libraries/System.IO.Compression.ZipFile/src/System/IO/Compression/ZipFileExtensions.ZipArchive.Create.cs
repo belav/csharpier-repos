@@ -6,7 +6,7 @@ using System.ComponentModel;
 namespace System.IO.Compression
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static partial class ZipFileExtensions
+    partial public static class ZipFileExtensions
     {
         /// <summary>
         /// <p>Adds a file from the file system to the archive under the specified entry name.
@@ -131,6 +131,6 @@ namespace System.IO.Compression
             }
         }
 
-        static partial void SetExternalAttributes(FileStream fs, ZipArchiveEntry entry);
+        partial static void SetExternalAttributes(FileStream fs, ZipArchiveEntry entry);
     }
 }

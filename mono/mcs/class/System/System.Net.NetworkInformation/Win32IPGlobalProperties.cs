@@ -128,7 +128,7 @@ namespace System.Net.NetworkInformation
             return ret.ToArray();
         }
 
-        public unsafe override IPEndPoint[] GetActiveUdpListeners()
+        public override unsafe IPEndPoint[] GetActiveUdpListeners()
         {
             List<IPEndPoint> list = new List<IPEndPoint>();
 

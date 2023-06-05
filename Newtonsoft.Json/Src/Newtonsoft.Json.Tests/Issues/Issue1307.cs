@@ -55,7 +55,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
         internal class MyJsonConverter : JsonConverter
         {
-            static private readonly JsonLoadSettings _jsonLoadSettings = new JsonLoadSettings
+            private static readonly JsonLoadSettings _jsonLoadSettings = new JsonLoadSettings
             {
                 CommentHandling = CommentHandling.Ignore
             };

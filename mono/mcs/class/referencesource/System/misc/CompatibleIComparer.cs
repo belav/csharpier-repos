@@ -19,7 +19,7 @@ namespace System.Collections.Specialized
 
     internal class BackCompatibleStringComparer : IEqualityComparer
     {
-        static internal IEqualityComparer Default = new BackCompatibleStringComparer();
+        internal static IEqualityComparer Default = new BackCompatibleStringComparer();
 
         internal BackCompatibleStringComparer() { }
 

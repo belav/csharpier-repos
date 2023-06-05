@@ -9,10 +9,11 @@ namespace System.IdentityModel.Configuration
     using System.ComponentModel;
     using System.Configuration;
 
+    partial
     /// <summary>
     /// The <c>IdentityModelCachesElement</c> class provides XML configuration for WIF caching services.
     /// </summary>
-    public sealed partial class IdentityModelCachesElement : ConfigurationElement
+    public sealed class IdentityModelCachesElement : ConfigurationElement
     {
         /// <summary>
         /// Gets or sets the <see cref="TokenReplayCache"/> type. This element is optional and the specified custom replay cache

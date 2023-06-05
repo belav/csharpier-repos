@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     internal enum APTTYPE : uint
     {
@@ -27,10 +27,10 @@ internal static partial class Interop
         APTTYPEQUALIFIER_APPLICATION_STA = 0x6u,
     }
 
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         [LibraryImport(Interop.Libraries.Ole32)]
-        internal static partial int CoGetApartmentType(
+        partial internal static int CoGetApartmentType(
             out APTTYPE pAptType,
             out APTTYPEQUALIFIER pAptQualifier
         );

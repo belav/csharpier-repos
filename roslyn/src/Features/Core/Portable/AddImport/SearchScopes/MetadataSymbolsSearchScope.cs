@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
         private class MetadataSymbolsSearchScope : SearchScope
         {

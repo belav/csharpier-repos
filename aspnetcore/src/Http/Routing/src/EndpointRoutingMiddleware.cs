@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing;
 
-internal sealed partial class EndpointRoutingMiddleware
+partial internal sealed class EndpointRoutingMiddleware
 {
     private const string DiagnosticsEndpointMatchedKey =
         "Microsoft.AspNetCore.Routing.EndpointMatched";
@@ -191,7 +191,7 @@ internal sealed partial class EndpointRoutingMiddleware
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void MatchSuccess(ILogger logger, Endpoint endpoint) =>
             MatchSuccess(logger, endpoint.DisplayName);
@@ -202,7 +202,7 @@ internal sealed partial class EndpointRoutingMiddleware
             "Request matched endpoint '{EndpointName}'",
             EventName = "MatchSuccess"
         )]
-        private static partial void MatchSuccess(ILogger logger, string? endpointName);
+        partial private static void MatchSuccess(ILogger logger, string? endpointName);
 
         [LoggerMessage(
             2,
@@ -210,7 +210,7 @@ internal sealed partial class EndpointRoutingMiddleware
             "Request did not match any endpoints",
             EventName = "MatchFailure"
         )]
-        public static partial void MatchFailure(ILogger logger);
+        partial public static void MatchFailure(ILogger logger);
 
         public static void MatchSkipped(ILogger logger, Endpoint endpoint) =>
             MatchingSkipped(logger, endpoint.DisplayName);
@@ -221,6 +221,6 @@ internal sealed partial class EndpointRoutingMiddleware
             "Endpoint '{EndpointName}' already set, skipping route matching.",
             EventName = "MatchingSkipped"
         )]
-        private static partial void MatchingSkipped(ILogger logger, string? endpointName);
+        partial private static void MatchingSkipped(ILogger logger, string? endpointName);
     }
 }

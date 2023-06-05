@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ChaCha20Poly1305
+    partial public sealed class ChaCha20Poly1305
     {
         private SafeEvpCipherCtxHandle _ctxHandle;
 

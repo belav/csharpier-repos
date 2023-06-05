@@ -7,10 +7,11 @@ using System.IdentityModel.Tokens;
 
 namespace System.IdentityModel.Configuration
 {
+    partial
     /// <summary>
     /// Class the represents system.identityModel section in the configuration file
     /// </summary>
-    public sealed partial class SystemIdentityModelSection : ConfigurationSection
+    public sealed class SystemIdentityModelSection : ConfigurationSection
     {
         /// <summary>
         /// The name of the configuration section defined by Windows Identity Foundation.

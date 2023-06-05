@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class TargetDetails
+    partial public class TargetDetails
     {
         public override string ToString()
         {

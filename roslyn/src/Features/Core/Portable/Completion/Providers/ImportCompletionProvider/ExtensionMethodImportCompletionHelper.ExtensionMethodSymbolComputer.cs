@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal static partial class ExtensionMethodImportCompletionHelper
+    partial internal static class ExtensionMethodImportCompletionHelper
     {
         private class ExtensionMethodSymbolComputer
         {

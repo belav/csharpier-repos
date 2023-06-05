@@ -22,7 +22,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.MetadataAsSource
 {
-    internal abstract partial class AbstractMetadataAsSourceService : IMetadataAsSourceService
+    partial internal abstract class AbstractMetadataAsSourceService : IMetadataAsSourceService
     {
         public async Task<Document> AddSourceToAsync(
             Document document,

@@ -1,6 +1,6 @@
 public class NestedLoop
 {
-    static public int Main()
+    public static int Main()
     {
         int n = 16;
         int x = 0;

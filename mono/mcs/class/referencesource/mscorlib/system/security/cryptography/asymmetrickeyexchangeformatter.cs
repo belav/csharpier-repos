@@ -33,8 +33,13 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        abstract public void SetKey(AsymmetricAlgorithm key);
-        abstract public byte[] CreateKeyExchange(byte[] data);
-        abstract public byte[] CreateKeyExchange(byte[] data, Type symAlgType);
+        public
+        //
+        // public methods
+        //
+
+        abstract void SetKey(AsymmetricAlgorithm key);
+        public abstract byte[] CreateKeyExchange(byte[] data);
+        public abstract byte[] CreateKeyExchange(byte[] data, Type symAlgType);
     }
 }

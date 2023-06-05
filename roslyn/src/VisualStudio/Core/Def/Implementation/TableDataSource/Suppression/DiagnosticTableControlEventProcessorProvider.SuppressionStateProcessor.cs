@@ -8,9 +8,9 @@ using Microsoft.VisualStudio.Shell.TableControl;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
-    internal partial class DiagnosticTableControlEventProcessorProvider
+    partial internal class DiagnosticTableControlEventProcessorProvider
     {
-        private partial class SuppressionStateEventProcessor : EventProcessor
+        partial private class SuppressionStateEventProcessor : EventProcessor
         {
             private readonly VisualStudioDiagnosticListSuppressionStateService _suppressionStateService;
 

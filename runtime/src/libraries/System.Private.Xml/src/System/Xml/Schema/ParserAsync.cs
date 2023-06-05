@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml.Schema
 {
-    internal sealed partial class Parser
+    partial internal sealed class Parser
     {
         public async Task StartParsingAsync(XmlReader reader, string? targetNamespace)
         {

@@ -12,7 +12,7 @@ using static System.WeakReferenceHandleTags;
 
 namespace System
 {
-    internal sealed partial class ComAwareWeakReference
+    partial internal sealed class ComAwareWeakReference
     {
         // _weakHandle is effectively readonly.
         // the only place where we change it after construction is in finalizer.

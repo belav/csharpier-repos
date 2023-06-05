@@ -8,10 +8,11 @@ using Internal.Runtime.TypeLoader;
 
 namespace Internal.TypeSystem.NoMetadata
 {
+    partial
     /// <summary>
     /// Represents a method within the Redhawk runtime
     /// </summary>
-    internal sealed partial class RuntimeMethodDesc : NoMetadataMethodDesc
+    internal sealed class RuntimeMethodDesc : NoMetadataMethodDesc
     {
         public RuntimeMethodDesc(
             bool unboxingStub,

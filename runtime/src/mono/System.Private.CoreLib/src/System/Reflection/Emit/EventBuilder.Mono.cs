@@ -40,7 +40,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class EventBuilder
+    partial public sealed class EventBuilder
     {
         #region Sync with MonoReflectionEventBuilder in object-internals.h
         internal string name;

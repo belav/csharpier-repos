@@ -42,7 +42,7 @@ using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {
-    public sealed partial class Font
+    partial public sealed class Font
     {
         private const byte DefaultCharSet = 1;
 

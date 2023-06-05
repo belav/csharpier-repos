@@ -21,10 +21,11 @@ namespace System.Dynamic
 #else
 namespace Microsoft.Scripting
 {
+    partial
 #endif
 
 #if true
-    internal static partial class Strings
+    internal static class Strings
     {
         private static string FormatString(string format, params object[] args)
         {
@@ -32,6 +33,7 @@ namespace Microsoft.Scripting
         }
     }
 
+    partial
     #region Generated Com Exception Factory
 
     // *** BEGIN GENERATED CODE ***
@@ -41,7 +43,7 @@ namespace Microsoft.Scripting
     ///    Strongly-typed and parameterized string factory.
     /// </summary>
 
-    internal static partial class Strings
+    internal static class Strings
     {
         /// <summary>
         /// A string like  "Invalid argument value"
@@ -212,11 +214,12 @@ namespace Microsoft.Scripting
         }
     }
 
+    partial
     /// <summary>
     ///    Strongly-typed and parameterized exception factory.
     /// </summary>
 
-    internal static partial class Error
+    internal static class Error
     {
         /// <summary>
         /// ArgumentException with message like "COM object does not support events."

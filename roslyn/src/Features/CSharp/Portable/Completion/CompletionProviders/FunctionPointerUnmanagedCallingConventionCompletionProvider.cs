@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     )]
     [ExtensionOrder(After = nameof(AggregateEmbeddedLanguageCompletionProvider))]
     [Shared]
-    internal partial class FunctionPointerUnmanagedCallingConventionCompletionProvider
+    partial internal class FunctionPointerUnmanagedCallingConventionCompletionProvider
         : LSPCompletionProvider
     {
         [ImportingConstructor]

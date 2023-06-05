@@ -34,8 +34,9 @@ namespace System.Threading
 #if !MONO
     [HostProtection(Synchronization = true, ExternalThreading = true)]
     [System.Runtime.InteropServices.ComVisible(true)]
+    partial
 #endif
-    public static partial class Monitor
+    public static class Monitor
     {
         /*=========================================================================
         ** Obtain the monitor lock of obj. Will block if another thread holds the lock

@@ -8,7 +8,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal abstract partial class CompilerDiagnosticAnalyzer : DiagnosticAnalyzer
+    partial internal abstract class CompilerDiagnosticAnalyzer : DiagnosticAnalyzer
     {
         private const string Origin = nameof(Origin);
         private const string Syntactic = nameof(Syntactic);

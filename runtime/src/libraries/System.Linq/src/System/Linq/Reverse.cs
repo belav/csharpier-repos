@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TSource> Reverse<TSource>(this IEnumerable<TSource> source)
         {
@@ -18,11 +18,12 @@ namespace System.Linq
             return new ReverseIterator<TSource>(source);
         }
 
+        partial
         /// <summary>
         /// An iterator that yields the items of an <see cref="IEnumerable{TSource}"/> in reverse.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        private sealed partial class ReverseIterator<TSource> : Iterator<TSource>
+        private sealed class ReverseIterator<TSource> : Iterator<TSource>
         {
             private readonly IEnumerable<TSource> _source;
             private TSource[]? _buffer;

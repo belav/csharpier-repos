@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace RunTests
 {
-    internal sealed partial class Program
+    partial internal sealed class Program
     {
         private static readonly ImmutableHashSet<string> PrimaryProcessNames =
             ImmutableHashSet.Create(

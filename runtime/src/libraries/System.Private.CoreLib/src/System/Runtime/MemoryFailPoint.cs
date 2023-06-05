@@ -67,7 +67,7 @@ using System.Diagnostics;
 
 namespace System.Runtime
 {
-    public sealed partial class MemoryFailPoint : CriticalFinalizerObject, IDisposable
+    partial public sealed class MemoryFailPoint : CriticalFinalizerObject, IDisposable
     {
         // Find the top section of user mode memory.  Avoid the last 64K.
         // Windows reserves that block for the kernel, apparently, and doesn't

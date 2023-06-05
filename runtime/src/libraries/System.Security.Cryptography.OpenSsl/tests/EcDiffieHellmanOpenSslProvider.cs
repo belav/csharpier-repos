@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
-    public partial class ECDiffieHellmanProvider : IECDiffieHellmanProvider
+    partial public class ECDiffieHellmanProvider : IECDiffieHellmanProvider
     {
         private EcDsa.Tests.ECDsaProvider _ecdsaProvider = new EcDsa.Tests.ECDsaProvider();
 
@@ -29,7 +29,7 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         public bool CanDeriveNewPublicKey => true;
     }
 
-    public partial class ECDiffieHellmanFactory
+    partial public class ECDiffieHellmanFactory
     {
         private static readonly IECDiffieHellmanProvider s_provider = new ECDiffieHellmanProvider();
     }

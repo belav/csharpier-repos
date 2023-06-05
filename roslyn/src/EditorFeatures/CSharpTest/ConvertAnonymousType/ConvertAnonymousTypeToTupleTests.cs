@@ -14,7 +14,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
-    public partial class ConvertAnonymousTypeToTupleTests : AbstractCSharpCodeActionTest
+    partial public class ConvertAnonymousTypeToTupleTests : AbstractCSharpCodeActionTest
     {
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,

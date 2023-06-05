@@ -321,7 +321,7 @@ namespace System.Web.UI.Design.MobileControls
             return "<div style='width:100%'>" + base.GetEmptyDesignTimeHtml() + "</div>";
         }
 
-        protected override sealed String GetErrorDesignTimeHtml(Exception e)
+        protected sealed override String GetErrorDesignTimeHtml(Exception e)
         {
             return base.GetErrorDesignTimeHtml(e);
         }

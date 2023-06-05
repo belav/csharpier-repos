@@ -87,7 +87,7 @@ namespace Mono.Security.X509
 
         private X501() { }
 
-        static public string ToString(ASN1 seq)
+        public static string ToString(ASN1 seq)
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < seq.Count; i++)
@@ -102,7 +102,7 @@ namespace Mono.Security.X509
             return sb.ToString();
         }
 
-        static public string ToString(ASN1 seq, bool reversed, string separator, bool quotes)
+        public static string ToString(ASN1 seq, bool reversed, string separator, bool quotes)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -133,7 +133,7 @@ namespace Mono.Security.X509
             return sb.ToString();
         }
 
-        static private void AppendEntry(StringBuilder sb, ASN1 entry, bool quotes)
+        private static void AppendEntry(StringBuilder sb, ASN1 entry, bool quotes)
         {
             // multiple entries are valid
             for (int k = 0; k < entry.Count; k++)
@@ -228,7 +228,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static private X520.AttributeTypeAndValue GetAttributeFromOid(string attributeType)
+        private static X520.AttributeTypeAndValue GetAttributeFromOid(string attributeType)
         {
             string s = attributeType.ToUpper(CultureInfo.InvariantCulture).Trim();
             switch (s)
@@ -280,7 +280,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static private bool IsOid(string oid)
+        private static bool IsOid(string oid)
         {
             try
             {
@@ -294,7 +294,9 @@ namespace Mono.Security.X509
         }
 
         // no quote processing
-        static private X520.AttributeTypeAndValue ReadAttribute(string value, ref int pos)
+        private
+        // no quote processing
+        static X520.AttributeTypeAndValue ReadAttribute(string value, ref int pos)
         {
             while ((value[pos] == ' ') && (pos < value.Length))
                 pos++;
@@ -318,7 +320,7 @@ namespace Mono.Security.X509
             return atv;
         }
 
-        static private bool IsHex(char c)
+        private static bool IsHex(char c)
         {
             if (Char.IsDigit(c))
                 return true;
@@ -343,7 +345,7 @@ namespace Mono.Security.X509
             return Encoding.UTF8.GetString(data);
         }
 
-        static private int ReadEscaped(StringBuilder sb, string value, int pos)
+        private static int ReadEscaped(StringBuilder sb, string value, int pos)
         {
             switch (value[pos])
             {
@@ -370,7 +372,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static private int ReadQuoted(StringBuilder sb, string value, int pos)
+        private static int ReadQuoted(StringBuilder sb, string value, int pos)
         {
             int original = pos;
             while (pos <= value.Length)
@@ -391,7 +393,7 @@ namespace Mono.Security.X509
             throw new FormatException(string.Format(msg, value.Substring(original)));
         }
 
-        static private string ReadValue(string value, ref int pos)
+        private static string ReadValue(string value, ref int pos)
         {
             int original = pos;
             StringBuilder sb = new StringBuilder();
@@ -430,7 +432,7 @@ namespace Mono.Security.X509
             return sb.ToString();
         }
 
-        static public ASN1 FromString(string rdn)
+        public static ASN1 FromString(string rdn)
         {
             if (rdn == null)
                 throw new ArgumentNullException("rdn");

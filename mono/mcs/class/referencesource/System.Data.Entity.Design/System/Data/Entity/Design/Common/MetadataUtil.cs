@@ -67,7 +67,7 @@ namespace System.Data.Entity.Design.Common
             return providerServices;
         }
 
-        static internal ProviderIncompatibleException ProviderIncompatible(string error)
+        internal static ProviderIncompatibleException ProviderIncompatible(string error)
         {
             ProviderIncompatibleException e = new ProviderIncompatibleException(error);
             return e;
@@ -256,13 +256,13 @@ namespace System.Data.Entity.Design.Common
             return true;
         }
 
-        static private readonly Type StackOverflowType = typeof(System.StackOverflowException);
-        static private readonly Type OutOfMemoryType = typeof(System.OutOfMemoryException);
-        static private readonly Type ThreadAbortType =
+        private static readonly Type StackOverflowType = typeof(System.StackOverflowException);
+        private static readonly Type OutOfMemoryType = typeof(System.OutOfMemoryException);
+        private static readonly Type ThreadAbortType =
             typeof(System.Threading.ThreadAbortException);
-        static private readonly Type NullReferenceType = typeof(System.NullReferenceException);
-        static private readonly Type AccessViolationType = typeof(System.AccessViolationException);
-        static private readonly Type SecurityType = typeof(System.Security.SecurityException);
+        private static readonly Type NullReferenceType = typeof(System.NullReferenceException);
+        private static readonly Type AccessViolationType = typeof(System.AccessViolationException);
+        private static readonly Type SecurityType = typeof(System.Security.SecurityException);
 
         internal static bool IsCatchableExceptionType(Exception e)
         {
@@ -285,7 +285,13 @@ namespace System.Data.Entity.Design.Common
         /// </summary>
         /// <param name="errors"></param>
         /// <returns></returns>
-        static internal string CombineErrorMessage(
+        internal
+        /// <summary>
+        /// Returns the single error message from the list of errors
+        /// </summary>
+        /// <param name="errors"></param>
+        /// <returns></returns>
+        static string CombineErrorMessage(
             IEnumerable<System.Data.Metadata.Edm.EdmSchemaError> errors
         )
         {

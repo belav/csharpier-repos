@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.ComponentModel;
     using System.ServiceModel.PeerResolvers;
 
-    public sealed partial class PeerResolverElement : ServiceModelConfigurationElement
+    partial public sealed class PeerResolverElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = PeerResolverMode.Auto)]
         [ServiceModelEnumValidator(typeof(PeerResolverModeHelper))]

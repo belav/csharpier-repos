@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel;
 
-    public sealed partial class CompositeDuplexElement : BindingElementExtensionElement
+    partial public sealed class CompositeDuplexElement : BindingElementExtensionElement
     {
         public CompositeDuplexElement() { }
 

@@ -5,18 +5,18 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxCreate")]
-        internal static partial SafeX509StoreCtxHandle X509StoreCtxCreate();
+        partial internal static SafeX509StoreCtxHandle X509StoreCtxCreate();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxDestroy")]
-        internal static partial void X509StoreCtxDestroy(IntPtr v);
+        partial internal static void X509StoreCtxDestroy(IntPtr v);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxGetChain")]
-        internal static partial SafeX509StackHandle X509StoreCtxGetChain(
+        partial internal static SafeX509StackHandle X509StoreCtxGetChain(
             SafeX509StoreCtxHandle ctx
         );
 
@@ -24,12 +24,12 @@ internal static partial class Interop
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_X509StoreCtxGetCurrentCert"
         )]
-        internal static partial SafeX509Handle X509StoreCtxGetCurrentCert(
+        partial internal static SafeX509Handle X509StoreCtxGetCurrentCert(
             SafeX509StoreCtxHandle ctx
         );
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_X509StoreCtxCommitToChain(
+        partial private static int CryptoNative_X509StoreCtxCommitToChain(
             SafeX509StoreCtxHandle ctx
         );
 
@@ -42,7 +42,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_X509StoreCtxResetForSignatureError(
+        partial private static int CryptoNative_X509StoreCtxResetForSignatureError(
             SafeX509StoreCtxHandle ctx,
             out SafeX509StoreHandle newStore
         );
@@ -70,7 +70,7 @@ internal static partial class Interop
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_X509StoreCtxGetSharedUntrusted"
         )]
-        private static partial SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted_private(
+        partial private static SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted_private(
             SafeX509StoreCtxHandle ctx
         );
 

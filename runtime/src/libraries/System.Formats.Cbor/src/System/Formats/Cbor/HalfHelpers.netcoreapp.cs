@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Formats.Cbor
 {
-    internal static partial class HalfHelpers
+    partial internal static class HalfHelpers
     {
         public static unsafe float HalfToFloat(Half value) => (float)value;
 

@@ -6,12 +6,13 @@ using Microsoft.CSharp.RuntimeBinder.Syntax;
 
 namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
+    partial
     // ----------------------------------------------------------------------------
     // This class encapsulates the results of member lookup, allowing the consumers
     // to get at the inaccessible symbols, bogus symbols, and validly bound symbols.
     // ----------------------------------------------------------------------------
 
-    internal sealed partial class CMemberLookupResults
+    internal sealed class CMemberLookupResults
     {
         private TypeArray ContainingTypes { get; } // Types that contain the member we're looking for.
 

@@ -10,7 +10,7 @@ using MonoTests.Common;
 using MonoTests.SystemWeb.Framework;
 using MonoTests.DataSource;
 
-public partial class DynamicValidator_02 : TestsBasePage<TestDataContext4>
+partial public class DynamicValidator_02 : TestsBasePage<TestDataContext4>
 {
     protected override void PopulateDataSource(DynamicDataSource ds)
     {

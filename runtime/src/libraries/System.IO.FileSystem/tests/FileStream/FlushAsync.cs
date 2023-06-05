@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class FileStream_FlushAsync : FileSystemTest
+    partial public class FileStream_FlushAsync : FileSystemTest
     {
         [Fact]
         public async Task FlushAsyncOnReadOnlyFileDoesNotThrow()

@@ -20,11 +20,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// Driver to execute diagnostic analyzers for a given compilation.
     /// It uses a <see cref="AsyncQueue{TElement}"/> of <see cref="CompilationEvent"/>s to drive its analysis.
     /// </summary>
-    internal abstract partial class AnalyzerDriver : IDisposable
+    internal abstract class AnalyzerDriver : IDisposable
     {
         // Protect against vicious analyzers that provide large values for SymbolKind.
         private const int MaxSymbolKind = 100;
@@ -3567,11 +3568,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
     }
 
+    partial
     /// <summary>
     /// Driver to execute diagnostic analyzers for a given compilation.
     /// It uses a <see cref="AsyncQueue{TElement}"/> of <see cref="CompilationEvent"/>s to drive its analysis.
     /// </summary>
-    internal partial class AnalyzerDriver<TLanguageKindEnum> : AnalyzerDriver
+    internal class AnalyzerDriver<TLanguageKindEnum> : AnalyzerDriver
         where TLanguageKindEnum : struct
     {
         private readonly Func<SyntaxNode, TLanguageKindEnum> _getKind;

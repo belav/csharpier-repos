@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal const int IPv4AddressBytes = 4;
         internal const int IPv6AddressBytes = 16;
@@ -28,7 +28,7 @@ internal static partial class Interop
                 set { _isIPv6 = value ? 1u : 0u; }
             }
 
-            internal fixed byte Address[MAX_IP_ADDRESS_BYTES]; // Buffer to fit an IPv4 or IPv6 address
+            fixed internal byte Address[MAX_IP_ADDRESS_BYTES]; // Buffer to fit an IPv4 or IPv6 address
             private uint _isIPv6; // Non-zero if this is an IPv6 address; zero for IPv4.
             internal uint ScopeId; // Scope ID (IPv6 only)
 

@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace System.Collections.Immutable
 {
-    internal sealed partial class SortedInt32KeyNode<TValue>
+    partial internal sealed class SortedInt32KeyNode<TValue>
     {
         /// <summary>
         /// Enumerates the contents of a binary tree.

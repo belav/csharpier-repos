@@ -26,7 +26,7 @@ class Test
         return 0;
     }
 
-    async static Task<int> TestMethod()
+    static async Task<int> TestMethod()
     {
         await Task.Delay(100000);
         return 1;

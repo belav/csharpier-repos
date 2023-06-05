@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    public abstract partial class MethodInfo : MethodBase
+    partial public abstract class MethodInfo : MethodBase
     {
         protected MethodInfo() { }
 

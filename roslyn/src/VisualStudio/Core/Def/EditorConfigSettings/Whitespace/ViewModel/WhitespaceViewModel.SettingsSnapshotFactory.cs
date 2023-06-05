@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespace.ViewModel
 {
-    internal partial class WhitespaceViewModel
+    partial internal class WhitespaceViewModel
     {
         internal sealed class SettingsSnapshotFactory
             : SettingsSnapshotFactoryBase<Setting, SettingsEntriesSnapshot>

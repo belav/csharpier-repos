@@ -24,7 +24,7 @@ using IntellisenseQuickInfoItem = Microsoft.VisualStudio.Language.Intellisense.Q
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
 {
-    internal partial class QuickInfoSourceProvider
+    partial internal class QuickInfoSourceProvider
     {
         private class QuickInfoSource : IAsyncQuickInfoSource
         {

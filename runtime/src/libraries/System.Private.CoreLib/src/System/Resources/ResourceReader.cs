@@ -48,7 +48,7 @@ namespace System.Resources
         }
     }
 
-    public sealed partial class
+    partial public sealed class
 #if RESOURCES_EXTENSIONS
     DeserializingResourceReader
 #else

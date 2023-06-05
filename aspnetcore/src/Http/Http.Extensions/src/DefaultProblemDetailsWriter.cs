@@ -9,7 +9,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
-internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWriter
+partial internal sealed class DefaultProblemDetailsWriter : IProblemDetailsWriter
 {
     private static readonly MediaTypeHeaderValue _jsonMediaType = new("application/json");
     private static readonly MediaTypeHeaderValue _problemDetailsJsonMediaType =
@@ -84,5 +84,5 @@ internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWrite
     }
 
     [JsonSerializable(typeof(ProblemDetails))]
-    internal sealed partial class ProblemDetailsJsonContext : JsonSerializerContext { }
+    partial internal sealed class ProblemDetailsJsonContext : JsonSerializerContext { }
 }

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
-    public partial class LocalsWindow_OutOfProc
+    partial public class LocalsWindow_OutOfProc
     {
         public class Verifier
         {

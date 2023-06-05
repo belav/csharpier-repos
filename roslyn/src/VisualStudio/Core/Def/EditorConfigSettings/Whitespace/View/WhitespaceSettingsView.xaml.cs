@@ -13,10 +13,11 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespace.View
 {
+    partial
     /// <summary>
     /// Interaction logic for FormattingSettingsView.xaml
     /// </summary>
-    internal partial class WhitespaceSettingsView : UserControl, ISettingsEditorView
+    internal class WhitespaceSettingsView : UserControl, ISettingsEditorView
     {
         private readonly IWpfSettingsEditorViewModel _viewModel;
 

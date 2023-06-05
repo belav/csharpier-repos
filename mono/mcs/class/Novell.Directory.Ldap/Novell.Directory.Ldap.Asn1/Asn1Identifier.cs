@@ -73,6 +73,7 @@ namespace Novell.Directory.Ldap.Asn1
     /// </summary>
     public class Asn1Identifier : System.Object, System.ICloneable
     {
+        public
         /// <summary> Returns the CLASS of this Asn1Identifier as an int value.
         ///
         /// </summary>
@@ -84,29 +85,32 @@ namespace Novell.Directory.Ldap.Asn1
         /// </seealso>
         /// <seealso cref="PRIVATE">
         /// </seealso>
-        virtual public int Asn1Class
+        virtual int Asn1Class
         {
             get { return tagClass; }
         }
 
+        public
         /// <summary> Return a boolean indicating if the constructed bit is set.
         ///
         /// </summary>
         /// <returns> true if constructed and false if primitive.
         /// </returns>
-        virtual public bool Constructed
+        virtual bool Constructed
         {
             get { return constructed; }
         }
 
+        public
         /// <summary> Returns the TAG of this Asn1Identifier.</summary>
-        virtual public int Tag
+        virtual int Tag
         {
             get { return tag; }
         }
 
+        public
         /// <summary> Returns the encoded length of this Asn1Identifier.</summary>
-        virtual public int EncodedLength
+        virtual int EncodedLength
         {
             get { return encodedLength; }
         }
@@ -118,7 +122,7 @@ namespace Novell.Directory.Ldap.Asn1
         /// <seealso cref="UNIVERSAL">
         /// </seealso>
         [CLSCompliantAttribute(false)]
-        virtual public bool Universal
+        public virtual bool Universal
         {
             get { return tagClass == UNIVERSAL; }
         }
@@ -130,7 +134,7 @@ namespace Novell.Directory.Ldap.Asn1
         /// <seealso cref="APPLICATION">
         /// </seealso>
         [CLSCompliantAttribute(false)]
-        virtual public bool Application
+        public virtual bool Application
         {
             get { return tagClass == APPLICATION; }
         }
@@ -142,7 +146,7 @@ namespace Novell.Directory.Ldap.Asn1
         /// <seealso cref="CONTEXT">
         /// </seealso>
         [CLSCompliantAttribute(false)]
-        virtual public bool Context
+        public virtual bool Context
         {
             get { return tagClass == CONTEXT; }
         }
@@ -153,7 +157,7 @@ namespace Novell.Directory.Ldap.Asn1
         /// </summary>
         /// <seealso cref="PRIVATE"></seealso>
         [CLSCompliantAttribute(false)]
-        virtual public bool Private
+        public virtual bool Private
         {
             get { return tagClass == PRIVATE; }
         }

@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Formats.Tar
 {
-    internal static partial class TarHelpers
+    partial internal static class TarHelpers
     {
         private static readonly Lazy<UnixFileMode> s_umask = new Lazy<UnixFileMode>(DetermineUMask);
 

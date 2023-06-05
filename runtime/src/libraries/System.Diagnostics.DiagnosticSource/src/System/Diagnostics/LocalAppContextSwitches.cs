@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    internal static partial class LocalAppContextSwitches
+    partial internal static class LocalAppContextSwitches
     {
         public static bool DefaultActivityIdFormatIsHierarchial { get; } =
             InitializeDefaultActivityIdFormat();

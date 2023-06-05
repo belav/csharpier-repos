@@ -43,7 +43,7 @@ namespace System.Web.Configuration
     public class RemoteWebConfigurationHostServer : IRemoteWebConfigurationHostServer
     {
         internal const char FilePathsSeparatorChar = '<';
-        static internal readonly char[] FilePathsSeparatorParams = new char[]
+        internal static readonly char[] FilePathsSeparatorParams = new char[]
         {
             FilePathsSeparatorChar
         };

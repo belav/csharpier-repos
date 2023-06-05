@@ -8,10 +8,11 @@ using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace Microsoft.CodeAnalysis
 {
+    ref
     /// <summary>
     /// A Span-compatible version of <see cref="System.IO.BinaryReader"/>.
     /// </summary>
-    internal ref struct LittleEndianReader
+    internal struct LittleEndianReader
     {
         private ReadOnlySpan<byte> _span;
 

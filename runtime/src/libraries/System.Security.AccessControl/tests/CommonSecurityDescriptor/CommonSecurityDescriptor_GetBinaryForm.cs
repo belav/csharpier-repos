@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class CommonSecurityDescriptor_GetBinaryForm
+    partial public class CommonSecurityDescriptor_GetBinaryForm
     {
         public static IEnumerable<object[]> CommonSecurityDescriptor_GetBinaryForm_TestData()
         {

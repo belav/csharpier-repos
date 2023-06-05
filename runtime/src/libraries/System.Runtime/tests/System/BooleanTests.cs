@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class BooleanTests
+    partial public class BooleanTests
     {
         [Fact]
         public void TrueString_Get_ReturnsTrue()

@@ -4,8 +4,9 @@ using System.Xml;
 
 namespace System.IdentityModel.Configuration
 {
+    partial
 #pragma warning disable 1591
-    public partial class ConfigurationElementInterceptor : ConfigurationElement
+    public class ConfigurationElementInterceptor : ConfigurationElement
     {
         private XmlDocument elementXml;
 

@@ -206,9 +206,11 @@ namespace System.Linq.Expressions
             get { return 0; }
         }
     }
+
+    partial
     #endregion
 
-    public partial class Expression
+    public class Expression
     {
         /// <summary>
         /// Creates a <see cref="DebugInfoExpression"/> with the specified span.

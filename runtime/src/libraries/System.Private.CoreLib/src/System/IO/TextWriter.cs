@@ -12,13 +12,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.IO
 {
+    partial
     // This abstract base class represents a writer that can write a sequential
     // stream of characters. A subclass must minimally implement the
     // Write(char) method.
     //
     // This class is intended for character output, not bytes.
     // There are methods on the Stream class for writing bytes.
-    public abstract partial class TextWriter : MarshalByRefObject, IDisposable, IAsyncDisposable
+    public abstract class TextWriter : MarshalByRefObject, IDisposable, IAsyncDisposable
     {
         public static readonly TextWriter Null = new NullTextWriter();
 

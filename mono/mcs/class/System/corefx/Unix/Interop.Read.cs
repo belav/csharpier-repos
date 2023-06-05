@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         static Sys()
         {

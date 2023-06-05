@@ -5724,7 +5724,7 @@ namespace MonoTests.System
                 get { return null; }
             }
 
-            protected static internal string ProIntStatBlue
+            protected internal static string ProIntStatBlue
             {
                 get { return null; }
             }
@@ -5787,7 +5787,7 @@ namespace MonoTests.System
                 get { return null; }
             }
 
-            protected static internal string ProIntStatBase
+            protected internal static string ProIntStatBase
             {
                 get { return null; }
             }
@@ -5850,7 +5850,7 @@ namespace MonoTests.System
                 get { return null; }
             }
 
-            protected static internal string ProIntStat
+            protected internal static string ProIntStat
             {
                 get { return null; }
             }

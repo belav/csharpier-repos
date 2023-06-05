@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree
         ),
         Shared
     ]
-    internal partial class SymbolTreeInfoIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider
+    partial internal class SymbolTreeInfoIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

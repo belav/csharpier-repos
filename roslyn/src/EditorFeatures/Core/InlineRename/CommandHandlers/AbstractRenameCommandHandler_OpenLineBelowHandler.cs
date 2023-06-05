@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler
+    partial internal abstract class AbstractRenameCommandHandler
         : IChainedCommandHandler<OpenLineBelowCommandArgs>
     {
         public CommandState GetCommandState(

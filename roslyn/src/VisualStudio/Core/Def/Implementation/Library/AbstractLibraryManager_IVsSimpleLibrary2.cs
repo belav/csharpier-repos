@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
 {
-    internal partial class AbstractLibraryManager : IVsSimpleLibrary2
+    partial internal class AbstractLibraryManager : IVsSimpleLibrary2
     {
         public abstract uint GetLibraryFlags();
 

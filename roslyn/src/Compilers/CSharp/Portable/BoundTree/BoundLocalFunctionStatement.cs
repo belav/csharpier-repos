@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundLocalFunctionStatement
+    partial internal class BoundLocalFunctionStatement
     {
         public BoundBlock? Body
         {

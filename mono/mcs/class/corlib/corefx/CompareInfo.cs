@@ -38,7 +38,7 @@ namespace System.Globalization
             _sortName = culture.SortName;
         }
 
-        unsafe static int CompareStringOrdinalIgnoreCase(
+        static unsafe int CompareStringOrdinalIgnoreCase(
             char* pString1,
             int length1,
             char* pString2,
@@ -176,7 +176,7 @@ namespace System.Globalization
             return internal_compare_switch(s1, 0, s1.Length, new string(s2), 0, s2.Length, options);
         }
 
-        unsafe static bool IsSortable(char* text, int length)
+        static unsafe bool IsSortable(char* text, int length)
         {
             return Mono.Globalization.Unicode.MSCompatUnicodeTable.IsSortable(
                 new string(text, 0, length)

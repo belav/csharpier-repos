@@ -15,7 +15,7 @@ using KeyBlobMagicNumber = Interop.BCrypt.KeyBlobMagicNumber;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECCng
+    partial internal static class ECCng
     {
         internal static byte[] GetNamedCurveBlob(ref ECParameters parameters, bool ecdh)
         {

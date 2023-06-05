@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class HandleFactory
+partial internal static class HandleFactory
 {
     public static SafeHandle CreateHandle(IntPtr handle)
     {

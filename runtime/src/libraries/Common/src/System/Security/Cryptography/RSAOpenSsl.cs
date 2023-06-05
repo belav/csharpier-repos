@@ -13,7 +13,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSAOpenSsl : RSA, IRuntimeAlgorithm
+    partial public sealed class RSAOpenSsl : RSA, IRuntimeAlgorithm
     {
         private const int BitsPerByte = 8;
 
@@ -957,7 +957,7 @@ namespace System.Security.Cryptography
             }
         }
 
-        static partial void ThrowIfNotSupported();
+        partial static void ThrowIfNotSupported();
 
         private static Exception PaddingModeNotSupported() =>
             new CryptographicException(SR.Cryptography_InvalidPaddingMode);

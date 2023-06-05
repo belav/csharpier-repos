@@ -26,7 +26,7 @@ namespace System.Web.Util
         private static class ResetUtil<T>
             where T : class
         {
-            internal readonly static Action<T> ResetFn = CreateResetFn();
+            internal static readonly Action<T> ResetFn = CreateResetFn();
 
             private static Action<T> CreateResetFn()
             {

@@ -7,11 +7,12 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
+    partial
     /// <summary>
     /// Helper class to allow one to do simple regular expressions over a sequence of objects (as
     /// opposed to a sequence of characters).
     /// </summary>
-    internal abstract partial class Matcher<T>
+    internal abstract class Matcher<T>
     {
         // Tries to match this matcher against the provided sequence at the given index.  If the
         // match succeeds, 'true' is returned, and 'index' points to the location after the match

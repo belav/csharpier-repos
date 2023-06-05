@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelliSense
 {
-    internal partial class DebuggerTextView
+    partial internal class DebuggerTextView
     {
         // HACK HACK HACK HACK HACK: We'll use this fake ICompletionSession to trick them into
         // routing commands to us for both completion and sighelp

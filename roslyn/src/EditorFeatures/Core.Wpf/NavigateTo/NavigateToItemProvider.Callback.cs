@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
 {
-    internal partial class NavigateToItemProvider
+    partial internal class NavigateToItemProvider
     {
         private class NavigateToItemProviderCallback : INavigateToSearchCallback
         {

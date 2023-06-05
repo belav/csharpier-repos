@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System
 {
-    internal static partial class PasteArguments
+    partial internal static class PasteArguments
     {
         /// <summary>
         /// Repastes a set of arguments into a linear string that parses back into the originals under pre- or post-2008 VC parsing rules.

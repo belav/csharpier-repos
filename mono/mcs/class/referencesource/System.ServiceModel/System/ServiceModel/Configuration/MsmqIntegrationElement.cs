@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using Msmq = System.ServiceModel.MsmqIntegration;
 
-    public sealed partial class MsmqIntegrationElement : MsmqElementBase
+    partial public sealed class MsmqIntegrationElement : MsmqElementBase
     {
         public override Type BindingElementType
         {

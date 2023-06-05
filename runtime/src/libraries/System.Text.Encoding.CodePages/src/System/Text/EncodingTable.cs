@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.Text
 {
-    internal static partial class EncodingTable
+    partial internal static class EncodingTable
     {
         private static readonly Dictionary<string, int> s_nameToCodePageCache = new Dictionary<
             string,

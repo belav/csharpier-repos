@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class CommonSecurityDescriptor_GetSddlForm
+    partial public class CommonSecurityDescriptor_GetSddlForm
     {
         public static IEnumerable<object[]> CommonSecurityDescriptor_GetSddlForm_TestData()
         {

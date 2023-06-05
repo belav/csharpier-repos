@@ -10,7 +10,7 @@ using System.Text;
 
 namespace System.Data.Common
 {
-    internal partial class DbConnectionOptions
+    partial internal class DbConnectionOptions
     {
         // instances of this class are intended to be immutable, i.e readonly
         // used by pooling classes so it is much easier to verify correctness

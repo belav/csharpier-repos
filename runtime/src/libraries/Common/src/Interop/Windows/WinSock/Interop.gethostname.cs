@@ -4,11 +4,11 @@
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static unsafe partial SocketError gethostname(byte* name, int namelen);
+        partial internal static unsafe SocketError gethostname(byte* name, int namelen);
     }
 }

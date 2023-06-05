@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace System.ComponentModel.Composition.Factories
 {
-    internal static partial class ReflectionFactory
+    partial internal static class ReflectionFactory
     {
         public static ParameterInfo CreateParameter()
         {

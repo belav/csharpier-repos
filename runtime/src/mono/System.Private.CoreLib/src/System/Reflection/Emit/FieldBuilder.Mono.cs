@@ -41,7 +41,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class FieldBuilder : FieldInfo
+    partial public sealed class FieldBuilder : FieldInfo
     {
         #region Sync with MonoReflectionFieldBuilder in object-internals.h
         private FieldAttributes attrs;

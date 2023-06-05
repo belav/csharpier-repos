@@ -1295,7 +1295,7 @@ namespace System.IO.Tests
     }
 
     [Collection(nameof(DisableParallelization))]
-    public partial class DangerousFileSystemWatcherTests : FileSystemWatcherTest
+    partial public class DangerousFileSystemWatcherTests : FileSystemWatcherTest
     {
         private readonly ITestOutputHelper _output;
 

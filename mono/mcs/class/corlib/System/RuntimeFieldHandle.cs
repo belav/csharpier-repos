@@ -135,7 +135,7 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static unsafe extern internal Object GetValueDirect(
+        internal static extern unsafe Object GetValueDirect(
             RuntimeFieldInfo field,
             RuntimeType fieldType,
             void* pTypedRef,
@@ -143,7 +143,7 @@ namespace System
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static unsafe extern internal void SetValueDirect(
+        internal static extern unsafe void SetValueDirect(
             RuntimeFieldInfo field,
             RuntimeType fieldType,
             void* pTypedRef,

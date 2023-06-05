@@ -6,7 +6,7 @@
 
 namespace System.IO
 {
-    public sealed partial class DriveInfo : System.Runtime.Serialization.ISerializable
+    partial public sealed class DriveInfo : System.Runtime.Serialization.ISerializable
     {
         public DriveInfo(string driveName) { }
 
@@ -67,7 +67,7 @@ namespace System.IO
         }
     }
 
-    public partial class DriveNotFoundException : System.IO.IOException
+    partial public class DriveNotFoundException : System.IO.IOException
     {
         public DriveNotFoundException() { }
 

@@ -5,8 +5,9 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     // Functionality related to deterministic ordering of types
-    internal partial class EnumGetHashCodeThunk
+    internal class EnumGetHashCodeThunk
     {
         protected override int ClassCode => 261739662;
 
@@ -17,7 +18,7 @@ namespace Internal.IL.Stubs
         }
     }
 
-    internal partial class EnumEqualsThunk
+    partial internal class EnumEqualsThunk
     {
         protected override int ClassCode => -1774524780;
 

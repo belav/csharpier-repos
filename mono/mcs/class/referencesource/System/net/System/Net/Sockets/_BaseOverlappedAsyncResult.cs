@@ -38,11 +38,9 @@ namespace System.Net.Sockets
 #if SOCKETTHREADPOOL
         internal
 #else
-        private
+        private static readonly
 #endif
-        unsafe static readonly IOCompletionCallback s_IOCallback = new IOCompletionCallback(
-            CompletionPortCallback
-        );
+        unsafe IOCompletionCallback s_IOCallback = new IOCompletionCallback(CompletionPortCallback);
 
         //
         // Constructor. We take in the socket that's creating us, the caller's
@@ -361,7 +359,7 @@ namespace System.Net.Sockets
 #endif
         }
 
-        private unsafe static void CompletionPortCallback(
+        private static unsafe void CompletionPortCallback(
             uint errorCode,
             uint numBytes,
             NativeOverlapped* nativeOverlapped

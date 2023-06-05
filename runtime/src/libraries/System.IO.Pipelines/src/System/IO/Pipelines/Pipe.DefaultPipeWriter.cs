@@ -7,8 +7,9 @@ using System.Threading.Tasks.Sources;
 
 namespace System.IO.Pipelines
 {
+    partial
     /// <summary>The default <see cref="System.IO.Pipelines.PipeWriter" /> and <see cref="System.IO.Pipelines.PipeReader" /> implementation.</summary>
-    public sealed partial class Pipe
+    public sealed class Pipe
     {
         private sealed class DefaultPipeWriter : PipeWriter, IValueTaskSource<FlushResult>
         {

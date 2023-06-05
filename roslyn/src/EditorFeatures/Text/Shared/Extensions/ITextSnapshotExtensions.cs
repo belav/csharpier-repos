@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
 {
-    internal static partial class ITextSnapshotExtensions
+    partial internal static class ITextSnapshotExtensions
     {
         public static SnapshotPoint GetPoint(this ITextSnapshot snapshot, int position) =>
             new SnapshotPoint(snapshot, position);

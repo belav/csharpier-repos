@@ -31,7 +31,7 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
     [Export(typeof(MiscellaneousFilesWorkspace))]
-    internal sealed partial class MiscellaneousFilesWorkspace
+    partial internal sealed class MiscellaneousFilesWorkspace
         : Workspace,
             IRunningDocumentTableEventListener
     {

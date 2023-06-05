@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Net.Sockets
 {
-    public partial class SocketException : Win32Exception
+    partial public class SocketException : Win32Exception
     {
         /// <summary>Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the default error code.</summary>
         public SocketException()

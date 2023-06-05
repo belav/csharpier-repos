@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundSpillSequence
+    partial internal class BoundSpillSequence
     {
         public BoundSpillSequence(
             SyntaxNode syntax,

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Net
 {
-    internal static partial class CertificateValidationPal
+    partial internal static class CertificateValidationPal
     {
         private static readonly object s_syncObject = new object();
 
@@ -40,7 +40,7 @@ namespace System.Net
                 chainPolicy
             );
 
-        static partial void CheckSupportsStore(StoreLocation storeLocation, ref bool hasSupport);
+        partial static void CheckSupportsStore(StoreLocation storeLocation, ref bool hasSupport);
 
         internal static X509Store? EnsureStoreOpened(bool isMachineStore)
         {

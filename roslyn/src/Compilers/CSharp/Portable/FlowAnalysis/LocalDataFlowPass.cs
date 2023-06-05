@@ -10,10 +10,11 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Does a data flow analysis for state attached to local variables and fields of struct locals.
     /// </summary>
-    internal abstract partial class LocalDataFlowPass<TLocalState, TLocalFunctionState>
+    internal abstract class LocalDataFlowPass<TLocalState, TLocalFunctionState>
         : AbstractFlowPass<TLocalState, TLocalFunctionState>
         where TLocalState : LocalDataFlowPass<TLocalState, TLocalFunctionState>.ILocalDataFlowState
         where TLocalFunctionState : AbstractFlowPass<

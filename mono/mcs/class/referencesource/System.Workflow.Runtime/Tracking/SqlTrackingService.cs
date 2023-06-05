@@ -230,7 +230,12 @@ namespace System.Workflow.Runtime.Tracking
 
         #region WorkflowRuntimeService
 
-        override protected internal void Start()
+        protected internal
+        #endregion
+
+        #region WorkflowRuntimeService
+
+        override void Start()
         {
             _lastProfileCheck = DateTime.UtcNow;
 

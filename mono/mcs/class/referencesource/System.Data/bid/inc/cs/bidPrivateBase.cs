@@ -63,7 +63,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 //
 
 [ComVisible(false)]
-internal static partial class Bid
+partial internal static class Bid
 {
     //+//////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                         //
@@ -1254,7 +1254,7 @@ internal static partial class Bid
             _bInitialized = true;
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             _bInitialized = false;
             doneEntryPoint();
@@ -1283,7 +1283,7 @@ internal static partial class Bid
     //
 
     [SuppressUnmanagedCodeSecurity, ComVisible(false)]
-    private static partial class NativeMethods
+    partial private static class NativeMethods
     {
         //
         //  Plain text
@@ -1295,7 +1295,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.StdCall,
             EntryPoint = "DllBidPutStrW"
         )]
-        extern internal static void PutStr(IntPtr hID, UIntPtr src, UIntPtr info, string str);
+        internal static extern void PutStr(IntPtr hID, UIntPtr src, UIntPtr info, string str);
 
         //
         //  Trace
@@ -1307,7 +1307,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(IntPtr hID, UIntPtr src, UIntPtr info, string strConst);
+        internal static extern void Trace(IntPtr hID, UIntPtr src, UIntPtr info, string strConst);
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(
@@ -1316,7 +1316,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1329,7 +1329,7 @@ internal static partial class Bid
         //
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName, EntryPoint = "DllBidScopeLeave")]
-        extern internal static void ScopeLeave(
+        internal static extern void ScopeLeave(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1343,7 +1343,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1358,7 +1358,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1374,7 +1374,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1390,13 +1390,13 @@ internal static partial class Bid
 #if BID_USE_CONTROL
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName, CharSet = CharSet.Unicode, EntryPoint = "DllBidEnabledW")]
-        extern internal static bool Enabled(IntPtr hID, UIntPtr src, UIntPtr info, string tcs);
+        internal static extern bool Enabled(IntPtr hID, UIntPtr src, UIntPtr info, string tcs);
 #endif
 
 #if BID_USE_IDENT
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName, CharSet = CharSet.Unicode, EntryPoint = "DllBidIndent")]
-        extern internal static int Indent(IntPtr hID, int nIdx);
+        internal static extern int Indent(IntPtr hID, int nIdx);
 #endif
 
         [ResourceExposure(ResourceScope.None)]
@@ -1406,7 +1406,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void TraceBin(
+        internal static extern void TraceBin(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1421,7 +1421,7 @@ internal static partial class Bid
         //
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName, CharSet = CharSet.Unicode, EntryPoint = "DllBidTouch")]
-        extern internal static int Touch01(
+        internal static extern int Touch01(
             IntPtr hID,
             string textID,
             uint code,
@@ -1431,7 +1431,7 @@ internal static partial class Bid
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName, CharSet = CharSet.Unicode, EntryPoint = "DllBidTouch")]
-        extern internal static void Touch02(
+        internal static extern void Touch02(
             IntPtr hID,
             string textID,
             uint code,
@@ -1441,7 +1441,7 @@ internal static partial class Bid
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName, CharSet = CharSet.Unicode, EntryPoint = "DllBidTouch")]
-        extern internal static void Touch03(
+        internal static extern void Touch03(
             IntPtr hID,
             string textID,
             uint code,
@@ -1456,7 +1456,7 @@ internal static partial class Bid
 #if BID_USE_CONTROL
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName, CharSet = CharSet.Unicode, EntryPoint = "DllBidCtlProc")]
-        extern internal static void DllBidCtlProc(
+        internal static extern void DllBidCtlProc(
             IntPtr hID,
             IntPtr cmdSpace,
             CtlCmd cmd,
@@ -1468,7 +1468,7 @@ internal static partial class Bid
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName, CharSet = CharSet.Unicode, EntryPoint = "DllBidCtlProc")]
-        extern internal static void AddMetaText(
+        internal static extern void AddMetaText(
             IntPtr hID,
             IntPtr cmdSpace,
             CtlCmd cmd,
@@ -1480,7 +1480,7 @@ internal static partial class Bid
 #if BID_USE_EXTENSIONS
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName, CharSet = CharSet.Unicode, EntryPoint = "DllBidCtlProc")]
-        extern internal static void AddExtension(
+        internal static extern void AddExtension(
             IntPtr hID,
             IntPtr cmdSpaceID,
             CtlCmd cmd,
@@ -1498,7 +1498,7 @@ internal static partial class Bid
             BestFitMapping = false,
             EntryPoint = "DllBidCtlProc"
         )]
-        extern internal static IntPtr GetCmdSpaceID(
+        internal static extern IntPtr GetCmdSpaceID(
             IntPtr hID,
             IntPtr cmdSpace,
             CtlCmd cmd,
@@ -1513,7 +1513,7 @@ internal static partial class Bid
         //
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(dllName, CharSet = CharSet.Ansi, BestFitMapping = false)]
-        extern internal static void DllBidEntryPoint(
+        internal static extern void DllBidEntryPoint(
             ref IntPtr hID,
             int bInitAndVer,
             string sIdentity,
@@ -1528,7 +1528,7 @@ internal static partial class Bid
         [ResourceExposure(ResourceScope.Machine)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport(dllName)]
-        extern internal static void DllBidEntryPoint(
+        internal static extern void DllBidEntryPoint(
             ref IntPtr hID,
             int bInitAndVer,
             IntPtr unused1,
@@ -1542,12 +1542,12 @@ internal static partial class Bid
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(dllName)]
-        extern internal static void DllBidInitialize();
+        internal static extern void DllBidInitialize();
 
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport(dllName)]
-        extern internal static void DllBidFinalize();
+        internal static extern void DllBidFinalize();
     } // NativeMethods
 } // Bid{PrivateBase}
 

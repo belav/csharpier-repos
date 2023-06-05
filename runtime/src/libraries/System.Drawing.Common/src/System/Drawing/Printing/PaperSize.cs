@@ -5,10 +5,11 @@ using System.Globalization;
 
 namespace System.Drawing.Printing
 {
+    partial
     /// <summary>
     /// Specifies the size of a piece of paper.
     /// </summary>
-    public partial class PaperSize
+    public class PaperSize
     {
         private PaperKind _kind;
         private string _name;

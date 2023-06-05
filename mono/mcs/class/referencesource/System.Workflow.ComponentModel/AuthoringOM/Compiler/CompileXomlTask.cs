@@ -997,7 +997,7 @@ namespace System.Workflow.ComponentModel.Compiler
             protected VBCompilerOptionsBuilder()
                 : base() { }
 
-            sealed protected override void GetOptionInfo(
+            protected sealed override void GetOptionInfo(
                 ITaskItem option,
                 out string optionName,
                 out string optionValue,
@@ -1340,7 +1340,7 @@ namespace System.Workflow.ComponentModel.Compiler
             set { base.ResourceFilesWithManifestResourceNames = value; }
         }
 
-        override protected string CreateManifestName(
+        protected override string CreateManifestName(
             string fileName,
             string linkFileName,
             string rootNamespace,
@@ -1384,7 +1384,7 @@ namespace System.Workflow.ComponentModel.Compiler
             return manifestName;
         }
 
-        override protected bool IsSourceFile(string fileName)
+        protected override bool IsSourceFile(string fileName)
         {
             string extension = Path.GetExtension(fileName);
             if (String.Compare(extension, ".xoml", StringComparison.OrdinalIgnoreCase) == 0)
@@ -1401,7 +1401,7 @@ namespace System.Workflow.ComponentModel.Compiler
     {
         private bool lastAskedFileWasXoml = false;
 
-        override protected string CreateManifestName(
+        protected override string CreateManifestName(
             string fileName,
             string linkFileName,
             string rootNamespace,
@@ -1445,7 +1445,7 @@ namespace System.Workflow.ComponentModel.Compiler
             return manifestName;
         }
 
-        override protected bool IsSourceFile(string fileName)
+        protected override bool IsSourceFile(string fileName)
         {
             string extension = Path.GetExtension(fileName);
             if (String.Compare(extension, ".xoml", StringComparison.OrdinalIgnoreCase) == 0)
@@ -1574,7 +1574,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
     internal static class Culture
     {
-        static private string[] cultureInfoStrings;
+        private static string[] cultureInfoStrings;
 
         internal struct ItemCultureInfo
         {

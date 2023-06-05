@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 {
-    internal partial class OptionPreviewControl : AbstractOptionPageControl
+    partial internal class OptionPreviewControl : AbstractOptionPageControl
     {
         internal AbstractOptionPreviewViewModel ViewModel;
         private readonly IServiceProvider _serviceProvider;

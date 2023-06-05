@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1.Pkcs12
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct PfxAsn
+    partial internal struct PfxAsn
     {
         internal int Version;
         internal System.Security.Cryptography.Asn1.Pkcs7.ContentInfoAsn AuthSafe;

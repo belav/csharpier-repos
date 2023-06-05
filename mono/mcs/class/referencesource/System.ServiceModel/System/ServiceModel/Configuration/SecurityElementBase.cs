@@ -16,7 +16,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Linq;
 
-    public partial class SecurityElementBase : BindingElementExtensionElement
+    partial public class SecurityElementBase : BindingElementExtensionElement
     {
         internal const AuthenticationMode defaultAuthenticationMode =
             AuthenticationMode.SspiNegotiated;

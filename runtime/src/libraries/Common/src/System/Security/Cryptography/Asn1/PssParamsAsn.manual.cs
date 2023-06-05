@@ -6,7 +6,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Asn1
 {
-    internal partial struct PssParamsAsn
+    partial internal struct PssParamsAsn
     {
         internal RSASignaturePadding GetSignaturePadding(int? digestValueLength = null)
         {

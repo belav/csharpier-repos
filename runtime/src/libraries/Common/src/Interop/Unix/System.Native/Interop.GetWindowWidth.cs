@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct WinSize
@@ -22,13 +22,13 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetWindowSize",
             SetLastError = true
         )]
-        internal static partial int GetWindowSize(out WinSize winSize);
+        partial internal static int GetWindowSize(out WinSize winSize);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_SetWindowSize",
             SetLastError = true
         )]
-        internal static partial int SetWindowSize(in WinSize winSize);
+        partial internal static int SetWindowSize(in WinSize winSize);
     }
 }

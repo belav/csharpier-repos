@@ -5,7 +5,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class AesImplementation : Aes
+    partial internal sealed class AesImplementation : Aes
     {
         public sealed override ICryptoTransform CreateDecryptor()
         {

@@ -15,7 +15,7 @@ using Xunit.Sdk;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonTestHelper
+    partial internal static class JsonTestHelper
     {
 #if NETCOREAPP
         public const string DoubleFormatString = null;

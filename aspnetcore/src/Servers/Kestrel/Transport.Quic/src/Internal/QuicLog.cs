@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 
-internal static partial class QuicLog
+partial internal static class QuicLog
 {
     [LoggerMessage(
         1,
@@ -17,7 +17,7 @@ internal static partial class QuicLog
         EventName = "AcceptedConnection",
         SkipEnabledCheck = true
     )]
-    private static partial void AcceptedConnectionCore(ILogger logger, string connectionId);
+    partial private static void AcceptedConnectionCore(ILogger logger, string connectionId);
 
     public static void AcceptedConnection(ILogger logger, BaseConnectionContext connection)
     {
@@ -34,7 +34,7 @@ internal static partial class QuicLog
         EventName = "AcceptedStream",
         SkipEnabledCheck = true
     )]
-    private static partial void AcceptedStreamCore(
+    partial private static void AcceptedStreamCore(
         ILogger logger,
         string connectionId,
         StreamType streamType
@@ -55,7 +55,7 @@ internal static partial class QuicLog
         EventName = "ConnectedStream",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectedStreamCore(
+    partial private static void ConnectedStreamCore(
         ILogger logger,
         string connectionId,
         StreamType streamType
@@ -76,7 +76,7 @@ internal static partial class QuicLog
         EventName = "ConnectionError",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionErrorCore(
+    partial private static void ConnectionErrorCore(
         ILogger logger,
         string connectionId,
         Exception ex
@@ -101,7 +101,7 @@ internal static partial class QuicLog
         EventName = "ConnectionAborted",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionAbortedCore(
+    partial private static void ConnectionAbortedCore(
         ILogger logger,
         string connectionId,
         long errorCode,
@@ -128,7 +128,7 @@ internal static partial class QuicLog
         EventName = "ConnectionAbort",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionAbortCore(
+    partial private static void ConnectionAbortCore(
         ILogger logger,
         string connectionId,
         long errorCode,
@@ -155,7 +155,7 @@ internal static partial class QuicLog
         EventName = "StreamError",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamErrorCore(ILogger logger, string connectionId, Exception ex);
+    partial private static void StreamErrorCore(ILogger logger, string connectionId, Exception ex);
 
     public static void StreamError(ILogger logger, QuicStreamContext streamContext, Exception ex)
     {
@@ -172,7 +172,7 @@ internal static partial class QuicLog
         EventName = "StreamPause",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamPauseCore(ILogger logger, string connectionId);
+    partial private static void StreamPauseCore(ILogger logger, string connectionId);
 
     public static void StreamPause(ILogger logger, QuicStreamContext streamContext)
     {
@@ -189,7 +189,7 @@ internal static partial class QuicLog
         EventName = "StreamResume",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamResumeCore(ILogger logger, string connectionId);
+    partial private static void StreamResumeCore(ILogger logger, string connectionId);
 
     public static void StreamResume(ILogger logger, QuicStreamContext streamContext)
     {
@@ -206,7 +206,7 @@ internal static partial class QuicLog
         EventName = "StreamShutdownWrite",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamShutdownWriteCore(
+    partial private static void StreamShutdownWriteCore(
         ILogger logger,
         string connectionId,
         string reason
@@ -231,7 +231,7 @@ internal static partial class QuicLog
         EventName = "StreamAbortedRead",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamAbortedReadCore(
+    partial private static void StreamAbortedReadCore(
         ILogger logger,
         string connectionId,
         long errorCode
@@ -256,7 +256,7 @@ internal static partial class QuicLog
         EventName = "StreamAbortedWrite",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamAbortedWriteCore(
+    partial private static void StreamAbortedWriteCore(
         ILogger logger,
         string connectionId,
         long errorCode
@@ -281,7 +281,7 @@ internal static partial class QuicLog
         EventName = "StreamAbort",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamAbortCore(
+    partial private static void StreamAbortCore(
         ILogger logger,
         string connectionId,
         long errorCode,
@@ -308,7 +308,7 @@ internal static partial class QuicLog
         EventName = "StreamAbortRead",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamAbortReadCore(
+    partial private static void StreamAbortReadCore(
         ILogger logger,
         string connectionId,
         long errorCode,
@@ -335,7 +335,7 @@ internal static partial class QuicLog
         EventName = "StreamAbortWrite",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamAbortWriteCore(
+    partial private static void StreamAbortWriteCore(
         ILogger logger,
         string connectionId,
         long errorCode,
@@ -362,7 +362,7 @@ internal static partial class QuicLog
         EventName = "StreamPooled",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamPooledCore(ILogger logger, string connectionId);
+    partial private static void StreamPooledCore(ILogger logger, string connectionId);
 
     public static void StreamPooled(ILogger logger, QuicStreamContext streamContext)
     {
@@ -379,7 +379,7 @@ internal static partial class QuicLog
         EventName = "StreamReused",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamReusedCore(ILogger logger, string connectionId);
+    partial private static void StreamReusedCore(ILogger logger, string connectionId);
 
     public static void StreamReused(ILogger logger, QuicStreamContext streamContext)
     {
@@ -396,7 +396,7 @@ internal static partial class QuicLog
             + $" {nameof(SslServerAuthenticationOptions.ServerCertificateContext)}, or {nameof(SslServerAuthenticationOptions.ServerCertificateSelectionCallback)}.",
         EventName = "ConnectionListenerCertificateNotSpecified"
     )]
-    public static partial void ConnectionListenerCertificateNotSpecified(ILogger logger);
+    partial public static void ConnectionListenerCertificateNotSpecified(ILogger logger);
 
     [LoggerMessage(
         19,
@@ -404,7 +404,7 @@ internal static partial class QuicLog
         $"{nameof(SslServerAuthenticationOptions)} must provide at least one application protocol using {nameof(SslServerAuthenticationOptions.ApplicationProtocols)}.",
         EventName = "ConnectionListenerApplicationProtocolsNotSpecified"
     )]
-    public static partial void ConnectionListenerApplicationProtocolsNotSpecified(ILogger logger);
+    partial public static void ConnectionListenerApplicationProtocolsNotSpecified(ILogger logger);
 
     [LoggerMessage(
         20,
@@ -412,7 +412,7 @@ internal static partial class QuicLog
         "QUIC listener starting with configured endpoint {listenEndPoint}.",
         EventName = "ConnectionListenerStarting"
     )]
-    public static partial void ConnectionListenerStarting(
+    partial public static void ConnectionListenerStarting(
         ILogger logger,
         IPEndPoint listenEndPoint
     );
@@ -423,7 +423,7 @@ internal static partial class QuicLog
         "QUIC listener aborted.",
         EventName = "ConnectionListenerAborted"
     )]
-    public static partial void ConnectionListenerAborted(ILogger logger, Exception exception);
+    partial public static void ConnectionListenerAborted(ILogger logger, Exception exception);
 
     [LoggerMessage(
         22,
@@ -432,7 +432,7 @@ internal static partial class QuicLog
         EventName = "StreamTimeoutRead",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamTimeoutReadCore(ILogger logger, string connectionId);
+    partial private static void StreamTimeoutReadCore(ILogger logger, string connectionId);
 
     public static void StreamTimeoutRead(ILogger logger, QuicStreamContext streamContext)
     {
@@ -449,7 +449,7 @@ internal static partial class QuicLog
         EventName = "StreamTimeoutWrite",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamTimeoutWriteCore(ILogger logger, string connectionId);
+    partial private static void StreamTimeoutWriteCore(ILogger logger, string connectionId);
 
     public static void StreamTimeoutWrite(ILogger logger, QuicStreamContext streamContext)
     {
@@ -465,7 +465,7 @@ internal static partial class QuicLog
         "QUIC listener connection failed.",
         EventName = "ConnectionListenerAcceptConnectionFailed"
     )]
-    public static partial void ConnectionListenerAcceptConnectionFailed(
+    partial public static void ConnectionListenerAcceptConnectionFailed(
         ILogger logger,
         Exception exception
     );

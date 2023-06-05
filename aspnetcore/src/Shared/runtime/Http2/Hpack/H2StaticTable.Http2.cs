@@ -5,7 +5,7 @@ using System.Text;
 
 namespace System.Net.Http.HPack
 {
-    internal static partial class H2StaticTable
+    partial internal static class H2StaticTable
     {
         public static int Count => s_staticDecoderTable.Length;
 

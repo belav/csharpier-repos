@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Text.Json.Nodes.Tests
 {
-    public static partial class JsonNodeTests
+    partial public static class JsonNodeTests
     {
         [Fact]
         public static void JsonTypes_Deserialize()

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using Xunit;
 
-public static partial class OverlappedTests
+partial public static class OverlappedTests
 {
     [Fact]
     public static void PropertyTest1()

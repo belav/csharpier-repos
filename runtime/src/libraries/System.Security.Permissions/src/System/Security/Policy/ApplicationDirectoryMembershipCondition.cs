@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public sealed partial class ApplicationDirectoryMembershipCondition
+    partial public sealed class ApplicationDirectoryMembershipCondition
         : ISecurityEncodable,
             ISecurityPolicyEncodable,
             IMembershipCondition

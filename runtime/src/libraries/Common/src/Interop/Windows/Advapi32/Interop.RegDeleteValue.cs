@@ -8,15 +8,15 @@ using Internal.Win32.SafeHandles;
 #endif
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Libraries.Advapi32,
             EntryPoint = "RegDeleteValueW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int RegDeleteValue(SafeRegistryHandle hKey, string? lpValueName);
+        partial internal static int RegDeleteValue(SafeRegistryHandle hKey, string? lpValueName);
     }
 }

@@ -14,10 +14,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This portion of the binder converts a QueryExpressionSyntax into a BoundExpression
     /// </summary>
-    internal partial class Binder
+    internal class Binder
     {
         private const string transparentIdentifierPrefix = "<>h__TransparentIdentifier";
 

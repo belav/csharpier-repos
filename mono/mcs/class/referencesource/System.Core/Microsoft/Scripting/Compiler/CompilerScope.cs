@@ -39,6 +39,7 @@ namespace System.Linq.Expressions.Compiler
         Hoisted
     }
 
+    partial
     /// <summary>
     /// CompilerScope is the data structure which the Compiler keeps information
     /// related to compiling scopes. It stores the following information:
@@ -49,7 +50,7 @@ namespace System.Linq.Expressions.Compiler
     /// Instances are produced by VariableBinder, which does a tree walk
     /// looking for scope nodes: LambdaExpression and BlockExpression.
     /// </summary>
-    internal sealed partial class CompilerScope
+    internal sealed class CompilerScope
     {
         /// <summary>
         /// parent scope, if any

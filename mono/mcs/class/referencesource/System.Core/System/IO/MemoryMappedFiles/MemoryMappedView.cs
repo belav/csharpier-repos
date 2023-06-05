@@ -71,7 +71,7 @@ namespace System.IO.MemoryMappedFiles
 
         // Callers must demand unmanaged code first
         [System.Security.SecurityCritical]
-        internal unsafe static MemoryMappedView CreateView(
+        internal static unsafe MemoryMappedView CreateView(
             SafeMemoryMappedFileHandle memMappedFileHandle,
             MemoryMappedFileAccess access,
             Int64 offset,

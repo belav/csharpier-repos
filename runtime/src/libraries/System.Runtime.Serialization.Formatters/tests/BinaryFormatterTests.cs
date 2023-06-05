@@ -22,7 +22,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
         typeof(PlatformDetection),
         nameof(PlatformDetection.IsBinaryFormatterSupported)
     )]
-    public partial class BinaryFormatterTests : FileCleanupTestBase
+    partial public class BinaryFormatterTests : FileCleanupTestBase
     {
         // On 32-bit we can't test these high inputs as they cause OutOfMemoryExceptions.
         [ConditionalTheory(typeof(Environment), nameof(Environment.Is64BitProcess))]

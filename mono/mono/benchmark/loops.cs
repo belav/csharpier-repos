@@ -2,7 +2,7 @@ using System;
 
 public class NestedLoop
 {
-    static public int nest_test()
+    public static int nest_test()
     {
         int n = 16;
         int x = 0;

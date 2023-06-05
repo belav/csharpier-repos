@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Globalization;
 
-    public partial class ServiceMetadataEndpointElement : StandardEndpointElement
+    partial public class ServiceMetadataEndpointElement : StandardEndpointElement
     {
         public ServiceMetadataEndpointElement()
             : base() { }

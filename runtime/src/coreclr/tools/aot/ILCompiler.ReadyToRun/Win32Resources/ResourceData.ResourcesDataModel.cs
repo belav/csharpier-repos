@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ILCompiler.Win32Resources
 {
-    public unsafe partial class ResourceData
+    partial public unsafe class ResourceData
     {
         private readonly SortedDictionary<ushort, ResType> _resTypeHeadID =
             new SortedDictionary<ushort, ResType>();

@@ -14,9 +14,10 @@ namespace System.Data
     using System.ComponentModel.Design.Serialization;
     using System.Globalization;
 
+    internal
     /// <devdoc>
     /// </devdoc>
-    sealed internal class ConstraintConverter : ExpandableObjectConverter
+    sealed class ConstraintConverter : ExpandableObjectConverter
     {
         // converter classes should have public ctor
         public ConstraintConverter() { }

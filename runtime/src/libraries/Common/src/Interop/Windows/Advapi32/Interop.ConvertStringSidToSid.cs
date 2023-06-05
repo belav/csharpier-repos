@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
@@ -14,6 +14,6 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial BOOL ConvertStringSidToSid(string stringSid, out IntPtr ByteArray);
+        partial internal static BOOL ConvertStringSidToSid(string stringSid, out IntPtr ByteArray);
     }
 }

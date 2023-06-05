@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.Security.Cryptography
 {
-    public abstract partial class DSA : AsymmetricAlgorithm
+    partial public abstract class DSA : AsymmetricAlgorithm
     {
         private const string CounterElementName = "PgenCounter";
 

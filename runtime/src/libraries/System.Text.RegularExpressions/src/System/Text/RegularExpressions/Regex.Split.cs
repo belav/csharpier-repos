@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.RegularExpressions
 {
-    public partial class Regex
+    partial public class Regex
     {
         /// <summary>
         /// Splits the <paramref name="input "/>string at the position defined

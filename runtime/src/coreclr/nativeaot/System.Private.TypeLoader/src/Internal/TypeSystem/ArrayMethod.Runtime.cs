@@ -7,7 +7,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace Internal.TypeSystem
 {
-    public partial class ArrayMethod : MethodDesc
+    partial public class ArrayMethod : MethodDesc
     {
         public override MethodNameAndSignature NameAndSignature
         {

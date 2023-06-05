@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source) =>
             Distinct(source, null);
@@ -92,11 +92,12 @@ namespace System.Linq
             }
         }
 
+        partial
         /// <summary>
         /// An iterator that yields the distinct values in an <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        private sealed partial class DistinctIterator<TSource> : Iterator<TSource>
+        private sealed class DistinctIterator<TSource> : Iterator<TSource>
         {
             private readonly IEnumerable<TSource> _source;
             private readonly IEqualityComparer<TSource>? _comparer;

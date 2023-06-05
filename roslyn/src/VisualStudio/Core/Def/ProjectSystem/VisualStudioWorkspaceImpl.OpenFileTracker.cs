@@ -28,7 +28,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal partial class VisualStudioWorkspaceImpl
+    partial internal class VisualStudioWorkspaceImpl
     {
         /// <summary>
         /// Singleton the subscribes to the running document table and connects/disconnects files to files that are opened.

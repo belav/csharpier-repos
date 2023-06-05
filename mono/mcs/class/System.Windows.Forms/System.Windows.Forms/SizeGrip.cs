@@ -97,7 +97,11 @@ namespace System.Windows.Forms
         #endregion	// Properties
 
         #region Methods
-        static internal Size GetDefaultSize()
+        internal
+        #endregion	// Properties
+
+        #region Methods
+        static Size GetDefaultSize()
         {
             return new Size(
                 SystemInformation.VerticalScrollBarWidth,
@@ -105,7 +109,7 @@ namespace System.Windows.Forms
             );
         }
 
-        static internal Rectangle GetDefaultRectangle(Control Parent)
+        internal static Rectangle GetDefaultRectangle(Control Parent)
         {
             Size size = GetDefaultSize();
             return new Rectangle(

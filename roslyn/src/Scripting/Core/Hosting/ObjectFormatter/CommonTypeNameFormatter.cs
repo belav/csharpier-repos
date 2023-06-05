@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
     using static ObjectFormatterHelpers;
     using TypeInfo = System.Reflection.TypeInfo;
 
-    internal abstract partial class CommonTypeNameFormatter
+    partial internal abstract class CommonTypeNameFormatter
     {
         protected abstract string GetPrimitiveTypeName(SpecialType type);
 

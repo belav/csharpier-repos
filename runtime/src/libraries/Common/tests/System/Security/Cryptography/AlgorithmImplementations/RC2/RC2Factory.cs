@@ -11,7 +11,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
         bool OneShotSupported { get; }
     }
 
-    public static partial class RC2Factory
+    partial public static class RC2Factory
     {
         public static RC2 Create()
         {

@@ -11,7 +11,7 @@ using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System
 {
-    internal partial class DefaultBinder : Binder
+    partial internal class DefaultBinder : Binder
     {
         // This method is passed a set of methods and must choose the best
         // fit.  The methods all have the same number of arguments and the object

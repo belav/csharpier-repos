@@ -14,13 +14,14 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// Represents an identity of an assembly as defined by CLI metadata specification.
     /// </summary>
     /// <remarks>
     /// May represent assembly definition or assembly reference identity.
     /// </remarks>
-    public partial class AssemblyIdentity
+    public class AssemblyIdentity
     {
         internal const string InvariantCultureDisplay = "neutral";
 

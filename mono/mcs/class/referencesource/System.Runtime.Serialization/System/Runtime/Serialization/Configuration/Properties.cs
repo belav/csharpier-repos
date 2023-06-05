@@ -23,7 +23,7 @@ using System.Globalization;
 
 namespace System.Runtime.Serialization.Configuration
 {
-    public sealed partial class DeclaredTypeElement
+    partial public sealed class DeclaredTypeElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -67,7 +67,7 @@ namespace System.Runtime.Serialization.Configuration
 
 namespace System.Runtime.Serialization.Configuration
 {
-    public sealed partial class NetDataContractSerializerSection
+    partial public sealed class NetDataContractSerializerSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -101,7 +101,7 @@ namespace System.Runtime.Serialization.Configuration
 
 namespace System.Runtime.Serialization.Configuration
 {
-    public sealed partial class ParameterElement
+    partial public sealed class ParameterElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -155,7 +155,7 @@ namespace System.Runtime.Serialization.Configuration
 
 namespace System.Runtime.Serialization.Configuration
 {
-    public sealed partial class DataContractSerializerSection
+    partial public sealed class DataContractSerializerSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -189,7 +189,7 @@ namespace System.Runtime.Serialization.Configuration
 
 namespace System.Runtime.Serialization.Configuration
 {
-    public sealed partial class TypeElement
+    partial public sealed class TypeElement
     {
         ConfigurationPropertyCollection properties;
 

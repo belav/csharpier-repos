@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
-internal partial class LongPollingTransport
+partial internal class LongPollingTransport
 {
+    partial
     // EventIds 100 - 106 used in SendUtils
-    private static partial class Log
+    private static class Log
     {
         [LoggerMessage(
             1,
@@ -19,13 +20,13 @@ internal partial class LongPollingTransport
             "Starting transport. Transfer mode: {TransferFormat}.",
             EventName = "StartTransport"
         )]
-        public static partial void StartTransport(ILogger logger, TransferFormat transferFormat);
+        partial public static void StartTransport(ILogger logger, TransferFormat transferFormat);
 
         [LoggerMessage(2, LogLevel.Debug, "Transport stopped.", EventName = "TransportStopped")]
-        public static partial void TransportStopped(ILogger logger, Exception? exception);
+        partial public static void TransportStopped(ILogger logger, Exception? exception);
 
         [LoggerMessage(3, LogLevel.Debug, "Starting receive loop.", EventName = "StartReceive")]
-        public static partial void StartReceive(ILogger logger);
+        partial public static void StartReceive(ILogger logger);
 
         [LoggerMessage(
             6,
@@ -33,13 +34,13 @@ internal partial class LongPollingTransport
             "Transport is stopping.",
             EventName = "TransportStopping"
         )]
-        public static partial void TransportStopping(ILogger logger);
+        partial public static void TransportStopping(ILogger logger);
 
         [LoggerMessage(5, LogLevel.Debug, "Receive loop canceled.", EventName = "ReceiveCanceled")]
-        public static partial void ReceiveCanceled(ILogger logger);
+        partial public static void ReceiveCanceled(ILogger logger);
 
         [LoggerMessage(4, LogLevel.Debug, "Receive loop stopped.", EventName = "ReceiveStopped")]
-        public static partial void ReceiveStopped(ILogger logger);
+        partial public static void ReceiveStopped(ILogger logger);
 
         [LoggerMessage(
             7,
@@ -47,7 +48,7 @@ internal partial class LongPollingTransport
             "The server is closing the connection.",
             EventName = "ClosingConnection"
         )]
-        public static partial void ClosingConnection(ILogger logger);
+        partial public static void ClosingConnection(ILogger logger);
 
         [LoggerMessage(
             8,
@@ -55,7 +56,7 @@ internal partial class LongPollingTransport
             "Received messages from the server.",
             EventName = "ReceivedMessages"
         )]
-        public static partial void ReceivedMessages(ILogger logger);
+        partial public static void ReceivedMessages(ILogger logger);
 
         [LoggerMessage(
             9,
@@ -63,7 +64,7 @@ internal partial class LongPollingTransport
             "Error while polling '{PollUrl}'.",
             EventName = "ErrorPolling"
         )]
-        public static partial void ErrorPolling(ILogger logger, Uri pollUrl, Exception exception);
+        partial public static void ErrorPolling(ILogger logger, Uri pollUrl, Exception exception);
 
         // long? does properly format as "(null)" when null.
         public static void PollResponseReceived(ILogger logger, HttpResponseMessage response)
@@ -85,7 +86,7 @@ internal partial class LongPollingTransport
             EventName = "PollResponseReceived",
             SkipEnabledCheck = true
         )]
-        private static partial void PollResponseReceived(
+        partial private static void PollResponseReceived(
             ILogger logger,
             int statusCode,
             long contentLength
@@ -97,7 +98,7 @@ internal partial class LongPollingTransport
             "Sending DELETE request to '{PollUrl}'.",
             EventName = "SendingDeleteRequest"
         )]
-        public static partial void SendingDeleteRequest(ILogger logger, Uri pollUrl);
+        partial public static void SendingDeleteRequest(ILogger logger, Uri pollUrl);
 
         [LoggerMessage(
             12,
@@ -105,7 +106,7 @@ internal partial class LongPollingTransport
             "DELETE request to '{PollUrl}' accepted.",
             EventName = "DeleteRequestAccepted"
         )]
-        public static partial void DeleteRequestAccepted(ILogger logger, Uri pollUrl);
+        partial public static void DeleteRequestAccepted(ILogger logger, Uri pollUrl);
 
         [LoggerMessage(
             13,
@@ -113,7 +114,7 @@ internal partial class LongPollingTransport
             "Error sending DELETE request to '{PollUrl}'.",
             EventName = "ErrorSendingDeleteRequest"
         )]
-        public static partial void ErrorSendingDeleteRequest(
+        partial public static void ErrorSendingDeleteRequest(
             ILogger logger,
             Uri pollUrl,
             Exception ex
@@ -125,7 +126,7 @@ internal partial class LongPollingTransport
             "A 404 response was returned from sending DELETE request to '{PollUrl}', likely because the transport was already closed on the server.",
             EventName = "ConnectionAlreadyClosedSendingDeleteRequest"
         )]
-        public static partial void ConnectionAlreadyClosedSendingDeleteRequest(
+        partial public static void ConnectionAlreadyClosedSendingDeleteRequest(
             ILogger logger,
             Uri pollUrl
         );

@@ -8,8 +8,9 @@ using Xunit;
 
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
+    partial
 #if NETCOREAPP
-    public partial class ECDiffieHellmanTests
+    public class ECDiffieHellmanTests
     {
         // On CentOS, secp224r1 (also called nistP224) appears to be disabled. To prevent test failures on that platform,
         // probe for this capability before depending on it.

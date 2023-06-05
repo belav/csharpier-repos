@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class WriteValueTests
+    partial public static class WriteValueTests
     {
         public static bool IsX64 { get; } = IntPtr.Size >= 8;
 
@@ -26,7 +26,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact]
-        public async static void NullInputTypeThrows()
+        public static async void NullInputTypeThrows()
         {
             ArgumentException ex;
             Utf8JsonWriter writer = new Utf8JsonWriter(new MemoryStream());
@@ -59,7 +59,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact]
-        public async static void NullValueWithValueTypeThrows()
+        public static async void NullValueWithValueTypeThrows()
         {
             JsonException ex;
 
@@ -91,7 +91,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact]
-        public async static void NullValueWithNullableSuccess()
+        public static async void NullValueWithNullableSuccess()
         {
             byte[] nullUtf8Literal = Encoding.UTF8.GetBytes("null");
 

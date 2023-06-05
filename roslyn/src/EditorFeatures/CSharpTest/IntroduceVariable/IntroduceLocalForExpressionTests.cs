@@ -18,7 +18,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
-    public partial class IntroduceLocalForExpressionTests : AbstractCSharpCodeActionTest
+    partial public class IntroduceLocalForExpressionTests : AbstractCSharpCodeActionTest
     {
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,

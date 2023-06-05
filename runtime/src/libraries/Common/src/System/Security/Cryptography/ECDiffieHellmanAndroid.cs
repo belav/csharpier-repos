@@ -6,9 +6,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECDiffieHellmanImplementation
+    partial internal static class ECDiffieHellmanImplementation
     {
-        public sealed partial class ECDiffieHellmanAndroid : ECDiffieHellman
+        partial public sealed class ECDiffieHellmanAndroid : ECDiffieHellman
         {
             private ECAndroid? _key;
 

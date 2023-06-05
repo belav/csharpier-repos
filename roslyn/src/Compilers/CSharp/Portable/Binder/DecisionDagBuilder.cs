@@ -16,6 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// <para>
     /// A utility class for making a decision dag (directed acyclic graph) for a pattern-matching construct.
@@ -54,7 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <see cref="BoundUnconvertedSwitchExpression"/>) and is used for semantic analysis and lowering.
     /// </para>
     /// </summary>
-    internal sealed partial class DecisionDagBuilder
+    internal sealed class DecisionDagBuilder
     {
         private readonly CSharpCompilation _compilation;
         private readonly Conversions _conversions;

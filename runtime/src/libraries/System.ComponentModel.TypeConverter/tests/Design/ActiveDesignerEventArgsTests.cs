@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.ComponentModel.Design.Tests
 {
-    public partial class ActiveDesignerEventArgsTests
+    partial public class ActiveDesignerEventArgsTests
     {
         public static IEnumerable<object[]> Ctor_OldDesigner_NewDesigner_TestData()
         {

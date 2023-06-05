@@ -23,7 +23,7 @@ namespace System.Data.Common
         public StringStorage(DataColumn column)
             : base(column, typeof(String), String.Empty, StorageType.String) { }
 
-        override public Object Aggregate(int[] recordNos, AggregateType kind)
+        public override Object Aggregate(int[] recordNos, AggregateType kind)
         {
             int i;
             switch (kind)
@@ -87,7 +87,7 @@ namespace System.Data.Common
             throw ExceptionBuilder.AggregateException(kind, DataType);
         }
 
-        override public int Compare(int recordNo1, int recordNo2)
+        public override int Compare(int recordNo1, int recordNo2)
         {
             string valueNo1 = values[recordNo1];
             string valueNo2 = values[recordNo2];
@@ -103,7 +103,7 @@ namespace System.Data.Common
             return Table.Compare(valueNo1, valueNo2);
         }
 
-        override public int CompareValueTo(int recordNo, Object value)
+        public override int CompareValueTo(int recordNo, Object value)
         {
             Debug.Assert(recordNo != -1, "Invalid (-1) parameter: 'recordNo'");
             Debug.Assert(null != value, "null value");
@@ -143,12 +143,12 @@ namespace System.Data.Common
             return value;
         }
 
-        override public void Copy(int recordNo1, int recordNo2)
+        public override void Copy(int recordNo1, int recordNo2)
         {
             values[recordNo2] = values[recordNo1];
         }
 
-        override public Object Get(int recordNo)
+        public override Object Get(int recordNo)
         {
             String value = values[recordNo];
 
@@ -159,18 +159,18 @@ namespace System.Data.Common
             return NullValue;
         }
 
-        override public int GetStringLength(int record)
+        public override int GetStringLength(int record)
         {
             string value = values[record];
             return ((null != value) ? value.Length : 0);
         }
 
-        override public bool IsNull(int record)
+        public override bool IsNull(int record)
         {
             return (null == values[record]);
         }
 
-        override public void Set(int record, Object value)
+        public override void Set(int record, Object value)
         {
             System.Diagnostics.Debug.Assert(null != value, "null value");
             if (NullValue == value)
@@ -183,7 +183,7 @@ namespace System.Data.Common
             }
         }
 
-        override public void SetCapacity(int capacity)
+        public override void SetCapacity(int capacity)
         {
             string[] newValues = new string[capacity];
             if (values != null)
@@ -193,22 +193,22 @@ namespace System.Data.Common
             values = newValues;
         }
 
-        override public object ConvertXmlToObject(string s)
+        public override object ConvertXmlToObject(string s)
         {
             return s;
         }
 
-        override public string ConvertObjectToXml(object value)
+        public override string ConvertObjectToXml(object value)
         {
             return (string)value;
         }
 
-        override protected object GetEmptyStorage(int recordCount)
+        protected override object GetEmptyStorage(int recordCount)
         {
             return new String[recordCount];
         }
 
-        override protected void CopyValue(
+        protected override void CopyValue(
             int record,
             object store,
             BitArray nullbits,
@@ -220,7 +220,7 @@ namespace System.Data.Common
             nullbits.Set(storeIndex, IsNull(record));
         }
 
-        override protected void SetStorage(object store, BitArray nullbits)
+        protected override void SetStorage(object store, BitArray nullbits)
         {
             values = (String[])store;
             //           SetNullStorage(nullbits);

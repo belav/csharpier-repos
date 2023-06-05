@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Text.Json
 {
-    public sealed partial class Utf8JsonWriter
+    partial public sealed class Utf8JsonWriter
     {
         private static readonly char[] s_singleLineCommentDelimiter = new char[2] { '*', '/' };
         private static ReadOnlySpan<byte> SingleLineCommentDelimiterUtf8 => "*/"u8;

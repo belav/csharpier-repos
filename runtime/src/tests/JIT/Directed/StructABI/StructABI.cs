@@ -360,7 +360,7 @@ struct FourDoubles
 
 unsafe struct InlineArray1
 {
-    public fixed byte Array[16];
+    fixed public byte Array[16];
 
     public static InlineArray1 Get()
     {
@@ -392,7 +392,7 @@ unsafe struct InlineArray1
 
 unsafe struct InlineArray2
 {
-    public fixed float Array[4];
+    fixed public float Array[4];
 
     public static InlineArray2 Get()
     {
@@ -424,7 +424,7 @@ unsafe struct InlineArray2
 
 unsafe struct InlineArray3
 {
-    public fixed float Array[3];
+    fixed public float Array[3];
 
     public static InlineArray3 Get()
     {
@@ -456,7 +456,7 @@ unsafe struct InlineArray3
 
 unsafe struct InlineArray4
 {
-    public fixed ushort Array[5];
+    fixed public ushort Array[5];
 
     public static InlineArray4 Get()
     {
@@ -488,7 +488,7 @@ unsafe struct InlineArray4
 
 unsafe struct InlineArray5
 {
-    public fixed byte Array[9];
+    fixed public byte Array[9];
 
     public static InlineArray5 Get()
     {
@@ -520,7 +520,7 @@ unsafe struct InlineArray5
 
 unsafe struct InlineArray6
 {
-    public fixed double Array[1];
+    fixed public double Array[1];
 
     public static InlineArray6 Get()
     {
@@ -707,7 +707,7 @@ struct Nested9
     }
 }
 
-public static partial class StructABI
+partial public static class StructABI
 {
     [DllImport("StructABILib")]
     static extern SingleByte EchoSingleByte(SingleByte value);

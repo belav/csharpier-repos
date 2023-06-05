@@ -3,9 +3,9 @@
 
 using System.Runtime.CompilerServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Libraries
+    partial internal static class Libraries
     {
         internal const string Kernel32 = RuntimeHelpers.QCall;
     }

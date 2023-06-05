@@ -40,7 +40,7 @@ using DbLinq.Factory;
 
 namespace DbLinq.Data.Linq.Sugar.Implementation
 {
-    internal partial class ExpressionDispatcher : IExpressionDispatcher
+    partial internal class ExpressionDispatcher : IExpressionDispatcher
     {
         public IExpressionQualifier ExpressionQualifier { get; set; }
         public IDataRecordReader DataRecordReader { get; set; }

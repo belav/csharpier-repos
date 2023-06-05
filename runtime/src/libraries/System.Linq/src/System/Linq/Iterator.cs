@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         /// <summary>
         /// A base class for enumerables that are loaded on-demand.

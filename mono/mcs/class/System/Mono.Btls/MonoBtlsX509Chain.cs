@@ -46,28 +46,28 @@ namespace Mono.Btls
             }
         }
 
-        new internal BoringX509ChainHandle Handle
+        internal new BoringX509ChainHandle Handle
         {
             get { return (BoringX509ChainHandle)base.Handle; }
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_chain_new();
+        static extern IntPtr mono_btls_x509_chain_new();
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_chain_get_count(IntPtr handle);
+        static extern int mono_btls_x509_chain_get_count(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_chain_get_cert(IntPtr Handle, int index);
+        static extern IntPtr mono_btls_x509_chain_get_cert(IntPtr Handle, int index);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_chain_add_cert(IntPtr chain, IntPtr x509);
+        static extern int mono_btls_x509_chain_add_cert(IntPtr chain, IntPtr x509);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_chain_up_ref(IntPtr handle);
+        static extern IntPtr mono_btls_x509_chain_up_ref(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_x509_chain_free(IntPtr handle);
+        static extern void mono_btls_x509_chain_free(IntPtr handle);
 
         public MonoBtlsX509Chain()
             : base(new BoringX509ChainHandle(mono_btls_x509_chain_new())) { }

@@ -20,11 +20,12 @@ namespace System.Web.Configuration
     using System.Web.Compilation;
     using Microsoft.Win32;
 
+    internal
     //
     // Abstracts differences between config retreived from IIS 6 metabase
     // and config retreived from new IIS7 configuration system.
     //
-    static internal class ServerConfig
+    static class ServerConfig
     {
         static int s_iisMajorVersion = 0;
 
@@ -86,7 +87,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal IServerConfig GetInstance()
+        internal static IServerConfig GetInstance()
         {
             // IIS 7 bits on <= IIS 6: use the metabase
             if (UseMetabase)
@@ -100,7 +101,7 @@ namespace System.Web.Configuration
             return ExpressServerConfig.GetInstance(IISExpressVersion);
         }
 
-        static internal IServerConfig GetDefaultDomainInstance(string version)
+        internal static IServerConfig GetDefaultDomainInstance(string version)
         {
             if (version == null)
             {
@@ -131,7 +132,7 @@ namespace System.Web.Configuration
         // to resolve paths.
         //
         static int s_useServerConfig = -1;
-        static internal bool UseServerConfig
+        internal static bool UseServerConfig
         {
             get
             {

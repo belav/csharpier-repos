@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.IO.Ports
 {
-    public partial class SerialPort : Component
+    partial public class SerialPort : Component
     {
         public const int InfiniteTimeout = -1;
 

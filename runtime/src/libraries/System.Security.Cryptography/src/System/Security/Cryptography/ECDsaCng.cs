@@ -8,7 +8,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDsaCng : ECDsa
+    partial public sealed class ECDsaCng : ECDsa
     {
         private CngAlgorithmCore _core = new CngAlgorithmCore(typeof(ECDsaCng));
         private CngAlgorithm _hashAlgorithm = CngAlgorithm.Sha256;

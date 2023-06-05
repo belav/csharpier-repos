@@ -5,7 +5,7 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System.Runtime.InteropServices
 {
-    public abstract partial class CriticalHandle : CriticalFinalizerObject, IDisposable
+    partial public abstract class CriticalHandle : CriticalFinalizerObject, IDisposable
     {
         internal void SetHandleInternal(IntPtr handle)
         {

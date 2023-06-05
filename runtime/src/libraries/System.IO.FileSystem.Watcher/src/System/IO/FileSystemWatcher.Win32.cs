@@ -12,7 +12,7 @@ using FILE_NOTIFY_INFORMATION = Interop.Kernel32.FILE_NOTIFY_INFORMATION;
 
 namespace System.IO
 {
-    public partial class FileSystemWatcher
+    partial public class FileSystemWatcher
     {
         /// <summary>Start monitoring the current directory.</summary>
         private void StartRaisingEvents()

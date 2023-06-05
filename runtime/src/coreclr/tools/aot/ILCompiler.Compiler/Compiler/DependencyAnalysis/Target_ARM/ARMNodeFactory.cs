@@ -3,7 +3,7 @@
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public partial class NodeFactory
+    partial public class NodeFactory
     {
         private InitialInterfaceDispatchStubNode _initialInterfaceDispatchStubNode;
 

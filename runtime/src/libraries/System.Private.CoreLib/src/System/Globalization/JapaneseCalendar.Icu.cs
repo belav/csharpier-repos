@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
-    public partial class JapaneseCalendar : Calendar
+    partial public class JapaneseCalendar : Calendar
     {
         private static readonly string[] s_abbreviatedEnglishEraNames = { "M", "T", "S", "H", "R" };
 

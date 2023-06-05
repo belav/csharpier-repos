@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Routing;
 
-public partial class _Global : HttpApplication
+partial public class _Global : HttpApplication
 {
     void Application_Start(object sender, EventArgs e)
     {

@@ -14,7 +14,7 @@ using System.Runtime.Versioning;
 
 namespace System.IO.Pipes
 {
-    public abstract partial class PipeStream : Stream
+    partial public abstract class PipeStream : Stream
     {
         // The Windows implementation of PipeStream sets the stream's handle during
         // creation, and as such should always have a handle, but the Unix implementation

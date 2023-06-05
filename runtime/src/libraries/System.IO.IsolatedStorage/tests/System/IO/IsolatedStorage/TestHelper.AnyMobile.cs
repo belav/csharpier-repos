@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.IO.IsolatedStorage
 {
-    public static partial class TestHelper
+    partial public static class TestHelper
     {
         private static List<string> GetRoots()
         {

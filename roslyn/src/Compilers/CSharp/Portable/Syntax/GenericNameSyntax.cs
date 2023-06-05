@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class GenericNameSyntax
+    partial public class GenericNameSyntax
     {
         public bool IsUnboundGenericName
         {

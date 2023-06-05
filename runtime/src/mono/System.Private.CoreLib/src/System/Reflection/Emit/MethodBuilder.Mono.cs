@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class MethodBuilder : MethodInfo
+    partial public sealed class MethodBuilder : MethodInfo
     {
         #region Sync with MonoReflectionMethodBuilder in object-internals.h
         private RuntimeMethodHandle mhandle;

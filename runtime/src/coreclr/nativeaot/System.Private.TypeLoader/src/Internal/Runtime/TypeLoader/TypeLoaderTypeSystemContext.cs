@@ -8,11 +8,12 @@ using Internal.TypeSystem;
 
 namespace Internal.Runtime.TypeLoader
 {
+    partial
     /// <summary>
     /// TypeSystemContext that can interfact with the
     /// Redhawk runtime type system and native metadata
     /// </summary>
-    public partial class TypeLoaderTypeSystemContext : TypeSystemContext
+    public class TypeLoaderTypeSystemContext : TypeSystemContext
     {
         private static readonly NoMetadataRuntimeInterfacesAlgorithm s_noMetadataRuntimeInterfacesAlgorithm =
             new NoMetadataRuntimeInterfacesAlgorithm();

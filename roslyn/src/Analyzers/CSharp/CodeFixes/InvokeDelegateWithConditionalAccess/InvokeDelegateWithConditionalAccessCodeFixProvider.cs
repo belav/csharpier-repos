@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
         ),
         Shared
     ]
-    internal partial class InvokeDelegateWithConditionalAccessCodeFixProvider
+    partial internal class InvokeDelegateWithConditionalAccessCodeFixProvider
         : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]

@@ -15,7 +15,7 @@ using SdtEventSources;
 
 namespace BasicEventSourceTests
 {
-    public partial class TestsWriteEventToListener
+    partial public class TestsWriteEventToListener
     {
         [Fact]
         [ActiveIssue(
@@ -224,7 +224,7 @@ namespace BasicEventSourceTests
             TestUtilities.CheckNoEventSourcesRunning("Stop");
         }
 
-        static partial void Test_WriteEvent_ArgsBasicTypes_Etw_Validate_DateTime(
+        partial static void Test_WriteEvent_ArgsBasicTypes_Etw_Validate_DateTime(
             EventSourceTest log
         );
 
@@ -262,7 +262,7 @@ namespace BasicEventSourceTests
             TestUtilities.CheckNoEventSourcesRunning("Stop");
         }
 
-        static partial void Test_WriteEvent_ArgsCornerCases_TestEtw(EventSourceTest log);
+        partial static void Test_WriteEvent_ArgsCornerCases_TestEtw(EventSourceTest log);
 
         [Fact]
         public void Test_WriteEvent_InvalidCalls()

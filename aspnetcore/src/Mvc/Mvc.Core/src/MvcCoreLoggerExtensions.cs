@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-internal static partial class MvcCoreLoggerExtensions
+partial internal static class MvcCoreLoggerExtensions
 {
     public const string ActionFilter = "Action Filter";
     private static readonly string[] _noFilters = new[] { "None" };
@@ -102,7 +102,7 @@ internal static partial class MvcCoreLoggerExtensions
         "{FilterType}: Before executing {Method} on filter {Filter}.",
         EventName = "BeforeExecutingMethodOnFilter"
     )]
-    public static partial void BeforeExecutingMethodOnFilter(
+    partial public static void BeforeExecutingMethodOnFilter(
         this ILogger logger,
         string filterType,
         string method,
@@ -115,7 +115,7 @@ internal static partial class MvcCoreLoggerExtensions
         "{FilterType}: After executing {Method} on filter {Filter}.",
         EventName = "AfterExecutingMethodOnFilter"
     )]
-    public static partial void AfterExecutingMethodOnFilter(
+    partial public static void AfterExecutingMethodOnFilter(
         this ILogger logger,
         string filterType,
         string method,
@@ -152,7 +152,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "NoActionsMatched",
         SkipEnabledCheck = true
     )]
-    private static partial void NoActionsMatched(ILogger logger, string[]? routeValues);
+    partial private static void NoActionsMatched(ILogger logger, string[]? routeValues);
 
     [LoggerMessage(
         5,
@@ -160,7 +160,7 @@ internal static partial class MvcCoreLoggerExtensions
         "Request was short circuited at result filter '{ResultFilter}'.",
         EventName = "ResultFilterShortCircuit"
     )]
-    public static partial void ResultFilterShortCircuited(
+    partial public static void ResultFilterShortCircuited(
         this ILogger logger,
         IFilterMetadata resultFilter
     );
@@ -171,7 +171,7 @@ internal static partial class MvcCoreLoggerExtensions
         "Request was short circuited at exception filter '{ExceptionFilter}'.",
         EventName = "ExceptionFilterShortCircuit"
     )]
-    public static partial void ExceptionFilterShortCircuited(
+    partial public static void ExceptionFilterShortCircuited(
         this ILogger logger,
         IFilterMetadata exceptionFilter
     );
@@ -182,7 +182,7 @@ internal static partial class MvcCoreLoggerExtensions
         "Request was short circuited at action filter '{ActionFilter}'.",
         EventName = "ActionFilterShortCircuit"
     )]
-    public static partial void ActionFilterShortCircuited(
+    partial public static void ActionFilterShortCircuited(
         this ILogger logger,
         IFilterMetadata actionFilter
     );
@@ -230,7 +230,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "FoundNoValueForPropertyInRequest",
         SkipEnabledCheck = true
     )]
-    private static partial void FoundNoValueForPropertyInRequest(
+    partial private static void FoundNoValueForPropertyInRequest(
         ILogger logger,
         string modelName,
         Type? propertyContainerType,
@@ -245,7 +245,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "FoundNoValueForParameterInRequest",
         SkipEnabledCheck = true
     )]
-    private static partial void FoundNoValueForParameterInRequest(
+    partial private static void FoundNoValueForParameterInRequest(
         ILogger logger,
         string modelName,
         string? modelFieldName,
@@ -259,7 +259,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "FoundNoValueInRequest",
         SkipEnabledCheck = true
     )]
-    private static partial void FoundNoValueInRequest(
+    partial private static void FoundNoValueInRequest(
         ILogger logger,
         string modelName,
         Type modelType
@@ -281,7 +281,7 @@ internal static partial class MvcCoreLoggerExtensions
         "Could not bind to model with name '{ModelName}' and type '{ModelType}' as the request did not have a content type of either 'application/x-www-form-urlencoded' or 'multipart/form-data'.",
         EventName = "CannotBindToFilesCollectionDueToUnsupportedContentType"
     )]
-    private static partial void CannotBindToFilesCollectionDueToUnsupportedContentType(
+    partial private static void CannotBindToFilesCollectionDueToUnsupportedContentType(
         ILogger logger,
         string modelName,
         Type modelType
@@ -330,7 +330,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "AttemptingToBindParameterModel",
         SkipEnabledCheck = true
     )]
-    private static partial void AttemptingToBindParameterModel(
+    partial private static void AttemptingToBindParameterModel(
         ILogger logger,
         string? parameterName,
         Type modelType,
@@ -344,7 +344,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "AttemptingToBindPropertyModel",
         SkipEnabledCheck = true
     )]
-    private static partial void AttemptingToBindPropertyModel(
+    partial private static void AttemptingToBindPropertyModel(
         ILogger logger,
         Type? propertyContainerType,
         string? propertyName,
@@ -359,7 +359,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "AttemptingToBindModel",
         SkipEnabledCheck = true
     )]
-    private static partial void AttemptingToBindModel(
+    partial private static void AttemptingToBindModel(
         ILogger logger,
         Type modelType,
         string modelName
@@ -409,7 +409,7 @@ internal static partial class MvcCoreLoggerExtensions
         "Done attempting to bind property '{PropertyContainerType}.{PropertyName}' of type '{ModelType}'.",
         EventName = "DoneAttemptingToBindPropertyModel"
     )]
-    private static partial void DoneAttemptingToBindPropertyModel(
+    partial private static void DoneAttemptingToBindPropertyModel(
         ILogger logger,
         Type? propertyContainerType,
         string? propertyName,
@@ -423,7 +423,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "DoneAttemptingToBindModel",
         SkipEnabledCheck = true
     )]
-    private static partial void DoneAttemptingToBindModel(
+    partial private static void DoneAttemptingToBindModel(
         ILogger logger,
         Type modelType,
         string modelName
@@ -436,7 +436,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "DoneAttemptingToBindParameterModel",
         SkipEnabledCheck = true
     )]
-    private static partial void DoneAttemptingToBindParameterModel(
+    partial private static void DoneAttemptingToBindParameterModel(
         ILogger logger,
         string? parameterName,
         Type modelType
@@ -464,7 +464,7 @@ internal static partial class MvcCoreLoggerExtensions
         EventName = "FilterExecutionPlan",
         SkipEnabledCheck = true
     )]
-    private static partial void LogFilterExecutionPlan(
+    partial private static void LogFilterExecutionPlan(
         ILogger logger,
         string filterType,
         string[] filters

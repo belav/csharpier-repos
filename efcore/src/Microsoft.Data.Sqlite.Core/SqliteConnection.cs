@@ -14,12 +14,13 @@ using static SQLitePCL.raw;
 
 namespace Microsoft.Data.Sqlite
 {
+    partial
     /// <summary>
     ///     Represents a connection to a SQLite database.
     /// </summary>
     /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/connection-strings">Connection Strings</seealso>
     /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/async">Async Limitations</seealso>
-    public partial class SqliteConnection : DbConnection
+    public class SqliteConnection : DbConnection
     {
         internal const string MainDatabaseName = "main";
 

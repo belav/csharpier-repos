@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    internal abstract partial class AbstractSyntaxTreeFactoryService
+    partial internal abstract class AbstractSyntaxTreeFactoryService
     {
         internal readonly struct SyntaxTreeInfo
         {

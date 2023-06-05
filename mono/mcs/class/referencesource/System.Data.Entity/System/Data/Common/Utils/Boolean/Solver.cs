@@ -39,7 +39,7 @@ namespace System.Data.Common.Utils.Boolean
         int _variableCount;
 
         // a standard Boolean variable has children '1' and '0'
-        internal readonly static Vertex[] BooleanVariableChildren = new Vertex[]
+        internal static readonly Vertex[] BooleanVariableChildren = new Vertex[]
         {
             Vertex.One,
             Vertex.Zero

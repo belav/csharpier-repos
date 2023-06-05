@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class WithHeaderWhenEmpty : System.Web.UI.Page
+partial public class WithHeaderWhenEmpty : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {

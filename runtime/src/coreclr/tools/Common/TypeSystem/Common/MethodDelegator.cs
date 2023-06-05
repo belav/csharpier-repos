@@ -3,10 +3,11 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Wraps a <see cref="MethodDesc"/> object and delegates methods to that <see cref="MethodDesc"/>.
     /// </summary>
-    public abstract partial class MethodDelegator : MethodDesc
+    public abstract class MethodDelegator : MethodDesc
     {
         protected readonly MethodDesc _wrappedMethod;
 

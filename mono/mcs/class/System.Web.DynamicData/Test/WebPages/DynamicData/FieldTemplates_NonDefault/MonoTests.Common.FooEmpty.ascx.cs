@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class MonoTestsCommonFooEmpty_Field : System.Web.DynamicData.FieldTemplateUserControl
+partial public class MonoTestsCommonFooEmpty_Field : System.Web.DynamicData.FieldTemplateUserControl
 {
     public override Control DataControl
     {

@@ -5,8 +5,9 @@ using System.Collections;
 
 namespace System.Xml
 {
+    partial
     // Represents a collection of nodes that can be accessed by name or index.
-    public partial class XmlNamedNodeMap : IEnumerable
+    public class XmlNamedNodeMap : IEnumerable
     {
         internal XmlNode parent;
         internal SmallXmlNodeList nodes;

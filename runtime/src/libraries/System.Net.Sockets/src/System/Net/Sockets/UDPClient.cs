@@ -8,10 +8,11 @@ using System.Threading;
 
 namespace System.Net.Sockets
 {
+    partial
     // The System.Net.Sockets.UdpClient class provides access to UDP services at a higher abstraction
     // level than the System.Net.Sockets.Socket class. System.Net.Sockets.UdpClient is used to
     // connect to a remote host and to receive connections from a remote client.
-    public partial class UdpClient : IDisposable
+    public class UdpClient : IDisposable
     {
         private const int MaxUDPSize = 0x10000;
 

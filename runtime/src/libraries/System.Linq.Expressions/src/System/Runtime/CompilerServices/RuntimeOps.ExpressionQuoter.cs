@@ -12,7 +12,7 @@ using static System.Linq.Expressions.CachedReflectionInfo;
 
 namespace System.Runtime.CompilerServices
 {
-    public partial class RuntimeOps
+    partial public class RuntimeOps
     {
         /// <summary>
         /// Quotes the provided expression tree.

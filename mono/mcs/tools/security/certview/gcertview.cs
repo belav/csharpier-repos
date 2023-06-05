@@ -27,7 +27,7 @@ namespace Mono.Tools.CertView
 {
     public class GtkCertificateViewer
     {
-        static private void Header()
+        private static void Header()
         {
             Assembly a = Assembly.GetExecutingAssembly();
             AssemblyName an = a.GetName();

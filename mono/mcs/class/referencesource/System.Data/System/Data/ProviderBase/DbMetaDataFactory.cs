@@ -128,7 +128,7 @@ namespace System.Data.ProviderBase
             Dispose(true);
         }
 
-        virtual protected void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -474,7 +474,7 @@ namespace System.Data.ProviderBase
             return result;
         }
 
-        virtual public DataTable GetSchema(
+        public virtual DataTable GetSchema(
             DbConnection connection,
             string collectionName,
             string[] restrictions
@@ -608,7 +608,7 @@ namespace System.Data.ProviderBase
             _metaDataCollectionsDataSet.ReadXml(XmlStream);
         }
 
-        virtual protected DataTable PrepareCollection(
+        protected virtual DataTable PrepareCollection(
             String collectionName,
             String[] restrictions,
             DbConnection connection

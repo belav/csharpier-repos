@@ -1,6 +1,6 @@
 partial class A<T>
 {
-    internal partial class B : A<int>
+    partial internal class B : A<int>
     {
         public void Test()
         {

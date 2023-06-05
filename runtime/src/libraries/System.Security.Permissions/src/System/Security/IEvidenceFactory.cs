@@ -3,7 +3,7 @@
 
 namespace System.Security
 {
-    public partial interface IEvidenceFactory
+    partial public interface IEvidenceFactory
     {
         System.Security.Policy.Evidence Evidence { get; }
     }

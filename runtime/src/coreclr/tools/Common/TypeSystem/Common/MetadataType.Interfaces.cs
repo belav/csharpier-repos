@@ -3,9 +3,10 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Api surface definition for interfaces that all MetadataTypes must implement
 
-    public abstract partial class MetadataType : DefType
+    public abstract class MetadataType : DefType
     {
         /// <summary>
         /// The interfaces explicitly declared as implemented by this MetadataType in the type's metadata.

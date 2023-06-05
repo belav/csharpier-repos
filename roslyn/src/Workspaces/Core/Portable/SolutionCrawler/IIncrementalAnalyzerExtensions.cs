@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal static partial class IIncrementalAnalyzerExtensions
+    partial internal static class IIncrementalAnalyzerExtensions
     {
         public static BackgroundAnalysisScope GetOverriddenBackgroundAnalysisScope(
             this IIncrementalAnalyzer incrementalAnalyzer,

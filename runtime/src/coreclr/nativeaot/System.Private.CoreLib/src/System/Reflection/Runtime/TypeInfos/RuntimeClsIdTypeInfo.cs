@@ -12,11 +12,12 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
+    partial
     //
     // TypeInfos returned by the Type.GetTypeFromCLSID() api. These "types" are little more than mules that hold a CLSID
     // and optional remote server name. The only useful thing to do with them is to pass them to Activator.CreateInstance().
     //
-    internal sealed partial class RuntimeCLSIDTypeInfo
+    internal sealed class RuntimeCLSIDTypeInfo
         : RuntimeTypeDefinitionTypeInfo,
             IKeyedItem<RuntimeCLSIDTypeInfo.UnificationKey>
     {

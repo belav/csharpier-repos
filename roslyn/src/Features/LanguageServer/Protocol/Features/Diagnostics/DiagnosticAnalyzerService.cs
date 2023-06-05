@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     [Export(typeof(IDiagnosticAnalyzerService))]
     [Shared]
-    internal partial class DiagnosticAnalyzerService : IDiagnosticAnalyzerService
+    partial internal class DiagnosticAnalyzerService : IDiagnosticAnalyzerService
     {
         private const string DiagnosticsUpdatedEventName = "DiagnosticsUpdated";
 

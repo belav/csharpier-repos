@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [ExportCompletionProvider(nameof(DeclarationNameCompletionProvider), LanguageNames.CSharp)]
     [ExtensionOrder(After = nameof(TupleNameCompletionProvider))]
     [Shared]
-    internal partial class DeclarationNameCompletionProvider : LSPCompletionProvider
+    partial internal class DeclarationNameCompletionProvider : LSPCompletionProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

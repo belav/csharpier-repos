@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 {
-    internal static partial class SyntaxTreeExtensions
+    partial internal static class SyntaxTreeExtensions
     {
         public static bool IsPreProcessorDirectiveContext(
             this SyntaxTree syntaxTree,

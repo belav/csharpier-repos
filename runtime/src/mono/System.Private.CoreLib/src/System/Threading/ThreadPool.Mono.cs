@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Threading
 {
-    public static partial class ThreadPool
+    partial public static class ThreadPool
     {
         [Conditional("unnecessary")]
         internal static void ReportThreadStatus(bool isWorking) { }

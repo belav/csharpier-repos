@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------
 namespace System.Data.Objects
 {
-    public static partial class EntityFunctions
+    partial public static class EntityFunctions
     {
         /// <summary>
         /// An ELINQ operator that ensures the input string is treated as a unicode string.

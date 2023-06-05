@@ -6,7 +6,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class ConsoleTraceListener : System.Diagnostics.TextWriterTraceListener
+    partial public class ConsoleTraceListener : System.Diagnostics.TextWriterTraceListener
     {
         public ConsoleTraceListener() { }
 
@@ -15,7 +15,7 @@ namespace System.Diagnostics
         public override void Close() { }
     }
 
-    public partial class DelimitedListTraceListener : System.Diagnostics.TextWriterTraceListener
+    partial public class DelimitedListTraceListener : System.Diagnostics.TextWriterTraceListener
     {
         public DelimitedListTraceListener(System.IO.Stream stream) { }
 
@@ -75,7 +75,7 @@ namespace System.Diagnostics
         ) { }
     }
 
-    public partial class TextWriterTraceListener : System.Diagnostics.TraceListener
+    partial public class TextWriterTraceListener : System.Diagnostics.TraceListener
     {
         public TextWriterTraceListener() { }
 
@@ -108,7 +108,7 @@ namespace System.Diagnostics
         public override void WriteLine(string? message) { }
     }
 
-    public partial class XmlWriterTraceListener : System.Diagnostics.TextWriterTraceListener
+    partial public class XmlWriterTraceListener : System.Diagnostics.TextWriterTraceListener
     {
         public XmlWriterTraceListener(System.IO.Stream stream) { }
 

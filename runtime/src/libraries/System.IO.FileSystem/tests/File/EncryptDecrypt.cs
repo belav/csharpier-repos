@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 
 namespace System.IO.Tests
 {
-    public partial class EncryptDecrypt : FileSystemTest
+    partial public class EncryptDecrypt : FileSystemTest
     {
         private readonly ITestOutputHelper _output;
 

@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public partial class DefaultJsonTypeInfoResolverMultiContextTests : SerializerTests
+    partial public class DefaultJsonTypeInfoResolverMultiContextTests : SerializerTests
     {
         public DefaultJsonTypeInfoResolverMultiContextTests()
             : base(JsonSerializerWrapper.StringSerializer) { }

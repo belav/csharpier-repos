@@ -5,12 +5,12 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(Libraries.Gdi32)]
-        public static partial int GetClipRgn(IntPtr hdc, IntPtr hrgn);
+        partial public static int GetClipRgn(IntPtr hdc, IntPtr hrgn);
 
         public static int GetClipRgn(HandleRef hdc, IntPtr hrgn)
         {

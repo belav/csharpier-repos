@@ -8,9 +8,10 @@ using System.IO;
 
 namespace System.Diagnostics
 {
+    partial
     // this file can be used in order to ignore all RemoteInvoke-tests
     // should be used instead of /corefx/.../RemoteExecutorTestBase.Process.cs
-    public abstract partial class RemoteExecutorTestBase : FileCleanupTestBase
+    public abstract class RemoteExecutorTestBase : FileCleanupTestBase
     {
         static RemoteInvokeHandle RemoteInvoke(
             MethodInfo method,

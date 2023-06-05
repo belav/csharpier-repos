@@ -13,9 +13,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class SolutionState
+    partial internal class SolutionState
     {
-        private partial class CompilationTracker
+        partial private class CompilationTracker
         {
             /// <summary>
             /// The base type of all <see cref="CompilationTracker"/> states. The state of a <see cref="CompilationTracker" />

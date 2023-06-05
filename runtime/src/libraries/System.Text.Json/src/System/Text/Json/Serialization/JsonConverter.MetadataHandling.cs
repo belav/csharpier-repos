@@ -6,7 +6,7 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json.Serialization
 {
-    public partial class JsonConverter
+    partial public class JsonConverter
     {
         /// <summary>
         /// Initializes the state for polymorphic cases and returns the appropriate derived converter.

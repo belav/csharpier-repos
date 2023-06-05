@@ -18,7 +18,7 @@ using Internal.LowLevelLinq;
 
 namespace System.Reflection.Runtime.Assemblies
 {
-    internal partial class RuntimeAssemblyInfo
+    partial internal class RuntimeAssemblyInfo
     {
         [RequiresUnreferencedCode("Types might be removed")]
         public sealed override Type[] GetExportedTypes() => ExportedTypes.ToArray();
@@ -95,7 +95,7 @@ namespace System.Reflection.Runtime.Assemblies
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal abstract partial class RuntimeConstructorInfo
+    partial internal abstract class RuntimeConstructorInfo
     {
         public sealed override MethodImplAttributes GetMethodImplementationFlags() =>
             MethodImplementationFlags;
@@ -109,7 +109,7 @@ namespace System.Reflection.Runtime.MethodInfos
 
 namespace System.Reflection.Runtime.EventInfos
 {
-    internal abstract partial class RuntimeEventInfo
+    partial internal abstract class RuntimeEventInfo
     {
         public sealed override MethodInfo GetAddMethod(bool nonPublic) =>
             AddMethod.FilterAccessor(nonPublic);
@@ -124,7 +124,7 @@ namespace System.Reflection.Runtime.EventInfos
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal abstract partial class RuntimeMethodInfo
+    partial internal abstract class RuntimeMethodInfo
     {
         public sealed override MethodImplAttributes GetMethodImplementationFlags() =>
             MethodImplementationFlags;
@@ -141,7 +141,7 @@ namespace System.Reflection.Runtime.MethodInfos
 
 namespace System.Reflection.Runtime.PropertyInfos
 {
-    internal abstract partial class RuntimePropertyInfo
+    partial internal abstract class RuntimePropertyInfo
     {
         public sealed override MethodInfo GetGetMethod(bool nonPublic) =>
             Getter?.FilterAccessor(nonPublic);
@@ -171,7 +171,7 @@ namespace System.Reflection.Runtime.PropertyInfos
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal abstract partial class RuntimeTypeInfo
+    partial internal abstract class RuntimeTypeInfo
     {
         public sealed override Type[] GetGenericArguments()
         {

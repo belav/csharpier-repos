@@ -15,8 +15,9 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 #pragma warning disable CA1852 // Seal internal types
-internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
+internal class ControllerActionInvoker : ResourceInvoker, IActionInvoker
 #pragma warning restore CA1852 // Seal internal types
 {
     private readonly ControllerActionInvokerCacheEntry _cacheEntry;
@@ -674,8 +675,9 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
             : base(actionContext, filters, controller) { }
     }
 
+    partial
     // Internal for unit testing
-    internal static new partial class Log
+    internal static new class Log
     {
         public static void ExecutingControllerFactory(ILogger logger, ControllerContext context)
         {
@@ -700,7 +702,7 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
             EventName = "ControllerFactoryExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ExecutingControllerFactory(
+        partial private static void ExecutingControllerFactory(
             ILogger logger,
             string controller,
             string? assemblyName
@@ -729,7 +731,7 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
             EventName = "ControllerFactoryExecuted",
             SkipEnabledCheck = true
         )]
-        private static partial void ExecutedControllerFactory(
+        partial private static void ExecutedControllerFactory(
             ILogger logger,
             string controller,
             string? assemblyName
@@ -771,7 +773,7 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
             EventName = "ActionMethodExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ActionMethodExecuting(
+        partial private static void ActionMethodExecuting(
             ILogger logger,
             string? actionName,
             ModelValidationState validationState
@@ -784,7 +786,7 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
             EventName = "ActionMethodExecutingWithArguments",
             SkipEnabledCheck = true
         )]
-        private static partial void ActionMethodExecutingWithArguments(
+        partial private static void ActionMethodExecutingWithArguments(
             ILogger logger,
             string? actionName,
             string?[] arguments
@@ -816,7 +818,7 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
             EventName = "ActionMethodExecuted",
             SkipEnabledCheck = true
         )]
-        private static partial void ActionMethodExecuted(
+        partial private static void ActionMethodExecuted(
             ILogger logger,
             string? actionName,
             string? actionResult,

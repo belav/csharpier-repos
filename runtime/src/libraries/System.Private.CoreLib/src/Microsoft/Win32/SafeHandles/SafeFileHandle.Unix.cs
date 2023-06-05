@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeFileHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         private const UnixFileMode PermissionMask =
             UnixFileMode.UserRead

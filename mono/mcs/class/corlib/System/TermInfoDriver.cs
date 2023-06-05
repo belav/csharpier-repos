@@ -49,14 +49,16 @@ namespace System
 {
     class TermInfoDriver : IConsoleDriver
     {
+        static
         // This points to a variable that is updated by unmanage code on window size changes.
-        unsafe static int* native_terminal_size;
+        unsafe int* native_terminal_size;
 
         // The current size that we believe we have
         static int terminal_size;
 
+        static
         //static uint flag = 0xdeadbeef;
-        readonly static string[] locations =
+        readonly string[] locations =
         {
             "/usr/share/terminfo",
             "/etc/terminfo",

@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base class for all CustomAttributeData objects created by a MetadataLoadContext.
     /// </summary>
-    internal abstract partial class RoCustomAttributeData : LeveledCustomAttributeData
+    internal abstract class RoCustomAttributeData : LeveledCustomAttributeData
     {
         protected RoCustomAttributeData() { }
 

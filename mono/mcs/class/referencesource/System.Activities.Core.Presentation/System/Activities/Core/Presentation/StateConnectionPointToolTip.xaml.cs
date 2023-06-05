@@ -20,10 +20,11 @@ namespace System.Activities.Core.Presentation
     using System.Windows.Navigation;
     using System.Windows.Shapes;
 
+    partial
     /// <summary>
     /// Interaction logic for StateConnectionPointToolTip.xaml
     /// </summary>
-    internal partial class StateConnectionPointToolTip : UserControl
+    internal class StateConnectionPointToolTip : UserControl
     {
         public StateConnectionPointToolTip()
         {

@@ -15,9 +15,10 @@ namespace System.Diagnostics.Tracing
 #if !ES_BUILD_STANDALONE
 #if !FEATURE_WASM_PERFTRACING
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
+    partial
 #endif
 #endif
-    public partial class IncrementingEventCounter : DiagnosticCounter
+    public class IncrementingEventCounter : DiagnosticCounter
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IncrementingEventCounter"/> class.

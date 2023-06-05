@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
     using Microsoft.CodeAnalysis.Syntax.InternalSyntax;
 
-    internal static partial class SyntaxFactory
+    partial internal static class SyntaxFactory
     {
         private const string CrLf = "\r\n";
         internal static readonly SyntaxTrivia CarriageReturnLineFeed = EndOfLine(CrLf);

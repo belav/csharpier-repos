@@ -10,9 +10,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 {
-    internal partial class DiagnosticIncrementalAnalyzer
+    partial internal class DiagnosticIncrementalAnalyzer
     {
-        private partial class StateManager
+        partial private class StateManager
         {
             public IEnumerable<StateSet> GetAllHostStateSets() =>
                 _hostAnalyzerStateMap.Values.SelectMany(v => v.OrderedStateSets);

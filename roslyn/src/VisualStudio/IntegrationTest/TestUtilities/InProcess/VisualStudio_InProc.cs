@@ -10,7 +10,7 @@ using EnvDTE80;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
-    internal partial class VisualStudio_InProc : InProcComponent
+    partial internal class VisualStudio_InProc : InProcComponent
     {
         private VisualStudio_InProc() { }
 

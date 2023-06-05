@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    internal partial class ConstructorInvoker
+    partial internal class ConstructorInvoker
     {
         public InvocationFlags _invocationFlags;
 

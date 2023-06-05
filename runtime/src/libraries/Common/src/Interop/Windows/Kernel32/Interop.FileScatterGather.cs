@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static unsafe partial int ReadFileScatter(
+        partial internal static unsafe int ReadFileScatter(
             SafeHandle hFile,
             long* aSegmentArray,
             int nNumberOfBytesToRead,
@@ -19,7 +19,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static unsafe partial int WriteFileGather(
+        partial internal static unsafe int WriteFileGather(
             SafeHandle hFile,
             long* aSegmentArray,
             int nNumberOfBytesToWrite,

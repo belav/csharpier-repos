@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public abstract partial class MsmqBindingElementBase : StandardBindingElement
+    partial public abstract class MsmqBindingElementBase : StandardBindingElement
     {
         protected MsmqBindingElementBase(string name)
             : base(name) { }

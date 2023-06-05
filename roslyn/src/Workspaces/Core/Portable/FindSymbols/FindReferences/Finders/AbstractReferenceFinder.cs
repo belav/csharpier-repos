@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal abstract partial class AbstractReferenceFinder : IReferenceFinder
+    partial internal abstract class AbstractReferenceFinder : IReferenceFinder
     {
         public const string ContainingTypeInfoPropertyName = "ContainingTypeInfo";
         public const string ContainingMemberInfoPropertyName = "ContainingMemberInfo";
@@ -1126,7 +1126,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         }
     }
 
-    internal abstract partial class AbstractReferenceFinder<TSymbol> : AbstractReferenceFinder
+    partial internal abstract class AbstractReferenceFinder<TSymbol> : AbstractReferenceFinder
         where TSymbol : ISymbol
     {
         protected abstract bool CanFind(TSymbol symbol);

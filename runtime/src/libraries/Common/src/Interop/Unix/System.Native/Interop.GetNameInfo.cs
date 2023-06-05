@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [Flags]
         internal enum GetNameInfoFlags : int
@@ -16,7 +16,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetNameInfo")]
-        internal static unsafe partial int GetNameInfo(
+        partial internal static unsafe int GetNameInfo(
             byte* address,
             uint addressLength,
             byte isIpv6,

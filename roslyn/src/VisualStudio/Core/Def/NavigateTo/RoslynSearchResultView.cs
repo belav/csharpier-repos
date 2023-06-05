@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.NavigateTo;
 
-internal sealed partial class RoslynSearchItemsSourceProvider
+partial internal sealed class RoslynSearchItemsSourceProvider
 {
     private sealed class RoslynSearchResultView : CodeSearchResultViewBase
     {

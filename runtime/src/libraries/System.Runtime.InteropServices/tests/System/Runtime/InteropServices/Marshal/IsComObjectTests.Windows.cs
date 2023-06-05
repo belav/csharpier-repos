@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class IsComObjectTests
+    partial public class IsComObjectTests
     {
         public static IEnumerable<object[]> IsComObject_Windows_TestData()
         {

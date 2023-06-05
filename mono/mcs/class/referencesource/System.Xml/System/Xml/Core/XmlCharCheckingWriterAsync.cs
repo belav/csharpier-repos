@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
+    partial
     //
     // XmlCharCheckingWriter
     //
-    internal partial class XmlCharCheckingWriter : XmlWrappingWriter
+    internal class XmlCharCheckingWriter : XmlWrappingWriter
     {
         public override Task WriteDocTypeAsync(
             string name,

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Json.Tests
 {
-    public static partial class JsonEncodedTextTests
+    partial public static class JsonEncodedTextTests
     {
         [Fact]
         public static void LatinCharsSameAsDefaultEncoder()
@@ -528,7 +528,7 @@ namespace System.Text.Json.Tests
                 return Default.WillEncode(unicodeScalar);
             }
 
-            public unsafe override int FindFirstCharacterToEncode(char* text, int textLength)
+            public override unsafe int FindFirstCharacterToEncode(char* text, int textLength)
             {
                 return Default.FindFirstCharacterToEncode(text, textLength);
             }
@@ -538,7 +538,7 @@ namespace System.Text.Json.Tests
                 get { return Default.MaxOutputCharactersPerInputCharacter; }
             }
 
-            public unsafe override bool TryEncodeUnicodeScalar(
+            public override unsafe bool TryEncodeUnicodeScalar(
                 int unicodeScalar,
                 char* buffer,
                 int bufferLength,

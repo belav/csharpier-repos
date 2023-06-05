@@ -6,7 +6,7 @@ namespace AppFramework.Util
 {
     public class Logic
     {
-        static public bool EnumInSet(Enum anEnum, Enum[] checkSet)
+        public static bool EnumInSet(Enum anEnum, Enum[] checkSet)
         {
             foreach (Enum aVal in checkSet)
             {

@@ -3,6 +3,7 @@
 
 namespace System.Security
 {
+    partial
     // SecureString attempts to provide a defense-in-depth solution.
     //
     // On Windows, this is done with several mechanisms:
@@ -12,7 +13,7 @@ namespace System.Security
     //
     // On Unix, we do 1 and 2, but we don't do 3 as there's no CryptProtectData equivalent.
 
-    public sealed partial class SecureString
+    public sealed class SecureString
     {
         private static int GetAlignedByteSize(int length)
         {

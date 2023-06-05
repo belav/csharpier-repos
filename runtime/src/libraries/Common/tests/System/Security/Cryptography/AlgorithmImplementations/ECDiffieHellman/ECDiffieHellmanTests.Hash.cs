@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
-    public partial class ECDiffieHellmanTests
+    partial public class ECDiffieHellmanTests
     {
         [Fact]
         public static void HashDerivation_OtherKeyRequired()

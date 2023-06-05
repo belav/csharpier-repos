@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal static unsafe uint[]? GetGroups()
         {
@@ -48,6 +48,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetGroups",
             SetLastError = true
         )]
-        private static unsafe partial int GetGroups(int ngroups, uint* groups);
+        partial private static unsafe int GetGroups(int ngroups, uint* groups);
     }
 }

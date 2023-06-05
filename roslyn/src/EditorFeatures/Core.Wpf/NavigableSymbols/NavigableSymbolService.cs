@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
     [Export(typeof(INavigableSymbolSourceProvider))]
     [Name(nameof(NavigableSymbolService))]
     [ContentType(ContentTypeNames.RoslynContentType)]
-    internal sealed partial class NavigableSymbolService : INavigableSymbolSourceProvider
+    partial internal sealed class NavigableSymbolService : INavigableSymbolSourceProvider
     {
         private static readonly object s_key = new();
 

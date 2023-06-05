@@ -3,7 +3,7 @@
 
 namespace System.IO.IsolatedStorage
 {
-    internal static partial class Helper
+    partial internal static class Helper
     {
         internal static void CreateDirectory(
             string path,

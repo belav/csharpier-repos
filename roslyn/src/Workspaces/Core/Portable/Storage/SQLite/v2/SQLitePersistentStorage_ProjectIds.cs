@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SQLite.v2
 {
-    internal partial class SQLitePersistentStorage
+    partial internal class SQLitePersistentStorage
     {
         /// <summary>
         /// Mapping from the workspace's ID for a project, to the ID we use in the DB for the project.

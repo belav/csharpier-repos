@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-internal sealed partial class RazorDirectiveSyntax
+partial internal sealed class RazorDirectiveSyntax
 {
     private static readonly string DirectiveDescriptorKey = typeof(DirectiveDescriptor).Name;
 

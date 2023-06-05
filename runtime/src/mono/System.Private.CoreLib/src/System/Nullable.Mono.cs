@@ -5,7 +5,7 @@
 
 namespace System
 {
-    public partial struct Nullable<T>
+    partial public struct Nullable<T>
     {
         //
         // These are called by the JIT

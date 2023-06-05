@@ -21,7 +21,7 @@ namespace Internal.TypeSystem
         AutoClass = 0x00020000,
     }
 
-    public partial class MetadataType
+    partial public class MetadataType
     {
         /// <summary>
         /// Gets a value indicating how strings should be handled for native interop.

@@ -20,10 +20,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 {
-    internal abstract partial class AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer
+    partial internal abstract class AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer
         : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
     {
-        private sealed partial class SymbolStartAnalyzer
+        partial private sealed class SymbolStartAnalyzer
         {
             private readonly AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer _compilationAnalyzer;
 

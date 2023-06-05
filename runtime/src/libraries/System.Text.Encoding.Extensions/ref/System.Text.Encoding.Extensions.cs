@@ -6,7 +6,7 @@
 
 namespace System.Text
 {
-    public partial class ASCIIEncoding : System.Text.Encoding
+    partial public class ASCIIEncoding : System.Text.Encoding
     {
         public ASCIIEncoding() { }
 
@@ -16,7 +16,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -37,7 +37,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -70,7 +70,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -86,7 +86,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }
@@ -133,7 +133,7 @@ namespace System.Text
         }
     }
 
-    public partial class UnicodeEncoding : System.Text.Encoding
+    partial public class UnicodeEncoding : System.Text.Encoding
     {
         public const int CharSize = 2;
 
@@ -156,7 +156,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -172,7 +172,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -200,7 +200,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -211,7 +211,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }
@@ -263,7 +263,7 @@ namespace System.Text
         }
     }
 
-    public sealed partial class UTF32Encoding : System.Text.Encoding
+    partial public sealed class UTF32Encoding : System.Text.Encoding
     {
         public UTF32Encoding() { }
 
@@ -284,7 +284,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -300,7 +300,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -328,7 +328,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -339,7 +339,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }
@@ -391,7 +391,7 @@ namespace System.Text
         }
     }
 
-    public partial class UTF7Encoding : System.Text.Encoding
+    partial public class UTF7Encoding : System.Text.Encoding
     {
         [System.ObsoleteAttribute(
             "The UTF-7 encoding is insecure and should not be used. Consider using UTF-8 instead.",
@@ -415,7 +415,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -431,7 +431,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -459,7 +459,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -470,7 +470,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }
@@ -517,7 +517,7 @@ namespace System.Text
         }
     }
 
-    public partial class UTF8Encoding : System.Text.Encoding
+    partial public class UTF8Encoding : System.Text.Encoding
     {
         public UTF8Encoding() { }
 
@@ -538,7 +538,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -559,7 +559,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -592,7 +592,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -608,7 +608,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }

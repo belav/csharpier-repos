@@ -12,10 +12,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
 {
+    partial
     /// <summary>
     /// Interaction logic for MoveToNamespaceDialog.xaml
     /// </summary>
-    internal partial class MoveToNamespaceDialog : DialogWindow
+    internal class MoveToNamespaceDialog : DialogWindow
     {
         private readonly MoveToNamespaceDialogViewModel _viewModel;
 

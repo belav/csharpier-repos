@@ -46,11 +46,12 @@ namespace Internal.TypeSystem
         CppCodegen,
     }
 
+    partial
     /// <summary>
     /// Represents various details about the compilation target that affect
     /// layout, padding, allocations, or ABI.
     /// </summary>
-    public partial class TargetDetails
+    public class TargetDetails
     {
         /// <summary>
         /// Gets the target CPU architecture.

@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class ECCngKey
+    partial internal sealed class ECCngKey
     {
         private SafeNCryptKeyHandle? _keyHandle;
         private int _lastKeySize;

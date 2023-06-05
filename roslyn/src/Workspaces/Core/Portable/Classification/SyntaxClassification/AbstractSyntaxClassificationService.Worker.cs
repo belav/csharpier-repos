@@ -12,9 +12,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Classification
 {
-    internal partial class AbstractSyntaxClassificationService
+    partial internal class AbstractSyntaxClassificationService
     {
-        private readonly ref struct Worker
+        ref private readonly struct Worker
         {
             private readonly SemanticModel _semanticModel;
             private readonly SyntaxTree _syntaxTree;

@@ -20,7 +20,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class Thread
+    partial public sealed class Thread
     {
         /*=========================================================================
         ** Data accessed from managed code that needs to be defined in
@@ -98,7 +98,7 @@ namespace System.Threading
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ThreadNative_Start")]
-        private static unsafe partial void StartInternal(
+        partial private static unsafe void StartInternal(
             ThreadHandle t,
             int stackSize,
             int priority,
@@ -130,7 +130,7 @@ namespace System.Threading
         private static extern void SleepInternal(int millisecondsTimeout);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ThreadNative_UninterruptibleSleep0")]
-        internal static partial void UninterruptibleSleep0();
+        partial internal static void UninterruptibleSleep0();
 
         /// <summary>
         /// Wait for a length of time proportional to 'iterations'.  Each iteration is should
@@ -143,7 +143,7 @@ namespace System.Threading
         public static void SpinWait(int iterations) => SpinWaitInternal(iterations);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ThreadNative_YieldThread")]
-        private static partial Interop.BOOL YieldInternal();
+        partial private static Interop.BOOL YieldInternal();
 
         public static bool Yield() => YieldInternal() != Interop.BOOL.FALSE;
 
@@ -173,7 +173,7 @@ namespace System.Threading
             EntryPoint = "ThreadNative_InformThreadNameChange",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial void InformThreadNameChange(ThreadHandle t, string? name, int len);
+        partial private static void InformThreadNameChange(ThreadHandle t, string? name, int len);
 
         /// <summary>Returns true if the thread has been started and is not dead.</summary>
         public extern bool IsAlive
@@ -235,7 +235,7 @@ namespace System.Threading
         private extern void SetPriorityNative(int priority);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ThreadNative_GetCurrentOSThreadId")]
-        private static partial ulong GetCurrentOSThreadId();
+        partial private static ulong GetCurrentOSThreadId();
 
         /// <summary>
         /// Return the thread state as a consistent set of bits.  This is more

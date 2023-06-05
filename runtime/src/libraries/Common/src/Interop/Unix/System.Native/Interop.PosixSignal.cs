@@ -3,13 +3,13 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetPosixSignalHandler")]
         [SuppressGCTransition]
-        internal static unsafe partial void SetPosixSignalHandler(
+        partial internal static unsafe void SetPosixSignalHandler(
             delegate* unmanaged<int, PosixSignal, int> handler
         );
 
@@ -19,22 +19,22 @@ internal static partial class Interop
             SetLastError = true
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool EnablePosixSignalHandling(int signal);
+        partial internal static bool EnablePosixSignalHandling(int signal);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_DisablePosixSignalHandling"
         )]
-        internal static partial void DisablePosixSignalHandling(int signal);
+        partial internal static void DisablePosixSignalHandling(int signal);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_HandleNonCanceledPosixSignal"
         )]
-        internal static partial void HandleNonCanceledPosixSignal(int signal);
+        partial internal static void HandleNonCanceledPosixSignal(int signal);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetPlatformSignalNumber")]
         [SuppressGCTransition]
-        internal static partial int GetPlatformSignalNumber(PosixSignal signal);
+        partial internal static int GetPlatformSignalNumber(PosixSignal signal);
     }
 }

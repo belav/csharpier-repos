@@ -669,7 +669,9 @@ namespace Mono.Security
         static bool initialized;
 
         // We don't want a dependency on StrongNameManager in Mono.Security.dll
-        static public bool IsAssemblyStrongnamed(string assemblyName)
+        public
+        // We don't want a dependency on StrongNameManager in Mono.Security.dll
+        static bool IsAssemblyStrongnamed(string assemblyName)
         {
             if (!initialized)
             {
@@ -721,12 +723,13 @@ namespace Mono.Security
         // assembly - as we wouldn't have to load it from disk a
         // second time. The runtime already have implementations of
         // SHA1 (and even MD5 if required someday).
-        static public bool VerifySignature(
-            byte[] publicKey,
-            int algorithm,
-            byte[] hash,
-            byte[] signature
-        )
+        public
+        // TODO
+        // we would get better performance if the runtime hashed the
+        // assembly - as we wouldn't have to load it from disk a
+        // second time. The runtime already have implementations of
+        // SHA1 (and even MD5 if required someday).
+        static bool VerifySignature(byte[] publicKey, int algorithm, byte[] hash, byte[] signature)
         {
             try
             {
@@ -741,12 +744,88 @@ namespace Mono.Security
         }
 #endif
 
-        static private bool Verify(
-            RSA rsa,
-            AssemblyHashAlgorithm algorithm,
-            byte[] hash,
-            byte[] signature
-        )
+        private
+#if INSIDE_CORLIB
+        static object lockObject = new object();
+        static bool initialized;
+
+        // We don't want a dependency on StrongNameManager in Mono.Security.dll
+        public
+        // We don't want a dependency on StrongNameManager in Mono.Security.dll
+        static bool IsAssemblyStrongnamed(string assemblyName)
+        {
+            if (!initialized)
+            {
+                lock (lockObject)
+                {
+                    if (!initialized)
+                    {
+                        string config = Environment.GetMachineConfigPath();
+                        StrongNameManager.LoadConfig(config);
+                        initialized = true;
+                    }
+                }
+            }
+
+            try
+            {
+                // this doesn't load the assembly (well it unloads it ;)
+                // http://weblogs.asp.net/nunitaddin/posts/9991.aspx
+                AssemblyName an = AssemblyName.GetAssemblyName(assemblyName);
+                if (an == null)
+                    return false;
+
+                byte[] publicKey = StrongNameManager.GetMappedPublicKey(an.GetPublicKeyToken());
+                if (publicKey == null || publicKey.Length < 12)
+                {
+                    // no mapping
+                    publicKey = an.GetPublicKey();
+                    if (publicKey == null || publicKey.Length < 12)
+                        return false;
+                }
+
+                // Note: MustVerify is based on the original token (by design). Public key
+                // remapping won't affect if the assembly is verified or not.
+                if (!StrongNameManager.MustVerify(an))
+                    return true;
+
+                RSA rsa = CryptoConvert.FromCapiPublicKeyBlob(publicKey, 12);
+                return new StrongName(rsa).Verify(assemblyName);
+            }
+            catch
+            {
+                // no exception allowed
+                return false;
+            }
+        }
+
+        // TODO
+        // we would get better performance if the runtime hashed the
+        // assembly - as we wouldn't have to load it from disk a
+        // second time. The runtime already have implementations of
+        // SHA1 (and even MD5 if required someday).
+        public
+        // TODO
+        // we would get better performance if the runtime hashed the
+        // assembly - as we wouldn't have to load it from disk a
+        // second time. The runtime already have implementations of
+        // SHA1 (and even MD5 if required someday).
+        static bool VerifySignature(byte[] publicKey, int algorithm, byte[] hash, byte[] signature)
+        {
+            try
+            {
+                RSA rsa = CryptoConvert.FromCapiPublicKeyBlob(publicKey);
+                return Verify(rsa, (AssemblyHashAlgorithm)algorithm, hash, signature);
+            }
+            catch
+            {
+                // no exception allowed
+                return false;
+            }
+        }
+#endif
+
+        static bool Verify(RSA rsa, AssemblyHashAlgorithm algorithm, byte[] hash, byte[] signature)
         {
             RSAPKCS1SignatureDeformatter vrfy = new RSAPKCS1SignatureDeformatter(rsa);
             switch (algorithm)

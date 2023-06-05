@@ -8,11 +8,12 @@ using static System.Linq.Expressions.CachedReflectionInfo;
 
 namespace System.Linq.Expressions.Compiler
 {
+    partial
     /// <summary>
     /// Dynamic Language Runtime Compiler.
     /// This part compiles lambdas.
     /// </summary>
-    internal sealed partial class LambdaCompiler
+    internal sealed class LambdaCompiler
     {
 #if FEATURE_COMPILE_TO_METHODBUILDER
         private static int s_counter;

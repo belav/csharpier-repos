@@ -5,8 +5,9 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Implements generic method canonicalization
-    public partial class InstantiatedMethod
+    public class InstantiatedMethod
     {
         /// <summary>
         /// Stores a cached version of the canonicalized form of this method since

@@ -17,7 +17,7 @@ using AssemblyFlags = System.Reflection.AssemblyFlags;
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         private EntityMap<ForwarderKey, TypeForwarder> _forwarders = new EntityMap<
             ForwarderKey,

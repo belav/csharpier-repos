@@ -10,7 +10,7 @@ namespace LibraryImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        public partial class NativeExportsSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
+        partial public class NativeExportsSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
             private NativeExportsSafeHandle()
                 : base(ownsHandle: true) { }
@@ -25,25 +25,25 @@ namespace LibraryImportGenerator.IntegrationTests
             public static NativeExportsSafeHandle CreateNewHandle() => AllocateHandle();
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "alloc_handle")]
-            private static partial NativeExportsSafeHandle AllocateHandle();
+            partial private static NativeExportsSafeHandle AllocateHandle();
         }
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "alloc_handle")]
-        public static partial NativeExportsSafeHandle AllocateHandle();
+        partial public static NativeExportsSafeHandle AllocateHandle();
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "alloc_handle_out")]
-        public static partial void AllocateHandle(out NativeExportsSafeHandle handle);
+        partial public static void AllocateHandle(out NativeExportsSafeHandle handle);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "release_handle")]
         [return: MarshalAs(UnmanagedType.I1)]
-        private static partial bool ReleaseHandle(nint handle);
+        partial private static bool ReleaseHandle(nint handle);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "is_handle_alive")]
         [return: MarshalAs(UnmanagedType.I1)]
-        public static partial bool IsHandleAlive(NativeExportsSafeHandle handle);
+        partial public static bool IsHandleAlive(NativeExportsSafeHandle handle);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "modify_handle")]
-        public static partial void ModifyHandle(
+        partial public static void ModifyHandle(
             ref NativeExportsSafeHandle handle,
             [MarshalAs(UnmanagedType.I1)] bool newHandle
         );

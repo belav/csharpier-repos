@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers
 {
-    public static partial class SequenceReaderExtensions
+    partial public static class SequenceReaderExtensions
     {
         /// <summary>
         /// Try to read the given type out of the buffer if possible. Warning: this is dangerous to use with arbitrary

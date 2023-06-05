@@ -30,6 +30,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
 {
+    partial
     /// <summary>
     /// Shared implementation of the outliner tagger provider.
     ///
@@ -39,7 +40,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
     /// editor doesn't know about all the regions in the file, then it wouldn't be able to
     /// persist them to the SUO file to persist this data across sessions.
     /// </summary>
-    internal abstract partial class AbstractStructureTaggerProvider
+    internal abstract class AbstractStructureTaggerProvider
         : AsynchronousTaggerProvider<IStructureTag>
     {
         private const string RegionDirective = "#region";

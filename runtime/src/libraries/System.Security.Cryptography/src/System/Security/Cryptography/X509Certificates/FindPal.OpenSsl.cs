@@ -8,9 +8,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal static partial class FindPal
+    partial internal static class FindPal
     {
-        private static partial IFindPal OpenPal(
+        partial private static IFindPal OpenPal(
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
             bool validOnly

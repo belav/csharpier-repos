@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class PeerCustomResolverElement : ConfigurationElement
+    partial public sealed class PeerCustomResolverElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

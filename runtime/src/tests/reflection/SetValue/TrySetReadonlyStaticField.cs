@@ -6,10 +6,10 @@ using System.Reflection;
 
 class X
 {
-    readonly static string S;
-    readonly static string S_Expected;
-    readonly static bool B0;
-    readonly static bool B1;
+    static readonly string S;
+    static readonly string S_Expected;
+    static readonly bool B0;
+    static readonly bool B1;
 
     static X()
     {

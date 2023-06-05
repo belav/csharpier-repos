@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-internal partial class DatabaseDropCommand : ContextCommandBase
+partial internal class DatabaseDropCommand : ContextCommandBase
 {
     private CommandOption? _force;
     private CommandOption? _dryRun;

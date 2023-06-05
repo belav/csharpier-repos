@@ -10,7 +10,7 @@ namespace System.Security.Cryptography
         "CA5350",
         Justification = "We are providing the implementation for DES, not consuming it."
     )]
-    internal sealed partial class DesImplementation : DES
+    partial internal sealed class DesImplementation : DES
     {
         private const int BitsPerByte = 8;
 

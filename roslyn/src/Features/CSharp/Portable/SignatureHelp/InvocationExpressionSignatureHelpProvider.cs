@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         public InvocationExpressionSignatureHelpProvider() { }
     }
 
-    internal partial class InvocationExpressionSignatureHelpProviderBase
+    partial internal class InvocationExpressionSignatureHelpProviderBase
         : AbstractOrdinaryMethodSignatureHelpProvider
     {
         public override bool IsTriggerCharacter(char ch) => ch is '(' or ',';

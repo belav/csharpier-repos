@@ -18,10 +18,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
+    partial
     /// <summary>
     /// Base type for Roslyn brokered services hosted in ServiceHub.
     /// </summary>
-    internal abstract partial class BrokeredServiceBase : IDisposable
+    internal abstract class BrokeredServiceBase : IDisposable
     {
         protected readonly TraceSource TraceLogger;
         protected readonly RemoteWorkspaceManager WorkspaceManager;

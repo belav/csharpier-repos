@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
 {
-    internal partial class CSharpReplacePropertyWithMethodsService
+    partial internal class CSharpReplacePropertyWithMethodsService
     {
         private class ConvertValueToParamRewriter : CSharpSyntaxRewriter
         {

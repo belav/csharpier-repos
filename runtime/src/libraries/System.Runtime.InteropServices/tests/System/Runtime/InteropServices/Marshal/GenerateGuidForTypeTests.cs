@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GenerateGuidForTypeTests
+    partial public class GenerateGuidForTypeTests
     {
         public static IEnumerable<object[]> GenerateGuidForType_Valid_TestData()
         {

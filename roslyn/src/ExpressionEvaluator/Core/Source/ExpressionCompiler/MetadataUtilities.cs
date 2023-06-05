@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
-    internal static partial class MetadataUtilities
+    partial internal static class MetadataUtilities
     {
         /// <summary>
         /// Group module metadata into assemblies.

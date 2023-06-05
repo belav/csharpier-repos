@@ -13,12 +13,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// A list of <see cref="SyntaxNode"/>.
     /// </summary>
-    public readonly partial struct SyntaxList<TNode>
-        : IReadOnlyList<TNode>,
-            IEquatable<SyntaxList<TNode>>
+    public readonly struct SyntaxList<TNode> : IReadOnlyList<TNode>, IEquatable<SyntaxList<TNode>>
         where TNode : SyntaxNode
     {
         private readonly SyntaxNode? _node;

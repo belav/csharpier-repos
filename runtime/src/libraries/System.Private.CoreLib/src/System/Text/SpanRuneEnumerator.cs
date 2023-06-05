@@ -3,9 +3,10 @@
 
 namespace System.Text
 {
+    ref
     // An enumerator for retrieving System.Text.Rune instances from a ROS<char>.
     // Methods are pattern-matched by compiler to allow using foreach pattern.
-    public ref struct SpanRuneEnumerator
+    public struct SpanRuneEnumerator
     {
         private ReadOnlySpan<char> _remaining;
         private Rune _current;

@@ -3,7 +3,7 @@
 
 namespace System.Xml
 {
-    internal static partial class BinHexEncoder
+    partial internal static class BinHexEncoder
     {
         private const int CharsChunkSize = 128;
 

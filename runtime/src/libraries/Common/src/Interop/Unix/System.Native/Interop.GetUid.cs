@@ -3,11 +3,11 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetUid")]
-        internal static partial uint GetUid();
+        partial internal static uint GetUid();
     }
 }

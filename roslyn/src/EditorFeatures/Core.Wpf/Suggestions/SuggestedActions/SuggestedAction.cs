@@ -27,10 +27,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
+    partial
     /// <summary>
     /// Base class for all Roslyn light bulb menu items.
     /// </summary>
-    internal abstract partial class SuggestedAction
+    internal abstract class SuggestedAction
         : ForegroundThreadAffinitizedObject,
             ISuggestedAction3,
             IEquatable<ISuggestedAction>

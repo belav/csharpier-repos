@@ -12,10 +12,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Pipes
 {
+    partial
     /// <summary>
     /// Named pipe server
     /// </summary>
-    public sealed partial class NamedPipeServerStream : PipeStream
+    public sealed class NamedPipeServerStream : PipeStream
     {
         private ConnectionValueTaskSource? _reusableConnectionValueTaskSource; // reusable ConnectionValueTaskSource that is currently NOT being used
 

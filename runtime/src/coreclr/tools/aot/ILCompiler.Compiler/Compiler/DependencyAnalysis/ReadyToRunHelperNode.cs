@@ -43,7 +43,7 @@ namespace ILCompiler.DependencyAnalysis
         ConstrainedDirectCall,
     }
 
-    public partial class ReadyToRunHelperNode : AssemblyStubNode, INodeWithDebugInfo
+    partial public class ReadyToRunHelperNode : AssemblyStubNode, INodeWithDebugInfo
     {
         private readonly ReadyToRunHelperId _id;
         private readonly object _target;

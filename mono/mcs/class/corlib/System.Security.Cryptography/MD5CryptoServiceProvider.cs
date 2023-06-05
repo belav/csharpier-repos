@@ -498,7 +498,7 @@ namespace System.Security.Cryptography
             buffer[position] = (byte)(length >> 56);
         }
 
-        private readonly static uint[] K =
+        private static readonly uint[] K =
         {
             0xd76aa478,
             0xe8c7b756,

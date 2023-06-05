@@ -10,7 +10,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCReadOuterXml : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadOuterXml : TCXMLReaderBaseGeneral
     {
         // Element names to test ReadOuterXml on
         private static string s_EMP1 = "EMPTY1";

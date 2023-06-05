@@ -4,12 +4,13 @@
 using System;
 using System.Runtime.CompilerServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
+    partial
     // WARNING: until https://github.com/dotnet/runtime/issues/37955 is fixed
     // make sure that the native side always sets the out parameters
     // otherwise out parameters could stay un-initialized, when the method is used in inlined context
-    internal static unsafe partial class Runtime
+    internal static unsafe class Runtime
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void ReleaseCSOwnedObject(IntPtr jsHandle);

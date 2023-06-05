@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
+    partial
     /// <summary>
     /// Coordinates the exectution of LSP messages to ensure correct results are sent back.
     /// </summary>
@@ -48,7 +49,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// more messages, and a new queue will need to be created.
     /// </para>
     /// </remarks>
-    internal partial class RequestExecutionQueue
+    internal class RequestExecutionQueue
     {
         private readonly WellKnownLspServerKinds _serverKind;
         private readonly ImmutableArray<string> _supportedLanguages;

@@ -101,7 +101,7 @@ public class CriticalClass
 {
     public class NestedClassInsideCritical
     {
-        static public void Method()
+        public static void Method()
         {
             Test.error("critical inner class method called");
         }

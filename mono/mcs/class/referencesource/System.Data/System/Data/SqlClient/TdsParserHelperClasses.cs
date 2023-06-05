@@ -297,7 +297,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class SqlCollation
+    internal sealed class SqlCollation
     {
         // First 20 bits of info field represent the lcid, bits 21-25 are compare options
         private const uint IgnoreCase = 1 << 20; // bit 21 - IgnoreCase
@@ -483,7 +483,7 @@ namespace System.Data.SqlClient
             );
         }
 
-        static internal bool AreSame(SqlCollation a, SqlCollation b)
+        internal static bool AreSame(SqlCollation a, SqlCollation b)
         {
             if (a == null || b == null)
             {
@@ -510,7 +510,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class SqlEnvChange
+    internal sealed class SqlEnvChange
     {
         internal byte type;
         internal byte oldLength;
@@ -527,7 +527,7 @@ namespace System.Data.SqlClient
         internal RoutingInfo newRoutingInfo;
     }
 
-    sealed internal class SqlLogin
+    internal sealed class SqlLogin
     {
         internal SqlAuthenticationMethod authentication = SqlAuthenticationMethod.NotSpecified; // Authentication type
         internal int timeout; // login timeout
@@ -549,7 +549,7 @@ namespace System.Data.SqlClient
         internal SecureString newSecurePassword; // new password in SecureString for resetting pasword
     }
 
-    sealed internal class SqlLoginAck
+    internal sealed class SqlLoginAck
     {
         internal string programName;
         internal byte majorVersion;
@@ -559,7 +559,7 @@ namespace System.Data.SqlClient
         internal UInt32 tdsVersion;
     }
 
-    sealed internal class SqlFedAuthInfo
+    internal sealed class SqlFedAuthInfo
     {
         internal string spn;
         internal string stsurl;
@@ -575,14 +575,14 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class SqlFedAuthToken
+    internal sealed class SqlFedAuthToken
     {
         internal UInt32 dataLen;
         internal byte[] accessToken;
         internal long expirationFileTime;
     }
 
-    sealed internal class _SqlMetaData : SqlMetaDataPriv, ICloneable
+    internal sealed class _SqlMetaData : SqlMetaDataPriv, ICloneable
     {
         internal string column;
         internal string baseColumn;
@@ -659,7 +659,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class _SqlMetaDataSet : ICloneable
+    internal sealed class _SqlMetaDataSet : ICloneable
     {
         internal ushort id; // for altrow-columns only
         internal int[] indexMap;
@@ -720,7 +720,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class _SqlMetaDataSetCollection : ICloneable
+    internal sealed class _SqlMetaDataSetCollection : ICloneable
     {
         private readonly List<_SqlMetaDataSet> altMetaDataSetArray;
         internal _SqlMetaDataSet metaDataSet;
@@ -1051,10 +1051,11 @@ namespace System.Data.SqlClient
         }
     }
 
+    internal
     /// <summary>
     /// Class encapsulating additional information when sending encrypted input parameters.
     /// </summary>
-    sealed internal class SqlColumnEncryptionInputParameterInfo
+    sealed class SqlColumnEncryptionInputParameterInfo
     {
         /// <summary>
         /// Metadata of the parameter to write the TYPE_INFO of the unencrypted column data type.
@@ -1200,7 +1201,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class _SqlRPC
+    internal sealed class _SqlRPC
     {
         internal string rpcName;
         internal string databaseName; // Used for UDTs
@@ -1235,7 +1236,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class SqlReturnValue : SqlMetaDataPriv
+    internal sealed class SqlReturnValue : SqlMetaDataPriv
     {
         internal ushort parmIndex; //Yukon or later only
         internal string parameter;

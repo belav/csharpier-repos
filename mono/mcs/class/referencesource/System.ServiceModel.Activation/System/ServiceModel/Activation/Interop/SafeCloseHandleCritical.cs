@@ -30,6 +30,6 @@ namespace System.ServiceModel.Activation.Interop
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CloseHandle(IntPtr handle);
+        static extern bool CloseHandle(IntPtr handle);
     }
 }

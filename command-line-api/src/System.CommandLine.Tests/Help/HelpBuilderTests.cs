@@ -11,7 +11,7 @@ using static System.Environment;
 
 namespace System.CommandLine.Tests.Help
 {
-    public partial class HelpBuilderTests
+    partial public class HelpBuilderTests
     {
         private const int SmallMaxWidth = 70;
         private const int LargeMaxWidth = 200;

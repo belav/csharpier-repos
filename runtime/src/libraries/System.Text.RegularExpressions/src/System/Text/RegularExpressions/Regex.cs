@@ -14,11 +14,12 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions
 {
+    partial
     /// <summary>
     /// Represents an immutable regular expression. Also contains static methods that
     /// allow use of regular expressions without instantiating a Regex explicitly.
     /// </summary>
-    public partial class Regex : ISerializable
+    public class Regex : ISerializable
     {
         [StringSyntax(StringSyntaxAttribute.Regex)]
         protected internal string? pattern; // The string pattern provided

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class SystemAcl_BinaryLength
+    partial public class SystemAcl_BinaryLength
     {
         [Fact]
         public static void BasicValidationTestCases()

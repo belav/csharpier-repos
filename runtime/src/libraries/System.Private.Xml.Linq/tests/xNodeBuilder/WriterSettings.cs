@@ -9,11 +9,11 @@ using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeBuilderFunctionalTests : TestModule
+    partial public class XNodeBuilderFunctionalTests : TestModule
     {
-        public partial class XNodeBuilderTests : XLinqTestCase
+        partial public class XNodeBuilderTests : XLinqTestCase
         {
-            public partial class Writer_Settings : BridgeHelpers
+            partial public class Writer_Settings : BridgeHelpers
             {
                 //[Variation(Desc = "XDocument: Settings before Close()", Priority = 1)]
                 public void var_1()

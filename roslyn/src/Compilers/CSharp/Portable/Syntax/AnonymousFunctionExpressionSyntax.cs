@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class AnonymousFunctionExpressionSyntax
+    partial public class AnonymousFunctionExpressionSyntax
     {
         /// <summary>
         /// Either the <see cref="Block"/> if it is not <c>null</c> or the

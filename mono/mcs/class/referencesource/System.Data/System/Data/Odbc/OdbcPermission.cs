@@ -74,7 +74,7 @@ namespace System.Data.Odbc
             AddPermissionEntry(constr);
         }
 
-        override public IPermission Copy()
+        public override IPermission Copy()
         {
             return new OdbcPermission(this);
         }
@@ -95,7 +95,7 @@ namespace System.Data.Odbc
         public OdbcPermissionAttribute(SecurityAction action)
             : base(action) { }
 
-        override public IPermission CreatePermission()
+        public override IPermission CreatePermission()
         {
             return new OdbcPermission(this);
         }

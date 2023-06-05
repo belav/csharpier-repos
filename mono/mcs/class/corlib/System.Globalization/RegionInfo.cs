@@ -36,7 +36,7 @@ namespace System.Globalization
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public partial class RegionInfo
+    partial public class RegionInfo
     {
         static RegionInfo currentRegion;
 

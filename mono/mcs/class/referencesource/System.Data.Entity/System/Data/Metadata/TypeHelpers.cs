@@ -933,7 +933,13 @@ namespace System.Data.Common
         /// </summary>
         /// <param name="primitiveTypeKind"></param>
         /// <returns></returns>
-        static internal TypeUsage GetLiteralTypeUsage(PrimitiveTypeKind primitiveTypeKind)
+        internal
+        /// <summary>
+        /// returns a Typeusage
+        /// </summary>
+        /// <param name="primitiveTypeKind"></param>
+        /// <returns></returns>
+        static TypeUsage GetLiteralTypeUsage(PrimitiveTypeKind primitiveTypeKind)
         {
             // all clr strings by default are unicode
             return GetLiteralTypeUsage(
@@ -942,7 +948,7 @@ namespace System.Data.Common
             );
         }
 
-        static internal TypeUsage GetLiteralTypeUsage(
+        internal static TypeUsage GetLiteralTypeUsage(
             PrimitiveTypeKind primitiveTypeKind,
             bool isUnicode
         )

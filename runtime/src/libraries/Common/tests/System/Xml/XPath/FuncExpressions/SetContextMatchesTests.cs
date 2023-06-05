@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Expressions.SetContextFunctionalTests
 {
+    partial
     /// <summary>
     /// XPathExpression - SetContext Functional Tests (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Match node with qname

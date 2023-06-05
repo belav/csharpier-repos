@@ -18,6 +18,7 @@ using STOP_COMPLETE_DATA = Microsoft.Quic.QUIC_LISTENER_EVENT._Anonymous_e__Unio
 
 namespace System.Net.Quic;
 
+partial
 /// <summary>
 /// Represents a listener that listens for incoming QUIC connections, see <see href="https://www.rfc-editor.org/rfc/rfc9000.html#name-connections">RFC 9000: Connections</see> for more details.
 /// <see cref="QuicListener" /> allows accepting multiple <see cref="QuicConnection" />.
@@ -26,7 +27,7 @@ namespace System.Net.Quic;
 /// Unlike the connection and stream, <see cref="QuicListener" /> lifetime is not linked to any of the accepted connections.
 /// It can be safely disposed while keeping the accepted connection alive. The <see cref="DisposeAsync"/> will only stop listening for any other inbound connections.
 /// </remarks>
-public sealed partial class QuicListener : IAsyncDisposable
+public sealed class QuicListener : IAsyncDisposable
 {
     /// <summary>
     /// Returns <c>true</c> if QUIC is supported on the current machine and can be used; otherwise, <c>false</c>.

@@ -8,10 +8,11 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
 {
+    partial
     /// <summary>
     /// Represents an unboxing stub that supports calling instance methods on boxed valuetypes.
     /// </summary>
-    public partial class UnboxingStubNode : AssemblyStubNode, IMethodNode, ISymbolDefinitionNode
+    public class UnboxingStubNode : AssemblyStubNode, IMethodNode, ISymbolDefinitionNode
     {
         public MethodDesc Method { get; }
 

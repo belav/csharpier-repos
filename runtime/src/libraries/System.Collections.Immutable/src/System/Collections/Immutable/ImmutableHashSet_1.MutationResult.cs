@@ -3,10 +3,11 @@
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableHashSet{T}.MutationResult"/> class.
     /// </content>
-    public partial class ImmutableHashSet<T>
+    public class ImmutableHashSet<T>
     {
         /// <summary>
         /// Interpretations for a <see cref="MutationResult.Count"/> member.

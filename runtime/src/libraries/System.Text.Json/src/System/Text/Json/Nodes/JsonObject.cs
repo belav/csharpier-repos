@@ -17,7 +17,7 @@ namespace System.Text.Json.Nodes
     /// </remarks>
     [DebuggerDisplay("JsonObject[{Count}]")]
     [DebuggerTypeProxy(typeof(DebugView))]
-    public sealed partial class JsonObject : JsonNode
+    partial public sealed class JsonObject : JsonNode
     {
         private JsonElement? _jsonElement;
 

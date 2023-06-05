@@ -6,9 +6,9 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         internal const int WSA_INVALID_HANDLE = 6;
         internal const int WSA_E_CANCELLED = 10111;
@@ -22,7 +22,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int GetAddrInfoExW(
+        partial internal static unsafe int GetAddrInfoExW(
             string pName,
             string? pServiceName,
             int dwNamespace,
@@ -36,10 +36,10 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.Ws2_32)]
-        internal static unsafe partial int GetAddrInfoExCancel(IntPtr* lpHandle);
+        partial internal static unsafe int GetAddrInfoExCancel(IntPtr* lpHandle);
 
         [LibraryImport(Libraries.Ws2_32)]
-        internal static unsafe partial void FreeAddrInfoExW(AddressInfoEx* pAddrInfo);
+        partial internal static unsafe void FreeAddrInfoExW(AddressInfoEx* pAddrInfo);
 
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct AddressInfoEx

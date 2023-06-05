@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
     using System.Xml;
 
-    public partial class EndpointBehaviorElement
+    partial public class EndpointBehaviorElement
         : NamedServiceModelExtensionCollectionElement<BehaviorExtensionElement>
     {
         public EndpointBehaviorElement()

@@ -8,7 +8,7 @@ using System;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectBrowser
 {
-    internal abstract partial class AbstractDescriptionBuilder
+    partial internal abstract class AbstractDescriptionBuilder
     {
         [Flags]
         protected enum LinkFlags

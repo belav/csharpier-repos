@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public sealed partial class InstantiatedType
+    partial public sealed class InstantiatedType
     {
         public override string DiagnosticName
         {

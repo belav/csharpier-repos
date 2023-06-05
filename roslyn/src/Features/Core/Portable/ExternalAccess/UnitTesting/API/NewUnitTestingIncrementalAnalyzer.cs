@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api;
 
-internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider
+partial internal sealed class NewUnitTestingIncrementalAnalyzerProvider
 {
     private sealed class NewUnitTestingIncrementalAnalyzer : IUnitTestingIncrementalAnalyzer
     {

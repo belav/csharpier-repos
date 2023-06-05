@@ -10,7 +10,7 @@
     using System.ServiceModel;
     using System.ServiceModel.Description;
 
-    public sealed partial class ServiceAuthenticationElement : BehaviorExtensionElement
+    partial public sealed class ServiceAuthenticationElement : BehaviorExtensionElement
     {
         public ServiceAuthenticationElement() { }
 

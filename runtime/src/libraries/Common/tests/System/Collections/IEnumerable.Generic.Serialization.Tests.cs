@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
-    public abstract partial class IEnumerable_Generic_Tests<T> : TestBase<T>
+    partial public abstract class IEnumerable_Generic_Tests<T> : TestBase<T>
     {
         [ConditionalTheory(
             typeof(PlatformDetection),

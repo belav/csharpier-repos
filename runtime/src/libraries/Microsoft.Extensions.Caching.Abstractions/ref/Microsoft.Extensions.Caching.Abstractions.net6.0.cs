@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Caching.Memory
 {
-    public partial interface IMemoryCache : System.IDisposable
+    partial public interface IMemoryCache : System.IDisposable
     {
         MemoryCacheStatistics? GetCurrentStatistics() => null;
     }

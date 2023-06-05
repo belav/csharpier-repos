@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal abstract partial class AbstractDiagnosticsAdornmentTaggerProvider<TTag>
+    partial internal abstract class AbstractDiagnosticsAdornmentTaggerProvider<TTag>
         : AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
         where TTag : class, ITag
     {

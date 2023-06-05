@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Internal.Cryptography.Pal
 {
-    internal static partial class X500NameEncoder
+    partial internal static class X500NameEncoder
     {
         private static string X500DistinguishedNameDecode(
             byte[] encodedName,

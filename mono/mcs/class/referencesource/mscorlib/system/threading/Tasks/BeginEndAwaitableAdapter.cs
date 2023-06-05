@@ -54,7 +54,7 @@ namespace System.Threading.Tasks
     {
         /// <summary>A sentinel marker used to communicate between OnCompleted and the APM callback
         /// that the callback has already run, and thus OnCompleted needs to execute the callback.</summary>
-        private readonly static Action CALLBACK_RAN = () => { };
+        private static readonly Action CALLBACK_RAN = () => { };
 
         /// <summary>The IAsyncResult for the APM operation.</summary>
         private IAsyncResult _asyncResult;
@@ -64,7 +64,7 @@ namespace System.Threading.Tasks
 
         /// <summary>A callback to be passed as the AsyncCallback to an APM pair.
         /// It expects that an BeginEndAwaitableAdapter instance was supplied to the APM Begin method as the object state.</summary>
-        public readonly static AsyncCallback Callback = (asyncResult) =>
+        public static readonly AsyncCallback Callback = (asyncResult) =>
         {
             Contract.Assert(asyncResult != null);
             Contract.Assert(asyncResult.IsCompleted);

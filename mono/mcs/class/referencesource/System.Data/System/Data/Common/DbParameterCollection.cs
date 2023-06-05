@@ -19,14 +19,14 @@ namespace System.Data.Common
             : base() { }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        abstract public int Count { get; }
+        public abstract int Count { get; }
 
         [
             Browsable(false),
             EditorBrowsableAttribute(EditorBrowsableState.Never),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        virtual public bool IsFixedSize
+        public virtual bool IsFixedSize
         {
             get { return false; }
         }
@@ -36,7 +36,7 @@ namespace System.Data.Common
             EditorBrowsableAttribute(EditorBrowsableState.Never),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        virtual public bool IsReadOnly
+        public virtual bool IsReadOnly
         {
             get { return false; }
         }
@@ -46,7 +46,7 @@ namespace System.Data.Common
             EditorBrowsableAttribute(EditorBrowsableState.Never),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        virtual public bool IsSynchronized
+        public virtual bool IsSynchronized
         {
             get { return false; }
         }
@@ -56,7 +56,7 @@ namespace System.Data.Common
             EditorBrowsableAttribute(EditorBrowsableState.Never),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        abstract public object SyncRoot { get; }
+        public abstract object SyncRoot { get; }
 
         object IList.this[int index]
         {
@@ -82,53 +82,73 @@ namespace System.Data.Common
             set { SetParameter(parameterName, value); }
         }
 
-        abstract public int Add(object value);
+        public abstract int Add(object value);
 
         //
 
-        abstract public void AddRange(System.Array values);
+        public
+        //
+
+        abstract void AddRange(System.Array values);
 
         //
 
-        abstract public bool Contains(object value);
+        public
+        //
 
-        abstract public bool Contains(string value); // WebData 97349
+        abstract bool Contains(object value);
+
+        public abstract bool Contains(string value); // WebData 97349
 
         //
 
-        abstract public void CopyTo(System.Array array, int index);
+        public
+        //
+
+        abstract void CopyTo(System.Array array, int index);
 
         //
 
-        abstract public void Clear();
+        public
+        //
+
+        abstract void Clear();
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        abstract public IEnumerator GetEnumerator();
+        public abstract IEnumerator GetEnumerator();
 
-        abstract protected DbParameter GetParameter(int index);
+        protected abstract DbParameter GetParameter(int index);
 
-        abstract protected DbParameter GetParameter(string parameterName);
+        protected abstract DbParameter GetParameter(string parameterName);
 
-        abstract public int IndexOf(object value);
-
-        //
-
-        abstract public int IndexOf(string parameterName);
-
-        abstract public void Insert(int index, object value);
-
-        abstract public void Remove(object value);
+        public abstract int IndexOf(object value);
 
         //
 
+        public
         //
 
-        abstract public void RemoveAt(int index);
+        abstract int IndexOf(string parameterName);
 
-        abstract public void RemoveAt(string parameterName);
+        public abstract void Insert(int index, object value);
 
-        abstract protected void SetParameter(int index, DbParameter value);
+        public abstract void Remove(object value);
 
-        abstract protected void SetParameter(string parameterName, DbParameter value);
+        //
+
+        //
+
+        public
+        //
+
+        //
+
+        abstract void RemoveAt(int index);
+
+        public abstract void RemoveAt(string parameterName);
+
+        protected abstract void SetParameter(int index, DbParameter value);
+
+        protected abstract void SetParameter(string parameterName, DbParameter value);
     }
 }

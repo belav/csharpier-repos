@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
 
-    public partial class MexHttpBindingCollectionElement
+    partial public class MexHttpBindingCollectionElement
         : MexBindingBindingCollectionElement<WSHttpBinding, MexHttpBindingElement>
     {
         internal static MexHttpBindingCollectionElement GetBindingCollectionElement()

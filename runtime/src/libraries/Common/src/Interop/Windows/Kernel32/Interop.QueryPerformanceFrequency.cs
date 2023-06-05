@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         // The actual native signature is:
         //      BOOL WINAPI QueryPerformanceFrequency(
@@ -16,6 +16,6 @@ internal static partial class Interop
         // We don't set last error since we don't need the extended error info.
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial BOOL QueryPerformanceFrequency(long* lpFrequency);
+        partial internal static unsafe BOOL QueryPerformanceFrequency(long* lpFrequency);
     }
 }

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Text.RegularExpressions.Tests
 {
-    public static partial class MatchCollectionTests
+    partial public static class MatchCollectionTests
     {
         public static IEnumerable<object[]> NoneCompiledBacktracking()
         {

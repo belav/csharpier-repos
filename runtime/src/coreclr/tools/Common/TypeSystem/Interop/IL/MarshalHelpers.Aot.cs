@@ -8,7 +8,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Interop
 {
-    public static partial class MarshalHelpers
+    partial public static class MarshalHelpers
     {
         public static bool IsStructMarshallingRequired(TypeDesc typeDesc)
         {

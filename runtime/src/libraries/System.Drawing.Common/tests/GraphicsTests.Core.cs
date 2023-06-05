@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Drawing.Tests
 {
-    public partial class GraphicsTests
+    partial public class GraphicsTests
     {
         private static Matrix3x2 s_testMatrix =
             Matrix3x2.CreateRotation(45)

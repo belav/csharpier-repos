@@ -13,7 +13,7 @@ using Internal.Cryptography;
 
 namespace Internal.Cryptography.Pal.AnyOS
 {
-    internal sealed partial class ManagedPkcsPal : PkcsPal
+    partial internal sealed class ManagedPkcsPal : PkcsPal
     {
         public override void AddCertsFromStoreForDecryption(X509Certificate2Collection certs)
         {

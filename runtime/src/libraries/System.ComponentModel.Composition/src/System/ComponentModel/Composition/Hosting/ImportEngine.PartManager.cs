@@ -8,7 +8,7 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class ImportEngine
+    partial public class ImportEngine
     {
         /// <summary>
         ///     Used by the <see cref="ImportEngine"/> to manage the composition of a given part.

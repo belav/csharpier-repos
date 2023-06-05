@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public static partial class EnvironmentVariablesExtensions
+    partial public static class EnvironmentVariablesExtensions
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddEnvironmentVariables(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configurationBuilder
@@ -35,7 +35,7 @@ namespace Microsoft.Extensions.Configuration
 
 namespace Microsoft.Extensions.Configuration.EnvironmentVariables
 {
-    public partial class EnvironmentVariablesConfigurationProvider
+    partial public class EnvironmentVariablesConfigurationProvider
         : Microsoft.Extensions.Configuration.ConfigurationProvider
     {
         public EnvironmentVariablesConfigurationProvider() { }
@@ -50,7 +50,7 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
         }
     }
 
-    public partial class EnvironmentVariablesConfigurationSource
+    partial public class EnvironmentVariablesConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
         public EnvironmentVariablesConfigurationSource() { }

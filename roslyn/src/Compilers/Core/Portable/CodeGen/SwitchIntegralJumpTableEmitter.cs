@@ -12,10 +12,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeGen
 {
+    partial
     /// <summary>
     /// Class for emitting the switch jump table for switch statements with integral governing type
     /// </summary>
-    internal partial struct SwitchIntegralJumpTableEmitter
+    internal struct SwitchIntegralJumpTableEmitter
     {
         private readonly ILBuilder _builder;
 

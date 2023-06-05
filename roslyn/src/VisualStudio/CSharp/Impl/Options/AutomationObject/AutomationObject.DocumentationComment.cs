@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.DocumentationComments;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
-    public partial class AutomationObject
+    partial public class AutomationObject
     {
         public int AutoComment
         {

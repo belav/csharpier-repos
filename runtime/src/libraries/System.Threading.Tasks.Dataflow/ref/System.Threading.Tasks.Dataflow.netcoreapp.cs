@@ -6,7 +6,7 @@
 
 namespace System.Threading.Tasks.Dataflow
 {
-    public static partial class DataflowBlock
+    partial public static class DataflowBlock
     {
         public static System.Collections.Generic.IAsyncEnumerable<TOutput> ReceiveAllAsync<TOutput>(
             this System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput> source,
@@ -17,7 +17,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class TransformManyBlock<TInput, TOutput>
+    partial public sealed class TransformManyBlock<TInput, TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput>,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput>,

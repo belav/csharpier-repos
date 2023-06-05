@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundNode : IBoundNodeWithIOperationChildren
+    partial internal class BoundNode : IBoundNodeWithIOperationChildren
     {
         ImmutableArray<BoundNode?> IBoundNodeWithIOperationChildren.Children => this.Children;
 
@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected virtual ImmutableArray<BoundNode?> Children => ImmutableArray<BoundNode?>.Empty;
     }
 
-    internal partial class BoundBadStatement : IBoundInvalidNode
+    partial internal class BoundBadStatement : IBoundInvalidNode
     {
         protected override ImmutableArray<BoundNode?> Children => this.ChildBoundNodes!;
 

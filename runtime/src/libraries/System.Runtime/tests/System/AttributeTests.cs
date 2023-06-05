@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public static partial class AttributeTests
+    partial public static class AttributeTests
     {
         [Fact]
         public static void DefaultEquality()

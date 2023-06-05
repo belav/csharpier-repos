@@ -36,7 +36,23 @@ namespace System.Web.Configuration
         // For config implemented with IConfigurationSectionHandler, this
         // may return null, non-null, or throw an exception.
         //
-        static internal RuntimeConfig GetConfig()
+        internal
+        //
+        // GetConfig() - get configuration appropriate for the current thread.
+        //
+        // Looks up the HttpContext on the current thread if it is available,
+        // otherwise it uses the config at the app path.
+        //
+        // Use GetConfig(context) if a context is available, as it will avoid
+        // the lookup for contxt on the current thread.
+        //
+        // For config derived from ConfigurationSection, this will either
+        // return a non-null object or throw an exception.
+        //
+        // For config implemented with IConfigurationSectionHandler, this
+        // may return null, non-null, or throw an exception.
+        //
+        static RuntimeConfig GetConfig()
         {
             if (!HttpConfigurationSystem.UseHttpConfigurationSystem)
             {
@@ -64,7 +80,18 @@ namespace System.Web.Configuration
         // For config implemented with IConfigurationSectionHandler, this
         // may return null, non-null, or throw an exception.
         //
-        static internal RuntimeConfig GetConfig(HttpContext context)
+        internal
+        //
+        // GetConfig(context) - gets configuration appropriate for the HttpContext.
+        // The most efficient way to get config.
+        //
+        // For config derived from ConfigurationSection, this will either
+        // return a non-null object or throw an exception.
+        //
+        // For config implemented with IConfigurationSectionHandler, this
+        // may return null, non-null, or throw an exception.
+        //
+        static RuntimeConfig GetConfig(HttpContext context)
         {
             if (!HttpConfigurationSystem.UseHttpConfigurationSystem)
             {
@@ -87,7 +114,21 @@ namespace System.Web.Configuration
         // For config implemented with IConfigurationSectionHandler, this
         // may return null, non-null, or throw an exception.
         //
-        static internal RuntimeConfig GetConfig(HttpContext context, VirtualPath path)
+        internal
+        //
+        // GetConfig(context, path) - returns the config at 'path'.
+        //
+        // This method is more efficient than not using context, as
+        // the config cached in the context is used if it matches the
+        // context path.
+        //
+        // For config derived from ConfigurationSection, this will either
+        // return a non-null object or throw an exception.
+        //
+        // For config implemented with IConfigurationSectionHandler, this
+        // may return null, non-null, or throw an exception.
+        //
+        static RuntimeConfig GetConfig(HttpContext context, VirtualPath path)
         {
             if (!HttpConfigurationSystem.UseHttpConfigurationSystem)
             {
@@ -112,12 +153,28 @@ namespace System.Web.Configuration
         // For config implemented with IConfigurationSectionHandler, this
         // may return null, non-null, or throw an exception.
         //
-        static internal RuntimeConfig GetConfig(string path)
+        internal
+        //
+        // GetConfig(path) - returns the config at 'path'.
+        //
+        // If 'path' is null, or is outside of the application path, then it
+        // returns the application config.
+        //
+        // For efficientcy, use GetConfig(context) instead of this method
+        // where possible.
+        //
+        // For config derived from ConfigurationSection, this will either
+        // return a non-null object or throw an exception.
+        //
+        // For config implemented with IConfigurationSectionHandler, this
+        // may return null, non-null, or throw an exception.
+        //
+        static RuntimeConfig GetConfig(string path)
         {
             return GetConfig(VirtualPath.CreateNonRelativeAllowNull(path));
         }
 
-        static internal RuntimeConfig GetConfig(VirtualPath path)
+        internal static RuntimeConfig GetConfig(VirtualPath path)
         {
             if (!HttpConfigurationSystem.UseHttpConfigurationSystem)
             {
@@ -136,7 +193,17 @@ namespace System.Web.Configuration
         // For config implemented with IConfigurationSectionHandler, this
         // may return null, non-null, or throw an exception.
         //
-        static internal RuntimeConfig GetAppConfig()
+        internal
+        //
+        // GetAppConfig() - returns the application config.
+        //
+        // For config derived from ConfigurationSection, this will either
+        // return a non-null object or throw an exception.
+        //
+        // For config implemented with IConfigurationSectionHandler, this
+        // may return null, non-null, or throw an exception.
+        //
+        static RuntimeConfig GetAppConfig()
         {
             if (!HttpConfigurationSystem.UseHttpConfigurationSystem)
             {
@@ -155,7 +222,17 @@ namespace System.Web.Configuration
         // For config implemented with IConfigurationSectionHandler, this
         // may return null, non-null, or throw an exception.
         //
-        static internal RuntimeConfig GetRootWebConfig()
+        internal
+        //
+        // GetRootWebConfig() - returns the root web configuration.
+        //
+        // For config derived from ConfigurationSection, this will either
+        // return a non-null object or throw an exception.
+        //
+        // For config implemented with IConfigurationSectionHandler, this
+        // may return null, non-null, or throw an exception.
+        //
+        static RuntimeConfig GetRootWebConfig()
         {
             if (!HttpConfigurationSystem.UseHttpConfigurationSystem)
             {
@@ -174,7 +251,17 @@ namespace System.Web.Configuration
         // For config implemented with IConfigurationSectionHandler, this
         // may return null, non-null, or throw an exception.
         //
-        static internal RuntimeConfig GetMachineConfig()
+        internal
+        //
+        // GetMachineConfig() - returns the machine configuration.
+        //
+        // For config derived from ConfigurationSection, this will either
+        // return a non-null object or throw an exception.
+        //
+        // For config implemented with IConfigurationSectionHandler, this
+        // may return null, non-null, or throw an exception.
+        //
+        static RuntimeConfig GetMachineConfig()
         {
             if (!HttpConfigurationSystem.UseHttpConfigurationSystem)
             {
@@ -193,7 +280,17 @@ namespace System.Web.Configuration
         // This method will never throw an exception. If no config
         // is available, a request for a section will return null.
         //
-        static internal RuntimeConfig GetLKGConfig(HttpContext context)
+        internal
+        //
+        // GetLKGConfig(context) - gets the nearest configuration available.
+        //
+        // This method is to be used in the few instances where we
+        // cannot throw an exception if a config file has an error.
+        //
+        // This method will never throw an exception. If no config
+        // is available, a request for a section will return null.
+        //
+        static RuntimeConfig GetLKGConfig(HttpContext context)
         {
             RuntimeConfig config = null;
             bool success = false;
@@ -222,7 +319,18 @@ namespace System.Web.Configuration
         // This method will never throw an exception. If no config
         // is available, a request for a section will return null.
         //
-        static internal RuntimeConfig GetAppLKGConfig()
+        internal
+        //
+        // GetAppLKGConfig(path) - gets the nearest configuration available,
+        // starting from the application path.
+        //
+        // This method is to be used in the few instances where we
+        // cannot throw an exception if a config file has an error.
+        //
+        // This method will never throw an exception. If no config
+        // is available, a request for a section will return null.
+        //
+        static RuntimeConfig GetAppLKGConfig()
         {
             RuntimeConfig config = null;
             bool success = false;
@@ -846,7 +954,9 @@ namespace System.Web.Configuration
         }
 
         // Create the single instance of the wrapper for error configuration.
-        static internal RuntimeConfig GetErrorRuntimeConfig()
+        internal
+        // Create the single instance of the wrapper for error configuration.
+        static RuntimeConfig GetErrorRuntimeConfig()
         {
             if (s_errorRuntimeConfig == null)
             {
@@ -962,7 +1072,14 @@ namespace System.Web.Configuration
         // In these cases, walk the hierarchy upwards until we are able to retreive
         // a CachedPathData and its associated RuntimeConfig.
         //
-        static private RuntimeConfig GetLKGRuntimeConfig(VirtualPath path)
+        private
+        //
+        // There are extreme cases where we cannot even retreive the CachedPathData
+        // for a path - such as when MapPath deems the path to be suspicious.
+        // In these cases, walk the hierarchy upwards until we are able to retreive
+        // a CachedPathData and its associated RuntimeConfig.
+        //
+        static RuntimeConfig GetLKGRuntimeConfig(VirtualPath path)
         {
             try
             {

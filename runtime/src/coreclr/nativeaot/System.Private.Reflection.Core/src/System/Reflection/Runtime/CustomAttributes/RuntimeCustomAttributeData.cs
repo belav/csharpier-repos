@@ -10,10 +10,11 @@ using Internal.Reflection.Tracing;
 
 namespace System.Reflection.Runtime.CustomAttributes
 {
+    partial
     //
     // Common base class for the Runtime's implementation of CustomAttributeData.
     //
-    internal abstract partial class RuntimeCustomAttributeData : CustomAttributeData
+    internal abstract class RuntimeCustomAttributeData : CustomAttributeData
     {
         public abstract override Type AttributeType { get; }
 

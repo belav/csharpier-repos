@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace System.SpanTests
 {
-    public static partial class ReadOnlySpanTests
+    partial public static class ReadOnlySpanTests
     {
         public static IEnumerable<object[]> IntegerArrays()
         {

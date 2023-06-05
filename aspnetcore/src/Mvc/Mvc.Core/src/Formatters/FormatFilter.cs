@@ -10,11 +10,12 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+partial
 /// <summary>
 /// A filter that will use the format value in the route data or query string to set the content type on an
 /// <see cref="ObjectResult"/> returned from an action.
 /// </summary>
-public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilter
+public class FormatFilter : IFormatFilter, IResourceFilter, IResultFilter
 {
     private readonly MvcOptions _options;
     private readonly ILogger _logger;
@@ -185,7 +186,7 @@ public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilte
     /// <inheritdoc />
     public void OnResultExecuted(ResultExecutedContext context) { }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -193,7 +194,7 @@ public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilte
             "Could not find a media type for the format '{FormatFilterContentType}'.",
             EventName = "UnsupportedFormatFilterContentType"
         )]
-        public static partial void UnsupportedFormatFilterContentType(
+        partial public static void UnsupportedFormatFilterContentType(
             ILogger logger,
             string formatFilterContentType
         );
@@ -204,7 +205,7 @@ public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilte
             "Current action does not support the content type '{FormatFilterContentType}'. The supported content types are '{SupportedMediaTypes}'.",
             EventName = "ActionDoesNotSupportFormatFilterContentType"
         )]
-        public static partial void ActionDoesNotSupportFormatFilterContentType(
+        partial public static void ActionDoesNotSupportFormatFilterContentType(
             ILogger logger,
             string formatFilterContentType,
             MediaTypeCollection supportedMediaTypes
@@ -216,7 +217,7 @@ public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilte
             "Cannot apply content type '{FormatFilterContentType}' to the response as current action had explicitly set a preferred content type.",
             EventName = "CannotApplyFormatFilterContentType"
         )]
-        public static partial void CannotApplyFormatFilterContentType(
+        partial public static void CannotApplyFormatFilterContentType(
             ILogger logger,
             string formatFilterContentType
         );
@@ -227,6 +228,6 @@ public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilte
             "Current action does not explicitly specify any content types for the response.",
             EventName = "ActionDoesNotExplicitlySpecifyContentTypes"
         )]
-        public static partial void ActionDoesNotExplicitlySpecifyContentTypes(ILogger logger);
+        partial public static void ActionDoesNotExplicitlySpecifyContentTypes(ILogger logger);
     }
 }

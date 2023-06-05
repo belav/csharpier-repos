@@ -25,7 +25,7 @@ using WindowsInput.Native;
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     [TestService]
-    internal partial class StateResetInProcess
+    partial internal class StateResetInProcess
     {
         /// <summary>
         /// Contains the persistence slots of tool windows to close between tests.

@@ -12,10 +12,11 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
+    partial
     //
     // XmlCharCheckingWriter
     //
-    internal sealed partial class XmlCharCheckingWriter : XmlWrappingWriter
+    internal sealed class XmlCharCheckingWriter : XmlWrappingWriter
     {
         public override Task WriteDocTypeAsync(
             string name,

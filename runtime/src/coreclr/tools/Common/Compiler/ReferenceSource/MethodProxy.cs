@@ -8,7 +8,7 @@ using Mono.Linker;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    readonly partial struct MethodProxy : IEquatable<MethodProxy>
+    partial readonly struct MethodProxy : IEquatable<MethodProxy>
     {
         public MethodProxy(MethodDefinition method) => Method = method;
 
@@ -23,36 +23,49 @@ namespace ILLink.Shared.TypeSystemProxy
 
         public string GetDisplayName() => Method.GetDisplayName();
 
-        internal partial bool IsDeclaredOnType(string fullTypeName) =>
+        partial internal bool IsDeclaredOnType(string fullTypeName) =>
             Method.IsDeclaredOnType(fullTypeName);
 
-        internal partial bool HasMetadataParameters() => Method.HasMetadataParameters();
+        partial internal bool HasMetadataParameters() => Method.HasMetadataParameters();
 
         /// <summary>
         /// Gets the number of entries in the 'Parameters' section of a method's metadata (i.e. excludes the implicit 'this' from the count)
         /// </summary>
-        internal partial int GetMetadataParametersCount() => Method.GetMetadataParametersCount();
+        partial
+        /// <summary>
+        /// Gets the number of entries in the 'Parameters' section of a method's metadata (i.e. excludes the implicit 'this' from the count)
+        /// </summary>
+        internal int GetMetadataParametersCount() => Method.GetMetadataParametersCount();
 
         /// <summary>
         /// Returns the number of parameters that are passed to the method in IL (including the implicit 'this' parameter).
         /// In pseudocode: <code>method.HasImplicitThis() ? 1 + MetadataParametersCount : MetadataParametersCount;</code>
         /// </summary>
-        internal partial int GetParametersCount() => Method.GetParametersCount();
+        partial
+        /// <summary>
+        /// Returns the number of parameters that are passed to the method in IL (including the implicit 'this' parameter).
+        /// In pseudocode: <code>method.HasImplicitThis() ? 1 + MetadataParametersCount : MetadataParametersCount;</code>
+        /// </summary>
+        internal int GetParametersCount() => Method.GetParametersCount();
 
         /// <summary>
         /// Use only when iterating over all parameters. When wanting to index, use GetParameters(ParameterIndex)
         /// </summary>
-        internal partial ParameterProxyEnumerable GetParameters() => Method.GetParameters();
+        partial
+        /// <summary>
+        /// Use only when iterating over all parameters. When wanting to index, use GetParameters(ParameterIndex)
+        /// </summary>
+        internal ParameterProxyEnumerable GetParameters() => Method.GetParameters();
 
-        internal partial ParameterProxy GetParameter(ParameterIndex index) =>
+        partial internal ParameterProxy GetParameter(ParameterIndex index) =>
             Method.GetParameter(index);
 
-        internal partial bool HasGenericParameters() => Method.HasGenericParameters;
+        partial internal bool HasGenericParameters() => Method.HasGenericParameters;
 
-        internal partial bool HasGenericParametersCount(int genericParameterCount) =>
+        partial internal bool HasGenericParametersCount(int genericParameterCount) =>
             Method.GenericParameters.Count == genericParameterCount;
 
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters()
+        partial internal ImmutableArray<GenericParameterProxy> GetGenericParameters()
         {
             if (!Method.HasGenericParameters)
                 return ImmutableArray<GenericParameterProxy>.Empty;
@@ -68,11 +81,11 @@ namespace ILLink.Shared.TypeSystemProxy
             return builder.ToImmutableArray();
         }
 
-        internal partial bool IsStatic() => Method.IsStatic;
+        partial internal bool IsStatic() => Method.IsStatic;
 
-        internal partial bool HasImplicitThis() => Method.HasImplicitThis();
+        partial internal bool HasImplicitThis() => Method.HasImplicitThis();
 
-        internal partial bool ReturnsVoid() => Method.ReturnsVoid();
+        partial internal bool ReturnsVoid() => Method.ReturnsVoid();
 
         public override string ToString() => Method.ToString();
 

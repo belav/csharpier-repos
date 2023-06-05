@@ -6,7 +6,7 @@ using Xunit;
 
 namespace ILLink.RoslynAnalyzer.Tests
 {
-    public sealed partial class AdvancedTests : LinkerTestBase
+    partial public sealed class AdvancedTests : LinkerTestBase
     {
         protected override string TestSuiteName => "Advanced";
 

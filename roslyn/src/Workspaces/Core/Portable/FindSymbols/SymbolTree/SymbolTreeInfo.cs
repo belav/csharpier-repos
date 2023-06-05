@@ -17,6 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
+    partial
     /// <summary>
     /// Represents a tree of names of the namespaces, types (and members within those types) within a <see
     /// cref="Project"/> or <see cref="PortableExecutableReference"/>.  This tree can be used to quickly determine if
@@ -27,7 +28,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     /// will still incur a heavy cost (for example, getting the <see cref="IAssemblySymbol"/> root symbol for a
     /// particular project).
     /// </summary>
-    internal partial class SymbolTreeInfo : IChecksummedObject
+    internal class SymbolTreeInfo : IChecksummedObject
     {
         private static readonly StringComparer s_caseInsensitiveComparer =
             CaseInsensitiveComparison.Comparer;

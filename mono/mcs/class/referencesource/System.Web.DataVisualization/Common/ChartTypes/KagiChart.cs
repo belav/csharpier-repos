@@ -518,7 +518,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="points">Array of points coordinates.</param>
         /// <param name="pointIndex">Index of point to draw.</param>
         /// <param name="tension">Line tension</param>
-        override protected void DrawLine(
+        protected
+        #endregion // Methods
+
+        #region Line drawing and selecting methods
+
+        /// <summary>
+        /// Draw chart line using horisontal and vertical lines.
+        /// </summary>
+        /// <param name="graph">Graphics object.</param>
+        /// <param name="common">The Common elements object</param>
+        /// <param name="point">Point to draw the line for.</param>
+        /// <param name="series">Point series.</param>
+        /// <param name="points">Array of points coordinates.</param>
+        /// <param name="pointIndex">Index of point to draw.</param>
+        /// <param name="tension">Line tension</param>
+        override void DrawLine(
             ChartGraphics graph,
             CommonElements common,
             DataPoint point,
@@ -723,11 +738,15 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="series">Point series.</param>
         /// <param name="indexedSeries">Indicate that point index should be used as X value.</param>
         /// <returns>Array of data points position.</returns>
-        override protected PointF[] GetPointsPosition(
-            ChartGraphics graph,
-            Series series,
-            bool indexedSeries
-        )
+        protected
+        /// <summary>
+        /// Fills a PointF array of data points absolute pixel positions.
+        /// </summary>
+        /// <param name="graph">Graphics object.</param>
+        /// <param name="series">Point series.</param>
+        /// <param name="indexedSeries">Indicate that point index should be used as X value.</param>
+        /// <returns>Array of data points position.</returns>
+        override PointF[] GetPointsPosition(ChartGraphics graph, Series series, bool indexedSeries)
         {
             PointF[] pointPos = new PointF[series.Points.Count];
             int index = 0;
@@ -1125,6 +1144,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return resultPath;
         }
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -1132,7 +1152,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.Kagi; }
         }
@@ -1142,7 +1162,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");

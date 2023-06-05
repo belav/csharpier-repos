@@ -17,7 +17,7 @@ using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public abstract partial class NodeFactory
+    partial public abstract class NodeFactory
     {
         private TargetDetails _target;
         private CompilerTypeSystemContext _context;

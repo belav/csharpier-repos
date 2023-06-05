@@ -6,10 +6,11 @@ using Internal.TypeSystem.Interop;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Thunk to create Delegates from native function pointer
     /// </summary>
-    public partial class ForwardDelegateCreationThunk : ILStubMethod
+    public class ForwardDelegateCreationThunk : ILStubMethod
     {
         private readonly TypeDesc _owningType;
         private readonly MetadataType _delegateType;

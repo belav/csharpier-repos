@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class GenericTypeParameterBuilder : TypeInfo
+    partial public sealed class GenericTypeParameterBuilder : TypeInfo
     {
         internal GenericTypeParameterBuilder()
         {

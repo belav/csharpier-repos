@@ -13,10 +13,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
+partial
 /// <summary>
 /// Default implementation for <see cref="IViewComponentInvoker"/>.
 /// </summary>
-internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoker
+internal sealed class DefaultViewComponentInvoker : IViewComponentInvoker
 {
     private readonly IViewComponentFactory _viewComponentFactory;
     private readonly ViewComponentInvokerCache _viewComponentInvokerCache;
@@ -263,7 +264,7 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
         return arguments;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -272,7 +273,7 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
             EventName = "ViewComponentExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ViewComponentExecuting(
+        partial private static void ViewComponentExecuting(
             ILogger logger,
             string viewComponentName,
             string[] arguments
@@ -285,7 +286,7 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
             EventName = "ViewComponentExecuted",
             SkipEnabledCheck = true
         )]
-        private static partial void ViewComponentExecuted(
+        partial private static void ViewComponentExecuted(
             ILogger logger,
             string viewComponentName,
             double elapsedMilliseconds,

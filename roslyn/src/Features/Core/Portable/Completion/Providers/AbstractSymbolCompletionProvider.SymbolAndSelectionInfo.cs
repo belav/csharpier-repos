@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractSymbolCompletionProvider<TSyntaxContext>
+    partial internal abstract class AbstractSymbolCompletionProvider<TSyntaxContext>
     {
         // The equality of this type is only used when we try to figure out missing symbols
         // among linked files, therefore delegate to CompletionLinkedFilesSymbolEquivalenceComparer

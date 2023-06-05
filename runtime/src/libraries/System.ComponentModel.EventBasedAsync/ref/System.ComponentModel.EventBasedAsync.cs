@@ -6,7 +6,7 @@
 
 namespace System.ComponentModel
 {
-    public partial class AsyncCompletedEventArgs : System.EventArgs
+    partial public class AsyncCompletedEventArgs : System.EventArgs
     {
         public AsyncCompletedEventArgs(System.Exception? error, bool cancelled, object? userState)
         { }
@@ -32,7 +32,7 @@ namespace System.ComponentModel
         System.ComponentModel.AsyncCompletedEventArgs e
     );
 
-    public sealed partial class AsyncOperation
+    partial public sealed class AsyncOperation
     {
         internal AsyncOperation() { }
 
@@ -54,7 +54,7 @@ namespace System.ComponentModel
         public void PostOperationCompleted(System.Threading.SendOrPostCallback d, object? arg) { }
     }
 
-    public static partial class AsyncOperationManager
+    partial public static class AsyncOperationManager
     {
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
@@ -73,7 +73,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class BackgroundWorker : System.ComponentModel.Component
+    partial public class BackgroundWorker : System.ComponentModel.Component
     {
         public BackgroundWorker() { }
 
@@ -134,7 +134,7 @@ namespace System.ComponentModel
         public void RunWorkerAsync(object? argument) { }
     }
 
-    public partial class DoWorkEventArgs : System.ComponentModel.CancelEventArgs
+    partial public class DoWorkEventArgs : System.ComponentModel.CancelEventArgs
     {
         public DoWorkEventArgs(object? argument) { }
 
@@ -154,7 +154,7 @@ namespace System.ComponentModel
         System.ComponentModel.DoWorkEventArgs e
     );
 
-    public partial class ProgressChangedEventArgs : System.EventArgs
+    partial public class ProgressChangedEventArgs : System.EventArgs
     {
         public ProgressChangedEventArgs(int progressPercentage, object? userState) { }
 
@@ -173,7 +173,7 @@ namespace System.ComponentModel
         System.ComponentModel.ProgressChangedEventArgs e
     );
 
-    public partial class RunWorkerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    partial public class RunWorkerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         public RunWorkerCompletedEventArgs(object? result, System.Exception? error, bool cancelled)
             : base(default(System.Exception), default(bool), default(object)) { }

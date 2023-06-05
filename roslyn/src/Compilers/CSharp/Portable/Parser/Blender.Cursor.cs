@@ -13,7 +13,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial struct Blender
+    partial internal struct Blender
     {
         /// <summary>
         /// THe cursor represents a location in the tree that we can move around to indicate where

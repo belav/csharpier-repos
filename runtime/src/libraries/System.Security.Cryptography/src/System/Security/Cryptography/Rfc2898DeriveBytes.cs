@@ -12,7 +12,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public partial class Rfc2898DeriveBytes : DeriveBytes
+    partial public class Rfc2898DeriveBytes : DeriveBytes
     {
         private byte[] _salt;
         private uint _iterations;

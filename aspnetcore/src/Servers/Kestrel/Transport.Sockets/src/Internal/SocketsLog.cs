@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 
-internal static partial class SocketsLog
+partial internal static class SocketsLog
 {
     // Reserved: Event ID 3, EventName = ConnectionRead
 
@@ -16,7 +16,7 @@ internal static partial class SocketsLog
         EventName = "ConnectionReadFin",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionReadFinCore(ILogger logger, string connectionId);
+    partial private static void ConnectionReadFinCore(ILogger logger, string connectionId);
 
     public static void ConnectionReadFin(ILogger logger, SocketConnection connection)
     {
@@ -33,7 +33,7 @@ internal static partial class SocketsLog
         EventName = "ConnectionWriteFin",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionWriteFinCore(
+    partial private static void ConnectionWriteFinCore(
         ILogger logger,
         string connectionId,
         string reason
@@ -62,7 +62,7 @@ internal static partial class SocketsLog
         EventName = "ConnectionError",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionErrorCore(
+    partial private static void ConnectionErrorCore(
         ILogger logger,
         string connectionId,
         Exception ex
@@ -83,7 +83,7 @@ internal static partial class SocketsLog
         EventName = "ConnectionReset",
         SkipEnabledCheck = true
     )]
-    public static partial void ConnectionReset(ILogger logger, string connectionId);
+    partial public static void ConnectionReset(ILogger logger, string connectionId);
 
     public static void ConnectionReset(ILogger logger, SocketConnection connection)
     {
@@ -100,7 +100,7 @@ internal static partial class SocketsLog
         EventName = "ConnectionPause",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionPauseCore(ILogger logger, string connectionId);
+    partial private static void ConnectionPauseCore(ILogger logger, string connectionId);
 
     public static void ConnectionPause(ILogger logger, SocketConnection connection)
     {
@@ -117,7 +117,7 @@ internal static partial class SocketsLog
         EventName = "ConnectionResume",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionResumeCore(ILogger logger, string connectionId);
+    partial private static void ConnectionResumeCore(ILogger logger, string connectionId);
 
     public static void ConnectionResume(ILogger logger, SocketConnection connection)
     {

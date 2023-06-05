@@ -18,9 +18,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
 {
+    partial
     // Disabled due to: https://github.com/dotnet/roslyn/issues/5835 & https://github.com/dotnet/roslyn/pull/6642
     // [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.SimplifyLambda)]
-    internal partial class LambdaSimplifierCodeRefactoringProvider : CodeRefactoringProvider
+    internal class LambdaSimplifierCodeRefactoringProvider : CodeRefactoringProvider
     {
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

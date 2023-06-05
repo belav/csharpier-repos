@@ -42,7 +42,7 @@ using System.Xml.XPath;
 
 namespace Tester
 {
-    static partial class Sequences
+    partial static class Sequences
     {
         public static void Run(StringBuilder sb, string seqDir, string dataDir, string indent)
         {

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class OnSerializeTests
+    partial public static class OnSerializeTests
     {
         private class MyClass
             : IJsonOnDeserializing,

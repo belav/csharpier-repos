@@ -16,8 +16,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
 #nullable enable
-    internal partial class RefSafetyAnalysis
+    internal class RefSafetyAnalysis
     {
         private enum EscapeLevel : uint
         {
@@ -193,9 +194,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private const uint CurrentMethodScope = 2;
     }
 
+    partial
 #nullable disable
 
-    internal partial class Binder
+    internal class Binder
     {
         // Some value kinds are semantically the same and the only distinction is how errors are reported
         // for those purposes we reserve lowest 2 bits
@@ -1151,7 +1153,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class RefSafetyAnalysis
+    partial internal class RefSafetyAnalysis
     {
         private bool CheckLocalRefEscape(
             SyntaxNode node,
@@ -1235,7 +1237,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class Binder
+    partial internal class Binder
     {
         private bool CheckParameterValueKind(
             SyntaxNode node,
@@ -1285,7 +1287,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class RefSafetyAnalysis
+    partial internal class RefSafetyAnalysis
     {
         private static EscapeLevel? EscapeLevelFromScope(uint scope) =>
             scope switch
@@ -1449,7 +1451,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class Binder
+    partial internal class Binder
     {
         private bool CheckFieldValueKind(
             SyntaxNode node,
@@ -1639,7 +1641,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class RefSafetyAnalysis
+    partial internal class RefSafetyAnalysis
     {
         private uint GetFieldRefEscape(
             BoundFieldAccess fieldAccess,
@@ -1739,7 +1741,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class Binder
+    partial internal class Binder
     {
         private bool CheckEventValueKind(
             BoundEventAccess boundEvent,
@@ -2266,7 +2268,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class RefSafetyAnalysis
+    partial internal class RefSafetyAnalysis
     {
         internal uint GetInterpolatedStringHandlerConversionEscapeScope(
             BoundExpression expression,
@@ -3475,7 +3477,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class Binder
+    partial internal class Binder
     {
         private static void ReportReadonlyLocalError(
             SyntaxNode node,
@@ -3628,7 +3630,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class RefSafetyAnalysis
+    partial internal class RefSafetyAnalysis
     {
         private static ErrorCode GetStandardRValueRefEscapeError(uint escapeTo)
         {
@@ -3641,7 +3643,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class Binder
+    partial internal class Binder
     {
         private static void ReportReadOnlyFieldError(
             FieldSymbol field,
@@ -3740,7 +3742,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class RefSafetyAnalysis
+    partial internal class RefSafetyAnalysis
     {
         /// <summary>
         /// Checks whether given expression can escape from the current scope to the <paramref name="escapeTo"/>.
@@ -5985,7 +5987,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class Binder
+    partial internal class Binder
     {
         internal enum AddressKind
         {

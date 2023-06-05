@@ -24,7 +24,7 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.Remote.Testing
 {
-    internal sealed partial class InProcRemoteHostClient : RemoteHostClient
+    partial internal sealed class InProcRemoteHostClient : RemoteHostClient
     {
         private readonly SolutionServices _workspaceServices;
         private readonly InProcRemoteServices _inprocServices;

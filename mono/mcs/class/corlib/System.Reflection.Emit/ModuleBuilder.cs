@@ -88,7 +88,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public partial class ModuleBuilder : Module
+    partial public class ModuleBuilder : Module
     {
 #pragma warning disable 169, 414
         #region Sync with object-internals.h

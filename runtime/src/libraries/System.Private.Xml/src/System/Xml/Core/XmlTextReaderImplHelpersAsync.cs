@@ -16,12 +16,13 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlTextReaderImpl
+    partial internal sealed class XmlTextReaderImpl
     {
+        partial
         //
         // DtdParserProxy: IDtdParserAdapter proxy for XmlTextReaderImpl
         //
-        internal sealed partial class DtdParserProxy : IDtdParserAdapterV1
+        internal sealed class DtdParserProxy : IDtdParserAdapterV1
         {
             Task<int> IDtdParserAdapter.ReadDataAsync()
             {

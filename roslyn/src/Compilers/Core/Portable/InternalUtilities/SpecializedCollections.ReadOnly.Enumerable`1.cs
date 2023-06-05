@@ -6,9 +6,9 @@ using System.Collections;
 
 namespace Roslyn.Utilities
 {
-    internal partial class SpecializedCollections
+    partial internal class SpecializedCollections
     {
-        private partial class ReadOnly
+        partial private class ReadOnly
         {
             internal class Enumerable<TUnderlying> : IEnumerable
                 where TUnderlying : IEnumerable

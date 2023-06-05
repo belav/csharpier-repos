@@ -21,9 +21,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 {
-    internal partial class CSharpMethodExtractor
+    partial internal class CSharpMethodExtractor
     {
-        private partial class CSharpCodeGenerator
+        partial private class CSharpCodeGenerator
         {
             public sealed class MultipleStatementsCodeGenerator : CSharpCodeGenerator
             {

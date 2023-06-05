@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 #if FEATURE_COMINTEROP || FEATURE_COMWRAPPERS
 namespace System
 {
-    internal sealed partial class ComAwareWeakReference
+    partial internal sealed class ComAwareWeakReference
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ComWeakRefToObject")]
-        private static partial void ComWeakRefToObject(
+        partial private static void ComWeakRefToObject(
             IntPtr pComWeakRef,
             long wrapperId,
             ObjectHandleOnStack retRcw
@@ -45,7 +45,7 @@ namespace System
         internal static extern bool HasInteropInfo(object target);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ObjectToComWeakRef")]
-        private static partial IntPtr ObjectToComWeakRef(
+        partial private static IntPtr ObjectToComWeakRef(
             ObjectHandleOnStack retRcw,
             out long wrapperId
         );

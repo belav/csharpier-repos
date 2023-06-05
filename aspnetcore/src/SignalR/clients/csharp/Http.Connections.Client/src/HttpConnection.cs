@@ -20,10 +20,11 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client;
 
+partial
 /// <summary>
 /// Used to make a connection to an ASP.NET Core ConnectionHandler using an HTTP-based transport.
 /// </summary>
-public partial class HttpConnection : ConnectionContext, IConnectionInherentKeepAliveFeature
+public class HttpConnection : ConnectionContext, IConnectionInherentKeepAliveFeature
 {
     // Not configurable on purpose, high enough that if we reach here, it's likely
     // a buggy server

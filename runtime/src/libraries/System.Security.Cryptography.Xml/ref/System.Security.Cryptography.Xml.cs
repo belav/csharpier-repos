@@ -6,7 +6,7 @@
 
 namespace System.Security.Cryptography.Xml
 {
-    public sealed partial class CipherData
+    partial public sealed class CipherData
     {
         public CipherData() { }
 
@@ -36,7 +36,7 @@ namespace System.Security.Cryptography.Xml
         public void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public sealed partial class CipherReference
+    partial public sealed class CipherReference
         : System.Security.Cryptography.Xml.EncryptedReference
     {
         public CipherReference() { }
@@ -56,7 +56,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public partial class DataObject
+    partial public class DataObject
     {
         public DataObject() { }
 
@@ -92,7 +92,7 @@ namespace System.Security.Cryptography.Xml
         public void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public sealed partial class DataReference : System.Security.Cryptography.Xml.EncryptedReference
+    partial public sealed class DataReference : System.Security.Cryptography.Xml.EncryptedReference
     {
         public DataReference() { }
 
@@ -104,7 +104,7 @@ namespace System.Security.Cryptography.Xml
         ) { }
     }
 
-    public partial class DSAKeyValue : System.Security.Cryptography.Xml.KeyInfoClause
+    partial public class DSAKeyValue : System.Security.Cryptography.Xml.KeyInfoClause
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
@@ -126,7 +126,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public sealed partial class EncryptedData : System.Security.Cryptography.Xml.EncryptedType
+    partial public sealed class EncryptedData : System.Security.Cryptography.Xml.EncryptedType
     {
         public EncryptedData() { }
 
@@ -138,7 +138,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public sealed partial class EncryptedKey : System.Security.Cryptography.Xml.EncryptedType
+    partial public sealed class EncryptedKey : System.Security.Cryptography.Xml.EncryptedType
     {
         public EncryptedKey() { }
 
@@ -171,7 +171,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public abstract partial class EncryptedReference
+    partial public abstract class EncryptedReference
     {
         protected EncryptedReference() { }
 
@@ -212,7 +212,7 @@ namespace System.Security.Cryptography.Xml
         public virtual void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public abstract partial class EncryptedType
+    partial public abstract class EncryptedType
     {
         protected EncryptedType() { }
 
@@ -264,7 +264,7 @@ namespace System.Security.Cryptography.Xml
         public abstract void LoadXml(System.Xml.XmlElement value);
     }
 
-    public partial class EncryptedXml
+    partial public class EncryptedXml
     {
         public const string XmlEncAES128KeyWrapUrl = "http://www.w3.org/2001/04/xmlenc#kw-aes128";
         public const string XmlEncAES128Url = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
@@ -453,7 +453,7 @@ namespace System.Security.Cryptography.Xml
         ) { }
     }
 
-    public partial class EncryptionMethod
+    partial public class EncryptionMethod
     {
         public EncryptionMethod() { }
 
@@ -478,7 +478,7 @@ namespace System.Security.Cryptography.Xml
         public void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public sealed partial class EncryptionProperty
+    partial public sealed class EncryptionProperty
     {
         public EncryptionProperty() { }
 
@@ -508,7 +508,7 @@ namespace System.Security.Cryptography.Xml
         public void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public sealed partial class EncryptionPropertyCollection
+    partial public sealed class EncryptionPropertyCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -608,7 +608,7 @@ namespace System.Security.Cryptography.Xml
         void System.Collections.IList.Remove(object? value) { }
     }
 
-    public partial interface IRelDecryptor
+    partial public interface IRelDecryptor
     {
         System.IO.Stream Decrypt(
             System.Security.Cryptography.Xml.EncryptionMethod encryptionMethod,
@@ -617,7 +617,7 @@ namespace System.Security.Cryptography.Xml
         );
     }
 
-    public partial class KeyInfo : System.Collections.IEnumerable
+    partial public class KeyInfo : System.Collections.IEnumerable
     {
         public KeyInfo() { }
 
@@ -651,7 +651,7 @@ namespace System.Security.Cryptography.Xml
         public void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public abstract partial class KeyInfoClause
+    partial public abstract class KeyInfoClause
     {
         protected KeyInfoClause() { }
 
@@ -659,7 +659,7 @@ namespace System.Security.Cryptography.Xml
         public abstract void LoadXml(System.Xml.XmlElement element);
     }
 
-    public partial class KeyInfoEncryptedKey : System.Security.Cryptography.Xml.KeyInfoClause
+    partial public class KeyInfoEncryptedKey : System.Security.Cryptography.Xml.KeyInfoClause
     {
         public KeyInfoEncryptedKey() { }
 
@@ -679,7 +679,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public partial class KeyInfoName : System.Security.Cryptography.Xml.KeyInfoClause
+    partial public class KeyInfoName : System.Security.Cryptography.Xml.KeyInfoClause
     {
         public KeyInfoName() { }
 
@@ -699,7 +699,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public partial class KeyInfoNode : System.Security.Cryptography.Xml.KeyInfoClause
+    partial public class KeyInfoNode : System.Security.Cryptography.Xml.KeyInfoClause
     {
         public KeyInfoNode() { }
 
@@ -719,7 +719,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public partial class KeyInfoRetrievalMethod : System.Security.Cryptography.Xml.KeyInfoClause
+    partial public class KeyInfoRetrievalMethod : System.Security.Cryptography.Xml.KeyInfoClause
     {
         public KeyInfoRetrievalMethod() { }
 
@@ -746,7 +746,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public partial class KeyInfoX509Data : System.Security.Cryptography.Xml.KeyInfoClause
+    partial public class KeyInfoX509Data : System.Security.Cryptography.Xml.KeyInfoClause
     {
         public KeyInfoX509Data() { }
 
@@ -802,7 +802,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement element) { }
     }
 
-    public sealed partial class KeyReference : System.Security.Cryptography.Xml.EncryptedReference
+    partial public sealed class KeyReference : System.Security.Cryptography.Xml.EncryptedReference
     {
         public KeyReference() { }
 
@@ -814,7 +814,7 @@ namespace System.Security.Cryptography.Xml
         ) { }
     }
 
-    public partial class Reference
+    partial public class Reference
     {
         public Reference() { }
 
@@ -863,7 +863,7 @@ namespace System.Security.Cryptography.Xml
         public void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public sealed partial class ReferenceList
+    partial public sealed class ReferenceList
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -939,7 +939,7 @@ namespace System.Security.Cryptography.Xml
         public void RemoveAt(int index) { }
     }
 
-    public partial class RSAKeyValue : System.Security.Cryptography.Xml.KeyInfoClause
+    partial public class RSAKeyValue : System.Security.Cryptography.Xml.KeyInfoClause
     {
         public RSAKeyValue() { }
 
@@ -959,7 +959,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public partial class Signature
+    partial public class Signature
     {
         public Signature() { }
 
@@ -999,7 +999,7 @@ namespace System.Security.Cryptography.Xml
         public void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public partial class SignedInfo : System.Collections.ICollection, System.Collections.IEnumerable
+    partial public class SignedInfo : System.Collections.ICollection, System.Collections.IEnumerable
     {
         public SignedInfo() { }
 
@@ -1066,7 +1066,7 @@ namespace System.Security.Cryptography.Xml
         public void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public partial class SignedXml
+    partial public class SignedXml
     {
         protected System.Security.Cryptography.Xml.Signature m_signature;
         protected string? m_strSigningKeyName;
@@ -1230,7 +1230,7 @@ namespace System.Security.Cryptography.Xml
         public void LoadXml(System.Xml.XmlElement value) { }
     }
 
-    public abstract partial class Transform
+    partial public abstract class Transform
     {
         protected Transform() { }
 
@@ -1273,7 +1273,7 @@ namespace System.Security.Cryptography.Xml
         public abstract void LoadInput(object obj);
     }
 
-    public partial class TransformChain
+    partial public class TransformChain
     {
         public TransformChain() { }
 
@@ -1294,7 +1294,7 @@ namespace System.Security.Cryptography.Xml
         }
     }
 
-    public partial class XmlDecryptionTransform : System.Security.Cryptography.Xml.Transform
+    partial public class XmlDecryptionTransform : System.Security.Cryptography.Xml.Transform
     {
         public XmlDecryptionTransform() { }
 
@@ -1339,7 +1339,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadInput(object obj) { }
     }
 
-    public partial class XmlDsigBase64Transform : System.Security.Cryptography.Xml.Transform
+    partial public class XmlDsigBase64Transform : System.Security.Cryptography.Xml.Transform
     {
         public XmlDsigBase64Transform() { }
 
@@ -1372,7 +1372,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadInput(object obj) { }
     }
 
-    public partial class XmlDsigC14NTransform : System.Security.Cryptography.Xml.Transform
+    partial public class XmlDsigC14NTransform : System.Security.Cryptography.Xml.Transform
     {
         public XmlDsigC14NTransform() { }
 
@@ -1412,13 +1412,13 @@ namespace System.Security.Cryptography.Xml
         public override void LoadInput(object obj) { }
     }
 
-    public partial class XmlDsigC14NWithCommentsTransform
+    partial public class XmlDsigC14NWithCommentsTransform
         : System.Security.Cryptography.Xml.XmlDsigC14NTransform
     {
         public XmlDsigC14NWithCommentsTransform() { }
     }
 
-    public partial class XmlDsigEnvelopedSignatureTransform
+    partial public class XmlDsigEnvelopedSignatureTransform
         : System.Security.Cryptography.Xml.Transform
     {
         public XmlDsigEnvelopedSignatureTransform() { }
@@ -1454,7 +1454,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadInput(object obj) { }
     }
 
-    public partial class XmlDsigExcC14NTransform : System.Security.Cryptography.Xml.Transform
+    partial public class XmlDsigExcC14NTransform : System.Security.Cryptography.Xml.Transform
     {
         public XmlDsigExcC14NTransform() { }
 
@@ -1504,7 +1504,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadInput(object obj) { }
     }
 
-    public partial class XmlDsigExcC14NWithCommentsTransform
+    partial public class XmlDsigExcC14NWithCommentsTransform
         : System.Security.Cryptography.Xml.XmlDsigExcC14NTransform
     {
         public XmlDsigExcC14NWithCommentsTransform() { }
@@ -1512,7 +1512,7 @@ namespace System.Security.Cryptography.Xml
         public XmlDsigExcC14NWithCommentsTransform(string inclusiveNamespacesPrefixList) { }
     }
 
-    public partial class XmlDsigXPathTransform : System.Security.Cryptography.Xml.Transform
+    partial public class XmlDsigXPathTransform : System.Security.Cryptography.Xml.Transform
     {
         public XmlDsigXPathTransform() { }
 
@@ -1545,7 +1545,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadInput(object obj) { }
     }
 
-    public partial class XmlDsigXsltTransform : System.Security.Cryptography.Xml.Transform
+    partial public class XmlDsigXsltTransform : System.Security.Cryptography.Xml.Transform
     {
         public XmlDsigXsltTransform() { }
 
@@ -1580,7 +1580,7 @@ namespace System.Security.Cryptography.Xml
         public override void LoadInput(object obj) { }
     }
 
-    public partial class XmlLicenseTransform : System.Security.Cryptography.Xml.Transform
+    partial public class XmlLicenseTransform : System.Security.Cryptography.Xml.Transform
     {
         public XmlLicenseTransform() { }
 

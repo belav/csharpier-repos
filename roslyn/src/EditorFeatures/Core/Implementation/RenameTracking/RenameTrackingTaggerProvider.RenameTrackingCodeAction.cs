@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 {
-    internal sealed partial class RenameTrackingTaggerProvider
+    partial internal sealed class RenameTrackingTaggerProvider
     {
         private class RenameTrackingCodeAction : CodeAction
         {

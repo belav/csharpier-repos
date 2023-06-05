@@ -4,15 +4,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_MUnmap",
             SetLastError = true
         )]
-        internal static partial int MUnmap(IntPtr addr, ulong len);
+        partial internal static int MUnmap(IntPtr addr, ulong len);
     }
 }

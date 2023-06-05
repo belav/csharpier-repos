@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseImplicitType
         ),
         Shared
     ]
-    internal partial class UseImplicitTypeCodeRefactoringProvider
+    partial internal class UseImplicitTypeCodeRefactoringProvider
         : AbstractUseTypeCodeRefactoringProvider
     {
         [ImportingConstructor]

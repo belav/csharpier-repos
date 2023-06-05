@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.ServiceModel.Channels;
 
-    public sealed partial class UdpTransportElement : TransportElement
+    partial public sealed class UdpTransportElement : TransportElement
     {
         public UdpTransportElement()
             : base() { }

@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formatting.ViewModel
 {
-    internal partial class FormattingViewModel
+    partial internal class FormattingViewModel
         : SettingsViewModelBase<
             FormattingSetting,
             FormattingViewModel.SettingsSnapshotFactory,

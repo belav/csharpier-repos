@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Text.Json.SourceGeneration.Tests
 {
-    public static partial class JsonSerializerContextTests
+    partial public static class JsonSerializerContextTests
     {
         [Fact]
         public static void VariousNestingAndVisibilityLevelsAreSupported()
@@ -366,7 +366,7 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Serialization)]
         [JsonSerializable(typeof(JsonMessage))]
-        public partial class FastPathSerializationContext : JsonSerializerContext { }
+        partial public class FastPathSerializationContext : JsonSerializerContext { }
 
         public class ClassWithJsonMessage
         {
@@ -539,13 +539,13 @@ namespace System.Text.Json.SourceGeneration.Tests
         }
 
         [JsonSerializable(typeof(JsonMessage))]
-        internal partial class NestedContext : JsonSerializerContext { }
+        partial internal class NestedContext : JsonSerializerContext { }
 
         [JsonSerializable(typeof(JsonMessage))]
-        public partial class NestedPublicContext : JsonSerializerContext
+        partial public class NestedPublicContext : JsonSerializerContext
         {
             [JsonSerializable(typeof(JsonMessage))]
-            protected internal partial class NestedProtectedInternalClass
+            partial protected internal class NestedProtectedInternalClass
                 : JsonSerializerContext { }
         }
 
@@ -553,7 +553,7 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
         [JsonSerializable(typeof(Person))]
-        internal partial class PersonJsonContext : JsonSerializerContext { }
+        partial internal class PersonJsonContext : JsonSerializerContext { }
 
         internal class GreetingCard
         {
@@ -568,11 +568,11 @@ namespace System.Text.Json.SourceGeneration.Tests
         }
 
         [JsonSerializable(typeof(GreetingCard))]
-        internal partial class GreetingCardJsonContext : JsonSerializerContext { }
+        partial internal class GreetingCardJsonContext : JsonSerializerContext { }
 
         [JsonSourceGenerationOptions(IncludeFields = true)]
         [JsonSerializable(typeof(GreetingCardWithFields))]
-        internal partial class GreetingCardWithFieldsJsonContext : JsonSerializerContext { }
+        partial internal class GreetingCardWithFieldsJsonContext : JsonSerializerContext { }
 
         // Regression test for https://github.com/dotnet/runtime/issues/62079
         [Fact]
@@ -597,7 +597,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         }
 
         [JsonSerializable(typeof(ParentClass))]
-        internal partial class SingleClassWithCustomConverterFactoryPropertyContext
+        partial internal class SingleClassWithCustomConverterFactoryPropertyContext
             : JsonSerializerContext { }
 
         // Regression test for https://github.com/dotnet/runtime/issues/61860
@@ -647,18 +647,18 @@ namespace System.Text.Json.SourceGeneration.Tests
         }
 
         [JsonSerializable(typeof(List<TestEnum>))]
-        internal partial class GenericParameterWithCustomConverterFactoryContext
+        partial internal class GenericParameterWithCustomConverterFactoryContext
             : JsonSerializerContext { }
 
         [JsonSerializable(typeof(ClassWithPocoListDictionaryAndNullable))]
-        internal partial class ClassWithPocoListDictionaryAndNullablePropertyContext
+        partial internal class ClassWithPocoListDictionaryAndNullablePropertyContext
             : JsonSerializerContext { }
 
         [JsonSerializable(typeof(ClassWithStringValues))]
-        internal partial class ClassWithStringValuesContext : JsonSerializerContext { }
+        partial internal class ClassWithStringValuesContext : JsonSerializerContext { }
 
         [JsonSerializable(typeof(ClassWithDictionaryProperty))]
-        internal partial class ClassWithDictionaryPropertyContext : JsonSerializerContext { }
+        partial internal class ClassWithDictionaryPropertyContext : JsonSerializerContext { }
 
         internal class ClassWithPocoListDictionaryAndNullable
         {

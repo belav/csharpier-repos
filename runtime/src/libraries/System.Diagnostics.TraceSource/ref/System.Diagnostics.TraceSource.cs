@@ -7,7 +7,7 @@
 namespace System.Diagnostics
 {
     [System.Diagnostics.SwitchLevelAttribute(typeof(bool))]
-    public partial class BooleanSwitch : System.Diagnostics.Switch
+    partial public class BooleanSwitch : System.Diagnostics.Switch
     {
         public BooleanSwitch(string displayName, string? description)
             : base(default(string), default(string)) { }
@@ -24,7 +24,7 @@ namespace System.Diagnostics
         protected override void OnValueChanged() { }
     }
 
-    public partial class CorrelationManager
+    partial public class CorrelationManager
     {
         internal CorrelationManager() { }
 
@@ -45,7 +45,7 @@ namespace System.Diagnostics
         public void StopLogicalOperation() { }
     }
 
-    public partial class DefaultTraceListener : System.Diagnostics.TraceListener
+    partial public class DefaultTraceListener : System.Diagnostics.TraceListener
     {
         public DefaultTraceListener() { }
 
@@ -69,7 +69,7 @@ namespace System.Diagnostics
         public override void WriteLine(string? message) { }
     }
 
-    public partial class EventTypeFilter : System.Diagnostics.TraceFilter
+    partial public class EventTypeFilter : System.Diagnostics.TraceFilter
     {
         public EventTypeFilter(System.Diagnostics.SourceLevels level) { }
 
@@ -95,7 +95,7 @@ namespace System.Diagnostics
         }
     }
 
-    public sealed partial class InitializingSwitchEventArgs : System.EventArgs
+    partial public sealed class InitializingSwitchEventArgs : System.EventArgs
     {
         public InitializingSwitchEventArgs(System.Diagnostics.Switch @switch) { }
 
@@ -105,7 +105,7 @@ namespace System.Diagnostics
         }
     }
 
-    public sealed partial class InitializingTraceSourceEventArgs : System.EventArgs
+    partial public sealed class InitializingTraceSourceEventArgs : System.EventArgs
     {
         public InitializingTraceSourceEventArgs(System.Diagnostics.TraceSource traceSource) { }
 
@@ -120,7 +120,7 @@ namespace System.Diagnostics
         }
     }
 
-    public partial class SourceFilter : System.Diagnostics.TraceFilter
+    partial public class SourceFilter : System.Diagnostics.TraceFilter
     {
         public SourceFilter(string source) { }
 
@@ -163,7 +163,7 @@ namespace System.Diagnostics
         ActivityTracing = 65280,
     }
 
-    public partial class SourceSwitch : System.Diagnostics.Switch
+    partial public class SourceSwitch : System.Diagnostics.Switch
     {
         public SourceSwitch(string name)
             : base(default(string), default(string)) { }
@@ -185,7 +185,7 @@ namespace System.Diagnostics
         }
     }
 
-    public abstract partial class Switch
+    partial public abstract class Switch
     {
         protected Switch(string displayName, string? description) { }
 
@@ -243,7 +243,7 @@ namespace System.Diagnostics
             | System.AttributeTargets.Method
             | System.AttributeTargets.Property
     )]
-    public sealed partial class SwitchAttribute : System.Attribute
+    partial public sealed class SwitchAttribute : System.Attribute
     {
         public SwitchAttribute(string switchName, System.Type switchType) { }
 
@@ -275,7 +275,7 @@ namespace System.Diagnostics
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class SwitchLevelAttribute : System.Attribute
+    partial public sealed class SwitchLevelAttribute : System.Attribute
     {
         public SwitchLevelAttribute(System.Type switchLevelType) { }
 
@@ -286,7 +286,7 @@ namespace System.Diagnostics
         }
     }
 
-    public sealed partial class Trace
+    partial public sealed class Trace
     {
         internal Trace() { }
 
@@ -433,7 +433,7 @@ namespace System.Diagnostics
         public static void WriteLineIf(bool condition, string? message, string? category) { }
     }
 
-    public partial class TraceEventCache
+    partial public class TraceEventCache
     {
         public TraceEventCache() { }
 
@@ -477,7 +477,7 @@ namespace System.Diagnostics
         Transfer = 4096,
     }
 
-    public abstract partial class TraceFilter
+    partial public abstract class TraceFilter
     {
         protected TraceFilter() { }
 
@@ -503,7 +503,7 @@ namespace System.Diagnostics
         Verbose = 4,
     }
 
-    public abstract partial class TraceListener : System.MarshalByRefObject, System.IDisposable
+    partial public abstract class TraceListener : System.MarshalByRefObject, System.IDisposable
     {
         protected TraceListener() { }
 
@@ -635,7 +635,7 @@ namespace System.Diagnostics
         public virtual void WriteLine(string? message, string? category) { }
     }
 
-    public partial class TraceListenerCollection
+    partial public class TraceListenerCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -747,7 +747,7 @@ namespace System.Diagnostics
         Callstack = 32,
     }
 
-    public partial class TraceSource
+    partial public class TraceSource
     {
         public TraceSource(string name) { }
 
@@ -833,7 +833,7 @@ namespace System.Diagnostics
     }
 
     [System.Diagnostics.SwitchLevelAttribute(typeof(System.Diagnostics.TraceLevel))]
-    public partial class TraceSwitch : System.Diagnostics.Switch
+    partial public class TraceSwitch : System.Diagnostics.Switch
     {
         public TraceSwitch(string displayName, string? description)
             : base(default(string), default(string)) { }

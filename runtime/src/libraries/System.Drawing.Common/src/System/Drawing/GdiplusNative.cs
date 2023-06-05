@@ -12,23 +12,24 @@ using System.Runtime.InteropServices.Marshalling;
 
 namespace System.Drawing
 {
+    partial
     // Raw function imports for gdiplus
-    internal static partial class SafeNativeMethods
+    internal static class SafeNativeMethods
     {
-        internal static unsafe partial class Gdip
+        partial internal static unsafe class Gdip
         {
             private const string LibraryName = "gdiplus.dll";
 
             // Imported functions
             [LibraryImport(LibraryName)]
-            private static partial int GdiplusStartup(
+            partial private static int GdiplusStartup(
                 out IntPtr token,
                 in StartupInputEx input,
                 out StartupOutput output
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipBeginContainer(
+            partial internal static int GdipBeginContainer(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -40,7 +41,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipBeginContainer2(
+            partial internal static int GdipBeginContainer2(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -49,7 +50,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipBeginContainerI(
+            partial internal static int GdipBeginContainerI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -61,7 +62,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEndContainer(
+            partial internal static int GdipEndContainer(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -70,7 +71,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateAdjustableArrowCap(
+            partial internal static int GdipCreateAdjustableArrowCap(
                 float height,
                 float width,
                 [MarshalAs(UnmanagedType.Bool)] bool isFilled,
@@ -78,7 +79,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetAdjustableArrowCapHeight(
+            partial internal static int GdipGetAdjustableArrowCapHeight(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -87,7 +88,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetAdjustableArrowCapHeight(
+            partial internal static int GdipSetAdjustableArrowCapHeight(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -96,7 +97,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetAdjustableArrowCapWidth(
+            partial internal static int GdipSetAdjustableArrowCapWidth(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -105,7 +106,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetAdjustableArrowCapWidth(
+            partial internal static int GdipGetAdjustableArrowCapWidth(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -114,7 +115,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetAdjustableArrowCapMiddleInset(
+            partial internal static int GdipSetAdjustableArrowCapMiddleInset(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -123,7 +124,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetAdjustableArrowCapMiddleInset(
+            partial internal static int GdipGetAdjustableArrowCapMiddleInset(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -132,7 +133,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetAdjustableArrowCapFillState(
+            partial internal static int GdipSetAdjustableArrowCapFillState(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -141,7 +142,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetAdjustableArrowCapFillState(
+            partial internal static int GdipGetAdjustableArrowCapFillState(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -150,13 +151,13 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCustomLineCapType(
+            partial internal static int GdipGetCustomLineCapType(
                 IntPtr customCap,
                 out CustomLineCapType capType
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateCustomLineCap(
+            partial internal static int GdipCreateCustomLineCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -171,10 +172,10 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeleteCustomLineCap(IntPtr customCap);
+            partial internal static int GdipDeleteCustomLineCap(IntPtr customCap);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeleteCustomLineCap(
+            partial internal static int GdipDeleteCustomLineCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -182,7 +183,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneCustomLineCap(
+            partial internal static int GdipCloneCustomLineCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -191,7 +192,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetCustomLineCapStrokeCaps(
+            partial internal static int GdipSetCustomLineCapStrokeCaps(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -201,7 +202,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCustomLineCapStrokeCaps(
+            partial internal static int GdipGetCustomLineCapStrokeCaps(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -211,7 +212,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetCustomLineCapStrokeJoin(
+            partial internal static int GdipSetCustomLineCapStrokeJoin(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -220,7 +221,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCustomLineCapStrokeJoin(
+            partial internal static int GdipGetCustomLineCapStrokeJoin(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -229,7 +230,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetCustomLineCapBaseCap(
+            partial internal static int GdipSetCustomLineCapBaseCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -238,7 +239,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCustomLineCapBaseCap(
+            partial internal static int GdipGetCustomLineCapBaseCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -247,7 +248,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetCustomLineCapBaseInset(
+            partial internal static int GdipSetCustomLineCapBaseInset(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -256,7 +257,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCustomLineCapBaseInset(
+            partial internal static int GdipGetCustomLineCapBaseInset(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -265,7 +266,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetCustomLineCapWidthScale(
+            partial internal static int GdipSetCustomLineCapWidthScale(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -274,7 +275,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCustomLineCapWidthScale(
+            partial internal static int GdipGetCustomLineCapWidthScale(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -283,7 +284,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreatePathIter(
+            partial internal static int GdipCreatePathIter(
                 out IntPtr pathIter,
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
@@ -292,7 +293,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeletePathIter(
+            partial internal static int GdipDeletePathIter(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -300,7 +301,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterNextSubpath(
+            partial internal static int GdipPathIterNextSubpath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -312,7 +313,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterNextSubpathPath(
+            partial internal static int GdipPathIterNextSubpathPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -326,7 +327,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterNextPathType(
+            partial internal static int GdipPathIterNextPathType(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -338,7 +339,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterNextMarker(
+            partial internal static int GdipPathIterNextMarker(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -349,7 +350,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterNextMarkerPath(
+            partial internal static int GdipPathIterNextMarkerPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -362,7 +363,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterGetCount(
+            partial internal static int GdipPathIterGetCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -371,7 +372,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterGetSubpathCount(
+            partial internal static int GdipPathIterGetSubpathCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -380,7 +381,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterHasCurve(
+            partial internal static int GdipPathIterHasCurve(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -389,7 +390,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterRewind(
+            partial internal static int GdipPathIterRewind(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -397,7 +398,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterEnumerate(
+            partial internal static int GdipPathIterEnumerate(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -409,7 +410,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPathIterCopyData(
+            partial internal static int GdipPathIterCopyData(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -422,7 +423,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateHatchBrush(
+            partial internal static int GdipCreateHatchBrush(
                 int hatchstyle,
                 int forecol,
                 int backcol,
@@ -430,7 +431,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetHatchStyle(
+            partial internal static int GdipGetHatchStyle(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -439,7 +440,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetHatchForegroundColor(
+            partial internal static int GdipGetHatchForegroundColor(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -448,7 +449,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetHatchBackgroundColor(
+            partial internal static int GdipGetHatchBackgroundColor(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -457,7 +458,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneBrush(
+            partial internal static int GdipCloneBrush(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -466,7 +467,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateLineBrush(
+            partial internal static int GdipCreateLineBrush(
                 ref PointF point1,
                 ref PointF point2,
                 int color1,
@@ -476,7 +477,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateLineBrushI(
+            partial internal static int GdipCreateLineBrushI(
                 ref Point point1,
                 ref Point point2,
                 int color1,
@@ -486,7 +487,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateLineBrushFromRect(
+            partial internal static int GdipCreateLineBrushFromRect(
                 ref RectangleF rect,
                 int color1,
                 int color2,
@@ -496,7 +497,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateLineBrushFromRectI(
+            partial internal static int GdipCreateLineBrushFromRectI(
                 ref Rectangle rect,
                 int color1,
                 int color2,
@@ -506,7 +507,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateLineBrushFromRectWithAngle(
+            partial internal static int GdipCreateLineBrushFromRectWithAngle(
                 ref RectangleF rect,
                 int color1,
                 int color2,
@@ -517,7 +518,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateLineBrushFromRectWithAngleI(
+            partial internal static int GdipCreateLineBrushFromRectWithAngleI(
                 ref Rectangle rect,
                 int color1,
                 int color2,
@@ -528,7 +529,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetLineColors(
+            partial internal static int GdipSetLineColors(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -538,7 +539,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLineColors(
+            partial internal static int GdipGetLineColors(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -547,7 +548,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLineRect(
+            partial internal static int GdipGetLineRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -556,7 +557,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLineGammaCorrection(
+            partial internal static int GdipGetLineGammaCorrection(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -565,7 +566,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetLineGammaCorrection(
+            partial internal static int GdipSetLineGammaCorrection(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -574,7 +575,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetLineSigmaBlend(
+            partial internal static int GdipSetLineSigmaBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -584,7 +585,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetLineLinearBlend(
+            partial internal static int GdipSetLineLinearBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -594,7 +595,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLineBlendCount(
+            partial internal static int GdipGetLineBlendCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -603,7 +604,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLineBlend(
+            partial internal static int GdipGetLineBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -614,7 +615,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetLineBlend(
+            partial internal static int GdipSetLineBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -625,7 +626,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLinePresetBlendCount(
+            partial internal static int GdipGetLinePresetBlendCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -634,7 +635,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLinePresetBlend(
+            partial internal static int GdipGetLinePresetBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -645,7 +646,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetLinePresetBlend(
+            partial internal static int GdipSetLinePresetBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -656,7 +657,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetLineWrapMode(
+            partial internal static int GdipSetLineWrapMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -665,7 +666,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLineWrapMode(
+            partial internal static int GdipGetLineWrapMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -674,7 +675,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipResetLineTransform(
+            partial internal static int GdipResetLineTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -682,7 +683,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipMultiplyLineTransform(
+            partial internal static int GdipMultiplyLineTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -695,7 +696,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLineTransform(
+            partial internal static int GdipGetLineTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -707,7 +708,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetLineTransform(
+            partial internal static int GdipSetLineTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -719,7 +720,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTranslateLineTransform(
+            partial internal static int GdipTranslateLineTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -730,7 +731,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipScaleLineTransform(
+            partial internal static int GdipScaleLineTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -741,7 +742,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipRotateLineTransform(
+            partial internal static int GdipRotateLineTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -751,7 +752,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreatePathGradient(
+            partial internal static int GdipCreatePathGradient(
                 PointF* points,
                 int count,
                 WrapMode wrapMode,
@@ -759,7 +760,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreatePathGradientI(
+            partial internal static int GdipCreatePathGradientI(
                 Point* points,
                 int count,
                 WrapMode wrapMode,
@@ -767,7 +768,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreatePathGradientFromPath(
+            partial internal static int GdipCreatePathGradientFromPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -776,7 +777,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientCenterColor(
+            partial internal static int GdipGetPathGradientCenterColor(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -785,7 +786,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientCenterColor(
+            partial internal static int GdipSetPathGradientCenterColor(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -794,7 +795,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientSurroundColorsWithCount(
+            partial internal static int GdipGetPathGradientSurroundColorsWithCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -804,7 +805,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientSurroundColorsWithCount(
+            partial internal static int GdipSetPathGradientSurroundColorsWithCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -814,7 +815,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientCenterPoint(
+            partial internal static int GdipGetPathGradientCenterPoint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -823,7 +824,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientCenterPoint(
+            partial internal static int GdipSetPathGradientCenterPoint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -832,7 +833,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientRect(
+            partial internal static int GdipGetPathGradientRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -841,7 +842,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientPointCount(
+            partial internal static int GdipGetPathGradientPointCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -850,7 +851,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientSurroundColorCount(
+            partial internal static int GdipGetPathGradientSurroundColorCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -859,7 +860,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientBlendCount(
+            partial internal static int GdipGetPathGradientBlendCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -868,7 +869,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientBlend(
+            partial internal static int GdipGetPathGradientBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -879,7 +880,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientBlend(
+            partial internal static int GdipSetPathGradientBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -890,7 +891,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientPresetBlendCount(
+            partial internal static int GdipGetPathGradientPresetBlendCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -899,7 +900,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientPresetBlend(
+            partial internal static int GdipGetPathGradientPresetBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -910,7 +911,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientPresetBlend(
+            partial internal static int GdipSetPathGradientPresetBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -921,7 +922,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientSigmaBlend(
+            partial internal static int GdipSetPathGradientSigmaBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -931,7 +932,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientLinearBlend(
+            partial internal static int GdipSetPathGradientLinearBlend(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -941,7 +942,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientWrapMode(
+            partial internal static int GdipSetPathGradientWrapMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -950,7 +951,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientWrapMode(
+            partial internal static int GdipGetPathGradientWrapMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -959,7 +960,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientTransform(
+            partial internal static int GdipSetPathGradientTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -971,7 +972,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientTransform(
+            partial internal static int GdipGetPathGradientTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -983,7 +984,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipResetPathGradientTransform(
+            partial internal static int GdipResetPathGradientTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -991,7 +992,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipMultiplyPathGradientTransform(
+            partial internal static int GdipMultiplyPathGradientTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1004,7 +1005,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTranslatePathGradientTransform(
+            partial internal static int GdipTranslatePathGradientTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1015,7 +1016,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipScalePathGradientTransform(
+            partial internal static int GdipScalePathGradientTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1026,7 +1027,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipRotatePathGradientTransform(
+            partial internal static int GdipRotatePathGradientTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1036,7 +1037,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathGradientFocusScales(
+            partial internal static int GdipGetPathGradientFocusScales(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1046,7 +1047,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathGradientFocusScales(
+            partial internal static int GdipSetPathGradientFocusScales(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1056,10 +1057,10 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateImageAttributes(out IntPtr imageattr);
+            partial internal static int GdipCreateImageAttributes(out IntPtr imageattr);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneImageAttributes(
+            partial internal static int GdipCloneImageAttributes(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1068,7 +1069,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDisposeImageAttributes(
+            partial internal static int GdipDisposeImageAttributes(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1076,7 +1077,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetImageAttributesColorMatrix(
+            partial internal static int GdipSetImageAttributesColorMatrix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1095,7 +1096,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetImageAttributesThreshold(
+            partial internal static int GdipSetImageAttributesThreshold(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1106,7 +1107,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetImageAttributesGamma(
+            partial internal static int GdipSetImageAttributesGamma(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1117,7 +1118,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetImageAttributesNoOp(
+            partial internal static int GdipSetImageAttributesNoOp(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1127,7 +1128,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetImageAttributesColorKeys(
+            partial internal static int GdipSetImageAttributesColorKeys(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1139,7 +1140,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetImageAttributesOutputChannel(
+            partial internal static int GdipSetImageAttributesOutputChannel(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1150,7 +1151,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipSetImageAttributesOutputChannelColorProfile(
+            partial internal static int GdipSetImageAttributesOutputChannelColorProfile(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1161,7 +1162,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetImageAttributesRemapTable(
+            partial internal static int GdipSetImageAttributesRemapTable(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1173,7 +1174,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetImageAttributesWrapMode(
+            partial internal static int GdipSetImageAttributesWrapMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1184,7 +1185,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageAttributesAdjustedPalette(
+            partial internal static int GdipGetImageAttributesAdjustedPalette(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1194,30 +1195,30 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageDecodersSize(out int numDecoders, out int size);
+            partial internal static int GdipGetImageDecodersSize(out int numDecoders, out int size);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageDecoders(
+            partial internal static int GdipGetImageDecoders(
                 int numDecoders,
                 int size,
                 IntPtr decoders
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageEncodersSize(out int numEncoders, out int size);
+            partial internal static int GdipGetImageEncodersSize(out int numEncoders, out int size);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageEncoders(
+            partial internal static int GdipGetImageEncoders(
                 int numEncoders,
                 int size,
                 IntPtr encoders
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateSolidFill(int color, out IntPtr brush);
+            partial internal static int GdipCreateSolidFill(int color, out IntPtr brush);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetSolidFillColor(
+            partial internal static int GdipSetSolidFillColor(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1226,7 +1227,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetSolidFillColor(
+            partial internal static int GdipGetSolidFillColor(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1235,7 +1236,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateTexture(
+            partial internal static int GdipCreateTexture(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1245,7 +1246,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateTexture2(
+            partial internal static int GdipCreateTexture2(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1259,7 +1260,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateTextureIA(
+            partial internal static int GdipCreateTextureIA(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1276,7 +1277,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateTexture2I(
+            partial internal static int GdipCreateTexture2I(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1290,7 +1291,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateTextureIAI(
+            partial internal static int GdipCreateTextureIAI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1307,7 +1308,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetTextureTransform(
+            partial internal static int GdipSetTextureTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1319,7 +1320,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetTextureTransform(
+            partial internal static int GdipGetTextureTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1331,7 +1332,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipResetTextureTransform(
+            partial internal static int GdipResetTextureTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1339,7 +1340,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipMultiplyTextureTransform(
+            partial internal static int GdipMultiplyTextureTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1352,7 +1353,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTranslateTextureTransform(
+            partial internal static int GdipTranslateTextureTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1363,7 +1364,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipScaleTextureTransform(
+            partial internal static int GdipScaleTextureTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1374,7 +1375,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipRotateTextureTransform(
+            partial internal static int GdipRotateTextureTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1384,7 +1385,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetTextureWrapMode(
+            partial internal static int GdipSetTextureWrapMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1393,7 +1394,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetTextureWrapMode(
+            partial internal static int GdipGetTextureWrapMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1402,7 +1403,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetTextureImage(
+            partial internal static int GdipGetTextureImage(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1411,7 +1412,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetFontCollectionFamilyCount(
+            partial internal static int GdipGetFontCollectionFamilyCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1420,7 +1421,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetFontCollectionFamilyList(
+            partial internal static int GdipGetFontCollectionFamilyList(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1431,13 +1432,13 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneFontFamily(
+            partial internal static int GdipCloneFontFamily(
                 IntPtr fontfamily,
                 out IntPtr clonefontfamily
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipCreateFontFamilyFromName(
+            partial internal static int GdipCreateFontFamilyFromName(
                 string name,
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
@@ -1447,16 +1448,16 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetGenericFontFamilySansSerif(out IntPtr fontfamily);
+            partial internal static int GdipGetGenericFontFamilySansSerif(out IntPtr fontfamily);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetGenericFontFamilySerif(out IntPtr fontfamily);
+            partial internal static int GdipGetGenericFontFamilySerif(out IntPtr fontfamily);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetGenericFontFamilyMonospace(out IntPtr fontfamily);
+            partial internal static int GdipGetGenericFontFamilyMonospace(out IntPtr fontfamily);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeleteFontFamily(
+            partial internal static int GdipDeleteFontFamily(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1464,7 +1465,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipGetFamilyName(
+            partial internal static int GdipGetFamilyName(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1474,7 +1475,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsStyleAvailable(
+            partial internal static int GdipIsStyleAvailable(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1484,7 +1485,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetEmHeight(
+            partial internal static int GdipGetEmHeight(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1494,7 +1495,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCellAscent(
+            partial internal static int GdipGetCellAscent(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1504,7 +1505,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCellDescent(
+            partial internal static int GdipGetCellDescent(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1514,7 +1515,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLineSpacing(
+            partial internal static int GdipGetLineSpacing(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1524,16 +1525,16 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipNewInstalledFontCollection(out IntPtr fontCollection);
+            partial internal static int GdipNewInstalledFontCollection(out IntPtr fontCollection);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipNewPrivateFontCollection(out IntPtr fontCollection);
+            partial internal static int GdipNewPrivateFontCollection(out IntPtr fontCollection);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeletePrivateFontCollection(ref IntPtr fontCollection);
+            partial internal static int GdipDeletePrivateFontCollection(ref IntPtr fontCollection);
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipPrivateAddFontFile(
+            partial internal static int GdipPrivateAddFontFile(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1542,7 +1543,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPrivateAddMemoryFont(
+            partial internal static int GdipPrivateAddMemoryFont(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1552,7 +1553,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateFont(
+            partial internal static int GdipCreateFont(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1564,10 +1565,10 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateFontFromDC(IntPtr hdc, ref IntPtr font);
+            partial internal static int GdipCreateFontFromDC(IntPtr hdc, ref IntPtr font);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneFont(
+            partial internal static int GdipCloneFont(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1576,7 +1577,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeleteFont(
+            partial internal static int GdipDeleteFont(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1584,7 +1585,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetFamily(
+            partial internal static int GdipGetFamily(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1593,7 +1594,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetFontStyle(
+            partial internal static int GdipGetFontStyle(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1602,7 +1603,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetFontSize(
+            partial internal static int GdipGetFontSize(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1611,7 +1612,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetFontHeight(
+            partial internal static int GdipGetFontHeight(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1624,7 +1625,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetFontHeightGivenDPI(
+            partial internal static int GdipGetFontHeightGivenDPI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1634,7 +1635,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetFontUnit(
+            partial internal static int GdipGetFontUnit(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1643,7 +1644,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetLogFontW(
+            partial internal static int GdipGetLogFontW(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1656,7 +1657,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreatePen1(
+            partial internal static int GdipCreatePen1(
                 int argb,
                 float width,
                 int unit,
@@ -1664,7 +1665,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreatePen2(
+            partial internal static int GdipCreatePen2(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1675,7 +1676,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipClonePen(
+            partial internal static int GdipClonePen(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1684,7 +1685,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeletePen(
+            partial internal static int GdipDeletePen(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1692,7 +1693,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenMode(
+            partial internal static int GdipSetPenMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1701,7 +1702,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenMode(
+            partial internal static int GdipGetPenMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1710,7 +1711,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenWidth(
+            partial internal static int GdipSetPenWidth(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1719,7 +1720,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenWidth(
+            partial internal static int GdipGetPenWidth(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1728,7 +1729,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenLineCap197819(
+            partial internal static int GdipSetPenLineCap197819(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1739,7 +1740,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenStartCap(
+            partial internal static int GdipSetPenStartCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1748,7 +1749,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenEndCap(
+            partial internal static int GdipSetPenEndCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1757,7 +1758,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenStartCap(
+            partial internal static int GdipGetPenStartCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1766,7 +1767,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenEndCap(
+            partial internal static int GdipGetPenEndCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1775,7 +1776,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenDashCap197819(
+            partial internal static int GdipGetPenDashCap197819(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1784,7 +1785,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenDashCap197819(
+            partial internal static int GdipSetPenDashCap197819(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1793,7 +1794,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenLineJoin(
+            partial internal static int GdipSetPenLineJoin(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1802,7 +1803,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenLineJoin(
+            partial internal static int GdipGetPenLineJoin(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1811,7 +1812,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenCustomStartCap(
+            partial internal static int GdipSetPenCustomStartCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1823,7 +1824,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenCustomStartCap(
+            partial internal static int GdipGetPenCustomStartCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1832,7 +1833,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenCustomEndCap(
+            partial internal static int GdipSetPenCustomEndCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1844,7 +1845,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenCustomEndCap(
+            partial internal static int GdipGetPenCustomEndCap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1853,7 +1854,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenMiterLimit(
+            partial internal static int GdipSetPenMiterLimit(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1862,7 +1863,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenMiterLimit(
+            partial internal static int GdipGetPenMiterLimit(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1871,7 +1872,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenTransform(
+            partial internal static int GdipSetPenTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1883,7 +1884,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenTransform(
+            partial internal static int GdipGetPenTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1895,7 +1896,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipResetPenTransform(
+            partial internal static int GdipResetPenTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1903,7 +1904,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipMultiplyPenTransform(
+            partial internal static int GdipMultiplyPenTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1916,7 +1917,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTranslatePenTransform(
+            partial internal static int GdipTranslatePenTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1927,7 +1928,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipScalePenTransform(
+            partial internal static int GdipScalePenTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1938,7 +1939,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipRotatePenTransform(
+            partial internal static int GdipRotatePenTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1948,7 +1949,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenColor(
+            partial internal static int GdipSetPenColor(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1957,7 +1958,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenColor(
+            partial internal static int GdipGetPenColor(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1966,7 +1967,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenBrushFill(
+            partial internal static int GdipSetPenBrushFill(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1978,7 +1979,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenBrushFill(
+            partial internal static int GdipGetPenBrushFill(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1987,7 +1988,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenFillType(
+            partial internal static int GdipGetPenFillType(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -1996,7 +1997,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenDashStyle(
+            partial internal static int GdipGetPenDashStyle(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2005,7 +2006,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenDashStyle(
+            partial internal static int GdipSetPenDashStyle(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2014,7 +2015,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenDashArray(
+            partial internal static int GdipSetPenDashArray(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2027,7 +2028,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenDashOffset(
+            partial internal static int GdipGetPenDashOffset(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2036,7 +2037,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenDashOffset(
+            partial internal static int GdipSetPenDashOffset(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2045,7 +2046,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenDashCount(
+            partial internal static int GdipGetPenDashCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2054,7 +2055,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenDashArray(
+            partial internal static int GdipGetPenDashArray(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2064,7 +2065,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenCompoundCount(
+            partial internal static int GdipGetPenCompoundCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2073,7 +2074,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPenCompoundArray(
+            partial internal static int GdipSetPenCompoundArray(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2083,7 +2084,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPenCompoundArray(
+            partial internal static int GdipGetPenCompoundArray(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2093,7 +2094,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetWorldTransform(
+            partial internal static int GdipSetWorldTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2105,7 +2106,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipResetWorldTransform(
+            partial internal static int GdipResetWorldTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2113,7 +2114,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipMultiplyWorldTransform(
+            partial internal static int GdipMultiplyWorldTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2126,7 +2127,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTranslateWorldTransform(
+            partial internal static int GdipTranslateWorldTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2137,7 +2138,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipScaleWorldTransform(
+            partial internal static int GdipScaleWorldTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2148,7 +2149,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipRotateWorldTransform(
+            partial internal static int GdipRotateWorldTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2158,7 +2159,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetWorldTransform(
+            partial internal static int GdipGetWorldTransform(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2170,7 +2171,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetCompositingMode(
+            partial internal static int GdipSetCompositingMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2179,7 +2180,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetTextRenderingHint(
+            partial internal static int GdipSetTextRenderingHint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2188,7 +2189,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetTextContrast(
+            partial internal static int GdipSetTextContrast(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2197,7 +2198,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetInterpolationMode(
+            partial internal static int GdipSetInterpolationMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2206,7 +2207,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCompositingMode(
+            partial internal static int GdipGetCompositingMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2215,7 +2216,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetRenderingOrigin(
+            partial internal static int GdipSetRenderingOrigin(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2225,7 +2226,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetRenderingOrigin(
+            partial internal static int GdipGetRenderingOrigin(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2235,7 +2236,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetCompositingQuality(
+            partial internal static int GdipSetCompositingQuality(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2244,7 +2245,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetCompositingQuality(
+            partial internal static int GdipGetCompositingQuality(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2253,7 +2254,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetSmoothingMode(
+            partial internal static int GdipSetSmoothingMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2262,7 +2263,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetSmoothingMode(
+            partial internal static int GdipGetSmoothingMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2271,7 +2272,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPixelOffsetMode(
+            partial internal static int GdipSetPixelOffsetMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2280,7 +2281,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPixelOffsetMode(
+            partial internal static int GdipGetPixelOffsetMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2289,7 +2290,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetTextRenderingHint(
+            partial internal static int GdipGetTextRenderingHint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2298,7 +2299,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetTextContrast(
+            partial internal static int GdipGetTextContrast(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2307,7 +2308,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetInterpolationMode(
+            partial internal static int GdipGetInterpolationMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2316,7 +2317,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPageUnit(
+            partial internal static int GdipGetPageUnit(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2325,7 +2326,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPageScale(
+            partial internal static int GdipGetPageScale(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2334,7 +2335,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPageUnit(
+            partial internal static int GdipSetPageUnit(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2343,7 +2344,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPageScale(
+            partial internal static int GdipSetPageScale(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2352,7 +2353,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetDpiX(
+            partial internal static int GdipGetDpiX(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2361,7 +2362,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetDpiY(
+            partial internal static int GdipGetDpiY(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2370,10 +2371,10 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateMatrix(out IntPtr matrix);
+            partial internal static int GdipCreateMatrix(out IntPtr matrix);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateMatrix2(
+            partial internal static int GdipCreateMatrix2(
                 float m11,
                 float m12,
                 float m21,
@@ -2384,21 +2385,21 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateMatrix3(
+            partial internal static int GdipCreateMatrix3(
                 ref RectangleF rect,
                 PointF* dstplg,
                 out IntPtr matrix
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateMatrix3I(
+            partial internal static int GdipCreateMatrix3I(
                 ref Rectangle rect,
                 Point* dstplg,
                 out IntPtr matrix
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneMatrix(
+            partial internal static int GdipCloneMatrix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2407,7 +2408,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeleteMatrix(
+            partial internal static int GdipDeleteMatrix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2415,7 +2416,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetMatrixElements(
+            partial internal static int GdipSetMatrixElements(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2429,7 +2430,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipMultiplyMatrix(
+            partial internal static int GdipMultiplyMatrix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2442,7 +2443,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTranslateMatrix(
+            partial internal static int GdipTranslateMatrix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2453,7 +2454,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipScaleMatrix(
+            partial internal static int GdipScaleMatrix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2464,7 +2465,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipRotateMatrix(
+            partial internal static int GdipRotateMatrix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2474,7 +2475,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipShearMatrix(
+            partial internal static int GdipShearMatrix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2485,7 +2486,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipInvertMatrix(
+            partial internal static int GdipInvertMatrix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2493,7 +2494,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTransformMatrixPoints(
+            partial internal static int GdipTransformMatrixPoints(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2503,7 +2504,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTransformMatrixPointsI(
+            partial internal static int GdipTransformMatrixPointsI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2513,7 +2514,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipVectorTransformMatrixPoints(
+            partial internal static int GdipVectorTransformMatrixPoints(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2523,7 +2524,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipVectorTransformMatrixPointsI(
+            partial internal static int GdipVectorTransformMatrixPointsI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2533,7 +2534,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static unsafe partial int GdipGetMatrixElements(
+            partial internal static unsafe int GdipGetMatrixElements(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2542,7 +2543,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsMatrixInvertible(
+            partial internal static int GdipIsMatrixInvertible(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2551,7 +2552,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsMatrixIdentity(
+            partial internal static int GdipIsMatrixIdentity(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2560,7 +2561,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsMatrixEqual(
+            partial internal static int GdipIsMatrixEqual(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2573,22 +2574,22 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateRegion(out IntPtr region);
+            partial internal static int GdipCreateRegion(out IntPtr region);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateRegionRect(
+            partial internal static int GdipCreateRegionRect(
                 ref RectangleF gprectf,
                 out IntPtr region
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateRegionRectI(
+            partial internal static int GdipCreateRegionRectI(
                 ref Rectangle gprect,
                 out IntPtr region
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateRegionPath(
+            partial internal static int GdipCreateRegionPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2597,17 +2598,17 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateRegionRgnData(
+            partial internal static int GdipCreateRegionRgnData(
                 byte[] rgndata,
                 int size,
                 out IntPtr region
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateRegionHrgn(IntPtr hRgn, out IntPtr region);
+            partial internal static int GdipCreateRegionHrgn(IntPtr hRgn, out IntPtr region);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneRegion(
+            partial internal static int GdipCloneRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2616,7 +2617,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeleteRegion(
+            partial internal static int GdipDeleteRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2624,7 +2625,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillRegion(
+            partial internal static int GdipFillRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2640,7 +2641,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetInfinite(
+            partial internal static int GdipSetInfinite(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2648,7 +2649,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetEmpty(
+            partial internal static int GdipSetEmpty(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2656,7 +2657,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCombineRegionRect(
+            partial internal static int GdipCombineRegionRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2666,7 +2667,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCombineRegionRectI(
+            partial internal static int GdipCombineRegionRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2676,7 +2677,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCombineRegionPath(
+            partial internal static int GdipCombineRegionPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2689,7 +2690,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCombineRegionRegion(
+            partial internal static int GdipCombineRegionRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2702,7 +2703,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTranslateRegion(
+            partial internal static int GdipTranslateRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2712,7 +2713,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTranslateRegionI(
+            partial internal static int GdipTranslateRegionI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2722,7 +2723,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTransformRegion(
+            partial internal static int GdipTransformRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2734,7 +2735,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetRegionBounds(
+            partial internal static int GdipGetRegionBounds(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2747,7 +2748,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetRegionHRgn(
+            partial internal static int GdipGetRegionHRgn(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2760,7 +2761,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsEmptyRegion(
+            partial internal static int GdipIsEmptyRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2773,7 +2774,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsInfiniteRegion(
+            partial internal static int GdipIsInfiniteRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2786,7 +2787,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsEqualRegion(
+            partial internal static int GdipIsEqualRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2803,7 +2804,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetRegionDataSize(
+            partial internal static int GdipGetRegionDataSize(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2812,7 +2813,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetRegionData(
+            partial internal static int GdipGetRegionData(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2823,7 +2824,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisibleRegionPoint(
+            partial internal static int GdipIsVisibleRegionPoint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2838,7 +2839,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisibleRegionPointI(
+            partial internal static int GdipIsVisibleRegionPointI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2853,7 +2854,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisibleRegionRect(
+            partial internal static int GdipIsVisibleRegionRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2870,7 +2871,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisibleRegionRectI(
+            partial internal static int GdipIsVisibleRegionRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2887,7 +2888,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetRegionScansCount(
+            partial internal static int GdipGetRegionScansCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2900,7 +2901,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetRegionScans(
+            partial internal static int GdipGetRegionScans(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2914,10 +2915,10 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateFromHDC(IntPtr hdc, out IntPtr graphics);
+            partial internal static int GdipCreateFromHDC(IntPtr hdc, out IntPtr graphics);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetClipGraphics(
+            partial internal static int GdipSetClipGraphics(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2930,7 +2931,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetClipRect(
+            partial internal static int GdipSetClipRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2943,7 +2944,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetClipRectI(
+            partial internal static int GdipSetClipRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2956,7 +2957,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetClipPath(
+            partial internal static int GdipSetClipPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2969,7 +2970,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetClipRegion(
+            partial internal static int GdipSetClipRegion(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2982,7 +2983,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipResetClip(
+            partial internal static int GdipResetClip(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -2990,7 +2991,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTranslateClip(
+            partial internal static int GdipTranslateClip(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3000,7 +3001,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetClip(
+            partial internal static int GdipGetClip(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3012,7 +3013,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetClipBounds(
+            partial internal static int GdipGetClipBounds(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3021,7 +3022,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsClipEmpty(
+            partial internal static int GdipIsClipEmpty(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3030,7 +3031,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetVisibleClipBounds(
+            partial internal static int GdipGetVisibleClipBounds(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3039,7 +3040,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisibleClipEmpty(
+            partial internal static int GdipIsVisibleClipEmpty(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3048,7 +3049,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisiblePoint(
+            partial internal static int GdipIsVisiblePoint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3059,7 +3060,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisiblePointI(
+            partial internal static int GdipIsVisiblePointI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3070,7 +3071,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisibleRect(
+            partial internal static int GdipIsVisibleRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3083,7 +3084,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisibleRectI(
+            partial internal static int GdipIsVisibleRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3096,7 +3097,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipFlush(
+            partial internal static int GdipFlush(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3105,7 +3106,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetDC(
+            partial internal static int GdipGetDC(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3114,7 +3115,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetStringFormatMeasurableCharacterRanges(
+            partial internal static int GdipSetStringFormatMeasurableCharacterRanges(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3124,20 +3125,20 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateStringFormat(
+            partial internal static int GdipCreateStringFormat(
                 StringFormatFlags options,
                 int language,
                 out IntPtr format
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipStringFormatGetGenericDefault(out IntPtr format);
+            partial internal static int GdipStringFormatGetGenericDefault(out IntPtr format);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipStringFormatGetGenericTypographic(out IntPtr format);
+            partial internal static int GdipStringFormatGetGenericTypographic(out IntPtr format);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeleteStringFormat(
+            partial internal static int GdipDeleteStringFormat(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3145,7 +3146,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneStringFormat(
+            partial internal static int GdipCloneStringFormat(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3154,7 +3155,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetStringFormatFlags(
+            partial internal static int GdipSetStringFormatFlags(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3163,7 +3164,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetStringFormatFlags(
+            partial internal static int GdipGetStringFormatFlags(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3172,7 +3173,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetStringFormatAlign(
+            partial internal static int GdipSetStringFormatAlign(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3181,7 +3182,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetStringFormatAlign(
+            partial internal static int GdipGetStringFormatAlign(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3190,7 +3191,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetStringFormatLineAlign(
+            partial internal static int GdipSetStringFormatLineAlign(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3199,7 +3200,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetStringFormatLineAlign(
+            partial internal static int GdipGetStringFormatLineAlign(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3208,7 +3209,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetStringFormatHotkeyPrefix(
+            partial internal static int GdipSetStringFormatHotkeyPrefix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3217,7 +3218,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetStringFormatHotkeyPrefix(
+            partial internal static int GdipGetStringFormatHotkeyPrefix(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3226,7 +3227,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetStringFormatTabStops(
+            partial internal static int GdipSetStringFormatTabStops(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3237,7 +3238,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetStringFormatTabStops(
+            partial internal static int GdipGetStringFormatTabStops(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3248,7 +3249,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetStringFormatTabStopCount(
+            partial internal static int GdipGetStringFormatTabStopCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3257,7 +3258,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetStringFormatMeasurableCharacterRangeCount(
+            partial internal static int GdipGetStringFormatMeasurableCharacterRangeCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3266,7 +3267,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetStringFormatTrimming(
+            partial internal static int GdipSetStringFormatTrimming(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3275,7 +3276,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetStringFormatTrimming(
+            partial internal static int GdipGetStringFormatTrimming(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3284,7 +3285,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetStringFormatDigitSubstitution(
+            partial internal static int GdipSetStringFormatDigitSubstitution(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3294,7 +3295,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetStringFormatDigitSubstitution(
+            partial internal static int GdipGetStringFormatDigitSubstitution(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3304,7 +3305,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageDimension(
+            partial internal static int GdipGetImageDimension(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3314,7 +3315,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageWidth(
+            partial internal static int GdipGetImageWidth(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3323,7 +3324,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageHeight(
+            partial internal static int GdipGetImageHeight(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3332,7 +3333,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageHorizontalResolution(
+            partial internal static int GdipGetImageHorizontalResolution(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3341,7 +3342,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageVerticalResolution(
+            partial internal static int GdipGetImageVerticalResolution(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3350,7 +3351,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageFlags(
+            partial internal static int GdipGetImageFlags(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3359,7 +3360,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageRawFormat(
+            partial internal static int GdipGetImageRawFormat(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3368,7 +3369,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImagePixelFormat(
+            partial internal static int GdipGetImagePixelFormat(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3377,7 +3378,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipImageGetFrameCount(
+            partial internal static int GdipImageGetFrameCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3387,7 +3388,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipImageSelectActiveFrame(
+            partial internal static int GdipImageSelectActiveFrame(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3397,7 +3398,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipImageRotateFlip(
+            partial internal static int GdipImageRotateFlip(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3406,7 +3407,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetAllPropertyItems(
+            partial internal static int GdipGetAllPropertyItems(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3417,7 +3418,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPropertyCount(
+            partial internal static int GdipGetPropertyCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3426,7 +3427,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPropertyIdList(
+            partial internal static int GdipGetPropertyIdList(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3436,7 +3437,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPropertyItem(
+            partial internal static int GdipGetPropertyItem(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3447,7 +3448,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPropertyItemSize(
+            partial internal static int GdipGetPropertyItemSize(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3457,7 +3458,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPropertySize(
+            partial internal static int GdipGetPropertySize(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3467,7 +3468,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipRemovePropertyItem(
+            partial internal static int GdipRemovePropertyItem(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3476,7 +3477,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPropertyItem(
+            partial internal static int GdipSetPropertyItem(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3485,7 +3486,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageType(
+            partial internal static int GdipGetImageType(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3494,10 +3495,10 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageType(IntPtr image, out int type);
+            partial internal static int GdipGetImageType(IntPtr image, out int type);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDisposeImage(
+            partial internal static int GdipDisposeImage(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3505,22 +3506,22 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDisposeImage(IntPtr image);
+            partial internal static int GdipDisposeImage(IntPtr image);
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipCreateBitmapFromFile(
+            partial internal static int GdipCreateBitmapFromFile(
                 string filename,
                 out IntPtr bitmap
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipCreateBitmapFromFileICM(
+            partial internal static int GdipCreateBitmapFromFileICM(
                 string filename,
                 out IntPtr bitmap
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateBitmapFromScan0(
+            partial internal static int GdipCreateBitmapFromScan0(
                 int width,
                 int height,
                 int stride,
@@ -3530,7 +3531,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateBitmapFromGraphics(
+            partial internal static int GdipCreateBitmapFromGraphics(
                 int width,
                 int height,
 #if NET7_0_OR_GREATER
@@ -3541,24 +3542,24 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateBitmapFromHBITMAP(
+            partial internal static int GdipCreateBitmapFromHBITMAP(
                 IntPtr hbitmap,
                 IntPtr hpalette,
                 out IntPtr bitmap
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateBitmapFromHICON(IntPtr hicon, out IntPtr bitmap);
+            partial internal static int GdipCreateBitmapFromHICON(IntPtr hicon, out IntPtr bitmap);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateBitmapFromResource(
+            partial internal static int GdipCreateBitmapFromResource(
                 IntPtr hresource,
                 IntPtr name,
                 out IntPtr bitmap
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateHBITMAPFromBitmap(
+            partial internal static int GdipCreateHBITMAPFromBitmap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3568,7 +3569,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateHICONFromBitmap(
+            partial internal static int GdipCreateHICONFromBitmap(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3577,7 +3578,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneBitmapArea(
+            partial internal static int GdipCloneBitmapArea(
                 float x,
                 float y,
                 float width,
@@ -3591,7 +3592,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneBitmapAreaI(
+            partial internal static int GdipCloneBitmapAreaI(
                 int x,
                 int y,
                 int width,
@@ -3605,7 +3606,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipBitmapLockBits(
+            partial internal static int GdipBitmapLockBits(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3620,7 +3621,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipBitmapUnlockBits(
+            partial internal static int GdipBitmapUnlockBits(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3632,7 +3633,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipBitmapGetPixel(
+            partial internal static int GdipBitmapGetPixel(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3643,7 +3644,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipBitmapSetPixel(
+            partial internal static int GdipBitmapSetPixel(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3654,7 +3655,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipBitmapSetResolution(
+            partial internal static int GdipBitmapSetResolution(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3664,7 +3665,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipImageGetFrameDimensionsCount(
+            partial internal static int GdipImageGetFrameDimensionsCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3673,7 +3674,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipImageGetFrameDimensionsList(
+            partial internal static int GdipImageGetFrameDimensionsList(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3683,14 +3684,14 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateMetafileFromEmf(
+            partial internal static int GdipCreateMetafileFromEmf(
                 IntPtr hEnhMetafile,
                 [MarshalAs(UnmanagedType.Bool)] bool deleteEmf,
                 out IntPtr metafile
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateMetafileFromWmf(
+            partial internal static int GdipCreateMetafileFromWmf(
                 IntPtr hMetafile,
                 [MarshalAs(UnmanagedType.Bool)] bool deleteWmf,
 #if NET7_0_OR_GREATER
@@ -3701,13 +3702,13 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipCreateMetafileFromFile(
+            partial internal static int GdipCreateMetafileFromFile(
                 string file,
                 out IntPtr metafile
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipRecordMetafile(
+            partial internal static int GdipRecordMetafile(
                 IntPtr referenceHdc,
                 EmfType emfType,
                 IntPtr pframeRect,
@@ -3717,7 +3718,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipRecordMetafile(
+            partial internal static int GdipRecordMetafile(
                 IntPtr referenceHdc,
                 EmfType emfType,
                 ref RectangleF frameRect,
@@ -3727,7 +3728,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipRecordMetafileI(
+            partial internal static int GdipRecordMetafileI(
                 IntPtr referenceHdc,
                 EmfType emfType,
                 ref Rectangle frameRect,
@@ -3737,7 +3738,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipRecordMetafileFileName(
+            partial internal static int GdipRecordMetafileFileName(
                 string fileName,
                 IntPtr referenceHdc,
                 EmfType emfType,
@@ -3748,7 +3749,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipRecordMetafileFileName(
+            partial internal static int GdipRecordMetafileFileName(
                 string fileName,
                 IntPtr referenceHdc,
                 EmfType emfType,
@@ -3759,7 +3760,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipRecordMetafileFileNameI(
+            partial internal static int GdipRecordMetafileFileNameI(
                 string fileName,
                 IntPtr referenceHdc,
                 EmfType emfType,
@@ -3770,7 +3771,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipPlayMetafileRecord(
+            partial internal static int GdipPlayMetafileRecord(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3782,7 +3783,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSaveGraphics(
+            partial internal static int GdipSaveGraphics(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3791,7 +3792,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawArc(
+            partial internal static int GdipDrawArc(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3809,7 +3810,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawArcI(
+            partial internal static int GdipDrawArcI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3827,7 +3828,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawLinesI(
+            partial internal static int GdipDrawLinesI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3841,7 +3842,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawBezier(
+            partial internal static int GdipDrawBezier(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3861,7 +3862,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawEllipse(
+            partial internal static int GdipDrawEllipse(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3877,7 +3878,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawEllipseI(
+            partial internal static int GdipDrawEllipseI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3893,7 +3894,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawLine(
+            partial internal static int GdipDrawLine(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3909,7 +3910,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawLineI(
+            partial internal static int GdipDrawLineI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3925,7 +3926,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawLines(
+            partial internal static int GdipDrawLines(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3939,7 +3940,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawPath(
+            partial internal static int GdipDrawPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3955,7 +3956,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawPie(
+            partial internal static int GdipDrawPie(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3973,7 +3974,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawPieI(
+            partial internal static int GdipDrawPieI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -3991,7 +3992,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawPolygon(
+            partial internal static int GdipDrawPolygon(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4005,7 +4006,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawPolygonI(
+            partial internal static int GdipDrawPolygonI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4019,7 +4020,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillEllipse(
+            partial internal static int GdipFillEllipse(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4035,7 +4036,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillEllipseI(
+            partial internal static int GdipFillEllipseI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4051,7 +4052,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillPolygon(
+            partial internal static int GdipFillPolygon(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4066,7 +4067,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillPolygonI(
+            partial internal static int GdipFillPolygonI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4081,7 +4082,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillRectangle(
+            partial internal static int GdipFillRectangle(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4097,7 +4098,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillRectangleI(
+            partial internal static int GdipFillRectangleI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4113,7 +4114,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillRectangles(
+            partial internal static int GdipFillRectangles(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4127,7 +4128,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillRectanglesI(
+            partial internal static int GdipFillRectanglesI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4145,7 +4146,7 @@ namespace System.Drawing
                 SetLastError = true,
                 StringMarshalling = StringMarshalling.Utf16
             )]
-            internal static partial int GdipDrawString(
+            partial internal static int GdipDrawString(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4168,7 +4169,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImageRectI(
+            partial internal static int GdipDrawImageRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4184,7 +4185,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGraphicsClear(
+            partial internal static int GdipGraphicsClear(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4193,7 +4194,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawClosedCurve(
+            partial internal static int GdipDrawClosedCurve(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4207,7 +4208,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawClosedCurveI(
+            partial internal static int GdipDrawClosedCurveI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4221,65 +4222,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawClosedCurve2(
-#if NET7_0_OR_GREATER
-                [MarshalUsing(typeof(HandleRefMarshaller))]
-#endif
-                HandleRef graphics,
-#if NET7_0_OR_GREATER
-                [MarshalUsing(typeof(HandleRefMarshaller))]
-#endif
-                HandleRef pen,
-                PointF* points,
-                int count,
-                float tension
-            );
-
-            [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawClosedCurve2I(
-#if NET7_0_OR_GREATER
-                [MarshalUsing(typeof(HandleRefMarshaller))]
-#endif
-                HandleRef graphics,
-#if NET7_0_OR_GREATER
-                [MarshalUsing(typeof(HandleRefMarshaller))]
-#endif
-                HandleRef pen,
-                Point* points,
-                int count,
-                float tension
-            );
-
-            [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawCurve(
-#if NET7_0_OR_GREATER
-                [MarshalUsing(typeof(HandleRefMarshaller))]
-#endif
-                HandleRef graphics,
-#if NET7_0_OR_GREATER
-                [MarshalUsing(typeof(HandleRefMarshaller))]
-#endif
-                HandleRef pen,
-                PointF* points,
-                int count
-            );
-
-            [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawCurveI(
-#if NET7_0_OR_GREATER
-                [MarshalUsing(typeof(HandleRefMarshaller))]
-#endif
-                HandleRef graphics,
-#if NET7_0_OR_GREATER
-                [MarshalUsing(typeof(HandleRefMarshaller))]
-#endif
-                HandleRef pen,
-                Point* points,
-                int count
-            );
-
-            [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawCurve2(
+            partial internal static int GdipDrawClosedCurve2(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4294,7 +4237,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawCurve2I(
+            partial internal static int GdipDrawClosedCurve2I(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4309,7 +4252,65 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawCurve3(
+            partial internal static int GdipDrawCurve(
+#if NET7_0_OR_GREATER
+                [MarshalUsing(typeof(HandleRefMarshaller))]
+#endif
+                HandleRef graphics,
+#if NET7_0_OR_GREATER
+                [MarshalUsing(typeof(HandleRefMarshaller))]
+#endif
+                HandleRef pen,
+                PointF* points,
+                int count
+            );
+
+            [LibraryImport(LibraryName, SetLastError = true)]
+            partial internal static int GdipDrawCurveI(
+#if NET7_0_OR_GREATER
+                [MarshalUsing(typeof(HandleRefMarshaller))]
+#endif
+                HandleRef graphics,
+#if NET7_0_OR_GREATER
+                [MarshalUsing(typeof(HandleRefMarshaller))]
+#endif
+                HandleRef pen,
+                Point* points,
+                int count
+            );
+
+            [LibraryImport(LibraryName, SetLastError = true)]
+            partial internal static int GdipDrawCurve2(
+#if NET7_0_OR_GREATER
+                [MarshalUsing(typeof(HandleRefMarshaller))]
+#endif
+                HandleRef graphics,
+#if NET7_0_OR_GREATER
+                [MarshalUsing(typeof(HandleRefMarshaller))]
+#endif
+                HandleRef pen,
+                PointF* points,
+                int count,
+                float tension
+            );
+
+            [LibraryImport(LibraryName, SetLastError = true)]
+            partial internal static int GdipDrawCurve2I(
+#if NET7_0_OR_GREATER
+                [MarshalUsing(typeof(HandleRefMarshaller))]
+#endif
+                HandleRef graphics,
+#if NET7_0_OR_GREATER
+                [MarshalUsing(typeof(HandleRefMarshaller))]
+#endif
+                HandleRef pen,
+                Point* points,
+                int count,
+                float tension
+            );
+
+            [LibraryImport(LibraryName, SetLastError = true)]
+            partial internal static int GdipDrawCurve3(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4326,7 +4327,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawCurve3I(
+            partial internal static int GdipDrawCurve3I(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4343,7 +4344,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillClosedCurve(
+            partial internal static int GdipFillClosedCurve(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4357,7 +4358,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillClosedCurveI(
+            partial internal static int GdipFillClosedCurveI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4371,7 +4372,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillClosedCurve2(
+            partial internal static int GdipFillClosedCurve2(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4387,7 +4388,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillClosedCurve2I(
+            partial internal static int GdipFillClosedCurve2I(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4403,7 +4404,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillPie(
+            partial internal static int GdipFillPie(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4421,7 +4422,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillPieI(
+            partial internal static int GdipFillPieI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4439,7 +4440,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipMeasureString(
+            partial internal static int GdipMeasureString(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4461,7 +4462,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipMeasureCharacterRanges(
+            partial internal static int GdipMeasureCharacterRanges(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4482,7 +4483,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImageI(
+            partial internal static int GdipDrawImageI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4496,7 +4497,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImage(
+            partial internal static int GdipDrawImage(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4510,7 +4511,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImagePoints(
+            partial internal static int GdipDrawImagePoints(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4524,7 +4525,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImagePointsI(
+            partial internal static int GdipDrawImagePointsI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4538,7 +4539,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImageRectRectI(
+            partial internal static int GdipDrawImageRectRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4571,7 +4572,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImagePointsRect(
+            partial internal static int GdipDrawImagePointsRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4602,7 +4603,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImageRectRect(
+            partial internal static int GdipDrawImageRectRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4635,7 +4636,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImagePointsRectI(
+            partial internal static int GdipDrawImagePointsRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4666,7 +4667,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImageRect(
+            partial internal static int GdipDrawImageRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4682,7 +4683,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImagePointRect(
+            partial internal static int GdipDrawImagePointRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4701,7 +4702,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawImagePointRectI(
+            partial internal static int GdipDrawImagePointRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4720,7 +4721,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawRectangle(
+            partial internal static int GdipDrawRectangle(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4736,7 +4737,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawRectangleI(
+            partial internal static int GdipDrawRectangleI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4752,7 +4753,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawRectangles(
+            partial internal static int GdipDrawRectangles(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4766,7 +4767,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawRectanglesI(
+            partial internal static int GdipDrawRectanglesI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4780,7 +4781,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTransformPoints(
+            partial internal static int GdipTransformPoints(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4792,7 +4793,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTransformPointsI(
+            partial internal static int GdipTransformPointsI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4804,13 +4805,13 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipLoadImageFromFileICM(string filename, out IntPtr image);
+            partial internal static int GdipLoadImageFromFileICM(string filename, out IntPtr image);
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipLoadImageFromFile(string filename, out IntPtr image);
+            partial internal static int GdipLoadImageFromFile(string filename, out IntPtr image);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetEncoderParameterListSize(
+            partial internal static int GdipGetEncoderParameterListSize(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4820,7 +4821,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetEncoderParameterList(
+            partial internal static int GdipGetEncoderParameterList(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4831,10 +4832,10 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreatePath(int brushMode, out IntPtr path);
+            partial internal static int GdipCreatePath(int brushMode, out IntPtr path);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreatePath2(
+            partial internal static int GdipCreatePath2(
                 PointF* points,
                 byte* types,
                 int count,
@@ -4843,7 +4844,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreatePath2I(
+            partial internal static int GdipCreatePath2I(
                 Point* points,
                 byte* types,
                 int count,
@@ -4852,7 +4853,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipClonePath(
+            partial internal static int GdipClonePath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4861,7 +4862,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeletePath(
+            partial internal static int GdipDeletePath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4869,7 +4870,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipResetPath(
+            partial internal static int GdipResetPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4877,7 +4878,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPointCount(
+            partial internal static int GdipGetPointCount(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4886,7 +4887,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathTypes(
+            partial internal static int GdipGetPathTypes(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4896,7 +4897,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathPoints(
+            partial internal static int GdipGetPathPoints(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4906,7 +4907,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathFillMode(
+            partial internal static int GdipGetPathFillMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4915,7 +4916,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathFillMode(
+            partial internal static int GdipSetPathFillMode(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4924,7 +4925,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathData(
+            partial internal static int GdipGetPathData(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4933,7 +4934,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipStartPathFigure(
+            partial internal static int GdipStartPathFigure(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4941,7 +4942,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipClosePathFigure(
+            partial internal static int GdipClosePathFigure(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4949,7 +4950,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipClosePathFigures(
+            partial internal static int GdipClosePathFigures(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4957,7 +4958,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetPathMarker(
+            partial internal static int GdipSetPathMarker(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4965,7 +4966,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipClearPathMarkers(
+            partial internal static int GdipClearPathMarkers(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4973,7 +4974,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipReversePath(
+            partial internal static int GdipReversePath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4981,7 +4982,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathLastPoint(
+            partial internal static int GdipGetPathLastPoint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -4990,7 +4991,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathLine(
+            partial internal static int GdipAddPathLine(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5002,7 +5003,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathLine2(
+            partial internal static int GdipAddPathLine2(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5012,7 +5013,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathArc(
+            partial internal static int GdipAddPathArc(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5026,7 +5027,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathBezier(
+            partial internal static int GdipAddPathBezier(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5042,7 +5043,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathBeziers(
+            partial internal static int GdipAddPathBeziers(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5052,7 +5053,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathCurve(
+            partial internal static int GdipAddPathCurve(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5062,7 +5063,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathCurve2(
+            partial internal static int GdipAddPathCurve2(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5073,7 +5074,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathCurve3(
+            partial internal static int GdipAddPathCurve3(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5086,7 +5087,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathClosedCurve(
+            partial internal static int GdipAddPathClosedCurve(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5096,7 +5097,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathClosedCurve2(
+            partial internal static int GdipAddPathClosedCurve2(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5107,7 +5108,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathRectangle(
+            partial internal static int GdipAddPathRectangle(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5119,7 +5120,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathRectangles(
+            partial internal static int GdipAddPathRectangles(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5129,7 +5130,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathEllipse(
+            partial internal static int GdipAddPathEllipse(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5141,7 +5142,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathPie(
+            partial internal static int GdipAddPathPie(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5155,7 +5156,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathPolygon(
+            partial internal static int GdipAddPathPolygon(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5165,7 +5166,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathPath(
+            partial internal static int GdipAddPathPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5178,7 +5179,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipAddPathString(
+            partial internal static int GdipAddPathString(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5199,7 +5200,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipAddPathStringI(
+            partial internal static int GdipAddPathStringI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5220,7 +5221,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathLineI(
+            partial internal static int GdipAddPathLineI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5232,7 +5233,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathLine2I(
+            partial internal static int GdipAddPathLine2I(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5242,7 +5243,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathArcI(
+            partial internal static int GdipAddPathArcI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5256,7 +5257,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathBezierI(
+            partial internal static int GdipAddPathBezierI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5272,7 +5273,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathBeziersI(
+            partial internal static int GdipAddPathBeziersI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5282,7 +5283,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathCurveI(
+            partial internal static int GdipAddPathCurveI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5292,7 +5293,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathCurve2I(
+            partial internal static int GdipAddPathCurve2I(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5303,7 +5304,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathCurve3I(
+            partial internal static int GdipAddPathCurve3I(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5316,7 +5317,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathClosedCurveI(
+            partial internal static int GdipAddPathClosedCurveI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5326,7 +5327,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathClosedCurve2I(
+            partial internal static int GdipAddPathClosedCurve2I(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5337,7 +5338,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathRectangleI(
+            partial internal static int GdipAddPathRectangleI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5349,7 +5350,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathRectanglesI(
+            partial internal static int GdipAddPathRectanglesI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5359,7 +5360,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathEllipseI(
+            partial internal static int GdipAddPathEllipseI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5371,7 +5372,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathPieI(
+            partial internal static int GdipAddPathPieI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5385,7 +5386,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipAddPathPolygonI(
+            partial internal static int GdipAddPathPolygonI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5395,7 +5396,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipFlattenPath(
+            partial internal static int GdipFlattenPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5408,7 +5409,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipWidenPath(
+            partial internal static int GdipWidenPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5425,7 +5426,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipWarpPath(
+            partial internal static int GdipWarpPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5445,7 +5446,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipTransformPath(
+            partial internal static int GdipTransformPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5457,7 +5458,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetPathWorldBounds(
+            partial internal static int GdipGetPathWorldBounds(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5474,7 +5475,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisiblePathPoint(
+            partial internal static int GdipIsVisiblePathPoint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5489,7 +5490,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsVisiblePathPointI(
+            partial internal static int GdipIsVisiblePathPointI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5504,7 +5505,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsOutlineVisiblePathPoint(
+            partial internal static int GdipIsOutlineVisiblePathPoint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5523,7 +5524,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipIsOutlineVisiblePathPointI(
+            partial internal static int GdipIsOutlineVisiblePathPointI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5542,7 +5543,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeleteBrush(
+            partial internal static int GdipDeleteBrush(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5550,13 +5551,13 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipLoadImageFromStream(IntPtr stream, IntPtr* image);
+            partial internal static int GdipLoadImageFromStream(IntPtr stream, IntPtr* image);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipLoadImageFromStreamICM(IntPtr stream, IntPtr* image);
+            partial internal static int GdipLoadImageFromStreamICM(IntPtr stream, IntPtr* image);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCloneImage(
+            partial internal static int GdipCloneImage(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5565,7 +5566,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipSaveImageToFile(
+            partial internal static int GdipSaveImageToFile(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5579,7 +5580,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSaveImageToStream(
+            partial internal static int GdipSaveImageToStream(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5593,7 +5594,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSaveAdd(
+            partial internal static int GdipSaveAdd(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5605,7 +5606,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSaveAddImage(
+            partial internal static int GdipSaveAddImage(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5621,7 +5622,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageGraphicsContext(
+            partial internal static int GdipGetImageGraphicsContext(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5630,7 +5631,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageBounds(
+            partial internal static int GdipGetImageBounds(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5640,7 +5641,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImageThumbnail(
+            partial internal static int GdipGetImageThumbnail(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5656,7 +5657,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImagePalette(
+            partial internal static int GdipGetImagePalette(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5666,7 +5667,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipSetImagePalette(
+            partial internal static int GdipSetImagePalette(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5675,7 +5676,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetImagePaletteSize(
+            partial internal static int GdipGetImagePaletteSize(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5684,20 +5685,20 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipImageForceValidation(IntPtr image);
+            partial internal static int GdipImageForceValidation(IntPtr image);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateFromHDC2(
+            partial internal static int GdipCreateFromHDC2(
                 IntPtr hdc,
                 IntPtr hdevice,
                 out IntPtr graphics
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateFromHWND(IntPtr hwnd, out IntPtr graphics);
+            partial internal static int GdipCreateFromHWND(IntPtr hwnd, out IntPtr graphics);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipDeleteGraphics(
+            partial internal static int GdipDeleteGraphics(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5705,7 +5706,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipReleaseDC(
+            partial internal static int GdipReleaseDC(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5714,7 +5715,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetNearestColor(
+            partial internal static int GdipGetNearestColor(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5723,10 +5724,10 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial IntPtr GdipCreateHalftonePalette();
+            partial internal static IntPtr GdipCreateHalftonePalette();
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawBeziers(
+            partial internal static int GdipDrawBeziers(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5740,7 +5741,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipDrawBeziersI(
+            partial internal static int GdipDrawBeziersI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5754,7 +5755,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, SetLastError = true)]
-            internal static partial int GdipFillPath(
+            partial internal static int GdipFillPath(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5770,7 +5771,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileDestPoint(
+            partial internal static int GdipEnumerateMetafileDestPoint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5792,7 +5793,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileDestPointI(
+            partial internal static int GdipEnumerateMetafileDestPointI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5814,7 +5815,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileDestRect(
+            partial internal static int GdipEnumerateMetafileDestRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5836,7 +5837,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileDestRectI(
+            partial internal static int GdipEnumerateMetafileDestRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5858,7 +5859,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileDestPoints(
+            partial internal static int GdipEnumerateMetafileDestPoints(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5881,7 +5882,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileDestPointsI(
+            partial internal static int GdipEnumerateMetafileDestPointsI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5904,7 +5905,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileSrcRectDestPoint(
+            partial internal static int GdipEnumerateMetafileSrcRectDestPoint(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5928,7 +5929,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileSrcRectDestPointI(
+            partial internal static int GdipEnumerateMetafileSrcRectDestPointI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5952,7 +5953,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileSrcRectDestRect(
+            partial internal static int GdipEnumerateMetafileSrcRectDestRect(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -5976,7 +5977,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileSrcRectDestRectI(
+            partial internal static int GdipEnumerateMetafileSrcRectDestRectI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -6000,7 +6001,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileSrcRectDestPoints(
+            partial internal static int GdipEnumerateMetafileSrcRectDestPoints(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -6025,7 +6026,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipEnumerateMetafileSrcRectDestPointsI(
+            partial internal static int GdipEnumerateMetafileSrcRectDestPointsI(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -6050,7 +6051,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipRestoreGraphics(
+            partial internal static int GdipRestoreGraphics(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -6059,7 +6060,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, EntryPoint = "GdipGetMetafileHeaderFromWmf")]
-            private static partial int GdipGetMetafileHeaderFromWmf_Internal(
+            partial private static int GdipGetMetafileHeaderFromWmf_Internal(
                 IntPtr hMetafile,
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(WmfPlaceableFileHeader.PinningMarshaller))]
@@ -6090,25 +6091,25 @@ namespace System.Drawing
             }
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetMetafileHeaderFromEmf(
+            partial internal static int GdipGetMetafileHeaderFromEmf(
                 IntPtr hEnhMetafile,
                 MetafileHeaderEmf metafileHeaderEmf
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipGetMetafileHeaderFromFile(
+            partial internal static int GdipGetMetafileHeaderFromFile(
                 string filename,
                 IntPtr header
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetMetafileHeaderFromStream(
+            partial internal static int GdipGetMetafileHeaderFromStream(
                 IntPtr stream,
                 IntPtr header
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetMetafileHeaderFromMetafile(
+            partial internal static int GdipGetMetafileHeaderFromMetafile(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -6117,7 +6118,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipGetHemfFromMetafile(
+            partial internal static int GdipGetHemfFromMetafile(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -6126,13 +6127,13 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateMetafileFromStream(
+            partial internal static int GdipCreateMetafileFromStream(
                 IntPtr stream,
                 IntPtr* metafile
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipRecordMetafileStream(
+            partial internal static int GdipRecordMetafileStream(
                 IntPtr stream,
                 IntPtr referenceHdc,
                 EmfType emfType,
@@ -6143,7 +6144,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipRecordMetafileStream(
+            partial internal static int GdipRecordMetafileStream(
                 IntPtr stream,
                 IntPtr referenceHdc,
                 EmfType emfType,
@@ -6154,7 +6155,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipRecordMetafileStreamI(
+            partial internal static int GdipRecordMetafileStreamI(
                 IntPtr stream,
                 IntPtr referenceHdc,
                 EmfType emfType,
@@ -6165,7 +6166,7 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipComment(
+            partial internal static int GdipComment(
 #if NET7_0_OR_GREATER
                 [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -6175,17 +6176,17 @@ namespace System.Drawing
             );
 
             [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf16)]
-            internal static partial int GdipCreateFontFromLogfontW(
+            partial internal static int GdipCreateFontFromLogfontW(
                 IntPtr hdc,
                 ref Interop.User32.LOGFONT lf,
                 out IntPtr font
             );
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateBitmapFromStream(IntPtr stream, IntPtr* bitmap);
+            partial internal static int GdipCreateBitmapFromStream(IntPtr stream, IntPtr* bitmap);
 
             [LibraryImport(LibraryName)]
-            internal static partial int GdipCreateBitmapFromStreamICM(
+            partial internal static int GdipCreateBitmapFromStreamICM(
                 IntPtr stream,
                 IntPtr* bitmap
             );

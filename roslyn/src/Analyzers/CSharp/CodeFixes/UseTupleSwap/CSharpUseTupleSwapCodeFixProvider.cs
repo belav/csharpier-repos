@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
         ),
         Shared
     ]
-    internal partial class CSharpUseTupleSwapCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    partial internal class CSharpUseTupleSwapCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

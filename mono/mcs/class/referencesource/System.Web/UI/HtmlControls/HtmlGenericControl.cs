@@ -74,7 +74,7 @@ namespace System.Web.UI.HtmlControls
             DefaultValue(""),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        new public string TagName
+        public new string TagName
         {
             get { return _tagName; }
             set { _tagName = value; }

@@ -41,7 +41,7 @@ namespace ShowLocallocAlignment
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private unsafe static void* SnapLocallocBufferAddress1(
+        private static unsafe void* SnapLocallocBufferAddress1(
             int arg1,
             int arg2,
             int arg3,
@@ -56,7 +56,7 @@ namespace ShowLocallocAlignment
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private unsafe static void* SnapLocallocBufferAddress2(
+        private static unsafe void* SnapLocallocBufferAddress2(
             int arg1,
             int arg2,
             int arg3,
@@ -70,7 +70,7 @@ namespace ShowLocallocAlignment
             return (void*)buffer;
         }
 
-        private unsafe static int RunAlignmentCheckScenario()
+        private static unsafe int RunAlignmentCheckScenario()
         {
             UInt64 address1;
             UInt64 address2;

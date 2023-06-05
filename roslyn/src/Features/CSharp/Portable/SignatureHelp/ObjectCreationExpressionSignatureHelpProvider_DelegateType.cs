@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 {
-    internal partial class ObjectCreationExpressionSignatureHelpProvider
+    partial internal class ObjectCreationExpressionSignatureHelpProvider
     {
         private static ImmutableArray<SignatureHelpItem> ConvertDelegateTypeConstructor(
             BaseObjectCreationExpressionSyntax objectCreationExpression,

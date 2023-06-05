@@ -8,7 +8,7 @@ using System.Security.Policy;
 
 namespace System.CodeDom.Compiler
 {
-    public partial class CompilerParameters
+    partial public class CompilerParameters
     {
         private Evidence _evidence;
 

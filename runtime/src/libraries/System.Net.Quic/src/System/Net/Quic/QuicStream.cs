@@ -20,6 +20,7 @@ using SHUTDOWN_COMPLETE = Microsoft.Quic.QUIC_STREAM_EVENT._Anonymous_e__Union._
 
 namespace System.Net.Quic;
 
+partial
 /// <summary>
 /// Represents a QUIC stream, see <see href="https://www.rfc-editor.org/rfc/rfc9000.html#name-streams">RFC 9000: Streams</see> for more details.
 /// <see cref="QuicStream" /> can be <see cref="QuicStreamType.Unidirectional">unidirectional</see>, i.e.: write-only for the opening side,
@@ -51,7 +52,7 @@ namespace System.Net.Quic;
 /// </item>
 /// </list>
 /// </remarks>
-public sealed partial class QuicStream
+public sealed class QuicStream
 {
     /// <summary>
     /// Handle to MsQuic connection object.

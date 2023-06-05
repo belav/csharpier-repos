@@ -14,6 +14,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
+partial
 /// <summary>
 /// Default implementation of <see cref="IRazorViewEngine"/>.
 /// </summary>
@@ -23,7 +24,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor;
 /// by default. For the controllers in an area, views should exist in
 /// <see cref="RazorViewEngineOptions.AreaViewLocationFormats"/>.
 /// </remarks>
-public partial class RazorViewEngine : IRazorViewEngine
+public class RazorViewEngine : IRazorViewEngine
 {
     /// <summary>
     /// The view extension
@@ -541,7 +542,7 @@ public partial class RazorViewEngine : IRazorViewEngine
         return name.EndsWith(ViewExtension, StringComparison.OrdinalIgnoreCase);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -549,7 +550,7 @@ public partial class RazorViewEngine : IRazorViewEngine
             "View lookup cache miss for view '{ViewName}' in controller '{ControllerName}'.",
             EventName = "ViewLookupCacheMiss"
         )]
-        public static partial void ViewLookupCacheMiss(
+        partial public static void ViewLookupCacheMiss(
             ILogger logger,
             string viewName,
             string? controllerName
@@ -561,7 +562,7 @@ public partial class RazorViewEngine : IRazorViewEngine
             "View lookup cache hit for view '{ViewName}' in controller '{ControllerName}'.",
             EventName = "ViewLookupCacheHit"
         )]
-        public static partial void ViewLookupCacheHit(
+        partial public static void ViewLookupCacheHit(
             ILogger logger,
             string viewName,
             string? controllerName

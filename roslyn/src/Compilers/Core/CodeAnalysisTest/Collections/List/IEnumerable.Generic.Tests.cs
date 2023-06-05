@@ -18,11 +18,12 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
+    partial
     /// <summary>
     /// Contains tests that ensure the correctness of any class that implements the generic
     /// IEnumerable interface.
     /// </summary>
-    public abstract partial class IEnumerable_Generic_Tests<T> : TestBase<T>
+    public abstract class IEnumerable_Generic_Tests<T> : TestBase<T>
         where T : notnull
     {
         #region IEnumerable<T> Helper Methods

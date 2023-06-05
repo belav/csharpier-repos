@@ -73,7 +73,7 @@ namespace System.Web.Configuration
             s_slashSplit = new char[PathSeparator];
         }
 
-        static internal string DefaultSiteName
+        internal static string DefaultSiteName
         {
             get
             {
@@ -93,7 +93,9 @@ namespace System.Web.Configuration
         }
 
         // Not used in runtime because in runtime we have all the siteid, appPath, etc. already.
-        static internal void GetConfigPaths(
+        internal
+        // Not used in runtime because in runtime we have all the siteid, appPath, etc. already.
+        static void GetConfigPaths(
             IConfigMapPath configMapPath,
             WebLevel webLevel,
             VirtualPath virtualPath,
@@ -397,25 +399,38 @@ namespace System.Web.Configuration
         //          MACHINE/WEBROOT/[Site ID]/[Path Component]/[Path Component]/...
         //
 
-        static internal bool IsMachineConfigPath(string configPath)
+        internal
+        //
+        // Utilities to parse config path
+        //
+        // In both WHIDBEY and ORCAS, Path has the format:
+        //          MACHINE/WEBROOT/[Site ID]/[Path Component]/[Path Component]/...
+        //
+
+        static bool IsMachineConfigPath(string configPath)
         {
             return configPath.Length == MachineConfigPath.Length;
         }
 
-        static internal bool IsRootWebConfigPath(string configPath)
+        internal static bool IsRootWebConfigPath(string configPath)
         {
             return configPath.Length == RootWebConfigPath.Length;
         }
 
         // Does the configPath represent a virtual path?
-        static internal bool IsVirtualPathConfigPath(string configPath)
+        internal
+        // Does the configPath represent a virtual path?
+        static bool IsVirtualPathConfigPath(string configPath)
         {
             return configPath.Length > RootWebConfigPath.Length;
         }
 
         // A site argument that begins or ends in slashes will prevent
         // us from using it in a configPath
-        static internal bool IsValidSiteArgument(string site)
+        internal
+        // A site argument that begins or ends in slashes will prevent
+        // us from using it in a configPath
+        static bool IsValidSiteArgument(string site)
         {
             if (!String.IsNullOrEmpty(site))
             {
@@ -432,7 +447,9 @@ namespace System.Web.Configuration
         }
 
         // Return the virtual path from the configPath.
-        static internal string VPathFromConfigPath(string configPath)
+        internal
+        // Return the virtual path from the configPath.
+        static string VPathFromConfigPath(string configPath)
         {
             if (!IsVirtualPathConfigPath(configPath))
                 return null;
@@ -467,7 +484,7 @@ namespace System.Web.Configuration
             vpath = VirtualPath.GetVirtualPathString(virtualPath);
         }
 
-        static internal void GetSiteIDAndVPathFromConfigPath(
+        internal static void GetSiteIDAndVPathFromConfigPath(
             string configPath,
             out string siteID,
             out VirtualPath vpath
@@ -515,7 +532,7 @@ namespace System.Web.Configuration
             );
         }
 
-        static internal string GetConfigPathFromSiteIDAndVPath(string siteID, VirtualPath vpath)
+        internal static string GetConfigPathFromSiteIDAndVPath(string siteID, VirtualPath vpath)
         {
 #if DBG
             // Do not inadverte expand app-relative paths using appdomain
@@ -546,7 +563,7 @@ namespace System.Web.Configuration
             return configPath;
         }
 
-        static internal string CombineConfigPath(string parentConfigPath, string childConfigPath)
+        internal static string CombineConfigPath(string parentConfigPath, string childConfigPath)
         {
             if (String.IsNullOrEmpty(parentConfigPath))
             {
@@ -889,7 +906,7 @@ namespace System.Web.Configuration
             return GetPathLevel(configPath) == WebApplicationLevel.AboveApplication;
         }
 
-        static internal string GetConfigPathFromLocationSubPathBasic(
+        internal static string GetConfigPathFromLocationSubPathBasic(
             string configPath,
             string locationSubPath
         )
@@ -1119,8 +1136,9 @@ namespace System.Web.Configuration
             return (appPath == vpath);
         }
 
+        internal
         // Get the factory used to create and initialize Configuration objects.
-        static internal IInternalConfigConfigurationFactory ConfigurationFactory
+        static IInternalConfigConfigurationFactory ConfigurationFactory
         {
             [ReflectionPermission(
                 SecurityAction.Assert,
@@ -1141,7 +1159,10 @@ namespace System.Web.Configuration
 
         // Create an instance of a Configuration object.
         // Used by design-time API to open a Configuration object.
-        static internal Configuration OpenConfiguration(
+        internal
+        // Create an instance of a Configuration object.
+        // Used by design-time API to open a Configuration object.
+        static Configuration OpenConfiguration(
             WebLevel webLevel,
             ConfigurationFileMap fileMap,
             VirtualPath path,

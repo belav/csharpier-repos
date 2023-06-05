@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 public class GetTargetTest
 {
     public WeakReference w;
-    static public bool Passed = false;
+    public static bool Passed = false;
 
     public GetTargetTest(bool trackResurrection)
     {
@@ -48,7 +48,7 @@ public class GetTargetTest
 public class SetTargetTest
 {
     public WeakReference w;
-    static public bool Passed = false;
+    public static bool Passed = false;
 
     public SetTargetTest(bool trackResurrection)
     {
@@ -85,7 +85,7 @@ public class SetTargetTest
 public class IsAliveTest
 {
     public WeakReference w;
-    static public bool Passed = false;
+    public static bool Passed = false;
 
     public IsAliveTest(bool trackResurrection)
     {

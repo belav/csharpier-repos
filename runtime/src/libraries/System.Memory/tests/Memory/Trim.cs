@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.MemoryTests
 {
-    public static partial class MemoryTests
+    partial public static class MemoryTests
     {
         [Theory]
         [InlineData(new int[0], 1, new int[0])]

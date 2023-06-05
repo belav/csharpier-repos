@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
-    internal partial class AbstractSuppressionCodeFixProvider
+    partial internal class AbstractSuppressionCodeFixProvider
     {
         internal abstract class AbstractSuppressionCodeAction : NestedSuppressionCodeAction
         {

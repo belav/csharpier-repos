@@ -7,7 +7,7 @@ using Xunit.Sdk;
 
 namespace System.Collections.Immutable.Tests
 {
-    internal static partial class TestExtensionsMethods
+    partial internal static class TestExtensionsMethods
     {
         private static readonly double s_GoldenRatio = (1 + Math.Sqrt(5)) / 2;
 

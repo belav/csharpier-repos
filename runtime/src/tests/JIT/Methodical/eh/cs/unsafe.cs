@@ -29,7 +29,7 @@ namespace Test_unsafe
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        unsafe static void WriteLocations(byte[] arr)
+        static unsafe void WriteLocations(byte[] arr)
         {
             fixed (byte* p_arr = arr)
             {

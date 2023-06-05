@@ -11,7 +11,7 @@ namespace System.Net
         Name = "Private.InternalDiagnostics.System.Net.Sockets",
         LocalizationResources = "FxResources.System.Net.Sockets.SR"
     )]
-    internal sealed partial class NetEventSource
+    partial internal sealed class NetEventSource
     {
         private const int AcceptedId = NextAvailableEventId;
         private const int ConnectedId = AcceptedId + 1;

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore;
 
+partial
 /// <summary>
 ///     Static methods that are useful in application code where there is not an EF type for the method to be accessed from. For example,
 ///     referencing a shadow state property in a LINQ query.
@@ -14,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore;
 ///     <see href="https://aka.ms/efcore-docs-efproperty">Using EF.Property in EF Core queries</see> for more information and examples.
 /// </remarks>
 // ReSharper disable once InconsistentNaming
-public static partial class EF
+public static class EF
 {
     internal static readonly MethodInfo PropertyMethod = typeof(EF)
         .GetTypeInfo()

@@ -2,7 +2,7 @@
 
 public unsafe struct B
 {
-    private fixed int a[5];
+    fixed private int a[5];
 }
 
 public unsafe class C

@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.CSharp.LanguageServices;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
 {
-    internal partial class HideBaseCodeFixProvider
+    partial internal class HideBaseCodeFixProvider
     {
         private class AddNewKeywordAction : CodeActions.CodeAction
         {

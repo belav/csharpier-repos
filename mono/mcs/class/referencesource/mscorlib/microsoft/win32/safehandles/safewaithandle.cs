@@ -43,7 +43,7 @@ namespace Microsoft.Win32.SafeHandles
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
 #if MONO
             NativeEventCalls.CloseEvent_internal(handle);

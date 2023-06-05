@@ -14,7 +14,7 @@ namespace System.Data
     using System.ComponentModel.Design.Serialization;
     using System.Globalization;
 
-    sealed internal class RelationshipConverter : ExpandableObjectConverter
+    internal sealed class RelationshipConverter : ExpandableObjectConverter
     {
         // converter classes should have public ctor
         public RelationshipConverter() { }

@@ -6,7 +6,7 @@
 
 namespace System
 {
-    public partial class UriTypeConverter : System.ComponentModel.TypeConverter
+    partial public class UriTypeConverter : System.ComponentModel.TypeConverter
     {
         public UriTypeConverter() { }
 
@@ -57,7 +57,7 @@ namespace System
 
 namespace System.ComponentModel
 {
-    public partial class AddingNewEventArgs : System.EventArgs
+    partial public class AddingNewEventArgs : System.EventArgs
     {
         public AddingNewEventArgs() { }
 
@@ -76,7 +76,7 @@ namespace System.ComponentModel
     );
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class AmbientValueAttribute : System.Attribute
+    partial public sealed class AmbientValueAttribute : System.Attribute
     {
         public AmbientValueAttribute(bool value) { }
 
@@ -127,7 +127,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class ArrayConverter : System.ComponentModel.CollectionConverter
+    partial public class ArrayConverter : System.ComponentModel.CollectionConverter
     {
         public ArrayConverter() { }
 
@@ -162,7 +162,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class AttributeCollection
+    partial public class AttributeCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -272,7 +272,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public partial class AttributeProviderAttribute : System.Attribute
+    partial public class AttributeProviderAttribute : System.Attribute
     {
         public AttributeProviderAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -354,7 +354,7 @@ namespace System.ComponentModel
         }
     }
 
-    public abstract partial class BaseNumberConverter : System.ComponentModel.TypeConverter
+    partial public abstract class BaseNumberConverter : System.ComponentModel.TypeConverter
     {
         internal BaseNumberConverter() { }
 
@@ -395,7 +395,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class BindableAttribute : System.Attribute
+    partial public sealed class BindableAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.BindableAttribute Default;
         public static readonly System.ComponentModel.BindableAttribute No;
@@ -453,7 +453,7 @@ namespace System.ComponentModel
         TwoWay = 1,
     }
 
-    public partial class BindingList<
+    partial public class BindingList<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
         )]
@@ -643,7 +643,7 @@ namespace System.ComponentModel
         void System.ComponentModel.IBindingList.RemoveSort() { }
     }
 
-    public partial class BooleanConverter : System.ComponentModel.TypeConverter
+    partial public class BooleanConverter : System.ComponentModel.TypeConverter
     {
         public BooleanConverter() { }
 
@@ -686,7 +686,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class ByteConverter : System.ComponentModel.BaseNumberConverter
+    partial public class ByteConverter : System.ComponentModel.BaseNumberConverter
     {
         public ByteConverter() { }
     }
@@ -696,7 +696,7 @@ namespace System.ComponentModel
         System.ComponentModel.CancelEventArgs e
     );
 
-    public partial class CharConverter : System.ComponentModel.TypeConverter
+    partial public class CharConverter : System.ComponentModel.TypeConverter
     {
         public CharConverter() { }
 
@@ -735,7 +735,7 @@ namespace System.ComponentModel
         Refresh = 3,
     }
 
-    public partial class CollectionChangeEventArgs : System.EventArgs
+    partial public class CollectionChangeEventArgs : System.EventArgs
     {
         public CollectionChangeEventArgs(
             System.ComponentModel.CollectionChangeAction action,
@@ -757,7 +757,7 @@ namespace System.ComponentModel
         System.ComponentModel.CollectionChangeEventArgs e
     );
 
-    public partial class CollectionConverter : System.ComponentModel.TypeConverter
+    partial public class CollectionConverter : System.ComponentModel.TypeConverter
     {
         public CollectionConverter() { }
 
@@ -785,7 +785,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class ComplexBindingPropertiesAttribute : System.Attribute
+    partial public sealed class ComplexBindingPropertiesAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.ComplexBindingPropertiesAttribute Default;
 
@@ -817,7 +817,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class ComponentConverter : System.ComponentModel.ReferenceConverter
+    partial public class ComponentConverter : System.ComponentModel.ReferenceConverter
     {
         public ComponentConverter(System.Type type)
             : base(default(System.Type)) { }
@@ -842,7 +842,7 @@ namespace System.ComponentModel
         }
     }
 
-    public abstract partial class ComponentEditor
+    partial public abstract class ComponentEditor
     {
         protected ComponentEditor() { }
 
@@ -857,7 +857,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class ComponentResourceManager : System.Resources.ResourceManager
+    partial public class ComponentResourceManager : System.Resources.ResourceManager
     {
         public ComponentResourceManager() { }
 
@@ -878,7 +878,7 @@ namespace System.ComponentModel
         ) { }
     }
 
-    public partial class Container : System.ComponentModel.IContainer, System.IDisposable
+    partial public class Container : System.ComponentModel.IContainer, System.IDisposable
     {
         public Container() { }
 
@@ -926,7 +926,7 @@ namespace System.ComponentModel
         ) { }
     }
 
-    public abstract partial class ContainerFilterService
+    partial public abstract class ContainerFilterService
     {
         protected ContainerFilterService() { }
 
@@ -938,7 +938,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class CultureInfoConverter : System.ComponentModel.TypeConverter
+    partial public class CultureInfoConverter : System.ComponentModel.TypeConverter
     {
         public CultureInfoConverter() { }
 
@@ -1004,7 +1004,7 @@ namespace System.ComponentModel
         }
     }
 
-    public abstract partial class CustomTypeDescriptor : System.ComponentModel.ICustomTypeDescriptor
+    partial public abstract class CustomTypeDescriptor : System.ComponentModel.ICustomTypeDescriptor
     {
         protected CustomTypeDescriptor() { }
 
@@ -1097,7 +1097,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class DataObjectAttribute : System.Attribute
+    partial public sealed class DataObjectAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DataObjectAttribute DataObject;
         public static readonly System.ComponentModel.DataObjectAttribute Default;
@@ -1131,7 +1131,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class DataObjectFieldAttribute : System.Attribute
+    partial public sealed class DataObjectFieldAttribute : System.Attribute
     {
         public DataObjectFieldAttribute(bool primaryKey) { }
 
@@ -1177,7 +1177,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Method)]
-    public sealed partial class DataObjectMethodAttribute : System.Attribute
+    partial public sealed class DataObjectMethodAttribute : System.Attribute
     {
         public DataObjectMethodAttribute(System.ComponentModel.DataObjectMethodType methodType) { }
 
@@ -1224,7 +1224,7 @@ namespace System.ComponentModel
         Delete = 4,
     }
 
-    public partial class DateOnlyConverter : System.ComponentModel.TypeConverter
+    partial public class DateOnlyConverter : System.ComponentModel.TypeConverter
     {
         public DateOnlyConverter() { }
 
@@ -1264,7 +1264,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class DateTimeConverter : System.ComponentModel.TypeConverter
+    partial public class DateTimeConverter : System.ComponentModel.TypeConverter
     {
         public DateTimeConverter() { }
 
@@ -1304,7 +1304,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class DateTimeOffsetConverter : System.ComponentModel.TypeConverter
+    partial public class DateTimeOffsetConverter : System.ComponentModel.TypeConverter
     {
         public DateTimeOffsetConverter() { }
 
@@ -1344,7 +1344,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class DecimalConverter : System.ComponentModel.BaseNumberConverter
+    partial public class DecimalConverter : System.ComponentModel.BaseNumberConverter
     {
         public DecimalConverter() { }
 
@@ -1368,7 +1368,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class DefaultBindingPropertyAttribute : System.Attribute
+    partial public sealed class DefaultBindingPropertyAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DefaultBindingPropertyAttribute Default;
 
@@ -1395,7 +1395,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class DefaultEventAttribute : System.Attribute
+    partial public sealed class DefaultEventAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DefaultEventAttribute Default;
 
@@ -1420,7 +1420,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class DefaultPropertyAttribute : System.Attribute
+    partial public sealed class DefaultPropertyAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DefaultPropertyAttribute Default;
 
@@ -1447,7 +1447,7 @@ namespace System.ComponentModel
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class | System.AttributeTargets.Interface
     )]
-    public sealed partial class DesignTimeVisibleAttribute : System.Attribute
+    partial public sealed class DesignTimeVisibleAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.DesignTimeVisibleAttribute Default;
         public static readonly System.ComponentModel.DesignTimeVisibleAttribute No;
@@ -1480,12 +1480,12 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class DoubleConverter : System.ComponentModel.BaseNumberConverter
+    partial public class DoubleConverter : System.ComponentModel.BaseNumberConverter
     {
         public DoubleConverter() { }
     }
 
-    public partial class EnumConverter : System.ComponentModel.TypeConverter
+    partial public class EnumConverter : System.ComponentModel.TypeConverter
     {
         public EnumConverter(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -1587,7 +1587,7 @@ namespace System.ComponentModel
         }
     }
 
-    public abstract partial class EventDescriptor : System.ComponentModel.MemberDescriptor
+    partial public abstract class EventDescriptor : System.ComponentModel.MemberDescriptor
     {
         protected EventDescriptor(System.ComponentModel.MemberDescriptor descr)
             : base(default(string)) { }
@@ -1608,7 +1608,7 @@ namespace System.ComponentModel
         public abstract void RemoveEventHandler(object component, System.Delegate value);
     }
 
-    public partial class EventDescriptorCollection
+    partial public class EventDescriptorCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -1753,7 +1753,7 @@ namespace System.ComponentModel
         void System.Collections.IList.RemoveAt(int index) { }
     }
 
-    public partial class ExpandableObjectConverter : System.ComponentModel.TypeConverter
+    partial public class ExpandableObjectConverter : System.ComponentModel.TypeConverter
     {
         public ExpandableObjectConverter() { }
 
@@ -1778,7 +1778,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class ExtenderProvidedPropertyAttribute : System.Attribute
+    partial public sealed class ExtenderProvidedPropertyAttribute : System.Attribute
     {
         public ExtenderProvidedPropertyAttribute() { }
 
@@ -1813,7 +1813,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class GuidConverter : System.ComponentModel.TypeConverter
+    partial public class GuidConverter : System.ComponentModel.TypeConverter
     {
         public GuidConverter() { }
 
@@ -1853,12 +1853,12 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class HalfConverter : System.ComponentModel.BaseNumberConverter
+    partial public class HalfConverter : System.ComponentModel.BaseNumberConverter
     {
         public HalfConverter() { }
     }
 
-    public partial class HandledEventArgs : System.EventArgs
+    partial public class HandledEventArgs : System.EventArgs
     {
         public HandledEventArgs() { }
 
@@ -1876,7 +1876,7 @@ namespace System.ComponentModel
         System.ComponentModel.HandledEventArgs e
     );
 
-    public partial interface IBindingList
+    partial public interface IBindingList
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -1902,7 +1902,7 @@ namespace System.ComponentModel
         void RemoveSort();
     }
 
-    public partial interface IBindingListView
+    partial public interface IBindingListView
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList,
@@ -1923,7 +1923,7 @@ namespace System.ComponentModel
         void RemoveFilter();
     }
 
-    public partial interface ICancelAddNew
+    partial public interface ICancelAddNew
     {
         void CancelNew(int itemIndex);
         void EndNew(int itemIndex);
@@ -1932,7 +1932,7 @@ namespace System.ComponentModel
     [System.ObsoleteAttribute(
         "IComNativeDescriptorHandler has been deprecated. Add a TypeDescriptionProvider to handle type TypeDescriptor.ComObjectType instead."
     )]
-    public partial interface IComNativeDescriptorHandler
+    partial public interface IComNativeDescriptorHandler
     {
         System.ComponentModel.AttributeCollection GetAttributes(object component);
         string GetClassName(object component);
@@ -1954,7 +1954,7 @@ namespace System.ComponentModel
         object GetPropertyValue(object component, string propertyName, ref bool success);
     }
 
-    public partial interface ICustomTypeDescriptor
+    partial public interface ICustomTypeDescriptor
     {
         System.ComponentModel.AttributeCollection GetAttributes();
         string? GetClassName();
@@ -2000,18 +2000,18 @@ namespace System.ComponentModel
         object? GetPropertyOwner(System.ComponentModel.PropertyDescriptor? pd);
     }
 
-    public partial interface IDataErrorInfo
+    partial public interface IDataErrorInfo
     {
         string Error { get; }
         string this[string columnName] { get; }
     }
 
-    public partial interface IExtenderProvider
+    partial public interface IExtenderProvider
     {
         bool CanExtend(object extendee);
     }
 
-    public partial interface IIntellisenseBuilder
+    partial public interface IIntellisenseBuilder
     {
         string Name { get; }
         bool Show(string language, string value, ref string newValue);
@@ -2025,18 +2025,18 @@ namespace System.ComponentModel
     [System.ComponentModel.TypeConverterAttribute(
         "System.Windows.Forms.Design.DataSourceConverter, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial interface IListSource
+    partial public interface IListSource
     {
         bool ContainsListCollection { get; }
         System.Collections.IList GetList();
     }
 
-    public partial interface INestedContainer : System.ComponentModel.IContainer, System.IDisposable
+    partial public interface INestedContainer : System.ComponentModel.IContainer, System.IDisposable
     {
         System.ComponentModel.IComponent Owner { get; }
     }
 
-    public partial interface INestedSite : System.ComponentModel.ISite, System.IServiceProvider
+    partial public interface INestedSite : System.ComponentModel.ISite, System.IServiceProvider
     {
         string? FullName { get; }
     }
@@ -2046,7 +2046,7 @@ namespace System.ComponentModel
             | System.AttributeTargets.Field
             | System.AttributeTargets.Property
     )]
-    public sealed partial class InheritanceAttribute : System.Attribute
+    partial public sealed class InheritanceAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.InheritanceAttribute Default;
         public static readonly System.ComponentModel.InheritanceAttribute Inherited;
@@ -2093,7 +2093,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public partial class InstallerTypeAttribute : System.Attribute
+    partial public class InstallerTypeAttribute : System.Attribute
     {
         public InstallerTypeAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2130,7 +2130,7 @@ namespace System.ComponentModel
         }
     }
 
-    public abstract partial class InstanceCreationEditor
+    partial public abstract class InstanceCreationEditor
     {
         protected InstanceCreationEditor() { }
 
@@ -2144,39 +2144,39 @@ namespace System.ComponentModel
         );
     }
 
-    public partial class Int128Converter : System.ComponentModel.BaseNumberConverter
+    partial public class Int128Converter : System.ComponentModel.BaseNumberConverter
     {
         public Int128Converter() { }
     }
 
-    public partial class Int16Converter : System.ComponentModel.BaseNumberConverter
+    partial public class Int16Converter : System.ComponentModel.BaseNumberConverter
     {
         public Int16Converter() { }
     }
 
-    public partial class Int32Converter : System.ComponentModel.BaseNumberConverter
+    partial public class Int32Converter : System.ComponentModel.BaseNumberConverter
     {
         public Int32Converter() { }
     }
 
-    public partial class Int64Converter : System.ComponentModel.BaseNumberConverter
+    partial public class Int64Converter : System.ComponentModel.BaseNumberConverter
     {
         public Int64Converter() { }
     }
 
-    public partial interface IRaiseItemChangedEvents
+    partial public interface IRaiseItemChangedEvents
     {
         bool RaisesItemChangedEvents { get; }
     }
 
-    public partial interface ISupportInitializeNotification
+    partial public interface ISupportInitializeNotification
         : System.ComponentModel.ISupportInitialize
     {
         bool IsInitialized { get; }
         event System.EventHandler Initialized;
     }
 
-    public partial interface ITypeDescriptorContext : System.IServiceProvider
+    partial public interface ITypeDescriptorContext : System.IServiceProvider
     {
         System.ComponentModel.IContainer? Container { get; }
         object? Instance { get; }
@@ -2185,7 +2185,7 @@ namespace System.ComponentModel
         bool OnComponentChanging();
     }
 
-    public partial interface ITypedList
+    partial public interface ITypedList
     {
         System.ComponentModel.PropertyDescriptorCollection GetItemProperties(
             System.ComponentModel.PropertyDescriptor[] listAccessors
@@ -2193,7 +2193,7 @@ namespace System.ComponentModel
         string GetListName(System.ComponentModel.PropertyDescriptor[] listAccessors);
     }
 
-    public abstract partial class License : System.IDisposable
+    partial public abstract class License : System.IDisposable
     {
         protected License() { }
 
@@ -2201,7 +2201,7 @@ namespace System.ComponentModel
         public abstract void Dispose();
     }
 
-    public partial class LicenseContext : System.IServiceProvider
+    partial public class LicenseContext : System.IServiceProvider
     {
         public LicenseContext() { }
 
@@ -2226,7 +2226,7 @@ namespace System.ComponentModel
         public virtual void SetSavedLicenseKey(System.Type type, string key) { }
     }
 
-    public partial class LicenseException : System.SystemException
+    partial public class LicenseException : System.SystemException
     {
         protected LicenseException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -2257,7 +2257,7 @@ namespace System.ComponentModel
         ) { }
     }
 
-    public sealed partial class LicenseManager
+    partial public sealed class LicenseManager
     {
         internal LicenseManager() { }
 
@@ -2327,7 +2327,7 @@ namespace System.ComponentModel
         }
     }
 
-    public abstract partial class LicenseProvider
+    partial public abstract class LicenseProvider
     {
         protected LicenseProvider() { }
 
@@ -2344,7 +2344,7 @@ namespace System.ComponentModel
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class LicenseProviderAttribute : System.Attribute
+    partial public sealed class LicenseProviderAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.LicenseProviderAttribute Default;
 
@@ -2407,7 +2407,7 @@ namespace System.ComponentModel
         Designtime = 1,
     }
 
-    public partial class LicFileLicenseProvider : System.ComponentModel.LicenseProvider
+    partial public class LicFileLicenseProvider : System.ComponentModel.LicenseProvider
     {
         public LicFileLicenseProvider() { }
 
@@ -2433,7 +2433,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class ListBindableAttribute : System.Attribute
+    partial public sealed class ListBindableAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.ListBindableAttribute Default;
         public static readonly System.ComponentModel.ListBindableAttribute No;
@@ -2466,7 +2466,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class ListChangedEventArgs : System.EventArgs
+    partial public class ListChangedEventArgs : System.EventArgs
     {
         public ListChangedEventArgs(
             System.ComponentModel.ListChangedType listChangedType,
@@ -2525,7 +2525,7 @@ namespace System.ComponentModel
         PropertyDescriptorChanged = 7,
     }
 
-    public partial class ListSortDescription
+    partial public class ListSortDescription
     {
         public ListSortDescription(
             System.ComponentModel.PropertyDescriptor? property,
@@ -2544,7 +2544,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class ListSortDescriptionCollection
+    partial public class ListSortDescriptionCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -2623,7 +2623,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class LookupBindingPropertiesAttribute : System.Attribute
+    partial public sealed class LookupBindingPropertiesAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.LookupBindingPropertiesAttribute Default;
 
@@ -2672,7 +2672,7 @@ namespace System.ComponentModel
     )]
     [System.ComponentModel.DesignerCategoryAttribute("Component")]
     [System.ComponentModel.TypeConverterAttribute(typeof(System.ComponentModel.ComponentConverter))]
-    public partial class MarshalByValueComponent
+    partial public class MarshalByValueComponent
         : System.ComponentModel.IComponent,
             System.IDisposable,
             System.IServiceProvider
@@ -2736,7 +2736,7 @@ namespace System.ComponentModel
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
         System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
     )]
-    public partial class MaskedTextProvider : System.ICloneable
+    partial public class MaskedTextProvider : System.ICloneable
     {
         public MaskedTextProvider(string mask) { }
 
@@ -3218,7 +3218,7 @@ namespace System.ComponentModel
         Success = 4,
     }
 
-    public abstract partial class MemberDescriptor
+    partial public abstract class MemberDescriptor
     {
         protected MemberDescriptor(System.ComponentModel.MemberDescriptor descr) { }
 
@@ -3335,7 +3335,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class MultilineStringConverter : System.ComponentModel.TypeConverter
+    partial public class MultilineStringConverter : System.ComponentModel.TypeConverter
     {
         public MultilineStringConverter() { }
 
@@ -3369,7 +3369,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class NestedContainer
+    partial public class NestedContainer
         : System.ComponentModel.Container,
             System.ComponentModel.IContainer,
             System.ComponentModel.INestedContainer,
@@ -3402,7 +3402,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class NullableConverter : System.ComponentModel.TypeConverter
+    partial public class NullableConverter : System.ComponentModel.TypeConverter
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The UnderlyingType cannot be statically discovered."
@@ -3522,7 +3522,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public sealed partial class PasswordPropertyTextAttribute : System.Attribute
+    partial public sealed class PasswordPropertyTextAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.PasswordPropertyTextAttribute Default;
         public static readonly System.ComponentModel.PasswordPropertyTextAttribute No;
@@ -3555,7 +3555,7 @@ namespace System.ComponentModel
         }
     }
 
-    public abstract partial class PropertyDescriptor : System.ComponentModel.MemberDescriptor
+    partial public abstract class PropertyDescriptor : System.ComponentModel.MemberDescriptor
     {
         protected PropertyDescriptor(System.ComponentModel.MemberDescriptor descr)
             : base(default(string)) { }
@@ -3704,7 +3704,7 @@ namespace System.ComponentModel
         public abstract bool ShouldSerializeValue(object component);
     }
 
-    public partial class PropertyDescriptorCollection
+    partial public class PropertyDescriptorCollection
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable,
@@ -3889,7 +3889,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public partial class PropertyTabAttribute : System.Attribute
+    partial public class PropertyTabAttribute : System.Attribute
     {
         public PropertyTabAttribute() { }
 
@@ -3976,7 +3976,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = true)]
-    public sealed partial class ProvidePropertyAttribute : System.Attribute
+    partial public sealed class ProvidePropertyAttribute : System.Attribute
     {
         public ProvidePropertyAttribute(
             string propertyName,
@@ -4040,7 +4040,7 @@ namespace System.ComponentModel
     [System.ObsoleteAttribute(
         "RecommendedAsConfigurableAttribute has been deprecated. Use System.ComponentModel.SettingsBindableAttribute instead."
     )]
-    public partial class RecommendedAsConfigurableAttribute : System.Attribute
+    partial public class RecommendedAsConfigurableAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.RecommendedAsConfigurableAttribute Default;
         public static readonly System.ComponentModel.RecommendedAsConfigurableAttribute No;
@@ -4071,7 +4071,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class ReferenceConverter : System.ComponentModel.TypeConverter
+    partial public class ReferenceConverter : System.ComponentModel.TypeConverter
     {
         public ReferenceConverter(System.Type type) { }
 
@@ -4132,7 +4132,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class RefreshEventArgs : System.EventArgs
+    partial public class RefreshEventArgs : System.EventArgs
     {
         public RefreshEventArgs(object? componentChanged) { }
 
@@ -4151,7 +4151,7 @@ namespace System.ComponentModel
     public delegate void RefreshEventHandler(System.ComponentModel.RefreshEventArgs e);
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public partial class RunInstallerAttribute : System.Attribute
+    partial public class RunInstallerAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.RunInstallerAttribute Default;
         public static readonly System.ComponentModel.RunInstallerAttribute No;
@@ -4182,13 +4182,13 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class SByteConverter : System.ComponentModel.BaseNumberConverter
+    partial public class SByteConverter : System.ComponentModel.BaseNumberConverter
     {
         public SByteConverter() { }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class SettingsBindableAttribute : System.Attribute
+    partial public sealed class SettingsBindableAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.SettingsBindableAttribute No;
         public static readonly System.ComponentModel.SettingsBindableAttribute Yes;
@@ -4213,12 +4213,12 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class SingleConverter : System.ComponentModel.BaseNumberConverter
+    partial public class SingleConverter : System.ComponentModel.BaseNumberConverter
     {
         public SingleConverter() { }
     }
 
-    public partial class StringConverter : System.ComponentModel.TypeConverter
+    partial public class StringConverter : System.ComponentModel.TypeConverter
     {
         public StringConverter() { }
 
@@ -4240,7 +4240,7 @@ namespace System.ComponentModel
         }
     }
 
-    public static partial class SyntaxCheck
+    partial public static class SyntaxCheck
     {
         public static bool CheckMachineName(string value)
         {
@@ -4258,7 +4258,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class TimeOnlyConverter : System.ComponentModel.TypeConverter
+    partial public class TimeOnlyConverter : System.ComponentModel.TypeConverter
     {
         public TimeOnlyConverter() { }
 
@@ -4298,7 +4298,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class TimeSpanConverter : System.ComponentModel.TypeConverter
+    partial public class TimeSpanConverter : System.ComponentModel.TypeConverter
     {
         public TimeSpanConverter() { }
 
@@ -4339,7 +4339,7 @@ namespace System.ComponentModel
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public partial class ToolboxItemAttribute : System.Attribute
+    partial public class ToolboxItemAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.ToolboxItemAttribute Default;
         public static readonly System.ComponentModel.ToolboxItemAttribute None;
@@ -4399,7 +4399,7 @@ namespace System.ComponentModel
         AllowMultiple = true,
         Inherited = true
     )]
-    public sealed partial class ToolboxItemFilterAttribute : System.Attribute
+    partial public sealed class ToolboxItemFilterAttribute : System.Attribute
     {
         public ToolboxItemFilterAttribute(string filterString) { }
 
@@ -4454,7 +4454,7 @@ namespace System.ComponentModel
         Require = 3,
     }
 
-    public partial class TypeConverter
+    partial public class TypeConverter
     {
         public TypeConverter() { }
 
@@ -4720,7 +4720,7 @@ namespace System.ComponentModel
             throw null;
         }
 
-        protected abstract partial class SimplePropertyDescriptor
+        partial protected abstract class SimplePropertyDescriptor
             : System.ComponentModel.PropertyDescriptor
         {
             protected SimplePropertyDescriptor(
@@ -4764,7 +4764,7 @@ namespace System.ComponentModel
             }
         }
 
-        public partial class StandardValuesCollection
+        partial public class StandardValuesCollection
             : System.Collections.ICollection,
                 System.Collections.IEnumerable
         {
@@ -4796,7 +4796,7 @@ namespace System.ComponentModel
         }
     }
 
-    public abstract partial class TypeDescriptionProvider
+    partial public abstract class TypeDescriptionProvider
     {
         protected TypeDescriptionProvider() { }
 
@@ -4940,7 +4940,7 @@ namespace System.ComponentModel
         }
     }
 
-    public sealed partial class TypeDescriptor
+    partial public sealed class TypeDescriptor
     {
         internal TypeDescriptor() { }
 
@@ -5629,7 +5629,7 @@ namespace System.ComponentModel
         public static void SortDescriptorArray(System.Collections.IList infos) { }
     }
 
-    public abstract partial class TypeListConverter : System.ComponentModel.TypeConverter
+    partial public abstract class TypeListConverter : System.ComponentModel.TypeConverter
     {
         protected TypeListConverter(System.Type[] types) { }
 
@@ -5690,27 +5690,27 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class UInt16Converter : System.ComponentModel.BaseNumberConverter
+    partial public class UInt16Converter : System.ComponentModel.BaseNumberConverter
     {
         public UInt16Converter() { }
     }
 
-    public partial class UInt32Converter : System.ComponentModel.BaseNumberConverter
+    partial public class UInt32Converter : System.ComponentModel.BaseNumberConverter
     {
         public UInt32Converter() { }
     }
 
-    public partial class UInt64Converter : System.ComponentModel.BaseNumberConverter
+    partial public class UInt64Converter : System.ComponentModel.BaseNumberConverter
     {
         public UInt64Converter() { }
     }
 
-    public partial class UInt128Converter : System.ComponentModel.BaseNumberConverter
+    partial public class UInt128Converter : System.ComponentModel.BaseNumberConverter
     {
         public UInt128Converter() { }
     }
 
-    public partial class VersionConverter : System.ComponentModel.TypeConverter
+    partial public class VersionConverter : System.ComponentModel.TypeConverter
     {
         public VersionConverter() { }
 
@@ -5758,7 +5758,7 @@ namespace System.ComponentModel
         }
     }
 
-    public partial class WarningException : System.SystemException
+    partial public class WarningException : System.SystemException
     {
         public WarningException() { }
 
@@ -5793,7 +5793,7 @@ namespace System.ComponentModel
 
 namespace System.ComponentModel.Design
 {
-    public partial class ActiveDesignerEventArgs : System.EventArgs
+    partial public class ActiveDesignerEventArgs : System.EventArgs
     {
         public ActiveDesignerEventArgs(
             System.ComponentModel.Design.IDesignerHost? oldDesigner,
@@ -5815,7 +5815,7 @@ namespace System.ComponentModel.Design
         System.ComponentModel.Design.ActiveDesignerEventArgs e
     );
 
-    public partial class CheckoutException : System.Runtime.InteropServices.ExternalException
+    partial public class CheckoutException : System.Runtime.InteropServices.ExternalException
     {
         public static readonly System.ComponentModel.Design.CheckoutException Canceled;
 
@@ -5833,7 +5833,7 @@ namespace System.ComponentModel.Design
         public CheckoutException(string? message, int errorCode) { }
     }
 
-    public partial class CommandID
+    partial public class CommandID
     {
         public CommandID(System.Guid menuGroup, int commandID) { }
 
@@ -5864,7 +5864,7 @@ namespace System.ComponentModel.Design
         }
     }
 
-    public sealed partial class ComponentChangedEventArgs : System.EventArgs
+    partial public sealed class ComponentChangedEventArgs : System.EventArgs
     {
         public ComponentChangedEventArgs(
             object? component,
@@ -5896,7 +5896,7 @@ namespace System.ComponentModel.Design
         System.ComponentModel.Design.ComponentChangedEventArgs e
     );
 
-    public sealed partial class ComponentChangingEventArgs : System.EventArgs
+    partial public sealed class ComponentChangingEventArgs : System.EventArgs
     {
         public ComponentChangingEventArgs(
             object? component,
@@ -5918,7 +5918,7 @@ namespace System.ComponentModel.Design
         System.ComponentModel.Design.ComponentChangingEventArgs e
     );
 
-    public partial class ComponentEventArgs : System.EventArgs
+    partial public class ComponentEventArgs : System.EventArgs
     {
         public ComponentEventArgs(System.ComponentModel.IComponent? component) { }
 
@@ -5933,7 +5933,7 @@ namespace System.ComponentModel.Design
         System.ComponentModel.Design.ComponentEventArgs e
     );
 
-    public partial class ComponentRenameEventArgs : System.EventArgs
+    partial public class ComponentRenameEventArgs : System.EventArgs
     {
         public ComponentRenameEventArgs(object? component, string? oldName, string? newName) { }
 
@@ -5956,7 +5956,7 @@ namespace System.ComponentModel.Design
         System.ComponentModel.Design.ComponentRenameEventArgs e
     );
 
-    public partial class DesignerCollection
+    partial public class DesignerCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -5998,7 +5998,7 @@ namespace System.ComponentModel.Design
         }
     }
 
-    public partial class DesignerEventArgs : System.EventArgs
+    partial public class DesignerEventArgs : System.EventArgs
     {
         public DesignerEventArgs(System.ComponentModel.Design.IDesignerHost? host) { }
 
@@ -6013,7 +6013,7 @@ namespace System.ComponentModel.Design
         System.ComponentModel.Design.DesignerEventArgs e
     );
 
-    public abstract partial class DesignerOptionService
+    partial public abstract class DesignerOptionService
         : System.ComponentModel.Design.IDesignerOptionService
     {
         protected DesignerOptionService() { }
@@ -6068,7 +6068,7 @@ namespace System.ComponentModel.Design
             "",
             "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         )]
-        public sealed partial class DesignerOptionCollection
+        partial public sealed class DesignerOptionCollection
             : System.Collections.ICollection,
                 System.Collections.IEnumerable,
                 System.Collections.IList
@@ -6168,7 +6168,7 @@ namespace System.ComponentModel.Design
         }
     }
 
-    public abstract partial class DesignerTransaction : System.IDisposable
+    partial public abstract class DesignerTransaction : System.IDisposable
     {
         protected DesignerTransaction() { }
 
@@ -6201,7 +6201,7 @@ namespace System.ComponentModel.Design
         void System.IDisposable.Dispose() { }
     }
 
-    public partial class DesignerTransactionCloseEventArgs : System.EventArgs
+    partial public class DesignerTransactionCloseEventArgs : System.EventArgs
     {
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use DesignerTransactionCloseEventArgs(bool, bool) instead."
@@ -6225,7 +6225,7 @@ namespace System.ComponentModel.Design
         System.ComponentModel.Design.DesignerTransactionCloseEventArgs e
     );
 
-    public partial class DesignerVerb : System.ComponentModel.Design.MenuCommand
+    partial public class DesignerVerb : System.ComponentModel.Design.MenuCommand
     {
         public DesignerVerb(string text, System.EventHandler handler)
             : base(default(System.EventHandler), default(System.ComponentModel.Design.CommandID))
@@ -6255,7 +6255,7 @@ namespace System.ComponentModel.Design
         }
     }
 
-    public partial class DesignerVerbCollection : System.Collections.CollectionBase
+    partial public class DesignerVerbCollection : System.Collections.CollectionBase
     {
         public DesignerVerbCollection() { }
 
@@ -6295,7 +6295,7 @@ namespace System.ComponentModel.Design
         public void Remove(System.ComponentModel.Design.DesignerVerb? value) { }
     }
 
-    public partial class DesigntimeLicenseContext : System.ComponentModel.LicenseContext
+    partial public class DesigntimeLicenseContext : System.ComponentModel.LicenseContext
     {
         public DesigntimeLicenseContext() { }
 
@@ -6315,7 +6315,7 @@ namespace System.ComponentModel.Design
         public override void SetSavedLicenseKey(System.Type type, string key) { }
     }
 
-    public partial class DesigntimeLicenseContextSerializer
+    partial public class DesigntimeLicenseContextSerializer
     {
         internal DesigntimeLicenseContextSerializer() { }
 
@@ -6339,7 +6339,7 @@ namespace System.ComponentModel.Design
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class HelpKeywordAttribute : System.Attribute
+    partial public sealed class HelpKeywordAttribute : System.Attribute
     {
         public static readonly System.ComponentModel.Design.HelpKeywordAttribute Default;
 
@@ -6379,7 +6379,7 @@ namespace System.ComponentModel.Design
         FilterKeyword = 2,
     }
 
-    public partial interface IComponentChangeService
+    partial public interface IComponentChangeService
     {
         event System.ComponentModel.Design.ComponentEventHandler ComponentAdded;
         event System.ComponentModel.Design.ComponentEventHandler ComponentAdding;
@@ -6397,7 +6397,7 @@ namespace System.ComponentModel.Design
         void OnComponentChanging(object component, System.ComponentModel.MemberDescriptor? member);
     }
 
-    public partial interface IComponentDiscoveryService
+    partial public interface IComponentDiscoveryService
     {
         System.Collections.ICollection GetComponentTypes(
             System.ComponentModel.Design.IDesignerHost? designerHost,
@@ -6405,13 +6405,13 @@ namespace System.ComponentModel.Design
         );
     }
 
-    public partial interface IComponentInitializer
+    partial public interface IComponentInitializer
     {
         void InitializeExistingComponent(System.Collections.IDictionary? defaultValues);
         void InitializeNewComponent(System.Collections.IDictionary? defaultValues);
     }
 
-    public partial interface IDesigner : System.IDisposable
+    partial public interface IDesigner : System.IDisposable
     {
         System.ComponentModel.IComponent Component { get; }
         System.ComponentModel.Design.DesignerVerbCollection? Verbs { get; }
@@ -6419,7 +6419,7 @@ namespace System.ComponentModel.Design
         void Initialize(System.ComponentModel.IComponent component);
     }
 
-    public partial interface IDesignerEventService
+    partial public interface IDesignerEventService
     {
         System.ComponentModel.Design.IDesignerHost? ActiveDesigner { get; }
         System.ComponentModel.Design.DesignerCollection Designers { get; }
@@ -6429,7 +6429,7 @@ namespace System.ComponentModel.Design
         event System.EventHandler SelectionChanged;
     }
 
-    public partial interface IDesignerFilter
+    partial public interface IDesignerFilter
     {
         void PostFilterAttributes(System.Collections.IDictionary attributes);
         void PostFilterEvents(System.Collections.IDictionary events);
@@ -6439,7 +6439,7 @@ namespace System.ComponentModel.Design
         void PreFilterProperties(System.Collections.IDictionary properties);
     }
 
-    public partial interface IDesignerHost
+    partial public interface IDesignerHost
         : System.ComponentModel.Design.IServiceContainer,
             System.IServiceProvider
     {
@@ -6468,12 +6468,12 @@ namespace System.ComponentModel.Design
         System.Type? GetType(string typeName);
     }
 
-    public partial interface IDesignerHostTransactionState
+    partial public interface IDesignerHostTransactionState
     {
         bool IsClosingTransaction { get; }
     }
 
-    public partial interface IDesignerOptionService
+    partial public interface IDesignerOptionService
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The option value's Type cannot be statically discovered."
@@ -6486,14 +6486,14 @@ namespace System.ComponentModel.Design
         void SetOptionValue(string pageName, string valueName, object value);
     }
 
-    public partial interface IDictionaryService
+    partial public interface IDictionaryService
     {
         object? GetKey(object? value);
         object? GetValue(object key);
         void SetValue(object key, object? value);
     }
 
-    public partial interface IEventBindingService
+    partial public interface IEventBindingService
     {
         string CreateUniqueMethodName(
             System.ComponentModel.IComponent component,
@@ -6519,18 +6519,18 @@ namespace System.ComponentModel.Design
         bool ShowCode(int lineNumber);
     }
 
-    public partial interface IExtenderListService
+    partial public interface IExtenderListService
     {
         System.ComponentModel.IExtenderProvider[] GetExtenderProviders();
     }
 
-    public partial interface IExtenderProviderService
+    partial public interface IExtenderProviderService
     {
         void AddExtenderProvider(System.ComponentModel.IExtenderProvider provider);
         void RemoveExtenderProvider(System.ComponentModel.IExtenderProvider provider);
     }
 
-    public partial interface IHelpService
+    partial public interface IHelpService
     {
         void AddContextAttribute(
             string name,
@@ -6547,7 +6547,7 @@ namespace System.ComponentModel.Design
         void ShowHelpFromUrl(string helpUrl);
     }
 
-    public partial interface IInheritanceService
+    partial public interface IInheritanceService
     {
         void AddInheritedComponents(
             System.ComponentModel.IComponent component,
@@ -6558,7 +6558,7 @@ namespace System.ComponentModel.Design
         );
     }
 
-    public partial interface IMenuCommandService
+    partial public interface IMenuCommandService
     {
         System.ComponentModel.Design.DesignerVerbCollection Verbs { get; }
         void AddCommand(System.ComponentModel.Design.MenuCommand command);
@@ -6572,7 +6572,7 @@ namespace System.ComponentModel.Design
         void ShowContextMenu(System.ComponentModel.Design.CommandID menuID, int x, int y);
     }
 
-    public partial interface IReferenceService
+    partial public interface IReferenceService
     {
         System.ComponentModel.IComponent? GetComponent(object reference);
         string? GetName(object reference);
@@ -6581,13 +6581,13 @@ namespace System.ComponentModel.Design
         object[] GetReferences(System.Type baseType);
     }
 
-    public partial interface IResourceService
+    partial public interface IResourceService
     {
         System.Resources.IResourceReader? GetResourceReader(System.Globalization.CultureInfo info);
         System.Resources.IResourceWriter GetResourceWriter(System.Globalization.CultureInfo info);
     }
 
-    public partial interface IRootDesigner
+    partial public interface IRootDesigner
         : System.ComponentModel.Design.IDesigner,
             System.IDisposable
     {
@@ -6595,7 +6595,7 @@ namespace System.ComponentModel.Design
         object GetView(System.ComponentModel.Design.ViewTechnology technology);
     }
 
-    public partial interface ISelectionService
+    partial public interface ISelectionService
     {
         object PrimarySelection { get; }
         int SelectionCount { get; }
@@ -6610,7 +6610,7 @@ namespace System.ComponentModel.Design
         );
     }
 
-    public partial interface IServiceContainer : System.IServiceProvider
+    partial public interface IServiceContainer : System.IServiceProvider
     {
         void AddService(
             System.Type serviceType,
@@ -6627,7 +6627,7 @@ namespace System.ComponentModel.Design
         void RemoveService(System.Type serviceType, bool promote);
     }
 
-    public partial interface ITreeDesigner
+    partial public interface ITreeDesigner
         : System.ComponentModel.Design.IDesigner,
             System.IDisposable
     {
@@ -6635,7 +6635,7 @@ namespace System.ComponentModel.Design
         System.ComponentModel.Design.IDesigner? Parent { get; }
     }
 
-    public partial interface ITypeDescriptorFilterService
+    partial public interface ITypeDescriptorFilterService
     {
         bool FilterAttributes(
             System.ComponentModel.IComponent component,
@@ -6651,12 +6651,12 @@ namespace System.ComponentModel.Design
         );
     }
 
-    public partial interface ITypeDiscoveryService
+    partial public interface ITypeDiscoveryService
     {
         System.Collections.ICollection GetTypes(System.Type? baseType, bool excludeGlobalTypes);
     }
 
-    public partial interface ITypeResolutionService
+    partial public interface ITypeResolutionService
     {
         System.Reflection.Assembly? GetAssembly(System.Reflection.AssemblyName name);
         System.Reflection.Assembly? GetAssembly(
@@ -6724,7 +6724,7 @@ namespace System.ComponentModel.Design
         void ReferenceAssembly(System.Reflection.AssemblyName name);
     }
 
-    public partial class MenuCommand
+    partial public class MenuCommand
     {
         public MenuCommand(
             System.EventHandler? handler,
@@ -6817,7 +6817,7 @@ namespace System.ComponentModel.Design
         Remove = 128,
     }
 
-    public partial class ServiceContainer
+    partial public class ServiceContainer
         : System.ComponentModel.Design.IServiceContainer,
             System.IDisposable,
             System.IServiceProvider
@@ -6869,7 +6869,7 @@ namespace System.ComponentModel.Design
         System.Type serviceType
     );
 
-    public partial class StandardCommands
+    partial public class StandardCommands
     {
         public static readonly System.ComponentModel.Design.CommandID AlignBottom;
         public static readonly System.ComponentModel.Design.CommandID AlignHorizontalCenters;
@@ -6930,7 +6930,7 @@ namespace System.ComponentModel.Design
         public StandardCommands() { }
     }
 
-    public partial class StandardToolWindows
+    partial public class StandardToolWindows
     {
         public static readonly System.Guid ObjectBrowser;
         public static readonly System.Guid OutputWindow;
@@ -6944,7 +6944,7 @@ namespace System.ComponentModel.Design
         public StandardToolWindows() { }
     }
 
-    public abstract partial class TypeDescriptionProviderService
+    partial public abstract class TypeDescriptionProviderService
     {
         protected TypeDescriptionProviderService() { }
 
@@ -6969,7 +6969,7 @@ namespace System.ComponentModel.Design
 
 namespace System.ComponentModel.Design.Serialization
 {
-    public abstract partial class ComponentSerializationService
+    partial public abstract class ComponentSerializationService
     {
         protected ComponentSerializationService() { }
 
@@ -7022,7 +7022,7 @@ namespace System.ComponentModel.Design.Serialization
         );
     }
 
-    public sealed partial class ContextStack
+    partial public sealed class ContextStack
     {
         public ContextStack() { }
 
@@ -7050,7 +7050,7 @@ namespace System.ComponentModel.Design.Serialization
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, Inherited = false)]
-    public sealed partial class DefaultSerializationProviderAttribute : System.Attribute
+    partial public sealed class DefaultSerializationProviderAttribute : System.Attribute
     {
         public DefaultSerializationProviderAttribute(string providerTypeName) { }
 
@@ -7062,7 +7062,7 @@ namespace System.ComponentModel.Design.Serialization
         }
     }
 
-    public abstract partial class DesignerLoader
+    partial public abstract class DesignerLoader
     {
         protected DesignerLoader() { }
 
@@ -7078,7 +7078,7 @@ namespace System.ComponentModel.Design.Serialization
         public virtual void Flush() { }
     }
 
-    public partial interface IDesignerLoaderHost
+    partial public interface IDesignerLoaderHost
         : System.ComponentModel.Design.IDesignerHost,
             System.ComponentModel.Design.IServiceContainer,
             System.IServiceProvider
@@ -7091,7 +7091,7 @@ namespace System.ComponentModel.Design.Serialization
         void Reload();
     }
 
-    public partial interface IDesignerLoaderHost2
+    partial public interface IDesignerLoaderHost2
         : System.ComponentModel.Design.IDesignerHost,
             System.ComponentModel.Design.IServiceContainer,
             System.ComponentModel.Design.Serialization.IDesignerLoaderHost,
@@ -7101,7 +7101,7 @@ namespace System.ComponentModel.Design.Serialization
         bool IgnoreErrorsDuringReload { get; set; }
     }
 
-    public partial interface IDesignerLoaderService
+    partial public interface IDesignerLoaderService
     {
         void AddLoadDependency();
         void DependentLoadComplete(
@@ -7111,7 +7111,7 @@ namespace System.ComponentModel.Design.Serialization
         bool Reload();
     }
 
-    public partial interface IDesignerSerializationManager : System.IServiceProvider
+    partial public interface IDesignerSerializationManager : System.IServiceProvider
     {
         System.ComponentModel.Design.Serialization.ContextStack Context { get; }
         System.ComponentModel.PropertyDescriptorCollection Properties { get; }
@@ -7137,7 +7137,7 @@ namespace System.ComponentModel.Design.Serialization
         void SetName(object instance, string name);
     }
 
-    public partial interface IDesignerSerializationProvider
+    partial public interface IDesignerSerializationProvider
     {
         object? GetSerializer(
             System.ComponentModel.Design.Serialization.IDesignerSerializationManager manager,
@@ -7147,20 +7147,20 @@ namespace System.ComponentModel.Design.Serialization
         );
     }
 
-    public partial interface IDesignerSerializationService
+    partial public interface IDesignerSerializationService
     {
         System.Collections.ICollection Deserialize(object serializationData);
         object Serialize(System.Collections.ICollection objects);
     }
 
-    public partial interface INameCreationService
+    partial public interface INameCreationService
     {
         string CreateName(System.ComponentModel.IContainer? container, System.Type dataType);
         bool IsValidName(string name);
         void ValidateName(string name);
     }
 
-    public sealed partial class InstanceDescriptor
+    partial public sealed class InstanceDescriptor
     {
         public InstanceDescriptor(
             System.Reflection.MemberInfo? member,
@@ -7195,7 +7195,7 @@ namespace System.ComponentModel.Design.Serialization
     [System.Runtime.InteropServices.StructLayoutAttribute(
         System.Runtime.InteropServices.LayoutKind.Sequential
     )]
-    public readonly partial struct MemberRelationship
+    partial public readonly struct MemberRelationship
         : System.IEquatable<System.ComponentModel.Design.Serialization.MemberRelationship>
     {
         private readonly object _dummy;
@@ -7254,7 +7254,7 @@ namespace System.ComponentModel.Design.Serialization
         }
     }
 
-    public abstract partial class MemberRelationshipService
+    partial public abstract class MemberRelationshipService
     {
         protected MemberRelationshipService() { }
 
@@ -7287,7 +7287,7 @@ namespace System.ComponentModel.Design.Serialization
         );
     }
 
-    public partial class ResolveNameEventArgs : System.EventArgs
+    partial public class ResolveNameEventArgs : System.EventArgs
     {
         public ResolveNameEventArgs(string? name) { }
 
@@ -7315,7 +7315,7 @@ namespace System.ComponentModel.Design.Serialization
     [System.ObsoleteAttribute(
         "RootDesignerSerializerAttribute has been deprecated. Use DesignerSerializerAttribute instead. For example, to specify a root designer for CodeDom, use DesignerSerializerAttribute(...,typeof(TypeCodeDomSerializer)) instead."
     )]
-    public sealed partial class RootDesignerSerializerAttribute : System.Attribute
+    partial public sealed class RootDesignerSerializerAttribute : System.Attribute
     {
         public RootDesignerSerializerAttribute(
             string? serializerTypeName,
@@ -7353,7 +7353,7 @@ namespace System.ComponentModel.Design.Serialization
         }
     }
 
-    public abstract partial class SerializationStore : System.IDisposable
+    partial public abstract class SerializationStore : System.IDisposable
     {
         protected SerializationStore() { }
 
@@ -7370,7 +7370,7 @@ namespace System.ComponentModel.Design.Serialization
 
 namespace System.Drawing
 {
-    public partial class ColorConverter : System.ComponentModel.TypeConverter
+    partial public class ColorConverter : System.ComponentModel.TypeConverter
     {
         public ColorConverter() { }
 
@@ -7424,7 +7424,7 @@ namespace System.Drawing
         }
     }
 
-    public partial class PointConverter : System.ComponentModel.TypeConverter
+    partial public class PointConverter : System.ComponentModel.TypeConverter
     {
         public PointConverter() { }
 
@@ -7498,7 +7498,7 @@ namespace System.Drawing
         }
     }
 
-    public partial class RectangleConverter : System.ComponentModel.TypeConverter
+    partial public class RectangleConverter : System.ComponentModel.TypeConverter
     {
         public RectangleConverter() { }
 
@@ -7572,7 +7572,7 @@ namespace System.Drawing
         }
     }
 
-    public partial class SizeConverter : System.ComponentModel.TypeConverter
+    partial public class SizeConverter : System.ComponentModel.TypeConverter
     {
         public SizeConverter() { }
 
@@ -7646,7 +7646,7 @@ namespace System.Drawing
         }
     }
 
-    public partial class SizeFConverter : System.ComponentModel.TypeConverter
+    partial public class SizeFConverter : System.ComponentModel.TypeConverter
     {
         public SizeFConverter() { }
 
@@ -7723,7 +7723,7 @@ namespace System.Drawing
 
 namespace System.Security.Authentication.ExtendedProtection
 {
-    public partial class ExtendedProtectionPolicyTypeConverter : System.ComponentModel.TypeConverter
+    partial public class ExtendedProtectionPolicyTypeConverter : System.ComponentModel.TypeConverter
     {
         public ExtendedProtectionPolicyTypeConverter() { }
 
@@ -7750,7 +7750,7 @@ namespace System.Security.Authentication.ExtendedProtection
 
 namespace System.Timers
 {
-    public partial class ElapsedEventArgs : System.EventArgs
+    partial public class ElapsedEventArgs : System.EventArgs
     {
         internal ElapsedEventArgs() { }
 
@@ -7764,7 +7764,7 @@ namespace System.Timers
 
     [System.ComponentModel.DefaultEventAttribute("Elapsed")]
     [System.ComponentModel.DefaultPropertyAttribute("Interval")]
-    public partial class Timer
+    partial public class Timer
         : System.ComponentModel.Component,
             System.ComponentModel.ISupportInitialize
     {
@@ -7826,7 +7826,7 @@ namespace System.Timers
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public partial class TimersDescriptionAttribute : System.ComponentModel.DescriptionAttribute
+    partial public class TimersDescriptionAttribute : System.ComponentModel.DescriptionAttribute
     {
         public TimersDescriptionAttribute(string description) { }
 

@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator
 {
     [Export(typeof(WpfBackgroundWorkIndicatorFactory))]
     [ExportWorkspaceService(typeof(IBackgroundWorkIndicatorFactory), ServiceLayer.Editor), Shared]
-    internal sealed partial class WpfBackgroundWorkIndicatorFactory
+    partial internal sealed class WpfBackgroundWorkIndicatorFactory
         : IBackgroundWorkIndicatorFactory
     {
         private readonly IThreadingContext _threadingContext;

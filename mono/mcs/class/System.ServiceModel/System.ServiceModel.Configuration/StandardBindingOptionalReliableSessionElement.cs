@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class StandardBindingOptionalReliableSessionElement
+    partial public sealed class StandardBindingOptionalReliableSessionElement
         : StandardBindingReliableSessionElement
     {
         // Static Fields

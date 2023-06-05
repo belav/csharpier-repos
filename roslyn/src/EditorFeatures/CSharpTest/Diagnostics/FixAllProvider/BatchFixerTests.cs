@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTypeNames
 {
-    public partial class BatchFixerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    partial public class BatchFixerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public BatchFixerTests(ITestOutputHelper logger)
             : base(logger) { }

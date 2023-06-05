@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class ProcessThreadTests : ProcessTestBase
+    partial public class ProcessThreadTests : ProcessTestBase
     {
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void TestCommonPriorityAndTimeProperties()

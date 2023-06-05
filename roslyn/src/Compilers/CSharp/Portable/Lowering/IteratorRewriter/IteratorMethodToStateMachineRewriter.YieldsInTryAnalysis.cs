@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class IteratorMethodToStateMachineRewriter
+    partial internal class IteratorMethodToStateMachineRewriter
     {
         /// <summary>
         /// Analyzes method body for yields in try blocks and labels that they contain.

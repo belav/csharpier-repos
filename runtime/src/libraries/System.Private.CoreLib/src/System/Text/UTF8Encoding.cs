@@ -18,6 +18,7 @@ using System.Text.Unicode;
 
 namespace System.Text
 {
+    partial
     // Encodes text into and out of UTF-8.  UTF-8 is a way of writing
     // Unicode characters with variable numbers of bytes per character,
     // optimized for the lower 127 ASCII characters.  It's an efficient way
@@ -30,7 +31,7 @@ namespace System.Text
     // used mostly to distinguish UTF-8 text from other encodings, and doesn't
     // switch the byte orderings.
 
-    public partial class UTF8Encoding : Encoding
+    public class UTF8Encoding : Encoding
     {
         /*
             bytes   bits    UTF-8 representation

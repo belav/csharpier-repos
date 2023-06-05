@@ -5,7 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-unsafe partial class GenericsNative
+partial unsafe class GenericsNative
 {
     [DllImport(nameof(GenericsNative), EntryPoint = "GetIComInterface")]
     [return: MarshalAs(UnmanagedType.Interface)]
@@ -38,7 +38,7 @@ unsafe partial class GenericsNative
     );
 }
 
-unsafe partial class GenericsTest
+partial unsafe class GenericsTest
 {
     private static void TestIComInterfaceC()
     {

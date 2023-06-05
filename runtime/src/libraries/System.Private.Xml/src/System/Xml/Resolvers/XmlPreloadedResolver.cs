@@ -12,12 +12,13 @@ using System.Runtime.Versioning;
 
 namespace System.Xml.Resolvers
 {
+    partial
     //
     // XmlPreloadedResolver is an XmlResolver that which can be pre-loaded with data.
     // By default it contains well-known DTDs for XHTML 1.0 and RSS 0.91.
     // Custom mappings of URIs to data can be added with the Add method.
     //
-    public partial class XmlPreloadedResolver : XmlResolver
+    public class XmlPreloadedResolver : XmlResolver
     {
         //
         // PreloadedData class

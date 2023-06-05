@@ -7,10 +7,11 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This portion of the binder converts a <see cref="WithExpressionSyntax"/> into a <see cref="BoundExpression"/>.
     /// </summary>
-    internal partial class Binder
+    internal class Binder
     {
         private BoundExpression BindWithExpression(
             WithExpressionSyntax syntax,

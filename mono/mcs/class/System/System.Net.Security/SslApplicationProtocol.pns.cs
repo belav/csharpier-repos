@@ -9,7 +9,7 @@ namespace System.Net.Security
         string hostName
     );
 
-    public readonly partial struct SslApplicationProtocol
+    partial public readonly struct SslApplicationProtocol
         : System.IEquatable<System.Net.Security.SslApplicationProtocol>
     {
         private readonly object _dummy;

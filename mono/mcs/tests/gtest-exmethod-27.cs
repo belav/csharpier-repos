@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Foo
 {
-    static partial class Extensions { }
+    partial static class Extensions { }
 
-    static partial class Extensions
+    partial static class Extensions
     {
         public static string AsString(this IList<byte> bytes)
         {

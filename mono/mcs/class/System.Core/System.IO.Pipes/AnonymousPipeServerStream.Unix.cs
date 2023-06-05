@@ -1,6 +1,6 @@
 namespace System.IO.Pipes
 {
-    public sealed partial class AnonymousPipeServerStream
+    partial public sealed class AnonymousPipeServerStream
     {
         public AnonymousPipeServerStream(
             PipeDirection direction,

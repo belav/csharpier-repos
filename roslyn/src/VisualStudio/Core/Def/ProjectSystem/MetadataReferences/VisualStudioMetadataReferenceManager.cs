@@ -22,6 +22,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
+    partial
     /// <summary>
     /// Manages metadata references for VS projects.
     /// </summary>
@@ -30,9 +31,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     /// that can be passed to the compiler. These snapshot references serve the underlying metadata blobs from a VS-wide storage, if possible,
     /// from <see cref="ITemporaryStorageServiceInternal"/>.
     /// </remarks>
-    internal sealed partial class VisualStudioMetadataReferenceManager
-        : IWorkspaceService,
-            IDisposable
+    internal sealed class VisualStudioMetadataReferenceManager : IWorkspaceService, IDisposable
     {
         private static readonly Guid s_IID_IMetaDataImport =
             new("7DAC8207-D3AE-4c75-9B67-92801A497D44");

@@ -4,7 +4,7 @@
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class AesCcm : System.IDisposable
+    partial public sealed class AesCcm : System.IDisposable
     {
         public AesCcm(byte[] key) => throw new PlatformNotSupportedException();
 

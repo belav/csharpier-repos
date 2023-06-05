@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         public enum CombineMode : int
         {
@@ -17,7 +17,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
-        public static partial RegionType CombineRgn(
+        partial public static RegionType CombineRgn(
             IntPtr hrgnDst,
             IntPtr hrgnSrc1,
             IntPtr hrgnSrc2,

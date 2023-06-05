@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.FileProviders
 {
-    public partial class PhysicalFileProviderTests : FileCleanupTestBase
+    partial public class PhysicalFileProviderTests : FileCleanupTestBase
     {
         [ConditionalTheory(typeof(MountHelper), nameof(MountHelper.CanCreateSymbolicLinks))]
         [InlineData(false)]

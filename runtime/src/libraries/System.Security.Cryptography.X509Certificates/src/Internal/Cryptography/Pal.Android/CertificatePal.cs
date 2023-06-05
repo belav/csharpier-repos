@@ -11,7 +11,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class CertificatePal
+    partial internal sealed class CertificatePal
     {
         public static ICertificatePal FromHandle(IntPtr handle)
         {

@@ -7,8 +7,9 @@ using System.IO;
 
 namespace System.Formats.Tar
 {
+    partial
     // Unix specific methods for the TarEntry class.
-    public abstract partial class TarEntry
+    public abstract class TarEntry
     {
         // Unix specific implementation of the method that extracts the current entry as a block device.
         private void ExtractAsBlockDevice(string destinationFileName)

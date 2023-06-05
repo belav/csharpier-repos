@@ -19,7 +19,7 @@ namespace System.Workflow.Activities
     using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization;
 
-    internal partial class StateDesigner : FreeformActivityDesigner
+    partial internal class StateDesigner : FreeformActivityDesigner
     {
         #region ContainedDesignersParser class
         /// <summary>

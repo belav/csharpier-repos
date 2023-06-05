@@ -5,12 +5,12 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetSockOpt")]
-        internal static unsafe partial Error SetSockOpt(
+        partial internal static unsafe Error SetSockOpt(
             SafeHandle socket,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -19,7 +19,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetSockOpt")]
-        internal static unsafe partial Error SetSockOpt(
+        partial internal static unsafe Error SetSockOpt(
             IntPtr socket,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -28,7 +28,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetRawSockOpt")]
-        internal static unsafe partial Error SetRawSockOpt(
+        partial internal static unsafe Error SetRawSockOpt(
             SafeHandle socket,
             int optionLevel,
             int optionName,

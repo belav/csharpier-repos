@@ -6,7 +6,7 @@ using Xunit;
 
 namespace ILLink.RoslynAnalyzer.Tests
 {
-    public sealed partial class DataFlowTests : LinkerTestBase
+    partial public sealed class DataFlowTests : LinkerTestBase
     {
         protected override string TestSuiteName => "DataFlow";
 

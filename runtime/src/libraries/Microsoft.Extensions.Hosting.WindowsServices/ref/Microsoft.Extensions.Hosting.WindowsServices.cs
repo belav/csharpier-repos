@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Hosting
 {
-    public static partial class WindowsServiceLifetimeHostBuilderExtensions
+    partial public static class WindowsServiceLifetimeHostBuilderExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddWindowsService(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
@@ -39,7 +39,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public partial class WindowsServiceLifetimeOptions
+    partial public class WindowsServiceLifetimeOptions
     {
         public WindowsServiceLifetimeOptions() { }
 
@@ -53,7 +53,7 @@ namespace Microsoft.Extensions.Hosting
 
 namespace Microsoft.Extensions.Hosting.WindowsServices
 {
-    public static partial class WindowsServiceHelpers
+    partial public static class WindowsServiceHelpers
     {
         [System.Runtime.Versioning.SupportedOSPlatformGuardAttribute("windows")]
         public static bool IsWindowsService()
@@ -63,7 +63,7 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
     }
 
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-    public partial class WindowsServiceLifetime
+    partial public class WindowsServiceLifetime
         : System.ServiceProcess.ServiceBase,
             Microsoft.Extensions.Hosting.IHostLifetime
     {

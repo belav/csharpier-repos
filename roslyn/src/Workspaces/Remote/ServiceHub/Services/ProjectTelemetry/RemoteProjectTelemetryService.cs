@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal partial class RemoteProjectTelemetryService
+    partial internal class RemoteProjectTelemetryService
         : BrokeredServiceBase,
             IRemoteProjectTelemetryService
     {

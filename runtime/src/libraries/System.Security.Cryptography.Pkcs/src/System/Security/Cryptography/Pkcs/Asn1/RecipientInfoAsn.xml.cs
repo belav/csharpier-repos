@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct RecipientInfoAsn
+    partial internal struct RecipientInfoAsn
     {
         internal System.Security.Cryptography.Pkcs.Asn1.KeyTransRecipientInfoAsn? Ktri;
         internal System.Security.Cryptography.Pkcs.Asn1.KeyAgreeRecipientInfoAsn? Kari;

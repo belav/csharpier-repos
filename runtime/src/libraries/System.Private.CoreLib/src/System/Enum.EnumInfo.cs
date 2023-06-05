@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace System
 {
-    public abstract partial class Enum
+    partial public abstract class Enum
     {
         internal sealed class EnumInfo<TUnderlyingValue>
             where TUnderlyingValue : struct, INumber<TUnderlyingValue>

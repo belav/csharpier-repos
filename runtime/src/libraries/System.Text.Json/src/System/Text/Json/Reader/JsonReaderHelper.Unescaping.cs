@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonReaderHelper
+    partial internal static class JsonReaderHelper
     {
         public static bool TryGetUnescapedBase64Bytes(
             ReadOnlySpan<byte> utf8Source,

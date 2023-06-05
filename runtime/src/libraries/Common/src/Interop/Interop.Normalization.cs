@@ -4,16 +4,16 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Globalization
+    partial internal static class Globalization
     {
         [LibraryImport(
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_IsNormalized",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int IsNormalized(
+        partial internal static unsafe int IsNormalized(
             NormalizationForm normalizationForm,
             char* src,
             int srcLen
@@ -24,7 +24,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_NormalizeString",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int NormalizeString(
+        partial internal static unsafe int NormalizeString(
             NormalizationForm normalizationForm,
             char* src,
             int srcLen,

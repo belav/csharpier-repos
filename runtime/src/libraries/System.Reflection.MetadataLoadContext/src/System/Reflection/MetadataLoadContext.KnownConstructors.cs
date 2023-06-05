@@ -5,8 +5,9 @@ using System.Reflection.TypeLoading;
 
 namespace System.Reflection
 {
+    partial
     // Latch known constructors of pseudo-CustomAttribute types.
-    public sealed partial class MetadataLoadContext
+    public sealed class MetadataLoadContext
     {
         internal ConstructorInfo? TryGetFieldOffsetCtor() =>
             _lazyFieldOffset ??= TryGetConstructor(CoreType.FieldOffsetAttribute, CoreType.Int32);

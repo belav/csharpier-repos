@@ -11,12 +11,12 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.ServiceModel.Channels;
 
+    partial
     /// <summary>
     /// The ApplicationContainerSettingsElement provides configuration support for the NamedPipes
     /// services in in application containers.
     /// </summary>
-    public sealed partial class ApplicationContainerSettingsElement
-        : ServiceModelConfigurationElement
+    public sealed class ApplicationContainerSettingsElement : ServiceModelConfigurationElement
     {
         public ApplicationContainerSettingsElement() { }
 

@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests
 {
+    partial
     /// <summary>
     /// Miscellaneous Cases
     /// </summary>
-    public static partial class MiscellaneousCasesTests
+    public static class MiscellaneousCasesTests
     {
         /// <summary>
         /// verify that attribute nodes occur before children of a node in document order

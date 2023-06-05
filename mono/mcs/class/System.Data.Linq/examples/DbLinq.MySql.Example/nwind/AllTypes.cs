@@ -25,7 +25,7 @@ using DbLinq.Data.Linq;
 
 namespace AllTypesExample
 {
-    public partial class AllTypes : DataContext
+    partial public class AllTypes : DataContext
     {
         public AllTypes(System.Data.IDbConnection connection)
             : base(connection, new DbLinq.MySql.MySqlVendor()) { }
@@ -52,7 +52,7 @@ namespace AllTypesExample
     }
 
     [Table(Name = "AllTypes.allinttypes")]
-    public partial class AllIntTypes : INotifyPropertyChanged
+    partial public class AllIntTypes : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -477,7 +477,7 @@ namespace AllTypesExample
     }
 
     [Table(Name = "AllTypes.floattypes")]
-    public partial class FloatTypes : INotifyPropertyChanged
+    partial public class FloatTypes : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -765,7 +765,7 @@ namespace AllTypesExample
     }
 
     [Table(Name = "AllTypes.othertypes")]
-    public partial class OtherTypes : INotifyPropertyChanged
+    partial public class OtherTypes : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -1096,7 +1096,7 @@ namespace AllTypesExample
     }
 
     [Table(Name = "AllTypes.parsingdata")]
-    public partial class ParsingData : INotifyPropertyChanged
+    partial public class ParsingData : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 

@@ -48,7 +48,7 @@ namespace System.Data.Common
             return GetDbDataReader(i);
         }
 
-        virtual protected DbDataReader GetDbDataReader(int i)
+        protected virtual DbDataReader GetDbDataReader(int i)
         {
             // NOTE: This method is virtual because we're required to implement
             //       it however most providers won't support it. Only the OLE DB

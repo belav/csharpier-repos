@@ -13,8 +13,9 @@ using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
+    partial
     // Implementation for "displaying type name as string" aspect of the Formatter component
-    internal abstract partial class Formatter
+    internal abstract class Formatter
     {
         /// <returns>The qualified name (i.e. including containing types and namespaces) of a named,
         /// pointer, or array type.</returns>

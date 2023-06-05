@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class WriteTests
+    partial public class WriteTests
     {
         protected virtual Stream CreateStream()
         {

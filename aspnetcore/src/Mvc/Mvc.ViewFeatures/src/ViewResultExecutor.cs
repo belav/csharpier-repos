@@ -15,10 +15,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+partial
 /// <summary>
 /// Finds and executes an <see cref="IView"/> for a <see cref="ViewResult"/>.
 /// </summary>
-public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<ViewResult>
+public class ViewResultExecutor : ViewExecutor, IActionResultExecutor<ViewResult>
 {
     private const string ActionNameKey = "action";
 
@@ -229,7 +230,7 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
         return stringRouteValue;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -237,7 +238,7 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
             "Executing ViewResult, running view {ViewName}.",
             EventName = "ViewResultExecuting"
         )]
-        public static partial void ViewResultExecuting(ILogger logger, string viewName);
+        partial public static void ViewResultExecuting(ILogger logger, string viewName);
 
         [LoggerMessage(
             2,
@@ -245,7 +246,7 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
             "The view path '{ViewFilePath}' was found in {ElapsedMilliseconds}ms.",
             EventName = "ViewFound"
         )]
-        private static partial void ViewFound(
+        partial private static void ViewFound(
             ILogger logger,
             string viewFilePath,
             double elapsedMilliseconds
@@ -262,7 +263,7 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
             "The view '{ViewName}' was not found. Searched locations: {SearchedViewLocations}",
             EventName = "ViewNotFound"
         )]
-        public static partial void ViewNotFound(
+        partial public static void ViewNotFound(
             ILogger logger,
             string viewName,
             IEnumerable<string> searchedViewLocations
@@ -274,7 +275,7 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
             "Executed ViewResult - view {ViewName} executed in {ElapsedMilliseconds}ms.",
             EventName = "ViewResultExecuted"
         )]
-        private static partial void ViewResultExecuted(
+        partial private static void ViewResultExecuted(
             ILogger logger,
             string viewName,
             double elapsedMilliseconds

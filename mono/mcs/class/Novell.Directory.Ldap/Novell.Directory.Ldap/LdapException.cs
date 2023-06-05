@@ -151,6 +151,7 @@ namespace Novell.Directory.Ldap
 
     public class LdapException : System.Exception
     {
+        public
         /// <summary> Returns the error message from the Ldap server, if this message is
         /// available (that is, if this message was set). If the message was not set,
         /// this method returns null.
@@ -159,7 +160,7 @@ namespace Novell.Directory.Ldap
         /// <returns> The error message or null if the message was not set.
         ///
         /// </returns>
-        virtual public System.String LdapErrorMessage
+        virtual System.String LdapErrorMessage
         {
             get
             {
@@ -171,15 +172,17 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the lower level Exception which caused the failure, if any.
         /// For example, an IOException with additional information may be returned
         /// on a CONNECT_ERROR failure.
         /// </summary>
-        virtual public System.Exception Cause
+        virtual System.Exception Cause
         {
             get { return rootException; }
         }
 
+        public
         /// <summary> Returns the result code from the exception.
         ///
         /// The codes are defined as <code>public final static int</code> members
@@ -188,11 +191,12 @@ namespace Novell.Directory.Ldap
         /// code will be one of those defined for the class. Otherwise, a local error
         /// code is returned.
         /// </summary>
-        virtual public int ResultCode
+        virtual int ResultCode
         {
             get { return resultCode; }
         }
 
+        public
         /// <summary> Returns the part of a submitted distinguished name which could be
         /// matched by the server.
         ///
@@ -211,7 +215,7 @@ namespace Novell.Directory.Ldap
         /// <returns> The part of a submitted distinguished name which could be
         /// matched by the server or null if the error is a local error.
         /// </returns>
-        virtual public System.String MatchedDN
+        virtual System.String MatchedDN
         {
             get { return matchedDN; }
         }

@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.IO.Enumeration
 {
-    public abstract unsafe partial class FileSystemEnumerator<TResult>
+    partial public abstract unsafe class FileSystemEnumerator<TResult>
         : CriticalFinalizerObject,
             IEnumerator<TResult>
     {

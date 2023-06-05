@@ -266,7 +266,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 set { _eventChecker = value; }
             }
 
-            static private void testAdded()
+            private static void testAdded()
             {
                 _testcounter++;
                 _eventChecker = false;
@@ -463,7 +463,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 evaluateCount = 0;
             }
 
-            internal protected override object Evaluate(HttpContext context, Control control)
+            protected internal override object Evaluate(HttpContext context, Control control)
             {
                 evaluateCount++;
                 return String.Format("{0}{1}", DefaultValue, evaluateCount);

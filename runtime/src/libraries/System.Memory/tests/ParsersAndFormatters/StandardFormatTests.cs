@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Buffers.Text.Tests
 {
-    public static partial class StandardFormatTests
+    partial public static class StandardFormatTests
     {
         [Fact]
         public static void StandardFormatCtorNegative()

@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
 {
-    public partial class SimplifyThisOrMeTests
+    partial public class SimplifyThisOrMeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyThisOrMeTests(ITestOutputHelper logger)

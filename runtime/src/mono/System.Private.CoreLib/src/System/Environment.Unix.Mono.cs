@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System
 {
-    public partial class Environment
+    partial public class Environment
     {
         private static Dictionary<string, string>? s_environment;
 

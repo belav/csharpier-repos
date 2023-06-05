@@ -6,7 +6,7 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json.Nodes
 {
-    public partial class JsonValue
+    partial public class JsonValue
     {
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonValue"/> class that contains the specified value.

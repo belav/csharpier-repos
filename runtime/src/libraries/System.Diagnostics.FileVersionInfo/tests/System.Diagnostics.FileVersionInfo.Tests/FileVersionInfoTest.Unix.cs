@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class FileVersionInfoTest
+    partial public class FileVersionInfoTest
     {
         [PlatformSpecific(TestPlatforms.AnyUnix & ~(TestPlatforms.iOS | TestPlatforms.tvOS))]
         [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks mkfifo")]

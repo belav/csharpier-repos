@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class OleAut32
+    partial internal static class OleAut32
     {
         [LibraryImport(Libraries.OleAut32)]
-        internal static partial void VariantClear(IntPtr variant);
+        partial internal static void VariantClear(IntPtr variant);
     }
 }

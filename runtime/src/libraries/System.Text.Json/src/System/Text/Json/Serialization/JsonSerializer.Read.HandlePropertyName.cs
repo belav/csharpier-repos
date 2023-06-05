@@ -10,7 +10,7 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
-    public static partial class JsonSerializer
+    partial public static class JsonSerializer
     {
         /// <summary>
         /// Lookup the property given its name (obtained from the reader) and return it.

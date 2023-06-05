@@ -21,9 +21,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ImplementInterface
 {
-    internal abstract partial class AbstractImplementInterfaceService
+    partial internal abstract class AbstractImplementInterfaceService
     {
-        internal partial class ImplementInterfaceCodeAction : CodeAction
+        partial internal class ImplementInterfaceCodeAction : CodeAction
         {
             protected readonly bool Explicitly;
             protected readonly bool Abstractly;

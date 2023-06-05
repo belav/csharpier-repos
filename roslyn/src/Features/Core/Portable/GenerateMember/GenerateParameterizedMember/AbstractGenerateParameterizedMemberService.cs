@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal abstract partial class AbstractGenerateParameterizedMemberService<
+    partial internal abstract class AbstractGenerateParameterizedMemberService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax,

@@ -622,7 +622,7 @@ namespace Mono.Security.Cryptography
             return mask;
         }
 
-        static internal string HashNameFromOid(string oid, bool throwOnError = true)
+        internal static string HashNameFromOid(string oid, bool throwOnError = true)
         {
             switch (oid)
             {
@@ -651,12 +651,12 @@ namespace Mono.Security.Cryptography
             }
         }
 
-        static internal HashAlgorithm CreateFromOid(string oid)
+        internal static HashAlgorithm CreateFromOid(string oid)
         {
             return CreateFromName(HashNameFromOid(oid));
         }
 
-        static internal HashAlgorithm CreateFromName(string name)
+        internal static HashAlgorithm CreateFromName(string name)
         {
 #if FULL_AOT_RUNTIME
             switch (name)

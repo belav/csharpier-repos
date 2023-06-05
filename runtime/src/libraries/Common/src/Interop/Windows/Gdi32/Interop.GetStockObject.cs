@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         public enum StockObject : int
         {
@@ -14,6 +14,6 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Gdi32)]
-        public static partial IntPtr GetStockObject(StockObject i);
+        partial public static IntPtr GetStockObject(StockObject i);
     }
 }

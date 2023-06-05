@@ -15,7 +15,7 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.ErrorReporting
 {
-    internal partial class VisualStudioErrorReportingService
+    partial internal class VisualStudioErrorReportingService
     {
         private static string GetFormattedExceptionStack(Exception exception)
         {

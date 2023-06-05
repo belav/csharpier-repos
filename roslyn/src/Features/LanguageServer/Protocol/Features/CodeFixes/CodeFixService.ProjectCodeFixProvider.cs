@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
-    internal partial class CodeFixService
+    partial internal class CodeFixService
     {
         private class ProjectCodeFixProvider
             : AbstractProjectExtensionProvider<

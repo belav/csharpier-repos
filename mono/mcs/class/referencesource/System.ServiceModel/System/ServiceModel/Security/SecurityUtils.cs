@@ -311,8 +311,8 @@ namespace System.ServiceModel.Security
         const int XPMinorNumber = 1;
         const string ServicePack1 = "Service Pack 1";
         const string ServicePack2 = "Service Pack 2";
-        volatile static bool shouldValidateSslCipherStrength;
-        volatile static bool isSslValidationRequirementDetermined = false;
+        static volatile bool shouldValidateSslCipherStrength;
+        static volatile bool isSslValidationRequirementDetermined = false;
         static readonly int MinimumSslCipherStrength = 128;
 
         // these are kept in sync with IIS70
@@ -2475,7 +2475,7 @@ namespace System.ServiceModel.Security
                 Safe = "Only uses the protected values to test for null/empty.  Does not leak."
             )]
             [SecuritySafeCritical]
-            static internal bool IsNullOrEmpty(NetworkCredential credential)
+            internal static bool IsNullOrEmpty(NetworkCredential credential)
             {
                 return credential == null
                     || (
@@ -2490,7 +2490,7 @@ namespace System.ServiceModel.Security
                 Safe = "Only uses the default credentials to test for equality and uses the system credential's .Equals, not the caller's."
             )]
             [SecuritySafeCritical]
-            static internal bool IsDefault(NetworkCredential credential)
+            internal static bool IsDefault(NetworkCredential credential)
             {
                 return UnsafeGetDefaultNetworkCredentials().Equals(credential);
             }
@@ -2502,7 +2502,7 @@ namespace System.ServiceModel.Security
             )]
             [SecurityCritical]
             [EnvironmentPermission(SecurityAction.Assert, Read = "USERNAME")]
-            static internal string UnsafeGetUsername(NetworkCredential credential)
+            internal static string UnsafeGetUsername(NetworkCredential credential)
             {
                 return credential.UserName;
             }
@@ -2514,7 +2514,7 @@ namespace System.ServiceModel.Security
             )]
             [SecurityCritical]
             [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
-            static internal string UnsafeGetPassword(NetworkCredential credential)
+            internal static string UnsafeGetPassword(NetworkCredential credential)
             {
                 return credential.Password;
             }
@@ -2526,7 +2526,7 @@ namespace System.ServiceModel.Security
             )]
             [SecurityCritical]
             [EnvironmentPermission(SecurityAction.Assert, Read = "USERDOMAIN")]
-            static internal string UnsafeGetDomain(NetworkCredential credential)
+            internal static string UnsafeGetDomain(NetworkCredential credential)
             {
                 return credential.Domain;
             }

@@ -6,7 +6,7 @@ namespace System.Activities.Debugger
 {
     using System.Collections.Generic;
 
-    internal partial class CharacterSpottingTextReader : ICharacterSpottingTextReaderForUnitTest
+    partial internal class CharacterSpottingTextReader : ICharacterSpottingTextReaderForUnitTest
     {
         int ICharacterSpottingTextReaderForUnitTest.CurrentLine
         {

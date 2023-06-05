@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         ),
         Shared
     ]
-    internal partial class CSharpAsAndMemberAccessCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    partial internal class CSharpAsAndMemberAccessCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

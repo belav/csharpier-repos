@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Formatter
+    partial public static class Utf8Formatter
     {
         /// <summary>
         /// Formats a TimeSpan as a UTF8 string.

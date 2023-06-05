@@ -13,7 +13,7 @@ namespace System.Runtime.InteropServices
     /// </summary>
     [StructLayout(LayoutKind.Explicit)]
     [SupportedOSPlatform("windows")]
-    internal partial struct Variant
+    partial internal struct Variant
     {
 #if DEBUG
         static Variant()

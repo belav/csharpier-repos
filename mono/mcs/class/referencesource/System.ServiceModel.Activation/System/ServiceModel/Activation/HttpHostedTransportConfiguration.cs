@@ -18,7 +18,7 @@ namespace System.ServiceModel.Activation
     {
         Collection<HostedHttpTransportManager> transportManagerDirectory;
 
-        internal protected HttpHostedTransportConfiguration(string scheme)
+        protected internal HttpHostedTransportConfiguration(string scheme)
             : base(scheme)
         {
             CreateTransportManagers();

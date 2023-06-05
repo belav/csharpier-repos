@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 using System.Net.Sockets;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool WSAGetOverlappedResult(
+        partial internal static unsafe bool WSAGetOverlappedResult(
             SafeSocketHandle socketHandle,
             NativeOverlapped* overlapped,
             out uint bytesTransferred,

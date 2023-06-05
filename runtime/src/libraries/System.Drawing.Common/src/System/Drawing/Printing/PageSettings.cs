@@ -7,10 +7,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Printing
 {
+    partial
     /// <summary>
     /// Specifies settings that apply to a single page.
     /// </summary>
-    public partial class PageSettings : ICloneable
+    public class PageSettings : ICloneable
     {
         internal PrinterSettings printerSettings;
 

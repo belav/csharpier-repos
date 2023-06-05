@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal partial class DisconnectListener
+partial internal class DisconnectListener
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.DisconnectHandlerError,
@@ -15,7 +15,7 @@ internal partial class DisconnectListener
             "CreateDisconnectToken Callback",
             EventName = "DisconnectHandlerError"
         )]
-        public static partial void DisconnectHandlerError(ILogger logger, Exception exception);
+        partial public static void DisconnectHandlerError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.DisconnectRegistrationError,
@@ -23,7 +23,7 @@ internal partial class DisconnectListener
             "Unable to register for disconnect notifications.",
             EventName = "DisconnectRegistrationError"
         )]
-        public static partial void DisconnectRegistrationError(ILogger logger, Exception exception);
+        partial public static void DisconnectRegistrationError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.CreateDisconnectTokenError,
@@ -31,7 +31,7 @@ internal partial class DisconnectListener
             "CreateDisconnectToken",
             EventName = "CreateDisconnectTokenError"
         )]
-        public static partial void CreateDisconnectTokenError(ILogger logger, Exception exception);
+        partial public static void CreateDisconnectTokenError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.DisconnectTriggered,
@@ -39,7 +39,7 @@ internal partial class DisconnectListener
             "CreateDisconnectToken; http.sys disconnect callback fired for connection ID: {ConnectionId}",
             EventName = "DisconnectTriggered"
         )]
-        public static partial void DisconnectTriggered(ILogger logger, ulong connectionId);
+        partial public static void DisconnectTriggered(ILogger logger, ulong connectionId);
 
         [LoggerMessage(
             LoggerEventIds.RegisterDisconnectListener,
@@ -47,7 +47,7 @@ internal partial class DisconnectListener
             "CreateDisconnectToken; Registering connection for disconnect for connection ID: {ConnectionId}",
             EventName = "RegisterDisconnectListener"
         )]
-        public static partial void RegisterDisconnectListener(ILogger logger, ulong connectionId);
+        partial public static void RegisterDisconnectListener(ILogger logger, ulong connectionId);
 
         [LoggerMessage(
             LoggerEventIds.UnknownDisconnectError,
@@ -55,6 +55,6 @@ internal partial class DisconnectListener
             "HttpWaitForDisconnectEx",
             EventName = "UnknownDisconnectError"
         )]
-        public static partial void UnknownDisconnectError(ILogger logger, Exception exception);
+        partial public static void UnknownDisconnectError(ILogger logger, Exception exception);
     }
 }

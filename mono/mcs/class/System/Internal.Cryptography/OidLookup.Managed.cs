@@ -28,10 +28,11 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
+    partial
     /// <summary>
     /// Fully managed implementation of OidLookup for the commonly supported Oids.
     /// </summary>
-    internal static partial class OidLookup
+    internal static class OidLookup
     {
         private static bool ShouldUseCache(OidGroup oidGroup)
         {

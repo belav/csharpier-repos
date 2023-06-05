@@ -568,7 +568,7 @@ namespace Mono.Simd
 
         /*Same as a == b. */
         [Acceleration(AccelMode.SSE1)]
-        public unsafe static Vector4f CompareEqual(this Vector4f v1, Vector4f v2)
+        public static unsafe Vector4f CompareEqual(this Vector4f v1, Vector4f v2)
         {
             Vector4f res = new Vector4f();
             int* c = (int*)&res;
@@ -581,7 +581,7 @@ namespace Mono.Simd
 
         /*Same as a == b. */
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static Vector2d CompareEqual(this Vector2d v1, Vector2d v2)
+        public static unsafe Vector2d CompareEqual(this Vector2d v1, Vector2d v2)
         {
             Vector2d res = new Vector2d();
             long* c = (long*)&res;
@@ -678,7 +678,7 @@ namespace Mono.Simd
 
         /*Same as a < b. */
         [Acceleration(AccelMode.SSE1)]
-        public unsafe static Vector4f CompareLessThan(this Vector4f v1, Vector4f v2)
+        public static unsafe Vector4f CompareLessThan(this Vector4f v1, Vector4f v2)
         {
             Vector4f res = new Vector4f();
             int* c = (int*)&res;
@@ -691,7 +691,7 @@ namespace Mono.Simd
 
         /*Same as a < b. */
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static Vector2d CompareLessThan(this Vector2d v1, Vector2d v2)
+        public static unsafe Vector2d CompareLessThan(this Vector2d v1, Vector2d v2)
         {
             Vector2d res = new Vector2d();
             long* c = (long*)&res;
@@ -702,7 +702,7 @@ namespace Mono.Simd
 
         /*Same as a <= b. */
         [Acceleration(AccelMode.SSE1)]
-        public unsafe static Vector4f CompareLessEqual(this Vector4f v1, Vector4f v2)
+        public static unsafe Vector4f CompareLessEqual(this Vector4f v1, Vector4f v2)
         {
             Vector4f res = new Vector4f();
             int* c = (int*)&res;
@@ -715,7 +715,7 @@ namespace Mono.Simd
 
         /*Same as a <= b. */
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static Vector2d CompareLessEqual(this Vector2d v1, Vector2d v2)
+        public static unsafe Vector2d CompareLessEqual(this Vector2d v1, Vector2d v2)
         {
             Vector2d res = new Vector2d();
             long* c = (long*)&res;
@@ -768,7 +768,7 @@ namespace Mono.Simd
 
         /*Same float.IsNaN (a) || float.IsNaN (b). */
         [Acceleration(AccelMode.SSE1)]
-        public unsafe static Vector4f CompareUnordered(this Vector4f v1, Vector4f v2)
+        public static unsafe Vector4f CompareUnordered(this Vector4f v1, Vector4f v2)
         {
             Vector4f res = new Vector4f();
             int* c = (int*)&res;
@@ -781,7 +781,7 @@ namespace Mono.Simd
 
         /*Same double.IsNaN (a) || double.IsNaN (b). */
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static Vector2d CompareUnordered(this Vector2d v1, Vector2d v2)
+        public static unsafe Vector2d CompareUnordered(this Vector2d v1, Vector2d v2)
         {
             Vector2d res = new Vector2d();
             long* c = (long*)&res;
@@ -792,7 +792,7 @@ namespace Mono.Simd
 
         /*Same as a != b. */
         [Acceleration(AccelMode.SSE1)]
-        public unsafe static Vector4f CompareNotEqual(this Vector4f v1, Vector4f v2)
+        public static unsafe Vector4f CompareNotEqual(this Vector4f v1, Vector4f v2)
         {
             Vector4f res = new Vector4f();
             int* c = (int*)&res;
@@ -805,7 +805,7 @@ namespace Mono.Simd
 
         /*Same as a != b. */
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static Vector2d CompareNotEqual(this Vector2d v1, Vector2d v2)
+        public static unsafe Vector2d CompareNotEqual(this Vector2d v1, Vector2d v2)
         {
             Vector2d res = new Vector2d();
             long* c = (long*)&res;
@@ -816,7 +816,7 @@ namespace Mono.Simd
 
         /*Same as !(a < b). */
         [Acceleration(AccelMode.SSE1)]
-        public unsafe static Vector4f CompareNotLessThan(this Vector4f v1, Vector4f v2)
+        public static unsafe Vector4f CompareNotLessThan(this Vector4f v1, Vector4f v2)
         {
             Vector4f res = new Vector4f();
             int* c = (int*)&res;
@@ -829,7 +829,7 @@ namespace Mono.Simd
 
         /*Same as !(a < b). */
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static Vector2d CompareNotLessThan(this Vector2d v1, Vector2d v2)
+        public static unsafe Vector2d CompareNotLessThan(this Vector2d v1, Vector2d v2)
         {
             Vector2d res = new Vector2d();
             long* c = (long*)&res;
@@ -840,7 +840,7 @@ namespace Mono.Simd
 
         /*Same as !(a <= b). */
         [Acceleration(AccelMode.SSE1)]
-        public unsafe static Vector4f CompareNotLessEqual(this Vector4f v1, Vector4f v2)
+        public static unsafe Vector4f CompareNotLessEqual(this Vector4f v1, Vector4f v2)
         {
             Vector4f res = new Vector4f();
             int* c = (int*)&res;
@@ -853,7 +853,7 @@ namespace Mono.Simd
 
         /*Same as !(a <= b). */
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static Vector2d CompareNotLessEqual(this Vector2d v1, Vector2d v2)
+        public static unsafe Vector2d CompareNotLessEqual(this Vector2d v1, Vector2d v2)
         {
             Vector2d res = new Vector2d();
             long* c = (long*)&res;
@@ -864,7 +864,7 @@ namespace Mono.Simd
 
         /*Same !float.IsNaN (a) && !float.IsNaN (b). */
         [Acceleration(AccelMode.SSE1)]
-        public unsafe static Vector4f CompareOrdered(this Vector4f v1, Vector4f v2)
+        public static unsafe Vector4f CompareOrdered(this Vector4f v1, Vector4f v2)
         {
             Vector4f res = new Vector4f();
             int* c = (int*)&res;
@@ -877,7 +877,7 @@ namespace Mono.Simd
 
         /*Same !double.IsNaN (a) && !double.IsNaN (b). */
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static Vector2d CompareOrdered(this Vector2d v1, Vector2d v2)
+        public static unsafe Vector2d CompareOrdered(this Vector2d v1, Vector2d v2)
         {
             Vector2d res = new Vector2d();
             long* c = (long*)&res;

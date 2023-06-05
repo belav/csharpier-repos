@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatements
 {
-    public sealed partial class MergeNestedIfStatementsTests
+    partial public sealed class MergeNestedIfStatementsTests
     {
         [Fact]
         public async Task MergedOnOuterIf()

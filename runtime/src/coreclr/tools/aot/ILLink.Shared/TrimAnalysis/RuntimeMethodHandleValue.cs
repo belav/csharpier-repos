@@ -9,10 +9,11 @@ using ILLink.Shared.TypeSystemProxy;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// This is the System.RuntimeMethodHandle equivalent to a <see cref="SystemReflectionMethodBaseValue"/> node.
     /// </summary>
-    internal sealed partial record RuntimeMethodHandleValue : SingleValue
+    internal sealed record RuntimeMethodHandleValue : SingleValue
     {
         public RuntimeMethodHandleValue(in MethodProxy representedMethod)
         {

@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
-    public partial class Dictionary_IDictionary_NonGeneric_Tests : IDictionary_NonGeneric_Tests
+    partial public class Dictionary_IDictionary_NonGeneric_Tests : IDictionary_NonGeneric_Tests
     {
         protected override IDictionary NonGenericIDictionaryFactory()
         {

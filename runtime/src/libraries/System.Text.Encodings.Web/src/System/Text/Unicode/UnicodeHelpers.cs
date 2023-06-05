@@ -6,10 +6,11 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Unicode
 {
+    partial
     /// <summary>
     /// Contains helpers for dealing with Unicode code points.
     /// </summary>
-    internal static partial class UnicodeHelpers
+    internal static class UnicodeHelpers
     {
         /// <summary>
         /// The last code point defined by the Unicode specification.

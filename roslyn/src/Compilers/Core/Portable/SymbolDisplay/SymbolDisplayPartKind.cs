@@ -130,7 +130,7 @@ namespace Microsoft.CodeAnalysis
         public const SymbolDisplayPartKind Other = @base + 1;
     }
 
-    internal static partial class EnumBounds
+    partial internal static class EnumBounds
     {
         internal static bool IsValid(this SymbolDisplayPartKind value)
         {

@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.InlineMethod
 {
-    internal abstract partial class AbstractInlineMethodRefactoringProvider<
+    partial internal abstract class AbstractInlineMethodRefactoringProvider<
         TMethodDeclarationSyntax,
         TStatementSyntax,
         TExpressionSyntax,

@@ -23,9 +23,9 @@ using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
-        private partial class SymbolReferenceFinder
+        partial private class SymbolReferenceFinder
         {
             private const string AttributeSuffix = nameof(Attribute);
 

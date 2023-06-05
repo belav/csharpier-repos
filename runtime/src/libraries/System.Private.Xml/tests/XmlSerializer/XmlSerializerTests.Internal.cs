@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using Xunit;
 
-public static partial class XmlSerializerTests
+partial public static class XmlSerializerTests
 {
     [Fact]
     // XmlTypeMapping is not included in System.Xml.XmlSerializer 4.0.0.0 facade in GAC

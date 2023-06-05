@@ -4,9 +4,9 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use SetFileAttributes.
@@ -18,7 +18,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool SetFileAttributesPrivate(string name, int attr);
+        partial private static bool SetFileAttributesPrivate(string name, int attr);
 
         internal static bool SetFileAttributes(string name, int attr)
         {

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct OtherNameAsn
+    partial internal struct OtherNameAsn
     {
         internal string TypeId;
         internal ReadOnlyMemory<byte> Value;

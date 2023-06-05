@@ -3,7 +3,7 @@
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Formatter
+    partial public static class Utf8Formatter
     {
         // Rfc1123 - lowercase
         //

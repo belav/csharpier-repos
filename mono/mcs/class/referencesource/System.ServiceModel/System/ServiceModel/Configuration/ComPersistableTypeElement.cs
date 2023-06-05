@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
     using System.Xml;
 
-    public sealed partial class ComPersistableTypeElement : ConfigurationElement
+    partial public sealed class ComPersistableTypeElement : ConfigurationElement
     {
         public ComPersistableTypeElement()
             : base() { }

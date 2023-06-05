@@ -13,11 +13,12 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.WebSockets;
 
+partial
 /// <summary>
 /// Enables accepting WebSocket requests by adding a <see cref="IHttpWebSocketFeature"/>
 /// to the <see cref="HttpContext"/> if the request is a valid WebSocket request.
 /// </summary>
-public partial class WebSocketMiddleware
+public class WebSocketMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly WebSocketOptions _options;
@@ -389,7 +390,7 @@ public partial class WebSocketMiddleware
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -397,7 +398,7 @@ public partial class WebSocketMiddleware
             "WebSocket compression negotiation accepted with values '{CompressionResponse}'.",
             EventName = "CompressionAccepted"
         )]
-        public static partial void CompressionAccepted(ILogger logger, string compressionResponse);
+        partial public static void CompressionAccepted(ILogger logger, string compressionResponse);
 
         [LoggerMessage(
             2,
@@ -405,6 +406,6 @@ public partial class WebSocketMiddleware
             "Compression negotiation not accepted by server.",
             EventName = "CompressionNotAccepted"
         )]
-        public static partial void CompressionNotAccepted(ILogger logger);
+        partial public static void CompressionNotAccepted(ILogger logger);
     }
 }

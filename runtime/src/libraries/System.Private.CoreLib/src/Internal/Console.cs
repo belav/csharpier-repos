@@ -5,12 +5,13 @@ using System;
 
 namespace Internal
 {
+    partial
     //
     // Simple limited console class for internal printf-style debugging in System.Private.CoreLib
     // and low-level tests that want to call System.Private.CoreLib directly
     //
 
-    public static partial class Console
+    public static class Console
     {
         public static void WriteLine(string? s) => Write(s + Environment.NewLineConst);
 

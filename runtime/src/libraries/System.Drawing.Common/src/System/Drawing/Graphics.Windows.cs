@@ -16,10 +16,11 @@ using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {
+    partial
     /// <summary>
     /// Encapsulates a GDI+ drawing surface.
     /// </summary>
-    public sealed partial class Graphics : MarshalByRefObject, IDisposable, IDeviceContext
+    public sealed class Graphics : MarshalByRefObject, IDisposable, IDeviceContext
     {
 #if FINALIZATION_WATCH
         static readonly TraceSwitch GraphicsFinalization = new TraceSwitch(

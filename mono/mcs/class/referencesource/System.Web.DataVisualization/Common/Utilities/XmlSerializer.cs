@@ -302,7 +302,16 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// Reset properties of the object to default values.
         /// </summary>
         /// <param name="objectToReset">Object to be reset.</param>
-        virtual internal void ResetObjectProperties(object objectToReset)
+        internal
+        #endregion
+
+        #region Resetting methods
+
+        /// <summary>
+        /// Reset properties of the object to default values.
+        /// </summary>
+        /// <param name="objectToReset">Object to be reset.</param>
+        virtual void ResetObjectProperties(object objectToReset)
         {
             // Reset object properties
             ResetObjectProperties(objectToReset, null, GetObjectName(objectToReset));
@@ -315,11 +324,15 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="objectToReset">Object to be reset.</param>
         /// <param name="parent">Parent of the reset object.</param>
         /// <param name="elementName">Object element name.</param>
-        virtual internal void ResetObjectProperties(
-            object objectToReset,
-            object parent,
-            string elementName
-        )
+        internal
+        /// <summary>
+        /// Reset properties of the object to default values.
+        /// Method is called recursively to reset child objects properties.
+        /// </summary>
+        /// <param name="objectToReset">Object to be reset.</param>
+        /// <param name="parent">Parent of the reset object.</param>
+        /// <param name="elementName">Object element name.</param>
+        virtual void ResetObjectProperties(object objectToReset, object parent, string elementName)
         {
             // Check input parameters
             if (objectToReset == null)
@@ -1667,7 +1680,17 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="elementName">Object element name.</param>
         /// <param name="xmlParentNode">The XmlNode of the parent object to serialize the data in.</param>
         /// <param name="xmlDocument">The XmlDocument the parent node belongs to.</param>
-        virtual protected void SerializeObject(
+        protected
+        /// <summary>
+        /// Serialize specified object into the XML format.
+        /// Method is called recursively to serialize child objects.
+        /// </summary>
+        /// <param name="objectToSerialize">Object to be serialized.</param>
+        /// <param name="parent">Parent of the serialized object.</param>
+        /// <param name="elementName">Object element name.</param>
+        /// <param name="xmlParentNode">The XmlNode of the parent object to serialize the data in.</param>
+        /// <param name="xmlDocument">The XmlDocument the parent node belongs to.</param>
+        virtual void SerializeObject(
             object objectToSerialize,
             object parent,
             string elementName,
@@ -1942,7 +1965,16 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="elementName">Object element name.</param>
         /// <param name="xmlParentNode">The XmlNode of the parent object to serialize the data in.</param>
         /// <param name="xmlDocument">The XmlDocument the parent node belongs to.</param>
-        virtual protected void SerializeCollection(
+        protected
+        /// <summary>
+        /// Serialize specified object into the XML text writer.
+        /// Method is called recursively to serialize child objects.
+        /// </summary>
+        /// <param name="objectToSerialize">Object to be serialized.</param>
+        /// <param name="elementName">Object element name.</param>
+        /// <param name="xmlParentNode">The XmlNode of the parent object to serialize the data in.</param>
+        /// <param name="xmlDocument">The XmlDocument the parent node belongs to.</param>
+        virtual void SerializeCollection(
             object objectToSerialize,
             string elementName,
             XmlNode xmlParentNode,
@@ -1984,7 +2016,17 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="elementName">Object element name.</param>
         /// <param name="xmlParentNode">The XmlNode of the parent object to serialize the data in.</param>
         /// <param name="xmlDocument">The XmlDocument the parent node belongs to.</param>
-        virtual protected void SerializeProperty(
+        protected
+        /// <summary>
+        /// Serialize specified object into the XML text writer.
+        /// Method is called recursively to serialize child objects.
+        /// </summary>
+        /// <param name="objectToSerialize">Object to be serialized.</param>
+        /// <param name="parent">Parent of the serialized object.</param>
+        /// <param name="elementName">Object element name.</param>
+        /// <param name="xmlParentNode">The XmlNode of the parent object to serialize the data in.</param>
+        /// <param name="xmlDocument">The XmlDocument the parent node belongs to.</param>
+        virtual void SerializeProperty(
             object objectToSerialize,
             object parent,
             string elementName,
@@ -2322,7 +2364,18 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="xmlParentNode">The XmlNode of the parent object to deserialize the data from.</param>
         /// <param name="xmlDocument">The XmlDocument the parent node belongs to.</param>
         /// <returns>Number of properties set.</returns>
-        virtual internal int DeserializeObject(
+        internal
+        /// <summary>
+        /// Deserialize object from the XML format.
+        /// Method is called recursively to deserialize child objects.
+        /// </summary>
+        /// <param name="objectToDeserialize">Object to be deserialized.</param>
+        /// <param name="parent">Parent of the deserialized object.</param>
+        /// <param name="elementName">Object element name.</param>
+        /// <param name="xmlParentNode">The XmlNode of the parent object to deserialize the data from.</param>
+        /// <param name="xmlDocument">The XmlDocument the parent node belongs to.</param>
+        /// <returns>Number of properties set.</returns>
+        virtual int DeserializeObject(
             object objectToDeserialize,
             object parent,
             string elementName,
@@ -2722,7 +2775,16 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="parent">Parent of the serialized object.</param>
         /// <param name="elementName">Object element name.</param>
         /// <param name="writer">Binary writer object.</param>
-        virtual internal void SerializeObject(
+        internal
+        /// <summary>
+        /// Serialize specified object into the binary format.
+        /// Method is called recursively to serialize child objects.
+        /// </summary>
+        /// <param name="objectToSerialize">Object to be serialized.</param>
+        /// <param name="parent">Parent of the serialized object.</param>
+        /// <param name="elementName">Object element name.</param>
+        /// <param name="writer">Binary writer object.</param>
+        virtual void SerializeObject(
             object objectToSerialize,
             object parent,
             string elementName,
@@ -2982,7 +3044,15 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="objectToSerialize">Object to be serialized.</param>
         /// <param name="elementName">Object element name.</param>
         /// <param name="writer">Binary writer.</param>
-        virtual internal void SerializeCollection(
+        internal
+        /// <summary>
+        /// Serialize specified object into the binary writer.
+        /// Method is called recursively to serialize child objects.
+        /// </summary>
+        /// <param name="objectToSerialize">Object to be serialized.</param>
+        /// <param name="elementName">Object element name.</param>
+        /// <param name="writer">Binary writer.</param>
+        virtual void SerializeCollection(
             object objectToSerialize,
             string elementName,
             BinaryWriter writer
@@ -3033,7 +3103,16 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="parent">Parent of the serialized object.</param>
         /// <param name="elementName">Object element name.</param>
         /// <param name="writer">Binary writer.</param>
-        virtual internal void SerializeProperty(
+        internal
+        /// <summary>
+        /// Serialize specified object into the binary writer.
+        /// Method is called recursively to serialize child objects.
+        /// </summary>
+        /// <param name="objectToSerialize">Object to be serialized.</param>
+        /// <param name="parent">Parent of the serialized object.</param>
+        /// <param name="elementName">Object element name.</param>
+        /// <param name="writer">Binary writer.</param>
+        virtual void SerializeProperty(
             object objectToSerialize,
             object parent,
             string elementName,
@@ -3412,7 +3491,18 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="reader">Binary reader object.</param>
         /// <param name="skipElement">if set to <c>true</c> the element will not be set.</param>
         /// <returns>Number of properties set.</returns>
-        virtual protected int DeserializeObject(
+        protected
+        /// <summary>
+        /// Deserialize object from the binary format.
+        /// Method is called recursively to deserialize child objects.
+        /// </summary>
+        /// <param name="objectToDeserialize">Object to be deserialized.</param>
+        /// <param name="parent">Parent of the deserialized object.</param>
+        /// <param name="elementName">Object element name.</param>
+        /// <param name="reader">Binary reader object.</param>
+        /// <param name="skipElement">if set to <c>true</c> the element will not be set.</param>
+        /// <returns>Number of properties set.</returns>
+        virtual int DeserializeObject(
             object objectToDeserialize,
             object parent,
             string elementName,

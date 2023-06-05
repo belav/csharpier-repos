@@ -6,8 +6,9 @@ using System.Diagnostics;
 
 namespace System.Formats.Cbor
 {
+    partial
     /// <summary>A stateful, forward-only reader for Concise Binary Object Representation (CBOR) encoded data.</summary>
-    public partial class CborReader
+    public class CborReader
     {
         private readonly ReadOnlyMemory<byte> _data;
         private int _offset;

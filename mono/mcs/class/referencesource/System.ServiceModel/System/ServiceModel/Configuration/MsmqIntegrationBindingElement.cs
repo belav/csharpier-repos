@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.MsmqIntegration;
     using System.Net.Security;
 
-    public partial class MsmqIntegrationBindingElement : MsmqBindingElementBase
+    partial public class MsmqIntegrationBindingElement : MsmqBindingElementBase
     {
         public MsmqIntegrationBindingElement(string name)
             : base(name) { }

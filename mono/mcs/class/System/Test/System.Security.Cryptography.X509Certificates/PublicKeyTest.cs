@@ -38,10 +38,10 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
     [TestFixture]
     public class PublicKeyTest
     {
-        static public Oid rsaOid = new Oid("1.2.840.113549.1.1.1");
-        static public Oid dsaOid = new Oid("1.2.840.10040.4.1");
-        static public Oid unknownOid = new Oid("1.2.3.4");
-        static public AsnEncodedData emptyData = new AsnEncodedData(new byte[0]);
+        public static Oid rsaOid = new Oid("1.2.840.113549.1.1.1");
+        public static Oid dsaOid = new Oid("1.2.840.10040.4.1");
+        public static Oid unknownOid = new Oid("1.2.3.4");
+        public static AsnEncodedData emptyData = new AsnEncodedData(new byte[0]);
 
         private static byte[] cert_a =
         {

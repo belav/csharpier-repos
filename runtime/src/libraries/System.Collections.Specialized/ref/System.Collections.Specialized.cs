@@ -6,7 +6,7 @@
 
 namespace System.Collections.Specialized
 {
-    public partial struct BitVector32
+    partial public struct BitVector32
         : System.IEquatable<System.Collections.Specialized.BitVector32>
     {
         private int _dummyPrimitive;
@@ -88,7 +88,7 @@ namespace System.Collections.Specialized
             throw null;
         }
 
-        public readonly partial struct Section
+        partial public readonly struct Section
             : System.IEquatable<System.Collections.Specialized.BitVector32.Section>
         {
             private readonly int _dummyPrimitive;
@@ -146,7 +146,7 @@ namespace System.Collections.Specialized
         }
     }
 
-    public partial class HybridDictionary
+    partial public class HybridDictionary
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable
@@ -217,7 +217,7 @@ namespace System.Collections.Specialized
         }
     }
 
-    public partial interface IOrderedDictionary
+    partial public interface IOrderedDictionary
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable
@@ -228,7 +228,7 @@ namespace System.Collections.Specialized
         void RemoveAt(int index);
     }
 
-    public partial class ListDictionary
+    partial public class ListDictionary
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable
@@ -295,7 +295,7 @@ namespace System.Collections.Specialized
         }
     }
 
-    public abstract partial class NameObjectCollectionBase
+    partial public abstract class NameObjectCollectionBase
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Runtime.Serialization.IDeserializationCallback,
@@ -418,7 +418,7 @@ namespace System.Collections.Specialized
 
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
 
-        public partial class KeysCollection
+        partial public class KeysCollection
             : System.Collections.ICollection,
                 System.Collections.IEnumerable
         {
@@ -455,7 +455,7 @@ namespace System.Collections.Specialized
         }
     }
 
-    public partial class NameValueCollection
+    partial public class NameValueCollection
         : System.Collections.Specialized.NameObjectCollectionBase
     {
         public NameValueCollection() { }
@@ -557,7 +557,7 @@ namespace System.Collections.Specialized
         public virtual void Set(string? name, string? value) { }
     }
 
-    public partial class OrderedDictionary
+    partial public class OrderedDictionary
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable,
@@ -661,7 +661,7 @@ namespace System.Collections.Specialized
         ) { }
     }
 
-    public partial class StringCollection
+    partial public class StringCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -766,7 +766,7 @@ namespace System.Collections.Specialized
         "System.Diagnostics.Design.StringDictionaryCodeDomSerializer, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.ComponentModel.Design.Serialization.CodeDomSerializer, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class StringDictionary : System.Collections.IEnumerable
+    partial public class StringDictionary : System.Collections.IEnumerable
     {
         public StringDictionary() { }
 
@@ -820,7 +820,7 @@ namespace System.Collections.Specialized
         public virtual void Remove(string key) { }
     }
 
-    public partial class StringEnumerator
+    partial public class StringEnumerator
     {
         internal StringEnumerator() { }
 

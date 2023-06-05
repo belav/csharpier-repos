@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class Lexer
+    partial internal class Lexer
     {
         // Maximum size of tokens/trivia that we cache and use in quick scanner.
         // From what I see in our own codebase, tokens longer then 40-50 chars are

@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 {
-    internal abstract partial class SettingsViewModelBase<T, TSnapshotFactory, TEntriesSnapshot>
+    partial internal abstract class SettingsViewModelBase<T, TSnapshotFactory, TEntriesSnapshot>
         : IWpfSettingsEditorViewModel,
             ITableDataSource
         where TSnapshotFactory : SettingsSnapshotFactoryBase<T, TEntriesSnapshot>

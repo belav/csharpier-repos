@@ -3,8 +3,9 @@
 
 namespace System.Net.Sockets
 {
+    partial
     /// <summary>Represents a Unix Domain Socket endpoint as a path.</summary>
-    public sealed partial class UnixDomainSocketEndPoint : EndPoint
+    public sealed class UnixDomainSocketEndPoint : EndPoint
     {
 #pragma warning disable CA1802 // on Unix these need to be static readonly rather than const, so we do the same on Windows for consistency
         private static readonly int s_nativePathOffset = 2; // sizeof(sun_family)

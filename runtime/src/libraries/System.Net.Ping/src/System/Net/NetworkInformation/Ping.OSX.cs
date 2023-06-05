@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.NetworkInformation
 {
-    public partial class Ping
+    partial public class Ping
     {
         private static bool SendIpHeader => true;
         private static bool NeedsConnect => false;

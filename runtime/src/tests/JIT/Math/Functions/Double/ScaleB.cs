@@ -5,7 +5,7 @@ using System;
 
 namespace System.MathBenchmarks
 {
-    public partial class Double
+    partial public class Double
     {
         // Tests Math.ScaleB(double, int) over 5000 iterations for the domain x: -1, +1; y: +0, +5000
 

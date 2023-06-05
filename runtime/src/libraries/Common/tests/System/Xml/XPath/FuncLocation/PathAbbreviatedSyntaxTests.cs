@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths
 {
+    partial
     /// <summary>
     /// Location Paths - Abbreviated Syntax
     /// </summary>
-    public static partial class AbbreviatedSyntaxTests
+    public static class AbbreviatedSyntaxTests
     {
         /// <summary>
         /// Find all title elements.

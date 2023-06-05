@@ -24,7 +24,7 @@ using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ISymbolExtensions
+    partial internal static class ISymbolExtensions
     {
         public static DeclarationModifiers GetSymbolModifiers(this ISymbol symbol)
         {

@@ -17,7 +17,7 @@ using Xunit;
 
 namespace JIT.HardwareIntrinsics.X86._Avx1.handwritten
 {
-    public static partial class Program
+    partial public static class Program
     {
         [Fact]
         public static void ConvertToVector128Int32Double()

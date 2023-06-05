@@ -4,40 +4,40 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial IntPtr CreateThreadpoolWork(
+        partial internal static unsafe IntPtr CreateThreadpoolWork(
             delegate* unmanaged<IntPtr, IntPtr, IntPtr, void> pfnwk,
             IntPtr pv,
             IntPtr pcbe
         );
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial void SubmitThreadpoolWork(IntPtr pwk);
+        partial internal static void SubmitThreadpoolWork(IntPtr pwk);
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial void CloseThreadpoolWork(IntPtr pwk);
+        partial internal static void CloseThreadpoolWork(IntPtr pwk);
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial IntPtr CreateThreadpoolWait(
+        partial internal static unsafe IntPtr CreateThreadpoolWait(
             delegate* unmanaged<IntPtr, IntPtr, IntPtr, uint, void> pfnwa,
             IntPtr pv,
             IntPtr pcbe
         );
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial void SetThreadpoolWait(IntPtr pwa, IntPtr h, IntPtr pftTimeout);
+        partial internal static void SetThreadpoolWait(IntPtr pwa, IntPtr h, IntPtr pftTimeout);
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial void WaitForThreadpoolWaitCallbacks(
+        partial internal static void WaitForThreadpoolWaitCallbacks(
             IntPtr pwa,
             [MarshalAs(UnmanagedType.Bool)] bool fCancelPendingCallbacks
         );
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial void CloseThreadpoolWait(IntPtr pwa);
+        partial internal static void CloseThreadpoolWait(IntPtr pwa);
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial class SemanticMap
+    partial internal class SemanticMap
     {
         private class Walker : SyntaxWalker
         {

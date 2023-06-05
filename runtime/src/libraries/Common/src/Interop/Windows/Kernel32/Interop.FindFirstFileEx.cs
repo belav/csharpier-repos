@@ -6,9 +6,9 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use FindFirstFile.
@@ -19,7 +19,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial SafeFindHandle FindFirstFileExPrivate(
+        partial private static SafeFindHandle FindFirstFileExPrivate(
             string lpFileName,
             FINDEX_INFO_LEVELS fInfoLevelId,
             ref WIN32_FIND_DATA lpFindFileData,

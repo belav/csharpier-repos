@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace System.Text.Json.Serialization.Tests
 {
+    partial
     /// <summary>
     /// Base class for wrapping Stream-based JsonSerializer methods which allows tests to run under different configurations.
     /// </summary>
-    public abstract partial class JsonSerializerWrapperForStream
+    public abstract class JsonSerializerWrapperForStream
     {
         protected internal abstract Task SerializeWrapper<T>(
             Stream stream,

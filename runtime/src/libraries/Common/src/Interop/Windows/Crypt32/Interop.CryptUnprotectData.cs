@@ -5,13 +5,13 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptUnprotectData(
+        partial internal static bool CryptUnprotectData(
             in DATA_BLOB pDataIn,
             IntPtr ppszDataDescr,
             ref DATA_BLOB pOptionalEntropy,

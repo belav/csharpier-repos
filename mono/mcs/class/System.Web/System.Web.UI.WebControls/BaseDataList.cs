@@ -493,7 +493,7 @@ namespace System.Web.UI.WebControls
             remove { Events.RemoveHandler(selectedIndexChangedEvent, value); }
         }
 
-        static public bool IsBindableType(Type type)
+        public static bool IsBindableType(Type type)
         {
             // I can't believe how many NRE are possible in System.Web
             if (type == null) // Type.GetTypeCode no longer throws when a null is passed.

@@ -856,7 +856,7 @@ namespace System.IdentityModel.Tokens
             this.sourceData.GetWriter().WriteTo(dictionaryWriter, null);
         }
 
-        static internal void AddSamlClaimTypes(ICollection<Type> knownClaimTypes)
+        internal static void AddSamlClaimTypes(ICollection<Type> knownClaimTypes)
         {
             if (knownClaimTypes == null)
             {

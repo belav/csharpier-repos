@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.IO.IsolatedStorage.Tests
 {
-    public partial class HelperTests
+    partial public class HelperTests
     {
         [Fact]
         public void GetDefaultIdentityAndHash()

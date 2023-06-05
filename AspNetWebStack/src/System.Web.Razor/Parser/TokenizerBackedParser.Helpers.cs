@@ -17,7 +17,7 @@ using System.Web.Razor.Utils;
 
 namespace System.Web.Razor.Parser
 {
-    public abstract partial class TokenizerBackedParser<TTokenizer, TSymbol, TSymbolType>
+    partial public abstract class TokenizerBackedParser<TTokenizer, TSymbol, TSymbolType>
         : ParserBase
         where TTokenizer : Tokenizer<TSymbol, TSymbolType>
         where TSymbol : SymbolBase<TSymbolType>

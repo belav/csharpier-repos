@@ -3,12 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetSystemTimes(out long idle, out long kernel, out long user);
+        partial internal static bool GetSystemTimes(out long idle, out long kernel, out long user);
     }
 }

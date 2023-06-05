@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-public partial class DbContextTest
+partial public class DbContextTest
 {
     [ConditionalFact]
     public void Set_throws_for_type_not_in_model()

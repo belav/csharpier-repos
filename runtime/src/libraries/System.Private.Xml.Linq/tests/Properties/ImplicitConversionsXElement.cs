@@ -7,7 +7,7 @@ using Xunit;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class ImplicitConversionsElem
+    partial public class ImplicitConversionsElem
     {
         // these tests are duplication of the
         // valid cases

@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// A <see cref="IActionResultExecutor{RedirectToRouteResult}"/> for <see cref="RedirectToRouteResult"/>.
 /// </summary>
-public partial class RedirectToRouteResultExecutor : IActionResultExecutor<RedirectToRouteResult>
+public class RedirectToRouteResultExecutor : IActionResultExecutor<RedirectToRouteResult>
 {
     private readonly ILogger _logger;
     private readonly IUrlHelperFactory _urlHelperFactory;
@@ -74,7 +75,7 @@ public partial class RedirectToRouteResultExecutor : IActionResultExecutor<Redir
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -82,7 +83,7 @@ public partial class RedirectToRouteResultExecutor : IActionResultExecutor<Redir
             "Executing RedirectToRouteResult, redirecting to {Destination} from route {RouteName}.",
             EventName = "RedirectToRouteResultExecuting"
         )]
-        public static partial void RedirectToRouteResultExecuting(
+        partial public static void RedirectToRouteResultExecuting(
             ILogger logger,
             string destination,
             string? routeName

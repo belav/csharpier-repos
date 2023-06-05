@@ -8,12 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+partial
 /// <summary>
 /// A <see cref="TextInputFormatter"/> for JSON content that uses <see cref="JsonSerializer"/>.
 /// </summary>
-public partial class SystemTextJsonInputFormatter
-    : TextInputFormatter,
-        IInputFormatterExceptionPolicy
+public class SystemTextJsonInputFormatter : TextInputFormatter, IInputFormatterExceptionPolicy
 {
     private readonly JsonOptions _jsonOptions;
     private readonly ILogger<SystemTextJsonInputFormatter> _logger;
@@ -159,7 +158,7 @@ public partial class SystemTextJsonInputFormatter
         return (inputStream, true);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -167,7 +166,7 @@ public partial class SystemTextJsonInputFormatter
             "JSON input formatter threw an exception: {Message}",
             EventName = "SystemTextJsonInputException"
         )]
-        private static partial void JsonInputException(ILogger logger, string message);
+        partial private static void JsonInputException(ILogger logger, string message);
 
         public static void JsonInputException(ILogger logger, Exception exception) =>
             JsonInputException(logger, exception.Message);
@@ -178,7 +177,7 @@ public partial class SystemTextJsonInputFormatter
             "JSON input formatter succeeded, deserializing to type '{TypeName}'",
             EventName = "SystemTextJsonInputSuccess"
         )]
-        private static partial void JsonInputSuccess(ILogger logger, string? typeName);
+        partial private static void JsonInputSuccess(ILogger logger, string? typeName);
 
         public static void JsonInputSuccess(ILogger logger, Type modelType) =>
             JsonInputSuccess(logger, modelType.FullName);

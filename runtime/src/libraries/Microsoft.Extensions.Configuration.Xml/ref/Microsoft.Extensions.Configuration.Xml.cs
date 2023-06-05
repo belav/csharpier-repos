@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public static partial class XmlConfigurationExtensions
+    partial public static class XmlConfigurationExtensions
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
@@ -66,7 +66,7 @@ namespace Microsoft.Extensions.Configuration
 
 namespace Microsoft.Extensions.Configuration.Xml
 {
-    public partial class XmlConfigurationProvider
+    partial public class XmlConfigurationProvider
         : Microsoft.Extensions.Configuration.FileConfigurationProvider
     {
         public XmlConfigurationProvider(
@@ -77,7 +77,7 @@ namespace Microsoft.Extensions.Configuration.Xml
         public override void Load(System.IO.Stream stream) { }
     }
 
-    public partial class XmlConfigurationSource
+    partial public class XmlConfigurationSource
         : Microsoft.Extensions.Configuration.FileConfigurationSource
     {
         public XmlConfigurationSource() { }
@@ -90,7 +90,7 @@ namespace Microsoft.Extensions.Configuration.Xml
         }
     }
 
-    public partial class XmlDocumentDecryptor
+    partial public class XmlDocumentDecryptor
     {
         public static readonly Microsoft.Extensions.Configuration.Xml.XmlDocumentDecryptor Instance;
 
@@ -113,7 +113,7 @@ namespace Microsoft.Extensions.Configuration.Xml
         }
     }
 
-    public partial class XmlStreamConfigurationProvider
+    partial public class XmlStreamConfigurationProvider
         : Microsoft.Extensions.Configuration.StreamConfigurationProvider
     {
         public XmlStreamConfigurationProvider(
@@ -132,7 +132,7 @@ namespace Microsoft.Extensions.Configuration.Xml
         }
     }
 
-    public partial class XmlStreamConfigurationSource
+    partial public class XmlStreamConfigurationSource
         : Microsoft.Extensions.Configuration.StreamConfigurationSource
     {
         public XmlStreamConfigurationSource() { }

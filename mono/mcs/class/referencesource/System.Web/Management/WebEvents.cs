@@ -205,12 +205,14 @@ namespace System.Web.Management
         }
 
         // ctors
-        internal protected WebBaseEvent(string message, Object eventSource, int eventCode)
+        protected
+        // ctors
+        internal WebBaseEvent(string message, Object eventSource, int eventCode)
         {
             Init(message, eventSource, eventCode, WebEventCodes.UndefinedEventDetailCode);
         }
 
-        internal protected WebBaseEvent(
+        protected internal WebBaseEvent(
             string message,
             Object eventSource,
             int eventCode,
@@ -296,7 +298,7 @@ namespace System.Web.Management
             get { return s_applicationInfo; }
         }
 
-        virtual internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal virtual void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             formatter.AppendLine(
                 WebBaseEvent.FormatResourceStringWithCache(
@@ -385,7 +387,7 @@ namespace System.Web.Management
             return formatter.ToString();
         }
 
-        virtual public void FormatCustomEventDetails(WebEventFormatter formatter) { }
+        public virtual void FormatCustomEventDetails(WebEventFormatter formatter) { }
 
         internal int InferEtwTraceVerbosity()
         {
@@ -607,7 +609,7 @@ namespace System.Web.Management
             }
         }
 
-        static internal void RaiseRuntimeError(Exception e, object source)
+        internal static void RaiseRuntimeError(Exception e, object source)
         {
             Debug.Trace("WebEventRaiseError", "Error Event is raised; type=" + e.GetType().Name);
 
@@ -646,7 +648,7 @@ namespace System.Web.Management
             catch { }
         }
 
-        virtual internal protected void IncrementPerfCounters()
+        protected internal virtual void IncrementPerfCounters()
         {
             PerfCounters.IncrementCounter(AppPerfCounter.EVENTS_TOTAL);
         }
@@ -697,7 +699,7 @@ namespace System.Web.Management
             SecurityAction.Demand,
             Level = AspNetHostingPermissionLevel.Medium
         )]
-        virtual public void Raise()
+        public virtual void Raise()
         {
             Raise(this);
         }
@@ -707,7 +709,7 @@ namespace System.Web.Management
             SecurityAction.Demand,
             Level = AspNetHostingPermissionLevel.Medium
         )]
-        static public void Raise(WebBaseEvent eventRaised)
+        public static void Raise(WebBaseEvent eventRaised)
         {
             if (eventRaised.EventCode < WebEventCodes.WebExtendedBase)
             {
@@ -732,7 +734,7 @@ namespace System.Web.Management
             RaiseInternal(eventRaised, null, -1, -1);
         }
 
-        static internal void RaiseInternal(
+        internal static void RaiseInternal(
             WebBaseEvent eventRaised,
             ArrayList firingRuleInfos,
             int index0,
@@ -1513,7 +1515,7 @@ namespace System.Web.Management
             return WebEventType.WEBEVENT_BASE_EVENT;
         }
 
-        static internal void RaisePropertyDeserializationWebErrorEvent(
+        internal static void RaisePropertyDeserializationWebErrorEvent(
             SettingsProperty property,
             object source,
             Exception exception
@@ -1570,7 +1572,7 @@ namespace System.Web.Management
             _sb.Append('\n');
         }
 
-        new public string ToString()
+        public new string ToString()
         {
             return _sb.ToString();
         }
@@ -1608,10 +1610,10 @@ namespace System.Web.Management
     {
         static WebProcessInformation s_processInfo = new WebProcessInformation();
 
-        internal protected WebManagementEvent(string message, object eventSource, int eventCode)
+        protected internal WebManagementEvent(string message, object eventSource, int eventCode)
             : base(message, eventSource, eventCode) { }
 
-        internal protected WebManagementEvent(
+        protected internal WebManagementEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -1656,7 +1658,7 @@ namespace System.Web.Management
             );
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -1678,7 +1680,7 @@ namespace System.Web.Management
     {
         static WebProcessStatistics s_procStats = new WebProcessStatistics();
 
-        internal protected WebHeartbeatEvent(string message, int eventCode)
+        protected internal WebHeartbeatEvent(string message, int eventCode)
             : base(message, null, eventCode) { }
 
         internal WebHeartbeatEvent()
@@ -1691,7 +1693,7 @@ namespace System.Web.Management
             get { return s_procStats; }
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -1713,14 +1715,14 @@ namespace System.Web.Management
 
     public class WebApplicationLifetimeEvent : WebManagementEvent
     {
-        internal protected WebApplicationLifetimeEvent(
+        protected internal WebApplicationLifetimeEvent(
             string message,
             object eventSource,
             int eventCode
         )
             : base(message, eventSource, eventCode) { }
 
-        internal protected WebApplicationLifetimeEvent(
+        protected internal WebApplicationLifetimeEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -1733,7 +1735,7 @@ namespace System.Web.Management
             // For creating dummy event.  See GetSystemDummyEvent()
         }
 
-        static internal int DetailCodeFromShutdownReason(ApplicationShutdownReason reason)
+        internal static int DetailCodeFromShutdownReason(ApplicationShutdownReason reason)
         {
             switch (reason)
             {
@@ -1787,7 +1789,7 @@ namespace System.Web.Management
             }
         }
 
-        override internal protected void IncrementPerfCounters()
+        protected internal override void IncrementPerfCounters()
         {
             base.IncrementPerfCounters();
             PerfCounters.IncrementCounter(AppPerfCounter.EVENTS_APP);
@@ -1799,16 +1801,16 @@ namespace System.Web.Management
     {
         WebRequestInformation _requestInfo;
 
-        override internal void PreProcessEventInit()
+        internal override void PreProcessEventInit()
         {
             base.PreProcessEventInit();
             InitRequestInformation();
         }
 
-        internal protected WebRequestEvent(string message, object eventSource, int eventCode)
+        protected internal WebRequestEvent(string message, object eventSource, int eventCode)
             : base(message, eventSource, eventCode) { }
 
-        internal protected WebRequestEvent(
+        protected internal WebRequestEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -1892,7 +1894,7 @@ namespace System.Web.Management
             );
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -1906,7 +1908,7 @@ namespace System.Web.Management
             formatter.IndentationLevel -= 1;
         }
 
-        override internal protected void IncrementPerfCounters()
+        protected internal override void IncrementPerfCounters()
         {
             base.IncrementPerfCounters();
             PerfCounters.IncrementCounter(AppPerfCounter.EVENTS_WEB_REQ);
@@ -1923,7 +1925,7 @@ namespace System.Web.Management
             _exception = e;
         }
 
-        internal protected WebBaseErrorEvent(
+        protected internal WebBaseErrorEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -1934,7 +1936,7 @@ namespace System.Web.Management
             Init(e);
         }
 
-        internal protected WebBaseErrorEvent(
+        protected internal WebBaseErrorEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -1956,7 +1958,7 @@ namespace System.Web.Management
             get { return _exception; }
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -2026,7 +2028,7 @@ namespace System.Web.Management
             );
         }
 
-        override internal protected void IncrementPerfCounters()
+        protected internal override void IncrementPerfCounters()
         {
             base.IncrementPerfCounters();
             PerfCounters.IncrementCounter(AppPerfCounter.EVENTS_ERROR);
@@ -2044,14 +2046,14 @@ namespace System.Web.Management
 
         void Init(Exception e) { }
 
-        override internal void PreProcessEventInit()
+        internal override void PreProcessEventInit()
         {
             base.PreProcessEventInit();
             InitRequestInformation();
             InitThreadInformation();
         }
 
-        internal protected WebErrorEvent(
+        protected internal WebErrorEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2062,7 +2064,7 @@ namespace System.Web.Management
             Init(exception);
         }
 
-        internal protected WebErrorEvent(
+        protected internal WebErrorEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2113,7 +2115,7 @@ namespace System.Web.Management
             }
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -2218,7 +2220,7 @@ namespace System.Web.Management
             );
         }
 
-        override internal protected void IncrementPerfCounters()
+        protected internal override void IncrementPerfCounters()
         {
             base.IncrementPerfCounters();
             PerfCounters.IncrementCounter(AppPerfCounter.EVENTS_HTTP_INFRA_ERROR);
@@ -2235,14 +2237,14 @@ namespace System.Web.Management
 
         void Init(Exception e) { }
 
-        override internal void PreProcessEventInit()
+        internal override void PreProcessEventInit()
         {
             base.PreProcessEventInit();
             InitRequestInformation();
             InitThreadInformation();
         }
 
-        internal protected WebRequestErrorEvent(
+        protected internal WebRequestErrorEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2253,7 +2255,7 @@ namespace System.Web.Management
             Init(exception);
         }
 
-        internal protected WebRequestErrorEvent(
+        protected internal WebRequestErrorEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2306,7 +2308,7 @@ namespace System.Web.Management
             }
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -2411,7 +2413,7 @@ namespace System.Web.Management
             );
         }
 
-        override internal protected void IncrementPerfCounters()
+        protected internal override void IncrementPerfCounters()
         {
             base.IncrementPerfCounters();
             PerfCounters.IncrementCounter(AppPerfCounter.EVENTS_HTTP_REQ_ERROR);
@@ -2425,16 +2427,16 @@ namespace System.Web.Management
     {
         WebRequestInformation _requestInfo;
 
-        override internal void PreProcessEventInit()
+        internal override void PreProcessEventInit()
         {
             base.PreProcessEventInit();
             InitRequestInformation();
         }
 
-        internal protected WebAuditEvent(string message, object eventSource, int eventCode)
+        protected internal WebAuditEvent(string message, object eventSource, int eventCode)
             : base(message, eventSource, eventCode) { }
 
-        internal protected WebAuditEvent(
+        protected internal WebAuditEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2518,7 +2520,7 @@ namespace System.Web.Management
             );
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -2538,10 +2540,10 @@ namespace System.Web.Management
 
     public class WebFailureAuditEvent : WebAuditEvent
     {
-        internal protected WebFailureAuditEvent(string message, object eventSource, int eventCode)
+        protected internal WebFailureAuditEvent(string message, object eventSource, int eventCode)
             : base(message, eventSource, eventCode) { }
 
-        internal protected WebFailureAuditEvent(
+        protected internal WebFailureAuditEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2554,7 +2556,7 @@ namespace System.Web.Management
             // For creating dummy event.  See GetSystemDummyEvent()
         }
 
-        override internal protected void IncrementPerfCounters()
+        protected internal override void IncrementPerfCounters()
         {
             base.IncrementPerfCounters();
             PerfCounters.IncrementCounter(AppPerfCounter.AUDIT_FAIL);
@@ -2571,7 +2573,7 @@ namespace System.Web.Management
             _nameToAuthenticate = name;
         }
 
-        internal protected WebAuthenticationFailureAuditEvent(
+        protected internal WebAuthenticationFailureAuditEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2582,7 +2584,7 @@ namespace System.Web.Management
             Init(nameToAuthenticate);
         }
 
-        internal protected WebAuthenticationFailureAuditEvent(
+        protected internal WebAuthenticationFailureAuditEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2616,7 +2618,7 @@ namespace System.Web.Management
             );
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -2634,7 +2636,7 @@ namespace System.Web.Management
     {
         ViewStateException _viewStateException;
 
-        internal protected WebViewStateFailureAuditEvent(
+        protected internal WebViewStateFailureAuditEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2645,7 +2647,7 @@ namespace System.Web.Management
             _viewStateException = viewStateException;
         }
 
-        internal protected WebViewStateFailureAuditEvent(
+        protected internal WebViewStateFailureAuditEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2717,7 +2719,7 @@ namespace System.Web.Management
             );
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -2744,10 +2746,10 @@ namespace System.Web.Management
 
     public class WebSuccessAuditEvent : WebAuditEvent
     {
-        internal protected WebSuccessAuditEvent(string message, object eventSource, int eventCode)
+        protected internal WebSuccessAuditEvent(string message, object eventSource, int eventCode)
             : base(message, eventSource, eventCode) { }
 
-        internal protected WebSuccessAuditEvent(
+        protected internal WebSuccessAuditEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2760,7 +2762,7 @@ namespace System.Web.Management
             // For creating dummy event.  See GetSystemDummyEvent()
         }
 
-        override internal protected void IncrementPerfCounters()
+        protected internal override void IncrementPerfCounters()
         {
             base.IncrementPerfCounters();
             PerfCounters.IncrementCounter(AppPerfCounter.AUDIT_SUCCESS);
@@ -2777,7 +2779,7 @@ namespace System.Web.Management
             _nameToAuthenticate = name;
         }
 
-        internal protected WebAuthenticationSuccessAuditEvent(
+        protected internal WebAuthenticationSuccessAuditEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2788,7 +2790,7 @@ namespace System.Web.Management
             Init(nameToAuthenticate);
         }
 
-        internal protected WebAuthenticationSuccessAuditEvent(
+        protected internal WebAuthenticationSuccessAuditEvent(
             string message,
             object eventSource,
             int eventCode,
@@ -2822,7 +2824,7 @@ namespace System.Web.Management
             );
         }
 
-        override internal void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
+        internal override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
         {
             base.FormatToString(formatter, includeAppInfo);
 
@@ -3351,7 +3353,7 @@ namespace System.Web.Management
             }
         }
 
-        virtual public void FormatToString(WebEventFormatter formatter)
+        public virtual void FormatToString(WebEventFormatter formatter)
         {
             formatter.AppendLine(
                 WebBaseEvent.FormatResourceStringWithCache(

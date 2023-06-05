@@ -52,7 +52,7 @@ namespace Internal.IL
     /// Represents a method body.
     /// </summary>
     [System.Diagnostics.DebuggerTypeProxy(typeof(MethodILDebugView))]
-    public abstract partial class MethodILScope
+    partial public abstract class MethodILScope
     {
         /// <summary>
         /// Gets the method whose body this <see cref=""/> represents.
@@ -87,7 +87,7 @@ namespace Internal.IL
     /// Represents a method body.
     /// </summary>
     [System.Diagnostics.DebuggerTypeProxy(typeof(MethodILDebugView))]
-    public abstract partial class MethodIL : MethodILScope
+    partial public abstract class MethodIL : MethodILScope
     {
         /// <summary>
         /// Gets the maximum possible stack depth this method declares.

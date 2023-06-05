@@ -47,9 +47,10 @@ namespace Algorithms
         }
     }
 
+    partial
     // A couple extension methods that operate on BCL Complex types to help efficiently calculate
     // the Mandelbrot set (They're instance methods on the ComplexFloat custom type)
-    public static partial class extensions
+    public static class extensions
     {
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         public static double sqabs(this Complex val)

@@ -46,8 +46,9 @@ namespace Novell.Directory.Ldap.Rfc2251
     /// </summary>
     public class RfcExtendedResponse : Asn1Sequence, RfcResponse
     {
+        public
         /// <summary> </summary>
-        virtual public RfcLdapOID ResponseName
+        virtual RfcLdapOID ResponseName
         {
             get
             {
@@ -57,7 +58,7 @@ namespace Novell.Directory.Ldap.Rfc2251
 
         /// <summary> </summary>
         [CLSCompliantAttribute(false)]
-        virtual public Asn1OctetString Response
+        public virtual Asn1OctetString Response
         {
             get
             {

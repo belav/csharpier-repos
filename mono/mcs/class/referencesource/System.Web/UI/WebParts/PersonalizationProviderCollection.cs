@@ -13,7 +13,7 @@ namespace System.Web.UI.WebControls.WebParts
 
     public sealed class PersonalizationProviderCollection : ProviderCollection
     {
-        new public PersonalizationProvider this[string name]
+        public new PersonalizationProvider this[string name]
         {
             get { return (PersonalizationProvider)base[name]; }
         }

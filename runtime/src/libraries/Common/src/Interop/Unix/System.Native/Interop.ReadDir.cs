@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum NodeType : int
         {
@@ -71,7 +71,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial IntPtr OpenDir(string path);
+        partial internal static IntPtr OpenDir(string path);
 
         [LibraryImport(
             Libraries.SystemNative,
@@ -79,10 +79,10 @@ internal static partial class Interop
             SetLastError = false
         )]
         [SuppressGCTransition]
-        internal static partial int GetReadDirRBufferSize();
+        partial internal static int GetReadDirRBufferSize();
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_ReadDirR")]
-        internal static unsafe partial int ReadDirR(
+        partial internal static unsafe int ReadDirR(
             IntPtr dir,
             byte* buffer,
             int bufferSize,
@@ -94,6 +94,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_CloseDir",
             SetLastError = true
         )]
-        internal static partial int CloseDir(IntPtr dir);
+        partial internal static int CloseDir(IntPtr dir);
     }
 }

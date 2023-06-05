@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace System.Threading
 {
+    partial
     //
     // Windows-specific implementation of Timer
     //
-    internal partial class TimerQueue
+    internal class TimerQueue
     {
         private IntPtr _nativeTimer;
         private readonly int _id;

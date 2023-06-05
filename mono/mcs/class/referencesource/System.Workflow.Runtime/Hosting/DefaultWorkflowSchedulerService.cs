@@ -119,7 +119,7 @@ namespace System.Workflow.Runtime.Hosting
             get { return maxSimultaneousWorkflows; }
         }
 
-        internal protected override void Schedule(WaitCallback callback, Guid workflowInstanceId)
+        protected internal override void Schedule(WaitCallback callback, Guid workflowInstanceId)
         {
             WorkflowTrace.Host.TraceEvent(
                 TraceEventType.Information,
@@ -143,7 +143,7 @@ namespace System.Workflow.Runtime.Hosting
             EnqueueWorkItem(new WorkItem(callback, workflowInstanceId));
         }
 
-        internal protected override void Schedule(
+        protected internal override void Schedule(
             WaitCallback callback,
             Guid workflowInstanceId,
             DateTime whenUtc,
@@ -186,7 +186,7 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        internal protected override void Cancel(Guid timerId)
+        protected internal override void Cancel(Guid timerId)
         {
             WorkflowTrace.Host.TraceEvent(
                 TraceEventType.Information,
@@ -211,7 +211,7 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        override protected void OnStarted()
+        protected override void OnStarted()
         {
             lock (timerQueue)
             {

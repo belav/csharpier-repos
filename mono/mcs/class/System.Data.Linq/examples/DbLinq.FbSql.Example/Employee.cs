@@ -21,7 +21,7 @@ using DbLinq.Data.Linq;
 using DbLinq.Vendor;
 using System.ComponentModel;
 
-public partial class CpRogramFilesFirebirdFirebird21ExamplesEmpbuildEmployeefdb : DataContext
+partial public class CpRogramFilesFirebirdFirebird21ExamplesEmpbuildEmployeefdb : DataContext
 {
     public CpRogramFilesFirebirdFirebird21ExamplesEmpbuildEmployeefdb(IDbConnection connection)
         : base(connection, new DbLinq.FirebirdSql.FbVendor()) { }
@@ -79,7 +79,7 @@ public partial class CpRogramFilesFirebirdFirebird21ExamplesEmpbuildEmployeefdb 
 }
 
 [Table(Name = " Foo .COUNTRY")]
-public partial class Country : INotifyPropertyChanged
+partial public class Country : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -153,7 +153,7 @@ public partial class Country : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .CUSTOMER")]
-public partial class Customer : INotifyPropertyChanged
+partial public class Customer : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -456,7 +456,7 @@ public partial class Customer : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .DEPARTMENT")]
-public partial class Department : INotifyPropertyChanged
+partial public class Department : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -639,7 +639,7 @@ public partial class Department : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .EMPLOYEE")]
-public partial class Employee : INotifyPropertyChanged
+partial public class Employee : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -970,7 +970,7 @@ public partial class Employee : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .EMPLOYEE_PROJECT")]
-public partial class EmployeeProject : INotifyPropertyChanged
+partial public class EmployeeProject : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1076,7 +1076,7 @@ public partial class EmployeeProject : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .JOB")]
-public partial class Job : INotifyPropertyChanged
+partial public class Job : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1300,7 +1300,7 @@ public partial class Job : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .PHONE_LIST")]
-public partial class PhoneList : INotifyPropertyChanged
+partial public class PhoneList : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1444,7 +1444,7 @@ public partial class PhoneList : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .PROJ_DEPT_BUDGET")]
-public partial class ProJDEPtBudget : INotifyPropertyChanged
+partial public class ProJDEPtBudget : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1619,7 +1619,7 @@ public partial class ProJDEPtBudget : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .PROJECT")]
-public partial class Project : INotifyPropertyChanged
+partial public class Project : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1760,7 +1760,7 @@ public partial class Project : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .SALARY_HISTORY")]
-public partial class SalaryHistory : INotifyPropertyChanged
+partial public class SalaryHistory : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1941,7 +1941,7 @@ public partial class SalaryHistory : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .SALES")]
-public partial class Sales : INotifyPropertyChanged
+partial public class Sales : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 

@@ -62,7 +62,7 @@ namespace System.Data.SqlClient
     [System.ComponentModel.TypeConverterAttribute(
         typeof(System.Data.SqlClient.SqlParameter.SqlParameterConverter)
     )]
-    public sealed partial class SqlParameter : DbParameter, IDbDataParameter, ICloneable
+    partial public sealed class SqlParameter : DbParameter, IDbDataParameter, ICloneable
     {
         private MetaType _metaType;
 
@@ -316,7 +316,7 @@ namespace System.Data.SqlClient
         ]
         public bool ForceColumnEncryption { get; set; }
 
-        override public DbType DbType
+        public override DbType DbType
         {
             get { return GetMetaTypeOnly().DbType; }
             set
@@ -647,7 +647,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.SqlParameter_ParameterName),
         ]
-        override public string ParameterName
+        public override string ParameterName
         {
             get
             {
@@ -890,7 +890,7 @@ namespace System.Data.SqlClient
             ResDescriptionAttribute(Res.DbParameter_Value),
             TypeConverterAttribute(typeof(StringConverter)),
         ]
-        override public object Value
+        public override object Value
         { // V1.2.3300, XXXParameter V1.0.3300
             get
             {
@@ -2291,12 +2291,12 @@ namespace System.Data.SqlClient
             }
         }
 
-        sealed internal class SqlParameterConverter : ExpandableObjectConverter
+        internal sealed class SqlParameterConverter : ExpandableObjectConverter
         {
             // converter classes should have public ctor
             public SqlParameterConverter() { }
 
-            override public bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
                 if (
                     typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
@@ -2308,7 +2308,7 @@ namespace System.Data.SqlClient
                 return base.CanConvertTo(context, destinationType);
             }
 
-            override public object ConvertTo(
+            public override object ConvertTo(
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value,

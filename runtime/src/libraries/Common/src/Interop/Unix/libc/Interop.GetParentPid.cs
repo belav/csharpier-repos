@@ -3,11 +3,11 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class @libc
+    partial internal static class @libc
     {
         [LibraryImport(Libraries.libc, EntryPoint = "getppid")]
-        internal static partial int GetParentPid();
+        partial internal static int GetParentPid();
     }
 }

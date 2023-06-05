@@ -11,7 +11,7 @@ using CallingConventions = System.Reflection.CallingConventions;
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         private Property HandleProperty(
             Cts.Ecma.EcmaModule module,

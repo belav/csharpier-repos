@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 
-internal static partial class SyntaxValueProviderExtensions
+partial internal static class SyntaxValueProviderExtensions
 {
     private sealed class ImmutableArrayValueComparer<T> : IEqualityComparer<ImmutableArray<T>>
     {

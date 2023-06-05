@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.Threading;
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     [TestService]
-    internal partial class ErrorListInProcess
+    partial internal class ErrorListInProcess
     {
         public Task ShowErrorListAsync(CancellationToken cancellationToken) =>
             ShowErrorListAsync(

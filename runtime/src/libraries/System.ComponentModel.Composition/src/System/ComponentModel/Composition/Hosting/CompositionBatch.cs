@@ -9,7 +9,7 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class CompositionBatch
+    partial public class CompositionBatch
     {
         private readonly object _lock = new object();
         private bool _copyNeededForAdd;

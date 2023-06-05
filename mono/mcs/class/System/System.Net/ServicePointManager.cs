@@ -63,7 +63,7 @@ using System.Diagnostics;
 
 namespace System.Net
 {
-    public partial class ServicePointManager
+    partial public class ServicePointManager
     {
         internal class SPKey
         {

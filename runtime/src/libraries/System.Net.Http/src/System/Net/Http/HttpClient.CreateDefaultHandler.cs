@@ -3,7 +3,7 @@
 
 namespace System.Net.Http
 {
-    public partial class HttpClient
+    partial public class HttpClient
     {
         private static HttpMessageHandler CreateDefaultHandler()
         {

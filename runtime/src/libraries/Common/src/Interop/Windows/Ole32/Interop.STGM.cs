@@ -3,9 +3,9 @@
 
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         /// <summary>
         /// Stream / storage modes.

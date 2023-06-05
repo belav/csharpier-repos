@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.DocumentationComments;
 
 namespace Microsoft.CodeAnalysis.MetadataAsSource
 {
-    internal partial class AbstractMetadataAsSourceService
+    partial internal class AbstractMetadataAsSourceService
     {
         private class WrappedEventSymbol : AbstractWrappedSymbol, IEventSymbol
         {

@@ -65,7 +65,7 @@ namespace System.Data.Common
         //        SqlXml,
     };
 
-    abstract internal class DataStorage
+    internal abstract class DataStorage
     {
         // for Whidbey 40426, searching down the Type[] is about 20% faster than using a Dictionary
         // must keep in same order as enum StorageType
@@ -129,11 +129,11 @@ namespace System.Data.Common
         internal readonly bool IsStringType;
         internal readonly bool IsValueType;
 
-        private readonly static Func<
+        private static readonly Func<
             Type,
             Tuple<bool, bool, bool, bool>
         > _inspectTypeForInterfaces = InspectTypeForInterfaces;
-        private readonly static ConcurrentDictionary<
+        private static readonly ConcurrentDictionary<
             Type,
             Tuple<bool, bool, bool, bool>
         > _typeImplementsInterface =
@@ -242,9 +242,9 @@ namespace System.Data.Common
             this.dbNullBits.Set(dstRecordNo, this.dbNullBits.Get(srcRecordNo));
         }
 
-        abstract public void Copy(int recordNo1, int recordNo2);
+        public abstract void Copy(int recordNo1, int recordNo2);
 
-        abstract public Object Get(int recordNo);
+        public abstract Object Get(int recordNo);
 
         protected Object GetBits(int recordNo)
         {
@@ -255,7 +255,7 @@ namespace System.Data.Common
             return DefaultValue;
         }
 
-        virtual public int GetStringLength(int record)
+        public virtual int GetStringLength(int record)
         {
             System.Diagnostics.Debug.Assert(false, "not a String or SqlString column");
             return Int32.MaxValue;
@@ -272,14 +272,16 @@ namespace System.Data.Common
         }
 
         // convert (may not support reference null) and store the value
-        abstract public void Set(int recordNo, Object value);
+        public
+        // convert (may not support reference null) and store the value
+        abstract void Set(int recordNo, Object value);
 
         protected void SetNullBit(int recordNo, bool flag)
         {
             this.dbNullBits.Set(recordNo, flag);
         }
 
-        virtual public void SetCapacity(int capacity)
+        public virtual void SetCapacity(int capacity)
         {
             if (null == this.dbNullBits)
             {
@@ -291,14 +293,14 @@ namespace System.Data.Common
             }
         }
 
-        abstract public object ConvertXmlToObject(string s);
+        public abstract object ConvertXmlToObject(string s);
 
         public virtual object ConvertXmlToObject(XmlReader xmlReader, XmlRootAttribute xmlAttrib)
         {
             return ConvertXmlToObject(xmlReader.Value);
         }
 
-        abstract public string ConvertObjectToXml(object value);
+        public abstract string ConvertObjectToXml(object value);
 
         public virtual void ConvertObjectToXml(
             object value,
@@ -643,14 +645,14 @@ namespace System.Data.Common
             SetStorage(store, nullbits);
         }
 
-        abstract protected Object GetEmptyStorage(int recordCount);
-        abstract protected void CopyValue(
+        protected abstract Object GetEmptyStorage(int recordCount);
+        protected abstract void CopyValue(
             int record,
             object store,
             BitArray nullbits,
             int storeIndex
         );
-        abstract protected void SetStorage(object store, BitArray nullbits);
+        protected abstract void SetStorage(object store, BitArray nullbits);
 
         protected void SetNullStorage(BitArray nullbits)
         {

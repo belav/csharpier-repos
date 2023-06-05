@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.IO.Compression.Tests
 {
-    public partial class zip_UpdateTests : ZipFileTestBase
+    partial public class zip_UpdateTests : ZipFileTestBase
     {
         [Theory]
         [MemberData(nameof(Utf8Comment_Data))]

@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
         ImmutableDictionary<string, string>
     >;
 
+    partial
     /// <summary>
     /// Analyzer to report unused expression values and parameters:
     /// It flags the following cases:
@@ -58,7 +59,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
     ///        though this may change in future.
     ///        This diagnostic configuration is controlled by <see cref="CodeStyleOptions2.UnusedParameters"/> option.
     /// </summary>
-    internal abstract partial class AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer
+    internal abstract class AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer
         : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
     {
         public const string DiscardVariableName = "_";

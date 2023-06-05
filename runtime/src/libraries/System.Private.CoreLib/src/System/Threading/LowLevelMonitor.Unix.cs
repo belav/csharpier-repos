@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Threading
 {
-    internal partial struct LowLevelMonitor
+    partial internal struct LowLevelMonitor
     {
         private IntPtr _nativeMonitor;
 

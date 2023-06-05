@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace System.Linq.Expressions
 {
-    public partial class Expression
+    partial public class Expression
     {
         internal sealed class BinaryExpressionProxy
         {

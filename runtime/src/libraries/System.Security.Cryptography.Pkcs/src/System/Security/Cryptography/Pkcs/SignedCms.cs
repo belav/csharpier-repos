@@ -15,7 +15,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs
 {
-    public sealed partial class SignedCms
+    partial public sealed class SignedCms
     {
         private SignedDataAsn _signedData;
         private bool _hasData;

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal static partial class X509ResourceClient
+    partial internal static class X509ResourceClient
     {
         private static readonly Func<
             string,
@@ -19,19 +19,19 @@ namespace System.Net.Http
             ValueTask<byte[]?>
         >? s_downloadBytes = CreateDownloadBytesFunc();
 
-        static partial void ReportNoClient();
+        partial static void ReportNoClient();
 
-        static partial void ReportNegativeTimeout();
+        partial static void ReportNegativeTimeout();
 
-        static partial void ReportDownloadStart(long totalMillis, string uri);
+        partial static void ReportDownloadStart(long totalMillis, string uri);
 
-        static partial void ReportDownloadStop(int bytesDownloaded);
+        partial static void ReportDownloadStop(int bytesDownloaded);
 
-        static partial void ReportRedirectsExceeded();
+        partial static void ReportRedirectsExceeded();
 
-        static partial void ReportRedirected(Uri newUri);
+        partial static void ReportRedirected(Uri newUri);
 
-        static partial void ReportRedirectNotFollowed(Uri redirectUri);
+        partial static void ReportRedirectNotFollowed(Uri redirectUri);
 
         internal static byte[]? DownloadAsset(string uri, TimeSpan downloadTimeout)
         {

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.DirectoryServices.Protocols
 {
-    public partial class LdapConnection
+    partial public class LdapConnection
     {
         private bool _setFQDNDone;
 

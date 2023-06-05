@@ -24,13 +24,13 @@ namespace Microsoft.Win32
 
     [System.Security.SecurityCritical] // auto-generated
     [HostProtectionAttribute(MayLeakOnAbort = true)]
-    sealed internal class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
+    internal sealed class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         internal SafeLibraryHandle()
             : base(true) { }
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return UnsafeNativeMethods.FreeLibrary(handle);
         }

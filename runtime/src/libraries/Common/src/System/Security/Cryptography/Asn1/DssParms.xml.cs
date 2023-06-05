@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct DssParms
+    partial internal struct DssParms
     {
         internal System.Numerics.BigInteger P;
         internal System.Numerics.BigInteger Q;

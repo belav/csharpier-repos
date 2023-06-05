@@ -6,7 +6,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class EntryWrittenEventArgs : System.EventArgs
+    partial public class EntryWrittenEventArgs : System.EventArgs
     {
         public EntryWrittenEventArgs() { }
 
@@ -23,7 +23,7 @@ namespace System.Diagnostics
         System.Diagnostics.EntryWrittenEventArgs e
     );
 
-    public partial class EventInstance
+    partial public class EventInstance
     {
         public EventInstance(long instanceId, int categoryId) { }
 
@@ -51,7 +51,7 @@ namespace System.Diagnostics
     }
 
     [System.ComponentModel.DefaultEventAttribute("EntryWritten")]
-    public partial class EventLog
+    partial public class EventLog
         : System.ComponentModel.Component,
             System.ComponentModel.ISupportInitialize
     {
@@ -303,7 +303,7 @@ namespace System.Diagnostics
 
     [System.ComponentModel.DesignTimeVisibleAttribute(false)]
     [System.ComponentModel.ToolboxItemAttribute(false)]
-    public sealed partial class EventLogEntry
+    partial public sealed class EventLogEntry
         : System.ComponentModel.Component,
             System.Runtime.Serialization.ISerializable
     {
@@ -386,7 +386,7 @@ namespace System.Diagnostics
         ) { }
     }
 
-    public partial class EventLogEntryCollection
+    partial public class EventLogEntryCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -428,7 +428,7 @@ namespace System.Diagnostics
         FailureAudit = 16,
     }
 
-    public sealed partial class EventLogTraceListener : System.Diagnostics.TraceListener
+    partial public sealed class EventLogTraceListener : System.Diagnostics.TraceListener
     {
         public EventLogTraceListener() { }
 
@@ -493,7 +493,7 @@ namespace System.Diagnostics
         public override void WriteLine(string message) { }
     }
 
-    public partial class EventSourceCreationData
+    partial public class EventSourceCreationData
     {
         public EventSourceCreationData(string source, string logName) { }
 
@@ -544,12 +544,12 @@ namespace System.Diagnostics
 
 namespace System.Diagnostics.Eventing.Reader
 {
-    public partial class EventBookmark
+    partial public class EventBookmark
     {
         internal EventBookmark() { }
     }
 
-    public sealed partial class EventKeyword
+    partial public sealed class EventKeyword
     {
         internal EventKeyword() { }
 
@@ -567,7 +567,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public sealed partial class EventLevel
+    partial public sealed class EventLevel
     {
         internal EventLevel() { }
 
@@ -585,7 +585,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public partial class EventLogConfiguration : System.IDisposable
+    partial public class EventLogConfiguration : System.IDisposable
     {
         public EventLogConfiguration(string logName) { }
 
@@ -681,7 +681,7 @@ namespace System.Diagnostics.Eventing.Reader
         public void SaveChanges() { }
     }
 
-    public partial class EventLogException : System.Exception
+    partial public class EventLogException : System.Exception
     {
         public EventLogException() { }
 
@@ -707,7 +707,7 @@ namespace System.Diagnostics.Eventing.Reader
         ) { }
     }
 
-    public sealed partial class EventLogInformation
+    partial public sealed class EventLogInformation
     {
         internal EventLogInformation() { }
 
@@ -745,7 +745,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public partial class EventLogInvalidDataException
+    partial public class EventLogInvalidDataException
         : System.Diagnostics.Eventing.Reader.EventLogException
     {
         public EventLogInvalidDataException() { }
@@ -767,7 +767,7 @@ namespace System.Diagnostics.Eventing.Reader
         Custom = 2,
     }
 
-    public sealed partial class EventLogLink
+    partial public sealed class EventLogLink
     {
         internal EventLogLink() { }
 
@@ -792,7 +792,7 @@ namespace System.Diagnostics.Eventing.Reader
         Retain = 2,
     }
 
-    public partial class EventLogNotFoundException
+    partial public class EventLogNotFoundException
         : System.Diagnostics.Eventing.Reader.EventLogException
     {
         public EventLogNotFoundException() { }
@@ -807,7 +807,7 @@ namespace System.Diagnostics.Eventing.Reader
         public EventLogNotFoundException(string message, System.Exception innerException) { }
     }
 
-    public partial class EventLogPropertySelector : System.IDisposable
+    partial public class EventLogPropertySelector : System.IDisposable
     {
         public EventLogPropertySelector(
             System.Collections.Generic.IEnumerable<string> propertyQueries
@@ -818,7 +818,7 @@ namespace System.Diagnostics.Eventing.Reader
         protected virtual void Dispose(bool disposing) { }
     }
 
-    public partial class EventLogProviderDisabledException
+    partial public class EventLogProviderDisabledException
         : System.Diagnostics.Eventing.Reader.EventLogException
     {
         public EventLogProviderDisabledException() { }
@@ -834,7 +834,7 @@ namespace System.Diagnostics.Eventing.Reader
         { }
     }
 
-    public partial class EventLogQuery
+    partial public class EventLogQuery
     {
         public EventLogQuery(string path, System.Diagnostics.Eventing.Reader.PathType pathType) { }
 
@@ -861,7 +861,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public partial class EventLogReader : System.IDisposable
+    partial public class EventLogReader : System.IDisposable
     {
         public EventLogReader(System.Diagnostics.Eventing.Reader.EventLogQuery eventQuery) { }
 
@@ -907,7 +907,7 @@ namespace System.Diagnostics.Eventing.Reader
         public void Seek(System.IO.SeekOrigin origin, long offset) { }
     }
 
-    public partial class EventLogReadingException
+    partial public class EventLogReadingException
         : System.Diagnostics.Eventing.Reader.EventLogException
     {
         public EventLogReadingException() { }
@@ -922,7 +922,7 @@ namespace System.Diagnostics.Eventing.Reader
         public EventLogReadingException(string message, System.Exception innerException) { }
     }
 
-    public partial class EventLogRecord : System.Diagnostics.Eventing.Reader.EventRecord
+    partial public class EventLogRecord : System.Diagnostics.Eventing.Reader.EventRecord
     {
         internal EventLogRecord() { }
 
@@ -1058,7 +1058,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public partial class EventLogSession : System.IDisposable
+    partial public class EventLogSession : System.IDisposable
     {
         public EventLogSession() { }
 
@@ -1137,7 +1137,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public sealed partial class EventLogStatus
+    partial public sealed class EventLogStatus
     {
         internal EventLogStatus() { }
 
@@ -1159,7 +1159,7 @@ namespace System.Diagnostics.Eventing.Reader
         Debug = 3,
     }
 
-    public partial class EventLogWatcher : System.IDisposable
+    partial public class EventLogWatcher : System.IDisposable
     {
         public EventLogWatcher(System.Diagnostics.Eventing.Reader.EventLogQuery eventQuery) { }
 
@@ -1192,7 +1192,7 @@ namespace System.Diagnostics.Eventing.Reader
         protected virtual void Dispose(bool disposing) { }
     }
 
-    public sealed partial class EventMetadata
+    partial public sealed class EventMetadata
     {
         internal EventMetadata() { }
 
@@ -1234,7 +1234,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public sealed partial class EventOpcode
+    partial public sealed class EventOpcode
     {
         internal EventOpcode() { }
 
@@ -1252,7 +1252,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public sealed partial class EventProperty
+    partial public sealed class EventProperty
     {
         internal EventProperty() { }
 
@@ -1262,7 +1262,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public abstract partial class EventRecord : System.IDisposable
+    partial public abstract class EventRecord : System.IDisposable
     {
         protected EventRecord() { }
 
@@ -1302,7 +1302,7 @@ namespace System.Diagnostics.Eventing.Reader
         public abstract string ToXml();
     }
 
-    public sealed partial class EventRecordWrittenEventArgs : System.EventArgs
+    partial public sealed class EventRecordWrittenEventArgs : System.EventArgs
     {
         internal EventRecordWrittenEventArgs() { }
 
@@ -1316,7 +1316,7 @@ namespace System.Diagnostics.Eventing.Reader
         }
     }
 
-    public sealed partial class EventTask
+    partial public sealed class EventTask
     {
         internal EventTask() { }
 
@@ -1344,7 +1344,7 @@ namespace System.Diagnostics.Eventing.Reader
         FilePath = 2,
     }
 
-    public partial class ProviderMetadata : System.IDisposable
+    partial public class ProviderMetadata : System.IDisposable
     {
         public ProviderMetadata(string providerName) { }
 

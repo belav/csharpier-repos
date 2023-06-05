@@ -12,12 +12,13 @@ using System.Diagnostics;
 
 namespace System.Xml
 {
+    partial
     /// <devdoc>
     ///    <para>Resolves external XML resources named by a Uniform
     ///       Resource Identifier (URI). This class is <see langword='abstract'/>
     ///       .</para>
     /// </devdoc>
-    public abstract partial class XmlResolver
+    public abstract class XmlResolver
     {
         /// <devdoc>
         ///    <para>Maps a

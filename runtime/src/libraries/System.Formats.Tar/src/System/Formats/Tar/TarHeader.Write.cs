@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace System.Formats.Tar
 {
+    partial
     // Writes header attributes of a tar archive entry.
-    internal sealed partial class TarHeader
+    internal sealed class TarHeader
     {
         private static ReadOnlySpan<byte> UstarMagicBytes => "ustar\0"u8;
         private static ReadOnlySpan<byte> UstarVersionBytes => "00"u8;

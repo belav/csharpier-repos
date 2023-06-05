@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.CPS
 {
-    internal sealed partial class CPSProject
+    partial internal sealed class CPSProject
         : IVsReportExternalErrors,
             IVsLanguageServiceBuildErrorReporter2
     {

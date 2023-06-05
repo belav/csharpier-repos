@@ -17,11 +17,11 @@ namespace NAMESPACE
     using System.Globalization;
     using System.Runtime.InteropServices;
 
-    public sealed partial class PARAMETERCOLLECTIONOBJECTNAME : DbParameterCollection
+    partial public sealed class PARAMETERCOLLECTIONOBJECTNAME : DbParameterCollection
     {
         private List<PARAMETEROBJECTNAME> _items; // the collection of parameters
 
-        override public int Count
+        public override int Count
         {
             get
             {
@@ -45,28 +45,28 @@ namespace NAMESPACE
             }
         }
 
-        override public bool IsFixedSize
+        public override bool IsFixedSize
         {
             get { return ((System.Collections.IList)InnerList).IsFixedSize; }
         }
 
-        override public bool IsReadOnly
+        public override bool IsReadOnly
         {
             get { return ((System.Collections.IList)InnerList).IsReadOnly; }
         }
 
-        override public bool IsSynchronized
+        public override bool IsSynchronized
         {
             get { return ((System.Collections.ICollection)InnerList).IsSynchronized; }
         }
 
-        override public object SyncRoot
+        public override object SyncRoot
         {
             get { return ((System.Collections.ICollection)InnerList).SyncRoot; }
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        override public int Add(object value)
+        public override int Add(object value)
         {
             OnChange(); // fire event before value is validated
             ValidateType(value);
@@ -75,7 +75,7 @@ namespace NAMESPACE
             return Count - 1;
         }
 
-        override public void AddRange(System.Array values)
+        public override void AddRange(System.Array values)
         {
             OnChange(); // fire event before value is validated
             if (null == values)
@@ -103,7 +103,7 @@ namespace NAMESPACE
             return index;
         }
 
-        override public void Clear()
+        public override void Clear()
         {
             OnChange(); // fire event before value is validated
             List<PARAMETEROBJECTNAME> items = InnerList;
@@ -118,28 +118,28 @@ namespace NAMESPACE
             }
         }
 
-        override public bool Contains(object value)
+        public override bool Contains(object value)
         {
             return (-1 != IndexOf(value));
         }
 
-        override public void CopyTo(Array array, int index)
+        public override void CopyTo(Array array, int index)
         {
             ((System.Collections.ICollection)InnerList).CopyTo(array, index);
         }
 
-        override public System.Collections.IEnumerator GetEnumerator()
+        public override System.Collections.IEnumerator GetEnumerator()
         {
             return ((System.Collections.ICollection)InnerList).GetEnumerator();
         }
 
-        override protected DbParameter GetParameter(int index)
+        protected override DbParameter GetParameter(int index)
         {
             RangeCheck(index);
             return InnerList[index];
         }
 
-        override protected DbParameter GetParameter(string parameterName)
+        protected override DbParameter GetParameter(string parameterName)
         {
             int index = IndexOf(parameterName);
             if (index < 0)
@@ -177,12 +177,12 @@ namespace NAMESPACE
             return -1;
         }
 
-        override public int IndexOf(string parameterName)
+        public override int IndexOf(string parameterName)
         {
             return IndexOf(InnerList, parameterName);
         }
 
-        override public int IndexOf(object value)
+        public override int IndexOf(object value)
         {
             if (null != value)
             {
@@ -206,7 +206,7 @@ namespace NAMESPACE
             return -1;
         }
 
-        override public void Insert(int index, object value)
+        public override void Insert(int index, object value)
         {
             OnChange(); // fire event before value is validated
             ValidateType(value);
@@ -222,7 +222,7 @@ namespace NAMESPACE
             }
         }
 
-        override public void Remove(object value)
+        public override void Remove(object value)
         {
             OnChange(); // fire event before value is validated
             ValidateType(value);
@@ -237,14 +237,14 @@ namespace NAMESPACE
             }
         }
 
-        override public void RemoveAt(int index)
+        public override void RemoveAt(int index)
         {
             OnChange(); // fire event before value is validated
             RangeCheck(index);
             RemoveIndex(index);
         }
 
-        override public void RemoveAt(string parameterName)
+        public override void RemoveAt(string parameterName)
         {
             OnChange(); // fire event before value is validated
             int index = CheckName(parameterName);
@@ -277,14 +277,14 @@ namespace NAMESPACE
             item.ResetParent();
         }
 
-        override protected void SetParameter(int index, DbParameter value)
+        protected override void SetParameter(int index, DbParameter value)
         {
             OnChange(); // fire event before value is validated
             RangeCheck(index);
             Replace(index, value);
         }
 
-        override protected void SetParameter(string parameterName, DbParameter value)
+        protected override void SetParameter(string parameterName, DbParameter value)
         {
             OnChange(); // fire event before value is validated
             int index = IndexOf(parameterName);

@@ -157,7 +157,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a new <see cref="NewExpression"/> that represents calling the specified constructor that takes no arguments.

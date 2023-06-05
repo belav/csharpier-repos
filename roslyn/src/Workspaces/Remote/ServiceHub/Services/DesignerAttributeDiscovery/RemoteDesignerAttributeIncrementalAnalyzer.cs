@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.DesignerAttribute;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed partial class RemoteDesignerAttributeIncrementalAnalyzer
+    partial internal sealed class RemoteDesignerAttributeIncrementalAnalyzer
         : AbstractDesignerAttributeIncrementalAnalyzer
     {
         /// <summary>

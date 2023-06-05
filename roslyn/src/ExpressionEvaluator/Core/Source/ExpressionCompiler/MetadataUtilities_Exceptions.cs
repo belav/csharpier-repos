@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
-    internal static partial class MetadataUtilities
+    partial internal static class MetadataUtilities
     {
         internal const uint COR_E_BADIMAGEFORMAT = 0x8007000b;
         internal const uint CORDBG_E_MISSING_METADATA = 0x80131c35;

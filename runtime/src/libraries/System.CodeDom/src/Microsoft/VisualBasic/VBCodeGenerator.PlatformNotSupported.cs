@@ -6,7 +6,7 @@ using System.CodeDom.Compiler;
 
 namespace Microsoft.VisualBasic
 {
-    internal sealed partial class VBCodeGenerator
+    partial internal sealed class VBCodeGenerator
     {
         protected override CompilerResults FromFileBatch(
             CompilerParameters options,

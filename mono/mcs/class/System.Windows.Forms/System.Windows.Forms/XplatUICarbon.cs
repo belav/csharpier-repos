@@ -3105,25 +3105,25 @@ namespace System.Windows.Forms
         #endregion
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewConvertPoint(ref Carbon.CGPoint point, IntPtr pView, IntPtr cView);
+        static extern int HIViewConvertPoint(ref Carbon.CGPoint point, IntPtr pView, IntPtr cView);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewChangeFeatures(IntPtr aView, ulong bitsin, ulong bitsout);
+        static extern int HIViewChangeFeatures(IntPtr aView, ulong bitsin, ulong bitsout);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewFindByID(IntPtr rootWnd, Carbon.HIViewID id, ref IntPtr outPtr);
+        static extern int HIViewFindByID(IntPtr rootWnd, Carbon.HIViewID id, ref IntPtr outPtr);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIGrowBoxViewSetTransparent(IntPtr GrowBox, bool transparency);
+        static extern int HIGrowBoxViewSetTransparent(IntPtr GrowBox, bool transparency);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr HIViewGetRoot(IntPtr hWnd);
+        static extern IntPtr HIViewGetRoot(IntPtr hWnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIObjectCreate(IntPtr cfStr, uint what, ref IntPtr hwnd);
+        static extern int HIObjectCreate(IntPtr cfStr, uint what, ref IntPtr hwnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIObjectRegisterSubclass(
+        static extern int HIObjectRegisterSubclass(
             IntPtr classid,
             IntPtr superclassid,
             uint options,
@@ -3135,37 +3135,37 @@ namespace System.Windows.Forms
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewPlaceInSuperviewAt(IntPtr view, float x, float y);
+        static extern int HIViewPlaceInSuperviewAt(IntPtr view, float x, float y);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewAddSubview(IntPtr parentHnd, IntPtr childHnd);
+        static extern int HIViewAddSubview(IntPtr parentHnd, IntPtr childHnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr HIViewGetPreviousView(IntPtr aView);
+        static extern IntPtr HIViewGetPreviousView(IntPtr aView);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr HIViewGetSuperview(IntPtr aView);
+        static extern IntPtr HIViewGetSuperview(IntPtr aView);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewRemoveFromSuperview(IntPtr aView);
+        static extern int HIViewRemoveFromSuperview(IntPtr aView);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewSetVisible(IntPtr vHnd, bool visible);
+        static extern int HIViewSetVisible(IntPtr vHnd, bool visible);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static bool HIViewIsVisible(IntPtr vHnd);
+        static extern bool HIViewIsVisible(IntPtr vHnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewGetBounds(IntPtr vHnd, ref Carbon.HIRect r);
+        static extern int HIViewGetBounds(IntPtr vHnd, ref Carbon.HIRect r);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewScrollRect(IntPtr vHnd, ref Carbon.HIRect rect, float x, float y);
+        static extern int HIViewScrollRect(IntPtr vHnd, ref Carbon.HIRect rect, float x, float y);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewSetZOrder(IntPtr hWnd, int cmd, IntPtr oHnd);
+        static extern int HIViewSetZOrder(IntPtr hWnd, int cmd, IntPtr oHnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewNewTrackingArea(
+        static extern int HIViewNewTrackingArea(
             IntPtr inView,
             IntPtr inShape,
             UInt64 inID,
@@ -3173,20 +3173,20 @@ namespace System.Windows.Forms
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr HIViewGetWindow(IntPtr aView);
+        static extern IntPtr HIViewGetWindow(IntPtr aView);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int HIViewSetFrame(IntPtr view_handle, ref Carbon.HIRect bounds);
+        static extern int HIViewSetFrame(IntPtr view_handle, ref Carbon.HIRect bounds);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        internal extern static int HIViewSetNeedsDisplayInRect(
+        internal static extern int HIViewSetNeedsDisplayInRect(
             IntPtr view_handle,
             ref Carbon.HIRect rect,
             bool needs_display
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static void SetRect(
+        static extern void SetRect(
             ref Carbon.Rect r,
             short left,
             short top,
@@ -3207,16 +3207,16 @@ namespace System.Windows.Forms
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr GetEventDispatcherTarget();
+        static extern IntPtr GetEventDispatcherTarget();
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int SendEventToEventTarget(IntPtr evt, IntPtr target);
+        static extern int SendEventToEventTarget(IntPtr evt, IntPtr target);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int ReleaseEvent(IntPtr evt);
+        static extern int ReleaseEvent(IntPtr evt);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int ReceiveNextEvent(
+        static extern int ReceiveNextEvent(
             uint evtCount,
             IntPtr evtTypes,
             double timeout,
@@ -3225,41 +3225,41 @@ namespace System.Windows.Forms
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static bool IsWindowCollapsed(IntPtr hWnd);
+        static extern bool IsWindowCollapsed(IntPtr hWnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static bool IsWindowInStandardState(IntPtr hWnd, IntPtr a, IntPtr b);
+        static extern bool IsWindowInStandardState(IntPtr hWnd, IntPtr a, IntPtr b);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static void CollapseWindow(IntPtr hWnd, bool collapse);
+        static extern void CollapseWindow(IntPtr hWnd, bool collapse);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static void ZoomWindow(IntPtr hWnd, short partCode, bool front);
+        static extern void ZoomWindow(IntPtr hWnd, short partCode, bool front);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int GetWindowAttributes(
+        static extern int GetWindowAttributes(
             IntPtr hWnd,
             ref Carbon.WindowAttributes outAttributes
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int ChangeWindowAttributes(
+        static extern int ChangeWindowAttributes(
             IntPtr hWnd,
             Carbon.WindowAttributes inAttributes,
             Carbon.WindowAttributes outAttributes
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        internal extern static int GetGlobalMouse(ref Carbon.QDPoint outData);
+        internal static extern int GetGlobalMouse(ref Carbon.QDPoint outData);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int BeginAppModalStateForWindow(IntPtr window);
+        static extern int BeginAppModalStateForWindow(IntPtr window);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int EndAppModalStateForWindow(IntPtr window);
+        static extern int EndAppModalStateForWindow(IntPtr window);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int CreateNewWindow(
+        static extern int CreateNewWindow(
             Carbon.WindowClass klass,
             Carbon.WindowAttributes attributes,
             ref Carbon.Rect r,
@@ -3267,82 +3267,82 @@ namespace System.Windows.Forms
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int DisposeWindow(IntPtr wHnd);
+        static extern int DisposeWindow(IntPtr wHnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        internal extern static int ShowWindow(IntPtr wHnd);
+        internal static extern int ShowWindow(IntPtr wHnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        internal extern static int HideWindow(IntPtr wHnd);
+        internal static extern int HideWindow(IntPtr wHnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        internal extern static bool IsWindowVisible(IntPtr wHnd);
+        internal static extern bool IsWindowVisible(IntPtr wHnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int SetWindowBounds(IntPtr wHnd, uint reg, ref Carbon.Rect rect);
+        static extern int SetWindowBounds(IntPtr wHnd, uint reg, ref Carbon.Rect rect);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int GetWindowBounds(IntPtr wHnd, uint reg, ref Carbon.Rect rect);
+        static extern int GetWindowBounds(IntPtr wHnd, uint reg, ref Carbon.Rect rect);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int SetControlTitleWithCFString(IntPtr hWnd, IntPtr titleCFStr);
+        static extern int SetControlTitleWithCFString(IntPtr hWnd, IntPtr titleCFStr);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int SetWindowTitleWithCFString(IntPtr hWnd, IntPtr titleCFStr);
+        static extern int SetWindowTitleWithCFString(IntPtr hWnd, IntPtr titleCFStr);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        internal extern static IntPtr __CFStringMakeConstantString(string cString);
+        internal static extern IntPtr __CFStringMakeConstantString(string cString);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr CFStringCreateWithCString(
+        static extern IntPtr CFStringCreateWithCString(
             IntPtr allocator,
             string cString,
             Carbon.CFStringEncoding encoding
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        internal extern static int CFRelease(IntPtr wHnd);
+        internal static extern int CFRelease(IntPtr wHnd);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static short GetMBarHeight();
+        static extern short GetMBarHeight();
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static void AlertSoundPlay();
+        static extern void AlertSoundPlay();
 
         #region Cursor imports
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static Carbon.HIRect CGDisplayBounds(IntPtr displayID);
+        static extern Carbon.HIRect CGDisplayBounds(IntPtr displayID);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr CGMainDisplayID();
+        static extern IntPtr CGMainDisplayID();
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static void CGDisplayShowCursor(IntPtr display);
+        static extern void CGDisplayShowCursor(IntPtr display);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static void CGDisplayHideCursor(IntPtr display);
+        static extern void CGDisplayHideCursor(IntPtr display);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static void CGDisplayMoveCursorToPoint(IntPtr display, Carbon.CGPoint point);
+        static extern void CGDisplayMoveCursorToPoint(IntPtr display, Carbon.CGPoint point);
         #endregion
 
         #region Process imports
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int GetCurrentProcess(ref Carbon.ProcessSerialNumber psn);
+        static extern int GetCurrentProcess(ref Carbon.ProcessSerialNumber psn);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int TransformProcessType(ref Carbon.ProcessSerialNumber psn, uint type);
+        static extern int TransformProcessType(ref Carbon.ProcessSerialNumber psn, uint type);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int SetFrontProcess(ref Carbon.ProcessSerialNumber psn);
+        static extern int SetFrontProcess(ref Carbon.ProcessSerialNumber psn);
         #endregion
 
         #region Dock tile imports
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr CGColorSpaceCreateDeviceRGB();
+        static extern IntPtr CGColorSpaceCreateDeviceRGB();
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr CGDataProviderCreateWithData(
+        static extern IntPtr CGDataProviderCreateWithData(
             IntPtr info,
             IntPtr[] data,
             int size,
@@ -3350,7 +3350,7 @@ namespace System.Windows.Forms
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static IntPtr CGImageCreate(
+        static extern IntPtr CGImageCreate(
             int width,
             int height,
             int bitsPerComponent,
@@ -3365,10 +3365,10 @@ namespace System.Windows.Forms
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static void SetApplicationDockTileImage(IntPtr imageRef);
+        static extern void SetApplicationDockTileImage(IntPtr imageRef);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static void RestoreApplicationDockTileImage();
+        static extern void RestoreApplicationDockTileImage();
         #endregion
     }
 }

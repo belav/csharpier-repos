@@ -9,7 +9,7 @@ using System.IO.Enumeration;
 
 namespace System.IO
 {
-    public sealed partial class DirectoryInfo : FileSystemInfo
+    partial public sealed class DirectoryInfo : FileSystemInfo
     {
         private bool _isNormalized;
 

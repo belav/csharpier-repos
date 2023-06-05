@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     [ContentType(ContentTypeNames.RoslynContentType)]
     [ContentType(ContentTypeNames.XamlContentType)]
     [TagType(typeof(ClassificationTag))]
-    internal sealed partial class DiagnosticsClassificationTaggerProvider
+    partial internal sealed class DiagnosticsClassificationTaggerProvider
         : AbstractPushOrPullDiagnosticsTaggerProvider<ClassificationTag>
     {
         private readonly ClassificationTypeMap _typeMap;

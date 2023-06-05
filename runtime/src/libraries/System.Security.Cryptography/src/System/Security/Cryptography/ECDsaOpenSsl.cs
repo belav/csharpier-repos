@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDsaOpenSsl : ECDsa
+    partial public sealed class ECDsaOpenSsl : ECDsa
     {
         /// <summary>
         /// Create an ECDsaOpenSsl from an <see cref="SafeEvpPKeyHandle"/> whose value is an existing
@@ -98,7 +98,7 @@ namespace System.Security.Cryptography
             }
         }
 
-        static partial void ThrowIfNotSupported()
+        partial static void ThrowIfNotSupported()
         {
             if (!Interop.OpenSslNoInit.OpenSslIsAvailable)
             {

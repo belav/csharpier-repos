@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public partial class TarFile_ExtractToDirectoryAsync_File_Tests : TarTestsBase
+    partial public class TarFile_ExtractToDirectoryAsync_File_Tests : TarTestsBase
     {
         [ConditionalFact(
             typeof(PlatformDetection),

@@ -14,7 +14,7 @@ namespace System.Data.Services.Client
 {
     using System;
 
-    internal static partial class Error
+    partial internal static class Error
     {
         internal static ArgumentException Argument(string message, string parameterName)
         {

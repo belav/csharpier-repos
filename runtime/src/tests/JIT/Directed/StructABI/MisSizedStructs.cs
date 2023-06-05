@@ -172,51 +172,51 @@ public unsafe class MisSizedStructs
 
     struct ForceStackUsage
     {
-        public fixed byte Bytes[40];
+        fixed public byte Bytes[40];
     }
 
     struct StructWithThreeBytes
     {
-        public fixed byte Bytes[3];
+        fixed public byte Bytes[3];
     }
 
     struct StructWithFiveBytes
     {
-        public fixed byte Bytes[5];
+        fixed public byte Bytes[5];
     }
 
     struct StructWithSixBytes
     {
-        public fixed byte Bytes[6];
+        fixed public byte Bytes[6];
     }
 
     struct StructWithSevenBytes
     {
-        public fixed byte Bytes[7];
+        fixed public byte Bytes[7];
     }
 
     struct StructWithElevenBytes
     {
-        public fixed byte Bytes[11];
+        fixed public byte Bytes[11];
     }
 
     struct StructWithThirteenBytes
     {
-        public fixed byte Bytes[13];
+        fixed public byte Bytes[13];
     }
 
     struct StructWithFourteenBytes
     {
-        public fixed byte Bytes[14];
+        fixed public byte Bytes[14];
     }
 
     struct StructWithFifteenBytes
     {
-        public fixed byte Bytes[15];
+        fixed public byte Bytes[15];
     }
 
     struct StructWithNineteenBytes
     {
-        public fixed byte Bytes[19];
+        fixed public byte Bytes[19];
     }
 }

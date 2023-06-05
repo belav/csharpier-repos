@@ -14,7 +14,7 @@ namespace System.Runtime.InteropServices.JavaScript
     [SupportedOSPlatform("browser")]
     [CLSCompliant(false)]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public partial struct JSMarshalerArgument
+    partial public struct JSMarshalerArgument
     {
         internal JSMarshalerArgumentImpl slot;
 

@@ -7,7 +7,7 @@ using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {
-    public partial class Pen
+    partial public class Pen
     {
         // libgdiplus does not implement GdipGetPenCustomEndCap, so we cache the last-known value here.
         // Note that this value is not necessarily in sync with the true native value of this property,

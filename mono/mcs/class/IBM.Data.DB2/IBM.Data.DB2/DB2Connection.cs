@@ -77,12 +77,13 @@ namespace IBM.Data.DB2
         {
             get { return connectionSettings.DatabaseAlias; }
         }
+        public
         #endregion
 
         #region State property
 
 
-        unsafe public ConnectionState State
+        unsafe ConnectionState State
         {
             get
             {
@@ -172,7 +173,11 @@ namespace IBM.Data.DB2
         #endregion
 
         #region ChangeDatabase
-        unsafe public void ChangeDatabase(string newDBName)
+        public
+        #endregion
+
+        #region ChangeDatabase
+        unsafe void ChangeDatabase(string newDBName)
         {
             if (connectionSettings == null)
             {
@@ -253,7 +258,12 @@ namespace IBM.Data.DB2
 
         #region Open
 
-        unsafe public void Open()
+        public
+        #endregion
+
+        #region Open
+
+        unsafe void Open()
         {
             if (disposed)
             {

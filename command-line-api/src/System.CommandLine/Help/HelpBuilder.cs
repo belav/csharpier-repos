@@ -7,10 +7,11 @@ using System.Linq;
 
 namespace System.CommandLine.Help
 {
+    partial
     /// <summary>
     /// Formats output to be shown to users to describe how to use a command line tool.
     /// </summary>
-    public partial class HelpBuilder
+    public class HelpBuilder
     {
         private const string Indent = "  ";
 

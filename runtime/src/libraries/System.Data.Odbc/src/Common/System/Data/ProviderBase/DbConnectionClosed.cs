@@ -5,7 +5,7 @@ using System.Data.Common;
 
 namespace System.Data.ProviderBase
 {
-    internal abstract partial class DbConnectionClosed : DbConnectionInternal
+    partial internal abstract class DbConnectionClosed : DbConnectionInternal
     {
         protected override void Activate() => throw ADP.ClosedConnectionError();
     }

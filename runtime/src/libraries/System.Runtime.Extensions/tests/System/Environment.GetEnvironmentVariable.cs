@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class GetEnvironmentVariable
+    partial public class GetEnvironmentVariable
     {
         [Fact]
         public void InvalidArguments_ThrowsExceptions()

@@ -25,7 +25,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class FileCodeGroup : CodeGroup, IUnionSemanticCodeGroup
+    public sealed class FileCodeGroup : CodeGroup, IUnionSemanticCodeGroup
     {
         private FileIOPermissionAccess m_access;
 

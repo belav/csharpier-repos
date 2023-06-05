@@ -33,7 +33,7 @@ namespace ILLink.Shared.TrimAnalysis
             _requireDynamicallyAccessedMembersAction = new(reflectionMarker, diagnosticContext);
         }
 
-        private partial bool MethodIsTypeConstructor(MethodProxy method)
+        partial private bool MethodIsTypeConstructor(MethodProxy method)
         {
             if (!method.Method.IsConstructor)
                 return false;
@@ -47,7 +47,7 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy(
+        partial private IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -63,7 +63,7 @@ namespace ILLink.Shared.TrimAnalysis
                 yield return new SystemReflectionMethodBaseValue(new MethodProxy(method));
         }
 
-        private partial IEnumerable<SystemTypeValue> GetNestedTypesOnType(
+        partial private IEnumerable<SystemTypeValue> GetNestedTypesOnType(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -75,7 +75,7 @@ namespace ILLink.Shared.TrimAnalysis
                 yield return new SystemTypeValue(new TypeProxy(nestedType));
         }
 
-        private partial bool TryGetBaseType(TypeProxy type, out TypeProxy? baseType)
+        partial private bool TryGetBaseType(TypeProxy type, out TypeProxy? baseType)
         {
             if (
                 type.Type.BaseType is TypeReference baseTypeRef
@@ -90,7 +90,7 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial bool TryResolveTypeNameForCreateInstanceAndMark(
+        partial private bool TryResolveTypeNameForCreateInstanceAndMark(
             in MethodProxy calledMethod,
             string assemblyName,
             string typeName,
@@ -130,10 +130,10 @@ namespace ILLink.Shared.TrimAnalysis
             return true;
         }
 
-        private partial void MarkStaticConstructor(TypeProxy type) =>
+        partial private void MarkStaticConstructor(TypeProxy type) =>
             _reflectionMarker.MarkStaticConstructor(_diagnosticContext.Origin, type.Type);
 
-        private partial void MarkEventsOnTypeHierarchy(
+        partial private void MarkEventsOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -145,7 +145,7 @@ namespace ILLink.Shared.TrimAnalysis
                 bindingFlags
             );
 
-        private partial void MarkFieldsOnTypeHierarchy(
+        partial private void MarkFieldsOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -157,7 +157,7 @@ namespace ILLink.Shared.TrimAnalysis
                 bindingFlags
             );
 
-        private partial void MarkPropertiesOnTypeHierarchy(
+        partial private void MarkPropertiesOnTypeHierarchy(
             TypeProxy type,
             string name,
             BindingFlags? bindingFlags
@@ -169,14 +169,14 @@ namespace ILLink.Shared.TrimAnalysis
                 bindingFlags
             );
 
-        private partial void MarkPublicParameterlessConstructorOnType(TypeProxy type) =>
+        partial private void MarkPublicParameterlessConstructorOnType(TypeProxy type) =>
             _reflectionMarker.MarkConstructorsOnType(
                 _diagnosticContext.Origin,
                 type.Type,
                 m => m.IsPublic && !m.HasMetadataParameters()
             );
 
-        private partial void MarkConstructorsOnType(
+        partial private void MarkConstructorsOnType(
             TypeProxy type,
             BindingFlags? bindingFlags,
             int? parameterCount
@@ -190,13 +190,13 @@ namespace ILLink.Shared.TrimAnalysis
                 bindingFlags
             );
 
-        private partial void MarkMethod(MethodProxy method) =>
+        partial private void MarkMethod(MethodProxy method) =>
             _reflectionMarker.MarkMethod(_diagnosticContext.Origin, method.Method);
 
-        private partial void MarkType(TypeProxy type) =>
+        partial private void MarkType(TypeProxy type) =>
             _reflectionMarker.MarkType(_diagnosticContext.Origin, type.Type);
 
-        private partial bool MarkAssociatedProperty(MethodProxy method)
+        partial private bool MarkAssociatedProperty(MethodProxy method)
         {
             if (method.Method.TryGetProperty(out PropertyDefinition? propertyDefinition))
             {
@@ -207,7 +207,7 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial string GetContainingSymbolDisplayName() =>
+        partial private string GetContainingSymbolDisplayName() =>
             _callingMethodDefinition.GetDisplayName();
     }
 }

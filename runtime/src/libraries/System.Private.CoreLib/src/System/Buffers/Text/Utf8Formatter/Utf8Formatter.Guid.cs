@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Formatter
+    partial public static class Utf8Formatter
     {
         #region Constants
 

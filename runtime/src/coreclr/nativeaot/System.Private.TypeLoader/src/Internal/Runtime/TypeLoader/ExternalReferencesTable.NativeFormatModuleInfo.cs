@@ -6,7 +6,7 @@ using Internal.Runtime.Augments;
 
 namespace Internal.Runtime.TypeLoader
 {
-    public partial struct ExternalReferencesTable
+    partial public struct ExternalReferencesTable
     {
         private unsafe bool Initialize(NativeFormatModuleInfo module, ReflectionMapBlob blobId)
         {

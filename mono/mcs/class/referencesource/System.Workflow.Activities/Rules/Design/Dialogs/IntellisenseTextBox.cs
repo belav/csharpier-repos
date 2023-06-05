@@ -13,9 +13,10 @@ using System.Windows.Forms;
 
 namespace System.Workflow.Activities.Rules.Design
 {
+    partial
     #region IntellisenseTextBox
 
-    internal partial class IntellisenseTextBox : TextBox
+    internal class IntellisenseTextBox : TextBox
     {
         #region members and constructors
 

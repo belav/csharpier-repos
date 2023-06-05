@@ -6,7 +6,7 @@
 
 namespace System.Linq
 {
-    public partial class OrderedParallelQuery<TSource> : System.Linq.ParallelQuery<TSource>
+    partial public class OrderedParallelQuery<TSource> : System.Linq.ParallelQuery<TSource>
     {
         internal OrderedParallelQuery() { }
 
@@ -16,7 +16,7 @@ namespace System.Linq
         }
     }
 
-    public static partial class ParallelEnumerable
+    partial public static class ParallelEnumerable
     {
         public static TSource Aggregate<TSource>(
             this System.Linq.ParallelQuery<TSource> source,
@@ -1664,7 +1664,7 @@ namespace System.Linq
         FullyBuffered = 3,
     }
 
-    public partial class ParallelQuery : System.Collections.IEnumerable
+    partial public class ParallelQuery : System.Collections.IEnumerable
     {
         internal ParallelQuery() { }
 
@@ -1674,7 +1674,7 @@ namespace System.Linq
         }
     }
 
-    public partial class ParallelQuery<TSource>
+    partial public class ParallelQuery<TSource>
         : System.Linq.ParallelQuery,
             System.Collections.Generic.IEnumerable<TSource>,
             System.Collections.IEnumerable

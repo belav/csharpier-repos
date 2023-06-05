@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Xunit;
 
-unsafe static class SuppressGCTransitionNative
+static unsafe class SuppressGCTransitionNative
 {
     [DllImport(nameof(SuppressGCTransitionNative), CallingConvention = CallingConvention.Cdecl)]
     public static extern unsafe void SetIsInCooperativeModeFunction(delegate* unmanaged<int> fn);

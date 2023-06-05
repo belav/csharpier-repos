@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         Name = PredefinedCodeFixProviderNames.MoveMisplacedUsingDirectives
     )]
     [Shared]
-    internal sealed partial class MisplacedUsingDirectivesCodeFixProvider : CodeFixProvider
+    partial internal sealed class MisplacedUsingDirectivesCodeFixProvider : CodeFixProvider
     {
         private static readonly SyntaxAnnotation s_usingPlacementCodeFixAnnotation =
             new(nameof(s_usingPlacementCodeFixAnnotation));

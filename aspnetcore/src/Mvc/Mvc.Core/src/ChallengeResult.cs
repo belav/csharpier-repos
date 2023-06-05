@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+partial
 /// <summary>
 /// An <see cref="ActionResult"/> that on execution invokes <see cref="M:HttpContext.ChallengeAsync"/>.
 /// </summary>
-public partial class ChallengeResult : ActionResult
+public class ChallengeResult : ActionResult
 {
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/>.
@@ -106,7 +107,7 @@ public partial class ChallengeResult : ActionResult
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void ChallengeResultExecuting(ILogger logger, IList<string> schemes)
         {
@@ -123,6 +124,6 @@ public partial class ChallengeResult : ActionResult
             EventName = "ChallengeResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ChallengeResultExecuting(ILogger logger, string[] schemes);
+        partial private static void ChallengeResultExecuting(ILogger logger, string[] schemes);
     }
 }

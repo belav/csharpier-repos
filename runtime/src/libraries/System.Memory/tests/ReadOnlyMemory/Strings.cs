@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.MemoryTests
 {
-    public static partial class ReadOnlyMemoryTests
+    partial public static class ReadOnlyMemoryTests
     {
         public static IEnumerable<object[]> StringInputs()
         {

@@ -21,7 +21,7 @@ namespace System.ServiceModel.Configuration
         FxCop.Rule.ConfigurationValidatorAttributeRule,
         Justification = "The ExtendedProtectionPolicyElement configuration object and the configuration validation is owned by the NCL team."
     )]
-    public partial class HttpTransportElement : TransportElement
+    partial public class HttpTransportElement : TransportElement
     {
         public HttpTransportElement() { }
 

@@ -4,13 +4,13 @@
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptExportKey(
+        partial public static bool CryptExportKey(
             SafeCapiKeyHandle hKey,
             SafeCapiKeyHandle hExpKey,
             int dwBlobType,

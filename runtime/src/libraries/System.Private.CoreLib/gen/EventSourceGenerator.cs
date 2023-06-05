@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Generators
 {
     [Generator]
-    public partial class EventSourceGenerator : IIncrementalGenerator
+    partial public class EventSourceGenerator : IIncrementalGenerator
     {
         // Example input:
         //

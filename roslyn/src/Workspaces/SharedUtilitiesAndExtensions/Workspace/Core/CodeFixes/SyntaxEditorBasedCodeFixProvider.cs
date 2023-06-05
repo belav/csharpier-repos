@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
-    internal abstract partial class SyntaxEditorBasedCodeFixProvider : CodeFixProvider
+    partial internal abstract class SyntaxEditorBasedCodeFixProvider : CodeFixProvider
     {
         private static readonly ImmutableArray<FixAllScope> s_defaultSupportedFixAllScopes =
             ImmutableArray.Create(

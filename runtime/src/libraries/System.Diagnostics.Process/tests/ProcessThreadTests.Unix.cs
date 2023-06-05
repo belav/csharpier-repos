@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class ProcessThreadTests
+    partial public class ProcessThreadTests
     {
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

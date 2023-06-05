@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal sealed partial class SourceGeneratedFileItem
+    partial internal sealed class SourceGeneratedFileItem
     {
         private class BrowseObject : LocalizableProperties
         {

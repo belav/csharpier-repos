@@ -5,7 +5,7 @@ using Internal.NativeFormat;
 
 namespace Internal.Metadata.NativeFormat
 {
-    internal static partial class MdBinaryReader
+    partial internal static class MdBinaryReader
     {
         public static uint Read(this NativeReader reader, uint offset, out bool value)
         {

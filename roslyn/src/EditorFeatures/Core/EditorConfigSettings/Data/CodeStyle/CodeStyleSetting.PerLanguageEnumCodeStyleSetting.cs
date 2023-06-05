@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 {
-    internal abstract partial class CodeStyleSetting
+    partial internal abstract class CodeStyleSetting
     {
         private class PerLanguageEnumCodeStyleSetting<T> : EnumCodeStyleSettingBase<T>
             where T : Enum

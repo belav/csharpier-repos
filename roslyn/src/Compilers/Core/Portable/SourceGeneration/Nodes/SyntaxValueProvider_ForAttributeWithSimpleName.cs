@@ -26,7 +26,7 @@ internal enum SourceGeneratorSyntaxTreeInfo
     ContainsGlobalAliasesOrAttributeList = ContainsGlobalAliases | ContainsAttributeList,
 }
 
-public partial struct SyntaxValueProvider
+partial public struct SyntaxValueProvider
 {
     private static readonly ObjectPool<Stack<string>> s_stringStackPool = new ObjectPool<
         Stack<string>

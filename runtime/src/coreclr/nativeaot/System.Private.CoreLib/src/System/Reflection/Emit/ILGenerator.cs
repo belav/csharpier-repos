@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    public partial class ILGenerator
+    partial public class ILGenerator
     {
         internal ILGenerator()
         {

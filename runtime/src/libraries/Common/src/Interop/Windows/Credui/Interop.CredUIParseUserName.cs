@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Credui
+    partial internal static class Credui
     {
         // These constants were taken from the wincred.h file
         internal const int CRED_MAX_USERNAME_LENGTH = 514;
@@ -18,7 +18,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int CredUIParseUserName(
+        partial internal static unsafe int CredUIParseUserName(
             string pszUserName,
             char* pszUser,
             uint ulUserMaxChars,

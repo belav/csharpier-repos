@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Globalization
 {
-    internal static partial class OrdinalCasing
+    partial internal static class OrdinalCasing
     {
         // s_noCasingPage means the Unicode page doesn't support any casing and no case translation is needed.
         private static ushort[] s_noCasingPage = Array.Empty<ushort>();

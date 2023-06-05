@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class SourceTextExtensions
+    partial internal static class SourceTextExtensions
     {
         /// <summary>
         /// Returns the leading whitespace of the line located at the specified position in the given snapshot.

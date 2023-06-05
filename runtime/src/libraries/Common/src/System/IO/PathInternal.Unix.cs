@@ -7,8 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.IO
 {
+    partial
     /// <summary>Contains internal path helpers that are shared between many projects.</summary>
-    internal static partial class PathInternal
+    internal static class PathInternal
     {
         internal const char DirectorySeparatorChar = '/';
         internal const char AltDirectorySeparatorChar = '/';

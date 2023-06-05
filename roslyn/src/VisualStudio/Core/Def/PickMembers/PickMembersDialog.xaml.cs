@@ -16,10 +16,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
 {
+    partial
     /// <summary>
     /// Interaction logic for ExtractInterfaceDialog.xaml
     /// </summary>
-    internal partial class PickMembersDialog : DialogWindow
+    internal class PickMembersDialog : DialogWindow
     {
         private readonly PickMembersDialogViewModel _viewModel;
 

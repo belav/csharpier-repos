@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 {
-    internal partial class UnitTestingSolutionCrawlerRegistrationService
+    partial internal class UnitTestingSolutionCrawlerRegistrationService
         : IUnitTestingSolutionCrawlerRegistrationService
     {
         internal static readonly Option2<bool> EnableSolutionCrawler =

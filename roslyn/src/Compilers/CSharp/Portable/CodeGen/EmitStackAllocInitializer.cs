@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 {
-    internal partial class CodeGenerator
+    partial internal class CodeGenerator
     {
         private void EmitStackAllocInitializers(TypeSymbol type, BoundArrayInitialization inits)
         {

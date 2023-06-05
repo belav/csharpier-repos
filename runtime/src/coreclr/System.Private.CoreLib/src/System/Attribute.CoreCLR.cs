@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace System
 {
-    public abstract partial class Attribute
+    partial public abstract class Attribute
     {
         #region Private Statics
 

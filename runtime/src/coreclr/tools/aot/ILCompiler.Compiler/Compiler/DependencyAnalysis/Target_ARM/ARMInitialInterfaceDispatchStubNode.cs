@@ -12,13 +12,14 @@ using ILCompiler.DependencyAnalysis.LoongArch64;
 
 namespace ILCompiler.DependencyAnalysis
 {
+    partial
     /// <summary>
     /// On ARM, we use R12 to store the interface dispatch cell. However, the jump through the import address
     /// table to call the runtime interface dispatch helper trashes R12. This stub pushes R12 before making
     /// the runtime call. The ARM runtime interface dispatch code expects this and pops R12 to get the dispatch
     /// cell.
     /// </summary>
-    public partial class InitialInterfaceDispatchStubNode : AssemblyStubNode
+    public class InitialInterfaceDispatchStubNode : AssemblyStubNode
     {
         protected override string GetName(NodeFactory factory) =>
             this.GetMangledName(factory.NameMangler);

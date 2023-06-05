@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal const int CTRL_C_EVENT = 0;
         internal const int CTRL_BREAK_EVENT = 1;
@@ -15,7 +15,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool SetConsoleCtrlHandler(
+        partial internal static unsafe bool SetConsoleCtrlHandler(
             delegate* unmanaged<int, BOOL> handler,
             [MarshalAs(UnmanagedType.Bool)] bool Add
         );

@@ -31,7 +31,7 @@ using System.Text;
 
 namespace System
 {
-    public partial class TimeZoneInfo
+    partial public class TimeZoneInfo
     {
         public static TimeZoneInfo FromSerializedString(string source)
         {

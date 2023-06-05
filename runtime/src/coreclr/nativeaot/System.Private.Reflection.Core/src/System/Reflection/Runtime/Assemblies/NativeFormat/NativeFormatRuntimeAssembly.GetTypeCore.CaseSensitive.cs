@@ -20,7 +20,7 @@ using Internal.Reflection.Tracing;
 
 namespace System.Reflection.Runtime.Assemblies.NativeFormat
 {
-    internal partial class NativeFormatRuntimeAssembly
+    partial internal class NativeFormatRuntimeAssembly
     {
         internal sealed override RuntimeTypeInfo UncachedGetTypeCoreCaseSensitive(string fullName)
         {

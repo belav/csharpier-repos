@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 public static class Program
 {
     [DllImport("__Internal")]
-    unsafe private static extern void invoke_external_native_api(
+    private static extern unsafe void invoke_external_native_api(
         delegate* unmanaged<void> callback
     );
 

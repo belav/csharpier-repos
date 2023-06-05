@@ -13,7 +13,7 @@ using BCRYPT_PSS_PADDING_INFO = Interop.BCrypt.BCRYPT_PSS_PADDING_INFO;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSACng : RSA
+    partial public sealed class RSACng : RSA
     {
         private static readonly ConcurrentDictionary<HashAlgorithmName, int> s_hashSizes =
             new ConcurrentDictionary<HashAlgorithmName, int>(

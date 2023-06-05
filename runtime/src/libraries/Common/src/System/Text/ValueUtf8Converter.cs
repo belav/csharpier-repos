@@ -5,12 +5,13 @@ using System.Buffers;
 
 namespace System.Text
 {
+    ref
     /// <summary>
     /// Helper to allow utilizing stack buffer for conversion to UTF-8. Will
     /// switch to ArrayPool if not given enough memory. As such, make sure to
     /// call Clear() to return any potentially rented buffer after conversion.
     /// </summary>
-    internal ref struct ValueUtf8Converter
+    internal struct ValueUtf8Converter
     {
         private byte[]? _arrayToReturnToPool;
         private Span<byte> _bytes;

@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Interop.FunctionalTests;
 
-public static partial class H2SpecCommands
+partial public static class H2SpecCommands
 {
     #region chmod
     // user permissions
@@ -33,7 +33,7 @@ public static partial class H2SpecCommands
     const int _0755 = S_IRUSR | S_IXUSR | S_IWUSR | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
 
     [LibraryImport("libc", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
-    private static partial int chmod(string pathname, int mode);
+    partial private static int chmod(string pathname, int mode);
 
     private static int chmod755(string pathname) => chmod(pathname, _0755);
     #endregion

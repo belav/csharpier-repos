@@ -706,7 +706,7 @@ namespace System.Net
         }
 
         //
-        private unsafe static int EncryptDecryptHelper(
+        private static unsafe int EncryptDecryptHelper(
             OP op,
             SSPIInterface SecModule,
             SafeDeleteContext context,

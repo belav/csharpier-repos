@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.Text.Editor.Expansion;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 {
-    internal abstract partial class AbstractSnippetFunction : IExpansionFunction
+    partial internal abstract class AbstractSnippetFunction : IExpansionFunction
     {
         void IExpansionFunction.GetDefaultValue(out string value, out bool hasDefaultValue)
         {

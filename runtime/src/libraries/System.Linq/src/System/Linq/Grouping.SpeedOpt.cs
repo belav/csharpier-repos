@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    internal sealed partial class GroupedResultEnumerable<TSource, TKey, TElement, TResult>
+    partial internal sealed class GroupedResultEnumerable<TSource, TKey, TElement, TResult>
         : IIListProvider<TResult>
     {
         public TResult[] ToArray() =>
@@ -26,7 +26,7 @@ namespace System.Linq
                     .Count;
     }
 
-    internal sealed partial class GroupedResultEnumerable<TSource, TKey, TResult>
+    partial internal sealed class GroupedResultEnumerable<TSource, TKey, TResult>
         : IIListProvider<TResult>
     {
         public TResult[] ToArray() =>
@@ -39,7 +39,7 @@ namespace System.Linq
             onlyIfCheap ? -1 : Lookup<TKey, TSource>.Create(_source, _keySelector, _comparer).Count;
     }
 
-    internal sealed partial class GroupedEnumerable<TSource, TKey, TElement>
+    partial internal sealed class GroupedEnumerable<TSource, TKey, TElement>
         : IIListProvider<IGrouping<TKey, TElement>>
     {
         public IGrouping<TKey, TElement>[] ToArray()
@@ -72,7 +72,7 @@ namespace System.Linq
                     .Count;
     }
 
-    internal sealed partial class GroupedEnumerable<TSource, TKey>
+    partial internal sealed class GroupedEnumerable<TSource, TKey>
         : IIListProvider<IGrouping<TKey, TSource>>
     {
         public IGrouping<TKey, TSource>[] ToArray()

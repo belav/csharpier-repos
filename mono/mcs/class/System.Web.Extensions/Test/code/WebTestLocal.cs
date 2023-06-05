@@ -2,9 +2,9 @@ using System;
 
 namespace MonoTests.SystemWeb.Framework
 {
-    public partial class WebTest
+    partial public class WebTest
     {
-        static partial void CopyResourcesLocal()
+        partial static void CopyResourcesLocal()
         {
             Type myself = typeof(WebTest);
 #if !DOTNET

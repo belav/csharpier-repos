@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.Net.Security;
 
-    public partial class NetMsmqBindingElement : MsmqBindingElementBase
+    partial public class NetMsmqBindingElement : MsmqBindingElementBase
     {
         public NetMsmqBindingElement(string name)
             : base(name) { }

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Xml.XmlWriterApiTests
 {
-    public partial class TCWriteEndDocumentOnCloseTest
+    partial public class TCWriteEndDocumentOnCloseTest
     {
         [Theory]
         [InlineData(false, "<root>text")]

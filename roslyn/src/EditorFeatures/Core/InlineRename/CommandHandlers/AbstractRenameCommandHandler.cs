@@ -15,7 +15,7 @@ using Microsoft.VisualStudio.Text.Editor.Commanding;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler
+    partial internal abstract class AbstractRenameCommandHandler
     {
         private readonly IThreadingContext _threadingContext;
         private readonly InlineRenameService _renameService;

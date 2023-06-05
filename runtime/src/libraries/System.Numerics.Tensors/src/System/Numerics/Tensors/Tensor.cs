@@ -8,10 +8,11 @@ using System.Text;
 
 namespace System.Numerics.Tensors
 {
+    partial
     /// <summary>
     /// Various methods for creating and manipulating Tensor&lt;T&gt;
     /// </summary>
-    public static partial class Tensor
+    public static class Tensor
     {
         /// <summary>
         /// Creates an identity tensor of the specified size.  An identity tensor is a two dimensional tensor with 1s in the diagonal.

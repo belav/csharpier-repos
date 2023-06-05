@@ -38,7 +38,7 @@ using System.Security.AccessControl;
 namespace System.IO
 {
     [ComVisible(true)]
-    public static partial class Directory
+    partial public static class Directory
     {
 #if !MONO
         [ResourceExposure(ResourceScope.Machine)]
@@ -248,7 +248,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static void InternalCreateDirectory(
+        internal static unsafe void InternalCreateDirectory(
             String fullPath,
             String path,
             Object dirSecurityObj,
@@ -552,7 +552,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static void SetCreationTimeUtc(String path, DateTime creationTimeUtc)
+        public static unsafe void SetCreationTimeUtc(String path, DateTime creationTimeUtc)
         {
             using (SafeFileHandle handle = Directory.OpenHandle(path))
             {
@@ -592,7 +592,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static void SetLastWriteTimeUtc(String path, DateTime lastWriteTimeUtc)
+        public static unsafe void SetLastWriteTimeUtc(String path, DateTime lastWriteTimeUtc)
         {
             using (SafeFileHandle handle = Directory.OpenHandle(path))
             {
@@ -632,7 +632,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static void SetLastAccessTimeUtc(String path, DateTime lastAccessTimeUtc)
+        public static unsafe void SetLastAccessTimeUtc(String path, DateTime lastAccessTimeUtc)
         {
             using (SafeFileHandle handle = Directory.OpenHandle(path))
             {

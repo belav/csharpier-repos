@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Text.Json.Tests
 {
-    public static partial class Utf8JsonReaderTests
+    partial public static class Utf8JsonReaderTests
     {
         [Fact]
         public static void DefaultUtf8JsonReader()

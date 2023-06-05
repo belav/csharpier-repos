@@ -6,9 +6,9 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        private abstract partial class AppendPrependIterator<TSource> : IIListProvider<TSource>
+        partial private abstract class AppendPrependIterator<TSource> : IIListProvider<TSource>
         {
             public abstract TSource[] ToArray();
 
@@ -17,7 +17,7 @@ namespace System.Linq
             public abstract int GetCount(bool onlyIfCheap);
         }
 
-        private sealed partial class AppendPrepend1Iterator<TSource>
+        partial private sealed class AppendPrepend1Iterator<TSource>
         {
             private TSource[] LazyToArray()
             {
@@ -100,7 +100,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class AppendPrependN<TSource>
+        partial private sealed class AppendPrependN<TSource>
         {
             private TSource[] LazyToArray()
             {

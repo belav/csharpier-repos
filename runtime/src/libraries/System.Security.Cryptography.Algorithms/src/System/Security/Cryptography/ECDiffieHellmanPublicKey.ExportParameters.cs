@@ -5,10 +5,11 @@ using System.Formats.Asn1;
 
 namespace System.Security.Cryptography
 {
+    partial
     /// <summary>
     ///     Wrapper for public key material passed between parties during Diffie-Hellman key material generation
     /// </summary>
-    public abstract partial class ECDiffieHellmanPublicKey : IDisposable
+    public abstract class ECDiffieHellmanPublicKey : IDisposable
     {
         /// <summary>
         /// When overridden in a derived class, exports the named or explicit ECParameters for an ECCurve.

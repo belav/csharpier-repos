@@ -9,9 +9,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class DSAImplementation
+    partial internal static class DSAImplementation
     {
-        public sealed partial class DSAAndroid : DSA
+        partial public sealed class DSAAndroid : DSA
         {
             // The biggest key allowed by FIPS 186-4 has N=256 (bit), which
             // maximally produces a 72-byte DER signature.

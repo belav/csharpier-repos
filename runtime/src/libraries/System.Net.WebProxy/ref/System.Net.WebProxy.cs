@@ -6,14 +6,14 @@
 
 namespace System.Net
 {
-    public partial interface IWebProxyScript
+    partial public interface IWebProxyScript
     {
         void Close();
         bool Load(System.Uri scriptLocation, string script, System.Type helperType);
         string Run(string url, string host);
     }
 
-    public partial class WebProxy : System.Net.IWebProxy, System.Runtime.Serialization.ISerializable
+    partial public class WebProxy : System.Net.IWebProxy, System.Runtime.Serialization.ISerializable
     {
         public WebProxy() { }
 

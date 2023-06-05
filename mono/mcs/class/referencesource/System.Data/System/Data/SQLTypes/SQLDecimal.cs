@@ -125,6 +125,7 @@ namespace System.Data.SqlTypes
             10 * 10 * 10 * 10 * 10 * 10 * 10 * 10 * 10
         };
 
+        private
         #region DecimalHelperTableGenerator
         /*
                 // the code below will generate the DecimalHelpers tables
@@ -172,7 +173,7 @@ namespace System.Data.SqlTypes
         #endregion
 
         #region DecimalHelperTable
-        static private readonly UInt32[] DecimalHelpersLo =
+        static readonly UInt32[] DecimalHelpersLo =
         {
             0x0000000a, // precision:2, value:10
             0x00000064, // precision:3, value:100
@@ -214,7 +215,7 @@ namespace System.Data.SqlTypes
             0x00000000, // precision:38+1, value:99999999999999999999999999999999999999+1
         };
 
-        static private readonly UInt32[] DecimalHelpersMid =
+        private static readonly UInt32[] DecimalHelpersMid =
         {
             0x00000000, // precision:2, value:10
             0x00000000, // precision:3, value:100
@@ -256,7 +257,7 @@ namespace System.Data.SqlTypes
             0x098a2240, // precision:38+1, value:99999999999999999999999999999999999999+1
         };
 
-        static private readonly UInt32[] DecimalHelpersHi =
+        private static readonly UInt32[] DecimalHelpersHi =
         {
             0x00000000, // precision:2, value:10
             0x00000000, // precision:3, value:100
@@ -298,7 +299,7 @@ namespace System.Data.SqlTypes
             0x5a86c47a, // precision:38+1, value:99999999999999999999999999999999999999+1
         };
 
-        static private readonly UInt32[] DecimalHelpersHiHi =
+        private static readonly UInt32[] DecimalHelpersHiHi =
         {
             0x00000000, // precision:2, value:10
             0x00000000, // precision:3, value:100

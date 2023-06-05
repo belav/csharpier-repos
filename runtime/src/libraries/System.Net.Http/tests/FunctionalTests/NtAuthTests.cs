@@ -104,7 +104,7 @@ namespace System.Net.Http.Functional.Tests
         }
     }
 
-    public partial class NtAuthTests : IClassFixture<NtAuthServers>
+    partial public class NtAuthTests : IClassFixture<NtAuthServers>
     {
         private readonly NtAuthServers _servers;
         private readonly ITestOutputHelper _output;

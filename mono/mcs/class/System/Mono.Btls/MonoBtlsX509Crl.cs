@@ -56,7 +56,7 @@ namespace Mono.Btls
             }
         }
 
-        new internal BoringX509CrlHandle Handle
+        internal new BoringX509CrlHandle Handle
         {
             get { return (BoringX509CrlHandle)base.Handle; }
         }
@@ -65,45 +65,45 @@ namespace Mono.Btls
             : base(handle) { }
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_crl_ref(IntPtr handle);
+        static extern IntPtr mono_btls_x509_crl_ref(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_crl_from_data(
+        static extern IntPtr mono_btls_x509_crl_from_data(
             IntPtr data,
             int len,
             MonoBtlsX509Format format
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_crl_get_by_cert(IntPtr handle, IntPtr x509);
+        static extern IntPtr mono_btls_x509_crl_get_by_cert(IntPtr handle, IntPtr x509);
 
         [DllImport(BTLS_DYLIB)]
-        unsafe extern static IntPtr mono_btls_x509_crl_get_by_serial(
+        static extern unsafe IntPtr mono_btls_x509_crl_get_by_serial(
             IntPtr handle,
             void* serial,
             int len
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_crl_get_revoked_count(IntPtr handle);
+        static extern int mono_btls_x509_crl_get_revoked_count(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_crl_get_revoked(IntPtr handle, int index);
+        static extern IntPtr mono_btls_x509_crl_get_revoked(IntPtr handle, int index);
 
         [DllImport(BTLS_DYLIB)]
-        extern static long mono_btls_x509_crl_get_last_update(IntPtr handle);
+        static extern long mono_btls_x509_crl_get_last_update(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static long mono_btls_x509_crl_get_next_update(IntPtr handle);
+        static extern long mono_btls_x509_crl_get_next_update(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static long mono_btls_x509_crl_get_version(IntPtr handle);
+        static extern long mono_btls_x509_crl_get_version(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_crl_get_issuer(IntPtr handle);
+        static extern IntPtr mono_btls_x509_crl_get_issuer(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_x509_crl_free(IntPtr handle);
+        static extern void mono_btls_x509_crl_free(IntPtr handle);
 
         public static MonoBtlsX509Crl LoadFromData(byte[] buffer, MonoBtlsX509Format format)
         {

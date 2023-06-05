@@ -7,12 +7,12 @@ using System.Net.Internals;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Socket")]
-        internal static unsafe partial Error Socket(
+        partial internal static unsafe Error Socket(
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType,

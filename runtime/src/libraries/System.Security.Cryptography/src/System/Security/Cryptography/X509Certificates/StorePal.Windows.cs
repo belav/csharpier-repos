@@ -8,11 +8,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
+    partial internal sealed class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
     {
         private SafeCertStoreHandle _certStore;
 
-        internal static partial IStorePal FromHandle(IntPtr storeHandle)
+        partial internal static IStorePal FromHandle(IntPtr storeHandle)
         {
             if (storeHandle == IntPtr.Zero)
             {

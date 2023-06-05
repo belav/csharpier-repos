@@ -52,7 +52,7 @@ namespace System.Web
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
     )]
-    public sealed partial class HttpResponse
+    partial public sealed class HttpResponse
     {
         internal HttpWorkerRequest WorkerRequest;
         internal HttpResponseStream output_stream;

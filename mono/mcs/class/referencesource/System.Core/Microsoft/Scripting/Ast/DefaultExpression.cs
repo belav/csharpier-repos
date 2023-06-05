@@ -66,7 +66,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates an empty expression that has <see cref="System.Void"/> type.

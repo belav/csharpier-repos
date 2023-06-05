@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Holds code for canonicalizing a parameterized type
-    public partial class ParameterizedType
+    public class ParameterizedType
     {
         public sealed override bool IsCanonicalSubtype(CanonicalFormKind policy)
         {

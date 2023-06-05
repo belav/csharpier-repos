@@ -91,7 +91,7 @@ namespace Microsoft.Interop.Analyzers
             );
         }
 
-        private sealed partial class PerCompilationAnalyzer
+        partial private sealed class PerCompilationAnalyzer
         {
             private readonly Compilation _compilation;
 

@@ -7,7 +7,7 @@ using System.Net;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlDownloadManager
+    partial internal sealed class XmlDownloadManager
     {
         internal static Stream GetStream(Uri uri, ICredentials? credentials, IWebProxy? proxy)
         {

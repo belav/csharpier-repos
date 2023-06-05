@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.Globalization
 {
-    internal static partial class Normalization
+    partial internal static class Normalization
     {
         private static unsafe bool NlsIsNormalized(
             string strInput,

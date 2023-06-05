@@ -82,7 +82,7 @@ namespace System.Runtime.Caching
         private const int CHANGED = 0x02; // dependency changed
         private const int INVOKED = 0x04; // OnChangedCallback has been invoked
         private const int DISPOSED = 0x08; // Dispose(true) called, or about to be called
-        private readonly static object NOT_SET = new object();
+        private static readonly object NOT_SET = new object();
 
         private SafeBitVector32 _flags;
         private OnChangedCallback _onChangedCallback;

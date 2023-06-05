@@ -3,10 +3,11 @@
 
 namespace System.Drawing.Printing
 {
+    partial
     /// <summary>
     /// Specifies the paper tray from which the printer gets paper.
     /// </summary>
-    public partial class PaperSource
+    public class PaperSource
     {
         private string _name;
         private PaperSourceKind _kind;

@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BrowserCrypto
+    partial internal static class BrowserCrypto
     {
         // These values are also defined in the pal_crypto_webworker header file, and utilized in the dotnet-crypto-worker in the wasm runtime.
         internal enum SimpleDigest
@@ -22,13 +22,13 @@ internal static partial class Interop
             Libraries.CryptoNative,
             EntryPoint = "SystemCryptoNativeBrowser_CanUseSimpleDigestHash"
         )]
-        internal static partial int CanUseSimpleDigestHash();
+        partial internal static int CanUseSimpleDigestHash();
 
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "SystemCryptoNativeBrowser_SimpleDigestHash"
         )]
-        internal static unsafe partial int SimpleDigestHash(
+        partial internal static unsafe int SimpleDigestHash(
             SimpleDigest hash,
             byte* input_buffer,
             int input_len,

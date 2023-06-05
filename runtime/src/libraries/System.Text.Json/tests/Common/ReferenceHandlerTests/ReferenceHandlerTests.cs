@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class ReferenceHandlerTests : SerializerTests
+    partial public abstract class ReferenceHandlerTests : SerializerTests
     {
         public ReferenceHandlerTests(JsonSerializerWrapper stringSerializer)
             : base(stringSerializer) { }

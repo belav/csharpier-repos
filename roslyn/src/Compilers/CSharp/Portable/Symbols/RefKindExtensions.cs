@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal static partial class RefKindExtensions
+    partial internal static class RefKindExtensions
     {
         public static bool IsManagedReference(this RefKind refKind)
         {

@@ -16,8 +16,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
+        partial
         /// <summary>
         /// Handles references to source symbols both from the current project the user is invoking
         /// 'add-import' from, as well as symbols from other viable projects.
@@ -26,7 +27,7 @@ namespace Microsoft.CodeAnalysis.AddImport
         /// light bulb and we say "(from ProjectXXX)" to make it clear that this will do more than
         /// just add a using/import.
         /// </summary>
-        private partial class ProjectSymbolReference : SymbolReference
+        private class ProjectSymbolReference : SymbolReference
         {
             private readonly Project _project;
 

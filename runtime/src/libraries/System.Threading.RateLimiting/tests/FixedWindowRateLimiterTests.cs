@@ -1362,7 +1362,7 @@ namespace System.Threading.RateLimiting.Test
         private static readonly double TickFrequency =
             (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency;
 
-        static internal void Replenish(FixedWindowRateLimiter limiter, long addMilliseconds)
+        internal static void Replenish(FixedWindowRateLimiter limiter, long addMilliseconds)
         {
             var replenishInternalMethod = typeof(FixedWindowRateLimiter).GetMethod(
                 "ReplenishInternal",

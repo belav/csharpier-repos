@@ -14,7 +14,7 @@ using SslStress.Utils;
 
 namespace SslStress
 {
-    public abstract partial class SslClientBase : IAsyncDisposable
+    partial public abstract class SslClientBase : IAsyncDisposable
     {
         protected readonly Configuration _config;
 

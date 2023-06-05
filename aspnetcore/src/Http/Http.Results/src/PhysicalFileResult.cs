@@ -7,11 +7,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+partial
 /// <summary>
 /// A <see cref="PhysicalFileResult"/> on execution will write a file from disk to the response
 /// using mechanisms provided by the host.
 /// </summary>
-internal sealed partial class PhysicalFileResult : FileResult, IResult
+internal sealed class PhysicalFileResult : FileResult, IResult
 {
     /// <summary>
     /// Creates a new <see cref="PhysicalFileResult"/> instance with

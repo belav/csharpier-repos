@@ -23,7 +23,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-public partial class TestServer : IDisposable
+partial public class TestServer : IDisposable
 {
     private const string InProcessHandlerDll = "aspnetcorev2_inprocess.dll";
     private const string AspNetCoreModuleDll = "aspnetcorev2.dll";
@@ -212,20 +212,20 @@ public partial class TestServer : IDisposable
     private delegate int hostfxr_main_fn(IntPtr argc, IntPtr argv);
 
     [LibraryImport(HWebCoreDll)]
-    private static partial int WebCoreActivate(
+    partial private static int WebCoreActivate(
         [MarshalAs(UnmanagedType.LPWStr)] string appHostConfigPath,
         [MarshalAs(UnmanagedType.LPWStr)] string rootWebConfigPath,
         [MarshalAs(UnmanagedType.LPWStr)] string instanceName
     );
 
     [LibraryImport(HWebCoreDll)]
-    private static partial int WebCoreShutdown([MarshalAs(UnmanagedType.Bool)] bool immediate);
+    partial private static int WebCoreShutdown([MarshalAs(UnmanagedType.Bool)] bool immediate);
 
     [LibraryImport(InProcessHandlerDll)]
-    private static partial int set_main_handler(hostfxr_main_fn main);
+    partial private static int set_main_handler(hostfxr_main_fn main);
 
     [LibraryImport("kernel32", EntryPoint = "LoadLibraryW", SetLastError = true)]
-    private static partial IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPWStr)] string lpFileName);
+    partial private static IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPWStr)] string lpFileName);
 
     private void Retry(Action func, int attempts)
     {

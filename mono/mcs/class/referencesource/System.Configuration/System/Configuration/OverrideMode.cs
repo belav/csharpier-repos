@@ -68,7 +68,7 @@ namespace System.Configuration
             LocationDefault._mode = (byte)OverrideMode.Inherit;
         }
 
-        static internal OverrideModeSetting CreateFromXmlReadValue(bool allowOverride)
+        internal static OverrideModeSetting CreateFromXmlReadValue(bool allowOverride)
         {
             // Create a mode from the old "allowOverride" attribute in the xml
 
@@ -83,7 +83,7 @@ namespace System.Configuration
             return result;
         }
 
-        static internal OverrideModeSetting CreateFromXmlReadValue(OverrideMode mode)
+        internal static OverrideModeSetting CreateFromXmlReadValue(OverrideMode mode)
         {
             OverrideModeSetting result = new OverrideModeSetting();
 

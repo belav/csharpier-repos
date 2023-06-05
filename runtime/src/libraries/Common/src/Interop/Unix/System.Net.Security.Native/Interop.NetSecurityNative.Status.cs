@@ -3,9 +3,9 @@
 
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NetSecurityNative
+    partial internal static class NetSecurityNative
     {
         // https://www.gnu.org/software/gss/reference/gss.pdf Page 65
         internal const int GSS_C_ROUTINE_ERROR_OFFSET = 16;

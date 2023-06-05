@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal partial class InvisibleEditor : ForegroundThreadAffinitizedObject, IInvisibleEditor
+    partial internal class InvisibleEditor : ForegroundThreadAffinitizedObject, IInvisibleEditor
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly string _filePath;

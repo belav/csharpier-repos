@@ -11,13 +11,13 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class X509Pal
+    partial internal sealed class X509Pal
     {
         public static IX509Pal Instance = new AndroidX509Pal();
 
         private X509Pal() { }
 
-        private sealed partial class AndroidX509Pal : ManagedX509ExtensionProcessor, IX509Pal
+        partial private sealed class AndroidX509Pal : ManagedX509ExtensionProcessor, IX509Pal
         {
             public ECDsa DecodeECDsaPublicKey(ICertificatePal? certificatePal)
             {

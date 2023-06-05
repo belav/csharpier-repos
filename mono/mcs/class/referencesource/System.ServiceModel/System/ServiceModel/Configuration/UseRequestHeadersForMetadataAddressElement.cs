@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public sealed partial class UseRequestHeadersForMetadataAddressElement
+    partial public sealed class UseRequestHeadersForMetadataAddressElement
         : BehaviorExtensionElement
     {
         public UseRequestHeadersForMetadataAddressElement() { }

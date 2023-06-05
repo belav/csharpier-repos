@@ -3,7 +3,7 @@
 
 namespace System.Text
 {
-    internal static partial class EncodingHelper
+    partial internal static class EncodingHelper
     {
         /// <summary>Creates an encoding from the current environment.</summary>
         /// <returns>The encoding, or null if it could not be determined.</returns>

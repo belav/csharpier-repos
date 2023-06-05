@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Internal.IL
 {
-    public partial class MethodIL
+    partial public class MethodIL
     {
         public virtual MethodDebugInformation GetDebugInfo()
         {
@@ -14,7 +14,7 @@ namespace Internal.IL
         }
     }
 
-    public partial class InstantiatedMethodIL
+    partial public class InstantiatedMethodIL
     {
         public override MethodDebugInformation GetDebugInfo()
         {

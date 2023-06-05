@@ -16,10 +16,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+partial
 /// <summary>
 /// A factory for <see cref="IModelBinder"/> instances.
 /// </summary>
-public partial class ModelBinderFactory : IModelBinderFactory
+public class ModelBinderFactory : IModelBinderFactory
 {
     private readonly IModelMetadataProvider _metadataProvider;
     private readonly IModelBinderProvider[] _providers;
@@ -349,7 +350,7 @@ public partial class ModelBinderFactory : IModelBinderFactory
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             12,
@@ -357,7 +358,7 @@ public partial class ModelBinderFactory : IModelBinderFactory
             "Registered model binder providers, in the following order: {ModelBinderProviders}",
             EventName = "RegisteredModelBinderProviders"
         )]
-        public static partial void RegisteredModelBinderProviders(
+        partial public static void RegisteredModelBinderProviders(
             ILogger logger,
             IModelBinderProvider[] modelBinderProviders
         );

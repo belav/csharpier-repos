@@ -3,7 +3,7 @@
 
 namespace System.Runtime.CompilerServices
 {
-    public partial class RuntimeOps
+    partial public class RuntimeOps
     {
         internal sealed class RuntimeVariables : IRuntimeVariables
         {

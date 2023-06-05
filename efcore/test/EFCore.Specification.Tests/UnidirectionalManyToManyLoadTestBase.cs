@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract partial class ManyToManyLoadTestBase<TFixture>
+partial public abstract class ManyToManyLoadTestBase<TFixture>
 {
     [ConditionalTheory]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]

@@ -9,10 +9,11 @@ using System.Security;
 
 namespace Microsoft.Win32.SafeHandles
 {
+    partial
     /// <summary>
     /// Wrap a string- or SecureString-based object. A null value indicates IntPtr.Zero should be used.
     /// </summary>
-    internal sealed partial class SafePasswordHandle : SafeHandleZeroOrMinusOneIsInvalid
+    internal sealed class SafePasswordHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         internal int Length { get; private set; }
 

@@ -27,12 +27,12 @@ namespace System.Data.EntityModel.SchemaObjectModel
         internal const string DateTimeFormat = @"yyyy-MM-dd HH\:mm\:ss.fffZ";
         internal const string TimeFormat = @"HH\:mm\:ss.fffffffZ";
         internal const string DateTimeOffsetFormat = @"yyyy-MM-dd HH\:mm\:ss.fffffffz";
-        private readonly static System.Text.RegularExpressions.Regex _BinaryValueValidator =
+        private static readonly System.Text.RegularExpressions.Regex _BinaryValueValidator =
             new System.Text.RegularExpressions.Regex(
                 "^0[xX][0-9a-fA-F]+$",
                 System.Text.RegularExpressions.RegexOptions.Compiled
             );
-        private readonly static System.Text.RegularExpressions.Regex _GuidValueValidator =
+        private static readonly System.Text.RegularExpressions.Regex _GuidValueValidator =
             new System.Text.RegularExpressions.Regex(
                 "[0-9a-fA-F]{8,8}(-[0-9a-fA-F]{4,4}){3,3}-[0-9a-fA-F]{12,12}",
                 System.Text.RegularExpressions.RegexOptions.Compiled

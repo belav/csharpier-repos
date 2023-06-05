@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
+    partial
     // this maps to src\mono\wasm\runtime\legacy\corebindings.ts
     // the public methods are protected from trimming by DynamicDependency on JSFunctionBinding.BindJSFunction
-    internal static unsafe partial class LegacyExports
+    internal static unsafe class LegacyExports
     {
         public static void GetCSOwnedObjectByJSHandleRef(
             nint jsHandle,

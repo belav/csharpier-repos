@@ -1,8 +1,8 @@
 using System;
 
-public partial struct S<T> { }
+partial public struct S<T> { }
 
-public partial struct S<T>
+partial public struct S<T>
 {
     public S(T t) { }
 }

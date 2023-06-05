@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.Simplification
 {
-    internal abstract partial class AbstractReducer
+    partial internal abstract class AbstractReducer
     {
         private readonly ObjectPool<IReductionRewriter> _pool;
 

@@ -73,7 +73,7 @@ namespace System.Activities
         // called on the Cancel and Abort paths to allow cleanup of outstanding async work
         protected virtual void Cancel(AsyncCodeActivityContext context) { }
 
-        sealed internal override void InternalExecute(
+        internal sealed override void InternalExecute(
             ActivityInstance instance,
             ActivityExecutor executor,
             BookmarkManager bookmarkManager
@@ -158,7 +158,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void InternalCancel(
+        internal sealed override void InternalCancel(
             ActivityInstance instance,
             ActivityExecutor executor,
             BookmarkManager bookmarkManager
@@ -184,7 +184,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void InternalAbort(
+        internal sealed override void InternalAbort(
             ActivityInstance instance,
             ActivityExecutor executor,
             Exception terminationReason
@@ -212,7 +212,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void OnInternalCacheMetadata(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadata(bool createEmptyBindings)
         {
             CodeActivityMetadata metadata = new CodeActivityMetadata(
                 this,
@@ -435,7 +435,7 @@ namespace System.Activities
         // called on the Cancel and Abort paths to allow cleanup of outstanding async work
         protected virtual void Cancel(AsyncCodeActivityContext context) { }
 
-        sealed internal override void InternalExecute(
+        internal sealed override void InternalExecute(
             ActivityInstance instance,
             ActivityExecutor executor,
             BookmarkManager bookmarkManager
@@ -501,7 +501,7 @@ namespace System.Activities
             this.Result.Set(context, executionResult);
         }
 
-        sealed internal override void InternalCancel(
+        internal sealed override void InternalCancel(
             ActivityInstance instance,
             ActivityExecutor executor,
             BookmarkManager bookmarkManager
@@ -527,7 +527,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void InternalAbort(
+        internal sealed override void InternalAbort(
             ActivityInstance instance,
             ActivityExecutor executor,
             Exception terminationReason
@@ -555,7 +555,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
         {
             CodeActivityMetadata metadata = new CodeActivityMetadata(
                 this,

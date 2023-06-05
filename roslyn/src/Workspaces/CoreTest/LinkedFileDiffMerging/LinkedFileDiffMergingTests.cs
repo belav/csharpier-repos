@@ -12,7 +12,7 @@ using Roslyn.Test.Utilities;
 namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
 {
     [UseExportProvider]
-    public partial class LinkedFileDiffMergingTests
+    partial public class LinkedFileDiffMergingTests
     {
         private static void TestLinkedFileSet(
             string startText,

@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal static partial class TypeSymbolExtensions
+    partial internal static class TypeSymbolExtensions
     {
         /// <summary>
         /// Count the custom modifiers within the specified TypeSymbol.

@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
     [ContentType(ContentTypeNames.RoslynContentType)]
     [ContentType(ContentTypeNames.XamlContentType)]
     [TagType(typeof(ClassificationTag))]
-    internal partial class DiagnosticsClassificationTaggerProvider
+    partial internal class DiagnosticsClassificationTaggerProvider
         : AbstractDiagnosticsTaggerProvider<ClassificationTag>
     {
         private static readonly IEnumerable<Option2<bool>> s_tagSourceOptions =

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class SyntaxGeneratorExtensions
+    partial internal static class SyntaxGeneratorExtensions
     {
         private const string EqualsName = "Equals";
         private const string DefaultName = "Default";

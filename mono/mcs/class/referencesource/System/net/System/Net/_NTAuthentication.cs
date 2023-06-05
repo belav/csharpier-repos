@@ -142,8 +142,8 @@ namespace System.Net
 
     internal class NTAuthentication
     {
-        static private int s_UniqueGroupId = 1;
-        static private ContextCallback s_InitializeCallback = new ContextCallback(
+        private static int s_UniqueGroupId = 1;
+        private static ContextCallback s_InitializeCallback = new ContextCallback(
             InitializeCallback
         );
 

@@ -51,10 +51,11 @@ namespace Newtonsoft.Json
         ReadAsBoolean
     }
 
+    partial
     /// <summary>
     /// Represents a reader that provides fast, non-cached, forward-only access to JSON text data.
     /// </summary>
-    public partial class JsonTextReader : JsonReader, IJsonLineInfo
+    public class JsonTextReader : JsonReader, IJsonLineInfo
     {
         private const char UnicodeReplacementChar = '\uFFFD';
 #if HAVE_BIG_INTEGER

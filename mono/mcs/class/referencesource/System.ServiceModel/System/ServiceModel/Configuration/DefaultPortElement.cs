@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Net;
 
-    public sealed partial class DefaultPortElement : ConfigurationElement
+    partial public sealed class DefaultPortElement : ConfigurationElement
     {
         public DefaultPortElement() { }
 

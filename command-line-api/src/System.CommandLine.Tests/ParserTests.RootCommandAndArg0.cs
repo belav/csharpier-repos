@@ -8,9 +8,9 @@ using Xunit;
 
 namespace System.CommandLine.Tests;
 
-public partial class ParserTests
+partial public class ParserTests
 {
-    public partial class RootCommandAndArg0
+    partial public class RootCommandAndArg0
     {
         [Fact]
         public void When_parsing_a_string_array_a_root_command_can_be_omitted_from_the_parsed_args()

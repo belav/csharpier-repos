@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System;
     using System.Configuration;
 
-    public sealed partial class EndToEndTracingElement : ConfigurationElement
+    partial public sealed class EndToEndTracingElement : ConfigurationElement
     {
         // These three constructors are used by the configuration system.
         public EndToEndTracingElement()

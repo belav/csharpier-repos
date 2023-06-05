@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial class XsdValidatingReader
+    partial internal class XsdValidatingReader
         : XmlReader,
             IXmlSchemaInfo,
             IXmlLineInfo,

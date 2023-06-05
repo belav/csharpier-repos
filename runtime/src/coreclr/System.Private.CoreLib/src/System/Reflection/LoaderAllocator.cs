@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
+    partial
     //
     // We can destroy the unmanaged part of collectible type only after the managed part is definitely gone and thus
     // nobody can call/allocate/reference anything related to the collectible assembly anymore. A call to finalizer
@@ -20,14 +21,14 @@ namespace System.Reflection
     // The finalization does not have to be done using CriticalFinalizerObject. We have to go over all LoaderAllocators
     // during AppDomain shutdown anyway to avoid leaks e.g. if somebody stores reference to LoaderAllocator in a static.
     //
-    internal sealed partial class LoaderAllocatorScout
+    internal sealed class LoaderAllocatorScout
     {
         // This field is set by the VM to atomically transfer the ownership to the managed loader allocator
         internal IntPtr m_nativeLoaderAllocator;
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "LoaderAllocator_Destroy")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool Destroy(IntPtr nativeLoaderAllocator);
+        partial private static bool Destroy(IntPtr nativeLoaderAllocator);
 
         ~LoaderAllocatorScout()
         {

@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(Libraries.Gdi32)]
-        public static partial IntPtr CreateFontIndirectW(ref User32.LOGFONT lplf);
+        partial public static IntPtr CreateFontIndirectW(ref User32.LOGFONT lplf);
     }
 }

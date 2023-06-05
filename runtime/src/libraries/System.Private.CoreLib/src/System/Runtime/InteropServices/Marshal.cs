@@ -11,11 +11,12 @@ using System.Text;
 
 namespace System.Runtime.InteropServices
 {
+    partial
     /// <summary>
     /// This class contains methods that are mainly used to marshal between unmanaged
     /// and managed types.
     /// </summary>
-    public static partial class Marshal
+    public static class Marshal
     {
         /// <summary>
         /// The default character size for the system. This is always 2 because

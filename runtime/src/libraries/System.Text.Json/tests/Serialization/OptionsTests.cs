@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class OptionsTests
+    partial public static class OptionsTests
     {
         private class TestConverter : JsonConverter<bool>
         {

@@ -11,6 +11,7 @@ namespace System.Resources
 .Extensions
 #endif
 {
+    partial
     // Generates a binary .resources file in the system default format
     // from name and value pairs.  Create one with a unique file name,
     // call AddResource() at least once, then call Generate() to write
@@ -22,7 +23,7 @@ namespace System.Resources
     // See the RuntimeResourceSet overview for details on the system
     // default file format.
     //
-    public sealed partial class
+    public sealed class
 #if RESOURCES_EXTENSIONS
     PreserializedResourceWriter
 #else

@@ -9,13 +9,13 @@ using System.Threading;
 
 namespace System.Diagnostics.Tracing
 {
-    internal static partial class EventPipeInternal
+    partial internal static class EventPipeInternal
     {
         //
         // These PInvokes are used by the configuration APIs to interact with EventPipe.
         //
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_Enable")]
-        private static unsafe partial ulong Enable(
+        partial private static unsafe ulong Enable(
             char* outputFile,
             EventPipeSerializationFormat format,
             uint circularBufferSizeInMB,
@@ -24,7 +24,7 @@ namespace System.Diagnostics.Tracing
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_Disable")]
-        internal static partial void Disable(ulong sessionID);
+        partial internal static void Disable(ulong sessionID);
 
         //
         // These PInvokes are used by EventSource to interact with the EventPipe.
@@ -34,13 +34,13 @@ namespace System.Diagnostics.Tracing
             EntryPoint = "EventPipeInternal_CreateProvider",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial IntPtr CreateProvider(
+        partial internal static IntPtr CreateProvider(
             string providerName,
             Interop.Advapi32.EtwEnableCallback callbackFunc
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_DefineEvent")]
-        internal static unsafe partial IntPtr DefineEvent(
+        partial internal static unsafe IntPtr DefineEvent(
             IntPtr provHandle,
             uint eventID,
             long keywords,
@@ -55,19 +55,19 @@ namespace System.Diagnostics.Tracing
             EntryPoint = "EventPipeInternal_GetProvider",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial IntPtr GetProvider(string providerName);
+        partial internal static IntPtr GetProvider(string providerName);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_DeleteProvider")]
-        internal static partial void DeleteProvider(IntPtr provHandle);
+        partial internal static void DeleteProvider(IntPtr provHandle);
 
         [LibraryImport(
             RuntimeHelpers.QCall,
             EntryPoint = "EventPipeInternal_EventActivityIdControl"
         )]
-        internal static partial int EventActivityIdControl(uint controlCode, ref Guid activityId);
+        partial internal static int EventActivityIdControl(uint controlCode, ref Guid activityId);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_WriteEventData")]
-        internal static unsafe partial void WriteEventData(
+        partial internal static unsafe void WriteEventData(
             IntPtr eventHandle,
             EventProvider.EventData* pEventData,
             uint dataCount,
@@ -80,25 +80,25 @@ namespace System.Diagnostics.Tracing
         //
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_GetSessionInfo")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool GetSessionInfo(
+        partial internal static unsafe bool GetSessionInfo(
             ulong sessionID,
             EventPipeSessionInfo* pSessionInfo
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_GetNextEvent")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool GetNextEvent(
+        partial internal static unsafe bool GetNextEvent(
             ulong sessionID,
             EventPipeEventInstanceData* pInstance
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_SignalSession")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool SignalSession(ulong sessionID);
+        partial internal static unsafe bool SignalSession(ulong sessionID);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_WaitForSessionSignal")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool WaitForSessionSignal(ulong sessionID, int timeoutMs);
+        partial internal static unsafe bool WaitForSessionSignal(ulong sessionID, int timeoutMs);
     }
 }
 

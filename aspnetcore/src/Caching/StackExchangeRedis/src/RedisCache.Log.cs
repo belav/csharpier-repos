@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
-public partial class RedisCache
+partial public class RedisCache
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -16,7 +16,7 @@ public partial class RedisCache
             "Could not determine the Redis server version. Falling back to use HMSET command instead of HSET.",
             EventName = "CouldNotDetermineServerVersion"
         )]
-        public static partial void CouldNotDetermineServerVersion(
+        partial public static void CouldNotDetermineServerVersion(
             ILogger logger,
             Exception exception
         );

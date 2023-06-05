@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
     >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseNotPattern)]
-    public partial class CSharpUseNotPatternTests
+    partial public class CSharpUseNotPatternTests
     {
         [Fact, WorkItem(50690, "https://github.com/dotnet/roslyn/issues/50690")]
         public async Task BinaryIsExpression()

@@ -12,7 +12,7 @@ namespace System.Threading
     /// Used by the other threading subsystems, so this type cannot have any dependencies on them.
     /// </summary>
     [StructLayout(LayoutKind.Auto)]
-    internal partial struct LowLevelMonitor
+    partial internal struct LowLevelMonitor
     {
 #if DEBUG
         private Thread? _ownerThread;

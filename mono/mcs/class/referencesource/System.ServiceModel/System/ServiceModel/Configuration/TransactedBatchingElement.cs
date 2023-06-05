@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.ServiceModel.Description;
 
-    public sealed partial class TransactedBatchingElement : BehaviorExtensionElement
+    partial public sealed class TransactedBatchingElement : BehaviorExtensionElement
     {
         [ConfigurationProperty(ConfigurationStrings.MaxBatchSize, DefaultValue = 0)]
         [IntegerValidator(MinValue = 0)]

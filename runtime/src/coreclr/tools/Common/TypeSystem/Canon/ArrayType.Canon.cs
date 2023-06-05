@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Implements canonicalization for arrays
-    public partial class ArrayType
+    public class ArrayType
     {
         protected override TypeDesc ConvertToCanonFormImpl(CanonicalFormKind kind)
         {
@@ -20,8 +21,9 @@ namespace Internal.TypeSystem
         }
     }
 
+    partial
     // Implements canonicalization for array methods
-    public partial class ArrayMethod
+    public class ArrayMethod
     {
         public override bool IsCanonicalMethod(CanonicalFormKind policy)
         {

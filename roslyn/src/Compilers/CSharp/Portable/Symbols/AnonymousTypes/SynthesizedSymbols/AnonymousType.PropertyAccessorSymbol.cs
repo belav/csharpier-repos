@@ -10,12 +10,13 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class AnonymousTypeManager
+    partial internal sealed class AnonymousTypeManager
     {
+        partial
         /// <summary>
         /// Represents a getter for anonymous type property.
         /// </summary>
-        private sealed partial class AnonymousTypePropertyGetAccessorSymbol : SynthesizedMethodBase
+        private sealed class AnonymousTypePropertyGetAccessorSymbol : SynthesizedMethodBase
         {
             private readonly AnonymousTypePropertySymbol _property;
 

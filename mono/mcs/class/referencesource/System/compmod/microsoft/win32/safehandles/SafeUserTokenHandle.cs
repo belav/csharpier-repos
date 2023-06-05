@@ -50,7 +50,7 @@ namespace Microsoft.Win32.SafeHandles
             BestFitMapping = false
         )]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool DuplicateTokenEx(
+        internal static extern bool DuplicateTokenEx(
             SafeHandle hToken,
             int access,
             NativeMethods.SECURITY_ATTRIBUTES tokenAttributes,
@@ -65,7 +65,7 @@ namespace Microsoft.Win32.SafeHandles
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         private static extern bool CloseHandle(IntPtr handle);
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return CloseHandle(handle);
         }

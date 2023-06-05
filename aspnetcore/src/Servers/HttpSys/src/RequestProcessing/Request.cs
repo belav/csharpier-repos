@@ -16,7 +16,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal sealed partial class Request
+partial internal sealed class Request
 {
     private X509Certificate2? _clientCert;
 
@@ -584,7 +584,7 @@ internal sealed partial class Request
         _nativeStream.SwitchToOpaqueMode();
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.ErrorInReadingCertificate,
@@ -592,7 +592,7 @@ internal sealed partial class Request
             "An error occurred reading the client certificate.",
             EventName = "ErrorInReadingCertificate"
         )]
-        public static partial void ErrorInReadingCertificate(ILogger logger, Exception exception);
+        partial public static void ErrorInReadingCertificate(ILogger logger, Exception exception);
     }
 
     private void RemoveContentLengthIfTransferEncodingContainsChunked()

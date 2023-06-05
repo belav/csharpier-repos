@@ -22,10 +22,11 @@ using WellKnownType = Internal.TypeSystem.WellKnownType;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// Caches dataflow annotations for type members.
     /// </summary>
-    public sealed partial class FlowAnnotations
+    public sealed class FlowAnnotations
     {
         private readonly TypeAnnotationsHashtable _hashtable;
         private readonly Logger _logger;
@@ -1313,21 +1314,23 @@ namespace ILLink.Shared.TrimAnalysis
                 (Field, Annotation) = (field, annotation);
         }
 
-        internal partial bool MethodRequiresDataFlowAnalysis(MethodProxy method) =>
+        partial internal bool MethodRequiresDataFlowAnalysis(MethodProxy method) =>
             RequiresDataflowAnalysis(method.Method);
 
 #pragma warning disable CA1822 // Other partial implementations are not in the ilc project
-        internal partial MethodReturnValue GetMethodReturnValue(
+        partial
+#pragma warning disable CA1822 // Other partial implementations are not in the ilc project
+        internal MethodReturnValue GetMethodReturnValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         )
 #pragma warning restore CA1822 // Mark members as static
             => new MethodReturnValue(method.Method, dynamicallyAccessedMemberTypes);
 
-        internal partial MethodReturnValue GetMethodReturnValue(MethodProxy method) =>
+        partial internal MethodReturnValue GetMethodReturnValue(MethodProxy method) =>
             GetMethodReturnValue(method, GetReturnParameterAnnotation(method.Method));
 
-        internal partial GenericParameterValue GetGenericParameterValue(
+        partial internal GenericParameterValue GetGenericParameterValue(
             GenericParameterProxy genericParameter
         ) =>
             new GenericParameterValue(
@@ -1336,13 +1339,18 @@ namespace ILLink.Shared.TrimAnalysis
             );
 
 #pragma warning disable CA1822 // Mark members as static - Should be an instance method for consistency
-        internal partial MethodParameterValue GetMethodParameterValue(
+        partial
+#pragma warning disable CA1822 // Mark members as static - Should be an instance method for consistency
+        internal MethodParameterValue GetMethodParameterValue(
             ParameterProxy param,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         ) => new(param, dynamicallyAccessedMemberTypes);
 #pragma warning restore CA1822 // Mark members as static
 
-        internal partial MethodParameterValue GetMethodParameterValue(ParameterProxy param) =>
+        partial
+#pragma warning restore CA1822 // Mark members as static
+
+        internal MethodParameterValue GetMethodParameterValue(ParameterProxy param) =>
             GetMethodParameterValue(param, GetParameterAnnotation(param));
 
 #pragma warning disable CA1822 // Mark members as static - Should be an instance method for consistency
@@ -1365,12 +1373,15 @@ namespace ILLink.Shared.TrimAnalysis
         }
 #pragma warning restore CA1822 // Mark members as static
 
-        internal partial MethodParameterValue GetMethodThisParameterValue(
+        partial
+#pragma warning restore CA1822 // Mark members as static
+
+        internal MethodParameterValue GetMethodThisParameterValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         ) => GetMethodThisParameterValue(method, dynamicallyAccessedMemberTypes, false);
 
-        internal partial MethodParameterValue GetMethodThisParameterValue(MethodProxy method)
+        partial internal MethodParameterValue GetMethodThisParameterValue(MethodProxy method)
         {
             if (!method.HasImplicitThis())
                 throw new InvalidOperationException(

@@ -17,10 +17,11 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Roslyn.VisualStudio.DiagnosticsWindow
 {
+    partial
     /// <summary>
     /// Interaction logic for TelemetryPanel.xaml
     /// </summary>
-    public sealed partial class WorkspacePanel : UserControl
+    public sealed class WorkspacePanel : UserControl
     {
         private readonly DiagnosticsWindow _window;
 

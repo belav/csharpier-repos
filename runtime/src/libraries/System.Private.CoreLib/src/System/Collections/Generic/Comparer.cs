@@ -11,7 +11,7 @@ namespace System.Collections.Generic
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public abstract partial class Comparer<T> : IComparer, IComparer<T>
+    partial public abstract class Comparer<T> : IComparer, IComparer<T>
     {
         // public static Comparer<T> Default is runtime-specific
 
@@ -60,8 +60,9 @@ namespace System.Collections.Generic
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
+    partial
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class GenericComparer<T> : Comparer<T>
+    public sealed class GenericComparer<T> : Comparer<T>
         where T : IComparable<T>?
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -130,8 +131,9 @@ namespace System.Collections.Generic
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
+    partial
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class ObjectComparer<T> : Comparer<T>
+    public sealed class ObjectComparer<T> : Comparer<T>
     {
         public override int Compare(T? x, T? y)
         {
@@ -146,7 +148,7 @@ namespace System.Collections.Generic
     }
 
     [Serializable]
-    internal sealed partial class EnumComparer<T> : Comparer<T>, ISerializable
+    partial internal sealed class EnumComparer<T> : Comparer<T>, ISerializable
         where T : struct, Enum
     {
         public EnumComparer() { }

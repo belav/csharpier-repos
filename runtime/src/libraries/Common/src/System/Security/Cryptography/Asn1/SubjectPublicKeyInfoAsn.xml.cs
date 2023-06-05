@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct SubjectPublicKeyInfoAsn
+    partial internal struct SubjectPublicKeyInfoAsn
     {
         internal System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn Algorithm;
         internal ReadOnlyMemory<byte> SubjectPublicKey;

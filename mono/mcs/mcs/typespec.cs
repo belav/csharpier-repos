@@ -2267,7 +2267,7 @@ namespace Mono.CSharp
             return "ref readonly " + GetSignatureForError();
         }
 
-        public new static ReferenceContainer MakeType(ModuleContainer module, TypeSpec element)
+        public static new ReferenceContainer MakeType(ModuleContainer module, TypeSpec element)
         {
             if (element.Kind == MemberKind.ByRef)
                 throw new ArgumentException();

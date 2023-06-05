@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
 
     [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
-    public partial class PeerTransportElement : BindingElementExtensionElement
+    partial public class PeerTransportElement : BindingElementExtensionElement
     {
         public PeerTransportElement() { }
 

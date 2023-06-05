@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Microsoft.TestCommon
 {
-    public partial class Assert
+    partial public class Assert
     {
         // Method has been removed in xUnit.net v2.0.0+.
         public static void DoesNotThrow(Action testCode)

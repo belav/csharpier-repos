@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
     using RegexTrivia = EmbeddedSyntaxTrivia<RegexKind>;
 
+    partial
     /// <summary>
     /// Produces a <see cref="RegexTree"/> from a sequence of <see cref="VirtualChar"/> characters.
     ///
@@ -82,7 +83,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     /// during design time that they would not get at runtime.  It's far worse to have that than to
     /// not report an error, even though one might happen later.
     /// </remarks>
-    internal partial struct RegexParser
+    internal struct RegexParser
     {
         private readonly ImmutableDictionary<string, TextSpan> _captureNamesToSpan;
         private readonly ImmutableDictionary<int, TextSpan> _captureNumbersToSpan;

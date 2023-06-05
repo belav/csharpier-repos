@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Internal.NativeFormat
 {
-    internal partial struct NativeParser
+    partial internal struct NativeParser
     {
         public string GetString()
         {
@@ -26,7 +26,7 @@ namespace Internal.NativeFormat
         }
     }
 
-    internal partial class NativeReader
+    partial internal class NativeReader
     {
         public string ReadString(uint offset)
         {

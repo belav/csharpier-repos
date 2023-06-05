@@ -9,6 +9,7 @@ using System.Threading;
 
 namespace System.Drawing
 {
+    partial
     /// <summary>
     ///     Animates one or more images that have time-based frames.
     ///     See the ImageInfo.cs file for the helper nested ImageInfo class.
@@ -32,7 +33,7 @@ namespace System.Drawing
     ///     code.  If the user code locks on the image ref forever a deadlock will happen preventing the animation
     ///     from occurring.
     /// </summary>
-    public sealed partial class ImageAnimator
+    public sealed class ImageAnimator
     {
         // We use a timer to apply an animation tick speeds of something a bit shorter than 50ms
         // such that if the requested frame rate is about 20 frames per second, we will rarely skip

@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 {
-    internal partial class PreviewUpdater : ForegroundThreadAffinitizedObject
+    partial internal class PreviewUpdater : ForegroundThreadAffinitizedObject
     {
         private PreviewDialogWorkspace? _previewWorkspace;
         private readonly ITextView _textView;

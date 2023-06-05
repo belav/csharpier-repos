@@ -29,11 +29,11 @@ namespace System.Configuration
         int _current;
         bool _enabled;
 
-        static internal ClientConfigPerf ConfigSystem = new ClientConfigPerf(false);
-        static internal ClientConfigPerf ScanSections = new ClientConfigPerf(false);
-        static internal ClientConfigPerf CopySection = new ClientConfigPerf(false);
-        static internal ClientConfigPerf CopyXmlNode = new ClientConfigPerf(false);
-        static internal ClientConfigPerf GetConfig = new ClientConfigPerf(true);
+        internal static ClientConfigPerf ConfigSystem = new ClientConfigPerf(false);
+        internal static ClientConfigPerf ScanSections = new ClientConfigPerf(false);
+        internal static ClientConfigPerf CopySection = new ClientConfigPerf(false);
+        internal static ClientConfigPerf CopyXmlNode = new ClientConfigPerf(false);
+        internal static ClientConfigPerf GetConfig = new ClientConfigPerf(true);
 
         ClientConfigPerf(bool enabled)
         {

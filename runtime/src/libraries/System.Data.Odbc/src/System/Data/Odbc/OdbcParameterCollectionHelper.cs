@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace System.Data.Odbc
 {
-    public sealed partial class OdbcParameterCollection : DbParameterCollection
+    partial public sealed class OdbcParameterCollection : DbParameterCollection
     {
         private List<OdbcParameter>? _items;
 

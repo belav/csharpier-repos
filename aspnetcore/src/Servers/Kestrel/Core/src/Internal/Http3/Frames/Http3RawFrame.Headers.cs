@@ -3,7 +3,7 @@
 
 namespace System.Net.Http;
 
-internal partial class Http3RawFrame
+partial internal class Http3RawFrame
 {
     public void PrepareHeaders()
     {

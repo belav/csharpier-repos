@@ -5,60 +5,60 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
     using NamespaceForABC;
 
-    internal static partial class NestedClassTestsExtensions<T>
+    partial internal static class NestedClassTestsExtensions<T>
         where T : ABC
     {
-        internal static partial class NestedMiddleParentClass
+        partial internal static class NestedMiddleParentClass
         {
-            internal static partial class NestedClass
+            partial internal static class NestedClass
             {
                 [LoggerMessage(EventId = 8, Level = LogLevel.Debug, Message = "M8")]
-                public static partial void M8(ILogger logger);
+                partial public static void M8(ILogger logger);
             }
         }
     }
 
-    internal partial class NonStaticNestedClassTestsExtensions<T>
+    partial internal class NonStaticNestedClassTestsExtensions<T>
         where T : ABC
     {
-        internal partial class NonStaticNestedMiddleParentClass
+        partial internal class NonStaticNestedMiddleParentClass
         {
-            internal static partial class NestedClass
+            partial internal static class NestedClass
             {
                 [LoggerMessage(EventId = 9, Level = LogLevel.Debug, Message = "M9")]
-                public static partial void M9(ILogger logger);
+                partial public static void M9(ILogger logger);
             }
         }
     }
 
-    public partial struct NestedStruct
+    partial public struct NestedStruct
     {
-        internal static partial class Logger
+        partial internal static class Logger
         {
             [LoggerMessage(EventId = 10, Level = LogLevel.Debug, Message = "M10")]
-            public static partial void M10(ILogger logger);
+            partial public static void M10(ILogger logger);
         }
     }
 
-    public partial record NestedRecord(string Name, string Address)
+    partial public record NestedRecord(string Name, string Address)
     {
-        internal static partial class Logger
+        partial internal static class Logger
         {
             [LoggerMessage(EventId = 11, Level = LogLevel.Debug, Message = "M11")]
-            public static partial void M11(ILogger logger);
+            partial public static void M11(ILogger logger);
         }
     }
 
-    public static partial class MultiLevelNestedClass
+    partial public static class MultiLevelNestedClass
     {
-        public partial struct NestedStruct
+        partial public struct NestedStruct
         {
-            internal partial record NestedRecord(string Name, string Address)
+            partial internal record NestedRecord(string Name, string Address)
             {
-                internal static partial class Logger
+                partial internal static class Logger
                 {
                     [LoggerMessage(EventId = 12, Level = LogLevel.Debug, Message = "M12")]
-                    public static partial void M12(ILogger logger);
+                    partial public static void M12(ILogger logger);
                 }
             }
         }

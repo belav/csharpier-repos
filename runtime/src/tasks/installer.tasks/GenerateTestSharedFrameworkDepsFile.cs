@@ -13,7 +13,7 @@ using NuGet.RuntimeModel;
 
 namespace Microsoft.DotNet.Build.Tasks
 {
-    public partial class GenerateTestSharedFrameworkDepsFile : BuildTask
+    partial public class GenerateTestSharedFrameworkDepsFile : BuildTask
     {
         // we don't care about these values in the deps file
         const string rid = "rid";

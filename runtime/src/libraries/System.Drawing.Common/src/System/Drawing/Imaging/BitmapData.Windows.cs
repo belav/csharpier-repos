@@ -9,7 +9,7 @@ namespace System.Drawing.Imaging
     /// Specifies the attributes of a bitmap image.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class BitmapData
+    partial public sealed class BitmapData
     {
         private int _width;
         private int _height;

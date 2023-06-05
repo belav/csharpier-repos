@@ -94,7 +94,7 @@ namespace System.IO.Ports
         private byte[] tempBuf; // used to avoid multiple array allocations in ReadByte()
 
         // called whenever any async i/o operation completes.
-        private unsafe static readonly IOCompletionCallback IOCallback = new IOCompletionCallback(
+        private static readonly unsafe IOCompletionCallback IOCallback = new IOCompletionCallback(
             SerialStream.AsyncFSCallback
         );
 
@@ -1135,7 +1135,7 @@ namespace System.IO.Ports
         // Async companion to BeginRead.
         // Note, assumed IAsyncResult argument is of derived type SerialStreamAsyncResult,
         // and throws an exception if untrue.
-        public unsafe override int EndRead(IAsyncResult asyncResult)
+        public override unsafe int EndRead(IAsyncResult asyncResult)
         {
             if (!isAsync)
                 return base.EndRead(asyncResult);
@@ -1212,7 +1212,7 @@ namespace System.IO.Ports
         // Note, assumed IAsyncResult argument is of derived type SerialStreamAsyncResult,
         // and throws an exception if untrue.
         // Also fails if called in port's break state.
-        public unsafe override void EndWrite(IAsyncResult asyncResult)
+        public override unsafe void EndWrite(IAsyncResult asyncResult)
         {
             if (!isAsync)
             {
@@ -1698,7 +1698,7 @@ namespace System.IO.Ports
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        unsafe private SerialStreamAsyncResult BeginReadCore(
+        private unsafe SerialStreamAsyncResult BeginReadCore(
             byte[] array,
             int offset,
             int numBytes,
@@ -1758,7 +1758,7 @@ namespace System.IO.Ports
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        unsafe private SerialStreamAsyncResult BeginWriteCore(
+        private unsafe SerialStreamAsyncResult BeginWriteCore(
             byte[] array,
             int offset,
             int numBytes,
@@ -1953,11 +1953,11 @@ namespace System.IO.Ports
         // ----SUBSECTION: internal methods supporting events/async operation------*
 
         // This is a the callback prompted when a thread completes any async I/O operation.
-        unsafe private static void AsyncFSCallback(
-            uint errorCode,
-            uint numBytes,
-            NativeOverlapped* pOverlapped
-        )
+        private static
+        // ----SUBSECTION: internal methods supporting events/async operation------*
+
+        // This is a the callback prompted when a thread completes any async I/O operation.
+        unsafe void AsyncFSCallback(uint errorCode, uint numBytes, NativeOverlapped* pOverlapped)
         {
             // Unpack overlapped
             Overlapped overlapped = Overlapped.Unpack(pOverlapped);
@@ -2359,10 +2359,11 @@ namespace System.IO.Ports
             }
         }
 
+        internal sealed
         // This is an internal object implementing IAsyncResult with fields
         // for all of the relevant data necessary to complete the IO operation.
         // This is used by AsyncFSCallback and all async methods.
-        unsafe internal sealed class SerialStreamAsyncResult : IAsyncResult
+        unsafe class SerialStreamAsyncResult : IAsyncResult
         {
             // User code callback
             internal AsyncCallback _userCallback;

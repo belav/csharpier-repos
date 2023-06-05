@@ -10,7 +10,7 @@ using System.DirectoryServices;
 namespace System.Workflow.Activities
 {
     [Serializable]
-    sealed internal class DirectoryRedirect : IDirectoryOperation
+    internal sealed class DirectoryRedirect : IDirectoryOperation
     {
         private String m_getPropertyName;
         private String m_searchPropertyName;

@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Emit
         Embedded = 3,
     }
 
-    internal static partial class DebugInformationFormatExtensions
+    partial internal static class DebugInformationFormatExtensions
     {
         internal static bool IsValid(this DebugInformationFormat value)
         {

@@ -8,7 +8,7 @@ namespace System.Reflection.Tests
 {
     using Console = global::System.Reflection.Tests.FakeConsole; // Must be inside namespace for redirect to work properly.
 
-    public static partial class MetadataLoadContextTests
+    partial public static class MetadataLoadContextTests
     {
         [Fact]
         public static void Scenario_GetAssemblyName()

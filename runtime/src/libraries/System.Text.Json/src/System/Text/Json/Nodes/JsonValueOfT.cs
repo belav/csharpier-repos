@@ -8,7 +8,7 @@ namespace System.Text.Json.Nodes
 {
     [DebuggerDisplay("{ToJsonString(),nq}")]
     [DebuggerTypeProxy(typeof(JsonValue<>.DebugView))]
-    internal abstract partial class JsonValue<TValue> : JsonValue
+    partial internal abstract class JsonValue<TValue> : JsonValue
     {
         public readonly TValue _value; // keep as a field for direct access to avoid copies
 

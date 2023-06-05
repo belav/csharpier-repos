@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.NamingStyles
 {
-    internal partial record struct NamingStyle
+    partial internal record struct NamingStyle
     {
         private readonly struct WordSpanEnumerable
         {

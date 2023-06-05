@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class ParameterizedType : TypeDesc
+    partial public abstract class ParameterizedType : TypeDesc
     {
         private TypeDesc _parameterType;
 

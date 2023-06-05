@@ -19,7 +19,7 @@ using System.Xml.Linq;
 using Xunit;
 using System.Runtime.Serialization.Tests;
 
-public static partial class DataContractJsonSerializerTests
+partial public static class DataContractJsonSerializerTests
 {
 #if ReflectionOnly
     private static readonly string SerializationOptionSetterName = "set_Option";

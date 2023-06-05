@@ -30,7 +30,7 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     [ExportWorkspaceService(typeof(ISymbolNavigationService), ServiceLayer.Host), Shared]
-    internal partial class VisualStudioSymbolNavigationService
+    partial internal class VisualStudioSymbolNavigationService
         : ForegroundThreadAffinitizedObject,
             ISymbolNavigationService
     {

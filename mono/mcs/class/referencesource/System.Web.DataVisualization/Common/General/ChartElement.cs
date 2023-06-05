@@ -1574,7 +1574,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="series">Data series to test.</param>
         /// <returns>True if series is indexed.</returns>
-        static internal bool IndexedSeries(Series series)
+        internal
+        /// <summary>
+        /// Check if series is indexed. IsXValueIndexed flag is set or all X values are zeros.
+        /// </summary>
+        /// <param name="series">Data series to test.</param>
+        /// <returns>True if series is indexed.</returns>
+        static bool IndexedSeries(Series series)
         {
             // X value indexed flag set
             if (series.IsXValueIndexed)
@@ -1603,7 +1609,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Check if all data points in the series have X value set to 0.
         /// </summary>
         /// <param name="series">Data series to check.</param>
-        static private bool SeriesXValuesZeros(Series series)
+        private
+        /// <summary>
+        /// Check if all data points in the series have X value set to 0.
+        /// </summary>
+        /// <param name="series">Data series to check.</param>
+        static bool SeriesXValuesZeros(Series series)
         {
             // Check if X value zeros check was already done
             if (series.xValuesZerosChecked)
@@ -1632,7 +1643,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="common">Reference to common chart classes.</param>
         /// <param name="series">Data series names.</param>
         /// <returns>True if any series is indexed.</returns>
-        static internal bool IndexedSeries(CommonElements common, params string[] series)
+        internal
+        /// <summary>
+        /// Check if any series is indexed. IsXValueIndexed flag is set or all X values are zeros.
+        /// </summary>
+        /// <param name="common">Reference to common chart classes.</param>
+        /// <param name="series">Data series names.</param>
+        /// <returns>True if any series is indexed.</returns>
+        static bool IndexedSeries(CommonElements common, params string[] series)
         {
             // Data series loop
             bool zeroXValues = true;
@@ -1663,7 +1681,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="common">Reference to common chart classes.</param>
         /// <param name="series">Data series.</param>
         /// <returns>True if all data points have value 0.</returns>
-        static internal bool SeriesXValuesZeros(CommonElements common, params string[] series)
+        internal
+        /// <summary>
+        /// Check if all data points in many series have X value set to 0.
+        /// </summary>
+        /// <param name="common">Reference to common chart classes.</param>
+        /// <param name="series">Data series.</param>
+        /// <returns>True if all data points have value 0.</returns>
+        static bool SeriesXValuesZeros(CommonElements common, params string[] series)
         {
             // Data series loop
             foreach (string ser in series)

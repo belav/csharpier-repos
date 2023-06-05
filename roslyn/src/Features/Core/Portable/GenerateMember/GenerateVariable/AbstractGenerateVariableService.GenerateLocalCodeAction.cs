@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 {
-    internal partial class AbstractGenerateVariableService<
+    partial internal class AbstractGenerateVariableService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax

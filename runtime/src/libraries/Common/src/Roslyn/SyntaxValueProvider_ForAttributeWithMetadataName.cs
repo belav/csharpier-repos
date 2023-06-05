@@ -57,7 +57,7 @@ internal readonly struct GeneratorAttributeSyntaxContext
     }
 }
 
-internal static partial class SyntaxValueProviderExtensions
+partial internal static class SyntaxValueProviderExtensions
 {
 #if false
 

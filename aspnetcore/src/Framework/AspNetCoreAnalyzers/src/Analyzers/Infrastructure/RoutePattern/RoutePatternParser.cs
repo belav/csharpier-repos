@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 using static RoutePatternHelpers;
 using RoutePatternToken = EmbeddedSyntaxToken<RoutePatternKind>;
 
-internal partial struct RoutePatternParser
+partial internal struct RoutePatternParser
 {
     private RoutePatternLexer _lexer;
     private RoutePatternToken _currentToken;

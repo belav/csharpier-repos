@@ -8,7 +8,7 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.Logging
 {
-    public sealed partial class DocumentationSignatureGenerator
+    partial public sealed class DocumentationSignatureGenerator
     {
         /// <summary>
         ///  A visitor that generates the part of the documentation comment after the initial type

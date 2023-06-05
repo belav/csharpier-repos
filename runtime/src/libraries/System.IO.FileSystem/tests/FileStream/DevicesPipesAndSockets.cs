@@ -302,6 +302,6 @@ namespace System.IO.Tests
         }
 
         [DllImport("libc")]
-        private static unsafe extern int socketpair(int domain, int type, int protocol, int* ptr);
+        private static extern unsafe int socketpair(int domain, int type, int protocol, int* ptr);
     }
 }

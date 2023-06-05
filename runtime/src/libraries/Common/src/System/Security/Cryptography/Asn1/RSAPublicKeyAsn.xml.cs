@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct RSAPublicKeyAsn
+    partial internal struct RSAPublicKeyAsn
     {
         internal System.Numerics.BigInteger Modulus;
         internal System.Numerics.BigInteger PublicExponent;

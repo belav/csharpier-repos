@@ -39,7 +39,7 @@ using System.Threading;
 
 namespace System.ServiceModel
 {
-    public abstract partial class ServiceHostBase
+    partial public abstract class ServiceHostBase
         : CommunicationObject,
             IExtensibleObject<ServiceHostBase>,
             IDisposable
@@ -616,7 +616,7 @@ namespace System.ServiceModel
             ApplyServiceElement(serviceSection);
         }
 
-        protected override sealed void OnAbort()
+        protected sealed override void OnAbort()
         {
             OnCloseOrAbort(TimeSpan.Zero);
         }
@@ -624,7 +624,7 @@ namespace System.ServiceModel
         Action<TimeSpan> close_delegate;
         Action<TimeSpan> open_delegate;
 
-        protected override sealed IAsyncResult OnBeginClose(
+        protected sealed override IAsyncResult OnBeginClose(
             TimeSpan timeout,
             AsyncCallback callback,
             object state
@@ -635,7 +635,7 @@ namespace System.ServiceModel
             return close_delegate.BeginInvoke(timeout, callback, state);
         }
 
-        protected override sealed IAsyncResult OnBeginOpen(
+        protected sealed override IAsyncResult OnBeginOpen(
             TimeSpan timeout,
             AsyncCallback callback,
             object state
@@ -674,7 +674,7 @@ namespace System.ServiceModel
             }
         }
 
-        protected override sealed void OnOpen(TimeSpan timeout)
+        protected sealed override void OnOpen(TimeSpan timeout)
         {
             DateTime start = DateTime.UtcNow;
             InitializeRuntime();
@@ -721,7 +721,7 @@ namespace System.ServiceModel
             close_delegate.EndInvoke(result);
         }
 
-        protected override sealed void OnEndOpen(IAsyncResult result)
+        protected sealed override void OnEndOpen(IAsyncResult result)
         {
             if (open_delegate == null)
                 throw new InvalidOperationException("Aync open operation has not started");

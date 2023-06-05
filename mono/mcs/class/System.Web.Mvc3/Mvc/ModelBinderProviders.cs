@@ -2,7 +2,7 @@
 {
     public static class ModelBinderProviders
     {
-        private readonly static ModelBinderProviderCollection _binderProviders =
+        private static readonly ModelBinderProviderCollection _binderProviders =
             new ModelBinderProviderCollection { };
 
         public static ModelBinderProviderCollection BinderProviders

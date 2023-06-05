@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal partial class AggregateJsonConverter : JsonConverter
+    partial internal class AggregateJsonConverter : JsonConverter
     {
         public static readonly AggregateJsonConverter Instance = new AggregateJsonConverter();
 

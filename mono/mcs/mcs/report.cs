@@ -515,13 +515,13 @@ namespace Mono.CSharp
         }
 
         [Conditional("MCS_DEBUG")]
-        static public void Debug(string message, params object[] args)
+        public static void Debug(string message, params object[] args)
         {
             Debug(4, message, args);
         }
 
         [Conditional("MCS_DEBUG")]
-        static public void Debug(int category, string message, params object[] args)
+        public static void Debug(int category, string message, params object[] args)
         {
             //			if ((category & DebugFlags) == 0)
             //				return;

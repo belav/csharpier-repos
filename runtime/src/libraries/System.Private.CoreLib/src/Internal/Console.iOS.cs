@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Internal
 {
-    public static partial class Console
+    partial public static class Console
     {
         public static unsafe void Write(string s)
         {
@@ -16,7 +16,7 @@ namespace Internal
             }
         }
 
-        public static partial class Error
+        partial public static class Error
         {
             public static unsafe void Write(string s)
             {

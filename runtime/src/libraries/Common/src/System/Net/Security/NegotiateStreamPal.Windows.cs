@@ -12,13 +12,14 @@ using System.Security.Authentication.ExtendedProtection;
 
 namespace System.Net.Security
 {
+    partial
     //
     // The class does the real work in authentication and
     // user data encryption with NEGO SSPI package.
     //
     // This is part of the NegotiateStream PAL.
     //
-    internal static partial class NegotiateStreamPal
+    internal static class NegotiateStreamPal
     {
         internal static int QueryMaxTokenSize(string package)
         {

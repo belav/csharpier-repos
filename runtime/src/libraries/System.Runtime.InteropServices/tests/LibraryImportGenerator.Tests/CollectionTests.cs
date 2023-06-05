@@ -15,24 +15,24 @@ namespace LibraryImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        public partial class Collections
+        partial public class Collections
         {
-            public partial class Stateless
+            partial public class Stateless
             {
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-                public static partial int Sum(
+                partial public static int Sum(
                     [MarshalUsing(typeof(ListMarshaller<,>))] List<int> values,
                     int numValues
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-                public static partial int SumWithBuffer(
+                partial public static int SumWithBuffer(
                     [MarshalUsing(typeof(ListMarshallerWithBuffer<,>))] List<int> values,
                     int numValues
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_ptr_array")]
-                public static unsafe partial int SumWithFreeTracking(
+                partial public static unsafe int SumWithFreeTracking(
                     [
                         MarshalUsing(typeof(ListMarshaller<,>)),
                         MarshalUsing(
@@ -45,20 +45,20 @@ namespace LibraryImportGenerator.IntegrationTests
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_values")]
-                public static partial int DoubleValues(
+                partial public static int DoubleValues(
                     [MarshalUsing(typeof(ListMarshallerWithPinning<,>))]
                         List<BlittableIntWrapper> values,
                     int length
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array_ref")]
-                public static partial int SumInArray(
+                partial public static int SumInArray(
                     [MarshalUsing(typeof(ListMarshaller<,>))] in List<int> values,
                     int numValues
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-                public static partial void Duplicate(
+                partial public static void Duplicate(
                     [MarshalUsing(typeof(ListMarshaller<,>), CountElementName = "numValues")]
                         ref List<int> values,
                     int numValues
@@ -66,10 +66,10 @@ namespace LibraryImportGenerator.IntegrationTests
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "create_range_array")]
                 [return: MarshalUsing(typeof(ListMarshaller<,>), CountElementName = "numValues")]
-                public static partial List<int> CreateRange(int start, int end, out int numValues);
+                partial public static List<int> CreateRange(int start, int end, out int numValues);
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "create_range_array_out")]
-                public static partial void CreateRange_Out(
+                partial public static void CreateRange_Out(
                     int start,
                     int end,
                     out int numValues,
@@ -82,31 +82,31 @@ namespace LibraryImportGenerator.IntegrationTests
                     typeof(ListMarshaller<,>),
                     ConstantElementCount = sizeof(long)
                 )]
-                public static partial List<byte> GetLongBytes(long l);
+                partial public static List<byte> GetLongBytes(long l);
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_bool_struct_array")]
                 [return: MarshalAs(UnmanagedType.U1)]
-                public static partial bool AndAllMembers(
+                partial public static bool AndAllMembers(
                     [MarshalUsing(typeof(ListMarshaller<,>))] List<BoolStruct> pArray,
                     int length
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_bool_struct_array_in")]
                 [return: MarshalAs(UnmanagedType.U1)]
-                public static partial bool AndAllMembersIn(
+                partial public static bool AndAllMembersIn(
                     [MarshalUsing(typeof(ListMarshaller<,>))] in List<BoolStruct> pArray,
                     int length
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "negate_bool_struct_array_ref")]
-                public static partial void NegateBools(
+                partial public static void NegateBools(
                     [MarshalUsing(typeof(ListMarshaller<,>), CountElementName = "numValues")]
                         ref List<BoolStruct> boolStruct,
                     int numValues
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "negate_bool_struct_array_out")]
-                public static partial void NegateBools(
+                partial public static void NegateBools(
                     [MarshalUsing(typeof(ListMarshaller<,>))] List<BoolStruct> boolStruct,
                     int numValues,
                     [MarshalUsing(typeof(ListMarshaller<,>), CountElementName = "numValues")]
@@ -118,21 +118,21 @@ namespace LibraryImportGenerator.IntegrationTests
                     EntryPoint = "negate_bool_struct_array_return"
                 )]
                 [return: MarshalUsing(typeof(ListMarshaller<,>), CountElementName = "numValues")]
-                public static partial List<BoolStruct> NegateBools(
+                partial public static List<BoolStruct> NegateBools(
                     [MarshalUsing(typeof(ListMarshaller<,>))] List<BoolStruct> boolStruct,
                     int numValues
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
                 [return: MarshalUsing(typeof(ExceptionOnUnmarshal))]
-                public static partial int GuaranteedUnmarshal(
+                partial public static int GuaranteedUnmarshal(
                     [MarshalUsing(typeof(ListGuaranteedUnmarshal<,>), ConstantElementCount = 1)]
                         out List<int> ret
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
                 [return: MarshalUsing(typeof(ExceptionOnUnmarshal))]
-                public static partial int GuaranteedUnmarshal(
+                partial public static int GuaranteedUnmarshal(
                     [MarshalUsing(typeof(ListGuaranteedUnmarshal<,>), ConstantElementCount = 1)]
                         out List<BoolStruct> ret
                 );
@@ -143,7 +143,7 @@ namespace LibraryImportGenerator.IntegrationTests
                     MarshalMode.ManagedToUnmanagedOut,
                     typeof(ListGuaranteedUnmarshal<,>)
                 )]
-                public unsafe static class ListGuaranteedUnmarshal<T, TUnmanagedElement>
+                public static unsafe class ListGuaranteedUnmarshal<T, TUnmanagedElement>
                     where TUnmanagedElement : unmanaged
                 {
                     public static bool AllocateContainerForManagedElementsFinallyCalled = false;
@@ -166,16 +166,16 @@ namespace LibraryImportGenerator.IntegrationTests
                 }
             }
 
-            public partial class Stateful
+            partial public class Stateful
             {
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-                public static partial int Sum(
+                partial public static int Sum(
                     [MarshalUsing(typeof(ListMarshallerStateful<,>))] List<int> values,
                     int numValues
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_ptr_array")]
-                public static unsafe partial int SumWithFreeTracking(
+                partial public static unsafe int SumWithFreeTracking(
                     [
                         MarshalUsing(typeof(ListMarshallerStateful<,>)),
                         MarshalUsing(
@@ -188,13 +188,13 @@ namespace LibraryImportGenerator.IntegrationTests
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array_ref")]
-                public static partial int SumInArray(
+                partial public static int SumInArray(
                     [MarshalUsing(typeof(ListMarshallerStateful<,>))] in List<int> values,
                     int numValues
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-                public static partial void Duplicate(
+                partial public static void Duplicate(
                     [MarshalUsing(
                         typeof(ListMarshallerStateful<,>),
                         CountElementName = "numValues"
@@ -208,10 +208,10 @@ namespace LibraryImportGenerator.IntegrationTests
                     typeof(ListMarshallerStateful<,>),
                     CountElementName = "numValues"
                 )]
-                public static partial List<int> CreateRange(int start, int end, out int numValues);
+                partial public static List<int> CreateRange(int start, int end, out int numValues);
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "create_range_array_out")]
-                public static partial void CreateRange_Out(
+                partial public static void CreateRange_Out(
                     int start,
                     int end,
                     out int numValues,
@@ -227,24 +227,24 @@ namespace LibraryImportGenerator.IntegrationTests
                     typeof(ListMarshallerStateful<,>),
                     ConstantElementCount = sizeof(long)
                 )]
-                public static partial List<byte> GetLongBytes(long l);
+                partial public static List<byte> GetLongBytes(long l);
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_bool_struct_array")]
                 [return: MarshalAs(UnmanagedType.U1)]
-                public static partial bool AndAllMembers(
+                partial public static bool AndAllMembers(
                     [MarshalUsing(typeof(ListMarshallerStateful<,>))] List<BoolStruct> pArray,
                     int length
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_bool_struct_array_in")]
                 [return: MarshalAs(UnmanagedType.U1)]
-                public static partial bool AndAllMembersIn(
+                partial public static bool AndAllMembersIn(
                     [MarshalUsing(typeof(ListMarshallerStateful<,>))] in List<BoolStruct> pArray,
                     int length
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "negate_bool_struct_array_ref")]
-                public static partial void NegateBools(
+                partial public static void NegateBools(
                     [MarshalUsing(
                         typeof(ListMarshallerStateful<,>),
                         CountElementName = "numValues"
@@ -254,7 +254,7 @@ namespace LibraryImportGenerator.IntegrationTests
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "negate_bool_struct_array_out")]
-                public static partial void NegateBools(
+                partial public static void NegateBools(
                     [MarshalUsing(typeof(ListMarshallerStateful<,>))] List<BoolStruct> boolStruct,
                     int numValues,
                     [MarshalUsing(
@@ -272,21 +272,21 @@ namespace LibraryImportGenerator.IntegrationTests
                     typeof(ListMarshallerStateful<,>),
                     CountElementName = "numValues"
                 )]
-                public static partial List<BoolStruct> NegateBools(
+                partial public static List<BoolStruct> NegateBools(
                     [MarshalUsing(typeof(ListMarshallerStateful<,>))] List<BoolStruct> boolStruct,
                     int numValues
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
                 [return: MarshalUsing(typeof(ExceptionOnUnmarshal))]
-                public static partial int GuaranteedUnmarshal(
+                partial public static int GuaranteedUnmarshal(
                     [MarshalUsing(typeof(ListGuaranteedUnmarshal<,>), ConstantElementCount = 1)]
                         out List<int> ret
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
                 [return: MarshalUsing(typeof(ExceptionOnUnmarshal))]
-                public static partial int GuaranteedUnmarshal(
+                partial public static int GuaranteedUnmarshal(
                     [MarshalUsing(typeof(ListGuaranteedUnmarshal<,>), ConstantElementCount = 1)]
                         out List<BoolStruct> ret
                 );
@@ -297,7 +297,7 @@ namespace LibraryImportGenerator.IntegrationTests
                     MarshalMode.ManagedToUnmanagedOut,
                     typeof(ListGuaranteedUnmarshal<,>.Marshaller)
                 )]
-                public unsafe static class ListGuaranteedUnmarshal<T, TUnmanagedElement>
+                public static unsafe class ListGuaranteedUnmarshal<T, TUnmanagedElement>
                     where TUnmanagedElement : unmanaged
                 {
                     public struct Marshaller

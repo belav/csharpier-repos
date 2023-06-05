@@ -5,9 +5,9 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(
             Libraries.Kernel32,
@@ -15,7 +15,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial SafeWaitHandle OpenSemaphore(
+        partial internal static SafeWaitHandle OpenSemaphore(
             uint desiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool inheritHandle,
             string name
@@ -27,7 +27,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial SafeWaitHandle CreateSemaphoreEx(
+        partial internal static SafeWaitHandle CreateSemaphoreEx(
             IntPtr lpSecurityAttributes,
             int initialCount,
             int maximumCount,
@@ -38,7 +38,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool ReleaseSemaphore(
+        partial internal static bool ReleaseSemaphore(
             SafeWaitHandle handle,
             int releaseCount,
             out int previousCount

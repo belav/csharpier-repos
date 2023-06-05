@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
-    internal static partial class ParameterTestExtensions
+    partial internal static class ParameterTestExtensions
     {
         internal struct S
         {
@@ -11,9 +11,9 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         }
 
         [LoggerMessage(EventId = 0, Level = LogLevel.Information, Message = "UseInParameter {s}")]
-        internal static partial void UseInParameter(ILogger logger, in S s);
+        partial internal static void UseInParameter(ILogger logger, in S s);
 
         [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "UseRefParameter {s}")]
-        internal static partial void UseRefParameter(ILogger logger, ref S s);
+        partial internal static void UseRefParameter(ILogger logger, ref S s);
     }
 }

@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
 {
-    internal partial class NavigableSymbolService
+    partial internal class NavigableSymbolService
     {
         private class NavigableSymbol : INavigableSymbol
         {

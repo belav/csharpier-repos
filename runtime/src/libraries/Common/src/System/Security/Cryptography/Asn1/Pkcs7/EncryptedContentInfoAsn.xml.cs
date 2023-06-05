@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1.Pkcs7
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct EncryptedContentInfoAsn
+    partial internal struct EncryptedContentInfoAsn
     {
         internal string ContentType;
         internal System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn ContentEncryptionAlgorithm;

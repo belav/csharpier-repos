@@ -17,7 +17,7 @@ namespace ILCompiler.DependencyAnalysis
         public int CustomSort = int.MaxValue;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static partial void ApplyCustomSort(
+        partial static void ApplyCustomSort(
             SortableDependencyNode x,
             SortableDependencyNode y,
             ref int result

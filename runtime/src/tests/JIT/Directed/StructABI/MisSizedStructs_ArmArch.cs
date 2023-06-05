@@ -608,96 +608,96 @@ public unsafe class MisSizedStructs_ArmSplit
 
     struct StructWithOneByte
     {
-        public fixed byte Bytes[1];
+        fixed public byte Bytes[1];
     }
 
     struct StructWithTwoBytes
     {
-        public fixed byte Bytes[2];
+        fixed public byte Bytes[2];
     }
 
     struct StructWithThreeBytes
     {
-        public fixed byte Bytes[3];
+        fixed public byte Bytes[3];
     }
 
     struct StructWithFourBytes
     {
-        public fixed byte Bytes[4];
+        fixed public byte Bytes[4];
     }
 
     struct StructWithFiveBytes
     {
-        public fixed byte Bytes[5];
+        fixed public byte Bytes[5];
     }
 
     struct StructWithSixBytes
     {
-        public fixed byte Bytes[6];
+        fixed public byte Bytes[6];
     }
 
     struct StructWithSevenBytes
     {
-        public fixed byte Bytes[7];
+        fixed public byte Bytes[7];
     }
 
     struct StructWithEightBytes
     {
-        public fixed byte Bytes[8];
+        fixed public byte Bytes[8];
     }
 
     struct StructWithNineBytes
     {
-        public fixed byte Bytes[9];
+        fixed public byte Bytes[9];
     }
 
     struct StructWithTenBytes
     {
-        public fixed byte Bytes[10];
+        fixed public byte Bytes[10];
     }
 
     struct StructWithElevenBytes
     {
-        public fixed byte Bytes[11];
+        fixed public byte Bytes[11];
     }
 
     struct StructWithTwelveBytes
     {
-        public fixed byte Bytes[12];
+        fixed public byte Bytes[12];
     }
 
     struct StructWithThirteenBytes
     {
-        public fixed byte Bytes[13];
+        fixed public byte Bytes[13];
     }
 
     struct StructWithFourteenBytes
     {
-        public fixed byte Bytes[14];
+        fixed public byte Bytes[14];
     }
 
     struct StructWithFifteenBytes
     {
-        public fixed byte Bytes[15];
+        fixed public byte Bytes[15];
     }
 
     struct StructWithSixteenBytes
     {
-        public fixed byte Bytes[16];
+        fixed public byte Bytes[16];
     }
 
     struct StructWithSeventeenBytes
     {
-        public fixed byte Bytes[17];
+        fixed public byte Bytes[17];
     }
 
     struct StructWithEighteenBytes
     {
-        public fixed byte Bytes[18];
+        fixed public byte Bytes[18];
     }
 
     struct StructWithNineteenBytes
     {
-        public fixed byte Bytes[19];
+        fixed public byte Bytes[19];
     }
 }

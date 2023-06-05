@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_LookupFriendlyNameByOid",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial int LookupFriendlyNameByOid(
+        partial internal static int LookupFriendlyNameByOid(
             string oidValue,
             ref IntPtr friendlyNamePtr
         );

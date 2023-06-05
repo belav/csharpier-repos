@@ -13,39 +13,39 @@ namespace DllImportGenerator.IntegrationTests
     partial class NativeExportsNE
     {
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "stringcontainer_deepduplicate")]
-        public static partial void DeepDuplicateStrings(
+        partial public static void DeepDuplicateStrings(
             StringContainer strings,
             out StringContainer pStringsOut
         );
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "stringcontainer_reverse_strings")]
-        public static partial void ReverseStrings(ref StringContainer strings);
+        partial public static void ReverseStrings(ref StringContainer strings);
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes_as_double")]
-        public static partial double GetLongBytesAsDouble(
+        partial public static double GetLongBytesAsDouble(
             [MarshalUsing(typeof(DoubleToLongMarshaler))] double d
         );
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "negate_bools")]
-        public static partial void NegateBools(
+        partial public static void NegateBools(
             BoolStruct boolStruct,
             out BoolStruct pBoolStructOut
         );
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "and_bools_ref")]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static partial bool AndBoolsRef(in BoolStruct boolStruct);
+        partial public static bool AndBoolsRef(in BoolStruct boolStruct);
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
-        public static partial IntWrapper DoubleIntRef(IntWrapper pInt);
+        partial public static IntWrapper DoubleIntRef(IntWrapper pInt);
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "reverse_replace_ref_ushort")]
-        public static partial void ReverseReplaceString(
+        partial public static void ReverseReplaceString(
             [MarshalUsing(typeof(Utf16StringMarshaler))] ref string s
         );
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "return_length_ushort")]
-        public static partial int ReturnStringLength(
+        partial public static int ReturnStringLength(
             [MarshalUsing(typeof(Utf16StringMarshaler))] string s
         );
     }

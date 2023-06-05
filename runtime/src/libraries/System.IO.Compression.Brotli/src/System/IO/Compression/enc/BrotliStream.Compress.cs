@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace System.IO.Compression
 {
+    partial
     /// <summary>Provides methods and properties used to compress and decompress streams by using the Brotli data format specification.</summary>
-    public sealed partial class BrotliStream : Stream
+    public sealed class BrotliStream : Stream
     {
         private BrotliEncoder _encoder;
 

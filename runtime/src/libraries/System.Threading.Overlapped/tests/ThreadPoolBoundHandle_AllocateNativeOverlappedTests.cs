@@ -12,7 +12,7 @@ using Xunit;
     TargetFrameworkMonikers.Netcoreapp,
     TestRuntimes.Mono
 )]
-public partial class ThreadPoolBoundHandleTests
+partial public class ThreadPoolBoundHandleTests
 {
     [Fact]
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix

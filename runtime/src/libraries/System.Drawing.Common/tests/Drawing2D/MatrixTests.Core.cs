@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Drawing.Drawing2D.Tests
 {
-    public partial class MatrixTests
+    partial public class MatrixTests
     {
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(MatrixElements_TestData))]

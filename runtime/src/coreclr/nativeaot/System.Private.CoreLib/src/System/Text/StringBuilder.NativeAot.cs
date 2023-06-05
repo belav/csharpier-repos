@@ -3,7 +3,7 @@
 
 namespace System.Text
 {
-    public partial class StringBuilder
+    partial public class StringBuilder
     {
         /// <summary>
         /// Calculate the new length for array allocation when marshalling StringBuilder in interop

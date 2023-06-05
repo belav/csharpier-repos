@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Normaliz
+    partial internal static class Normaliz
     {
         //
         //  Idn APIs
@@ -16,7 +16,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int IdnToAscii(
+        partial internal static unsafe int IdnToAscii(
             uint dwFlags,
             char* lpUnicodeCharStr,
             int cchUnicodeChar,
@@ -29,7 +29,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int IdnToUnicode(
+        partial internal static unsafe int IdnToUnicode(
             uint dwFlags,
             char* lpASCIICharStr,
             int cchASCIIChar,

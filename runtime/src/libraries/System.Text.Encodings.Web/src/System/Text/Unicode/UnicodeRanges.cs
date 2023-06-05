@@ -7,11 +7,12 @@ using System.Threading;
 
 namespace System.Text.Unicode
 {
+    partial
     /// <summary>
     /// Contains predefined <see cref="UnicodeRange"/> instances which correspond to blocks
     /// from the Unicode 7.0 specification.
     /// </summary>
-    public static partial class UnicodeRanges
+    public static class UnicodeRanges
     {
         /// <summary>
         /// An empty <see cref="UnicodeRange"/>. This range contains no code points.

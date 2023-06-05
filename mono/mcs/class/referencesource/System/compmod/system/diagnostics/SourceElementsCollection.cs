@@ -19,7 +19,7 @@ namespace System.Diagnostics
     )]
     internal class SourceElementsCollection : ConfigurationElementCollection
     {
-        new public SourceElement this[string name]
+        public new SourceElement this[string name]
         {
             get { return (SourceElement)BaseGet(name); }
         }

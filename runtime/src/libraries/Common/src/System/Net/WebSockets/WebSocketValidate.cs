@@ -7,7 +7,7 @@ using System.Text;
 
 namespace System.Net.WebSockets
 {
-    internal static partial class WebSocketValidate
+    partial internal static class WebSocketValidate
     {
         /// <summary>
         /// The minimum value for window bits that the websocket per-message-deflate extension can support.<para />

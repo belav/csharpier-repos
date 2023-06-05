@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class ActivatorUtilities
+    partial public static class ActivatorUtilities
     {
         public static Microsoft.Extensions.DependencyInjection.ObjectFactory CreateFactory(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -74,12 +74,12 @@ namespace Microsoft.Extensions.DependencyInjection
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
-    public partial class ActivatorUtilitiesConstructorAttribute : System.Attribute
+    partial public class ActivatorUtilitiesConstructorAttribute : System.Attribute
     {
         public ActivatorUtilitiesConstructorAttribute() { }
     }
 
-    public readonly partial struct AsyncServiceScope
+    partial public readonly struct AsyncServiceScope
         : Microsoft.Extensions.DependencyInjection.IServiceScope,
             System.IAsyncDisposable,
             System.IDisposable
@@ -107,13 +107,13 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public partial interface IServiceCollection
+    partial public interface IServiceCollection
         : System.Collections.Generic.ICollection<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
             System.Collections.Generic.IList<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
             System.Collections.IEnumerable { }
 
-    public partial interface IServiceProviderFactory<TContainerBuilder>
+    partial public interface IServiceProviderFactory<TContainerBuilder>
         where TContainerBuilder : notnull
     {
         TContainerBuilder CreateBuilder(
@@ -122,22 +122,22 @@ namespace Microsoft.Extensions.DependencyInjection
         System.IServiceProvider CreateServiceProvider(TContainerBuilder containerBuilder);
     }
 
-    public partial interface IServiceProviderIsService
+    partial public interface IServiceProviderIsService
     {
         bool IsService(System.Type serviceType);
     }
 
-    public partial interface IServiceScope : System.IDisposable
+    partial public interface IServiceScope : System.IDisposable
     {
         System.IServiceProvider ServiceProvider { get; }
     }
 
-    public partial interface IServiceScopeFactory
+    partial public interface IServiceScopeFactory
     {
         Microsoft.Extensions.DependencyInjection.IServiceScope CreateScope();
     }
 
-    public partial interface ISupportRequiredService
+    partial public interface ISupportRequiredService
     {
         object GetRequiredService(System.Type serviceType);
     }
@@ -151,7 +151,7 @@ namespace Microsoft.Extensions.DependencyInjection
         object?[]? arguments
     );
 
-    public partial class ServiceCollection
+    partial public class ServiceCollection
         : Microsoft.Extensions.DependencyInjection.IServiceCollection,
             System.Collections.Generic.ICollection<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
@@ -220,7 +220,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public static partial class ServiceCollectionServiceExtensions
+    partial public static class ServiceCollectionServiceExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddScoped(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
@@ -475,7 +475,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public partial class ServiceDescriptor
+    partial public class ServiceDescriptor
     {
         public ServiceDescriptor(
             System.Type serviceType,
@@ -719,7 +719,7 @@ namespace Microsoft.Extensions.DependencyInjection
         Transient = 2,
     }
 
-    public static partial class ServiceProviderServiceExtensions
+    partial public static class ServiceProviderServiceExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.AsyncServiceScope CreateAsyncScope(
             this Microsoft.Extensions.DependencyInjection.IServiceScopeFactory serviceScopeFactory
@@ -783,7 +783,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
 namespace Microsoft.Extensions.DependencyInjection.Extensions
 {
-    public static partial class ServiceCollectionDescriptorExtensions
+    partial public static class ServiceCollectionDescriptorExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection Add(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection collection,

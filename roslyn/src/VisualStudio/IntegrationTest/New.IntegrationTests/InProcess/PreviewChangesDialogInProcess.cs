@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Extensibility.Testing;
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     [TestService]
-    internal partial class PreviewChangesDialogInProcess
+    partial internal class PreviewChangesDialogInProcess
     {
         /// <summary>
         /// Verifies that the Preview Changes dialog is showing with the

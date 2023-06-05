@@ -15,7 +15,7 @@ using Xunit;
 
 namespace System.IO.Pipelines.Tests
 {
-    public partial class PipelineReaderWriterFacts : IDisposable
+    partial public class PipelineReaderWriterFacts : IDisposable
     {
         [Fact]
         public async Task ResetAfterCompleteReaderAndWriterWithoutAdvancingClearsEverything()

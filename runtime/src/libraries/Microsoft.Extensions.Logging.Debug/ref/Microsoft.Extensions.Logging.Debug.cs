@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Logging
 {
-    public static partial class DebugLoggerFactoryExtensions
+    partial public static class DebugLoggerFactoryExtensions
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddDebug(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder
@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Logging
 namespace Microsoft.Extensions.Logging.Debug
 {
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("Debug")]
-    public partial class DebugLoggerProvider
+    partial public class DebugLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
             System.IDisposable
     {

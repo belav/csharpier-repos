@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 {
-    internal partial class InvocationExpressionSignatureHelpProviderBase
+    partial internal class InvocationExpressionSignatureHelpProviderBase
     {
         private static IMethodSymbol? GetDelegateInvokeMethod(
             InvocationExpressionSyntax invocationExpression,

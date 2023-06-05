@@ -13,7 +13,7 @@ namespace System.Text.Json.Node
     /// </summary>
     [DebuggerDisplay("JsonArray[{List.Count}]")]
     [DebuggerTypeProxy(typeof(DebugView))]
-    public sealed partial class JsonArray : JsonNode
+    partial public sealed class JsonArray : JsonNode
     {
         private JsonElement? _jsonElement;
         private List<JsonNode?>? _list;

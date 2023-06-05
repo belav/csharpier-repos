@@ -5,9 +5,9 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal static void CreateHardLink(string hardLinkFilePath, string targetFilePath)
         {
@@ -28,7 +28,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool CreateHardLinkPrivate(
+        partial private static bool CreateHardLinkPrivate(
             string lpFileName,
             string lpExistingFileName,
             IntPtr lpSecurityAttributes

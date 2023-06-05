@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net
 {
-    internal static partial class HttpKnownHeaderNames
+    partial internal static class HttpKnownHeaderNames
     {
         private const string Gzip = "gzip";
         private const string Deflate = "deflate";

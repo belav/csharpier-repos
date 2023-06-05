@@ -6,14 +6,14 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Metadata
 {
-    public static partial class AssemblyExtensions
+    partial public static class AssemblyExtensions
     {
         [LibraryImport(
             RuntimeHelpers.QCall,
             EntryPoint = "AssemblyNative_InternalTryGetRawMetadata"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe partial bool InternalTryGetRawMetadata(
+        partial private static unsafe bool InternalTryGetRawMetadata(
             QCallAssembly assembly,
             ref byte* blob,
             ref int length

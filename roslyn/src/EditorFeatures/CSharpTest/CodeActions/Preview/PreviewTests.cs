@@ -25,7 +25,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
 {
-    public partial class PreviewTests : AbstractCSharpCodeActionTest
+    partial public class PreviewTests : AbstractCSharpCodeActionTest
     {
         private static readonly TestComposition s_composition =
             EditorTestCompositions.EditorFeaturesWpf

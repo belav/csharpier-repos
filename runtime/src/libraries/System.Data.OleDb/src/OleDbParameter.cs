@@ -10,7 +10,7 @@ using System.Globalization;
 namespace System.Data.OleDb
 {
     [TypeConverter(typeof(OleDbParameter.OleDbParameterConverter))]
-    public sealed partial class OleDbParameter : DbParameter, ICloneable, IDbDataParameter
+    partial public sealed class OleDbParameter : DbParameter, ICloneable, IDbDataParameter
     {
         private NativeDBType? _metaType;
         private int _changeID;

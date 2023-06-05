@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text
 {
-    public partial class Encoding
+    partial public class Encoding
     {
         /*
          * This file contains infrastructure code that supports a simplified way of writing

@@ -14,7 +14,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeEvent))]
-    public sealed partial class CodeEvent : AbstractCodeMember, EnvDTE80.CodeEvent
+    partial public sealed class CodeEvent : AbstractCodeMember, EnvDTE80.CodeEvent
     {
         internal static EnvDTE80.CodeEvent Create(
             CodeModelState state,

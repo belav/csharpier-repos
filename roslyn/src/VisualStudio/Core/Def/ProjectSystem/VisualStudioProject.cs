@@ -26,7 +26,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal sealed partial class VisualStudioProject
+    partial internal sealed class VisualStudioProject
     {
         private static readonly char[] s_directorySeparator = { Path.DirectorySeparatorChar };
         private static readonly ImmutableArray<MetadataReferenceProperties> s_defaultMetadataReferenceProperties =

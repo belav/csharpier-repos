@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 namespace System.Net
 {
-    public partial class WebProxy : IWebProxy, ISerializable
+    partial public class WebProxy : IWebProxy, ISerializable
     {
         private static bool IsLocal(Uri host)
         {

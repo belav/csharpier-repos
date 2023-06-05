@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class NullTests
+    partial public static class NullTests
     {
         [Fact]
         public static void ClassWithNullProperty()

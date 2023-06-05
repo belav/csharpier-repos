@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class SspiCli
+    partial internal static class SspiCli
     {
         [LibraryImport(Interop.Libraries.SspiCli)]
-        internal static partial int LsaDeregisterLogonProcess(IntPtr LsaHandle);
+        partial internal static int LsaDeregisterLogonProcess(IntPtr LsaHandle);
     }
 }

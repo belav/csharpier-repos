@@ -9,7 +9,7 @@ using System.Security.Authentication.ExtendedProtection;
 
 namespace System.Net
 {
-    internal sealed partial class NTAuthentication
+    partial internal sealed class NTAuthentication
     {
         internal bool IsConfidentialityFlag =>
             (_contextFlags & ContextFlagsPal.Confidentiality) != 0;

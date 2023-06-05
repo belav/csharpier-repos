@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 
 namespace System.Runtime.CompilerServices
 {
-    public partial class RuntimeHelpers
+    partial public class RuntimeHelpers
     {
         public static void InitializeArray(Array array, RuntimeFieldHandle fldHandle)
         {
@@ -162,9 +162,10 @@ namespace System.Runtime.CompilerServices
             return RuntimeTypeHandle.HasReferences((obj.GetType() as RuntimeType)!);
         }
 
+        ref
         // A conservative GC already scans the stack looking for potential object-refs or by-refs.
         // Mono uses a conservative GC so there is no need for this API to be full implemented.
-        internal unsafe ref struct GCFrameRegistration
+        internal unsafe struct GCFrameRegistration
         {
 #pragma warning disable IDE0060
             public GCFrameRegistration(void* allocation, uint elemCount, bool areByRefs = true) { }

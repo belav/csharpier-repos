@@ -4,7 +4,7 @@
 using System;
 using System.Buffers;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     /// <summary>
     /// Helper for making interop calls that return a string, but we don't know

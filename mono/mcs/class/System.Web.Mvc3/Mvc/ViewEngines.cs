@@ -2,7 +2,7 @@
 {
     public static class ViewEngines
     {
-        private readonly static ViewEngineCollection _engines = new ViewEngineCollection
+        private static readonly ViewEngineCollection _engines = new ViewEngineCollection
         {
             new WebFormViewEngine(),
             new RazorViewEngine(),

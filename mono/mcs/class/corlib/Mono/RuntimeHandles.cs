@@ -67,7 +67,7 @@ namespace Mono
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal unsafe extern static IntPtr GetTypeFromClass(RuntimeStructs.MonoClass* klass);
+        internal static extern unsafe IntPtr GetTypeFromClass(RuntimeStructs.MonoClass* klass);
 
         internal RuntimeTypeHandle GetTypeHandle() =>
             new RuntimeTypeHandle(GetTypeFromClass(value));
@@ -241,7 +241,7 @@ namespace Mono
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void GPtrArrayFree(RuntimeStructs.GPtrArray* value);
+        static extern void GPtrArrayFree(RuntimeStructs.GPtrArray* value);
 
         internal static void DestroyAndFree(ref RuntimeGPtrArrayHandle h)
         {

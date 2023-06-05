@@ -41,12 +41,13 @@ namespace Novell.Directory.Ldap
     /// </summary>
     public class LdapReferralException : LdapException
     {
+        public
         /// <summary> Sets a referral that could not be processed
         ///
         /// </summary>
         /// <param name="url">The referral URL that could not be processed.
         /// </param>
-        virtual public System.String FailedReferral
+        virtual System.String FailedReferral
         {
             /* Gets the referral that could not be processed.  If multiple referrals
             * could not be processed, the method returns one of them.

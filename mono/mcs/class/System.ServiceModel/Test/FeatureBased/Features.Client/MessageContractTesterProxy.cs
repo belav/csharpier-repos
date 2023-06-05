@@ -25,7 +25,7 @@ namespace Proxy.MonoTests.Features.Client
         WrapperNamespace = "http://MonoTests.Features.Contracts",
         IsWrapped = true
     )]
-    public partial class TestMessage
+    partial public class TestMessage
     {
         [System.ServiceModel.MessageHeaderAttribute(
             Namespace = "http://MonoTests.Features.Contracts"
@@ -61,7 +61,7 @@ namespace Proxy.MonoTests.Features.Client
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class MessageContractTesterContractClient
+    partial public class MessageContractTesterContractClient
         : System.ServiceModel.ClientBase<IMessageContractTesterContract>,
             IMessageContractTesterContract
     {

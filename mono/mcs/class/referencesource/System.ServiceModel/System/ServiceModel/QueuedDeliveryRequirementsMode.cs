@@ -12,7 +12,7 @@ namespace System.ServiceModel
 
     static class QueuedDeliveryRequirementsModeHelper
     {
-        static public bool IsDefined(QueuedDeliveryRequirementsMode x)
+        public static bool IsDefined(QueuedDeliveryRequirementsMode x)
         {
             return x == QueuedDeliveryRequirementsMode.Allowed
                 || x == QueuedDeliveryRequirementsMode.Required

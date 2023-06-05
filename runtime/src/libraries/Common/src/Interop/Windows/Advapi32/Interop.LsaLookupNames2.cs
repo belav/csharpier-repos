@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
@@ -16,7 +16,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial uint LsaLookupNames2(
+        partial internal static uint LsaLookupNames2(
             SafeLsaPolicyHandle handle,
             int flags,
             int count,

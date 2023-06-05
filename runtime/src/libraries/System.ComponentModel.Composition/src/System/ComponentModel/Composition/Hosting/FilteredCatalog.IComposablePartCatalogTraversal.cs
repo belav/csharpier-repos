@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class FilteredCatalog
+    partial public class FilteredCatalog
     {
         /// <summary>
         /// This is designed to traverse a set of parts based on whatever pattern. There are no real expectations

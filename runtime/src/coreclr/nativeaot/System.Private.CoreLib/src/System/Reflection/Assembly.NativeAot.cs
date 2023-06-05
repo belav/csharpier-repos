@@ -10,7 +10,7 @@ using Internal.Reflection.Core.NonPortable;
 
 namespace System.Reflection
 {
-    public abstract partial class Assembly : ICustomAttributeProvider, ISerializable
+    partial public abstract class Assembly : ICustomAttributeProvider, ISerializable
     {
         private static Assembly? GetEntryAssemblyInternal() =>
             Internal.Runtime.CompilerHelpers.StartupCodeHelpers.GetEntryAssembly();

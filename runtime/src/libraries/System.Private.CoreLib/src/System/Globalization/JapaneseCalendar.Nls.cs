@@ -9,7 +9,7 @@ using Internal.Win32;
 
 namespace System.Globalization
 {
-    public partial class JapaneseCalendar : Calendar
+    partial public class JapaneseCalendar : Calendar
     {
 #if TARGET_WINDOWS
         private const string JapaneseErasHive =

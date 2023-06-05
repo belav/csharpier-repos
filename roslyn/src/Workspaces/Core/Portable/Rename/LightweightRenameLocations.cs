@@ -17,11 +17,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
+    partial
     /// <summary>
     /// Equivalent to <see cref="SymbolicRenameLocations"/> except that references to symbols are kept in a lightweight fashion
     /// to avoid expensive rehydration steps as a host and OOP communicate.
     /// </summary>
-    internal sealed partial class LightweightRenameLocations
+    internal sealed class LightweightRenameLocations
     {
         public readonly Solution Solution;
         public readonly SymbolRenameOptions Options;

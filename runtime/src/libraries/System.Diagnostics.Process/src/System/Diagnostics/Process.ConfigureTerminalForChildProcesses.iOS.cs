@@ -3,7 +3,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class Process
+    partial public class Process
     {
         /// These methods are used on other Unix systems to track how many children use the terminal,
         /// and update the terminal configuration when necessary.
@@ -14,7 +14,7 @@ namespace System.Diagnostics
             bool configureConsole = true
         ) { }
 
-        static partial void SetDelayedSigChildConsoleConfigurationHandler();
+        partial static void SetDelayedSigChildConsoleConfigurationHandler();
 
         private static bool AreChildrenUsingTerminal => false;
     }

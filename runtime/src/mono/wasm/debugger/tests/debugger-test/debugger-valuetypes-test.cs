@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DebuggerTests
 {
-    public partial class ValueTypesTest
+    partial public class ValueTypesTest
     { //Only append content to this class as the test suite depends on line info
         [System.Runtime.InteropServices.JavaScript.JSExport]
         public static void MethodWithLocalStructs()

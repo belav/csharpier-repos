@@ -9,7 +9,7 @@ using Internal.Reflection.Extensions.NonPortable;
 
 namespace System
 {
-    public abstract partial class Attribute
+    partial public abstract class Attribute
     {
         public static Attribute GetCustomAttribute(Assembly element, Type attributeType)
         {

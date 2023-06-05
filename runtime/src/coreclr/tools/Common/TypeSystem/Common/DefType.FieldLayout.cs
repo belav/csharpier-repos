@@ -6,8 +6,9 @@ using System.Diagnostics;
 
 namespace Internal.TypeSystem
 {
+    partial
     // This is the api surface necessary to query the field layout of a type
-    public abstract partial class DefType : TypeDesc
+    public abstract class DefType : TypeDesc
     {
         /// <summary>
         /// Bit flags for layout

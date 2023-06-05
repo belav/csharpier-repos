@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Formatting.Rules;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 {
-    internal partial class CSharpMethodExtractor : MethodExtractor
+    partial internal class CSharpMethodExtractor : MethodExtractor
     {
         private class FormattingRule : AbstractFormattingRule
         {

@@ -9,10 +9,11 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {
+    partial
     /// <summary>
     /// X64 specific portions of ReadyToRunHelperNode
     /// </summary>
-    public partial class ReadyToRunHelperNode
+    public class ReadyToRunHelperNode
     {
         protected override void EmitCode(
             NodeFactory factory,

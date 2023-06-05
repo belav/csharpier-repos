@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.MiscellaneousCases
 {
+    partial
     /// <summary>
     /// Miscellaneous Cases (regression tests)
     /// </summary>
-    public static partial class RegressionTestsTests
+    public static class RegressionTestsTests
     {
         /// <summary>
         /// translate() cannot handle surrogate pair mapping correctly

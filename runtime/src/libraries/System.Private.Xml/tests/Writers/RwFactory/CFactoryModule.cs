@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Xml.RwFactoryWriterTests
 {
-    public partial class CFactoryModule : CXmlDriverModule
+    partial public class CFactoryModule : CXmlDriverModule
     {
         [Theory]
         [XmlTests(nameof(Create))]

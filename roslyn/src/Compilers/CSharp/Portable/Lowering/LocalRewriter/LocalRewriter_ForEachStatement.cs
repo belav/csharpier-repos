@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class LocalRewriter
+    partial internal class LocalRewriter
     {
         /// <summary>
         /// This is the entry point for foreach-loop lowering.  It delegates to

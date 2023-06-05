@@ -17,7 +17,7 @@
         private const string DefaultViewName = "DefaultView";
         private ReadOnlyCollection<string> _viewNames;
         private QueryableDataSourceView _view;
-        private readonly new IPage _page;
+        private new readonly IPage _page;
 
         internal QueryableDataSource(IPage page)
         {

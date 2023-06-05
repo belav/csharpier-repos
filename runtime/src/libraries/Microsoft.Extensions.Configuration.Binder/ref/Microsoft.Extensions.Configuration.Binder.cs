@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public partial class BinderOptions
+    partial public class BinderOptions
     {
         public BinderOptions() { }
 
@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public static partial class ConfigurationBinder
+    partial public static class ConfigurationBinder
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding strongly typed objects to configuration values requires generating dynamic code at runtime, for example instantiating generic types."

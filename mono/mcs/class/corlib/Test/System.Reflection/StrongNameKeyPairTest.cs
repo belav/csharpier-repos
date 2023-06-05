@@ -834,7 +834,7 @@ namespace MonoTests.System.Reflection
             return file;
         }
 
-        static public byte[] GetKey()
+        public static byte[] GetKey()
         {
             return test;
         }

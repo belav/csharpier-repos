@@ -16,7 +16,7 @@ using HttpMethods = Microsoft.AspNetCore.Http.HttpMethods;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-internal abstract partial class Http2Stream
+partial internal abstract class Http2Stream
     : HttpProtocol,
         IThreadPoolWorkItem,
         IDisposable,

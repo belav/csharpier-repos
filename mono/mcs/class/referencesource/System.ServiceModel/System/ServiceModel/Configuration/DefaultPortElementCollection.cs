@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
 
     [ConfigurationCollection(typeof(DefaultPortElement), AddItemName = ConfigurationStrings.Add)]
-    public sealed partial class DefaultPortElementCollection
+    partial public sealed class DefaultPortElementCollection
         : ServiceModelEnhancedConfigurationElementCollection<DefaultPortElement>
     {
         public DefaultPortElementCollection()

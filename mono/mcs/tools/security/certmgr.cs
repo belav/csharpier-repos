@@ -30,12 +30,12 @@ namespace Mono.Tools
 {
     class CertificateManager
     {
-        static private void Header()
+        private static void Header()
         {
             Console.WriteLine(new AssemblyInfo().ToString());
         }
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine("Usage: certmgr [action] [object-type] [options] store [filename]");
             Console.WriteLine("   or: certmgr -list object-type [options] store");

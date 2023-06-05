@@ -51,11 +51,12 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal abstract class NamedTypeName : NonQualifiedTypeName { }
 
+    partial
     //
     // Non-nested named type. The full name is the namespace-qualified name. For example, the FullName for
     // System.Collections.Generic.IList<> is "System.Collections.Generic.IList`1".
     //
-    internal sealed partial class NamespaceTypeName : NamedTypeName
+    internal sealed class NamespaceTypeName : NamedTypeName
     {
         public NamespaceTypeName(string[] namespaceParts, string name)
         {

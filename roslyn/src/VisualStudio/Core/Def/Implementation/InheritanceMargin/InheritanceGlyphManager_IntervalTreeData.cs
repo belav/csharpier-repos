@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMargin
 {
-    internal partial class InheritanceGlyphManager
+    partial internal class InheritanceGlyphManager
     {
         private record GlyphData
         {

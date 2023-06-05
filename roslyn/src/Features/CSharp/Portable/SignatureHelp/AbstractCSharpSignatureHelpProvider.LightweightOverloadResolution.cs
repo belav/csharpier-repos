@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 {
-    internal abstract partial class AbstractCSharpSignatureHelpProvider
+    partial internal abstract class AbstractCSharpSignatureHelpProvider
     {
         internal static class LightweightOverloadResolution
         {

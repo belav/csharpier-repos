@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Roslyn.Test.EditorUtilities.NavigateTo
 {
-    public sealed partial class NavigateToTestAggregator
+    partial public sealed class NavigateToTestAggregator
     {
         private sealed class Callback : INavigateToCallback
         {

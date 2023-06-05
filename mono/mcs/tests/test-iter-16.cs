@@ -2,7 +2,7 @@ using System.Collections;
 
 class Foo
 {
-    static public IEnumerable foo()
+    public static IEnumerable foo()
     {
         try
         {

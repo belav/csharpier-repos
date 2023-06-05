@@ -51,11 +51,12 @@ namespace System.Data.Linq
 namespace DbLinq.Data.Linq
 #endif
 {
+    partial
     /// <summary>
     /// T may be eg. class Employee or string - the output
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    public sealed partial class Table<TEntity>
+    public sealed class Table<TEntity>
         : ITable,
             IQueryProvider,
             IListSource,

@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 
 namespace Generators
 {
-    public partial class EventSourceGenerator
+    partial public class EventSourceGenerator
     {
         private sealed class Parser
         {

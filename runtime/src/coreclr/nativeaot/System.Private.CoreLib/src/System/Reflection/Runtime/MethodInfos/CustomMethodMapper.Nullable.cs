@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal static partial class CustomMethodMapper
+    partial internal static class CustomMethodMapper
     {
         //
         // Nullables are another edge case.

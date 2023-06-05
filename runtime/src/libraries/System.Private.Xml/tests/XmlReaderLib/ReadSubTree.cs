@@ -13,7 +13,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCReadSubtree : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadSubtree : TCXMLReaderBaseGeneral
     {
         [Variation("ReadSubtree only works on Element Node")]
         public int ReadSubtreeWorksOnlyOnElementNode()

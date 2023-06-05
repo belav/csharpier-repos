@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class TransactionFlowElement : BindingElementExtensionElement
+    partial public class TransactionFlowElement : BindingElementExtensionElement
     {
         ConfigurationPropertyCollection _properties;
 

@@ -3,7 +3,7 @@
 // similar code from #75772.
 public class Splay<T>
 {
-    unsafe private struct Node
+    private unsafe struct Node
     {
         private int* foo;
         private T data;

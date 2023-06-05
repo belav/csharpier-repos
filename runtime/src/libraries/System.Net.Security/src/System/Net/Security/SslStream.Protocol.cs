@@ -15,7 +15,7 @@ namespace System.Net.Security
 {
     internal delegate X509Certificate2? SelectClientCertificate(out bool sessionRestartAttempt);
 
-    public partial class SslStream
+    partial public class SslStream
     {
         private SafeFreeCredentials? _credentialsHandle;
         private SafeDeleteSslContext? _securityContext;

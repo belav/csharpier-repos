@@ -3,11 +3,11 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
-        internal static partial class PerformanceCounterOptions
+        partial internal static class PerformanceCounterOptions
         {
             internal const int SDDL_REVISION_1 = 1;
 

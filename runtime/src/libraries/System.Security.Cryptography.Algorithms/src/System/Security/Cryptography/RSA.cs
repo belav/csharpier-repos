@@ -13,7 +13,7 @@ using Internal.Cryptography;
 namespace System.Security.Cryptography
 {
     [UnsupportedOSPlatform("browser")]
-    public abstract partial class RSA : AsymmetricAlgorithm
+    partial public abstract class RSA : AsymmetricAlgorithm
     {
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static new RSA? Create(string algName)

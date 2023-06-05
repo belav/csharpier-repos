@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.MemoryTests
 {
-    public static partial class MemoryMarshalTests
+    partial public static class MemoryMarshalTests
     {
         [Fact]
         public static void ReadOnlyMemory_TryGetString_Roundtrips()

@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
-    internal partial class CSharpProjectShim : ICSharpProjectSite
+    partial internal class CSharpProjectShim : ICSharpProjectSite
     {
         /// <summary>
         /// When the project property page calls GetValidStartupClasses on us, it assumes

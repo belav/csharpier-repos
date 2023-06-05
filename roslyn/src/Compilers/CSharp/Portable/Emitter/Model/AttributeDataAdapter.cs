@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal abstract partial class CSharpAttributeData : Cci.ICustomAttribute
+    partial internal abstract class CSharpAttributeData : Cci.ICustomAttribute
     {
         ImmutableArray<Cci.IMetadataExpression> Cci.ICustomAttribute.GetArguments(
             EmitContext context

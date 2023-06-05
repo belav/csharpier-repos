@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.ComponentModel;
     using System.ServiceModel.Channels;
 
-    public partial class MexHttpsBindingElement : MexBindingElement<WSHttpBinding>
+    partial public class MexHttpsBindingElement : MexBindingElement<WSHttpBinding>
     {
         public MexHttpsBindingElement(string name)
             : base(name) { }

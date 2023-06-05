@@ -16,7 +16,7 @@ using EETypeElementType = Internal.Runtime.EETypeElementType;
 
 namespace System
 {
-    public abstract partial class Enum : ValueType, IComparable, IFormattable, IConvertible
+    partial public abstract class Enum : ValueType, IComparable, IFormattable, IConvertible
     {
 #pragma warning disable IDE0060
         internal static EnumInfo GetEnumInfo(Type enumType, bool getNames = true)

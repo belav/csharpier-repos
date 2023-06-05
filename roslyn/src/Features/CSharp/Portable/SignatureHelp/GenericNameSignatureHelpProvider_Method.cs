@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 {
-    internal partial class GenericNameSignatureHelpProvider
+    partial internal class GenericNameSignatureHelpProvider
     {
         private static IList<SymbolDisplayPart> GetPreambleParts(
             IMethodSymbol method,

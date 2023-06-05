@@ -22,6 +22,7 @@ using System.Reflection;
 
 namespace System.Resources
 {
+    partial
     //
     // Note: this type is integral to the construction of exception objects,
     // and sometimes this has to be done in low memory situtations (OOM) or
@@ -31,7 +32,7 @@ namespace System.Resources
     // belonging to that type may not be initialized. FrameworkEventSource.Log
     // is one such example.
     //
-    internal sealed partial class ManifestBasedResourceGroveler : IResourceGroveler
+    internal sealed class ManifestBasedResourceGroveler : IResourceGroveler
     {
         private readonly ResourceManager.ResourceManagerMediator _mediator;
 

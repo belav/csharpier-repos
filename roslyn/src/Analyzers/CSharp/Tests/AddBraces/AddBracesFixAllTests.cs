@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
 {
-    public partial class AddBracesTests
+    partial public class AddBracesTests
     {
         [Fact]
         [Trait(Traits.Feature, Traits.Features.CodeActionsAddBraces)]

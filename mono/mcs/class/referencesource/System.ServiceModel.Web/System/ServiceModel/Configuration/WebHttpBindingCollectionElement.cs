@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
 
-    public partial class WebHttpBindingCollectionElement
+    partial public class WebHttpBindingCollectionElement
         : StandardBindingCollectionElement<WebHttpBinding, WebHttpBindingElement>
     {
         protected internal override Binding GetDefault()

@@ -6,10 +6,11 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// A collection of value set factory instances for built-in types.
     /// </summary>
-    internal static partial class ValueSetFactory
+    internal static class ValueSetFactory
     {
         internal static readonly IValueSetFactory<byte> ForByte = NumericValueSetFactory<
             byte,

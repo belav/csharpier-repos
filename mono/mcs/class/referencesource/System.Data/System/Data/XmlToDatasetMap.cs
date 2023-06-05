@@ -31,12 +31,12 @@ namespace System.Data
                 this.NamespaceURI = namespaceURI;
             }
 
-            override public int GetHashCode()
+            public override int GetHashCode()
             {
                 return ((object)LocalName).GetHashCode();
             }
 
-            override public bool Equals(object obj)
+            public override bool Equals(object obj)
             {
                 XmlNodeIdentety id = (XmlNodeIdentety)obj;
                 return (
@@ -160,7 +160,7 @@ namespace System.Data
             BuildIdentityMap(nameTable, dataTable);
         }
 
-        static internal bool IsMappedColumn(DataColumn c)
+        internal static bool IsMappedColumn(DataColumn c)
         {
             return (c.ColumnMapping != MappingType.Hidden);
         }

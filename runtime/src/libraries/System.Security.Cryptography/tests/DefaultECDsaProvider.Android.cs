@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Cryptography.EcDsa.Tests
 {
-    public partial class ECDsaProvider : IECDsaProvider
+    partial public class ECDsaProvider : IECDsaProvider
     {
         public bool IsCurveValid(Oid oid)
         {
@@ -48,9 +48,9 @@ namespace System.Security.Cryptography.EcDsa.Tests
     }
 }
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AndroidCrypto
+    partial internal static class AndroidCrypto
     {
         [DllImport(
             Libraries.AndroidCryptoNative,

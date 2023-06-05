@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         ),
         Shared
     ]
-    internal partial class CSharpUseNotPatternCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    partial internal class CSharpUseNotPatternCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [SuppressMessage(

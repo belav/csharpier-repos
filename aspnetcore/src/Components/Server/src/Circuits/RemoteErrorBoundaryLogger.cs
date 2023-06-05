@@ -8,7 +8,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-internal sealed partial class RemoteErrorBoundaryLogger : IErrorBoundaryLogger
+partial internal sealed class RemoteErrorBoundaryLogger : IErrorBoundaryLogger
 {
     private readonly ILogger _logger;
     private readonly IJSRuntime _jsRuntime;
@@ -46,7 +46,7 @@ internal sealed partial class RemoteErrorBoundaryLogger : IErrorBoundaryLogger
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             100,
@@ -54,7 +54,7 @@ internal sealed partial class RemoteErrorBoundaryLogger : IErrorBoundaryLogger
             "Unhandled exception rendering component: {Message}",
             EventName = "ExceptionCaughtByErrorBoundary"
         )]
-        public static partial void ExceptionCaughtByErrorBoundary(
+        partial public static void ExceptionCaughtByErrorBoundary(
             ILogger logger,
             string message,
             Exception exception

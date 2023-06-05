@@ -3,7 +3,7 @@
 
 namespace System.Runtime.CompilerServices
 {
-    public partial class RuntimeOps
+    partial public class RuntimeOps
     {
         /// <summary>
         /// Provides a list of variables, supporting read/write of the values

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct EdiPartyNameAsn
+    partial internal struct EdiPartyNameAsn
     {
         internal System.Security.Cryptography.Asn1.DirectoryStringAsn? NameAssigner;
         internal System.Security.Cryptography.Asn1.DirectoryStringAsn PartyName;

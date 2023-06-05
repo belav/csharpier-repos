@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text
 {
+    partial
     // ASCIIEncoding
     //
     // Note that ASCIIEncoding is optimized with no best fit and ? for fallback.
@@ -19,7 +20,7 @@ namespace System.Text
     // Note: IsAlwaysNormalized remains false because 1/2 the code points are unassigned, so they'd
     //       use fallbacks, and we cannot guarantee that fallbacks are normalized.
 
-    public partial class ASCIIEncoding : Encoding
+    public class ASCIIEncoding : Encoding
     {
         // This specialized sealed type has two benefits:
         // 1) it allows for devirtualization (see https://github.com/dotnet/coreclr/pull/9230), and

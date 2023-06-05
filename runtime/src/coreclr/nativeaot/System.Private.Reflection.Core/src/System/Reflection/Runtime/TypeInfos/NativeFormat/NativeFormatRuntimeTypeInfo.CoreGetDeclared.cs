@@ -15,7 +15,7 @@ using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeNamedTypeInfo
+    partial internal sealed class NativeFormatRuntimeNamedTypeInfo
     {
         internal sealed override IEnumerable<ConstructorInfo> CoreGetDeclaredConstructors(
             NameFilter optionalNameFilter,

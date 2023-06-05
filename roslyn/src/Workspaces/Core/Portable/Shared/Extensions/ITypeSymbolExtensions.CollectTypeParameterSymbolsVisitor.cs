@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal partial class ITypeSymbolExtensions
+    partial internal class ITypeSymbolExtensions
     {
         private class CollectTypeParameterSymbolsVisitor : SymbolVisitor
         {

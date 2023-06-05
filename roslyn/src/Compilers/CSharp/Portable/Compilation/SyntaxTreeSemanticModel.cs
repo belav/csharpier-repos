@@ -18,10 +18,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Allows asking semantic questions about any node in a SyntaxTree within a Compilation.
     /// </summary>
-    internal partial class SyntaxTreeSemanticModel : PublicSemanticModel
+    internal class SyntaxTreeSemanticModel : PublicSemanticModel
     {
         private readonly CSharpCompilation _compilation;
         private readonly SyntaxTree _syntaxTree;

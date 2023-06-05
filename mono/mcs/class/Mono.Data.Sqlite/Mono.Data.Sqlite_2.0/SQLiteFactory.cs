@@ -10,11 +10,12 @@ namespace Mono.Data.Sqlite
     using System;
     using System.Data.Common;
 
+    partial
 #if !PLATFORM_COMPACTFRAMEWORK
     /// <summary>
     /// SQLite implementation of DbProviderFactory.
     /// </summary>
-    public sealed partial class SqliteFactory : DbProviderFactory
+    public sealed class SqliteFactory : DbProviderFactory
     {
         /// <summary>
         /// Static instance member which returns an instanced SqliteFactory class.

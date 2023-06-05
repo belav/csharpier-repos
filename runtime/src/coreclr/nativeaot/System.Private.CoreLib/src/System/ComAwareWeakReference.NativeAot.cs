@@ -9,7 +9,7 @@ using System;
 
 namespace System
 {
-    internal sealed partial class ComAwareWeakReference
+    partial internal sealed class ComAwareWeakReference
     {
         internal static object? ComWeakRefToObject(IntPtr pComWeakRef, long wrapperId)
         {

@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public static partial class FileConfigurationExtensions
+    partial public static class FileConfigurationExtensions
     {
         public static System.Action<Microsoft.Extensions.Configuration.FileLoadExceptionContext>? GetFileLoadExceptionHandler(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder
@@ -47,7 +47,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public abstract partial class FileConfigurationProvider
+    partial public abstract class FileConfigurationProvider
         : Microsoft.Extensions.Configuration.ConfigurationProvider,
             System.IDisposable
     {
@@ -74,7 +74,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 
-    public abstract partial class FileConfigurationSource
+    partial public abstract class FileConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
         protected FileConfigurationSource() { }
@@ -122,7 +122,7 @@ namespace Microsoft.Extensions.Configuration
         public void ResolveFileProvider() { }
     }
 
-    public partial class FileLoadExceptionContext
+    partial public class FileLoadExceptionContext
     {
         public FileLoadExceptionContext() { }
 

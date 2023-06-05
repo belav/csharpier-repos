@@ -9,9 +9,9 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 {
-    internal partial class SyntacticClassificationTaggerProvider
+    partial internal class SyntacticClassificationTaggerProvider
     {
-        internal partial class TagComputer
+        partial internal class TagComputer
         {
             /// <summary>
             /// it is a helper class that encapsulates logic on holding onto last classification result

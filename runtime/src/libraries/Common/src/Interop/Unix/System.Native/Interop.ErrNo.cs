@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal unsafe partial class Sys
+    partial internal unsafe class Sys
     {
         [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_GetErrNo")]
         [SuppressGCTransition]
-        internal static partial int GetErrNo();
+        partial internal static int GetErrNo();
 
         [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_SetErrNo")]
         [SuppressGCTransition]
-        internal static partial void SetErrNo(int errorCode);
+        partial internal static void SetErrNo(int errorCode);
     }
 }

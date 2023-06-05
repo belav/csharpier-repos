@@ -95,7 +95,7 @@ namespace MonoTests.System.Web
             new WebTest(new HandlerInvoker(AddNode_delegate)).Run();
         }
 
-        static public void AddNode_delegate()
+        public static void AddNode_delegate()
         {
             StaticPoker poker = new StaticPoker();
 
@@ -115,7 +115,7 @@ namespace MonoTests.System.Web
             new WebTest(new HandlerInvoker(AddNode_delegate2)).Run();
         }
 
-        static public void AddNode_delegate2()
+        public static void AddNode_delegate2()
         {
             StaticPoker poker = new StaticPoker();
 
@@ -142,7 +142,7 @@ namespace MonoTests.System.Web
             new WebTest(new HandlerInvoker(AddNode2_nullParent_delegate)).Run();
         }
 
-        static public void AddNode2_nullParent_delegate()
+        public static void AddNode2_nullParent_delegate()
         {
             StaticPoker poker = new StaticPoker();
             poker.DoAddNode(new SiteMapNode(poker, "childKey", "childUrl"), null);
@@ -155,7 +155,7 @@ namespace MonoTests.System.Web
             new WebTest(new HandlerInvoker(AddNode2_delegate)).Run();
         }
 
-        static public void AddNode2_delegate()
+        public static void AddNode2_delegate()
         {
             StaticPoker poker = new StaticPoker();
             poker.DoAddNode(
@@ -171,7 +171,7 @@ namespace MonoTests.System.Web
             new WebTest(PageInvoker.CreateOnLoad(IsAccessibleFrom1_delegate)).Run();
         }
 
-        static public void IsAccessibleFrom1_delegate(Page page)
+        public static void IsAccessibleFrom1_delegate(Page page)
         {
             StaticPoker p = new StaticPoker();
             SiteMapNode n = new SiteMapNode(p, "childKey", "http://childUrl/");

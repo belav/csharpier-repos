@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class DiscretionaryAcl_GetBinaryForm
+    partial public class DiscretionaryAcl_GetBinaryForm
     {
         [Fact]
         public static void GetBinaryForm_BasicValidationTestCases()

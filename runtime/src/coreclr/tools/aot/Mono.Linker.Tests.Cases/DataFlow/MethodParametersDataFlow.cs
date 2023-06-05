@@ -202,7 +202,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [return: DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
         )]
-        static private Type ReturnThingsWithPublicParameterlessConstructor()
+        private static Type ReturnThingsWithPublicParameterlessConstructor()
         {
             return null;
         }

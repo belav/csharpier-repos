@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class GridViewPager : System.Web.UI.UserControl
+partial public class GridViewPager : System.Web.UI.UserControl
 {
     private GridView _gridView;
 

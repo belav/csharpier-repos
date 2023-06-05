@@ -37,7 +37,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             ) { }
     }
 
-    public abstract partial class CollectionTests_Metadata : CollectionTests
+    partial public abstract class CollectionTests_Metadata : CollectionTests
     {
         protected CollectionTests_Metadata(JsonSerializerWrapper serializerWrapper)
             : base(serializerWrapper) { }
@@ -496,10 +496,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(KeyValuePair<int, int>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, int>>))]
         [JsonSerializable(typeof(StackWrapper))]
-        internal sealed partial class CollectionTestsContext_Metadata : JsonSerializerContext { }
+        partial internal sealed class CollectionTestsContext_Metadata : JsonSerializerContext { }
     }
 
-    public partial class CollectionTests_Default : CollectionTests
+    partial public class CollectionTests_Default : CollectionTests
     {
         public CollectionTests_Default()
             : base(
@@ -941,6 +941,6 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(KeyValuePair<int, int>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, int>>))]
         [JsonSerializable(typeof(StackWrapper))]
-        internal sealed partial class CollectionTestsContext_Default : JsonSerializerContext { }
+        partial internal sealed class CollectionTestsContext_Default : JsonSerializerContext { }
     }
 }

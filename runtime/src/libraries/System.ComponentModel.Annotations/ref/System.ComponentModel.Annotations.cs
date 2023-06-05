@@ -6,7 +6,7 @@
 
 namespace System.ComponentModel.DataAnnotations
 {
-    public partial class AssociatedMetadataTypeTypeDescriptionProvider
+    partial public class AssociatedMetadataTypeTypeDescriptionProvider
         : System.ComponentModel.TypeDescriptionProvider
     {
         public AssociatedMetadataTypeTypeDescriptionProvider(System.Type type) { }
@@ -37,7 +37,7 @@ namespace System.ComponentModel.DataAnnotations
         Inherited = true
     )]
     [System.ObsoleteAttribute("AssociationAttribute has been deprecated and is not supported.")]
-    public sealed partial class AssociationAttribute : System.Attribute
+    partial public sealed class AssociationAttribute : System.Attribute
     {
         public AssociationAttribute(string name, string thisKey, string otherKey) { }
 
@@ -69,7 +69,7 @@ namespace System.ComponentModel.DataAnnotations
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property, AllowMultiple = false)]
-    public partial class CompareAttribute
+    partial public class CompareAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -109,7 +109,7 @@ namespace System.ComponentModel.DataAnnotations
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class ConcurrencyCheckAttribute : System.Attribute
+    partial public sealed class ConcurrencyCheckAttribute : System.Attribute
     {
         public ConcurrencyCheckAttribute() { }
     }
@@ -120,7 +120,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class CreditCardAttribute
+    partial public sealed class CreditCardAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public CreditCardAttribute()
@@ -140,7 +140,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = true
     )]
-    public sealed partial class CustomValidationAttribute
+    partial public sealed class CustomValidationAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public CustomValidationAttribute(
@@ -206,7 +206,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class DataTypeAttribute
+    partial public class DataTypeAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public DataTypeAttribute(System.ComponentModel.DataAnnotations.DataType dataType) { }
@@ -246,7 +246,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class DisplayAttribute : System.Attribute
+    partial public sealed class DisplayAttribute : System.Attribute
     {
         public DisplayAttribute() { }
 
@@ -346,7 +346,7 @@ namespace System.ComponentModel.DataAnnotations
         Inherited = true,
         AllowMultiple = false
     )]
-    public partial class DisplayColumnAttribute : System.Attribute
+    partial public class DisplayColumnAttribute : System.Attribute
     {
         public DisplayColumnAttribute(string displayColumn) { }
 
@@ -373,7 +373,7 @@ namespace System.ComponentModel.DataAnnotations
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class DisplayFormatAttribute : System.Attribute
+    partial public class DisplayFormatAttribute : System.Attribute
     {
         public DisplayFormatAttribute() { }
 
@@ -423,7 +423,7 @@ namespace System.ComponentModel.DataAnnotations
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class EditableAttribute : System.Attribute
+    partial public sealed class EditableAttribute : System.Attribute
     {
         public EditableAttribute(bool allowEdit) { }
 
@@ -444,7 +444,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class EmailAddressAttribute
+    partial public sealed class EmailAddressAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public EmailAddressAttribute()
@@ -463,7 +463,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class EnumDataTypeAttribute
+    partial public sealed class EnumDataTypeAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public EnumDataTypeAttribute(System.Type enumType)
@@ -486,7 +486,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class FileExtensionsAttribute
+    partial public sealed class FileExtensionsAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public FileExtensionsAttribute()
@@ -514,7 +514,7 @@ namespace System.ComponentModel.DataAnnotations
         AllowMultiple = false
     )]
     [System.ObsoleteAttribute("FilterUIHintAttribute has been deprecated and is not supported.")]
-    public sealed partial class FilterUIHintAttribute : System.Attribute
+    partial public sealed class FilterUIHintAttribute : System.Attribute
     {
         public FilterUIHintAttribute(string filterUIHint) { }
 
@@ -552,7 +552,7 @@ namespace System.ComponentModel.DataAnnotations
         }
     }
 
-    public partial interface IValidatableObject
+    partial public interface IValidatableObject
     {
         System.Collections.Generic.IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
@@ -564,7 +564,7 @@ namespace System.ComponentModel.DataAnnotations
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class KeyAttribute : System.Attribute
+    partial public sealed class KeyAttribute : System.Attribute
     {
         public KeyAttribute() { }
     }
@@ -575,7 +575,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class MaxLengthAttribute
+    partial public class MaxLengthAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -605,7 +605,7 @@ namespace System.ComponentModel.DataAnnotations
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = false)]
-    public sealed partial class MetadataTypeAttribute : System.Attribute
+    partial public sealed class MetadataTypeAttribute : System.Attribute
     {
         public MetadataTypeAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -629,7 +629,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class MinLengthAttribute
+    partial public class MinLengthAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -659,7 +659,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class PhoneAttribute
+    partial public sealed class PhoneAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public PhoneAttribute()
@@ -677,7 +677,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class RangeAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute
+    partial public class RangeAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public RangeAttribute(double minimum, double maximum) { }
 
@@ -739,7 +739,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class RegularExpressionAttribute
+    partial public class RegularExpressionAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public RegularExpressionAttribute(
@@ -777,7 +777,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class RequiredAttribute
+    partial public class RequiredAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public RequiredAttribute() { }
@@ -798,7 +798,7 @@ namespace System.ComponentModel.DataAnnotations
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class ScaffoldColumnAttribute : System.Attribute
+    partial public class ScaffoldColumnAttribute : System.Attribute
     {
         public ScaffoldColumnAttribute(bool scaffold) { }
 
@@ -814,7 +814,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class StringLengthAttribute
+    partial public class StringLengthAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public StringLengthAttribute(int maximumLength) { }
@@ -845,7 +845,7 @@ namespace System.ComponentModel.DataAnnotations
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class TimestampAttribute : System.Attribute
+    partial public sealed class TimestampAttribute : System.Attribute
     {
         public TimestampAttribute() { }
     }
@@ -854,7 +854,7 @@ namespace System.ComponentModel.DataAnnotations
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = true
     )]
-    public partial class UIHintAttribute : System.Attribute
+    partial public class UIHintAttribute : System.Attribute
     {
         public UIHintAttribute(string uiHint) { }
 
@@ -898,7 +898,7 @@ namespace System.ComponentModel.DataAnnotations
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class UrlAttribute
+    partial public sealed class UrlAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public UrlAttribute()
@@ -910,7 +910,7 @@ namespace System.ComponentModel.DataAnnotations
         }
     }
 
-    public abstract partial class ValidationAttribute : System.Attribute
+    partial public abstract class ValidationAttribute : System.Attribute
     {
         protected ValidationAttribute() { }
 
@@ -981,7 +981,7 @@ namespace System.ComponentModel.DataAnnotations
         public void Validate(object? value, string name) { }
     }
 
-    public sealed partial class ValidationContext : System.IServiceProvider
+    partial public sealed class ValidationContext : System.IServiceProvider
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
@@ -1036,7 +1036,7 @@ namespace System.ComponentModel.DataAnnotations
         public void InitializeServiceProvider(System.Func<System.Type, object?> serviceProvider) { }
     }
 
-    public partial class ValidationException : System.Exception
+    partial public class ValidationException : System.Exception
     {
         public ValidationException() { }
 
@@ -1075,7 +1075,7 @@ namespace System.ComponentModel.DataAnnotations
         }
     }
 
-    public partial class ValidationResult
+    partial public class ValidationResult
     {
         public static readonly System.ComponentModel.DataAnnotations.ValidationResult? Success;
 
@@ -1106,7 +1106,7 @@ namespace System.ComponentModel.DataAnnotations
         }
     }
 
-    public static partial class Validator
+    partial public static class Validator
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
@@ -1194,7 +1194,7 @@ namespace System.ComponentModel.DataAnnotations.Schema
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class ColumnAttribute : System.Attribute
+    partial public class ColumnAttribute : System.Attribute
     {
         public ColumnAttribute() { }
 
@@ -1219,7 +1219,7 @@ namespace System.ComponentModel.DataAnnotations.Schema
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = false)]
-    public partial class ComplexTypeAttribute : System.Attribute
+    partial public class ComplexTypeAttribute : System.Attribute
     {
         public ComplexTypeAttribute() { }
     }
@@ -1228,7 +1228,7 @@ namespace System.ComponentModel.DataAnnotations.Schema
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class DatabaseGeneratedAttribute : System.Attribute
+    partial public class DatabaseGeneratedAttribute : System.Attribute
     {
         public DatabaseGeneratedAttribute(
             System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption databaseGeneratedOption
@@ -1251,7 +1251,7 @@ namespace System.ComponentModel.DataAnnotations.Schema
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class ForeignKeyAttribute : System.Attribute
+    partial public class ForeignKeyAttribute : System.Attribute
     {
         public ForeignKeyAttribute(string name) { }
 
@@ -1265,7 +1265,7 @@ namespace System.ComponentModel.DataAnnotations.Schema
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class InversePropertyAttribute : System.Attribute
+    partial public class InversePropertyAttribute : System.Attribute
     {
         public InversePropertyAttribute(string property) { }
 
@@ -1281,13 +1281,13 @@ namespace System.ComponentModel.DataAnnotations.Schema
             | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public partial class NotMappedAttribute : System.Attribute
+    partial public class NotMappedAttribute : System.Attribute
     {
         public NotMappedAttribute() { }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = false)]
-    public partial class TableAttribute : System.Attribute
+    partial public class TableAttribute : System.Attribute
     {
         public TableAttribute(string name) { }
 

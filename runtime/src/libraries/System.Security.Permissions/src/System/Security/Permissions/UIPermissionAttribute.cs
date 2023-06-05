@@ -11,7 +11,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
-    public sealed partial class UIPermissionAttribute : CodeAccessSecurityAttribute
+    partial public sealed class UIPermissionAttribute : CodeAccessSecurityAttribute
     {
         public UIPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }

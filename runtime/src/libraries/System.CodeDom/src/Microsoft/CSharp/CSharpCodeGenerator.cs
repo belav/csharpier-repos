@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Microsoft.CSharp
 {
-    internal sealed partial class CSharpCodeGenerator : ICodeCompiler, ICodeGenerator
+    partial internal sealed class CSharpCodeGenerator : ICodeCompiler, ICodeGenerator
     {
         private static readonly char[] s_periodArray = new char[] { '.' };
 

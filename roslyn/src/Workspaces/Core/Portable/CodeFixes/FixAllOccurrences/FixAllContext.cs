@@ -16,10 +16,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
+    partial
     /// <summary>
     /// Context for "Fix all occurrences" code fixes provided by a <see cref="FixAllProvider"/>.
     /// </summary>
-    public partial class FixAllContext : IFixAllContext
+    public class FixAllContext : IFixAllContext
     {
         internal FixAllState State { get; }
 

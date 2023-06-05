@@ -149,7 +149,7 @@ namespace System.Data.Odbc
         }
     }
 
-    public static partial class ODBC32
+    partial public static class ODBC32
     {
         internal enum SQL_HANDLE : short
         {

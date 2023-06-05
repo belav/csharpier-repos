@@ -21,8 +21,9 @@ namespace System.Xml
     // Represents a reader that provides fast, non-cached forward only stream access to XML data.
 #if !SILVERLIGHT // This is used for displaying the state of the XmlReader in Watch/Locals windows in the Visual Studio during debugging
     [DebuggerDisplay("{debuggerDisplayProxy}")]
+    partial
 #endif
-    public abstract partial class XmlReader : IDisposable
+    public abstract class XmlReader : IDisposable
     {
         public virtual Task<string> GetValueAsync()
         {

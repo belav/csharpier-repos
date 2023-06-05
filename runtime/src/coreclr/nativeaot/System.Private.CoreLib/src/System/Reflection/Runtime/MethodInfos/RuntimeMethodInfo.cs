@@ -21,7 +21,7 @@ namespace System.Reflection.Runtime.MethodInfos
     // Abstract base class for RuntimeNamedMethodInfo, RuntimeConstructedGenericMethodInfo.
     //
     [DebuggerDisplay("{_debugName}")]
-    internal abstract partial class RuntimeMethodInfo : MethodInfo
+    partial internal abstract class RuntimeMethodInfo : MethodInfo
     {
         protected RuntimeMethodInfo() { }
 

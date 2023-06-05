@@ -12,10 +12,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
 {
+    partial
     /// <summary>
     /// Interaction logic for GenerateTypeDialog.xaml
     /// </summary>
-    internal partial class GenerateTypeDialog : DialogWindow
+    internal class GenerateTypeDialog : DialogWindow
     {
         private readonly GenerateTypeDialogViewModel _viewModel;
 

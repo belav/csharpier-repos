@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 {
-    internal abstract partial class AbstractGenerateConstructorFromMembersCodeRefactoringProvider
+    partial internal abstract class AbstractGenerateConstructorFromMembersCodeRefactoringProvider
     {
         private class State
         {

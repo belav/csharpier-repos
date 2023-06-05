@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.Net.Security;
     using System.Net.Sockets;
 
-    public partial class NetTcpBindingElement : StandardBindingElement
+    partial public class NetTcpBindingElement : StandardBindingElement
     {
         public NetTcpBindingElement(string name)
             : base(name) { }

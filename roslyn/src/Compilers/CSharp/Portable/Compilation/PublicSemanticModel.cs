@@ -7,12 +7,13 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Instances of this <see cref="SemanticModel"/> can be exposed to external consumers.
     /// Other types of <see cref="CSharpSemanticModel"/> are not designed for direct exposure
     /// and their implementation might not be able to handle external requests properly.
     /// </summary>
-    internal abstract partial class PublicSemanticModel : CSharpSemanticModel
+    internal abstract class PublicSemanticModel : CSharpSemanticModel
     {
         protected AttributeSemanticModel CreateModelForAttribute(
             Binder enclosingBinder,

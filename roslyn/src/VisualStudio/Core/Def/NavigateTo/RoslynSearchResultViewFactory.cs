@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.Search.Data;
 
 namespace Microsoft.CodeAnalysis.NavigateTo;
 
-internal sealed partial class RoslynSearchItemsSourceProvider
+partial internal sealed class RoslynSearchItemsSourceProvider
 {
     /// <summary>
     /// Implementation of the <see cref="ISearchResultViewFactory"/>.  Responsible for actually producing both the

@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public partial class StandardBindingReliableSessionElement : ServiceModelConfigurationElement
+    partial public class StandardBindingReliableSessionElement : ServiceModelConfigurationElement
     {
         public StandardBindingReliableSessionElement() { }
 

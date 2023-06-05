@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
     >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseNullPropagation)]
-    public partial class UseNullPropagationTests
+    partial public class UseNullPropagationTests
     {
         private static async Task TestInRegularAndScript1Async(
             string testCode,

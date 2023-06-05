@@ -7,12 +7,13 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// A class used to provide XML documentation to the compiler for members from metadata. A
     /// custom implementation of this class should be returned from a DocumentationResolver to provide XML
     /// documentation comments from custom caches or locations.
     /// </summary>
-    public abstract partial class DocumentationProvider
+    public abstract class DocumentationProvider
     {
         public static DocumentationProvider Default { get; } = new NullDocumentationProvider();
 

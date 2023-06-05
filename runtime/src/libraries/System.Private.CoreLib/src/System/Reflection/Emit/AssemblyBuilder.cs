@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class AssemblyBuilder : Assembly
+    partial public sealed class AssemblyBuilder : Assembly
     {
         [System.ObsoleteAttribute(
             "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location instead.",

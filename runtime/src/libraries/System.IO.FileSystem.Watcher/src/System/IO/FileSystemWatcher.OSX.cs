@@ -18,7 +18,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    public partial class FileSystemWatcher
+    partial public class FileSystemWatcher
     {
         /// <summary>Called when FileSystemWatcher is finalized.</summary>
         private void FinalizeDispose()
@@ -685,7 +685,7 @@ namespace System.IO
                 }
             }
 
-            private readonly ref struct ParsedEvent
+            ref private readonly struct ParsedEvent
             {
                 public ParsedEvent(ReadOnlySpan<char> path, char[] tempBuffer)
                 {

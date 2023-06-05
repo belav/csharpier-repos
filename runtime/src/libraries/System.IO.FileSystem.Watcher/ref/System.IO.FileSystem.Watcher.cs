@@ -6,7 +6,7 @@
 
 namespace System.IO
 {
-    public partial class ErrorEventArgs : System.EventArgs
+    partial public class ErrorEventArgs : System.EventArgs
     {
         public ErrorEventArgs(System.Exception exception) { }
 
@@ -18,7 +18,7 @@ namespace System.IO
 
     public delegate void ErrorEventHandler(object sender, System.IO.ErrorEventArgs e);
 
-    public partial class FileSystemEventArgs : System.EventArgs
+    partial public class FileSystemEventArgs : System.EventArgs
     {
         public FileSystemEventArgs(
             System.IO.WatcherChangeTypes changeType,
@@ -42,7 +42,7 @@ namespace System.IO
 
     public delegate void FileSystemEventHandler(object sender, System.IO.FileSystemEventArgs e);
 
-    public partial class FileSystemWatcher
+    partial public class FileSystemWatcher
         : System.ComponentModel.Component,
             System.ComponentModel.ISupportInitialize
     {
@@ -167,7 +167,7 @@ namespace System.IO
         }
     }
 
-    public partial class InternalBufferOverflowException : System.SystemException
+    partial public class InternalBufferOverflowException : System.SystemException
     {
         public InternalBufferOverflowException() { }
 
@@ -194,7 +194,7 @@ namespace System.IO
         Security = 256,
     }
 
-    public partial class RenamedEventArgs : System.IO.FileSystemEventArgs
+    partial public class RenamedEventArgs : System.IO.FileSystemEventArgs
     {
         public RenamedEventArgs(
             System.IO.WatcherChangeTypes changeType,
@@ -216,7 +216,7 @@ namespace System.IO
 
     public delegate void RenamedEventHandler(object sender, System.IO.RenamedEventArgs e);
 
-    public partial struct WaitForChangedResult
+    partial public struct WaitForChangedResult
     {
         private object _dummy;
         private int _dummyPrimitive;

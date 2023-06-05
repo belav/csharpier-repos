@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    public partial class Thread
+    partial public class Thread
     {
         [UnsupportedOSPlatformGuard("browser")]
         internal static bool IsThreadStartSupported => false;

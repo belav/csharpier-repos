@@ -845,7 +845,7 @@ namespace System.Reflection.Emit
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe public virtual void Emit(OpCode opcode, float arg)
+        public virtual unsafe void Emit(OpCode opcode, float arg)
         {
             EnsureCapacity(7);
             InternalEmit(opcode);
@@ -857,7 +857,7 @@ namespace System.Reflection.Emit
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe public virtual void Emit(OpCode opcode, double arg)
+        public virtual unsafe void Emit(OpCode opcode, double arg)
         {
             EnsureCapacity(11);
             InternalEmit(opcode);

@@ -10,11 +10,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 
+partial
 /// <summary>
 /// Initializes and processes the <see cref="ITagHelperComponent"/>s added to the
 /// <see cref="ITagHelperComponentManager.Components"/> in the specified order.
 /// </summary>
-public abstract partial class TagHelperComponentTagHelper : TagHelper
+public abstract class TagHelperComponentTagHelper : TagHelper
 {
     private readonly ILogger _logger;
     private readonly ITagHelperComponent[] _components;
@@ -90,7 +91,7 @@ public abstract partial class TagHelperComponentTagHelper : TagHelper
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             2,
@@ -99,7 +100,7 @@ public abstract partial class TagHelperComponentTagHelper : TagHelper
             EventName = "TagHelperComponentInitialized",
             SkipEnabledCheck = true
         )]
-        public static partial void TagHelperComponentInitialized(
+        partial public static void TagHelperComponentInitialized(
             ILogger logger,
             string componentName
         );
@@ -111,7 +112,7 @@ public abstract partial class TagHelperComponentTagHelper : TagHelper
             EventName = "TagHelperComponentProcessed",
             SkipEnabledCheck = true
         )]
-        public static partial void TagHelperComponentProcessed(
+        partial public static void TagHelperComponentProcessed(
             ILogger logger,
             string componentName
         );

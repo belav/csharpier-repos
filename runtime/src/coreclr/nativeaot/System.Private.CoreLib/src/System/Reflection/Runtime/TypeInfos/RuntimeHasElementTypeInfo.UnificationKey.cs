@@ -9,7 +9,7 @@ using System.Collections.Concurrent;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal abstract partial class RuntimeHasElementTypeInfo : RuntimeTypeInfo
+    partial internal abstract class RuntimeHasElementTypeInfo : RuntimeTypeInfo
     {
         //
         // Key for unification.

@@ -12,7 +12,7 @@ namespace System.IdentityModel.Configuration
         typeof(CustomTypeElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap
     )]
-    public sealed partial class SecurityTokenHandlerElementCollection
+    partial public sealed class SecurityTokenHandlerElementCollection
         : ConfigurationElementCollection
     {
         public SecurityTokenHandlerElementCollection() { }

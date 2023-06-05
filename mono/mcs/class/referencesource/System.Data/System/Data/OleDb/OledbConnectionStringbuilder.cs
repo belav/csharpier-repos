@@ -986,12 +986,12 @@ namespace System.Data.OleDb
             }
         }
 
-        sealed internal class OleDbConnectionStringBuilderConverter : ExpandableObjectConverter
+        internal sealed class OleDbConnectionStringBuilderConverter : ExpandableObjectConverter
         {
             // converter classes should have public ctor
             public OleDbConnectionStringBuilderConverter() { }
 
-            override public bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
                 if (
                     typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
@@ -1003,7 +1003,7 @@ namespace System.Data.OleDb
                 return base.CanConvertTo(context, destinationType);
             }
 
-            override public object ConvertTo(
+            public override object ConvertTo(
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value,

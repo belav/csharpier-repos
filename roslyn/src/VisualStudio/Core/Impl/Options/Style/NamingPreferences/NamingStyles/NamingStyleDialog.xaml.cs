@@ -9,10 +9,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.NamingPreferences
 {
+    partial
     /// <summary>
     /// Interaction logic for NamingStyleDialog.xaml
     /// </summary>
-    internal partial class NamingStyleDialog : DialogWindow
+    internal class NamingStyleDialog : DialogWindow
     {
         private readonly NamingStyleViewModel _viewModel;
 

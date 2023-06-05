@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundSwitchStatement
+    partial internal class BoundSwitchStatement
     {
         public BoundDecisionDag GetDecisionDagForLowering(CSharpCompilation compilation)
         {

@@ -11,9 +11,9 @@ using Microsoft.VisualStudio.Shell.TableControl;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 {
-    internal sealed partial class SettingsEditorPane
+    partial internal sealed class SettingsEditorPane
     {
-        private partial class SearchHandler : IVsWindowSearch
+        partial private class SearchHandler : IVsWindowSearch
         {
             private readonly IThreadingContext _threadingContext;
             private readonly int _controlMinWidth;

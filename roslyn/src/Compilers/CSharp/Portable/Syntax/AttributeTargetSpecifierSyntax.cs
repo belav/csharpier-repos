@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public sealed partial class AttributeTargetSpecifierSyntax : CSharpSyntaxNode
+    partial public sealed class AttributeTargetSpecifierSyntax : CSharpSyntaxNode
     {
         internal AttributeLocation GetAttributeLocation()
         {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Collections.Immutable
 {
-    public readonly partial struct ImmutableArray<T>
+    partial public readonly struct ImmutableArray<T>
         : IReadOnlyList<T>,
             IList<T>,
             IEquatable<ImmutableArray<T>>,

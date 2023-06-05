@@ -19,15 +19,17 @@ namespace System.Runtime.InteropServices
         MarshallingGlobalInstance = 2,
     }
 
+    partial
     /// <summary>
     /// Class for managing wrappers of COM IUnknown types.
     /// </summary>
-    public abstract partial class ComWrappers
+    public abstract class ComWrappers
     {
+        partial
         /// <summary>
         /// ABI for function dispatch of a COM interface.
         /// </summary>
-        public partial struct ComInterfaceDispatch
+        public struct ComInterfaceDispatch
         {
             /// <summary>
             /// Given a <see cref="System.IntPtr"/> from a generated Vtable, convert to the target type.
@@ -124,7 +126,7 @@ namespace System.Runtime.InteropServices
             EntryPoint = "ComWrappers_TryGetOrCreateComInterfaceForObject"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool TryGetOrCreateComInterfaceForObjectInternal(
+        partial private static bool TryGetOrCreateComInterfaceForObjectInternal(
             ObjectHandleOnStack comWrappersImpl,
             long wrapperId,
             ObjectHandleOnStack instance,
@@ -337,7 +339,7 @@ namespace System.Runtime.InteropServices
             EntryPoint = "ComWrappers_TryGetOrCreateObjectForComInstance"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool TryGetOrCreateObjectForComInstanceInternal(
+        partial private static bool TryGetOrCreateObjectForComInstanceInternal(
             ObjectHandleOnStack comWrappersImpl,
             long wrapperId,
             IntPtr externalComObject,
@@ -390,7 +392,7 @@ namespace System.Runtime.InteropServices
             EntryPoint = "ComWrappers_SetGlobalInstanceRegisteredForTrackerSupport"
         )]
         [SuppressGCTransition]
-        private static partial void SetGlobalInstanceRegisteredForTrackerSupport(long id);
+        partial private static void SetGlobalInstanceRegisteredForTrackerSupport(long id);
 
         /// <summary>
         /// Register a <see cref="ComWrappers" /> instance to be used as the global instance for marshalling in the runtime.
@@ -431,7 +433,7 @@ namespace System.Runtime.InteropServices
             EntryPoint = "ComWrappers_SetGlobalInstanceRegisteredForMarshalling"
         )]
         [SuppressGCTransition]
-        private static partial void SetGlobalInstanceRegisteredForMarshalling(long id);
+        partial private static void SetGlobalInstanceRegisteredForMarshalling(long id);
 
         /// <summary>
         /// Get the runtime provided IUnknown implementation.
@@ -446,7 +448,7 @@ namespace System.Runtime.InteropServices
         ) => GetIUnknownImplInternal(out fpQueryInterface, out fpAddRef, out fpRelease);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ComWrappers_GetIUnknownImpl")]
-        private static partial void GetIUnknownImplInternal(
+        partial private static void GetIUnknownImplInternal(
             out IntPtr fpQueryInterface,
             out IntPtr fpAddRef,
             out IntPtr fpRelease

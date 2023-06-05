@@ -5,13 +5,13 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(Libraries.Gdi32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool OffsetViewportOrgEx(IntPtr hdc, int x, int y, ref Point lppt);
+        partial public static bool OffsetViewportOrgEx(IntPtr hdc, int x, int y, ref Point lppt);
 
         public static bool OffsetViewportOrgEx(HandleRef hdc, int x, int y, ref Point lppt)
         {

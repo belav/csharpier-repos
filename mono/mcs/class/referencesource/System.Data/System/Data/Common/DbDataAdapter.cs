@@ -121,7 +121,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbDataAdapter_UpdateBatchSize),
         ]
-        virtual public int UpdateBatchSize
+        public virtual int UpdateBatchSize
         {
             get { return 1; }
             set
@@ -184,7 +184,7 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        virtual protected void ClearBatch()
+        protected virtual void ClearBatch()
         {
             // Called when batch updates are requested to clear out the contents
             // of the batch, whether or not it's been executed.
@@ -215,7 +215,7 @@ namespace System.Data.Common
             return (IDbCommand)((command is ICloneable) ? ((ICloneable)command).Clone() : null);
         }
 
-        virtual protected RowUpdatedEventArgs CreateRowUpdatedEvent(
+        protected virtual RowUpdatedEventArgs CreateRowUpdatedEvent(
             DataRow dataRow,
             IDbCommand command,
             StatementType statementType,
@@ -225,7 +225,7 @@ namespace System.Data.Common
             return new RowUpdatedEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-        virtual protected RowUpdatingEventArgs CreateRowUpdatingEvent(
+        protected virtual RowUpdatingEventArgs CreateRowUpdatingEvent(
             DataRow dataRow,
             IDbCommand command,
             StatementType statementType,
@@ -235,7 +235,7 @@ namespace System.Data.Common
             return new RowUpdatingEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-        override protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         { // V1.0.3300, MDAC 69629
             if (disposing)
             { // release mananged objects
@@ -279,7 +279,7 @@ namespace System.Data.Common
             }
         }
 
-        override public DataTable[] FillSchema(DataSet dataSet, SchemaType schemaType)
+        public override DataTable[] FillSchema(DataSet dataSet, SchemaType schemaType)
         { // V1.0.3300
             IntPtr hscp;
             Bid.ScopeEnter(
@@ -339,7 +339,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected DataTable[] FillSchema(
+        protected virtual DataTable[] FillSchema(
             DataSet dataSet,
             SchemaType schemaType,
             IDbCommand command,
@@ -387,7 +387,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected DataTable FillSchema(
+        protected virtual DataTable FillSchema(
             DataTable dataTable,
             SchemaType schemaType,
             IDbCommand command,
@@ -491,7 +491,7 @@ namespace System.Data.Common
             return dataTables;
         }
 
-        override public int Fill(DataSet dataSet)
+        public override int Fill(DataSet dataSet)
         { // V1.0.3300
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<comm.DbDataAdapter.Fill|API> %d#, dataSet\n", ObjectID);
@@ -561,7 +561,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected int Fill(
+        protected virtual int Fill(
             DataSet dataSet,
             int startRecord,
             int maxRecords,
@@ -656,7 +656,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected int Fill(
+        protected virtual int Fill(
             DataTable dataTable,
             IDbCommand command,
             CommandBehavior behavior
@@ -681,7 +681,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected int Fill(
+        protected virtual int Fill(
             DataTable[] dataTables,
             int startRecord,
             int maxRecords,
@@ -815,7 +815,7 @@ namespace System.Data.Common
             return rowsAddedToDataSet;
         }
 
-        virtual protected IDataParameter GetBatchedParameter(
+        protected virtual IDataParameter GetBatchedParameter(
             int commandIdentifier,
             int parameterIndex
         )
@@ -827,7 +827,7 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        virtual protected bool GetBatchedRecordsAffected(
+        protected virtual bool GetBatchedRecordsAffected(
             int commandIdentifier,
             out int recordsAffected,
             out Exception error
@@ -847,7 +847,7 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)] // MDAC 69508
-        override public IDataParameter[] GetFillParameters()
+        public override IDataParameter[] GetFillParameters()
         { // V1.0.3300
             IDataParameter[] value = null;
             IDbCommand select = _IDbDataAdapter.SelectCommand;
@@ -886,7 +886,7 @@ namespace System.Data.Common
             return tableMapping;
         }
 
-        virtual protected void InitializeBatching()
+        protected virtual void InitializeBatching()
         {
             // Called when batch updates are requested to prepare for processing
             // of a batch of commands.
@@ -894,12 +894,12 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        virtual protected void OnRowUpdated(
+        protected virtual void OnRowUpdated(
             RowUpdatedEventArgs value
         ) { // V1.0.3300
         }
 
-        virtual protected void OnRowUpdating(
+        protected virtual void OnRowUpdating(
             RowUpdatingEventArgs value
         ) { // V1.0.3300
         }
@@ -1020,7 +1020,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected void TerminateBatching()
+        protected virtual void TerminateBatching()
         {
             // Called when batch updates are requested to cleanup after a batch
             // update has been completed.
@@ -1028,7 +1028,7 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        override public int Update(DataSet dataSet)
+        public override int Update(DataSet dataSet)
         { // V1.0.3300
             //if (!TableMappings.Contains(DbDataAdapter.DefaultSourceTableName)) { // MDAC 59268
             //    throw ADP.UpdateRequiresSourceTable(DbDataAdapter.DefaultSourceTableName);
@@ -1171,7 +1171,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected int Update(DataRow[] dataRows, DataTableMapping tableMapping)
+        protected virtual int Update(DataRow[] dataRows, DataTableMapping tableMapping)
         { // V1.0.3300
             IntPtr hscp;
             Bid.ScopeEnter(
@@ -2201,7 +2201,7 @@ namespace System.Data.Common
             }
         }
 
-        static private IDbConnection GetConnection1(DbDataAdapter adapter)
+        private static IDbConnection GetConnection1(DbDataAdapter adapter)
         {
             IDbCommand command = adapter._IDbDataAdapter.SelectCommand;
             if (null == command)
@@ -2228,7 +2228,7 @@ namespace System.Data.Common
             return connection;
         }
 
-        static private IDbConnection GetConnection3(
+        private static IDbConnection GetConnection3(
             DbDataAdapter adapter,
             IDbCommand command,
             string method
@@ -2244,7 +2244,7 @@ namespace System.Data.Common
             return connection;
         }
 
-        static private IDbConnection GetConnection4(
+        private static IDbConnection GetConnection4(
             DbDataAdapter adapter,
             IDbCommand command,
             StatementType statementType,
@@ -2260,7 +2260,7 @@ namespace System.Data.Common
             return connection;
         }
 
-        static private DataRowVersion GetParameterSourceVersion(
+        private static DataRowVersion GetParameterSourceVersion(
             StatementType statementType,
             IDataParameter parameter
         )
@@ -2281,7 +2281,7 @@ namespace System.Data.Common
             }
         }
 
-        static private void QuietClose(IDbConnection connection, ConnectionState originalState)
+        private static void QuietClose(IDbConnection connection, ConnectionState originalState)
         {
             // close the connection if:
             // * it was closed on first use and adapter has opened it, AND
@@ -2297,7 +2297,11 @@ namespace System.Data.Common
         // QuietOpen needs to appear in the try {} finally { QuietClose } block
         // otherwise a possibility exists that an exception may be thrown, i.e. ThreadAbortException
         // where we would Open the connection and not close it
-        static private void QuietOpen(IDbConnection connection, out ConnectionState originalState)
+        private
+        // QuietOpen needs to appear in the try {} finally { QuietClose } block
+        // otherwise a possibility exists that an exception may be thrown, i.e. ThreadAbortException
+        // where we would Open the connection and not close it
+        static void QuietOpen(IDbConnection connection, out ConnectionState originalState)
         {
             Debug.Assert(null != connection, "QuietOpen: null connection");
             originalState = connection.State;

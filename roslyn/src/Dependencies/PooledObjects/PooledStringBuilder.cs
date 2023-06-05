@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Microsoft.CodeAnalysis.PooledObjects
 {
+    partial
     /// <summary>
     /// The usage is:
     ///        var inst = PooledStringBuilder.GetInstance();
@@ -15,7 +16,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
     ///        ... sb.ToString() ...
     ///        inst.Free();
     /// </summary>
-    internal sealed partial class PooledStringBuilder
+    internal sealed class PooledStringBuilder
     {
         public readonly StringBuilder Builder = new();
         private readonly ObjectPool<PooledStringBuilder> _pool;

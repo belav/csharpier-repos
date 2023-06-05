@@ -7,7 +7,7 @@
 namespace Microsoft.Extensions.Logging
 {
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public static partial class ConsoleLoggerExtensions
+    partial public static class ConsoleLoggerExtensions
     {
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddConsole(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder
@@ -120,7 +120,7 @@ namespace Microsoft.Extensions.Logging
 
 namespace Microsoft.Extensions.Logging.Console
 {
-    public abstract partial class ConsoleFormatter
+    partial public abstract class ConsoleFormatter
     {
         protected ConsoleFormatter(string name) { }
 
@@ -135,14 +135,14 @@ namespace Microsoft.Extensions.Logging.Console
         );
     }
 
-    public static partial class ConsoleFormatterNames
+    partial public static class ConsoleFormatterNames
     {
         public const string Json = "json";
         public const string Simple = "simple";
         public const string Systemd = "systemd";
     }
 
-    public partial class ConsoleFormatterOptions
+    partial public class ConsoleFormatterOptions
     {
         public ConsoleFormatterOptions() { }
 
@@ -172,7 +172,7 @@ namespace Microsoft.Extensions.Logging.Console
         Systemd = 1,
     }
 
-    public partial class ConsoleLoggerOptions
+    partial public class ConsoleLoggerOptions
     {
         public ConsoleLoggerOptions() { }
 
@@ -244,7 +244,7 @@ namespace Microsoft.Extensions.Logging.Console
 
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("Console")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class ConsoleLoggerProvider
+    partial public class ConsoleLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
             Microsoft.Extensions.Logging.ISupportExternalScope,
             System.IDisposable
@@ -276,7 +276,7 @@ namespace Microsoft.Extensions.Logging.Console
         DropWrite = 1,
     }
 
-    public partial class JsonConsoleFormatterOptions
+    partial public class JsonConsoleFormatterOptions
         : Microsoft.Extensions.Logging.Console.ConsoleFormatterOptions
     {
         public JsonConsoleFormatterOptions() { }
@@ -295,7 +295,7 @@ namespace Microsoft.Extensions.Logging.Console
         Disabled = 2,
     }
 
-    public partial class SimpleConsoleFormatterOptions
+    partial public class SimpleConsoleFormatterOptions
         : Microsoft.Extensions.Logging.Console.ConsoleFormatterOptions
     {
         public SimpleConsoleFormatterOptions() { }

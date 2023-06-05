@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
-public partial class DetectMisplacedLambdaAttributeTest
+partial public class DetectMisplacedLambdaAttributeTest
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new RouteHandlerAnalyzer());
 

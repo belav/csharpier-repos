@@ -12,7 +12,7 @@ namespace System.Text.Json
     ///   Represents a specific JSON value within a <see cref="JsonDocument"/>.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public readonly partial struct JsonElement
+    partial public readonly struct JsonElement
     {
         private readonly JsonDocument _parent;
         private readonly int _idx;

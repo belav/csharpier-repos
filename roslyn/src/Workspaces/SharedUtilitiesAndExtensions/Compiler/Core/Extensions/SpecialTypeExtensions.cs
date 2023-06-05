@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class SpecialTypeExtensions
+    partial internal static class SpecialTypeExtensions
     {
         public static PredefinedType ToPredefinedType(this SpecialType specialType) =>
             specialType switch

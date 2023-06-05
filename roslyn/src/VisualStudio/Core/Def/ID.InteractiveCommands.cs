@@ -8,7 +8,7 @@ using System;
 
 namespace Microsoft.VisualStudio.LanguageServices
 {
-    internal static partial class ID
+    partial internal static class ID
     {
         internal static class InteractiveCommands
         {

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public partial class TarReader_TarEntry_ExtractToFile_Tests : TarTestsBase
+    partial public class TarReader_TarEntry_ExtractToFile_Tests : TarTestsBase
     {
         [Fact]
         public void EntriesWithSlashDotPrefix()

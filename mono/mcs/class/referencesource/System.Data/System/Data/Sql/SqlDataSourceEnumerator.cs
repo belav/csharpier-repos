@@ -40,7 +40,7 @@ namespace System.Data.Sql
             get { return SqlDataSourceEnumerator.SingletonInstance; }
         }
 
-        override public DataTable GetDataSources()
+        public override DataTable GetDataSources()
         {
 #if MONO
             timeoutTime = 0;
@@ -118,7 +118,7 @@ namespace System.Data.Sql
         private static int _clusterLength = _Cluster.Length;
         private static int _versionLength = _Version.Length;
 
-        static private DataTable ParseServerEnumString(string serverInstances)
+        private static DataTable ParseServerEnumString(string serverInstances)
         {
             DataTable dataTable = new DataTable("SqlDataSources");
             dataTable.Locale = CultureInfo.InvariantCulture;

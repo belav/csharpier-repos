@@ -9,7 +9,7 @@ using System.Text;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class DynamicMethod : MethodInfo
+    partial public sealed class DynamicMethod : MethodInfo
     {
         // The context when the method was created. We use this to do the RestrictedMemberAccess checks.
         // These checks are done when the method is compiled. This can happen at an arbitrary time,

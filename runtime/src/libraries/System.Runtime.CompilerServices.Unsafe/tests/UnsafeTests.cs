@@ -1185,7 +1185,7 @@ namespace System.Runtime.CompilerServices
 
     public unsafe struct Byte512
     {
-        public fixed byte Bytes[512];
+        fixed public byte Bytes[512];
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 16)]

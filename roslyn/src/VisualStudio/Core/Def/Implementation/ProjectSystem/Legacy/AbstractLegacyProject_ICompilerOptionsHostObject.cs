@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Inter
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy
 {
-    internal partial class AbstractLegacyProject : ICompilerOptionsHostObject
+    partial internal class AbstractLegacyProject : ICompilerOptionsHostObject
     {
         int ICompilerOptionsHostObject.SetCompilerOptions(
             string compilerOptions,

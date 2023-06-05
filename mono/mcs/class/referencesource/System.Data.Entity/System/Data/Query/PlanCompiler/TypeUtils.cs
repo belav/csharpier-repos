@@ -37,6 +37,7 @@ using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.PlanCompiler
 {
+    internal
     /// <summary>
     /// This class is used as a Comparer for Types all through the PlanCompiler.
     /// It has a pretty strict definition of type equality - which pretty much devolves
@@ -51,7 +52,7 @@ namespace System.Data.Query.PlanCompiler
     /// Again, this is different from other parts of  the query pipeline; and we're much stricter here
     ///
     /// </summary>
-    sealed internal class TypeUsageEqualityComparer : IEqualityComparer<md.TypeUsage>
+    sealed class TypeUsageEqualityComparer : IEqualityComparer<md.TypeUsage>
     {
         private TypeUsageEqualityComparer() { }
 

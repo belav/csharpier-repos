@@ -6,8 +6,9 @@ using System;
 using System.Resources;
 using System.Reflection;
 
+partial
 // needed for ../referencesource/System.Data/System/Data/CodeGen/datacache.cs
-internal static partial class Res
+internal static class Res
 {
     internal static string GetString(string name) => name;
 
@@ -57,7 +58,7 @@ internal static partial class Res
         "{0} requires open connection when the quote prefix has not been set.";
 }
 
-internal static partial class SR
+partial internal static class SR
 {
     public static string GetResourceString(string resourceKey, string defaultString)
     {

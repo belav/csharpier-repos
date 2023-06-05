@@ -5,7 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
-public abstract partial class ModelBuilderTest
+partial public abstract class ModelBuilderTest
 {
     public abstract class ManyToOneTestBase : ModelBuilderTestBase
     {

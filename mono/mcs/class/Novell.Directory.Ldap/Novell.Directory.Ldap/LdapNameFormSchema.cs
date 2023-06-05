@@ -49,34 +49,37 @@ namespace Novell.Directory.Ldap
 
     public class LdapNameFormSchema : LdapSchemaElement
     {
+        public
         /// <summary> Returns the name of the object class which this name form applies to.
         ///
         /// </summary>
         /// <returns> The name of the object class.
         /// </returns>
-        virtual public System.String ObjectClass
+        virtual System.String ObjectClass
         {
             get { return objectClass; }
         }
 
+        public
         /// <summary> Returns the list of required naming attributes for an entry
         /// controlled by this name form.
         ///
         /// </summary>
         /// <returns> The list of required naming attributes.
         /// </returns>
-        virtual public System.String[] RequiredNamingAttributes
+        virtual System.String[] RequiredNamingAttributes
         {
             get { return required; }
         }
 
+        public
         /// <summary> Returns the list of optional naming attributes for an entry
         /// controlled by this content rule.
         ///
         /// </summary>
         /// <returns> The list of the optional naming attributes.
         /// </returns>
-        virtual public System.String[] OptionalNamingAttributes
+        virtual System.String[] OptionalNamingAttributes
         {
             get { return optional; }
         }

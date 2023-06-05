@@ -12,11 +12,12 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
+    partial
     /// <summary>
     /// The NamedPipeSettingElement provides configuration support for the NamedPipeSetttings
     /// on the NamedPipeTransportBinding element.
     /// </summary>
-    public sealed partial class NamedPipeSettingsElement : ServiceModelConfigurationElement
+    public sealed class NamedPipeSettingsElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(ConfigurationStrings.ApplicationContainerSettings)]
         public ApplicationContainerSettingsElement ApplicationContainerSettings

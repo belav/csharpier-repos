@@ -6,7 +6,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.PooledObjects
 {
-    internal partial class PooledHashSet<T> : IPooled, IReadOnlySet<T>
+    partial internal class PooledHashSet<T> : IPooled, IReadOnlySet<T>
     {
         public static PooledDisposer<PooledHashSet<T>> GetInstance(out PooledHashSet<T> instance)
         {

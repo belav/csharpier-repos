@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
-    public partial class CodeGenOptimizedNullableOperatorTests : CSharpTestBase
+    partial public class CodeGenOptimizedNullableOperatorTests : CSharpTestBase
     {
         [Fact]
         public void TestNullableBoxingConversionsAlwaysNull()

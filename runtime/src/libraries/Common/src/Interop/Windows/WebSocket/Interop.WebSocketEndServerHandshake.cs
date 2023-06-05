@@ -7,11 +7,11 @@ using System.Security;
 using System.Diagnostics;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WebSocket
+    partial internal static class WebSocket
     {
         [LibraryImport(Libraries.WebSocket)]
-        internal static partial int WebSocketEndServerHandshake(SafeHandle webSocketHandle);
+        partial internal static int WebSocketEndServerHandshake(SafeHandle webSocketHandle);
     }
 }

@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateType
 {
-    internal abstract partial class AbstractGenerateTypeService<
+    partial internal abstract class AbstractGenerateTypeService<
         TService,
         TSimpleNameSyntax,
         TObjectCreationExpressionSyntax,

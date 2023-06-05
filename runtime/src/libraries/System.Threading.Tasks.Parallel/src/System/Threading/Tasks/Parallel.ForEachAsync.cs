@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Threading.Tasks
 {
-    public static partial class Parallel
+    partial public static class Parallel
     {
         /// <summary>Executes a for each operation on an <see cref="System.Collections.Generic.IEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>

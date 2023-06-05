@@ -13,7 +13,7 @@ namespace System.Security.Cryptography
     ///     Abstract base class for implementations of elliptic curve Diffie-Hellman to derive from
     /// </summary>
     [UnsupportedOSPlatform("browser")]
-    public abstract partial class ECDiffieHellman : AsymmetricAlgorithm
+    partial public abstract class ECDiffieHellman : AsymmetricAlgorithm
     {
         private static readonly string[] s_validOids =
         {

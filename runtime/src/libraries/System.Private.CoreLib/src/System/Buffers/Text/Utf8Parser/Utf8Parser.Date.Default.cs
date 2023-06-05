@@ -3,7 +3,7 @@
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Parser
+    partial public static class Utf8Parser
     {
         //
         // ToString() format for DateTimeOffset. Does not have a corresponding format symbol but it

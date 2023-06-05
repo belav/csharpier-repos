@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Json.Tests.Serialization
 {
-    public static partial class MetadataServicesTests
+    partial public static class MetadataServicesTests
     {
         [Fact]
         public static void JsonSerializerContextCtor()

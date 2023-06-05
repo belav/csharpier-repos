@@ -5,7 +5,7 @@ using XPathTests.Common;
 
 namespace XPathTests.Common
 {
-    public static partial class Utils
+    partial public static class Utils
     {
         private static readonly ICreateNavigator _navigatorCreator =
             new CreateNavigatorFromXmlDocument();

@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MexNamedPipeBindingElement
+    partial public class MexNamedPipeBindingElement
         : MexBindingElement<CustomBinding>,
             IBindingConfigurationElement
     {

@@ -11,7 +11,7 @@ using static System.Environment;
 
 namespace System.CommandLine.Tests.Help
 {
-    public partial class HelpBuilderTests
+    partial public class HelpBuilderTests
     {
         public class Customization
         {

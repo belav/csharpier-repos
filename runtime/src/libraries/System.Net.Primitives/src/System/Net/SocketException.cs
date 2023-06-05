@@ -11,7 +11,7 @@ namespace System.Net.Sockets
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial class SocketException : Win32Exception
+    partial public class SocketException : Win32Exception
     {
         /// <summary>The SocketError or Int32 specified when constructing the exception.</summary>
         /// <remarks>Based on platform, this may or may not be the same as the underlying NativeErrorCode.</remarks>

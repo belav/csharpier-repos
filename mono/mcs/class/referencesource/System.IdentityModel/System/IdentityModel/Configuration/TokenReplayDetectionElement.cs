@@ -7,10 +7,11 @@ using System.ComponentModel;
 
 namespace System.IdentityModel.Configuration
 {
+    partial
     /// <summary>
     /// Manages the configuration of a TokenReplayDetection element
     /// </summary>
-    public sealed partial class TokenReplayDetectionElement : ConfigurationElement
+    public sealed class TokenReplayDetectionElement : ConfigurationElement
     {
         /// <summary>
         /// Enabled, optional.  Specifies if replays should be detected.

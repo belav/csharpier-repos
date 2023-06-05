@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class SystemAcl_AddAudit
+    partial public class SystemAcl_AddAudit
     {
         public static IEnumerable<object[]> SystemAcl_AddAudit_TestData()
         {

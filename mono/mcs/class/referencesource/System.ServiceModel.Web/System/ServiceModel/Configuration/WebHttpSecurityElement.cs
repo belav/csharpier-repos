@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Configuration;
 
-    public sealed partial class WebHttpSecurityElement : ServiceModelConfigurationElement
+    partial public sealed class WebHttpSecurityElement : ServiceModelConfigurationElement
     {
         ConfigurationPropertyCollection properties;
 

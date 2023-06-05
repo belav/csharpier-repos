@@ -3,9 +3,9 @@
 
 namespace System.Net.Test.Common
 {
-    public static partial class Configuration
+    partial public static class Configuration
     {
-        public static partial class Ping
+        partial public static class Ping
         {
             // Host not on same network with ability to respond to ICMP Echo
             public static string PingHost =>

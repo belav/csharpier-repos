@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public sealed partial class PropertyNameTestsDynamic : PropertyNameTests
+    partial public sealed class PropertyNameTestsDynamic : PropertyNameTests
     {
         public PropertyNameTestsDynamic()
             : base(JsonSerializerWrapper.StringSerializer) { }

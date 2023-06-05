@@ -9,7 +9,7 @@ using System.Runtime.InteropServices.Marshalling;
 #endif
 using System.Security.Authentication;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     public const int SEC_WINNT_AUTH_IDENTITY_UNICODE = 0x2;
     public const int SEC_WINNT_AUTH_IDENTITY_VERSION = 0x200;

@@ -3,9 +3,9 @@
 
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         internal sealed class SslException : Exception
         {
@@ -19,7 +19,7 @@ internal static partial class Interop
         }
     }
 
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         internal static Exception CreateExceptionForOSStatus(int osStatus)
         {

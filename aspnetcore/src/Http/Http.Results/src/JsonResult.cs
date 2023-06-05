@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+partial
 /// <summary>
 /// An action result which formats the given object as JSON.
 /// </summary>
-internal sealed partial class JsonResult : IResult
+internal sealed class JsonResult : IResult
 {
     /// <summary>
     /// Gets or sets the <see cref="Net.Http.Headers.MediaTypeHeaderValue"/> representing the Content-Type header of the response.
@@ -57,7 +58,7 @@ internal sealed partial class JsonResult : IResult
         return httpContext.Response.WriteAsJsonAsync(Value, JsonSerializerOptions, ContentType);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void JsonResultExecuting(ILogger logger, object? value)
         {
@@ -75,6 +76,6 @@ internal sealed partial class JsonResult : IResult
             EventName = "JsonResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void JsonResultExecuting(ILogger logger, string type);
+        partial private static void JsonResultExecuting(ILogger logger, string type);
     }
 }

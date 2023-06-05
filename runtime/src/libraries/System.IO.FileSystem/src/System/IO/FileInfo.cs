@@ -13,9 +13,10 @@ namespace Microsoft.IO
 namespace System.IO
 #endif
 {
+    partial
     // Class for creating FileStream objects, and some basic file management
     // routines such as Delete, etc.
-    public sealed partial class FileInfo : FileSystemInfo
+    public sealed class FileInfo : FileSystemInfo
     {
         private FileInfo() { }
 

@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         public static long TickCount64 => (long)RuntimeImports.RhpGetTickCount64();
 

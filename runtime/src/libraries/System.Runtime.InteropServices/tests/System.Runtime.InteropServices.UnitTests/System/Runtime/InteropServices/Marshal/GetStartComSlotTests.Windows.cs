@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetStartComSlotTests
+    partial public class GetStartComSlotTests
     {
         public static IEnumerable<object[]> GetStartComSlot_TestData()
         {

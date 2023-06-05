@@ -19,7 +19,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForEachToFor
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToFor)]
-    public partial class ConvertForEachToForTests : AbstractCSharpCodeActionTest
+    partial public class ConvertForEachToForTests : AbstractCSharpCodeActionTest
     {
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,

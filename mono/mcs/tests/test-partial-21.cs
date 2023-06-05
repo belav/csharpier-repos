@@ -7,7 +7,7 @@ namespace Mono.Sms
 {
     using Mono.Sms.Core;
 
-    public partial class Main
+    partial public class Main
     {
         public void Test()
         {
@@ -19,7 +19,7 @@ namespace Mono.Sms
         }
     }
 
-    public partial class Contacts
+    partial public class Contacts
     {
         public void Test()
         {

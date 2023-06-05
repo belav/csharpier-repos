@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography
 {
-    internal abstract partial class PkcsPal
+    partial internal abstract class PkcsPal
     {
         private protected static readonly byte[] s_rsaOaepSha1Parameters = { 0x30, 0x00 };
         private protected static readonly byte[] s_rsaOaepSha256Parameters =

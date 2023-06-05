@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.Runtime.InteropServices.ObjectiveC
 {
-    public static unsafe partial class ObjectiveCMarshal
+    partial public static unsafe class ObjectiveCMarshal
     {
         private static readonly IntPtr[] s_ObjcMessageSendFunctions = new IntPtr[
             (int)MessageSendFunction.MsgSendSuperStret + 1

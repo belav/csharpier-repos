@@ -23,7 +23,7 @@ using System.Globalization;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class UdpBindingElement
+    partial public class UdpBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -136,7 +136,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ByteStreamMessageEncodingElement
+    partial public sealed class ByteStreamMessageEncodingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -170,7 +170,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class UdpTransportElement
+    partial public sealed class UdpTransportElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -253,7 +253,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class UdpRetransmissionSettingsElement
+    partial public sealed class UdpRetransmissionSettingsElement
     {
         ConfigurationPropertyCollection properties;
 

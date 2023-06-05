@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class DirectiveTriviaSyntax
+    partial internal class DirectiveTriviaSyntax
     {
         internal override DirectiveStack ApplyDirectives(DirectiveStack stack)
         {

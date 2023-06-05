@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSAOpenSsl : RSA
+    partial public sealed class RSAOpenSsl : RSA
     {
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
@@ -91,7 +91,7 @@ namespace System.Security.Cryptography
             return Interop.Crypto.EvpPKeyDuplicate(GetKey(), Interop.Crypto.EvpAlgorithmId.RSA);
         }
 
-        static partial void ThrowIfNotSupported()
+        partial static void ThrowIfNotSupported()
         {
             if (!Interop.OpenSslNoInit.OpenSslIsAvailable)
             {

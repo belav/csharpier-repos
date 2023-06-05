@@ -9,7 +9,7 @@ using MSB = Microsoft.Build;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class CSharpProjectFileLoader : ProjectFileLoader
+    partial internal class CSharpProjectFileLoader : ProjectFileLoader
     {
         public CSharpProjectFileLoader() { }
 

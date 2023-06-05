@@ -12,4 +12,4 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class Site : System.Web.UI.MasterPage { }
+partial public class Site : System.Web.UI.MasterPage { }

@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class InstantiatedType
+    partial public class InstantiatedType
     {
         public override PInvokeStringFormat PInvokeStringFormat
         {

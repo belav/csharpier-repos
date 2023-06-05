@@ -6,7 +6,7 @@ using System.Security;
 
 namespace System.Text
 {
-    internal static partial class EncodingHelper
+    partial internal static class EncodingHelper
     {
         //
         // Only internal, to be used by the class libraries: Unmarked and non-input-validating
@@ -84,7 +84,7 @@ namespace System.Text
         static readonly object lockobj = new object();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern internal static string InternalCodePage(ref int code_page);
+        internal static extern string InternalCodePage(ref int code_page);
 
 #if !MONOTOUCH && !WASM
         internal static Encoding GetDefaultEncoding()

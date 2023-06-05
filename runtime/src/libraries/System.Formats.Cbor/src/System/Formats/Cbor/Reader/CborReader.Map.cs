@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Formats.Cbor
 {
-    public partial class CborReader
+    partial public class CborReader
     {
         private KeyEncodingComparer? _keyEncodingComparer;
         private Stack<HashSet<(int Offset, int Length)>>? _pooledKeyEncodingRangeAllocations;

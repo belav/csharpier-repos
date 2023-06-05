@@ -69,7 +69,7 @@ namespace Mono.Tools
     {
         static ArrayList _levels;
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine("Usage: caspol [options] [arguments] ...{0}", Environment.NewLine);
         }

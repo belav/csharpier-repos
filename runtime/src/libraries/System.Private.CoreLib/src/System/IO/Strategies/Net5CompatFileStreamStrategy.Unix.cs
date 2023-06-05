@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace System.IO.Strategies
 {
+    partial
     /// <summary>Provides an implementation of a file stream for Unix files.</summary>
-    internal sealed partial class Net5CompatFileStreamStrategy : FileStreamStrategy
+    internal sealed class Net5CompatFileStreamStrategy : FileStreamStrategy
     {
         /// <summary>File mode.</summary>
         private FileMode _mode;

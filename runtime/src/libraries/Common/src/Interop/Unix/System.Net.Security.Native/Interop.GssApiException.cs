@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NetSecurityNative
+    partial internal static class NetSecurityNative
     {
         internal sealed class GssApiException : Exception
         {

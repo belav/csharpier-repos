@@ -16,7 +16,7 @@ using System.Xml.Schema;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlSqlBinaryReader : XmlReader, IXmlNamespaceResolver
+    partial internal sealed class XmlSqlBinaryReader : XmlReader, IXmlNamespaceResolver
     {
         internal static readonly Type TypeOfObject = typeof(System.Object);
         internal static readonly Type TypeOfString = typeof(System.String);

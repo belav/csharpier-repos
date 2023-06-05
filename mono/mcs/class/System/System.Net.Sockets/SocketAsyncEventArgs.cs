@@ -36,7 +36,7 @@ using System.Threading;
 
 namespace System.Net.Sockets
 {
-    public partial class SocketAsyncEventArgs : EventArgs, IDisposable
+    partial public class SocketAsyncEventArgs : EventArgs, IDisposable
     {
         bool disposed;
 

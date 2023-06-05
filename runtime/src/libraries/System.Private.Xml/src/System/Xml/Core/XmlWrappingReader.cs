@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace System.Xml
 {
-    internal partial class XmlWrappingReader : XmlReader, IXmlLineInfo
+    partial internal class XmlWrappingReader : XmlReader, IXmlLineInfo
     {
         //
         // Fields

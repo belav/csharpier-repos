@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddPackage
 {
-    internal abstract partial class AbstractAddPackageCodeFixProvider : CodeFixProvider
+    partial internal abstract class AbstractAddPackageCodeFixProvider : CodeFixProvider
     {
         private readonly IPackageInstallerService _packageInstallerService;
         private readonly ISymbolSearchService _symbolSearchService;

@@ -21,7 +21,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime.TypeLoader
 {
-    public sealed partial class TypeLoaderEnvironment
+    partial public sealed class TypeLoaderEnvironment
     {
         public bool CompareMethodSignatures(
             RuntimeSignature signature1,

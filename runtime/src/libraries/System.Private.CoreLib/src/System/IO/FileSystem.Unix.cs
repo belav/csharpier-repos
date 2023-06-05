@@ -9,8 +9,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
+    partial
     /// <summary>Provides an implementation of FileSystem for Unix systems.</summary>
-    internal static partial class FileSystem
+    internal static class FileSystem
     {
         // On Linux, the maximum number of symbolic links that are followed while resolving a pathname is 40.
         // See: https://man7.org/linux/man-pages/man7/path_resolution.7.html

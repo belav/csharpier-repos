@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal partial class SolutionCrawlerRegistrationService : ISolutionCrawlerRegistrationService
+    partial internal class SolutionCrawlerRegistrationService : ISolutionCrawlerRegistrationService
     {
         /// <summary>
         /// Progress reporter

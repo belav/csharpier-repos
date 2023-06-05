@@ -6,16 +6,16 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Globalization
+    partial internal static class Globalization
     {
         [LibraryImport(
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_GetSortHandle",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static unsafe partial ResultCode GetSortHandle(
+        partial internal static unsafe ResultCode GetSortHandle(
             string localeName,
             out IntPtr sortHandle
         );
@@ -24,14 +24,14 @@ internal static partial class Interop
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_CloseSortHandle"
         )]
-        internal static partial void CloseSortHandle(IntPtr handle);
+        partial internal static void CloseSortHandle(IntPtr handle);
 
         [LibraryImport(
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_CompareString",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int CompareString(
+        partial internal static unsafe int CompareString(
             IntPtr sortHandle,
             char* lpStr1,
             int cwStr1Len,
@@ -45,7 +45,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_IndexOf",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int IndexOf(
+        partial internal static unsafe int IndexOf(
             IntPtr sortHandle,
             char* target,
             int cwTargetLength,
@@ -60,7 +60,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_LastIndexOf",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int LastIndexOf(
+        partial internal static unsafe int LastIndexOf(
             IntPtr sortHandle,
             char* target,
             int cwTargetLength,
@@ -77,7 +77,7 @@ internal static partial class Interop
         )]
         [MethodImpl(MethodImplOptions.NoInlining)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool StartsWith(
+        partial internal static unsafe bool StartsWith(
             IntPtr sortHandle,
             char* target,
             int cwTargetLength,
@@ -94,7 +94,7 @@ internal static partial class Interop
         )]
         [MethodImpl(MethodImplOptions.NoInlining)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool EndsWith(
+        partial internal static unsafe bool EndsWith(
             IntPtr sortHandle,
             char* target,
             int cwTargetLength,
@@ -110,7 +110,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool StartsWith(
+        partial internal static bool StartsWith(
             IntPtr sortHandle,
             string target,
             int cwTargetLength,
@@ -125,7 +125,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool EndsWith(
+        partial internal static bool EndsWith(
             IntPtr sortHandle,
             string target,
             int cwTargetLength,
@@ -139,7 +139,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_GetSortKey",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int GetSortKey(
+        partial internal static unsafe int GetSortKey(
             IntPtr sortHandle,
             char* str,
             int strLength,
@@ -152,6 +152,6 @@ internal static partial class Interop
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_GetSortVersion"
         )]
-        internal static partial int GetSortVersion(IntPtr sortHandle);
+        partial internal static int GetSortVersion(IntPtr sortHandle);
     }
 }

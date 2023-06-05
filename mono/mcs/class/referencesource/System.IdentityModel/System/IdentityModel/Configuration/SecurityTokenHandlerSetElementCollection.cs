@@ -15,7 +15,7 @@ namespace System.IdentityModel.Configuration
         AddItemName = ConfigurationStrings.SecurityTokenHandlers,
         CollectionType = ConfigurationElementCollectionType.BasicMap
     )]
-    public sealed partial class SecurityTokenHandlerSetElementCollection
+    partial public sealed class SecurityTokenHandlerSetElementCollection
         : ConfigurationElementCollection
     {
         public SecurityTokenHandlerSetElementCollection() { }

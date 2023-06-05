@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Expressions
 {
+    partial
     /// <summary>
     /// Expressions - Node Sets
     /// </summary>
-    public static partial class NodeSetsTests
+    public static class NodeSetsTests
     {
         /// <summary>
         /// Expected: Selects all paraA and paraB element children of the context node.

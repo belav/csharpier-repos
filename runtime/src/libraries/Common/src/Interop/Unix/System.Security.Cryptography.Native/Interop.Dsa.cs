@@ -7,23 +7,23 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DsaUpRef")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool DsaUpRef(IntPtr dsa);
+        partial internal static bool DsaUpRef(IntPtr dsa);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DsaDestroy")]
-        internal static partial void DsaDestroy(IntPtr dsa);
+        partial internal static void DsaDestroy(IntPtr dsa);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DsaGenerateKey")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool DsaGenerateKey(out SafeDsaHandle dsa, int bits);
+        partial internal static bool DsaGenerateKey(out SafeDsaHandle dsa, int bits);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DsaSizeSignature")]
-        private static partial int DsaSizeSignature(SafeDsaHandle dsa);
+        partial private static int DsaSizeSignature(SafeDsaHandle dsa);
 
         /// <summary>
         /// Return the maximum size of the DER-encoded key in bytes.
@@ -35,7 +35,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DsaSizeQ")]
-        private static partial int DsaSizeQ(SafeDsaHandle dsa);
+        partial private static int DsaSizeQ(SafeDsaHandle dsa);
 
         /// <summary>
         /// Return the size of the 'r' or 's' signature fields in bytes.
@@ -48,7 +48,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DsaSizeP")]
-        private static partial int DsaSizeP(SafeDsaHandle dsa);
+        partial private static int DsaSizeP(SafeDsaHandle dsa);
 
         /// <summary>
         /// Return the size of the key in bytes.
@@ -78,7 +78,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DsaSign")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool DsaSign(
+        partial private static bool DsaSign(
             SafeDsaHandle dsa,
             ref byte hash,
             int hashLength,
@@ -107,7 +107,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DsaVerify")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool DsaVerify(
+        partial private static bool DsaVerify(
             SafeDsaHandle dsa,
             ref byte hash,
             int hashLength,
@@ -195,7 +195,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetDsaParameters")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool GetDsaParameters(
+        partial private static bool GetDsaParameters(
             SafeDsaHandle key,
             out IntPtr p,
             out int p_cb,
@@ -214,7 +214,7 @@ internal static partial class Interop
             EntryPoint = "CryptoNative_DsaKeyCreateByExplicitParameters"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool DsaKeyCreateByExplicitParameters(
+        partial internal static bool DsaKeyCreateByExplicitParameters(
             out SafeDsaHandle dsa,
             byte[] p,
             int pLength,

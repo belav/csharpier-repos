@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class TextDocumentExtensions
+    partial internal static class TextDocumentExtensions
     {
         /// <summary>
         /// Creates a new instance of this text document updated to have the text specified.

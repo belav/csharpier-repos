@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal abstract partial class AbstractSyntaxIndex<TIndex>
+    partial internal abstract class AbstractSyntaxIndex<TIndex>
         where TIndex : AbstractSyntaxIndex<TIndex>
     {
         protected delegate TIndex? IndexReader(

@@ -9,7 +9,7 @@ using StackCrawlMark = System.Threading.StackCrawlMark;
 
 namespace System
 {
-    public abstract partial class Type : MemberInfo, IReflect
+    partial public abstract class Type : MemberInfo, IReflect
     {
         public bool IsInterface
         {

@@ -9,8 +9,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Strategies
 {
+    partial
     // This type is partial so we can avoid code duplication between Windows and Unix Net5Compat implementations
-    internal sealed partial class Net5CompatFileStreamStrategy : FileStreamStrategy
+    internal sealed class Net5CompatFileStreamStrategy : FileStreamStrategy
     {
         private byte[]? _buffer;
         private readonly int _bufferLength;

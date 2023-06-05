@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis
     /// making usage of them less bug prone.
     /// </summary>
     [NonCopyable]
-    internal partial struct MetadataTypeName
+    partial internal struct MetadataTypeName
     {
         /// <summary>
         /// Full metadata name of a type, includes namespace name for top level types.

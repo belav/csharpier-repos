@@ -10,7 +10,7 @@ using System.Text.Json.Reflection;
 
 namespace System.Text.Json.Serialization.Metadata
 {
-    public abstract partial class JsonTypeInfo
+    partial public abstract class JsonTypeInfo
     {
         /// <summary>
         /// Cached typeof(object). It is faster to cache this than to call typeof(object) multiple times.

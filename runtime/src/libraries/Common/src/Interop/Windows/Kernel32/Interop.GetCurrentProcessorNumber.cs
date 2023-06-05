@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial uint GetCurrentProcessorNumber();
+        partial internal static uint GetCurrentProcessorNumber();
     }
 }

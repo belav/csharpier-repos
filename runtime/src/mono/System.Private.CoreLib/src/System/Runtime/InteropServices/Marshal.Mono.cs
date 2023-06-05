@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System.Runtime.InteropServices
 {
-    public partial class Marshal
+    partial public class Marshal
     {
         /// <summary>
         /// Get the last platform invoke error on the current thread

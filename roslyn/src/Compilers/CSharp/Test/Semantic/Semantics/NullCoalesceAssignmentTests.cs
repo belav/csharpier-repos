@@ -14,7 +14,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     [CompilerTrait(CompilerFeature.NullCoalescingAssignment)]
-    public partial class NullCoalesceAssignmentTests : SemanticModelTestBase
+    partial public class NullCoalesceAssignmentTests : SemanticModelTestBase
     {
         [Fact]
         public void CoalescingAssignment_NoConversion()

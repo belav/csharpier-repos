@@ -10,7 +10,7 @@ using Internal.Win32;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         internal static bool IsWindows8OrAbove => WindowsVersion.IsWindows8OrAbove;
 

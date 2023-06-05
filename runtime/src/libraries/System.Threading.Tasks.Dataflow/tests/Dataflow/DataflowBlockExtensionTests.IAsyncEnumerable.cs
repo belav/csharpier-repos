@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Threading.Tasks.Dataflow.Tests
 {
-    public partial class DataflowBlockExtensionTests
+    partial public class DataflowBlockExtensionTests
     {
         [Fact]
         public void ReceiveAllAsync_ArgumentValidation()

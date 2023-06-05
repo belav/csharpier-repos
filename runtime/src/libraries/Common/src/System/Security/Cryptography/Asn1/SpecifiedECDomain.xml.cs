@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct SpecifiedECDomain
+    partial internal struct SpecifiedECDomain
     {
         internal int Version;
         internal System.Security.Cryptography.Asn1.FieldID FieldID;

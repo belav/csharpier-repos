@@ -18,11 +18,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
+    partial
     /// <summary>
     /// Provides completion items for extension methods from unimported namespace.
     /// </summary>
     /// <remarks>It runs out-of-proc if it's enabled</remarks>
-    internal static partial class ExtensionMethodImportCompletionHelper
+    internal static class ExtensionMethodImportCompletionHelper
     {
         public static async Task WarmUpCacheAsync(
             Project project,

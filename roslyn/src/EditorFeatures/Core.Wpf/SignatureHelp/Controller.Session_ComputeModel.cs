@@ -22,9 +22,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHelp
 {
-    internal partial class Controller
+    partial internal class Controller
     {
-        internal partial class Session
+        partial internal class Session
         {
             public void ComputeModel(
                 ImmutableArray<ISignatureHelpProvider> providers,

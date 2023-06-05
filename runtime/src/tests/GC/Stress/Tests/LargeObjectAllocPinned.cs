@@ -8,7 +8,7 @@ using System;
 internal class LargePinned
 {
     [System.Security.SecuritySafeCritical]
-    unsafe public static int Main()
+    public static unsafe int Main()
     {
         for (int i = 0; i < 25; i++)
         {

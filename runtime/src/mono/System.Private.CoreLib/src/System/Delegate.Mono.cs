@@ -49,7 +49,7 @@ namespace System
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public partial class Delegate
+    partial public class Delegate
     {
         #region Sync with object-internals.h
         private IntPtr method_ptr;

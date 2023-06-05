@@ -28,11 +28,11 @@ namespace System.Reflection.Runtime.MethodInfos
         internal abstract RuntimeMethodHandle GetRuntimeMethodHandle(Type[] methodArguments);
     }
 
+    partial
     //
     // The runtime's implementation of non-constructor MethodInfo's that represent a method definition.
     //
-    internal sealed partial class RuntimeNamedMethodInfo<TRuntimeMethodCommon>
-        : RuntimeNamedMethodInfo
+    internal sealed class RuntimeNamedMethodInfo<TRuntimeMethodCommon> : RuntimeNamedMethodInfo
         where TRuntimeMethodCommon : IRuntimeMethodCommon<TRuntimeMethodCommon>,
             IEquatable<TRuntimeMethodCommon>
     {

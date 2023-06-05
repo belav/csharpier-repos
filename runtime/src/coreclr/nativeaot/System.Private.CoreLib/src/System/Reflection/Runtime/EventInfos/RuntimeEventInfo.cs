@@ -19,7 +19,7 @@ namespace System.Reflection.Runtime.EventInfos
     // The runtime's implementation of EventInfo's
     //
     [DebuggerDisplay("{_debugName}")]
-    internal abstract partial class RuntimeEventInfo : EventInfo
+    partial internal abstract class RuntimeEventInfo : EventInfo
     {
         protected RuntimeEventInfo(RuntimeTypeInfo contextTypeInfo, RuntimeTypeInfo reflectedType)
         {

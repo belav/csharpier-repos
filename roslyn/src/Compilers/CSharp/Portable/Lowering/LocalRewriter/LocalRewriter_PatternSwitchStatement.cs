@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class LocalRewriter
+    partial internal class LocalRewriter
     {
         public override BoundNode VisitSwitchStatement(BoundSwitchStatement node)
         {

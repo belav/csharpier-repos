@@ -104,7 +104,7 @@ namespace System.ServiceModel.Security
                 set { _serializationContext = value; }
             }
 
-            public new static Message End(IAsyncResult iar)
+            public static new Message End(IAsyncResult iar)
             {
                 System.IdentityModel.AsyncResult.End(iar);
 

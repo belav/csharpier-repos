@@ -6,11 +6,12 @@ using System.Security;
 
 namespace System.Numerics
 {
+    partial
     // ATTENTION: always pass BitsBuffer by reference,
     // it's a structure for performance reasons. Furthermore
     // it's a mutable one, so use it only with care!
 
-    internal static partial class BigIntegerCalculator
+    internal static class BigIntegerCalculator
     {
         // To spare memory allocations a buffer helps reusing memory!
         // We just create the target array twice and switch between every

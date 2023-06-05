@@ -14,7 +14,7 @@ using Internal.Runtime.TypeLoader;
 
 namespace System.Reflection.Runtime.General
 {
-    public partial struct QMethodDefinition
+    partial public struct QMethodDefinition
     {
         public QMethodDefinition(MetadataReader reader, MethodHandle handle)
         {
@@ -49,7 +49,7 @@ namespace System.Reflection.Runtime.General
         }
     }
 
-    public partial struct QTypeDefinition
+    partial public struct QTypeDefinition
     {
         public QTypeDefinition(MetadataReader reader, TypeDefinitionHandle handle)
         {
@@ -84,7 +84,7 @@ namespace System.Reflection.Runtime.General
         }
     }
 
-    public partial struct QTypeDefRefOrSpec
+    partial public struct QTypeDefRefOrSpec
     {
         public QTypeDefRefOrSpec(MetadataReader reader, Handle handle, bool skipCheck = false)
         {

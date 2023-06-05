@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.Text.Json
 {
-    public static partial class JsonSerializer
+    partial public static class JsonSerializer
     {
         // We flush the Stream when the buffer is >=90% of capacity.
         // This threshold is a compromise between buffer utilization and minimizing cases where the buffer

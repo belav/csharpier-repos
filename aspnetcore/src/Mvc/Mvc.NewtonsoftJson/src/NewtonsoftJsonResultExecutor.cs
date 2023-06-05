@@ -14,10 +14,11 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
+partial
 /// <summary>
 /// Executes a <see cref="JsonResult"/> to write to the response.
 /// </summary>
-internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecutor<JsonResult>
+internal sealed class NewtonsoftJsonResultExecutor : IActionResultExecutor<JsonResult>
 {
     private static readonly string DefaultContentType = new MediaTypeHeaderValue("application/json")
     {
@@ -199,7 +200,7 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -208,7 +209,7 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
             EventName = "BufferingAsyncEnumerable",
             SkipEnabledCheck = true
         )]
-        private static partial void BufferingAsyncEnumerable(ILogger logger, string? type);
+        partial private static void BufferingAsyncEnumerable(ILogger logger, string? type);
 
         public static void BufferingAsyncEnumerable(ILogger logger, object asyncEnumerable)
         {
@@ -225,7 +226,7 @@ internal sealed partial class NewtonsoftJsonResultExecutor : IActionResultExecut
             EventName = "JsonResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void JsonResultExecuting(ILogger logger, string? type);
+        partial private static void JsonResultExecuting(ILogger logger, string? type);
 
         public static void JsonResultExecuting(ILogger logger, object? value)
         {

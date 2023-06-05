@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class FileStream_ctor_options
+    partial public class FileStream_ctor_options
     {
         private unsafe long GetAllocatedSize(FileStream fileStream)
         {
@@ -118,7 +118,7 @@ namespace System.IO.Tests
         }
 
         [DllImport(Interop.Libraries.Kernel32, CharSet = CharSet.Auto, SetLastError = true)]
-        public extern static bool GetVolumeInformation(
+        public static extern bool GetVolumeInformation(
             string rootPathName,
             StringBuilder volumeNameBuffer,
             int volumeNameSize,

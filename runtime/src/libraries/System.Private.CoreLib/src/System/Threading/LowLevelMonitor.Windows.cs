@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    internal unsafe partial struct LowLevelMonitor
+    partial internal unsafe struct LowLevelMonitor
     {
         internal struct Monitor
         {

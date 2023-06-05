@@ -38,7 +38,7 @@ using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 namespace MonoTests.System.Xaml
 {
     [TestFixture]
-    public partial class XamlObjectReaderTest : XamlReaderTestBase
+    partial public class XamlObjectReaderTest : XamlReaderTestBase
     {
         [Test]
         public void ConstructorNullObject()

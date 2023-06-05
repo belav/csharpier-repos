@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 {
-    internal static partial class EditorConfigNamingStyleParser
+    partial internal static class EditorConfigNamingStyleParser
     {
         public static NamingStylePreferences ParseDictionary(
             AnalyzerConfigOptions allRawConventions

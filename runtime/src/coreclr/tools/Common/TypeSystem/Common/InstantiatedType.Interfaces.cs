@@ -3,9 +3,10 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Implementation for Instantiated type specific interface logic
 
-    public sealed partial class InstantiatedType : MetadataType
+    public sealed class InstantiatedType : MetadataType
     {
         private DefType[] _implementedInterfaces;
 

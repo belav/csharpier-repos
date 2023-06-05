@@ -14,7 +14,7 @@ using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
 {
-    internal abstract partial class AbstractTypeImportCompletionService
+    partial internal abstract class AbstractTypeImportCompletionService
     {
         private readonly struct CacheEntry
         {

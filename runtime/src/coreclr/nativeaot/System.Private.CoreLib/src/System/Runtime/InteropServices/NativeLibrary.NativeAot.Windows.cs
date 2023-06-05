@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class NativeLibrary
+    partial public static class NativeLibrary
     {
         private const int LoadWithAlteredSearchPathFlag = 0x8; /* LOAD_WITH_ALTERED_SEARCH_PATH */
 

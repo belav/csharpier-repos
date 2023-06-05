@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Xml.XmlWriterApiTests
 {
-    public partial class TCEOFHandling
+    partial public class TCEOFHandling
     {
         private static NewLineHandling[] s_nlHandlingMembers =
         {

@@ -10,7 +10,7 @@ using Test.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class KeyTransRecipientInfoRsaPaddingModeTests
+    partial public static class KeyTransRecipientInfoRsaPaddingModeTests
     {
         public static bool SupportsRsaOaepCerts => PlatformDetection.IsWindows;
 

@@ -10,7 +10,7 @@ using MonoTests.Common;
 using MonoTests.SystemWeb.Framework;
 using MonoTests.DataSource;
 
-public partial class ListView_DynamicControl_06 : TestsBasePage<EmployeesDataContext>
+partial public class ListView_DynamicControl_06 : TestsBasePage<EmployeesDataContext>
 {
     protected override void PopulateDataSource(DynamicDataSource ds)
     {

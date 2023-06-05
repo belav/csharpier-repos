@@ -27,7 +27,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [DllImport(JitHelpers.QCall)]
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        private unsafe extern static void StoreOverlappedPtrInCCW(
+        private static extern unsafe void StoreOverlappedPtrInCCW(
             ObjectHandleOnStack windowsRuntimeBuffer,
             NativeOverlapped* overlapped
         );
@@ -35,7 +35,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [FriendAccessAllowed]
         [SecurityCritical]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal unsafe static void StoreOverlappedInCCW(
+        internal static unsafe void StoreOverlappedInCCW(
             Object windowsRuntimeBuffer,
             NativeOverlapped* overlapped
         )

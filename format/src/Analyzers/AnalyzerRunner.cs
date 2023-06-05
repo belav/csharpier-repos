@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.CodeAnalysis.Tools.Analyzers
 {
-    internal partial class AnalyzerRunner : IAnalyzerRunner
+    partial internal class AnalyzerRunner : IAnalyzerRunner
     {
         public Task RunCodeAnalysisAsync(
             CodeAnalysisResult result,

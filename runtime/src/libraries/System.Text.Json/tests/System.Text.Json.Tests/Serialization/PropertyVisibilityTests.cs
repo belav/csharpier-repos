@@ -3,7 +3,7 @@
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public sealed partial class PropertyVisibilityTestsDynamic : PropertyVisibilityTests
+    partial public sealed class PropertyVisibilityTestsDynamic : PropertyVisibilityTests
     {
         public PropertyVisibilityTestsDynamic()
             : base(JsonSerializerWrapper.StringSerializer) { }

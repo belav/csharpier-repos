@@ -4,12 +4,12 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
-        internal static partial SafeCertStoreHandle PFXImportCertStore(
+        partial internal static SafeCertStoreHandle PFXImportCertStore(
             ref DATA_BLOB pPFX,
             SafePasswordHandle password,
             PfxCertStoreFlags dwFlags

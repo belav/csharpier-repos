@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class
+    partial internal class
 #if DEBUG
     ArrayTypeSymbolAdapter : SymbolAdapter,
 #else
@@ -91,7 +91,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         Cci.IDefinition? Cci.IReference.AsDefinition(EmitContext context) => null;
     }
 
-    internal partial class ArrayTypeSymbol
+    partial internal class ArrayTypeSymbol
     {
 #if DEBUG
         private ArrayTypeSymbolAdapter? _lazyAdapter;
@@ -120,8 +120,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #endif
     }
 
+    partial
 #if DEBUG
-    internal partial class ArrayTypeSymbolAdapter
+    internal class ArrayTypeSymbolAdapter
     {
         internal ArrayTypeSymbolAdapter(ArrayTypeSymbol underlyingArrayTypeSymbol)
         {

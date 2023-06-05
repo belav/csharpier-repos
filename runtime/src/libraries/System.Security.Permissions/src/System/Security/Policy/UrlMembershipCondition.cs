@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public sealed partial class UrlMembershipCondition
+    partial public sealed class UrlMembershipCondition
         : ISecurityEncodable,
             IMembershipCondition,
             ISecurityPolicyEncodable

@@ -6,8 +6,9 @@ using System.IO;
 
 namespace System.IO.Enumeration
 {
+    ref partial
     /// <summary>Provides a lower level view of <see cref="System.IO.FileSystemInfo" /> to help process and filter find results.</summary>
-    public ref partial struct FileSystemEntry
+    public struct FileSystemEntry
     {
         /// <summary>Returns the full path for the find results, based on the initially provided path.</summary>
         /// <returns>A string representing the full path.</returns>

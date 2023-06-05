@@ -68,5 +68,5 @@ public class MyController : ControllerBase
 
 namespace SimpleWebSiteWithWebApplicationBuilder
 {
-    public partial class Program { }
+    partial public class Program { }
 }

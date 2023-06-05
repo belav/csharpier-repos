@@ -66,7 +66,7 @@ namespace System.Text.Json.Serialization.Tests
             : base(JsonSerializerWrapper.NodeSerializer) { }
     }
 
-    public abstract partial class RequiredKeywordTests : SerializerTests
+    partial public abstract class RequiredKeywordTests : SerializerTests
     {
         public RequiredKeywordTests(JsonSerializerWrapper serializer)
             : base(serializer) { }
@@ -607,7 +607,7 @@ namespace System.Text.Json.Serialization.Tests
         [JsonSerializable(
             typeof(PersonWithRequiredMembersAndLargeParametrizedCtorAndSetsRequiredMembers)
         )]
-        private partial class SetsRequiredMembersTestsContext : JsonSerializerContext { }
+        partial private class SetsRequiredMembersTestsContext : JsonSerializerContext { }
 
         [Fact]
         public async void RemovingPropertiesWithRequiredKeywordAllowsDeserialization()

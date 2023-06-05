@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths
 {
+    partial
     /// <summary>
     /// Location Paths - Node Tests
     /// </summary>
-    public static partial class NodeTestsTests
+    public static class NodeTestsTests
     {
         [Fact]
         public static void PathNavigatorMoveToNext_HasNotNextNode()

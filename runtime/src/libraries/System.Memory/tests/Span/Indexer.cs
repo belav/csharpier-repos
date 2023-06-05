@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.SpanTests
 {
-    public static partial class IndexerTests
+    partial public static class IndexerTests
     {
         [Fact]
         public static void IndexerWithIndexTest()

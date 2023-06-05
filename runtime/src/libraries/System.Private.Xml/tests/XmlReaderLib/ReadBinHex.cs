@@ -9,7 +9,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.Tests
 {
     [InheritRequired()]
-    public abstract partial class TCReadContentAsBinHex : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadContentAsBinHex : TCXMLReaderBaseGeneral
     {
         public const string ST_ELEM_NAME1 = "ElemAll";
         public const string ST_ELEM_NAME2 = "ElemEmpty";
@@ -521,7 +521,7 @@ namespace System.Xml.Tests
     }
 
     [InheritRequired()]
-    public abstract partial class TCReadElementContentAsBinHex : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadElementContentAsBinHex : TCXMLReaderBaseGeneral
     {
         public const string ST_ELEM_NAME1 = "ElemAll";
         public const string ST_ELEM_NAME2 = "ElemEmpty";

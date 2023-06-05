@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
-internal static partial class PageLoggerExtensions
+partial internal static class PageLoggerExtensions
 {
     public const string PageFilter = "Page Filter";
 
@@ -23,7 +23,7 @@ internal static partial class PageLoggerExtensions
         EventName = "ExecutingModelFactory",
         SkipEnabledCheck = true
     )]
-    private static partial void ExecutingPageModelFactory(
+    partial private static void ExecutingPageModelFactory(
         this ILogger logger,
         string page,
         string assemblyName
@@ -48,7 +48,7 @@ internal static partial class PageLoggerExtensions
         EventName = "ExecutedModelFactory",
         SkipEnabledCheck = true
     )]
-    private static partial void ExecutedPageModelFactory(
+    partial private static void ExecutedPageModelFactory(
         this ILogger logger,
         string page,
         string assemblyName
@@ -73,7 +73,7 @@ internal static partial class PageLoggerExtensions
         EventName = "ExecutingPageFactory",
         SkipEnabledCheck = true
     )]
-    private static partial void ExecutingPageFactory(
+    partial private static void ExecutingPageFactory(
         this ILogger logger,
         string page,
         string assemblyName
@@ -98,7 +98,7 @@ internal static partial class PageLoggerExtensions
         EventName = "ExecutedPageFactory",
         SkipEnabledCheck = true
     )]
-    private static partial void ExecutedPageFactory(
+    partial private static void ExecutedPageFactory(
         this ILogger logger,
         string page,
         string assemblyName
@@ -123,7 +123,7 @@ internal static partial class PageLoggerExtensions
         EventName = "ExecutingHandlerMethod",
         SkipEnabledCheck = true
     )]
-    private static partial void ExecutingHandlerMethod(
+    partial private static void ExecutingHandlerMethod(
         this ILogger logger,
         string handlerName,
         ModelValidationState validationState
@@ -136,7 +136,7 @@ internal static partial class PageLoggerExtensions
         EventName = "HandlerMethodExecutingWithArguments",
         SkipEnabledCheck = true
     )]
-    private static partial void ExecutingHandlerMethodWithArguments(
+    partial private static void ExecutingHandlerMethodWithArguments(
         this ILogger logger,
         string handlerName,
         string[] arguments
@@ -182,7 +182,7 @@ internal static partial class PageLoggerExtensions
         EventName = "ExecutingImplicitHandlerMethod",
         SkipEnabledCheck = true
     )]
-    public static partial void ExecutingImplicitHandlerMethod(
+    partial public static void ExecutingImplicitHandlerMethod(
         this ILogger logger,
         ModelValidationState validationState
     );
@@ -203,7 +203,7 @@ internal static partial class PageLoggerExtensions
         "Executed handler method {HandlerName}, returned result {ActionResult}.",
         EventName = "ExecutedHandlerMethod"
     )]
-    public static partial void ExecutedHandlerMethod(
+    partial public static void ExecutedHandlerMethod(
         this ILogger logger,
         string handlerName,
         string? actionResult
@@ -233,7 +233,7 @@ internal static partial class PageLoggerExtensions
         EventName = "ExecutedImplicitHandlerMethod",
         SkipEnabledCheck = true
     )]
-    public static partial void ExecutedImplicitHandlerMethod(
+    partial public static void ExecutedImplicitHandlerMethod(
         this ILogger logger,
         string actionResult
     );
@@ -255,7 +255,7 @@ internal static partial class PageLoggerExtensions
         "{FilterType}: Before executing {Method} on filter {Filter}.",
         EventName = "BeforeExecutingMethodOnFilter"
     )]
-    public static partial void BeforeExecutingMethodOnFilter(
+    partial public static void BeforeExecutingMethodOnFilter(
         this ILogger logger,
         string filterType,
         string method,
@@ -268,7 +268,7 @@ internal static partial class PageLoggerExtensions
         "{FilterType}: After executing {Method} on filter {Filter}.",
         EventName = "AfterExecutingMethodOnFilter"
     )]
-    public static partial void AfterExecutingMethodOnFilter(
+    partial public static void AfterExecutingMethodOnFilter(
         this ILogger logger,
         string filterType,
         string method,
@@ -281,7 +281,7 @@ internal static partial class PageLoggerExtensions
         "Request was short circuited at page filter '{PageFilter}'.",
         EventName = "PageFilterShortCircuited"
     )]
-    public static partial void PageFilterShortCircuited(
+    partial public static void PageFilterShortCircuited(
         this ILogger logger,
         IFilterMetadata pageFilter
     );
@@ -292,5 +292,5 @@ internal static partial class PageLoggerExtensions
         "Skipping the execution of current filter as its not the most effective filter implementing the policy {FilterPolicy}.",
         EventName = "NotMostEffectiveFilter"
     )]
-    public static partial void NotMostEffectiveFilter(this ILogger logger, Type filterPolicy);
+    partial public static void NotMostEffectiveFilter(this ILogger logger, Type filterPolicy);
 }

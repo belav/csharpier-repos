@@ -13,7 +13,7 @@ using ILCompiler.DependencyAnalysisFramework;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public abstract partial class ReadyToRunGenericHelperNode
+    partial public abstract class ReadyToRunGenericHelperNode
         : AssemblyStubNode,
             INodeWithRuntimeDeterminedDependencies
     {
@@ -433,7 +433,7 @@ namespace ILCompiler.DependencyAnalysis
         }
     }
 
-    public partial class ReadyToRunGenericLookupFromDictionaryNode : ReadyToRunGenericHelperNode
+    partial public class ReadyToRunGenericLookupFromDictionaryNode : ReadyToRunGenericHelperNode
     {
         public ReadyToRunGenericLookupFromDictionaryNode(
             NodeFactory factory,
@@ -458,7 +458,7 @@ namespace ILCompiler.DependencyAnalysis
         public override int ClassCode => 1055354299;
     }
 
-    public partial class ReadyToRunGenericLookupFromTypeNode : ReadyToRunGenericHelperNode
+    partial public class ReadyToRunGenericLookupFromTypeNode : ReadyToRunGenericHelperNode
     {
         public ReadyToRunGenericLookupFromTypeNode(
             NodeFactory factory,

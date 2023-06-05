@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Diagnostics;
 
-public partial class MyDefault : System.Web.UI.Page
+partial public class MyDefault : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e) { }
 

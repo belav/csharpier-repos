@@ -5,15 +5,15 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         /// <summary>
         /// Version used for a buffer containing a scalar integer (not an IntPtr)
         /// </summary>
         [LibraryImport(Libraries.Crypt32)]
-        private static unsafe partial CRYPT_OID_INFO* CryptFindOIDInfo(
+        partial private static unsafe CRYPT_OID_INFO* CryptFindOIDInfo(
             CryptOidInfoKeyType dwKeyType,
             void* pvKey,
             OidGroup group

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Threading.Channels
 {
-    public abstract partial class ChannelReader<T>
+    partial public abstract class ChannelReader<T>
     {
         /// <summary>Creates an <see cref="IAsyncEnumerable{T}"/> that enables reading all of the data from the channel.</summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to use to cancel the enumeration.</param>

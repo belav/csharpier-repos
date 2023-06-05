@@ -7,10 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableHashSet{T}.Builder"/> class.
     /// </content>
-    public sealed partial class ImmutableHashSet<T>
+    public sealed class ImmutableHashSet<T>
     {
         /// <summary>
         /// A hash set that mutates with little or no memory allocations,

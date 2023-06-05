@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Tools.Tests.Utilities
 {
-    internal static partial class DotNetHelper
+    partial internal static class DotNetHelper
     {
         public static async Task<int> NewProjectAsync(
             string templateName,

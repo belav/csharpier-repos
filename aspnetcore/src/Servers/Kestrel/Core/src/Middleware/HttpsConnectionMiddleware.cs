@@ -654,7 +654,7 @@ internal sealed class HttpsConnectionMiddleware
     }
 }
 
-internal static partial class HttpsConnectionMiddlewareLoggerExtensions
+partial internal static class HttpsConnectionMiddlewareLoggerExtensions
 {
     [LoggerMessage(
         1,
@@ -662,7 +662,7 @@ internal static partial class HttpsConnectionMiddlewareLoggerExtensions
         "Failed to authenticate HTTPS connection.",
         EventName = "AuthenticationFailed"
     )]
-    public static partial void AuthenticationFailed(
+    partial public static void AuthenticationFailed(
         this ILogger<HttpsConnectionMiddleware> logger,
         Exception exception
     );
@@ -673,7 +673,7 @@ internal static partial class HttpsConnectionMiddlewareLoggerExtensions
         "Authentication of the HTTPS connection timed out.",
         EventName = "AuthenticationTimedOut"
     )]
-    public static partial void AuthenticationTimedOut(
+    partial public static void AuthenticationTimedOut(
         this ILogger<HttpsConnectionMiddleware> logger
     );
 
@@ -683,7 +683,7 @@ internal static partial class HttpsConnectionMiddlewareLoggerExtensions
         "Connection {ConnectionId} established using the following protocol: {Protocol}",
         EventName = "HttpsConnectionEstablished"
     )]
-    public static partial void HttpsConnectionEstablished(
+    partial public static void HttpsConnectionEstablished(
         this ILogger<HttpsConnectionMiddleware> logger,
         string connectionId,
         SslProtocols protocol
@@ -695,7 +695,7 @@ internal static partial class HttpsConnectionMiddlewareLoggerExtensions
         "HTTP/2 over TLS is not supported on Windows versions older than Windows 10 and Windows Server 2016 due to incompatible ciphers or missing ALPN support. Falling back to HTTP/1.1 instead.",
         EventName = "Http2DefaultCiphersInsufficient"
     )]
-    public static partial void Http2DefaultCiphersInsufficient(
+    partial public static void Http2DefaultCiphersInsufficient(
         this ILogger<HttpsConnectionMiddleware> logger
     );
 
@@ -705,7 +705,7 @@ internal static partial class HttpsConnectionMiddlewareLoggerExtensions
         "Searching for certificate with private key and thumbprint {Thumbprint} in the certificate store.",
         EventName = "LocateCertWithPrivateKey"
     )]
-    private static partial void LocatingCertWithPrivateKey(
+    partial private static void LocatingCertWithPrivateKey(
         this ILogger<HttpsConnectionMiddleware> logger,
         string thumbPrint
     );
@@ -721,7 +721,7 @@ internal static partial class HttpsConnectionMiddlewareLoggerExtensions
         "Found certificate with private key and thumbprint {Thumbprint} in certificate store {StoreName}.",
         EventName = "FoundCertWithPrivateKey"
     )]
-    public static partial void FoundCertWithPrivateKey(
+    partial public static void FoundCertWithPrivateKey(
         this ILogger<HttpsConnectionMiddleware> logger,
         string thumbprint,
         string? storeName
@@ -746,7 +746,7 @@ internal static partial class HttpsConnectionMiddlewareLoggerExtensions
         "Failure to locate certificate from store.",
         EventName = "FailToLocateCertificate"
     )]
-    public static partial void FailedToFindCertificateInStore(
+    partial public static void FailedToFindCertificateInStore(
         this ILogger<HttpsConnectionMiddleware> logger,
         Exception exception
     );
@@ -757,7 +757,7 @@ internal static partial class HttpsConnectionMiddlewareLoggerExtensions
         "Failed to open certificate store {StoreName}.",
         EventName = "FailToOpenStore"
     )]
-    public static partial void FailedToOpenStore(
+    partial public static void FailedToOpenStore(
         this ILogger<HttpsConnectionMiddleware> logger,
         string? storeName,
         Exception exception

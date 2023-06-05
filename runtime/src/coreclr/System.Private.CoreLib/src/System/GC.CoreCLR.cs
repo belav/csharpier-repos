@@ -59,7 +59,7 @@ namespace System
         NotApplicable = 4
     }
 
-    public static partial class GC
+    partial public static class GC
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void GetMemoryInfo(GCMemoryInfoData data, int kind);
@@ -91,7 +91,7 @@ namespace System
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_StartNoGCRegion")]
-        internal static partial int _StartNoGCRegion(
+        partial internal static int _StartNoGCRegion(
             long totalSize,
             [MarshalAs(UnmanagedType.Bool)] bool lohSizeKnown,
             long lohSize,
@@ -99,7 +99,7 @@ namespace System
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_EndNoGCRegion")]
-        internal static partial int _EndNoGCRegion();
+        partial internal static int _EndNoGCRegion();
 
         // keep in sync with GC_ALLOC_FLAGS in gcinterface.h
         internal enum GC_ALLOC_FLAGS
@@ -120,10 +120,10 @@ namespace System
         private static extern int GetGenerationWR(IntPtr handle);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_GetTotalMemory")]
-        private static partial long GetTotalMemory();
+        partial private static long GetTotalMemory();
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_Collect")]
-        private static partial void _Collect(int generation, int mode);
+        partial private static void _Collect(int generation, int mode);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern int GetMaxGeneration();
@@ -141,10 +141,10 @@ namespace System
         internal static extern ulong GetGenerationSize(int gen);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_AddMemoryPressure")]
-        private static partial void _AddMemoryPressure(ulong bytesAllocated);
+        partial private static void _AddMemoryPressure(ulong bytesAllocated);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_RemoveMemoryPressure")]
-        private static partial void _RemoveMemoryPressure(ulong bytesAllocated);
+        partial private static void _RemoveMemoryPressure(ulong bytesAllocated);
 
         public static void AddMemoryPressure(long bytesAllocated)
         {
@@ -318,7 +318,7 @@ namespace System
         public static int MaxGeneration => GetMaxGeneration();
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_WaitForPendingFinalizers")]
-        private static partial void _WaitForPendingFinalizers();
+        partial private static void _WaitForPendingFinalizers();
 
         public static void WaitForPendingFinalizers()
         {
@@ -381,13 +381,13 @@ namespace System
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_RegisterFrozenSegment")]
-        private static partial IntPtr _RegisterFrozenSegment(
+        partial private static IntPtr _RegisterFrozenSegment(
             IntPtr sectionAddress,
             nint sectionSize
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCInterface_UnregisterFrozenSegment")]
-        private static partial void _UnregisterFrozenSegment(IntPtr segmentHandle);
+        partial private static void _UnregisterFrozenSegment(IntPtr segmentHandle);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern long GetAllocatedBytesForCurrentThread();
@@ -871,7 +871,7 @@ namespace System
             RuntimeHelpers.QCall,
             EntryPoint = "GCInterface_EnumerateConfigurationValues"
         )]
-        internal static unsafe partial void _EnumerateConfigurationValues(
+        partial internal static unsafe void _EnumerateConfigurationValues(
             void* configurationDictionary,
             delegate* unmanaged<void*, void*, void*, GCConfigurationType, long, void> callback
         );

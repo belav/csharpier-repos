@@ -5,7 +5,7 @@ using System.Text;
 
 namespace System.Security.Cryptography
 {
-    public abstract partial class RSA : AsymmetricAlgorithm
+    partial public abstract class RSA : AsymmetricAlgorithm
     {
         private static byte[] ReadRequiredElement(
             ref XmlKeyHelper.ParseState state,

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class OidLookup
+    partial internal static class OidLookup
     {
 #pragma warning disable IDE0060
 

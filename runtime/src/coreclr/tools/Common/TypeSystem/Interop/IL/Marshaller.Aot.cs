@@ -13,7 +13,7 @@ using System.Reflection.Metadata;
 
 namespace Internal.TypeSystem.Interop
 {
-    internal partial class Marshaller
+    partial internal class Marshaller
     {
         protected static Marshaller CreateMarshaller(MarshallerKind kind)
         {

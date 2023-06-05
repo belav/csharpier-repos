@@ -31,12 +31,13 @@ using Mono.Net.Security;
 
 namespace Mono.Security.Interface
 {
+    partial
     /*
      * Public API front-end to System.dll's version.
      *
      * Keep in sync with System/Mono.Net.Security/MonoTlsProviderFactory.cs.
      */
-    public static partial class MonoTlsProviderFactory
+    public static class MonoTlsProviderFactory
     {
         /*
          * TLS Provider Initialization

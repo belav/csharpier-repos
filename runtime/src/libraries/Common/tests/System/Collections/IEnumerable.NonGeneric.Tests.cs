@@ -7,11 +7,12 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
+    partial
     /// <summary>
     /// Contains tests that ensure the correctness of any class that implements the nongeneric
     /// IEnumerable interface
     /// </summary>
-    public abstract partial class IEnumerable_NonGeneric_Tests : TestBase
+    public abstract class IEnumerable_NonGeneric_Tests : TestBase
     {
         #region IEnumerable Helper Methods
 

@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
         Before = PredefinedCodeRefactoringProviderNames.GenerateOverrides
     )]
     [IntentProvider(WellKnownIntents.AddConstructorParameter, LanguageNames.CSharp)]
-    internal partial class AddConstructorParametersFromMembersCodeRefactoringProvider
+    partial internal class AddConstructorParametersFromMembersCodeRefactoringProvider
         : AbstractGenerateFromMembersCodeRefactoringProvider,
             IIntentProvider
     {

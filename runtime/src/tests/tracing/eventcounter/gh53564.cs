@@ -107,7 +107,7 @@ namespace gh53564Tests
         }
     }
 
-    public partial class TestRuntimeEventCounter
+    partial public class TestRuntimeEventCounter
     {
         public static int Main()
         {

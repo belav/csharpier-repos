@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class CoreFoundation
+    partial internal static class CoreFoundation
     {
         internal enum CFNumberType
         {
@@ -17,7 +17,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static unsafe partial int CFNumberGetValue(
+        partial private static unsafe int CFNumberGetValue(
             IntPtr handle,
             CFNumberType type,
             int* value

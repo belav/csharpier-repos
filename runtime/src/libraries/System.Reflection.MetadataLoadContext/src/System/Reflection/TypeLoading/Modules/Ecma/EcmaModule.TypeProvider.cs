@@ -7,10 +7,11 @@ using System.Reflection.Metadata;
 
 namespace System.Reflection.TypeLoading.Ecma
 {
+    partial
     //
     // Main TypeProvider interface for System.Reflection.Metadata.
     //
-    internal sealed partial class EcmaModule
+    internal sealed class EcmaModule
         : ISignatureTypeProvider<RoType, TypeContext>,
             ICustomAttributeTypeProvider<RoType>
     {

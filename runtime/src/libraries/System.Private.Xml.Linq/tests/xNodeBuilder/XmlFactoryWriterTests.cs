@@ -12,11 +12,11 @@ using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeBuilderFunctionalTests : TestModule
+    partial public class XNodeBuilderFunctionalTests : TestModule
     {
-        public partial class XNodeBuilderTests : XLinqTestCase
+        partial public class XNodeBuilderTests : XLinqTestCase
         {
-            public partial class TCCheckChars : BridgeHelpers
+            partial public class TCCheckChars : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "CheckChars=true, invalid XML test WriteEntityRef", Priority = 1, Param = "EntityRef")]
                 //[Variation(Id = 2, Desc = "CheckChars=true, invalid XML test WriteSurrogateCharEntity", Priority = 1, Param = "SurrogateCharEntity")]
@@ -201,7 +201,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCNewLineHandling : BridgeHelpers
+            partial public class TCNewLineHandling : BridgeHelpers
             {
                 //[Variation(Id = 7, Desc = "Test for CR (xD) inside attr when NewLineHandling = Replace", Priority = 0)]
                 public void NewLineHandling_7()
@@ -295,7 +295,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCIndent : BridgeHelpers
+            partial public class TCIndent : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Simple test when false", Priority = 0)]
                 public void indent_1()
@@ -396,7 +396,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCNewLineOnAttributes : BridgeHelpers
+            partial public class TCNewLineOnAttributes : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Make sure the setting has no effect when Indent is false", Priority = 0)]
                 public void NewLineOnAttributes_1()
@@ -444,7 +444,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCStandAlone : BridgeHelpers
+            partial public class TCStandAlone : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "StartDocument(bool standalone = true)", Priority = 0)]
                 public void standalone_1()
@@ -485,7 +485,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCFragmentCL : BridgeHelpers
+            partial public class TCFragmentCL : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "WriteDocType should error when CL=fragment", Priority = 1)]
                 public void frag_1()
@@ -536,7 +536,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCAutoCL : BridgeHelpers
+            partial public class TCAutoCL : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Change to CL Document after WriteStartDocument()", Priority = 0)]
                 public void auto_1()

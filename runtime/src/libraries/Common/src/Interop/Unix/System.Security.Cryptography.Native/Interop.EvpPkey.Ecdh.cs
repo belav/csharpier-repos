@@ -7,12 +7,12 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpPKeyCtxCreate")]
-        internal static partial SafeEvpPKeyCtxHandle EvpPKeyCtxCreate(
+        partial internal static SafeEvpPKeyCtxHandle EvpPKeyCtxCreate(
             SafeEvpPKeyHandle pkey,
             SafeEvpPKeyHandle peerkey,
             out uint secretLength
@@ -22,14 +22,14 @@ internal static partial class Interop
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_EvpPKeyDeriveSecretAgreement"
         )]
-        private static partial int EvpPKeyDeriveSecretAgreement(
+        partial private static int EvpPKeyDeriveSecretAgreement(
             ref byte secret,
             uint secretLength,
             SafeEvpPKeyCtxHandle ctx
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpPKeyCtxDestroy")]
-        internal static partial void EvpPKeyCtxDestroy(IntPtr ctx);
+        partial internal static void EvpPKeyCtxDestroy(IntPtr ctx);
 
         internal static void EvpPKeyDeriveSecretAgreement(
             SafeEvpPKeyCtxHandle ctx,

@@ -83,7 +83,7 @@ namespace I18N.Other
             return s.Length;
         }
 
-        public unsafe override int GetByteCountImpl(char* chars, int count)
+        public override unsafe int GetByteCountImpl(char* chars, int count)
         {
             int index = 0;
             int length = 0;
@@ -121,7 +121,7 @@ namespace I18N.Other
             return length;
         }
 
-        public unsafe override int GetBytesImpl(
+        public override unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,

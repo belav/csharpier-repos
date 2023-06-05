@@ -3,7 +3,7 @@
 
 namespace System.Collections.Specialized.Tests
 {
-    public partial class MyNameObjectCollection : NameObjectCollectionBase
+    partial public class MyNameObjectCollection : NameObjectCollectionBase
     {
         public MyNameObjectCollection()
             : base() { }

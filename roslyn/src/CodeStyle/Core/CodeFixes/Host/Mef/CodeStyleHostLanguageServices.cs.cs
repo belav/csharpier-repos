@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    internal sealed partial class CodeStyleHostLanguageServices : HostLanguageServices
+    partial internal sealed class CodeStyleHostLanguageServices : HostLanguageServices
     {
         private sealed class MefHostExportProvider : IMefHostExportProvider
         {

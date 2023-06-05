@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LegacySolutionEvents
 {
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
-    internal sealed partial class HostLegacySolutionEventsWorkspaceEventListener
+    partial internal sealed class HostLegacySolutionEventsWorkspaceEventListener
         : IEventListener<object>
     {
         private readonly IGlobalOptionService _globalOptions;

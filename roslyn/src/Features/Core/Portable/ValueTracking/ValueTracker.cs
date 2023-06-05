@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ValueTracking
 {
-    internal static partial class ValueTracker
+    partial internal static class ValueTracker
     {
         public static async Task TrackValueSourceAsync(
             TextSpan selection,

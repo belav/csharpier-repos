@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum Signals : int
         {
@@ -20,6 +20,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_Kill",
             SetLastError = true
         )]
-        internal static partial int Kill(int pid, Signals signal);
+        partial internal static int Kill(int pid, Signals signal);
     }
 }

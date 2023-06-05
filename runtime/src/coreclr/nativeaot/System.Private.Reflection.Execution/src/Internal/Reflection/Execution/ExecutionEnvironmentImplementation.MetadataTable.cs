@@ -20,7 +20,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
 {
-    internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
+    partial internal sealed class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
         private struct DynamicInvokeMapEntry
         {

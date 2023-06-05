@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.TestHooks
 {
-    internal static partial class TaskExtensions
+    partial internal static class TaskExtensions
     {
         [SuppressMessage(
             "Style",

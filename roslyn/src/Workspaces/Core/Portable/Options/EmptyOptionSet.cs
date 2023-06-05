@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Options;
 
-public abstract partial class OptionSet
+partial public abstract class OptionSet
 {
     private sealed class EmptyOptionSet : OptionSet
     {

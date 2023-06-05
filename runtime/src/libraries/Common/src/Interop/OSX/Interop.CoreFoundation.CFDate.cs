@@ -10,9 +10,9 @@ using Microsoft.Win32.SafeHandles;
 #pragma warning disable SA1121 // we don't want to simplify built-ins here as we're using aliasing
 using CFAbsoluteTime = System.Double;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class CoreFoundation
+    partial internal static class CoreFoundation
     {
         // https://developer.apple.com/reference/corefoundation/cfabsolutetime
         private static readonly DateTime s_cfDateEpoch = new DateTime(
@@ -26,7 +26,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static partial SafeCFDateHandle CFDateCreate(IntPtr zero, CFAbsoluteTime at);
+        partial private static SafeCFDateHandle CFDateCreate(IntPtr zero, CFAbsoluteTime at);
 
         internal static SafeCFDateHandle CFDateCreate(DateTime date)
         {

@@ -39,7 +39,7 @@ using MonoTests.Helpers;
 namespace MonoTests.System.Web.Caching
 {
     [TestFixture]
-    public partial class CacheItemPriorityQueueTest
+    partial public class CacheItemPriorityQueueTest
     {
         sealed class TestCacheItem : CacheItem
         {

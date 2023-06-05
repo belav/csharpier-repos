@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Collections.ObjectModel.Tests
 {
-    public partial class ReadOnlyObservableCollection_Serialization
+    partial public class ReadOnlyObservableCollection_Serialization
     {
         public static IEnumerable<object[]> SerializeDeserialize_Roundtrips_MemberData()
         {

@@ -524,7 +524,7 @@ namespace Internal.JitInterface
             : base(reason.ToString()) { }
     }
 
-    unsafe partial class CorInfoImpl
+    partial unsafe class CorInfoImpl
     {
         private const CORINFO_RUNTIME_ABI TargetABI = CORINFO_RUNTIME_ABI.CORINFO_CORECLR_ABI;
 

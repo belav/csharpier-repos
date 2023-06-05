@@ -8,10 +8,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
+    partial
     /// <summary>
     /// A thread-pool run and managed on the CLR.
     /// </summary>
-    internal sealed partial class PortableThreadPool
+    internal sealed class PortableThreadPool
     {
         private const int ThreadPoolThreadTimeoutMs = 20 * 1000; // If you change this make sure to change the timeout times in the tests.
         private const int SmallStackSizeBytes = 256 * 1024;

@@ -12,7 +12,7 @@ using System.Text;
 namespace System.Security.Cryptography
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public partial class PasswordDeriveBytes : DeriveBytes
+    partial public class PasswordDeriveBytes : DeriveBytes
     {
         private const string HashAlgorithmUnreferencedCodeMessage =
             "The hash implementation might be removed. Ensure the referenced hash algorithm is not trimmed.";

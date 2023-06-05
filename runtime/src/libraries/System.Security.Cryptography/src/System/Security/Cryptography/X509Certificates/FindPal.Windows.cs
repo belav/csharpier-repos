@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class FindPal : IFindPal
+    partial internal sealed class FindPal : IFindPal
     {
         private readonly StorePal _storePal;
         private readonly X509Certificate2Collection _copyTo;
@@ -26,7 +26,7 @@ namespace System.Security.Cryptography.X509Certificates
             _validOnly = validOnly;
         }
 
-        private static partial IFindPal OpenPal(
+        partial private static IFindPal OpenPal(
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
             bool validOnly

@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths.Predicates
 {
+    partial
     /// <summary>
     /// Location Paths - Predicates (Using position() Function)
     /// </summary>
-    public static partial class UsingPositionFunctionTests
+    public static class UsingPositionFunctionTests
     {
         /// <summary>
         /// Position on the child axis

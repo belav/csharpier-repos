@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
-internal sealed partial class LoggingHttpMessageHandler : DelegatingHandler
+partial internal sealed class LoggingHttpMessageHandler : DelegatingHandler
 {
     private readonly ILogger<LoggingHttpMessageHandler> _logger;
 
@@ -50,7 +50,7 @@ internal sealed partial class LoggingHttpMessageHandler : DelegatingHandler
         return response;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -58,7 +58,7 @@ internal sealed partial class LoggingHttpMessageHandler : DelegatingHandler
             "Sending HTTP request {RequestMethod} '{RequestUrl}'.",
             EventName = "SendingHttpRequest"
         )]
-        public static partial void SendingHttpRequest(
+        partial public static void SendingHttpRequest(
             ILogger logger,
             HttpMethod requestMethod,
             Uri requestUrl
@@ -70,7 +70,7 @@ internal sealed partial class LoggingHttpMessageHandler : DelegatingHandler
             "Unsuccessful HTTP response {StatusCode} return from {RequestMethod} '{RequestUrl}'.",
             EventName = "UnsuccessfulHttpResponse"
         )]
-        public static partial void UnsuccessfulHttpResponse(
+        partial public static void UnsuccessfulHttpResponse(
             ILogger logger,
             HttpStatusCode statusCode,
             HttpMethod requestMethod,

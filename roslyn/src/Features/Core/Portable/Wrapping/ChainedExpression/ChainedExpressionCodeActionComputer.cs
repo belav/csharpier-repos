@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
 {
-    internal abstract partial class AbstractChainedExpressionWrapper<
+    partial internal abstract class AbstractChainedExpressionWrapper<
         TNameSyntax,
         TBaseArgumentListSyntax
     >

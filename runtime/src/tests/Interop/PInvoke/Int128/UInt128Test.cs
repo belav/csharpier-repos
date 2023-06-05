@@ -5,7 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-unsafe partial class Int128Native
+partial unsafe class Int128Native
 {
     [DllImport(nameof(Int128Native))]
     public static extern UInt128 GetUInt128(ulong upper, ulong lower);
@@ -38,7 +38,7 @@ unsafe partial class Int128Native
     public static extern UInt128 AddUInt128s(in UInt128 pValues, int count);
 }
 
-unsafe partial class Int128Native
+partial unsafe class Int128Native
 {
     private static void TestUInt128()
     {

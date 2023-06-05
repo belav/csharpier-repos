@@ -12,7 +12,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Runtime.Serialization
 {
     [TestFixture]
-    public partial class Bug675144Test
+    partial public class Bug675144Test
     {
         [Test]
         public void ServerSerialization()
@@ -57,7 +57,7 @@ namespace WebServiceMoonlightTest.ServiceReference1
         Name = "DataType1",
         Namespace = "http://mynamespace"
     )]
-    public partial class DataType1 : object, System.ComponentModel.INotifyPropertyChanged
+    partial public class DataType1 : object, System.ComponentModel.INotifyPropertyChanged
     {
         private string IdField;
 
@@ -103,7 +103,7 @@ namespace WebServiceMoonlightTest.ServiceReference1
     [System.Runtime.Serialization.KnownTypeAttribute(
         typeof(System.Collections.Generic.IEnumerable<object>)
     )]
-    public partial class DataType2 : object, System.ComponentModel.INotifyPropertyChanged
+    partial public class DataType2 : object, System.ComponentModel.INotifyPropertyChanged
     {
         private System.Collections.Generic.IEnumerable<object> ItemsField;
 
@@ -204,7 +204,7 @@ namespace WebServiceMoonlightTest.ServiceReference1
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    partial public class GetDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         private object[] results;
 
@@ -231,7 +231,7 @@ namespace WebServiceMoonlightTest.ServiceReference1
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetCollectionDataCompletedEventArgs
+    partial public class GetCollectionDataCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         private object[] results;
@@ -259,7 +259,7 @@ namespace WebServiceMoonlightTest.ServiceReference1
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetNestedDataCompletedEventArgs
+    partial public class GetNestedDataCompletedEventArgs
         : System.ComponentModel.AsyncCompletedEventArgs
     {
         private object[] results;
@@ -287,7 +287,7 @@ namespace WebServiceMoonlightTest.ServiceReference1
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client
+    partial public class Service1Client
         : System.ServiceModel.ClientBase<WebServiceMoonlightTest.ServiceReference1.IService1>,
             WebServiceMoonlightTest.ServiceReference1.IService1
     {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.NetworkInformation
 {
-    public partial class Ping : Component
+    partial public class Ping : Component
     {
         private const int DefaultSendBufferSize = 32; // Same as ping.exe on Windows.
         private const int DefaultTimeout = 5000; // 5 seconds: same as ping.exe on Windows.

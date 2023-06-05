@@ -8,9 +8,10 @@ using System;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
+    partial
     // Various parts of VS (such as Venus) like to assume our project is an IServiceProvider, and so
     // we must implement it here.
-    internal partial class CSharpProjectShim : Microsoft.VisualStudio.OLE.Interop.IServiceProvider
+    internal class CSharpProjectShim : Microsoft.VisualStudio.OLE.Interop.IServiceProvider
     {
         public int QueryService(ref Guid guidService, ref Guid riid, out IntPtr ppvObject)
         {

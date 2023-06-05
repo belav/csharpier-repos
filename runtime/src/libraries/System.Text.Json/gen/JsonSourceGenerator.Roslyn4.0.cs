@@ -17,7 +17,7 @@ namespace System.Text.Json.SourceGeneration
     /// Generates source code to optimize serialization and deserialization with JsonSerializer.
     /// </summary>
     [Generator]
-    public sealed partial class JsonSourceGenerator : IIncrementalGenerator
+    partial public sealed class JsonSourceGenerator : IIncrementalGenerator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {

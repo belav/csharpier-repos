@@ -7,7 +7,7 @@ using System.Reflection.TypeLoading;
 
 namespace System.Reflection
 {
-    public sealed partial class MetadataLoadContext
+    partial public sealed class MetadataLoadContext
     {
         private static readonly string[] s_CoreNames =
         {

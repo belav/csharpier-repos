@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace System
 {
-    public static partial class GC
+    partial public static class GC
     {
         /// <summary>
         /// Returns, in a specified time-out period, the status of a registered notification for determining whether a full,

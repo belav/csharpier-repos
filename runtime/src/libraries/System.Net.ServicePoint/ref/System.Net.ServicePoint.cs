@@ -27,7 +27,7 @@ namespace System.Net
         Tls13 = 12288,
     }
 
-    public partial class ServicePoint
+    partial public class ServicePoint
     {
         internal ServicePoint() { }
 
@@ -107,7 +107,7 @@ namespace System.Net
         public void SetTcpKeepAlive(bool enabled, int keepAliveTime, int keepAliveInterval) { }
     }
 
-    public partial class ServicePointManager
+    partial public class ServicePointManager
     {
         internal ServicePointManager() { }
 

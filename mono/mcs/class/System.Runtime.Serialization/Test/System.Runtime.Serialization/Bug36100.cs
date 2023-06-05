@@ -70,7 +70,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "DingusSyncData",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class DingusSyncData : object
+    partial public class DingusSyncData : object
     {
         AircraftDTO[] AircraftField;
 
@@ -298,7 +298,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "DataInspection",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class DataInspection : object
+    partial public class DataInspection : object
     {
         private int DayCountField;
 
@@ -355,7 +355,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "AircraftDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class AircraftDTO : object
+    partial public class AircraftDTO : object
     {
         private string aircraftIdField;
 
@@ -538,7 +538,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "AircraftTypeDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class AircraftTypeDTO : object
+    partial public class AircraftTypeDTO : object
     {
         private string aircraftTypeIdField;
 
@@ -685,7 +685,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "AirlineDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class AirlineDTO : object
+    partial public class AirlineDTO : object
     {
         private string airlineIdField;
 
@@ -823,7 +823,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "AirportDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class AirportDTO : object
+    partial public class AirportDTO : object
     {
         private string airlineNameField;
 
@@ -1114,7 +1114,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "ApproachDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class ApproachDTO : object
+    partial public class ApproachDTO : object
     {
         private string approachIdField;
 
@@ -1234,7 +1234,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "ApproachesLegDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class ApproachesLegDTO : object
+    partial public class ApproachesLegDTO : object
     {
         private string approachIdField;
 
@@ -1336,7 +1336,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "BinaryCatalogDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class BinaryCatalogDTO : object
+    partial public class BinaryCatalogDTO : object
     {
         private global::System.Guid RowGuidField;
 
@@ -1492,7 +1492,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "CrewDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class CrewDTO : object
+    partial public class CrewDTO : object
     {
         private Nullable<int> communicationLevelField;
 
@@ -1729,7 +1729,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "DayDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class DayDTO : object
+    partial public class DayDTO : object
     {
         private Nullable<int> blockField;
 
@@ -2056,7 +2056,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "EmploymentEventDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class EmploymentEventDTO : object
+    partial public class EmploymentEventDTO : object
     {
         private string airlineIdField;
 
@@ -2167,7 +2167,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "EventDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class EventDTO : object
+    partial public class EventDTO : object
     {
         private Nullable<global::System.DateTime> createdUtcField;
 
@@ -2287,7 +2287,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "GlobalSettingDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class GlobalSettingDTO : object
+    partial public class GlobalSettingDTO : object
     {
         private string DescriptionField;
 
@@ -2344,7 +2344,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "HotelDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class HotelDTO : object
+    partial public class HotelDTO : object
     {
         private Nullable<int> communicationLevelField;
 
@@ -2554,7 +2554,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "LegDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class LegDTO : object
+    partial public class LegDTO : object
     {
         private Nullable<int> actualBlockField;
 
@@ -3016,7 +3016,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "NoteDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class NoteDTO : object
+    partial public class NoteDTO : object
     {
         private Nullable<global::System.DateTime> createdUtcField;
 
@@ -3127,7 +3127,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "PayperiodEventDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PayperiodEventDTO : object
+    partial public class PayperiodEventDTO : object
     {
         private string airlineIdField;
 
@@ -3247,7 +3247,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "PayrollCategoryDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PayrollCategoryDTO : object
+    partial public class PayrollCategoryDTO : object
     {
         private Nullable<bool> aboveGuaranteeField;
 
@@ -3475,7 +3475,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "PayrollDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PayrollDTO : object
+    partial public class PayrollDTO : object
     {
         private Nullable<int> actualField;
 
@@ -3604,7 +3604,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "PerformanceDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PerformanceDTO : object
+    partial public class PerformanceDTO : object
     {
         private Nullable<int> actualField;
 
@@ -3733,7 +3733,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "PositionDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PositionDTO : object
+    partial public class PositionDTO : object
     {
         private Nullable<bool> autoNightLandingField;
 
@@ -3907,7 +3907,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "ReglatoryOperationTypeDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class ReglatoryOperationTypeDTO : object
+    partial public class ReglatoryOperationTypeDTO : object
     {
         private Nullable<bool> activeField;
 
@@ -4036,7 +4036,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "TripDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class TripDTO : object
+    partial public class TripDTO : object
     {
         private bool activeField;
 
@@ -4273,7 +4273,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "UserSettingDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class UserSettingDTO : object
+    partial public class UserSettingDTO : object
     {
         private Nullable<global::System.DateTime> createdUtcField;
 
@@ -4393,7 +4393,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "DingusSyncResponse",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class DingusSyncResponse : object
+    partial public class DingusSyncResponse : object
     {
         DingusSyncData CloudDataField;
 
@@ -4468,7 +4468,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "BinaryTransferResponse",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class BinaryTransferResponse : object
+    partial public class BinaryTransferResponse : object
     {
         private string ErrorMessageField;
 
@@ -4498,7 +4498,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "SyncStatus",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class SyncStatus : object
+    partial public class SyncStatus : object
     {
         EntitySyncState[] SyncStateField;
 
@@ -4519,7 +4519,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "EntitySyncState",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class EntitySyncState : object
+    partial public class EntitySyncState : object
     {
         private string EntityNameField;
 
@@ -4549,7 +4549,7 @@ namespace MonoTests.System.Runtime.Serialization
         Name = "TaxiTime",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class TaxiTime : object
+    partial public class TaxiTime : object
     {
         private string AirportField;
 
@@ -4640,7 +4640,7 @@ namespace host
         Name = "DingusSyncData",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class DingusSyncData : object
+    partial public class DingusSyncData : object
     {
         AircraftDTO[] AircraftField;
 
@@ -4868,7 +4868,7 @@ namespace host
         Name = "DataInspection",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class DataInspection : object
+    partial public class DataInspection : object
     {
         private int DayCountField;
 
@@ -4925,7 +4925,7 @@ namespace host
         Name = "AircraftDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class AircraftDTO : object
+    partial public class AircraftDTO : object
     {
         private string aircraftIdField;
 
@@ -5108,7 +5108,7 @@ namespace host
         Name = "AircraftTypeDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class AircraftTypeDTO : object
+    partial public class AircraftTypeDTO : object
     {
         private string aircraftTypeIdField;
 
@@ -5255,7 +5255,7 @@ namespace host
         Name = "AirlineDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class AirlineDTO : object
+    partial public class AirlineDTO : object
     {
         private string airlineIdField;
 
@@ -5393,7 +5393,7 @@ namespace host
         Name = "AirportDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class AirportDTO : object
+    partial public class AirportDTO : object
     {
         private string airlineNameField;
 
@@ -5684,7 +5684,7 @@ namespace host
         Name = "ApproachDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class ApproachDTO : object
+    partial public class ApproachDTO : object
     {
         private string approachIdField;
 
@@ -5804,7 +5804,7 @@ namespace host
         Name = "ApproachesLegDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class ApproachesLegDTO : object
+    partial public class ApproachesLegDTO : object
     {
         private string approachIdField;
 
@@ -5906,7 +5906,7 @@ namespace host
         Name = "BinaryCatalogDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class BinaryCatalogDTO : object
+    partial public class BinaryCatalogDTO : object
     {
         private global::System.Guid RowGuidField;
 
@@ -6062,7 +6062,7 @@ namespace host
         Name = "CrewDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class CrewDTO : object
+    partial public class CrewDTO : object
     {
         private Nullable<int> communicationLevelField;
 
@@ -6299,7 +6299,7 @@ namespace host
         Name = "DayDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class DayDTO : object
+    partial public class DayDTO : object
     {
         private Nullable<int> blockField;
 
@@ -6626,7 +6626,7 @@ namespace host
         Name = "EmploymentEventDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class EmploymentEventDTO : object
+    partial public class EmploymentEventDTO : object
     {
         private string airlineIdField;
 
@@ -6737,7 +6737,7 @@ namespace host
         Name = "EventDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class EventDTO : object
+    partial public class EventDTO : object
     {
         private Nullable<global::System.DateTime> createdUtcField;
 
@@ -6857,7 +6857,7 @@ namespace host
         Name = "GlobalSettingDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class GlobalSettingDTO : object
+    partial public class GlobalSettingDTO : object
     {
         private string DescriptionField;
 
@@ -6914,7 +6914,7 @@ namespace host
         Name = "HotelDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class HotelDTO : object
+    partial public class HotelDTO : object
     {
         private Nullable<int> communicationLevelField;
 
@@ -7124,7 +7124,7 @@ namespace host
         Name = "LegDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class LegDTO : object
+    partial public class LegDTO : object
     {
         private Nullable<int> actualBlockField;
 
@@ -7586,7 +7586,7 @@ namespace host
         Name = "NoteDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class NoteDTO : object
+    partial public class NoteDTO : object
     {
         private Nullable<global::System.DateTime> createdUtcField;
 
@@ -7697,7 +7697,7 @@ namespace host
         Name = "PayperiodEventDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PayperiodEventDTO : object
+    partial public class PayperiodEventDTO : object
     {
         private string airlineIdField;
 
@@ -7817,7 +7817,7 @@ namespace host
         Name = "PayrollCategoryDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PayrollCategoryDTO : object
+    partial public class PayrollCategoryDTO : object
     {
         private Nullable<bool> aboveGuaranteeField;
 
@@ -8045,7 +8045,7 @@ namespace host
         Name = "PayrollDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PayrollDTO : object
+    partial public class PayrollDTO : object
     {
         private Nullable<int> actualField;
 
@@ -8174,7 +8174,7 @@ namespace host
         Name = "PerformanceDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PerformanceDTO : object
+    partial public class PerformanceDTO : object
     {
         private Nullable<int> actualField;
 
@@ -8303,7 +8303,7 @@ namespace host
         Name = "PositionDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class PositionDTO : object
+    partial public class PositionDTO : object
     {
         private Nullable<bool> autoNightLandingField;
 
@@ -8477,7 +8477,7 @@ namespace host
         Name = "ReglatoryOperationTypeDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class ReglatoryOperationTypeDTO : object
+    partial public class ReglatoryOperationTypeDTO : object
     {
         private Nullable<bool> activeField;
 
@@ -8606,7 +8606,7 @@ namespace host
         Name = "TripDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class TripDTO : object
+    partial public class TripDTO : object
     {
         private bool activeField;
 
@@ -8843,7 +8843,7 @@ namespace host
         Name = "UserSettingDTO",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class UserSettingDTO : object
+    partial public class UserSettingDTO : object
     {
         private Nullable<global::System.DateTime> createdUtcField;
 
@@ -8963,7 +8963,7 @@ namespace host
         Name = "DingusSyncResponse",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class DingusSyncResponse : object
+    partial public class DingusSyncResponse : object
     {
         DingusSyncData CloudDataField;
 
@@ -9038,7 +9038,7 @@ namespace host
         Name = "BinaryTransferResponse",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class BinaryTransferResponse : object
+    partial public class BinaryTransferResponse : object
     {
         private string ErrorMessageField;
 
@@ -9068,7 +9068,7 @@ namespace host
         Name = "SyncStatus",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class SyncStatus : object
+    partial public class SyncStatus : object
     {
         EntitySyncState[] SyncStateField;
 
@@ -9089,7 +9089,7 @@ namespace host
         Name = "EntitySyncState",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class EntitySyncState : object
+    partial public class EntitySyncState : object
     {
         private string EntityNameField;
 
@@ -9119,7 +9119,7 @@ namespace host
         Name = "TaxiTime",
         Namespace = "http://schemas.datacontract.org/2004/07/Dingus.Data.DataContracts"
     )]
-    public partial class TaxiTime : object
+    partial public class TaxiTime : object
     {
         private string AirportField;
 

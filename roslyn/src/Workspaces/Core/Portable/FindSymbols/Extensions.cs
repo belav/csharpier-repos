@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal static partial class Extensions
+    partial internal static class Extensions
     {
         public const string ComplexReceiverTypeName = "";
 

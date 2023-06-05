@@ -6,10 +6,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Expressions.NodeSets
 {
+    partial
     /// <summary>
     /// Expressions - Node Sets (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Expected: True (based on context node).

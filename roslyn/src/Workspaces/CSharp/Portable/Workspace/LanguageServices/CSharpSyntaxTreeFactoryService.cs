@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     [ExportLanguageService(typeof(ISyntaxTreeFactoryService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpSyntaxTreeFactoryService : AbstractSyntaxTreeFactoryService
+    partial internal class CSharpSyntaxTreeFactoryService : AbstractSyntaxTreeFactoryService
     {
         private static readonly CSharpParseOptions _parseOptionWithLatestLanguageVersion =
             CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview);

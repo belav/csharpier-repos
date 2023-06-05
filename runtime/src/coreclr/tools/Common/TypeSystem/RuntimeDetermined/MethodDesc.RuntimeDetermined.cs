@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class MethodDesc
+    partial public class MethodDesc
     {
         /// <summary>
         /// Gets the shared runtime determined form of the method. This is a canonical form of the method

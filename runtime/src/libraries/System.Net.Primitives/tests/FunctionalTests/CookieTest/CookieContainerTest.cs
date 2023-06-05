@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
 {
-    public partial class CookieContainerTest
+    partial public class CookieContainerTest
     {
         private const string CookieName1 = "CookieName1";
         private const string CookieName2 = "CookieName2";

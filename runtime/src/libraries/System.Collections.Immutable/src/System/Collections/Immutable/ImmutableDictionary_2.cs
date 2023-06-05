@@ -15,7 +15,7 @@ namespace System.Collections.Immutable
     /// <typeparam name="TValue">The type of the value.</typeparam>
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ImmutableDictionaryDebuggerProxy<,>))]
-    public sealed partial class ImmutableDictionary<TKey, TValue>
+    partial public sealed class ImmutableDictionary<TKey, TValue>
         : IImmutableDictionary<TKey, TValue>,
             IImmutableDictionaryInternal<TKey, TValue>,
             IHashKeyCollection<TKey>,

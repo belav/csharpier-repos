@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial struct SymbolKey
+    partial internal struct SymbolKey
     {
         private sealed class TypeParameterSymbolKey : AbstractSymbolKey<ITypeParameterSymbol>
         {

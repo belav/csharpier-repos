@@ -5,7 +5,7 @@ public struct Test
     int a1;
     int a2;
 
-    static public int Main()
+    public static int Main()
     {
         Test[] tarray = new Test[20];
         tarray[0].a1 = 1;

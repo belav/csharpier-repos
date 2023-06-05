@@ -15,7 +15,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
-    public partial class ImmutableSegmentedHashSetTest : ImmutableSetTest
+    partial public class ImmutableSegmentedHashSetTest : ImmutableSetTest
     {
         [Fact]
         public void EmptyTest()

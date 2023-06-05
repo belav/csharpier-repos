@@ -7,8 +7,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
+partial
 // We use a middleware so that we can use DI.
-internal sealed partial class CircuitDisconnectMiddleware
+internal sealed class CircuitDisconnectMiddleware
 {
     private const string CircuitIdKey = "circuitId";
 
@@ -87,7 +88,7 @@ internal sealed partial class CircuitDisconnectMiddleware
         Log.CircuitTerminatedGracefully(Logger, circuitId);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -95,7 +96,7 @@ internal sealed partial class CircuitDisconnectMiddleware
             "Circuit with id '{CircuitId}' terminating gracefully.",
             EventName = "CircuitTerminatingGracefully"
         )]
-        public static partial void CircuitTerminatingGracefully(
+        partial public static void CircuitTerminatingGracefully(
             ILogger logger,
             CircuitId circuitId
         );
@@ -106,7 +107,7 @@ internal sealed partial class CircuitDisconnectMiddleware
             "Circuit with id '{CircuitId}' terminated gracefully.",
             EventName = "CircuitTerminatedGracefully"
         )]
-        public static partial void CircuitTerminatedGracefully(ILogger logger, CircuitId circuitId);
+        partial public static void CircuitTerminatedGracefully(ILogger logger, CircuitId circuitId);
 
         [LoggerMessage(
             3,
@@ -114,6 +115,6 @@ internal sealed partial class CircuitDisconnectMiddleware
             "CircuitDisconnectMiddleware received an invalid circuit id '{CircuitIdSecret}'.",
             EventName = "InvalidCircuitId"
         )]
-        public static partial void InvalidCircuitId(ILogger logger, string circuitIdSecret);
+        partial public static void InvalidCircuitId(ILogger logger, string circuitIdSecret);
     }
 }

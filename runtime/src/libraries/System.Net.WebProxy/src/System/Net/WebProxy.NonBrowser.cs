@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace System.Net
 {
-    public partial class WebProxy : IWebProxy, ISerializable
+    partial public class WebProxy : IWebProxy, ISerializable
     {
         private static volatile string? s_domainName;
         private static volatile IPAddress[]? s_localAddresses;

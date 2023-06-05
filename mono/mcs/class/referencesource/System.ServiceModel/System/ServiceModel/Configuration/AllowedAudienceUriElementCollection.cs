@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
         typeof(AllowedAudienceUriElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap
     )]
-    public sealed partial class AllowedAudienceUriElementCollection
+    partial public sealed class AllowedAudienceUriElementCollection
         : ServiceModelConfigurationElementCollection<AllowedAudienceUriElement>
     {
         public AllowedAudienceUriElementCollection()

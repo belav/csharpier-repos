@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    internal abstract partial class AbstractTriviaDataFactory
+    partial internal abstract class AbstractTriviaDataFactory
     {
         private const int SpaceCacheSize = 10;
         private const int LineBreakCacheSize = 5;

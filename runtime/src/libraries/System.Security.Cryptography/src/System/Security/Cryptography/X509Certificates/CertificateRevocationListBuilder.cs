@@ -10,10 +10,11 @@ using System.Security.Cryptography.Asn1;
 
 namespace System.Security.Cryptography.X509Certificates
 {
+    partial
     /// <summary>
     ///   Facilitates building a Certificate Revocation List (CRL).
     /// </summary>
-    public sealed partial class CertificateRevocationListBuilder
+    public sealed class CertificateRevocationListBuilder
     {
         private readonly List<RevokedCertificate> _revoked;
         private AsnWriter? _writer;

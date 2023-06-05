@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public partial class CustomAttributeBuilder
+    partial public class CustomAttributeBuilder
     {
         private ConstructorInfo ctor = null!;
         private byte[] data = null!;

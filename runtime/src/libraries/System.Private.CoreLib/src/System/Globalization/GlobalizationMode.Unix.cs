@@ -3,9 +3,9 @@
 
 namespace System.Globalization
 {
-    internal static partial class GlobalizationMode
+    partial internal static class GlobalizationMode
     {
-        private static partial class Settings
+        partial private static class Settings
         {
             /// <summary>
             /// Load ICU (when not in Invariant mode) in a static cctor to ensure it is loaded as side-effect of

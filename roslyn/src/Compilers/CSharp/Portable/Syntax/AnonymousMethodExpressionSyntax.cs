@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class AnonymousMethodExpressionSyntax
+    partial public class AnonymousMethodExpressionSyntax
     {
         public new AnonymousMethodExpressionSyntax WithBody(CSharpSyntaxNode body) =>
             body is BlockSyntax block
@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         /// <summary>Creates a new AnonymousMethodExpressionSyntax instance.</summary>
         public static AnonymousMethodExpressionSyntax AnonymousMethodExpression() =>

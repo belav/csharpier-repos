@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-internal partial class IISHttpContext
+partial internal class IISHttpContext
 {
     private long _consumedBytes;
     internal bool ClientDisconnected { get; private set; }

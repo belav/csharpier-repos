@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.LanguageService.TypeInferenceService;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     [ExportLanguageService(typeof(ITypeInferenceService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpTypeInferenceService : AbstractTypeInferenceService
+    partial internal class CSharpTypeInferenceService : AbstractTypeInferenceService
     {
         public static readonly CSharpTypeInferenceService Instance = new();
 

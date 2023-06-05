@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class OptionsBuilderConfigurationExtensions
+    partial public static class OptionsBuilderConfigurationExtensions
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding strongly typed objects to configuration values may require generating dynamic code at runtime."
@@ -71,7 +71,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public static partial class OptionsConfigurationServiceCollectionExtensions
+    partial public static class OptionsConfigurationServiceCollectionExtensions
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding strongly typed objects to configuration values may require generating dynamic code at runtime."
@@ -161,7 +161,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
 namespace Microsoft.Extensions.Options
 {
-    public partial class ConfigurationChangeTokenSource<TOptions>
+    partial public class ConfigurationChangeTokenSource<TOptions>
         : Microsoft.Extensions.Options.IOptionsChangeTokenSource<TOptions>
     {
         public ConfigurationChangeTokenSource(
@@ -184,7 +184,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class ConfigureFromConfigurationOptions<
+    partial public class ConfigureFromConfigurationOptions<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
         )]
@@ -204,7 +204,7 @@ namespace Microsoft.Extensions.Options
             : base(default(System.Action<TOptions>)) { }
     }
 
-    public partial class NamedConfigureFromConfigurationOptions<
+    partial public class NamedConfigureFromConfigurationOptions<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
         )]

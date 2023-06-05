@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy
 {
-    internal partial class AbstractLegacyProject
+    partial internal class AbstractLegacyProject
         : IVsReportExternalErrors,
             IVsLanguageServiceBuildErrorReporter2
     {

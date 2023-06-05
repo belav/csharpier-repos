@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class ReferenceHandlerTests
+    partial public static class ReferenceHandlerTests
     {
         private static readonly JsonSerializerOptions s_serializerOptionsPreserve =
             new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve };

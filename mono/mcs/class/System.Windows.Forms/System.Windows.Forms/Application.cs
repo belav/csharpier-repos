@@ -567,10 +567,11 @@ namespace System.Windows.Forms
             return false;
         }
 
+        internal
         //
         // If true, it uses GDI+, performance reasons were quoted
         //
-        static internal bool use_compatible_text_rendering = true;
+        static bool use_compatible_text_rendering = true;
 
         public static void SetCompatibleTextRenderingDefault(bool defaultValue)
         {

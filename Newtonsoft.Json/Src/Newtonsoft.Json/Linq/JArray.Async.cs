@@ -32,7 +32,7 @@ using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq
 {
-    public partial class JArray
+    partial public class JArray
     {
         /// <summary>
         /// Writes this token to a <see cref="JsonWriter"/> asynchronously.
@@ -66,7 +66,7 @@ namespace Newtonsoft.Json.Linq
         /// If this is <c>null</c>, default load settings will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous load. The <see cref="Task{TResult}.Result"/> property contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static Task<JArray> LoadAsync(
+        public static new Task<JArray> LoadAsync(
             JsonReader reader,
             CancellationToken cancellationToken = default
         )
@@ -82,7 +82,7 @@ namespace Newtonsoft.Json.Linq
         /// If this is <c>null</c>, default load settings will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the asynchronous load. The <see cref="Task{TResult}.Result"/> property contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static async Task<JArray> LoadAsync(
+        public static new async Task<JArray> LoadAsync(
             JsonReader reader,
             JsonLoadSettings? settings,
             CancellationToken cancellationToken = default

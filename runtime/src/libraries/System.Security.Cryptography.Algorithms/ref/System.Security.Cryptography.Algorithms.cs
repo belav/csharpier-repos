@@ -7,7 +7,7 @@
 namespace System.Security.Cryptography
 {
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class Aes : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class Aes : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected Aes() { }
 
@@ -28,7 +28,7 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public sealed partial class AesCcm : System.IDisposable
+    partial public sealed class AesCcm : System.IDisposable
     {
         public AesCcm(byte[] key) { }
 
@@ -85,7 +85,7 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public sealed partial class AesGcm : System.IDisposable
+    partial public sealed class AesGcm : System.IDisposable
     {
         public AesGcm(byte[] key) { }
 
@@ -148,7 +148,7 @@ namespace System.Security.Cryptography
         System.ComponentModel.EditorBrowsableState.Never
     )]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public sealed partial class AesManaged : System.Security.Cryptography.Aes
+    partial public sealed class AesManaged : System.Security.Cryptography.Aes
     {
         public AesManaged() { }
 
@@ -230,7 +230,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class AsymmetricKeyExchangeDeformatter
+    partial public abstract class AsymmetricKeyExchangeDeformatter
     {
         protected AsymmetricKeyExchangeDeformatter() { }
 
@@ -240,7 +240,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class AsymmetricSignatureDeformatter
+    partial public abstract class AsymmetricSignatureDeformatter
     {
         protected AsymmetricSignatureDeformatter() { }
 
@@ -258,7 +258,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class AsymmetricSignatureFormatter
+    partial public abstract class AsymmetricSignatureFormatter
     {
         protected AsymmetricSignatureFormatter() { }
 
@@ -276,7 +276,7 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public sealed partial class ChaCha20Poly1305 : System.IDisposable
+    partial public sealed class ChaCha20Poly1305 : System.IDisposable
     {
         public ChaCha20Poly1305(byte[] key) { }
 
@@ -322,7 +322,7 @@ namespace System.Security.Cryptography
         ) { }
     }
 
-    public partial class CryptoConfig
+    partial public class CryptoConfig
     {
         public CryptoConfig() { }
 
@@ -372,7 +372,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class DeriveBytes : System.IDisposable
+    partial public abstract class DeriveBytes : System.IDisposable
     {
         protected DeriveBytes() { }
 
@@ -388,7 +388,7 @@ namespace System.Security.Cryptography
         System.ComponentModel.EditorBrowsableState.Never
     )]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class DES : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class DES : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected DES() { }
 
@@ -423,7 +423,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class DSA : System.Security.Cryptography.AsymmetricAlgorithm
+    partial public abstract class DSA : System.Security.Cryptography.AsymmetricAlgorithm
     {
         protected DSA() { }
 
@@ -880,7 +880,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial struct DSAParameters
+    partial public struct DSAParameters
     {
         public int Counter;
         public byte[]? G;
@@ -893,7 +893,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class DSASignatureDeformatter
+    partial public class DSASignatureDeformatter
         : System.Security.Cryptography.AsymmetricSignatureDeformatter
     {
         public DSASignatureDeformatter() { }
@@ -917,7 +917,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class DSASignatureFormatter
+    partial public class DSASignatureFormatter
         : System.Security.Cryptography.AsymmetricSignatureFormatter
     {
         public DSASignatureFormatter() { }
@@ -935,7 +935,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial struct ECCurve
+    partial public struct ECCurve
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -1001,7 +1001,7 @@ namespace System.Security.Cryptography
             Named = 5,
         }
 
-        public static partial class NamedCurves
+        partial public static class NamedCurves
         {
             public static System.Security.Cryptography.ECCurve brainpoolP160r1
             {
@@ -1075,7 +1075,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class ECDiffieHellman : System.Security.Cryptography.AsymmetricAlgorithm
+    partial public abstract class ECDiffieHellman : System.Security.Cryptography.AsymmetricAlgorithm
     {
         protected ECDiffieHellman() { }
 
@@ -1298,7 +1298,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class ECDiffieHellmanPublicKey : System.IDisposable
+    partial public abstract class ECDiffieHellmanPublicKey : System.IDisposable
     {
         protected ECDiffieHellmanPublicKey() { }
 
@@ -1343,7 +1343,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class ECDsa : System.Security.Cryptography.AsymmetricAlgorithm
+    partial public abstract class ECDsa : System.Security.Cryptography.AsymmetricAlgorithm
     {
         protected ECDsa() { }
 
@@ -1836,7 +1836,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial struct ECParameters
+    partial public struct ECParameters
     {
         public System.Security.Cryptography.ECCurve Curve;
         public byte[]? D;
@@ -1845,14 +1845,14 @@ namespace System.Security.Cryptography
         public void Validate() { }
     }
 
-    public partial struct ECPoint
+    partial public struct ECPoint
     {
         public byte[]? X;
         public byte[]? Y;
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public static partial class HKDF
+    partial public static class HKDF
     {
         public static byte[] DeriveKey(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithmName,
@@ -1911,7 +1911,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class HMACMD5 : System.Security.Cryptography.HMAC
+    partial public class HMACMD5 : System.Security.Cryptography.HMAC
     {
         public HMACMD5() { }
 
@@ -1975,7 +1975,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class HMACSHA1 : System.Security.Cryptography.HMAC
+    partial public class HMACSHA1 : System.Security.Cryptography.HMAC
     {
         public HMACSHA1() { }
 
@@ -2049,7 +2049,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class HMACSHA256 : System.Security.Cryptography.HMAC
+    partial public class HMACSHA256 : System.Security.Cryptography.HMAC
     {
         public HMACSHA256() { }
 
@@ -2113,7 +2113,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class HMACSHA384 : System.Security.Cryptography.HMAC
+    partial public class HMACSHA384 : System.Security.Cryptography.HMAC
     {
         public HMACSHA384() { }
 
@@ -2188,7 +2188,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class HMACSHA512 : System.Security.Cryptography.HMAC
+    partial public class HMACSHA512 : System.Security.Cryptography.HMAC
     {
         public HMACSHA512() { }
 
@@ -2262,7 +2262,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class IncrementalHash : System.IDisposable
+    partial public sealed class IncrementalHash : System.IDisposable
     {
         internal IncrementalHash() { }
 
@@ -2340,7 +2340,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class MaskGenerationMethod
+    partial public abstract class MaskGenerationMethod
     {
         protected MaskGenerationMethod() { }
 
@@ -2348,7 +2348,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class MD5 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class MD5 : System.Security.Cryptography.HashAlgorithm
     {
         protected MD5() { }
 
@@ -2391,7 +2391,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class PKCS1MaskGenerationMethod
+    partial public class PKCS1MaskGenerationMethod
         : System.Security.Cryptography.MaskGenerationMethod
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2411,7 +2411,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class RandomNumberGenerator : System.IDisposable
+    partial public abstract class RandomNumberGenerator : System.IDisposable
     {
         protected RandomNumberGenerator() { }
 
@@ -2465,7 +2465,7 @@ namespace System.Security.Cryptography
         System.ComponentModel.EditorBrowsableState.Never
     )]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class RC2 : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class RC2 : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected int EffectiveKeySizeValue;
 
@@ -2498,7 +2498,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class Rfc2898DeriveBytes : System.Security.Cryptography.DeriveBytes
+    partial public class Rfc2898DeriveBytes : System.Security.Cryptography.DeriveBytes
     {
         public Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations) { }
 
@@ -2635,7 +2635,7 @@ namespace System.Security.Cryptography
         System.ComponentModel.EditorBrowsableState.Never
     )]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class Rijndael : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class Rijndael : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected Rijndael() { }
 
@@ -2662,7 +2662,7 @@ namespace System.Security.Cryptography
         System.ComponentModel.EditorBrowsableState.Never
     )]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public sealed partial class RijndaelManaged : System.Security.Cryptography.Rijndael
+    partial public sealed class RijndaelManaged : System.Security.Cryptography.Rijndael
     {
         public RijndaelManaged() { }
 
@@ -2740,7 +2740,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class RSA : System.Security.Cryptography.AsymmetricAlgorithm
+    partial public abstract class RSA : System.Security.Cryptography.AsymmetricAlgorithm
     {
         protected RSA() { }
 
@@ -3109,7 +3109,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public sealed partial class RSAEncryptionPadding
+    partial public sealed class RSAEncryptionPadding
         : System.IEquatable<System.Security.Cryptography.RSAEncryptionPadding>
     {
         internal RSAEncryptionPadding() { }
@@ -3199,7 +3199,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class RSAOAEPKeyExchangeDeformatter
+    partial public class RSAOAEPKeyExchangeDeformatter
         : System.Security.Cryptography.AsymmetricKeyExchangeDeformatter
     {
         public RSAOAEPKeyExchangeDeformatter() { }
@@ -3222,7 +3222,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class RSAOAEPKeyExchangeFormatter
+    partial public class RSAOAEPKeyExchangeFormatter
         : System.Security.Cryptography.AsymmetricKeyExchangeFormatter
     {
         public RSAOAEPKeyExchangeFormatter() { }
@@ -3257,7 +3257,7 @@ namespace System.Security.Cryptography
         public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
     }
 
-    public partial struct RSAParameters
+    partial public struct RSAParameters
     {
         public byte[]? D;
         public byte[]? DP;
@@ -3270,7 +3270,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class RSAPKCS1KeyExchangeDeformatter
+    partial public class RSAPKCS1KeyExchangeDeformatter
         : System.Security.Cryptography.AsymmetricKeyExchangeDeformatter
     {
         public RSAPKCS1KeyExchangeDeformatter() { }
@@ -3298,7 +3298,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class RSAPKCS1KeyExchangeFormatter
+    partial public class RSAPKCS1KeyExchangeFormatter
         : System.Security.Cryptography.AsymmetricKeyExchangeFormatter
     {
         public RSAPKCS1KeyExchangeFormatter() { }
@@ -3330,7 +3330,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class RSAPKCS1SignatureDeformatter
+    partial public class RSAPKCS1SignatureDeformatter
         : System.Security.Cryptography.AsymmetricSignatureDeformatter
     {
         public RSAPKCS1SignatureDeformatter() { }
@@ -3349,7 +3349,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class RSAPKCS1SignatureFormatter
+    partial public class RSAPKCS1SignatureFormatter
         : System.Security.Cryptography.AsymmetricSignatureFormatter
     {
         public RSAPKCS1SignatureFormatter() { }
@@ -3367,7 +3367,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public sealed partial class RSASignaturePadding
+    partial public sealed class RSASignaturePadding
         : System.IEquatable<System.Security.Cryptography.RSASignaturePadding>
     {
         internal RSASignaturePadding() { }
@@ -3433,7 +3433,7 @@ namespace System.Security.Cryptography
         Pss = 1,
     }
 
-    public abstract partial class SHA1 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class SHA1 : System.Security.Cryptography.HashAlgorithm
     {
         protected SHA1() { }
 
@@ -3483,7 +3483,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class SHA1Managed : System.Security.Cryptography.SHA1
+    partial public sealed class SHA1Managed : System.Security.Cryptography.SHA1
     {
         public SHA1Managed() { }
 
@@ -3509,7 +3509,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class SHA256 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class SHA256 : System.Security.Cryptography.HashAlgorithm
     {
         protected SHA256() { }
 
@@ -3559,7 +3559,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class SHA256Managed : System.Security.Cryptography.SHA256
+    partial public sealed class SHA256Managed : System.Security.Cryptography.SHA256
     {
         public SHA256Managed() { }
 
@@ -3585,7 +3585,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class SHA384 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class SHA384 : System.Security.Cryptography.HashAlgorithm
     {
         protected SHA384() { }
 
@@ -3635,7 +3635,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class SHA384Managed : System.Security.Cryptography.SHA384
+    partial public sealed class SHA384Managed : System.Security.Cryptography.SHA384
     {
         public SHA384Managed() { }
 
@@ -3661,7 +3661,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class SHA512 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class SHA512 : System.Security.Cryptography.HashAlgorithm
     {
         protected SHA512() { }
 
@@ -3711,7 +3711,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class SHA512Managed : System.Security.Cryptography.SHA512
+    partial public sealed class SHA512Managed : System.Security.Cryptography.SHA512
     {
         public SHA512Managed() { }
 
@@ -3738,7 +3738,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class SignatureDescription
+    partial public class SignatureDescription
     {
         public SignatureDescription() { }
 
@@ -3795,7 +3795,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public abstract partial class TripleDES : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class TripleDES : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected TripleDES() { }
 

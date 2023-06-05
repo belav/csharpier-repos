@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct IssuerAndSerialNumberAsn
+    partial internal struct IssuerAndSerialNumberAsn
     {
         internal ReadOnlyMemory<byte> Issuer;
         internal ReadOnlyMemory<byte> SerialNumber;

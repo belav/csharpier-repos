@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetStartComSlotTests
+    partial public class GetStartComSlotTests
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]

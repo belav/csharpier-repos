@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class CommonSecurityDescriptor_SetSystemAclProtection
+    partial public class CommonSecurityDescriptor_SetSystemAclProtection
     {
         public static IEnumerable<object[]> CommonSecurityDescriptor_SetSystemAclProtection_TestData()
         {

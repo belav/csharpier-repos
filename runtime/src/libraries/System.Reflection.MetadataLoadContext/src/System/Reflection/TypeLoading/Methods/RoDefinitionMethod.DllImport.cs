@@ -5,11 +5,12 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Class for all RoMethod objects created by a MetadataLoadContext that has a MethodDef token associated with it
     /// and for which IsConstructedGenericMethod returns false.
     /// </summary>
-    internal sealed partial class RoDefinitionMethod<TMethodDecoder>
+    internal sealed class RoDefinitionMethod<TMethodDecoder>
     {
         private CustomAttributeData? ComputeDllImportCustomAttributeDataIfAny()
         {

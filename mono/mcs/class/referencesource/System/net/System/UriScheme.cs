@@ -27,13 +27,14 @@ namespace System
     using System.Globalization;
     using System.Security.Permissions;
 
+    partial
     //
     // The class is used as a base for custom uri parsing and derived Uri factoring.
     // A set of protected .ctors allows to hookup on the builtin parser behaviors.
     //
     // A developer must implement at least internal default .ctor to participate in the Uri extensibility game.
     //
-    public abstract partial class UriParser
+    public abstract class UriParser
     {
         internal string SchemeName
         {

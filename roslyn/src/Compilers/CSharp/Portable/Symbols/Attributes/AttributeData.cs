@@ -19,10 +19,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Represents an attribute applied to a Symbol.
     /// </summary>
-    internal abstract partial class CSharpAttributeData : AttributeData
+    internal abstract class CSharpAttributeData : AttributeData
     {
         private ThreeState _lazyIsSecurityAttribute = ThreeState.Unknown;
 

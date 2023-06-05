@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public static partial class AppContext
+    partial public static class AppContext
     {
         private static string GetBaseDirectoryCore()
         {

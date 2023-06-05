@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal partial class RemoteTodoCommentsDiscoveryService
+    partial internal class RemoteTodoCommentsDiscoveryService
         : BrokeredServiceBase,
             IRemoteTodoCommentsDiscoveryService
     {

@@ -6,10 +6,11 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace Internal.TypeSystem.Ecma
 {
+    partial
     /// <summary>
     /// Override of MetadataType that uses actual Ecma335 metadata.
     /// </summary>
-    public sealed partial class EcmaType
+    public sealed class EcmaType
     {
         public override string DiagnosticName
         {

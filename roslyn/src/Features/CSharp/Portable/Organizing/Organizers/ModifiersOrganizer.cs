@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 {
-    internal static partial class ModifiersOrganizer
+    partial internal static class ModifiersOrganizer
     {
         public static SyntaxTokenList Organize(SyntaxTokenList modifiers)
         {

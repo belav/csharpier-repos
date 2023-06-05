@@ -5,16 +5,16 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Globalization
+    partial internal static class Globalization
     {
         [LibraryImport(
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_GetCalendars",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int GetCalendars(
+        partial internal static int GetCalendars(
             string localeName,
             CalendarId[] calendars,
             int calendarsCapacity
@@ -25,7 +25,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_GetCalendarInfo",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial ResultCode GetCalendarInfo(
+        partial internal static unsafe ResultCode GetCalendarInfo(
             string localeName,
             CalendarId calendarId,
             CalendarDataType calendarDataType,
@@ -58,7 +58,10 @@ internal static partial class Interop
         [return: MarshalAs(UnmanagedType.Bool)]
         // We skip the following DllImport because of 'Parsing function pointer types in signatures is not supported.' for some targeted
         // platforms (for example, WASM build).
-        private static unsafe partial bool EnumCalendarInfo(
+        partial
+        // We skip the following DllImport because of 'Parsing function pointer types in signatures is not supported.' for some targeted
+        // platforms (for example, WASM build).
+        private static unsafe bool EnumCalendarInfo(
             IntPtr callback,
             string localeName,
             CalendarId calendarId,
@@ -70,14 +73,14 @@ internal static partial class Interop
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_GetLatestJapaneseEra"
         )]
-        internal static partial int GetLatestJapaneseEra();
+        partial internal static int GetLatestJapaneseEra();
 
         [LibraryImport(
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_GetJapaneseEraStartDate"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetJapaneseEraStartDate(
+        partial internal static bool GetJapaneseEraStartDate(
             int era,
             out int startYear,
             out int startMonth,

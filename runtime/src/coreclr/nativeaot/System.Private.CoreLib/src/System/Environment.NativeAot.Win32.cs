@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         [DoesNotReturn]
         private static void ExitRaw() => Interop.Kernel32.ExitProcess(s_latchedExitCode);

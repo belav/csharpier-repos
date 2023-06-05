@@ -18,7 +18,7 @@ namespace System.Text.Json
     /// Provides options to be used with <see cref="JsonSerializer"/>.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public sealed partial class JsonSerializerOptions
+    partial public sealed class JsonSerializerOptions
     {
         internal const int BufferSizeDefault = 16 * 1024;
 

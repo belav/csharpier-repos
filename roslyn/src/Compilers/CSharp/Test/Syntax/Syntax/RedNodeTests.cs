@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class RedNodeTests
+    partial public class RedNodeTests
     {
         private class TokenDeleteRewriter : CSharpSyntaxRewriter
         {

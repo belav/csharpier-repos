@@ -7,8 +7,9 @@ using System.Text;
 
 namespace System
 {
+    partial
     /// <summary>Provides access to and processing of a terminfo database.</summary>
-    internal static partial class TermInfo
+    internal static class TermInfo
     {
         /// <summary>Provides support for evaluating parameterized terminfo database format strings.</summary>
         internal static class ParameterizedStrings

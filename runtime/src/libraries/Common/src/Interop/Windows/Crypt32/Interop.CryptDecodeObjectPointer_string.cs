@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(
             Libraries.Crypt32,
@@ -14,7 +14,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CryptDecodeObjectPointer(
+        partial internal static unsafe bool CryptDecodeObjectPointer(
             CertEncodingType dwCertEncodingType,
             [MarshalAs(UnmanagedType.LPStr)] string lpszStructType,
             byte[] pbEncoded,

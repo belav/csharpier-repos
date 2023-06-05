@@ -1,8 +1,8 @@
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Http
+    partial internal static class Http
     {
         internal static bool GetSupportsHttp2Multiplexing() => false;
 

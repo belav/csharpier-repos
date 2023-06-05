@@ -18,7 +18,7 @@ namespace System.Security
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial class HostProtectionException : SystemException
+    partial public class HostProtectionException : SystemException
     {
         private const string ProtectedResourcesName = "ProtectedResources";
         private const string DemandedResourcesName = "DemandedResources";

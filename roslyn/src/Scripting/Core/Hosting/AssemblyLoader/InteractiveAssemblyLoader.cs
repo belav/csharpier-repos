@@ -18,6 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Scripting.Hosting
 {
+    partial
     /// <summary>
     /// Implements an assembly loader for interactive compiler and REPL.
     /// </summary>
@@ -26,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
     /// The class is thread-safe.
     /// </para>
     /// </remarks>
-    public sealed partial class InteractiveAssemblyLoader : IDisposable
+    public sealed class InteractiveAssemblyLoader : IDisposable
     {
         private class LoadedAssembly
         {

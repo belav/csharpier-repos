@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
-    internal partial class TestExportJoinableTaskContext
+    partial internal class TestExportJoinableTaskContext
     {
         /// <summary>
         /// Defines a <see cref="SynchronizationContext"/> for use in cases where the synchronization context should not

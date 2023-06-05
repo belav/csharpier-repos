@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     /// </summary>
     /// <completionlist cref="NotificationOption2"/>
     [DataContract]
-    internal readonly partial record struct NotificationOption2(
+    partial internal readonly record struct NotificationOption2(
         [property: DataMember(Order = 0)] ReportDiagnostic Severity
     )
     {

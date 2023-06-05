@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class BlockSyntax
+    partial public class BlockSyntax
     {
         public BlockSyntax Update(
             SyntaxToken openBraceToken,
@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static BlockSyntax Block(
             SyntaxToken openBraceToken,

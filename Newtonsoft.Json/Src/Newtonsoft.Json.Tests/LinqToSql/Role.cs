@@ -35,7 +35,7 @@ using System.Text;
 namespace Newtonsoft.Json.Tests.LinqToSql
 {
     [MetadataType(typeof(RoleMetadata))]
-    public partial class Role
+    partial public class Role
     {
         public class RoleMetadata
         {

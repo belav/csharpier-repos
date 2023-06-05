@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Xml
 {
-    internal abstract partial class Base64Encoder
+    partial internal abstract class Base64Encoder
     {
         private byte[]? _leftOverBytes;
         private int _leftOverBytesCount;
@@ -97,7 +97,7 @@ namespace System.Xml
         }
     }
 
-    internal sealed partial class XmlRawWriterBase64Encoder : Base64Encoder
+    partial internal sealed class XmlRawWriterBase64Encoder : Base64Encoder
     {
         private readonly XmlRawWriter _rawWriter;
 
@@ -112,7 +112,7 @@ namespace System.Xml
         }
     }
 
-    internal sealed partial class XmlTextWriterBase64Encoder : Base64Encoder
+    partial internal sealed class XmlTextWriterBase64Encoder : Base64Encoder
     {
         private readonly XmlTextEncoder _xmlTextEncoder;
 

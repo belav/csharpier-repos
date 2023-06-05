@@ -12,7 +12,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCReadToNextSibling : TCXMLReaderBaseGeneral
+    partial public abstract class TCReadToNextSibling : TCXMLReaderBaseGeneral
     {
         #region XMLSTR
         private string _xmlStr =

@@ -35,7 +35,7 @@ public class PseudoBase : Base
 
 public abstract class Intermediate : PseudoBase
 {
-    public override abstract I getI();
+    public abstract override I getI();
 }
 
 public class Leaf : Intermediate

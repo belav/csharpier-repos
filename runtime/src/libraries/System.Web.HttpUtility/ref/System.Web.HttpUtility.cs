@@ -6,7 +6,7 @@
 
 namespace System.Web
 {
-    public sealed partial class HttpUtility
+    partial public sealed class HttpUtility
     {
         public HttpUtility() { }
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Functional.Tests
 {
-    public abstract partial class HttpClientHandlerTestBase : FileCleanupTestBase
+    partial public abstract class HttpClientHandlerTestBase : FileCleanupTestBase
     {
         protected static bool IsWinHttpHandler => false;
 

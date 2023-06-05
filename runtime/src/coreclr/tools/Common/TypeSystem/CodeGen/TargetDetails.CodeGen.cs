@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Extension to TargetDetails related to code generation
-    public partial class TargetDetails
+    public class TargetDetails
     {
         public TargetDetails(
             TargetArchitecture architecture,

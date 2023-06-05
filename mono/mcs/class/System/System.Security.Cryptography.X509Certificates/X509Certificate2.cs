@@ -684,11 +684,12 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
+        internal
         //
         // MARTIN CHECK POINT
         //
 
-        new internal X509Certificate2Impl Impl
+        new X509Certificate2Impl Impl
         {
             get
             {

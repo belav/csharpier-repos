@@ -33,7 +33,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             catch { }
         }
 
-        static private byte[] smallexe =
+        private static byte[] smallexe =
         {
             0x4D,
             0x5A,
@@ -3109,7 +3109,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x00
         };
 
-        static internal byte[] smallspcexe =
+        internal static byte[] smallspcexe =
         {
             0x4D,
             0x5A,
@@ -10705,7 +10705,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x00
         };
 
-        static private byte[] motus =
+        private static byte[] motus =
         {
             0x30,
             0x82,

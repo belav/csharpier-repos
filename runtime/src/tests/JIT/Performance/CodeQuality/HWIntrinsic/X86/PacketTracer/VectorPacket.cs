@@ -20,7 +20,7 @@ internal struct VectorPacket256
         get { return Sqrt(DotProduct(this, this)); }
     }
 
-    public readonly static int Packet256Size = 8;
+    public static readonly int Packet256Size = 8;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VectorPacket256(Vector256<float> init)

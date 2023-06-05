@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public sealed partial class QualifiedNameSyntax : NameSyntax
+    partial public sealed class QualifiedNameSyntax : NameSyntax
     {
         // This override is only intended to support cases where a caller has a value statically typed as NameSyntax in hand
         // and neither knows nor cares to determine whether that name is qualified or not.

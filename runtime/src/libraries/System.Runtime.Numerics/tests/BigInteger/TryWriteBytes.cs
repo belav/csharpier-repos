@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Numerics.Tests
 {
-    public partial class ExtractBytesMembersTests
+    partial public class ExtractBytesMembersTests
     {
         [Theory]
         [MemberData(nameof(FromIntTests_MemberData))]

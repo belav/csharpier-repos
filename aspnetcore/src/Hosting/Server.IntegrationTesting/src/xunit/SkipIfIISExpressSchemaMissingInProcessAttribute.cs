@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Testing;
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Assembly | AttributeTargets.Class)]
-public sealed partial class SkipIfIISExpressSchemaMissingInProcessAttribute
+partial public sealed class SkipIfIISExpressSchemaMissingInProcessAttribute
     : Attribute,
         ITestCondition
 {

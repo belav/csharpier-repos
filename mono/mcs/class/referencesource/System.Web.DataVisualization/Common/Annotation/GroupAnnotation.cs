@@ -116,7 +116,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(LegendAreaNameConverter)),
             Browsable(false),
         ]
-        override public string ClipToChartArea
+        public override string ClipToChartArea
         {
             get { return base.ClipToChartArea; }
             set
@@ -157,7 +157,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(true),
             SRDescription("DescriptionAttributeAnnotationGroup_SizeAlwaysRelative"),
         ]
-        override public bool IsSizeAlwaysRelative
+        public override bool IsSizeAlwaysRelative
         {
             get { return base.IsSizeAlwaysRelative; }
             set { base.IsSizeAlwaysRelative = value; }
@@ -189,7 +189,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Browsable(false),
             SRDescription("DescriptionAttributeAnnotationGroup_Selected"),
         ]
-        override public bool IsSelected
+        public override bool IsSelected
         {
             get { return base.IsSelected; }
             set
@@ -216,7 +216,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeAnnotationGroup_Visible"),
             ParenthesizePropertyNameAttribute(true),
         ]
-        override public bool Visible
+        public override bool Visible
         {
             get { return base.Visible; }
             set { base.Visible = value; }
@@ -239,7 +239,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeAlignment"),
             Browsable(false),
         ]
-        override public ContentAlignment Alignment
+        public override ContentAlignment Alignment
         {
             get { return base.Alignment; }
             set
@@ -283,7 +283,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
             Browsable(false),
         ]
-        override public Color ForeColor
+        public override Color ForeColor
         {
             get { return base.ForeColor; }
             set
@@ -309,7 +309,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeTextFont"),
             Browsable(false),
         ]
-        override public Font Font
+        public override Font Font
         {
             get { return base.Font; }
             set
@@ -338,7 +338,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
             Browsable(false),
         ]
-        override public Color LineColor
+        public override Color LineColor
         {
             get { return base.LineColor; }
             set
@@ -365,7 +365,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeLineWidth"),
             Browsable(false),
         ]
-        override public int LineWidth
+        public override int LineWidth
         {
             get { return base.LineWidth; }
             set
@@ -392,7 +392,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeLineDashStyle"),
             Browsable(false),
         ]
-        override public ChartDashStyle LineDashStyle
+        public override ChartDashStyle LineDashStyle
         {
             get { return base.LineDashStyle; }
             set
@@ -423,7 +423,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
             Browsable(false),
         ]
-        override public Color BackColor
+        public override Color BackColor
         {
             get { return base.BackColor; }
             set
@@ -456,7 +456,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base),
             Browsable(false),
         ]
-        override public ChartHatchStyle BackHatchStyle
+        public override ChartHatchStyle BackHatchStyle
         {
             get { return base.BackHatchStyle; }
             set
@@ -489,7 +489,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base),
             Browsable(false),
         ]
-        override public GradientStyle BackGradientStyle
+        public override GradientStyle BackGradientStyle
         {
             get { return base.BackGradientStyle; }
             set
@@ -525,7 +525,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
             Browsable(false),
         ]
-        override public Color BackSecondaryColor
+        public override Color BackSecondaryColor
         {
             get { return base.BackSecondaryColor; }
             set
@@ -553,7 +553,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
             Browsable(false),
         ]
-        override public Color ShadowColor
+        public override Color ShadowColor
         {
             get { return base.ShadowColor; }
             set
@@ -579,7 +579,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeShadowOffset"),
             Browsable(false),
         ]
-        override public int ShadowOffset
+        public override int ShadowOffset
         {
             get { return base.ShadowOffset; }
             set
@@ -610,7 +610,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(false),
             SRDescription("DescriptionAttributeAllowSelecting"),
         ]
-        override public bool AllowSelecting
+        public override bool AllowSelecting
         {
             get { return base.AllowSelecting; }
             set { base.AllowSelecting = value; }
@@ -628,7 +628,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(false),
             SRDescription("DescriptionAttributeAllowMoving"),
         ]
-        override public bool AllowMoving
+        public override bool AllowMoving
         {
             get { return base.AllowMoving; }
             set { base.AllowMoving = value; }
@@ -646,7 +646,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(false),
             SRDescription("DescriptionAttributeAnnotationGroup_AllowAnchorMoving"),
         ]
-        override public bool AllowAnchorMoving
+        public override bool AllowAnchorMoving
         {
             get { return base.AllowAnchorMoving; }
             set { base.AllowAnchorMoving = value; }
@@ -664,7 +664,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(false),
             SRDescription("DescriptionAttributeAllowResizing"),
         ]
-        override public bool AllowResizing
+        public override bool AllowResizing
         {
             get { return base.AllowResizing; }
             set { base.AllowResizing = value; }
@@ -682,7 +682,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(false),
             SRDescription("DescriptionAttributeAllowTextEditing"),
         ]
-        override public bool AllowTextEditing
+        public override bool AllowTextEditing
         {
             get { return base.AllowTextEditing; }
             set { base.AllowTextEditing = value; }
@@ -700,7 +700,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(false),
             SRDescription("DescriptionAttributeAnnotationGroup_AllowPathEditing"),
         ]
-        override public bool AllowPathEditing
+        public override bool AllowPathEditing
         {
             get { return base.AllowPathEditing; }
             set { base.AllowPathEditing = value; }
@@ -784,7 +784,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SerializationVisibilityAttribute(SerializationVisibility.Hidden),
             SRDescription("DescriptionAttributeSelectionPointsStyle"),
         ]
-        override internal SelectionPointsStyle SelectionPointsStyle
+        internal override SelectionPointsStyle SelectionPointsStyle
         {
             get { return SelectionPointsStyle.Rectangle; }
         }
@@ -802,7 +802,21 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="chart">
         /// Reference to the <see cref="Chart"/> control.
         /// </param>
-        override internal void Paint(Chart chart, ChartGraphics graphics)
+        internal
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Paints an annotation object using the specified graphics.
+        /// </summary>
+        /// <param name="graphics">
+        /// A <see cref="ChartGraphics"/> object, used to paint the annotation object.
+        /// </param>
+        /// <param name="chart">
+        /// Reference to the <see cref="Chart"/> control.
+        /// </param>
+        override void Paint(Chart chart, ChartGraphics graphics)
         {
             // Paint all annotations in the group
             foreach (Annotation annotation in this.annotations)

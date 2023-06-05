@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    internal sealed partial class DesImplementation
+    partial internal sealed class DesImplementation
     {
         private static UniversalCryptoTransform CreateTransformCore(
             CipherMode cipherMode,

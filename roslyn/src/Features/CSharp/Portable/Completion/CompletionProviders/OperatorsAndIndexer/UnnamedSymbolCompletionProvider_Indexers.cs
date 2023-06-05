@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    internal partial class UnnamedSymbolCompletionProvider
+    partial internal class UnnamedSymbolCompletionProvider
     {
         private readonly ImmutableDictionary<string, string> IndexerProperties =
             ImmutableDictionary<string, string>.Empty.Add(KindName, IndexerKindName);

@@ -6,13 +6,14 @@ using System.Globalization;
 
 namespace System.Runtime.Caching
 {
+    partial
     // MemoryMonitor is the base class for memory monitors.  The MemoryCache has two
     // types of monitors:  PhysicalMemoryMonitor and CacheMemoryMonitor.  The first monitors
     // the amount of physical memory used on the machine, and helps determine when we should
     // drop cache entries to avoid paging.  The second monitors the amount of memory used by
     // the cache itself, and helps determine when we should drop cache entries to avoid
     // exceeding the cache's memory limit.  Both are configurable (see ConfigUtil.cs).
-    internal abstract partial class MemoryMonitor
+    internal abstract class MemoryMonitor
     {
         protected const int TERABYTE_SHIFT = 40;
         protected const long TERABYTE = 1L << TERABYTE_SHIFT;

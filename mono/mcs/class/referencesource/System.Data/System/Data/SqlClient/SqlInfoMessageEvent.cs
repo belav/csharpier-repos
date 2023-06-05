@@ -39,7 +39,7 @@ namespace System.Data.SqlClient
             get { return exception.Source; }
         }
 
-        override public string ToString()
+        public override string ToString()
         { // MDAC 68482
             return Message;
         }

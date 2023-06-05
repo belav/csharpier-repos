@@ -233,12 +233,12 @@ namespace System.Workflow.Activities
             return contractType;
         }
 
-        internal protected override bool GetIsOneWay(IServiceProvider provider)
+        protected internal override bool GetIsOneWay(IServiceProvider provider)
         {
             return this.IsOneWay;
         }
 
-        internal protected override MethodInfo GetMethodInfo(IServiceProvider provider)
+        protected internal override MethodInfo GetMethodInfo(IServiceProvider provider)
         {
             if (string.IsNullOrEmpty(this.Name))
             {
@@ -280,7 +280,7 @@ namespace System.Workflow.Activities
             return methodInfo;
         }
 
-        internal protected override OperationParameterInfoCollection GetParameters(
+        protected internal override OperationParameterInfoCollection GetParameters(
             IServiceProvider provider
         )
         {

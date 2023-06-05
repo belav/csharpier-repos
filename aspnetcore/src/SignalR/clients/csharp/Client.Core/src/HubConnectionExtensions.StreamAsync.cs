@@ -8,10 +8,11 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
+partial
 /// <summary>
 /// Extension methods for <see cref="HubConnectionExtensions"/>.
 /// </summary>
-public static partial class HubConnectionExtensions
+public static class HubConnectionExtensions
 {
     /// <summary>
     /// Invokes a streaming hub method on the server using the specified method name and return type.

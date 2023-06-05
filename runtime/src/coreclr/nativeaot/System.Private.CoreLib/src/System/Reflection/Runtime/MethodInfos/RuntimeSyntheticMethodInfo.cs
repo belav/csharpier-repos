@@ -14,10 +14,11 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
+    partial
     //
     // These methods implement the Get/Set methods on array types.
     //
-    internal sealed partial class RuntimeSyntheticMethodInfo
+    internal sealed class RuntimeSyntheticMethodInfo
         : RuntimeMethodInfo,
             IRuntimeMemberInfoWithNoMetadataDefinition
     {

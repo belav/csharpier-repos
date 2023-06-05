@@ -17,7 +17,7 @@ namespace System.ServiceModel.Activities.Configuration
             );
         }
 
-        static internal string WorkflowHostingOptionsSectionPath
+        internal static string WorkflowHostingOptionsSectionPath
         {
             get
             {

@@ -23,7 +23,7 @@ namespace System.Data.Mapping
     using System.Data.Common.CommandTrees.ExpressionBuilder;
     using OfTypeQVCacheKey = Pair<EntitySetBase, Pair<EntityTypeBase, bool>>;
 
-    public partial class StorageMappingItemCollection : MappingItemCollection
+    partial public class StorageMappingItemCollection : MappingItemCollection
     {
         internal delegate bool TryGetUserDefinedQueryView(
             EntitySetBase extent,

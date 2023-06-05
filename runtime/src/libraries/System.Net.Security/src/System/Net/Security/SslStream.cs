@@ -63,7 +63,7 @@ namespace System.Net.Security
         CancellationToken cancellationToken
     );
 
-    public partial class SslStream : AuthenticatedStream
+    partial public class SslStream : AuthenticatedStream
     {
         /// <summary>Set as the _exception when the instance is disposed.</summary>
         private static readonly ExceptionDispatchInfo s_disposedSentinel =

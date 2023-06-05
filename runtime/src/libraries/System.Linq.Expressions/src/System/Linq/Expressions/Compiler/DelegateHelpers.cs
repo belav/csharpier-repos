@@ -10,7 +10,7 @@ using System.Reflection.Emit;
 
 namespace System.Linq.Expressions.Compiler
 {
-    internal static partial class DelegateHelpers
+    partial internal static class DelegateHelpers
     {
         /// <summary>
         /// Finds a delegate type for a CallSite using the types in the ReadOnlyCollection of Expression.

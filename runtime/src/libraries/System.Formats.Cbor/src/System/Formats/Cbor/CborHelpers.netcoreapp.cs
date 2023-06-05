@@ -9,7 +9,7 @@ using System.Text;
 
 namespace System.Formats.Cbor
 {
-    internal static partial class CborHelpers
+    partial internal static class CborHelpers
     {
         public static readonly DateTimeOffset UnixEpoch = DateTimeOffset.UnixEpoch;
 

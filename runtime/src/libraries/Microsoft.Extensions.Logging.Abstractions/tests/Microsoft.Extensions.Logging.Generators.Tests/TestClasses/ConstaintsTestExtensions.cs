@@ -7,7 +7,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 
     namespace UsesConstraintInAnotherNamespace
     {
-        public partial class MessagePrinter<T>
+        partial public class MessagePrinter<T>
             where T : Message
         {
             public void Print(ILogger logger, T message)
@@ -15,18 +15,18 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
                 Log.Message(logger, message.Text);
             }
 
-            internal static partial class Log
+            partial internal static class Log
             {
                 [LoggerMessage(
                     EventId = 1,
                     Level = LogLevel.Information,
                     Message = "The message is {Text}."
                 )]
-                internal static partial void Message(ILogger logger, string? text);
+                partial internal static void Message(ILogger logger, string? text);
             }
         }
 
-        public partial class MessagePrinterHasConstraintOnLogClassAndLogMethod<T>
+        partial public class MessagePrinterHasConstraintOnLogClassAndLogMethod<T>
             where T : Message
         {
             public void Print(ILogger logger, T message)
@@ -34,7 +34,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
                 Log<Message>.Message(logger, message);
             }
 
-            internal static partial class Log<U>
+            partial internal static class Log<U>
                 where U : Message
             {
                 [LoggerMessage(
@@ -42,61 +42,61 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
                     Level = LogLevel.Information,
                     Message = "The message is {Text}."
                 )]
-                internal static partial void Message(ILogger logger, U text);
+                partial internal static void Message(ILogger logger, U text);
             }
         }
     }
 
-    internal static partial class ConstraintsTestExtensions<T>
+    partial internal static class ConstraintsTestExtensions<T>
         where T : class
     {
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
-        public static partial void M0(ILogger logger, int p0);
+        partial public static void M0(ILogger logger, int p0);
 
         public static void Foo(T dummy) { }
     }
 
-    internal static partial class ConstraintsTestExtensions1<T>
+    partial internal static class ConstraintsTestExtensions1<T>
         where T : struct
     {
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
-        public static partial void M0(ILogger logger, int p0);
+        partial public static void M0(ILogger logger, int p0);
 
         public static void Foo(T dummy) { }
     }
 
-    internal static partial class ConstraintsTestExtensions2<T>
+    partial internal static class ConstraintsTestExtensions2<T>
         where T : unmanaged
     {
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
-        public static partial void M0(ILogger logger, int p0);
+        partial public static void M0(ILogger logger, int p0);
 
         public static void Foo(T dummy) { }
     }
 
-    internal static partial class ConstraintsTestExtensions3<T>
+    partial internal static class ConstraintsTestExtensions3<T>
         where T : new()
     {
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
-        public static partial void M0(ILogger logger, int p0);
+        partial public static void M0(ILogger logger, int p0);
 
         public static void Foo(T dummy) { }
     }
 
-    internal static partial class ConstraintsTestExtensions4<T>
+    partial internal static class ConstraintsTestExtensions4<T>
         where T : System.Attribute
     {
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
-        public static partial void M0(ILogger logger, int p0);
+        partial public static void M0(ILogger logger, int p0);
 
         public static void Foo(T dummy) { }
     }
 
-    internal static partial class ConstraintsTestExtensions5<T>
+    partial internal static class ConstraintsTestExtensions5<T>
         where T : notnull
     {
         [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = "M0{p0}")]
-        public static partial void M0(ILogger logger, int p0);
+        partial public static void M0(ILogger logger, int p0);
 
         public static void Foo(T dummy) { }
     }

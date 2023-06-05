@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Organizing.Organizers;
 
 namespace Microsoft.CodeAnalysis.CSharp.Organizing
 {
-    internal partial class CSharpOrganizingService
+    partial internal class CSharpOrganizingService
     {
         private class Rewriter : CSharpSyntaxRewriter
         {

@@ -8,9 +8,9 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal abstract partial class AbstractAsynchronousTaggerProvider<TTag>
+    partial internal abstract class AbstractAsynchronousTaggerProvider<TTag>
     {
-        private partial class TagSource : IEqualityComparer<ITagSpan<TTag>>
+        partial private class TagSource : IEqualityComparer<ITagSpan<TTag>>
         {
             public bool Equals(ITagSpan<TTag>? x, ITagSpan<TTag>? y) =>
                 x != null && y != null && x.Span == y.Span && _dataSource.TagEquals(x.Tag, y.Tag);

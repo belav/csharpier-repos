@@ -8,7 +8,7 @@ using System.Net.Security;
 
 namespace System.Net
 {
-    public sealed unsafe partial class HttpListener
+    partial public sealed unsafe class HttpListener
     {
         public static bool IsSupported => true;
 

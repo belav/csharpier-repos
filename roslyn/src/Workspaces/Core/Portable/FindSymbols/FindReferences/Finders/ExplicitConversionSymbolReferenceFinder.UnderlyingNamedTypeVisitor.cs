@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal partial class ExplicitConversionSymbolReferenceFinder
+    partial internal class ExplicitConversionSymbolReferenceFinder
     {
         private class UnderlyingNamedTypeVisitor : SymbolVisitor<INamedTypeSymbol?>
         {

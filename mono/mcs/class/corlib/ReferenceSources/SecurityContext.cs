@@ -45,29 +45,29 @@ namespace System.Security
             return this;
         }
 
-        static public SecurityContext Capture()
+        public static SecurityContext Capture()
         {
             return new SecurityContext();
         }
 
         public void Dispose() { }
 
-        static public bool IsFlowSuppressed()
+        public static bool IsFlowSuppressed()
         {
             return false;
         }
 
-        static public bool IsWindowsIdentityFlowSuppressed()
+        public static bool IsWindowsIdentityFlowSuppressed()
         {
             return false;
         }
 
-        static public void RestoreFlow() { }
+        public static void RestoreFlow() { }
 
         // if you got the context then you can use it
         [SecurityPermission(SecurityAction.Assert, ControlPrincipal = true)]
         [SecurityPermission(SecurityAction.LinkDemand, Infrastructure = true)]
-        static public void Run(
+        public static void Run(
             SecurityContext securityContext,
             ContextCallback callback,
             object state
@@ -77,12 +77,12 @@ namespace System.Security
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, Infrastructure = true)]
-        static public AsyncFlowControl SuppressFlow()
+        public static AsyncFlowControl SuppressFlow()
         {
             throw new NotSupportedException();
         }
 
-        static public AsyncFlowControl SuppressFlowWindowsIdentity()
+        public static AsyncFlowControl SuppressFlowWindowsIdentity()
         {
             throw new NotSupportedException();
         }

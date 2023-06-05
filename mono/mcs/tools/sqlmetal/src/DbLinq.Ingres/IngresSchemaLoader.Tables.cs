@@ -30,10 +30,10 @@ using DbLinq.Vendor;
 
 namespace DbLinq.Ingres
 {
-#if !MONO_STRICT
-    public
 #endif
-    partial class IngresSchemaLoader
+    partial
+#if !MONO_STRICT
+    public class IngresSchemaLoader
     {
         protected override IDataName ReadDataNameAndSchema(IDataRecord dataRecord)
         {

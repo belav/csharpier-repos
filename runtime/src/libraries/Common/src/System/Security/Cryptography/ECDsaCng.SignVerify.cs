@@ -11,7 +11,7 @@ using AsymmetricPaddingMode = Interop.NCrypt.AsymmetricPaddingMode;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDsaCng : ECDsa
+    partial public sealed class ECDsaCng : ECDsa
     {
         /// <summary>
         ///     Computes the signature of a hash that was produced by the hash algorithm specified by "hashAlgorithm."

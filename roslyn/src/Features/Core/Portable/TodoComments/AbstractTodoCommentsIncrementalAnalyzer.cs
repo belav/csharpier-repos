@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.CodeAnalysis.TodoComments
 {
-    internal abstract partial class AbstractTodoCommentsIncrementalAnalyzer
+    partial internal abstract class AbstractTodoCommentsIncrementalAnalyzer
         : IncrementalAnalyzerBase
     {
         private readonly object _gate = new();

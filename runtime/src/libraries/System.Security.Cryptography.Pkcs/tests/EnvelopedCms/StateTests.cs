@@ -18,7 +18,7 @@ using System.Security.Cryptography.Pkcs.Tests;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class StateTests
+    partial public static class StateTests
     {
         //
         // Exercises various edge cases when EnvelopedCms methods and properties are called out of the "expected" order.

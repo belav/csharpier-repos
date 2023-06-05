@@ -113,7 +113,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static StackFrame[] get_trace(Exception e, int skipFrames, bool fNeedFileInfo);
+        static extern StackFrame[] get_trace(Exception e, int skipFrames, bool fNeedFileInfo);
 
         public StackTrace(Exception e)
             : this(e, METHODS_TO_SKIP, false) { }

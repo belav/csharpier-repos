@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class ReadValueTests
+    partial public static class ReadValueTests
     {
         [Fact]
         public static void NullReturnTypeThrows()

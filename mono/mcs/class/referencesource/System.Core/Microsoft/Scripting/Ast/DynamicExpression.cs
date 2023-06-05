@@ -931,9 +931,10 @@ namespace System.Linq.Expressions
         }
     }
 
+    partial
     #endregion
 
-    public partial class Expression
+    public class Expression
     {
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.

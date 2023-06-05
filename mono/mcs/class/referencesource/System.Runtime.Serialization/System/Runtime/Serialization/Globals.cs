@@ -1179,7 +1179,7 @@ namespace System.Runtime.Serialization
 
         // The value string.Empty aids comparisons (can do simple length checks
         //     instead of string comparison method calls in IL.)
-        public readonly static string NewObjectId = string.Empty;
+        public static readonly string NewObjectId = string.Empty;
         public const string SimpleSRSInternalsVisiblePattern =
             @"^[\s]*System\.Runtime\.Serialization[\s]*$";
         public const string FullSRSInternalsVisiblePattern =

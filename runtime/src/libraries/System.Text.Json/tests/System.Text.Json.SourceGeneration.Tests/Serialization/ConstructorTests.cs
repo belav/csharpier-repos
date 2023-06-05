@@ -30,7 +30,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             ) { }
     }
 
-    public abstract partial class ConstructorTests_Metadata : ConstructorTests
+    partial public abstract class ConstructorTests_Metadata : ConstructorTests
     {
         protected ConstructorTests_Metadata(JsonSerializerWrapper stringWrapper)
             : base(stringWrapper) { }
@@ -165,7 +165,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassWithIgnoredSameType))]
         [JsonSerializable(typeof(ClassWithDefaultCtorParams))]
         [JsonSerializable(typeof(ClassWithManyConstructorParameters))]
-        internal sealed partial class ConstructorTestsContext_Metadata : JsonSerializerContext { }
+        partial internal sealed class ConstructorTestsContext_Metadata : JsonSerializerContext { }
     }
 
     public sealed class ConstructorTests_Default_String : ConstructorTests_Default
@@ -190,7 +190,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             ) { }
     }
 
-    public abstract partial class ConstructorTests_Default : ConstructorTests_Metadata
+    partial public abstract class ConstructorTests_Default : ConstructorTests_Metadata
     {
         public ConstructorTests_Default(JsonSerializerWrapper jsonSerializer)
             : base(jsonSerializer) { }
@@ -324,6 +324,6 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassWithIgnoredSameType))]
         [JsonSerializable(typeof(ClassWithDefaultCtorParams))]
         [JsonSerializable(typeof(ClassWithManyConstructorParameters))]
-        internal sealed partial class ConstructorTestsContext_Default : JsonSerializerContext { }
+        partial internal sealed class ConstructorTestsContext_Default : JsonSerializerContext { }
     }
 }

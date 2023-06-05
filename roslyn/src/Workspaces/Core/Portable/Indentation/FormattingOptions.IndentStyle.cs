@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    public static partial class FormattingOptions
+    partial public static class FormattingOptions
     {
         // Publicly exposed.  Keep in sync with <see cref="FormattingOptions2.IndentStyle"/> in the CodeStyle layer.
         public enum IndentStyle

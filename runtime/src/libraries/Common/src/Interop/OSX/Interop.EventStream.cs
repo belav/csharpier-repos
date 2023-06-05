@@ -16,9 +16,9 @@ using FSEventStreamEventId = System.UInt64;
 using CFTimeInterval = System.Double;
 using CFRunLoopRef = System.IntPtr;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class EventStream
+    partial internal static class EventStream
     {
         /// <summary>
         /// This constant specifies that we don't want historical file system events, only new ones
@@ -104,7 +104,7 @@ internal static partial class Interop
             Interop.Libraries.CoreServicesLibrary,
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static unsafe partial SafeEventStreamHandle FSEventStreamCreate(
+        partial internal static unsafe SafeEventStreamHandle FSEventStreamCreate(
             IntPtr allocator,
             delegate* unmanaged<
                 FSEventStreamRef,
@@ -128,7 +128,7 @@ internal static partial class Interop
         /// <param name="runLoop">The RunLoop to attach the stream to</param>
         /// <param name="runLoopMode">The mode of the RunLoop; this should usually be kCFRunLoopDefaultMode. See the documentation for RunLoops for more info.</param>
         [LibraryImport(Interop.Libraries.CoreServicesLibrary)]
-        internal static partial void FSEventStreamScheduleWithRunLoop(
+        partial internal static void FSEventStreamScheduleWithRunLoop(
             SafeEventStreamHandle streamRef,
             CFRunLoopRef runLoop,
             SafeCreateHandle runLoopMode
@@ -141,21 +141,21 @@ internal static partial class Interop
         /// <returns>Returns true if the stream was started; otherwise, returns false and no events will be received.</returns>
         [LibraryImport(Interop.Libraries.CoreServicesLibrary)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool FSEventStreamStart(SafeEventStreamHandle streamRef);
+        partial internal static bool FSEventStreamStart(SafeEventStreamHandle streamRef);
 
         /// <summary>
         /// Stops receiving events on the specified stream. The stream can be restarted and not miss any events.
         /// </summary>
         /// <param name="streamRef">The stream to stop receiving events on.</param>
         [LibraryImport(Interop.Libraries.CoreServicesLibrary)]
-        internal static partial void FSEventStreamStop(SafeEventStreamHandle streamRef);
+        partial internal static void FSEventStreamStop(SafeEventStreamHandle streamRef);
 
         /// <summary>
         /// Stops receiving events on the specified stream. The stream can be restarted and not miss any events.
         /// </summary>
         /// <param name="streamRef">The stream to stop receiving events on.</param>
         [LibraryImport(Interop.Libraries.CoreServicesLibrary)]
-        internal static partial void FSEventStreamStop(IntPtr streamRef);
+        partial internal static void FSEventStreamStop(IntPtr streamRef);
 
         /// <summary>
         /// Invalidates an EventStream and removes it from any RunLoops.
@@ -163,7 +163,7 @@ internal static partial class Interop
         /// <param name="streamRef">The FSEventStream to invalidate</param>
         /// <remarks>This can only be called after FSEventStreamScheduleWithRunLoop has be called</remarks>
         [LibraryImport(Interop.Libraries.CoreServicesLibrary)]
-        internal static partial void FSEventStreamInvalidate(IntPtr streamRef);
+        partial internal static void FSEventStreamInvalidate(IntPtr streamRef);
 
         /// <summary>
         /// Removes the event stream from the RunLoop.
@@ -172,7 +172,7 @@ internal static partial class Interop
         /// <param name="runLoop">The RunLoop to remove the stream from.</param>
         /// <param name="runLoopMode">The mode of the RunLoop; this should usually be kCFRunLoopDefaultMode. See the documentation for RunLoops for more info.</param>
         [LibraryImport(Interop.Libraries.CoreServicesLibrary)]
-        internal static partial void FSEventStreamUnscheduleFromRunLoop(
+        partial internal static void FSEventStreamUnscheduleFromRunLoop(
             SafeEventStreamHandle streamRef,
             CFRunLoopRef runLoop,
             SafeCreateHandle runLoopMode
@@ -183,6 +183,6 @@ internal static partial class Interop
         /// </summary>
         /// <param name="streamRef">The stream on which to decrement the reference count.</param>
         [LibraryImport(Interop.Libraries.CoreServicesLibrary)]
-        internal static partial void FSEventStreamRelease(IntPtr streamRef);
+        partial internal static void FSEventStreamRelease(IntPtr streamRef);
     }
 }

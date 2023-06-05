@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [Flags]
         internal enum MemoryMappedProtections
@@ -32,7 +32,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_MMap",
             SetLastError = true
         )]
-        internal static partial IntPtr MMap(
+        partial internal static IntPtr MMap(
             IntPtr addr,
             ulong len,
             MemoryMappedProtections prot,

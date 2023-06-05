@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.IO.Compression.Tests
 {
-    public partial class zip_CreateTests : ZipFileTestBase
+    partial public class zip_CreateTests : ZipFileTestBase
     {
         [Fact]
         public static void CreateModeInvalidOperations()

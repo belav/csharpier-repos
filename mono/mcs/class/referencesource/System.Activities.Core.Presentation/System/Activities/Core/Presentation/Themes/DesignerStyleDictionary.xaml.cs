@@ -6,7 +6,7 @@ namespace System.Activities.Core.Presentation.Themes
     using System.Windows;
     using System.Runtime;
 
-    sealed partial class DesignerStylesDictionary
+    partial sealed class DesignerStylesDictionary
     {
         static DesignerStylesDictionary instance;
 

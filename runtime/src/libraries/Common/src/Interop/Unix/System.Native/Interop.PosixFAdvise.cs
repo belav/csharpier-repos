@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum FileAdvice : int
         {
@@ -34,7 +34,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_PosixFAdvise",
             SetLastError = false /* this is explicitly called out in the man page */
         )]
-        internal static partial int PosixFAdvise(
+        partial internal static int PosixFAdvise(
             SafeFileHandle fd,
             long offset,
             long length,

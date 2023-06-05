@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal static partial class TypeSymbolExtensions
+    partial internal static class TypeSymbolExtensions
     {
         public static NamedTypeSymbol AsUnboundGenericType(this NamedTypeSymbol type)
         {

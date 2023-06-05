@@ -32,6 +32,7 @@ using System.Threading;
 
 namespace System.Globalization
 {
+    partial
     /// <summary>
     /// This class represents the software preferences of a particular culture
     /// or community. It includes information such as the language, writing
@@ -49,7 +50,7 @@ namespace System.Globalization
     /// order of the class is to do a !dumpobj on an instance of the managed
     /// object inside of the debugger.
     /// </remarks>
-    public partial class CultureInfo : IFormatProvider, ICloneable
+    public class CultureInfo : IFormatProvider, ICloneable
     {
         // We use an RFC4646 type string to construct CultureInfo.
         // This string is stored in _name and is authoritative.

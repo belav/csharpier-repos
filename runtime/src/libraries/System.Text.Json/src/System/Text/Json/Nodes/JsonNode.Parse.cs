@@ -7,7 +7,7 @@ using System.Text.Json.Serialization.Converters;
 
 namespace System.Text.Json.Nodes
 {
-    public abstract partial class JsonNode
+    partial public abstract class JsonNode
     {
         /// <summary>
         ///   Parses one JSON value (including objects or arrays) from the provided reader.

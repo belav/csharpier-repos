@@ -6,7 +6,7 @@ using Marshal = System.Runtime.InteropServices.Marshal;
 
 namespace System.IO.Ports
 {
-    internal static partial class InternalResources
+    partial internal static class InternalResources
     {
         // Beginning of static Error methods
         internal static void EndOfFile()

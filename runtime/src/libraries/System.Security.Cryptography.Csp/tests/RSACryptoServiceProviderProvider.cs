@@ -26,7 +26,7 @@ namespace System.Security.Cryptography.Rsa.Tests
             _supportsSha1Signatures ??= SignatureSupport.CanProduceSha1Signature(Create());
     }
 
-    public partial class RSAFactory
+    partial public class RSAFactory
     {
         private static readonly IRSAProvider s_provider = new RSACryptoServiceProviderProvider();
     }

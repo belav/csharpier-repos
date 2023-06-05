@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.TypeLoading
 {
-    internal sealed partial class RoArrayType : RoHasElementType
+    partial internal sealed class RoArrayType : RoHasElementType
     {
         //
         // Multidimensional is implied here (even for rank 1.) SzArrays live in their own unification table.

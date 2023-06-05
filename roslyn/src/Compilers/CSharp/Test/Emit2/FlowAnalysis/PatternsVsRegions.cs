@@ -15,10 +15,11 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
+    partial
     /// <summary>
     /// Region analysis tests involving pattern-matching constructs.
     /// </summary>
-    public partial class PatternsVsRegions : FlowTestBase
+    public class PatternsVsRegions : FlowTestBase
     {
         [Fact]
         public void RegionInIsPattern01()

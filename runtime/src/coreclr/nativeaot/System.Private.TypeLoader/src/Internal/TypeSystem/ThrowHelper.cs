@@ -5,9 +5,10 @@ using CoreLibThrow = Internal.Runtime.CompilerHelpers.ThrowHelpers;
 
 namespace Internal.TypeSystem
 {
+    partial
     // This implementation forwards to the throw helpers targeted by the compiler in CoreLib.
     // That way we can share the exception string resources.
-    public static partial class ThrowHelper
+    public static class ThrowHelper
     {
         private static void ThrowTypeLoadException(
             ExceptionStringID id,
@@ -68,7 +69,7 @@ namespace Internal.TypeSystem
             CoreLibThrow.ThrowBadImageFormatException(ExceptionStringID.BadImageFormatGeneric);
         }
 
-        private static partial class Format
+        partial private static class Format
         {
             public static string OwningModule(TypeDesc type)
             {

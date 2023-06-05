@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedVariable
         Shared
     ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.AddImport)]
-    internal partial class CSharpRemoveUnusedVariableCodeFixProvider
+    partial internal class CSharpRemoveUnusedVariableCodeFixProvider
         : AbstractRemoveUnusedVariableCodeFixProvider<
             LocalDeclarationStatementSyntax,
             VariableDeclaratorSyntax,

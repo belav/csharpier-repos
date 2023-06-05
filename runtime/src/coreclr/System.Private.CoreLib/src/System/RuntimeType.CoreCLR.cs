@@ -41,7 +41,7 @@ namespace System
         FullName,
     }
 
-    internal sealed partial class RuntimeType : TypeInfo, ICloneable
+    partial internal sealed class RuntimeType : TypeInfo, ICloneable
     {
         #region Definitions
 
@@ -5149,15 +5149,16 @@ namespace System
 #endif // FEATURE_COMINTEROP
     }
 
+    partial
     #region Library
-    internal readonly unsafe partial struct MdUtf8String
+    internal readonly unsafe struct MdUtf8String
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "MdUtf8String_EqualsCaseInsensitive")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EqualsCaseInsensitive(void* szLhs, void* szRhs, int cSz);
+        partial private static bool EqualsCaseInsensitive(void* szLhs, void* szRhs, int cSz);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "MdUtf8String_HashCaseInsensitive")]
-        private static partial uint HashCaseInsensitive(void* sz, int cSz);
+        partial private static uint HashCaseInsensitive(void* sz, int cSz);
 
         private readonly byte* m_pStringHeap; // This is the raw UTF8 string.
         private readonly int m_StringHeapByteLength;

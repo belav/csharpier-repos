@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 {
     [DataContract]
-    internal partial struct UnitTestingInvocationReasons : IEnumerable<string>
+    partial internal struct UnitTestingInvocationReasons : IEnumerable<string>
     {
         public static readonly UnitTestingInvocationReasons Empty =
             new(ImmutableHashSet<string>.Empty);

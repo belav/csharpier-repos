@@ -14,6 +14,7 @@ namespace System.Data.Mapping.Update.Internal
     using System.Data.Metadata.Edm;
     using System.Diagnostics;
 
+    partial
     /// <summary>
     /// <para>
     /// Comments assume there is a map between the CDM and store. Other maps are possible, but
@@ -40,7 +41,7 @@ namespace System.Data.Mapping.Update.Internal
     /// <item>Left outer equijoin</item>
     /// </list>
     /// </remarks>
-    internal partial class Propagator : UpdateExpressionVisitor<ChangeNode>
+    internal class Propagator : UpdateExpressionVisitor<ChangeNode>
     {
         #region Constructors
         /// <summary>
@@ -75,7 +76,7 @@ namespace System.Data.Mapping.Update.Internal
             get { return m_updateTranslator; }
         }
 
-        override protected string VisitorName
+        protected override string VisitorName
         {
             get { return s_visitorName; }
         }
@@ -93,7 +94,22 @@ namespace System.Data.Mapping.Update.Internal
         /// <param name="table">Table for which updates are being produced.</param>
         /// <param name="umView">Update mapping view to propagate.</param>
         /// <returns>Changes in S-Space.</returns>
-        static internal ChangeNode Propagate(
+        internal
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Propagate changes from C-Space (contained in <paramref name="parent" /> to the S-Space.
+        /// </summary>
+        /// <remarks>
+        /// See Walker class for an explanation of this coding pattern.
+        /// </remarks>
+        /// <param name="parent">Grouper supporting retrieval of changes for C-Space
+        /// extents referenced in the update mapping view.</param>
+        /// <param name="table">Table for which updates are being produced.</param>
+        /// <param name="umView">Update mapping view to propagate.</param>
+        /// <returns>Changes in S-Space.</returns>
+        static ChangeNode Propagate(
             UpdateTranslator parent,
             EntitySet table,
             DbQueryCommandTree umView

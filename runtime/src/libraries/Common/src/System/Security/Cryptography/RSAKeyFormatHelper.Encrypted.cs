@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    internal static partial class RSAKeyFormatHelper
+    partial internal static class RSAKeyFormatHelper
     {
         internal static void ReadEncryptedPkcs8(
             ReadOnlySpan<byte> source,

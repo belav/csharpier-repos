@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct CONSOLE_SCREEN_BUFFER_INFO
@@ -18,14 +18,14 @@ internal static partial class Interop
         }
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
-        internal partial struct COORD
+        partial internal struct COORD
         {
             internal short X;
             internal short Y;
         }
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
-        internal partial struct SMALL_RECT
+        partial internal struct SMALL_RECT
         {
             internal short Left;
             internal short Top;

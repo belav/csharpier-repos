@@ -6,8 +6,8 @@
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct GenericParameterProxy
+    partial internal readonly struct GenericParameterProxy
     {
-        internal partial bool HasDefaultConstructorConstraint();
+        partial internal bool HasDefaultConstructorConstraint();
     }
 }

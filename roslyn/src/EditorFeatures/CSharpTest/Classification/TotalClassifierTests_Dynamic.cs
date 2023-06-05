@@ -13,7 +13,7 @@ using static Microsoft.CodeAnalysis.Editor.UnitTests.Classification.FormattedCla
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
 {
-    public partial class TotalClassifierTests
+    partial public class TotalClassifierTests
     {
         [Theory]
         [CombinatorialData]

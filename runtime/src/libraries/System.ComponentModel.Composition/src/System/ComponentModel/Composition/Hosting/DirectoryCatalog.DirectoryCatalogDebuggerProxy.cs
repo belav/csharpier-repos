@@ -10,7 +10,7 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class DirectoryCatalog
+    partial public class DirectoryCatalog
     {
         internal sealed class DirectoryCatalogDebuggerProxy
         {

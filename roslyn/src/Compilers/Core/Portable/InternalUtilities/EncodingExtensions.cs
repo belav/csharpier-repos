@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal static partial class EncodingExtensions
+    partial internal static class EncodingExtensions
     {
         /// <summary>
         /// Get maximum char count needed to decode the entire stream.

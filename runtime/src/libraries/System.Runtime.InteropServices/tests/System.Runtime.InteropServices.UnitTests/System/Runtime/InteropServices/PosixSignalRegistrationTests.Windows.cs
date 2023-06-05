@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class PosixSignalRegistrationTests
+    partial public class PosixSignalRegistrationTests
     {
         public static IEnumerable<object[]> UninstallableSignals() => Enumerable.Empty<object[]>();
 

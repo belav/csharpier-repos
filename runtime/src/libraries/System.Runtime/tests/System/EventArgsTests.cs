@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public static partial class EventArgsTests
+    partial public static class EventArgsTests
     {
         [Fact]
         public static void Ctor()

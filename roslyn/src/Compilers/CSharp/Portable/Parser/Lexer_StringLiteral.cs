@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class Lexer
+    partial internal class Lexer
     {
         private void ScanStringLiteral(ref TokenInfo info, bool inDirective)
         {
@@ -357,7 +357,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// recursing to process interpolated strings.
         /// </summary>
         [NonCopyable]
-        private ref struct InterpolatedStringScanner
+        ref private struct InterpolatedStringScanner
         {
             private readonly Lexer _lexer;
 

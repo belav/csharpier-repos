@@ -14,10 +14,11 @@ using System;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This portion of the binder reports errors arising from resolving queries.
     /// </summary>
-    internal partial class Binder
+    internal class Binder
     {
         /// <summary>
         /// This is a clone of the Dev10 logic for reporting query errors.

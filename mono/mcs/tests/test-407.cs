@@ -13,7 +13,7 @@ struct A
 
 class MainClass
 {
-    unsafe public static void Main()
+    public static unsafe void Main()
     {
         System.Console.WriteLine(sizeof(Obsolete));
     }

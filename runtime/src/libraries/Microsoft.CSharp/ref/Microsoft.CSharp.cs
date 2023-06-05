@@ -9,7 +9,7 @@ namespace Microsoft.CSharp.RuntimeBinder
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public static partial class Binder
+    partial public static class Binder
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
@@ -153,7 +153,7 @@ namespace Microsoft.CSharp.RuntimeBinder
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class CSharpArgumentInfo
+    partial public sealed class CSharpArgumentInfo
     {
         internal CSharpArgumentInfo() { }
 
@@ -199,7 +199,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         ResultDiscarded = 256,
     }
 
-    public partial class RuntimeBinderException : System.Exception
+    partial public class RuntimeBinderException : System.Exception
     {
         public RuntimeBinderException() { }
 
@@ -213,7 +213,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         public RuntimeBinderException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class RuntimeBinderInternalCompilerException : System.Exception
+    partial public class RuntimeBinderInternalCompilerException : System.Exception
     {
         public RuntimeBinderInternalCompilerException() { }
 

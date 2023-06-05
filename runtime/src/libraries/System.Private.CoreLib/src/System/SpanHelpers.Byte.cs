@@ -11,7 +11,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System
 {
-    internal static partial class SpanHelpers // .Byte
+    partial internal static class SpanHelpers // .Byte
     {
         public static int IndexOf(
             ref byte searchSpace,

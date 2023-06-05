@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
-    internal static partial class CSharpFormattingOptions2
+    partial internal static class CSharpFormattingOptions2
     {
         public static int ParseEditorConfigFlags(
             string list,

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Formats.Cbor
 {
-    public partial class CborWriter
+    partial public class CborWriter
     {
         // Implements major type 7 encoding per https://tools.ietf.org/html/rfc7049#section-2.1
 

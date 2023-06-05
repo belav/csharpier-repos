@@ -7,9 +7,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal partial class MessagePump
+partial internal class MessagePump
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.AcceptError,
@@ -17,7 +17,7 @@ internal partial class MessagePump
             "Failed to accept a request.",
             EventName = "AcceptError"
         )]
-        public static partial void AcceptError(ILogger logger, Exception exception);
+        partial public static void AcceptError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.AcceptErrorStopping,
@@ -25,7 +25,7 @@ internal partial class MessagePump
             "Failed to accept a request, the server is stopping.",
             EventName = "AcceptErrorStopping"
         )]
-        public static partial void AcceptErrorStopping(ILogger logger, Exception exception);
+        partial public static void AcceptErrorStopping(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.BindingToDefault,
@@ -33,7 +33,7 @@ internal partial class MessagePump
             $"No listening endpoints were configured. Binding to {Constants.DefaultServerAddress} by default.",
             EventName = "BindingToDefault"
         )]
-        public static partial void BindingToDefault(ILogger logger);
+        partial public static void BindingToDefault(ILogger logger);
 
         public static void ClearedAddresses(ILogger logger, ICollection<string> serverAddresses)
         {
@@ -50,7 +50,7 @@ internal partial class MessagePump
             EventName = "ClearedAddresses",
             SkipEnabledCheck = true
         )]
-        private static partial void ClearedAddressesCore(ILogger logger, string serverAddresses);
+        partial private static void ClearedAddressesCore(ILogger logger, string serverAddresses);
 
         public static void ClearedPrefixes(ILogger logger, ICollection<string> serverAddresses)
         {
@@ -67,7 +67,7 @@ internal partial class MessagePump
             EventName = "ClearedPrefixes",
             SkipEnabledCheck = true
         )]
-        private static partial void ClearedPrefixesCore(ILogger logger, string serverAddresses);
+        partial private static void ClearedPrefixesCore(ILogger logger, string serverAddresses);
 
         [LoggerMessage(
             LoggerEventIds.RequestListenerProcessError,
@@ -75,7 +75,7 @@ internal partial class MessagePump
             "ProcessRequestAsync",
             EventName = "RequestListenerProcessError"
         )]
-        public static partial void RequestListenerProcessError(ILogger logger, Exception exception);
+        partial public static void RequestListenerProcessError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.StopCancelled,
@@ -83,7 +83,7 @@ internal partial class MessagePump
             "Canceled, terminating {OutstandingRequests} request(s).",
             EventName = "StopCancelled"
         )]
-        public static partial void StopCancelled(ILogger logger, int outstandingRequests);
+        partial public static void StopCancelled(ILogger logger, int outstandingRequests);
 
         [LoggerMessage(
             LoggerEventIds.WaitingForRequestsToDrain,
@@ -91,7 +91,7 @@ internal partial class MessagePump
             "Stopping, waiting for {OutstandingRequests} request(s) to drain.",
             EventName = "WaitingForRequestsToDrain"
         )]
-        public static partial void WaitingForRequestsToDrain(
+        partial public static void WaitingForRequestsToDrain(
             ILogger logger,
             int outstandingRequests
         );

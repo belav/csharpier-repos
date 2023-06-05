@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    internal static partial class Marvin
+    partial internal static class Marvin
     {
         /// <summary>
         /// Compute a Marvin hash and collapse it into a 32-bit hash.

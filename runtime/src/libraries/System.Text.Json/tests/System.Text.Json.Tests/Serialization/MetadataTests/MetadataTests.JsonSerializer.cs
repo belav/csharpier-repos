@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class MetadataTests
+    partial public abstract class MetadataTests
     {
         [Fact]
         public async Task RoundTripSerializerOverloads()

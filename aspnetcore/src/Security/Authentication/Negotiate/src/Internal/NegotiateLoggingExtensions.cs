@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class NegotiateLoggingExtensions
+partial internal static class NegotiateLoggingExtensions
 {
     [LoggerMessage(
         1,
@@ -11,7 +11,7 @@ internal static partial class NegotiateLoggingExtensions
         "Incomplete Negotiate handshake, sending an additional 401 Negotiate challenge.",
         EventName = "IncompleteNegotiateChallenge"
     )]
-    public static partial void IncompleteNegotiateChallenge(this ILogger logger);
+    partial public static void IncompleteNegotiateChallenge(this ILogger logger);
 
     [LoggerMessage(
         2,
@@ -19,7 +19,7 @@ internal static partial class NegotiateLoggingExtensions
         "Completed Negotiate authentication.",
         EventName = "NegotiateComplete"
     )]
-    public static partial void NegotiateComplete(this ILogger logger);
+    partial public static void NegotiateComplete(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -27,7 +27,7 @@ internal static partial class NegotiateLoggingExtensions
         "Enabling credential persistence for a complete Kerberos handshake.",
         EventName = "EnablingCredentialPersistence"
     )]
-    public static partial void EnablingCredentialPersistence(this ILogger logger);
+    partial public static void EnablingCredentialPersistence(this ILogger logger);
 
     [LoggerMessage(
         4,
@@ -35,7 +35,7 @@ internal static partial class NegotiateLoggingExtensions
         "Disabling credential persistence for a complete {protocol} handshake.",
         EventName = "DisablingCredentialPersistence"
     )]
-    public static partial void DisablingCredentialPersistence(this ILogger logger, string protocol);
+    partial public static void DisablingCredentialPersistence(this ILogger logger, string protocol);
 
     [LoggerMessage(
         5,
@@ -43,7 +43,7 @@ internal static partial class NegotiateLoggingExtensions
         "An exception occurred while processing the authentication request.",
         EventName = "ExceptionProcessingAuth"
     )]
-    public static partial void ExceptionProcessingAuth(this ILogger logger, Exception ex);
+    partial public static void ExceptionProcessingAuth(this ILogger logger, Exception ex);
 
     [LoggerMessage(
         6,
@@ -51,7 +51,7 @@ internal static partial class NegotiateLoggingExtensions
         "Challenged 401 Negotiate.",
         EventName = "ChallengeNegotiate"
     )]
-    public static partial void ChallengeNegotiate(this ILogger logger);
+    partial public static void ChallengeNegotiate(this ILogger logger);
 
     [LoggerMessage(
         7,
@@ -59,7 +59,7 @@ internal static partial class NegotiateLoggingExtensions
         "Negotiate data received for an already authenticated connection, Re-authenticating.",
         EventName = "Reauthenticating"
     )]
-    public static partial void Reauthenticating(this ILogger logger);
+    partial public static void Reauthenticating(this ILogger logger);
 
     [LoggerMessage(
         8,
@@ -67,7 +67,7 @@ internal static partial class NegotiateLoggingExtensions
         "Deferring to the server's implementation of Windows Authentication.",
         EventName = "Deferring"
     )]
-    public static partial void Deferring(this ILogger logger);
+    partial public static void Deferring(this ILogger logger);
 
     [LoggerMessage(
         9,
@@ -75,7 +75,7 @@ internal static partial class NegotiateLoggingExtensions
         "There was a problem with the users credentials.",
         EventName = "CredentialError"
     )]
-    public static partial void CredentialError(this ILogger logger, Exception ex);
+    partial public static void CredentialError(this ILogger logger, Exception ex);
 
     [LoggerMessage(
         10,
@@ -83,7 +83,7 @@ internal static partial class NegotiateLoggingExtensions
         "The users authentication request was invalid.",
         EventName = "ClientError"
     )]
-    public static partial void ClientError(this ILogger logger, Exception ex);
+    partial public static void ClientError(this ILogger logger, Exception ex);
 
     [LoggerMessage(
         11,
@@ -91,7 +91,7 @@ internal static partial class NegotiateLoggingExtensions
         "Negotiate error code: {error}.",
         EventName = "NegotiateError"
     )]
-    public static partial void NegotiateError(this ILogger logger, string error);
+    partial public static void NegotiateError(this ILogger logger, string error);
 
     [LoggerMessage(
         12,
@@ -99,5 +99,5 @@ internal static partial class NegotiateLoggingExtensions
         "Negotiate is not supported with {protocol}.",
         EventName = "ProtocolNotSupported"
     )]
-    public static partial void ProtocolNotSupported(this ILogger logger, string protocol);
+    partial public static void ProtocolNotSupported(this ILogger logger, string protocol);
 }

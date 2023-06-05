@@ -121,7 +121,7 @@ namespace System.Data.Common
             _descriptors = new PropertyDescriptorCollection(props);
         }
 
-        sealed private class DbColumnDescriptor : PropertyDescriptor
+        private sealed class DbColumnDescriptor : PropertyDescriptor
         {
             int _ordinal;
             Type _type;

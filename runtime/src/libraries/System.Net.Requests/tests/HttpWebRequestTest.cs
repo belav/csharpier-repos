@@ -44,7 +44,7 @@ namespace System.Net.Tests
         protected override bool IsAsync => false;
     }
 
-    public abstract partial class HttpWebRequestTest
+    partial public abstract class HttpWebRequestTest
     {
         protected virtual bool IsAsync => true;
 

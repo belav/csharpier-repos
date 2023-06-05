@@ -602,8 +602,10 @@ namespace System.StubHelpers
             return DateTime.DoubleDateToTicks(nativeDate);
         }
     } // class DateMarshaler
+
+    partial
 #if FEATURE_COMINTEROP
-    internal static partial class InterfaceMarshaler
+    internal static class InterfaceMarshaler
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern IntPtr ConvertToNative(
@@ -622,7 +624,7 @@ namespace System.StubHelpers
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "InterfaceMarshaler__ClearNative")]
-        internal static partial void ClearNative(IntPtr pUnk);
+        partial internal static void ClearNative(IntPtr pUnk);
     } // class InterfaceMarshaler
 #endif // FEATURE_COMINTEROP
 

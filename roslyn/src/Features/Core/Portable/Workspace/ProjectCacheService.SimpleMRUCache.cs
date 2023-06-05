@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    internal partial class ProjectCacheService : IProjectCacheHostService
+    partial internal class ProjectCacheService : IProjectCacheHostService
     {
         private sealed class SimpleMRUCache
         {

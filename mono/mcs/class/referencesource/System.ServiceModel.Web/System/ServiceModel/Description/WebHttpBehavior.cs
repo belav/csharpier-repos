@@ -2022,7 +2022,7 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static internal JavascriptCallbackResponseMessageProperty TrySetupJavascriptCallback(
+        internal static JavascriptCallbackResponseMessageProperty TrySetupJavascriptCallback(
             string callbackParameterName
         )
         {

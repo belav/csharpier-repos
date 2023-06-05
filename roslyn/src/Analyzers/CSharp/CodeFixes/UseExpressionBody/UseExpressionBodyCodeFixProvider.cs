@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         ),
         Shared
     ]
-    internal partial class UseExpressionBodyCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    partial internal class UseExpressionBodyCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; }
 

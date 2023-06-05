@@ -19,7 +19,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 {
     [UseExportProvider]
-    public abstract partial class AbstractMetadataAsSourceTests : IAsyncLifetime
+    partial public abstract class AbstractMetadataAsSourceTests : IAsyncLifetime
     {
         protected static readonly string ICSharpCodeDecompilerVersion = "7.1.0.6543";
 

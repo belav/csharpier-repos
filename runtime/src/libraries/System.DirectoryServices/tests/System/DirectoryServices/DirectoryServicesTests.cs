@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace System.DirectoryServices.Tests
 {
-    public partial class DirectoryServicesTests
+    partial public class DirectoryServicesTests
     {
         internal static bool IsLdapConfigurationExist => LdapConfiguration.Configuration != null;
         internal static bool IsActiveDirectoryServer =>

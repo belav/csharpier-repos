@@ -30,7 +30,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
-    internal abstract partial class VisualStudioBaseDiagnosticListTable
+    partial internal abstract class VisualStudioBaseDiagnosticListTable
     {
         /// <summary>
         /// Used by the editor to signify that errors added to the error list

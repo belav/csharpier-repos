@@ -62,7 +62,7 @@ namespace System.ServiceModel.Configuration
         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
     )]
     [MonoTODO]
-    public sealed partial class ChannelEndpointElementCollection
+    partial public sealed class ChannelEndpointElementCollection
         : ServiceModelEnhancedConfigurationElementCollection<ChannelEndpointElement>,
             ICollection,
             IEnumerable

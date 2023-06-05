@@ -686,7 +686,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static IntPtr GetStdHandle(Handles handle);
+        static extern IntPtr GetStdHandle(Handles handle);
 
         [DllImport(
             "kernel32.dll",
@@ -694,7 +694,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static void _Beep(int frequency, int duration);
+        static extern void _Beep(int frequency, int duration);
 
         [DllImport(
             "kernel32.dll",
@@ -702,7 +702,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool GetConsoleScreenBufferInfo(
+        static extern bool GetConsoleScreenBufferInfo(
             IntPtr handle,
             out ConsoleScreenBufferInfo info
         );
@@ -713,7 +713,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool FillConsoleOutputCharacter(
+        static extern bool FillConsoleOutputCharacter(
             IntPtr handle,
             char c,
             int size,
@@ -727,7 +727,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool FillConsoleOutputAttribute(
+        static extern bool FillConsoleOutputAttribute(
             IntPtr handle,
             short c,
             int size,
@@ -741,7 +741,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool SetConsoleCursorPosition(IntPtr handle, Coord coord);
+        static extern bool SetConsoleCursorPosition(IntPtr handle, Coord coord);
 
         [DllImport(
             "kernel32.dll",
@@ -749,7 +749,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool SetConsoleTextAttribute(IntPtr handle, short attribute);
+        static extern bool SetConsoleTextAttribute(IntPtr handle, short attribute);
 
         [DllImport(
             "kernel32.dll",
@@ -757,7 +757,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool SetConsoleScreenBufferSize(IntPtr handle, Coord newSize);
+        static extern bool SetConsoleScreenBufferSize(IntPtr handle, Coord newSize);
 
         [DllImport(
             "kernel32.dll",
@@ -765,7 +765,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool SetConsoleWindowInfo(IntPtr handle, bool absolute, ref SmallRect rect);
+        static extern bool SetConsoleWindowInfo(IntPtr handle, bool absolute, ref SmallRect rect);
 
         [DllImport(
             "kernel32.dll",
@@ -773,7 +773,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static int GetConsoleTitle(StringBuilder sb, int size);
+        static extern int GetConsoleTitle(StringBuilder sb, int size);
 
         [DllImport(
             "kernel32.dll",
@@ -781,7 +781,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool SetConsoleTitle(string title);
+        static extern bool SetConsoleTitle(string title);
 
         [DllImport(
             "kernel32.dll",
@@ -789,7 +789,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool GetConsoleCursorInfo(IntPtr handle, out ConsoleCursorInfo info);
+        static extern bool GetConsoleCursorInfo(IntPtr handle, out ConsoleCursorInfo info);
 
         [DllImport(
             "kernel32.dll",
@@ -797,7 +797,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool SetConsoleCursorInfo(IntPtr handle, ref ConsoleCursorInfo info);
+        static extern bool SetConsoleCursorInfo(IntPtr handle, ref ConsoleCursorInfo info);
 
         [DllImport(
             "user32.dll",
@@ -805,7 +805,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static short GetKeyState(int virtKey);
+        static extern short GetKeyState(int virtKey);
 
         [DllImport(
             "kernel32.dll",
@@ -813,7 +813,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool GetConsoleMode(IntPtr handle, out int mode);
+        static extern bool GetConsoleMode(IntPtr handle, out int mode);
 
         [DllImport(
             "kernel32.dll",
@@ -821,7 +821,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool SetConsoleMode(IntPtr handle, int mode);
+        static extern bool SetConsoleMode(IntPtr handle, int mode);
 
         [DllImport(
             "kernel32.dll",
@@ -829,7 +829,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool PeekConsoleInput(
+        static extern bool PeekConsoleInput(
             IntPtr handle,
             out InputRecord record,
             int length,
@@ -842,7 +842,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool ReadConsoleInput(
+        static extern bool ReadConsoleInput(
             IntPtr handle,
             out InputRecord record,
             int length,
@@ -855,7 +855,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static Coord GetLargestConsoleWindowSize(IntPtr handle);
+        static extern Coord GetLargestConsoleWindowSize(IntPtr handle);
 
         [DllImport(
             "kernel32.dll",
@@ -863,7 +863,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool ReadConsoleOutput(
+        static extern bool ReadConsoleOutput(
             IntPtr handle,
             void* buffer,
             Coord bsize,
@@ -877,7 +877,7 @@ namespace System
             SetLastError = true,
             CharSet = CharSet.Unicode
         )]
-        extern static bool WriteConsoleOutput(
+        static extern bool WriteConsoleOutput(
             IntPtr handle,
             CharInfo[] buffer,
             Coord bsize,

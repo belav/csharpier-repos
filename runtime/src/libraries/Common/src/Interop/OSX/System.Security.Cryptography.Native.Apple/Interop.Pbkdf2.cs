@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         internal static unsafe void Pbkdf2(
             PAL_HashAlgorithm prfAlgorithm,
@@ -52,7 +52,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static unsafe partial int AppleCryptoNative_Pbkdf2(
+        partial private static unsafe int AppleCryptoNative_Pbkdf2(
             PAL_HashAlgorithm prfAlgorithm,
             byte* password,
             int passwordLen,

@@ -37,10 +37,11 @@ namespace Internal.TypeSystem
         public TypeDesc type;
     }
 
+    partial
     /// <summary>
     /// Represents the parameter types, the return type, and flags of a method.
     /// </summary>
-    public sealed partial class MethodSignature : TypeSystemEntity, IEquatable<MethodSignature>
+    public sealed class MethodSignature : TypeSystemEntity, IEquatable<MethodSignature>
     {
         internal MethodSignatureFlags _flags;
         internal int _genericParameterCount;
@@ -408,10 +409,11 @@ namespace Internal.TypeSystem
         }
     }
 
+    partial
     /// <summary>
     /// Represents the fundamental base type for all methods within the type system.
     /// </summary>
-    public abstract partial class MethodDesc : TypeSystemEntity
+    public abstract class MethodDesc : TypeSystemEntity
     {
 #pragma warning disable CA1825 // avoid Array.Empty<T>() instantiation for TypeLoader
         public static readonly MethodDesc[] EmptyMethods = new MethodDesc[0];

@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {
-    public partial class ProcessThread
+    partial public class ProcessThread
     {
         /// <summary>
         /// Returns or sets the priority level of the associated thread.  The priority level is

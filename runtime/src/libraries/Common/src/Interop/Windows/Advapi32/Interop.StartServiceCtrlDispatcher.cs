@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Libraries.Advapi32,
@@ -14,6 +14,6 @@ internal static partial class Interop
             SetLastError = true
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool StartServiceCtrlDispatcher(IntPtr entry);
+        partial public static bool StartServiceCtrlDispatcher(IntPtr entry);
     }
 }

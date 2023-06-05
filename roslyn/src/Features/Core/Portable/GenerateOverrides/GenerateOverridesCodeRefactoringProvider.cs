@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
     [ExtensionOrder(
         After = PredefinedCodeRefactoringProviderNames.AddConstructorParametersFromMembers
     )]
-    internal partial class GenerateOverridesCodeRefactoringProvider : CodeRefactoringProvider
+    partial internal class GenerateOverridesCodeRefactoringProvider : CodeRefactoringProvider
     {
         private readonly IPickMembersService? _pickMembersService_forTestingPurposes;
 

@@ -6,11 +6,12 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
+    partial
     // CONTRACT with Runtime
     // The Array type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type int
 
-    public partial class Array
+    public class Array
     {
         // CS0169: The field 'Array._numComponents' is never used
 #pragma warning disable 0169

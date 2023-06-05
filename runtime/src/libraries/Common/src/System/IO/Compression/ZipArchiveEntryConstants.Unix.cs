@@ -3,7 +3,7 @@
 
 namespace System.IO.Compression
 {
-    internal static partial class ZipArchiveEntryConstants
+    partial internal static class ZipArchiveEntryConstants
     {
         /// <summary>
         /// The default external file attributes are used to support zip archives on multiple platforms.

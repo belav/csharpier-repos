@@ -10,34 +10,34 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ssl
+    partial internal static class Ssl
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxCreate")]
-        internal static partial SafeSslContextHandle SslCtxCreate(IntPtr method);
+        partial internal static SafeSslContextHandle SslCtxCreate(IntPtr method);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxDestroy")]
-        internal static partial void SslCtxDestroy(IntPtr ctx);
+        partial internal static void SslCtxDestroy(IntPtr ctx);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxGetData")]
-        internal static partial IntPtr SslCtxGetData(IntPtr ctx);
+        partial internal static IntPtr SslCtxGetData(IntPtr ctx);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetData")]
-        internal static partial int SslCtxSetData(SafeSslContextHandle ctx, IntPtr data);
+        partial internal static int SslCtxSetData(SafeSslContextHandle ctx, IntPtr data);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetData")]
-        internal static partial int SslCtxSetData(IntPtr ctx, IntPtr data);
+        partial internal static int SslCtxSetData(IntPtr ctx, IntPtr data);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetAlpnSelectCb")]
-        internal static unsafe partial void SslCtxSetAlpnSelectCb(
+        partial internal static unsafe void SslCtxSetAlpnSelectCb(
             SafeSslContextHandle ctx,
             delegate* unmanaged<IntPtr, byte**, byte*, byte*, uint, IntPtr, int> callback,
             IntPtr arg
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetCaching")]
-        internal static unsafe partial int SslCtxSetCaching(
+        partial internal static unsafe int SslCtxSetCaching(
             SafeSslContextHandle ctx,
             int mode,
             int cacheSize,

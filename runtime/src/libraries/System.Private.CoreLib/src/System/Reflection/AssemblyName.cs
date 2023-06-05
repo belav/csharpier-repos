@@ -9,7 +9,7 @@ using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System.Reflection
 {
-    public sealed partial class AssemblyName : ICloneable, IDeserializationCallback, ISerializable
+    partial public sealed class AssemblyName : ICloneable, IDeserializationCallback, ISerializable
     {
         // If you modify any of these fields, you must also update the
         // AssemblyBaseObject structure in object.h

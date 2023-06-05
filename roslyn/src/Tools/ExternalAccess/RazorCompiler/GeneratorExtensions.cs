@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler
 {
-    internal static partial class GeneratorExtensions
+    partial internal static class GeneratorExtensions
     {
         public static void RegisterHostOutput<TSource>(
             ref this IncrementalGeneratorInitializationContext @this,

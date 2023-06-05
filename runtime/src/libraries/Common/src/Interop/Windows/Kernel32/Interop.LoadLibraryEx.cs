@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         public const int LOAD_LIBRARY_AS_DATAFILE = 0x00000002;
         public const int LOAD_LIBRARY_SEARCH_SYSTEM32 = 0x00000800;
@@ -18,7 +18,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial SafeLibraryHandle LoadLibraryExW(
+        partial public static SafeLibraryHandle LoadLibraryExW(
             string lpwLibFileName,
             IntPtr hFile,
             uint dwFlags

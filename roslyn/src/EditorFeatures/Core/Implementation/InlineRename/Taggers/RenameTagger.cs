@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal sealed partial class RenameTagger : AbstractRenameTagger<ITextMarkerTag>
+    partial internal sealed class RenameTagger : AbstractRenameTagger<ITextMarkerTag>
     {
         public RenameTagger(ITextBuffer buffer, InlineRenameService renameService)
             : base(buffer, renameService) { }

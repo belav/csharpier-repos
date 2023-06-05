@@ -15,11 +15,11 @@ namespace System.Data.OleDb
     using System.Globalization;
     using System.Reflection;
 
-    sealed internal class OleDbPropertySetGuid
+    internal sealed class OleDbPropertySetGuid
     {
         private OleDbPropertySetGuid() { }
 
-        static internal readonly Guid Column = new Guid(
+        internal static readonly Guid Column = new Guid(
             0xc8b522b9,
             0x5cf3,
             0x11ce,
@@ -32,7 +32,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid DataSource = new Guid(
+        internal static readonly Guid DataSource = new Guid(
             0xc8b522ba,
             0x5cf3,
             0x11ce,
@@ -45,7 +45,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid DataSourceInfo = new Guid(
+        internal static readonly Guid DataSourceInfo = new Guid(
             0xc8b522bb,
             0x5cf3,
             0x11ce,
@@ -58,7 +58,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid DBInit = new Guid(
+        internal static readonly Guid DBInit = new Guid(
             0xc8b522bc,
             0x5cf3,
             0x11ce,
@@ -71,7 +71,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid Index = new Guid(
+        internal static readonly Guid Index = new Guid(
             0xc8b522bd,
             0x5cf3,
             0x11ce,
@@ -84,7 +84,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid PropertiesInError = new Guid(
+        internal static readonly Guid PropertiesInError = new Guid(
             0xc8b522d4,
             0x5cf3,
             0x11ce,
@@ -97,7 +97,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid Rowset = new Guid(
+        internal static readonly Guid Rowset = new Guid(
             0xc8b522be,
             0x5cf3,
             0x11ce,
@@ -110,7 +110,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid Session = new Guid(
+        internal static readonly Guid Session = new Guid(
             0xc8b522c6,
             0x5cf3,
             0x11ce,
@@ -123,7 +123,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid Stream = new Guid(
+        internal static readonly Guid Stream = new Guid(
             0xc8b522fd,
             0x5cf3,
             0x11ce,
@@ -136,7 +136,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid Table = new Guid(
+        internal static readonly Guid Table = new Guid(
             0xc8b522bf,
             0x5cf3,
             0x11ce,
@@ -149,7 +149,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid Trustee = new Guid(
+        internal static readonly Guid Trustee = new Guid(
             0xc8b522e1,
             0x5cf3,
             0x11ce,
@@ -162,7 +162,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid View = new Guid(
+        internal static readonly Guid View = new Guid(
             0xc8b522df,
             0x5cf3,
             0x11ce,
@@ -176,7 +176,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static internal readonly Guid DataSourceAll = new Guid(
+        internal static readonly Guid DataSourceAll = new Guid(
             0xc8b522c0,
             0x5cf3,
             0x11ce,
@@ -189,7 +189,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid DataSourceInfoAll = new Guid(
+        internal static readonly Guid DataSourceInfoAll = new Guid(
             0xc8b522c1,
             0x5cf3,
             0x11ce,
@@ -202,7 +202,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid DBInitAll = new Guid(
+        internal static readonly Guid DBInitAll = new Guid(
             0xc8b522ca,
             0x5cf3,
             0x11ce,
@@ -215,7 +215,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid ColumnAll = new Guid(
+        internal static readonly Guid ColumnAll = new Guid(
             0xc8b522f0,
             0x5cf3,
             0x11ce,
@@ -228,7 +228,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid ConstraintAll = new Guid(
+        internal static readonly Guid ConstraintAll = new Guid(
             0xc8b522fa,
             0x5cf3,
             0x11ce,
@@ -241,7 +241,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid IndexAll = new Guid(
+        internal static readonly Guid IndexAll = new Guid(
             0xc8b522f1,
             0x5cf3,
             0x11ce,
@@ -254,7 +254,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid RowsetAll = new Guid(
+        internal static readonly Guid RowsetAll = new Guid(
             0xc8b522c2,
             0x5cf3,
             0x11ce,
@@ -267,7 +267,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid SessionAll = new Guid(
+        internal static readonly Guid SessionAll = new Guid(
             0xc8b522c7,
             0x5cf3,
             0x11ce,
@@ -280,7 +280,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid StreamAll = new Guid(
+        internal static readonly Guid StreamAll = new Guid(
             0xc8b522fe,
             0x5cf3,
             0x11ce,
@@ -293,7 +293,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid TableAll = new Guid(
+        internal static readonly Guid TableAll = new Guid(
             0xc8b522f2,
             0x5cf3,
             0x11ce,
@@ -306,7 +306,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid TrusteeAll = new Guid(
+        internal static readonly Guid TrusteeAll = new Guid(
             0xc8b522f3,
             0x5cf3,
             0x11ce,
@@ -319,7 +319,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal readonly Guid ViewAll = new Guid(
+        internal static readonly Guid ViewAll = new Guid(
             0xc8b522fc,
             0x5cf3,
             0x11ce,

@@ -7,7 +7,7 @@
 namespace System.Data.OleDb
 {
     [System.ComponentModel.TypeConverterAttribute(typeof(OleDbParameter.OleDbParameterConverter))]
-    public sealed partial class OleDbParameter
+    partial public sealed class OleDbParameter
         : System.Data.Common.DbParameter,
             System.Data.IDataParameter,
             System.Data.IDbDataParameter,
@@ -20,7 +20,7 @@ namespace System.Data.OleDb
     [System.ComponentModel.TypeConverterAttribute(
         typeof(OleDbConnectionStringBuilder.OleDbConnectionStringBuilderConverter)
     )]
-    public sealed partial class OleDbConnectionStringBuilder
+    partial public sealed class OleDbConnectionStringBuilder
         : System.Data.Common.DbConnectionStringBuilder
     {
         [System.ComponentModel.DisplayNameAttribute("OLE DB Services")]
@@ -52,7 +52,7 @@ namespace System.Data.OleDb
         internal sealed class OleDbProviderConverter { }
     }
 
-    public sealed partial class OleDbException
+    partial public sealed class OleDbException
     {
         [System.ComponentModel.TypeConverterAttribute(typeof(ErrorCodeConverter))]
         public override int ErrorCode

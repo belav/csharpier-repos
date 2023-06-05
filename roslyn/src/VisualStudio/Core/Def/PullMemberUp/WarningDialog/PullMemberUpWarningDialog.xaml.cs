@@ -10,10 +10,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.WarningDialog
 {
+    partial
     /// <summary>
     /// Interaction logic for PushMemberUpWarningDialog.xaml
     /// </summary>
-    internal partial class PullMemberUpWarningDialog : DialogWindow
+    internal class PullMemberUpWarningDialog : DialogWindow
     {
         public string Back => ServicesVSResources.Back;
         public string Finish => ServicesVSResources.Finish;

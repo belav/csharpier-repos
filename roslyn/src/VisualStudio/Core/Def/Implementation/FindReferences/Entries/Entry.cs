@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Shell.TableControl;
 
 namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 {
-    internal partial class StreamingFindUsagesPresenter
+    partial internal class StreamingFindUsagesPresenter
     {
         /// <summary>
         /// Represents a single entry (i.e. row) in the ungrouped FAR table.

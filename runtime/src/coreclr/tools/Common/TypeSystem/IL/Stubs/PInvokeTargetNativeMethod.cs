@@ -5,12 +5,13 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Synthetic method that represents the actual PInvoke target method.
     /// All parameters are simple types. There will be no code
     /// generated for this method. Instead, a static reference to a symbol will be emitted.
     /// </summary>
-    public sealed partial class PInvokeTargetNativeMethod : MethodDesc
+    public sealed class PInvokeTargetNativeMethod : MethodDesc
     {
         private readonly MethodDesc _declMethod;
         private readonly MethodSignature _signature;

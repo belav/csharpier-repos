@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AndroidCrypto
+    partial internal static class AndroidCrypto
     {
         internal static bool EcdhDeriveKey(
             SafeEcKeyHandle ourKey,
@@ -29,7 +29,7 @@ internal static partial class Interop
             EntryPoint = "AndroidCryptoNative_EcdhDeriveKey"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EcdhDeriveKey(
+        partial private static bool EcdhDeriveKey(
             SafeEcKeyHandle ourKey,
             SafeEcKeyHandle peerKey,
             ref byte buffer,

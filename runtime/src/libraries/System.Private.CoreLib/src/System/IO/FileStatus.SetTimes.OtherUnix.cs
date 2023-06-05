@@ -6,7 +6,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    internal partial struct FileStatus
+    partial internal struct FileStatus
     {
         internal void SetCreationTime(string path, DateTimeOffset time, bool asDirectory) =>
             SetLastWriteTime(path, time, asDirectory);

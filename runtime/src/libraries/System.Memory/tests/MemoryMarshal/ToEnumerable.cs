@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.MemoryTests
 {
-    public static partial class MemoryTests
+    partial public static class MemoryTests
     {
         [Fact]
         public static void ToEnumerable()

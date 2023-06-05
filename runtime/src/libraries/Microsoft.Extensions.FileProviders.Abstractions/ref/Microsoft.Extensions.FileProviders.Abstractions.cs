@@ -6,14 +6,14 @@
 
 namespace Microsoft.Extensions.FileProviders
 {
-    public partial interface IDirectoryContents
+    partial public interface IDirectoryContents
         : System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
             System.Collections.IEnumerable
     {
         bool Exists { get; }
     }
 
-    public partial interface IFileInfo
+    partial public interface IFileInfo
     {
         bool Exists { get; }
         bool IsDirectory { get; }
@@ -24,14 +24,14 @@ namespace Microsoft.Extensions.FileProviders
         System.IO.Stream CreateReadStream();
     }
 
-    public partial interface IFileProvider
+    partial public interface IFileProvider
     {
         Microsoft.Extensions.FileProviders.IDirectoryContents GetDirectoryContents(string subpath);
         Microsoft.Extensions.FileProviders.IFileInfo GetFileInfo(string subpath);
         Microsoft.Extensions.Primitives.IChangeToken Watch(string filter);
     }
 
-    public partial class NotFoundDirectoryContents
+    partial public class NotFoundDirectoryContents
         : Microsoft.Extensions.FileProviders.IDirectoryContents,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
             System.Collections.IEnumerable
@@ -58,7 +58,7 @@ namespace Microsoft.Extensions.FileProviders
         }
     }
 
-    public partial class NotFoundFileInfo : Microsoft.Extensions.FileProviders.IFileInfo
+    partial public class NotFoundFileInfo : Microsoft.Extensions.FileProviders.IFileInfo
     {
         public NotFoundFileInfo(string name) { }
 
@@ -94,7 +94,7 @@ namespace Microsoft.Extensions.FileProviders
         }
     }
 
-    public partial class NullChangeToken : Microsoft.Extensions.Primitives.IChangeToken
+    partial public class NullChangeToken : Microsoft.Extensions.Primitives.IChangeToken
     {
         internal NullChangeToken() { }
 
@@ -120,7 +120,7 @@ namespace Microsoft.Extensions.FileProviders
         }
     }
 
-    public partial class NullFileProvider : Microsoft.Extensions.FileProviders.IFileProvider
+    partial public class NullFileProvider : Microsoft.Extensions.FileProviders.IFileProvider
     {
         public NullFileProvider() { }
 

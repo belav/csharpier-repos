@@ -11,7 +11,7 @@ namespace System.Xml.Serialization
     // from Types.cs
     internal class TypeScope
     {
-        static internal XmlQualifiedName ParseWsdlArrayType(
+        internal static XmlQualifiedName ParseWsdlArrayType(
             string type,
             out string dims,
             XmlSchemaObject parent

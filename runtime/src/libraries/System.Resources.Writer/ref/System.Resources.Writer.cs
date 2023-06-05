@@ -6,7 +6,7 @@
 
 namespace System.Resources
 {
-    public partial interface IResourceWriter : System.IDisposable
+    partial public interface IResourceWriter : System.IDisposable
     {
         void AddResource(string name, byte[]? value);
         void AddResource(string name, object? value);
@@ -15,7 +15,7 @@ namespace System.Resources
         void Generate();
     }
 
-    public sealed partial class ResourceWriter
+    partial public sealed class ResourceWriter
         : System.IDisposable,
             System.Resources.IResourceWriter
     {

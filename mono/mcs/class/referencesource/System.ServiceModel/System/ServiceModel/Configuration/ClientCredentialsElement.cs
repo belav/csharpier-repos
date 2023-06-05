@@ -14,7 +14,7 @@ namespace System.ServiceModel.Configuration
     using System.Reflection;
     using System.Runtime.InteropServices;
 
-    public partial class ClientCredentialsElement : BehaviorExtensionElement
+    partial public class ClientCredentialsElement : BehaviorExtensionElement
     {
         public ClientCredentialsElement() { }
 

@@ -107,7 +107,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        static public AsymmetricAlgorithm Create()
+        public
+        //
+        // public methods
+        //
+
+        static AsymmetricAlgorithm Create()
         {
 #if FULL_AOT_RUNTIME
             return new RSACryptoServiceProvider();
@@ -118,7 +123,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        static public AsymmetricAlgorithm Create(String algName)
+        public static AsymmetricAlgorithm Create(String algName)
         {
             return (AsymmetricAlgorithm)CryptoConfig.CreateFromName(algName);
         }

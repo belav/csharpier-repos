@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace Roslyn.Utilities
 {
-    internal static partial class SpecializedCollections
+    partial internal static class SpecializedCollections
     {
-        private static partial class Singleton
+        partial private static class Singleton
         {
             internal class Enumerator<T> : IEnumerator<T>
             {

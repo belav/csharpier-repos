@@ -14,7 +14,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 {
     using Workspace = Microsoft.CodeAnalysis.Workspace;
 
-    internal partial class AnalyzersFolderItem : BaseItem
+    partial internal class AnalyzersFolderItem : BaseItem
     {
         private readonly IContextMenuController _contextMenuController;
 

@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System
 {
-    public partial class WeakReference : ISerializable
+    partial public class WeakReference : ISerializable
     {
         // If you fix bugs here, please fix them in WeakReference<T> at the same time.
 

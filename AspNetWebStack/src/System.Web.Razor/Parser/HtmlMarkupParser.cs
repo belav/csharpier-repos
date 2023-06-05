@@ -10,7 +10,7 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    public partial class HtmlMarkupParser
+    partial public class HtmlMarkupParser
         : TokenizerBackedParser<HtmlTokenizer, HtmlSymbol, HtmlSymbolType>
     {
         //From http://dev.w3.org/html5/spec/Overview.html#elements-0

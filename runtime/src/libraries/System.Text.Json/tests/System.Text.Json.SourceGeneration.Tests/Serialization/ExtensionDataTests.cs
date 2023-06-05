@@ -8,7 +8,7 @@ using System.Text.Json.Serialization.Tests;
 
 namespace System.Text.Json.SourceGeneration.Tests
 {
-    public sealed partial class ExtensionDataTests_Metadata : ExtensionDataTests
+    partial public sealed class ExtensionDataTests_Metadata : ExtensionDataTests
     {
         public ExtensionDataTests_Metadata()
             : base(
@@ -67,10 +67,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(int))]
         [JsonSerializable(typeof(DummyObj))]
         [JsonSerializable(typeof(DummyStruct))]
-        internal sealed partial class ExtensionDataTestsContext_Metadata : JsonSerializerContext { }
+        partial internal sealed class ExtensionDataTestsContext_Metadata : JsonSerializerContext { }
     }
 
-    public sealed partial class ExtensionDataTests_Default : ExtensionDataTests
+    partial public sealed class ExtensionDataTests_Default : ExtensionDataTests
     {
         public ExtensionDataTests_Default()
             : base(
@@ -128,6 +128,6 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(int))]
         [JsonSerializable(typeof(DummyObj))]
         [JsonSerializable(typeof(DummyStruct))]
-        internal sealed partial class ExtensionDataTestsContext_Default : JsonSerializerContext { }
+        partial internal sealed class ExtensionDataTestsContext_Default : JsonSerializerContext { }
     }
 }

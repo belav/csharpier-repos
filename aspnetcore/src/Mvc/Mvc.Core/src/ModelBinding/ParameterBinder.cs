@@ -9,10 +9,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
+partial
 /// <summary>
 /// Binds and validates models specified by a <see cref="ParameterDescriptor"/>.
 /// </summary>
-public partial class ParameterBinder
+public class ParameterBinder
 {
     private readonly IModelMetadataProvider _modelMetadataProvider;
     private readonly IModelBinderFactory _modelBinderFactory;

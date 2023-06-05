@@ -9,7 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial struct SeparatedSyntaxList<TNode>
+    partial public struct SeparatedSyntaxList<TNode>
     {
         // Public struct enumerator
         // Only implements enumerator pattern as used by foreach

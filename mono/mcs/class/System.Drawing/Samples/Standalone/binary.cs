@@ -35,7 +35,7 @@ using System.Windows.Forms;
 
 namespace Samples
 {
-    public partial class binary : Form
+    partial public class binary : Form
     {
         private Region r1;
         private Region r2;

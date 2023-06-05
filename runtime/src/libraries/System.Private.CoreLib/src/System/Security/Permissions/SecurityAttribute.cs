@@ -9,7 +9,7 @@ namespace System.Security.Permissions
         UrlFormat = Obsoletions.SharedUrlFormat
     )]
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
-    public abstract partial class SecurityAttribute : Attribute
+    partial public abstract class SecurityAttribute : Attribute
     {
         protected SecurityAttribute(SecurityAction action) { }
 

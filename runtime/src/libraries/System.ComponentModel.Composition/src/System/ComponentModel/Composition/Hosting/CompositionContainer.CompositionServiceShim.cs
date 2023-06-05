@@ -5,7 +5,7 @@ using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class CompositionContainer
+    partial public class CompositionContainer
     {
         private sealed class CompositionServiceShim : ICompositionService
         {

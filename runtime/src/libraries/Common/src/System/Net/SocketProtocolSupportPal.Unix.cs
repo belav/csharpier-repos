@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Net
 {
-    internal static partial class SocketProtocolSupportPal
+    partial internal static class SocketProtocolSupportPal
     {
         private static unsafe bool IsSupported(AddressFamily af)
         {

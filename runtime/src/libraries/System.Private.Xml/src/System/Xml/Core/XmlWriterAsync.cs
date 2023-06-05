@@ -8,9 +8,10 @@ using System.Diagnostics;
 
 namespace System.Xml
 {
+    partial
     // Represents a writer that provides fast non-cached forward-only way of generating XML streams containing XML documents
     // that conform to the W3C Extensible Markup Language (XML) 1.0 specification and the Namespaces in XML specification.
-    public abstract partial class XmlWriter : IDisposable, IAsyncDisposable
+    public abstract class XmlWriter : IDisposable, IAsyncDisposable
     {
         // Write methods
         // Writes out the XML declaration with the version "1.0".

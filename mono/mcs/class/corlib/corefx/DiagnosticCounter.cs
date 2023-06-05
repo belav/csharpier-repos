@@ -4,7 +4,7 @@
 
 namespace System.Diagnostics.Tracing
 {
-    public abstract partial class DiagnosticCounter : IDisposable
+    partial public abstract class DiagnosticCounter : IDisposable
     {
         internal DiagnosticCounter(string name, EventSource eventSource) { }
 

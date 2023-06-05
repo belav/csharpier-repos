@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public abstract partial class Workspace
+    partial public abstract class Workspace
     {
         private readonly EventMap _eventMap = new();
 

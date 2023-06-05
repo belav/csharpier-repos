@@ -6,10 +6,11 @@ using System.Diagnostics;
 
 namespace System.Formats.Asn1
 {
+    partial
     /// <summary>
     ///   Provides stateless methods for decoding BER-, CER-, or DER-encoded ASN.1 data.
     /// </summary>
-    public static partial class AsnDecoder
+    public static class AsnDecoder
     {
         // T-REC-X.690-201508 sec 9.2
         internal const int MaxCERSegmentSize = 1000;
@@ -708,10 +709,11 @@ namespace System.Formats.Asn1
         }
     }
 
+    partial
     /// <summary>
     ///   A stateful, forward-only reader for BER-, CER-, or DER-encoded ASN.1 data.
     /// </summary>
-    public partial class AsnReader
+    public class AsnReader
     {
         internal const int MaxCERSegmentSize = AsnDecoder.MaxCERSegmentSize;
 

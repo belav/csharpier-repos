@@ -7,9 +7,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal static unsafe int ForkAndExecProcess(
             string filename,
@@ -73,7 +73,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        private static unsafe partial int ForkAndExecProcess(
+        partial private static unsafe int ForkAndExecProcess(
             string filename,
             byte** argv,
             byte** envp,

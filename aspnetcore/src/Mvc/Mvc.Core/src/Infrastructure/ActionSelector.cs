@@ -12,10 +12,11 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// A default <see cref="IActionSelector"/> implementation.
 /// </summary>
-internal sealed partial class ActionSelector : IActionSelector
+internal sealed class ActionSelector : IActionSelector
 {
     private readonly IActionDescriptorCollectionProvider _actionDescriptorCollectionProvider;
     private readonly ActionConstraintCache _actionConstraintCache;
@@ -271,7 +272,7 @@ internal sealed partial class ActionSelector : IActionSelector
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -279,7 +280,7 @@ internal sealed partial class ActionSelector : IActionSelector
             "Request matched multiple actions resulting in ambiguity. Matching actions: {AmbiguousActions}",
             EventName = "AmbiguousActions"
         )]
-        public static partial void AmbiguousActions(ILogger logger, string ambiguousActions);
+        partial public static void AmbiguousActions(ILogger logger, string ambiguousActions);
 
         [LoggerMessage(
             2,
@@ -287,7 +288,7 @@ internal sealed partial class ActionSelector : IActionSelector
             "Action '{ActionName}' with id '{ActionId}' did not match the constraint '{ActionConstraint}'",
             EventName = "ConstraintMismatch"
         )]
-        public static partial void ConstraintMismatch(
+        partial public static void ConstraintMismatch(
             ILogger logger,
             string? actionName,
             string actionId,

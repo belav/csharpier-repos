@@ -2,7 +2,7 @@ namespace System
 {
     internal static class MonoUtil
     {
-        public readonly static bool IsUnix;
+        public static readonly bool IsUnix;
 
         static MonoUtil()
         {

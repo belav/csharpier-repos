@@ -87,7 +87,7 @@ namespace System.Reflection
 
 namespace System.Reflection.Metadata
 {
-    public readonly partial struct ArrayShape
+    partial public readonly struct ArrayShape
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -115,7 +115,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct AssemblyDefinition
+    partial public readonly struct AssemblyDefinition
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -155,7 +155,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct AssemblyDefinitionHandle
+    partial public readonly struct AssemblyDefinitionHandle
         : System.IEquatable<System.Reflection.Metadata.AssemblyDefinitionHandle>
     {
         private readonly int _dummyPrimitive;
@@ -224,7 +224,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct AssemblyFile
+    partial public readonly struct AssemblyFile
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -247,7 +247,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct AssemblyFileHandle
+    partial public readonly struct AssemblyFileHandle
         : System.IEquatable<System.Reflection.Metadata.AssemblyFileHandle>
     {
         private readonly int _dummyPrimitive;
@@ -316,7 +316,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct AssemblyFileHandleCollection
+    partial public readonly struct AssemblyFileHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.AssemblyFileHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.AssemblyFileHandle>,
             System.Collections.IEnumerable
@@ -342,7 +342,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.AssemblyFileHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -368,7 +368,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct AssemblyReference
+    partial public readonly struct AssemblyReference
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -403,7 +403,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct AssemblyReferenceHandle
+    partial public readonly struct AssemblyReferenceHandle
         : System.IEquatable<System.Reflection.Metadata.AssemblyReferenceHandle>
     {
         private readonly int _dummyPrimitive;
@@ -472,7 +472,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct AssemblyReferenceHandleCollection
+    partial public readonly struct AssemblyReferenceHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.AssemblyReferenceHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.AssemblyReferenceHandle>,
             System.Collections.IEnumerable
@@ -499,7 +499,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.AssemblyReferenceHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -526,7 +526,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct Blob
+    partial public readonly struct Blob
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -545,7 +545,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public partial class BlobBuilder
+    partial public class BlobBuilder
     {
         public BlobBuilder(int capacity = 256) { }
 
@@ -700,7 +700,7 @@ namespace System.Reflection.Metadata
 
         public void WriteUTF8(string value, bool allowUnpairedSurrogates = true) { }
 
-        public partial struct Blobs
+        partial public struct Blobs
             : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
                 System.Collections.Generic.IEnumerator<System.Reflection.Metadata.Blob>,
                 System.Collections.IEnumerable,
@@ -744,7 +744,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct BlobContentId
+    partial public readonly struct BlobContentId
         : System.IEquatable<System.Reflection.Metadata.BlobContentId>
     {
         private readonly int _dummyPrimitive;
@@ -831,7 +831,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct BlobHandle
+    partial public readonly struct BlobHandle
         : System.IEquatable<System.Reflection.Metadata.BlobHandle>
     {
         private readonly int _dummyPrimitive;
@@ -888,7 +888,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public partial struct BlobReader
+    partial public struct BlobReader
     {
         private int _dummyPrimitive;
 
@@ -1076,7 +1076,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public partial struct BlobWriter
+    partial public struct BlobWriter
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -1231,7 +1231,7 @@ namespace System.Reflection.Metadata
         public void WriteUTF8(string value, bool allowUnpairedSurrogates) { }
     }
 
-    public readonly partial struct Constant
+    partial public readonly struct Constant
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1249,7 +1249,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ConstantHandle
+    partial public readonly struct ConstantHandle
         : System.IEquatable<System.Reflection.Metadata.ConstantHandle>
     {
         private readonly int _dummyPrimitive;
@@ -1337,7 +1337,7 @@ namespace System.Reflection.Metadata
         NullReference = (byte)18,
     }
 
-    public readonly partial struct CustomAttribute
+    partial public readonly struct CustomAttribute
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1362,7 +1362,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct CustomAttributeHandle
+    partial public readonly struct CustomAttributeHandle
         : System.IEquatable<System.Reflection.Metadata.CustomAttributeHandle>
     {
         private readonly int _dummyPrimitive;
@@ -1431,7 +1431,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct CustomAttributeHandleCollection
+    partial public readonly struct CustomAttributeHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.CustomAttributeHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.CustomAttributeHandle>,
             System.Collections.IEnumerable
@@ -1458,7 +1458,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.CustomAttributeHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -1491,7 +1491,7 @@ namespace System.Reflection.Metadata
         Property = (byte)84,
     }
 
-    public readonly partial struct CustomAttributeNamedArgument<TType>
+    partial public readonly struct CustomAttributeNamedArgument<TType>
     {
         private readonly TType _Type_k__BackingField;
         private readonly object _dummy;
@@ -1525,7 +1525,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct CustomAttributeTypedArgument<TType>
+    partial public readonly struct CustomAttributeTypedArgument<TType>
     {
         private readonly TType _Type_k__BackingField;
         private readonly object _dummy;
@@ -1546,7 +1546,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct CustomAttributeValue<TType>
+    partial public readonly struct CustomAttributeValue<TType>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1569,7 +1569,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct CustomDebugInformation
+    partial public readonly struct CustomDebugInformation
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1587,7 +1587,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct CustomDebugInformationHandle
+    partial public readonly struct CustomDebugInformationHandle
         : System.IEquatable<System.Reflection.Metadata.CustomDebugInformationHandle>
     {
         private readonly int _dummyPrimitive;
@@ -1658,7 +1658,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct CustomDebugInformationHandleCollection
+    partial public readonly struct CustomDebugInformationHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.CustomDebugInformationHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.CustomDebugInformationHandle>,
             System.Collections.IEnumerable
@@ -1685,7 +1685,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.CustomDebugInformationHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -1712,7 +1712,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public sealed partial class DebugMetadataHeader
+    partial public sealed class DebugMetadataHeader
     {
         internal DebugMetadataHeader() { }
 
@@ -1730,7 +1730,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct DeclarativeSecurityAttribute
+    partial public readonly struct DeclarativeSecurityAttribute
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1748,7 +1748,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct DeclarativeSecurityAttributeHandle
+    partial public readonly struct DeclarativeSecurityAttributeHandle
         : System.IEquatable<System.Reflection.Metadata.DeclarativeSecurityAttributeHandle>
     {
         private readonly int _dummyPrimitive;
@@ -1817,7 +1817,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct DeclarativeSecurityAttributeHandleCollection
+    partial public readonly struct DeclarativeSecurityAttributeHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.DeclarativeSecurityAttributeHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.DeclarativeSecurityAttributeHandle>,
             System.Collections.IEnumerable
@@ -1844,7 +1844,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.DeclarativeSecurityAttributeHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -1871,7 +1871,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct Document
+    partial public readonly struct Document
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1893,7 +1893,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct DocumentHandle
+    partial public readonly struct DocumentHandle
         : System.IEquatable<System.Reflection.Metadata.DocumentHandle>
     {
         private readonly int _dummyPrimitive;
@@ -1962,7 +1962,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct DocumentHandleCollection
+    partial public readonly struct DocumentHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.DocumentHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.DocumentHandle>,
             System.Collections.IEnumerable
@@ -1989,7 +1989,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.DocumentHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -2016,7 +2016,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct DocumentNameBlobHandle
+    partial public readonly struct DocumentNameBlobHandle
         : System.IEquatable<System.Reflection.Metadata.DocumentNameBlobHandle>
     {
         private readonly int _dummyPrimitive;
@@ -2073,7 +2073,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct EntityHandle
+    partial public readonly struct EntityHandle
         : System.IEquatable<System.Reflection.Metadata.EntityHandle>
     {
         private readonly int _dummyPrimitive;
@@ -2136,7 +2136,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct EventAccessors
+    partial public readonly struct EventAccessors
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2158,7 +2158,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct EventDefinition
+    partial public readonly struct EventDefinition
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2186,7 +2186,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct EventDefinitionHandle
+    partial public readonly struct EventDefinitionHandle
         : System.IEquatable<System.Reflection.Metadata.EventDefinitionHandle>
     {
         private readonly int _dummyPrimitive;
@@ -2255,7 +2255,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct EventDefinitionHandleCollection
+    partial public readonly struct EventDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.EventDefinitionHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.EventDefinitionHandle>,
             System.Collections.IEnumerable
@@ -2282,7 +2282,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.EventDefinitionHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -2309,7 +2309,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ExceptionRegion
+    partial public readonly struct ExceptionRegion
     {
         private readonly int _dummyPrimitive;
         public System.Reflection.Metadata.EntityHandle CatchType
@@ -2350,7 +2350,7 @@ namespace System.Reflection.Metadata
         Fault = (ushort)4,
     }
 
-    public readonly partial struct ExportedType
+    partial public readonly struct ExportedType
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2385,7 +2385,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ExportedTypeHandle
+    partial public readonly struct ExportedTypeHandle
         : System.IEquatable<System.Reflection.Metadata.ExportedTypeHandle>
     {
         private readonly int _dummyPrimitive;
@@ -2454,7 +2454,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ExportedTypeHandleCollection
+    partial public readonly struct ExportedTypeHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ExportedTypeHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ExportedTypeHandle>,
             System.Collections.IEnumerable
@@ -2480,7 +2480,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ExportedTypeHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -2506,7 +2506,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct FieldDefinition
+    partial public readonly struct FieldDefinition
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2562,7 +2562,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct FieldDefinitionHandle
+    partial public readonly struct FieldDefinitionHandle
         : System.IEquatable<System.Reflection.Metadata.FieldDefinitionHandle>
     {
         private readonly int _dummyPrimitive;
@@ -2631,7 +2631,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct FieldDefinitionHandleCollection
+    partial public readonly struct FieldDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.FieldDefinitionHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.FieldDefinitionHandle>,
             System.Collections.IEnumerable
@@ -2658,7 +2658,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.FieldDefinitionHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -2685,7 +2685,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct GenericParameter
+    partial public readonly struct GenericParameter
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2717,7 +2717,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct GenericParameterConstraint
+    partial public readonly struct GenericParameterConstraint
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2736,7 +2736,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct GenericParameterConstraintHandle
+    partial public readonly struct GenericParameterConstraintHandle
         : System.IEquatable<System.Reflection.Metadata.GenericParameterConstraintHandle>
     {
         private readonly int _dummyPrimitive;
@@ -2805,7 +2805,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct GenericParameterConstraintHandleCollection
+    partial public readonly struct GenericParameterConstraintHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.GenericParameterConstraintHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.GenericParameterConstraintHandle>,
             System.Collections.Generic.IReadOnlyList<System.Reflection.Metadata.GenericParameterConstraintHandle>,
@@ -2836,7 +2836,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.GenericParameterConstraintHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -2862,7 +2862,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct GenericParameterHandle
+    partial public readonly struct GenericParameterHandle
         : System.IEquatable<System.Reflection.Metadata.GenericParameterHandle>
     {
         private readonly int _dummyPrimitive;
@@ -2931,7 +2931,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct GenericParameterHandleCollection
+    partial public readonly struct GenericParameterHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.GenericParameterHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.GenericParameterHandle>,
             System.Collections.Generic.IReadOnlyList<System.Reflection.Metadata.GenericParameterHandle>,
@@ -2962,7 +2962,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.GenericParameterHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -2988,7 +2988,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct GuidHandle
+    partial public readonly struct GuidHandle
         : System.IEquatable<System.Reflection.Metadata.GuidHandle>
     {
         private readonly int _dummyPrimitive;
@@ -3045,7 +3045,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct Handle : System.IEquatable<System.Reflection.Metadata.Handle>
+    partial public readonly struct Handle : System.IEquatable<System.Reflection.Metadata.Handle>
     {
         private readonly int _dummyPrimitive;
         public static readonly System.Reflection.Metadata.AssemblyDefinitionHandle AssemblyDefinition;
@@ -3093,7 +3093,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public sealed partial class HandleComparer
+    partial public sealed class HandleComparer
         : System.Collections.Generic.IComparer<System.Reflection.Metadata.EntityHandle>,
             System.Collections.Generic.IComparer<System.Reflection.Metadata.Handle>,
             System.Collections.Generic.IEqualityComparer<System.Reflection.Metadata.EntityHandle>,
@@ -3184,7 +3184,7 @@ namespace System.Reflection.Metadata
         NamespaceDefinition = (byte)124,
     }
 
-    public partial interface IConstructedTypeProvider<TType>
+    partial public interface IConstructedTypeProvider<TType>
         : System.Reflection.Metadata.ISZArrayTypeProvider<TType>
     {
         TType GetArrayType(TType elementType, System.Reflection.Metadata.ArrayShape shape);
@@ -3196,7 +3196,7 @@ namespace System.Reflection.Metadata
         TType GetPointerType(TType elementType);
     }
 
-    public partial interface ICustomAttributeTypeProvider<TType>
+    partial public interface ICustomAttributeTypeProvider<TType>
         : System.Reflection.Metadata.ISimpleTypeProvider<TType>,
             System.Reflection.Metadata.ISZArrayTypeProvider<TType>
     {
@@ -3428,7 +3428,7 @@ namespace System.Reflection.Metadata
         Readonly = (ushort)65054,
     }
 
-    public static partial class ILOpCodeExtensions
+    partial public static class ILOpCodeExtensions
     {
         public static int GetBranchOperandSize(this System.Reflection.Metadata.ILOpCode opCode)
         {
@@ -3455,7 +3455,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public partial class ImageFormatLimitationException : System.Exception
+    partial public class ImageFormatLimitationException : System.Exception
     {
         public ImageFormatLimitationException() { }
 
@@ -3464,7 +3464,7 @@ namespace System.Reflection.Metadata
         public ImageFormatLimitationException(string? message, System.Exception? innerException) { }
     }
 
-    public readonly partial struct ImportDefinition
+    partial public readonly struct ImportDefinition
     {
         private readonly int _dummyPrimitive;
         public System.Reflection.Metadata.BlobHandle Alias
@@ -3489,7 +3489,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ImportDefinitionCollection
+    partial public readonly struct ImportDefinitionCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ImportDefinition>,
             System.Collections.IEnumerable
     {
@@ -3510,7 +3510,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ImportDefinition>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -3549,7 +3549,7 @@ namespace System.Reflection.Metadata
         AliasType = 9,
     }
 
-    public readonly partial struct ImportScope
+    partial public readonly struct ImportScope
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -3568,7 +3568,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ImportScopeCollection
+    partial public readonly struct ImportScopeCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ImportScopeHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ImportScopeHandle>,
             System.Collections.IEnumerable
@@ -3595,7 +3595,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ImportScopeHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -3622,7 +3622,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ImportScopeHandle
+    partial public readonly struct ImportScopeHandle
         : System.IEquatable<System.Reflection.Metadata.ImportScopeHandle>
     {
         private readonly int _dummyPrimitive;
@@ -3693,7 +3693,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct InterfaceImplementation
+    partial public readonly struct InterfaceImplementation
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -3708,7 +3708,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct InterfaceImplementationHandle
+    partial public readonly struct InterfaceImplementationHandle
         : System.IEquatable<System.Reflection.Metadata.InterfaceImplementationHandle>
     {
         private readonly int _dummyPrimitive;
@@ -3777,7 +3777,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct InterfaceImplementationHandleCollection
+    partial public readonly struct InterfaceImplementationHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.InterfaceImplementationHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.InterfaceImplementationHandle>,
             System.Collections.IEnumerable
@@ -3804,7 +3804,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.InterfaceImplementationHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -3831,7 +3831,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public partial interface ISignatureTypeProvider<TType, TGenericContext>
+    partial public interface ISignatureTypeProvider<TType, TGenericContext>
         : System.Reflection.Metadata.IConstructedTypeProvider<TType>,
             System.Reflection.Metadata.ISimpleTypeProvider<TType>,
             System.Reflection.Metadata.ISZArrayTypeProvider<TType>
@@ -3849,7 +3849,7 @@ namespace System.Reflection.Metadata
         );
     }
 
-    public partial interface ISimpleTypeProvider<TType>
+    partial public interface ISimpleTypeProvider<TType>
     {
         TType GetPrimitiveType(System.Reflection.Metadata.PrimitiveTypeCode typeCode);
         TType GetTypeFromDefinition(
@@ -3864,12 +3864,12 @@ namespace System.Reflection.Metadata
         );
     }
 
-    public partial interface ISZArrayTypeProvider<TType>
+    partial public interface ISZArrayTypeProvider<TType>
     {
         TType GetSZArrayType(TType elementType);
     }
 
-    public readonly partial struct LocalConstant
+    partial public readonly struct LocalConstant
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -3883,7 +3883,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct LocalConstantHandle
+    partial public readonly struct LocalConstantHandle
         : System.IEquatable<System.Reflection.Metadata.LocalConstantHandle>
     {
         private readonly int _dummyPrimitive;
@@ -3954,7 +3954,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct LocalConstantHandleCollection
+    partial public readonly struct LocalConstantHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.LocalConstantHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.LocalConstantHandle>,
             System.Collections.IEnumerable
@@ -3981,7 +3981,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.LocalConstantHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -4008,7 +4008,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct LocalScope
+    partial public readonly struct LocalScope
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -4049,7 +4049,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct LocalScopeHandle
+    partial public readonly struct LocalScopeHandle
         : System.IEquatable<System.Reflection.Metadata.LocalScopeHandle>
     {
         private readonly int _dummyPrimitive;
@@ -4118,7 +4118,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct LocalScopeHandleCollection
+    partial public readonly struct LocalScopeHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.LocalScopeHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.LocalScopeHandle>,
             System.Collections.IEnumerable
@@ -4145,7 +4145,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct ChildrenEnumerator
+        partial public struct ChildrenEnumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.LocalScopeHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -4171,7 +4171,7 @@ namespace System.Reflection.Metadata
             void System.IDisposable.Dispose() { }
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.LocalScopeHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -4198,7 +4198,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct LocalVariable
+    partial public readonly struct LocalVariable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -4223,7 +4223,7 @@ namespace System.Reflection.Metadata
         DebuggerHidden = 1,
     }
 
-    public readonly partial struct LocalVariableHandle
+    partial public readonly struct LocalVariableHandle
         : System.IEquatable<System.Reflection.Metadata.LocalVariableHandle>
     {
         private readonly int _dummyPrimitive;
@@ -4292,7 +4292,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct LocalVariableHandleCollection
+    partial public readonly struct LocalVariableHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.LocalVariableHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.LocalVariableHandle>,
             System.Collections.IEnumerable
@@ -4319,7 +4319,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.LocalVariableHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -4346,7 +4346,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ManifestResource
+    partial public readonly struct ManifestResource
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -4373,7 +4373,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ManifestResourceHandle
+    partial public readonly struct ManifestResourceHandle
         : System.IEquatable<System.Reflection.Metadata.ManifestResourceHandle>
     {
         private readonly int _dummyPrimitive;
@@ -4442,7 +4442,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ManifestResourceHandleCollection
+    partial public readonly struct ManifestResourceHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ManifestResourceHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ManifestResourceHandle>,
             System.Collections.IEnumerable
@@ -4468,7 +4468,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ManifestResourceHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -4494,7 +4494,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MemberReference
+    partial public readonly struct MemberReference
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -4541,7 +4541,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MemberReferenceHandle
+    partial public readonly struct MemberReferenceHandle
         : System.IEquatable<System.Reflection.Metadata.MemberReferenceHandle>
     {
         private readonly int _dummyPrimitive;
@@ -4610,7 +4610,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MemberReferenceHandleCollection
+    partial public readonly struct MemberReferenceHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.MemberReferenceHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MemberReferenceHandle>,
             System.Collections.IEnumerable
@@ -4636,7 +4636,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.MemberReferenceHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -4675,7 +4675,7 @@ namespace System.Reflection.Metadata
         ManagedWindowsMetadata = 2,
     }
 
-    public sealed partial class MetadataReader
+    partial public sealed class MetadataReader
     {
         public unsafe MetadataReader(byte* metadata, int length) { }
 
@@ -5141,13 +5141,13 @@ namespace System.Reflection.Metadata
         Default = 1,
     }
 
-    public sealed partial class MetadataReaderProvider : System.IDisposable
+    partial public sealed class MetadataReaderProvider : System.IDisposable
     {
         internal MetadataReaderProvider() { }
 
         public void Dispose() { }
 
-        public unsafe static System.Reflection.Metadata.MetadataReaderProvider FromMetadataImage(
+        public static unsafe System.Reflection.Metadata.MetadataReaderProvider FromMetadataImage(
             byte* start,
             int size
         )
@@ -5172,7 +5172,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public unsafe static System.Reflection.Metadata.MetadataReaderProvider FromPortablePdbImage(
+        public static unsafe System.Reflection.Metadata.MetadataReaderProvider FromPortablePdbImage(
             byte* start,
             int size
         )
@@ -5215,7 +5215,7 @@ namespace System.Reflection.Metadata
         PrefetchMetadata = 2,
     }
 
-    public readonly partial struct MetadataStringComparer
+    partial public readonly struct MetadataStringComparer
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -5280,7 +5280,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public partial class MetadataStringDecoder
+    partial public class MetadataStringDecoder
     {
         public MetadataStringDecoder(System.Text.Encoding encoding) { }
 
@@ -5293,13 +5293,13 @@ namespace System.Reflection.Metadata
             get { throw null; }
         }
 
-        public unsafe virtual string GetString(byte* bytes, int byteCount)
+        public virtual unsafe string GetString(byte* bytes, int byteCount)
         {
             throw null;
         }
     }
 
-    public sealed partial class MethodBodyBlock
+    partial public sealed class MethodBodyBlock
     {
         internal MethodBodyBlock() { }
 
@@ -5347,7 +5347,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodDebugInformation
+    partial public readonly struct MethodDebugInformation
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -5375,7 +5375,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodDebugInformationHandle
+    partial public readonly struct MethodDebugInformationHandle
         : System.IEquatable<System.Reflection.Metadata.MethodDebugInformationHandle>
     {
         private readonly int _dummyPrimitive;
@@ -5449,7 +5449,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodDebugInformationHandleCollection
+    partial public readonly struct MethodDebugInformationHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.MethodDebugInformationHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MethodDebugInformationHandle>,
             System.Collections.IEnumerable
@@ -5476,7 +5476,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.MethodDebugInformationHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -5503,7 +5503,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodDefinition
+    partial public readonly struct MethodDefinition
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -5570,7 +5570,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodDefinitionHandle
+    partial public readonly struct MethodDefinitionHandle
         : System.IEquatable<System.Reflection.Metadata.MethodDefinitionHandle>
     {
         private readonly int _dummyPrimitive;
@@ -5644,7 +5644,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodDefinitionHandleCollection
+    partial public readonly struct MethodDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.MethodDefinitionHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MethodDefinitionHandle>,
             System.Collections.IEnumerable
@@ -5671,7 +5671,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.MethodDefinitionHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -5698,7 +5698,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodImplementation
+    partial public readonly struct MethodImplementation
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -5721,7 +5721,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodImplementationHandle
+    partial public readonly struct MethodImplementationHandle
         : System.IEquatable<System.Reflection.Metadata.MethodImplementationHandle>
     {
         private readonly int _dummyPrimitive;
@@ -5790,7 +5790,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodImplementationHandleCollection
+    partial public readonly struct MethodImplementationHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.MethodImplementationHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MethodImplementationHandle>,
             System.Collections.IEnumerable
@@ -5816,7 +5816,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.MethodImplementationHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -5842,7 +5842,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodImport
+    partial public readonly struct MethodImport
     {
         private readonly int _dummyPrimitive;
         public System.Reflection.MethodImportAttributes Attributes
@@ -5859,7 +5859,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodSignature<TType>
+    partial public readonly struct MethodSignature<TType>
     {
         private readonly TType _ReturnType_k__BackingField;
         private readonly object _dummy;
@@ -5898,7 +5898,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodSpecification
+    partial public readonly struct MethodSpecification
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -5928,7 +5928,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct MethodSpecificationHandle
+    partial public readonly struct MethodSpecificationHandle
         : System.IEquatable<System.Reflection.Metadata.MethodSpecificationHandle>
     {
         private readonly int _dummyPrimitive;
@@ -5997,7 +5997,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ModuleDefinition
+    partial public readonly struct ModuleDefinition
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -6028,7 +6028,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ModuleDefinitionHandle
+    partial public readonly struct ModuleDefinitionHandle
         : System.IEquatable<System.Reflection.Metadata.ModuleDefinitionHandle>
     {
         private readonly int _dummyPrimitive;
@@ -6097,7 +6097,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ModuleReference
+    partial public readonly struct ModuleReference
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -6112,7 +6112,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ModuleReferenceHandle
+    partial public readonly struct ModuleReferenceHandle
         : System.IEquatable<System.Reflection.Metadata.ModuleReferenceHandle>
     {
         private readonly int _dummyPrimitive;
@@ -6181,7 +6181,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public partial struct NamespaceDefinition
+    partial public struct NamespaceDefinition
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -6207,7 +6207,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct NamespaceDefinitionHandle
+    partial public readonly struct NamespaceDefinitionHandle
         : System.IEquatable<System.Reflection.Metadata.NamespaceDefinitionHandle>
     {
         private readonly int _dummyPrimitive;
@@ -6264,7 +6264,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct Parameter
+    partial public readonly struct Parameter
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -6297,7 +6297,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ParameterHandle
+    partial public readonly struct ParameterHandle
         : System.IEquatable<System.Reflection.Metadata.ParameterHandle>
     {
         private readonly int _dummyPrimitive;
@@ -6366,7 +6366,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ParameterHandleCollection
+    partial public readonly struct ParameterHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ParameterHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ParameterHandle>,
             System.Collections.IEnumerable
@@ -6393,7 +6393,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ParameterHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -6423,7 +6423,7 @@ namespace System.Reflection.Metadata
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public static partial class PEReaderExtensions
+    partial public static class PEReaderExtensions
     {
         public static System.Reflection.Metadata.MetadataReader GetMetadataReader(
             this System.Reflection.PortableExecutable.PEReader peReader
@@ -6497,7 +6497,7 @@ namespace System.Reflection.Metadata
         Object = (byte)28,
     }
 
-    public readonly partial struct PropertyAccessors
+    partial public readonly struct PropertyAccessors
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -6515,7 +6515,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct PropertyDefinition
+    partial public readonly struct PropertyDefinition
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -6559,7 +6559,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct PropertyDefinitionHandle
+    partial public readonly struct PropertyDefinitionHandle
         : System.IEquatable<System.Reflection.Metadata.PropertyDefinitionHandle>
     {
         private readonly int _dummyPrimitive;
@@ -6628,7 +6628,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct PropertyDefinitionHandleCollection
+    partial public readonly struct PropertyDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.PropertyDefinitionHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.PropertyDefinitionHandle>,
             System.Collections.IEnumerable
@@ -6655,7 +6655,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.PropertyDefinitionHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -6682,7 +6682,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ReservedBlob<THandle>
+    partial public readonly struct ReservedBlob<THandle>
         where THandle : struct
     {
         private readonly THandle _Handle_k__BackingField;
@@ -6703,7 +6703,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct SequencePoint
+    partial public readonly struct SequencePoint
         : System.IEquatable<System.Reflection.Metadata.SequencePoint>
     {
         private readonly int _dummyPrimitive;
@@ -6755,7 +6755,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct SequencePointCollection
+    partial public readonly struct SequencePointCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.SequencePoint>,
             System.Collections.IEnumerable
     {
@@ -6776,7 +6776,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.SequencePoint>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -6844,7 +6844,7 @@ namespace System.Reflection.Metadata
         Unmanaged = (byte)9,
     }
 
-    public partial struct SignatureHeader
+    partial public struct SignatureHeader
         : System.IEquatable<System.Reflection.Metadata.SignatureHeader>
     {
         private int _dummyPrimitive;
@@ -6984,7 +6984,7 @@ namespace System.Reflection.Metadata
         Class = (byte)18,
     }
 
-    public readonly partial struct StandaloneSignature
+    partial public readonly struct StandaloneSignature
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -7026,7 +7026,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct StandaloneSignatureHandle
+    partial public readonly struct StandaloneSignatureHandle
         : System.IEquatable<System.Reflection.Metadata.StandaloneSignatureHandle>
     {
         private readonly int _dummyPrimitive;
@@ -7101,7 +7101,7 @@ namespace System.Reflection.Metadata
         LocalVariables = 1,
     }
 
-    public readonly partial struct StringHandle
+    partial public readonly struct StringHandle
         : System.IEquatable<System.Reflection.Metadata.StringHandle>
     {
         private readonly int _dummyPrimitive;
@@ -7156,7 +7156,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct TypeDefinition
+    partial public readonly struct TypeDefinition
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -7246,7 +7246,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct TypeDefinitionHandle
+    partial public readonly struct TypeDefinitionHandle
         : System.IEquatable<System.Reflection.Metadata.TypeDefinitionHandle>
     {
         private readonly int _dummyPrimitive;
@@ -7315,7 +7315,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct TypeDefinitionHandleCollection
+    partial public readonly struct TypeDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.TypeDefinitionHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.TypeDefinitionHandle>,
             System.Collections.IEnumerable
@@ -7341,7 +7341,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.TypeDefinitionHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -7367,7 +7367,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct TypeLayout
+    partial public readonly struct TypeLayout
     {
         private readonly int _dummyPrimitive;
 
@@ -7390,7 +7390,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct TypeReference
+    partial public readonly struct TypeReference
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -7408,7 +7408,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct TypeReferenceHandle
+    partial public readonly struct TypeReferenceHandle
         : System.IEquatable<System.Reflection.Metadata.TypeReferenceHandle>
     {
         private readonly int _dummyPrimitive;
@@ -7477,7 +7477,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct TypeReferenceHandleCollection
+    partial public readonly struct TypeReferenceHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.TypeReferenceHandle>,
             System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.TypeReferenceHandle>,
             System.Collections.IEnumerable
@@ -7503,7 +7503,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.TypeReferenceHandle>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -7529,7 +7529,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct TypeSpecification
+    partial public readonly struct TypeSpecification
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -7552,7 +7552,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct TypeSpecificationHandle
+    partial public readonly struct TypeSpecificationHandle
         : System.IEquatable<System.Reflection.Metadata.TypeSpecificationHandle>
     {
         private readonly int _dummyPrimitive;
@@ -7621,7 +7621,7 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct UserStringHandle
+    partial public readonly struct UserStringHandle
         : System.IEquatable<System.Reflection.Metadata.UserStringHandle>
     {
         private readonly int _dummyPrimitive;
@@ -7679,7 +7679,7 @@ namespace System.Reflection.Metadata
 
 namespace System.Reflection.Metadata.Ecma335
 {
-    public readonly partial struct ArrayShapeEncoder
+    partial public readonly struct ArrayShapeEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -7701,7 +7701,7 @@ namespace System.Reflection.Metadata.Ecma335
         ) { }
     }
 
-    public readonly partial struct BlobEncoder
+    partial public readonly struct BlobEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -7790,7 +7790,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public static partial class CodedIndex
+    partial public static class CodedIndex
     {
         public static int CustomAttributeType(System.Reflection.Metadata.EntityHandle handle)
         {
@@ -7868,7 +7868,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public sealed partial class ControlFlowBuilder
+    partial public sealed class ControlFlowBuilder
     {
         public ControlFlowBuilder() { }
 
@@ -7905,7 +7905,7 @@ namespace System.Reflection.Metadata.Ecma335
         public void Clear() { }
     }
 
-    public readonly partial struct CustomAttributeArrayTypeEncoder
+    partial public readonly struct CustomAttributeArrayTypeEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -7928,7 +7928,7 @@ namespace System.Reflection.Metadata.Ecma335
         public void ObjectArray() { }
     }
 
-    public readonly partial struct CustomAttributeElementTypeEncoder
+    partial public readonly struct CustomAttributeElementTypeEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -7978,7 +7978,7 @@ namespace System.Reflection.Metadata.Ecma335
         public void UInt64() { }
     }
 
-    public readonly partial struct CustomAttributeNamedArgumentsEncoder
+    partial public readonly struct CustomAttributeNamedArgumentsEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -7999,7 +7999,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct CustomModifiersEncoder
+    partial public readonly struct CustomModifiersEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8023,7 +8023,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct EditAndContinueLogEntry
+    partial public readonly struct EditAndContinueLogEntry
         : System.IEquatable<System.Reflection.Metadata.Ecma335.EditAndContinueLogEntry>
     {
         private readonly int _dummyPrimitive;
@@ -8073,7 +8073,7 @@ namespace System.Reflection.Metadata.Ecma335
         AddEvent = 5,
     }
 
-    public readonly partial struct ExceptionRegionEncoder
+    partial public readonly struct ExceptionRegionEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8153,7 +8153,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public static partial class ExportedTypeExtensions
+    partial public static class ExportedTypeExtensions
     {
         public static int GetTypeDefinitionId(
             this System.Reflection.Metadata.ExportedType exportedType
@@ -8163,7 +8163,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct FieldTypeEncoder
+    partial public readonly struct FieldTypeEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8194,7 +8194,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct FixedArgumentsEncoder
+    partial public readonly struct FixedArgumentsEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8222,7 +8222,7 @@ namespace System.Reflection.Metadata.Ecma335
         HasExplicitThis = 96,
     }
 
-    public readonly partial struct GenericTypeArgumentsEncoder
+    partial public readonly struct GenericTypeArgumentsEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8251,7 +8251,7 @@ namespace System.Reflection.Metadata.Ecma335
         Guid = 3,
     }
 
-    public readonly partial struct InstructionEncoder
+    partial public readonly struct InstructionEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8333,7 +8333,7 @@ namespace System.Reflection.Metadata.Ecma335
         public void Token(System.Reflection.Metadata.EntityHandle handle) { }
     }
 
-    public readonly partial struct LabelHandle
+    partial public readonly struct LabelHandle
         : System.IEquatable<System.Reflection.Metadata.Ecma335.LabelHandle>
     {
         private readonly int _dummyPrimitive;
@@ -8380,7 +8380,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct LiteralEncoder
+    partial public readonly struct LiteralEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8432,7 +8432,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct LiteralsEncoder
+    partial public readonly struct LiteralsEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8453,7 +8453,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct LocalVariablesEncoder
+    partial public readonly struct LocalVariablesEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8474,7 +8474,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct LocalVariableTypeEncoder
+    partial public readonly struct LocalVariableTypeEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -8505,7 +8505,7 @@ namespace System.Reflection.Metadata.Ecma335
         public void TypedReference() { }
     }
 
-    public sealed partial class MetadataAggregator
+    partial public sealed class MetadataAggregator
     {
         public MetadataAggregator(
             System.Collections.Generic.IReadOnlyList<int>? baseTableRowCounts,
@@ -8527,7 +8527,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public sealed partial class MetadataBuilder
+    partial public sealed class MetadataBuilder
     {
         public MetadataBuilder(
             int userStringHeapStartOffset = 0,
@@ -8984,7 +8984,7 @@ namespace System.Reflection.Metadata.Ecma335
         ) { }
     }
 
-    public static partial class MetadataReaderExtensions
+    partial public static class MetadataReaderExtensions
     {
         public static System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Ecma335.EditAndContinueLogEntry> GetEditAndContinueLogEntries(
             this System.Reflection.Metadata.MetadataReader reader
@@ -9088,7 +9088,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public sealed partial class MetadataRootBuilder
+    partial public sealed class MetadataRootBuilder
     {
         public MetadataRootBuilder(
             System.Reflection.Metadata.Ecma335.MetadataBuilder tablesAndHeaps,
@@ -9116,7 +9116,7 @@ namespace System.Reflection.Metadata.Ecma335
         ) { }
     }
 
-    public sealed partial class MetadataSizes
+    partial public sealed class MetadataSizes
     {
         internal MetadataSizes() { }
 
@@ -9139,7 +9139,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public static partial class MetadataTokens
+    partial public static class MetadataTokens
     {
         public static readonly int HeapCount;
         public static readonly int TableCount;
@@ -9493,7 +9493,7 @@ namespace System.Reflection.Metadata.Ecma335
         InitLocals = 1,
     }
 
-    public readonly partial struct MethodBodyStreamEncoder
+    partial public readonly struct MethodBodyStreamEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9558,7 +9558,7 @@ namespace System.Reflection.Metadata.Ecma335
             throw null;
         }
 
-        public readonly partial struct MethodBody
+        partial public readonly struct MethodBody
         {
             private readonly object _dummy;
             private readonly int _dummyPrimitive;
@@ -9577,7 +9577,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct MethodSignatureEncoder
+    partial public readonly struct MethodSignatureEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9615,7 +9615,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct NamedArgumentsEncoder
+    partial public readonly struct NamedArgumentsEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9648,7 +9648,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct NamedArgumentTypeEncoder
+    partial public readonly struct NamedArgumentTypeEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9676,7 +9676,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct NameEncoder
+    partial public readonly struct NameEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9694,7 +9694,7 @@ namespace System.Reflection.Metadata.Ecma335
         public void Name(string name) { }
     }
 
-    public readonly partial struct ParametersEncoder
+    partial public readonly struct ParametersEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9727,7 +9727,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct ParameterTypeEncoder
+    partial public readonly struct ParameterTypeEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9755,7 +9755,7 @@ namespace System.Reflection.Metadata.Ecma335
         public void TypedReference() { }
     }
 
-    public readonly partial struct PermissionSetEncoder
+    partial public readonly struct PermissionSetEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9787,7 +9787,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public sealed partial class PortablePdbBuilder
+    partial public sealed class PortablePdbBuilder
     {
         public PortablePdbBuilder(
             System.Reflection.Metadata.Ecma335.MetadataBuilder tablesAndHeaps,
@@ -9823,7 +9823,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct ReturnTypeEncoder
+    partial public readonly struct ReturnTypeEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9853,7 +9853,7 @@ namespace System.Reflection.Metadata.Ecma335
         public void Void() { }
     }
 
-    public readonly partial struct ScalarEncoder
+    partial public readonly struct ScalarEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -9875,7 +9875,7 @@ namespace System.Reflection.Metadata.Ecma335
         public void SystemType(string? serializedTypeName) { }
     }
 
-    public readonly partial struct SignatureDecoder<TType, TGenericContext>
+    partial public readonly struct SignatureDecoder<TType, TGenericContext>
     {
         private readonly TGenericContext _genericContext;
         private readonly object _dummy;
@@ -9925,7 +9925,7 @@ namespace System.Reflection.Metadata.Ecma335
         }
     }
 
-    public readonly partial struct SignatureTypeEncoder
+    partial public readonly struct SignatureTypeEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -10093,7 +10093,7 @@ namespace System.Reflection.Metadata.Ecma335
         CustomDebugInformation = (byte)55,
     }
 
-    public readonly partial struct VectorEncoder
+    partial public readonly struct VectorEncoder
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -10137,7 +10137,7 @@ namespace System.Reflection.PortableExecutable
         BytesReversedHi = (ushort)32768,
     }
 
-    public readonly partial struct CodeViewDebugDirectoryData
+    partial public readonly struct CodeViewDebugDirectoryData
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -10155,7 +10155,7 @@ namespace System.Reflection.PortableExecutable
         }
     }
 
-    public sealed partial class CoffHeader
+    partial public sealed class CoffHeader
     {
         internal CoffHeader() { }
 
@@ -10201,7 +10201,7 @@ namespace System.Reflection.PortableExecutable
         Prefers32Bit = 131072,
     }
 
-    public sealed partial class CorHeader
+    partial public sealed class CorHeader
     {
         internal CorHeader() { }
 
@@ -10251,7 +10251,7 @@ namespace System.Reflection.PortableExecutable
         }
     }
 
-    public sealed partial class DebugDirectoryBuilder
+    partial public sealed class DebugDirectoryBuilder
     {
         public DebugDirectoryBuilder() { }
 
@@ -10295,7 +10295,7 @@ namespace System.Reflection.PortableExecutable
         public void AddReproducibleEntry() { }
     }
 
-    public readonly partial struct DebugDirectoryEntry
+    partial public readonly struct DebugDirectoryEntry
     {
         private readonly int _dummyPrimitive;
 
@@ -10356,7 +10356,7 @@ namespace System.Reflection.PortableExecutable
         PdbChecksum = 19,
     }
 
-    public readonly partial struct DirectoryEntry
+    partial public readonly struct DirectoryEntry
     {
         public readonly int RelativeVirtualAddress;
         public readonly int Size;
@@ -10418,7 +10418,7 @@ namespace System.Reflection.PortableExecutable
         LoongArch64 = (ushort)25188,
     }
 
-    public partial class ManagedPEBuilder : System.Reflection.PortableExecutable.PEBuilder
+    partial public class ManagedPEBuilder : System.Reflection.PortableExecutable.PEBuilder
     {
         public const int ManagedResourcesDataAlignment = 8;
         public const int MappedFieldDataAlignment = 8;
@@ -10477,7 +10477,7 @@ namespace System.Reflection.PortableExecutable
         ) { }
     }
 
-    public readonly partial struct PdbChecksumDebugDirectoryData
+    partial public readonly struct PdbChecksumDebugDirectoryData
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -10491,7 +10491,7 @@ namespace System.Reflection.PortableExecutable
         }
     }
 
-    public abstract partial class PEBuilder
+    partial public abstract class PEBuilder
     {
         protected PEBuilder(
             System.Reflection.PortableExecutable.PEHeaderBuilder header,
@@ -10536,7 +10536,7 @@ namespace System.Reflection.PortableExecutable
             System.Reflection.PortableExecutable.SectionLocation location
         );
 
-        protected readonly partial struct Section
+        partial protected readonly struct Section
         {
             public readonly System.Reflection.PortableExecutable.SectionCharacteristics Characteristics;
             public readonly string Name;
@@ -10551,7 +10551,7 @@ namespace System.Reflection.PortableExecutable
         }
     }
 
-    public sealed partial class PEDirectoriesBuilder
+    partial public sealed class PEDirectoriesBuilder
     {
         public PEDirectoriesBuilder() { }
 
@@ -10632,7 +10632,7 @@ namespace System.Reflection.PortableExecutable
         }
     }
 
-    public sealed partial class PEHeader
+    partial public sealed class PEHeader
     {
         internal PEHeader() { }
 
@@ -10810,7 +10810,7 @@ namespace System.Reflection.PortableExecutable
         }
     }
 
-    public sealed partial class PEHeaderBuilder
+    partial public sealed class PEHeaderBuilder
     {
         public PEHeaderBuilder(
             System.Reflection.PortableExecutable.Machine machine =
@@ -10929,7 +10929,7 @@ namespace System.Reflection.PortableExecutable
         }
     }
 
-    public sealed partial class PEHeaders
+    partial public sealed class PEHeaders
     {
         public PEHeaders(System.IO.Stream peStream) { }
 
@@ -11010,7 +11010,7 @@ namespace System.Reflection.PortableExecutable
         PE32Plus = (ushort)523,
     }
 
-    public readonly partial struct PEMemoryBlock
+    partial public readonly struct PEMemoryBlock
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -11044,7 +11044,7 @@ namespace System.Reflection.PortableExecutable
         }
     }
 
-    public sealed partial class PEReader : System.IDisposable
+    partial public sealed class PEReader : System.IDisposable
     {
         public unsafe PEReader(byte* peImage, int size) { }
 
@@ -11153,7 +11153,7 @@ namespace System.Reflection.PortableExecutable
         IsLoadedImage = 8,
     }
 
-    public abstract partial class ResourceSectionBuilder
+    partial public abstract class ResourceSectionBuilder
     {
         protected ResourceSectionBuilder() { }
 
@@ -11214,7 +11214,7 @@ namespace System.Reflection.PortableExecutable
         MemWrite = (uint)2147483648,
     }
 
-    public readonly partial struct SectionHeader
+    partial public readonly struct SectionHeader
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -11260,7 +11260,7 @@ namespace System.Reflection.PortableExecutable
         }
     }
 
-    public readonly partial struct SectionLocation
+    partial public readonly struct SectionLocation
     {
         private readonly int _dummyPrimitive;
 

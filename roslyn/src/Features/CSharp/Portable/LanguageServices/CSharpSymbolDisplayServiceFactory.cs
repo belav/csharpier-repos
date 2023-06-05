@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 {
     [ExportLanguageServiceFactory(typeof(ISymbolDisplayService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpSymbolDisplayServiceFactory : ILanguageServiceFactory
+    partial internal class CSharpSymbolDisplayServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

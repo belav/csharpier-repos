@@ -7,7 +7,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSACng : RSA, IRuntimeAlgorithm
+    partial public sealed class RSACng : RSA, IRuntimeAlgorithm
     {
         /// <summary>
         ///     Create an RSACng algorithm with a random 2048 bit key pair.

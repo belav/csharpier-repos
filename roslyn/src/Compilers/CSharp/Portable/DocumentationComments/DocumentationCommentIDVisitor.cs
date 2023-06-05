@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class DocumentationCommentIDVisitor
+    partial internal sealed class DocumentationCommentIDVisitor
         : CSharpSymbolVisitor<StringBuilder, object>
     {
         public static readonly DocumentationCommentIDVisitor Instance =

@@ -48,7 +48,7 @@ namespace System.Configuration
             }
         }
 
-        new public ConnectionStringSettings this[string name]
+        public new ConnectionStringSettings this[string name]
         {
             get { return (ConnectionStringSettings)BaseGet(name); }
         }

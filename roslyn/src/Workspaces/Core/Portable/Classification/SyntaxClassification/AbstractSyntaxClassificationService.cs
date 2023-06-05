@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Classification
 {
-    internal abstract partial class AbstractSyntaxClassificationService
+    partial internal abstract class AbstractSyntaxClassificationService
         : ISyntaxClassificationService
     {
         protected AbstractSyntaxClassificationService() { }

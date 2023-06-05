@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct SID_IDENTIFIER_AUTHORITY
@@ -20,12 +20,12 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Advapi32)]
-        internal static partial IntPtr GetSidIdentifierAuthority(IntPtr sid);
+        partial internal static IntPtr GetSidIdentifierAuthority(IntPtr sid);
 
         [LibraryImport(Interop.Libraries.Advapi32)]
-        internal static partial IntPtr GetSidSubAuthority(IntPtr sid, int index);
+        partial internal static IntPtr GetSidSubAuthority(IntPtr sid, int index);
 
         [LibraryImport(Interop.Libraries.Advapi32)]
-        internal static partial IntPtr GetSidSubAuthorityCount(IntPtr sid);
+        partial internal static IntPtr GetSidSubAuthorityCount(IntPtr sid);
     }
 }

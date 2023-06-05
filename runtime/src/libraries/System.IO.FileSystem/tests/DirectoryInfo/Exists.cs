@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class DirectoryInfo_Exists : FileSystemTest
+    partial public class DirectoryInfo_Exists : FileSystemTest
     {
         [Fact]
         public void InitializeExistsBeforeCreation()

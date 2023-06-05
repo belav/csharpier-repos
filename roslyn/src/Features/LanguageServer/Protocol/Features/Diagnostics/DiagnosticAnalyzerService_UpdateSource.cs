@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class DiagnosticAnalyzerService : IDiagnosticUpdateSource
+    partial internal class DiagnosticAnalyzerService : IDiagnosticUpdateSource
     {
         public event EventHandler<DiagnosticsUpdatedArgs> DiagnosticsUpdated
         {

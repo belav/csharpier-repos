@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Quic
 {
-    internal partial struct QUIC_HANDLE { }
+    partial internal struct QUIC_HANDLE { }
 
     internal enum QUIC_EXECUTION_PROFILE
     {
@@ -164,7 +164,7 @@ namespace Microsoft.Quic
         CANCELED,
     }
 
-    internal unsafe partial struct QUIC_REGISTRATION_CONFIG
+    partial internal unsafe struct QUIC_REGISTRATION_CONFIG
     {
         [NativeTypeName("const char *")]
         internal sbyte* AppName;
@@ -172,24 +172,24 @@ namespace Microsoft.Quic
         internal QUIC_EXECUTION_PROFILE ExecutionProfile;
     }
 
-    internal unsafe partial struct QUIC_CERTIFICATE_HASH
+    partial internal unsafe struct QUIC_CERTIFICATE_HASH
     {
         [NativeTypeName("uint8_t [20]")]
-        internal fixed byte ShaHash[20];
+        fixed internal byte ShaHash[20];
     }
 
-    internal unsafe partial struct QUIC_CERTIFICATE_HASH_STORE
+    partial internal unsafe struct QUIC_CERTIFICATE_HASH_STORE
     {
         internal QUIC_CERTIFICATE_HASH_STORE_FLAGS Flags;
 
         [NativeTypeName("uint8_t [20]")]
-        internal fixed byte ShaHash[20];
+        fixed internal byte ShaHash[20];
 
         [NativeTypeName("char [128]")]
-        internal fixed sbyte StoreName[128];
+        fixed internal sbyte StoreName[128];
     }
 
-    internal unsafe partial struct QUIC_CERTIFICATE_FILE
+    partial internal unsafe struct QUIC_CERTIFICATE_FILE
     {
         [NativeTypeName("const char *")]
         internal sbyte* PrivateKeyFile;
@@ -198,7 +198,7 @@ namespace Microsoft.Quic
         internal sbyte* CertificateFile;
     }
 
-    internal unsafe partial struct QUIC_CERTIFICATE_FILE_PROTECTED
+    partial internal unsafe struct QUIC_CERTIFICATE_FILE_PROTECTED
     {
         [NativeTypeName("const char *")]
         internal sbyte* PrivateKeyFile;
@@ -210,7 +210,7 @@ namespace Microsoft.Quic
         internal sbyte* PrivateKeyPassword;
     }
 
-    internal unsafe partial struct QUIC_CERTIFICATE_PKCS12
+    partial internal unsafe struct QUIC_CERTIFICATE_PKCS12
     {
         [NativeTypeName("const uint8_t *")]
         internal byte* Asn1Blob;
@@ -222,7 +222,7 @@ namespace Microsoft.Quic
         internal sbyte* PrivateKeyPassword;
     }
 
-    internal unsafe partial struct QUIC_CREDENTIAL_CONFIG
+    partial internal unsafe struct QUIC_CREDENTIAL_CONFIG
     {
         internal QUIC_CREDENTIAL_TYPE Type;
 
@@ -302,7 +302,7 @@ namespace Microsoft.Quic
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        internal unsafe partial struct _Anonymous_e__Union
+        partial internal unsafe struct _Anonymous_e__Union
         {
             [FieldOffset(0)]
             internal QUIC_CERTIFICATE_HASH* CertificateHash;
@@ -325,19 +325,19 @@ namespace Microsoft.Quic
         }
     }
 
-    internal unsafe partial struct QUIC_TICKET_KEY_CONFIG
+    partial internal unsafe struct QUIC_TICKET_KEY_CONFIG
     {
         [NativeTypeName("uint8_t [16]")]
-        internal fixed byte Id[16];
+        fixed internal byte Id[16];
 
         [NativeTypeName("uint8_t [64]")]
-        internal fixed byte Material[64];
+        fixed internal byte Material[64];
 
         [NativeTypeName("uint8_t")]
         internal byte MaterialLength;
     }
 
-    internal unsafe partial struct QUIC_BUFFER
+    partial internal unsafe struct QUIC_BUFFER
     {
         [NativeTypeName("uint32_t")]
         internal uint Length;
@@ -346,7 +346,7 @@ namespace Microsoft.Quic
         internal byte* Buffer;
     }
 
-    internal unsafe partial struct QUIC_NEW_CONNECTION_INFO
+    partial internal unsafe struct QUIC_NEW_CONNECTION_INFO
     {
         [NativeTypeName("uint32_t")]
         internal uint QuicVersion;
@@ -421,7 +421,7 @@ namespace Microsoft.Quic
         MAX,
     }
 
-    internal partial struct QUIC_HANDSHAKE_INFO
+    partial internal struct QUIC_HANDSHAKE_INFO
     {
         internal QUIC_TLS_PROTOCOL_VERSION TlsProtocolVersion;
 
@@ -443,7 +443,7 @@ namespace Microsoft.Quic
         internal QUIC_CIPHER_SUITE CipherSuite;
     }
 
-    internal partial struct QUIC_STATISTICS
+    partial internal struct QUIC_STATISTICS
     {
         [NativeTypeName("uint64_t")]
         internal ulong CorrelationId;
@@ -502,7 +502,7 @@ namespace Microsoft.Quic
         [NativeTypeName("struct (anonymous struct)")]
         internal _Misc_e__Struct Misc;
 
-        internal partial struct _Timing_e__Struct
+        partial internal struct _Timing_e__Struct
         {
             [NativeTypeName("uint64_t")]
             internal ulong Start;
@@ -514,7 +514,7 @@ namespace Microsoft.Quic
             internal ulong HandshakeFlightEnd;
         }
 
-        internal partial struct _Handshake_e__Struct
+        partial internal struct _Handshake_e__Struct
         {
             [NativeTypeName("uint32_t")]
             internal uint ClientFlight1Bytes;
@@ -526,7 +526,7 @@ namespace Microsoft.Quic
             internal uint ClientFlight2Bytes;
         }
 
-        internal partial struct _Send_e__Struct
+        partial internal struct _Send_e__Struct
         {
             [NativeTypeName("uint16_t")]
             internal ushort PathMtu;
@@ -556,7 +556,7 @@ namespace Microsoft.Quic
             internal uint PersistentCongestionCount;
         }
 
-        internal partial struct _Recv_e__Struct
+        partial internal struct _Recv_e__Struct
         {
             [NativeTypeName("uint64_t")]
             internal ulong TotalPackets;
@@ -583,14 +583,14 @@ namespace Microsoft.Quic
             internal ulong ValidAckFrames;
         }
 
-        internal partial struct _Misc_e__Struct
+        partial internal struct _Misc_e__Struct
         {
             [NativeTypeName("uint32_t")]
             internal uint KeyUpdateCount;
         }
     }
 
-    internal partial struct QUIC_STATISTICS_V2
+    partial internal struct QUIC_STATISTICS_V2
     {
         [NativeTypeName("uint64_t")]
         internal ulong CorrelationId;
@@ -710,7 +710,7 @@ namespace Microsoft.Quic
         internal uint SendCongestionWindow;
     }
 
-    internal partial struct QUIC_LISTENER_STATISTICS
+    partial internal struct QUIC_LISTENER_STATISTICS
     {
         [NativeTypeName("uint64_t")]
         internal ulong TotalAcceptedConnections;
@@ -758,7 +758,7 @@ namespace Microsoft.Quic
         MAX,
     }
 
-    internal unsafe partial struct QUIC_VERSION_SETTINGS
+    partial internal unsafe struct QUIC_VERSION_SETTINGS
     {
         [NativeTypeName("uint32_t *")]
         internal uint* AcceptableVersions;
@@ -779,7 +779,7 @@ namespace Microsoft.Quic
         internal uint FullyDeployedVersionsLength;
     }
 
-    internal partial struct QUIC_GLOBAL_SETTINGS
+    partial internal struct QUIC_GLOBAL_SETTINGS
     {
         [NativeTypeName("QUIC_GLOBAL_SETTINGS::(anonymous union)")]
         internal _Anonymous_e__Union Anonymous;
@@ -811,7 +811,7 @@ namespace Microsoft.Quic
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        internal partial struct _Anonymous_e__Union
+        partial internal struct _Anonymous_e__Union
         {
             [FieldOffset(0)]
             [NativeTypeName("uint64_t")]
@@ -821,7 +821,7 @@ namespace Microsoft.Quic
             [NativeTypeName("struct (anonymous struct)")]
             internal _IsSet_e__Struct IsSet;
 
-            internal partial struct _IsSet_e__Struct
+            partial internal struct _IsSet_e__Struct
             {
                 internal ulong _bitfield;
 
@@ -853,7 +853,7 @@ namespace Microsoft.Quic
         }
     }
 
-    internal partial struct QUIC_SETTINGS
+    partial internal struct QUIC_SETTINGS
     {
         [NativeTypeName("QUIC_SETTINGS::(anonymous union)")]
         internal _Anonymous_e__Union Anonymous;
@@ -1001,7 +1001,7 @@ namespace Microsoft.Quic
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        internal partial struct _Anonymous_e__Union
+        partial internal struct _Anonymous_e__Union
         {
             [FieldOffset(0)]
             [NativeTypeName("uint64_t")]
@@ -1011,7 +1011,7 @@ namespace Microsoft.Quic
             [NativeTypeName("struct (anonymous struct)")]
             internal _IsSet_e__Struct IsSet;
 
-            internal partial struct _IsSet_e__Struct
+            partial internal struct _IsSet_e__Struct
             {
                 internal ulong _bitfield;
 
@@ -1242,7 +1242,7 @@ namespace Microsoft.Quic
         }
     }
 
-    internal unsafe partial struct QUIC_TLS_SECRETS
+    partial internal unsafe struct QUIC_TLS_SECRETS
     {
         [NativeTypeName("uint8_t")]
         internal byte SecretLength;
@@ -1251,24 +1251,24 @@ namespace Microsoft.Quic
         internal _IsSet_e__Struct IsSet;
 
         [NativeTypeName("uint8_t [32]")]
-        internal fixed byte ClientRandom[32];
+        fixed internal byte ClientRandom[32];
 
         [NativeTypeName("uint8_t [64]")]
-        internal fixed byte ClientEarlyTrafficSecret[64];
+        fixed internal byte ClientEarlyTrafficSecret[64];
 
         [NativeTypeName("uint8_t [64]")]
-        internal fixed byte ClientHandshakeTrafficSecret[64];
+        fixed internal byte ClientHandshakeTrafficSecret[64];
 
         [NativeTypeName("uint8_t [64]")]
-        internal fixed byte ServerHandshakeTrafficSecret[64];
+        fixed internal byte ServerHandshakeTrafficSecret[64];
 
         [NativeTypeName("uint8_t [64]")]
-        internal fixed byte ClientTrafficSecret0[64];
+        fixed internal byte ClientTrafficSecret0[64];
 
         [NativeTypeName("uint8_t [64]")]
-        internal fixed byte ServerTrafficSecret0[64];
+        fixed internal byte ServerTrafficSecret0[64];
 
-        internal partial struct _IsSet_e__Struct
+        partial internal struct _IsSet_e__Struct
         {
             internal byte _bitfield;
 
@@ -1316,7 +1316,7 @@ namespace Microsoft.Quic
         }
     }
 
-    internal unsafe partial struct QUIC_SCHANNEL_CONTEXT_ATTRIBUTE_W
+    partial internal unsafe struct QUIC_SCHANNEL_CONTEXT_ATTRIBUTE_W
     {
         [NativeTypeName("unsigned long")]
         internal uint Attribute;
@@ -1330,7 +1330,7 @@ namespace Microsoft.Quic
         STOP_COMPLETE = 1,
     }
 
-    internal partial struct QUIC_LISTENER_EVENT
+    partial internal struct QUIC_LISTENER_EVENT
     {
         internal QUIC_LISTENER_EVENT_TYPE Type;
 
@@ -1358,7 +1358,7 @@ namespace Microsoft.Quic
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        internal partial struct _Anonymous_e__Union
+        partial internal struct _Anonymous_e__Union
         {
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
@@ -1368,7 +1368,7 @@ namespace Microsoft.Quic
             [NativeTypeName("struct (anonymous struct)")]
             internal _STOP_COMPLETE_e__Struct STOP_COMPLETE;
 
-            internal unsafe partial struct _NEW_CONNECTION_e__Struct
+            partial internal unsafe struct _NEW_CONNECTION_e__Struct
             {
                 [NativeTypeName("const QUIC_NEW_CONNECTION_INFO *")]
                 internal QUIC_NEW_CONNECTION_INFO* Info;
@@ -1377,7 +1377,7 @@ namespace Microsoft.Quic
                 internal QUIC_HANDLE* Connection;
             }
 
-            internal partial struct _STOP_COMPLETE_e__Struct
+            partial internal struct _STOP_COMPLETE_e__Struct
             {
                 internal byte _bitfield;
 
@@ -1421,7 +1421,7 @@ namespace Microsoft.Quic
         PEER_CERTIFICATE_RECEIVED = 15,
     }
 
-    internal partial struct QUIC_CONNECTION_EVENT
+    partial internal struct QUIC_CONNECTION_EVENT
     {
         internal QUIC_CONNECTION_EVENT_TYPE Type;
 
@@ -1579,7 +1579,7 @@ namespace Microsoft.Quic
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        internal partial struct _Anonymous_e__Union
+        partial internal struct _Anonymous_e__Union
         {
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
@@ -1641,7 +1641,7 @@ namespace Microsoft.Quic
             [NativeTypeName("struct (anonymous struct)")]
             internal _PEER_CERTIFICATE_RECEIVED_e__Struct PEER_CERTIFICATE_RECEIVED;
 
-            internal unsafe partial struct _CONNECTED_e__Struct
+            partial internal unsafe struct _CONNECTED_e__Struct
             {
                 [NativeTypeName("BOOLEAN")]
                 internal byte SessionResumed;
@@ -1653,19 +1653,19 @@ namespace Microsoft.Quic
                 internal byte* NegotiatedAlpn;
             }
 
-            internal partial struct _SHUTDOWN_INITIATED_BY_TRANSPORT_e__Struct
+            partial internal struct _SHUTDOWN_INITIATED_BY_TRANSPORT_e__Struct
             {
                 [NativeTypeName("HRESULT")]
                 internal int Status;
             }
 
-            internal partial struct _SHUTDOWN_INITIATED_BY_PEER_e__Struct
+            partial internal struct _SHUTDOWN_INITIATED_BY_PEER_e__Struct
             {
                 [NativeTypeName("QUIC_UINT62")]
                 internal ulong ErrorCode;
             }
 
-            internal partial struct _SHUTDOWN_COMPLETE_e__Struct
+            partial internal struct _SHUTDOWN_COMPLETE_e__Struct
             {
                 internal byte _bitfield;
 
@@ -1691,19 +1691,19 @@ namespace Microsoft.Quic
                 }
             }
 
-            internal unsafe partial struct _LOCAL_ADDRESS_CHANGED_e__Struct
+            partial internal unsafe struct _LOCAL_ADDRESS_CHANGED_e__Struct
             {
                 [NativeTypeName("const QUIC_ADDR *")]
                 internal QuicAddr* Address;
             }
 
-            internal unsafe partial struct _PEER_ADDRESS_CHANGED_e__Struct
+            partial internal unsafe struct _PEER_ADDRESS_CHANGED_e__Struct
             {
                 [NativeTypeName("const QUIC_ADDR *")]
                 internal QuicAddr* Address;
             }
 
-            internal unsafe partial struct _PEER_STREAM_STARTED_e__Struct
+            partial internal unsafe struct _PEER_STREAM_STARTED_e__Struct
             {
                 [NativeTypeName("HQUIC")]
                 internal QUIC_HANDLE* Stream;
@@ -1711,7 +1711,7 @@ namespace Microsoft.Quic
                 internal QUIC_STREAM_OPEN_FLAGS Flags;
             }
 
-            internal partial struct _STREAMS_AVAILABLE_e__Struct
+            partial internal struct _STREAMS_AVAILABLE_e__Struct
             {
                 [NativeTypeName("uint16_t")]
                 internal ushort BidirectionalCount;
@@ -1720,13 +1720,13 @@ namespace Microsoft.Quic
                 internal ushort UnidirectionalCount;
             }
 
-            internal partial struct _IDEAL_PROCESSOR_CHANGED_e__Struct
+            partial internal struct _IDEAL_PROCESSOR_CHANGED_e__Struct
             {
                 [NativeTypeName("uint16_t")]
                 internal ushort IdealProcessor;
             }
 
-            internal partial struct _DATAGRAM_STATE_CHANGED_e__Struct
+            partial internal struct _DATAGRAM_STATE_CHANGED_e__Struct
             {
                 [NativeTypeName("BOOLEAN")]
                 internal byte SendEnabled;
@@ -1735,7 +1735,7 @@ namespace Microsoft.Quic
                 internal ushort MaxSendLength;
             }
 
-            internal unsafe partial struct _DATAGRAM_RECEIVED_e__Struct
+            partial internal unsafe struct _DATAGRAM_RECEIVED_e__Struct
             {
                 [NativeTypeName("const QUIC_BUFFER *")]
                 internal QUIC_BUFFER* Buffer;
@@ -1743,14 +1743,14 @@ namespace Microsoft.Quic
                 internal QUIC_RECEIVE_FLAGS Flags;
             }
 
-            internal unsafe partial struct _DATAGRAM_SEND_STATE_CHANGED_e__Struct
+            partial internal unsafe struct _DATAGRAM_SEND_STATE_CHANGED_e__Struct
             {
                 internal void* ClientContext;
 
                 internal QUIC_DATAGRAM_SEND_STATE State;
             }
 
-            internal unsafe partial struct _RESUMED_e__Struct
+            partial internal unsafe struct _RESUMED_e__Struct
             {
                 [NativeTypeName("uint16_t")]
                 internal ushort ResumptionStateLength;
@@ -1759,7 +1759,7 @@ namespace Microsoft.Quic
                 internal byte* ResumptionState;
             }
 
-            internal unsafe partial struct _RESUMPTION_TICKET_RECEIVED_e__Struct
+            partial internal unsafe struct _RESUMPTION_TICKET_RECEIVED_e__Struct
             {
                 [NativeTypeName("uint32_t")]
                 internal uint ResumptionTicketLength;
@@ -1768,7 +1768,7 @@ namespace Microsoft.Quic
                 internal byte* ResumptionTicket;
             }
 
-            internal unsafe partial struct _PEER_CERTIFICATE_RECEIVED_e__Struct
+            partial internal unsafe struct _PEER_CERTIFICATE_RECEIVED_e__Struct
             {
                 [NativeTypeName("QUIC_CERTIFICATE *")]
                 internal void* Certificate;
@@ -1799,7 +1799,7 @@ namespace Microsoft.Quic
         PEER_ACCEPTED = 9,
     }
 
-    internal partial struct QUIC_STREAM_EVENT
+    partial internal struct QUIC_STREAM_EVENT
     {
         internal QUIC_STREAM_EVENT_TYPE Type;
 
@@ -1887,7 +1887,7 @@ namespace Microsoft.Quic
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        internal partial struct _Anonymous_e__Union
+        partial internal struct _Anonymous_e__Union
         {
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
@@ -1921,7 +1921,7 @@ namespace Microsoft.Quic
             [NativeTypeName("struct (anonymous struct)")]
             internal _IDEAL_SEND_BUFFER_SIZE_e__Struct IDEAL_SEND_BUFFER_SIZE;
 
-            internal partial struct _START_COMPLETE_e__Struct
+            partial internal struct _START_COMPLETE_e__Struct
             {
                 [NativeTypeName("HRESULT")]
                 internal int Status;
@@ -1949,7 +1949,7 @@ namespace Microsoft.Quic
                 }
             }
 
-            internal unsafe partial struct _RECEIVE_e__Struct
+            partial internal unsafe struct _RECEIVE_e__Struct
             {
                 [NativeTypeName("uint64_t")]
                 internal ulong AbsoluteOffset;
@@ -1966,7 +1966,7 @@ namespace Microsoft.Quic
                 internal QUIC_RECEIVE_FLAGS Flags;
             }
 
-            internal unsafe partial struct _SEND_COMPLETE_e__Struct
+            partial internal unsafe struct _SEND_COMPLETE_e__Struct
             {
                 [NativeTypeName("BOOLEAN")]
                 internal byte Canceled;
@@ -1974,25 +1974,25 @@ namespace Microsoft.Quic
                 internal void* ClientContext;
             }
 
-            internal partial struct _PEER_SEND_ABORTED_e__Struct
+            partial internal struct _PEER_SEND_ABORTED_e__Struct
             {
                 [NativeTypeName("QUIC_UINT62")]
                 internal ulong ErrorCode;
             }
 
-            internal partial struct _PEER_RECEIVE_ABORTED_e__Struct
+            partial internal struct _PEER_RECEIVE_ABORTED_e__Struct
             {
                 [NativeTypeName("QUIC_UINT62")]
                 internal ulong ErrorCode;
             }
 
-            internal partial struct _SEND_SHUTDOWN_COMPLETE_e__Struct
+            partial internal struct _SEND_SHUTDOWN_COMPLETE_e__Struct
             {
                 [NativeTypeName("BOOLEAN")]
                 internal byte Graceful;
             }
 
-            internal partial struct _SHUTDOWN_COMPLETE_e__Struct
+            partial internal struct _SHUTDOWN_COMPLETE_e__Struct
             {
                 [NativeTypeName("BOOLEAN")]
                 internal byte ConnectionShutdown;
@@ -2017,7 +2017,7 @@ namespace Microsoft.Quic
                 }
             }
 
-            internal partial struct _IDEAL_SEND_BUFFER_SIZE_e__Struct
+            partial internal struct _IDEAL_SEND_BUFFER_SIZE_e__Struct
             {
                 [NativeTypeName("uint64_t")]
                 internal ulong ByteCount;
@@ -2025,7 +2025,7 @@ namespace Microsoft.Quic
         }
     }
 
-    internal unsafe partial struct QUIC_API_TABLE
+    partial internal unsafe struct QUIC_API_TABLE
     {
         [NativeTypeName("QUIC_SET_CONTEXT_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, void> SetContext;
@@ -2188,7 +2188,7 @@ namespace Microsoft.Quic
             int> DatagramSend;
     }
 
-    internal static unsafe partial class MsQuic
+    partial internal static unsafe class MsQuic
     {
         [DllImport("msquic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("HRESULT")]

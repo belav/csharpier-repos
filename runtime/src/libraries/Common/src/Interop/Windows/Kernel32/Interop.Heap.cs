@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial IntPtr GetProcessHeap();
+        partial internal static IntPtr GetProcessHeap();
 
         [Flags]
         internal enum HeapAllocFlags : int
@@ -22,7 +22,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial SafeHeapAllocHandle HeapAlloc(
+        partial internal static SafeHeapAllocHandle HeapAlloc(
             IntPtr hHeap,
             HeapAllocFlags dwFlags,
             nint dwBytes
@@ -30,6 +30,6 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool HeapFree(IntPtr hHeap, HeapAllocFlags dwFlags, IntPtr lpMem);
+        partial internal static bool HeapFree(IntPtr hHeap, HeapAllocFlags dwFlags, IntPtr lpMem);
     }
 }

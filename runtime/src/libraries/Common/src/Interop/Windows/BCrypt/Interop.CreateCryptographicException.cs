@@ -4,9 +4,9 @@
 using System;
 using Internal.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         internal static Exception CreateCryptographicException(NTSTATUS ntStatus)
         {

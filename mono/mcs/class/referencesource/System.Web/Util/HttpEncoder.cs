@@ -364,7 +364,7 @@ namespace System.Web.Util
             }
         }
 
-        private unsafe static void HtmlAttributeEncodeInternal(String s, TextWriter output)
+        private static unsafe void HtmlAttributeEncodeInternal(String s, TextWriter output)
         {
             int index = IndexOfHtmlAttributeEncodingChars(s, 0);
             if (index == -1)

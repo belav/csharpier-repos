@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 
 namespace System.Drawing
 {
-    public sealed partial class Icon : MarshalByRefObject, ICloneable, IDisposable, ISerializable
+    partial public sealed class Icon : MarshalByRefObject, ICloneable, IDisposable, ISerializable
     {
         public void Save(Stream outputStream)
         {

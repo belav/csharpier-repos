@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal abstract partial class AbstractGenerateConversionService<
+    partial internal abstract class AbstractGenerateConversionService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax,

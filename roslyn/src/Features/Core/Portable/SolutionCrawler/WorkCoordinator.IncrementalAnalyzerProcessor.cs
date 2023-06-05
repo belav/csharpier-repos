@@ -22,11 +22,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal partial class SolutionCrawlerRegistrationService
+    partial internal class SolutionCrawlerRegistrationService
     {
-        internal partial class WorkCoordinator
+        partial internal class WorkCoordinator
         {
-            private partial class IncrementalAnalyzerProcessor
+            partial private class IncrementalAnalyzerProcessor
             {
                 private static readonly Func<int, object, bool, string> s_enqueueLogger =
                     EnqueueLogger;

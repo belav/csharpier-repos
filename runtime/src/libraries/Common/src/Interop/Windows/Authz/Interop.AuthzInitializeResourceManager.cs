@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Authz
+    partial internal static class Authz
     {
         [LibraryImport(
             Libraries.Authz,
@@ -14,7 +14,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool AuthzInitializeResourceManager(
+        partial internal static bool AuthzInitializeResourceManager(
             int flags,
             IntPtr pfnAccessCheck,
             IntPtr pfnComputeDynamicGroups,
@@ -25,6 +25,6 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Authz)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool AuthzFreeResourceManager(IntPtr rm);
+        partial internal static bool AuthzFreeResourceManager(IntPtr rm);
     }
 }

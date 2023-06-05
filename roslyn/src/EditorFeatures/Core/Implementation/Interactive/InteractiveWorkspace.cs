@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Interactive
 {
-    internal partial class InteractiveWorkspace : Workspace
+    partial internal class InteractiveWorkspace : Workspace
     {
         private readonly ISolutionCrawlerRegistrationService _registrationService;
 

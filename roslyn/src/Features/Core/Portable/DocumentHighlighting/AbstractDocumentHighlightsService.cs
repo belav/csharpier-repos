@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.DocumentHighlighting
 {
-    internal abstract partial class AbstractDocumentHighlightsService
+    partial internal abstract class AbstractDocumentHighlightsService
         : AbstractEmbeddedLanguageFeatureService<IEmbeddedLanguageDocumentHighlighter>,
             IDocumentHighlightsService
     {

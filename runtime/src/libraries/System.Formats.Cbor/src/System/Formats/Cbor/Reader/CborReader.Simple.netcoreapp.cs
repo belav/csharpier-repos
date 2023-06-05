@@ -5,7 +5,7 @@ using System.Buffers.Binary;
 
 namespace System.Formats.Cbor
 {
-    public partial class CborReader
+    partial public class CborReader
     {
         /// <summary>Reads the next data item as a half-precision floating point number (major type 7).</summary>
         /// <returns>The decoded value.</returns>

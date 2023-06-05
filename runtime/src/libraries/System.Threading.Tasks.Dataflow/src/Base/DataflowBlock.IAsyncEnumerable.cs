@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Threading.Tasks.Dataflow
 {
-    public static partial class DataflowBlock
+    partial public static class DataflowBlock
     {
         /// <summary>Creates an <see cref="IAsyncEnumerable{TOutput}"/> that enables receiving all of the data from the source.</summary>
         /// <typeparam name="TOutput">Specifies the type of data contained in the source.</typeparam>

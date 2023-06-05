@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection
 {
-    public abstract partial class TypeInfo : Type, IReflectableType
+    partial public abstract class TypeInfo : Type, IReflectableType
     {
         protected TypeInfo() { }
 

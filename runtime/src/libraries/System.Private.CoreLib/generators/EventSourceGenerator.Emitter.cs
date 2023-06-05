@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Generators
 {
-    public partial class EventSourceGenerator
+    partial public class EventSourceGenerator
     {
         private sealed class Emitter
         {

@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static unsafe partial NTSTATUS BCryptHash(
+        partial internal static unsafe NTSTATUS BCryptHash(
             nuint hAlgorithm,
             byte* pbSecret,
             int cbSecret,

@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal abstract partial class AbstractFlowPass<TLocalState, TLocalFunctionState>
+    partial internal abstract class AbstractFlowPass<TLocalState, TLocalFunctionState>
     {
         public override BoundNode VisitSwitchStatement(BoundSwitchStatement node)
         {

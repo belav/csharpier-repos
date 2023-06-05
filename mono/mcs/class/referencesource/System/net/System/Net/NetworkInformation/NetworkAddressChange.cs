@@ -56,21 +56,22 @@ namespace System.Net.NetworkInformation
         )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static void RegisterNetworkChange(NetworkChange nc) { }
+        public
         #endregion
 
-        static public event NetworkAvailabilityChangedEventHandler NetworkAvailabilityChanged
+        static event NetworkAvailabilityChangedEventHandler NetworkAvailabilityChanged
         {
             add { AvailabilityChangeListener.Start(value); }
             remove { AvailabilityChangeListener.Stop(value); }
         }
 
-        static public event NetworkAddressChangedEventHandler NetworkAddressChanged
+        public static event NetworkAddressChangedEventHandler NetworkAddressChanged
         {
             add { AddressChangeListener.Start(value); }
             remove { AddressChangeListener.Stop(value); }
         }
 
-        static internal bool CanListenForNetworkChanges
+        internal static bool CanListenForNetworkChanges
         {
             get { return true; }
         }
@@ -78,7 +79,7 @@ namespace System.Net.NetworkInformation
         internal static class AvailabilityChangeListener
         {
             static object syncObject = new object();
-            static private ListDictionary s_availabilityCallerArray = new ListDictionary();
+            private static ListDictionary s_availabilityCallerArray = new ListDictionary();
             static NetworkAddressChangedEventHandler addressChange = ChangedAddress;
             static volatile bool isAvailable = false;
             private static ContextCallback s_RunHandlerCallback = new ContextCallback(
@@ -161,21 +162,22 @@ namespace System.Net.NetworkInformation
         }
 
         //helper class for detecting address change events.
-        internal unsafe static class AddressChangeListener
+        internal static unsafe class AddressChangeListener
         {
-            static private ListDictionary s_callerArray = new ListDictionary();
-            static private ContextCallback s_runHandlerCallback = new ContextCallback(
+            private static ListDictionary s_callerArray = new ListDictionary();
+            private static ContextCallback s_runHandlerCallback = new ContextCallback(
                 RunHandlerCallback
             );
-            static private RegisteredWaitHandle s_registeredWait;
+            private static RegisteredWaitHandle s_registeredWait;
 
+            private
             //need to keep the reference so it isn't GC'd before the native call executes
-            static private bool s_isListening = false;
-            static private bool s_isPending = false;
-            static private SafeCloseSocketAndEvent s_ipv4Socket = null;
-            static private SafeCloseSocketAndEvent s_ipv6Socket = null;
-            static private WaitHandle s_ipv4WaitHandle = null;
-            static private WaitHandle s_ipv6WaitHandle = null;
+            static bool s_isListening = false;
+            private static bool s_isPending = false;
+            private static SafeCloseSocketAndEvent s_ipv4Socket = null;
+            private static SafeCloseSocketAndEvent s_ipv6Socket = null;
+            private static WaitHandle s_ipv4WaitHandle = null;
+            private static WaitHandle s_ipv6WaitHandle = null;
 
             //callback fired when an address change occurs
             private static void AddressChangedCallback(object stateObject, bool signaled)

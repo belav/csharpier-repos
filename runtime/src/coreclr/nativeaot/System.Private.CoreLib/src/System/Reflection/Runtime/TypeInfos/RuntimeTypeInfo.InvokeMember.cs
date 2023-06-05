@@ -9,7 +9,7 @@ using System.Reflection.Runtime.BindingFlagSupport;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal abstract partial class RuntimeTypeInfo
+    partial internal abstract class RuntimeTypeInfo
     {
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         public sealed override object? InvokeMember(

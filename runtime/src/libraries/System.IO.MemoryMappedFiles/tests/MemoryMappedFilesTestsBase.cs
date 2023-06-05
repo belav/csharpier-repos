@@ -8,8 +8,9 @@ using Xunit;
 
 namespace System.IO.MemoryMappedFiles.Tests
 {
+    partial
     /// <summary>Base class from which all of the memory mapped files test classes derive.</summary>
-    public abstract partial class MemoryMappedFilesTestBase : FileCleanupTestBase
+    public abstract class MemoryMappedFilesTestBase : FileCleanupTestBase
     {
         /// <summary>Gets whether named maps are supported by the current platform.</summary>
         internal static bool MapNamesSupported => OperatingSystem.IsWindows();

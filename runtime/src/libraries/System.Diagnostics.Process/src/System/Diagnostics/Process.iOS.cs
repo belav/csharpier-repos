@@ -7,7 +7,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {
-    public partial class Process : IDisposable
+    partial public class Process : IDisposable
     {
 #pragma warning disable IDE0060
         [UnsupportedOSPlatform("ios")]

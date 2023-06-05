@@ -5,11 +5,11 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         [LibraryImport(Interop.Libraries.Ole32)]
-        internal static partial int CoUninitialize();
+        partial internal static int CoUninitialize();
     }
 }

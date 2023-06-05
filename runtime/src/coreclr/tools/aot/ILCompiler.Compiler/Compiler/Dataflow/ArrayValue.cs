@@ -14,7 +14,7 @@ using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.Single
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    internal partial record ArrayValue
+    partial internal record ArrayValue
     {
         public static MultiValue Create(MultiValue size, TypeDesc elementType)
         {
@@ -48,7 +48,7 @@ namespace ILLink.Shared.TrimAnalysis
         public TypeDesc ElementType { get; }
         public Dictionary<int, ValueBasicBlockPair> IndexValues { get; }
 
-        public partial bool TryGetValueByIndex(int index, out MultiValue value)
+        partial public bool TryGetValueByIndex(int index, out MultiValue value)
         {
             if (IndexValues.TryGetValue(index, out var valuePair))
             {

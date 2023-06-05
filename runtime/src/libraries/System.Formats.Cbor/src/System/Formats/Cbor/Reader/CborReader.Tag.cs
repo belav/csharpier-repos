@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace System.Formats.Cbor
 {
-    public partial class CborReader
+    partial public class CborReader
     {
         /// <summary>Reads the next data item as a semantic tag (major type 6).</summary>
         /// <returns>The decoded value.</returns>

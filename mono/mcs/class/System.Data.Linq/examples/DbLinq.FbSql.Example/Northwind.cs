@@ -21,7 +21,7 @@ using DbLinq.Data.Linq;
 using DbLinq.Vendor;
 using System.ComponentModel;
 
-public partial class CpRogramFilesFirebirdFirebird21ExamplesNwindNorthwindfdb : DataContext
+partial public class CpRogramFilesFirebirdFirebird21ExamplesNwindNorthwindfdb : DataContext
 {
     public CpRogramFilesFirebirdFirebird21ExamplesNwindNorthwindfdb(IDbConnection connection)
         : base(connection, new DbLinq.FirebirdSql.FbVendor()) { }
@@ -79,7 +79,7 @@ public partial class CpRogramFilesFirebirdFirebird21ExamplesNwindNorthwindfdb : 
 }
 
 [Table(Name = " Foo .CATEGORIES")]
-public partial class Categories : INotifyPropertyChanged
+partial public class Categories : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -199,7 +199,7 @@ public partial class Categories : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .CUSTOMERS")]
-public partial class Customers : INotifyPropertyChanged
+partial public class Customers : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -466,7 +466,7 @@ public partial class Customers : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .EMPLOYEES")]
-public partial class Employees : INotifyPropertyChanged
+partial public class Employees : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -888,7 +888,7 @@ public partial class Employees : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .EMPLOYEETERRITORIES")]
-public partial class EmployeeTerritories : INotifyPropertyChanged
+partial public class EmployeeTerritories : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -994,7 +994,7 @@ public partial class EmployeeTerritories : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo . Order Details ")]
-public partial class OrderDetails : INotifyPropertyChanged
+partial public class OrderDetails : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1163,7 +1163,7 @@ public partial class OrderDetails : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .ORDERS")]
-public partial class Orders : INotifyPropertyChanged
+partial public class Orders : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1523,7 +1523,7 @@ public partial class Orders : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .PRODUCTS")]
-public partial class Products : INotifyPropertyChanged
+partial public class Products : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1799,7 +1799,7 @@ public partial class Products : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .REGION")]
-public partial class Region : INotifyPropertyChanged
+partial public class Region : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1878,7 +1878,7 @@ public partial class Region : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .SHIPPERS")]
-public partial class Shippers : INotifyPropertyChanged
+partial public class Shippers : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -1965,7 +1965,7 @@ public partial class Shippers : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .SUPPLIERS")]
-public partial class Suppliers : INotifyPropertyChanged
+partial public class Suppliers : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 
@@ -2232,7 +2232,7 @@ public partial class Suppliers : INotifyPropertyChanged
 }
 
 [Table(Name = " Foo .TERRITORIES")]
-public partial class Territories : INotifyPropertyChanged
+partial public class Territories : INotifyPropertyChanged
 {
     #region INotifyPropertyChanged handling
 

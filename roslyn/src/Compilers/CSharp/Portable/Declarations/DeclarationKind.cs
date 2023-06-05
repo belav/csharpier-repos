@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         RecordStruct
     }
 
-    internal static partial class EnumConversions
+    partial internal static class EnumConversions
     {
         internal static DeclarationKind ToDeclarationKind(this SyntaxKind kind)
         {

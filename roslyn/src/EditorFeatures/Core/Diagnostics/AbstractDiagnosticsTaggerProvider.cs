@@ -25,11 +25,12 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// Base type for all taggers that interact with the <see cref="IDiagnosticAnalyzerService"/> and produce tags for
     /// the diagnostics with different UI presentations.
     /// </summary>
-    internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
+    internal abstract class AbstractDiagnosticsTaggerProvider<TTag>
         : AsynchronousTaggerProvider<TTag>
         where TTag : ITag
     {

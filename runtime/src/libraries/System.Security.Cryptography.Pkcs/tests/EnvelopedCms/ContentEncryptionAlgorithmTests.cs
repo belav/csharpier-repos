@@ -9,7 +9,7 @@ using System.Security.Cryptography.Pkcs.Tests;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class ContentEncryptionAlgorithmTests
+    partial public static class ContentEncryptionAlgorithmTests
     {
         public static bool SupportsRc2 => PlatformSupport.IsRC2Supported;
         public static bool SupportsRc4 => PlatformDetection.IsWindows;

@@ -296,7 +296,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public UniqueId(byte[] guid, int offset)
+        public unsafe UniqueId(byte[] guid, int offset)
         {
             if (guid == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -335,7 +335,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public UniqueId(string value)
+        public unsafe UniqueId(string value)
         {
             if (value == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
@@ -357,7 +357,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public UniqueId(char[] chars, int offset, int count)
+        public unsafe UniqueId(char[] chars, int offset, int count)
         {
             if (chars == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -559,7 +559,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public int ToCharArray(char[] chars, int offset)
+        public unsafe int ToCharArray(char[] chars, int offset)
         {
             int count = CharArrayLength;
 
@@ -662,7 +662,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public bool TryGetGuid(byte[] buffer, int offset)
+        public unsafe bool TryGetGuid(byte[] buffer, int offset)
         {
             if (!IsGuid)
                 return false;
@@ -709,7 +709,7 @@ namespace System.Xml
             Safe = "Doesn't allow unchecked write access to the field."
         )]
         [SecuritySafeCritical]
-        unsafe public override string ToString()
+        public override unsafe string ToString()
         {
             if (s == null)
             {
@@ -721,7 +721,7 @@ namespace System.Xml
             return s;
         }
 
-        static public bool operator ==(UniqueId id1, UniqueId id2)
+        public static bool operator ==(UniqueId id1, UniqueId id2)
         {
             if (object.ReferenceEquals(id1, null) && object.ReferenceEquals(id2, null))
                 return true;
@@ -738,7 +738,7 @@ namespace System.Xml
             return id1.ToString() == id2.ToString();
         }
 
-        static public bool operator !=(UniqueId id1, UniqueId id2)
+        public static bool operator !=(UniqueId id1, UniqueId id2)
         {
             return !(id1 == id2);
         }

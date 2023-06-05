@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public partial class MissingMemberException
+    partial public class MissingMemberException
     {
         internal static string FormatSignature(byte[] signature)
         {

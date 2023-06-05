@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal partial class MemberDeclarationSyntaxExtensions
+    partial internal class MemberDeclarationSyntaxExtensions
     {
         private sealed class DeclarationFinder : CSharpSyntaxWalker
         {

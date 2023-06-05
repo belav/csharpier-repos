@@ -9,11 +9,12 @@ using System.Threading;
 
 namespace Internal.TypeSystem.Interop
 {
+    partial
     /// <summary>
     /// This generates a class which inherits from System.Runtime.InteropServices.NativeFunctionPointerWrapper. It has a constructror and
     /// a second instance method which marshalls arguments in the forward direction in order to call the native function pointer.
     /// </summary>
-    public partial class PInvokeDelegateWrapper : MetadataType
+    public class PInvokeDelegateWrapper : MetadataType
     {
         // The type of delegate that will be created from the native function pointer
         public MetadataType DelegateType { get; }

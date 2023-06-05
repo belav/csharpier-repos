@@ -6,7 +6,7 @@ using Internal.TypeSystem;
 
 namespace System
 {
-    public partial class String
+    partial public class String
     {
         public static string Intern(string str)
         {

@@ -5,12 +5,12 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal unsafe partial class Sys
+    partial internal unsafe class Sys
     {
         [DoesNotReturn]
         [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_Abort")]
-        internal static partial void Abort();
+        partial internal static void Abort();
     }
 }

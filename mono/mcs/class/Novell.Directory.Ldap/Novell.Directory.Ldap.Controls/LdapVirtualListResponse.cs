@@ -50,35 +50,39 @@ namespace Novell.Directory.Ldap.Controls
     /// </summary>
     public class LdapVirtualListResponse : LdapControl
     {
+        public
         /// <summary> Returns the size of the virtual search results list.  This integer as
         /// the servers current estimate of what the search result size.
         /// </summary>
-        virtual public int ContentCount
+        virtual int ContentCount
         {
             get { return m_ContentCount; }
         }
 
+        public
         /// <summary> Returns the index of the first entry in the returned list.  The server uses
         /// the clients request information in conjunction with its current search result
         /// list to estimate what list of entries the client is requesting.  This integer
         /// is the index into the search results that is returned to the client.
         /// </summary>
-        virtual public int FirstPosition
+        virtual int FirstPosition
         {
             get { return m_firstPosition; }
         }
 
+        public
         /// <summary> Returns the result code for the virtual list search request.</summary>
-        virtual public int ResultCode
+        virtual int ResultCode
         {
             get { return m_resultCode; }
         }
 
+        public
         /// <summary> Returns the cookie used by some servers to optimize the processing of
         /// virtual list requests. Subsequent VLV requests to the same server
         /// should return this String to the server.
         /// </summary>
-        virtual public System.String Context
+        virtual System.String Context
         {
             get { return m_context; }
         }

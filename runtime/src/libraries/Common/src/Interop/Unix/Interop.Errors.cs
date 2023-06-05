@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     /// <summary>Common Unix errno error codes.</summary>
     internal enum Error
@@ -155,7 +155,7 @@ internal static partial class Interop
         }
     }
 
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal static Error GetLastError()
         {
@@ -191,16 +191,16 @@ internal static partial class Interop
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_ConvertErrorPlatformToPal"
         )]
-        internal static partial Error ConvertErrorPlatformToPal(int platformErrno);
+        partial internal static Error ConvertErrorPlatformToPal(int platformErrno);
 
         [LibraryImport(
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_ConvertErrorPalToPlatform"
         )]
-        internal static partial int ConvertErrorPalToPlatform(Error error);
+        partial internal static int ConvertErrorPalToPlatform(Error error);
 
         [LibraryImport(Libraries.IOPortsNative, EntryPoint = "SystemIoPortsNative_StrErrorR")]
-        private static unsafe partial byte* StrErrorR(
+        partial private static unsafe byte* StrErrorR(
             int platformErrno,
             byte* buffer,
             int bufferSize
@@ -211,17 +211,17 @@ internal static partial class Interop
             EntryPoint = "SystemNative_ConvertErrorPlatformToPal"
         )]
         [SuppressGCTransition]
-        internal static partial Error ConvertErrorPlatformToPal(int platformErrno);
+        partial internal static Error ConvertErrorPlatformToPal(int platformErrno);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_ConvertErrorPalToPlatform"
         )]
         [SuppressGCTransition]
-        internal static partial int ConvertErrorPalToPlatform(Error error);
+        partial internal static int ConvertErrorPalToPlatform(Error error);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_StrErrorR")]
-        private static unsafe partial byte* StrErrorR(
+        partial private static unsafe byte* StrErrorR(
             int platformErrno,
             byte* buffer,
             int bufferSize

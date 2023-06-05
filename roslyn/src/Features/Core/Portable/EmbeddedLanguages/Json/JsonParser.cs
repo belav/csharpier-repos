@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     /// </para>
     /// </remarks>
     [NonCopyable]
-    internal partial struct JsonParser
+    partial internal struct JsonParser
     {
         private static readonly string s_closeBracketExpected = string.Format(
             FeaturesResources._0_expected,

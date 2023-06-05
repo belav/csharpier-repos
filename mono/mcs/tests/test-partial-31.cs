@@ -13,7 +13,7 @@ namespace TestPartialOverride.BaseNamespace
 
 namespace TestPartialOverride.Outer.Nested.Namespace
 {
-    internal partial class Inherits
+    partial internal class Inherits
     {
         protected override void OverrideMe()
         {
@@ -26,7 +26,7 @@ namespace TestPartialOverride.Outer
 {
     namespace Nested.Namespace
     {
-        internal partial class Inherits : TestPartialOverride.BaseNamespace.Base
+        partial internal class Inherits : TestPartialOverride.BaseNamespace.Base
         {
             public void DoesSomethignElse()
             {

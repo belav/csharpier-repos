@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace System.ComponentModel.Composition.Factories
 {
-    public static partial class CatalogFactory
+    partial public static class CatalogFactory
     {
         public static AggregateCatalog CreateAggregateCatalog()
         {

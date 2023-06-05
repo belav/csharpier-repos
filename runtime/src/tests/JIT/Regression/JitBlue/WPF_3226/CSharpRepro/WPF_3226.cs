@@ -35,7 +35,7 @@ public class Test_WPF_3226
         Marshal.StructureToPtr(mmi, lParam, true);
     }
 
-    public unsafe static int Main()
+    public static unsafe int Main()
     {
         MINMAXINFO mmi = new MINMAXINFO();
         IntPtr pmmi = Marshal.AllocHGlobal(Marshal.SizeOf(mmi));

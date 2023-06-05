@@ -12,7 +12,7 @@ namespace System
 {
     [ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]
-    public abstract partial class Delegate : ICloneable, ISerializable
+    partial public abstract class Delegate : ICloneable, ISerializable
     {
         // _target is the object we will invoke on
         internal object? _target; // Initialized by VM as needed; null if static delegate

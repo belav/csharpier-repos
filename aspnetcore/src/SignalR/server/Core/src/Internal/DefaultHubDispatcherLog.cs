@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-internal static partial class DefaultHubDispatcherLog
+partial internal static class DefaultHubDispatcherLog
 {
     [LoggerMessage(
         1,
@@ -15,7 +15,7 @@ internal static partial class DefaultHubDispatcherLog
         "Received hub invocation: {InvocationMessage}.",
         EventName = "ReceivedHubInvocation"
     )]
-    public static partial void ReceivedHubInvocation(
+    partial public static void ReceivedHubInvocation(
         ILogger logger,
         InvocationMessage invocationMessage
     );
@@ -26,7 +26,7 @@ internal static partial class DefaultHubDispatcherLog
         "Received unsupported message of type '{MessageType}'.",
         EventName = "UnsupportedMessageReceived"
     )]
-    public static partial void UnsupportedMessageReceived(ILogger logger, string messageType);
+    partial public static void UnsupportedMessageReceived(ILogger logger, string messageType);
 
     [LoggerMessage(
         3,
@@ -34,7 +34,7 @@ internal static partial class DefaultHubDispatcherLog
         "Unknown hub method '{HubMethod}'.",
         EventName = "UnknownHubMethod"
     )]
-    public static partial void UnknownHubMethod(ILogger logger, string hubMethod);
+    partial public static void UnknownHubMethod(ILogger logger, string hubMethod);
 
     // 4, OutboundChannelClosed - removed
 
@@ -44,7 +44,7 @@ internal static partial class DefaultHubDispatcherLog
         "Failed to invoke '{HubMethod}' because user is unauthorized.",
         EventName = "HubMethodNotAuthorized"
     )]
-    public static partial void HubMethodNotAuthorized(ILogger logger, string hubMethod);
+    partial public static void HubMethodNotAuthorized(ILogger logger, string hubMethod);
 
     public static void StreamingResult(
         ILogger logger,
@@ -67,7 +67,7 @@ internal static partial class DefaultHubDispatcherLog
         EventName = "StreamingResult",
         SkipEnabledCheck = true
     )]
-    private static partial void StreamingResult(
+    partial private static void StreamingResult(
         ILogger logger,
         string invocationId,
         string? resultType
@@ -94,7 +94,7 @@ internal static partial class DefaultHubDispatcherLog
         EventName = "SendingResult",
         SkipEnabledCheck = true
     )]
-    private static partial void SendingResult(
+    partial private static void SendingResult(
         ILogger logger,
         string? invocationId,
         string? resultType
@@ -106,7 +106,7 @@ internal static partial class DefaultHubDispatcherLog
         "Failed to invoke hub method '{HubMethod}'.",
         EventName = "FailedInvokingHubMethod"
     )]
-    public static partial void FailedInvokingHubMethod(
+    partial public static void FailedInvokingHubMethod(
         ILogger logger,
         string hubMethod,
         Exception exception
@@ -118,7 +118,7 @@ internal static partial class DefaultHubDispatcherLog
         "'{HubName}' hub method '{HubMethod}' is bound.",
         EventName = "HubMethodBound"
     )]
-    public static partial void HubMethodBound(ILogger logger, string hubName, string hubMethod);
+    partial public static void HubMethodBound(ILogger logger, string hubName, string hubMethod);
 
     [LoggerMessage(
         10,
@@ -126,7 +126,7 @@ internal static partial class DefaultHubDispatcherLog
         "Canceling stream for invocation {InvocationId}.",
         EventName = "CancelStream"
     )]
-    public static partial void CancelStream(ILogger logger, string invocationId);
+    partial public static void CancelStream(ILogger logger, string invocationId);
 
     [LoggerMessage(
         11,
@@ -134,7 +134,7 @@ internal static partial class DefaultHubDispatcherLog
         "CancelInvocationMessage received unexpectedly.",
         EventName = "UnexpectedCancel"
     )]
-    public static partial void UnexpectedCancel(ILogger logger);
+    partial public static void UnexpectedCancel(ILogger logger);
 
     [LoggerMessage(
         12,
@@ -142,7 +142,7 @@ internal static partial class DefaultHubDispatcherLog
         "Received stream hub invocation: {InvocationMessage}.",
         EventName = "ReceivedStreamHubInvocation"
     )]
-    public static partial void ReceivedStreamHubInvocation(
+    partial public static void ReceivedStreamHubInvocation(
         ILogger logger,
         StreamInvocationMessage invocationMessage
     );
@@ -153,7 +153,7 @@ internal static partial class DefaultHubDispatcherLog
         "A streaming method was invoked with a non-streaming invocation : {InvocationMessage}.",
         EventName = "StreamingMethodCalledWithInvoke"
     )]
-    public static partial void StreamingMethodCalledWithInvoke(
+    partial public static void StreamingMethodCalledWithInvoke(
         ILogger logger,
         HubMethodInvocationMessage invocationMessage
     );
@@ -164,7 +164,7 @@ internal static partial class DefaultHubDispatcherLog
         "A non-streaming method was invoked with a streaming invocation : {InvocationMessage}.",
         EventName = "NonStreamingMethodCalledWithStream"
     )]
-    public static partial void NonStreamingMethodCalledWithStream(
+    partial public static void NonStreamingMethodCalledWithStream(
         ILogger logger,
         HubMethodInvocationMessage invocationMessage
     );
@@ -175,7 +175,7 @@ internal static partial class DefaultHubDispatcherLog
         "A streaming method returned a value that cannot be used to build enumerator {HubMethod}.",
         EventName = "InvalidReturnValueFromStreamingMethod"
     )]
-    public static partial void InvalidReturnValueFromStreamingMethod(
+    partial public static void InvalidReturnValueFromStreamingMethod(
         ILogger logger,
         string hubMethod
     );
@@ -189,7 +189,7 @@ internal static partial class DefaultHubDispatcherLog
         "Received item for stream '{StreamId}'.",
         EventName = "ReceivedStreamItem"
     )]
-    private static partial void ReceivedStreamItem(ILogger logger, string? streamId);
+    partial private static void ReceivedStreamItem(ILogger logger, string? streamId);
 
     [LoggerMessage(
         17,
@@ -197,7 +197,7 @@ internal static partial class DefaultHubDispatcherLog
         "Creating streaming parameter channel '{StreamId}'.",
         EventName = "StartingParameterStream"
     )]
-    public static partial void StartingParameterStream(ILogger logger, string streamId);
+    partial public static void StartingParameterStream(ILogger logger, string streamId);
 
     public static void CompletingStream(ILogger logger, CompletionMessage message) =>
         CompletingStream(logger, message.InvocationId);
@@ -208,7 +208,7 @@ internal static partial class DefaultHubDispatcherLog
         "Stream '{StreamId}' has been completed by client.",
         EventName = "CompletingStream"
     )]
-    private static partial void CompletingStream(ILogger logger, string? streamId);
+    partial private static void CompletingStream(ILogger logger, string? streamId);
 
     public static void ClosingStreamWithBindingError(ILogger logger, CompletionMessage message) =>
         ClosingStreamWithBindingError(logger, message.InvocationId, message.Error);
@@ -219,7 +219,7 @@ internal static partial class DefaultHubDispatcherLog
         "Stream '{StreamId}' closed with error '{Error}'.",
         EventName = "ClosingStreamWithBindingError"
     )]
-    private static partial void ClosingStreamWithBindingError(
+    partial private static void ClosingStreamWithBindingError(
         ILogger logger,
         string? streamId,
         string? error
@@ -233,7 +233,7 @@ internal static partial class DefaultHubDispatcherLog
         "StreamItemMessage received unexpectedly.",
         EventName = "UnexpectedStreamItem"
     )]
-    public static partial void UnexpectedStreamItem(ILogger logger);
+    partial public static void UnexpectedStreamItem(ILogger logger);
 
     [LoggerMessage(
         22,
@@ -241,7 +241,7 @@ internal static partial class DefaultHubDispatcherLog
         "Parameters to hub method '{HubMethod}' are incorrect.",
         EventName = "InvalidHubParameters"
     )]
-    public static partial void InvalidHubParameters(
+    partial public static void InvalidHubParameters(
         ILogger logger,
         string hubMethod,
         Exception exception
@@ -253,7 +253,7 @@ internal static partial class DefaultHubDispatcherLog
         "Invocation ID '{InvocationId}' is already in use.",
         EventName = "InvocationIdInUse"
     )]
-    public static partial void InvocationIdInUse(ILogger logger, string InvocationId);
+    partial public static void InvocationIdInUse(ILogger logger, string InvocationId);
 
     [LoggerMessage(
         24,
@@ -261,7 +261,7 @@ internal static partial class DefaultHubDispatcherLog
         "CompletionMessage for invocation ID '{InvocationId}' received unexpectedly.",
         EventName = "UnexpectedCompletion"
     )]
-    public static partial void UnexpectedCompletion(ILogger logger, string invocationId);
+    partial public static void UnexpectedCompletion(ILogger logger, string invocationId);
 
     [LoggerMessage(
         25,
@@ -269,7 +269,7 @@ internal static partial class DefaultHubDispatcherLog
         "Invocation ID {InvocationId}: Failed while sending stream items from hub method {HubMethod}.",
         EventName = "FailedStreaming"
     )]
-    public static partial void FailedStreaming(
+    partial public static void FailedStreaming(
         ILogger logger,
         string invocationId,
         string hubMethod,

@@ -14,7 +14,7 @@ namespace System.Data.Objects.ELinq
     using System.Data.Metadata.Edm;
     using System.Diagnostics;
 
-    internal sealed partial class ExpressionConverter
+    partial internal sealed class ExpressionConverter
     {
         /// <summary>
         /// A context-sensitive DbExpression builder class that simulates order preservation

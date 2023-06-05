@@ -408,7 +408,9 @@ namespace Microsoft.SqlServer.Server
         }
 
         // Method to map from Type to ExtendedTypeCode
-        static internal ExtendedClrTypeCode DetermineExtendedTypeCodeFromType(Type clrType)
+        internal
+        // Method to map from Type to ExtendedTypeCode
+        static ExtendedClrTypeCode DetermineExtendedTypeCodeFromType(Type clrType)
         {
             object result = __typeToExtendedTypeCodeMap[clrType];
 
@@ -438,7 +440,21 @@ namespace Microsoft.SqlServer.Server
 
 
 
-        static internal ExtendedClrTypeCode DetermineExtendedTypeCode(object value)
+        internal
+        // Returns the ExtendedClrTypeCode that describes the given value
+        //
+
+
+
+
+
+
+
+
+
+
+
+        static ExtendedClrTypeCode DetermineExtendedTypeCode(object value)
         {
             ExtendedClrTypeCode resultCode;
             if (null == value)
@@ -454,7 +470,9 @@ namespace Microsoft.SqlServer.Server
         }
 
         // returns a sqldbtype for the given type code
-        static internal SqlDbType InferSqlDbTypeFromTypeCode(ExtendedClrTypeCode typeCode)
+        internal
+        // returns a sqldbtype for the given type code
+        static SqlDbType InferSqlDbTypeFromTypeCode(ExtendedClrTypeCode typeCode)
         {
             Debug.Assert(
                 typeCode >= ExtendedClrTypeCode.Invalid && typeCode <= ExtendedClrTypeCode.Last,
@@ -466,7 +484,10 @@ namespace Microsoft.SqlServer.Server
 
         // Infer SqlDbType from Type in the general case.  Katmai-only (or later) features that need to
         //  infer types should use InferSqlDbTypeFromType_Katmai.
-        static internal SqlDbType InferSqlDbTypeFromType(Type type)
+        internal
+        // Infer SqlDbType from Type in the general case.  Katmai-only (or later) features that need to
+        //  infer types should use InferSqlDbTypeFromType_Katmai.
+        static SqlDbType InferSqlDbTypeFromType(Type type)
         {
             ExtendedClrTypeCode typeCode = DetermineExtendedTypeCodeFromType(type);
             SqlDbType returnType;
@@ -487,7 +508,13 @@ namespace Microsoft.SqlServer.Server
         //      example: TVP's are a new Katmai feature (no back compat issues) so can infer DATETIME2
         //          when mapping System.DateTime from DateTable or DbDataReader.  DATETIME2 is better because
         //          of greater range that can handle all DateTime values.
-        static internal SqlDbType InferSqlDbTypeFromType_Katmai(Type type)
+        internal
+        // Inference rules changed for Katmai-or-later-only cases.  Only features that are guaranteed to be
+        //  running against Katmai and don't have backward compat issues should call this code path.
+        //      example: TVP's are a new Katmai feature (no back compat issues) so can infer DATETIME2
+        //          when mapping System.DateTime from DateTable or DbDataReader.  DATETIME2 is better because
+        //          of greater range that can handle all DateTime values.
+        static SqlDbType InferSqlDbTypeFromType_Katmai(Type type)
         {
             SqlDbType returnType = InferSqlDbTypeFromType(type);
             if (SqlDbType.DateTime == returnType)
@@ -497,7 +524,7 @@ namespace Microsoft.SqlServer.Server
             return returnType;
         }
 
-        static internal bool IsValidForSmiVersion(SmiExtendedMetaData md, ulong smiVersion)
+        internal static bool IsValidForSmiVersion(SmiExtendedMetaData md, ulong smiVersion)
         {
             if (SmiContextFactory.LatestVersion == smiVersion)
             {
@@ -518,7 +545,7 @@ namespace Microsoft.SqlServer.Server
             }
         }
 
-        static internal SqlMetaData SmiExtendedMetaDataToSqlMetaData(SmiExtendedMetaData source)
+        internal static SqlMetaData SmiExtendedMetaDataToSqlMetaData(SmiExtendedMetaData source)
         {
             if (SqlDbType.Xml == source.SqlDbType)
             {
@@ -633,7 +660,9 @@ namespace Microsoft.SqlServer.Server
         }
 
         // compare SmiMetaData to SqlMetaData and determine if they are compatible.
-        static internal bool IsCompatible(SmiMetaData firstMd, SqlMetaData secondMd)
+        internal
+        // compare SmiMetaData to SqlMetaData and determine if they are compatible.
+        static bool IsCompatible(SmiMetaData firstMd, SqlMetaData secondMd)
         {
             return firstMd.SqlDbType == secondMd.SqlDbType
                 && firstMd.MaxLength == secondMd.MaxLength
@@ -647,7 +676,7 @@ namespace Microsoft.SqlServer.Server
                 !firstMd.IsMultiValued; // SqlMetaData doesn't have a "multivalued" option
         }
 
-        static internal long AdjustMaxLength(SqlDbType dbType, long maxLength)
+        internal static long AdjustMaxLength(SqlDbType dbType, long maxLength)
         {
             if (SmiMetaData.UnlimitedMaxLengthIndicator != maxLength)
             {
@@ -706,10 +735,9 @@ namespace Microsoft.SqlServer.Server
         }
 
         // Extract metadata for a single DataColumn
-        static internal SmiExtendedMetaData SmiMetaDataFromDataColumn(
-            DataColumn column,
-            DataTable parent
-        )
+        internal
+        // Extract metadata for a single DataColumn
+        static SmiExtendedMetaData SmiMetaDataFromDataColumn(DataColumn column, DataTable parent)
         {
             SqlDbType dbType = InferSqlDbTypeFromType_Katmai(column.DataType);
             if (InvalidSqlDbType == dbType)
@@ -840,7 +868,11 @@ namespace Microsoft.SqlServer.Server
         // Map SmiMetaData from a schema table.
         //  DEVNOTE: since we're using SchemaTable, we can assume that we aren't directly using a SqlDataReader
         //      so we don't support the Sql-specific stuff, like collation
-        static internal SmiExtendedMetaData SmiMetaDataFromSchemaTableRow(DataRow schemaRow)
+        internal
+        // Map SmiMetaData from a schema table.
+        //  DEVNOTE: since we're using SchemaTable, we can assume that we aren't directly using a SqlDataReader
+        //      so we don't support the Sql-specific stuff, like collation
+        static SmiExtendedMetaData SmiMetaDataFromSchemaTableRow(DataRow schemaRow)
         {
             // One way or another, we'll need column name, so put it in a local now to shorten code later.
             string colName = "";

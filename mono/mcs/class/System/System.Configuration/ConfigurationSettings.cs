@@ -159,7 +159,7 @@ namespace System.Configuration
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private static string get_bundled_machine_config();
+        private static extern string get_bundled_machine_config();
 
         internal static string GetBundledMachineConfig()
         {
@@ -167,7 +167,7 @@ namespace System.Configuration
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private static string get_machine_config_path();
+        private static extern string get_machine_config_path();
 
         internal static string GetMachineConfigPath()
         {

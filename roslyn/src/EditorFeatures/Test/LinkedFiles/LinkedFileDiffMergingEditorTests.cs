@@ -16,7 +16,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.LinkedFiles
 {
-    public partial class LinkedFileDiffMergingEditorTests : AbstractCodeActionTest
+    partial public class LinkedFileDiffMergingEditorTests : AbstractCodeActionTest
     {
         private const string WorkspaceXml =
             @"<Workspace>

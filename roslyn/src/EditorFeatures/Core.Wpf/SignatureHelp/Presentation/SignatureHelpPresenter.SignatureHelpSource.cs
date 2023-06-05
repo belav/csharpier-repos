@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Language.Intellisense;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHelp.Presentation
 {
-    internal partial class SignatureHelpPresenter
+    partial internal class SignatureHelpPresenter
     {
         private class SignatureHelpSource : ForegroundThreadAffinitizedObject, ISignatureHelpSource
         {

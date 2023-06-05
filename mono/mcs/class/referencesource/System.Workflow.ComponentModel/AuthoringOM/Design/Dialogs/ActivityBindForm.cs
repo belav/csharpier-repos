@@ -17,7 +17,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Workflow.ComponentModel.Design
 {
-    internal sealed partial class ActivityBindForm : Form
+    partial internal sealed class ActivityBindForm : Form
     {
         //ui control
         private ActivityBindFormWorkflowOutline workflowOutline = null;

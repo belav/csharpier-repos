@@ -45,13 +45,14 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     public class LdapAuthProvider
     {
+        public
         /// <summary> Returns the distinguished name to be used for authentication on
         /// automatic referral following.
         ///
         /// </summary>
         /// <returns> The distinguished name from the object.
         /// </returns>
-        virtual public System.String DN
+        virtual System.String DN
         {
             get { return dn; }
         }
@@ -63,7 +64,7 @@ namespace Novell.Directory.Ldap
         /// <returns> The byte[] value (UTF-8) of the password from the object.
         /// </returns>
         [CLSCompliantAttribute(false)]
-        virtual public sbyte[] Password
+        public virtual sbyte[] Password
         {
             get { return password; }
         }

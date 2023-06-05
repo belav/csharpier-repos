@@ -6,16 +6,16 @@ using System.IO.Ports;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Serial
+    partial internal static class Serial
     {
         [LibraryImport(
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_SerialPortOpen",
             SetLastError = true
         )]
-        internal static partial SafeSerialDeviceHandle SerialPortOpen(
+        partial internal static SafeSerialDeviceHandle SerialPortOpen(
             [MarshalAs(UnmanagedType.LPUTF8Str)] string name
         );
 
@@ -24,10 +24,10 @@ internal static partial class Interop
             EntryPoint = "SystemIoPortsNative_SerialPortClose",
             SetLastError = true
         )]
-        internal static partial int SerialPortClose(IntPtr handle);
+        partial internal static int SerialPortClose(IntPtr handle);
 
         [LibraryImport(Libraries.IOPortsNative, EntryPoint = "SystemIoPortsNative_Shutdown")]
-        internal static partial Error Shutdown(IntPtr socket, SocketShutdown how);
+        partial internal static Error Shutdown(IntPtr socket, SocketShutdown how);
 
         /// <summary>
         /// Reads a number of bytes from an open file descriptor into a specified buffer.
@@ -44,7 +44,7 @@ internal static partial class Interop
             EntryPoint = "SystemIoPortsNative_Read",
             SetLastError = true
         )]
-        internal static unsafe partial int Read(SafeHandle fd, byte* buffer, int count);
+        partial internal static unsafe int Read(SafeHandle fd, byte* buffer, int count);
 
         /// <summary>
         /// Writes the specified buffer to the provided open file descriptor
@@ -60,7 +60,7 @@ internal static partial class Interop
             EntryPoint = "SystemIoPortsNative_Write",
             SetLastError = true
         )]
-        internal static unsafe partial int Write(SafeHandle fd, byte* buffer, int bufferSize);
+        partial internal static unsafe int Write(SafeHandle fd, byte* buffer, int bufferSize);
 
         /// <summary>
         /// Polls a set of file descriptors for signals and returns what signals have been set
@@ -71,7 +71,7 @@ internal static partial class Interop
         /// <param name="triggered">The number of events triggered (i.e. the number of entries in pollEvents with a non-zero TriggeredEvents). May be zero in the event of a timeout.</param>
         /// <returns>An error or Error.SUCCESS.</returns>
         [LibraryImport(Libraries.IOPortsNative, EntryPoint = "SystemIoPortsNative_Poll")]
-        private static unsafe partial Error Poll(
+        partial private static unsafe Error Poll(
             PollEvent* pollEvents,
             uint eventCount,
             int timeout,

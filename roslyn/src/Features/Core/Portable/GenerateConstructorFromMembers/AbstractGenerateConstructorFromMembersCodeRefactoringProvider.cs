@@ -24,6 +24,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 {
+    partial
     /// <summary>
     /// This <see cref="CodeRefactoringProvider"/> is responsible for allowing a user to pick a
     /// set of members from a class or struct, and then generate a constructor for that takes in
@@ -36,7 +37,7 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
     /// something like "new MyType(x, y, z)", nor is it responsible for generating constructors
     /// in a derived type that delegate to a base type. Both of those are handled by other services.
     /// </summary>
-    internal abstract partial class AbstractGenerateConstructorFromMembersCodeRefactoringProvider
+    internal abstract class AbstractGenerateConstructorFromMembersCodeRefactoringProvider
         : AbstractGenerateFromMembersCodeRefactoringProvider,
             IIntentProvider
     {

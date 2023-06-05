@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         public static unsafe long WorkingSet
         {

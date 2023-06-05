@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-    internal sealed partial class HttpResponseStream : Stream
+    partial internal sealed class HttpResponseStream : Stream
     {
         private bool _closed;
         internal bool Closed => _closed;

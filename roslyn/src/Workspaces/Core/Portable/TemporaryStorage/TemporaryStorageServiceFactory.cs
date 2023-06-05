@@ -19,10 +19,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Host
 {
+    partial
     /// <summary>
     /// Temporarily stores text and streams in memory mapped files.
     /// </summary>
-    internal partial class TemporaryStorageService : ITemporaryStorageService2
+    internal class TemporaryStorageService : ITemporaryStorageService2
     {
         /// <summary>
         /// The maximum size in bytes of a single storage unit in a memory mapped file which is shared with other

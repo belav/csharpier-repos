@@ -8,10 +8,11 @@ using System.Threading;
 
 namespace System.Runtime
 {
+    partial
     /// <summary>
     /// Allows to run code and abort it asynchronously.
     /// </summary>
-    public static partial class ControlledExecution
+    public static class ControlledExecution
     {
         [ThreadStatic]
         private static bool t_executing;
@@ -130,11 +131,11 @@ namespace System.Runtime
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ThreadNative_Abort")]
-        private static partial void AbortThread(ThreadHandle thread);
+        partial private static void AbortThread(ThreadHandle thread);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ThreadNative_ResetAbort")]
         [SuppressGCTransition]
-        private static partial void ResetAbortThread();
+        partial private static void ResetAbortThread();
 
         private sealed class Canceler
         {

@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 using Internal.NativeCrypto;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         internal static unsafe SafeKeyHandle BCryptImportKey(
             SafeAlgorithmHandle hAlg,
@@ -74,7 +74,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        private static unsafe partial NTSTATUS BCryptImportKey(
+        partial private static unsafe NTSTATUS BCryptImportKey(
             SafeAlgorithmHandle hAlgorithm,
             IntPtr hImportKey,
             string pszBlobType,

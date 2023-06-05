@@ -5,8 +5,9 @@ using System.Diagnostics;
 
 namespace System.Text
 {
+    partial
     // If we find issues with this or if more libraries need this behavior we will revisit the solution.
-    internal static partial class EncodingHelper
+    internal static class EncodingHelper
     {
         /// <summary>Hardcoded Encoding.UTF8.CodePage to avoid accessing Encoding.Unicode and forcing it into existence unnecessarily.</summary>
         private const int Utf8CodePage = 65001;

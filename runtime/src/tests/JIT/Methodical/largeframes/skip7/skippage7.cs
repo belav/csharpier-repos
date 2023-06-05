@@ -62,7 +62,7 @@ namespace Test_skippage7
             }
 
             [MethodImplAttribute(MethodImplOptions.NoInlining)]
-            public unsafe static void Test1(int n)
+            public static unsafe void Test1(int n)
             {
                 Console.WriteLine("Enter Test1");
                 LargeStruct s = new LargeStruct();

@@ -8,8 +8,9 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Includes canonicalization objects local to a particular context
-    public partial class TypeSystemContext
+    public class TypeSystemContext
     {
         private CanonType _canonType;
 

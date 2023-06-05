@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Activeds
+    partial internal static class Activeds
     {
         [LibraryImport(Interop.Libraries.Activeds, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial int ADsOpenObject(
+        partial internal static int ADsOpenObject(
             string path,
             string? userName,
             string? password,

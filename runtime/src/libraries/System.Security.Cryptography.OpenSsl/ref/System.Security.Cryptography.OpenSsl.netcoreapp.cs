@@ -6,7 +6,7 @@
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class DSAOpenSsl : System.Security.Cryptography.DSA
+    partial public sealed class DSAOpenSsl : System.Security.Cryptography.DSA
     {
         protected override byte[] HashData(
             byte[] data,
@@ -27,7 +27,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class ECDiffieHellmanOpenSsl
+    partial public sealed class ECDiffieHellmanOpenSsl
         : System.Security.Cryptography.ECDiffieHellman
     {
         public ECDiffieHellmanOpenSsl() { }
@@ -108,7 +108,7 @@ namespace System.Security.Cryptography
         ) { }
     }
 
-    public sealed partial class SafeEvpPKeyHandle : System.Runtime.InteropServices.SafeHandle
+    partial public sealed class SafeEvpPKeyHandle : System.Runtime.InteropServices.SafeHandle
     {
         public static long OpenSslVersion
         {

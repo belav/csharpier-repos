@@ -110,11 +110,11 @@ namespace System.Data
         private object typeName = null;
 
         // primary key info
-        private readonly static Int32[] zeroIntegers = new Int32[0];
-        internal readonly static DataColumn[] zeroColumns = new DataColumn[0];
-        internal readonly static DataRow[] zeroRows = new DataRow[0];
+        private static readonly Int32[] zeroIntegers = new Int32[0];
+        internal static readonly DataColumn[] zeroColumns = new DataColumn[0];
+        internal static readonly DataRow[] zeroRows = new DataRow[0];
         internal UniqueConstraint primaryKey;
-        internal readonly static IndexField[] zeroIndexField = new IndexField[0];
+        internal static readonly IndexField[] zeroIndexField = new IndexField[0];
         internal IndexField[] _primaryIndex = zeroIndexField;
         private DataColumn[] delayedSetPrimaryKey = null;
 
@@ -2511,7 +2511,11 @@ namespace System.Data
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        virtual public void BeginInit()
+        public
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        virtual void BeginInit()
         {
             fInitInProgress = true;
         }
@@ -2519,7 +2523,11 @@ namespace System.Data
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        virtual public void EndInit()
+        public
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        virtual void EndInit()
         {
             if (dataSet == null || !dataSet.fInitInProgress)
             {

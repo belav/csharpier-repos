@@ -6,15 +6,15 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpPkeyCreate")]
-        internal static partial SafeEvpPKeyHandle EvpPkeyCreate();
+        partial internal static SafeEvpPKeyHandle EvpPkeyCreate();
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial SafeEvpPKeyHandle CryptoNative_EvpPKeyDuplicate(
+        partial private static SafeEvpPKeyHandle CryptoNative_EvpPKeyDuplicate(
             SafeEvpPKeyHandle currentKey,
             EvpAlgorithmId algorithmId
         );
@@ -38,23 +38,23 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpPkeyDestroy")]
-        internal static partial void EvpPkeyDestroy(IntPtr pkey);
+        partial internal static void EvpPkeyDestroy(IntPtr pkey);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpPKeySize")]
-        internal static partial int EvpPKeySize(SafeEvpPKeyHandle pkey);
+        partial internal static int EvpPKeySize(SafeEvpPKeyHandle pkey);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_UpRefEvpPkey")]
-        internal static partial int UpRefEvpPkey(SafeEvpPKeyHandle handle);
+        partial internal static int UpRefEvpPkey(SafeEvpPKeyHandle handle);
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static unsafe partial SafeEvpPKeyHandle CryptoNative_DecodeSubjectPublicKeyInfo(
+        partial private static unsafe SafeEvpPKeyHandle CryptoNative_DecodeSubjectPublicKeyInfo(
             byte* buf,
             int len,
             int algId
         );
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static unsafe partial SafeEvpPKeyHandle CryptoNative_DecodePkcs8PrivateKey(
+        partial private static unsafe SafeEvpPKeyHandle CryptoNative_DecodePkcs8PrivateKey(
             byte* buf,
             int len,
             int algId
@@ -111,7 +111,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_GetPkcs8PrivateKeySize(IntPtr pkey, out int p8size);
+        partial private static int CryptoNative_GetPkcs8PrivateKeySize(IntPtr pkey, out int p8size);
 
         private static int GetPkcs8PrivateKeySize(IntPtr pkey)
         {
@@ -138,7 +138,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static unsafe partial int CryptoNative_EncodePkcs8PrivateKey(
+        partial private static unsafe int CryptoNative_EncodePkcs8PrivateKey(
             IntPtr pkey,
             byte* buf
         );
@@ -176,7 +176,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_GetSubjectPublicKeyInfoSize(IntPtr pkey);
+        partial private static int CryptoNative_GetSubjectPublicKeyInfoSize(IntPtr pkey);
 
         private static int GetSubjectPublicKeyInfoSize(IntPtr pkey)
         {
@@ -191,7 +191,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static unsafe partial int CryptoNative_EncodeSubjectPublicKeyInfo(
+        partial private static unsafe int CryptoNative_EncodeSubjectPublicKeyInfo(
             IntPtr pkey,
             byte* buf
         );

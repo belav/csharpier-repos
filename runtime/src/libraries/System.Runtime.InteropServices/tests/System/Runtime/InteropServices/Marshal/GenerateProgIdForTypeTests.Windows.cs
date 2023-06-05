@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GenerateProgIdForTypeTests
+    partial public class GenerateProgIdForTypeTests
     {
         [Fact]
         public void GenerateProgIdForType_ImportType_ThrowsArgumentException()

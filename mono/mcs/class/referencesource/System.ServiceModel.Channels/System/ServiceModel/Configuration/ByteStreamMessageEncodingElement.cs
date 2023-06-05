@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed partial class ByteStreamMessageEncodingElement : BindingElementExtensionElement
+    partial public sealed class ByteStreamMessageEncodingElement : BindingElementExtensionElement
     {
         public ByteStreamMessageEncodingElement() { }
 

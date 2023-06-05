@@ -19,7 +19,7 @@ namespace System.Xml.Xsl.Xslt
     using Res = System.Xml.Utils.Res;
     using T = XmlQueryTypeFactory;
 
-    internal partial class QilGenerator : IXPathEnvironment
+    partial internal class QilGenerator : IXPathEnvironment
     {
         // Everywhere in this code in case of error in the stylesheet we should throw XslLoadException.
         // This helper IErrorHelper implementation is used to wrap XmlException's into XslLoadException's.

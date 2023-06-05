@@ -15,9 +15,10 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
+    partial
     // Class for creating FileStream objects, and some basic file management
     // routines such as Delete, etc.
-    public static partial class File
+    public static class File
     {
         private const int ChunkSize = 8192;
         private static Encoding? s_UTF8NoBOM;

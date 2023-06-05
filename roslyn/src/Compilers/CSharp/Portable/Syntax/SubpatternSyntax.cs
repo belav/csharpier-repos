@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static SubpatternSyntax Subpattern(
             NameColonSyntax? nameColon,

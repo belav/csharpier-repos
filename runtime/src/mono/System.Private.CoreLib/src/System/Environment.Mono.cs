@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace System
 {
-    public partial class Environment
+    partial public class Environment
     {
         public static int CurrentManagedThreadId => Thread.CurrentThread.ManagedThreadId;
 

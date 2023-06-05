@@ -4,7 +4,7 @@ using Microsoft.SqlServer.Server;
 
 namespace System.Data.SqlClient
 {
-    sealed internal class SqlSequentialStreamSmi : System.IO.Stream
+    internal sealed class SqlSequentialStreamSmi : System.IO.Stream
     {
         private SmiEventSink_Default _sink;
         private ITypedGettersV3 _getters;

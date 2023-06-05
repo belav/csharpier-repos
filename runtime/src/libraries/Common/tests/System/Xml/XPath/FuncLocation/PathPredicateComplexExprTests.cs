@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths.Predicates
 {
+    partial
     /// <summary>
     /// Location Paths - Predicates (Complex Expressions)
     /// </summary>
-    public static partial class ComplexExpressionsTests
+    public static class ComplexExpressionsTests
     {
         /// <summary>
         /// child::*[last() or following::* | count(preceding::*)> string-length(name())]

@@ -82,7 +82,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             }
         }
 
-        private readonly static object s_buildFilesLock = new object();
+        private static readonly object s_buildFilesLock = new object();
 
         private TestProject CopyTestProject(TestProject sourceTestProject)
         {

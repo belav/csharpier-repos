@@ -19,7 +19,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System
 {
-    public static partial class Activator
+    partial public static class Activator
     {
         // The following methods and helper class implement the functionality of Activator.CreateInstance<T>()
         // The implementation relies on several compiler intrinsics that expand to quick dictionary lookups in shared

@@ -1223,7 +1223,7 @@ namespace System.IO.MemoryMappedFiles
         // Helper method used to extract the native binary security descriptor from the MemoryMappedFileSecurity
         // type. If pinningHandle is not null, caller must free it AFTER the call to CreateFile has returned.
         [System.Security.SecurityCritical]
-        private unsafe static UnsafeNativeMethods.SECURITY_ATTRIBUTES GetSecAttrs(
+        private static unsafe UnsafeNativeMethods.SECURITY_ATTRIBUTES GetSecAttrs(
             HandleInheritability inheritability,
             MemoryMappedFileSecurity memoryMappedFileSecurity,
             out Object pinningHandle

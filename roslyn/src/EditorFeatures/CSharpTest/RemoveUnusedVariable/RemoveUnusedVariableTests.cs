@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
 {
-    public partial class RemoveUnusedVariableTests
+    partial public class RemoveUnusedVariableTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnusedVariableTests(ITestOutputHelper logger)

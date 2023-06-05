@@ -11,7 +11,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeEnum))]
-    public sealed partial class CodeEnum : AbstractCodeType, EnvDTE.CodeEnum
+    partial public sealed class CodeEnum : AbstractCodeType, EnvDTE.CodeEnum
     {
         internal static EnvDTE.CodeEnum Create(
             CodeModelState state,

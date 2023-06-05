@@ -15,7 +15,7 @@ using System.Diagnostics;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeProcessHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeProcessHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         // On Windows, SafeProcessHandle represents the actual OS handle for the process.
         // On Unix, there's no such concept.  Instead, the implementation manufactures

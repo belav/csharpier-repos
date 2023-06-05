@@ -9,7 +9,7 @@ using Mono.Options;
 
 namespace Sample
 {
-    public partial class Test
+    partial public class Test
     {
         static string tasksArg;
 

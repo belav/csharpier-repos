@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class PropertyDeclarationSyntax
+    partial public class PropertyDeclarationSyntax
     {
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("This member is obsolete.", true)]
@@ -25,8 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         }
     }
 
+    partial
     // backwards compatibility for API extension
-    public sealed partial class AccessorDeclarationSyntax : CSharpSyntaxNode
+    public sealed class AccessorDeclarationSyntax : CSharpSyntaxNode
     {
         public AccessorDeclarationSyntax Update(
             SyntaxList<AttributeListSyntax> attributeLists,
@@ -40,7 +41,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         /// <summary>Creates a new AccessorDeclarationSyntax instance.</summary>
         public static AccessorDeclarationSyntax AccessorDeclaration(

@@ -16,10 +16,11 @@ using System.Runtime.Versioning;
 
 namespace System.Runtime.CompilerServices
 {
+    partial
     /// <summary>
     /// Contains generic, low-level functionality for manipulating pointers.
     /// </summary>
-    public static unsafe partial class Unsafe
+    public static unsafe class Unsafe
     {
         /// <summary>
         /// Returns a pointer to the given by-ref parameter.

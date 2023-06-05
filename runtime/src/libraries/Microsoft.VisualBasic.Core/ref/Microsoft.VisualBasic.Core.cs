@@ -26,7 +26,7 @@ namespace Microsoft.VisualBasic
         Set = 8,
     }
 
-    public sealed partial class Collection
+    partial public sealed class Collection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -138,7 +138,7 @@ namespace Microsoft.VisualBasic
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class ComClassAttribute : System.Attribute
+    partial public sealed class ComClassAttribute : System.Attribute
     {
         public ComClassAttribute() { }
 
@@ -174,7 +174,7 @@ namespace Microsoft.VisualBasic
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
-    public sealed partial class Constants
+    partial public sealed class Constants
     {
         internal Constants() { }
 
@@ -541,7 +541,7 @@ namespace Microsoft.VisualBasic
             .YesNoCancel;
     }
 
-    public sealed partial class ControlChars
+    partial public sealed class ControlChars
     {
         public const char Back = '\b';
         public const char Cr = '\r';
@@ -558,7 +558,7 @@ namespace Microsoft.VisualBasic
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
-    public sealed partial class Conversion
+    partial public sealed class Conversion
     {
         internal Conversion() { }
 
@@ -788,7 +788,7 @@ namespace Microsoft.VisualBasic
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
-    public sealed partial class DateAndTime
+    partial public sealed class DateAndTime
     {
         internal DateAndTime() { }
 
@@ -993,7 +993,7 @@ namespace Microsoft.VisualBasic
         BegOfPeriod = 1,
     }
 
-    public sealed partial class ErrObject
+    partial public sealed class ErrObject
     {
         internal ErrObject() { }
 
@@ -1060,7 +1060,7 @@ namespace Microsoft.VisualBasic
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
-    public sealed partial class FileSystem
+    partial public sealed class FileSystem
     {
         internal FileSystem() { }
 
@@ -1412,7 +1412,7 @@ namespace Microsoft.VisualBasic
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
-    public sealed partial class Financial
+    partial public sealed class Financial
     {
         internal Financial() { }
 
@@ -1561,13 +1561,13 @@ namespace Microsoft.VisualBasic
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class HideModuleNameAttribute : System.Attribute
+    partial public sealed class HideModuleNameAttribute : System.Attribute
     {
         public HideModuleNameAttribute() { }
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
-    public sealed partial class Information
+    partial public sealed class Information
     {
         internal Information() { }
 
@@ -1658,7 +1658,7 @@ namespace Microsoft.VisualBasic
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
-    public sealed partial class Interaction
+    partial public sealed class Interaction
     {
         internal Interaction() { }
 
@@ -1841,7 +1841,7 @@ namespace Microsoft.VisualBasic
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Advanced
     )]
-    public sealed partial class MyGroupCollectionAttribute : System.Attribute
+    partial public sealed class MyGroupCollectionAttribute : System.Attribute
     {
         public MyGroupCollectionAttribute(
             string typeToCollect,
@@ -1897,13 +1897,13 @@ namespace Microsoft.VisualBasic
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial struct SpcInfo
+    partial public struct SpcInfo
     {
         public short Count;
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
-    public sealed partial class Strings
+    partial public sealed class Strings
     {
         internal Strings() { }
 
@@ -2293,7 +2293,7 @@ namespace Microsoft.VisualBasic
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial struct TabInfo
+    partial public struct TabInfo
     {
         public short Column;
     }
@@ -2334,7 +2334,7 @@ namespace Microsoft.VisualBasic
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class VBFixedArrayAttribute : System.Attribute
+    partial public sealed class VBFixedArrayAttribute : System.Attribute
     {
         public VBFixedArrayAttribute(int UpperBound1) { }
 
@@ -2355,7 +2355,7 @@ namespace Microsoft.VisualBasic
         Inherited = false,
         AllowMultiple = false
     )]
-    public sealed partial class VBFixedStringAttribute : System.Attribute
+    partial public sealed class VBFixedStringAttribute : System.Attribute
     {
         public VBFixedStringAttribute(int Length) { }
 
@@ -2366,7 +2366,7 @@ namespace Microsoft.VisualBasic
     }
 
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
-    public sealed partial class VBMath
+    partial public sealed class VBMath
     {
         internal VBMath() { }
 
@@ -2407,7 +2407,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class BooleanType
+    partial public sealed class BooleanType
     {
         internal BooleanType() { }
 
@@ -2425,7 +2425,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class ByteType
+    partial public sealed class ByteType
     {
         internal ByteType() { }
 
@@ -2443,7 +2443,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class CharArrayType
+    partial public sealed class CharArrayType
     {
         internal CharArrayType() { }
 
@@ -2461,7 +2461,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class CharType
+    partial public sealed class CharType
     {
         internal CharType() { }
 
@@ -2479,7 +2479,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class Conversions
+    partial public sealed class Conversions
     {
         internal Conversions() { }
 
@@ -2802,7 +2802,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class DateType
+    partial public sealed class DateType
     {
         internal DateType() { }
 
@@ -2828,7 +2828,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class DecimalType
+    partial public sealed class DecimalType
     {
         internal DecimalType() { }
 
@@ -2880,7 +2880,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class DesignerGeneratedAttribute : System.Attribute
+    partial public sealed class DesignerGeneratedAttribute : System.Attribute
     {
         public DesignerGeneratedAttribute() { }
     }
@@ -2888,7 +2888,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class DoubleType
+    partial public sealed class DoubleType
     {
         internal DoubleType() { }
 
@@ -2935,7 +2935,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class IncompleteInitialization : System.Exception
+    partial public sealed class IncompleteInitialization : System.Exception
     {
         public IncompleteInitialization() { }
     }
@@ -2943,7 +2943,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class IntegerType
+    partial public sealed class IntegerType
     {
         internal IntegerType() { }
 
@@ -2961,7 +2961,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class LateBinding
+    partial public sealed class LateBinding
     {
         internal LateBinding() { }
 
@@ -3070,7 +3070,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class LikeOperator
+    partial public sealed class LikeOperator
     {
         internal LikeOperator() { }
 
@@ -3099,7 +3099,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class LongType
+    partial public sealed class LongType
     {
         internal LongType() { }
 
@@ -3117,7 +3117,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class NewLateBinding
+    partial public sealed class NewLateBinding
     {
         internal NewLateBinding() { }
 
@@ -3399,7 +3399,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class ObjectFlowControl
+    partial public sealed class ObjectFlowControl
     {
         internal ObjectFlowControl() { }
 
@@ -3408,7 +3408,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public sealed partial class ForLoopControl
+        partial public sealed class ForLoopControl
         {
             internal ForLoopControl() { }
 
@@ -3459,7 +3459,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class ObjectType
+    partial public sealed class ObjectType
     {
         public ObjectType() { }
 
@@ -3571,7 +3571,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class Operators
+    partial public sealed class Operators
     {
         internal Operators() { }
 
@@ -3853,7 +3853,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class OptionCompareAttribute : System.Attribute
+    partial public sealed class OptionCompareAttribute : System.Attribute
     {
         public OptionCompareAttribute() { }
     }
@@ -3866,7 +3866,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class OptionTextAttribute : System.Attribute
+    partial public sealed class OptionTextAttribute : System.Attribute
     {
         public OptionTextAttribute() { }
     }
@@ -3874,7 +3874,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class ProjectData
+    partial public sealed class ProjectData
     {
         internal ProjectData() { }
 
@@ -3895,7 +3895,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class ShortType
+    partial public sealed class ShortType
     {
         internal ShortType() { }
 
@@ -3913,7 +3913,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class SingleType
+    partial public sealed class SingleType
     {
         internal SingleType() { }
 
@@ -3952,7 +3952,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class StandardModuleAttribute : System.Attribute
+    partial public sealed class StandardModuleAttribute : System.Attribute
     {
         public StandardModuleAttribute() { }
     }
@@ -3960,7 +3960,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class StaticLocalInitFlag
+    partial public sealed class StaticLocalInitFlag
     {
         public short State;
 
@@ -3970,7 +3970,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class StringType
+    partial public sealed class StringType
     {
         internal StringType() { }
 
@@ -4089,7 +4089,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class Utils
+    partial public sealed class Utils
     {
         internal Utils() { }
 
@@ -4107,7 +4107,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class Versioned
+    partial public sealed class Versioned
     {
         internal Versioned() { }
 
@@ -4160,7 +4160,7 @@ namespace Microsoft.VisualBasic.FileIO
         FixedWidth = 1,
     }
 
-    public partial class FileSystem
+    partial public class FileSystem
     {
         public FileSystem() { }
 
@@ -4476,7 +4476,7 @@ namespace Microsoft.VisualBasic.FileIO
         ) { }
     }
 
-    public partial class MalformedLineException : System.Exception
+    partial public class MalformedLineException : System.Exception
     {
         public MalformedLineException() { }
 
@@ -4535,7 +4535,7 @@ namespace Microsoft.VisualBasic.FileIO
         SearchAllSubDirectories = 3,
     }
 
-    public partial class SpecialDirectories
+    partial public class SpecialDirectories
     {
         public SpecialDirectories() { }
 
@@ -4577,7 +4577,7 @@ namespace Microsoft.VisualBasic.FileIO
         }
     }
 
-    public partial class TextFieldParser : System.IDisposable
+    partial public class TextFieldParser : System.IDisposable
     {
         public TextFieldParser(System.IO.Stream stream) { }
 

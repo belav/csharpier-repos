@@ -1,21 +1,21 @@
 using System;
 
-static partial class C
+partial static class C
 {
-    static partial void Foo_1(this string s);
+    partial static void Foo_1(this string s);
 
     [Obsolete]
-    static partial void Foo_2(string s);
+    partial static void Foo_2(string s);
 
     public static void Main() { }
 }
 
 partial class D
 {
-    static partial void Method(this int a);
+    partial static void Method(this int a);
 }
 
-static partial class D
+partial static class D
 {
-    static partial void Method(this int a) { }
+    partial static void Method(this int a) { }
 }

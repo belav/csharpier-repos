@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     // https://msdn.microsoft.com/en-us/library/windows/desktop/aa380518.aspx
     // https://msdn.microsoft.com/en-us/library/windows/hardware/ff564879.aspx

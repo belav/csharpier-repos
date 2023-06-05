@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCMoveToFirstAttribute : TCXMLReaderBaseGeneral
+    partial public class TCMoveToFirstAttribute : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCMoveToFirstAttribute
         // Test Case

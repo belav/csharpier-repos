@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.Text.Json
 {
-    internal sealed partial class JsonPropertyDictionary<T>
+    partial internal sealed class JsonPropertyDictionary<T>
     {
         private ValueCollection? _valueCollection;
 

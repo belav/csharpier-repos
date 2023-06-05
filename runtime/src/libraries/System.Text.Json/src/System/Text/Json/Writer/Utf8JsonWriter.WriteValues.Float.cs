@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace System.Text.Json
 {
-    public sealed partial class Utf8JsonWriter
+    partial public sealed class Utf8JsonWriter
     {
         /// <summary>
         /// Writes the <see cref="float"/> value (as a JSON number) as an element of a JSON array.

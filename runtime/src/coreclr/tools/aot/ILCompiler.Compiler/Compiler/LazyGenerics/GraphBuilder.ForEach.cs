@@ -9,9 +9,9 @@ using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler
 {
-    internal static partial class LazyGenericsSupport
+    partial internal static class LazyGenericsSupport
     {
-        private sealed partial class GraphBuilder
+        partial private sealed class GraphBuilder
         {
             /// <summary>
             /// Walk through the type expression and find any embedded generic parameter references. For each one found,

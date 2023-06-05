@@ -6,7 +6,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class CounterCreationData
+    partial public class CounterCreationData
     {
         public CounterCreationData() { }
 
@@ -33,7 +33,7 @@ namespace System.Diagnostics
         }
     }
 
-    public partial class CounterCreationDataCollection : System.Collections.CollectionBase
+    partial public class CounterCreationDataCollection : System.Collections.CollectionBase
     {
         public CounterCreationDataCollection() { }
 
@@ -76,7 +76,7 @@ namespace System.Diagnostics
         public virtual void Remove(System.Diagnostics.CounterCreationData value) { }
     }
 
-    public readonly partial struct CounterSample
+    partial public readonly struct CounterSample
     {
         private readonly int _dummyPrimitive;
         public static System.Diagnostics.CounterSample Empty;
@@ -186,7 +186,7 @@ namespace System.Diagnostics
         }
     }
 
-    public static partial class CounterSampleCalculator
+    partial public static class CounterSampleCalculator
     {
         public static float ComputeCounterValue(System.Diagnostics.CounterSample newSample)
         {
@@ -205,7 +205,7 @@ namespace System.Diagnostics
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface ICollectData
+    partial public interface ICollectData
     {
         void CloseData();
         void CollectData(
@@ -217,7 +217,7 @@ namespace System.Diagnostics
         );
     }
 
-    public partial class InstanceData
+    partial public class InstanceData
     {
         public InstanceData(string instanceName, System.Diagnostics.CounterSample sample) { }
 
@@ -235,7 +235,7 @@ namespace System.Diagnostics
         }
     }
 
-    public partial class InstanceDataCollection : System.Collections.DictionaryBase
+    partial public class InstanceDataCollection : System.Collections.DictionaryBase
     {
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use System.Diagnostics.InstanceDataCollectionCollection.get_Item to get an instance of this collection instead."
@@ -267,7 +267,7 @@ namespace System.Diagnostics
         public void CopyTo(System.Diagnostics.InstanceData[] instances, int index) { }
     }
 
-    public partial class InstanceDataCollectionCollection : System.Collections.DictionaryBase
+    partial public class InstanceDataCollectionCollection : System.Collections.DictionaryBase
     {
         [System.ObsoleteAttribute(
             "This constructor has been deprecated. Use System.Diagnostics.PerformanceCounterCategory.ReadCategory() to get an instance of this collection instead."
@@ -295,7 +295,7 @@ namespace System.Diagnostics
         public void CopyTo(System.Diagnostics.InstanceDataCollection[] counters, int index) { }
     }
 
-    public sealed partial class PerformanceCounter
+    partial public sealed class PerformanceCounter
         : System.ComponentModel.Component,
             System.ComponentModel.ISupportInitialize
     {
@@ -408,7 +408,7 @@ namespace System.Diagnostics
         public void RemoveInstance() { }
     }
 
-    public sealed partial class PerformanceCounterCategory
+    partial public sealed class PerformanceCounterCategory
     {
         public PerformanceCounterCategory() { }
 
@@ -577,7 +577,7 @@ namespace System.Diagnostics
         Process = 1,
     }
 
-    public sealed partial class PerformanceCounterManager : System.Diagnostics.ICollectData
+    partial public sealed class PerformanceCounterManager : System.Diagnostics.ICollectData
     {
         [System.ObsoleteAttribute(
             "PerformanceCounterManager has been deprecated. Use the PerformanceCounters through the System.Diagnostics.PerformanceCounter class instead."
@@ -639,7 +639,7 @@ namespace System.Diagnostics
 
 namespace System.Diagnostics.PerformanceData
 {
-    public sealed partial class CounterData
+    partial public sealed class CounterData
     {
         internal CounterData() { }
 
@@ -661,7 +661,7 @@ namespace System.Diagnostics.PerformanceData
         public void IncrementBy(long value) { }
     }
 
-    public partial class CounterSet : System.IDisposable
+    partial public class CounterSet : System.IDisposable
     {
         public CounterSet(
             System.Guid providerGuid,
@@ -694,7 +694,7 @@ namespace System.Diagnostics.PerformanceData
         ~CounterSet() { }
     }
 
-    public sealed partial class CounterSetInstance : System.IDisposable
+    partial public sealed class CounterSetInstance : System.IDisposable
     {
         internal CounterSetInstance() { }
 
@@ -708,7 +708,7 @@ namespace System.Diagnostics.PerformanceData
         ~CounterSetInstance() { }
     }
 
-    public sealed partial class CounterSetInstanceCounterDataSet : System.IDisposable
+    partial public sealed class CounterSetInstanceCounterDataSet : System.IDisposable
     {
         internal CounterSetInstanceCounterDataSet() { }
 

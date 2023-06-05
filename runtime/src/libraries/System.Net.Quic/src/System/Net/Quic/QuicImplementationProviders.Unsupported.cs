@@ -5,7 +5,7 @@ using System.Net.Quic.Implementations;
 
 namespace System.Net.Quic
 {
-    public static partial class QuicImplementationProviders
+    partial public static class QuicImplementationProviders
     {
         public static Implementations.QuicImplementationProvider Mock => Default;
         public static Implementations.QuicImplementationProvider MsQuic => Default;
@@ -24,7 +24,7 @@ namespace System.Net.Quic
 
 namespace System.Net.Quic.Implementations
 {
-    public abstract partial class QuicImplementationProvider
+    partial public abstract class QuicImplementationProvider
     {
         // alternative constructor because currently it is not possible to exlude ctors from
         // PNSE autogeneration (https://github.com/dotnet/arcade/issues/8676)

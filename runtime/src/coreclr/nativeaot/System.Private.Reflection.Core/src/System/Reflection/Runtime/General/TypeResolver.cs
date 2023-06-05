@@ -17,7 +17,7 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.General
 {
-    internal static partial class TypeResolver
+    partial internal static class TypeResolver
     {
         //
         // Main routine to resolve a typeDef/Ref/Spec.

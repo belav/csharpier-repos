@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TSource?> DefaultIfEmpty<TSource>(
             this IEnumerable<TSource> source
@@ -25,7 +25,7 @@ namespace System.Linq
             return new DefaultIfEmptyIterator<TSource>(source, defaultValue);
         }
 
-        private sealed partial class DefaultIfEmptyIterator<TSource> : Iterator<TSource>
+        partial private sealed class DefaultIfEmptyIterator<TSource> : Iterator<TSource>
         {
             private readonly IEnumerable<TSource> _source;
             private readonly TSource _default;

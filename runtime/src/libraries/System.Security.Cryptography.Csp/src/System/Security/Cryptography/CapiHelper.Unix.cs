@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace Internal.NativeCrypto
 {
-    internal static partial class CapiHelper
+    partial internal static class CapiHelper
     {
         public static CryptographicException GetBadDataException()
         {

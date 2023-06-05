@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundPattern
+    partial internal class BoundPattern
     {
         /// <summary>
         /// Sets <paramref name="innerPattern"/> to the inner pattern after stripping off outer

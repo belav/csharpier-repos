@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Reflection
 {
-    internal sealed partial class RuntimeMethodBody : MethodBody
+    partial internal sealed class RuntimeMethodBody : MethodBody
     {
         private byte[] _IL;
         private ExceptionHandlingClause[] _exceptionHandlingClauses;

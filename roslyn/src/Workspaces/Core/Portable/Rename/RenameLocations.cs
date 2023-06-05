@@ -20,11 +20,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
+    partial
     /// <summary>
     /// Holds the Locations of a symbol that should be renamed, along with the symbol and Solution
     /// for the set.
     /// </summary>
-    internal sealed partial class RenameLocations
+    internal sealed class RenameLocations
     {
         public readonly Solution Solution;
         public readonly ISymbol Symbol;

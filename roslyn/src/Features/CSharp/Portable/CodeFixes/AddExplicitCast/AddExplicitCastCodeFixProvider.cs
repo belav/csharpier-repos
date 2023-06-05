@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
         ),
         Shared
     ]
-    internal sealed partial class CSharpAddExplicitCastCodeFixProvider
+    partial internal sealed class CSharpAddExplicitCastCodeFixProvider
         : AbstractAddExplicitCastCodeFixProvider<ExpressionSyntax>
     {
         /// <summary>

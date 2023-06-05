@@ -12,7 +12,7 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-internal sealed partial class CircuitFactory : ICircuitFactory
+partial internal sealed class CircuitFactory : ICircuitFactory
 {
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ILoggerFactory _loggerFactory;
@@ -106,7 +106,7 @@ internal sealed partial class CircuitFactory : ICircuitFactory
         return circuitHost;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -114,7 +114,7 @@ internal sealed partial class CircuitFactory : ICircuitFactory
             "Created circuit {CircuitId} for connection {ConnectionId}",
             EventName = "CreatedCircuit"
         )]
-        private static partial void CreatedCircuit(
+        partial private static void CreatedCircuit(
             ILogger logger,
             string circuitId,
             string connectionId

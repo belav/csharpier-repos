@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 {
-    public partial class ImplementAbstractClassTests
+    partial public class ImplementAbstractClassTests
     {
         #region "Fix all occurrences tests"
 

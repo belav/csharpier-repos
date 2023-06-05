@@ -662,11 +662,11 @@ namespace System.ServiceModel.Security
             }
         }
 
-        internal protected virtual void OnWriteCustomAttributes(XmlWriter writer) { }
+        protected internal virtual void OnWriteCustomAttributes(XmlWriter writer) { }
 
-        internal protected virtual void OnWriteCustomElements(XmlWriter writer) { }
+        protected internal virtual void OnWriteCustomElements(XmlWriter writer) { }
 
-        internal protected virtual void OnMakeReadOnly() { }
+        protected internal virtual void OnMakeReadOnly() { }
 
         protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
         {

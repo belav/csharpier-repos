@@ -81,7 +81,7 @@ namespace System.Web.UI
     )]
     [Bindable(true)]
     [Themeable(false)]
-    public partial class Control
+    partial public class Control
         : IComponent,
             IDisposable,
             IParserAccessor,

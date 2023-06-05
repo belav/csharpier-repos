@@ -13,7 +13,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
-    public partial class AddFileBannerTests : AbstractCSharpCodeActionTest
+    partial public class AddFileBannerTests : AbstractCSharpCodeActionTest
     {
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,

@@ -36,7 +36,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Strategies
 {
-    internal sealed partial class Net5CompatFileStreamStrategy : FileStreamStrategy
+    partial internal sealed class Net5CompatFileStreamStrategy : FileStreamStrategy
     {
         private bool _canSeek;
         private bool _isPipe; // Whether to disable async buffering code.
@@ -161,7 +161,7 @@ namespace System.IO.Strategies
 
         public override bool CanSeek => _canSeek;
 
-        public unsafe override long Length
+        public override unsafe long Length
         {
             get
             {

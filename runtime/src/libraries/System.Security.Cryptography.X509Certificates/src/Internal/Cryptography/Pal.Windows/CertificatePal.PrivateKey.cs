@@ -12,7 +12,7 @@ using Internal.Cryptography.Pal.Native;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class CertificatePal : IDisposable, ICertificatePal
+    partial internal sealed class CertificatePal : IDisposable, ICertificatePal
     {
         public bool HasPrivateKey
         {

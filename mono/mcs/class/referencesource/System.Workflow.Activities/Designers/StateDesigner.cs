@@ -29,7 +29,7 @@ namespace System.Workflow.Activities
     [DesignerSerializer(typeof(StateDesignerLayoutSerializer), typeof(WorkflowMarkupSerializer))]
     [ActivityDesignerTheme(typeof(StateDesignerTheme))]
     [System.Runtime.InteropServices.ComVisible(false)]
-    internal partial class StateDesigner : FreeformActivityDesigner
+    partial internal class StateDesigner : FreeformActivityDesigner
     {
         #region Fields
 

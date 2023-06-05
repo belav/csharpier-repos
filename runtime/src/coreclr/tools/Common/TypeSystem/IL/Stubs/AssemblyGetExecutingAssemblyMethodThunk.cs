@@ -5,12 +5,13 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Thunk that replaces calls to Assembly.GetExecutingAssembly in user code. The purpose of the thunk
     /// is to load something that will let us identify the current assembly and call a class library
     /// helper that will let us get the Assembly.
     /// </summary>
-    internal sealed partial class AssemblyGetExecutingAssemblyMethodThunk : ILStubMethod
+    internal sealed class AssemblyGetExecutingAssemblyMethodThunk : ILStubMethod
     {
         public AssemblyGetExecutingAssemblyMethodThunk(
             TypeDesc owningType,

@@ -5,17 +5,18 @@ using System.Diagnostics;
 
 namespace System.IO.Enumeration
 {
+    ref partial
     /// <summary>
     /// Lower level view of FileSystemInfo used for processing and filtering find results.
     /// </summary>
-    public unsafe ref partial struct FileSystemEntry
+    public unsafe struct FileSystemEntry
     {
         internal Interop.Sys.DirectoryEntry _directoryEntry;
         private FileStatus _status;
         private Span<char> _pathBuffer;
         private ReadOnlySpan<char> _fullPath;
         private ReadOnlySpan<char> _fileName;
-        private fixed char _fileNameBuffer[Interop.Sys.DirectoryEntry.NameBufferSize];
+        fixed private char _fileNameBuffer[Interop.Sys.DirectoryEntry.NameBufferSize];
         private FileAttributes _initialAttributes;
 
         internal static FileAttributes Initialize(

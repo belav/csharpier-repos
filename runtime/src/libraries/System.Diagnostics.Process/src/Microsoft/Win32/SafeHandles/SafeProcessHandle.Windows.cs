@@ -16,7 +16,7 @@ using System.Security;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeProcessHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public sealed class SafeProcessHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         protected override bool ReleaseHandle()
         {

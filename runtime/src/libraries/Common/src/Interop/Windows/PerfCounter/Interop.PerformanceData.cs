@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class PerfCounter
+    partial internal static class PerfCounter
     {
         [LibraryImport(Libraries.Advapi32)]
-        internal static partial uint PerfStopProvider(IntPtr hProvider);
+        partial internal static uint PerfStopProvider(IntPtr hProvider);
 
         internal unsafe delegate uint PERFLIBREQUEST(
             uint RequestCode,
@@ -52,7 +52,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Advapi32)]
-        internal static partial uint PerfStartProvider(
+        partial internal static uint PerfStartProvider(
             ref Guid ProviderGuid,
             PERFLIBREQUEST ControlCallback,
             out SafePerfProviderHandle phProvider
@@ -63,7 +63,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial PerfCounterSetInstanceStruct* PerfCreateInstance(
+        partial internal static unsafe PerfCounterSetInstanceStruct* PerfCreateInstance(
             SafePerfProviderHandle hProvider,
             ref Guid CounterSetGuid,
             string szInstanceName,
@@ -71,20 +71,20 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.Advapi32)]
-        internal static unsafe partial uint PerfSetCounterSetInfo(
+        partial internal static unsafe uint PerfSetCounterSetInfo(
             SafePerfProviderHandle hProvider,
             PerfCounterSetInfoStruct* pTemplate,
             uint dwTemplateSize
         );
 
         [LibraryImport(Libraries.Advapi32)]
-        internal static unsafe partial uint PerfDeleteInstance(
+        partial internal static unsafe uint PerfDeleteInstance(
             SafePerfProviderHandle hProvider,
             PerfCounterSetInstanceStruct* InstanceBlock
         );
 
         [LibraryImport(Libraries.Advapi32)]
-        internal static unsafe partial uint PerfSetCounterRefValue(
+        partial internal static unsafe uint PerfSetCounterRefValue(
             SafePerfProviderHandle hProvider,
             PerfCounterSetInstanceStruct* pInstance,
             uint CounterId,

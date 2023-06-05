@@ -7,10 +7,11 @@ using System.Globalization;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base class for all PropertyInfo objects created by a MetadataLoadContext.
     /// </summary>
-    internal abstract partial class RoProperty : LeveledPropertyInfo
+    internal abstract class RoProperty : LeveledPropertyInfo
     {
         private readonly RoInstantiationProviderType _declaringType;
         private readonly Type _reflectedType;

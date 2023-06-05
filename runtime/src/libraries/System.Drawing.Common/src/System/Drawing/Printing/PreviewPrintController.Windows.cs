@@ -9,10 +9,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Printing
 {
+    partial
     /// <summary>
     /// A PrintController which "prints" to a series of images.
     /// </summary>
-    public partial class PreviewPrintController : PrintController
+    public class PreviewPrintController : PrintController
     {
         private Graphics? _graphics;
         private DeviceContext? _dc;

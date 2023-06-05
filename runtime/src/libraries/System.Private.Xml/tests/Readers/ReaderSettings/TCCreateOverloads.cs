@@ -6,7 +6,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.ReaderSettingsTests
 {
-    public partial class TCCreateOverloads : TCXMLReaderBaseGeneral
+    partial public class TCCreateOverloads : TCXMLReaderBaseGeneral
     {
         // Type is System.Xml.Tests.TCCreateOverloads
         // Test Case

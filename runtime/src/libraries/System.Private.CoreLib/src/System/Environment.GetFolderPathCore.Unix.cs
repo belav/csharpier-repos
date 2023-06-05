@@ -15,7 +15,7 @@ using NSSearchPathDirectory = Interop.Sys.NSSearchPathDirectory;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         private static string GetFolderPathCore(SpecialFolder folder, SpecialFolderOption option)
         {

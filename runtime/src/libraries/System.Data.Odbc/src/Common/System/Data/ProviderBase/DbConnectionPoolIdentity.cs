@@ -3,7 +3,7 @@
 
 namespace System.Data.ProviderBase
 {
-    internal sealed partial class DbConnectionPoolIdentity
+    partial internal sealed class DbConnectionPoolIdentity
     {
         public static readonly DbConnectionPoolIdentity NoIdentity = new DbConnectionPoolIdentity(
             string.Empty,

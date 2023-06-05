@@ -11,7 +11,7 @@ using System.Runtime.Versioning;
 
 namespace System.IO
 {
-    public static partial class Directory
+    partial public static class Directory
     {
         public static DirectoryInfo? GetParent(string path)
         {

@@ -11,11 +11,12 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Represents a pointer type such as "int *". Pointer types
     /// are used only in unsafe code.
     /// </summary>
-    internal sealed partial class PointerTypeSymbol : TypeSymbol
+    internal sealed class PointerTypeSymbol : TypeSymbol
     {
         private readonly TypeWithAnnotations _pointedAtType;
 

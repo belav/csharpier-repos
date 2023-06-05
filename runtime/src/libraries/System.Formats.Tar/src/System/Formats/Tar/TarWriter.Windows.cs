@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace System.Formats.Tar
 {
+    partial
     // Windows specific methods for the TarWriter class.
-    public sealed partial class TarWriter : IDisposable
+    public sealed class TarWriter : IDisposable
     {
         // Windows files don't have a mode. Use a mode of 755 for directories and files.
         private const UnixFileMode DefaultWindowsMode =

@@ -3,12 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NtDll
+    partial internal static class NtDll
     {
         [LibraryImport(Libraries.NtDll)]
-        internal static unsafe partial uint NtQuerySystemInformation(
+        partial internal static unsafe uint NtQuerySystemInformation(
             int SystemInformationClass,
             void* SystemInformation,
             uint SystemInformationLength,

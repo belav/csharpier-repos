@@ -3,7 +3,7 @@
 
 namespace System.Text.Json.Node
 {
-    public partial class JsonNode
+    partial public class JsonNode
     {
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="bool"/> to a <see cref="JsonNode"/>.

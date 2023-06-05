@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net.Security
 {
-    internal static partial class CertificateHelper
+    partial internal static class CertificateHelper
     {
         private const string ClientAuthenticationOID = "1.3.6.1.5.5.7.3.2";
 

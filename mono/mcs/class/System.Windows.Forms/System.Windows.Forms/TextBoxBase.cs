@@ -81,8 +81,8 @@ namespace System.Windows.Forms
         internal bool show_caret_w_selection; // TextBox shows the caret when the selection is visible
         internal int canvas_width;
         internal int canvas_height;
-        static internal int track_width = 2; //
-        static internal int track_border = 5; //
+        internal static int track_width = 2; //
+        internal static int track_border = 5; //
         internal DateTime click_last;
         internal int click_point_x;
         internal int click_point_y;

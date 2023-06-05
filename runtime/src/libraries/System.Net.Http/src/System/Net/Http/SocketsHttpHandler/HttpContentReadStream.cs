@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal sealed partial class HttpConnection
+    partial internal sealed class HttpConnection
     {
         internal abstract class HttpContentReadStream : HttpContentStream
         {

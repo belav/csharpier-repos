@@ -7,27 +7,27 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_OcspRequestDestroy")]
-        internal static partial void OcspRequestDestroy(IntPtr ocspReq);
+        partial internal static void OcspRequestDestroy(IntPtr ocspReq);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetOcspRequestDerSize")]
-        internal static partial int GetOcspRequestDerSize(SafeOcspRequestHandle req);
+        partial internal static int GetOcspRequestDerSize(SafeOcspRequestHandle req);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EncodeOcspRequest")]
-        internal static partial int EncodeOcspRequest(SafeOcspRequestHandle req, byte[] buf);
+        partial internal static int EncodeOcspRequest(SafeOcspRequestHandle req, byte[] buf);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509BuildOcspRequest")]
-        internal static partial SafeOcspRequestHandle X509BuildOcspRequest(
+        partial internal static SafeOcspRequestHandle X509BuildOcspRequest(
             IntPtr subject,
             IntPtr issuer
         );
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static unsafe partial int CryptoNative_X509DecodeOcspToExpiration(
+        partial private static unsafe int CryptoNative_X509DecodeOcspToExpiration(
             byte* buf,
             int len,
             SafeOcspRequestHandle req,
@@ -82,7 +82,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial SafeOcspResponseHandle CryptoNative_DecodeOcspResponse(
+        partial private static SafeOcspResponseHandle CryptoNative_DecodeOcspResponse(
             ref byte buf,
             int len
         );
@@ -93,7 +93,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_OcspResponseDestroy")]
-        internal static partial void OcspResponseDestroy(IntPtr ocspReq);
+        partial internal static void OcspResponseDestroy(IntPtr ocspReq);
     }
 }
 

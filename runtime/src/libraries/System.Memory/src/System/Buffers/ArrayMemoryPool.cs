@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Buffers
 {
-    internal sealed partial class ArrayMemoryPool<T> : MemoryPool<T>
+    partial internal sealed class ArrayMemoryPool<T> : MemoryPool<T>
     {
         public sealed override int MaxBufferSize => Array.MaxLength;
 

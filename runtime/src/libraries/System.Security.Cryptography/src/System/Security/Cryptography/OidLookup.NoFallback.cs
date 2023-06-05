@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class OidLookup
+    partial internal static class OidLookup
     {
 #pragma warning disable IDE0060
         private static bool ShouldUseCache(OidGroup oidGroup)
@@ -91,7 +91,9 @@ namespace System.Security.Cryptography
         }
 
 #if DEBUG
-        static partial void ExtraStaticDebugValidation()
+        partial
+#if DEBUG
+        static void ExtraStaticDebugValidation()
         {
             // Validate we hardcoded the right dictionary size
             Debug.Assert(

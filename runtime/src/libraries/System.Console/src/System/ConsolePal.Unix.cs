@@ -12,13 +12,14 @@ using System.Threading;
 
 namespace System
 {
+    partial
     // Provides Unix-based support for System.Console.
     //
     // NOTE: The test class reflects over this class to run the tests due to limitations in
     //       the test infrastructure that prevent OS-specific builds of test binaries. If you
     //       change any of the class / struct / function names, parameters, etc then you need
     //       to also change the test class.
-    internal static partial class ConsolePal
+    internal static class ConsolePal
     {
         // StdInReader is only used when input isn't redirected and we're working
         // with an interactive terminal.  In that case, performance isn't critical

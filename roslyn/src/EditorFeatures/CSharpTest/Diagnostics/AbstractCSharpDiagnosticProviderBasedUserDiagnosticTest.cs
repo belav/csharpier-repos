@@ -13,7 +13,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics
 {
-    public abstract partial class AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    partial public abstract class AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
         : AbstractDiagnosticProviderBasedUserDiagnosticTest
     {
         protected AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest(ITestOutputHelper logger)

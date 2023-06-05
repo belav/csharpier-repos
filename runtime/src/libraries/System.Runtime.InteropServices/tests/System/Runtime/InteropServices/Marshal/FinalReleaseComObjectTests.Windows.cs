@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class FinalReleaseComObjectTests
+    partial public class FinalReleaseComObjectTests
     {
         [ConditionalFact(
             typeof(PlatformDetection),

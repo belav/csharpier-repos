@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public sealed partial class GacMembershipCondition
+    partial public sealed class GacMembershipCondition
         : ISecurityEncodable,
             ISecurityPolicyEncodable,
             IMembershipCondition

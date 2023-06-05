@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class CheckedStatementSyntax
+    partial public class CheckedStatementSyntax
     {
         public CheckedStatementSyntax Update(SyntaxToken keyword, BlockSyntax block) =>
             Update(AttributeLists, keyword, block);
@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static CheckedStatementSyntax CheckedStatement(
             SyntaxKind kind,

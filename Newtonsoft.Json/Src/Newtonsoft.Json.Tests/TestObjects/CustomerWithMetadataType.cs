@@ -35,7 +35,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
 #if !(DNXCORE50 || NET20)
     [MetadataType(typeof(CustomerValidation))]
-    public partial class CustomerWithMetadataType
+    partial public class CustomerWithMetadataType
     {
         public System.Guid UpdatedBy_Id { get; set; }
 

@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.Win32.RegistryTests
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
@@ -15,7 +15,7 @@ namespace Microsoft.Win32.RegistryTests
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial int RegSetValue(
+        partial private static int RegSetValue(
             SafeRegistryHandle handle,
             string value,
             int regType,
@@ -35,7 +35,7 @@ namespace Microsoft.Win32.RegistryTests
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial int RegQueryValueEx(
+        partial private static int RegQueryValueEx(
             SafeRegistryHandle handle,
             string valueName,
             int[] reserved,
@@ -71,6 +71,6 @@ namespace Microsoft.Win32.RegistryTests
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetEnvironmentVariable(string lpName, string lpValue);
+        partial internal static bool SetEnvironmentVariable(string lpName, string lpValue);
     }
 }

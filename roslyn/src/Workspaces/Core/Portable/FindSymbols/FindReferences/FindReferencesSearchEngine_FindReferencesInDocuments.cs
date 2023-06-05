@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal partial class FindReferencesSearchEngine
+    partial internal class FindReferencesSearchEngine
     {
         public async Task FindReferencesInDocumentsAsync(
             ISymbol originalSymbol,

@@ -6,16 +6,17 @@ using System;
 
 namespace Testing
 {
+    partial
     /// <summary>
     /// description for class Test
     /// </summary>
-    public partial class Test
+    public class Test
     {
         /// test
         public Test() { }
     }
 
-    public partial class Test
+    partial public class Test
     {
         /// test 2
         public void Foo() { }

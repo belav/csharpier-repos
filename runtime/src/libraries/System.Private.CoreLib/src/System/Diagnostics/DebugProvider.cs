@@ -8,10 +8,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Diagnostics
 {
+    partial
     /// <summary>
     /// Provides default implementation for Write and Fail methods in Debug class.
     /// </summary>
-    public partial class DebugProvider
+    public class DebugProvider
     {
         [DoesNotReturn]
         public virtual void Fail(string? message, string? detailMessage)

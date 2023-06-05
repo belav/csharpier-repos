@@ -5,12 +5,12 @@ using Microsoft.CodeAnalysis;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct GenericParameterProxy
+    partial internal readonly struct GenericParameterProxy
     {
         public GenericParameterProxy(ITypeParameterSymbol typeParameterSymbol) =>
             TypeParameterSymbol = typeParameterSymbol;
 
-        internal partial bool HasDefaultConstructorConstraint() =>
+        partial internal bool HasDefaultConstructorConstraint() =>
             TypeParameterSymbol.HasConstructorConstraint
             | TypeParameterSymbol.HasValueTypeConstraint
             | TypeParameterSymbol.HasUnmanagedTypeConstraint;

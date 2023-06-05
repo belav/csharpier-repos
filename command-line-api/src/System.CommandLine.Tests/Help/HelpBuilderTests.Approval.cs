@@ -8,7 +8,7 @@ using ApprovalTests.Reporters;
 
 namespace System.CommandLine.Tests.Help
 {
-    public partial class HelpBuilderTests
+    partial public class HelpBuilderTests
     {
         [Fact]
         [UseReporter(typeof(DiffReporter))]

@@ -16,12 +16,13 @@ namespace System.Web.Configuration
     using System.IO;
     using System.Web.Hosting;
 
+    internal
     //
     // Abstracts the difference between Metabase and SitesSection IConfigMapPath.
     //
-    static internal class IISMapPath
+    static class IISMapPath
     {
-        static internal IConfigMapPath GetInstance()
+        internal static IConfigMapPath GetInstance()
         {
             // IIS 7 bits on <= IIS 6.x: use the metabase
             if (ServerConfig.UseMetabase)
@@ -51,7 +52,9 @@ namespace System.Web.Configuration
         }
 
         // A site name might be an id if it is a number.
-        static internal bool IsSiteId(string siteName)
+        internal
+        // A site name might be an id if it is a number.
+        static bool IsSiteId(string siteName)
         {
             if (string.IsNullOrEmpty(siteName))
                 return false;

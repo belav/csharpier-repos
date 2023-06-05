@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveAsyncModifier
         Shared
     ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.MakeMethodSynchronous)]
-    internal partial class CSharpRemoveAsyncModifierCodeFixProvider
+    partial internal class CSharpRemoveAsyncModifierCodeFixProvider
         : AbstractRemoveAsyncModifierCodeFixProvider<ReturnStatementSyntax, ExpressionSyntax>
     {
         private const string CS1998 = nameof(CS1998); // This async method lacks 'await' operators and will run synchronously.

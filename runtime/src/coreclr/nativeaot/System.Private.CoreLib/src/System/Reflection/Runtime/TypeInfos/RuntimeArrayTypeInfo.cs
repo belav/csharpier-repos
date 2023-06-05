@@ -14,10 +14,11 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
+    partial
     //
     // The runtime's implementation of TypeInfo's for array types.
     //
-    internal sealed partial class RuntimeArrayTypeInfo : RuntimeHasElementTypeInfo
+    internal sealed class RuntimeArrayTypeInfo : RuntimeHasElementTypeInfo
     {
         private RuntimeArrayTypeInfo(UnificationKey key, bool multiDim, int rank)
             : base(key)

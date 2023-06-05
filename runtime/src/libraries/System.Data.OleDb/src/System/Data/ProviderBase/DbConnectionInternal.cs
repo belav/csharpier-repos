@@ -9,7 +9,7 @@ using SysTx = System.Transactions;
 
 namespace System.Data.ProviderBase
 {
-    internal abstract partial class DbConnectionInternal
+    partial internal abstract class DbConnectionInternal
     {
         internal void ActivateConnection(SysTx.Transaction? transaction)
         {

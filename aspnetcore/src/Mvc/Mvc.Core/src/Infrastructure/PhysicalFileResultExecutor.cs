@@ -8,10 +8,11 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// A <see cref="IActionResultExecutor{PhysicalFileResult}"/> for <see cref="PhysicalFileResult"/>.
 /// </summary>
-public partial class PhysicalFileResultExecutor
+public class PhysicalFileResultExecutor
     : FileResultExecutorBase,
         IActionResultExecutor<PhysicalFileResult>
 {
@@ -189,7 +190,7 @@ public partial class PhysicalFileResultExecutor
         public DateTimeOffset LastModified { get; set; }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void ExecutingFileResult(
             ILogger logger,
@@ -211,7 +212,7 @@ public partial class PhysicalFileResultExecutor
             EventName = "ExecutingFileResult",
             SkipEnabledCheck = true
         )]
-        private static partial void ExecutingFileResult(
+        partial private static void ExecutingFileResult(
             ILogger logger,
             string fileResultType,
             string fileDownloadPath,
@@ -224,6 +225,6 @@ public partial class PhysicalFileResultExecutor
             "Writing the requested range of bytes to the body...",
             EventName = "WritingRangeToBody"
         )]
-        public static partial void WritingRangeToBody(ILogger logger);
+        partial public static void WritingRangeToBody(ILogger logger);
     }
 }

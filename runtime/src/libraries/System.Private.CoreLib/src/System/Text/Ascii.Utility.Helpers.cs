@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text
 {
-    public static partial class Ascii
+    partial public static class Ascii
     {
         /// <summary>
         /// A mask which selects only the high bit of each byte of the given <see cref="uint"/>.

@@ -6,7 +6,7 @@ using System.Runtime.Versioning;
 
 namespace System.DirectoryServices.Protocols
 {
-    public partial class LdapSessionOptions
+    partial public class LdapSessionOptions
     {
         private static void PALCertFreeCRLContext(IntPtr certPtr) =>
             Interop.Ldap.CertFreeCRLContext(certPtr);

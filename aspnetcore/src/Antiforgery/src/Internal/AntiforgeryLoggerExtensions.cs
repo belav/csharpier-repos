@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-internal static partial class AntiforgeryLoggerExtensions
+partial internal static class AntiforgeryLoggerExtensions
 {
     [LoggerMessage(
         1,
@@ -13,7 +13,7 @@ internal static partial class AntiforgeryLoggerExtensions
         "Antiforgery validation failed with message '{Message}'.",
         EventName = "ValidationFailed"
     )]
-    public static partial void ValidationFailed(this ILogger logger, string message);
+    partial public static void ValidationFailed(this ILogger logger, string message);
 
     [LoggerMessage(
         2,
@@ -21,7 +21,7 @@ internal static partial class AntiforgeryLoggerExtensions
         "Antiforgery successfully validated a request.",
         EventName = "Validated"
     )]
-    public static partial void ValidatedAntiforgeryToken(this ILogger logger);
+    partial public static void ValidatedAntiforgeryToken(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -29,7 +29,7 @@ internal static partial class AntiforgeryLoggerExtensions
         "The required antiforgery cookie '{CookieName}' is not present.",
         EventName = "MissingCookieToken"
     )]
-    public static partial void MissingCookieToken(this ILogger logger, string? cookieName);
+    partial public static void MissingCookieToken(this ILogger logger, string? cookieName);
 
     [LoggerMessage(
         4,
@@ -38,7 +38,7 @@ internal static partial class AntiforgeryLoggerExtensions
             + "or header '{HeaderName}'.",
         EventName = "MissingRequestToken"
     )]
-    public static partial void MissingRequestToken(
+    partial public static void MissingRequestToken(
         this ILogger logger,
         string formFieldName,
         string? headerName
@@ -50,7 +50,7 @@ internal static partial class AntiforgeryLoggerExtensions
         "A new antiforgery cookie token was created.",
         EventName = "NewCookieToken"
     )]
-    public static partial void NewCookieToken(this ILogger logger);
+    partial public static void NewCookieToken(this ILogger logger);
 
     [LoggerMessage(
         6,
@@ -58,7 +58,7 @@ internal static partial class AntiforgeryLoggerExtensions
         "An antiforgery cookie token was reused.",
         EventName = "ReusedCookieToken"
     )]
-    public static partial void ReusedCookieToken(this ILogger logger);
+    partial public static void ReusedCookieToken(this ILogger logger);
 
     [LoggerMessage(
         7,
@@ -66,7 +66,7 @@ internal static partial class AntiforgeryLoggerExtensions
         "An exception was thrown while deserializing the token.",
         EventName = "TokenDeserializeException"
     )]
-    public static partial void TokenDeserializeException(this ILogger logger, Exception exception);
+    partial public static void TokenDeserializeException(this ILogger logger, Exception exception);
 
     [LoggerMessage(
         8,
@@ -76,7 +76,7 @@ internal static partial class AntiforgeryLoggerExtensions
             + "should not be cached.",
         EventName = "ResponseCacheHeadersOverridenToNoCache"
     )]
-    public static partial void ResponseCacheHeadersOverridenToNoCache(this ILogger logger);
+    partial public static void ResponseCacheHeadersOverridenToNoCache(this ILogger logger);
 
     [LoggerMessage(
         9,
@@ -84,5 +84,5 @@ internal static partial class AntiforgeryLoggerExtensions
         "Failed to deserialize antiforgery tokens.",
         EventName = "FailedToDeserialzeTokens"
     )]
-    public static partial void FailedToDeserialzeTokens(this ILogger logger, Exception exception);
+    partial public static void FailedToDeserialzeTokens(this ILogger logger, Exception exception);
 }

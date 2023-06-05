@@ -7,10 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableDictionary{TKey, TValue}.Builder"/> class.
     /// </content>
-    public sealed partial class ImmutableDictionary<TKey, TValue>
+    public sealed class ImmutableDictionary<TKey, TValue>
     {
         /// <summary>
         /// A dictionary that mutates with little or no memory allocations,

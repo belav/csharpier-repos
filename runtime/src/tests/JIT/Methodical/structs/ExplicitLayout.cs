@@ -16,7 +16,7 @@ public class ExplicitLayout
         public const int SIZE = 32;
 
         [FieldOffset(0)]
-        private fixed byte _data[SIZE];
+        fixed private byte _data[SIZE];
 
         [FieldOffset(0), MarshalAs(UnmanagedType.Struct, SizeConst = 16)]
         public Guid Guid1;

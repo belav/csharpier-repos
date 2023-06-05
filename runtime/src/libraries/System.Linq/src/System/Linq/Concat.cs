@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TSource> Concat<TSource>(
             this IEnumerable<TSource> first,
@@ -28,11 +28,12 @@ namespace System.Linq
                 : new Concat2Iterator<TSource>(first, second);
         }
 
+        partial
         /// <summary>
         /// Represents the concatenation of two <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerables.</typeparam>
-        private sealed partial class Concat2Iterator<TSource> : ConcatIterator<TSource>
+        private sealed class Concat2Iterator<TSource> : ConcatIterator<TSource>
         {
             /// <summary>
             /// The first source to concatenate.
@@ -83,6 +84,7 @@ namespace System.Linq
             }
         }
 
+        partial
         /// <summary>
         /// Represents the concatenation of three or more <see cref="IEnumerable{TSource}"/>.
         /// </summary>
@@ -95,7 +97,7 @@ namespace System.Linq
         /// would be to use an array to store all of the enumerables, but this has a much better memory profile and
         /// without much additional run-time cost.
         /// </remarks>
-        private sealed partial class ConcatNIterator<TSource> : ConcatIterator<TSource>
+        private sealed class ConcatNIterator<TSource> : ConcatIterator<TSource>
         {
             /// <summary>
             /// The linked list of previous sources.
@@ -194,11 +196,12 @@ namespace System.Linq
             }
         }
 
+        partial
         /// <summary>
         /// Represents the concatenation of two or more <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerables.</typeparam>
-        private abstract partial class ConcatIterator<TSource> : Iterator<TSource>
+        private abstract class ConcatIterator<TSource> : Iterator<TSource>
         {
             /// <summary>
             /// The enumerator of the current source, if <see cref="MoveNext"/> has been called.

@@ -7,10 +7,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 
+partial
 /// <summary>
 /// Limits the number of concurrent requests allowed in the application.
 /// </summary>
-public partial class ConcurrencyLimiterMiddleware
+public class ConcurrencyLimiterMiddleware
 {
     private readonly IQueuePolicy _queuePolicy;
     private readonly RequestDelegate _next;
@@ -90,7 +91,7 @@ public partial class ConcurrencyLimiterMiddleware
         }
     }
 
-    private static partial class ConcurrencyLimiterLog
+    partial private static class ConcurrencyLimiterLog
     {
         [LoggerMessage(
             1,
@@ -98,7 +99,7 @@ public partial class ConcurrencyLimiterMiddleware
             "MaxConcurrentRequests limit reached, request has been queued. Current active requests: {ActiveRequests}.",
             EventName = "RequestEnqueued"
         )]
-        internal static partial void RequestEnqueued(ILogger logger, int activeRequests);
+        partial internal static void RequestEnqueued(ILogger logger, int activeRequests);
 
         [LoggerMessage(
             2,
@@ -106,7 +107,7 @@ public partial class ConcurrencyLimiterMiddleware
             "Request dequeued. Current active requests: {ActiveRequests}.",
             EventName = "RequestDequeued"
         )]
-        internal static partial void RequestDequeued(ILogger logger, int activeRequests);
+        partial internal static void RequestDequeued(ILogger logger, int activeRequests);
 
         [LoggerMessage(
             3,
@@ -114,7 +115,7 @@ public partial class ConcurrencyLimiterMiddleware
             "Below MaxConcurrentRequests limit, running request immediately. Current active requests: {ActiveRequests}",
             EventName = "RequestRunImmediately"
         )]
-        internal static partial void RequestRunImmediately(ILogger logger, int activeRequests);
+        partial internal static void RequestRunImmediately(ILogger logger, int activeRequests);
 
         [LoggerMessage(
             4,
@@ -122,6 +123,6 @@ public partial class ConcurrencyLimiterMiddleware
             "Currently at the 'RequestQueueLimit', rejecting this request with a '503 server not available' error",
             EventName = "RequestRejectedQueueFull"
         )]
-        internal static partial void RequestRejectedQueueFull(ILogger logger);
+        partial internal static void RequestRejectedQueueFull(ILogger logger);
     }
 }

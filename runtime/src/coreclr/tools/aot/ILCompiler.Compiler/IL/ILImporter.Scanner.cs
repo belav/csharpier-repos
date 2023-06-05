@@ -14,9 +14,10 @@ using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore
 
 namespace Internal.IL
 {
+    partial
     // Implements an IL scanner that scans method bodies to be compiled by the code generation
     // backend before the actual compilation happens to gain insights into the code.
-    internal partial class ILImporter
+    internal class ILImporter
     {
         private readonly MethodIL _methodIL;
         private readonly MethodIL _canonMethodIL;

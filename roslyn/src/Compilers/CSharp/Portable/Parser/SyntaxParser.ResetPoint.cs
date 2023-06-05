@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class SyntaxParser
+    partial internal class SyntaxParser
     {
         protected readonly struct ResetPoint
         {

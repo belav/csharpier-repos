@@ -13,7 +13,7 @@ using TypeAttributes = System.Reflection.TypeAttributes;
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         internal EntityMap<Cts.TypeDesc, MetadataRecord> _types = new EntityMap<
             Cts.TypeDesc,

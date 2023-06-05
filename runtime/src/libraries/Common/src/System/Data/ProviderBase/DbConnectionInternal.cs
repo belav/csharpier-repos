@@ -9,7 +9,7 @@ using System.Transactions;
 
 namespace System.Data.ProviderBase
 {
-    internal abstract partial class DbConnectionInternal
+    partial internal abstract class DbConnectionInternal
     {
         internal static readonly StateChangeEventArgs StateChangeClosed = new StateChangeEventArgs(
             ConnectionState.Open,

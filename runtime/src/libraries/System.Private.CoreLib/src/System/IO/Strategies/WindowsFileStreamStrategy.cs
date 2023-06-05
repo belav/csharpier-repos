@@ -83,7 +83,7 @@ namespace System.IO.Strategies
 
         // When the file is locked for writes we can cache file length in memory
         // and avoid subsequent native calls which are expensive.
-        public unsafe sealed override long Length
+        public sealed override unsafe long Length
         {
             get
             {

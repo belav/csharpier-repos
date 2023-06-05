@@ -7,10 +7,11 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
+    partial
     /// <summary>
     ///     Abstract base class for implementations of elliptic curve Diffie-Hellman to derive from
     /// </summary>
-    public abstract partial class ECDiffieHellman : ECAlgorithm
+    public abstract class ECDiffieHellman : ECAlgorithm
     {
         public override string KeyExchangeAlgorithm
         {
@@ -23,13 +24,13 @@ namespace System.Security.Cryptography
         }
 
         [UnsupportedOSPlatform("browser")]
-        public static new partial ECDiffieHellman Create();
+        partial public static new ECDiffieHellman Create();
 
         [UnsupportedOSPlatform("browser")]
-        public static partial ECDiffieHellman Create(ECCurve curve);
+        partial public static ECDiffieHellman Create(ECCurve curve);
 
         [UnsupportedOSPlatform("browser")]
-        public static partial ECDiffieHellman Create(ECParameters parameters);
+        partial public static ECDiffieHellman Create(ECParameters parameters);
 
         [Obsolete(
             Obsoletions.CryptoStringFactoryMessage,

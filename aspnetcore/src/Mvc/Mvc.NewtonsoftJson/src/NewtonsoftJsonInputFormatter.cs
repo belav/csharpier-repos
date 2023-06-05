@@ -14,12 +14,11 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+partial
 /// <summary>
 /// A <see cref="TextInputFormatter"/> for JSON content.
 /// </summary>
-public partial class NewtonsoftJsonInputFormatter
-    : TextInputFormatter,
-        IInputFormatterExceptionPolicy
+public class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFormatterExceptionPolicy
 {
     private readonly IArrayPool<char> _charPool;
     private readonly ILogger _logger;
@@ -469,7 +468,7 @@ public partial class NewtonsoftJsonInputFormatter
         return exception;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -477,6 +476,6 @@ public partial class NewtonsoftJsonInputFormatter
             "JSON input formatter threw an exception.",
             EventName = "JsonInputException"
         )]
-        public static partial void JsonInputException(ILogger logger, Exception exception);
+        partial public static void JsonInputException(ILogger logger, Exception exception);
     }
 }

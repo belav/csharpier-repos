@@ -24,12 +24,13 @@ namespace System.Net.Sockets
     using System.Diagnostics.Contracts;
     using System.ComponentModel;
 
+    partial
     /// <devdoc>
     /// <para>The <see cref='Sockets.Socket'/> class implements the Berkeley sockets
     ///    interface.</para>
     /// </devdoc>
 
-    public partial class Socket : IDisposable
+    public class Socket : IDisposable
     {
 #if !MONO
         internal const int DefaultCloseTimeout = -1; // don't change for default, otherwise breaking change
@@ -117,7 +118,7 @@ namespace System.Net.Sockets
         private int m_CloseTimeout = Socket.DefaultCloseTimeout;
         private int m_IntCleanedUp; // 0 if not completed >0 otherwise.
         private const int microcnv = 1000000;
-        private readonly static int protocolInformationSize = Marshal.SizeOf(
+        private static readonly int protocolInformationSize = Marshal.SizeOf(
             typeof(UnsafeNclNativeMethods.OSSOCK.WSAPROTOCOL_INFO)
         );
 #endif // !MONO
@@ -12924,7 +12925,9 @@ namespace System.Net.Sockets
         }
 
         // Method to setup an Overlapped object with either m_Buffer or m_AcceptBuffer pinned.
-        unsafe private void SetupOverlappedSingle(bool pinSingleBuffer)
+        private
+        // Method to setup an Overlapped object with either m_Buffer or m_AcceptBuffer pinned.
+        unsafe void SetupOverlappedSingle(bool pinSingleBuffer)
         {
             // Alloc new Overlapped.
             m_Overlapped = new Overlapped();
@@ -12995,7 +12998,9 @@ namespace System.Net.Sockets
         }
 
         // Method to setup an Overlapped object with with multiple buffers pinned.
-        unsafe private void SetupOverlappedMultiple()
+        private
+        // Method to setup an Overlapped object with with multiple buffers pinned.
+        unsafe void SetupOverlappedMultiple()
         {
             ArraySegment<byte>[] tempList = new ArraySegment<byte>[m_BufferList.Count];
             m_BufferList.CopyTo(tempList, 0);
@@ -13046,7 +13051,9 @@ namespace System.Net.Sockets
         }
 
         // Method to setup an Overlapped object for SendPacketsAsync.
-        unsafe private void SetupOverlappedSendPackets()
+        private
+        // Method to setup an Overlapped object for SendPacketsAsync.
+        unsafe void SetupOverlappedSendPackets()
         {
             int index;
 
@@ -13846,7 +13853,7 @@ namespace System.Net.Sockets
             }
         }
 
-        private unsafe static void ThreadPoolFunc()
+        private static unsafe void ThreadPoolFunc()
         {
             try
             {

@@ -3,12 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal partial class Interop
+partial internal class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
         [SuppressGCTransition]
-        internal static partial void SetLastError(int errorCode);
+        partial internal static void SetLastError(int errorCode);
     }
 }

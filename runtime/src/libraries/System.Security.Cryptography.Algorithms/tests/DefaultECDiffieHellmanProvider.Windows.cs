@@ -6,7 +6,7 @@ using Test.Cryptography;
 
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
-    public partial class ECDiffieHellmanProvider : IECDiffieHellmanProvider
+    partial public class ECDiffieHellmanProvider : IECDiffieHellmanProvider
     {
         public bool IsCurveValid(Oid oid)
         {

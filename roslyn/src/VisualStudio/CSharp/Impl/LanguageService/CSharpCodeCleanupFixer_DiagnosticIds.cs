@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 {
-    internal partial class CSharpCodeCleanUpFixer
+    partial internal class CSharpCodeCleanUpFixer
     {
         [Export]
         [FixId(IDEDiagnosticIds.UseImplicitTypeDiagnosticId)]

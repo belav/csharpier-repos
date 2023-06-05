@@ -32,7 +32,7 @@ using Task = System.Threading.Tasks.Task;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     [Export(typeof(VisualStudioDiagnosticListTableCommandHandler))]
-    internal partial class VisualStudioDiagnosticListTableCommandHandler
+    partial internal class VisualStudioDiagnosticListTableCommandHandler
     {
         private readonly VisualStudioWorkspace _workspace;
         private readonly VisualStudioSuppressionFixService _suppressionFixService;

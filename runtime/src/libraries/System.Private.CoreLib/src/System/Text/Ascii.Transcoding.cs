@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text
 {
-    public static partial class Ascii
+    partial public static class Ascii
     {
         /// <summary>
         /// Copies text from a source buffer to a destination buffer, converting

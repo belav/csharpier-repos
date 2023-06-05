@@ -3,13 +3,13 @@
 unsafe struct S
 {
     public short nData;
-    public fixed int Data[1];
+    fixed public int Data[1];
 }
 
 unsafe struct S2
 {
     public uint Header;
-    public fixed byte Data[5];
+    fixed public byte Data[5];
 
     public void Test()
     {

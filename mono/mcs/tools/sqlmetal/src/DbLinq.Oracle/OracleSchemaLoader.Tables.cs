@@ -30,10 +30,10 @@ using DbLinq.Vendor;
 
 namespace DbLinq.Oracle
 {
-#if !MONO_STRICT
-    public
 #endif
-    partial class OracleSchemaLoader
+    partial
+#if !MONO_STRICT
+    public class OracleSchemaLoader
     {
         public override IList<IDataName> ReadTables(
             IDbConnection connectionString,

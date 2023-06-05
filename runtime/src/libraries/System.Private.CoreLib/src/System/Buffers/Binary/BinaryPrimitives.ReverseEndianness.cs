@@ -8,7 +8,7 @@ using System.Runtime.Intrinsics;
 
 namespace System.Buffers.Binary
 {
-    public static partial class BinaryPrimitives
+    partial public static class BinaryPrimitives
     {
         /// <summary>Copies every primitive value from <paramref name="source"/> to <paramref name="destination"/>, reversing each primitive by performing an endianness swap as part of writing each.</summary>
         /// <param name="source">The source span to copy.</param>

@@ -12,7 +12,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class ConversionsBase
+    partial internal class ConversionsBase
     {
         public static void AddTypesParticipatingInUserDefinedConversion(
             ArrayBuilder<(

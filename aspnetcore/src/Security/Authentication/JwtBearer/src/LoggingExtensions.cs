@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(
         1,
@@ -11,7 +11,7 @@ internal static partial class LoggingExtensions
         "Failed to validate the token.",
         EventName = "TokenValidationFailed"
     )]
-    public static partial void TokenValidationFailed(this ILogger logger, Exception ex);
+    partial public static void TokenValidationFailed(this ILogger logger, Exception ex);
 
     [LoggerMessage(
         2,
@@ -19,7 +19,7 @@ internal static partial class LoggingExtensions
         "Successfully validated the token.",
         EventName = "TokenValidationSucceeded"
     )]
-    public static partial void TokenValidationSucceeded(this ILogger logger);
+    partial public static void TokenValidationSucceeded(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -27,5 +27,5 @@ internal static partial class LoggingExtensions
         "Exception occurred while processing message.",
         EventName = "ProcessingMessageFailed"
     )]
-    public static partial void ErrorProcessingMessage(this ILogger logger, Exception ex);
+    partial public static void ErrorProcessingMessage(this ILogger logger, Exception ex);
 }

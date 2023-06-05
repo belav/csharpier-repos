@@ -5,8 +5,9 @@ namespace System.Diagnostics.Tracing
 {
 #if !FEATURE_WASM_PERFTRACING
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
+    partial
 #endif
-    public abstract partial class DiagnosticCounter : System.IDisposable
+    public abstract class DiagnosticCounter : System.IDisposable
     {
         internal DiagnosticCounter() { }
 
@@ -36,8 +37,9 @@ namespace System.Diagnostics.Tracing
 
 #if !FEATURE_WASM_PERFTRACING
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
+    partial
 #endif
-    public partial class PollingCounter : System.Diagnostics.Tracing.DiagnosticCounter
+    public class PollingCounter : System.Diagnostics.Tracing.DiagnosticCounter
     {
         public PollingCounter(
             string name,
@@ -53,8 +55,9 @@ namespace System.Diagnostics.Tracing
 
 #if !FEATURE_WASM_PERFTRACING
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
+    partial
 #endif
-    public partial class IncrementingEventCounter : System.Diagnostics.Tracing.DiagnosticCounter
+    public class IncrementingEventCounter : System.Diagnostics.Tracing.DiagnosticCounter
     {
         public IncrementingEventCounter(
             string name,
@@ -77,8 +80,9 @@ namespace System.Diagnostics.Tracing
 
 #if !FEATURE_WASM_PERFTRACING
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
+    partial
 #endif
-    public partial class IncrementingPollingCounter : System.Diagnostics.Tracing.DiagnosticCounter
+    public class IncrementingPollingCounter : System.Diagnostics.Tracing.DiagnosticCounter
     {
         public IncrementingPollingCounter(
             string name,
@@ -100,8 +104,9 @@ namespace System.Diagnostics.Tracing
 
 #if !FEATURE_WASM_PERFTRACING
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
+    partial
 #endif
-    public partial class EventCounter : System.Diagnostics.Tracing.DiagnosticCounter
+    public class EventCounter : System.Diagnostics.Tracing.DiagnosticCounter
     {
         public EventCounter(string name, System.Diagnostics.Tracing.EventSource eventSource) { }
 

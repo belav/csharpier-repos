@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class MethodTypeInferenceTests : OverloadResolutionTestBase
+    partial public class MethodTypeInferenceTests : OverloadResolutionTestBase
     {
         [Fact]
         public void TestMethodTypeInference()

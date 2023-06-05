@@ -8,7 +8,7 @@ using System.Reflection.Runtime.BindingFlagSupport;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal abstract partial class RuntimeTypeInfo
+    partial internal abstract class RuntimeTypeInfo
     {
         [DynamicallyAccessedMembers(GetAllMembers)]
         public sealed override MemberInfo[] GetMembers(BindingFlags bindingAttr) =>

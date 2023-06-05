@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal sealed partial class VisualStudioRuleSetManager
+    partial internal sealed class VisualStudioRuleSetManager
     {
         private sealed class RuleSetFile : IRuleSetFile, IDisposable
         {

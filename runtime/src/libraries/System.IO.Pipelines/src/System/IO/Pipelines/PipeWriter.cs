@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace System.IO.Pipelines
 {
+    partial
     /// <summary>Defines a class that provides a pipeline to which data can be written.</summary>
-    public abstract partial class PipeWriter : IBufferWriter<byte>
+    public abstract class PipeWriter : IBufferWriter<byte>
     {
         private PipeWriterStream? _stream;
 

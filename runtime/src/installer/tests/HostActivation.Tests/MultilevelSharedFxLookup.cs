@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 {
-    public partial class MultilevelSharedFxLookup : IDisposable
+    partial public class MultilevelSharedFxLookup : IDisposable
     {
         private const string SystemCollectionsImmutableFileVersion = "88.2.3.4";
         private const string SystemCollectionsImmutableAssemblyVersion = "88.0.1.2";

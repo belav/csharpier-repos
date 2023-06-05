@@ -9,11 +9,11 @@ using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeReaderFunctionalTests : TestModule
+    partial public class XNodeReaderFunctionalTests : TestModule
     {
-        public partial class XNodeReaderTests : XLinqTestCase
+        partial public class XNodeReaderTests : XLinqTestCase
         {
-            public partial class ErrorConditions : BridgeHelpers
+            partial public class ErrorConditions : BridgeHelpers
             {
                 //[Variation(Desc = "IsStartElement")]
                 public void Variation3()

@@ -45,23 +45,23 @@ namespace Mono.Btls
             }
         }
 
-        new internal BoringX509LookupMonoHandle Handle
+        internal new BoringX509LookupMonoHandle Handle
         {
             get { return (BoringX509LookupMonoHandle)base.Handle; }
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_lookup_mono_new();
+        static extern IntPtr mono_btls_x509_lookup_mono_new();
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_x509_lookup_mono_init(
+        static extern void mono_btls_x509_lookup_mono_init(
             IntPtr handle,
             IntPtr instance,
             IntPtr by_subject_func
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_lookup_mono_free(IntPtr handle);
+        static extern int mono_btls_x509_lookup_mono_free(IntPtr handle);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         delegate int BySubjectFunc(IntPtr instance, IntPtr name, out IntPtr x509_ptr);

@@ -46,7 +46,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WebHttpElement : BehaviorExtensionElement
+    partial public sealed class WebHttpElement : BehaviorExtensionElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

@@ -13,7 +13,7 @@ using Internal.Runtime;
 
 namespace System.Runtime
 {
-    internal static partial class RuntimeExports
+    partial internal static class RuntimeExports
     {
         //
         // internal calls for allocation

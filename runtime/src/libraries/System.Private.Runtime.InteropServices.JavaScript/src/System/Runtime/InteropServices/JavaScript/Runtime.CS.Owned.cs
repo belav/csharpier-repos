@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    public static partial class Runtime
+    partial public static class Runtime
     {
         private static readonly Dictionary<int, WeakReference<JSObject>> _csOwnedObjects =
             new Dictionary<int, WeakReference<JSObject>>();

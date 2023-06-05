@@ -14,7 +14,7 @@ using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings
 {
-    internal abstract partial class SyntaxEditorBasedCodeRefactoringProvider
+    partial internal abstract class SyntaxEditorBasedCodeRefactoringProvider
         : CodeRefactoringProvider
     {
         protected static readonly ImmutableArray<FixAllScope> DefaultFixAllScopes =

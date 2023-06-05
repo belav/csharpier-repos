@@ -10,10 +10,11 @@ using Microsoft.CodeAnalysis.SourceGeneration;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// Allows a user to create Syntax based input nodes for incremental generation
     /// </summary>
-    public readonly partial struct SyntaxValueProvider
+    public readonly struct SyntaxValueProvider
     {
         private readonly IncrementalGeneratorInitializationContext _context;
         private readonly ArrayBuilder<SyntaxInputNode> _inputNodes;

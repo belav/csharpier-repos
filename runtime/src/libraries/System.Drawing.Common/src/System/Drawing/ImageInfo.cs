@@ -6,11 +6,12 @@ using System.Drawing.Imaging;
 
 namespace System.Drawing
 {
+    partial
     /// <summary>
     /// Animates one or more images that have time-based frames. This file contains the nested ImageInfo class
     /// - See ImageAnimator.cs for the definition of the outer class.
     /// </summary>
-    public sealed partial class ImageAnimator
+    public sealed class ImageAnimator
     {
         /// <summary>
         /// ImageAnimator nested helper class used to store extra image state info.

@@ -6,9 +6,9 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal const uint FILE_NAME_NORMALIZED = 0x0;
 
@@ -18,7 +18,7 @@ internal static partial class Interop
             EntryPoint = "GetFinalPathNameByHandleW",
             SetLastError = true
         )]
-        internal static unsafe partial uint GetFinalPathNameByHandle(
+        partial internal static unsafe uint GetFinalPathNameByHandle(
             SafeFileHandle hFile,
             char* lpszFilePath,
             uint cchFilePath,

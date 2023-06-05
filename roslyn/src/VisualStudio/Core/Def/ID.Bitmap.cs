@@ -6,7 +6,7 @@
 
 namespace Microsoft.VisualStudio.LanguageServices
 {
-    internal static partial class ID
+    partial internal static class ID
     {
         public static class Bitmap
         {

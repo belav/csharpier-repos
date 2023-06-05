@@ -13,10 +13,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
+    partial
     /// <summary>
     /// Represents an intrinsic debugger method with byref return type.
     /// </summary>
-    internal sealed partial class PlaceholderMethodSymbol : MethodSymbol
+    internal sealed class PlaceholderMethodSymbol : MethodSymbol
     {
         internal delegate ImmutableArray<TypeParameterSymbol> GetTypeParameters(
             PlaceholderMethodSymbol method
@@ -297,18 +298,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 #endif
     }
 
+    partial partial
 #if DEBUG
-    internal sealed partial class PlaceholderMethodSymbolAdapter : MethodSymbolAdapter
+    internal sealed class PlaceholderMethodSymbolAdapter : MethodSymbolAdapter
     {
         internal PlaceholderMethodSymbolAdapter(MethodSymbol underlyingMethodSymbol)
             : base(underlyingMethodSymbol) { }
     }
+    partial
 #endif
 
 #if DEBUG
-    internal partial class PlaceholderMethodSymbolAdapter :
+    internal class PlaceholderMethodSymbolAdapter :
 #else
-    internal partial class PlaceholderMethodSymbol :
+    internal class PlaceholderMethodSymbol :
 #endif
         Cci.ISignature
     {

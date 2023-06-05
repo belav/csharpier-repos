@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Cryptography.EcDsa.Tests
 {
-    public partial class ECDsaProvider : IECDsaProvider
+    partial public class ECDsaProvider : IECDsaProvider
     {
         public bool IsCurveValid(Oid oid)
         {

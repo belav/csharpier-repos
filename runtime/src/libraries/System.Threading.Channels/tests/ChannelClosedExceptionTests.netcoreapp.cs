@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Threading.Channels.Tests
 {
-    public partial class ChannelClosedExceptionTests
+    partial public class ChannelClosedExceptionTests
     {
         [ConditionalFact(
             typeof(PlatformDetection),

@@ -33,7 +33,7 @@ using System.Collections.Generic;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class MethodBuilder : System.Reflection.MethodInfo
+    partial public sealed class MethodBuilder : System.Reflection.MethodInfo
     {
         internal MethodBuilder()
         {

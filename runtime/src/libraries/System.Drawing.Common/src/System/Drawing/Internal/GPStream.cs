@@ -5,7 +5,7 @@ using System.IO;
 
 namespace System.Drawing.Internal
 {
-    internal sealed partial class GPStream : Interop.Ole32.IStream
+    partial internal sealed class GPStream : Interop.Ole32.IStream
     {
         private readonly Stream _dataStream;
 

@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
 {
     using StackFrameToken = EmbeddedSyntaxToken<StackFrameKind>;
 
-    public partial class StackFrameParserTests
+    partial public class StackFrameParserTests
     {
         private static void Verify(
             string input,

@@ -9,12 +9,13 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {
+    partial
     /// <summary>
     /// The ComWrappers implementation for System.Drawing.Common's COM interop usages.
     ///
     /// Supports IStream and IPicture COM interfaces.
     /// </summary>
-    internal unsafe partial class DrawingCom : ComWrappers
+    internal unsafe class DrawingCom : ComWrappers
     {
         private const int S_OK = (int)Interop.HRESULT.S_OK;
         private static readonly Guid IID_IStream = new Guid(

@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Notification
 {
     [ExportWorkspaceService(typeof(IGlobalOperationNotificationService)), Shared]
-    internal partial class GlobalOperationNotificationService : IGlobalOperationNotificationService
+    partial internal class GlobalOperationNotificationService : IGlobalOperationNotificationService
     {
         private readonly object _gate = new();
 

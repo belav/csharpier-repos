@@ -15,7 +15,7 @@ namespace System
         }
     }
 
-    public partial struct Decimal
+    partial public struct Decimal
     {
         // Constructs a Decimal from a Currency value.
         //

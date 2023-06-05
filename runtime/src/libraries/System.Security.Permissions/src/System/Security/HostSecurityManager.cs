@@ -6,7 +6,7 @@ using System.Security.Policy;
 
 namespace System.Security
 {
-    public partial class HostSecurityManager
+    partial public class HostSecurityManager
     {
         public HostSecurityManager() { }
 

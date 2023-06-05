@@ -6,14 +6,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+partial
 /// <summary>
 /// An <see cref="ContentHttpResult"/> that when executed
 /// will produce a response with content.
 /// </summary>
-public sealed partial class ContentHttpResult
-    : IResult,
-        IStatusCodeHttpResult,
-        IContentTypeHttpResult
+public sealed class ContentHttpResult : IResult, IStatusCodeHttpResult, IContentTypeHttpResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentHttpResult"/> class with the values.

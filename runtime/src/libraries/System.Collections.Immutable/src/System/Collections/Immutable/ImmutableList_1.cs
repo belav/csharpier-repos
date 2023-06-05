@@ -14,7 +14,7 @@ namespace System.Collections.Immutable
     /// <typeparam name="T">The type of elements in the set.</typeparam>
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
-    public sealed partial class ImmutableList<T>
+    partial public sealed class ImmutableList<T>
         : IImmutableList<T>,
             IList<T>,
             IList,

@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
-        internal static unsafe partial CERT_EXTENSION* CertFindExtension(
+        partial internal static unsafe CERT_EXTENSION* CertFindExtension(
             [MarshalAs(UnmanagedType.LPStr)] string pszObjId,
             int cExtensions,
             IntPtr rgExtensions

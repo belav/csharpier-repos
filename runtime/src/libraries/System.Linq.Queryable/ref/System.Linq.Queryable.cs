@@ -6,17 +6,17 @@
 
 namespace System.Linq
 {
-    public abstract partial class EnumerableExecutor
+    partial public abstract class EnumerableExecutor
     {
         internal EnumerableExecutor() { }
     }
 
-    public partial class EnumerableExecutor<T> : System.Linq.EnumerableExecutor
+    partial public class EnumerableExecutor<T> : System.Linq.EnumerableExecutor
     {
         public EnumerableExecutor(System.Linq.Expressions.Expression expression) { }
     }
 
-    public abstract partial class EnumerableQuery
+    partial public abstract class EnumerableQuery
     {
         internal EnumerableQuery() { }
     }
@@ -27,7 +27,7 @@ namespace System.Linq
     [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
         "Enumerating collections as IQueryable can require creating new generic types or methods, which requires creating code at runtime. This may not work when AOT compiling."
     )]
-    public partial class EnumerableQuery<T>
+    partial public class EnumerableQuery<T>
         : System.Linq.EnumerableQuery,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable,
@@ -96,7 +96,7 @@ namespace System.Linq
         }
     }
 
-    public static partial class Queryable
+    partial public static class Queryable
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode(
             "Enumerating collections as IQueryable can require creating new generic types or methods, which requires creating code at runtime. This may not work when AOT compiling."

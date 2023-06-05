@@ -61,7 +61,7 @@ namespace System.Data.SqlClient
             System.Security.Permissions.SecurityAction.LinkDemand,
             Flags = System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter
         )]
-        override public void GetObjectData(SerializationInfo si, StreamingContext context)
+        public override void GetObjectData(SerializationInfo si, StreamingContext context)
         {
             if (null == si)
             {
@@ -125,7 +125,7 @@ namespace System.Data.SqlClient
             get { return this.Errors[0].State; }
         }
 
-        override public string Source
+        public override string Source
         {
             get { return this.Errors[0].Source; }
         }
@@ -163,7 +163,7 @@ namespace System.Data.SqlClient
             return sb.ToString();
         }
 
-        static internal SqlException CreateException(
+        internal static SqlException CreateException(
             SqlErrorCollection errorCollection,
             string serverVersion
         )
@@ -171,7 +171,7 @@ namespace System.Data.SqlClient
             return CreateException(errorCollection, serverVersion, Guid.Empty);
         }
 
-        static internal SqlException CreateException(
+        internal static SqlException CreateException(
             SqlErrorCollection errorCollection,
             string serverVersion,
             SqlInternalConnectionTds internalConnection,
@@ -215,7 +215,7 @@ namespace System.Data.SqlClient
             return exception;
         }
 
-        static internal SqlException CreateException(
+        internal static SqlException CreateException(
             SqlErrorCollection errorCollection,
             string serverVersion,
             Guid conId,

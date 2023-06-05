@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal static partial class AnalyzerHelper
+    partial internal static class AnalyzerHelper
     {
 #pragma warning disable IDE0060 // Remove unused parameter - Needed to share this method signature between CodeStyle and Features layer.
         public static T GetOption<T>(

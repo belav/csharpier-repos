@@ -9,7 +9,7 @@ using System.IO.Compression;
 
 namespace System.Reflection.PortableExecutable
 {
-    public sealed partial class DebugDirectoryBuilder
+    partial public sealed class DebugDirectoryBuilder
     {
         /// <summary>
         /// Adds Embedded Portable PDB entry.

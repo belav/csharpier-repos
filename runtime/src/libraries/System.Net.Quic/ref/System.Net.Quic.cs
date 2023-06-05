@@ -14,7 +14,7 @@ namespace System.Net.Quic
         Both = 3,
     }
 
-    public sealed partial class QuicClientConnectionOptions : System.Net.Quic.QuicConnectionOptions
+    partial public sealed class QuicClientConnectionOptions : System.Net.Quic.QuicConnectionOptions
     {
         public QuicClientConnectionOptions() { }
 
@@ -35,7 +35,7 @@ namespace System.Net.Quic
         }
     }
 
-    public sealed partial class QuicConnection : System.IAsyncDisposable
+    partial public sealed class QuicConnection : System.IAsyncDisposable
     {
         internal QuicConnection() { }
 
@@ -106,7 +106,7 @@ namespace System.Net.Quic
         }
     }
 
-    public abstract partial class QuicConnectionOptions
+    partial public abstract class QuicConnectionOptions
     {
         internal QuicConnectionOptions() { }
 
@@ -155,7 +155,7 @@ namespace System.Net.Quic
         AlpnInUse = 13,
     }
 
-    public sealed partial class QuicException : System.IO.IOException
+    partial public sealed class QuicException : System.IO.IOException
     {
         public QuicException(
             System.Net.Quic.QuicError error,
@@ -173,7 +173,7 @@ namespace System.Net.Quic
         }
     }
 
-    public sealed partial class QuicListener : System.IAsyncDisposable
+    partial public sealed class QuicListener : System.IAsyncDisposable
     {
         internal QuicListener() { }
 
@@ -214,7 +214,7 @@ namespace System.Net.Quic
         }
     }
 
-    public sealed partial class QuicListenerOptions
+    partial public sealed class QuicListenerOptions
     {
         public QuicListenerOptions() { }
 
@@ -245,7 +245,7 @@ namespace System.Net.Quic
         }
     }
 
-    public sealed partial class QuicServerConnectionOptions : System.Net.Quic.QuicConnectionOptions
+    partial public sealed class QuicServerConnectionOptions : System.Net.Quic.QuicConnectionOptions
     {
         public QuicServerConnectionOptions() { }
 
@@ -256,7 +256,7 @@ namespace System.Net.Quic
         }
     }
 
-    public sealed partial class QuicStream : System.IO.Stream
+    partial public sealed class QuicStream : System.IO.Stream
     {
         internal QuicStream() { }
 

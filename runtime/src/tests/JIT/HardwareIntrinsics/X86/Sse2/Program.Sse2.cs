@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace JIT.HardwareIntrinsics.X86._Sse2
 {
-    public static partial class Program
+    partial public static class Program
     {
         static Program() { }
     }

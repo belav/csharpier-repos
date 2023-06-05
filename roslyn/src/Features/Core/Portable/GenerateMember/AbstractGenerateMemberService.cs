@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.GenerateMember
 {
-    internal abstract partial class AbstractGenerateMemberService<
+    partial internal abstract class AbstractGenerateMemberService<
         TSimpleNameSyntax,
         TExpressionSyntax
     >

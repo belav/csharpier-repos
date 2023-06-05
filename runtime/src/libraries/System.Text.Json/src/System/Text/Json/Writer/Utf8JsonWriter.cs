@@ -32,7 +32,7 @@ namespace System.Text.Json
     ///   </para>
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public sealed partial class Utf8JsonWriter : IDisposable, IAsyncDisposable
+    partial public sealed class Utf8JsonWriter : IDisposable, IAsyncDisposable
     {
         // Depending on OS, either '\r\n' OR '\n'
         private static readonly int s_newLineLength = Environment.NewLine.Length;

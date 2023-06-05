@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
-    internal abstract partial class AbstractSyntacticSingleKeywordRecommender
+    partial internal abstract class AbstractSyntacticSingleKeywordRecommender
         : IKeywordRecommender<CSharpSyntaxContext>
     {
         public readonly SyntaxKind KeywordKind;

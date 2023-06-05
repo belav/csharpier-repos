@@ -52,28 +52,31 @@ namespace Exocortex.DSP
 
         //======================================================================================
 
-        static private void Swap(ref float a, ref float b)
+        private
+        //======================================================================================
+
+        static void Swap(ref float a, ref float b)
         {
             float temp = a;
             a = b;
             b = temp;
         }
 
-        static private void Swap(ref double a, ref double b)
+        private static void Swap(ref double a, ref double b)
         {
             double temp = a;
             a = b;
             b = temp;
         }
 
-        static private void Swap(ref ComplexF a, ref ComplexF b)
+        private static void Swap(ref ComplexF a, ref ComplexF b)
         {
             ComplexF temp = a;
             a = b;
             b = temp;
         }
 
-        static private void Swap(ref Complex a, ref Complex b)
+        private static void Swap(ref Complex a, ref Complex b)
         {
             Complex temp = a;
             a = b;
@@ -88,13 +91,13 @@ namespace Exocortex.DSP
         private const int cMaxBits = 12;
         private const int cMinBits = 0;
 
-        static private bool IsPowerOf2(int x)
+        private static bool IsPowerOf2(int x)
         {
             return (x & (x - 1)) == 0;
             //return	( x == Pow2( Log2( x ) ) );
         }
 
-        static private int Pow2(int exponent)
+        private static int Pow2(int exponent)
         {
             if (exponent >= 0 && exponent < 31)
             {
@@ -103,7 +106,7 @@ namespace Exocortex.DSP
             return 0;
         }
 
-        static private int Log2(int x)
+        private static int Log2(int x)
         {
             if (x <= 65536)
             {
@@ -211,7 +214,11 @@ namespace Exocortex.DSP
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
 
-        static private int ReverseBits(int index, int numberOfBits)
+        private
+        //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
+
+        static int ReverseBits(int index, int numberOfBits)
         {
             Debug.Assert(numberOfBits >= cMinBits);
             Debug.Assert(numberOfBits <= cMaxBits);
@@ -225,11 +232,12 @@ namespace Exocortex.DSP
             return reversedIndex;
         }
 
+        private
         //-------------------------------------------------------------------------------------
 
-        static private int[][] _reversedBits = new int[cMaxBits][];
+        static int[][] _reversedBits = new int[cMaxBits][];
 
-        static private int[] GetReversedBits(int numberOfBits)
+        private static int[] GetReversedBits(int numberOfBits)
         {
             Debug.Assert(numberOfBits >= cMinBits);
             Debug.Assert(numberOfBits <= cMaxBits);
@@ -255,7 +263,10 @@ namespace Exocortex.DSP
 
         //-------------------------------------------------------------------------------------
 
-        static private void ReorderArray(float[] data)
+        private
+        //-------------------------------------------------------------------------------------
+
+        static void ReorderArray(float[] data)
         {
             Debug.Assert(data != null);
 
@@ -277,7 +288,7 @@ namespace Exocortex.DSP
             }
         }
 
-        static private void ReorderArray(double[] data)
+        private static void ReorderArray(double[] data)
         {
             Debug.Assert(data != null);
 
@@ -299,7 +310,7 @@ namespace Exocortex.DSP
             }
         }
 
-        static private void ReorderArray(Complex[] data)
+        private static void ReorderArray(Complex[] data)
         {
             Debug.Assert(data != null);
 
@@ -322,7 +333,7 @@ namespace Exocortex.DSP
             }
         }
 
-        static private void ReorderArray(ComplexF[] data)
+        private static void ReorderArray(ComplexF[] data)
         {
             Debug.Assert(data != null);
 
@@ -476,13 +487,14 @@ namespace Exocortex.DSP
             }
         }
 
+        private
         //======================================================================================
         //======================================================================================
 
-        static private bool _bufferFLocked = false;
-        static private float[] _bufferF = new float[0];
+        static bool _bufferFLocked = false;
+        private static float[] _bufferF = new float[0];
 
-        static private void LockBufferF(int length, ref float[] buffer)
+        private static void LockBufferF(int length, ref float[] buffer)
         {
             Debug.Assert(_bufferFLocked == false);
             _bufferFLocked = true;
@@ -493,7 +505,7 @@ namespace Exocortex.DSP
             buffer = _bufferF;
         }
 
-        static private void UnlockBufferF(ref float[] buffer)
+        private static void UnlockBufferF(ref float[] buffer)
         {
             Debug.Assert(_bufferF == buffer);
             Debug.Assert(_bufferFLocked == true);
@@ -573,13 +585,14 @@ namespace Exocortex.DSP
             UnlockBufferF(ref buffer);
         }
 
+        private
         //======================================================================================
         //======================================================================================
 
-        static private bool _bufferCFLocked = false;
-        static private ComplexF[] _bufferCF = new ComplexF[0];
+        static bool _bufferCFLocked = false;
+        private static ComplexF[] _bufferCF = new ComplexF[0];
 
-        static private void LockBufferCF(int length, ref ComplexF[] buffer)
+        private static void LockBufferCF(int length, ref ComplexF[] buffer)
         {
             Debug.Assert(length >= 0);
             Debug.Assert(_bufferCFLocked == false);
@@ -592,7 +605,7 @@ namespace Exocortex.DSP
             buffer = _bufferCF;
         }
 
-        static private void UnlockBufferCF(ref ComplexF[] buffer)
+        private static void UnlockBufferCF(ref ComplexF[] buffer)
         {
             Debug.Assert(_bufferCF == buffer);
             Debug.Assert(_bufferCFLocked == true);
@@ -673,13 +686,14 @@ namespace Exocortex.DSP
             UnlockBufferCF(ref buffer);
         }
 
+        private
         //======================================================================================
         //======================================================================================
 
-        static private bool _bufferCLocked = false;
-        static private Complex[] _bufferC = new Complex[0];
+        static bool _bufferCLocked = false;
+        private static Complex[] _bufferC = new Complex[0];
 
-        static private void LockBufferC(int length, ref Complex[] buffer)
+        private static void LockBufferC(int length, ref Complex[] buffer)
         {
             Debug.Assert(length >= 0);
             Debug.Assert(_bufferCLocked == false);
@@ -692,7 +706,7 @@ namespace Exocortex.DSP
             buffer = _bufferC;
         }
 
-        static private void UnlockBufferC(ref Complex[] buffer)
+        private static void UnlockBufferC(ref Complex[] buffer)
         {
             Debug.Assert(_bufferC == buffer);
             Debug.Assert(_bufferCLocked == true);

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class DocumentExtensions
+    partial internal static class DocumentExtensions
     {
         public static async ValueTask<SyntaxTreeIndex> GetSyntaxTreeIndexAsync(
             this Document document,

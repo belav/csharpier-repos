@@ -55,10 +55,11 @@ using Microsoft.CodeAnalysis.Workspaces.ProjectSystem;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
+    partial
     /// <summary>
     /// The Workspace for running inside Visual Studio.
     /// </summary>
-    internal abstract partial class VisualStudioWorkspaceImpl : VisualStudioWorkspace
+    internal abstract class VisualStudioWorkspaceImpl : VisualStudioWorkspace
     {
         private static readonly IntPtr s_docDataExisting_Unknown = new(-1);
         private const string AppCodeFolderName = "App_Code";

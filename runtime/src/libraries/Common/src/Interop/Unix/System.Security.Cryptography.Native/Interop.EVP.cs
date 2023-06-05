@@ -6,42 +6,42 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpMdCtxCreate")]
-        internal static partial SafeEvpMdCtxHandle EvpMdCtxCreate(IntPtr type);
+        partial internal static SafeEvpMdCtxHandle EvpMdCtxCreate(IntPtr type);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpMdCtxDestroy")]
-        internal static partial void EvpMdCtxDestroy(IntPtr ctx);
+        partial internal static void EvpMdCtxDestroy(IntPtr ctx);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestReset")]
-        internal static partial int EvpDigestReset(SafeEvpMdCtxHandle ctx, IntPtr type);
+        partial internal static int EvpDigestReset(SafeEvpMdCtxHandle ctx, IntPtr type);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestUpdate")]
-        internal static partial int EvpDigestUpdate(
+        partial internal static int EvpDigestUpdate(
             SafeEvpMdCtxHandle ctx,
             ReadOnlySpan<byte> d,
             int cnt
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestFinalEx")]
-        internal static partial int EvpDigestFinalEx(
+        partial internal static int EvpDigestFinalEx(
             SafeEvpMdCtxHandle ctx,
             ref byte md,
             ref uint s
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestCurrent")]
-        internal static partial int EvpDigestCurrent(
+        partial internal static int EvpDigestCurrent(
             SafeEvpMdCtxHandle ctx,
             ref byte md,
             ref uint s
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestOneShot")]
-        internal static unsafe partial int EvpDigestOneShot(
+        partial internal static unsafe int EvpDigestOneShot(
             IntPtr type,
             byte* source,
             int sourceSize,
@@ -50,13 +50,13 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpMdSize")]
-        internal static partial int EvpMdSize(IntPtr md);
+        partial internal static int EvpMdSize(IntPtr md);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetMaxMdSize")]
-        private static partial int GetMaxMdSize();
+        partial private static int GetMaxMdSize();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Pbkdf2")]
-        private static unsafe partial int Pbkdf2(
+        partial private static unsafe int Pbkdf2(
             byte* pPassword,
             int passwordLength,
             byte* pSalt,

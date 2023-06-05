@@ -17,7 +17,7 @@ namespace Roslyn.Utilities
         "CA1068:CancellationToken parameters must come last",
         Justification = "Matching TPL Signatures"
     )]
-    internal static partial class TaskFactoryExtensions
+    partial internal static class TaskFactoryExtensions
     {
         [SuppressMessage(
             "Style",

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class StreamReaderTests : FileCleanupTestBase
+    partial public class StreamReaderTests : FileCleanupTestBase
     {
         [Fact]
         public void ObjectClosedReadLine()

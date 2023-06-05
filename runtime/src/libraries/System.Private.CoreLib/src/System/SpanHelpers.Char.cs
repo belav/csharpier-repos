@@ -9,7 +9,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System
 {
-    internal static partial class SpanHelpers // .Char
+    partial internal static class SpanHelpers // .Char
     {
         public static int IndexOf(
             ref char searchSpace,

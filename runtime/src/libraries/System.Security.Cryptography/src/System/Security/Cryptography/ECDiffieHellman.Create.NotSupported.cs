@@ -3,19 +3,19 @@
 
 namespace System.Security.Cryptography
 {
-    public partial class ECDiffieHellman : ECAlgorithm
+    partial public class ECDiffieHellman : ECAlgorithm
     {
-        public static new partial ECDiffieHellman Create()
+        partial public static new ECDiffieHellman Create()
         {
             throw new PlatformNotSupportedException();
         }
 
-        public static partial ECDiffieHellman Create(ECCurve curve)
+        partial public static ECDiffieHellman Create(ECCurve curve)
         {
             throw new PlatformNotSupportedException();
         }
 
-        public static partial ECDiffieHellman Create(ECParameters parameters)
+        partial public static ECDiffieHellman Create(ECParameters parameters)
         {
             throw new PlatformNotSupportedException();
         }

@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 {
-    internal partial class AutomaticLineEnderCommandHandler
+    partial internal class AutomaticLineEnderCommandHandler
     {
         #region NodeReplacementHelpers
 

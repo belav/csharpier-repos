@@ -6,7 +6,7 @@
 
 namespace System.Security.Cryptography.Cose
 {
-    public readonly partial struct CoseHeaderLabel
+    partial public readonly struct CoseHeaderLabel
         : System.IEquatable<System.Security.Cryptography.Cose.CoseHeaderLabel>
     {
         private readonly object _dummy;
@@ -73,7 +73,7 @@ namespace System.Security.Cryptography.Cose
         }
     }
 
-    public sealed partial class CoseHeaderMap
+    partial public sealed class CoseHeaderMap
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             System.Security.Cryptography.Cose.CoseHeaderLabel,
             System.Security.Cryptography.Cose.CoseHeaderValue
@@ -242,7 +242,7 @@ namespace System.Security.Cryptography.Cose
         }
     }
 
-    public readonly partial struct CoseHeaderValue
+    partial public readonly struct CoseHeaderValue
         : System.IEquatable<System.Security.Cryptography.Cose.CoseHeaderValue>
     {
         private readonly object _dummy;
@@ -342,7 +342,7 @@ namespace System.Security.Cryptography.Cose
         }
     }
 
-    public abstract partial class CoseMessage
+    partial public abstract class CoseMessage
     {
         internal CoseMessage() { }
 
@@ -405,7 +405,7 @@ namespace System.Security.Cryptography.Cose
         public abstract bool TryEncode(System.Span<byte> destination, out int bytesWritten);
     }
 
-    public sealed partial class CoseMultiSignMessage : System.Security.Cryptography.Cose.CoseMessage
+    partial public sealed class CoseMultiSignMessage : System.Security.Cryptography.Cose.CoseMessage
     {
         internal CoseMultiSignMessage() { }
 
@@ -562,7 +562,7 @@ namespace System.Security.Cryptography.Cose
         }
     }
 
-    public sealed partial class CoseSign1Message : System.Security.Cryptography.Cose.CoseMessage
+    partial public sealed class CoseSign1Message : System.Security.Cryptography.Cose.CoseMessage
     {
         internal CoseSign1Message() { }
 
@@ -714,7 +714,7 @@ namespace System.Security.Cryptography.Cose
         }
     }
 
-    public sealed partial class CoseSignature
+    partial public sealed class CoseSignature
     {
         internal CoseSignature() { }
 
@@ -790,7 +790,7 @@ namespace System.Security.Cryptography.Cose
         }
     }
 
-    public sealed partial class CoseSigner
+    partial public sealed class CoseSigner
     {
         public CoseSigner(
             System.Security.Cryptography.AsymmetricAlgorithm key,

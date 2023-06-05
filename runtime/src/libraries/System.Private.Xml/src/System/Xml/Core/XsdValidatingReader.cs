@@ -37,7 +37,7 @@ namespace System.Xml
         }
     }
 
-    internal sealed partial class XsdValidatingReader
+    partial internal sealed class XsdValidatingReader
         : XmlReader,
             IXmlSchemaInfo,
             IXmlLineInfo,

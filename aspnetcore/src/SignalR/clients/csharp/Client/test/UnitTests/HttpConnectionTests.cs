@@ -20,7 +20,7 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-public partial class HttpConnectionTests : VerifiableLoggedTest
+partial public class HttpConnectionTests : VerifiableLoggedTest
 {
     [Fact]
     public void HttpConnectionOptionsDefaults()

@@ -13,9 +13,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
-        private partial class AssemblyReference : Reference
+        partial private class AssemblyReference : Reference
         {
             private readonly ReferenceAssemblyWithTypeResult _referenceAssemblyWithType;
 

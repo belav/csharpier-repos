@@ -3,19 +3,19 @@
 
 namespace System.Security.Cryptography
 {
-    public partial class ECDsa : ECAlgorithm
+    partial public class ECDsa : ECAlgorithm
     {
-        public static new partial ECDsa Create()
+        partial public static new ECDsa Create()
         {
             throw new PlatformNotSupportedException();
         }
 
-        public static partial ECDsa Create(ECCurve curve)
+        partial public static ECDsa Create(ECCurve curve)
         {
             throw new PlatformNotSupportedException();
         }
 
-        public static partial ECDsa Create(ECParameters parameters)
+        partial public static ECDsa Create(ECParameters parameters)
         {
             throw new PlatformNotSupportedException();
         }

@@ -5,10 +5,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers
 {
+    partial
     /// <summary>
     /// Contains factory methods to create <see cref="BoundedMemory{T}"/> instances.
     /// </summary>
-    public static partial class BoundedMemory
+    public static class BoundedMemory
     {
         /// <summary>
         /// Allocates a new <see cref="BoundedMemory{T}"/> region which is immediately preceded by

@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Caching
 {
-    public partial class CacheItemPriorityQueueTest
+    partial public class CacheItemPriorityQueueTest
     {
         [Test(
             Description = "Generated from sequence file cache_pq_sequence_2010-01-29_10-24-08.seq"

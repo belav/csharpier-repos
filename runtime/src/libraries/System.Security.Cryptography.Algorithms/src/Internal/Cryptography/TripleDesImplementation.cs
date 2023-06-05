@@ -11,7 +11,7 @@ namespace Internal.Cryptography
         "CA5350",
         Justification = "We are providing the implementation for TripleDES, not consuming it."
     )]
-    internal sealed partial class TripleDesImplementation : TripleDES
+    partial internal sealed class TripleDesImplementation : TripleDES
     {
         private const int BitsPerByte = 8;
 

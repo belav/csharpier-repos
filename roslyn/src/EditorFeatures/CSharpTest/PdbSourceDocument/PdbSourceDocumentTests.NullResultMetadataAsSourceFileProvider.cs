@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.PdbSourceDocument;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 {
-    public partial class PdbSourceDocumentTests
+    partial public class PdbSourceDocumentTests
     {
         /// <summary>
         /// IMetadataAsSourceFileService has to always return a result, but for our testing

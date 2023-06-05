@@ -3,7 +3,7 @@
 
 namespace System.IO.Compression
 {
-    public static partial class ZipFileExtensions
+    partial public static class ZipFileExtensions
     {
         /// <summary>
         /// Creates a file on the file system with the entry?s contents and the specified name. The last write time of the file is set to the

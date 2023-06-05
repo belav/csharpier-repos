@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Linq.Expressions
 {
-    internal static partial class CachedReflectionInfo
+    partial internal static class CachedReflectionInfo
     {
         private static ConstructorInfo? s_Nullable_Boolean_Ctor;
 

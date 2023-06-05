@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_MAdvise",
             SetLastError = true
         )]
-        internal static partial int MAdvise(IntPtr addr, ulong length, MemoryAdvice advice);
+        partial internal static int MAdvise(IntPtr addr, ulong length, MemoryAdvice advice);
 
         internal enum MemoryAdvice
         {

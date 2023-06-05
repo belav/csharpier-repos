@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Inter
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy
 {
-    internal abstract partial class AbstractLegacyProject : IAnalyzerHost
+    partial internal abstract class AbstractLegacyProject : IAnalyzerHost
     {
         void IAnalyzerHost.AddAnalyzerReference(string analyzerAssemblyFullPath) =>
             VisualStudioProject.AddAnalyzerReference(analyzerAssemblyFullPath);

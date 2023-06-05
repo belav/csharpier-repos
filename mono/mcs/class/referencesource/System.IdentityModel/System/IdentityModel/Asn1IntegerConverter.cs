@@ -10,7 +10,7 @@ namespace System.IdentityModel
     static class Asn1IntegerConverter
     {
         static List<byte[]> powersOfTwo = new List<byte[]>(new byte[][] { new byte[] { 1 } });
-        readonly static char[] digitMap = new char[]
+        static readonly char[] digitMap = new char[]
         {
             '0',
             '1',

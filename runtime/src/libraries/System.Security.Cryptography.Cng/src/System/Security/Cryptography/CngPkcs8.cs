@@ -8,7 +8,7 @@ using System.Security.Cryptography.Asn1;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class CngPkcs8
+    partial internal static class CngPkcs8
     {
         internal struct Pkcs8Response
         {

@@ -8,7 +8,7 @@ using Xunit;
 namespace System.Security.Cryptography.Encryption.Des.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public static partial class DesTests
+    partial public static class DesTests
     {
         private static readonly byte[] KnownWeakKey = "e0e0e0e0f1f1f1f1".HexToByteArray();
         private static readonly byte[] KnownSemiWeakKey = "1f011f010e010e01".HexToByteArray();

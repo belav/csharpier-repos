@@ -5,11 +5,12 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
+partial
 #pragma warning disable CA1823 // analyzer incorrectly flags fixed buffer length const (https://github.com/dotnet/roslyn/issues/37593)
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class Process
+    partial internal static class Process
     {
         // Constants from sys/user.h
         private const int TDNAMLEN = 16;
@@ -36,7 +37,7 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct @sigset_t
         {
-            private fixed int bits[4];
+            fixed private int bits[4];
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -121,7 +122,7 @@ internal static partial class Interop
             private gid_t ki_svgid; /* Saved effective group id */
             private short ki_ngroups; /* number of groups */
             private short ki_spare_short2; /* unused (just here for alignment) */
-            private fixed uint ki_groups[KI_NGROUPS]; /* groups */
+            fixed private uint ki_groups[KI_NGROUPS]; /* groups */
             public ulong ki_size; /* virtual size */
             public long ki_rssize; /* current resident set size in pages */
             private long ki_swrss; /* resident set size before last swap */
@@ -147,15 +148,15 @@ internal static partial class Interop
             private byte ki_rqindex; /* Run queue index */
             private byte ki_oncpu_old; /* Which cpu we are on (legacy) */
             private byte ki_lastcpu_old; /* Last cpu we were on (legacy) */
-            public fixed byte ki_tdname[TDNAMLEN + 1]; /* thread name */
-            private fixed byte ki_wmesg[WMESGLEN + 1]; /* wchan message */
-            private fixed byte ki_login[LOGNAMELEN + 1]; /* setlogin name */
-            private fixed byte ki_lockname[LOCKNAMELEN + 1]; /* lock name */
-            public fixed byte ki_comm[COMMLEN + 1]; /* command name */
-            private fixed byte ki_emul[KI_EMULNAMELEN + 1]; /* emulation name */
-            private fixed byte ki_loginclass[LOGINCLASSLEN + 1]; /* login class */
-            private fixed byte ki_sparestrings[50]; /* spare string space */
-            private fixed int ki_spareints[KI_NSPARE_INT]; /* spare room for growth */
+            fixed public byte ki_tdname[TDNAMLEN + 1]; /* thread name */
+            fixed private byte ki_wmesg[WMESGLEN + 1]; /* wchan message */
+            fixed private byte ki_login[LOGNAMELEN + 1]; /* setlogin name */
+            fixed private byte ki_lockname[LOCKNAMELEN + 1]; /* lock name */
+            fixed public byte ki_comm[COMMLEN + 1]; /* command name */
+            fixed private byte ki_emul[KI_EMULNAMELEN + 1]; /* emulation name */
+            fixed private byte ki_loginclass[LOGINCLASSLEN + 1]; /* login class */
+            fixed private byte ki_sparestrings[50]; /* spare string space */
+            fixed private int ki_spareints[KI_NSPARE_INT]; /* spare room for growth */
             private int ki_oncpu; /* Which cpu we are on */
             private int ki_lastcpu; /* Last cpu we were on */
             private int ki_tracer; /* Pid of tracing process */
@@ -165,7 +166,7 @@ internal static partial class Interop
             private int ki_jid; /* Process jail ID */
             public int ki_numthreads; /* XXXKSE number of threads in total */
             public int ki_tid; /* XXXKSE thread id */
-            private fixed byte ki_pri[4]; /* process priority */
+            fixed private byte ki_pri[4]; /* process priority */
             public rusage ki_rusage; /* process rusage statistics */
 
             /* XXX - most fields in ki_rusage_ch are not (yet) filled in */
@@ -175,8 +176,8 @@ internal static partial class Interop
             private void* ki_udata; /* User convenience pointer */
             public void* ki_tdaddr; /* address of thread */
 
-            private fixed long ki_spareptrs[KI_NSPARE_PTR]; /* spare room for growth */
-            private fixed long ki_sparelongs[KI_NSPARE_LONG]; /* spare room for growth */
+            fixed private long ki_spareptrs[KI_NSPARE_PTR]; /* spare room for growth */
+            fixed private long ki_sparelongs[KI_NSPARE_LONG]; /* spare room for growth */
             private long ki_sflag; /* PS_* flags */
             private long ki_tdflags; /* XXXKSE kthread flag */
         }

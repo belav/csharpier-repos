@@ -9,11 +9,12 @@ using System.IO;
 
 namespace GenerateRegexCasingTable
 {
+    partial
     /// <summary>
     /// Program that takes a parameter pointing to UnicodeData.txt and generates a file to be used
     /// as the Regex case equivalence table to be used for matching when using RegexOptions.IgnoreCase
     /// </summary>
-    public partial class Program
+    public class Program
     {
         public static void Main(string[] args)
         {

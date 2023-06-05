@@ -243,8 +243,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // X value type if X value is indexed
         internal ChartValueType indexedXValueType = ChartValueType.Auto;
 
+        internal
         // Default properties
-        static internal DataPointCustomProperties defaultCustomProperties =
+        static DataPointCustomProperties defaultCustomProperties =
             InitializeDefaultCustomProperties();
 
         // Indicates that a temp. marker style was set for drawing
@@ -934,7 +935,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="type">Chart type.</param>
         /// <returns>Chart type name.</returns>
-        static internal string GetChartTypeName(SeriesChartType type)
+        internal
+        /// <summary>
+        /// Get chart type name by it's type
+        /// </summary>
+        /// <param name="type">Chart type.</param>
+        /// <returns>Chart type name.</returns>
+        static string GetChartTypeName(SeriesChartType type)
         {
             if (type == SeriesChartType.StackedArea100)
                 return ChartTypeNames.OneHundredPercentStackedArea;
@@ -2688,7 +2695,7 @@ namespace System.Web.UI.DataVisualization.Charting
             PersistenceMode(PersistenceMode.Attribute)
 #endif
         ]
-        override public string AxisLabel
+        public override string AxisLabel
         {
             get { return base.AxisLabel; }
             set

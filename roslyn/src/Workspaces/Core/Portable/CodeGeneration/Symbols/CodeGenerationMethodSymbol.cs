@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration
 {
-    internal partial class CodeGenerationMethodSymbol : CodeGenerationAbstractMethodSymbol
+    partial internal class CodeGenerationMethodSymbol : CodeGenerationAbstractMethodSymbol
     {
         public override ITypeSymbol ReturnType { get; }
         public override ImmutableArray<ITypeParameterSymbol> TypeParameters { get; }

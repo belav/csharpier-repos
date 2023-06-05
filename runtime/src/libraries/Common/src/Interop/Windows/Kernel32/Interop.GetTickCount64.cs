@@ -5,12 +5,12 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static unsafe partial class Kernel32
+    partial internal static unsafe class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
         [SuppressGCTransition]
-        internal static partial ulong GetTickCount64();
+        partial internal static ulong GetTickCount64();
     }
 }

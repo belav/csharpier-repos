@@ -13,7 +13,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-internal sealed partial class HttpRequestHeaders : HttpHeaders
+partial internal sealed class HttpRequestHeaders : HttpHeaders
 {
     private EnumeratorCache? _enumeratorCache;
     private long _previousBits;
@@ -264,7 +264,7 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
         public void Reset() => throw new NotSupportedException();
     }
 
-    public partial struct Enumerator : IEnumerator<KeyValuePair<string, StringValues>>
+    partial public struct Enumerator : IEnumerator<KeyValuePair<string, StringValues>>
     {
         private readonly HttpRequestHeaders _collection;
         private long _currentBits;

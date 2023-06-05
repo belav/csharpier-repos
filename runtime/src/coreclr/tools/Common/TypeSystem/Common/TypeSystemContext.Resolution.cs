@@ -10,7 +10,7 @@ using Internal.NativeFormat;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class TypeSystemContext : IModuleResolver
+    partial public abstract class TypeSystemContext : IModuleResolver
     {
         public ModuleDesc SystemModule { get; private set; }
 

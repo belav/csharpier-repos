@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
             EntryPoint = "SetSecurityInfo",
             SetLastError = true
         )]
-        internal static partial uint SetSecurityInfoByHandle(
+        partial internal static uint SetSecurityInfoByHandle(
             SafeHandle handle,
             /*DWORD*/uint objectType,
             /*DWORD*/uint securityInformation,

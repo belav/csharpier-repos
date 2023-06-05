@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Extensions.Hosting.Systemd
 {
-    public partial class SystemdLifetime
+    partial public class SystemdLifetime
     {
         private PosixSignalRegistration? _sigTermRegistration;
 
-        private partial void RegisterShutdownHandlers()
+        partial private void RegisterShutdownHandlers()
         {
             // systemd only sends SIGTERM to the service process, so we only listen for that signal.
             // Other signals (ex. SIGINT/SIGQUIT) will be handled by the default .NET runtime signal handler
@@ -29,7 +29,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
             ApplicationLifetime.StopApplication();
         }
 
-        private partial void UnregisterShutdownHandlers()
+        partial private void UnregisterShutdownHandlers()
         {
             _sigTermRegistration?.Dispose();
         }

@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
     using Microsoft.CodeAnalysis.Syntax.InternalSyntax;
 
-    internal abstract partial class SyntaxParser : IDisposable
+    partial internal abstract class SyntaxParser : IDisposable
     {
         protected readonly Lexer lexer;
         private readonly bool _isIncremental;

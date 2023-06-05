@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 {
-    internal partial class TaggerEventSources
+    partial internal class TaggerEventSources
     {
         private class ParseOptionChangedEventSource : AbstractWorkspaceTrackingTaggerEventSource
         {

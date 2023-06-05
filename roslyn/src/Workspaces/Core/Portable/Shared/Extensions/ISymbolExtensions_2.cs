@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ISymbolExtensions
+    partial internal static class ISymbolExtensions
     {
         public static bool IsImplicitValueParameter(
             [NotNullWhen(returnValue: true)] this ISymbol? symbol

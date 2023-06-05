@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.MoveToNamespace
 {
-    internal partial class MoveToNamespaceAnalysisResult
+    partial internal class MoveToNamespaceAnalysisResult
     {
         public enum ContainerType
         {

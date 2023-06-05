@@ -7,7 +7,7 @@ using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {
-    public partial class Pen
+    partial public class Pen
     {
         /// <summary>
         /// Gets or sets a custom cap style to use at the beginning of lines drawn with this <see cref='Pen'/>.

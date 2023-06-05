@@ -772,13 +772,13 @@ namespace System.Net.Sockets.Tests
         }
 
         [DllImport("libc")]
-        private static unsafe extern int socketpair(int domain, int type, int protocol, int* ptr);
+        private static extern unsafe int socketpair(int domain, int type, int protocol, int* ptr);
 
         [DllImport("libc")]
         private static extern int close(int fd);
 
         [DllImport("libc", SetLastError = true)]
-        private static unsafe extern int pipe2(int* pipefd, int flags);
+        private static extern unsafe int pipe2(int* pipefd, int flags);
 
         private static unsafe (int, int) pipe2(int flags = 0)
         {

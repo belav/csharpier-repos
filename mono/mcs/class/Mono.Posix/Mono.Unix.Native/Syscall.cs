@@ -2865,7 +2865,7 @@ namespace Mono.Unix.Native
     [CLSCompliant(false)]
     public sealed class Syscall : Stdlib
     {
-        new internal const string LIBC = "libc";
+        internal new const string LIBC = "libc";
 
         private Syscall() { }
 

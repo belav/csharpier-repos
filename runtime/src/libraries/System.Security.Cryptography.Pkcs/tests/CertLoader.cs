@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Test.Cryptography
 {
-    internal abstract partial class CertLoader
+    partial internal abstract class CertLoader
     {
         private static readonly X509KeyStorageFlags s_defaultKeyStorageFlags =
             GetBestKeyStorageFlags();

@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.FindUsages
 {
-    internal abstract partial class AbstractFindUsagesService
+    partial internal abstract class AbstractFindUsagesService
         : IFindUsagesService,
             IFindUsagesLSPService { }
 }

@@ -8,10 +8,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Pipes
 {
+    partial
     /// <summary>
     /// Named pipe server
     /// </summary>
-    public sealed partial class NamedPipeServerStream : PipeStream
+    public sealed class NamedPipeServerStream : PipeStream
     {
         // Use the maximum number of server instances that the system resources allow
         public const int MaxAllowedServerInstances = -1;

@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 {
-    internal abstract partial class CSharpSelectionResult : SelectionResult
+    partial internal abstract class CSharpSelectionResult : SelectionResult
     {
         public static async Task<CSharpSelectionResult> CreateAsync(
             OperationStatus status,

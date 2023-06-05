@@ -103,7 +103,7 @@ namespace System.Workflow.Runtime.Hosting
             base.OnStopped();
         }
 
-        internal protected override void CommitWorkBatch(
+        protected internal override void CommitWorkBatch(
             CommitWorkBatchCallback commitWorkBatchCallback
         )
         {

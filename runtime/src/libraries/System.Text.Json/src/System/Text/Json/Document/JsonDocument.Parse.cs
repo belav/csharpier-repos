@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.Text.Json
 {
-    public sealed partial class JsonDocument
+    partial public sealed class JsonDocument
     {
         // Cached unrented documents for literal values.
         private static JsonDocument? s_nullLiteral;

@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public partial class CommonServiceBehaviorElement
+    partial public class CommonServiceBehaviorElement
         : ServiceModelExtensionCollectionElement<BehaviorExtensionElement>,
             ICollection<BehaviorExtensionElement>,
             IEnumerable<BehaviorExtensionElement>,

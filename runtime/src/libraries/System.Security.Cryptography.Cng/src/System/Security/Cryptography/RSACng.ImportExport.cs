@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSACng : RSA
+    partial public sealed class RSACng : RSA
     {
         // CngKeyBlob formats for RSA key blobs
         private static readonly CngKeyBlobFormat s_rsaFullPrivateBlob = new CngKeyBlobFormat(

@@ -8,7 +8,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.SymbolSearch
 {
-    internal partial class SymbolSearchUpdateEngine
+    partial internal class SymbolSearchUpdateEngine
     {
         private class DelayService : IDelayService
         {

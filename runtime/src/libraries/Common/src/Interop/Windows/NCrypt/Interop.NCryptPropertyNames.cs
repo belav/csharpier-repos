@@ -3,9 +3,9 @@
 
 using System;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NCrypt
+    partial internal static class NCrypt
     {
         internal const string NCRYPT_CHAINING_MODE_PROPERTY = "Chaining Mode";
         internal const string NCRYPT_INITIALIZATION_VECTOR = "IV";

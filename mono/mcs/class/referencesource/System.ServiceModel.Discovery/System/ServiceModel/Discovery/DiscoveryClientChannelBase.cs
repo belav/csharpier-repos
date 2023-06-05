@@ -11,7 +11,7 @@ namespace System.ServiceModel.Discovery
     using System.ServiceModel.Channels;
     using System.Threading;
 
-    abstract partial class DiscoveryClientChannelBase<TChannel> : ChannelBase
+    partial abstract class DiscoveryClientChannelBase<TChannel> : ChannelBase
         where TChannel : class, IChannel
     {
         TChannel innerChannel;

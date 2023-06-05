@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace testwebemailcontrols
 {
-    public partial class test : System.Web.UI.UserControl
+    partial public class test : System.Web.UI.UserControl
     {
         private ctlItem _slam;
         StringBuilder _stringBuilderSlam;

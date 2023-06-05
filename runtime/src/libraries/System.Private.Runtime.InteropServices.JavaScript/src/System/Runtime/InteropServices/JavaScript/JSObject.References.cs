@@ -8,7 +8,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    public partial class JSObject : SafeHandleMinusOneIsInvalid
+    partial public class JSObject : SafeHandleMinusOneIsInvalid
     {
         private GCHandle? InFlight;
         private int InFlightCounter;

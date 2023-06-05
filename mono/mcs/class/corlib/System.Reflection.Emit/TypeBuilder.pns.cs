@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class TypeBuilder : System.Reflection.TypeInfo
+    partial public sealed class TypeBuilder : System.Reflection.TypeInfo
     {
         internal TypeBuilder()
         {

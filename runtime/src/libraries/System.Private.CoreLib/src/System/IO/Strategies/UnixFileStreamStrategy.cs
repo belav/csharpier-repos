@@ -5,7 +5,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Strategies
 {
-    internal sealed partial class UnixFileStreamStrategy : OSFileStreamStrategy
+    partial internal sealed class UnixFileStreamStrategy : OSFileStreamStrategy
     {
         internal UnixFileStreamStrategy(SafeFileHandle handle, FileAccess access)
             : base(handle, access) { }

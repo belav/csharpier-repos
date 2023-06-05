@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {
-    public static partial class HttpContentJsonExtensions
+    partial public static class HttpContentJsonExtensions
     {
         private static Task<Stream> ReadHttpContentStreamAsync(
             HttpContent content,

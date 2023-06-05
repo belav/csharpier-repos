@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public sealed partial class ZoneMembershipCondition : ISecurityEncodable, IMembershipCondition
+    partial public sealed class ZoneMembershipCondition : ISecurityEncodable, IMembershipCondition
     {
         public ZoneMembershipCondition(SecurityZone zone) { }
 

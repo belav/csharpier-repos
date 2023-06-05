@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-internal partial class FileLoggerProcessor : IAsyncDisposable
+partial internal class FileLoggerProcessor : IAsyncDisposable
 {
     private const int _maxQueuedMessages = 1024;
 
@@ -361,7 +361,7 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -369,7 +369,7 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
             "Failed to write all messages.",
             EventName = "WriteMessagesFailed"
         )]
-        public static partial void WriteMessagesFailed(ILogger logger, Exception ex);
+        partial public static void WriteMessagesFailed(ILogger logger, Exception ex);
 
         [LoggerMessage(
             2,
@@ -377,7 +377,7 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
             "Failed to create directory {Path}.",
             EventName = "CreateDirectoryFailed"
         )]
-        public static partial void CreateDirectoryFailed(ILogger logger, string path, Exception ex);
+        partial public static void CreateDirectoryFailed(ILogger logger, string path, Exception ex);
 
         [LoggerMessage(
             3,
@@ -385,6 +385,6 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
             "Limit of 10000 files per day has been reached",
             EventName = "MaxFilesReached"
         )]
-        public static partial void MaxFilesReached(ILogger logger);
+        partial public static void MaxFilesReached(ILogger logger);
     }
 }

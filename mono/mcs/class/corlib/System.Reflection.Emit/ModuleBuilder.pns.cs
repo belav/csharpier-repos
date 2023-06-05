@@ -30,7 +30,7 @@
 
 namespace System.Reflection.Emit
 {
-    public partial class ModuleBuilder : System.Reflection.Module
+    partial public class ModuleBuilder : System.Reflection.Module
     {
         internal ModuleBuilder() => throw new PlatformNotSupportedException();
 
@@ -485,7 +485,7 @@ namespace System.Reflection.Emit
             throw new PlatformNotSupportedException();
     }
 
-    public readonly partial struct MethodToken : System.IEquatable<MethodToken>
+    partial public readonly struct MethodToken : System.IEquatable<MethodToken>
     {
         public static readonly System.Reflection.Emit.MethodToken Empty;
         public int Token
@@ -525,7 +525,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public readonly partial struct SignatureToken : System.IEquatable<SignatureToken>
+    partial public readonly struct SignatureToken : System.IEquatable<SignatureToken>
     {
         public static readonly System.Reflection.Emit.SignatureToken Empty;
         public int Token
@@ -565,7 +565,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public readonly partial struct FieldToken : System.IEquatable<FieldToken>
+    partial public readonly struct FieldToken : System.IEquatable<FieldToken>
     {
         public static readonly System.Reflection.Emit.FieldToken Empty;
         public int Token
@@ -605,7 +605,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public readonly partial struct StringToken : System.IEquatable<StringToken>
+    partial public readonly struct StringToken : System.IEquatable<StringToken>
     {
         public int Token
         {
@@ -644,7 +644,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public readonly partial struct TypeToken : System.IEquatable<TypeToken>
+    partial public readonly struct TypeToken : System.IEquatable<TypeToken>
     {
         public static readonly System.Reflection.Emit.TypeToken Empty;
         public int Token
@@ -684,7 +684,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public partial class DynamicILInfo
+    partial public class DynamicILInfo
     {
         internal DynamicILInfo() => throw new PlatformNotSupportedException();
 
@@ -760,7 +760,7 @@ namespace System.Reflection.Emit
             throw new PlatformNotSupportedException();
     }
 
-    public readonly partial struct EventToken : System.IEquatable<EventToken>
+    partial public readonly struct EventToken : System.IEquatable<EventToken>
     {
         public static readonly System.Reflection.Emit.EventToken Empty;
         public int Token
@@ -800,7 +800,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public readonly partial struct ParameterToken : System.IEquatable<ParameterToken>
+    partial public readonly struct ParameterToken : System.IEquatable<ParameterToken>
     {
         public static readonly System.Reflection.Emit.ParameterToken Empty;
         public int Token
@@ -840,7 +840,7 @@ namespace System.Reflection.Emit
         }
     }
 
-    public readonly partial struct PropertyToken : System.IEquatable<PropertyToken>
+    partial public readonly struct PropertyToken : System.IEquatable<PropertyToken>
     {
         public static readonly System.Reflection.Emit.PropertyToken Empty;
         public int Token

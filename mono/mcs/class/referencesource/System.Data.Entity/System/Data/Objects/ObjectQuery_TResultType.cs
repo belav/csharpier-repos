@@ -28,7 +28,7 @@ namespace System.Data.Objects
         "Microsoft.Naming",
         "CA1710:IdentifiersShouldHaveCorrectSuffix"
     )]
-    public partial class ObjectQuery<T>
+    partial public class ObjectQuery<T>
         : ObjectQuery,
             IEnumerable<T>,
             IQueryable<T>,

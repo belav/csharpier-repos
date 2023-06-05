@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public partial class TarWriter_WriteEntry_File_Tests : TarWriter_File_Base
+    partial public class TarWriter_WriteEntry_File_Tests : TarWriter_File_Base
     {
         [Fact]
         public void ThrowIf_AddFile_AfterDispose()

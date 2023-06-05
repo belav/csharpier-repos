@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 {
-    internal abstract partial class AbstractVirtualCharService
+    partial internal abstract class AbstractVirtualCharService
     {
         /// <summary>
         /// Abstraction to allow generic algorithms to run over a string or <see cref="SourceText"/> without any

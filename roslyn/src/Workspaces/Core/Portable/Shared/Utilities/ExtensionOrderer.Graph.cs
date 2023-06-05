@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial class ExtensionOrderer
+    partial internal class ExtensionOrderer
     {
         private class Graph<TExtension, TMetadata>
             where TMetadata : OrderableMetadata

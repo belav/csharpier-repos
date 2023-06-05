@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-public partial class WebHostTests
+partial public class WebHostTests
 {
     [Fact]
     public async Task DisposingHostCallsDisposeAsyncOnProvider()

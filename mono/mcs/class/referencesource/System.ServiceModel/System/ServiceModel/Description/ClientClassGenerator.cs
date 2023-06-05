@@ -1569,7 +1569,7 @@ namespace System.ServiceModel.Description
             );
         }
 
-        static internal string GetClientClassName(string interfaceName)
+        internal static string GetClientClassName(string interfaceName)
         {
             return GetClassName(interfaceName) + Strings.ClientTypeSuffix;
         }

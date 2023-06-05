@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 {
-    internal sealed partial class ProjectSystemProject
+    partial internal sealed class ProjectSystemProject
     {
         /// <summary>
         /// Helper class to manage collections of source-file like things; this exists just to avoid duplicating all the logic for regular source files

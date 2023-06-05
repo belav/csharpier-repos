@@ -50,7 +50,7 @@ namespace System.Data
     }
 
     [System.ComponentModel.DefaultPropertyAttribute("ConstraintName")]
-    public abstract partial class Constraint
+    partial public abstract class Constraint
     {
         internal Constraint() { }
 
@@ -90,7 +90,7 @@ namespace System.Data
         "Microsoft.VSDesigner.Data.Design.ConstraintsCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public sealed partial class ConstraintCollection : System.Data.InternalDataCollectionBase
+    partial public sealed class ConstraintCollection : System.Data.InternalDataCollectionBase
     {
         internal ConstraintCollection() { }
 
@@ -183,7 +183,7 @@ namespace System.Data
         public void RemoveAt(int index) { }
     }
 
-    public partial class ConstraintException : System.Data.DataException
+    partial public class ConstraintException : System.Data.DataException
     {
         public ConstraintException() { }
 
@@ -211,7 +211,7 @@ namespace System.Data
             .DynamicallyAccessedMemberTypes
             .PublicParameterlessConstructor
     )]
-    public partial class DataColumn : System.ComponentModel.MarshalByValueComponent
+    partial public class DataColumn : System.ComponentModel.MarshalByValueComponent
     {
         public DataColumn() { }
 
@@ -414,7 +414,7 @@ namespace System.Data
         }
     }
 
-    public partial class DataColumnChangeEventArgs : System.EventArgs
+    partial public class DataColumnChangeEventArgs : System.EventArgs
     {
         public DataColumnChangeEventArgs(
             System.Data.DataRow row,
@@ -447,7 +447,7 @@ namespace System.Data
         "Microsoft.VSDesigner.Data.Design.ColumnsCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public sealed partial class DataColumnCollection : System.Data.InternalDataCollectionBase
+    partial public sealed class DataColumnCollection : System.Data.InternalDataCollectionBase
     {
         internal DataColumnCollection() { }
 
@@ -542,7 +542,7 @@ namespace System.Data
         public void RemoveAt(int index) { }
     }
 
-    public partial class DataException : System.SystemException
+    partial public class DataException : System.SystemException
     {
         public DataException() { }
 
@@ -556,7 +556,7 @@ namespace System.Data
         public DataException(string? s, System.Exception? innerException) { }
     }
 
-    public static partial class DataReaderExtensions
+    partial public static class DataReaderExtensions
     {
         public static bool GetBoolean(this System.Data.Common.DbDataReader reader, string name)
         {
@@ -751,7 +751,7 @@ namespace System.Data
         "Microsoft.VSDesigner.Data.Design.DataRelationEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class DataRelation
+    partial public class DataRelation
     {
         public DataRelation(
             string? relationName,
@@ -876,7 +876,7 @@ namespace System.Data
         "Microsoft.VSDesigner.Data.Design.DataRelationCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public abstract partial class DataRelationCollection : System.Data.InternalDataCollectionBase
+    partial public abstract class DataRelationCollection : System.Data.InternalDataCollectionBase
     {
         protected DataRelationCollection() { }
 
@@ -991,7 +991,7 @@ namespace System.Data
         protected virtual void RemoveCore(System.Data.DataRelation relation) { }
     }
 
-    public partial class DataRow
+    partial public class DataRow
     {
         protected internal DataRow(System.Data.DataRowBuilder builder) { }
 
@@ -1238,12 +1238,12 @@ namespace System.Data
         ChangeCurrentAndOriginal = 64,
     }
 
-    public sealed partial class DataRowBuilder
+    partial public sealed class DataRowBuilder
     {
         internal DataRowBuilder() { }
     }
 
-    public partial class DataRowChangeEventArgs : System.EventArgs
+    partial public class DataRowChangeEventArgs : System.EventArgs
     {
         public DataRowChangeEventArgs(System.Data.DataRow row, System.Data.DataRowAction action) { }
 
@@ -1262,7 +1262,7 @@ namespace System.Data
         System.Data.DataRowChangeEventArgs e
     );
 
-    public sealed partial class DataRowCollection : System.Data.InternalDataCollectionBase
+    partial public sealed class DataRowCollection : System.Data.InternalDataCollectionBase
     {
         internal DataRowCollection() { }
 
@@ -1325,7 +1325,7 @@ namespace System.Data
         public void RemoveAt(int index) { }
     }
 
-    public static partial class DataRowComparer
+    partial public static class DataRowComparer
     {
         public static System.Data.DataRowComparer<System.Data.DataRow> Default
         {
@@ -1333,7 +1333,7 @@ namespace System.Data
         }
     }
 
-    public sealed partial class DataRowComparer<TRow>
+    partial public sealed class DataRowComparer<TRow>
         : System.Collections.Generic.IEqualityComparer<TRow>
         where TRow : System.Data.DataRow
     {
@@ -1355,7 +1355,7 @@ namespace System.Data
         }
     }
 
-    public static partial class DataRowExtensions
+    partial public static class DataRowExtensions
     {
         public static T? Field<T>(this System.Data.DataRow row, System.Data.DataColumn column)
         {
@@ -1432,7 +1432,7 @@ namespace System.Data
         Default = 1536,
     }
 
-    public partial class DataRowView
+    partial public class DataRowView
         : System.ComponentModel.ICustomTypeDescriptor,
             System.ComponentModel.IDataErrorInfo,
             System.ComponentModel.IEditableObject,
@@ -1634,7 +1634,7 @@ namespace System.Data
             .PublicParameterlessConstructor
             | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
     )]
-    public partial class DataSet
+    partial public class DataSet
         : System.ComponentModel.MarshalByValueComponent,
             System.ComponentModel.IListSource,
             System.ComponentModel.ISupportInitialize,
@@ -2226,7 +2226,7 @@ namespace System.Data
     [System.ObsoleteAttribute(
         "DataSysDescriptionAttribute has been deprecated and is not supported."
     )]
-    public partial class DataSysDescriptionAttribute : System.ComponentModel.DescriptionAttribute
+    partial public class DataSysDescriptionAttribute : System.ComponentModel.DescriptionAttribute
     {
         [System.ObsoleteAttribute(
             "DataSysDescriptionAttribute has been deprecated and is not supported."
@@ -2256,7 +2256,7 @@ namespace System.Data
             .PublicParameterlessConstructor
             | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
     )]
-    public partial class DataTable
+    partial public class DataTable
         : System.ComponentModel.MarshalByValueComponent,
             System.ComponentModel.IListSource,
             System.ComponentModel.ISupportInitialize,
@@ -2891,7 +2891,7 @@ namespace System.Data
         public void WriteXmlSchema(System.Xml.XmlWriter? writer, bool writeHierarchy) { }
     }
 
-    public sealed partial class DataTableClearEventArgs : System.EventArgs
+    partial public sealed class DataTableClearEventArgs : System.EventArgs
     {
         public DataTableClearEventArgs(System.Data.DataTable dataTable) { }
 
@@ -2920,7 +2920,7 @@ namespace System.Data
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
     [System.ComponentModel.ListBindableAttribute(false)]
-    public sealed partial class DataTableCollection : System.Data.InternalDataCollectionBase
+    partial public sealed class DataTableCollection : System.Data.InternalDataCollectionBase
     {
         internal DataTableCollection() { }
 
@@ -3013,7 +3013,7 @@ namespace System.Data
         public void RemoveAt(int index) { }
     }
 
-    public static partial class DataTableExtensions
+    partial public static class DataTableExtensions
     {
         public static System.Data.DataView AsDataView(this System.Data.DataTable table)
         {
@@ -3059,7 +3059,7 @@ namespace System.Data
             where T : System.Data.DataRow { }
     }
 
-    public sealed partial class DataTableNewRowEventArgs : System.EventArgs
+    partial public sealed class DataTableNewRowEventArgs : System.EventArgs
     {
         public DataTableNewRowEventArgs(System.Data.DataRow dataRow) { }
 
@@ -3074,7 +3074,7 @@ namespace System.Data
         System.Data.DataTableNewRowEventArgs e
     );
 
-    public sealed partial class DataTableReader : System.Data.Common.DbDataReader
+    partial public sealed class DataTableReader : System.Data.Common.DbDataReader
     {
         public DataTableReader(System.Data.DataTable dataTable) { }
 
@@ -3281,7 +3281,7 @@ namespace System.Data
         "Microsoft.VSDesigner.Data.Design.DataSourceEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class DataView
+    partial public class DataView
         : System.ComponentModel.MarshalByValueComponent,
             System.Collections.ICollection,
             System.Collections.IEnumerable,
@@ -3643,7 +3643,7 @@ namespace System.Data
     [System.ComponentModel.DesignerAttribute(
         "Microsoft.VSDesigner.Data.VS.DataViewManagerDesigner, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class DataViewManager
+    partial public class DataViewManager
         : System.ComponentModel.MarshalByValueComponent,
             System.Collections.ICollection,
             System.Collections.IEnumerable,
@@ -3855,7 +3855,7 @@ namespace System.Data
     [System.ComponentModel.TypeConverterAttribute(
         typeof(System.ComponentModel.ExpandableObjectConverter)
     )]
-    public partial class DataViewSetting
+    partial public class DataViewSetting
     {
         internal DataViewSetting() { }
 
@@ -3904,7 +3904,7 @@ namespace System.Data
         "Microsoft.VSDesigner.Data.Design.DataViewSettingsCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class DataViewSettingCollection
+    partial public class DataViewSettingCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -3960,7 +3960,7 @@ namespace System.Data
         }
     }
 
-    public sealed partial class DBConcurrencyException : System.SystemException
+    partial public sealed class DBConcurrencyException : System.SystemException
     {
         public DBConcurrencyException() { }
 
@@ -4026,7 +4026,7 @@ namespace System.Data
         DateTimeOffset = 27,
     }
 
-    public partial class DeletedRowInaccessibleException : System.Data.DataException
+    partial public class DeletedRowInaccessibleException : System.Data.DataException
     {
         public DeletedRowInaccessibleException() { }
 
@@ -4041,7 +4041,7 @@ namespace System.Data
         { }
     }
 
-    public partial class DuplicateNameException : System.Data.DataException
+    partial public class DuplicateNameException : System.Data.DataException
     {
         public DuplicateNameException() { }
 
@@ -4055,7 +4055,7 @@ namespace System.Data
         public DuplicateNameException(string? message, System.Exception? innerException) { }
     }
 
-    public abstract partial class EnumerableRowCollection : System.Collections.IEnumerable
+    partial public abstract class EnumerableRowCollection : System.Collections.IEnumerable
     {
         internal EnumerableRowCollection() { }
 
@@ -4065,7 +4065,7 @@ namespace System.Data
         }
     }
 
-    public static partial class EnumerableRowCollectionExtensions
+    partial public static class EnumerableRowCollectionExtensions
     {
         public static System.Data.EnumerableRowCollection<TResult> Cast<TResult>(
             this System.Data.EnumerableRowCollection source
@@ -4165,7 +4165,7 @@ namespace System.Data
         }
     }
 
-    public partial class EnumerableRowCollection<TRow>
+    partial public class EnumerableRowCollection<TRow>
         : System.Data.EnumerableRowCollection,
             System.Collections.Generic.IEnumerable<TRow>,
             System.Collections.IEnumerable
@@ -4183,7 +4183,7 @@ namespace System.Data
         }
     }
 
-    public partial class EvaluateException : System.Data.InvalidExpressionException
+    partial public class EvaluateException : System.Data.InvalidExpressionException
     {
         public EvaluateException() { }
 
@@ -4197,7 +4197,7 @@ namespace System.Data
         public EvaluateException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class FillErrorEventArgs : System.EventArgs
+    partial public class FillErrorEventArgs : System.EventArgs
     {
         public FillErrorEventArgs(System.Data.DataTable? dataTable, object?[]? values) { }
 
@@ -4228,7 +4228,7 @@ namespace System.Data
         "Microsoft.VSDesigner.Data.Design.ForeignKeyConstraintEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class ForeignKeyConstraint : System.Data.Constraint
+    partial public class ForeignKeyConstraint : System.Data.Constraint
     {
         public ForeignKeyConstraint(
             System.Data.DataColumn parentColumn,
@@ -4333,13 +4333,13 @@ namespace System.Data
         }
     }
 
-    public partial interface IColumnMapping
+    partial public interface IColumnMapping
     {
         string DataSetColumn { get; set; }
         string SourceColumn { get; set; }
     }
 
-    public partial interface IColumnMappingCollection
+    partial public interface IColumnMappingCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -4352,7 +4352,7 @@ namespace System.Data
         void RemoveAt(string sourceColumnName);
     }
 
-    public partial interface IDataAdapter
+    partial public interface IDataAdapter
     {
         System.Data.MissingMappingAction MissingMappingAction { get; set; }
         System.Data.MissingSchemaAction MissingSchemaAction { get; set; }
@@ -4374,7 +4374,7 @@ namespace System.Data
         int Update(System.Data.DataSet dataSet);
     }
 
-    public partial interface IDataParameter
+    partial public interface IDataParameter
     {
         System.Data.DbType DbType { get; set; }
         System.Data.ParameterDirection Direction { get; set; }
@@ -4389,7 +4389,7 @@ namespace System.Data
         object? Value { get; set; }
     }
 
-    public partial interface IDataParameterCollection
+    partial public interface IDataParameterCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -4400,7 +4400,7 @@ namespace System.Data
         void RemoveAt(string parameterName);
     }
 
-    public partial interface IDataReader : System.Data.IDataRecord, System.IDisposable
+    partial public interface IDataReader : System.Data.IDataRecord, System.IDisposable
     {
         int Depth { get; }
         bool IsClosed { get; }
@@ -4411,7 +4411,7 @@ namespace System.Data
         bool Read();
     }
 
-    public partial interface IDataRecord
+    partial public interface IDataRecord
     {
         int FieldCount { get; }
         object this[int i] { get; }
@@ -4445,7 +4445,7 @@ namespace System.Data
         bool IsDBNull(int i);
     }
 
-    public partial interface IDbCommand : System.IDisposable
+    partial public interface IDbCommand : System.IDisposable
     {
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         string CommandText { get; set; }
@@ -4464,7 +4464,7 @@ namespace System.Data
         void Prepare();
     }
 
-    public partial interface IDbConnection : System.IDisposable
+    partial public interface IDbConnection : System.IDisposable
     {
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         string ConnectionString { get; set; }
@@ -4479,7 +4479,7 @@ namespace System.Data
         void Open();
     }
 
-    public partial interface IDbDataAdapter : System.Data.IDataAdapter
+    partial public interface IDbDataAdapter : System.Data.IDataAdapter
     {
         System.Data.IDbCommand? DeleteCommand { get; set; }
         System.Data.IDbCommand? InsertCommand { get; set; }
@@ -4487,14 +4487,14 @@ namespace System.Data
         System.Data.IDbCommand? UpdateCommand { get; set; }
     }
 
-    public partial interface IDbDataParameter : System.Data.IDataParameter
+    partial public interface IDbDataParameter : System.Data.IDataParameter
     {
         byte Precision { get; set; }
         byte Scale { get; set; }
         int Size { get; set; }
     }
 
-    public partial interface IDbTransaction : System.IDisposable
+    partial public interface IDbTransaction : System.IDisposable
     {
         System.Data.IDbConnection? Connection { get; }
         System.Data.IsolationLevel IsolationLevel { get; }
@@ -4502,7 +4502,7 @@ namespace System.Data
         void Rollback();
     }
 
-    public partial class InRowChangingEventException : System.Data.DataException
+    partial public class InRowChangingEventException : System.Data.DataException
     {
         public InRowChangingEventException() { }
 
@@ -4516,7 +4516,7 @@ namespace System.Data
         public InRowChangingEventException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class InternalDataCollectionBase
+    partial public class InternalDataCollectionBase
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -4558,7 +4558,7 @@ namespace System.Data
         }
     }
 
-    public partial class InvalidConstraintException : System.Data.DataException
+    partial public class InvalidConstraintException : System.Data.DataException
     {
         public InvalidConstraintException() { }
 
@@ -4572,7 +4572,7 @@ namespace System.Data
         public InvalidConstraintException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class InvalidExpressionException : System.Data.DataException
+    partial public class InvalidExpressionException : System.Data.DataException
     {
         public InvalidExpressionException() { }
 
@@ -4597,14 +4597,14 @@ namespace System.Data
         Snapshot = 16777216,
     }
 
-    public partial interface ITableMapping
+    partial public interface ITableMapping
     {
         System.Data.IColumnMappingCollection ColumnMappings { get; }
         string DataSetTable { get; set; }
         string SourceTable { get; set; }
     }
 
-    public partial interface ITableMappingCollection
+    partial public interface ITableMappingCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -4638,7 +4638,7 @@ namespace System.Data
         Hidden = 4,
     }
 
-    public partial class MergeFailedEventArgs : System.EventArgs
+    partial public class MergeFailedEventArgs : System.EventArgs
     {
         public MergeFailedEventArgs(System.Data.DataTable? table, string conflict) { }
 
@@ -4661,7 +4661,7 @@ namespace System.Data
         Error = 3,
     }
 
-    public partial class MissingPrimaryKeyException : System.Data.DataException
+    partial public class MissingPrimaryKeyException : System.Data.DataException
     {
         public MissingPrimaryKeyException() { }
 
@@ -4683,7 +4683,7 @@ namespace System.Data
         AddWithKey = 4,
     }
 
-    public partial class NoNullAllowedException : System.Data.DataException
+    partial public class NoNullAllowedException : System.Data.DataException
     {
         public NoNullAllowedException() { }
 
@@ -4697,7 +4697,7 @@ namespace System.Data
         public NoNullAllowedException(string? message, System.Exception? innerException) { }
     }
 
-    public sealed partial class OrderedEnumerableRowCollection<TRow>
+    partial public sealed class OrderedEnumerableRowCollection<TRow>
         : System.Data.EnumerableRowCollection<TRow>
     {
         internal OrderedEnumerableRowCollection() { }
@@ -4711,7 +4711,7 @@ namespace System.Data
         ReturnValue = 6,
     }
 
-    public partial class PropertyCollection : System.Collections.Hashtable, System.ICloneable
+    partial public class PropertyCollection : System.Collections.Hashtable, System.ICloneable
     {
         public PropertyCollection() { }
 
@@ -4726,7 +4726,7 @@ namespace System.Data
         }
     }
 
-    public partial class ReadOnlyException : System.Data.DataException
+    partial public class ReadOnlyException : System.Data.DataException
     {
         public ReadOnlyException() { }
 
@@ -4740,7 +4740,7 @@ namespace System.Data
         public ReadOnlyException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class RowNotInTableException : System.Data.DataException
+    partial public class RowNotInTableException : System.Data.DataException
     {
         public RowNotInTableException() { }
 
@@ -4820,7 +4820,7 @@ namespace System.Data
         DateTimeOffset = 34,
     }
 
-    public sealed partial class StateChangeEventArgs : System.EventArgs
+    partial public sealed class StateChangeEventArgs : System.EventArgs
     {
         public StateChangeEventArgs(
             System.Data.ConnectionState originalState,
@@ -4839,7 +4839,7 @@ namespace System.Data
 
     public delegate void StateChangeEventHandler(object sender, System.Data.StateChangeEventArgs e);
 
-    public sealed partial class StatementCompletedEventArgs : System.EventArgs
+    partial public sealed class StatementCompletedEventArgs : System.EventArgs
     {
         public StatementCompletedEventArgs(int recordCount) { }
 
@@ -4863,7 +4863,7 @@ namespace System.Data
         Batch = 4,
     }
 
-    public partial class StrongTypingException : System.Data.DataException
+    partial public class StrongTypingException : System.Data.DataException
     {
         public StrongTypingException() { }
 
@@ -4877,7 +4877,7 @@ namespace System.Data
         public StrongTypingException(string? s, System.Exception? innerException) { }
     }
 
-    public partial class SyntaxErrorException : System.Data.InvalidExpressionException
+    partial public class SyntaxErrorException : System.Data.InvalidExpressionException
     {
         public SyntaxErrorException() { }
 
@@ -4891,7 +4891,7 @@ namespace System.Data
         public SyntaxErrorException(string? message, System.Exception? innerException) { }
     }
 
-    public static partial class TypedTableBaseExtensions
+    partial public static class TypedTableBaseExtensions
     {
         public static System.Data.EnumerableRowCollection<TRow> AsEnumerable<TRow>(
             this System.Data.TypedTableBase<TRow> source
@@ -4970,7 +4970,7 @@ namespace System.Data
         }
     }
 
-    public abstract partial class TypedTableBase<T>
+    partial public abstract class TypedTableBase<T>
         : System.Data.DataTable,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable
@@ -5007,7 +5007,7 @@ namespace System.Data
         "Microsoft.VSDesigner.Data.Design.UniqueConstraintEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public partial class UniqueConstraint : System.Data.Constraint
+    partial public class UniqueConstraint : System.Data.Constraint
     {
         public UniqueConstraint(System.Data.DataColumn column) { }
 
@@ -5074,7 +5074,7 @@ namespace System.Data
         SkipAllRemainingRows = 3,
     }
 
-    public partial class VersionNotFoundException : System.Data.DataException
+    partial public class VersionNotFoundException : System.Data.DataException
     {
         public VersionNotFoundException() { }
 
@@ -5122,7 +5122,7 @@ namespace System.Data.Common
             .DynamicallyAccessedMemberTypes
             .PublicParameterlessConstructor
     )]
-    public partial class DataAdapter : System.ComponentModel.Component, System.Data.IDataAdapter
+    partial public class DataAdapter : System.ComponentModel.Component, System.Data.IDataAdapter
     {
         protected DataAdapter() { }
 
@@ -5334,7 +5334,7 @@ namespace System.Data.Common
         }
     }
 
-    public sealed partial class DataColumnMapping
+    partial public sealed class DataColumnMapping
         : System.MarshalByRefObject,
             System.Data.IColumnMapping,
             System.ICloneable
@@ -5404,7 +5404,7 @@ namespace System.Data.Common
         }
     }
 
-    public sealed partial class DataColumnMappingCollection
+    partial public sealed class DataColumnMappingCollection
         : System.MarshalByRefObject,
             System.Collections.ICollection,
             System.Collections.IEnumerable,
@@ -5582,7 +5582,7 @@ namespace System.Data.Common
         }
     }
 
-    public sealed partial class DataTableMapping
+    partial public sealed class DataTableMapping
         : System.MarshalByRefObject,
             System.Data.ITableMapping,
             System.ICloneable
@@ -5681,7 +5681,7 @@ namespace System.Data.Common
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
     [System.ComponentModel.ListBindableAttribute(false)]
-    public sealed partial class DataTableMappingCollection
+    partial public sealed class DataTableMappingCollection
         : System.MarshalByRefObject,
             System.Collections.ICollection,
             System.Collections.IEnumerable,
@@ -5960,7 +5960,7 @@ namespace System.Data.Common
         );
     }
 
-    public abstract partial class DbColumn
+    partial public abstract class DbColumn
     {
         protected DbColumn() { }
 
@@ -6085,7 +6085,7 @@ namespace System.Data.Common
         }
     }
 
-    public abstract partial class DbCommand
+    partial public abstract class DbCommand
         : System.ComponentModel.Component,
             System.Data.IDbCommand,
             System.IDisposable,
@@ -6283,7 +6283,7 @@ namespace System.Data.Common
         }
     }
 
-    public abstract partial class DbCommandBuilder : System.ComponentModel.Component
+    partial public abstract class DbCommandBuilder : System.ComponentModel.Component
     {
         protected DbCommandBuilder() { }
 
@@ -6427,7 +6427,7 @@ namespace System.Data.Common
         }
     }
 
-    public abstract partial class DbConnection
+    partial public abstract class DbConnection
         : System.ComponentModel.Component,
             System.Data.IDbConnection,
             System.IDisposable,
@@ -6631,7 +6631,7 @@ namespace System.Data.Common
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
         System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
     )]
-    public partial class DbConnectionStringBuilder
+    partial public class DbConnectionStringBuilder
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable,
@@ -6884,7 +6884,7 @@ namespace System.Data.Common
         }
     }
 
-    public abstract partial class DbDataAdapter
+    partial public abstract class DbDataAdapter
         : System.Data.Common.DataAdapter,
             System.Data.IDataAdapter,
             System.Data.IDbDataAdapter,
@@ -7207,7 +7207,7 @@ namespace System.Data.Common
         }
     }
 
-    public abstract partial class DbDataReader
+    partial public abstract class DbDataReader
         : System.MarshalByRefObject,
             System.Collections.IEnumerable,
             System.Data.IDataReader,
@@ -7432,7 +7432,7 @@ namespace System.Data.Common
         }
     }
 
-    public static partial class DbDataReaderExtensions
+    partial public static class DbDataReaderExtensions
     {
         public static bool CanGetColumnSchema(this System.Data.Common.DbDataReader reader)
         {
@@ -7447,7 +7447,7 @@ namespace System.Data.Common
         }
     }
 
-    public abstract partial class DbDataRecord
+    partial public abstract class DbDataRecord
         : System.ComponentModel.ICustomTypeDescriptor,
             System.Data.IDataRecord
     {
@@ -7670,14 +7670,14 @@ namespace System.Data.Common
         }
     }
 
-    public abstract partial class DbDataSourceEnumerator
+    partial public abstract class DbDataSourceEnumerator
     {
         protected DbDataSourceEnumerator() { }
 
         public abstract System.Data.DataTable GetDataSources();
     }
 
-    public partial class DbEnumerator : System.Collections.IEnumerator
+    partial public class DbEnumerator : System.Collections.IEnumerator
     {
         public DbEnumerator(System.Data.Common.DbDataReader reader) { }
 
@@ -7703,7 +7703,7 @@ namespace System.Data.Common
         public void Reset() { }
     }
 
-    public abstract partial class DbException : System.Runtime.InteropServices.ExternalException
+    partial public abstract class DbException : System.Runtime.InteropServices.ExternalException
     {
         protected DbException() { }
 
@@ -7736,7 +7736,7 @@ namespace System.Data.Common
         }
     }
 
-    public static partial class DbMetaDataCollectionNames
+    partial public static class DbMetaDataCollectionNames
     {
         public static readonly string DataSourceInformation;
         public static readonly string DataTypes;
@@ -7745,7 +7745,7 @@ namespace System.Data.Common
         public static readonly string Restrictions;
     }
 
-    public static partial class DbMetaDataColumnNames
+    partial public static class DbMetaDataColumnNames
     {
         public static readonly string CollectionName;
         public static readonly string ColumnSize;
@@ -7792,7 +7792,7 @@ namespace System.Data.Common
         public static readonly string TypeName;
     }
 
-    public abstract partial class DbParameter
+    partial public abstract class DbParameter
         : System.MarshalByRefObject,
             System.Data.IDataParameter,
             System.Data.IDbDataParameter
@@ -7878,7 +7878,7 @@ namespace System.Data.Common
         public abstract void ResetDbType();
     }
 
-    public abstract partial class DbParameterCollection
+    partial public abstract class DbParameterCollection
         : System.MarshalByRefObject,
             System.Collections.ICollection,
             System.Collections.IEnumerable,
@@ -8013,7 +8013,7 @@ namespace System.Data.Common
         );
     }
 
-    public static partial class DbProviderFactories
+    partial public static class DbProviderFactories
     {
         public static System.Data.Common.DbProviderFactory? GetFactory(
             System.Data.Common.DbConnection connection
@@ -8086,7 +8086,7 @@ namespace System.Data.Common
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
         System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
     )]
-    public abstract partial class DbProviderFactory
+    partial public abstract class DbProviderFactory
     {
         protected DbProviderFactory() { }
 
@@ -8163,7 +8163,7 @@ namespace System.Data.Common
         AllowMultiple = false,
         Inherited = true
     )]
-    public sealed partial class DbProviderSpecificTypePropertyAttribute : System.Attribute
+    partial public sealed class DbProviderSpecificTypePropertyAttribute : System.Attribute
     {
         public DbProviderSpecificTypePropertyAttribute(bool isProviderSpecificTypeProperty) { }
 
@@ -8173,7 +8173,7 @@ namespace System.Data.Common
         }
     }
 
-    public abstract partial class DbTransaction
+    partial public abstract class DbTransaction
         : System.MarshalByRefObject,
             System.Data.IDbTransaction,
             System.IDisposable,
@@ -8274,7 +8274,7 @@ namespace System.Data.Common
         ExactMatch = 4,
     }
 
-    public partial interface IDbColumnSchemaGenerator
+    partial public interface IDbColumnSchemaGenerator
     {
         System.Collections.ObjectModel.ReadOnlyCollection<System.Data.Common.DbColumn> GetColumnSchema();
     }
@@ -8286,7 +8286,7 @@ namespace System.Data.Common
         Sensitive = 2,
     }
 
-    public partial class RowUpdatedEventArgs : System.EventArgs
+    partial public class RowUpdatedEventArgs : System.EventArgs
     {
         public RowUpdatedEventArgs(
             System.Data.DataRow dataRow,
@@ -8335,7 +8335,7 @@ namespace System.Data.Common
         public void CopyToRows(System.Data.DataRow[] array, int arrayIndex) { }
     }
 
-    public partial class RowUpdatingEventArgs : System.EventArgs
+    partial public class RowUpdatingEventArgs : System.EventArgs
     {
         public RowUpdatingEventArgs(
             System.Data.DataRow dataRow,
@@ -8378,7 +8378,7 @@ namespace System.Data.Common
         }
     }
 
-    public static partial class SchemaTableColumn
+    partial public static class SchemaTableColumn
     {
         public static readonly string AllowDBNull;
         public static readonly string BaseColumnName;
@@ -8399,7 +8399,7 @@ namespace System.Data.Common
         public static readonly string ProviderType;
     }
 
-    public static partial class SchemaTableOptionalColumn
+    partial public static class SchemaTableOptionalColumn
     {
         public static readonly string AutoIncrementSeed;
         public static readonly string AutoIncrementStep;
@@ -8430,12 +8430,12 @@ namespace System.Data.Common
 
 namespace System.Data.SqlTypes
 {
-    public partial interface INullable
+    partial public interface INullable
     {
         bool IsNull { get; }
     }
 
-    public sealed partial class SqlAlreadyFilledException : System.Data.SqlTypes.SqlTypeException
+    partial public sealed class SqlAlreadyFilledException : System.Data.SqlTypes.SqlTypeException
     {
         public SqlAlreadyFilledException() { }
 
@@ -8445,7 +8445,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlBinary
+    partial public struct SqlBinary
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -8674,7 +8674,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlBoolean
+    partial public struct SqlBoolean
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -9062,7 +9062,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlByte
+    partial public struct SqlByte
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -9503,7 +9503,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public sealed partial class SqlBytes
+    partial public sealed class SqlBytes
         : System.Data.SqlTypes.INullable,
             System.Runtime.Serialization.ISerializable,
             System.Xml.Serialization.IXmlSerializable
@@ -9608,7 +9608,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public sealed partial class SqlChars
+    partial public sealed class SqlChars
         : System.Data.SqlTypes.INullable,
             System.Runtime.Serialization.ISerializable,
             System.Xml.Serialization.IXmlSerializable
@@ -9718,7 +9718,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlDateTime
+    partial public struct SqlDateTime
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -10000,7 +10000,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlDecimal
+    partial public struct SqlDecimal
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -10501,7 +10501,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlDouble
+    partial public struct SqlDouble
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -10865,7 +10865,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlGuid
+    partial public struct SqlGuid
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -11106,7 +11106,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlInt16
+    partial public struct SqlInt16
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -11552,7 +11552,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlInt32
+    partial public struct SqlInt32
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -11998,7 +11998,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlInt64
+    partial public struct SqlInt64
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -12444,7 +12444,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlMoney
+    partial public struct SqlMoney
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -12862,7 +12862,7 @@ namespace System.Data.SqlTypes
         }
     }
 
-    public sealed partial class SqlNotFilledException : System.Data.SqlTypes.SqlTypeException
+    partial public sealed class SqlNotFilledException : System.Data.SqlTypes.SqlTypeException
     {
         public SqlNotFilledException() { }
 
@@ -12871,7 +12871,7 @@ namespace System.Data.SqlTypes
         public SqlNotFilledException(string? message, System.Exception? e) { }
     }
 
-    public sealed partial class SqlNullValueException : System.Data.SqlTypes.SqlTypeException
+    partial public sealed class SqlNullValueException : System.Data.SqlTypes.SqlTypeException
     {
         public SqlNullValueException() { }
 
@@ -12881,7 +12881,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlSingle
+    partial public struct SqlSingle
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -13250,7 +13250,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public partial struct SqlString
+    partial public struct SqlString
         : System.Data.SqlTypes.INullable,
             System.IComparable,
             System.Xml.Serialization.IXmlSerializable,
@@ -13685,7 +13685,7 @@ namespace System.Data.SqlTypes
         }
     }
 
-    public sealed partial class SqlTruncateException : System.Data.SqlTypes.SqlTypeException
+    partial public sealed class SqlTruncateException : System.Data.SqlTypes.SqlTypeException
     {
         public SqlTruncateException() { }
 
@@ -13694,7 +13694,7 @@ namespace System.Data.SqlTypes
         public SqlTruncateException(string? message, System.Exception? e) { }
     }
 
-    public partial class SqlTypeException : System.SystemException
+    partial public class SqlTypeException : System.SystemException
     {
         public SqlTypeException() { }
 
@@ -13709,7 +13709,7 @@ namespace System.Data.SqlTypes
     }
 
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
-    public sealed partial class SqlXml
+    partial public sealed class SqlXml
         : System.Data.SqlTypes.INullable,
             System.Xml.Serialization.IXmlSerializable
     {
@@ -13765,7 +13765,7 @@ namespace System.Data.SqlTypes
 namespace System.Xml
 {
     [System.ObsoleteAttribute("XmlDataDocument has been deprecated and is not supported.")]
-    public partial class XmlDataDocument : System.Xml.XmlDocument
+    partial public class XmlDataDocument : System.Xml.XmlDocument
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "XmlDataDocument is used for serialization and deserialization. Members from serialized types may be trimmed if not referenced directly."

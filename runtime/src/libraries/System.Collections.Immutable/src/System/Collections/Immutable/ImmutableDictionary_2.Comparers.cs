@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableDictionary{TKey, TValue}.Comparers"/> class.
     /// </content>
-    public sealed partial class ImmutableDictionary<TKey, TValue>
+    public sealed class ImmutableDictionary<TKey, TValue>
     {
         /// <summary>
         /// A shareable container for the comparers used by an immutable dictionary.

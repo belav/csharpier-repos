@@ -6,7 +6,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDsaCng : ECDsa
+    partial public sealed class ECDsaCng : ECDsa
     {
         /// <summary>
         ///     Gets the key that will be used by the ECDsa object for any cryptographic operation that it uses.

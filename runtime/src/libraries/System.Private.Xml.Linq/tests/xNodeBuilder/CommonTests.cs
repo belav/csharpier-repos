@@ -18,12 +18,13 @@ using Xunit;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeBuilderFunctionalTests : TestModule
+    partial public class XNodeBuilderFunctionalTests : TestModule
     {
-        public partial class XNodeBuilderTests : XLinqTestCase
+        partial public class XNodeBuilderTests : XLinqTestCase
         {
+            partial
             //[TestCase(Name = "Auto-completion of tokens", Param = "XNodeBuilder")]
-            public partial class TCAutoComplete : BridgeHelpers
+            public class TCAutoComplete : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Missing EndAttr, followed by element", Priority = 1)]
                 public void var_1()
@@ -163,8 +164,9 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
+            partial
             //[TestCase(Name = "WriteStart/EndDocument", Param = "XNodeBuilder")]
-            public partial class TCDocument : BridgeHelpers
+            public class TCDocument : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "StartDocument-EndDocument Sanity Test", Priority = 0)]
                 public void document_1()
@@ -502,7 +504,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCDocType : BridgeHelpers
+            partial public class TCDocType : BridgeHelpers
             {
                 //[Variation(Id = 4, Desc = "WriteDocType with name value = String.Empty", Param = "String.Empty", Priority = 1)]
                 //[Variation(Id = 5, Desc = "WriteDocType with name value = null", Param = "null", Priority = 1)]
@@ -591,8 +593,9 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
+            partial
             //[TestCase(Name = "WriteStart/EndElement", Param = "XNodeBuilder")]
-            public partial class TCElement : BridgeHelpers
+            public class TCElement : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "StartElement-EndElement Sanity Test", Priority = 0)]
                 public void element_1()
@@ -718,7 +721,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCAttribute : BridgeHelpers
+            partial public class TCAttribute : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Sanity test for WriteAttribute", Priority = 0)]
                 public void attribute_1()
@@ -1209,7 +1212,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteAttributes : BridgeHelpers
+            partial public class TCWriteAttributes : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Call WriteAttributes with default DTD attributes = true", Priority = 1)]
                 public void writeAttributes_1()
@@ -1623,7 +1626,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteNode_XmlReader : BridgeHelpers
+            partial public class TCWriteNode_XmlReader : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "WriteNode with null reader", Priority = 1)]
                 public void writeNode_XmlReader1()
@@ -2397,8 +2400,9 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
+            partial
             //[TestCase(Name = "WriteFullEndElement", Param = "XNodeBuilder")]
-            public partial class TCFullEndElement : BridgeHelpers
+            public class TCFullEndElement : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Sanity test for WriteFullEndElement()", Priority = 0)]
                 public void fullEndElement_1()
@@ -2511,7 +2515,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCElemNamespace : BridgeHelpers
+            partial public class TCElemNamespace : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Multiple NS decl for same prefix on an element", Priority = 1)]
                 public void elemNamespace_1()
@@ -3138,8 +3142,9 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
+            partial
             //[TestCase(Name = "Attribute Namespace", Param = "XNodeBuilder")]
-            public partial class TCAttrNamespace : BridgeHelpers
+            public class TCAttrNamespace : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Define prefix 'xml' with invalid namespace URI 'foo'", Priority = 1)]
                 public void attrNamespace_1()
@@ -3942,7 +3947,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCCData : BridgeHelpers
+            partial public class TCCData : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "WriteCData with null", Priority = 1)]
                 private void CData_1()
@@ -4145,7 +4150,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCComment : BridgeHelpers
+            partial public class TCComment : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Sanity test for WriteComment", Priority = 0)]
                 private void comment_1()
@@ -4259,7 +4264,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCEntityRef : BridgeHelpers
+            partial public class TCEntityRef : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "WriteEntityRef with value = null", Param = "null", Priority = 1)]
                 //[Variation(Id = 2, Desc = "WriteEntityRef with value = String.Empty", Param = "String.Empty", Priority = 1)]
@@ -4410,7 +4415,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCCharEntity : BridgeHelpers
+            partial public class TCCharEntity : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "WriteCharEntity with valid Unicode character", Priority = 0)]
                 public void charEntity_1()
@@ -4550,7 +4555,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCSurrogateCharEntity : BridgeHelpers
+            partial public class TCSurrogateCharEntity : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "SurrogateCharEntity after WriteStartElement/WriteEndElement", Priority = 1)]
                 public void surrogateEntity_1()
@@ -4723,7 +4728,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCPI : BridgeHelpers
+            partial public class TCPI : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Sanity test for WritePI", Priority = 0)]
                 private void pi_1()
@@ -4999,7 +5004,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteNmToken : BridgeHelpers
+            partial public class TCWriteNmToken : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Name = null", Param = "null", Priority = 1)]
                 //[Variation(Id = 2, Desc = "Name = String.Empty", Param = "String.Empty", Priority = 1)]
@@ -5083,7 +5088,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteName : BridgeHelpers
+            partial public class TCWriteName : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Name = null", Param = "null", Priority = 1)]
                 //[Variation(Id = 2, Desc = "Name = String.Empty", Param = "String.Empty", Priority = 1)]
@@ -5165,7 +5170,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteQName : BridgeHelpers
+            partial public class TCWriteQName : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Name = null", Param = "null", Priority = 1)]
                 //[Variation(Id = 2, Desc = "Name = String.Empty", Param = "String.Empty", Priority = 1)]
@@ -5284,7 +5289,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteChars : BridgeHelpers
+            partial public class TCWriteChars : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "WriteChars with valid buffer, number, count", Priority = 0)]
                 public void writeChars_1()
@@ -5434,7 +5439,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteString : BridgeHelpers
+            partial public class TCWriteString : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "WriteString(null)", Priority = 0)]
                 public void writeString_1()
@@ -5686,7 +5691,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWhiteSpace : BridgeHelpers
+            partial public class TCWhiteSpace : BridgeHelpers
             {
                 //[Variation(Id = 3, Desc = "WriteWhitespace before and after root element", Priority = 1)]
                 public void whitespace_3()
@@ -5757,7 +5762,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteValue : BridgeHelpers
+            partial public class TCWriteValue : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "WriteValue(boolean)", Priority = 1)]
                 public void writeValue_1()
@@ -6041,7 +6046,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCLookUpPrefix : BridgeHelpers
+            partial public class TCLookUpPrefix : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "LookupPrefix with null", Priority = 2)]
                 public void lookupPrefix_1()
@@ -6195,7 +6200,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCXmlSpaceWriter : BridgeHelpers
+            partial public class TCXmlSpaceWriter : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Verify XmlSpace as Preserve", Priority = 0)]
                 public void xmlSpace_1()
@@ -6358,7 +6363,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCXmlLangWriter : BridgeHelpers
+            partial public class TCXmlLangWriter : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Verify XmlLang sanity test", Priority = 0)]
                 public void XmlLang_1()
@@ -6524,7 +6529,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteRaw : BridgeHelpers
+            partial public class TCWriteRaw : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Call both WriteRaw Methods", Priority = 1)]
                 public void writeRaw_1()
@@ -6702,7 +6707,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteBase64 : BridgeHelpers
+            partial public class TCWriteBase64 : BridgeHelpers
             {
                 //[Variation(Id = 20, Desc = "WriteBase64 with count > buffer size", Priority = 1)]
                 public void Base64_2()
@@ -6845,7 +6850,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCWriteState : BridgeHelpers
+            partial public class TCWriteState : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Verify WriteState.Start when nothing has been written yet", Priority = 0)]
                 public void writeState_1()
@@ -7270,7 +7275,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TC_NDP20_NewMethods : BridgeHelpers
+            partial public class TC_NDP20_NewMethods : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "WriteElementString(prefix, name, ns, value) sanity test", Priority = 0)]
                 public void var_1()
@@ -7361,7 +7366,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCGlobalization : BridgeHelpers
+            partial public class TCGlobalization : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Characters between 0xdfff and 0xfffe are valid Unicode characters", Priority = 1)]
                 public void var_1()
@@ -7408,7 +7413,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class TCClose : BridgeHelpers
+            partial public class TCClose : BridgeHelpers
             {
                 //[Variation(Id = 1, Desc = "Closing an XmlWriter should close all opened elements", Priority = 1)]
                 public void var_1()

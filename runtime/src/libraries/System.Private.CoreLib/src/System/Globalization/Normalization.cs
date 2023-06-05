@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.Globalization
 {
-    internal static partial class Normalization
+    partial internal static class Normalization
     {
         internal static bool IsNormalized(string strInput, NormalizationForm normalizationForm)
         {

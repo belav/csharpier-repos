@@ -72,7 +72,7 @@ namespace Mono.Xml.XPath2
         }
     }
 
-    public abstract partial class ExprSingle
+    partial public abstract class ExprSingle
     {
         internal abstract void CheckReference(XQueryASTCompiler compiler);
 
@@ -272,9 +272,10 @@ namespace Mono.Xml.XPath2
         #endregion
     }
 
+    partial
     // FLWORExpr
 
-    internal partial class FLWORExpr : ExprSingle
+    internal class FLWORExpr : ExprSingle
     {
         public FLWORExpr(
             ForLetClauseCollection forlet,

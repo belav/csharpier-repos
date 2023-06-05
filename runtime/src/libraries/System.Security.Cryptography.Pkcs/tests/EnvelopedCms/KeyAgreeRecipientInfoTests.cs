@@ -10,7 +10,7 @@ using Test.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class KeyAgreeRecipientInfoTests
+    partial public static class KeyAgreeRecipientInfoTests
     {
         internal static readonly AlgorithmIdentifier TripleDesAlgId = new AlgorithmIdentifier(
             new Oid(Oids.TripleDesCbc, null)

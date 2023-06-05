@@ -49,7 +49,7 @@ namespace Novell.Directory.Ldap.Asn1
     {
         /// <summary> Sets the Asn1Object tagged value</summary>
         [CLSCompliantAttribute(false)]
-        virtual public Asn1Object TaggedValue
+        public virtual Asn1Object TaggedValue
         {
             set
             {
@@ -62,10 +62,11 @@ namespace Novell.Directory.Ldap.Asn1
             }
         }
 
+        public
         /// <summary> Returns a boolean value indicating if this object uses
         /// EXPLICIT tagging.
         /// </summary>
-        virtual public bool Explicit
+        virtual bool Explicit
         {
             get { return explicit_Renamed; }
         }

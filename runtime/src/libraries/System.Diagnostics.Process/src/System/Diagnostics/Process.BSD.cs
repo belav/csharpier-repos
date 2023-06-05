@@ -7,7 +7,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {
-    public partial class Process
+    partial public class Process
     {
         /// <summary>
         /// Creates an array of <see cref="Process"/> components that are associated with process resources on a

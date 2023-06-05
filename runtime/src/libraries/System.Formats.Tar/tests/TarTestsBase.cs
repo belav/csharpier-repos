@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public abstract partial class TarTestsBase : FileCleanupTestBase
+    partial public abstract class TarTestsBase : FileCleanupTestBase
     {
         protected static bool IsRemoteExecutorSupportedAndPrivilegedProcess =>
             RemoteExecutor.IsSupported && PlatformDetection.IsPrivilegedProcess;

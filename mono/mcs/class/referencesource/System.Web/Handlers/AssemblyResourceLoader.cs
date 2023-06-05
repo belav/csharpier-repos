@@ -31,7 +31,7 @@ namespace System.Web.Handlers
     {
         private const string _webResourceUrl = "WebResource.axd";
 
-        private readonly static Regex webResourceRegex = new WebResourceRegex();
+        private static readonly Regex webResourceRegex = new WebResourceRegex();
 
         private static IDictionary _urlCache = Hashtable.Synchronized(new Hashtable());
         private static IDictionary _assemblyInfoCache = Hashtable.Synchronized(new Hashtable());

@@ -5,7 +5,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    public static partial class File
+    partial public static class File
     {
 #pragma warning disable IDE0060
         private static UnixFileMode GetUnixFileModeCore(string path) =>

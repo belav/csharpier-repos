@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.ComponentModel.Tests
 {
-    public static partial class Win32ExceptionTestType
+    partial public static class Win32ExceptionTestType
     {
         private const int FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
         private const int FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000;

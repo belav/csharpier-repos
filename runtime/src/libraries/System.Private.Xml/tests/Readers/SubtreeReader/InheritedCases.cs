@@ -9,7 +9,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.SubtreeReaderTests
 {
     [TestModule(Name = "XmlSubtreeReader Test", Desc = "XmlSubtreeReader Test")]
-    public partial class SubtreeReaderTest : CGenericTestModule
+    partial public class SubtreeReaderTest : CGenericTestModule
     {
         public override int Init(object objParam)
         {

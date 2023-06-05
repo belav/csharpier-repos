@@ -3,7 +3,7 @@
 
 namespace System.Net
 {
-    internal partial struct StreamSizes
+    partial internal struct StreamSizes
     {
         // Windows SChannel requires that you pass it a buffer big enough to hold
         // the header, the trailer, and the payload.  You're also required to do your

@@ -73,7 +73,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class EnvironmentPermission
+    public sealed class EnvironmentPermission
         : CodeAccessPermission,
             IUnrestrictedPermission,
             IBuiltInPermission

@@ -68,11 +68,12 @@ using DbLinq.Util;
 
 namespace Test_NUnit
 {
+    partial
     /// <summary>
     /// base class for ReadTest and WriteTest.
     /// Provides CreateDB(), Conn, and stringComparisonType.
     /// </summary>
-    public abstract partial class TestBase
+    public abstract class TestBase
     {
         [SetUp]
         public void BaseSetUp()
@@ -129,7 +130,13 @@ namespace Test_NUnit
         //    return CreateDB(System.Data.ConnectionState.Closed);
         //}
 
-        static partial void CheckRecreateSqlite();
+        partial
+        //public Northwind CreateDB()
+        //{
+        //    return CreateDB(System.Data.ConnectionState.Closed);
+        //}
+
+        static void CheckRecreateSqlite();
 
         public Northwind CreateDB()
         {

@@ -10,7 +10,7 @@ using StackCrawlMark = System.Threading.StackCrawlMark;
 
 namespace System.Reflection
 {
-    public abstract partial class Assembly : ICustomAttributeProvider, ISerializable
+    partial public abstract class Assembly : ICustomAttributeProvider, ISerializable
     {
         // Locate an assembly by the long form of the assembly name.
         // eg. "Toolbox.dll, version=1.1.10.1220, locale=en, publickey=1234567890123456789012345678901234567890"
@@ -65,7 +65,7 @@ namespace System.Reflection
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_GetExecutingAssembly")]
-        private static partial void GetExecutingAssemblyNative(
+        partial private static void GetExecutingAssemblyNative(
             StackCrawlMarkHandle stackMark,
             ObjectHandleOnStack retAssembly
         );
@@ -99,7 +99,7 @@ namespace System.Reflection
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_GetEntryAssembly")]
-        private static partial void GetEntryAssemblyNative(ObjectHandleOnStack retAssembly);
+        partial private static void GetEntryAssemblyNative(ObjectHandleOnStack retAssembly);
 
         private static Assembly? GetEntryAssemblyInternal()
         {
@@ -110,6 +110,6 @@ namespace System.Reflection
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_GetAssemblyCount")]
         [SuppressGCTransition]
-        internal static partial uint GetAssemblyCount();
+        partial internal static uint GetAssemblyCount();
     }
 }

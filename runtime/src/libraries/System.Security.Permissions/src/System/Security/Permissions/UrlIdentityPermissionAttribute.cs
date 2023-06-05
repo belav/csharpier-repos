@@ -11,7 +11,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
-    public sealed partial class UrlIdentityPermissionAttribute : CodeAccessSecurityAttribute
+    partial public sealed class UrlIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
         public UrlIdentityPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }

@@ -24,7 +24,7 @@ public struct AA
         m_b.m_bval = b;
     }
 
-    public unsafe static B* get_pb(AA* px)
+    public static unsafe B* get_pb(AA* px)
     {
         return &px->m_b;
     }

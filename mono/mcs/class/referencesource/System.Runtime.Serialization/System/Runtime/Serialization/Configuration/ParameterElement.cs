@@ -9,7 +9,7 @@ namespace System.Runtime.Serialization.Configuration
     using System.Xml;
     using System.Security;
 
-    public sealed partial class ParameterElement : ConfigurationElement
+    partial public sealed class ParameterElement : ConfigurationElement
     {
         public ParameterElement() { }
 

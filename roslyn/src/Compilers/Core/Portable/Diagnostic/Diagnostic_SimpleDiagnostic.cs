@@ -11,10 +11,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// A diagnostic (such as a compiler error or a warning), along with the location where it occurred.
     /// </summary>
-    public abstract partial class Diagnostic
+    public abstract class Diagnostic
     {
         internal sealed class SimpleDiagnostic : Diagnostic
         {

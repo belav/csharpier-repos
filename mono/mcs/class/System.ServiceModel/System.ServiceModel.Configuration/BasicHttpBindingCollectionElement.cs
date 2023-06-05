@@ -54,6 +54,6 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class BasicHttpBindingCollectionElement
+    partial public class BasicHttpBindingCollectionElement
         : StandardBindingCollectionElement<BasicHttpBinding, BasicHttpBindingElement> { }
 }

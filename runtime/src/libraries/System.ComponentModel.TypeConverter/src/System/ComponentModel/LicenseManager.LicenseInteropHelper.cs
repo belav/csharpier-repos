@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace System.ComponentModel
 {
-    public sealed partial class LicenseManager
+    partial public sealed class LicenseManager
     {
         // A private implementation of a LicenseContext used for instantiating
         // managed objects exposed to COM. It has memory for the license key

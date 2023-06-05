@@ -6,11 +6,12 @@ using System.Runtime.InteropServices;
 
 namespace System.Globalization
 {
-    internal static partial class GlobalizationMode
+    partial internal static class GlobalizationMode
     {
+        partial
         // Split from GlobalizationMode so the whole class can be trimmed when Invariant=true. Trimming tests
         // validate this implementation detail.
-        private static partial class Settings
+        private static class Settings
         {
             internal static bool Invariant { get; } =
                 AppContextConfigHelper.GetBooleanConfig(

@@ -17,7 +17,7 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 {
-    public partial class RequestOrderingTests : AbstractLanguageServerProtocolTests
+    partial public class RequestOrderingTests : AbstractLanguageServerProtocolTests
     {
         public RequestOrderingTests(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper) { }

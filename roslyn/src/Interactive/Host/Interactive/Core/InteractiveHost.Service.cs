@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Interactive
 {
-    internal partial class InteractiveHost
+    partial internal class InteractiveHost
     {
         /// <summary>
         /// A remote singleton server-activated object that lives in the interactive host process and controls it.

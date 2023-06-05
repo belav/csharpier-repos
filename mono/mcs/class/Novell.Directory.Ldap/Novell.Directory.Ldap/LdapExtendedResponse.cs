@@ -45,12 +45,13 @@ namespace Novell.Directory.Ldap
     /// </summary>
     public class LdapExtendedResponse : LdapResponse
     {
+        public
         /// <summary> Returns the message identifier of the response.
         ///
         /// </summary>
         /// <returns> OID of the response.
         /// </returns>
-        virtual public System.String ID
+        virtual System.String ID
         {
             get
             {
@@ -79,7 +80,7 @@ namespace Novell.Directory.Ldap
         /// <returns> The value of the response.
         /// </returns>
         [CLSCompliantAttribute(false)]
-        virtual public sbyte[] Value
+        public virtual sbyte[] Value
         {
             get
             {

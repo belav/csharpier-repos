@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class MemberDeclarationSyntaxExtensions
+    partial internal static class MemberDeclarationSyntaxExtensions
     {
         public static SyntaxList<AttributeListSyntax> GetAttributes(
             this MemberDeclarationSyntax member

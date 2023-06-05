@@ -6,10 +6,11 @@ using System.CommandLine.Invocation;
 
 namespace System.CommandLine;
 
+partial
 /// <summary>
 /// Provides methods for creating and working with command handlers.
 /// </summary>
-public static partial class Handler
+public static class Handler
 {
     /// <summary>
     /// Sets a command's handler based on an <see cref="Action{InvocationContext}"/>.

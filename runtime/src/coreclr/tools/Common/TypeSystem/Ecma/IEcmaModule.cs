@@ -14,7 +14,7 @@ namespace Internal.IL
         public IEcmaModule Module { get; }
     }
 
-    public sealed partial class EcmaMethodIL : IEcmaMethodIL
+    partial public sealed class EcmaMethodIL : IEcmaMethodIL
     {
         IEcmaModule IEcmaMethodIL.Module
         {
@@ -22,7 +22,7 @@ namespace Internal.IL
         }
     }
 
-    public sealed partial class EcmaMethodILScope : IEcmaMethodIL
+    partial public sealed class EcmaMethodILScope : IEcmaMethodIL
     {
         IEcmaModule IEcmaMethodIL.Module
         {
@@ -47,7 +47,7 @@ namespace Internal.TypeSystem.Ecma
         IAssemblyDesc Assembly { get; }
     }
 
-    public partial class EcmaModule : IEcmaModule
+    partial public class EcmaModule : IEcmaModule
     {
         public int CompareTo(IEcmaModule other)
         {

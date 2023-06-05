@@ -9,7 +9,7 @@ namespace System.Security.Cryptography
     [UnsupportedOSPlatform("browser")]
     [UnsupportedOSPlatform("ios")]
     [UnsupportedOSPlatform("tvos")]
-    public sealed partial class ChaCha20Poly1305 : IDisposable
+    partial public sealed class ChaCha20Poly1305 : IDisposable
     {
         // Per https://tools.ietf.org/html/rfc7539, ChaCha20Poly1305 AEAD requires a 256-bit key and 96-bit nonce,
         // and it produces a 128-bit tag. We don't expose NonceByteSizes / TagByteSizes properties because callers

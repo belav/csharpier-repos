@@ -6,15 +6,16 @@ namespace Avalon.Secure
 {
     public class Foo
     {
-        static public void FooMethod(object sender, EventArgs e)
+        public static void FooMethod(object sender, EventArgs e)
         {
             bar.BarEvent -= new EventHandler(Foo.FooMethod);
             bar.OnBarEvent();
         }
 
+        public
         ///<summary>
         ///</summary>
-        static public Bar bar = null;
+        static Bar bar = null;
     }
 
     public class Bar

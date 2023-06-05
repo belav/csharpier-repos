@@ -10,12 +10,13 @@ using System.Runtime.CompilerServices;
 
 namespace System.Globalization
 {
+    partial
     /// <summary>
     /// This class implements a set of methods for retrieving character type
     /// information. Character type information is independent of culture
     /// and region.
     /// </summary>
-    public static partial class CharUnicodeInfo
+    public static class CharUnicodeInfo
     {
         internal const char HIGH_SURROGATE_START = '\ud800';
         internal const char HIGH_SURROGATE_END = '\udbff';

@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class Binder
+    partial internal class Binder
     {
         /// <summary>
         /// True if we are currently in an unsafe region (type, member, or block).

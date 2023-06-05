@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class BinderFactory
+    partial internal sealed class BinderFactory
     {
         private sealed class BinderFactoryVisitor : CSharpSyntaxVisitor<Binder>
         {

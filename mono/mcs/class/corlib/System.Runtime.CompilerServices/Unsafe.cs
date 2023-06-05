@@ -36,7 +36,7 @@ using nint = System.Int32;
 
 namespace System.Runtime.CompilerServices
 {
-    unsafe static partial class Unsafe
+    partial static unsafe class Unsafe
     {
         public static ref T Add<T>(ref T source, int elementOffset)
         {
@@ -48,7 +48,7 @@ namespace System.Runtime.CompilerServices
             throw new NotImplementedException();
         }
 
-        public unsafe static void* Add<T>(void* source, int elementOffset)
+        public static unsafe void* Add<T>(void* source, int elementOffset)
         {
             throw new NotImplementedException();
         }
@@ -74,12 +74,12 @@ namespace System.Runtime.CompilerServices
             throw new NotImplementedException();
         }
 
-        public unsafe static void* AsPointer<T>(ref T value)
+        public static unsafe void* AsPointer<T>(ref T value)
         {
             throw new NotImplementedException();
         }
 
-        public unsafe static ref T AsRef<T>(void* source)
+        public static unsafe ref T AsRef<T>(void* source)
         {
             throw new NotImplementedException();
         }
@@ -104,17 +104,17 @@ namespace System.Runtime.CompilerServices
             throw new NotImplementedException();
         }
 
-        public unsafe static void InitBlockUnaligned(void* startAddress, byte value, uint byteCount)
+        public static unsafe void InitBlockUnaligned(void* startAddress, byte value, uint byteCount)
         {
             throw new NotImplementedException();
         }
 
-        public unsafe static T Read<T>(void* source)
+        public static unsafe T Read<T>(void* source)
         {
             throw new NotImplementedException();
         }
 
-        public unsafe static T ReadUnaligned<T>(void* source)
+        public static unsafe T ReadUnaligned<T>(void* source)
         {
             throw new NotImplementedException();
         }
@@ -155,7 +155,7 @@ namespace System.Runtime.CompilerServices
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        unsafe internal static ref T AddByteOffset<T>(ref T source, nuint byteOffset)
+        internal static unsafe ref T AddByteOffset<T>(ref T source, nuint byteOffset)
         {
             return ref AddByteOffset(ref source, (IntPtr)(void*)byteOffset);
         }

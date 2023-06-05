@@ -10,10 +10,11 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// A value that came from a method parameter - such as the result of a ldarg.
     /// </summary>
-    internal partial record MethodParameterValue : IValueWithStaticType
+    internal record MethodParameterValue : IValueWithStaticType
     {
         public MethodParameterValue(
             ParameterProxy param,

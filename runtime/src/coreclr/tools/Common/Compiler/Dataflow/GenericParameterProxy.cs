@@ -7,7 +7,7 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct GenericParameterProxy
+    partial internal readonly struct GenericParameterProxy
     {
         public GenericParameterProxy(GenericParameterDesc genericParameter) =>
             GenericParameter = genericParameter;
@@ -16,7 +16,7 @@ namespace ILLink.Shared.TypeSystemProxy
             GenericParameterDesc genericParameter
         ) => new(genericParameter);
 
-        internal partial bool HasDefaultConstructorConstraint() =>
+        partial internal bool HasDefaultConstructorConstraint() =>
             GenericParameter.HasDefaultConstructorConstraint;
 
         public readonly GenericParameterDesc GenericParameter;

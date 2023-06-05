@@ -85,7 +85,7 @@ namespace System.Net
         WwwAuthenticate = 29,
     }
 
-    public partial class WebHeaderCollection
+    partial public class WebHeaderCollection
         : System.Collections.Specialized.NameValueCollection,
             System.Collections.IEnumerable,
             System.Runtime.Serialization.ISerializable

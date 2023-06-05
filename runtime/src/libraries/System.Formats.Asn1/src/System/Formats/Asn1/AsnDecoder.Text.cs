@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.Formats.Asn1
 {
-    public static partial class AsnDecoder
+    partial public static class AsnDecoder
     {
         /// <summary>
         ///   Attempts to get an unprocessed character string value from <paramref name="source"/> with a
@@ -573,7 +573,7 @@ namespace System.Formats.Asn1
         }
     }
 
-    public partial class AsnReader
+    partial public class AsnReader
     {
         /// <summary>
         ///   Reads the next value as a character with a specified tag, returning the contents

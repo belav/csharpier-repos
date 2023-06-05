@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Collections.Generic
 {
-    internal ref struct BitHelper
+    ref internal struct BitHelper
     {
         private const int IntSize = sizeof(int) * 8;
         private readonly Span<int> _span;

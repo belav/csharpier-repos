@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace System.Security.Policy
 {
-    public sealed partial class Evidence : ICollection, IEnumerable
+    partial public sealed class Evidence : ICollection, IEnumerable
     {
         public Evidence() { }
 

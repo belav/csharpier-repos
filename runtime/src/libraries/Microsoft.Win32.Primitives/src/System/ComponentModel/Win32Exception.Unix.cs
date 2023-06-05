@@ -3,7 +3,7 @@
 
 namespace System.ComponentModel
 {
-    public partial class Win32Exception
+    partial public class Win32Exception
     {
         private static string GetErrorMessage(int error) => Interop.Sys.StrError(error);
     }

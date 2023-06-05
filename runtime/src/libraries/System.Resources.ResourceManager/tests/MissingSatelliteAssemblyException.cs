@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Resources.Tests
 {
-    public partial class MissingSatelliteAssemblyExceptionTests
+    partial public class MissingSatelliteAssemblyExceptionTests
     {
         [Fact]
         public void ConstructorSimple()

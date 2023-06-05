@@ -6,10 +6,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
+    partial
     /// <summary>
     ///     Managed representation of an NCrypt key
     /// </summary>
-    public sealed partial class CngKey : IDisposable
+    public sealed class CngKey : IDisposable
     {
         private readonly SafeNCryptKeyHandle _keyHandle;
         private readonly SafeNCryptProviderHandle _providerHandle;

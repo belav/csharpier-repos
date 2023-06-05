@@ -11,7 +11,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDelegateWithConditionalAccess
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)]
-    public partial class InvokeDelegateWithConditionalAccessTests
+    partial public class InvokeDelegateWithConditionalAccessTests
     {
         [Fact]
         public async Task TestFixAllInDocument1()

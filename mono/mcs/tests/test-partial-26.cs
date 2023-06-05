@@ -4,7 +4,7 @@ namespace TestAttributesCollecting
 {
     class A : Attribute { }
 
-    public partial class X
+    partial public class X
     {
         [A]
         partial void Foo<[A] T>( /*[A]*/
@@ -12,7 +12,7 @@ namespace TestAttributesCollecting
         );
     }
 
-    public partial class X
+    partial public class X
     {
         partial void Foo<T>(int p)
         {
@@ -20,7 +20,7 @@ namespace TestAttributesCollecting
         }
     }
 
-    public partial class Y
+    partial public class Y
     {
         partial void Foo()
         {
@@ -28,7 +28,7 @@ namespace TestAttributesCollecting
         }
     }
 
-    public partial class Y
+    partial public class Y
     {
         [CLSCompliant(true)]
         partial void Foo();

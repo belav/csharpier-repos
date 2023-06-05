@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace System.Collections.Immutable
 {
-    public sealed partial class ImmutableStack<T>
+    partial public sealed class ImmutableStack<T>
     {
         /// <summary>
         /// Enumerates a stack with no memory allocations.

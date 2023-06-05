@@ -16,7 +16,7 @@ using System.Xml;
 
 namespace System.Data.Common
 {
-    internal static partial class ADP
+    partial internal static class ADP
     {
         internal const int DecimalMaxPrecision = 29;
         internal const int DecimalMaxPrecision28 = 28; // there are some cases in Odbc where we need that ...
@@ -94,7 +94,7 @@ namespace System.Data.Common
             return InvalidOperation(SR.GetString(SR.ADP_OffsetOutOfRangeException));
         }
 
-        static internal InvalidOperationException QuotePrefixNotSet(string method)
+        internal static InvalidOperationException QuotePrefixNotSet(string method)
         {
             return InvalidOperation(Res.GetString(Res.ADP_QuotePrefixNotSet, method));
         }
@@ -142,22 +142,22 @@ namespace System.Data.Common
             return (IntPtr)checked(pbase.ToInt64() + offset);
         }
 
-        static internal Exception InvalidXMLBadVersion()
+        internal static Exception InvalidXMLBadVersion()
         {
             return Argument(Res.GetString(Res.ADP_InvalidXMLBadVersion));
         }
 
-        static internal Exception NotAPermissionElement()
+        internal static Exception NotAPermissionElement()
         {
             return Argument(Res.GetString(Res.ADP_NotAPermissionElement));
         }
 
-        static internal Exception PermissionTypeMismatch()
+        internal static Exception PermissionTypeMismatch()
         {
             return Argument(Res.GetString(Res.ADP_PermissionTypeMismatch));
         }
 
-        static internal ArgumentOutOfRangeException InvalidPermissionState(PermissionState value)
+        internal static ArgumentOutOfRangeException InvalidPermissionState(PermissionState value)
         {
 #if DEBUG
             switch (value)
@@ -172,14 +172,16 @@ namespace System.Data.Common
         }
 
 #if !MOBILE
-        static internal ConfigurationException Configuration(string message)
+        internal
+#if !MOBILE
+        static ConfigurationException Configuration(string message)
         {
             ConfigurationException e = new ConfigurationErrorsException(message);
             TraceExceptionAsReturnValue(e);
             return e;
         }
 
-        static internal ConfigurationException Configuration(string message, XmlNode node)
+        internal static ConfigurationException Configuration(string message, XmlNode node)
         {
             ConfigurationException e = new ConfigurationErrorsException(message, node);
             TraceExceptionAsReturnValue(e);
@@ -187,23 +189,28 @@ namespace System.Data.Common
         }
 #endif
 
-        static internal ArgumentException ConfigProviderNotFound()
+        internal
+#endif
+
+        static ArgumentException ConfigProviderNotFound()
         {
             return Argument(Res.GetString(Res.ConfigProviderNotFound));
         }
 
-        static internal InvalidOperationException ConfigProviderInvalid()
+        internal static InvalidOperationException ConfigProviderInvalid()
         {
             return InvalidOperation(Res.GetString(Res.ConfigProviderInvalid));
         }
 
 #if !MOBILE
-        static internal ConfigurationException ConfigProviderNotInstalled()
+        internal
+#if !MOBILE
+        static ConfigurationException ConfigProviderNotInstalled()
         {
             return Configuration(Res.GetString(Res.ConfigProviderNotInstalled));
         }
 
-        static internal ConfigurationException ConfigProviderMissing()
+        internal static ConfigurationException ConfigProviderMissing()
         {
             return Configuration(Res.GetString(Res.ConfigProviderMissing));
         }
@@ -211,17 +218,21 @@ namespace System.Data.Common
         //
         // DbProviderConfigurationHandler
         //
-        static internal ConfigurationException ConfigBaseNoChildNodes(XmlNode node)
+        internal
+        //
+        // DbProviderConfigurationHandler
+        //
+        static ConfigurationException ConfigBaseNoChildNodes(XmlNode node)
         { // Res.Config_base_no_child_nodes
             return Configuration(Res.GetString(Res.ConfigBaseNoChildNodes), node);
         }
 
-        static internal ConfigurationException ConfigBaseElementsOnly(XmlNode node)
+        internal static ConfigurationException ConfigBaseElementsOnly(XmlNode node)
         { // Res.Config_base_elements_only
             return Configuration(Res.GetString(Res.ConfigBaseElementsOnly), node);
         }
 
-        static internal ConfigurationException ConfigUnrecognizedAttributes(XmlNode node)
+        internal static ConfigurationException ConfigUnrecognizedAttributes(XmlNode node)
         { // Res.Config_base_unrecognized_attribute
             return Configuration(
                 Res.GetString(Res.ConfigUnrecognizedAttributes, node.Attributes[0].Name),
@@ -229,17 +240,17 @@ namespace System.Data.Common
             );
         }
 
-        static internal ConfigurationException ConfigUnrecognizedElement(XmlNode node)
+        internal static ConfigurationException ConfigUnrecognizedElement(XmlNode node)
         { // Res.Config_base_unrecognized_element
             return Configuration(Res.GetString(Res.ConfigUnrecognizedElement), node);
         }
 
-        static internal ConfigurationException ConfigSectionsUnique(string sectionName)
+        internal static ConfigurationException ConfigSectionsUnique(string sectionName)
         { // Res.Res.ConfigSectionsUnique
             return Configuration(Res.GetString(Res.ConfigSectionsUnique, sectionName));
         }
 
-        static internal ConfigurationException ConfigRequiredAttributeMissing(
+        internal static ConfigurationException ConfigRequiredAttributeMissing(
             string name,
             XmlNode node
         )
@@ -247,7 +258,7 @@ namespace System.Data.Common
             return Configuration(Res.GetString(Res.ConfigRequiredAttributeMissing, name), node);
         }
 
-        static internal ConfigurationException ConfigRequiredAttributeEmpty(
+        internal static ConfigurationException ConfigRequiredAttributeEmpty(
             string name,
             XmlNode node
         )
@@ -256,7 +267,9 @@ namespace System.Data.Common
         }
 #endif
 
-        static internal Exception OleDb() =>
-            new NotImplementedException("OleDb is not implemented.");
+        internal
+#endif
+
+        static Exception OleDb() => new NotImplementedException("OleDb is not implemented.");
     }
 }

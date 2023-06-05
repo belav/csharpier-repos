@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class CSharpCompilation
+    partial public class CSharpCompilation
     {
         private ConcurrentSet<AssemblySymbol>? _lazyUsedAssemblyReferences;
         private bool _usedAssemblyReferencesFrozen;

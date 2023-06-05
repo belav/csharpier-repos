@@ -4,7 +4,7 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    public abstract partial class X509SignatureGenerator
+    partial public abstract class X509SignatureGenerator
     {
         protected X509SignatureGenerator() => throw new PlatformNotSupportedException();
 

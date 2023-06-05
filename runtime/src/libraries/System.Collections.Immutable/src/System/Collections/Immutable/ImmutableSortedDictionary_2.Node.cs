@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace System.Collections.Immutable
 {
-    public sealed partial class ImmutableSortedDictionary<TKey, TValue>
+    partial public sealed class ImmutableSortedDictionary<TKey, TValue>
     {
         /// <summary>
         /// A node in the AVL tree storing this map.

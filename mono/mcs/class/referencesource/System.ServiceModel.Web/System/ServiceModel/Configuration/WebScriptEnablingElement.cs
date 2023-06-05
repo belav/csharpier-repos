@@ -6,7 +6,7 @@ namespace System.ServiceModel.Configuration
 {
     using System.ServiceModel.Description;
 
-    public sealed partial class WebScriptEnablingElement : BehaviorExtensionElement
+    partial public sealed class WebScriptEnablingElement : BehaviorExtensionElement
     {
         public WebScriptEnablingElement() { }
 
@@ -21,7 +21,7 @@ namespace System.ServiceModel.Configuration
             get { return typeof(WebScriptEnablingBehavior); }
         }
 
-        internal protected override object CreateBehavior()
+        protected internal override object CreateBehavior()
         {
             return new WebScriptEnablingBehavior();
         }

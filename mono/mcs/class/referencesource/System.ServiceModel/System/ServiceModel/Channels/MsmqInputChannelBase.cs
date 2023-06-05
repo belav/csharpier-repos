@@ -127,7 +127,7 @@ namespace System.ServiceModel.Channels
             base.OnFaulted();
         }
 
-        abstract protected Message DecodeMsmqMessage(
+        protected abstract Message DecodeMsmqMessage(
             MsmqInputMessage msmqMessage,
             MsmqMessageProperty property
         );

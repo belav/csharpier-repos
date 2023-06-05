@@ -4,7 +4,7 @@ namespace Repro
 {
     public class Base
     {
-        internal protected virtual int Test()
+        protected internal virtual int Test()
         {
             return 1;
         }

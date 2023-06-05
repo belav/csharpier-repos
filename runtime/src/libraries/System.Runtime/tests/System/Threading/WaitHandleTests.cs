@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Threading.Tests
 {
-    public static partial class WaitHandleTests
+    partial public static class WaitHandleTests
     {
         [Fact]
         public static void WaitOne()
@@ -278,7 +278,7 @@ namespace System.Threading.Tests
             Assert.True(wh.WasExplicitlyDisposed);
         }
 
-        private partial class TestWaitHandle : WaitHandle
+        partial private class TestWaitHandle : WaitHandle
         {
             public bool WasExplicitlyDisposed { get; private set; } = false;
 
@@ -520,7 +520,7 @@ namespace System.Threading.Tests
             Assert.True(wh.WasExplicitlyDisposed);
         }
 
-        private partial class TestWaitHandle : WaitHandle
+        partial private class TestWaitHandle : WaitHandle
         {
 #pragma warning disable 0618 // 'WaitHandle.Handle' is obsolete: 'Use the SafeWaitHandle property instead.'
             public void ClearHandle()

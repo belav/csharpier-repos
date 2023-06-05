@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct SecretBagAsn
+    partial internal struct SecretBagAsn
     {
         internal string SecretTypeId;
         internal ReadOnlyMemory<byte> SecretValue;

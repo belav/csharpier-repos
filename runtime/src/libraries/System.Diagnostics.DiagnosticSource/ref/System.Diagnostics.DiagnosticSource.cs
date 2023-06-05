@@ -6,7 +6,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class DiagnosticListener
+    partial public class DiagnosticListener
         : System.Diagnostics.DiagnosticSource,
             System.IDisposable,
             System.IObservable<System.Collections.Generic.KeyValuePair<string, object?>>
@@ -73,7 +73,7 @@ namespace System.Diagnostics
         public override void Write(string name, object? value) { }
     }
 
-    public abstract partial class DiagnosticSource
+    partial public abstract class DiagnosticSource
     {
         protected DiagnosticSource() { }
 

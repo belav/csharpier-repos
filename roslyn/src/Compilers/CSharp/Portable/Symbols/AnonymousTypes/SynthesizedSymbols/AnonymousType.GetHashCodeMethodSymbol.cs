@@ -17,12 +17,13 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class AnonymousTypeManager
+    partial internal sealed class AnonymousTypeManager
     {
+        partial
         /// <summary>
         /// Represents an anonymous type 'GetHashCode' method.
         /// </summary>
-        private sealed partial class AnonymousTypeGetHashCodeMethodSymbol : SynthesizedMethodBase
+        private sealed class AnonymousTypeGetHashCodeMethodSymbol : SynthesizedMethodBase
         {
             internal AnonymousTypeGetHashCodeMethodSymbol(NamedTypeSymbol container)
                 : base(container, WellKnownMemberNames.ObjectGetHashCode) { }

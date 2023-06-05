@@ -17,10 +17,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// Stores the partial analysis state for analyzers executed on a specific compilation.
     /// </summary>
-    internal partial class AnalysisState
+    internal class AnalysisState
     {
         private readonly SemaphoreSlim _gate;
 

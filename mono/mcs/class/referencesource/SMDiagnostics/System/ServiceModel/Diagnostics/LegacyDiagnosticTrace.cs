@@ -228,7 +228,9 @@ namespace System.ServiceModel.Diagnostics
         }
 
         // helper for standardized trace code generation
-        static internal string GenerateMsdnTraceCode(string traceSource, string traceCodeString)
+        internal
+        // helper for standardized trace code generation
+        static string GenerateMsdnTraceCode(string traceSource, string traceCodeString)
         {
             return string.Format(
                 CultureInfo.InvariantCulture,

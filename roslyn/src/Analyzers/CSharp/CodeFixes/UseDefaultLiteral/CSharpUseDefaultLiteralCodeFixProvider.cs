@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
         ),
         Shared
     ]
-    internal partial class CSharpUseDefaultLiteralCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    partial internal class CSharpUseDefaultLiteralCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

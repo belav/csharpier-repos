@@ -9,8 +9,9 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
+    partial
     /// <inheritdoc cref="FormattingOptions2"/>
-    public static partial class FormattingOptions
+    public static class FormattingOptions
     {
         /// <inheritdoc cref="FormattingOptions2.UseTabs"/>
         public static PerLanguageOption<bool> UseTabs { get; } =

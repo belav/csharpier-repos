@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class HttpClientBuilderExtensions
+    partial public static class HttpClientBuilderExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpMessageHandler(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
@@ -147,7 +147,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public static partial class HttpClientFactoryServiceCollectionExtensions
+    partial public static class HttpClientFactoryServiceCollectionExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddHttpClient(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
@@ -417,7 +417,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public partial interface IHttpClientBuilder
+    partial public interface IHttpClientBuilder
     {
         string Name { get; }
         Microsoft.Extensions.DependencyInjection.IServiceCollection Services { get; }
@@ -426,7 +426,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
 namespace Microsoft.Extensions.Http
 {
-    public partial class HttpClientFactoryOptions
+    partial public class HttpClientFactoryOptions
     {
         public HttpClientFactoryOptions() { }
 
@@ -461,7 +461,7 @@ namespace Microsoft.Extensions.Http
         }
     }
 
-    public abstract partial class HttpMessageHandlerBuilder
+    partial public abstract class HttpMessageHandlerBuilder
     {
         protected HttpMessageHandlerBuilder() { }
 
@@ -486,14 +486,14 @@ namespace Microsoft.Extensions.Http
         }
     }
 
-    public partial interface IHttpMessageHandlerBuilderFilter
+    partial public interface IHttpMessageHandlerBuilderFilter
     {
         System.Action<Microsoft.Extensions.Http.HttpMessageHandlerBuilder> Configure(
             System.Action<Microsoft.Extensions.Http.HttpMessageHandlerBuilder> next
         );
     }
 
-    public partial interface ITypedHttpClientFactory<
+    partial public interface ITypedHttpClientFactory<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
         )]
@@ -506,7 +506,7 @@ namespace Microsoft.Extensions.Http
 
 namespace Microsoft.Extensions.Http.Logging
 {
-    public partial class LoggingHttpMessageHandler : System.Net.Http.DelegatingHandler
+    partial public class LoggingHttpMessageHandler : System.Net.Http.DelegatingHandler
     {
         public LoggingHttpMessageHandler(Microsoft.Extensions.Logging.ILogger logger) { }
 
@@ -525,7 +525,7 @@ namespace Microsoft.Extensions.Http.Logging
         }
     }
 
-    public partial class LoggingScopeHttpMessageHandler : System.Net.Http.DelegatingHandler
+    partial public class LoggingScopeHttpMessageHandler : System.Net.Http.DelegatingHandler
     {
         public LoggingScopeHttpMessageHandler(Microsoft.Extensions.Logging.ILogger logger) { }
 
@@ -547,7 +547,7 @@ namespace Microsoft.Extensions.Http.Logging
 
 namespace System.Net.Http
 {
-    public static partial class HttpClientFactoryExtensions
+    partial public static class HttpClientFactoryExtensions
     {
         public static System.Net.Http.HttpClient CreateClient(
             this System.Net.Http.IHttpClientFactory factory
@@ -557,7 +557,7 @@ namespace System.Net.Http
         }
     }
 
-    public static partial class HttpMessageHandlerFactoryExtensions
+    partial public static class HttpMessageHandlerFactoryExtensions
     {
         public static System.Net.Http.HttpMessageHandler CreateHandler(
             this System.Net.Http.IHttpMessageHandlerFactory factory
@@ -567,12 +567,12 @@ namespace System.Net.Http
         }
     }
 
-    public partial interface IHttpClientFactory
+    partial public interface IHttpClientFactory
     {
         System.Net.Http.HttpClient CreateClient(string name);
     }
 
-    public partial interface IHttpMessageHandlerFactory
+    partial public interface IHttpMessageHandlerFactory
     {
         System.Net.Http.HttpMessageHandler CreateHandler(string name);
     }

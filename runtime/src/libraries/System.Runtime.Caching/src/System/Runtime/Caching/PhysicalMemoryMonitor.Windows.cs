@@ -8,7 +8,7 @@ using System.Security;
 
 namespace System.Runtime.Caching
 {
-    internal sealed partial class PhysicalMemoryMonitor : MemoryMonitor
+    partial internal sealed class PhysicalMemoryMonitor : MemoryMonitor
     {
         protected override unsafe int GetCurrentPressure()
         {

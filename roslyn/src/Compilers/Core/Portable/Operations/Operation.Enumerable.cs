@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal abstract partial class Operation : IOperation
+    partial internal abstract class Operation : IOperation
     {
         /// <summary>
         /// Implements a struct-based enumerable for <see cref="Operation"/> nodes, using a slot-based system that tracks

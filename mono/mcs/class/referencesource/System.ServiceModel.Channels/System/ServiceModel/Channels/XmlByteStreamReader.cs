@@ -308,7 +308,7 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-        public override abstract int ReadContentAsBase64(byte[] buffer, int index, int count);
+        public abstract override int ReadContentAsBase64(byte[] buffer, int index, int count);
 
         public override int ReadContentAsBinHex(byte[] buffer, int index, int count)
         {

@@ -10,10 +10,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// A <see cref="IActionResultExecutor{ContentResult}"/> that is responsible for <see cref="ContentResult"/>
 /// </summary>
-public partial class ContentResultExecutor : IActionResultExecutor<ContentResult>
+public class ContentResultExecutor : IActionResultExecutor<ContentResult>
 {
     private const string DefaultContentType = "text/plain; charset=utf-8";
     private readonly ILogger<ContentResultExecutor> _logger;
@@ -88,7 +89,7 @@ public partial class ContentResultExecutor : IActionResultExecutor<ContentResult
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -96,6 +97,6 @@ public partial class ContentResultExecutor : IActionResultExecutor<ContentResult
             "Executing ContentResult with HTTP Response ContentType of {ContentType}",
             EventName = "ContentResultExecuting"
         )]
-        public static partial void ContentResultExecuting(ILogger logger, string contentType);
+        partial public static void ContentResultExecuting(ILogger logger, string contentType);
     }
 }

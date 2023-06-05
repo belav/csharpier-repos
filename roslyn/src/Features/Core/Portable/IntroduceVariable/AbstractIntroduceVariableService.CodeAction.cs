@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CodeCleanup;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<
+    partial internal class AbstractIntroduceVariableService<
         TService,
         TExpressionSyntax,
         TTypeSyntax,

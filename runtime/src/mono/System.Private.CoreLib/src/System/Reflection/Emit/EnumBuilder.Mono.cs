@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class EnumBuilder : TypeInfo
+    partial public sealed class EnumBuilder : TypeInfo
     {
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         private TypeBuilder _tb;

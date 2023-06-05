@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.Json.Node
 {
-    public partial class JsonObject : IDictionary<string, JsonNode?>
+    partial public class JsonObject : IDictionary<string, JsonNode?>
     {
         /// <summary>
         ///   Adds an element with the provided property name and value to the <see cref="JsonObject"/>.

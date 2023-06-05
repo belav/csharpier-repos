@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
@@ -14,7 +14,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial SafeFileHandle ShmOpen(string name, OpenFlags flags, int mode);
+        partial internal static SafeFileHandle ShmOpen(string name, OpenFlags flags, int mode);
 
         [LibraryImport(
             Libraries.SystemNative,
@@ -22,6 +22,6 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial int ShmUnlink(string name);
+        partial internal static int ShmUnlink(string name);
     }
 }

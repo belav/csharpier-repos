@@ -7,7 +7,7 @@ using Test.Cryptography;
 
 namespace System.Formats.Cbor.Tests
 {
-    public partial class CborWriterTests
+    partial public class CborWriterTests
     {
         internal static class Helpers
         {

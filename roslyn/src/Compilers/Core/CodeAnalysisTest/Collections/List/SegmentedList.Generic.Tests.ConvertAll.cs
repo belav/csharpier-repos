@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
-    public abstract partial class SegmentedList_Generic_Tests<T> : IList_Generic_Tests<T>
+    partial public abstract class SegmentedList_Generic_Tests<T> : IList_Generic_Tests<T>
     {
         [Fact]
         public void ConvertAll()

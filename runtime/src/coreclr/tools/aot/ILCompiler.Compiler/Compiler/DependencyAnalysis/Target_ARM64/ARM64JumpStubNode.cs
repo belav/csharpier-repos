@@ -5,7 +5,7 @@ using ILCompiler.DependencyAnalysis.ARM64;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public partial class JumpStubNode
+    partial public class JumpStubNode
     {
         protected override void EmitCode(
             NodeFactory factory,

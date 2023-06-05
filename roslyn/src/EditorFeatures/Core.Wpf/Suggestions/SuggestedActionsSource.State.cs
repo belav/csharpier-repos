@@ -11,9 +11,9 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
-    internal partial class SuggestedActionsSourceProvider
+    partial internal class SuggestedActionsSourceProvider
     {
-        private partial class SuggestedActionsSource
+        partial private class SuggestedActionsSource
         {
             protected sealed class State : IDisposable
             {

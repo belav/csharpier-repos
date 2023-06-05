@@ -1,8 +1,8 @@
 namespace A
 {
-    public partial class B<T>
+    partial public class B<T>
     {
-        public partial class C
+        partial public class C
         {
             public class A { }
         }
@@ -11,15 +11,15 @@ namespace A
 
 namespace A
 {
-    public abstract partial class B<T>
+    partial public abstract class B<T>
         where T : B<T>.C { }
 }
 
 namespace A
 {
-    public partial class B<T>
+    partial public class B<T>
     {
-        public partial class C : I { }
+        partial public class C : I { }
     }
 }
 
@@ -27,7 +27,7 @@ namespace A
 {
     public interface Ibase { }
 
-    public partial class B<T>
+    partial public class B<T>
     {
         public interface I : Ibase { }
     }

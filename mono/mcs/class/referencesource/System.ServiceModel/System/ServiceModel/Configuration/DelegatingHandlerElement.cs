@@ -8,10 +8,11 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Runtime;
 
+    partial
     /// <summary>
     /// DelegatingHandlerElement for DelegatingHandler
     /// </summary>
-    public sealed partial class DelegatingHandlerElement : ConfigurationElement
+    public sealed class DelegatingHandlerElement : ConfigurationElement
     {
         Guid id = Guid.NewGuid();
 

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 unsafe struct Foo
 {
-    public fixed long FieldName[32];
+    fixed public long FieldName[32];
 }
 
 class Test

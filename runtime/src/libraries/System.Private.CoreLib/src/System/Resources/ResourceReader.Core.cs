@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace System.Resources
 {
-    public partial class ResourceReader
+    partial public class ResourceReader
     {
         private readonly bool _permitDeserialization; // can deserialize BinaryFormatted resources
         private object? _binaryFormatter; // binary formatter instance to use for deserializing

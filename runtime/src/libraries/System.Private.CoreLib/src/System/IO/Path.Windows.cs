@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.IO
 {
-    public static unsafe partial class Path
+    partial public static unsafe class Path
     {
         private static volatile delegate* unmanaged<int, char*, uint> s_GetTempPathWFunc;
 

@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 {
-    internal static partial class EditorConfigNamingStyleParser
+    partial internal static class EditorConfigNamingStyleParser
     {
         private static bool TryGetSerializableNamingRule(
             string namingRuleTitle,

@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial IntPtr VirtualAlloc(
+        partial internal static IntPtr VirtualAlloc(
             SafeHandle lpAddress,
             UIntPtr dwSize,
             int flAllocationType,

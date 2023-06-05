@@ -13,7 +13,7 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class DynamicMethod : MethodInfo
+    partial public sealed class DynamicMethod : MethodInfo
     {
         private RuntimeType[] _parameterTypes;
         internal IRuntimeMethodInfo? _methodHandle;

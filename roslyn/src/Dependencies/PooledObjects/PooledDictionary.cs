@@ -8,9 +8,10 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.PooledObjects
 {
+    partial
     // Dictionary that can be recycled via an object pool
     // NOTE: these dictionaries always have the default comparer.
-    internal sealed partial class PooledDictionary<K, V> : Dictionary<K, V>
+    internal sealed class PooledDictionary<K, V> : Dictionary<K, V>
         where K : notnull
     {
         private readonly ObjectPool<PooledDictionary<K, V>> _pool;

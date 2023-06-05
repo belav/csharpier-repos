@@ -24,8 +24,9 @@ namespace Microsoft.Scripting.Ast.Compiler
 #else
 namespace System.Linq.Expressions.Compiler
 {
+    partial
 #endif
-    internal static partial class DelegateHelpers
+    internal static class DelegateHelpers
     {
         private const MethodAttributes CtorAttributes =
             MethodAttributes.RTSpecialName | MethodAttributes.HideBySig | MethodAttributes.Public;

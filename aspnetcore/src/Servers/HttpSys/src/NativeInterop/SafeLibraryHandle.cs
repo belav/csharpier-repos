@@ -7,10 +7,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
+partial
 /// <summary>
 /// Represents a handle to a Windows module (DLL).
 /// </summary>
-internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
+internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
     // Called by P/Invoke when returning SafeHandles
     private SafeLibraryHandle()
@@ -73,23 +74,23 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
     }
 
     [SuppressUnmanagedCodeSecurity]
-    private static partial class UnsafeNativeMethods
+    partial private static class UnsafeNativeMethods
     {
         // http://msdn.microsoft.com/en-us/library/ms683152(v=vs.85).aspx
         [return: MarshalAs(UnmanagedType.Bool)]
         [LibraryImport("kernel32.dll")]
-        internal static partial bool FreeLibrary(IntPtr hModule);
+        partial internal static bool FreeLibrary(IntPtr hModule);
 
         // http://msdn.microsoft.com/en-us/library/ms683212(v=vs.85).aspx
         [LibraryImport("kernel32.dll", SetLastError = true)]
-        internal static partial IntPtr GetProcAddress(
+        partial internal static IntPtr GetProcAddress(
             SafeLibraryHandle hModule,
             [MarshalAs(UnmanagedType.LPStr)] string lpProcName
         );
 
         // http://msdn.microsoft.com/en-us/library/windows/desktop/ms684179(v=vs.85).aspx
         [LibraryImport("kernel32.dll", EntryPoint = "LoadLibraryExW", SetLastError = true)]
-        internal static partial SafeLibraryHandle LoadLibraryEx(
+        partial internal static SafeLibraryHandle LoadLibraryEx(
             [MarshalAs(UnmanagedType.LPWStr)] string lpFileName,
             IntPtr hFile,
             uint dwFlags

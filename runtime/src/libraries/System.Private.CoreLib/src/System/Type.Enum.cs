@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace System
 {
+    partial
     //
     // This file collects a set of Enum-related apis that run when the Type is subclassed by an application.
     // None of it runs on normal Type objects supplied by the runtime (as those types override these methods.)
@@ -15,7 +16,7 @@ namespace System
     // Since app-subclassed Types are "untrusted classes" that may or may not implement the complete surface area correctly,
     // this code should be considered brittle and not changed lightly.
     //
-    public abstract partial class Type
+    public abstract class Type
     {
         public virtual bool IsEnumDefined(object value)
         {

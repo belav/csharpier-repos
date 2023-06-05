@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
-    internal abstract partial class AbstractCSharpReducer : AbstractReducer
+    partial internal abstract class AbstractCSharpReducer : AbstractReducer
     {
         protected AbstractCSharpReducer(ObjectPool<IReductionRewriter> pool)
             : base(pool) { }

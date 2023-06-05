@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class IsTypeVisibleFromComTests
+    partial public class IsTypeVisibleFromComTests
     {
         [Fact]
         public void IsTypeVisibleFromCom_NullType_ThrowsArgumentNullException()

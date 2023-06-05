@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class CreateWrapperOfTypeTests
+    partial public class CreateWrapperOfTypeTests
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]

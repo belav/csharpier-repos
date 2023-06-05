@@ -5,7 +5,7 @@ using System.Collections.Concurrent;
 
 namespace System.Reflection
 {
-    public sealed partial class MetadataLoadContext
+    partial public sealed class MetadataLoadContext
     {
         // Objects (e.g. PEReaders) to dispose when this MetadataLoadContext is disposed.
         private ConcurrentBag<IDisposable> _disposables = new ConcurrentBag<IDisposable>();

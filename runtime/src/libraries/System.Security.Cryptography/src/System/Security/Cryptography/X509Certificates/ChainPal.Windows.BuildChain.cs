@@ -9,12 +9,16 @@ using SafeX509ChainHandle = Microsoft.Win32.SafeHandles.SafeX509ChainHandle;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class ChainPal : IDisposable, IChainPal
+    partial internal sealed class ChainPal : IDisposable, IChainPal
     {
         /// <summary>
         /// Does not throw on error. Returns null ChainPal instead.
         /// </summary>
-        internal static partial IChainPal? BuildChain(
+        partial
+        /// <summary>
+        /// Does not throw on error. Returns null ChainPal instead.
+        /// </summary>
+        internal static IChainPal? BuildChain(
             bool useMachineContext,
             ICertificatePal cert,
             X509Certificate2Collection? extraStore,

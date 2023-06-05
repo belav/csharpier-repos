@@ -3,16 +3,16 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         internal const uint CRYPTPROTECTMEMORY_BLOCK_SIZE = 16;
         internal const uint CRYPTPROTECTMEMORY_SAME_PROCESS = 0;
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptProtectMemory(
+        partial internal static bool CryptProtectMemory(
             SafeBuffer pData,
             uint cbData,
             uint dwFlags
@@ -20,7 +20,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptUnprotectMemory(
+        partial internal static bool CryptUnprotectMemory(
             SafeBuffer pData,
             uint cbData,
             uint dwFlags

@@ -8,7 +8,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.Tests
 {
     [InheritRequired()]
-    public abstract partial class TCErrorCondition : TCXMLReaderBaseGeneral
+    partial public abstract class TCErrorCondition : TCXMLReaderBaseGeneral
     {
         public static string xmlStr = "<a></a>";
 

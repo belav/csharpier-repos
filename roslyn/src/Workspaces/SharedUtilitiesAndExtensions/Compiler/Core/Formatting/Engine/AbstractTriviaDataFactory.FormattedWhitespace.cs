@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    internal abstract partial class AbstractTriviaDataFactory
+    partial internal abstract class AbstractTriviaDataFactory
     {
         protected class FormattedWhitespace : TriviaData
         {

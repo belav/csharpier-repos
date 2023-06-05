@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
-    internal static partial class ITextViewExtensions
+    partial internal static class ITextViewExtensions
     {
         /// <summary>
         /// Collects the content types in the view's buffer graph.

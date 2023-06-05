@@ -91,7 +91,7 @@ namespace MonoTests.System.Drawing.Imaging
             Assert.Throws<ExternalException>(() => new Metafile(Bitmap));
         }
 
-        static public void Check_MetaHeader_WmfPlaceable(MetaHeader mh)
+        public static void Check_MetaHeader_WmfPlaceable(MetaHeader mh)
         {
             Assert.AreEqual(9, mh.HeaderSize, "HeaderSize");
             Assert.AreEqual(98, mh.MaxRecord, "MaxRecord");

@@ -32,7 +32,7 @@ namespace System.Net.Configuration
             );
         }
 
-        static internal string AuthenticationModulesSectionPath
+        internal static string AuthenticationModulesSectionPath
         {
             get
             {
@@ -42,7 +42,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal string ConnectionManagementSectionPath
+        internal static string ConnectionManagementSectionPath
         {
             get
             {
@@ -52,7 +52,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal string DefaultProxySectionPath
+        internal static string DefaultProxySectionPath
         {
             get
             {
@@ -62,7 +62,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal string SmtpSectionPath
+        internal static string SmtpSectionPath
         {
             get
             {
@@ -73,7 +73,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal string RequestCachingSectionPath
+        internal static string RequestCachingSectionPath
         {
             get
             {
@@ -83,7 +83,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal string SettingsSectionPath
+        internal static string SettingsSectionPath
         {
             get
             {
@@ -93,7 +93,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal string WebRequestModulesSectionPath
+        internal static string WebRequestModulesSectionPath
         {
             get
             {

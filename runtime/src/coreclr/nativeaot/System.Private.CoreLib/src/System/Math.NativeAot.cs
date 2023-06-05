@@ -14,7 +14,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public static partial class Math
+    partial public static class Math
     {
         [Intrinsic]
         public static double Acos(double d)

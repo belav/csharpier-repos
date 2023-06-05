@@ -8,7 +8,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.Tests
 {
     [InheritRequired()]
-    public abstract partial class TCLinePos : TCXMLReaderBaseGeneral
+    partial public abstract class TCLinePos : TCXMLReaderBaseGeneral
     {
         public const string ST_ELEMENT = "ELEMENT";
         public const string ST_SKIP = "SKIP";

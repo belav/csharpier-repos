@@ -17,10 +17,11 @@ using static Microsoft.VisualStudio.Threading.ThreadingTools;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
+    partial
     /// <summary>
     /// Workspace created by the remote host that mirrors the corresponding client workspace.
     /// </summary>
-    internal sealed partial class RemoteWorkspace : Workspace
+    internal sealed class RemoteWorkspace : Workspace
     {
         /// <summary>
         /// Guards updates to all mutable state in this workspace.

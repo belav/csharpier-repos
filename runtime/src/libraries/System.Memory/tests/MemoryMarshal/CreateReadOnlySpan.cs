@@ -9,7 +9,7 @@ using static System.TestHelpers;
 
 namespace System.SpanTests
 {
-    public static partial class MemoryMarshalTests
+    partial public static class MemoryMarshalTests
     {
         [Fact]
         public static void CreateReadOnlySpan()

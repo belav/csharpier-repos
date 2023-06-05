@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.CommandLine.Invocation
 {
-    public static partial class CommandHandler
+    partial public static class CommandHandler
     {
         /// <summary>
         /// Creates a command handler based on a delegate.

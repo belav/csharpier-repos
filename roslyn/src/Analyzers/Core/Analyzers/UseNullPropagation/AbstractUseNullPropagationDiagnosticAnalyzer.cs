@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
         public const string WhenPartIsNullable = nameof(WhenPartIsNullable);
     }
 
+    partial
     /// <summary>
     /// Looks for code snippets similar to <c>x == null ? null : x.Y()</c> and converts it to <c>x?.Y()</c>.  This form is also supported:
     /// <code>
@@ -25,7 +26,7 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
     ///     x.Y();
     /// </code>
     /// </summary>
-    internal abstract partial class AbstractUseNullPropagationDiagnosticAnalyzer<
+    internal abstract class AbstractUseNullPropagationDiagnosticAnalyzer<
         TSyntaxKind,
         TExpressionSyntax,
         TStatementSyntax,

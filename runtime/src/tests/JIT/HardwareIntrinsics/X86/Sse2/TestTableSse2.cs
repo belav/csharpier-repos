@@ -3186,7 +3186,7 @@ namespace IntelHardwareIntrinsicTest.SSE2
         Sse2MultiplyHorizontalAdd = 1,
     }
 
-    public partial class Program
+    partial public class Program
     {
         private static void PrintErrorHeaderTu<T>(string functionName, string testFuncString)
             where T : struct

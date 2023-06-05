@@ -33,7 +33,7 @@ namespace Client.EvalServiceReference
         Namespace = "http://schemas.datacontract.org/2004/07/WcfServiceLibrary1"
     )]
     [System.SerializableAttribute()]
-    public partial class Eval
+    partial public class Eval
         : object,
             System.Runtime.Serialization.IExtensibleDataObject,
             System.ComponentModel.INotifyPropertyChanged
@@ -128,7 +128,7 @@ namespace Client.EvalServiceReference
         Namespace = "http://schemas.datacontract.org/2004/07/WcfServiceLibrary1"
     )]
     [System.SerializableAttribute()]
-    public partial class EvalItem
+    partial public class EvalItem
         : object,
             System.Runtime.Serialization.IExtensibleDataObject,
             System.ComponentModel.INotifyPropertyChanged
@@ -259,7 +259,7 @@ namespace Client.EvalServiceReference
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class EvalServiceClient
+    partial public class EvalServiceClient
         : System.ServiceModel.ClientBase<Client.EvalServiceReference.IEvalService>,
             Client.EvalServiceReference.IEvalService
     {

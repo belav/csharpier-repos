@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime
 {
-    public static partial class RuntimeImports
+    partial public static class RuntimeImports
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern unsafe void _ecvt_s(

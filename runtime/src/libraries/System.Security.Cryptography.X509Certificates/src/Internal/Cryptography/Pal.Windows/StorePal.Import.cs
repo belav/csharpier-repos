@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
+    partial internal sealed class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
     {
         public static ILoaderPal FromBlob(
             ReadOnlySpan<byte> rawData,

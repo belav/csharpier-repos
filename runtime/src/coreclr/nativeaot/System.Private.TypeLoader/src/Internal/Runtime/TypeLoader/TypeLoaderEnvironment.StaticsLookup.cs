@@ -13,7 +13,7 @@ using Internal.NativeFormat;
 
 namespace Internal.Runtime.TypeLoader
 {
-    public sealed partial class TypeLoaderEnvironment
+    partial public sealed class TypeLoaderEnvironment
     {
         // To keep the synchronization simple, we execute all TLS registration/lookups under a global lock
         private Lock _threadStaticsLock = new Lock();

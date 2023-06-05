@@ -9,7 +9,7 @@ using System.Composition;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     [Export(typeof(IDiagnosticUpdateSourceRegistrationService))]
-    internal partial class DiagnosticService : IDiagnosticUpdateSourceRegistrationService
+    partial internal class DiagnosticService : IDiagnosticUpdateSourceRegistrationService
     {
         public void Register(IDiagnosticUpdateSource source)
         {

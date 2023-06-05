@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    public static partial class RandomAccess
+    partial public static class RandomAccess
     {
         /// <summary>
         /// Gets the length of the file in bytes.

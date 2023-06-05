@@ -13,7 +13,7 @@ using NuGet.RuntimeModel;
 
 namespace Microsoft.NET.Build.Tasks
 {
-    internal static partial class NuGetUtils
+    partial internal static class NuGetUtils
     {
         public static bool IsPlaceholderFile(string path)
         {

@@ -8,7 +8,7 @@ using System.Security.Cryptography.Pkcs.Asn1;
 
 namespace Internal.Cryptography.Pal.AnyOS
 {
-    internal sealed partial class ManagedPkcsPal : PkcsPal
+    partial internal sealed class ManagedPkcsPal : PkcsPal
     {
         private sealed class ManagedKeyAgreePal : KeyAgreeRecipientInfoPal
         {

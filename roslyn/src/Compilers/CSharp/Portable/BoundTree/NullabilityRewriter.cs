@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class NullabilityRewriter : BoundTreeRewriter
+    partial internal sealed class NullabilityRewriter : BoundTreeRewriter
     {
         protected override BoundExpression? VisitExpressionWithoutStackGuard(BoundExpression node)
         {

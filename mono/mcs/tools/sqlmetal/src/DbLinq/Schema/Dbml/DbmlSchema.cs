@@ -42,10 +42,10 @@ namespace DbLinq.Schema.Dbml
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007",
         IsNullable = false
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class Database : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class Database : object, System.ComponentModel.INotifyPropertyChanged
     {
         private Connection connectionField;
 
@@ -322,10 +322,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class Connection : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class Connection : object, System.ComponentModel.INotifyPropertyChanged
     {
         private string providerField;
 
@@ -456,10 +456,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class Return : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class Return : object, System.ComponentModel.INotifyPropertyChanged
     {
         private string typeField;
 
@@ -513,10 +513,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class Parameter : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class Parameter : object, System.ComponentModel.INotifyPropertyChanged
     {
         private string nameField;
 
@@ -647,10 +647,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class Function : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class Function : object, System.ComponentModel.INotifyPropertyChanged
     {
         private Parameter[] parameterField;
 
@@ -859,10 +859,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class Type : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class Type : object, System.ComponentModel.INotifyPropertyChanged
     {
         private object[] itemsField;
 
@@ -1057,10 +1057,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class Association : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class Association : object, System.ComponentModel.INotifyPropertyChanged
     {
         private string nameField;
 
@@ -1393,10 +1393,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class Column : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class Column : object, System.ComponentModel.INotifyPropertyChanged
     {
         private string nameField;
 
@@ -1879,10 +1879,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class TableFunctionReturn : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class TableFunctionReturn : object, System.ComponentModel.INotifyPropertyChanged
     {
         private string memberField;
 
@@ -1922,10 +1922,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class TableFunctionParameter : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class TableFunctionParameter : object, System.ComponentModel.INotifyPropertyChanged
     {
         private string parameterField;
 
@@ -2025,10 +2025,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class TableFunction : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class TableFunction : object, System.ComponentModel.INotifyPropertyChanged
     {
         private TableFunctionParameter[] argumentField;
 
@@ -2123,10 +2123,10 @@ namespace DbLinq.Schema.Dbml
     [System.Xml.Serialization.XmlTypeAttribute(
         Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
     )]
-#if !MONO_STRICT
-    public
 #endif
-    partial class Table : object, System.ComponentModel.INotifyPropertyChanged
+    partial
+#if !MONO_STRICT
+    public class Table : object, System.ComponentModel.INotifyPropertyChanged
     {
         private Type typeField;
 

@@ -17,7 +17,7 @@ using System.Threading;
 
 namespace System
 {
-    public sealed partial class AppDomain : MarshalByRefObject
+    partial public sealed class AppDomain : MarshalByRefObject
     {
         private static readonly AppDomain s_domain = new AppDomain();
         private IPrincipal? _defaultPrincipal;

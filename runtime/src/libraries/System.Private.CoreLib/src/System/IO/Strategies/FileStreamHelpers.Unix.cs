@@ -5,8 +5,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Strategies
 {
+    partial
     // this type defines a set of stateless FileStream/FileStreamStrategy helper methods
-    internal static partial class FileStreamHelpers
+    internal static class FileStreamHelpers
     {
 #pragma warning disable IDE0060
         private static OSFileStreamStrategy ChooseStrategyCore(

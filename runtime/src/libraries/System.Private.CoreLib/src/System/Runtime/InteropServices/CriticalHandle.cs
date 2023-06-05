@@ -115,8 +115,9 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System.Runtime.InteropServices
 {
+    partial
     // This class should not be serializable - it's a handle
-    public abstract partial class CriticalHandle : CriticalFinalizerObject, IDisposable
+    public abstract class CriticalHandle : CriticalFinalizerObject, IDisposable
     {
         // ! Do not add or rearrange fields as the EE depends on this layout.
         //------------------------------------------------------------------

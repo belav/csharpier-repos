@@ -19,8 +19,9 @@ namespace System.Collections.Immutable
     /// </devremarks>
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
+    partial partial
 #if NETCOREAPP
-    public sealed partial class ImmutableSortedSet<T>
+    public sealed class ImmutableSortedSet<T>
         : IImmutableSet<T>,
             ISortKeyCollection<T>,
             IReadOnlySet<T>,
@@ -30,7 +31,7 @@ namespace System.Collections.Immutable
             IList,
             IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
 #else
-    public sealed partial class ImmutableSortedSet<T>
+    public sealed class ImmutableSortedSet<T>
         : IImmutableSet<T>,
             ISortKeyCollection<T>,
             IReadOnlyList<T>,

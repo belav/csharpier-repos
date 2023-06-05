@@ -11,6 +11,7 @@ using System;
 
 namespace Roslyn.Utilities
 {
+    partial
     /// <summary>
     /// NOTE: Only use if you truly need a BK-tree.  If you just want to compare words, use
     /// the 'SpellChecker' type instead.
@@ -23,7 +24,7 @@ namespace Roslyn.Utilities
     /// Pages 230-236
     /// http://dl.acm.org/citation.cfm?doid=362003.362025
     /// </summary>
-    internal partial class BKTree
+    internal class BKTree
     {
         public static readonly BKTree Empty =
             new(Array.Empty<char>(), ImmutableArray<Node>.Empty, ImmutableArray<Edge>.Empty);

@@ -5,7 +5,7 @@ using Mono.Linker;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    public readonly partial struct DiagnosticContext
+    partial public readonly struct DiagnosticContext
     {
         public readonly MessageOrigin Origin;
         public readonly bool DiagnosticsEnabled;
@@ -17,14 +17,16 @@ namespace ILLink.Shared.TrimAnalysis
             LinkContext context
         ) => (Origin, DiagnosticsEnabled, _context) = (origin, diagnosticsEnabled, context);
 
-        public partial void AddDiagnostic(DiagnosticId id, params string[] args)
+        partial public void AddDiagnostic(DiagnosticId id, params string[] args)
         {
             if (DiagnosticsEnabled)
                 _context.LogWarning(Origin, id, args);
         }
 
 #pragma warning disable IDE0060, CA1822
-        public partial void AddDiagnostic(
+        partial
+#pragma warning disable IDE0060, CA1822
+        public void AddDiagnostic(
             DiagnosticId id,
             ValueWithDynamicallyAccessedMembers actualValue,
             ValueWithDynamicallyAccessedMembers expectedAnnotationsValue,

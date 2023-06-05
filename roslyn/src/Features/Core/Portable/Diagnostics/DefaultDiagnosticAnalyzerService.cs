@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         WellKnownSolutionCrawlerAnalyzers.Diagnostic,
         workspaceKinds: null
     )]
-    internal partial class DefaultDiagnosticAnalyzerService
+    partial internal class DefaultDiagnosticAnalyzerService
         : IIncrementalAnalyzerProvider,
             IDiagnosticUpdateSource
     {

@@ -49,7 +49,7 @@ namespace System.Security.Cryptography.X509Certificates
     // and/or Authenticode certs. However this class works with older
     // X509v1 certificates and non-authenticode (code signing) certs.
     [Serializable]
-    public partial class X509Certificate : IDisposable, IDeserializationCallback, ISerializable
+    partial public class X509Certificate : IDisposable, IDeserializationCallback, ISerializable
     {
         #region CoreFX Implementation
 

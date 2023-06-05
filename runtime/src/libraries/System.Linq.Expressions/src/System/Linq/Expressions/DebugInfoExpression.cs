@@ -147,9 +147,10 @@ namespace System.Linq.Expressions
 
         public override int EndColumn => 0;
     }
+    partial
     #endregion
 
-    public partial class Expression
+    public class Expression
     {
         /// <summary>
         /// Creates a <see cref="DebugInfoExpression"/> with the specified span.

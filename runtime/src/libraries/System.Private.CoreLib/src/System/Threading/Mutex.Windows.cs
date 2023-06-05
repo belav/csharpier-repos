@@ -7,10 +7,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
+    partial
     /// <summary>
     /// Synchronization primitive that can also be used for interprocess synchronization
     /// </summary>
-    public sealed partial class Mutex : WaitHandle
+    public sealed class Mutex : WaitHandle
     {
         private const uint AccessRights =
             (uint)Interop.Kernel32.MAXIMUM_ALLOWED

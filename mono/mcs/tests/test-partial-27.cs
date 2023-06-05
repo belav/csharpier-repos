@@ -2,9 +2,9 @@ using System;
 
 partial class C
 {
-    static partial void Partial(int i);
+    partial static void Partial(int i);
 
-    static partial void Partial(string i);
+    partial static void Partial(string i);
 
     public static int Main()
     {

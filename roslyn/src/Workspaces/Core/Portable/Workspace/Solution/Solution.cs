@@ -21,10 +21,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// Represents a set of projects and their source code documents.
     /// </summary>
-    public partial class Solution
+    public class Solution
     {
         // SolutionState that doesn't hold onto Project/Document
         private readonly SolutionState _state;

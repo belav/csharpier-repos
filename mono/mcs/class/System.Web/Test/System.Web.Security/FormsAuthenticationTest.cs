@@ -29,7 +29,7 @@ namespace MonoTests.System.Web.Security
             new WebTest(new HandlerInvoker(new HandlerDelegate(DefaultValues_delegate))).Run();
         }
 
-        static public void DefaultValues_delegate()
+        public static void DefaultValues_delegate()
         {
             // MS use ".ASPXAUTH" while Mono use ".MONOAUTH"
             string str = FormsAuthentication.FormsCookieName;
@@ -61,7 +61,7 @@ namespace MonoTests.System.Web.Security
             new WebTest(new HandlerInvoker(new HandlerDelegate(Initialize_delegate))).Run();
         }
 
-        static public void Initialize_delegate()
+        public static void Initialize_delegate()
         {
             // calling Initialize without an HttpContext
             FormsAuthentication.Initialize();

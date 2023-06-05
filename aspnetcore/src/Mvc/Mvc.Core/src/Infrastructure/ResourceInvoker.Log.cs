@@ -12,10 +12,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-internal partial class ResourceInvoker
+partial internal class ResourceInvoker
 {
+    partial
     // Internal for unit testing
-    internal static partial class Log
+    internal static class Log
     {
         public static void ExecutingAction(ILogger logger, ActionDescriptor action)
         {
@@ -75,7 +76,7 @@ internal partial class ResourceInvoker
             EventName = "ActionExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ActionExecuting(
+        partial private static void ActionExecuting(
             ILogger logger,
             string routeData,
             string? actionName
@@ -88,7 +89,7 @@ internal partial class ResourceInvoker
             EventName = "ControllerActionExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ControllerActionExecuting(
+        partial private static void ControllerActionExecuting(
             ILogger logger,
             string routeData,
             MethodInfo methodInfo,
@@ -103,7 +104,7 @@ internal partial class ResourceInvoker
             EventName = "PageExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void PageExecuting(
+        partial private static void PageExecuting(
             ILogger logger,
             string routeData,
             string? pageName
@@ -115,7 +116,7 @@ internal partial class ResourceInvoker
             "Authorization failed for the request at filter '{AuthorizationFilter}'.",
             EventName = "AuthorizationFailure"
         )]
-        public static partial void AuthorizationFailure(
+        partial public static void AuthorizationFailure(
             ILogger logger,
             IFilterMetadata authorizationFilter
         );
@@ -126,7 +127,7 @@ internal partial class ResourceInvoker
             "Request was short circuited at resource filter '{ResourceFilter}'.",
             EventName = "ResourceFilterShortCircuit"
         )]
-        public static partial void ResourceFilterShortCircuited(
+        partial public static void ResourceFilterShortCircuited(
             ILogger logger,
             IFilterMetadata resourceFilter
         );
@@ -137,7 +138,7 @@ internal partial class ResourceInvoker
             "Before executing action result {ActionResult}.",
             EventName = "BeforeExecutingActionResult"
         )]
-        private static partial void BeforeExecutingActionResult(ILogger logger, Type actionResult);
+        partial private static void BeforeExecutingActionResult(ILogger logger, Type actionResult);
 
         public static void BeforeExecutingActionResult(ILogger logger, IActionResult actionResult)
         {
@@ -150,7 +151,7 @@ internal partial class ResourceInvoker
             "After executing action result {ActionResult}.",
             EventName = "AfterExecutingActionResult"
         )]
-        private static partial void AfterExecutingActionResult(ILogger logger, Type actionResult);
+        partial private static void AfterExecutingActionResult(ILogger logger, Type actionResult);
 
         public static void AfterExecutingActionResult(ILogger logger, IActionResult actionResult)
         {
@@ -184,7 +185,7 @@ internal partial class ResourceInvoker
             EventName = "PageExecuted",
             SkipEnabledCheck = true
         )]
-        private static partial void PageExecuted(
+        partial private static void PageExecuted(
             ILogger logger,
             string? pageName,
             double elapsedMilliseconds
@@ -197,7 +198,7 @@ internal partial class ResourceInvoker
             EventName = "ActionExecuted",
             SkipEnabledCheck = true
         )]
-        private static partial void ActionExecuted(
+        partial private static void ActionExecuted(
             ILogger logger,
             string? actionName,
             double elapsedMilliseconds

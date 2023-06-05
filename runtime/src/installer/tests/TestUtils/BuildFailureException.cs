@@ -5,7 +5,7 @@ using System;
 
 namespace Microsoft.DotNet.Cli.Build.Framework
 {
-    public partial class BuildFailureException : Exception
+    partial public class BuildFailureException : Exception
     {
         public BuildFailureException() { }
 

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Internal.TypeSystem
 {
-    public partial class DebugNameFormatter
+    partial public class DebugNameFormatter
         : TypeNameFormatter<DebugNameFormatter.Void, DebugNameFormatter.FormatOptions>
     {
         public static readonly DebugNameFormatter Instance = new DebugNameFormatter();

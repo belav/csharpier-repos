@@ -54,11 +54,12 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
+    partial
     /// <summary>
     /// The Axis class provides functionality for
     /// drawing axis labels.
     /// </summary>
-    public partial class Axis
+    public class Axis
     {
         #region Fields
 

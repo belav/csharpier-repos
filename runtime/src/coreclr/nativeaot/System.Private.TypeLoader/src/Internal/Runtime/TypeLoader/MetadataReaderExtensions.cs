@@ -13,7 +13,7 @@ using AssemblyFlags = Internal.Metadata.NativeFormat.AssemblyFlags;
 
 namespace System.Reflection.Runtime.General
 {
-    public static partial class MetadataReaderExtensions
+    partial public static class MetadataReaderExtensions
     {
         /// <summary>
         /// Convert raw token to a typed metadata handle.

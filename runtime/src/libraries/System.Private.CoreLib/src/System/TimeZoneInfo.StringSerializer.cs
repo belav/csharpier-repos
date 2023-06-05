@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System
 {
-    public sealed partial class TimeZoneInfo
+    partial public sealed class TimeZoneInfo
     {
         /// <summary>
         /// Used to serialize and deserialize TimeZoneInfo objects based on the custom string serialization format.

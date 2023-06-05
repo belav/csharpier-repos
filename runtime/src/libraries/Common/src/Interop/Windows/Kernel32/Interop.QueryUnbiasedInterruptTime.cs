@@ -3,12 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool QueryUnbiasedInterruptTime(out ulong UnbiasedTime);
+        partial internal static bool QueryUnbiasedInterruptTime(out ulong UnbiasedTime);
     }
 }

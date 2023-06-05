@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
 {
-    internal partial class CSharpMetadataAsSourceService
+    partial internal class CSharpMetadataAsSourceService
     {
         private class FormattingRule : AbstractMetadataFormattingRule
         {

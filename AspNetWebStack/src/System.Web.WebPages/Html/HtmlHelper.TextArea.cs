@@ -8,7 +8,7 @@ using Microsoft.Internal.Web.Utils;
 
 namespace System.Web.WebPages.Html
 {
-    public partial class HtmlHelper
+    partial public class HtmlHelper
     {
         // Values from mvc
         private const int TextAreaRows = 2;

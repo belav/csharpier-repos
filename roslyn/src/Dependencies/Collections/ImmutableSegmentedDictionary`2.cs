@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
+    partial
     /// <summary>
     /// Represents a segmented dictionary that is immutable; meaning it cannot be changed once it is created.
     /// </summary>
@@ -67,7 +68,7 @@ namespace Microsoft.CodeAnalysis.Collections
     /// This effectively copies the one field in the struct to a local variable so that it is insulated from other
     /// threads.</para>
     /// </devremarks>
-    internal readonly partial struct ImmutableSegmentedDictionary<TKey, TValue>
+    internal readonly struct ImmutableSegmentedDictionary<TKey, TValue>
         : IImmutableDictionary<TKey, TValue>,
             IDictionary<TKey, TValue>,
             IReadOnlyDictionary<TKey, TValue>,

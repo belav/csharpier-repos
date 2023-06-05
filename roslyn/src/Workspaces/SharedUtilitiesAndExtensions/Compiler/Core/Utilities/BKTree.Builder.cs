@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Utilities;
 
 namespace Roslyn.Utilities
 {
-    internal partial class BKTree
+    partial internal class BKTree
     {
         private class Builder
         {

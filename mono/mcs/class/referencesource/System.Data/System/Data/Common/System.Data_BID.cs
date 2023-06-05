@@ -65,7 +65,7 @@ using System.Runtime.Versioning;
 //
 [module: BidMetaText("<ApiGroup|SqlClient|Correlation> 0x00040000: Correlation")]
 
-internal static partial class Bid
+partial internal static class Bid
 {
     private const string dllName = "System.Data.dll";
 
@@ -1366,10 +1366,11 @@ internal static partial class Bid
         }
     }
 
+    partial
     //
     // Interop calls to pluggable hooks [SuppressUnmanagedCodeSecurity] applied
     //
-    private static partial class NativeMethods
+    private static class NativeMethods
     {
         //
         //  Manually edited wrappers
@@ -1381,7 +1382,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1400,7 +1401,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1417,7 +1418,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1438,7 +1439,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1454,7 +1455,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1471,7 +1472,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1489,7 +1490,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1507,7 +1508,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1525,7 +1526,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1548,7 +1549,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1564,7 +1565,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1579,7 +1580,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1595,7 +1596,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1612,7 +1613,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1629,7 +1630,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1646,7 +1647,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1662,7 +1663,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1679,7 +1680,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1695,7 +1696,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1712,7 +1713,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1729,7 +1730,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1747,7 +1748,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1767,7 +1768,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1784,7 +1785,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1800,7 +1801,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1818,7 +1819,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1836,7 +1837,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1854,7 +1855,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1871,7 +1872,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1892,7 +1893,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1911,7 +1912,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1927,7 +1928,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1944,7 +1945,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1961,7 +1962,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1981,7 +1982,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -1999,7 +2000,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2017,7 +2018,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2039,7 +2040,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidTraceCW"
         )]
-        extern internal static void Trace(
+        internal static extern void Trace(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2060,7 +2061,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2076,7 +2077,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2093,7 +2094,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2110,7 +2111,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2128,7 +2129,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2146,7 +2147,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2164,7 +2165,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2183,7 +2184,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,
@@ -2201,7 +2202,7 @@ internal static partial class Bid
             CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "DllBidScopeEnterCW"
         )]
-        extern internal static void ScopeEnter(
+        internal static extern void ScopeEnter(
             IntPtr hID,
             UIntPtr src,
             UIntPtr info,

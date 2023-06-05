@@ -350,7 +350,7 @@ namespace System.Web
 #endif
         }
 
-        private unsafe static int UnsafeAppendEncodedChars(
+        private static unsafe int UnsafeAppendEncodedChars(
             char[] src,
             int srcOffset,
             int srcSize,

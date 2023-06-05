@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class AppleCertificatePal : ICertificatePal
+    partial internal sealed class AppleCertificatePal : ICertificatePal
     {
         public DSA? GetDSAPrivateKey()
         {

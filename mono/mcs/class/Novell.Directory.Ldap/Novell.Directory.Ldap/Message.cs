@@ -44,10 +44,11 @@ namespace Novell.Directory.Ldap
             replies = new MessageVector(5, 5);
         }
 
+        internal
         /// <summary> Get number of messages queued.
         /// Don't count the last message containing result code.
         /// </summary>
-        virtual internal int Count
+        virtual int Count
         {
             /* package */
 
@@ -65,8 +66,9 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        internal
         /// <summary> sets the agent for this message</summary>
-        virtual internal MessageAgent Agent
+        virtual MessageAgent Agent
         {
             /* package */
 
@@ -93,7 +95,7 @@ namespace Novell.Directory.Ldap
             return (replies.Count > 0);
         }
 
-        virtual internal int MessageType
+        internal virtual int MessageType
         {
             /* package */
 
@@ -107,20 +109,21 @@ namespace Novell.Directory.Ldap
             }
         }
 
-        virtual internal int MessageID
+        internal virtual int MessageID
         {
             /* package */
 
             get { return msgId; }
         }
 
+        internal
         /// <summary> gets the operation complete status for this message
         ///
         /// </summary>
         /// <returns> the true if the operation is complete, i.e.
         /// the LdapResult has been received.
         /// </returns>
-        virtual internal bool Complete
+        virtual bool Complete
         {
             /* package */
 
@@ -183,12 +186,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        internal
         /// <summary> Gets the next reply from the reply queue if one exists
         ///
         /// </summary>
         /// <returns> the next reply message on the reply queue or null if none
         /// </returns>
-        virtual internal System.Object Reply
+        virtual System.Object Reply
         {
             /* package */
 
@@ -231,31 +235,33 @@ namespace Novell.Directory.Ldap
             return acceptReplies;
         }
 
+        internal
         /// <summary> gets the LdapMessage request associated with this message
         ///
         /// </summary>
         /// <returns> the LdapMessage request associated with this message
         /// </returns>
-        virtual internal LdapMessage Request
+        virtual LdapMessage Request
         {
             /*package*/
 
             get { return msg; }
         }
 
-        virtual internal bool BindRequest
+        internal virtual bool BindRequest
         {
             /* package */
 
             get { return (bindprops != null); }
         }
 
+        internal
         /// <summary> gets the MessageAgent associated with this message
         ///
         /// </summary>
         /// <returns> the MessageAgent associated with this message
         /// </returns>
-        virtual internal MessageAgent MessageAgent
+        virtual MessageAgent MessageAgent
         {
             /* package */
 
@@ -554,7 +560,11 @@ namespace Novell.Directory.Ldap
             /// <summary> The timeout thread.  If it wakes from the sleep, future input
             /// is stopped and the request is timed out.
             /// </summary>
-            override public void Run()
+            public
+            /// <summary> The timeout thread.  If it wakes from the sleep, future input
+            /// is stopped and the request is timed out.
+            /// </summary>
+            override void Run()
             {
                 try
                 {

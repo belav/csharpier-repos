@@ -14,7 +14,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class ChainPal : IDisposable, IChainPal
+    partial internal sealed class ChainPal : IDisposable, IChainPal
     {
         /// <summary>
         /// Does not throw on error. Returns null ChainPal instead.

@@ -6,7 +6,7 @@ using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     [StructLayout(LayoutKind.Sequential, Size = 40)]
     public struct PROCESS_MEMORY_COUNTERS

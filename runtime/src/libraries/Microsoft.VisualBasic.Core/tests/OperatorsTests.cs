@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Microsoft.VisualBasic.CompilerServices.Tests
 {
-    public partial class OperatorsTests
+    partial public class OperatorsTests
     {
         public static IEnumerable<object[]> AddObject_Idempotent_TestData()
         {

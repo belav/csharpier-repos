@@ -12,7 +12,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class ChainPal
+    partial internal sealed class ChainPal
     {
         public static IChainPal FromHandle(IntPtr chainContext)
         {

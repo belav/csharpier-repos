@@ -3,14 +3,14 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-public partial class DataAnnotationsValidator : Microsoft.AspNetCore.Components.ComponentBase
+partial public class DataAnnotationsValidator : Microsoft.AspNetCore.Components.ComponentBase
 {
     public DataAnnotationsValidator() { }
 
     protected override void OnInitialized() { }
 }
 
-public sealed partial class EditContext
+partial public sealed class EditContext
 {
     public EditContext(object model) { }
 
@@ -92,7 +92,7 @@ public sealed partial class EditContext
     }
 }
 
-public static partial class EditContextDataAnnotationsExtensions
+partial public static class EditContextDataAnnotationsExtensions
 {
     public static Microsoft.AspNetCore.Components.Forms.EditContext AddDataAnnotationsValidation(
         this Microsoft.AspNetCore.Components.Forms.EditContext editContext
@@ -102,7 +102,7 @@ public static partial class EditContextDataAnnotationsExtensions
     }
 }
 
-public sealed partial class FieldChangedEventArgs : System.EventArgs
+partial public sealed class FieldChangedEventArgs : System.EventArgs
 {
     public FieldChangedEventArgs(
         in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier
@@ -118,7 +118,7 @@ public sealed partial class FieldChangedEventArgs : System.EventArgs
 [System.Runtime.InteropServices.StructLayoutAttribute(
     System.Runtime.InteropServices.LayoutKind.Sequential
 )]
-public readonly partial struct FieldIdentifier
+partial public readonly struct FieldIdentifier
     : System.IEquatable<Microsoft.AspNetCore.Components.Forms.FieldIdentifier>
 {
     private readonly object _dummy;
@@ -162,7 +162,7 @@ public readonly partial struct FieldIdentifier
     }
 }
 
-public sealed partial class ValidationMessageStore
+partial public sealed class ValidationMessageStore
 {
     public ValidationMessageStore(Microsoft.AspNetCore.Components.Forms.EditContext editContext) { }
 
@@ -202,14 +202,14 @@ public sealed partial class ValidationMessageStore
     public void Clear(System.Linq.Expressions.Expression<System.Func<object>> accessor) { }
 }
 
-public sealed partial class ValidationRequestedEventArgs : System.EventArgs
+partial public sealed class ValidationRequestedEventArgs : System.EventArgs
 {
     public static new readonly Microsoft.AspNetCore.Components.Forms.ValidationRequestedEventArgs Empty;
 
     public ValidationRequestedEventArgs() { }
 }
 
-public sealed partial class ValidationStateChangedEventArgs : System.EventArgs
+partial public sealed class ValidationStateChangedEventArgs : System.EventArgs
 {
     public static new readonly Microsoft.AspNetCore.Components.Forms.ValidationStateChangedEventArgs Empty;
 

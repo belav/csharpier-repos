@@ -9,7 +9,7 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace System.Text.Encodings.Web
 {
-    internal sealed partial class OptimizedInboxTextEncoder
+    partial internal sealed class OptimizedInboxTextEncoder
     {
         private unsafe nuint GetIndexOfFirstByteToEncodeAdvSimd64(byte* pData, nuint lengthInBytes)
         {

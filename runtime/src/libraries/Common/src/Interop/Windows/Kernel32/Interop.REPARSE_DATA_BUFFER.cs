@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         // https://docs.microsoft.com/windows-hardware/drivers/ifs/fsctl-get-reparse-point
         internal const int MAXIMUM_REPARSE_DATA_BUFFER_SIZE = 16 * 1024;

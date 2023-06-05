@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 
-internal partial class QuicStreamContext : TransportConnection, IPooledStream, IDisposable
+partial internal class QuicStreamContext : TransportConnection, IPooledStream, IDisposable
 {
     private static readonly ConnectionAbortedException SendGracefullyCompletedException =
         new ConnectionAbortedException("The QUIC transport's send loop completed gracefully.");
@@ -333,7 +333,7 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
             Input.Complete(ResolveCompleteReceiveException(error));
         }
 
-        async static ValueTask<FlushResult> AwaitCompleteTaskAsync(ValueTask completeTask)
+        static async ValueTask<FlushResult> AwaitCompleteTaskAsync(ValueTask completeTask)
         {
             await completeTask;
             return new FlushResult(isCanceled: false, isCompleted: true);

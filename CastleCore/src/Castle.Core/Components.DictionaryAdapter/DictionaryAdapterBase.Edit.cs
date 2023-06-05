@@ -20,7 +20,7 @@ namespace Castle.Components.DictionaryAdapter
     using System.Linq;
     using System.Reflection;
 
-    public abstract partial class DictionaryAdapterBase
+    partial public abstract class DictionaryAdapterBase
     {
         private int suppressEditingCount = 0;
         private Stack<Dictionary<string, Edit>> updates;

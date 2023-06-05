@@ -821,7 +821,7 @@ namespace System.Web.ClientServices.Providers
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    internal partial class ProfileServiceClient
+    partial internal class ProfileServiceClient
         : System.ServiceModel.ClientBase<ProfileService>,
             ProfileService
     {

@@ -10,12 +10,13 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
+partial
 /// <summary>
 /// Caches the result of runtime compilation of Razor files for the duration of the application lifetime.
 /// </summary>
 #pragma warning disable CA1852 // Seal internal types
 // This name is hardcoded in RazorRuntimeCompilationMvcCoreBuilderExtensions. Make sure it's updated if this is ever renamed.
-internal partial class DefaultViewCompiler : IViewCompiler
+internal class DefaultViewCompiler : IViewCompiler
 #pragma warning restore CA1852 // Seal internal types
 {
     private readonly ApplicationPartManager _applicationPartManager;
@@ -139,7 +140,7 @@ internal partial class DefaultViewCompiler : IViewCompiler
         return normalizedPath;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             3,
@@ -147,7 +148,7 @@ internal partial class DefaultViewCompiler : IViewCompiler
             "Initializing Razor view compiler with compiled view: '{ViewName}'.",
             EventName = "ViewCompilerLocatedCompiledView"
         )]
-        public static partial void ViewCompilerLocatedCompiledView(ILogger logger, string viewName);
+        partial public static void ViewCompilerLocatedCompiledView(ILogger logger, string viewName);
 
         [LoggerMessage(
             4,
@@ -155,7 +156,7 @@ internal partial class DefaultViewCompiler : IViewCompiler
             "Initializing Razor view compiler with no compiled views.",
             EventName = "ViewCompilerNoCompiledViewsFound"
         )]
-        public static partial void ViewCompilerNoCompiledViewsFound(ILogger logger);
+        partial public static void ViewCompilerNoCompiledViewsFound(ILogger logger);
 
         [LoggerMessage(
             5,
@@ -163,7 +164,7 @@ internal partial class DefaultViewCompiler : IViewCompiler
             "Located compiled view for view at path '{Path}'.",
             EventName = "ViewCompilerLocatedCompiledViewForPath"
         )]
-        public static partial void ViewCompilerLocatedCompiledViewForPath(
+        partial public static void ViewCompilerLocatedCompiledViewForPath(
             ILogger logger,
             string path
         );
@@ -174,6 +175,6 @@ internal partial class DefaultViewCompiler : IViewCompiler
             "Could not find a file for view at path '{Path}'.",
             EventName = "ViewCompilerCouldNotFindFileAtPath"
         )]
-        public static partial void ViewCompilerCouldNotFindFileAtPath(ILogger logger, string path);
+        partial public static void ViewCompilerCouldNotFindFileAtPath(ILogger logger, string path);
     }
 }

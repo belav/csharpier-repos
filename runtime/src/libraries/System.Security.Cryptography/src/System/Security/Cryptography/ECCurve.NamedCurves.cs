@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    public partial struct ECCurve
+    partial public struct ECCurve
     {
         /// <summary>
         /// Factory class for creating named curves.

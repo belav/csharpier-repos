@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class CSharpTypeInferenceService
+    partial internal class CSharpTypeInferenceService
     {
         private class TypeInferrer : AbstractTypeInferrer
         {

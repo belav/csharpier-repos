@@ -18,7 +18,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
 {
-    internal abstract partial class AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax>
+    partial internal abstract class AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax>
         : AbstractSyntaxWrapper
         where TBinaryExpressionSyntax : SyntaxNode
     {

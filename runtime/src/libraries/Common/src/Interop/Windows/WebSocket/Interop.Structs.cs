@@ -6,9 +6,9 @@ using System.Net.WebSockets;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WebSocket
+    partial internal static class WebSocket
     {
         [StructLayout(LayoutKind.Explicit)]
         internal struct Buffer

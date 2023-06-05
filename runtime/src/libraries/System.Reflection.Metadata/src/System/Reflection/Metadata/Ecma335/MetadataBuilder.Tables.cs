@@ -8,7 +8,7 @@ using System.Reflection.Internal;
 
 namespace System.Reflection.Metadata.Ecma335
 {
-    public partial class MetadataBuilder
+    partial public class MetadataBuilder
     {
         private const byte MetadataFormatMajorVersion = 2;
         private const byte MetadataFormatMinorVersion = 0;

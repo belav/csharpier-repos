@@ -4,7 +4,7 @@ using System;
 
 class Program
 {
-    static unsafe public int Main()
+    public static unsafe int Main()
     {
         return Test((sbyte*)(-1));
     }

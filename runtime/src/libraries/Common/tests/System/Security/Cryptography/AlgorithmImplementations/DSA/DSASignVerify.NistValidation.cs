@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Dsa.Tests
 {
-    public abstract partial class DSASignVerify
+    partial public abstract class DSASignVerify
     {
         [Fact]
         public void Fips186_2_1()

@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Drawing.Tests
 {
-    public partial class GraphicsTests
+    partial public class GraphicsTests
     {
         public static bool IsWindows7OrWindowsArm64 =>
             PlatformDetection.IsWindows7

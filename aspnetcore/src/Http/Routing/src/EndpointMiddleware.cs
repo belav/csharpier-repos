@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing;
 
-internal sealed partial class EndpointMiddleware
+partial internal sealed class EndpointMiddleware
 {
     internal const string AuthorizationMiddlewareInvokedKey =
         "__AuthorizationMiddlewareWithEndpointInvoked";
@@ -113,7 +113,7 @@ internal sealed partial class EndpointMiddleware
         );
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             0,
@@ -121,7 +121,7 @@ internal sealed partial class EndpointMiddleware
             "Executing endpoint '{EndpointName}'",
             EventName = "ExecutingEndpoint"
         )]
-        public static partial void ExecutingEndpoint(ILogger logger, Endpoint endpointName);
+        partial public static void ExecutingEndpoint(ILogger logger, Endpoint endpointName);
 
         [LoggerMessage(
             1,
@@ -129,6 +129,6 @@ internal sealed partial class EndpointMiddleware
             "Executed endpoint '{EndpointName}'",
             EventName = "ExecutedEndpoint"
         )]
-        public static partial void ExecutedEndpoint(ILogger logger, Endpoint endpointName);
+        partial public static void ExecutedEndpoint(ILogger logger, Endpoint endpointName);
     }
 }

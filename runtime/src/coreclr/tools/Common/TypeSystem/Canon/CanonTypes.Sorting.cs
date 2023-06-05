@@ -5,8 +5,9 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class CanonBaseType
+    public class CanonBaseType
     {
         protected internal sealed override int CompareToImpl(
             TypeDesc other,
@@ -19,12 +20,12 @@ namespace Internal.TypeSystem
         }
     }
 
-    internal partial class CanonType
+    partial internal class CanonType
     {
         protected internal override int ClassCode => 46114331;
     }
 
-    internal partial class UniversalCanonType
+    partial internal class UniversalCanonType
     {
         protected internal override int ClassCode => 1687626054;
     }

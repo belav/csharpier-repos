@@ -19,7 +19,7 @@ using System.Collections.Generic;
 
 namespace System.Xml
 {
-    internal partial class XmlWellFormedWriter : XmlWriter
+    partial internal class XmlWellFormedWriter : XmlWriter
     {
         //
         // Private types used by the XmlWellFormedWriter are defined in XmlWellFormedWriterHelpers.cs
@@ -2467,7 +2467,7 @@ namespace System.Xml
             }
         }
 
-        static private XmlException DupAttrException(string prefix, string localName)
+        private static XmlException DupAttrException(string prefix, string localName)
         {
             StringBuilder sb = new StringBuilder();
             if (prefix.Length > 0)

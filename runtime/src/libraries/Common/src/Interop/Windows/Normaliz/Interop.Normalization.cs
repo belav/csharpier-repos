@@ -4,16 +4,16 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Normaliz
+    partial internal static class Normaliz
     {
         [LibraryImport(
             "Normaliz.dll",
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial BOOL IsNormalizedString(
+        partial internal static unsafe BOOL IsNormalizedString(
             NormalizationForm normForm,
             char* source,
             int length
@@ -24,7 +24,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int NormalizeString(
+        partial internal static unsafe int NormalizeString(
             NormalizationForm normForm,
             char* source,
             int sourceLength,

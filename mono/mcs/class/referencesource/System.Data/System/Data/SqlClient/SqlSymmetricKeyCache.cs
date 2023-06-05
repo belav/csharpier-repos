@@ -17,10 +17,11 @@ namespace System.Data.SqlClient
     using System.Runtime.Caching;
     using System.Text;
 
+    internal
     /// <summary>
     /// <para> Implements a cache of Symmetric Keys (once they are decrypted).Useful for rapidly decrypting multiple data values.</para>
     /// </summary>
-    sealed internal class SqlSymmetricKeyCache
+    sealed class SqlSymmetricKeyCache
     {
         private readonly MemoryCache _cache;
         private static readonly SqlSymmetricKeyCache _singletonInstance =

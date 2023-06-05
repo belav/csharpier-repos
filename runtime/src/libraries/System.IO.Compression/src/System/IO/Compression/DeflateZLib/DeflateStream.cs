@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.IO.Compression
 {
-    public partial class DeflateStream : Stream
+    partial public class DeflateStream : Stream
     {
         private const int DefaultBufferSize = 8192;
 

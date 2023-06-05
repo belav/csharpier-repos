@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             );
     }
 
-    internal abstract partial class CSharpTypeStyleHelper
+    partial internal abstract class CSharpTypeStyleHelper
     {
         protected abstract bool IsStylePreferred(in State state);
 

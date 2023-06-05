@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Diagnostics
 {
+    partial
     /// <summary>
     /// This is the basic API to 'hook' parts of the framework.   It is like an EventSource
     /// (which can also write object), but is intended to log complex objects that can't be serialized.
@@ -14,7 +15,7 @@ namespace System.Diagnostics
     /// https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md
     /// for instructions on its use.
     /// </summary>
-    public abstract partial class DiagnosticSource
+    public abstract class DiagnosticSource
     {
         internal const string WriteRequiresUnreferencedCode =
             "The type of object being written to DiagnosticSource cannot be discovered statically.";

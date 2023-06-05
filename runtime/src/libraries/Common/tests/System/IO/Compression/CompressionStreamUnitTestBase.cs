@@ -700,7 +700,7 @@ namespace System.IO.Compression
         }
     }
 
-    internal partial class ManualSyncMemoryStream : MemoryStream
+    partial internal class ManualSyncMemoryStream : MemoryStream
     {
         private bool isSync;
         public ManualResetEventSlim manualResetEvent = new ManualResetEventSlim(

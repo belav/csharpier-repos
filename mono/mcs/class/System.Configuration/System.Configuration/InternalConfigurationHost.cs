@@ -195,10 +195,10 @@ namespace System.Configuration
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private static string get_bundled_machine_config();
+        private static extern string get_bundled_machine_config();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private static string get_bundled_app_config();
+        private static extern string get_bundled_app_config();
 
         public virtual Stream OpenStreamForRead(string streamName)
         {

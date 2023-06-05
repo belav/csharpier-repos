@@ -3,24 +3,26 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal static partial class ChainPal
+    partial internal static class ChainPal
     {
 #pragma warning disable IDE0060
-        internal static partial IChainPal FromHandle(IntPtr chainContext)
+        partial
+#pragma warning disable IDE0060
+        internal static IChainPal FromHandle(IntPtr chainContext)
         {
             throw new PlatformNotSupportedException(
                 SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
             );
         }
 
-        internal static partial bool ReleaseSafeX509ChainHandle(IntPtr handle)
+        partial internal static bool ReleaseSafeX509ChainHandle(IntPtr handle)
         {
             throw new PlatformNotSupportedException(
                 SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
             );
         }
 
-        internal static partial IChainPal? BuildChain(
+        partial internal static IChainPal? BuildChain(
             bool useMachineContext,
             ICertificatePal cert,
             X509Certificate2Collection? extraStore,

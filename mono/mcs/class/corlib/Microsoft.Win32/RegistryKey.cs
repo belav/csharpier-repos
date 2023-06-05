@@ -307,7 +307,7 @@ namespace Microsoft.Win32
             isWritable = writable;
         }
 
-        static internal bool IsEquals(RegistryKey a, RegistryKey b)
+        internal static bool IsEquals(RegistryKey a, RegistryKey b)
         {
             return a.hive == b.hive
                 && a.handle == b.handle
@@ -918,7 +918,11 @@ namespace Microsoft.Win32
         /// <summary>
         ///	decode a byte array as a string, and strip trailing nulls
         /// </summary>
-        static internal string DecodeString(byte[] data)
+        internal
+        /// <summary>
+        ///	decode a byte array as a string, and strip trailing nulls
+        /// </summary>
+        static string DecodeString(byte[] data)
         {
             string stringRep = Encoding.Unicode.GetString(data);
             int idx = stringRep.IndexOf('\0');
@@ -927,7 +931,7 @@ namespace Microsoft.Win32
             return stringRep;
         }
 
-        static internal IOException CreateMarkedForDeletionException()
+        internal static IOException CreateMarkedForDeletionException()
         {
             throw new IOException(
                 "Illegal operation attempted on a"

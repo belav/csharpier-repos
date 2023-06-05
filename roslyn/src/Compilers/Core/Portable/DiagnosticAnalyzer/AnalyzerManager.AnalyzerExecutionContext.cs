@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class AnalyzerManager
+    partial internal class AnalyzerManager
     {
         private sealed class AnalyzerExecutionContext
         {

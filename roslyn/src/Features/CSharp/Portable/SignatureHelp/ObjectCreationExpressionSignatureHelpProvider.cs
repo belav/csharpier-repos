@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         ),
         Shared
     ]
-    internal partial class ObjectCreationExpressionSignatureHelpProvider
+    partial internal class ObjectCreationExpressionSignatureHelpProvider
         : AbstractCSharpSignatureHelpProvider
     {
         [ImportingConstructor]

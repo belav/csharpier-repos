@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    public sealed partial class ThreadPoolBoundHandle
+    partial public sealed class ThreadPoolBoundHandle
     {
         private static ThreadPoolBoundHandle BindHandleCore(SafeHandle handle)
         {

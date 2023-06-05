@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
+    partial
     // this maps to src\mono\wasm\runtime\corebindings.ts
     // the public methods are protected from trimming by DynamicDependency on JSFunctionBinding.BindJSFunction
-    internal static unsafe partial class JavaScriptExports
+    internal static unsafe class JavaScriptExports
     {
         // the marshaled signature is:
         // Task<int>? CallEntrypoint(MonoMethod* entrypointPtr, string[] args)

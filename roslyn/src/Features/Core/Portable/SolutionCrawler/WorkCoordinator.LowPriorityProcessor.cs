@@ -15,11 +15,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal sealed partial class SolutionCrawlerRegistrationService
+    partial internal sealed class SolutionCrawlerRegistrationService
     {
-        internal sealed partial class WorkCoordinator
+        partial internal sealed class WorkCoordinator
         {
-            private sealed partial class IncrementalAnalyzerProcessor
+            partial private sealed class IncrementalAnalyzerProcessor
             {
                 private sealed class LowPriorityProcessor : AbstractPriorityProcessor
                 {

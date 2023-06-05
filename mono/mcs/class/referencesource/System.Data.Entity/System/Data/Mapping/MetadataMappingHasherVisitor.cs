@@ -20,7 +20,7 @@ using System.Globalization;
 
 namespace System.Data.Mapping
 {
-    internal partial class MetadataMappingHasherVisitor : BaseMetadataMappingVisitor
+    partial internal class MetadataMappingHasherVisitor : BaseMetadataMappingVisitor
     {
         private CompressingHashBuilder m_hashSourceBuilder;
         private Dictionary<Object, int> m_itemsAlreadySeen = new Dictionary<Object, int>();

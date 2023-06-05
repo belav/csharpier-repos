@@ -8,10 +8,11 @@ using Xunit;
 
 namespace System.Security.Cryptography.RNG.Tests
 {
+    partial
     /// <summary>
     /// Since RNGCryptoServiceProviderTests wraps RandomNumberGenerator from Algorithms assembly, we only test minimally here.
     /// </summary>
-    public partial class RNGCryptoServiceProviderTests
+    public class RNGCryptoServiceProviderTests
     {
         [Fact]
         public static void DifferentSequential_10_Array()

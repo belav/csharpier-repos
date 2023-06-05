@@ -9,12 +9,12 @@ using System.Security.Cryptography;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NCrypt
+    partial internal static class NCrypt
     {
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static unsafe partial ErrorCode NCryptGetProperty(
+        partial internal static unsafe ErrorCode NCryptGetProperty(
             SafeNCryptHandle hObject,
             string pszProperty,
             void* pbOutput,
@@ -24,7 +24,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static unsafe partial ErrorCode NCryptSetProperty(
+        partial internal static unsafe ErrorCode NCryptSetProperty(
             SafeNCryptHandle hObject,
             string pszProperty,
             void* pbInput,

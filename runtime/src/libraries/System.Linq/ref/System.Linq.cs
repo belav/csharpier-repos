@@ -6,7 +6,7 @@
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static TSource Aggregate<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
@@ -1736,14 +1736,14 @@ namespace System.Linq
         }
     }
 
-    public partial interface IGrouping<out TKey, out TElement>
+    partial public interface IGrouping<out TKey, out TElement>
         : System.Collections.Generic.IEnumerable<TElement>,
             System.Collections.IEnumerable
     {
         TKey Key { get; }
     }
 
-    public partial interface ILookup<TKey, TElement>
+    partial public interface ILookup<TKey, TElement>
         : System.Collections.Generic.IEnumerable<System.Linq.IGrouping<TKey, TElement>>,
             System.Collections.IEnumerable
     {
@@ -1752,7 +1752,7 @@ namespace System.Linq
         bool Contains(TKey key);
     }
 
-    public partial interface IOrderedEnumerable<out TElement>
+    partial public interface IOrderedEnumerable<out TElement>
         : System.Collections.Generic.IEnumerable<TElement>,
             System.Collections.IEnumerable
     {
@@ -1763,7 +1763,7 @@ namespace System.Linq
         );
     }
 
-    public partial class Lookup<TKey, TElement>
+    partial public class Lookup<TKey, TElement>
         : System.Collections.Generic.IEnumerable<System.Linq.IGrouping<TKey, TElement>>,
             System.Collections.IEnumerable,
             System.Linq.ILookup<TKey, TElement>

@@ -10,7 +10,7 @@ using MetadataType = Internal.TypeSystem.DefType;
 
 namespace Internal.TypeSystem
 {
-    public sealed partial class InstantiatedType : MetadataType
+    partial public sealed class InstantiatedType : MetadataType
     {
         private MetadataType _typeDef;
         private Instantiation _instantiation;

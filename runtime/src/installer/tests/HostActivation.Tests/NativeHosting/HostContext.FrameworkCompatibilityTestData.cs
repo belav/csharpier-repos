@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 {
-    public partial class HostContext : IClassFixture<HostContext.SharedTestState>
+    partial public class HostContext : IClassFixture<HostContext.SharedTestState>
     {
         public enum ExistingContextType
         {

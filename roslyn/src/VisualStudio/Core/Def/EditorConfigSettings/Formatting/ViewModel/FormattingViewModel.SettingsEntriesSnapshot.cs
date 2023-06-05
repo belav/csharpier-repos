@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formatting.ViewModel
 {
-    internal partial class FormattingViewModel
+    partial internal class FormattingViewModel
     {
         internal sealed class SettingsEntriesSnapshot
             : SettingsEntriesSnapshotBase<FormattingSetting>

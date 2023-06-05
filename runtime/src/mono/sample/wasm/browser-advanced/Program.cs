@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace Sample
 {
-    public partial class Test
+    partial public class Test
     {
         public static int Main(string[] args)
         {
@@ -17,10 +17,10 @@ namespace Sample
         }
 
         [LibraryImport("fibonacci")]
-        public static partial int Fibonacci(int n);
+        partial public static int Fibonacci(int n);
 
         [JSImport("Sample.Test.add", "main.js")]
-        internal static partial int Add(int a, int b);
+        partial internal static int Add(int a, int b);
 
         [JSExport]
         internal static int TestMeaning()

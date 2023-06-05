@@ -30,14 +30,14 @@ namespace System.Data.OleDb
             return dataTable;
         }
 
-        static public OleDbDataReader GetEnumerator(Type type)
+        public static OleDbDataReader GetEnumerator(Type type)
         {
             OleDbConnection.ExecutePermission.Demand();
 
             return GetEnumeratorFromType(type);
         }
 
-        static internal OleDbDataReader GetEnumeratorFromType(Type type)
+        internal static OleDbDataReader GetEnumeratorFromType(Type type)
         { // WebData 99005
             // will demand security appropriately
             object value = Activator.CreateInstance(
@@ -51,7 +51,7 @@ namespace System.Data.OleDb
             return GetEnumeratorReader(value);
         }
 
-        static private OleDbDataReader GetEnumeratorReader(object value)
+        private static OleDbDataReader GetEnumeratorReader(object value)
         {
             NativeMethods.ISourcesRowset srcrowset = null;
 
@@ -104,7 +104,7 @@ namespace System.Data.OleDb
             return dataReader;
         }
 
-        static public OleDbDataReader GetRootEnumerator()
+        public static OleDbDataReader GetRootEnumerator()
         {
             OleDbConnection.ExecutePermission.Demand();
 

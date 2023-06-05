@@ -6,7 +6,7 @@ using Mono.Cecil;
 
 namespace Mono.Linker
 {
-    public partial class AnnotationStore
+    partial public class AnnotationStore
     {
         internal AnnotationStore() { }
 

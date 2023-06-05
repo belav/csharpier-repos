@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
+    partial
     //
     // XmlCharCheckingReaderWithNS
     //
-    internal partial class XmlCharCheckingReader : XmlWrappingReader
+    internal class XmlCharCheckingReader : XmlWrappingReader
     {
         public override async Task<bool> ReadAsync()
         {

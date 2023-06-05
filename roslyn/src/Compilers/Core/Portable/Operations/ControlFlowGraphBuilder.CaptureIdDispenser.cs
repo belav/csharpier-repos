@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    internal sealed partial class ControlFlowGraphBuilder
+    partial internal sealed class ControlFlowGraphBuilder
     {
         internal class CaptureIdDispenser
         {

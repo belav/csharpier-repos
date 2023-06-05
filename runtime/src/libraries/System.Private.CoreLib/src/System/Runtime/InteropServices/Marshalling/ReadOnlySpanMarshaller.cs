@@ -84,10 +84,11 @@ namespace System.Runtime.InteropServices.Marshalling
             ) => new Span<TUnmanagedElement>(unmanaged, numElements);
         }
 
+        ref
         /// <summary>
         /// Supports marshalling from managed into unmanaged in a call from managed code to unmanaged code.
         /// </summary>
-        public ref struct ManagedToUnmanagedIn
+        public struct ManagedToUnmanagedIn
         {
             /// <summary>
             /// Gets the size of the caller-allocated buffer to allocate.

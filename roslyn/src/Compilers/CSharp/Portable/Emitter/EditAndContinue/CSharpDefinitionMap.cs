@@ -16,12 +16,13 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
+    partial
     /// <summary>
     /// Matches symbols from an assembly in one compilation to
     /// the corresponding assembly in another. Assumes that only
     /// one assembly has changed between the two compilations.
     /// </summary>
-    internal sealed partial class CSharpDefinitionMap : DefinitionMap
+    internal sealed class CSharpDefinitionMap : DefinitionMap
     {
         private readonly MetadataDecoder _metadataDecoder;
         private readonly CSharpSymbolMatcher _mapToMetadata;

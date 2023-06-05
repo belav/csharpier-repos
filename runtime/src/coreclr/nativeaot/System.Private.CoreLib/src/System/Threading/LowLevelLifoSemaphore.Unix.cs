@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
 namespace System.Threading
 {
+    partial
     /// <summary>
     /// A LIFO semaphore.
     /// Waits on this semaphore are uninterruptible.
     /// </summary>
-    internal sealed partial class LowLevelLifoSemaphore : IDisposable
+    internal sealed class LowLevelLifoSemaphore : IDisposable
     {
         private WaitSubsystem.WaitableObject _semaphore;
 

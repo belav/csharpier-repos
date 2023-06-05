@@ -15,7 +15,7 @@ using static Roslyn.Test.Utilities.SigningTestHelpers;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class InternalsVisibleToAndStrongNameTests : CSharpTestBase
+    partial public class InternalsVisibleToAndStrongNameTests : CSharpTestBase
     {
         [Fact]
         [WorkItem(209695, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=209694")]

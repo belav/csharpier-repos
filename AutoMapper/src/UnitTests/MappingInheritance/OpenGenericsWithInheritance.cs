@@ -46,7 +46,7 @@ public class OpenGenericsWithInclude : AutoMapperSpecBase
         public List<BarModelBase> BarList { get; set; }
     }
 
-    abstract public class BarBase
+    public abstract class BarBase
     {
         public int Id { get; set; }
     }
@@ -56,7 +56,7 @@ public class OpenGenericsWithInclude : AutoMapperSpecBase
         public T Value { get; set; }
     }
 
-    abstract public class BarModelBase
+    public abstract class BarModelBase
     {
         public int Id { get; set; }
         public string Ignored { get; set; }
@@ -121,7 +121,7 @@ public class OpenGenericsWithIncludeBase : AutoMapperSpecBase
         public List<BarModelBase> BarList { get; set; }
     }
 
-    abstract public class BarBase
+    public abstract class BarBase
     {
         public int Id { get; set; }
     }
@@ -131,7 +131,7 @@ public class OpenGenericsWithIncludeBase : AutoMapperSpecBase
         public T Value { get; set; }
     }
 
-    abstract public class BarModelBase
+    public abstract class BarModelBase
     {
         public int Id { get; set; }
         public string Ignored { get; set; }

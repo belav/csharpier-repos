@@ -14,13 +14,13 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
 {
-    internal abstract partial class AbstractGenerateEnumMemberService<
+    partial internal abstract class AbstractGenerateEnumMemberService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax
     >
     {
-        private partial class State
+        partial private class State
         {
             // public TypeDeclarationSyntax ContainingTypeDeclaration { get; private set; }
             public INamedTypeSymbol TypeToGenerateIn { get; private set; }

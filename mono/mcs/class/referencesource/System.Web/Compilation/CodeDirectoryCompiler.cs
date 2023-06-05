@@ -41,7 +41,7 @@ namespace System.Web.Compilation
 
         private bool _onlyBuildLocalizedResources;
 
-        static internal BuildResultMainCodeAssembly _mainCodeBuildResult;
+        internal static BuildResultMainCodeAssembly _mainCodeBuildResult;
 
         internal static bool IsResourceCodeDirectoryType(CodeDirectoryType dirType)
         {

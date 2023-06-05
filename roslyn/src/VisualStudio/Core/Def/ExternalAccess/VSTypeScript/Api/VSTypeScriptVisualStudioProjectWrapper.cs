@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem;
 
 namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Api
 {
-    internal sealed partial class VSTypeScriptVisualStudioProjectWrapper
+    partial internal sealed class VSTypeScriptVisualStudioProjectWrapper
     {
         public VSTypeScriptVisualStudioProjectWrapper(ProjectSystemProject underlyingObject) =>
             Project = underlyingObject;

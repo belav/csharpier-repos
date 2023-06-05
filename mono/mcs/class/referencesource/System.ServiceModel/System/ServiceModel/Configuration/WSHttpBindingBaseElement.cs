@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Text;
     using System.ServiceModel.Channels;
 
-    public abstract partial class WSHttpBindingBaseElement : StandardBindingElement
+    partial public abstract class WSHttpBindingBaseElement : StandardBindingElement
     {
         protected WSHttpBindingBaseElement(string name)
             : base(name) { }

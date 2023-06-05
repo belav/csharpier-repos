@@ -3,7 +3,7 @@
 
 namespace System.Runtime
 {
-    public partial class GCSettings
+    partial public class GCSettings
     {
         public static bool IsServerGC => false;
 

@@ -11,7 +11,7 @@ using System.Security.Principal;
 
 namespace System.Net
 {
-    internal static partial class CertificateValidation
+    partial internal static class CertificateValidation
     {
 #pragma warning disable IDE0060
         internal static SslPolicyErrors BuildChainAndVerifyProperties(

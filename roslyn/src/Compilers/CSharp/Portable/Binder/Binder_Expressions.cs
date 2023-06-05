@@ -20,10 +20,11 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This portion of the binder converts an <see cref="ExpressionSyntax"/> into a <see cref="BoundExpression"/>.
     /// </summary>
-    internal partial class Binder
+    internal class Binder
     {
         /// <summary>
         /// Determines whether "this" reference is available within the current context.

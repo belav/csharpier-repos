@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         // Declaration for C# representation of Win32 COMMPROP
         // structure associated with a file handle to a serial communications resource.

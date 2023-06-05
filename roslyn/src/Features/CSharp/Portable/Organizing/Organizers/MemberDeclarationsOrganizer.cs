@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 {
-    internal static partial class MemberDeclarationsOrganizer
+    partial internal static class MemberDeclarationsOrganizer
     {
         public static SyntaxList<MemberDeclarationSyntax> Organize(
             SyntaxList<MemberDeclarationSyntax> members,

@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis
     /// Represents a project that is part of a <see cref="Solution"/>.
     /// </summary>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public partial class Project
+    partial public class Project
     {
         private readonly Solution _solution;
         private readonly ProjectState _projectState;

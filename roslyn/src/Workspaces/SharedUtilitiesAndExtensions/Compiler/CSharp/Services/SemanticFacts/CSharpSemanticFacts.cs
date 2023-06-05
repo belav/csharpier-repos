@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class CSharpSemanticFacts : ISemanticFacts
+    partial internal sealed class CSharpSemanticFacts : ISemanticFacts
     {
         internal static readonly CSharpSemanticFacts Instance = new();
 

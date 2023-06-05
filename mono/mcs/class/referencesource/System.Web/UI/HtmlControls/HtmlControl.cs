@@ -40,7 +40,7 @@ namespace System.Web.UI.HtmlControls
         Designer("System.Web.UI.Design.HtmlIntrinsicControlDesigner, " + AssemblyRef.SystemDesign),
         ToolboxItem(false)
     ]
-    abstract public class HtmlControl : Control, IAttributeAccessor
+    public abstract class HtmlControl : Control, IAttributeAccessor
     {
         internal string _tagName;
         private AttributeCollection _attributes;

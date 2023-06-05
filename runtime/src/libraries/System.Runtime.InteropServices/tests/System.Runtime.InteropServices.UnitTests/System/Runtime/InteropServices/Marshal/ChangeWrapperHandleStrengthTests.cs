@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class ChangeWrapperHandleStrengthTests
+    partial public class ChangeWrapperHandleStrengthTests
     {
         public static IEnumerable<object[]> ChangeWrapperHandleStrength_TestData()
         {

@@ -9,7 +9,7 @@ using Microsoft.DotNet.Cli.Build.Framework;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
-    public abstract partial class FrameworkResolutionBase
+    partial public abstract class FrameworkResolutionBase
     {
         protected const string MicrosoftNETCoreApp = "Microsoft.NETCore.App";
 

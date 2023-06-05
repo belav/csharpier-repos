@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ProjectExtensions
+    partial internal static class ProjectExtensions
     {
         internal static Project WithSolutionOptions(this Project project, OptionSet options) =>
             project.Solution.WithOptions(options).GetProject(project.Id)!;

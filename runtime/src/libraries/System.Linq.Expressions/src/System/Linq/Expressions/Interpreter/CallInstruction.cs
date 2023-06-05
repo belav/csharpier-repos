@@ -9,7 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Linq.Expressions.Interpreter
 {
-    internal abstract partial class CallInstruction : Instruction
+    partial internal abstract class CallInstruction : Instruction
     {
         /// <summary>
         /// The number of arguments including "this" for instance methods.

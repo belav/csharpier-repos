@@ -7,30 +7,30 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_StoreEnumerateUserRoot(
+        partial private static int AppleCryptoNative_StoreEnumerateUserRoot(
             out SafeCFArrayHandle pCertsOut,
             out int pOSStatusOut
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_StoreEnumerateMachineRoot(
+        partial private static int AppleCryptoNative_StoreEnumerateMachineRoot(
             out SafeCFArrayHandle pCertsOut,
             out int pOSStatusOut
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_StoreEnumerateUserDisallowed(
+        partial private static int AppleCryptoNative_StoreEnumerateUserDisallowed(
             out SafeCFArrayHandle pCertsOut,
             out int pOSStatusOut
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_StoreEnumerateMachineDisallowed(
+        partial private static int AppleCryptoNative_StoreEnumerateMachineDisallowed(
             out SafeCFArrayHandle pCertsOut,
             out int pOSStatusOut
         );

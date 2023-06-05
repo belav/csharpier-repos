@@ -28,7 +28,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
 {
     [ExportDeclarationNameRecommender(nameof(DeclarationNameRecommender)), Shared]
-    internal sealed partial class DeclarationNameRecommender : IDeclarationNameRecommender
+    partial internal sealed class DeclarationNameRecommender : IDeclarationNameRecommender
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

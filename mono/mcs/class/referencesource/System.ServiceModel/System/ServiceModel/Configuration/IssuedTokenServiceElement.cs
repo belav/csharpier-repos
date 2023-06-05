@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.Xml;
 
-    public sealed partial class IssuedTokenServiceElement : ConfigurationElement
+    partial public sealed class IssuedTokenServiceElement : ConfigurationElement
     {
         public IssuedTokenServiceElement() { }
 

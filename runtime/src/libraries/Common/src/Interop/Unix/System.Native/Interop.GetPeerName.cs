@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetPeerName")]
-        internal static unsafe partial Error GetPeerName(
+        partial internal static unsafe Error GetPeerName(
             SafeHandle socket,
             byte* socketAddress,
             int* socketAddressLen

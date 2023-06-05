@@ -8,10 +8,11 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json.Nodes
 {
+    partial
     /// <summary>
     /// Represents a mutable JSON value.
     /// </summary>
-    public abstract partial class JsonValue : JsonNode
+    public abstract class JsonValue : JsonNode
     {
         internal const string CreateUnreferencedCodeMessage =
             "Creating JsonValue instances with non-primitive types is not compatible with trimming. It can result in non-primitive types being serialized, which may have their members trimmed.";

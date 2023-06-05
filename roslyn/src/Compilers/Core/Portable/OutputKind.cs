@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis
         WindowsRuntimeApplication = 5,
     }
 
-    internal static partial class EnumBounds
+    partial internal static class EnumBounds
     {
         internal static bool IsValid(this OutputKind value)
         {

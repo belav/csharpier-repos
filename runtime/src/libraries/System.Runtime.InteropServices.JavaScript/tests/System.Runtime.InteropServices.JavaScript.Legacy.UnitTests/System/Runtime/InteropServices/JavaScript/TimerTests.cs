@@ -119,21 +119,21 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public Task DisposeAsync() => Task.CompletedTask;
     }
 
-    public static partial class TimersJS
+    partial public static class TimersJS
     {
         [JSImport("log", "Timers")]
-        public static partial void Log(string message);
+        partial public static void Log(string message);
 
         [JSImport("install", "Timers")]
-        public static partial void Install();
+        partial public static void Install();
 
         [JSImport("cleanup", "Timers")]
-        public static partial void Cleanup();
+        partial public static void Cleanup();
 
         [JSImport("getRegisterCount", "Timers")]
-        public static partial int GetRegisterCount();
+        partial public static int GetRegisterCount();
 
         [JSImport("getHitCount", "Timers")]
-        public static partial int GetHitCount();
+        partial public static int GetHitCount();
     }
 }

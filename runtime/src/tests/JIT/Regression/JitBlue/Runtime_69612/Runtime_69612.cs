@@ -45,7 +45,7 @@ public class Runtime_69612
 
     static NewReference PyInt_FromInt32(int value) => PyLong_FromLongLong(value);
 
-    unsafe static NewReference PyLong_FromLongLong(long value) =>
+    static unsafe NewReference PyLong_FromLongLong(long value) =>
         Delegates.PyLong_FromLongLong(value);
 
     [MethodImpl(MethodImplOptions.NoOptimization)]

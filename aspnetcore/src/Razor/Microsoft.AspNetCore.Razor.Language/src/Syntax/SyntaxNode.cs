@@ -11,7 +11,7 @@ using System.Threading;
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
-internal abstract partial class SyntaxNode
+partial internal abstract class SyntaxNode
 {
     public SyntaxNode(GreenNode green, SyntaxNode parent, int position)
     {

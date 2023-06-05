@@ -513,7 +513,7 @@ namespace System.Text
         [System.Security.SecurityCritical] // auto-generated
         [CLSCompliant(false)]
         [System.Runtime.InteropServices.ComVisible(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             // Validate Parameters
             if (bytes == null || chars == null)
@@ -1241,7 +1241,7 @@ namespace System.Text
 
             // This version just counts the fallback and doesn't actually copy anything.
             [System.Security.SecurityCritical] // auto-generated
-            internal unsafe override int InternalFallback(byte[] bytes, byte* pBytes)
+            internal override unsafe int InternalFallback(byte[] bytes, byte* pBytes)
             // Right now this has both bytes and bytes[], since we might have extra bytes, hence the
             // array, and we might need the index, hence the byte*
             {

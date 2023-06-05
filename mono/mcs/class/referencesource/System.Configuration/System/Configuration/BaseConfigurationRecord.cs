@@ -28,7 +28,7 @@ namespace System.Configuration
     //
 
     [System.Diagnostics.DebuggerDisplay("ConfigPath = {ConfigPath}")]
-    abstract internal class BaseConfigurationRecord : IInternalConfigRecord
+    internal abstract class BaseConfigurationRecord : IInternalConfigRecord
     {
         protected const string NL = "\r\n";
 
@@ -132,7 +132,7 @@ namespace System.Configuration
 
         internal const char ConfigPathSeparatorChar = '/';
         internal const string ConfigPathSeparatorString = "/";
-        static internal readonly char[] ConfigPathSeparatorParams = new char[]
+        internal static readonly char[] ConfigPathSeparatorParams = new char[]
         {
             ConfigPathSeparatorChar
         };
@@ -3556,7 +3556,17 @@ namespace System.Configuration
         //   allowExeDefinition - string representation of value
         //   xmlUtil [optional] - can provide better error
         //
-        static internal ConfigurationAllowExeDefinition AllowExeDefinitionToEnum(
+        internal
+        // ExeDefinitionToEnum
+        //
+        // Translate an ExeDefinition string from the Declaration in a file
+        // to the appropriate enumeration
+        //
+        // Parameters:
+        //   allowExeDefinition - string representation of value
+        //   xmlUtil [optional] - can provide better error
+        //
+        static ConfigurationAllowExeDefinition AllowExeDefinitionToEnum(
             string allowExeDefinition,
             XmlUtil xmlUtil
         )
@@ -3583,7 +3593,7 @@ namespace System.Configuration
             }
         }
 
-        static internal ConfigurationAllowDefinition AllowDefinitionToEnum(
+        internal static ConfigurationAllowDefinition AllowDefinitionToEnum(
             string allowDefinition,
             XmlUtil xmlUtil
         )
@@ -3610,7 +3620,7 @@ namespace System.Configuration
             }
         }
 
-        static internal string CombineConfigKey(string parentConfigKey, string tagName)
+        internal static string CombineConfigKey(string parentConfigKey, string tagName)
         {
             if (String.IsNullOrEmpty(parentConfigKey))
             {
@@ -3625,7 +3635,7 @@ namespace System.Configuration
             return parentConfigKey + "/" + tagName;
         }
 
-        static internal void SplitConfigKey(string configKey, out string group, out string name)
+        internal static void SplitConfigKey(string configKey, out string group, out string name)
         {
             int lastSlash = configKey.LastIndexOf('/');
             if (lastSlash == -1)
@@ -4821,7 +4831,7 @@ namespace System.Configuration
             return Host.IsDefinitionAllowed(_configPath, allowDefinition, allowExeDefinition);
         }
 
-        static protected void VerifySectionName(
+        protected static void VerifySectionName(
             string name,
             XmlUtil xmlUtil,
             ExceptionAction action,
@@ -4841,7 +4851,10 @@ namespace System.Configuration
 
         // Check if the section name contains reserved words from the config system,
         // and is a valid name for an XML Element.
-        static protected void VerifySectionName(
+        protected
+        // Check if the section name contains reserved words from the config system,
+        // and is a valid name for an XML Element.
+        static void VerifySectionName(
             string name,
             IConfigErrorInfo errorInfo,
             bool allowImplicit,
@@ -5136,7 +5149,7 @@ namespace System.Configuration
             }
         }
 
-        static internal string NormalizeConfigSource(
+        internal static string NormalizeConfigSource(
             string configSource,
             IConfigErrorInfo errorInfo
         )
@@ -5706,7 +5719,7 @@ namespace System.Configuration
             return configSection;
         }
 
-        static internal string ValidateConfigBuilderAttribute(
+        internal static string ValidateConfigBuilderAttribute(
             string configBuilder,
             IConfigErrorInfo errorInfo
         )
@@ -5722,7 +5735,7 @@ namespace System.Configuration
             return configBuilder;
         }
 
-        static internal string ValidateProtectionProviderAttribute(
+        internal static string ValidateProtectionProviderAttribute(
             string protectionProvider,
             IConfigErrorInfo errorInfo
         )

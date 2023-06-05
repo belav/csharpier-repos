@@ -3,7 +3,7 @@
 
 namespace System.IO
 {
-    internal static partial class PersistedFiles
+    partial internal static class PersistedFiles
     {
         // Temporary data, /tmp/.dotnet/corefx
         // User-persisted data, ~/.dotnet/corefx/

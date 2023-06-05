@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class TypeBuilder : TypeInfo
+    partial public sealed class TypeBuilder : TypeInfo
     {
         internal TypeBuilder()
         {

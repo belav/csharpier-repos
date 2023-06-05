@@ -9,7 +9,7 @@ using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 
 namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 {
-    internal abstract partial class CommonFixAllState<TProvider, TFixAllProvider, TFixAllState>
+    partial internal abstract class CommonFixAllState<TProvider, TFixAllProvider, TFixAllState>
         : IFixAllState
         where TFixAllProvider : IFixAllProvider
         where TFixAllState : CommonFixAllState<TProvider, TFixAllProvider, TFixAllState>

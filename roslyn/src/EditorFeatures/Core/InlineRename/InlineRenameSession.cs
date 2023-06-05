@@ -34,7 +34,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal partial class InlineRenameSession : IInlineRenameSession, IFeatureController
+    partial internal class InlineRenameSession : IInlineRenameSession, IFeatureController
     {
         private readonly Workspace _workspace;
         private readonly IUIThreadOperationExecutor _uiThreadOperationExecutor;

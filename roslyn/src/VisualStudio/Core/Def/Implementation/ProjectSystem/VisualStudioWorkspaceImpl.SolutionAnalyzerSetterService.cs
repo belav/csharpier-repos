@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal partial class VisualStudioWorkspaceImpl
+    partial internal class VisualStudioWorkspaceImpl
     {
         internal sealed class SolutionAnalyzerSetter : ISolutionAnalyzerSetterWorkspaceService
         {

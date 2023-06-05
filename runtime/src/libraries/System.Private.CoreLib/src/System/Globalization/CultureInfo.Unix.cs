@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
-    public partial class CultureInfo : IFormatProvider
+    partial public class CultureInfo : IFormatProvider
     {
         internal static CultureInfo GetUserDefaultCulture()
         {

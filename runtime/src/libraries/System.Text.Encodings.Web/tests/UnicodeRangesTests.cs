@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Unicode.Tests
 {
-    public static partial class UnicodeRangesTests
+    partial public static class UnicodeRangesTests
     {
         [Fact]
         public static void Range_None()

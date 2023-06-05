@@ -40,7 +40,7 @@ namespace System.Data.Odbc
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.OdbcCommandBuilder_DataAdapter), // MDAC 60524
         ]
-        new public OdbcDataAdapter DataAdapter
+        public new OdbcDataAdapter DataAdapter
         {
             get { return (base.DataAdapter as OdbcDataAdapter); }
             set { base.DataAdapter = value; }
@@ -51,53 +51,53 @@ namespace System.Data.Odbc
             RowUpdatingHandler(ruevent);
         }
 
-        new public OdbcCommand GetInsertCommand()
+        public new OdbcCommand GetInsertCommand()
         {
             return (OdbcCommand)base.GetInsertCommand();
         }
 
-        new public OdbcCommand GetInsertCommand(bool useColumnsForParameterNames)
+        public new OdbcCommand GetInsertCommand(bool useColumnsForParameterNames)
         {
             return (OdbcCommand)base.GetInsertCommand(useColumnsForParameterNames);
         }
 
-        new public OdbcCommand GetUpdateCommand()
+        public new OdbcCommand GetUpdateCommand()
         {
             return (OdbcCommand)base.GetUpdateCommand();
         }
 
-        new public OdbcCommand GetUpdateCommand(bool useColumnsForParameterNames)
+        public new OdbcCommand GetUpdateCommand(bool useColumnsForParameterNames)
         {
             return (OdbcCommand)base.GetUpdateCommand(useColumnsForParameterNames);
         }
 
-        new public OdbcCommand GetDeleteCommand()
+        public new OdbcCommand GetDeleteCommand()
         {
             return (OdbcCommand)base.GetDeleteCommand();
         }
 
-        new public OdbcCommand GetDeleteCommand(bool useColumnsForParameterNames)
+        public new OdbcCommand GetDeleteCommand(bool useColumnsForParameterNames)
         {
             return (OdbcCommand)base.GetDeleteCommand(useColumnsForParameterNames);
         }
 
-        override protected string GetParameterName(int parameterOrdinal)
+        protected override string GetParameterName(int parameterOrdinal)
         {
             return "p"
                 + parameterOrdinal.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 
-        override protected string GetParameterName(string parameterName)
+        protected override string GetParameterName(string parameterName)
         {
             return parameterName;
         }
 
-        override protected string GetParameterPlaceholder(int parameterOrdinal)
+        protected override string GetParameterPlaceholder(int parameterOrdinal)
         {
             return "?";
         }
 
-        override protected void ApplyParameterInfo(
+        protected override void ApplyParameterInfo(
             DbParameter parameter,
             DataRow datarow,
             StatementType statementType,
@@ -123,7 +123,7 @@ namespace System.Data.Odbc
             }
         }
 
-        static public void DeriveParameters(OdbcCommand command)
+        public static void DeriveParameters(OdbcCommand command)
         {
             // MDAC 65927
             OdbcConnection.ExecutePermission.Demand();
@@ -185,7 +185,15 @@ namespace System.Data.Odbc
         // Uses SQLProcedureColumns to create an array of OdbcParameters
         //
 
-        static private OdbcParameter[] DeriveParametersFromStoredProcedure(
+        private
+        // DeriveParametersFromStoredProcedure (
+        //  OdbcConnection connection,
+        //  OdbcCommand command);
+        //
+        // Uses SQLProcedureColumns to create an array of OdbcParameters
+        //
+
+        static OdbcParameter[] DeriveParametersFromStoredProcedure(
             OdbcConnection connection,
             OdbcCommand command
         )
@@ -339,7 +347,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override protected void SetRowUpdatingHandler(DbDataAdapter adapter)
+        protected override void SetRowUpdatingHandler(DbDataAdapter adapter)
         {
             Debug.Assert(adapter is OdbcDataAdapter, "!OdbcDataAdapter");
             if (adapter == base.DataAdapter)

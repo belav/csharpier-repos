@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         [LibraryImport(Libraries.BCrypt)]
-        internal static partial NTSTATUS BCryptFinishHash(
+        partial internal static NTSTATUS BCryptFinishHash(
             SafeBCryptHashHandle hHash,
             Span<byte> pbOutput,
             int cbOutput,

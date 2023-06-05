@@ -119,7 +119,7 @@ using System.Diagnostics.CodeAnalysis;
     Justification = Justifications.SymbolTypeNames
 )]
 
-internal static partial class Justifications
+partial internal static class Justifications
 {
     internal const string SymbolTypeNames =
         "Symbol Type Names are spelled according to the language keyword or token they represent";

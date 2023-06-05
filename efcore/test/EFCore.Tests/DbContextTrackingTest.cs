@@ -3,7 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public partial class DbContextTest
+partial public class DbContextTest
 {
     [ConditionalFact]
     public Task Can_add_existing_entities_to_context_to_be_deleted() =>

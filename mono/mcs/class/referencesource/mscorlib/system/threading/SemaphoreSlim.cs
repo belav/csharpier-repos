@@ -77,7 +77,7 @@ namespace System.Threading
         private TaskNode m_asyncTail;
 
         // A pre-completed task with Result==true
-        private readonly static Task<bool> s_trueTask = new Task<bool>(
+        private static readonly Task<bool> s_trueTask = new Task<bool>(
             false,
             true,
             (TaskCreationOptions)InternalTaskOptions.DoNotDispose,
@@ -85,7 +85,7 @@ namespace System.Threading
         );
 
         // A pre-completed task with Result==false
-        private readonly static Task<bool> s_falseTask = new Task<bool>(
+        private static readonly Task<bool> s_falseTask = new Task<bool>(
             false,
             false,
             (TaskCreationOptions)InternalTaskOptions.DoNotDispose,

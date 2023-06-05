@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace System.Runtime.Serialization
 {
-    internal partial class XmlFormatReaderGenerator
+    partial internal class XmlFormatReaderGenerator
     {
         partial class CriticalHelper
         {

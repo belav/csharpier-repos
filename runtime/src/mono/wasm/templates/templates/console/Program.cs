@@ -5,7 +5,7 @@ Console.WriteLine("Hello, Console!");
 
 return 0;
 
-public partial class MyClass
+partial public class MyClass
 {
     [JSExport]
     internal static string Greeting()
@@ -15,5 +15,5 @@ public partial class MyClass
     }
 
     [JSImport("node.process.version", "main.mjs")]
-    internal static partial string GetNodeVersion();
+    partial internal static string GetNodeVersion();
 }

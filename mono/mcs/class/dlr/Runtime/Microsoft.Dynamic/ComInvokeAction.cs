@@ -79,7 +79,7 @@ namespace Microsoft.Scripting
     /// </summary>
     internal sealed class SplatInvokeBinder : CallSiteBinder
     {
-        internal readonly static SplatInvokeBinder Instance = new SplatInvokeBinder();
+        internal static readonly SplatInvokeBinder Instance = new SplatInvokeBinder();
 
         // Just splat the args and dispatch through a nested site
         public override Expression Bind(

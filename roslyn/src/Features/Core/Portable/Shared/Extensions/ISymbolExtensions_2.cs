@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ISymbolExtensions2
+    partial internal static class ISymbolExtensions2
     {
         public static Glyph GetGlyph(this ISymbol symbol)
         {

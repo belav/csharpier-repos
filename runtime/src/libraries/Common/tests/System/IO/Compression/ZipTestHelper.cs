@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.IO.Compression.Tests
 {
-    public partial class ZipFileTestBase : FileCleanupTestBase
+    partial public class ZipFileTestBase : FileCleanupTestBase
     {
         public static string bad(string filename) =>
             Path.Combine("ZipTestData", "badzipfiles", filename);

@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public sealed partial class AppDomain
+    partial public sealed class AppDomain
     {
         public TimeSpan MonitoringTotalProcessorTime
         {

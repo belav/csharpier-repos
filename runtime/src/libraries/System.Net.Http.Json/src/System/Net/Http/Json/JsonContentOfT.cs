@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {
-    internal sealed partial class JsonContent<TValue> : HttpContent
+    partial internal sealed class JsonContent<TValue> : HttpContent
     {
         private readonly JsonTypeInfo<TValue> _typeInfo;
 

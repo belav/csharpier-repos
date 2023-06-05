@@ -9,7 +9,7 @@ namespace Moq
     /// Provides additional methods on mocks.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static partial class MockExtensions
+    partial public static class MockExtensions
     {
         /// <summary>
         /// Resets this mock's state. This includes its setups, configured default return values, registered event handlers, and all recorded invocations.

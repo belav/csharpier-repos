@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct EssCertIdV2
+    partial internal struct EssCertIdV2
     {
         private static ReadOnlySpan<byte> DefaultHashAlgorithm =>
             new byte[]

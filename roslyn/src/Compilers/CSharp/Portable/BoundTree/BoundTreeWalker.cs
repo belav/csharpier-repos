@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal abstract partial class BoundTreeWalker : BoundTreeVisitor
+    partial internal abstract class BoundTreeWalker : BoundTreeVisitor
     {
         protected BoundTreeWalker() { }
 

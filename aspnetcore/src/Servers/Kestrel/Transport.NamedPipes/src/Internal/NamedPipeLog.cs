@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal;
 
-internal static partial class NamedPipeLog
+partial internal static class NamedPipeLog
 {
     [LoggerMessage(
         1,
@@ -15,7 +15,7 @@ internal static partial class NamedPipeLog
         EventName = "AcceptedConnection",
         SkipEnabledCheck = true
     )]
-    private static partial void AcceptedConnectionCore(ILogger logger, string connectionId);
+    partial private static void AcceptedConnectionCore(ILogger logger, string connectionId);
 
     public static void AcceptedConnection(ILogger logger, BaseConnectionContext connection)
     {
@@ -32,7 +32,7 @@ internal static partial class NamedPipeLog
         EventName = "ConnectionError",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionErrorCore(
+    partial private static void ConnectionErrorCore(
         ILogger logger,
         string connectionId,
         Exception ex
@@ -56,7 +56,7 @@ internal static partial class NamedPipeLog
         "Named pipe listener aborted.",
         EventName = "ConnectionListenerAborted"
     )]
-    public static partial void ConnectionListenerAborted(ILogger logger, Exception exception);
+    partial public static void ConnectionListenerAborted(ILogger logger, Exception exception);
 
     [LoggerMessage(
         4,
@@ -65,7 +65,7 @@ internal static partial class NamedPipeLog
         EventName = "ConnectionPause",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionPauseCore(ILogger logger, string connectionId);
+    partial private static void ConnectionPauseCore(ILogger logger, string connectionId);
 
     public static void ConnectionPause(ILogger logger, NamedPipeConnection connection)
     {
@@ -82,7 +82,7 @@ internal static partial class NamedPipeLog
         EventName = "ConnectionResume",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionResumeCore(ILogger logger, string connectionId);
+    partial private static void ConnectionResumeCore(ILogger logger, string connectionId);
 
     public static void ConnectionResume(ILogger logger, NamedPipeConnection connection)
     {
@@ -99,7 +99,7 @@ internal static partial class NamedPipeLog
         EventName = "ConnectionReadEnd",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionReadEndCore(ILogger logger, string connectionId);
+    partial private static void ConnectionReadEndCore(ILogger logger, string connectionId);
 
     public static void ConnectionReadEnd(ILogger logger, NamedPipeConnection connection)
     {
@@ -116,7 +116,7 @@ internal static partial class NamedPipeLog
         EventName = "ConnectionDisconnect",
         SkipEnabledCheck = true
     )]
-    private static partial void ConnectionDisconnectCore(
+    partial private static void ConnectionDisconnectCore(
         ILogger logger,
         string connectionId,
         string reason

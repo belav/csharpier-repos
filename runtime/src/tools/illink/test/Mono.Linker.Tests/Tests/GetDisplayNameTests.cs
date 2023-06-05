@@ -123,7 +123,7 @@ namespace Mono.Linker.Tests
         }
 
         [DisplayName("Mono.Linker.Tests.GetDisplayNameTests.PartialClass")]
-        public partial class PartialClass { }
+        partial public class PartialClass { }
 
         [DisplayName("Mono.Linker.Tests.GetDisplayNameTests.StaticClass")]
         public static class StaticClass { }

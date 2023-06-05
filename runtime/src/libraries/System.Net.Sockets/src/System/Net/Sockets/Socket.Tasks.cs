@@ -13,7 +13,7 @@ using System.Threading.Tasks.Sources;
 
 namespace System.Net.Sockets
 {
-    public partial class Socket
+    partial public class Socket
     {
         /// <summary>Cached instance for receive operations that return <see cref="ValueTask{Int32}"/>. Also used for ConnectAsync operations.</summary>
         private AwaitableSocketAsyncEventArgs? _singleBufferReceiveEventArgs;

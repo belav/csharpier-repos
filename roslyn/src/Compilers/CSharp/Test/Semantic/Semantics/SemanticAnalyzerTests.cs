@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class SemanticAnalyzerTests : CompilingTestBase
+    partial public class SemanticAnalyzerTests : CompilingTestBase
     {
         [Fact]
         public void TestMethodGroupConversionError()

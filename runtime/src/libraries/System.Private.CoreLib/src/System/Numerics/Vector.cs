@@ -10,7 +10,7 @@ namespace System.Numerics
 {
     /// <summary>Provides a collection of static methods for creating, manipulating, and otherwise operating on generic vectors.</summary>
     [Intrinsic]
-    public static unsafe partial class Vector
+    partial public static unsafe class Vector
     {
         internal static readonly nuint Alignment =
             (sizeof(Vector<byte>) == sizeof(Vector128<byte>))

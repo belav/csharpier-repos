@@ -5,7 +5,7 @@ using System.Buffers.Binary;
 
 namespace System
 {
-    internal static partial class IPv4AddressHelper
+    partial internal static class IPv4AddressHelper
     {
         internal const long Invalid = -1;
         private const long MaxIPv4Value = uint.MaxValue; // the native parser cannot handle MaxIPv4Value, only MaxIPv4Value - 1

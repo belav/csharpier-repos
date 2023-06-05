@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter
+    partial internal sealed class LocalRewriter
     {
         public override BoundNode? VisitDeconstructionAssignmentOperator(
             BoundDeconstructionAssignmentOperator node

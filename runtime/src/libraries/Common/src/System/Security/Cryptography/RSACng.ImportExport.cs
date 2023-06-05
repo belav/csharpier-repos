@@ -5,7 +5,7 @@ using Internal.NativeCrypto;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class RSACng : RSA
+    partial public sealed class RSACng : RSA
     {
         /// <summary>
         ///   <para>

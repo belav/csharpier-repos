@@ -46,7 +46,7 @@ namespace System.Security.Permissions
 
     [ComVisible(true)]
     [Serializable]
-    sealed public class ReflectionPermission
+    public sealed class ReflectionPermission
         : CodeAccessPermission,
             IUnrestrictedPermission,
             IBuiltInPermission

@@ -51,7 +51,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static SecStatusCode SecTrustCreateWithCertificates(
+        static extern SecStatusCode SecTrustCreateWithCertificates(
             /* CFTypeRef */IntPtr certOrCertArray,
             /* CFTypeRef __nullable */IntPtr policies,
             /* SecTrustRef *__nonull */out IntPtr sectrustref
@@ -94,7 +94,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static SecStatusCode /* OSStatus */
+        static extern SecStatusCode /* OSStatus */
         SecTrustEvaluate(
             IntPtr /* SecTrustRef */
             trust,
@@ -115,7 +115,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static IntPtr /* CFIndex */
+        static extern IntPtr /* CFIndex */
         SecTrustGetCertificateCount(
             IntPtr /* SecTrustRef */
             trust
@@ -132,7 +132,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static IntPtr /* SecCertificateRef */
+        static extern IntPtr /* SecCertificateRef */
         SecTrustGetCertificateAtIndex(
             IntPtr /* SecTrustRef */
             trust,
@@ -153,7 +153,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static SecStatusCode /* OSStatus */
+        static extern SecStatusCode /* OSStatus */
         SecTrustSetAnchorCertificates(
             IntPtr /* SecTrustRef */
             trust,
@@ -189,7 +189,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static SecStatusCode /* OSStatus */
+        static extern SecStatusCode /* OSStatus */
         SecTrustSetAnchorCertificatesOnly(
             IntPtr /* SecTrustRef */
             trust,
@@ -205,7 +205,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static SecStatusCode /* OSStatus */
+        static extern SecStatusCode /* OSStatus */
         SecTrustSetVerifyDate(
             IntPtr /* SecTrustRef */
             trust,

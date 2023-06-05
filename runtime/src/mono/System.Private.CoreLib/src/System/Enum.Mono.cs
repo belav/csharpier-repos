@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class Enum
+    partial public class Enum
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void GetEnumValuesAndNames(

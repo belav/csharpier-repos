@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class OperatorDeclarationSyntax
+    partial public class OperatorDeclarationSyntax
     {
         public OperatorDeclarationSyntax Update(
             SyntaxList<AttributeListSyntax> attributeLists,

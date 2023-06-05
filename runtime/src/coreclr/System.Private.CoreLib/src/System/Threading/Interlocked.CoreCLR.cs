@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    public static partial class Interlocked
+    partial public static class Interlocked
     {
         #region Increment
         /// <summary>Increments a specified variable and stores the result, as an atomic operation.</summary>
@@ -242,7 +242,7 @@ namespace System.Threading
         internal static extern void ReadMemoryBarrier();
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Interlocked_MemoryBarrierProcessWide")]
-        private static partial void _MemoryBarrierProcessWide();
+        partial private static void _MemoryBarrierProcessWide();
 
         /// <summary>Provides a process-wide memory barrier that ensures that reads and writes from any CPU cannot move across the barrier.</summary>
         public static void MemoryBarrierProcessWide() => _MemoryBarrierProcessWide();

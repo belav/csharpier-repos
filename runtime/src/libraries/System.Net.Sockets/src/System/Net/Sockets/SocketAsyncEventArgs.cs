@@ -10,7 +10,7 @@ using System.Threading.Tasks.Sources;
 
 namespace System.Net.Sockets
 {
-    public partial class SocketAsyncEventArgs : EventArgs, IDisposable
+    partial public class SocketAsyncEventArgs : EventArgs, IDisposable
     {
         // AcceptSocket property variables.
         private Socket? _acceptSocket;

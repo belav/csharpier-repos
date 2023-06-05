@@ -9,7 +9,7 @@ using MonoDelta;
 
 namespace Sample
 {
-    public partial class Test
+    partial public class Test
     {
         static DeltaHelper replacer = DeltaHelper.Make();
 

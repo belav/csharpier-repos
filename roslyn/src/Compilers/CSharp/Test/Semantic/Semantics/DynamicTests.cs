@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class SyntaxBinderTests
+    partial public class SyntaxBinderTests
     {
         #region Conversions
 

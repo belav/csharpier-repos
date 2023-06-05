@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class BoundStatementExtensions
+    partial internal static class BoundStatementExtensions
     {
         [Conditional("DEBUG")]
         internal static void AssertIsLabeledStatement(this BoundStatement node)

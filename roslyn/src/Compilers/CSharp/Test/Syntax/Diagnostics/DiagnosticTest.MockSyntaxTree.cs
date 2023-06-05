@@ -14,7 +14,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class DiagnosticTest
+    partial public class DiagnosticTest
     {
         internal class MockSyntaxTree : CSharpSyntaxTree
         {

@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
 {
-    internal abstract partial class AbstractMakeMethodAsynchronousCodeFixProvider
+    partial internal abstract class AbstractMakeMethodAsynchronousCodeFixProvider
     {
         internal readonly struct KnownTypes
         {

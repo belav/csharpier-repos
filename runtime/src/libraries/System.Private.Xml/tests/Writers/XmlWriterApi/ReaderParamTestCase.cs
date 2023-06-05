@@ -12,7 +12,7 @@ namespace System.Xml.XmlWriterApiTests
         CoreReader
     }
 
-    public partial class ReaderParamTestCase
+    partial public class ReaderParamTestCase
     {
         internal const ReaderType readerType = ReaderType.CoreReader;
 

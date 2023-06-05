@@ -6,7 +6,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class SyntaxKindExtensions
+    partial internal static class SyntaxKindExtensions
     {
         internal static SpecialType GetSpecialType(this SyntaxKind kind)
         {

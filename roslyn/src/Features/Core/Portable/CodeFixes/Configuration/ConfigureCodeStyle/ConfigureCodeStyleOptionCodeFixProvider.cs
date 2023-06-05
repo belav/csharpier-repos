@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
     ]
     [ExtensionOrder(Before = PredefinedConfigurationFixProviderNames.ConfigureSeverity)]
     [ExtensionOrder(After = PredefinedConfigurationFixProviderNames.Suppression)]
-    internal sealed partial class ConfigureCodeStyleOptionCodeFixProvider
+    partial internal sealed class ConfigureCodeStyleOptionCodeFixProvider
         : IConfigurationFixProvider
     {
         private static readonly ImmutableArray<bool> s_boolValues = ImmutableArray.Create(

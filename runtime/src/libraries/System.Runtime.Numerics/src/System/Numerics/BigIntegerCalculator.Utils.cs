@@ -3,7 +3,7 @@
 
 namespace System.Numerics
 {
-    internal static partial class BigIntegerCalculator
+    partial internal static class BigIntegerCalculator
     {
 #if DEBUG
         // Mutable for unit testing...

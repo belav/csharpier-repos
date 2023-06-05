@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseImplicitType
 {
-    public partial class UseImplicitTypeTests
+    partial public class UseImplicitTypeTests
     {
         #region "Fix all occurrences tests"
 

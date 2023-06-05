@@ -16,7 +16,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing;
 
-internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
+partial internal sealed class DefaultLinkGenerator : LinkGenerator, IDisposable
 {
     private readonly TemplateBinderFactory _binderFactory;
     private readonly ILogger<DefaultLinkGenerator> _logger;
@@ -373,7 +373,7 @@ internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
         _cache.Dispose();
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void EndpointsFound(
             ILogger logger,
@@ -395,7 +395,7 @@ internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
             EventName = "EndpointsFound",
             SkipEnabledCheck = true
         )]
-        private static partial void EndpointsFound(
+        partial private static void EndpointsFound(
             ILogger logger,
             IEnumerable<string?> endpoints,
             object? address
@@ -407,7 +407,7 @@ internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
             "No endpoints found for address {Address}",
             EventName = "EndpointsNotFound"
         )]
-        public static partial void EndpointsNotFound(ILogger logger, object? address);
+        partial public static void EndpointsNotFound(ILogger logger, object? address);
 
         public static void TemplateSucceeded(
             ILogger logger,
@@ -429,7 +429,7 @@ internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
             "Successfully processed template {Template} for {Endpoint} resulting in {Path} and {Query}",
             EventName = "TemplateSucceeded"
         )]
-        private static partial void TemplateSucceeded(
+        partial private static void TemplateSucceeded(
             ILogger logger,
             string? template,
             string? endpoint,
@@ -467,7 +467,7 @@ internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
             EventName = "TemplateFailedRequiredValues",
             SkipEnabledCheck = true
         )]
-        private static partial void TemplateFailedRequiredValues(
+        partial private static void TemplateFailedRequiredValues(
             ILogger logger,
             string? template,
             string? endpoint,
@@ -506,7 +506,7 @@ internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
             EventName = "TemplateFailedConstraint",
             SkipEnabledCheck = true
         )]
-        private static partial void TemplateFailedConstraint(
+        partial private static void TemplateFailedConstraint(
             ILogger logger,
             string? template,
             string? endpoint,
@@ -542,7 +542,7 @@ internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
             EventName = "TemplateFailedExpansion",
             SkipEnabledCheck = true
         )]
-        private static partial void TemplateFailedExpansion(
+        partial private static void TemplateFailedExpansion(
             ILogger logger,
             string? template,
             string? endpoint,
@@ -569,7 +569,7 @@ internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
             EventName = "LinkGenerationSucceeded",
             SkipEnabledCheck = true
         )]
-        private static partial void LinkGenerationSucceeded(
+        partial private static void LinkGenerationSucceeded(
             ILogger logger,
             IEnumerable<string?> endpoints,
             string uri
@@ -591,7 +591,7 @@ internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
             EventName = "LinkGenerationFailed",
             SkipEnabledCheck = true
         )]
-        private static partial void LinkGenerationFailed(
+        partial private static void LinkGenerationFailed(
             ILogger logger,
             IEnumerable<string?> endpoints
         );

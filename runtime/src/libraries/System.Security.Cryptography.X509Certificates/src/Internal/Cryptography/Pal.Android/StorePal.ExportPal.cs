@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class StorePal
+    partial internal sealed class StorePal
     {
         private sealed class AndroidExportProvider : UnixExportProvider
         {

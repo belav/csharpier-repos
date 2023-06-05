@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal abstract partial class AbstractGenerateMethodService<
+    partial internal abstract class AbstractGenerateMethodService<
         TService,
         TSimpleNameSyntax,
         TExpressionSyntax,

@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ArrayRankSpecifierSyntax
+    partial public class ArrayRankSpecifierSyntax
     {
         public int Rank
         {

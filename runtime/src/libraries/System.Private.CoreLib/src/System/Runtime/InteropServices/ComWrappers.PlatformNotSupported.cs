@@ -6,9 +6,9 @@ using System.Runtime.Versioning;
 
 namespace System.Runtime.InteropServices
 {
-    public abstract partial class ComWrappers
+    partial public abstract class ComWrappers
     {
-        public partial struct ComInterfaceDispatch
+        partial public struct ComInterfaceDispatch
         {
             public static unsafe T GetInstance<T>(ComInterfaceDispatch* dispatchPtr)
                 where T : class

@@ -143,7 +143,7 @@ namespace System.Reflection
 
     #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
-    internal sealed unsafe partial class RuntimeMethodInfo : MethodInfo
+    partial internal sealed unsafe class RuntimeMethodInfo : MethodInfo
     {
 #pragma warning disable 649
         internal IntPtr mhandle;
@@ -769,7 +769,7 @@ namespace System.Reflection
 
     #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
-    internal sealed unsafe partial class RuntimeConstructorInfo : ConstructorInfo
+    partial internal sealed unsafe class RuntimeConstructorInfo : ConstructorInfo
     {
 #pragma warning disable 649
         internal IntPtr mhandle;

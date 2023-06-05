@@ -33,7 +33,7 @@ using System.IO;
 
 namespace System.Net.Http
 {
-    public partial class HttpClient : HttpMessageInvoker
+    partial public class HttpClient : HttpMessageInvoker
     {
         static readonly TimeSpan TimeoutDefault = TimeSpan.FromSeconds(100);
 

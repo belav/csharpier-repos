@@ -3,7 +3,7 @@
 
 namespace System.Runtime
 {
-    public static partial class JitInfo
+    partial public static class JitInfo
     {
         public static long GetCompiledILBytes(bool currentThread = false) => 0;
 

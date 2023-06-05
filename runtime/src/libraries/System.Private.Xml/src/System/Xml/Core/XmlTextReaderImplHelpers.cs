@@ -15,7 +15,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlTextReaderImpl
+    partial internal sealed class XmlTextReaderImpl
     {
         //
         // ParsingState
@@ -189,10 +189,11 @@ namespace System.Xml
             }
         }
 
+        partial
         //
         // DtdParserProxy: IDtdParserAdapter proxy for XmlTextReaderImpl
         //
-        internal sealed partial class DtdParserProxy : IDtdParserAdapterV1
+        internal sealed class DtdParserProxy : IDtdParserAdapterV1
         {
             // Fields
             private readonly XmlTextReaderImpl _reader;

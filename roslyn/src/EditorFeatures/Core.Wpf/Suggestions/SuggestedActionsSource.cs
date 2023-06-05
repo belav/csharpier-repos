@@ -32,9 +32,9 @@ using IUIThreadOperationContext = Microsoft.VisualStudio.Utilities.IUIThreadOper
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
-    internal partial class SuggestedActionsSourceProvider
+    partial internal class SuggestedActionsSourceProvider
     {
-        private abstract partial class SuggestedActionsSource
+        partial private abstract class SuggestedActionsSource
             : ForegroundThreadAffinitizedObject,
                 ISuggestedActionsSource3
         {

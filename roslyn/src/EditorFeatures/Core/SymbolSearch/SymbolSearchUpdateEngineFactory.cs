@@ -11,6 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SymbolSearch
 {
+    partial
     /// <summary>
     /// Factory that will produce the <see cref="ISymbolSearchUpdateEngine"/>.  The default
     /// implementation produces an engine that will run in-process.  Implementations at
@@ -19,7 +20,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     /// <remarks>
     /// This returns an No-op engine on non-Windows OS, because the backing storage depends on Windows APIs.
     /// </remarks>
-    internal static partial class SymbolSearchUpdateEngineFactory
+    internal static class SymbolSearchUpdateEngineFactory
     {
         public static async Task<ISymbolSearchUpdateEngine> CreateEngineAsync(
             Workspace workspace,

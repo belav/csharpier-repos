@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.InlineMethod
 {
-    internal abstract partial class AbstractInlineMethodRefactoringProvider<
+    partial internal abstract class AbstractInlineMethodRefactoringProvider<
         TMethodDeclarationSyntax,
         TStatementSyntax,
         TExpressionSyntax,

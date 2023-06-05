@@ -47,7 +47,7 @@ namespace System.Net.NetworkInformation
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool ParseRouteInfo_icall(string iface, out string[] gw_addr_list);
+        private static extern bool ParseRouteInfo_icall(string iface, out string[] gw_addr_list);
 
         public override GatewayIPAddressInformationCollection GatewayAddresses
         {

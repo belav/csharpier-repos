@@ -17,13 +17,14 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.Interactive
 {
+    partial
     /// <summary>
     /// Represents a process that hosts an interactive session.
     /// </summary>
     /// <remarks>
     /// Handles spawning of the host process and communication between the local callers and the remote session.
     /// </remarks>
-    internal sealed partial class InteractiveHost : IDisposable
+    internal sealed class InteractiveHost : IDisposable
     {
         internal const InteractiveHostPlatform DefaultPlatform = InteractiveHostPlatform.Desktop32;
 

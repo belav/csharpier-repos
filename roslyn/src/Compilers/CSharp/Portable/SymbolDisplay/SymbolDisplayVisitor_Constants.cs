@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class SymbolDisplayVisitor
+    partial internal class SymbolDisplayVisitor
     {
         private void AddConstantValue(
             ITypeSymbol type,

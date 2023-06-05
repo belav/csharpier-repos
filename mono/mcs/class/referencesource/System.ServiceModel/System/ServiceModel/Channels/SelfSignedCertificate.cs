@@ -9,7 +9,7 @@ namespace System.ServiceModel.Channels
     using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel.Diagnostics;
 
-    sealed partial class SelfSignedCertificate : IDisposable
+    partial sealed class SelfSignedCertificate : IDisposable
     {
         CertificateHandle cert;
         KeyContainerHandle keyContainer;

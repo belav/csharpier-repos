@@ -8,9 +8,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
-internal sealed partial class WebSocketsTransport
+partial internal sealed class WebSocketsTransport
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -18,17 +18,17 @@ internal sealed partial class WebSocketsTransport
             "Starting transport. Transfer mode: {TransferFormat}. Url: '{WebSocketUrl}'.",
             EventName = "StartTransport"
         )]
-        public static partial void StartTransport(
+        partial public static void StartTransport(
             ILogger logger,
             TransferFormat transferFormat,
             Uri webSocketUrl
         );
 
         [LoggerMessage(2, LogLevel.Debug, "Transport stopped.", EventName = "TransportStopped")]
-        public static partial void TransportStopped(ILogger logger, Exception? exception);
+        partial public static void TransportStopped(ILogger logger, Exception? exception);
 
         [LoggerMessage(3, LogLevel.Debug, "Starting receive loop.", EventName = "StartReceive")]
-        public static partial void StartReceive(ILogger logger);
+        partial public static void StartReceive(ILogger logger);
 
         [LoggerMessage(
             6,
@@ -36,7 +36,7 @@ internal sealed partial class WebSocketsTransport
             "Transport is stopping.",
             EventName = "TransportStopping"
         )]
-        public static partial void TransportStopping(ILogger logger);
+        partial public static void TransportStopping(ILogger logger);
 
         [LoggerMessage(
             10,
@@ -44,22 +44,22 @@ internal sealed partial class WebSocketsTransport
             "Passing message to application. Payload size: {Count}.",
             EventName = "MessageToApp"
         )]
-        public static partial void MessageToApp(ILogger logger, int count);
+        partial public static void MessageToApp(ILogger logger, int count);
 
         [LoggerMessage(5, LogLevel.Debug, "Receive loop canceled.", EventName = "ReceiveCanceled")]
-        public static partial void ReceiveCanceled(ILogger logger);
+        partial public static void ReceiveCanceled(ILogger logger);
 
         [LoggerMessage(4, LogLevel.Debug, "Receive loop stopped.", EventName = "ReceiveStopped")]
-        public static partial void ReceiveStopped(ILogger logger);
+        partial public static void ReceiveStopped(ILogger logger);
 
         [LoggerMessage(7, LogLevel.Debug, "Starting the send loop.", EventName = "SendStarted")]
-        public static partial void SendStarted(ILogger logger);
+        partial public static void SendStarted(ILogger logger);
 
         [LoggerMessage(9, LogLevel.Debug, "Send loop canceled.", EventName = "SendCanceled")]
-        public static partial void SendCanceled(ILogger logger);
+        partial public static void SendCanceled(ILogger logger);
 
         [LoggerMessage(8, LogLevel.Debug, "Send loop stopped.", EventName = "SendStopped")]
-        public static partial void SendStopped(ILogger logger);
+        partial public static void SendStopped(ILogger logger);
 
         [LoggerMessage(
             11,
@@ -67,7 +67,7 @@ internal sealed partial class WebSocketsTransport
             "WebSocket closed by the server. Close status {CloseStatus}.",
             EventName = "WebSocketClosed"
         )]
-        public static partial void WebSocketClosed(
+        partial public static void WebSocketClosed(
             ILogger logger,
             WebSocketCloseStatus? closeStatus
         );
@@ -78,7 +78,7 @@ internal sealed partial class WebSocketsTransport
             "Message received. Type: {MessageType}, size: {Count}, EndOfMessage: {EndOfMessage}.",
             EventName = "MessageReceived"
         )]
-        public static partial void MessageReceived(
+        partial public static void MessageReceived(
             ILogger logger,
             WebSocketMessageType messageType,
             int count,
@@ -91,7 +91,7 @@ internal sealed partial class WebSocketsTransport
             "Received message from application. Payload size: {Count}.",
             EventName = "ReceivedFromApp"
         )]
-        public static partial void ReceivedFromApp(ILogger logger, long count);
+        partial public static void ReceivedFromApp(ILogger logger, long count);
 
         [LoggerMessage(
             14,
@@ -99,7 +99,7 @@ internal sealed partial class WebSocketsTransport
             "Sending a message canceled.",
             EventName = "SendMessageCanceled"
         )]
-        public static partial void SendMessageCanceled(ILogger logger);
+        partial public static void SendMessageCanceled(ILogger logger);
 
         [LoggerMessage(
             15,
@@ -107,7 +107,7 @@ internal sealed partial class WebSocketsTransport
             "Error while sending a message.",
             EventName = "ErrorSendingMessage"
         )]
-        public static partial void ErrorSendingMessage(ILogger logger, Exception exception);
+        partial public static void ErrorSendingMessage(ILogger logger, Exception exception);
 
         [LoggerMessage(
             16,
@@ -115,7 +115,7 @@ internal sealed partial class WebSocketsTransport
             "Closing WebSocket.",
             EventName = "ClosingWebSocket"
         )]
-        public static partial void ClosingWebSocket(ILogger logger);
+        partial public static void ClosingWebSocket(ILogger logger);
 
         [LoggerMessage(
             17,
@@ -123,7 +123,7 @@ internal sealed partial class WebSocketsTransport
             "Closing webSocket failed.",
             EventName = "ClosingWebSocketFailed"
         )]
-        public static partial void ClosingWebSocketFailed(ILogger logger, Exception exception);
+        partial public static void ClosingWebSocketFailed(ILogger logger, Exception exception);
 
         [LoggerMessage(
             18,
@@ -131,10 +131,10 @@ internal sealed partial class WebSocketsTransport
             "Canceled passing message to application.",
             EventName = "CancelMessage"
         )]
-        public static partial void CancelMessage(ILogger logger);
+        partial public static void CancelMessage(ILogger logger);
 
         [LoggerMessage(19, LogLevel.Debug, "Started transport.", EventName = "StartedTransport")]
-        public static partial void StartedTransport(ILogger logger);
+        partial public static void StartedTransport(ILogger logger);
 
         [LoggerMessage(
             20,
@@ -143,6 +143,6 @@ internal sealed partial class WebSocketsTransport
                 + "on the browser platform.",
             EventName = "HeadersNotSupported"
         )]
-        public static partial void HeadersNotSupported(ILogger logger);
+        partial public static void HeadersNotSupported(ILogger logger);
     }
 }

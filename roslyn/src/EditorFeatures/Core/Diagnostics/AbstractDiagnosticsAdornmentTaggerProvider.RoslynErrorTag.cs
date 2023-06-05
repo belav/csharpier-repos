@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class AbstractDiagnosticsAdornmentTaggerProvider<TTag>
+    partial internal class AbstractDiagnosticsAdornmentTaggerProvider<TTag>
     {
         protected sealed class RoslynErrorTag : ErrorTag, IEquatable<RoslynErrorTag>
         {

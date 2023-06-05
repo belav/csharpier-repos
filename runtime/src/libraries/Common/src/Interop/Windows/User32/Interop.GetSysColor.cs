@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         // The returned value is a COLORREF. The docs don't say that explicitly, but
         // they do document the same macros (GetRValue, etc.). [0x00BBGGRR]
@@ -16,6 +16,6 @@ internal static partial class Interop
 
         [SuppressGCTransition]
         [LibraryImport(Libraries.User32)]
-        internal static partial uint GetSysColor(int nIndex);
+        partial internal static uint GetSysColor(int nIndex);
     }
 }

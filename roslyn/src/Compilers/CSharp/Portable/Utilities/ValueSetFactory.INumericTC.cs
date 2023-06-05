@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class ValueSetFactory
+    partial internal static class ValueSetFactory
     {
         /// <summary>
         /// A type class providing the primitive operations needed to support a value set.

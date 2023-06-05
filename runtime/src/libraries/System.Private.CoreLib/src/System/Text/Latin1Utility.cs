@@ -9,7 +9,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Text
 {
-    internal static partial class Latin1Utility
+    partial internal static class Latin1Utility
     {
         /// <summary>
         /// Returns the index in <paramref name="pBuffer"/> where the first non-Latin1 char is found.

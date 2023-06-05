@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Buffers.Text.Tests
 {
-    public static partial class FormatterTests
+    partial public static class FormatterTests
     {
         [Theory]
         [MemberData(nameof(TestData.BooleanFormatterTheoryData), MemberType = typeof(TestData))]

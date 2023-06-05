@@ -39,7 +39,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Options;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
-    internal partial class AdvancedOptionPageControl : AbstractOptionPageControl
+    partial internal class AdvancedOptionPageControl : AbstractOptionPageControl
     {
         private readonly IThreadingContext _threadingContext;
         private readonly ColorSchemeApplier _colorSchemeApplier;

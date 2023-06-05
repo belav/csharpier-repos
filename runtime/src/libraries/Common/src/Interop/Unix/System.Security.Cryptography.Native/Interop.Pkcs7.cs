@@ -5,44 +5,44 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_PemReadBioPkcs7")]
-        internal static partial SafePkcs7Handle PemReadBioPkcs7(SafeBioHandle bp);
+        partial internal static SafePkcs7Handle PemReadBioPkcs7(SafeBioHandle bp);
 
         internal static SafePkcs7Handle DecodePkcs7(ReadOnlySpan<byte> buf) =>
             DecodePkcs7(ref MemoryMarshal.GetReference(buf), buf.Length);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_DecodePkcs7")]
-        private static partial SafePkcs7Handle DecodePkcs7(ref byte buf, int len);
+        partial private static SafePkcs7Handle DecodePkcs7(ref byte buf, int len);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_D2IPkcs7Bio")]
-        internal static partial SafePkcs7Handle D2IPkcs7Bio(SafeBioHandle bp);
+        partial internal static SafePkcs7Handle D2IPkcs7Bio(SafeBioHandle bp);
 
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_Pkcs7CreateCertificateCollection"
         )]
-        internal static partial SafePkcs7Handle Pkcs7CreateCertificateCollection(
+        partial internal static SafePkcs7Handle Pkcs7CreateCertificateCollection(
             SafeX509StackHandle certs
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Pkcs7Destroy")]
-        internal static partial void Pkcs7Destroy(IntPtr p7);
+        partial internal static void Pkcs7Destroy(IntPtr p7);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetPkcs7Certificates")]
-        private static partial int GetPkcs7Certificates(
+        partial private static int GetPkcs7Certificates(
             SafePkcs7Handle p7,
             out SafeSharedX509StackHandle certs
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetPkcs7DerSize")]
-        internal static partial int GetPkcs7DerSize(SafePkcs7Handle p7);
+        partial internal static int GetPkcs7DerSize(SafePkcs7Handle p7);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EncodePkcs7")]
-        internal static partial int EncodePkcs7(SafePkcs7Handle p7, byte[] buf);
+        partial internal static int EncodePkcs7(SafePkcs7Handle p7, byte[] buf);
 
         internal static SafeSharedX509StackHandle GetPkcs7Certificates(SafePkcs7Handle p7)
         {

@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(Libraries.Gdi32)]
-        public static partial ObjectType GetObjectType(IntPtr h);
+        partial public static ObjectType GetObjectType(IntPtr h);
     }
 }

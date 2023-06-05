@@ -3,7 +3,7 @@
 
 namespace System.MathBenchmarks
 {
-    public partial class MathTests
+    partial public class MathTests
     {
         public static int Main()
         {

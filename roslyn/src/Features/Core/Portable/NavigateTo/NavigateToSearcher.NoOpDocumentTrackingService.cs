@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.NavigateTo
 {
-    internal partial class NavigateToSearcher
+    partial internal class NavigateToSearcher
     {
         private class NoOpDocumentTrackingService : IDocumentTrackingService
         {

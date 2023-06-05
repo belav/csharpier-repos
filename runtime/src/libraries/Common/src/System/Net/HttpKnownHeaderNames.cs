@@ -3,7 +3,7 @@
 
 namespace System.Net
 {
-    internal static partial class HttpKnownHeaderNames
+    partial internal static class HttpKnownHeaderNames
     {
         // When adding a new constant, add it to HttpKnownHeaderNames.TryGetHeaderName.cs as well.
 

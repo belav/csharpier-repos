@@ -243,7 +243,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public partial class ILGenerator
+    partial public class ILGenerator
     {
         private struct LabelFixup
         {

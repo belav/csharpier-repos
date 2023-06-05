@@ -8,16 +8,16 @@
 namespace System.Data
 {
     [System.ComponentModel.TypeConverter(typeof(ConstraintConverter))]
-    public abstract partial class Constraint { }
+    partial public abstract class Constraint { }
 
     internal sealed class ConstraintConverter { }
 
     [System.ComponentModel.TypeConverter(typeof(RelationshipConverter))]
-    public partial class DataRelation { }
+    partial public class DataRelation { }
 
     internal sealed class RelationshipConverter { }
 
-    public partial class DataColumn
+    partial public class DataColumn
     {
         [System.ComponentModel.DefaultValueAttribute(typeof(string))]
         [System.ComponentModel.RefreshPropertiesAttribute(
@@ -48,7 +48,7 @@ namespace System.Data
 
     internal sealed class DefaultValueTypeConverter { }
 
-    public partial class DataTable
+    partial public class DataTable
     {
         [System.ComponentModel.EditorAttribute(
             "Microsoft.VSDesigner.Data.Design.PrimaryKeyEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
@@ -65,7 +65,7 @@ namespace System.Data
 
     internal sealed class PrimaryKeyTypeConverter { }
 
-    public partial class DataView
+    partial public class DataView
     {
         [System.ComponentModel.DefaultValueAttribute(null)]
         [System.ComponentModel.RefreshPropertiesAttribute(
@@ -87,7 +87,7 @@ namespace System.Data.Common
     [System.ComponentModel.TypeConverterAttribute(
         typeof(DataColumnMapping.DataColumnMappingConverter)
     )]
-    public sealed partial class DataColumnMapping
+    partial public sealed class DataColumnMapping
     {
         internal sealed class DataColumnMappingConverter { }
     }
@@ -95,7 +95,7 @@ namespace System.Data.Common
     [System.ComponentModel.TypeConverterAttribute(
         typeof(DataTableMapping.DataTableMappingConverter)
     )]
-    public sealed partial class DataTableMapping
+    partial public sealed class DataTableMapping
     {
         internal sealed class DataTableMappingConverter { }
     }

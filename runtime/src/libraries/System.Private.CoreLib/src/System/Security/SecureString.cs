@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace System.Security
 {
-    public sealed partial class SecureString : IDisposable
+    partial public sealed class SecureString : IDisposable
     {
         private const int MaxLength = 65536;
         private readonly object _methodLock = new object();

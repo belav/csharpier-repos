@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class DSACng : DSA
+    partial public sealed class DSACng : DSA
     {
         /// <summary>
         ///     Gets the key that will be used by the DSA object for any cryptographic operation that it uses.

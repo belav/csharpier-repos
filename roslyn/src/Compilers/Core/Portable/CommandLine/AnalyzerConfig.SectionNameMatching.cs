@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public sealed partial class AnalyzerConfig
+    partial public sealed class AnalyzerConfig
     {
         internal readonly struct SectionNameMatcher
         {

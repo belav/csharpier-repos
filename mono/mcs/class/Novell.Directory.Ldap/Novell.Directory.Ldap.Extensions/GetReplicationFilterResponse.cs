@@ -48,13 +48,14 @@ namespace Novell.Directory.Ldap.Extensions
     /// </summary>
     public class GetReplicationFilterResponse : LdapExtendedResponse
     {
+        public
         /// <summary> Returns the replicationFilter as an array of classname-attribute name pairs
         ///
         /// </summary>
         /// <returns> String array contining a two dimensional array of strings.  The first
         /// element of each array is the class name the others are the attribute names
         /// </returns>
-        virtual public System.String[][] ReplicationFilter
+        virtual System.String[][] ReplicationFilter
         {
             get { return returnedFilter; }
         }

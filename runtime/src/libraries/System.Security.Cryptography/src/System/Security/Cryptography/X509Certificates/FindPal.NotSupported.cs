@@ -3,10 +3,12 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal static partial class FindPal
+    partial internal static class FindPal
     {
 #pragma warning disable IDE0060
-        private static partial IFindPal OpenPal(
+        partial
+#pragma warning disable IDE0060
+        private static IFindPal OpenPal(
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
             bool validOnly

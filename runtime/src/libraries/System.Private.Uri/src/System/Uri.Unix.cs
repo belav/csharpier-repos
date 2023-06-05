@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public partial class Uri
+    partial public class Uri
     {
         private const bool IsWindowsSystem = false;
     }

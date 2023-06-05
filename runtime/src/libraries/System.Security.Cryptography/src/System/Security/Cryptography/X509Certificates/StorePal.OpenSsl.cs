@@ -8,16 +8,21 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class StorePal
+    partial internal sealed class StorePal
     {
 #pragma warning disable IDE0060
-        internal static partial IStorePal FromHandle(IntPtr storeHandle)
+        partial
+#pragma warning disable IDE0060
+        internal static IStorePal FromHandle(IntPtr storeHandle)
         {
             throw new PlatformNotSupportedException();
         }
 #pragma warning restore IDE0060
 
-        internal static partial ILoaderPal FromBlob(
+        partial
+#pragma warning restore IDE0060
+
+        internal static ILoaderPal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
@@ -64,7 +69,7 @@ namespace System.Security.Cryptography.X509Certificates
             throw openSslException;
         }
 
-        internal static partial ILoaderPal FromFile(
+        partial internal static ILoaderPal FromFile(
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
@@ -156,19 +161,19 @@ namespace System.Security.Cryptography.X509Certificates
             throw openSslException;
         }
 
-        internal static partial IExportPal FromCertificate(ICertificatePalCore cert)
+        partial internal static IExportPal FromCertificate(ICertificatePalCore cert)
         {
             return new OpenSslExportProvider(cert);
         }
 
-        internal static partial IExportPal LinkFromCertificateCollection(
+        partial internal static IExportPal LinkFromCertificateCollection(
             X509Certificate2Collection certificates
         )
         {
             return new OpenSslExportProvider(certificates);
         }
 
-        internal static partial IStorePal FromSystemStore(
+        partial internal static IStorePal FromSystemStore(
             string storeName,
             StoreLocation storeLocation,
             OpenFlags openFlags

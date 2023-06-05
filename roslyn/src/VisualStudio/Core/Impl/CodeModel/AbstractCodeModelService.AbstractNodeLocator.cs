@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
-    internal partial class AbstractCodeModelService : ICodeModelService
+    partial internal class AbstractCodeModelService : ICodeModelService
     {
         protected abstract AbstractNodeLocator CreateNodeLocator();
 

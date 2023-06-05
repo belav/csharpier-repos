@@ -14,7 +14,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class StringTests
+    partial public class StringTests
     {
         [Theory]
         [InlineData(0, 0)]

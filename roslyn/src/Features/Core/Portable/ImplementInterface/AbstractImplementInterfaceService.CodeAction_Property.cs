@@ -15,9 +15,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ImplementInterface
 {
-    internal abstract partial class AbstractImplementInterfaceService
+    partial internal abstract class AbstractImplementInterfaceService
     {
-        internal partial class ImplementInterfaceCodeAction
+        partial internal class ImplementInterfaceCodeAction
         {
             private IEnumerable<ISymbol?> GeneratePropertyMembers(
                 Compilation compilation,

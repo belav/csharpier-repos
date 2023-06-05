@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct PolicyConstraintsAsn
+    partial internal struct PolicyConstraintsAsn
     {
         internal int? RequireExplicitPolicyDepth;
         internal int? InhibitMappingDepth;

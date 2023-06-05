@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Debugging
 {
-    internal static partial class DkmExceptionUtilities
+    partial internal static class DkmExceptionUtilities
     {
         internal const int COR_E_BADIMAGEFORMAT = unchecked((int)0x8007000b);
         internal const int CORDBG_E_MISSING_METADATA = unchecked((int)0x80131c35);

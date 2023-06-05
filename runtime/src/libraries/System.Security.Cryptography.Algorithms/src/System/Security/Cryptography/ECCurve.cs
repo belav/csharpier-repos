@@ -15,7 +15,7 @@ namespace System.Security.Cryptography
     /// </remarks>
     [DebuggerDisplay("ECCurve: {Oid}")]
     [UnsupportedOSPlatform("browser")]
-    public partial struct ECCurve
+    partial public struct ECCurve
     {
         /// <summary>
         /// Coefficient A. Applies only to Explicit curves.

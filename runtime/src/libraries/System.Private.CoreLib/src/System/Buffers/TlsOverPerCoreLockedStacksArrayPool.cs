@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace System.Buffers
 {
+    partial
     /// <summary>
     /// Provides an ArrayPool implementation meant to be used as the singleton returned from ArrayPool.Shared.
     /// </summary>
@@ -18,7 +19,7 @@ namespace System.Buffers
     /// checking its processor number, because multiple threads could interleave on the same core, and because
     /// a thread is allowed to check other core's buckets if its core's bucket is empty/full.
     /// </remarks>
-    internal sealed partial class TlsOverPerCoreLockedStacksArrayPool<T> : ArrayPool<T>
+    internal sealed class TlsOverPerCoreLockedStacksArrayPool<T> : ArrayPool<T>
     {
         /// <summary>The number of buckets (array sizes) in the pool, one for each array length, starting from length 16.</summary>
         private const int NumBuckets = 27; // Utilities.SelectBucketIndex(1024 * 1024 * 1024 + 1)

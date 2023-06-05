@@ -9,7 +9,7 @@ using System.Security.Cryptography.Asn1;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class CngPkcs8
+    partial internal static class CngPkcs8
     {
         // Windows 7, 8, and 8.1 don't support PBES2 export, so use
         // the 3DES-192 scheme from PKCS12-PBE whenever deferring to the system.

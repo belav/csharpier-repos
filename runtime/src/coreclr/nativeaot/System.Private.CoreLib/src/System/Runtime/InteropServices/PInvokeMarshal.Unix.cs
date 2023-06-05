@@ -6,11 +6,12 @@ using System.Security;
 
 namespace System.Runtime.InteropServices
 {
+    partial
     /// <summary>
     /// This PInvokeMarshal class should provide full public Marshal
     /// implementation for all things related to P/Invoke marshalling
     /// </summary>
-    public partial class PInvokeMarshal
+    public class PInvokeMarshal
     {
         public static void SaveLastError()
         {

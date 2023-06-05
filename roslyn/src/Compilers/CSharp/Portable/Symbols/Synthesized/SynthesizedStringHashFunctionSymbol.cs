@@ -9,11 +9,12 @@ using Microsoft.CodeAnalysis.CodeGen;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Represents a compiler generated synthesized method symbol
     /// representing string switch hash function
     /// </summary>
-    internal sealed partial class SynthesizedStringSwitchHashMethod : SynthesizedGlobalMethodSymbol
+    internal sealed class SynthesizedStringSwitchHashMethod : SynthesizedGlobalMethodSymbol
     {
         internal SynthesizedStringSwitchHashMethod(
             SourceModuleSymbol containingModule,
@@ -42,7 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal sealed partial class SynthesizedSpanSwitchHashMethod : SynthesizedGlobalMethodSymbol
+    partial internal sealed class SynthesizedSpanSwitchHashMethod : SynthesizedGlobalMethodSymbol
     {
         internal SynthesizedSpanSwitchHashMethod(
             SourceModuleSymbol containingModule,

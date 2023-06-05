@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class RandomNumberGeneratorImplementation : RandomNumberGenerator
+    partial internal sealed class RandomNumberGeneratorImplementation : RandomNumberGenerator
     {
         // a singleton which always calls into a thread-safe implementation
         // and whose Dispose method no-ops

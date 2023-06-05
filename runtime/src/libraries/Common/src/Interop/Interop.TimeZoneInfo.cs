@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Globalization
+    partial internal static class Globalization
     {
         [LibraryImport(
             Libraries.GlobalizationNative,
             EntryPoint = "GlobalizationNative_GetTimeZoneDisplayName",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial ResultCode GetTimeZoneDisplayName(
+        partial internal static unsafe ResultCode GetTimeZoneDisplayName(
             string localeName,
             string timeZoneId,
             TimeZoneDisplayNameType type,
@@ -26,7 +26,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_WindowsIdToIanaId",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int WindowsIdToIanaId(
+        partial internal static unsafe int WindowsIdToIanaId(
             string windowsId,
             IntPtr region,
             char* ianaId,
@@ -38,7 +38,7 @@ internal static partial class Interop
             EntryPoint = "GlobalizationNative_IanaIdToWindowsId",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int IanaIdToWindowsId(
+        partial internal static unsafe int IanaIdToWindowsId(
             string ianaId,
             char* windowsId,
             int windowsIdLength

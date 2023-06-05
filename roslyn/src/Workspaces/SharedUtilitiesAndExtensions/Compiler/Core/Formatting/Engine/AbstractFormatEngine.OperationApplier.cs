@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    internal abstract partial class AbstractFormatEngine
+    partial internal abstract class AbstractFormatEngine
     {
         /// <summary>
         /// this actually applies formatting operations to trivia between two tokens

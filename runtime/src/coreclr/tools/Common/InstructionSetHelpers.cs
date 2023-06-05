@@ -9,7 +9,7 @@ using InstructionSet = Internal.JitInterface.InstructionSet;
 
 namespace System.CommandLine
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
         public static InstructionSetSupport ConfigureInstructionSetSupport(
             string instructionSet,

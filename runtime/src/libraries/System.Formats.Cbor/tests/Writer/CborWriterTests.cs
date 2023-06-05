@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Formats.Cbor.Tests
 {
-    public partial class CborWriterTests
+    partial public class CborWriterTests
     {
         [Fact]
         public static void IsWriteCompleted_OnWrittenPrimitive_ShouldBeTrue()

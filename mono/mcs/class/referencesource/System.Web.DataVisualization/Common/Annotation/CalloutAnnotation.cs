@@ -172,7 +172,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeCalloutAnnotation_CalloutStyle"),
             ParenthesizePropertyNameAttribute(true),
         ]
-        virtual public CalloutStyle CalloutStyle
+        public virtual CalloutStyle CalloutStyle
         {
             get { return _calloutStyle; }
             set
@@ -204,7 +204,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(LineAnchorCapStyle.Arrow),
             SRDescription("DescriptionAttributeCalloutAnnotation_CalloutAnchorCap"),
         ]
-        virtual public LineAnchorCapStyle CalloutAnchorCap
+        public virtual LineAnchorCapStyle CalloutAnchorCap
         {
             get { return _calloutAnchorCap; }
             set
@@ -233,7 +233,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(ColorConverter)),
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
-        override public Color LineColor
+        public override Color LineColor
         {
             get { return base.LineColor; }
             set { base.LineColor = value; }
@@ -253,7 +253,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(1),
             SRDescription("DescriptionAttributeLineWidth"),
         ]
-        override public int LineWidth
+        public override int LineWidth
         {
             get { return base.LineWidth; }
             set { base.LineWidth = value; }
@@ -273,7 +273,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(ChartDashStyle.Solid),
             SRDescription("DescriptionAttributeLineDashStyle"),
         ]
-        override public ChartDashStyle LineDashStyle
+        public override ChartDashStyle LineDashStyle
         {
             get { return base.LineDashStyle; }
             set { base.LineDashStyle = value; }
@@ -297,7 +297,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(ColorConverter)),
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
-        override public Color BackColor
+        public override Color BackColor
         {
             get { return base.BackColor; }
             set { base.BackColor = value; }
@@ -323,7 +323,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeBackHatchStyle"),
             Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
         ]
-        override public ChartHatchStyle BackHatchStyle
+        public override ChartHatchStyle BackHatchStyle
         {
             get { return base.BackHatchStyle; }
             set { base.BackHatchStyle = value; }
@@ -349,7 +349,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeBackGradientStyle"),
             Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
         ]
-        override public GradientStyle BackGradientStyle
+        public override GradientStyle BackGradientStyle
         {
             get { return base.BackGradientStyle; }
             set { base.BackGradientStyle = value; }
@@ -378,7 +378,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(ColorConverter)),
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
-        override public Color BackSecondaryColor
+        public override Color BackSecondaryColor
         {
             get { return base.BackSecondaryColor; }
             set { base.BackSecondaryColor = value; }
@@ -409,7 +409,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeCalloutAnnotation_AnchorOffsetX"),
             RefreshPropertiesAttribute(RefreshProperties.All),
         ]
-        override public double AnchorOffsetX
+        public override double AnchorOffsetX
         {
             get { return base.AnchorOffsetX; }
             set { base.AnchorOffsetX = value; }
@@ -436,7 +436,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeCalloutAnnotation_AnchorOffsetY"),
             RefreshPropertiesAttribute(RefreshProperties.All),
         ]
-        override public double AnchorOffsetY
+        public override double AnchorOffsetY
         {
             get { return base.AnchorOffsetY; }
             set { base.AnchorOffsetY = value; }
@@ -464,7 +464,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(typeof(ContentAlignment), "BottomLeft"),
             SRDescription("DescriptionAttributeAnchorAlignment"),
         ]
-        override public ContentAlignment AnchorAlignment
+        public override ContentAlignment AnchorAlignment
         {
             get { return base.AnchorAlignment; }
             set { base.AnchorAlignment = value; }
@@ -518,7 +518,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SerializationVisibilityAttribute(SerializationVisibility.Hidden),
             SRDescription("DescriptionAttributeSelectionPointsStyle"),
         ]
-        override internal SelectionPointsStyle SelectionPointsStyle
+        internal override SelectionPointsStyle SelectionPointsStyle
         {
             get { return SelectionPointsStyle.Rectangle; }
         }
@@ -569,7 +569,21 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="chart">
         /// Reference to the <see cref="Chart"/> control.
         /// </param>
-        override internal void Paint(Chart chart, ChartGraphics graphics)
+        internal
+        #endregion // Text Spacing
+
+        #region Painting
+
+        /// <summary>
+        /// Paints annotation object on specified graphics.
+        /// </summary>
+        /// <param name="graphics">
+        /// A <see cref="ChartGraphics"/> used to paint annotation object.
+        /// </param>
+        /// <param name="chart">
+        /// Reference to the <see cref="Chart"/> control.
+        /// </param>
+        override void Paint(Chart chart, ChartGraphics graphics)
         {
             // Get annotation position in relative coordinates
             PointF firstPoint = PointF.Empty;
@@ -1798,7 +1812,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Checks if annotation draw anything in the anchor position (except selection handle)
         /// </summary>
         /// <returns>True if annotation "connects" itself and anchor point visually.</returns>
-        override internal bool IsAnchorDrawn()
+        internal
+        #endregion // Painting
+
+        #region Anchor Methods
+
+        /// <summary>
+        /// Checks if annotation draw anything in the anchor position (except selection handle)
+        /// </summary>
+        /// <returns>True if annotation "connects" itself and anchor point visually.</returns>
+        override bool IsAnchorDrawn()
         {
             return true;
         }

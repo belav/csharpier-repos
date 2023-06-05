@@ -30,10 +30,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Implement C# definite assignment.
     /// </summary>
-    internal partial class DefiniteAssignmentPass
+    internal class DefiniteAssignmentPass
         : LocalDataFlowPass<
             DefiniteAssignmentPass.LocalState,
             DefiniteAssignmentPass.LocalFunctionState

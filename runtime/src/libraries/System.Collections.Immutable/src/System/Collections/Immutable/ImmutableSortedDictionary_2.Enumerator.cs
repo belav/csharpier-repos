@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Collections.Immutable
 {
-    public sealed partial class ImmutableSortedDictionary<TKey, TValue>
+    partial public sealed class ImmutableSortedDictionary<TKey, TValue>
     {
         /// <summary>
         /// Enumerates the contents of a binary tree.

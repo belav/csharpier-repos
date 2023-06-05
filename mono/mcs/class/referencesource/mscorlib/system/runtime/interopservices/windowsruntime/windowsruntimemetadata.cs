@@ -71,7 +71,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [System.Security.SecurityCritical]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void nResolveNamespace(
+        private static extern void nResolveNamespace(
             string namespaceName,
             string windowsSdkFilePath,
             string[] packageGraphFilePaths,

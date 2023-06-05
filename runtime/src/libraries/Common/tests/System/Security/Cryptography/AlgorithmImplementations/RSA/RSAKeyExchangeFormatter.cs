@@ -8,7 +8,7 @@ using Xunit;
 namespace System.Security.Cryptography.Rsa.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public partial class RSAKeyExchangeFormatterTests
+    partial public class RSAKeyExchangeFormatterTests
     {
         [Fact]
         public static void VerifyDecryptKeyExchangeOaep()

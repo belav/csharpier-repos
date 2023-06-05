@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.Net.WebSockets
 {
-    internal static partial class HttpWebSocket
+    partial internal static class HttpWebSocket
     {
         internal const string SecWebSocketKeyGuid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
         internal const string WebSocketUpgradeToken = "websocket";

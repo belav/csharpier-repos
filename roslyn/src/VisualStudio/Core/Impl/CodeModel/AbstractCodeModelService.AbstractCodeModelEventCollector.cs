@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
-    internal partial class AbstractCodeModelService
+    partial internal class AbstractCodeModelService
     {
         protected abstract AbstractCodeModelEventCollector CreateCodeModelEventCollector();
 

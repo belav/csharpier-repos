@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class MethodSignature
+    public class MethodSignature
     {
         internal int CompareTo(MethodSignature other, TypeSystemComparer comparer)
         {

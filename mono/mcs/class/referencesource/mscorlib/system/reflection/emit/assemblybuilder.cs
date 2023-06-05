@@ -2519,7 +2519,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.Machine | ResourceScope.Assembly)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern void DefineDynamicModule(
+        private static extern void DefineDynamicModule(
             RuntimeAssembly containingAssembly,
             bool emitSymbolInfo,
             String name,
@@ -2565,7 +2565,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern void PrepareForSavingManifestToDisk(
+        private static extern void PrepareForSavingManifestToDisk(
             RuntimeAssembly assembly,
             RuntimeModule assemblyModule
         ); // module to contain assembly information if assembly is embedded
@@ -2574,7 +2574,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern void SaveManifestToDisk(
+        private static extern void SaveManifestToDisk(
             RuntimeAssembly assembly,
             String strFileName,
             int entryPoint,
@@ -2587,13 +2587,13 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern int AddFile(RuntimeAssembly assembly, String strFileName);
+        private static extern int AddFile(RuntimeAssembly assembly, String strFileName);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern void SetFileHashValue(
+        private static extern void SetFileHashValue(
             RuntimeAssembly assembly,
             int tkFile,
             String strFullFileName
@@ -2603,7 +2603,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern int AddExportedTypeInMemory(
+        private static extern int AddExportedTypeInMemory(
             RuntimeAssembly assembly,
             String strComTypeName,
             int tkAssemblyRef,
@@ -2615,7 +2615,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern int AddExportedTypeOnDisk(
+        private static extern int AddExportedTypeOnDisk(
             RuntimeAssembly assembly,
             String strComTypeName,
             int tkAssemblyRef,
@@ -2628,7 +2628,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern void AddStandAloneResource(
+        private static extern void AddStandAloneResource(
             RuntimeAssembly assembly,
             String strName,
             String strFileName,
@@ -2641,7 +2641,9 @@ namespace System.Reflection.Emit
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
 #pragma warning disable 618
-        static private extern void AddDeclarativeSecurity(
+        private
+#pragma warning disable 618
+        static extern void AddDeclarativeSecurity(
             RuntimeAssembly assembly,
             SecurityAction action,
             byte[] blob,
@@ -2655,7 +2657,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern void CreateVersionInfoResource(
+        private static extern void CreateVersionInfoResource(
             String filename,
             String title,
             String iconFilename,

@@ -7,6 +7,7 @@ using System.Text;
 
 namespace System.Globalization
 {
+    partial
     /// <summary>
     /// List of culture data
     /// Note the we cache overrides.
@@ -37,7 +38,7 @@ namespace System.Globalization
     ///                en if you pass in en
     ///                de-DE if you pass in de-DE_phoneb
     /// </remarks>
-    internal sealed partial class CultureData
+    internal sealed class CultureData
     {
         private const int LocaleNameMaxLength = 85;
         private const int undef = -1;

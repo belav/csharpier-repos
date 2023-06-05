@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeMemoryMappedFileHandle
+    partial public sealed class SafeMemoryMappedFileHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeMemoryMappedFileHandle()
@@ -23,7 +23,7 @@ namespace Microsoft.Win32.SafeHandles
         }
     }
 
-    public sealed partial class SafeMemoryMappedViewHandle
+    partial public sealed class SafeMemoryMappedViewHandle
         : System.Runtime.InteropServices.SafeBuffer
     {
         public SafeMemoryMappedViewHandle()
@@ -38,7 +38,7 @@ namespace Microsoft.Win32.SafeHandles
 
 namespace System.IO.MemoryMappedFiles
 {
-    public partial class MemoryMappedFile : System.IDisposable
+    partial public class MemoryMappedFile : System.IDisposable
     {
         internal MemoryMappedFile() { }
 
@@ -270,7 +270,7 @@ namespace System.IO.MemoryMappedFiles
         AccessSystemSecurity = 16777216,
     }
 
-    public sealed partial class MemoryMappedViewAccessor : System.IO.UnmanagedMemoryAccessor
+    partial public sealed class MemoryMappedViewAccessor : System.IO.UnmanagedMemoryAccessor
     {
         internal MemoryMappedViewAccessor() { }
 
@@ -288,7 +288,7 @@ namespace System.IO.MemoryMappedFiles
         public void Flush() { }
     }
 
-    public sealed partial class MemoryMappedViewStream : System.IO.UnmanagedMemoryStream
+    partial public sealed class MemoryMappedViewStream : System.IO.UnmanagedMemoryStream
     {
         internal MemoryMappedViewStream() { }
 

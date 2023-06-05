@@ -4,14 +4,14 @@
 using System.Runtime.InteropServices;
 using System.Net.NetworkInformation;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [StructLayout(LayoutKind.Sequential)]
         public unsafe struct IPEndPointInfo
         {
-            public fixed byte AddressBytes[16];
+            fixed public byte AddressBytes[16];
             public uint NumAddressBytes;
             public uint Port;
             private uint __padding; // For native struct-size padding. Does not contain useful data.
@@ -29,13 +29,13 @@ internal static partial class Interop
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetEstimatedTcpConnectionCount"
         )]
-        public static partial int GetEstimatedTcpConnectionCount();
+        partial public static int GetEstimatedTcpConnectionCount();
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetActiveTcpConnectionInfos"
         )]
-        public static unsafe partial int GetActiveTcpConnectionInfos(
+        partial public static unsafe int GetActiveTcpConnectionInfos(
             NativeTcpConnectionInformation* infos,
             int* infoCount
         );
@@ -44,10 +44,10 @@ internal static partial class Interop
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetEstimatedUdpListenerCount"
         )]
-        public static partial int GetEstimatedUdpListenerCount();
+        partial public static int GetEstimatedUdpListenerCount();
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetActiveUdpListeners")]
-        public static unsafe partial int GetActiveUdpListeners(
+        partial public static unsafe int GetActiveUdpListeners(
             IPEndPointInfo* infos,
             int* infoCount
         );

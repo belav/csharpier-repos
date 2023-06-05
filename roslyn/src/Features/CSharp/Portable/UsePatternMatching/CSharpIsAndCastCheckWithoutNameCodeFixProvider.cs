@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         ),
         Shared
     ]
-    internal partial class CSharpIsAndCastCheckWithoutNameCodeFixProvider
+    partial internal class CSharpIsAndCastCheckWithoutNameCodeFixProvider
         : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]

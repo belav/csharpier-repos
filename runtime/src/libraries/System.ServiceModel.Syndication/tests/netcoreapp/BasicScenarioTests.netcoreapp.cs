@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests
 {
-    public static partial class BasicScenarioTests
+    partial public static class BasicScenarioTests
     {
         [Fact]
         public static void SyndicationFeed_Rss_DateTimeParser()

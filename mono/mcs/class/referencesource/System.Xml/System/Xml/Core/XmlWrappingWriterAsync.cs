@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial class XmlWrappingWriter : XmlWriter
+    partial internal class XmlWrappingWriter : XmlWriter
     {
         public override Task WriteStartDocumentAsync()
         {

@@ -20,7 +20,7 @@ using Internal.NativeFormat;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class TypeSystemContext
+    partial public abstract class TypeSystemContext
     {
         internal static TemplateLocator TemplateLookup => new TemplateLocator();
 
@@ -605,7 +605,7 @@ namespace Internal.TypeSystem
         }
     }
 
-    internal static partial class TypeNameHelper
+    partial internal static class TypeNameHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T WithDebugName<T>(this T type)

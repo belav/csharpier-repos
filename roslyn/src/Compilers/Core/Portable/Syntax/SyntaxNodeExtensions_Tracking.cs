@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public static partial class SyntaxNodeExtensions
+    partial public static class SyntaxNodeExtensions
     {
         private static readonly ConditionalWeakTable<SyntaxNode, SyntaxAnnotation> s_nodeToIdMap =
             new ConditionalWeakTable<SyntaxNode, SyntaxAnnotation>();

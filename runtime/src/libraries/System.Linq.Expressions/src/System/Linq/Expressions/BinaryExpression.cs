@@ -626,7 +626,7 @@ namespace System.Linq.Expressions
         internal override MethodInfo GetMethod() => _method;
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         #region Assign
 

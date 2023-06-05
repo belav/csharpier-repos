@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace System.IO.Pipelines
 {
+    partial
     /// <summary>Defines a class that provides access to a read side of pipe.</summary>
-    public abstract partial class PipeReader
+    public abstract class PipeReader
     {
         private PipeReaderStream? _stream;
 

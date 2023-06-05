@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         internal const int CRYPT_FORMAT_STR_NONE = 0;
         internal const int CRYPT_FORMAT_STR_MULTI_LINE = 0x00000001;
@@ -14,7 +14,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CryptFormatObject(
+        partial internal static unsafe bool CryptFormatObject(
             int dwCertEncodingType, // only valid value is X509_ASN_ENCODING
             int dwFormatType, // unused - pass 0.
             int dwFormatStrType, // select multiline

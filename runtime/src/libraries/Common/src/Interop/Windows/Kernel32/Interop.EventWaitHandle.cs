@@ -5,20 +5,20 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal const uint CREATE_EVENT_INITIAL_SET = 0x2;
         internal const uint CREATE_EVENT_MANUAL_RESET = 0x1;
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetEvent(SafeWaitHandle handle);
+        partial internal static bool SetEvent(SafeWaitHandle handle);
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool ResetEvent(SafeWaitHandle handle);
+        partial internal static bool ResetEvent(SafeWaitHandle handle);
 
         [LibraryImport(
             Libraries.Kernel32,
@@ -26,7 +26,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial SafeWaitHandle CreateEventEx(
+        partial internal static SafeWaitHandle CreateEventEx(
             IntPtr lpSecurityAttributes,
             string? name,
             uint flags,
@@ -39,7 +39,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial SafeWaitHandle OpenEvent(
+        partial internal static SafeWaitHandle OpenEvent(
             uint desiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool inheritHandle,
             string name

@@ -6,9 +6,9 @@ using System.Security.Cryptography.Apple;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECDiffieHellmanImplementation
+    partial internal static class ECDiffieHellmanImplementation
     {
-        public sealed partial class ECDiffieHellmanSecurityTransforms : ECDiffieHellman
+        partial public sealed class ECDiffieHellmanSecurityTransforms : ECDiffieHellman
         {
             private readonly EccSecurityTransforms _ecc = new EccSecurityTransforms(
                 nameof(ECDiffieHellman)

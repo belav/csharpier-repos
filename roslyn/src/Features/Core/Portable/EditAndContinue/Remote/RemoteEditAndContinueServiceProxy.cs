@@ -18,12 +18,13 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
+    partial
     /// <summary>
     /// Facade used to call remote <see cref="IRemoteEditAndContinueService"/> methods.
     /// Encapsulates all RPC logic as well as dispatching to the local service if the remote service is disabled.
     /// THe facade is useful for targeted testing of serialization/deserialization of EnC service calls.
     /// </summary>
-    internal readonly partial struct RemoteEditAndContinueServiceProxy
+    internal readonly struct RemoteEditAndContinueServiceProxy
     {
         [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteEditAndContinueService)), Shared]
         internal sealed class CallbackDispatcher

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
-internal sealed partial class ComponentParameterDeserializer
+partial internal sealed class ComponentParameterDeserializer
 {
     private readonly ILogger<ComponentParameterDeserializer> _logger;
     private readonly ComponentParametersTypeCache _parametersCache;
@@ -110,7 +110,7 @@ internal sealed partial class ComponentParameterDeserializer
         return true;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -118,7 +118,7 @@ internal sealed partial class ComponentParameterDeserializer
             "Parameter values must be an array.",
             EventName = "ParameterValuesInvalidFormat"
         )]
-        internal static partial void ParameterValuesInvalidFormat(
+        partial internal static void ParameterValuesInvalidFormat(
             ILogger<ComponentParameterDeserializer> logger
         );
 
@@ -128,7 +128,7 @@ internal sealed partial class ComponentParameterDeserializer
             "The parameter definition for '{ParameterName}' is incomplete: Type='{TypeName}' Assembly='{Assembly}'.",
             EventName = "IncompleteParameterDefinition"
         )]
-        internal static partial void IncompleteParameterDefinition(
+        partial internal static void IncompleteParameterDefinition(
             ILogger<ComponentParameterDeserializer> logger,
             string parameterName,
             string typeName,
@@ -141,7 +141,7 @@ internal sealed partial class ComponentParameterDeserializer
             "The parameter '{ParameterName} with type '{TypeName}' in assembly '{Assembly}' could not be found.",
             EventName = "InvalidParameterType"
         )]
-        internal static partial void InvalidParameterType(
+        partial internal static void InvalidParameterType(
             ILogger<ComponentParameterDeserializer> logger,
             string parameterName,
             string typeName,
@@ -154,7 +154,7 @@ internal sealed partial class ComponentParameterDeserializer
             "Could not parse the parameter value for parameter '{Name}' of type '{TypeName}' and assembly '{Assembly}'.",
             EventName = "InvalidParameterValue"
         )]
-        internal static partial void InvalidParameterValue(
+        partial internal static void InvalidParameterValue(
             ILogger<ComponentParameterDeserializer> logger,
             string name,
             string typeName,
@@ -168,7 +168,7 @@ internal sealed partial class ComponentParameterDeserializer
             "Failed to parse the parameter definitions.",
             EventName = "FailedToParseParameterDefinitions"
         )]
-        internal static partial void FailedToParseParameterDefinitions(
+        partial internal static void FailedToParseParameterDefinitions(
             ILogger<ComponentParameterDeserializer> logger,
             Exception e
         );
@@ -179,7 +179,7 @@ internal sealed partial class ComponentParameterDeserializer
             "Failed to parse the parameter values.",
             EventName = "FailedToParseParameterValues"
         )]
-        internal static partial void FailedToParseParameterValues(
+        partial internal static void FailedToParseParameterValues(
             ILogger<ComponentParameterDeserializer> logger,
             Exception e
         );
@@ -190,7 +190,7 @@ internal sealed partial class ComponentParameterDeserializer
             "The number of parameter definitions '{DescriptorsLength}' does not match the number parameter values '{ValuesLength}'.",
             EventName = "MismatchedParameterAndDefinitions"
         )]
-        internal static partial void MismatchedParameterAndDefinitions(
+        partial internal static void MismatchedParameterAndDefinitions(
             ILogger<ComponentParameterDeserializer> logger,
             int descriptorsLength,
             int valuesLength
@@ -202,7 +202,7 @@ internal sealed partial class ComponentParameterDeserializer
             "The name is missing in a parameter definition.",
             EventName = "MissingParameterDefinitionName"
         )]
-        internal static partial void MissingParameterDefinitionName(
+        partial internal static void MissingParameterDefinitionName(
             ILogger<ComponentParameterDeserializer> logger
         );
     }

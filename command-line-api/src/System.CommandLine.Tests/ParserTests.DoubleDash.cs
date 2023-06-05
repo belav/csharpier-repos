@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.CommandLine.Tests
 {
-    public partial class ParserTests
+    partial public class ParserTests
     {
         public class DefaultDoubleDashBehavior
         {

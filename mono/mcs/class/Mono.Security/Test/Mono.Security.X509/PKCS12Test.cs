@@ -28,7 +28,7 @@ namespace MonoTests.Mono.Security.X509
     [TestFixture]
     public class PKCS12Test
     {
-        static public byte[] farscape_pfx =
+        public static byte[] farscape_pfx =
         {
             0x30,
             0x82,
@@ -1735,7 +1735,7 @@ namespace MonoTests.Mono.Security.X509
             0xF5
         };
 
-        static public byte[] farscape_nopwd_pfx =
+        public static byte[] farscape_nopwd_pfx =
         {
             0x30,
             0x82,
@@ -3442,7 +3442,7 @@ namespace MonoTests.Mono.Security.X509
             0x8C
         };
 
-        static public byte[] farscape_path_pfx =
+        public static byte[] farscape_path_pfx =
         {
             0x30,
             0x82,
@@ -6349,7 +6349,7 @@ namespace MonoTests.Mono.Security.X509
             0x11
         };
 
-        static public byte[] farscape_strong_pfx =
+        public static byte[] farscape_strong_pfx =
         {
             0x30,
             0x82,
@@ -8060,7 +8060,7 @@ namespace MonoTests.Mono.Security.X509
             0xD0
         };
 
-        static public byte[] farscape_strong_path_pfx =
+        public static byte[] farscape_strong_path_pfx =
         {
             0x30,
             0x82,
@@ -10971,7 +10971,7 @@ namespace MonoTests.Mono.Security.X509
             0xD0
         };
 
-        static public byte[] cert =
+        public static byte[] cert =
         {
             0x30,
             0x82,
@@ -11587,7 +11587,7 @@ namespace MonoTests.Mono.Security.X509
             PKCS12 p12 = new PKCS12(p12data, "farscape");
         }
 
-        static private byte[] password1 =
+        private static byte[] password1 =
         {
             0x00,
             0x73,
@@ -11600,7 +11600,7 @@ namespace MonoTests.Mono.Security.X509
             0x00,
             0x00
         }; // smeg
-        static private byte[] password2 =
+        private static byte[] password2 =
         {
             0x00,
             0x71,
@@ -11616,12 +11616,12 @@ namespace MonoTests.Mono.Security.X509
             0x00
         }; // queeg
 
-        static private byte[] salt1 = { 0x0A, 0x58, 0xCF, 0x64, 0x53, 0x0D, 0x82, 0x3F };
-        static private byte[] salt2 = { 0x64, 0x2B, 0x99, 0xAB, 0x44, 0xFB, 0x4B, 0x1F };
-        static private byte[] salt3 = { 0x3D, 0x83, 0xC0, 0xE4, 0x54, 0x6A, 0xC1, 0x40 };
-        static private byte[] salt4 = { 0x05, 0xDE, 0xC9, 0x59, 0xAC, 0xFF, 0x72, 0xF7 };
-        static private byte[] salt5 = { 0x16, 0x82, 0xC0, 0xFC, 0x5B, 0x3F, 0x7E, 0xC5 };
-        static private byte[] salt6 = { 0x26, 0x32, 0x16, 0xFC, 0xC2, 0xFA, 0xB3, 0x1C };
+        private static byte[] salt1 = { 0x0A, 0x58, 0xCF, 0x64, 0x53, 0x0D, 0x82, 0x3F };
+        private static byte[] salt2 = { 0x64, 0x2B, 0x99, 0xAB, 0x44, 0xFB, 0x4B, 0x1F };
+        private static byte[] salt3 = { 0x3D, 0x83, 0xC0, 0xE4, 0x54, 0x6A, 0xC1, 0x40 };
+        private static byte[] salt4 = { 0x05, 0xDE, 0xC9, 0x59, 0xAC, 0xFF, 0x72, 0xF7 };
+        private static byte[] salt5 = { 0x16, 0x82, 0xC0, 0xFC, 0x5B, 0x3F, 0x7E, 0xC5 };
+        private static byte[] salt6 = { 0x26, 0x32, 0x16, 0xFC, 0xC2, 0xFA, 0xB3, 0x1C };
 
         [Test]
         public void KeyGeneration_Test1()
@@ -11966,7 +11966,7 @@ namespace MonoTests.Mono.Security.X509
             return bResult;
         }
 
-        static public byte[] p12_truncated =
+        public static byte[] p12_truncated =
         {
             0x30,
             0x82,
@@ -13666,7 +13666,7 @@ namespace MonoTests.Mono.Security.X509
             Assert.AreEqual(3, p12.Keys.Count, "3");
         }
 
-        static public byte[] openssl_79617 =
+        public static byte[] openssl_79617 =
         {
             0x30,
             0x82,
@@ -15233,7 +15233,7 @@ namespace MonoTests.Mono.Security.X509
             new PKCS12(openssl_79617, String.Empty);
         }
 
-        static public byte[] DSACACert_p12 =
+        public static byte[] DSACACert_p12 =
         {
             0x30,
             0x82,
@@ -16858,7 +16858,7 @@ namespace MonoTests.Mono.Security.X509
             0x00
         };
 
-        static public byte[] DSAParametersInheritedCACert_p12 =
+        public static byte[] DSAParametersInheritedCACert_p12 =
         {
             0x30,
             0x82,
@@ -18115,7 +18115,7 @@ namespace MonoTests.Mono.Security.X509
             0x00
         };
 
-        static public byte[] InvalidDSASignatureTest6EE_p12 =
+        public static byte[] InvalidDSASignatureTest6EE_p12 =
         {
             0x30,
             0x82,
@@ -19805,7 +19805,7 @@ namespace MonoTests.Mono.Security.X509
             0x00
         };
 
-        static public byte[] ValidDSAParameterInheritanceTest5EE_p12 =
+        public static byte[] ValidDSAParameterInheritanceTest5EE_p12 =
         {
             0x30,
             0x82,
@@ -21284,7 +21284,7 @@ namespace MonoTests.Mono.Security.X509
             0x00
         };
 
-        static public byte[] ValidDSASignaturesTest4EE_p12 =
+        public static byte[] ValidDSASignaturesTest4EE_p12 =
         {
             0x30,
             0x82,
@@ -23043,7 +23043,7 @@ namespace MonoTests.Mono.Security.X509
             Assert.AreEqual(dsa, (pfx.Keys[0] as DSA).ToXmlString(true), "Key[0]");
         }
 
-        static public byte[] secret =
+        public static byte[] secret =
         {
             0x50,
             0xF7,

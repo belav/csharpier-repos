@@ -5,9 +5,10 @@ using System.Diagnostics;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Api extensions for fields that allow keeping track of field layout
 
-    public partial class FieldDesc
+    public class FieldDesc
     {
         private LayoutInt _offset = FieldAndOffset.InvalidOffset;
 

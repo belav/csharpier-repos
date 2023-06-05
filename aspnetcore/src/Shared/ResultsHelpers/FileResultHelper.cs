@@ -14,7 +14,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Internal;
 
-internal static partial class FileResultHelper
+partial internal static class FileResultHelper
 {
     private const string AcceptRangeHeaderValue = "bytes";
 
@@ -468,7 +468,7 @@ internal static partial class FileResultHelper
         return dateTimeOffset.Subtract(TimeSpan.FromTicks(ticksToRemove));
     }
 
-    internal static partial class Log
+    partial internal static class Log
     {
         [LoggerMessage(
             17,
@@ -476,7 +476,7 @@ internal static partial class FileResultHelper
             "Writing the requested range of bytes to the body.",
             EventName = "WritingRangeToBody"
         )]
-        public static partial void WritingRangeToBody(ILogger logger);
+        partial public static void WritingRangeToBody(ILogger logger);
 
         [LoggerMessage(
             34,
@@ -484,7 +484,7 @@ internal static partial class FileResultHelper
             "Current request's If-Match header check failed as the file's current etag '{CurrentETag}' does not match with any of the supplied etags.",
             EventName = "IfMatchPreconditionFailed"
         )]
-        public static partial void IfMatchPreconditionFailed(
+        partial public static void IfMatchPreconditionFailed(
             ILogger logger,
             EntityTagHeaderValue currentETag
         );
@@ -495,7 +495,7 @@ internal static partial class FileResultHelper
             "Current request's If-Unmodified-Since header check failed as the file was modified (at '{lastModified}') after the If-Unmodified-Since date '{IfUnmodifiedSinceDate}'.",
             EventName = "IfUnmodifiedSincePreconditionFailed"
         )]
-        public static partial void IfUnmodifiedSincePreconditionFailed(
+        partial public static void IfUnmodifiedSincePreconditionFailed(
             ILogger logger,
             DateTimeOffset? lastModified,
             DateTimeOffset? ifUnmodifiedSinceDate
@@ -507,7 +507,7 @@ internal static partial class FileResultHelper
             "Could not serve range as the file was modified (at {LastModified}) after the if-Range's last modified date '{IfRangeLastModified}'.",
             EventName = "IfRangeLastModifiedPreconditionFailed"
         )]
-        public static partial void IfRangeLastModifiedPreconditionFailed(
+        partial public static void IfRangeLastModifiedPreconditionFailed(
             ILogger logger,
             DateTimeOffset? lastModified,
             DateTimeOffset? IfRangeLastModified
@@ -519,7 +519,7 @@ internal static partial class FileResultHelper
             "Could not serve range as the file's current etag '{CurrentETag}' does not match the If-Range etag '{IfRangeETag}'.",
             EventName = "IfRangeETagPreconditionFailed"
         )]
-        public static partial void IfRangeETagPreconditionFailed(
+        partial public static void IfRangeETagPreconditionFailed(
             ILogger logger,
             EntityTagHeaderValue currentETag,
             EntityTagHeaderValue IfRangeETag
@@ -531,6 +531,6 @@ internal static partial class FileResultHelper
             "The file result has not been enabled for processing range requests. To enable it, set the EnableRangeProcessing property on the result to 'true'.",
             EventName = "NotEnabledForRangeProcessing"
         )]
-        public static partial void NotEnabledForRangeProcessing(ILogger logger);
+        partial public static void NotEnabledForRangeProcessing(ILogger logger);
     }
 }

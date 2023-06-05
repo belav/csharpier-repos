@@ -4,7 +4,7 @@
 #if MOBILE
 namespace System.Data.Common
 {
-    public static partial class DbProviderFactories
+    partial public static class DbProviderFactories
     {
         public static System.Data.Common.DbProviderFactory GetFactory(
             System.Data.Common.DbConnection connection

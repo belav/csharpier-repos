@@ -5,7 +5,7 @@ using ILCompiler.DependencyAnalysis.ARM;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public partial class TentativeMethodNode
+    partial public class TentativeMethodNode
     {
         protected override void EmitCode(
             NodeFactory factory,

@@ -11,7 +11,7 @@ using Xunit.Sdk;
 
 namespace System.IO.Tests
 {
-    public partial class File_NotifyFilter_Tests : FileSystemWatcherTest
+    partial public class File_NotifyFilter_Tests : FileSystemWatcherTest
     {
         [LibraryImport(
             "advapi32.dll",
@@ -19,7 +19,7 @@ namespace System.IO.Tests
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial uint SetSecurityInfoByHandle(
+        partial private static uint SetSecurityInfoByHandle(
             string name,
             uint objectType,
             uint securityInformation,

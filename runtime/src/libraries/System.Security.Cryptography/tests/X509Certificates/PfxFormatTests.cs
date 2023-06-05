@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.X509Certificates.Tests
 {
-    public abstract partial class PfxFormatTests
+    partial public abstract class PfxFormatTests
     {
         // Use a MAC count of 1 because we're not persisting things, and the password
         // is with the test... just save some CPU cycles.

@@ -4,22 +4,22 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_SchedSetAffinity",
             SetLastError = true
         )]
-        internal static partial int SchedSetAffinity(int pid, ref IntPtr mask);
+        partial internal static int SchedSetAffinity(int pid, ref IntPtr mask);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_SchedGetAffinity",
             SetLastError = true
         )]
-        internal static partial int SchedGetAffinity(int pid, out IntPtr mask);
+        partial internal static int SchedGetAffinity(int pid, out IntPtr mask);
     }
 }

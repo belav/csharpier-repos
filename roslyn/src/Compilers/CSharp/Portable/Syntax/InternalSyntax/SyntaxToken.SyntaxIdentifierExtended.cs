@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class SyntaxToken
+    partial internal class SyntaxToken
     {
         internal class SyntaxIdentifierExtended : SyntaxIdentifier
         {

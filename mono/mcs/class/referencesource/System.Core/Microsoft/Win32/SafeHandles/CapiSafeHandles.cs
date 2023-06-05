@@ -181,7 +181,7 @@ namespace Microsoft.Win32.SafeHandles
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        protected override sealed bool ReleaseHandle()
+        protected sealed override bool ReleaseHandle()
         {
             // Order is important here - we must destroy the child handle before the parent CSP
             bool destroyedChild = ReleaseCapiChildHandle();

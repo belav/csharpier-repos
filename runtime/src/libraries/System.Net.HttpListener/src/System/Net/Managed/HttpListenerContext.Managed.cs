@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-    public sealed unsafe partial class HttpListenerContext
+    partial public sealed unsafe class HttpListenerContext
     {
         private HttpConnection _connection;
 

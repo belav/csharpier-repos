@@ -34,7 +34,7 @@ namespace System.Reflection.Metadata
         // System.Runtime.Loader netstandard typeforwarders dependency
         //
         [CLSCompliant(false)]
-        public unsafe static bool TryGetRawMetadata(
+        public static unsafe bool TryGetRawMetadata(
             this System.Reflection.Assembly assembly,
             out byte* blob,
             out int length

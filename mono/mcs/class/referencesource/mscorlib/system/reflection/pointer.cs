@@ -26,7 +26,7 @@ namespace System.Reflection
     public sealed class Pointer : ISerializable
     {
         [SecurityCritical]
-        unsafe private void* _ptr;
+        private unsafe void* _ptr;
         private RuntimeType _ptrType;
 
         private Pointer() { }

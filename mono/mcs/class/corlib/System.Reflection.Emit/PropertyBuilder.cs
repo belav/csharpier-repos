@@ -84,7 +84,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class PropertyBuilder : PropertyInfo
+    partial public sealed class PropertyBuilder : PropertyInfo
     {
         // Managed version of MonoReflectionPropertyBuilder
 #pragma warning disable 169, 414

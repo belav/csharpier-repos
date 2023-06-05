@@ -6,10 +6,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Pipes
 {
+    partial
     /// <summary>
     /// Anonymous pipe server stream
     /// </summary>
-    public sealed partial class AnonymousPipeServerStream : PipeStream
+    public sealed class AnonymousPipeServerStream : PipeStream
     {
         // Creates the anonymous pipe.
         private void Create(

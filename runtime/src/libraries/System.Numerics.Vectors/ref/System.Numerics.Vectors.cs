@@ -6,7 +6,7 @@
 
 namespace System.Numerics
 {
-    public partial struct Matrix3x2 : System.IEquatable<System.Numerics.Matrix3x2>
+    partial public struct Matrix3x2 : System.IEquatable<System.Numerics.Matrix3x2>
     {
         public float M11;
         public float M12;
@@ -251,7 +251,7 @@ namespace System.Numerics
         }
     }
 
-    public partial struct Matrix4x4 : System.IEquatable<System.Numerics.Matrix4x4>
+    partial public struct Matrix4x4 : System.IEquatable<System.Numerics.Matrix4x4>
     {
         public float M11;
         public float M12;
@@ -702,7 +702,7 @@ namespace System.Numerics
         }
     }
 
-    public partial struct Plane : System.IEquatable<System.Numerics.Plane>
+    partial public struct Plane : System.IEquatable<System.Numerics.Plane>
     {
         public System.Numerics.Vector3 Normal;
         public float D;
@@ -803,7 +803,7 @@ namespace System.Numerics
         }
     }
 
-    public partial struct Quaternion : System.IEquatable<System.Numerics.Quaternion>
+    partial public struct Quaternion : System.IEquatable<System.Numerics.Quaternion>
     {
         public float X;
         public float Y;
@@ -1050,7 +1050,7 @@ namespace System.Numerics
         }
     }
 
-    public static partial class Vector
+    partial public static class Vector
     {
         public static bool IsHardwareAccelerated
         {
@@ -2265,7 +2265,7 @@ namespace System.Numerics
         }
     }
 
-    public partial struct Vector2 : System.IEquatable<System.Numerics.Vector2>, System.IFormattable
+    partial public struct Vector2 : System.IEquatable<System.Numerics.Vector2>, System.IFormattable
     {
         public float X;
         public float Y;
@@ -2598,7 +2598,7 @@ namespace System.Numerics
         }
     }
 
-    public partial struct Vector3 : System.IEquatable<System.Numerics.Vector3>, System.IFormattable
+    partial public struct Vector3 : System.IEquatable<System.Numerics.Vector3>, System.IFormattable
     {
         public float X;
         public float Y;
@@ -2933,7 +2933,7 @@ namespace System.Numerics
         }
     }
 
-    public partial struct Vector4 : System.IEquatable<System.Numerics.Vector4>, System.IFormattable
+    partial public struct Vector4 : System.IEquatable<System.Numerics.Vector4>, System.IFormattable
     {
         public float X;
         public float Y;
@@ -3286,7 +3286,7 @@ namespace System.Numerics
         }
     }
 
-    public readonly partial struct Vector<T>
+    partial public readonly struct Vector<T>
         : System.IEquatable<System.Numerics.Vector<T>>,
             System.IFormattable
         where T : struct

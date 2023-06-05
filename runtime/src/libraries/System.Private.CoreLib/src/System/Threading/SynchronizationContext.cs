@@ -3,7 +3,7 @@
 
 namespace System.Threading
 {
-    public partial class SynchronizationContext
+    partial public class SynchronizationContext
     {
         private bool _requireWaitNotification;
 

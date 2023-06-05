@@ -7,8 +7,9 @@ using System.Globalization;
 
 namespace System.Reflection.Context.Virtual
 {
+    partial
     // Provides the base class for func-based properties and indexers
-    internal abstract partial class VirtualPropertyBase : PropertyInfo
+    internal abstract class VirtualPropertyBase : PropertyInfo
     {
         private readonly string _name;
         private readonly Type _propertyType;

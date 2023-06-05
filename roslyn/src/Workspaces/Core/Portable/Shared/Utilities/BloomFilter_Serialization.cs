@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial class BloomFilter : IObjectWritable
+    partial internal class BloomFilter : IObjectWritable
     {
         private const string SerializationFormat = "2";
 

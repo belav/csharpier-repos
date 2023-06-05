@@ -13,7 +13,7 @@ using TOption = Microsoft.CodeAnalysis.Options.IOption;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal static partial class AnalyzerHelper
+    partial internal static class AnalyzerHelper
     {
         public static T GetOption<T>(this SemanticModelAnalysisContext context, Option2<T> option)
         {

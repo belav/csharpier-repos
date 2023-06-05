@@ -10,12 +10,13 @@ using Microsoft.CSharp.RuntimeBinder.Syntax;
 
 namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
+    partial
     // ----------------------------------------------------------------------------
     // This class takes an EXPRMEMGRP and a set of arguments and binds the arguments
     // to the best applicable method in the group.
     // ----------------------------------------------------------------------------
 
-    internal readonly partial struct ExpressionBinder
+    internal readonly struct ExpressionBinder
     {
         internal sealed class GroupToArgsBinder
         {

@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.Differencing
 {
-    public sealed partial class Match<TNode>
+    partial public sealed class Match<TNode>
     {
         private const double ExactMatchDistance = 0.0;
         private const double EpsilonDistance = 0.00001;

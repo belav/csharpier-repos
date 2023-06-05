@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NtDll
+    partial internal static class NtDll
     {
         // https://msdn.microsoft.com/en-us/library/windows/hardware/ff550671.aspx
         [StructLayout(LayoutKind.Sequential)]

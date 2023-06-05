@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectBrowser
 {
-    internal abstract partial class AbstractObjectBrowserLibraryManager
+    partial internal abstract class AbstractObjectBrowserLibraryManager
     {
         internal bool TryFillDescription(
             ObjectListItem listItem,

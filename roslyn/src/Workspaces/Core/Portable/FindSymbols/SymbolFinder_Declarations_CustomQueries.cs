@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
+    partial
     // Logic related to finding declarations with a completely custom predicate goes here.
     // Completely custom predicates can not be optimized in any way as there is no way to
     // tell what the predicate will return true for.
@@ -20,7 +21,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     // Also, because we have no control over these predicates, we cannot remote these queries
     // over to the OOP process.
 
-    public static partial class SymbolFinder
+    public static class SymbolFinder
     {
         /// <summary>
         /// Find the symbols for declarations made in source with a matching name.

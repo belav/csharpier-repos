@@ -6,7 +6,7 @@
 
 namespace System.Text.RegularExpressions
 {
-    public partial class Capture
+    partial public class Capture
     {
         internal Capture() { }
 
@@ -33,7 +33,7 @@ namespace System.Text.RegularExpressions
         }
     }
 
-    public partial class CaptureCollection
+    partial public class CaptureCollection
         : System.Collections.Generic.ICollection<System.Text.RegularExpressions.Capture>,
             System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Capture>,
             System.Collections.Generic.IList<System.Text.RegularExpressions.Capture>,
@@ -154,7 +154,7 @@ namespace System.Text.RegularExpressions
         void System.Collections.IList.RemoveAt(int index) { }
     }
 
-    public partial class Group : System.Text.RegularExpressions.Capture
+    partial public class Group : System.Text.RegularExpressions.Capture
     {
         internal Group() { }
 
@@ -179,7 +179,7 @@ namespace System.Text.RegularExpressions
         }
     }
 
-    public partial class GroupCollection
+    partial public class GroupCollection
         : System.Collections.Generic.ICollection<System.Text.RegularExpressions.Group>,
             System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
                 string,
@@ -349,7 +349,7 @@ namespace System.Text.RegularExpressions
         }
     }
 
-    public partial class Match : System.Text.RegularExpressions.Group
+    partial public class Match : System.Text.RegularExpressions.Group
     {
         internal Match() { }
 
@@ -380,7 +380,7 @@ namespace System.Text.RegularExpressions
         }
     }
 
-    public partial class MatchCollection
+    partial public class MatchCollection
         : System.Collections.Generic.ICollection<System.Text.RegularExpressions.Match>,
             System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Match>,
             System.Collections.Generic.IList<System.Text.RegularExpressions.Match>,
@@ -503,7 +503,7 @@ namespace System.Text.RegularExpressions
 
     public delegate string MatchEvaluator(System.Text.RegularExpressions.Match match);
 
-    public partial class Regex : System.Runtime.Serialization.ISerializable
+    partial public class Regex : System.Runtime.Serialization.ISerializable
     {
         protected internal System.Collections.Hashtable? capnames;
         protected internal System.Collections.Hashtable? caps;
@@ -1122,7 +1122,7 @@ namespace System.Text.RegularExpressions
 
         protected internal static void ValidateMatchTimeout(System.TimeSpan matchTimeout) { }
 
-        public ref partial struct ValueMatchEnumerator
+        ref partial public struct ValueMatchEnumerator
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -1148,7 +1148,7 @@ namespace System.Text.RegularExpressions
         DiagnosticId = "SYSLIB0036",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public partial class RegexCompilationInfo
+    partial public class RegexCompilationInfo
     {
         public RegexCompilationInfo(
             string pattern,
@@ -1204,7 +1204,7 @@ namespace System.Text.RegularExpressions
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class GeneratedRegexAttribute : System.Attribute
+    partial public sealed class GeneratedRegexAttribute : System.Attribute
     {
         public GeneratedRegexAttribute(
             [System.Diagnostics.CodeAnalysis.StringSyntax(
@@ -1259,7 +1259,7 @@ namespace System.Text.RegularExpressions
         public int MatchTimeoutMilliseconds { get; }
     }
 
-    public partial class RegexMatchTimeoutException
+    partial public class RegexMatchTimeoutException
         : System.TimeoutException,
             System.Runtime.Serialization.ISerializable
     {
@@ -1351,7 +1351,7 @@ namespace System.Text.RegularExpressions
         UnrecognizedUnicodeProperty = 31,
     }
 
-    public sealed partial class RegexParseException : System.ArgumentException
+    partial public sealed class RegexParseException : System.ArgumentException
     {
         private RegexParseException() { }
 
@@ -1370,7 +1370,7 @@ namespace System.Text.RegularExpressions
         ) { }
     }
 
-    public abstract partial class RegexRunner
+    partial public abstract class RegexRunner
     {
         protected internal int[]? runcrawl;
         protected internal int runcrawlpos;
@@ -1500,14 +1500,14 @@ namespace System.Text.RegularExpressions
         protected void Uncapture() { }
     }
 
-    public abstract partial class RegexRunnerFactory
+    partial public abstract class RegexRunnerFactory
     {
         protected RegexRunnerFactory() { }
 
         protected internal abstract System.Text.RegularExpressions.RegexRunner CreateInstance();
     }
 
-    public readonly ref partial struct ValueMatch
+    ref partial public readonly struct ValueMatch
     {
         private readonly int _dummyPrimitive;
         public int Index

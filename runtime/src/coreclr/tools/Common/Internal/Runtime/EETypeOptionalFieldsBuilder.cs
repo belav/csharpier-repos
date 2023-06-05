@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Internal.Runtime
 {
-    internal sealed unsafe partial class EETypeOptionalFieldsBuilder
+    partial internal sealed unsafe class EETypeOptionalFieldsBuilder
     {
         private NativePrimitiveEncoder _encoder;
         private OptionalField[] _rgFields = new OptionalField[(int)EETypeOptionalFieldTag.Count];

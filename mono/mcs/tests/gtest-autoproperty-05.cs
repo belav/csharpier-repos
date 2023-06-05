@@ -1,6 +1,6 @@
 partial class Test { }
 
-abstract partial class Test
+partial abstract class Test
 {
     public string X { get; set; }
 }

@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class SspiCli
+    partial internal static class SspiCli
     {
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct TOKEN_SOURCE
         {
-            internal fixed byte SourceName[TOKEN_SOURCE_LENGTH];
+            fixed internal byte SourceName[TOKEN_SOURCE_LENGTH];
             internal LUID SourceIdentifier;
 
             internal const int TOKEN_SOURCE_LENGTH = 8;

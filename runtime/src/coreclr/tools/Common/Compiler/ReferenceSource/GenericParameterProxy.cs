@@ -5,7 +5,7 @@ using Mono.Cecil;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct GenericParameterProxy
+    partial internal readonly struct GenericParameterProxy
     {
         public GenericParameterProxy(GenericParameter genericParameter) =>
             GenericParameter = genericParameter;
@@ -13,7 +13,7 @@ namespace ILLink.Shared.TypeSystemProxy
         public static implicit operator GenericParameterProxy(GenericParameter genericParameter) =>
             new(genericParameter);
 
-        internal partial bool HasDefaultConstructorConstraint() =>
+        partial internal bool HasDefaultConstructorConstraint() =>
             GenericParameter.HasDefaultConstructorConstraint;
 
         public readonly GenericParameter GenericParameter;

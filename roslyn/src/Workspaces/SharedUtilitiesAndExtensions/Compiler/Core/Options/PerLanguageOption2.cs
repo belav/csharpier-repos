@@ -17,11 +17,12 @@ namespace Microsoft.CodeAnalysis.Options
     /// <inheritdoc cref="IPerLanguageValuedOption"/>
     internal interface IPerLanguageValuedOption<T> : IPerLanguageValuedOption { }
 
+    partial
     /// <summary>
     /// An option that can be specified once per language.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal partial class PerLanguageOption2<T> : IPerLanguageValuedOption<T>
+    internal class PerLanguageOption2<T> : IPerLanguageValuedOption<T>
     {
         public OptionDefinition<T> Definition { get; }
         public IPublicOption? PublicOption { get; }

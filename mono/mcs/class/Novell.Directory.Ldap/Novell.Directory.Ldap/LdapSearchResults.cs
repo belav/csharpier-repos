@@ -43,6 +43,7 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     public class LdapSearchResults
     {
+        public
         /// <summary> Returns a count of the items in the search result.
         ///
         /// Returns a count of the entries and exceptions remaining in the object.
@@ -55,7 +56,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> The number of items received but not retrieved by the application
         /// </returns>
-        virtual public int Count
+        virtual int Count
         {
             get
             {
@@ -64,6 +65,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the latest server controls returned by the server
         /// in the context of this search request, or null
         /// if no server controls were returned.
@@ -72,7 +74,7 @@ namespace Novell.Directory.Ldap
         /// <returns> The server controls returned with the search request, or null
         /// if none were returned.
         /// </returns>
-        virtual public LdapControl[] ResponseControls
+        virtual LdapControl[] ResponseControls
         {
             get { return controls; }
         }

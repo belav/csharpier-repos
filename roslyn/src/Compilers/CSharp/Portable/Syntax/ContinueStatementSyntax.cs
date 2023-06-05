@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ContinueStatementSyntax
+    partial public class ContinueStatementSyntax
     {
         public ContinueStatementSyntax Update(
             SyntaxToken continueKeyword,
@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static ContinueStatementSyntax ContinueStatement(
             SyntaxToken continueKeyword,

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectBrowser
 {
-    internal abstract partial class AbstractObjectBrowserLibraryManager
+    partial internal abstract class AbstractObjectBrowserLibraryManager
     {
         internal void CollectMemberListItems(
             IAssemblySymbol assemblySymbol,

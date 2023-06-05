@@ -8,12 +8,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
+    partial
     /// <summary>
     /// this provides information about the syntax tree formatting service is formatting.
     /// this provides necessary abstraction between different kinds of syntax trees so that ones that contain
     /// actual text or cache can answer queries more efficiently.
     /// </summary>
-    internal abstract partial class TreeData
+    internal abstract class TreeData
     {
         public static TreeData Create(SyntaxNode root)
         {

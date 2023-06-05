@@ -172,7 +172,7 @@ namespace Microsoft.CodeAnalysis.Rename
         }
     }
 
-    internal partial class LightweightRenameLocations
+    partial internal class LightweightRenameLocations
     {
         public SerializableRenameLocations Dehydrate() =>
             new(
@@ -183,7 +183,7 @@ namespace Microsoft.CodeAnalysis.Rename
             );
     }
 
-    internal partial class SymbolicRenameLocations
+    partial internal class SymbolicRenameLocations
     {
         internal static async Task<SymbolicRenameLocations?> TryRehydrateAsync(
             ISymbol symbol,
@@ -398,7 +398,7 @@ namespace Microsoft.CodeAnalysis.Rename
         }
     }
 
-    internal partial struct ConflictResolution
+    partial internal struct ConflictResolution
     {
         public async Task<SerializableConflictResolution> DehydrateAsync(
             CancellationToken cancellationToken

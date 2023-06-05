@@ -7,7 +7,7 @@ namespace System.Data.Odbc
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public static partial class ODBC32
+    partial public static class ODBC32
     {
         // from .\public\sdk\inc\sqlext.h: and .\public\sdk\inc\sql.h
         // must be public because it is serialized by OdbcException

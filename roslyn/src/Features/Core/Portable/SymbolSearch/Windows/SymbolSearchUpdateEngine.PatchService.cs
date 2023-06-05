@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.SymbolSearch
 {
-    internal partial class SymbolSearchUpdateEngine
+    partial internal class SymbolSearchUpdateEngine
     {
         private class PatchService : IPatchService
         {

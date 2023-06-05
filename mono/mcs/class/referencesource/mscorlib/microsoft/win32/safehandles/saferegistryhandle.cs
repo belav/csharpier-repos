@@ -37,13 +37,15 @@ namespace Microsoft.Win32.SafeHandles
         }
 
 #if MOBILE
-        override protected bool ReleaseHandle()
+        protected
+#if MOBILE
+        override bool ReleaseHandle()
         {
             return true;
         }
 #else
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return (RegCloseKey(handle) == Win32Native.ERROR_SUCCESS);
         }

@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Imaging.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal partial class AnalyzerItem : BaseItem
+    partial internal class AnalyzerItem : BaseItem
     {
         private readonly AnalyzersFolderItem _analyzersFolder;
         private readonly AnalyzerReference _analyzerReference;

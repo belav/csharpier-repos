@@ -1,9 +1,10 @@
+partial
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         /// <summary>
         /// Type of the storage element. Used with <see cref="STATSTG"/>.

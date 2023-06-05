@@ -24,7 +24,7 @@ using Internal.Reflection.Extensions.NonPortable;
 
 namespace System.Reflection.Runtime.Assemblies
 {
-    internal partial class RuntimeAssemblyInfo
+    partial internal class RuntimeAssemblyInfo
     {
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
@@ -58,7 +58,7 @@ namespace System.Reflection.Runtime.Assemblies
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal abstract partial class RuntimeConstructorInfo
+    partial internal abstract class RuntimeConstructorInfo
     {
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
@@ -94,7 +94,7 @@ namespace System.Reflection.Runtime.MethodInfos
 
 namespace System.Reflection.Runtime.EventInfos
 {
-    internal abstract partial class RuntimeEventInfo
+    partial internal abstract class RuntimeEventInfo
     {
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
@@ -130,7 +130,7 @@ namespace System.Reflection.Runtime.EventInfos
 
 namespace System.Reflection.Runtime.FieldInfos
 {
-    internal abstract partial class RuntimeFieldInfo
+    partial internal abstract class RuntimeFieldInfo
     {
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
@@ -166,7 +166,7 @@ namespace System.Reflection.Runtime.FieldInfos
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal abstract partial class RuntimeMethodInfo
+    partial internal abstract class RuntimeMethodInfo
     {
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
@@ -202,7 +202,7 @@ namespace System.Reflection.Runtime.MethodInfos
 
 namespace System.Reflection.Runtime.Modules
 {
-    internal abstract partial class RuntimeModule
+    partial internal abstract class RuntimeModule
     {
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
@@ -236,7 +236,7 @@ namespace System.Reflection.Runtime.Modules
 
 namespace System.Reflection.Runtime.ParameterInfos
 {
-    internal abstract partial class RuntimeParameterInfo
+    partial internal abstract class RuntimeParameterInfo
     {
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
@@ -272,7 +272,7 @@ namespace System.Reflection.Runtime.ParameterInfos
 
 namespace System.Reflection.Runtime.PropertyInfos
 {
-    internal abstract partial class RuntimePropertyInfo
+    partial internal abstract class RuntimePropertyInfo
     {
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
@@ -308,7 +308,7 @@ namespace System.Reflection.Runtime.PropertyInfos
 
 namespace System.Reflection.Runtime.TypeInfos
 {
-    internal abstract partial class RuntimeTypeInfo
+    partial internal abstract class RuntimeTypeInfo
     {
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();

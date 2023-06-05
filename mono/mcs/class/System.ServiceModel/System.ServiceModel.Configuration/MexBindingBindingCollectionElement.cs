@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public abstract partial class MexBindingBindingCollectionElement<
+    partial public abstract class MexBindingBindingCollectionElement<
         TStandardBinding,
         TBindingConfiguration
     > : StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>

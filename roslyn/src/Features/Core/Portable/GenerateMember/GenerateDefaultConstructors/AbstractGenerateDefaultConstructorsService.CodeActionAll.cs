@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
 {
-    internal abstract partial class AbstractGenerateDefaultConstructorsService<TService>
+    partial internal abstract class AbstractGenerateDefaultConstructorsService<TService>
     {
         private class CodeActionAll : AbstractCodeAction
         {

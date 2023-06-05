@@ -55,7 +55,11 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// <summary>
         /// Generates new encryption keys based on given seed
         /// </summary>
-        static public byte[] GenerateKeys(byte[] seed)
+        public
+        /// <summary>
+        /// Generates new encryption keys based on given seed
+        /// </summary>
+        static byte[] GenerateKeys(byte[] seed)
         {
             if (seed == null)
             {

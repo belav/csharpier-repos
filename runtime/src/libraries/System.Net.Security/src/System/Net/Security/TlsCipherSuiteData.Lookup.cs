@@ -12,7 +12,7 @@ using System.Security.Authentication;
 
 namespace System.Net.Security
 {
-    internal partial struct TlsCipherSuiteData
+    partial internal struct TlsCipherSuiteData
     {
         private const int LookupCount = 337;
 

@@ -5,10 +5,11 @@ using System.Reflection;
 
 namespace System.Runtime.Serialization
 {
+    partial
     /// <summary>
     /// Provides access to portions of the Serialization Guard APIs since they're not publicly exposed via contracts.
     /// </summary>
-    internal static partial class SerializationGuard
+    internal static class SerializationGuard
     {
         private delegate void ThrowIfDeserializationInProgressWithSwitchDel(
             string switchName,

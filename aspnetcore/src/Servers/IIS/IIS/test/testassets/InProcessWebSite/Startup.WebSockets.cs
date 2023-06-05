@@ -19,7 +19,7 @@ using Xunit;
 
 namespace TestSite;
 
-public partial class Startup
+partial public class Startup
 {
     private void WebSocketNotUpgradable(IApplicationBuilder app)
     {

@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Internal.TypeSystem
 {
-    internal sealed partial class InstantiatedGenericParameter : GenericParameterDesc
+    partial internal sealed class InstantiatedGenericParameter : GenericParameterDesc
     {
         private readonly GenericParameterDesc _genericParam;
         private Instantiation _typeInstantiation;

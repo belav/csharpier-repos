@@ -5,7 +5,7 @@ using Internal.TypeSystem;
 
 namespace ILCompiler
 {
-    public partial class CompilationModuleGroup : IInliningPolicy
+    partial public class CompilationModuleGroup : IInliningPolicy
     {
         /// <summary>
         /// If true, type dictionary of "type" is in the module to be compiled

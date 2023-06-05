@@ -17,6 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
 {
+    partial
     /// The passing of the data model between the queues starts with _computeDataModelQueue which flows into _filterAndSortDataModelQueue which
     /// will then flow into _highlightExpandAndPresentItemsQueue.
 
@@ -24,7 +25,7 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
     /// Work is added to the _filterAndSortDataModelQueue when the user performs a sort or search operation.
     /// Work is added to the _highlightExpandAndPresentItemsQueue when the user moves the caret around or expands/collapses all nodes.
 
-    internal partial class DocumentOutlineControl
+    internal class DocumentOutlineControl
     {
         /// <summary>
         /// Enqueues a new task to compute the data model.

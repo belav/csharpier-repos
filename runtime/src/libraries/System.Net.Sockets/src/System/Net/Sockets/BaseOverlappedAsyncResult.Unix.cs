@@ -10,11 +10,12 @@ using Microsoft.Win32;
 
 namespace System.Net.Sockets
 {
+    partial
     // BaseOverlappedAsyncResult
     //
     // This class is used to track state for async Socket operations such as the BeginSend, BeginSendTo,
     // BeginReceive, BeginReceiveFrom, BeginSendFile, and BeginAccept calls.
-    internal partial class BaseOverlappedAsyncResult : ContextAwareResult
+    internal class BaseOverlappedAsyncResult : ContextAwareResult
     {
         public BaseOverlappedAsyncResult(
             Socket socket,

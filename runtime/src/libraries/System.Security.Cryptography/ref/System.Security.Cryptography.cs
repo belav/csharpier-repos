@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public abstract partial class SafeNCryptHandle
+    partial public abstract class SafeNCryptHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -28,7 +28,7 @@ namespace Microsoft.Win32.SafeHandles
         protected abstract bool ReleaseNativeHandle();
     }
 
-    public sealed partial class SafeNCryptKeyHandle : Microsoft.Win32.SafeHandles.SafeNCryptHandle
+    partial public sealed class SafeNCryptKeyHandle : Microsoft.Win32.SafeHandles.SafeNCryptHandle
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public SafeNCryptKeyHandle() { }
@@ -45,7 +45,7 @@ namespace Microsoft.Win32.SafeHandles
         }
     }
 
-    public sealed partial class SafeNCryptProviderHandle
+    partial public sealed class SafeNCryptProviderHandle
         : Microsoft.Win32.SafeHandles.SafeNCryptHandle
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -57,7 +57,7 @@ namespace Microsoft.Win32.SafeHandles
         }
     }
 
-    public sealed partial class SafeNCryptSecretHandle
+    partial public sealed class SafeNCryptSecretHandle
         : Microsoft.Win32.SafeHandles.SafeNCryptHandle
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
@@ -69,7 +69,7 @@ namespace Microsoft.Win32.SafeHandles
         }
     }
 
-    public sealed partial class SafeX509ChainHandle
+    partial public sealed class SafeX509ChainHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeX509ChainHandle()
@@ -86,7 +86,7 @@ namespace Microsoft.Win32.SafeHandles
 
 namespace System.Security.Cryptography
 {
-    public abstract partial class Aes : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class Aes : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected Aes() { }
 
@@ -113,7 +113,7 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public sealed partial class AesCcm : System.IDisposable
+    partial public sealed class AesCcm : System.IDisposable
     {
         public AesCcm(byte[] key) { }
 
@@ -167,7 +167,7 @@ namespace System.Security.Cryptography
         ) { }
     }
 
-    public sealed partial class AesCng : System.Security.Cryptography.Aes
+    partial public sealed class AesCng : System.Security.Cryptography.Aes
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public AesCng() { }
@@ -303,7 +303,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class AesCryptoServiceProvider : System.Security.Cryptography.Aes
+    partial public sealed class AesCryptoServiceProvider : System.Security.Cryptography.Aes
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public AesCryptoServiceProvider() { }
@@ -388,7 +388,7 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public sealed partial class AesGcm : System.IDisposable
+    partial public sealed class AesGcm : System.IDisposable
     {
         public AesGcm(byte[] key) { }
 
@@ -451,7 +451,7 @@ namespace System.Security.Cryptography
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public sealed partial class AesManaged : System.Security.Cryptography.Aes
+    partial public sealed class AesManaged : System.Security.Cryptography.Aes
     {
         public AesManaged() { }
 
@@ -532,7 +532,7 @@ namespace System.Security.Cryptography
         public override void GenerateKey() { }
     }
 
-    public partial class AsnEncodedData
+    partial public class AsnEncodedData
     {
         protected AsnEncodedData() { }
 
@@ -572,7 +572,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class AsnEncodedDataCollection
+    partial public sealed class AsnEncodedDataCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -620,7 +620,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class AsnEncodedDataEnumerator : System.Collections.IEnumerator
+    partial public sealed class AsnEncodedDataEnumerator : System.Collections.IEnumerator
     {
         internal AsnEncodedDataEnumerator() { }
 
@@ -641,7 +641,7 @@ namespace System.Security.Cryptography
         public void Reset() { }
     }
 
-    public abstract partial class AsymmetricAlgorithm : System.IDisposable
+    partial public abstract class AsymmetricAlgorithm : System.IDisposable
     {
         protected int KeySizeValue;
 
@@ -872,7 +872,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class AsymmetricKeyExchangeDeformatter
+    partial public abstract class AsymmetricKeyExchangeDeformatter
     {
         protected AsymmetricKeyExchangeDeformatter() { }
 
@@ -881,7 +881,7 @@ namespace System.Security.Cryptography
         public abstract void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key);
     }
 
-    public abstract partial class AsymmetricKeyExchangeFormatter
+    partial public abstract class AsymmetricKeyExchangeFormatter
     {
         protected AsymmetricKeyExchangeFormatter() { }
 
@@ -891,7 +891,7 @@ namespace System.Security.Cryptography
         public abstract void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key);
     }
 
-    public abstract partial class AsymmetricSignatureDeformatter
+    partial public abstract class AsymmetricSignatureDeformatter
     {
         protected AsymmetricSignatureDeformatter() { }
 
@@ -908,7 +908,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class AsymmetricSignatureFormatter
+    partial public abstract class AsymmetricSignatureFormatter
     {
         protected AsymmetricSignatureFormatter() { }
 
@@ -923,7 +923,7 @@ namespace System.Security.Cryptography
         public abstract void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key);
     }
 
-    public sealed partial class AuthenticationTagMismatchException
+    partial public sealed class AuthenticationTagMismatchException
         : System.Security.Cryptography.CryptographicException
     {
         public AuthenticationTagMismatchException() { }
@@ -936,7 +936,7 @@ namespace System.Security.Cryptography
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public sealed partial class ChaCha20Poly1305 : System.IDisposable
+    partial public sealed class ChaCha20Poly1305 : System.IDisposable
     {
         public ChaCha20Poly1305(byte[] key) { }
 
@@ -995,7 +995,7 @@ namespace System.Security.Cryptography
         CTS = 5,
     }
 
-    public sealed partial class CngAlgorithm
+    partial public sealed class CngAlgorithm
         : System.IEquatable<System.Security.Cryptography.CngAlgorithm>
     {
         public CngAlgorithm(string algorithm) { }
@@ -1103,7 +1103,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class CngAlgorithmGroup
+    partial public sealed class CngAlgorithmGroup
         : System.IEquatable<System.Security.Cryptography.CngAlgorithmGroup>
     {
         public CngAlgorithmGroup(string algorithmGroup) { }
@@ -1185,7 +1185,7 @@ namespace System.Security.Cryptography
         AllowPlaintextArchiving = 8,
     }
 
-    public sealed partial class CngKey : System.IDisposable
+    partial public sealed class CngKey : System.IDisposable
     {
         internal CngKey() { }
 
@@ -1377,7 +1377,7 @@ namespace System.Security.Cryptography
         public void SetProperty(System.Security.Cryptography.CngProperty property) { }
     }
 
-    public sealed partial class CngKeyBlobFormat
+    partial public sealed class CngKeyBlobFormat
         : System.IEquatable<System.Security.Cryptography.CngKeyBlobFormat>
     {
         public CngKeyBlobFormat(string format) { }
@@ -1469,7 +1469,7 @@ namespace System.Security.Cryptography
         OverwriteExistingKey = 128,
     }
 
-    public sealed partial class CngKeyCreationParameters
+    partial public sealed class CngKeyCreationParameters
     {
         public CngKeyCreationParameters() { }
 
@@ -1535,7 +1535,7 @@ namespace System.Security.Cryptography
         AllUsages = 16777215,
     }
 
-    public partial struct CngProperty : System.IEquatable<System.Security.Cryptography.CngProperty>
+    partial public struct CngProperty : System.IEquatable<System.Security.Cryptography.CngProperty>
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -1597,7 +1597,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class CngPropertyCollection
+    partial public sealed class CngPropertyCollection
         : System.Collections.ObjectModel.Collection<System.Security.Cryptography.CngProperty>
     {
         public CngPropertyCollection() { }
@@ -1611,7 +1611,7 @@ namespace System.Security.Cryptography
         CustomProperty = 1073741824,
     }
 
-    public sealed partial class CngProvider
+    partial public sealed class CngProvider
         : System.IEquatable<System.Security.Cryptography.CngProvider>
     {
         public CngProvider(string provider) { }
@@ -1675,7 +1675,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class CngUIPolicy
+    partial public sealed class CngUIPolicy
     {
         public CngUIPolicy(System.Security.Cryptography.CngUIProtectionLevels protectionLevel) { }
 
@@ -1735,7 +1735,7 @@ namespace System.Security.Cryptography
         ForceHighProtection = 2,
     }
 
-    public partial class CryptoConfig
+    partial public class CryptoConfig
     {
         public CryptoConfig() { }
 
@@ -1784,7 +1784,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public static partial class CryptographicOperations
+    partial public static class CryptographicOperations
     {
         public static bool FixedTimeEquals(
             System.ReadOnlySpan<byte> left,
@@ -1797,7 +1797,7 @@ namespace System.Security.Cryptography
         public static void ZeroMemory(System.Span<byte> buffer) { }
     }
 
-    public partial class CryptographicUnexpectedOperationException
+    partial public class CryptographicUnexpectedOperationException
         : System.Security.Cryptography.CryptographicException
     {
         public CryptographicUnexpectedOperationException() { }
@@ -1815,7 +1815,7 @@ namespace System.Security.Cryptography
         public CryptographicUnexpectedOperationException(string format, string? insert) { }
     }
 
-    public partial class CryptoStream : System.IO.Stream, System.IDisposable
+    partial public class CryptoStream : System.IO.Stream, System.IDisposable
     {
         public CryptoStream(
             System.IO.Stream stream,
@@ -1991,7 +1991,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-    public sealed partial class CspKeyContainerInfo
+    partial public sealed class CspKeyContainerInfo
     {
         public CspKeyContainerInfo(System.Security.Cryptography.CspParameters parameters) { }
 
@@ -2046,7 +2046,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-    public sealed partial class CspParameters
+    partial public sealed class CspParameters
     {
         public string? KeyContainerName;
         public int KeyNumber;
@@ -2095,7 +2095,7 @@ namespace System.Security.Cryptography
         CreateEphemeralKey = 128,
     }
 
-    public abstract partial class DeriveBytes : System.IDisposable
+    partial public abstract class DeriveBytes : System.IDisposable
     {
         protected DeriveBytes() { }
 
@@ -2110,7 +2110,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public abstract partial class DES : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class DES : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected DES() { }
 
@@ -2158,7 +2158,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class DESCryptoServiceProvider : System.Security.Cryptography.DES
+    partial public sealed class DESCryptoServiceProvider : System.Security.Cryptography.DES
     {
         public DESCryptoServiceProvider() { }
 
@@ -2193,7 +2193,7 @@ namespace System.Security.Cryptography
         public override void GenerateKey() { }
     }
 
-    public abstract partial class DSA : System.Security.Cryptography.AsymmetricAlgorithm
+    partial public abstract class DSA : System.Security.Cryptography.AsymmetricAlgorithm
     {
         protected DSA() { }
 
@@ -2658,7 +2658,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class DSACng : System.Security.Cryptography.DSA
+    partial public sealed class DSACng : System.Security.Cryptography.DSA
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public DSACng() { }
@@ -2791,7 +2791,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class DSACryptoServiceProvider
+    partial public sealed class DSACryptoServiceProvider
         : System.Security.Cryptography.DSA,
             System.Security.Cryptography.ICspAsymmetricAlgorithm
     {
@@ -2945,7 +2945,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class DSAOpenSsl : System.Security.Cryptography.DSA
+    partial public sealed class DSAOpenSsl : System.Security.Cryptography.DSA
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -3009,7 +3009,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial struct DSAParameters
+    partial public struct DSAParameters
     {
         public int Counter;
         public byte[]? G;
@@ -3021,7 +3021,7 @@ namespace System.Security.Cryptography
         public byte[]? Y;
     }
 
-    public partial class DSASignatureDeformatter
+    partial public class DSASignatureDeformatter
         : System.Security.Cryptography.AsymmetricSignatureDeformatter
     {
         public DSASignatureDeformatter() { }
@@ -3044,7 +3044,7 @@ namespace System.Security.Cryptography
         Rfc3279DerSequence = 1,
     }
 
-    public partial class DSASignatureFormatter
+    partial public class DSASignatureFormatter
         : System.Security.Cryptography.AsymmetricSignatureFormatter
     {
         public DSASignatureFormatter() { }
@@ -3061,7 +3061,7 @@ namespace System.Security.Cryptography
         public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
     }
 
-    public abstract partial class ECAlgorithm : System.Security.Cryptography.AsymmetricAlgorithm
+    partial public abstract class ECAlgorithm : System.Security.Cryptography.AsymmetricAlgorithm
     {
         protected ECAlgorithm() { }
 
@@ -3196,7 +3196,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial struct ECCurve
+    partial public struct ECCurve
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -3262,7 +3262,7 @@ namespace System.Security.Cryptography
             Named = 5,
         }
 
-        public static partial class NamedCurves
+        partial public static class NamedCurves
         {
             public static System.Security.Cryptography.ECCurve brainpoolP160r1
             {
@@ -3335,7 +3335,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class ECDiffieHellman : System.Security.Cryptography.ECAlgorithm
+    partial public abstract class ECDiffieHellman : System.Security.Cryptography.ECAlgorithm
     {
         protected ECDiffieHellman() { }
 
@@ -3446,7 +3446,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class ECDiffieHellmanCng : System.Security.Cryptography.ECDiffieHellman
+    partial public sealed class ECDiffieHellmanCng : System.Security.Cryptography.ECDiffieHellman
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public ECDiffieHellmanCng() { }
@@ -3686,7 +3686,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class ECDiffieHellmanCngPublicKey
+    partial public sealed class ECDiffieHellmanCngPublicKey
         : System.Security.Cryptography.ECDiffieHellmanPublicKey
     {
         internal ECDiffieHellmanCngPublicKey() { }
@@ -3752,7 +3752,7 @@ namespace System.Security.Cryptography
         Tls = 2,
     }
 
-    public sealed partial class ECDiffieHellmanOpenSsl
+    partial public sealed class ECDiffieHellmanOpenSsl
         : System.Security.Cryptography.ECDiffieHellman
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
@@ -3812,7 +3812,7 @@ namespace System.Security.Cryptography
         ) { }
     }
 
-    public abstract partial class ECDiffieHellmanPublicKey : System.IDisposable
+    partial public abstract class ECDiffieHellmanPublicKey : System.IDisposable
     {
         protected ECDiffieHellmanPublicKey() { }
 
@@ -3871,7 +3871,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class ECDsa : System.Security.Cryptography.ECAlgorithm
+    partial public abstract class ECDsa : System.Security.Cryptography.ECAlgorithm
     {
         protected ECDsa() { }
 
@@ -4314,7 +4314,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class ECDsaCng : System.Security.Cryptography.ECDsa
+    partial public sealed class ECDsaCng : System.Security.Cryptography.ECDsa
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public ECDsaCng() { }
@@ -4536,7 +4536,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class ECDsaOpenSsl : System.Security.Cryptography.ECDsa
+    partial public sealed class ECDsaOpenSsl : System.Security.Cryptography.ECDsa
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -4594,7 +4594,7 @@ namespace System.Security.Cryptography
         Rfc4050 = 0,
     }
 
-    public partial struct ECParameters
+    partial public struct ECParameters
     {
         public System.Security.Cryptography.ECCurve Curve;
         public byte[]? D;
@@ -4603,13 +4603,13 @@ namespace System.Security.Cryptography
         public void Validate() { }
     }
 
-    public partial struct ECPoint
+    partial public struct ECPoint
     {
         public byte[]? X;
         public byte[]? Y;
     }
 
-    public partial class FromBase64Transform
+    partial public class FromBase64Transform
         : System.IDisposable,
             System.Security.Cryptography.ICryptoTransform
     {
@@ -4666,7 +4666,7 @@ namespace System.Security.Cryptography
         DoNotIgnoreWhiteSpaces = 1,
     }
 
-    public abstract partial class HashAlgorithm
+    partial public abstract class HashAlgorithm
         : System.IDisposable,
             System.Security.Cryptography.ICryptoTransform
     {
@@ -4792,7 +4792,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public readonly partial struct HashAlgorithmName
+    partial public readonly struct HashAlgorithmName
         : System.IEquatable<System.Security.Cryptography.HashAlgorithmName>
     {
         private readonly object _dummy;
@@ -4880,7 +4880,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public static partial class HKDF
+    partial public static class HKDF
     {
         public static byte[] DeriveKey(
             System.Security.Cryptography.HashAlgorithmName hashAlgorithmName,
@@ -4938,7 +4938,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class HMAC : System.Security.Cryptography.KeyedHashAlgorithm
+    partial public abstract class HMAC : System.Security.Cryptography.KeyedHashAlgorithm
     {
         protected HMAC() { }
 
@@ -5000,7 +5000,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial class HMACMD5 : System.Security.Cryptography.HMAC
+    partial public class HMACMD5 : System.Security.Cryptography.HMAC
     {
         public const int HashSizeInBits = 128;
         public const int HashSizeInBytes = 16;
@@ -5128,7 +5128,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial class HMACSHA1 : System.Security.Cryptography.HMAC
+    partial public class HMACSHA1 : System.Security.Cryptography.HMAC
     {
         public const int HashSizeInBits = 160;
         public const int HashSizeInBytes = 20;
@@ -5254,7 +5254,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial class HMACSHA256 : System.Security.Cryptography.HMAC
+    partial public class HMACSHA256 : System.Security.Cryptography.HMAC
     {
         public const int HashSizeInBits = 256;
         public const int HashSizeInBytes = 32;
@@ -5370,7 +5370,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial class HMACSHA384 : System.Security.Cryptography.HMAC
+    partial public class HMACSHA384 : System.Security.Cryptography.HMAC
     {
         public const int HashSizeInBits = 384;
         public const int HashSizeInBytes = 48;
@@ -5497,7 +5497,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial class HMACSHA512 : System.Security.Cryptography.HMAC
+    partial public class HMACSHA512 : System.Security.Cryptography.HMAC
     {
         public const int HashSizeInBits = 512;
         public const int HashSizeInBytes = 64;
@@ -5624,7 +5624,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial interface ICryptoTransform : System.IDisposable
+    partial public interface ICryptoTransform : System.IDisposable
     {
         bool CanReuseTransform { get; }
         bool CanTransformMultipleBlocks { get; }
@@ -5640,14 +5640,14 @@ namespace System.Security.Cryptography
         byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount);
     }
 
-    public partial interface ICspAsymmetricAlgorithm
+    partial public interface ICspAsymmetricAlgorithm
     {
         System.Security.Cryptography.CspKeyContainerInfo CspKeyContainerInfo { get; }
         byte[] ExportCspBlob(bool includePrivateParameters);
         void ImportCspBlob(byte[] rawData);
     }
 
-    public sealed partial class IncrementalHash : System.IDisposable
+    partial public sealed class IncrementalHash : System.IDisposable
     {
         internal IncrementalHash() { }
 
@@ -5722,7 +5722,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class KeyedHashAlgorithm : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class KeyedHashAlgorithm : System.Security.Cryptography.HashAlgorithm
     {
         protected byte[] KeyValue;
 
@@ -5766,7 +5766,7 @@ namespace System.Security.Cryptography
         Signature = 2,
     }
 
-    public sealed partial class KeySizes
+    partial public sealed class KeySizes
     {
         public KeySizes(int minSize, int maxSize, int skipSize) { }
 
@@ -5784,14 +5784,14 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class MaskGenerationMethod
+    partial public abstract class MaskGenerationMethod
     {
         protected MaskGenerationMethod() { }
 
         public abstract byte[] GenerateMask(byte[] rgbSeed, int cbReturn);
     }
 
-    public abstract partial class MD5 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class MD5 : System.Security.Cryptography.HashAlgorithm
     {
         public const int HashSizeInBits = 128;
         public const int HashSizeInBytes = 16;
@@ -5887,7 +5887,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class MD5CryptoServiceProvider : System.Security.Cryptography.MD5
+    partial public sealed class MD5CryptoServiceProvider : System.Security.Cryptography.MD5
     {
         public MD5CryptoServiceProvider() { }
 
@@ -5910,7 +5910,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class Oid
+    partial public sealed class Oid
     {
         public Oid() { }
 
@@ -5948,7 +5948,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class OidCollection
+    partial public sealed class OidCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -5995,7 +5995,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class OidEnumerator : System.Collections.IEnumerator
+    partial public sealed class OidEnumerator : System.Collections.IEnumerator
     {
         internal OidEnumerator() { }
 
@@ -6043,7 +6043,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial class PasswordDeriveBytes : System.Security.Cryptography.DeriveBytes
+    partial public class PasswordDeriveBytes : System.Security.Cryptography.DeriveBytes
     {
         public PasswordDeriveBytes(byte[] password, byte[]? salt) { }
 
@@ -6151,7 +6151,7 @@ namespace System.Security.Cryptography
         TripleDes3KeyPkcs12 = 4,
     }
 
-    public sealed partial class PbeParameters
+    partial public sealed class PbeParameters
     {
         public PbeParameters(
             System.Security.Cryptography.PbeEncryptionAlgorithm encryptionAlgorithm,
@@ -6173,7 +6173,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public static partial class PemEncoding
+    partial public static class PemEncoding
     {
         public static System.Security.Cryptography.PemFields Find(System.ReadOnlySpan<char> pemData)
         {
@@ -6217,7 +6217,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public readonly partial struct PemFields
+    partial public readonly struct PemFields
     {
         private readonly int _dummyPrimitive;
         public System.Range Base64Data
@@ -6238,7 +6238,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial class PKCS1MaskGenerationMethod
+    partial public class PKCS1MaskGenerationMethod
         : System.Security.Cryptography.MaskGenerationMethod
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -6258,7 +6258,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class RandomNumberGenerator : System.IDisposable
+    partial public abstract class RandomNumberGenerator : System.IDisposable
     {
         protected RandomNumberGenerator() { }
 
@@ -6315,7 +6315,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public abstract partial class RC2 : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class RC2 : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected int EffectiveKeySizeValue;
 
@@ -6361,7 +6361,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class RC2CryptoServiceProvider : System.Security.Cryptography.RC2
+    partial public sealed class RC2CryptoServiceProvider : System.Security.Cryptography.RC2
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -6400,7 +6400,7 @@ namespace System.Security.Cryptography
         public override void GenerateKey() { }
     }
 
-    public partial class Rfc2898DeriveBytes : System.Security.Cryptography.DeriveBytes
+    partial public class Rfc2898DeriveBytes : System.Security.Cryptography.DeriveBytes
     {
         [System.ObsoleteAttribute(
             "The default hash algorithm and iteration counts in Rfc2898DeriveBytes constructors are outdated and insecure. Use a constructor that accepts the hash algorithm and the number of iterations.",
@@ -6561,7 +6561,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0022",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public abstract partial class Rijndael : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class Rijndael : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected Rijndael() { }
 
@@ -6594,7 +6594,7 @@ namespace System.Security.Cryptography
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public sealed partial class RijndaelManaged : System.Security.Cryptography.Rijndael
+    partial public sealed class RijndaelManaged : System.Security.Cryptography.Rijndael
     {
         public RijndaelManaged() { }
 
@@ -6679,7 +6679,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0023",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class RNGCryptoServiceProvider
+    partial public sealed class RNGCryptoServiceProvider
         : System.Security.Cryptography.RandomNumberGenerator
     {
         public RNGCryptoServiceProvider() { }
@@ -6703,7 +6703,7 @@ namespace System.Security.Cryptography
         public override void GetNonZeroBytes(System.Span<byte> data) { }
     }
 
-    public abstract partial class RSA : System.Security.Cryptography.AsymmetricAlgorithm
+    partial public abstract class RSA : System.Security.Cryptography.AsymmetricAlgorithm
     {
         protected RSA() { }
 
@@ -7187,7 +7187,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class RSACng : System.Security.Cryptography.RSA
+    partial public sealed class RSACng : System.Security.Cryptography.RSA
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public RSACng() { }
@@ -7367,7 +7367,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class RSACryptoServiceProvider
+    partial public sealed class RSACryptoServiceProvider
         : System.Security.Cryptography.RSA,
             System.Security.Cryptography.ICspAsymmetricAlgorithm
     {
@@ -7562,7 +7562,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class RSAEncryptionPadding
+    partial public sealed class RSAEncryptionPadding
         : System.IEquatable<System.Security.Cryptography.RSAEncryptionPadding>
     {
         internal RSAEncryptionPadding() { }
@@ -7651,7 +7651,7 @@ namespace System.Security.Cryptography
         Oaep = 1,
     }
 
-    public partial class RSAOAEPKeyExchangeDeformatter
+    partial public class RSAOAEPKeyExchangeDeformatter
         : System.Security.Cryptography.AsymmetricKeyExchangeDeformatter
     {
         public RSAOAEPKeyExchangeDeformatter() { }
@@ -7673,7 +7673,7 @@ namespace System.Security.Cryptography
         public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
     }
 
-    public partial class RSAOAEPKeyExchangeFormatter
+    partial public class RSAOAEPKeyExchangeFormatter
         : System.Security.Cryptography.AsymmetricKeyExchangeFormatter
     {
         public RSAOAEPKeyExchangeFormatter() { }
@@ -7708,7 +7708,7 @@ namespace System.Security.Cryptography
         public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
     }
 
-    public sealed partial class RSAOpenSsl : System.Security.Cryptography.RSA
+    partial public sealed class RSAOpenSsl : System.Security.Cryptography.RSA
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -7762,7 +7762,7 @@ namespace System.Security.Cryptography
         ) { }
     }
 
-    public partial struct RSAParameters
+    partial public struct RSAParameters
     {
         public byte[]? D;
         public byte[]? DP;
@@ -7774,7 +7774,7 @@ namespace System.Security.Cryptography
         public byte[]? Q;
     }
 
-    public partial class RSAPKCS1KeyExchangeDeformatter
+    partial public class RSAPKCS1KeyExchangeDeformatter
         : System.Security.Cryptography.AsymmetricKeyExchangeDeformatter
     {
         public RSAPKCS1KeyExchangeDeformatter() { }
@@ -7801,7 +7801,7 @@ namespace System.Security.Cryptography
         public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
     }
 
-    public partial class RSAPKCS1KeyExchangeFormatter
+    partial public class RSAPKCS1KeyExchangeFormatter
         : System.Security.Cryptography.AsymmetricKeyExchangeFormatter
     {
         public RSAPKCS1KeyExchangeFormatter() { }
@@ -7833,7 +7833,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class RSAPKCS1SignatureDeformatter
+    partial public class RSAPKCS1SignatureDeformatter
         : System.Security.Cryptography.AsymmetricSignatureDeformatter
     {
         public RSAPKCS1SignatureDeformatter() { }
@@ -7852,7 +7852,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class RSAPKCS1SignatureFormatter
+    partial public class RSAPKCS1SignatureFormatter
         : System.Security.Cryptography.AsymmetricSignatureFormatter
     {
         public RSAPKCS1SignatureFormatter() { }
@@ -7869,7 +7869,7 @@ namespace System.Security.Cryptography
         public override void SetKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
     }
 
-    public sealed partial class RSASignaturePadding
+    partial public sealed class RSASignaturePadding
         : System.IEquatable<System.Security.Cryptography.RSASignaturePadding>
     {
         internal RSASignaturePadding() { }
@@ -7935,7 +7935,7 @@ namespace System.Security.Cryptography
         Pss = 1,
     }
 
-    public sealed partial class SafeEvpPKeyHandle : System.Runtime.InteropServices.SafeHandle
+    partial public sealed class SafeEvpPKeyHandle : System.Runtime.InteropServices.SafeHandle
     {
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
@@ -7979,7 +7979,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class SHA1 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class SHA1 : System.Security.Cryptography.HashAlgorithm
     {
         public const int HashSizeInBits = 160;
         public const int HashSizeInBytes = 20;
@@ -8066,7 +8066,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class SHA1CryptoServiceProvider : System.Security.Cryptography.SHA1
+    partial public sealed class SHA1CryptoServiceProvider : System.Security.Cryptography.SHA1
     {
         public SHA1CryptoServiceProvider() { }
 
@@ -8097,7 +8097,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class SHA1Managed : System.Security.Cryptography.SHA1
+    partial public sealed class SHA1Managed : System.Security.Cryptography.SHA1
     {
         public SHA1Managed() { }
 
@@ -8123,7 +8123,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class SHA256 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class SHA256 : System.Security.Cryptography.HashAlgorithm
     {
         public const int HashSizeInBits = 256;
         public const int HashSizeInBytes = 32;
@@ -8210,7 +8210,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class SHA256CryptoServiceProvider : System.Security.Cryptography.SHA256
+    partial public sealed class SHA256CryptoServiceProvider : System.Security.Cryptography.SHA256
     {
         public SHA256CryptoServiceProvider() { }
 
@@ -8241,7 +8241,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class SHA256Managed : System.Security.Cryptography.SHA256
+    partial public sealed class SHA256Managed : System.Security.Cryptography.SHA256
     {
         public SHA256Managed() { }
 
@@ -8267,7 +8267,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class SHA384 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class SHA384 : System.Security.Cryptography.HashAlgorithm
     {
         public const int HashSizeInBits = 384;
         public const int HashSizeInBytes = 48;
@@ -8354,7 +8354,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class SHA384CryptoServiceProvider : System.Security.Cryptography.SHA384
+    partial public sealed class SHA384CryptoServiceProvider : System.Security.Cryptography.SHA384
     {
         public SHA384CryptoServiceProvider() { }
 
@@ -8385,7 +8385,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class SHA384Managed : System.Security.Cryptography.SHA384
+    partial public sealed class SHA384Managed : System.Security.Cryptography.SHA384
     {
         public SHA384Managed() { }
 
@@ -8411,7 +8411,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class SHA512 : System.Security.Cryptography.HashAlgorithm
+    partial public abstract class SHA512 : System.Security.Cryptography.HashAlgorithm
     {
         public const int HashSizeInBits = 512;
         public const int HashSizeInBytes = 64;
@@ -8498,7 +8498,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class SHA512CryptoServiceProvider : System.Security.Cryptography.SHA512
+    partial public sealed class SHA512CryptoServiceProvider : System.Security.Cryptography.SHA512
     {
         public SHA512CryptoServiceProvider() { }
 
@@ -8529,7 +8529,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class SHA512Managed : System.Security.Cryptography.SHA512
+    partial public sealed class SHA512Managed : System.Security.Cryptography.SHA512
     {
         public SHA512Managed() { }
 
@@ -8555,7 +8555,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial class SignatureDescription
+    partial public class SignatureDescription
     {
         public SignatureDescription() { }
 
@@ -8611,7 +8611,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class SymmetricAlgorithm : System.IDisposable
+    partial public abstract class SymmetricAlgorithm : System.IDisposable
     {
         protected int BlockSizeValue;
         protected int FeedbackSizeValue;
@@ -9074,7 +9074,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial class ToBase64Transform
+    partial public class ToBase64Transform
         : System.IDisposable,
             System.Security.Cryptography.ICryptoTransform
     {
@@ -9122,7 +9122,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public abstract partial class TripleDES : System.Security.Cryptography.SymmetricAlgorithm
+    partial public abstract class TripleDES : System.Security.Cryptography.SymmetricAlgorithm
     {
         protected TripleDES() { }
 
@@ -9157,7 +9157,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class TripleDESCng : System.Security.Cryptography.TripleDES
+    partial public sealed class TripleDESCng : System.Security.Cryptography.TripleDES
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public TripleDESCng() { }
@@ -9293,7 +9293,7 @@ namespace System.Security.Cryptography
         DiagnosticId = "SYSLIB0021",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class TripleDESCryptoServiceProvider
+    partial public sealed class TripleDESCryptoServiceProvider
         : System.Security.Cryptography.TripleDES
     {
         public TripleDESCryptoServiceProvider() { }
@@ -9379,7 +9379,7 @@ namespace System.Security.Cryptography
 namespace System.Security.Cryptography.X509Certificates
 {
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public sealed partial class CertificateRequest
+    partial public sealed class CertificateRequest
     {
         public CertificateRequest(
             System.Security.Cryptography.X509Certificates.X500DistinguishedName subjectName,
@@ -9569,7 +9569,7 @@ namespace System.Security.Cryptography.X509Certificates
         UnsafeLoadCertificateExtensions = 2,
     }
 
-    public sealed partial class CertificateRevocationListBuilder
+    partial public sealed class CertificateRevocationListBuilder
     {
         public CertificateRevocationListBuilder() { }
 
@@ -9673,7 +9673,7 @@ namespace System.Security.Cryptography.X509Certificates
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public static partial class DSACertificateExtensions
+    partial public static class DSACertificateExtensions
     {
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
@@ -9698,7 +9698,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public static partial class ECDsaCertificateExtensions
+    partial public static class ECDsaCertificateExtensions
     {
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
@@ -9733,7 +9733,7 @@ namespace System.Security.Cryptography.X509Certificates
         IncludeArchived = 8,
     }
 
-    public sealed partial class PublicKey
+    partial public sealed class PublicKey
     {
         public PublicKey(System.Security.Cryptography.AsymmetricAlgorithm key) { }
 
@@ -9814,7 +9814,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public static partial class RSACertificateExtensions
+    partial public static class RSACertificateExtensions
     {
         public static System.Security.Cryptography.X509Certificates.X509Certificate2 CopyWithPrivateKey(
             this System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
@@ -9857,7 +9857,7 @@ namespace System.Security.Cryptography.X509Certificates
         TrustedPublisher = 8,
     }
 
-    public sealed partial class SubjectAlternativeNameBuilder
+    partial public sealed class SubjectAlternativeNameBuilder
     {
         public SubjectAlternativeNameBuilder() { }
 
@@ -9879,7 +9879,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X500DistinguishedName : System.Security.Cryptography.AsnEncodedData
+    partial public sealed class X500DistinguishedName : System.Security.Cryptography.AsnEncodedData
     {
         public X500DistinguishedName(byte[] encodedDistinguishedName) { }
 
@@ -9925,7 +9925,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X500DistinguishedNameBuilder
+    partial public sealed class X500DistinguishedNameBuilder
     {
         public X500DistinguishedNameBuilder() { }
 
@@ -9980,7 +9980,7 @@ namespace System.Security.Cryptography.X509Certificates
         ForceUTF8Encoding = 16384,
     }
 
-    public sealed partial class X500RelativeDistinguishedName
+    partial public sealed class X500RelativeDistinguishedName
     {
         internal X500RelativeDistinguishedName() { }
 
@@ -10004,7 +10004,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509AuthorityInformationAccessExtension
+    partial public sealed class X509AuthorityInformationAccessExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509AuthorityInformationAccessExtension() { }
@@ -10049,7 +10049,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509AuthorityKeyIdentifierExtension
+    partial public sealed class X509AuthorityKeyIdentifierExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509AuthorityKeyIdentifierExtension() { }
@@ -10147,7 +10147,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509BasicConstraintsExtension
+    partial public sealed class X509BasicConstraintsExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509BasicConstraintsExtension() { }
@@ -10196,7 +10196,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public partial class X509Certificate
+    partial public class X509Certificate
         : System.IDisposable,
             System.Runtime.Serialization.IDeserializationCallback,
             System.Runtime.Serialization.ISerializable
@@ -10548,7 +10548,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public partial class X509Certificate2
+    partial public class X509Certificate2
         : System.Security.Cryptography.X509Certificates.X509Certificate
     {
         [System.ObsoleteAttribute(
@@ -10909,7 +10909,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public partial class X509Certificate2Collection
+    partial public class X509Certificate2Collection
         : System.Security.Cryptography.X509Certificates.X509CertificateCollection,
             System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509Certificate2>,
             System.Collections.IEnumerable
@@ -11075,7 +11075,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509Certificate2Enumerator
+    partial public sealed class X509Certificate2Enumerator
         : System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509Certificate2>,
             System.Collections.IEnumerator,
             System.IDisposable
@@ -11108,7 +11108,7 @@ namespace System.Security.Cryptography.X509Certificates
         void System.IDisposable.Dispose() { }
     }
 
-    public partial class X509CertificateCollection : System.Collections.CollectionBase
+    partial public class X509CertificateCollection : System.Collections.CollectionBase
     {
         public X509CertificateCollection() { }
 
@@ -11173,7 +11173,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         public void Remove(System.Security.Cryptography.X509Certificates.X509Certificate value) { }
 
-        public partial class X509CertificateEnumerator : System.Collections.IEnumerator
+        partial public class X509CertificateEnumerator : System.Collections.IEnumerator
         {
             public X509CertificateEnumerator(
                 System.Security.Cryptography.X509Certificates.X509CertificateCollection mappings
@@ -11204,7 +11204,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public partial class X509Chain : System.IDisposable
+    partial public class X509Chain : System.IDisposable
     {
         public X509Chain() { }
 
@@ -11255,7 +11255,7 @@ namespace System.Security.Cryptography.X509Certificates
         public void Reset() { }
     }
 
-    public partial class X509ChainElement
+    partial public class X509ChainElement
     {
         internal X509ChainElement() { }
 
@@ -11273,7 +11273,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509ChainElementCollection
+    partial public sealed class X509ChainElementCollection
         : System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509ChainElement>,
             System.Collections.ICollection,
             System.Collections.IEnumerable
@@ -11320,7 +11320,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509ChainElementEnumerator
+    partial public sealed class X509ChainElementEnumerator
         : System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509ChainElement>,
             System.Collections.IEnumerator,
             System.IDisposable
@@ -11346,7 +11346,7 @@ namespace System.Security.Cryptography.X509Certificates
         void System.IDisposable.Dispose() { }
     }
 
-    public sealed partial class X509ChainPolicy
+    partial public sealed class X509ChainPolicy
     {
         public X509ChainPolicy() { }
 
@@ -11415,7 +11415,7 @@ namespace System.Security.Cryptography.X509Certificates
         public void Reset() { }
     }
 
-    public partial struct X509ChainStatus
+    partial public struct X509ChainStatus
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -11482,7 +11482,7 @@ namespace System.Security.Cryptography.X509Certificates
         Authenticode = 6,
     }
 
-    public sealed partial class X509EnhancedKeyUsageExtension
+    partial public sealed class X509EnhancedKeyUsageExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509EnhancedKeyUsageExtension() { }
@@ -11507,7 +11507,7 @@ namespace System.Security.Cryptography.X509Certificates
         ) { }
     }
 
-    public partial class X509Extension : System.Security.Cryptography.AsnEncodedData
+    partial public class X509Extension : System.Security.Cryptography.AsnEncodedData
     {
         protected X509Extension() { }
 
@@ -11540,7 +11540,7 @@ namespace System.Security.Cryptography.X509Certificates
         ) { }
     }
 
-    public sealed partial class X509ExtensionCollection
+    partial public sealed class X509ExtensionCollection
         : System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509Extension>,
             System.Collections.ICollection,
             System.Collections.IEnumerable
@@ -11596,7 +11596,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509ExtensionEnumerator
+    partial public sealed class X509ExtensionEnumerator
         : System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509Extension>,
             System.Collections.IEnumerator,
             System.IDisposable
@@ -11661,7 +11661,7 @@ namespace System.Security.Cryptography.X509Certificates
         EphemeralKeySet = 32,
     }
 
-    public sealed partial class X509KeyUsageExtension
+    partial public sealed class X509KeyUsageExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509KeyUsageExtension() { }
@@ -11740,7 +11740,7 @@ namespace System.Security.Cryptography.X509Certificates
         WeakAlgorithmOrKey = 11,
     }
 
-    public abstract partial class X509SignatureGenerator
+    partial public abstract class X509SignatureGenerator
     {
         protected X509SignatureGenerator() { }
 
@@ -11774,7 +11774,7 @@ namespace System.Security.Cryptography.X509Certificates
         );
     }
 
-    public sealed partial class X509Store : System.IDisposable
+    partial public sealed class X509Store : System.IDisposable
     {
         public X509Store() { }
 
@@ -11853,7 +11853,7 @@ namespace System.Security.Cryptography.X509Certificates
         ) { }
     }
 
-    public sealed partial class X509SubjectAlternativeNameExtension
+    partial public sealed class X509SubjectAlternativeNameExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509SubjectAlternativeNameExtension() { }
@@ -11880,7 +11880,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
     }
 
-    public sealed partial class X509SubjectKeyIdentifierExtension
+    partial public sealed class X509SubjectKeyIdentifierExtension
         : System.Security.Cryptography.X509Certificates.X509Extension
     {
         public X509SubjectKeyIdentifierExtension() { }

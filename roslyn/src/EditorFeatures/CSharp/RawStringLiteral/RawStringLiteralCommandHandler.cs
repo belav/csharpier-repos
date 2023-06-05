@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
     [ContentType(ContentTypeNames.CSharpContentType)]
     [Name(nameof(RawStringLiteralCommandHandler))]
     [Order(After = nameof(SplitStringLiteralCommandHandler))]
-    internal partial class RawStringLiteralCommandHandler
+    partial internal class RawStringLiteralCommandHandler
     {
         private readonly ITextUndoHistoryRegistry _undoHistoryRegistry;
         private readonly IGlobalOptionService _globalOptions;

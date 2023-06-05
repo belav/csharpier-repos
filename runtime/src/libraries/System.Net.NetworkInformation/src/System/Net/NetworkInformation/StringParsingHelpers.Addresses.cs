@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Net.NetworkInformation
 {
-    internal static partial class StringParsingHelpers
+    partial internal static class StringParsingHelpers
     {
         // /proc/net/route contains some information about gateway addresses,
         // and separates the information about by each interface.

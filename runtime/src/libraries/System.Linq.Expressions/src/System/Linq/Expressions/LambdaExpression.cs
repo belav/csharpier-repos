@@ -674,7 +674,7 @@ namespace System.Linq.Expressions
         internal override bool TailCallCore { get; }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates an Expression{T} given the delegate type. Caches the

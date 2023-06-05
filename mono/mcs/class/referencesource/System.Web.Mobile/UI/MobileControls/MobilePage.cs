@@ -126,7 +126,7 @@ namespace System.Web.UI.MobileControls
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             EditorBrowsable(EditorBrowsableState.Advanced)
         ]
-        public override sealed string MasterPageFile
+        public sealed override string MasterPageFile
         {
             get { return null; }
             set

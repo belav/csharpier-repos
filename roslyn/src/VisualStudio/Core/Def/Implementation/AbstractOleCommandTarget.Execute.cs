@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
-    internal abstract partial class AbstractOleCommandTarget
+    partial internal abstract class AbstractOleCommandTarget
     {
         public virtual int Exec(
             ref Guid pguidCmdGroup,

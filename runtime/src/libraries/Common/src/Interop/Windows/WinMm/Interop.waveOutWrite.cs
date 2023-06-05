@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         /// <summary>
         /// This function sends a data block to the specified waveform output device.
@@ -17,6 +17,6 @@ internal static partial class Interop
         /// <param name="cbwh">Size, in bytes, of the WaveHeader structure.</param>
         /// <returns>MMSYSERR</returns>
         [LibraryImport(Libraries.WinMM)]
-        internal static partial MMSYSERR waveOutWrite(IntPtr hwo, IntPtr pwh, int cbwh);
+        partial internal static MMSYSERR waveOutWrite(IntPtr hwo, IntPtr pwh, int cbwh);
     }
 }

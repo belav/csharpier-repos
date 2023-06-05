@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Xunit;
 
-public partial class ThreadPoolBoundHandleTests : FileCleanupTestBase
+partial public class ThreadPoolBoundHandleTests : FileCleanupTestBase
 {
     private List<SafeHandle> _handlesToDispose = new List<SafeHandle>();
 

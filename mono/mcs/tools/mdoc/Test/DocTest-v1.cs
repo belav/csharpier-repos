@@ -220,8 +220,9 @@ namespace Mono.DocTest
         /// <remarks><c>F:Mono.DocTest.Widget.PI</c>.</remarks>
         protected internal const double PI = 3.14159;
 
+        protected
         /// <remarks><c>F:Mono.DocTest.Widget.monthlyAverage</c>.</remarks>
-        internal protected readonly double monthlyAverage;
+        internal readonly double monthlyAverage;
 
         /// <remarks><c>F:Mono.DocTest.Widget.array1</c>.</remarks>
         public long[] array1;
@@ -359,9 +360,10 @@ namespace Mono.DocTest
             set { }
         }
 
+        protected
         /// <value>A <see cref="T:System.Double" /> value...</value>
         /// <remarks><c>P:Mono.DocTest.Widget.Y</c>.</remarks>
-        internal protected double Y
+        internal double Y
         {
             get { return 0; }
             set { }

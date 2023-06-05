@@ -8,7 +8,7 @@ using Internal.Metadata.NativeFormat.Writer;
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         private Dictionary<string, ConstantStringValue> _strings = new Dictionary<
             string,

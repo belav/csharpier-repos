@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests
 {
-    public partial class SyndicationItemFormatterTests
+    partial public class SyndicationItemFormatterTests
     {
         [Fact]
         public void Ctor_Default()

@@ -3,7 +3,7 @@
 
 namespace System.Diagnostics
 {
-    internal static partial class ProcessManager
+    partial internal static class ProcessManager
     {
         /// <summary>Gets whether the named machine is remote or local.</summary>
         /// <param name="machineName">The machine name.</param>

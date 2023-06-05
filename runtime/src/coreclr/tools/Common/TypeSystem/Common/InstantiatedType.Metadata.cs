@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Internal.TypeSystem
 {
-    public sealed partial class InstantiatedType : MetadataType
+    partial public sealed class InstantiatedType : MetadataType
     {
         public override MetadataType MetadataBaseType
         {

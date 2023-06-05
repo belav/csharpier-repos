@@ -13,10 +13,11 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle.View
 {
+    partial
     /// <summary>
     /// Interaction logic for CodeStyleView.xaml
     /// </summary>
-    internal partial class CodeStyleSettingsView : UserControl, ISettingsEditorView
+    internal class CodeStyleSettingsView : UserControl, ISettingsEditorView
     {
         private readonly IWpfSettingsEditorViewModel _viewModel;
 

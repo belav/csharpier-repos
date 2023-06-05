@@ -967,7 +967,7 @@ namespace System.Runtime.Serialization
                 }
             }
 
-            static public bool TryCreateBuiltInDataContract(
+            public static bool TryCreateBuiltInDataContract(
                 Type type,
                 out DataContract dataContract
             )
@@ -1055,7 +1055,7 @@ namespace System.Runtime.Serialization
                 return dataContract != null;
             }
 
-            static public bool TryCreateBuiltInDataContract(
+            public static bool TryCreateBuiltInDataContract(
                 string name,
                 string ns,
                 out DataContract dataContract
@@ -1481,7 +1481,7 @@ namespace System.Runtime.Serialization
             }
         }
 
-        static internal bool IsTypeSerializable(Type type)
+        internal static bool IsTypeSerializable(Type type)
         {
             return IsTypeSerializable(type, new Dictionary<Type, object>());
         }
@@ -1612,7 +1612,7 @@ namespace System.Runtime.Serialization
             return true;
         }
 
-        static internal string EncodeLocalName(string localName)
+        internal static string EncodeLocalName(string localName)
         {
             if (IsAsciiLocalName(localName))
                 return localName;
@@ -2487,7 +2487,7 @@ namespace System.Runtime.Serialization
             return typeName.ToString();
         }
 
-        static internal bool IsTypeNullable(Type type)
+        internal static bool IsTypeNullable(Type type)
         {
             return !type.IsValueType
                 || (
@@ -2920,7 +2920,9 @@ namespace System.Runtime.Serialization
         }
 
 #if NO_DYNAMIC_CODEGEN
-        static internal bool IsTypeVisible(Type t)
+        internal
+#if NO_DYNAMIC_CODEGEN
+        static bool IsTypeVisible(Type t)
         {
             return true;
         }
@@ -2930,7 +2932,7 @@ namespace System.Runtime.Serialization
                 + " Since this information is used to determine whether to give the generated code access"
                 + " permissions to private members, any changes to the logic should be reviewed."
         )]
-        static internal bool IsTypeVisible(Type t)
+        internal static bool IsTypeVisible(Type t)
         {
             // Generic parameters are always considered visible.
             if (t.IsGenericParameter)
@@ -2965,7 +2967,7 @@ namespace System.Runtime.Serialization
                 + " Since this information is used to determine whether to give the generated code access"
                 + " permissions to private members, any changes to the logic should be reviewed."
         )]
-        static internal bool IsTypeAndDeclaringTypeVisible(Type t)
+        internal static bool IsTypeAndDeclaringTypeVisible(Type t)
         {
             // Arrays, etc. must consider the underlying element type because the
             // non-element type does not reflect the same type nesting.  For example,
@@ -2990,7 +2992,7 @@ namespace System.Runtime.Serialization
                 + " Since this information is used to determine whether to give the generated code access"
                 + " permissions to private members, any changes to the logic should be reviewed."
         )]
-        static internal bool ConstructorRequiresMemberAccess(ConstructorInfo ctor)
+        internal static bool ConstructorRequiresMemberAccess(ConstructorInfo ctor)
         {
             return ctor != null && !ctor.IsPublic && !IsMemberVisibleInSerializationModule(ctor);
         }
@@ -3001,7 +3003,7 @@ namespace System.Runtime.Serialization
                 + " Since this information is used to determine whether to give the generated code access"
                 + " permissions to private members, any changes to the logic should be reviewed."
         )]
-        static internal bool MethodRequiresMemberAccess(MethodInfo method)
+        internal static bool MethodRequiresMemberAccess(MethodInfo method)
         {
             return method != null
                 && !method.IsPublic
@@ -3014,7 +3016,7 @@ namespace System.Runtime.Serialization
                 + " Since this information is used to determine whether to give the generated code access"
                 + " permissions to private members, any changes to the logic should be reviewed."
         )]
-        static internal bool FieldRequiresMemberAccess(FieldInfo field)
+        internal static bool FieldRequiresMemberAccess(FieldInfo field)
         {
             return field != null && !field.IsPublic && !IsMemberVisibleInSerializationModule(field);
         }

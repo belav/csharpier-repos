@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.LanguageServices
 {
-    internal partial class AbstractAnonymousTypeDisplayService
+    partial internal class AbstractAnonymousTypeDisplayService
     {
         private class NormalAnonymousTypeCollectorVisitor : SymbolVisitor
         {

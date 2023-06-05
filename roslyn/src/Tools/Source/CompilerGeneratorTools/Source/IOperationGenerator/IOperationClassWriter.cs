@@ -20,7 +20,7 @@ namespace IOperationGenerator
         NotApplicable // for value types
     }
 
-    internal sealed partial class IOperationClassWriter
+    partial internal sealed class IOperationClassWriter
     {
         private TextWriter _writer = null!;
         private readonly string _location;

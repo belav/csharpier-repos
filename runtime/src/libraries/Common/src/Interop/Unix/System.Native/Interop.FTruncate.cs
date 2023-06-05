@@ -4,15 +4,15 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_FTruncate",
             SetLastError = true
         )]
-        internal static partial int FTruncate(SafeFileHandle fd, long length);
+        partial internal static int FTruncate(SafeFileHandle fd, long length);
     }
 }

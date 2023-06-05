@@ -24,7 +24,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal partial class InlineRenameSession
+    partial internal class InlineRenameSession
     {
         /// <summary>
         /// Manages state for open text buffers.

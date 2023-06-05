@@ -7,12 +7,13 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
 {
+    partial
     /// <summary>
     /// Synthetic RVA static field that represents PInvoke fixup cell. The RVA data is
     /// backed by a small data structure generated on the fly from the <see cref="PInvokeMetadata"/>
     /// carried by the instance of this class.
     /// </summary>
-    public sealed partial class PInvokeLazyFixupField : FieldDesc
+    public sealed class PInvokeLazyFixupField : FieldDesc
     {
         private readonly DefType _owningType;
         private readonly MethodDesc _targetMethod;

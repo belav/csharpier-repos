@@ -9,10 +9,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembers
 {
+    partial
     /// <summary>
     /// Interaction logic for MoveMembersToTypeDialog.xaml
     /// </summary>
-    internal partial class MoveStaticMembersDialog : DialogWindow
+    internal class MoveStaticMembersDialog : DialogWindow
     {
         public string MoveStaticMembersDialogTitle =>
             ServicesVSResources.Move_static_members_to_another_type_colon;

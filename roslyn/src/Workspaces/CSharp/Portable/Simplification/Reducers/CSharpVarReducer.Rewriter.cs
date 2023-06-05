@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
-    internal partial class CSharpVarReducer
+    partial internal class CSharpVarReducer
     {
         private class Rewriter : AbstractReductionRewriter
         {

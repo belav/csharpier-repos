@@ -12,9 +12,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 {
-    internal partial class UnitTestingSolutionCrawlerRegistrationService
+    partial internal class UnitTestingSolutionCrawlerRegistrationService
     {
-        internal partial class UnitTestingWorkCoordinator
+        partial internal class UnitTestingWorkCoordinator
         {
             // this is internal only type
             private readonly struct UnitTestingWorkItem

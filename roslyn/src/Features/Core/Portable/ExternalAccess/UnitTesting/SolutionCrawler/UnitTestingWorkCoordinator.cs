@@ -18,9 +18,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 {
-    internal partial class UnitTestingSolutionCrawlerRegistrationService
+    partial internal class UnitTestingSolutionCrawlerRegistrationService
     {
-        internal sealed partial class UnitTestingWorkCoordinator : IUnitTestingWorkCoordinator
+        partial internal sealed class UnitTestingWorkCoordinator : IUnitTestingWorkCoordinator
         {
 #if false // Not used in unit testing crawling
             private readonly object _gate = new();

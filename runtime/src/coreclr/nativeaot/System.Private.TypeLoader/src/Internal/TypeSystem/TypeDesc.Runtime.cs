@@ -14,7 +14,7 @@ using System.Reflection.Runtime.General;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class TypeDesc
+    partial public abstract class TypeDesc
     {
         private RuntimeTypeHandle _runtimeTypeHandle;
         public RuntimeTypeHandle RuntimeTypeHandle

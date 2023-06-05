@@ -24,7 +24,14 @@ namespace System.Configuration
         // System.dll in Everett. Emulate that behavior by trying to get the
         // type from System.dll
         //
-        static private Type GetLegacyType(string typeString)
+        private
+        //
+        // Since the config APIs were originally implemented in System.dll,
+        // references to types without assembly names could be resolved to
+        // System.dll in Everett. Emulate that behavior by trying to get the
+        // type from System.dll
+        //
+        static Type GetLegacyType(string typeString)
         {
             Type type = null;
 
@@ -48,7 +55,13 @@ namespace System.Configuration
         // as a type from System.dll. If that fails,  return null or throw the original
         // exception as indicated by throwOnError.
         //
-        static private Type GetTypeImpl(string typeString, bool throwOnError)
+        private
+        //
+        // Get the type specified by typeString. If it fails, try to retrieve it
+        // as a type from System.dll. If that fails,  return null or throw the original
+        // exception as indicated by throwOnError.
+        //
+        static Type GetTypeImpl(string typeString, bool throwOnError)
         {
             Type type = null;
             Exception originalException = null;
@@ -79,7 +92,13 @@ namespace System.Configuration
         // as a type from System.dll. If that fails, return null or throw the original
         // exception as indicated by throwOnError.
         //
-        static internal Type GetTypeWithReflectionPermission(
+        internal
+        //
+        // Ask the host to get the type specified by typeString. If it fails, try to retrieve it
+        // as a type from System.dll. If that fails, return null or throw the original
+        // exception as indicated by throwOnError.
+        //
+        static Type GetTypeWithReflectionPermission(
             IInternalConfigHost host,
             string typeString,
             bool throwOnError
@@ -109,17 +128,17 @@ namespace System.Configuration
             return type;
         }
 
-        static internal Type GetTypeWithReflectionPermission(string typeString, bool throwOnError)
+        internal static Type GetTypeWithReflectionPermission(string typeString, bool throwOnError)
         {
             return GetTypeImpl(typeString, throwOnError);
         }
 
-        static internal T CreateInstance<T>(string typeString)
+        internal static T CreateInstance<T>(string typeString)
         {
             return CreateInstanceRestricted<T>(null, typeString);
         }
 
-        static internal T CreateInstanceRestricted<T>(Type callingType, string typeString)
+        internal static T CreateInstanceRestricted<T>(Type callingType, string typeString)
         {
             Type type = GetTypeImpl(typeString, true); // catch the errors and report them
             VerifyAssignableType(
@@ -136,7 +155,7 @@ namespace System.Configuration
             "CA2106:SecureAsserts",
             Justification = "This assert is potentially dangerous and shouldn't be present but is necessary for back-compat."
         )]
-        static internal object CreateInstanceWithReflectionPermission(Type type)
+        internal static object CreateInstanceWithReflectionPermission(Type type)
         {
             object result = Activator.CreateInstance(type, true); // create non-public types
             return result;
@@ -144,7 +163,10 @@ namespace System.Configuration
 
         // This is intended to be similar to CreateInstanceWithReflectionPermission, but there is
         // an extra check to make sure that the calling type is allowed to access the target type.
-        static internal object CreateInstanceRestricted(Type callingType, Type targetType)
+        internal
+        // This is intended to be similar to CreateInstanceWithReflectionPermission, but there is
+        // an extra check to make sure that the calling type is allowed to access the target type.
+        static object CreateInstanceRestricted(Type callingType, Type targetType)
         {
             if (CallerHasMemberAccessOrAspNetPermission())
             {
@@ -185,7 +207,10 @@ namespace System.Configuration
 
         // This is intended to be similar to Delegate.CreateDelegate, but there is
         // an extra check to make sure that the calling type is allowed to access the target method.
-        static internal Delegate CreateDelegateRestricted(
+        internal
+        // This is intended to be similar to Delegate.CreateDelegate, but there is
+        // an extra check to make sure that the calling type is allowed to access the target method.
+        static Delegate CreateDelegateRestricted(
             Type callingType,
             Type delegateType,
             MethodInfo targetMethod
@@ -278,7 +303,7 @@ namespace System.Configuration
             ilGen.Emit(OpCodes.Pop);
         }
 
-        static internal ConstructorInfo GetConstructorWithReflectionPermission(
+        internal static ConstructorInfo GetConstructorWithReflectionPermission(
             Type type,
             Type baseType,
             bool throwOnError
@@ -316,18 +341,18 @@ namespace System.Configuration
             "CA2106:SecureAsserts",
             Justification = "A permission check is already performed by BaseConfigurationRecord.FindAndEnsureFactoryRecord before code execution reaches this point."
         )]
-        static internal object InvokeCtorWithReflectionPermission(ConstructorInfo ctor)
+        internal static object InvokeCtorWithReflectionPermission(ConstructorInfo ctor)
         {
             return ctor.Invoke(null);
         }
 
-        static internal bool IsTypeFromTrustedAssemblyWithoutAptca(Type type)
+        internal static bool IsTypeFromTrustedAssemblyWithoutAptca(Type type)
         {
             Assembly assembly = type.Assembly;
             return assembly.GlobalAssemblyCache && !HasAptcaBit(assembly);
         }
 
-        static internal Type VerifyAssignableType(Type baseType, Type type, bool throwOnError)
+        internal static Type VerifyAssignableType(Type baseType, Type type, bool throwOnError)
         {
             if (baseType.IsAssignableFrom(type))
             {
@@ -358,14 +383,15 @@ namespace System.Configuration
             return (attrs != null && attrs.Length > 0);
         }
 
-        static private volatile PermissionSet s_fullTrustPermissionSet;
+        private static volatile PermissionSet s_fullTrustPermissionSet;
         private static readonly ReflectionPermission s_memberAccessPermission =
             new ReflectionPermission(ReflectionPermissionFlag.MemberAccess);
         private static readonly AspNetHostingPermission s_aspNetHostingPermission =
             new AspNetHostingPermission(AspNetHostingPermissionLevel.Minimal);
 
+        internal
         // Check if the caller is fully trusted
-        static internal bool IsCallerFullTrust
+        static bool IsCallerFullTrust
         {
             get
             {

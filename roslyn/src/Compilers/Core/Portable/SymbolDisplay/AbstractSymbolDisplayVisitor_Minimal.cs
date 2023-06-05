@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SymbolDisplay
 {
-    internal abstract partial class AbstractSymbolDisplayVisitor : SymbolVisitor
+    partial internal abstract class AbstractSymbolDisplayVisitor : SymbolVisitor
     {
         protected abstract bool ShouldRestrictMinimallyQualifyLookupToNamespacesAndTypes();
 

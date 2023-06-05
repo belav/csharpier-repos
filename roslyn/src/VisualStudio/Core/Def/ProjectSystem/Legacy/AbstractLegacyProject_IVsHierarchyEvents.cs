@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy
 {
-    internal partial class AbstractLegacyProject : IVsHierarchyEvents
+    partial internal class AbstractLegacyProject : IVsHierarchyEvents
     {
         private uint _hierarchyEventsCookie;
 

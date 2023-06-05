@@ -3,7 +3,7 @@
 
 namespace System.Runtime.CompilerServices
 {
-    public static partial class RuntimeFeature
+    partial public static class RuntimeFeature
     {
         public static bool IsDynamicCodeSupported => true;
         public static bool IsDynamicCodeCompiled => true;

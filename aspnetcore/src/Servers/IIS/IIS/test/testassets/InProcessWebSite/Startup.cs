@@ -33,7 +33,7 @@ using Xunit;
 
 namespace TestSite;
 
-public partial class Startup
+partial public class Startup
 {
     public static bool StartupHookCalled;
     private IHttpContextAccessor _httpContextAccessor;

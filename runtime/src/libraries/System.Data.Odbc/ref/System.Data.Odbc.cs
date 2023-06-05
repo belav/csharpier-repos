@@ -10,7 +10,7 @@ namespace System.Data.Odbc
         "Microsoft.VSDesigner.Data.VS.OdbcCommandDesigner, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
     [System.ComponentModel.ToolboxItemAttribute(true)]
-    public sealed partial class OdbcCommand : System.Data.Common.DbCommand, System.ICloneable
+    partial public sealed class OdbcCommand : System.Data.Common.DbCommand, System.ICloneable
     {
         public OdbcCommand() { }
 
@@ -161,7 +161,7 @@ namespace System.Data.Odbc
         }
     }
 
-    public sealed partial class OdbcCommandBuilder : System.Data.Common.DbCommandBuilder
+    partial public sealed class OdbcCommandBuilder : System.Data.Common.DbCommandBuilder
     {
         public OdbcCommandBuilder() { }
 
@@ -256,7 +256,7 @@ namespace System.Data.Odbc
         }
     }
 
-    public sealed partial class OdbcConnection : System.Data.Common.DbConnection, System.ICloneable
+    partial public sealed class OdbcConnection : System.Data.Common.DbConnection, System.ICloneable
     {
         public OdbcConnection() { }
 
@@ -395,7 +395,7 @@ namespace System.Data.Odbc
         }
     }
 
-    public sealed partial class OdbcConnectionStringBuilder
+    partial public sealed class OdbcConnectionStringBuilder
         : System.Data.Common.DbConnectionStringBuilder
     {
         public OdbcConnectionStringBuilder() { }
@@ -454,7 +454,7 @@ namespace System.Data.Odbc
     [System.ComponentModel.ToolboxItemAttribute(
         "Microsoft.VSDesigner.Data.VS.OdbcDataAdapterToolboxItem, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public sealed partial class OdbcDataAdapter
+    partial public sealed class OdbcDataAdapter
         : System.Data.Common.DbDataAdapter,
             System.Data.IDataAdapter,
             System.Data.IDbDataAdapter,
@@ -571,7 +571,7 @@ namespace System.Data.Odbc
         }
     }
 
-    public sealed partial class OdbcDataReader : System.Data.Common.DbDataReader
+    partial public sealed class OdbcDataReader : System.Data.Common.DbDataReader
     {
         internal OdbcDataReader() { }
 
@@ -756,7 +756,7 @@ namespace System.Data.Odbc
         }
     }
 
-    public sealed partial class OdbcError
+    partial public sealed class OdbcError
     {
         internal OdbcError() { }
 
@@ -783,7 +783,7 @@ namespace System.Data.Odbc
         }
     }
 
-    public sealed partial class OdbcErrorCollection
+    partial public sealed class OdbcErrorCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -816,7 +816,7 @@ namespace System.Data.Odbc
         }
     }
 
-    public sealed partial class OdbcException : System.Data.Common.DbException
+    partial public sealed class OdbcException : System.Data.Common.DbException
     {
         internal OdbcException() { }
 
@@ -835,7 +835,7 @@ namespace System.Data.Odbc
         ) { }
     }
 
-    public sealed partial class OdbcFactory : System.Data.Common.DbProviderFactory
+    partial public sealed class OdbcFactory : System.Data.Common.DbProviderFactory
     {
         internal OdbcFactory() { }
 
@@ -872,7 +872,7 @@ namespace System.Data.Odbc
         }
     }
 
-    public sealed partial class OdbcInfoMessageEventArgs : System.EventArgs
+    partial public sealed class OdbcInfoMessageEventArgs : System.EventArgs
     {
         internal OdbcInfoMessageEventArgs() { }
 
@@ -896,7 +896,7 @@ namespace System.Data.Odbc
         System.Data.Odbc.OdbcInfoMessageEventArgs e
     );
 
-    public static partial class OdbcMetaDataCollectionNames
+    partial public static class OdbcMetaDataCollectionNames
     {
         public static readonly string Columns;
         public static readonly string Indexes;
@@ -907,14 +907,14 @@ namespace System.Data.Odbc
         public static readonly string Views;
     }
 
-    public static partial class OdbcMetaDataColumnNames
+    partial public static class OdbcMetaDataColumnNames
     {
         public static readonly string BooleanFalseLiteral;
         public static readonly string BooleanTrueLiteral;
         public static readonly string SQLType;
     }
 
-    public sealed partial class OdbcParameter
+    partial public sealed class OdbcParameter
         : System.Data.Common.DbParameter,
             System.Data.IDataParameter,
             System.Data.IDbDataParameter,
@@ -1054,7 +1054,7 @@ namespace System.Data.Odbc
         "Microsoft.VSDesigner.Data.Design.DBParametersEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
         "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public sealed partial class OdbcParameterCollection : System.Data.Common.DbParameterCollection
+    partial public sealed class OdbcParameterCollection : System.Data.Common.DbParameterCollection
     {
         internal OdbcParameterCollection() { }
 
@@ -1227,7 +1227,7 @@ namespace System.Data.Odbc
         ) { }
     }
 
-    public sealed partial class OdbcRowUpdatedEventArgs : System.Data.Common.RowUpdatedEventArgs
+    partial public sealed class OdbcRowUpdatedEventArgs : System.Data.Common.RowUpdatedEventArgs
     {
         public OdbcRowUpdatedEventArgs(
             System.Data.DataRow row,
@@ -1253,7 +1253,7 @@ namespace System.Data.Odbc
         System.Data.Odbc.OdbcRowUpdatedEventArgs e
     );
 
-    public sealed partial class OdbcRowUpdatingEventArgs : System.Data.Common.RowUpdatingEventArgs
+    partial public sealed class OdbcRowUpdatingEventArgs : System.Data.Common.RowUpdatingEventArgs
     {
         public OdbcRowUpdatingEventArgs(
             System.Data.DataRow row,
@@ -1285,7 +1285,7 @@ namespace System.Data.Odbc
         System.Data.Odbc.OdbcRowUpdatingEventArgs e
     );
 
-    public sealed partial class OdbcTransaction : System.Data.Common.DbTransaction
+    partial public sealed class OdbcTransaction : System.Data.Common.DbTransaction
     {
         internal OdbcTransaction() { }
 

@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
-    public partial class LocalsWindow_OutOfProc : OutOfProcComponent
+    partial public class LocalsWindow_OutOfProc : OutOfProcComponent
     {
         public Verifier Verify { get; }
 

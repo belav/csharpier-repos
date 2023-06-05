@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class CngKey : IDisposable
+    partial public sealed class CngKey : IDisposable
     {
         /// <summary>
         /// Does the key represent a named curve (Win10+)

@@ -18,7 +18,7 @@ namespace System
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
-    unsafe internal struct UnSafeCharBuffer
+    internal unsafe struct UnSafeCharBuffer
     {
         [SecurityCritical]
         char* m_buffer;

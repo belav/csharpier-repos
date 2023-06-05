@@ -8,7 +8,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal readonly partial struct ImmutableSegmentedHashSet<T>
+    partial internal readonly struct ImmutableSegmentedHashSet<T>
     {
         /// <inheritdoc cref="ImmutableHashSet{T}.Enumerator"/>
         public struct Enumerator : IEnumerator<T>

@@ -6,7 +6,7 @@
 
 namespace System.IO.Hashing
 {
-    public sealed partial class XxHash128 : System.IO.Hashing.NonCryptographicHashAlgorithm
+    partial public sealed class XxHash128 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
         [System.CLSCompliantAttribute(false)]
         public System.UInt128 GetCurrentHashAsUInt128()

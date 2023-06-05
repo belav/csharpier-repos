@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime
 {
-    public static partial class GCSettings
+    partial public static class GCSettings
     {
         public static extern bool IsServerGC
         {

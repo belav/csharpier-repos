@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 
-internal partial class Interop
+partial internal class Interop
 {
     static class MonoGetRandomBytesFallback
     {

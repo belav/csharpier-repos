@@ -5,7 +5,7 @@ using Internal.TypeSystem;
 
 namespace Internal.IL
 {
-    internal sealed partial class ILImporter
+    partial internal sealed class ILImporter
     {
         private BasicBlock[] _basicBlocks; // Maps IL offset to basic block
 

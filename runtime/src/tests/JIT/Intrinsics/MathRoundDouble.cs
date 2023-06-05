@@ -21,7 +21,7 @@ namespace MathRoundDoubleTest
 
         public double[] instanceValueArray = new double[] { 6.6, 7.7, 8.8 };
 
-        unsafe static int Main()
+        static unsafe int Main()
         {
             double localValue = 9.9;
 

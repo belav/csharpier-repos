@@ -12,7 +12,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCDispose : TCXMLReaderBaseGeneral
+    partial public abstract class TCDispose : TCXMLReaderBaseGeneral
     {
         [Variation("Test Integrity of all values after Dispose")]
         public int Variation1()
@@ -79,7 +79,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCInvalidXML : TCXMLReaderBaseGeneral
+    partial public abstract class TCInvalidXML : TCXMLReaderBaseGeneral
     {
         private bool TestInvalidXmlFile(
             string filename,
@@ -1152,7 +1152,7 @@ namespace System.Xml.Tests
     //
 
     [InheritRequired()]
-    public abstract partial class TCRead2 : TCXMLReaderBaseGeneral
+    partial public abstract class TCRead2 : TCXMLReaderBaseGeneral
     {
         private void TestUCS4Encoding(string filename, string expEncoding)
         {
@@ -2407,7 +2407,7 @@ namespace System.Xml.Tests
     }
 
     [InheritRequired()]
-    public abstract partial class TCBufferBoundaries : TCXMLReaderBaseGeneral
+    partial public abstract class TCBufferBoundaries : TCXMLReaderBaseGeneral
     {
         // Just in case this ones required.
         public MemoryStream GetStream(string sTag, string eTag, string content, int val)

@@ -16,7 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml.Serialization
 {
-    internal sealed partial class XmlSerializationReaderILGen : XmlSerializationILGen
+    partial internal sealed class XmlSerializationReaderILGen : XmlSerializationILGen
     {
         private readonly Dictionary<string, string> _idNames = new Dictionary<string, string>();
 
@@ -3085,10 +3085,10 @@ namespace System.Xml.Serialization
         [GeneratedRegex(
             "(?<locA1>[^ ]+) = .+EnsureArrayIndex[(](?<locA2>[^,]+), (?<locI1>[^,]+),[^;]+;(?<locA3>[^[]+)[[](?<locI2>[^+]+)[+][+][]]"
         )]
-        private static partial Regex EnsureArrayIndexRegex();
+        partial private static Regex EnsureArrayIndexRegex();
 
         [GeneratedRegex("(?<a>[^[]+)[[](?<ia>.+)[]]")]
-        private static partial Regex P0Regex();
+        partial private static Regex P0Regex();
 
         private void WriteSourceBegin(string source)
         {
@@ -4036,19 +4036,19 @@ namespace System.Xml.Serialization
         }
 
         [GeneratedRegex("UnknownNode[(]null, @[\"](?<qnames>[^\"]*)[\"][)];")]
-        private static partial Regex UnknownNodeNullAnyTypeRegex();
+        partial private static Regex UnknownNodeNullAnyTypeRegex();
 
         [GeneratedRegex("UnknownNode[(][(]object[)](?<o>[^,]+), @[\"](?<qnames>[^\"]*)[\"][)];")]
-        private static partial Regex UnknownNodeObjectEmptyRegex();
+        partial private static Regex UnknownNodeObjectEmptyRegex();
 
         [GeneratedRegex("UnknownNode[(][(]object[)](?<o>[^,]+), null[)];")]
-        private static partial Regex UnknownNodeObjectNullRegex();
+        partial private static Regex UnknownNodeObjectNullRegex();
 
         [GeneratedRegex("UnknownNode[(][(]object[)](?<o>[^)]+)[)];")]
-        private static partial Regex UnknownNodeObjectRegex();
+        partial private static Regex UnknownNodeObjectRegex();
 
         [GeneratedRegex("paramsRead\\[(?<index>[0-9]+)\\]")]
-        private static partial Regex ParamsReadRegex();
+        partial private static Regex ParamsReadRegex();
 
         private void ILGenElseString(string elseString)
         {

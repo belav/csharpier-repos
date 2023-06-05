@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class SChannel
+    partial internal static class SChannel
     {
         // schannel.h;
 

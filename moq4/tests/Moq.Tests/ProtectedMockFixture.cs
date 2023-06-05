@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Moq.Tests
 {
-    public partial class ProtectedMockFixture
+    partial public class ProtectedMockFixture
     {
         [Fact]
         public void ThrowsIfNullMock()
@@ -1291,16 +1291,16 @@ namespace Moq.Tests
                 this.ProtectedValue = value;
             }
 
-            internal protected virtual void ProtectedInternal() { }
+            protected internal virtual void ProtectedInternal() { }
 
-            internal protected virtual void ProtectedInternalGeneric<T>() { }
+            protected internal virtual void ProtectedInternalGeneric<T>() { }
 
-            internal protected virtual int ProtectedInternalInt()
+            protected internal virtual int ProtectedInternalInt()
             {
                 return 0;
             }
 
-            internal protected virtual T ProtectedInternalReturnGeneric<T>()
+            protected internal virtual T ProtectedInternalReturnGeneric<T>()
             {
                 return default(T);
             }

@@ -15,10 +15,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
+    partial
     // All the logic for finding all declarations in a given solution/project with some name
     // is in this file.
 
-    internal static partial class DeclarationFinder
+    internal static class DeclarationFinder
     {
         public static async Task<ImmutableArray<ISymbol>> FindAllDeclarationsWithNormalQueryAsync(
             Project project,

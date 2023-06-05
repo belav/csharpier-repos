@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
-    public sealed partial class NamedPipeTransportSecurityElement : ServiceModelConfigurationElement
+    partial public sealed class NamedPipeTransportSecurityElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.ProtectionLevel,

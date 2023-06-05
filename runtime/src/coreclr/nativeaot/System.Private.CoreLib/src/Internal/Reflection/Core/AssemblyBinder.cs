@@ -15,7 +15,7 @@ namespace Internal.Reflection.Core
     [StructLayout(LayoutKind.Auto)]
     [ReflectionBlocked]
     [CLSCompliant(false)]
-    public partial struct AssemblyBindResult
+    partial public struct AssemblyBindResult
     {
         public MetadataReader Reader;
         public ScopeDefinitionHandle ScopeDefinitionHandle;

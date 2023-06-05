@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
 {
-    internal abstract partial class AbstractChangeNamespaceToMatchFolderCodeFixProvider
+    partial internal abstract class AbstractChangeNamespaceToMatchFolderCodeFixProvider
         : CodeFixProvider
     {
         public override ImmutableArray<string> FixableDiagnosticIds =>

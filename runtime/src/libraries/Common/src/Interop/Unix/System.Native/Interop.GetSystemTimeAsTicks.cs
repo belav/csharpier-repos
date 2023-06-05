@@ -3,15 +3,15 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Interop.Libraries.SystemNative,
             EntryPoint = "SystemNative_GetSystemTimeAsTicks"
         )]
         [SuppressGCTransition]
-        internal static partial long GetSystemTimeAsTicks();
+        partial internal static long GetSystemTimeAsTicks();
     }
 }

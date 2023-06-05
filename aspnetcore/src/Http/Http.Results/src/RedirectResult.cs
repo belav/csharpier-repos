@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-internal sealed partial class RedirectResult : IResult
+partial internal sealed class RedirectResult : IResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectResult"/> class with the values
@@ -77,7 +77,7 @@ internal sealed partial class RedirectResult : IResult
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -85,6 +85,6 @@ internal sealed partial class RedirectResult : IResult
             "Executing RedirectResult, redirecting to {Destination}.",
             EventName = "RedirectResultExecuting"
         )]
-        public static partial void RedirectResultExecuting(ILogger logger, string destination);
+        partial public static void RedirectResultExecuting(ILogger logger, string destination);
     }
 }

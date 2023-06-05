@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class SimpleLambdaExpressionSyntax
+    partial public class SimpleLambdaExpressionSyntax
     {
         public new SimpleLambdaExpressionSyntax WithBody(CSharpSyntaxNode body) =>
             body is BlockSyntax block
@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static SimpleLambdaExpressionSyntax SimpleLambdaExpression(
             SyntaxToken asyncKeyword,

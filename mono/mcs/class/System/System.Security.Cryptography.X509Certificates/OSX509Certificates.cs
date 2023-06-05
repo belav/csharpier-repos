@@ -36,19 +36,19 @@ namespace System.Security.Cryptography.X509Certificates
             "/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation";
 
         [DllImport(SecurityLibrary)]
-        extern static IntPtr SecCertificateCreateWithData(IntPtr allocator, IntPtr nsdataRef);
+        static extern IntPtr SecCertificateCreateWithData(IntPtr allocator, IntPtr nsdataRef);
 
         [DllImport(SecurityLibrary)]
-        extern static /* OSStatus */
-        int SecTrustCreateWithCertificates(
+        static /* OSStatus */
+        extern int SecTrustCreateWithCertificates(
             IntPtr certOrCertArray,
             IntPtr policies,
             out IntPtr sectrustref
         );
 
         [DllImport(SecurityLibrary)]
-        extern static /* OSStatus */
-        int SecTrustSetAnchorCertificates(
+        static /* OSStatus */
+        extern int SecTrustSetAnchorCertificates(
             IntPtr /* SecTrustRef */
             trust,
             IntPtr /* CFArrayRef */
@@ -56,37 +56,37 @@ namespace System.Security.Cryptography.X509Certificates
         );
 
         [DllImport(SecurityLibrary)]
-        extern static IntPtr SecPolicyCreateSSL(
+        static extern IntPtr SecPolicyCreateSSL(
             [MarshalAs(UnmanagedType.I1)] bool server,
             IntPtr cfStringHostname
         );
 
         [DllImport(SecurityLibrary)]
-        extern static /* OSStatus */
-        int SecTrustEvaluate(IntPtr secTrustRef, out SecTrustResult secTrustResultTime);
+        static /* OSStatus */
+        extern int SecTrustEvaluate(IntPtr secTrustRef, out SecTrustResult secTrustResultTime);
 
         [DllImport(CoreFoundationLibrary, CharSet = CharSet.Unicode)]
-        extern static IntPtr CFStringCreateWithCharacters(
+        static extern IntPtr CFStringCreateWithCharacters(
             IntPtr allocator,
             string str, /* CFIndex */
             IntPtr count
         );
 
         [DllImport(CoreFoundationLibrary)]
-        unsafe extern static IntPtr CFDataCreate(
+        static extern unsafe IntPtr CFDataCreate(
             IntPtr allocator,
             byte* bytes, /* CFIndex */
             IntPtr length
         );
 
         [DllImport(CoreFoundationLibrary)]
-        extern static void CFRetain(IntPtr handle);
+        static extern void CFRetain(IntPtr handle);
 
         [DllImport(CoreFoundationLibrary)]
-        extern static void CFRelease(IntPtr handle);
+        static extern void CFRelease(IntPtr handle);
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFArrayCreate(
+        static extern IntPtr CFArrayCreate(
             IntPtr allocator,
             IntPtr values, /* CFIndex */
             IntPtr numValues,

@@ -12,7 +12,7 @@ using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Avx2
 {
-    public partial class Program
+    partial public class Program
     {
         public class GatherVector128
         {

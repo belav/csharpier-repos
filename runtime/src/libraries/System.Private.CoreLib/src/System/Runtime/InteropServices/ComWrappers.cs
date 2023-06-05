@@ -74,7 +74,7 @@ namespace System.Runtime.InteropServices
     [UnsupportedOSPlatform("ios")]
     [UnsupportedOSPlatform("tvos")]
     [CLSCompliant(false)]
-    public abstract partial class ComWrappers
+    partial public abstract class ComWrappers
     {
         /// <summary>
         /// Interface type and pointer to targeted VTable.
@@ -92,10 +92,11 @@ namespace System.Runtime.InteropServices
             public IntPtr Vtable;
         }
 
+        partial
         /// <summary>
         /// ABI for function dispatch of a COM interface.
         /// </summary>
-        public partial struct ComInterfaceDispatch
+        public struct ComInterfaceDispatch
         {
             public IntPtr Vtable;
         }

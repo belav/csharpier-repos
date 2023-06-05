@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
-    internal abstract partial class BoundNode
+    partial internal abstract class BoundNode
     {
         private readonly BoundKind _kind;
         private BoundNodeAttributes _attributes;

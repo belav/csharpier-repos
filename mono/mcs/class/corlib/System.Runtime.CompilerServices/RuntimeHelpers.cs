@@ -35,7 +35,7 @@ using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {
-    public static partial class RuntimeHelpers
+    partial public static class RuntimeHelpers
     {
         public delegate void TryCode(Object userData);
 

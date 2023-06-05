@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     [UseExportProvider]
     [Trait(Traits.Feature, Traits.Features.Formatting)]
-    public partial class FormattingTests : TestBase
+    partial public class FormattingTests : TestBase
     {
         [Fact]
         public void TestCSharpFormatting()

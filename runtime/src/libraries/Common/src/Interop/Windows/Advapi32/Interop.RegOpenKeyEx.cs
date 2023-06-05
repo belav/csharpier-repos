@@ -9,16 +9,16 @@ using Internal.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Libraries.Advapi32,
             EntryPoint = "RegOpenKeyExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int RegOpenKeyEx(
+        partial internal static int RegOpenKeyEx(
             SafeRegistryHandle hKey,
             string? lpSubKey,
             int ulOptions,
@@ -31,7 +31,7 @@ internal static partial class Interop
             EntryPoint = "RegOpenKeyExW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int RegOpenKeyEx(
+        partial internal static int RegOpenKeyEx(
             IntPtr hKey,
             string? lpSubKey,
             int ulOptions,

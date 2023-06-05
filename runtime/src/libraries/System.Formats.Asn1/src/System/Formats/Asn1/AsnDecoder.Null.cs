@@ -3,7 +3,7 @@
 
 namespace System.Formats.Asn1
 {
-    public static partial class AsnDecoder
+    partial public static class AsnDecoder
     {
         /// <summary>
         ///   Reads a Null value from <paramref name="source"/> with a specified tag under
@@ -64,7 +64,7 @@ namespace System.Formats.Asn1
         }
     }
 
-    public partial class AsnReader
+    partial public class AsnReader
     {
         /// <summary>
         ///   Reads the next value as a NULL with a specified tag.

@@ -9,7 +9,7 @@ using System.Security.Cryptography.Asn1;
 
 namespace Internal.Cryptography
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
         public static bool UsesIv(this CipherMode cipherMode)
         {

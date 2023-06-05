@@ -15,7 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeFunction2))]
-    public sealed partial class CodeAccessorFunction
+    partial public sealed class CodeAccessorFunction
         : AbstractCodeElement,
             EnvDTE.CodeFunction,
             EnvDTE80.CodeFunction2

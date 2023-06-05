@@ -14,7 +14,7 @@ namespace System.Threading
     // Under netcore, there is only one thread object per thread
     //
     [StructLayout(LayoutKind.Sequential)]
-    public partial class Thread
+    partial public class Thread
     {
 #pragma warning disable 169, 414, 649
         #region Sync with metadata/object-internals.h

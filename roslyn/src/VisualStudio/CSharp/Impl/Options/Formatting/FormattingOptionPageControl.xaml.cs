@@ -17,10 +17,11 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
+    partial
     /// <summary>
     /// Interaction logic for FormattingOptionPageControl.xaml
     /// </summary>
-    internal partial class FormattingOptionPageControl : AbstractOptionPageControl
+    internal class FormattingOptionPageControl : AbstractOptionPageControl
     {
         public FormattingOptionPageControl(OptionStore optionStore)
             : base(optionStore)

@@ -8,7 +8,7 @@ namespace System.Configuration
 {
     using System.Xml;
 
-    sealed public class IgnoreSection : ConfigurationSection
+    public sealed class IgnoreSection : ConfigurationSection
     {
         private static volatile ConfigurationPropertyCollection s_properties;
 

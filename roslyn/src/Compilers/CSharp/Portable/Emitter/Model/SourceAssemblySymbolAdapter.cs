@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Emit;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class SourceAssemblySymbol
+    partial internal class SourceAssemblySymbol
     {
         internal IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder,

@@ -34,7 +34,7 @@ namespace System.Net.NetworkInformation
         DestinationScopeMismatch = 11045,
     }
 
-    public partial class Ping : System.ComponentModel.Component
+    partial public class Ping : System.ComponentModel.Component
     {
         public Ping() { }
 
@@ -260,7 +260,7 @@ namespace System.Net.NetworkInformation
         }
     }
 
-    public partial class PingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    partial public class PingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         internal PingCompletedEventArgs()
             : base(default(System.Exception), default(bool), default(object)) { }
@@ -276,7 +276,7 @@ namespace System.Net.NetworkInformation
         System.Net.NetworkInformation.PingCompletedEventArgs e
     );
 
-    public partial class PingException : System.InvalidOperationException
+    partial public class PingException : System.InvalidOperationException
     {
         protected PingException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
@@ -288,7 +288,7 @@ namespace System.Net.NetworkInformation
         public PingException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class PingOptions
+    partial public class PingOptions
     {
         public PingOptions() { }
 
@@ -306,7 +306,7 @@ namespace System.Net.NetworkInformation
         }
     }
 
-    public partial class PingReply
+    partial public class PingReply
     {
         internal PingReply() { }
 

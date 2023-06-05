@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 {
     using static SQLitePersistentStorageConstants;
 
-    internal partial class SQLitePersistentStorage
+    partial internal class SQLitePersistentStorage
     {
         protected override Task<bool> ChecksumMatchesAsync(
             ProjectKey projectKey,

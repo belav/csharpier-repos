@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    internal abstract partial class OrderedEnumerable<TElement> : IOrderedEnumerable<TElement>
+    partial internal abstract class OrderedEnumerable<TElement> : IOrderedEnumerable<TElement>
     {
         internal IEnumerable<TElement> _source;
 
@@ -192,9 +192,9 @@ namespace System.Linq
         }
     }
 
+    partial
     /// <summary>An ordered enumerable used by Order/OrderDescending for Ts that are bitwise indistinguishable for any considered equal.</summary>
-    internal sealed partial class OrderedImplicitlyStableEnumerable<TElement>
-        : OrderedEnumerable<TElement>
+    internal sealed class OrderedImplicitlyStableEnumerable<TElement> : OrderedEnumerable<TElement>
     {
         private readonly bool _descending;
 

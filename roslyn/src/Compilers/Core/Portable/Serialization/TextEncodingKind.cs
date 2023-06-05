@@ -26,7 +26,7 @@ internal enum TextEncodingKind : byte
     EncodingUnicode_LE_BOM = 10,
 }
 
-internal static partial class EncodingExtensions
+partial internal static class EncodingExtensions
 {
     internal const TextEncodingKind FirstTextEncodingKind = TextEncodingKind.EncodingUtf8;
     internal const TextEncodingKind LastTextEncodingKind = TextEncodingKind.EncodingUnicode_LE_BOM;

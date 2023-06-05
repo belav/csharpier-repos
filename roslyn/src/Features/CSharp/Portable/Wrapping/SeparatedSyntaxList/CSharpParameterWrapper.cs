@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
 {
-    internal partial class CSharpParameterWrapper
+    partial internal class CSharpParameterWrapper
         : AbstractCSharpSeparatedSyntaxListWrapper<BaseParameterListSyntax, ParameterSyntax>
     {
         protected override string Align_wrapped_items => FeaturesResources.Align_wrapped_parameters;

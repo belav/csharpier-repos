@@ -12,7 +12,7 @@ using Xunit;
 
 namespace IntelHardwareIntrinsicTest.General;
 
-public partial class Program
+partial public class Program
 {
     private class Vector128UnusedTest<T>
         where T : struct, IComparable<T>, IEquatable<T>

@@ -11,7 +11,7 @@ namespace System.Net.Mail
         GSSAPI = 4
     };
 
-    internal sealed partial class SmtpConnection
+    partial internal sealed class SmtpConnection
     {
         private bool _serverSupportsEai;
         private bool _dsnEnabled;

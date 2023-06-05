@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 {
-    internal static partial class SkipEnabledCheckExtensions
+    partial internal static class SkipEnabledCheckExtensions
     {
         [LoggerMessage(
             EventId = 0,
@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
             Message = "Message: When using SkipEnabledCheck, the generated code skips logger.IsEnabled(logLevel) check before calling log. To be used when consumer has already guarded logger method in an IsEnabled check.",
             SkipEnabledCheck = true
         )]
-        internal static partial void LoggerMethodWithTrueSkipEnabledCheck(ILogger logger);
+        partial internal static void LoggerMethodWithTrueSkipEnabledCheck(ILogger logger);
 
         [LoggerMessage(
             EventId = 1,
@@ -19,6 +19,6 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
             Message = "M1",
             SkipEnabledCheck = false
         )]
-        internal static partial void LoggerMethodWithFalseSkipEnabledCheck(ILogger logger);
+        partial internal static void LoggerMethodWithFalseSkipEnabledCheck(ILogger logger);
     }
 }

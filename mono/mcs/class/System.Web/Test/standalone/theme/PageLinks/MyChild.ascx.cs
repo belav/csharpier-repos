@@ -6,7 +6,7 @@ using System.Web.UI.HtmlControls;
 using System.Diagnostics;
 
 [Themeable(true)]
-public partial class MyChild : System.Web.UI.UserControl
+partial public class MyChild : System.Web.UI.UserControl
 {
     protected override void OnInit(EventArgs e)
     {

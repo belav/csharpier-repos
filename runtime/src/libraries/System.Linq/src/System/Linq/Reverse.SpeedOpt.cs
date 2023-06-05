@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        private sealed partial class ReverseIterator<TSource> : IIListProvider<TSource>
+        partial private sealed class ReverseIterator<TSource> : IIListProvider<TSource>
         {
             public TSource[] ToArray()
             {

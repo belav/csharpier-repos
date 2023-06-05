@@ -10,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal abstract partial class BoundTreeRewriter : BoundTreeVisitor
+    partial internal abstract class BoundTreeRewriter : BoundTreeVisitor
     {
         [return: NotNullIfNotNull(nameof(type))]
         public virtual TypeSymbol? VisitType(TypeSymbol? type)

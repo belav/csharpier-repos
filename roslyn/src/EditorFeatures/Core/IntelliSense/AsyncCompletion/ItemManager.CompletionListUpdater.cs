@@ -25,7 +25,7 @@ using VSCompletionItem = Microsoft.VisualStudio.Language.Intellisense.AsyncCompl
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion
 {
-    internal partial class ItemManager
+    partial internal class ItemManager
     {
         /// <summary>
         /// Handles the filtering, sorting and selection of the completion items based on user inputs

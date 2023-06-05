@@ -133,7 +133,7 @@ namespace System.Threading
         }
 
         [SecurityCritical]
-        static internal void EstablishCopyOnWriteScope(ref ExecutionContextSwitcher ecsw)
+        internal static void EstablishCopyOnWriteScope(ref ExecutionContextSwitcher ecsw)
         {
             ecsw.m_ec = Capture();
             ecsw.m_sc = SynchronizationContext.CurrentNoFlow;
@@ -589,7 +589,7 @@ namespace System.Threading
             isPreAllocatedDefault: true
         );
 
-        static internal ExecutionContext PreAllocatedDefault
+        internal static ExecutionContext PreAllocatedDefault
         {
             [SecuritySafeCritical]
             get { return s_dummyDefaultEC; }
@@ -1157,13 +1157,13 @@ namespace System.Threading
         }
 
         [SecurityCritical]
-        static internal void EstablishCopyOnWriteScope(ref ExecutionContextSwitcher ecsw)
+        internal static void EstablishCopyOnWriteScope(ref ExecutionContextSwitcher ecsw)
         {
             EstablishCopyOnWriteScope(Thread.CurrentThread, false, ref ecsw);
         }
 
         [SecurityCritical]
-        static private void EstablishCopyOnWriteScope(
+        private static void EstablishCopyOnWriteScope(
             Thread currentThread,
             bool knownNullWindowsIdentity,
             ref ExecutionContextSwitcher ecsw
@@ -1443,7 +1443,7 @@ namespace System.Threading
 
         // internal helper to capture the current execution context using a passed in stack mark
         [System.Security.SecurityCritical] // auto-generated
-        static internal ExecutionContext Capture(
+        internal static ExecutionContext Capture(
             ref StackCrawlMark stackMark,
             CaptureOptions options
         )

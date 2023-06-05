@@ -39,7 +39,7 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-    internal partial class HttpRequestStream : Stream
+    partial internal class HttpRequestStream : Stream
     {
         private byte[] _buffer;
         private int _offset;

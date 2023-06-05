@@ -5,9 +5,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlTextReaderImpl
+    partial internal sealed class XmlTextReaderImpl
     {
-        static partial void ConvertAbsoluteUnixPathToAbsoluteUri(
+        partial static void ConvertAbsoluteUnixPathToAbsoluteUri(
             [NotNullIfNotNull(nameof(url))] ref string? url,
             XmlResolver? resolver
         )

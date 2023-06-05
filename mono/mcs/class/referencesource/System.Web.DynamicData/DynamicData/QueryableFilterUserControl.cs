@@ -16,8 +16,9 @@ namespace System.Web.DynamicData
         private HttpContextBase _context;
         private DefaultValueMapping _defaultValueMapping;
 
+        protected
         // internal for unit tests
-        internal protected MetaColumn Column { get; private set; }
+        internal MetaColumn Column { get; private set; }
         private IQueryableDataSource QueryableDataSource { get; set; }
 
         public abstract IQueryable GetQueryable(IQueryable source);

@@ -20,7 +20,7 @@ namespace GitHub_19910
         {
             // NOTE: This includes cost of stack alloc
             [MethodImpl(MethodImplOptions.NoInlining)]
-            static public void ReadFromStack()
+            public static void ReadFromStack()
             {
                 unsafe
                 {
@@ -32,7 +32,7 @@ namespace GitHub_19910
 
             // NOTE: This includes cost of stack alloc
             [MethodImpl(MethodImplOptions.NoInlining)]
-            static public void WriteToStack()
+            public static void WriteToStack()
             {
                 unsafe
                 {

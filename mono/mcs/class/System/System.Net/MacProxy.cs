@@ -48,7 +48,7 @@ namespace Mono.Net
             : base(handle, own) { }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFURLCreateWithString(IntPtr allocator, IntPtr str, IntPtr baseURL);
+        static extern IntPtr CFURLCreateWithString(IntPtr allocator, IntPtr str, IntPtr baseURL);
 
         public static CFUrl Create(string absolute)
         {
@@ -450,14 +450,16 @@ namespace Mono.Net
 
         [DllImport(CFNetworkLibrary, EntryPoint = "CFNetworkCopyProxiesForAutoConfigurationScript")]
         // CFArrayRef CFNetworkCopyProxiesForAutoConfigurationScript (CFStringRef proxyAutoConfigurationScript, CFURLRef targetURL, CFErrorRef* error);
-        extern static IntPtr CFNetworkCopyProxiesForAutoConfigurationScriptSequential(
+        static
+        // CFArrayRef CFNetworkCopyProxiesForAutoConfigurationScript (CFStringRef proxyAutoConfigurationScript, CFURLRef targetURL, CFErrorRef* error);
+        extern IntPtr CFNetworkCopyProxiesForAutoConfigurationScriptSequential(
             IntPtr proxyAutoConfigurationScript,
             IntPtr targetURL,
             out IntPtr error
         );
 
         [DllImport(CFNetworkLibrary)]
-        extern static IntPtr CFNetworkExecuteProxyAutoConfigurationURL(
+        static extern IntPtr CFNetworkExecuteProxyAutoConfigurationURL(
             IntPtr proxyAutoConfigURL,
             IntPtr targetURL,
             CFProxyAutoConfigurationResultCallback cb,
@@ -683,7 +685,9 @@ namespace Mono.Net
 
         [DllImport(CFNetworkLibrary)]
         // CFArrayRef CFNetworkCopyProxiesForURL (CFURLRef url, CFDictionaryRef proxySettings);
-        extern static IntPtr CFNetworkCopyProxiesForURL(IntPtr url, IntPtr proxySettings);
+        static
+        // CFArrayRef CFNetworkCopyProxiesForURL (CFURLRef url, CFDictionaryRef proxySettings);
+        extern IntPtr CFNetworkCopyProxiesForURL(IntPtr url, IntPtr proxySettings);
 
         static CFArray CopyProxiesForURL(CFUrl url, CFDictionary proxySettings)
         {
@@ -740,7 +744,9 @@ namespace Mono.Net
 
         [DllImport(CFNetworkLibrary)]
         // CFDictionaryRef CFNetworkCopySystemProxySettings (void);
-        extern static IntPtr CFNetworkCopySystemProxySettings();
+        static
+        // CFDictionaryRef CFNetworkCopySystemProxySettings (void);
+        extern IntPtr CFNetworkCopySystemProxySettings();
 
         public static CFProxySettings GetSystemProxySettings()
         {

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Reflection.Tests
 {
-    internal static partial class TestUtils
+    partial internal static class TestUtils
     {
         // Given a runtime Type, load up the equivalent in the Test MetataLoadContext. This is for test-writing convenience so
         // that tests can write "typeof(TestClass).Project()" and get the benefits of compile-time typename checking and Intellisense.

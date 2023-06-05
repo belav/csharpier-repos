@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [ExportCompletionProvider(nameof(OverrideCompletionProvider), LanguageNames.CSharp)]
     [ExtensionOrder(After = nameof(PreprocessorCompletionProvider))]
     [Shared]
-    internal partial class OverrideCompletionProvider : AbstractOverrideCompletionProvider
+    partial internal class OverrideCompletionProvider : AbstractOverrideCompletionProvider
     {
         [ImportingConstructor]
         [SuppressMessage(

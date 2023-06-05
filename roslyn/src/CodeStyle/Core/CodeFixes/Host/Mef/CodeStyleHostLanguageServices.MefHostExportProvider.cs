@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    internal sealed partial class CodeStyleHostLanguageServices : HostLanguageServices
+    partial internal sealed class CodeStyleHostLanguageServices : HostLanguageServices
     {
         private static readonly ConditionalWeakTable<
             HostLanguageServices,

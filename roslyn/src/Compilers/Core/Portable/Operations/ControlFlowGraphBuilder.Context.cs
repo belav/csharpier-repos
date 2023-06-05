@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    internal sealed partial class ControlFlowGraphBuilder
+    partial internal sealed class ControlFlowGraphBuilder
     {
         /// <summary>
         /// This structure is meant to capture a snapshot of the <see cref="ControlFlowGraphBuilder"/> state

@@ -45,7 +45,7 @@ namespace System
         public const char MinValue = (char)0x00;
 
         // Unicode category values from Unicode U+0000 ~ U+00FF. Store them in byte[] array to save space.
-        private readonly static byte[] categoryForLatin1 =
+        private static readonly byte[] categoryForLatin1 =
         {
             (byte)UnicodeCategory.Control,
             (byte)UnicodeCategory.Control,

@@ -10,11 +10,12 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace TestHelper;
 
+partial
 /// <summary>
 /// Diagnostic Producer class with extra methods dealing with applying codefixes
 /// All methods are static
 /// </summary>
-public abstract partial class CodeFixVerifier : DiagnosticVerifier
+public abstract class CodeFixVerifier : DiagnosticVerifier
 {
     /// <summary>
     /// Apply the inputted CodeAction to the inputted document.

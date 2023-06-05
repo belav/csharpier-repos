@@ -10,13 +10,14 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// A dictionary that maps strings to all known spellings of that string. Can be used to
     /// efficiently store the set of known type names for a module for both VB and C# while also
     /// answering questions like "do you have a type called Goo" in either a case sensitive or
     /// insensitive manner.
     /// </summary>
-    internal partial class IdentifierCollection
+    internal class IdentifierCollection
     {
         // Maps an identifier to all spellings of that identifier in this module.  The value type is
         // typed as object so that it can store either an individual element (the common case), or a

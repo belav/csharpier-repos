@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace System.Formats.Asn1
 {
-    public sealed partial class AsnWriter
+    partial public sealed class AsnWriter
     {
         /// <summary>
         ///   Write a [<see cref="FlagsAttribute"/>] enum value as a NamedBitList with

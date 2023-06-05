@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct RecipientKeyIdentifier
+    partial internal struct RecipientKeyIdentifier
     {
         internal ReadOnlyMemory<byte> SubjectKeyIdentifier;
         internal DateTimeOffset? Date;

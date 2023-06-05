@@ -15,7 +15,7 @@ using System.Web.DynamicData;
 
 using MonoTests.Common;
 
-public partial class ChildrenField : PokerFieldTemplateUserControl
+partial public class ChildrenField : PokerFieldTemplateUserControl
 {
     private bool _allowNavigation = true;
     private string _navigateUrl;

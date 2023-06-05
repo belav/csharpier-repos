@@ -757,7 +757,7 @@ namespace MonoTests.System.Windows.Forms
             Assert.True(ok, "Infinite loop has been detected in `WndProc`");
         }
 
-        public partial class ButtonedForm : Form
+        partial public class ButtonedForm : Form
         {
             // We need to controls on this form. One of them must be active (button).
             public Button button = new Button();
@@ -810,7 +810,7 @@ namespace MonoTests.System.Windows.Forms
             }
         }
 
-        public partial class OnClosedForm : Form
+        partial public class OnClosedForm : Form
         {
             private ButtonedForm buttonedForm;
 

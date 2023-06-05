@@ -3,16 +3,17 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
+    partial
     // Initialization of libssl threading support is done in a static constructor.
     // This enables a project simply to include this file, and any usage of any of
     // the Ssl functions will trigger initialization of the threading support.
 
-    internal static partial class Ssl
+    internal static class Ssl
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EnsureLibSslInitialized")]
-        internal static partial void EnsureLibSslInitialized();
+        partial internal static void EnsureLibSslInitialized();
 
         static Ssl()
         {

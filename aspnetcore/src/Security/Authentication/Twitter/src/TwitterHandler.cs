@@ -17,10 +17,11 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
+partial
 /// <summary>
 /// Authentication handler for Twitter's OAuth based authentication.
 /// </summary>
-public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions>
+public class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions>
 {
     private HttpClient Backchannel => Options.Backchannel;
 
@@ -546,7 +547,7 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
     }
 
     [JsonSerializable(typeof(TwitterErrorResponse))]
-    internal sealed partial class TwitterJsonContext : JsonSerializerContext
+    partial internal sealed class TwitterJsonContext : JsonSerializerContext
     {
         public static readonly TwitterJsonContext DefaultWithOptions = new TwitterJsonContext(
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true }

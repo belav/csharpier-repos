@@ -74,7 +74,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="MemberMemberBinding"/> that represents the recursive initialization of members of a field or property.

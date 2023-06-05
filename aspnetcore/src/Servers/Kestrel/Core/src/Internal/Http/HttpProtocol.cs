@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
 
-internal abstract partial class HttpProtocol : IHttpResponseControl
+partial internal abstract class HttpProtocol : IHttpResponseControl
 {
     private static readonly byte[] _bytesConnectionClose = Encoding.ASCII.GetBytes(
         "\r\nConnection: close"

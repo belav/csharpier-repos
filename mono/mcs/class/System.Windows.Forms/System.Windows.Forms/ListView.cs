@@ -92,7 +92,7 @@ namespace System.Windows.Forms
         internal int v_marker;
         private int keysearch_tickcnt;
         private string keysearch_text;
-        static private readonly int keysearch_keydelay = 1000;
+        private static readonly int keysearch_keydelay = 1000;
         private int[] reordered_column_indices;
         private int[] reordered_items_indices;
         private Point[] items_location;

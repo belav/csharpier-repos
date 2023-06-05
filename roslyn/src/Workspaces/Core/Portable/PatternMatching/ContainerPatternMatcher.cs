@@ -12,9 +12,9 @@ using Microsoft.CodeAnalysis.Shared.Collections;
 
 namespace Microsoft.CodeAnalysis.PatternMatching
 {
-    internal partial class PatternMatcher
+    partial internal class PatternMatcher
     {
-        private sealed partial class ContainerPatternMatcher : PatternMatcher
+        partial private sealed class ContainerPatternMatcher : PatternMatcher
         {
             private readonly PatternSegment[] _patternSegments;
             private readonly char[] _containerSplitCharacters;

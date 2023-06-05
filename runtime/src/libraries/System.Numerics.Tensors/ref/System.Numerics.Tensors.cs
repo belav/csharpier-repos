@@ -6,7 +6,7 @@
 
 namespace System.Numerics.Tensors
 {
-    public static partial class ArrayTensorExtensions
+    partial public static class ArrayTensorExtensions
     {
         public static System.Numerics.Tensors.CompressedSparseTensor<T> ToCompressedSparseTensor<T>(
             this System.Array array,
@@ -98,7 +98,7 @@ namespace System.Numerics.Tensors
         }
     }
 
-    public partial class CompressedSparseTensor<T> : System.Numerics.Tensors.Tensor<T>
+    partial public class CompressedSparseTensor<T> : System.Numerics.Tensors.Tensor<T>
     {
         public CompressedSparseTensor(
             System.Memory<T> values,
@@ -191,7 +191,7 @@ namespace System.Numerics.Tensors
         }
     }
 
-    public partial class DenseTensor<T> : System.Numerics.Tensors.Tensor<T>
+    partial public class DenseTensor<T> : System.Numerics.Tensors.Tensor<T>
     {
         public DenseTensor(int length)
             : base(default(System.Array), default(bool)) { }
@@ -245,7 +245,7 @@ namespace System.Numerics.Tensors
         public override void SetValue(int index, T value) { }
     }
 
-    public partial class SparseTensor<T> : System.Numerics.Tensors.Tensor<T>
+    partial public class SparseTensor<T> : System.Numerics.Tensors.Tensor<T>
     {
         public SparseTensor(
             System.ReadOnlySpan<int> dimensions,
@@ -301,7 +301,7 @@ namespace System.Numerics.Tensors
         }
     }
 
-    public static partial class Tensor
+    partial public static class Tensor
     {
         public static System.Numerics.Tensors.Tensor<T> CreateFromDiagonal<T>(
             System.Numerics.Tensors.Tensor<T> diagonal
@@ -338,7 +338,7 @@ namespace System.Numerics.Tensors
         }
     }
 
-    public abstract partial class Tensor<T>
+    partial public abstract class Tensor<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IList<T>,

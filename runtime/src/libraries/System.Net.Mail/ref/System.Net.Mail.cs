@@ -6,7 +6,7 @@
 
 namespace System.Net.Mail
 {
-    public partial class AlternateView : System.Net.Mail.AttachmentBase
+    partial public class AlternateView : System.Net.Mail.AttachmentBase
     {
         public AlternateView(System.IO.Stream contentStream)
             : base(default(System.IO.Stream)) { }
@@ -64,7 +64,7 @@ namespace System.Net.Mail
         protected override void Dispose(bool disposing) { }
     }
 
-    public sealed partial class AlternateViewCollection
+    partial public sealed class AlternateViewCollection
         : System.Collections.ObjectModel.Collection<System.Net.Mail.AlternateView>,
             System.IDisposable
     {
@@ -81,7 +81,7 @@ namespace System.Net.Mail
         protected override void SetItem(int index, System.Net.Mail.AlternateView item) { }
     }
 
-    public partial class Attachment : System.Net.Mail.AttachmentBase
+    partial public class Attachment : System.Net.Mail.AttachmentBase
     {
         public Attachment(System.IO.Stream contentStream, System.Net.Mime.ContentType contentType)
             : base(default(System.IO.Stream)) { }
@@ -143,7 +143,7 @@ namespace System.Net.Mail
         }
     }
 
-    public abstract partial class AttachmentBase : System.IDisposable
+    partial public abstract class AttachmentBase : System.IDisposable
     {
         protected AttachmentBase(System.IO.Stream contentStream) { }
 
@@ -186,7 +186,7 @@ namespace System.Net.Mail
         protected virtual void Dispose(bool disposing) { }
     }
 
-    public sealed partial class AttachmentCollection
+    partial public sealed class AttachmentCollection
         : System.Collections.ObjectModel.Collection<System.Net.Mail.Attachment>,
             System.IDisposable
     {
@@ -213,7 +213,7 @@ namespace System.Net.Mail
         Never = 134217728,
     }
 
-    public partial class LinkedResource : System.Net.Mail.AttachmentBase
+    partial public class LinkedResource : System.Net.Mail.AttachmentBase
     {
         public LinkedResource(System.IO.Stream contentStream)
             : base(default(System.IO.Stream)) { }
@@ -265,7 +265,7 @@ namespace System.Net.Mail
         }
     }
 
-    public sealed partial class LinkedResourceCollection
+    partial public sealed class LinkedResourceCollection
         : System.Collections.ObjectModel.Collection<System.Net.Mail.LinkedResource>,
             System.IDisposable
     {
@@ -282,7 +282,7 @@ namespace System.Net.Mail
         protected override void SetItem(int index, System.Net.Mail.LinkedResource item) { }
     }
 
-    public partial class MailAddress
+    partial public class MailAddress
     {
         public MailAddress(string address) { }
 
@@ -356,7 +356,7 @@ namespace System.Net.Mail
         }
     }
 
-    public partial class MailAddressCollection
+    partial public class MailAddressCollection
         : System.Collections.ObjectModel.Collection<System.Net.Mail.MailAddress>
     {
         public MailAddressCollection() { }
@@ -373,7 +373,7 @@ namespace System.Net.Mail
         }
     }
 
-    public partial class MailMessage : System.IDisposable
+    partial public class MailMessage : System.IDisposable
     {
         public MailMessage() { }
 
@@ -502,7 +502,7 @@ namespace System.Net.Mail
     );
 
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
-    public partial class SmtpClient : System.IDisposable
+    partial public class SmtpClient : System.IDisposable
     {
         public SmtpClient() { }
 
@@ -646,7 +646,7 @@ namespace System.Net.Mail
         PickupDirectoryFromIis = 2,
     }
 
-    public partial class SmtpException
+    partial public class SmtpException
         : System.Exception,
             System.Runtime.Serialization.ISerializable
     {
@@ -682,7 +682,7 @@ namespace System.Net.Mail
         ) { }
     }
 
-    public partial class SmtpFailedRecipientException
+    partial public class SmtpFailedRecipientException
         : System.Net.Mail.SmtpException,
             System.Runtime.Serialization.ISerializable
     {
@@ -730,7 +730,7 @@ namespace System.Net.Mail
         ) { }
     }
 
-    public partial class SmtpFailedRecipientsException
+    partial public class SmtpFailedRecipientsException
         : System.Net.Mail.SmtpFailedRecipientException,
             System.Runtime.Serialization.ISerializable
     {
@@ -798,7 +798,7 @@ namespace System.Net.Mail
 
 namespace System.Net.Mime
 {
-    public partial class ContentDisposition
+    partial public class ContentDisposition
     {
         public ContentDisposition() { }
 
@@ -862,7 +862,7 @@ namespace System.Net.Mime
         }
     }
 
-    public partial class ContentType
+    partial public class ContentType
     {
         public ContentType() { }
 
@@ -913,15 +913,15 @@ namespace System.Net.Mime
         }
     }
 
-    public static partial class DispositionTypeNames
+    partial public static class DispositionTypeNames
     {
         public const string Attachment = "attachment";
         public const string Inline = "inline";
     }
 
-    public static partial class MediaTypeNames
+    partial public static class MediaTypeNames
     {
-        public static partial class Application
+        partial public static class Application
         {
             public const string Json = "application/json";
             public const string Octet = "application/octet-stream";
@@ -932,14 +932,14 @@ namespace System.Net.Mime
             public const string Zip = "application/zip";
         }
 
-        public static partial class Image
+        partial public static class Image
         {
             public const string Gif = "image/gif";
             public const string Jpeg = "image/jpeg";
             public const string Tiff = "image/tiff";
         }
 
-        public static partial class Text
+        partial public static class Text
         {
             public const string Html = "text/html";
             public const string Plain = "text/plain";

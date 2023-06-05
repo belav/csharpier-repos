@@ -9,10 +9,11 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
+    partial
     /// <summary>
     /// Provides options to be used with <see cref="JsonSerializer"/>.
     /// </summary>
-    public sealed partial class JsonSerializerOptions
+    public sealed class JsonSerializerOptions
     {
         /// <summary>
         /// The list of custom converters.

@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static int Sum(this IEnumerable<int> source) => Sum<int, int>(source);
 

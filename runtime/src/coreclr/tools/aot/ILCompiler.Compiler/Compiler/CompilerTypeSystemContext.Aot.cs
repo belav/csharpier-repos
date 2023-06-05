@@ -12,7 +12,7 @@ using Interlocked = System.Threading.Interlocked;
 
 namespace ILCompiler
 {
-    public partial class CompilerTypeSystemContext
+    partial public class CompilerTypeSystemContext
     {
         // Chosen rather arbitrarily. For the app that I was looking at, cutoff point of 7 compiled
         // more than 10 minutes on a release build of the compiler, and I lost patience.

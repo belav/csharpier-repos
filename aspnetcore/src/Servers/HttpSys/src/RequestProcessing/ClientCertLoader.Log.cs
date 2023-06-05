@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal partial class ClientCertLoader
+partial internal class ClientCertLoader
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.ChannelBindingMissing,
@@ -15,7 +15,7 @@ internal partial class ClientCertLoader
             "GetChannelBindingFromTls",
             EventName = "ChannelBindingMissing"
         )]
-        public static partial void ChannelBindingMissing(ILogger logger, Exception exception);
+        partial public static void ChannelBindingMissing(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.ChannelBindingUnsupported,
@@ -23,6 +23,6 @@ internal partial class ClientCertLoader
             "GetChannelBindingFromTls; Channel binding is not supported.",
             EventName = "ChannelBindingUnsupported"
         )]
-        public static partial void ChannelBindingUnsupported(ILogger logger);
+        partial public static void ChannelBindingUnsupported(ILogger logger);
     }
 }

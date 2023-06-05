@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class BasePropertyDeclarationSyntax
+    partial public class BasePropertyDeclarationSyntax
     {
         public abstract override SyntaxList<AttributeListSyntax> AttributeLists { get; }
         public abstract override SyntaxTokenList Modifiers { get; }

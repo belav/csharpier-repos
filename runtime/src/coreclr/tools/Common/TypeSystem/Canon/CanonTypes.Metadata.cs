@@ -10,7 +10,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public abstract partial class CanonBaseType : MetadataType
+    partial public abstract class CanonBaseType : MetadataType
     {
         protected override MethodImplRecord[] ComputeVirtualMethodImplsForType()
         {
@@ -59,12 +59,12 @@ namespace Internal.TypeSystem
         }
     }
 
-    internal sealed partial class CanonType
+    partial internal sealed class CanonType
     {
         public override bool IsSealed => false;
     }
 
-    internal sealed partial class UniversalCanonType
+    partial internal sealed class UniversalCanonType
     {
         public override bool IsSealed => true;
     }

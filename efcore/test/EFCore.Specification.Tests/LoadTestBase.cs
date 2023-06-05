@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
+partial public abstract class LoadTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : LoadTestBase<TFixture>.LoadFixtureBase
 {
     protected LoadTestBase(TFixture fixture)

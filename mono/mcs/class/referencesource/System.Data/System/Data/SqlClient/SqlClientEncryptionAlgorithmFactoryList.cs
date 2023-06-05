@@ -13,10 +13,11 @@ namespace System.Data.SqlClient
     using System.Collections.Concurrent;
     using System.Text;
 
+    internal
     /// <summary>
     /// <para> Implements a global directory of all the encryption algorithms registered with client.</para>
     /// </summary>
-    sealed internal class SqlClientEncryptionAlgorithmFactoryList
+    sealed class SqlClientEncryptionAlgorithmFactoryList
     {
         private readonly ConcurrentDictionary<
             string,

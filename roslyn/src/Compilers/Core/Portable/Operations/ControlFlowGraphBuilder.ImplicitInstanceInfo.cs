@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    internal partial class ControlFlowGraphBuilder
+    partial internal class ControlFlowGraphBuilder
     {
         /// <summary>
         /// Holds the current object being initialized if we're visiting an object initializer.

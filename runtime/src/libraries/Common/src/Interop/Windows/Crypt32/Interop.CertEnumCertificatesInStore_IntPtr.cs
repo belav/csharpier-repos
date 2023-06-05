@@ -5,12 +5,12 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Interop.Libraries.Crypt32, SetLastError = true)]
-        internal static partial IntPtr CertEnumCertificatesInStore(
+        partial internal static IntPtr CertEnumCertificatesInStore(
             SafeCertStoreHandle hCertStore,
             IntPtr pPrevCertContext
         );

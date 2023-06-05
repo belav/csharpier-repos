@@ -13,7 +13,7 @@ using Xunit;
 
 namespace System.SpanTests
 {
-    public static partial class SpanTests
+    partial public static class SpanTests
     {
         private static readonly Func<IndexOfAnyValues<byte>, byte[]> s_getValuesByteMethod =
             typeof(IndexOfAnyValues<byte>)

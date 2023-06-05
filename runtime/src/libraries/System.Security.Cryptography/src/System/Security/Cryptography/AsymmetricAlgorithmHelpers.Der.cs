@@ -7,10 +7,11 @@ using System.Formats.Asn1;
 
 namespace System.Security.Cryptography
 {
+    partial
     //
     // Common infrastructure for AsymmetricAlgorithm-derived classes that layer on OpenSSL.
     //
-    internal static partial class AsymmetricAlgorithmHelpers
+    internal static class AsymmetricAlgorithmHelpers
     {
         /// <summary>
         /// Convert Ieee1363 format of (r, s) to Der format

@@ -16,7 +16,7 @@ namespace System.Activities.Core.Presentation
     using System.ComponentModel;
     using System.Windows;
 
-    internal sealed partial class InvokeDelegateDesigner
+    partial internal sealed class InvokeDelegateDesigner
     {
         private const string DelegatePropertyName = "Delegate";
         private const string DelegateArgumentsPropertyName = "DelegateArguments";

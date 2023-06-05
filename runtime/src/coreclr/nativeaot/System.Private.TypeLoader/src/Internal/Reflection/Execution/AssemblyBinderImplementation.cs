@@ -16,6 +16,7 @@ using Internal.Metadata.NativeFormat;
 
 namespace Internal.Reflection.Execution
 {
+    partial
     //=============================================================================================================================
     // The assembly resolution policy for emulation of "classic reflection."
     //
@@ -23,7 +24,7 @@ namespace Internal.Reflection.Execution
     // native process. There is no support for probing for assemblies in directories, user-supplied files, GACs, NICs or any
     // other repository.
     //=============================================================================================================================
-    public sealed partial class AssemblyBinderImplementation : AssemblyBinder
+    public sealed class AssemblyBinderImplementation : AssemblyBinder
     {
         private AssemblyBinderImplementation()
         {

@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
 {
-    internal partial class CSharpOrganizeImportsService
+    partial internal class CSharpOrganizeImportsService
     {
         private sealed class Rewriter : CSharpSyntaxRewriter
         {

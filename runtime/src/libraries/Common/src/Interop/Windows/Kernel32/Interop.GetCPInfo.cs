@@ -3,24 +3,24 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct CPINFO
         {
             internal int MaxCharSize;
 
-            internal fixed byte DefaultChar[
+            fixed internal byte DefaultChar[
                 2 /* MAX_DEFAULTCHAR */
             ];
-            internal fixed byte LeadByte[
+            fixed internal byte LeadByte[
                 12 /* MAX_LEADBYTES */
             ];
         }
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static unsafe partial Interop.BOOL GetCPInfo(uint codePage, CPINFO* lpCpInfo);
+        partial internal static unsafe Interop.BOOL GetCPInfo(uint codePage, CPINFO* lpCpInfo);
     }
 }

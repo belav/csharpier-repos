@@ -1500,7 +1500,7 @@ namespace System.Reflection
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [ResourceExposure(ResourceScope.None)]
-        private extern static void GetFullName(
+        private static extern void GetFullName(
             RuntimeAssembly assembly,
             StringHandleOnStack retString
         );
@@ -1583,7 +1583,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        internal extern static void GetForwardedTypes(
+        internal static extern void GetForwardedTypes(
             RuntimeAssembly assembly,
             ObjectHandleOnStack retTypes
         );
@@ -1592,7 +1592,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void GetExportedTypes(
+        private static extern void GetExportedTypes(
             RuntimeAssembly assembly,
             ObjectHandleOnStack retTypes
         );
@@ -1645,7 +1645,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void GetEvidence(
+        private static extern void GetEvidence(
             RuntimeAssembly assembly,
             ObjectHandleOnStack retEvidence
         );
@@ -1654,7 +1654,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static SecurityRuleSet GetSecurityRuleSet(RuntimeAssembly assembly);
+        private static extern SecurityRuleSet GetSecurityRuleSet(RuntimeAssembly assembly);
 
         public override Evidence Evidence
         {
@@ -2077,7 +2077,7 @@ namespace System.Reflection
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [ResourceExposure(ResourceScope.None)]
-        private extern static bool nIsDesignerBindingContext(RuntimeAssembly assembly);
+        private static extern bool nIsDesignerBindingContext(RuntimeAssembly assembly);
 #endif
 
         [System.Security.SecurityCritical] // auto-generated
@@ -2441,7 +2441,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.Machine | ResourceScope.Assembly)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void LoadModule(
+        private static extern void LoadModule(
             RuntimeAssembly assembly,
             String moduleName,
             byte[] rawModule,
@@ -2563,7 +2563,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void GetExecutingAssembly(
+        private static extern void GetExecutingAssembly(
             StackCrawlMarkHandle stackMark,
             ObjectHandleOnStack retAssembly
         );
@@ -2661,7 +2661,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void GetImageRuntimeVersion(
+        private static extern void GetImageRuntimeVersion(
             RuntimeAssembly assembly,
             StringHandleOnStack retString
         );
@@ -2683,7 +2683,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool IsGlobalAssemblyCache(RuntimeAssembly assembly);
+        private static extern bool IsGlobalAssemblyCache(RuntimeAssembly assembly);
 
         public override bool GlobalAssemblyCache
         {
@@ -2695,7 +2695,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static Int64 GetHostContext(RuntimeAssembly assembly);
+        private static extern Int64 GetHostContext(RuntimeAssembly assembly);
 
         public override Int64 HostContext
         {
@@ -2778,7 +2778,7 @@ namespace System.Reflection
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [ResourceExposure(ResourceScope.None)]
-        private static unsafe extern byte* GetResource(
+        private static extern unsafe byte* GetResource(
             RuntimeAssembly assembly,
             String resourceName,
             out ulong length,
@@ -2945,7 +2945,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static AssemblyHashAlgorithm GetHashAlgorithm(RuntimeAssembly assembly);
+        private static extern AssemblyHashAlgorithm GetHashAlgorithm(RuntimeAssembly assembly);
 
         [System.Security.SecurityCritical] // auto-generated
         private AssemblyHashAlgorithm GetHashAlgorithm()
@@ -2957,7 +2957,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static AssemblyNameFlags GetFlags(RuntimeAssembly assembly);
+        private static extern AssemblyNameFlags GetFlags(RuntimeAssembly assembly);
 
         [System.Security.SecurityCritical] // auto-generated
         private AssemblyNameFlags GetFlags()
@@ -3005,7 +3005,7 @@ namespace System.Reflection
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [ResourceExposure(ResourceScope.None)]
-        private extern static void GetGrantSet(
+        private static extern void GetGrantSet(
             RuntimeAssembly assembly,
             ObjectHandleOnStack granted,
             ObjectHandleOnStack denied
@@ -3045,7 +3045,7 @@ namespace System.Reflection
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private extern static bool IsAllSecurityCritical(RuntimeAssembly assembly);
+        private static extern bool IsAllSecurityCritical(RuntimeAssembly assembly);
 
         // Is everything introduced by this assembly critical
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -3059,7 +3059,7 @@ namespace System.Reflection
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private extern static bool IsAllSecuritySafeCritical(RuntimeAssembly assembly);
+        private static extern bool IsAllSecuritySafeCritical(RuntimeAssembly assembly);
 
         // Is everything introduced by this assembly safe critical
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -3073,7 +3073,7 @@ namespace System.Reflection
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private extern static bool IsAllPublicAreaSecuritySafeCritical(RuntimeAssembly assembly);
+        private static extern bool IsAllPublicAreaSecuritySafeCritical(RuntimeAssembly assembly);
 
         // Is everything introduced by this assembly safe critical
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -3087,7 +3087,7 @@ namespace System.Reflection
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private extern static bool IsAllSecurityTransparent(RuntimeAssembly assembly);
+        private static extern bool IsAllSecurityTransparent(RuntimeAssembly assembly);
 
         // Is everything introduced by this assembly transparent
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -3587,12 +3587,12 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern RuntimeAssembly nLoadFile(String path, Evidence evidence);
+        internal static extern RuntimeAssembly nLoadFile(String path, Evidence evidence);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern RuntimeAssembly nLoadImage(
+        internal static extern RuntimeAssembly nLoadImage(
             byte[] rawAssembly,
             byte[] rawSymbolStore,
             Evidence evidence,
@@ -3605,7 +3605,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static internal extern unsafe void nLoadFromUnmanagedArray(
+        internal static extern unsafe void nLoadFromUnmanagedArray(
             bool fIntrospection,
             byte* assemblyContent,
             ulong assemblySize,
@@ -3619,7 +3619,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void GetModules(
+        private static extern void GetModules(
             RuntimeAssembly assembly,
             bool loadIfNotFound,
             bool getResourceModules,

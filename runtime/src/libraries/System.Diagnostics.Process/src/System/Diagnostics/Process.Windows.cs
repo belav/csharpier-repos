@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace System.Diagnostics
 {
-    public partial class Process : IDisposable
+    partial public class Process : IDisposable
     {
         private static readonly object s_createProcessLock = new object();
 

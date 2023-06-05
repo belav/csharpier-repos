@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Navigation
 {
-    internal partial class NavigableItemFactory
+    partial internal class NavigableItemFactory
     {
         private class SymbolLocationNavigableItem : INavigableItem
         {

@@ -13,7 +13,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace System.Runtime.CompilerServices
 {
-    public static partial class RuntimeHelpers
+    partial public static class RuntimeHelpers
     {
         [Intrinsic]
         public static void InitializeArray(Array array, RuntimeFieldHandle fldHandle)

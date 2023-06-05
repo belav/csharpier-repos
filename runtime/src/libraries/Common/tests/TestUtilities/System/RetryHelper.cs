@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System
 {
-    public static partial class RetryHelper
+    partial public static class RetryHelper
     {
         private static readonly Func<int, int> s_defaultBackoffFunc = i =>
             Math.Min(i * 100, 60_000);

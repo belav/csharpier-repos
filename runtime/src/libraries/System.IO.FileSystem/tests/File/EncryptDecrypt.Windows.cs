@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace System.IO.Tests
 {
-    public partial class EncryptDecrypt
+    partial public class EncryptDecrypt
     {
         partial void EnsureEFSServiceStarted()
         {

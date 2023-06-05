@@ -34,12 +34,13 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class VolumeIndicators : PriceIndicators
     {
+        public
         #region Properties
 
         /// <summary>
         /// Formula Module name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return SR.FormulaNameVolumeIndicators; }
         }
@@ -63,7 +64,18 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="parameterList">Array of strings - Formula parameters</param>
         /// <param name="extraParameterList">Array of strings - Extra Formula parameters from DataManipulator object</param>
         /// <param name="outLabels">Array of strings - Used for Labels. Description for output results.</param>
-        override public void Formula(
+        public
+        /// <summary>
+        /// The first method in the module, which converts a formula
+        /// name to the corresponding private method.
+        /// </summary>
+        /// <param name="formulaName">String which represent a formula name</param>
+        /// <param name="inputValues">Arrays of doubles - Input values</param>
+        /// <param name="outputValues">Arrays of doubles - Output values</param>
+        /// <param name="parameterList">Array of strings - Formula parameters</param>
+        /// <param name="extraParameterList">Array of strings - Extra Formula parameters from DataManipulator object</param>
+        /// <param name="outLabels">Array of strings - Used for Labels. Description for output results.</param>
+        override void Formula(
             string formulaName,
             double[][] inputValues,
             out double[][] outputValues,

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class Buffer
+    partial public class Buffer
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern unsafe void __ZeroMemory(void* b, nuint byteLength);

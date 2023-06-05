@@ -6,12 +6,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public abstract partial class FileSystemTest
+    partial public abstract class FileSystemTest
     {
         [LibraryImport("libc", SetLastError = true)]
-        protected static partial int geteuid();
+        partial protected static int geteuid();
 
         [LibraryImport("libc", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
-        protected static partial int mkfifo(string path, int mode);
+        partial protected static int mkfifo(string path, int mode);
     }
 }

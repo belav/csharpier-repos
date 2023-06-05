@@ -10,7 +10,7 @@ using System.Globalization;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class SyntaxToken
+    partial internal class SyntaxToken
     {
         internal class SyntaxTokenWithValue<T> : SyntaxToken
         {

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal partial class ServiceHubRemoteHostClient
+    partial internal class ServiceHubRemoteHostClient
     {
         public delegate Task<RemoteServiceConnection> ConnectionFactory(
             RemoteServiceName serviceName,

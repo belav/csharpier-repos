@@ -10,7 +10,7 @@ using Xunit;
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     [TestService]
-    internal partial class SolutionVerifierInProcess
+    partial internal class SolutionVerifierInProcess
     {
         public async Task AssemblyReferencePresentAsync(
             string projectName,

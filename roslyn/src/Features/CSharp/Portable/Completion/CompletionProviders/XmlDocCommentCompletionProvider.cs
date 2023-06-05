@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [ExportCompletionProvider(nameof(XmlDocCommentCompletionProvider), LanguageNames.CSharp)]
     [ExtensionOrder(After = nameof(PartialTypeCompletionProvider))]
     [Shared]
-    internal partial class XmlDocCommentCompletionProvider
+    partial internal class XmlDocCommentCompletionProvider
         : AbstractDocCommentCompletionProvider<DocumentationCommentTriviaSyntax>
     {
         [ImportingConstructor]

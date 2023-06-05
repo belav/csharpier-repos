@@ -14,7 +14,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class AesCryptoServiceProvider : System.Security.Cryptography.Aes
+    partial public sealed class AesCryptoServiceProvider : System.Security.Cryptography.Aes
     {
         public AesCryptoServiceProvider() { }
 
@@ -96,7 +96,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-    public sealed partial class CspKeyContainerInfo
+    partial public sealed class CspKeyContainerInfo
     {
         public CspKeyContainerInfo(System.Security.Cryptography.CspParameters parameters) { }
 
@@ -151,7 +151,7 @@ namespace System.Security.Cryptography
     }
 
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-    public sealed partial class CspParameters
+    partial public sealed class CspParameters
     {
         public string? KeyContainerName;
         public int KeyNumber;
@@ -208,7 +208,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class DESCryptoServiceProvider : System.Security.Cryptography.DES
+    partial public sealed class DESCryptoServiceProvider : System.Security.Cryptography.DES
     {
         public DESCryptoServiceProvider() { }
 
@@ -243,7 +243,7 @@ namespace System.Security.Cryptography
         public override void GenerateKey() { }
     }
 
-    public sealed partial class DSACryptoServiceProvider
+    partial public sealed class DSACryptoServiceProvider
         : System.Security.Cryptography.DSA,
             System.Security.Cryptography.ICspAsymmetricAlgorithm
     {
@@ -375,7 +375,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial interface ICspAsymmetricAlgorithm
+    partial public interface ICspAsymmetricAlgorithm
     {
         System.Security.Cryptography.CspKeyContainerInfo CspKeyContainerInfo { get; }
         byte[] ExportCspBlob(bool includePrivateParameters);
@@ -396,7 +396,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class MD5CryptoServiceProvider : System.Security.Cryptography.MD5
+    partial public sealed class MD5CryptoServiceProvider : System.Security.Cryptography.MD5
     {
         public MD5CryptoServiceProvider() { }
 
@@ -422,7 +422,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial class PasswordDeriveBytes : System.Security.Cryptography.DeriveBytes
+    partial public class PasswordDeriveBytes : System.Security.Cryptography.DeriveBytes
     {
         public PasswordDeriveBytes(byte[] password, byte[]? salt) { }
 
@@ -529,7 +529,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class RC2CryptoServiceProvider : System.Security.Cryptography.RC2
+    partial public sealed class RC2CryptoServiceProvider : System.Security.Cryptography.RC2
     {
         public RC2CryptoServiceProvider() { }
 
@@ -574,7 +574,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class RNGCryptoServiceProvider
+    partial public sealed class RNGCryptoServiceProvider
         : System.Security.Cryptography.RandomNumberGenerator
     {
         public RNGCryptoServiceProvider() { }
@@ -598,7 +598,7 @@ namespace System.Security.Cryptography
         public override void GetNonZeroBytes(System.Span<byte> data) { }
     }
 
-    public sealed partial class RSACryptoServiceProvider
+    partial public sealed class RSACryptoServiceProvider
         : System.Security.Cryptography.RSA,
             System.Security.Cryptography.ICspAsymmetricAlgorithm
     {
@@ -783,7 +783,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class SHA1CryptoServiceProvider : System.Security.Cryptography.SHA1
+    partial public sealed class SHA1CryptoServiceProvider : System.Security.Cryptography.SHA1
     {
         public SHA1CryptoServiceProvider() { }
 
@@ -814,7 +814,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class SHA256CryptoServiceProvider : System.Security.Cryptography.SHA256
+    partial public sealed class SHA256CryptoServiceProvider : System.Security.Cryptography.SHA256
     {
         public SHA256CryptoServiceProvider() { }
 
@@ -845,7 +845,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class SHA384CryptoServiceProvider : System.Security.Cryptography.SHA384
+    partial public sealed class SHA384CryptoServiceProvider : System.Security.Cryptography.SHA384
     {
         public SHA384CryptoServiceProvider() { }
 
@@ -876,7 +876,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class SHA512CryptoServiceProvider : System.Security.Cryptography.SHA512
+    partial public sealed class SHA512CryptoServiceProvider : System.Security.Cryptography.SHA512
     {
         public SHA512CryptoServiceProvider() { }
 
@@ -907,7 +907,7 @@ namespace System.Security.Cryptography
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class TripleDESCryptoServiceProvider
+    partial public sealed class TripleDESCryptoServiceProvider
         : System.Security.Cryptography.TripleDES
     {
         public TripleDESCryptoServiceProvider() { }

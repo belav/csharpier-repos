@@ -19,10 +19,11 @@ using InternalSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// A class containing factory methods for constructing syntax nodes, tokens and trivia.
     /// </summary>
-    public static partial class SyntaxFactory
+    public static class SyntaxFactory
     {
         /// <summary>
         /// A trivia with kind EndOfLineTrivia containing both the carriage return and line feed characters.

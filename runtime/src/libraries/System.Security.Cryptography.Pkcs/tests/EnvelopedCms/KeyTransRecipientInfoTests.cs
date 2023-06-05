@@ -18,7 +18,7 @@ using System.Security.Cryptography.Pkcs.Tests;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class KeyTransRecipientInfoTests
+    partial public static class KeyTransRecipientInfoTests
     {
         [Fact]
         public static void TestKeyTransVersion_RoundTrip()

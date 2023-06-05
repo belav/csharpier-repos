@@ -5,9 +5,9 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         // https://docs.microsoft.com/windows/win32/api/winioctl/ni-winioctl-fsctl_get_reparse_point
         internal const int FSCTL_GET_REPARSE_POINT = 0x000900a8;
@@ -17,7 +17,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, EntryPoint = "DeviceIoControl", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool DeviceIoControl(
+        partial internal static unsafe bool DeviceIoControl(
             SafeHandle hDevice,
             uint dwIoControlCode,
             void* lpInBuffer,

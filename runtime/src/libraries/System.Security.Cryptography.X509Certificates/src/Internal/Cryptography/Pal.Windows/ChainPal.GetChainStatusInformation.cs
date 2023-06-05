@@ -10,7 +10,7 @@ using Internal.Cryptography.Pal.Native;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class ChainPal : IDisposable, IChainPal
+    partial internal sealed class ChainPal : IDisposable, IChainPal
     {
         private static X509ChainStatus[] GetChainStatusInformation(CertTrustErrorStatus dwStatus)
         {

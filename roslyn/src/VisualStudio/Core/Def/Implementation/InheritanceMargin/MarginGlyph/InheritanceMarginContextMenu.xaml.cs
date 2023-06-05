@@ -19,10 +19,11 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMargin.MarginGlyph
 {
+    partial
     /// <summary>
     /// Interaction logic for InheritanceMarginContextMenu.xaml
     /// </summary>
-    internal partial class InheritanceMarginContextMenu : ContextMenu
+    internal class InheritanceMarginContextMenu : ContextMenu
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IStreamingFindUsagesPresenter _streamingFindUsagesPresenter;

@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace System.Diagnostics
 {
-    public partial class Activity
+    partial public class Activity
     {
         private static readonly AsyncLocal<Activity?> s_current = new AsyncLocal<Activity?>();
 

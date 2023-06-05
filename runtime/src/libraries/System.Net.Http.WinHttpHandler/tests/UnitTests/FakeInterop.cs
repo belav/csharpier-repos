@@ -16,9 +16,9 @@ using System.Net.Http.WinHttpHandlerUnitTests;
 
 using SafeWinHttpHandle = Interop.WinHttp.SafeWinHttpHandle;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal unsafe struct CERT_CHAIN_POLICY_PARA
@@ -64,7 +64,7 @@ internal static partial class Interop
         }
     }
 
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         public static string GetMessage(int error, IntPtr moduleName)
         {
@@ -78,7 +78,7 @@ internal static partial class Interop
         }
     }
 
-    internal static partial class WinHttp
+    partial internal static class WinHttp
     {
         public static SafeWinHttpHandle WinHttpOpen(
             IntPtr userAgent,
@@ -641,7 +641,7 @@ internal static partial class Interop
             return true;
         }
 
-        public unsafe static bool WinHttpSetOption(
+        public static unsafe bool WinHttpSetOption(
             SafeWinHttpHandle handle,
             uint option,
             IntPtr optionData,

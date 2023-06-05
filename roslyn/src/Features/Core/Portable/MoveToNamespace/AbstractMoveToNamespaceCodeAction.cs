@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.MoveToNamespace
 {
-    internal abstract partial class AbstractMoveToNamespaceCodeAction : CodeActionWithOptions
+    partial internal abstract class AbstractMoveToNamespaceCodeAction : CodeActionWithOptions
     {
         private readonly IMoveToNamespaceService _moveToNamespaceService;
         private readonly MoveToNamespaceAnalysisResult _moveToNamespaceAnalysisResult;

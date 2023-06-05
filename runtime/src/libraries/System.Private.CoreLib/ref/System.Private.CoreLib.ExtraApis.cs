@@ -6,7 +6,7 @@
 
 namespace System.Runtime.Serialization
 {
-    public readonly partial struct DeserializationToken : System.IDisposable
+    partial public readonly struct DeserializationToken : System.IDisposable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -16,7 +16,7 @@ namespace System.Runtime.Serialization
         public void Dispose() { }
     }
 
-    public sealed partial class SerializationInfo
+    partial public sealed class SerializationInfo
     {
         public static System.Runtime.Serialization.DeserializationToken StartDeserialization()
         {
@@ -27,7 +27,7 @@ namespace System.Runtime.Serialization
 
 namespace System.Diagnostics
 {
-    public partial class DebugProvider
+    partial public class DebugProvider
     {
         public DebugProvider() { }
 
@@ -55,7 +55,7 @@ namespace System.Diagnostics
         public virtual void WriteLine(string? message) { }
     }
 
-    public static partial class Debug
+    partial public static class Debug
     {
         public static System.Diagnostics.DebugProvider SetProvider(
             System.Diagnostics.DebugProvider provider

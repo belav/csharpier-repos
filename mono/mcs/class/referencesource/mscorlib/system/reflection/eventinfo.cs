@@ -262,7 +262,7 @@ namespace System.Reflection
     }
 
     [Serializable]
-    internal unsafe sealed class RuntimeEventInfo : EventInfo, ISerializable
+    internal sealed unsafe class RuntimeEventInfo : EventInfo, ISerializable
     {
         #region Private Data Members
         private int m_token;

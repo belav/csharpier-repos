@@ -6,10 +6,11 @@ using Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
+    partial
     /// <summary>
     /// Provides a means of interacting with the interactive window in the Visual Studio host.
     /// </summary>
-    public abstract partial class InteractiveWindow_OutOfProc : TextViewWindow_OutOfProc
+    public abstract class InteractiveWindow_OutOfProc : TextViewWindow_OutOfProc
     {
         private readonly InteractiveWindow_InProc _interactiveWindowInProc;
         private readonly VisualStudioInstance _instance;

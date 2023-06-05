@@ -1,6 +1,7 @@
+partial
 // Compiler options: -langversion:default
 
-public partial class Test
+public class Test
 {
     public readonly Foo TheFoo;
 
@@ -9,7 +10,7 @@ public partial class Test
         this.TheFoo = new Foo();
     }
 
-    public partial interface IFoo
+    partial public interface IFoo
     {
         int Hello(Test foo);
     }
@@ -20,9 +21,9 @@ public partial class Test
     }
 }
 
-public partial class Test
+partial public class Test
 {
-    public partial class Foo : IFoo
+    partial public class Foo : IFoo
     {
         int IFoo.Hello(Test test)
         {

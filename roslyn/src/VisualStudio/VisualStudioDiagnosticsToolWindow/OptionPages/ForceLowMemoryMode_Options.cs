@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
 {
-    internal sealed partial class ForceLowMemoryMode
+    partial internal sealed class ForceLowMemoryMode
     {
         public static readonly Option2<bool> Enabled =
             new(

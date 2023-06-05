@@ -6,7 +6,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.FactoryReaderTests
 {
-    public partial class TCNormalization : TCXMLReaderBaseGeneral
+    partial public class TCNormalization : TCXMLReaderBaseGeneral
     {
         // Type is XmlReaderTest.FactoryReaderTest.TCNormalization
         // Test Case

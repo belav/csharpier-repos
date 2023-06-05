@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests
 {
-    public partial class SyndicationFeedTests
+    partial public class SyndicationFeedTests
     {
         [Fact]
         public void Documentation_Get_ReturnsExpected()

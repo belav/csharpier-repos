@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetObjectForNativeVariantTests
+    partial public class GetObjectForNativeVariantTests
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct Record

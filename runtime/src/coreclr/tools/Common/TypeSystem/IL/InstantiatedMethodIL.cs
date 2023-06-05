@@ -7,7 +7,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL
 {
-    public sealed partial class InstantiatedMethodIL : MethodIL
+    partial public sealed class InstantiatedMethodIL : MethodIL
     {
         private MethodDesc _method;
         private MethodIL _methodIL;

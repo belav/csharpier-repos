@@ -12,10 +12,11 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Allows asking semantic questions about any node in a SyntaxTree within a Compilation.
     /// </summary>
-    internal partial class SyntaxTreeSemanticModel
+    internal class SyntaxTreeSemanticModel
     {
         private RegionAnalysisContext RegionAnalysisContext(ExpressionSyntax expression)
         {

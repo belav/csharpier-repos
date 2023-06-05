@@ -16,7 +16,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class CertificatePal : IDisposable, ICertificatePal
+    partial internal sealed class CertificatePal : IDisposable, ICertificatePal
     {
         private SafeCertContextHandle _certContext;
 

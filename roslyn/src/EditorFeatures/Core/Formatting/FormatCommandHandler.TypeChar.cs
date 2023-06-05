@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    internal partial class FormatCommandHandler
+    partial internal class FormatCommandHandler
     {
         public CommandState GetCommandState(
             TypeCharCommandArgs args,

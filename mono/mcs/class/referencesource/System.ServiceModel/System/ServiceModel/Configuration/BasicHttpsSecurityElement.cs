@@ -7,7 +7,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.ServiceModel;
 
-    public sealed partial class BasicHttpsSecurityElement : ServiceModelConfigurationElement
+    partial public sealed class BasicHttpsSecurityElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.Mode,

@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32
 {
-    public partial class PowerModeChangedEventArgs : System.EventArgs
+    partial public class PowerModeChangedEventArgs : System.EventArgs
     {
         public PowerModeChangedEventArgs(Microsoft.Win32.PowerModes mode) { }
 
@@ -28,7 +28,7 @@ namespace Microsoft.Win32
         Suspend = 3,
     }
 
-    public partial class SessionEndedEventArgs : System.EventArgs
+    partial public class SessionEndedEventArgs : System.EventArgs
     {
         public SessionEndedEventArgs(Microsoft.Win32.SessionEndReasons reason) { }
 
@@ -43,7 +43,7 @@ namespace Microsoft.Win32
         Microsoft.Win32.SessionEndedEventArgs e
     );
 
-    public partial class SessionEndingEventArgs : System.EventArgs
+    partial public class SessionEndingEventArgs : System.EventArgs
     {
         public SessionEndingEventArgs(Microsoft.Win32.SessionEndReasons reason) { }
 
@@ -69,7 +69,7 @@ namespace Microsoft.Win32
         SystemShutdown = 2,
     }
 
-    public partial class SessionSwitchEventArgs : System.EventArgs
+    partial public class SessionSwitchEventArgs : System.EventArgs
     {
         public SessionSwitchEventArgs(Microsoft.Win32.SessionSwitchReason reason) { }
 
@@ -97,7 +97,7 @@ namespace Microsoft.Win32
         SessionRemoteControl = 9,
     }
 
-    public sealed partial class SystemEvents
+    partial public sealed class SystemEvents
     {
         internal SystemEvents() { }
 
@@ -188,7 +188,7 @@ namespace Microsoft.Win32
         public static void KillTimer(System.IntPtr timerId) { }
     }
 
-    public partial class TimerElapsedEventArgs : System.EventArgs
+    partial public class TimerElapsedEventArgs : System.EventArgs
     {
         public TimerElapsedEventArgs(System.IntPtr timerId) { }
 
@@ -221,7 +221,7 @@ namespace Microsoft.Win32
         VisualStyle = 14,
     }
 
-    public partial class UserPreferenceChangedEventArgs : System.EventArgs
+    partial public class UserPreferenceChangedEventArgs : System.EventArgs
     {
         public UserPreferenceChangedEventArgs(Microsoft.Win32.UserPreferenceCategory category) { }
 
@@ -236,7 +236,7 @@ namespace Microsoft.Win32
         Microsoft.Win32.UserPreferenceChangedEventArgs e
     );
 
-    public partial class UserPreferenceChangingEventArgs : System.EventArgs
+    partial public class UserPreferenceChangingEventArgs : System.EventArgs
     {
         public UserPreferenceChangingEventArgs(Microsoft.Win32.UserPreferenceCategory category) { }
 

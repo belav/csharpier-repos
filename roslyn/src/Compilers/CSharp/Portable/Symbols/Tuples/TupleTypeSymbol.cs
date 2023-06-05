@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal abstract partial class NamedTypeSymbol
+    partial internal abstract class NamedTypeSymbol
     {
         internal const int ValueTupleRestPosition = 8; // The Rest field is in 8th position
         internal const int ValueTupleRestIndex = ValueTupleRestPosition - 1;

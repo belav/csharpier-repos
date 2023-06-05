@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Text
 {
-    public static partial class Extensions
+    partial public static class Extensions
     {
         /// <summary>
         /// ITextBuffer implementation of SourceTextContainer

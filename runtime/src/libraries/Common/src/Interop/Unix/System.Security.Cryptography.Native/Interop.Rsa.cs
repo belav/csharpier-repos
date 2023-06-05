@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_RsaCreate")]
         internal static extern SafeRsaHandle RsaCreate();

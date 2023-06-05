@@ -23,7 +23,7 @@ namespace System.Reflection.Runtime.FieldInfos
     // The Runtime's implementation of fields.
     //
     [DebuggerDisplay("{_debugName}")]
-    internal abstract partial class RuntimeFieldInfo : FieldInfo
+    partial internal abstract class RuntimeFieldInfo : FieldInfo
     {
         //
         // contextType    - the type that supplies the type context (i.e. substitutions for generic parameters.) Though you

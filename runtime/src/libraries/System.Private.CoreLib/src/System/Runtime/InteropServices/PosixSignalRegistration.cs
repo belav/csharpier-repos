@@ -6,8 +6,9 @@ using System.Runtime.Versioning;
 
 namespace System.Runtime.InteropServices
 {
+    partial
     /// <summary>Handles a <see cref="PosixSignal"/>.</summary>
-    public sealed partial class PosixSignalRegistration : IDisposable
+    public sealed class PosixSignalRegistration : IDisposable
     {
         /// <summary>The state associated with this registration.</summary>
         /// <remarks>

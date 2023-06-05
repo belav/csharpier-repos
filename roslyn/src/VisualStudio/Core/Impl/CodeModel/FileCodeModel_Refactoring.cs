@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
-    public sealed partial class FileCodeModel
+    partial public sealed class FileCodeModel
     {
         public void Rename(EnvDTE.CodeElement element) => throw new NotImplementedException();
 

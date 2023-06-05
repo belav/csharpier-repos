@@ -6,7 +6,7 @@ using System.Reflection.Runtime.BindingFlagSupport;
 
 namespace System.Reflection.TypeLoading
 {
-    internal abstract partial class RoType
+    partial internal abstract class RoType
     {
         public sealed override MemberInfo[] GetMembers(BindingFlags bindingAttr) =>
             GetMemberImpl(null, MemberTypes.All, bindingAttr);

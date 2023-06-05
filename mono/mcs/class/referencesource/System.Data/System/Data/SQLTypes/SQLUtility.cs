@@ -75,7 +75,7 @@ namespace System.Data.SqlTypes
         protected SqlTypeException(SerializationInfo si, StreamingContext sc)
             : base(SqlTypeExceptionSerialization(si, sc), sc) { }
 
-        static private SerializationInfo SqlTypeExceptionSerialization(
+        private static SerializationInfo SqlTypeExceptionSerialization(
             SerializationInfo si,
             StreamingContext sc
         )
@@ -112,7 +112,7 @@ namespace System.Data.SqlTypes
         private SqlNullValueException(SerializationInfo si, StreamingContext sc)
             : base(SqlNullValueExceptionSerialization(si, sc), sc) { }
 
-        static private SerializationInfo SqlNullValueExceptionSerialization(
+        private static SerializationInfo SqlNullValueExceptionSerialization(
             SerializationInfo si,
             StreamingContext sc
         )
@@ -149,7 +149,7 @@ namespace System.Data.SqlTypes
         private SqlTruncateException(SerializationInfo si, StreamingContext sc)
             : base(SqlTruncateExceptionSerialization(si, sc), sc) { }
 
-        static private SerializationInfo SqlTruncateExceptionSerialization(
+        private static SerializationInfo SqlTruncateExceptionSerialization(
             SerializationInfo si,
             StreamingContext sc
         )

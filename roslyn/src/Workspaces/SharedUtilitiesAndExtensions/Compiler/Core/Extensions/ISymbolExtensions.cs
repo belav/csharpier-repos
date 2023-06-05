@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ISymbolExtensions
+    partial internal static class ISymbolExtensions
     {
         public static string ToNameDisplayString(this ISymbol symbol) =>
             symbol.ToDisplayString(SymbolDisplayFormats.NameFormat);

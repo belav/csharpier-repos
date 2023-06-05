@@ -12,6 +12,7 @@ using ImmutableArrayExtensions = System.Linq.ImmutableArrayExtensions;
 
 namespace System.Reflection.PortableExecutable
 {
+    partial
     /// <summary>
     /// Portable Executable format reader.
     /// </summary>
@@ -19,7 +20,7 @@ namespace System.Reflection.PortableExecutable
     /// The implementation is thread-safe, that is multiple threads can read data from the reader in parallel.
     /// Disposal of the reader is not thread-safe (see <see cref="Dispose"/>).
     /// </remarks>
-    public sealed partial class PEReader : IDisposable
+    public sealed class PEReader : IDisposable
     {
         /// <summary>
         /// True if the PE image has been loaded into memory by the OS loader.

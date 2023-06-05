@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 {
-    internal partial class GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider
+    partial internal class GenerateEqualsAndGetHashCodeFromMembersCodeRefactoringProvider
     {
         private class GenerateEqualsAndGetHashCodeWithDialogCodeAction : CodeActionWithOptions
         {

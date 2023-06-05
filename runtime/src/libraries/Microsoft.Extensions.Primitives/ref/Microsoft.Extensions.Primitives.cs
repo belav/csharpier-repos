@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Primitives
 {
-    public partial class CancellationChangeToken : Microsoft.Extensions.Primitives.IChangeToken
+    partial public class CancellationChangeToken : Microsoft.Extensions.Primitives.IChangeToken
     {
         public CancellationChangeToken(System.Threading.CancellationToken cancellationToken) { }
 
@@ -28,7 +28,7 @@ namespace Microsoft.Extensions.Primitives
         }
     }
 
-    public static partial class ChangeToken
+    partial public static class ChangeToken
     {
         public static System.IDisposable OnChange(
             System.Func<Microsoft.Extensions.Primitives.IChangeToken?> changeTokenProducer,
@@ -48,7 +48,7 @@ namespace Microsoft.Extensions.Primitives
         }
     }
 
-    public partial class CompositeChangeToken : Microsoft.Extensions.Primitives.IChangeToken
+    partial public class CompositeChangeToken : Microsoft.Extensions.Primitives.IChangeToken
     {
         public CompositeChangeToken(
             System.Collections.Generic.IReadOnlyList<Microsoft.Extensions.Primitives.IChangeToken> changeTokens
@@ -76,7 +76,7 @@ namespace Microsoft.Extensions.Primitives
         }
     }
 
-    public static partial class Extensions
+    partial public static class Extensions
     {
         public static System.Text.StringBuilder Append(
             this System.Text.StringBuilder builder,
@@ -87,14 +87,14 @@ namespace Microsoft.Extensions.Primitives
         }
     }
 
-    public partial interface IChangeToken
+    partial public interface IChangeToken
     {
         bool ActiveChangeCallbacks { get; }
         bool HasChanged { get; }
         System.IDisposable RegisterChangeCallback(System.Action<object?> callback, object? state);
     }
 
-    public readonly partial struct StringSegment
+    partial public readonly struct StringSegment
         : System.IEquatable<Microsoft.Extensions.Primitives.StringSegment>,
             System.IEquatable<string?>
     {
@@ -342,7 +342,7 @@ namespace Microsoft.Extensions.Primitives
         }
     }
 
-    public partial class StringSegmentComparer
+    partial public class StringSegmentComparer
         : System.Collections.Generic.IComparer<Microsoft.Extensions.Primitives.StringSegment>,
             System.Collections.Generic.IEqualityComparer<Microsoft.Extensions.Primitives.StringSegment>
     {
@@ -379,7 +379,7 @@ namespace Microsoft.Extensions.Primitives
         }
     }
 
-    public readonly partial struct StringTokenizer
+    partial public readonly struct StringTokenizer
         : System.Collections.Generic.IEnumerable<Microsoft.Extensions.Primitives.StringSegment>,
             System.Collections.IEnumerable
     {
@@ -414,7 +414,7 @@ namespace Microsoft.Extensions.Primitives
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<Microsoft.Extensions.Primitives.StringSegment>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -447,7 +447,7 @@ namespace Microsoft.Extensions.Primitives
         }
     }
 
-    public readonly partial struct StringValues
+    partial public readonly struct StringValues
         : System.Collections.Generic.ICollection<string?>,
             System.Collections.Generic.IEnumerable<string?>,
             System.Collections.Generic.IList<string?>,
@@ -767,7 +767,7 @@ namespace Microsoft.Extensions.Primitives
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<string?>,
                 System.Collections.IEnumerator,
                 System.IDisposable

@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
 
-    public sealed partial class SecureConversationServiceElement : ConfigurationElement
+    partial public sealed class SecureConversationServiceElement : ConfigurationElement
     {
         public SecureConversationServiceElement() { }
 

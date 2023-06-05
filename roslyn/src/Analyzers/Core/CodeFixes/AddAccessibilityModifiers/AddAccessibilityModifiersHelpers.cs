@@ -9,7 +9,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 {
-    internal static partial class AddAccessibilityModifiersHelpers
+    partial internal static class AddAccessibilityModifiersHelpers
     {
         public static void UpdateDeclaration(
             SyntaxEditor editor,

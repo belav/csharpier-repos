@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace Microsoft.Internal.Collections
 {
-    internal static partial class CollectionServices
+    partial internal static class CollectionServices
     {
         public static ICollection<object> GetCollectionWrapper(
             Type itemType,

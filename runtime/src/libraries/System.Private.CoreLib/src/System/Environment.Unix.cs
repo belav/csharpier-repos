@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         public static string[] GetLogicalDrives() => Interop.Sys.GetAllMountPoints();
 

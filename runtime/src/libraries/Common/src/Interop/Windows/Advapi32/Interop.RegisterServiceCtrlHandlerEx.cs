@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         public delegate int ServiceControlCallbackEx(
             int control,
@@ -21,7 +21,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial IntPtr RegisterServiceCtrlHandlerEx(
+        partial public static IntPtr RegisterServiceCtrlHandlerEx(
             string? serviceName,
             ServiceControlCallbackEx? callback,
             IntPtr userData

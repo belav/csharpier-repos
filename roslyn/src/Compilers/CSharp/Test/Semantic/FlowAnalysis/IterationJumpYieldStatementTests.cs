@@ -15,7 +15,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class IterationJumpYieldStatementTests : FlowTestBase
+    partial public class IterationJumpYieldStatementTests : FlowTestBase
     {
         #region "While, Do, Break, Continue"
 

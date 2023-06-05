@@ -20,7 +20,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal partial class RemoteWorkspace
+    partial internal class RemoteWorkspace
     {
         /// <summary>
         /// Create solution for given checksum from base solution

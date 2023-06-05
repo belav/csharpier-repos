@@ -417,17 +417,17 @@ namespace System.ServiceModel.WasHosting
                 FxCop.Rule.AvoidUncalledPrivateCode,
                 Justification = "Called by MetabaseSettingsIis7.PopulateSiteProperties"
             )]
-            static internal Site GetSite(string name)
+            internal static Site GetSite(string name)
             {
                 return new ServerManager().Sites[name];
             }
 
-            static internal Configuration GetWebConfiguration(string siteName, string absolutePath)
+            internal static Configuration GetWebConfiguration(string siteName, string absolutePath)
             {
                 return new ServerManager().GetWebConfiguration(siteName, absolutePath);
             }
 
-            static internal ConfigurationSection GetSection(
+            internal static ConfigurationSection GetSection(
                 Configuration config,
                 string sectionName
             )
@@ -435,7 +435,7 @@ namespace System.ServiceModel.WasHosting
                 return config.GetSection(sectionName);
             }
 
-            static internal List<string> GetProviders(
+            internal static List<string> GetProviders(
                 ConfigurationSection section,
                 string providerElementName,
                 string valueAttributeName
@@ -451,7 +451,7 @@ namespace System.ServiceModel.WasHosting
                 return providerList;
             }
 
-            static internal object GetAttributeValue(
+            internal static object GetAttributeValue(
                 ConfigurationSection section,
                 string attributeName
             )
@@ -459,7 +459,7 @@ namespace System.ServiceModel.WasHosting
                 return section.GetAttribute(attributeName).Value;
             }
 
-            static internal object GetAttributeValue(
+            internal static object GetAttributeValue(
                 ConfigurationElement element,
                 string attributeName
             )
@@ -472,7 +472,7 @@ namespace System.ServiceModel.WasHosting
                 FxCop.Rule.AvoidUncalledPrivateCode,
                 Justification = "Called by MetabaseSettingsIis7.PopulateSiteProperties"
             )]
-            static internal IDictionary<string, List<string>> GetProtocolBindingTable(Site site)
+            internal static IDictionary<string, List<string>> GetProtocolBindingTable(Site site)
             {
                 IDictionary<string, List<string>> bindingList =
                     new Dictionary<string, List<string>>();
@@ -501,7 +501,7 @@ namespace System.ServiceModel.WasHosting
                 FxCop.Rule.AvoidUncalledPrivateCode,
                 Justification = "Called by MetabaseSettingsIis7.PopulateSiteProperties"
             )]
-            static internal string GetEnabledProtocols(Site site)
+            internal static string GetEnabledProtocols(Site site)
             {
                 Application application = site.Applications[
                     HostingEnvironmentWrapper.ApplicationVirtualPath
@@ -511,7 +511,7 @@ namespace System.ServiceModel.WasHosting
                 return application.EnabledProtocols;
             }
 
-            static internal void ReadIisExtendedProtectionPolicy(
+            internal static void ReadIisExtendedProtectionPolicy(
                 ConfigurationElement element,
                 out ExtendedProtectionTokenChecking tokenChecking,
                 out ExtendedProtectionFlags flags,
@@ -533,7 +533,7 @@ namespace System.ServiceModel.WasHosting
                 }
             }
 
-            static internal IEnumerable<string> GetApplicationPaths()
+            internal static IEnumerable<string> GetApplicationPaths()
             {
                 //Get the site ourselves instead of calling GetSite() because we should dispose of the ServerManager
                 using (ServerManager serverManager = new ServerManager())
@@ -575,7 +575,7 @@ namespace System.ServiceModel.WasHosting
             PopulateSiteProperties();
         }
 
-        static internal MethodInfo GetSectionMethod
+        internal static MethodInfo GetSectionMethod
         {
             get
             {
@@ -935,7 +935,7 @@ namespace System.ServiceModel.WasHosting
                 FxCop.Rule.AvoidUncalledPrivateCode,
                 Justification = "Called by MetabaseSettingsIis7V2.PopulateSiteProperties"
             )]
-            static internal ConfigurationElement GetSite(string siteName)
+            internal static ConfigurationElement GetSite(string siteName)
             {
                 ConfigurationSection sitesSection = WebConfigGetSection(
                     null,
@@ -957,7 +957,7 @@ namespace System.ServiceModel.WasHosting
                 FxCop.Rule.AvoidUncalledPrivateCode,
                 Justification = "Called by GetSite"
             )]
-            static internal ConfigurationElement FindElement(
+            internal static ConfigurationElement FindElement(
                 ConfigurationElementCollection collection,
                 string attributeName,
                 string value
@@ -980,7 +980,7 @@ namespace System.ServiceModel.WasHosting
                 return null;
             }
 
-            static internal ConfigurationSection WebConfigGetSection(
+            internal static ConfigurationSection WebConfigGetSection(
                 string siteName,
                 string virtualPath,
                 string sectionName
@@ -993,7 +993,7 @@ namespace System.ServiceModel.WasHosting
                     );
             }
 
-            static internal object GetValue(ConfigurationSection section, string name)
+            internal static object GetValue(ConfigurationSection section, string name)
             {
                 return section[name];
             }
@@ -1003,7 +1003,7 @@ namespace System.ServiceModel.WasHosting
                 FxCop.Rule.AvoidUncalledPrivateCode,
                 Justification = "Called by MetabaseSettingsIis7V2.PopulateSiteProperties"
             )]
-            static internal IDictionary<string, List<string>> GetProtocolBindingTable(
+            internal static IDictionary<string, List<string>> GetProtocolBindingTable(
                 ConfigurationElement site
             )
             {
@@ -1041,7 +1041,7 @@ namespace System.ServiceModel.WasHosting
                 FxCop.Rule.AvoidUncalledPrivateCode,
                 Justification = "Called by MetabaseSettingsIis7V2.PopulateSiteProperties"
             )]
-            static internal string GetEnabledProtocols(ConfigurationElement site)
+            internal static string GetEnabledProtocols(ConfigurationElement site)
             {
                 ConfigurationElement application = FindElement(
                     site.GetCollection(),
@@ -1054,7 +1054,7 @@ namespace System.ServiceModel.WasHosting
                     application[MetabaseSettingsIis7Constants.EnabledProtocolsAttributeName];
             }
 
-            static internal List<string> GetProviderList(ConfigurationElement section)
+            internal static List<string> GetProviderList(ConfigurationElement section)
             {
                 List<string> providerList = new List<string>();
                 foreach (
@@ -1071,7 +1071,9 @@ namespace System.ServiceModel.WasHosting
             }
 
             // translate IIS setting on extended protection to NCL object
-            static internal void ReadIisExtendedProtectionPolicy(
+            internal
+            // translate IIS setting on extended protection to NCL object
+            static void ReadIisExtendedProtectionPolicy(
                 ConfigurationElement element,
                 out ExtendedProtectionTokenChecking tokenChecking,
                 out ExtendedProtectionFlags flags,
@@ -1093,7 +1095,7 @@ namespace System.ServiceModel.WasHosting
                 }
             }
 
-            static internal IEnumerable<string> GetApplicationPaths(ConfigurationElement site)
+            internal static IEnumerable<string> GetApplicationPaths(ConfigurationElement site)
             {
                 List<string> appPaths = new List<string>();
                 ConfigurationElementCollection applications = site.GetCollection();

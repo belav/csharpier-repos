@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.PageDirectories.Pages
 {
-    public partial class PageHyperLink : GHTBaseWeb
+    partial public class PageHyperLink : GHTBaseWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {

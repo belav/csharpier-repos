@@ -11,7 +11,7 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    internal readonly partial struct MethodProxy : IEquatable<MethodProxy>
+    partial internal readonly struct MethodProxy : IEquatable<MethodProxy>
     {
         public MethodProxy(MethodDesc method) => Method = method;
 
@@ -26,25 +26,33 @@ namespace ILLink.Shared.TypeSystemProxy
 
         public string GetDisplayName() => Method.GetDisplayName();
 
-        internal partial bool IsDeclaredOnType(string fullTypeName) =>
+        partial internal bool IsDeclaredOnType(string fullTypeName) =>
             Method.IsDeclaredOnType(fullTypeName);
 
-        internal partial bool HasMetadataParameters() => GetMetadataParametersCount() > 0;
+        partial internal bool HasMetadataParameters() => GetMetadataParametersCount() > 0;
 
         /// <summary>
         /// Gets the number of entries in the 'Parameters' section of a method's metadata (i.e. excludes the implicit 'this' from the count)
         /// </summary>
-        internal partial int GetMetadataParametersCount() => Method.GetMetadataParametersCount();
+        partial
+        /// <summary>
+        /// Gets the number of entries in the 'Parameters' section of a method's metadata (i.e. excludes the implicit 'this' from the count)
+        /// </summary>
+        internal int GetMetadataParametersCount() => Method.GetMetadataParametersCount();
 
-        internal partial int GetParametersCount() => Method.GetParametersCount();
+        partial internal int GetParametersCount() => Method.GetParametersCount();
 
         /// <summary>
         /// Use only when iterating over all parameters. When wanting to index, use GetParameters(ParameterIndex)
         /// </summary>
-        internal partial ParameterProxyEnumerable GetParameters() =>
+        partial
+        /// <summary>
+        /// Use only when iterating over all parameters. When wanting to index, use GetParameters(ParameterIndex)
+        /// </summary>
+        internal ParameterProxyEnumerable GetParameters() =>
             new ParameterProxyEnumerable(0, Method.GetParametersCount(), Method);
 
-        internal partial ParameterProxy GetParameter(ParameterIndex index)
+        partial internal ParameterProxy GetParameter(ParameterIndex index)
         {
             return GetParametersCount() <= (int)index || (int)index < 0
                 ? throw new InvalidOperationException(
@@ -53,12 +61,12 @@ namespace ILLink.Shared.TypeSystemProxy
                 : new ParameterProxy(this, index);
         }
 
-        internal partial bool HasGenericParameters() => Method.HasInstantiation;
+        partial internal bool HasGenericParameters() => Method.HasInstantiation;
 
-        internal partial bool HasGenericParametersCount(int genericParameterCount) =>
+        partial internal bool HasGenericParametersCount(int genericParameterCount) =>
             Method.Instantiation.Length == genericParameterCount;
 
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters()
+        partial internal ImmutableArray<GenericParameterProxy> GetGenericParameters()
         {
             MethodDesc methodDef = Method.GetMethodDefinition();
 
@@ -75,11 +83,11 @@ namespace ILLink.Shared.TypeSystemProxy
             return builder.ToImmutableArray();
         }
 
-        internal partial bool IsStatic() => Method.Signature.IsStatic;
+        partial internal bool IsStatic() => Method.Signature.IsStatic;
 
-        internal partial bool HasImplicitThis() => !Method.Signature.IsStatic;
+        partial internal bool HasImplicitThis() => !Method.Signature.IsStatic;
 
-        internal partial bool ReturnsVoid() => Method.Signature.ReturnType.IsVoid;
+        partial internal bool ReturnsVoid() => Method.Signature.ReturnType.IsVoid;
 
         public override string ToString() => Method.ToString();
 

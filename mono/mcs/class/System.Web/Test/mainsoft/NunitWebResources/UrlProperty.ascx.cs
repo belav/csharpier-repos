@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 
 [Themeable(true)]
-public partial class UrlPropertyControl : System.Web.UI.UserControl
+partial public class UrlPropertyControl : System.Web.UI.UserControl
 {
     string property1;
     string urlProperty2;

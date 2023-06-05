@@ -10,7 +10,7 @@ namespace NetClient
 
     class ArrayTests
     {
-        static private readonly IEnumerable<int> BaseData = Enumerable.Range(0, 10);
+        private static readonly IEnumerable<int> BaseData = Enumerable.Range(0, 10);
 
         private readonly Server.Contract.Servers.ArrayTesting server;
         private readonly double expectedMean;
@@ -43,7 +43,7 @@ namespace NetClient
             this.Marshal_DoubleArray();
         }
 
-        static private bool EqualByBound(double expected, double actual)
+        private static bool EqualByBound(double expected, double actual)
         {
             double low = expected - 0.00001;
             double high = expected + 0.00001;

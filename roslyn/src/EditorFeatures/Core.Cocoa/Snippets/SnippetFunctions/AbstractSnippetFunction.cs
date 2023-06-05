@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 {
-    internal abstract partial class AbstractSnippetFunction
+    partial internal abstract class AbstractSnippetFunction
     {
         private readonly ITextBuffer _subjectBuffer;
 

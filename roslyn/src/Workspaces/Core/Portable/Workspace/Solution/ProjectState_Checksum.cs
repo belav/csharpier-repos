@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class ProjectState
+    partial internal class ProjectState
     {
         public bool TryGetStateChecksums(out ProjectStateChecksums stateChecksums) =>
             _lazyChecksums.TryGetValue(out stateChecksums);

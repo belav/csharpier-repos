@@ -10,7 +10,7 @@ using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
-    internal partial class ReflectionMethod : ReflectionMember
+    partial internal class ReflectionMethod : ReflectionMember
     {
         private readonly MethodInfo _method;
 

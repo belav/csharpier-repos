@@ -9,10 +9,11 @@ using System.Windows.Controls;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 {
+    partial
     /// <summary>
     /// Interaction logic for MemberSelection.xaml
     /// </summary>
-    internal partial class MemberSelection : UserControl
+    internal class MemberSelection : UserControl
     {
         public string SelectDependents => ServicesVSResources.Select_Dependents;
         public string SelectPublic => ServicesVSResources.Select_Public;

@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public abstract partial class ArraySegment_Tests<T> : IList_Generic_Tests<T>
+    partial public abstract class ArraySegment_Tests<T> : IList_Generic_Tests<T>
     {
         #region IList<T> Helper Methods
 
@@ -255,7 +255,7 @@ namespace System.Tests
         }
     }
 
-    public static partial class ArraySegment_Tests
+    partial public static class ArraySegment_Tests
     {
         public static IEnumerable<object[]> Equals_TestData()
         {

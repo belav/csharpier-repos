@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Interactive
 {
-    internal partial class InertClassifierProvider
+    partial internal class InertClassifierProvider
     {
         private class InertClassifier : IClassifier
         {

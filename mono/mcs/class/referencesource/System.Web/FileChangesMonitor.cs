@@ -179,7 +179,7 @@ namespace System.Web
             "CA1404:CallGetLastErrorImmediatelyAfterPInvoke",
             Justification = "Microsoft: Call to GetLastWin32Error() does follow P/Invoke call that is outside the if/else block."
         )]
-        static internal byte[] GetDacl(string filename)
+        internal static byte[] GetDacl(string filename)
         {
             // DevDiv #322858 - allow skipping DACL step for perf gain
             if (HostingEnvironment.FcnSkipReadAndCacheDacls)

@@ -6,7 +6,7 @@
 
 namespace System.Xml.XPath
 {
-    public partial class XPathDocument : System.Xml.XPath.IXPathNavigable
+    partial public class XPathDocument : System.Xml.XPath.IXPathNavigable
     {
         public XPathDocument(System.IO.Stream stream) { }
 
@@ -31,7 +31,7 @@ namespace System.Xml.XPath
         }
     }
 
-    public partial class XPathException : System.SystemException
+    partial public class XPathException : System.SystemException
     {
         public XPathException() { }
 

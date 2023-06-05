@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.IO
 {
-    public static partial class Directory
+    partial public static class Directory
     {
         private static DirectoryInfo CreateDirectoryCore(string path, UnixFileMode unixCreateMode)
         {

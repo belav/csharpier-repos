@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    internal static partial class CapiHelper
+    partial internal static class CapiHelper
     {
         // For backwards compat with CapiHelper.ObjToHashAlgorithm, use "hashAlg" as name
         internal static HashAlgorithmName ObjToHashAlgorithmName(object hashAlg)

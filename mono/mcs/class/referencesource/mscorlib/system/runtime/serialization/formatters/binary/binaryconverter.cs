@@ -26,7 +26,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
     using System.Security.Permissions;
     using System.Diagnostics.Contracts;
 
-    sealed internal class Converter
+    internal sealed class Converter
     {
         private Converter() { }
 

@@ -6,7 +6,7 @@
 
 namespace System.DirectoryServices.AccountManagement
 {
-    public partial class AdvancedFilters
+    partial public class AdvancedFilters
     {
         protected internal AdvancedFilters(System.DirectoryServices.AccountManagement.Principal p)
         { }
@@ -50,7 +50,7 @@ namespace System.DirectoryServices.AccountManagement
     }
 
     [System.DirectoryServices.AccountManagement.DirectoryRdnPrefixAttribute("CN")]
-    public partial class AuthenticablePrincipal
+    partial public class AuthenticablePrincipal
         : System.DirectoryServices.AccountManagement.Principal
     {
         protected internal AuthenticablePrincipal(
@@ -264,7 +264,7 @@ namespace System.DirectoryServices.AccountManagement
     }
 
     [System.DirectoryServices.AccountManagement.DirectoryRdnPrefixAttribute("CN")]
-    public partial class ComputerPrincipal
+    partial public class ComputerPrincipal
         : System.DirectoryServices.AccountManagement.AuthenticablePrincipal
     {
         public ComputerPrincipal(
@@ -367,7 +367,7 @@ namespace System.DirectoryServices.AccountManagement
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = true)]
-    public sealed partial class DirectoryObjectClassAttribute : System.Attribute
+    partial public sealed class DirectoryObjectClassAttribute : System.Attribute
     {
         public DirectoryObjectClassAttribute(string objectClass) { }
 
@@ -382,7 +382,7 @@ namespace System.DirectoryServices.AccountManagement
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property, AllowMultiple = true)]
-    public sealed partial class DirectoryPropertyAttribute : System.Attribute
+    partial public sealed class DirectoryPropertyAttribute : System.Attribute
     {
         public DirectoryPropertyAttribute(string schemaAttributeName) { }
 
@@ -398,7 +398,7 @@ namespace System.DirectoryServices.AccountManagement
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = true)]
-    public sealed partial class DirectoryRdnPrefixAttribute : System.Attribute
+    partial public sealed class DirectoryRdnPrefixAttribute : System.Attribute
     {
         public DirectoryRdnPrefixAttribute(string rdnPrefix) { }
 
@@ -413,7 +413,7 @@ namespace System.DirectoryServices.AccountManagement
     }
 
     [System.DirectoryServices.AccountManagement.DirectoryRdnPrefixAttribute("CN")]
-    public partial class GroupPrincipal : System.DirectoryServices.AccountManagement.Principal
+    partial public class GroupPrincipal : System.DirectoryServices.AccountManagement.Principal
     {
         public GroupPrincipal(System.DirectoryServices.AccountManagement.PrincipalContext context)
         { }
@@ -497,7 +497,7 @@ namespace System.DirectoryServices.AccountManagement
         LessThanOrEquals = 5,
     }
 
-    public partial class MultipleMatchesException
+    partial public class MultipleMatchesException
         : System.DirectoryServices.AccountManagement.PrincipalException
     {
         public MultipleMatchesException()
@@ -528,7 +528,7 @@ namespace System.DirectoryServices.AccountManagement
             ) { }
     }
 
-    public partial class NoMatchingPrincipalException
+    partial public class NoMatchingPrincipalException
         : System.DirectoryServices.AccountManagement.PrincipalException
     {
         public NoMatchingPrincipalException()
@@ -559,7 +559,7 @@ namespace System.DirectoryServices.AccountManagement
             ) { }
     }
 
-    public partial class PasswordException
+    partial public class PasswordException
         : System.DirectoryServices.AccountManagement.PrincipalException
     {
         public PasswordException()
@@ -590,7 +590,7 @@ namespace System.DirectoryServices.AccountManagement
             ) { }
     }
 
-    public abstract partial class Principal : System.IDisposable
+    partial public abstract class Principal : System.IDisposable
     {
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         protected Principal() { }
@@ -763,7 +763,7 @@ namespace System.DirectoryServices.AccountManagement
         }
     }
 
-    public partial class PrincipalCollection
+    partial public class PrincipalCollection
         : System.Collections.Generic.ICollection<System.DirectoryServices.AccountManagement.Principal>,
             System.Collections.Generic.IEnumerable<System.DirectoryServices.AccountManagement.Principal>,
             System.Collections.ICollection,
@@ -892,7 +892,7 @@ namespace System.DirectoryServices.AccountManagement
         }
     }
 
-    public partial class PrincipalContext : System.IDisposable
+    partial public class PrincipalContext : System.IDisposable
     {
         public PrincipalContext(System.DirectoryServices.AccountManagement.ContextType contextType)
         { }
@@ -981,7 +981,7 @@ namespace System.DirectoryServices.AccountManagement
         }
     }
 
-    public abstract partial class PrincipalException : System.SystemException
+    partial public abstract class PrincipalException : System.SystemException
     {
         protected PrincipalException(
             System.Runtime.Serialization.SerializationInfo info,
@@ -989,7 +989,7 @@ namespace System.DirectoryServices.AccountManagement
         ) { }
     }
 
-    public partial class PrincipalExistsException
+    partial public class PrincipalExistsException
         : System.DirectoryServices.AccountManagement.PrincipalException
     {
         public PrincipalExistsException()
@@ -1020,7 +1020,7 @@ namespace System.DirectoryServices.AccountManagement
             ) { }
     }
 
-    public partial class PrincipalOperationException
+    partial public class PrincipalOperationException
         : System.DirectoryServices.AccountManagement.PrincipalException
     {
         public PrincipalOperationException()
@@ -1077,7 +1077,7 @@ namespace System.DirectoryServices.AccountManagement
         ) { }
     }
 
-    public partial class PrincipalSearcher : System.IDisposable
+    partial public class PrincipalSearcher : System.IDisposable
     {
         public PrincipalSearcher() { }
 
@@ -1117,7 +1117,7 @@ namespace System.DirectoryServices.AccountManagement
         }
     }
 
-    public partial class PrincipalSearchResult<T>
+    partial public class PrincipalSearchResult<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable,
             System.IDisposable
@@ -1137,7 +1137,7 @@ namespace System.DirectoryServices.AccountManagement
         }
     }
 
-    public partial class PrincipalServerDownException
+    partial public class PrincipalServerDownException
         : System.DirectoryServices.AccountManagement.PrincipalException
     {
         public PrincipalServerDownException()
@@ -1200,7 +1200,7 @@ namespace System.DirectoryServices.AccountManagement
         ) { }
     }
 
-    public partial class PrincipalValueCollection<T>
+    partial public class PrincipalValueCollection<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IList<T>,
@@ -1323,7 +1323,7 @@ namespace System.DirectoryServices.AccountManagement
     }
 
     [System.DirectoryServices.AccountManagement.DirectoryRdnPrefixAttribute("CN")]
-    public partial class UserPrincipal
+    partial public class UserPrincipal
         : System.DirectoryServices.AccountManagement.AuthenticablePrincipal
     {
         public UserPrincipal(System.DirectoryServices.AccountManagement.PrincipalContext context)

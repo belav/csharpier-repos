@@ -52,31 +52,34 @@ namespace Novell.Directory.Ldap.Utilclass
 
     public class RDN : System.Object
     {
+        protected internal
         /// <summary> Returns the actually Raw String before Normalization
         ///
         /// </summary>
         /// <returns> The raw string
         /// </returns>
-        virtual protected internal System.String RawValue
+        virtual System.String RawValue
         {
             get { return rawValue; }
         }
 
+        public
         /// <summary> Returns the type of this RDN.  This method assumes that only one value
         /// is used, If multivalues attributes are used only the first Type is
         /// returned.  Use GetTypes.
         /// </summary>
         /// <returns> Type of attribute
         /// </returns>
-        virtual public System.String Type
+        virtual System.String Type
         {
             get { return (System.String)types[0]; }
         }
 
+        public
         /// <summary> Returns all the types for this RDN.</summary>
         /// <returns> list of types
         /// </returns>
-        virtual public System.String[] Types
+        virtual System.String[] Types
         {
             get
             {
@@ -87,21 +90,23 @@ namespace Novell.Directory.Ldap.Utilclass
             }
         }
 
+        public
         /// <summary> Returns the values of this RDN.  If multivalues attributes are used only
         /// the first Type is returned.  Use GetTypes.
         ///
         /// </summary>
         /// <returns> Type of attribute
         /// </returns>
-        virtual public System.String Value
+        virtual System.String Value
         {
             get { return (System.String)values[0]; }
         }
 
+        public
         /// <summary> Returns all the types for this RDN.</summary>
         /// <returns> list of types
         /// </returns>
-        virtual public System.String[] Values
+        virtual System.String[] Values
         {
             get
             {
@@ -112,10 +117,11 @@ namespace Novell.Directory.Ldap.Utilclass
             }
         }
 
+        public
         /// <summary> Determines if this RDN is multivalued or not</summary>
         /// <returns> true if this RDN is multivalued
         /// </returns>
-        virtual public bool Multivalued
+        virtual bool Multivalued
         {
             get { return (values.Count > 1) ? true : false; }
         }

@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class MemberSemanticModel
+    partial internal class MemberSemanticModel
     {
         protected sealed class NodeMapBuilder : BoundTreeWalkerWithStackGuard
         {

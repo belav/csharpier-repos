@@ -11,14 +11,15 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 {
-    internal static partial class SymbolUsageAnalysis
+    partial internal static class SymbolUsageAnalysis
     {
+        partial
         /// <summary>
         /// Dataflow analysis to compute symbol usage information (i.e. reads/writes) for locals/parameters
         /// in a given control flow graph, along with the information of whether or not the writes
         /// may be read on some control flow path.
         /// </summary>
-        private sealed partial class DataFlowAnalyzer : DataFlowAnalyzer<BasicBlockAnalysisData>
+        private sealed class DataFlowAnalyzer : DataFlowAnalyzer<BasicBlockAnalysisData>
         {
             private readonly FlowGraphAnalysisData _analysisData;
 

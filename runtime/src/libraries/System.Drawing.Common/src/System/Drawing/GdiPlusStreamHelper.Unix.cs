@@ -40,7 +40,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {
-    internal sealed partial class GdiPlusStreamHelper
+    partial internal sealed class GdiPlusStreamHelper
     {
         private Stream _stream;
 

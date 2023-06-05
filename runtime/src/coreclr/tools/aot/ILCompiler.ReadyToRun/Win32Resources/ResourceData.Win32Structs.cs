@@ -9,7 +9,7 @@ using ILCompiler.DependencyAnalysis;
 
 namespace ILCompiler.Win32Resources
 {
-    public unsafe partial class ResourceData
+    partial public unsafe class ResourceData
     {
         private struct IMAGE_RESOURCE_DIRECTORY
         {

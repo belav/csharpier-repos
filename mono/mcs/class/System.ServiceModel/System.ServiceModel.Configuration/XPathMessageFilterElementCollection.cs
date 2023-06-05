@@ -62,7 +62,7 @@ namespace System.ServiceModel.Configuration
         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
     )]
     [MonoTODO]
-    public sealed partial class XPathMessageFilterElementCollection
+    partial public sealed class XPathMessageFilterElementCollection
         : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>,
             ICollection,
             IEnumerable

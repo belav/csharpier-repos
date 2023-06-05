@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Formats.Cbor.Tests
 {
-    public partial class CborWriterTests
+    partial public class CborWriterTests
     {
         [Theory]
         [InlineData("", "60")]

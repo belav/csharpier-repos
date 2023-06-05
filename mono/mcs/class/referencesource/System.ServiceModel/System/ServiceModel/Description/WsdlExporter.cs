@@ -716,7 +716,7 @@ namespace System.ServiceModel.Description
             this.Errors.Add(new MetadataConversionError(warningMessage, true));
         }
 
-        static internal XmlSchemaSet GetEmptySchemaSet()
+        internal static XmlSchemaSet GetEmptySchemaSet()
         {
             XmlSchemaSet schemaSet = new XmlSchemaSet();
             schemaSet.XmlResolver = null;

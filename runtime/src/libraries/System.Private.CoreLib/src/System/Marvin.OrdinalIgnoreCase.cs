@@ -9,7 +9,7 @@ using System.Text.Unicode;
 
 namespace System
 {
-    internal static partial class Marvin
+    partial internal static class Marvin
     {
         /// <summary>
         /// Compute a Marvin OrdinalIgnoreCase hash and collapse it into a 32-bit hash.

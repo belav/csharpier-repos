@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal partial class CpsDiagnosticItemSource
+    partial internal class CpsDiagnosticItemSource
         : BaseDiagnosticAndGeneratorItemSource,
             INotifyPropertyChanged
     {

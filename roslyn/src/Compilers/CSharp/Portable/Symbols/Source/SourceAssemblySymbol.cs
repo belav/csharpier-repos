@@ -24,10 +24,11 @@ using CommonAssemblyWellKnownAttributeData = Microsoft.CodeAnalysis.CommonAssemb
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Represents an assembly built by compiler.
     /// </summary>
-    internal sealed partial class SourceAssemblySymbol
+    internal sealed class SourceAssemblySymbol
         : MetadataOrSourceAssemblySymbol,
             ISourceAssemblySymbolInternal,
             IAttributeTargetSymbol

@@ -8,10 +8,11 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.NavigationBar
 {
+    partial
     /// <summary>
     /// Base type of all C#/VB navigation bar items.  Only for use internally to roslyn.
     /// </summary>
-    internal abstract partial class RoslynNavigationBarItem : IEquatable<RoslynNavigationBarItem>
+    internal abstract class RoslynNavigationBarItem : IEquatable<RoslynNavigationBarItem>
     {
         public readonly RoslynNavigationBarItemKind Kind;
 

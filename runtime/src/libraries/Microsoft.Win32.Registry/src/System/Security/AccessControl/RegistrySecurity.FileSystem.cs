@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Security.AccessControl
 {
-    public sealed partial class RegistrySecurity : NativeObjectSecurity
+    partial public sealed class RegistrySecurity : NativeObjectSecurity
     {
         private static Exception _HandleErrorCodeCore(
             int errorCode,

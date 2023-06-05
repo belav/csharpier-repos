@@ -14,7 +14,7 @@ using Microsoft.VisualStudio.Imaging.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal sealed partial class SourceGeneratedFileItem : BaseItem
+    partial internal sealed class SourceGeneratedFileItem : BaseItem
     {
         private readonly IThreadingContext _threadingContext;
         private readonly string _languageName;

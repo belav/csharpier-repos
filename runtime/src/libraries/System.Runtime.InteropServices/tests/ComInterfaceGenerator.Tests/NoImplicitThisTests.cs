@@ -8,13 +8,13 @@ using Xunit;
 
 namespace ComInterfaceGenerator.Tests
 {
-    internal unsafe partial class NativeExportsNE
+    partial internal unsafe class NativeExportsNE
     {
-        internal partial class NoImplicitThis
+        partial internal class NoImplicitThis
         {
             public readonly record struct NoCasting;
 
-            internal partial interface IStaticMethodTable
+            partial internal interface IStaticMethodTable
                 : IUnmanagedInterfaceType<IStaticMethodTable, NoCasting>
             {
                 static int IUnmanagedInterfaceType<
@@ -88,7 +88,7 @@ namespace ComInterfaceGenerator.Tests
             }
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_static_function_table")]
-            public static partial StaticMethodTable GetStaticFunctionTable();
+            partial public static StaticMethodTable GetStaticFunctionTable();
         }
     }
 

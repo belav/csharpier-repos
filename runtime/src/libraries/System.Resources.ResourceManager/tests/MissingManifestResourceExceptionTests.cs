@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Resources.Tests
 {
-    public partial class MissingManifestResourceExceptionTests
+    partial public class MissingManifestResourceExceptionTests
     {
         [Fact]
         public static void ConstructorSimple()

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace System.Diagnostics
 {
-    public partial class StackTrace
+    partial public class StackTrace
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void GetStackFramesInternal(

@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public static partial class UserSecretsConfigurationExtensions
+    partial public static class UserSecretsConfigurationExtensions
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
@@ -83,7 +83,7 @@ namespace Microsoft.Extensions.Configuration
 
 namespace Microsoft.Extensions.Configuration.UserSecrets
 {
-    public partial class PathHelper
+    partial public class PathHelper
     {
         public PathHelper() { }
 
@@ -98,7 +98,7 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
         Inherited = false,
         AllowMultiple = false
     )]
-    public partial class UserSecretsIdAttribute : System.Attribute
+    partial public class UserSecretsIdAttribute : System.Attribute
     {
         public UserSecretsIdAttribute(string userSecretId) { }
 

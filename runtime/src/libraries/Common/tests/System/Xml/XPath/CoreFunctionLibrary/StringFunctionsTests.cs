@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.CoreFunctionLibrary
 {
+    partial
     /// <summary>
     /// Core Function Library - String Functions
     /// </summary>
-    public static partial class StringFunctionsTests
+    public static class StringFunctionsTests
     {
         /// <summary>
         /// Verify result.

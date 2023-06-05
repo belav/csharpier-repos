@@ -12,12 +12,13 @@ using System.Text.Unicode;
 
 namespace System.Globalization
 {
+    partial
     /// <summary>
     /// This Class defines behaviors specific to a writing system.
     /// A writing system is the collection of scripts and orthographic rules
     /// required to represent a language as text.
     /// </summary>
-    public sealed partial class TextInfo : ICloneable, IDeserializationCallback
+    public sealed class TextInfo : ICloneable, IDeserializationCallback
     {
         private enum Tristate : byte
         {

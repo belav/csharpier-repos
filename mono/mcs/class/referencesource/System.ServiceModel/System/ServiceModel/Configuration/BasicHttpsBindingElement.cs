@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.Text;
 
-    public partial class BasicHttpsBindingElement : HttpBindingBaseElement
+    partial public class BasicHttpsBindingElement : HttpBindingBaseElement
     {
         public BasicHttpsBindingElement(string name)
             : base(name) { }

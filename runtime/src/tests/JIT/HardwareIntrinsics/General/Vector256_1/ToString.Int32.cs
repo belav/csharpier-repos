@@ -16,9 +16,9 @@ using System.Runtime.Intrinsics;
 
 namespace JIT.HardwareIntrinsics.General
 {
-    public static partial class Program
+    partial public static class Program
     {
-        private unsafe static void ToStringInt32()
+        private static unsafe void ToStringInt32()
         {
             int size = Unsafe.SizeOf<Vector256<Int32>>() / sizeof(Int32);
             Int32[] values = new Int32[size];

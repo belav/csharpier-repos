@@ -20,7 +20,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
 {
     [Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-    public partial class TypeInferrerTests : TypeInferrerTestBase<CSharpTestWorkspaceFixture>
+    partial public class TypeInferrerTests : TypeInferrerTestBase<CSharpTestWorkspaceFixture>
     {
         protected override async Task TestWorkerAsync(
             Document document,

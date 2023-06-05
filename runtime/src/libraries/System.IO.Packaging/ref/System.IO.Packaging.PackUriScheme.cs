@@ -6,7 +6,7 @@
 
 namespace System.IO.Packaging
 {
-    public static partial class PackUriHelper
+    partial public static class PackUriHelper
     {
         public static int ComparePackUri(System.Uri? firstPackUri, System.Uri? secondPackUri)
         {

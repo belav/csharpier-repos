@@ -8,7 +8,7 @@ using Xunit;
 namespace System.Security.Cryptography.Rsa.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public partial class RSASignatureFormatterTests : AsymmetricSignatureFormatterTests
+    partial public class RSASignatureFormatterTests : AsymmetricSignatureFormatterTests
     {
         [ConditionalFact(typeof(RSAFactory), nameof(RSAFactory.SupportsSha1Signatures))]
         public static void VerifySignature_SHA1()

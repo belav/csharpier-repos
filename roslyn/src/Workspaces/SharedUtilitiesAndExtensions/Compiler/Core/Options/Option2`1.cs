@@ -29,10 +29,11 @@ namespace Microsoft.CodeAnalysis.Options
     /// <inheritdoc cref="ISingleValuedOption"/>
     internal interface ISingleValuedOption<T> : ISingleValuedOption { }
 
+    partial
     /// <summary>
     /// An global option. An instance of this class can be used to access an option value from an OptionSet.
     /// </summary>
-    internal partial class Option2<T> : ISingleValuedOption<T>
+    internal class Option2<T> : ISingleValuedOption<T>
     {
         public OptionDefinition OptionDefinition { get; }
 

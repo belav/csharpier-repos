@@ -20,6 +20,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Net
 {
+    partial
     // Implementation:
     // This partial file is meant to be consumed into each System.Net.* assembly that needs to log.  Each such assembly also provides
     // its own NetEventSource partial class that adds an appropriate [EventSource] attribute, giving it a unique name for that assembly.
@@ -38,7 +39,7 @@ namespace System.Net
     //   method that takes an object and optionally provides a string representation of it, in case a particular library wants to customize further.
 
     /// <summary>Provides logging facilities for System.Net libraries.</summary>
-    internal sealed partial class NetEventSource : EventSource
+    internal sealed class NetEventSource : EventSource
     {
         /// <summary>The single event source instance to use for all logging.</summary>
         public static readonly NetEventSource Log = new NetEventSource();
@@ -588,7 +589,7 @@ namespace System.Net
             }
         }
 
-        static partial void AdditionalCustomizedToString<T>(T value, ref string? result);
+        partial static void AdditionalCustomizedToString<T>(T value, ref string? result);
         #endregion
 
         #region Custom WriteEvent overloads

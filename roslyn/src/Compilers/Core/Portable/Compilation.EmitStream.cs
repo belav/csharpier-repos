@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public abstract partial class Compilation
+    partial public abstract class Compilation
     {
         /// <summary>
         /// Describes the kind of real signing that is being done during Emit. In the case of public signing

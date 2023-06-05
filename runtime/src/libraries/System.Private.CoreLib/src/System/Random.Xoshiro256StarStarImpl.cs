@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public partial class Random
+    partial public class Random
     {
         /// <summary>
         /// Provides an implementation of the xoshiro256** algorithm. This implementation is used

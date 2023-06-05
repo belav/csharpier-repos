@@ -15,7 +15,7 @@ using System.Transactions;
 
 namespace System.Data.Common
 {
-    internal static partial class ADP
+    partial internal static class ADP
     {
         // NOTE: Initializing a Task in SQL CLR requires the "UNSAFE" permission set (https://docs.microsoft.com/en-us/dotnet/framework/performance/sql-server-programming-and-host-protection-attributes)
         // Therefore we are lazily initializing these Tasks to avoid forcing customers to use the "UNSAFE" set when they are actually using no Async features
@@ -29,7 +29,7 @@ namespace System.Data.Common
             CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth | CompareOptions.IgnoreCase;
         internal const int DefaultConnectionTimeout = DbConnectionStringDefaults.ConnectTimeout;
 
-        static partial void TraceException(string trace, Exception e);
+        partial static void TraceException(string trace, Exception e);
 
         internal static void TraceExceptionAsReturnValue(Exception e)
         {

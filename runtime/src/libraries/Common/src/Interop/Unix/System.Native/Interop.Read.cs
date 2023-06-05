@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Reads a number of bytes from an open file descriptor into a specified buffer.
@@ -22,6 +22,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_Read",
             SetLastError = true
         )]
-        internal static unsafe partial int Read(SafeHandle fd, byte* buffer, int count);
+        partial internal static unsafe int Read(SafeHandle fd, byte* buffer, int count);
     }
 }

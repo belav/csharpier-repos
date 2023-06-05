@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct PBES2Params
+    partial internal struct PBES2Params
     {
         internal System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn KeyDerivationFunc;
         internal System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn EncryptionScheme;

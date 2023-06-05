@@ -20,7 +20,7 @@ using System.Security.AccessControl;
 
 namespace System.DirectoryServices.AccountManagement
 {
-    internal partial class ADStoreCtx : StoreCtx
+    partial internal class ADStoreCtx : StoreCtx
     {
         //
         // Native <--> Principal

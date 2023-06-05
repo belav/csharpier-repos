@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct X509ExtensionAsn
+    partial internal struct X509ExtensionAsn
     {
         private static ReadOnlySpan<byte> DefaultCritical => new byte[] { 0x01, 0x01, 0x00 };
 

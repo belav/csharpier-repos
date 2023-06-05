@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class ValueSetFactory
+    partial internal static class ValueSetFactory
     {
         /// <summary>
         /// A type class for values (of type <typeparamref name="T"/>) that can be directly compared for equality

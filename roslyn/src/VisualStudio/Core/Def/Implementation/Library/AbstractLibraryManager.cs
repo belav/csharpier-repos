@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
 {
-    internal abstract partial class AbstractLibraryManager : IVsCoTaskMemFreeMyStrings
+    partial internal abstract class AbstractLibraryManager : IVsCoTaskMemFreeMyStrings
     {
         internal readonly Guid LibraryGuid;
         private readonly IServiceProvider _serviceProvider;

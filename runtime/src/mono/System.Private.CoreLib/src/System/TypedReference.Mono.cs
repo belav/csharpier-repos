@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public ref partial struct TypedReference
+    ref partial public struct TypedReference
     {
         #region sync with object-internals.h
 #pragma warning disable CA1823 // used by runtime

@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    public partial class DSA : AsymmetricAlgorithm
+    partial public class DSA : AsymmetricAlgorithm
     {
         private static DSA CreateCore()
         {
@@ -14,9 +14,9 @@ namespace System.Security.Cryptography
         }
     }
 
-    internal static partial class DSAImplementation
+    partial internal static class DSAImplementation
     {
-        public sealed partial class DSACng : DSA
+        partial public sealed class DSACng : DSA
         {
             private SafeNCryptKeyHandle? _keyHandle;
             private int _lastKeySize;

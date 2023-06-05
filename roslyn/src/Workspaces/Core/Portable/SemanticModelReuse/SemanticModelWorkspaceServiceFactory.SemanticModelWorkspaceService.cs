@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
         }
     }
 
-    internal partial class SemanticModelReuseWorkspaceServiceFactory : IWorkspaceServiceFactory
+    partial internal class SemanticModelReuseWorkspaceServiceFactory : IWorkspaceServiceFactory
     {
         private sealed class SemanticModelReuseWorkspaceService
             : ISemanticModelReuseWorkspaceService

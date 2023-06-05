@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    public partial class ModuleBuilder : Module
+    partial public class ModuleBuilder : Module
     {
         internal ModuleBuilder()
         {

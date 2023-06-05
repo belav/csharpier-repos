@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.UnitTests;
 
-public partial class HandlerProviderTests
+partial public class HandlerProviderTests
 {
     private const string _method = "SomeMethod";
     private const string _wrongMethod = "WrongMethod";

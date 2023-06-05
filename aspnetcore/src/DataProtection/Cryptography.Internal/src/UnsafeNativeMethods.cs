@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Cryptography.SafeHandles;
 namespace Microsoft.AspNetCore.Cryptography;
 
 [SuppressUnmanagedCodeSecurity]
-internal static unsafe partial class UnsafeNativeMethods
+partial internal static unsafe class UnsafeNativeMethods
 {
     internal const string BCRYPT_LIB = "bcrypt.dll";
     private static SafeLibraryHandle? _lazyBCryptLibHandle;
@@ -32,7 +32,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375377(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptCloseAlgorithmProvider(
+    partial internal static int BCryptCloseAlgorithmProvider(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptCloseAlgorithmProvider(
@@ -42,7 +42,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375383(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptCreateHash(
+    partial internal static int BCryptCreateHash(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptCreateHash(
@@ -59,7 +59,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375391(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptDecrypt(
+    partial internal static int BCryptDecrypt(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptDecrypt(
@@ -79,7 +79,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/dd433795(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptDeriveKeyPBKDF2(
+    partial internal static int BCryptDeriveKeyPBKDF2(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptDeriveKeyPBKDF2(
@@ -101,7 +101,7 @@ internal static unsafe partial class UnsafeNativeMethods
 #endif
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptDestroyHash(
+    partial internal static int BCryptDestroyHash(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptDestroyHash(
@@ -114,7 +114,7 @@ internal static unsafe partial class UnsafeNativeMethods
 #endif
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptDestroyKey(
+    partial internal static int BCryptDestroyKey(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptDestroyKey(
@@ -124,7 +124,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375413(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptDuplicateHash(
+    partial internal static int BCryptDuplicateHash(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptDuplicateHash(
@@ -139,7 +139,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375421(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptEncrypt(
+    partial internal static int BCryptEncrypt(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptEncrypt(
@@ -159,7 +159,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375443(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptFinishHash(
+    partial internal static int BCryptFinishHash(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptFinishHash(
@@ -173,7 +173,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375453(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptGenerateSymmetricKey(
+    partial internal static int BCryptGenerateSymmetricKey(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptGenerateSymmetricKey(
@@ -190,7 +190,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375458(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptGenRandom(
+    partial internal static int BCryptGenRandom(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptGenRandom(
@@ -204,7 +204,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375464(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptGetProperty(
+    partial internal static int BCryptGetProperty(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptGetProperty(
@@ -220,7 +220,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375468(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptHashData(
+    partial internal static int BCryptHashData(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptHashData(
@@ -234,7 +234,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/hh448506(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptKeyDerivation(
+    partial internal static int BCryptKeyDerivation(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptKeyDerivation(
@@ -250,7 +250,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375479(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptOpenAlgorithmProvider(
+    partial internal static int BCryptOpenAlgorithmProvider(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptOpenAlgorithmProvider(
@@ -264,7 +264,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375504(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
-    internal static partial int BCryptSetProperty(
+    partial internal static int BCryptSetProperty(
 #else
     [DllImport(BCRYPT_LIB)]
     internal static extern int BCryptSetProperty(
@@ -284,7 +284,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa380261(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(CRYPT32_LIB, SetLastError = true)]
-    internal static partial bool CryptProtectData(
+    partial internal static bool CryptProtectData(
 #else
     [DllImport(CRYPT32_LIB, SetLastError = true)]
     internal static extern bool CryptProtectData(
@@ -302,7 +302,7 @@ internal static unsafe partial class UnsafeNativeMethods
     [return: MarshalAs(UnmanagedType.Bool)]
 #if NET7_0_OR_GREATER
     [LibraryImport(CRYPT32_LIB, SetLastError = true)]
-    public static partial bool CryptProtectMemory(
+    partial public static bool CryptProtectMemory(
 #else
     [DllImport(CRYPT32_LIB, SetLastError = true)]
     public static extern bool CryptProtectMemory(
@@ -313,7 +313,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa380882(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(CRYPT32_LIB, SetLastError = true)]
-    internal static partial bool CryptUnprotectData(
+    partial internal static bool CryptUnprotectData(
 #else
     [DllImport(CRYPT32_LIB, SetLastError = true)]
     internal static extern bool CryptUnprotectData(
@@ -331,7 +331,7 @@ internal static unsafe partial class UnsafeNativeMethods
     [return: MarshalAs(UnmanagedType.Bool)]
 #if NET7_0_OR_GREATER
     [LibraryImport(CRYPT32_LIB, SetLastError = true)]
-    public static partial bool CryptUnprotectMemory(
+    partial public static bool CryptUnprotectMemory(
 #else
     [DllImport(CRYPT32_LIB, SetLastError = true)]
     public static extern bool CryptUnprotectMemory(
@@ -342,7 +342,7 @@ internal static unsafe partial class UnsafeNativeMethods
     [return: MarshalAs(UnmanagedType.Bool)]
 #if NET7_0_OR_GREATER
     [LibraryImport(CRYPT32_LIB, SetLastError = true)]
-    public static partial bool CryptUnprotectMemory(
+    partial public static bool CryptUnprotectMemory(
 #else
     [DllImport(CRYPT32_LIB, SetLastError = true)]
     public static extern bool CryptUnprotectMemory(
@@ -359,7 +359,7 @@ internal static unsafe partial class UnsafeNativeMethods
 #endif
 #if NET7_0_OR_GREATER
     [LibraryImport(NCRYPT_LIB)]
-    internal static partial int NCryptCloseProtectionDescriptor(
+    partial internal static int NCryptCloseProtectionDescriptor(
 #else
     [DllImport(NCRYPT_LIB)]
     internal static extern int NCryptCloseProtectionDescriptor(
@@ -369,7 +369,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/hh706800(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(NCRYPT_LIB)]
-    internal static partial int NCryptCreateProtectionDescriptor(
+    partial internal static int NCryptCreateProtectionDescriptor(
 #else
     [DllImport(NCRYPT_LIB)]
     internal static extern int NCryptCreateProtectionDescriptor(
@@ -382,7 +382,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // https://msdn.microsoft.com/en-us/library/windows/desktop/hh706801(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(NCRYPT_LIB)]
-    internal static partial int NCryptGetProtectionDescriptorInfo(
+    partial internal static int NCryptGetProtectionDescriptorInfo(
 #else
     [DllImport(NCRYPT_LIB)]
     internal static extern int NCryptGetProtectionDescriptorInfo(
@@ -396,7 +396,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/hh706802(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(NCRYPT_LIB)]
-    internal static partial int NCryptProtectSecret(
+    partial internal static int NCryptProtectSecret(
 #else
     [DllImport(NCRYPT_LIB)]
     internal static extern int NCryptProtectSecret(
@@ -414,7 +414,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/hh706811(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(NCRYPT_LIB)]
-    internal static partial int NCryptUnprotectSecret(
+    partial internal static int NCryptUnprotectSecret(
 #else
     [DllImport(NCRYPT_LIB)]
     internal static extern int NCryptUnprotectSecret(
@@ -432,7 +432,7 @@ internal static unsafe partial class UnsafeNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/hh706811(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(NCRYPT_LIB)]
-    internal static partial int NCryptUnprotectSecret(
+    partial internal static int NCryptUnprotectSecret(
 #else
     [DllImport(NCRYPT_LIB)]
     internal static extern int NCryptUnprotectSecret(

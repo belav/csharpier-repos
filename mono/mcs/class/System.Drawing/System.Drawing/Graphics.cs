@@ -78,7 +78,7 @@ namespace System.Drawing
             Dispose();
         }
 
-        static internal float systemDpiX
+        internal static float systemDpiX
         {
             get
             {
@@ -93,7 +93,7 @@ namespace System.Drawing
             }
         }
 
-        static internal float systemDpiY
+        internal static float systemDpiY
         {
             get
             {

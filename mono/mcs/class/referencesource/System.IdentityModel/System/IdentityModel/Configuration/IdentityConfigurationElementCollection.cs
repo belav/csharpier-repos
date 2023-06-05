@@ -13,7 +13,7 @@ namespace System.IdentityModel.Configuration
         AddItemName = ConfigurationStrings.IdentityConfiguration,
         CollectionType = ConfigurationElementCollectionType.BasicMap
     )]
-    public sealed partial class IdentityConfigurationElementCollection
+    partial public sealed class IdentityConfigurationElementCollection
         : ConfigurationElementCollection
     {
         // Note:This is a BasicMap collection type with ThrowOnDuplicate true.

@@ -6,12 +6,12 @@
 
 namespace System.IO.IsolatedStorage
 {
-    public partial interface INormalizeForIsolatedStorage
+    partial public interface INormalizeForIsolatedStorage
     {
         object Normalize();
     }
 
-    public abstract partial class IsolatedStorage : System.MarshalByRefObject
+    partial public abstract class IsolatedStorage : System.MarshalByRefObject
     {
         protected IsolatedStorage() { }
 
@@ -89,7 +89,7 @@ namespace System.IO.IsolatedStorage
         public abstract void Remove();
     }
 
-    public partial class IsolatedStorageException : System.Exception
+    partial public class IsolatedStorageException : System.Exception
     {
         public IsolatedStorageException() { }
 
@@ -103,7 +103,7 @@ namespace System.IO.IsolatedStorage
         public IsolatedStorageException(string? message, System.Exception? inner) { }
     }
 
-    public sealed partial class IsolatedStorageFile
+    partial public sealed class IsolatedStorageFile
         : System.IO.IsolatedStorage.IsolatedStorage,
             System.IDisposable
     {
@@ -325,7 +325,7 @@ namespace System.IO.IsolatedStorage
         public static void Remove(System.IO.IsolatedStorage.IsolatedStorageScope scope) { }
     }
 
-    public partial class IsolatedStorageFileStream : System.IO.FileStream
+    partial public class IsolatedStorageFileStream : System.IO.FileStream
     {
         public IsolatedStorageFileStream(string path, System.IO.FileMode mode)
             : base(

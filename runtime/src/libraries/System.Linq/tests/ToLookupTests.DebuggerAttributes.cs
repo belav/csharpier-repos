@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Linq.Tests
 {
-    public partial class ToLookupTests : EnumerableTests
+    partial public class ToLookupTests : EnumerableTests
     {
         [ConditionalTheory(
             typeof(PlatformDetection),

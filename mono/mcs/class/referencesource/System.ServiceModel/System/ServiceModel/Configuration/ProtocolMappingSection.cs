@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.Security;
 
-    public sealed partial class ProtocolMappingSection : ConfigurationSection
+    partial public sealed class ProtocolMappingSection : ConfigurationSection
     {
         public ProtocolMappingSection() { }
 

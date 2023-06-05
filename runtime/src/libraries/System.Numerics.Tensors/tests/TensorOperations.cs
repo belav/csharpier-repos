@@ -3,7 +3,7 @@
 
 namespace System.Numerics.Tensors
 {
-    public static partial class TensorOperations
+    partial public static class TensorOperations
     {
         internal static void ValidateBinaryArgs<T>(Tensor<T> left, Tensor<T> right)
         {

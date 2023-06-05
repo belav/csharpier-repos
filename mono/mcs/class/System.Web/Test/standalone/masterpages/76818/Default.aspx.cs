@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-public partial class _Default : System.Web.UI.Page
+partial public class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e) { }
 }

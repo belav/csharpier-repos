@@ -3,12 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NtDll
+    partial internal static class NtDll
     {
         [LibraryImport(Libraries.NtDll)]
-        private static partial int RtlGetVersion(ref RTL_OSVERSIONINFOEX lpVersionInformation);
+        partial private static int RtlGetVersion(ref RTL_OSVERSIONINFOEX lpVersionInformation);
 
         internal static unsafe int RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi)
         {
@@ -25,7 +25,7 @@ internal static partial class Interop
             internal uint dwMinorVersion;
             internal uint dwBuildNumber;
             internal uint dwPlatformId;
-            internal fixed char szCSDVersion[128];
+            fixed internal char szCSDVersion[128];
         }
     }
 }

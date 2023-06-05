@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReferences.Dialog
 {
-    internal partial class UnusedReferencesTableProvider
+    partial internal class UnusedReferencesTableProvider
     {
         internal class ReferenceImageMonikers
         {

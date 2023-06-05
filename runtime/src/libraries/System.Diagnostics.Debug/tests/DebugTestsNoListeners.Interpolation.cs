@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class DebugTestsNoListeners : DebugTests
+    partial public class DebugTestsNoListeners : DebugTests
     {
         [Fact]
         public void Asserts_Interpolation()

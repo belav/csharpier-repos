@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedLocalFunction
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedLocalFunction)]
-    public partial class RemoveUnusedLocalFunctionTests
+    partial public class RemoveUnusedLocalFunctionTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnusedLocalFunctionTests(ITestOutputHelper logger)

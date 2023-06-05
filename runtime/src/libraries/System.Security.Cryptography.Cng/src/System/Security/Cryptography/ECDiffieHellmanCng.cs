@@ -15,10 +15,11 @@ namespace System.Security.Cryptography
         Tls
     }
 
+    partial
     /// <summary>
     ///     Wrapper for CNG's implementation of elliptic curve Diffie-Hellman key exchange
     /// </summary>
-    public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+    public sealed class ECDiffieHellmanCng : ECDiffieHellman
     {
         private CngAlgorithmCore _core = new CngAlgorithmCore(nameof(ECDiffieHellmanCng))
         {

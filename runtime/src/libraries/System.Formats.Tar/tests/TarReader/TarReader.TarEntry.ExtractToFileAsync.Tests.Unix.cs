@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public partial class TarReader_TarEntry_ExtractToFileAsync_Tests : TarTestsBase
+    partial public class TarReader_TarEntry_ExtractToFileAsync_Tests : TarTestsBase
     {
         [SkipOnPlatform(TestPlatforms.LinuxBionic, "Unsupported on Bionic")]
         [SkipOnPlatform(TestPlatforms.tvOS, "https://github.com/dotnet/runtime/issues/68360")]

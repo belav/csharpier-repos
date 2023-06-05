@@ -14,10 +14,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
+    partial
     // All the logic for finding source declarations in a given solution/project with some name
     // is in this file.
 
-    internal static partial class DeclarationFinder
+    internal static class DeclarationFinder
     {
         #region Dispatch Members
 

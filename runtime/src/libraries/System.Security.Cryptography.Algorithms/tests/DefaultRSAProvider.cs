@@ -46,7 +46,7 @@ namespace System.Security.Cryptography.Rsa.Tests
         public bool SupportsPss { get; } = true;
     }
 
-    public partial class RSAFactory
+    partial public class RSAFactory
     {
         private static readonly IRSAProvider s_provider = new DefaultRSAProvider();
     }

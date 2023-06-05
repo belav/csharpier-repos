@@ -3,7 +3,7 @@
 
 namespace System.Reflection
 {
-    public abstract partial class MethodInfo : MethodBase
+    partial public abstract class MethodInfo : MethodBase
     {
         internal virtual int GenericParameterCount => GetGenericArguments().Length;
     }

@@ -2,7 +2,7 @@ using System;
 
 namespace MainsoftWebApp
 {
-    public partial class Global : System.Web.HttpApplication
+    partial public class Global : System.Web.HttpApplication
     {
         protected void Application_Error(object sender, EventArgs e)
         {

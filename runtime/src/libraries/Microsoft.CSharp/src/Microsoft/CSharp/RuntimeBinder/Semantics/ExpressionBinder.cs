@@ -143,7 +143,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         None
     }
 
-    internal readonly partial struct ExpressionBinder
+    partial internal readonly struct ExpressionBinder
     {
         // ExpressionBinder - General Rules
         //

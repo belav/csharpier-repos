@@ -9,7 +9,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public partial class ImmutableDictionaryTest : ImmutableDictionaryTestBase
+    partial public class ImmutableDictionaryTest : ImmutableDictionaryTestBase
     {
         [Fact]
         public void AddExistingKeySameValueTest()

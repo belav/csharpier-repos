@@ -16,6 +16,7 @@ namespace System.Net
     using System.Security.Authentication;
     using System.Threading;
 
+    partial
     //
     // The ServicePointManager class hands out ServicePoints (may exist or be created
     // as needed) and makes sure they are garbage collected when they expire.
@@ -26,7 +27,7 @@ namespace System.Net
     /// <para>Manages the collection of <see cref='System.Net.ServicePoint'/> instances.</para>
     /// </devdoc>
     ///
-    public partial class ServicePointManager
+    public class ServicePointManager
     {
         /// <devdoc>
         ///    <para>

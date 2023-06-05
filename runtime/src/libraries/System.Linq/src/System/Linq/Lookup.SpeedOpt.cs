@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public partial class Lookup<TKey, TElement> : IIListProvider<IGrouping<TKey, TElement>>
+    partial public class Lookup<TKey, TElement> : IIListProvider<IGrouping<TKey, TElement>>
     {
         IGrouping<TKey, TElement>[] IIListProvider<IGrouping<TKey, TElement>>.ToArray()
         {

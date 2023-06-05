@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct GeneralNameAsn
+    partial internal struct GeneralNameAsn
     {
         internal System.Security.Cryptography.Asn1.OtherNameAsn? OtherName;
         internal string? Rfc822Name;

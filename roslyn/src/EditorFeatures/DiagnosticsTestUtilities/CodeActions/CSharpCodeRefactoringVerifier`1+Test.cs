@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
-    public static partial class CSharpCodeRefactoringVerifier<TCodeRefactoring>
+    partial public static class CSharpCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()
     {
         public class Test : CSharpCodeRefactoringTest<TCodeRefactoring, XUnitVerifier>

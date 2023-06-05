@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal static partial class BinHexEncoder
+    partial internal static class BinHexEncoder
     {
         internal static async Task EncodeAsync(
             byte[] buffer,

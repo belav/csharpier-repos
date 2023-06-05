@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class CastExpressionSyntaxExtensions
+    partial internal static class CastExpressionSyntaxExtensions
     {
         public static ExpressionSyntax Uncast(this CastExpressionSyntax node)
         {

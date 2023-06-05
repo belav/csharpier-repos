@@ -7,7 +7,7 @@ using System.Security;
 
 namespace System.Diagnostics
 {
-    public sealed partial class ProcessStartInfo
+    partial public sealed class ProcessStartInfo
     {
         private string? _domain;
 

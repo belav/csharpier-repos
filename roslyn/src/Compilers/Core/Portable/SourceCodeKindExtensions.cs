@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis
 {
-    internal static partial class SourceCodeKindExtensions
+    partial internal static class SourceCodeKindExtensions
     {
         internal static SourceCodeKind MapSpecifiedToEffectiveKind(this SourceCodeKind kind)
         {

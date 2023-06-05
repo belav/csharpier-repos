@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal sealed partial class DiagnosticItem
+    partial internal sealed class DiagnosticItem
     {
         internal class BrowseObject : LocalizableProperties
         {

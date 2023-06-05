@@ -9,7 +9,7 @@ using RegisterBuildProvider.Test;
 
 namespace RegisterBuildProvider
 {
-    public partial class _default : System.Web.UI.Page
+    partial public class _default : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

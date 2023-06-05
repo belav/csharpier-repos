@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Dummy implementation of diagnostic names that just forwards to Name
-    public abstract partial class GenericParameterDesc
+    public abstract class GenericParameterDesc
     {
         /// <summary>
         /// Gets the name of the generic parameter as defined in the metadata. This must not throw

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-internal partial class MigrationsListCommand : ContextCommandBase
+partial internal class MigrationsListCommand : ContextCommandBase
 {
     private CommandOption? _connection;
     private CommandOption? _noConnect;

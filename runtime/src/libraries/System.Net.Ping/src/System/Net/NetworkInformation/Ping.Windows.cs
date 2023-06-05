@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.NetworkInformation
 {
-    public partial class Ping
+    partial public class Ping
     {
         private const int MaxUdpPacket = 0xFFFF + 256; // Marshal.SizeOf(typeof(ICMPV6_ECHO_REPLY)) * 2 + ip header info;
 

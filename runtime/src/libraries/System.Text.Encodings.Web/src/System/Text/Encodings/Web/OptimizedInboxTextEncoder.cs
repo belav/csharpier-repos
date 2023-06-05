@@ -15,6 +15,7 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace System.Text.Encodings.Web
 {
+    partial
     /// <summary>
     /// Allows efficient escaping for the library's built-in types (HTML, URL, JS).
     /// Assumes the following:
@@ -23,7 +24,7 @@ namespace System.Text.Encodings.Web
     ///   (c) All Unicode scalar values may be represented in escaped form.
     ///   (d) The escaped form of any Unicode scalar value consists of only ASCII characters.
     /// </summary>
-    internal sealed partial class OptimizedInboxTextEncoder
+    internal sealed class OptimizedInboxTextEncoder
     {
         private readonly AllowedAsciiCodePoints _allowedAsciiCodePoints;
         private readonly AsciiPreescapedData _asciiPreescapedData;

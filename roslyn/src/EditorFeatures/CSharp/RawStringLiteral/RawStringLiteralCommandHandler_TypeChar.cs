@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
 {
-    internal partial class RawStringLiteralCommandHandler
+    partial internal class RawStringLiteralCommandHandler
         : IChainedCommandHandler<TypeCharCommandArgs>
     {
         public CommandState GetCommandState(

@@ -21,7 +21,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
-    public partial class UseThrowExpressionTests
+    partial public class UseThrowExpressionTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseThrowExpressionTests(ITestOutputHelper logger)

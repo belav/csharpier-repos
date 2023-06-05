@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
-    internal partial class RequestExecutionQueue
+    partial internal class RequestExecutionQueue
     {
         /// <summary>
         /// Logs metadata on LSP requests (duration, success / failure metrics)

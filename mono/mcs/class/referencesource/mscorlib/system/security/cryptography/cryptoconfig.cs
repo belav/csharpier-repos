@@ -1069,7 +1069,7 @@ namespace System.Security.Cryptography
             return oid;
         }
 
-        static public byte[] EncodeOID(string str)
+        public static byte[] EncodeOID(string str)
         {
             if (str == null)
             {
@@ -1125,7 +1125,7 @@ namespace System.Security.Cryptography
             return retval;
         }
 
-        static private byte[] EncodeSingleOIDNum(uint dwValue)
+        private static byte[] EncodeSingleOIDNum(uint dwValue)
         {
             byte[] retval;
 

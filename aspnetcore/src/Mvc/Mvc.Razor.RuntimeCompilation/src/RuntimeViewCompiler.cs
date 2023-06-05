@@ -19,8 +19,9 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
+partial
 #pragma warning disable CA1852 // Seal internal types
-internal partial class RuntimeViewCompiler : IViewCompiler
+internal class RuntimeViewCompiler : IViewCompiler
 #pragma warning restore CA1852 // Seal internal types
 {
     private readonly object _cacheLock = new object();
@@ -447,14 +448,14 @@ internal partial class RuntimeViewCompiler : IViewCompiler
         public CompiledViewDescriptor Descriptor { get; set; } = default!;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
             LogLevel.Debug,
             "Compilation of the generated code for the Razor file at '{FilePath}' started."
         )]
-        public static partial void GeneratedCodeToAssemblyCompilationStart(
+        partial public static void GeneratedCodeToAssemblyCompilationStart(
             ILogger logger,
             string filePath
         );
@@ -464,7 +465,7 @@ internal partial class RuntimeViewCompiler : IViewCompiler
             LogLevel.Debug,
             "Compilation of the generated code for the Razor file at '{FilePath}' completed in {ElapsedMilliseconds}ms."
         )]
-        private static partial void GeneratedCodeToAssemblyCompilationEnd(
+        partial private static void GeneratedCodeToAssemblyCompilationEnd(
             ILogger logger,
             string filePath,
             double elapsedMilliseconds
@@ -495,36 +496,36 @@ internal partial class RuntimeViewCompiler : IViewCompiler
             LogLevel.Debug,
             "Initializing Razor view compiler with compiled view: '{ViewName}'."
         )]
-        public static partial void ViewCompilerLocatedCompiledView(ILogger logger, string viewName);
+        partial public static void ViewCompilerLocatedCompiledView(ILogger logger, string viewName);
 
         [LoggerMessage(
             4,
             LogLevel.Debug,
             "Initializing Razor view compiler with no compiled views."
         )]
-        public static partial void ViewCompilerNoCompiledViewsFound(ILogger logger);
+        partial public static void ViewCompilerNoCompiledViewsFound(ILogger logger);
 
         [LoggerMessage(5, LogLevel.Trace, "Located compiled view for view at path '{Path}'.")]
-        public static partial void ViewCompilerLocatedCompiledViewForPath(
+        partial public static void ViewCompilerLocatedCompiledViewForPath(
             ILogger logger,
             string path
         );
 
         [LoggerMessage(6, LogLevel.Trace, "Invalidating compiled view for view at path '{Path}'.")]
-        public static partial void ViewCompilerRecompilingCompiledView(ILogger logger, string path);
+        partial public static void ViewCompilerRecompilingCompiledView(ILogger logger, string path);
 
         [LoggerMessage(7, LogLevel.Trace, "Could not find a file for view at path '{Path}'.")]
-        public static partial void ViewCompilerCouldNotFindFileAtPath(ILogger logger, string path);
+        partial public static void ViewCompilerCouldNotFindFileAtPath(ILogger logger, string path);
 
         [LoggerMessage(8, LogLevel.Trace, "Found file at path '{Path}'.")]
-        public static partial void ViewCompilerFoundFileToCompile(ILogger logger, string path);
+        partial public static void ViewCompilerFoundFileToCompile(ILogger logger, string path);
 
         [LoggerMessage(
             9,
             LogLevel.Trace,
             "Invalidating compiled view at path '{Path}' with a file since the checksum did not match."
         )]
-        public static partial void ViewCompilerInvalidatingCompiledFile(
+        partial public static void ViewCompilerInvalidatingCompiledFile(
             ILogger logger,
             string path
         );

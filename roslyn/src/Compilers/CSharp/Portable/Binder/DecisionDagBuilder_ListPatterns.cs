@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class DecisionDagBuilder
+    partial internal sealed class DecisionDagBuilder
     {
         private Tests MakeTestsAndBindingsForListPattern(
             BoundDagTemp input,

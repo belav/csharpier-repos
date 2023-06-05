@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractEditorInlineRenameService
+    partial internal abstract class AbstractEditorInlineRenameService
     {
         private class InlineRenameLocationSet : IInlineRenameLocationSet
         {

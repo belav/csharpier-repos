@@ -4,9 +4,9 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT

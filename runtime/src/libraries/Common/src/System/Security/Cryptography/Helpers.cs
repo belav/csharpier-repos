@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 
 namespace Internal.Cryptography
 {
-    internal static partial class Helpers
+    partial internal static class Helpers
     {
         [UnsupportedOSPlatformGuard("browser")]
         internal static bool HasSymmetricEncryption { get; } =

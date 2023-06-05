@@ -11,7 +11,7 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    public partial class CryptoConfig
+    partial public class CryptoConfig
     {
         private const string AssemblyName_Cng = "System.Security.Cryptography.Cng";
         private const string AssemblyName_Csp = "System.Security.Cryptography.Csp";

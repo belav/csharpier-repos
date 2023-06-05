@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests
 {
+    partial
     /// <summary>
     /// Node sets
     /// </summary>
-    public static partial class NodeSetsTests
+    public static class NodeSetsTests
     {
         /// <summary>
         /// Trying to union 2 node-sets

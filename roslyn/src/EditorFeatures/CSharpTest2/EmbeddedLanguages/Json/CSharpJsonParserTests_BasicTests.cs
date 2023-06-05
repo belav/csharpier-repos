@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
 {
-    public partial class CSharpJsonParserBasicTests : CSharpJsonParserTests
+    partial public class CSharpJsonParserBasicTests : CSharpJsonParserTests
     {
         [Fact]
         public void TestEmpty()

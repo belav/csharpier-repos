@@ -5,9 +5,9 @@ using System;
 using System.DirectoryServices.Protocols;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ldap
+    partial internal static class Ldap
     {
         [LibraryImport(
             Libraries.Wldap32,
@@ -17,7 +17,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_bind_s(
+        partial public static int ldap_bind_s(
             ConnectionHandle ldapHandle,
             string dn,
             in SEC_WINNT_AUTH_IDENTITY_EX credentials,
@@ -33,13 +33,13 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_init(string hostName, int portNumber);
+        partial public static IntPtr ldap_init(string hostName, int portNumber);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_connect")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_connect(
+        partial public static int ldap_connect(
             ConnectionHandle ldapHandle,
             in LDAP_TIMEVAL timeout
         );
@@ -48,13 +48,13 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_unbind(IntPtr ldapHandle);
+        partial public static int ldap_unbind(IntPtr ldapHandle);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_get_optionW")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_get_option_int(
+        partial public static int ldap_get_option_int(
             ConnectionHandle ldapHandle,
             LdapOption option,
             ref int outValue
@@ -64,7 +64,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_set_option_int(
+        partial public static int ldap_set_option_int(
             ConnectionHandle ldapHandle,
             LdapOption option,
             ref int inValue
@@ -74,7 +74,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_get_option_ptr(
+        partial public static int ldap_get_option_ptr(
             ConnectionHandle ldapHandle,
             LdapOption option,
             ref IntPtr outValue
@@ -84,7 +84,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_set_option_ptr(
+        partial public static int ldap_set_option_ptr(
             ConnectionHandle ldapHandle,
             LdapOption option,
             ref IntPtr inValue
@@ -94,7 +94,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_get_option_sechandle(
+        partial public static int ldap_get_option_sechandle(
             ConnectionHandle ldapHandle,
             LdapOption option,
             ref SecurityHandle outValue
@@ -104,7 +104,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static unsafe partial int ldap_get_option_secInfo(
+        partial public static unsafe int ldap_get_option_secInfo(
             ConnectionHandle ldapHandle,
             LdapOption option,
             void* outValue
@@ -114,7 +114,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_set_option_referral(
+        partial public static int ldap_set_option_referral(
             ConnectionHandle ldapHandle,
             LdapOption option,
             ref LdapReferralCallback outValue
@@ -124,7 +124,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_set_option_clientcert(
+        partial public static int ldap_set_option_clientcert(
             ConnectionHandle ldapHandle,
             LdapOption option,
             QUERYCLIENTCERT outValue
@@ -134,7 +134,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_set_option_servercert(
+        partial public static int ldap_set_option_servercert(
             ConnectionHandle ldapHandle,
             LdapOption option,
             VERIFYSERVERCERT outValue
@@ -144,7 +144,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int LdapGetLastError();
+        partial public static int LdapGetLastError();
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -155,7 +155,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr cldap_open(string hostName, int portNumber);
+        partial public static IntPtr cldap_open(string hostName, int portNumber);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -165,7 +165,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_simple_bind_s(
+        partial public static int ldap_simple_bind_s(
             ConnectionHandle ldapHandle,
             string distinguishedName,
             string password
@@ -179,7 +179,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_delete_ext(
+        partial public static int ldap_delete_ext(
             ConnectionHandle ldapHandle,
             string dn,
             IntPtr servercontrol,
@@ -191,7 +191,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_result(
+        partial public static int ldap_result(
             ConnectionHandle ldapHandle,
             int messageId,
             int all,
@@ -203,7 +203,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_parse_result(
+        partial public static int ldap_parse_result(
             ConnectionHandle ldapHandle,
             IntPtr result,
             ref int serverError,
@@ -218,7 +218,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_parse_result_referral(
+        partial public static int ldap_parse_result_referral(
             ConnectionHandle ldapHandle,
             IntPtr result,
             IntPtr serverError,
@@ -233,31 +233,31 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial void ldap_memfree(IntPtr value);
+        partial public static void ldap_memfree(IntPtr value);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_value_freeW")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_value_free(IntPtr value);
+        partial public static int ldap_value_free(IntPtr value);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_controls_freeW")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_controls_free(IntPtr value);
+        partial public static int ldap_controls_free(IntPtr value);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_abandon")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_abandon(ConnectionHandle ldapHandle, int messagId);
+        partial public static int ldap_abandon(ConnectionHandle ldapHandle, int messagId);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_start_tls_sW")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_start_tls(
+        partial public static int ldap_start_tls(
             ConnectionHandle ldapHandle,
             ref int ServerReturnValue,
             ref IntPtr Message,
@@ -269,7 +269,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial byte ldap_stop_tls(ConnectionHandle ldapHandle);
+        partial public static byte ldap_stop_tls(ConnectionHandle ldapHandle);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -279,7 +279,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_rename(
+        partial public static int ldap_rename(
             ConnectionHandle ldapHandle,
             string dn,
             string newRdn,
@@ -298,7 +298,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_compare(
+        partial public static int ldap_compare(
             ConnectionHandle ldapHandle,
             string dn,
             string attributeName,
@@ -317,7 +317,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_add(
+        partial public static int ldap_add(
             ConnectionHandle ldapHandle,
             string dn,
             IntPtr attrs,
@@ -334,7 +334,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_modify(
+        partial public static int ldap_modify(
             ConnectionHandle ldapHandle,
             string dn,
             IntPtr attrs,
@@ -351,7 +351,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_extended_operation(
+        partial public static int ldap_extended_operation(
             ConnectionHandle ldapHandle,
             string oid,
             BerVal data,
@@ -364,7 +364,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_parse_extended_result(
+        partial public static int ldap_parse_extended_result(
             ConnectionHandle ldapHandle,
             IntPtr result,
             ref IntPtr oid,
@@ -376,7 +376,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_msgfree(IntPtr result);
+        partial public static int ldap_msgfree(IntPtr result);
 
         [LibraryImport(
             Libraries.Wldap32,
@@ -386,7 +386,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_search(
+        partial public static int ldap_search(
             ConnectionHandle ldapHandle,
             string dn,
             int scope,
@@ -404,19 +404,19 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_first_entry(ConnectionHandle ldapHandle, IntPtr result);
+        partial public static IntPtr ldap_first_entry(ConnectionHandle ldapHandle, IntPtr result);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_next_entry")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_next_entry(ConnectionHandle ldapHandle, IntPtr result);
+        partial public static IntPtr ldap_next_entry(ConnectionHandle ldapHandle, IntPtr result);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_first_reference")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_first_reference(
+        partial public static IntPtr ldap_first_reference(
             ConnectionHandle ldapHandle,
             IntPtr result
         );
@@ -425,7 +425,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_next_reference(
+        partial public static IntPtr ldap_next_reference(
             ConnectionHandle ldapHandle,
             IntPtr result
         );
@@ -434,13 +434,13 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_get_dn(ConnectionHandle ldapHandle, IntPtr result);
+        partial public static IntPtr ldap_get_dn(ConnectionHandle ldapHandle, IntPtr result);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_first_attributeW")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_first_attribute(
+        partial public static IntPtr ldap_first_attribute(
             ConnectionHandle ldapHandle,
             IntPtr result,
             ref IntPtr address
@@ -450,7 +450,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_next_attribute(
+        partial public static IntPtr ldap_next_attribute(
             ConnectionHandle ldapHandle,
             IntPtr result,
             IntPtr address
@@ -464,7 +464,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_get_values_len(
+        partial public static IntPtr ldap_get_values_len(
             ConnectionHandle ldapHandle,
             IntPtr result,
             string name
@@ -474,13 +474,13 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial IntPtr ldap_value_free_len(IntPtr berelement);
+        partial public static IntPtr ldap_value_free_len(IntPtr berelement);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_parse_referenceW")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_parse_reference(
+        partial public static int ldap_parse_reference(
             ConnectionHandle ldapHandle,
             IntPtr result,
             ref IntPtr referrals
@@ -490,7 +490,7 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_create_sort_control(
+        partial public static int ldap_create_sort_control(
             ConnectionHandle handle,
             IntPtr keys,
             byte critical,
@@ -501,16 +501,16 @@ internal static partial class Interop
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_control_free(IntPtr control);
+        partial public static int ldap_control_free(IntPtr control);
 
         [LibraryImport("Crypt32.dll", EntryPoint = "CertFreeCRLContext")]
-        public static partial int CertFreeCRLContext(IntPtr certContext);
+        partial public static int CertFreeCRLContext(IntPtr certContext);
 
         [LibraryImport(Libraries.Wldap32, EntryPoint = "ldap_result2error")]
         [UnmanagedCallConv(
             CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) }
         )]
-        public static partial int ldap_result2error(
+        partial public static int ldap_result2error(
             ConnectionHandle ldapHandle,
             IntPtr result,
             int freeIt

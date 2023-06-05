@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Reflection
 {
-    internal sealed partial class FieldAccessor
+    partial internal sealed class FieldAccessor
     {
         private readonly RtFieldInfo _fieldInfo;
         public InvocationFlags _invocationFlags;

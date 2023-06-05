@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 class MonoEmbed
 {
     [MethodImplAttribute(MethodImplOptions.InternalCall)]
-    extern static string gimme();
+    static extern string gimme();
 
     static int Main()
     {

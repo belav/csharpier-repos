@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Takes a string and applies a formatting to it to transform
@@ -32,7 +32,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static unsafe partial int SNPrintF(
+        partial internal static unsafe int SNPrintF(
             byte* str,
             int size,
             string format,
@@ -63,6 +63,6 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static unsafe partial int SNPrintF(byte* str, int size, string format, int arg1);
+        partial internal static unsafe int SNPrintF(byte* str, int size, string format, int arg1);
     }
 }

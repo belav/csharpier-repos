@@ -7,7 +7,7 @@ using System.Runtime.Intrinsics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static int Max(this IEnumerable<int> source) =>
             MinMaxInteger<int, MaxCalc<int>>(source);

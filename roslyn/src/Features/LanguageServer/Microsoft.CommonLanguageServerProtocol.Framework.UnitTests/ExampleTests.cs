@@ -16,7 +16,7 @@ using Xunit;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.UnitTests;
 
-public partial class ExampleTests
+partial public class ExampleTests
 {
     [Fact]
     public async Task InitializeServer_SerializesCorrectly()

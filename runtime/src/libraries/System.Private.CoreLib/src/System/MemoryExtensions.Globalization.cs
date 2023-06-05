@@ -9,7 +9,7 @@ using System.Text;
 
 namespace System
 {
-    public static partial class MemoryExtensions
+    partial public static class MemoryExtensions
     {
         /// <summary>
         /// Indicates whether the specified span contains only white-space characters.

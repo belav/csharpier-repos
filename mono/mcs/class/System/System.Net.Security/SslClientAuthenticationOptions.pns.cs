@@ -4,7 +4,7 @@
 
 namespace System.Net.Security
 {
-    public partial class SslClientAuthenticationOptions
+    partial public class SslClientAuthenticationOptions
     {
         public SslClientAuthenticationOptions() => throw new PlatformNotSupportedException();
 

@@ -8,7 +8,7 @@ using Moq;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-public partial class HubConnectionHandlerTests
+partial public class HubConnectionHandlerTests
 {
     [Fact]
     public async Task CanReturnClientResultToHub()

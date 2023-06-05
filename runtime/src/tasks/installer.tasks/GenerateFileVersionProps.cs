@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Microsoft.DotNet.Build.Tasks
 {
-    public partial class GenerateFileVersionProps : BuildTask
+    partial public class GenerateFileVersionProps : BuildTask
     {
         private const string PlatformManifestsItem = "PackageConflictPlatformManifests";
         private const string PreferredPackagesProperty = "PackageConflictPreferredPackages";

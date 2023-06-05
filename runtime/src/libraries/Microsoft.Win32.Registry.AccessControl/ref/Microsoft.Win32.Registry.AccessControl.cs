@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32
 {
-    public static partial class RegistryAclExtensions
+    partial public static class RegistryAclExtensions
     {
         public static System.Security.AccessControl.RegistrySecurity GetAccessControl(
             this Microsoft.Win32.RegistryKey key

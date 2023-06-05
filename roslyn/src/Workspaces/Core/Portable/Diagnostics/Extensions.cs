@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal static partial class Extensions
+    partial internal static class Extensions
     {
         public static async Task<ImmutableArray<Diagnostic>> ToDiagnosticsAsync(
             this IEnumerable<DiagnosticData> diagnostics,

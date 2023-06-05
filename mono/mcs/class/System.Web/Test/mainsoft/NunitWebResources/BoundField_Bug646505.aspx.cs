@@ -3,7 +3,7 @@ using System.Web.UI.WebControls;
 
 namespace MonoBoundFieldCompatibilityIssue
 {
-    public partial class _Default : System.Web.UI.Page
+    partial public class _Default : System.Web.UI.Page
     {
         #region [ -- Custom Column Definition -- ]
 

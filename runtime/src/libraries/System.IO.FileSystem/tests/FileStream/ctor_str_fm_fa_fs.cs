@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public partial class FileStream_ctor_str_fm_fa_fs : FileStream_ctor_str_fm_fa
+    partial public class FileStream_ctor_str_fm_fa_fs : FileStream_ctor_str_fm_fa
     {
         protected override FileStream CreateFileStream(
             string path,

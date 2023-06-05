@@ -5,10 +5,11 @@ using System.Reflection.Metadata;
 
 namespace System.Reflection.TypeLoading.Ecma
 {
+    partial
     /// <summary>
     /// Base class for all Assembly objects created by a MetadataLoadContext and get its metadata from a PEReader.
     /// </summary>
-    internal sealed partial class EcmaAssembly
+    internal sealed class EcmaAssembly
     {
         protected sealed override AssemblyNameData ComputeNameData()
         {

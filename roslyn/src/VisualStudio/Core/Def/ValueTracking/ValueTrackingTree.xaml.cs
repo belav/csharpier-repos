@@ -7,10 +7,11 @@ using System.Windows.Input;
 
 namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 {
+    partial
     /// <summary>
     /// Interaction logic for ValueTrackingTree.xaml
     /// </summary>
-    internal partial class ValueTrackingTree : UserControl
+    internal class ValueTrackingTree : UserControl
     {
         private readonly ValueTrackingTreeViewModel _viewModel;
 

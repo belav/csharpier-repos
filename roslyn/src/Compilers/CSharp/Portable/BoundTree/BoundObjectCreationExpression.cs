@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundObjectCreationExpression
+    partial internal class BoundObjectCreationExpression
     {
         public BoundObjectCreationExpression(
             SyntaxNode syntax,

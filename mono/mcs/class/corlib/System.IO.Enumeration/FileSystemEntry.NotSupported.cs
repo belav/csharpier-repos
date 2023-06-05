@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace System.IO.Enumeration
 {
-    public unsafe ref partial struct FileSystemEntry
+    ref partial public unsafe struct FileSystemEntry
     {
         public ReadOnlySpan<char> Directory
         {

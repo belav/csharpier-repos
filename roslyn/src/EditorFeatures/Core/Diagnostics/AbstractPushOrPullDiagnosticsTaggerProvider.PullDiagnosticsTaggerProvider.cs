@@ -13,15 +13,16 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
+partial internal abstract class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
     where TTag : ITag
 {
+    partial
     /// <summary>
     /// Base type for all taggers that interact with the <see cref="IDiagnosticAnalyzerService"/> and produce tags for the
     /// diagnostics with different UI presentations.  It does no computation work itself, but instead defers that to it's
     /// underlying <see cref="SingleDiagnosticKindPullTaggerProvider"/>s.
     /// </summary>
-    private sealed partial class PullDiagnosticsTaggerProvider : ITaggerProvider
+    private sealed class PullDiagnosticsTaggerProvider : ITaggerProvider
     {
         /// <summary>
         /// Underlying diagnostic tagger responsible for the syntax/semantic and compiler/analyzer split.  The ordering of

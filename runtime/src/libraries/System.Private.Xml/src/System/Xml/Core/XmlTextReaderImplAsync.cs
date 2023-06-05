@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlTextReaderImpl : XmlReader, IXmlLineInfo, IXmlNamespaceResolver
+    partial internal sealed class XmlTextReaderImpl : XmlReader, IXmlLineInfo, IXmlNamespaceResolver
     {
         private void CheckAsyncCall()
         {

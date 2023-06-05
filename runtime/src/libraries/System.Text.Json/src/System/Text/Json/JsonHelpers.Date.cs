@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonHelpers
+    partial internal static class JsonHelpers
     {
         [StructLayout(LayoutKind.Auto)]
         private struct DateTimeParseData

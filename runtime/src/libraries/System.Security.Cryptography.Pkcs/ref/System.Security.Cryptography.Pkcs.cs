@@ -6,7 +6,7 @@
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class CryptographicAttributeObject
+    partial public sealed class CryptographicAttributeObject
     {
         public CryptographicAttributeObject(System.Security.Cryptography.Oid oid) { }
 
@@ -25,7 +25,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class CryptographicAttributeObjectCollection
+    partial public sealed class CryptographicAttributeObjectCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -82,7 +82,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class CryptographicAttributeObjectEnumerator
+    partial public sealed class CryptographicAttributeObjectEnumerator
         : System.Collections.IEnumerator
     {
         internal CryptographicAttributeObjectEnumerator() { }
@@ -107,7 +107,7 @@ namespace System.Security.Cryptography
 
 namespace System.Security.Cryptography.Pkcs
 {
-    public sealed partial class AlgorithmIdentifier
+    partial public sealed class AlgorithmIdentifier
     {
         public AlgorithmIdentifier() { }
 
@@ -132,7 +132,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class CmsRecipient
+    partial public sealed class CmsRecipient
     {
         public CmsRecipient(
             System.Security.Cryptography.Pkcs.SubjectIdentifierType recipientIdentifierType,
@@ -153,7 +153,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class CmsRecipientCollection
+    partial public sealed class CmsRecipientCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -205,7 +205,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class CmsRecipientEnumerator : System.Collections.IEnumerator
+    partial public sealed class CmsRecipientEnumerator : System.Collections.IEnumerator
     {
         internal CmsRecipientEnumerator() { }
 
@@ -226,7 +226,7 @@ namespace System.Security.Cryptography.Pkcs
         public void Reset() { }
     }
 
-    public sealed partial class CmsSigner
+    partial public sealed class CmsSigner
     {
         public CmsSigner() { }
 
@@ -289,7 +289,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class ContentInfo
+    partial public sealed class ContentInfo
     {
         public ContentInfo(byte[] content) { }
 
@@ -310,7 +310,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class EnvelopedCms
+    partial public sealed class EnvelopedCms
     {
         public EnvelopedCms() { }
 
@@ -371,7 +371,7 @@ namespace System.Security.Cryptography.Pkcs
         public void Encrypt(System.Security.Cryptography.Pkcs.CmsRecipientCollection recipients) { }
     }
 
-    public sealed partial class KeyAgreeRecipientInfo
+    partial public sealed class KeyAgreeRecipientInfo
         : System.Security.Cryptography.Pkcs.RecipientInfo
     {
         internal KeyAgreeRecipientInfo() { }
@@ -406,7 +406,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class KeyTransRecipientInfo
+    partial public sealed class KeyTransRecipientInfo
         : System.Security.Cryptography.Pkcs.RecipientInfo
     {
         internal KeyTransRecipientInfo() { }
@@ -429,7 +429,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public partial class Pkcs9AttributeObject : System.Security.Cryptography.AsnEncodedData
+    partial public class Pkcs9AttributeObject : System.Security.Cryptography.AsnEncodedData
     {
         public Pkcs9AttributeObject() { }
 
@@ -449,7 +449,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class Pkcs9ContentType
+    partial public sealed class Pkcs9ContentType
         : System.Security.Cryptography.Pkcs.Pkcs9AttributeObject
     {
         public Pkcs9ContentType() { }
@@ -464,7 +464,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class Pkcs9DocumentDescription
+    partial public sealed class Pkcs9DocumentDescription
         : System.Security.Cryptography.Pkcs.Pkcs9AttributeObject
     {
         public Pkcs9DocumentDescription() { }
@@ -483,7 +483,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class Pkcs9DocumentName
+    partial public sealed class Pkcs9DocumentName
         : System.Security.Cryptography.Pkcs.Pkcs9AttributeObject
     {
         public Pkcs9DocumentName() { }
@@ -502,7 +502,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class Pkcs9MessageDigest
+    partial public sealed class Pkcs9MessageDigest
         : System.Security.Cryptography.Pkcs.Pkcs9AttributeObject
     {
         public Pkcs9MessageDigest() { }
@@ -517,7 +517,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class Pkcs9SigningTime
+    partial public sealed class Pkcs9SigningTime
         : System.Security.Cryptography.Pkcs.Pkcs9AttributeObject
     {
         public Pkcs9SigningTime() { }
@@ -536,7 +536,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class PublicKeyInfo
+    partial public sealed class PublicKeyInfo
     {
         internal PublicKeyInfo() { }
 
@@ -550,7 +550,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public abstract partial class RecipientInfo
+    partial public abstract class RecipientInfo
     {
         internal RecipientInfo() { }
 
@@ -564,7 +564,7 @@ namespace System.Security.Cryptography.Pkcs
         public abstract int Version { get; }
     }
 
-    public sealed partial class RecipientInfoCollection
+    partial public sealed class RecipientInfoCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -602,7 +602,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class RecipientInfoEnumerator : System.Collections.IEnumerator
+    partial public sealed class RecipientInfoEnumerator : System.Collections.IEnumerator
     {
         internal RecipientInfoEnumerator() { }
 
@@ -630,7 +630,7 @@ namespace System.Security.Cryptography.Pkcs
         KeyAgreement = 2,
     }
 
-    public sealed partial class SignedCms
+    partial public sealed class SignedCms
     {
         public SignedCms() { }
 
@@ -708,7 +708,7 @@ namespace System.Security.Cryptography.Pkcs
         public void RemoveSignature(System.Security.Cryptography.Pkcs.SignerInfo signerInfo) { }
     }
 
-    public sealed partial class SignerInfo
+    partial public sealed class SignerInfo
     {
         internal SignerInfo() { }
 
@@ -771,7 +771,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class SignerInfoCollection
+    partial public sealed class SignerInfoCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -809,7 +809,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class SignerInfoEnumerator : System.Collections.IEnumerator
+    partial public sealed class SignerInfoEnumerator : System.Collections.IEnumerator
     {
         internal SignerInfoEnumerator() { }
 
@@ -830,7 +830,7 @@ namespace System.Security.Cryptography.Pkcs
         public void Reset() { }
     }
 
-    public sealed partial class SubjectIdentifier
+    partial public sealed class SubjectIdentifier
     {
         internal SubjectIdentifier() { }
 
@@ -844,7 +844,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class SubjectIdentifierOrKey
+    partial public sealed class SubjectIdentifierOrKey
     {
         internal SubjectIdentifierOrKey() { }
 
@@ -877,7 +877,7 @@ namespace System.Security.Cryptography.Pkcs
 
 namespace System.Security.Cryptography.Xml
 {
-    public partial struct X509IssuerSerial
+    partial public struct X509IssuerSerial
     {
         private object _dummy;
         private int _dummyPrimitive;

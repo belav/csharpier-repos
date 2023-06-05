@@ -9,7 +9,7 @@ namespace System.Diagnostics.Metrics
         int Length { get; }
     }
 
-    internal partial struct StringSequence1 : IEquatable<StringSequence1>, IStringSequence
+    partial internal struct StringSequence1 : IEquatable<StringSequence1>, IStringSequence
     {
         public string this[int i]
         {
@@ -37,7 +37,7 @@ namespace System.Diagnostics.Metrics
         public int Length => 1;
     }
 
-    internal partial struct StringSequence2 : IEquatable<StringSequence2>, IStringSequence
+    partial internal struct StringSequence2 : IEquatable<StringSequence2>, IStringSequence
     {
         public string this[int i]
         {
@@ -77,7 +77,7 @@ namespace System.Diagnostics.Metrics
             (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0 << 3);
     }
 
-    internal partial struct StringSequence3 : IEquatable<StringSequence3>, IStringSequence
+    partial internal struct StringSequence3 : IEquatable<StringSequence3>, IStringSequence
     {
         public string this[int i]
         {
@@ -127,7 +127,7 @@ namespace System.Diagnostics.Metrics
             ^ (Value3?.GetHashCode() ?? 0 << 6);
     }
 
-    internal partial struct StringSequenceMany : IEquatable<StringSequenceMany>, IStringSequence
+    partial internal struct StringSequenceMany : IEquatable<StringSequenceMany>, IStringSequence
     {
         public string this[int i]
         {

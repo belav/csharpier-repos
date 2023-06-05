@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.ServiceModel.Description;
 
-    public sealed partial class WsdlImporterElement : ConfigurationElement
+    partial public sealed class WsdlImporterElement : ConfigurationElement
     {
         public WsdlImporterElement() { }
 

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal static partial class X500NameEncoder
+    partial internal static class X500NameEncoder
     {
         private const string OidTagPrefix = "OID.";
         private const string UseSemicolonSeparators = ";";

@@ -25,12 +25,12 @@ namespace Mono.Tools
 {
     class SignCode
     {
-        static private void Header()
+        private static void Header()
         {
             Console.WriteLine(new AssemblyInfo().ToString());
         }
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine("Usage: signcode [options] filename{0}", Environment.NewLine);
             Console.WriteLine("\t-spc spc\t\t\t\t\tSoftware Publisher Certificate file");
@@ -54,7 +54,7 @@ namespace Mono.Tools
             Console.WriteLine("\t-r [localMachine|currentUser]\tKey Location");
         }
 
-        static private RSA GetPrivateKey(string keyfile, CspParameters csp)
+        private static RSA GetPrivateKey(string keyfile, CspParameters csp)
         {
             RSA rsa = null;
 
@@ -94,7 +94,7 @@ namespace Mono.Tools
             return rsa;
         }
 
-        static private X509CertificateCollection GetCertificates(string spcfile)
+        private static X509CertificateCollection GetCertificates(string spcfile)
         {
             if (spcfile == null)
             {

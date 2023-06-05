@@ -35,7 +35,9 @@ namespace System.Security
         private static object[] psNone = new object[1] { PermissionState.None };
 
         // can be used to create an empty or an unrestricted permission from any valid type
-        static public IPermission Create(string fullname, PermissionState state)
+        public
+        // can be used to create an empty or an unrestricted permission from any valid type
+        static IPermission Create(string fullname, PermissionState state)
         {
             if (fullname == null)
                 throw new ArgumentNullException("fullname");
@@ -49,7 +51,7 @@ namespace System.Security
             return CreatePermission(fullname, se);
         }
 
-        static public IPermission Create(SecurityElement se)
+        public static IPermission Create(SecurityElement se)
         {
             if (se == null)
                 throw new ArgumentNullException("se");
@@ -62,7 +64,9 @@ namespace System.Security
         }
 
         // to use in case where the "class" attribute isn't a fully qualified class name
-        static public IPermission Create(string fullname, SecurityElement se)
+        public
+        // to use in case where the "class" attribute isn't a fully qualified class name
+        static IPermission Create(string fullname, SecurityElement se)
         {
             if (fullname == null)
                 throw new ArgumentNullException("fullname");
@@ -72,7 +76,7 @@ namespace System.Security
             return CreatePermission(fullname, se);
         }
 
-        static public IPermission Create(Type type)
+        public static IPermission Create(Type type)
         {
             // note: unification is handled in lower levels
             // http://blogs.msdn.com/shawnfa/archive/2004/08/05/209320.aspx

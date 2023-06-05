@@ -5,7 +5,7 @@ partial class X
 {
     partial void Foo();
 
-    async partial void Foo()
+    partial async void Foo()
     {
         await Task.FromResult(1);
     }

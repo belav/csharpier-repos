@@ -28,7 +28,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 {
-    public abstract partial class AbstractDiagnosticProviderBasedUserDiagnosticTest
+    partial public abstract class AbstractDiagnosticProviderBasedUserDiagnosticTest
         : AbstractUserDiagnosticTest
     {
         private readonly ConcurrentDictionary<

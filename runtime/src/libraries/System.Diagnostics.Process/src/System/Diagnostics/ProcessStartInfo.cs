@@ -19,7 +19,7 @@ namespace System.Diagnostics
     [DebuggerDisplay(
         "FileName={FileName}, Arguments={BuildArguments()}, WorkingDirectory={WorkingDirectory}"
     )]
-    public sealed partial class ProcessStartInfo
+    partial public sealed class ProcessStartInfo
     {
         private string? _fileName;
         private string? _arguments;

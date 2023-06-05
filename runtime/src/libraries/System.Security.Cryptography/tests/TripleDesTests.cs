@@ -10,7 +10,7 @@ using Xunit;
 namespace System.Security.Cryptography.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public static partial class TripleDesTests
+    partial public static class TripleDesTests
     {
         [Fact]
         public static void TripleDesDefaultCtor()

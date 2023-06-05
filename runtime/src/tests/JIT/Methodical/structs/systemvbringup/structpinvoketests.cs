@@ -316,7 +316,7 @@ namespace structinreg
         [DllImport("jitstructtests_lib")]
         public static extern S20 InvokeCallback20R(MyCallback20 callback, S20 s);
 
-        static public int Main1()
+        public static int Main1()
         {
             Program3 p = new Program3();
             S1 s1 = new S1();

@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetEUid")]
-        internal static partial int SetEUid(uint euid);
+        partial internal static int SetEUid(uint euid);
     }
 }

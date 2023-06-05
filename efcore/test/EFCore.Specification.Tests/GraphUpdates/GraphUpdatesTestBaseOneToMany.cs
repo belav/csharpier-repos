@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 // ReSharper disable PossibleMultipleEnumeration
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract partial class GraphUpdatesTestBase<TFixture>
+partial public abstract class GraphUpdatesTestBase<TFixture>
     where TFixture : GraphUpdatesTestBase<TFixture>.GraphUpdatesFixtureBase, new()
 {
     [ConditionalTheory]

@@ -20,7 +20,7 @@ using Xunit;
 
 namespace Roslyn.Test.Utilities.PDB
 {
-    internal static partial class DeterministicBuildCompilationTestHelpers
+    partial internal static class DeterministicBuildCompilationTestHelpers
     {
         public static void VerifyPdbOption<T>(
             this ImmutableDictionary<string, string> pdbOptions,

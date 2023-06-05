@@ -2,7 +2,7 @@ using System;
 
 class Foo { }
 
-static partial class Extensions
+partial static class Extensions
 {
     public static bool IsFoo(this Foo self)
     {

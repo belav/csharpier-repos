@@ -51,10 +51,11 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="unmanaged">The memory allocated for the unmanaged string.</param>
         public static void Free(byte* unmanaged) => Marshal.FreeCoTaskMem((IntPtr)unmanaged);
 
+        ref
         /// <summary>
         /// Custom marshaller to marshal a managed string as a UTF-8 unmanaged string.
         /// </summary>
-        public ref struct ManagedToUnmanagedIn
+        public struct ManagedToUnmanagedIn
         {
             /// <summary>
             /// Gets the requested buffer size for optimized marshalling.

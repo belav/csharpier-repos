@@ -12,9 +12,9 @@ using Xunit;
 
 namespace System.Net.Test.Common
 {
-    public static partial class Configuration
+    partial public static class Configuration
     {
-        public static partial class Certificates
+        partial public static class Certificates
         {
             private const string CertificatePassword = "PLACEHOLDER";
             private const string TestDataFolder = "TestDataCertificates";

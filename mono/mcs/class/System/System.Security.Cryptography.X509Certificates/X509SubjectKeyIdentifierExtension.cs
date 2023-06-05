@@ -191,7 +191,10 @@ namespace System.Security.Cryptography.X509Certificates
 
         // internal
 
-        static internal byte FromHexChar(char c)
+        internal
+        // internal
+
+        static byte FromHexChar(char c)
         {
             if ((c >= 'a') && (c <= 'f'))
                 return (byte)(c - 'a' + 10);
@@ -202,7 +205,7 @@ namespace System.Security.Cryptography.X509Certificates
             return 255; // F
         }
 
-        static internal byte FromHexChars(char c1, char c2)
+        internal static byte FromHexChars(char c1, char c2)
         {
             byte result = FromHexChar(c1);
             if (result < 255)
@@ -210,7 +213,7 @@ namespace System.Security.Cryptography.X509Certificates
             return result;
         }
 
-        static internal byte[] FromHex(string hex)
+        internal static byte[] FromHex(string hex)
         {
             // here we can't use CryptoConvert.FromHex because we
             // must convert any *illegal* (non hex) 2 characters

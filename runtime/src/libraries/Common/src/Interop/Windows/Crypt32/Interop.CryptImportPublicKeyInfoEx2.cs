@@ -4,13 +4,13 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CryptImportPublicKeyInfoEx2(
+        partial internal static unsafe bool CryptImportPublicKeyInfoEx2(
             CertEncodingType dwCertEncodingType,
             CERT_PUBLIC_KEY_INFO* pInfo,
             CryptImportPublicKeyInfoFlags dwFlags,

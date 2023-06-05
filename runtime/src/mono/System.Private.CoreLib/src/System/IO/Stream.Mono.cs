@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.IO
 {
-    public partial class Stream
+    partial public class Stream
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern bool HasOverriddenBeginEndRead();

@@ -12,7 +12,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Net.Sockets
 {
-    public partial class SocketAsyncEventArgs : EventArgs, IDisposable
+    partial public class SocketAsyncEventArgs : EventArgs, IDisposable
     {
         /// <summary>
         /// Value used to indicate whether the thread starting an async operation or invoking the callback owns completion and cleanup,

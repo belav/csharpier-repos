@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Collections;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    internal partial class TokenStream
+    partial internal class TokenStream
     {
         // gain of having hand written iterator seems about 50-100ms over auto generated one.
         // not sure whether it is worth it. but I already wrote it to test, so going to just keep it.

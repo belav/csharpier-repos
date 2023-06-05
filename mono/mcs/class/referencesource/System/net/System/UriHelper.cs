@@ -147,7 +147,7 @@ namespace System
         const short c_MaxUTF_8BytesPerUnicodeChar = 4;
         const short c_EncodedCharsPerByte = 3;
 
-        internal unsafe static char[] EscapeString(
+        internal static unsafe char[] EscapeString(
             string input,
             int start,
             int end,
@@ -308,7 +308,7 @@ namespace System
         //
         // ensure destination array has enough space and contains all the needed input stuff
         //
-        private unsafe static char[] EnsureDestinationSize(
+        private static unsafe char[] EnsureDestinationSize(
             char* pStr,
             char[] dest,
             int currentInputPos,
@@ -350,7 +350,7 @@ namespace System
         // - It is a RARE case when Unescape actually needs escaping some characteres mentioned above.
         //   For this reason it returns a char[] that is usually the same ref as the input "dest" value.
         //
-        internal unsafe static char[] UnescapeString(
+        internal static unsafe char[] UnescapeString(
             string input,
             int start,
             int end,
@@ -382,7 +382,7 @@ namespace System
             }
         }
 
-        internal unsafe static char[] UnescapeString(
+        internal static unsafe char[] UnescapeString(
             char* pStr,
             int start,
             int end,

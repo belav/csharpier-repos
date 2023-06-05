@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System
 {
-    internal static partial class IPv6AddressHelper
+    partial internal static class IPv6AddressHelper
     {
         private const int NumberOfLabels = 8;
 

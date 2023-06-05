@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public partial class DictionaryTests
+    partial public class DictionaryTests
     {
         public abstract class DictionaryKeyTestsBase<TKey, TValue>
         {

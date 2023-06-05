@@ -14,7 +14,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Runtime.Diagnostics;
 
-    public sealed partial class StandardEndpointsSection
+    partial public sealed class StandardEndpointsSection
         : ConfigurationSection,
             IConfigurationContextProviderInternal
     {
@@ -39,7 +39,7 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        new public EndpointCollectionElement this[string endpoint]
+        public new EndpointCollectionElement this[string endpoint]
         {
             get { return (EndpointCollectionElement)base[endpoint]; }
         }

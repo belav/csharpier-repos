@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial class DocumentationProvider
+    partial public class DocumentationProvider
     {
         /// <summary>
         /// A trivial DocumentationProvider which never returns documentation.

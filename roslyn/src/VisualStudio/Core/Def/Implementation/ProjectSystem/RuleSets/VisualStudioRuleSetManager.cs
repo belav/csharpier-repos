@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal sealed partial class VisualStudioRuleSetManager : IWorkspaceService
+    partial internal sealed class VisualStudioRuleSetManager : IWorkspaceService
     {
         private readonly IThreadingContext _threadingContext;
         private readonly FileChangeWatcher _fileChangeWatcher;

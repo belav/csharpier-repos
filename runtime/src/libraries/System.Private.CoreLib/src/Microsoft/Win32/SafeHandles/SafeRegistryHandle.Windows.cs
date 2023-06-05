@@ -9,12 +9,13 @@ namespace Microsoft.Win32.SafeHandles
 namespace Internal.Win32.SafeHandles
 #endif
 {
+    partial
 #if REGISTRY_ASSEMBLY
     public
 #else
     internal
 #endif
-    sealed partial class SafeRegistryHandle : SafeHandleZeroOrMinusOneIsInvalid
+    sealed class SafeRegistryHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         protected override bool ReleaseHandle() =>
             Interop.Advapi32.RegCloseKey(handle) == Interop.Errors.ERROR_SUCCESS;

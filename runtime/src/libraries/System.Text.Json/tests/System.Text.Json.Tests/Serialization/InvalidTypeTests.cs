@@ -202,7 +202,7 @@ namespace System.Text.Json.Serialization.Tests
             public unsafe int* IntPtr { get; }
         }
 
-        private ref struct MyRefStruct { }
+        ref private struct MyRefStruct { }
 
         [Fact]
         public void ArraySegmentTest()

@@ -11,7 +11,7 @@ using System.Text;
 
 namespace System.IO
 {
-    internal static partial class FileSystem
+    partial internal static class FileSystem
     {
         public static unsafe void CreateDirectory(
             string fullPath,

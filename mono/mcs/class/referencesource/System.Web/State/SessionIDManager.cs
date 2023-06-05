@@ -387,7 +387,9 @@ namespace System.Web.SessionState
         }
 
         // Create a session id.
-        virtual public String CreateSessionID(HttpContext context)
+        public
+        // Create a session id.
+        virtual String CreateSessionID(HttpContext context)
         {
             return SessionId.Create(ref _randgen);
         }
@@ -635,7 +637,7 @@ namespace System.Web.SessionState
             return new String(chars);
         }
 
-        static internal String Create(ref RandomNumberGenerator randgen)
+        internal static String Create(ref RandomNumberGenerator randgen)
         {
             byte[] buffer;
             String encoding;

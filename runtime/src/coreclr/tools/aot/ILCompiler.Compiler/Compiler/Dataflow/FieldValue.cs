@@ -12,10 +12,11 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// A representation of a field. Typically a result of ldfld.
     /// </summary>
-    internal sealed partial record FieldValue : IValueWithStaticType
+    internal sealed record FieldValue : IValueWithStaticType
     {
         public FieldValue(
             FieldDesc field,

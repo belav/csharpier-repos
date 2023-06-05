@@ -13,7 +13,7 @@ namespace System.Data.SqlClient
     using System.Data.Common;
     using System.Data.ProviderBase;
 
-    sealed internal class SqlConnectionPoolGroupProviderInfo : DbConnectionPoolGroupProviderInfo
+    internal sealed class SqlConnectionPoolGroupProviderInfo : DbConnectionPoolGroupProviderInfo
     {
         private string _alias;
         private System.Security.PermissionSet _failoverPermissionSet;

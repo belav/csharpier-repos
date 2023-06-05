@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
-    internal partial class CSharpExtensionMethodReducer
+    partial internal class CSharpExtensionMethodReducer
     {
         private class Rewriter : AbstractReductionRewriter
         {

@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 {
-    internal abstract partial class AbstractSnippetFunction : IVsExpansionFunction
+    partial internal abstract class AbstractSnippetFunction : IVsExpansionFunction
     {
         private readonly ITextBuffer _subjectBuffer;
         private readonly IThreadingContext _threadingContext;

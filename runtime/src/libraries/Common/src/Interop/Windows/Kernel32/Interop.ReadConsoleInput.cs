@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     internal const short KEY_EVENT = 1;
 
@@ -31,7 +31,7 @@ internal static partial class Interop
         // This struct is a union!  Word alignment should take care of padding!
     }
 
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(
             Libraries.Kernel32,
@@ -40,7 +40,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool ReadConsoleInput(
+        partial internal static bool ReadConsoleInput(
             IntPtr hConsoleInput,
             out INPUT_RECORD buffer,
             int numInputRecords_UseOne,

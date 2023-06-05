@@ -23,7 +23,7 @@ using System.ComponentModel;
 
 namespace nwind
 {
-    public partial class Northwind : DataContext
+    partial public class Northwind : DataContext
     {
         public Northwind(IDbConnection connection)
             : base(connection, new DbLinq.Firebird.FirebirdVendor()) { }
@@ -78,7 +78,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .CATEGORIES")]
-    public partial class Category : INotifyPropertyChanged
+    partial public class Category : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -198,7 +198,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .CUSTOMERS")]
-    public partial class Customer : INotifyPropertyChanged
+    partial public class Customer : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -465,7 +465,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .EMPLOYEES")]
-    public partial class Employee : INotifyPropertyChanged
+    partial public class Employee : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -912,7 +912,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .EMPLOYEETERRITORIES")]
-    public partial class EmployeeTerritory : INotifyPropertyChanged
+    partial public class EmployeeTerritory : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -1018,7 +1018,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .\"Order Details\"")]
-    public partial class OrderDetail : INotifyPropertyChanged
+    partial public class OrderDetail : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -1187,7 +1187,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .ORDERS")]
-    public partial class Order : INotifyPropertyChanged
+    partial public class Order : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -1551,7 +1551,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .PRODUCTS")]
-    public partial class Product : INotifyPropertyChanged
+    partial public class Product : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -1831,7 +1831,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .REGION")]
-    public partial class Region : INotifyPropertyChanged
+    partial public class Region : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -1914,7 +1914,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .SHIPPERS")]
-    public partial class Shipper : INotifyPropertyChanged
+    partial public class Shipper : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -2001,7 +2001,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .SUPPLIERS")]
-    public partial class Supplier : INotifyPropertyChanged
+    partial public class Supplier : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 
@@ -2268,7 +2268,7 @@ namespace nwind
     }
 
     [Table(Name = " Foo .TERRITORIES")]
-    public partial class Territory : INotifyPropertyChanged
+    partial public class Territory : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged handling
 

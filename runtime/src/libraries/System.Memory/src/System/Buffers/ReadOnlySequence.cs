@@ -12,7 +12,7 @@ namespace System.Buffers
     /// </summary>
     [DebuggerTypeProxy(typeof(ReadOnlySequenceDebugView<>))]
     [DebuggerDisplay("{ToString(),raw}")]
-    public readonly partial struct ReadOnlySequence<T>
+    partial public readonly struct ReadOnlySequence<T>
     {
         // The data is essentially two SequencePositions, however the Start and End SequencePositions are deconstructed to improve packing.
         private readonly object? _startObject;

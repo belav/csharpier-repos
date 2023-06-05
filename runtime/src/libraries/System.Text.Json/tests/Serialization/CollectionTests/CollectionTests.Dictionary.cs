@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class DictionaryTests
+    partial public static class DictionaryTests
     {
         [Fact]
         public static void DictionaryOfString()

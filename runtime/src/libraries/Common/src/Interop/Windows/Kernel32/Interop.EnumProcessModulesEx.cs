@@ -5,9 +5,9 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         internal const int LIST_MODULES_ALL = 0x00000003;
 
@@ -17,7 +17,7 @@ internal static partial class Interop
             SetLastError = true
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool EnumProcessModulesEx(
+        partial internal static bool EnumProcessModulesEx(
             SafeProcessHandle handle,
             IntPtr[]? modules,
             int size,

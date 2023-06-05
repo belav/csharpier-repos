@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    internal partial class FormattingContext
+    partial internal class FormattingContext
     {
         /// <summary>
         /// data that will be used in an interval tree related to Anchor.

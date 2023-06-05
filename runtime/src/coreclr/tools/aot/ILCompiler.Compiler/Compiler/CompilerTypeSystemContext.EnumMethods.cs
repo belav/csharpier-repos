@@ -10,7 +10,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
 {
-    public partial class CompilerTypeSystemContext
+    partial public class CompilerTypeSystemContext
     {
         private sealed class EnumInfo
         {

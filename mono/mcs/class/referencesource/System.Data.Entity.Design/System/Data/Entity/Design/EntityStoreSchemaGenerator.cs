@@ -28,10 +28,11 @@ using Microsoft.Build.Utilities;
 
 namespace System.Data.Entity.Design
 {
+    partial
     /// <summary>
     /// Responsible for Loading Database Schema Information
     /// </summary>
-    public sealed partial class EntityStoreSchemaGenerator
+    public sealed class EntityStoreSchemaGenerator
     {
         private const string CONTAINER_SUFFIX = "Container";
         private EntityStoreSchemaGeneratorDatabaseSchemaLoader _loader;
@@ -1325,7 +1326,7 @@ namespace System.Data.Entity.Design
             return true;
         }
 
-        static internal bool IsFkPartiallyContainedInPK(
+        internal static bool IsFkPartiallyContainedInPK(
             AssociationType association,
             out string errorMessage
         )

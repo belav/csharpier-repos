@@ -584,7 +584,7 @@ namespace System.ServiceModel
             }
         }
 
-        internal protected bool IsIssuedSecurityTokenRequirement(
+        protected internal bool IsIssuedSecurityTokenRequirement(
             SecurityTokenRequirement requirement
         )
         {

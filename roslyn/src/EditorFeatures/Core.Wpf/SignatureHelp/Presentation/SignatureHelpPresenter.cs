@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
     [Export(typeof(IIntelliSensePresenter<ISignatureHelpPresenterSession, ISignatureHelpSession>))]
     [Name(PredefinedSignatureHelpPresenterNames.RoslynSignatureHelpPresenter)]
     [ContentType(ContentTypeNames.RoslynContentType)]
-    internal partial class SignatureHelpPresenter
+    partial internal class SignatureHelpPresenter
         : IIntelliSensePresenter<ISignatureHelpPresenterSession, ISignatureHelpSession>,
             ISignatureHelpSourceProvider
     {

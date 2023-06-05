@@ -472,7 +472,7 @@ namespace System.Text.Json.Node
             }
         }
 
-        internal static partial class CachedReflectionInfo
+        partial internal static class CachedReflectionInfo
         {
             private static MethodInfo? s_String_Format_String_ObjectArray;
             public static MethodInfo String_Format_String_ObjectArray =>

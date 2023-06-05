@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-internal sealed partial class ContentResult : IResult
+partial internal sealed class ContentResult : IResult
 {
     private const string DefaultContentType = "text/plain; charset=utf-8";
     private static readonly Encoding DefaultEncoding = Encoding.UTF8;
@@ -65,7 +65,7 @@ internal sealed partial class ContentResult : IResult
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -73,6 +73,6 @@ internal sealed partial class ContentResult : IResult
             "Executing ContentResult with HTTP Response ContentType of {ContentType}",
             EventName = "ContentResultExecuting"
         )]
-        internal static partial void ContentResultExecuting(ILogger logger, string contentType);
+        partial internal static void ContentResultExecuting(ILogger logger, string contentType);
     }
 }

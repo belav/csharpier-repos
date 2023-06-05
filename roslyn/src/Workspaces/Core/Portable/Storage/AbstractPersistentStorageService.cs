@@ -13,12 +13,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Storage
 {
+    partial
     /// <summary>
     /// A service that enables storing and retrieving of information associated with solutions,
     /// projects or documents across runtime sessions.
     /// </summary>
-    internal abstract partial class AbstractPersistentStorageService
-        : IChecksummedPersistentStorageService
+    internal abstract class AbstractPersistentStorageService : IChecksummedPersistentStorageService
     {
         protected readonly IPersistentStorageConfiguration Configuration;
 

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace System.Runtime.CompilerServices
 {
-    public partial class RuntimeOps
+    partial public class RuntimeOps
     {
         [Obsolete("do not use this method")]
         public static IRuntimeVariables MergeRuntimeVariables(

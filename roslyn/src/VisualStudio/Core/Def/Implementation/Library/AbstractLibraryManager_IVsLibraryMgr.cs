@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
 {
-    internal partial class AbstractLibraryManager : IVsLibraryMgr
+    partial internal class AbstractLibraryManager : IVsLibraryMgr
     {
         int IVsLibraryMgr.GetCheckAt(uint nLibIndex, LIB_CHECKSTATE[] pstate)
         {

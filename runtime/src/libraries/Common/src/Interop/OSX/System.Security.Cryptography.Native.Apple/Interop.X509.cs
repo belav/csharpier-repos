@@ -10,25 +10,25 @@ using System.Security.Cryptography.X509Certificates;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509GetRawData(
+        partial private static int AppleCryptoNative_X509GetRawData(
             SafeSecCertificateHandle cert,
             out SafeCFDataHandle cfDataOut,
             out int pOSStatus
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509GetSubjectSummary(
+        partial private static int AppleCryptoNative_X509GetSubjectSummary(
             SafeSecCertificateHandle cert,
             out SafeCFStringHandle cfSubjectSummaryOut
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509GetPublicKey(
+        partial private static int AppleCryptoNative_X509GetPublicKey(
             SafeSecCertificateHandle cert,
             out SafeSecKeyRefHandle publicKey,
             out int pOSStatus
@@ -41,22 +41,22 @@ internal static partial class Interop
             Libraries.AppleCryptoNative,
             EntryPoint = "AppleCryptoNative_X509GetContentType"
         )]
-        private static partial X509ContentType X509GetContentType(ref byte pbData, int cbData);
+        partial private static X509ContentType X509GetContentType(ref byte pbData, int cbData);
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509CopyCertFromIdentity(
+        partial private static int AppleCryptoNative_X509CopyCertFromIdentity(
             SafeSecIdentityHandle identity,
             out SafeSecCertificateHandle cert
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509CopyPrivateKeyFromIdentity(
+        partial private static int AppleCryptoNative_X509CopyPrivateKeyFromIdentity(
             SafeSecIdentityHandle identity,
             out SafeSecKeyRefHandle key
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509DemuxAndRetainHandle(
+        partial private static int AppleCryptoNative_X509DemuxAndRetainHandle(
             IntPtr handle,
             out SafeSecCertificateHandle certHandle,
             out SafeSecIdentityHandle identityHandle

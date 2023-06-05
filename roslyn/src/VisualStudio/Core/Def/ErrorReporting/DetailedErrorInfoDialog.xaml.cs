@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.CodeAnalysis.ErrorReporting
 {
-    internal partial class DetailedErrorInfoDialog : DialogWindow
+    partial internal class DetailedErrorInfoDialog : DialogWindow
     {
         private readonly string errorInfo;
 

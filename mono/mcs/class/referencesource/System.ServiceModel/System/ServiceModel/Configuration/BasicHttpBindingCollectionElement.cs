@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.Globalization;
 
-    public partial class BasicHttpBindingCollectionElement
+    partial public class BasicHttpBindingCollectionElement
         : StandardBindingCollectionElement<BasicHttpBinding, BasicHttpBindingElement>
     {
         internal static BasicHttpBindingCollectionElement GetBindingCollectionElement()

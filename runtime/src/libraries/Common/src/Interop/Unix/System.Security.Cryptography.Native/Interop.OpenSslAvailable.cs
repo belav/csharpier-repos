@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class OpenSslNoInit
+    partial internal static class OpenSslNoInit
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_OpenSslAvailable")]
-        private static partial int OpenSslAvailable();
+        partial private static int OpenSslAvailable();
 
         private static readonly Lazy<bool> s_openSslAvailable = new Lazy<bool>(
             () => OpenSslAvailable() != 0

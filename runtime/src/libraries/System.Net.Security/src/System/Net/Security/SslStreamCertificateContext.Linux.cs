@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Security
 {
-    public partial class SslStreamCertificateContext
+    partial public class SslStreamCertificateContext
     {
         private const bool TrimRootCertificate = true;
         internal readonly ConcurrentDictionary<SslProtocols, SafeSslContextHandle> SslContexts;

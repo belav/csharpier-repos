@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace System.Formats.Asn1
 {
-    public sealed partial class AsnWriter
+    partial public sealed class AsnWriter
     {
         /// <summary>
         ///   Write an Object Identifier with a specified tag.

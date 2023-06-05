@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Runtime;
 
-    public sealed partial class HostTimeoutsElement : ConfigurationElement
+    partial public sealed class HostTimeoutsElement : ConfigurationElement
     {
         public HostTimeoutsElement()
             : base() { }

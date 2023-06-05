@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum LockType : short
         {
@@ -19,7 +19,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_LockFileRegion",
             SetLastError = true
         )]
-        internal static partial int LockFileRegion(
+        partial internal static int LockFileRegion(
             SafeHandle fd,
             long offset,
             long length,

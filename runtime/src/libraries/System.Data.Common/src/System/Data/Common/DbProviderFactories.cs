@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace System.Data.Common
 {
-    public static partial class DbProviderFactories
+    partial public static class DbProviderFactories
     {
         private struct ProviderRegistration
         {

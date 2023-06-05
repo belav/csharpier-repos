@@ -9,7 +9,7 @@ using System.Security.Policy;
 
 namespace System
 {
-    public partial class AppDomain
+    partial public class AppDomain
     {
         public AssemblyBuilder DefineDynamicAssembly(
             AssemblyName name,

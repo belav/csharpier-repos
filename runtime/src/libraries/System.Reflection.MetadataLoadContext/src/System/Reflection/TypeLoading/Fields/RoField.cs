@@ -8,10 +8,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base class for all FieldInfo objects created by a MetadataLoadContext.
     /// </summary>
-    internal abstract partial class RoField : LeveledFieldInfo
+    internal abstract class RoField : LeveledFieldInfo
     {
         private readonly RoInstantiationProviderType _declaringType;
         private readonly Type _reflectedType;

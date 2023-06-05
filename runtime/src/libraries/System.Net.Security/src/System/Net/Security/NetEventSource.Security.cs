@@ -15,7 +15,7 @@ namespace System.Net
         Name = "Private.InternalDiagnostics.System.Net.Security",
         LocalizationResources = "FxResources.System.Net.Security.SR"
     )]
-    internal sealed partial class NetEventSource
+    partial internal sealed class NetEventSource
     {
 #if WINDOWS
         // More events are defined in NetEventSource.Security.Windows.cs
@@ -325,7 +325,7 @@ namespace System.Net
         private void ReceivedFrame(string sslStream, string tlsFrame, int isComplete) =>
             WriteEvent(ReceivedFrameId, sslStream, tlsFrame, isComplete);
 
-        static partial void AdditionalCustomizedToString(object value, ref string? result)
+        partial static void AdditionalCustomizedToString(object value, ref string? result)
         {
             if (value is X509Certificate cert)
             {

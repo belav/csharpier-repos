@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.UnitTests.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 {
-    public abstract partial class AbstractUserDiagnosticTest
+    partial public abstract class AbstractUserDiagnosticTest
     {
         private class FixAllDiagnosticProvider : FixAllContext.DiagnosticProvider
         {

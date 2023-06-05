@@ -97,7 +97,7 @@ namespace System.Web.UI.Design.MobileControls
         ///   Loads the component into the page.
         /// </summary>
         /// <seealso class="System.ComponentModel.ComponentEditorPage"/>
-        protected override sealed void LoadComponent()
+        protected sealed override void LoadComponent()
         {
             InitPage();
             InitTree();
@@ -120,7 +120,7 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        public override sealed void SetComponent(IComponent component)
+        public sealed override void SetComponent(IComponent component)
         {
             base.SetComponent(component);
 

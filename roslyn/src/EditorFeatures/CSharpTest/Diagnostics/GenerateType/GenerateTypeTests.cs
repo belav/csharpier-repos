@@ -26,7 +26,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateTypeTests
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
-    public partial class GenerateTypeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    partial public class GenerateTypeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public GenerateTypeTests(ITestOutputHelper logger)
             : base(logger) { }

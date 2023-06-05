@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
-    internal static partial class CancelablePromise
+    partial internal static class CancelablePromise
     {
         [JSImport("INTERNAL.mono_wasm_cancel_promise")]
-        private static partial void _CancelPromise(IntPtr promiseGCHandle);
+        partial private static void _CancelPromise(IntPtr promiseGCHandle);
 
         public static void CancelPromise(Task promise)
         {

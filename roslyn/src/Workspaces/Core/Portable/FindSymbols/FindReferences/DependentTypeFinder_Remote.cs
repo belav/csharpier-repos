@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal static partial class DependentTypeFinder
+    partial internal static class DependentTypeFinder
     {
         public static async Task<ImmutableArray<INamedTypeSymbol>> FindTypesAsync(
             INamedTypeSymbol type,

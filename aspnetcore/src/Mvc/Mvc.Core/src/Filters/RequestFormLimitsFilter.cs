@@ -6,12 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+partial
 /// <summary>
 /// A filter that configures <see cref="FormOptions"/> for the current request.
 /// </summary>
-internal sealed partial class RequestFormLimitsFilter
-    : IAuthorizationFilter,
-        IRequestFormLimitsPolicy
+internal sealed class RequestFormLimitsFilter : IAuthorizationFilter, IRequestFormLimitsPolicy
 {
     private readonly ILogger _logger;
 
@@ -56,7 +55,7 @@ internal sealed partial class RequestFormLimitsFilter
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -64,7 +63,7 @@ internal sealed partial class RequestFormLimitsFilter
             "Unable to apply configured form options since the request form has already been read.",
             EventName = "CannotApplyRequestFormLimits"
         )]
-        public static partial void CannotApplyRequestFormLimits(ILogger logger);
+        partial public static void CannotApplyRequestFormLimits(ILogger logger);
 
         [LoggerMessage(
             2,
@@ -72,7 +71,7 @@ internal sealed partial class RequestFormLimitsFilter
             "Applied the configured form options on the current request.",
             EventName = "AppliedRequestFormLimits"
         )]
-        public static partial void AppliedRequestFormLimits(ILogger logger);
+        partial public static void AppliedRequestFormLimits(ILogger logger);
 
         [LoggerMessage(
             4,
@@ -80,7 +79,7 @@ internal sealed partial class RequestFormLimitsFilter
             "Execution of filter {OverriddenFilter} is preempted by filter {OverridingFilter} which is the most effective filter implementing policy {FilterPolicy}.",
             EventName = "NotMostEffectiveFilter"
         )]
-        public static partial void NotMostEffectiveFilter(
+        partial public static void NotMostEffectiveFilter(
             ILogger logger,
             Type overriddenFilter,
             Type overridingFilter,

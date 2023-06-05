@@ -61,7 +61,7 @@ namespace System
         AllocationExceeded = 3
     }
 
-    public static partial class GC
+    partial public static class GC
     {
         public static int GetGeneration(object obj)
         {

@@ -30,7 +30,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.Cci
 {
-    internal abstract partial class MetadataWriter
+    partial internal abstract class MetadataWriter
     {
         internal static readonly Encoding s_utf8Encoding = Encoding.UTF8;
 

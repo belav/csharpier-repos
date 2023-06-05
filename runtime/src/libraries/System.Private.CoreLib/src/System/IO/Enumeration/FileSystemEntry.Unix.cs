@@ -6,10 +6,11 @@ using System.Runtime.InteropServices;
 
 namespace System.IO.Enumeration
 {
+    ref partial
     /// <summary>
     /// Lower level view of FileSystemInfo used for processing and filtering find results.
     /// </summary>
-    public unsafe ref partial struct FileSystemEntry
+    public unsafe struct FileSystemEntry
     {
         private Interop.Sys.DirectoryEntry _directoryEntry;
         private bool _isDirectory;
@@ -22,7 +23,7 @@ namespace System.IO.Enumeration
         // Wrap the fixed buffer to workaround visibility issues in api compat verification
         private struct FileNameBuffer
         {
-            internal fixed char _buffer[Interop.Sys.DirectoryEntry.NameBufferSize];
+            fixed internal char _buffer[Interop.Sys.DirectoryEntry.NameBufferSize];
         }
 
         internal static FileAttributes Initialize(

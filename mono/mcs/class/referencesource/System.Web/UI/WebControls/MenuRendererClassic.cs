@@ -10,7 +10,7 @@ namespace System.Web.UI.WebControls
     using System.Globalization;
     using System.Text;
 
-    public partial class Menu
+    partial public class Menu
     {
         /// <devdoc>The classic (pre-ASP.NET 4.0) Menu renderer</devdoc>
         private class MenuRendererClassic : MenuRenderer

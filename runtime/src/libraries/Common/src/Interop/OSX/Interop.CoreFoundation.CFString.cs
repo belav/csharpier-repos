@@ -7,22 +7,22 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class CoreFoundation
+    partial internal static class CoreFoundation
     {
         /// <summary>
         /// Returns the interior pointer of the cfString if it has the specified encoding.
         /// If it has the wrong encoding, or if the interior pointer isn't being shared for some reason, returns NULL
         /// </summary>
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static partial IntPtr CFStringGetCStringPtr(
+        partial private static IntPtr CFStringGetCStringPtr(
             SafeCFStringHandle cfString,
             CFStringBuiltInEncodings encoding
         );
 
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static partial SafeCFDataHandle CFStringCreateExternalRepresentation(
+        partial private static SafeCFDataHandle CFStringCreateExternalRepresentation(
             IntPtr alloc,
             SafeCFStringHandle theString,
             CFStringBuiltInEncodings encoding,

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Net.WebSockets.Tests
 {
-    public sealed partial class WebSocketExceptionTests
+    partial public sealed class WebSocketExceptionTests
     {
         public static object[][] ErrorData =
         {

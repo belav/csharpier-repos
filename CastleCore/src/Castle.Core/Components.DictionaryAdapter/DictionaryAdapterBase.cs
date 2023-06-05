@@ -19,7 +19,7 @@ namespace Castle.Components.DictionaryAdapter
     using System.Linq;
     using System.Reflection;
 
-    public abstract partial class DictionaryAdapterBase : IDictionaryAdapter
+    partial public abstract class DictionaryAdapterBase : IDictionaryAdapter
     {
         public DictionaryAdapterBase(DictionaryAdapterInstance instance)
         {

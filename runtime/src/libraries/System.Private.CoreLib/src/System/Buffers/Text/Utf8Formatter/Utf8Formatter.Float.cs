@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Formatter
+    partial public static class Utf8Formatter
     {
         /// <summary>
         /// Formats a Double as a UTF8 string.

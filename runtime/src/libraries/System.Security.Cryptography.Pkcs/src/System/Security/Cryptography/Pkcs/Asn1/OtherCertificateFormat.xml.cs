@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct OtherCertificateFormat
+    partial internal struct OtherCertificateFormat
     {
         internal string OtherCertFormat;
         internal ReadOnlyMemory<byte> OtherCert;

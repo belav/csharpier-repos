@@ -10,7 +10,7 @@ using System.Web.WebPages.Resources;
 
 namespace System.Web.WebPages.Html
 {
-    public partial class HtmlHelper
+    partial public class HtmlHelper
     {
         private void AddErrorClass(TagBuilder tagBuilder, string name)
         {

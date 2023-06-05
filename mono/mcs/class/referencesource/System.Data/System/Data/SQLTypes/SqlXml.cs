@@ -45,18 +45,18 @@ namespace System.Data.SqlTypes
         private Stream m_stream;
         private bool firstCreateReader;
         private MethodInfo createSqlReaderMethodInfo;
-        private readonly static Func<
+        private static readonly Func<
             Stream,
             XmlReaderSettings,
             XmlParserContext,
             XmlReader
         > sqlReaderDelegate = CreateSqlReaderDelegate();
 
-        private readonly static XmlReaderSettings DefaultXmlReaderSettings = new XmlReaderSettings()
+        private static readonly XmlReaderSettings DefaultXmlReaderSettings = new XmlReaderSettings()
         {
             ConformanceLevel = ConformanceLevel.Fragment
         };
-        private readonly static XmlReaderSettings DefaultXmlReaderSettingsCloseInput =
+        private static readonly XmlReaderSettings DefaultXmlReaderSettingsCloseInput =
             new XmlReaderSettings()
             {
                 ConformanceLevel = ConformanceLevel.Fragment,

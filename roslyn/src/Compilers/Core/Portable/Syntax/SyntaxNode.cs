@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
 #pragma warning restore CA1200 // Avoid using cref tags with a prefix
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
-    public abstract partial class SyntaxNode
+    partial public abstract class SyntaxNode
     {
         private readonly SyntaxNode? _parent;
         internal SyntaxTree? _syntaxTree;

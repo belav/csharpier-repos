@@ -24,7 +24,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Progression;
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
 {
     [ExportLanguageService(typeof(IProgressionLanguageService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpProgressionLanguageService : IProgressionLanguageService
+    partial internal class CSharpProgressionLanguageService : IProgressionLanguageService
     {
         private static readonly SymbolDisplayFormat s_descriptionFormat =
             new(

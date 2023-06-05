@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 class MainClass
 {
-    async static Task AsyncTest()
+    static async Task AsyncTest()
     {
         var b = await Task.Factory.StartNew(() => 13);
     }

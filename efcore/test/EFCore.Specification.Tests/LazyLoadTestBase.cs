@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract partial class LoadTestBase<TFixture>
+partial public abstract class LoadTestBase<TFixture>
 {
     [ConditionalTheory]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, false)]

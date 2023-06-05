@@ -13,10 +13,11 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers.View
 {
+    partial
     /// <summary>
     /// Interaction logic for AnalyzerSettingsView.xaml
     /// </summary>
-    internal partial class AnalyzerSettingsView : UserControl, ISettingsEditorView
+    internal class AnalyzerSettingsView : UserControl, ISettingsEditorView
     {
         private readonly IWpfSettingsEditorViewModel _viewModel;
 

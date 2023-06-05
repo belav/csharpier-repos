@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Ole32
+    partial internal static class Ole32
     {
         internal static unsafe int CoGetObjectContext(in Guid riid, out IntPtr ppv)
         {
@@ -18,6 +18,6 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Ole32)]
-        internal static unsafe partial int CoGetObjectContext(Guid* riid, IntPtr* ppv);
+        partial internal static unsafe int CoGetObjectContext(Guid* riid, IntPtr* ppv);
     }
 }

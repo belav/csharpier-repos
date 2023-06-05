@@ -8,10 +8,11 @@ using Xunit;
 
 namespace BasicEventSourceTests
 {
+    partial
     /// <summary>
     /// Tests the user experience for common user errors.
     /// </summary>
-    public partial class TestsUserErrors
+    public class TestsUserErrors
     {
         /// <summary>
         /// Test the

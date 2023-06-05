@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractOverrideCompletionProvider
+    partial internal abstract class AbstractOverrideCompletionProvider
         : AbstractMemberInsertingCompletionProvider
     {
         public AbstractOverrideCompletionProvider() { }

@@ -9,10 +9,10 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    public abstract partial class Enum
+    partial public abstract class Enum
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Enum_GetValuesAndNames")]
-        private static partial void GetEnumValuesAndNames(
+        partial private static void GetEnumValuesAndNames(
             QCallTypeHandle enumType,
             ObjectHandleOnStack values,
             ObjectHandleOnStack names,

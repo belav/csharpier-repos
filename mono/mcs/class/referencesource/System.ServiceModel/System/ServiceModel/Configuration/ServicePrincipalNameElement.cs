@@ -12,7 +12,7 @@ namespace System.ServiceModel.Configuration
     using System.Security.Cryptography;
     using System.Xml;
 
-    public sealed partial class ServicePrincipalNameElement : ConfigurationElement
+    partial public sealed class ServicePrincipalNameElement : ConfigurationElement
     {
         public ServicePrincipalNameElement() { }
 

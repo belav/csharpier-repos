@@ -126,7 +126,11 @@ namespace System.Windows.Forms.RTF
         #endregion	// Properties
 
         #region Methods
-        static public bool DeleteFont(RTF rtf, int font_number)
+        public
+        #endregion	// Properties
+
+        #region Methods
+        static bool DeleteFont(RTF rtf, int font_number)
         {
             Font f;
             Font prev;
@@ -164,7 +168,7 @@ namespace System.Windows.Forms.RTF
             return false;
         }
 
-        static public Font GetFont(RTF rtf, int font_number)
+        public static Font GetFont(RTF rtf, int font_number)
         {
             Font f;
 
@@ -175,7 +179,7 @@ namespace System.Windows.Forms.RTF
             return f;
         }
 
-        static public Font GetFont(Font start, int font_number)
+        public static Font GetFont(Font start, int font_number)
         {
             Font f;
 

@@ -14,7 +14,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlTextReaderImpl : XmlReader, IXmlLineInfo, IXmlNamespaceResolver
+    partial internal sealed class XmlTextReaderImpl : XmlReader, IXmlLineInfo, IXmlNamespaceResolver
     {
         private static UTF8Encoding? s_utf8BomThrowing;
 
@@ -10416,7 +10416,9 @@ namespace System.Xml
         }
 
 #pragma warning disable IDE0060 // https://github.com/dotnet/roslyn-analyzers/issues/6177
-        static partial void ConvertAbsoluteUnixPathToAbsoluteUri(
+        partial
+#pragma warning disable IDE0060 // https://github.com/dotnet/roslyn-analyzers/issues/6177
+        static void ConvertAbsoluteUnixPathToAbsoluteUri(
             [NotNullIfNotNull(nameof(url))] ref string? url,
             XmlResolver? resolver
         );

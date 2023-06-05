@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
-    public partial class RebuildCommandLineTests
+    partial public class RebuildCommandLineTests
     {
         private sealed class VisualBasicRebuildCompiler : VisualBasicCompiler
         {

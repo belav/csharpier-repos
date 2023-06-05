@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     )]
     [ExtensionOrder(After = nameof(CSharpSuggestionModeCompletionProvider))]
     [Shared]
-    internal partial class EnumAndCompletionListTagCompletionProvider : LSPCompletionProvider
+    partial internal class EnumAndCompletionListTagCompletionProvider : LSPCompletionProvider
     {
         private static readonly CompletionItemRules s_enumTypeRules = CompletionItemRules.Default
             .WithCommitCharacterRules(

@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace System
 {
-    public sealed partial class TimeZoneInfo
+    partial public sealed class TimeZoneInfo
     {
         private static unsafe bool TryConvertIanaIdToWindowsId(
             string ianaId,

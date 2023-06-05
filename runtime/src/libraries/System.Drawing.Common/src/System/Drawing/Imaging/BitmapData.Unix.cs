@@ -38,7 +38,7 @@ namespace System.Drawing.Imaging
     // MUST BE KEPT IN SYNC WITH gdip.h in libgdiplus!
     // The first 6 fields MUST also match MS definition
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class BitmapData
+    partial public sealed class BitmapData
     {
         private int _width;
         private int _height;

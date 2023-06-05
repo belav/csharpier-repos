@@ -5,7 +5,7 @@ using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.Tests
 {
-    public partial class TCXMLIntegrityBase : CDataReaderTestCase
+    partial public class TCXMLIntegrityBase : CDataReaderTestCase
     {
         // Type is System.Xml.Tests.TCXMLIntegrityBase
         // Test Case

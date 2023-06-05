@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CodeGen
 {
-    internal partial struct SwitchIntegralJumpTableEmitter
+    partial internal struct SwitchIntegralJumpTableEmitter
     {
         private struct SwitchBucket
         {

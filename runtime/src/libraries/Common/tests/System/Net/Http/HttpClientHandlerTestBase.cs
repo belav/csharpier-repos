@@ -14,7 +14,7 @@ namespace System.Net.Http.Functional.Tests
 {
     using Configuration = System.Net.Test.Common.Configuration;
 
-    public abstract partial class HttpClientHandlerTestBase : FileCleanupTestBase
+    partial public abstract class HttpClientHandlerTestBase : FileCleanupTestBase
     {
         // This file is shared with the WinHttpHandler implementation, which supports .NET Framework
         // So, define this so derived tests can use it.

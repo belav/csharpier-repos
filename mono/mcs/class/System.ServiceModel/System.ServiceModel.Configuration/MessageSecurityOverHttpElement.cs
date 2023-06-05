@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MessageSecurityOverHttpElement : ConfigurationElement
+    partial public class MessageSecurityOverHttpElement : ConfigurationElement
     {
         // Properties
 

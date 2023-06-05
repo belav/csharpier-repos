@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.IO.Compression.Tests
 {
-    public partial class zip_CreateTests : ZipFileTestBase
+    partial public class zip_CreateTests : ZipFileTestBase
     {
         [Theory]
         [MemberData(nameof(Utf8Comment_Data))]

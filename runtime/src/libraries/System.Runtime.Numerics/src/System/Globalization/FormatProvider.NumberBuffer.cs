@@ -6,9 +6,9 @@ using System.Security;
 
 namespace System.Globalization
 {
-    internal static partial class FormatProvider
+    partial internal static class FormatProvider
     {
-        private static partial class Number
+        partial private static class Number
         {
             [StructLayout(LayoutKind.Sequential)]
             internal unsafe struct NumberBuffer

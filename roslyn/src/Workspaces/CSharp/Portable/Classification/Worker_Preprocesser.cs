@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Classification
 {
-    internal ref partial struct Worker
+    ref partial internal struct Worker
     {
         private void ClassifyPreprocessorDirective(DirectiveTriviaSyntax node)
         {

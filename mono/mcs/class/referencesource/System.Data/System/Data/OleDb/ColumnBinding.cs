@@ -16,7 +16,7 @@ namespace System.Data.OleDb
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    sealed internal class ColumnBinding
+    internal sealed class ColumnBinding
     {
         // shared with other ColumnBindings
         private readonly OleDbDataReader _dataReader; // HCHAPTER

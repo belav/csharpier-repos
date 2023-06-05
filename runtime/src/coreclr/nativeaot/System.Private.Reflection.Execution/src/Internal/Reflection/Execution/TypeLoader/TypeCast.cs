@@ -9,6 +9,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
 {
+    partial
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     //                                    **** WARNING ****
@@ -20,7 +21,7 @@ namespace Internal.Reflection.Execution
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // This is not a general purpose type comparison facility. It is limited to what constraint validation needs.
-    internal static partial class ConstraintValidator
+    internal static class ConstraintValidator
     {
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.OLE.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal partial class VisualStudioWorkspaceImpl
+    partial internal class VisualStudioWorkspaceImpl
     {
         private class AddMetadataReferenceUndoUnit : AbstractAddRemoveUndoUnit
         {

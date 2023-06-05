@@ -141,14 +141,14 @@ namespace System.Security.AccessControl
                 return new CommonAce(binaryForm, offset);
         }
 
-        public override sealed bool Equals(object o)
+        public sealed override bool Equals(object o)
         {
             return this == (o as GenericAce);
         }
 
         public abstract void GetBinaryForm(byte[] binaryForm, int offset);
 
-        public override sealed int GetHashCode()
+        public sealed override int GetHashCode()
         {
             byte[] buffer = new byte[BinaryLength];
             GetBinaryForm(buffer, 0);
@@ -219,7 +219,7 @@ namespace System.Security.AccessControl
 
         internal abstract string GetSddlForm();
 
-        static internal GenericAce CreateFromSddlForm(string sddlForm, ref int pos)
+        internal static GenericAce CreateFromSddlForm(string sddlForm, ref int pos)
         {
             if (sddlForm[pos] != '(')
                 throw new ArgumentException("Invalid SDDL string.", "sddlForm");

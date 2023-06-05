@@ -79,13 +79,13 @@ namespace System.ServiceModel.Channels
             ackTimer.Set(PeerTransportConstants.AckTimeout);
         }
 
-        static public void OnNeighborConnected(IPeerNeighbor neighbor)
+        public static void OnNeighborConnected(IPeerNeighbor neighbor)
         {
             Fx.Assert(neighbor != null, "Neighbor must have a value");
             neighbor.Extensions.Add(new UtilityExtension());
         }
 
-        static public void OnNeighborClosed(IPeerNeighbor neighbor)
+        public static void OnNeighborClosed(IPeerNeighbor neighbor)
         {
             Fx.Assert(neighbor != null, "Neighbor must have a value");
             UtilityExtension ext = neighbor.Extensions.Find<UtilityExtension>();
@@ -150,7 +150,7 @@ namespace System.ServiceModel.Channels
                 ackTimer.Set(PeerTransportConstants.AckTimeout);
         }
 
-        static public void ProcessLinkUtility(IPeerNeighbor neighbor, UtilityInfo umessage)
+        public static void ProcessLinkUtility(IPeerNeighbor neighbor, UtilityInfo umessage)
         {
             Fx.Assert(neighbor != null, "Neighbor must have a value");
             UtilityExtension ext = neighbor.Extensions.Find<UtilityExtension>();
@@ -388,7 +388,7 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static internal void ReportCacheMiss(IPeerNeighbor neighbor, int missedBy)
+        internal static void ReportCacheMiss(IPeerNeighbor neighbor, int missedBy)
         {
             Fx.Assert(missedBy > AcceptableMissDistance, "Call this method for cache misses ONLY!");
             Fx.Assert(neighbor != null, "Neighbor must have a value");

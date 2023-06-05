@@ -9,7 +9,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.CharCheckingReaderTests
 {
     [TestModule(Name = "XmlCharCheckingReader Test", Desc = "XmlCharCheckingReader Test")]
-    public partial class CharCheckingReaderTest : CGenericTestModule
+    partial public class CharCheckingReaderTest : CGenericTestModule
     {
         public override int Init(object objParam)
         {

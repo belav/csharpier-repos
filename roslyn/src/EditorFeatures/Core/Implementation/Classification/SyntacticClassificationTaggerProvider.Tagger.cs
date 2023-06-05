@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 {
-    internal partial class SyntacticClassificationTaggerProvider
+    partial internal class SyntacticClassificationTaggerProvider
     {
         private class Tagger : ITagger<IClassificationTag>, IDisposable
         {

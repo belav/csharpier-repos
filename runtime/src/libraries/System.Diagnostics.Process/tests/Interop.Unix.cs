@@ -3,7 +3,7 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     [DllImport("libc")]
     internal static extern int getsid(int pid);

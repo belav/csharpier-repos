@@ -42,7 +42,7 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System
 {
-    public abstract partial class Array
+    partial public abstract class Array
     {
         // Constructor
         private Array() { }
@@ -220,11 +220,11 @@ namespace System
 
         // CAUTION! No bounds checking!
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void GetGenericValue_icall<T>(ref Array self, int pos, out T value);
+        static extern void GetGenericValue_icall<T>(ref Array self, int pos, out T value);
 
         // CAUTION! No bounds checking!
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void SetGenericValue_icall<T>(ref Array self, int pos, ref T value);
+        static extern void SetGenericValue_icall<T>(ref Array self, int pos, ref T value);
 
         // This is a special case in the runtime.
         internal void GetGenericValueImpl<T>(int pos, out T value)
@@ -377,7 +377,7 @@ namespace System
         internal extern void SetValueImpl(object value, int pos);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool FastCopy(
+        internal static extern bool FastCopy(
             Array source,
             int source_idx,
             Array dest,
@@ -386,7 +386,7 @@ namespace System
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static Array CreateInstanceImpl(
+        internal static extern Array CreateInstanceImpl(
             Type elementType,
             int[] lengths,
             int[] bounds

@@ -15,7 +15,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 {
-    public partial class DiagnosticLocalizationTests
+    partial public class DiagnosticLocalizationTests
     {
         [Fact, WorkItem(1006, "https://github.com/dotnet/roslyn/issues/1006")]
         public void TestDiagnosticLocalization()

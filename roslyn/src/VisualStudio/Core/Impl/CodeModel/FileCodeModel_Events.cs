@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
-    public sealed partial class FileCodeModel
+    partial public sealed class FileCodeModel
     {
         private const int ElementAddedDispId = 1;
         private const int ElementChangedDispId = 2;

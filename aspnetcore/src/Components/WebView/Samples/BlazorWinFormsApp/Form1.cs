@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorWinFormsApp
 {
-    public partial class Form1 : Form
+    partial public class Form1 : Form
     {
         private readonly AppState _appState = new();
 

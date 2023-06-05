@@ -12,7 +12,7 @@ using SetTriad = System.Tuple<
 
 namespace System.Collections.Immutable.Tests
 {
-    public abstract partial class ImmutableSetTest : ImmutablesTestBase
+    partial public abstract class ImmutableSetTest : ImmutablesTestBase
     {
         [Fact]
         public void ExceptTest()

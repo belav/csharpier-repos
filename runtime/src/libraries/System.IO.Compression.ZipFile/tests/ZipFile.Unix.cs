@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.IO.Compression.Tests
 {
-    public partial class ZipFile_Unix : ZipFileTestBase
+    partial public class ZipFile_Unix : ZipFileTestBase
     {
         [Fact]
         public void UnixCreateSetsPermissionsInExternalAttributes()
@@ -280,9 +280,9 @@ namespace System.IO.Compression.Tests
         }
 
         [LibraryImport("libc", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
-        private static partial int mkfifo(string path, int mode);
+        partial private static int mkfifo(string path, int mode);
 
         [LibraryImport("libc", StringMarshalling = StringMarshalling.Utf8)]
-        private static partial int umask(int umask);
+        partial private static int umask(int umask);
     }
 }

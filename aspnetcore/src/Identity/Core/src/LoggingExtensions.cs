@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(
         0,
@@ -11,7 +11,7 @@ internal static partial class LoggingExtensions
         "ValidateAsync failed: the expiration time is invalid.",
         EventName = "InvalidExpirationTime"
     )]
-    public static partial void InvalidExpirationTime(this ILogger logger);
+    partial public static void InvalidExpirationTime(this ILogger logger);
 
     [LoggerMessage(
         1,
@@ -19,7 +19,7 @@ internal static partial class LoggingExtensions
         "ValidateAsync failed: did not find expected UserId.",
         EventName = "UserIdsNotEquals"
     )]
-    public static partial void UserIdsNotEquals(this ILogger logger);
+    partial public static void UserIdsNotEquals(this ILogger logger);
 
     [LoggerMessage(
         2,
@@ -27,7 +27,7 @@ internal static partial class LoggingExtensions
         "ValidateAsync failed: did not find expected purpose. '{ActualPurpose}' does not match the expected purpose '{ExpectedPurpose}'.",
         EventName = "PurposeNotEquals"
     )]
-    public static partial void PurposeNotEquals(
+    partial public static void PurposeNotEquals(
         this ILogger logger,
         string actualPurpose,
         string expectedPurpose
@@ -39,7 +39,7 @@ internal static partial class LoggingExtensions
         "ValidateAsync failed: unexpected end of input.",
         EventName = "UnexpectedEndOfInput"
     )]
-    public static partial void UnexpectedEndOfInput(this ILogger logger);
+    partial public static void UnexpectedEndOfInput(this ILogger logger);
 
     [LoggerMessage(
         4,
@@ -47,7 +47,7 @@ internal static partial class LoggingExtensions
         "ValidateAsync failed: did not find expected security stamp.",
         EventName = "SecurityStampNotEquals"
     )]
-    public static partial void SecurityStampNotEquals(this ILogger logger);
+    partial public static void SecurityStampNotEquals(this ILogger logger);
 
     [LoggerMessage(
         5,
@@ -55,7 +55,7 @@ internal static partial class LoggingExtensions
         "ValidateAsync failed: the expected stamp is not empty.",
         EventName = "SecurityStampIsNotEmpty"
     )]
-    public static partial void SecurityStampIsNotEmpty(this ILogger logger);
+    partial public static void SecurityStampIsNotEmpty(this ILogger logger);
 
     [LoggerMessage(
         6,
@@ -63,5 +63,5 @@ internal static partial class LoggingExtensions
         "ValidateAsync failed: unhandled exception was thrown.",
         EventName = "UnhandledException"
     )]
-    public static partial void UnhandledException(this ILogger logger);
+    partial public static void UnhandledException(this ILogger logger);
 }

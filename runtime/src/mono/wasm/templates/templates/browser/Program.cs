@@ -3,7 +3,7 @@ using System.Runtime.InteropServices.JavaScript;
 
 Console.WriteLine("Hello, Browser!");
 
-public partial class MyClass
+partial public class MyClass
 {
     [JSExport]
     internal static string Greeting()
@@ -14,5 +14,5 @@ public partial class MyClass
     }
 
     [JSImport("window.location.href", "main.js")]
-    internal static partial string GetHRef();
+    partial internal static string GetHRef();
 }

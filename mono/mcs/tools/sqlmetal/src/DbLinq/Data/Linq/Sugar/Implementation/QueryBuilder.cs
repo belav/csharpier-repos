@@ -38,12 +38,13 @@ using DbLinq.Util;
 
 namespace DbLinq.Data.Linq.Sugar.Implementation
 {
+    partial
     /// <summary>
     /// Full query builder, with cache management
     /// 1. Parses Linq Expression
     /// 2. Generates SQL
     /// </summary>
-    internal partial class QueryBuilder : IQueryBuilder
+    internal class QueryBuilder : IQueryBuilder
     {
         public IExpressionLanguageParser ExpressionLanguageParser { get; set; }
         public IExpressionDispatcher ExpressionDispatcher { get; set; }

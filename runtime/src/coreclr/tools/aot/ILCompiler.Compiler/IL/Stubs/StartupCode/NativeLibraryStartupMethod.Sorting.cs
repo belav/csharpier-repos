@@ -7,7 +7,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs.StartupCode
 {
-    public partial class NativeLibraryStartupMethod
+    partial public class NativeLibraryStartupMethod
     {
         protected override int ClassCode => -304225482;
 

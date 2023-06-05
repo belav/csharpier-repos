@@ -8,7 +8,7 @@ using static Internal.NativeCrypto.BCryptNative;
 
 namespace System.Security.Cryptography
 {
-    public partial class ECDsa : AsymmetricAlgorithm
+    partial public class ECDsa : AsymmetricAlgorithm
     {
         /// <summary>
         /// Creates an instance of the platform specific implementation of the cref="ECDsa" algorithm.
@@ -43,9 +43,9 @@ namespace System.Security.Cryptography
         }
     }
 
-    internal static partial class ECDsaImplementation
+    partial internal static class ECDsaImplementation
     {
-        public sealed partial class ECDsaCng : ECDsa
+        partial public sealed class ECDsaCng : ECDsa
         {
             protected override void Dispose(bool disposing)
             {

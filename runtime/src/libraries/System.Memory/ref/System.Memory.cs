@@ -7,7 +7,7 @@
 #if !BUILDING_CORELIB_REFERENCE
 namespace System
 {
-    public readonly partial struct SequencePosition : System.IEquatable<System.SequencePosition>
+    partial public readonly struct SequencePosition : System.IEquatable<System.SequencePosition>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -60,7 +60,7 @@ namespace System
 
 namespace System.Buffers
 {
-    public sealed partial class ArrayBufferWriter<T> : System.Buffers.IBufferWriter<T>
+    partial public sealed class ArrayBufferWriter<T> : System.Buffers.IBufferWriter<T>
     {
         public ArrayBufferWriter() { }
 
@@ -102,7 +102,7 @@ namespace System.Buffers
         }
     }
 
-    public static partial class BuffersExtensions
+    partial public static class BuffersExtensions
     {
         public static void CopyTo<T>(
             this in System.Buffers.ReadOnlySequence<T> source,
@@ -129,14 +129,14 @@ namespace System.Buffers
         ) { }
     }
 
-    public partial interface IBufferWriter<T>
+    partial public interface IBufferWriter<T>
     {
         void Advance(int count);
         System.Memory<T> GetMemory(int sizeHint = 0);
         System.Span<T> GetSpan(int sizeHint = 0);
     }
 
-    public abstract partial class MemoryPool<T> : System.IDisposable
+    partial public abstract class MemoryPool<T> : System.IDisposable
     {
         protected MemoryPool() { }
 
@@ -152,7 +152,7 @@ namespace System.Buffers
         public abstract System.Buffers.IMemoryOwner<T> Rent(int minBufferSize = -1);
     }
 
-    public abstract partial class ReadOnlySequenceSegment<T>
+    partial public abstract class ReadOnlySequenceSegment<T>
     {
         protected ReadOnlySequenceSegment() { }
 
@@ -173,7 +173,7 @@ namespace System.Buffers
         }
     }
 
-    public readonly partial struct ReadOnlySequence<T>
+    partial public readonly struct ReadOnlySequence<T>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -315,7 +315,7 @@ namespace System.Buffers
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -337,7 +337,7 @@ namespace System.Buffers
         }
     }
 
-    public static partial class SequenceReaderExtensions
+    partial public static class SequenceReaderExtensions
     {
         public static bool TryReadBigEndian(
             this ref System.Buffers.SequenceReader<byte> reader,
@@ -388,7 +388,7 @@ namespace System.Buffers
         }
     }
 
-    public ref partial struct SequenceReader<T>
+    ref partial public struct SequenceReader<T>
         where T : unmanaged, System.IEquatable<T>
     {
         private object _dummy;
@@ -600,7 +600,7 @@ namespace System.Buffers
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class SequenceMarshal
+    partial public static class SequenceMarshal
     {
         public static bool TryGetArray<T>(
             System.Buffers.ReadOnlySequence<T> sequence,
@@ -641,7 +641,7 @@ namespace System.Runtime.InteropServices
 
 namespace System.Text
 {
-    public static partial class EncodingExtensions
+    partial public static class EncodingExtensions
     {
         public static void Convert(
             this System.Text.Decoder decoder,
@@ -766,7 +766,7 @@ namespace System.Text
 
 namespace System
 {
-    public static partial class MemoryExtensions
+    partial public static class MemoryExtensions
     {
         public static System.ReadOnlyMemory<char> AsMemory(this string? text)
         {
@@ -2084,7 +2084,7 @@ namespace System
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         [System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute]
-        public ref struct TryWriteInterpolatedStringHandler
+        ref public struct TryWriteInterpolatedStringHandler
         {
             private readonly object _dummy;
             private readonly int _dummyPrimitive;
@@ -2169,7 +2169,7 @@ namespace System
 
 namespace System.Buffers
 {
-    public readonly partial struct StandardFormat : System.IEquatable<System.Buffers.StandardFormat>
+    partial public readonly struct StandardFormat : System.IEquatable<System.Buffers.StandardFormat>
     {
         private readonly int _dummyPrimitive;
         public const byte MaxPrecision = (byte)99;
@@ -2268,7 +2268,7 @@ namespace System.Buffers
 
 namespace System.Buffers.Binary
 {
-    public static partial class BinaryPrimitives
+    partial public static class BinaryPrimitives
     {
         public static double ReadDoubleBigEndian(System.ReadOnlySpan<byte> source)
         {
@@ -2764,7 +2764,7 @@ namespace System.Buffers.Binary
 
 namespace System.Buffers.Text
 {
-    public static partial class Utf8Formatter
+    partial public static class Utf8Formatter
     {
         public static bool TryFormat(
             bool value,
@@ -2931,7 +2931,7 @@ namespace System.Buffers.Text
         }
     }
 
-    public static partial class Utf8Parser
+    partial public static class Utf8Parser
     {
         public static bool TryParse(
             System.ReadOnlySpan<byte> source,
@@ -3101,7 +3101,7 @@ namespace System.Buffers.Text
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class MemoryMarshal
+    partial public static class MemoryMarshal
     {
         public static System.ReadOnlySpan<byte> AsBytes<T>(System.ReadOnlySpan<T> span)
             where T : struct
@@ -3266,7 +3266,7 @@ namespace System.Runtime.InteropServices
 
 namespace System.Text
 {
-    public ref partial struct SpanLineEnumerator
+    ref partial public struct SpanLineEnumerator
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -3286,7 +3286,7 @@ namespace System.Text
         }
     }
 
-    public ref partial struct SpanRuneEnumerator
+    ref partial public struct SpanRuneEnumerator
     {
         private object _dummy;
         private int _dummyPrimitive;

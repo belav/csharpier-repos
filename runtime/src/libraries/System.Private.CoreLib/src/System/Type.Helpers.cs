@@ -7,8 +7,9 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
+    partial
     // This file collects the longer methods of Type to make the main Type class more readable.
-    public abstract partial class Type : MemberInfo, IReflect
+    public abstract class Type : MemberInfo, IReflect
     {
         public virtual bool IsSerializable
         {

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
 {
-    internal partial class EventHookupCommandHandler : ICommandHandler<EscapeKeyCommandArgs>
+    partial internal class EventHookupCommandHandler : ICommandHandler<EscapeKeyCommandArgs>
     {
         public string DisplayName => CSharpEditorResources.Generate_Event_Subscription;
 

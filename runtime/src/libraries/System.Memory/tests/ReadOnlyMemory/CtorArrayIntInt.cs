@@ -5,10 +5,11 @@ using Xunit;
 
 namespace System.MemoryTests
 {
+    partial
     //
     // Tests for MemoryTests<T>.ctor(T[], int, int). If the test is not specific to this overload, consider putting it in CtorArray.cs instread.
     //
-    public static partial class ReadOnlyMemoryTests
+    public static class ReadOnlyMemoryTests
     {
         [Fact]
         public static void CtorArrayWithStartAndLengthInt()

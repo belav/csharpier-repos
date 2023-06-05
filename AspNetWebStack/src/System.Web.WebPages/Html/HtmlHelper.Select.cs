@@ -11,7 +11,7 @@ using Microsoft.Internal.Web.Utils;
 
 namespace System.Web.WebPages.Html
 {
-    public partial class HtmlHelper
+    partial public class HtmlHelper
     {
         public IHtmlString ListBox(string name, IEnumerable<SelectListItem> selectList)
         {

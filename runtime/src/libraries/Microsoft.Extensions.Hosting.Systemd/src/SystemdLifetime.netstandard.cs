@@ -6,11 +6,11 @@ using System.Threading;
 
 namespace Microsoft.Extensions.Hosting.Systemd
 {
-    public partial class SystemdLifetime
+    partial public class SystemdLifetime
     {
         private readonly ManualResetEvent _shutdownBlock = new ManualResetEvent(false);
 
-        private partial void RegisterShutdownHandlers()
+        partial private void RegisterShutdownHandlers()
         {
             // systemd sends SIGTERM to stop the service.
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
             System.Environment.ExitCode = 0;
         }
 
-        private partial void UnregisterShutdownHandlers()
+        partial private void UnregisterShutdownHandlers()
         {
             _shutdownBlock.Set();
 

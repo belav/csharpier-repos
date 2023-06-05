@@ -3,6 +3,7 @@
 
 namespace System.Globalization
 {
+    partial
     /// <summary>
     /// JapaneseCalendar is based on Gregorian calendar.  The month and day values are the same as
     /// Gregorian calendar. However, the year value is an offset to the Gregorian
@@ -30,7 +31,7 @@ namespace System.Globalization
     ///     Gregorian   1868/09/08  9999/12/31
     ///     Japanese    Meiji 01/01 Reiwa 7981/12/31
     /// </remarks>
-    public partial class JapaneseCalendar : Calendar
+    public class JapaneseCalendar : Calendar
     {
         private static readonly DateTime s_calendarMinValue = new DateTime(1868, 9, 8);
 

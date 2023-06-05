@@ -35,7 +35,7 @@ using System.Windows.Forms;
 
 namespace Samples
 {
-    public partial class scan : Form
+    partial public class scan : Form
     {
         private Region region;
         private Matrix matrix;

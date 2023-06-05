@@ -18,12 +18,13 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Net.Security
 {
+    partial
     //
     // The class maintains the state of the authentication process and the security context.
     // It encapsulates security context and does the real work in authentication and
     // user data encryption with NEGO SSPI package.
     //
-    internal static partial class NegotiateStreamPal
+    internal static class NegotiateStreamPal
     {
         // value should match the Windows sspicli NTE_FAIL value
         // defined in winerror.h

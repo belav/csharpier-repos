@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.WebSockets
 {
-    internal static partial class HttpWebSocket
+    partial internal static class HttpWebSocket
     {
         private const string SupportedVersion = "13";
 

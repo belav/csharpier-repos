@@ -3,7 +3,7 @@
 
 namespace System
 {
-    public ref struct RuntimeArgumentHandle
+    ref public struct RuntimeArgumentHandle
     {
         internal IntPtr args;
     }

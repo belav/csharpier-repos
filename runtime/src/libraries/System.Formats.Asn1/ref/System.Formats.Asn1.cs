@@ -6,7 +6,7 @@
 
 namespace System.Formats.Asn1
 {
-    public readonly partial struct Asn1Tag : System.IEquatable<System.Formats.Asn1.Asn1Tag>
+    partial public readonly struct Asn1Tag : System.IEquatable<System.Formats.Asn1.Asn1Tag>
     {
         private readonly int _dummyPrimitive;
         public static readonly System.Formats.Asn1.Asn1Tag Boolean;
@@ -139,7 +139,7 @@ namespace System.Formats.Asn1
         }
     }
 
-    public partial class AsnContentException : System.Exception
+    partial public class AsnContentException : System.Exception
     {
         public AsnContentException() { }
 
@@ -153,7 +153,7 @@ namespace System.Formats.Asn1
         public AsnContentException(string? message, System.Exception? inner) { }
     }
 
-    public static partial class AsnDecoder
+    partial public static class AsnDecoder
     {
         public static byte[] ReadBitString(
             System.ReadOnlySpan<byte> source,
@@ -508,7 +508,7 @@ namespace System.Formats.Asn1
         DER = 2,
     }
 
-    public partial class AsnReader
+    partial public class AsnReader
     {
         public AsnReader(
             System.ReadOnlyMemory<byte> data,
@@ -791,7 +791,7 @@ namespace System.Formats.Asn1
         }
     }
 
-    public partial struct AsnReaderOptions
+    partial public struct AsnReaderOptions
     {
         private int _dummyPrimitive;
         public bool SkipSetSortOrderVerification
@@ -806,7 +806,7 @@ namespace System.Formats.Asn1
         }
     }
 
-    public sealed partial class AsnWriter
+    partial public sealed class AsnWriter
     {
         public AsnWriter(System.Formats.Asn1.AsnEncodingRules ruleSet) { }
 
@@ -998,7 +998,7 @@ namespace System.Formats.Asn1
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
         ) { }
 
-        public readonly partial struct Scope : System.IDisposable
+        partial public readonly struct Scope : System.IDisposable
         {
             private readonly object _dummy;
             private readonly int _dummyPrimitive;

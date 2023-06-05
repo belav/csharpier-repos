@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 using System.Security;
 using static System.Net.WebSockets.WebSocketProtocolComponent;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WebSocket
+    partial internal static class WebSocket
     {
         [LibraryImport(Libraries.WebSocket)]
-        internal static partial int WebSocketGetAction(
+        partial internal static int WebSocketGetAction(
             SafeHandle webSocketHandle,
             ActionQueue actionQueue,
             Buffer[] dataBuffers,

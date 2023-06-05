@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableDictionary{TKey, TValue}.Enumerator"/> struct.
     /// </content>
-    public partial class ImmutableDictionary<TKey, TValue>
+    public class ImmutableDictionary<TKey, TValue>
     {
         /// <summary>
         /// Enumerates the contents of the collection in an allocation-free manner.

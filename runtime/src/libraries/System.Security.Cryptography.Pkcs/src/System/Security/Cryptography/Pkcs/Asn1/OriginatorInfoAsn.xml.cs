@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct OriginatorInfoAsn
+    partial internal struct OriginatorInfoAsn
     {
         internal System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn[]? CertificateSet;
         internal ReadOnlyMemory<byte>[]? RevocationInfoChoices;

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Net.NetworkInformation
 {
-    internal static partial class StringParsingHelpers
+    partial internal static class StringParsingHelpers
     {
         internal static string ParseDnsSuffixFromResolvConfFile(string data)
         {

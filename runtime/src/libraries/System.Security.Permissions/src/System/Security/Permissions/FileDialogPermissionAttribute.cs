@@ -11,7 +11,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
-    public sealed partial class FileDialogPermissionAttribute : CodeAccessSecurityAttribute
+    partial public sealed class FileDialogPermissionAttribute : CodeAccessSecurityAttribute
     {
         public FileDialogPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }

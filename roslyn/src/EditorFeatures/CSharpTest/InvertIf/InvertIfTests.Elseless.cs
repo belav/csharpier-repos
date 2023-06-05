@@ -10,7 +10,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
-    public partial class InvertIfTests
+    partial public class InvertIfTests
     {
         [Fact]
         public async Task IfWithoutElse_MoveIfBodyToElseClause1()

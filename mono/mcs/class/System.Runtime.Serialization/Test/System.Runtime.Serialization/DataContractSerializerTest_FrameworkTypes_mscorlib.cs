@@ -44,7 +44,7 @@ namespace MonoTests.System.Runtime.Serialization
 {
     [TestFixture]
     [Category("NotWorking")]
-    public partial class DataContractSerializerTest_FrameworkTypes_mscorlib
+    partial public class DataContractSerializerTest_FrameworkTypes_mscorlib
         : DataContractSerializerTest_FrameworkTypes
     {
         [Test]

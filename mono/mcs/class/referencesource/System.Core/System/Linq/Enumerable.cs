@@ -10,7 +10,7 @@ using System.Core;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> source,

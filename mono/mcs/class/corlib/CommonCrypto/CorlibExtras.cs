@@ -9,8 +9,9 @@
 
 namespace System.Security.Cryptography
 {
+    partial
     // required to ensure compatibility with MS implementation
-    public sealed partial class RC2CryptoServiceProvider : RC2
+    public sealed class RC2CryptoServiceProvider : RC2
     {
         public override int EffectiveKeySize
         {

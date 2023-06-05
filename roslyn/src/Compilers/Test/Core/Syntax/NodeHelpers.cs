@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
-    public static partial class NodeHelpers
+    partial public static class NodeHelpers
     {
         // TODO: Having this as a shared property makes this less discoverable. This can also be bad
         // if we ever have an app where multiple threads need to use this with each thread operating

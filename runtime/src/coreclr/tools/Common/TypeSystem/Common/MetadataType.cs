@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Type with metadata available that is equivalent to a TypeDef record in an ECMA 335 metadata stream.
     /// A class, an interface, or a value type.
     /// </summary>
-    public abstract partial class MetadataType : DefType
+    public abstract class MetadataType : DefType
     {
         public abstract override string Name { get; }
 

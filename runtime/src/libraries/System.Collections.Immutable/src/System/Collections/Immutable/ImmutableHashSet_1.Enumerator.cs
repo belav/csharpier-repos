@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableHashSet{T}.Enumerator"/> class.
     /// </content>
-    public partial class ImmutableHashSet<T>
+    public class ImmutableHashSet<T>
     {
         /// <summary>
         /// Enumerates the contents of the collection in an allocation-free manner.

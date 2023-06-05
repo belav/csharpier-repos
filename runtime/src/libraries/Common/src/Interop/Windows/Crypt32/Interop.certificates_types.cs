@@ -4,17 +4,17 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
-        internal static partial class AuthType
+        partial internal static class AuthType
         {
             internal const uint AUTHTYPE_CLIENT = 1;
             internal const uint AUTHTYPE_SERVER = 2;
         }
 
-        internal static partial class CertChainPolicyIgnoreFlags
+        partial internal static class CertChainPolicyIgnoreFlags
         {
             internal const uint CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG = 0x00000001;
             internal const uint CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG = 0x00000002;
@@ -45,7 +45,7 @@ internal static partial class Interop
                 | CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG;
         }
 
-        internal static partial class CertChainPolicy
+        partial internal static class CertChainPolicy
         {
             internal const int CERT_CHAIN_POLICY_BASE = 1;
             internal const int CERT_CHAIN_POLICY_AUTHENTICODE = 2;
@@ -57,7 +57,7 @@ internal static partial class Interop
             internal const int CERT_CHAIN_POLICY_EV = 8;
         }
 
-        internal static partial class CertChainPolicyErrors
+        partial internal static class CertChainPolicyErrors
         {
             // Base Policy errors (CERT_CHAIN_POLICY_BASE).
             internal const uint TRUST_E_CERT_SIGNATURE = 0x80096004;

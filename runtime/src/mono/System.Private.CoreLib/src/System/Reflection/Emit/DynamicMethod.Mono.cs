@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class DynamicMethod : MethodInfo
+    partial public sealed class DynamicMethod : MethodInfo
     {
         #region Sync with MonoReflectionDynamicMethod in object-internals.h
         private RuntimeMethodHandle _mhandle;

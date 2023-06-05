@@ -3,11 +3,11 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         [LibraryImport(Libraries.User32)]
-        internal static partial short GetKeyState(int virtualKeyCode);
+        partial internal static short GetKeyState(int virtualKeyCode);
     }
 }

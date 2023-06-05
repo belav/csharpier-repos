@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 {
-    internal abstract partial class AbstractGenerateConstructorFromMembersCodeRefactoringProvider
+    partial internal abstract class AbstractGenerateConstructorFromMembersCodeRefactoringProvider
     {
         private sealed class FieldDelegatingCodeAction : CodeAction
         {

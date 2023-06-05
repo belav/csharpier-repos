@@ -170,12 +170,14 @@ namespace System.Net.Configuration
         private HandlersUtil() { }
 
 #if (XML_DEP)
-        static internal string ExtractAttributeValue(string attKey, XmlNode node)
+        internal
+#if (XML_DEP)
+        static string ExtractAttributeValue(string attKey, XmlNode node)
         {
             return ExtractAttributeValue(attKey, node, false);
         }
 
-        static internal string ExtractAttributeValue(string attKey, XmlNode node, bool optional)
+        internal static string ExtractAttributeValue(string attKey, XmlNode node, bool optional)
         {
             if (node.Attributes == null)
             {
@@ -203,7 +205,7 @@ namespace System.Net.Configuration
             return value;
         }
 
-        static internal void ThrowException(string msg, XmlNode node)
+        internal static void ThrowException(string msg, XmlNode node)
         {
             if (node != null && node.Name != String.Empty)
                 msg = msg + " (node name: " + node.Name + ") ";

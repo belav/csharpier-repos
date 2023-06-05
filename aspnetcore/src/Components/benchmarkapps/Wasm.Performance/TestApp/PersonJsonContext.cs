@@ -6,4 +6,4 @@ using System.Text.Json.Serialization;
 namespace Wasm.Performance.TestApp;
 
 [JsonSerializable(typeof(Person))]
-internal sealed partial class PersonJsonContext : JsonSerializerContext { }
+partial internal sealed class PersonJsonContext : JsonSerializerContext { }

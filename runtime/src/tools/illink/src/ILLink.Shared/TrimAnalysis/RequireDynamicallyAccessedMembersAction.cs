@@ -14,7 +14,7 @@ using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.Single
 namespace ILLink.Shared.TrimAnalysis
 {
     [StructLayout(LayoutKind.Auto)]
-    internal partial struct RequireDynamicallyAccessedMembersAction
+    partial internal struct RequireDynamicallyAccessedMembersAction
     {
         private readonly DiagnosticContext _diagnosticContext;
 
@@ -139,13 +139,13 @@ namespace ILLink.Shared.TrimAnalysis
             }
         }
 
-        public partial bool TryResolveTypeNameAndMark(
+        partial public bool TryResolveTypeNameAndMark(
             string typeName,
             bool needsAssemblyName,
             out TypeProxy type
         );
 
-        private partial void MarkTypeForDynamicallyAccessedMembers(
+        partial private void MarkTypeForDynamicallyAccessedMembers(
             in TypeProxy type,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
         );

@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.TypeLoading
 {
-    internal sealed partial class RoConstructedGenericType
+    partial internal sealed class RoConstructedGenericType
     {
         public readonly struct Key : IEquatable<Key>
         {

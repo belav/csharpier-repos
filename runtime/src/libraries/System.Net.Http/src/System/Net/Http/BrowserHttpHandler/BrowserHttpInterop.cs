@@ -9,25 +9,25 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal static partial class BrowserHttpInterop
+    partial internal static class BrowserHttpInterop
     {
         [JSImport("INTERNAL.http_wasm_supports_streaming_response")]
-        public static partial bool SupportsStreamingResponse();
+        partial public static bool SupportsStreamingResponse();
 
         [JSImport("INTERNAL.http_wasm_create_abort_controler")]
-        public static partial JSObject CreateAbortController();
+        partial public static JSObject CreateAbortController();
 
         [JSImport("INTERNAL.http_wasm_abort_request")]
-        public static partial void AbortRequest(JSObject abortController);
+        partial public static void AbortRequest(JSObject abortController);
 
         [JSImport("INTERNAL.http_wasm_abort_response")]
-        public static partial void AbortResponse(JSObject fetchResponse);
+        partial public static void AbortResponse(JSObject fetchResponse);
 
         [JSImport("INTERNAL.http_wasm_get_response_header_names")]
-        private static partial string[] _GetResponseHeaderNames(JSObject fetchResponse);
+        partial private static string[] _GetResponseHeaderNames(JSObject fetchResponse);
 
         [JSImport("INTERNAL.http_wasm_get_response_header_values")]
-        private static partial string[] _GetResponseHeaderValues(JSObject fetchResponse);
+        partial private static string[] _GetResponseHeaderValues(JSObject fetchResponse);
 
         public static void GetResponseHeaders(
             JSObject fetchResponse,
@@ -48,7 +48,7 @@ namespace System.Net.Http
         }
 
         [JSImport("INTERNAL.http_wasm_fetch")]
-        public static partial Task<JSObject> Fetch(
+        partial public static Task<JSObject> Fetch(
             string uri,
             string[] headerNames,
             string[] headerValues,
@@ -59,7 +59,7 @@ namespace System.Net.Http
         );
 
         [JSImport("INTERNAL.http_wasm_fetch_bytes")]
-        private static partial Task<JSObject> FetchBytes(
+        partial private static Task<JSObject> FetchBytes(
             string uri,
             string[] headerNames,
             string[] headerValues,
@@ -96,17 +96,17 @@ namespace System.Net.Http
         }
 
         [JSImport("INTERNAL.http_wasm_get_streamed_response_bytes")]
-        public static partial Task<int> GetStreamedResponseBytes(
+        partial public static Task<int> GetStreamedResponseBytes(
             JSObject fetchResponse,
             IntPtr bufferPtr,
             int bufferLength
         );
 
         [JSImport("INTERNAL.http_wasm_get_response_length")]
-        public static partial Task<int> GetResponseLength(JSObject fetchResponse);
+        partial public static Task<int> GetResponseLength(JSObject fetchResponse);
 
         [JSImport("INTERNAL.http_wasm_get_response_bytes")]
-        public static partial int GetResponseBytes(
+        partial public static int GetResponseBytes(
             JSObject fetchResponse,
             [JSMarshalAs<JSType.MemoryView>] Span<byte> buffer
         );

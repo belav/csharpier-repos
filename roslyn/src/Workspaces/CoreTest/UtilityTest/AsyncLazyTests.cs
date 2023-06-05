@@ -15,7 +15,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.UnitTests
 {
     [Trait(Traits.Feature, Traits.Features.AsyncLazy)]
-    public partial class AsyncLazyTests
+    partial public class AsyncLazyTests
     {
         [Fact]
         public void GetValueAsyncReturnsCompletedTaskIfAsyncComputationCompletesImmediately()

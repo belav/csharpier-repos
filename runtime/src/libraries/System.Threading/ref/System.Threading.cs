@@ -7,7 +7,7 @@
 #if !BUILDING_CORELIB_REFERENCE
 namespace System.Threading
 {
-    public partial class Barrier : System.IDisposable
+    partial public class Barrier : System.IDisposable
     {
         public Barrier(int participantCount) { }
 
@@ -86,7 +86,7 @@ namespace System.Threading
         }
     }
 
-    public partial class BarrierPostPhaseException : System.Exception
+    partial public class BarrierPostPhaseException : System.Exception
     {
         public BarrierPostPhaseException() { }
 
@@ -102,7 +102,7 @@ namespace System.Threading
         public BarrierPostPhaseException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class CountdownEvent : System.IDisposable
+    partial public class CountdownEvent : System.IDisposable
     {
         public CountdownEvent(int initialCount) { }
 
@@ -192,7 +192,7 @@ namespace System.Threading
         }
     }
 
-    public partial class HostExecutionContext : System.IDisposable
+    partial public class HostExecutionContext : System.IDisposable
     {
         public HostExecutionContext() { }
 
@@ -214,7 +214,7 @@ namespace System.Threading
         public virtual void Dispose(bool disposing) { }
     }
 
-    public partial class HostExecutionContextManager
+    partial public class HostExecutionContextManager
     {
         public HostExecutionContextManager() { }
 
@@ -233,7 +233,7 @@ namespace System.Threading
         }
     }
 
-    public partial struct LockCookie : System.IEquatable<System.Threading.LockCookie>
+    partial public struct LockCookie : System.IEquatable<System.Threading.LockCookie>
     {
         private int _dummyPrimitive;
 
@@ -265,7 +265,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class ReaderWriterLock
+    partial public sealed class ReaderWriterLock
         : System.Runtime.ConstrainedExecution.CriticalFinalizerObject
     {
         public ReaderWriterLock() { }
@@ -329,7 +329,7 @@ namespace System.Threading
 
 namespace System.Threading
 {
-    public partial class AbandonedMutexException : System.SystemException
+    partial public class AbandonedMutexException : System.SystemException
     {
         public AbandonedMutexException() { }
 
@@ -367,7 +367,7 @@ namespace System.Threading
         }
     }
 
-    public partial struct AsyncFlowControl : System.IEquatable<AsyncFlowControl>, System.IDisposable
+    partial public struct AsyncFlowControl : System.IEquatable<AsyncFlowControl>, System.IDisposable
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -410,7 +410,7 @@ namespace System.Threading
         public void Undo() { }
     }
 
-    public readonly partial struct AsyncLocalValueChangedArgs<T>
+    partial public readonly struct AsyncLocalValueChangedArgs<T>
     {
         private readonly T _PreviousValue_k__BackingField;
         private readonly T _CurrentValue_k__BackingField;
@@ -429,7 +429,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class AsyncLocal<T>
+    partial public sealed class AsyncLocal<T>
     {
         public AsyncLocal() { }
 
@@ -445,7 +445,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class AutoResetEvent : System.Threading.EventWaitHandle
+    partial public sealed class AutoResetEvent : System.Threading.EventWaitHandle
     {
         public AutoResetEvent(bool initialState)
             : base(default(bool), default(System.Threading.EventResetMode)) { }
@@ -459,7 +459,7 @@ namespace System.Threading
         ManualReset = 1,
     }
 
-    public partial class EventWaitHandle : System.Threading.WaitHandle
+    partial public class EventWaitHandle : System.Threading.WaitHandle
     {
         public EventWaitHandle(bool initialState, System.Threading.EventResetMode mode) { }
 
@@ -506,7 +506,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class ExecutionContext
+    partial public sealed class ExecutionContext
         : System.IDisposable,
             System.Runtime.Serialization.ISerializable
     {
@@ -550,7 +550,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class Interlocked
+    partial public static class Interlocked
     {
         public static int Add(ref int location1, int value)
         {
@@ -809,7 +809,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class LazyInitializer
+    partial public static class LazyInitializer
     {
         public static T EnsureInitialized<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -877,7 +877,7 @@ namespace System.Threading
         }
     }
 
-    public partial class LockRecursionException : System.Exception
+    partial public class LockRecursionException : System.Exception
     {
         public LockRecursionException() { }
 
@@ -897,13 +897,13 @@ namespace System.Threading
         SupportsRecursion = 1,
     }
 
-    public sealed partial class ManualResetEvent : System.Threading.EventWaitHandle
+    partial public sealed class ManualResetEvent : System.Threading.EventWaitHandle
     {
         public ManualResetEvent(bool initialState)
             : base(default(bool), default(System.Threading.EventResetMode)) { }
     }
 
-    public partial class ManualResetEventSlim : System.IDisposable
+    partial public class ManualResetEventSlim : System.IDisposable
     {
         public ManualResetEventSlim() { }
 
@@ -969,7 +969,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class Monitor
+    partial public static class Monitor
     {
         public static long LockContentionCount
         {
@@ -1043,7 +1043,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class Mutex : System.Threading.WaitHandle
+    partial public sealed class Mutex : System.Threading.WaitHandle
     {
         public Mutex() { }
 
@@ -1073,7 +1073,7 @@ namespace System.Threading
         }
     }
 
-    public partial class ReaderWriterLockSlim : System.IDisposable
+    partial public class ReaderWriterLockSlim : System.IDisposable
     {
         public ReaderWriterLockSlim() { }
 
@@ -1169,7 +1169,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class Semaphore : System.Threading.WaitHandle
+    partial public sealed class Semaphore : System.Threading.WaitHandle
     {
         public Semaphore(int initialCount, int maximumCount) { }
 
@@ -1207,7 +1207,7 @@ namespace System.Threading
         }
     }
 
-    public partial class SemaphoreFullException : System.SystemException
+    partial public class SemaphoreFullException : System.SystemException
     {
         public SemaphoreFullException() { }
 
@@ -1221,7 +1221,7 @@ namespace System.Threading
         public SemaphoreFullException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class SemaphoreSlim : System.IDisposable
+    partial public class SemaphoreSlim : System.IDisposable
     {
         public SemaphoreSlim(int initialCount) { }
 
@@ -1327,7 +1327,7 @@ namespace System.Threading
 
     public delegate void SendOrPostCallback(object? state);
 
-    public partial struct SpinLock
+    partial public struct SpinLock
     {
         private int _dummyPrimitive;
 
@@ -1362,7 +1362,7 @@ namespace System.Threading
         public void TryEnter(System.TimeSpan timeout, ref bool lockTaken) { }
     }
 
-    public partial struct SpinWait
+    partial public struct SpinWait
     {
         private int _dummyPrimitive;
         public int Count
@@ -1393,7 +1393,7 @@ namespace System.Threading
         }
     }
 
-    public partial class SynchronizationContext
+    partial public class SynchronizationContext
     {
         public SynchronizationContext() { }
 
@@ -1443,7 +1443,7 @@ namespace System.Threading
         }
     }
 
-    public partial class SynchronizationLockException : System.SystemException
+    partial public class SynchronizationLockException : System.SystemException
     {
         public SynchronizationLockException() { }
 
@@ -1457,7 +1457,7 @@ namespace System.Threading
         public SynchronizationLockException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class ThreadLocal<T> : System.IDisposable
+    partial public class ThreadLocal<T> : System.IDisposable
     {
         public ThreadLocal() { }
 
@@ -1495,7 +1495,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class Volatile
+    partial public static class Volatile
     {
         public static bool Read(ref bool location)
         {
@@ -1614,7 +1614,7 @@ namespace System.Threading
             where T : class? { }
     }
 
-    public partial class WaitHandleCannotBeOpenedException : System.ApplicationException
+    partial public class WaitHandleCannotBeOpenedException : System.ApplicationException
     {
         public WaitHandleCannotBeOpenedException() { }
 

@@ -5,20 +5,20 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetIPSocketAddressSizes")]
         [SuppressGCTransition]
-        internal static unsafe partial Error GetIPSocketAddressSizes(
+        partial internal static unsafe Error GetIPSocketAddressSizes(
             int* ipv4SocketAddressSize,
             int* ipv6SocketAddressSize
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetAddressFamily")]
         [SuppressGCTransition]
-        internal static unsafe partial Error GetAddressFamily(
+        partial internal static unsafe Error GetAddressFamily(
             byte* socketAddress,
             int socketAddressLen,
             int* addressFamily
@@ -26,7 +26,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetAddressFamily")]
         [SuppressGCTransition]
-        internal static unsafe partial Error SetAddressFamily(
+        partial internal static unsafe Error SetAddressFamily(
             byte* socketAddress,
             int socketAddressLen,
             int addressFamily
@@ -34,7 +34,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetPort")]
         [SuppressGCTransition]
-        internal static unsafe partial Error GetPort(
+        partial internal static unsafe Error GetPort(
             byte* socketAddress,
             int socketAddressLen,
             ushort* port
@@ -42,7 +42,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetPort")]
         [SuppressGCTransition]
-        internal static unsafe partial Error SetPort(
+        partial internal static unsafe Error SetPort(
             byte* socketAddress,
             int socketAddressLen,
             ushort port
@@ -50,7 +50,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetIPv4Address")]
         [SuppressGCTransition]
-        internal static unsafe partial Error GetIPv4Address(
+        partial internal static unsafe Error GetIPv4Address(
             byte* socketAddress,
             int socketAddressLen,
             uint* address
@@ -58,14 +58,14 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetIPv4Address")]
         [SuppressGCTransition]
-        internal static unsafe partial Error SetIPv4Address(
+        partial internal static unsafe Error SetIPv4Address(
             byte* socketAddress,
             int socketAddressLen,
             uint address
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetIPv6Address")]
-        internal static unsafe partial Error GetIPv6Address(
+        partial internal static unsafe Error GetIPv6Address(
             byte* socketAddress,
             int socketAddressLen,
             byte* address,
@@ -74,7 +74,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetIPv6Address")]
-        internal static unsafe partial Error SetIPv6Address(
+        partial internal static unsafe Error SetIPv6Address(
             byte* socketAddress,
             int socketAddressLen,
             byte* address,

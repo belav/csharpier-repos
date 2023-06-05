@@ -98,5 +98,5 @@ namespace System.Net.Http.Json.Functional.Tests
     internal class EnsureDefaultOptions { }
 
     [JsonSerializable(typeof(Person))]
-    internal sealed partial class JsonContext : JsonSerializerContext { }
+    partial internal sealed class JsonContext : JsonSerializerContext { }
 }

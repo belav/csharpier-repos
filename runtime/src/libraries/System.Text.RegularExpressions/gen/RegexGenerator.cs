@@ -18,7 +18,7 @@ namespace System.Text.RegularExpressions.Generator
 {
     /// <summary>Generates C# source code to implement regular expressions.</summary>
     [Generator(LanguageNames.CSharp)]
-    public partial class RegexGenerator : IIncrementalGenerator
+    partial public class RegexGenerator : IIncrementalGenerator
     {
         /// <summary>Name of the type emitted to contain helpers used by the generated code.</summary>
         private const string HelpersTypeName = "Utilities";

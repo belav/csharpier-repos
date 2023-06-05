@@ -10,7 +10,7 @@ namespace System.Runtime.Serialization.Configuration
     using System.Security.Permissions;
     using System.Security;
 
-    public sealed partial class DataContractSerializerSection : ConfigurationSection
+    partial public sealed class DataContractSerializerSection : ConfigurationSection
     {
         public DataContractSerializerSection()
             : base() { }

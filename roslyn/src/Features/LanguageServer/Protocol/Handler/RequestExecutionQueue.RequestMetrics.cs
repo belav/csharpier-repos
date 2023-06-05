@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
-    internal partial class RequestExecutionQueue
+    partial internal class RequestExecutionQueue
     {
         internal class RequestMetrics
         {

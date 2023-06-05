@@ -158,7 +158,7 @@ class UTF8StructMarshalling
 
     unsafe struct UnmanagedStruct
     {
-        public fixed byte psz[8];
+        fixed public byte psz[8];
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -199,7 +199,7 @@ class UTF8StructMarshalling
         }
     }
 
-    unsafe static void CompareWithUTF8Encoding()
+    static unsafe void CompareWithUTF8Encoding()
     {
         // Compare results with UTF8Encoding
         UnmanagedStruct ums;

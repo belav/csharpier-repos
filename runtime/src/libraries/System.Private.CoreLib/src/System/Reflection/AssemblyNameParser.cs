@@ -10,10 +10,11 @@ using System.Text;
 
 namespace System.Reflection
 {
+    ref
     //
     // Parses an assembly name.
     //
-    internal ref struct AssemblyNameParser
+    internal struct AssemblyNameParser
     {
         public readonly struct AssemblyNameParts
         {

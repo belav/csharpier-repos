@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Navigation
 {
-    internal static partial class NavigableItemFactory
+    partial internal static class NavigableItemFactory
     {
         public static INavigableItem GetItemFromSymbolLocation(
             Solution solution,

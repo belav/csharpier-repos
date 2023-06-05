@@ -21,7 +21,7 @@ using System.Text.RegularExpressions;
 
 namespace BasicEventSourceTests
 {
-    public partial class TestsManifestGeneration
+    partial public class TestsManifestGeneration
     {
         /// <summary>
         /// EventSource would fail when an EventSource was named "EventSource".

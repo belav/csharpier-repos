@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class FunctionTypeSymbol
+    partial internal sealed class FunctionTypeSymbol
     {
         /// <summary>
         /// A lazily calculated instance of <see cref="FunctionTypeSymbol"/> that represents

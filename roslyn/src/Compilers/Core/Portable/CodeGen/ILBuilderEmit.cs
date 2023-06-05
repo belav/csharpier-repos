@@ -12,7 +12,7 @@ using static System.Linq.ImmutableArrayExtensions;
 
 namespace Microsoft.CodeAnalysis.CodeGen
 {
-    internal partial class ILBuilder
+    partial internal class ILBuilder
     {
         internal void AdjustStack(int stackAdjustment)
         {

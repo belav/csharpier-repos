@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Drawing.Tests
 {
-    public partial class Graphics_GetContextTests
+    partial public class Graphics_GetContextTests
     {
         [ConditionalFact(Helpers.IsWindows)]
         public void GetContextInfo_New_DefaultGraphics()

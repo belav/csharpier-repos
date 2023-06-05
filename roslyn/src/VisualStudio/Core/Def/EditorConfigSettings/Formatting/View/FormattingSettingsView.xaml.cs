@@ -13,10 +13,11 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formatting.View
 {
+    partial
     /// <summary>
     /// Interaction logic for FormattingSettingsView.xaml
     /// </summary>
-    internal partial class FormattingSettingsView : UserControl, ISettingsEditorView
+    internal class FormattingSettingsView : UserControl, ISettingsEditorView
     {
         private readonly IWpfSettingsEditorViewModel _viewModel;
 

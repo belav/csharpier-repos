@@ -21,7 +21,7 @@ namespace System.Data.Objects.ELinq
     using System.Linq.Expressions;
     using System.Reflection;
 
-    internal sealed partial class ExpressionConverter
+    partial internal sealed class ExpressionConverter
     {
         // Base class supporting the translation of LINQ node type(s) given a LINQ expression
         // of that type, and the "parent" translation context (the ExpressionConverter processor)
@@ -180,7 +180,7 @@ namespace System.Data.Objects.ELinq
             }
         }
 
-        private sealed partial class MemberAccessTranslator : TypedTranslator<MemberExpression>
+        partial private sealed class MemberAccessTranslator : TypedTranslator<MemberExpression>
         {
             internal MemberAccessTranslator()
                 : base(ExpressionType.MemberAccess) { }

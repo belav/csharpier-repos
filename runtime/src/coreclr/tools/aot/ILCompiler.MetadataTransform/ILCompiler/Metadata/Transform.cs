@@ -6,13 +6,14 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Metadata
 {
+    partial
     /// <summary>
     /// Provides implementation of the <see cref="MetadataTransform"/> contract.
     /// This class is generic over the policy to make policy lookups cheap (policy being
     /// a struct means all the interface calls end up being constrained over the type
     /// and therefore fully inlineable).
     /// </summary>
-    internal sealed partial class Transform<TPolicy> : MetadataTransform
+    internal sealed class Transform<TPolicy> : MetadataTransform
         where TPolicy : struct, IMetadataPolicy
     {
         private TPolicy _policy;

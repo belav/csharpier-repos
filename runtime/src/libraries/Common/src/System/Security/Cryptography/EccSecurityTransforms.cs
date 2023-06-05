@@ -10,7 +10,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class EccSecurityTransforms : IDisposable
+    partial internal sealed class EccSecurityTransforms : IDisposable
     {
         private SecKeyPair? _keys;
         private bool _disposed;

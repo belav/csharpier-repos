@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public partial class StandardBindingReliableSessionElement : ConfigurationElement
+    partial public class StandardBindingReliableSessionElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

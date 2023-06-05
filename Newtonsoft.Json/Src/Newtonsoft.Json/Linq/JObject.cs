@@ -47,13 +47,14 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Linq
 {
+    partial
     /// <summary>
     /// Represents a JSON object.
     /// </summary>
     /// <example>
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
     /// </example>
-    public partial class JObject
+    public class JObject
         : JContainer,
             IDictionary<string, JToken?>,
             INotifyPropertyChanged
@@ -439,7 +440,7 @@ namespace Newtonsoft.Json.Linq
         /// <exception cref="JsonReaderException">
         ///     <paramref name="reader"/> is not valid JSON.
         /// </exception>
-        public new static JObject Load(JsonReader reader)
+        public static new JObject Load(JsonReader reader)
         {
             return Load(reader, null);
         }
@@ -454,7 +455,7 @@ namespace Newtonsoft.Json.Linq
         /// <exception cref="JsonReaderException">
         ///     <paramref name="reader"/> is not valid JSON.
         /// </exception>
-        public new static JObject Load(JsonReader reader, JsonLoadSettings? settings)
+        public static new JObject Load(JsonReader reader, JsonLoadSettings? settings)
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
 
@@ -501,7 +502,7 @@ namespace Newtonsoft.Json.Linq
         /// <example>
         ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
         /// </example>
-        public new static JObject Parse(string json)
+        public static new JObject Parse(string json)
         {
             return Parse(json, null);
         }
@@ -519,7 +520,7 @@ namespace Newtonsoft.Json.Linq
         /// <example>
         ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
         /// </example>
-        public new static JObject Parse(string json, JsonLoadSettings? settings)
+        public static new JObject Parse(string json, JsonLoadSettings? settings)
         {
             using (JsonReader reader = new JsonTextReader(new StringReader(json)))
             {
@@ -539,7 +540,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="o">The object that will be used to create <see cref="JObject"/>.</param>
         /// <returns>A <see cref="JObject"/> with the values of the specified object.</returns>
-        public new static JObject FromObject(object o)
+        public static new JObject FromObject(object o)
         {
             return FromObject(o, JsonSerializer.CreateDefault());
         }
@@ -550,7 +551,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="o">The object that will be used to create <see cref="JObject"/>.</param>
         /// <param name="jsonSerializer">The <see cref="JsonSerializer"/> that will be used to read the object.</param>
         /// <returns>A <see cref="JObject"/> with the values of the specified object.</returns>
-        public new static JObject FromObject(object o, JsonSerializer jsonSerializer)
+        public static new JObject FromObject(object o, JsonSerializer jsonSerializer)
         {
             JToken token = FromObjectInternal(o, jsonSerializer);
 

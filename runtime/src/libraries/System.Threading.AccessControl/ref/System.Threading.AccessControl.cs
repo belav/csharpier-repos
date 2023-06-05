@@ -6,7 +6,7 @@
 
 namespace System.Security.AccessControl
 {
-    public sealed partial class EventWaitHandleAccessRule : System.Security.AccessControl.AccessRule
+    partial public sealed class EventWaitHandleAccessRule : System.Security.AccessControl.AccessRule
     {
         public EventWaitHandleAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -42,7 +42,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public sealed partial class EventWaitHandleAuditRule : System.Security.AccessControl.AuditRule
+    partial public sealed class EventWaitHandleAuditRule : System.Security.AccessControl.AuditRule
     {
         public EventWaitHandleAuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -76,7 +76,7 @@ namespace System.Security.AccessControl
         FullControl = 2031619,
     }
 
-    public sealed partial class EventWaitHandleSecurity
+    partial public sealed class EventWaitHandleSecurity
         : System.Security.AccessControl.NativeObjectSecurity
     {
         public EventWaitHandleSecurity()
@@ -158,7 +158,7 @@ namespace System.Security.AccessControl
         public void SetAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule rule) { }
     }
 
-    public sealed partial class MutexAccessRule : System.Security.AccessControl.AccessRule
+    partial public sealed class MutexAccessRule : System.Security.AccessControl.AccessRule
     {
         public MutexAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -194,7 +194,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public sealed partial class MutexAuditRule : System.Security.AccessControl.AuditRule
+    partial public sealed class MutexAuditRule : System.Security.AccessControl.AuditRule
     {
         public MutexAuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -228,7 +228,7 @@ namespace System.Security.AccessControl
         FullControl = 2031617,
     }
 
-    public sealed partial class MutexSecurity : System.Security.AccessControl.NativeObjectSecurity
+    partial public sealed class MutexSecurity : System.Security.AccessControl.NativeObjectSecurity
     {
         public MutexSecurity()
             : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
@@ -305,7 +305,7 @@ namespace System.Security.AccessControl
         public void SetAuditRule(System.Security.AccessControl.MutexAuditRule rule) { }
     }
 
-    public sealed partial class SemaphoreAccessRule : System.Security.AccessControl.AccessRule
+    partial public sealed class SemaphoreAccessRule : System.Security.AccessControl.AccessRule
     {
         public SemaphoreAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -341,7 +341,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public sealed partial class SemaphoreAuditRule : System.Security.AccessControl.AuditRule
+    partial public sealed class SemaphoreAuditRule : System.Security.AccessControl.AuditRule
     {
         public SemaphoreAuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -375,7 +375,7 @@ namespace System.Security.AccessControl
         FullControl = 2031619,
     }
 
-    public sealed partial class SemaphoreSecurity
+    partial public sealed class SemaphoreSecurity
         : System.Security.AccessControl.NativeObjectSecurity
     {
         public SemaphoreSecurity()

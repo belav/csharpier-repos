@@ -7,7 +7,7 @@ using System.Threading.Tasks.Dataflow.Internal;
 
 namespace System.Threading.Tasks.Dataflow
 {
-    public partial class TransformManyBlock<TInput, TOutput>
+    partial public class TransformManyBlock<TInput, TOutput>
     {
         /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function.</summary>
         /// <param name="transform">

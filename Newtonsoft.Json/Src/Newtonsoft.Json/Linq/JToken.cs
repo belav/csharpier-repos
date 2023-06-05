@@ -49,16 +49,16 @@ using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Linq
 {
+    partial
     /// <summary>
     /// Represents an abstract JSON token.
     /// </summary>
-    public abstract partial class JToken : IJEnumerable<JToken>, IJsonLineInfo
+    public abstract class JToken : IJEnumerable<JToken>, IJsonLineInfo
 #if HAVE_ICLONEABLE
             , ICloneable
 #endif
 #if HAVE_DYNAMIC
-            ,
-            IDynamicMetaObjectProvider
+            , IDynamicMetaObjectProvider
 #endif
     {
         private static JTokenEqualityComparer? _equalityComparer;

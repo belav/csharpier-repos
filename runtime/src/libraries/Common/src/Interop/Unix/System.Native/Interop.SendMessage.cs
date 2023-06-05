@@ -5,12 +5,12 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SendMessage")]
-        internal static unsafe partial Error SendMessage(
+        partial internal static unsafe Error SendMessage(
             SafeHandle socket,
             MessageHeader* messageHeader,
             SocketFlags flags,

@@ -6,7 +6,7 @@
 
 namespace System.Security.Cryptography
 {
-    public partial class AsnEncodedData
+    partial public class AsnEncodedData
     {
         protected AsnEncodedData() { }
 
@@ -46,7 +46,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class AsnEncodedDataCollection
+    partial public sealed class AsnEncodedDataCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -94,7 +94,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class AsnEncodedDataEnumerator : System.Collections.IEnumerator
+    partial public sealed class AsnEncodedDataEnumerator : System.Collections.IEnumerator
     {
         internal AsnEncodedDataEnumerator() { }
 
@@ -115,7 +115,7 @@ namespace System.Security.Cryptography
         public void Reset() { }
     }
 
-    public partial class FromBase64Transform
+    partial public class FromBase64Transform
         : System.IDisposable,
             System.Security.Cryptography.ICryptoTransform
     {
@@ -172,7 +172,7 @@ namespace System.Security.Cryptography
         DoNotIgnoreWhiteSpaces = 1,
     }
 
-    public sealed partial class Oid
+    partial public sealed class Oid
     {
         public Oid() { }
 
@@ -210,7 +210,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class OidCollection
+    partial public sealed class OidCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -257,7 +257,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class OidEnumerator : System.Collections.IEnumerator
+    partial public sealed class OidEnumerator : System.Collections.IEnumerator
     {
         internal OidEnumerator() { }
 
@@ -293,7 +293,7 @@ namespace System.Security.Cryptography
         KeyDerivationFunction = 10,
     }
 
-    public static partial class PemEncoding
+    partial public static class PemEncoding
     {
         public static System.Security.Cryptography.PemFields Find(System.ReadOnlySpan<char> pemData)
         {
@@ -329,7 +329,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public readonly partial struct PemFields
+    partial public readonly struct PemFields
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -351,7 +351,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public partial class ToBase64Transform
+    partial public class ToBase64Transform
         : System.IDisposable,
             System.Security.Cryptography.ICryptoTransform
     {

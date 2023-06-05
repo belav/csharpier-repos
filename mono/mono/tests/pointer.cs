@@ -7,7 +7,7 @@ public class Test
         return new IntPtr(value);
     }
 
-    unsafe public static int Main()
+    public static unsafe int Main()
     {
         int num = 0;
 

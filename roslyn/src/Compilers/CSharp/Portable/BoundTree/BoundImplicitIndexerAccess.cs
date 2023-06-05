@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundImplicitIndexerAccess
+    partial internal class BoundImplicitIndexerAccess
     {
         internal BoundImplicitIndexerAccess WithLengthOrCountAccess(
             BoundExpression lengthOrCountAccess
@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
         }
 
-        private partial void Validate()
+        partial private void Validate()
         {
             Debug.Assert(
                 LengthOrCountAccess

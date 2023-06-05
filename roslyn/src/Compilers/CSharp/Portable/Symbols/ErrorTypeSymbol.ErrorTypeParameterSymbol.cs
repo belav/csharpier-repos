@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class ErrorTypeSymbol
+    partial internal class ErrorTypeSymbol
     {
         protected sealed class ErrorTypeParameterSymbol : TypeParameterSymbol
         {

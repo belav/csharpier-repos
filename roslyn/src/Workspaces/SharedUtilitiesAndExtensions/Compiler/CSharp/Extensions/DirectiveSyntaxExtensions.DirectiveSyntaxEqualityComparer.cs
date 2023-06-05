@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal partial class DirectiveSyntaxExtensions
+    partial internal class DirectiveSyntaxExtensions
     {
         private class DirectiveSyntaxEqualityComparer : IEqualityComparer<DirectiveTriviaSyntax>
         {

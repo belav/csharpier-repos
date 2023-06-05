@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis
     /// May represent assembly definition or assembly reference identity.
     /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
-    public sealed partial class AssemblyIdentity : IEquatable<AssemblyIdentity>
+    partial public sealed class AssemblyIdentity : IEquatable<AssemblyIdentity>
     {
         // determines the binding model (how assembly references are matched to assembly definitions)
         private readonly AssemblyContentType _contentType;

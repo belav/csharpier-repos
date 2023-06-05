@@ -16,8 +16,9 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     // various factory methods. all these are just helper methods
-    internal partial class Checksum
+    internal class Checksum
     {
         private static readonly ObjectPool<IncrementalHash> s_incrementalHashPool =
             new(() => IncrementalHash.CreateHash(HashAlgorithmName.SHA256), size: 20);

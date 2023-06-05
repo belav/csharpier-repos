@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    internal sealed partial class HttpConnection
+    partial internal sealed class HttpConnection
     {
         private sealed class ChunkedEncodingReadStream : HttpContentReadStream
         {

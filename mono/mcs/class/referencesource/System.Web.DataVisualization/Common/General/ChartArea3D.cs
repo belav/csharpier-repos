@@ -506,12 +506,13 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion
     }
 
+    partial
     /// <summary>
     /// ChartArea3D class represents 3D chart area. It contains all the 3D
     /// scene settings and methods for drawing the 3D plotting area, and calculating
     /// the depth of chart elements.
     /// </summary>
-    public partial class ChartArea
+    public class ChartArea
     {
         #region Fields
 

@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Activation;
     using System.ServiceModel.Security;
 
-    public sealed partial class UserNameServiceElement : ConfigurationElement
+    partial public sealed class UserNameServiceElement : ConfigurationElement
     {
         public UserNameServiceElement() { }
 

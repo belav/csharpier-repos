@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         internal enum MM_MSG
         {
@@ -52,7 +52,7 @@ internal static partial class Interop
         /// <param name="fdwOpen">Flags for opening the device.</param>
         /// <returns>MMSYSERR</returns>
         [LibraryImport(Libraries.WinMM)]
-        internal static partial MMSYSERR waveOutOpen(
+        partial internal static MMSYSERR waveOutOpen(
             ref IntPtr phwo,
             int uDeviceID,
             byte[] pwfx,

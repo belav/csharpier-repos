@@ -18,12 +18,13 @@ namespace System.Linq.Expressions.Compiler
         void FreeLocal(LocalBuilder local);
     }
 
+    partial
     /// <summary>
     /// LambdaCompiler is responsible for compiling individual lambda (LambdaExpression). The complete tree may
     /// contain multiple lambdas, the Compiler class is responsible for compiling the whole tree, individual
     /// lambdas are then compiled by the LambdaCompiler.
     /// </summary>
-    internal sealed partial class LambdaCompiler : ILocalCache
+    internal sealed class LambdaCompiler : ILocalCache
     {
         private static int s_lambdaMethodIndex;
 

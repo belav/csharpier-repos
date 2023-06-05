@@ -613,7 +613,10 @@ public class Program
 
     // Validation
 
-    unsafe static bool ValidateResult_Vector64<T>(Vector64<T> result, T expectedElementValue)
+    static
+    // Validation
+
+    unsafe bool ValidateResult_Vector64<T>(Vector64<T> result, T expectedElementValue)
         where T : unmanaged
     {
         var succeeded = true;
@@ -629,7 +632,7 @@ public class Program
         return succeeded;
     }
 
-    unsafe static bool ValidateResult_Vector64<T>(
+    static unsafe bool ValidateResult_Vector64<T>(
         Vector64<T> result,
         Vector64<T> expectedElementValue
     )
@@ -648,7 +651,7 @@ public class Program
         return succeeded;
     }
 
-    unsafe static bool ValidateResult_Vector128<T>(Vector128<T> result, T expectedElementValue)
+    static unsafe bool ValidateResult_Vector128<T>(Vector128<T> result, T expectedElementValue)
         where T : unmanaged
     {
         var succeeded = true;
@@ -664,7 +667,7 @@ public class Program
         return succeeded;
     }
 
-    unsafe static bool ValidateResult_Vector128<T>(
+    static unsafe bool ValidateResult_Vector128<T>(
         Vector128<T> result,
         Vector128<T> expectedElementValue
     )

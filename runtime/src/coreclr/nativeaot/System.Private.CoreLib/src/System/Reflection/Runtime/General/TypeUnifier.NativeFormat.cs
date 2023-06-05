@@ -38,7 +38,7 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.General
 {
-    internal static partial class TypeUnifier
+    partial internal static class TypeUnifier
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RuntimeTypeDefinitionTypeInfo GetNamedType(
@@ -72,10 +72,11 @@ namespace System.Reflection.Runtime.General
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for type definitions (i.e. "Foo" and "Foo<>" but not "Foo<int>")
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class NativeFormatRuntimeNamedTypeInfo : RuntimeNamedTypeInfo
+    internal sealed class NativeFormatRuntimeNamedTypeInfo : RuntimeNamedTypeInfo
     {
         internal static NativeFormatRuntimeNamedTypeInfo GetRuntimeNamedTypeInfo(
             MetadataReader metadataReader,
@@ -117,10 +118,11 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         }
     }
 
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for generic parameters on types.
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes
+    internal sealed class NativeFormatRuntimeGenericParameterTypeInfoForTypes
         : NativeFormatRuntimeGenericParameterTypeInfo
     {
         //
@@ -168,10 +170,11 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         }
     }
 
+    partial
     //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for generic parameters on methods.
     //-----------------------------------------------------------------------------------------------------------
-    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForMethods
+    internal sealed class NativeFormatRuntimeGenericParameterTypeInfoForMethods
         : NativeFormatRuntimeGenericParameterTypeInfo,
             IKeyedItem<NativeFormatRuntimeGenericParameterTypeInfoForMethods.UnificationKey>
     {

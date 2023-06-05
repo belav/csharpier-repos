@@ -16,10 +16,11 @@ using PublicIndentStyle = Microsoft.CodeAnalysis.Formatting.FormattingOptions.In
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
+    partial
     /// <summary>
     /// Formatting options stored in editorconfig.
     /// </summary>
-    internal sealed partial class FormattingOptions2
+    internal sealed class FormattingOptions2
     {
         private const string PublicFeatureName = "FormattingOptions";
 

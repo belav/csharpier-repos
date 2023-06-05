@@ -6,10 +6,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Printing
 {
+    partial
     /// <summary>
     /// Controls how a document is printed.
     /// </summary>
-    public abstract partial class PrintController
+    public abstract class PrintController
     {
         /// <summary>
         /// Represents a SafeHandle for a Printer's Device Mode struct handle (DEVMODE)

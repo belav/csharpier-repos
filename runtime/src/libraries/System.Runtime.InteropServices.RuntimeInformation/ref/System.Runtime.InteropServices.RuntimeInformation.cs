@@ -16,7 +16,7 @@ namespace System.Runtime.InteropServices
         S390x = 5,
     }
 
-    public readonly partial struct OSPlatform
+    partial public readonly struct OSPlatform
         : System.IEquatable<System.Runtime.InteropServices.OSPlatform>
     {
         private readonly object _dummy;
@@ -82,7 +82,7 @@ namespace System.Runtime.InteropServices
         }
     }
 
-    public static partial class RuntimeInformation
+    partial public static class RuntimeInformation
     {
         public static string FrameworkDescription
         {

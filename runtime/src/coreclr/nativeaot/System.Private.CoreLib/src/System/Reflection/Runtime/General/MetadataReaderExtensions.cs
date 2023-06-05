@@ -16,7 +16,7 @@ namespace System.Reflection.Runtime.General
 {
     [ReflectionBlocked]
     [CLSCompliant(false)]
-    public static partial class MetadataReaderExtensions
+    partial public static class MetadataReaderExtensions
     {
         /// <summary>
         /// Convert raw token to a typed metadata handle.

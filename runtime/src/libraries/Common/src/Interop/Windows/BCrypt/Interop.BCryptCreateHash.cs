@@ -7,12 +7,12 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial NTSTATUS BCryptCreateHash(
+        partial internal static NTSTATUS BCryptCreateHash(
             SafeBCryptAlgorithmHandle hAlgorithm,
             out SafeBCryptHashHandle phHash,
             IntPtr pbHashObject,

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-internal partial class MarkupEndTagSyntax
+partial internal class MarkupEndTagSyntax
 {
     public bool IsMarkupTransition
     {

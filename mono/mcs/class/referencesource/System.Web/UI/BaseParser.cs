@@ -86,26 +86,26 @@ namespace System.Web.UI
         private Regex _tagRegex;
 
         // The 3.5 regex is used only when targeting 2.0/3.5 for backward compatibility (Dev10 bug 830783).
-        private readonly static Regex tagRegex35 = new TagRegex35();
+        private static readonly Regex tagRegex35 = new TagRegex35();
 
         // The 4.0 regex is used for web sites targeting 4.0 and above.
-        private readonly static Regex tagRegex40 = new TagRegex();
+        private static readonly Regex tagRegex40 = new TagRegex();
 
-        internal readonly static Regex directiveRegex = new DirectiveRegex();
-        internal readonly static Regex endtagRegex = new EndTagRegex();
-        internal readonly static Regex aspCodeRegex = new AspCodeRegex();
-        internal readonly static Regex aspExprRegex = new AspExprRegex();
-        internal readonly static Regex aspEncodedExprRegex = new AspEncodedExprRegex();
-        internal readonly static Regex databindExprRegex = new DatabindExprRegex();
-        internal readonly static Regex commentRegex = new CommentRegex();
-        internal readonly static Regex includeRegex = new IncludeRegex();
-        internal readonly static Regex textRegex = new TextRegex();
+        internal static readonly Regex directiveRegex = new DirectiveRegex();
+        internal static readonly Regex endtagRegex = new EndTagRegex();
+        internal static readonly Regex aspCodeRegex = new AspCodeRegex();
+        internal static readonly Regex aspExprRegex = new AspExprRegex();
+        internal static readonly Regex aspEncodedExprRegex = new AspEncodedExprRegex();
+        internal static readonly Regex databindExprRegex = new DatabindExprRegex();
+        internal static readonly Regex commentRegex = new CommentRegex();
+        internal static readonly Regex includeRegex = new IncludeRegex();
+        internal static readonly Regex textRegex = new TextRegex();
 
         // Regexes used in DetectSpecialServerTagError
-        internal readonly static Regex gtRegex = new GTRegex();
-        internal readonly static Regex ltRegex = new LTRegex();
-        internal readonly static Regex serverTagsRegex = new ServerTagsRegex();
-        internal readonly static Regex runatServerRegex = new RunatServerRegex();
+        internal static readonly Regex gtRegex = new GTRegex();
+        internal static readonly Regex ltRegex = new LTRegex();
+        internal static readonly Regex serverTagsRegex = new ServerTagsRegex();
+        internal static readonly Regex runatServerRegex = new RunatServerRegex();
 
         /*
          * Turns relative virtual path into absolute ones

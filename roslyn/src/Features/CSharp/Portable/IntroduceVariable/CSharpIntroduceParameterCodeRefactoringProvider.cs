@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         ),
         Shared
     ]
-    internal partial class CSharpIntroduceParameterCodeRefactoringProvider
+    partial internal class CSharpIntroduceParameterCodeRefactoringProvider
         : AbstractIntroduceParameterService<
             ExpressionSyntax,
             InvocationExpressionSyntax,

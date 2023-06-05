@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
-internal static partial class CorsLoggerExtensions
+partial internal static class CorsLoggerExtensions
 {
     [LoggerMessage(
         1,
@@ -13,5 +13,5 @@ internal static partial class CorsLoggerExtensions
         "Skipping the execution of current filter as its not the most effective filter implementing the policy {FilterPolicy}.",
         EventName = "NotMostEffectiveFilter"
     )]
-    public static partial void NotMostEffectiveFilter(this ILogger logger, Type filterPolicy);
+    partial public static void NotMostEffectiveFilter(this ILogger logger, Type filterPolicy);
 }

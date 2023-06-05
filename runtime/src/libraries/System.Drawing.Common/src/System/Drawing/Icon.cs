@@ -23,7 +23,7 @@ namespace System.Drawing
     [TypeForwardedFrom(
         "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     )]
-    public sealed partial class Icon : MarshalByRefObject, ICloneable, IDisposable, ISerializable
+    partial public sealed class Icon : MarshalByRefObject, ICloneable, IDisposable, ISerializable
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct DirectoryStringAsn
+    partial internal struct DirectoryStringAsn
     {
         internal string? TeletexString;
         internal string? PrintableString;

@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AndroidCrypto
+    partial internal static class AndroidCrypto
     {
         internal static bool EcDsaSign(
             ReadOnlySpan<byte> dgst,
@@ -25,7 +25,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_EcDsaSign")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool EcDsaSign(
+        partial private static bool EcDsaSign(
             ref byte dgst,
             int dlen,
             ref byte sig,
@@ -60,7 +60,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_EcDsaVerify"
         )]
-        private static partial int EcDsaVerify(
+        partial private static int EcDsaVerify(
             ref byte dgst,
             int dgst_len,
             ref byte sigbuf,
@@ -70,7 +70,7 @@ internal static partial class Interop
 
         // returns the maximum length of a DER encoded ECDSA signature created with this key.
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_EcDsaSize")]
-        private static partial int AndroidCryptoNative_EcDsaSize(SafeEcKeyHandle ecKey);
+        partial private static int AndroidCryptoNative_EcDsaSize(SafeEcKeyHandle ecKey);
 
         internal static int EcDsaSize(SafeEcKeyHandle ecKey)
         {

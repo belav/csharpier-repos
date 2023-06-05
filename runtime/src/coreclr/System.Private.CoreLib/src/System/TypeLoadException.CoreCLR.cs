@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class TypeLoadException : SystemException
+    partial public class TypeLoadException : SystemException
     {
         // This is called from inside the EE.
         private TypeLoadException(
@@ -49,7 +49,7 @@ namespace System
         }
 
         [LibraryImport(RuntimeHelpers.QCall)]
-        private static partial void GetTypeLoadExceptionMessage(
+        partial private static void GetTypeLoadExceptionMessage(
             int resourceId,
             StringHandleOnStack retString
         );

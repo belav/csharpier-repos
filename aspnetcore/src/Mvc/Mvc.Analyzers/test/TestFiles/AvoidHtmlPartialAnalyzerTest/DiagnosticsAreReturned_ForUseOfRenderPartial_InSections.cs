@@ -12,7 +12,7 @@ namespace AspNetCore
         : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
 #pragma warning disable 1998
-        public async override global::System.Threading.Tasks.Task ExecuteAsync()
+        public override async global::System.Threading.Tasks.Task ExecuteAsync()
         {
             BeginContext(0, 25, true);
             DefineSection(

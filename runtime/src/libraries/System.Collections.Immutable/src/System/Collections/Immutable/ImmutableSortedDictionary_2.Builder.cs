@@ -7,10 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableSortedDictionary{TKey, TValue}.Builder"/> class.
     /// </content>
-    public sealed partial class ImmutableSortedDictionary<TKey, TValue>
+    public sealed class ImmutableSortedDictionary<TKey, TValue>
         where TKey : notnull
     {
         /// <summary>

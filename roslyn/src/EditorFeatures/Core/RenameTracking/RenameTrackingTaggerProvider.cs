@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
     [ContentType(ContentTypeNames.RoslynContentType)]
     [ContentType(ContentTypeNames.XamlContentType)]
     [TextViewRole(PredefinedTextViewRoles.Editable)]
-    internal sealed partial class RenameTrackingTaggerProvider : ITaggerProvider
+    partial internal sealed class RenameTrackingTaggerProvider : ITaggerProvider
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IAsynchronousOperationListener _asyncListener;

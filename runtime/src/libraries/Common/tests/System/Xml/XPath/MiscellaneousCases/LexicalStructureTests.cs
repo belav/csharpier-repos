@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests
 {
+    partial
     /// <summary>
     /// Lexical Structure
     /// </summary>
-    public static partial class LexicalStructureTests
+    public static class LexicalStructureTests
     {
         /// <summary>
         /// Expression with intervening whitespace after node type. If the character following an NCName (possibly after intervening ExprWhitespace) is (, then the token must be recognized as a NodeType or a FunctionName

@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         internal const int SEEK_READ = 0x2;
         internal const int FORWARDS_READ = 0x4;
@@ -14,7 +14,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Advapi32, EntryPoint = "ReadEventLogW", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool ReadEventLog(
+        partial public static bool ReadEventLog(
             SafeEventLogReadHandle hEventLog,
             int dwReadFlags,
             int dwRecordOffset,

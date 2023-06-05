@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.Host
 {
+    partial
     /// <summary>
     /// This service will implicitly cache previous Compilations used by each supported Workspace implementation.
     /// The number of Compilations cached is determined by <see cref="ImplicitCacheSize"/>.  For now, we'll only
@@ -19,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Host
     /// cache is likely to outweigh the benefit (for example, in Misc File Workspace cases, we can end up holding
     /// onto a lot of memory even after a file is closed).  We can opt in other kinds of Workspaces as needed.
     /// </summary>
-    internal partial class ProjectCacheService : IProjectCacheHostService
+    internal class ProjectCacheService : IProjectCacheHostService
     {
         internal const int ImplicitCacheSize = 3;
 

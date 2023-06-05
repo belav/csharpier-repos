@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.Security.Cryptography.X509Certificates;
     using System.IdentityModel.Selectors;
 
-    public sealed partial class X509ServiceCertificateAuthenticationElement : ConfigurationElement
+    partial public sealed class X509ServiceCertificateAuthenticationElement : ConfigurationElement
     {
         public X509ServiceCertificateAuthenticationElement() { }
 

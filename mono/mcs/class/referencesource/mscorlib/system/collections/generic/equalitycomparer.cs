@@ -551,7 +551,7 @@ namespace System.Collections.Generic
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        internal unsafe override int IndexOf(byte[] array, byte value, int startIndex, int count)
+        internal override unsafe int IndexOf(byte[] array, byte value, int startIndex, int count)
         {
             if (array == null)
                 throw new ArgumentNullException("array");

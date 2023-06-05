@@ -7,7 +7,7 @@ using System.Net.Http.QPack;
 
 namespace System.Net.Http
 {
-    public partial class HttpMethod : IEquatable<HttpMethod>
+    partial public class HttpMethod : IEquatable<HttpMethod>
     {
         private readonly string _method;
         private readonly int? _http3Index;

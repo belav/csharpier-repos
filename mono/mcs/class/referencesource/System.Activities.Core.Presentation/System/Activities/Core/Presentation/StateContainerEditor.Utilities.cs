@@ -366,7 +366,7 @@ namespace System.Activities.Core.Presentation
             return modelItem;
         }
 
-        static internal ConnectionPoint GetClosestConnectionPoint(
+        internal static ConnectionPoint GetClosestConnectionPoint(
             ConnectionPoint srcConnPoint,
             List<ConnectionPoint> destConnPoints,
             out double minDist

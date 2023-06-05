@@ -5,7 +5,7 @@ using System.Diagnostics.Tracing;
 
 namespace System.Net.Http
 {
-    internal sealed partial class HttpTelemetry
+    partial internal sealed class HttpTelemetry
     {
 #pragma warning disable CA1822, IDE0060
         public void Http11RequestLeftQueue(double timeOnQueueMilliseconds) { }

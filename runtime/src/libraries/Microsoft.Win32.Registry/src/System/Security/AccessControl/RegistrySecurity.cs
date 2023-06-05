@@ -129,7 +129,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public sealed partial class RegistrySecurity : NativeObjectSecurity
+    partial public sealed class RegistrySecurity : NativeObjectSecurity
     {
         public RegistrySecurity()
             : base(true, ResourceType.RegistryKey) { }

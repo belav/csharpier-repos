@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
-        internal static partial class AcceptOptions
+        partial internal static class AcceptOptions
         {
             internal const int ACCEPT_POWEREVENT = 0x00000040;
             internal const int ACCEPT_PAUSE_CONTINUE = 0x00000002;
@@ -17,7 +17,7 @@ internal static partial class Interop
             internal const int ACCEPT_STOP = 0x00000001;
         }
 
-        internal static partial class ControlOptions
+        partial internal static class ControlOptions
         {
             internal const int CONTROL_CONTINUE = 0x00000003;
             internal const int CONTROL_INTERROGATE = 0x00000004;
@@ -28,14 +28,14 @@ internal static partial class Interop
             internal const int CONTROL_STOP = 0x00000001;
         }
 
-        internal static partial class ServiceConfigOptions
+        partial internal static class ServiceConfigOptions
         {
             internal const int SERVICE_CONFIG_DESCRIPTION = 0x00000001;
             internal const int SERVICE_CONFIG_FAILURE_ACTIONS = 0x00000002;
             internal const int SERVICE_CONFIG_DELAYED_AUTO_START_INFO = 0x00000003;
         }
 
-        internal static partial class ServiceOptions
+        partial internal static class ServiceOptions
         {
             internal const int SERVICE_QUERY_CONFIG = 0x0001;
             internal const int SERVICE_CHANGE_CONFIG = 0x0002;
@@ -63,7 +63,7 @@ internal static partial class Interop
             internal const int STANDARD_RIGHTS_REQUIRED = 0x000F0000;
         }
 
-        internal static partial class ServiceTypeOptions
+        partial internal static class ServiceTypeOptions
         {
             internal const int SERVICE_KERNEL_DRIVER = 0x00000001;
             internal const int SERVICE_FILE_SYSTEM_DRIVER = 0x00000002;
@@ -82,7 +82,7 @@ internal static partial class Interop
             internal const int SERVICE_INTERACTIVE_PROCESS = 0x00000100;
         }
 
-        internal static partial class ServiceAccessOptions
+        partial internal static class ServiceAccessOptions
         {
             internal const int ACCESS_TYPE_CHANGE_CONFIG = 0x0002;
             internal const int ACCESS_TYPE_ENUMERATE_DEPENDENTS = 0x0008;
@@ -106,7 +106,7 @@ internal static partial class Interop
                 | ACCESS_TYPE_USER_DEFINED_CONTROL;
         }
 
-        internal static partial class ServiceStartModes
+        partial internal static class ServiceStartModes
         {
             internal const int START_TYPE_BOOT = 0x00000000;
             internal const int START_TYPE_SYSTEM = 0x00000001;
@@ -115,21 +115,21 @@ internal static partial class Interop
             internal const int START_TYPE_DISABLED = 0x00000004;
         }
 
-        internal static partial class ServiceState
+        partial internal static class ServiceState
         {
             internal const int SERVICE_ACTIVE = 1;
             internal const int SERVICE_INACTIVE = 2;
             internal const int SERVICE_STATE_ALL = SERVICE_ACTIVE | SERVICE_INACTIVE;
         }
 
-        internal static partial class StatusOptions
+        partial internal static class StatusOptions
         {
             internal const int STATUS_ACTIVE = 0x00000001;
             internal const int STATUS_INACTIVE = 0x00000002;
             internal const int STATUS_ALL = STATUS_ACTIVE | STATUS_INACTIVE;
         }
 
-        internal static partial class ServiceControlStatus
+        partial internal static class ServiceControlStatus
         {
             internal const int STATE_CONTINUE_PENDING = 0x00000005;
             internal const int STATE_PAUSED = 0x00000007;
@@ -141,7 +141,7 @@ internal static partial class Interop
             internal const int ERROR_EXCEPTION_IN_SERVICE = 0x00000428;
         }
 
-        internal static partial class ServiceStartErrorModes
+        partial internal static class ServiceStartErrorModes
         {
             internal const int ERROR_CONTROL_CRITICAL = 0x00000003;
             internal const int ERROR_CONTROL_IGNORE = 0x00000000;
@@ -149,7 +149,7 @@ internal static partial class Interop
             internal const int ERROR_CONTROL_SEVERE = 0x00000002;
         }
 
-        internal static partial class ServiceControllerOptions
+        partial internal static class ServiceControllerOptions
         {
             internal const int SC_ENUM_PROCESS_INFO = 0;
             internal const int SC_MANAGER_CONNECT = 0x0001;
@@ -168,7 +168,7 @@ internal static partial class Interop
                 | SC_MANAGER_MODIFY_BOOT_CONFIG;
         }
 
-        internal static partial class PowerBroadcastStatus
+        partial internal static class PowerBroadcastStatus
         {
             internal const int PBT_APMBATTERYLOW = 0x0009;
             internal const int PBT_APMOEMEVENT = 0x000B;
@@ -181,7 +181,7 @@ internal static partial class Interop
             internal const int PBT_APMSUSPEND = 0x0004;
         }
 
-        internal static partial class SessionStateChange
+        partial internal static class SessionStateChange
         {
             internal const int WTS_CONSOLE_CONNECT = 0x1;
             internal const int WTS_CONSOLE_DISCONNECT = 0x2;

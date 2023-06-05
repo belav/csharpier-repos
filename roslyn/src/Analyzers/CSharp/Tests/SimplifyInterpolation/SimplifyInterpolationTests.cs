@@ -18,7 +18,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyInterpolation)]
-    public partial class SimplifyInterpolationTests
+    partial public class SimplifyInterpolationTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyInterpolationTests(ITestOutputHelper logger)

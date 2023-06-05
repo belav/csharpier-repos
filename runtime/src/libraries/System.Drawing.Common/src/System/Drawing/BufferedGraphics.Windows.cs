@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {
-    public sealed partial class BufferedGraphics
+    partial public sealed class BufferedGraphics
     {
         private Graphics _bufferedGraphicsSurface;
         private BufferedGraphicsContext _context;

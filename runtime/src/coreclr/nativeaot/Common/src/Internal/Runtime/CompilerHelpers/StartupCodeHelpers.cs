@@ -10,7 +10,7 @@ using Debug = Internal.Runtime.CompilerHelpers.StartupDebug;
 
 namespace Internal.Runtime.CompilerHelpers
 {
-    public static partial class StartupCodeHelpers
+    partial public static class StartupCodeHelpers
     {
         /// <summary>
         /// Table of logical modules. Only the first s_moduleCount elements of the array are in use.

@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Threading
 {
-    internal static partial class WaitSubsystem
+    partial internal static class WaitSubsystem
     {
         /// <summary>
         /// Contains thread-specific information for the wait subsystem. There is one instance per thread that is registered

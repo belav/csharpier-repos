@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlSqlBinaryReader : XmlReader, IXmlNamespaceResolver
+    partial internal sealed class XmlSqlBinaryReader : XmlReader, IXmlNamespaceResolver
     {
         public override Task<string> GetValueAsync()
         {

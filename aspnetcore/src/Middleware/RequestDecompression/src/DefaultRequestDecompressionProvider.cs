@@ -9,8 +9,9 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
+partial
 /// <inheritdoc />
-internal sealed partial class DefaultRequestDecompressionProvider : IRequestDecompressionProvider
+internal sealed class DefaultRequestDecompressionProvider : IRequestDecompressionProvider
 {
     private readonly ILogger _logger;
     private readonly IDictionary<string, IDecompressionProvider> _providers;
@@ -66,7 +67,7 @@ internal sealed partial class DefaultRequestDecompressionProvider : IRequestDeco
         return null;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -74,7 +75,7 @@ internal sealed partial class DefaultRequestDecompressionProvider : IRequestDeco
             "The Content-Encoding header is empty or not specified. Skipping request decompression.",
             EventName = "NoContentEncoding"
         )]
-        public static partial void NoContentEncoding(ILogger logger);
+        partial public static void NoContentEncoding(ILogger logger);
 
         [LoggerMessage(
             2,
@@ -82,7 +83,7 @@ internal sealed partial class DefaultRequestDecompressionProvider : IRequestDeco
             "Request decompression is not supported for multiple Content-Encodings.",
             EventName = "MultipleContentEncodingsSpecified"
         )]
-        public static partial void MultipleContentEncodingsSpecified(ILogger logger);
+        partial public static void MultipleContentEncodingsSpecified(ILogger logger);
 
         [LoggerMessage(
             3,
@@ -90,7 +91,7 @@ internal sealed partial class DefaultRequestDecompressionProvider : IRequestDeco
             "No matching request decompression provider found.",
             EventName = "NoDecompressionProvider"
         )]
-        public static partial void NoDecompressionProvider(ILogger logger);
+        partial public static void NoDecompressionProvider(ILogger logger);
 
         public static void DecompressingWith(ILogger logger, string contentEncoding)
         {
@@ -107,6 +108,6 @@ internal sealed partial class DefaultRequestDecompressionProvider : IRequestDeco
             EventName = "DecompressingWith",
             SkipEnabledCheck = true
         )]
-        private static partial void DecompressingWithCore(ILogger logger, string contentEncoding);
+        partial private static void DecompressingWithCore(ILogger logger, string contentEncoding);
     }
 }

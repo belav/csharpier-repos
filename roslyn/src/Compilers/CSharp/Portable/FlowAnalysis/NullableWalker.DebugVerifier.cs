@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class NullableWalker
+    partial internal sealed class NullableWalker
     {
 #if DEBUG
         /// <summary>

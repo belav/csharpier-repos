@@ -1,6 +1,6 @@
 using System.Globalization;
 
-static partial class TraceSR
+partial static class TraceSR
 {
     public const string ThrowingException = "throwing exception.";
     public const string StringNullOrEmpty = "Argument string is null or empty.";

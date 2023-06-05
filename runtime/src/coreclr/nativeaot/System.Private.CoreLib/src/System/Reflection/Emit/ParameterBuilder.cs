@@ -3,7 +3,7 @@
 
 namespace System.Reflection.Emit
 {
-    public partial class ParameterBuilder
+    partial public class ParameterBuilder
     {
         internal ParameterBuilder()
         {

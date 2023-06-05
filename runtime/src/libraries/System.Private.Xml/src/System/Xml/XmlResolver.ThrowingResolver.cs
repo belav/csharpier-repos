@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    public abstract partial class XmlResolver
+    partial public abstract class XmlResolver
     {
         /// <summary>
         /// Gets an XML resolver which forbids entity resolution.

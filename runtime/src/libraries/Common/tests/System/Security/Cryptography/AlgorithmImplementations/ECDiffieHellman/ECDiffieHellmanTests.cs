@@ -10,7 +10,7 @@ using Test.Cryptography;
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public partial class ECDiffieHellmanTests : EccTestBase
+    partial public class ECDiffieHellmanTests : EccTestBase
     {
         private static List<object[]> s_everyKeysize;
         private static List<object[]> s_mismatchedKeysizes;

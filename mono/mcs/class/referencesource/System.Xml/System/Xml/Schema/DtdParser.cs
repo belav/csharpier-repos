@@ -22,7 +22,7 @@ using BufferBuilder = System.Text.StringBuilder;
 
 namespace System.Xml
 {
-    internal partial class DtdParser : IDtdParser
+    partial internal class DtdParser : IDtdParser
     {
         //
         // Private types

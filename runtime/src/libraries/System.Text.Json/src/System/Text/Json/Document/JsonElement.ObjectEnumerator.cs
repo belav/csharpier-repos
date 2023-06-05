@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.Text.Json
 {
-    public partial struct JsonElement
+    partial public struct JsonElement
     {
         /// <summary>
         ///   An enumerable and enumerator for the properties of a JSON object.

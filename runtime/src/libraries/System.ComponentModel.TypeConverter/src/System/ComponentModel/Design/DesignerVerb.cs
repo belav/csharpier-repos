@@ -6,10 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace System.ComponentModel.Design
 {
+    partial
     /// <summary>
     /// Represents a verb that can be executed by a component's designer.
     /// </summary>
-    public partial class DesignerVerb : MenuCommand
+    public class DesignerVerb : MenuCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Design.DesignerVerb'/> class.
@@ -29,7 +30,7 @@ namespace System.ComponentModel.Design
         }
 
         [GeneratedRegex(@"\(\&.\)")]
-        private static partial Regex GetParameterReplacementRegex();
+        partial private static Regex GetParameterReplacementRegex();
 
         /// <summary>
         /// Gets or sets the description of the menu item for the verb.

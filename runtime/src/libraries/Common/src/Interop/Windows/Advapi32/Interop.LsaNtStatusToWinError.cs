@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(Interop.Libraries.Advapi32, SetLastError = false)]
-        internal static partial uint LsaNtStatusToWinError(uint status);
+        partial internal static uint LsaNtStatusToWinError(uint status);
     }
 }

@@ -50,7 +50,7 @@ namespace System.Security.Policy
             public const string Nothing = "Nothing";
             public const string Everything = "Everything";
 
-            static public bool IsReserved(string name)
+            public static bool IsReserved(string name)
             {
                 switch (name)
                 {

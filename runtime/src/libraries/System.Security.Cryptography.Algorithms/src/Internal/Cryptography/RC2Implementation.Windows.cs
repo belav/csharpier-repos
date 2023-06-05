@@ -8,7 +8,7 @@ using Internal.NativeCrypto;
 
 namespace Internal.Cryptography
 {
-    internal sealed partial class RC2Implementation
+    partial internal sealed class RC2Implementation
     {
         private static UniversalCryptoTransform CreateTransformCore(
             CipherMode cipherMode,

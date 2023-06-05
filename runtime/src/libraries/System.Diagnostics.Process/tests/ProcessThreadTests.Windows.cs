@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    public partial class ProcessThreadTests : ProcessTestBase
+    partial public class ProcessThreadTests : ProcessTestBase
     {
         [PlatformSpecific(TestPlatforms.Windows)] // P/Invokes
         [Fact]

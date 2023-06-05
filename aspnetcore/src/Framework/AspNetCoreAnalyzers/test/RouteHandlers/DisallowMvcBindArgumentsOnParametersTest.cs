@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
-public partial class DisallowMvcBindArgumentsOnParametersTest
+partial public class DisallowMvcBindArgumentsOnParametersTest
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new RouteHandlerAnalyzer());
 

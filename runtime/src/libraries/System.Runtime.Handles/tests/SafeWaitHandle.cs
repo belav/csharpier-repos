@@ -5,7 +5,7 @@ using System;
 using Microsoft.Win32.SafeHandles;
 using Xunit;
 
-public partial class SafeWaitHandleTests
+partial public class SafeWaitHandleTests
 {
     [Fact]
     public static void SafeWaitHandle_invalid()

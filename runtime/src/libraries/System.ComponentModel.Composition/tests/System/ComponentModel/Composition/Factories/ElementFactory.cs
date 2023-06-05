@@ -5,7 +5,7 @@ using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.Factories
 {
-    internal static partial class ElementFactory
+    partial internal static class ElementFactory
     {
         public static ICompositionElement Create()
         {

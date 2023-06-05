@@ -42,12 +42,12 @@ namespace Mono.Tools
 {
     class CrlUpdater
     {
-        static private void Header()
+        private static void Header()
         {
             Console.WriteLine(new AssemblyInfo().ToString());
         }
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine("Usage: crlupdate [-m] [-v] [-f] [-?]");
             Console.WriteLine();

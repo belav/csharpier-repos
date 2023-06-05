@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Reflection.Metadata
 {
-    public sealed partial class MetadataReader
+    partial public sealed class MetadataReader
     {
         internal AssemblyName GetAssemblyName(
             StringHandle nameHandle,

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial struct SyntaxTriviaList
+    partial public struct SyntaxTriviaList
     {
         /// <summary>
         /// Reversed enumerable.

@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
 {
-    internal abstract partial class AbstractSeparatedSyntaxListWrapper<TListSyntax, TListItemSyntax>
+    partial internal abstract class AbstractSeparatedSyntaxListWrapper<TListSyntax, TListItemSyntax>
     {
         /// <summary>
         /// Class responsible for actually computing the entire set of code actions to offer the user.

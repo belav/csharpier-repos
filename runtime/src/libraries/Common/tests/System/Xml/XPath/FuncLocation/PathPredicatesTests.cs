@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths
 {
+    partial
     /// <summary>
     /// Location Paths - Predicates
     /// </summary>
-    public static partial class PredicatesTests
+    public static class PredicatesTests
     {
         /// <summary>
         /// Verify: Returned node is correct (document order).

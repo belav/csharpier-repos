@@ -25,7 +25,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 {
     [Export(typeof(CallHierarchyProvider))]
-    internal partial class CallHierarchyProvider
+    partial internal class CallHierarchyProvider
     {
         private readonly IAsynchronousOperationListener _asyncListener;
         public IGlyphService GlyphService { get; }

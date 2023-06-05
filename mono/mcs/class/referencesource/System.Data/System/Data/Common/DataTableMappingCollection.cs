@@ -458,7 +458,7 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)] // MDAC 69508
-        static public DataTableMapping GetTableMappingBySchemaAction(
+        public static DataTableMapping GetTableMappingBySchemaAction(
             DataTableMappingCollection tableMappings,
             string sourceTable,
             string dataSetTable,

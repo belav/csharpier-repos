@@ -17,7 +17,7 @@ namespace System.Data.OleDb
     using System.IO;
     using System.Runtime.Versioning;
 
-    sealed internal class OleDbConnectionFactory : DbConnectionFactory
+    internal sealed class OleDbConnectionFactory : DbConnectionFactory
     {
         private OleDbConnectionFactory()
             : base() { }
@@ -32,12 +32,12 @@ namespace System.Data.OleDb
         public static readonly OleDbConnectionFactory SingletonInstance =
             new OleDbConnectionFactory();
 
-        override public DbProviderFactory ProviderFactory
+        public override DbProviderFactory ProviderFactory
         {
             get { return OleDbFactory.Instance; }
         }
 
-        override protected DbConnectionInternal CreateConnection(
+        protected override DbConnectionInternal CreateConnection(
             DbConnectionOptions options,
             DbConnectionPoolKey poolKey,
             object poolGroupProviderInfo,
@@ -70,7 +70,7 @@ namespace System.Data.OleDb
         // under the runtime folder.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        override protected DbMetaDataFactory CreateMetaDataFactory(
+        protected override DbMetaDataFactory CreateMetaDataFactory(
             DbConnectionInternal internalConnection,
             out bool cacheMetaDataFactory
         )
@@ -142,21 +142,21 @@ namespace System.Data.OleDb
             );
         }
 
-        override protected DbConnectionPoolGroupOptions CreateConnectionPoolGroupOptions(
+        protected override DbConnectionPoolGroupOptions CreateConnectionPoolGroupOptions(
             DbConnectionOptions connectionOptions
         )
         {
             return null;
         }
 
-        override internal DbConnectionPoolGroupProviderInfo CreateConnectionPoolGroupProviderInfo(
+        internal override DbConnectionPoolGroupProviderInfo CreateConnectionPoolGroupProviderInfo(
             DbConnectionOptions connectionOptions
         )
         {
             return new OleDbConnectionPoolGroupProviderInfo();
         }
 
-        override internal DbConnectionPoolGroup GetConnectionPoolGroup(DbConnection connection)
+        internal override DbConnectionPoolGroup GetConnectionPoolGroup(DbConnection connection)
         {
             OleDbConnection c = (connection as OleDbConnection);
             if (null != c)
@@ -166,7 +166,7 @@ namespace System.Data.OleDb
             return null;
         }
 
-        override internal DbConnectionInternal GetInnerConnection(DbConnection connection)
+        internal override DbConnectionInternal GetInnerConnection(DbConnection connection)
         {
             OleDbConnection c = (connection as OleDbConnection);
             if (null != c)
@@ -176,7 +176,7 @@ namespace System.Data.OleDb
             return null;
         }
 
-        override protected int GetObjectId(DbConnection connection)
+        protected override int GetObjectId(DbConnection connection)
         {
             OleDbConnection c = (connection as OleDbConnection);
             if (null != c)
@@ -186,7 +186,7 @@ namespace System.Data.OleDb
             return 0;
         }
 
-        override internal void PermissionDemand(DbConnection outerConnection)
+        internal override void PermissionDemand(DbConnection outerConnection)
         {
             OleDbConnection c = (outerConnection as OleDbConnection);
             if (null != c)
@@ -195,7 +195,7 @@ namespace System.Data.OleDb
             }
         }
 
-        override internal void SetConnectionPoolGroup(
+        internal override void SetConnectionPoolGroup(
             DbConnection outerConnection,
             DbConnectionPoolGroup poolGroup
         )
@@ -207,7 +207,7 @@ namespace System.Data.OleDb
             }
         }
 
-        override internal void SetInnerConnectionEvent(
+        internal override void SetInnerConnectionEvent(
             DbConnection owningObject,
             DbConnectionInternal to
         )
@@ -219,7 +219,7 @@ namespace System.Data.OleDb
             }
         }
 
-        override internal bool SetInnerConnectionFrom(
+        internal override bool SetInnerConnectionFrom(
             DbConnection owningObject,
             DbConnectionInternal to,
             DbConnectionInternal from
@@ -233,7 +233,7 @@ namespace System.Data.OleDb
             return false;
         }
 
-        override internal void SetInnerConnectionTo(
+        internal override void SetInnerConnectionTo(
             DbConnection owningObject,
             DbConnectionInternal to
         )

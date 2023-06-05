@@ -8,7 +8,7 @@ using XmlCoreTest.Common;
 
 namespace System.Xml.RwFactoryWriterTests
 {
-    public partial class CReaderFactory : CFactory
+    partial public class CReaderFactory : CFactory
     {
         //Enum defined for different API calls. This is superset of the actual reader types.
         protected enum ReaderOverload

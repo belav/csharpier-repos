@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class OperatorKindExtensions
+    partial internal static class OperatorKindExtensions
     {
         public static int OperatorIndex(this UnaryOperatorKind kind)
         {

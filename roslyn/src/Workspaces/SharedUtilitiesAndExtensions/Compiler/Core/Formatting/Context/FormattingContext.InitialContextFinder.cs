@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    internal partial class FormattingContext
+    partial internal class FormattingContext
     {
         private class InitialContextFinder
         {

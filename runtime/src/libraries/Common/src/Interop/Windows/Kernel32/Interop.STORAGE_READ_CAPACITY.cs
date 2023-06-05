@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         // https://docs.microsoft.com/en-us/windows/win32/devio/storage-read-capacity
         [StructLayout(LayoutKind.Sequential)]

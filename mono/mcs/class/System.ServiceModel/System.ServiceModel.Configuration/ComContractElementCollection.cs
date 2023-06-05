@@ -62,7 +62,7 @@ namespace System.ServiceModel.Configuration
         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
     )]
     [MonoTODO]
-    public sealed partial class ComContractElementCollection
+    partial public sealed class ComContractElementCollection
         : ServiceModelEnhancedConfigurationElementCollection<ComContractElement>,
             ICollection,
             IEnumerable

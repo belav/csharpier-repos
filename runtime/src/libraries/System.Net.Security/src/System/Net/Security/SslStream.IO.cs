@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Security
 {
-    public partial class SslStream
+    partial public class SslStream
     {
         private readonly SslAuthenticationOptions _sslAuthenticationOptions =
             new SslAuthenticationOptions();

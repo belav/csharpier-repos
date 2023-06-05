@@ -26,13 +26,14 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// Represents a set of projects and their source code documents.
     ///
     /// this is a green node of Solution like ProjectState/DocumentState are for
     /// Project and Document.
     /// </summary>
-    internal partial class SolutionState
+    internal class SolutionState
     {
         // the version of the workspace this solution is from
         private readonly int _workspaceVersion;

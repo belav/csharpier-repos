@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal static partial class SpecializedSymbolCollections
+    partial internal static class SpecializedSymbolCollections
     {
         public static PooledHashSet<TSymbol> GetPooledSymbolHashSetInstance<TSymbol>()
             where TSymbol : Symbol

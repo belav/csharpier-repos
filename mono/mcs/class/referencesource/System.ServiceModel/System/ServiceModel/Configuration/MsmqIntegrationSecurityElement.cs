@@ -14,7 +14,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
-    public sealed partial class MsmqIntegrationSecurityElement : ServiceModelConfigurationElement
+    partial public sealed class MsmqIntegrationSecurityElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.Mode,

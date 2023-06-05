@@ -10,9 +10,9 @@ using Microsoft.CodeAnalysis.Shared.Collections;
 
 namespace Microsoft.CodeAnalysis.PatternMatching
 {
-    internal partial class PatternMatcher
+    partial internal class PatternMatcher
     {
-        private sealed partial class SimplePatternMatcher : PatternMatcher
+        partial private sealed class SimplePatternMatcher : PatternMatcher
         {
             private PatternSegment _fullPatternSegment;
 

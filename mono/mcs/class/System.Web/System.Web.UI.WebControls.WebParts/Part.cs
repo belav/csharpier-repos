@@ -71,7 +71,7 @@ namespace System.Web.UI.WebControls.WebParts
             set { chrome_type = value; }
         }
 
-        public virtual new ControlCollection Controls
+        public new virtual ControlCollection Controls
         {
             get
             {

@@ -11,7 +11,7 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         }
     }
 
-    public partial class TripleDESFactory
+    partial public class TripleDESFactory
     {
         private static readonly ITripleDESProvider s_provider = new TripleDesProvider();
     }

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class GetTypedObjectForIUnknownTests
+    partial public class GetTypedObjectForIUnknownTests
     {
         public static IEnumerable<object[]> GetTypedObjectForIUnknown_ComObject_TestData()
         {

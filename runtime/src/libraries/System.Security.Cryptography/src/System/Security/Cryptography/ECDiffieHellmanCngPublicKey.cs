@@ -5,10 +5,11 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
+    partial
     /// <summary>
     /// Public key used to do key exchange with the ECDiffieHellmanCng algorithm
     /// </summary>
-    public sealed partial class ECDiffieHellmanCngPublicKey : ECDiffieHellmanPublicKey
+    public sealed class ECDiffieHellmanCngPublicKey : ECDiffieHellmanPublicKey
     {
         private readonly CngKeyBlobFormat _format;
         private readonly string? _curveName;

@@ -14,7 +14,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 {
-    internal abstract partial class ReferenceChange : AbstractChange
+    partial internal abstract class ReferenceChange : AbstractChange
     {
         private readonly ProjectId _projectId;
         private readonly string _projectName;

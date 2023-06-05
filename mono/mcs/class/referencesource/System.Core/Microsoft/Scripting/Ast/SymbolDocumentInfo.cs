@@ -121,7 +121,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates an instance of <see cref="T:System.Linq.Expressions.SymbolDocumentInfo" />.

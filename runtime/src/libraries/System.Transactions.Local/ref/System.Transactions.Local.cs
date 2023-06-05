@@ -9,7 +9,7 @@ using System.Runtime.Versioning;
 namespace System.Transactions
 {
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
-    public sealed partial class CommittableTransaction
+    partial public sealed class CommittableTransaction
         : System.Transactions.Transaction,
             System.IAsyncResult
     {
@@ -55,14 +55,14 @@ namespace System.Transactions
         RollbackIfNotComplete = 1,
     }
 
-    public sealed partial class DependentTransaction : System.Transactions.Transaction
+    partial public sealed class DependentTransaction : System.Transactions.Transaction
     {
         internal DependentTransaction() { }
 
         public void Complete() { }
     }
 
-    public partial class Enlistment
+    partial public class Enlistment
     {
         internal Enlistment() { }
 
@@ -88,14 +88,14 @@ namespace System.Transactions
     [System.Runtime.InteropServices.InterfaceTypeAttribute(
         System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
     )]
-    public partial interface IDtcTransaction
+    partial public interface IDtcTransaction
     {
         void Abort(System.IntPtr reason, int retaining, int async);
         void Commit(int retaining, int commitType, int reserved);
         void GetTransactionInfo(System.IntPtr transactionInformation);
     }
 
-    public partial interface IEnlistmentNotification
+    partial public interface IEnlistmentNotification
     {
         void Commit(System.Transactions.Enlistment enlistment);
         void InDoubt(System.Transactions.Enlistment enlistment);
@@ -103,7 +103,7 @@ namespace System.Transactions
         void Rollback(System.Transactions.Enlistment enlistment);
     }
 
-    public partial interface IPromotableSinglePhaseNotification
+    partial public interface IPromotableSinglePhaseNotification
         : System.Transactions.ITransactionPromoter
     {
         void Initialize();
@@ -111,12 +111,12 @@ namespace System.Transactions
         void SinglePhaseCommit(System.Transactions.SinglePhaseEnlistment singlePhaseEnlistment);
     }
 
-    public partial interface ISimpleTransactionSuperior : System.Transactions.ITransactionPromoter
+    partial public interface ISimpleTransactionSuperior : System.Transactions.ITransactionPromoter
     {
         void Rollback();
     }
 
-    public partial interface ISinglePhaseNotification : System.Transactions.IEnlistmentNotification
+    partial public interface ISinglePhaseNotification : System.Transactions.IEnlistmentNotification
     {
         void SinglePhaseCommit(System.Transactions.SinglePhaseEnlistment singlePhaseEnlistment);
     }
@@ -132,12 +132,12 @@ namespace System.Transactions
         Unspecified = 6,
     }
 
-    public partial interface ITransactionPromoter
+    partial public interface ITransactionPromoter
     {
         byte[]? Promote();
     }
 
-    public partial class PreparingEnlistment : System.Transactions.Enlistment
+    partial public class PreparingEnlistment : System.Transactions.Enlistment
     {
         internal PreparingEnlistment() { }
 
@@ -153,7 +153,7 @@ namespace System.Transactions
         }
     }
 
-    public partial class SinglePhaseEnlistment : System.Transactions.Enlistment
+    partial public class SinglePhaseEnlistment : System.Transactions.Enlistment
     {
         internal SinglePhaseEnlistment() { }
 
@@ -168,7 +168,7 @@ namespace System.Transactions
         public void InDoubt(System.Exception? e) { }
     }
 
-    public sealed partial class SubordinateTransaction : System.Transactions.Transaction
+    partial public sealed class SubordinateTransaction : System.Transactions.Transaction
     {
         public SubordinateTransaction(
             System.Transactions.IsolationLevel isoLevel,
@@ -176,7 +176,7 @@ namespace System.Transactions
         ) { }
     }
 
-    public partial class Transaction
+    partial public class Transaction
         : System.IDisposable,
             System.Runtime.Serialization.ISerializable
     {
@@ -326,7 +326,7 @@ namespace System.Transactions
         ) { }
     }
 
-    public partial class TransactionAbortedException : System.Transactions.TransactionException
+    partial public class TransactionAbortedException : System.Transactions.TransactionException
     {
         public TransactionAbortedException() { }
 
@@ -345,7 +345,7 @@ namespace System.Transactions
         System.Transactions.TransactionEventArgs e
     );
 
-    public partial class TransactionEventArgs : System.EventArgs
+    partial public class TransactionEventArgs : System.EventArgs
     {
         public TransactionEventArgs() { }
 
@@ -355,7 +355,7 @@ namespace System.Transactions
         }
     }
 
-    public partial class TransactionException : System.SystemException
+    partial public class TransactionException : System.SystemException
     {
         public TransactionException() { }
 
@@ -369,7 +369,7 @@ namespace System.Transactions
         public TransactionException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class TransactionInDoubtException : System.Transactions.TransactionException
+    partial public class TransactionInDoubtException : System.Transactions.TransactionException
     {
         public TransactionInDoubtException() { }
 
@@ -383,7 +383,7 @@ namespace System.Transactions
         public TransactionInDoubtException(string? message, System.Exception? innerException) { }
     }
 
-    public partial class TransactionInformation
+    partial public class TransactionInformation
     {
         internal TransactionInformation() { }
 
@@ -405,7 +405,7 @@ namespace System.Transactions
         }
     }
 
-    public static partial class TransactionInterop
+    partial public static class TransactionInterop
     {
         public static readonly System.Guid PromoterTypeDtc;
 
@@ -456,7 +456,7 @@ namespace System.Transactions
         }
     }
 
-    public static partial class TransactionManager
+    partial public static class TransactionManager
     {
         public static System.TimeSpan DefaultTimeout
         {
@@ -502,7 +502,7 @@ namespace System.Transactions
         }
     }
 
-    public partial class TransactionManagerCommunicationException
+    partial public class TransactionManagerCommunicationException
         : System.Transactions.TransactionException
     {
         public TransactionManagerCommunicationException() { }
@@ -520,7 +520,7 @@ namespace System.Transactions
         ) { }
     }
 
-    public partial struct TransactionOptions
+    partial public struct TransactionOptions
         : System.IEquatable<System.Transactions.TransactionOptions>
     {
         private readonly int _dummyPrimitive;
@@ -569,7 +569,7 @@ namespace System.Transactions
         }
     }
 
-    public partial class TransactionPromotionException : System.Transactions.TransactionException
+    partial public class TransactionPromotionException : System.Transactions.TransactionException
     {
         public TransactionPromotionException() { }
 
@@ -584,7 +584,7 @@ namespace System.Transactions
     }
 
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
-    public sealed partial class TransactionScope : System.IDisposable
+    partial public sealed class TransactionScope : System.IDisposable
     {
         public TransactionScope() { }
 

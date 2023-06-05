@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
-    public partial class NodeInfo
+    partial public class NodeInfo
     {
         //Package of information containing the name, type, and value of a field on a syntax node.
         public class FieldInfo

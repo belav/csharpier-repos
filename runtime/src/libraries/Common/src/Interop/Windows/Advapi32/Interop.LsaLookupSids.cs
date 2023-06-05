@@ -5,16 +5,16 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
             EntryPoint = "LsaLookupSids",
             SetLastError = true
         )]
-        internal static partial uint LsaLookupSids(
+        partial internal static uint LsaLookupSids(
             SafeLsaPolicyHandle handle,
             int count,
             IntPtr[] sids,
@@ -24,7 +24,7 @@ internal static partial class Interop
     }
 }
 
-internal static partial class SafeLsaMemoryHandleExtensions
+partial internal static class SafeLsaMemoryHandleExtensions
 {
     public static unsafe void InitializeReferencedDomainsList(
         this SafeLsaMemoryHandle referencedDomains

@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 {
-    internal static partial class SyntaxTokenExtensions
+    partial internal static class SyntaxTokenExtensions
     {
         public static bool IsUsingOrExternKeyword(this SyntaxToken token)
         {

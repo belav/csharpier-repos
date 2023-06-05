@@ -8,7 +8,7 @@ using Mono.Linker;
 
 namespace ILLink.Shared.TypeSystemProxy
 {
-    readonly partial struct MethodProxy : IEquatable<MethodProxy>
+    partial readonly struct MethodProxy : IEquatable<MethodProxy>
     {
         public MethodProxy(MethodDefinition method) => Method = method;
 
@@ -23,25 +23,25 @@ namespace ILLink.Shared.TypeSystemProxy
 
         public string GetDisplayName() => Method.GetDisplayName();
 
-        internal partial bool IsDeclaredOnType(string fullTypeName) =>
+        partial internal bool IsDeclaredOnType(string fullTypeName) =>
             Method.IsDeclaredOnType(fullTypeName);
 
-        internal partial bool HasParameters() => Method.HasParameters;
+        partial internal bool HasParameters() => Method.HasParameters;
 
-        internal partial int GetParametersCount() => Method.Parameters.Count;
+        partial internal int GetParametersCount() => Method.Parameters.Count;
 
-        internal partial bool HasParameterOfType(int parameterIndex, string fullTypeName) =>
+        partial internal bool HasParameterOfType(int parameterIndex, string fullTypeName) =>
             Method.HasParameterOfType(parameterIndex, fullTypeName);
 
-        internal partial string GetParameterDisplayName(int parameterIndex) =>
+        partial internal string GetParameterDisplayName(int parameterIndex) =>
             Method.Parameters[parameterIndex].Name;
 
-        internal partial bool HasGenericParameters() => Method.HasGenericParameters;
+        partial internal bool HasGenericParameters() => Method.HasGenericParameters;
 
-        internal partial bool HasGenericParametersCount(int genericParameterCount) =>
+        partial internal bool HasGenericParametersCount(int genericParameterCount) =>
             Method.GenericParameters.Count == genericParameterCount;
 
-        internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters()
+        partial internal ImmutableArray<GenericParameterProxy> GetGenericParameters()
         {
             if (!Method.HasGenericParameters)
                 return ImmutableArray<GenericParameterProxy>.Empty;
@@ -57,9 +57,9 @@ namespace ILLink.Shared.TypeSystemProxy
             return builder.ToImmutableArray();
         }
 
-        internal partial bool IsStatic() => Method.IsStatic;
+        partial internal bool IsStatic() => Method.IsStatic;
 
-        internal partial bool ReturnsVoid() => Method.ReturnsVoid();
+        partial internal bool ReturnsVoid() => Method.ReturnsVoid();
 
         public override string ToString() => Method.ToString();
 

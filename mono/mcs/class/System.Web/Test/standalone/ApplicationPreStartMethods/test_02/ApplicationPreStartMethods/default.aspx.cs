@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace ApplicationPreStartMethods
 {
-    public partial class _default : System.Web.UI.Page
+    partial public class _default : System.Web.UI.Page
     {
         static List<string> messages = new List<string>();
 

@@ -7,7 +7,7 @@ using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {
-    public partial class ProcessThread
+    partial public class ProcessThread
     {
         /// <summary>Sets the processor that this thread would ideally like to run on.</summary>
         public int IdealProcessor

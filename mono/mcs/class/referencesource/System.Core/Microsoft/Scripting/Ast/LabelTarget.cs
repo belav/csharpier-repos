@@ -70,7 +70,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="LabelTarget"/> representing a label with void type and no name.

@@ -18,11 +18,12 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
+    partial
     /// <summary>
     /// This is the root class for all code model objects. It contains methods that
     /// are common to everything.
     /// </summary>
-    public abstract partial class AbstractCodeModelObject : ApartmentSensitiveComObject
+    public abstract class AbstractCodeModelObject : ApartmentSensitiveComObject
     {
         private CodeModelState _state;
         private bool _zombied;

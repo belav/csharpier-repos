@@ -16,6 +16,6 @@ public class Y
 {
     public class Z
     {
-        public readonly static Z I = new Z();
+        public static readonly Z I = new Z();
     }
 }

@@ -16,7 +16,7 @@ using static Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles.SymbolSpe
 
 namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 {
-    internal static partial class EditorConfigNamingStyleParser
+    partial internal static class EditorConfigNamingStyleParser
     {
         internal static bool TryGetSymbolSpec(
             Section section,

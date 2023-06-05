@@ -8,10 +8,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 {
+    partial
     /// <summary>
     /// Interaction logic for AddParameterDialog.xaml
     /// </summary>
-    internal partial class AddParameterDialog : DialogWindow
+    internal class AddParameterDialog : DialogWindow
     {
         private readonly AddParameterDialogViewModel _viewModel;
 

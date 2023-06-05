@@ -5,8 +5,9 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace Internal.TypeSystem.Ecma
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class EcmaGenericParameter
+    public class EcmaGenericParameter
     {
         protected internal override int ClassCode => -1548417824;
 

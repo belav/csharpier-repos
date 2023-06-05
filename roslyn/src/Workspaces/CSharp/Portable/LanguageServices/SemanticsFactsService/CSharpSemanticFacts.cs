@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class CSharpSemanticFacts : ISemanticFacts
+    partial internal sealed class CSharpSemanticFacts : ISemanticFacts
     {
         public string GenerateNameForExpression(
             SemanticModel semanticModel,

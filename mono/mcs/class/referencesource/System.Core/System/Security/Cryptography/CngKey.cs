@@ -32,7 +32,7 @@ namespace System.Security.Cryptography
     ///     Managed representation of an NCrypt key
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed partial class CngKey : IDisposable
+    partial public sealed class CngKey : IDisposable
     {
 #if MONO
         public CngAlgorithmGroup AlgorithmGroup

@@ -9,7 +9,7 @@ using System.Runtime.Intrinsics;
 
 namespace System.Globalization
 {
-    internal static partial class Ordinal
+    partial internal static class Ordinal
     {
         internal static int CompareStringIgnoreCase(
             ref char strA,

@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths.Axes
 {
+    partial
     /// <summary>
     /// Location Paths - Axes (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Expected: Error (Not supported for Matches).

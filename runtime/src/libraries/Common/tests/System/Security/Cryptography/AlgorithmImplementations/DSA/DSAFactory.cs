@@ -11,7 +11,7 @@ namespace System.Security.Cryptography.Dsa.Tests
         bool SupportsKeyGeneration { get; }
     }
 
-    public static partial class DSAFactory
+    partial public static class DSAFactory
     {
         public static DSA Create()
         {

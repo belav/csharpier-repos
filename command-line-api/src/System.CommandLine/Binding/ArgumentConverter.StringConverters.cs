@@ -7,7 +7,7 @@ using System.Net;
 
 namespace System.CommandLine.Binding;
 
-internal static partial class ArgumentConverter
+partial internal static class ArgumentConverter
 {
     private delegate bool TryConvertString(string token, out object? value);
 

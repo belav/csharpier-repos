@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 {
-    internal sealed partial class RenameTrackingTaggerProvider
+    partial internal sealed class RenameTrackingTaggerProvider
     {
         private class Tagger : ITagger<RenameTrackingTag>, ITagger<IErrorTag>, IDisposable
         {

@@ -43,7 +43,7 @@ namespace Mono.Linker.Dataflow
         }
     }
 
-    abstract partial class MethodBodyScanner
+    partial abstract class MethodBodyScanner
     {
         protected readonly LinkContext _context;
         protected readonly InterproceduralStateLattice InterproceduralStateLattice;

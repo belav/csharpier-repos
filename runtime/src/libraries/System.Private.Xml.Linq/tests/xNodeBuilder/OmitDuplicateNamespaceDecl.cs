@@ -11,11 +11,11 @@ using System.IO;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeBuilderFunctionalTests : TestModule
+    partial public class XNodeBuilderFunctionalTests : TestModule
     {
-        public partial class XNodeBuilderTests : XLinqTestCase
+        partial public class XNodeBuilderTests : XLinqTestCase
         {
-            public partial class NamespacehandlingWriterSanity : XLinqTestCase
+            partial public class NamespacehandlingWriterSanity : XLinqTestCase
             {
                 #region helpers
                 private string SaveXElementUsingXmlWriter(

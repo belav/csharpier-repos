@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal abstract partial class AnalyzerDriver
+    partial internal abstract class AnalyzerDriver
     {
         protected abstract IGroupedAnalyzerActions EmptyGroupedActions { get; }
         protected abstract IGroupedAnalyzerActions CreateGroupedActions(

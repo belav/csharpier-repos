@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 {
-    internal abstract partial class AbstractGenerateConstructorFromMembersCodeRefactoringProvider
+    partial internal abstract class AbstractGenerateConstructorFromMembersCodeRefactoringProvider
         : AbstractGenerateFromMembersCodeRefactoringProvider
     {
         private class GenerateConstructorWithDialogCodeAction : CodeActionWithOptions

@@ -30,28 +30,28 @@ namespace ClassLibrary
                 c;
         };
 
-        static public float abs(float a)
+        public static float abs(float a)
         {
             return a > 0 ? a : -a;
         }
 
-        static public float dist(float x, float y, Line l)
+        public static float dist(float x, float y, Line l)
         {
             float r = abs(x * l.a + y * l.b + l.c);
             return r;
         }
 
-        static public float min(float a, float b)
+        public static float min(float a, float b)
         {
             return a < b ? a : b;
         }
 
-        static public float max(float a, float b)
+        public static float max(float a, float b)
         {
             return a > b ? a : b;
         }
 
-        static public void swap(ref float a, ref float b)
+        public static void swap(ref float a, ref float b)
         {
             float c = a;
             a = b;
@@ -59,7 +59,9 @@ namespace ClassLibrary
         }
 
         // Calc the radius of a circle, with a center in (x, y), the is bounded with Lines.
-        static public float radius(float x, float y, List<Line> l)
+        public
+        // Calc the radius of a circle, with a center in (x, y), the is bounded with Lines.
+        static float radius(float x, float y, List<Line> l)
         {
             int n = (int)l.Count;
             float res = INF;
@@ -74,7 +76,9 @@ namespace ClassLibrary
         }
 
         // Find y and calc the radius of a circle, with a center in (x), tha is bounded with Lines.
-        static public float y_radius(float x, List<Point> a, List<Line> l, out float yOut)
+        public
+        // Find y and calc the radius of a circle, with a center in (x), tha is bounded with Lines.
+        static float y_radius(float x, List<Point> a, List<Line> l, out float yOut)
         {
             int n = (int)a.Count;
             float ly = INF,
@@ -117,7 +121,7 @@ namespace ClassLibrary
             return radius(x, ly, l);
         }
 
-        static public Boolean Check(List<Point> points)
+        public static Boolean Check(List<Point> points)
         {
             float zn = vectMul((points[2] - points[0]), (points[1] - points[0]));
             for (int i = 2; i < points.Count; ++i)
@@ -135,7 +139,7 @@ namespace ClassLibrary
             return true;
         }
 
-        static public Boolean FindCircle(List<Point> points, out Point O, out float r)
+        public static Boolean FindCircle(List<Point> points, out Point O, out float r)
         {
             O.X = 0;
             O.Y = 0;

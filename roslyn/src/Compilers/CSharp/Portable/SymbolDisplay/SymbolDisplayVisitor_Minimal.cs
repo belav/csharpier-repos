@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class SymbolDisplayVisitor
+    partial internal class SymbolDisplayVisitor
     {
         private bool TryAddAlias(
             INamespaceOrTypeSymbol symbol,

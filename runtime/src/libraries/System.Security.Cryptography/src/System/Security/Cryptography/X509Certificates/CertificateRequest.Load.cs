@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates.Asn1;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    public sealed partial class CertificateRequest
+    partial public sealed class CertificateRequest
     {
         private const CertificateRequestLoadOptions AllOptions =
             CertificateRequestLoadOptions.SkipSignatureValidation

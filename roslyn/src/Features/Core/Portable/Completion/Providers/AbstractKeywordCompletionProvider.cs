@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractKeywordCompletionProvider<TContext>
+    partial internal abstract class AbstractKeywordCompletionProvider<TContext>
         : LSPCompletionProvider
         where TContext : SyntaxContext
     {

@@ -81,7 +81,7 @@ namespace Mono.Security.Authenticode
             return ci.GetBytes();
         }
 
-        static public SoftwarePublisherCertificate CreateFromFile(string filename)
+        public static SoftwarePublisherCertificate CreateFromFile(string filename)
         {
             if (filename == null)
                 throw new ArgumentNullException("filename");

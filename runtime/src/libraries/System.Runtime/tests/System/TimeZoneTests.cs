@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public static partial class TimeZoneTests
+    partial public static class TimeZoneTests
     {
         [Fact]
         public static void TestBasicTimeZoneProperties()

@@ -53,7 +53,7 @@ namespace Microsoft.AspNetCore.Http;
     "IL2077",
     Justification = "RequestDelegateFactory.Create requires unreferenced code."
 )]
-public static partial class RequestDelegateFactory
+partial public static class RequestDelegateFactory
 {
     private static readonly ParameterBindingMethodCache ParameterBindingMethodCache = new();
 
@@ -3305,7 +3305,7 @@ public static partial class RequestDelegateFactory
         public const string PropertyAsParameter = "As Parameter (Attribute)";
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         private const string InvalidJsonRequestBodyMessage =
             @"Failed to read parameter ""{ParameterType} {ParameterName}"" from the request body as JSON.";
@@ -3353,7 +3353,7 @@ public static partial class RequestDelegateFactory
             "Reading the request body failed with an IOException.",
             EventName = "RequestBodyIOException"
         )]
-        private static partial void RequestBodyIOException(ILogger logger, IOException exception);
+        partial private static void RequestBodyIOException(ILogger logger, IOException exception);
 
         public static void InvalidJsonRequestBody(
             HttpContext httpContext,
@@ -3388,7 +3388,7 @@ public static partial class RequestDelegateFactory
             InvalidJsonRequestBodyMessage,
             EventName = "InvalidJsonRequestBody"
         )]
-        private static partial void InvalidJsonRequestBody(
+        partial private static void InvalidJsonRequestBody(
             ILogger logger,
             string parameterType,
             string parameterName,
@@ -3429,7 +3429,7 @@ public static partial class RequestDelegateFactory
             ParameterBindingFailedLogMessage,
             EventName = "ParameterBindingFailed"
         )]
-        private static partial void ParameterBindingFailed(
+        partial private static void ParameterBindingFailed(
             ILogger logger,
             string parameterType,
             string parameterName,
@@ -3470,7 +3470,7 @@ public static partial class RequestDelegateFactory
             RequiredParameterNotProvidedLogMessage,
             EventName = "RequiredParameterNotProvided"
         )]
-        private static partial void RequiredParameterNotProvided(
+        partial private static void RequiredParameterNotProvided(
             ILogger logger,
             string parameterType,
             string parameterName,
@@ -3502,7 +3502,7 @@ public static partial class RequestDelegateFactory
             ImplicitBodyNotProvidedLogMessage,
             EventName = "ImplicitBodyNotProvided"
         )]
-        private static partial void ImplicitBodyNotProvided(ILogger logger, string parameterName);
+        partial private static void ImplicitBodyNotProvided(ILogger logger, string parameterName);
 
         public static void UnexpectedJsonContentType(
             HttpContext httpContext,
@@ -3532,7 +3532,7 @@ public static partial class RequestDelegateFactory
             UnexpectedJsonContentTypeLogMessage,
             EventName = "UnexpectedContentType"
         )]
-        private static partial void UnexpectedJsonContentType(ILogger logger, string contentType);
+        partial private static void UnexpectedJsonContentType(ILogger logger, string contentType);
 
         public static void UnexpectedNonFormContentType(
             HttpContext httpContext,
@@ -3562,7 +3562,7 @@ public static partial class RequestDelegateFactory
             UnexpectedFormContentTypeLogMessage,
             EventName = "UnexpectedNonFormContentType"
         )]
-        private static partial void UnexpectedNonFormContentType(
+        partial private static void UnexpectedNonFormContentType(
             ILogger logger,
             string contentType
         );
@@ -3600,7 +3600,7 @@ public static partial class RequestDelegateFactory
             InvalidFormRequestBodyMessage,
             EventName = "InvalidFormRequestBody"
         )]
-        private static partial void InvalidFormRequestBody(
+        partial private static void InvalidFormRequestBody(
             ILogger logger,
             string parameterType,
             string parameterName,

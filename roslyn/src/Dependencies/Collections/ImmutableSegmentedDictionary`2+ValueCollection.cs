@@ -8,9 +8,9 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal readonly partial struct ImmutableSegmentedDictionary<TKey, TValue>
+    partial internal readonly struct ImmutableSegmentedDictionary<TKey, TValue>
     {
-        public readonly partial struct ValueCollection
+        partial public readonly struct ValueCollection
             : IReadOnlyCollection<TValue>,
                 ICollection<TValue>,
                 ICollection

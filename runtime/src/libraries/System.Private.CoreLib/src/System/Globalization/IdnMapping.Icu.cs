@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Globalization
 {
-    public sealed partial class IdnMapping
+    partial public sealed class IdnMapping
     {
         private unsafe string IcuGetAsciiCore(string unicodeString, char* unicode, int count)
         {

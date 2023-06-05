@@ -6,7 +6,7 @@
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafePipeHandle
+    partial public sealed class SafePipeHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafePipeHandle()
@@ -29,7 +29,7 @@ namespace Microsoft.Win32.SafeHandles
 
 namespace System.IO.Pipes
 {
-    public sealed partial class AnonymousPipeClientStream : System.IO.Pipes.PipeStream
+    partial public sealed class AnonymousPipeClientStream : System.IO.Pipes.PipeStream
     {
         public AnonymousPipeClientStream(
             System.IO.Pipes.PipeDirection direction,
@@ -58,7 +58,7 @@ namespace System.IO.Pipes
         ~AnonymousPipeClientStream() { }
     }
 
-    public sealed partial class AnonymousPipeServerStream : System.IO.Pipes.PipeStream
+    partial public sealed class AnonymousPipeServerStream : System.IO.Pipes.PipeStream
     {
         public AnonymousPipeServerStream()
             : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
@@ -111,7 +111,7 @@ namespace System.IO.Pipes
         }
     }
 
-    public sealed partial class NamedPipeClientStream : System.IO.Pipes.PipeStream
+    partial public sealed class NamedPipeClientStream : System.IO.Pipes.PipeStream
     {
         public NamedPipeClientStream(
             System.IO.Pipes.PipeDirection direction,
@@ -211,7 +211,7 @@ namespace System.IO.Pipes
         ~NamedPipeClientStream() { }
     }
 
-    public sealed partial class NamedPipeServerStream : System.IO.Pipes.PipeStream
+    partial public sealed class NamedPipeServerStream : System.IO.Pipes.PipeStream
     {
         public const int MaxAllowedServerInstances = -1;
 
@@ -318,7 +318,7 @@ namespace System.IO.Pipes
         Asynchronous = 1073741824,
     }
 
-    public abstract partial class PipeStream : System.IO.Stream
+    partial public abstract class PipeStream : System.IO.Stream
     {
         protected PipeStream(System.IO.Pipes.PipeDirection direction, int bufferSize) { }
 

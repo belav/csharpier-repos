@@ -20,7 +20,7 @@ public class BloggingContextWithPendingModelChanges : BloggingContext
 
     [DbContext(typeof(BloggingContextWithPendingModelChanges))]
     [Migration("111111111111111_MigrationOne")]
-    public partial class MigrationOne : Migration
+    partial public class MigrationOne : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder) { }
     }

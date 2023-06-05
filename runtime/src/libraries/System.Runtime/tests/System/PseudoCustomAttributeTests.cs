@@ -16,7 +16,7 @@ namespace System.Tests
         typeof(PlatformDetection),
         nameof(PlatformDetection.IsNativeAot)
     )]
-    public static partial class PseudoCustomAttributeTests
+    partial public static class PseudoCustomAttributeTests
     {
         [Theory]
         [MemberData(nameof(TestData_AttributeExists))]

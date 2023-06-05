@@ -41,7 +41,7 @@ namespace System.Diagnostics
         private PerformanceCounterCategoryType type = PerformanceCounterCategoryType.Unknown;
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern bool CategoryDelete_icall(char* name, int name_length);
+        private static extern unsafe bool CategoryDelete_icall(char* name, int name_length);
 
         static unsafe bool CategoryDelete(string name)
         {
@@ -50,7 +50,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe static extern string CategoryHelp_icall(char* category, int category_length);
+        private static extern unsafe string CategoryHelp_icall(char* category, int category_length);
 
         static unsafe string CategoryHelpInternal(string category)
         {
@@ -60,7 +60,7 @@ namespace System.Diagnostics
 
         /* this icall allows a null counter and it will just search for the category */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern bool CounterCategoryExists_icall(
+        private static extern unsafe bool CounterCategoryExists_icall(
             char* counter,
             int counter_length,
             char* category,
@@ -82,7 +82,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private unsafe extern bool Create_icall(
+        private static extern unsafe bool Create_icall(
             char* categoryName,
             int categoryName_length,
             char* categoryHelp,
@@ -113,7 +113,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private unsafe extern bool InstanceExistsInternal_icall(
+        private static extern unsafe bool InstanceExistsInternal_icall(
             char* instance,
             int instance_length,
             char* category,
@@ -138,7 +138,7 @@ namespace System.Diagnostics
         static extern string[] GetCategoryNames();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private unsafe extern string[] GetCounterNames_icall(
+        private static extern unsafe string[] GetCounterNames_icall(
             char* category,
             int category_length
         );
@@ -150,7 +150,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private unsafe extern string[] GetInstanceNames_icall(
+        private static extern unsafe string[] GetInstanceNames_icall(
             char* category,
             int category_length
         );

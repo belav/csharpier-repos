@@ -42,7 +42,7 @@ namespace System.Linq.Expressions
         "Microsoft.Maintainability",
         "CA1506:AvoidExcessiveClassCoupling"
     )]
-    public abstract partial class Expression
+    partial public abstract class Expression
     {
         private delegate LambdaExpression LambdaFactory(
             Expression body,
@@ -385,11 +385,11 @@ namespace System.Linq.Expressions
 #if SILVERLIGHT
 #if !CLR2
         // Quirks mode for Expression Trees as they existed in Silverlight 2 and 3
-        internal readonly static bool SilverlightQuirks = System
+        internal static readonly bool SilverlightQuirks = System
             .CompatibilitySwitches
             .IsAppEarlierThanSilverlight4;
 #else
-        internal readonly static bool SilverlightQuirks = true;
+        internal static readonly bool SilverlightQuirks = true;
 #endif
 #endif
 

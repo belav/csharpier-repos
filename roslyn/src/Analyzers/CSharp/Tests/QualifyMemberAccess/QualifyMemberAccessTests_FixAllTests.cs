@@ -13,7 +13,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 {
-    public partial class QualifyMemberAccessTests
+    partial public class QualifyMemberAccessTests
     {
         [Fact]
         [Trait(Traits.Feature, Traits.Features.CodeActionsQualifyMemberAccess)]

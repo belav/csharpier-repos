@@ -21,7 +21,7 @@ namespace System.Data.Metadata.Edm
     /// done by ItemCollection
     /// </summary>
     [CLSCompliant(false)]
-    public sealed partial class ObjectItemCollection : ItemCollection
+    partial public sealed class ObjectItemCollection : ItemCollection
     {
         #region Constructors
 

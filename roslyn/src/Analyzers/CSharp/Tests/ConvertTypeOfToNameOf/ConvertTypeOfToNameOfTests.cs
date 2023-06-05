@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
     >;
 
     [Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
-    public partial class ConvertTypeOfToNameOfTests
+    partial public class ConvertTypeOfToNameOfTests
     {
         [Fact]
         public async Task BasicType()

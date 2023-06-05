@@ -33,47 +33,47 @@ namespace UnsafeCSharp
 
         public static AA s_x;
 
-        public unsafe static B* get_pb(AA* px)
+        public static unsafe B* get_pb(AA* px)
         {
             return &px->m_b;
         }
 
-        public unsafe static B* get_pb_1(AA* px)
+        public static unsafe B* get_pb_1(AA* px)
         {
             return &px->m_b - 1;
         }
 
-        public unsafe static long get_pb_i(AA* px)
+        public static unsafe long get_pb_i(AA* px)
         {
             return (long)&px->m_b;
         }
 
-        public unsafe static long get_bv1(B* pb)
+        public static unsafe long get_bv1(B* pb)
         {
             return pb->m_bval;
         }
 
-        public unsafe static long get_bv2(B b)
+        public static unsafe long get_bv2(B b)
         {
             return b.m_bval;
         }
 
-        public unsafe static long get_bv3(ref B rb)
+        public static unsafe long get_bv3(ref B rb)
         {
             return rb.m_bval;
         }
 
-        public unsafe static long get_i1(long* pi)
+        public static unsafe long get_i1(long* pi)
         {
             return *pi;
         }
 
-        public unsafe static long get_i2(long i)
+        public static unsafe long get_i2(long i)
         {
             return i;
         }
 
-        public unsafe static long get_i3(ref long ri)
+        public static unsafe long get_i3(ref long ri)
         {
             return ri;
         }

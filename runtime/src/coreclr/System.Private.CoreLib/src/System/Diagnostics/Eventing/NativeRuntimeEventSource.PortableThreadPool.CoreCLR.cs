@@ -9,6 +9,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Diagnostics.Tracing
 {
+    partial
     // This is part of the NativeRuntimeEventsource, which is the managed version of the Microsoft-Windows-DotNETRuntime provider.
     // It contains the handwritten implementation of the ThreadPool events.
     // The events here do not call into the typical WriteEvent* APIs unlike most EventSources because that results in the
@@ -18,7 +19,7 @@ namespace System.Diagnostics.Tracing
     // FireEtw* methods auto-generated from ClrEtwAll.man. This ensures that corresponding event sinks are being used
     // for the native platform. Refer to src/coreclr/vm/nativeruntimesource.cpp.
     // For Mono|CoreRT implementation of these events, refer to NativeRuntimeEventSource.PortableThreadPool.cs.
-    internal sealed partial class NativeRuntimeEventSource : EventSource
+    internal sealed class NativeRuntimeEventSource : EventSource
     {
         // This value does not seem to be used, leaving it as zero for now. It may be useful for a scenario that may involve
         // multiple instances of the runtime within the same process, but then it seems unlikely that both instances' thread

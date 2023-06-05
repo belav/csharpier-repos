@@ -10,6 +10,7 @@ using System.Buffers;
 
 namespace System.IO
 {
+    partial
     // This abstract base class represents a reader that can read a sequential
     // stream of characters.  This is not intended for reading bytes -
     // there are methods on the Stream class to read bytes.
@@ -17,7 +18,7 @@ namespace System.IO
     //
     // This class is intended for character input, not bytes.
     // There are methods on the Stream class for reading bytes.
-    public abstract partial class TextReader : MarshalByRefObject, IDisposable
+    public abstract class TextReader : MarshalByRefObject, IDisposable
     {
         // Create our own instance to avoid static field initialization order problems on Mono.
         public static readonly TextReader Null = new StreamReader.NullStreamReader();

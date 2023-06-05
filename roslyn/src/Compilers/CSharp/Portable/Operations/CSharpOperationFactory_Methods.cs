@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Operations
 {
-    internal sealed partial class CSharpOperationFactory
+    partial internal sealed class CSharpOperationFactory
     {
         internal ImmutableArray<BoundStatement> ToStatements(BoundStatement? statement)
         {

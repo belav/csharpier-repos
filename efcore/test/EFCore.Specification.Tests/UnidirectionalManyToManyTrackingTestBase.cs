@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract partial class ManyToManyTrackingTestBase<TFixture>
+partial public abstract class ManyToManyTrackingTestBase<TFixture>
 {
     [ConditionalTheory]
     [InlineData(false)]

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class AppContextTests
+    partial public class AppContextTests
     {
         [Fact]
         public void SwitchNotFound()

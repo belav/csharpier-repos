@@ -131,7 +131,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
             return isLooback;
         }
 
-        async static Task<int> runRouter(
+        static async Task<int> runRouter(
             CancellationToken token,
             DiagnosticsServerRouterFactory routerFactory,
             Callbacks callbacks

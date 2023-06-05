@@ -63,7 +63,7 @@ namespace System.Reflection
         }
     }
 
-    public sealed partial class AssemblyName
+    partial public sealed class AssemblyName
     {
         internal unsafe AssemblyName(NativeAssemblyNameParts* pParts)
             : this()
@@ -191,7 +191,7 @@ namespace System.Reflection
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyName_InitializeAssemblySpec")]
-        private static unsafe partial void InitializeAssemblySpec(
+        partial private static unsafe void InitializeAssemblySpec(
             NativeAssemblyNameParts* pAssemblyNameParts,
             void* pAssemblySpec
         );

@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(Libraries.Gdi32)]
-        public static partial int SaveDC(IntPtr hdc);
+        partial public static int SaveDC(IntPtr hdc);
 
         public static int SaveDC(HandleRef hdc)
         {

@@ -40,7 +40,7 @@ namespace System.Web.UI
     /// </devdoc>
     public abstract class SimpleWebHandlerParser : IAssemblyDependencyParser
     {
-        private readonly static Regex directiveRegex = new SimpleDirectiveRegex();
+        private static readonly Regex directiveRegex = new SimpleDirectiveRegex();
 
         private SimpleHandlerBuildProvider _buildProvider;
 

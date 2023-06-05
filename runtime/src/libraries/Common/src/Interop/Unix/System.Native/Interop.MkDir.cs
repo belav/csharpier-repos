@@ -5,16 +5,16 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_MkDir",
             SetLastError = true
         )]
-        private static partial int MkDir(ref byte path, int mode);
+        partial private static int MkDir(ref byte path, int mode);
 
         internal static int MkDir(ReadOnlySpan<char> path, int mode)
         {

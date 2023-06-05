@@ -9,7 +9,7 @@ using Internal.Reflection.Augments;
 // This type is just stubbed out to be harmonious with CoreCLR
 namespace System.Runtime.Loader
 {
-    public partial class AssemblyLoadContext
+    partial public class AssemblyLoadContext
     {
         internal static Assembly[] GetLoadedAssemblies() =>
             ReflectionAugments.ReflectionCoreCallbacks.GetLoadedAssemblies();

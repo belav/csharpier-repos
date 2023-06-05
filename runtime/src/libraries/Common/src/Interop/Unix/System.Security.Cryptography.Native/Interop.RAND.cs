@@ -4,9 +4,9 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         internal static unsafe bool GetRandomBytes(byte* pbBuffer, int count)
         {
@@ -16,6 +16,6 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static unsafe partial int CryptoNative_GetRandomBytes(byte* buf, int num);
+        partial private static unsafe int CryptoNative_GetRandomBytes(byte* buf, int num);
     }
 }

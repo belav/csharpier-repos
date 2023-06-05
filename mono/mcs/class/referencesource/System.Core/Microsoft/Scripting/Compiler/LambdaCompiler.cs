@@ -43,7 +43,7 @@ namespace System.Linq.Expressions.Compiler
         "Microsoft.Maintainability",
         "CA1506:AvoidExcessiveClassCoupling"
     )]
-    internal sealed partial class LambdaCompiler
+    partial internal sealed class LambdaCompiler
     {
         private delegate void WriteBack();
 

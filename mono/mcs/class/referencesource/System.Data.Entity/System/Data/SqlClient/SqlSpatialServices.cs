@@ -23,7 +23,7 @@ namespace System.Data.SqlClient
     /// SqlClient specific implementation of <see cref="DbSpatialServices"/>
     /// </summary>
     [Serializable]
-    internal sealed partial class SqlSpatialServices : DbSpatialServices, ISerializable
+    partial internal sealed class SqlSpatialServices : DbSpatialServices, ISerializable
     {
         /// <summary>
         /// Do not allow instantiation

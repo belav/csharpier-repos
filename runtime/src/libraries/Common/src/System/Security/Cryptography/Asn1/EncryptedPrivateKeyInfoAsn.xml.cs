@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct EncryptedPrivateKeyInfoAsn
+    partial internal struct EncryptedPrivateKeyInfoAsn
     {
         internal System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn EncryptionAlgorithm;
         internal ReadOnlyMemory<byte> EncryptedData;

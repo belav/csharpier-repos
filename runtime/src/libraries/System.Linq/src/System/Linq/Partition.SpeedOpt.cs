@@ -147,7 +147,7 @@ namespace System.Linq
             _source.GetCount(_minIndexInclusive, _maxIndexInclusive, onlyIfCheap);
     }
 
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         /// <summary>
         /// An iterator that yields the items of part of an <see cref="IList{TSource}"/>.

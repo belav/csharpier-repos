@@ -16,7 +16,7 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    public partial class VBCodeParser : TokenizerBackedParser<VBTokenizer, VBSymbol, VBSymbolType>
+    partial public class VBCodeParser : TokenizerBackedParser<VBTokenizer, VBSymbol, VBSymbolType>
     {
         private void SetUpDirectives()
         {

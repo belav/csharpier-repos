@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Returns -1 on error, 0 on success.
@@ -16,6 +16,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_FAllocate",
             SetLastError = true
         )]
-        internal static partial int FAllocate(SafeFileHandle fd, long offset, long length);
+        partial internal static int FAllocate(SafeFileHandle fd, long offset, long length);
     }
 }

@@ -8,7 +8,7 @@ using System.Text.Unicode;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonWriterHelper
+    partial internal static class JsonWriterHelper
     {
         public static void WriteIndentation(Span<byte> buffer, int indent)
         {

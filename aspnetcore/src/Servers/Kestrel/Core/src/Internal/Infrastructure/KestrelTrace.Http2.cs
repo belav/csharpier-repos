@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-internal sealed partial class KestrelTrace : ILogger
+partial internal sealed class KestrelTrace : ILogger
 {
     public void Http2ConnectionError(string connectionId, Http2ConnectionErrorException ex)
     {
@@ -103,7 +103,7 @@ internal sealed partial class KestrelTrace : ILogger
         Http2Log.Http2UnexpectedConnectionQueueError(_http2Logger, connectionId, ex);
     }
 
-    private static partial class Http2Log
+    partial private static class Http2Log
     {
         [LoggerMessage(
             29,
@@ -111,7 +111,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"": HTTP/2 connection error.",
             EventName = "Http2ConnectionError"
         )]
-        public static partial void Http2ConnectionError(
+        partial public static void Http2ConnectionError(
             ILogger logger,
             string connectionId,
             Http2ConnectionErrorException ex
@@ -123,7 +123,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"": HTTP/2 stream error.",
             EventName = "Http2StreamError"
         )]
-        public static partial void Http2StreamError(
+        partial public static void Http2StreamError(
             ILogger logger,
             string connectionId,
             Http2StreamErrorException ex
@@ -135,7 +135,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"": HPACK decoding error while decoding headers for stream ID {StreamId}.",
             EventName = "HPackDecodingError"
         )]
-        public static partial void HPackDecodingError(
+        partial public static void HPackDecodingError(
             ILogger logger,
             string connectionId,
             int streamId,
@@ -148,7 +148,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Trace id ""{TraceIdentifier}"": HTTP/2 stream error ""{error}"". A Reset is being sent to the stream.",
             EventName = "Http2StreamResetAbort"
         )]
-        public static partial void Http2StreamResetAbort(
+        partial public static void Http2StreamResetAbort(
             ILogger logger,
             string traceIdentifier,
             Http2ErrorCode error,
@@ -161,7 +161,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"" is closing.",
             EventName = "Http2ConnectionClosing"
         )]
-        public static partial void Http2ConnectionClosing(ILogger logger, string connectionId);
+        partial public static void Http2ConnectionClosing(ILogger logger, string connectionId);
 
         [LoggerMessage(
             37,
@@ -170,7 +170,7 @@ internal sealed partial class KestrelTrace : ILogger
             EventName = "Http2FrameReceived",
             SkipEnabledCheck = true
         )]
-        public static partial void Http2FrameReceived(
+        partial public static void Http2FrameReceived(
             ILogger logger,
             string connectionId,
             Http2FrameType type,
@@ -185,7 +185,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"": HPACK encoding error while encoding headers for stream ID {StreamId}.",
             EventName = "HPackEncodingError"
         )]
-        public static partial void HPackEncodingError(
+        partial public static void HPackEncodingError(
             ILogger logger,
             string connectionId,
             int streamId,
@@ -198,7 +198,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"" reached the maximum number of concurrent HTTP/2 streams allowed.",
             EventName = "Http2MaxConcurrentStreamsReached"
         )]
-        public static partial void Http2MaxConcurrentStreamsReached(
+        partial public static void Http2MaxConcurrentStreamsReached(
             ILogger logger,
             string connectionId
         );
@@ -209,7 +209,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"" is closed. The last processed stream ID was {HighestOpenedStreamId}.",
             EventName = "Http2ConnectionClosed"
         )]
-        public static partial void Http2ConnectionClosed(
+        partial public static void Http2ConnectionClosed(
             ILogger logger,
             string connectionId,
             int highestOpenedStreamId
@@ -222,7 +222,7 @@ internal sealed partial class KestrelTrace : ILogger
             EventName = "Http2FrameSending",
             SkipEnabledCheck = true
         )]
-        public static partial void Http2FrameSending(
+        partial public static void Http2FrameSending(
             ILogger logger,
             string connectionId,
             Http2FrameType type,
@@ -237,7 +237,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Connection id ""{ConnectionId}"" exceeded the output operations maximum queue size.",
             EventName = "Http2QueueOperationsExceeded"
         )]
-        public static partial void Http2QueueOperationsExceeded(
+        partial public static void Http2QueueOperationsExceeded(
             ILogger logger,
             string connectionId,
             ConnectionAbortedException ex
@@ -249,7 +249,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"Stream {StreamId} on connection id ""{ConnectionId}"" observed an unexpected state where the streams output ended with data still remaining in the pipe.",
             EventName = "Http2UnexpectedDataRemaining"
         )]
-        public static partial void Http2UnexpectedDataRemaining(
+        partial public static void Http2UnexpectedDataRemaining(
             ILogger logger,
             int streamId,
             string connectionId
@@ -261,7 +261,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"The connection queue processing loop for {ConnectionId} completed.",
             EventName = "Http2ConnectionQueueProcessingCompleted"
         )]
-        public static partial void Http2ConnectionQueueProcessingCompleted(
+        partial public static void Http2ConnectionQueueProcessingCompleted(
             ILogger logger,
             string connectionId
         );
@@ -272,7 +272,7 @@ internal sealed partial class KestrelTrace : ILogger
             @"The event loop in connection {ConnectionId} failed unexpectedly.",
             EventName = "Http2UnexpectedConnectionQueueError"
         )]
-        public static partial void Http2UnexpectedConnectionQueueError(
+        partial public static void Http2UnexpectedConnectionQueueError(
             ILogger logger,
             string connectionId,
             Exception ex

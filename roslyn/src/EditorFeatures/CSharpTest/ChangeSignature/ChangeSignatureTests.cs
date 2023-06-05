@@ -13,7 +13,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
 {
     [Trait(Traits.Feature, Traits.Features.ChangeSignature)]
-    public partial class ChangeSignatureTests : AbstractChangeSignatureTests
+    partial public class ChangeSignatureTests : AbstractChangeSignatureTests
     {
         [Fact, WorkItem(8333, "https://github.com/dotnet/roslyn/issues/8333")]
         public async Task TestNotInExpressionBody()

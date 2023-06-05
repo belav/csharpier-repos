@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
 {
-    internal partial class NavigateToItemProvider : INavigateToItemProvider2
+    partial internal class NavigateToItemProvider : INavigateToItemProvider2
     {
         private readonly Workspace _workspace;
         private readonly IAsynchronousOperationListener _asyncListener;

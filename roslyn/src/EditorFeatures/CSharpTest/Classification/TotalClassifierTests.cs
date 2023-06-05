@@ -18,7 +18,7 @@ using static Microsoft.CodeAnalysis.Editor.UnitTests.Classification.FormattedCla
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
 {
     [Trait(Traits.Feature, Traits.Features.Classification)]
-    public partial class TotalClassifierTests : AbstractCSharpClassifierTests
+    partial public class TotalClassifierTests : AbstractCSharpClassifierTests
     {
         protected override async Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(
             string code,

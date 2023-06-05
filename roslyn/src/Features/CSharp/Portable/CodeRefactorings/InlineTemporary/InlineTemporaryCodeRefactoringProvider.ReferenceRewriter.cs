@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 {
-    internal partial class CSharpInlineTemporaryCodeRefactoringProvider
+    partial internal class CSharpInlineTemporaryCodeRefactoringProvider
     {
         private class ReferenceRewriter : CSharpSyntaxRewriter
         {

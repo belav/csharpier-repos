@@ -16,9 +16,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract partial class MethodExtractor
+    partial internal abstract class MethodExtractor
     {
-        protected abstract partial class Analyzer
+        partial protected abstract class Analyzer
         {
             private readonly SemanticDocument _semanticDocument;
 

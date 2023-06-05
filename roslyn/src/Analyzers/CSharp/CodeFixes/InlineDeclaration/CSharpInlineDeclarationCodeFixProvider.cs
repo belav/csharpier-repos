@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
         ),
         Shared
     ]
-    internal partial class CSharpInlineDeclarationCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    partial internal class CSharpInlineDeclarationCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [SuppressMessage(

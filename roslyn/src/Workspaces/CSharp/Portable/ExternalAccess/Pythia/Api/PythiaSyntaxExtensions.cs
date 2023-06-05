@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
 {
-    internal static partial class PythiaSyntaxExtensions
+    partial internal static class PythiaSyntaxExtensions
     {
         public static bool IsInNonUserCode(
             this SyntaxTree syntaxTree,

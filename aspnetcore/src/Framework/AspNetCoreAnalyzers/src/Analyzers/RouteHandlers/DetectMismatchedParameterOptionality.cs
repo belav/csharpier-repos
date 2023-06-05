@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
-public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
+partial public class RouteHandlerAnalyzer : DiagnosticAnalyzer
 {
     private static void DetectMismatchedParameterOptionality(
         in OperationAnalysisContext context,

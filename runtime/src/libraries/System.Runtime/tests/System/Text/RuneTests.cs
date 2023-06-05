@@ -9,7 +9,7 @@ using Xunit.Sdk;
 
 namespace System.Text.Tests
 {
-    public static partial class RuneTests
+    partial public static class RuneTests
     {
         [ConditionalTheory(
             typeof(PlatformDetection),

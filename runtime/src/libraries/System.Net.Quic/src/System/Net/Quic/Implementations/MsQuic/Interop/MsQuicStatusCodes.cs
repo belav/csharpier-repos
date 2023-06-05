@@ -3,7 +3,7 @@
 
 namespace System.Net.Quic.Implementations.MsQuic.Internal
 {
-    internal static partial class MsQuicStatusCodes
+    partial internal static class MsQuicStatusCodes
     {
         // TODO return better error messages here.
         public static string GetError(uint status)

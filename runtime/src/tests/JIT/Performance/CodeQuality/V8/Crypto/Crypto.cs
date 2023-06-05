@@ -1044,13 +1044,16 @@ namespace V8.Crypto
 
         public abstract class Reducer
         {
-            abstract public BigInteger convert(BigInteger x);
-            abstract public BigInteger revert(BigInteger x);
+            public abstract BigInteger convert(BigInteger x);
+            public abstract BigInteger revert(BigInteger x);
 
             // DELETEME
             // abstract public void reduce(BigInteger x);
-            abstract public void sqrTo(BigInteger x, BigInteger r);
-            abstract public void mulTo(BigInteger x, BigInteger y, BigInteger r);
+            public
+            // DELETEME
+            // abstract public void reduce(BigInteger x);
+            abstract void sqrTo(BigInteger x, BigInteger r);
+            public abstract void mulTo(BigInteger x, BigInteger y, BigInteger r);
         };
 
         private class MontgomeryReducer : Reducer
@@ -2364,8 +2367,8 @@ namespace V8.Crypto
 
     internal abstract class RNG
     {
-        abstract public void init(int[] key);
-        abstract public int next();
+        public abstract void init(int[] key);
+        public abstract int next();
     }
 
     internal class Arcfour : RNG

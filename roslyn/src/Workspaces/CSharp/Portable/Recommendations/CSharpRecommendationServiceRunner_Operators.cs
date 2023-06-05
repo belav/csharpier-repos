@@ -9,12 +9,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Recommendations;
 
-internal partial class CSharpRecommendationService
+partial internal class CSharpRecommendationService
 {
+    partial
     /// <summary>
     /// Adds user defined operators to the unnamed recommendation set.
     /// </summary>
-    private sealed partial class CSharpRecommendationServiceRunner
+    private sealed class CSharpRecommendationServiceRunner
     {
         private static void AddOperators(ITypeSymbol container, ArrayBuilder<ISymbol> symbols)
         {

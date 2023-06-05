@@ -24,7 +24,7 @@ using static Roslyn.Test.Utilities.SigningTestHelpers;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class InternalsVisibleToAndStrongNameTests : CSharpTestBase
+    partial public class InternalsVisibleToAndStrongNameTests : CSharpTestBase
     {
         public static IEnumerable<object[]> AllProviderParseOptions
         {

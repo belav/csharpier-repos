@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Immutable
 {
-    public sealed partial class ImmutableSortedSet<T>
+    partial public sealed class ImmutableSortedSet<T>
     {
         /// <summary>
         /// A node in the AVL tree storing this set.

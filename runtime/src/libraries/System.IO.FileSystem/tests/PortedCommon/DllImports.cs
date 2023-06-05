@@ -5,10 +5,10 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class DllImports
+partial internal static class DllImports
 {
     [LibraryImport("kernel32.dll", SetLastError = true)]
-    internal static partial int GetLogicalDrives();
+    partial internal static int GetLogicalDrives();
 
     [LibraryImport(
         "kernel32.dll",
@@ -17,7 +17,7 @@ internal static partial class DllImports
         SetLastError = true
     )]
     [return: MarshalAs(UnmanagedType.Bool)]
-    internal static partial bool GetDiskFreeSpaceEx(
+    partial internal static bool GetDiskFreeSpaceEx(
         string drive,
         out long freeBytesForUser,
         out long totalBytes,
@@ -30,5 +30,5 @@ internal static partial class DllImports
         StringMarshalling = StringMarshalling.Utf16,
         SetLastError = true
     )]
-    internal static partial int GetDriveType(string drive);
+    partial internal static int GetDriveType(string drive);
 }

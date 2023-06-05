@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
 {
     [UseExportProvider]
     [Trait(Traits.Feature, Traits.Features.DebuggingProximityExpressions)]
-    public partial class ProximityExpressionsGetterTests
+    partial public class ProximityExpressionsGetterTests
     {
         private static string s_lazyTestFileContent;
 

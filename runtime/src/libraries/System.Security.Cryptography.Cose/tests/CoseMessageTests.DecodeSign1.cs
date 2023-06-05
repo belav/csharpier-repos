@@ -8,7 +8,7 @@ using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
 
 namespace System.Security.Cryptography.Cose.Tests
 {
-    public partial class CoseMessageTests
+    partial public class CoseMessageTests
     {
         [Fact]
         public void DecodeSign1_VerifyUntagged()

@@ -7,10 +7,11 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers.Text
 {
+    partial
     // All the helper methods in this class assume that the by-ref is valid and that there is
     // enough space to fit the items that will be written into the underlying memory. The calling
     // code must have already done all the necessary validation.
-    internal static partial class FormattingHelpers
+    internal static class FormattingHelpers
     {
         /// <summary>
         /// Returns the symbol contained within the standard format. If the standard format

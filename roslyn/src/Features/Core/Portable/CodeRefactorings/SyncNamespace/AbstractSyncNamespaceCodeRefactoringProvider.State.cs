@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 {
-    internal abstract partial class AbstractSyncNamespaceCodeRefactoringProvider<
+    partial internal abstract class AbstractSyncNamespaceCodeRefactoringProvider<
         TNamespaceDeclarationSyntax,
         TCompilationUnitSyntax,
         TMemberDeclarationSyntax

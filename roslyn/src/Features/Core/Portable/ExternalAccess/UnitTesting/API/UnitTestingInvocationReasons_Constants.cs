@@ -8,7 +8,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 {
-    internal readonly partial struct UnitTestingInvocationReasons
+    partial internal readonly struct UnitTestingInvocationReasons
     {
         public static readonly UnitTestingInvocationReasons DocumentAdded =
             new(

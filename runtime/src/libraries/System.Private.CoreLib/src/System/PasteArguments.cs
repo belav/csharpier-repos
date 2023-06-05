@@ -5,7 +5,7 @@ using System.Text;
 
 namespace System
 {
-    internal static partial class PasteArguments
+    partial internal static class PasteArguments
     {
         internal static void AppendArgument(ref ValueStringBuilder stringBuilder, string argument)
         {

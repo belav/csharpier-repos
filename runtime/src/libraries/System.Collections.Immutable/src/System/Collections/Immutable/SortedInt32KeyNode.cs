@@ -19,7 +19,7 @@ namespace System.Collections.Immutable
     /// the comparer's <see cref="IComparer{T}.Compare"/> implementation.
     /// </remarks>
     [DebuggerDisplay("{_key} = {_value}")]
-    internal sealed partial class SortedInt32KeyNode<TValue> : IBinaryTree
+    partial internal sealed class SortedInt32KeyNode<TValue> : IBinaryTree
     {
         /// <summary>
         /// The default empty node.

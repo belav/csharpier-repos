@@ -6,11 +6,12 @@
 
 namespace System.Configuration
 {
+    internal
     //
     // Represents an update to a configuration section, either in its
     // declaration or its definition.
     //
-    abstract internal class Update
+    abstract class Update
     {
         private bool _moved;
         private bool _retrieved;

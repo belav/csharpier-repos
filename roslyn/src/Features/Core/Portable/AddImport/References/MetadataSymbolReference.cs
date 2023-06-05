@@ -17,9 +17,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
-        private partial class MetadataSymbolReference : SymbolReference
+        partial private class MetadataSymbolReference : SymbolReference
         {
             private readonly ProjectId _referenceProjectId;
             private readonly PortableExecutableReference _reference;

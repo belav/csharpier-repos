@@ -36,7 +36,7 @@ namespace Mono.Linker.Tests.Cases.Attributes
             [KeptFixedBuffer]
             [KeptAttributeOnFixedBufferType(typeof(UnsafeValueTypeAttribute))]
             [KeptAttributeAttribute(typeof(FixedBufferAttribute))]
-            public fixed int Values[10];
+            fixed public int Values[10];
         }
     }
 }

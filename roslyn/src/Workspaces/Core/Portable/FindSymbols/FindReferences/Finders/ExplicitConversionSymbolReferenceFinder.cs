@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal sealed partial class ExplicitConversionSymbolReferenceFinder
+    partial internal sealed class ExplicitConversionSymbolReferenceFinder
         : AbstractMethodOrPropertyOrEventSymbolReferenceFinder<IMethodSymbol>
     {
         protected override bool CanFind(IMethodSymbol symbol) =>

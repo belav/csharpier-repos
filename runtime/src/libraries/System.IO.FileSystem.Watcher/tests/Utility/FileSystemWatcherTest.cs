@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace System.IO.Tests
 {
-    public abstract partial class FileSystemWatcherTest : FileCleanupTestBase
+    partial public abstract class FileSystemWatcherTest : FileCleanupTestBase
     {
         // Events are reported asynchronously by the OS, so allow an amount of time for
         // them to arrive before testing an assertion.  If we expect an event to occur,

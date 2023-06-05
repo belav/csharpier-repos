@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace Internal.TypeSystem
 {
-    public sealed partial class MethodForRuntimeDeterminedType : MethodDesc
+    partial public sealed class MethodForRuntimeDeterminedType : MethodDesc
     {
         private MethodDesc _typicalMethodDef;
         private RuntimeDeterminedType _rdType;

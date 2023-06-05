@@ -29,7 +29,7 @@ namespace Internal.IL.Stubs
         }
     }
 
-    public partial class StructMarshallingThunk : ILStubMethod
+    partial public class StructMarshallingThunk : ILStubMethod
     {
         internal readonly MetadataType ManagedType;
         internal readonly NativeStructType NativeType;

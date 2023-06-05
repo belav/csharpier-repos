@@ -12,30 +12,30 @@ using System.Runtime.Versioning;
 using System.Security;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Odbc
+    partial internal static class Odbc
     {
         //
         // ODBC32
         //
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLAllocHandle(
+        partial internal static ODBC32.SQLRETURN SQLAllocHandle(
             /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
             /*SQLHANDLE*/IntPtr InputHandle,
             /*SQLHANDLE* */out IntPtr OutputHandle
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLAllocHandle(
+        partial internal static ODBC32.SQLRETURN SQLAllocHandle(
             /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
             /*SQLHANDLE*/OdbcHandle InputHandle,
             /*SQLHANDLE* */out IntPtr OutputHandle
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial /*SQLRETURN*/
-        ODBC32.SQLRETURN SQLBindCol(
+        partial /*SQLRETURN*/
+        internal static ODBC32.SQLRETURN SQLBindCol(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLUSMALLINT*/ushort ColumnNumber,
             /*SQLSMALLINT*/ODBC32.SQL_C TargetType,
@@ -49,7 +49,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLBindCol(
+        partial internal static ODBC32.SQLRETURN SQLBindCol(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLUSMALLINT*/ushort ColumnNumber,
             /*SQLSMALLINT*/ODBC32.SQL_C TargetType,
@@ -59,8 +59,8 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial /*SQLRETURN*/
-        ODBC32.SQLRETURN SQLBindParameter(
+        partial /*SQLRETURN*/
+        internal static ODBC32.SQLRETURN SQLBindParameter(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLUSMALLINT*/ushort ParameterNumber,
             /*SQLSMALLINT*/short ParamDirection,
@@ -82,17 +82,17 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLCancel(
+        partial internal static ODBC32.SQLRETURN SQLCancel(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLCloseCursor(
+        partial internal static ODBC32.SQLRETURN SQLCloseCursor(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLColAttributeW(
+        partial internal static ODBC32.SQLRETURN SQLColAttributeW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLUSMALLINT*/short ColumnNumber,
             /*SQLUSMALLINT*/short FieldIdentifier,
@@ -118,7 +118,7 @@ internal static partial class Interop
         // #endif
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLColumnsW(
+        partial internal static ODBC32.SQLRETURN SQLColumnsW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLCHAR* */string CatalogName,
             /*SQLSMALLINT*/short NameLen1,
@@ -131,12 +131,12 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLDisconnect(
+        partial internal static ODBC32.SQLRETURN SQLDisconnect(
             /*SQLHDBC*/IntPtr ConnectionHandle
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLDriverConnectW(
+        partial internal static ODBC32.SQLRETURN SQLDriverConnectW(
             /*SQLHDBC*/OdbcConnectionHandle hdbc,
             /*SQLHWND*/IntPtr hwnd,
             /*SQLCHAR* */string connectionstring,
@@ -148,43 +148,43 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLEndTran(
+        partial internal static ODBC32.SQLRETURN SQLEndTran(
             /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
             /*SQLHANDLE*/IntPtr Handle,
             /*SQLSMALLINT*/short CompletionType
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLExecDirectW(
+        partial internal static ODBC32.SQLRETURN SQLExecDirectW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLCHAR* */string StatementText,
             /*SQLINTEGER*/int TextLength
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLExecute(
+        partial internal static ODBC32.SQLRETURN SQLExecute(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLFetch(
+        partial internal static ODBC32.SQLRETURN SQLFetch(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLFreeHandle(
+        partial internal static ODBC32.SQLRETURN SQLFreeHandle(
             /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
             /*SQLHSTMT*/IntPtr StatementHandle
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLFreeStmt(
+        partial internal static ODBC32.SQLRETURN SQLFreeStmt(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLUSMALLINT*/ODBC32.STMT Option
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLGetConnectAttrW(
+        partial internal static ODBC32.SQLRETURN SQLGetConnectAttrW(
             /*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
             /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
             /*SQLPOINTER*/byte[] Value,
@@ -193,7 +193,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLGetData(
+        partial internal static ODBC32.SQLRETURN SQLGetData(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLUSMALLINT*/ushort ColumnNumber,
             /*SQLSMALLINT*/ODBC32.SQL_C TargetType,
@@ -203,7 +203,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLGetDescFieldW(
+        partial internal static ODBC32.SQLRETURN SQLGetDescFieldW(
             /*SQLHSTMT*/OdbcDescriptorHandle StatementHandle,
             /*SQLUSMALLINT*/short RecNumber,
             /*SQLUSMALLINT*/ODBC32.SQL_DESC FieldIdentifier,
@@ -213,7 +213,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLGetDiagRecW(
+        partial internal static ODBC32.SQLRETURN SQLGetDiagRecW(
             /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
             /*SQLHANDLE*/OdbcHandle Handle,
             /*SQLSMALLINT*/short RecNumber,
@@ -225,7 +225,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLGetDiagFieldW(
+        partial internal static ODBC32.SQLRETURN SQLGetDiagFieldW(
             /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
             /*SQLHANDLE*/OdbcHandle Handle,
             /*SQLSMALLINT*/short RecNumber,
@@ -236,14 +236,14 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLGetFunctions(
+        partial internal static ODBC32.SQLRETURN SQLGetFunctions(
             /*SQLHBDC*/OdbcConnectionHandle hdbc,
             /*SQLUSMALLINT*/ODBC32.SQL_API fFunction,
             /*SQLUSMALLINT* */out short pfExists
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLGetInfoW(
+        partial internal static ODBC32.SQLRETURN SQLGetInfoW(
             /*SQLHBDC*/OdbcConnectionHandle hdbc,
             /*SQLUSMALLINT*/ODBC32.SQL_INFO fInfoType,
             /*SQLPOINTER*/byte[] rgbInfoValue,
@@ -252,7 +252,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLGetInfoW(
+        partial internal static ODBC32.SQLRETURN SQLGetInfoW(
             /*SQLHBDC*/OdbcConnectionHandle hdbc,
             /*SQLUSMALLINT*/ODBC32.SQL_INFO fInfoType,
             /*SQLPOINTER*/byte[] rgbInfoValue,
@@ -261,7 +261,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLGetStmtAttrW(
+        partial internal static ODBC32.SQLRETURN SQLGetStmtAttrW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
             /*SQLPOINTER*/out IntPtr Value,
@@ -270,31 +270,31 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLGetTypeInfo(
+        partial internal static ODBC32.SQLRETURN SQLGetTypeInfo(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLSMALLINT*/short fSqlType
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLMoreResults(
+        partial internal static ODBC32.SQLRETURN SQLMoreResults(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLNumResultCols(
+        partial internal static ODBC32.SQLRETURN SQLNumResultCols(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLSMALLINT* */out short ColumnCount
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLPrepareW(
+        partial internal static ODBC32.SQLRETURN SQLPrepareW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLCHAR* */string StatementText,
             /*SQLINTEGER*/int TextLength
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLPrimaryKeysW(
+        partial internal static ODBC32.SQLRETURN SQLPrimaryKeysW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLCHAR* */string? CatalogName,
             /*SQLSMALLINT*/short NameLen1,
@@ -305,7 +305,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLProcedureColumnsW(
+        partial internal static ODBC32.SQLRETURN SQLProcedureColumnsW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLCHAR* */string? CatalogName,
             /*SQLSMALLINT*/short NameLen1,
@@ -318,7 +318,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLProceduresW(
+        partial internal static ODBC32.SQLRETURN SQLProceduresW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLCHAR* */string CatalogName,
             /*SQLSMALLINT*/short NameLen1,
@@ -329,13 +329,13 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLRowCount(
+        partial internal static ODBC32.SQLRETURN SQLRowCount(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLLEN* */out IntPtr RowCount
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLSetConnectAttrW(
+        partial internal static ODBC32.SQLRETURN SQLSetConnectAttrW(
             /*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
             /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
             /*SQLPOINTER*/string Value,
@@ -343,7 +343,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLSetConnectAttrW(
+        partial internal static ODBC32.SQLRETURN SQLSetConnectAttrW(
             /*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
             /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
             /*SQLPOINTER*/IntPtr Value,
@@ -351,7 +351,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLSetConnectAttrW( // used only for AutoCommitOn
+        partial internal static ODBC32.SQLRETURN SQLSetConnectAttrW( // used only for AutoCommitOn
             /*SQLHBDC*/IntPtr ConnectionHandle,
             /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
             /*SQLPOINTER*/IntPtr Value,
@@ -359,8 +359,8 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial /*SQLRETURN*/
-        ODBC32.SQLRETURN SQLSetDescFieldW(
+        partial /*SQLRETURN*/
+        internal static ODBC32.SQLRETURN SQLSetDescFieldW(
             /*SQLHSTMT*/OdbcDescriptorHandle StatementHandle,
             /*SQLSMALLINT*/short ColumnNumber,
             /*SQLSMALLINT*/ODBC32.SQL_DESC FieldIdentifier,
@@ -373,7 +373,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLSetDescFieldW(
+        partial internal static ODBC32.SQLRETURN SQLSetDescFieldW(
             /*SQLHSTMT*/OdbcDescriptorHandle StatementHandle,
             /*SQLSMALLINT*/short ColumnNumber,
             /*SQLSMALLINT*/ODBC32.SQL_DESC FieldIdentifier,
@@ -383,7 +383,9 @@ internal static partial class Interop
 
         [LibraryImport(Interop.Libraries.Odbc32)]
         // user can set SQL_ATTR_CONNECTION_POOLING attribute with envHandle = null, this attribute is process-level attribute
-        internal static partial ODBC32.SQLRETURN SQLSetEnvAttr(
+        partial
+        // user can set SQL_ATTR_CONNECTION_POOLING attribute with envHandle = null, this attribute is process-level attribute
+        internal static ODBC32.SQLRETURN SQLSetEnvAttr(
             /*SQLHENV*/OdbcEnvironmentHandle EnvironmentHandle,
             /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
             /*SQLPOINTER*/IntPtr Value,
@@ -391,7 +393,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        internal static partial ODBC32.SQLRETURN SQLSetStmtAttrW(
+        partial internal static ODBC32.SQLRETURN SQLSetStmtAttrW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLINTEGER*/int Attribute,
             /*SQLPOINTER*/IntPtr Value,
@@ -399,7 +401,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLSpecialColumnsW(
+        partial internal static ODBC32.SQLRETURN SQLSpecialColumnsW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLUSMALLINT*/ODBC32.SQL_SPECIALCOLS IdentifierType,
             /*SQLCHAR* */string? CatalogName,
@@ -413,7 +415,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLStatisticsW(
+        partial internal static ODBC32.SQLRETURN SQLStatisticsW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLCHAR* */string? CatalogName,
             /*SQLSMALLINT*/short NameLen1,
@@ -426,7 +428,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial ODBC32.SQLRETURN SQLTablesW(
+        partial internal static ODBC32.SQLRETURN SQLTablesW(
             /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             /*SQLCHAR* */string CatalogName,
             /*SQLSMALLINT*/short NameLen1,

@@ -6,7 +6,7 @@
 
 namespace System.Threading
 {
-    public static partial class EventWaitHandleAcl
+    partial public static class EventWaitHandleAcl
     {
         public static System.Threading.EventWaitHandle Create(
             bool initialState,
@@ -38,7 +38,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class MutexAcl
+    partial public static class MutexAcl
     {
         public static System.Threading.Mutex Create(
             bool initiallyOwned,
@@ -69,7 +69,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class SemaphoreAcl
+    partial public static class SemaphoreAcl
     {
         public static System.Threading.Semaphore Create(
             int initialCount,
@@ -101,7 +101,7 @@ namespace System.Threading
         }
     }
 
-    public static partial class ThreadingAclExtensions
+    partial public static class ThreadingAclExtensions
     {
         public static System.Security.AccessControl.EventWaitHandleSecurity GetAccessControl(
             this System.Threading.EventWaitHandle handle

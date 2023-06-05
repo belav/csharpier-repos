@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public readonly partial struct ChildSyntaxList
+    partial public readonly struct ChildSyntaxList
         : IEquatable<ChildSyntaxList>,
             IReadOnlyList<SyntaxNodeOrToken>
     {

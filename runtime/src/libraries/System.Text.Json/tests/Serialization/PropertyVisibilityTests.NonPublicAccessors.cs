@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class PropertyVisibilityTests
+    partial public static class PropertyVisibilityTests
     {
         [Fact]
         public static void NonPublic_AccessorsNotSupported_WithoutAttribute()

@@ -10,7 +10,7 @@ using InternalSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class GreenNodeTests
+    partial public class GreenNodeTests
     {
         private static void AttachAndCheckDiagnostics(InternalSyntax.CSharpSyntaxNode node)
         {

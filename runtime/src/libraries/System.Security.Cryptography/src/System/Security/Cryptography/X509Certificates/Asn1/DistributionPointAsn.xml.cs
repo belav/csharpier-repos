@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct DistributionPointAsn
+    partial internal struct DistributionPointAsn
     {
         internal System.Security.Cryptography.X509Certificates.Asn1.DistributionPointNameAsn? DistributionPoint;
         internal System.Security.Cryptography.X509Certificates.Asn1.ReasonFlagsAsn? Reasons;

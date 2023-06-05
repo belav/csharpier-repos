@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace System.Data.SqlClient
 {
-    public partial class SqlParameterCollection
+    partial public class SqlParameterCollection
         : DbParameterCollection,
             IDataParameterCollection,
             IList,

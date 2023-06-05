@@ -11,7 +11,7 @@ using Internal.TypeSystem.Ecma;
 
 namespace Internal.IL
 {
-    public sealed partial class EcmaMethodIL : MethodIL
+    partial public sealed class EcmaMethodIL : MethodIL
     {
         private readonly EcmaModule _module;
         private readonly EcmaMethod _method;
@@ -141,7 +141,7 @@ namespace Internal.IL
         }
     }
 
-    public sealed partial class EcmaMethodILScope : MethodILScope
+    partial public sealed class EcmaMethodILScope : MethodILScope
     {
         private readonly EcmaModule _module;
         private readonly EcmaMethod _method;

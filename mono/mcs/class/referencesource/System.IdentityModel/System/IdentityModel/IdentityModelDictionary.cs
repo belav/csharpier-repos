@@ -9,7 +9,7 @@ namespace System.IdentityModel
 
     class IdentityModelDictionary : IXmlDictionary
     {
-        static public readonly IdentityModelDictionary Version1 = new IdentityModelDictionary(
+        public static readonly IdentityModelDictionary Version1 = new IdentityModelDictionary(
             new IdentityModelStringsVersion1()
         );
         IdentityModelStrings strings;
@@ -24,7 +24,7 @@ namespace System.IdentityModel
             this.count = strings.Count;
         }
 
-        static public IdentityModelDictionary CurrentVersion
+        public static IdentityModelDictionary CurrentVersion
         {
             get { return Version1; }
         }

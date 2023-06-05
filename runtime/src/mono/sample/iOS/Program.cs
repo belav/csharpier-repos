@@ -13,7 +13,7 @@ public static class Program
     private static extern void ios_set_text(string value);
 
     [DllImport("__Internal")]
-    unsafe private static extern void ios_register_button_click(delegate* unmanaged<void> callback);
+    private static extern unsafe void ios_register_button_click(delegate* unmanaged<void> callback);
 
     private static int counter = 0;
 

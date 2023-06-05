@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct Pbkdf2SaltChoice
+    partial internal struct Pbkdf2SaltChoice
     {
         internal ReadOnlyMemory<byte>? Specified;
         internal System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn? OtherSource;

@@ -6,7 +6,7 @@
 
 namespace System.Collections.Frozen
 {
-    public static partial class FrozenDictionary
+    partial public static class FrozenDictionary
     {
         public static System.Collections.Frozen.FrozenDictionary<TKey, TValue> ToFrozenDictionary<
             TKey,
@@ -52,7 +52,7 @@ namespace System.Collections.Frozen
         }
     }
 
-    public abstract partial class FrozenDictionary<TKey, TValue>
+    partial public abstract class FrozenDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
@@ -271,7 +271,7 @@ namespace System.Collections.Frozen
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
@@ -303,7 +303,7 @@ namespace System.Collections.Frozen
         }
     }
 
-    public static partial class FrozenSet
+    partial public static class FrozenSet
     {
         public static System.Collections.Frozen.FrozenSet<T> ToFrozenSet<T>(
             this System.Collections.Generic.IEnumerable<T> source,
@@ -314,7 +314,7 @@ namespace System.Collections.Frozen
         }
     }
 
-    public abstract partial class FrozenSet<T>
+    partial public abstract class FrozenSet<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IReadOnlyCollection<T>,
@@ -447,7 +447,7 @@ namespace System.Collections.Frozen
             throw null;
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -478,7 +478,7 @@ namespace System.Collections.Frozen
 
 namespace System.Collections.Immutable
 {
-    public partial interface IImmutableDictionary<TKey, TValue>
+    partial public interface IImmutableDictionary<TKey, TValue>
         : System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
@@ -516,7 +516,7 @@ namespace System.Collections.Immutable
         bool TryGetKey(TKey equalKey, out TKey actualKey);
     }
 
-    public partial interface IImmutableList<T>
+    partial public interface IImmutableList<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IReadOnlyCollection<T>,
             System.Collections.Generic.IReadOnlyList<T>,
@@ -563,7 +563,7 @@ namespace System.Collections.Immutable
         System.Collections.Immutable.IImmutableList<T> SetItem(int index, T value);
     }
 
-    public partial interface IImmutableQueue<T>
+    partial public interface IImmutableQueue<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable
     {
@@ -574,7 +574,7 @@ namespace System.Collections.Immutable
         T Peek();
     }
 
-    public partial interface IImmutableSet<T>
+    partial public interface IImmutableSet<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IReadOnlyCollection<T>,
             System.Collections.IEnumerable
@@ -604,7 +604,7 @@ namespace System.Collections.Immutable
         );
     }
 
-    public partial interface IImmutableStack<T>
+    partial public interface IImmutableStack<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable
     {
@@ -615,7 +615,7 @@ namespace System.Collections.Immutable
         System.Collections.Immutable.IImmutableStack<T> Push(T value);
     }
 
-    public static partial class ImmutableArray
+    partial public static class ImmutableArray
     {
         public static int BinarySearch<T>(
             this System.Collections.Immutable.ImmutableArray<T> array,
@@ -824,7 +824,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public readonly partial struct ImmutableArray<T>
+    partial public readonly struct ImmutableArray<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IList<T>,
@@ -1475,7 +1475,7 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        public sealed partial class Builder
+        partial public sealed class Builder
             : System.Collections.Generic.ICollection<T>,
                 System.Collections.Generic.IEnumerable<T>,
                 System.Collections.Generic.IList<T>,
@@ -1739,7 +1739,7 @@ namespace System.Collections.Immutable
             }
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
         {
             private readonly T[] _array;
             private object _dummy;
@@ -1756,7 +1756,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public static partial class ImmutableDictionary
+    partial public static class ImmutableDictionary
     {
         public static bool Contains<TKey, TValue>(
             this System.Collections.Immutable.IImmutableDictionary<TKey, TValue> map,
@@ -2018,7 +2018,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public sealed partial class ImmutableDictionary<TKey, TValue>
+    partial public sealed class ImmutableDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
@@ -2373,7 +2373,7 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        public sealed partial class Builder
+        partial public sealed class Builder
             : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
@@ -2589,7 +2589,7 @@ namespace System.Collections.Immutable
             }
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
@@ -2619,7 +2619,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public static partial class ImmutableHashSet
+    partial public static class ImmutableHashSet
     {
         public static System.Collections.Immutable.ImmutableHashSet<T>.Builder CreateBuilder<T>()
         {
@@ -2709,8 +2709,9 @@ namespace System.Collections.Immutable
         }
     }
 
+    partial partial
 #if NETCOREAPP
-    public sealed partial class ImmutableHashSet<T>
+    public sealed class ImmutableHashSet<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IReadOnlyCollection<T>,
@@ -2720,7 +2721,7 @@ namespace System.Collections.Immutable
             System.Collections.IEnumerable,
             System.Collections.Immutable.IImmutableSet<T>
 #else
-    public sealed partial class ImmutableHashSet<T>
+    public sealed class ImmutableHashSet<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IReadOnlyCollection<T>,
@@ -2949,7 +2950,7 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        public sealed partial class Builder
+        partial public sealed class Builder
             : System.Collections.Generic.ICollection<T>,
                 System.Collections.Generic.IEnumerable<T>,
                 System.Collections.Generic.IReadOnlyCollection<T>,
@@ -3057,7 +3058,7 @@ namespace System.Collections.Immutable
             public void UnionWith(System.Collections.Generic.IEnumerable<T> other) { }
         }
 
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -3084,7 +3085,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public static partial class ImmutableInterlocked
+    partial public static class ImmutableInterlocked
     {
         public static TValue AddOrUpdate<TKey, TValue>(
             ref System.Collections.Immutable.ImmutableDictionary<TKey, TValue> location,
@@ -3262,7 +3263,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public static partial class ImmutableList
+    partial public static class ImmutableList
     {
         public static System.Collections.Immutable.ImmutableList<T>.Builder CreateBuilder<T>()
         {
@@ -3403,7 +3404,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public sealed partial class ImmutableList<T>
+    partial public sealed class ImmutableList<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IList<T>,
@@ -3866,7 +3867,7 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        public sealed partial class Builder
+        partial public sealed class Builder
             : System.Collections.Generic.ICollection<T>,
                 System.Collections.Generic.IEnumerable<T>,
                 System.Collections.Generic.IList<T>,
@@ -4193,7 +4194,7 @@ namespace System.Collections.Immutable
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -4220,7 +4221,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public static partial class ImmutableQueue
+    partial public static class ImmutableQueue
     {
         public static System.Collections.Immutable.ImmutableQueue<T> CreateRange<T>(
             System.Collections.Generic.IEnumerable<T> items
@@ -4253,7 +4254,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public sealed partial class ImmutableQueue<T>
+    partial public sealed class ImmutableQueue<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable,
             System.Collections.Immutable.IImmutableQueue<T>
@@ -4334,7 +4335,7 @@ namespace System.Collections.Immutable
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
-        public partial struct Enumerator
+        partial public struct Enumerator
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -4350,7 +4351,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public static partial class ImmutableSortedDictionary
+    partial public static class ImmutableSortedDictionary
     {
         public static System.Collections.Immutable.ImmutableSortedDictionary<
             TKey,
@@ -4561,7 +4562,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public sealed partial class ImmutableSortedDictionary<TKey, TValue>
+    partial public sealed class ImmutableSortedDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
             TKey,
             TValue
@@ -4929,7 +4930,7 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        public sealed partial class Builder
+        partial public sealed class Builder
             : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
@@ -5156,7 +5157,7 @@ namespace System.Collections.Immutable
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
@@ -5186,7 +5187,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public static partial class ImmutableSortedSet
+    partial public static class ImmutableSortedSet
     {
         public static System.Collections.Immutable.ImmutableSortedSet<T>.Builder CreateBuilder<T>()
         {
@@ -5276,8 +5277,9 @@ namespace System.Collections.Immutable
         }
     }
 
+    partial partial
 #if NETCOREAPP
-    public sealed partial class ImmutableSortedSet<T>
+    public sealed class ImmutableSortedSet<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IList<T>,
@@ -5290,7 +5292,7 @@ namespace System.Collections.Immutable
             System.Collections.IList,
             System.Collections.Immutable.IImmutableSet<T>
 #else
-    public sealed partial class ImmutableSortedSet<T>
+    public sealed class ImmutableSortedSet<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
             System.Collections.Generic.IList<T>,
@@ -5594,7 +5596,7 @@ namespace System.Collections.Immutable
             throw null;
         }
 
-        public sealed partial class Builder
+        partial public sealed class Builder
             : System.Collections.Generic.ICollection<T>,
                 System.Collections.Generic.IEnumerable<T>,
                 System.Collections.Generic.IReadOnlyCollection<T>,
@@ -5743,7 +5745,7 @@ namespace System.Collections.Immutable
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
-        public partial struct Enumerator
+        partial public struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
                 System.Collections.IEnumerator,
                 System.IDisposable
@@ -5770,7 +5772,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public static partial class ImmutableStack
+    partial public static class ImmutableStack
     {
         public static System.Collections.Immutable.ImmutableStack<T> CreateRange<T>(
             System.Collections.Generic.IEnumerable<T> items
@@ -5803,7 +5805,7 @@ namespace System.Collections.Immutable
         }
     }
 
-    public sealed partial class ImmutableStack<T>
+    partial public sealed class ImmutableStack<T>
         : System.Collections.Generic.IEnumerable<T>,
             System.Collections.IEnumerable,
             System.Collections.Immutable.IImmutableStack<T>
@@ -5884,7 +5886,7 @@ namespace System.Collections.Immutable
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
-        public partial struct Enumerator
+        partial public struct Enumerator
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -5903,7 +5905,7 @@ namespace System.Collections.Immutable
 
 namespace System.Linq
 {
-    public static partial class ImmutableArrayExtensions
+    partial public static class ImmutableArrayExtensions
     {
         public static T? Aggregate<T>(
             this System.Collections.Immutable.ImmutableArray<T> immutableArray,

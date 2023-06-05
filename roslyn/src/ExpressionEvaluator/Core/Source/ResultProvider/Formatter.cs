@@ -21,10 +21,11 @@ using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
+    partial
     /// <summary>
     /// Computes string representations of <see cref="DkmClrValue"/> instances.
     /// </summary>
-    internal abstract partial class Formatter
+    internal abstract class Formatter
         : IDkmClrFormatter,
             IDkmClrFormatter2,
             IDkmClrFullNameProvider,

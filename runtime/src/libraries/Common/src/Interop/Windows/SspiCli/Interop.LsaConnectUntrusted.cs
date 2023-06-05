@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class SspiCli
+    partial internal static class SspiCli
     {
         [LibraryImport(Interop.Libraries.SspiCli)]
-        internal static partial int LsaConnectUntrusted(out SafeLsaHandle LsaHandle);
+        partial internal static int LsaConnectUntrusted(out SafeLsaHandle LsaHandle);
     }
 }

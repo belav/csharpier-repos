@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.Internal
 {
-    internal static partial class Assumes
+    partial internal static class Assumes
     {
         [DebuggerStepThrough]
         internal static void NotNull<T>(T value)

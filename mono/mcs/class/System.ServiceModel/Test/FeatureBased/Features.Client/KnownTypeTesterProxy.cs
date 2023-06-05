@@ -11,7 +11,7 @@
     )]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(AdvPoint2D))]
-    public partial class Point2D
+    partial public class Point2D
         : object,
             System.Runtime.Serialization.IExtensibleDataObject,
             System.ComponentModel.INotifyPropertyChanged
@@ -83,7 +83,7 @@
         Namespace = "http://MonoTests.Features.Contracts"
     )]
     [System.SerializableAttribute()]
-    public partial class AdvPoint2D : Point2D
+    partial public class AdvPoint2D : Point2D
     {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double ZeroDistanceField;
@@ -130,7 +130,7 @@
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class KnownTypeTesterContractClient
+    partial public class KnownTypeTesterContractClient
         : System.ServiceModel.ClientBase<IKnownTypeTesterContract>,
             IKnownTypeTesterContract
     {

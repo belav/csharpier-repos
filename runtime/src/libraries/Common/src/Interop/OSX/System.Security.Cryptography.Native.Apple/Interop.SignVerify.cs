@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         internal enum PAL_SignatureAlgorithm : uint
         {
@@ -48,7 +48,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static unsafe partial int AppleCryptoNative_SecKeyVerifySignature(
+        partial private static unsafe int AppleCryptoNative_SecKeyVerifySignature(
             SafeSecKeyRefHandle publicKey,
             byte* pbDataHash,
             int cbDataHash,
@@ -83,7 +83,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static unsafe partial int AppleCryptoNative_SecKeyCreateSignature(
+        partial private static unsafe int AppleCryptoNative_SecKeyCreateSignature(
             SafeSecKeyRefHandle privateKey,
             byte* pbDataHash,
             int cbDataHash,

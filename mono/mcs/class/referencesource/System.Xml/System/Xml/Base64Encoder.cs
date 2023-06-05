@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace System.Xml
 {
-    internal abstract partial class Base64Encoder
+    partial internal abstract class Base64Encoder
     {
         byte[] leftOverBytes;
         int leftOverBytesCount;
@@ -115,7 +115,7 @@ namespace System.Xml
         }
     }
 
-    internal partial class XmlRawWriterBase64Encoder : Base64Encoder
+    partial internal class XmlRawWriterBase64Encoder : Base64Encoder
     {
         XmlRawWriter rawWriter;
 
@@ -130,8 +130,9 @@ namespace System.Xml
         }
     }
 
+    partial
 #if !SILVERLIGHT || FEATURE_NETCORE
-    internal partial class XmlTextWriterBase64Encoder : Base64Encoder
+    internal class XmlTextWriterBase64Encoder : Base64Encoder
     {
         XmlTextEncoder xmlTextEncoder;
 

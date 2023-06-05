@@ -363,7 +363,7 @@ namespace System.Web.Compilation
             }
         }
 
-        static private void ShutdownCallBack(Object state)
+        private static void ShutdownCallBack(Object state)
         {
             string message = state as string;
             if (message != null)
@@ -776,7 +776,7 @@ namespace System.Web.Compilation
             s_inUseAssemblyWasDeleted = true;
         }
 
-        static internal void ShutDownAppDomainIfRequired()
+        internal static void ShutDownAppDomainIfRequired()
         {
             // VSWhidbey 610631 Stress Failure: Worker process throws exceptions while unloading app domain and re-tries over and over
             // It is possible for a deadlock to happen when locks on ApplicationManager and the CompilationMutex
@@ -802,7 +802,7 @@ namespace System.Web.Compilation
             }
         }
 
-        static private void ShutdownCallBack(
+        private static void ShutdownCallBack(
             Object state /*not used*/
         )
         {

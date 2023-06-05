@@ -22,6 +22,7 @@ using IUIThreadOperationExecutor = Microsoft.VisualStudio.Utilities.IUIThreadOpe
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
 {
+    partial
     /// <summary>
     /// The controller for navigation bars.
     /// </summary>
@@ -29,7 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
     /// The threading model for this class is simple: all non-static members are affinitized to the
     /// UI thread.
     /// </remarks>
-    internal partial class NavigationBarController : ForegroundThreadAffinitizedObject, IDisposable
+    internal class NavigationBarController : ForegroundThreadAffinitizedObject, IDisposable
     {
         private readonly INavigationBarPresenter _presenter;
         private readonly ITextBuffer _subjectBuffer;

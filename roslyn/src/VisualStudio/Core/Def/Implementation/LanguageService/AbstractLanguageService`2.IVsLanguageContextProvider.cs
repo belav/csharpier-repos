@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService>
+    partial internal abstract class AbstractLanguageService<TPackage, TLanguageService>
         : IVsLanguageContextProvider
     {
         public int UpdateLanguageContext(

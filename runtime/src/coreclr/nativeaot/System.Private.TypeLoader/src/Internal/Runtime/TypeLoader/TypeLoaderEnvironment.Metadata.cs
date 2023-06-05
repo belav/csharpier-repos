@@ -54,7 +54,7 @@ namespace Internal.Runtime.TypeLoader
         public InvokeTableFlags InvokeTableFlags;
     }
 
-    public sealed partial class TypeLoaderEnvironment
+    partial public sealed class TypeLoaderEnvironment
     {
         /// <summary>
         /// Compare two arrays sequentially.

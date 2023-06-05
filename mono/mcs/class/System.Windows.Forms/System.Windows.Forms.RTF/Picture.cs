@@ -38,7 +38,7 @@ namespace System.Windows.Forms.RTF
         private float width = -1;
         private float height = -1;
 
-        private readonly static float dpix;
+        private static readonly float dpix;
 
         static Picture()
         {

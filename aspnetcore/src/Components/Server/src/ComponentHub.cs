@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
+partial
 // Some notes about our expectations for error handling:
 //
 // In general, we need to prevent any client from interacting with a circuit that's in an unpredictable
@@ -33,7 +34,7 @@ namespace Microsoft.AspNetCore.Components.Server;
 // needs access to the circuit/application state to unblock the message loop. Using async in our
 // Hub methods allows us to ensure message delivery to the client before we abort the connection
 // in error cases.
-internal sealed partial class ComponentHub : Hub
+internal sealed class ComponentHub : Hub
 {
     private static readonly object CircuitKey = new();
     private readonly IServerComponentDeserializer _serverComponentSerializer;
@@ -400,7 +401,7 @@ internal sealed partial class ComponentHub : Hub
     private static Task NotifyClientError(IClientProxy client, string error) =>
         client.SendAsync("JS.Error", error);
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -408,7 +409,7 @@ internal sealed partial class ComponentHub : Hub
             "Received confirmation for batch {BatchId}",
             EventName = "ReceivedConfirmationForBatch"
         )]
-        public static partial void ReceivedConfirmationForBatch(ILogger logger, long batchId);
+        partial public static void ReceivedConfirmationForBatch(ILogger logger, long batchId);
 
         [LoggerMessage(
             2,
@@ -416,7 +417,7 @@ internal sealed partial class ComponentHub : Hub
             "The circuit host '{CircuitId}' has already been initialized",
             EventName = "CircuitAlreadyInitialized"
         )]
-        public static partial void CircuitAlreadyInitialized(ILogger logger, CircuitId circuitId);
+        partial public static void CircuitAlreadyInitialized(ILogger logger, CircuitId circuitId);
 
         [LoggerMessage(
             3,
@@ -424,7 +425,7 @@ internal sealed partial class ComponentHub : Hub
             "Call to '{CallSite}' received before the circuit host initialization",
             EventName = "CircuitHostNotInitialized"
         )]
-        public static partial void CircuitHostNotInitialized(
+        partial public static void CircuitHostNotInitialized(
             ILogger logger,
             [CallerMemberName] string callSite = ""
         );
@@ -435,7 +436,7 @@ internal sealed partial class ComponentHub : Hub
             "Call to '{CallSite}' received after the circuit was shut down",
             EventName = "CircuitHostShutdown"
         )]
-        public static partial void CircuitHostShutdown(
+        partial public static void CircuitHostShutdown(
             ILogger logger,
             [CallerMemberName] string callSite = ""
         );
@@ -446,7 +447,7 @@ internal sealed partial class ComponentHub : Hub
             "Call to '{CallSite}' received invalid input data",
             EventName = "InvalidInputData"
         )]
-        public static partial void InvalidInputData(
+        partial public static void InvalidInputData(
             ILogger logger,
             [CallerMemberName] string callSite = ""
         );
@@ -457,7 +458,7 @@ internal sealed partial class ComponentHub : Hub
             "Circuit initialization failed",
             EventName = "CircuitInitializationFailed"
         )]
-        public static partial void CircuitInitializationFailed(ILogger logger, Exception exception);
+        partial public static void CircuitInitializationFailed(ILogger logger, Exception exception);
 
         [LoggerMessage(
             7,
@@ -465,7 +466,7 @@ internal sealed partial class ComponentHub : Hub
             "Created circuit '{CircuitId}' with secret '{CircuitIdSecret}' for '{ConnectionId}'",
             EventName = "CreatedCircuit"
         )]
-        private static partial void CreatedCircuitCore(
+        partial private static void CreatedCircuitCore(
             ILogger logger,
             CircuitId circuitId,
             string circuitIdSecret,
@@ -494,7 +495,7 @@ internal sealed partial class ComponentHub : Hub
             "ConnectAsync received an invalid circuit id '{CircuitIdSecret}'",
             EventName = "InvalidCircuitId"
         )]
-        private static partial void InvalidCircuitIdCore(ILogger logger, string circuitIdSecret);
+        partial private static void InvalidCircuitIdCore(ILogger logger, string circuitIdSecret);
 
         public static void InvalidCircuitId(ILogger logger, string circuitSecret)
         {

@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 {
-    internal partial class InlineTemporaryCodeRefactoringProvider
+    partial internal class InlineTemporaryCodeRefactoringProvider
     {
         /// <summary>
         /// This class handles rewriting initializer expressions that refer to the variable

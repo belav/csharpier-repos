@@ -73,7 +73,7 @@ namespace System.Web.Http.WebHost
             return bytesRead;
         }
 
-        public async override Task<int> ReadAsync(
+        public override async Task<int> ReadAsync(
             byte[] buffer,
             int offset,
             int count,

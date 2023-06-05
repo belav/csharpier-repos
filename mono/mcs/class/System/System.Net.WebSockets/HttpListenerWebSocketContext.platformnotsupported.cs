@@ -27,7 +27,7 @@
 
 namespace System.Net.WebSockets
 {
-    public partial class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext
+    partial public class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext
     {
         const string EXCEPTION_MESSAGE =
             "System.Net.WebSockets.HttpListenerWebSocketContext is not supported on the current platform.";

@@ -11,16 +11,16 @@ using System.Text.RegularExpressions;
 
 namespace System.Xml.Serialization
 {
-    internal sealed partial class SourceInfo
+    partial internal sealed class SourceInfo
     {
         //a[ia]
         //((global::System.Xml.Serialization.XmlSerializerNamespaces)p[0])
         [GeneratedRegex("([(][(](?<t>[^)]+)[)])?(?<a>[^[]+)[[](?<ia>.+)[]][)]?")]
-        private static partial Regex Regex1();
+        partial private static Regex Regex1();
 
         //((global::Microsoft.CFx.Test.Common.TypeLibrary.IXSType_9)o), @"IXSType_9", @"", true, true);
         [GeneratedRegex("[(][(](?<cast>[^)]+)[)](?<arg>[^)]+)[)]")]
-        private static partial Regex Regex2();
+        partial private static Regex Regex2();
 
         private static readonly Lazy<MethodInfo> s_iListGetItemMethod = new Lazy<MethodInfo>(() =>
         {

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace ILLink.RoslynAnalyzer.Tests.Inheritance.Interfaces
 {
-    public sealed partial class StaticInterfaceMethodsTests : LinkerTestBase
+    partial public sealed class StaticInterfaceMethodsTests : LinkerTestBase
     {
         protected override string TestSuiteName => "Inheritance.Interfaces.StaticInterfaceMethods";
 

@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace System.Data.Entity.Design
 {
-    public sealed partial class EntityStoreSchemaGenerator
+    partial public sealed class EntityStoreSchemaGenerator
     {
         internal enum DbObjectType
         {

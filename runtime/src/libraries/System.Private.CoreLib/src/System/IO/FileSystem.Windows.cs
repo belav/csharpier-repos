@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace System.IO
 {
-    internal static partial class FileSystem
+    partial internal static class FileSystem
     {
         public static void Encrypt(string path)
         {

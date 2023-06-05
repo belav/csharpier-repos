@@ -348,7 +348,7 @@ namespace System
         internal static extern int InternalKeyAvailable(int ms_timeout);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe internal static extern bool TtySetup(
+        internal static extern unsafe bool TtySetup(
             string keypadXmit,
             string teardown,
             out byte[] control_characters,

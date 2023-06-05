@@ -162,7 +162,7 @@ namespace IBM.Data.DB2
     {
         static bool useLibCli;
 
-        static public short Initialize(ref IntPtr pEnvHandle)
+        public static short Initialize(ref IntPtr pEnvHandle)
         {
             string OSVersion = Environment.OSVersion.ToString();
             useLibCli = true;
@@ -177,7 +177,7 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLAllocHandle(
+        public static short SQLAllocHandle(
             short handleType,
             IntPtr inputHandle,
             out IntPtr outputHandle
@@ -188,21 +188,21 @@ namespace IBM.Data.DB2
             return StaticWrapper36.SQLAllocHandle(handleType, inputHandle, out outputHandle);
         }
 
-        static public short SQLFreeHandle(short handleType, IntPtr inputHandle)
+        public static short SQLFreeHandle(short handleType, IntPtr inputHandle)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLFreeHandle(handleType, inputHandle);
             return StaticWrapper36.SQLFreeHandle(handleType, inputHandle);
         }
 
-        static public short SQLFreeStmt(IntPtr StatementHandle, short option)
+        public static short SQLFreeStmt(IntPtr StatementHandle, short option)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLFreeStmt(StatementHandle, option);
             return StaticWrapper36.SQLFreeStmt(StatementHandle, option);
         }
 
-        static public short SQLConnect(
+        public static short SQLConnect(
             IntPtr sqlHdbc,
             string serverName,
             short serverNameLength,
@@ -233,7 +233,7 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLColAttribute(
+        public static short SQLColAttribute(
             IntPtr StatementHandle,
             short ColumnNumber,
             short FieldIdentifier,
@@ -264,7 +264,7 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLGetConnectAttr(
+        public static short SQLGetConnectAttr(
             IntPtr ConnectionHandle,
             int Attribute,
             IntPtr ValuePtr,
@@ -289,7 +289,7 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLGetConnectAttr(
+        public static short SQLGetConnectAttr(
             IntPtr ConnectionHandle,
             int Attribute,
             out int Value,
@@ -314,7 +314,7 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLColAttribute(
+        public static short SQLColAttribute(
             IntPtr StatementHandle,
             short ColumnNumber,
             short FieldIdentifier,
@@ -345,14 +345,14 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLMoreResults(IntPtr StatementHandle)
+        public static short SQLMoreResults(IntPtr StatementHandle)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLMoreResults(StatementHandle);
             return StaticWrapper36.SQLMoreResults(StatementHandle);
         }
 
-        static public short SQLGetData(
+        public static short SQLGetData(
             IntPtr StatementHandle,
             short ColumnNumber,
             short TargetType,
@@ -380,7 +380,7 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLGetData(
+        public static short SQLGetData(
             IntPtr StatementHandle,
             short ColumnNumber,
             short TargetType,
@@ -408,7 +408,7 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLGetData(
+        public static short SQLGetData(
             IntPtr StatementHandle,
             short ColumnNumber,
             short TargetType,
@@ -436,14 +436,14 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLDisconnect(IntPtr sqlHdbc)
+        public static short SQLDisconnect(IntPtr sqlHdbc)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLDisconnect(sqlHdbc);
             return StaticWrapper36.SQLDisconnect(sqlHdbc);
         }
 
-        static public short SQLGetDiagRec(
+        public static short SQLGetDiagRec(
             short handleType,
             IntPtr handle,
             short recNum,
@@ -477,7 +477,7 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLSetConnectAttr(
+        public static short SQLSetConnectAttr(
             IntPtr sqlHdbc,
             int sqlAttr,
             IntPtr sqlValuePtr,
@@ -494,7 +494,7 @@ namespace IBM.Data.DB2
             return StaticWrapper36.SQLSetConnectAttr(sqlHdbc, sqlAttr, sqlValuePtr, sqlValueLength);
         }
 
-        static public short SQLSetStmtAttr(
+        public static short SQLSetStmtAttr(
             IntPtr sqlHdbc,
             int sqlAttr,
             IntPtr sqlValuePtr,
@@ -512,7 +512,9 @@ namespace IBM.Data.DB2
         }
 
         //for bulk operations
-        static public short SQLSetStmtAttr(
+        public
+        //for bulk operations
+        static short SQLSetStmtAttr(
             IntPtr sqlHdbc,
             int sqlAttr,
             ushort[] sqlValuePtr,
@@ -529,56 +531,56 @@ namespace IBM.Data.DB2
             return StaticWrapper36.SQLSetStmtAttr(sqlHdbc, sqlAttr, sqlValuePtr, sqlValueLength);
         }
 
-        static public short SQLEndTran(short handleType, IntPtr handle, short fType)
+        public static short SQLEndTran(short handleType, IntPtr handle, short fType)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLEndTran(handleType, handle, fType);
             return StaticWrapper36.SQLEndTran(handleType, handle, fType);
         }
 
-        static public short SQLCancel(IntPtr handle)
+        public static short SQLCancel(IntPtr handle)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLCancel(handle);
             return StaticWrapper36.SQLCancel(handle);
         }
 
-        static public short SQLNumResultCols(IntPtr handle, out short numCols)
+        public static short SQLNumResultCols(IntPtr handle, out short numCols)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLNumResultCols(handle, out numCols);
             return StaticWrapper36.SQLNumResultCols(handle, out numCols);
         }
 
-        static public short SQLFetch(IntPtr handle)
+        public static short SQLFetch(IntPtr handle)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLFetch(handle);
             return StaticWrapper36.SQLFetch(handle);
         }
 
-        static public short SQLRowCount(IntPtr stmtHandle, out int numRows)
+        public static short SQLRowCount(IntPtr stmtHandle, out int numRows)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLRowCount(stmtHandle, out numRows);
             return StaticWrapper36.SQLRowCount(stmtHandle, out numRows);
         }
 
-        static public short SQLExecute(IntPtr handle)
+        public static short SQLExecute(IntPtr handle)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLExecute(handle);
             return StaticWrapper36.SQLExecute(handle);
         }
 
-        static public short SQLExecDirect(IntPtr stmtHandle, string stmt, int length)
+        public static short SQLExecDirect(IntPtr stmtHandle, string stmt, int length)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLExecDirect(stmtHandle, stmt, length);
             return StaticWrapper36.SQLExecDirect(stmtHandle, stmt, length);
         }
 
-        static public short SQLDriverConnect(
+        public static short SQLDriverConnect(
             IntPtr hdbc,
             IntPtr windowHandle,
             string inConnectStr,
@@ -612,14 +614,14 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLPrepare(IntPtr stmtHandle, string stmt, int length)
+        public static short SQLPrepare(IntPtr stmtHandle, string stmt, int length)
         {
             if (useLibCli)
                 return StaticWrapperCli.SQLPrepare(stmtHandle, stmt, length);
             return StaticWrapper36.SQLPrepare(stmtHandle, stmt, length);
         }
 
-        static public short SQLBindParameter(
+        public static short SQLBindParameter(
             IntPtr stmtHandle,
             short paramNumber,
             short dataType,
@@ -659,7 +661,7 @@ namespace IBM.Data.DB2
             );
         }
 
-        static public short SQLBindParameter(
+        public static short SQLBindParameter(
             IntPtr stmtHandle,
             short paramNumber,
             short dataType,

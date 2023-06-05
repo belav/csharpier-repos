@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class EventDeclarationSyntax
+    partial public class EventDeclarationSyntax
     {
         public EventDeclarationSyntax Update(
             SyntaxList<AttributeListSyntax> attributeLists,

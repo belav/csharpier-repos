@@ -14,7 +14,7 @@ namespace System.Web.Management
             get { return _webServiceErrorEventCode; }
         }
 
-        internal protected WebServiceErrorEvent(
+        protected internal WebServiceErrorEvent(
             string message,
             object eventSource,
             Exception exception

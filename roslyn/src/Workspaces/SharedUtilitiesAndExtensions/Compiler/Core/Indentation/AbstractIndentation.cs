@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Indentation
 {
-    internal abstract partial class AbstractIndentation<TSyntaxRoot>
+    partial internal abstract class AbstractIndentation<TSyntaxRoot>
         where TSyntaxRoot : SyntaxNode, ICompilationUnitSyntax
     {
         protected abstract ISyntaxFacts SyntaxFacts { get; }

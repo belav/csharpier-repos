@@ -30,7 +30,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 {
-    internal partial class StreamingFindUsagesPresenter
+    partial internal class StreamingFindUsagesPresenter
     {
         private abstract class AbstractTableDataSourceFindUsagesContext
             : FindUsagesContext,

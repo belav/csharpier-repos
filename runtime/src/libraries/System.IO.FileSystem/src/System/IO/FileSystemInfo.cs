@@ -11,7 +11,7 @@ namespace Microsoft.IO
 namespace System.IO
 #endif
 {
-    public abstract partial class FileSystemInfo : MarshalByRefObject, ISerializable
+    partial public abstract class FileSystemInfo : MarshalByRefObject, ISerializable
     {
         // FullPath and OriginalPath are documented fields
         protected string FullPath = null!; // fully qualified path of the file or directory

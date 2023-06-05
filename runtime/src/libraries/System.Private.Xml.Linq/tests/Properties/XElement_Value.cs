@@ -13,13 +13,14 @@ using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class PropertiesFunctionalTests : TestModule
+    partial public class PropertiesFunctionalTests : TestModule
     {
-        public partial class PropertiesTests : XLinqTestCase
+        partial public class PropertiesTests : XLinqTestCase
         {
+            partial
             //[TestCase(Name = "XElement.Name", Params = new object[] { false })]
             //[TestCase(Name = "XElement.Name with Events", Params = new object[] { true })]
-            public partial class XElementName : XLinqTestCase
+            public class XElementName : XLinqTestCase
             {
                 private EventsHelper _eHelper;
                 private bool _runWithEvents;
@@ -187,9 +188,10 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
+            partial
             //[TestCase(Name = "XElement.Value", Params = new object[] { false })]
             //[TestCase(Name = "XElement.Value with Events", Params = new object[] { true })]
-            public partial class XElementValue : XLinqTestCase
+            public class XElementValue : XLinqTestCase
             {
                 private EventsHelper _eHelper;
                 private bool _runWithEvents;

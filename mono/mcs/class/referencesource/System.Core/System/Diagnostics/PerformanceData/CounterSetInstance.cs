@@ -27,7 +27,7 @@ namespace System.Diagnostics.PerformanceData
         private CounterSetInstanceCounterDataSet m_counters;
 
         [SecurityCritical]
-        unsafe internal UnsafeNativeMethods.PerfCounterSetInstanceStruct* m_nativeInst;
+        internal unsafe UnsafeNativeMethods.PerfCounterSetInstanceStruct* m_nativeInst;
 
         [System.Security.SecurityCritical]
         [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]

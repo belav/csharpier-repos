@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal abstract partial class AbstractReferenceFinder : IReferenceFinder
+    partial internal abstract class AbstractReferenceFinder : IReferenceFinder
     {
         private static bool ShouldFindReferencesInGlobalSuppressions(
             ISymbol symbol,

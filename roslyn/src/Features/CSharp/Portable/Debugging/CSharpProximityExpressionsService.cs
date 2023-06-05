@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
     /// contribute to the 'previous statement'
     /// </summary>
     [ExportLanguageService(typeof(IProximityExpressionsService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpProximityExpressionsService : IProximityExpressionsService
+    partial internal class CSharpProximityExpressionsService : IProximityExpressionsService
     {
         [ImportingConstructor]
         [SuppressMessage(

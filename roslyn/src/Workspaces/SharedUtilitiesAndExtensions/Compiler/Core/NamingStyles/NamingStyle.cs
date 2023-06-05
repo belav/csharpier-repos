@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.NamingStyles
 {
     [DataContract]
-    internal readonly partial record struct NamingStyle : IObjectWritable
+    partial internal readonly record struct NamingStyle : IObjectWritable
     {
         [DataMember(Order = 0)]
         public Guid ID { get; init; }

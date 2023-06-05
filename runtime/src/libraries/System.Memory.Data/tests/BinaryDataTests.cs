@@ -15,7 +15,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class BinaryDataTests
+    partial public class BinaryDataTests
     {
         [Fact]
         public void CanCreateBinaryDataFromBytes()
@@ -734,10 +734,10 @@ namespace System.Tests
         }
 
         [JsonSerializable(typeof(TestModel))]
-        internal partial class TestModelJsonContext : JsonSerializerContext { }
+        partial internal class TestModelJsonContext : JsonSerializerContext { }
 
         [JsonSerializable(typeof(MismatchedTestModel))]
-        internal partial class MismatchedTestModelJsonContext : JsonSerializerContext { }
+        partial internal class MismatchedTestModelJsonContext : JsonSerializerContext { }
 
         private class OverFlowStream : MemoryStream
         {

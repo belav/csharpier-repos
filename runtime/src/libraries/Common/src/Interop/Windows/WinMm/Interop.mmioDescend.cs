@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class WinMM
+    partial internal static class WinMM
     {
         internal const int MMIO_FINDRIFF = 0x00000020;
 
         [LibraryImport(Libraries.WinMM)]
-        internal static unsafe partial int mmioDescend(
+        partial internal static unsafe int mmioDescend(
             IntPtr hMIO,
             MMCKINFO* lpck,
             MMCKINFO* lcpkParent,

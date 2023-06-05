@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
 {
-    public partial struct GCHandle
+    partial public struct GCHandle
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern IntPtr InternalAlloc(object? value, GCHandleType type);

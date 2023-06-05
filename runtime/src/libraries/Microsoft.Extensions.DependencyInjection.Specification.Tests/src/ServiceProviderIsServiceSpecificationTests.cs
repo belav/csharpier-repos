@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    public abstract partial class DependencyInjectionSpecificationTests
+    partial public abstract class DependencyInjectionSpecificationTests
     {
         public virtual bool SupportsIServiceProviderIsService => true;
 

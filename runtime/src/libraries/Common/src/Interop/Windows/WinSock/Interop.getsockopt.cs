@@ -4,12 +4,12 @@
 using System.Runtime.InteropServices;
 using System.Net.Sockets;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static unsafe partial SocketError getsockopt(
+        partial internal static unsafe SocketError getsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -18,7 +18,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError getsockopt(
+        partial internal static SocketError getsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -27,7 +27,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError getsockopt(
+        partial internal static SocketError getsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
@@ -36,7 +36,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError getsockopt(
+        partial internal static SocketError getsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,

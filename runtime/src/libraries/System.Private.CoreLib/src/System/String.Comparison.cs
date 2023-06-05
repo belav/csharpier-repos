@@ -12,7 +12,7 @@ using System.Text.Unicode;
 
 namespace System
 {
-    public partial class String
+    partial public class String
     {
         //
         // Search/Query methods

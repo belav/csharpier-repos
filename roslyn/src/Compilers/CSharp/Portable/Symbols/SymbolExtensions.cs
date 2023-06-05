@@ -14,7 +14,7 @@ using static System.Linq.ImmutableArrayExtensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal static partial class SymbolExtensions
+    partial internal static class SymbolExtensions
     {
         /// <summary>
         /// Does the compilation this symbol belongs to output to a winmdobj?

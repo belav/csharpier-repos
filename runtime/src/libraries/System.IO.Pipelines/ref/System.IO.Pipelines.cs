@@ -6,7 +6,7 @@
 
 namespace System.IO.Pipelines
 {
-    public partial struct FlushResult
+    partial public struct FlushResult
     {
         private int _dummyPrimitive;
 
@@ -25,13 +25,13 @@ namespace System.IO.Pipelines
         }
     }
 
-    public partial interface IDuplexPipe
+    partial public interface IDuplexPipe
     {
         System.IO.Pipelines.PipeReader Input { get; }
         System.IO.Pipelines.PipeWriter Output { get; }
     }
 
-    public sealed partial class Pipe
+    partial public sealed class Pipe
     {
         public Pipe() { }
 
@@ -49,7 +49,7 @@ namespace System.IO.Pipelines
         public void Reset() { }
     }
 
-    public partial class PipeOptions
+    partial public class PipeOptions
     {
         public PipeOptions(
             System.Buffers.MemoryPool<byte>? pool = null,
@@ -95,7 +95,7 @@ namespace System.IO.Pipelines
         }
     }
 
-    public abstract partial class PipeReader
+    partial public abstract class PipeReader
     {
         protected PipeReader() { }
 
@@ -186,7 +186,7 @@ namespace System.IO.Pipelines
         public abstract bool TryRead(out System.IO.Pipelines.ReadResult result);
     }
 
-    public abstract partial class PipeScheduler
+    partial public abstract class PipeScheduler
     {
         protected PipeScheduler() { }
 
@@ -201,7 +201,7 @@ namespace System.IO.Pipelines
         public abstract void Schedule(System.Action<object?> action, object? state);
     }
 
-    public abstract partial class PipeWriter : System.Buffers.IBufferWriter<byte>
+    partial public abstract class PipeWriter : System.Buffers.IBufferWriter<byte>
     {
         protected PipeWriter() { }
 
@@ -267,7 +267,7 @@ namespace System.IO.Pipelines
         }
     }
 
-    public readonly partial struct ReadResult
+    partial public readonly struct ReadResult
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -295,7 +295,7 @@ namespace System.IO.Pipelines
         }
     }
 
-    public static partial class StreamPipeExtensions
+    partial public static class StreamPipeExtensions
     {
         public static System.Threading.Tasks.Task CopyToAsync(
             this System.IO.Stream source,
@@ -308,7 +308,7 @@ namespace System.IO.Pipelines
         }
     }
 
-    public partial class StreamPipeReaderOptions
+    partial public class StreamPipeReaderOptions
     {
         public StreamPipeReaderOptions(
             System.Buffers.MemoryPool<byte>? pool,
@@ -347,7 +347,7 @@ namespace System.IO.Pipelines
         }
     }
 
-    public partial class StreamPipeWriterOptions
+    partial public class StreamPipeWriterOptions
     {
         public StreamPipeWriterOptions(
             System.Buffers.MemoryPool<byte>? pool = null,

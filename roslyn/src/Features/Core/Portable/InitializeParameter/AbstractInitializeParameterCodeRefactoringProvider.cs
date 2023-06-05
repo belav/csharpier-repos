@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.InitializeParameter
 {
-    internal abstract partial class AbstractInitializeParameterCodeRefactoringProvider<
+    partial internal abstract class AbstractInitializeParameterCodeRefactoringProvider<
         TTypeDeclarationSyntax,
         TParameterSyntax,
         TStatementSyntax,

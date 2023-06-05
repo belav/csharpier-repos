@@ -60,7 +60,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 #region ShouldSerializeContractResolver
     public class ShouldSerializeContractResolver : DefaultContractResolver
     {
-        public new static readonly ShouldSerializeContractResolver Instance =
+        public static new readonly ShouldSerializeContractResolver Instance =
             new ShouldSerializeContractResolver();
 
         protected override JsonProperty CreateProperty(

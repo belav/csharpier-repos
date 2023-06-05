@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    public partial class AesCcm
+    partial public class AesCcm
     {
         public static bool IsSupported => false;
 

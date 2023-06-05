@@ -1351,21 +1351,21 @@ namespace System.Windows.Forms
             EntryPoint = "RegisterDragDrop",
             CallingConvention = CallingConvention.StdCall
         )]
-        private extern static uint Win32RegisterDragDrop(IntPtr Window, IntPtr pDropTarget);
+        private static extern uint Win32RegisterDragDrop(IntPtr Window, IntPtr pDropTarget);
 
         [DllImport(
             "ole32.dll",
             EntryPoint = "RevokeDragDrop",
             CallingConvention = CallingConvention.StdCall
         )]
-        private extern static int Win32RevokeDragDrop(IntPtr Window);
+        private static extern int Win32RevokeDragDrop(IntPtr Window);
 
         [DllImport(
             "ole32.dll",
             EntryPoint = "DoDragDrop",
             CallingConvention = CallingConvention.StdCall
         )]
-        private extern static uint Win32DoDragDrop(
+        private static extern uint Win32DoDragDrop(
             IntPtr pDataObject,
             IntPtr pDropSource,
             IntPtr dwOKEffect,
@@ -1380,7 +1380,7 @@ namespace System.Windows.Forms
             EntryPoint = "OleInitialize",
             CallingConvention = CallingConvention.StdCall
         )]
-        private extern static int Win32OleInitialize(IntPtr pvReserved);
+        private static extern int Win32OleInitialize(IntPtr pvReserved);
 
         [DllImport(
             "shell32.dll",
@@ -1388,7 +1388,7 @@ namespace System.Windows.Forms
             CharSet = CharSet.Unicode,
             CallingConvention = CallingConvention.StdCall
         )]
-        private extern static int Win32DragQueryFile(
+        private static extern int Win32DragQueryFile(
             IntPtr hDrop,
             int iFile,
             IntPtr lpszFile,
@@ -1401,7 +1401,7 @@ namespace System.Windows.Forms
             CharSet = CharSet.Unicode,
             CallingConvention = CallingConvention.StdCall
         )]
-        private extern static int Win32DragQueryFile(
+        private static extern int Win32DragQueryFile(
             IntPtr hDrop,
             int iFile,
             StringBuilder lpszFile,
@@ -1413,7 +1413,7 @@ namespace System.Windows.Forms
             EntryPoint = "SHCreateStdEnumFmtEtc",
             CallingConvention = CallingConvention.StdCall
         )]
-        private extern static uint Win32SHCreateStdEnumFmtEtc(
+        private static extern uint Win32SHCreateStdEnumFmtEtc(
             uint cfmt,
             FORMATETC[] afmt,
             ref IntPtr ppenumFormatEtc

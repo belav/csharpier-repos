@@ -5,8 +5,9 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     // Functionality related to deterministic ordering of methods
-    public partial class CalliMarshallingMethodThunk
+    public class CalliMarshallingMethodThunk
     {
         protected override int ClassCode => 1594107963;
 

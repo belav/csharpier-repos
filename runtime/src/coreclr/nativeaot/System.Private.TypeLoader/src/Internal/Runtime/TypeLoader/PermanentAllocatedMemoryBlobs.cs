@@ -16,7 +16,7 @@ using Internal.NativeFormat;
 
 namespace Internal.Runtime.TypeLoader
 {
-    public sealed partial class PermanentAllocatedMemoryBlobs
+    partial public sealed class PermanentAllocatedMemoryBlobs
     {
         // Various functions in the type loader need to create permanent pointers for various purposes.
 

@@ -27,11 +27,12 @@ namespace System.Xml
         RoundtripKind,
     }
 
+    partial
     /// <devdoc>
     ///    Encodes and decodes XML names according to
     ///    the "Encoding of arbitrary Unicode Characters in XML Names" specification.
     /// </devdoc>
-    public partial class XmlConvert
+    public class XmlConvert
     {
         internal static char[] crt = new char[] { '\n', '\r', '\t' };
 
@@ -316,10 +317,10 @@ namespace System.Xml
         private const int EncodedCharLength = 7; // ("_xFFFF_".Length);
 
         [GeneratedRegex("_[Xx][0-9a-fA-F]{4}(?:_|[0-9a-fA-F]{4}_)")]
-        private static partial Regex DecodeCharRegex();
+        partial private static Regex DecodeCharRegex();
 
         [GeneratedRegex("(?<=_)[Xx][0-9a-fA-F]{4}(?:_|[0-9a-fA-F]{4}_)")]
-        private static partial Regex EncodeCharRegex();
+        partial private static Regex EncodeCharRegex();
 
         private static int FromHex(char digit)
         {

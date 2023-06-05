@@ -15,10 +15,11 @@ namespace System.Data.EntityClient
     using System.Data.Metadata.Edm;
     using System.Diagnostics;
 
+    partial
     /// <summary>
     /// Class representing a parameter used in EntityCommand
     /// </summary>
-    public sealed partial class EntityParameter : DbParameter, IDbDataParameter
+    public sealed class EntityParameter : DbParameter, IDbDataParameter
     {
         private string _parameterName;
         private DbType? _dbType;

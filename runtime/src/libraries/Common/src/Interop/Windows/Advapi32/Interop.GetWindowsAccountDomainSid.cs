@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
             EntryPoint = "GetWindowsAccountDomainSid",
             SetLastError = true
         )]
-        internal static partial int GetWindowsAccountDomainSid(
+        partial internal static int GetWindowsAccountDomainSid(
             byte[] sid,
             byte[] resultSid,
             ref uint resultSidLength

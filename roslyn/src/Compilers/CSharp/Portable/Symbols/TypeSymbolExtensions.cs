@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal static partial class TypeSymbolExtensions
+    partial internal static class TypeSymbolExtensions
     {
         public static bool ImplementsInterface(
             this TypeSymbol subType,

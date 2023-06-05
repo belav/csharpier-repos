@@ -6,7 +6,7 @@
 
 namespace System.Resources.Extensions
 {
-    public sealed partial class DeserializingResourceReader
+    partial public sealed class DeserializingResourceReader
         : System.Collections.IEnumerable,
             System.IDisposable,
             System.Resources.IResourceReader
@@ -30,7 +30,7 @@ namespace System.Resources.Extensions
         }
     }
 
-    public sealed partial class PreserializedResourceWriter
+    partial public sealed class PreserializedResourceWriter
         : System.IDisposable,
             System.Resources.IResourceWriter
     {

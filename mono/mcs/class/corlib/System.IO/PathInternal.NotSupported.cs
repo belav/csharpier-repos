@@ -1,6 +1,6 @@
 namespace System.IO
 {
-    internal static partial class PathInternal
+    partial internal static class PathInternal
     {
         internal const char DirectorySeparatorChar = '\0';
         internal const char AltDirectorySeparatorChar = '\0';

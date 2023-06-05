@@ -3,12 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
-        internal static unsafe partial int CertVerifyTimeValidity(
+        partial internal static unsafe int CertVerifyTimeValidity(
             ref FILETIME pTimeToVerify,
             CERT_INFO* pCertInfo
         );

@@ -34,7 +34,7 @@ using System.Xml;
 
 namespace System.Web.Caching
 {
-    sealed partial class CacheItemPriorityQueue
+    partial sealed class CacheItemPriorityQueue
     {
         const int INITIAL_HEAP_SIZE = 32;
         const int HEAP_RESIZE_THRESHOLD = 8192;

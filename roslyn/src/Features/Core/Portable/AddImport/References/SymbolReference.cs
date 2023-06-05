@@ -17,9 +17,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
-        private abstract partial class SymbolReference : Reference
+        partial private abstract class SymbolReference : Reference
         {
             public readonly SymbolResult<INamespaceOrTypeSymbol> SymbolResult;
 

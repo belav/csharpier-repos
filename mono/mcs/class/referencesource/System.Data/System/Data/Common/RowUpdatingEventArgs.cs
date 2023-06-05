@@ -52,8 +52,9 @@ namespace System.Data.Common
             _tableMapping = tableMapping;
         }
 
+        protected
         //
-        virtual protected IDbCommand BaseCommand
+        virtual IDbCommand BaseCommand
         {
             get { return _command; }
             set { _command = value; }

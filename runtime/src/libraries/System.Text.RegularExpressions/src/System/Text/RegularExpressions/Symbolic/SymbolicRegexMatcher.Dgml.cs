@@ -10,7 +10,7 @@ using System.Net;
 
 namespace System.Text.RegularExpressions.Symbolic
 {
-    internal sealed partial class SymbolicRegexMatcher<TSet>
+    partial internal sealed class SymbolicRegexMatcher<TSet>
     {
         /// <inheritdoc cref="Regex.SaveDGML(TextWriter, int)"/>
         [ExcludeFromCodeCoverage(Justification = "Currently only used for testing")]

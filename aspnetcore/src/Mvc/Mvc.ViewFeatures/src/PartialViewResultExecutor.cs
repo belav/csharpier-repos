@@ -15,12 +15,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+partial
 /// <summary>
 /// Finds and executes an <see cref="IView"/> for a <see cref="PartialViewResult"/>.
 /// </summary>
-public partial class PartialViewResultExecutor
-    : ViewExecutor,
-        IActionResultExecutor<PartialViewResult>
+public class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<PartialViewResult>
 {
     private const string ActionNameKey = "action";
 
@@ -244,7 +243,7 @@ public partial class PartialViewResultExecutor
         return stringRouteValue;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -252,7 +251,7 @@ public partial class PartialViewResultExecutor
             "Executing PartialViewResult, running view {PartialViewName}.",
             EventName = "PartialViewResultExecuting"
         )]
-        public static partial void PartialViewResultExecuting(
+        partial public static void PartialViewResultExecuting(
             ILogger logger,
             string partialViewName
         );
@@ -263,7 +262,7 @@ public partial class PartialViewResultExecutor
             "The partial view path '{PartialViewFilePath}' was found in {ElapsedMilliseconds}ms.",
             EventName = "PartialViewFound"
         )]
-        private static partial void PartialViewFound(
+        partial private static void PartialViewFound(
             ILogger logger,
             string partialViewFilePath,
             double elapsedMilliseconds
@@ -280,7 +279,7 @@ public partial class PartialViewResultExecutor
             "The partial view '{PartialViewName}' was not found. Searched locations: {SearchedViewLocations}",
             EventName = "PartialViewNotFound"
         )]
-        public static partial void PartialViewNotFound(
+        partial public static void PartialViewNotFound(
             ILogger logger,
             string partialViewName,
             IEnumerable<string> searchedViewLocations
@@ -292,7 +291,7 @@ public partial class PartialViewResultExecutor
             "Executed PartialViewResult - view {PartialViewName} executed in {ElapsedMilliseconds}ms.",
             EventName = "PartialViewResultExecuted"
         )]
-        private static partial void PartialViewResultExecuted(
+        partial private static void PartialViewResultExecuted(
             ILogger logger,
             string? partialViewName,
             double elapsedMilliseconds

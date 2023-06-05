@@ -13,7 +13,7 @@ using static Roslyn.Test.Utilities.SigningTestHelpers;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class DesktopStrongNameProviderTests : CSharpTestBase
+    partial public class DesktopStrongNameProviderTests : CSharpTestBase
     {
         [WorkItem(13995, "https://github.com/dotnet/roslyn/issues/13995")]
         [Fact]

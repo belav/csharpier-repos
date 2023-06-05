@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net
 {
-    public partial class HttpListener
+    partial public class HttpListener
     {
         internal static SslStream CreateSslStream(
             Stream innerStream,

@@ -13,7 +13,7 @@ namespace System
 {
     [CLSCompliant(false)]
     [StructLayout(LayoutKind.Sequential)]
-    public ref struct TypedReference
+    ref public struct TypedReference
     {
         // Do not change the ordering of these fields. The JIT has a dependency on this layout.
         private readonly ref byte _value;

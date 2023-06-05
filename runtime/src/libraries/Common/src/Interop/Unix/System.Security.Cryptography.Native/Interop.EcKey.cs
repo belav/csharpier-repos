@@ -6,16 +6,16 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(
             Libraries.CryptoNative,
             EntryPoint = "CryptoNative_EcKeyCreateByOid",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        private static partial SafeEcKeyHandle CryptoNative_EcKeyCreateByOid(string oid);
+        partial private static SafeEcKeyHandle CryptoNative_EcKeyCreateByOid(string oid);
 
         internal static SafeEcKeyHandle? EcKeyCreateByOid(string oid)
         {
@@ -29,18 +29,18 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcKeyDestroy")]
-        internal static partial void EcKeyDestroy(IntPtr a);
+        partial internal static void EcKeyDestroy(IntPtr a);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcKeyGenerateKey")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool EcKeyGenerateKey(SafeEcKeyHandle eckey);
+        partial internal static bool EcKeyGenerateKey(SafeEcKeyHandle eckey);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcKeyUpRef")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool EcKeyUpRef(IntPtr r);
+        partial internal static bool EcKeyUpRef(IntPtr r);
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_EcKeyGetSize(
+        partial private static int CryptoNative_EcKeyGetSize(
             SafeEcKeyHandle ecKey,
             out int keySize
         );
@@ -57,7 +57,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcKeyGetCurveName2")]
-        private static partial int CryptoNative_EcKeyGetCurveName(
+        partial private static int CryptoNative_EcKeyGetCurveName(
             SafeEcKeyHandle ecKey,
             out int nid
         );

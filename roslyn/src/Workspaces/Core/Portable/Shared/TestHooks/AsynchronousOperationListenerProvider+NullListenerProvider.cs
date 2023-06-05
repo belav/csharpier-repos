@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.Shared.TestHooks
 {
-    internal sealed partial class AsynchronousOperationListenerProvider
+    partial internal sealed class AsynchronousOperationListenerProvider
     {
         private sealed class NullListenerProvider : IAsynchronousOperationListenerProvider
         {

@@ -11,10 +11,11 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Http;
 
+partial
 /// <summary>
 /// Provides extension methods for writing a JSON serialized value to the HTTP response.
 /// </summary>
-public static partial class HttpResponseJsonExtensions
+public static class HttpResponseJsonExtensions
 {
     private const string RequiresUnreferencedCodeMessage =
         "JSON serialization and deserialization might require types that cannot be statically analyzed. "

@@ -13,7 +13,7 @@ namespace System.Text.Json
         Allow = (byte)2,
     }
 
-    public sealed partial class JsonDocument : System.IDisposable
+    partial public sealed class JsonDocument : System.IDisposable
     {
         internal JsonDocument() { }
 
@@ -100,7 +100,7 @@ namespace System.Text.Json
         public void WriteTo(System.Text.Json.Utf8JsonWriter writer) { }
     }
 
-    public partial struct JsonDocumentOptions
+    partial public struct JsonDocumentOptions
     {
         private int _dummyPrimitive;
         public bool AllowTrailingCommas
@@ -120,7 +120,7 @@ namespace System.Text.Json
         }
     }
 
-    public readonly partial struct JsonElement
+    partial public readonly struct JsonElement
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -402,7 +402,7 @@ namespace System.Text.Json
 
         public void WriteTo(System.Text.Json.Utf8JsonWriter writer) { }
 
-        public partial struct ArrayEnumerator
+        partial public struct ArrayEnumerator
             : System.Collections.Generic.IEnumerable<System.Text.Json.JsonElement>,
                 System.Collections.Generic.IEnumerator<System.Text.Json.JsonElement>,
                 System.Collections.IEnumerable,
@@ -445,7 +445,7 @@ namespace System.Text.Json
             }
         }
 
-        public partial struct ObjectEnumerator
+        partial public struct ObjectEnumerator
             : System.Collections.Generic.IEnumerable<System.Text.Json.JsonProperty>,
                 System.Collections.Generic.IEnumerator<System.Text.Json.JsonProperty>,
                 System.Collections.IEnumerable,
@@ -489,7 +489,7 @@ namespace System.Text.Json
         }
     }
 
-    public readonly partial struct JsonEncodedText
+    partial public readonly struct JsonEncodedText
         : System.IEquatable<System.Text.Json.JsonEncodedText>
     {
         private readonly object _dummy;
@@ -550,7 +550,7 @@ namespace System.Text.Json
         }
     }
 
-    public partial class JsonException : System.Exception
+    partial public class JsonException : System.Exception
     {
         public JsonException() { }
 
@@ -601,7 +601,7 @@ namespace System.Text.Json
         ) { }
     }
 
-    public abstract partial class JsonNamingPolicy
+    partial public abstract class JsonNamingPolicy
     {
         protected JsonNamingPolicy() { }
 
@@ -628,7 +628,7 @@ namespace System.Text.Json
         public abstract string ConvertName(string name);
     }
 
-    public readonly partial struct JsonProperty
+    partial public readonly struct JsonProperty
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -664,7 +664,7 @@ namespace System.Text.Json
         public void WriteTo(System.Text.Json.Utf8JsonWriter writer) { }
     }
 
-    public partial struct JsonReaderOptions
+    partial public struct JsonReaderOptions
     {
         private int _dummyPrimitive;
         public bool AllowTrailingCommas
@@ -684,7 +684,7 @@ namespace System.Text.Json
         }
     }
 
-    public partial struct JsonReaderState
+    partial public struct JsonReaderState
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -702,7 +702,7 @@ namespace System.Text.Json
         }
     }
 
-    public static partial class JsonSerializer
+    partial public static class JsonSerializer
     {
         public static object? Deserialize(
             System.IO.Stream utf8Json,
@@ -1692,7 +1692,7 @@ namespace System.Text.Json
         Web = 1,
     }
 
-    public sealed partial class JsonSerializerOptions
+    partial public sealed class JsonSerializerOptions
     {
         public JsonSerializerOptions() { }
 
@@ -1870,7 +1870,7 @@ namespace System.Text.Json
         Null = (byte)7,
     }
 
-    public partial struct JsonWriterOptions
+    partial public struct JsonWriterOptions
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -1896,7 +1896,7 @@ namespace System.Text.Json
         }
     }
 
-    public ref partial struct Utf8JsonReader
+    ref partial public struct Utf8JsonReader
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -2193,7 +2193,7 @@ namespace System.Text.Json
         }
     }
 
-    public sealed partial class Utf8JsonWriter : System.IAsyncDisposable, System.IDisposable
+    partial public sealed class Utf8JsonWriter : System.IAsyncDisposable, System.IDisposable
     {
         public Utf8JsonWriter(
             System.Buffers.IBufferWriter<byte> bufferWriter,
@@ -2537,7 +2537,7 @@ namespace System.Text.Json
 
 namespace System.Text.Json.Nodes
 {
-    public sealed partial class JsonArray
+    partial public sealed class JsonArray
         : System.Text.Json.Nodes.JsonNode,
             System.Collections.Generic.ICollection<System.Text.Json.Nodes.JsonNode?>,
             System.Collections.Generic.IEnumerable<System.Text.Json.Nodes.JsonNode?>,
@@ -2626,7 +2626,7 @@ namespace System.Text.Json.Nodes
         ) { }
     }
 
-    public abstract partial class JsonNode
+    partial public abstract class JsonNode
     {
         internal JsonNode() { }
 
@@ -3087,7 +3087,7 @@ namespace System.Text.Json.Nodes
         );
     }
 
-    public partial struct JsonNodeOptions
+    partial public struct JsonNodeOptions
     {
         private int _dummyPrimitive;
         public bool PropertyNameCaseInsensitive
@@ -3097,7 +3097,7 @@ namespace System.Text.Json.Nodes
         }
     }
 
-    public sealed partial class JsonObject
+    partial public sealed class JsonObject
         : System.Text.Json.Nodes.JsonNode,
             System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                 string,
@@ -3246,7 +3246,7 @@ namespace System.Text.Json.Nodes
         ) { }
     }
 
-    public abstract partial class JsonValue : System.Text.Json.Nodes.JsonNode
+    partial public abstract class JsonValue : System.Text.Json.Nodes.JsonNode
     {
         internal JsonValue() { }
 
@@ -3607,39 +3607,39 @@ namespace System.Text.Json.Nodes
 
 namespace System.Text.Json.Serialization
 {
-    public partial interface IJsonOnDeserialized
+    partial public interface IJsonOnDeserialized
     {
         void OnDeserialized();
     }
 
-    public partial interface IJsonOnDeserializing
+    partial public interface IJsonOnDeserializing
     {
         void OnDeserializing();
     }
 
-    public partial interface IJsonOnSerialized
+    partial public interface IJsonOnSerialized
     {
         void OnSerialized();
     }
 
-    public partial interface IJsonOnSerializing
+    partial public interface IJsonOnSerializing
     {
         void OnSerializing();
     }
 
-    public abstract partial class JsonAttribute : System.Attribute
+    partial public abstract class JsonAttribute : System.Attribute
     {
         protected JsonAttribute() { }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Constructor, AllowMultiple = false)]
-    public sealed partial class JsonConstructorAttribute
+    partial public sealed class JsonConstructorAttribute
         : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonConstructorAttribute() { }
     }
 
-    public abstract partial class JsonConverter
+    partial public abstract class JsonConverter
     {
         internal JsonConverter() { }
 
@@ -3655,7 +3655,7 @@ namespace System.Text.Json.Serialization
             | System.AttributeTargets.Struct,
         AllowMultiple = false
     )]
-    public partial class JsonConverterAttribute : System.Text.Json.Serialization.JsonAttribute
+    partial public class JsonConverterAttribute : System.Text.Json.Serialization.JsonAttribute
     {
         protected JsonConverterAttribute() { }
 
@@ -3690,7 +3690,7 @@ namespace System.Text.Json.Serialization
         }
     }
 
-    public abstract partial class JsonConverterFactory
+    partial public abstract class JsonConverterFactory
         : System.Text.Json.Serialization.JsonConverter
     {
         protected JsonConverterFactory() { }
@@ -3701,7 +3701,7 @@ namespace System.Text.Json.Serialization
         );
     }
 
-    public abstract partial class JsonConverter<T> : System.Text.Json.Serialization.JsonConverter
+    partial public abstract class JsonConverter<T> : System.Text.Json.Serialization.JsonConverter
     {
         protected internal JsonConverter() { }
 
@@ -3750,7 +3750,7 @@ namespace System.Text.Json.Serialization
         AllowMultiple = true,
         Inherited = false
     )]
-    public partial class JsonDerivedTypeAttribute : System.Text.Json.Serialization.JsonAttribute
+    partial public class JsonDerivedTypeAttribute : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonDerivedTypeAttribute(System.Type derivedType) { }
 
@@ -3772,7 +3772,7 @@ namespace System.Text.Json.Serialization
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class JsonExtensionDataAttribute
+    partial public sealed class JsonExtensionDataAttribute
         : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonExtensionDataAttribute() { }
@@ -3782,7 +3782,7 @@ namespace System.Text.Json.Serialization
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class JsonIgnoreAttribute : System.Text.Json.Serialization.JsonAttribute
+    partial public sealed class JsonIgnoreAttribute : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonIgnoreAttribute() { }
 
@@ -3805,7 +3805,7 @@ namespace System.Text.Json.Serialization
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class JsonIncludeAttribute : System.Text.Json.Serialization.JsonAttribute
+    partial public sealed class JsonIncludeAttribute : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonIncludeAttribute() { }
     }
@@ -3836,7 +3836,7 @@ namespace System.Text.Json.Serialization
             | System.AttributeTargets.Struct,
         AllowMultiple = false
     )]
-    public sealed partial class JsonNumberHandlingAttribute
+    partial public sealed class JsonNumberHandlingAttribute
         : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonNumberHandlingAttribute(
@@ -3854,7 +3854,7 @@ namespace System.Text.Json.Serialization
         AllowMultiple = false,
         Inherited = false
     )]
-    public sealed partial class JsonPolymorphicAttribute
+    partial public sealed class JsonPolymorphicAttribute
         : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonPolymorphicAttribute() { }
@@ -3880,7 +3880,7 @@ namespace System.Text.Json.Serialization
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class JsonPropertyNameAttribute
+    partial public sealed class JsonPropertyNameAttribute
         : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonPropertyNameAttribute(string name) { }
@@ -3895,7 +3895,7 @@ namespace System.Text.Json.Serialization
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class JsonPropertyOrderAttribute
+    partial public sealed class JsonPropertyOrderAttribute
         : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonPropertyOrderAttribute(int order) { }
@@ -3910,13 +3910,13 @@ namespace System.Text.Json.Serialization
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
     )]
-    public sealed partial class JsonRequiredAttribute : System.Text.Json.Serialization.JsonAttribute
+    partial public sealed class JsonRequiredAttribute : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonRequiredAttribute() { }
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = true)]
-    public sealed partial class JsonSerializableAttribute
+    partial public sealed class JsonSerializableAttribute
         : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonSerializableAttribute(System.Type type) { }
@@ -3933,7 +3933,7 @@ namespace System.Text.Json.Serialization
         }
     }
 
-    public abstract partial class JsonSerializerContext
+    partial public abstract class JsonSerializerContext
         : System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver
     {
         protected JsonSerializerContext(System.Text.Json.JsonSerializerOptions? options) { }
@@ -3965,7 +3965,7 @@ namespace System.Text.Json.Serialization
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = false)]
-    public sealed partial class JsonSourceGenerationOptionsAttribute
+    partial public sealed class JsonSourceGenerationOptionsAttribute
         : System.Text.Json.Serialization.JsonAttribute
     {
         public JsonSourceGenerationOptionsAttribute() { }
@@ -4010,7 +4010,7 @@ namespace System.Text.Json.Serialization
     [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
         "JsonStringEnumConverter cannot be statically analyzed and requires runtime code generation. Consider authoring a custom converter that is not a factory to work around the issue. See https://github.com/dotnet/runtime/issues/73124."
     )]
-    public partial class JsonStringEnumConverter
+    partial public class JsonStringEnumConverter
         : System.Text.Json.Serialization.JsonConverterFactory
     {
         public JsonStringEnumConverter() { }
@@ -4047,7 +4047,7 @@ namespace System.Text.Json.Serialization
         JsonNode = 1,
     }
 
-    public abstract partial class ReferenceHandler
+    partial public abstract class ReferenceHandler
     {
         protected ReferenceHandler() { }
 
@@ -4062,7 +4062,7 @@ namespace System.Text.Json.Serialization
         public abstract System.Text.Json.Serialization.ReferenceResolver CreateResolver();
     }
 
-    public sealed partial class ReferenceHandler<T>
+    partial public sealed class ReferenceHandler<T>
         : System.Text.Json.Serialization.ReferenceHandler
         where T : System.Text.Json.Serialization.ReferenceResolver, new()
     {
@@ -4074,7 +4074,7 @@ namespace System.Text.Json.Serialization
         }
     }
 
-    public abstract partial class ReferenceResolver
+    partial public abstract class ReferenceResolver
     {
         protected ReferenceResolver() { }
 
@@ -4086,7 +4086,7 @@ namespace System.Text.Json.Serialization
 
 namespace System.Text.Json.Serialization.Metadata
 {
-    public partial class DefaultJsonTypeInfoResolver
+    partial public class DefaultJsonTypeInfoResolver
         : System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
@@ -4111,7 +4111,7 @@ namespace System.Text.Json.Serialization.Metadata
         }
     }
 
-    public partial interface IJsonTypeInfoResolver
+    partial public interface IJsonTypeInfoResolver
     {
         System.Text.Json.Serialization.Metadata.JsonTypeInfo? GetTypeInfo(
             System.Type type,
@@ -4122,7 +4122,7 @@ namespace System.Text.Json.Serialization.Metadata
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class JsonCollectionInfoValues<TCollection>
+    partial public sealed class JsonCollectionInfoValues<TCollection>
     {
         public JsonCollectionInfoValues() { }
 
@@ -4153,7 +4153,7 @@ namespace System.Text.Json.Serialization.Metadata
         }
     }
 
-    public readonly partial struct JsonDerivedType
+    partial public readonly struct JsonDerivedType
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -4186,7 +4186,7 @@ namespace System.Text.Json.Serialization.Metadata
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public static partial class JsonMetadataServices
+    partial public static class JsonMetadataServices
     {
         public static System.Text.Json.Serialization.JsonConverter<bool> BooleanConverter
         {
@@ -4621,7 +4621,7 @@ namespace System.Text.Json.Serialization.Metadata
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class JsonObjectInfoValues<T>
+    partial public sealed class JsonObjectInfoValues<T>
     {
         public JsonObjectInfoValues() { }
 
@@ -4663,7 +4663,7 @@ namespace System.Text.Json.Serialization.Metadata
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class JsonParameterInfoValues
+    partial public sealed class JsonParameterInfoValues
     {
         public JsonParameterInfoValues() { }
 
@@ -4694,7 +4694,7 @@ namespace System.Text.Json.Serialization.Metadata
         }
     }
 
-    public partial class JsonPolymorphismOptions
+    partial public class JsonPolymorphismOptions
     {
         public JsonPolymorphismOptions() { }
 
@@ -4721,7 +4721,7 @@ namespace System.Text.Json.Serialization.Metadata
         }
     }
 
-    public abstract partial class JsonPropertyInfo
+    partial public abstract class JsonPropertyInfo
     {
         internal JsonPropertyInfo() { }
 
@@ -4788,7 +4788,7 @@ namespace System.Text.Json.Serialization.Metadata
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public sealed partial class JsonPropertyInfoValues<T>
+    partial public sealed class JsonPropertyInfoValues<T>
     {
         public JsonPropertyInfoValues() { }
 
@@ -4864,7 +4864,7 @@ namespace System.Text.Json.Serialization.Metadata
         }
     }
 
-    public abstract partial class JsonTypeInfo
+    partial public abstract class JsonTypeInfo
     {
         internal JsonTypeInfo() { }
 
@@ -4980,7 +4980,7 @@ namespace System.Text.Json.Serialization.Metadata
         Dictionary = 3,
     }
 
-    public static partial class JsonTypeInfoResolver
+    partial public static class JsonTypeInfoResolver
     {
         public static System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver Combine(
             params System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver[] resolvers
@@ -4990,7 +4990,7 @@ namespace System.Text.Json.Serialization.Metadata
         }
     }
 
-    public abstract partial class JsonTypeInfo<T>
+    partial public abstract class JsonTypeInfo<T>
         : System.Text.Json.Serialization.Metadata.JsonTypeInfo
     {
         internal JsonTypeInfo() { }

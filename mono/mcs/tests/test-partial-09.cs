@@ -1,10 +1,11 @@
+partial
 // The standard says this doesn't have to have the 'abstract' modifier
-public partial class Foo
+public class Foo
 {
     public string myId;
 }
 
-public abstract partial class Foo
+partial public abstract class Foo
 {
     public string Id
     {

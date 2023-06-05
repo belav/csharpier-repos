@@ -6,7 +6,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    internal sealed partial class ThreadPoolWorkQueue
+    partial internal sealed class ThreadPoolWorkQueue
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void DispatchItemWithAutoreleasePool(object workItem, Thread currentThread)

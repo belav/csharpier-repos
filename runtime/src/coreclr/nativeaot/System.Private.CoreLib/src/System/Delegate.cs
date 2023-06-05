@@ -15,7 +15,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System
 {
-    public abstract partial class Delegate : ICloneable, ISerializable
+    partial public abstract class Delegate : ICloneable, ISerializable
     {
         // V1 API: Create closed instance delegates. Method name matching is case sensitive.
         [RequiresUnreferencedCode("The target method might be removed")]

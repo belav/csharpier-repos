@@ -33,19 +33,19 @@ namespace hello_tryfinallyloop_leaves_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void inTry()
+        public static void inTry()
         {
             Console.WriteLine("in Try\n");
             throw new Exception();
         }
 
-        static public void inFinally()
+        public static void inFinally()
         {
             Console.WriteLine("in Finally\n");
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             int i = 0;
             //Start recording

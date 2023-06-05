@@ -11,10 +11,11 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     ///  Represents a read-only list of <see cref="SyntaxToken"/>s.
     /// </summary>
-    public partial struct SyntaxTokenList
+    public struct SyntaxTokenList
     {
         /// <summary>
         /// A structure for enumerating a <see cref="SyntaxTokenList"/>

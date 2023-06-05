@@ -27,7 +27,7 @@ namespace System.Data.SqlClient
         public SqlDataAdapter(string selectCommandText, SqlConnection selectConnection)
             : this() { }
 
-        new public SqlCommand DeleteCommand
+        public new SqlCommand DeleteCommand
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -39,7 +39,7 @@ namespace System.Data.SqlClient
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        new public SqlCommand InsertCommand
+        public new SqlCommand InsertCommand
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -51,7 +51,7 @@ namespace System.Data.SqlClient
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        new public SqlCommand SelectCommand
+        public new SqlCommand SelectCommand
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -63,7 +63,7 @@ namespace System.Data.SqlClient
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        new public SqlCommand UpdateCommand
+        public new SqlCommand UpdateCommand
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -126,10 +126,10 @@ namespace System.Data.SqlClient
         public event SqlRowUpdatedEventHandler RowUpdated;
         public event SqlRowUpdatingEventHandler RowUpdating;
 
-        override protected void OnRowUpdated(RowUpdatedEventArgs value) =>
+        protected override void OnRowUpdated(RowUpdatedEventArgs value) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override protected void OnRowUpdating(RowUpdatingEventArgs value) =>
+        protected override void OnRowUpdating(RowUpdatingEventArgs value) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
     }
 }

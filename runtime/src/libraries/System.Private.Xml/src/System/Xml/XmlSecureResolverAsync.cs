@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    public partial class XmlSecureResolver : XmlResolver
+    partial public class XmlSecureResolver : XmlResolver
     {
         public override Task<object> GetEntityAsync(
             Uri absoluteUri,

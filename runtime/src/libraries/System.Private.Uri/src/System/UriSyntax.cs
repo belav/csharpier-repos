@@ -54,10 +54,11 @@ namespace System
         //      KeepTailLWS             = 0x8000000,
     }
 
+    partial
     //
     // Only internal members are included here
     //
-    public abstract partial class UriParser
+    public abstract class UriParser
     {
         // These are always available without paying hashtable lookup cost
         // Note: see UpdateStaticSyntaxReference()

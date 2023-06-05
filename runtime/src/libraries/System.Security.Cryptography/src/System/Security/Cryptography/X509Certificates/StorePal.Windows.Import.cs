@@ -9,9 +9,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
+    partial internal sealed class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
     {
-        internal static partial ILoaderPal FromBlob(
+        partial internal static ILoaderPal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
@@ -20,7 +20,7 @@ namespace System.Security.Cryptography.X509Certificates
             return FromBlobOrFile(rawData, null, password, keyStorageFlags);
         }
 
-        internal static partial ILoaderPal FromFile(
+        partial internal static ILoaderPal FromFile(
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
@@ -160,7 +160,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        internal static partial IExportPal FromCertificate(ICertificatePalCore cert)
+        partial internal static IExportPal FromCertificate(ICertificatePalCore cert)
         {
             CertificatePal certificatePal = (CertificatePal)cert;
 
@@ -199,7 +199,12 @@ namespace System.Security.Cryptography.X509Certificates
         /// Note: this factory method creates the store using links to the original certificates rather than copies. This means that any changes to certificate properties
         /// in the store changes the original.
         /// </summary>
-        internal static partial IExportPal LinkFromCertificateCollection(
+        partial
+        /// <summary>
+        /// Note: this factory method creates the store using links to the original certificates rather than copies. This means that any changes to certificate properties
+        /// in the store changes the original.
+        /// </summary>
+        internal static IExportPal LinkFromCertificateCollection(
             X509Certificate2Collection certificates
         )
         {
@@ -257,7 +262,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        internal static partial IStorePal FromSystemStore(
+        partial internal static IStorePal FromSystemStore(
             string storeName,
             StoreLocation storeLocation,
             OpenFlags openFlags

@@ -6,7 +6,7 @@ using System.Runtime.ExceptionServices;
 
 namespace System
 {
-    public static partial class AppContext
+    partial public static class AppContext
     {
         [RuntimeExport("OnFirstChanceException")]
         internal static void OnFirstChanceException(object e)

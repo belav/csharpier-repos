@@ -14,7 +14,7 @@ using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler
 {
-    public partial class CompilerTypeSystemContext
+    partial public class CompilerTypeSystemContext
         : MetadataTypeSystemContext,
             IMetadataStringDecoderProvider
     {

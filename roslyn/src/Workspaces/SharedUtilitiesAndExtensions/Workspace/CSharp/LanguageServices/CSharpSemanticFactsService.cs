@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class CSharpSemanticFactsService
+    partial internal sealed class CSharpSemanticFactsService
         : AbstractSemanticFactsService,
             ISemanticFactsService
     {

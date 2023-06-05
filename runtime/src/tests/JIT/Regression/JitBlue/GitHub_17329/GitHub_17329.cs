@@ -40,9 +40,9 @@ struct Point1
 
 public class TestCase
 {
-    static public long[] arr;
+    public static long[] arr;
 
-    unsafe static long Test(int size, Point1 a, Point1 b, Point1 c)
+    static unsafe long Test(int size, Point1 a, Point1 b, Point1 c)
     {
         // Mutate the values stored in a, b and c
         // So if these have a shadow copy we will notice

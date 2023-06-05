@@ -49,7 +49,7 @@ namespace System.Data.OleDb
         S_ROWSETCOLUMN = 29, // 2.6
     }
 
-    sealed internal class NativeDBType
+    internal sealed class NativeDBType
     { // from 4214.0
         // Variant compatible
         internal const short EMPTY = 0; //
@@ -97,7 +97,7 @@ namespace System.Data.OleDb
         // high mask
         internal const short HighMask = unchecked((short)0xf000);
 
-        static internal bool HasHighBit(short value)
+        internal static bool HasHighBit(short value)
         {
             return (0 != (HighMask & value));
         }
@@ -159,7 +159,7 @@ namespace System.Data.OleDb
         private const string S_WLONGVARCHAR = "DBTYPE_WLONGVARCHAR"; // DBTYPE_WSTR
         private const string S_XML = "DBTYPE_XML";
 
-        static private readonly NativeDBType D_Binary = new NativeDBType(
+        private static readonly NativeDBType D_Binary = new NativeDBType(
             0xff,
             -1,
             true,
@@ -171,7 +171,7 @@ namespace System.Data.OleDb
             NativeDBType.BYTES,
             DbType.Binary
         ); //  0
-        static private readonly NativeDBType D_Boolean = new NativeDBType(
+        private static readonly NativeDBType D_Boolean = new NativeDBType(
             0xff,
             2,
             true,
@@ -183,7 +183,7 @@ namespace System.Data.OleDb
             NativeDBType.BOOL,
             DbType.Boolean
         ); //  1 - integer2 (variant_bool)
-        static private readonly NativeDBType D_BSTR = new NativeDBType(
+        private static readonly NativeDBType D_BSTR = new NativeDBType(
             0xff,
             ADP.PtrSize,
             false,
@@ -195,7 +195,7 @@ namespace System.Data.OleDb
             NativeDBType.BSTR,
             DbType.String
         ); //  2 - integer4 (pointer)
-        static private readonly NativeDBType D_Char = new NativeDBType(
+        private static readonly NativeDBType D_Char = new NativeDBType(
             0xff,
             -1,
             true,
@@ -208,7 +208,7 @@ namespace System.Data.OleDb
             ,
             DbType.AnsiStringFixedLength
         ); //  3 - (ansi pointer)
-        static private readonly NativeDBType D_Currency = new NativeDBType(
+        private static readonly NativeDBType D_Currency = new NativeDBType(
             19,
             8,
             true,
@@ -220,7 +220,7 @@ namespace System.Data.OleDb
             NativeDBType.CY,
             DbType.Currency
         ); //  4 - integer8
-        static private readonly NativeDBType D_Date = new NativeDBType(
+        private static readonly NativeDBType D_Date = new NativeDBType(
             0xff,
             8,
             true,
@@ -232,7 +232,7 @@ namespace System.Data.OleDb
             NativeDBType.DATE,
             DbType.DateTime
         ); //  5 - double
-        static private readonly NativeDBType D_DBDate = new NativeDBType(
+        private static readonly NativeDBType D_DBDate = new NativeDBType(
             0xff,
             6,
             true,
@@ -244,7 +244,7 @@ namespace System.Data.OleDb
             NativeDBType.DBDATE,
             DbType.Date
         ); //  6 - (tagDBDate)
-        static private readonly NativeDBType D_DBTime = new NativeDBType(
+        private static readonly NativeDBType D_DBTime = new NativeDBType(
             0xff,
             6,
             true,
@@ -256,7 +256,7 @@ namespace System.Data.OleDb
             NativeDBType.DBTIME,
             DbType.Time
         ); //  7 - (tagDBTime)
-        static private readonly NativeDBType D_DBTimeStamp = new NativeDBType(
+        private static readonly NativeDBType D_DBTimeStamp = new NativeDBType(
             0xff,
             16,
             true,
@@ -268,7 +268,7 @@ namespace System.Data.OleDb
             NativeDBType.DBTIMESTAMP,
             DbType.DateTime
         ); //  8 - (tagDBTIMESTAMP)
-        static private readonly NativeDBType D_Decimal = new NativeDBType(
+        private static readonly NativeDBType D_Decimal = new NativeDBType(
             28,
             16,
             true,
@@ -280,7 +280,7 @@ namespace System.Data.OleDb
             NativeDBType.DECIMAL,
             DbType.Decimal
         ); //  9 - (tagDec) // MDAC 68447
-        static private readonly NativeDBType D_Error = new NativeDBType(
+        private static readonly NativeDBType D_Error = new NativeDBType(
             0xff,
             4,
             true,
@@ -292,7 +292,7 @@ namespace System.Data.OleDb
             NativeDBType.ERROR,
             DbType.Int32
         ); // 10 - integer4
-        static private readonly NativeDBType D_Filetime = new NativeDBType(
+        private static readonly NativeDBType D_Filetime = new NativeDBType(
             0xff,
             8,
             true,
@@ -304,7 +304,7 @@ namespace System.Data.OleDb
             NativeDBType.FILETIME,
             DbType.DateTime
         ); // 11 - integer8 // MDAC 59504
-        static private readonly NativeDBType D_Guid = new NativeDBType(
+        private static readonly NativeDBType D_Guid = new NativeDBType(
             0xff,
             16,
             true,
@@ -316,7 +316,7 @@ namespace System.Data.OleDb
             NativeDBType.GUID,
             DbType.Guid
         ); // 12 - ubyte[16]
-        static private readonly NativeDBType D_TinyInt = new NativeDBType(
+        private static readonly NativeDBType D_TinyInt = new NativeDBType(
             3,
             1,
             true,
@@ -328,7 +328,7 @@ namespace System.Data.OleDb
             NativeDBType.I1,
             DbType.SByte
         ); // 13 - integer1 // MDAC 59492
-        static private readonly NativeDBType D_SmallInt = new NativeDBType(
+        private static readonly NativeDBType D_SmallInt = new NativeDBType(
             5,
             2,
             true,
@@ -340,7 +340,7 @@ namespace System.Data.OleDb
             NativeDBType.I2,
             DbType.Int16
         ); // 14 - integer2
-        static private readonly NativeDBType D_Integer = new NativeDBType(
+        private static readonly NativeDBType D_Integer = new NativeDBType(
             10,
             4,
             true,
@@ -352,7 +352,7 @@ namespace System.Data.OleDb
             NativeDBType.I4,
             DbType.Int32
         ); // 15 - integer4
-        static private readonly NativeDBType D_BigInt = new NativeDBType(
+        private static readonly NativeDBType D_BigInt = new NativeDBType(
             19,
             8,
             true,
@@ -364,7 +364,7 @@ namespace System.Data.OleDb
             NativeDBType.I8,
             DbType.Int64
         ); // 16 - integer8
-        static private readonly NativeDBType D_IDispatch = new NativeDBType(
+        private static readonly NativeDBType D_IDispatch = new NativeDBType(
             0xff,
             ADP.PtrSize,
             true,
@@ -376,7 +376,7 @@ namespace System.Data.OleDb
             NativeDBType.IDISPATCH,
             DbType.Object
         ); // 17 - integer4 (pointer)
-        static private readonly NativeDBType D_IUnknown = new NativeDBType(
+        private static readonly NativeDBType D_IUnknown = new NativeDBType(
             0xff,
             ADP.PtrSize,
             true,
@@ -388,7 +388,7 @@ namespace System.Data.OleDb
             NativeDBType.IUNKNOWN,
             DbType.Object
         ); // 18 - integer4 (pointer) // MDAC 64040
-        static private readonly NativeDBType D_LongVarBinary = new NativeDBType(
+        private static readonly NativeDBType D_LongVarBinary = new NativeDBType(
             0xff,
             -1,
             false,
@@ -400,7 +400,7 @@ namespace System.Data.OleDb
             NativeDBType.BYTES,
             DbType.Binary
         ); // 19
-        static private readonly NativeDBType D_LongVarChar = new NativeDBType(
+        private static readonly NativeDBType D_LongVarChar = new NativeDBType(
             0xff,
             -1,
             false,
@@ -413,7 +413,7 @@ namespace System.Data.OleDb
             ,
             DbType.AnsiString
         ); // 20 - (ansi pointer)
-        static private readonly NativeDBType D_Numeric = new NativeDBType(
+        private static readonly NativeDBType D_Numeric = new NativeDBType(
             28,
             19,
             true,
@@ -425,7 +425,7 @@ namespace System.Data.OleDb
             NativeDBType.NUMERIC,
             DbType.Decimal
         ); // 21 - (tagDB_Numeric)
-        static private readonly NativeDBType D_PropVariant = new NativeDBType(
+        private static readonly NativeDBType D_PropVariant = new NativeDBType(
             0xff,
             NativeOledbWrapper.SizeOfPROPVARIANT,
             true,
@@ -437,7 +437,7 @@ namespace System.Data.OleDb
             NativeDBType.VARIANT,
             DbType.Object
         ); // 22
-        static private readonly NativeDBType D_Single = new NativeDBType(
+        private static readonly NativeDBType D_Single = new NativeDBType(
             7,
             4,
             true,
@@ -449,7 +449,7 @@ namespace System.Data.OleDb
             NativeDBType.R4,
             DbType.Single
         ); // 23 - single
-        static private readonly NativeDBType D_Double = new NativeDBType(
+        private static readonly NativeDBType D_Double = new NativeDBType(
             15,
             8,
             true,
@@ -461,7 +461,7 @@ namespace System.Data.OleDb
             NativeDBType.R8,
             DbType.Double
         ); // 24 - double
-        static private readonly NativeDBType D_UnsignedTinyInt = new NativeDBType(
+        private static readonly NativeDBType D_UnsignedTinyInt = new NativeDBType(
             3,
             1,
             true,
@@ -473,7 +473,7 @@ namespace System.Data.OleDb
             NativeDBType.UI1,
             DbType.Byte
         ); // 25 - byte7
-        static private readonly NativeDBType D_UnsignedSmallInt = new NativeDBType(
+        private static readonly NativeDBType D_UnsignedSmallInt = new NativeDBType(
             5,
             2,
             true,
@@ -485,7 +485,7 @@ namespace System.Data.OleDb
             NativeDBType.UI2,
             DbType.UInt16
         ); // 26 - unsigned integer2
-        static private readonly NativeDBType D_UnsignedInt = new NativeDBType(
+        private static readonly NativeDBType D_UnsignedInt = new NativeDBType(
             10,
             4,
             true,
@@ -497,7 +497,7 @@ namespace System.Data.OleDb
             NativeDBType.UI4,
             DbType.UInt32
         ); // 27 - unsigned integer4
-        static private readonly NativeDBType D_UnsignedBigInt = new NativeDBType(
+        private static readonly NativeDBType D_UnsignedBigInt = new NativeDBType(
             20,
             8,
             true,
@@ -509,7 +509,7 @@ namespace System.Data.OleDb
             NativeDBType.UI8,
             DbType.UInt64
         ); // 28 - unsigned integer8
-        static private readonly NativeDBType D_VarBinary = new NativeDBType(
+        private static readonly NativeDBType D_VarBinary = new NativeDBType(
             0xff,
             -1,
             false,
@@ -521,7 +521,7 @@ namespace System.Data.OleDb
             NativeDBType.BYTES,
             DbType.Binary
         ); // 29
-        static private readonly NativeDBType D_VarChar = new NativeDBType(
+        private static readonly NativeDBType D_VarChar = new NativeDBType(
             0xff,
             -1,
             false,
@@ -534,7 +534,7 @@ namespace System.Data.OleDb
             ,
             DbType.AnsiString
         ); // 30 - (ansi pointer)
-        static private readonly NativeDBType D_Variant = new NativeDBType(
+        private static readonly NativeDBType D_Variant = new NativeDBType(
             0xff,
             ODB.SizeOf_Variant,
             true,
@@ -546,7 +546,7 @@ namespace System.Data.OleDb
             NativeDBType.VARIANT,
             DbType.Object
         ); // 31 - ubyte[16] (variant)
-        static private readonly NativeDBType D_VarNumeric = new NativeDBType(
+        private static readonly NativeDBType D_VarNumeric = new NativeDBType(
             255,
             16,
             true,
@@ -558,7 +558,7 @@ namespace System.Data.OleDb
             NativeDBType.DECIMAL,
             DbType.VarNumeric
         ); // 32 - (unicode pointer)
-        static private readonly NativeDBType D_WChar = new NativeDBType(
+        private static readonly NativeDBType D_WChar = new NativeDBType(
             0xff,
             -1,
             true,
@@ -570,7 +570,7 @@ namespace System.Data.OleDb
             NativeDBType.WSTR,
             DbType.StringFixedLength
         ); // 33 - (unicode pointer)
-        static private readonly NativeDBType D_VarWChar = new NativeDBType(
+        private static readonly NativeDBType D_VarWChar = new NativeDBType(
             0xff,
             -1,
             false,
@@ -582,7 +582,7 @@ namespace System.Data.OleDb
             NativeDBType.WSTR,
             DbType.String
         ); // 34 - (unicode pointer)
-        static private readonly NativeDBType D_LongVarWChar = new NativeDBType(
+        private static readonly NativeDBType D_LongVarWChar = new NativeDBType(
             0xff,
             -1,
             false,
@@ -594,7 +594,7 @@ namespace System.Data.OleDb
             NativeDBType.WSTR,
             DbType.String
         ); // 35 - (unicode pointer)
-        static private readonly NativeDBType D_Chapter = new NativeDBType(
+        private static readonly NativeDBType D_Chapter = new NativeDBType(
             0xff,
             ADP.PtrSize,
             false,
@@ -606,7 +606,7 @@ namespace System.Data.OleDb
             NativeDBType.HCHAPTER,
             DbType.Object
         ); // 36 - (hierarchical chaper)
-        static private readonly NativeDBType D_Empty = new NativeDBType(
+        private static readonly NativeDBType D_Empty = new NativeDBType(
             0xff,
             0,
             false,
@@ -618,7 +618,7 @@ namespace System.Data.OleDb
             NativeDBType.EMPTY,
             DbType.Object
         ); // 37 - invalid param default
-        static private readonly NativeDBType D_Xml = new NativeDBType(
+        private static readonly NativeDBType D_Xml = new NativeDBType(
             0xff,
             -1,
             false,
@@ -630,7 +630,7 @@ namespace System.Data.OleDb
             NativeDBType.WSTR,
             DbType.String
         ); // 38 - (unicode pointer)
-        static private readonly NativeDBType D_Udt = new NativeDBType(
+        private static readonly NativeDBType D_Udt = new NativeDBType(
             0xff,
             -1,
             false,
@@ -643,8 +643,8 @@ namespace System.Data.OleDb
             DbType.Binary
         ); // 39 - (unicode pointer)
 
-        static internal readonly NativeDBType Default = D_VarWChar; // MDAC 65324
-        static internal readonly Byte MaximumDecimalPrecision = D_Decimal.maxpre;
+        internal static readonly NativeDBType Default = D_VarWChar; // MDAC 65324
+        internal static readonly Byte MaximumDecimalPrecision = D_Decimal.maxpre;
 
         private const int FixedDbPart = /*DBPART_VALUE*/
             0x1
@@ -705,13 +705,26 @@ namespace System.Data.OleDb
         }
 
 #if DEBUG
-        override public string ToString()
+        public
+#if DEBUG
+        override string ToString()
         {
             return enumOleDbType.ToString();
         }
 #endif
 
-        static internal NativeDBType FromDataType(OleDbType enumOleDbType)
+        public
+#endif
+
+        internal
+#if DEBUG
+        override string ToString()
+        {
+            return enumOleDbType.ToString();
+        }
+#endif
+
+        static NativeDBType FromDataType(OleDbType enumOleDbType)
         {
             switch (enumOleDbType)
             { // @perfnote: Enum.IsDefined
@@ -794,7 +807,7 @@ namespace System.Data.OleDb
             }
         }
 
-        static internal NativeDBType FromSystemType(object value)
+        internal static NativeDBType FromSystemType(object value)
         {
             IConvertible ic = (value as IConvertible);
             if (null != ic)
@@ -860,7 +873,7 @@ namespace System.Data.OleDb
             //throw ADP.UnknownDataType(value.GetType());
         }
 
-        static internal NativeDBType FromDbType(DbType dbType)
+        internal static NativeDBType FromDbType(DbType dbType)
         {
             switch (dbType)
             {
@@ -919,7 +932,7 @@ namespace System.Data.OleDb
             }
         }
 
-        static internal NativeDBType FromDBType(short dbType, bool isLong, bool isFixed)
+        internal static NativeDBType FromDBType(short dbType, bool isLong, bool isFixed)
         {
             switch (dbType)
             {

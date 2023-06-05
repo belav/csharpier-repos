@@ -9,7 +9,7 @@ using RuntimeTypeInfo = System.Reflection.TypeLoading.RoType;
 
 namespace System.Reflection.TypeLoading
 {
-    internal abstract partial class RoType
+    partial internal abstract class RoType
     {
         /// <summary>
         /// TypeComponentsCache objects are allocated on-demand on a per-Type basis to cache hot data for key scenarios.

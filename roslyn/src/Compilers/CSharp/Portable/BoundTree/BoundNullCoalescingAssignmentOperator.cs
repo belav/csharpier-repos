@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundNullCoalescingAssignmentOperator
+    partial internal class BoundNullCoalescingAssignmentOperator
     {
         internal bool IsNullableValueTypeAssignment
         {

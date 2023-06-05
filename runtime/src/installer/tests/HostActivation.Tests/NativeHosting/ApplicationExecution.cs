@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 {
-    public partial class ApplicationExecution : IClassFixture<ApplicationExecution.SharedTestState>
+    partial public class ApplicationExecution : IClassFixture<ApplicationExecution.SharedTestState>
     {
         private const string ApplicationExecutionArg = "run_app";
 

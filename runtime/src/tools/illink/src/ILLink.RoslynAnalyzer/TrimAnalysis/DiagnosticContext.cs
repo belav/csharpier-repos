@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    readonly partial struct DiagnosticContext
+    partial readonly struct DiagnosticContext
     {
         public List<Diagnostic> Diagnostics { get; } = new();
 
@@ -22,7 +22,7 @@ namespace ILLink.Shared.TrimAnalysis
 
         public static DiagnosticContext CreateDisabled() => new() { Location = null };
 
-        public partial void AddDiagnostic(DiagnosticId id, params string[] args)
+        partial public void AddDiagnostic(DiagnosticId id, params string[] args)
         {
             if (Location == null)
                 return;
@@ -32,7 +32,7 @@ namespace ILLink.Shared.TrimAnalysis
             );
         }
 
-        public partial void AddDiagnostic(
+        partial public void AddDiagnostic(
             DiagnosticId id,
             ValueWithDynamicallyAccessedMembers actualValue,
             ValueWithDynamicallyAccessedMembers expectedAnnotationsValue,

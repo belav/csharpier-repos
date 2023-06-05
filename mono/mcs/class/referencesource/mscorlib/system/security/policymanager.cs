@@ -486,7 +486,7 @@ namespace System.Security
             return (policy.Attributes & PolicyStatementAttribute.Exclusive) == 0;
         }
 
-        private volatile static QuickCacheEntryType[] FullTrustMap;
+        private static volatile QuickCacheEntryType[] FullTrustMap;
 
         private static QuickCacheEntryType GenerateQuickCache(PolicyLevel level)
         {

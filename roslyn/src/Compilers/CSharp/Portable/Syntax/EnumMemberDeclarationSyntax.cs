@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class EnumMemberDeclarationSyntax
+    partial public class EnumMemberDeclarationSyntax
     {
         public EnumMemberDeclarationSyntax Update(
             SyntaxList<AttributeListSyntax> attributeLists,

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class Object
+    partial public class Object
     {
         [Intrinsic]
         public Type GetType() => GetType();

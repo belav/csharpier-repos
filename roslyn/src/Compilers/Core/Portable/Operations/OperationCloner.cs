@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Operations
 {
-    internal sealed partial class OperationCloner : OperationVisitor<object?, IOperation>
+    partial internal sealed class OperationCloner : OperationVisitor<object?, IOperation>
     {
         [return: NotNullIfNotNull(nameof(operation))]
         public IOperation? Visit(IOperation? operation)

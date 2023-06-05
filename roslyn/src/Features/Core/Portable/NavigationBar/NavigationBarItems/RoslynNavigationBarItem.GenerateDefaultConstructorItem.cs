@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis.NavigationBar
 {
-    internal abstract partial class RoslynNavigationBarItem
+    partial internal abstract class RoslynNavigationBarItem
     {
         public class GenerateDefaultConstructor
             : AbstractGenerateCodeItem,

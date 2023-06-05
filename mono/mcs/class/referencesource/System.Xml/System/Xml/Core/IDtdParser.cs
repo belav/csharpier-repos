@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace System.Xml
 {
-    internal partial interface IDtdParser
+    partial internal interface IDtdParser
     {
         IDtdInfo ParseInternalDtd(IDtdParserAdapter adapter, bool saveInternalSubset);
         IDtdInfo ParseFreeFloatingDtd(

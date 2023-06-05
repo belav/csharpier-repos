@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public abstract partial class ImmutableDictionaryTestBase : ImmutablesTestBase
+    partial public abstract class ImmutableDictionaryTestBase : ImmutablesTestBase
     {
         [Fact]
         public void EnumeratorTest()

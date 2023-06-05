@@ -42,10 +42,11 @@ using System.Text.RegularExpressions;
 
 namespace DbLinq.Vendor.Implementation
 {
+    partial
 #if !MONO_STRICT
     public
 #endif
-    abstract partial class SchemaLoader : ISchemaLoader
+    abstract class SchemaLoader : ISchemaLoader
     {
         /// <summary>
         /// Underlying vendor

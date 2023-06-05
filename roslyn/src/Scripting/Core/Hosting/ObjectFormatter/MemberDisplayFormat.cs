@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         Hidden,
     }
 
-    internal static partial class MemberDisplayFormatExtensions
+    partial internal static class MemberDisplayFormatExtensions
     {
         internal static bool IsValid(this MemberDisplayFormat value)
         {

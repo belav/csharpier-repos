@@ -12,10 +12,11 @@ using System.Security.Cryptography;
 
 namespace System.Formats.Asn1
 {
+    partial
     /// <summary>
     ///   A writer for BER-, CER-, and DER-encoded ASN.1 data.
     /// </summary>
-    public sealed partial class AsnWriter
+    public sealed class AsnWriter
     {
         private byte[] _buffer = null!;
         private int _offset;

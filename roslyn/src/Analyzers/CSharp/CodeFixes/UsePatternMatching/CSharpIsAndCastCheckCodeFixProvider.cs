@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         ),
         Shared
     ]
-    internal partial class CSharpIsAndCastCheckCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    partial internal class CSharpIsAndCastCheckCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [SuppressMessage(

@@ -19,10 +19,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
+    partial
     /// <summary>
     /// Represents a named type symbol whose members are declared in source.
     /// </summary>
-    internal abstract partial class SourceMemberContainerTypeSymbol : NamedTypeSymbol
+    internal abstract class SourceMemberContainerTypeSymbol : NamedTypeSymbol
     {
         // The flags type is used to compact many different bits of information efficiently.
         private struct Flags

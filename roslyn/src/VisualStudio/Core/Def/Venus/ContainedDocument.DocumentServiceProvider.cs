@@ -24,7 +24,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 {
-    internal sealed partial class ContainedDocument
+    partial internal sealed class ContainedDocument
     {
         // this is to support old venus/razor case before dev16.
         // all new razor (asp.NET core after dev16) should use their own implementation not ours

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text.Unicode
 {
-    internal static partial class Utf8Utility
+    partial internal static class Utf8Utility
     {
         /// <summary>
         /// The maximum number of bytes that can result from UTF-8 transcoding

@@ -6,7 +6,7 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
 
-    public sealed partial class HostElement : ConfigurationElement
+    partial public sealed class HostElement : ConfigurationElement
     {
         public HostElement()
             : base() { }

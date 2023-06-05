@@ -6,8 +6,9 @@ using System;
 
 namespace Internal.TypeSystem.NoMetadata
 {
+    partial
     // Implements runtime method canonicalization
-    internal partial class RuntimeMethodDesc
+    internal class RuntimeMethodDesc
     {
         public override bool IsCanonicalMethod(CanonicalFormKind policy)
         {

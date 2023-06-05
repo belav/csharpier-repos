@@ -9,11 +9,12 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs.StartupCode
 {
+    partial
     /// <summary>
     /// Startup code that does initialization, Main invocation
     /// and shutdown of the runtime.
     /// </summary>
-    public sealed partial class StartupCodeMainMethod : ILStubMethod
+    public sealed class StartupCodeMainMethod : ILStubMethod
     {
         private TypeDesc _owningType;
         private MainMethodWrapper _mainMethod;
@@ -196,6 +197,7 @@ namespace Internal.IL.Stubs.StartupCode
             get { return true; }
         }
 
+        partial
         /// <summary>
         /// Wraps the main method in a layer of indirection. This is necessary to protect the startup code
         /// infrastructure from situations when the owning type of the main method cannot be loaded, and codegen
@@ -204,7 +206,7 @@ namespace Internal.IL.Stubs.StartupCode
         /// environment without it being fully initialized. (In particular, the unhandled exception experience
         /// won't be initialized, making this difficult to diagnose.)
         /// </summary>
-        private sealed partial class MainMethodWrapper : ILStubMethod
+        private sealed class MainMethodWrapper : ILStubMethod
         {
             public MainMethodWrapper(TypeDesc owningType, MethodDesc mainMethod)
             {

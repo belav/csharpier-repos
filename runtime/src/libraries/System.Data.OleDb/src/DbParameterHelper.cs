@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data.OleDb
 {
-    public sealed partial class OleDbParameter : DbParameter
+    partial public sealed class OleDbParameter : DbParameter
     { // V1.2.3300
         private object? _value;
 

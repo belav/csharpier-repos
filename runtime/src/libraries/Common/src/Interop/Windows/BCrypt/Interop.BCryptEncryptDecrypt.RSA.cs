@@ -7,9 +7,9 @@ using System.Security.Cryptography;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         [Flags]
         private enum BCryptEncryptFlags : uint
@@ -19,7 +19,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.BCrypt)]
-        private static unsafe partial NTSTATUS BCryptEncrypt(
+        partial private static unsafe NTSTATUS BCryptEncrypt(
             SafeBCryptKeyHandle hKey,
             byte* pbInput,
             int cbInput,
@@ -33,7 +33,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.BCrypt)]
-        private static unsafe partial NTSTATUS BCryptDecrypt(
+        partial private static unsafe NTSTATUS BCryptDecrypt(
             SafeBCryptKeyHandle hKey,
             byte* pbInput,
             int cbInput,

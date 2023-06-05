@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    internal static partial class ControlFlowGraphExtensions
+    partial internal static class ControlFlowGraphExtensions
     {
         public static BasicBlock EntryBlock(this ControlFlowGraph cfg)
         {

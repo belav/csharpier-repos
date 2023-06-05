@@ -6,7 +6,7 @@
 
 namespace System.Threading.Tasks.Dataflow
 {
-    public sealed partial class ActionBlock<TInput>
+    partial public sealed class ActionBlock<TInput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.ITargetBlock<TInput>
     {
@@ -58,7 +58,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class BatchBlock<T>
+    partial public sealed class BatchBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T[]>,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T[]>,
@@ -153,7 +153,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class BatchedJoinBlock<T1, T2>
+    partial public sealed class BatchedJoinBlock<T1, T2>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<
                 System.Collections.Generic.IList<T1>,
@@ -282,7 +282,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class BatchedJoinBlock<T1, T2, T3>
+    partial public sealed class BatchedJoinBlock<T1, T2, T3>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<
                 System.Collections.Generic.IList<T1>,
@@ -428,7 +428,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class BroadcastBlock<T>
+    partial public sealed class BroadcastBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>,
@@ -513,7 +513,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class BufferBlock<T>
+    partial public sealed class BufferBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>,
@@ -601,7 +601,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public static partial class DataflowBlock
+    partial public static class DataflowBlock
     {
         public static System.IObservable<TOutput> AsObservable<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source
@@ -819,7 +819,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public partial class DataflowBlockOptions
+    partial public class DataflowBlockOptions
     {
         public const int Unbounded = -1;
 
@@ -857,7 +857,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public partial class DataflowLinkOptions
+    partial public class DataflowLinkOptions
     {
         public DataflowLinkOptions() { }
 
@@ -878,7 +878,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public readonly partial struct DataflowMessageHeader
+    partial public readonly struct DataflowMessageHeader
         : System.IEquatable<System.Threading.Tasks.Dataflow.DataflowMessageHeader>
     {
         private readonly int _dummyPrimitive;
@@ -940,7 +940,7 @@ namespace System.Threading.Tasks.Dataflow
         DecliningPermanently = 4,
     }
 
-    public partial class ExecutionDataflowBlockOptions
+    partial public class ExecutionDataflowBlockOptions
         : System.Threading.Tasks.Dataflow.DataflowBlockOptions
     {
         public ExecutionDataflowBlockOptions() { }
@@ -957,7 +957,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public partial class GroupingDataflowBlockOptions
+    partial public class GroupingDataflowBlockOptions
         : System.Threading.Tasks.Dataflow.DataflowBlockOptions
     {
         public GroupingDataflowBlockOptions() { }
@@ -974,19 +974,19 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public partial interface IDataflowBlock
+    partial public interface IDataflowBlock
     {
         System.Threading.Tasks.Task Completion { get; }
         void Complete();
         void Fault(System.Exception exception);
     }
 
-    public partial interface IPropagatorBlock<in TInput, out TOutput>
+    partial public interface IPropagatorBlock<in TInput, out TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>,
             System.Threading.Tasks.Dataflow.ITargetBlock<TInput> { }
 
-    public partial interface IReceivableSourceBlock<TOutput>
+    partial public interface IReceivableSourceBlock<TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>
     {
@@ -1000,7 +1000,7 @@ namespace System.Threading.Tasks.Dataflow
         );
     }
 
-    public partial interface ISourceBlock<out TOutput>
+    partial public interface ISourceBlock<out TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock
     {
         TOutput? ConsumeMessage(
@@ -1022,7 +1022,7 @@ namespace System.Threading.Tasks.Dataflow
         );
     }
 
-    public partial interface ITargetBlock<in TInput>
+    partial public interface ITargetBlock<in TInput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock
     {
         System.Threading.Tasks.Dataflow.DataflowMessageStatus OfferMessage(
@@ -1033,7 +1033,7 @@ namespace System.Threading.Tasks.Dataflow
         );
     }
 
-    public sealed partial class JoinBlock<T1, T2>
+    partial public sealed class JoinBlock<T1, T2>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<T1, T2>>,
             System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2>>
@@ -1121,7 +1121,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class JoinBlock<T1, T2, T3>
+    partial public sealed class JoinBlock<T1, T2, T3>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<T1, T2, T3>>,
             System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2, T3>>
@@ -1218,7 +1218,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class TransformBlock<TInput, TOutput>
+    partial public sealed class TransformBlock<TInput, TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput>,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput>,
@@ -1319,7 +1319,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class TransformManyBlock<TInput, TOutput>
+    partial public sealed class TransformManyBlock<TInput, TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput>,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput>,
@@ -1429,7 +1429,7 @@ namespace System.Threading.Tasks.Dataflow
         }
     }
 
-    public sealed partial class WriteOnceBlock<T>
+    partial public sealed class WriteOnceBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
             System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
             System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>,

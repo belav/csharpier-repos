@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class ChainPal : IDisposable, IChainPal
+    partial internal sealed class ChainPal : IDisposable, IChainPal
     {
         private static X509ChainStatus[] GetChainStatusInformation(CertTrustErrorStatus dwStatus)
         {

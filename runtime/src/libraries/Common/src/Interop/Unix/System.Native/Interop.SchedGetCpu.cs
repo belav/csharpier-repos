@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal unsafe partial class Sys
+    partial internal unsafe class Sys
     {
         [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_SchedGetCpu")]
-        internal static partial int SchedGetCpu();
+        partial internal static int SchedGetCpu();
     }
 }

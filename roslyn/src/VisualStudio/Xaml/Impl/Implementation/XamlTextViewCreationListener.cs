@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
     [ContentType(ContentTypeNames.XamlContentType)]
     [TextViewRole(PredefinedTextViewRoles.PrimaryDocument)]
     [TextViewRole(PredefinedTextViewRoles.Document)]
-    internal sealed partial class XamlTextViewCreationListener : IWpfTextViewCreationListener
+    partial internal sealed class XamlTextViewCreationListener : IWpfTextViewCreationListener
     {
         // Temporary UIConext GUID owned by the XAML language service until we can get a KnownUIContext
         private static readonly Guid s_serverUIContextGuid = new Guid(

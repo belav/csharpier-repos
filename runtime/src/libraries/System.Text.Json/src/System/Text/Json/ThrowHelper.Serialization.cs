@@ -14,7 +14,7 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
-    internal static partial class ThrowHelper
+    partial internal static class ThrowHelper
     {
         [DoesNotReturn]
         public static void ThrowArgumentException_DeserializeWrongType(Type type, object value)

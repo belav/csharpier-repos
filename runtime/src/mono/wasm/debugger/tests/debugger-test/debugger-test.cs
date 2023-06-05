@@ -4,7 +4,7 @@
 using System;
 using System.Linq;
 
-public partial class Math
+partial public class Math
 { //Only append content to this class as the test suite depends on line info
     [System.Runtime.InteropServices.JavaScript.JSExport]
     public static int IntAdd(int a, int b)
@@ -117,7 +117,7 @@ public partial class Math
         return i - 2;
     }
 
-    public partial class NestedInMath
+    partial public class NestedInMath
     {
         public int InnerMethod(int i)
         {
@@ -377,7 +377,7 @@ public partial class Math
     }
 }
 
-public partial class DebuggerTest
+partial public class DebuggerTest
 {
     [System.Runtime.InteropServices.JavaScript.JSExport]
     public static void run_all()
@@ -602,7 +602,7 @@ public class LoadDebuggerTest
     }
 }
 
-public partial class HiddenSequencePointTest
+partial public class HiddenSequencePointTest
 {
     public static void StepOverHiddenSP()
     {
@@ -1374,7 +1374,7 @@ public class InspectIntPtr
     }
 }
 
-public partial class HiddenSequencePointTest
+partial public class HiddenSequencePointTest
 {
     public static void StepOverHiddenSP3()
     {

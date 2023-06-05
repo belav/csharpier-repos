@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
 {
-    internal abstract partial class AbstractTypeInferenceService : ITypeInferenceService
+    partial internal abstract class AbstractTypeInferenceService : ITypeInferenceService
     {
         protected abstract AbstractTypeInferrer CreateTypeInferrer(
             SemanticModel semanticModel,

@@ -10,7 +10,7 @@ namespace System.Text.RegularExpressions
 
     internal delegate bool MatchCallback<TState>(ref TState state, Match match);
 
-    public partial class Regex
+    partial public class Regex
     {
         /// <summary>
         /// Replaces all occurrences of the pattern with the <paramref name="replacement"/> pattern, starting at

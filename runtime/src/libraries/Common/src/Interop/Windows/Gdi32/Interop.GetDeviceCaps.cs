@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         public enum DeviceCapability : int
         {
@@ -31,7 +31,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Gdi32)]
-        public static partial int GetDeviceCaps(IntPtr hdc, DeviceCapability index);
+        partial public static int GetDeviceCaps(IntPtr hdc, DeviceCapability index);
 
         public static int GetDeviceCaps(HandleRef hdc, DeviceCapability index)
         {

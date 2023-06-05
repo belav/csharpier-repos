@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
     [DataContract]
-    internal partial struct InvocationReasons : IEnumerable<string>
+    partial internal struct InvocationReasons : IEnumerable<string>
     {
         public static readonly InvocationReasons Empty = new(ImmutableHashSet<string>.Empty);
 

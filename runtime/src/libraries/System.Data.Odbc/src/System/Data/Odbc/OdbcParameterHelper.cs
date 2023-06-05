@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data.Odbc
 {
-    public sealed partial class OdbcParameter : DbParameter
+    partial public sealed class OdbcParameter : DbParameter
     {
         private object? _value;
 

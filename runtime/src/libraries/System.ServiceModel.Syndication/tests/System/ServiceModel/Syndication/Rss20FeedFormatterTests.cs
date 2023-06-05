@@ -14,7 +14,7 @@ using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests
 {
-    public partial class Rss20FeedFormatterTests
+    partial public class Rss20FeedFormatterTests
     {
         [Fact]
         public void Ctor_Default()

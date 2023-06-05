@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(
             Libraries.Gdi32,
@@ -14,7 +14,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int AddFontResourceEx(string lpszFilename, int fl, IntPtr pdv);
+        partial internal static int AddFontResourceEx(string lpszFilename, int fl, IntPtr pdv);
 
         internal static int AddFontFile(string fileName)
         {

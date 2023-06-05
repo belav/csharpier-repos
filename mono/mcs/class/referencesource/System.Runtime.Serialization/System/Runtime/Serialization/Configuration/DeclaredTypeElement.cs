@@ -9,7 +9,7 @@ namespace System.Runtime.Serialization.Configuration
     using System.Security.Permissions;
     using System.Security;
 
-    public sealed partial class DeclaredTypeElement : ConfigurationElement
+    partial public sealed class DeclaredTypeElement : ConfigurationElement
     {
         public DeclaredTypeElement() { }
 

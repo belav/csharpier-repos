@@ -1,31 +1,35 @@
 // Compiler options: -doc:xml-028.xml
 using System;
 
+partial
 /// <summary>
 /// Partial comment #2
-public partial class Test
+public class Test
 {
     string Bar;
 
     public static void Main() { }
 
+    partial
     /// <summary>
     /// Partial inner class!
-    internal partial class Inner
+    internal class Inner
     {
         public string Hoge;
     }
 }
 
+partial
 /// Partial comment #1
 /// </summary>
-public partial class Test
+public class Test
 {
     public string Foo;
 
+    partial
     /// ... is still available.
     /// </summary>
-    internal partial class Inner
+    internal class Inner
     {
         string Fuga;
     }

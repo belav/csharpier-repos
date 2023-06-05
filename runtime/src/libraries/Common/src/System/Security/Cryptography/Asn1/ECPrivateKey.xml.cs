@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct ECPrivateKey
+    partial internal struct ECPrivateKey
     {
         internal int Version;
         internal ReadOnlyMemory<byte> PrivateKey;

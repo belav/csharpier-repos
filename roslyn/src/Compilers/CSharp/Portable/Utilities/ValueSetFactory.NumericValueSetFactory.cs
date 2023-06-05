@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     using static BinaryOperatorKind;
 
-    internal static partial class ValueSetFactory
+    partial internal static class ValueSetFactory
     {
         /// <summary>
         /// The implementation of a value set factory of any numeric type <typeparamref name="T"/>,

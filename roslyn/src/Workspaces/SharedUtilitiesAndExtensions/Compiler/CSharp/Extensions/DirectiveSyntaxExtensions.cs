@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class DirectiveSyntaxExtensions
+    partial internal static class DirectiveSyntaxExtensions
     {
         private static readonly ConditionalWeakTable<
             SyntaxNode,

@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 class Program
 {
-    static public T DeserializeFromString<T>(string xml)
+    public static T DeserializeFromString<T>(string xml)
         where T : class
     {
         if (String.IsNullOrEmpty(xml))
@@ -84,7 +84,7 @@ class Program
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
 [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-public partial class TASK
+partial public class TASK
 {
     private object itemField;
 

@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Type name formatting functionality that relies on metadata.
-    public partial class ExceptionTypeNameFormatter
+    public class ExceptionTypeNameFormatter
     {
         private static string GetTypeName(DefType type)
         {

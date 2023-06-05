@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-internal sealed partial class MarkupMinimizedTagHelperDirectiveAttributeSyntax
+partial internal sealed class MarkupMinimizedTagHelperDirectiveAttributeSyntax
 {
     private static readonly string TagHelperAttributeInfoKey = typeof(TagHelperAttributeInfo).Name;
 

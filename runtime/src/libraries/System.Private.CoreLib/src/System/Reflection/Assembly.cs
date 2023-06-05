@@ -13,7 +13,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {
-    public abstract partial class Assembly : ICustomAttributeProvider, ISerializable
+    partial public abstract class Assembly : ICustomAttributeProvider, ISerializable
     {
         private static readonly Dictionary<string, Assembly> s_loadfile =
             new Dictionary<string, Assembly>();

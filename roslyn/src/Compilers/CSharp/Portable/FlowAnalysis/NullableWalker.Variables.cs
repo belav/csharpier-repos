@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class NullableWalker
+    partial internal class NullableWalker
     {
         /// <summary>
         /// An immutable copy of <see cref="Variables"/>.

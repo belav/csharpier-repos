@@ -7,7 +7,7 @@ using Internal.NativeCrypto;
 
 namespace System.Security.Cryptography
 {
-    public partial class AesGcm
+    partial public class AesGcm
     {
         private SafeKeyHandle _keyHandle;
 

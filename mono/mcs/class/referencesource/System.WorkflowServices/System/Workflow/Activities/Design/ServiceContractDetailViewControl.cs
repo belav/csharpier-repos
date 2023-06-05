@@ -10,7 +10,7 @@ namespace System.Workflow.Activities.Design
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
 
-    internal partial class ServiceContractDetailViewControl : ListItemViewControl
+    partial internal class ServiceContractDetailViewControl : ListItemViewControl
     {
         public ServiceContractDetailViewControl()
         {

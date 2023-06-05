@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
         ),
         Shared
     ]
-    internal sealed partial class ConvertSwitchStatementToExpressionCodeFixProvider
+    partial internal sealed class ConvertSwitchStatementToExpressionCodeFixProvider
         : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]

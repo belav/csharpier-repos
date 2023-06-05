@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         private static IEnumerable<TSource> TakeIterator<TSource>(
             IEnumerable<TSource> source,

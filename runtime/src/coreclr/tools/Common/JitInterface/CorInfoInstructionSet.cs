@@ -306,7 +306,7 @@ namespace Internal.JitInterface
     {
         private const int FlagsFieldCount = 1;
         private const int BitsPerFlagsField = 64;
-        private fixed ulong _flags[FlagsFieldCount];
+        fixed private ulong _flags[FlagsFieldCount];
         public IEnumerable<InstructionSet_ARM64> ARM64Flags =>
             this.Select((x) => (InstructionSet_ARM64)x);
 

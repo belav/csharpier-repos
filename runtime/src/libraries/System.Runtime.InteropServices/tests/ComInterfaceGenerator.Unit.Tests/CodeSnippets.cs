@@ -6,7 +6,7 @@ using Microsoft.Interop.UnitTests;
 
 namespace ComInterfaceGenerator.Unit.Tests
 {
-    internal partial class CodeSnippets
+    partial internal class CodeSnippets
     {
         public static readonly string DisableRuntimeMarshalling =
             "[assembly:System.Runtime.CompilerServices.DisableRuntimeMarshalling]";

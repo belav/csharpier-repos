@@ -3,9 +3,9 @@ partial
 #endif
 class T { }
 
-public partial class partial { }
+partial public class partial { }
 
-public partial class A : partial
+partial public class A : partial
 {
     public void partial(partial partial)
     {

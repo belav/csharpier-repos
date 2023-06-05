@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace System.Data.Entity.Design
 {
-    public sealed partial class EntityStoreSchemaGenerator
+    partial public sealed class EntityStoreSchemaGenerator
     {
         // responsible for holding all the
         // state for a single execution of the Load

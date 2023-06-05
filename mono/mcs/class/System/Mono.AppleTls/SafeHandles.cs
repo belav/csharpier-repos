@@ -30,12 +30,12 @@ using Mono;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    sealed partial class SafeSecIdentityHandle : SafeKeychainItemHandle
+    partial sealed class SafeSecIdentityHandle : SafeKeychainItemHandle
     {
         public SafeSecIdentityHandle() { }
     }
 
-    sealed partial class SafeSecCertificateHandle : SafeKeychainItemHandle
+    partial sealed class SafeSecCertificateHandle : SafeKeychainItemHandle
     {
         public SafeSecCertificateHandle() { }
     }

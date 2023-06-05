@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal partial class RemoteTaskListService : BrokeredServiceBase, IRemoteTaskListService
+    partial internal class RemoteTaskListService : BrokeredServiceBase, IRemoteTaskListService
     {
         internal sealed class Factory : FactoryBase<IRemoteTaskListService>
         {

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text
 {
-    public partial class StringBuilder
+    partial public class StringBuilder
     {
         private int GetReplaceBufferCapacity(int requiredCapacity)
         {

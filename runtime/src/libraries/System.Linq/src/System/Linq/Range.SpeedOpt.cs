@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        private sealed partial class RangeIterator : IPartition<int>
+        partial private sealed class RangeIterator : IPartition<int>
         {
             public override IEnumerable<TResult> Select<TResult>(Func<int, TResult> selector)
             {

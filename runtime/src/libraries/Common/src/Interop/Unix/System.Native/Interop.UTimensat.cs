@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal struct TimeSpec
         {
@@ -28,13 +28,13 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static unsafe partial int UTimensat(string path, TimeSpec* times);
+        partial internal static unsafe int UTimensat(string path, TimeSpec* times);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_FUTimens",
             SetLastError = true
         )]
-        internal static unsafe partial int FUTimens(SafeHandle fd, TimeSpec* times);
+        partial internal static unsafe int FUTimens(SafeHandle fd, TimeSpec* times);
     }
 }

@@ -19,7 +19,7 @@ namespace System.Xml
         XmlDictionaryString[] strings;
         int nextId;
 
-        static public IXmlDictionary Empty
+        public static IXmlDictionary Empty
         {
             get
             {

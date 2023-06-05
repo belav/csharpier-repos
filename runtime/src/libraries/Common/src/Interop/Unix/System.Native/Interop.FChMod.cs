@@ -5,15 +5,15 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_FChMod",
             SetLastError = true
         )]
-        internal static partial int FChMod(SafeFileHandle fd, int mode);
+        partial internal static int FChMod(SafeFileHandle fd, int mode);
     }
 }

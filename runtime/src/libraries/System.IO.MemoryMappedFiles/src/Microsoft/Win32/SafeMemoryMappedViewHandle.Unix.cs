@@ -5,7 +5,7 @@ using System;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public sealed partial class SafeMemoryMappedViewHandle
+    partial public sealed class SafeMemoryMappedViewHandle
     {
         internal SafeMemoryMappedViewHandle(IntPtr handle, bool ownsHandle)
             : base(ownsHandle)

@@ -9,11 +9,12 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
+    partial partial
 #if INTERNAL_ASYMMETRIC_IMPLEMENTATIONS
-    internal static partial class ECDsaImplementation
+    internal static class ECDsaImplementation
     {
 #endif
-        public sealed partial class ECDsaCng : ECDsa
+        public sealed class ECDsaCng : ECDsa
         {
             protected override byte[] HashData(
                 byte[] data,

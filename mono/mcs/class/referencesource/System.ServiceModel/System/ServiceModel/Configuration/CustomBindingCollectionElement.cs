@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public sealed partial class CustomBindingCollectionElement : BindingCollectionElement
+    partial public sealed class CustomBindingCollectionElement : BindingCollectionElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.DefaultCollectionName,

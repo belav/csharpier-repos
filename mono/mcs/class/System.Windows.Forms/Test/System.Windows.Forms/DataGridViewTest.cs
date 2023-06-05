@@ -433,7 +433,7 @@ namespace MonoTests.System.Windows.Forms
             }
         }
 
-        static private void generate_case(
+        private static void generate_case(
             StringBuilder result,
             DataGridView dgv,
             string message,

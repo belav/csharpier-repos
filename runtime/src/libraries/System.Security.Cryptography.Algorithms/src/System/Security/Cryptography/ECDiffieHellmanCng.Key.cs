@@ -6,9 +6,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class ECDiffieHellmanImplementation
+    partial internal static class ECDiffieHellmanImplementation
     {
-        public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+        partial public sealed class ECDiffieHellmanCng : ECDiffieHellman
         {
             private readonly ECCngKey _key = new ECCngKey(
                 BCryptNative.AlgorithmName.ECDH,

@@ -7,14 +7,14 @@ using System.Runtime.InteropServices;
 
 namespace System.DirectoryServices
 {
-    internal static partial class SafeNativeMethods
+    partial internal static class SafeNativeMethods
     {
         [LibraryImport(global::Interop.Libraries.OleAut32)]
-        public static partial void VariantInit(IntPtr pObject);
+        partial public static void VariantInit(IntPtr pObject);
 
         [LibraryImport(global::Interop.Libraries.Activeds)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool FreeADsMem(IntPtr pVoid);
+        partial public static bool FreeADsMem(IntPtr pVoid);
 
         public const int FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200,
             FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000,
@@ -26,7 +26,7 @@ namespace System.DirectoryServices
             global::Interop.Libraries.Activeds,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static unsafe partial int ADsGetLastError(
+        partial public static unsafe int ADsGetLastError(
             out int error,
             char* errorBuffer,
             int errorBufferLength,
@@ -38,7 +38,7 @@ namespace System.DirectoryServices
             global::Interop.Libraries.Activeds,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static partial int ADsSetLastError(int error, string? errorString, string? provider);
+        partial public static int ADsSetLastError(int error, string? errorString, string? provider);
 
         public sealed class EnumVariant
         {

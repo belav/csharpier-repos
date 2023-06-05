@@ -13,7 +13,7 @@ internal class Test_gettypetypeofmatrix
     private static Foo s_foo = new Foo();
     private static Foo[] s_fooArray = new Foo[10];
 
-    static public int Main()
+    public static int Main()
     {
         int iReturn = 100;
         try

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class CustomConverterTests
+    partial public static class CustomConverterTests
     {
         // A custom long[] converter as comma-delimited string "1,2,3".
         internal class LongArrayConverter : JsonConverter<long[]>

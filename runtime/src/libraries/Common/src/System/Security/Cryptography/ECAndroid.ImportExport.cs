@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class ECAndroid
+    partial internal sealed class ECAndroid
     {
         public int ImportParameters(ECParameters parameters)
         {

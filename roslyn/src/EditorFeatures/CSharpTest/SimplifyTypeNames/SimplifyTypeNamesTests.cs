@@ -24,7 +24,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyTypeNames)]
-    public partial class SimplifyTypeNamesTests
+    partial public class SimplifyTypeNamesTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyTypeNamesTests(ITestOutputHelper logger)

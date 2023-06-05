@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     [CLSCompliantAttribute(false)]
-    public ref struct TypedReference
+    ref public struct TypedReference
     {
         #region sync with object-internals.h
 #pragma warning disable CA1823 // used by runtime

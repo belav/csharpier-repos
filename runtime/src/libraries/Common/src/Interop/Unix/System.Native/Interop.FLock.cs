@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum LockOperations : int
         {
@@ -22,7 +22,7 @@ internal static partial class Interop
             EntryPoint = "SystemNative_FLock",
             SetLastError = true
         )]
-        internal static partial int FLock(SafeFileHandle fd, LockOperations operation);
+        partial internal static int FLock(SafeFileHandle fd, LockOperations operation);
 
         /// <summary>
         /// Exposing this for SafeFileHandle.ReleaseHandle() to call.
@@ -33,6 +33,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_FLock",
             SetLastError = true
         )]
-        internal static partial int FLock(IntPtr fd, LockOperations operation);
+        partial internal static int FLock(IntPtr fd, LockOperations operation);
     }
 }

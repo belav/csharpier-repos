@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.PooledObjects
 {
-    internal partial class ArrayBuilder<T>
+    partial internal class ArrayBuilder<T>
     {
         /// <summary>
         /// struct enumerator used in foreach.

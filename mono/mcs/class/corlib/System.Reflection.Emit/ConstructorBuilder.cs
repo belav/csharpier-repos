@@ -87,7 +87,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class ConstructorBuilder : ConstructorInfo
+    partial public sealed class ConstructorBuilder : ConstructorInfo
     {
 #pragma warning disable 169, 414
         private RuntimeMethodHandle mhandle;

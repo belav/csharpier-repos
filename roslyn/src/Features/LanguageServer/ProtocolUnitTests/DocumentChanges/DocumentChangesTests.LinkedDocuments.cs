@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 {
-    public partial class DocumentChangesTests
+    partial public class DocumentChangesTests
     {
         [Fact]
         public async Task LinkedDocuments_AllTracked()

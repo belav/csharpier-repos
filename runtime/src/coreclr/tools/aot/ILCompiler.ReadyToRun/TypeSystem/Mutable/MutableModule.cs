@@ -15,7 +15,7 @@ using System.Runtime.CompilerServices;
 
 namespace Internal.TypeSystem.Ecma
 {
-    public partial class MutableModule : ModuleDesc, IEcmaModule
+    partial public class MutableModule : ModuleDesc, IEcmaModule
     {
         private class ManagedBinaryEmitterForInternalUse : TypeSystemMetadataEmitter
         {

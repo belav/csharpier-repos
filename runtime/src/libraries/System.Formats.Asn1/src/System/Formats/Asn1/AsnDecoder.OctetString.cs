@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace System.Formats.Asn1
 {
-    public static partial class AsnDecoder
+    partial public static class AsnDecoder
     {
         /// <summary>
         ///   Attempts to get an Octet String value from <paramref name="source"/> with a specified tag under
@@ -585,7 +585,7 @@ namespace System.Formats.Asn1
         }
     }
 
-    public partial class AsnReader
+    partial public class AsnReader
     {
         /// <summary>
         ///   Reads the next value as an OCTET STRING with a specified tag, copying the value

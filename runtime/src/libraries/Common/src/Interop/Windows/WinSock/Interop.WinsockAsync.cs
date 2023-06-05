@@ -5,9 +5,9 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct ControlData
@@ -27,7 +27,7 @@ internal static partial class Interop
             internal UIntPtr length;
             internal uint level;
             internal uint type;
-            internal fixed byte address[IPv6AddressLength];
+            fixed internal byte address[IPv6AddressLength];
             internal uint index;
         }
 

@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Log")]
-        internal static unsafe partial void Log(byte* buffer, int count);
+        partial internal static unsafe void Log(byte* buffer, int count);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_LogError")]
-        internal static unsafe partial void LogError(byte* buffer, int count);
+        partial internal static unsafe void LogError(byte* buffer, int count);
     }
 }

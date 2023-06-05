@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
-    internal partial class MethodDebugInfo<TTypeSymbol, TLocalSymbol>
+    partial internal class MethodDebugInfo<TTypeSymbol, TLocalSymbol>
         where TTypeSymbol : class, ITypeSymbolInternal
         where TLocalSymbol : class, ILocalSymbolInternal
     {

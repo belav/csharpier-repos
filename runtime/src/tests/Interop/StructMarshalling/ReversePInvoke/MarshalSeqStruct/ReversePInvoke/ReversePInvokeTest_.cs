@@ -1767,7 +1767,7 @@ public class MarshalStructTest
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S11ByRefCdeclcaller([In, Out] ref S11 argStr);
 
-    unsafe private static bool TestMethodForStructS11_ReversePInvokeByRef_Cdecl(ref S11 argstr)
+    private static unsafe bool TestMethodForStructS11_ReversePInvokeByRef_Cdecl(ref S11 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,Cdecl");
         S11 changeS11 = Helper.NewS11((int*)(64), 64);
@@ -1788,7 +1788,7 @@ public class MarshalStructTest
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S11ByRefStdCallcaller([In, Out] ref S11 argStr);
 
-    unsafe private static bool TestMethodForStructS11_ReversePInvokeByRef_StdCall(ref S11 argstr)
+    private static unsafe bool TestMethodForStructS11_ReversePInvokeByRef_StdCall(ref S11 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Ref,StdCall");
         S11 changeS11 = Helper.NewS11((int*)(64), 64);
@@ -1824,7 +1824,7 @@ public class MarshalStructTest
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool S11ByValCdeclcaller([In, Out] S11 argStr);
 
-    unsafe private static bool TestMethodForStructS11_ReversePInvokeByVal_Cdecl(S11 argstr)
+    private static unsafe bool TestMethodForStructS11_ReversePInvokeByVal_Cdecl(S11 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,Cdecl");
         S11 changeS11 = Helper.NewS11((int*)(64), 64);
@@ -1845,7 +1845,7 @@ public class MarshalStructTest
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate bool S11ByValStdCallcaller([In, Out] S11 argStr);
 
-    unsafe private static bool TestMethodForStructS11_ReversePInvokeByVal_StdCall(S11 argstr)
+    private static unsafe bool TestMethodForStructS11_ReversePInvokeByVal_StdCall(S11 argstr)
     {
         Console.WriteLine("ReversePinvoke,By Value,StdCall");
         S11 changeS11 = Helper.NewS11((int*)(64), 64);

@@ -44,7 +44,7 @@ using System.Globalization;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public partial class ModuleBuilder : Module
+    partial public class ModuleBuilder : Module
     {
         #region Sync with MonoReflectionModuleBuilder in object-internals.h
 

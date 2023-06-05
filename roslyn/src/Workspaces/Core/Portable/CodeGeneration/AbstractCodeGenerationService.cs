@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration
 {
-    internal abstract partial class AbstractCodeGenerationService<TCodeGenerationContextInfo>
+    partial internal abstract class AbstractCodeGenerationService<TCodeGenerationContextInfo>
         : ICodeGenerationService
         where TCodeGenerationContextInfo : CodeGenerationContextInfo
     {

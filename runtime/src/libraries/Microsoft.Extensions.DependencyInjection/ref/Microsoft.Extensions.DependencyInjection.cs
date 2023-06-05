@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
     [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
         "Using Microsoft.Extensions.DependencyInjection requires generating code dynamically at runtime. For example, when using enumerable and generic ValueType services."
     )]
-    public partial class DefaultServiceProviderFactory
+    partial public class DefaultServiceProviderFactory
         : Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<Microsoft.Extensions.DependencyInjection.IServiceCollection>
     {
         public DefaultServiceProviderFactory() { }
@@ -33,7 +33,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public static partial class ServiceCollectionContainerBuilderExtensions
+    partial public static class ServiceCollectionContainerBuilderExtensions
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Using Microsoft.Extensions.DependencyInjection requires generating code dynamically at runtime. For example, when using enumerable and generic ValueType services."
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public sealed partial class ServiceProvider
+    partial public sealed class ServiceProvider
         : System.IAsyncDisposable,
             System.IDisposable,
             System.IServiceProvider
@@ -88,7 +88,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 
-    public partial class ServiceProviderOptions
+    partial public class ServiceProviderOptions
     {
         public ServiceProviderOptions() { }
 

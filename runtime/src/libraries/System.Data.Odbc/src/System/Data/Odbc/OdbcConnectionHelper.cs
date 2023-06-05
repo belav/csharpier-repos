@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System.Data.Odbc
 {
-    public sealed partial class OdbcConnection : DbConnection
+    partial public sealed class OdbcConnection : DbConnection
     {
         private static readonly DbConnectionFactory s_connectionFactory =
             OdbcConnectionFactory.SingletonInstance;

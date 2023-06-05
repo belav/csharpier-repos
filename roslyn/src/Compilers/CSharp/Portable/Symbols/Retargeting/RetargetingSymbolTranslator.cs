@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         RetargetPrimitiveTypesByTypeCode = 1,
     }
 
-    internal partial class RetargetingModuleSymbol
+    partial internal class RetargetingModuleSymbol
     {
         /// <summary>
         /// Retargeting map from underlying module to this one.

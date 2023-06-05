@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class PropertyVisibilityTests
+    partial public abstract class PropertyVisibilityTests
     {
         [Fact]
         public async Task NonPublic_AccessorsNotSupported_WithoutAttribute()

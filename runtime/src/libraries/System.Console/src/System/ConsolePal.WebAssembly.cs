@@ -73,10 +73,10 @@ namespace System
         }
     }
 
-    internal static partial class ConsolePal
+    partial internal static class ConsolePal
     {
         [JSImport("globalThis.console.clear")]
-        public static partial void Clear();
+        partial public static void Clear();
 
         private static Encoding? s_outputEncoding;
 

@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
@@ -16,7 +16,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        private static partial int GetUnixVersion(byte[] version, ref int capacity);
+        partial private static int GetUnixVersion(byte[] version, ref int capacity);
 
         internal static string GetUnixVersion()
         {

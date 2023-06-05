@@ -16,7 +16,7 @@ using MethodImplAttributes = System.Reflection.MethodImplAttributes;
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         internal EntityMap<Cts.MethodDesc, MetadataRecord> _methods = new EntityMap<
             Cts.MethodDesc,

@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.CoreFunctionLibrary
 {
+    partial
     /// <summary>
     /// Core Function Library - Boolean Functions
     /// </summary>
-    public static partial class BooleanFunctionsTests
+    public static class BooleanFunctionsTests
     {
         /// <summary>
         /// Verify result.

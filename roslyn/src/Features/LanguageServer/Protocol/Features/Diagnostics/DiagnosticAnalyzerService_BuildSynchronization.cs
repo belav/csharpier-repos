@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class DiagnosticAnalyzerService
+    partial internal class DiagnosticAnalyzerService
     {
         /// <summary>
         /// Synchronize build errors with live error.

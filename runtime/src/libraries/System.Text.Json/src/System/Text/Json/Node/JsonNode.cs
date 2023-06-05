@@ -6,10 +6,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.Json.Node
 {
+    partial
     /// <summary>
     ///   The base class that represents a single node within a mutable JSON document.
     /// </summary>
-    public abstract partial class JsonNode
+    public abstract class JsonNode
     {
         private JsonNode? _parent;
         private JsonNodeOptions? _options;

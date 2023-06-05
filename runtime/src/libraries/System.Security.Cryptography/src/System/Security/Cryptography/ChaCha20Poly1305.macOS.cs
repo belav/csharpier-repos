@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ChaCha20Poly1305
+    partial public sealed class ChaCha20Poly1305
     {
         // CryptoKit added ChaCha20Poly1305 in macOS 10.15, which is our minimum target for macOS.
         public static bool IsSupported => true;

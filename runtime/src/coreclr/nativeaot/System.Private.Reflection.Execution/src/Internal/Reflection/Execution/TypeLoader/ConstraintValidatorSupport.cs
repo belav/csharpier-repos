@@ -11,7 +11,7 @@ using Debug = global::System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
 {
-    internal static partial class ConstraintValidator
+    partial internal static class ConstraintValidator
     {
         //
         // We cannot do the constraint validation against real TypeInfo because of constraints need to be validated

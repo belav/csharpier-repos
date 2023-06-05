@@ -3,16 +3,16 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Secur32
+    partial internal static class Secur32
     {
         [LibraryImport(
             Libraries.Secur32,
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial BOOLEAN GetUserNameExW(
+        partial internal static BOOLEAN GetUserNameExW(
             int NameFormat,
             ref char lpNameBuffer,
             ref uint lpnSize

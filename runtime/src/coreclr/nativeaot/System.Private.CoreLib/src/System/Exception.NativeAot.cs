@@ -12,7 +12,7 @@ using MethodBase = System.Reflection.MethodBase;
 
 namespace System
 {
-    public partial class Exception
+    partial public class Exception
     {
         public MethodBase? TargetSite
         {

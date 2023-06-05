@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    public abstract partial class DependencyInjectionSpecificationTests
+    partial public abstract class DependencyInjectionSpecificationTests
     {
         // for most DI providers, the structs default constructor shouldn't run when creating an instance of ClassWithOptionalArgsCtorWithStructs
         public virtual bool ExpectStructWithPublicDefaultConstructorInvoked => false;

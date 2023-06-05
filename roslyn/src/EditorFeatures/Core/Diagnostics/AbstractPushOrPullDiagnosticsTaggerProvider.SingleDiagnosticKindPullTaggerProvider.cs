@@ -28,7 +28,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
+partial internal abstract class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
 {
     /// <summary>
     /// Low level tagger responsible for producing specific diagnostics tags for some feature for some particular <see

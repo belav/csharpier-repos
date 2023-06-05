@@ -82,7 +82,7 @@ namespace System.Diagnostics.Tracing
 
     internal sealed class EventPipeWaitHandle : WaitHandle { }
 
-    internal static partial class EventPipeInternal
+    partial internal static class EventPipeInternal
     {
         private unsafe struct EventPipeProviderConfigurationNative
         {

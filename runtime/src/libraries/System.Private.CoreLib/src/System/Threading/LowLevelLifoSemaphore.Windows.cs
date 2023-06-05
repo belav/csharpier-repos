@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
+    partial
     /// <summary>
     /// A LIFO semaphore implemented using Win32 IO Completion Ports.
     /// </summary>
@@ -14,7 +15,7 @@ namespace System.Threading
     /// See https://msdn.microsoft.com/en-us/library/windows/desktop/aa365198(v=vs.85).aspx under How I/O Completion Ports Work.
     /// From the docs "Threads that block their execution on an I/O completion port are released in last-in-first-out (LIFO) order."
     /// </remarks>
-    internal sealed partial class LowLevelLifoSemaphore : IDisposable
+    internal sealed class LowLevelLifoSemaphore : IDisposable
     {
         private IntPtr _completionPort;
 

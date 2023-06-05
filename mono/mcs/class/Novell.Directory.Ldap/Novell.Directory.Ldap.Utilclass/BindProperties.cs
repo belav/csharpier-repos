@@ -36,58 +36,64 @@ namespace Novell.Directory.Ldap.Utilclass
     /// <summary> Encapsulates an Ldap Bind properties</summary>
     public class BindProperties
     {
+        public
         /// <summary> gets the protocol version</summary>
-        virtual public int ProtocolVersion
+        virtual int ProtocolVersion
         {
             get { return version; }
         }
 
+        public
         /// <summary> Gets the authentication dn
         ///
         /// </summary>
         /// <returns> the authentication dn for this connection
         /// </returns>
-        virtual public System.String AuthenticationDN
+        virtual System.String AuthenticationDN
         {
             get { return dn; }
         }
 
+        public
         /// <summary> Gets the authentication method
         ///
         /// </summary>
         /// <returns> the authentication method for this connection
         /// </returns>
-        virtual public System.String AuthenticationMethod
+        virtual System.String AuthenticationMethod
         {
             get { return method; }
         }
 
+        public
         /// <summary> Gets the SASL Bind properties
         ///
         /// </summary>
         /// <returns> the sasl bind properties for this connection
         /// </returns>
-        virtual public System.Collections.Hashtable SaslBindProperties
+        virtual System.Collections.Hashtable SaslBindProperties
         {
             get { return bindProperties; }
         }
 
+        public
         /// <summary> Gets the SASL callback handler
         ///
         /// </summary>
         /// <returns> the sasl callback handler for this connection
         /// </returns>
-        virtual public System.Object SaslCallbackHandler
+        virtual System.Object SaslCallbackHandler
         {
             get { return bindCallbackHandler; }
         }
 
+        public
         /// <summary> Indicates whether or not the bind properties specify an anonymous bind
         ///
         /// </summary>
         /// <returns> true if the bind properties specify an anonymous bind
         /// </returns>
-        virtual public bool Anonymous
+        virtual bool Anonymous
         {
             get { return anonymous; }
         }

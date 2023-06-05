@@ -25,7 +25,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
-    public partial class DeterministicKeyBuilderTests<
+    partial public class DeterministicKeyBuilderTests<
         TCompilation,
         TCompilationOptions,
         TParseOptions

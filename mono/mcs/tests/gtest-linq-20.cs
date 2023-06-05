@@ -2,7 +2,7 @@ using System;
 
 class Maybe<T>
 {
-    public readonly static Maybe<T> Nothing = new Maybe<T>();
+    public static readonly Maybe<T> Nothing = new Maybe<T>();
     public T Value { get; private set; }
     public bool HasValue { get; private set; }
 

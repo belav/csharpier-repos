@@ -60,7 +60,7 @@ namespace Microsoft.Win32.SafeHandles
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         private static extern IntPtr LocalFree(IntPtr hMem);
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return LocalFree(handle) == IntPtr.Zero;
         }

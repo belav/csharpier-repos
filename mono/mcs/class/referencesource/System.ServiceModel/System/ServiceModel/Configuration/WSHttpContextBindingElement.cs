@@ -16,7 +16,7 @@ namespace System.ServiceModel.Configuration
     [TypeForwardedFrom(
         "System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     )]
-    public partial class WSHttpContextBindingElement : WSHttpBindingElement
+    partial public class WSHttpContextBindingElement : WSHttpBindingElement
     {
         const string ContextManagementEnabledName =
             ContextBindingElementExtensionElement.ContextManagementEnabledName;

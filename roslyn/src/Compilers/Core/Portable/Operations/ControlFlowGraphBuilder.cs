@@ -15,6 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
+    partial
     /// <summary>
     /// Some basic concepts:
     /// - Basic blocks are sequences of statements/operations with no branching. The only branching
@@ -24,7 +25,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
     /// - <see cref="ControlFlowGraphBuilder.SpillEvalStack"/> converts values on the stack into captures.
     /// - Error scenarios from initial binding need to be handled.
     /// </summary>
-    internal sealed partial class ControlFlowGraphBuilder : OperationVisitor<int?, IOperation>
+    internal sealed class ControlFlowGraphBuilder : OperationVisitor<int?, IOperation>
     {
         private readonly Compilation _compilation;
         private readonly BasicBlockBuilder _entry = new BasicBlockBuilder(BasicBlockKind.Entry);

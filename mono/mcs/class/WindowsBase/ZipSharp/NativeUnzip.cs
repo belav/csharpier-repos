@@ -302,7 +302,7 @@ namespace zipsharp
         ); // uLong
 
         [DllImport("MonoPosixHelper", CallingConvention = CallingConvention.Cdecl)]
-        static unsafe extern int unzReadCurrentFile(
+        static extern unsafe int unzReadCurrentFile(
             UnzipHandle handle,
             byte* buf, // voidp
             uint len

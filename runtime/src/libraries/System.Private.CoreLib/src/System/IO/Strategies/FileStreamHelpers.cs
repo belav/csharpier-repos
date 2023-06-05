@@ -6,7 +6,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Strategies
 {
-    internal static partial class FileStreamHelpers
+    partial internal static class FileStreamHelpers
     {
         /// <summary>Caches whether Serialization Guard has been disabled for file writes</summary>
         private static int s_cachedSerializationSwitch;

@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
-    internal abstract partial class AbstractOleCommandTarget
+    partial internal abstract class AbstractOleCommandTarget
     {
         public int QueryStatus(
             ref Guid pguidCmdGroup,

@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api;
 
-internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider
+partial internal sealed class NewUnitTestingIncrementalAnalyzerProvider
     : IUnitTestingIncrementalAnalyzerProvider
 {
     private readonly string? _workspaceKind;

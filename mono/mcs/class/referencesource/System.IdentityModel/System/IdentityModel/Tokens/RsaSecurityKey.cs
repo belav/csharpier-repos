@@ -8,7 +8,7 @@ namespace System.IdentityModel.Tokens
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
 
-    sealed public class RsaSecurityKey : AsymmetricSecurityKey
+    public sealed class RsaSecurityKey : AsymmetricSecurityKey
     {
         PrivateKeyStatus privateKeyStatus = PrivateKeyStatus.AvailabilityNotDetermined;
         readonly RSA rsa;

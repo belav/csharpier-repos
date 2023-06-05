@@ -6,7 +6,7 @@ using System.CommandLine.Invocation;
 
 namespace System.CommandLine;
 
-public static partial class Handler
+partial public static class Handler
 {
     private static T? GetValueForHandlerParameter<T>(
         IValueDescriptor<T> symbol,

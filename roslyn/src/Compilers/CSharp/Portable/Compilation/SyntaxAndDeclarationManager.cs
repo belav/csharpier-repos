@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class SyntaxAndDeclarationManager : CommonSyntaxAndDeclarationManager
+    partial internal sealed class SyntaxAndDeclarationManager : CommonSyntaxAndDeclarationManager
     {
         private State _lazyState;
 

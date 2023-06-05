@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 namespace System.Formats.Asn1
 {
-    internal ref struct AsnValueReader
+    ref internal struct AsnValueReader
     {
         private static readonly byte[] s_singleByte = new byte[1];
 

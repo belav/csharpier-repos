@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class OptionsBuilderExtensions
+    partial public static class OptionsBuilderExtensions
     {
         public static Microsoft.Extensions.Options.OptionsBuilder<TOptions> ValidateOnStart<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -33,7 +33,7 @@ namespace Microsoft.Extensions.Hosting
         Ignore = 1,
     }
 
-    public partial class ConsoleLifetimeOptions
+    partial public class ConsoleLifetimeOptions
     {
         public ConsoleLifetimeOptions() { }
 
@@ -44,7 +44,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public static partial class Host
+    partial public static class Host
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Hosting uses Microsoft.Extensions.DependencyInjection, which may require generating code dynamically at runtime."
@@ -81,7 +81,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public sealed partial class HostApplicationBuilder
+    partial public sealed class HostApplicationBuilder
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Hosting uses Microsoft.Extensions.DependencyInjection, which may require generating code dynamically at runtime."
@@ -129,7 +129,7 @@ namespace Microsoft.Extensions.Hosting
             where TContainerBuilder : notnull { }
     }
 
-    public sealed partial class HostApplicationBuilderSettings
+    partial public sealed class HostApplicationBuilderSettings
     {
         public HostApplicationBuilderSettings() { }
 
@@ -165,7 +165,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public partial class HostBuilder : Microsoft.Extensions.Hosting.IHostBuilder
+    partial public class HostBuilder : Microsoft.Extensions.Hosting.IHostBuilder
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Hosting uses Microsoft.Extensions.DependencyInjection, which may require generating code dynamically at runtime."
@@ -239,7 +239,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public static partial class HostingHostBuilderExtensions
+    partial public static class HostingHostBuilderExtensions
     {
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureAppConfiguration(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
@@ -406,7 +406,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 
-    public partial class HostOptions
+    partial public class HostOptions
     {
         public HostOptions() { }
 
@@ -425,7 +425,7 @@ namespace Microsoft.Extensions.Hosting
 
 namespace Microsoft.Extensions.Hosting.Internal
 {
-    public partial class ApplicationLifetime
+    partial public class ApplicationLifetime
         : Microsoft.Extensions.Hosting.IApplicationLifetime,
             Microsoft.Extensions.Hosting.IHostApplicationLifetime
     {
@@ -457,7 +457,7 @@ namespace Microsoft.Extensions.Hosting.Internal
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public partial class ConsoleLifetime
+    partial public class ConsoleLifetime
         : Microsoft.Extensions.Hosting.IHostLifetime,
             System.IDisposable
     {
@@ -493,7 +493,7 @@ namespace Microsoft.Extensions.Hosting.Internal
         }
     }
 
-    public partial class HostingEnvironment
+    partial public class HostingEnvironment
         : Microsoft.Extensions.Hosting.IHostEnvironment,
             Microsoft.Extensions.Hosting.IHostingEnvironment
     {

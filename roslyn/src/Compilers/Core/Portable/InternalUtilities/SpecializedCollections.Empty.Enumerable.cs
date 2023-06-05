@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace Roslyn.Utilities
 {
-    internal partial class SpecializedCollections
+    partial internal class SpecializedCollections
     {
-        private partial class Empty
+        partial private class Empty
         {
             internal class Enumerable<T> : IEnumerable<T>
             {

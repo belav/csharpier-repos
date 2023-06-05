@@ -3,28 +3,30 @@
 
 using Microsoft.Extensions.Logging;
 
+partial
 // Used to test use outside of a namespace
-internal static partial class NoNamespace
+internal static class NoNamespace
 {
     [LoggerMessage(
         EventId = 0,
         Level = LogLevel.Critical,
         Message = "Could not open socket to `{hostName}`"
     )]
-    public static partial void CouldNotOpenSocket(ILogger logger, string hostName);
+    partial public static void CouldNotOpenSocket(ILogger logger, string hostName);
 }
 
 namespace Level1
 {
+    partial
     // used to test use inside a one-level namespace
-    internal static partial class OneLevelNamespace
+    internal static class OneLevelNamespace
     {
         [LoggerMessage(
             EventId = 0,
             Level = LogLevel.Critical,
             Message = "Could not open socket to `{hostName}`"
         )]
-        public static partial void CouldNotOpenSocket(ILogger logger, string hostName);
+        partial public static void CouldNotOpenSocket(ILogger logger, string hostName);
     }
 }
 
@@ -32,15 +34,16 @@ namespace Level1
 {
     namespace Level2
     {
+        partial
         // used to test use inside a two-level namespace
-        internal static partial class TwoLevelNamespace
+        internal static class TwoLevelNamespace
         {
             [LoggerMessage(
                 EventId = 0,
                 Level = LogLevel.Critical,
                 Message = "Could not open socket to `{hostName}`"
             )]
-            public static partial void CouldNotOpenSocket(ILogger logger, string hostName);
+            partial public static void CouldNotOpenSocket(ILogger logger, string hostName);
         }
     }
 }

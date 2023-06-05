@@ -4,7 +4,7 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-public partial class FunctionPtr
+partial public class FunctionPtr
 {
     static class FunctionPointerNative
     {

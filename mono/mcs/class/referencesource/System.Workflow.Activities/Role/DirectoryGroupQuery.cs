@@ -12,7 +12,7 @@ using System.DirectoryServices;
 namespace System.Workflow.Activities
 {
     [Serializable]
-    sealed internal class DirectoryGroupQuery : IDirectoryOperation
+    internal sealed class DirectoryGroupQuery : IDirectoryOperation
     {
         public DirectoryGroupQuery() { }
 

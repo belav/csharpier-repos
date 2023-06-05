@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
-public partial class CancelKeyPressTests
+partial public class CancelKeyPressTests
 {
     private const int WaitFailTestTimeoutSeconds = 30;
 

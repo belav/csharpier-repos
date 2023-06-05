@@ -14,9 +14,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.MSBuild
 {
-    public partial class MSBuildProjectLoader
+    partial public class MSBuildProjectLoader
     {
-        private partial class Worker
+        partial private class Worker
         {
             private readonly struct ResolvedReferences
             {

@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal unsafe struct OSVERSIONINFOEX
@@ -15,7 +15,7 @@ internal static partial class Interop
             public int dwMinorVersion;
             public int dwBuildNumber;
             public int dwPlatformId;
-            public fixed char szCSDVersion[128];
+            fixed public char szCSDVersion[128];
             public ushort wServicePackMajor;
             public ushort wServicePackMinor;
             public ushort wSuiteMask;

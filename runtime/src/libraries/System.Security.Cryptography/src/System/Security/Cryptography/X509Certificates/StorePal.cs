@@ -5,29 +5,29 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal partial class StorePal
+    partial internal class StorePal
     {
-        internal static partial IStorePal FromHandle(IntPtr storeHandle);
+        partial internal static IStorePal FromHandle(IntPtr storeHandle);
 
-        internal static partial ILoaderPal FromBlob(
+        partial internal static ILoaderPal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
         );
 
-        internal static partial ILoaderPal FromFile(
+        partial internal static ILoaderPal FromFile(
             string fileName,
             SafePasswordHandle password,
             X509KeyStorageFlags keyStorageFlags
         );
 
-        internal static partial IExportPal FromCertificate(ICertificatePalCore cert);
+        partial internal static IExportPal FromCertificate(ICertificatePalCore cert);
 
-        internal static partial IExportPal LinkFromCertificateCollection(
+        partial internal static IExportPal LinkFromCertificateCollection(
             X509Certificate2Collection certificates
         );
 
-        internal static partial IStorePal FromSystemStore(
+        partial internal static IStorePal FromSystemStore(
             string storeName,
             StoreLocation storeLocation,
             OpenFlags openFlags

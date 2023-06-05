@@ -671,7 +671,7 @@ namespace System.Runtime.InteropServices
         Inherited = false
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class MarshalAsAttribute : Attribute
+    public sealed unsafe class MarshalAsAttribute : Attribute
     {
 #if MONO
         internal MarshalAsAttribute Copy ()
@@ -986,7 +986,7 @@ namespace System.Runtime.InteropServices
 
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class DllImportAttribute : Attribute
+    public sealed unsafe class DllImportAttribute : Attribute
     {
         [System.Security.SecurityCritical] // auto-generated
         internal static Attribute GetCustomAttribute(RuntimeMethodInfo method)
@@ -1132,7 +1132,7 @@ namespace System.Runtime.InteropServices
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class StructLayoutAttribute : Attribute
+    public sealed unsafe class StructLayoutAttribute : Attribute
     {
         private const int DEFAULT_PACKING_SIZE = 8;
 
@@ -1233,7 +1233,7 @@ namespace System.Runtime.InteropServices
 
     [AttributeUsage(AttributeTargets.Field, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class FieldOffsetAttribute : Attribute
+    public sealed unsafe class FieldOffsetAttribute : Attribute
     {
         [System.Security.SecurityCritical] // auto-generated
         internal static Attribute GetCustomAttribute(RuntimeFieldInfo field)

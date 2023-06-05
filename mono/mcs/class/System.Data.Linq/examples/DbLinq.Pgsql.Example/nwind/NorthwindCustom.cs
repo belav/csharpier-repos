@@ -27,7 +27,7 @@ namespace nwind
     } */
 
     [Table(Name = "public.\"Categories\"")]
-    public partial class NoStorageCategory
+    partial public class NoStorageCategory
     {
         public bool propertyInvoked_CategoryName = false;
         public bool propertyInvoked_Description = false;

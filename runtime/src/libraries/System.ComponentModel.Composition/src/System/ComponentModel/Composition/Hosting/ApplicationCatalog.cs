@@ -12,7 +12,7 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class ApplicationCatalog : ComposablePartCatalog, ICompositionElement
+    partial public class ApplicationCatalog : ComposablePartCatalog, ICompositionElement
     {
         private bool _isDisposed;
         private volatile AggregateCatalog? _innerCatalog;

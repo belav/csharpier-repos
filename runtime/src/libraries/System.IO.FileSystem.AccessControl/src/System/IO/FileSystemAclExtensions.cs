@@ -8,7 +8,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    public static partial class FileSystemAclExtensions
+    partial public static class FileSystemAclExtensions
     {
         public static DirectorySecurity GetAccessControl(this DirectoryInfo directoryInfo)
         {

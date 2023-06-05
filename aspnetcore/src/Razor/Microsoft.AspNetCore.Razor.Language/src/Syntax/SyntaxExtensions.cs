@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-internal partial class MarkupTextLiteralSyntax
+partial internal class MarkupTextLiteralSyntax
 {
     protected override string GetDebuggerDisplay()
     {
@@ -18,7 +18,7 @@ internal partial class MarkupTextLiteralSyntax
     }
 }
 
-internal partial class MarkupEphemeralTextLiteralSyntax
+partial internal class MarkupEphemeralTextLiteralSyntax
 {
     protected override string GetDebuggerDisplay()
     {
@@ -31,7 +31,7 @@ internal partial class MarkupEphemeralTextLiteralSyntax
     }
 }
 
-internal partial class CSharpStatementLiteralSyntax
+partial internal class CSharpStatementLiteralSyntax
 {
     protected override string GetDebuggerDisplay()
     {
@@ -44,7 +44,7 @@ internal partial class CSharpStatementLiteralSyntax
     }
 }
 
-internal partial class CSharpExpressionLiteralSyntax
+partial internal class CSharpExpressionLiteralSyntax
 {
     protected override string GetDebuggerDisplay()
     {
@@ -57,7 +57,7 @@ internal partial class CSharpExpressionLiteralSyntax
     }
 }
 
-internal partial class CSharpEphemeralTextLiteralSyntax
+partial internal class CSharpEphemeralTextLiteralSyntax
 {
     protected override string GetDebuggerDisplay()
     {
@@ -70,7 +70,7 @@ internal partial class CSharpEphemeralTextLiteralSyntax
     }
 }
 
-internal partial class UnclassifiedTextLiteralSyntax
+partial internal class UnclassifiedTextLiteralSyntax
 {
     protected override string GetDebuggerDisplay()
     {

@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class IdentifierNameSyntax
+    partial internal class IdentifierNameSyntax
     {
         public override string ToString()
         {

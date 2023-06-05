@@ -12,7 +12,7 @@ namespace System.IdentityModel
     // Static Xml Dictionary
     static class XD
     {
-        static public IdentityModelDictionary Dictionary
+        public static IdentityModelDictionary Dictionary
         {
             get { return IdentityModelDictionary.CurrentVersion; }
         }
@@ -31,7 +31,7 @@ namespace System.IdentityModel
         static XmlEncryptionDictionary xmlEncryptionDictionary;
         static XmlSignatureDictionary xmlSignatureDictionary;
 
-        static public ExclusiveC14NDictionary ExclusiveC14NDictionary
+        public static ExclusiveC14NDictionary ExclusiveC14NDictionary
         {
             get
             {
@@ -41,7 +41,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public SamlDictionary SamlDictionary
+        public static SamlDictionary SamlDictionary
         {
             get
             {
@@ -51,7 +51,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public SecureConversationDec2005Dictionary SecureConversationDec2005Dictionary
+        public static SecureConversationDec2005Dictionary SecureConversationDec2005Dictionary
         {
             get
             {
@@ -63,7 +63,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public SecureConversationFeb2005Dictionary SecureConversationFeb2005Dictionary
+        public static SecureConversationFeb2005Dictionary SecureConversationFeb2005Dictionary
         {
             get
             {
@@ -75,7 +75,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public SecurityAlgorithmDictionary SecurityAlgorithmDictionary
+        public static SecurityAlgorithmDictionary SecurityAlgorithmDictionary
         {
             get
             {
@@ -85,7 +85,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public SecurityAlgorithmDec2005Dictionary SecurityAlgorithmDec2005Dictionary
+        public static SecurityAlgorithmDec2005Dictionary SecurityAlgorithmDec2005Dictionary
         {
             get
             {
@@ -97,7 +97,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public SecurityJan2004Dictionary SecurityJan2004Dictionary
+        public static SecurityJan2004Dictionary SecurityJan2004Dictionary
         {
             get
             {
@@ -107,7 +107,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public SecurityXXX2005Dictionary SecurityXXX2005Dictionary
+        public static SecurityXXX2005Dictionary SecurityXXX2005Dictionary
         {
             get
             {
@@ -117,7 +117,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public TrustDec2005Dictionary TrustDec2005Dictionary
+        public static TrustDec2005Dictionary TrustDec2005Dictionary
         {
             get
             {
@@ -127,7 +127,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public TrustFeb2005Dictionary TrustFeb2005Dictionary
+        public static TrustFeb2005Dictionary TrustFeb2005Dictionary
         {
             get
             {
@@ -137,7 +137,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public UtilityDictionary UtilityDictionary
+        public static UtilityDictionary UtilityDictionary
         {
             get
             {
@@ -147,7 +147,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public XmlEncryptionDictionary XmlEncryptionDictionary
+        public static XmlEncryptionDictionary XmlEncryptionDictionary
         {
             get
             {
@@ -157,7 +157,7 @@ namespace System.IdentityModel
             }
         }
 
-        static public XmlSignatureDictionary XmlSignatureDictionary
+        public static XmlSignatureDictionary XmlSignatureDictionary
         {
             get
             {

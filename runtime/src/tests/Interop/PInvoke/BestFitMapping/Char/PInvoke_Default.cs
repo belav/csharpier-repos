@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Char;
 
-public partial class PInvoke_Default
+partial public class PInvoke_Default
 {
     [DllImport("Char_BestFitMappingNative")]
     public static extern bool Char_In([In] char c);

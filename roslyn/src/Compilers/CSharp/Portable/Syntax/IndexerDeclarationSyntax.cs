@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class IndexerDeclarationSyntax
+    partial public class IndexerDeclarationSyntax
     {
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("This member is obsolete.", true)]
@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static IndexerDeclarationSyntax IndexerDeclaration(
             SyntaxList<AttributeListSyntax> attributeLists,

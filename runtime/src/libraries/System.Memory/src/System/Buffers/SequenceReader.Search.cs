@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Buffers
 {
-    public ref partial struct SequenceReader<T>
+    ref partial public struct SequenceReader<T>
         where T : unmanaged, IEquatable<T>
     {
         /// <summary>

@@ -22,7 +22,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class DocumentExtensions
+    partial internal static class DocumentExtensions
     {
         // ⚠ Verify IVTs do not use this method before removing it.
         public static TLanguageService? GetLanguageService<TLanguageService>(

@@ -8,8 +8,9 @@ using System.Runtime.Versioning;
 
 namespace System.Threading.Tasks
 {
+    partial
     /// <summary>Provides a set of static methods for configuring <see cref="Task"/>-related behaviors on asynchronous enumerables and disposables.</summary>
-    public static partial class TaskAsyncEnumerableExtensions
+    public static class TaskAsyncEnumerableExtensions
     {
         /// <summary>
         /// Converts an <see cref="IAsyncEnumerable{T}"/> instance into an <see cref="IEnumerable{T}"/> that enumerates elements in a blocking manner.

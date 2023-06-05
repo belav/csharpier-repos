@@ -157,7 +157,7 @@ namespace WebAssembly.Core
         /// </summary>
         /// <returns>The new TypedArray/</returns>
         /// <param name="span">ReadOnlySpan.</param>
-        public unsafe static T From(ReadOnlySpan<U> span)
+        public static unsafe T From(ReadOnlySpan<U> span)
         {
             // source has to be instantiated.
             ValidateFromSource(span);

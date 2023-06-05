@@ -5,7 +5,7 @@ using System.Buffers;
 
 namespace System.Text.Json.Node
 {
-    public abstract partial class JsonNode
+    partial public abstract class JsonNode
     {
         /// <summary>
         ///   Converts the current instance to string in JSON format.

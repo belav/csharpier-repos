@@ -40,7 +40,7 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
     /// date by downloading patches on a daily basis.
     /// </summary>
     [ExportWorkspaceService(typeof(ISymbolSearchService), ServiceLayer.Host), Shared]
-    internal partial class VisualStudioSymbolSearchService
+    partial internal class VisualStudioSymbolSearchService
         : AbstractDelayStartedService,
             ISymbolSearchService
     {

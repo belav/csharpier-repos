@@ -11,7 +11,7 @@ using GenericParameterKind = Internal.Metadata.NativeFormat.GenericParameterKind
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         private GenericParameter HandleGenericParameter(Cts.GenericParameterDesc genParam)
         {

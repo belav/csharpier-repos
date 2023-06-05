@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Dsrole
+    partial internal static class Dsrole
     {
         internal enum DSROLE_PRIMARY_DOMAIN_INFO_LEVEL
         {
@@ -17,7 +17,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Dsrole, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial int DsRoleGetPrimaryDomainInformation(
+        partial internal static int DsRoleGetPrimaryDomainInformation(
             [MarshalAs(UnmanagedType.LPTStr)] string lpServer,
             DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
             out IntPtr Buffer

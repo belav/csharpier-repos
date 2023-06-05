@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.ServiceModel.Channels;
 
-    public sealed partial class UdpRetransmissionSettingsElement : ServiceModelConfigurationElement
+    partial public sealed class UdpRetransmissionSettingsElement : ServiceModelConfigurationElement
     {
         public UdpRetransmissionSettingsElement() { }
 

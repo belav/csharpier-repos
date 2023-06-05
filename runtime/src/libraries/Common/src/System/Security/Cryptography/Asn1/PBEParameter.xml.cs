@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct PBEParameter
+    partial internal struct PBEParameter
     {
         internal ReadOnlyMemory<byte> Salt;
         internal int IterationCount;

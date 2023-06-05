@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         Shared
     ]
     [ExtensionOrder(After = nameof(UnnamedSymbolCompletionProvider))]
-    internal partial class ExplicitInterfaceMemberCompletionProvider : LSPCompletionProvider
+    partial internal class ExplicitInterfaceMemberCompletionProvider : LSPCompletionProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

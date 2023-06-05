@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.IO.Compression
 {
-    public static partial class ZipFile
+    partial public static class ZipFile
     {
         /// <summary>
         /// Opens a <code>ZipArchive</code> on the specified path for reading. The specified file is opened with <code>FileMode.Open</code>.

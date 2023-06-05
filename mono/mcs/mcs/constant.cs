@@ -33,7 +33,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return this.GetType().Name + " (" + GetValueAsLiteral() + ")";
         }

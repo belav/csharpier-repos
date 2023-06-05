@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    internal sealed partial class PortableThreadPool
+    partial internal sealed class PortableThreadPool
     {
         private static class GateThread
         {

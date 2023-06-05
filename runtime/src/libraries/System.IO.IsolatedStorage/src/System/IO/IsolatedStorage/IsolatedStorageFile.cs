@@ -9,7 +9,7 @@ using System.Text;
 
 namespace System.IO.IsolatedStorage
 {
-    public sealed partial class IsolatedStorageFile : IsolatedStorage, IDisposable
+    partial public sealed class IsolatedStorageFile : IsolatedStorage, IDisposable
     {
         internal const string s_files = "Files";
         internal const string s_assemFiles = "AssemFiles";

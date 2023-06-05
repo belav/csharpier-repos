@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem
 {
+    partial
     // Additional members of MethodDesc related to code generation.
-    public abstract partial class MethodDesc
+    public abstract class MethodDesc
     {
         /// <summary>
         /// Gets a value specifying whether this method is an intrinsic.
@@ -109,8 +110,9 @@ namespace Internal.TypeSystem
         }
     }
 
+    partial
     // Additional members of InstantiatedMethod related to code generation.
-    public partial class InstantiatedMethod
+    public class InstantiatedMethod
     {
         public override bool IsIntrinsic
         {
@@ -168,8 +170,9 @@ namespace Internal.TypeSystem
         }
     }
 
+    partial
     // Additional members of MethodForInstantiatedType related to code generation.
-    public partial class MethodForInstantiatedType
+    public class MethodForInstantiatedType
     {
         public override bool IsIntrinsic
         {
@@ -227,8 +230,9 @@ namespace Internal.TypeSystem
         }
     }
 
+    partial
     // Additional members of ArrayMethod related to code generation.
-    public partial class ArrayMethod
+    public class ArrayMethod
     {
         public override bool IsIntrinsic
         {

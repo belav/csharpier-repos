@@ -10,7 +10,7 @@ namespace System.Security.Cryptography.Dsa.Tests
         TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
         "Not supported on Browser/iOS/tvOS/MacCatalyst"
     )]
-    public partial class DSASignatureFormatterTests : AsymmetricSignatureFormatterTests
+    partial public class DSASignatureFormatterTests : AsymmetricSignatureFormatterTests
     {
         [Fact]
         public static void VerifySignature_SHA1()

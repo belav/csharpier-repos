@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
+partial
 /// <summary>
 /// Implements <see cref="IDistributedCacheTagHelperService"/> and ensures
 /// multiple concurrent requests are gated.
@@ -28,7 +29,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 /// </item>
 /// </list>
 /// </summary>
-public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelperService
+public class DistributedCacheTagHelperService : IDistributedCacheTagHelperService
 {
     private readonly IDistributedCacheTagHelperStorage _storage;
     private readonly IDistributedCacheTagHelperFormatter _formatter;
@@ -227,7 +228,7 @@ public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelp
         return decoded;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -235,7 +236,7 @@ public partial class DistributedCacheTagHelperService : IDistributedCacheTagHelp
             "Couldn't deserialize cached value for key {Key}.",
             EventName = "DistributedFormatterDeserializationException"
         )]
-        public static partial void DistributedFormatterDeserializationException(
+        partial public static void DistributedFormatterDeserializationException(
             ILogger logger,
             string key,
             Exception exception

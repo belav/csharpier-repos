@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.Cci
 {
-    internal partial class MetadataWriter
+    partial internal class MetadataWriter
     {
         /// <summary>
         /// Import scopes are associated with binders (in C#) and thus multiple instances might be created for a single set of imports.

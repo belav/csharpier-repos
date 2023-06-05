@@ -12,7 +12,7 @@ namespace TestMcs
     // User Interface of the application, as well as listening (and optionally responding) to
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : UIApplicationDelegate
+    partial public class AppDelegate : UIApplicationDelegate
     {
         // class-level declarations
         UIWindow window;

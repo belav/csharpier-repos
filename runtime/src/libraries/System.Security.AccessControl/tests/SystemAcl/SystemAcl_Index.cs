@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class SystemAcl_Index
+    partial public class SystemAcl_Index
     {
         [Fact]
         public static void BasicValidationTestCases()

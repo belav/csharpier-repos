@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Mono.Cecil
 {
-    static partial class Mixin
+    partial static class Mixin
     {
         public static bool IsTypeSpecification(this TypeReference type)
         {

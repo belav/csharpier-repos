@@ -13,11 +13,11 @@ using SafePasswordHandle = Microsoft.Win32.SafeHandles.SafePasswordHandle;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class CertificatePal : IDisposable, ICertificatePal
+    partial internal sealed class CertificatePal : IDisposable, ICertificatePal
     {
         private SafeCertContextHandle _certContext;
 
-        internal static partial ICertificatePal FromHandle(IntPtr handle)
+        partial internal static ICertificatePal FromHandle(IntPtr handle)
         {
             if (handle == IntPtr.Zero)
                 throw new ArgumentException(SR.Arg_InvalidHandle, nameof(handle));
@@ -46,7 +46,13 @@ namespace System.Security.Cryptography.X509Certificates
         /// creating another X509Certificate object based on this one to ensure the underlying
         /// cert context is not released at the wrong time.
         /// </summary>
-        internal static partial ICertificatePal FromOtherCert(X509Certificate copyFrom)
+        partial
+        /// <summary>
+        /// Returns the SafeCertContextHandle. Use this instead of FromHandle() when
+        /// creating another X509Certificate object based on this one to ensure the underlying
+        /// cert context is not released at the wrong time.
+        /// </summary>
+        internal static ICertificatePal FromOtherCert(X509Certificate copyFrom)
         {
             CertificatePal pal = new CertificatePal((CertificatePal)copyFrom.Pal!);
             return pal;

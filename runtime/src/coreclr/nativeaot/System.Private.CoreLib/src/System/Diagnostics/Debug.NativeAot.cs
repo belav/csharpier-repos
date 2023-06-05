@@ -7,8 +7,9 @@ using System.Security;
 
 namespace System.Diagnostics
 {
+    partial
     // .NET Native-specific Debug implementation
-    public static partial class Debug
+    public static class Debug
     {
         [DebuggerHidden]
         [Intrinsic]

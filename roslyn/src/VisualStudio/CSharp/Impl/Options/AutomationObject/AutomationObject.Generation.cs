@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
-    public partial class AutomationObject
+    partial public class AutomationObject
     {
         public int SortUsings_SeparateImportDirectiveGroups
         {

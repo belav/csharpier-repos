@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace System.Text.Json.Node
 {
-    public partial class JsonNode : IDynamicMetaObjectProvider
+    partial public class JsonNode : IDynamicMetaObjectProvider
     {
         internal virtual MethodInfo? TryGetMemberMethodInfo => null;
         internal virtual MethodInfo? TrySetMemberMethodInfo => null;

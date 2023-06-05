@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 {
-    internal static partial class SymbolUsageAnalysis
+    partial internal static class SymbolUsageAnalysis
     {
         /// <summary>
         /// Analysis data for a particular <see cref="BasicBlock"/> for <see cref="ControlFlowGraph"/>

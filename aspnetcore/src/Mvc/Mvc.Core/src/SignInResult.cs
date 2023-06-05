@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc;
 
+partial
 /// <summary>
 /// An <see cref="ActionResult"/> that on execution invokes <see cref="M:HttpContext.SignInAsync"/>.
 /// </summary>
-public partial class SignInResult : ActionResult
+public class SignInResult : ActionResult
 {
     /// <summary>
     /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -88,7 +89,7 @@ public partial class SignInResult : ActionResult
         return httpContext.SignInAsync(AuthenticationScheme, Principal, Properties);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -96,7 +97,7 @@ public partial class SignInResult : ActionResult
             $"Executing {nameof(SignInResult)} with authentication scheme ({{Scheme}}) and the following principal: {{Principal}}.",
             EventName = "SignInResultExecuting"
         )]
-        public static partial void SignInResultExecuting(
+        partial public static void SignInResultExecuting(
             ILogger logger,
             string? scheme,
             ClaimsPrincipal principal

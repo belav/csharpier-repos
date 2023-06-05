@@ -6,8 +6,9 @@ using System.Reflection.PortableExecutable;
 
 namespace Internal.TypeSystem.Ecma
 {
+    partial
     // Pluggable file that adds PDB handling functionality to EcmaAssembly
-    public partial class EcmaAssembly
+    public class EcmaAssembly
     {
         internal EcmaAssembly(
             TypeSystemContext context,

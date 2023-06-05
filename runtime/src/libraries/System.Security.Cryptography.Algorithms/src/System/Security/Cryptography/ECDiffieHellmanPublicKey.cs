@@ -3,10 +3,11 @@
 
 namespace System.Security.Cryptography
 {
+    partial
     /// <summary>
     ///     Wrapper for public key material passed between parties during Diffie-Hellman key material generation
     /// </summary>
-    public abstract partial class ECDiffieHellmanPublicKey : IDisposable
+    public abstract class ECDiffieHellmanPublicKey : IDisposable
     {
         private readonly byte[] _keyBlob;
 

@@ -6,10 +6,11 @@ using System.Text;
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Provides a name formatter that is compatible with SigFormat.cpp in the CLR.
     /// </summary>
-    public partial class ExceptionTypeNameFormatter : TypeNameFormatter
+    public class ExceptionTypeNameFormatter : TypeNameFormatter
     {
         public static ExceptionTypeNameFormatter Instance { get; } =
             new ExceptionTypeNameFormatter();

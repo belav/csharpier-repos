@@ -42,7 +42,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
     [TestFixture]
     public class CmsRecipientTest
     {
-        static public byte[] farscape_p12_pfx =
+        public static byte[] farscape_p12_pfx =
         {
             0x30,
             0x82,

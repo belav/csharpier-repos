@@ -22,7 +22,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class ZoneIdentityPermission : CodeAccessPermission, IBuiltInPermission
+    public sealed class ZoneIdentityPermission : CodeAccessPermission, IBuiltInPermission
     {
         //------------------------------------------------------
         //

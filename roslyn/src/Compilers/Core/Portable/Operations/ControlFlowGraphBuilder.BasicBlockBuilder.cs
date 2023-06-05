@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    internal partial class ControlFlowGraphBuilder
+    partial internal class ControlFlowGraphBuilder
     {
         internal sealed class BasicBlockBuilder
         {

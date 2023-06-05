@@ -11,7 +11,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    public sealed partial class Thread
+    partial public sealed class Thread
     {
         // Extra bits used in _threadState
         private const ThreadState ThreadPoolThread = (ThreadState)0x1000;

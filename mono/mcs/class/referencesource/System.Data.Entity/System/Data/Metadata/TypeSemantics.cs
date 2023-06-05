@@ -30,11 +30,12 @@ namespace System.Data.Metadata.Edm
     /// </remarks>
     internal static class TypeSemantics
     {
+        private
         #region Fields
         //
         // cache commom super type closure
         //
-        static private objectModel.ReadOnlyCollection<PrimitiveType>[,] _commonTypeClosure;
+        static objectModel.ReadOnlyCollection<PrimitiveType>[,] _commonTypeClosure;
         #endregion
 
         //
@@ -356,7 +357,13 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="type">Type to be checked.</param>
         /// <returns><c>true</c> if the <param ref="type" /> is a nominal type. <c>false</c> otherwise.</returns>
-        static internal bool IsNominalType(TypeUsage type)
+        internal
+        /// <summary>
+        /// Determines if the <param ref="type" /> is a structural nominal type, i.e., EntityType or ComplexType
+        /// </summary>
+        /// <param name="type">Type to be checked.</param>
+        /// <returns><c>true</c> if the <param ref="type" /> is a nominal type. <c>false</c> otherwise.</returns>
+        static bool IsNominalType(TypeUsage type)
         {
             Debug.Assert(
                 !IsEnumerationType(type),
@@ -758,7 +765,7 @@ namespace System.Data.Metadata.Edm
         }
 
         [System.Diagnostics.Conditional("DEBUG")]
-        static internal void AssertTypeInvariant(string message, Func<bool> assertPredicate)
+        internal static void AssertTypeInvariant(string message, Func<bool> assertPredicate)
         {
             System.Diagnostics.Debug.Assert(
                 assertPredicate(),

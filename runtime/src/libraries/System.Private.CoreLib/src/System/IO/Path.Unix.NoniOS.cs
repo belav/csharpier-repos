@@ -3,7 +3,7 @@
 
 namespace System.IO
 {
-    public static partial class Path
+    partial public static class Path
     {
         private static string DefaultTempPath => "/tmp/";
     }

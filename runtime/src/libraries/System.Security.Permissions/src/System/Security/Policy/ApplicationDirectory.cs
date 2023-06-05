@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public sealed partial class ApplicationDirectory : EvidenceBase
+    partial public sealed class ApplicationDirectory : EvidenceBase
     {
         public ApplicationDirectory(string name) { }
 

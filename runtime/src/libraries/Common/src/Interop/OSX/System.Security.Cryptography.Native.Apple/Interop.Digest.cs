@@ -5,15 +5,15 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.Apple;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_DigestFree")]
-        internal static partial void DigestFree(IntPtr handle);
+        partial internal static void DigestFree(IntPtr handle);
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_DigestCreate")]
-        internal static partial SafeDigestCtxHandle DigestCreate(
+        partial internal static SafeDigestCtxHandle DigestCreate(
             PAL_HashAlgorithm algorithm,
             out int cbDigest
         );
@@ -22,7 +22,7 @@ internal static partial class Interop
             DigestUpdate(ctx, ref MemoryMarshal.GetReference(data), data.Length);
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_DigestUpdate")]
-        private static partial int DigestUpdate(
+        partial private static int DigestUpdate(
             SafeDigestCtxHandle ctx,
             ref byte pbData,
             int cbData
@@ -32,7 +32,7 @@ internal static partial class Interop
             DigestFinal(ctx, ref MemoryMarshal.GetReference(output), output.Length);
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_DigestFinal")]
-        private static partial int DigestFinal(
+        partial private static int DigestFinal(
             SafeDigestCtxHandle ctx,
             ref byte pbOutput,
             int cbOutput
@@ -42,14 +42,14 @@ internal static partial class Interop
             DigestCurrent(ctx, ref MemoryMarshal.GetReference(output), output.Length);
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_DigestCurrent")]
-        private static partial int DigestCurrent(
+        partial private static int DigestCurrent(
             SafeDigestCtxHandle ctx,
             ref byte pbOutput,
             int cbOutput
         );
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_DigestOneShot")]
-        internal static unsafe partial int DigestOneShot(
+        partial internal static unsafe int DigestOneShot(
             PAL_HashAlgorithm algorithm,
             byte* pbData,
             int cbData,
@@ -59,7 +59,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_DigestReset")]
-        internal static partial int DigestReset(SafeDigestCtxHandle ctx);
+        partial internal static int DigestReset(SafeDigestCtxHandle ctx);
     }
 }
 

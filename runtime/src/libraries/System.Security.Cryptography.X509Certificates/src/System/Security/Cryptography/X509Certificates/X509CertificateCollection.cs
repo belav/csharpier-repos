@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    public partial class X509CertificateCollection : System.Collections.CollectionBase
+    partial public class X509CertificateCollection : System.Collections.CollectionBase
     {
         public X509CertificateCollection() { }
 

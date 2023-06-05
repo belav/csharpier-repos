@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
     private static void ThrowExceptionForIoErrno(ErrorInfo errorInfo, string? path, bool isDirError)
     {

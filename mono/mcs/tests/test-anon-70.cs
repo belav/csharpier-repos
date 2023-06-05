@@ -18,7 +18,7 @@ public class C
 
     static void Test(D d) { }
 
-    unsafe static void UnsafeTests()
+    static unsafe void UnsafeTests()
     {
         UnsafeClass v = new UnsafeClass();
         Test(

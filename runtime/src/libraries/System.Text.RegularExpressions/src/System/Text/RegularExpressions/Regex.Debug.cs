@@ -9,7 +9,7 @@ using System.Text.RegularExpressions.Symbolic;
 
 namespace System.Text.RegularExpressions
 {
-    public partial class Regex
+    partial public class Regex
     {
         /// <summary>Unwind the regex and save the resulting state graph in DGML</summary>
         /// <param name="writer">Writer to which the DGML is written.</param>

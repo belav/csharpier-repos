@@ -9,9 +9,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal readonly partial struct ImmutableSegmentedDictionary<TKey, TValue>
+    partial internal readonly struct ImmutableSegmentedDictionary<TKey, TValue>
     {
-        public sealed partial class Builder
+        partial public sealed class Builder
             : IDictionary<TKey, TValue>,
                 IReadOnlyDictionary<TKey, TValue>,
                 IDictionary

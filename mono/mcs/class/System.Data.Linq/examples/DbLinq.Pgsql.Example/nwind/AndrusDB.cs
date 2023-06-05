@@ -15,10 +15,11 @@ using DbLinq.PostgreSql;
 
 namespace AndrusDB
 {
+    partial
     /// <summary>
     /// This class represents PostgreSQL database Andrus.
     /// </summary>
-    public partial class Andrus : DataContext
+    public class Andrus : DataContext
     {
         public Andrus(string connStr)
             : base(new Npgsql.NpgsqlConnection(connStr), new PgsqlVendor()) { }
@@ -63,7 +64,7 @@ namespace AndrusDB
     }
 
     [Table(Name = "public.t3")]
-    public partial class T3
+    partial public class T3
     {
         protected int _id1;
         protected int? _f1;
@@ -115,7 +116,7 @@ namespace AndrusDB
     }
 
     [Table(Name = "public.tcompositepk")]
-    public partial class Tcompositepk
+    partial public class Tcompositepk
     {
         protected int _f1;
         protected string _f2;
@@ -191,7 +192,7 @@ namespace AndrusDB
     [InheritanceMapping(Code = 0, Type = typeof(HourlyEmployee), IsDefault = true)]
     [InheritanceMapping(Code = 1, Type = typeof(SalariedEmployee))]
     [InheritanceMapping(Code = 2, Type = typeof(CommissionedEmployee))]
-    public partial class Employee
+    partial public class Employee
     {
         protected int _employeeid;
         protected int _employeetype;
@@ -282,7 +283,7 @@ namespace AndrusDB
     }
 
     [Table(Name = "public.char_pk")]
-    public partial class Char_Pk
+    partial public class Char_Pk
     {
         protected string _col1;
         protected int? _val1;
@@ -342,7 +343,7 @@ namespace AndrusDB
     }
 
     [Table(Name = "public.t5")]
-    public partial class T5
+    partial public class T5
     {
         protected int _myid;
         protected int? _myval;
@@ -394,7 +395,7 @@ namespace AndrusDB
     }
 
     [Table(Name = "public.t4")]
-    public partial class T4
+    partial public class T4
     {
         protected decimal? _mydec;
         protected string _mychar;
@@ -444,7 +445,7 @@ namespace AndrusDB
     }
 
     [Table(Name = "public.t1")]
-    public partial class T1
+    partial public class T1
     {
         protected int _private;
 
@@ -508,7 +509,7 @@ namespace AndrusDB
     }
 
     [Table(Name = "public.t2")]
-    public partial class T2
+    partial public class T2
     {
         protected int? _f1;
         protected int? _f2;

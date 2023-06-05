@@ -3,7 +3,7 @@
 //----------------------------------------------------------------
 namespace System.Activities.Core.Presentation.Themes
 {
-    sealed partial class StringResourceDictionary
+    partial sealed class StringResourceDictionary
     {
         static StringResourceDictionary instance;
 

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public abstract partial class FileSystemTest : FileCleanupTestBase
+    partial public abstract class FileSystemTest : FileCleanupTestBase
     {
         public static readonly byte[] TestBuffer =
         {

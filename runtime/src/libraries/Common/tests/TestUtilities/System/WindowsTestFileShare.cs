@@ -6,7 +6,7 @@ using System.ServiceProcess;
 
 namespace System
 {
-    public sealed partial class WindowsTestFileShare : IDisposable
+    partial public sealed class WindowsTestFileShare : IDisposable
     {
         private static readonly Lazy<bool> _canShareFiles = new Lazy<bool>(() =>
         {
@@ -82,7 +82,7 @@ namespace System
         }
 
         [LibraryImport(Interop.Libraries.Netapi32)]
-        private static partial int NetShareAdd(
+        partial private static int NetShareAdd(
             [MarshalAs(UnmanagedType.LPWStr)] string servername,
             int level,
             IntPtr buf,
@@ -90,7 +90,7 @@ namespace System
         );
 
         [LibraryImport(Interop.Libraries.Netapi32)]
-        private static partial int NetShareDel(
+        partial private static int NetShareDel(
             [MarshalAs(UnmanagedType.LPWStr)] string servername,
             [MarshalAs(UnmanagedType.LPWStr)] string netname,
             int reserved

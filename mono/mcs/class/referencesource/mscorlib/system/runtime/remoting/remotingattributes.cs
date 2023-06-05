@@ -44,7 +44,7 @@ namespace System.Runtime.Remoting.Metadata
             return _soapAttr;
         } // GetSoapAttribute
 
-        abstract internal SoapAttribute GetSoapAttributeNoLock();
+        internal abstract SoapAttribute GetSoapAttributeNoLock();
     } // class RemotingCachedData
 
     internal class RemotingFieldCachedData : RemotingCachedData

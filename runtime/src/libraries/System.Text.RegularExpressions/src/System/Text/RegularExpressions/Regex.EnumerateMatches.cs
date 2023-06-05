@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.RegularExpressions
 {
-    public partial class Regex
+    partial public class Regex
     {
         /// <summary>
         /// Searches an input span for all occurrences of a regular expression and returns a <see cref="ValueMatchEnumerator"/> to iterate over the matches.
@@ -102,6 +102,7 @@ namespace System.Text.RegularExpressions
         public ValueMatchEnumerator EnumerateMatches(ReadOnlySpan<char> input, int startat) =>
             new ValueMatchEnumerator(this, input, startat);
 
+        ref
         /// <summary>
         /// Represents an enumerator containing the set of successful matches found by iteratively applying a regular expression pattern to the input span.
         /// </summary>
@@ -113,7 +114,7 @@ namespace System.Text.RegularExpressions
         ///
         /// This type is a ref struct since it stores the input span as a field in order to be able to lazily iterate over it.
         /// </remarks>
-        public ref struct ValueMatchEnumerator
+        public struct ValueMatchEnumerator
         {
             private readonly Regex _regex;
             private readonly ReadOnlySpan<char> _input;

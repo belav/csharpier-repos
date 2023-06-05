@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
 {
-    internal sealed partial class SnippetExpansionClient : AbstractSnippetExpansionClient
+    partial internal sealed class SnippetExpansionClient : AbstractSnippetExpansionClient
     {
         public SnippetExpansionClient(
             IContentType languageServiceGuid,

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace BasicEventSourceTests
 {
-    public partial class TestEventCounter
+    partial public class TestEventCounter
     {
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/25035")]

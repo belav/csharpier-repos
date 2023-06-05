@@ -7,7 +7,7 @@ using System;
 
 namespace Microsoft.NETCore.Platforms.BuildTasks
 {
-    public abstract partial class BuildTask : ITask
+    partial public abstract class BuildTask : ITask
     {
         private Log _log;
 

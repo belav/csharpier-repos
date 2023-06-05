@@ -228,7 +228,11 @@ namespace System.Workflow.Activities
         #endregion
 
         #region Helper methods
-        static internal bool IsValidContainer(CompositeActivity activity)
+        internal
+        #endregion
+
+        #region Helper methods
+        static bool IsValidContainer(CompositeActivity activity)
         {
             return (activity is EventDrivenActivity || activity is StateInitializationActivity);
         }

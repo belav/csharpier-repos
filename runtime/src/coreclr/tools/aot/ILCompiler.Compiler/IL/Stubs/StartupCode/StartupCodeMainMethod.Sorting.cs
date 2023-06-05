@@ -6,7 +6,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs.StartupCode
 {
-    public partial class StartupCodeMainMethod
+    partial public class StartupCodeMainMethod
     {
         protected override int ClassCode => -304225481;
 
@@ -17,7 +17,7 @@ namespace Internal.IL.Stubs.StartupCode
             return 0;
         }
 
-        private partial class MainMethodWrapper
+        partial private class MainMethodWrapper
         {
             protected override int ClassCode => -215672259;
 

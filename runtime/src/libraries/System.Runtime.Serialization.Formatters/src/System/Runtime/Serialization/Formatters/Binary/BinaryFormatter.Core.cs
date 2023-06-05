@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
-    public sealed partial class BinaryFormatter : IFormatter
+    partial public sealed class BinaryFormatter : IFormatter
     {
         [Obsolete(
             Obsoletions.BinaryFormatterMessage,

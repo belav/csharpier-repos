@@ -21,10 +21,11 @@ using InternalSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// The parsed representation of a C# source document.
     /// </summary>
-    public abstract partial class CSharpSyntaxTree : SyntaxTree
+    public abstract class CSharpSyntaxTree : SyntaxTree
     {
         internal static readonly SyntaxTree Dummy = new DummySyntaxTree();
 

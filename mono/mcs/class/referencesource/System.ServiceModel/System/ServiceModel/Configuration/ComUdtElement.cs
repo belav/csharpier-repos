@@ -11,7 +11,7 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
     using System.Xml;
 
-    public sealed partial class ComUdtElement : ConfigurationElement
+    partial public sealed class ComUdtElement : ConfigurationElement
     {
         public ComUdtElement()
             : base() { }

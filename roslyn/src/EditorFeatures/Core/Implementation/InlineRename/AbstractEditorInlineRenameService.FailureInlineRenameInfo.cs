@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractEditorInlineRenameService
+    partial internal abstract class AbstractEditorInlineRenameService
     {
         private class FailureInlineRenameInfo : IInlineRenameInfo
         {

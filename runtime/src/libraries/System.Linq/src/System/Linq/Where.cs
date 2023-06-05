@@ -7,7 +7,7 @@ using static System.Linq.Utilities;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TSource> Where<TSource>(
             this IEnumerable<TSource> source,
@@ -82,11 +82,12 @@ namespace System.Linq
             }
         }
 
+        partial
         /// <summary>
         /// An iterator that filters each item of an <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        private sealed partial class WhereEnumerableIterator<TSource> : Iterator<TSource>
+        private sealed class WhereEnumerableIterator<TSource> : Iterator<TSource>
         {
             private readonly IEnumerable<TSource> _source;
             private readonly Func<TSource, bool> _predicate;
@@ -154,11 +155,12 @@ namespace System.Linq
                 );
         }
 
+        partial
         /// <summary>
         /// An iterator that filters each item of an array.
         /// </summary>
         /// <typeparam name="TSource">The type of the source array.</typeparam>
-        internal sealed partial class WhereArrayIterator<TSource> : Iterator<TSource>
+        internal sealed class WhereArrayIterator<TSource> : Iterator<TSource>
         {
             private readonly TSource[] _source;
             private readonly Func<TSource, bool> _predicate;
@@ -201,11 +203,12 @@ namespace System.Linq
                 new WhereArrayIterator<TSource>(_source, CombinePredicates(_predicate, predicate));
         }
 
+        partial
         /// <summary>
         /// An iterator that filters each item of a <see cref="List{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source list.</typeparam>
-        private sealed partial class WhereListIterator<TSource> : Iterator<TSource>
+        private sealed class WhereListIterator<TSource> : Iterator<TSource>
         {
             private readonly List<TSource> _source;
             private readonly Func<TSource, bool> _predicate;
@@ -255,12 +258,13 @@ namespace System.Linq
                 new WhereListIterator<TSource>(_source, CombinePredicates(_predicate, predicate));
         }
 
+        partial
         /// <summary>
         /// An iterator that filters, then maps, each item of an array.
         /// </summary>
         /// <typeparam name="TSource">The type of the source array.</typeparam>
         /// <typeparam name="TResult">The type of the mapped items.</typeparam>
-        private sealed partial class WhereSelectArrayIterator<TSource, TResult> : Iterator<TResult>
+        private sealed class WhereSelectArrayIterator<TSource, TResult> : Iterator<TResult>
         {
             private readonly TSource[] _source;
             private readonly Func<TSource, bool> _predicate;
@@ -313,12 +317,13 @@ namespace System.Linq
                 );
         }
 
+        partial
         /// <summary>
         /// An iterator that filters, then maps, each item of a <see cref="List{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source list.</typeparam>
         /// <typeparam name="TResult">The type of the mapped items.</typeparam>
-        private sealed partial class WhereSelectListIterator<TSource, TResult> : Iterator<TResult>
+        private sealed class WhereSelectListIterator<TSource, TResult> : Iterator<TResult>
         {
             private readonly List<TSource> _source;
             private readonly Func<TSource, bool> _predicate;
@@ -378,13 +383,13 @@ namespace System.Linq
                 );
         }
 
+        partial
         /// <summary>
         /// An iterator that filters, then maps, each item of an <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
         /// <typeparam name="TResult">The type of the mapped items.</typeparam>
-        private sealed partial class WhereSelectEnumerableIterator<TSource, TResult>
-            : Iterator<TResult>
+        private sealed class WhereSelectEnumerableIterator<TSource, TResult> : Iterator<TResult>
         {
             private readonly IEnumerable<TSource> _source;
             private readonly Func<TSource, bool> _predicate;

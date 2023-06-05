@@ -14,7 +14,7 @@ namespace System.Collections.Immutable
     /// <typeparam name="T">The type of elements stored in the queue.</typeparam>
     [DebuggerDisplay("IsEmpty = {IsEmpty}")]
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
-    public sealed partial class ImmutableQueue<T> : IImmutableQueue<T>
+    partial public sealed class ImmutableQueue<T> : IImmutableQueue<T>
     {
         /// <summary>
         /// The singleton empty queue.

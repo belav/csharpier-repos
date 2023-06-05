@@ -112,7 +112,7 @@ namespace System.Reflection.Runtime.General
 
     [ReflectionBlocked]
     [CLSCompliant(false)]
-    public partial struct QMethodDefinition
+    partial public struct QMethodDefinition
     {
         private QMethodDefinition(object reader, int token)
         {
@@ -147,7 +147,7 @@ namespace System.Reflection.Runtime.General
 
     [ReflectionBlocked]
     [CLSCompliant(false)]
-    public partial struct QTypeDefinition
+    partial public struct QTypeDefinition
     {
         public object Reader
         {
@@ -171,7 +171,7 @@ namespace System.Reflection.Runtime.General
 
     [ReflectionBlocked]
     [CLSCompliant(false)]
-    public partial struct QTypeDefRefOrSpec
+    partial public struct QTypeDefRefOrSpec
     {
         public object Reader
         {

@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.FileProviders
 {
-    public partial class PhysicalFileProvider
+    partial public class PhysicalFileProvider
         : Microsoft.Extensions.FileProviders.IFileProvider,
             System.IDisposable
     {
@@ -59,7 +59,7 @@ namespace Microsoft.Extensions.FileProviders
 
 namespace Microsoft.Extensions.FileProviders.Internal
 {
-    public partial class PhysicalDirectoryContents
+    partial public class PhysicalDirectoryContents
         : Microsoft.Extensions.FileProviders.IDirectoryContents,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
             System.Collections.IEnumerable
@@ -100,7 +100,7 @@ namespace Microsoft.Extensions.FileProviders.Physical
         Sensitive = 7,
     }
 
-    public partial class PhysicalDirectoryInfo : Microsoft.Extensions.FileProviders.IFileInfo
+    partial public class PhysicalDirectoryInfo : Microsoft.Extensions.FileProviders.IFileInfo
     {
         public PhysicalDirectoryInfo(System.IO.DirectoryInfo info) { }
 
@@ -135,7 +135,7 @@ namespace Microsoft.Extensions.FileProviders.Physical
         }
     }
 
-    public partial class PhysicalFileInfo : Microsoft.Extensions.FileProviders.IFileInfo
+    partial public class PhysicalFileInfo : Microsoft.Extensions.FileProviders.IFileInfo
     {
         public PhysicalFileInfo(System.IO.FileInfo info) { }
 
@@ -170,7 +170,7 @@ namespace Microsoft.Extensions.FileProviders.Physical
         }
     }
 
-    public partial class PhysicalFilesWatcher : System.IDisposable
+    partial public class PhysicalFilesWatcher : System.IDisposable
     {
         public PhysicalFilesWatcher(
             string root,
@@ -197,7 +197,7 @@ namespace Microsoft.Extensions.FileProviders.Physical
         ~PhysicalFilesWatcher() { }
     }
 
-    public partial class PollingFileChangeToken : Microsoft.Extensions.Primitives.IChangeToken
+    partial public class PollingFileChangeToken : Microsoft.Extensions.Primitives.IChangeToken
     {
         public PollingFileChangeToken(System.IO.FileInfo fileInfo) { }
 
@@ -219,7 +219,7 @@ namespace Microsoft.Extensions.FileProviders.Physical
         }
     }
 
-    public partial class PollingWildCardChangeToken : Microsoft.Extensions.Primitives.IChangeToken
+    partial public class PollingWildCardChangeToken : Microsoft.Extensions.Primitives.IChangeToken
     {
         public PollingWildCardChangeToken(string root, string pattern) { }
 

@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.Configuration
 {
-    public static partial class CommandLineConfigurationExtensions
+    partial public static class CommandLineConfigurationExtensions
     {
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddCommandLine(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
@@ -37,7 +37,7 @@ namespace Microsoft.Extensions.Configuration
 
 namespace Microsoft.Extensions.Configuration.CommandLine
 {
-    public partial class CommandLineConfigurationProvider
+    partial public class CommandLineConfigurationProvider
         : Microsoft.Extensions.Configuration.ConfigurationProvider
     {
         public CommandLineConfigurationProvider(
@@ -53,7 +53,7 @@ namespace Microsoft.Extensions.Configuration.CommandLine
         public override void Load() { }
     }
 
-    public partial class CommandLineConfigurationSource
+    partial public class CommandLineConfigurationSource
         : Microsoft.Extensions.Configuration.IConfigurationSource
     {
         public CommandLineConfigurationSource() { }

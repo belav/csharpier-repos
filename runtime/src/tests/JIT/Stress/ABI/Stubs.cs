@@ -36,7 +36,7 @@ namespace ABIStress
         }
     }
 
-    internal partial class Program
+    partial internal class Program
     {
         private static Dictionary<int, Callee> s_instantiatingStubCallees =
             new Dictionary<int, Callee>();

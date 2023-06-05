@@ -35,7 +35,7 @@ using System.Runtime.Serialization;
 
 namespace System.Drawing
 {
-    public sealed partial class BufferedGraphicsContext : IDisposable
+    partial public sealed class BufferedGraphicsContext : IDisposable
     {
         private BufferedGraphics AllocBuffer(
             Graphics? targetGraphics,

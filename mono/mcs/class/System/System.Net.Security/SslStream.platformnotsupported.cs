@@ -50,7 +50,7 @@ namespace System.Net.Security
         string[] acceptableIssuers
     );
 
-    public partial class SslStream : System.Net.Security.AuthenticatedStream
+    partial public class SslStream : System.Net.Security.AuthenticatedStream
     {
         public SslStream(System.IO.Stream innerStream)
             : base(default(System.IO.Stream), default(bool)) =>

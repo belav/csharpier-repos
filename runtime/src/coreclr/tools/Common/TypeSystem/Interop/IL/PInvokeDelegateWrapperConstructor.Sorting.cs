@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem.Interop
 {
+    partial
     // Functionality related to deterministic ordering of methods
-    public partial class PInvokeDelegateWrapperConstructor
+    public class PInvokeDelegateWrapperConstructor
     {
         protected override int ClassCode => 1000342011;
 

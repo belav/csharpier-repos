@@ -21,7 +21,7 @@ public class A { }
 
 public class B { }
 
-unsafe public class C
+public unsafe class C
 {
     static int i;
 
@@ -92,7 +92,7 @@ unsafe public class C
     }
 }
 
-unsafe public class D<T1>
+public unsafe class D<T1>
 {
     [MethodImpl(NoInlining)]
     public static void check(long stack1, long stack2)

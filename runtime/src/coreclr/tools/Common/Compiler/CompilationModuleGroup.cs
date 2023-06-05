@@ -5,7 +5,7 @@ using Internal.TypeSystem;
 
 namespace ILCompiler
 {
-    public abstract partial class CompilationModuleGroup
+    partial public abstract class CompilationModuleGroup
     {
         /// <summary>
         /// If true, "type" is in the set of input assemblies being compiled

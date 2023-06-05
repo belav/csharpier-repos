@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class NullableTests
+    partial public static class NullableTests
     {
         [Fact]
         public static void DictionaryWithNullableValue()

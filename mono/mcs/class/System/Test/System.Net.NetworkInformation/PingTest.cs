@@ -8,7 +8,7 @@ namespace MonoTests.System.Net.NetworkInformation
 {
     [TestFixture]
     [Category("NotWasm")]
-    public partial class PingTest
+    partial public class PingTest
     {
         partial void AndroidShouldPingWork(ref bool shouldWork);
 

@@ -202,7 +202,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public Size AutoScrollMargin
+        public new Size AutoScrollMargin
         {
             get { return base.AutoScrollMargin; }
             set { base.AutoScrollMargin = value; }
@@ -211,7 +211,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public Size AutoScrollMinSize
+        public new Size AutoScrollMinSize
         {
             get { return base.AutoScrollMinSize; }
             set { base.AutoScrollMinSize = value; }
@@ -229,7 +229,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public Point AutoScrollPosition
+        public new Point AutoScrollPosition
         {
             get { return base.AutoScrollPosition; }
             set { base.AutoScrollPosition = value; }
@@ -290,12 +290,12 @@ namespace System.Windows.Forms
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public ControlCollection Controls
+        public new ControlCollection Controls
         {
             get { return base.Controls; }
         }
 
-        new public DockStyle Dock
+        public new DockStyle Dock
         {
             get { return base.Dock; }
             set { base.Dock = value; }
@@ -364,7 +364,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public Padding Padding
+        public new Padding Padding
         {
             get { return base.Padding; }
             set { base.Padding = value; }
@@ -534,7 +534,7 @@ namespace System.Windows.Forms
         [DispId(-516)]
         [DefaultValue(true)]
         [MonoTODO("Stub, never called")]
-        new public bool TabStop
+        public new bool TabStop
         {
             get { return false; }
             set { }

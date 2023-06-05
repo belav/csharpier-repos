@@ -6,7 +6,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+    partial public sealed class ECDiffieHellmanCng : ECDiffieHellman
     {
         /// <summary>
         ///     Public key used to generate key material with the second party

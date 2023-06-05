@@ -18,8 +18,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 {
-    internal partial class DiagnosticIncrementalAnalyzer
+    partial internal class DiagnosticIncrementalAnalyzer
     {
+        partial
         /// <summary>
         /// This type performs incremental analysis in presence of edits to only a single member inside a document.
         /// For typing scenarios where we are continuously editing a method body, we can optimize the full
@@ -32,7 +33,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         /// If we are unable to perform this incremental diagnostics update, we fallback to computing
         /// the diagnostics for the entire document.
         /// </summary>
-        private sealed partial class IncrementalMemberEditAnalyzer
+        private sealed class IncrementalMemberEditAnalyzer
         {
             /// <summary>
             /// Weak reference to the last document snapshot for which full document diagnostics

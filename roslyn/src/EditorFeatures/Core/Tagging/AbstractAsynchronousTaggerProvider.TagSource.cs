@@ -22,8 +22,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal partial class AbstractAsynchronousTaggerProvider<TTag>
+    partial internal class AbstractAsynchronousTaggerProvider<TTag>
     {
+        partial
         /// <summary>
         /// <para>The <see cref="TagSource"/> is the core part of our asynchronous
         /// tagging infrastructure. It is the coordinator between <see cref="ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/>s,
@@ -40,7 +41,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// and <see cref="ITagger{T}"/>s. Special cases, like reference highlighting (which processes multiple
         /// subject buffers at once) have their own providers and tag source derivations.</para>
         /// </summary>
-        private sealed partial class TagSource
+        private sealed class TagSource
         {
             /// <summary>
             /// If we get more than this many differences, then we just issue it as a single change

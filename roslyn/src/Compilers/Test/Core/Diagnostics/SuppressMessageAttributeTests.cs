@@ -17,7 +17,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 {
-    public abstract partial class SuppressMessageAttributeTests
+    partial public abstract class SuppressMessageAttributeTests
     {
         #region Local Suppression
 

@@ -7,7 +7,7 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    public partial class HtmlMarkupParser
+    partial public class HtmlMarkupParser
     {
         public override void ParseDocument()
         {

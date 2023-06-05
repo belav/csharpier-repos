@@ -589,7 +589,7 @@ namespace Microsoft.CodeAnalysis.Remote
         }
     }
 
-    internal static partial class NativeMethods
+    partial internal static class NativeMethods
     {
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern bool GetExitCodeProcess(

@@ -5,8 +5,9 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Implements canonicalization of generic type parameters
-    public partial class SignatureTypeVariable
+    public class SignatureTypeVariable
     {
         public override bool IsCanonicalSubtype(CanonicalFormKind policy)
         {
@@ -21,8 +22,9 @@ namespace Internal.TypeSystem
         }
     }
 
+    partial
     // Implements canonicalization of generic method parameters
-    public partial class SignatureMethodVariable
+    public class SignatureMethodVariable
     {
         public override bool IsCanonicalSubtype(CanonicalFormKind policy)
         {

@@ -7,8 +7,9 @@ using MetadataType = Internal.TypeSystem.DefType;
 
 namespace Internal.TypeSystem
 {
+    partial
     // Implements canonicalization for generic instantiations
-    public partial class InstantiatedType
+    public class InstantiatedType
     {
         public override bool IsCanonicalSubtype(CanonicalFormKind policy)
         {

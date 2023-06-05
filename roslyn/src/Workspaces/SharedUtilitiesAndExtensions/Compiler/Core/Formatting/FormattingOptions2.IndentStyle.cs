@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
-    internal partial class FormattingOptions2
+    partial internal class FormattingOptions2
     {
         /// <summary>
         /// For use in the shared CodeStyle layer.  Keep in syntax with FormattingOptions.IndentStyle.

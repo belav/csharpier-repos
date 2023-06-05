@@ -27,7 +27,7 @@ using Microsoft.CodeAnalysis.CodeCleanup;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
         : IAddImportFeatureService,
             IEqualityComparer<PortableExecutableReference>
         where TSimpleNameSyntax : SyntaxNode

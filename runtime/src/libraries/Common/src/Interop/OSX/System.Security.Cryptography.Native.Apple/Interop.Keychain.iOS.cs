@@ -11,27 +11,27 @@ using System.Security.Cryptography.Apple;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_SecKeychainEnumerateCerts(
+        partial private static int AppleCryptoNative_SecKeychainEnumerateCerts(
             out SafeCFArrayHandle matches
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_SecKeychainEnumerateIdentities(
+        partial private static int AppleCryptoNative_SecKeychainEnumerateIdentities(
             out SafeCFArrayHandle matches
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509StoreAddCertificate(
+        partial private static int AppleCryptoNative_X509StoreAddCertificate(
             SafeHandle certOrIdentity
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509StoreRemoveCertificate(
+        partial private static int AppleCryptoNative_X509StoreRemoveCertificate(
             SafeHandle certOrIdentity,
             [MarshalAs(UnmanagedType.Bool)] bool isReadOnlyMode
         );

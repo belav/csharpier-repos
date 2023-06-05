@@ -5,7 +5,7 @@ using System.IO;
 
 namespace System.Reflection.Internal
 {
-    internal static partial class StreamExtensions
+    partial internal static class StreamExtensions
     {
         internal static unsafe int Read(this Stream stream, byte* buffer, int size) =>
             stream.Read(new Span<byte>(buffer, size));

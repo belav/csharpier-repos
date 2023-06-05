@@ -371,7 +371,7 @@ namespace Mono.XBuild.CommandLine
     class UnixUtils
     {
         [System.Runtime.InteropServices.DllImport("libc", EntryPoint = "isatty")]
-        extern static int _isatty(int fd);
+        static extern int _isatty(int fd);
 
         public static bool isatty(int fd)
         {

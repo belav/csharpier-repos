@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial class XsdCachingReader : XmlReader, IXmlLineInfo
+    partial internal class XsdCachingReader : XmlReader, IXmlLineInfo
     {
         // Gets the text value of the current node.
         public override Task<string> GetValueAsync()

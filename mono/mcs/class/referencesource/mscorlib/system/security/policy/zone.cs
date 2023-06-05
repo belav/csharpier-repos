@@ -81,7 +81,7 @@ namespace System.Security.Policy
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static SecurityZone _CreateFromUrl(String url);
+        private static extern SecurityZone _CreateFromUrl(String url);
 #endif // FEATURE_CAS_POLICY
 
         public IPermission CreateIdentityPermission(Evidence evidence)

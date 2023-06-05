@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [ExportCompletionProvider(nameof(ObjectCreationCompletionProvider), LanguageNames.CSharp)]
     [ExtensionOrder(After = nameof(ExplicitInterfaceTypeCompletionProvider))]
     [Shared]
-    internal partial class ObjectCreationCompletionProvider
+    partial internal class ObjectCreationCompletionProvider
         : AbstractObjectCreationCompletionProvider<CSharpSyntaxContext>
     {
         [ImportingConstructor]

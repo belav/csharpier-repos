@@ -38,10 +38,10 @@ namespace System.Windows.Forms.VisualStyles
     {
         #region DllImports
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 CloseThemeData(IntPtr hTheme);
+        public static extern Int32 CloseThemeData(IntPtr hTheme);
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 DrawThemeBackground(
+        public static extern Int32 DrawThemeBackground(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -51,7 +51,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 DrawThemeBackground(
+        public static extern Int32 DrawThemeBackground(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -61,7 +61,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 DrawThemeEdge(
+        public static extern Int32 DrawThemeEdge(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -73,7 +73,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 DrawThemeEdge(
+        public static extern Int32 DrawThemeEdge(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -85,7 +85,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 DrawThemeIcon(
+        public static extern Int32 DrawThemeIcon(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -96,17 +96,17 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 DrawThemeParentBackground(
+        public static extern Int32 DrawThemeParentBackground(
             IntPtr hWnd,
             IntPtr hdc,
             ref XplatUIWin32.RECT pRect
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 DrawThemeParentBackground(IntPtr hWnd, IntPtr hdc, int pRect);
+        public static extern Int32 DrawThemeParentBackground(IntPtr hWnd, IntPtr hdc, int pRect);
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 DrawThemeText(
+        public static extern Int32 DrawThemeText(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -119,13 +119,13 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 EnableTheming(int fEnable);
+        public static extern Int32 EnableTheming(int fEnable);
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
         public static extern IntPtr OpenThemeData(IntPtr hWnd, String classList);
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeBackgroundContentRect(
+        public static extern Int32 GetThemeBackgroundContentRect(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -135,7 +135,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeBackgroundExtent(
+        public static extern Int32 GetThemeBackgroundExtent(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -145,7 +145,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeBackgroundRegion(
+        public static extern Int32 GetThemeBackgroundRegion(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -155,7 +155,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeBool(
+        public static extern Int32 GetThemeBool(
             IntPtr hTheme,
             int iPartId,
             int iStateId,
@@ -164,7 +164,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeColor(
+        public static extern Int32 GetThemeColor(
             IntPtr hTheme,
             int iPartId,
             int iStateId,
@@ -173,7 +173,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeEnumValue(
+        public static extern Int32 GetThemeEnumValue(
             IntPtr hTheme,
             int iPartId,
             int iStateId,
@@ -182,7 +182,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeFilename(
+        public static extern Int32 GetThemeFilename(
             IntPtr hTheme,
             int iPartId,
             int iStateId,
@@ -192,7 +192,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeFont(
+        public static extern Int32 GetThemeFont(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -207,7 +207,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeInt(
+        public static extern Int32 GetThemeInt(
             IntPtr hTheme,
             int iPartId,
             int iStateId,
@@ -216,7 +216,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeMargins(
+        public static extern Int32 GetThemeMargins(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -227,7 +227,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemePartSize(
+        public static extern Int32 GetThemePartSize(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -238,7 +238,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemePartSize(
+        public static extern Int32 GetThemePartSize(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -249,7 +249,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemePosition(
+        public static extern Int32 GetThemePosition(
             IntPtr hTheme,
             int iPartId,
             int iStateId,
@@ -258,7 +258,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeString(
+        public static extern Int32 GetThemeString(
             IntPtr hTheme,
             int iPartId,
             int iStateId,
@@ -268,7 +268,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeTextExtent(
+        public static extern Int32 GetThemeTextExtent(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -281,7 +281,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeTextExtent(
+        public static extern Int32 GetThemeTextExtent(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -294,7 +294,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeTextMetrics(
+        public static extern Int32 GetThemeTextMetrics(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -303,7 +303,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 HitTestThemeBackground(
+        public static extern Int32 HitTestThemeBackground(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -316,23 +316,23 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static int IsThemeBackgroundPartiallyTransparent(
+        public static extern int IsThemeBackgroundPartiallyTransparent(
             IntPtr hTheme,
             int iPartId,
             int iStateId
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static bool IsThemePartDefined(IntPtr hTheme, int iPartId, int iStateId);
+        public static extern bool IsThemePartDefined(IntPtr hTheme, int iPartId, int iStateId);
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static bool IsThemeActive();
+        public static extern bool IsThemeActive();
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static bool IsAppThemed();
+        public static extern bool IsAppThemed();
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 HitTestThemeBackground(
+        public static extern Int32 HitTestThemeBackground(
             IntPtr hTheme,
             IntPtr hdc,
             int iPartId,
@@ -345,7 +345,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeDocumentationProperty(
+        public static extern Int32 GetThemeDocumentationProperty(
             String stringThemeName,
             String stringPropertyName,
             StringBuilder stringValue,
@@ -353,7 +353,7 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetCurrentThemeName(
+        public static extern Int32 GetCurrentThemeName(
             StringBuilder stringThemeName,
             int lengthThemeName,
             StringBuilder stringColorName,
@@ -363,13 +363,13 @@ namespace System.Windows.Forms.VisualStyles
         );
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static UInt32 GetThemeSysColor(IntPtr hTheme, int iColorId);
+        public static extern UInt32 GetThemeSysColor(IntPtr hTheme, int iColorId);
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static Int32 GetThemeSysInt(IntPtr hTheme, int iIntId, out int piVal);
+        public static extern Int32 GetThemeSysInt(IntPtr hTheme, int iIntId, out int piVal);
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static int GetThemeSysBool(IntPtr hTheme, int iBoolId);
+        public static extern int GetThemeSysBool(IntPtr hTheme, int iBoolId);
         #endregion
 
         #region LOGFONT Type

@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.SymbolSearch;
 
 namespace Microsoft.CodeAnalysis.AddPackage
 {
-    internal abstract partial class AbstractAddSpecificPackageCodeFixProvider
+    partial internal abstract class AbstractAddSpecificPackageCodeFixProvider
         : AbstractAddPackageCodeFixProvider
     {
         /// <summary>

@@ -18,7 +18,7 @@ using VSCompletionItem = Microsoft.VisualStudio.Language.Intellisense.AsyncCompl
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion
 {
-    internal sealed partial class ItemManager : IAsyncCompletionItemManager2
+    partial internal sealed class ItemManager : IAsyncCompletionItemManager2
     {
         private readonly RecentItemsManager _recentItemsManager;
         private readonly IGlobalOptionService _globalOptions;

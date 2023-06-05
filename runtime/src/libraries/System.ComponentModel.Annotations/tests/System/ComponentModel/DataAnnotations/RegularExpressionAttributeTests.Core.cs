@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.ComponentModel.Annotations.Tests.System.ComponentModel.DataAnnotations
 {
-    public sealed partial class RegularExpressionAttributeTests
+    partial public sealed class RegularExpressionAttributeTests
     {
         [Theory]
         [InlineData(12345)]

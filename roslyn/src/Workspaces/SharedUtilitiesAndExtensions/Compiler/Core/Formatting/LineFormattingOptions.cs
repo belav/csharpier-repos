@@ -35,7 +35,7 @@ internal interface LineFormattingOptionsProvider
 #endif
 { }
 
-internal static partial class LineFormattingOptionsProviders
+partial internal static class LineFormattingOptionsProviders
 {
     public static LineFormattingOptions GetLineFormattingOptions(
         this IOptionsReader options,

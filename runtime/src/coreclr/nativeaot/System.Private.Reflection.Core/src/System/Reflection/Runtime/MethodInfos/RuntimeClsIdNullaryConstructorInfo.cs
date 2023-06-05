@@ -15,10 +15,11 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
+    partial
     //
     // This represents the synthetic nullary instance constructor for Types created by Type.GetTypeFromCLSID().
     //
-    internal sealed partial class RuntimeCLSIDNullaryConstructorInfo : RuntimeConstructorInfo
+    internal sealed class RuntimeCLSIDNullaryConstructorInfo : RuntimeConstructorInfo
     {
         private RuntimeCLSIDNullaryConstructorInfo(RuntimeCLSIDTypeInfo declaringType)
         {

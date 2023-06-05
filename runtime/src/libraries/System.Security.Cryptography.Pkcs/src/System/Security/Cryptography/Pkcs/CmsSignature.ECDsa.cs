@@ -9,9 +9,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs
 {
-    internal partial class CmsSignature
+    partial internal class CmsSignature
     {
-        static partial void PrepareRegistrationECDsa(Dictionary<string, CmsSignature> lookup)
+        partial static void PrepareRegistrationECDsa(Dictionary<string, CmsSignature> lookup)
         {
             lookup.Add(
                 Oids.ECDsaWithSha1,
@@ -32,7 +32,7 @@ namespace System.Security.Cryptography.Pkcs
             lookup.Add(Oids.EcPublicKey, new ECDsaCmsSignature(null, default));
         }
 
-        private sealed partial class ECDsaCmsSignature : CmsSignature
+        partial private sealed class ECDsaCmsSignature : CmsSignature
         {
             private readonly HashAlgorithmName _expectedDigest;
             private readonly string? _signatureAlgorithm;

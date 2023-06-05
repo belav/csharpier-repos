@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal partial class
+    partial internal class
 #if DEBUG
     FieldSymbolAdapter
         : SymbolAdapter,
@@ -307,7 +307,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal partial class FieldSymbol
+    partial internal class FieldSymbol
     {
 #if DEBUG
         private FieldSymbolAdapter _lazyAdapter;
@@ -354,8 +354,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
+    partial
 #if DEBUG
-    internal partial class FieldSymbolAdapter
+    internal class FieldSymbolAdapter
     {
         internal FieldSymbolAdapter(FieldSymbol underlyingFieldSymbol)
         {

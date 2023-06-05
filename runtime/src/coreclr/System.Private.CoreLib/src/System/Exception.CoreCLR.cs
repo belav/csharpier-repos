@@ -11,7 +11,7 @@ using System.Runtime.Serialization;
 
 namespace System
 {
-    public partial class Exception : ISerializable
+    partial public class Exception : ISerializable
     {
         partial void RestoreRemoteStackTrace(SerializationInfo info, StreamingContext context)
         {
@@ -235,7 +235,7 @@ namespace System
             RuntimeHelpers.QCall,
             EntryPoint = "ExceptionNative_GetMessageFromNativeResources"
         )]
-        private static partial void GetMessageFromNativeResources(
+        partial private static void GetMessageFromNativeResources(
             ExceptionMessageKind kind,
             StringHandleOnStack retMesg
         );

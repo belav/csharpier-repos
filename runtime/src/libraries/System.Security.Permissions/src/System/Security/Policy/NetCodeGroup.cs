@@ -3,7 +3,7 @@
 
 namespace System.Security.Policy
 {
-    public sealed partial class NetCodeGroup : CodeGroup
+    partial public sealed class NetCodeGroup : CodeGroup
     {
         public static readonly string AbsentOriginScheme;
         public static readonly string AnyOtherOriginScheme;

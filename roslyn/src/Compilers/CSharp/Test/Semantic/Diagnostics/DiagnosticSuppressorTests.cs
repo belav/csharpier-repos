@@ -20,7 +20,7 @@ using static Microsoft.CodeAnalysis.CommonDiagnosticAnalyzers;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class DiagnosticSuppressorTests : CompilingTestBase
+    partial public class DiagnosticSuppressorTests : CompilingTestBase
     {
         private static CSharpCompilation VerifyAnalyzerDiagnostics(
             CSharpCompilation c,

@@ -28,7 +28,7 @@ namespace System.Xml.Serialization
         EnableDataBinding = 16,
     }
 
-    public partial class CodeIdentifier
+    partial public class CodeIdentifier
     {
         [System.ObsoleteAttribute(
             "This class should never get constructed as it contains only static methods."
@@ -51,7 +51,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class CodeIdentifiers
+    partial public class CodeIdentifiers
     {
         public CodeIdentifiers() { }
 
@@ -99,7 +99,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class ImportContext
+    partial public class ImportContext
     {
         public ImportContext(System.Xml.Serialization.CodeIdentifiers? identifiers, bool shareTypes)
         { }
@@ -118,13 +118,13 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial interface IXmlTextParser
+    partial public interface IXmlTextParser
     {
         bool Normalized { get; set; }
         System.Xml.WhitespaceHandling WhitespaceHandling { get; set; }
     }
 
-    public abstract partial class SchemaImporter
+    partial public abstract class SchemaImporter
     {
         internal SchemaImporter() { }
     }
@@ -135,7 +135,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Property
             | System.AttributeTargets.ReturnValue
     )]
-    public partial class SoapAttributeAttribute : System.Attribute
+    partial public class SoapAttributeAttribute : System.Attribute
     {
         public SoapAttributeAttribute() { }
 
@@ -161,7 +161,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class SoapAttributeOverrides
+    partial public class SoapAttributeOverrides
     {
         public SoapAttributeOverrides() { }
 
@@ -183,7 +183,7 @@ namespace System.Xml.Serialization
         public void Add(System.Type type, System.Xml.Serialization.SoapAttributes? attributes) { }
     }
 
-    public partial class SoapAttributes
+    partial public class SoapAttributes
     {
         public SoapAttributes() { }
 
@@ -227,7 +227,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Property
             | System.AttributeTargets.ReturnValue
     )]
-    public partial class SoapElementAttribute : System.Attribute
+    partial public class SoapElementAttribute : System.Attribute
     {
         public SoapElementAttribute() { }
 
@@ -254,7 +254,7 @@ namespace System.Xml.Serialization
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Field)]
-    public partial class SoapEnumAttribute : System.Attribute
+    partial public class SoapEnumAttribute : System.Attribute
     {
         public SoapEnumAttribute() { }
 
@@ -274,7 +274,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Property
             | System.AttributeTargets.ReturnValue
     )]
-    public partial class SoapIgnoreAttribute : System.Attribute
+    partial public class SoapIgnoreAttribute : System.Attribute
     {
         public SoapIgnoreAttribute() { }
     }
@@ -286,7 +286,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Struct,
         AllowMultiple = true
     )]
-    public partial class SoapIncludeAttribute : System.Attribute
+    partial public class SoapIncludeAttribute : System.Attribute
     {
         public SoapIncludeAttribute(System.Type type) { }
 
@@ -297,7 +297,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class SoapReflectionImporter
+    partial public class SoapReflectionImporter
     {
         public SoapReflectionImporter() { }
 
@@ -399,7 +399,7 @@ namespace System.Xml.Serialization
         public void IncludeTypes(System.Reflection.ICustomAttributeProvider provider) { }
     }
 
-    public partial class SoapSchemaMember
+    partial public class SoapSchemaMember
     {
         public SoapSchemaMember() { }
 
@@ -422,7 +422,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Interface
             | System.AttributeTargets.Struct
     )]
-    public partial class SoapTypeAttribute : System.Attribute
+    partial public class SoapTypeAttribute : System.Attribute
     {
         public SoapTypeAttribute() { }
 
@@ -449,7 +449,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class UnreferencedObjectEventArgs : System.EventArgs
+    partial public class UnreferencedObjectEventArgs : System.EventArgs
     {
         public UnreferencedObjectEventArgs(object? o, string? id) { }
 
@@ -468,7 +468,7 @@ namespace System.Xml.Serialization
         System.Xml.Serialization.UnreferencedObjectEventArgs e
     );
 
-    public partial class XmlAnyElementAttributes : System.Collections.CollectionBase
+    partial public class XmlAnyElementAttributes : System.Collections.CollectionBase
     {
         public XmlAnyElementAttributes() { }
 
@@ -510,7 +510,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.ReturnValue,
         AllowMultiple = false
     )]
-    public partial class XmlArrayAttribute : System.Attribute
+    partial public class XmlArrayAttribute : System.Attribute
     {
         public XmlArrayAttribute() { }
 
@@ -551,7 +551,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.ReturnValue,
         AllowMultiple = true
     )]
-    public partial class XmlArrayItemAttribute : System.Attribute
+    partial public class XmlArrayItemAttribute : System.Attribute
     {
         public XmlArrayItemAttribute() { }
 
@@ -601,7 +601,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class XmlArrayItemAttributes : System.Collections.CollectionBase
+    partial public class XmlArrayItemAttributes : System.Collections.CollectionBase
     {
         public XmlArrayItemAttributes() { }
 
@@ -633,7 +633,7 @@ namespace System.Xml.Serialization
         public void Remove(System.Xml.Serialization.XmlArrayItemAttribute? attribute) { }
     }
 
-    public partial class XmlAttributeEventArgs : System.EventArgs
+    partial public class XmlAttributeEventArgs : System.EventArgs
     {
         internal XmlAttributeEventArgs() { }
 
@@ -664,7 +664,7 @@ namespace System.Xml.Serialization
         System.Xml.Serialization.XmlAttributeEventArgs e
     );
 
-    public partial class XmlAttributeOverrides
+    partial public class XmlAttributeOverrides
     {
         public XmlAttributeOverrides() { }
 
@@ -686,7 +686,7 @@ namespace System.Xml.Serialization
         public void Add(System.Type type, System.Xml.Serialization.XmlAttributes attributes) { }
     }
 
-    public partial class XmlAttributes
+    partial public class XmlAttributes
     {
         public XmlAttributes() { }
 
@@ -767,7 +767,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.ReturnValue,
         AllowMultiple = false
     )]
-    public partial class XmlChoiceIdentifierAttribute : System.Attribute
+    partial public class XmlChoiceIdentifierAttribute : System.Attribute
     {
         public XmlChoiceIdentifierAttribute() { }
 
@@ -781,7 +781,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial struct XmlDeserializationEvents
+    partial public struct XmlDeserializationEvents
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -807,7 +807,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class XmlElementAttributes : System.Collections.CollectionBase
+    partial public class XmlElementAttributes : System.Collections.CollectionBase
     {
         public XmlElementAttributes() { }
 
@@ -839,7 +839,7 @@ namespace System.Xml.Serialization
         public void Remove(System.Xml.Serialization.XmlElementAttribute? attribute) { }
     }
 
-    public partial class XmlElementEventArgs : System.EventArgs
+    partial public class XmlElementEventArgs : System.EventArgs
     {
         internal XmlElementEventArgs() { }
 
@@ -877,7 +877,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Struct,
         AllowMultiple = true
     )]
-    public partial class XmlIncludeAttribute : System.Attribute
+    partial public class XmlIncludeAttribute : System.Attribute
     {
         public XmlIncludeAttribute(System.Type? type) { }
 
@@ -888,7 +888,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public abstract partial class XmlMapping
+    partial public abstract class XmlMapping
     {
         internal XmlMapping() { }
 
@@ -916,7 +916,7 @@ namespace System.Xml.Serialization
         Write = 2,
     }
 
-    public partial class XmlMemberMapping
+    partial public class XmlMemberMapping
     {
         internal XmlMemberMapping() { }
 
@@ -958,7 +958,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class XmlMembersMapping : System.Xml.Serialization.XmlMapping
+    partial public class XmlMembersMapping : System.Xml.Serialization.XmlMapping
     {
         internal XmlMembersMapping() { }
 
@@ -980,7 +980,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class XmlNodeEventArgs : System.EventArgs
+    partial public class XmlNodeEventArgs : System.EventArgs
     {
         internal XmlNodeEventArgs() { }
 
@@ -1023,7 +1023,7 @@ namespace System.Xml.Serialization
         System.Xml.Serialization.XmlNodeEventArgs e
     );
 
-    public partial class XmlReflectionImporter
+    partial public class XmlReflectionImporter
     {
         public XmlReflectionImporter() { }
 
@@ -1149,7 +1149,7 @@ namespace System.Xml.Serialization
         public void IncludeTypes(System.Reflection.ICustomAttributeProvider provider) { }
     }
 
-    public partial class XmlReflectionMember
+    partial public class XmlReflectionMember
     {
         public XmlReflectionMember() { }
 
@@ -1185,7 +1185,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class XmlSchemaEnumerator
+    partial public class XmlSchemaEnumerator
         : System.Collections.Generic.IEnumerator<System.Xml.Schema.XmlSchema>,
             System.Collections.IEnumerator,
             System.IDisposable
@@ -1211,7 +1211,7 @@ namespace System.Xml.Serialization
         void System.Collections.IEnumerator.Reset() { }
     }
 
-    public partial class XmlSchemaExporter
+    partial public class XmlSchemaExporter
     {
         public XmlSchemaExporter(System.Xml.Serialization.XmlSchemas schemas) { }
 
@@ -1244,7 +1244,7 @@ namespace System.Xml.Serialization
         public void ExportTypeMapping(System.Xml.Serialization.XmlTypeMapping xmlTypeMapping) { }
     }
 
-    public partial class XmlSchemaImporter : System.Xml.Serialization.SchemaImporter
+    partial public class XmlSchemaImporter : System.Xml.Serialization.SchemaImporter
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Members from serialized types may be trimmed if not referenced directly"
@@ -1381,7 +1381,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class XmlSchemas
+    partial public class XmlSchemas
         : System.Collections.CollectionBase,
             System.Collections.Generic.IEnumerable<System.Xml.Schema.XmlSchema>,
             System.Collections.IEnumerable
@@ -1477,14 +1477,14 @@ namespace System.Xml.Serialization
     );
     public delegate void XmlSerializationFixupCallback(object fixup);
 
-    public abstract partial class XmlSerializationGeneratedCode
+    partial public abstract class XmlSerializationGeneratedCode
     {
         protected XmlSerializationGeneratedCode() { }
     }
 
     public delegate object? XmlSerializationReadCallback();
 
-    public abstract partial class XmlSerializationReader
+    partial public abstract class XmlSerializationReader
         : System.Xml.Serialization.XmlSerializationGeneratedCode
     {
         protected XmlSerializationReader() { }
@@ -1885,7 +1885,7 @@ namespace System.Xml.Serialization
 
         protected void UnreferencedObject(string? id, object? o) { }
 
-        protected partial class CollectionFixup
+        partial protected class CollectionFixup
         {
             public CollectionFixup(
                 object? collection,
@@ -1907,7 +1907,7 @@ namespace System.Xml.Serialization
             }
         }
 
-        protected partial class Fixup
+        partial protected class Fixup
         {
             public Fixup(
                 object? o,
@@ -1939,7 +1939,7 @@ namespace System.Xml.Serialization
 
     public delegate void XmlSerializationWriteCallback(object o);
 
-    public abstract partial class XmlSerializationWriter
+    partial public abstract class XmlSerializationWriter
         : System.Xml.Serialization.XmlSerializationGeneratedCode
     {
         protected XmlSerializationWriter() { }
@@ -2388,7 +2388,7 @@ namespace System.Xml.Serialization
         protected void WriteXsiType(string name, string? ns) { }
     }
 
-    public partial class XmlSerializer
+    partial public class XmlSerializer
     {
         protected XmlSerializer() { }
 
@@ -2662,7 +2662,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Struct,
         AllowMultiple = false
     )]
-    public sealed partial class XmlSerializerAssemblyAttribute : System.Attribute
+    partial public sealed class XmlSerializerAssemblyAttribute : System.Attribute
     {
         public XmlSerializerAssemblyAttribute() { }
 
@@ -2682,7 +2682,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class XmlSerializerFactory
+    partial public class XmlSerializerFactory
     {
         public XmlSerializerFactory() { }
 
@@ -2778,7 +2778,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public abstract partial class XmlSerializerImplementation
+    partial public abstract class XmlSerializerImplementation
     {
         protected XmlSerializerImplementation() { }
 
@@ -2815,7 +2815,7 @@ namespace System.Xml.Serialization
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Assembly)]
-    public sealed partial class XmlSerializerVersionAttribute : System.Attribute
+    partial public sealed class XmlSerializerVersionAttribute : System.Attribute
     {
         public XmlSerializerVersionAttribute() { }
 
@@ -2849,7 +2849,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Interface
             | System.AttributeTargets.Struct
     )]
-    public partial class XmlTypeAttribute : System.Attribute
+    partial public class XmlTypeAttribute : System.Attribute
     {
         public XmlTypeAttribute() { }
 
@@ -2879,7 +2879,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class XmlTypeMapping : System.Xml.Serialization.XmlMapping
+    partial public class XmlTypeMapping : System.Xml.Serialization.XmlMapping
     {
         internal XmlTypeMapping() { }
 

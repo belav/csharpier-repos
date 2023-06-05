@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Options
 {
-    internal sealed partial class SerializableOptionSet : OptionSet
+    partial internal sealed class SerializableOptionSet : OptionSet
     {
         /// <summary>
         /// An implementation of <see cref="OptionSet"/> for non-serializable options that are defined in VS layers.

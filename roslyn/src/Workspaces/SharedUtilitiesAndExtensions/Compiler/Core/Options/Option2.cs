@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Options
     /// <inheritdoc cref="ISingleValuedOption"/>
     internal interface ISingleValuedOption<T> : ISingleValuedOption { }
 
-    internal partial class Option2<T> : ISingleValuedOption<T>
+    partial internal class Option2<T> : ISingleValuedOption<T>
     {
         public OptionDefinition<T> Definition { get; }
         public IPublicOption? PublicOption { get; }

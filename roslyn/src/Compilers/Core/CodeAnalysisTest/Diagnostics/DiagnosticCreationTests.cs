@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 {
-    public partial class DiagnosticCreationTests
+    partial public class DiagnosticCreationTests
     {
         [Fact, WorkItem(547049, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=547049")]
         public void TestDiagnosticCreationWithOverriddenSeverity()

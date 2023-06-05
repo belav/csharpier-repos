@@ -86,7 +86,7 @@ namespace MonoTests.W3C_xmlconf
     public class AllTests : BaseTests
     {
         [Suite]
-        static public TestSuite Suite
+        public static TestSuite Suite
         {
             get
             {
@@ -104,7 +104,7 @@ namespace MonoTests.W3C_xmlconf
     public class CleanTests : BaseTests
     {
         [Suite]
-        static public TestSuite Suite
+        public static TestSuite Suite
         {
             get
             {
@@ -130,7 +130,7 @@ namespace MonoTests.W3C_xmlconf
     public class KnownFailureTests : BaseTests
     {
         [Suite]
-        static public TestSuite Suite
+        public static TestSuite Suite
         {
             get
             {

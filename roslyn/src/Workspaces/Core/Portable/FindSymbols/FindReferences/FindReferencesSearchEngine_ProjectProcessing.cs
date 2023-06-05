@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)>
     >;
 
-    internal partial class FindReferencesSearchEngine
+    partial internal class FindReferencesSearchEngine
     {
         private async Task ProcessProjectAsync(Project project, DocumentMap documentMap)
         {

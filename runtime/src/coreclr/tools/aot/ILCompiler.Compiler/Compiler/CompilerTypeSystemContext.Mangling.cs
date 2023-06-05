@@ -5,10 +5,11 @@ using Internal.TypeSystem;
 
 namespace ILCompiler
 {
+    partial
     // Contains functionality related to name mangling
-    public partial class CompilerTypeSystemContext
+    public class CompilerTypeSystemContext
     {
-        private partial class BoxedValueType : IPrefixMangledType
+        partial private class BoxedValueType : IPrefixMangledType
         {
             TypeDesc IPrefixMangledType.BaseType
             {
@@ -21,7 +22,7 @@ namespace ILCompiler
             }
         }
 
-        private partial class GenericUnboxingThunk : IPrefixMangledMethod
+        partial private class GenericUnboxingThunk : IPrefixMangledMethod
         {
             MethodDesc IPrefixMangledMethod.BaseMethod
             {
@@ -34,7 +35,7 @@ namespace ILCompiler
             }
         }
 
-        private partial class UnboxingThunk : IPrefixMangledMethod
+        partial private class UnboxingThunk : IPrefixMangledMethod
         {
             MethodDesc IPrefixMangledMethod.BaseMethod
             {

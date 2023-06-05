@@ -106,7 +106,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="ListInitExpression"/> that uses a method named "Add" to add elements to a collection.

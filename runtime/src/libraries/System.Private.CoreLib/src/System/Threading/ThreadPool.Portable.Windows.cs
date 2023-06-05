@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-    public static partial class ThreadPool
+    partial public static class ThreadPool
     {
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]

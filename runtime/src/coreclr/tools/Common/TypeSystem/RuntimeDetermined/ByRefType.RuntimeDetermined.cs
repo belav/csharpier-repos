@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class ByRefType
+    partial public class ByRefType
     {
         public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
             Instantiation typeInstantiation,

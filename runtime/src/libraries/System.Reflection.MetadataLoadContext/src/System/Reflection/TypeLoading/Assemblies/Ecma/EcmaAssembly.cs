@@ -8,10 +8,11 @@ using System.Reflection.PortableExecutable;
 
 namespace System.Reflection.TypeLoading.Ecma
 {
+    partial
     /// <summary>
     /// Base class for all Assembly objects created by a MetadataLoadContext and get its metadata from a PEReader.
     /// </summary>
-    internal sealed partial class EcmaAssembly : RoAssembly
+    internal sealed class EcmaAssembly : RoAssembly
     {
         private readonly string _location;
         private readonly EcmaModule _manifestModule;

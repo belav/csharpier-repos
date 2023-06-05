@@ -5,7 +5,7 @@ using System.Diagnostics.Tracing;
 
 namespace System.Threading
 {
-    internal sealed partial class PortableThreadPool
+    partial internal sealed class PortableThreadPool
     {
         /// <summary>
         /// The worker thread infastructure for the CLR thread pool.

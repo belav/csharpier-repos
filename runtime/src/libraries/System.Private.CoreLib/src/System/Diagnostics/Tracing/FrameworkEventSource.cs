@@ -11,7 +11,7 @@ namespace System.Diagnostics.Tracing
         Name = "System.Diagnostics.Eventing.FrameworkEventSource"
     )]
     [EventSourceAutoGenerate]
-    internal sealed partial class FrameworkEventSource : EventSource
+    partial internal sealed class FrameworkEventSource : EventSource
     {
         private const string EventSourceSuppressMessage =
             "Parameters to this method are primitive and are trimmer safe";

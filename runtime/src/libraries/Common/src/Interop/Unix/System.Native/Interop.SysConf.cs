@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum SysConfName
         {
@@ -18,6 +18,6 @@ internal static partial class Interop
             EntryPoint = "SystemNative_SysConf",
             SetLastError = true
         )]
-        internal static partial long SysConf(SysConfName name);
+        partial internal static long SysConf(SysConfName name);
     }
 }

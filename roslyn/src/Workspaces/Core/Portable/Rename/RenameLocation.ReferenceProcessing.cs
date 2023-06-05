@@ -20,11 +20,12 @@ using System.Text;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
+    partial
     /// <summary>
     /// A helper class that contains some of the methods and filters that must be used when
     /// processing the raw results from the FindReferences API.
     /// </summary>
-    internal sealed partial class RenameLocations
+    internal sealed class RenameLocations
     {
         internal static class ReferenceProcessing
         {

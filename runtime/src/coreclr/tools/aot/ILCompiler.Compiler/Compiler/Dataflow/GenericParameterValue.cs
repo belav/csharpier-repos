@@ -11,11 +11,12 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TrimAnalysis
 {
+    partial
     /// <summary>
     /// This is a System.Type value which represents generic parameter (basically result of typeof(T))
     /// Its actual type is unknown, but it can have annotations.
     /// </summary>
-    internal partial record GenericParameterValue
+    internal record GenericParameterValue
     {
         public GenericParameterValue(
             GenericParameterDesc genericParameter,

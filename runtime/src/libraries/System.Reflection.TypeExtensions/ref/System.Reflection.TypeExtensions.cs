@@ -6,7 +6,7 @@
 
 namespace System.Reflection
 {
-    public static partial class AssemblyExtensions
+    partial public static class AssemblyExtensions
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Types might be removed"
@@ -32,7 +32,7 @@ namespace System.Reflection
         }
     }
 
-    public static partial class EventInfoExtensions
+    partial public static class EventInfoExtensions
     {
         public static System.Reflection.MethodInfo? GetAddMethod(
             this System.Reflection.EventInfo eventInfo
@@ -80,7 +80,7 @@ namespace System.Reflection
         }
     }
 
-    public static partial class MemberInfoExtensions
+    partial public static class MemberInfoExtensions
     {
         public static int GetMetadataToken(this System.Reflection.MemberInfo member)
         {
@@ -93,7 +93,7 @@ namespace System.Reflection
         }
     }
 
-    public static partial class MethodInfoExtensions
+    partial public static class MethodInfoExtensions
     {
         public static System.Reflection.MethodInfo GetBaseDefinition(
             this System.Reflection.MethodInfo method
@@ -103,7 +103,7 @@ namespace System.Reflection
         }
     }
 
-    public static partial class ModuleExtensions
+    partial public static class ModuleExtensions
     {
         public static System.Guid GetModuleVersionId(this System.Reflection.Module module)
         {
@@ -116,7 +116,7 @@ namespace System.Reflection
         }
     }
 
-    public static partial class PropertyInfoExtensions
+    partial public static class PropertyInfoExtensions
     {
         public static System.Reflection.MethodInfo[] GetAccessors(
             this System.Reflection.PropertyInfo property
@@ -164,7 +164,7 @@ namespace System.Reflection
         }
     }
 
-    public static partial class TypeExtensions
+    partial public static class TypeExtensions
     {
         public static System.Reflection.ConstructorInfo? GetConstructor(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(

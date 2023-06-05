@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-internal partial class IISHttpContext : IHttpRequestLifetimeFeature
+partial internal class IISHttpContext : IHttpRequestLifetimeFeature
 {
     private CancellationTokenSource? _abortedCts;
     private CancellationToken? _manuallySetRequestAbortToken;

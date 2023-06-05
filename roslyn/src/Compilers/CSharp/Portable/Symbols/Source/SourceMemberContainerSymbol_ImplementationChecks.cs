@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         TArg arg
     );
 
-    internal partial class SourceMemberContainerTypeSymbol
+    partial internal class SourceMemberContainerTypeSymbol
     {
         /// <summary>
         /// In some circumstances (e.g. implicit implementation of an interface method by a non-virtual method in a

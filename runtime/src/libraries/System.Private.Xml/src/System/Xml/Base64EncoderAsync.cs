@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal abstract partial class Base64Encoder
+    partial internal abstract class Base64Encoder
     {
         internal abstract Task WriteCharsAsync(char[] chars, int index, int count);
 
@@ -103,7 +103,7 @@ namespace System.Xml
         }
     }
 
-    internal sealed partial class XmlTextWriterBase64Encoder : Base64Encoder
+    partial internal sealed class XmlTextWriterBase64Encoder : Base64Encoder
     {
         internal override Task WriteCharsAsync(char[] chars, int index, int count)
         {
@@ -111,7 +111,7 @@ namespace System.Xml
         }
     }
 
-    internal sealed partial class XmlRawWriterBase64Encoder : Base64Encoder
+    partial internal sealed class XmlRawWriterBase64Encoder : Base64Encoder
     {
         internal override Task WriteCharsAsync(char[] chars, int index, int count)
         {

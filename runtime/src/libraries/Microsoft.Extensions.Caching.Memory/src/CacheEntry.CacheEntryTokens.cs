@@ -11,7 +11,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.Caching.Memory
 {
-    internal sealed partial class CacheEntry
+    partial internal sealed class CacheEntry
     {
         // this type exists just to reduce average CacheEntry size
         // which typically is not using expiration tokens or callbacks

@@ -4,9 +4,9 @@
 
 namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 {
-    internal partial struct ChildSyntaxList
+    partial internal struct ChildSyntaxList
     {
-        internal readonly partial struct Reversed
+        partial internal readonly struct Reversed
         {
             internal struct Enumerator
             {

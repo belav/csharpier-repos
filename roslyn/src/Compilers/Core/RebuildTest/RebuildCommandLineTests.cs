@@ -17,7 +17,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
-    public sealed partial class RebuildCommandLineTests : CSharpTestBase
+    partial public sealed class RebuildCommandLineTests : CSharpTestBase
     {
         private record CommandInfo(
             string CommandLine,

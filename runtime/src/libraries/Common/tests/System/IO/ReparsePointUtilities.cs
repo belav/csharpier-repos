@@ -19,7 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-public static partial class MountHelper
+partial public static class MountHelper
 {
     [DllImport(
         "kernel32.dll",

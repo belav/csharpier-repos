@@ -41,12 +41,13 @@ namespace Novell.Directory.Ldap
     /// </summary>
     public class LdapSearchResultReference : LdapMessage
     {
+        public
         /// <summary> Returns any URLs in the object.
         ///
         /// </summary>
         /// <returns> The URLs.
         /// </returns>
-        virtual public System.String[] Referrals
+        virtual System.String[] Referrals
         {
             get
             {

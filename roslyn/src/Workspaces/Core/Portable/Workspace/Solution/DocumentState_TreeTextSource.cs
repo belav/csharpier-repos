@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class DocumentState
+    partial internal class DocumentState
     {
         /// <summary>
         /// A source for <see cref="TextAndVersion"/> constructed from an syntax tree.

@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location
 {
+    partial
     /// <summary>
     /// Location Steps
     /// </summary>
-    public static partial class StepsTests
+    public static class StepsTests
     {
         /// <summary>
         /// Invalid Location Step - Missing axis . Expected error.

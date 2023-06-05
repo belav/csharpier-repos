@@ -23,7 +23,7 @@ namespace System.Net.Security
     // user data encryption with NEGO SSPI package.
     //
     [UnsupportedOSPlatform("tvos")]
-    internal static partial class NegotiateStreamPal
+    partial internal static class NegotiateStreamPal
     {
         internal static string QueryContextClientSpecifiedSpn(SafeDeleteContext securityContext)
         {

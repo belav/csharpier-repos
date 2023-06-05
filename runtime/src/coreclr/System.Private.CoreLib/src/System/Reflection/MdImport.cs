@@ -180,7 +180,7 @@ namespace System.Reflection
         // Keep the definition in sync with vm\ManagedMdImport.hpp
         private int[] largeResult;
         private int length;
-        private fixed int smallResult[16];
+        fixed private int smallResult[16];
 
         public int Length => length;
 

@@ -45,7 +45,7 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class TypeBuilder : TypeInfo
+    partial public sealed class TypeBuilder : TypeInfo
     {
         #region Sync with MonoReflectionTypeBuilder in object-internals.h
         private string tname; // name in internal form

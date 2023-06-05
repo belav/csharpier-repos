@@ -6,9 +6,10 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
+    partial
     // CLRConfig is mainly reading the config switch values. this is used when we cannot use the AppContext class.
     // In general AppContext should be used instead of CLRConfig if there is no reason prevent that.
-    internal static partial class CLRConfig
+    internal static class CLRConfig
     {
         internal static bool GetBoolValue(string switchName, out bool exist)
         {
@@ -21,7 +22,7 @@ namespace System
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool GetConfigBoolValue(
+        partial private static bool GetConfigBoolValue(
             string configSwitchName,
             [MarshalAs(UnmanagedType.Bool)] out bool exist
         );

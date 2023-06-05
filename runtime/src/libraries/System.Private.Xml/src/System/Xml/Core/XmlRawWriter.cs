@@ -10,6 +10,7 @@ using System.Collections;
 
 namespace System.Xml
 {
+    partial
     /// <summary>
     /// Implementations of XmlRawWriter are intended to be wrapped by the XmlWellFormedWriter.  The
     /// well-formed writer performs many checks in behalf of the raw writer, and keeps state that the
@@ -36,7 +37,7 @@ namespace System.Xml
     ///  8. The well-formed writer keeps track of xml:space and xml:lang.
     ///  9. The well-formed writer verifies NmToken, Name, and QName values and calls WriteString().
     /// </summary>
-    internal abstract partial class XmlRawWriter : XmlWriter
+    internal abstract class XmlRawWriter : XmlWriter
     {
         //
         // Fields

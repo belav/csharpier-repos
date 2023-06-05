@@ -3,7 +3,7 @@
 
 namespace System.Globalization
 {
-    public partial class HijriCalendar : Calendar
+    partial public class HijriCalendar : Calendar
     {
         private static int GetHijriDateAdjustment()
         {

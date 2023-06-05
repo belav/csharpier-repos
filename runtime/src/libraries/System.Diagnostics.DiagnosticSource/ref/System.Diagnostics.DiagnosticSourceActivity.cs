@@ -6,7 +6,7 @@
 
 namespace System.Diagnostics
 {
-    public partial class Activity : IDisposable
+    partial public class Activity : IDisposable
     {
         public Activity(string operationName) { }
 
@@ -481,7 +481,7 @@ namespace System.Diagnostics
         W3C = 2,
     }
 
-    public readonly partial struct ActivitySpanId
+    partial public readonly struct ActivitySpanId
         : System.IEquatable<System.Diagnostics.ActivitySpanId>
     {
         private readonly object _dummy;
@@ -691,7 +691,7 @@ namespace System.Diagnostics
         Recorded = 1,
     }
 
-    public readonly partial struct ActivityTraceId
+    partial public readonly struct ActivityTraceId
         : System.IEquatable<System.Diagnostics.ActivityTraceId>
     {
         private readonly object _dummy;
@@ -769,7 +769,7 @@ namespace System.Diagnostics
         }
     }
 
-    public partial class DiagnosticListener
+    partial public class DiagnosticListener
     {
         public override void OnActivityExport(
             System.Diagnostics.Activity activity,
@@ -792,7 +792,7 @@ namespace System.Diagnostics
         }
     }
 
-    public abstract partial class DiagnosticSource
+    partial public abstract class DiagnosticSource
     {
         public virtual void OnActivityExport(
             System.Diagnostics.Activity activity,

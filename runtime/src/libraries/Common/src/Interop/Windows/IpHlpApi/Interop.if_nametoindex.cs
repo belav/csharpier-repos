@@ -4,11 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class IpHlpApi
+    partial internal static class IpHlpApi
     {
         [LibraryImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
-        internal static partial uint if_nametoindex([MarshalAs(UnmanagedType.LPStr)] string name);
+        partial internal static uint if_nametoindex([MarshalAs(UnmanagedType.LPStr)] string name);
     }
 }

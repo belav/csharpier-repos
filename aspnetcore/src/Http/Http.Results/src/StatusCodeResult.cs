@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-internal partial class StatusCodeResult : IResult
+partial internal class StatusCodeResult : IResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="StatusCodeResult"/> class
@@ -40,7 +40,7 @@ internal partial class StatusCodeResult : IResult
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -48,6 +48,6 @@ internal partial class StatusCodeResult : IResult
             "Executing StatusCodeResult, setting HTTP status code {StatusCode}.",
             EventName = "StatusCodeResultExecuting"
         )]
-        public static partial void StatusCodeResultExecuting(ILogger logger, int statusCode);
+        partial public static void StatusCodeResultExecuting(ILogger logger, int statusCode);
     }
 }

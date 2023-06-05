@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace System.Runtime.InteropServices
 {
-    public sealed partial class PosixSignalRegistration
+    partial public sealed class PosixSignalRegistration
     {
         private static readonly Dictionary<int, HashSet<Token>> s_registrations = Initialize();
 

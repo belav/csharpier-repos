@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class CapiHelper
+    partial internal static class CapiHelper
     {
         internal const int S_OK = 0;
         internal const int E_FAIL = unchecked((int)0x80004005);

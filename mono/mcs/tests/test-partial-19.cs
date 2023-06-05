@@ -2,9 +2,9 @@ using System;
 
 namespace Bug
 {
-    public static partial class GL
+    partial public static class GL
     {
-        static partial class Core
+        partial static class Core
         {
             internal static bool A()
             {
@@ -26,7 +26,7 @@ namespace Bug
             //Bar.A ();
         }
 
-        internal partial class Core { }
+        partial internal class Core { }
 
         /*partial class Bar
         {

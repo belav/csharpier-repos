@@ -67,7 +67,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates an <see cref="Expressions.ElementInit" /> expression that represents the initialization of a list.

@@ -5,9 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         /// <summary>
         /// Renames a file, moving to the correct destination if necessary. There are many edge cases to this call, check man 2 rename for more info
@@ -23,14 +23,14 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        internal static partial int Rename(string oldPath, string newPath);
+        partial internal static int Rename(string oldPath, string newPath);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_Rename",
             SetLastError = true
         )]
-        internal static partial int Rename(ref byte oldPath, ref byte newPath);
+        partial internal static int Rename(ref byte oldPath, ref byte newPath);
 
         internal static int Rename(ReadOnlySpan<char> oldPath, ReadOnlySpan<char> newPath)
         {

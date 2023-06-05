@@ -1,10 +1,12 @@
+partial
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-internal static partial class Interop
+internal static class Interop
 {
+    partial
     // As defined in winerror.h and https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes
-    internal static partial class Errors
+    internal static class Errors
     {
         internal const int ERROR_SUCCESS = 0x0;
         internal const int ERROR_INVALID_FUNCTION = 0x1;

@@ -13,7 +13,7 @@ namespace System.Workflow.Activities.Design
     using System.Windows.Forms;
     using System.ServiceModel;
 
-    internal partial class ServiceContractViewControl : ListItemViewControl
+    partial internal class ServiceContractViewControl : ListItemViewControl
     {
         public ServiceContractViewControl()
         {

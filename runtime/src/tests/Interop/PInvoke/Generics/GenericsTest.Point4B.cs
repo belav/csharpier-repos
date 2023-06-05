@@ -5,7 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using Xunit;
 
-unsafe partial class GenericsNative
+partial unsafe class GenericsNative
 {
     [DllImport(nameof(GenericsNative))]
     public static extern Point4<bool> GetPoint4B(bool e00, bool e01, bool e02, bool e03);
@@ -40,7 +40,7 @@ unsafe partial class GenericsNative
     public static extern Point4<bool> AddPoint4Bs(in Point4<bool> pValues, int count);
 }
 
-unsafe partial class GenericsTest
+partial unsafe class GenericsTest
 {
     private static void TestPoint4B()
     {

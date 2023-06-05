@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Collections.Generic;
     using System.Configuration;
 
-    public sealed partial class BaseAddressPrefixFilterElement : ConfigurationElement
+    partial public sealed class BaseAddressPrefixFilterElement : ConfigurationElement
     {
         public BaseAddressPrefixFilterElement() { }
 

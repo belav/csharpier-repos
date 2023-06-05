@@ -11,6 +11,7 @@ using System.Runtime.Serialization;
 
 namespace System.Text
 {
+    partial
     // This abstract base class represents a character encoding. The class provides
     // methods to convert arrays and strings of Unicode characters to and from
     // arrays of bytes. A number of Encoding implementations are provided in
@@ -74,7 +75,7 @@ namespace System.Text
     // generally executes faster.
     //
 
-    public abstract partial class Encoding : ICloneable
+    public abstract class Encoding : ICloneable
     {
         // For netcore we use UTF8 as default encoding since ANSI isn't available
         private static readonly UTF8Encoding.UTF8EncodingSealed s_defaultEncoding =

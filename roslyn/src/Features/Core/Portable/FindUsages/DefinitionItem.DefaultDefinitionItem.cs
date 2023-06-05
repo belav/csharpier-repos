@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindUsages
 {
-    internal partial class DefinitionItem
+    partial internal class DefinitionItem
     {
         /// <summary>
         /// Implementation of a <see cref="DefinitionItem"/> that sits on top of a

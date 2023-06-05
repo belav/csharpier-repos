@@ -7,29 +7,29 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ErrClearError")]
-        internal static partial ulong ErrClearError();
+        partial internal static ulong ErrClearError();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ErrGetExceptionError")]
-        private static partial ulong ErrGetExceptionError(
+        partial private static ulong ErrGetExceptionError(
             [MarshalAs(UnmanagedType.Bool)] out bool isAllocFailure
         );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ErrPeekError")]
-        internal static partial ulong ErrPeekError();
+        partial internal static ulong ErrPeekError();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ErrPeekLastError")]
-        internal static partial ulong ErrPeekLastError();
+        partial internal static ulong ErrPeekLastError();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ErrReasonErrorString")]
-        internal static partial IntPtr ErrReasonErrorString(ulong error);
+        partial internal static IntPtr ErrReasonErrorString(ulong error);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ErrErrorStringN")]
-        private static unsafe partial void ErrErrorStringN(ulong e, byte* buf, int len);
+        partial private static unsafe void ErrErrorStringN(ulong e, byte* buf, int len);
 
         private static unsafe string ErrErrorStringN(ulong error)
         {

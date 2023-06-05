@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
-    public partial class ECDiffieHellmanTests
+    partial public class ECDiffieHellmanTests
     {
         private static readonly byte[] s_fourByteLabel = new byte[4];
         private static readonly byte[] s_emptySeed = new byte[64];

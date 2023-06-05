@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    public partial class ModuleBuilder : Module
+    partial public class ModuleBuilder : Module
     {
         internal static string UnmangleTypeName(string typeName)
         {
@@ -107,7 +107,7 @@ namespace System.Reflection.Emit
             EntryPoint = "ModuleBuilder_GetTypeRef",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial int GetTypeRef(
+        partial private static int GetTypeRef(
             QCallModule module,
             string strFullName,
             QCallModule refedModule,
@@ -115,7 +115,7 @@ namespace System.Reflection.Emit
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetMemberRef")]
-        private static partial int GetMemberRef(
+        partial private static int GetMemberRef(
             QCallModule module,
             QCallModule refedModule,
             int tr,
@@ -140,7 +140,7 @@ namespace System.Reflection.Emit
             EntryPoint = "ModuleBuilder_GetMemberRefFromSignature",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial int GetMemberRefFromSignature(
+        partial private static int GetMemberRefFromSignature(
             QCallModule module,
             int tr,
             string methodName,
@@ -166,7 +166,7 @@ namespace System.Reflection.Emit
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetMemberRefOfMethodInfo")]
-        private static partial int GetMemberRefOfMethodInfo(
+        partial private static int GetMemberRefOfMethodInfo(
             QCallModule module,
             int tr,
             RuntimeMethodHandleInternal method
@@ -201,7 +201,7 @@ namespace System.Reflection.Emit
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetMemberRefOfFieldInfo")]
-        private static partial int GetMemberRefOfFieldInfo(
+        partial private static int GetMemberRefOfFieldInfo(
             QCallModule module,
             int tkType,
             QCallTypeHandle declaringType,
@@ -226,7 +226,7 @@ namespace System.Reflection.Emit
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_GetTokenFromTypeSpec")]
-        private static partial int GetTokenFromTypeSpec(
+        partial private static int GetTokenFromTypeSpec(
             QCallModule pModule,
             byte[] signature,
             int length
@@ -243,7 +243,7 @@ namespace System.Reflection.Emit
             EntryPoint = "ModuleBuilder_GetArrayMethodToken",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial int GetArrayMethodToken(
+        partial private static int GetArrayMethodToken(
             QCallModule module,
             int tkTypeSpec,
             string methodName,
@@ -256,10 +256,10 @@ namespace System.Reflection.Emit
             EntryPoint = "ModuleBuilder_GetStringConstant",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        private static partial int GetStringConstant(QCallModule module, string str, int length);
+        partial private static int GetStringConstant(QCallModule module, string str, int length);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ModuleBuilder_SetFieldRVAContent")]
-        internal static partial void SetFieldRVAContent(
+        partial internal static void SetFieldRVAContent(
             QCallModule module,
             int fdToken,
             byte[]? data,

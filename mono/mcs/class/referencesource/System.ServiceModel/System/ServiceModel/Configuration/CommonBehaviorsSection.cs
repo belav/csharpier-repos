@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.Security;
 
-    public partial class CommonBehaviorsSection : ConfigurationSection
+    partial public class CommonBehaviorsSection : ConfigurationSection
     {
         [ConfigurationProperty(
             ConfigurationStrings.EndpointBehaviors,

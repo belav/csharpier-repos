@@ -7,12 +7,12 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        private static unsafe partial SocketError WSARecvFrom(
+        partial private static unsafe SocketError WSARecvFrom(
             SafeHandle socketHandle,
             WSABuffer* buffers,
             int bufferCount,

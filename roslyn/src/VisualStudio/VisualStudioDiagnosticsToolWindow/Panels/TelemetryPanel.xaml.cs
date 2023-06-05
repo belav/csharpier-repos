@@ -17,10 +17,11 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Roslyn.VisualStudio.DiagnosticsWindow
 {
+    partial
     /// <summary>
     /// Interaction logic for TelemetryPanel.xaml
     /// </summary>
-    public partial class TelemetryPanel : UserControl
+    public class TelemetryPanel : UserControl
     {
         public TelemetryPanel()
         {

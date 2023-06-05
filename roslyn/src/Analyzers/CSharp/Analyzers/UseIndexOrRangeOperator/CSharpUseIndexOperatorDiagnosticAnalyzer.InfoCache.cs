@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
 {
     using static Helpers;
 
-    internal partial class CSharpUseIndexOperatorDiagnosticAnalyzer
+    partial internal class CSharpUseIndexOperatorDiagnosticAnalyzer
     {
         /// <summary>
         /// Helper type to cache information about types while analyzing the compilation.

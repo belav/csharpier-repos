@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class SemanticModelExtensions
+    partial internal static class SemanticModelExtensions
     {
         private const string DefaultBuildInParameterName = "v";
 

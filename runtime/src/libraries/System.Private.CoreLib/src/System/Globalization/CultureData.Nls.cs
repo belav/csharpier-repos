@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Globalization
 {
-    internal sealed partial class CultureData
+    partial internal sealed class CultureData
     {
         // Wrappers around the GetLocaleInfoEx APIs which handle marshalling the returned
         // data as either and Int or string.

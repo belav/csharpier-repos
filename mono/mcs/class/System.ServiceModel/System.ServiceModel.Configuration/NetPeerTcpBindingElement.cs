@@ -55,7 +55,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class NetPeerTcpBindingElement
+    partial public class NetPeerTcpBindingElement
         : StandardBindingElement,
             IBindingConfigurationElement
     {

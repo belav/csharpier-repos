@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace System.Collections.Immutable
 {
-    internal static partial class ImmutableExtensions
+    partial internal static class ImmutableExtensions
     {
         /// <summary>
         /// Tries to divine the number of elements in a sequence without actually enumerating each element.

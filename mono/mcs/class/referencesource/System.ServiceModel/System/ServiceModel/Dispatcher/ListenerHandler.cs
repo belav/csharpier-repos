@@ -114,7 +114,7 @@ namespace System.ServiceModel.Dispatcher
             get { return this.host; }
         }
 
-        new internal object ThisLock
+        internal new object ThisLock
         {
             get { return base.ThisLock; }
         }

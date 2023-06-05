@@ -4,7 +4,7 @@ using System;
 
 class PointerArithmeticTest
 {
-    unsafe public static int Main()
+    public static unsafe int Main()
     {
         try
         {
@@ -30,12 +30,12 @@ class PointerArithmeticTest
         return 0;
     }
 
-    unsafe static int* Conversions(long b)
+    static unsafe int* Conversions(long b)
     {
         return (int*)b;
     }
 
-    unsafe static int CheckAdd(byte* ptr, int offset)
+    static unsafe int CheckAdd(byte* ptr, int offset)
     {
         if (checked(ptr + offset < ptr))
             return 1;
@@ -43,7 +43,7 @@ class PointerArithmeticTest
         return 101;
     }
 
-    unsafe static int CheckSub(short* ptr, int offset)
+    static unsafe int CheckSub(short* ptr, int offset)
     {
         if (checked(ptr - offset < ptr))
             return 2;
@@ -51,7 +51,7 @@ class PointerArithmeticTest
         return 102;
     }
 
-    unsafe static int CheckSub(short* ptr, long offset)
+    static unsafe int CheckSub(short* ptr, long offset)
     {
         if (checked(ptr - offset < ptr))
             return 2;
@@ -59,7 +59,7 @@ class PointerArithmeticTest
         return 102;
     }
 
-    unsafe static int CheckSub2(short* ptr, int offset)
+    static unsafe int CheckSub2(short* ptr, int offset)
     {
         short* b = ptr + offset;
         if (checked(ptr - b < 0))

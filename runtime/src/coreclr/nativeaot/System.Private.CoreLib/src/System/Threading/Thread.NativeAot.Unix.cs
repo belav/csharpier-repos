@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    public sealed partial class Thread
+    partial public sealed class Thread
     {
         // Event signaling that the thread has stopped
         private ManualResetEvent _stopped;

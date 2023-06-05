@@ -3,7 +3,7 @@
 
 namespace Internal.TypeSystem
 {
-    public partial class TypeDesc
+    partial public class TypeDesc
     {
         /// <summary>
         /// Gets a value indicating whether the concrete type this object represents is unknown

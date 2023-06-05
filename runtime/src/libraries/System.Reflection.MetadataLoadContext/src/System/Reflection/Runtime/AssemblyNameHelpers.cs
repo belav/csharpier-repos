@@ -3,7 +3,7 @@
 
 namespace System.Reflection
 {
-    internal static partial class AssemblyNameHelpers
+    partial internal static class AssemblyNameHelpers
     {
         // These helpers convert between the combined flags+contentType+processorArchitecture value and the separated parts.
         // Since these are only for trusted callers, they do NOT check for out of bound bits.

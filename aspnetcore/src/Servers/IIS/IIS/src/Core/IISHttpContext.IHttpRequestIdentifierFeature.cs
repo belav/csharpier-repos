@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-internal partial class IISHttpContext : IHttpRequestIdentifierFeature
+partial internal class IISHttpContext : IHttpRequestIdentifierFeature
 {
     string IHttpRequestIdentifierFeature.TraceIdentifier
     {

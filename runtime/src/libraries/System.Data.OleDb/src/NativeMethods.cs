@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Data.Common
 {
-    internal static partial class NativeMethods
+    partial internal static class NativeMethods
     {
         [
             Guid("0c733a1e-2a1c-11ce-ade5-00aa0044773d"),

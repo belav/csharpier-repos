@@ -9,7 +9,7 @@ using System.Text;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
-public partial class ConsoleEncoding
+partial public class ConsoleEncoding
 {
     public static IEnumerable<object[]> InputData()
     {

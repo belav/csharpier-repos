@@ -11,7 +11,7 @@ using Mono;
 
 namespace System.Runtime.Loader
 {
-    public partial class AssemblyLoadContext
+    partial public class AssemblyLoadContext
     {
         internal IntPtr NativeALC
         {

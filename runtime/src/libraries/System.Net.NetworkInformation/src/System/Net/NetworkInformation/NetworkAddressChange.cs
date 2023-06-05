@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace System.Net.NetworkInformation
 {
-    public partial class NetworkChange
+    partial public class NetworkChange
     {
         // The list of current address-changed subscribers.
         private static readonly Dictionary<

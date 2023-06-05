@@ -15,7 +15,7 @@ namespace Microsoft.IO
 namespace System.IO
 #endif
 {
-    internal static partial class FileSystem
+    partial internal static class FileSystem
     {
         public static void CopyFile(string sourceFullPath, string destFullPath, bool overwrite)
         {

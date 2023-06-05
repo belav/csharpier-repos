@@ -6,7 +6,7 @@ using Internal.TypeSystem;
 
 namespace ILCompiler
 {
-    public partial class CompilerTypeSystemContext
+    partial public class CompilerTypeSystemContext
     {
         private sealed class DynamicInvokeThunkHashtable
             : LockFreeReaderHashtable<MethodSignature, DynamicInvokeMethodThunk>

@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace System.Formats.Tar
 {
-    internal static partial class TarHelpers
+    partial internal static class TarHelpers
     {
         internal static SortedDictionary<string, UnixFileMode>? CreatePendingModesDictionary() =>
             null;

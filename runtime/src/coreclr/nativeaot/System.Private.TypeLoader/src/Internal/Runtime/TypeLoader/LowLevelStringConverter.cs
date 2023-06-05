@@ -55,12 +55,13 @@ namespace System
 
 namespace Internal.Runtime.TypeLoader
 {
+    partial
     /// <summary>
     /// Extension methods that provide low level ToString() equivalents for some of the core types.
     /// Calling regular ToString() on these types goes through a lot of the CultureInfo machinery
     /// which is not low level enough for the type loader purposes.
     /// </summary>
-    internal static partial class LowLevelStringConverter
+    internal static class LowLevelStringConverter
     {
         private const string HexDigits = "0123456789ABCDEF";
 

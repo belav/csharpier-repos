@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Roslyn.Test.Utilities
 {
-    internal sealed partial class SourceWithMarkedNodes
+    partial internal sealed class SourceWithMarkedNodes
     {
         internal readonly struct MarkedSpan
         {

@@ -16,7 +16,7 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace JIT.HardwareIntrinsics.Arm
 {
-    public static partial class Program
+    partial public static class Program
     {
         private static void ShiftRightArithmeticRoundedNarrowingSaturateScalar_Vector64_Int32_64()
         {

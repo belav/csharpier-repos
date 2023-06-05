@@ -24,10 +24,11 @@ namespace System.Data.Objects.ELinq
     using System.Reflection;
     using System.Text;
 
+    partial
     /// <summary>
     /// Class supporting conversion of LINQ expressions to EDM CQT expressions.
     /// </summary>
-    internal sealed partial class ExpressionConverter
+    internal sealed class ExpressionConverter
     {
         #region Fields
         private readonly Funcletizer _funcletizer;

@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
 {
-    internal partial class LambdaSimplifierCodeRefactoringProvider
+    partial internal class LambdaSimplifierCodeRefactoringProvider
     {
         private class Rewriter : CSharpSyntaxRewriter
         {

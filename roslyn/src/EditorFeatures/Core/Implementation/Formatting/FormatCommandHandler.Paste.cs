@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
 {
-    internal partial class FormatCommandHandler
+    partial internal class FormatCommandHandler
     {
         public CommandState GetCommandState(
             PasteCommandArgs args,

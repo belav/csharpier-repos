@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
 {
-    internal readonly partial struct SectionMatcher
+    partial internal readonly struct SectionMatcher
     {
         private struct Lexer
         {

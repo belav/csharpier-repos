@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class ConversionOperatorDeclarationSyntax
+    partial public class ConversionOperatorDeclarationSyntax
     {
         public ConversionOperatorDeclarationSyntax Update(
             SyntaxList<AttributeListSyntax> attributeLists,

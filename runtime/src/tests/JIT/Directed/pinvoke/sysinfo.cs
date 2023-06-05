@@ -21,7 +21,7 @@ namespace JitTest
         private ushort _wProcessorRevision;
 
         [DllImport("kernel32", CharSet = CharSet.Ansi)]
-        public extern static void GetSystemInfo(ref SYSTEM_INFO si);
+        public static extern void GetSystemInfo(ref SYSTEM_INFO si);
 
         public static int Main()
         {

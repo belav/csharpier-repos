@@ -5,7 +5,7 @@ using Internal.TypeSystem;
 
 namespace ILCompiler
 {
-    public static partial class HardwareIntrinsicHelpers
+    partial public static class HardwareIntrinsicHelpers
     {
         /// <summary>
         /// Gets a value indicating whether this is a hardware intrinsic on the platform that we're compiling for.

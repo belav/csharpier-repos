@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.OLE.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Packaging
 {
-    internal partial class PackageInstallerService
+    partial internal class PackageInstallerService
     {
         private async Task<bool> TryInstallAndAddUndoActionAsync(
             string source,

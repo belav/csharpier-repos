@@ -12,10 +12,11 @@ using ErrorCode = Interop.NCrypt.ErrorCode;
 
 namespace System.Security.Cryptography
 {
+    partial
     /// <summary>
     ///     Managed representation of an NCrypt key
     /// </summary>
-    public sealed partial class CngKey : IDisposable
+    public sealed class CngKey : IDisposable
     {
         private CngKey(SafeNCryptProviderHandle providerHandle, SafeNCryptKeyHandle keyHandle)
         {

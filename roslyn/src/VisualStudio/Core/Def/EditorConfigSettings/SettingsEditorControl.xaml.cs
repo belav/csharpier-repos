@@ -16,10 +16,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 {
+    partial
     /// <summary>
     /// Interaction logic for SettingsEditorControl.xaml
     /// </summary>
-    internal partial class SettingsEditorControl : UserControl
+    internal class SettingsEditorControl : UserControl
     {
         private readonly ISettingsEditorView[] _views;
         private readonly IWpfTableControl[] _tableControls;

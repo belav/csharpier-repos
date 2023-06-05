@@ -12,7 +12,7 @@ using System.Diagnostics.Tracing;
 
 namespace BasicEventSourceTests
 {
-    public partial class TestsWriteEventToListener
+    partial public class TestsWriteEventToListener
     {
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
         public void Test_WriteEvent_TransferEvents()
@@ -93,7 +93,7 @@ namespace BasicEventSourceTests
             TestUtilities.CheckNoEventSourcesRunning("Stop");
         }
 
-        static partial void Test_WriteEvent_ArgsBasicTypes_Etw_Validate_DateTime(
+        partial static void Test_WriteEvent_ArgsBasicTypes_Etw_Validate_DateTime(
             EventSourceTest log
         )
         {
@@ -104,7 +104,7 @@ namespace BasicEventSourceTests
             Assert.Equal((DateTime)LoudListener.LastEvent.Payload[0], now);
         }
 
-        static partial void Test_WriteEvent_ArgsCornerCases_TestEtw(EventSourceTest log)
+        partial static void Test_WriteEvent_ArgsCornerCases_TestEtw(EventSourceTest log)
         {
             Guid guid = Guid.NewGuid();
 

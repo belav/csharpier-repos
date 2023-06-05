@@ -312,7 +312,7 @@ namespace I18N.MidEast
         };
 
         // Get the number of bytes needed to encode a character buffer.
-        public unsafe override int GetByteCountImpl(char* chars, int count)
+        public override unsafe int GetByteCountImpl(char* chars, int count)
         {
             if (this.EncoderFallback != null)
             {
@@ -347,7 +347,7 @@ namespace I18N.MidEast
         }
 
         //ToBytes is just an alias for GetBytesImpl, but doesn't return byte count
-        protected unsafe override void ToBytes(
+        protected override unsafe void ToBytes(
             char* chars,
             int charCount,
             byte* bytes,
@@ -360,7 +360,7 @@ namespace I18N.MidEast
             GetBytesImpl(chars, charCount, bytes, byteCount);
         }
 
-        public unsafe override int GetBytesImpl(
+        public override unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,

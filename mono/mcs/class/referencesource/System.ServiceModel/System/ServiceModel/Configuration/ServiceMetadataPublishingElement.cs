@@ -9,7 +9,7 @@ namespace System.ServiceModel.Configuration
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public sealed partial class ServiceMetadataPublishingElement : BehaviorExtensionElement
+    partial public sealed class ServiceMetadataPublishingElement : BehaviorExtensionElement
     {
         public ServiceMetadataPublishingElement() { }
 

@@ -3,7 +3,7 @@
 
 namespace System.Reflection.TypeLoading
 {
-    internal sealed partial class RoExceptionHandlingClause : ExceptionHandlingClause
+    partial internal sealed class RoExceptionHandlingClause : ExceptionHandlingClause
     {
         private readonly Type? _catchType;
         private readonly ExceptionHandlingClauseOptions _flags;

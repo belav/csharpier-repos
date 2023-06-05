@@ -10,7 +10,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial struct Decimal
+    partial public struct Decimal
     {
         // Low level accessors used by a DecCalc and formatting
         internal uint High => (uint)hi;

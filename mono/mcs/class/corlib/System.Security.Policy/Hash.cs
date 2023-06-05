@@ -198,7 +198,7 @@ namespace System.Security.Policy
             return 0;
         }
 
-        static public Hash CreateMD5(byte[] md5)
+        public static Hash CreateMD5(byte[] md5)
         {
             if (md5 == null)
                 throw new ArgumentNullException("md5");
@@ -207,7 +207,7 @@ namespace System.Security.Policy
             return h;
         }
 
-        static public Hash CreateSHA1(byte[] sha1)
+        public static Hash CreateSHA1(byte[] sha1)
         {
             if (sha1 == null)
                 throw new ArgumentNullException("sha1");

@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 {
-    public partial class CodeCleanupTests
+    partial public class CodeCleanupTests
     {
         private abstract class TestThirdPartyCodeFix : CodeFixProvider
         {

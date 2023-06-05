@@ -9,7 +9,7 @@ using XmlCoreTest.Common;
 namespace System.Xml.WrappedReaderTests
 {
     [TestModule(Name = "XmlWrappedReader Test", Desc = "XmlWrappedReader Test")]
-    public partial class WrappedReaderTest : CGenericTestModule
+    partial public class WrappedReaderTest : CGenericTestModule
     {
         public override int Init(object objParam)
         {

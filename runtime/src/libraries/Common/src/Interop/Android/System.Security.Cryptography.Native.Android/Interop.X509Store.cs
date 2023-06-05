@@ -7,9 +7,9 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AndroidCrypto
+    partial internal static class AndroidCrypto
     {
         [LibraryImport(
             Libraries.AndroidCryptoNative,
@@ -17,7 +17,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool X509StoreAddCertificate(
+        partial internal static unsafe bool X509StoreAddCertificate(
             SafeX509StoreHandle store,
             SafeX509Handle cert,
             string hashString
@@ -29,7 +29,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool X509StoreAddCertificateWithPrivateKey(
+        partial internal static unsafe bool X509StoreAddCertificateWithPrivateKey(
             SafeX509StoreHandle store,
             SafeX509Handle cert,
             SafeKeyHandle key,
@@ -43,7 +43,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool X509StoreContainsCertificate(
+        partial internal static unsafe bool X509StoreContainsCertificate(
             SafeX509StoreHandle store,
             SafeX509Handle cert,
             string hashString
@@ -54,7 +54,7 @@ internal static partial class Interop
             EntryPoint = "AndroidCryptoNative_X509StoreEnumerateCertificates"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool X509StoreEnumerateCertificates(
+        partial internal static unsafe bool X509StoreEnumerateCertificates(
             SafeX509StoreHandle storeHandle,
             delegate* unmanaged<
                 void*,
@@ -70,7 +70,7 @@ internal static partial class Interop
             EntryPoint = "AndroidCryptoNative_X509StoreEnumerateTrustedCertificates"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool X509StoreEnumerateTrustedCertificates(
+        partial internal static unsafe bool X509StoreEnumerateTrustedCertificates(
             byte systemOnly,
             delegate* unmanaged<void*, void*, void> callback,
             void* callbackContext
@@ -80,7 +80,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_X509StoreOpenDefault"
         )]
-        internal static unsafe partial SafeX509StoreHandle X509StoreOpenDefault();
+        partial internal static unsafe SafeX509StoreHandle X509StoreOpenDefault();
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
@@ -88,7 +88,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf8
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool X509StoreRemoveCertificate(
+        partial internal static unsafe bool X509StoreRemoveCertificate(
             SafeX509StoreHandle store,
             SafeX509Handle cert,
             string hashString

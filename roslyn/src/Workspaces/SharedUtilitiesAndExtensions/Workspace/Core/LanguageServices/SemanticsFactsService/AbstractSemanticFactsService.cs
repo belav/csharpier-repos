@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {
-    internal abstract partial class AbstractSemanticFactsService : ISemanticFacts
+    partial internal abstract class AbstractSemanticFactsService : ISemanticFacts
     {
         public abstract ISyntaxFacts SyntaxFacts { get; }
         public abstract IBlockFacts BlockFacts { get; }

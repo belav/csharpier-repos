@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
     [ContentType(ContentTypeNames.CSharpContentType)]
     [Name(PredefinedCommandHandlerNames.EventHookup)]
     [Order(Before = PredefinedCommandHandlerNames.AutomaticCompletion)]
-    internal partial class EventHookupCommandHandler
+    partial internal class EventHookupCommandHandler
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IInlineRenameService _inlineRenameService;

@@ -107,7 +107,7 @@ namespace Microsoft.CodeAnalysis
     /// </para>
     /// </summary>
     [DataContract]
-    internal partial struct SymbolKey : IEquatable<SymbolKey>
+    partial internal struct SymbolKey : IEquatable<SymbolKey>
     {
         /// <summary>
         /// Current format version.  Any time we change anything about our format, we should

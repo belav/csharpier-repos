@@ -3,7 +3,7 @@
 
 namespace System.IO
 {
-    public partial class FileSystemWatcher
+    partial public class FileSystemWatcher
     {
         /// <summary>Called when FileSystemWatcher is finalized.</summary>
         private void FinalizeDispose() { }

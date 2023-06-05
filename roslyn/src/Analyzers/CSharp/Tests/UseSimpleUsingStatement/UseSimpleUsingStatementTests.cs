@@ -19,7 +19,7 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseSimpleUsingStatement)]
-    public partial class UseSimpleUsingStatementTests
+    partial public class UseSimpleUsingStatementTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseSimpleUsingStatementTests(ITestOutputHelper logger)

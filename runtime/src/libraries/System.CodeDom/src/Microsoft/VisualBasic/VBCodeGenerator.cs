@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Microsoft.VisualBasic
 {
-    internal sealed partial class VBCodeGenerator : CodeCompiler
+    partial internal sealed class VBCodeGenerator : CodeCompiler
     {
         private static readonly char[] s_periodArray = new char[] { '.' };
         private const int MaxLineLength = 80;

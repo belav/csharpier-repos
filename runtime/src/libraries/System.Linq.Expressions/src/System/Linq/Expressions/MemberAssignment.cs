@@ -46,7 +46,7 @@ namespace System.Linq.Expressions
         internal override void ValidateAsDefinedHere(int index) { }
     }
 
-    public partial class Expression
+    partial public class Expression
     {
         /// <summary>
         /// Creates a <see cref="MemberAssignment"/> binding the specified value to the given member.

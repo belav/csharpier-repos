@@ -9,7 +9,7 @@ using AsymmetricPaddingMode = Interop.NCrypt.AsymmetricPaddingMode;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class CngCommon
+    partial internal static class CngCommon
     {
         private const int StatusUnsuccessfulRetryCount = 1;
 

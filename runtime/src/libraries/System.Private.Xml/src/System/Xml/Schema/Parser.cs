@@ -11,7 +11,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml.Schema
 {
-    internal sealed partial class Parser
+    partial internal sealed class Parser
     {
         private SchemaType _schemaType;
         private readonly XmlNameTable _nameTable;

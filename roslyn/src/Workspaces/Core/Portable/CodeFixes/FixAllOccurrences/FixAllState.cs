@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
-    internal sealed partial class FixAllState
+    partial internal sealed class FixAllState
         : CommonFixAllState<CodeFixProvider, FixAllProvider, FixAllState>
     {
         public override FixAllKind FixAllKind => FixAllKind.CodeFix;

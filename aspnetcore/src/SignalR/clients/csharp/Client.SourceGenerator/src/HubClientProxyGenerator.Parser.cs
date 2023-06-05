@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.SignalR.Client.SourceGenerator;
 
-internal sealed partial class HubClientProxyGenerator
+partial internal sealed class HubClientProxyGenerator
 {
     public sealed class Parser
     {

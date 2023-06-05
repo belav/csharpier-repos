@@ -4,13 +4,13 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(Libraries.Gdi32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool RestoreDC(IntPtr hdc, int nSavedDC);
+        partial public static bool RestoreDC(IntPtr hdc, int nSavedDC);
 
         public static bool RestoreDC(HandleRef hdc, int nSavedDC)
         {

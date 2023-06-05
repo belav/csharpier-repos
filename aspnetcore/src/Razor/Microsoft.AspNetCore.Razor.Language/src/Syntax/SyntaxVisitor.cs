@@ -3,6 +3,7 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
+partial
 /// <summary>
 /// Represents a <see cref="SyntaxNode"/> visitor that visits only the single SyntaxNode
 /// passed into its Visit method and produces
@@ -11,7 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 /// <typeparam name="TResult">
 /// The type of the return value this visitor's Visit method.
 /// </typeparam>
-internal abstract partial class SyntaxVisitor<TResult>
+internal abstract class SyntaxVisitor<TResult>
 {
     public virtual TResult Visit(SyntaxNode node)
     {
@@ -39,11 +40,12 @@ internal abstract partial class SyntaxVisitor<TResult>
     }
 }
 
+partial
 /// <summary>
 /// Represents a <see cref="SyntaxNode"/> visitor that visits only the single SyntaxNode
 /// passed into its Visit method.
 /// </summary>
-internal abstract partial class SyntaxVisitor
+internal abstract class SyntaxVisitor
 {
     public virtual void Visit(SyntaxNode node)
     {

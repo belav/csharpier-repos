@@ -3,9 +3,9 @@
 
 namespace System.Threading
 {
-    internal sealed partial class PortableThreadPool
+    partial internal sealed class PortableThreadPool
     {
-        private sealed partial class HillClimbing
+        partial private sealed class HillClimbing
         {
             private struct Complex
             {

@@ -90,13 +90,13 @@ namespace System
 
     public class Exception { }
 
-    public ref struct TypedReference
+    ref public struct TypedReference
     {
         private readonly ByReference<byte> _value;
         private readonly RuntimeTypeHandle _typeHandle;
     }
 
-    public ref struct ByReference<T> { }
+    ref public struct ByReference<T> { }
 }
 
 namespace System.Collections

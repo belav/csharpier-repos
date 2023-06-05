@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Net.Tests
 {
-    public partial class WebUtilityTests
+    partial public class WebUtilityTests
     {
         // HtmlEncode + HtmlDecode
         public static IEnumerable<object[]> HtmlDecode_TestData()

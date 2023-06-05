@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Text
 {
-    public static partial class Extensions
+    partial public static class Extensions
     {
         public static SourceTextContainer AsTextContainer(this ITextBuffer buffer) =>
             TextBufferContainer.From(buffer);

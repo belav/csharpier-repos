@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Text.Json
 {
-    internal static partial class JsonTestHelper
+    partial internal static class JsonTestHelper
     {
         internal static void AssertThrows_PropMetadataInit(Action action, Type type)
         {

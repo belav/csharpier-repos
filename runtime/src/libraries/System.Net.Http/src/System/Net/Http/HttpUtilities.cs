@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace System.Net.Http
 {
-    internal static partial class HttpUtilities
+    partial internal static class HttpUtilities
     {
         internal static Version DefaultRequestVersion => HttpVersion.Version11;
 

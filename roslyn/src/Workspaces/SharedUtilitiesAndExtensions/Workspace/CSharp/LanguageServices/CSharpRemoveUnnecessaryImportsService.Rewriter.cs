@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
 {
-    internal partial class CSharpRemoveUnnecessaryImportsService
+    partial internal class CSharpRemoveUnnecessaryImportsService
     {
         private class Rewriter : CSharpSyntaxRewriter
         {

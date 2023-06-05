@@ -37,7 +37,7 @@ namespace Microsoft.Win32.SafeHandles
             base.SetHandle(h);
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return SafeNativeMethods.CloseHandle(handle);
         }

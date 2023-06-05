@@ -14,7 +14,7 @@ namespace System.Security.Cryptography.Rsa.Tests
         bool SupportsSha1Signatures { get; }
     }
 
-    public static partial class RSAFactory
+    partial public static class RSAFactory
     {
         public static RSA Create()
         {

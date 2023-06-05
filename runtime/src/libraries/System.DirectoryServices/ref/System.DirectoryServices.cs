@@ -6,7 +6,7 @@
 
 namespace System.DirectoryServices
 {
-    public partial class ActiveDirectoryAccessRule : System.Security.AccessControl.ObjectAccessRule
+    partial public class ActiveDirectoryAccessRule : System.Security.AccessControl.ObjectAccessRule
     {
         public ActiveDirectoryAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -123,7 +123,7 @@ namespace System.DirectoryServices
         }
     }
 
-    public partial class ActiveDirectoryAuditRule : System.Security.AccessControl.ObjectAuditRule
+    partial public class ActiveDirectoryAuditRule : System.Security.AccessControl.ObjectAuditRule
     {
         public ActiveDirectoryAuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -264,7 +264,7 @@ namespace System.DirectoryServices
         AccessSystemSecurity = 16777216,
     }
 
-    public partial class ActiveDirectorySecurity
+    partial public class ActiveDirectorySecurity
         : System.Security.AccessControl.DirectoryObjectSecurity
     {
         public ActiveDirectorySecurity() { }
@@ -421,7 +421,7 @@ namespace System.DirectoryServices
         ServerBind = 512,
     }
 
-    public sealed partial class CreateChildAccessRule
+    partial public sealed class CreateChildAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
     {
         public CreateChildAccessRule(
@@ -494,7 +494,7 @@ namespace System.DirectoryServices
             ) { }
     }
 
-    public sealed partial class DeleteChildAccessRule
+    partial public sealed class DeleteChildAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
     {
         public DeleteChildAccessRule(
@@ -567,7 +567,7 @@ namespace System.DirectoryServices
             ) { }
     }
 
-    public sealed partial class DeleteTreeAccessRule
+    partial public sealed class DeleteTreeAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
     {
         public DeleteTreeAccessRule(
@@ -612,7 +612,7 @@ namespace System.DirectoryServices
         Always = 3,
     }
 
-    public partial class DirectoryEntries : System.Collections.IEnumerable
+    partial public class DirectoryEntries : System.Collections.IEnumerable
     {
         internal DirectoryEntries() { }
 
@@ -644,7 +644,7 @@ namespace System.DirectoryServices
         public void Remove(System.DirectoryServices.DirectoryEntry entry) { }
     }
 
-    public partial class DirectoryEntry : System.ComponentModel.Component
+    partial public class DirectoryEntry : System.ComponentModel.Component
     {
         public DirectoryEntry() { }
 
@@ -794,7 +794,7 @@ namespace System.DirectoryServices
         public void Rename(string? newName) { }
     }
 
-    public partial class DirectoryEntryConfiguration
+    partial public class DirectoryEntryConfiguration
     {
         internal DirectoryEntryConfiguration() { }
 
@@ -837,7 +837,7 @@ namespace System.DirectoryServices
         public void SetUserNameQueryQuota(string accountName) { }
     }
 
-    public partial class DirectorySearcher : System.ComponentModel.Component
+    partial public class DirectorySearcher : System.ComponentModel.Component
     {
         public DirectorySearcher() { }
 
@@ -1034,7 +1034,7 @@ namespace System.DirectoryServices
         }
     }
 
-    public partial class DirectoryServicesCOMException
+    partial public class DirectoryServicesCOMException
         : System.Runtime.InteropServices.COMException,
             System.Runtime.Serialization.ISerializable
     {
@@ -1069,7 +1069,7 @@ namespace System.DirectoryServices
         DiagnosticId = "SYSLIB0003",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public sealed partial class DirectoryServicesPermission
+    partial public sealed class DirectoryServicesPermission
         : System.Security.Permissions.ResourcePermissionBase
     {
         public DirectoryServicesPermission() { }
@@ -1114,7 +1114,7 @@ namespace System.DirectoryServices
         AllowMultiple = true,
         Inherited = false
     )]
-    public partial class DirectoryServicesPermissionAttribute
+    partial public class DirectoryServicesPermissionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
         public DirectoryServicesPermissionAttribute(
@@ -1139,7 +1139,7 @@ namespace System.DirectoryServices
         }
     }
 
-    public partial class DirectoryServicesPermissionEntry
+    partial public class DirectoryServicesPermissionEntry
     {
         public DirectoryServicesPermissionEntry(
             System.DirectoryServices.DirectoryServicesPermissionAccess permissionAccess,
@@ -1156,7 +1156,7 @@ namespace System.DirectoryServices
         }
     }
 
-    public partial class DirectoryServicesPermissionEntryCollection
+    partial public class DirectoryServicesPermissionEntryCollection
         : System.Collections.CollectionBase
     {
         internal DirectoryServicesPermissionEntryCollection() { }
@@ -1209,7 +1209,7 @@ namespace System.DirectoryServices
         public void Remove(System.DirectoryServices.DirectoryServicesPermissionEntry? value) { }
     }
 
-    public partial class DirectorySynchronization
+    partial public class DirectorySynchronization
     {
         public DirectorySynchronization() { }
 
@@ -1260,7 +1260,7 @@ namespace System.DirectoryServices
         IncrementalValues = (long)2147483648,
     }
 
-    public partial class DirectoryVirtualListView
+    partial public class DirectoryVirtualListView
     {
         public DirectoryVirtualListView() { }
 
@@ -1335,7 +1335,7 @@ namespace System.DirectoryServices
         }
     }
 
-    public partial class DirectoryVirtualListViewContext
+    partial public class DirectoryVirtualListViewContext
     {
         public DirectoryVirtualListViewContext() { }
 
@@ -1352,7 +1352,7 @@ namespace System.DirectoryServices
         Standard = 1,
     }
 
-    public sealed partial class ExtendedRightAccessRule
+    partial public sealed class ExtendedRightAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
     {
         public ExtendedRightAccessRule(
@@ -1425,7 +1425,7 @@ namespace System.DirectoryServices
             ) { }
     }
 
-    public sealed partial class ListChildrenAccessRule
+    partial public sealed class ListChildrenAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
     {
         public ListChildrenAccessRule(
@@ -1474,7 +1474,7 @@ namespace System.DirectoryServices
         Write = 1,
     }
 
-    public sealed partial class PropertyAccessRule
+    partial public sealed class PropertyAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
     {
         public PropertyAccessRule(
@@ -1553,7 +1553,7 @@ namespace System.DirectoryServices
             ) { }
     }
 
-    public partial class PropertyCollection
+    partial public class PropertyCollection
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable
@@ -1633,7 +1633,7 @@ namespace System.DirectoryServices
         }
     }
 
-    public sealed partial class PropertySetAccessRule
+    partial public sealed class PropertySetAccessRule
         : System.DirectoryServices.ActiveDirectoryAccessRule
     {
         public PropertySetAccessRule(
@@ -1676,7 +1676,7 @@ namespace System.DirectoryServices
             ) { }
     }
 
-    public partial class PropertyValueCollection : System.Collections.CollectionBase
+    partial public class PropertyValueCollection : System.Collections.CollectionBase
     {
         internal PropertyValueCollection() { }
 
@@ -1737,7 +1737,7 @@ namespace System.DirectoryServices
         All = 96,
     }
 
-    public partial class ResultPropertyCollection : System.Collections.DictionaryBase
+    partial public class ResultPropertyCollection : System.Collections.DictionaryBase
     {
         internal ResultPropertyCollection() { }
 
@@ -1765,7 +1765,7 @@ namespace System.DirectoryServices
         ) { }
     }
 
-    public partial class ResultPropertyValueCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ResultPropertyValueCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ResultPropertyValueCollection() { }
 
@@ -1787,7 +1787,7 @@ namespace System.DirectoryServices
         }
     }
 
-    public partial class SchemaNameCollection
+    partial public class SchemaNameCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -1881,7 +1881,7 @@ namespace System.DirectoryServices
         void System.Collections.IList.Remove(object? value) { }
     }
 
-    public partial class SearchResult
+    partial public class SearchResult
     {
         internal SearchResult() { }
 
@@ -1900,7 +1900,7 @@ namespace System.DirectoryServices
         }
     }
 
-    public partial class SearchResultCollection
+    partial public class SearchResultCollection
         : System.MarshalByRefObject,
             System.Collections.ICollection,
             System.Collections.IEnumerable,
@@ -1985,7 +1985,7 @@ namespace System.DirectoryServices
     [System.ComponentModel.TypeConverterAttribute(
         typeof(System.ComponentModel.ExpandableObjectConverter)
     )]
-    public partial class SortOption
+    partial public class SortOption
     {
         public SortOption() { }
 
@@ -2012,7 +2012,7 @@ namespace System.DirectoryServices
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-    public partial class ActiveDirectoryInterSiteTransport : System.IDisposable
+    partial public class ActiveDirectoryInterSiteTransport : System.IDisposable
     {
         internal ActiveDirectoryInterSiteTransport() { }
 
@@ -2064,7 +2064,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ActiveDirectoryObjectExistsException : System.Exception
+    partial public class ActiveDirectoryObjectExistsException : System.Exception
     {
         public ActiveDirectoryObjectExistsException() { }
 
@@ -2078,7 +2078,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public ActiveDirectoryObjectExistsException(string? message, System.Exception? inner) { }
     }
 
-    public partial class ActiveDirectoryObjectNotFoundException
+    partial public class ActiveDirectoryObjectNotFoundException
         : System.Exception,
             System.Runtime.Serialization.ISerializable
     {
@@ -2114,7 +2114,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
     }
 
-    public partial class ActiveDirectoryOperationException
+    partial public class ActiveDirectoryOperationException
         : System.Exception,
             System.Runtime.Serialization.ISerializable
     {
@@ -2148,7 +2148,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
     }
 
-    public abstract partial class ActiveDirectoryPartition : System.IDisposable
+    partial public abstract class ActiveDirectoryPartition : System.IDisposable
     {
         protected ActiveDirectoryPartition() { }
 
@@ -2169,7 +2169,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ActiveDirectoryReplicationMetadata : System.Collections.DictionaryBase
+    partial public class ActiveDirectoryReplicationMetadata : System.Collections.DictionaryBase
     {
         internal ActiveDirectoryReplicationMetadata() { }
 
@@ -2206,7 +2206,7 @@ namespace System.DirectoryServices.ActiveDirectory
         InfrastructureRole = 4,
     }
 
-    public partial class ActiveDirectoryRoleCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ActiveDirectoryRoleCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ActiveDirectoryRoleCollection() { }
 
@@ -2231,7 +2231,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ActiveDirectorySchedule
+    partial public class ActiveDirectorySchedule
     {
         public ActiveDirectorySchedule() { }
 
@@ -2271,7 +2271,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
     }
 
-    public partial class ActiveDirectorySchema
+    partial public class ActiveDirectorySchema
         : System.DirectoryServices.ActiveDirectory.ActiveDirectoryPartition
     {
         internal ActiveDirectorySchema() { }
@@ -2365,7 +2365,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public void RefreshSchema() { }
     }
 
-    public partial class ActiveDirectorySchemaClass : System.IDisposable
+    partial public class ActiveDirectorySchemaClass : System.IDisposable
     {
         public ActiveDirectorySchemaClass(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
@@ -2467,7 +2467,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ActiveDirectorySchemaClassCollection : System.Collections.CollectionBase
+    partial public class ActiveDirectorySchemaClassCollection : System.Collections.CollectionBase
     {
         internal ActiveDirectorySchemaClassCollection() { }
 
@@ -2535,7 +2535,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
     }
 
-    public partial class ActiveDirectorySchemaProperty : System.IDisposable
+    partial public class ActiveDirectorySchemaProperty : System.IDisposable
     {
         public ActiveDirectorySchemaProperty(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
@@ -2656,7 +2656,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ActiveDirectorySchemaPropertyCollection : System.Collections.CollectionBase
+    partial public class ActiveDirectorySchemaPropertyCollection : System.Collections.CollectionBase
     {
         internal ActiveDirectorySchemaPropertyCollection() { }
 
@@ -2724,7 +2724,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
     }
 
-    public partial class ActiveDirectoryServerDownException
+    partial public class ActiveDirectoryServerDownException
         : System.Exception,
             System.Runtime.Serialization.ISerializable
     {
@@ -2767,7 +2767,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
     }
 
-    public partial class ActiveDirectorySite : System.IDisposable
+    partial public class ActiveDirectorySite : System.IDisposable
     {
         public ActiveDirectorySite(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
@@ -2865,7 +2865,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ActiveDirectorySiteCollection : System.Collections.CollectionBase
+    partial public class ActiveDirectorySiteCollection : System.Collections.CollectionBase
     {
         internal ActiveDirectorySiteCollection() { }
 
@@ -2921,7 +2921,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public void Remove(System.DirectoryServices.ActiveDirectory.ActiveDirectorySite site) { }
     }
 
-    public partial class ActiveDirectorySiteLink : System.IDisposable
+    partial public class ActiveDirectorySiteLink : System.IDisposable
     {
         public ActiveDirectorySiteLink(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
@@ -3020,7 +3020,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ActiveDirectorySiteLinkBridge : System.IDisposable
+    partial public class ActiveDirectorySiteLinkBridge : System.IDisposable
     {
         public ActiveDirectorySiteLinkBridge(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
@@ -3082,7 +3082,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ActiveDirectorySiteLinkCollection : System.Collections.CollectionBase
+    partial public class ActiveDirectorySiteLinkCollection : System.Collections.CollectionBase
     {
         internal ActiveDirectorySiteLinkCollection() { }
 
@@ -3157,7 +3157,7 @@ namespace System.DirectoryServices.ActiveDirectory
         RedundantServerTopologyEnabled = 1024,
     }
 
-    public partial class ActiveDirectorySubnet : System.IDisposable
+    partial public class ActiveDirectorySubnet : System.IDisposable
     {
         public ActiveDirectorySubnet(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
@@ -3212,7 +3212,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ActiveDirectorySubnetCollection : System.Collections.CollectionBase
+    partial public class ActiveDirectorySubnetCollection : System.Collections.CollectionBase
     {
         internal ActiveDirectorySubnetCollection() { }
 
@@ -3305,7 +3305,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Smtp = 1,
     }
 
-    public partial class AdamInstance : System.DirectoryServices.ActiveDirectory.DirectoryServer
+    partial public class AdamInstance : System.DirectoryServices.ActiveDirectory.DirectoryServer
     {
         internal AdamInstance() { }
 
@@ -3439,7 +3439,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public override void TriggerSyncReplicaFromNeighbors(string partition) { }
     }
 
-    public partial class AdamInstanceCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class AdamInstanceCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal AdamInstanceCollection() { }
 
@@ -3470,7 +3470,7 @@ namespace System.DirectoryServices.ActiveDirectory
         NamingRole = 1,
     }
 
-    public partial class AdamRoleCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class AdamRoleCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal AdamRoleCollection() { }
 
@@ -3492,7 +3492,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ApplicationPartition
+    partial public class ApplicationPartition
         : System.DirectoryServices.ActiveDirectory.ActiveDirectoryPartition
     {
         public ApplicationPartition(
@@ -3594,7 +3594,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public void Save() { }
     }
 
-    public partial class ApplicationPartitionCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ApplicationPartitionCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ApplicationPartitionCollection() { }
 
@@ -3623,7 +3623,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class AttributeMetadata
+    partial public class AttributeMetadata
     {
         internal AttributeMetadata() { }
 
@@ -3657,7 +3657,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class AttributeMetadataCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class AttributeMetadataCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal AttributeMetadataCollection() { }
 
@@ -3682,7 +3682,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ConfigurationSet
+    partial public class ConfigurationSet
     {
         internal ConfigurationSet() { }
 
@@ -3786,7 +3786,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class DirectoryContext
+    partial public class DirectoryContext
     {
         public DirectoryContext(
             System.DirectoryServices.ActiveDirectory.DirectoryContextType contextType
@@ -3833,7 +3833,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ApplicationPartition = 4,
     }
 
-    public abstract partial class DirectoryServer : System.IDisposable
+    partial public abstract class DirectoryServer : System.IDisposable
     {
         protected DirectoryServer() { }
 
@@ -3893,7 +3893,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public abstract void TriggerSyncReplicaFromNeighbors(string partition);
     }
 
-    public partial class DirectoryServerCollection : System.Collections.CollectionBase
+    partial public class DirectoryServerCollection : System.Collections.CollectionBase
     {
         internal DirectoryServerCollection() { }
 
@@ -3945,7 +3945,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public void Remove(System.DirectoryServices.ActiveDirectory.DirectoryServer server) { }
     }
 
-    public partial class Domain : System.DirectoryServices.ActiveDirectory.ActiveDirectoryPartition
+    partial public class Domain : System.DirectoryServices.ActiveDirectory.ActiveDirectoryPartition
     {
         internal Domain() { }
 
@@ -4136,7 +4136,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ) { }
     }
 
-    public partial class DomainCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class DomainCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal DomainCollection() { }
 
@@ -4168,7 +4168,7 @@ namespace System.DirectoryServices.ActiveDirectory
         NetBiosNameDisabledByConflict = 8,
     }
 
-    public partial class DomainController : System.DirectoryServices.ActiveDirectory.DirectoryServer
+    partial public class DomainController : System.DirectoryServices.ActiveDirectory.DirectoryServer
     {
         protected DomainController() { }
 
@@ -4347,7 +4347,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public override void TriggerSyncReplicaFromNeighbors(string partition) { }
     }
 
-    public partial class DomainControllerCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class DomainControllerCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal DomainControllerCollection() { }
 
@@ -4389,7 +4389,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Windows2012R2Domain = 7,
     }
 
-    public partial class Forest : System.IDisposable
+    partial public class Forest : System.IDisposable
     {
         internal Forest() { }
 
@@ -4599,7 +4599,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Windows2012R2Forest = 6,
     }
 
-    public partial class ForestTrustCollisionException
+    partial public class ForestTrustCollisionException
         : System.DirectoryServices.ActiveDirectory.ActiveDirectoryOperationException,
             System.Runtime.Serialization.ISerializable
     {
@@ -4638,7 +4638,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Other = 2,
     }
 
-    public partial class ForestTrustDomainInfoCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ForestTrustDomainInfoCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ForestTrustDomainInfoCollection() { }
 
@@ -4667,7 +4667,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ForestTrustDomainInformation
+    partial public class ForestTrustDomainInformation
     {
         internal ForestTrustDomainInformation() { }
 
@@ -4699,7 +4699,7 @@ namespace System.DirectoryServices.ActiveDirectory
         NetBiosNameConflictDisabled = 8,
     }
 
-    public partial class ForestTrustRelationshipCollision
+    partial public class ForestTrustRelationshipCollision
     {
         internal ForestTrustRelationshipCollision() { }
 
@@ -4721,7 +4721,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ForestTrustRelationshipCollisionCollection
+    partial public class ForestTrustRelationshipCollisionCollection
         : System.Collections.ReadOnlyCollectionBase
     {
         internal ForestTrustRelationshipCollisionCollection() { }
@@ -4751,7 +4751,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ForestTrustRelationshipInformation
+    partial public class ForestTrustRelationshipInformation
         : System.DirectoryServices.ActiveDirectory.TrustRelationshipInformation
     {
         internal ForestTrustRelationshipInformation() { }
@@ -4772,7 +4772,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public void Save() { }
     }
 
-    public partial class GlobalCatalog : System.DirectoryServices.ActiveDirectory.DomainController
+    partial public class GlobalCatalog : System.DirectoryServices.ActiveDirectory.DomainController
     {
         internal GlobalCatalog() { }
 
@@ -4856,7 +4856,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class GlobalCatalogCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class GlobalCatalogCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal GlobalCatalogCollection() { }
 
@@ -4941,7 +4941,7 @@ namespace System.DirectoryServices.ActiveDirectory
         InGlobalCatalog = 4,
     }
 
-    public partial class ReadOnlyActiveDirectorySchemaClassCollection
+    partial public class ReadOnlyActiveDirectorySchemaClassCollection
         : System.Collections.ReadOnlyCollectionBase
     {
         internal ReadOnlyActiveDirectorySchemaClassCollection() { }
@@ -4971,7 +4971,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReadOnlyActiveDirectorySchemaPropertyCollection
+    partial public class ReadOnlyActiveDirectorySchemaPropertyCollection
         : System.Collections.ReadOnlyCollectionBase
     {
         internal ReadOnlyActiveDirectorySchemaPropertyCollection() { }
@@ -5001,7 +5001,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReadOnlyDirectoryServerCollection
+    partial public class ReadOnlyDirectoryServerCollection
         : System.Collections.ReadOnlyCollectionBase
     {
         internal ReadOnlyDirectoryServerCollection() { }
@@ -5029,7 +5029,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReadOnlySiteCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ReadOnlySiteCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ReadOnlySiteCollection() { }
 
@@ -5054,7 +5054,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReadOnlySiteLinkBridgeCollection
+    partial public class ReadOnlySiteLinkBridgeCollection
         : System.Collections.ReadOnlyCollectionBase
     {
         internal ReadOnlySiteLinkBridgeCollection() { }
@@ -5084,7 +5084,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReadOnlySiteLinkCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ReadOnlySiteLinkCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ReadOnlySiteLinkCollection() { }
 
@@ -5109,7 +5109,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReadOnlyStringCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ReadOnlyStringCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ReadOnlyStringCollection() { }
 
@@ -5131,7 +5131,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationConnection : System.IDisposable
+    partial public class ReplicationConnection : System.IDisposable
     {
         public ReplicationConnection(
             System.DirectoryServices.ActiveDirectory.DirectoryContext context,
@@ -5246,7 +5246,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationConnectionCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ReplicationConnectionCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ReplicationConnectionCollection() { }
 
@@ -5275,7 +5275,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationCursor
+    partial public class ReplicationCursor
     {
         internal ReplicationCursor() { }
 
@@ -5301,7 +5301,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationCursorCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ReplicationCursorCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ReplicationCursorCollection() { }
 
@@ -5326,7 +5326,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationFailure
+    partial public class ReplicationFailure
     {
         internal ReplicationFailure() { }
 
@@ -5352,7 +5352,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationFailureCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ReplicationFailureCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ReplicationFailureCollection() { }
 
@@ -5377,7 +5377,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationNeighbor
+    partial public class ReplicationNeighbor
     {
         internal ReplicationNeighbor() { }
 
@@ -5451,7 +5451,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationNeighborCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ReplicationNeighborCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ReplicationNeighborCollection() { }
 
@@ -5476,7 +5476,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationOperation
+    partial public class ReplicationOperation
     {
         internal ReplicationOperation() { }
 
@@ -5506,7 +5506,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationOperationCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ReplicationOperationCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ReplicationOperationCollection() { }
 
@@ -5533,7 +5533,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class ReplicationOperationInformation
+    partial public class ReplicationOperationInformation
     {
         public ReplicationOperationInformation() { }
 
@@ -5588,7 +5588,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ServerUnreachable = 2,
     }
 
-    public partial class SyncFromAllServersErrorInformation
+    partial public class SyncFromAllServersErrorInformation
     {
         internal SyncFromAllServersErrorInformation() { }
 
@@ -5622,7 +5622,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Finished = 3,
     }
 
-    public partial class SyncFromAllServersOperationException
+    partial public class SyncFromAllServersOperationException
         : System.DirectoryServices.ActiveDirectory.ActiveDirectoryOperationException,
             System.Runtime.Serialization.ISerializable
     {
@@ -5673,7 +5673,7 @@ namespace System.DirectoryServices.ActiveDirectory
         System.DirectoryServices.ActiveDirectory.SyncFromAllServersOperationException? exception
     );
 
-    public partial class TopLevelName
+    partial public class TopLevelName
     {
         internal TopLevelName() { }
 
@@ -5688,7 +5688,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class TopLevelNameCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class TopLevelNameCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal TopLevelNameCollection() { }
 
@@ -5737,7 +5737,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Bidirectional = 3,
     }
 
-    public partial class TrustRelationshipInformation
+    partial public class TrustRelationshipInformation
     {
         internal TrustRelationshipInformation() { }
 
@@ -5759,7 +5759,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
     }
 
-    public partial class TrustRelationshipInformationCollection
+    partial public class TrustRelationshipInformationCollection
         : System.Collections.ReadOnlyCollectionBase
     {
         internal TrustRelationshipInformationCollection() { }

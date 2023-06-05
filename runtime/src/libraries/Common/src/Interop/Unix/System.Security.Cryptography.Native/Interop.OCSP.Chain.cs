@@ -8,12 +8,12 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         [LibraryImport(Libraries.CryptoNative, StringMarshalling = StringMarshalling.Utf8)]
-        private static partial int CryptoNative_X509ChainGetCachedOcspStatus(
+        partial private static int CryptoNative_X509ChainGetCachedOcspStatus(
             SafeX509StoreCtxHandle ctx,
             string cachePath,
             int chainDepth
@@ -42,7 +42,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_X509ChainHasStapledOcsp(
+        partial private static int CryptoNative_X509ChainHasStapledOcsp(
             SafeX509StoreCtxHandle storeCtx
         );
 
@@ -60,7 +60,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative, StringMarshalling = StringMarshalling.Utf8)]
-        private static partial int CryptoNative_X509ChainVerifyOcsp(
+        partial private static int CryptoNative_X509ChainVerifyOcsp(
             SafeX509StoreCtxHandle ctx,
             SafeOcspRequestHandle req,
             SafeOcspResponseHandle resp,
@@ -94,7 +94,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial SafeOcspRequestHandle CryptoNative_X509ChainBuildOcspRequest(
+        partial private static SafeOcspRequestHandle CryptoNative_X509ChainBuildOcspRequest(
             SafeX509StoreCtxHandle storeCtx,
             int chainDepth
         );

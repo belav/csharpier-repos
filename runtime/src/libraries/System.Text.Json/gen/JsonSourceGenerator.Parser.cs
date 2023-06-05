@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 
 namespace System.Text.Json.SourceGeneration
 {
-    public sealed partial class JsonSourceGenerator
+    partial public sealed class JsonSourceGenerator
     {
         private sealed class Parser
         {

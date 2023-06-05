@@ -15,7 +15,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousTypeToTuple
 {
-    public partial class ConvertAnonymousTypeToTupleTests
+    partial public class ConvertAnonymousTypeToTupleTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ConvertAnonymousTypeToTupleTests(ITestOutputHelper logger)

@@ -25,9 +25,9 @@ using System.Reflection;
 
 namespace System.Data.Objects.ELinq
 {
-    internal sealed partial class ExpressionConverter
+    partial internal sealed class ExpressionConverter
     {
-        private sealed partial class MemberAccessTranslator : TypedTranslator<MemberExpression>
+        partial private sealed class MemberAccessTranslator : TypedTranslator<MemberExpression>
         {
             private sealed class SpatialPropertyTranslator : PropertyTranslator
             {

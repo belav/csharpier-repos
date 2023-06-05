@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Runtime.InteropServices
 {
-    public abstract partial class SafeHandle
+    partial public abstract class SafeHandle
     {
         // The handle cannot be closed until we are sure that no other objects might
         // be using it.  In the case of finalization, there may be other objects in

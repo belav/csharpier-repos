@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     using static BinaryOperatorKind;
 
-    internal static partial class ValueSetFactory
+    partial internal static class ValueSetFactory
     {
         /// <summary>
         /// A value set implementation for <see cref="System.Single"/> and <see cref="System.Double"/>.

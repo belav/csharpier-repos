@@ -7,7 +7,7 @@ using System.Runtime.Versioning;
 
 namespace System.IO.MemoryMappedFiles
 {
-    public partial class MemoryMappedFile : IDisposable
+    partial public class MemoryMappedFile : IDisposable
     {
         private readonly SafeMemoryMappedFileHandle _handle;
         private readonly bool _leaveOpen;

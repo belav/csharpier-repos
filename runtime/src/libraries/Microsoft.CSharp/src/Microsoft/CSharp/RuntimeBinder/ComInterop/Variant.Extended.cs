@@ -9,7 +9,7 @@ using Microsoft.CSharp.RuntimeBinder.ComInterop;
 
 namespace System.Runtime.InteropServices
 {
-    internal partial struct Variant
+    partial internal struct Variant
     {
         // VT_I1
 

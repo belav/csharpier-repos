@@ -1,10 +1,11 @@
+partial
 // Bug #80731
-public partial class A<T>
+public class A<T>
 {
     public class B { }
 }
 
-public partial class A<T>
+partial public class A<T>
 {
     public B Test;
 }

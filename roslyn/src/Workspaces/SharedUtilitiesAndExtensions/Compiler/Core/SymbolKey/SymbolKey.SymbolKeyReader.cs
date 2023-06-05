@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial struct SymbolKey
+    partial internal struct SymbolKey
     {
         private abstract class Reader<TStringResult> : IDisposable
             where TStringResult : class
@@ -446,7 +446,7 @@ namespace Microsoft.CodeAnalysis
             public ISymbol? CurrentContextualSymbol =>
                 _contextualSymbolStack.Count == 0 ? null : _contextualSymbolStack.Peek();
 
-            public readonly ref struct MethodPopper
+            ref public readonly struct MethodPopper
             {
                 private readonly SymbolKeyReader _reader;
                 private readonly IMethodSymbol? _method;
@@ -460,7 +460,7 @@ namespace Microsoft.CodeAnalysis
                 public void Dispose() => _reader.PopMethod(_method);
             }
 
-            public readonly ref struct ContextualSymbolPopper
+            ref public readonly struct ContextualSymbolPopper
             {
                 private readonly SymbolKeyReader _reader;
                 private readonly ISymbol? _contextualSymbol;

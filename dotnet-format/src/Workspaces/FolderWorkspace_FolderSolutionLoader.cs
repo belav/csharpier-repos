@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Tools.Utilities;
 
 namespace Microsoft.CodeAnalysis.Tools.Workspaces
 {
-    internal sealed partial class FolderWorkspace : Workspace
+    partial internal sealed class FolderWorkspace : Workspace
     {
         private static class FolderSolutionLoader
         {

@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Rename;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractEditorInlineRenameService : IEditorInlineRenameService
+    partial internal abstract class AbstractEditorInlineRenameService : IEditorInlineRenameService
     {
         private readonly IEnumerable<IRefactorNotifyService> _refactorNotifyServices;
         private readonly IGlobalOptionService _globalOptions;

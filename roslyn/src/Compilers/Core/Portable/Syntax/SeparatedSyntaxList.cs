@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public readonly partial struct SeparatedSyntaxList<TNode>
+    partial public readonly struct SeparatedSyntaxList<TNode>
         : IEquatable<SeparatedSyntaxList<TNode>>,
             IReadOnlyList<TNode>
         where TNode : SyntaxNode

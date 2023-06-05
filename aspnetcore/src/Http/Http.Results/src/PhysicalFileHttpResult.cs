@@ -7,14 +7,12 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+partial
 /// <summary>
 /// A <see cref="PhysicalFileHttpResult"/> on execution will write a file from disk to the response
 /// using mechanisms provided by the host.
 /// </summary>
-public sealed partial class PhysicalFileHttpResult
-    : IResult,
-        IFileHttpResult,
-        IContentTypeHttpResult
+public sealed class PhysicalFileHttpResult : IResult, IFileHttpResult, IContentTypeHttpResult
 {
     /// <summary>
     /// Creates a new <see cref="PhysicalFileHttpResult"/> instance with

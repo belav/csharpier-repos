@@ -17,6 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 {
+    partial
     /// <summary>
     /// Represents a primary module of a <see cref="RetargetingAssemblySymbol"/>. Essentially this is a wrapper around
     /// another <see cref="SourceModuleSymbol"/> that is responsible for retargeting symbols from one assembly to another.
@@ -28,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
     ///   used as is.
     /// - Symbols from referenced assemblies that must be retargeted are substituted with result of retargeting.
     /// </summary>
-    internal sealed partial class RetargetingModuleSymbol : NonMissingModuleSymbol
+    internal sealed class RetargetingModuleSymbol : NonMissingModuleSymbol
     {
         /// <summary>
         /// Owning <see cref="RetargetingAssemblySymbol"/>.

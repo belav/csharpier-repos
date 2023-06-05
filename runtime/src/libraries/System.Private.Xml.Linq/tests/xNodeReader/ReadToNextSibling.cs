@@ -8,12 +8,13 @@ using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeReaderFunctionalTests : TestModule
+    partial public class XNodeReaderFunctionalTests : TestModule
     {
-        public partial class XNodeReaderTests : XLinqTestCase
+        partial public class XNodeReaderTests : XLinqTestCase
         {
+            partial
             //[TestCase(Name = "ReadToNextSibling", Desc = "ReadToNextSibling")]
-            public partial class TCReadToNextSibling : BridgeHelpers
+            public class TCReadToNextSibling : BridgeHelpers
             {
                 #region XMLSTR
                 private string _xmlStr =

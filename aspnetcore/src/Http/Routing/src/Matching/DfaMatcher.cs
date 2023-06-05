@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-internal sealed partial class DfaMatcher : Matcher
+partial internal sealed class DfaMatcher : Matcher
 {
     private readonly ILogger _logger;
     private readonly EndpointSelector _selector;
@@ -367,7 +367,7 @@ internal sealed partial class DfaMatcher : Matcher
         await _selector.SelectAsync(httpContext, candidateSet);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1000,
@@ -376,7 +376,7 @@ internal sealed partial class DfaMatcher : Matcher
             EventName = "CandidatesNotFound",
             SkipEnabledCheck = true
         )]
-        public static partial void CandidatesNotFound(ILogger logger, string path);
+        partial public static void CandidatesNotFound(ILogger logger, string path);
 
         public static void CandidatesFound(ILogger logger, string path, Candidate[] candidates) =>
             CandidatesFound(logger, candidates.Length, path);
@@ -388,7 +388,7 @@ internal sealed partial class DfaMatcher : Matcher
             EventName = "CandidatesFound",
             SkipEnabledCheck = true
         )]
-        private static partial void CandidatesFound(
+        partial private static void CandidatesFound(
             ILogger logger,
             int candidateCount,
             string path
@@ -422,7 +422,7 @@ internal sealed partial class DfaMatcher : Matcher
             EventName = "CandidateRejectedByComplexSegment",
             SkipEnabledCheck = true
         )]
-        private static partial void CandidateRejectedByComplexSegment(
+        partial private static void CandidateRejectedByComplexSegment(
             ILogger logger,
             string? endpoint,
             string routePattern,
@@ -462,7 +462,7 @@ internal sealed partial class DfaMatcher : Matcher
             EventName = "CandidateRejectedByConstraint",
             SkipEnabledCheck = true
         )]
-        private static partial void CandidateRejectedByConstraint(
+        partial private static void CandidateRejectedByConstraint(
             ILogger logger,
             string? endpoint,
             string routePattern,
@@ -489,7 +489,7 @@ internal sealed partial class DfaMatcher : Matcher
             EventName = "CandidateNotValid",
             SkipEnabledCheck = true
         )]
-        private static partial void CandidateNotValid(
+        partial private static void CandidateNotValid(
             ILogger logger,
             string? endpoint,
             string routePattern,
@@ -513,7 +513,7 @@ internal sealed partial class DfaMatcher : Matcher
             EventName = "CandidateValid",
             SkipEnabledCheck = true
         )]
-        private static partial void CandidateValid(
+        partial private static void CandidateValid(
             ILogger logger,
             string? endpoint,
             string routePattern,

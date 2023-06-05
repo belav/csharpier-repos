@@ -5,10 +5,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+partial
 /// <summary>
 /// An <see cref="IActionFilter"/> which sets the appropriate headers related to response caching.
 /// </summary>
-internal sealed partial class ResponseCacheFilter : IActionFilter, IResponseCacheFilter
+internal sealed class ResponseCacheFilter : IActionFilter, IResponseCacheFilter
 {
     private readonly ResponseCacheFilterExecutor _executor;
     private readonly ILogger _logger;
@@ -106,7 +107,7 @@ internal sealed partial class ResponseCacheFilter : IActionFilter, IResponseCach
     /// <inheritdoc />
     public void OnActionExecuted(ActionExecutedContext context) { }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             4,
@@ -114,7 +115,7 @@ internal sealed partial class ResponseCacheFilter : IActionFilter, IResponseCach
             "Execution of filter {OverriddenFilter} is preempted by filter {OverridingFilter} which is the most effective filter implementing policy {FilterPolicy}.",
             EventName = "NotMostEffectiveFilter"
         )]
-        public static partial void NotMostEffectiveFilter(
+        partial public static void NotMostEffectiveFilter(
             ILogger logger,
             Type overriddenFilter,
             Type overridingFilter,

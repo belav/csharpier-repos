@@ -103,10 +103,11 @@ namespace System.Security
 
         internal int m_index;
         internal volatile PermissionTokenType m_type;
+        internal
 #if FEATURE_CAS_POLICY
         internal String m_strTypeName;
 #endif // FEATURE_CAS_POLICY
-        static internal TokenBasedSet s_tokenSet = new TokenBasedSet();
+        static TokenBasedSet s_tokenSet = new TokenBasedSet();
 
         internal static bool IsMscorlibClassName(string className)
         {

@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace System
 {
-    public static partial class Environment
+    partial public static class Environment
     {
         public static extern int CurrentManagedThreadId
         {
@@ -20,7 +20,7 @@ namespace System
         // Terminates this process with the given exit code.
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Environment_Exit")]
         [DoesNotReturn]
-        private static partial void _Exit(int exitCode);
+        partial private static void _Exit(int exitCode);
 
         [DoesNotReturn]
         public static void Exit(int exitCode) => _Exit(exitCode);
@@ -108,7 +108,7 @@ namespace System
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Environment_GetProcessorCount")]
-        private static partial int GetProcessorCount();
+        partial private static int GetProcessorCount();
 
         // Used by VM
         internal static string? GetResourceStringLocal(string key) => SR.GetResourceString(key);

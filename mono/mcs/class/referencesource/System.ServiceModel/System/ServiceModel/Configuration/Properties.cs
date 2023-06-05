@@ -23,7 +23,7 @@ using System.Globalization;
 
 namespace System.ServiceModel.Activation.Configuration
 {
-    public sealed partial class DiagnosticSection
+    partial public sealed class DiagnosticSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -57,7 +57,7 @@ namespace System.ServiceModel.Activation.Configuration
 
 namespace System.ServiceModel.Activation.Configuration
 {
-    public sealed partial class NetPipeSection
+    partial public sealed class NetPipeSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -127,7 +127,7 @@ namespace System.ServiceModel.Activation.Configuration
 
 namespace System.ServiceModel.Activation.Configuration
 {
-    public sealed partial class NetTcpSection
+    partial public sealed class NetTcpSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -217,7 +217,7 @@ namespace System.ServiceModel.Activation.Configuration
 
 namespace System.ServiceModel.Activation.Configuration
 {
-    public sealed partial class SecurityIdentifierElement
+    partial public sealed class SecurityIdentifierElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -251,7 +251,7 @@ namespace System.ServiceModel.Activation.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class ContextBindingElementExtensionElement
+    partial public class ContextBindingElementExtensionElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -319,7 +319,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class NetTcpContextBindingElement
+    partial public class NetTcpContextBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -374,7 +374,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class WSHttpContextBindingElement
+    partial public class WSHttpContextBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -429,7 +429,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class BasicHttpContextBindingElement
+    partial public class BasicHttpContextBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -462,7 +462,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ApplicationContainerSettingsElement
+    partial public sealed class ApplicationContainerSettingsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -506,7 +506,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class AllowedAudienceUriElement
+    partial public sealed class AllowedAudienceUriElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -540,7 +540,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class AddressHeaderCollectionElement
+    partial public sealed class AddressHeaderCollectionElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -574,7 +574,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceAuthenticationElement
+    partial public sealed class ServiceAuthenticationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -618,7 +618,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class AuthorizationPolicyTypeElement
+    partial public sealed class AuthorizationPolicyTypeElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -653,7 +653,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class BaseAddressElement
+    partial public sealed class BaseAddressElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -688,7 +688,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class BaseAddressPrefixFilterElement
+    partial public sealed class BaseAddressPrefixFilterElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -723,7 +723,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class BasicHttpBindingElement
+    partial public class BasicHttpBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -768,7 +768,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class BasicHttpMessageSecurityElement
+    partial public sealed class BasicHttpMessageSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -814,7 +814,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class BasicHttpSecurityElement
+    partial public sealed class BasicHttpSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -870,7 +870,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class BasicHttpsBindingElement
+    partial public class BasicHttpsBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -915,7 +915,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class BasicHttpsSecurityElement
+    partial public sealed class BasicHttpsSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -971,7 +971,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class BehaviorsSection
+    partial public class BehaviorsSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -1015,7 +1015,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class BinaryMessageEncodingElement
+    partial public sealed class BinaryMessageEncodingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1091,7 +1091,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class CertificateElement
+    partial public sealed class CertificateElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1125,7 +1125,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class CertificateReferenceElement
+    partial public sealed class CertificateReferenceElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1215,7 +1215,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ChannelEndpointElement
+    partial public sealed class ChannelEndpointElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1339,7 +1339,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ChannelPoolSettingsElement
+    partial public sealed class ChannelPoolSettingsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1405,7 +1405,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ClientViaElement
+    partial public sealed class ClientViaElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1439,7 +1439,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ClaimTypeElement
+    partial public sealed class ClaimTypeElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1484,7 +1484,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class CallbackDebugElement
+    partial public sealed class CallbackDebugElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1518,7 +1518,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ClientSection
+    partial public sealed class ClientSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -1562,7 +1562,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class CallbackTimeoutsElement
+    partial public sealed class CallbackTimeoutsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1602,7 +1602,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class ClientCredentialsElement
+    partial public class ClientCredentialsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1716,7 +1716,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class CommonBehaviorsSection
+    partial public class CommonBehaviorsSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -1760,7 +1760,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class CompositeDuplexElement
+    partial public sealed class CompositeDuplexElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1794,7 +1794,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class ConnectionOrientedTransportElement
+    partial public class ConnectionOrientedTransportElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -1916,7 +1916,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class CustomBindingElement
+    partial public class CustomBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2003,7 +2003,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class CustomBindingCollectionElement
+    partial public sealed class CustomBindingCollectionElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2037,7 +2037,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class OneWayElement
+    partial public sealed class OneWayElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2091,7 +2091,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class DefaultPortElement
+    partial public sealed class DefaultPortElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2136,7 +2136,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class DelegatingHandlerElement
+    partial public sealed class DelegatingHandlerElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2171,7 +2171,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class DiagnosticSection
+    partial public sealed class DiagnosticSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -2247,7 +2247,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class DnsElement
+    partial public sealed class DnsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2281,7 +2281,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class EndpointAddressElementBase
+    partial public class EndpointAddressElementBase
     {
         ConfigurationPropertyCollection properties;
 
@@ -2335,7 +2335,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class EndToEndTracingElement
+    partial public sealed class EndToEndTracingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2389,7 +2389,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class FederatedMessageSecurityOverHttpElement
+    partial public sealed class FederatedMessageSecurityOverHttpElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2505,7 +2505,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class HostElement
+    partial public sealed class HostElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2549,7 +2549,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class HostTimeoutsElement
+    partial public sealed class HostTimeoutsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2605,7 +2605,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class HttpBindingBaseElement
+    partial public class HttpBindingBaseElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2742,7 +2742,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class HttpDigestClientElement
+    partial public sealed class HttpDigestClientElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2778,7 +2778,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class HttpMessageHandlerFactoryElement
+    partial public sealed class HttpMessageHandlerFactoryElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2822,7 +2822,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class HttpsTransportElement
+    partial public class HttpsTransportElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -2855,7 +2855,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class HttpTransportElement
+    partial public class HttpTransportElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -3070,7 +3070,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class HttpTransportSecurityElement
+    partial public sealed class HttpTransportSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -3138,7 +3138,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class IdentityElement
+    partial public sealed class IdentityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -3222,7 +3222,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class IssuedTokenClientElement
+    partial public sealed class IssuedTokenClientElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -3327,7 +3327,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class IssuedTokenServiceElement
+    partial public sealed class IssuedTokenServiceElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -3454,7 +3454,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class IssuedTokenClientBehaviorsElement
+    partial public sealed class IssuedTokenClientBehaviorsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -3499,7 +3499,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class IssuedTokenParametersElement
+    partial public sealed class IssuedTokenParametersElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -3615,7 +3615,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class IssuedTokenParametersEndpointAddressElement
+    partial public sealed class IssuedTokenParametersEndpointAddressElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -3658,7 +3658,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class LocalClientSecuritySettingsElement
+    partial public sealed class LocalClientSecuritySettingsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -3831,7 +3831,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class LocalServiceSecuritySettingsElement
+    partial public sealed class LocalServiceSecuritySettingsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4043,7 +4043,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MetadataElement
+    partial public sealed class MetadataElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4087,7 +4087,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MessageLoggingElement
+    partial public sealed class MessageLoggingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4191,7 +4191,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MessageSecurityOverHttpElement
+    partial public class MessageSecurityOverHttpElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4247,7 +4247,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MessageSecurityOverMsmqElement
+    partial public sealed class MessageSecurityOverMsmqElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4293,7 +4293,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MessageSecurityOverTcpElement
+    partial public sealed class MessageSecurityOverTcpElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4339,7 +4339,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MsmqBindingElementBase
+    partial public class MsmqBindingElementBase
     {
         ConfigurationPropertyCollection properties;
 
@@ -4524,7 +4524,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MsmqIntegrationBindingElement
+    partial public class MsmqIntegrationBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4569,7 +4569,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MsmqIntegrationElement
+    partial public sealed class MsmqIntegrationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4604,7 +4604,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MsmqIntegrationSecurityElement
+    partial public sealed class MsmqIntegrationSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4654,7 +4654,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class MsmqElementBase
+    partial public class MsmqElementBase
     {
         ConfigurationPropertyCollection properties;
 
@@ -4839,7 +4839,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MsmqTransportElement
+    partial public sealed class MsmqTransportElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4894,7 +4894,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MsmqTransportSecurityElement
+    partial public sealed class MsmqTransportSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -4966,7 +4966,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class MtomMessageEncodingElement
+    partial public sealed class MtomMessageEncodingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5050,7 +5050,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NamedPipeConnectionPoolSettingsElement
+    partial public sealed class NamedPipeConnectionPoolSettingsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5110,7 +5110,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NamedPipeSettingsElement
+    partial public sealed class NamedPipeSettingsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5144,7 +5144,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NamedPipeTransportElement
+    partial public sealed class NamedPipeTransportElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5187,7 +5187,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NamedPipeTransportSecurityElement
+    partial public sealed class NamedPipeTransportSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5223,7 +5223,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NonDualMessageSecurityOverHttpElement
+    partial public sealed class NonDualMessageSecurityOverHttpElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5256,7 +5256,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NetHttpBindingElement
+    partial public sealed class NetHttpBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5321,7 +5321,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NetHttpsBindingElement
+    partial public sealed class NetHttpsBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5386,7 +5386,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NetHttpWebSocketTransportSettingsElement
+    partial public sealed class NetHttpWebSocketTransportSettingsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5433,7 +5433,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class WebSocketTransportSettingsElement
+    partial public class WebSocketTransportSettingsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5528,7 +5528,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class NetPeerTcpBindingElement
+    partial public class NetPeerTcpBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5625,7 +5625,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class NetNamedPipeBindingElement
+    partial public class NetNamedPipeBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5752,7 +5752,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NetNamedPipeSecurityElement
+    partial public sealed class NetNamedPipeSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5798,7 +5798,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class NetMsmqBindingElement
+    partial public class NetMsmqBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5873,7 +5873,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NetMsmqSecurityElement
+    partial public sealed class NetMsmqSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -5929,7 +5929,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class NetTcpBindingElement
+    partial public class NetTcpBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6086,7 +6086,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class NetTcpSecurityElement
+    partial public sealed class NetTcpSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6142,7 +6142,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class StandardBindingOptionalReliableSessionElement
+    partial public sealed class StandardBindingOptionalReliableSessionElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6175,7 +6175,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class PeerCredentialElement
+    partial public sealed class PeerCredentialElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6229,7 +6229,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class PeerCustomResolverElement
+    partial public sealed class PeerCustomResolverElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6313,7 +6313,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class PeerResolverElement
+    partial public sealed class PeerResolverElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6371,7 +6371,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class PeerSecurityElement
+    partial public sealed class PeerSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6417,7 +6417,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class PeerTransportElement
+    partial public class PeerTransportElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6491,7 +6491,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class PeerTransportSecurityElement
+    partial public sealed class PeerTransportSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6527,7 +6527,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class PolicyImporterElement
+    partial public sealed class PolicyImporterElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6562,7 +6562,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class PrivacyNoticeElement
+    partial public class PrivacyNoticeElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6606,7 +6606,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class StandardBindingElement
+    partial public class StandardBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6704,7 +6704,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class WSHttpBindingBaseElement
+    partial public class WSHttpBindingBaseElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6841,7 +6841,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class WSHttpBindingElement
+    partial public class WSHttpBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6884,7 +6884,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>
+    partial public class StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>
     {
         ConfigurationPropertyCollection properties;
 
@@ -6918,7 +6918,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class TransportElement
+    partial public class TransportElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -6972,7 +6972,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class StandardEndpointElement
+    partial public class StandardEndpointElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7006,7 +7006,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class StandardEndpointCollectionElement<
+    partial public class StandardEndpointCollectionElement<
         TStandardEndpoint,
         TEndpointConfiguration
     >
@@ -7043,7 +7043,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class StandardBindingReliableSessionElement
+    partial public class StandardBindingReliableSessionElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7096,7 +7096,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class RsaElement
+    partial public sealed class RsaElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7130,7 +7130,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ReliableSessionElement
+    partial public sealed class ReliableSessionElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7252,7 +7252,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class SecureConversationServiceElement
+    partial public sealed class SecureConversationServiceElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7286,7 +7286,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class SecurityElementBase
+    partial public class SecurityElementBase
     {
         ConfigurationPropertyCollection properties;
 
@@ -7502,7 +7502,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class SecurityElement
+    partial public sealed class SecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7535,7 +7535,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceActivationElement
+    partial public sealed class ServiceActivationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7590,7 +7590,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceAuthorizationElement
+    partial public sealed class ServiceAuthorizationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7680,7 +7680,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class ServiceCredentialsElement
+    partial public class ServiceCredentialsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7804,7 +7804,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceElement
+    partial public sealed class ServiceElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -7869,7 +7869,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceEndpointElement
+    partial public sealed class ServiceEndpointElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8045,7 +8045,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class ExtensionElement
+    partial public class ExtensionElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8090,7 +8090,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceHostingEnvironmentSection
+    partial public sealed class ServiceHostingEnvironmentSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -8184,7 +8184,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ProtocolMappingSection
+    partial public sealed class ProtocolMappingSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -8218,7 +8218,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ProtocolMappingElement
+    partial public sealed class ProtocolMappingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8273,7 +8273,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceMetadataPublishingElement
+    partial public sealed class ServiceMetadataPublishingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8397,7 +8397,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class ExtensionsSection
+    partial public class ExtensionsSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -8461,7 +8461,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceSecurityAuditElement
+    partial public sealed class ServiceSecurityAuditElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8531,7 +8531,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServicesSection
+    partial public sealed class ServicesSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -8565,7 +8565,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceThrottlingElement
+    partial public sealed class ServiceThrottlingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8619,7 +8619,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServicePrincipalNameElement
+    partial public sealed class ServicePrincipalNameElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8653,7 +8653,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class SslStreamSecurityElement
+    partial public sealed class SslStreamSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8701,7 +8701,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class TcpTransportElement
+    partial public sealed class TcpTransportElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8774,7 +8774,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class TcpTransportSecurityElement
+    partial public sealed class TcpTransportSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8846,7 +8846,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class TextMessageEncodingElement
+    partial public sealed class TextMessageEncodingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8920,7 +8920,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class TransactedBatchingElement
+    partial public sealed class TransactedBatchingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8954,7 +8954,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class TransportConfigurationTypeElement
+    partial public sealed class TransportConfigurationTypeElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -8999,7 +8999,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class UserPrincipalNameElement
+    partial public sealed class UserPrincipalNameElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9033,7 +9033,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class UserNameServiceElement
+    partial public sealed class UserNameServiceElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9138,7 +9138,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WindowsClientElement
+    partial public sealed class WindowsClientElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9184,7 +9184,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WindowsServiceElement
+    partial public sealed class WindowsServiceElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9228,7 +9228,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WindowsStreamSecurityElement
+    partial public sealed class WindowsStreamSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9264,7 +9264,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WsdlImporterElement
+    partial public sealed class WsdlImporterElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9299,7 +9299,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class WSDualHttpBindingElement
+    partial public class WSDualHttpBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9456,7 +9456,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WSDualHttpSecurityElement
+    partial public sealed class WSDualHttpSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9502,7 +9502,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WSHttpSecurityElement
+    partial public sealed class WSHttpSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9558,7 +9558,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class XmlDictionaryReaderQuotasElement
+    partial public sealed class XmlDictionaryReaderQuotasElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9632,7 +9632,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class XmlElementElement
+    partial public sealed class XmlElementElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9666,7 +9666,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class DataContractSerializerElement
+    partial public sealed class DataContractSerializerElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9710,7 +9710,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class XPathMessageFilterElement
+    partial public sealed class XPathMessageFilterElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9745,7 +9745,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509CertificateTrustedIssuerElement
+    partial public sealed class X509CertificateTrustedIssuerElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9825,7 +9825,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509ClientCertificateAuthenticationElement
+    partial public sealed class X509ClientCertificateAuthenticationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -9920,7 +9920,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509ClientCertificateCredentialsElement
+    partial public sealed class X509ClientCertificateCredentialsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10000,7 +10000,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509DefaultServiceCertificateElement
+    partial public sealed class X509DefaultServiceCertificateElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10075,7 +10075,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509InitiatorCertificateClientElement
+    partial public sealed class X509InitiatorCertificateClientElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10150,7 +10150,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509RecipientCertificateClientElement
+    partial public sealed class X509RecipientCertificateClientElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10214,7 +10214,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509InitiatorCertificateServiceElement
+    partial public sealed class X509InitiatorCertificateServiceElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10258,7 +10258,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509RecipientCertificateServiceElement
+    partial public sealed class X509RecipientCertificateServiceElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10338,7 +10338,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509ScopedServiceCertificateElement
+    partial public sealed class X509ScopedServiceCertificateElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10424,7 +10424,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509ServiceCertificateAuthenticationElement
+    partial public sealed class X509ServiceCertificateAuthenticationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10494,7 +10494,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ComContractElement
+    partial public sealed class ComContractElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10589,7 +10589,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ComContractsSection
+    partial public sealed class ComContractsSection
     {
         ConfigurationPropertyCollection properties;
 
@@ -10623,7 +10623,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ComMethodElement
+    partial public sealed class ComMethodElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10658,7 +10658,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ComPersistableTypeElement
+    partial public sealed class ComPersistableTypeElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10703,7 +10703,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ComUdtElement
+    partial public sealed class ComUdtElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10768,7 +10768,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class TransactionFlowElement
+    partial public class TransactionFlowElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10812,7 +10812,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public partial class WSFederationHttpBindingElement
+    partial public class WSFederationHttpBindingElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10865,7 +10865,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WSFederationHttpSecurityElement
+    partial public sealed class WSFederationHttpSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10911,7 +10911,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509PeerCertificateElement
+    partial public sealed class X509PeerCertificateElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -10986,7 +10986,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class X509PeerCertificateAuthenticationElement
+    partial public sealed class X509PeerCertificateAuthenticationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -11060,7 +11060,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceDebugElement
+    partial public sealed class ServiceDebugElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -11174,7 +11174,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class ServiceTimeoutsElement
+    partial public sealed class ServiceTimeoutsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -11214,7 +11214,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class TcpConnectionPoolSettingsElement
+    partial public sealed class TcpConnectionPoolSettingsElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -11290,7 +11290,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WSHttpTransportSecurityElement
+    partial public sealed class WSHttpTransportSecurityElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -11358,7 +11358,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class DispatcherSynchronizationElement
+    partial public sealed class DispatcherSynchronizationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -11402,7 +11402,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class RemoveBehaviorElement
+    partial public sealed class RemoveBehaviorElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -11436,7 +11436,7 @@ namespace System.ServiceModel.Configuration
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class UseRequestHeadersForMetadataAddressElement
+    partial public sealed class UseRequestHeadersForMetadataAddressElement
     {
         ConfigurationPropertyCollection properties;
 

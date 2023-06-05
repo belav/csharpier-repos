@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
-    internal partial class CSharpProjectShim : ICSharpVenusProjectSite
+    partial internal class CSharpProjectShim : ICSharpVenusProjectSite
     {
         public void AddReferenceToCodeDirectory(
             string assemblyFileName,

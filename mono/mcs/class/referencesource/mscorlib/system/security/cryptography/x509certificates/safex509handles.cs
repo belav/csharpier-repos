@@ -56,7 +56,7 @@ namespace System.Security.Cryptography.X509Certificates
         private static extern void _FreePCertContext(IntPtr pCert);
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             _FreePCertContext(handle);
             return true;
@@ -88,7 +88,7 @@ namespace System.Security.Cryptography.X509Certificates
         private static extern void _FreeCertStoreContext(IntPtr hCertStore);
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             _FreeCertStoreContext(handle);
             return true;

@@ -9,9 +9,9 @@ using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
-    internal partial class FixAllSuggestedAction
+    partial internal class FixAllSuggestedAction
     {
-        private sealed partial class FixAllCodeAction : FixSomeCodeAction
+        partial private sealed class FixAllCodeAction : FixSomeCodeAction
         {
             public FixAllCodeAction(FixAllState fixAllState)
                 : base(fixAllState, showPreviewChangesDialog: true) { }

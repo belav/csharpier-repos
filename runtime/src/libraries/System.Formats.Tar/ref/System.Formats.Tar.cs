@@ -6,7 +6,7 @@
 
 namespace System.Formats.Tar
 {
-    public sealed partial class GnuTarEntry : System.Formats.Tar.PosixTarEntry
+    partial public sealed class GnuTarEntry : System.Formats.Tar.PosixTarEntry
     {
         public GnuTarEntry(System.Formats.Tar.TarEntry other) { }
 
@@ -24,7 +24,7 @@ namespace System.Formats.Tar
         }
     }
 
-    public sealed partial class PaxGlobalExtendedAttributesTarEntry
+    partial public sealed class PaxGlobalExtendedAttributesTarEntry
         : System.Formats.Tar.PosixTarEntry
     {
         public PaxGlobalExtendedAttributesTarEntry(
@@ -43,7 +43,7 @@ namespace System.Formats.Tar
         }
     }
 
-    public sealed partial class PaxTarEntry : System.Formats.Tar.PosixTarEntry
+    partial public sealed class PaxTarEntry : System.Formats.Tar.PosixTarEntry
     {
         public PaxTarEntry(System.Formats.Tar.TarEntry other) { }
 
@@ -64,7 +64,7 @@ namespace System.Formats.Tar
         }
     }
 
-    public abstract partial class PosixTarEntry : System.Formats.Tar.TarEntry
+    partial public abstract class PosixTarEntry : System.Formats.Tar.TarEntry
     {
         internal PosixTarEntry() { }
 
@@ -90,7 +90,7 @@ namespace System.Formats.Tar
         }
     }
 
-    public abstract partial class TarEntry
+    partial public abstract class TarEntry
     {
         internal TarEntry() { }
 
@@ -195,7 +195,7 @@ namespace System.Formats.Tar
         ExtendedAttributes = (byte)120,
     }
 
-    public static partial class TarFile
+    partial public static class TarFile
     {
         public static void CreateFromDirectory(
             string sourceDirectoryName,
@@ -266,7 +266,7 @@ namespace System.Formats.Tar
         }
     }
 
-    public sealed partial class TarReader : System.IAsyncDisposable, System.IDisposable
+    partial public sealed class TarReader : System.IAsyncDisposable, System.IDisposable
     {
         public TarReader(System.IO.Stream archiveStream, bool leaveOpen = false) { }
 
@@ -292,7 +292,7 @@ namespace System.Formats.Tar
         }
     }
 
-    public sealed partial class TarWriter : System.IAsyncDisposable, System.IDisposable
+    partial public sealed class TarWriter : System.IAsyncDisposable, System.IDisposable
     {
         public TarWriter(System.IO.Stream archiveStream) { }
 
@@ -340,14 +340,14 @@ namespace System.Formats.Tar
         }
     }
 
-    public sealed partial class UstarTarEntry : System.Formats.Tar.PosixTarEntry
+    partial public sealed class UstarTarEntry : System.Formats.Tar.PosixTarEntry
     {
         public UstarTarEntry(System.Formats.Tar.TarEntry other) { }
 
         public UstarTarEntry(System.Formats.Tar.TarEntryType entryType, string entryName) { }
     }
 
-    public sealed partial class V7TarEntry : System.Formats.Tar.TarEntry
+    partial public sealed class V7TarEntry : System.Formats.Tar.TarEntry
     {
         public V7TarEntry(System.Formats.Tar.TarEntry other) { }
 

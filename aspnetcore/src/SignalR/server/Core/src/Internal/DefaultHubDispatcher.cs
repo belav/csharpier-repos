@@ -16,7 +16,7 @@ using Log = Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcherLog;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
+partial internal sealed class DefaultHubDispatcher<THub> : HubDispatcher<THub>
     where THub : Hub
 {
     private readonly Dictionary<string, HubMethodDescriptor> _methods =

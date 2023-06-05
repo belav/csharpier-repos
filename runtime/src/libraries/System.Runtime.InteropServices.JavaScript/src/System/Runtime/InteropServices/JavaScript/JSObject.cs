@@ -11,7 +11,7 @@ namespace System.Runtime.InteropServices.JavaScript
     /// </summary>
     /// <remarks>JSObject instances are expensive, so use <see cref="Dispose()"/> to release instances once you no longer need to retain a reference to the target object.</remarks>
     [SupportedOSPlatform("browser")]
-    public partial class JSObject : IDisposable
+    partial public class JSObject : IDisposable
     {
         /// <summary>
         /// Returns true if the proxy was already disposed.

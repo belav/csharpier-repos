@@ -55,7 +55,11 @@ namespace System.Configuration
         // new configSource stream added thru API
 
 
-        static internal MgmtConfigurationRecord Create(
+        internal
+        // new configSource stream added thru API
+
+
+        static MgmtConfigurationRecord Create(
             IInternalConfigRoot configRoot,
             IInternalConfigRecord parent,
             string configPath,
@@ -125,7 +129,7 @@ namespace System.Configuration
             ClassSupportsKeepInputs | ClassIgnoreLocalErrors
         );
 
-        override protected SimpleBitVector32 ClassFlags
+        protected override SimpleBitVector32 ClassFlags
         {
             get { return MgmtClassFlags; }
         }
@@ -134,7 +138,12 @@ namespace System.Configuration
         // Create the factory object that is used to create new instances of a ConfigurationSection.
         // Our factory is a ConstructorInfo that creates the section.
         //
-        override protected object CreateSectionFactory(FactoryRecord factoryRecord)
+        protected
+        //
+        // Create the factory object that is used to create new instances of a ConfigurationSection.
+        // Our factory is a ConstructorInfo that creates the section.
+        //
+        override object CreateSectionFactory(FactoryRecord factoryRecord)
         {
             // Get the type of the factory
             Type type = TypeUtil.GetTypeWithReflectionPermission(
@@ -165,7 +174,11 @@ namespace System.Configuration
         //
         // Create the ConfigurationSection.
         //
-        override protected object CreateSection(
+        protected
+        //
+        // Create the ConfigurationSection.
+        //
+        override object CreateSection(
             bool inputIsTrusted,
             FactoryRecord factoryRecord,
             SectionRecord sectionRecord,
@@ -260,7 +273,14 @@ namespace System.Configuration
         // by the config system and the child ConfigurationSection may change due to
         // user interaction.
         //
-        override protected object UseParentResult(
+        protected
+        //
+        // Create a new ConfigurationSection with the same values as the parent.
+        // We must use a different instance than the parent, as the parent is cached
+        // by the config system and the child ConfigurationSection may change due to
+        // user interaction.
+        //
+        override object UseParentResult(
             string configKey,
             object parentResult,
             SectionRecord sectionRecord
@@ -288,7 +308,11 @@ namespace System.Configuration
         //
         // There is no runtime object at designtime - always return the result.
         //
-        override protected object GetRuntimeObject(object result)
+        protected
+        //
+        // There is no runtime object at designtime - always return the result.
+        //
+        override object GetRuntimeObject(object result)
         {
             return result;
         }

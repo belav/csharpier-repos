@@ -118,7 +118,7 @@ namespace System.IO
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe override byte[] ToArray()
+        public override unsafe byte[] ToArray()
         {
             if (!_unmanagedStream._isOpen)
                 __Error.StreamIsClosed();
@@ -141,7 +141,7 @@ namespace System.IO
         }
 
         // Writes this MemoryStream to another stream.
-        public unsafe override void WriteTo(Stream stream)
+        public override unsafe void WriteTo(Stream stream)
         {
             if (stream == null)
                 throw new ArgumentNullException(

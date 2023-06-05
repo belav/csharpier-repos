@@ -9,7 +9,7 @@ using static TestData;
 
 namespace LPStr;
 
-public partial class PInvoke_Default
+partial public class PInvoke_Default
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct LPStrTestStruct

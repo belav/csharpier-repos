@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class QueryInterfaceTests
+    partial public class QueryInterfaceTests
     {
         public const string IID_IDISPATCH = "00020400-0000-0000-C000-000000000046";
         public const string IID_IINSPECTABLE = "AF86E2E0-B12D-4c6a-9C5A-D7AA65101E90";

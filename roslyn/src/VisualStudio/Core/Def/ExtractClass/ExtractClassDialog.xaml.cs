@@ -11,10 +11,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
 {
+    partial
     /// <summary>
     /// Interaction logic for ExtractClassDialog.xaml
     /// </summary>
-    internal partial class ExtractClassDialog : DialogWindow
+    internal class ExtractClassDialog : DialogWindow
     {
         public string OK => ServicesVSResources.OK;
         public string Cancel => ServicesVSResources.Cancel;

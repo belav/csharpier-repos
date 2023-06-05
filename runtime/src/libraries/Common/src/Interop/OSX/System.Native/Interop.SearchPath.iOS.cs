@@ -4,15 +4,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_SearchPath_TempDirectory",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        internal static partial string SearchPathTempDirectory();
+        partial internal static string SearchPathTempDirectory();
     }
 }

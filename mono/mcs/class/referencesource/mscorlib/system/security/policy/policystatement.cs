@@ -37,7 +37,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class PolicyStatement : ISecurityPolicyEncodable, ISecurityEncodable
+    public sealed class PolicyStatement : ISecurityPolicyEncodable, ISecurityEncodable
     {
         // The PermissionSet associated with this policy
         internal PermissionSet m_permSet;

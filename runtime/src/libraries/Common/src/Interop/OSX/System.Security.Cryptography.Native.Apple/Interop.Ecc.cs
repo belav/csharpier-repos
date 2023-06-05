@@ -7,12 +7,12 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_EccGenerateKey(
+        partial private static int AppleCryptoNative_EccGenerateKey(
             int keySizeInBits,
             out SafeSecKeyRefHandle pPublicKey,
             out SafeSecKeyRefHandle pPrivateKey,
@@ -23,7 +23,7 @@ internal static partial class Interop
             Libraries.AppleCryptoNative,
             EntryPoint = "AppleCryptoNative_EccGetKeySizeInBits"
         )]
-        internal static partial int EccGetKeySizeInBits(SafeSecKeyRefHandle publicKey);
+        partial internal static int EccGetKeySizeInBits(SafeSecKeyRefHandle publicKey);
 
         internal static void EccGenerateKey(
             int keySizeInBits,

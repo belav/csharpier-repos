@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 
 namespace System.Linq.Expressions.Compiler
 {
-    internal sealed partial class LambdaCompiler
+    partial internal sealed class LambdaCompiler
     {
         #region Conditional
 

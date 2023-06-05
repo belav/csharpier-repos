@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
         ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AddNew),
         Shared
     ]
-    internal partial class HideBaseCodeFixProvider : CodeFixProvider
+    partial internal class HideBaseCodeFixProvider : CodeFixProvider
     {
         internal const string CS0108 = nameof(CS0108); // 'SomeClass.SomeMember' hides inherited member 'SomeClass.SomeMember'. Use the new keyword if hiding was intended.
 

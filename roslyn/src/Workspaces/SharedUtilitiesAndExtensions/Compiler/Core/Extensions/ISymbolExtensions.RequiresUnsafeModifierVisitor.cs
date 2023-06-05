@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal partial class ISymbolExtensions
+    partial internal class ISymbolExtensions
     {
         /// <summary>
         /// Visits types or members that have signatures (i.e. methods, fields, etc.) and determines

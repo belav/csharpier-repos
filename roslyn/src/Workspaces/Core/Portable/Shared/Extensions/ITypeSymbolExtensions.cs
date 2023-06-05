@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class ITypeSymbolExtensions
+    partial internal static class ITypeSymbolExtensions
     {
         /// <summary>
         /// Returns the corresponding symbol in this type or a base type that implements

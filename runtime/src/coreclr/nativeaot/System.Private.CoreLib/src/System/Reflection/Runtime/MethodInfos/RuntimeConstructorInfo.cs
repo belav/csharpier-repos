@@ -15,10 +15,11 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
+    partial
     //
     // The runtime's implementation of ConstructorInfo.
     //
-    internal abstract partial class RuntimeConstructorInfo : ConstructorInfo
+    internal abstract class RuntimeConstructorInfo : ConstructorInfo
     {
         public abstract override MethodAttributes Attributes { get; }
 

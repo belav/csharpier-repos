@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Text
 {
-    public sealed partial class StringBuilder
+    partial public sealed class StringBuilder
     {
         private void ShowChunks(int maxChunksToShow = 10)
         {

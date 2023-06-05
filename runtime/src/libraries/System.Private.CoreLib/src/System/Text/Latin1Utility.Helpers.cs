@@ -8,7 +8,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Text
 {
-    internal static partial class Latin1Utility
+    partial internal static class Latin1Utility
     {
         /// <summary>
         /// Returns <see langword="true"/> iff all chars in <paramref name="value"/> are Latin-1.

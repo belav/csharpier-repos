@@ -1,6 +1,6 @@
 namespace System.IO
 {
-    internal static partial class PathInternal
+    partial internal static class PathInternal
     {
         public static bool IsPartiallyQualified(string path)
         {

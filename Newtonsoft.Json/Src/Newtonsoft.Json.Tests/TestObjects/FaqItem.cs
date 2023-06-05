@@ -35,7 +35,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
 #if !(DNXCORE50 || NET20)
     [Serializable]
-    public partial class FaqItem
+    partial public class FaqItem
     {
         public FaqItem()
         {

@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 {
-    internal abstract partial class CodeStyleSetting
+    partial internal abstract class CodeStyleSetting
     {
         private abstract class BooleanCodeStyleSettingBase : CodeStyleSetting
         {

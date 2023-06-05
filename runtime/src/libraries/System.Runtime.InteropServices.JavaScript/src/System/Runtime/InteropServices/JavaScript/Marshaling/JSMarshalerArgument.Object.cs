@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.InteropServices.JavaScript
 {
+    partial
     // Methods in this file are marshaling System.Object signature to Any JS signature dynamically.
     // In order to do that, we are referring to all well know marshaled types
     // therefore they could not be linked out during AOT, when user uses System.Object signature in his [JSImport] or [JSExport]
     // it is pay for play
 
-    public partial struct JSMarshalerArgument
+    public struct JSMarshalerArgument
     {
         /// <summary>
         /// Implementation of the argument marshaling.

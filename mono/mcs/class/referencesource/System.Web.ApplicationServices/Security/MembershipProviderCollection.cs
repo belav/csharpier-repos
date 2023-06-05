@@ -39,7 +39,7 @@ namespace System.Web.Security
             base.Add(provider);
         }
 
-        new public MembershipProvider this[string name]
+        public new MembershipProvider this[string name]
         {
             get { return (MembershipProvider)base[name]; }
         }

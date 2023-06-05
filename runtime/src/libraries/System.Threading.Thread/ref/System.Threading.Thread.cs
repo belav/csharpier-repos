@@ -6,7 +6,7 @@
 
 namespace System
 {
-    public sealed partial class LocalDataStoreSlot
+    partial public sealed class LocalDataStoreSlot
     {
         internal LocalDataStoreSlot() { }
 
@@ -23,7 +23,7 @@ namespace System.Threading
         Unknown = 2,
     }
 
-    public sealed partial class CompressedStack : System.Runtime.Serialization.ISerializable
+    partial public sealed class CompressedStack : System.Runtime.Serialization.ISerializable
     {
         internal CompressedStack() { }
 
@@ -56,7 +56,7 @@ namespace System.Threading
 
     public delegate void ParameterizedThreadStart(object? obj);
 
-    public sealed partial class Thread : System.Runtime.ConstrainedExecution.CriticalFinalizerObject
+    partial public sealed class Thread : System.Runtime.ConstrainedExecution.CriticalFinalizerObject
     {
         public Thread(System.Threading.ParameterizedThreadStart start) { }
 
@@ -403,7 +403,7 @@ namespace System.Threading
         }
     }
 
-    public sealed partial class ThreadAbortException : System.SystemException
+    partial public sealed class ThreadAbortException : System.SystemException
     {
         internal ThreadAbortException() { }
 
@@ -413,7 +413,7 @@ namespace System.Threading
         }
     }
 
-    public partial class ThreadExceptionEventArgs : System.EventArgs
+    partial public class ThreadExceptionEventArgs : System.EventArgs
     {
         public ThreadExceptionEventArgs(System.Exception t) { }
 
@@ -428,7 +428,7 @@ namespace System.Threading
         System.Threading.ThreadExceptionEventArgs e
     );
 
-    public partial class ThreadInterruptedException : System.SystemException
+    partial public class ThreadInterruptedException : System.SystemException
     {
         public ThreadInterruptedException() { }
 
@@ -453,7 +453,7 @@ namespace System.Threading
 
     public delegate void ThreadStart();
 
-    public sealed partial class ThreadStartException : System.SystemException
+    partial public sealed class ThreadStartException : System.SystemException
     {
         internal ThreadStartException() { }
     }
@@ -473,7 +473,7 @@ namespace System.Threading
         Aborted = 256,
     }
 
-    public partial class ThreadStateException : System.SystemException
+    partial public class ThreadStateException : System.SystemException
     {
         public ThreadStateException() { }
 

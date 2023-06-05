@@ -10,7 +10,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class StorePal
+    partial internal sealed class StorePal
     {
         private sealed class AppleCertLoader : ILoaderPal
         {

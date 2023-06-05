@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Reflection.TypeLoading
 {
-    internal abstract partial class RoMethodBody : MethodBody
+    partial internal abstract class RoMethodBody : MethodBody
     {
         protected RoMethodBody() { }
 

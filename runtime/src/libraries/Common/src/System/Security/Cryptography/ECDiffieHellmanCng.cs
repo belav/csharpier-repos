@@ -6,7 +6,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+    partial public sealed class ECDiffieHellmanCng : ECDiffieHellman
     {
         [SupportedOSPlatform("windows")]
         public ECDiffieHellmanCng()

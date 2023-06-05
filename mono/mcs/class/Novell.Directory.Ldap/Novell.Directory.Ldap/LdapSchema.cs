@@ -82,92 +82,101 @@ namespace Novell.Directory.Ldap
             idTable = new System.Collections.Hashtable[8];
         }
 
+        public
         /// <summary> Returns an enumeration of attribute definitions.
         ///
         /// </summary>
         /// <returns> An enumeration of attribute definitions.
         /// </returns>
-        virtual public System.Collections.IEnumerator AttributeSchemas
+        virtual System.Collections.IEnumerator AttributeSchemas
         {
             get { return new EnumeratedIterator(idTable[ATTRIBUTE].Values.GetEnumerator()); }
         }
 
+        public
         /// <summary> Returns an enumeration of DIT content rule definitions.
         ///
         /// </summary>
         /// <returns> An enumeration of DIT content rule definitions.
         /// </returns>
-        virtual public System.Collections.IEnumerator DITContentRuleSchemas
+        virtual System.Collections.IEnumerator DITContentRuleSchemas
         {
             get { return new EnumeratedIterator(idTable[DITCONTENT].Values.GetEnumerator()); }
         }
 
+        public
         /// <summary> Returns an enumeration of DIT structure rule definitions.
         ///
         /// </summary>
         /// <returns> An enumeration of DIT structure rule definitions.
         /// </returns>
-        virtual public System.Collections.IEnumerator DITStructureRuleSchemas
+        virtual System.Collections.IEnumerator DITStructureRuleSchemas
         {
             get { return new EnumeratedIterator(idTable[DITSTRUCTURE].Values.GetEnumerator()); }
         }
 
+        public
         /// <summary> Returns an enumeration of matching rule definitions.
         ///
         /// </summary>
         /// <returns> An enumeration of matching rule definitions.
         /// </returns>
-        virtual public System.Collections.IEnumerator MatchingRuleSchemas
+        virtual System.Collections.IEnumerator MatchingRuleSchemas
         {
             get { return new EnumeratedIterator(idTable[MATCHING].Values.GetEnumerator()); }
         }
 
+        public
         /// <summary> Returns an enumeration of matching rule use definitions.
         ///
         /// </summary>
         /// <returns> An enumeration of matching rule use definitions.
         /// </returns>
-        virtual public System.Collections.IEnumerator MatchingRuleUseSchemas
+        virtual System.Collections.IEnumerator MatchingRuleUseSchemas
         {
             get { return new EnumeratedIterator(idTable[MATCHING_USE].Values.GetEnumerator()); }
         }
 
+        public
         /// <summary> Returns an enumeration of name form definitions.
         ///
         /// </summary>
         /// <returns> An enumeration of name form definitions.
         /// </returns>
-        virtual public System.Collections.IEnumerator NameFormSchemas
+        virtual System.Collections.IEnumerator NameFormSchemas
         {
             get { return new EnumeratedIterator(idTable[NAME_FORM].Values.GetEnumerator()); }
         }
 
+        public
         /// <summary> Returns an enumeration of object class definitions.
         ///
         /// </summary>
         /// <returns> An enumeration of object class definitions.
         /// </returns>
-        virtual public System.Collections.IEnumerator ObjectClassSchemas
+        virtual System.Collections.IEnumerator ObjectClassSchemas
         {
             get { return new EnumeratedIterator(idTable[OBJECT_CLASS].Values.GetEnumerator()); }
         }
 
+        public
         /// <summary> Returns an enumeration of syntax definitions.
         ///
         /// </summary>
         /// <returns> An enumeration of syntax definitions.
         /// </returns>
-        virtual public System.Collections.IEnumerator SyntaxSchemas
+        virtual System.Collections.IEnumerator SyntaxSchemas
         {
             get { return new EnumeratedIterator(idTable[SYNTAX].Values.GetEnumerator()); }
         }
 
+        public
         /// <summary> Returns an enumeration of attribute names.
         ///
         /// </summary>
         /// <returns> An enumeration of attribute names.
         /// </returns>
-        virtual public System.Collections.IEnumerator AttributeNames
+        virtual System.Collections.IEnumerator AttributeNames
         {
             get
             {
@@ -177,12 +186,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns an enumeration of DIT content rule names.
         ///
         /// </summary>
         /// <returns> An enumeration of DIT content rule names.
         /// </returns>
-        virtual public System.Collections.IEnumerator DITContentRuleNames
+        virtual System.Collections.IEnumerator DITContentRuleNames
         {
             get
             {
@@ -192,12 +202,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns an enumeration of DIT structure rule names.
         ///
         /// </summary>
         /// <returns> An enumeration of DIT structure rule names.
         /// </returns>
-        virtual public System.Collections.IEnumerator DITStructureRuleNames
+        virtual System.Collections.IEnumerator DITStructureRuleNames
         {
             get
             {
@@ -207,12 +218,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns an enumeration of matching rule names.
         ///
         /// </summary>
         /// <returns> An enumeration of matching rule names.
         /// </returns>
-        virtual public System.Collections.IEnumerator MatchingRuleNames
+        virtual System.Collections.IEnumerator MatchingRuleNames
         {
             get
             {
@@ -222,12 +234,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns an enumeration of matching rule use names.
         ///
         /// </summary>
         /// <returns> An enumeration of matching rule use names.
         /// </returns>
-        virtual public System.Collections.IEnumerator MatchingRuleUseNames
+        virtual System.Collections.IEnumerator MatchingRuleUseNames
         {
             get
             {
@@ -237,12 +250,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns an enumeration of name form names.
         ///
         /// </summary>
         /// <returns> An enumeration of name form names.
         /// </returns>
-        virtual public System.Collections.IEnumerator NameFormNames
+        virtual System.Collections.IEnumerator NameFormNames
         {
             get
             {
@@ -252,12 +266,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns an enumeration of object class names.
         ///
         /// </summary>
         /// <returns> An enumeration of object class names.
         /// </returns>
-        virtual public System.Collections.IEnumerator ObjectClassNames
+        virtual System.Collections.IEnumerator ObjectClassNames
         {
             get
             {

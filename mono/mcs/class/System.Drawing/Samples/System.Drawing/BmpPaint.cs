@@ -38,7 +38,7 @@ namespace MonoSamples.System.Drawing
 {
     public class BmpPaint
     {
-        static public void CreateBitmap(string filename, ImageFormat imgFmt)
+        public static void CreateBitmap(string filename, ImageFormat imgFmt)
         {
             Bitmap bmp = new Bitmap(100, 100, PixelFormat.Format24bppRgb);
             Console.WriteLine("Bitmap created OK {0}", bmp != null);
@@ -62,7 +62,7 @@ namespace MonoSamples.System.Drawing
             Console.WriteLine("Bitmap stored to " + filename);
         }
 
-        static public void PaintOnBitmap(string filename, string newname, ImageFormat imgFmt)
+        public static void PaintOnBitmap(string filename, string newname, ImageFormat imgFmt)
         {
             Bitmap bmp = new Bitmap(filename);
             Console.WriteLine("Bitmap read OK {0}", bmp != null);
@@ -85,7 +85,7 @@ namespace MonoSamples.System.Drawing
             Console.WriteLine("Modified Bitmap stored to " + newname);
         }
 
-        static public void Main(string[] args)
+        public static void Main(string[] args)
         {
             CreateBitmap("BmpPaint.bmp", ImageFormat.Bmp);
             PaintOnBitmap("BmpPaint.bmp", "Bmp-Painted.bmp", ImageFormat.Bmp);

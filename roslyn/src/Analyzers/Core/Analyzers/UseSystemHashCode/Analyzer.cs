@@ -12,11 +12,12 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.UseSystemHashCode
 {
+    partial
     /// <summary>
     /// Helper code to support both "UseSystemHashCodeCodeFixProvider" and
     /// <see cref="UseSystemHashCodeDiagnosticAnalyzer"/>.
     /// </summary>
-    internal partial struct Analyzer
+    internal struct Analyzer
     {
         private readonly Compilation _compilation;
         private readonly IMethodSymbol _objectGetHashCodeMethod;

@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
         ),
         Shared
     ]
-    internal partial class CSharpInlineTemporaryCodeRefactoringProvider
+    partial internal class CSharpInlineTemporaryCodeRefactoringProvider
         : AbstractInlineTemporaryCodeRefactoringProvider<
             IdentifierNameSyntax,
             VariableDeclaratorSyntax

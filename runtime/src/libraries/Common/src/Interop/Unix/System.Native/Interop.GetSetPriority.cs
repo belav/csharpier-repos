@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Reflection;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal enum PriorityWhich : int
         {
@@ -21,14 +21,14 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetPriority",
             SetLastError = true
         )]
-        private static partial int GetPriority(PriorityWhich which, int who);
+        partial private static int GetPriority(PriorityWhich which, int who);
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_SetPriority",
             SetLastError = true
         )]
-        internal static partial int SetPriority(PriorityWhich which, int who, int nice);
+        partial internal static int SetPriority(PriorityWhich which, int who, int nice);
 
         /// <summary>
         /// Wrapper around getpriority since getpriority can return from -20 to 20; therefore,

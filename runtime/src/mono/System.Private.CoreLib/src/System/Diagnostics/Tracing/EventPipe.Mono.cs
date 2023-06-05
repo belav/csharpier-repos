@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Diagnostics.Tracing
 {
-    internal static partial class EventPipeInternal
+    partial internal static class EventPipeInternal
     {
 #if FEATURE_PERFTRACING
         // These ICalls are used by the configuration APIs to interact with EventPipe.

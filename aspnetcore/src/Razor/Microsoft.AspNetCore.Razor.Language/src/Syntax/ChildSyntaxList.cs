@@ -518,7 +518,7 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
         public void Dispose() { }
     }
 
-    public readonly partial struct Reversed : IEnumerable<SyntaxNode>, IEquatable<Reversed>
+    partial public readonly struct Reversed : IEnumerable<SyntaxNode>, IEquatable<Reversed>
     {
         private readonly SyntaxNode _node;
         private readonly int _count;

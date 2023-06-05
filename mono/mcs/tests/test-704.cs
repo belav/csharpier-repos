@@ -10,7 +10,7 @@ namespace NObjective
         static volatile bool ProcessExiting = false;
 
         [DllImport("libc.dylib")]
-        public extern static void printf(string format, __arglist);
+        public static extern void printf(string format, __arglist);
 
         private static void ArglistMethod(__arglist)
         {
@@ -20,7 +20,7 @@ namespace NObjective
                 Console.WriteLine(TypedReference.ToObject(iter.GetNextArg()));
         }
 
-        unsafe public static void Main(string[] args)
+        public static unsafe void Main(string[] args)
         {
             ArglistMethod(__arglist(1, 2, 3));
         }

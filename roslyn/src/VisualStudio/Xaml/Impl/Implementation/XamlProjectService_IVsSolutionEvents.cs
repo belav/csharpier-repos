@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Xaml
 {
-    internal partial class XamlProjectService : IVsSolutionEvents
+    partial internal class XamlProjectService : IVsSolutionEvents
     {
         int IVsSolutionEvents.OnAfterLoadProject(
             IVsHierarchy pStubHierarchy,

@@ -9,7 +9,7 @@ namespace System.Xml.Schema
 
     using System.Threading.Tasks;
 
-    internal sealed partial class Parser
+    partial internal sealed class Parser
     {
         public async Task<SchemaType> ParseAsync(XmlReader reader, string targetNamespace)
         {

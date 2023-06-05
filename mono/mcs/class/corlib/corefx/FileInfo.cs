@@ -4,7 +4,7 @@ using System.Security.AccessControl;
 
 namespace System.IO
 {
-    public partial class FileInfo
+    partial public class FileInfo
     {
         private FileInfo(SerializationInfo info, StreamingContext context)
             : base(info, context) { }

@@ -24,10 +24,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
 {
+    partial
     /// <summary>
     /// Interaction logic for DocumentOutlineControl.xaml
     /// </summary>
-    internal partial class DocumentOutlineControl : UserControl, IVsCodeWindowEvents, IDisposable
+    internal class DocumentOutlineControl : UserControl, IVsCodeWindowEvents, IDisposable
     {
         private readonly ILanguageServiceBroker2 _languageServiceBroker;
         private readonly IThreadingContext _threadingContext;

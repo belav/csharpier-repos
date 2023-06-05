@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class IFindReferencesResultExtensions
+    partial internal static class IFindReferencesResultExtensions
     {
         public static IEnumerable<Location> GetDefinitionLocationsToShow(this ISymbol definition)
         {

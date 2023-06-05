@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Pkcs.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct EssCertId
+    partial internal struct EssCertId
     {
         internal ReadOnlyMemory<byte> Hash;
         internal System.Security.Cryptography.Pkcs.Asn1.CadesIssuerSerial? IssuerSerial;

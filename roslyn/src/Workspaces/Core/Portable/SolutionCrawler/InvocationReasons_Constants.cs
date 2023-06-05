@@ -8,7 +8,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal readonly partial struct InvocationReasons
+    partial internal readonly struct InvocationReasons
     {
         public static readonly InvocationReasons DocumentAdded =
             new(

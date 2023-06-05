@@ -16,11 +16,12 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
+partial
 /// <summary>
 /// This class handles serialization of objects
 /// to XML using <see cref="XmlSerializer"/>
 /// </summary>
-public partial class XmlSerializerOutputFormatter : TextOutputFormatter
+public class XmlSerializerOutputFormatter : TextOutputFormatter
 {
     private readonly ConcurrentDictionary<Type, object> _serializerCache =
         new ConcurrentDictionary<Type, object>();
@@ -327,7 +328,7 @@ public partial class XmlSerializerOutputFormatter : TextOutputFormatter
         return (XmlSerializer)serializer!;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -336,7 +337,7 @@ public partial class XmlSerializerOutputFormatter : TextOutputFormatter
             EventName = "BufferingAsyncEnumerable",
             SkipEnabledCheck = true
         )]
-        private static partial void BufferingAsyncEnumerable(ILogger logger, string type);
+        partial private static void BufferingAsyncEnumerable(ILogger logger, string type);
 
         public static void BufferingAsyncEnumerable(ILogger logger, object asyncEnumerable)
         {
@@ -352,7 +353,7 @@ public partial class XmlSerializerOutputFormatter : TextOutputFormatter
             "An error occurred while trying to create an XmlSerializer for the type '{Type}'.",
             EventName = "FailedToCreateXmlSerializer"
         )]
-        public static partial void FailedToCreateXmlSerializer(
+        partial public static void FailedToCreateXmlSerializer(
             ILogger logger,
             string type,
             Exception exception

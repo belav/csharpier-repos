@@ -15,9 +15,9 @@ using Microsoft.Win32.SafeHandles;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography.X509Certificates;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    public static partial class crypt32
+    partial public static class crypt32
     {
         public static unsafe string CertGetNameString(
             SafeCertContextHandle certContext,

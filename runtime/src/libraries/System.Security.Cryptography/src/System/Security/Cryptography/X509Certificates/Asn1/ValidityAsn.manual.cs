@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography.X509Certificates.Asn1
 {
-    internal partial struct ValidityAsn
+    partial internal struct ValidityAsn
     {
         public ValidityAsn(DateTimeOffset notBefore, DateTimeOffset notAfter)
         {

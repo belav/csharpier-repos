@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     // Starting with 15.3 the editor took a dependency on JoinableTaskContext
     // in Text.Logic and IntelliSense layers as an editor host provided service.
     [Export]
-    internal partial class TestExportJoinableTaskContext
+    partial internal class TestExportJoinableTaskContext
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

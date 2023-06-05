@@ -8,9 +8,9 @@ using static System.Linq.Utilities;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        static partial void CreateSelectIPartitionIterator<TResult, TSource>(
+        partial static void CreateSelectIPartitionIterator<TResult, TSource>(
             Func<TSource, TResult> selector,
             IPartition<TSource> partition,
             ref IEnumerable<TResult>? result
@@ -22,7 +22,7 @@ namespace System.Linq
                     : new SelectIPartitionIterator<TSource, TResult>(partition, selector);
         }
 
-        private sealed partial class SelectEnumerableIterator<TSource, TResult>
+        partial private sealed class SelectEnumerableIterator<TSource, TResult>
             : IIListProvider<TResult>
         {
             public TResult[] ToArray()
@@ -74,7 +74,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class SelectArrayIterator<TSource, TResult> : IPartition<TResult>
+        partial private sealed class SelectArrayIterator<TSource, TResult> : IPartition<TResult>
         {
             public TResult[] ToArray()
             {
@@ -177,7 +177,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class SelectRangeIterator<TResult>
+        partial private sealed class SelectRangeIterator<TResult>
             : Iterator<TResult>,
                 IPartition<TResult>
         {
@@ -311,7 +311,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class SelectListIterator<TSource, TResult> : IPartition<TResult>
+        partial private sealed class SelectListIterator<TSource, TResult> : IPartition<TResult>
         {
             public TResult[] ToArray()
             {
@@ -420,7 +420,7 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class SelectIListIterator<TSource, TResult> : IPartition<TResult>
+        partial private sealed class SelectIListIterator<TSource, TResult> : IPartition<TResult>
         {
             public TResult[] ToArray()
             {

@@ -7,7 +7,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial class ProjectDependencyGraph
+    partial public class ProjectDependencyGraph
     {
         internal ProjectDependencyGraph WithProjectRemoved(ProjectId projectId)
         {

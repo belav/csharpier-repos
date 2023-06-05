@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Rename
 {
-    public static partial class Renamer
+    partial public static class Renamer
     {
         /// <summary>
         /// Individual action from RenameDocument APIs in <see cref="Renamer"/>. Represents

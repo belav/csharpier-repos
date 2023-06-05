@@ -13,7 +13,7 @@ namespace System
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial class Exception : ISerializable
+    partial public class Exception : ISerializable
     {
         private protected const string InnerExceptionPrefix = " ---> ";
 

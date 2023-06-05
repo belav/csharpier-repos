@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.TestHooks
 {
-    internal sealed partial class AsynchronousOperationListener
+    partial internal sealed class AsynchronousOperationListener
         : IAsynchronousOperationListener,
             IAsynchronousOperationWaiter
     {

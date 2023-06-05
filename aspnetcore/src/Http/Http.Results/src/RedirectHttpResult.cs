@@ -8,11 +8,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
+partial
 /// <summary>
 /// An <see cref="IResult"/> that returns a Found (302), Moved Permanently (301), Temporary Redirect (307),
 /// or Permanent Redirect (308) response with a Location header to the supplied URL.
 /// </summary>
-public sealed partial class RedirectHttpResult : IResult
+public sealed class RedirectHttpResult : IResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectHttpResult"/> class with the values
@@ -132,7 +133,7 @@ public sealed partial class RedirectHttpResult : IResult
         return Task.CompletedTask;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -140,6 +141,6 @@ public sealed partial class RedirectHttpResult : IResult
             "Executing RedirectResult, redirecting to {Destination}.",
             EventName = "RedirectResultExecuting"
         )]
-        public static partial void RedirectResultExecuting(ILogger logger, string destination);
+        partial public static void RedirectResultExecuting(ILogger logger, string destination);
     }
 }

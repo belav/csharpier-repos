@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class CatalogExportProvider
+    partial public class CatalogExportProvider
     {
         internal sealed class ScopeFactoryExport : FactoryExport
         {

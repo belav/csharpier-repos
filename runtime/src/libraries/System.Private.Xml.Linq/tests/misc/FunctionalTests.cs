@@ -9,7 +9,7 @@ using Xunit;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class MiscFunctionalTests : TestModule
+    partial public class MiscFunctionalTests : TestModule
     {
         // Type is CoreXml.Test.XLinq.FunctionalTests
         // Test Module
@@ -36,7 +36,7 @@ namespace CoreXml.Test.XLinq
             Assert.False(module.HasFailures, module.GetFailuresInfo());
         }
 
-        public partial class MiscTests : XLinqTestCase
+        partial public class MiscTests : XLinqTestCase
         {
             // Type is CoreXml.Test.XLinq.FunctionalTests+MiscTests
             // Test Case
@@ -94,7 +94,7 @@ namespace CoreXml.Test.XLinq
                 );
             }
 
-            public partial class PrefixImprovements : XLinqTestCase
+            partial public class PrefixImprovements : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+MiscTests+PrefixImprovements
                 // Test Case
@@ -214,7 +214,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class XNameAPI : XLinqTestCase
+            partial public class XNameAPI : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+MiscTests+XNameAPI
                 // Test Case

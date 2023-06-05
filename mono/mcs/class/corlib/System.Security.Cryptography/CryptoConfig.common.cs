@@ -33,7 +33,7 @@ using System.Collections.Generic;
 
 namespace System.Security.Cryptography
 {
-    public partial class CryptoConfig
+    partial public class CryptoConfig
     {
         static readonly object lockObject = new object();
         static Dictionary<string, Type> algorithms;

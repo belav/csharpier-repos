@@ -10,10 +10,11 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// A <see cref="IActionResultExecutor{VirtualFileResult}"/> for <see cref="VirtualFileResult"/>.
 /// </summary>
-public partial class VirtualFileResultExecutor
+public class VirtualFileResultExecutor
     : FileResultExecutorBase,
         IActionResultExecutor<VirtualFileResult>
 {
@@ -178,7 +179,7 @@ public partial class VirtualFileResultExecutor
         return fileInfo.CreateReadStream();
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void ExecutingFileResult(
             ILogger logger,
@@ -200,7 +201,7 @@ public partial class VirtualFileResultExecutor
             EventName = "ExecutingFileResult",
             SkipEnabledCheck = true
         )]
-        private static partial void ExecutingFileResult(
+        partial private static void ExecutingFileResult(
             ILogger logger,
             string fileResultType,
             string fileDownloadPath,
@@ -213,6 +214,6 @@ public partial class VirtualFileResultExecutor
             "Writing the requested range of bytes to the body...",
             EventName = "WritingRangeToBody"
         )]
-        public static partial void WritingRangeToBody(ILogger logger);
+        partial public static void WritingRangeToBody(ILogger logger);
     }
 }

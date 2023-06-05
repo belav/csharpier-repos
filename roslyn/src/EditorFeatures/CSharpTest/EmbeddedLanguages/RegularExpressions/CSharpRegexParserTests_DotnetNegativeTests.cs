@@ -9,9 +9,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpressions
 {
+    partial
     // These tests came from tests found at:
     // https://github.com/dotnet/corefx/blob/main/src/System.Text.RegularExpressions/tests/
-    public partial class CSharpRegexParserTests
+    public class CSharpRegexParserTests
     {
         [Fact]
         public void NegativeTest0()

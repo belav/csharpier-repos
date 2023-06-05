@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Text
 {
-    internal ref partial struct ValueStringBuilder
+    ref partial internal struct ValueStringBuilder
     {
         private char[]? _arrayToReturnToPool;
         private Span<char> _chars;

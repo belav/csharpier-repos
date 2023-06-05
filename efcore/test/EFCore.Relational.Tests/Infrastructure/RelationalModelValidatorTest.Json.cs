@@ -3,7 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-public partial class RelationalModelValidatorTest
+partial public class RelationalModelValidatorTest
 {
     [ConditionalFact]
     public void Throw_when_non_json_entity_is_the_owner_of_json_entity_ref_ref()

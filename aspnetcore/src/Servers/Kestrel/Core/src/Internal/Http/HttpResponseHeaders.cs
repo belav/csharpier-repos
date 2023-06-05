@@ -13,7 +13,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-internal sealed partial class HttpResponseHeaders : HttpHeaders
+partial internal sealed class HttpResponseHeaders : HttpHeaders
 {
     // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
     private static ReadOnlySpan<byte> CrLf => "\r\n"u8;
@@ -151,7 +151,7 @@ internal sealed partial class HttpResponseHeaders : HttpHeaders
         return true;
     }
 
-    public partial struct Enumerator : IEnumerator<KeyValuePair<string, StringValues>>
+    partial public struct Enumerator : IEnumerator<KeyValuePair<string, StringValues>>
     {
         private readonly HttpResponseHeaders _collection;
         private long _currentBits;

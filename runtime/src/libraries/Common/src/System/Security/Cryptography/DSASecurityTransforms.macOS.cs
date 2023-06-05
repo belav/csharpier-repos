@@ -11,9 +11,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class DSAImplementation
+    partial internal static class DSAImplementation
     {
-        public sealed partial class DSASecurityTransforms : DSA
+        partial public sealed class DSASecurityTransforms : DSA
         {
             public override DSAParameters ExportParameters(bool includePrivateParameters)
             {

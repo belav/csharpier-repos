@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.PatternMatching
 {
-    internal partial class PatternMatcher
+    partial internal class PatternMatcher
     {
         private readonly struct CamelCaseResult
         {

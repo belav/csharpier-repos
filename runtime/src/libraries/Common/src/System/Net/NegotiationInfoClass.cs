@@ -3,9 +3,10 @@
 
 namespace System.Net
 {
+    partial
     // This class is used to determine if NTLM or
     // Kerberos are used in the context of a Negotiate handshake
-    internal static partial class NegotiationInfoClass
+    internal static class NegotiationInfoClass
     {
         internal const string NTLM = "NTLM";
         internal const string Kerberos = "Kerberos";

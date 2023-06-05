@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
-    public partial class NtAuthTests : IClassFixture<NtAuthServers>
+    partial public class NtAuthTests : IClassFixture<NtAuthServers>
     {
         internal const string NtlmAuthHeader = "WWW-Authenticate: NTLM";
         internal const string NegotiateAuthHeader = "WWW-Authenticate: Negotiate";

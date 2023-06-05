@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
     [ExportWorkspaceService(typeof(ISolutionCrawlerRegistrationService), ServiceLayer.Host), Shared]
-    internal partial class SolutionCrawlerRegistrationService : ISolutionCrawlerRegistrationService
+    partial internal class SolutionCrawlerRegistrationService : ISolutionCrawlerRegistrationService
     {
         private const string Default = "*";
 

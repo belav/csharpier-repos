@@ -10,7 +10,7 @@ using CryptProtectDataFlags = Interop.Crypt32.CryptProtectDataFlags;
 
 namespace System.Security.Cryptography
 {
-    public static partial class ProtectedData
+    partial public static class ProtectedData
     {
         private static readonly byte[] s_nonEmpty = new byte[1];
 

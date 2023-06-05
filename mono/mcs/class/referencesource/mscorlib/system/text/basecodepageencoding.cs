@@ -155,7 +155,7 @@ namespace System.Text
 
         // Initialize our global stuff
         [SecurityCritical]
-        unsafe static CodePageDataFileHeader* m_pCodePageFileHeader = (CodePageDataFileHeader*)
+        static unsafe CodePageDataFileHeader* m_pCodePageFileHeader = (CodePageDataFileHeader*)
             GlobalizationAssembly.GetGlobalizationResourceBytePtr(
                 typeof(CharUnicodeInfo).Assembly,
                 CODE_PAGE_DATA_FILE_NAME
@@ -164,7 +164,7 @@ namespace System.Text
         // Real variables
         [NonSerialized]
         [SecurityCritical]
-        unsafe protected CodePageHeader* pCodePage = null;
+        protected unsafe CodePageHeader* pCodePage = null;
 
         // Safe handle wrapper around section map view
         [System.Security.SecurityCritical] // auto-generated
@@ -339,7 +339,7 @@ namespace System.Text
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        protected unsafe virtual String GetMemorySectionName()
+        protected virtual unsafe String GetMemorySectionName()
         {
             int iUseCodePage = this.bFlagDataTable ? dataTableCodePage : CodePage;
 

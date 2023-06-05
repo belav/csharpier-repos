@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Microsoft.CodeAnalysis
 {
-    public sealed partial class DesktopAssemblyIdentityComparer : AssemblyIdentityComparer
+    partial public sealed class DesktopAssemblyIdentityComparer : AssemblyIdentityComparer
     {
         // Portability:
         //   If a reference or definition identity is strong, not retargetable, and portable (i.e. one of a few names hard-coded in Fusion)

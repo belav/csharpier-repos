@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Shell32
+    partial internal static class Shell32
     {
         internal const int COR_E_PLATFORMNOTSUPPORTED = unchecked((int)0x80131539);
 
@@ -16,7 +16,7 @@ internal static partial class Interop
             SetLastError = false,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int SHGetKnownFolderPath(
+        partial internal static int SHGetKnownFolderPath(
             in Guid rfid,
             uint dwFlags,
             IntPtr hToken,

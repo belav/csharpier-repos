@@ -14,9 +14,10 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 {
+    partial
     // Code for the CodeFixProvider ("Fixing") portion of the feature.
 
-    internal partial class UseExpressionBodyForLambdaCodeStyleProvider
+    internal class UseExpressionBodyForLambdaCodeStyleProvider
     {
         protected override Task<ImmutableArray<CodeAction>> ComputeCodeActionsAsync(
             Document document,

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EntityFrameworkCoreSample.Migrations;
 
-public partial class AddDataProtectionKeys : Migration
+partial public class AddDataProtectionKeys : Migration
 {
     protected override void Up(MigrationBuilder migrationBuilder)
     {

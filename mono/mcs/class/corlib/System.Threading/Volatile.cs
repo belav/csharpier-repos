@@ -206,28 +206,28 @@ namespace System.Threading
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public extern static long Read(ref long location);
+        public static extern long Read(ref long location);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [CLSCompliant(false)]
-        public extern static ulong Read(ref ulong location);
+        public static extern ulong Read(ref ulong location);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public extern static double Read(ref double location);
+        public static extern double Read(ref double location);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public extern static void Write(ref long location, long value);
+        public static extern void Write(ref long location, long value);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [CLSCompliant(false)]
-        public extern static void Write(ref ulong location, ulong value);
+        public static extern void Write(ref ulong location, ulong value);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public extern static void Write(ref double location, double value);
+        public static extern void Write(ref double location, double value);
     }
 }

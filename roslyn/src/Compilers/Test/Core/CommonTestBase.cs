@@ -61,12 +61,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             new() { Status = VerificationStatus.PassesOrFailFast };
     }
 
+    partial
 #nullable disable
 
     /// <summary>
     /// Base class for all language specific tests.
     /// </summary>
-    public abstract partial class CommonTestBase : TestBase
+    public abstract class CommonTestBase : TestBase
     {
         #region Emit
 

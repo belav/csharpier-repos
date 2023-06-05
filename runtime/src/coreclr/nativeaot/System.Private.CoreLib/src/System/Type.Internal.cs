@@ -8,13 +8,14 @@ using Internal.Runtime.Augments;
 
 namespace System
 {
+    partial
     //
     // This file contains methods on Type that are internal to the framework.
     //
     // Before adding new entries to this, ask yourself: is it ever referenced by System.Private.CoreLib?
     // If not, don't put it here. Put it on RuntimeTypeInfo instead.
     //
-    public abstract partial class Type
+    public abstract class Type
     {
         internal EETypePtr GetEEType()
         {

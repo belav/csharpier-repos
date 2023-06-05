@@ -13,14 +13,14 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial interface IOperation
+    partial public interface IOperation
     {
         /// <summary>
         /// Implements a struct-based collection of <see cref="Operation"/> nodes. This collection is ordered, but
         /// random access into the collection is not provided.
         /// </summary>
         [NonDefaultable]
-        public readonly partial struct OperationList : IReadOnlyCollection<IOperation>
+        partial public readonly struct OperationList : IReadOnlyCollection<IOperation>
         {
             private readonly Operation _operation;
 

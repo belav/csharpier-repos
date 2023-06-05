@@ -12,9 +12,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractOverrideCompletionProvider
+    partial internal abstract class AbstractOverrideCompletionProvider
     {
-        private partial class ItemGetter
+        partial private class ItemGetter
         {
             private readonly CancellationToken _cancellationToken;
             private readonly int _position;

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal sealed partial class DisconnectListener
+partial internal sealed class DisconnectListener
 {
     private readonly ConcurrentDictionary<
         ulong,

@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 
 namespace ABIStress
 {
-    internal partial class Program
+    partial internal class Program
     {
         private static List<Callee> s_tailCallees;
 

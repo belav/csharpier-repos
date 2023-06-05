@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.SpanTests
 {
-    public static partial class ReadOnlySpanTests
+    partial public static class ReadOnlySpanTests
     {
         [Fact]
         public static void ZeroLengthIndexOf_Byte()

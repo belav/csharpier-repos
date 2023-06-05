@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 {
-    internal partial class ModifiersOrganizer
+    partial internal class ModifiersOrganizer
     {
         private class Comparer : IComparer<SyntaxToken>
         {

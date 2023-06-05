@@ -19,7 +19,7 @@ namespace Castle.Components.DictionaryAdapter
     using System.ComponentModel;
     using System.Linq;
 
-    public abstract partial class DictionaryAdapterBase
+    partial public abstract class DictionaryAdapterBase
     {
         [ThreadStatic]
         private static TrackPropertyChangeScope readOnlyTrackingScope;

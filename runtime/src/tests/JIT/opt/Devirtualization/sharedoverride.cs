@@ -18,7 +18,7 @@ public class Base
 
 public class Derived<T> : Base
 {
-    public override sealed int Foo(int x)
+    public sealed override int Foo(int x)
     {
         if (typeof(T) == typeof(string))
         {

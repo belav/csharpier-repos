@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
 {
-    internal sealed partial class MemberSignatureParser
+    partial internal sealed class MemberSignatureParser
     {
         internal static readonly StringComparer StringComparer = StringComparer.OrdinalIgnoreCase;
         internal static readonly ImmutableHashSet<string> Keywords = GetKeywords(StringComparer);

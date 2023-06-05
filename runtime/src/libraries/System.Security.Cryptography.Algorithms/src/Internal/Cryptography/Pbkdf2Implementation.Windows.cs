@@ -14,7 +14,7 @@ using NTSTATUS = Interop.BCrypt.NTSTATUS;
 
 namespace Internal.Cryptography
 {
-    internal static partial class Pbkdf2Implementation
+    partial internal static class Pbkdf2Implementation
     {
         // For Windows 7 we will use BCryptDeriveKeyPBKDF2. For Windows 8+ (seen as version 6.2.0) we will
         // use BCryptKeyDerivation since it has better performance.

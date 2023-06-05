@@ -11,7 +11,7 @@ using System.Text;
 
 namespace System
 {
-    internal static partial class SR
+    partial internal static class SR
     {
         internal static string GetString(string value)
         {
@@ -27,7 +27,7 @@ namespace System
 
 namespace System.Data.Common
 {
-    internal static partial class ADP
+    partial internal static class ADP
     {
         // The class ADP defines the exceptions that are specific to the Adapters.f
         // The class contains functions that take the proper informational variables and then construct

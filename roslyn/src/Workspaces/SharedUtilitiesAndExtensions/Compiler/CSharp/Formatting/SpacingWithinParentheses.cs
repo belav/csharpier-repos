@@ -15,7 +15,7 @@ internal enum SpacePlacementWithinParentheses
     ControlFlowStatements = 1 << 2,
 }
 
-internal static partial class Extensions
+partial internal static class Extensions
 {
     public static SpacePlacementWithinParentheses ToSpacingWithinParentheses(
         this SpacePlacement placement

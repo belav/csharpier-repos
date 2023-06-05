@@ -7,7 +7,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class ECDsaWrapper : ECDsa
+    partial internal sealed class ECDsaWrapper : ECDsa
     {
         private readonly ECDsa _wrapped;
 

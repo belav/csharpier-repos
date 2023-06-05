@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.Win32.SafeHandles
 {
-    public abstract partial class SafeNCryptHandle : SafeHandleZeroOrMinusOneIsInvalid
+    partial public abstract class SafeNCryptHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         [SupportedOSPlatform("windows")]
         protected SafeNCryptHandle()
@@ -30,7 +30,7 @@ namespace Microsoft.Win32.SafeHandles
         protected abstract bool ReleaseNativeHandle();
     }
 
-    public sealed partial class SafeNCryptKeyHandle : SafeNCryptHandle
+    partial public sealed class SafeNCryptKeyHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
         public SafeNCryptKeyHandle()
@@ -47,7 +47,7 @@ namespace Microsoft.Win32.SafeHandles
         protected override bool ReleaseNativeHandle() => false;
     }
 
-    public sealed partial class SafeNCryptProviderHandle : SafeNCryptHandle
+    partial public sealed class SafeNCryptProviderHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
         public SafeNCryptProviderHandle()
@@ -58,7 +58,7 @@ namespace Microsoft.Win32.SafeHandles
         protected override bool ReleaseNativeHandle() => false;
     }
 
-    public sealed partial class SafeNCryptSecretHandle : SafeNCryptHandle
+    partial public sealed class SafeNCryptSecretHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
         public SafeNCryptSecretHandle()
@@ -72,7 +72,7 @@ namespace Microsoft.Win32.SafeHandles
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class AesCng : Aes
+    partial public sealed class AesCng : Aes
     {
         [SupportedOSPlatform("windows")]
         public AesCng()
@@ -107,7 +107,7 @@ namespace System.Security.Cryptography
         public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV) => null!;
     }
 
-    public sealed partial class CngKey : System.IDisposable
+    partial public sealed class CngKey : System.IDisposable
     {
         internal CngKey() { }
 
@@ -226,7 +226,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class DSACng : DSA
+    partial public sealed class DSACng : DSA
     {
         [SupportedOSPlatform("windows")]
         public DSACng()
@@ -257,7 +257,7 @@ namespace System.Security.Cryptography
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) => false;
     }
 
-    public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
+    partial public sealed class ECDiffieHellmanCng : ECDiffieHellman
     {
         [SupportedOSPlatform("windows")]
         public ECDiffieHellmanCng()
@@ -347,7 +347,7 @@ namespace System.Security.Cryptography
         public override ECDiffieHellmanPublicKey PublicKey => null!;
     }
 
-    public sealed partial class ECDiffieHellmanCngPublicKey : ECDiffieHellmanPublicKey
+    partial public sealed class ECDiffieHellmanCngPublicKey : ECDiffieHellmanPublicKey
     {
         internal ECDiffieHellmanCngPublicKey() { }
 
@@ -387,7 +387,7 @@ namespace System.Security.Cryptography
         }
     }
 
-    public sealed partial class ECDsaCng : ECDsa
+    partial public sealed class ECDsaCng : ECDsa
     {
         [SupportedOSPlatform("windows")]
         public ECDsaCng()
@@ -451,7 +451,7 @@ namespace System.Security.Cryptography
         public override bool VerifyHash(byte[] hash, byte[] signature) => false;
     }
 
-    public sealed partial class RSACng : RSA
+    partial public sealed class RSACng : RSA
     {
         [SupportedOSPlatform("windows")]
         public RSACng()
@@ -478,7 +478,7 @@ namespace System.Security.Cryptography
         public override void ImportParameters(RSAParameters parameters) { }
     }
 
-    public sealed partial class TripleDESCng : TripleDES
+    partial public sealed class TripleDESCng : TripleDES
     {
         [SupportedOSPlatform("windows")]
         public TripleDESCng()

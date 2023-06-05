@@ -10,8 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
     using Microsoft.CodeAnalysis.Syntax.InternalSyntax;
 
+    partial
 #nullable enable
-    internal partial class CSharpSyntaxRewriter : CSharpSyntaxVisitor<CSharpSyntaxNode>
+    internal class CSharpSyntaxRewriter : CSharpSyntaxVisitor<CSharpSyntaxNode>
 #nullable disable
     {
         protected readonly bool VisitIntoStructuredTrivia;

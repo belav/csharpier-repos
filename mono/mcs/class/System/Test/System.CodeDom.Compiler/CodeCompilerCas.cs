@@ -249,7 +249,7 @@ namespace MonoCasTests.System.CodeDom.Compiler
             return GetResponseFileCmdArgs(options, cmdArgs);
         }
 
-        static public string _JoinStringArray(string[] sa, string separator)
+        public static string _JoinStringArray(string[] sa, string separator)
         {
             return CodeCompiler.JoinStringArray(sa, separator);
         }

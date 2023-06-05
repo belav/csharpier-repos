@@ -9,7 +9,7 @@ using Xunit;
 
 namespace XPathTests.Common
 {
-    public static partial class Utils
+    partial public static class Utils
     {
         private static readonly ICreateNavigator s_xmlDocumentNavigatorCreator =
             new CreateNavigatorFromXmlDocument();

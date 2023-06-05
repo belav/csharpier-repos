@@ -16,7 +16,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
 {
-    internal sealed partial class EditAndContinueTest : IDisposable
+    partial internal sealed class EditAndContinueTest : IDisposable
     {
         private readonly CSharpCompilationOptions? _options;
         private readonly TargetFramework _targetFramework;

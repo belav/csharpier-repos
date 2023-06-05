@@ -29,7 +29,7 @@ using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
-    public abstract partial class AbstractCodeActionTest : AbstractCodeActionOrUserDiagnosticTest
+    partial public abstract class AbstractCodeActionTest : AbstractCodeActionOrUserDiagnosticTest
     {
         protected abstract CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,

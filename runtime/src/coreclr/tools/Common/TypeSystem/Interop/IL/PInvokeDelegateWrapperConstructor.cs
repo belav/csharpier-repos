@@ -6,10 +6,11 @@ using Internal.IL.Stubs;
 
 namespace Internal.TypeSystem.Interop
 {
+    partial
     /// <summary>
     /// Constructor for PInvokeDelegateWrapper which calls into the base class constructor
     /// </summary>
-    public partial class PInvokeDelegateWrapperConstructor : ILStubMethod
+    public class PInvokeDelegateWrapperConstructor : ILStubMethod
     {
         public PInvokeDelegateWrapperConstructor(PInvokeDelegateWrapper owningType)
         {

@@ -6,10 +6,11 @@ using System.Collections.Generic;
 
 namespace Internal.TypeSystem
 {
+    partial
     /// <summary>
     /// Base type for all type system exceptions.
     /// </summary>
-    public abstract partial class TypeSystemException : Exception
+    public abstract class TypeSystemException : Exception
     {
         private string[] _arguments;
 

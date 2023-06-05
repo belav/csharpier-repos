@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.WebView.Services;
 
-internal sealed partial class WebViewNavigationManager : NavigationManager
+partial internal sealed class WebViewNavigationManager : NavigationManager
 {
     private readonly ILogger _logger;
     private IpcSender _ipcSender;
@@ -106,7 +106,7 @@ internal sealed partial class WebViewNavigationManager : NavigationManager
         _ipcSender.SetHasLocationChangingListeners(value);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -114,7 +114,7 @@ internal sealed partial class WebViewNavigationManager : NavigationManager
             "Navigation canceled when changing the location to {Uri}",
             EventName = "NavigationCanceled"
         )]
-        public static partial void NavigationCanceled(ILogger logger, string uri);
+        partial public static void NavigationCanceled(ILogger logger, string uri);
 
         [LoggerMessage(
             2,
@@ -122,7 +122,7 @@ internal sealed partial class WebViewNavigationManager : NavigationManager
             "Navigation failed when changing the location to {Uri}",
             EventName = "NavigationFailed"
         )]
-        public static partial void NavigationFailed(
+        partial public static void NavigationFailed(
             ILogger logger,
             string uri,
             Exception exception

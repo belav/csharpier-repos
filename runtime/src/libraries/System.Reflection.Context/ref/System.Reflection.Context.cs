@@ -6,7 +6,7 @@
 
 namespace System.Reflection.Context
 {
-    public abstract partial class CustomReflectionContext : System.Reflection.ReflectionContext
+    partial public abstract class CustomReflectionContext : System.Reflection.ReflectionContext
     {
         protected CustomReflectionContext() { }
 

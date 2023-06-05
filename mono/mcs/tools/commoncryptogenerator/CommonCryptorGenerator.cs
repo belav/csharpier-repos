@@ -14,7 +14,7 @@ namespace Xamarin
 {
     public static class CommonCryptor
     {
-        static public void Generate(
+        public static void Generate(
             string namespaceName,
             string typeName,
             string baseTypeName,

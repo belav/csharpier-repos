@@ -424,19 +424,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase
+            public static bool PublicStaticPropertyOnBase
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static protected bool ProtectedStaticPropertyOnBase { get; set; }
-            static private bool PrivateStaticPropertyOnBase { get; set; }
+            protected static bool ProtectedStaticPropertyOnBase { get; set; }
+            private static bool PrivateStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -533,19 +533,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty
+            public static bool PublicStaticProperty
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static protected bool ProtectedStaticProperty { get; set; }
-            static private bool PrivateStaticProperty { get; set; }
+            protected static bool ProtectedStaticProperty { get; set; }
+            private static bool PrivateStaticProperty { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -621,19 +621,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             public static void HideStaticMethod() { }
 
-            static public bool PublicStaticPropertyOnBase { get; set; }
+            public static bool PublicStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase
+            protected static bool ProtectedStaticPropertyOnBase
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static private bool PrivateStaticPropertyOnBase { get; set; }
-            static public bool HideStaticProperty { get; set; }
+            private static bool PrivateStaticPropertyOnBase { get; set; }
+            public static bool HideStaticProperty { get; set; }
 
             public static event EventHandler<EventArgs> PublicStaticEventOnBase;
 
@@ -720,11 +720,11 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             public static void HideStaticMethod() { }
 
-            static public bool PublicStaticProperty { get; set; }
+            public static bool PublicStaticProperty { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty
+            protected static bool ProtectedStaticProperty
             {
                 [Kept]
                 get;
@@ -734,14 +734,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty
+            private static bool PrivateStaticProperty
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static public bool HideStaticProperty { get; set; }
+            public static bool HideStaticProperty { get; set; }
 
             public static event EventHandler<EventArgs> PublicStaticEvent;
 
@@ -851,7 +851,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase
+            public static bool PublicStaticPropertyOnBase
             {
                 [Kept]
                 get;
@@ -861,18 +861,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase
+            protected static bool ProtectedStaticPropertyOnBase
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static private bool PrivateStaticPropertyOnBase { get; set; }
+            private static bool PrivateStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -1009,7 +1009,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty
+            public static bool PublicStaticProperty
             {
                 [Kept]
                 get;
@@ -1019,7 +1019,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty
+            protected static bool ProtectedStaticProperty
             {
                 [Kept]
                 get;
@@ -1029,7 +1029,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty
+            private static bool PrivateStaticProperty
             {
                 [Kept]
                 get;
@@ -1039,7 +1039,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -1102,17 +1102,17 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             private event EventHandler<EventArgs> PrivateEventOnBase;
 
             [Kept]
-            static public bool StaticPublicBaseField;
-            static protected bool StaticProtectedBaseField;
-            static private bool StaticPrivateBaseField;
+            public static bool StaticPublicBaseField;
+            protected static bool StaticProtectedBaseField;
+            private static bool StaticPrivateBaseField;
 
             [Kept]
-            static public bool HideStaticField;
+            public static bool HideStaticField;
 
-            static public bool PublicStaticPropertyOnBase { get; set; }
-            static protected bool ProtectedStaticPropertyOnBase { get; set; }
-            static private bool PrivateStaticPropertyOnBase { get; set; }
-            static public bool HideStaticProperty { get; set; }
+            public static bool PublicStaticPropertyOnBase { get; set; }
+            protected static bool ProtectedStaticPropertyOnBase { get; set; }
+            private static bool PrivateStaticPropertyOnBase { get; set; }
+            public static bool HideStaticProperty { get; set; }
 
             public static event EventHandler<EventArgs> PublicStaticEventOnBase;
             protected static event EventHandler<EventArgs> ProtectedStaticEventOnBase;
@@ -1148,20 +1148,20 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             [Kept]
-            static public bool StaticPublicField;
+            public static bool StaticPublicField;
 
             [Kept]
-            static public string StaticPublicStringField;
-            static protected bool StaticProtectedField;
-            static private bool StaticPrivateField;
+            public static string StaticPublicStringField;
+            protected static bool StaticProtectedField;
+            private static bool StaticPrivateField;
 
             [Kept]
-            static public bool HideStaticField;
+            public static bool HideStaticField;
 
-            static public bool PublicStaticProperty { get; set; }
-            static protected bool ProtectedStaticProperty { get; set; }
-            static private bool PrivateStaticProperty { get; set; }
-            static public bool HideStaticProperty { get; set; }
+            public static bool PublicStaticProperty { get; set; }
+            protected static bool ProtectedStaticProperty { get; set; }
+            private static bool PrivateStaticProperty { get; set; }
+            public static bool HideStaticProperty { get; set; }
 
             public static event EventHandler<EventArgs> PublicStaticEvent;
             protected static event EventHandler<EventArgs> ProtectedStaticEvent;
@@ -1195,17 +1195,17 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             protected event EventHandler<EventArgs> ProtectedEventOnBase;
             private event EventHandler<EventArgs> PrivateEventOnBase;
 
-            static public bool StaticPublicBaseField;
+            public static bool StaticPublicBaseField;
 
             [Kept]
-            static protected bool StaticProtectedBaseField;
-            static private bool StaticPrivateBaseField;
-            static public bool HideStaticField;
+            protected static bool StaticProtectedBaseField;
+            private static bool StaticPrivateBaseField;
+            public static bool HideStaticField;
 
-            static public bool PublicStaticPropertyOnBase { get; set; }
-            static protected bool ProtectedStaticPropertyOnBase { get; set; }
-            static private bool PrivateStaticPropertyOnBase { get; set; }
-            static public bool HideStaticProperty { get; set; }
+            public static bool PublicStaticPropertyOnBase { get; set; }
+            protected static bool ProtectedStaticPropertyOnBase { get; set; }
+            private static bool PrivateStaticPropertyOnBase { get; set; }
+            public static bool HideStaticProperty { get; set; }
 
             public static event EventHandler<EventArgs> PublicStaticEventOnBase;
             protected static event EventHandler<EventArgs> ProtectedStaticEventOnBase;
@@ -1255,27 +1255,27 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptBackingField]
             public event EventHandler<EventArgs> HideEvent;
 
-            static public bool StaticPublicField;
-            static public string StaticPublicStringField;
+            public static bool StaticPublicField;
+            public static string StaticPublicStringField;
 
             [Kept]
-            static protected bool StaticProtectedField;
+            protected static bool StaticProtectedField;
 
             [Kept]
-            static private bool StaticPrivateField;
-            static public bool HideStaticField;
+            private static bool StaticPrivateField;
+            public static bool HideStaticField;
 
             [KeptBackingField]
-            static public bool PublicStaticProperty { get; set; }
+            public static bool PublicStaticProperty { get; set; }
 
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty { get; set; }
+            protected static bool ProtectedStaticProperty { get; set; }
 
             [KeptBackingField]
-            static private bool PrivateStaticProperty { get; set; }
+            private static bool PrivateStaticProperty { get; set; }
 
             [KeptBackingField]
-            static public bool HideStaticProperty { get; set; }
+            public static bool HideStaticProperty { get; set; }
 
             [KeptBackingField]
             public static event EventHandler<EventArgs> PublicStaticEvent;
@@ -1323,19 +1323,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             private event EventHandler<EventArgs> PrivateEventOnBase;
 
             [Kept]
-            static public bool StaticPublicBaseField;
+            public static bool StaticPublicBaseField;
 
             [Kept]
-            static protected bool StaticProtectedBaseField;
-            static private bool StaticPrivateBaseField;
+            protected static bool StaticProtectedBaseField;
+            private static bool StaticPrivateBaseField;
 
             [Kept]
-            static public bool HideStaticField;
+            public static bool HideStaticField;
 
-            static public bool PublicStaticPropertyOnBase { get; set; }
-            static protected bool ProtectedStaticPropertyOnBase { get; set; }
-            static private bool PrivateStaticPropertyOnBase { get; set; }
-            static public bool HideStaticProperty { get; set; }
+            public static bool PublicStaticPropertyOnBase { get; set; }
+            protected static bool ProtectedStaticPropertyOnBase { get; set; }
+            private static bool PrivateStaticPropertyOnBase { get; set; }
+            public static bool HideStaticProperty { get; set; }
 
             public static event EventHandler<EventArgs> PublicStaticEventOnBase;
             protected static event EventHandler<EventArgs> ProtectedStaticEventOnBase;
@@ -1390,31 +1390,31 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             [Kept]
-            static public bool StaticPublicField;
+            public static bool StaticPublicField;
 
             [Kept]
-            static public string StaticPublicStringField;
+            public static string StaticPublicStringField;
 
             [Kept]
-            static protected bool StaticProtectedField;
+            protected static bool StaticProtectedField;
 
             [Kept]
-            static private bool StaticPrivateField;
+            private static bool StaticPrivateField;
 
             [Kept]
-            static public bool HideStaticField;
+            public static bool HideStaticField;
 
             [KeptBackingField]
-            static public bool PublicStaticProperty { get; set; }
+            public static bool PublicStaticProperty { get; set; }
 
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty { get; set; }
+            protected static bool ProtectedStaticProperty { get; set; }
 
             [KeptBackingField]
-            static private bool PrivateStaticProperty { get; set; }
+            private static bool PrivateStaticProperty { get; set; }
 
             [KeptBackingField]
-            static public bool HideStaticProperty { get; set; }
+            public static bool HideStaticProperty { get; set; }
 
             [KeptBackingField]
             public static event EventHandler<EventArgs> PublicStaticEvent;
@@ -1660,19 +1660,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase
+            public static bool PublicStaticPropertyOnBase
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static protected bool ProtectedStaticPropertyOnBase { get; set; }
-            static private bool PrivateStaticPropertyOnBase { get; set; }
+            protected static bool ProtectedStaticPropertyOnBase { get; set; }
+            private static bool PrivateStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -1743,19 +1743,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty
+            public static bool PublicStaticProperty
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static protected bool ProtectedStaticProperty { get; set; }
-            static private bool PrivateStaticProperty { get; set; }
+            protected static bool ProtectedStaticProperty { get; set; }
+            private static bool PrivateStaticProperty { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -1807,19 +1807,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             private bool PrivatePropertyOnBase { get; set; }
             public bool HideProperty { get; set; }
 
-            static public bool PublicStaticPropertyOnBase { get; set; }
+            public static bool PublicStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase
+            protected static bool ProtectedStaticPropertyOnBase
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static private bool PrivateStaticPropertyOnBase { get; set; }
-            static public bool HideStaticProperty { get; set; }
+            private static bool PrivateStaticPropertyOnBase { get; set; }
+            public static bool HideStaticProperty { get; set; }
         }
 
         [Kept]
@@ -1869,11 +1869,11 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             }
             public bool HideProperty { get; set; }
 
-            static public bool PublicStaticProperty { get; set; }
+            public static bool PublicStaticProperty { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty
+            protected static bool ProtectedStaticProperty
             {
                 [Kept]
                 get;
@@ -1883,14 +1883,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty
+            private static bool PrivateStaticProperty
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static public bool HideStaticProperty { get; set; }
+            public static bool HideStaticProperty { get; set; }
         }
 
         [Kept]
@@ -1974,7 +1974,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase
+            public static bool PublicStaticPropertyOnBase
             {
                 [Kept]
                 get;
@@ -1984,18 +1984,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase
+            protected static bool ProtectedStaticPropertyOnBase
             {
                 [Kept]
                 get;
                 [Kept]
                 set;
             }
-            static private bool PrivateStaticPropertyOnBase { get; set; }
+            private static bool PrivateStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -2086,7 +2086,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty
+            public static bool PublicStaticProperty
             {
                 [Kept]
                 get;
@@ -2096,7 +2096,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty
+            protected static bool ProtectedStaticProperty
             {
                 [Kept]
                 get;
@@ -2106,7 +2106,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty
+            private static bool PrivateStaticProperty
             {
                 [Kept]
                 get;
@@ -2116,7 +2116,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -2153,15 +2153,15 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static public event EventHandler<EventArgs> PublicStaticEventOnBase;
-            static protected event EventHandler<EventArgs> ProtectedStaticEventOnBase;
-            static private event EventHandler<EventArgs> PrivateStaticEventOnBase;
+            public static event EventHandler<EventArgs> PublicStaticEventOnBase;
+            protected static event EventHandler<EventArgs> ProtectedStaticEventOnBase;
+            private static event EventHandler<EventArgs> PrivateStaticEventOnBase;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static public event EventHandler<EventArgs> HideStaticEvent;
+            public static event EventHandler<EventArgs> HideStaticEvent;
         }
 
         [Kept]
@@ -2186,15 +2186,15 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static public event EventHandler<EventArgs> PublicStaticEvent;
-            static protected event EventHandler<EventArgs> ProtectedStaticEvent;
-            static private event EventHandler<EventArgs> PrivateStaticEvent;
+            public static event EventHandler<EventArgs> PublicStaticEvent;
+            protected static event EventHandler<EventArgs> ProtectedStaticEvent;
+            private static event EventHandler<EventArgs> PrivateStaticEvent;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static public event EventHandler<EventArgs> HideStaticEvent;
+            public static event EventHandler<EventArgs> HideStaticEvent;
         }
 
         [Kept]
@@ -2217,15 +2217,15 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             private event EventHandler<EventArgs> PrivateEventOnBase;
             public event EventHandler<EventArgs> HideEvent;
 
-            static public event EventHandler<EventArgs> PublicStaticEventOnBase;
+            public static event EventHandler<EventArgs> PublicStaticEventOnBase;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static protected event EventHandler<EventArgs> ProtectedStaticEventOnBase;
-            static private event EventHandler<EventArgs> PrivateStaticEventOnBase;
-            static public event EventHandler<EventArgs> HideStaticEvent;
+            protected static event EventHandler<EventArgs> ProtectedStaticEventOnBase;
+            private static event EventHandler<EventArgs> PrivateStaticEventOnBase;
+            public static event EventHandler<EventArgs> HideStaticEvent;
         }
 
         [Kept]
@@ -2247,20 +2247,20 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             private event EventHandler<EventArgs> PrivateEvent;
             public event EventHandler<EventArgs> HideEvent;
 
-            static public event EventHandler<EventArgs> PublicStaticEvent;
+            public static event EventHandler<EventArgs> PublicStaticEvent;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static protected event EventHandler<EventArgs> ProtectedStaticEvent;
+            protected static event EventHandler<EventArgs> ProtectedStaticEvent;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static private event EventHandler<EventArgs> PrivateStaticEvent;
-            static public event EventHandler<EventArgs> HideStaticEvent;
+            private static event EventHandler<EventArgs> PrivateStaticEvent;
+            public static event EventHandler<EventArgs> HideStaticEvent;
         }
 
         [Kept]
@@ -2299,20 +2299,20 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static public event EventHandler<EventArgs> PublicStaticEventOnBase;
+            public static event EventHandler<EventArgs> PublicStaticEventOnBase;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static protected event EventHandler<EventArgs> ProtectedStaticEventOnBase;
-            static private event EventHandler<EventArgs> PrivateStaticEventOnBase;
+            protected static event EventHandler<EventArgs> ProtectedStaticEventOnBase;
+            private static event EventHandler<EventArgs> PrivateStaticEventOnBase;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static public event EventHandler<EventArgs> HideStaticEvent;
+            public static event EventHandler<EventArgs> HideStaticEvent;
         }
 
         [Kept]
@@ -2347,25 +2347,25 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static public event EventHandler<EventArgs> PublicStaticEvent;
+            public static event EventHandler<EventArgs> PublicStaticEvent;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static protected event EventHandler<EventArgs> ProtectedStaticEvent;
+            protected static event EventHandler<EventArgs> ProtectedStaticEvent;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static private event EventHandler<EventArgs> PrivateStaticEvent;
+            private static event EventHandler<EventArgs> PrivateStaticEvent;
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
-            static public event EventHandler<EventArgs> HideStaticEvent;
+            public static event EventHandler<EventArgs> HideStaticEvent;
         }
 
         [Kept]
@@ -2587,7 +2587,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase
+            public static bool PublicStaticPropertyOnBase
             {
                 [Kept]
                 get;
@@ -2597,7 +2597,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase
+            protected static bool ProtectedStaticPropertyOnBase
             {
                 [Kept]
                 get;
@@ -2607,7 +2607,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticPropertyOnBase
+            private static bool PrivateStaticPropertyOnBase
             {
                 [Kept]
                 get;
@@ -2617,7 +2617,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -2662,16 +2662,16 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public bool HideField;
 
             [Kept]
-            static public bool StaticPublicBaseField;
+            public static bool StaticPublicBaseField;
 
             [Kept]
-            static protected bool StaticProtectedBaseField;
+            protected static bool StaticProtectedBaseField;
 
             [Kept]
-            static private bool StaticPrivateBaseField;
+            private static bool StaticPrivateBaseField;
 
             [Kept]
-            static public bool HideStaticField;
+            public static bool HideStaticField;
 
             [Kept]
             [KeptMember(".ctor()")]
@@ -2823,7 +2823,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty
+            public static bool PublicStaticProperty
             {
                 [Kept]
                 get;
@@ -2833,7 +2833,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty
+            protected static bool ProtectedStaticProperty
             {
                 [Kept]
                 get;
@@ -2843,7 +2843,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty
+            private static bool PrivateStaticProperty
             {
                 [Kept]
                 get;
@@ -2853,7 +2853,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty
+            public static bool HideStaticProperty
             {
                 [Kept]
                 get;
@@ -2904,19 +2904,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public bool HideField;
 
             [Kept]
-            static public bool StaticPublicField;
+            public static bool StaticPublicField;
 
             [Kept]
-            static public string StaticPublicStringField;
+            public static string StaticPublicStringField;
 
             [Kept]
-            static protected bool StaticProtectedField;
+            protected static bool StaticProtectedField;
 
             [Kept]
-            static private bool StaticPrivateField;
+            private static bool StaticPrivateField;
 
             [Kept]
-            static public bool HideStaticField;
+            public static bool HideStaticField;
 
             [Kept]
             [KeptMember(".ctor()")]

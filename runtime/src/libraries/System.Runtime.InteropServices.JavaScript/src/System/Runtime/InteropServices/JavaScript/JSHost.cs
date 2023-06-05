@@ -12,7 +12,7 @@ namespace System.Runtime.InteropServices.JavaScript
     /// Represents the JavaScript host environment where the .NET runtime is currently operating.
     /// </summary>
     [SupportedOSPlatform("browser")]
-    public static partial class JSHost
+    partial public static class JSHost
     {
         /// <summary>
         /// Returns a proxy for the <see href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/globalThis">globalThis</see> JavaScript host object.

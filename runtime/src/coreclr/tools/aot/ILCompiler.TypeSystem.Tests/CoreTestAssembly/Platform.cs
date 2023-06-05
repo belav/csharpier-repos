@@ -102,7 +102,7 @@ namespace System
 
     public class Exception { }
 
-    public ref struct TypedReference
+    ref public struct TypedReference
     {
         private readonly ref byte _value;
         private readonly RuntimeTypeHandle _typeHandle;

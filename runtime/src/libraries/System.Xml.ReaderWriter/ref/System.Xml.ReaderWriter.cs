@@ -39,7 +39,7 @@ namespace System.Xml
         "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
         true
     )]
-    public partial interface IApplicationResourceStreamResolver
+    partial public interface IApplicationResourceStreamResolver
     {
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -51,19 +51,19 @@ namespace System.Xml
         System.IO.Stream GetApplicationResourceStream(System.Uri relativeUri);
     }
 
-    public partial interface IHasXmlNode
+    partial public interface IHasXmlNode
     {
         System.Xml.XmlNode GetNode();
     }
 
-    public partial interface IXmlLineInfo
+    partial public interface IXmlLineInfo
     {
         int LineNumber { get; }
         int LinePosition { get; }
         bool HasLineInfo();
     }
 
-    public partial interface IXmlNamespaceResolver
+    partial public interface IXmlNamespaceResolver
     {
         System.Collections.Generic.IDictionary<string, string> GetNamespacesInScope(
             System.Xml.XmlNamespaceScope scope
@@ -79,7 +79,7 @@ namespace System.Xml
         OmitDuplicates = 1,
     }
 
-    public partial class NameTable : System.Xml.XmlNameTable
+    partial public class NameTable : System.Xml.XmlNameTable
     {
         public NameTable() { }
 
@@ -155,7 +155,7 @@ namespace System.Xml
         Error = 6,
     }
 
-    public partial class XmlAttribute : System.Xml.XmlNode
+    partial public class XmlAttribute : System.Xml.XmlNode
     {
         protected internal XmlAttribute(
             string? prefix,
@@ -274,7 +274,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public sealed partial class XmlAttributeCollection
+    partial public sealed class XmlAttributeCollection
         : System.Xml.XmlNamedNodeMap,
             System.Collections.ICollection,
             System.Collections.IEnumerable
@@ -360,7 +360,7 @@ namespace System.Xml
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
     }
 
-    public partial class XmlCDataSection : System.Xml.XmlCharacterData
+    partial public class XmlCDataSection : System.Xml.XmlCharacterData
     {
         protected internal XmlCDataSection(string? data, System.Xml.XmlDocument doc)
             : base(default(string), default(System.Xml.XmlDocument)) { }
@@ -396,7 +396,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public abstract partial class XmlCharacterData : System.Xml.XmlLinkedNode
+    partial public abstract class XmlCharacterData : System.Xml.XmlLinkedNode
     {
         protected internal XmlCharacterData(string? data, System.Xml.XmlDocument doc) { }
 
@@ -435,7 +435,7 @@ namespace System.Xml
         }
     }
 
-    public partial class XmlComment : System.Xml.XmlCharacterData
+    partial public class XmlComment : System.Xml.XmlCharacterData
     {
         protected internal XmlComment(string? comment, System.Xml.XmlDocument doc)
             : base(default(string), default(System.Xml.XmlDocument)) { }
@@ -463,7 +463,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public partial class XmlConvert
+    partial public class XmlConvert
     {
         public XmlConvert() { }
 
@@ -816,7 +816,7 @@ namespace System.Xml
         RoundtripKind = 3,
     }
 
-    public partial class XmlDeclaration : System.Xml.XmlLinkedNode
+    partial public class XmlDeclaration : System.Xml.XmlLinkedNode
     {
         protected internal XmlDeclaration(
             string version,
@@ -875,7 +875,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public partial class XmlDocument : System.Xml.XmlNode
+    partial public class XmlDocument : System.Xml.XmlNode
     {
         public XmlDocument() { }
 
@@ -1201,7 +1201,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public partial class XmlDocumentFragment : System.Xml.XmlNode
+    partial public class XmlDocumentFragment : System.Xml.XmlNode
     {
         protected internal XmlDocumentFragment(System.Xml.XmlDocument ownerDocument) { }
 
@@ -1241,7 +1241,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public partial class XmlDocumentType : System.Xml.XmlLinkedNode
+    partial public class XmlDocumentType : System.Xml.XmlLinkedNode
     {
         protected internal XmlDocumentType(
             string name,
@@ -1298,7 +1298,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public partial class XmlElement : System.Xml.XmlLinkedNode
+    partial public class XmlElement : System.Xml.XmlLinkedNode
     {
         protected internal XmlElement(
             string? prefix,
@@ -1471,7 +1471,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public partial class XmlEntity : System.Xml.XmlNode
+    partial public class XmlEntity : System.Xml.XmlNode
     {
         internal XmlEntity() { }
 
@@ -1532,7 +1532,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public partial class XmlEntityReference : System.Xml.XmlLinkedNode
+    partial public class XmlEntityReference : System.Xml.XmlLinkedNode
     {
         protected internal XmlEntityReference(string name, System.Xml.XmlDocument doc) { }
 
@@ -1572,7 +1572,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public partial class XmlException : System.SystemException
+    partial public class XmlException : System.SystemException
     {
         public XmlException() { }
 
@@ -1615,7 +1615,7 @@ namespace System.Xml
         ) { }
     }
 
-    public partial class XmlImplementation
+    partial public class XmlImplementation
     {
         public XmlImplementation() { }
 
@@ -1632,7 +1632,7 @@ namespace System.Xml
         }
     }
 
-    public abstract partial class XmlLinkedNode : System.Xml.XmlNode
+    partial public abstract class XmlLinkedNode : System.Xml.XmlNode
     {
         internal XmlLinkedNode() { }
 
@@ -1646,7 +1646,7 @@ namespace System.Xml
         }
     }
 
-    public partial class XmlNamedNodeMap : System.Collections.IEnumerable
+    partial public class XmlNamedNodeMap : System.Collections.IEnumerable
     {
         internal XmlNamedNodeMap() { }
 
@@ -1691,7 +1691,7 @@ namespace System.Xml
         }
     }
 
-    public partial class XmlNamespaceManager
+    partial public class XmlNamespaceManager
         : System.Collections.IEnumerable,
             System.Xml.IXmlNamespaceResolver
     {
@@ -1760,7 +1760,7 @@ namespace System.Xml
         Local = 2,
     }
 
-    public abstract partial class XmlNameTable
+    partial public abstract class XmlNameTable
     {
         protected XmlNameTable() { }
 
@@ -1771,7 +1771,7 @@ namespace System.Xml
     }
 
     [System.Diagnostics.DebuggerDisplayAttribute("{debuggerDisplayProxy}")]
-    public abstract partial class XmlNode
+    partial public abstract class XmlNode
         : System.Collections.IEnumerable,
             System.ICloneable,
             System.Xml.XPath.IXPathNavigable
@@ -1992,7 +1992,7 @@ namespace System.Xml
         Change = 2,
     }
 
-    public partial class XmlNodeChangedEventArgs : System.EventArgs
+    partial public class XmlNodeChangedEventArgs : System.EventArgs
     {
         public XmlNodeChangedEventArgs(
             System.Xml.XmlNode? node,
@@ -2034,7 +2034,7 @@ namespace System.Xml
         System.Xml.XmlNodeChangedEventArgs e
     );
 
-    public abstract partial class XmlNodeList : System.Collections.IEnumerable, System.IDisposable
+    partial public abstract class XmlNodeList : System.Collections.IEnumerable, System.IDisposable
     {
         protected XmlNodeList() { }
 
@@ -2061,7 +2061,7 @@ namespace System.Xml
         Unknown = 3,
     }
 
-    public partial class XmlNodeReader : System.Xml.XmlReader, System.Xml.IXmlNamespaceResolver
+    partial public class XmlNodeReader : System.Xml.XmlReader, System.Xml.IXmlNamespaceResolver
     {
         public XmlNodeReader(System.Xml.XmlNode node) { }
 
@@ -2279,7 +2279,7 @@ namespace System.Xml
         XmlDeclaration = 17,
     }
 
-    public partial class XmlNotation : System.Xml.XmlNode
+    partial public class XmlNotation : System.Xml.XmlNode
     {
         internal XmlNotation() { }
 
@@ -2335,7 +2335,7 @@ namespace System.Xml
         AutoDetect = 3,
     }
 
-    public partial class XmlParserContext
+    partial public class XmlParserContext
     {
         public XmlParserContext(
             System.Xml.XmlNameTable? nt,
@@ -2440,7 +2440,7 @@ namespace System.Xml
         }
     }
 
-    public partial class XmlProcessingInstruction : System.Xml.XmlLinkedNode
+    partial public class XmlProcessingInstruction : System.Xml.XmlLinkedNode
     {
         protected internal XmlProcessingInstruction(
             string target,
@@ -2495,7 +2495,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public partial class XmlQualifiedName
+    partial public class XmlQualifiedName
     {
         public static readonly System.Xml.XmlQualifiedName Empty;
 
@@ -2559,7 +2559,7 @@ namespace System.Xml
 
     [System.Diagnostics.DebuggerDisplayAttribute("{debuggerDisplayProxy}")]
     [System.Diagnostics.DebuggerDisplayAttribute("{debuggerDisplayProxy}")]
-    public abstract partial class XmlReader : System.IDisposable
+    partial public abstract class XmlReader : System.IDisposable
     {
         protected XmlReader() { }
 
@@ -3189,7 +3189,7 @@ namespace System.Xml
         }
     }
 
-    public sealed partial class XmlReaderSettings
+    partial public sealed class XmlReaderSettings
     {
         public XmlReaderSettings() { }
 
@@ -3300,7 +3300,7 @@ namespace System.Xml
         public void Reset() { }
     }
 
-    public abstract partial class XmlResolver
+    partial public abstract class XmlResolver
     {
         protected XmlResolver() { }
 
@@ -3343,7 +3343,7 @@ namespace System.Xml
         DiagnosticId = "SYSLIB0047",
         UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
     )]
-    public partial class XmlSecureResolver : System.Xml.XmlResolver
+    partial public class XmlSecureResolver : System.Xml.XmlResolver
     {
         public XmlSecureResolver(System.Xml.XmlResolver resolver, string? securityUrl) { }
 
@@ -3376,7 +3376,7 @@ namespace System.Xml
         }
     }
 
-    public partial class XmlSignificantWhitespace : System.Xml.XmlCharacterData
+    partial public class XmlSignificantWhitespace : System.Xml.XmlCharacterData
     {
         protected internal XmlSignificantWhitespace(string? strData, System.Xml.XmlDocument doc)
             : base(default(string), default(System.Xml.XmlDocument)) { }
@@ -3424,7 +3424,7 @@ namespace System.Xml
         Preserve = 2,
     }
 
-    public partial class XmlText : System.Xml.XmlCharacterData
+    partial public class XmlText : System.Xml.XmlCharacterData
     {
         protected internal XmlText(string? strData, System.Xml.XmlDocument doc)
             : base(default(string), default(System.Xml.XmlDocument)) { }
@@ -3473,7 +3473,7 @@ namespace System.Xml
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial class XmlTextReader
+    partial public class XmlTextReader
         : System.Xml.XmlReader,
             System.Xml.IXmlLineInfo,
             System.Xml.IXmlNamespaceResolver
@@ -3812,7 +3812,7 @@ namespace System.Xml
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial class XmlTextWriter : System.Xml.XmlWriter
+    partial public class XmlTextWriter : System.Xml.XmlWriter
     {
         public XmlTextWriter(System.IO.Stream w, System.Text.Encoding? encoding) { }
 
@@ -3944,7 +3944,7 @@ namespace System.Xml
         None = 12,
     }
 
-    public partial class XmlUrlResolver : System.Xml.XmlResolver
+    partial public class XmlUrlResolver : System.Xml.XmlResolver
     {
         public XmlUrlResolver() { }
 
@@ -3992,7 +3992,7 @@ namespace System.Xml
     [System.ObsoleteAttribute(
         "XmlValidatingReader has been deprecated. Use XmlReader created by XmlReader.Create() method using appropriate XmlReaderSettings instead."
     )]
-    public partial class XmlValidatingReader
+    partial public class XmlValidatingReader
         : System.Xml.XmlReader,
             System.Xml.IXmlLineInfo,
             System.Xml.IXmlNamespaceResolver
@@ -4255,7 +4255,7 @@ namespace System.Xml
         }
     }
 
-    public partial class XmlWhitespace : System.Xml.XmlCharacterData
+    partial public class XmlWhitespace : System.Xml.XmlCharacterData
     {
         protected internal XmlWhitespace(string? strData, System.Xml.XmlDocument doc)
             : base(default(string), default(System.Xml.XmlDocument)) { }
@@ -4296,7 +4296,7 @@ namespace System.Xml
         public override void WriteTo(System.Xml.XmlWriter w) { }
     }
 
-    public abstract partial class XmlWriter : System.IAsyncDisposable, System.IDisposable
+    partial public abstract class XmlWriter : System.IAsyncDisposable, System.IDisposable
     {
         protected XmlWriter() { }
 
@@ -4725,7 +4725,7 @@ namespace System.Xml
         }
     }
 
-    public sealed partial class XmlWriterSettings
+    partial public sealed class XmlWriterSettings
     {
         public XmlWriterSettings() { }
 
@@ -4824,7 +4824,7 @@ namespace System.Xml.Resolvers
         All = 65535,
     }
 
-    public partial class XmlPreloadedResolver : System.Xml.XmlResolver
+    partial public class XmlPreloadedResolver : System.Xml.XmlResolver
     {
         public XmlPreloadedResolver() { }
 
@@ -4894,7 +4894,7 @@ namespace System.Xml.Resolvers
 
 namespace System.Xml.Schema
 {
-    public partial interface IXmlSchemaInfo
+    partial public interface IXmlSchemaInfo
     {
         bool IsDefault { get; }
         bool IsNil { get; }
@@ -4905,7 +4905,7 @@ namespace System.Xml.Schema
         System.Xml.Schema.XmlSchemaValidity Validity { get; }
     }
 
-    public partial class ValidationEventArgs : System.EventArgs
+    partial public class ValidationEventArgs : System.EventArgs
     {
         internal ValidationEventArgs() { }
 
@@ -4928,7 +4928,7 @@ namespace System.Xml.Schema
         System.Xml.Schema.ValidationEventArgs e
     );
 
-    public sealed partial class XmlAtomicValue : System.Xml.XPath.XPathItem, System.ICloneable
+    partial public sealed class XmlAtomicValue : System.Xml.XPath.XPathItem, System.ICloneable
     {
         internal XmlAtomicValue() { }
 
@@ -5001,7 +5001,7 @@ namespace System.Xml.Schema
         "schema",
         Namespace = "http://www.w3.org/2001/XMLSchema"
     )]
-    public partial class XmlSchema : System.Xml.Schema.XmlSchemaObject
+    partial public class XmlSchema : System.Xml.Schema.XmlSchemaObject
     {
         public const string InstanceNamespace = "http://www.w3.org/2001/XMLSchema-instance";
         public const string Namespace = "http://www.w3.org/2001/XMLSchema";
@@ -5245,7 +5245,7 @@ namespace System.Xml.Schema
         ) { }
     }
 
-    public partial class XmlSchemaAll : System.Xml.Schema.XmlSchemaGroupBase
+    partial public class XmlSchemaAll : System.Xml.Schema.XmlSchemaGroupBase
     {
         public XmlSchemaAll() { }
 
@@ -5259,7 +5259,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaAnnotated : System.Xml.Schema.XmlSchemaObject
+    partial public class XmlSchemaAnnotated : System.Xml.Schema.XmlSchemaObject
     {
         public XmlSchemaAnnotated() { }
 
@@ -5288,7 +5288,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaAnnotation : System.Xml.Schema.XmlSchemaObject
+    partial public class XmlSchemaAnnotation : System.Xml.Schema.XmlSchemaObject
     {
         public XmlSchemaAnnotation() { }
 
@@ -5320,7 +5320,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaAny : System.Xml.Schema.XmlSchemaParticle
+    partial public class XmlSchemaAny : System.Xml.Schema.XmlSchemaParticle
     {
         public XmlSchemaAny() { }
 
@@ -5342,7 +5342,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaAnyAttribute : System.Xml.Schema.XmlSchemaAnnotated
+    partial public class XmlSchemaAnyAttribute : System.Xml.Schema.XmlSchemaAnnotated
     {
         public XmlSchemaAnyAttribute() { }
 
@@ -5364,7 +5364,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaAppInfo : System.Xml.Schema.XmlSchemaObject
+    partial public class XmlSchemaAppInfo : System.Xml.Schema.XmlSchemaObject
     {
         public XmlSchemaAppInfo() { }
 
@@ -5384,7 +5384,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaAttribute : System.Xml.Schema.XmlSchemaAnnotated
+    partial public class XmlSchemaAttribute : System.Xml.Schema.XmlSchemaAnnotated
     {
         public XmlSchemaAttribute() { }
 
@@ -5470,7 +5470,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaAttributeGroup : System.Xml.Schema.XmlSchemaAnnotated
+    partial public class XmlSchemaAttributeGroup : System.Xml.Schema.XmlSchemaAnnotated
     {
         public XmlSchemaAttributeGroup() { }
 
@@ -5514,7 +5514,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaAttributeGroupRef : System.Xml.Schema.XmlSchemaAnnotated
+    partial public class XmlSchemaAttributeGroupRef : System.Xml.Schema.XmlSchemaAnnotated
     {
         public XmlSchemaAttributeGroupRef() { }
 
@@ -5527,7 +5527,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaChoice : System.Xml.Schema.XmlSchemaGroupBase
+    partial public class XmlSchemaChoice : System.Xml.Schema.XmlSchemaGroupBase
     {
         public XmlSchemaChoice() { }
 
@@ -5560,7 +5560,7 @@ namespace System.Xml.Schema
     [System.ObsoleteAttribute(
         "XmlSchemaCollection has been deprecated. Use System.Xml.Schema.XmlSchemaSet for schema compilation and validation instead."
     )]
-    public sealed partial class XmlSchemaCollection
+    partial public sealed class XmlSchemaCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -5660,7 +5660,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public sealed partial class XmlSchemaCollectionEnumerator : System.Collections.IEnumerator
+    partial public sealed class XmlSchemaCollectionEnumerator : System.Collections.IEnumerator
     {
         internal XmlSchemaCollectionEnumerator() { }
 
@@ -5686,7 +5686,7 @@ namespace System.Xml.Schema
         void System.Collections.IEnumerator.Reset() { }
     }
 
-    public sealed partial class XmlSchemaCompilationSettings
+    partial public sealed class XmlSchemaCompilationSettings
     {
         public XmlSchemaCompilationSettings() { }
 
@@ -5697,7 +5697,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaComplexContent : System.Xml.Schema.XmlSchemaContentModel
+    partial public class XmlSchemaComplexContent : System.Xml.Schema.XmlSchemaContentModel
     {
         public XmlSchemaComplexContent() { }
 
@@ -5723,7 +5723,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaComplexContentExtension : System.Xml.Schema.XmlSchemaContent
+    partial public class XmlSchemaComplexContentExtension : System.Xml.Schema.XmlSchemaContent
     {
         public XmlSchemaComplexContentExtension() { }
 
@@ -5777,7 +5777,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaComplexContentRestriction : System.Xml.Schema.XmlSchemaContent
+    partial public class XmlSchemaComplexContentRestriction : System.Xml.Schema.XmlSchemaContent
     {
         public XmlSchemaComplexContentRestriction() { }
 
@@ -5831,7 +5831,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaComplexType : System.Xml.Schema.XmlSchemaType
+    partial public class XmlSchemaComplexType : System.Xml.Schema.XmlSchemaType
     {
         public XmlSchemaComplexType() { }
 
@@ -5948,12 +5948,12 @@ namespace System.Xml.Schema
         }
     }
 
-    public abstract partial class XmlSchemaContent : System.Xml.Schema.XmlSchemaAnnotated
+    partial public abstract class XmlSchemaContent : System.Xml.Schema.XmlSchemaAnnotated
     {
         protected XmlSchemaContent() { }
     }
 
-    public abstract partial class XmlSchemaContentModel : System.Xml.Schema.XmlSchemaAnnotated
+    partial public abstract class XmlSchemaContentModel : System.Xml.Schema.XmlSchemaAnnotated
     {
         protected XmlSchemaContentModel() { }
 
@@ -5984,7 +5984,7 @@ namespace System.Xml.Schema
         Mixed = 3,
     }
 
-    public abstract partial class XmlSchemaDatatype
+    partial public abstract class XmlSchemaDatatype
     {
         internal XmlSchemaDatatype() { }
 
@@ -6060,7 +6060,7 @@ namespace System.Xml.Schema
         None = 256,
     }
 
-    public partial class XmlSchemaDocumentation : System.Xml.Schema.XmlSchemaObject
+    partial public class XmlSchemaDocumentation : System.Xml.Schema.XmlSchemaObject
     {
         public XmlSchemaDocumentation() { }
 
@@ -6088,7 +6088,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaElement : System.Xml.Schema.XmlSchemaParticle
+    partial public class XmlSchemaElement : System.Xml.Schema.XmlSchemaParticle
     {
         public XmlSchemaElement() { }
 
@@ -6249,12 +6249,12 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaEnumerationFacet : System.Xml.Schema.XmlSchemaFacet
+    partial public class XmlSchemaEnumerationFacet : System.Xml.Schema.XmlSchemaFacet
     {
         public XmlSchemaEnumerationFacet() { }
     }
 
-    public partial class XmlSchemaException : System.SystemException
+    partial public class XmlSchemaException : System.SystemException
     {
         public XmlSchemaException() { }
 
@@ -6301,7 +6301,7 @@ namespace System.Xml.Schema
         ) { }
     }
 
-    public abstract partial class XmlSchemaExternal : System.Xml.Schema.XmlSchemaObject
+    partial public abstract class XmlSchemaExternal : System.Xml.Schema.XmlSchemaObject
     {
         protected XmlSchemaExternal() { }
 
@@ -6334,7 +6334,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public abstract partial class XmlSchemaFacet : System.Xml.Schema.XmlSchemaAnnotated
+    partial public abstract class XmlSchemaFacet : System.Xml.Schema.XmlSchemaAnnotated
     {
         protected XmlSchemaFacet() { }
 
@@ -6366,12 +6366,12 @@ namespace System.Xml.Schema
         Unqualified = 2,
     }
 
-    public partial class XmlSchemaFractionDigitsFacet : System.Xml.Schema.XmlSchemaNumericFacet
+    partial public class XmlSchemaFractionDigitsFacet : System.Xml.Schema.XmlSchemaNumericFacet
     {
         public XmlSchemaFractionDigitsFacet() { }
     }
 
-    public partial class XmlSchemaGroup : System.Xml.Schema.XmlSchemaAnnotated
+    partial public class XmlSchemaGroup : System.Xml.Schema.XmlSchemaAnnotated
     {
         public XmlSchemaGroup() { }
 
@@ -6407,7 +6407,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public abstract partial class XmlSchemaGroupBase : System.Xml.Schema.XmlSchemaParticle
+    partial public abstract class XmlSchemaGroupBase : System.Xml.Schema.XmlSchemaParticle
     {
         internal XmlSchemaGroupBase() { }
 
@@ -6415,7 +6415,7 @@ namespace System.Xml.Schema
         public abstract System.Xml.Schema.XmlSchemaObjectCollection Items { get; }
     }
 
-    public partial class XmlSchemaGroupRef : System.Xml.Schema.XmlSchemaParticle
+    partial public class XmlSchemaGroupRef : System.Xml.Schema.XmlSchemaParticle
     {
         public XmlSchemaGroupRef() { }
 
@@ -6433,7 +6433,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaIdentityConstraint : System.Xml.Schema.XmlSchemaAnnotated
+    partial public class XmlSchemaIdentityConstraint : System.Xml.Schema.XmlSchemaAnnotated
     {
         public XmlSchemaIdentityConstraint() { }
 
@@ -6470,7 +6470,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaImport : System.Xml.Schema.XmlSchemaExternal
+    partial public class XmlSchemaImport : System.Xml.Schema.XmlSchemaExternal
     {
         public XmlSchemaImport() { }
 
@@ -6492,7 +6492,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaInclude : System.Xml.Schema.XmlSchemaExternal
+    partial public class XmlSchemaInclude : System.Xml.Schema.XmlSchemaExternal
     {
         public XmlSchemaInclude() { }
 
@@ -6507,7 +6507,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public sealed partial class XmlSchemaInference
+    partial public sealed class XmlSchemaInference
     {
         public XmlSchemaInference() { }
 
@@ -6542,7 +6542,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaInferenceException : System.Xml.Schema.XmlSchemaException
+    partial public class XmlSchemaInferenceException : System.Xml.Schema.XmlSchemaException
     {
         public XmlSchemaInferenceException() { }
 
@@ -6568,7 +6568,7 @@ namespace System.Xml.Schema
         ) { }
     }
 
-    public partial class XmlSchemaInfo : System.Xml.Schema.IXmlSchemaInfo
+    partial public class XmlSchemaInfo : System.Xml.Schema.IXmlSchemaInfo
     {
         public XmlSchemaInfo() { }
 
@@ -6614,12 +6614,12 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaKey : System.Xml.Schema.XmlSchemaIdentityConstraint
+    partial public class XmlSchemaKey : System.Xml.Schema.XmlSchemaIdentityConstraint
     {
         public XmlSchemaKey() { }
     }
 
-    public partial class XmlSchemaKeyref : System.Xml.Schema.XmlSchemaIdentityConstraint
+    partial public class XmlSchemaKeyref : System.Xml.Schema.XmlSchemaIdentityConstraint
     {
         public XmlSchemaKeyref() { }
 
@@ -6631,42 +6631,42 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaLengthFacet : System.Xml.Schema.XmlSchemaNumericFacet
+    partial public class XmlSchemaLengthFacet : System.Xml.Schema.XmlSchemaNumericFacet
     {
         public XmlSchemaLengthFacet() { }
     }
 
-    public partial class XmlSchemaMaxExclusiveFacet : System.Xml.Schema.XmlSchemaFacet
+    partial public class XmlSchemaMaxExclusiveFacet : System.Xml.Schema.XmlSchemaFacet
     {
         public XmlSchemaMaxExclusiveFacet() { }
     }
 
-    public partial class XmlSchemaMaxInclusiveFacet : System.Xml.Schema.XmlSchemaFacet
+    partial public class XmlSchemaMaxInclusiveFacet : System.Xml.Schema.XmlSchemaFacet
     {
         public XmlSchemaMaxInclusiveFacet() { }
     }
 
-    public partial class XmlSchemaMaxLengthFacet : System.Xml.Schema.XmlSchemaNumericFacet
+    partial public class XmlSchemaMaxLengthFacet : System.Xml.Schema.XmlSchemaNumericFacet
     {
         public XmlSchemaMaxLengthFacet() { }
     }
 
-    public partial class XmlSchemaMinExclusiveFacet : System.Xml.Schema.XmlSchemaFacet
+    partial public class XmlSchemaMinExclusiveFacet : System.Xml.Schema.XmlSchemaFacet
     {
         public XmlSchemaMinExclusiveFacet() { }
     }
 
-    public partial class XmlSchemaMinInclusiveFacet : System.Xml.Schema.XmlSchemaFacet
+    partial public class XmlSchemaMinInclusiveFacet : System.Xml.Schema.XmlSchemaFacet
     {
         public XmlSchemaMinInclusiveFacet() { }
     }
 
-    public partial class XmlSchemaMinLengthFacet : System.Xml.Schema.XmlSchemaNumericFacet
+    partial public class XmlSchemaMinLengthFacet : System.Xml.Schema.XmlSchemaNumericFacet
     {
         public XmlSchemaMinLengthFacet() { }
     }
 
-    public partial class XmlSchemaNotation : System.Xml.Schema.XmlSchemaAnnotated
+    partial public class XmlSchemaNotation : System.Xml.Schema.XmlSchemaAnnotated
     {
         public XmlSchemaNotation() { }
 
@@ -6692,12 +6692,12 @@ namespace System.Xml.Schema
         }
     }
 
-    public abstract partial class XmlSchemaNumericFacet : System.Xml.Schema.XmlSchemaFacet
+    partial public abstract class XmlSchemaNumericFacet : System.Xml.Schema.XmlSchemaFacet
     {
         protected XmlSchemaNumericFacet() { }
     }
 
-    public abstract partial class XmlSchemaObject
+    partial public abstract class XmlSchemaObject
     {
         protected XmlSchemaObject() { }
 
@@ -6737,7 +6737,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaObjectCollection : System.Collections.CollectionBase
+    partial public class XmlSchemaObjectCollection : System.Collections.CollectionBase
     {
         public XmlSchemaObjectCollection() { }
 
@@ -6784,7 +6784,7 @@ namespace System.Xml.Schema
         public void Remove(System.Xml.Schema.XmlSchemaObject item) { }
     }
 
-    public partial class XmlSchemaObjectEnumerator : System.Collections.IEnumerator
+    partial public class XmlSchemaObjectEnumerator : System.Collections.IEnumerator
     {
         internal XmlSchemaObjectEnumerator() { }
 
@@ -6812,7 +6812,7 @@ namespace System.Xml.Schema
         void System.Collections.IEnumerator.Reset() { }
     }
 
-    public partial class XmlSchemaObjectTable
+    partial public class XmlSchemaObjectTable
     {
         internal XmlSchemaObjectTable() { }
 
@@ -6844,7 +6844,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public abstract partial class XmlSchemaParticle : System.Xml.Schema.XmlSchemaAnnotated
+    partial public abstract class XmlSchemaParticle : System.Xml.Schema.XmlSchemaAnnotated
     {
         protected XmlSchemaParticle() { }
 
@@ -6877,12 +6877,12 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaPatternFacet : System.Xml.Schema.XmlSchemaFacet
+    partial public class XmlSchemaPatternFacet : System.Xml.Schema.XmlSchemaFacet
     {
         public XmlSchemaPatternFacet() { }
     }
 
-    public partial class XmlSchemaRedefine : System.Xml.Schema.XmlSchemaExternal
+    partial public class XmlSchemaRedefine : System.Xml.Schema.XmlSchemaExternal
     {
         public XmlSchemaRedefine() { }
 
@@ -6930,7 +6930,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaSequence : System.Xml.Schema.XmlSchemaGroupBase
+    partial public class XmlSchemaSequence : System.Xml.Schema.XmlSchemaGroupBase
     {
         public XmlSchemaSequence() { }
 
@@ -6960,7 +6960,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaSet
+    partial public class XmlSchemaSet
     {
         public XmlSchemaSet() { }
 
@@ -7065,7 +7065,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaSimpleContent : System.Xml.Schema.XmlSchemaContentModel
+    partial public class XmlSchemaSimpleContent : System.Xml.Schema.XmlSchemaContentModel
     {
         public XmlSchemaSimpleContent() { }
 
@@ -7084,7 +7084,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaSimpleContentExtension : System.Xml.Schema.XmlSchemaContent
+    partial public class XmlSchemaSimpleContentExtension : System.Xml.Schema.XmlSchemaContent
     {
         public XmlSchemaSimpleContentExtension() { }
 
@@ -7116,7 +7116,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaSimpleContentRestriction : System.Xml.Schema.XmlSchemaContent
+    partial public class XmlSchemaSimpleContentRestriction : System.Xml.Schema.XmlSchemaContent
     {
         public XmlSchemaSimpleContentRestriction() { }
 
@@ -7211,7 +7211,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaSimpleType : System.Xml.Schema.XmlSchemaType
+    partial public class XmlSchemaSimpleType : System.Xml.Schema.XmlSchemaType
     {
         public XmlSchemaSimpleType() { }
 
@@ -7234,12 +7234,12 @@ namespace System.Xml.Schema
         }
     }
 
-    public abstract partial class XmlSchemaSimpleTypeContent : System.Xml.Schema.XmlSchemaAnnotated
+    partial public abstract class XmlSchemaSimpleTypeContent : System.Xml.Schema.XmlSchemaAnnotated
     {
         protected XmlSchemaSimpleTypeContent() { }
     }
 
-    public partial class XmlSchemaSimpleTypeList : System.Xml.Schema.XmlSchemaSimpleTypeContent
+    partial public class XmlSchemaSimpleTypeList : System.Xml.Schema.XmlSchemaSimpleTypeContent
     {
         public XmlSchemaSimpleTypeList() { }
 
@@ -7268,7 +7268,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaSimpleTypeRestriction
+    partial public class XmlSchemaSimpleTypeRestriction
         : System.Xml.Schema.XmlSchemaSimpleTypeContent
     {
         public XmlSchemaSimpleTypeRestriction() { }
@@ -7344,7 +7344,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaSimpleTypeUnion : System.Xml.Schema.XmlSchemaSimpleTypeContent
+    partial public class XmlSchemaSimpleTypeUnion : System.Xml.Schema.XmlSchemaSimpleTypeContent
     {
         public XmlSchemaSimpleTypeUnion() { }
 
@@ -7371,12 +7371,12 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaTotalDigitsFacet : System.Xml.Schema.XmlSchemaNumericFacet
+    partial public class XmlSchemaTotalDigitsFacet : System.Xml.Schema.XmlSchemaNumericFacet
     {
         public XmlSchemaTotalDigitsFacet() { }
     }
 
-    public partial class XmlSchemaType : System.Xml.Schema.XmlSchemaAnnotated
+    partial public class XmlSchemaType : System.Xml.Schema.XmlSchemaAnnotated
     {
         public XmlSchemaType() { }
 
@@ -7489,7 +7489,7 @@ namespace System.Xml.Schema
         }
     }
 
-    public partial class XmlSchemaUnique : System.Xml.Schema.XmlSchemaIdentityConstraint
+    partial public class XmlSchemaUnique : System.Xml.Schema.XmlSchemaIdentityConstraint
     {
         public XmlSchemaUnique() { }
     }
@@ -7509,7 +7509,7 @@ namespace System.Xml.Schema
         Required = 3,
     }
 
-    public partial class XmlSchemaValidationException : System.Xml.Schema.XmlSchemaException
+    partial public class XmlSchemaValidationException : System.Xml.Schema.XmlSchemaException
     {
         public XmlSchemaValidationException() { }
 
@@ -7553,7 +7553,7 @@ namespace System.Xml.Schema
         AllowXmlAttributes = 16,
     }
 
-    public sealed partial class XmlSchemaValidator
+    partial public sealed class XmlSchemaValidator
     {
         public XmlSchemaValidator(
             System.Xml.XmlNameTable nameTable,
@@ -7681,12 +7681,12 @@ namespace System.Xml.Schema
         Invalid = 2,
     }
 
-    public partial class XmlSchemaWhiteSpaceFacet : System.Xml.Schema.XmlSchemaFacet
+    partial public class XmlSchemaWhiteSpaceFacet : System.Xml.Schema.XmlSchemaFacet
     {
         public XmlSchemaWhiteSpaceFacet() { }
     }
 
-    public partial class XmlSchemaXPath : System.Xml.Schema.XmlSchemaAnnotated
+    partial public class XmlSchemaXPath : System.Xml.Schema.XmlSchemaAnnotated
     {
         public XmlSchemaXPath() { }
 
@@ -7769,7 +7769,7 @@ namespace System.Xml.Schema
 
 namespace System.Xml.Serialization
 {
-    public partial interface IXmlSerializable
+    partial public interface IXmlSerializable
     {
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -7786,7 +7786,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.ReturnValue,
         AllowMultiple = false
     )]
-    public partial class XmlAnyAttributeAttribute : System.Attribute
+    partial public class XmlAnyAttributeAttribute : System.Attribute
     {
         public XmlAnyAttributeAttribute() { }
     }
@@ -7798,7 +7798,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.ReturnValue,
         AllowMultiple = true
     )]
-    public partial class XmlAnyElementAttribute : System.Attribute
+    partial public class XmlAnyElementAttribute : System.Attribute
     {
         public XmlAnyElementAttribute() { }
 
@@ -7830,7 +7830,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Property
             | System.AttributeTargets.ReturnValue
     )]
-    public partial class XmlAttributeAttribute : System.Attribute
+    partial public class XmlAttributeAttribute : System.Attribute
     {
         public XmlAttributeAttribute() { }
 
@@ -7877,7 +7877,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.ReturnValue,
         AllowMultiple = true
     )]
-    public partial class XmlElementAttribute : System.Attribute
+    partial public class XmlElementAttribute : System.Attribute
     {
         public XmlElementAttribute() { }
 
@@ -7928,7 +7928,7 @@ namespace System.Xml.Serialization
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Field)]
-    public partial class XmlEnumAttribute : System.Attribute
+    partial public class XmlEnumAttribute : System.Attribute
     {
         public XmlEnumAttribute() { }
 
@@ -7947,7 +7947,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Property
             | System.AttributeTargets.ReturnValue
     )]
-    public partial class XmlIgnoreAttribute : System.Attribute
+    partial public class XmlIgnoreAttribute : System.Attribute
     {
         public XmlIgnoreAttribute() { }
     }
@@ -7959,7 +7959,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.ReturnValue,
         AllowMultiple = false
     )]
-    public partial class XmlNamespaceDeclarationsAttribute : System.Attribute
+    partial public class XmlNamespaceDeclarationsAttribute : System.Attribute
     {
         public XmlNamespaceDeclarationsAttribute() { }
     }
@@ -7971,7 +7971,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.ReturnValue
             | System.AttributeTargets.Struct
     )]
-    public partial class XmlRootAttribute : System.Attribute
+    partial public class XmlRootAttribute : System.Attribute
     {
         public XmlRootAttribute() { }
 
@@ -8005,7 +8005,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Interface
             | System.AttributeTargets.Struct
     )]
-    public sealed partial class XmlSchemaProviderAttribute : System.Attribute
+    partial public sealed class XmlSchemaProviderAttribute : System.Attribute
     {
         public XmlSchemaProviderAttribute(string? methodName) { }
 
@@ -8020,7 +8020,7 @@ namespace System.Xml.Serialization
         }
     }
 
-    public partial class XmlSerializerNamespaces
+    partial public class XmlSerializerNamespaces
     {
         public XmlSerializerNamespaces() { }
 
@@ -8048,7 +8048,7 @@ namespace System.Xml.Serialization
             | System.AttributeTargets.Property
             | System.AttributeTargets.ReturnValue
     )]
-    public partial class XmlTextAttribute : System.Attribute
+    partial public class XmlTextAttribute : System.Attribute
     {
         public XmlTextAttribute() { }
 
@@ -8070,7 +8070,7 @@ namespace System.Xml.Serialization
 
 namespace System.Xml.XPath
 {
-    public partial interface IXPathNavigable
+    partial public interface IXPathNavigable
     {
         System.Xml.XPath.XPathNavigator? CreateNavigator();
     }
@@ -8094,7 +8094,7 @@ namespace System.Xml.XPath
         Descending = 2,
     }
 
-    public abstract partial class XPathExpression
+    partial public abstract class XPathExpression
     {
         internal XPathExpression() { }
 
@@ -8127,7 +8127,7 @@ namespace System.Xml.XPath
         public abstract void SetContext(System.Xml.XmlNamespaceManager nsManager);
     }
 
-    public abstract partial class XPathItem
+    partial public abstract class XPathItem
     {
         protected XPathItem() { }
 
@@ -8160,7 +8160,7 @@ namespace System.Xml.XPath
         Local = 2,
     }
 
-    public abstract partial class XPathNavigator
+    partial public abstract class XPathNavigator
         : System.Xml.XPath.XPathItem,
             System.ICloneable,
             System.Xml.IXmlNamespaceResolver,
@@ -8664,7 +8664,7 @@ namespace System.Xml.XPath
     [System.Diagnostics.DebuggerDisplayAttribute(
         "Position={CurrentPosition}, Current={debuggerDisplayProxy}"
     )]
-    public abstract partial class XPathNodeIterator
+    partial public abstract class XPathNodeIterator
         : System.Collections.IEnumerable,
             System.ICloneable
     {
@@ -8719,7 +8719,7 @@ namespace System.Xml.XPath
 
 namespace System.Xml.Xsl
 {
-    public partial interface IXsltContextFunction
+    partial public interface IXsltContextFunction
     {
         System.Xml.XPath.XPathResultType[] ArgTypes { get; }
         int Maxargs { get; }
@@ -8732,7 +8732,7 @@ namespace System.Xml.Xsl
         );
     }
 
-    public partial interface IXsltContextVariable
+    partial public interface IXsltContextVariable
     {
         bool IsLocal { get; }
         bool IsParam { get; }
@@ -8740,7 +8740,7 @@ namespace System.Xml.Xsl
         object Evaluate(System.Xml.Xsl.XsltContext xsltContext);
     }
 
-    public sealed partial class XslCompiledTransform
+    partial public sealed class XslCompiledTransform
     {
         public XslCompiledTransform() { }
 
@@ -8869,7 +8869,7 @@ namespace System.Xml.Xsl
         ) { }
     }
 
-    public partial class XsltArgumentList
+    partial public class XsltArgumentList
     {
         public XsltArgumentList() { }
 
@@ -8912,7 +8912,7 @@ namespace System.Xml.Xsl
         }
     }
 
-    public partial class XsltCompileException : System.Xml.Xsl.XsltException
+    partial public class XsltCompileException : System.Xml.Xsl.XsltException
     {
         public XsltCompileException() { }
 
@@ -8938,7 +8938,7 @@ namespace System.Xml.Xsl
         ) { }
     }
 
-    public abstract partial class XsltContext : System.Xml.XmlNamespaceManager
+    partial public abstract class XsltContext : System.Xml.XmlNamespaceManager
     {
         protected XsltContext()
             : base(default(System.Xml.XmlNameTable)) { }
@@ -8960,7 +8960,7 @@ namespace System.Xml.Xsl
         );
     }
 
-    public partial class XsltException : System.SystemException
+    partial public class XsltException : System.SystemException
     {
         public XsltException() { }
 
@@ -8996,7 +8996,7 @@ namespace System.Xml.Xsl
         ) { }
     }
 
-    public abstract partial class XsltMessageEncounteredEventArgs : System.EventArgs
+    partial public abstract class XsltMessageEncounteredEventArgs : System.EventArgs
     {
         protected XsltMessageEncounteredEventArgs() { }
 
@@ -9008,7 +9008,7 @@ namespace System.Xml.Xsl
         System.Xml.Xsl.XsltMessageEncounteredEventArgs e
     );
 
-    public sealed partial class XslTransform
+    partial public sealed class XslTransform
     {
         public XslTransform() { }
 
@@ -9165,7 +9165,7 @@ namespace System.Xml.Xsl
         ) { }
     }
 
-    public sealed partial class XsltSettings
+    partial public sealed class XsltSettings
     {
         public XsltSettings() { }
 

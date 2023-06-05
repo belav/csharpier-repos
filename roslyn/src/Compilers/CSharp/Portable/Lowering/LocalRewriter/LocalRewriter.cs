@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class LocalRewriter : BoundTreeRewriterWithStackGuard
+    partial internal sealed class LocalRewriter : BoundTreeRewriterWithStackGuard
     {
         private readonly CSharpCompilation _compilation;
         private readonly SyntheticBoundNodeFactory _factory;

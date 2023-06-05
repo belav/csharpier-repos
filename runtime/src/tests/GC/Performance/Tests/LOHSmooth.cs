@@ -44,7 +44,7 @@ public class VSTSTest
             ThreadPool.QueueUserWorkItem(Worker);
     }
 
-    static public void Allocate()
+    public static void Allocate()
     {
         for (int i = 0; i < _threadCount; i++)
         {

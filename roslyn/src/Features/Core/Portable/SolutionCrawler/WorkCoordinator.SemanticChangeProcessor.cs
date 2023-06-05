@@ -16,14 +16,14 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    internal sealed partial class SolutionCrawlerRegistrationService
+    partial internal sealed class SolutionCrawlerRegistrationService
     {
         /// <summary>
         /// this will be used in the unit test to indicate certain action has happened or not.
         /// </summary>
         public const string EnqueueItem = nameof(EnqueueItem);
 
-        internal sealed partial class WorkCoordinator
+        partial internal sealed class WorkCoordinator
         {
             private sealed class SemanticChangeProcessor : IdleProcessor
             {

@@ -9,6 +9,7 @@ using System.Drawing.Drawing2D;
 
 namespace System.Drawing.Internal
 {
+    partial
     /// <summary>
     /// WindowsGraphics is a library for rendering text and drawing using GDI; it was created to address performance
     /// and compatibility issues found in GDI+ Graphics class.
@@ -18,7 +19,7 @@ namespace System.Drawing.Internal
     /// saved and restored on dispose so external HDCs won't be modified by WindowsGraphics. So we don't need to
     /// restore previous objects into the dc in method calls.
     ///</summary>
-    internal sealed partial class WindowsGraphics : MarshalByRefObject, IDisposable, IDeviceContext
+    internal sealed class WindowsGraphics : MarshalByRefObject, IDisposable, IDeviceContext
     {
         // Wrapper around the window dc this object refers to.
         // Note: this dc is only disposed when owned (created) by the WindowsGraphics.

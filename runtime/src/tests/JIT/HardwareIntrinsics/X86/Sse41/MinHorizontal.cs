@@ -19,7 +19,7 @@ using Xunit;
 
 namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 {
-    public static partial class Program
+    partial public static class Program
     {
         [Fact]
         public static void MinHorizontal()

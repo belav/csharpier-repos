@@ -13,7 +13,7 @@ namespace System.Xml.FactoryReaderTests
     //
     ////////////////////////////////////////////////////////////////
     [TestModule(Name = "XmlFactoryReader Test", Desc = "XmlFactoryReader Test")]
-    public partial class FactoryReaderTest : CGenericTestModule
+    partial public class FactoryReaderTest : CGenericTestModule
     {
         public override int Init(object objParam)
         {

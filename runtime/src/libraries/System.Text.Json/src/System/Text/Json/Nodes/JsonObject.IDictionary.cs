@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace System.Text.Json.Nodes
 {
-    public partial class JsonObject : IDictionary<string, JsonNode?>
+    partial public class JsonObject : IDictionary<string, JsonNode?>
     {
         private JsonPropertyDictionary<JsonNode?>? _dictionary;
 

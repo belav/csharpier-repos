@@ -122,8 +122,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "Element Namespace")]
-        public partial class TCElemNamespace
+        public class TCElemNamespace
         {
             // Multiple NS decl for same prefix on an element
             [Theory]
@@ -758,8 +759,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "Attribute Namespace")]
-        public partial class TCAttrNamespace
+        public class TCAttrNamespace
         {
             // Define prefix 'xml' with invalid namespace URI 'foo'
             [Theory]
@@ -1555,8 +1557,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteCData")]
-        public partial class TCCData
+        public class TCCData
         {
             // WriteCData with null
             [Theory]
@@ -1795,8 +1798,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteComment")]
-        public partial class TCComment
+        public class TCComment
         {
             // Sanity test for WriteComment
             [Theory]
@@ -1893,8 +1897,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteEntityRef")]
-        public partial class TCEntityRef
+        public class TCEntityRef
         {
             [Theory]
             [XmlWriterInlineData("null")]
@@ -2032,8 +2037,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteCharEntity")]
-        public partial class TCCharEntity
+        public class TCCharEntity
         {
             // WriteCharEntity with valid Unicode character
             [Theory]
@@ -2210,8 +2216,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteSurrogateCharEntity")]
-        public partial class TCSurrogateCharEntity
+        public class TCSurrogateCharEntity
         {
             // SurrogateCharEntity after WriteStartElement/WriteEndElement
             [Theory]
@@ -2386,8 +2393,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteProcessingInstruction")]
-        public partial class TCPI
+        public class TCPI
         {
             // Sanity test for WritePI
             [Theory]
@@ -2674,8 +2682,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteNmToken")]
-        public partial class TCWriteNmToken
+        public class TCWriteNmToken
         {
             [Theory]
             [XmlWriterInlineData("null")]
@@ -2767,8 +2776,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteName")]
-        public partial class TCWriteName
+        public class TCWriteName
         {
             [Theory]
             [XmlWriterInlineData("null")]
@@ -2858,8 +2868,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteQualifiedName")]
-        public partial class TCWriteQName
+        public class TCWriteQName
         {
             [Theory]
             [XmlWriterInlineData("null")]
@@ -3009,8 +3020,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteChars")]
-        public partial class TCWriteChars : TCWriteBuffer
+        public class TCWriteChars : TCWriteBuffer
         {
             // WriteChars with valid buffer, number, count
             [Theory]
@@ -3202,8 +3214,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteString")]
-        public partial class TCWriteString
+        public class TCWriteString
         {
             // WriteString(null)
             [Theory]
@@ -3483,8 +3496,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteWhitespace")]
-        public partial class TCWhiteSpace
+        public class TCWhiteSpace
         {
             // WriteWhitespace with values #x20 #x9 #xD #xA
             [Theory]
@@ -3594,8 +3608,9 @@ namespace System.Xml.XmlWriterApiTests
             }
         }
 
+        partial
         //[TestCase(Name = "WriteValue")]
-        public partial class TCWriteValue
+        public class TCWriteValue
         {
             // Write multiple atomic values inside element
             [Theory]
@@ -4967,8 +4982,9 @@ namespace System.Xml.XmlWriterApiTests
                 Assert.True((isPassed));
             }
 
+            partial
             //[TestCase(Name = "LookupPrefix")]
-            public partial class TCLookUpPrefix
+            public class TCLookUpPrefix
             {
                 // LookupPrefix with null
                 [Theory]
@@ -5151,8 +5167,9 @@ namespace System.Xml.XmlWriterApiTests
                 }
             }
 
+            partial
             //[TestCase(Name = "XmlSpace")]
-            public partial class TCXmlSpace
+            public class TCXmlSpace
             {
                 // Verify XmlSpace as Preserve
                 [Theory]
@@ -5342,8 +5359,9 @@ namespace System.Xml.XmlWriterApiTests
                 }
             }
 
+            partial
             //[TestCase(Name = "XmlLang")]
-            public partial class TCXmlLang
+            public class TCXmlLang
             {
                 // Verify XmlLang sanity test
                 [Theory]
@@ -5537,8 +5555,9 @@ namespace System.Xml.XmlWriterApiTests
                 }
             }
 
+            partial
             //[TestCase(Name = "WriteRaw")]
-            public partial class TCWriteRaw : TCWriteBuffer
+            public class TCWriteRaw : TCWriteBuffer
             {
                 // Call both WriteRaw Methods
                 [Theory]
@@ -5797,8 +5816,9 @@ namespace System.Xml.XmlWriterApiTests
                 }
             }
 
+            partial
             //[TestCase(Name = "WriteBase64")]
-            public partial class TCWriteBase64 : TCWriteBuffer
+            public class TCWriteBase64 : TCWriteBuffer
             {
                 // Base64LineSize = 76, test around this boundary size
                 [Theory]
@@ -6222,8 +6242,9 @@ namespace System.Xml.XmlWriterApiTests
                 }
             }
 
+            partial
             //[TestCase(Name = "WriteBinHex")]
-            public partial class TCWriteBinHex : TCWriteBuffer
+            public class TCWriteBinHex : TCWriteBuffer
             {
                 // Call WriteBinHex with correct byte, index, and count
                 [Theory]
@@ -6440,8 +6461,9 @@ namespace System.Xml.XmlWriterApiTests
                 }
             }
 
+            partial
             //[TestCase(Name = "WriteState")]
-            public partial class TCWriteState
+            public class TCWriteState
             {
                 // Verify WriteState.Start when nothing has been written yet
                 [Theory]
@@ -6811,8 +6833,9 @@ namespace System.Xml.XmlWriterApiTests
                 }
             }
 
+            partial
             //[TestCase(Name = "NDP20_NewMethods")]
-            public partial class TC_NDP20_NewMethods
+            public class TC_NDP20_NewMethods
             {
                 // WriteElementString(prefix, name, ns, value) sanity test
                 [Theory]
@@ -6997,8 +7020,9 @@ namespace System.Xml.XmlWriterApiTests
                 }
             }
 
+            partial
             //[TestCase(Name = "Globalization")]
-            public partial class TCGlobalization
+            public class TCGlobalization
             {
                 // Characters between 0xdfff and 0xfffe are valid Unicode characters
                 [Theory]
@@ -7046,8 +7070,9 @@ namespace System.Xml.XmlWriterApiTests
                 }
             }
 
+            partial
             //[TestCase(Name = "Close()")]
-            public partial class TCClose
+            public class TCClose
             {
                 // Closing an XmlWriter should close all opened elements
                 [Theory]

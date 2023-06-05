@@ -6,10 +6,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableHashSet{T}.NodeEnumerable"/> class.
     /// </content>
-    public partial class ImmutableHashSet<T>
+    public class ImmutableHashSet<T>
     {
         /// <summary>
         /// Enumerates over a sorted dictionary used for hash buckets.

@@ -9,10 +9,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// Defines a set of methods to determine how Unicode characters are treated by the C# compiler.
     /// </summary>
-    public static partial class SyntaxFacts
+    public static class SyntaxFacts
     {
         /// <summary>
         /// Returns true if the Unicode character is a hexadecimal digit.

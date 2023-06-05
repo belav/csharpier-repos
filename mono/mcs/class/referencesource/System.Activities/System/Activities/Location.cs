@@ -183,7 +183,7 @@ namespace System.Activities
             get { return typeof(T); }
         }
 
-        public virtual new T Value
+        public new virtual T Value
         {
             get { return this.value; }
             set { this.value = value; }
@@ -195,7 +195,7 @@ namespace System.Activities
             set { this.Value = value; }
         }
 
-        protected override sealed object ValueCore
+        protected sealed override object ValueCore
         {
             get { return this.Value; }
             set { this.Value = TypeHelper.Convert<T>(value); }

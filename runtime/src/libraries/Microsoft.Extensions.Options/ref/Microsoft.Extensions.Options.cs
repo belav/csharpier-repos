@@ -6,7 +6,7 @@
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class OptionsServiceCollectionExtensions
+    partial public static class OptionsServiceCollectionExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddOptions(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
@@ -122,7 +122,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
 namespace Microsoft.Extensions.Options
 {
-    public partial class ConfigureNamedOptions<TOptions>
+    partial public class ConfigureNamedOptions<TOptions>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
             Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
@@ -143,7 +143,7 @@ namespace Microsoft.Extensions.Options
         public void Configure(TOptions options) { }
     }
 
-    public partial class ConfigureNamedOptions<TOptions, TDep>
+    partial public class ConfigureNamedOptions<TOptions, TDep>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
             Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
@@ -173,7 +173,7 @@ namespace Microsoft.Extensions.Options
         public void Configure(TOptions options) { }
     }
 
-    public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2>
+    partial public class ConfigureNamedOptions<TOptions, TDep1, TDep2>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
             Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
@@ -209,7 +209,7 @@ namespace Microsoft.Extensions.Options
         public void Configure(TOptions options) { }
     }
 
-    public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3>
+    partial public class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
             Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
@@ -251,7 +251,7 @@ namespace Microsoft.Extensions.Options
         public void Configure(TOptions options) { }
     }
 
-    public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
+    partial public class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
             Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
@@ -299,7 +299,7 @@ namespace Microsoft.Extensions.Options
         public void Configure(TOptions options) { }
     }
 
-    public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
+    partial public class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
             Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
@@ -353,7 +353,7 @@ namespace Microsoft.Extensions.Options
         public void Configure(TOptions options) { }
     }
 
-    public partial class ConfigureOptions<TOptions>
+    partial public class ConfigureOptions<TOptions>
         : Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
     {
@@ -367,26 +367,26 @@ namespace Microsoft.Extensions.Options
         public virtual void Configure(TOptions options) { }
     }
 
-    public partial interface IConfigureNamedOptions<in TOptions>
+    partial public interface IConfigureNamedOptions<in TOptions>
         : Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
     {
         void Configure(string? name, TOptions options);
     }
 
-    public partial interface IConfigureOptions<in TOptions>
+    partial public interface IConfigureOptions<in TOptions>
         where TOptions : class
     {
         void Configure(TOptions options);
     }
 
-    public partial interface IOptionsChangeTokenSource<out TOptions>
+    partial public interface IOptionsChangeTokenSource<out TOptions>
     {
         string? Name { get; }
         Microsoft.Extensions.Primitives.IChangeToken GetChangeToken();
     }
 
-    public partial interface IOptionsFactory<
+    partial public interface IOptionsFactory<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -401,7 +401,7 @@ namespace Microsoft.Extensions.Options
         TOptions Create(string name);
     }
 
-    public partial interface IOptionsMonitorCache<
+    partial public interface IOptionsMonitorCache<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -419,7 +419,7 @@ namespace Microsoft.Extensions.Options
         bool TryRemove(string? name);
     }
 
-    public partial interface IOptionsMonitor<
+    partial public interface IOptionsMonitor<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -435,7 +435,7 @@ namespace Microsoft.Extensions.Options
         System.IDisposable? OnChange(System.Action<TOptions, string?> listener);
     }
 
-    public partial interface IOptionsSnapshot<
+    partial public interface IOptionsSnapshot<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -450,7 +450,7 @@ namespace Microsoft.Extensions.Options
         TOptions Get(string? name);
     }
 
-    public partial interface IOptions<
+    partial public interface IOptions<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -465,19 +465,19 @@ namespace Microsoft.Extensions.Options
         TOptions Value { get; }
     }
 
-    public partial interface IPostConfigureOptions<in TOptions>
+    partial public interface IPostConfigureOptions<in TOptions>
         where TOptions : class
     {
         void PostConfigure(string? name, TOptions options);
     }
 
-    public partial interface IValidateOptions<TOptions>
+    partial public interface IValidateOptions<TOptions>
         where TOptions : class
     {
         Microsoft.Extensions.Options.ValidateOptionsResult Validate(string? name, TOptions options);
     }
 
-    public static partial class Options
+    partial public static class Options
     {
         public static readonly string DefaultName;
 
@@ -497,7 +497,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class OptionsBuilder<TOptions>
+    partial public class OptionsBuilder<TOptions>
         where TOptions : class
     {
         public OptionsBuilder(
@@ -787,7 +787,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class OptionsCache<
+    partial public class OptionsCache<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -819,7 +819,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class OptionsFactory<
+    partial public class OptionsFactory<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -853,7 +853,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class OptionsManager<
+    partial public class OptionsManager<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -880,7 +880,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public static partial class OptionsMonitorExtensions
+    partial public static class OptionsMonitorExtensions
     {
         public static System.IDisposable? OnChange<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
@@ -900,7 +900,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class OptionsMonitor<
+    partial public class OptionsMonitor<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -936,7 +936,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class OptionsValidationException : System.Exception
+    partial public class OptionsValidationException : System.Exception
     {
         public OptionsValidationException(
             string optionsName,
@@ -962,7 +962,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class OptionsWrapper<
+    partial public class OptionsWrapper<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
             System
                 .Diagnostics
@@ -982,7 +982,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class PostConfigureOptions<TOptions>
+    partial public class PostConfigureOptions<TOptions>
         : Microsoft.Extensions.Options.IPostConfigureOptions<TOptions>
         where TOptions : class
     {
@@ -1000,7 +1000,7 @@ namespace Microsoft.Extensions.Options
         public virtual void PostConfigure(string? name, TOptions options) { }
     }
 
-    public partial class PostConfigureOptions<TOptions, TDep>
+    partial public class PostConfigureOptions<TOptions, TDep>
         : Microsoft.Extensions.Options.IPostConfigureOptions<TOptions>
         where TOptions : class
         where TDep : class
@@ -1029,7 +1029,7 @@ namespace Microsoft.Extensions.Options
         public void PostConfigure(TOptions options) { }
     }
 
-    public partial class PostConfigureOptions<TOptions, TDep1, TDep2>
+    partial public class PostConfigureOptions<TOptions, TDep1, TDep2>
         : Microsoft.Extensions.Options.IPostConfigureOptions<TOptions>
         where TOptions : class
         where TDep1 : class
@@ -1064,7 +1064,7 @@ namespace Microsoft.Extensions.Options
         public void PostConfigure(TOptions options) { }
     }
 
-    public partial class PostConfigureOptions<TOptions, TDep1, TDep2, TDep3>
+    partial public class PostConfigureOptions<TOptions, TDep1, TDep2, TDep3>
         : Microsoft.Extensions.Options.IPostConfigureOptions<TOptions>
         where TOptions : class
         where TDep1 : class
@@ -1105,7 +1105,7 @@ namespace Microsoft.Extensions.Options
         public void PostConfigure(TOptions options) { }
     }
 
-    public partial class PostConfigureOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
+    partial public class PostConfigureOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
         : Microsoft.Extensions.Options.IPostConfigureOptions<TOptions>
         where TOptions : class
         where TDep1 : class
@@ -1152,7 +1152,7 @@ namespace Microsoft.Extensions.Options
         public void PostConfigure(TOptions options) { }
     }
 
-    public partial class PostConfigureOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
+    partial public class PostConfigureOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
         : Microsoft.Extensions.Options.IPostConfigureOptions<TOptions>
         where TOptions : class
         where TDep1 : class
@@ -1205,7 +1205,7 @@ namespace Microsoft.Extensions.Options
         public void PostConfigure(TOptions options) { }
     }
 
-    public partial class ValidateOptionsResult
+    partial public class ValidateOptionsResult
     {
         public static readonly Microsoft.Extensions.Options.ValidateOptionsResult Skip;
         public static readonly Microsoft.Extensions.Options.ValidateOptionsResult Success;
@@ -1253,7 +1253,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class ValidateOptions<TOptions>
+    partial public class ValidateOptions<TOptions>
         : Microsoft.Extensions.Options.IValidateOptions<TOptions>
         where TOptions : class
     {
@@ -1285,7 +1285,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class ValidateOptions<TOptions, TDep>
+    partial public class ValidateOptions<TOptions, TDep>
         : Microsoft.Extensions.Options.IValidateOptions<TOptions>
         where TOptions : class
     {
@@ -1322,7 +1322,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class ValidateOptions<TOptions, TDep1, TDep2>
+    partial public class ValidateOptions<TOptions, TDep1, TDep2>
         : Microsoft.Extensions.Options.IValidateOptions<TOptions>
         where TOptions : class
     {
@@ -1364,7 +1364,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class ValidateOptions<TOptions, TDep1, TDep2, TDep3>
+    partial public class ValidateOptions<TOptions, TDep1, TDep2, TDep3>
         : Microsoft.Extensions.Options.IValidateOptions<TOptions>
         where TOptions : class
     {
@@ -1411,7 +1411,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class ValidateOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
+    partial public class ValidateOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
         : Microsoft.Extensions.Options.IValidateOptions<TOptions>
         where TOptions : class
     {
@@ -1463,7 +1463,7 @@ namespace Microsoft.Extensions.Options
         }
     }
 
-    public partial class ValidateOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
+    partial public class ValidateOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
         : Microsoft.Extensions.Options.IValidateOptions<TOptions>
         where TOptions : class
     {

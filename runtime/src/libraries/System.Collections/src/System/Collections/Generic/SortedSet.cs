@@ -47,7 +47,7 @@ namespace System.Collections.Generic
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial class SortedSet<T>
+    partial public class SortedSet<T>
         : ISet<T>,
             ICollection<T>,
             ICollection,

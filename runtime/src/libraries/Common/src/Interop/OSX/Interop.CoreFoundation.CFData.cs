@@ -9,15 +9,15 @@ using Microsoft.Win32.SafeHandles;
 // Declared as signed long, which has sizeof(void*) on OSX.
 using CFIndex = System.IntPtr;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class CoreFoundation
+    partial internal static class CoreFoundation
     {
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static unsafe partial byte* CFDataGetBytePtr(SafeCFDataHandle cfData);
+        partial private static unsafe byte* CFDataGetBytePtr(SafeCFDataHandle cfData);
 
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static partial CFIndex CFDataGetLength(SafeCFDataHandle cfData);
+        partial private static CFIndex CFDataGetLength(SafeCFDataHandle cfData);
 
         internal static unsafe Span<byte> CFDataDangerousGetSpan(SafeCFDataHandle cfData)
         {

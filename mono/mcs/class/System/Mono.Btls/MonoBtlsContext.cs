@@ -92,7 +92,7 @@ namespace Mono.Btls
             }
         }
 
-        new public MonoBtlsProvider Provider
+        public new MonoBtlsProvider Provider
         {
             get { return (MonoBtlsProvider)base.Provider; }
         }

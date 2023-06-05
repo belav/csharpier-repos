@@ -113,7 +113,7 @@ namespace System.Xml.RwFactoryWriterTests
             get { return _spec; }
         }
 
-        public virtual new string Filter
+        public new virtual string Filter
         {
             get { return _filters[0]; }
             set { _filters = new string[] { value }; }

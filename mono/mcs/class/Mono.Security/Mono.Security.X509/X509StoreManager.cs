@@ -43,14 +43,14 @@ namespace Mono.Security.X509
 #endif
     sealed class X509StoreManager
     {
-        static private string _userPath;
-        static private string _localMachinePath;
-        static private string _newUserPath;
-        static private string _newLocalMachinePath;
-        static private X509Stores _userStore;
-        static private X509Stores _machineStore;
-        static private X509Stores _newUserStore;
-        static private X509Stores _newMachineStore;
+        private static string _userPath;
+        private static string _localMachinePath;
+        private static string _newUserPath;
+        private static string _newLocalMachinePath;
+        private static X509Stores _userStore;
+        private static X509Stores _machineStore;
+        private static X509Stores _newUserStore;
+        private static X509Stores _newMachineStore;
 
         private X509StoreManager() { }
 
@@ -118,7 +118,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static public X509Stores CurrentUser
+        public static X509Stores CurrentUser
         {
             get
             {
@@ -129,7 +129,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static public X509Stores LocalMachine
+        public static X509Stores LocalMachine
         {
             get
             {
@@ -140,7 +140,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static public X509Stores NewCurrentUser
+        public static X509Stores NewCurrentUser
         {
             get
             {
@@ -151,7 +151,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static public X509Stores NewLocalMachine
+        public static X509Stores NewLocalMachine
         {
             get
             {
@@ -162,11 +162,12 @@ namespace Mono.Security.X509
             }
         }
 
+        public
         // Merged stores collections
         // we need to look at both the user and the machine (entreprise)
         // certificates/CRLs when building/validating a chain
 
-        static public X509CertificateCollection IntermediateCACertificates
+        static X509CertificateCollection IntermediateCACertificates
         {
             get
             {
@@ -177,7 +178,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static public ArrayList IntermediateCACrls
+        public static ArrayList IntermediateCACrls
         {
             get
             {
@@ -188,7 +189,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static public X509CertificateCollection TrustedRootCertificates
+        public static X509CertificateCollection TrustedRootCertificates
         {
             get
             {
@@ -199,7 +200,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static public ArrayList TrustedRootCACrls
+        public static ArrayList TrustedRootCACrls
         {
             get
             {
@@ -210,7 +211,7 @@ namespace Mono.Security.X509
             }
         }
 
-        static public X509CertificateCollection UntrustedCertificates
+        public static X509CertificateCollection UntrustedCertificates
         {
             get
             {

@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal partial class HttpSysListener
+partial internal class HttpSysListener
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.ListenerDisposeError,
@@ -15,7 +15,7 @@ internal partial class HttpSysListener
             "Dispose",
             EventName = "ListenerDisposeError"
         )]
-        public static partial void ListenerDisposeError(ILogger logger, Exception exception);
+        partial public static void ListenerDisposeError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.ListenerDisposing,
@@ -23,7 +23,7 @@ internal partial class HttpSysListener
             "Disposing the listener.",
             EventName = "ListenerDisposing"
         )]
-        public static partial void ListenerDisposing(ILogger logger);
+        partial public static void ListenerDisposing(ILogger logger);
 
         [LoggerMessage(
             LoggerEventIds.HttpSysListenerCtorError,
@@ -31,7 +31,7 @@ internal partial class HttpSysListener
             ".Ctor",
             EventName = "HttpSysListenerCtorError"
         )]
-        public static partial void HttpSysListenerCtorError(ILogger logger, Exception exception);
+        partial public static void HttpSysListenerCtorError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.ListenerStartError,
@@ -39,7 +39,7 @@ internal partial class HttpSysListener
             "Start",
             EventName = "ListenerStartError"
         )]
-        public static partial void ListenerStartError(ILogger logger, Exception exception);
+        partial public static void ListenerStartError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.ListenerStarting,
@@ -47,7 +47,7 @@ internal partial class HttpSysListener
             "Starting the listener.",
             EventName = "ListenerStarting"
         )]
-        public static partial void ListenerStarting(ILogger logger);
+        partial public static void ListenerStarting(ILogger logger);
 
         [LoggerMessage(
             LoggerEventIds.ListenerStopError,
@@ -55,7 +55,7 @@ internal partial class HttpSysListener
             "Stop",
             EventName = "ListenerStopError"
         )]
-        public static partial void ListenerStopError(ILogger logger, Exception exception);
+        partial public static void ListenerStopError(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.ListenerStopping,
@@ -63,7 +63,7 @@ internal partial class HttpSysListener
             "Stopping the listener.",
             EventName = "ListenerStopping"
         )]
-        public static partial void ListenerStopping(ILogger logger);
+        partial public static void ListenerStopping(ILogger logger);
 
         [LoggerMessage(
             LoggerEventIds.RequestValidationFailed,
@@ -71,7 +71,7 @@ internal partial class HttpSysListener
             "Error validating request {RequestId}",
             EventName = "RequestValidationFailed"
         )]
-        public static partial void RequestValidationFailed(
+        partial public static void RequestValidationFailed(
             ILogger logger,
             Exception exception,
             ulong requestId

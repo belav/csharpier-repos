@@ -7,10 +7,11 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle.Vie
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle.View
 {
+    partial
     /// <summary>
     /// Interaction logic for CodeStyleSeverityControl.xaml
     /// </summary>
-    internal partial class CodeStyleSeverityControl : UserControl
+    internal class CodeStyleSeverityControl : UserControl
     {
         private readonly CodeStyleSeverityViewModel _viewModel;
 

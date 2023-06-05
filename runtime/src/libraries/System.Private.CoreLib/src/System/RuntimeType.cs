@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    internal sealed partial class RuntimeType : TypeInfo, ICloneable
+    partial internal sealed class RuntimeType : TypeInfo, ICloneable
     {
         public override Assembly Assembly => RuntimeTypeHandle.GetAssembly(this);
         public override Type? BaseType => GetBaseType();

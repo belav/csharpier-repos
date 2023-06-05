@@ -3,9 +3,9 @@
 
 namespace System.Net.Test.Common
 {
-    public static partial class Configuration
+    partial public static class Configuration
     {
-        public static partial class Security
+        partial public static class Security
         {
             // Domain server environment.
             public static string ActiveDirectoryName => GetValue("DOTNET_TEST_NET_AD_DOMAINNAME");

@@ -54,7 +54,7 @@ namespace System.Runtime.Serialization
             Safe = "Read only access."
         )]
         [SecuritySafeCritical]
-        static internal XmlQualifiedName GetBaseContractName(Type type)
+        internal static XmlQualifiedName GetBaseContractName(Type type)
         {
             return EnumDataContractCriticalHelper.GetBaseContractName(type);
         }
@@ -64,7 +64,7 @@ namespace System.Runtime.Serialization
             Safe = "Read only access."
         )]
         [SecuritySafeCritical]
-        static internal Type GetBaseType(XmlQualifiedName baseContractName)
+        internal static Type GetBaseType(XmlQualifiedName baseContractName)
         {
             return EnumDataContractCriticalHelper.GetBaseType(baseContractName);
         }
@@ -186,7 +186,7 @@ namespace System.Runtime.Serialization
                 MessageId = "typeToName",
                 Justification = "No need to support type equivalence here."
             )]
-            static internal void Add(Type type, string localName)
+            internal static void Add(Type type, string localName)
             {
                 XmlQualifiedName stableName = CreateQualifiedName(
                     localName,
@@ -196,14 +196,14 @@ namespace System.Runtime.Serialization
                 nameToType.Add(stableName, type);
             }
 
-            static internal XmlQualifiedName GetBaseContractName(Type type)
+            internal static XmlQualifiedName GetBaseContractName(Type type)
             {
                 XmlQualifiedName retVal = null;
                 typeToName.TryGetValue(type, out retVal);
                 return retVal;
             }
 
-            static internal Type GetBaseType(XmlQualifiedName baseContractName)
+            internal static Type GetBaseType(XmlQualifiedName baseContractName)
             {
                 Type retVal = null;
                 nameToType.TryGetValue(baseContractName, out retVal);

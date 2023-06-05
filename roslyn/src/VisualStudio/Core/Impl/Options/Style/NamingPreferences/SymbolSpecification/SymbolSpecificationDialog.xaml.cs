@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.NamingPreferences
 {
-    internal partial class SymbolSpecificationDialog : DialogWindow
+    partial internal class SymbolSpecificationDialog : DialogWindow
     {
         private readonly SymbolSpecificationViewModel _viewModel;
 

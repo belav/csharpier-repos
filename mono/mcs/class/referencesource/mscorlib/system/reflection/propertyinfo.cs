@@ -236,7 +236,7 @@ namespace System.Reflection
     }
 
     [Serializable]
-    internal unsafe sealed class RuntimePropertyInfo : PropertyInfo, ISerializable
+    internal sealed unsafe class RuntimePropertyInfo : PropertyInfo, ISerializable
     {
         #region Private Data Members
         private int m_token;

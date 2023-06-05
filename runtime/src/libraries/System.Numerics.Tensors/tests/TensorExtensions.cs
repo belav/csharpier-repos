@@ -3,7 +3,7 @@
 
 namespace System.Numerics.Tensors
 {
-    public static partial class TensorExtensions
+    partial public static class TensorExtensions
     {
         private static int[] s_zeroArray = new[] { 0 };
         private static int[] s_oneArray = new[] { 1 };

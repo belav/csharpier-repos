@@ -12,9 +12,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
+    partial internal abstract class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
-        private partial class SymbolReferenceFinder
+        partial private class SymbolReferenceFinder
         {
             internal async Task FindNugetOrReferenceAssemblyReferencesAsync(
                 ArrayBuilder<Reference> allReferences,

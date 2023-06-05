@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         private static readonly SafeCreateHandle s_nullExportString = new SafeCreateHandle();
 
@@ -29,7 +29,7 @@ internal static partial class Interop
             );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_SecKeyImportEphemeral(
+        partial private static int AppleCryptoNative_SecKeyImportEphemeral(
             ref byte pbKeyBlob,
             int cbKeyBlob,
             int isPrivateKey,
@@ -72,7 +72,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_SecKeyExport(
+        partial private static int AppleCryptoNative_SecKeyExport(
             SafeSecKeyRefHandle? key,
             int exportPrivate,
             SafeCreateHandle cfExportPassphrase,

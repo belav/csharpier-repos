@@ -20,16 +20,18 @@ namespace System.Data.Common.QueryCache
     /// </summary>
     internal class QueryCacheEntry
     {
+        private
         #region Fields
         /// <summary>
         /// querycachekey for this entry
         /// </summary>
-        readonly private QueryCacheKey _queryCacheKey;
+        readonly QueryCacheKey _queryCacheKey;
 
+        protected
         /// <summary>
         /// strong reference to the target object
         /// </summary>
-        readonly protected object _target;
+        readonly object _target;
         #endregion
 
         #region Constructors

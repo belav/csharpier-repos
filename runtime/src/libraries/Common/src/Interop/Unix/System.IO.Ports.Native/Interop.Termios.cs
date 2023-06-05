@@ -5,9 +5,9 @@ using System;
 using System.IO.Ports;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Termios
+    partial internal static class Termios
     {
         [Flags]
         internal enum Signals
@@ -34,7 +34,7 @@ internal static partial class Interop
             EntryPoint = "SystemIoPortsNative_TermiosReset",
             SetLastError = true
         )]
-        internal static partial int TermiosReset(
+        partial internal static int TermiosReset(
             SafeSerialDeviceHandle handle,
             int speed,
             int data,
@@ -48,14 +48,14 @@ internal static partial class Interop
             EntryPoint = "SystemIoPortsNative_TermiosGetSignal",
             SetLastError = true
         )]
-        internal static partial int TermiosGetSignal(SafeSerialDeviceHandle handle, Signals signal);
+        partial internal static int TermiosGetSignal(SafeSerialDeviceHandle handle, Signals signal);
 
         [LibraryImport(
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_TermiosSetSignal",
             SetLastError = true
         )]
-        internal static partial int TermiosGetSignal(
+        partial internal static int TermiosGetSignal(
             SafeSerialDeviceHandle handle,
             Signals signal,
             int set
@@ -65,28 +65,28 @@ internal static partial class Interop
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_TermiosGetAllSignals"
         )]
-        internal static partial Signals TermiosGetAllSignals(SafeSerialDeviceHandle handle);
+        partial internal static Signals TermiosGetAllSignals(SafeSerialDeviceHandle handle);
 
         [LibraryImport(
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_TermiosSetSpeed",
             SetLastError = true
         )]
-        internal static partial int TermiosSetSpeed(SafeSerialDeviceHandle handle, int speed);
+        partial internal static int TermiosSetSpeed(SafeSerialDeviceHandle handle, int speed);
 
         [LibraryImport(
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_TermiosGetSpeed",
             SetLastError = true
         )]
-        internal static partial int TermiosGetSpeed(SafeSerialDeviceHandle handle);
+        partial internal static int TermiosGetSpeed(SafeSerialDeviceHandle handle);
 
         [LibraryImport(
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_TermiosAvailableBytes",
             SetLastError = true
         )]
-        internal static partial int TermiosGetAvailableBytes(
+        partial internal static int TermiosGetAvailableBytes(
             SafeSerialDeviceHandle handle,
             [MarshalAs(UnmanagedType.Bool)] bool fromReadBuffer
         );
@@ -96,20 +96,20 @@ internal static partial class Interop
             EntryPoint = "SystemIoPortsNative_TermiosDiscard",
             SetLastError = true
         )]
-        internal static partial int TermiosDiscard(SafeSerialDeviceHandle handle, Queue input);
+        partial internal static int TermiosDiscard(SafeSerialDeviceHandle handle, Queue input);
 
         [LibraryImport(
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_TermiosDrain",
             SetLastError = true
         )]
-        internal static partial int TermiosDrain(SafeSerialDeviceHandle handle);
+        partial internal static int TermiosDrain(SafeSerialDeviceHandle handle);
 
         [LibraryImport(
             Libraries.IOPortsNative,
             EntryPoint = "SystemIoPortsNative_TermiosSendBreak",
             SetLastError = true
         )]
-        internal static partial int TermiosSendBreak(SafeSerialDeviceHandle handle, int duration);
+        partial internal static int TermiosSendBreak(SafeSerialDeviceHandle handle, int duration);
     }
 }

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 public class GitHub_27279
 {
-    public unsafe static int Main()
+    public static unsafe int Main()
     {
         bool res = Unsafe.IsAddressLessThan(
             ref Unsafe.AsRef<byte>((void*)(-1)),

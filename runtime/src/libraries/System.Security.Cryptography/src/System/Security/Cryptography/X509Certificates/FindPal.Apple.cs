@@ -3,9 +3,9 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class FindPal
+    partial internal sealed class FindPal
     {
-        private static partial IFindPal OpenPal(
+        partial private static IFindPal OpenPal(
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
             bool validOnly

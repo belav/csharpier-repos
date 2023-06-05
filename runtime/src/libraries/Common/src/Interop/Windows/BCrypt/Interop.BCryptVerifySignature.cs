@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class BCrypt
+    partial internal static class BCrypt
     {
         [Flags]
         private enum BCryptSignVerifyFlags : uint
@@ -18,7 +18,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.BCrypt)]
-        private static unsafe partial NTSTATUS BCryptVerifySignature(
+        partial private static unsafe NTSTATUS BCryptVerifySignature(
             SafeBCryptKeyHandle hKey,
             void* pPaddingInfo,
             byte* pbHash,

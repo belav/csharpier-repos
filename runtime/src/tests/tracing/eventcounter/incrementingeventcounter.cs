@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace BasicEventSourceTests
 {
-    public partial class TestIncrementingEventCounter
+    partial public class TestIncrementingEventCounter
     {
         private static ManualResetEvent evnt = new ManualResetEvent(false);
 

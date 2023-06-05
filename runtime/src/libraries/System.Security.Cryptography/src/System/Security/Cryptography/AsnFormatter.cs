@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    internal abstract partial class AsnFormatter
+    partial internal abstract class AsnFormatter
     {
         internal static AsnFormatter Instance
         {

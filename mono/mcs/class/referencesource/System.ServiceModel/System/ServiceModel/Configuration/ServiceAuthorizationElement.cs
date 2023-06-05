@@ -15,7 +15,7 @@ namespace System.ServiceModel.Configuration
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
 
-    public sealed partial class ServiceAuthorizationElement : BehaviorExtensionElement
+    partial public sealed class ServiceAuthorizationElement : BehaviorExtensionElement
     {
         public ServiceAuthorizationElement() { }
 

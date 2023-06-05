@@ -7,7 +7,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Interop
 {
-    public partial class NativeStructType : MetadataType
+    partial public class NativeStructType : MetadataType
     {
         // The managed struct that this type will imitate
         public MetadataType ManagedStructType { get; }
@@ -298,10 +298,11 @@ namespace Internal.TypeSystem.Interop
             return _fields;
         }
 
+        partial
         /// <summary>
         /// Synthetic field on <see cref="NativeStructType"/>.
         /// </summary>
-        private partial class NativeStructField : FieldDesc
+        private class NativeStructField : FieldDesc
         {
             private TypeDesc _fieldType;
             private MetadataType _owningType;

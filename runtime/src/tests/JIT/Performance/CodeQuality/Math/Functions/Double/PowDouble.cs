@@ -5,7 +5,7 @@ using System;
 
 namespace Functions
 {
-    public static partial class MathTests
+    partial public static class MathTests
     {
         // Tests Math.Pow(double, double) over 5000 iterations for the domain x: +2, +1; y: -2, -1
 

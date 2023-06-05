@@ -46,12 +46,12 @@ namespace System.Data.Services.Client
             return base.ContainsKey(value);
         }
 
-        new public bool Remove(T value)
+        public new bool Remove(T value)
         {
             return base.Remove(value);
         }
 
-        new public IEnumerator<T> GetEnumerator()
+        public new IEnumerator<T> GetEnumerator()
         {
             return base.Keys.GetEnumerator();
         }

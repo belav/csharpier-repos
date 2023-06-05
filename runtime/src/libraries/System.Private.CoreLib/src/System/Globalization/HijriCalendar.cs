@@ -3,6 +3,7 @@
 
 namespace System.Globalization
 {
+    partial
     /// <remarks>
     /// Rules for the Hijri calendar:
     ///   - The Hijri calendar is a strictly Lunar calendar.
@@ -36,7 +37,7 @@ namespace System.Globalization
     ///     Hijri       0001/01/01   9666/04/03
     /// </remarks>
 
-    public partial class HijriCalendar : Calendar
+    public class HijriCalendar : Calendar
     {
         public static readonly int HijriEra = 1;
 

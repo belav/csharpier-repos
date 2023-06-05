@@ -4,16 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Logoncli
+    partial internal static class Logoncli
     {
         [LibraryImport(
             Libraries.Logoncli,
             EntryPoint = "DsGetDcNameW",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial int DsGetDcName(
+        partial internal static int DsGetDcName(
             string computerName,
             string domainName,
             IntPtr domainGuid,

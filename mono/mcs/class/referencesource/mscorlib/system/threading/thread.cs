@@ -65,10 +65,10 @@ namespace System.Threading
         }
 
         [System.Security.SecurityCritical]
-        static internal ContextCallback _ccb = new ContextCallback(ThreadStart_Context);
+        internal static ContextCallback _ccb = new ContextCallback(ThreadStart_Context);
 
         [System.Security.SecurityCritical]
-        static private void ThreadStart_Context(Object state)
+        private static void ThreadStart_Context(Object state)
         {
             ThreadHelper t = (ThreadHelper)state;
             if (t._start is ThreadStart)
@@ -136,11 +136,12 @@ namespace System.Threading
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(_Thread))]
     [System.Runtime.InteropServices.ComVisible(true)]
+    partial
 #endif
 #if !NETCORE
     public
 #endif
-    sealed partial class Thread : CriticalFinalizerObject
+    sealed class Thread : CriticalFinalizerObject
 #if !MOBILE && !NETCORE
             , _Thread
 #endif
@@ -184,6 +185,7 @@ namespace System.Threading
 #pragma warning restore 169
 
         private bool m_ExecutionContextBelongsToOuterScope;
+        private
 #if DEBUG
         private bool m_ForbidExecutionContextMutation;
 #endif
@@ -194,13 +196,13 @@ namespace System.Threading
         ** This manager is responsible for storing the global data that is
         ** shared amongst all the thread local stores.
         =========================================================================*/
-        static private LocalDataStoreMgr s_LocalDataStoreMgr;
+        static LocalDataStoreMgr s_LocalDataStoreMgr;
 
         /*=========================================================================
         ** Thread-local data store
         =========================================================================*/
         [ThreadStatic]
-        static private LocalDataStoreHolder s_LocalDataStore;
+        private static LocalDataStoreHolder s_LocalDataStore;
 #endif
 
         // Do not move! Order of above fields needs to be preserved for alignment
@@ -308,7 +310,7 @@ namespace System.Threading
             return m_ManagedThreadId;
         }
 
-        extern public int ManagedThreadId
+        public extern int ManagedThreadId
         {
             [ResourceExposure(ResourceScope.None)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -543,7 +545,7 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static IntPtr InternalGetCurrentThread();
+        internal static extern IntPtr InternalGetCurrentThread();
 
         /*=========================================================================
         ** Raises a ThreadAbortException in the thread, which usually
@@ -1290,7 +1292,7 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static extern private bool nativeGetSafeCulture(
+        private static extern bool nativeGetSafeCulture(
             Thread t,
             int appDomainId,
             bool isUI,
@@ -1440,7 +1442,7 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static extern private bool nativeSetThreadUILocale(String locale);
+        private static extern bool nativeSetThreadUILocale(String locale);
 #endif
 
         // As the culture can be customized object then we cannot hold any

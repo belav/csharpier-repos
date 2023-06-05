@@ -86,7 +86,7 @@ namespace System.Web.UI.MobileControls
         }
 
         [DefaultValue(false)]
-        public override sealed bool EnableTheming
+        public sealed override bool EnableTheming
         {
             get { return false; }
             set
@@ -165,7 +165,7 @@ namespace System.Web.UI.MobileControls
         }
 
         [Browsable(false)]
-        public override sealed string SkinID
+        public sealed override string SkinID
         {
             get { return String.Empty; }
             set
@@ -177,7 +177,7 @@ namespace System.Web.UI.MobileControls
         }
 
         [EditorBrowsable(EditorBrowsableState.Never),]
-        public override sealed void ApplyStyleSheetSkin(Page page)
+        public sealed override void ApplyStyleSheetSkin(Page page)
         {
             throw new NotSupportedException(SR.GetString(SR.Theme_Not_Supported_On_MobileControls));
         }
@@ -742,7 +742,7 @@ namespace System.Web.UI.MobileControls
             Bindable(false),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         ]
-        internal protected virtual Style Style
+        protected internal virtual Style Style
         {
             get
             {
@@ -1128,7 +1128,7 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        static internal void TranslateAndAppendText(String text, StringWriter writer)
+        internal static void TranslateAndAppendText(String text, StringWriter writer)
         {
             // Can't quite use HtmlDecode, because HtmlDecode doesn't
             // parse &nbsp; the way we'd like it to.

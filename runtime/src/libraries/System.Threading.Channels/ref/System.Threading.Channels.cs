@@ -14,7 +14,7 @@ namespace System.Threading.Channels
         DropWrite = 3,
     }
 
-    public sealed partial class BoundedChannelOptions : System.Threading.Channels.ChannelOptions
+    partial public sealed class BoundedChannelOptions : System.Threading.Channels.ChannelOptions
     {
         public BoundedChannelOptions(int capacity) { }
 
@@ -30,7 +30,7 @@ namespace System.Threading.Channels
         }
     }
 
-    public static partial class Channel
+    partial public static class Channel
     {
         public static System.Threading.Channels.Channel<T> CreateBounded<T>(int capacity)
         {
@@ -65,7 +65,7 @@ namespace System.Threading.Channels
         }
     }
 
-    public partial class ChannelClosedException : System.InvalidOperationException
+    partial public class ChannelClosedException : System.InvalidOperationException
     {
         public ChannelClosedException() { }
 
@@ -76,7 +76,7 @@ namespace System.Threading.Channels
         public ChannelClosedException(string? message, System.Exception? innerException) { }
     }
 
-    public abstract partial class ChannelOptions
+    partial public abstract class ChannelOptions
     {
         protected ChannelOptions() { }
 
@@ -97,7 +97,7 @@ namespace System.Threading.Channels
         }
     }
 
-    public abstract partial class ChannelReader<T>
+    partial public abstract class ChannelReader<T>
     {
         protected ChannelReader() { }
 
@@ -142,7 +142,7 @@ namespace System.Threading.Channels
         );
     }
 
-    public abstract partial class ChannelWriter<T>
+    partial public abstract class ChannelWriter<T>
     {
         protected ChannelWriter() { }
 
@@ -169,12 +169,12 @@ namespace System.Threading.Channels
         }
     }
 
-    public abstract partial class Channel<T> : System.Threading.Channels.Channel<T, T>
+    partial public abstract class Channel<T> : System.Threading.Channels.Channel<T, T>
     {
         protected Channel() { }
     }
 
-    public abstract partial class Channel<TWrite, TRead>
+    partial public abstract class Channel<TWrite, TRead>
     {
         protected Channel() { }
 
@@ -204,7 +204,7 @@ namespace System.Threading.Channels
         }
     }
 
-    public sealed partial class UnboundedChannelOptions : System.Threading.Channels.ChannelOptions
+    partial public sealed class UnboundedChannelOptions : System.Threading.Channels.ChannelOptions
     {
         public UnboundedChannelOptions() { }
     }

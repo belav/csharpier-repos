@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     [ContentType(ContentTypeNames.RoslynContentType)]
     [ContentType(ContentTypeNames.XamlContentType)]
     [TagType(typeof(IErrorTag))]
-    internal sealed partial class DiagnosticsSquiggleTaggerProvider
+    partial internal sealed class DiagnosticsSquiggleTaggerProvider
         : AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>
     {
         protected override ImmutableArray<IOption2> Options { get; } =

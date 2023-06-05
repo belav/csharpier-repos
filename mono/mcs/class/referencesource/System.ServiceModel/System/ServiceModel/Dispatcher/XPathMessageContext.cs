@@ -212,7 +212,7 @@ namespace System.ServiceModel.Dispatcher
 
     internal abstract class XPathMessageFunction : IXsltContextFunction
     {
-        internal readonly static DateTime ZeroDate = new DateTime(
+        internal static readonly DateTime ZeroDate = new DateTime(
             1,
             1,
             1,
@@ -221,7 +221,7 @@ namespace System.ServiceModel.Dispatcher
             0,
             DateTimeKind.Utc
         );
-        internal readonly static XmlNamespaceManager Namespaces = new XmlNamespaceManager(
+        internal static readonly XmlNamespaceManager Namespaces = new XmlNamespaceManager(
             new NameTable()
         );
 

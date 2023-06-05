@@ -6,7 +6,7 @@
 
 namespace System.IO
 {
-    public static partial class FileSystemAclExtensions
+    partial public static class FileSystemAclExtensions
     {
         public static void Create(
             this System.IO.DirectoryInfo directoryInfo,
@@ -90,7 +90,7 @@ namespace System.IO
 
 namespace System.Security.AccessControl
 {
-    public abstract partial class DirectoryObjectSecurity
+    partial public abstract class DirectoryObjectSecurity
         : System.Security.AccessControl.ObjectSecurity
     {
         protected DirectoryObjectSecurity() { }
@@ -196,7 +196,7 @@ namespace System.Security.AccessControl
         protected void SetAuditRule(System.Security.AccessControl.ObjectAuditRule rule) { }
     }
 
-    public sealed partial class DirectorySecurity : System.Security.AccessControl.FileSystemSecurity
+    partial public sealed class DirectorySecurity : System.Security.AccessControl.FileSystemSecurity
     {
         public DirectorySecurity() { }
 
@@ -206,7 +206,7 @@ namespace System.Security.AccessControl
         ) { }
     }
 
-    public sealed partial class FileSecurity : System.Security.AccessControl.FileSystemSecurity
+    partial public sealed class FileSecurity : System.Security.AccessControl.FileSystemSecurity
     {
         public FileSecurity() { }
 
@@ -216,7 +216,7 @@ namespace System.Security.AccessControl
         ) { }
     }
 
-    public sealed partial class FileSystemAccessRule : System.Security.AccessControl.AccessRule
+    partial public sealed class FileSystemAccessRule : System.Security.AccessControl.AccessRule
     {
         public FileSystemAccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -284,7 +284,7 @@ namespace System.Security.AccessControl
         }
     }
 
-    public sealed partial class FileSystemAuditRule : System.Security.AccessControl.AuditRule
+    partial public sealed class FileSystemAuditRule : System.Security.AccessControl.AuditRule
     {
         public FileSystemAuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -380,7 +380,7 @@ namespace System.Security.AccessControl
         FullControl = 2032127,
     }
 
-    public abstract partial class FileSystemSecurity
+    partial public abstract class FileSystemSecurity
         : System.Security.AccessControl.NativeObjectSecurity
     {
         internal FileSystemSecurity()

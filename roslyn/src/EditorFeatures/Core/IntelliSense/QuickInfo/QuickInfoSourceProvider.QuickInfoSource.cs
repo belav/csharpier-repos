@@ -29,7 +29,7 @@ using Microsoft.CodeAnalysis.Editor.InlineRename;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
 {
-    internal partial class QuickInfoSourceProvider
+    partial internal class QuickInfoSourceProvider
     {
         private sealed class QuickInfoSource : IAsyncQuickInfoSource
         {

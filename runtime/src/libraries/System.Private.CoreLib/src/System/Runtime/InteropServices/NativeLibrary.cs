@@ -25,10 +25,11 @@ namespace System.Runtime.InteropServices
         DllImportSearchPath? searchPath
     );
 
+    partial
     /// <summary>
     /// APIs for managing Native Libraries
     /// </summary>
-    public static partial class NativeLibrary
+    public static class NativeLibrary
     {
         /// <summary>
         /// NativeLibrary Loader: Simple API

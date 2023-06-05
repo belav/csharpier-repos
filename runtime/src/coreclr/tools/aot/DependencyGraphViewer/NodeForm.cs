@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace DependencyLogViewer
 {
-    public partial class NodeForm : Form
+    partial public class NodeForm : Form
     {
         private readonly Graph _graph;
         private readonly Node _node;

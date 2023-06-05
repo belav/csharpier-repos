@@ -7,22 +7,22 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AndroidCrypto
+    partial internal static class AndroidCrypto
     {
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_RsaCreate")]
-        internal static partial SafeRsaHandle RsaCreate();
+        partial internal static SafeRsaHandle RsaCreate();
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_RsaUpRef")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool RsaUpRef(IntPtr rsa);
+        partial internal static bool RsaUpRef(IntPtr rsa);
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_RsaDestroy"
         )]
-        internal static partial void RsaDestroy(IntPtr rsa);
+        partial internal static void RsaDestroy(IntPtr rsa);
 
         internal static SafeRsaHandle DecodeRsaSubjectPublicKeyInfo(ReadOnlySpan<byte> buf) =>
             DecodeRsaSubjectPublicKeyInfo(ref MemoryMarshal.GetReference(buf), buf.Length);
@@ -31,7 +31,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_DecodeRsaSubjectPublicKeyInfo"
         )]
-        private static partial SafeRsaHandle DecodeRsaSubjectPublicKeyInfo(ref byte buf, int len);
+        partial private static SafeRsaHandle DecodeRsaSubjectPublicKeyInfo(ref byte buf, int len);
 
         internal static int RsaPublicEncrypt(
             int flen,
@@ -52,7 +52,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_RsaPublicEncrypt"
         )]
-        private static partial int RsaPublicEncrypt(
+        partial private static int RsaPublicEncrypt(
             int flen,
             ref byte from,
             ref byte to,
@@ -79,7 +79,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_RsaPrivateDecrypt"
         )]
-        private static partial int RsaPrivateDecrypt(
+        partial private static int RsaPrivateDecrypt(
             int flen,
             ref byte from,
             ref byte to,
@@ -103,7 +103,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_RsaSignPrimitive"
         )]
-        private static partial int RsaSignPrimitive(
+        partial private static int RsaSignPrimitive(
             int flen,
             ref byte from,
             ref byte to,
@@ -126,7 +126,7 @@ internal static partial class Interop
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_RsaVerificationPrimitive"
         )]
-        private static partial int RsaVerificationPrimitive(
+        partial private static int RsaVerificationPrimitive(
             int flen,
             ref byte from,
             ref byte to,
@@ -134,13 +134,13 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_RsaSize")]
-        internal static partial int RsaSize(SafeRsaHandle rsa);
+        partial internal static int RsaSize(SafeRsaHandle rsa);
 
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_RsaGenerateKeyEx"
         )]
-        internal static partial int RsaGenerateKeyEx(SafeRsaHandle rsa, int bits);
+        partial internal static int RsaGenerateKeyEx(SafeRsaHandle rsa, int bits);
 
         internal static RSAParameters ExportRsaParameters(
             SafeRsaHandle key,
@@ -230,7 +230,7 @@ internal static partial class Interop
             EntryPoint = "AndroidCryptoNative_GetRsaParameters"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool GetRsaParameters(
+        partial private static bool GetRsaParameters(
             SafeRsaHandle key,
             out SafeBignumHandle n,
             out SafeBignumHandle e,
@@ -247,7 +247,7 @@ internal static partial class Interop
             EntryPoint = "AndroidCryptoNative_SetRsaParameters"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetRsaParameters(
+        partial internal static bool SetRsaParameters(
             SafeRsaHandle key,
             byte[]? n,
             int nLength,

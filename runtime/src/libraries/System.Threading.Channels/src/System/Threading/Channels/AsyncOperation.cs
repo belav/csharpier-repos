@@ -37,9 +37,10 @@ namespace System.Threading.Channels
             throw new InvalidOperationException(SR.InvalidOperation_IncorrectToken);
     }
 
+    partial
     /// <summary>The representation of an asynchronous operation that has a result value.</summary>
     /// <typeparam name="TResult">Specifies the type of the result.  May be <see cref="VoidResult"/>.</typeparam>
-    internal partial class AsyncOperation<TResult>
+    internal class AsyncOperation<TResult>
         : AsyncOperation,
             IValueTaskSource,
             IValueTaskSource<TResult>

@@ -9,7 +9,7 @@ abstract class sample
             public static TValue Val;
         }
 
-        public override sealed TValue Value<TKey, TValue>()
+        public sealed override TValue Value<TKey, TValue>()
         {
             return holder<TKey, TValue>.Val;
         }

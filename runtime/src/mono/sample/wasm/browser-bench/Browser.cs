@@ -3,7 +3,7 @@
 
 namespace Sample
 {
-    public partial class Test
+    partial public class Test
     {
         public static int Main(string[] args)
         {

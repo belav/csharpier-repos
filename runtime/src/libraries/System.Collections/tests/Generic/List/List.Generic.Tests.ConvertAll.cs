@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
-    public abstract partial class List_Generic_Tests<T> : IList_Generic_Tests<T>
+    partial public abstract class List_Generic_Tests<T> : IList_Generic_Tests<T>
     {
         [Fact]
         public void ConvertAll()

@@ -17,13 +17,13 @@ namespace System
 namespace System.Configuration
 {
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class ApplicationScopedSettingAttribute
+    partial public sealed class ApplicationScopedSettingAttribute
         : System.Configuration.SettingAttribute
     {
         public ApplicationScopedSettingAttribute() { }
     }
 
-    public abstract partial class ApplicationSettingsBase
+    partial public abstract class ApplicationSettingsBase
         : System.Configuration.SettingsBase,
             System.ComponentModel.INotifyPropertyChanged
     {
@@ -128,13 +128,13 @@ namespace System.Configuration
         public virtual void Upgrade() { }
     }
 
-    public sealed partial class ApplicationSettingsGroup
+    partial public sealed class ApplicationSettingsGroup
         : System.Configuration.ConfigurationSectionGroup
     {
         public ApplicationSettingsGroup() { }
     }
 
-    public partial class AppSettingsReader
+    partial public class AppSettingsReader
     {
         public AppSettingsReader() { }
 
@@ -144,7 +144,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class AppSettingsSection : System.Configuration.ConfigurationSection
+    partial public sealed class AppSettingsSection : System.Configuration.ConfigurationSection
     {
         public AppSettingsSection() { }
 
@@ -189,7 +189,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class CallbackValidator : System.Configuration.ConfigurationValidatorBase
+    partial public sealed class CallbackValidator : System.Configuration.ConfigurationValidatorBase
     {
         public CallbackValidator(System.Type type, System.Configuration.ValidatorCallback callback)
         { }
@@ -203,7 +203,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class CallbackValidatorAttribute
+    partial public sealed class CallbackValidatorAttribute
         : System.Configuration.ConfigurationValidatorAttribute
     {
         public CallbackValidatorAttribute() { }
@@ -224,7 +224,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class ClientSettingsSection : System.Configuration.ConfigurationSection
+    partial public sealed class ClientSettingsSection : System.Configuration.ConfigurationSection
     {
         public ClientSettingsSection() { }
 
@@ -238,7 +238,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class CommaDelimitedStringCollection
+    partial public sealed class CommaDelimitedStringCollection
         : System.Collections.Specialized.StringCollection
     {
         public CommaDelimitedStringCollection() { }
@@ -280,7 +280,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class CommaDelimitedStringCollectionConverter
+    partial public sealed class CommaDelimitedStringCollectionConverter
         : System.Configuration.ConfigurationConverterBase
     {
         public CommaDelimitedStringCollectionConverter() { }
@@ -305,7 +305,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class Configuration
+    partial public sealed class Configuration
     {
         internal Configuration() { }
 
@@ -414,7 +414,7 @@ namespace System.Configuration
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class | System.AttributeTargets.Property
     )]
-    public sealed partial class ConfigurationCollectionAttribute : System.Attribute
+    partial public sealed class ConfigurationCollectionAttribute : System.Attribute
     {
         public ConfigurationCollectionAttribute(System.Type itemType) { }
 
@@ -444,7 +444,7 @@ namespace System.Configuration
         }
     }
 
-    public abstract partial class ConfigurationConverterBase : System.ComponentModel.TypeConverter
+    partial public abstract class ConfigurationConverterBase : System.ComponentModel.TypeConverter
     {
         protected ConfigurationConverterBase() { }
 
@@ -465,7 +465,7 @@ namespace System.Configuration
         }
     }
 
-    public abstract partial class ConfigurationElement
+    partial public abstract class ConfigurationElement
     {
         protected ConfigurationElement() { }
 
@@ -624,7 +624,7 @@ namespace System.Configuration
     }
 
     [System.Diagnostics.DebuggerDisplayAttribute("Count = {Count}")]
-    public abstract partial class ConfigurationElementCollection
+    partial public abstract class ConfigurationElementCollection
         : System.Configuration.ConfigurationElement,
             System.Collections.ICollection,
             System.Collections.IEnumerable
@@ -813,7 +813,7 @@ namespace System.Configuration
         AddRemoveClearMapAlternate = 3,
     }
 
-    public sealed partial class ConfigurationElementProperty
+    partial public sealed class ConfigurationElementProperty
     {
         public ConfigurationElementProperty(
             System.Configuration.ConfigurationValidatorBase validator
@@ -825,7 +825,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class ConfigurationErrorsException : System.Configuration.ConfigurationException
+    partial public class ConfigurationErrorsException : System.Configuration.ConfigurationException
     {
         public ConfigurationErrorsException() { }
 
@@ -910,7 +910,7 @@ namespace System.Configuration
         ) { }
     }
 
-    public partial class ConfigurationException : System.SystemException
+    partial public class ConfigurationException : System.SystemException
     {
         [System.ObsoleteAttribute(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."
@@ -1000,7 +1000,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class ConfigurationFileMap : System.ICloneable
+    partial public class ConfigurationFileMap : System.ICloneable
     {
         public ConfigurationFileMap() { }
 
@@ -1018,7 +1018,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class ConfigurationLocation
+    partial public class ConfigurationLocation
     {
         internal ConfigurationLocation() { }
 
@@ -1033,7 +1033,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class ConfigurationLocationCollection : System.Collections.ReadOnlyCollectionBase
+    partial public class ConfigurationLocationCollection : System.Collections.ReadOnlyCollectionBase
     {
         internal ConfigurationLocationCollection() { }
 
@@ -1043,7 +1043,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class ConfigurationLockCollection
+    partial public sealed class ConfigurationLockCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -1102,7 +1102,7 @@ namespace System.Configuration
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
     }
 
-    public static partial class ConfigurationManager
+    partial public static class ConfigurationManager
     {
         public static System.Collections.Specialized.NameValueCollection AppSettings
         {
@@ -1162,7 +1162,7 @@ namespace System.Configuration
         public static void RefreshSection(string sectionName) { }
     }
 
-    public sealed partial class ConfigurationProperty
+    partial public sealed class ConfigurationProperty
     {
         public ConfigurationProperty(string name, System.Type type) { }
 
@@ -1245,7 +1245,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class ConfigurationPropertyAttribute : System.Attribute
+    partial public sealed class ConfigurationPropertyAttribute : System.Attribute
     {
         public ConfigurationPropertyAttribute(string name) { }
 
@@ -1280,7 +1280,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class ConfigurationPropertyCollection
+    partial public class ConfigurationPropertyCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -1346,7 +1346,7 @@ namespace System.Configuration
         Full = 2,
     }
 
-    public abstract partial class ConfigurationSection : System.Configuration.ConfigurationElement
+    partial public abstract class ConfigurationSection : System.Configuration.ConfigurationElement
     {
         protected ConfigurationSection() { }
 
@@ -1405,7 +1405,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class ConfigurationSectionCollection
+    partial public sealed class ConfigurationSectionCollection
         : System.Collections.Specialized.NameObjectCollectionBase
     {
         internal ConfigurationSectionCollection() { }
@@ -1463,7 +1463,7 @@ namespace System.Configuration
         public void RemoveAt(int index) { }
     }
 
-    public partial class ConfigurationSectionGroup
+    partial public class ConfigurationSectionGroup
     {
         public ConfigurationSectionGroup() { }
 
@@ -1509,7 +1509,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class ConfigurationSectionGroupCollection
+    partial public sealed class ConfigurationSectionGroupCollection
         : System.Collections.Specialized.NameObjectCollectionBase
     {
         internal ConfigurationSectionGroupCollection() { }
@@ -1570,7 +1570,7 @@ namespace System.Configuration
         public void RemoveAt(int index) { }
     }
 
-    public sealed partial class ConfigurationSettings
+    partial public sealed class ConfigurationSettings
     {
         internal ConfigurationSettings() { }
 
@@ -1599,7 +1599,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public partial class ConfigurationValidatorAttribute : System.Attribute
+    partial public class ConfigurationValidatorAttribute : System.Attribute
     {
         protected ConfigurationValidatorAttribute() { }
 
@@ -1615,7 +1615,7 @@ namespace System.Configuration
         }
     }
 
-    public abstract partial class ConfigurationValidatorBase
+    partial public abstract class ConfigurationValidatorBase
     {
         protected ConfigurationValidatorBase() { }
 
@@ -1627,7 +1627,7 @@ namespace System.Configuration
         public abstract void Validate(object value);
     }
 
-    public sealed partial class ConfigXmlDocument
+    partial public sealed class ConfigXmlDocument
         : System.Xml.XmlDocument,
             System.Configuration.Internal.IConfigErrorInfo
     {
@@ -1698,7 +1698,7 @@ namespace System.Configuration
         public void LoadSingleElement(string filename, System.Xml.XmlTextReader sourceReader) { }
     }
 
-    public sealed partial class ConnectionStringSettings : System.Configuration.ConfigurationElement
+    partial public sealed class ConnectionStringSettings : System.Configuration.ConfigurationElement
     {
         public ConnectionStringSettings() { }
 
@@ -1736,7 +1736,7 @@ namespace System.Configuration
     [System.Configuration.ConfigurationCollectionAttribute(
         typeof(System.Configuration.ConnectionStringSettings)
     )]
-    public sealed partial class ConnectionStringSettingsCollection
+    partial public sealed class ConnectionStringSettingsCollection
         : System.Configuration.ConfigurationElementCollection
     {
         public ConnectionStringSettingsCollection() { }
@@ -1786,7 +1786,7 @@ namespace System.Configuration
         public void RemoveAt(int index) { }
     }
 
-    public sealed partial class ConnectionStringsSection : System.Configuration.ConfigurationSection
+    partial public sealed class ConnectionStringsSection : System.Configuration.ConfigurationSection
     {
         public ConnectionStringsSection() { }
 
@@ -1805,7 +1805,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class ContextInformation
+    partial public sealed class ContextInformation
     {
         internal ContextInformation() { }
 
@@ -1824,7 +1824,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class DefaultSection : System.Configuration.ConfigurationSection
+    partial public sealed class DefaultSection : System.Configuration.ConfigurationSection
     {
         public DefaultSection() { }
 
@@ -1855,7 +1855,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class DefaultSettingValueAttribute : System.Attribute
+    partial public sealed class DefaultSettingValueAttribute : System.Attribute
     {
         public DefaultSettingValueAttribute(string value) { }
 
@@ -1865,7 +1865,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class DefaultValidator : System.Configuration.ConfigurationValidatorBase
+    partial public sealed class DefaultValidator : System.Configuration.ConfigurationValidatorBase
     {
         public DefaultValidator() { }
 
@@ -1877,7 +1877,7 @@ namespace System.Configuration
         public override void Validate(object value) { }
     }
 
-    public partial class DictionarySectionHandler
+    partial public class DictionarySectionHandler
         : System.Configuration.IConfigurationSectionHandler
     {
         public DictionarySectionHandler() { }
@@ -1898,7 +1898,7 @@ namespace System.Configuration
     }
 
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-    public sealed partial class DpapiProtectedConfigurationProvider
+    partial public sealed class DpapiProtectedConfigurationProvider
         : System.Configuration.ProtectedConfigurationProvider
     {
         public DpapiProtectedConfigurationProvider() { }
@@ -1924,7 +1924,7 @@ namespace System.Configuration
         ) { }
     }
 
-    public sealed partial class ElementInformation
+    partial public sealed class ElementInformation
     {
         internal ElementInformation() { }
 
@@ -1966,7 +1966,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class ExeConfigurationFileMap : System.Configuration.ConfigurationFileMap
+    partial public sealed class ExeConfigurationFileMap : System.Configuration.ConfigurationFileMap
     {
         public ExeConfigurationFileMap() { }
 
@@ -1994,7 +1994,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class ExeContext
+    partial public sealed class ExeContext
     {
         internal ExeContext() { }
 
@@ -2008,7 +2008,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class GenericEnumConverter
+    partial public sealed class GenericEnumConverter
         : System.Configuration.ConfigurationConverterBase
     {
         public GenericEnumConverter(System.Type typeEnum) { }
@@ -2033,7 +2033,7 @@ namespace System.Configuration
         }
     }
 
-    public partial interface IApplicationSettingsProvider
+    partial public interface IApplicationSettingsProvider
     {
         System.Configuration.SettingsPropertyValue GetPreviousVersion(
             System.Configuration.SettingsContext context,
@@ -2046,18 +2046,18 @@ namespace System.Configuration
         );
     }
 
-    public partial interface IConfigurationSectionHandler
+    partial public interface IConfigurationSectionHandler
     {
         object Create(object parent, object configContext, System.Xml.XmlNode section);
     }
 
-    public partial interface IConfigurationSystem
+    partial public interface IConfigurationSystem
     {
         object GetConfig(string configKey);
         void Init();
     }
 
-    public sealed partial class IdnElement : System.Configuration.ConfigurationElement
+    partial public sealed class IdnElement : System.Configuration.ConfigurationElement
     {
         public IdnElement() { }
 
@@ -2072,7 +2072,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class IgnoreSection : System.Configuration.ConfigurationSection
+    partial public sealed class IgnoreSection : System.Configuration.ConfigurationSection
     {
         public IgnoreSection() { }
 
@@ -2102,7 +2102,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class IgnoreSectionHandler : System.Configuration.IConfigurationSectionHandler
+    partial public class IgnoreSectionHandler : System.Configuration.IConfigurationSectionHandler
     {
         public IgnoreSectionHandler() { }
 
@@ -2116,7 +2116,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class InfiniteIntConverter
+    partial public sealed class InfiniteIntConverter
         : System.Configuration.ConfigurationConverterBase
     {
         public InfiniteIntConverter() { }
@@ -2141,7 +2141,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class InfiniteTimeSpanConverter
+    partial public sealed class InfiniteTimeSpanConverter
         : System.Configuration.ConfigurationConverterBase
     {
         public InfiniteTimeSpanConverter() { }
@@ -2166,7 +2166,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class IntegerValidator : System.Configuration.ConfigurationValidatorBase
+    partial public class IntegerValidator : System.Configuration.ConfigurationValidatorBase
     {
         public IntegerValidator(int minValue, int maxValue) { }
 
@@ -2184,7 +2184,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class IntegerValidatorAttribute
+    partial public sealed class IntegerValidatorAttribute
         : System.Configuration.ConfigurationValidatorAttribute
     {
         public IntegerValidatorAttribute() { }
@@ -2210,7 +2210,7 @@ namespace System.Configuration
         }
     }
 
-    public partial interface IPersistComponentSettings
+    partial public interface IPersistComponentSettings
     {
         bool SaveSettings { get; set; }
         string SettingsKey { get; set; }
@@ -2219,7 +2219,7 @@ namespace System.Configuration
         void SaveComponentSettings();
     }
 
-    public sealed partial class IriParsingElement : System.Configuration.ConfigurationElement
+    partial public sealed class IriParsingElement : System.Configuration.ConfigurationElement
     {
         public IriParsingElement() { }
 
@@ -2234,7 +2234,7 @@ namespace System.Configuration
         }
     }
 
-    public partial interface ISettingsProviderService
+    partial public interface ISettingsProviderService
     {
         System.Configuration.SettingsProvider GetSettingsProvider(
             System.Configuration.SettingsProperty property
@@ -2244,7 +2244,7 @@ namespace System.Configuration
     [System.Configuration.ConfigurationCollectionAttribute(
         typeof(System.Configuration.KeyValueConfigurationElement)
     )]
-    public partial class KeyValueConfigurationCollection
+    partial public class KeyValueConfigurationCollection
         : System.Configuration.ConfigurationElementCollection
     {
         public KeyValueConfigurationCollection() { }
@@ -2285,7 +2285,7 @@ namespace System.Configuration
         public void Remove(string key) { }
     }
 
-    public partial class KeyValueConfigurationElement : System.Configuration.ConfigurationElement
+    partial public class KeyValueConfigurationElement : System.Configuration.ConfigurationElement
     {
         public KeyValueConfigurationElement(string key, string value) { }
 
@@ -2306,7 +2306,7 @@ namespace System.Configuration
         protected override void Init() { }
     }
 
-    public partial class LocalFileSettingsProvider
+    partial public class LocalFileSettingsProvider
         : System.Configuration.SettingsProvider,
             System.Configuration.IApplicationSettingsProvider
     {
@@ -2352,7 +2352,7 @@ namespace System.Configuration
         ) { }
     }
 
-    public partial class LongValidator : System.Configuration.ConfigurationValidatorBase
+    partial public class LongValidator : System.Configuration.ConfigurationValidatorBase
     {
         public LongValidator(long minValue, long maxValue) { }
 
@@ -2370,7 +2370,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class LongValidatorAttribute
+    partial public sealed class LongValidatorAttribute
         : System.Configuration.ConfigurationValidatorAttribute
     {
         public LongValidatorAttribute() { }
@@ -2399,7 +2399,7 @@ namespace System.Configuration
     [System.Configuration.ConfigurationCollectionAttribute(
         typeof(System.Configuration.NameValueConfigurationElement)
     )]
-    public sealed partial class NameValueConfigurationCollection
+    partial public sealed class NameValueConfigurationCollection
         : System.Configuration.ConfigurationElementCollection
     {
         public NameValueConfigurationCollection() { }
@@ -2437,7 +2437,7 @@ namespace System.Configuration
         public void Remove(string name) { }
     }
 
-    public sealed partial class NameValueConfigurationElement
+    partial public sealed class NameValueConfigurationElement
         : System.Configuration.ConfigurationElement
     {
         public NameValueConfigurationElement(string name, string value) { }
@@ -2457,7 +2457,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class NameValueFileSectionHandler
+    partial public class NameValueFileSectionHandler
         : System.Configuration.IConfigurationSectionHandler
     {
         public NameValueFileSectionHandler() { }
@@ -2468,7 +2468,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class NameValueSectionHandler : System.Configuration.IConfigurationSectionHandler
+    partial public class NameValueSectionHandler : System.Configuration.IConfigurationSectionHandler
     {
         public NameValueSectionHandler() { }
 
@@ -2488,7 +2488,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class NoSettingsVersionUpgradeAttribute : System.Attribute
+    partial public sealed class NoSettingsVersionUpgradeAttribute : System.Attribute
     {
         public NoSettingsVersionUpgradeAttribute() { }
     }
@@ -2500,7 +2500,7 @@ namespace System.Configuration
         Deny = 2,
     }
 
-    public partial class PositiveTimeSpanValidator : System.Configuration.ConfigurationValidatorBase
+    partial public class PositiveTimeSpanValidator : System.Configuration.ConfigurationValidatorBase
     {
         public PositiveTimeSpanValidator() { }
 
@@ -2513,7 +2513,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class PositiveTimeSpanValidatorAttribute
+    partial public sealed class PositiveTimeSpanValidatorAttribute
         : System.Configuration.ConfigurationValidatorAttribute
     {
         public PositiveTimeSpanValidatorAttribute() { }
@@ -2524,7 +2524,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class PropertyInformation
+    partial public sealed class PropertyInformation
     {
         internal PropertyInformation() { }
 
@@ -2587,7 +2587,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class PropertyInformationCollection
+    partial public sealed class PropertyInformationCollection
         : System.Collections.Specialized.NameObjectCollectionBase
     {
         internal PropertyInformationCollection() { }
@@ -2617,7 +2617,7 @@ namespace System.Configuration
         SetHere = 2,
     }
 
-    public static partial class ProtectedConfiguration
+    partial public static class ProtectedConfiguration
     {
         public const string DataProtectionProviderName = "DataProtectionConfigurationProvider";
         public const string ProtectedDataSectionName = "configProtectedData";
@@ -2632,7 +2632,7 @@ namespace System.Configuration
         }
     }
 
-    public abstract partial class ProtectedConfigurationProvider
+    partial public abstract class ProtectedConfigurationProvider
         : System.Configuration.Provider.ProviderBase
     {
         protected ProtectedConfigurationProvider() { }
@@ -2641,7 +2641,7 @@ namespace System.Configuration
         public abstract System.Xml.XmlNode Encrypt(System.Xml.XmlNode node);
     }
 
-    public partial class ProtectedConfigurationProviderCollection
+    partial public class ProtectedConfigurationProviderCollection
         : System.Configuration.Provider.ProviderCollection
     {
         public ProtectedConfigurationProviderCollection() { }
@@ -2654,7 +2654,7 @@ namespace System.Configuration
         public override void Add(System.Configuration.Provider.ProviderBase provider) { }
     }
 
-    public sealed partial class ProtectedConfigurationSection
+    partial public sealed class ProtectedConfigurationSection
         : System.Configuration.ConfigurationSection
     {
         public ProtectedConfigurationSection() { }
@@ -2674,7 +2674,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class ProtectedProviderSettings : System.Configuration.ConfigurationElement
+    partial public class ProtectedProviderSettings : System.Configuration.ConfigurationElement
     {
         public ProtectedProviderSettings() { }
 
@@ -2688,7 +2688,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class ProviderSettings : System.Configuration.ConfigurationElement
+    partial public sealed class ProviderSettings : System.Configuration.ConfigurationElement
     {
         public ProviderSettings() { }
 
@@ -2735,7 +2735,7 @@ namespace System.Configuration
     [System.Configuration.ConfigurationCollectionAttribute(
         typeof(System.Configuration.ProviderSettings)
     )]
-    public sealed partial class ProviderSettingsCollection
+    partial public sealed class ProviderSettingsCollection
         : System.Configuration.ConfigurationElementCollection
     {
         public ProviderSettingsCollection() { }
@@ -2771,7 +2771,7 @@ namespace System.Configuration
         public void Remove(string name) { }
     }
 
-    public partial class RegexStringValidator : System.Configuration.ConfigurationValidatorBase
+    partial public class RegexStringValidator : System.Configuration.ConfigurationValidatorBase
     {
         public RegexStringValidator(string regex) { }
 
@@ -2784,7 +2784,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class RegexStringValidatorAttribute
+    partial public sealed class RegexStringValidatorAttribute
         : System.Configuration.ConfigurationValidatorAttribute
     {
         public RegexStringValidatorAttribute(string regex) { }
@@ -2799,7 +2799,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class RsaProtectedConfigurationProvider
+    partial public sealed class RsaProtectedConfigurationProvider
         : System.Configuration.ProtectedConfigurationProvider
     {
         public RsaProtectedConfigurationProvider() { }
@@ -2853,7 +2853,7 @@ namespace System.Configuration
         ) { }
     }
 
-    public sealed partial class SchemeSettingElement : System.Configuration.ConfigurationElement
+    partial public sealed class SchemeSettingElement : System.Configuration.ConfigurationElement
     {
         public SchemeSettingElement() { }
 
@@ -2878,7 +2878,7 @@ namespace System.Configuration
         ClearItemsName = "clear",
         RemoveItemName = "remove"
     )]
-    public sealed partial class SchemeSettingElementCollection
+    partial public sealed class SchemeSettingElementCollection
         : System.Configuration.ConfigurationElementCollection
     {
         public SchemeSettingElementCollection() { }
@@ -2912,7 +2912,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class SectionInformation
+    partial public sealed class SectionInformation
     {
         internal SectionInformation() { }
 
@@ -3033,12 +3033,12 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public partial class SettingAttribute : System.Attribute
+    partial public class SettingAttribute : System.Attribute
     {
         public SettingAttribute() { }
     }
 
-    public partial class SettingChangingEventArgs : System.ComponentModel.CancelEventArgs
+    partial public class SettingChangingEventArgs : System.ComponentModel.CancelEventArgs
     {
         public SettingChangingEventArgs(
             string settingName,
@@ -3071,7 +3071,7 @@ namespace System.Configuration
         System.Configuration.SettingChangingEventArgs e
     );
 
-    public sealed partial class SettingElement : System.Configuration.ConfigurationElement
+    partial public sealed class SettingElement : System.Configuration.ConfigurationElement
     {
         public SettingElement() { }
 
@@ -3108,7 +3108,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class SettingElementCollection
+    partial public sealed class SettingElementCollection
         : System.Configuration.ConfigurationElementCollection
     {
         public SettingElementCollection() { }
@@ -3144,7 +3144,7 @@ namespace System.Configuration
         public void Remove(System.Configuration.SettingElement element) { }
     }
 
-    public partial class SettingsAttributeDictionary : System.Collections.Hashtable
+    partial public class SettingsAttributeDictionary : System.Collections.Hashtable
     {
         public SettingsAttributeDictionary() { }
 
@@ -3158,7 +3158,7 @@ namespace System.Configuration
         ) { }
     }
 
-    public abstract partial class SettingsBase
+    partial public abstract class SettingsBase
     {
         protected SettingsBase() { }
 
@@ -3206,7 +3206,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class SettingsContext : System.Collections.Hashtable
+    partial public class SettingsContext : System.Collections.Hashtable
     {
         public SettingsContext() { }
 
@@ -3217,7 +3217,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class SettingsDescriptionAttribute : System.Attribute
+    partial public sealed class SettingsDescriptionAttribute : System.Attribute
     {
         public SettingsDescriptionAttribute(string description) { }
 
@@ -3228,7 +3228,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class SettingsGroupDescriptionAttribute : System.Attribute
+    partial public sealed class SettingsGroupDescriptionAttribute : System.Attribute
     {
         public SettingsGroupDescriptionAttribute(string description) { }
 
@@ -3239,7 +3239,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Class)]
-    public sealed partial class SettingsGroupNameAttribute : System.Attribute
+    partial public sealed class SettingsGroupNameAttribute : System.Attribute
     {
         public SettingsGroupNameAttribute(string groupName) { }
 
@@ -3249,7 +3249,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class SettingsLoadedEventArgs : System.EventArgs
+    partial public class SettingsLoadedEventArgs : System.EventArgs
     {
         public SettingsLoadedEventArgs(System.Configuration.SettingsProvider provider) { }
 
@@ -3272,7 +3272,7 @@ namespace System.Configuration
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class | System.AttributeTargets.Property
     )]
-    public sealed partial class SettingsManageabilityAttribute : System.Attribute
+    partial public sealed class SettingsManageabilityAttribute : System.Attribute
     {
         public SettingsManageabilityAttribute(
             System.Configuration.SettingsManageability manageability
@@ -3284,7 +3284,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class SettingsProperty
+    partial public class SettingsProperty
     {
         public SettingsProperty(System.Configuration.SettingsProperty propertyToCopy) { }
 
@@ -3348,7 +3348,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class SettingsPropertyCollection
+    partial public class SettingsPropertyCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.ICloneable
@@ -3405,7 +3405,7 @@ namespace System.Configuration
         public void SetReadOnly() { }
     }
 
-    public partial class SettingsPropertyIsReadOnlyException : System.Exception
+    partial public class SettingsPropertyIsReadOnlyException : System.Exception
     {
         public SettingsPropertyIsReadOnlyException() { }
 
@@ -3420,7 +3420,7 @@ namespace System.Configuration
         { }
     }
 
-    public partial class SettingsPropertyNotFoundException : System.Exception
+    partial public class SettingsPropertyNotFoundException : System.Exception
     {
         public SettingsPropertyNotFoundException() { }
 
@@ -3435,7 +3435,7 @@ namespace System.Configuration
         { }
     }
 
-    public partial class SettingsPropertyValue
+    partial public class SettingsPropertyValue
     {
         public SettingsPropertyValue(System.Configuration.SettingsProperty property) { }
 
@@ -3473,7 +3473,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class SettingsPropertyValueCollection
+    partial public class SettingsPropertyValueCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.ICloneable
@@ -3518,7 +3518,7 @@ namespace System.Configuration
         public void SetReadOnly() { }
     }
 
-    public partial class SettingsPropertyWrongTypeException : System.Exception
+    partial public class SettingsPropertyWrongTypeException : System.Exception
     {
         public SettingsPropertyWrongTypeException() { }
 
@@ -3533,7 +3533,7 @@ namespace System.Configuration
         { }
     }
 
-    public abstract partial class SettingsProvider : System.Configuration.Provider.ProviderBase
+    partial public abstract class SettingsProvider : System.Configuration.Provider.ProviderBase
     {
         protected SettingsProvider() { }
 
@@ -3551,7 +3551,7 @@ namespace System.Configuration
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class | System.AttributeTargets.Property
     )]
-    public sealed partial class SettingsProviderAttribute : System.Attribute
+    partial public sealed class SettingsProviderAttribute : System.Attribute
     {
         public SettingsProviderAttribute(string providerTypeName) { }
 
@@ -3563,7 +3563,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class SettingsProviderCollection
+    partial public class SettingsProviderCollection
         : System.Configuration.Provider.ProviderCollection
     {
         public SettingsProviderCollection() { }
@@ -3596,7 +3596,7 @@ namespace System.Configuration
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class | System.AttributeTargets.Property
     )]
-    public sealed partial class SettingsSerializeAsAttribute : System.Attribute
+    partial public sealed class SettingsSerializeAsAttribute : System.Attribute
     {
         public SettingsSerializeAsAttribute(System.Configuration.SettingsSerializeAs serializeAs)
         { }
@@ -3607,7 +3607,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class SettingValueElement : System.Configuration.ConfigurationElement
+    partial public sealed class SettingValueElement : System.Configuration.ConfigurationElement
     {
         public SettingValueElement() { }
 
@@ -3660,7 +3660,7 @@ namespace System.Configuration
         ) { }
     }
 
-    public partial class SingleTagSectionHandler : System.Configuration.IConfigurationSectionHandler
+    partial public class SingleTagSectionHandler : System.Configuration.IConfigurationSectionHandler
     {
         public SingleTagSectionHandler() { }
 
@@ -3679,7 +3679,7 @@ namespace System.Configuration
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class | System.AttributeTargets.Property
     )]
-    public sealed partial class SpecialSettingAttribute : System.Attribute
+    partial public sealed class SpecialSettingAttribute : System.Attribute
     {
         public SpecialSettingAttribute(System.Configuration.SpecialSetting specialSetting) { }
 
@@ -3689,7 +3689,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class StringValidator : System.Configuration.ConfigurationValidatorBase
+    partial public class StringValidator : System.Configuration.ConfigurationValidatorBase
     {
         public StringValidator(int minLength) { }
 
@@ -3706,7 +3706,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class StringValidatorAttribute
+    partial public sealed class StringValidatorAttribute
         : System.Configuration.ConfigurationValidatorAttribute
     {
         public StringValidatorAttribute() { }
@@ -3732,7 +3732,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class SubclassTypeValidator
+    partial public sealed class SubclassTypeValidator
         : System.Configuration.ConfigurationValidatorBase
     {
         public SubclassTypeValidator(System.Type baseClass) { }
@@ -3746,7 +3746,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class SubclassTypeValidatorAttribute
+    partial public sealed class SubclassTypeValidatorAttribute
         : System.Configuration.ConfigurationValidatorAttribute
     {
         public SubclassTypeValidatorAttribute(System.Type baseClass) { }
@@ -3761,7 +3761,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class TimeSpanMinutesConverter : System.Configuration.ConfigurationConverterBase
+    partial public class TimeSpanMinutesConverter : System.Configuration.ConfigurationConverterBase
     {
         public TimeSpanMinutesConverter() { }
 
@@ -3785,7 +3785,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class TimeSpanMinutesOrInfiniteConverter
+    partial public sealed class TimeSpanMinutesOrInfiniteConverter
         : System.Configuration.TimeSpanMinutesConverter
     {
         public TimeSpanMinutesOrInfiniteConverter() { }
@@ -3810,7 +3810,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class TimeSpanSecondsConverter : System.Configuration.ConfigurationConverterBase
+    partial public class TimeSpanSecondsConverter : System.Configuration.ConfigurationConverterBase
     {
         public TimeSpanSecondsConverter() { }
 
@@ -3834,7 +3834,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class TimeSpanSecondsOrInfiniteConverter
+    partial public sealed class TimeSpanSecondsOrInfiniteConverter
         : System.Configuration.TimeSpanSecondsConverter
     {
         public TimeSpanSecondsOrInfiniteConverter() { }
@@ -3859,7 +3859,7 @@ namespace System.Configuration
         }
     }
 
-    public partial class TimeSpanValidator : System.Configuration.ConfigurationValidatorBase
+    partial public class TimeSpanValidator : System.Configuration.ConfigurationValidatorBase
     {
         public TimeSpanValidator(System.TimeSpan minValue, System.TimeSpan maxValue) { }
 
@@ -3885,7 +3885,7 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class TimeSpanValidatorAttribute
+    partial public sealed class TimeSpanValidatorAttribute
         : System.Configuration.ConfigurationValidatorAttribute
     {
         public const string TimeSpanMaxValue = "10675199.02:48:05.4775807";
@@ -3922,7 +3922,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class TypeNameConverter : System.Configuration.ConfigurationConverterBase
+    partial public sealed class TypeNameConverter : System.Configuration.ConfigurationConverterBase
     {
         public TypeNameConverter() { }
 
@@ -3946,7 +3946,7 @@ namespace System.Configuration
         }
     }
 
-    public sealed partial class UriSection : System.Configuration.ConfigurationSection
+    partial public sealed class UriSection : System.Configuration.ConfigurationSection
     {
         public UriSection() { }
 
@@ -3969,19 +3969,19 @@ namespace System.Configuration
     }
 
     [System.AttributeUsageAttribute(System.AttributeTargets.Property)]
-    public sealed partial class UserScopedSettingAttribute : System.Configuration.SettingAttribute
+    partial public sealed class UserScopedSettingAttribute : System.Configuration.SettingAttribute
     {
         public UserScopedSettingAttribute() { }
     }
 
-    public sealed partial class UserSettingsGroup : System.Configuration.ConfigurationSectionGroup
+    partial public sealed class UserSettingsGroup : System.Configuration.ConfigurationSectionGroup
     {
         public UserSettingsGroup() { }
     }
 
     public delegate void ValidatorCallback(object value);
 
-    public sealed partial class WhiteSpaceTrimStringConverter
+    partial public sealed class WhiteSpaceTrimStringConverter
         : System.Configuration.ConfigurationConverterBase
     {
         public WhiteSpaceTrimStringConverter() { }
@@ -4009,7 +4009,7 @@ namespace System.Configuration
 
 namespace System.Configuration.Internal
 {
-    public partial class DelegatingConfigHost : System.Configuration.Internal.IInternalConfigHost
+    partial public class DelegatingConfigHost : System.Configuration.Internal.IInternalConfigHost
     {
         protected DelegatingConfigHost() { }
 
@@ -4272,25 +4272,25 @@ namespace System.Configuration.Internal
         ) { }
     }
 
-    public partial interface IConfigErrorInfo
+    partial public interface IConfigErrorInfo
     {
         string Filename { get; }
         int LineNumber { get; }
     }
 
-    public partial interface IConfigSystem
+    partial public interface IConfigSystem
     {
         System.Configuration.Internal.IInternalConfigHost Host { get; }
         System.Configuration.Internal.IInternalConfigRoot Root { get; }
         void Init(System.Type typeConfigHost, params object[] hostInitParams);
     }
 
-    public partial interface IConfigurationManagerHelper
+    partial public interface IConfigurationManagerHelper
     {
         void EnsureNetConfigLoaded();
     }
 
-    public partial interface IConfigurationManagerInternal
+    partial public interface IConfigurationManagerInternal
     {
         string ApplicationConfigUri { get; }
         string ExeLocalConfigDirectory { get; }
@@ -4305,7 +4305,7 @@ namespace System.Configuration.Internal
         string UserConfigFilename { get; }
     }
 
-    public partial interface IInternalConfigClientHost
+    partial public interface IInternalConfigClientHost
     {
         string GetExeConfigPath();
         string GetLocalUserConfigPath();
@@ -4315,7 +4315,7 @@ namespace System.Configuration.Internal
         bool IsRoamingUserConfig(string configPath);
     }
 
-    public partial interface IInternalConfigConfigurationFactory
+    partial public interface IInternalConfigConfigurationFactory
     {
         System.Configuration.Configuration Create(
             System.Type typeConfigHost,
@@ -4327,7 +4327,7 @@ namespace System.Configuration.Internal
         );
     }
 
-    public partial interface IInternalConfigHost
+    partial public interface IInternalConfigHost
     {
         bool IsRemote { get; }
         bool SupportsChangeNotifications { get; }
@@ -4426,7 +4426,7 @@ namespace System.Configuration.Internal
         );
     }
 
-    public partial interface IInternalConfigRecord
+    partial public interface IInternalConfigRecord
     {
         string ConfigPath { get; }
         bool HasInitErrors { get; }
@@ -4438,7 +4438,7 @@ namespace System.Configuration.Internal
         void ThrowIfInitErrors();
     }
 
-    public partial interface IInternalConfigRoot
+    partial public interface IInternalConfigRoot
     {
         bool IsDesignTime { get; }
         event System.Configuration.Internal.InternalConfigEventHandler ConfigChanged;
@@ -4453,7 +4453,7 @@ namespace System.Configuration.Internal
         void RemoveConfig(string configPath);
     }
 
-    public partial interface IInternalConfigSettingsFactory
+    partial public interface IInternalConfigSettingsFactory
     {
         void CompleteInit();
         void SetConfigurationSystem(
@@ -4462,14 +4462,14 @@ namespace System.Configuration.Internal
         );
     }
 
-    public partial interface IInternalConfigSystem
+    partial public interface IInternalConfigSystem
     {
         bool SupportsUserConfig { get; }
         object GetSection(string configKey);
         void RefreshConfig(string sectionName);
     }
 
-    public sealed partial class InternalConfigEventArgs : System.EventArgs
+    partial public sealed class InternalConfigEventArgs : System.EventArgs
     {
         public InternalConfigEventArgs(string configPath) { }
 
@@ -4489,7 +4489,7 @@ namespace System.Configuration.Internal
 
 namespace System.Configuration.Provider
 {
-    public abstract partial class ProviderBase
+    partial public abstract class ProviderBase
     {
         protected ProviderBase() { }
 
@@ -4508,7 +4508,7 @@ namespace System.Configuration.Provider
         ) { }
     }
 
-    public partial class ProviderCollection
+    partial public class ProviderCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -4549,7 +4549,7 @@ namespace System.Configuration.Provider
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
     }
 
-    public partial class ProviderException : System.Exception
+    partial public class ProviderException : System.Exception
     {
         public ProviderException() { }
 
@@ -4566,7 +4566,7 @@ namespace System.Configuration.Provider
 
 namespace System.Drawing.Configuration
 {
-    public sealed partial class SystemDrawingSection : System.Configuration.ConfigurationSection
+    partial public sealed class SystemDrawingSection : System.Configuration.ConfigurationSection
     {
         public SystemDrawingSection() { }
 

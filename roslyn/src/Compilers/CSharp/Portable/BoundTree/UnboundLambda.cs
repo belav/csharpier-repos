@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         bool WasCompilerGenerated { get; }
     }
 
-    internal sealed partial class BoundLocalFunctionStatement : IBoundLambdaOrFunction
+    partial internal sealed class BoundLocalFunctionStatement : IBoundLambdaOrFunction
     {
         MethodSymbol IBoundLambdaOrFunction.Symbol
         {
@@ -77,7 +77,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal sealed partial class BoundLambda : IBoundLambdaOrFunction
+    partial internal sealed class BoundLambda : IBoundLambdaOrFunction
     {
         public MessageID MessageID
         {
@@ -529,7 +529,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
     }
 
-    internal partial class UnboundLambda
+    partial internal class UnboundLambda
     {
         private readonly NullableWalker.VariableState? _nullableState;
 

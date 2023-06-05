@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Tests
 {
-    public partial class ActivatorTests
+    partial public class ActivatorTests
     {
         [Fact]
         public void CreateInstanceT_Array_ThrowsMissingMethodException() =>

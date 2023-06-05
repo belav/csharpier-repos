@@ -49,14 +49,14 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static IntPtr /* SecPolicyRef */
+        static extern IntPtr /* SecPolicyRef */
         SecPolicyCreateSSL(
             bool server,
             IntPtr /* CFStringRef */
             hostname
         );
 
-        static public SecPolicy CreateSslPolicy(bool server, string hostName)
+        public static SecPolicy CreateSslPolicy(bool server, string hostName)
         {
             CFString host = hostName == null ? null : CFString.Create(hostName);
             IntPtr handle = host == null ? IntPtr.Zero : host.Handle;

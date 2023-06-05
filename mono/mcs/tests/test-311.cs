@@ -91,7 +91,7 @@ public class Program
 }
 
 [SecurityPermission(SecurityAction.Demand, ControlAppDomain = true)]
-public partial class Test2 { }
+partial public class Test2 { }
 
 [SecurityPermission(SecurityAction.Demand, ControlAppDomain = true)]
-public partial class Test2 { }
+partial public class Test2 { }

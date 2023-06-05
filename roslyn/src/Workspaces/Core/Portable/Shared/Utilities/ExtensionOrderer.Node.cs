@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
-    internal partial class ExtensionOrderer
+    partial internal class ExtensionOrderer
     {
         private class Node<TExtension, TMetadata>
         {

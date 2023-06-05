@@ -40,7 +40,7 @@ namespace Microsoft.Win32
             SetHandle(handle);
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             if (handle != IntPtr.Zero)
             {

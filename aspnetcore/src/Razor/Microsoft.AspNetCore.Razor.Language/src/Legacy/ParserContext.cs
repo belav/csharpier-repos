@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-internal partial class ParserContext
+partial internal class ParserContext
 {
     public ParserContext(RazorSourceDocument source, RazorParserOptions options)
     {
@@ -62,7 +62,7 @@ internal partial class ParserContext
 
 #if DEBUG
 [DebuggerDisplay("{" + nameof(DebuggerToString) + "(),nq}")]
-internal partial class ParserContext
+partial internal class ParserContext
 {
     private const int InfiniteLoopCountThreshold = 1000;
     private int _infiniteLoopGuardCount;

@@ -15,7 +15,7 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         bool CanDeriveNewPublicKey { get; }
     }
 
-    public static partial class ECDiffieHellmanFactory
+    partial public static class ECDiffieHellmanFactory
     {
         public static ECDiffieHellman Create()
         {

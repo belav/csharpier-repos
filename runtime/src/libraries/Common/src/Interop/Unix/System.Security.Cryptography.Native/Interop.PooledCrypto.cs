@@ -4,9 +4,9 @@
 using System;
 using System.Security.Cryptography;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypto
+    partial internal static class Crypto
     {
         internal static ArraySegment<byte> RentAsn1StringBytes(IntPtr asn1)
         {

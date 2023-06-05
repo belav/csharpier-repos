@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         name: WellKnownSolutionCrawlerAnalyzers.Diagnostic,
         workspaceKinds: new string[] { WorkspaceKind.Host, WorkspaceKind.Interactive }
     )]
-    internal partial class DiagnosticAnalyzerService : IIncrementalAnalyzerProvider
+    partial internal class DiagnosticAnalyzerService : IIncrementalAnalyzerProvider
     {
         public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
             _map.GetValue(workspace, _createIncrementalAnalyzer);

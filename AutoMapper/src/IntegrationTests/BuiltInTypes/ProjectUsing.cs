@@ -115,7 +115,7 @@ public class ProjectUsingBug : AutoMapperSpecBase, IAsyncLifetime
         public List<int> Children { get; set; }
     }
 
-    public partial class ApplicationDBContext : LocalDbContext
+    partial public class ApplicationDBContext : LocalDbContext
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

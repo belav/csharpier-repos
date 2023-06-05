@@ -8,7 +8,7 @@ using Microsoft.DotNet.CoreSetup.Test;
 
 namespace Microsoft.DotNet.Cli.Build
 {
-    public partial class DotNetCli
+    partial public class DotNetCli
     {
         public string BinPath { get; }
         public string GreatestVersionSharedFxPath { get; }

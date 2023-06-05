@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.MiscellaneousCases
 {
+    partial
     /// <summary>
     /// Miscellaneous Cases (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Throw an exception on undefined variables

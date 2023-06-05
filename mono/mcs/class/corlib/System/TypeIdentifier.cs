@@ -237,7 +237,9 @@ namespace System
             }
 
 #if DEBUG
-            static private void checkNoBadChars(string s)
+            private
+#if DEBUG
+            static void checkNoBadChars(string s)
             {
                 if (TypeSpec.NeedsEscaping(s))
                     throw new ArgumentException("simpleName");

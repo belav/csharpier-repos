@@ -7,10 +7,11 @@ using StructLayoutAttribute = System.Runtime.InteropServices.StructLayoutAttribu
 
 namespace System.Reflection.TypeLoading
 {
+    partial
     /// <summary>
     /// Base type for all RoTypes that return true for IsGenericParameter. This can a generic parameter defined on a type or a method.
     /// </summary>
-    internal abstract partial class RoGenericParameterType : RoType
+    internal abstract class RoGenericParameterType : RoType
     {
         protected RoGenericParameterType()
             : base() { }

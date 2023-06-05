@@ -12,13 +12,13 @@ using Xunit;
 
 namespace LibraryImportGenerator.IntegrationTests
 {
-    internal partial class NativeExportsNE
+    partial internal class NativeExportsNE
     {
-        internal partial class CallingConventions
+        partial internal class CallingConventions
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "add_integers_cdecl")]
             [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-            public static partial long AddLongsCdecl(
+            partial public static long AddLongsCdecl(
                 long i,
                 long j,
                 long k,
@@ -32,7 +32,7 @@ namespace LibraryImportGenerator.IntegrationTests
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "add_integers_stdcall")]
             [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvStdcall) })]
-            public static partial long AddLongsStdcall(
+            partial public static long AddLongsStdcall(
                 long i,
                 long j,
                 long k,

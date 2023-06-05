@@ -43,6 +43,7 @@ using System.Text;
 
 namespace DbLinq.Vendor.Implementation
 {
+    partial
     /// <summary>
     /// some IVendor functionality is the same for many vendors,
     /// implemented here as virtual functions.
@@ -50,7 +51,7 @@ namespace DbLinq.Vendor.Implementation
 #if !MONO_STRICT
     public
 #endif
-    abstract partial class Vendor : IVendor
+    abstract class Vendor : IVendor
     {
         /// <summary>
         /// Pings requested DB, true is result is OK.

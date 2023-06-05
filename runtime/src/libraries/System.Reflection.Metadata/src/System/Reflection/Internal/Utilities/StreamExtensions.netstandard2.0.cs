@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Internal
 {
-    internal static partial class StreamExtensions
+    partial internal static class StreamExtensions
     {
         private static bool IsWindows => Path.DirectorySeparatorChar == '\\';
 

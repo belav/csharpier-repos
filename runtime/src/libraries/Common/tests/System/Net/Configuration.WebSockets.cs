@@ -3,9 +3,9 @@
 
 namespace System.Net.Test.Common
 {
-    public static partial class Configuration
+    partial public static class Configuration
     {
-        public static partial class WebSockets
+        partial public static class WebSockets
         {
             public static string ProxyServerUri => GetValue("DOTNET_TEST_WEBSOCKETPROXYSERVERURI");
 

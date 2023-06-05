@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 {
     using SymbolSet = HashSet<INamedTypeSymbol>;
 
+    partial
     /// <summary>
     /// Provides helper methods for finding dependent types (derivations, implementations, etc.) across a solution. This
     /// is effectively a graph walk between INamedTypeSymbols walking down the inheritance hierarchy to find related
@@ -35,7 +36,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     /// <para/>
     /// These links are then continually traversed to get the full set of results.
     /// </remarks>
-    internal static partial class DependentTypeFinder
+    internal static class DependentTypeFinder
     {
         // Static helpers so we can pass delegates around without allocations.
 

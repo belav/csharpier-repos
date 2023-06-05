@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace System.Net.Test.Common
 {
-    public static partial class Capability
+    partial public static class Capability
     {
         // Thumbprint for CN = NDX Test Root CA.
         // The certificate is part of the chain at

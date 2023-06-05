@@ -16,10 +16,11 @@ using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.ParameterInfos.NativeFormat
 {
+    partial
     //
     // This implements ParameterInfo objects owned by MethodBase objects that have an associated Parameter metadata entity.
     //
-    internal sealed partial class NativeFormatMethodParameterInfo : RuntimeFatMethodParameterInfo
+    internal sealed class NativeFormatMethodParameterInfo : RuntimeFatMethodParameterInfo
     {
         private NativeFormatMethodParameterInfo(
             MethodBase member,

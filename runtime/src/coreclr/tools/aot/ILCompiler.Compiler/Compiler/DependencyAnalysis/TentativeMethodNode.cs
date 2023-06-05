@@ -13,12 +13,13 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
 {
+    partial
     /// <summary>
     /// Represents a stand-in for a real method body that can turn into the real method
     /// body at object emission phase if the real method body was marked.
     /// It the real method body wasn't marked, this stub will tail-call into a throw helper.
     /// </summary>
-    public partial class TentativeMethodNode : AssemblyStubNode, IMethodNode, ISymbolNodeWithLinkage
+    public class TentativeMethodNode : AssemblyStubNode, IMethodNode, ISymbolNodeWithLinkage
     {
         private readonly IMethodBodyNode _methodNode;
 

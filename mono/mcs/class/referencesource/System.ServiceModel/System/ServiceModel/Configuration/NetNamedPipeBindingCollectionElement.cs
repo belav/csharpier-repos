@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.Globalization;
 
-    public partial class NetNamedPipeBindingCollectionElement
+    partial public class NetNamedPipeBindingCollectionElement
         : StandardBindingCollectionElement<NetNamedPipeBinding, NetNamedPipeBindingElement>
     {
         internal static NetNamedPipeBindingCollectionElement GetBindingCollectionElement()

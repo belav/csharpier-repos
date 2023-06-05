@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public abstract partial class WSHttpBindingBaseElement
+    partial public abstract class WSHttpBindingBaseElement
         : StandardBindingElement,
             IBindingConfigurationElement
     {

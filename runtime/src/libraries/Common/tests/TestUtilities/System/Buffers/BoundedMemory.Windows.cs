@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers
 {
-    public static unsafe partial class BoundedMemory
+    partial public static unsafe class BoundedMemory
     {
         private static readonly int SystemPageSize = Environment.SystemPageSize;
 
@@ -325,13 +325,13 @@ namespace System.Buffers
                 );
         }
 
-        private static partial class UnsafeNativeMethods
+        partial private static class UnsafeNativeMethods
         {
             private const string KERNEL32_LIB = "kernel32.dll";
 
             // https://msdn.microsoft.com/en-us/library/windows/desktop/aa366887(v=vs.85).aspx
             [LibraryImport(KERNEL32_LIB, SetLastError = true)]
-            public static partial VirtualAllocHandle VirtualAlloc(
+            partial public static VirtualAllocHandle VirtualAlloc(
                 IntPtr lpAddress,
                 IntPtr dwSize,
                 VirtualAllocAllocationType flAllocationType,
@@ -341,7 +341,7 @@ namespace System.Buffers
             // https://msdn.microsoft.com/en-us/library/windows/desktop/aa366892(v=vs.85).aspx
             [LibraryImport(KERNEL32_LIB, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static partial bool VirtualFree(
+            partial public static bool VirtualFree(
                 IntPtr lpAddress,
                 IntPtr dwSize,
                 VirtualAllocAllocationType dwFreeType
@@ -350,7 +350,7 @@ namespace System.Buffers
             // https://msdn.microsoft.com/en-us/library/windows/desktop/aa366898(v=vs.85).aspx
             [LibraryImport(KERNEL32_LIB, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static partial bool VirtualProtect(
+            partial public static bool VirtualProtect(
                 IntPtr lpAddress,
                 IntPtr dwSize,
                 VirtualAllocProtection flNewProtect,
@@ -359,7 +359,7 @@ namespace System.Buffers
 
             // https://msdn.microsoft.com/en-us/library/windows/desktop/aa366902(v=vs.85).aspx
             [LibraryImport(KERNEL32_LIB, SetLastError = true)]
-            public static partial IntPtr VirtualQuery(
+            partial public static IntPtr VirtualQuery(
                 IntPtr lpAddress,
                 out MEMORY_BASIC_INFORMATION lpBuffer,
                 IntPtr dwLength

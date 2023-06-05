@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
 {
-    internal partial class EditAndContinueTest
+    partial internal class EditAndContinueTest
     {
         internal sealed class GenerationInfo
         {

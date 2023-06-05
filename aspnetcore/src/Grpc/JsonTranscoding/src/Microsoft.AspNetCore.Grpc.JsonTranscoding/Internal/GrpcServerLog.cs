@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
-internal static partial class GrpcServerLog
+partial internal static class GrpcServerLog
 {
     [LoggerMessage(
         1,
@@ -14,7 +14,7 @@ internal static partial class GrpcServerLog
         "Request content-type of '{ContentType}' is not supported.",
         EventName = "UnsupportedRequestContentType"
     )]
-    public static partial void UnsupportedRequestContentType(ILogger logger, string? contentType);
+    partial public static void UnsupportedRequestContentType(ILogger logger, string? contentType);
 
     [LoggerMessage(
         2,
@@ -22,7 +22,7 @@ internal static partial class GrpcServerLog
         "Error when executing service method '{ServiceMethod}'.",
         EventName = "ErrorExecutingServiceMethod"
     )]
-    public static partial void ErrorExecutingServiceMethod(
+    partial public static void ErrorExecutingServiceMethod(
         ILogger logger,
         string serviceMethod,
         Exception ex
@@ -34,7 +34,7 @@ internal static partial class GrpcServerLog
         "Error status code '{StatusCode}' with detail '{Detail}' raised.",
         EventName = "RpcConnectionError"
     )]
-    public static partial void RpcConnectionError(
+    partial public static void RpcConnectionError(
         ILogger logger,
         StatusCode statusCode,
         string detail,
@@ -42,7 +42,7 @@ internal static partial class GrpcServerLog
     );
 
     [LoggerMessage(4, LogLevel.Debug, "Reading message.", EventName = "ReadingMessage")]
-    public static partial void ReadingMessage(ILogger logger);
+    partial public static void ReadingMessage(ILogger logger);
 
     [LoggerMessage(
         5,
@@ -50,10 +50,10 @@ internal static partial class GrpcServerLog
         "Deserializing to '{MessageType}'.",
         EventName = "DeserializingMessage"
     )]
-    public static partial void DeserializingMessage(ILogger logger, Type messageType);
+    partial public static void DeserializingMessage(ILogger logger, Type messageType);
 
     [LoggerMessage(6, LogLevel.Trace, "Received message.", EventName = "ReceivedMessage")]
-    public static partial void ReceivedMessage(ILogger logger);
+    partial public static void ReceivedMessage(ILogger logger);
 
     [LoggerMessage(
         7,
@@ -61,13 +61,13 @@ internal static partial class GrpcServerLog
         "Error reading message.",
         EventName = "ErrorReadingMessage"
     )]
-    public static partial void ErrorReadingMessage(ILogger logger, Exception ex);
+    partial public static void ErrorReadingMessage(ILogger logger, Exception ex);
 
     [LoggerMessage(8, LogLevel.Debug, "Sending message.", EventName = "SendingMessage")]
-    public static partial void SendingMessage(ILogger logger);
+    partial public static void SendingMessage(ILogger logger);
 
     [LoggerMessage(9, LogLevel.Debug, "Message sent.", EventName = "MessageSent")]
-    public static partial void MessageSent(ILogger logger);
+    partial public static void MessageSent(ILogger logger);
 
     [LoggerMessage(
         10,
@@ -75,7 +75,7 @@ internal static partial class GrpcServerLog
         "Error sending message.",
         EventName = "ErrorSendingMessage"
     )]
-    public static partial void ErrorSendingMessage(ILogger logger, Exception ex);
+    partial public static void ErrorSendingMessage(ILogger logger, Exception ex);
 
     [LoggerMessage(
         11,
@@ -83,5 +83,5 @@ internal static partial class GrpcServerLog
         "Serialized '{MessageType}'.",
         EventName = "SerializedMessage"
     )]
-    public static partial void SerializedMessage(ILogger logger, Type messageType);
+    partial public static void SerializedMessage(ILogger logger, Type messageType);
 }

@@ -6,7 +6,7 @@
 
 namespace System.Text
 {
-    internal static partial class EncodingTable
+    partial internal static class EncodingTable
     {
         //
         // s_encodingNames is the concatenation of all supported IANA names for each codepage.

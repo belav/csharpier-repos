@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    internal partial class VisualStudioWorkspaceImpl
+    partial internal class VisualStudioWorkspaceImpl
     {
         private class RemoveAdditionalDocumentUndoUnit : AbstractRemoveDocumentUndoUnit
         {

@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public partial class BasicHttpBindingElement : HttpBindingBaseElement
+    partial public class BasicHttpBindingElement : HttpBindingBaseElement
     {
         public BasicHttpBindingElement(string name)
             : base(name) { }

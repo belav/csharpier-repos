@@ -32,7 +32,7 @@ namespace System.Globalization
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public partial class TextInfo : ICloneable, IDeserializationCallback
+    partial public class TextInfo : ICloneable, IDeserializationCallback
     {
         //--------------------------------------------------------------------//
         //                        Internal Information                        //
@@ -98,7 +98,7 @@ namespace System.Globalization
                 return s_Invariant;
             }
         }
-        internal volatile static TextInfo s_Invariant;
+        internal static volatile TextInfo s_Invariant;
 
         ////////////////////////////////////////////////////////////////////////
         //
@@ -676,7 +676,7 @@ namespace System.Globalization
         ////////////////////////////////////////////////////////////////////////
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe virtual char ToLower(char c)
+        public virtual unsafe char ToLower(char c)
         {
             if (IsAscii(c) && IsAsciiCasingSameAsInvariant)
             {
@@ -698,7 +698,7 @@ namespace System.Globalization
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe virtual String ToLower(String str)
+        public virtual unsafe String ToLower(String str)
         {
             if (str == null)
             {
@@ -719,7 +719,7 @@ namespace System.Globalization
 #endif
         }
 
-        static private Char ToLowerAsciiInvariant(Char c)
+        private static Char ToLowerAsciiInvariant(Char c)
         {
             if ('A' <= c && c <= 'Z')
             {
@@ -738,7 +738,7 @@ namespace System.Globalization
         ////////////////////////////////////////////////////////////////////////
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe virtual char ToUpper(char c)
+        public virtual unsafe char ToUpper(char c)
         {
             if (IsAscii(c) && IsAsciiCasingSameAsInvariant)
             {
@@ -761,7 +761,7 @@ namespace System.Globalization
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe virtual String ToUpper(String str)
+        public virtual unsafe String ToUpper(String str)
         {
             if (str == null)
             {
@@ -782,7 +782,7 @@ namespace System.Globalization
 #endif
         }
 
-        static internal Char ToUpperAsciiInvariant(Char c)
+        internal static Char ToUpperAsciiInvariant(Char c)
         {
             if ('a' <= c && c <= 'z')
             {
@@ -791,7 +791,7 @@ namespace System.Globalization
             return c;
         }
 
-        static private bool IsAscii(Char c)
+        private static bool IsAscii(Char c)
         {
             return c < 0x80;
         }
@@ -1264,7 +1264,7 @@ namespace System.Globalization
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern char InternalChangeCaseChar(
+        private static extern unsafe char InternalChangeCaseChar(
             IntPtr handle,
             IntPtr handleOrigin,
             String localeName,
@@ -1276,7 +1276,7 @@ namespace System.Globalization
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern String InternalChangeCaseString(
+        private static extern unsafe String InternalChangeCaseString(
             IntPtr handle,
             IntPtr handleOrigin,
             String localeName,
@@ -1288,7 +1288,7 @@ namespace System.Globalization
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern int InternalGetCaseInsHash(
+        private static extern unsafe int InternalGetCaseInsHash(
             IntPtr handle,
             IntPtr handleOrigin,
             String localeName,
@@ -1303,7 +1303,7 @@ namespace System.Globalization
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private static unsafe extern int InternalCompareStringOrdinalIgnoreCase(
+        private static extern unsafe int InternalCompareStringOrdinalIgnoreCase(
             String string1,
             int index1,
             String string2,
@@ -1320,7 +1320,7 @@ namespace System.Globalization
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe extern bool InternalTryFindStringOrdinalIgnoreCase(
+        private static extern unsafe bool InternalTryFindStringOrdinalIgnoreCase(
             int searchFlags,
             String source,
             int sourceCount,

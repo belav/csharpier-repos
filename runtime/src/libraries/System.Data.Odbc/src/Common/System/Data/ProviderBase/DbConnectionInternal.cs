@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace System.Data.ProviderBase
 {
-    internal abstract partial class DbConnectionInternal
+    partial internal abstract class DbConnectionInternal
     {
         protected abstract void Activate();
 

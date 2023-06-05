@@ -24,6 +24,7 @@ using PEER_CERTIFICATE_RECEIVED_DATA = Microsoft.Quic.QUIC_CONNECTION_EVENT._Ano
 
 namespace System.Net.Quic;
 
+partial
 /// <summary>
 /// Represents a QUIC connection, see <see href="https://www.rfc-editor.org/rfc/rfc9000.html#name-connections">RFC 9000: Connections</see> for more details.
 /// <see cref="QuicConnection" /> itself doesn't send or receive data but rather allows opening and/or accepting multiple <see cref="QuicStream" />.
@@ -35,7 +36,7 @@ namespace System.Net.Quic;
 /// Each connection can then open outbound stream: <see cref="QuicConnection.OpenOutboundStreamAsync(QuicStreamType, CancellationToken)" />,
 /// or accept an inbound stream: <see cref="QuicConnection.AcceptInboundStreamAsync(CancellationToken)" />.
 /// </remarks>
-public sealed partial class QuicConnection : IAsyncDisposable
+public sealed class QuicConnection : IAsyncDisposable
 {
     /// <summary>
     /// Returns <c>true</c> if QUIC is supported on the current machine and can be used; otherwise, <c>false</c>.

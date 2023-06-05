@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.Shell.TableControl;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
-    internal partial class DiagnosticTableControlEventProcessorProvider
+    partial internal class DiagnosticTableControlEventProcessorProvider
     {
         private class AggregateDiagnosticTableControlEventProcessor : EventProcessor
         {

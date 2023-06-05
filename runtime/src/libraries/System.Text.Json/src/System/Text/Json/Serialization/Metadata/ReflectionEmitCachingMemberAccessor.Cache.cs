@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace System.Text.Json.Serialization.Metadata
 {
-    internal sealed partial class ReflectionEmitCachingMemberAccessor
+    partial internal sealed class ReflectionEmitCachingMemberAccessor
     {
         private sealed class Cache<TKey>
             where TKey : notnull

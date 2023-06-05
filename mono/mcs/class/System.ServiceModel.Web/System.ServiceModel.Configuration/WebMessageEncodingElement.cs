@@ -46,7 +46,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WebMessageEncodingElement : BindingElementExtensionElement
+    partial public sealed class WebMessageEncodingElement : BindingElementExtensionElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

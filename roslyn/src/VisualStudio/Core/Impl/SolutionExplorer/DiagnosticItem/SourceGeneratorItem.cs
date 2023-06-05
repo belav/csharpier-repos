@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Imaging.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal sealed partial class SourceGeneratorItem : BaseItem
+    partial internal sealed class SourceGeneratorItem : BaseItem
     {
         public ProjectId ProjectId { get; }
         public SourceGeneratorIdentity Identity { get; }

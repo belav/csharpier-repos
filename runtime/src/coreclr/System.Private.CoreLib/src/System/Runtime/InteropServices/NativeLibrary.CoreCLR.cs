@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
 {
-    public static partial class NativeLibrary
+    partial public static class NativeLibrary
     {
         internal static IntPtr LoadLibraryByName(
             string libraryName,
@@ -32,7 +32,7 @@ namespace System.Runtime.InteropServices
             EntryPoint = "NativeLibrary_LoadFromPath",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial IntPtr LoadFromPath(
+        partial internal static IntPtr LoadFromPath(
             string libraryName,
             [MarshalAs(UnmanagedType.Bool)] bool throwOnError
         );
@@ -42,7 +42,7 @@ namespace System.Runtime.InteropServices
             EntryPoint = "NativeLibrary_LoadByName",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial IntPtr LoadByName(
+        partial internal static IntPtr LoadByName(
             string libraryName,
             QCallAssembly callingAssembly,
             [MarshalAs(UnmanagedType.Bool)] bool hasDllImportSearchPathFlag,
@@ -51,14 +51,14 @@ namespace System.Runtime.InteropServices
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "NativeLibrary_FreeLib")]
-        internal static partial void FreeLib(IntPtr handle);
+        partial internal static void FreeLib(IntPtr handle);
 
         [LibraryImport(
             RuntimeHelpers.QCall,
             EntryPoint = "NativeLibrary_GetSymbol",
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial IntPtr GetSymbol(
+        partial internal static IntPtr GetSymbol(
             IntPtr handle,
             string symbolName,
             [MarshalAs(UnmanagedType.Bool)] bool throwOnError

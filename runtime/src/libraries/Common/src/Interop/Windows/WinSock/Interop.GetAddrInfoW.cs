@@ -5,16 +5,16 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(
             Interop.Libraries.Ws2_32,
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static unsafe partial int GetAddrInfoW(
+        partial internal static unsafe int GetAddrInfoW(
             string pNameName,
             string? pServiceName,
             AddressInfo* pHints,
@@ -22,7 +22,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static unsafe partial void FreeAddrInfoW(AddressInfo* info);
+        partial internal static unsafe void FreeAddrInfoW(AddressInfo* info);
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         internal unsafe struct AddressInfo

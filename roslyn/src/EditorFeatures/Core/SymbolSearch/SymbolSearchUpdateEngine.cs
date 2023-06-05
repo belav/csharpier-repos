@@ -21,6 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SymbolSearch
 {
+    partial
     /// <summary>
     /// A service which enables searching for packages matching certain criteria.
     /// It works against a <see cref="Microsoft.CodeAnalysis.Elfie"/> database to find results.
@@ -28,7 +29,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     /// This implementation also spawns a task which will attempt to keep that database up to
     /// date by downloading patches on a daily basis.
     /// </summary>
-    internal partial class SymbolSearchUpdateEngine : ISymbolSearchUpdateEngine
+    internal class SymbolSearchUpdateEngine : ISymbolSearchUpdateEngine
     {
         private readonly ConcurrentDictionary<
             string,

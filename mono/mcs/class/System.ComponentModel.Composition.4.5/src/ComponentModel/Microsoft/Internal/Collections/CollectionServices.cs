@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Microsoft.Internal.Collections
 {
-    internal static partial class CollectionServices
+    partial internal static class CollectionServices
     {
         private static readonly Type StringType = typeof(string);
         private static readonly Type IEnumerableType = typeof(IEnumerable);

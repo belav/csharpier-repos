@@ -45,7 +45,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         "CA1822:Mark members as static",
         Justification = "Used through .NET Remoting."
     )]
-    internal partial class Editor_InProc : TextViewWindow_InProc
+    partial internal class Editor_InProc : TextViewWindow_InProc
     {
         internal static readonly Guid IWpfTextViewId = new Guid(
             "8C40265E-9FDB-4F54-A0FD-EBB72B7D0476"

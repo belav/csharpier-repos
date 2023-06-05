@@ -10,7 +10,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public sealed partial class DSAOpenSsl : DSA, IRuntimeAlgorithm
+    partial public sealed class DSAOpenSsl : DSA, IRuntimeAlgorithm
     {
         // The biggest key allowed by FIPS 186-4 has N=256 (bit), which
         // maximally produces a 72-byte DER signature.
@@ -435,7 +435,7 @@ namespace System.Security.Cryptography
             _key = new Lazy<SafeDsaHandle>(newKey);
         }
 
-        static partial void ThrowIfNotSupported();
+        partial static void ThrowIfNotSupported();
 
         private static readonly KeySizes[] s_legalKeySizes = new KeySizes[]
         {

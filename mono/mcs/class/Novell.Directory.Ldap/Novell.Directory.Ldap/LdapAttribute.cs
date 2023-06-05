@@ -89,6 +89,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns an enumerator for the values of the attribute in byte format.
         ///
         /// </summary>
@@ -96,17 +97,18 @@ namespace Novell.Directory.Ldap
         ///  Note: All string values will be UTF-8 encoded. To decode use the
         /// String constructor. Example: new String( byteArray, "UTF-8" );
         /// </returns>
-        virtual public System.Collections.IEnumerator ByteValues
+        virtual System.Collections.IEnumerator ByteValues
         {
             get { return new ArrayEnumeration(ByteValueArray); }
         }
 
+        public
         /// <summary> Returns an enumerator for the string values of an attribute.
         ///
         /// </summary>
         /// <returns> The string values of an attribute.
         /// </returns>
-        virtual public System.Collections.IEnumerator StringValues
+        virtual System.Collections.IEnumerator StringValues
         {
             get { return new ArrayEnumeration(StringValueArray); }
         }
@@ -118,7 +120,7 @@ namespace Novell.Directory.Ldap
         /// no values.
         /// </returns>
         [CLSCompliantAttribute(false)]
-        virtual public sbyte[][] ByteValueArray
+        public virtual sbyte[][] ByteValueArray
         {
             get
             {
@@ -142,13 +144,14 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the values of the attribute as an array of strings.
         ///
         /// </summary>
         /// <returns> The values as an array of strings or an empty array if there are
         /// no values
         /// </returns>
-        virtual public System.String[] StringValueArray
+        virtual System.String[] StringValueArray
         {
             get
             {
@@ -178,6 +181,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the the first value of the attribute as a <code>String</code>.
         ///
         /// </summary>
@@ -194,7 +198,7 @@ namespace Novell.Directory.Ldap
         ///
         /// If the attribute has no values <code>null</code> is returned
         /// </returns>
-        virtual public System.String StringValue
+        virtual System.String StringValue
         {
             get
             {
@@ -228,7 +232,7 @@ namespace Novell.Directory.Ldap
         /// If the attribute has no values <code>null</code> is returned
         /// </returns>
         [CLSCompliantAttribute(false)]
-        virtual public sbyte[] ByteValue
+        public virtual sbyte[] ByteValue
         {
             get
             {
@@ -243,6 +247,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the language subtype of the attribute, if any.
         ///
         /// For example, if the attribute name is cn;lang-ja;phonetic,
@@ -252,7 +257,7 @@ namespace Novell.Directory.Ldap
         /// <returns> The language subtype of the attribute or null if the attribute
         /// has none.
         /// </returns>
-        virtual public System.String LangSubtype
+        virtual System.String LangSubtype
         {
             get
             {
@@ -270,21 +275,23 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the name of the attribute.
         ///
         /// </summary>
         /// <returns> The name of the attribute.
         /// </returns>
-        virtual public System.String Name
+        virtual System.String Name
         {
             get { return name; }
         }
 
+        protected internal
         /// <summary> Replaces all values with the specified value. This protected method is
         /// used by sub-classes of LdapSchemaElement because the value cannot be set
         /// with a contructor.
         /// </summary>
-        virtual protected internal System.String Value
+        virtual System.String Value
         {
             set
             {

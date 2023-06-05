@@ -36,10 +36,11 @@ namespace System.Net.Security
     using System.Security.Permissions;
     using System.Security.Principal;
 
+    partial
     //
     // Negotiate
     //
-    public partial class NegotiateStream : AuthenticatedStream
+    public class NegotiateStream : AuthenticatedStream
     {
         private NegoState _NegoState;
         private string _Package;

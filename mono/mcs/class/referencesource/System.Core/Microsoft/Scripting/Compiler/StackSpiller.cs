@@ -31,6 +31,7 @@ namespace Microsoft.Scripting.Ast.Compiler
 #else
 namespace System.Linq.Expressions.Compiler
 {
+    partial
 #endif
 
     /// <summary>
@@ -38,7 +39,7 @@ namespace System.Linq.Expressions.Compiler
     /// in order to guarantee some properties of code generation, for
     /// example that we always enter try block on empty stack.
     /// </summary>
-    internal partial class StackSpiller
+    internal class StackSpiller
     {
         // Is the evaluation stack empty?
         private enum Stack

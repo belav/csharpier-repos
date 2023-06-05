@@ -1284,7 +1284,7 @@ namespace Test_throwinfinallyrecursive_20_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void foo(int i)
+        public static void foo(int i)
         {
             if (i > 1)
                 return;
@@ -1708,7 +1708,7 @@ namespace Test_throwinfinallyrecursive_20_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();

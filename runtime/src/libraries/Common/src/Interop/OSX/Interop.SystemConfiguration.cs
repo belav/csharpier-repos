@@ -10,9 +10,9 @@ using CFArrayRef = System.IntPtr;
 using CFIndex = System.IntPtr;
 using SCDynamicStoreRef = System.IntPtr;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class SystemConfiguration
+    partial internal static class SystemConfiguration
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct SCDynamicStoreContext
@@ -35,7 +35,7 @@ internal static partial class Interop
         /// <param name="context">The context associated with the callout.</param>
         /// <returns>A reference to the new dynamic store session.</returns>
         [LibraryImport(Libraries.SystemConfigurationLibrary)]
-        private static unsafe partial SafeCreateHandle SCDynamicStoreCreate(
+        partial private static unsafe SafeCreateHandle SCDynamicStoreCreate(
             IntPtr allocator,
             CFStringRef name,
             delegate* unmanaged<SCDynamicStoreRef, CFArrayRef, IntPtr, void> callout,
@@ -70,7 +70,7 @@ internal static partial class Interop
         /// <param name="entity">The specific global entity, such as IPv4 or DNS.</param>
         /// <returns>A string containing the formatted key.</returns>
         [LibraryImport(Libraries.SystemConfigurationLibrary)]
-        private static partial SafeCreateHandle SCDynamicStoreKeyCreateNetworkServiceEntity(
+        partial private static SafeCreateHandle SCDynamicStoreKeyCreateNetworkServiceEntity(
             IntPtr allocator,
             CFStringRef domain,
             CFStringRef serviceID,
@@ -109,7 +109,7 @@ internal static partial class Interop
         /// on platforms that support it and for source versions that support it.</param>
         /// <returns>The new run loop source object.</returns>
         [LibraryImport(Libraries.SystemConfigurationLibrary)]
-        private static partial SafeCreateHandle SCDynamicStoreCreateRunLoopSource(
+        partial private static SafeCreateHandle SCDynamicStoreCreateRunLoopSource(
             IntPtr allocator,
             SCDynamicStoreRef store,
             CFIndex order
@@ -141,7 +141,7 @@ internal static partial class Interop
         /// <returns>Non-zero if the set of notification keys and patterns was successfully updated; zero otherwise.</returns>
         [LibraryImport(Libraries.SystemConfigurationLibrary)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SCDynamicStoreSetNotificationKeys(
+        partial internal static bool SCDynamicStoreSetNotificationKeys(
             SCDynamicStoreRef store,
             CFArrayRef keys,
             CFArrayRef patterns

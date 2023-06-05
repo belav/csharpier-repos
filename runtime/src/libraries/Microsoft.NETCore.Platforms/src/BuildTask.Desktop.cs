@@ -3,7 +3,7 @@
 
 namespace Microsoft.NETCore.Platforms.BuildTasks
 {
-    public partial class BuildTask
+    partial public class BuildTask
     {
         static BuildTask()
         {

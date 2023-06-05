@@ -9,10 +9,11 @@ using System.Reflection.Runtime.General;
 
 namespace System.Reflection.Runtime.TypeInfos
 {
+    partial
     //
     // The runtime's implementation of TypeInfo's for pointer types.
     //
-    internal sealed partial class RuntimePointerTypeInfo : RuntimeHasElementTypeInfo
+    internal sealed class RuntimePointerTypeInfo : RuntimeHasElementTypeInfo
     {
         private RuntimePointerTypeInfo(UnificationKey key)
             : base(key) { }

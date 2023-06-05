@@ -7,10 +7,11 @@ using System.Globalization;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableDictionary{TKey, TValue}.HashBucket"/> struct.
     /// </content>
-    public partial class ImmutableDictionary<TKey, TValue>
+    public class ImmutableDictionary<TKey, TValue>
     {
         /// <summary>
         /// Contains all the key/values in the collection that hash to the same value.

@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Shell32
+    partial internal static class Shell32
     {
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal unsafe struct SHELLEXECUTEINFO
@@ -53,6 +53,6 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Shell32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool ShellExecuteExW(SHELLEXECUTEINFO* pExecInfo);
+        partial internal static unsafe bool ShellExecuteExW(SHELLEXECUTEINFO* pExecInfo);
     }
 }

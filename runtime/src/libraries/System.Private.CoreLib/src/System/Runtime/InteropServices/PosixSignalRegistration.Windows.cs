@@ -6,7 +6,7 @@ using System.IO;
 
 namespace System.Runtime.InteropServices
 {
-    public sealed partial class PosixSignalRegistration
+    partial public sealed class PosixSignalRegistration
     {
         private static readonly HashSet<Token> s_registrations = new();
 

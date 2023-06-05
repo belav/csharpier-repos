@@ -10,8 +10,9 @@ using ILCompiler.DependencyAnalysisFramework;
 
 namespace ILCompiler.DependencyAnalysis
 {
+    partial
     /// Part of Node factory that deals with nodes describing native layout information
-    public partial class NodeFactory
+    public class NodeFactory
     {
         /// <summary>
         /// Helper class that provides a level of grouping for all the native layout lookups

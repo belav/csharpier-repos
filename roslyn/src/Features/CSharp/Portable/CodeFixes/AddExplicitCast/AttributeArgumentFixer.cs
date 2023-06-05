@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
 {
-    internal sealed partial class CSharpAddExplicitCastCodeFixProvider
+    partial internal sealed class CSharpAddExplicitCastCodeFixProvider
     {
         private class AttributeArgumentFixer
             : Fixer<AttributeArgumentSyntax, AttributeArgumentListSyntax, AttributeSyntax>

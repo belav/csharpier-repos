@@ -1060,7 +1060,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 set { _eventChecker = value; }
             }
 
-            static private void testAdded()
+            private static void testAdded()
             {
                 _testcounter++;
                 _eventChecker = false;

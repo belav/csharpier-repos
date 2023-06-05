@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class SourceTextExtensions
+    partial internal static class SourceTextExtensions
     {
         public static void GetLineAndOffset(
             this SourceText text,

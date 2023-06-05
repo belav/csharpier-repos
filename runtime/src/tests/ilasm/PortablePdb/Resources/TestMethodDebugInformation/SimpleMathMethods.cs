@@ -1,6 +1,6 @@
 ﻿namespace TestMethodDebugInformation
 {
-    public partial class SimpleMath
+    partial public class SimpleMath
     {
         public int Pow(int n, int d)
         {

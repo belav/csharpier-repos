@@ -18,7 +18,7 @@ namespace System.Security.Cryptography.X509Certificates
     /// create a certificate signing request blob to send to a Certificate Authority (CA).
     /// </summary>
     [UnsupportedOSPlatform("browser")]
-    public sealed partial class CertificateRequest
+    partial public sealed class CertificateRequest
     {
         private readonly AsymmetricAlgorithm? _key;
         private readonly X509SignatureGenerator? _generator;

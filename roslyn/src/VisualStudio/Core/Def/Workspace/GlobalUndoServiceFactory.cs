@@ -22,7 +22,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     /// A service that provide a way to undo operations applied to the workspace
     /// </summary>
     [ExportWorkspaceServiceFactory(typeof(IGlobalUndoService), ServiceLayer.Host), Shared]
-    internal partial class GlobalUndoServiceFactory : IWorkspaceServiceFactory
+    partial internal class GlobalUndoServiceFactory : IWorkspaceServiceFactory
     {
         private readonly GlobalUndoService _singleton;
 

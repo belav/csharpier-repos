@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
-public partial class ConsoleEncoding
+partial public class ConsoleEncoding
 {
     [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
     [PlatformSpecific(TestPlatforms.Windows)]
@@ -76,8 +76,8 @@ public partial class ConsoleEncoding
     }
 
     [LibraryImport("kernel32.dll")]
-    public static partial uint GetConsoleCP();
+    partial public static uint GetConsoleCP();
 
     [LibraryImport("kernel32.dll")]
-    public static partial uint GetConsoleOutputCP();
+    partial public static uint GetConsoleOutputCP();
 }

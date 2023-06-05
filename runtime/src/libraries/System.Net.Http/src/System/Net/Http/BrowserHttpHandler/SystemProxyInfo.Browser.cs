@@ -3,7 +3,7 @@
 
 namespace System.Net.Http
 {
-    internal static partial class SystemProxyInfo
+    partial internal static class SystemProxyInfo
     {
         public static IWebProxy Proxy => new HttpNoProxy();
     }

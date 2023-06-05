@@ -18,7 +18,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 [Obsolete(
     "This type is obsolete and will be removed in a future version. Use ComplexObjectModelBinder instead."
 )]
-public partial class ComplexTypeModelBinder : IModelBinder
+partial public class ComplexTypeModelBinder : IModelBinder
 {
     // Don't want a new public enum because communication between the private and internal methods of this class
     // should not be exposed. Can't use an internal enum because types of [TheoryData] values must be public.
@@ -639,7 +639,7 @@ public partial class ComplexTypeModelBinder : IModelBinder
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void NoPublicSettableProperties(
             ILogger logger,
@@ -652,7 +652,7 @@ public partial class ComplexTypeModelBinder : IModelBinder
             "Could not bind to model with name '{ModelName}' and type '{ModelType}' as the type has no public settable properties.",
             EventName = "NoPublicSettableProperties"
         )]
-        private static partial void NoPublicSettableProperties(
+        partial private static void NoPublicSettableProperties(
             ILogger logger,
             string modelName,
             Type modelType
@@ -669,6 +669,6 @@ public partial class ComplexTypeModelBinder : IModelBinder
             "Could not bind to model of type '{ModelType}' as there were no values in the request for any of the properties.",
             EventName = "CannotBindToComplexType"
         )]
-        private static partial void CannotBindToComplexType(ILogger logger, Type modelType);
+        partial private static void CannotBindToComplexType(ILogger logger, Type modelType);
     }
 }

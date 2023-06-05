@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Buffers.Text.Tests
 {
-    public static partial class ParserTests
+    partial public static class ParserTests
     {
         [Theory]
         [MemberData(nameof(TestData.BooleanParserTheoryData), MemberType = typeof(TestData))]

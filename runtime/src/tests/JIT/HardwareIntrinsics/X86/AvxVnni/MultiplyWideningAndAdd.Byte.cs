@@ -11,7 +11,7 @@ using Xunit;
 
 namespace JIT.HardwareIntrinsics.X86._AvxVnni
 {
-    public static partial class Program
+    partial public static class Program
     {
         [Fact]
         public static void MultiplyWideningAndAddByte()

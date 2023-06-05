@@ -15,7 +15,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectBrowser
 {
-    internal abstract partial class AbstractDescriptionBuilder
+    partial internal abstract class AbstractDescriptionBuilder
     {
         private readonly IVsObjectBrowserDescription3 _description;
         private readonly AbstractObjectBrowserLibraryManager _libraryManager;

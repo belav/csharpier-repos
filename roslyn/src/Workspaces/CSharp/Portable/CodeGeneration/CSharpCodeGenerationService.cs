@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 {
-    internal partial class CSharpCodeGenerationService
+    partial internal class CSharpCodeGenerationService
         : AbstractCodeGenerationService<CSharpCodeGenerationContextInfo>
     {
         public CSharpCodeGenerationService(HostLanguageServices languageServices)

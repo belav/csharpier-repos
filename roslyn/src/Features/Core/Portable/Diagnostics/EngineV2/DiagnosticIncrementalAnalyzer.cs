@@ -21,12 +21,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 {
+    partial
     /// <summary>
     /// Diagnostic Analyzer Engine V2
     ///
     /// This one follows pattern compiler has set for diagnostic analyzer.
     /// </summary>
-    internal partial class DiagnosticIncrementalAnalyzer : IIncrementalAnalyzer2
+    internal class DiagnosticIncrementalAnalyzer : IIncrementalAnalyzer2
     {
         private readonly int _correlationId;
         private readonly DiagnosticAnalyzerTelemetry _telemetry;

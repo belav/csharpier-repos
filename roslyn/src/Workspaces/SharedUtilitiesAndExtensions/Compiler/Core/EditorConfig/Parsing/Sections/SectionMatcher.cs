@@ -9,7 +9,7 @@ using static Microsoft.CodeAnalysis.EditorConfig.LanguageConstants;
 
 namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
 {
-    internal readonly partial struct SectionMatcher
+    partial internal readonly struct SectionMatcher
     {
         private readonly ImmutableArray<(int minValue, int maxValue)> _numberRangePairs;
         private readonly string _headerText;

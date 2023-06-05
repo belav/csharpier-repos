@@ -91,7 +91,7 @@ namespace TestWindowsOsShimsApp
             internal uint dwMinorVersion;
             internal uint dwBuildNumber;
             internal uint dwPlatformId;
-            internal fixed char szCSDVersion[128];
+            fixed internal char szCSDVersion[128];
         }
 
         [DllImport("ntdll.dll", ExactSpelling = true)]
@@ -112,7 +112,7 @@ namespace TestWindowsOsShimsApp
             ConditionMask dwConditionMask
         );
 
-        internal unsafe static int RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi)
+        internal static unsafe int RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi)
         {
             osvi = new RTL_OSVERSIONINFOEX();
             osvi.dwOSVersionInfoSize = (uint)sizeof(RTL_OSVERSIONINFOEX);

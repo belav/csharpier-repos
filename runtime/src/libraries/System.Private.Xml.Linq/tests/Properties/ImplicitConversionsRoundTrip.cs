@@ -14,9 +14,9 @@ using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class PropertiesFunctionalTests : TestModule
+    partial public class PropertiesFunctionalTests : TestModule
     {
-        public partial class PropertiesTests : XLinqTestCase
+        partial public class PropertiesTests : XLinqTestCase
         {
             public static object Explicit(Type ret, XAttribute data)
             {
@@ -160,6 +160,7 @@ namespace CoreXml.Test.XLinq
                 SetValue
             }
 
+            partial
             //[TestCase(Name = "XElement - value conversion round trip   (constructor)", Params = new object[] { typeof(XElement), ExplicitCastTestType.RoundTrip, NodeCreateType.Constructor })]
             //[TestCase(Name = "XAttribute - value conversion round trip (constructor)", Params = new object[] { typeof(XAttribute), ExplicitCastTestType.RoundTrip, NodeCreateType.Constructor })]
             //[TestCase(Name = "XElement - XmlConvert conformance        (constructor)", Params = new object[] { typeof(XElement), ExplicitCastTestType.XmlConvert, NodeCreateType.Constructor })]
@@ -168,7 +169,7 @@ namespace CoreXml.Test.XLinq
             //[TestCase(Name = "XAttribute - value conversion round trip (SetValue)", Params = new object[] { typeof(XAttribute), ExplicitCastTestType.RoundTrip, NodeCreateType.SetValue })]
             //[TestCase(Name = "XElement - XmlConvert conformance        (SetValue)", Params = new object[] { typeof(XElement), ExplicitCastTestType.XmlConvert, NodeCreateType.SetValue })]
             //[TestCase(Name = "XAttribute - XmlConvert conformance      (SetValue)", Params = new object[] { typeof(XAttribute), ExplicitCastTestType.XmlConvert, NodeCreateType.SetValue })]
-            public partial class XElement_Op_Eplicit : XLinqTestCase
+            public class XElement_Op_Eplicit : XLinqTestCase
             {
                 private object[] _data = new object[]
                 {
@@ -413,7 +414,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class ExplicitCastVariation : TestVariation
+            partial public class ExplicitCastVariation : TestVariation
             {
                 private object _data;
                 private Type _nodeType;
@@ -554,7 +555,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class XElement_Op_Eplicit_Null : XLinqTestCase
+            partial public class XElement_Op_Eplicit_Null : XLinqTestCase
             {
                 protected override void DetermineChildren()
                 {
@@ -587,7 +588,7 @@ namespace CoreXml.Test.XLinq
                 }
             }
 
-            public partial class ExplicitCastNullVariation : TestVariation
+            partial public class ExplicitCastNullVariation : TestVariation
             {
                 private Type _nodeType,
                     _retType;

@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Formats.Cbor
 {
-    public partial class CborReader
+    partial public class CborReader
     {
         /// <summary>Reads the contents of the next value, discarding the result and advancing the reader.</summary>
         /// <param name="disableConformanceModeChecks"><see langword="true" /> to disable conformance mode validation for the skipped values, equivalent to using <see cref="CborConformanceMode.Lax" />; otherwise, <see langword="false" />.</param>

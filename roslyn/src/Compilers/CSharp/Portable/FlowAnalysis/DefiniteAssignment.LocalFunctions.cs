@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class DefiniteAssignmentPass
+    partial internal class DefiniteAssignmentPass
     {
         internal sealed class LocalFunctionState : AbstractLocalFunctionState
         {

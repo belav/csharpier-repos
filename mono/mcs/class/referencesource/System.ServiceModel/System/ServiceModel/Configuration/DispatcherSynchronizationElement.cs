@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
 
-    public sealed partial class DispatcherSynchronizationElement : BehaviorExtensionElement
+    partial public sealed class DispatcherSynchronizationElement : BehaviorExtensionElement
     {
         public DispatcherSynchronizationElement() { }
 

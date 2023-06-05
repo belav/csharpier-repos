@@ -12,11 +12,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
+    partial
     /// <summary>
     /// This is the root class for all code model objects. It contains methods that
     /// are common to everything.
     /// </summary>
-    public partial class AbstractCodeModelObject
+    public class AbstractCodeModelObject
     {
         private static CodeGenerationContextInfo GetCodeGenerationContextInfo(
             SyntaxNode containerNode,

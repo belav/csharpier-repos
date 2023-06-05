@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial class XmlWellFormedWriter : XmlWriter
+    partial internal class XmlWellFormedWriter : XmlWriter
     {
         partial struct ElementScope
         {

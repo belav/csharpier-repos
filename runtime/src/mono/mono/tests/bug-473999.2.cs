@@ -12,7 +12,7 @@ public class Program
         //Console.WriteLine ("done");
     }
 
-    static public void Test<T>(T a)
+    public static void Test<T>(T a)
     {
         Func<T> func = () => a;
         //MethodInfo mi = func.Method;

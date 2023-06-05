@@ -6,7 +6,7 @@
 
 namespace System.Security.Cryptography.Pkcs
 {
-    public sealed partial class CmsRecipient
+    partial public sealed class CmsRecipient
     {
         public CmsRecipient(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate,
@@ -25,7 +25,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class CmsSigner
+    partial public sealed class CmsSigner
     {
         public CmsSigner(
             System.Security.Cryptography.Pkcs.SubjectIdentifierType signerIdentifierType,
@@ -52,7 +52,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class ContentInfo
+    partial public sealed class ContentInfo
     {
         public static System.Security.Cryptography.Oid GetContentType(
             ReadOnlySpan<byte> encodedMessage
@@ -62,7 +62,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class EnvelopedCms
+    partial public sealed class EnvelopedCms
     {
         public void Decode(System.ReadOnlySpan<byte> encodedMessage) { }
 
@@ -72,7 +72,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class Pkcs12Builder
+    partial public sealed class Pkcs12Builder
     {
         public Pkcs12Builder() { }
 
@@ -134,7 +134,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Pkcs12CertBag : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
+    partial public sealed class Pkcs12CertBag : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
     {
         public Pkcs12CertBag(
             System.Security.Cryptography.Oid certificateType,
@@ -170,7 +170,7 @@ namespace System.Security.Cryptography.Pkcs
         Unknown = 0,
     }
 
-    public sealed partial class Pkcs12Info
+    partial public sealed class Pkcs12Info
     {
         internal Pkcs12Info() { }
 
@@ -211,7 +211,7 @@ namespace System.Security.Cryptography.Pkcs
         Unknown = 0,
     }
 
-    public sealed partial class Pkcs12KeyBag : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
+    partial public sealed class Pkcs12KeyBag : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
     {
         public Pkcs12KeyBag(System.ReadOnlyMemory<byte> pkcs8PrivateKey, bool skipCopy = false)
             : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
@@ -222,7 +222,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public abstract partial class Pkcs12SafeBag
+    partial public abstract class Pkcs12SafeBag
     {
         protected Pkcs12SafeBag(
             string bagIdValue,
@@ -255,7 +255,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Pkcs12SafeContents
+    partial public sealed class Pkcs12SafeContents
     {
         public Pkcs12SafeContents() { }
 
@@ -349,7 +349,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Pkcs12SafeContentsBag
+    partial public sealed class Pkcs12SafeContentsBag
         : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
     {
         internal Pkcs12SafeContentsBag()
@@ -361,7 +361,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Pkcs12SecretBag : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
+    partial public sealed class Pkcs12SecretBag : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
     {
         internal Pkcs12SecretBag()
             : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
@@ -377,7 +377,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Pkcs12ShroudedKeyBag
+    partial public sealed class Pkcs12ShroudedKeyBag
         : System.Security.Cryptography.Pkcs.Pkcs12SafeBag
     {
         public Pkcs12ShroudedKeyBag(
@@ -392,7 +392,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Pkcs8PrivateKeyInfo
+    partial public sealed class Pkcs8PrivateKeyInfo
     {
         public Pkcs8PrivateKeyInfo(
             System.Security.Cryptography.Oid algorithmId,
@@ -499,7 +499,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Pkcs9LocalKeyId
+    partial public sealed class Pkcs9LocalKeyId
         : System.Security.Cryptography.Pkcs.Pkcs9AttributeObject
     {
         public Pkcs9LocalKeyId() { }
@@ -514,7 +514,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Rfc3161TimestampRequest
+    partial public sealed class Rfc3161TimestampRequest
     {
         internal Rfc3161TimestampRequest() { }
 
@@ -631,7 +631,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Rfc3161TimestampToken
+    partial public sealed class Rfc3161TimestampToken
     {
         internal Rfc3161TimestampToken() { }
 
@@ -702,7 +702,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class Rfc3161TimestampTokenInfo
+    partial public sealed class Rfc3161TimestampTokenInfo
     {
         public Rfc3161TimestampTokenInfo(
             System.Security.Cryptography.Oid policyId,
@@ -793,7 +793,7 @@ namespace System.Security.Cryptography.Pkcs
         }
     }
 
-    public sealed partial class SignedCms
+    partial public sealed class SignedCms
     {
         public void AddCertificate(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate
@@ -806,7 +806,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class SignerInfo
+    partial public sealed class SignerInfo
     {
         public System.Security.Cryptography.Oid SignatureAlgorithm
         {
@@ -827,7 +827,7 @@ namespace System.Security.Cryptography.Pkcs
         ) { }
     }
 
-    public sealed partial class SubjectIdentifier
+    partial public sealed class SubjectIdentifier
     {
         public bool MatchesCertificate(
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate

@@ -391,7 +391,7 @@ namespace System.Reflection
 
         #region Internal Static Members
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static CustomAttributeRecord[] GetCustomAttributeRecords(
+        internal static unsafe CustomAttributeRecord[] GetCustomAttributeRecords(
             RuntimeModule module,
             int targetToken
         )
@@ -1520,7 +1520,7 @@ namespace System.Reflection
         #endregion
     }
 
-    internal unsafe static class CustomAttribute
+    internal static unsafe class CustomAttribute
     {
         #region Private Data Members
         private static RuntimeType Type_RuntimeType = (RuntimeType)typeof(RuntimeType);
@@ -2213,7 +2213,7 @@ namespace System.Reflection
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        private unsafe static object[] GetCustomAttributes(
+        private static unsafe object[] GetCustomAttributes(
             RuntimeModule decoratedModule,
             int decoratedMetadataToken,
             int pcaCount,
@@ -2233,7 +2233,7 @@ namespace System.Reflection
         }
 
         [System.Security.SecurityCritical]
-        private unsafe static object[] GetCustomAttributes(
+        private static unsafe object[] GetCustomAttributes(
             RuntimeModule decoratedModule,
             int decoratedMetadataToken,
             int pcaCount,
@@ -2509,7 +2509,7 @@ namespace System.Reflection
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        private unsafe static bool FilterCustomAttributeRecord(
+        private static unsafe bool FilterCustomAttributeRecord(
             CustomAttributeRecord caRecord,
             MetadataImport scope,
             ref Assembly lastAptcaOkAssembly,
@@ -2800,7 +2800,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern Object _CreateCaObject(
+        private static extern unsafe Object _CreateCaObject(
             RuntimeModule pModule,
             IRuntimeMethodInfo pCtor,
             byte** ppBlob,
@@ -2829,7 +2829,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static void _GetPropertyOrFieldData(
+        private static extern unsafe void _GetPropertyOrFieldData(
             RuntimeModule pModule,
             byte** ppBlobStart,
             byte* pBlobEnd,
@@ -2840,7 +2840,7 @@ namespace System.Reflection
         );
 
         [System.Security.SecurityCritical] // auto-generated
-        private unsafe static void GetPropertyOrFieldData(
+        private static unsafe void GetPropertyOrFieldData(
             RuntimeModule module,
             ref IntPtr blobStart,
             IntPtr blobEnd,
@@ -2886,7 +2886,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe private static extern void _GetSecurityAttributes(
+        private static extern unsafe void _GetSecurityAttributes(
             RuntimeModule module,
             int token,
             bool assembly,
@@ -2894,7 +2894,7 @@ namespace System.Reflection
         );
 
         [System.Security.SecurityCritical] // auto-generated
-        unsafe internal static void GetSecurityAttributes(
+        internal static unsafe void GetSecurityAttributes(
             RuntimeModule module,
             int token,
             bool assembly,

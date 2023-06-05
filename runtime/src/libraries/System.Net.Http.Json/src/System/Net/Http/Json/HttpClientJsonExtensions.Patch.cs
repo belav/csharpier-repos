@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {
-    public static partial class HttpClientJsonExtensions
+    partial public static class HttpClientJsonExtensions
     {
         /// <summary>
         /// Sends a PATCH request to the specified Uri containing the <paramref name="value"/> serialized as JSON in the request body.

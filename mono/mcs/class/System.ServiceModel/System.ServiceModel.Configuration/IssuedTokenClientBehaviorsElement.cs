@@ -55,7 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class IssuedTokenClientBehaviorsElement : ConfigurationElement
+    partial public sealed class IssuedTokenClientBehaviorsElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

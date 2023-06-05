@@ -16,7 +16,7 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Globalization;
     using System.Collections.Generic;
 
-    internal partial class CorrelationInitializerDesigner
+    partial internal class CorrelationInitializerDesigner
     {
         DataGridHelper correlationInitializerDGHelper;
 

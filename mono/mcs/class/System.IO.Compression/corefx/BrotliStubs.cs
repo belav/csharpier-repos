@@ -8,9 +8,9 @@ using System.IO.Compression;
 using Microsoft.Win32.SafeHandles;
 using size_t = System.IntPtr;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Brotli
+    partial internal static class Brotli
     {
         internal static SafeBrotliEncoderHandle BrotliEncoderCreateInstance(
             IntPtr allocFunc,

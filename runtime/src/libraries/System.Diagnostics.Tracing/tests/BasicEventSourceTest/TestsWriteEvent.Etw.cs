@@ -81,7 +81,7 @@ namespace BasicEventSourceTests
             }
         }
 
-        static partial void Test_WriteEvent_AddEtwTests(List<SubTest> tests, EventSourceTest logger)
+        partial static void Test_WriteEvent_AddEtwTests(List<SubTest> tests, EventSourceTest logger)
         {
             if (!PlatformDetection.IsPrivilegedProcess)
             {

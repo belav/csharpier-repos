@@ -27,7 +27,7 @@ using Microsoft.VisualStudio.Text.Classification;
 namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 {
     [Export(typeof(IStreamingFindUsagesPresenter)), Shared]
-    internal partial class StreamingFindUsagesPresenter
+    partial internal class StreamingFindUsagesPresenter
         : ForegroundThreadAffinitizedObject,
             IStreamingFindUsagesPresenter
     {

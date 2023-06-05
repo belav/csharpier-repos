@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class StackAllocArrayCreationExpressionSyntax
+    partial public class StackAllocArrayCreationExpressionSyntax
     {
         public StackAllocArrayCreationExpressionSyntax Update(
             SyntaxToken stackAllocKeyword,
@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static StackAllocArrayCreationExpressionSyntax StackAllocArrayCreationExpression(
             SyntaxToken stackAllocKeyword,

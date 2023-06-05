@@ -3,7 +3,7 @@
 
 namespace System.Security.Cryptography
 {
-    internal static partial class CapiHelper
+    partial internal static class CapiHelper
     {
         // Return PROV_RSA_AES, in case any compat case pops up.
         internal const int DefaultRsaProviderType = 24;

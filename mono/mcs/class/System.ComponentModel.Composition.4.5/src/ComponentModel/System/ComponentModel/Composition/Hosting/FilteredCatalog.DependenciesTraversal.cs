@@ -10,7 +10,7 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class FilteredCatalog
+    partial public class FilteredCatalog
     {
         internal class DependenciesTraversal : IComposablePartCatalogTraversal
         {

@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
+    partial
     // The Parse methods provided by the numeric classes convert a
     // string to a numeric value. The optional style parameter specifies the
     // permitted style of the numeric string. It must be a combination of bit flags
@@ -24,7 +25,7 @@ namespace System
     // specified. Note, however, that the Parse methods do not accept
     // NaNs or Infinities.
 
-    internal static partial class Number
+    internal static class Number
     {
         private const int Int32Precision = 10;
         private const int UInt32Precision = Int32Precision;

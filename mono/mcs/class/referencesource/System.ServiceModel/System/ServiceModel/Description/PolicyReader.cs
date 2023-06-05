@@ -10,10 +10,11 @@ namespace System.ServiceModel.Description
     using WsdlNS = System.Web.Services.Description;
     using System.Globalization;
 
+    partial
     //
     // PolicyReader is a complex nested class in the MetadataImporter
     //
-    public abstract partial class MetadataImporter
+    public abstract class MetadataImporter
     {
         internal MetadataImporterQuotas Quotas;
 

@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace System.Collections.Immutable
 {
+    partial
     /// <content>
     /// Contains the inner <see cref="ImmutableHashSet{T}.MutationInput"/> class.
     /// </content>
-    public partial class ImmutableHashSet<T>
+    public class ImmutableHashSet<T>
     {
         /// <summary>
         /// Description of the current data structure as input into a

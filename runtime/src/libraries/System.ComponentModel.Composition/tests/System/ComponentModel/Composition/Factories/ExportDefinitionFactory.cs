@@ -6,9 +6,10 @@ using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.Factories
 {
+    partial
     // This class deliberately does not create instances of ExportDefinition,
     // so as to test other derived classes from ImportDefinition.
-    internal static partial class ExportDefinitionFactory
+    internal static class ExportDefinitionFactory
     {
         public static ExportDefinition Create()
         {

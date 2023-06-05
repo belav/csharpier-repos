@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.QuickInfo
 {
-    internal abstract partial class CommonSemanticQuickInfoProvider : CommonQuickInfoProvider
+    partial internal abstract class CommonSemanticQuickInfoProvider : CommonQuickInfoProvider
     {
         protected override async Task<QuickInfoItem?> BuildQuickInfoAsync(
             QuickInfoContext context,

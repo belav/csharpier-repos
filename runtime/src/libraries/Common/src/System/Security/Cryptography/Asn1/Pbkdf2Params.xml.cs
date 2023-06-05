@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct Pbkdf2Params
+    partial internal struct Pbkdf2Params
     {
         private static ReadOnlySpan<byte> DefaultPrf =>
             new byte[]

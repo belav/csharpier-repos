@@ -28,10 +28,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
+    partial
     /// <summary>
     /// Implementations of EnvDTE.FileCodeModel for both languages.
     /// </summary>
-    public sealed partial class FileCodeModel
+    public sealed class FileCodeModel
         : AbstractCodeModelObject,
             EnvDTE.FileCodeModel,
             EnvDTE80.FileCodeModel2,

@@ -9,5 +9,5 @@ namespace System.Net
         Name = "Private.InternalDiagnostics.System.Net.HttpListener",
         LocalizationResources = "FxResources.System.Net.HttpListener.SR"
     )]
-    internal sealed partial class NetEventSource { }
+    partial internal sealed class NetEventSource { }
 }

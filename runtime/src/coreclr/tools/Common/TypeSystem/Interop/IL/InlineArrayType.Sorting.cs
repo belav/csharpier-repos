@@ -3,8 +3,9 @@
 
 namespace Internal.TypeSystem.Interop
 {
+    partial
     // Functionality related to deterministic ordering of types
-    internal partial class InlineArrayType
+    internal class InlineArrayType
     {
         protected override int ClassCode => 226817075;
 
@@ -18,7 +19,7 @@ namespace Internal.TypeSystem.Interop
             return comparer.Compare(ElementType, otherType.ElementType);
         }
 
-        private partial class InlineArrayMethod
+        partial private class InlineArrayMethod
         {
             protected override int ClassCode => -1303220581;
 
@@ -34,7 +35,7 @@ namespace Internal.TypeSystem.Interop
             }
         }
 
-        private partial class InlineArrayField
+        partial private class InlineArrayField
         {
             protected override int ClassCode => 1542668652;
 

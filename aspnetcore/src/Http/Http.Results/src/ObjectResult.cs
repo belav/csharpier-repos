@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-internal partial class ObjectResult : IResult
+partial internal class ObjectResult : IResult
 {
     /// <summary>
     /// Creates a new <see cref="ObjectResult"/> instance with the provided <paramref name="value"/>.
@@ -115,7 +115,7 @@ internal partial class ObjectResult : IResult
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void ObjectResultExecuting(ILogger logger, object? value, int? statusCode)
         {
@@ -143,7 +143,7 @@ internal partial class ObjectResult : IResult
             EventName = "ObjectResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ObjectResultExecuting(
+        partial private static void ObjectResultExecuting(
             ILogger logger,
             string type,
             int statusCode
@@ -156,7 +156,7 @@ internal partial class ObjectResult : IResult
             EventName = "ObjectResultExecutingWithoutValue",
             SkipEnabledCheck = true
         )]
-        private static partial void ObjectResultExecutingWithoutValue(
+        partial private static void ObjectResultExecutingWithoutValue(
             ILogger logger,
             int statusCode
         );

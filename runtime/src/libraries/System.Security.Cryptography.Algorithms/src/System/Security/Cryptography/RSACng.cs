@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {
-    public partial class RSA : AsymmetricAlgorithm
+    partial public class RSA : AsymmetricAlgorithm
     {
         public static new RSA Create()
         {
@@ -15,9 +15,9 @@ namespace System.Security.Cryptography
         }
     }
 
-    internal static partial class RSAImplementation
+    partial internal static class RSAImplementation
     {
-        public sealed partial class RSACng : RSA
+        partial public sealed class RSACng : RSA
         {
             private SafeNCryptKeyHandle? _keyHandle;
             private int _lastKeySize;

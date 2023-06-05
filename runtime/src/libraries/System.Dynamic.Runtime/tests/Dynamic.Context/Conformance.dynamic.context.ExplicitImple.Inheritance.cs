@@ -192,21 +192,21 @@ namespace Dynamic.Tests
     public class SubClassOfExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass
         : ExplicitlyImplementedInterfaceWithTwoMembersAndEmptySubClass { }
 
-    public partial class ExplicitlyImplementedInterfaceInPartialClass { }
+    partial public class ExplicitlyImplementedInterfaceInPartialClass { }
 
-    public partial class ExplicitlyImplementedInterfaceInPartialClass : BaseInterfaceWithTwoMembers
+    partial public class ExplicitlyImplementedInterfaceInPartialClass : BaseInterfaceWithTwoMembers
     {
         int BaseInterfaceWithTwoMembers.Foo() => 0;
 
         public int Bar() => 1;
     }
 
-    public partial interface PartialInterfaceWithTwoMembers
+    partial public interface PartialInterfaceWithTwoMembers
     {
         int Foo();
     }
 
-    public partial interface PartialInterfaceWithTwoMembers
+    partial public interface PartialInterfaceWithTwoMembers
     {
         int Bar();
     }

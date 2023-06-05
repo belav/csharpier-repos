@@ -10,6 +10,7 @@ using System.Reflection;
 
 namespace System.Resources
 {
+    partial
     // Resource Manager exposes an assembly's resources to an application for
     // the correct CultureInfo.  An example would be localizing text for a
     // user-visible message.  Create a set of resource files listing a name
@@ -90,7 +91,7 @@ namespace System.Resources
     // is one such example.
     //
 
-    public partial class ResourceManager
+    public class ResourceManager
     {
         internal sealed class CultureNameResourceSetPair
         {

@@ -12,7 +12,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.Caching.Memory
 {
-    internal sealed partial class CacheEntry : ICacheEntry
+    partial internal sealed class CacheEntry : ICacheEntry
     {
         private static readonly Action<object> ExpirationCallback = ExpirationTokensExpired;
         private static readonly AsyncLocal<CacheEntry?> _current = new AsyncLocal<CacheEntry?>();

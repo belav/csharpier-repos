@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal static partial class CustomMethodMapper
+    partial internal static class CustomMethodMapper
     {
         //
         // String constructors require special casing down the stack, being the only variable-sized objects created via a constructor.

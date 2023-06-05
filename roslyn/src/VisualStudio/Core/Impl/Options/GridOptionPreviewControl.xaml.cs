@@ -24,7 +24,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 {
-    internal partial class GridOptionPreviewControl : AbstractOptionPageControl
+    partial internal class GridOptionPreviewControl : AbstractOptionPageControl
     {
         private const string UseEditorConfigUrl = "https://go.microsoft.com/fwlink/?linkid=866541";
         internal AbstractOptionPreviewViewModel ViewModel;

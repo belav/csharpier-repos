@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.IO.IsolatedStorage
 {
-    public static partial class TestHelper
+    partial public static class TestHelper
     {
         private static PropertyInfo s_rootDirectoryProperty;
         private static List<string> s_roots;

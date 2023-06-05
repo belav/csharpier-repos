@@ -58,7 +58,7 @@ namespace Microsoft.Scripting
             get { return _rcw; }
         }
 
-        private readonly static object _ComObjectInfoKey = new object();
+        private static readonly object _ComObjectInfoKey = new object();
 
         /// <summary>
         /// This is the factory method to get the ComObject corresponding to an RCW

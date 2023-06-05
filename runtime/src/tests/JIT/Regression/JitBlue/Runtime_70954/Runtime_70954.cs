@@ -22,11 +22,11 @@ public unsafe class Runtime_70954
     struct ImplicitByRefStruct
     {
         public ThreeByteStruct ThreeByteStruct;
-        public fixed byte Fill[16];
+        fixed public byte Fill[16];
     }
 
     struct ThreeByteStruct
     {
-        public fixed byte Bytes[3];
+        fixed public byte Bytes[3];
     }
 }

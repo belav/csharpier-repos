@@ -33,9 +33,10 @@ namespace System.Text.RegularExpressions.Symbolic
 #endif
     }
 
+    partial
     /// <summary>Represents a regex matching engine that performs regex matching using symbolic derivatives.</summary>
     /// <typeparam name="TSet">Character set type.</typeparam>
-    internal sealed partial class SymbolicRegexMatcher<TSet> : SymbolicRegexMatcher
+    internal sealed class SymbolicRegexMatcher<TSet> : SymbolicRegexMatcher
         where TSet : IComparable<TSet>, IEquatable<TSet>
     {
         /// <summary>Sentinel value used internally by the matcher to indicate no match exists.</summary>

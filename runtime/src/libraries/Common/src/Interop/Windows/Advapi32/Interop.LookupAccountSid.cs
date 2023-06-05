@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
@@ -14,7 +14,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        public static unsafe partial int LookupAccountSid(
+        partial public static unsafe int LookupAccountSid(
             string lpSystemName,
             byte[] Sid,
             char* Name,

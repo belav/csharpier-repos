@@ -8,10 +8,11 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
+    partial
     /// <summary>
     /// Constructor1
     /// </summary>
-    public partial class DiscretionaryAcl_Constructor1
+    public class DiscretionaryAcl_Constructor1
     {
         public static IEnumerable<object[]> DiscretionaryACL_Constructor1()
         {

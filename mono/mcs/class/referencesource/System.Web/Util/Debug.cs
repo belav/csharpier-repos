@@ -32,32 +32,33 @@ namespace System.Web.Util
 
         // Some of these APIs must be always available, not #ifdefed away.
         [SuppressUnmanagedCodeSecurity]
-        private static partial class NativeMethods
+        partial private static class NativeMethods
         {
             [DllImport("kernel32.dll")]
-            internal extern static bool IsDebuggerPresent();
+            internal static extern bool IsDebuggerPresent();
         }
 
+        partial
 #if DBG
-        private static partial class NativeMethods
+        private static class NativeMethods
         {
             [DllImport("kernel32.dll")]
-            internal extern static void DebugBreak();
+            internal static extern void DebugBreak();
 
             [DllImport("kernel32.dll")]
-            internal extern static int GetCurrentProcessId();
+            internal static extern int GetCurrentProcessId();
 
             [DllImport("kernel32.dll")]
-            internal extern static int GetCurrentThreadId();
+            internal static extern int GetCurrentThreadId();
 
             [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            internal extern static IntPtr GetCurrentProcess();
+            internal static extern IntPtr GetCurrentProcess();
 
             [DllImport("kernel32.dll", SetLastError = true)]
-            internal extern static bool TerminateProcess(HandleRef processHandle, int exitCode);
+            internal static extern bool TerminateProcess(HandleRef processHandle, int exitCode);
 
             [DllImport("kernel32.dll", CharSet = CharSet.Auto, BestFitMapping = false)]
-            internal extern static void OutputDebugString(string message);
+            internal static extern void OutputDebugString(string message);
 
             internal const int PM_NOREMOVE = 0x0000;
             internal const int PM_REMOVE = 0x0001;
@@ -75,7 +76,7 @@ namespace System.Web.Util
             }
 
             [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-            internal extern static bool PeekMessage(
+            internal static extern bool PeekMessage(
                 [In, Out] ref MSG msg,
                 HandleRef hwnd,
                 int msgMin,
@@ -130,7 +131,7 @@ namespace System.Web.Util
                 IDHELP = 9;
 
             [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false)]
-            internal extern static int MessageBox(
+            internal static extern int MessageBox(
                 HandleRef hWnd,
                 string text,
                 string caption,
@@ -162,7 +163,7 @@ namespace System.Web.Util
                 BestFitMapping = false,
                 SetLastError = true
             )]
-            internal extern static int RegOpenKeyEx(
+            internal static extern int RegOpenKeyEx(
                 IntPtr hKey,
                 string lpSubKey,
                 int ulOptions,
@@ -171,7 +172,7 @@ namespace System.Web.Util
             );
 
             [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
-            internal extern static int RegNotifyChangeKeyValue(
+            internal static extern int RegNotifyChangeKeyValue(
                 SafeRegistryHandle hKey,
                 bool watchSubTree,
                 uint notifyFilter,
@@ -198,7 +199,7 @@ namespace System.Web.Util
             ]
             private static extern int RegCloseKey(IntPtr hKey);
 
-            override protected bool ReleaseHandle()
+            protected override bool ReleaseHandle()
             {
                 // Returns a Win32 error code, 0 for success
                 int r = RegCloseKey(handle);
@@ -1302,7 +1303,9 @@ A=Exit process R=Debug I=Continue";
         }
 
 #if DBG
-        static internal string ToStringMaybeNull(object o)
+        internal
+#if DBG
+        static string ToStringMaybeNull(object o)
         {
             if (o != null)
             {
@@ -1313,7 +1316,20 @@ A=Exit process R=Debug I=Continue";
         }
 #endif
 
-        static internal string FormatUtcDate(DateTime utcTime)
+        internal internal
+#if DBG
+        static string ToStringMaybeNull(object o)
+        {
+            if (o != null)
+            {
+                return o.ToString();
+            }
+
+            return "<null>";
+        }
+#endif
+
+        static string FormatUtcDate(DateTime utcTime)
         {
 #if DBG
             DateTime localTime = DateTimeUtil.ConvertToLocalTime(utcTime);
@@ -1323,7 +1339,7 @@ A=Exit process R=Debug I=Continue";
 #endif
         }
 
-        static internal string FormatLocalDate(DateTime localTime)
+        internal static string FormatLocalDate(DateTime localTime)
         {
 #if DBG
             return localTime.ToString(DATE_FORMAT, CultureInfo.InvariantCulture);

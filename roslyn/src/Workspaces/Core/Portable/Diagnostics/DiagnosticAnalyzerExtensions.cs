@@ -6,7 +6,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal static partial class DiagnosticAnalyzerExtensions
+    partial internal static class DiagnosticAnalyzerExtensions
     {
         public static DiagnosticAnalyzerCategory GetDiagnosticAnalyzerCategory(
             this DiagnosticAnalyzer analyzer

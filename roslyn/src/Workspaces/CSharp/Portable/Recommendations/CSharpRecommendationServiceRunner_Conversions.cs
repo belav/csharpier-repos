@@ -10,12 +10,13 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Recommendations;
 
-internal partial class CSharpRecommendationService
+partial internal class CSharpRecommendationService
 {
+    partial
     /// <summary>
     /// Adds user defined and predefined conversions to the unnamed recommendation set.
     /// </summary>
-    private sealed partial class CSharpRecommendationServiceRunner
+    private sealed class CSharpRecommendationServiceRunner
     {
         private static readonly ImmutableArray<SpecialType> s_predefinedEnumConversionTargets =
             ImmutableArray.Create(

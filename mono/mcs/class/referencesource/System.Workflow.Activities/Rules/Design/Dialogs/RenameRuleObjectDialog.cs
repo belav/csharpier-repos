@@ -14,7 +14,7 @@ using System.Windows.Forms.Design;
 
 namespace System.Workflow.Activities.Rules.Design
 {
-    internal partial class RenameRuleObjectDialog : Form
+    partial internal class RenameRuleObjectDialog : Form
     {
         public delegate bool NameValidatorDelegate(string name);
 

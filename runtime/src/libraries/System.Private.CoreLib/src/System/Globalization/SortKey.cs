@@ -6,8 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Globalization
 {
+    partial
     /// <summary>Represents the result of mapping a string to its sort key.</summary>
-    public sealed partial class SortKey
+    public sealed class SortKey
     {
         private readonly CompareInfo _compareInfo;
         private readonly CompareOptions _options;

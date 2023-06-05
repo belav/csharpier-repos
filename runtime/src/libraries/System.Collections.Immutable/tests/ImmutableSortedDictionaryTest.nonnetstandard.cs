@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public partial class ImmutableSortedDictionaryTest : ImmutableDictionaryTestBase
+    partial public class ImmutableSortedDictionaryTest : ImmutableDictionaryTestBase
     {
         internal override IBinaryTree GetRootNode<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> dictionary

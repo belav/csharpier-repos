@@ -14,7 +14,7 @@ using FieldAttributes = System.Reflection.FieldAttributes;
 
 namespace ILCompiler.Metadata
 {
-    internal partial class Transform<TPolicy>
+    partial internal class Transform<TPolicy>
     {
         internal EntityMap<Cts.FieldDesc, MetadataRecord> _fields = new EntityMap<
             Cts.FieldDesc,

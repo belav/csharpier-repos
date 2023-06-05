@@ -6,7 +6,7 @@
 
 namespace Microsoft.CSharp
 {
-    public partial class CSharpCodeProvider : System.CodeDom.Compiler.CodeDomProvider
+    partial public class CSharpCodeProvider : System.CodeDom.Compiler.CodeDomProvider
     {
         public CSharpCodeProvider() { }
 
@@ -50,7 +50,7 @@ namespace Microsoft.CSharp
 
 namespace Microsoft.VisualBasic
 {
-    public partial class VBCodeProvider : System.CodeDom.Compiler.CodeDomProvider
+    partial public class VBCodeProvider : System.CodeDom.Compiler.CodeDomProvider
     {
         public VBCodeProvider() { }
 
@@ -98,7 +98,7 @@ namespace Microsoft.VisualBasic
 
 namespace System.CodeDom
 {
-    public partial class CodeArgumentReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodeArgumentReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodeArgumentReferenceExpression() { }
 
@@ -111,7 +111,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeArrayCreateExpression : System.CodeDom.CodeExpression
+    partial public class CodeArrayCreateExpression : System.CodeDom.CodeExpression
     {
         public CodeArrayCreateExpression() { }
 
@@ -167,7 +167,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeArrayIndexerExpression : System.CodeDom.CodeExpression
+    partial public class CodeArrayIndexerExpression : System.CodeDom.CodeExpression
     {
         public CodeArrayIndexerExpression() { }
 
@@ -187,7 +187,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeAssignStatement : System.CodeDom.CodeStatement
+    partial public class CodeAssignStatement : System.CodeDom.CodeStatement
     {
         public CodeAssignStatement() { }
 
@@ -208,7 +208,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeAttachEventStatement : System.CodeDom.CodeStatement
+    partial public class CodeAttachEventStatement : System.CodeDom.CodeStatement
     {
         public CodeAttachEventStatement() { }
 
@@ -235,7 +235,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeAttributeArgument
+    partial public class CodeAttributeArgument
     {
         public CodeAttributeArgument() { }
 
@@ -255,7 +255,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeAttributeArgumentCollection : System.Collections.CollectionBase
+    partial public class CodeAttributeArgumentCollection : System.Collections.CollectionBase
     {
         public CodeAttributeArgumentCollection() { }
 
@@ -296,7 +296,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeAttributeArgument value) { }
     }
 
-    public partial class CodeAttributeDeclaration
+    partial public class CodeAttributeDeclaration
     {
         public CodeAttributeDeclaration() { }
 
@@ -329,7 +329,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeAttributeDeclarationCollection : System.Collections.CollectionBase
+    partial public class CodeAttributeDeclarationCollection : System.Collections.CollectionBase
     {
         public CodeAttributeDeclarationCollection() { }
 
@@ -372,12 +372,12 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeAttributeDeclaration value) { }
     }
 
-    public partial class CodeBaseReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodeBaseReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodeBaseReferenceExpression() { }
     }
 
-    public partial class CodeBinaryOperatorExpression : System.CodeDom.CodeExpression
+    partial public class CodeBinaryOperatorExpression : System.CodeDom.CodeExpression
     {
         public CodeBinaryOperatorExpression() { }
 
@@ -425,7 +425,7 @@ namespace System.CodeDom
         GreaterThanOrEqual = 16,
     }
 
-    public partial class CodeCastExpression : System.CodeDom.CodeExpression
+    partial public class CodeCastExpression : System.CodeDom.CodeExpression
     {
         public CodeCastExpression() { }
 
@@ -451,7 +451,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeCatchClause
+    partial public class CodeCatchClause
     {
         public CodeCatchClause() { }
 
@@ -484,7 +484,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeCatchClauseCollection : System.Collections.CollectionBase
+    partial public class CodeCatchClauseCollection : System.Collections.CollectionBase
     {
         public CodeCatchClauseCollection() { }
 
@@ -524,7 +524,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeCatchClause value) { }
     }
 
-    public partial class CodeChecksumPragma : System.CodeDom.CodeDirective
+    partial public class CodeChecksumPragma : System.CodeDom.CodeDirective
     {
         public CodeChecksumPragma() { }
 
@@ -551,7 +551,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeComment : System.CodeDom.CodeObject
+    partial public class CodeComment : System.CodeDom.CodeObject
     {
         public CodeComment() { }
 
@@ -571,7 +571,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeCommentStatement : System.CodeDom.CodeStatement
+    partial public class CodeCommentStatement : System.CodeDom.CodeStatement
     {
         public CodeCommentStatement() { }
 
@@ -588,7 +588,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeCommentStatementCollection : System.Collections.CollectionBase
+    partial public class CodeCommentStatementCollection : System.Collections.CollectionBase
     {
         public CodeCommentStatementCollection() { }
 
@@ -629,7 +629,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeCommentStatement value) { }
     }
 
-    public partial class CodeCompileUnit : System.CodeDom.CodeObject
+    partial public class CodeCompileUnit : System.CodeDom.CodeObject
     {
         public CodeCompileUnit() { }
 
@@ -655,7 +655,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeConditionStatement : System.CodeDom.CodeStatement
+    partial public class CodeConditionStatement : System.CodeDom.CodeStatement
     {
         public CodeConditionStatement() { }
 
@@ -685,7 +685,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeConstructor : System.CodeDom.CodeMemberMethod
+    partial public class CodeConstructor : System.CodeDom.CodeMemberMethod
     {
         public CodeConstructor() { }
 
@@ -699,7 +699,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeDefaultValueExpression : System.CodeDom.CodeExpression
+    partial public class CodeDefaultValueExpression : System.CodeDom.CodeExpression
     {
         public CodeDefaultValueExpression() { }
 
@@ -712,7 +712,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeDelegateCreateExpression : System.CodeDom.CodeExpression
+    partial public class CodeDelegateCreateExpression : System.CodeDom.CodeExpression
     {
         public CodeDelegateCreateExpression() { }
 
@@ -739,7 +739,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeDelegateInvokeExpression : System.CodeDom.CodeExpression
+    partial public class CodeDelegateInvokeExpression : System.CodeDom.CodeExpression
     {
         public CodeDelegateInvokeExpression() { }
 
@@ -761,7 +761,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeDirectionExpression : System.CodeDom.CodeExpression
+    partial public class CodeDirectionExpression : System.CodeDom.CodeExpression
     {
         public CodeDirectionExpression() { }
 
@@ -782,12 +782,12 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeDirective : System.CodeDom.CodeObject
+    partial public class CodeDirective : System.CodeDom.CodeObject
     {
         public CodeDirective() { }
     }
 
-    public partial class CodeDirectiveCollection : System.Collections.CollectionBase
+    partial public class CodeDirectiveCollection : System.Collections.CollectionBase
     {
         public CodeDirectiveCollection() { }
 
@@ -827,12 +827,12 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeDirective value) { }
     }
 
-    public partial class CodeEntryPointMethod : System.CodeDom.CodeMemberMethod
+    partial public class CodeEntryPointMethod : System.CodeDom.CodeMemberMethod
     {
         public CodeEntryPointMethod() { }
     }
 
-    public partial class CodeEventReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodeEventReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodeEventReferenceExpression() { }
 
@@ -853,12 +853,12 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeExpression : System.CodeDom.CodeObject
+    partial public class CodeExpression : System.CodeDom.CodeObject
     {
         public CodeExpression() { }
     }
 
-    public partial class CodeExpressionCollection : System.Collections.CollectionBase
+    partial public class CodeExpressionCollection : System.Collections.CollectionBase
     {
         public CodeExpressionCollection() { }
 
@@ -898,7 +898,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeExpression value) { }
     }
 
-    public partial class CodeExpressionStatement : System.CodeDom.CodeStatement
+    partial public class CodeExpressionStatement : System.CodeDom.CodeStatement
     {
         public CodeExpressionStatement() { }
 
@@ -911,7 +911,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeFieldReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodeFieldReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodeFieldReferenceExpression() { }
 
@@ -932,7 +932,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeGotoStatement : System.CodeDom.CodeStatement
+    partial public class CodeGotoStatement : System.CodeDom.CodeStatement
     {
         public CodeGotoStatement() { }
 
@@ -945,7 +945,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeIndexerExpression : System.CodeDom.CodeExpression
+    partial public class CodeIndexerExpression : System.CodeDom.CodeExpression
     {
         public CodeIndexerExpression() { }
 
@@ -965,7 +965,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeIterationStatement : System.CodeDom.CodeStatement
+    partial public class CodeIterationStatement : System.CodeDom.CodeStatement
     {
         public CodeIterationStatement() { }
 
@@ -997,7 +997,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeLabeledStatement : System.CodeDom.CodeStatement
+    partial public class CodeLabeledStatement : System.CodeDom.CodeStatement
     {
         public CodeLabeledStatement() { }
 
@@ -1017,7 +1017,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeLinePragma
+    partial public class CodeLinePragma
     {
         public CodeLinePragma() { }
 
@@ -1035,7 +1035,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeMemberEvent : System.CodeDom.CodeTypeMember
+    partial public class CodeMemberEvent : System.CodeDom.CodeTypeMember
     {
         public CodeMemberEvent() { }
 
@@ -1055,7 +1055,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeMemberField : System.CodeDom.CodeTypeMember
+    partial public class CodeMemberField : System.CodeDom.CodeTypeMember
     {
         public CodeMemberField() { }
 
@@ -1077,7 +1077,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeMemberMethod : System.CodeDom.CodeTypeMember
+    partial public class CodeMemberMethod : System.CodeDom.CodeTypeMember
     {
         public CodeMemberMethod() { }
 
@@ -1128,7 +1128,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeMemberProperty : System.CodeDom.CodeTypeMember
+    partial public class CodeMemberProperty : System.CodeDom.CodeTypeMember
     {
         public CodeMemberProperty() { }
 
@@ -1170,7 +1170,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeMethodInvokeExpression : System.CodeDom.CodeExpression
+    partial public class CodeMethodInvokeExpression : System.CodeDom.CodeExpression
     {
         public CodeMethodInvokeExpression() { }
 
@@ -1196,7 +1196,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeMethodReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodeMethodReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodeMethodReferenceExpression() { }
 
@@ -1227,7 +1227,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeMethodReturnStatement : System.CodeDom.CodeStatement
+    partial public class CodeMethodReturnStatement : System.CodeDom.CodeStatement
     {
         public CodeMethodReturnStatement() { }
 
@@ -1240,7 +1240,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeNamespace : System.CodeDom.CodeObject
+    partial public class CodeNamespace : System.CodeDom.CodeObject
     {
         public CodeNamespace() { }
 
@@ -1280,7 +1280,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeNamespaceCollection : System.Collections.CollectionBase
+    partial public class CodeNamespaceCollection : System.Collections.CollectionBase
     {
         public CodeNamespaceCollection() { }
 
@@ -1320,7 +1320,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeNamespace value) { }
     }
 
-    public partial class CodeNamespaceImport : System.CodeDom.CodeObject
+    partial public class CodeNamespaceImport : System.CodeDom.CodeObject
     {
         public CodeNamespaceImport() { }
 
@@ -1338,7 +1338,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeNamespaceImportCollection
+    partial public class CodeNamespaceImportCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -1422,7 +1422,7 @@ namespace System.CodeDom
         void System.Collections.IList.RemoveAt(int index) { }
     }
 
-    public partial class CodeObject
+    partial public class CodeObject
     {
         public CodeObject() { }
 
@@ -1432,7 +1432,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeObjectCreateExpression : System.CodeDom.CodeExpression
+    partial public class CodeObjectCreateExpression : System.CodeDom.CodeExpression
     {
         public CodeObjectCreateExpression() { }
 
@@ -1462,7 +1462,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeParameterDeclarationExpression : System.CodeDom.CodeExpression
+    partial public class CodeParameterDeclarationExpression : System.CodeDom.CodeExpression
     {
         public CodeParameterDeclarationExpression() { }
 
@@ -1497,7 +1497,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeParameterDeclarationExpressionCollection
+    partial public class CodeParameterDeclarationExpressionCollection
         : System.Collections.CollectionBase
     {
         public CodeParameterDeclarationExpressionCollection() { }
@@ -1542,7 +1542,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeParameterDeclarationExpression value) { }
     }
 
-    public partial class CodePrimitiveExpression : System.CodeDom.CodeExpression
+    partial public class CodePrimitiveExpression : System.CodeDom.CodeExpression
     {
         public CodePrimitiveExpression() { }
 
@@ -1555,7 +1555,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodePropertyReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodePropertyReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodePropertyReferenceExpression() { }
 
@@ -1576,12 +1576,12 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodePropertySetValueReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodePropertySetValueReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodePropertySetValueReferenceExpression() { }
     }
 
-    public partial class CodeRegionDirective : System.CodeDom.CodeDirective
+    partial public class CodeRegionDirective : System.CodeDom.CodeDirective
     {
         public CodeRegionDirective() { }
 
@@ -1606,7 +1606,7 @@ namespace System.CodeDom
         End = 2,
     }
 
-    public partial class CodeRemoveEventStatement : System.CodeDom.CodeStatement
+    partial public class CodeRemoveEventStatement : System.CodeDom.CodeStatement
     {
         public CodeRemoveEventStatement() { }
 
@@ -1633,7 +1633,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeSnippetCompileUnit : System.CodeDom.CodeCompileUnit
+    partial public class CodeSnippetCompileUnit : System.CodeDom.CodeCompileUnit
     {
         public CodeSnippetCompileUnit() { }
 
@@ -1651,7 +1651,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeSnippetExpression : System.CodeDom.CodeExpression
+    partial public class CodeSnippetExpression : System.CodeDom.CodeExpression
     {
         public CodeSnippetExpression() { }
 
@@ -1664,7 +1664,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeSnippetStatement : System.CodeDom.CodeStatement
+    partial public class CodeSnippetStatement : System.CodeDom.CodeStatement
     {
         public CodeSnippetStatement() { }
 
@@ -1677,7 +1677,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeSnippetTypeMember : System.CodeDom.CodeTypeMember
+    partial public class CodeSnippetTypeMember : System.CodeDom.CodeTypeMember
     {
         public CodeSnippetTypeMember() { }
 
@@ -1690,7 +1690,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeStatement : System.CodeDom.CodeObject
+    partial public class CodeStatement : System.CodeDom.CodeObject
     {
         public CodeStatement() { }
 
@@ -1709,7 +1709,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeStatementCollection : System.Collections.CollectionBase
+    partial public class CodeStatementCollection : System.Collections.CollectionBase
     {
         public CodeStatementCollection() { }
 
@@ -1754,12 +1754,12 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeStatement value) { }
     }
 
-    public partial class CodeThisReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodeThisReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodeThisReferenceExpression() { }
     }
 
-    public partial class CodeThrowExceptionStatement : System.CodeDom.CodeStatement
+    partial public class CodeThrowExceptionStatement : System.CodeDom.CodeStatement
     {
         public CodeThrowExceptionStatement() { }
 
@@ -1772,7 +1772,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeTryCatchFinallyStatement : System.CodeDom.CodeStatement
+    partial public class CodeTryCatchFinallyStatement : System.CodeDom.CodeStatement
     {
         public CodeTryCatchFinallyStatement() { }
 
@@ -1801,12 +1801,12 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeTypeConstructor : System.CodeDom.CodeMemberMethod
+    partial public class CodeTypeConstructor : System.CodeDom.CodeMemberMethod
     {
         public CodeTypeConstructor() { }
     }
 
-    public partial class CodeTypeDeclaration : System.CodeDom.CodeTypeMember
+    partial public class CodeTypeDeclaration : System.CodeDom.CodeTypeMember
     {
         public CodeTypeDeclaration() { }
 
@@ -1866,7 +1866,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeTypeDeclarationCollection : System.Collections.CollectionBase
+    partial public class CodeTypeDeclarationCollection : System.Collections.CollectionBase
     {
         public CodeTypeDeclarationCollection() { }
 
@@ -1906,7 +1906,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeTypeDeclaration value) { }
     }
 
-    public partial class CodeTypeDelegate : System.CodeDom.CodeTypeDeclaration
+    partial public class CodeTypeDelegate : System.CodeDom.CodeTypeDeclaration
     {
         public CodeTypeDelegate() { }
 
@@ -1923,7 +1923,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeTypeMember : System.CodeDom.CodeObject
+    partial public class CodeTypeMember : System.CodeDom.CodeObject
     {
         public CodeTypeMember() { }
 
@@ -1961,7 +1961,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeTypeMemberCollection : System.Collections.CollectionBase
+    partial public class CodeTypeMemberCollection : System.Collections.CollectionBase
     {
         public CodeTypeMemberCollection() { }
 
@@ -2001,7 +2001,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeTypeMember value) { }
     }
 
-    public partial class CodeTypeOfExpression : System.CodeDom.CodeExpression
+    partial public class CodeTypeOfExpression : System.CodeDom.CodeExpression
     {
         public CodeTypeOfExpression() { }
 
@@ -2018,7 +2018,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeTypeParameter : System.CodeDom.CodeObject
+    partial public class CodeTypeParameter : System.CodeDom.CodeObject
     {
         public CodeTypeParameter() { }
 
@@ -2044,7 +2044,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeTypeParameterCollection : System.Collections.CollectionBase
+    partial public class CodeTypeParameterCollection : System.Collections.CollectionBase
     {
         public CodeTypeParameterCollection() { }
 
@@ -2086,7 +2086,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeTypeParameter value) { }
     }
 
-    public partial class CodeTypeReference : System.CodeDom.CodeObject
+    partial public class CodeTypeReference : System.CodeDom.CodeObject
     {
         public CodeTypeReference() { }
 
@@ -2141,7 +2141,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeTypeReferenceCollection : System.Collections.CollectionBase
+    partial public class CodeTypeReferenceCollection : System.Collections.CollectionBase
     {
         public CodeTypeReferenceCollection() { }
 
@@ -2185,7 +2185,7 @@ namespace System.CodeDom
         public void Remove(System.CodeDom.CodeTypeReference value) { }
     }
 
-    public partial class CodeTypeReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodeTypeReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodeTypeReferenceExpression() { }
 
@@ -2209,7 +2209,7 @@ namespace System.CodeDom
         GenericTypeParameter = 2,
     }
 
-    public partial class CodeVariableDeclarationStatement : System.CodeDom.CodeStatement
+    partial public class CodeVariableDeclarationStatement : System.CodeDom.CodeStatement
     {
         public CodeVariableDeclarationStatement() { }
 
@@ -2255,7 +2255,7 @@ namespace System.CodeDom
         }
     }
 
-    public partial class CodeVariableReferenceExpression : System.CodeDom.CodeExpression
+    partial public class CodeVariableReferenceExpression : System.CodeDom.CodeExpression
     {
         public CodeVariableReferenceExpression() { }
 
@@ -2298,7 +2298,7 @@ namespace System.CodeDom
 
 namespace System.CodeDom.Compiler
 {
-    public abstract partial class CodeCompiler
+    partial public abstract class CodeCompiler
         : System.CodeDom.Compiler.CodeGenerator,
             System.CodeDom.Compiler.ICodeCompiler
     {
@@ -2426,7 +2426,7 @@ namespace System.CodeDom.Compiler
     }
 
     [System.ComponentModel.ToolboxItemAttribute(false)]
-    public abstract partial class CodeDomProvider : System.ComponentModel.Component
+    partial public abstract class CodeDomProvider : System.ComponentModel.Component
     {
         protected CodeDomProvider() { }
 
@@ -2603,7 +2603,7 @@ namespace System.CodeDom.Compiler
         }
     }
 
-    public abstract partial class CodeGenerator : System.CodeDom.Compiler.ICodeGenerator
+    partial public abstract class CodeGenerator : System.CodeDom.Compiler.ICodeGenerator
     {
         protected CodeGenerator() { }
 
@@ -2986,7 +2986,7 @@ namespace System.CodeDom.Compiler
         public static void ValidateIdentifiers(System.CodeDom.CodeObject e) { }
     }
 
-    public partial class CodeGeneratorOptions
+    partial public class CodeGeneratorOptions
     {
         public CodeGeneratorOptions() { }
 
@@ -3022,14 +3022,14 @@ namespace System.CodeDom.Compiler
         }
     }
 
-    public abstract partial class CodeParser : System.CodeDom.Compiler.ICodeParser
+    partial public abstract class CodeParser : System.CodeDom.Compiler.ICodeParser
     {
         protected CodeParser() { }
 
         public abstract System.CodeDom.CodeCompileUnit Parse(System.IO.TextReader codeStream);
     }
 
-    public partial class CompilerError
+    partial public class CompilerError
     {
         public CompilerError() { }
 
@@ -3078,7 +3078,7 @@ namespace System.CodeDom.Compiler
         }
     }
 
-    public partial class CompilerErrorCollection : System.Collections.CollectionBase
+    partial public class CompilerErrorCollection : System.Collections.CollectionBase
     {
         public CompilerErrorCollection() { }
 
@@ -3126,7 +3126,7 @@ namespace System.CodeDom.Compiler
         public void Remove(System.CodeDom.Compiler.CompilerError value) { }
     }
 
-    public sealed partial class CompilerInfo
+    partial public sealed class CompilerInfo
     {
         internal CompilerInfo() { }
 
@@ -3177,7 +3177,7 @@ namespace System.CodeDom.Compiler
         }
     }
 
-    public partial class CompilerParameters
+    partial public class CompilerParameters
     {
         public CompilerParameters() { }
 
@@ -3265,7 +3265,7 @@ namespace System.CodeDom.Compiler
         }
     }
 
-    public partial class CompilerResults
+    partial public class CompilerResults
     {
         public CompilerResults(System.CodeDom.Compiler.TempFileCollection tempFiles) { }
 
@@ -3299,7 +3299,7 @@ namespace System.CodeDom.Compiler
         }
     }
 
-    public static partial class Executor
+    partial public static class Executor
     {
         public static void ExecWait(
             string cmd,
@@ -3382,7 +3382,7 @@ namespace System.CodeDom.Compiler
         DeclareIndexerProperties = 33554432,
     }
 
-    public partial interface ICodeCompiler
+    partial public interface ICodeCompiler
     {
         System.CodeDom.Compiler.CompilerResults CompileAssemblyFromDom(
             System.CodeDom.Compiler.CompilerParameters options,
@@ -3410,7 +3410,7 @@ namespace System.CodeDom.Compiler
         );
     }
 
-    public partial interface ICodeGenerator
+    partial public interface ICodeGenerator
     {
         string CreateEscapedIdentifier(string value);
         string CreateValidIdentifier(string value);
@@ -3445,7 +3445,7 @@ namespace System.CodeDom.Compiler
         void ValidateIdentifier(string value);
     }
 
-    public partial interface ICodeParser
+    partial public interface ICodeParser
     {
         System.CodeDom.CodeCompileUnit Parse(System.IO.TextReader codeStream);
     }
@@ -3457,7 +3457,7 @@ namespace System.CodeDom.Compiler
         CaseInsensitive = 1,
     }
 
-    public partial class TempFileCollection
+    partial public class TempFileCollection
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.IDisposable

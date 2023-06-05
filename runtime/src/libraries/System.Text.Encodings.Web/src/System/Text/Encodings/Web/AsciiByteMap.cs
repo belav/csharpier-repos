@@ -13,7 +13,7 @@ namespace System.Text.Encodings.Web
     internal unsafe struct AsciiByteMap
     {
         private const int BufferSize = 128;
-        private fixed byte Buffer[BufferSize];
+        fixed private byte Buffer[BufferSize];
 
         internal void InsertAsciiChar(char key, byte value)
         {

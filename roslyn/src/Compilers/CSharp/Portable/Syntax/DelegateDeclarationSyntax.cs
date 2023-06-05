@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class DelegateDeclarationSyntax
+    partial public class DelegateDeclarationSyntax
     {
         public int Arity
         {

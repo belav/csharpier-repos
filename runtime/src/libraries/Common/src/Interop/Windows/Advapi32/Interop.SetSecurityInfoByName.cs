@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(
             Interop.Libraries.Advapi32,
@@ -14,7 +14,7 @@ internal static partial class Interop
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial uint SetSecurityInfoByName(
+        partial internal static uint SetSecurityInfoByName(
             string name,
             /*DWORD*/uint objectType,
             /*DWORD*/uint securityInformation,

@@ -88,7 +88,7 @@ namespace System.Reflection.Emit
 #endif
 
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class MethodBuilder : MethodInfo
+    partial public sealed class MethodBuilder : MethodInfo
     {
 #pragma warning disable 169, 414
         private RuntimeMethodHandle mhandle;

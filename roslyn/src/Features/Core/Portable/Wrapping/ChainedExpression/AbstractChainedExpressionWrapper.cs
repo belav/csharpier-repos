@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
 {
+    partial
     /// <summary>
     /// Finds and wraps 'chained' expressions.  For the purpose of this feature, a chained
     /// expression is built out of 'chunks' where each chunk is of the form
@@ -44,10 +45,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
     /// many wrap dotted invocations, while also effectively not limiting the wrapper to
     /// only simple forms like <c>.a(...).b(...).c(...)</c>.
     /// </summary>
-    internal abstract partial class AbstractChainedExpressionWrapper<
-        TNameSyntax,
-        TBaseArgumentListSyntax
-    > : AbstractSyntaxWrapper
+    internal abstract class AbstractChainedExpressionWrapper<TNameSyntax, TBaseArgumentListSyntax>
+        : AbstractSyntaxWrapper
         where TNameSyntax : SyntaxNode
         where TBaseArgumentListSyntax : SyntaxNode
     {

@@ -17,7 +17,7 @@ namespace ComWrappersTests
     {
         class TestComWrappers : ComWrappers
         {
-            protected unsafe override ComInterfaceEntry* ComputeVtables(
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
                 object obj,
                 CreateComInterfaceFlags flags,
                 out int count
@@ -437,7 +437,7 @@ namespace ComWrappersTests
             public FailureMode ComputeVtablesMode { get; set; }
             public FailureMode CreateObjectMode { get; set; }
 
-            protected unsafe override ComInterfaceEntry* ComputeVtables(
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
                 object obj,
                 CreateComInterfaceFlags flags,
                 out int count

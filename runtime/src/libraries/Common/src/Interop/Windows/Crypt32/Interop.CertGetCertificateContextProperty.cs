@@ -5,13 +5,13 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Crypt32
+    partial internal static class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CertGetCertificateContextProperty(
+        partial internal static bool CertGetCertificateContextProperty(
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             byte[]? pvData,
@@ -24,7 +24,7 @@ internal static partial class Interop
             EntryPoint = "CertGetCertificateContextProperty"
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool CertGetCertificateContextPropertyPtr(
+        partial internal static unsafe bool CertGetCertificateContextPropertyPtr(
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             byte* pvData,
@@ -33,7 +33,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CertGetCertificateContextProperty(
+        partial internal static bool CertGetCertificateContextProperty(
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             out IntPtr pvData,
@@ -42,7 +42,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CertGetCertificateContextProperty(
+        partial internal static bool CertGetCertificateContextProperty(
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             out DATA_BLOB pvData,

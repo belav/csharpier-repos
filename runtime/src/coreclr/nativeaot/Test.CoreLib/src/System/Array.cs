@@ -7,7 +7,7 @@ using MethodTable = Internal.Runtime.MethodTable;
 
 namespace System
 {
-    public partial class Array
+    partial public class Array
     {
         // This is the classlib-provided "get array MethodTable" function that will be invoked whenever the runtime
         // needs to know the base type of an array.

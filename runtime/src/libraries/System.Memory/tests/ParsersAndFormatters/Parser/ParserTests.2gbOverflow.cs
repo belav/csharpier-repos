@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Buffers.Text.Tests
 {
-    public static partial class ParserTests
+    partial public static class ParserTests
     {
         private const int TwoGiB = int.MaxValue;
 

@@ -7,11 +7,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
+partial
 /// <summary>
 /// A filter that sets the <see cref="IHttpMaxRequestBodySizeFeature.MaxRequestBodySize"/>
 /// to the specified <see cref="Bytes"/>.
 /// </summary>
-internal sealed partial class RequestSizeLimitFilter : IAuthorizationFilter, IRequestSizePolicy
+internal sealed class RequestSizeLimitFilter : IAuthorizationFilter, IRequestSizePolicy
 {
     private readonly ILogger _logger;
 
@@ -68,7 +69,7 @@ internal sealed partial class RequestSizeLimitFilter : IAuthorizationFilter, IRe
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -76,7 +77,7 @@ internal sealed partial class RequestSizeLimitFilter : IAuthorizationFilter, IRe
             "A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.",
             EventName = "FeatureNotFound"
         )]
-        public static partial void FeatureNotFound(ILogger logger);
+        partial public static void FeatureNotFound(ILogger logger);
 
         [LoggerMessage(
             2,
@@ -84,7 +85,7 @@ internal sealed partial class RequestSizeLimitFilter : IAuthorizationFilter, IRe
             "A request body size limit could not be applied. The IHttpRequestBodySizeFeature for the server is read-only.",
             EventName = "FeatureIsReadOnly"
         )]
-        public static partial void FeatureIsReadOnly(ILogger logger);
+        partial public static void FeatureIsReadOnly(ILogger logger);
 
         [LoggerMessage(
             3,
@@ -92,7 +93,7 @@ internal sealed partial class RequestSizeLimitFilter : IAuthorizationFilter, IRe
             "The maximum request body size has been set to {RequestSize}.",
             EventName = "MaxRequestBodySizeSet"
         )]
-        public static partial void MaxRequestBodySizeSet(ILogger logger, string requestSize);
+        partial public static void MaxRequestBodySizeSet(ILogger logger, string requestSize);
 
         [LoggerMessage(
             4,
@@ -100,7 +101,7 @@ internal sealed partial class RequestSizeLimitFilter : IAuthorizationFilter, IRe
             "Execution of filter {OverriddenFilter} is preempted by filter {OverridingFilter} which is the most effective filter implementing policy {FilterPolicy}.",
             EventName = "NotMostEffectiveFilter"
         )]
-        public static partial void NotMostEffectiveFilter(
+        partial public static void NotMostEffectiveFilter(
             ILogger logger,
             Type overriddenFilter,
             Type overridingFilter,

@@ -6,7 +6,7 @@ using System;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial struct SymbolKey
+    partial internal struct SymbolKey
     {
         private struct ComparisonOptions
         {

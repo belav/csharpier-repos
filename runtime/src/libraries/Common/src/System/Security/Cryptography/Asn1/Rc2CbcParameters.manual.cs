@@ -3,6 +3,7 @@
 
 namespace System.Security.Cryptography.Asn1
 {
+    partial
     // https://tools.ietf.org/html/rfc2268#section-6 provides the table (EkbEncoding),
     // and provides a different structure for "RC2-CBCParameter" (with a hyphen in this name).
     //
@@ -10,7 +11,7 @@ namespace System.Security.Cryptography.Asn1
     // Since 3370 says to just use that alternative there's no fallback in this code for handling
     // just an IV which means that an effective key size of 32-bits has been chosen.  Since 40-bit is the
     // smallest supported by .NET that's not really a problem.
-    internal partial struct Rc2CbcParameters
+    internal struct Rc2CbcParameters
     {
         private static readonly byte[] s_rc2EkbEncoding =
         {

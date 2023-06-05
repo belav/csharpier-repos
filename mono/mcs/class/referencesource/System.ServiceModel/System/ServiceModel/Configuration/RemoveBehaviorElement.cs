@@ -6,7 +6,7 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
 
-    public sealed partial class RemoveBehaviorElement : BehaviorExtensionElement
+    partial public sealed class RemoveBehaviorElement : BehaviorExtensionElement
     {
         public RemoveBehaviorElement() { }
 

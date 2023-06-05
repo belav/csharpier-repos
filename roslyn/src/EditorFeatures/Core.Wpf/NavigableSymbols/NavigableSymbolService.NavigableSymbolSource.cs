@@ -14,7 +14,7 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
 {
-    internal partial class NavigableSymbolService
+    partial internal class NavigableSymbolService
     {
         private sealed class NavigableSymbolSource : INavigableSymbolSource
         {

@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.Intrinsics.X86
 {
-    public abstract partial class X86Base
+    partial public abstract class X86Base
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "X86BaseCpuId")]
-        private static unsafe partial void __cpuidex(
+        partial private static unsafe void __cpuidex(
             int* cpuInfo,
             int functionId,
             int subFunctionId

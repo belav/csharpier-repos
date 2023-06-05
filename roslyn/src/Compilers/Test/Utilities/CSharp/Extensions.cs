@@ -22,7 +22,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    internal static partial class Extensions
+    partial internal static class Extensions
     {
         public static AssemblySymbol GetReferencedAssemblySymbol(
             this CSharpCompilation compilation,

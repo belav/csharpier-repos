@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CaseCorrection
 {
-    internal abstract partial class AbstractCaseCorrectionService : ICaseCorrectionService
+    partial internal abstract class AbstractCaseCorrectionService : ICaseCorrectionService
     {
         protected abstract void AddReplacements(
             SemanticModel? semanticModel,

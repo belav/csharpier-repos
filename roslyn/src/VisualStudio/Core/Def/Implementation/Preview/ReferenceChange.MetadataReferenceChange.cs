@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 {
-    internal abstract partial class ReferenceChange : AbstractChange
+    partial internal abstract class ReferenceChange : AbstractChange
     {
         private sealed class MetadataReferenceChange : ReferenceChange
         {

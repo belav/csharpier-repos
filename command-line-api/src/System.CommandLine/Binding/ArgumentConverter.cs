@@ -8,7 +8,7 @@ using static System.CommandLine.Binding.ArgumentConversionResult;
 
 namespace System.CommandLine.Binding
 {
-    internal static partial class ArgumentConverter
+    partial internal static class ArgumentConverter
     {
         internal static ArgumentConversionResult ConvertObject(
             Argument argument,

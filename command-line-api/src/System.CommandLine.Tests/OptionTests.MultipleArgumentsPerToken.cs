@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace System.CommandLine.Tests
 {
-    public partial class OptionTests : SymbolTests
+    partial public class OptionTests : SymbolTests
     {
         public class MultipleArgumentsPerToken
         {

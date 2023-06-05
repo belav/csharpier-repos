@@ -11,7 +11,7 @@ namespace DHIWebService
         Name = "ClientLoginData",
         Namespace = "http://schemas.datacontract.org/2004/07/Domain.Models"
     )]
-    public partial class ClientLoginData : object
+    partial public class ClientLoginData : object
     {
         private int CompanyNumberField;
 
@@ -56,7 +56,7 @@ namespace DHIWebService
         Name = "Login",
         Namespace = "http://schemas.datacontract.org/2004/07/Domain.Models"
     )]
-    public partial class Login : object
+    partial public class Login : object
     {
         private int CompanyNumberField;
 
@@ -134,7 +134,7 @@ namespace DHIWebService
         WrapperNamespace = "IBEWebSvc",
         IsWrapped = true
     )]
-    public partial class LoginRequest
+    partial public class LoginRequest
     {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "IBEWebSvc", Order = 0)]
         public DHIWebService.ClientLoginData clientLoginData;
@@ -161,7 +161,7 @@ namespace DHIWebService
         WrapperNamespace = "IBEWebSvc",
         IsWrapped = true
     )]
-    public partial class LoginResponse { }
+    partial public class LoginResponse { }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IDHIServiceChannel
@@ -170,7 +170,7 @@ namespace DHIWebService
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    partial public class LoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         private object[] results;
 
@@ -197,7 +197,7 @@ namespace DHIWebService
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DHIServiceClient
+    partial public class DHIServiceClient
         : System.ServiceModel.ClientBase<DHIWebService.IDHIService>,
             DHIWebService.IDHIService
     {

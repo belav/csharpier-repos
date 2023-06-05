@@ -47,12 +47,12 @@ namespace System.IO.Compression
             staticDistanceTree = new HuffmanTree(GetStaticDistanceTreeLength());
         }
 
-        static public HuffmanTree StaticLiteralLengthTree
+        public static HuffmanTree StaticLiteralLengthTree
         {
             get { return staticLiteralLengthTree; }
         }
 
-        static public HuffmanTree StaticDistanceTree
+        public static HuffmanTree StaticDistanceTree
         {
             get { return staticDistanceTree; }
         }

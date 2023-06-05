@@ -45,7 +45,7 @@ namespace I18N.Common
         /// <remarks>
         /// Only state-full encoders need to implement this method (ie. ISO-2022-JP)
         /// </remarks>
-        protected unsafe virtual int GetBytesInternal(
+        protected virtual unsafe int GetBytesInternal(
             char* chars,
             int charCount,
             byte* bytes,
@@ -246,21 +246,21 @@ namespace I18N.Common
             }
         }
 
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             return GetByteCountImpl(chars, count);
         }
 
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             return GetBytesImpl(chars, charCount, bytes, byteCount);
         }
 
         //[CLSCompliant (false)]
-        public unsafe abstract int GetByteCountImpl(char* chars, int charCount);
+        public abstract unsafe int GetByteCountImpl(char* chars, int charCount);
 
         //[CLSCompliant (false)]
-        public unsafe abstract int GetBytesImpl(
+        public abstract unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,
@@ -353,9 +353,9 @@ namespace I18N.Common
             }
         }
 
-        public unsafe abstract int GetByteCountImpl(char* chars, int charCount, bool refresh);
+        public abstract unsafe int GetByteCountImpl(char* chars, int charCount, bool refresh);
 
-        public unsafe abstract int GetBytesImpl(
+        public abstract unsafe int GetBytesImpl(
             char* chars,
             int charCount,
             byte* bytes,
@@ -363,7 +363,7 @@ namespace I18N.Common
             bool refresh
         );
 
-        public unsafe override int GetBytes(
+        public override unsafe int GetBytes(
             char* chars,
             int charCount,
             byte* bytes,
@@ -413,7 +413,7 @@ namespace I18N.Common
 
         [CLSCompliant(false)]
         [ComVisible(false)]
-        public unsafe override void Convert(
+        public override unsafe void Convert(
             char* chars,
             int charCount,
             byte* bytes,

@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
 {
     using SymbolAndLineNumberArray = ImmutableArray<(ISymbol symbol, int lineNumber)>;
 
-    internal abstract partial class AbstractInheritanceMarginService : IInheritanceMarginService
+    partial internal abstract class AbstractInheritanceMarginService : IInheritanceMarginService
     {
         /// <summary>
         /// Given the syntax nodes to search,

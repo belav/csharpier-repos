@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure.Virtua
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 
-internal partial struct VirtualCharSequence
+partial internal struct VirtualCharSequence
 {
     public struct Enumerator : IEnumerator<VirtualChar>
     {

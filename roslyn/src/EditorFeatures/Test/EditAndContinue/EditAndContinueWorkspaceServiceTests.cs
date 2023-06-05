@@ -46,7 +46,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
     using static ActiveStatementTestHelpers;
 
     [UseExportProvider]
-    public sealed partial class EditAndContinueWorkspaceServiceTests : TestBase
+    partial public sealed class EditAndContinueWorkspaceServiceTests : TestBase
     {
         private static readonly Guid s_solutionTelemetryId = Guid.Parse(
             "00000000-AAAA-AAAA-AAAA-000000000000"

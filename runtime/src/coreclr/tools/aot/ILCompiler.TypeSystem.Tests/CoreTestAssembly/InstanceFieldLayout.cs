@@ -457,7 +457,7 @@ namespace Auto
 
 namespace IsByRefLike
 {
-    public ref struct ByRefLikeStruct
+    ref public struct ByRefLikeStruct
     {
         public ref object ByRef;
     }

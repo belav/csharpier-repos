@@ -16,7 +16,7 @@ public class BaseClassWithPrivateLogger
     public BaseClassWithPrivateLogger(ILogger logger) => _logger = logger;
 }
 
-public partial class DerivedClassWithPrivateLogger : BaseClassWithPrivateLogger
+partial public class DerivedClassWithPrivateLogger : BaseClassWithPrivateLogger
 {
     private ILogger _logger;
 
@@ -27,7 +27,7 @@ public partial class DerivedClassWithPrivateLogger : BaseClassWithPrivateLogger
     }
 
     [LoggerMessage(0, LogLevel.Debug, "Test.")]
-    public partial void Test();
+    partial public void Test();
 }
 
 public class BaseClass
@@ -37,50 +37,52 @@ public class BaseClass
     public BaseClass(ILogger logger) => _logger = logger;
 }
 
-public partial class DerivedClass : BaseClass
+partial public class DerivedClass : BaseClass
 {
     public DerivedClass(ILogger logger)
         : base(logger) { }
 
     [LoggerMessage(0, LogLevel.Debug, "Test.")]
-    public partial void Test();
+    partial public void Test();
 }
 
-public partial class PartialClassWithLoggerField
+partial public class PartialClassWithLoggerField
 {
     private ILogger _logger;
 
     public PartialClassWithLoggerField(ILogger logger) => _logger = logger;
 }
 
-public partial class PartialClassWithLoggerField
+partial public class PartialClassWithLoggerField
 {
     [LoggerMessage(0, LogLevel.Debug, "Test.")]
-    public partial void Test();
+    partial public void Test();
 }
 
+partial
 // Used to test use outside of a namespace
-internal static partial class NoNamespace
+internal static class NoNamespace
 {
     [LoggerMessage(
         EventId = 0,
         Level = LogLevel.Critical,
         Message = "Could not open socket to `{hostName}`"
     )]
-    public static partial void CouldNotOpenSocket(ILogger logger, string hostName);
+    partial public static void CouldNotOpenSocket(ILogger logger, string hostName);
 }
 
 namespace Level1
 {
+    partial
     // used to test use inside a one-level namespace
-    internal static partial class OneLevelNamespace
+    internal static class OneLevelNamespace
     {
         [LoggerMessage(
             EventId = 0,
             Level = LogLevel.Critical,
             Message = "Could not open socket to `{hostName}`"
         )]
-        public static partial void CouldNotOpenSocket(ILogger logger, string hostName);
+        partial public static void CouldNotOpenSocket(ILogger logger, string hostName);
     }
 }
 
@@ -88,15 +90,16 @@ namespace Level1
 {
     namespace Level2
     {
+        partial
         // used to test use inside a two-level namespace
-        internal static partial class TwoLevelNamespace
+        internal static class TwoLevelNamespace
         {
             [LoggerMessage(
                 EventId = 0,
                 Level = LogLevel.Critical,
                 Message = "Could not open socket to `{hostName}`"
             )]
-            public static partial void CouldNotOpenSocket(ILogger logger, string hostName);
+            partial public static void CouldNotOpenSocket(ILogger logger, string hostName);
         }
     }
 }

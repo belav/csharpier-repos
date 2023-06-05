@@ -6,15 +6,16 @@ using System.Linq;
 
 namespace ILCompiler
 {
-    internal static partial class LazyGenericsSupport
+    partial internal static class LazyGenericsSupport
     {
+        partial
         /// <summary>
         /// A weighted directed graph abstraction. For our purposes, we only use two weights, so our "weight" is a boolean: "Flagged" or "Not Flagged".
         ///
         /// The generic type "P" denotes the type that holds the payload data of graph vertices. Its overload of Object.Equals() is used
         /// to determine whether two "P"'s represent the same vertex.
         /// </summary>
-        private sealed partial class Graph<P>
+        private sealed class Graph<P>
         {
             /// <summary>
             /// Adds an edge from "from" to "to". If an edge already exists, the "flagged" value is merged (using boolean OR) into

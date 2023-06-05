@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class IMethodSymbolExtensions
+    partial internal static class IMethodSymbolExtensions
     {
         /// <summary>
         /// Returns the methodSymbol and any partial parts.

@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class CSharpSyntaxFactsServiceFactory
+    partial internal sealed class CSharpSyntaxFactsServiceFactory
     {
         private sealed class CSharpSyntaxFactsService : CSharpSyntaxFacts, ISyntaxFactsService
         {

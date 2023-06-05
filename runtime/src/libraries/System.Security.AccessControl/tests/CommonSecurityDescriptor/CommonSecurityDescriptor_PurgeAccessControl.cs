@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public partial class CommonSecurityDescriptor_PurgeAccessControl
+    partial public class CommonSecurityDescriptor_PurgeAccessControl
     {
         public static IEnumerable<object[]> CommonSecurityDescriptor_PurgeAccessControl_TestData()
         {

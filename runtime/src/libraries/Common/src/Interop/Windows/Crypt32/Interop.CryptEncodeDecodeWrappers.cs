@@ -8,13 +8,14 @@ using Internal.Cryptography;
 
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
+    partial
     //
     // Convenience wrappers for CryptEncodeObject() and CryptDecodeObject(). It's debatable whether they belong in Interop.Crypt32 but
     // there's no natural way to express these as extension methods and they'd be undiscoverable if put in any other class.
     //
-    internal static partial class Crypt32
+    internal static class Crypt32
     {
         internal static unsafe SafeHandle CryptDecodeObjectToMemory(
             CryptDecodeObjectStructType lpszStructType,

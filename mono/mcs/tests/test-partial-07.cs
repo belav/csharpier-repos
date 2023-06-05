@@ -3,13 +3,13 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [Test2]
-public partial class Test { }
+partial public class Test { }
 
 [AttributeUsage(AttributeTargets.Struct)]
-public partial class TestAttribute : Attribute { }
+partial public class TestAttribute : Attribute { }
 
 [AttributeUsage(AttributeTargets.All)]
-public partial class Test2Attribute : Attribute { }
+partial public class Test2Attribute : Attribute { }
 
 [TestAttribute]
 public struct Test_2 { }

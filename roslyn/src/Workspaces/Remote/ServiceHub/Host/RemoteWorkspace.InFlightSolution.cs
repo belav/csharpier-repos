@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed partial class RemoteWorkspace
+    partial internal sealed class RemoteWorkspace
     {
         /// <summary>
         /// Wrapper around asynchronously produced solution for a particular <see cref="SolutionChecksum"/>.  The

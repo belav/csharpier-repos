@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System
 {
-    public readonly partial struct DateTime
+    partial public readonly struct DateTime
     {
         internal static bool SystemSupportsLeapSeconds =>
             LeapSecondCache.s_systemSupportsLeapSeconds;

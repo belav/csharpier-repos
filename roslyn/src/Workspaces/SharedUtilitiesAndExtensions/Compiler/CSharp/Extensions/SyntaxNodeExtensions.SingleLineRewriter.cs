@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal partial class SyntaxNodeExtensions
+    partial internal class SyntaxNodeExtensions
     {
         internal class SingleLineRewriter : CSharpSyntaxRewriter
         {

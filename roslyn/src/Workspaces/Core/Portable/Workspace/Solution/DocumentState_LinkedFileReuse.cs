@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class DocumentState
+    partial internal class DocumentState
     {
         /// <summary>
         /// Returns a new instance of this document state that points to <paramref name="siblingTextSource"/> as the

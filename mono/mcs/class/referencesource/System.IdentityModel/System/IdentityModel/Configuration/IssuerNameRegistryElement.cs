@@ -6,7 +6,7 @@ using System.Configuration;
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class IssuerNameRegistryElement : ConfigurationElementInterceptor
+    partial public sealed class IssuerNameRegistryElement : ConfigurationElementInterceptor
     {
         public IssuerNameRegistryElement() { }
 

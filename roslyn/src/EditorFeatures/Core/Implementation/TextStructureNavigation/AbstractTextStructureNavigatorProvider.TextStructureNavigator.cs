@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
 {
-    internal partial class AbstractTextStructureNavigatorProvider
+    partial internal class AbstractTextStructureNavigatorProvider
     {
         private class TextStructureNavigator : ITextStructureNavigator
         {

@@ -47,7 +47,7 @@ namespace System.Tests
         TargetFrameworkMonikers.Netcoreapp,
         TestRuntimes.Mono
     )]
-    public partial class TypeTests
+    partial public class TypeTests
     {
         private static readonly IList<Type> NonArrayBaseTypes;
 
@@ -942,7 +942,7 @@ namespace System.Tests
             }
         }
 
-        private ref struct ByRefLikeStruct
+        ref private struct ByRefLikeStruct
         {
             public ByRefLikeStruct(int dummy)
             {
@@ -1465,7 +1465,7 @@ namespace System.Tests
 
     public struct NonGenericStruct { }
 
-    public ref struct RefStruct { }
+    ref public struct RefStruct { }
 
     public struct GenericStruct<T> { }
 

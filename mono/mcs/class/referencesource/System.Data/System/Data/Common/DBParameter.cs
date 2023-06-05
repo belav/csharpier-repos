@@ -24,7 +24,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbParameter_DbType),
         ]
-        abstract public DbType DbType { get; set; }
+        public abstract DbType DbType { get; set; }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
         public abstract void ResetDbType();
@@ -35,17 +35,17 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbParameter_Direction),
         ]
-        abstract public ParameterDirection Direction { get; set; }
+        public abstract ParameterDirection Direction { get; set; }
 
         [Browsable(false), DesignOnly(true), EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        abstract public Boolean IsNullable { get; set; }
+        public abstract Boolean IsNullable { get; set; }
 
         [
             DefaultValue(""),
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbParameter_ParameterName),
         ]
-        abstract public String ParameterName { get; set; }
+        public abstract String ParameterName { get; set; }
 
         byte IDbDataParameter.Precision
         { // SqlProjectTracking 17233
@@ -59,13 +59,13 @@ namespace System.Data.Common
             set { }
         }
 
-        virtual public byte Precision
+        public virtual byte Precision
         {
             get { return ((IDbDataParameter)this).Precision; }
             set { ((IDbDataParameter)this).Precision = value; }
         }
 
-        virtual public byte Scale
+        public virtual byte Scale
         {
             get { return ((IDbDataParameter)this).Scale; }
             set { ((IDbDataParameter)this).Scale = value; }
@@ -75,14 +75,14 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbParameter_Size),
         ]
-        abstract public int Size { get; set; }
+        public abstract int Size { get; set; }
 
         [
             DefaultValue(""),
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbParameter_SourceColumn),
         ]
-        abstract public String SourceColumn { get; set; }
+        public abstract String SourceColumn { get; set; }
 
         [
             DefaultValue(false),
@@ -91,14 +91,14 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbParameter_SourceColumnNullMapping),
         ]
-        abstract public bool SourceColumnNullMapping { get; set; }
+        public abstract bool SourceColumnNullMapping { get; set; }
 
         [
             DefaultValue(DataRowVersion.Current),
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbParameter_SourceVersion),
         ]
-        virtual public DataRowVersion SourceVersion
+        public virtual DataRowVersion SourceVersion
         {
             get { return DataRowVersion.Default; }
             set { }
@@ -110,6 +110,6 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbParameter_Value),
         ]
-        abstract public object Value { get; set; }
+        public abstract object Value { get; set; }
     }
 }

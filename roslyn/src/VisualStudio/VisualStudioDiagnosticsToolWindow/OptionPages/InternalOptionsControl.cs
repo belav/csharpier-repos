@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 {
-    internal partial class InternalOptionsControl : AbstractOptionPageControl
+    partial internal class InternalOptionsControl : AbstractOptionPageControl
     {
         private readonly IEnumerable<IOption2> _options;
 

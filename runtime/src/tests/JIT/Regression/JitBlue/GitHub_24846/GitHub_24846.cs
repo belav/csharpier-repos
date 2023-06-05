@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-unsafe public class GitHub_24846
+public unsafe class GitHub_24846
 {
     public static void TestCopy(byte* destination, byte* source)
     {

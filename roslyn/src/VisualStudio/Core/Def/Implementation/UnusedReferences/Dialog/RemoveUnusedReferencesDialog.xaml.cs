@@ -11,10 +11,11 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReferences.Dialog
 {
+    partial
     /// <summary>
     /// Interaction logic for RemoveUnusedReferencesDialog.xaml
     /// </summary>
-    internal partial class RemoveUnusedReferencesDialog : DialogWindow
+    internal class RemoveUnusedReferencesDialog : DialogWindow
     {
         public string RemoveUnusedReferences => ServicesVSResources.Remove_Unused_References;
         public string HelpText =>

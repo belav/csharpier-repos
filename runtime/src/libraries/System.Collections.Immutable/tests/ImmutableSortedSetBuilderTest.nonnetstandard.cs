@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public partial class ImmutableSortedSetBuilderTest : ImmutablesTestBase
+    partial public class ImmutableSortedSetBuilderTest : ImmutablesTestBase
     {
         [Fact]
         public void ItemRef()

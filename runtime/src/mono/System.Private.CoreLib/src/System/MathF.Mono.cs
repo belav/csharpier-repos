@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    public partial class MathF
+    partial public class MathF
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern float Acos(float x);

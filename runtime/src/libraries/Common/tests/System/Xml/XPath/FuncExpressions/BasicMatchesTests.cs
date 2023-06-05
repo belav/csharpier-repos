@@ -6,10 +6,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Expressions.Basics
 {
+    partial
     /// <summary>
     /// Expressions - Basics (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Expected: Selects the 1st element child of the context node.

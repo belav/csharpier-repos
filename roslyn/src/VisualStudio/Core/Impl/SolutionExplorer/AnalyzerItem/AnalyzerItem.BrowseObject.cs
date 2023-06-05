@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal partial class AnalyzerItem
+    partial internal class AnalyzerItem
     {
         internal class BrowseObject : LocalizableProperties
         {

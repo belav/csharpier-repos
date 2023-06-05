@@ -16,7 +16,7 @@ using System.Security.Policy;
 
 namespace System.Xml
 {
-    internal partial class XsdCachingReader : XmlReader, IXmlLineInfo
+    partial internal class XsdCachingReader : XmlReader, IXmlLineInfo
     {
         private enum CachingReaderState
         {

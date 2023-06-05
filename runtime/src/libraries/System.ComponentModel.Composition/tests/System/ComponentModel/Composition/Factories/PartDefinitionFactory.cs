@@ -8,7 +8,7 @@ using System.ComponentModel.Composition.ReflectionModel;
 
 namespace System.ComponentModel.Composition.Factories
 {
-    internal static partial class PartDefinitionFactory
+    partial internal static class PartDefinitionFactory
     {
         public static ComposablePartDefinition AsPart(this Type type)
         {

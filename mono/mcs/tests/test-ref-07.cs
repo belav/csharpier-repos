@@ -5,7 +5,7 @@ public struct TestMain
     public static void Main() => Test.MainMethod();
 }
 
-public readonly ref partial struct Test
+ref partial public readonly struct Test
 {
     public static void MainMethod()
     {

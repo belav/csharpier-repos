@@ -15,10 +15,11 @@ namespace System.Data.Common.EntitySql
     using System.Data.Entity;
     using System.Globalization;
 
+    partial
     /// <summary>
     /// Represents the Cql Parser engine. Also, implements helpers and util routines.
     /// </summary>
-    internal sealed partial class CqlParser
+    internal sealed class CqlParser
     {
         private Node _parsedTree;
         private CqlLexer _lexer;

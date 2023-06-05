@@ -205,28 +205,28 @@ namespace Sample
     partial class ImportsExportsHelper
     {
         [JSImport("Sample.Test.runLegacyExportInt", "main.js")]
-        public static partial void RunLegacyExportInt(int count);
+        partial public static void RunLegacyExportInt(int count);
 
         [JSImport("Sample.Test.runJSExportInt", "main.js")]
-        public static partial void RunJSExportInt(int count);
+        partial public static void RunJSExportInt(int count);
 
         [JSImport("Sample.Test.runLegacyExportString", "main.js")]
-        public static partial void RunLegacyExportString(int count);
+        partial public static void RunLegacyExportString(int count);
 
         [JSImport("Sample.Test.runJSExportString", "main.js")]
-        public static partial void RunJSExportString(int count);
+        partial public static void RunJSExportString(int count);
 
         [JSImport("Sample.Test.importTargetInt", "main.js")]
-        public static partial int ImportTargetInt(int value);
+        partial public static int ImportTargetInt(int value);
 
         [JSImport("Sample.Test.importTargetString", "main.js")]
-        public static partial string ImportTargetString(string value);
+        partial public static string ImportTargetString(string value);
 
         [JSImport("Sample.Test.importTargetTask", "main.js")]
-        public static partial Task<int> ImportTargetTask(Task<int> value);
+        partial public static Task<int> ImportTargetTask(Task<int> value);
 
         [JSImport("Sample.Test.importTargetThrows", "main.js")]
-        public static partial void ImportTargetThrows(int value);
+        partial public static void ImportTargetThrows(int value);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static int LegacyExportTargetInt(int value)
@@ -235,7 +235,7 @@ namespace Sample
         }
 
         [JSImport("Sample.Test.importTargetManyArgs", "main.js")]
-        public static partial double ImportTargetManyArgs(
+        partial public static double ImportTargetManyArgs(
             int arg1,
             int arg2,
             string arg3,

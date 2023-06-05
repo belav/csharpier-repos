@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public interface IC : IB { }
 
-public partial interface IB : IEnumerable<char> { }
+partial public interface IB : IEnumerable<char> { }
 
-public partial interface IB : IA { }
+partial public interface IB : IA { }
 
 public interface IA : IDisposable { }
 

@@ -8,10 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+partial
 /// <summary>
 /// An <see cref="IModelBinderProvider"/> for binding header values.
 /// </summary>
-public partial class HeaderModelBinderProvider : IModelBinderProvider
+public class HeaderModelBinderProvider : IModelBinderProvider
 {
     /// <inheritdoc />
     public IModelBinder? GetBinder(ModelBinderProviderContext context)
@@ -68,7 +69,7 @@ public partial class HeaderModelBinderProvider : IModelBinderProvider
         return !metadata.IsComplexType;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             20,
@@ -76,6 +77,6 @@ public partial class HeaderModelBinderProvider : IModelBinderProvider
             "Could not create a binder for type '{ModelType}' as this binder only supports simple types (like string, int, bool, enum) or a collection of simple types.",
             EventName = "CannotCreateHeaderModelBinder"
         )]
-        public static partial void CannotCreateHeaderModelBinder(ILogger logger, Type modelType);
+        partial public static void CannotCreateHeaderModelBinder(ILogger logger, Type modelType);
     }
 }

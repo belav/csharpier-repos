@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal unsafe struct WIN32_FIND_DATA
@@ -19,8 +19,8 @@ internal static partial class Interop
             internal uint nFileSizeLow;
             internal uint dwReserved0;
             internal uint dwReserved1;
-            private fixed char _cFileName[MAX_PATH];
-            private fixed char _cAlternateFileName[14];
+            fixed private char _cFileName[MAX_PATH];
+            fixed private char _cAlternateFileName[14];
 
             internal ReadOnlySpan<char> cFileName =>
                 MemoryMarshal.CreateReadOnlySpan(ref _cFileName[0], MAX_PATH);

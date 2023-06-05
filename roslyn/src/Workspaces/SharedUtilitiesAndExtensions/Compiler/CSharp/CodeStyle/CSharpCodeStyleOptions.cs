@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
 {
-    internal static partial class CSharpCodeStyleOptions
+    partial internal static class CSharpCodeStyleOptions
     {
         private static readonly ImmutableArray<IOption2>.Builder s_allOptionsBuilder =
             ImmutableArray.CreateBuilder<IOption2>();

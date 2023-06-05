@@ -138,7 +138,7 @@ namespace System.Workflow.Activities
         [NonSerialized]
         private bool activeBranchRemoved = false;
 
-        protected override sealed void OnActivityChangeAdd(
+        protected sealed override void OnActivityChangeAdd(
             ActivityExecutionContext executionContext,
             Activity addedActivity
         )
@@ -172,7 +172,7 @@ namespace System.Workflow.Activities
             }
         }
 
-        protected override sealed void OnActivityChangeRemove(
+        protected sealed override void OnActivityChangeRemove(
             ActivityExecutionContext executionContext,
             Activity removedActivity
         )

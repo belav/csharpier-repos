@@ -13,6 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// Manages properties of analyzers (such as registered actions, supported diagnostics) for analyzer host's lifetime
     /// and executes the callbacks into the analyzers.
@@ -22,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// 2) <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> is invoked only once per-analyzer.
     /// 3) <see cref="CompilationStartAnalyzerAction"/> registered during Initialize are invoked only once per-compilation per-analyzer and analyzer options.
     /// </summary>
-    internal partial class AnalyzerManager
+    internal class AnalyzerManager
     {
         // This cache stores the analyzer execution context per-analyzer (i.e. registered actions, supported descriptors, etc.).
         private readonly ImmutableDictionary<

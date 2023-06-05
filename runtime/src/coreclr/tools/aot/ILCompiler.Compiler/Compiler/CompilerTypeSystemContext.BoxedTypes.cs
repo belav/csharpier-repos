@@ -49,8 +49,9 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
 {
+    partial
     // Contains functionality related to pseudotypes representing boxed instances of value types
-    public partial class CompilerTypeSystemContext
+    public class CompilerTypeSystemContext
     {
         /// <summary>
         /// For a shared (canonical) instance method on a generic valuetype, gets a method that can be used to call the
@@ -303,11 +304,12 @@ namespace ILCompiler
         private NonGenericUnboxingThunkHashtable _nonGenericUnboxingThunkHashtable =
             new NonGenericUnboxingThunkHashtable();
 
+        partial
         /// <summary>
         /// A type with an identical layout to the layout of a boxed value type.
         /// The type has a single field of the type of the valuetype it represents.
         /// </summary>
-        private sealed partial class BoxedValueType : MetadataType, INonEmittableType
+        private sealed class BoxedValueType : MetadataType, INonEmittableType
         {
             public MetadataType ValueTypeRepresented { get; }
 
@@ -459,10 +461,11 @@ namespace ILCompiler
             return instantiatedMethod;
         }
 
+        partial
         /// <summary>
         /// Represents a thunk to call shared instance method on boxed valuetypes.
         /// </summary>
-        private sealed partial class GenericUnboxingThunk : ILStubMethod
+        private sealed class GenericUnboxingThunk : ILStubMethod
         {
             private MethodDesc _targetMethod;
             private ValueTypeInstanceMethodWithHiddenParameter _nakedTargetMethod;
@@ -553,10 +556,11 @@ namespace ILCompiler
             }
         }
 
+        partial
         /// <summary>
         /// Represents a thunk to call instance method on boxed valuetypes.
         /// </summary>
-        private sealed partial class UnboxingThunk : ILStubMethod
+        private sealed class UnboxingThunk : ILStubMethod
         {
             private MethodDesc _targetMethod;
             private BoxedValueType _owningType;
@@ -659,12 +663,13 @@ namespace ILCompiler
             public override Instantiation Instantiation => _targetMethod.Instantiation;
         }
 
+        partial
         /// <summary>
         /// Represents an instance method on a generic valuetype with an explicit instantiation parameter in the
         /// signature. This is so that we can refer to the parameter from IL. References to this method will
         /// be replaced by the actual instance method after codegen is done.
         /// </summary>
-        internal sealed partial class ValueTypeInstanceMethodWithHiddenParameter : MethodDesc
+        internal sealed class ValueTypeInstanceMethodWithHiddenParameter : MethodDesc
         {
             private MethodDesc _methodRepresented;
             private MethodSignature _signature;

@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public abstract partial class DecryptTests
+    partial public abstract class DecryptTests
     {
         private bool _useExplicitPrivateKey;
         public static bool SupportsIndefiniteLengthEncoding { get; } =

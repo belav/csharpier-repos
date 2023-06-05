@@ -20,7 +20,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class DocumentState : TextDocumentState
+    partial internal class DocumentState : TextDocumentState
     {
         private static readonly Func<string?, PreservationMode, string> s_fullParseLog = (
             path,

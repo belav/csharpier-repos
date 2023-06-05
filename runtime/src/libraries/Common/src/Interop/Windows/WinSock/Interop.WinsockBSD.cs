@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         // IO-Control operations are not directly exposed.
         // blocking is controlled by "Blocking" property on socket (FIONBIO)
@@ -91,7 +91,7 @@ internal static partial class Interop
                 public unsafe struct Native
                 {
                     private const int MulticastAddressLength = 16;
-                    private fixed byte _multicastAddress[MulticastAddressLength];
+                    fixed private byte _multicastAddress[MulticastAddressLength];
                     private int _interfaceIndex;
 
                     public Native(IPv6MulticastRequest managed)

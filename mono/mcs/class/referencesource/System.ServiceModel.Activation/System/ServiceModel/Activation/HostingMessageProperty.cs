@@ -54,7 +54,7 @@ namespace System.ServiceModel.Activation
 
         public Uri OriginalRequestUri { get; private set; }
 
-        static internal string Name
+        internal static string Name
         {
             get { return name; }
         }

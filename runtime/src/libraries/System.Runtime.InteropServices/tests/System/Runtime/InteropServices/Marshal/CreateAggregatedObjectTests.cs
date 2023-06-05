@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {
-    public partial class CreateAggregatedObjectTests
+    partial public class CreateAggregatedObjectTests
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]

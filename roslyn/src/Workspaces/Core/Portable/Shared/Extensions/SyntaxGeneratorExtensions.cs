@@ -19,7 +19,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
-    internal static partial class SyntaxGeneratorExtensions
+    partial internal static class SyntaxGeneratorExtensions
     {
         public static IMethodSymbol CreateBaseDelegatingConstructor(
             this SyntaxGenerator factory,

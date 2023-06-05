@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveConfusingSuppression
         ),
         Shared
     ]
-    internal sealed partial class CSharpRemoveConfusingSuppressionCodeFixProvider : CodeFixProvider
+    partial internal sealed class CSharpRemoveConfusingSuppressionCodeFixProvider : CodeFixProvider
     {
         public const string RemoveOperator = nameof(RemoveOperator);
         public const string NegateExpression = nameof(NegateExpression);

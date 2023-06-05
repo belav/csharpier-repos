@@ -431,7 +431,7 @@ namespace SharedTypes
 
     [ContiguousCollectionMarshaller]
     [CustomMarshaller(typeof(List<>), MarshalMode.Default, typeof(ListMarshaller<,>))]
-    public unsafe static class ListMarshaller<T, TUnmanagedElement>
+    public static unsafe class ListMarshaller<T, TUnmanagedElement>
         where TUnmanagedElement : unmanaged
     {
         public static byte* AllocateContainerForUnmanagedElements(
@@ -491,7 +491,7 @@ namespace SharedTypes
         MarshalMode.ManagedToUnmanagedIn,
         typeof(ListMarshallerWithBuffer<,>)
     )]
-    public unsafe static class ListMarshallerWithBuffer<T, TUnmanagedElement>
+    public static unsafe class ListMarshallerWithBuffer<T, TUnmanagedElement>
         where TUnmanagedElement : unmanaged
     {
         public static int BufferSize { get; } = 0x200;
@@ -532,10 +532,10 @@ namespace SharedTypes
         MarshalMode.Default,
         typeof(ListMarshallerStateful<,>.Marshaller)
     )]
-    public unsafe static class ListMarshallerStateful<T, TUnmanagedElement>
+    public static unsafe class ListMarshallerStateful<T, TUnmanagedElement>
         where TUnmanagedElement : unmanaged
     {
-        public ref struct Marshaller
+        ref public struct Marshaller
         {
             private List<T> _list;
             private IntPtr _allocatedMemory;
@@ -620,7 +620,7 @@ namespace SharedTypes
 
     [CustomMarshaller(typeof(List<>), MarshalMode.Default, typeof(ListMarshallerWithPinning<,>))]
     [ContiguousCollectionMarshaller]
-    public unsafe static class ListMarshallerWithPinning<T, TUnmanagedElement>
+    public static unsafe class ListMarshallerWithPinning<T, TUnmanagedElement>
         where TUnmanagedElement : unmanaged
     {
         public static byte* AllocateContainerForUnmanagedElements(

@@ -15,7 +15,7 @@ namespace System.IdentityModel.Configuration
         typeof(AudienceUriElement),
         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
     )]
-    public sealed partial class AudienceUriElementCollection : ConfigurationElementCollection
+    partial public sealed class AudienceUriElementCollection : ConfigurationElementCollection
     {
         const AudienceUriMode DefaultAudienceUriMode = AudienceUriMode.Always;
 

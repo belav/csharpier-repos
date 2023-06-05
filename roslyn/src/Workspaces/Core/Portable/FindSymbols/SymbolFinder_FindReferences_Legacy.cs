@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
+    partial
     // This file contains the legacy FindReferences APIs.  The APIs are legacy because they
     // do not contain enough information for us to effectively remote them over to the OOP
     // process to do the work.  Specifically, they lack the "current project context" necessary
     // to be able to effectively serialize symbols to/from the remote process.
 
-    public static partial class SymbolFinder
+    public static class SymbolFinder
     {
         /// <summary>
         /// Finds all references to a symbol throughout a solution

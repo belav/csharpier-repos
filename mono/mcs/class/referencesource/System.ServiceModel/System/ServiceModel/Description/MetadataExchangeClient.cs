@@ -876,7 +876,7 @@ namespace System.ServiceModel.Description
             );
             internal abstract MetadataSection EndRetrieve(IAsyncResult result);
 
-            static internal MetadataSection CreateMetadataSection(
+            internal static MetadataSection CreateMetadataSection(
                 XmlReader reader,
                 string sourceUrl
             )
@@ -1759,7 +1759,7 @@ namespace System.ServiceModel.Description
 
     static class MetadataExchangeClientModeHelper
     {
-        static public bool IsDefined(MetadataExchangeClientMode x)
+        public static bool IsDefined(MetadataExchangeClientMode x)
         {
             return x == MetadataExchangeClientMode.MetadataExchange
                 || x == MetadataExchangeClientMode.HttpGet

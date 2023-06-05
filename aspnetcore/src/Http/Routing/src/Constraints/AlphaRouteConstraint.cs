@@ -5,10 +5,11 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
+partial
 /// <summary>
 /// Constrains a route parameter to contain only lowercase or uppercase letters A through Z in the English alphabet.
 /// </summary>
-public partial class AlphaRouteConstraint : RegexRouteConstraint
+public class AlphaRouteConstraint : RegexRouteConstraint
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="AlphaRouteConstraint" /> class.
@@ -17,5 +18,5 @@ public partial class AlphaRouteConstraint : RegexRouteConstraint
         : base(GetAlphaRouteRegex()) { }
 
     [GeneratedRegex(@"^[A-Za-z]*$")]
-    private static partial Regex GetAlphaRouteRegex();
+    partial private static Regex GetAlphaRouteRegex();
 }

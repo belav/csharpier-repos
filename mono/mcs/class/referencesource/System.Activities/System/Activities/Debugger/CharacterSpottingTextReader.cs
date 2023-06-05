@@ -7,8 +7,9 @@ namespace System.Activities.Debugger
     using System.Collections.Generic;
     using System.IO;
 
+    partial
     //
-    internal partial class CharacterSpottingTextReader : TextReader
+    internal class CharacterSpottingTextReader : TextReader
     {
         // These 'special characters' couple with the fact that we are working on XML.
         private const char StartAngleBracket = '<';

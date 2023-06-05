@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.Json.Tests
 {
-    public static partial class JsonReaderStateAndOptionsTests
+    partial public static class JsonReaderStateAndOptionsTests
     {
         [Fact]
         public static void DefaultJsonReaderState()

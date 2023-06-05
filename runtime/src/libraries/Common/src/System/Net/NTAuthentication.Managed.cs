@@ -20,7 +20,7 @@ using System.Text;
 
 namespace System.Net
 {
-    internal sealed partial class NTAuthentication
+    partial internal sealed class NTAuthentication
     {
         // Input parameters
         private readonly bool _isSpNego;
@@ -179,7 +179,7 @@ namespace System.Net
         [StructLayout(LayoutKind.Sequential)]
         private unsafe struct MessageHeader
         {
-            public fixed byte Header[HeaderLength];
+            fixed public byte Header[HeaderLength];
             public MessageType MessageType;
             private byte _unused1;
             private byte _unused2;
@@ -216,7 +216,7 @@ namespace System.Net
             public MessageHeader Header;
             public MessageField TargetName;
             public Flags Flags;
-            public fixed byte ServerChallenge[ChallengeLength];
+            fixed public byte ServerChallenge[ChallengeLength];
             private ulong _unused;
             public MessageField TargetInfo;
             public Version Version;
@@ -235,23 +235,23 @@ namespace System.Net
             public MessageField EncryptedRandomSessionKey;
             public Flags Flags;
             public Version Version;
-            public fixed byte Mic[16];
+            fixed public byte Mic[16];
         }
 
         // Set temp to ConcatenationOf(Responserversion, HiResponserversion, Z(6), Time, ClientChallenge, Z(4), ServerName, Z(4))
         [StructLayout(LayoutKind.Sequential)]
         private unsafe struct NtChallengeResponse
         {
-            public fixed byte Hmac[DigestLength];
+            fixed public byte Hmac[DigestLength];
             public byte Responserversion;
             public byte HiResponserversion;
             private byte _reserved1;
             private byte _reserved2;
             private int _reserved3;
             public long Time;
-            public fixed byte ClientChallenge[ChallengeLength];
+            fixed public byte ClientChallenge[ChallengeLength];
             private int _reserved4;
-            public fixed byte ServerInfo[4]; // Has to be non-zero size, so set it to the Z(4) padding
+            fixed public byte ServerInfo[4]; // Has to be non-zero size, so set it to the Z(4) padding
         }
 
         // rfc4178

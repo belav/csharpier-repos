@@ -13,7 +13,7 @@ using System.Reflection.Runtime.Assemblies.NativeFormat;
 
 namespace System.Reflection.Runtime.Modules.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeModule : RuntimeModule
+    partial internal sealed class NativeFormatRuntimeModule : RuntimeModule
     {
         private NativeFormatRuntimeModule(NativeFormatRuntimeAssembly assembly)
             : base()

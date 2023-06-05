@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    internal partial class SymbolTreeInfo
+    partial internal class SymbolTreeInfo
     {
         private static readonly SimplePool<
             MultiDictionary<string, INamespaceOrTypeSymbol>

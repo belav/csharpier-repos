@@ -18,7 +18,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class MultiDimensionalArrayTests : SemanticModelTestBase
+    partial public class MultiDimensionalArrayTests : SemanticModelTestBase
     {
         [Fact]
         public void TestMultiDimensionalArray()

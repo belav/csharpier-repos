@@ -128,7 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             return base.IsEquivalentTo(obj) && this.Index == ((BoundDagIndexerEvaluation)obj).Index;
         }
 
-        private partial void Validate()
+        partial private void Validate()
         {
             Debug.Assert(
                 IndexerAccess
@@ -151,7 +151,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && this.EndIndex == e.EndIndex;
         }
 
-        private partial void Validate()
+        partial private void Validate()
         {
             Debug.Assert(
                 IndexerAccess

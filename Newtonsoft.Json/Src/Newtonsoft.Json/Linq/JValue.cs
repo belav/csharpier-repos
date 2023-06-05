@@ -40,15 +40,11 @@ using System.Numerics;
 
 namespace Newtonsoft.Json.Linq
 {
+    partial
     /// <summary>
     /// Represents a value in JSON (string, integer, date, etc).
     /// </summary>
-    public partial class JValue
-        : JToken,
-            IEquatable<JValue>,
-            IFormattable,
-            IComparable,
-            IComparable<JValue>
+    public class JValue : JToken, IEquatable<JValue>, IFormattable, IComparable, IComparable<JValue>
 #if HAVE_ICONVERTIBLE
             ,
             IConvertible

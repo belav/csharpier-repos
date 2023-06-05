@@ -3,10 +3,11 @@
 
 namespace System.Collections.Generic
 {
+    partial
     /// <summary>
     /// Internal helper functions for working with enumerables.
     /// </summary>
-    internal static partial class EnumerableHelpers
+    internal static class EnumerableHelpers
     {
         /// <summary>Converts an enumerable to an array using the same logic as List{T}.</summary>
         /// <param name="source">The enumerable to convert.</param>

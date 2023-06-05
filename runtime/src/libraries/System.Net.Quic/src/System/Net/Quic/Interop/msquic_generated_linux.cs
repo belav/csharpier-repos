@@ -7,7 +7,7 @@
 
 namespace Microsoft.Quic
 {
-    internal static unsafe partial class MsQuic_Linux
+    partial internal static unsafe class MsQuic_Linux
     {
         [NativeTypeName("#define QUIC_STATUS_SUCCESS ((QUIC_STATUS)0)")]
         public const int QUIC_STATUS_SUCCESS = ((int)(0));

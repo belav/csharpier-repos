@@ -6,10 +6,11 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// DiagnosticAnalyzer for compiler's syntax/semantic/compilation diagnostics.
     /// </summary>
-    internal abstract partial class CompilerDiagnosticAnalyzer : DiagnosticAnalyzer
+    internal abstract class CompilerDiagnosticAnalyzer : DiagnosticAnalyzer
     {
         internal abstract CommonMessageProvider MessageProvider { get; }
         internal abstract ImmutableArray<int> GetSupportedErrorCodes();

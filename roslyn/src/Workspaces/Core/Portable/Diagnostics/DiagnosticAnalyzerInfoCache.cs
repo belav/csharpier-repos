@@ -19,12 +19,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// Provides and caches information about diagnostic analyzers such as <see cref="AnalyzerReference"/>,
     /// <see cref="DiagnosticAnalyzer"/> instance, <see cref="DiagnosticDescriptor"/>s.
     /// Thread-safe.
     /// </summary>
-    internal sealed partial class DiagnosticAnalyzerInfoCache
+    internal sealed class DiagnosticAnalyzerInfoCache
     {
         /// <summary>
         /// Supported descriptors of each <see cref="DiagnosticAnalyzer"/>.

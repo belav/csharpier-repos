@@ -178,7 +178,7 @@ namespace Mono.Tools
     {
         private const string NotSpecified = "\tNot specified.";
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine("Usage: permview [options] assembly{0}", Environment.NewLine);
             Console.WriteLine("where options are:");

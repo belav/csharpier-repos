@@ -6,10 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing;
 
+partial
 /// <summary>
 /// Use to evaluate if all route parameter values match their constraints.
 /// </summary>
-public static partial class RouteConstraintMatcher
+public static class RouteConstraintMatcher
 {
     /// <summary>
     /// Determines if <paramref name="routeValues"/> match the provided <paramref name="constraints"/>.
@@ -77,7 +78,7 @@ public static partial class RouteConstraintMatcher
         return true;
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -85,7 +86,7 @@ public static partial class RouteConstraintMatcher
             "Route value '{RouteValue}' with key '{RouteKey}' did not match the constraint '{RouteConstraint}'",
             EventName = "ConstraintNotMatched"
         )]
-        public static partial void ConstraintNotMatched(
+        partial public static void ConstraintNotMatched(
             ILogger logger,
             object routeValue,
             string routeKey,

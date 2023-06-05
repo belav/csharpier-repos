@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.X509Certificates.Tests
 {
-    public abstract partial class PfxFormatTests
+    partial public abstract class PfxFormatTests
     {
         [Flags]
         public enum SingleCertOptions

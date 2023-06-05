@@ -15,7 +15,7 @@ using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeNamedTypeInfo : RuntimeNamedTypeInfo
+    partial internal sealed class NativeFormatRuntimeNamedTypeInfo : RuntimeNamedTypeInfo
     {
         private NativeFormatRuntimeNamedTypeInfo(
             MetadataReader reader,

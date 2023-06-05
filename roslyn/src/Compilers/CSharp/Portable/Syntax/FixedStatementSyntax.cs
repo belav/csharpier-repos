@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class FixedStatementSyntax
+    partial public class FixedStatementSyntax
     {
         public FixedStatementSyntax Update(
             SyntaxToken fixedKeyword,
@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    public partial class SyntaxFactory
+    partial public class SyntaxFactory
     {
         public static FixedStatementSyntax FixedStatement(
             SyntaxToken fixedKeyword,

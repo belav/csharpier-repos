@@ -360,14 +360,15 @@ namespace System.Net.Security
         }
     }
 
+    partial partial
     //
     // Implementation of handles that are dependent on DeleteSecurityContext
     //
 #if DEBUG
-    internal abstract partial class SafeDeleteContext : DebugSafeHandle
+    internal abstract class SafeDeleteContext : DebugSafeHandle
     {
 #else
-    internal abstract partial class SafeDeleteContext : SafeHandle
+    internal abstract class SafeDeleteContext : SafeHandle
     {
 #endif
         private const string dummyStr = " ";

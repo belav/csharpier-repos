@@ -308,7 +308,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCDepth : TCXMLReaderBaseGeneral
+    partial public abstract class TCDepth : TCXMLReaderBaseGeneral
     {
         [Variation("XmlReader Depth at the Root", Pri = 0)]
         public int TestDepth1()
@@ -493,7 +493,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCNamespace : TCXMLReaderBaseGeneral
+    partial public abstract class TCNamespace : TCXMLReaderBaseGeneral
     {
         private static string s_NONAMESPACE = "NONAMESPACE";
 
@@ -1181,7 +1181,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCHasValue : TCXMLReaderBaseGeneral
+    partial public abstract class TCHasValue : TCXMLReaderBaseGeneral
     {
         [Variation("HasValue On None")]
         public int TestHasValueNodeType_None()
@@ -1435,7 +1435,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCIsEmptyElement : TCXMLReaderBaseGeneral
+    partial public abstract class TCIsEmptyElement : TCXMLReaderBaseGeneral
     {
         [Variation("Set and Get an element that ends with />", Pri = 0)]
         public int TestEmpty1()
@@ -1711,7 +1711,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCXmlSpace : TCXMLReaderBaseGeneral
+    partial public abstract class TCXmlSpace : TCXMLReaderBaseGeneral
     {
         [Variation("XmlSpace test within EmptyTag")]
         public int TestXmlSpace1()
@@ -1927,7 +1927,7 @@ namespace System.Xml.Tests
     //
     ////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCXmlLang : TCXMLReaderBaseGeneral
+    partial public abstract class TCXmlLang : TCXMLReaderBaseGeneral
     {
         [Variation("XmlLang test within EmptyTag")]
         public int TestXmlLang1()
@@ -2182,7 +2182,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCSkip : TCXMLReaderBaseGeneral
+    partial public abstract class TCSkip : TCXMLReaderBaseGeneral
     {
         public bool VerifySkipOnNodeType(XmlNodeType testNodeType)
         {
@@ -2499,7 +2499,7 @@ namespace System.Xml.Tests
     //
     /////////////////////////////////////////////////////////////////////////
     [InheritRequired()]
-    public abstract partial class TCBaseURI : TCXMLReaderBaseGeneral
+    partial public abstract class TCBaseURI : TCXMLReaderBaseGeneral
     {
         public const string ST_TEST_ENT = "AllNodeTypes.ent";
 

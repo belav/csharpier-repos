@@ -7,7 +7,7 @@ using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
-    public static partial class SubjectIdentifierTests
+    partial public static class SubjectIdentifierTests
     {
         [Theory]
         [InlineData(SubjectIdentifierType.IssuerAndSerialNumber)]

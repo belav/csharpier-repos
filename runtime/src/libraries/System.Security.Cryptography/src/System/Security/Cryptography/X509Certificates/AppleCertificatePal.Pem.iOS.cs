@@ -8,7 +8,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    internal sealed partial class AppleCertificatePal : ICertificatePal
+    partial internal sealed class AppleCertificatePal : ICertificatePal
     {
         internal delegate bool DerCallback(ReadOnlySpan<byte> derData, X509ContentType contentType);
 

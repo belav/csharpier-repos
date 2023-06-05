@@ -14,13 +14,14 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.PatternMatching
 {
+    partial
     /// <summary>
     /// The pattern matcher is not thread-safe.  Do not use the pattern matcher across mutiple threads concurrently.  It
     /// also keeps an internal cache of data for speeding up operations.  As such, it should be disposed when done to
     /// release the cached data back. and release the matcher appropriately once you no longer need it. Also, while the
     /// pattern matcher is culture aware, it uses the culture specified in the constructor.
     /// </summary>
-    internal abstract partial class PatternMatcher : IDisposable
+    internal abstract class PatternMatcher : IDisposable
     {
         private static readonly char[] s_dotCharacterArray = { '.' };
 

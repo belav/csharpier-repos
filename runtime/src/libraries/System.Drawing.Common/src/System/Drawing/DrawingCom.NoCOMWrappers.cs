@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {
-    internal static partial class DrawingCom
+    partial internal static class DrawingCom
     {
         internal static IStreamWrapper GetComWrapper(GPStream stream)
         {

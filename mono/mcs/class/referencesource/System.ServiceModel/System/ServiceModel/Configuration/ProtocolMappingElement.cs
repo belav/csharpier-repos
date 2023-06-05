@@ -8,7 +8,7 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.ServiceModel.Channels;
 
-    public sealed partial class ProtocolMappingElement : ConfigurationElement
+    partial public sealed class ProtocolMappingElement : ConfigurationElement
     {
         public ProtocolMappingElement() { }
 

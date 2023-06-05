@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics;
 
-public partial class RawInterpolationTests : CompilingTestBase
+partial public class RawInterpolationTests : CompilingTestBase
 {
     [Fact]
     public void TestSimpleInterp()

@@ -21,7 +21,7 @@ using System.Threading;
 
 namespace System
 {
-    internal static partial class LocalAppContext
+    partial internal static class LocalAppContext
     {
         private delegate bool TryGetSwitchDelegate(string switchName, out bool value);
 

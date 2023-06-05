@@ -11,12 +11,13 @@ using Microsoft.CodeAnalysis.Formatting;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
-    internal abstract partial class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
+    partial internal abstract class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
     {
+        partial
         /// <summary>
         /// Base type for remove suppression code actions.
         /// </summary>
-        internal abstract partial class RemoveSuppressionCodeAction : AbstractSuppressionCodeAction
+        internal abstract class RemoveSuppressionCodeAction : AbstractSuppressionCodeAction
         {
             private readonly Diagnostic _diagnostic;
             private readonly bool _forFixMultipleContext;

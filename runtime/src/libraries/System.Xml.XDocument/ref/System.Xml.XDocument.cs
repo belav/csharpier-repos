@@ -6,7 +6,7 @@
 
 namespace System.Xml.Linq
 {
-    public static partial class Extensions
+    partial public static class Extensions
     {
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> AncestorsAndSelf(
             this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement?> source
@@ -170,7 +170,7 @@ namespace System.Xml.Linq
     [System.ComponentModel.TypeDescriptionProviderAttribute(
         "MS.Internal.Xml.Linq.ComponentModel.XTypeDescriptionProvider`1[[System.Xml.Linq.XAttribute, System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],System.ComponentModel.TypeConverter"
     )]
-    public partial class XAttribute : System.Xml.Linq.XObject
+    partial public class XAttribute : System.Xml.Linq.XObject
     {
         public XAttribute(System.Xml.Linq.XAttribute other) { }
 
@@ -381,7 +381,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public partial class XCData : System.Xml.Linq.XText
+    partial public class XCData : System.Xml.Linq.XText
     {
         public XCData(string value)
             : base(default(string)) { }
@@ -405,7 +405,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public partial class XComment : System.Xml.Linq.XNode
+    partial public class XComment : System.Xml.Linq.XNode
     {
         public XComment(string value) { }
 
@@ -432,7 +432,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public abstract partial class XContainer : System.Xml.Linq.XNode
+    partial public abstract class XContainer : System.Xml.Linq.XNode
     {
         internal XContainer() { }
 
@@ -504,7 +504,7 @@ namespace System.Xml.Linq
         public void ReplaceNodes(params object?[] content) { }
     }
 
-    public partial class XDeclaration
+    partial public class XDeclaration
     {
         public XDeclaration(string? version, string? encoding, string? standalone) { }
 
@@ -532,7 +532,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public partial class XDocument : System.Xml.Linq.XContainer
+    partial public class XDocument : System.Xml.Linq.XContainer
     {
         public XDocument() { }
 
@@ -705,7 +705,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public partial class XDocumentType : System.Xml.Linq.XNode
+    partial public class XDocumentType : System.Xml.Linq.XNode
     {
         public XDocumentType(
             string name,
@@ -756,7 +756,7 @@ namespace System.Xml.Linq
         "MS.Internal.Xml.Linq.ComponentModel.XTypeDescriptionProvider`1[[System.Xml.Linq.XElement, System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],System.ComponentModel.TypeConverter"
     )]
     [System.Xml.Serialization.XmlSchemaProviderAttribute(null, IsAny = true)]
-    public partial class XElement
+    partial public class XElement
         : System.Xml.Linq.XContainer,
             System.Xml.Serialization.IXmlSerializable
     {
@@ -1205,7 +1205,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public sealed partial class XName
+    partial public sealed class XName
         : System.IEquatable<System.Xml.Linq.XName>,
             System.Runtime.Serialization.ISerializable
     {
@@ -1279,7 +1279,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public sealed partial class XNamespace
+    partial public sealed class XNamespace
     {
         internal XNamespace() { }
 
@@ -1359,7 +1359,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public abstract partial class XNode : System.Xml.Linq.XObject
+    partial public abstract class XNode : System.Xml.Linq.XObject
     {
         internal XNode() { }
 
@@ -1500,7 +1500,7 @@ namespace System.Xml.Linq
         );
     }
 
-    public sealed partial class XNodeDocumentOrderComparer
+    partial public sealed class XNodeDocumentOrderComparer
         : System.Collections.Generic.IComparer<System.Xml.Linq.XNode?>,
             System.Collections.IComparer
     {
@@ -1517,7 +1517,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public sealed partial class XNodeEqualityComparer
+    partial public sealed class XNodeEqualityComparer
         : System.Collections.Generic.IEqualityComparer<System.Xml.Linq.XNode>,
             System.Collections.IEqualityComparer
     {
@@ -1544,7 +1544,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public abstract partial class XObject : System.Xml.IXmlLineInfo
+    partial public abstract class XObject : System.Xml.IXmlLineInfo
     {
         internal XObject() { }
 
@@ -1623,7 +1623,7 @@ namespace System.Xml.Linq
         Value = 3,
     }
 
-    public partial class XObjectChangeEventArgs : System.EventArgs
+    partial public class XObjectChangeEventArgs : System.EventArgs
     {
         public static readonly System.Xml.Linq.XObjectChangeEventArgs Add;
         public static readonly System.Xml.Linq.XObjectChangeEventArgs Name;
@@ -1638,7 +1638,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public partial class XProcessingInstruction : System.Xml.Linq.XNode
+    partial public class XProcessingInstruction : System.Xml.Linq.XNode
     {
         public XProcessingInstruction(string target, string data) { }
 
@@ -1670,7 +1670,7 @@ namespace System.Xml.Linq
         }
     }
 
-    public partial class XStreamingElement
+    partial public class XStreamingElement
     {
         public XStreamingElement(System.Xml.Linq.XName name) { }
 
@@ -1715,7 +1715,7 @@ namespace System.Xml.Linq
         public void WriteTo(System.Xml.XmlWriter writer) { }
     }
 
-    public partial class XText : System.Xml.Linq.XNode
+    partial public class XText : System.Xml.Linq.XNode
     {
         public XText(string value) { }
 
@@ -1745,7 +1745,7 @@ namespace System.Xml.Linq
 
 namespace System.Xml.Schema
 {
-    public static partial class Extensions
+    partial public static class Extensions
     {
         public static System.Xml.Schema.IXmlSchemaInfo? GetSchemaInfo(
             this System.Xml.Linq.XAttribute source

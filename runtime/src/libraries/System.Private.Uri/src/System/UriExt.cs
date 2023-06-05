@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System
 {
-    public partial class Uri
+    partial public class Uri
     {
         //
         // All public ctors go through here

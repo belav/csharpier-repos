@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.Security.Principal;
     using System.ServiceModel.Channels;
 
-    public partial class TransactionFlowElement : BindingElementExtensionElement
+    partial public class TransactionFlowElement : BindingElementExtensionElement
     {
         public TransactionFlowElement() { }
 
@@ -60,7 +60,7 @@ namespace System.ServiceModel.Configuration
             this.TransactionProtocol = source.TransactionProtocol;
         }
 
-        override protected internal BindingElement CreateBindingElement()
+        protected internal override BindingElement CreateBindingElement()
         {
             return new TransactionFlowBindingElement(true, TransactionProtocol)
             {

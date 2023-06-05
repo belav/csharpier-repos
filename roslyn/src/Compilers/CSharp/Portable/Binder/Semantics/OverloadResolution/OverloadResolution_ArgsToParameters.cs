@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class OverloadResolution
+    partial internal sealed class OverloadResolution
     {
         // During overload resolution we need to map arguments to their corresponding
         // parameters, but most of the time that map is going to be trivial:

@@ -21,11 +21,12 @@ namespace System
     using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
 
+    internal
     // Helper class to aid removal of LocalDataStore from the LocalDataStoreMgr
     // LocalDataStoreMgr does not holds references to LocalDataStoreHolder. It holds
     // references to LocalDataStore only. LocalDataStoreHolder finalizer will run once
     // the only outstanding reference to the store is in LocalDataStoreMgr.
-    sealed internal class LocalDataStoreHolder
+    sealed class LocalDataStoreHolder
     {
         private LocalDataStore m_Store;
 
@@ -49,7 +50,7 @@ namespace System
         }
     }
 
-    sealed internal class LocalDataStoreElement
+    internal sealed class LocalDataStoreElement
     {
         private Object m_value;
         private long m_cookie; // This is immutable cookie of the slot used to verify that
@@ -74,8 +75,9 @@ namespace System
         }
     }
 
+    internal
     // This class will not be marked serializable
-    sealed internal class LocalDataStore
+    sealed class LocalDataStore
     {
         private LocalDataStoreElement[] m_DataTable;
         private LocalDataStoreMgr m_Manager;

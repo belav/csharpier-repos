@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Formatting;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
-    public partial class AutomationObject
+    partial public class AutomationObject
     {
         public int Indent_BlockContents
         {

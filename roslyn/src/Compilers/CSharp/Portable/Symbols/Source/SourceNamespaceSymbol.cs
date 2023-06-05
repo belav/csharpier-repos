@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed partial class SourceNamespaceSymbol : NamespaceSymbol
+    partial internal sealed class SourceNamespaceSymbol : NamespaceSymbol
     {
         private readonly SourceModuleSymbol _module;
         private readonly Symbol _container;

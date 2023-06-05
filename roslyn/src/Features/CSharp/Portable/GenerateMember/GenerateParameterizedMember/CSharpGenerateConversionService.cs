@@ -21,7 +21,7 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMember
 {
     [ExportLanguageService(typeof(IGenerateConversionService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpGenerateConversionService
+    partial internal class CSharpGenerateConversionService
         : AbstractGenerateConversionService<
             CSharpGenerateConversionService,
             SimpleNameSyntax,

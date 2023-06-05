@@ -5,8 +5,9 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {
+    partial
     // Functionality related to deterministic ordering of types
-    public partial class PInvokeTargetNativeMethod
+    public class PInvokeTargetNativeMethod
     {
         protected internal override int ClassCode => -1626939381;
 

@@ -6,7 +6,7 @@
 
 namespace System.IO.Hashing
 {
-    public sealed partial class Crc32 : System.IO.Hashing.NonCryptographicHashAlgorithm
+    partial public sealed class Crc32 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
         public Crc32()
             : base(default(int)) { }
@@ -56,7 +56,7 @@ namespace System.IO.Hashing
         }
     }
 
-    public sealed partial class Crc64 : System.IO.Hashing.NonCryptographicHashAlgorithm
+    partial public sealed class Crc64 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
         public Crc64()
             : base(default(int)) { }
@@ -106,7 +106,7 @@ namespace System.IO.Hashing
         }
     }
 
-    public abstract partial class NonCryptographicHashAlgorithm
+    partial public abstract class NonCryptographicHashAlgorithm
     {
         protected NonCryptographicHashAlgorithm(int hashLengthInBytes) { }
 
@@ -176,7 +176,7 @@ namespace System.IO.Hashing
         }
     }
 
-    public sealed partial class XxHash128 : System.IO.Hashing.NonCryptographicHashAlgorithm
+    partial public sealed class XxHash128 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
         public XxHash128()
             : base(default(int)) { }
@@ -225,7 +225,7 @@ namespace System.IO.Hashing
         }
     }
 
-    public sealed partial class XxHash3 : System.IO.Hashing.NonCryptographicHashAlgorithm
+    partial public sealed class XxHash3 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
         public XxHash3()
             : base(default(int)) { }
@@ -286,7 +286,7 @@ namespace System.IO.Hashing
         }
     }
 
-    public sealed partial class XxHash32 : System.IO.Hashing.NonCryptographicHashAlgorithm
+    partial public sealed class XxHash32 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
         public XxHash32()
             : base(default(int)) { }
@@ -347,7 +347,7 @@ namespace System.IO.Hashing
         }
     }
 
-    public sealed partial class XxHash64 : System.IO.Hashing.NonCryptographicHashAlgorithm
+    partial public sealed class XxHash64 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
         public XxHash64()
             : base(default(int)) { }

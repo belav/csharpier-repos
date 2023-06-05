@@ -4,14 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal unsafe partial class Sys
+    partial internal unsafe class Sys
     {
         [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_GetEnviron")]
-        internal static unsafe partial IntPtr GetEnviron();
+        partial internal static unsafe IntPtr GetEnviron();
 
         [LibraryImport(Interop.Libraries.SystemNative, EntryPoint = "SystemNative_FreeEnviron")]
-        internal static unsafe partial void FreeEnviron(IntPtr environ);
+        partial internal static unsafe void FreeEnviron(IntPtr environ);
     }
 }

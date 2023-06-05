@@ -3,7 +3,7 @@
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public abstract partial class JumpStubNode : AssemblyStubNode
+    partial public abstract class JumpStubNode : AssemblyStubNode
     {
         private ISymbolNode _target;
 

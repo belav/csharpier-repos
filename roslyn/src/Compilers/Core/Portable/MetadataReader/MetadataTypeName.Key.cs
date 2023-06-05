@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial struct MetadataTypeName
+    partial internal struct MetadataTypeName
     {
         /// <summary>
         /// A digest of MetadataTypeName's fully qualified name which can be used as the key in a dictionary

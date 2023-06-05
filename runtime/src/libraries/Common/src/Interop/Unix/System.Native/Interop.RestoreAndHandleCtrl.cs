@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_RestoreAndHandleCtrl")]
         internal static extern void RestoreAndHandleCtrl(CtrlCode ctrlCode);

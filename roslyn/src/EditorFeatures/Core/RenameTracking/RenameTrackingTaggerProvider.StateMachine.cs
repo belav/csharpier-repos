@@ -28,7 +28,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 {
-    internal sealed partial class RenameTrackingTaggerProvider
+    partial internal sealed class RenameTrackingTaggerProvider
     {
         /// <summary>
         /// Keeps track of the rename tracking state for a given text buffer by tracking its

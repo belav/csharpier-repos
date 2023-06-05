@@ -13,7 +13,7 @@ using System.Collections.Specialized;
 
 namespace System.DirectoryServices.AccountManagement
 {
-    internal partial class ADStoreCtx : StoreCtx
+    partial internal class ADStoreCtx : StoreCtx
     {
         //
         // Query operations

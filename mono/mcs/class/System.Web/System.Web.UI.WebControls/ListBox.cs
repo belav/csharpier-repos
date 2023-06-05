@@ -54,7 +54,7 @@ namespace System.Web.UI.WebControls
 
         [Browsable(false)]
 #if HAVE_CONTROL_ADAPTERS
-        public virtual new
+        public new virtual
 #else
         public override
 #endif
@@ -66,7 +66,7 @@ namespace System.Web.UI.WebControls
 
         [Browsable(false)]
 #if HAVE_CONTROL_ADAPTERS
-        public virtual new
+        public new virtual
 #else
         public override
 #endif
@@ -78,7 +78,7 @@ namespace System.Web.UI.WebControls
 
         [Browsable(false)]
 #if HAVE_CONTROL_ADAPTERS
-        public virtual new
+        public new virtual
 #else
         public override
 #endif

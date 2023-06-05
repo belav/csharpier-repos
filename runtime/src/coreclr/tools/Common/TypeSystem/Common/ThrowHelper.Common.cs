@@ -7,7 +7,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public static partial class ThrowHelper
+    partial public static class ThrowHelper
     {
         [System.Diagnostics.DebuggerHidden]
         public static void ThrowTypeLoadException(string nestedTypeName, ModuleDesc module)
@@ -75,7 +75,7 @@ namespace Internal.TypeSystem
             ThrowTypeLoadException(id, Format.Type(type), Format.OwningModule(type));
         }
 
-        private static partial class Format
+        partial private static class Format
         {
             public static string OwningModule(MethodDesc method)
             {

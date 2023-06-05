@@ -6,19 +6,19 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool ConnectNamedPipe(
+        partial internal static unsafe bool ConnectNamedPipe(
             SafePipeHandle handle,
             NativeOverlapped* overlapped
         );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool ConnectNamedPipe(SafePipeHandle handle, IntPtr overlapped);
+        partial internal static bool ConnectNamedPipe(SafePipeHandle handle, IntPtr overlapped);
     }
 }

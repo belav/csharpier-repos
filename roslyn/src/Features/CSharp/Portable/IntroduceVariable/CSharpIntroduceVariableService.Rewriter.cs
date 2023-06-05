@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 {
-    internal partial class CSharpIntroduceVariableService
+    partial internal class CSharpIntroduceVariableService
     {
         private class Rewriter : CSharpSyntaxRewriter
         {

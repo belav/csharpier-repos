@@ -13,7 +13,7 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
 {
     [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
-    public partial class ExtractMethodTests
+    partial public class ExtractMethodTests
     {
         [UseExportProvider]
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]

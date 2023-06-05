@@ -286,7 +286,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public abstract partial class ECDsaTests : ECDsaTestsBase
+    partial public abstract class ECDsaTests : ECDsaTestsBase
     {
         protected bool VerifyData(
             ECDsa ecdsa,

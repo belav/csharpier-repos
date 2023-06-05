@@ -3,5 +3,5 @@
 
 namespace System.Runtime.CompilerServices
 {
-    public static partial class IsConst { }
+    partial public static class IsConst { }
 }

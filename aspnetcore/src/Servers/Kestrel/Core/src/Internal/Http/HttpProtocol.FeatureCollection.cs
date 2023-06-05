@@ -12,7 +12,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-internal partial class HttpProtocol
+partial internal class HttpProtocol
 {
     // NOTE: When feature interfaces are added to or removed from this HttpProtocol class implementation,
     // then the list of `implementedFeatures` in the generated code project MUST also be updated first

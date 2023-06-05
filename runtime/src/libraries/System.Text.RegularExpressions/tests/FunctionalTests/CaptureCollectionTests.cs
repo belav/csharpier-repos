@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Text.RegularExpressions.Tests
 {
-    public static partial class CaptureCollectionTests
+    partial public static class CaptureCollectionTests
     {
         [Fact]
         public static void GetEnumerator()

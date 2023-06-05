@@ -14,6 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
+    partial
     /// <summary>
     /// This portion of the binder converts deconstruction-assignment syntax (AssignmentExpressionSyntax nodes with the left
     /// being a tuple expression or declaration expression) into a BoundDeconstructionAssignmentOperator (or bad node).
@@ -24,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///         an array of nested Conversions (like a tuple conversion),
     ///     - a BoundExpression as its Operand.
     /// </summary>
-    internal partial class Binder
+    internal class Binder
     {
         internal BoundExpression BindDeconstruction(
             AssignmentExpressionSyntax node,

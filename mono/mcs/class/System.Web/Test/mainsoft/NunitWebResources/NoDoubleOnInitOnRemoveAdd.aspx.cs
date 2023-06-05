@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-public partial class _Bug471305_Default : System.Web.UI.Page
+partial public class _Bug471305_Default : System.Web.UI.Page
 {
     public class CustomControl : Control
     {

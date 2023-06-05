@@ -10,7 +10,7 @@ using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {
-    public partial class ImmutableSortedSetTest : ImmutableSetTest
+    partial public class ImmutableSortedSetTest : ImmutableSetTest
     {
         [Fact]
         [SkipOnTargetFramework(

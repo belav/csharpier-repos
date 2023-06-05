@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System.Net.Security
 {
-    internal partial struct SslConnectionInfo
+    partial internal struct SslConnectionInfo
     {
         private static byte[]? GetNegotiatedApplicationProtocol(SafeDeleteContext context)
         {

@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TSource> Append<TSource>(
             this IEnumerable<TSource> source,
@@ -38,11 +38,12 @@ namespace System.Linq
                 : new AppendPrepend1Iterator<TSource>(source, element, appending: false);
         }
 
+        partial
         /// <summary>
         /// Represents the insertion of one or more items before or after an <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        private abstract partial class AppendPrependIterator<TSource> : Iterator<TSource>
+        private abstract class AppendPrependIterator<TSource> : Iterator<TSource>
         {
             protected readonly IEnumerable<TSource> _source;
             protected IEnumerator<TSource>? _enumerator;
@@ -88,12 +89,12 @@ namespace System.Linq
             }
         }
 
+        partial
         /// <summary>
         /// Represents the insertion of an item before or after an <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        private sealed partial class AppendPrepend1Iterator<TSource>
-            : AppendPrependIterator<TSource>
+        private sealed class AppendPrepend1Iterator<TSource> : AppendPrependIterator<TSource>
         {
             private readonly TSource _item;
             private readonly bool _appending;
@@ -193,11 +194,12 @@ namespace System.Linq
             }
         }
 
+        partial
         /// <summary>
         /// Represents the insertion of multiple items before or after an <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        private sealed partial class AppendPrependN<TSource> : AppendPrependIterator<TSource>
+        private sealed class AppendPrependN<TSource> : AppendPrependIterator<TSource>
         {
             private readonly SingleLinkedNode<TSource>? _prepended;
             private readonly SingleLinkedNode<TSource>? _appended;

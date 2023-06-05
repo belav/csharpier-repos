@@ -15,10 +15,11 @@ using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 {
+    partial
     /// <summary>
     /// Interaction logic for ChangeSignatureDialog.xaml
     /// </summary>
-    internal partial class ChangeSignatureDialog : DialogWindow
+    internal class ChangeSignatureDialog : DialogWindow
     {
         private readonly ChangeSignatureDialogViewModel _viewModel;
 

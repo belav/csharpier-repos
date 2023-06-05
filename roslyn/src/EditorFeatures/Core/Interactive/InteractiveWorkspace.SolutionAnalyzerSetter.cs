@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Interactive
 {
-    internal partial class InteractiveWorkspace
+    partial internal class InteractiveWorkspace
     {
         internal sealed class SolutionAnalyzerSetter : ISolutionAnalyzerSetterWorkspaceService
         {

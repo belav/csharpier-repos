@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [Flags]
         internal enum InterfaceFlags
@@ -33,7 +33,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetTcpGlobalStatistics")]
-        public static unsafe partial int GetTcpGlobalStatistics(TcpGlobalStatistics* statistics);
+        partial public static unsafe int GetTcpGlobalStatistics(TcpGlobalStatistics* statistics);
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
         public readonly struct IPv4GlobalStatistics
@@ -55,7 +55,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetIPv4GlobalStatistics")]
-        public static unsafe partial int GetIPv4GlobalStatistics(IPv4GlobalStatistics* statistics);
+        partial public static unsafe int GetIPv4GlobalStatistics(IPv4GlobalStatistics* statistics);
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
         public readonly struct UdpGlobalStatistics
@@ -68,7 +68,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetUdpGlobalStatistics")]
-        public static unsafe partial int GetUdpGlobalStatistics(UdpGlobalStatistics* statistics);
+        partial public static unsafe int GetUdpGlobalStatistics(UdpGlobalStatistics* statistics);
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
         public readonly struct Icmpv4GlobalStatistics
@@ -101,7 +101,7 @@ internal static partial class Interop
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetIcmpv4GlobalStatistics"
         )]
-        public static unsafe partial int GetIcmpv4GlobalStatistics(
+        partial public static unsafe int GetIcmpv4GlobalStatistics(
             Icmpv4GlobalStatistics* statistics
         );
 
@@ -142,7 +142,7 @@ internal static partial class Interop
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetIcmpv6GlobalStatistics"
         )]
-        public static unsafe partial int GetIcmpv6GlobalStatistics(
+        partial public static unsafe int GetIcmpv6GlobalStatistics(
             Icmpv6GlobalStatistics* statistics
         );
 
@@ -169,12 +169,12 @@ internal static partial class Interop
             EntryPoint = "SystemNative_GetNativeIPInterfaceStatistics",
             StringMarshalling = StringMarshalling.Utf8
         )]
-        public static partial int GetNativeIPInterfaceStatistics(
+        partial public static int GetNativeIPInterfaceStatistics(
             string name,
             out NativeIPInterfaceStatistics stats
         );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetNumRoutes")]
-        public static partial int GetNumRoutes();
+        partial public static int GetNumRoutes();
     }
 }

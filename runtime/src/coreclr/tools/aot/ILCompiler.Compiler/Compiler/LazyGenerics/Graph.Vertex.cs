@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace ILCompiler
 {
-    internal static partial class LazyGenericsSupport
+    partial internal static class LazyGenericsSupport
     {
-        private sealed partial class Graph<P>
+        partial private sealed class Graph<P>
         {
             /// <summary>
             /// Gets or creates the canonical Vertex object for this payload value. Payload equality is defined by its Object.Equals() override. Vertex equality

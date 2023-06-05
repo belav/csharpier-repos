@@ -23,7 +23,7 @@ using System.Globalization;
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class AudienceUriElement
+    partial public sealed class AudienceUriElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -58,7 +58,7 @@ namespace System.IdentityModel.Configuration
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class AudienceUriElementCollection
+    partial public sealed class AudienceUriElementCollection
     {
         ConfigurationPropertyCollection properties;
 
@@ -94,7 +94,7 @@ namespace System.IdentityModel.Configuration
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class CustomTypeElement
+    partial public sealed class CustomTypeElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -129,7 +129,7 @@ namespace System.IdentityModel.Configuration
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class IdentityModelCachesElement
+    partial public sealed class IdentityModelCachesElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -173,7 +173,7 @@ namespace System.IdentityModel.Configuration
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class IssuerNameRegistryElement
+    partial public sealed class IssuerNameRegistryElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -207,7 +207,7 @@ namespace System.IdentityModel.Configuration
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class X509CertificateValidationElement
+    partial public sealed class X509CertificateValidationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -286,7 +286,7 @@ namespace System.IdentityModel.Configuration
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class SecurityTokenHandlerConfigurationElement
+    partial public sealed class SecurityTokenHandlerConfigurationElement
     {
         ConfigurationPropertyCollection properties;
 
@@ -416,7 +416,7 @@ namespace System.IdentityModel.Configuration
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class SecurityTokenHandlerElementCollection
+    partial public sealed class SecurityTokenHandlerElementCollection
     {
         ConfigurationPropertyCollection properties;
 
@@ -460,7 +460,7 @@ namespace System.IdentityModel.Configuration
 
 namespace System.IdentityModel.Configuration
 {
-    public sealed partial class TokenReplayDetectionElement
+    partial public sealed class TokenReplayDetectionElement
     {
         ConfigurationPropertyCollection properties;
 

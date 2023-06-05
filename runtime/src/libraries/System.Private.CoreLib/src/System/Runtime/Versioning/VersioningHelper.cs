@@ -18,7 +18,7 @@ namespace System.Runtime.Versioning
         TypeName = 0x10
     }
 
-    public static partial class VersioningHelper
+    partial public static class VersioningHelper
     {
         // These depend on the exact values given to members of the ResourceScope enum.
         private const ResourceScope ResTypeMask =

@@ -6,18 +6,19 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 #if !SYSTEM_NET_SOCKETS_DLL
 using SocketType = System.Net.Internals.SocketType;
+partial
 #endif
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class Winsock
+    partial internal static class Winsock
     {
         [LibraryImport(
             Interop.Libraries.Ws2_32,
             SetLastError = true,
             StringMarshalling = StringMarshalling.Utf16
         )]
-        internal static partial IntPtr WSASocketW(
+        partial internal static IntPtr WSASocketW(
             AddressFamily addressFamily,
             SocketType socketType,
             int protocolType,

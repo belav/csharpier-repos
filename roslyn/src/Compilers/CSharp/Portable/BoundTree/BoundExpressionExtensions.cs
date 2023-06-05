@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal static partial class BoundExpressionExtensions
+    partial internal static class BoundExpressionExtensions
     {
         /// <summary>
         /// Returns the RefKind if the expression represents a symbol

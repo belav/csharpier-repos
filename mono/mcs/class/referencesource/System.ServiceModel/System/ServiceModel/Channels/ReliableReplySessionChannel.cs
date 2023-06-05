@@ -2305,7 +2305,7 @@ namespace System.ServiceModel.Channels
 
             CloseSequenceReplyProvider() { }
 
-            static internal ReplyProvider Instance
+            internal static ReplyProvider Instance
             {
                 get
                 {
@@ -2339,7 +2339,7 @@ namespace System.ServiceModel.Channels
 
             TerminateSequenceReplyProvider() { }
 
-            static internal ReplyProvider Instance
+            internal static ReplyProvider Instance
             {
                 get
                 {

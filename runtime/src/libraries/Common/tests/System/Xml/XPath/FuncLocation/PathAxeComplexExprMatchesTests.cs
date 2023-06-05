@@ -7,10 +7,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths.Axes.ComplexExpressions
 {
+    partial
     /// <summary>
     /// Location Paths - Axes (Complex expressions) (matches)
     /// </summary>
-    public static partial class MatchesTests
+    public static class MatchesTests
     {
         /// <summary>
         /// Context node has an ancestor 'publication' so matches should return true

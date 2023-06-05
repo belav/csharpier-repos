@@ -7,9 +7,9 @@ using System.Security.Cryptography;
 using Internal.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class NCrypt
+    partial internal static class NCrypt
     {
         [Flags]
         internal enum SecretAgreementFlags
@@ -22,7 +22,7 @@ internal static partial class Interop
         ///     Generate a secret agreement for generating shared key material
         /// </summary>
         [LibraryImport(Interop.Libraries.NCrypt)]
-        private static partial ErrorCode NCryptSecretAgreement(
+        partial private static ErrorCode NCryptSecretAgreement(
             SafeNCryptKeyHandle hPrivKey,
             SafeNCryptKeyHandle hPubKey,
             out SafeNCryptSecretHandle phSecret,

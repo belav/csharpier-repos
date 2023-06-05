@@ -4,7 +4,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class BoundDagRelationalTest
+    partial internal sealed class BoundDagRelationalTest
     {
         public BinaryOperatorKind Relation => OperatorKind.Operator();
     }

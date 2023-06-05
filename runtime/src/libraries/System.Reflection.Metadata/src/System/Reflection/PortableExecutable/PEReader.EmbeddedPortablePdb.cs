@@ -13,6 +13,7 @@ using System.IO.Compression;
 
 namespace System.Reflection.PortableExecutable
 {
+    partial
     /// <summary>
     /// Portable Executable format reader.
     /// </summary>
@@ -20,7 +21,7 @@ namespace System.Reflection.PortableExecutable
     /// The implementation is thread-safe, that is multiple threads can read data from the reader in parallel.
     /// Disposal of the reader is not thread-safe (see <see cref="Dispose"/>).
     /// </remarks>
-    public sealed partial class PEReader : IDisposable
+    public sealed class PEReader : IDisposable
     {
         /// <summary>
         /// Reads the data pointed to by the specified Debug Directory entry and interprets them as Embedded Portable PDB blob.

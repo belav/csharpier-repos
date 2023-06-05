@@ -7,7 +7,7 @@ using System.Reflection.Internal;
 
 namespace System.Reflection.Metadata.Ecma335
 {
-    public sealed partial class MetadataBuilder
+    partial public sealed class MetadataBuilder
     {
         internal SerializedMetadata GetSerializedMetadata(
             ImmutableArray<int> externalRowCounts,

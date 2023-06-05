@@ -54,7 +54,7 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class XmlDictionaryReaderQuotasElement : ConfigurationElement
+    partial public sealed class XmlDictionaryReaderQuotasElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;

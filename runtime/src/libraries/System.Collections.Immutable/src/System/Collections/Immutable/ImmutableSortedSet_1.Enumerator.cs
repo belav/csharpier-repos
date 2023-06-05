@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace System.Collections.Immutable
 {
-    public sealed partial class ImmutableSortedSet<T>
+    partial public sealed class ImmutableSortedSet<T>
     {
         /// <summary>
         /// Enumerates the contents of a binary tree.

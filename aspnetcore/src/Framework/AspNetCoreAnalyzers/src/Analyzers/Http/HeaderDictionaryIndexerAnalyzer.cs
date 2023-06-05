@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Operations;
 namespace Microsoft.AspNetCore.Analyzers.Http;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public partial class HeaderDictionaryIndexerAnalyzer : DiagnosticAnalyzer
+partial public class HeaderDictionaryIndexerAnalyzer : DiagnosticAnalyzer
 {
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
         ImmutableArray.Create(DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer);

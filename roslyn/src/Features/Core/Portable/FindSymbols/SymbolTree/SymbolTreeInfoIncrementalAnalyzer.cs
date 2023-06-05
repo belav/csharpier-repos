@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree
 {
-    internal partial class SymbolTreeInfoIncrementalAnalyzerProvider
+    partial internal class SymbolTreeInfoIncrementalAnalyzerProvider
     {
         private class SymbolTreeInfoIncrementalAnalyzer : IncrementalAnalyzerBase
         {

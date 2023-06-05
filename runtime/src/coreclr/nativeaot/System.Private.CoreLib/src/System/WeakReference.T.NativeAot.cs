@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace System
 {
-    public sealed partial class WeakReference<T>
+    partial public sealed class WeakReference<T>
         where T : class?
     {
         // If you fix bugs here, please fix them in WeakReference at the same time.

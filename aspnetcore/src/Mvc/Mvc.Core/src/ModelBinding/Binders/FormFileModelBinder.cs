@@ -12,10 +12,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
+partial
 /// <summary>
 /// <see cref="IModelBinder"/> implementation to bind posted files to <see cref="IFormFile"/>.
 /// </summary>
-public partial class FormFileModelBinder : IModelBinder
+public class FormFileModelBinder : IModelBinder
 {
     private readonly ILogger _logger;
 
@@ -219,7 +220,7 @@ public partial class FormFileModelBinder : IModelBinder
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             21,
@@ -227,6 +228,6 @@ public partial class FormFileModelBinder : IModelBinder
             "No files found in the request to bind the model to.",
             EventName = "NoFilesFoundInRequest"
         )]
-        public static partial void NoFilesFoundInRequest(ILogger logger);
+        partial public static void NoFilesFoundInRequest(ILogger logger);
     }
 }

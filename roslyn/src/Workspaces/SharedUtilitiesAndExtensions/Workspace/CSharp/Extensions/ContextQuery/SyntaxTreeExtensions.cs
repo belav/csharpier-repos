@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 {
-    internal static partial class SyntaxTreeExtensions
+    partial internal static class SyntaxTreeExtensions
     {
         private static readonly ISet<SyntaxKind> s_validLocalFunctionModifiers =
             new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)

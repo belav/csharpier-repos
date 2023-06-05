@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
-    internal static partial class SemanticModelExtensions
+    partial internal static class SemanticModelExtensions
     {
         public static IEnumerable<ITypeSymbol> LookupTypeRegardlessOfArity(
             this SemanticModel semanticModel,

@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace Roslyn.Utilities
 {
-    internal partial class SpecializedCollections
+    partial internal class SpecializedCollections
     {
-        private partial class ReadOnly
+        partial private class ReadOnly
         {
             internal class Set<TUnderlying, T>
                 : Collection<TUnderlying, T>,

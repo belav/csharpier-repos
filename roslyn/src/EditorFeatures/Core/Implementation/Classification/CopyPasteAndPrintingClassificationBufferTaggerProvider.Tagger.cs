@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 {
-    internal partial class CopyPasteAndPrintingClassificationBufferTaggerProvider
+    partial internal class CopyPasteAndPrintingClassificationBufferTaggerProvider
     {
         private class Tagger
             : ForegroundThreadAffinitizedObject,

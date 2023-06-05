@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace System.IO.MemoryMappedFiles
 {
-    internal sealed partial class MemoryMappedView : IDisposable
+    partial internal sealed class MemoryMappedView : IDisposable
     {
         private readonly SafeMemoryMappedViewHandle _viewHandle;
         private readonly long _pointerOffset;

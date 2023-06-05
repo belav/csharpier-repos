@@ -7,10 +7,11 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json.Nodes
 {
+    partial
     /// <summary>
     /// Trim-safe since it either calls the converter directly or calls the JsonSerializer.Serialize(JsonTypeInfo{TValue}).
     /// </summary>
-    internal sealed partial class JsonValueTrimmable<TValue> : JsonValue<TValue>
+    internal sealed class JsonValueTrimmable<TValue> : JsonValue<TValue>
     {
         private readonly JsonTypeInfo<TValue>? _jsonTypeInfo;
         private readonly JsonConverter<TValue>? _converter;

@@ -6,7 +6,7 @@
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class AbstractFlowPass<TLocalState, TLocalFunctionState>
+    partial internal class AbstractFlowPass<TLocalState, TLocalFunctionState>
     {
         /// <summary>
         /// This is the "top" state of the data flow lattice. Generally, it is considered the state

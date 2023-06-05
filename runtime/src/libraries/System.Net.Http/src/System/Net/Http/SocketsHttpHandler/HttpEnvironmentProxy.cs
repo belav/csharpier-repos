@@ -99,7 +99,7 @@ namespace System.Net.Http
         }
     }
 
-    internal sealed partial class HttpEnvironmentProxy : IWebProxy
+    partial internal sealed class HttpEnvironmentProxy : IWebProxy
     {
         private const string EnvAllProxyUC = "ALL_PROXY";
         private const string EnvHttpProxyUC = "HTTP_PROXY";

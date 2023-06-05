@@ -5,7 +5,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class CustomConverterTests
+    partial public static class CustomConverterTests
     {
         // A custom data type representing a point where JSON is "XValue,YValue".
         public struct Point

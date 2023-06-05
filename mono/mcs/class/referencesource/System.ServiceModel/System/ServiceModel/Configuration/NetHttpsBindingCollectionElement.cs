@@ -4,10 +4,11 @@
 
 namespace System.ServiceModel.Configuration
 {
+    partial
     /// <summary>
     /// NetHttpsBindingCollectionElement for NetHttpsBinding
     /// </summary>
-    public partial class NetHttpsBindingCollectionElement
+    public class NetHttpsBindingCollectionElement
         : StandardBindingCollectionElement<NetHttpsBinding, NetHttpsBindingElement>
     {
         internal static NetHttpsBindingCollectionElement GetBindingCollectionElement()

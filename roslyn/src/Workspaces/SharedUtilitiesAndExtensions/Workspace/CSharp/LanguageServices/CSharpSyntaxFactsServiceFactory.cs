@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     [ExportLanguageServiceFactory(typeof(ISyntaxFactsService), LanguageNames.CSharp), Shared]
-    internal sealed partial class CSharpSyntaxFactsServiceFactory : ILanguageServiceFactory
+    partial internal sealed class CSharpSyntaxFactsServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

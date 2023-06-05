@@ -198,7 +198,7 @@ namespace System.Text.Unicode
         }
 
         [StructLayout(LayoutKind.Auto)]
-        private ref struct Processor<T>
+        ref private struct Processor<T>
         {
             private readonly ReadOnlySpan<T> _buffer;
             private readonly DecodeFirstRune<T> _decoder;

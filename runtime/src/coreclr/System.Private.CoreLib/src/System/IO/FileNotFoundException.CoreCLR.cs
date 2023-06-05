@@ -3,7 +3,7 @@
 
 namespace System.IO
 {
-    public partial class FileNotFoundException
+    partial public class FileNotFoundException
     {
         // Do not delete: this is invoked from native code.
         private FileNotFoundException(string? fileName, int hResult)

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
-    internal partial class Lexer
+    partial internal class Lexer
     {
         /// <returns>The number of quotes that were consumed</returns>
         private int ConsumeCharSequence(char ch)

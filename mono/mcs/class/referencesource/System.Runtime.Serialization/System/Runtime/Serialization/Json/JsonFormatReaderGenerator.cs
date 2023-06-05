@@ -36,7 +36,7 @@ namespace System.Runtime.Serialization.Json
         CollectionDataContract collectionContract
     );
 
-    sealed partial class JsonFormatReaderGenerator
+    partial sealed class JsonFormatReaderGenerator
     {
         [Fx.Tag.SecurityNote(
             Critical = "Holds instance of CriticalHelper which keeps state that was produced within an assert."

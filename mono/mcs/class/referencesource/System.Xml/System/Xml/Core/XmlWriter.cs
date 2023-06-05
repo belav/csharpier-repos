@@ -44,9 +44,10 @@ namespace System.Xml
         Error,
     };
 
+    partial
     // Represents a writer that provides fast non-cached forward-only way of generating XML streams containing XML documents
     // that conform to the W3C Extensible Markup Language (XML) 1.0 specification and the Namespaces in XML specification.
-    public abstract partial class XmlWriter : IDisposable
+    public abstract class XmlWriter : IDisposable
     {
         // Helper buffer for WriteNode(XmlReader, bool)
         char[] writeNodeBuffer;

@@ -6,7 +6,7 @@
 
 namespace System.Diagnostics
 {
-    public sealed partial class FileVersionInfo
+    partial public sealed class FileVersionInfo
     {
         internal FileVersionInfo() { }
 

@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<
+    partial internal class AbstractIntroduceVariableService<
         TService,
         TExpressionSyntax,
         TTypeSyntax,

@@ -393,7 +393,7 @@ namespace System.Web.Profile
             get { return _lastUpdatedDate; }
         }
 
-        public new static SettingsPropertyCollection Properties
+        public static new SettingsPropertyCollection Properties
         {
             get
             {

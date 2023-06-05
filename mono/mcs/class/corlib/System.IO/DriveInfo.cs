@@ -193,7 +193,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe extern static bool GetDiskFreeSpaceInternal(
+        static extern unsafe bool GetDiskFreeSpaceInternal(
             char* pathName,
             int pathName_length,
             out ulong freeBytesAvail,
@@ -202,7 +202,7 @@ namespace System.IO
             out MonoIOError error
         );
 
-        unsafe static bool GetDiskFreeSpaceInternal(
+        static unsafe bool GetDiskFreeSpaceInternal(
             string pathName,
             out ulong freeBytesAvail,
             out ulong totalNumberOfBytes,
@@ -225,9 +225,9 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe extern static uint GetDriveTypeInternal(char* rootPathName, int rootPathName_length);
+        static extern unsafe uint GetDriveTypeInternal(char* rootPathName, int rootPathName_length);
 
-        unsafe static uint GetDriveTypeInternal(string rootPathName)
+        static unsafe uint GetDriveTypeInternal(string rootPathName)
         {
             // FIXME Check for embedded nuls here or in native.
             fixed (char* fixed_rootPathName = rootPathName)
@@ -237,12 +237,12 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe extern static string GetDriveFormatInternal(
+        static extern unsafe string GetDriveFormatInternal(
             char* rootPathName,
             int rootPathName_length
         );
 
-        unsafe static string GetDriveFormat(string rootPathName)
+        static unsafe string GetDriveFormat(string rootPathName)
         {
             // FIXME Check for embedded nuls here or in native.
             fixed (char* fixed_rootPathName = rootPathName)

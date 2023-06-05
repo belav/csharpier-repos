@@ -25,7 +25,7 @@ using Internal.Reflection.Tracing;
 
 namespace System.Reflection.Runtime.Assemblies.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeAssembly : RuntimeAssemblyInfo
+    partial internal sealed class NativeFormatRuntimeAssembly : RuntimeAssemblyInfo
     {
         private NativeFormatRuntimeAssembly(
             MetadataReader reader,

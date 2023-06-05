@@ -17,7 +17,7 @@ using System.DirectoryServices;
 
 namespace System.DirectoryServices.AccountManagement
 {
-    internal sealed partial class SAMStoreCtx : StoreCtx
+    partial internal sealed class SAMStoreCtx : StoreCtx
     {
         //
         // Native <--> Principal

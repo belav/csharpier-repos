@@ -10,11 +10,12 @@ using System.Runtime.Versioning;
 
 namespace System.IO.Pipes
 {
+    partial
     /// <summary>
     /// Named pipe client. Use this to open the client end of a named pipes created with
     /// NamedPipeServerStream.
     /// </summary>
-    public sealed partial class NamedPipeClientStream : PipeStream
+    public sealed class NamedPipeClientStream : PipeStream
     {
         // Waits for a pipe instance to become available. This method may return before WaitForConnection is called
         // on the server end, but WaitForConnection will not return until we have returned.  Any data written to the

@@ -68,7 +68,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public RSA Create()
+        public static
+        //
+        // public methods
+        //
+
+        new RSA Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.RSACryptoServiceProvider();
@@ -77,7 +82,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public RSA Create(String algName)
+        public static new RSA Create(String algName)
         {
             return (RSA)CryptoConfig.CreateFromName(algName);
         }
@@ -470,9 +475,9 @@ namespace System.Security.Cryptography
             return (sb.ToString());
         }
 
-        abstract public RSAParameters ExportParameters(bool includePrivateParameters);
+        public abstract RSAParameters ExportParameters(bool includePrivateParameters);
 
-        abstract public void ImportParameters(RSAParameters parameters);
+        public abstract void ImportParameters(RSAParameters parameters);
 
 #if MONO // these methods were copied from CoreFX for NS2.1 support
         public static RSA Create(int keySizeInBits)

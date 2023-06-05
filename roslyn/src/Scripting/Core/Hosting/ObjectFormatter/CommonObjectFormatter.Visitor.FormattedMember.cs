@@ -8,9 +8,9 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Scripting.Hosting
 {
-    internal abstract partial class CommonObjectFormatter
+    partial internal abstract class CommonObjectFormatter
     {
-        private sealed partial class Visitor
+        partial private sealed class Visitor
         {
             private readonly struct FormattedMember
             {

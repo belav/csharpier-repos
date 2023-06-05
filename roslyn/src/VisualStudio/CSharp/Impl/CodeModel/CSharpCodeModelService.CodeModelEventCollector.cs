@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
-    internal partial class CSharpCodeModelService
+    partial internal class CSharpCodeModelService
     {
         protected override AbstractCodeModelEventCollector CreateCodeModelEventCollector() =>
             new CodeModelEventCollector(this);

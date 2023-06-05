@@ -346,7 +346,7 @@ namespace MonoTests.System.Collections.Generic
 
         sealed class StartsWithComparator : IComparer<string>
         {
-            private readonly static Comparer<string> _stringComparer = Comparer<string>.Default;
+            private static readonly Comparer<string> _stringComparer = Comparer<string>.Default;
             public static readonly StartsWithComparator Instance = new StartsWithComparator();
 
             public int Compare(string part, string whole)
@@ -370,7 +370,7 @@ namespace MonoTests.System.Collections.Generic
 
         sealed class StartsWithComparatorPartWholeCheck : IComparer<string>
         {
-            private readonly static Comparer<string> _stringComparer = Comparer<string>.Default;
+            private static readonly Comparer<string> _stringComparer = Comparer<string>.Default;
 
             public static readonly StartsWithComparator Instance = new StartsWithComparator();
 

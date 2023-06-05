@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace System.Text
 {
-    public static partial class Ascii
+    partial public static class Ascii
     {
         /// <summary>
         /// Trims all leading and trailing ASCII whitespaces from the buffer.

@@ -52,7 +52,7 @@ namespace R2RDump
         [DllImport(_dll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void FinishDisasm(IntPtr Disasm);
 
-        public unsafe static int GetInstruction(
+        public static unsafe int GetInstruction(
             IntPtr Disasm,
             RuntimeFunction rtf,
             int imageOffset,

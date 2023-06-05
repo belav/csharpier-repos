@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
-    public sealed partial class MessageSecurityOverTcpElement : ServiceModelConfigurationElement
+    partial public sealed class MessageSecurityOverTcpElement : ServiceModelConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.ClientCredentialType,

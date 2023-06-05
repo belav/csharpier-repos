@@ -52,7 +52,7 @@ namespace System.Diagnostics
             SelfAffectingProcessMgmt = true
         )
     ]
-    public partial class Process : Component
+    partial public class Process : Component
     {
         //
         // FIELDS

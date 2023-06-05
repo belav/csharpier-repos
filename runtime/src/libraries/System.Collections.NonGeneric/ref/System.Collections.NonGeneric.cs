@@ -6,7 +6,7 @@
 
 namespace System.Collections
 {
-    public partial class CaseInsensitiveComparer : System.Collections.IComparer
+    partial public class CaseInsensitiveComparer : System.Collections.IComparer
     {
         public CaseInsensitiveComparer() { }
 
@@ -30,7 +30,7 @@ namespace System.Collections
     [System.ObsoleteAttribute(
         "CaseInsensitiveHashCodeProvider has been deprecated. Use StringComparer instead."
     )]
-    public partial class CaseInsensitiveHashCodeProvider : System.Collections.IHashCodeProvider
+    partial public class CaseInsensitiveHashCodeProvider : System.Collections.IHashCodeProvider
     {
         public CaseInsensitiveHashCodeProvider() { }
 
@@ -51,7 +51,7 @@ namespace System.Collections
         }
     }
 
-    public abstract partial class CollectionBase
+    partial public abstract class CollectionBase
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.Collections.IList
@@ -148,7 +148,7 @@ namespace System.Collections
         void System.Collections.IList.Remove(object? value) { }
     }
 
-    public abstract partial class DictionaryBase
+    partial public abstract class DictionaryBase
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable
@@ -244,7 +244,7 @@ namespace System.Collections
         }
     }
 
-    public partial class Queue
+    partial public class Queue
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.ICloneable
@@ -314,7 +314,7 @@ namespace System.Collections
         public virtual void TrimToSize() { }
     }
 
-    public abstract partial class ReadOnlyCollectionBase
+    partial public abstract class ReadOnlyCollectionBase
         : System.Collections.ICollection,
             System.Collections.IEnumerable
     {
@@ -345,7 +345,7 @@ namespace System.Collections
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
     }
 
-    public partial class SortedList
+    partial public class SortedList
         : System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable,
@@ -483,7 +483,7 @@ namespace System.Collections
         public virtual void TrimToSize() { }
     }
 
-    public partial class Stack
+    partial public class Stack
         : System.Collections.ICollection,
             System.Collections.IEnumerable,
             System.ICloneable
@@ -552,7 +552,7 @@ namespace System.Collections
 
 namespace System.Collections.Specialized
 {
-    public partial class CollectionsUtil
+    partial public class CollectionsUtil
     {
         public CollectionsUtil() { }
 

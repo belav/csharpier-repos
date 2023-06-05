@@ -6,10 +6,11 @@ using System.Reflection.PortableExecutable;
 
 namespace System.Reflection.TypeLoading.Ecma
 {
+    partial
     /// <summary>
     /// Base class for all Module objects created by a MetadataLoadContext and get its metadata from a PEReader.
     /// </summary>
-    internal sealed partial class EcmaModule
+    internal sealed class EcmaModule
     {
         internal unsafe InternalManifestResourceInfo GetInternalManifestResourceInfo(
             string resourceName

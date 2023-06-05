@@ -9,7 +9,7 @@ namespace System.Security.Policy
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial class PolicyException : System.SystemException
+    partial public class PolicyException : System.SystemException
     {
         public PolicyException() { }
 

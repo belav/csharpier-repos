@@ -6,9 +6,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(
             Libraries.Kernel32,
@@ -17,7 +17,7 @@ internal static partial class Interop
             StringMarshalling = StringMarshalling.Utf16
         )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool ReadDirectoryChangesW(
+        partial internal static unsafe bool ReadDirectoryChangesW(
             SafeFileHandle hDirectory,
             byte[] lpBuffer,
             uint nBufferLength,

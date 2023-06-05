@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
-    internal partial class CSharpTriviaFormatter : AbstractTriviaFormatter
+    partial internal class CSharpTriviaFormatter : AbstractTriviaFormatter
     {
         private bool _succeeded = true;
 

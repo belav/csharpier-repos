@@ -6,8 +6,9 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
+    partial
     // Copied from https://github.com/dotnet/roslyn/blob/fdd40b21d59c13e8fa6c718c7aaf9d50634da754/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/BasicBlockExtensions.cs
-    internal static partial class BasicBlockExtensions
+    internal static class BasicBlockExtensions
     {
         public static IEnumerable<IOperation> DescendantOperations(this BasicBlock basicBlock)
         {

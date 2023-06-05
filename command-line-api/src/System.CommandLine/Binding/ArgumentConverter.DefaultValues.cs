@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 
 namespace System.CommandLine.Binding;
 
-internal static partial class ArgumentConverter
+partial internal static class ArgumentConverter
 {
 #if NET6_0_OR_GREATER
     private static ConstructorInfo? _listCtor;

@@ -6,9 +6,10 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {
+    partial
     /// Part of Node factory that deals with nodes describing results of generic lookups.
     /// See: <see cref="GenericLookupResult"/>.
-    public partial class NodeFactory
+    public class NodeFactory
     {
         /// <summary>
         /// Helper class that provides a level of grouping for all the generic lookup result kinds.

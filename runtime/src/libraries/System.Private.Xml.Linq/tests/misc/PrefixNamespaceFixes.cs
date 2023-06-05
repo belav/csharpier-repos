@@ -9,11 +9,11 @@ using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class MiscFunctionalTests : TestModule
+    partial public class MiscFunctionalTests : TestModule
     {
-        public partial class MiscTests : XLinqTestCase
+        partial public class MiscTests : XLinqTestCase
         {
-            public partial class PrefixImprovements : XLinqTestCase
+            partial public class PrefixImprovements : XLinqTestCase
             {
                 void CompareStringThroughXmlReader(string xml1, string xml2)
                 {

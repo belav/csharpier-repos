@@ -20,7 +20,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Threading
 {
-    public static partial class Monitor
+    partial public static class Monitor
     {
         #region Object->Lock/Condition mapping
 

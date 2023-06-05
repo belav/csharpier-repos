@@ -7,4 +7,4 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Tests;
 // Parallelization disable for QUIC test to avoid test flakiness from msquic refusing connections
 // because of high resource usage. See https://github.com/dotnet/runtime/issues/55979
 [CollectionDefinition(nameof(NoParallelCollection), DisableParallelization = true)]
-public partial class NoParallelCollection { }
+partial public class NoParallelCollection { }

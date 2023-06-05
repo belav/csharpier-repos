@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion
 {
-    public abstract partial class CompletionService
+    partial public abstract class CompletionService
     {
         /// <summary>
         /// Gets the completions available at the caret position.

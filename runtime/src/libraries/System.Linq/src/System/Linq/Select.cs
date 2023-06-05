@@ -8,7 +8,7 @@ using static System.Linq.Utilities;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
         public static IEnumerable<TResult> Select<TSource, TResult>(
             this IEnumerable<TSource> source,
@@ -61,7 +61,9 @@ namespace System.Linq
         }
 
 #pragma warning disable IDE0060 // https://github.com/dotnet/roslyn-analyzers/issues/6177
-        static partial void CreateSelectIPartitionIterator<TResult, TSource>(
+        partial
+#pragma warning disable IDE0060 // https://github.com/dotnet/roslyn-analyzers/issues/6177
+        static void CreateSelectIPartitionIterator<TResult, TSource>(
             Func<TSource, TResult> selector,
             IPartition<TSource> partition,
             [NotNull] ref IEnumerable<TResult>? result
@@ -103,12 +105,13 @@ namespace System.Linq
             }
         }
 
+        partial
         /// <summary>
         /// An iterator that maps each item of an <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
         /// <typeparam name="TResult">The type of the mapped items.</typeparam>
-        private sealed partial class SelectEnumerableIterator<TSource, TResult> : Iterator<TResult>
+        private sealed class SelectEnumerableIterator<TSource, TResult> : Iterator<TResult>
         {
             private readonly IEnumerable<TSource> _source;
             private readonly Func<TSource, TResult> _selector;
@@ -177,7 +180,7 @@ namespace System.Linq
         /// <typeparam name="TSource">The type of the source array.</typeparam>
         /// <typeparam name="TResult">The type of the mapped items.</typeparam>
         [DebuggerDisplay("Count = {CountForDebugger}")]
-        private sealed partial class SelectArrayIterator<TSource, TResult> : Iterator<TResult>
+        partial private sealed class SelectArrayIterator<TSource, TResult> : Iterator<TResult>
         {
             private readonly TSource[] _source;
             private readonly Func<TSource, TResult> _selector;
@@ -224,7 +227,7 @@ namespace System.Linq
         /// <typeparam name="TSource">The type of the source list.</typeparam>
         /// <typeparam name="TResult">The type of the mapped items.</typeparam>
         [DebuggerDisplay("Count = {CountForDebugger}")]
-        private sealed partial class SelectListIterator<TSource, TResult> : Iterator<TResult>
+        partial private sealed class SelectListIterator<TSource, TResult> : Iterator<TResult>
         {
             private readonly List<TSource> _source;
             private readonly Func<TSource, TResult> _selector;
@@ -280,7 +283,7 @@ namespace System.Linq
         /// <typeparam name="TSource">The type of the source list.</typeparam>
         /// <typeparam name="TResult">The type of the mapped items.</typeparam>
         [DebuggerDisplay("Count = {CountForDebugger}")]
-        private sealed partial class SelectIListIterator<TSource, TResult> : Iterator<TResult>
+        partial private sealed class SelectIListIterator<TSource, TResult> : Iterator<TResult>
         {
             private readonly IList<TSource> _source;
             private readonly Func<TSource, TResult> _selector;

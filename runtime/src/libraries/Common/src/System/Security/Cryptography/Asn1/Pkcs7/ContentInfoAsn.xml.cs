@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace System.Security.Cryptography.Asn1.Pkcs7
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal partial struct ContentInfoAsn
+    partial internal struct ContentInfoAsn
     {
         internal string ContentType;
         internal ReadOnlyMemory<byte> Content;

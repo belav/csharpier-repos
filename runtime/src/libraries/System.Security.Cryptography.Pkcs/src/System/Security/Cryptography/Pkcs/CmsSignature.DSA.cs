@@ -10,9 +10,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs
 {
-    internal partial class CmsSignature
+    partial internal class CmsSignature
     {
-        static partial void PrepareRegistrationDsa(Dictionary<string, CmsSignature> lookup)
+        partial static void PrepareRegistrationDsa(Dictionary<string, CmsSignature> lookup)
         {
             if (Helpers.IsDSASupported)
             {

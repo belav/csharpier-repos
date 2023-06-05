@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    public partial class HttpClientHandler : HttpMessageHandler
+    partial public class HttpClientHandler : HttpMessageHandler
     {
         private readonly SocketsHttpHandler? _socketHandler;
         private readonly DiagnosticsHandler? _diagnosticsHandler;

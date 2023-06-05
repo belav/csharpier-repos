@@ -28,7 +28,7 @@ namespace System.Reflection.Emit
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(_EnumBuilder))]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class EnumBuilder : TypeInfo, _EnumBuilder
+    public sealed class EnumBuilder : TypeInfo, _EnumBuilder
     {
         public override bool IsAssignableFrom(System.Reflection.TypeInfo typeInfo)
         {

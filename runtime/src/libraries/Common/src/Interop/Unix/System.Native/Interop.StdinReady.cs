@@ -3,12 +3,12 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_StdinReady")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool StdinReady();
+        partial internal static bool StdinReady();
     }
 }

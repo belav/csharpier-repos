@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace System.Runtime.Serialization
 {
-    internal partial class XmlDataContract
+    partial internal class XmlDataContract
     {
         internal CreateXmlSerializableDelegate GenerateCreateXmlSerializableDelegate()
         {

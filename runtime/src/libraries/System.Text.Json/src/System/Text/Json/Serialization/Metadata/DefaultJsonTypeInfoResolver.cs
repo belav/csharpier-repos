@@ -9,13 +9,14 @@ using System.Threading;
 
 namespace System.Text.Json.Serialization.Metadata
 {
+    partial
     /// <summary>
     /// Defines the default, reflection-based JSON contract resolver used by System.Text.Json.
     /// </summary>
     /// <remarks>
     /// The contract resolver used by <see cref="JsonSerializerOptions.Default"/>.
     /// </remarks>
-    public partial class DefaultJsonTypeInfoResolver : IJsonTypeInfoResolver
+    public class DefaultJsonTypeInfoResolver : IJsonTypeInfoResolver
     {
         private bool _mutable;
 

@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
     using System.Globalization;
 
-    public sealed partial class ClaimTypeElement : ConfigurationElement
+    partial public sealed class ClaimTypeElement : ConfigurationElement
     {
         public ClaimTypeElement() { }
 

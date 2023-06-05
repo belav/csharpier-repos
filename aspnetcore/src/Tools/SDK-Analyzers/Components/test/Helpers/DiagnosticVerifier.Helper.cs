@@ -11,11 +11,12 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace TestHelper;
 
+partial
 /// <summary>
 /// Class for turning strings into documents and getting the diagnostics on them
 /// All methods are static
 /// </summary>
-public abstract partial class DiagnosticVerifier
+public abstract class DiagnosticVerifier
 {
     private static readonly MetadataReference CorlibReference = MetadataReference.CreateFromFile(
         typeof(object).Assembly.Location

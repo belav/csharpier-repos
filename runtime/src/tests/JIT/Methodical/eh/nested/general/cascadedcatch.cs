@@ -40,7 +40,7 @@ namespace hello_cascadedcatch_general_cs
 
         static int i;
 
-        static public void inTry()
+        public static void inTry()
         {
             Console.WriteLine("in Try");
             i++;
@@ -48,18 +48,18 @@ namespace hello_cascadedcatch_general_cs
                 throw new Exception();
         }
 
-        static public void inCatch()
+        public static void inCatch()
         {
             Console.WriteLine("in Catch");
         }
 
-        static public void inFinally()
+        public static void inFinally()
         {
             Console.WriteLine("in Finally");
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             string[] args = new string[] { };
 

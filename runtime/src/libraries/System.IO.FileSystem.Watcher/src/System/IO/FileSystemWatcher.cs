@@ -13,11 +13,12 @@ using System.Threading.Tasks;
 
 namespace System.IO
 {
+    partial
     /// <devdoc>
     ///    Listens to the system directory change notifications and
     ///    raises events when a directory or file within a directory changes.
     /// </devdoc>
-    public partial class FileSystemWatcher : Component, ISupportInitialize
+    public class FileSystemWatcher : Component, ISupportInitialize
     {
         // Filters collection
         private readonly NormalizedFilterCollection _filters = new NormalizedFilterCollection();

@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Diagnostics
 {
+    partial
     /// <summary>
     /// A DiagnosticListener is something that forwards on events written with DiagnosticSource.
     /// It is an IObservable (has Subscribe method), and it also has a Subscribe overloads that
@@ -26,7 +27,7 @@ namespace System.Diagnostics
     /// https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md
     /// for instructions on its use.
     /// </summary>
-    public partial class DiagnosticListener
+    public class DiagnosticListener
         : DiagnosticSource,
             IObservable<KeyValuePair<string, object?>>,
             IDisposable

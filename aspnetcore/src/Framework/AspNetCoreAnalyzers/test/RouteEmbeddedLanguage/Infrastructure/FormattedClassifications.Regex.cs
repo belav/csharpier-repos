@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Classification;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification;
 
-public static partial class FormattedClassifications
+partial public static class FormattedClassifications
 {
     public static class Regex
     {

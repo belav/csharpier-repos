@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class AbstractFlowPass<TLocalState, TLocalFunctionState>
+    partial internal class AbstractFlowPass<TLocalState, TLocalFunctionState>
     {
         internal abstract class AbstractLocalFunctionState
         {

@@ -30,7 +30,7 @@
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class EnumBuilder : System.Reflection.TypeInfo
+    partial public sealed class EnumBuilder : System.Reflection.TypeInfo
     {
         internal EnumBuilder()
         {

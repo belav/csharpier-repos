@@ -83,7 +83,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
@@ -103,7 +109,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="points">Array of points coordinates.</param>
         /// <param name="pointIndex">Index of point to draw.</param>
         /// <param name="tension">Line tension</param>
-        override protected void DrawLine(
+        protected
+        #endregion
+
+        #region Line drawing and selecting methods
+
+        /// <summary>
+        /// Draw chart line using horisontal and vertical lines.
+        /// </summary>
+        /// <param name="graph">Graphics object.</param>
+        /// <param name="common">The Common elements object</param>
+        /// <param name="point">Point to draw the line for.</param>
+        /// <param name="series">Point series.</param>
+        /// <param name="points">Array of points coordinates.</param>
+        /// <param name="pointIndex">Index of point to draw.</param>
+        /// <param name="tension">Line tension</param>
+        override void DrawLine(
             ChartGraphics graph,
             CommonElements common,
             DataPoint point,

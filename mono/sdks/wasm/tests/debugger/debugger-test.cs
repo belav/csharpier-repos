@@ -3,7 +3,7 @@
 
 using System;
 
-public partial class Math
+partial public class Math
 { //Only append content to this class as the test suite depends on line info
     public static int IntAdd(int a, int b)
     {

@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.DesignerAttribute
 {
-    internal partial interface IDesignerAttributeDiscoveryService : IWorkspaceService
+    partial internal interface IDesignerAttributeDiscoveryService : IWorkspaceService
     {
         public interface ICallback
         {

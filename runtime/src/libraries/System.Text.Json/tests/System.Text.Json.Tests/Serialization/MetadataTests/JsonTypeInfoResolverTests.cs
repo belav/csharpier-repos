@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class JsonTypeInfoResolverTests
+    partial public static class JsonTypeInfoResolverTests
     {
         [Fact]
         public static void GetTypeInfoNullArguments()

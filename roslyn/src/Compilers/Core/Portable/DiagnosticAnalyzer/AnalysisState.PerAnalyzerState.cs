@@ -12,10 +12,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
+    partial
     /// <summary>
     /// Stores the current partial analysis state for an analyzer.
     /// </summary>
-    internal partial class AnalysisState
+    internal class AnalysisState
     {
         private class PerAnalyzerState
         {

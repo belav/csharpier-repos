@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Gdi32
+    partial internal static class Gdi32
     {
         [LibraryImport(Libraries.Gdi32, StringMarshalling = StringMarshalling.Utf16)]
-        public static partial IntPtr CreateDCW(
+        partial public static IntPtr CreateDCW(
             string pwszDriver,
             string pwszDevice,
             string? pszPort,

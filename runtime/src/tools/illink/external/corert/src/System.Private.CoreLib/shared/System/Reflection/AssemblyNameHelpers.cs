@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace System.Reflection
 {
-    public static partial class AssemblyNameHelpers
+    partial public static class AssemblyNameHelpers
     {
         //
         // These helpers convert between the combined flags+contentType+processorArchitecture value and the separated parts.

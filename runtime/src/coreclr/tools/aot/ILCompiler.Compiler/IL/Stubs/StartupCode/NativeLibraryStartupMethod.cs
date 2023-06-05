@@ -7,11 +7,12 @@ using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs.StartupCode
 {
+    partial
     /// <summary>
     /// Startup code that does initialization, Main invocation
     /// and shutdown of the runtime.
     /// </summary>
-    public sealed partial class NativeLibraryStartupMethod : ILStubMethod
+    public sealed class NativeLibraryStartupMethod : ILStubMethod
     {
         private TypeDesc _owningType;
         private MethodSignature _signature;

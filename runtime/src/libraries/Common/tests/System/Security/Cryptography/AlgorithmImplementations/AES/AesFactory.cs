@@ -10,7 +10,7 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         Aes Create();
     }
 
-    public static partial class AesFactory
+    partial public static class AesFactory
     {
         public static Aes Create()
         {

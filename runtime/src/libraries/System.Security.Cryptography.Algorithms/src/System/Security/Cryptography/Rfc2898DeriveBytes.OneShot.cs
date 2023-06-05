@@ -7,7 +7,7 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    public partial class Rfc2898DeriveBytes
+    partial public class Rfc2898DeriveBytes
     {
         // Throwing UTF8 on invalid input.
         private static readonly Encoding s_throwingUtf8Encoding = new UTF8Encoding(false, true);

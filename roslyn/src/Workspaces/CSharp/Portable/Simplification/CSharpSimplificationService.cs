@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     [ExportLanguageService(typeof(ISimplificationService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpSimplificationService
+    partial internal class CSharpSimplificationService
         : AbstractSimplificationService<ExpressionSyntax, StatementSyntax, CrefSyntax>
     {
         // 1. the cast simplifier should run earlier then everything else to minimize the type expressions

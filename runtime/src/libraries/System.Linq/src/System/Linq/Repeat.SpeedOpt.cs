@@ -7,9 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Linq
 {
-    public static partial class Enumerable
+    partial public static class Enumerable
     {
-        private sealed partial class RepeatIterator<TResult> : IPartition<TResult>
+        partial private sealed class RepeatIterator<TResult> : IPartition<TResult>
         {
             public override IEnumerable<TResult2> Select<TResult2>(
                 Func<TResult, TResult2> selector

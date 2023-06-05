@@ -47,7 +47,7 @@ using Mono.Linker.Dataflow;
 
 namespace Mono.Linker.Steps
 {
-    public partial class MarkStep : IStep
+    partial public class MarkStep : IStep
     {
         LinkContext? _context;
         protected LinkContext Context

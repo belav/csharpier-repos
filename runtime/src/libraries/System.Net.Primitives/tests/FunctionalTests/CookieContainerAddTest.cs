@@ -8,7 +8,7 @@ using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
 {
-    public partial class CookieContainerTest
+    partial public class CookieContainerTest
     {
         [Fact]
         public static void AddCookieCollection_Null_Throws()

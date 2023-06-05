@@ -9,8 +9,9 @@ using System.IdentityModel.Tokens;
 
 namespace System.IdentityModel.Configuration
 {
+    partial
 #pragma warning disable 1591
-    public sealed partial class IdentityConfigurationElement : ConfigurationElement
+    public sealed class IdentityConfigurationElement : ConfigurationElement
     {
         [ConfigurationProperty(
             ConfigurationStrings.Name,

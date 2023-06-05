@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
+partial
 // **Component descriptor protocol**
 // MVC serializes one or more components as comments in HTML.
 // Each comment is in the form <!-- Blazor:<<Json>>--> for example { "type": "server", "sequence": 0, descriptor: "base64(dataprotected(<<ServerComponent>>))" }
@@ -53,7 +54,7 @@ namespace Microsoft.AspNetCore.Components.Server;
 //  * If a marker has the right sequence but the invocation ID is different we will fail at that point. We know for sure that the
 //    component wasn't render as part of the same response.
 //  * If a marker can't be unprotected we will fail early. We know that the marker was tampered with and can't be trusted.
-internal sealed partial class ServerComponentDeserializer : IServerComponentDeserializer
+internal sealed class ServerComponentDeserializer : IServerComponentDeserializer
 {
     private readonly IDataProtector _dataProtector;
     private readonly ILogger<ServerComponentDeserializer> _logger;
@@ -229,7 +230,7 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
         return (componentDescriptor, serverComponent);
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             1,
@@ -237,7 +238,7 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             "Failed to deserialize the component descriptor.",
             EventName = "FailedToDeserializeDescriptor"
         )]
-        public static partial void FailedToDeserializeDescriptor(
+        partial public static void FailedToDeserializeDescriptor(
             ILogger<ServerComponentDeserializer> logger,
             Exception e
         );
@@ -248,7 +249,7 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             "Failed to find component '{ComponentName}' in assembly '{Assembly}'.",
             EventName = "FailedToFindComponent"
         )]
-        public static partial void FailedToFindComponent(
+        partial public static void FailedToFindComponent(
             ILogger<ServerComponentDeserializer> logger,
             string componentName,
             string assembly
@@ -260,7 +261,7 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             "Failed to unprotect the component descriptor.",
             EventName = "FailedToUnprotectDescriptor"
         )]
-        public static partial void FailedToUnprotectDescriptor(
+        partial public static void FailedToUnprotectDescriptor(
             ILogger<ServerComponentDeserializer> logger,
             Exception e
         );
@@ -271,7 +272,7 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             "Invalid component marker type '{MarkerType}'.",
             EventName = "InvalidMarkerType"
         )]
-        public static partial void InvalidMarkerType(
+        partial public static void InvalidMarkerType(
             ILogger<ServerComponentDeserializer> logger,
             string markerType
         );
@@ -282,7 +283,7 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             "The component marker is missing the descriptor.",
             EventName = "MissingMarkerDescriptor"
         )]
-        public static partial void MissingMarkerDescriptor(
+        partial public static void MissingMarkerDescriptor(
             ILogger<ServerComponentDeserializer> logger
         );
 
@@ -292,7 +293,7 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             "The descriptor invocationId is '{invocationId}' and got a descriptor with invocationId '{currentInvocationId}'.",
             EventName = "MismatchedInvocationId"
         )]
-        public static partial void MismatchedInvocationId(
+        partial public static void MismatchedInvocationId(
             ILogger<ServerComponentDeserializer> logger,
             string invocationId,
             string currentInvocationId
@@ -304,7 +305,7 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             "The last descriptor sequence was '{lastSequence}' and got a descriptor with sequence '{sequence}'.",
             EventName = "OutOfSequenceDescriptor"
         )]
-        public static partial void OutOfSequenceDescriptor(
+        partial public static void OutOfSequenceDescriptor(
             ILogger<ServerComponentDeserializer> logger,
             int lastSequence,
             int sequence
@@ -316,7 +317,7 @@ internal sealed partial class ServerComponentDeserializer : IServerComponentDese
             "The descriptor sequence '{sequence}' is an invalid start sequence.",
             EventName = "DescriptorSequenceMustStartAtZero"
         )]
-        public static partial void DescriptorSequenceMustStartAtZero(
+        partial public static void DescriptorSequenceMustStartAtZero(
             ILogger<ServerComponentDeserializer> logger,
             int sequence
         );

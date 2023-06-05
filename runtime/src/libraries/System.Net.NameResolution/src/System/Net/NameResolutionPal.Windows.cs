@@ -12,7 +12,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Net
 {
-    internal static partial class NameResolutionPal
+    partial internal static class NameResolutionPal
     {
         private static volatile int s_getAddrInfoExSupported;
 

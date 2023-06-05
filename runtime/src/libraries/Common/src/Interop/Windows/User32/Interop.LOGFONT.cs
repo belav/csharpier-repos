@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public unsafe struct LOGFONT
@@ -26,7 +26,7 @@ internal static partial class Interop
             public byte lfClipPrecision;
             public byte lfQuality;
             public byte lfPitchAndFamily;
-            private fixed char _lfFaceName[LF_FACESIZE];
+            fixed private char _lfFaceName[LF_FACESIZE];
             public Span<char> lfFaceName =>
                 MemoryMarshal.CreateSpan(ref _lfFaceName[0], LF_FACESIZE);
 

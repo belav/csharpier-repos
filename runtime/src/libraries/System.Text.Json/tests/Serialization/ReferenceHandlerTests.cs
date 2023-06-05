@@ -12,7 +12,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public static partial class ReferenceHandlerTests
+    partial public static class ReferenceHandlerTests
     {
         [Fact]
         public static void ThrowByDefaultOnLoop()

@@ -7,7 +7,7 @@ namespace System.Activities.Core.Presentation.Themes
     using System.Runtime;
     using System.Activities.Presentation.View;
 
-    sealed partial class EditorCategoryTemplateDictionary
+    partial sealed class EditorCategoryTemplateDictionary
     {
         static EditorCategoryTemplateDictionary instance;
 

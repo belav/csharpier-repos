@@ -5,9 +5,9 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [Flags]
         internal enum HandleFlags : uint
@@ -19,7 +19,7 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetHandleInformation(
+        partial internal static bool SetHandleInformation(
             SafeHandle hObject,
             HandleFlags dwMask,
             HandleFlags dwFlags

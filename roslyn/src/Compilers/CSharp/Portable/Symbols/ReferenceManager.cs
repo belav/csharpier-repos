@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     using MetadataOrDiagnostic = System.Object;
 
-    public partial class CSharpCompilation
+    partial public class CSharpCompilation
     {
         /// <summary>
         /// ReferenceManager encapsulates functionality to create an underlying SourceAssemblySymbol

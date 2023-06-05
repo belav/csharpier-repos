@@ -5,12 +5,13 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
+    partial
     //
     // These structures define the layout of CNG key blobs passed to NCryptImportKey
     //
-    internal static partial class BCrypt
+    internal static class BCrypt
     {
         /// <summary>
         ///     Append "value" to the data already in blob.
@@ -156,9 +157,9 @@ internal static partial class Interop
         {
             internal KeyBlobMagicNumber Magic;
             internal int cbKey;
-            internal fixed byte Count[4];
-            internal fixed byte Seed[20];
-            internal fixed byte q[20];
+            fixed internal byte Count[4];
+            fixed internal byte Seed[20];
+            fixed internal byte q[20];
         }
 
         /// <summary>
@@ -173,7 +174,7 @@ internal static partial class Interop
             internal DSAFIPSVERSION_ENUM standardVersion;
             internal int cbSeedLength;
             internal int cbGroupSize;
-            internal fixed byte Count[4];
+            fixed internal byte Count[4];
         }
 
         public enum HASHALGORITHM_ENUM

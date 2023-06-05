@@ -57,7 +57,7 @@ using TextSpan = Microsoft.CodeAnalysis.Text.TextSpan;
 
 namespace Microsoft.VisualStudio.Extensibility.Testing
 {
-    internal partial class EditorInProcess
+    partial internal class EditorInProcess
     {
         public async Task WaitForEditorOperationsAsync(CancellationToken cancellationToken)
         {

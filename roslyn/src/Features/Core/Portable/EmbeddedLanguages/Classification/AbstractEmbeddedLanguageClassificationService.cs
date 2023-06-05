@@ -82,7 +82,7 @@ namespace Microsoft.CodeAnalysis.Classification
             worker.VisitTokens(root);
         }
 
-        private readonly ref struct Worker
+        ref private readonly struct Worker
         {
             private readonly AbstractEmbeddedLanguageClassificationService _owner;
             private readonly Project _project;

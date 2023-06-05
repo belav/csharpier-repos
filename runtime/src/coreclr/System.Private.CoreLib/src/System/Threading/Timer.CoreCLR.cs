@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    internal sealed partial class TimerQueue
+    partial internal sealed class TimerQueue
     {
         #region interface to native per-AppDomain timer
 
@@ -58,18 +58,18 @@ namespace System.Threading
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AppDomainTimer_Create")]
-        private static partial AppDomainTimerSafeHandle CreateAppDomainTimer(uint dueTime, int id);
+        partial private static AppDomainTimerSafeHandle CreateAppDomainTimer(uint dueTime, int id);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AppDomainTimer_Change")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool ChangeAppDomainTimer(
+        partial private static bool ChangeAppDomainTimer(
             AppDomainTimerSafeHandle handle,
             uint dueTime
         );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AppDomainTimer_Delete")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool DeleteAppDomainTimer(IntPtr handle);
+        partial private static bool DeleteAppDomainTimer(IntPtr handle);
 
         #endregion
     }

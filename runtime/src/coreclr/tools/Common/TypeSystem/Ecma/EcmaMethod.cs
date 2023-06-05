@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace Internal.TypeSystem.Ecma
 {
-    public sealed partial class EcmaMethod : MethodDesc, EcmaModule.IEntityHandleObject
+    partial public sealed class EcmaMethod : MethodDesc, EcmaModule.IEntityHandleObject
     {
         private static class MethodFlags
         {

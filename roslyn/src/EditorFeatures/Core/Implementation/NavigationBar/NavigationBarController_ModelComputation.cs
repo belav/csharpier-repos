@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
 {
-    internal partial class NavigationBarController
+    partial internal class NavigationBarController
     {
         /// <summary>
         /// Starts a new task to compute the model based on the current text.

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Sample
 {
-    public partial class Test
+    partial public class Test
     {
         public static int Main(string[] args)
         {
@@ -19,10 +19,10 @@ namespace Sample
         }
 
         [JSImport("globalThis.console.log")]
-        public static partial void ConsoleLog(string status);
+        partial public static void ConsoleLog(string status);
 
         [JSImport("Sample.Test.updateProgress", "main.js")]
-        static partial void updateProgress(string status);
+        partial static void updateProgress(string status);
 
         internal static void UpdateProgress(string status) => updateProgress(status);
 

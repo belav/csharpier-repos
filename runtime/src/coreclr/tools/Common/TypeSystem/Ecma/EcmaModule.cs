@@ -12,7 +12,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Ecma
 {
-    public partial class EcmaModule : ModuleDesc
+    partial public class EcmaModule : ModuleDesc
     {
         private PEReader _peReader;
         protected MetadataReader _metadataReader;

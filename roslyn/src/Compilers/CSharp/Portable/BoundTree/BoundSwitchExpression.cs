@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundSwitchExpression
+    partial internal class BoundSwitchExpression
     {
         public BoundDecisionDag GetDecisionDagForLowering(
             CSharpCompilation compilation,

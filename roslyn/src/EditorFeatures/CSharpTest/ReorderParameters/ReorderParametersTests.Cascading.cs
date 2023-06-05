@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReorderParameters
 {
-    public partial class ReorderParametersTests
+    partial public class ReorderParametersTests
     {
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParameters_Cascade_ToImplementedMethod()

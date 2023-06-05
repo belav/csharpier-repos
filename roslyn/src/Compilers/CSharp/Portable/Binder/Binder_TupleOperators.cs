@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class Binder
+    partial internal class Binder
     {
         /// <summary>
         /// If the left and right are tuples of matching cardinality, we'll try to bind the operator element-wise.

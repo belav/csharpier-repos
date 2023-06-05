@@ -5,6 +5,7 @@ using System.Buffers.Binary;
 
 namespace System.IO.Hashing
 {
+    partial
     /// <summary>
     ///   Provides an implementation of the CRC-32 algorithm, as used in
     ///   ITU-T V.42 and IEEE 802.3.
@@ -24,7 +25,7 @@ namespace System.IO.Hashing
     ///     compatible with the cyclic redundancy check described in ITU-T I.363.5.
     ///   </para>
     /// </remarks>
-    public sealed partial class Crc32 : NonCryptographicHashAlgorithm
+    public sealed class Crc32 : NonCryptographicHashAlgorithm
     {
         private const uint InitialState = 0xFFFF_FFFFu;
         private const int Size = sizeof(uint);

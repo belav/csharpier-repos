@@ -32,6 +32,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// The compilation object is an immutable representation of a single invocation of the
     /// compiler. Although immutable, a compilation is also on-demand, and will realize and cache
@@ -40,7 +41,7 @@ namespace Microsoft.CodeAnalysis
     /// new compilation from scratch, as the new compilation can reuse information from the old
     /// compilation.
     /// </summary>
-    public abstract partial class Compilation
+    public abstract class Compilation
     {
         /// <summary>
         /// Returns true if this is a case sensitive compilation, false otherwise.  Case sensitivity

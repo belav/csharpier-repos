@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
-public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
+partial public class RouteHandlerAnalyzer : DiagnosticAnalyzer
 {
     private static void DisallowReturningActionResultFromMapMethods(
         in OperationAnalysisContext context,

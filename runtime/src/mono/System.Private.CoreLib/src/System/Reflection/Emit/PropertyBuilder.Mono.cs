@@ -41,7 +41,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Reflection.Emit
 {
     [StructLayout(LayoutKind.Sequential)]
-    public sealed partial class PropertyBuilder : PropertyInfo
+    partial public sealed class PropertyBuilder : PropertyInfo
     {
         #region Sync with MonoReflectionPropertyBuilder in object-internals.h
         private PropertyAttributes attrs;

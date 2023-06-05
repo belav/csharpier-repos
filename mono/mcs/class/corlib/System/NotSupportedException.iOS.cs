@@ -1,6 +1,6 @@
 namespace System
 {
-    public partial class NotSupportedException
+    partial public class NotSupportedException
     {
         // Avoid having the linker generate this method for every linked build
         // It also fix #30075 where --linkskip=mscorlib means that method could not be added

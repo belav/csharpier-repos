@@ -57,7 +57,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         public JsonTypeInfo<PolymorphicClass> PolymorphicClass { get; }
     }
 
-    internal partial class JsonContext : JsonSerializerContext
+    partial internal class JsonContext : JsonSerializerContext
     {
         private static JsonSerializerOptions s_defaultOptions { get; } =
             new JsonSerializerOptions()
@@ -119,32 +119,32 @@ namespace System.Text.Json.SourceGeneration.Tests
     [JsonSerializable(typeof(Dictionary<string, string>))]
     [JsonSerializable(typeof(Dictionary<int, string>))]
     [JsonSerializable(typeof(Dictionary<string, JsonMessage>))]
-    internal partial class DictionaryTypeContext : JsonSerializerContext { }
+    partial internal class DictionaryTypeContext : JsonSerializerContext { }
 
     [JsonSerializable(typeof(JsonMessage))]
     [JsonSerializable(typeof(PublicClassWithDifferentAccessibilitiesProperties))]
     [JsonSerializable(typeof(JsonConverter))]
     [JsonSerializable(typeof(JsonSerializerOptions))]
-    public partial class PublicContext : JsonSerializerContext { }
+    partial public class PublicContext : JsonSerializerContext { }
 
     [JsonSerializable(typeof(JsonMessage))]
-    public partial class GenericContext<T> : JsonSerializerContext { }
+    partial public class GenericContext<T> : JsonSerializerContext { }
 
-    public partial class ContextGenericContainer<T>
+    partial public class ContextGenericContainer<T>
     {
         [JsonSerializable(typeof(JsonMessage))]
-        public partial class NestedInGenericContainerContext : JsonSerializerContext { }
+        partial public class NestedInGenericContainerContext : JsonSerializerContext { }
 
         [JsonSerializable(typeof(JsonMessage))]
-        public partial class NestedGenericInGenericContainerContext<T1> : JsonSerializerContext { }
+        partial public class NestedGenericInGenericContainerContext<T1> : JsonSerializerContext { }
 
-        public partial class NestedGenericContainer<T1>
+        partial public class NestedGenericContainer<T1>
         {
             [JsonSerializable(typeof(JsonMessage))]
-            public partial class NestedInNestedGenericContainerContext : JsonSerializerContext { }
+            partial public class NestedInNestedGenericContainerContext : JsonSerializerContext { }
 
             [JsonSerializable(typeof(JsonMessage))]
-            public partial class NestedGenericInNestedGenericContainerContext<T2>
+            partial public class NestedGenericInNestedGenericContainerContext<T2>
                 : JsonSerializerContext { }
         }
     }
@@ -170,5 +170,5 @@ namespace System.Text.Json.SourceGeneration.Tests
     [JsonSerializable(
         typeof(MyContainingGenericClass<MyContainingGenericClass<int>.MyNestedGenericClass<int>.MyNestedGenericNestedGenericClass<int>>.MyNestedGenericClass<int>.MyNestedGenericNestedGenericClass<int>)
     )]
-    internal partial class NestedGenericTypesContext : JsonSerializerContext { }
+    partial internal class NestedGenericTypesContext : JsonSerializerContext { }
 }

@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal partial class SolutionState
+    partial internal class SolutionState
     {
-        private partial class CompilationTracker
+        partial private class CompilationTracker
         {
             /// <summary>
             /// When we're working with compilations, we often have two: a compilation that does not contain generated files

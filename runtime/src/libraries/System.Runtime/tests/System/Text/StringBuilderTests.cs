@@ -11,7 +11,7 @@ using Xunit;
 
 namespace System.Text.Tests
 {
-    public partial class StringBuilderTests
+    partial public class StringBuilderTests
     {
         private static readonly string s_chunkSplitSource = new string('a', 30);
         private static readonly string s_noCapacityParamName = "valueCount";

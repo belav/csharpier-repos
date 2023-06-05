@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
-    public partial class RebuildCommandLineTests
+    partial public class RebuildCommandLineTests
     {
         private sealed class CSharpRebuildCompiler : CSharpCompiler
         {

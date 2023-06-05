@@ -3,9 +3,9 @@
 
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class User32
+    partial internal static class User32
     {
         internal const int MB_OK = 0;
         internal const int MB_ICONHAND = 0x10;
@@ -15,6 +15,6 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.User32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool MessageBeep(int type);
+        partial internal static bool MessageBeep(int type);
     }
 }

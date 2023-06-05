@@ -12,9 +12,9 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    internal static partial class RSAImplementation
+    partial internal static class RSAImplementation
     {
-        public sealed partial class RSAAndroid : RSA, IRuntimeAlgorithm
+        partial public sealed class RSAAndroid : RSA, IRuntimeAlgorithm
         {
             private const int BitsPerByte = 8;
 

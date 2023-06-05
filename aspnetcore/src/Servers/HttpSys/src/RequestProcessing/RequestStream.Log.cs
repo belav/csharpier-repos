@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal partial class RequestStream
+partial internal class RequestStream
 {
-    private static partial class Log
+    partial private static class Log
     {
         [LoggerMessage(
             LoggerEventIds.ErrorWhenReadAsync,
@@ -15,7 +15,7 @@ internal partial class RequestStream
             "ReadAsync",
             EventName = "ErrorWhenReadAsync"
         )]
-        public static partial void ErrorWhenReadAsync(ILogger logger, Exception exception);
+        partial public static void ErrorWhenReadAsync(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.ErrorWhenReadBegun,
@@ -23,7 +23,7 @@ internal partial class RequestStream
             "BeginRead",
             EventName = "ErrorWhenReadBegun"
         )]
-        public static partial void ErrorWhenReadBegun(ILogger logger, Exception exception);
+        partial public static void ErrorWhenReadBegun(ILogger logger, Exception exception);
 
         [LoggerMessage(
             LoggerEventIds.ErrorWhileRead,
@@ -31,6 +31,6 @@ internal partial class RequestStream
             "Read",
             EventName = "ErrorWhileRead"
         )]
-        public static partial void ErrorWhileRead(ILogger logger, Exception exception);
+        partial public static void ErrorWhileRead(ILogger logger, Exception exception);
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.WebSockets
 {
-    public sealed partial class ClientWebSocket : WebSocket
+    partial public sealed class ClientWebSocket : WebSocket
     {
         /// <summary>This is really an InternalState value, but Interlocked doesn't support operations on values of enum types.</summary>
         private int _state;

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal static partial class BinHexEncoder
+    partial internal static class BinHexEncoder
     {
         internal static Task EncodeAsync(byte[] buffer, int index, int count, XmlWriter writer)
         {

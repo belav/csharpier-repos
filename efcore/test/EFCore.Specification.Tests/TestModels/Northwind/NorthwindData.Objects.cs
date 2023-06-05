@@ -3,7 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
-public partial class NorthwindData
+partial public class NorthwindData
 {
     #region Customers
 

@@ -14,10 +14,11 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
+partial
 /// <summary>
 /// The default implementation of <see cref="OutputFormatterSelector"/>.
 /// </summary>
-public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
+public class DefaultOutputFormatterSelector : OutputFormatterSelector
 {
     private static readonly Comparison<MediaTypeSegmentWithQuality> _sortFunction = (left, right) =>
     {
@@ -324,7 +325,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void FormatterSelected(
             ILogger logger,
@@ -349,7 +350,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
             EventName = "FormatterSelected",
             SkipEnabledCheck = true
         )]
-        public static partial void FormatterSelected(
+        partial public static void FormatterSelected(
             ILogger logger,
             IOutputFormatter outputFormatter,
             string? contentType
@@ -361,7 +362,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
             "No information found on request to perform content negotiation.",
             EventName = "NoAcceptForNegotiation"
         )]
-        public static partial void NoAcceptForNegotiation(ILogger logger);
+        partial public static void NoAcceptForNegotiation(ILogger logger);
 
         [LoggerMessage(
             5,
@@ -369,7 +370,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
             "Could not find an output formatter based on content negotiation. Accepted types were ({AcceptTypes})",
             EventName = "NoFormatterFromNegotiation"
         )]
-        public static partial void NoFormatterFromNegotiation(
+        partial public static void NoFormatterFromNegotiation(
             ILogger logger,
             IList<MediaTypeSegmentWithQuality> acceptTypes
         );
@@ -380,7 +381,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
             "Attempting to select an output formatter based on Accept header '{AcceptHeader}'.",
             EventName = "SelectingOutputFormatterUsingAcceptHeader"
         )]
-        public static partial void SelectingOutputFormatterUsingAcceptHeader(
+        partial public static void SelectingOutputFormatterUsingAcceptHeader(
             ILogger logger,
             IEnumerable<MediaTypeSegmentWithQuality> acceptHeader
         );
@@ -391,7 +392,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
             "Attempting to select an output formatter based on Accept header '{AcceptHeader}' and explicitly specified content types '{ExplicitContentTypes}'. The content types in the accept header must be a subset of the explicitly set content types.",
             EventName = "SelectingOutputFormatterUsingAcceptHeaderAndExplicitContentTypes"
         )]
-        public static partial void SelectingOutputFormatterUsingAcceptHeaderAndExplicitContentTypes(
+        partial public static void SelectingOutputFormatterUsingAcceptHeaderAndExplicitContentTypes(
             ILogger logger,
             IEnumerable<MediaTypeSegmentWithQuality> acceptHeader,
             MediaTypeCollection explicitContentTypes
@@ -403,7 +404,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
             "Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.",
             EventName = "SelectingOutputFormatterWithoutUsingContentTypes"
         )]
-        public static partial void SelectingOutputFormatterWithoutUsingContentTypes(ILogger logger);
+        partial public static void SelectingOutputFormatterWithoutUsingContentTypes(ILogger logger);
 
         [LoggerMessage(
             9,
@@ -411,7 +412,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
             "Attempting to select the first output formatter in the output formatters list which supports a content type from the explicitly specified content types '{ExplicitContentTypes}'.",
             EventName = "SelectingOutputFormatterUsingContentTypes"
         )]
-        public static partial void SelectingOutputFormatterUsingContentTypes(
+        partial public static void SelectingOutputFormatterUsingContentTypes(
             ILogger logger,
             MediaTypeCollection explicitContentTypes
         );
@@ -422,7 +423,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
             "Attempting to select the first formatter in the output formatters list which can write the result.",
             EventName = "SelectingFirstCanWriteFormatter"
         )]
-        public static partial void SelectFirstCanWriteFormatter(ILogger logger);
+        partial public static void SelectFirstCanWriteFormatter(ILogger logger);
 
         [LoggerMessage(
             11,
@@ -430,7 +431,7 @@ public partial class DefaultOutputFormatterSelector : OutputFormatterSelector
             "List of registered output formatters, in the following order: {OutputFormatters}",
             EventName = "RegisteredOutputFormatters"
         )]
-        public static partial void RegisteredOutputFormatters(
+        partial public static void RegisteredOutputFormatters(
             ILogger logger,
             IEnumerable<IOutputFormatter> outputFormatters
         );

@@ -30,7 +30,7 @@
 
 namespace System.Reflection.Emit
 {
-    public sealed partial class FieldBuilder : System.Reflection.FieldInfo
+    partial public sealed class FieldBuilder : System.Reflection.FieldInfo
     {
         internal FieldBuilder()
         {

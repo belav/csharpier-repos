@@ -13,7 +13,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
-    public sealed partial class NonDualMessageSecurityOverHttpElement
+    partial public sealed class NonDualMessageSecurityOverHttpElement
         : MessageSecurityOverHttpElement
     {
         [ConfigurationProperty(

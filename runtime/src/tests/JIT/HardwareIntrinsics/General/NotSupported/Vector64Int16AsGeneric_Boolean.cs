@@ -15,7 +15,7 @@ using System.Runtime.Intrinsics;
 
 namespace JIT.HardwareIntrinsics.General
 {
-    public static partial class Program
+    partial public static class Program
     {
         private static void Vector64Int16AsGeneric_Boolean()
         {

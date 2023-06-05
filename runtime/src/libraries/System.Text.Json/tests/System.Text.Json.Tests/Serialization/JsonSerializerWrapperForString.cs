@@ -9,10 +9,11 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
+    partial
     /// <summary>
     /// Base class for wrapping string-based JsonSerializer methods which allows tests to run under different configurations.
     /// </summary>
-    public abstract partial class JsonSerializerWrapperForString
+    public abstract class JsonSerializerWrapperForString
     {
         private static readonly JsonSerializerOptions _optionsWithSmallBuffer =
             new JsonSerializerOptions { DefaultBufferSize = 1 };

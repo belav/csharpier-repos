@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace System.Runtime.Serialization
 {
-    internal static partial class DiagnosticUtility
+    partial internal static class DiagnosticUtility
     {
         internal static bool ShouldTraceError = true;
         internal static readonly bool ShouldTraceWarning = false;

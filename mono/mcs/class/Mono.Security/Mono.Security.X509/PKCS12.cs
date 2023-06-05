@@ -131,7 +131,7 @@ namespace Mono.Security.X509
                 MAC
             }
 
-            static private byte[] keyDiversifier =
+            private static byte[] keyDiversifier =
             {
                 1,
                 1,
@@ -198,7 +198,7 @@ namespace Mono.Security.X509
                 1,
                 1
             };
-            static private byte[] ivDiversifier =
+            private static byte[] ivDiversifier =
             {
                 2,
                 2,
@@ -265,7 +265,7 @@ namespace Mono.Security.X509
                 2,
                 2
             };
-            static private byte[] macDiversifier =
+            private static byte[] macDiversifier =
             {
                 3,
                 3,
@@ -2464,15 +2464,16 @@ namespace Mono.Security.X509
 
         public const int CryptoApiPasswordLimit = 32;
 
-        static private int password_max_length = Int32.MaxValue;
+        private static int password_max_length = Int32.MaxValue;
 
+        public
         // static properties
 
         // MS CryptoAPI limits the password to a maximum of 31 characters
         // other implementations, like OpenSSL, have no such limitation.
         // Setting a maximum value will truncate the password length to
         // ensure compatibility with MS's PFXImportCertStore API.
-        static public int MaximumPasswordLength
+        static int MaximumPasswordLength
         {
             get { return password_max_length; }
             set
@@ -2491,7 +2492,10 @@ namespace Mono.Security.X509
 
         // static methods
 
-        static private byte[] LoadFile(string filename)
+        private
+        // static methods
+
+        static byte[] LoadFile(string filename)
         {
             byte[] data = null;
             using (FileStream fs = File.OpenRead(filename))
@@ -2503,7 +2507,7 @@ namespace Mono.Security.X509
             return data;
         }
 
-        static public PKCS12 LoadFromFile(string filename)
+        public static PKCS12 LoadFromFile(string filename)
         {
             if (filename == null)
                 throw new ArgumentNullException("filename");
@@ -2511,7 +2515,7 @@ namespace Mono.Security.X509
             return new PKCS12(LoadFile(filename));
         }
 
-        static public PKCS12 LoadFromFile(string filename, string password)
+        public static PKCS12 LoadFromFile(string filename, string password)
         {
             if (filename == null)
                 throw new ArgumentNullException("filename");

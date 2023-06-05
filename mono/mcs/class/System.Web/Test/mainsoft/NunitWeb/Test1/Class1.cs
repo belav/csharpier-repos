@@ -164,7 +164,7 @@ namespace Test1
             t.Run();
         }
 
-        static public void CheckPostRequest(Page p)
+        public static void CheckPostRequest(Page p)
         {
             Assert.AreEqual("POST", HttpContext.Current.Request.RequestType);
         }

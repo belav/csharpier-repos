@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
         new[] { WorkspaceKind.RemoteWorkspace }
     )]
     [ExportWorkspaceServiceFactory(typeof(ISymbolTreeInfoCacheService))]
-    internal partial class SymbolTreeInfoIncrementalAnalyzerProvider
+    partial internal class SymbolTreeInfoIncrementalAnalyzerProvider
         : IIncrementalAnalyzerProvider,
             IWorkspaceServiceFactory
     {

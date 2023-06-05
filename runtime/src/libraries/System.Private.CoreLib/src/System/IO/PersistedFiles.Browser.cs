@@ -3,7 +3,7 @@
 
 namespace System.IO
 {
-    internal static partial class PersistedFiles
+    partial internal static class PersistedFiles
     {
         internal static string? GetHomeDirectory() => Environment.GetEnvironmentVariable("HOME");
     }

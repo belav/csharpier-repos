@@ -82,10 +82,11 @@ namespace System.Net.Security
         string[] acceptableIssuers
     );
 
+    partial
     //
     //
     //
-    public partial class SslStream : AuthenticatedStream
+    public class SslStream : AuthenticatedStream
     {
         private SslState _SslState;
         private RemoteCertificateValidationCallback _userCertificateValidationCallback;

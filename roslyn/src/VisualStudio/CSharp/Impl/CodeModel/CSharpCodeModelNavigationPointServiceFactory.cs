@@ -24,7 +24,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         ),
         Shared
     ]
-    internal partial class CSharpCodeModelNavigationPointServiceFactory : ILanguageServiceFactory
+    partial internal class CSharpCodeModelNavigationPointServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

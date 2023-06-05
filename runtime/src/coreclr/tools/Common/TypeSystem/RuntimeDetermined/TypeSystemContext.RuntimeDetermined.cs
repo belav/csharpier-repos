@@ -8,7 +8,7 @@ using Internal.NativeFormat;
 
 namespace Internal.TypeSystem
 {
-    public partial class TypeSystemContext
+    partial public class TypeSystemContext
     {
         private struct RuntimeDeterminedTypeKey
         {

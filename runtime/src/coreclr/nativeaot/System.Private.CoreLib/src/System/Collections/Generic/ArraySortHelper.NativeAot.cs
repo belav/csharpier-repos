@@ -9,7 +9,7 @@ using System.Runtime.Versioning;
 
 namespace System.Collections.Generic
 {
-    internal partial class ArraySortHelper<T>
+    partial internal class ArraySortHelper<T>
     {
         private static readonly ArraySortHelper<T> s_defaultArraySortHelper =
             new ArraySortHelper<T>();
@@ -20,7 +20,7 @@ namespace System.Collections.Generic
         }
     }
 
-    internal partial class ArraySortHelper<TKey, TValue>
+    partial internal class ArraySortHelper<TKey, TValue>
     {
         private static readonly ArraySortHelper<TKey, TValue> s_defaultArraySortHelper =
             new ArraySortHelper<TKey, TValue>();

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Globalization
 {
-    public sealed partial class IdnMapping
+    partial public sealed class IdnMapping
     {
         private unsafe string NlsGetAsciiCore(string unicodeString, char* unicode, int count)
         {

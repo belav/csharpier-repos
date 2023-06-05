@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public partial class Compilation
+    partial public class Compilation
     {
         /// <summary>
         /// The list of RetargetingAssemblySymbol objects created for this Compilation.

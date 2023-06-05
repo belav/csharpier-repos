@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics
 {
-    internal static partial class ProcessManager
+    partial internal static class ProcessManager
     {
         /// <summary>Gets process infos for each process on the specified machine.</summary>
         /// <param name="processNameFilter">Optional process name to use as an inclusion filter.</param>

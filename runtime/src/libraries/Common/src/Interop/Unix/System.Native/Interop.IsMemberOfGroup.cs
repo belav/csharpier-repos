@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         internal static unsafe bool IsMemberOfGroup(uint gid)
         {
@@ -49,13 +49,13 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetEGid")]
-        private static partial uint GetEGid();
+        partial private static uint GetEGid();
 
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_GetGroups",
             SetLastError = true
         )]
-        private static unsafe partial int GetGroups(int ngroups, uint* groups);
+        partial private static unsafe int GetGroups(int ngroups, uint* groups);
     }
 }

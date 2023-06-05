@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Tags;
 
 namespace Microsoft.CodeAnalysis.Completion
 {
-    internal abstract partial class CommonCompletionService : CompletionService
+    partial internal abstract class CommonCompletionService : CompletionService
     {
         protected CommonCompletionService(
             SolutionServices services,

@@ -2,7 +2,7 @@
 
 namespace Microsoft.CodeAnalysis.Tools.Workspaces
 {
-    internal sealed partial class FolderWorkspace : Workspace
+    partial internal sealed class FolderWorkspace : Workspace
     {
         private sealed class CSharpProjectLoader : ProjectLoader
         {

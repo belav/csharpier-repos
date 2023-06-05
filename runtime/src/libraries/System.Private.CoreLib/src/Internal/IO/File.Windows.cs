@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Internal.IO
 {
-    internal static partial class File
+    partial internal static class File
     {
         internal static bool InternalExists(string fullPath)
         {

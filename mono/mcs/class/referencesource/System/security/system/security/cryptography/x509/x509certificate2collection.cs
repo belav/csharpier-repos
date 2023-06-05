@@ -357,7 +357,7 @@ namespace System.Security.Cryptography.X509Certificates
 #if FEATURE_CORESYSTEM
         [SecurityCritical]
 #endif
-        private unsafe static byte[] ExportCertificatesToBlob(
+        private static unsafe byte[] ExportCertificatesToBlob(
             SafeCertStoreHandle safeCertStoreHandle,
             X509ContentType contentType,
             string password
@@ -507,7 +507,7 @@ namespace System.Security.Cryptography.X509Certificates
 #if FEATURE_CORESYSTEM
         [SecuritySafeCritical]
 #endif
-        private unsafe static SafeCertStoreHandle FindCertInStore(
+        private static unsafe SafeCertStoreHandle FindCertInStore(
             SafeCertStoreHandle safeSourceStoreHandle,
             X509FindType findType,
             Object findValue,
@@ -1470,7 +1470,7 @@ namespace System.Security.Cryptography.X509Certificates
 #if !FEATURE_CORESYSTEM
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
 #endif
-        private unsafe static SafeCertStoreHandle LoadStoreFromBlob(
+        private static unsafe SafeCertStoreHandle LoadStoreFromBlob(
             byte[] rawData,
             string password,
             uint dwFlags,
@@ -1521,7 +1521,7 @@ namespace System.Security.Cryptography.X509Certificates
 #if !FEATURE_CORESYSTEM
         [ResourceConsumption(ResourceScope.Machine)]
 #endif
-        private unsafe static SafeCertStoreHandle LoadStoreFromFile(
+        private static unsafe SafeCertStoreHandle LoadStoreFromFile(
             string fileName,
             string password,
             uint dwFlags,

@@ -16,29 +16,29 @@ namespace LibraryImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        public partial class Span
+        partial public class Span
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int Sum(Span<int> values, int numValues);
+            partial public static int Sum(Span<int> values, int numValues);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int Sum(ReadOnlySpan<int> values, int numValues);
+            partial public static int Sum(ReadOnlySpan<int> values, int numValues);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array_ref")]
-            public static partial int SumInArray(in Span<int> values, int numValues);
+            partial public static int SumInArray(in Span<int> values, int numValues);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-            public static partial void Duplicate(
+            partial public static void Duplicate(
                 [MarshalUsing(CountElementName = "numValues")] ref Span<int> values,
                 int numValues
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "create_range_array")]
             [return: MarshalUsing(CountElementName = "numValues")]
-            public static partial Span<int> CreateRange(int start, int end, out int numValues);
+            partial public static Span<int> CreateRange(int start, int end, out int numValues);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "create_range_array_out")]
-            public static partial void CreateRange_Out(
+            partial public static void CreateRange_Out(
                 int start,
                 int end,
                 out int numValues,
@@ -47,11 +47,11 @@ namespace LibraryImportGenerator.IntegrationTests
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes")]
             [return: MarshalUsing(ConstantElementCount = sizeof(long))]
-            public static partial Span<byte> GetLongBytes(long l);
+            partial public static Span<byte> GetLongBytes(long l);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_bool_struct_array")]
             [return: MarshalAs(UnmanagedType.U1)]
-            public static partial bool AndAllMembers(Span<BoolStruct> pArray, int length);
+            partial public static bool AndAllMembers(Span<BoolStruct> pArray, int length);
         }
     }
 

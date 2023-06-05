@@ -4,12 +4,12 @@
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial SafeCFStringHandle AppleCryptoNative_SecCopyErrorMessageString(
+        partial private static SafeCFStringHandle AppleCryptoNative_SecCopyErrorMessageString(
             int osStatus
         );
 

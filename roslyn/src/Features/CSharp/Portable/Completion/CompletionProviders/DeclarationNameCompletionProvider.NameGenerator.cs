@@ -13,7 +13,7 @@ using Words = System.Collections.Immutable.ImmutableArray<string>;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    internal partial class DeclarationNameCompletionProvider
+    partial internal class DeclarationNameCompletionProvider
     {
         internal class NameGenerator
         {

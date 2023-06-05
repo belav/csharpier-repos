@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Kernel32
+    partial internal static class Kernel32
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        public static partial IntPtr GlobalFree(IntPtr handle);
+        partial public static IntPtr GlobalFree(IntPtr handle);
 
         public static IntPtr GlobalFree(HandleRef handle)
         {

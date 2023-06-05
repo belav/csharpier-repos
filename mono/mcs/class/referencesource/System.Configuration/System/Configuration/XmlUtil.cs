@@ -1193,7 +1193,15 @@ namespace System.Configuration
         //   indent          - indent for each depth
         //   skipFirstIndent - skip indent for the first element?
         //
-        static internal string FormatXmlElement(
+        internal
+        // Format an Xml element to be written to the config file.
+        // Params:
+        //   xmlElement      - the element
+        //   linePosition    - start position of the element
+        //   indent          - indent for each depth
+        //   skipFirstIndent - skip indent for the first element?
+        //
+        static string FormatXmlElement(
             string xmlElement,
             int linePosition,
             int indent,

@@ -20,7 +20,7 @@ using System.Diagnostics;
 
 namespace Roslyn.Utilities
 {
-    internal static partial class EnumerableExtensions
+    partial internal static class EnumerableExtensions
     {
         public static IEnumerable<T> Do<T>(this IEnumerable<T> source, Action<T> action)
         {

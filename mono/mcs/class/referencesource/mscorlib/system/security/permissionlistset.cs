@@ -28,7 +28,7 @@ namespace System.Security
     using System.Diagnostics.Contracts;
 
     [Serializable]
-    sealed internal class PermissionListSet
+    internal sealed class PermissionListSet
     {
         // Only internal (public) methods are creation methods and demand evaluation methods.
         // Scroll down to the end to see them.
@@ -348,10 +348,10 @@ namespace System.Security
         [System.Runtime.InteropServices.ComVisible(true)]
         // public(internal) interface begins...
         // Creation functions
-        static internal PermissionListSet CreateCompressedState(
-            CompressedStack cs,
-            CompressedStack innerCS
-        )
+        internal
+        // public(internal) interface begins...
+        // Creation functions
+        static PermissionListSet CreateCompressedState(CompressedStack cs, CompressedStack innerCS)
         {
             // function that completes the construction of the compressed stack if not done so already (bottom half for demand evaluation)
 
@@ -404,7 +404,7 @@ namespace System.Security
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        static internal PermissionListSet CreateCompressedState(
+        internal static PermissionListSet CreateCompressedState(
             IntPtr unmanagedDCS,
             out bool bHaltConstruction
         )
@@ -460,7 +460,7 @@ namespace System.Security
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        static internal PermissionListSet CreateCompressedState_HG()
+        internal static PermissionListSet CreateCompressedState_HG()
         {
             PermissionListSet pls = new PermissionListSet();
             CompressedStack.GetHomogeneousPLS(pls);

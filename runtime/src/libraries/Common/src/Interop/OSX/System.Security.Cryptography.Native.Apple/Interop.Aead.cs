@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class AppleCrypto
+    partial internal static class AppleCrypto
     {
         internal static unsafe void ChaCha20Poly1305Encrypt(
             ReadOnlySpan<byte> key,
@@ -196,7 +196,7 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static unsafe partial int AppleCryptoNative_ChaCha20Poly1305Encrypt(
+        partial private static unsafe int AppleCryptoNative_ChaCha20Poly1305Encrypt(
             byte* keyPtr,
             int keyLength,
             byte* noncePtr,
@@ -212,7 +212,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static unsafe partial int AppleCryptoNative_ChaCha20Poly1305Decrypt(
+        partial private static unsafe int AppleCryptoNative_ChaCha20Poly1305Decrypt(
             byte* keyPtr,
             int keyLength,
             byte* noncePtr,
@@ -228,7 +228,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static unsafe partial int AppleCryptoNative_AesGcmEncrypt(
+        partial private static unsafe int AppleCryptoNative_AesGcmEncrypt(
             byte* keyPtr,
             int keyLength,
             byte* noncePtr,
@@ -244,7 +244,7 @@ internal static partial class Interop
         );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static unsafe partial int AppleCryptoNative_AesGcmDecrypt(
+        partial private static unsafe int AppleCryptoNative_AesGcmDecrypt(
             byte* keyPtr,
             int keyLength,
             byte* noncePtr,

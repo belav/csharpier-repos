@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis
     /// change it in the future.
     /// </remarks>
     [InternalImplementationOnly]
-    public partial interface IOperation
+    partial public interface IOperation
     {
         /// <summary>
         /// IOperation that has this operation as a child. Null for the root.

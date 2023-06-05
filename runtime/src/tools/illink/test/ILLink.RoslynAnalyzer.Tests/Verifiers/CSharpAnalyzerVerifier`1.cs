@@ -20,7 +20,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace ILLink.RoslynAnalyzer.Tests
 {
-    public static partial class CSharpAnalyzerVerifier<TAnalyzer>
+    partial public static class CSharpAnalyzerVerifier<TAnalyzer>
         where TAnalyzer : DiagnosticAnalyzer, new()
     {
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer, TTest, TVerifier}.Diagnostic()"/>

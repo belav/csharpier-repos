@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    public partial class GetSemanticInfoTests : SemanticModelTestBase
+    partial public class GetSemanticInfoTests : SemanticModelTestBase
     {
         [WorkItem(545639, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545639")]
         [Fact]

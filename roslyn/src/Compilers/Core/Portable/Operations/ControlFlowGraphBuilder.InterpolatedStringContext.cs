@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
-    internal partial class ControlFlowGraphBuilder
+    partial internal class ControlFlowGraphBuilder
     {
         private class InterpolatedStringHandlerArgumentsContext
         {

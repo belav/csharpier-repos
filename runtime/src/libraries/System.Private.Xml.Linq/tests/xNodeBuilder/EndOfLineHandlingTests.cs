@@ -12,12 +12,13 @@ using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {
-    public partial class XNodeBuilderFunctionalTests : TestModule
+    partial public class XNodeBuilderFunctionalTests : TestModule
     {
-        public partial class XNodeBuilderTests : XLinqTestCase
+        partial public class XNodeBuilderTests : XLinqTestCase
         {
+            partial
             //[TestCase(Name = "NewLineHandling", Param = "XNodeBuilder")]
-            public partial class TCEOFHandling : BridgeHelpers
+            public class TCEOFHandling : BridgeHelpers
             {
                 private XmlDiff _diff = null;
 

@@ -3,7 +3,7 @@
 
 namespace Microsoft.Extensions.Logging;
 
-internal static partial class LoggingExtensions
+partial internal static class LoggingExtensions
 {
     [LoggerMessage(
         1,
@@ -11,7 +11,7 @@ internal static partial class LoggingExtensions
         "Received a sign-in message without a WResult.",
         EventName = "SignInWithoutWResult"
     )]
-    public static partial void SignInWithoutWResult(this ILogger logger);
+    partial public static void SignInWithoutWResult(this ILogger logger);
 
     [LoggerMessage(
         2,
@@ -19,7 +19,7 @@ internal static partial class LoggingExtensions
         "Received a sign-in message without a token.",
         EventName = "SignInWithoutToken"
     )]
-    public static partial void SignInWithoutToken(this ILogger logger);
+    partial public static void SignInWithoutToken(this ILogger logger);
 
     [LoggerMessage(
         3,
@@ -27,7 +27,7 @@ internal static partial class LoggingExtensions
         "Exception occurred while processing message.",
         EventName = "ExceptionProcessingMessage"
     )]
-    public static partial void ExceptionProcessingMessage(this ILogger logger, Exception ex);
+    partial public static void ExceptionProcessingMessage(this ILogger logger, Exception ex);
 
     [LoggerMessage(
         4,
@@ -35,7 +35,7 @@ internal static partial class LoggingExtensions
         "The sign-out redirect URI '{uri}' is malformed.",
         EventName = "MalformedRedirectUri"
     )]
-    public static partial void MalformedRedirectUri(this ILogger logger, string uri);
+    partial public static void MalformedRedirectUri(this ILogger logger, string uri);
 
     [LoggerMessage(
         5,
@@ -43,7 +43,7 @@ internal static partial class LoggingExtensions
         "RemoteSignOutContext.HandledResponse",
         EventName = "RemoteSignOutHandledResponse"
     )]
-    public static partial void RemoteSignOutHandledResponse(this ILogger logger);
+    partial public static void RemoteSignOutHandledResponse(this ILogger logger);
 
     [LoggerMessage(
         6,
@@ -51,7 +51,7 @@ internal static partial class LoggingExtensions
         "RemoteSignOutContext.Skipped",
         EventName = "RemoteSignOutSkipped"
     )]
-    public static partial void RemoteSignOutSkipped(this ILogger logger);
+    partial public static void RemoteSignOutSkipped(this ILogger logger);
 
     [LoggerMessage(
         7,
@@ -59,5 +59,5 @@ internal static partial class LoggingExtensions
         "Remote signout request processed.",
         EventName = "RemoteSignOut"
     )]
-    public static partial void RemoteSignOut(this ILogger logger);
+    partial public static void RemoteSignOut(this ILogger logger);
 }

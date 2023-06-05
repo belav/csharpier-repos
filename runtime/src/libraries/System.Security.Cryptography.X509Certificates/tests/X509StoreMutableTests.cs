@@ -6,7 +6,7 @@ using Xunit;
 namespace System.Security.Cryptography.X509Certificates.Tests
 {
     [OuterLoop("Modifies system state")]
-    public static partial class X509StoreMutableTests
+    partial public static class X509StoreMutableTests
     {
         [ConditionalFact(nameof(PermissionsAllowStoreWrite))]
         public static void AddToStoreTwice()

@@ -11,10 +11,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+partial
 /// <summary>
 /// An <see cref="IResult"/> that on execution invokes <see cref="M:HttpContext.ChallengeAsync"/>.
 /// </summary>
-internal sealed partial class ChallengeResult : IResult
+internal sealed class ChallengeResult : IResult
 {
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/>.
@@ -96,7 +97,7 @@ internal sealed partial class ChallengeResult : IResult
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void ChallengeResultExecuting(
             ILogger logger,
@@ -116,6 +117,6 @@ internal sealed partial class ChallengeResult : IResult
             EventName = "ChallengeResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void ChallengeResultExecuting(ILogger logger, string[] schemes);
+        partial private static void ChallengeResultExecuting(ILogger logger, string[] schemes);
     }
 }

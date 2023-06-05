@@ -311,11 +311,11 @@ namespace System.Reflection
     }
 
     [Serializable]
-    internal unsafe sealed class RuntimeParameterInfo : ParameterInfo, ISerializable
+    internal sealed unsafe class RuntimeParameterInfo : ParameterInfo, ISerializable
     {
         #region Static Members
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static ParameterInfo[] GetParameters(
+        internal static unsafe ParameterInfo[] GetParameters(
             IRuntimeMethodInfo method,
             MemberInfo member,
             Signature sig
@@ -328,7 +328,7 @@ namespace System.Reflection
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static ParameterInfo GetReturnParameter(
+        internal static unsafe ParameterInfo GetReturnParameter(
             IRuntimeMethodInfo method,
             MemberInfo member,
             Signature sig
@@ -342,7 +342,7 @@ namespace System.Reflection
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static ParameterInfo[] GetParameters(
+        internal static unsafe ParameterInfo[] GetParameters(
             IRuntimeMethodInfo methodHandle,
             MemberInfo member,
             Signature sig,

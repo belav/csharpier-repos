@@ -11,10 +11,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
+partial
 /// <summary>
 /// An <see cref="IResult"/> that on execution invokes <see cref="M:HttpContext.SignOutAsync"/>.
 /// </summary>
-internal sealed partial class SignOutResult : IResult
+internal sealed class SignOutResult : IResult
 {
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the default sign out scheme.
@@ -98,7 +99,7 @@ internal sealed partial class SignOutResult : IResult
         }
     }
 
-    private static partial class Log
+    partial private static class Log
     {
         public static void SignOutResultExecuting(
             ILogger logger,
@@ -118,6 +119,6 @@ internal sealed partial class SignOutResult : IResult
             EventName = "SignOutResultExecuting",
             SkipEnabledCheck = true
         )]
-        private static partial void SignOutResultExecuting(ILogger logger, string[] schemes);
+        partial private static void SignOutResultExecuting(ILogger logger, string[] schemes);
     }
 }

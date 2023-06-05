@@ -8,10 +8,11 @@ using Xunit;
 
 namespace XPathTests.FunctionalTests.Location.Paths
 {
+    partial
     /// <summary>
     /// Location Paths - Axes Combinations
     /// </summary>
-    public static partial class AxesCombinationsTests
+    public static class AxesCombinationsTests
     {
         /// <summary>
         /// Combines ancestor-or-self axis with child axis

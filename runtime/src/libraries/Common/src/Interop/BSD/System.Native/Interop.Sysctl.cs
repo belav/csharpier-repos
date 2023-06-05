@@ -8,20 +8,21 @@ using System.Text;
 
 using size_t = System.IntPtr;
 
+partial
 // This implements shim for sysctl calls.
 // They are available on BSD systems - FreeBSD, OSX and others.
 // Linux has sysctl() but it is deprecated as well as it is missing sysctlbyname()
 
-internal static partial class Interop
+internal static class Interop
 {
-    internal static partial class Sys
+    partial internal static class Sys
     {
         [LibraryImport(
             Libraries.SystemNative,
             EntryPoint = "SystemNative_Sysctl",
             SetLastError = true
         )]
-        private static unsafe partial int Sysctl(int* name, int namelen, void* value, size_t* len);
+        partial private static unsafe int Sysctl(int* name, int namelen, void* value, size_t* len);
 
         // This is 'raw' sysctl call, only wrapped to allocate memory if needed
         // caller always needs to free returned buffer using  Marshal.FreeHGlobal()

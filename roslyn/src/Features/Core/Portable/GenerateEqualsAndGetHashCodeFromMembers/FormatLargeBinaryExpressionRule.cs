@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 {
-    internal partial class AbstractGenerateEqualsAndGetHashCodeService
+    partial internal class AbstractGenerateEqualsAndGetHashCodeService
     {
         /// <summary>
         /// Specialized formatter for the "return a == obj.a &amp;&amp; b == obj.b &amp;&amp; c == obj.c &amp;&amp; ...

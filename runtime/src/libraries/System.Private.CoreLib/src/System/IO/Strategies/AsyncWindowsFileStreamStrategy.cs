@@ -8,7 +8,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Strategies
 {
-    internal sealed partial class AsyncWindowsFileStreamStrategy : OSFileStreamStrategy
+    partial internal sealed class AsyncWindowsFileStreamStrategy : OSFileStreamStrategy
     {
         internal AsyncWindowsFileStreamStrategy(SafeFileHandle handle, FileAccess access)
             : base(handle, access) { }

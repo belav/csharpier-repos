@@ -551,7 +551,7 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [DllImport(LibcLibrary, EntryPoint = "atoi", CallingConvention = CallingConvention.Cdecl)]
-        public static unsafe extern int MarshalerOnPointerMethod(
+        public static extern unsafe int MarshalerOnPointerMethod(
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(StringForwardingCustomMarshaler)

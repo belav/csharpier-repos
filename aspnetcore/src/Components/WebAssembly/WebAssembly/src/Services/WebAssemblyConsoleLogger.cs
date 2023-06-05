@@ -203,20 +203,20 @@ internal sealed class WebAssemblyConsoleLogger<T> : ILogger<T>, ILogger
     }
 }
 
-internal static partial class ConsoleLoggerInterop
+partial internal static class ConsoleLoggerInterop
 {
     [JSImport("globalThis.console.debug")]
-    public static partial void ConsoleDebug(string message);
+    partial public static void ConsoleDebug(string message);
 
     [JSImport("globalThis.console.info")]
-    public static partial void ConsoleInfo(string message);
+    partial public static void ConsoleInfo(string message);
 
     [JSImport("globalThis.console.warn")]
-    public static partial void ConsoleWarn(string message);
+    partial public static void ConsoleWarn(string message);
 
     [JSImport("globalThis.console.error")]
-    public static partial void ConsoleError(string message);
+    partial public static void ConsoleError(string message);
 
     [JSImport("Blazor._internal.dotNetCriticalError")]
-    public static partial void DotNetCriticalError(string message);
+    partial public static void DotNetCriticalError(string message);
 }

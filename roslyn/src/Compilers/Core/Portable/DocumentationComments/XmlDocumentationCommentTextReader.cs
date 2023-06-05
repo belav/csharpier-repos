@@ -10,12 +10,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
+    partial
     /// <summary>
     /// Used by the DocumentationCommentCompiler(s) to check doc comments for XML parse errors.
     /// As a performance optimization, this class tries to re-use the same underlying <see cref="XmlReader"/> instance
     /// when possible.
     /// </summary>
-    internal partial class XmlDocumentationCommentTextReader
+    internal class XmlDocumentationCommentTextReader
     {
         private XmlReader _reader;
         private readonly Reader _textReader = new Reader();

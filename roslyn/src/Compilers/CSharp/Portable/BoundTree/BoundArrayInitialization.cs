@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal partial class BoundArrayInitialization
+    partial internal class BoundArrayInitialization
     {
         public BoundArrayInitialization Update(ImmutableArray<BoundExpression> initializers)
         {

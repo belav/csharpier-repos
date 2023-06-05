@@ -10,7 +10,7 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public sealed partial class ReliableSessionElement : BindingElementExtensionElement
+    partial public sealed class ReliableSessionElement : BindingElementExtensionElement
     {
         public ReliableSessionElement() { }
 

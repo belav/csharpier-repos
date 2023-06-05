@@ -25,9 +25,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
-    internal partial class VisualStudioDiagnosticListTableWorkspaceEventListener
+    partial internal class VisualStudioDiagnosticListTableWorkspaceEventListener
     {
-        internal partial class VisualStudioDiagnosticListTable : VisualStudioBaseDiagnosticListTable
+        partial internal class VisualStudioDiagnosticListTable : VisualStudioBaseDiagnosticListTable
         {
             /// <summary>
             /// Error list diagnostic source for "Build only" setting.

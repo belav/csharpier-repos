@@ -24,7 +24,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateType
 {
-    internal abstract partial class AbstractGenerateTypeService<
+    partial internal abstract class AbstractGenerateTypeService<
         TService,
         TSimpleNameSyntax,
         TObjectCreationExpressionSyntax,
@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
             ITypeSymbol targetType
         );
 
-        private partial class Editor
+        partial private class Editor
         {
             private readonly TService _service;
             private TargetProjectChangeInLanguage _targetProjectChangeInLanguage =

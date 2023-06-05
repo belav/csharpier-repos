@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Net.Test.Common
 {
-    public static partial class Capability
+    partial public static class Capability
     {
         [DllImport("ntdll", CharSet = CharSet.Unicode)]
         private static extern int RtlGetVersion(ref RTL_OSVERSIONINFOW lpVersionInformation);

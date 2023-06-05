@@ -4,7 +4,7 @@ using System.Security.AccessControl;
 
 namespace System.IO
 {
-    public partial class DirectoryInfo
+    partial public class DirectoryInfo
     {
         private DirectoryInfo(SerializationInfo info, StreamingContext context)
             : base(info, context) { }

@@ -6,7 +6,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using Xunit;
 
-public static partial class DataContractSerializerTests
+partial public static class DataContractSerializerTests
 {
     [Fact]
     [ActiveIssue("https://github.com/dotnet/runtime/issues/34962", TestRuntimes.Mono)]

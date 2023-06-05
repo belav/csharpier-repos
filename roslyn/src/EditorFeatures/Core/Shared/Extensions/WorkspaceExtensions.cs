@@ -10,7 +10,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
-    internal static partial class IWorkspaceExtensions
+    partial internal static class IWorkspaceExtensions
     {
         /// <summary>
         /// Update the workspace so that the document with the Id of <paramref name="newDocument"/>

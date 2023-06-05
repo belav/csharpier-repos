@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
 {
     using static SyntaxFactory;
 
-    internal sealed partial class CSharpConvertIfToSwitchCodeRefactoringProvider
+    partial internal sealed class CSharpConvertIfToSwitchCodeRefactoringProvider
     {
         private static readonly Dictionary<BinaryOperatorKind, SyntaxKind> s_operatorMap =
             new Dictionary<BinaryOperatorKind, SyntaxKind>

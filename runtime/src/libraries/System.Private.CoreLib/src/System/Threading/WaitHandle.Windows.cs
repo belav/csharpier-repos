@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-    public abstract partial class WaitHandle
+    partial public abstract class WaitHandle
     {
         internal static unsafe int WaitMultipleIgnoringSyncContext(
             Span<IntPtr> handles,

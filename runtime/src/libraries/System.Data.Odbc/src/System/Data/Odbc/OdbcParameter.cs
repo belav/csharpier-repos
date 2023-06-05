@@ -12,7 +12,7 @@ using System.Text;
 
 namespace System.Data.Odbc
 {
-    public sealed partial class OdbcParameter
+    partial public sealed class OdbcParameter
         : DbParameter,
             ICloneable,
             IDataParameter,

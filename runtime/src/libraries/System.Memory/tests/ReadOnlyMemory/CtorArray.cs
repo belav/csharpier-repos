@@ -6,13 +6,14 @@ using static System.TestHelpers;
 
 namespace System.MemoryTests
 {
+    partial
     //
     // Tests for Memory<T>.ctor(T[])
     //
     // These tests will also exercise the matching codepaths in Memory<T>.ctor(T[], int, int). This makes it easier to ensure
     // that these parallel tests stay consistent, and avoid excess repetition in the files devoted to those specific overloads.
     //
-    public static partial class ReadOnlyMemoryTests
+    public static class ReadOnlyMemoryTests
     {
         [Fact]
         public static void CtorArrayInt()

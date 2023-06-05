@@ -31,10 +31,11 @@ namespace Internal.TypeSystem
         Any,
     }
 
+    partial
     /// <summary>
     /// Base class for specialized and universal canon types
     /// </summary>
-    public abstract partial class CanonBaseType
+    public abstract class CanonBaseType
     {
         private TypeSystemContext _context;
 
@@ -51,10 +52,11 @@ namespace Internal.TypeSystem
         public override DefType ContainingType => null;
     }
 
+    partial
     /// <summary>
     /// Type used for specific canonicalization (e.g. for reference types)
     /// </summary>
-    internal sealed partial class CanonType : CanonBaseType
+    internal sealed class CanonType : CanonBaseType
     {
         private const string _Namespace = "System";
         private const string _Name = "__Canon";
@@ -129,10 +131,11 @@ namespace Internal.TypeSystem
         }
     }
 
+    partial
     /// <summary>
     /// Type that can be used for canonicalization of any type (including value types of unknown size)
     /// </summary>
-    internal sealed partial class UniversalCanonType : CanonBaseType
+    internal sealed class UniversalCanonType : CanonBaseType
     {
         private const string _Namespace = "System";
         private const string _Name = "__UniversalCanon";

@@ -12,10 +12,11 @@ using Internal.NativeFormat;
 
 namespace Internal.TypeSystem.Ecma
 {
+    partial
     /// <summary>
     /// Override of MetadataType that uses actual Ecma335 metadata.
     /// </summary>
-    public sealed partial class EcmaType : MetadataType, EcmaModule.IEntityHandleObject
+    public sealed class EcmaType : MetadataType, EcmaModule.IEntityHandleObject
     {
         private EcmaModule _module;
         private TypeDefinitionHandle _handle;

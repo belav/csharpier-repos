@@ -9,7 +9,7 @@ using Xunit;
 
 namespace JIT.HardwareIntrinsics.General._Vector128_1
 {
-    public static partial class Program
+    partial public static class Program
     {
         static Program() { }
     }

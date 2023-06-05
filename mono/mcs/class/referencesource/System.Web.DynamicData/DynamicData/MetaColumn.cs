@@ -535,7 +535,11 @@ namespace System.Web.DynamicData
         /// <summary>
         /// Perform initialization logic for this column
         /// </summary>
-        internal protected virtual void Initialize() { }
+        protected
+        /// <summary>
+        /// Perform initialization logic for this column
+        /// </summary>
+        internal virtual void Initialize() { }
 
         /// <summary>
         /// Resets cached column metadata (i.e. information coming from attributes). The metadata cache will be rebuilt

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial interface IDtdParser
+    partial internal interface IDtdParser
     {
         Task<IDtdInfo> ParseInternalDtdAsync(IDtdParserAdapter adapter, bool saveInternalSubset);
 

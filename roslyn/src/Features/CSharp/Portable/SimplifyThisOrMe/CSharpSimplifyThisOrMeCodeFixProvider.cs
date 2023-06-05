@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyThisOrMe
         Shared
     ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.RemoveUnnecessaryCast)]
-    internal partial class CSharpSimplifyThisOrMeCodeFixProvider
+    partial internal class CSharpSimplifyThisOrMeCodeFixProvider
         : AbstractSimplifyThisOrMeCodeFixProvider<MemberAccessExpressionSyntax>
     {
         [ImportingConstructor]

@@ -147,7 +147,17 @@ class TypeTestFolding
     //    return t0 == t1;
     //}
 
-    unsafe static int Main()
+    static
+    //static bool False16() => typeof(delegate*<int>) == typeof(IntPtr);
+    //static bool False17()
+    //{
+    //    var t0 = typeof(delegate*<int>);
+    //    SideEffect();
+    //    var t1 = typeof(UIntPtr);
+    //    return t0 == t1;
+    //}
+
+    unsafe int Main()
     {
         delegate* <bool>[] trueFuncs = new delegate* <bool>[] { &True2, &True3, &True4, &True5 };
         delegate* <bool>[] falseFuncs = new delegate* <bool>[]

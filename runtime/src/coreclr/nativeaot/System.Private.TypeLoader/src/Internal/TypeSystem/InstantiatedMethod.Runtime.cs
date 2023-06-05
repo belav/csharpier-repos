@@ -10,7 +10,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
-    public sealed partial class InstantiatedMethod : MethodDesc
+    partial public sealed class InstantiatedMethod : MethodDesc
     {
         public override MethodNameAndSignature NameAndSignature
         {

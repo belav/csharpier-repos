@@ -18,7 +18,7 @@ namespace MonoTests.SystemWeb.Framework
     /// <seealso cref="Invoker"/>
     /// <seealso cref="Run"/>
     [Serializable]
-    public partial class WebTest
+    partial public class WebTest
     {
         /// <summary>
         /// Thrown when trying to copy a resource after appdomain was created. Please call
@@ -617,6 +617,6 @@ namespace MonoTests.SystemWeb.Framework
             CopyResourcesLocal();
         }
 
-        static partial void CopyResourcesLocal();
+        partial static void CopyResourcesLocal();
     }
 }

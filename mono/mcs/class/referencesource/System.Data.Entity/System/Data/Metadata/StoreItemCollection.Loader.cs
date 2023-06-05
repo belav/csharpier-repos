@@ -17,7 +17,7 @@ namespace System.Data.Metadata.Edm
     using System.Text;
     using System.Xml;
 
-    public sealed partial class StoreItemCollection
+    partial public sealed class StoreItemCollection
     {
         private class Loader
         {

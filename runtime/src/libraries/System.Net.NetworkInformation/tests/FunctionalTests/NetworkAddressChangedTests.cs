@@ -5,9 +5,10 @@ using Xunit;
 
 namespace System.Net.NetworkInformation.Tests
 {
+    partial
     // Partial class used for both NetworkAddressChanged and NetworkAvailabilityChanged
     // so that the tests for each don't run concurrently
-    public partial class NetworkChangedTests
+    public class NetworkChangedTests
     {
         private readonly NetworkAddressChangedEventHandler _addressHandler = delegate { };
 

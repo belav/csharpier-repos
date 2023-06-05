@@ -4,7 +4,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 
-public partial class MyLoginPage : Page
+partial public class MyLoginPage : Page
 {
     protected void loginControl_Authenticate(object sender, AuthenticateEventArgs e)
     {

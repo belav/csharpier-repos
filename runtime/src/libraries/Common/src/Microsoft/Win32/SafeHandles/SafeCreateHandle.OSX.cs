@@ -7,12 +7,13 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Win32.SafeHandles
 {
+    partial
     /// <summary>
     /// This class is a wrapper around the Create pattern in OS X where
     /// if a Create* function is called, the caller must also CFRelease
     /// on the same pointer in order to correctly free the memory.
     /// </summary>
-    internal sealed partial class SafeCreateHandle : SafeHandle
+    internal sealed class SafeCreateHandle : SafeHandle
     {
         public SafeCreateHandle()
             : base(IntPtr.Zero, true) { }

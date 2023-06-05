@@ -25,9 +25,10 @@ namespace Microsoft.Scripting.Ast.Compiler
 #else
 namespace System.Linq.Expressions.Compiler
 {
+    partial
 #endif
 
-    internal partial class StackSpiller
+    internal class StackSpiller
     {
         private class TempMaker
         {

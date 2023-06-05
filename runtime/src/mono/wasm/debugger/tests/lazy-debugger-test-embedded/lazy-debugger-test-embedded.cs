@@ -3,7 +3,7 @@
 
 using System;
 
-public partial class LazyMath
+partial public class LazyMath
 {
     public static int IntAdd(int a, int b)
     {

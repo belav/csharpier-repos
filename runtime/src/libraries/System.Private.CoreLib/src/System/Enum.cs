@@ -30,7 +30,7 @@ namespace System
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public abstract partial class Enum : ValueType, IComparable, ISpanFormattable, IConvertible
+    partial public abstract class Enum : ValueType, IComparable, ISpanFormattable, IConvertible
     {
         /// <summary>Character used to separate flag enum values when formatted in a list.</summary>
         private const char EnumSeparatorChar = ',';

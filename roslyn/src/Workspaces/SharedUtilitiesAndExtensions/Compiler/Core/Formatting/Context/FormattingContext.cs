@@ -17,11 +17,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {
+    partial
     /// <summary>
     /// this class maintain contextual information such as
     /// indentation of current position, based token to follow in current position and etc.
     /// </summary>
-    internal partial class FormattingContext
+    internal class FormattingContext
     {
         private readonly AbstractFormatEngine _engine;
         private readonly TokenStream _tokenStream;

@@ -14,7 +14,7 @@ namespace System.ServiceModel.Configuration
     using System.Xml.Serialization;
     using System.Text;
 
-    public sealed partial class XPathMessageFilterElement : ConfigurationElement
+    partial public sealed class XPathMessageFilterElement : ConfigurationElement
     {
         const int DefaultNodeQuota = 1000;
 

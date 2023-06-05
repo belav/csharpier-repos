@@ -3,7 +3,7 @@
 
 namespace Internal.Cryptography.Pal
 {
-    internal sealed partial class X509Pal
+    partial internal sealed class X509Pal
     {
         public static IX509Pal Instance = new OpenSslX509Encoder();
 

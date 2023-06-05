@@ -13,7 +13,7 @@ using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {
-    public abstract partial class PolymorphicTests
+    partial public abstract class PolymorphicTests
     {
         #region Polymorphic Class
         [Theory]
@@ -2433,7 +2433,7 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        private readonly static JsonSerializerOptions s_optionsWithPolymorphicCollectionInterface =
+        private static readonly JsonSerializerOptions s_optionsWithPolymorphicCollectionInterface =
             new JsonSerializerOptions
             {
                 TypeInfoResolver = new CustomPolymorphismResolver<IEnumerable<int>>
@@ -2641,7 +2641,7 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        private readonly static JsonSerializerOptions s_optionsWithPolymorphicDictionaryInterface =
+        private static readonly JsonSerializerOptions s_optionsWithPolymorphicDictionaryInterface =
             new JsonSerializerOptions
             {
                 TypeInfoResolver = new CustomPolymorphismResolver<
@@ -3162,7 +3162,7 @@ namespace System.Text.Json.Serialization.Tests
                 GetTestData().Select(entry => new object[] { entry.Value, entry.JsonTemplate });
         }
 
-        private readonly static JsonSerializerOptions s_jsonSerializerOptionsPreserveRefs =
+        private static readonly JsonSerializerOptions s_jsonSerializerOptionsPreserveRefs =
             new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve };
         #endregion
 

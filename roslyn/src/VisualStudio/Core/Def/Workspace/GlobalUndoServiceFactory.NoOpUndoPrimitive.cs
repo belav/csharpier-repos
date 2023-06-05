@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text.Operations;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
-    internal partial class GlobalUndoServiceFactory
+    partial internal class GlobalUndoServiceFactory
     {
         /// <summary>
         /// no op undo primitive

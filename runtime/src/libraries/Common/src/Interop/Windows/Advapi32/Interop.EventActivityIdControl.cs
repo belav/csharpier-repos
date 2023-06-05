@@ -4,12 +4,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-internal static partial class Interop
+partial internal static class Interop
 {
-    internal static partial class Advapi32
+    partial internal static class Advapi32
     {
         [LibraryImport(Libraries.Advapi32)]
-        internal static partial int EventActivityIdControl(
+        partial internal static int EventActivityIdControl(
             ActivityControl ControlCode,
             ref Guid ActivityId
         );

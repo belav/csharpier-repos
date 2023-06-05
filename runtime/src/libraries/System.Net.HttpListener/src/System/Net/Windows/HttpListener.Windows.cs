@@ -16,7 +16,7 @@ using System.Threading;
 
 namespace System.Net
 {
-    public sealed unsafe partial class HttpListener
+    partial public sealed unsafe class HttpListener
     {
         public static bool IsSupported => Interop.HttpApi.s_supported;
 

@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Classification
     [TagType(typeof(IClassificationTag))]
     [ContentType(ContentTypeNames.CSharpContentType)]
     [ContentType(ContentTypeNames.VisualBasicContentType)]
-    internal partial class CopyPasteAndPrintingClassificationBufferTaggerProvider : ITaggerProvider
+    partial internal class CopyPasteAndPrintingClassificationBufferTaggerProvider : ITaggerProvider
     {
         private readonly IAsynchronousOperationListener _asyncListener;
         private readonly IThreadingContext _threadingContext;

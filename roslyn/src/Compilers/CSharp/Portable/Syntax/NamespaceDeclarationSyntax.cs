@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
-    public partial class NamespaceDeclarationSyntax
+    partial public class NamespaceDeclarationSyntax
     {
         internal new InternalSyntax.NamespaceDeclarationSyntax Green
         {

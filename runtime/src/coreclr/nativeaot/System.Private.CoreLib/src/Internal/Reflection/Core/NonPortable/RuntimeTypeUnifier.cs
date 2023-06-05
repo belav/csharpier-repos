@@ -11,6 +11,7 @@ using Internal.Runtime.Augments;
 
 namespace Internal.Reflection.Core.NonPortable
 {
+    partial
     //
     // ! If you change this policy to not unify all instances, you must change the implementation of Equals/GetHashCode in the runtime type classes.
     //
@@ -37,7 +38,7 @@ namespace Internal.Reflection.Core.NonPortable
     //  appear in both TypeTableForTypesWithEETypes and the "inspection" type table for the type's specific flavor. This allows
     //  fast lookups for both the Object.GetType() calls and the metadata initiated lookups.
     //
-    internal static partial class RuntimeTypeUnifier
+    internal static class RuntimeTypeUnifier
     {
         //
         // Retrieves the unified Type object for given RuntimeTypeHandle (this is basically the Type.GetTypeFromHandle() api without the input validation.)

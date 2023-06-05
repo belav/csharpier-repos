@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers.ViewModel
 {
-    internal partial class AnalyzerSettingsViewModel
+    partial internal class AnalyzerSettingsViewModel
         : SettingsViewModelBase<
             AnalyzerSetting,
             AnalyzerSettingsViewModel.SettingsSnapshotFactory,

@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    public static partial class SymbolFinder
+    partial public static class SymbolFinder
     {
         [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteSymbolFinderService)), Shared]
         internal sealed class CallbackDispatcher

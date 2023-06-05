@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components;
 
-public partial class ParameterViewTest
+partial public class ParameterViewTest
 {
     [Fact]
     public void CanInitializeUsingComponentWithNoDescendants()

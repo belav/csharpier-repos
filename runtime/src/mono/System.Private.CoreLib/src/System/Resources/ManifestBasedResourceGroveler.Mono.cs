@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace System.Resources
 {
-    internal partial class ManifestBasedResourceGroveler
+    partial internal class ManifestBasedResourceGroveler
     {
         private static Assembly? InternalGetSatelliteAssembly(
             Assembly mainAssembly,

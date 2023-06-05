@@ -8,10 +8,11 @@ using System.Security;
 
 namespace System.IO.Pipes
 {
+    partial
     /// <summary>
     /// Anonymous pipe server stream
     /// </summary>
-    public sealed partial class AnonymousPipeServerStream : PipeStream
+    public sealed class AnonymousPipeServerStream : PipeStream
     {
         public AnonymousPipeServerStream(
             PipeDirection direction,
