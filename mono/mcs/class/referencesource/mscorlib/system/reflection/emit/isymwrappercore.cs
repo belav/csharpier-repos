@@ -863,7 +863,7 @@ namespace System.Reflection.Emit
             : base((IntPtr)0, true) { }
 
         [SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             m_Release(handle);
             return true;

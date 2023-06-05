@@ -49,7 +49,7 @@ internal class LocallocTest
         return 100;
     }
 
-    public unsafe static void unwindTest1()
+    public static unsafe void unwindTest1()
     {
 #if LOCALLOC_SMALL
         Int32* intArray2 = stackalloc Int32[1];

@@ -1326,7 +1326,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern bool CanConvertPrimitiveObjectToType(
+        internal static extern bool CanConvertPrimitiveObjectToType(
             Object source,
             RuntimeType type
         );

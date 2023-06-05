@@ -168,7 +168,10 @@ namespace System.Security.Cryptography.X509Certificates
 
         // private stuff
 
-        static private byte[] GetUnsignedBigInteger(byte[] integer)
+        private
+        // private stuff
+
+        static byte[] GetUnsignedBigInteger(byte[] integer)
         {
             if (integer[0] != 0x00)
                 return integer;
@@ -181,7 +184,7 @@ namespace System.Security.Cryptography.X509Certificates
             return uinteger;
         }
 
-        static internal DSA DecodeDSA(byte[] rawPublicKey, byte[] rawParameters)
+        internal static DSA DecodeDSA(byte[] rawPublicKey, byte[] rawParameters)
         {
             DSAParameters dsaParams = new DSAParameters();
             try
@@ -213,7 +216,7 @@ namespace System.Security.Cryptography.X509Certificates
             return dsa;
         }
 
-        static internal RSA DecodeRSA(byte[] rawPublicKey)
+        internal static RSA DecodeRSA(byte[] rawPublicKey)
         {
             RSAParameters rsaParams = new RSAParameters();
             try

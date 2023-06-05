@@ -3582,7 +3582,7 @@ class Tests
     }
 
     /* MS.NET doesn't seem to throw in this case */
-    public unsafe static int test_0_ldflda_null_pointer()
+    public static unsafe int test_0_ldflda_null_pointer()
     {
         int* pi = &Foo.pFoo->i;
 

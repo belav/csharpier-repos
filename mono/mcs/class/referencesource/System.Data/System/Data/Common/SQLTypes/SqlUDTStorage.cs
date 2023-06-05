@@ -89,22 +89,22 @@ namespace System.Data.Common
             return value;
         }
 
-        override public bool IsNull(int record)
+        public override bool IsNull(int record)
         {
             return (((INullable)values[record]).IsNull);
         }
 
-        override public Object Aggregate(int[] records, AggregateType kind)
+        public override Object Aggregate(int[] records, AggregateType kind)
         {
             throw ExceptionBuilder.AggregateException(kind, DataType);
         }
 
-        override public int Compare(int recordNo1, int recordNo2)
+        public override int Compare(int recordNo1, int recordNo2)
         {
             return (CompareValueTo(recordNo1, values[recordNo2]));
         }
 
-        override public int CompareValueTo(int recordNo1, Object value)
+        public override int CompareValueTo(int recordNo1, Object value)
         {
             if (DBNull.Value == value)
             { // it is not meaningful compare UDT with DBNull.Value   WebData 113372
@@ -124,18 +124,18 @@ namespace System.Data.Common
             throw ExceptionBuilder.IComparableNotImplemented(DataType.AssemblyQualifiedName);
         }
 
-        override public void Copy(int recordNo1, int recordNo2)
+        public override void Copy(int recordNo1, int recordNo2)
         {
             CopyBits(recordNo1, recordNo2);
             values[recordNo2] = values[recordNo1];
         }
 
-        override public Object Get(int recordNo)
+        public override Object Get(int recordNo)
         {
             return (values[recordNo]);
         }
 
-        override public void Set(int recordNo, Object value)
+        public override void Set(int recordNo, Object value)
         {
             if (DBNull.Value == value)
             {
@@ -165,7 +165,7 @@ namespace System.Data.Common
             }
         }
 
-        override public void SetCapacity(int capacity)
+        public override void SetCapacity(int capacity)
         {
             object[] newValues = new object[capacity];
             if (values != null)
@@ -178,7 +178,7 @@ namespace System.Data.Common
 
         // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
-        override public object ConvertXmlToObject(string s)
+        public override object ConvertXmlToObject(string s)
         {
             if (implementsIXmlSerializable)
             {
@@ -238,7 +238,7 @@ namespace System.Data.Common
             }
         }
 
-        override public string ConvertObjectToXml(object value)
+        public override string ConvertObjectToXml(object value)
         {
             StringWriter strwriter = new StringWriter(FormatProvider);
             if (implementsIXmlSerializable)
@@ -285,12 +285,12 @@ namespace System.Data.Common
             }
         }
 
-        override protected object GetEmptyStorage(int recordCount)
+        protected override object GetEmptyStorage(int recordCount)
         {
             return new Object[recordCount];
         }
 
-        override protected void CopyValue(
+        protected override void CopyValue(
             int record,
             object store,
             BitArray nullbits,
@@ -302,7 +302,7 @@ namespace System.Data.Common
             nullbits.Set(storeIndex, IsNull(record));
         }
 
-        override protected void SetStorage(object store, BitArray nullbits)
+        protected override void SetStorage(object store, BitArray nullbits)
         {
             values = (Object[])store;
             //SetNullStorage(nullbits);

@@ -20,7 +20,7 @@ namespace MonoTests.Mono.Security
     [TestFixture]
     public class PKCS7Test
     {
-        static public byte[] cert =
+        public static byte[] cert =
         {
             0x30,
             0x82,

@@ -82,12 +82,12 @@ namespace System.Security.AccessControl
             is_ds;
         internal RawAcl raw_acl;
 
-        public override sealed int BinaryLength
+        public sealed override int BinaryLength
         {
             get { return raw_acl.BinaryLength; }
         }
 
-        public override sealed int Count
+        public sealed override int Count
         {
             get { return raw_acl.Count; }
         }
@@ -114,18 +114,18 @@ namespace System.Security.AccessControl
             set { is_aefa = value; }
         }
 
-        public override sealed byte Revision
+        public sealed override byte Revision
         {
             get { return raw_acl.Revision; }
         }
 
-        public override sealed GenericAce this[int index]
+        public sealed override GenericAce this[int index]
         {
             get { return CopyAce(raw_acl[index]); }
             set { throw new NotSupportedException(); }
         }
 
-        public override sealed void GetBinaryForm(byte[] binaryForm, int offset)
+        public sealed override void GetBinaryForm(byte[] binaryForm, int offset)
         {
             raw_acl.GetBinaryForm(binaryForm, offset);
         }

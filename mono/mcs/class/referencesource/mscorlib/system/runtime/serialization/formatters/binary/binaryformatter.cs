@@ -33,7 +33,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
     using System.Diagnostics.Contracts;
 
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class BinaryFormatter :
+    public sealed class BinaryFormatter :
 #if DISABLE_REMOTING || (!FEATURE_REMOTING && !MONO)
         IFormatter
 #else

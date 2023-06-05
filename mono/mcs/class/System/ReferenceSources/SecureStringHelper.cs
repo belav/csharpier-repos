@@ -5,7 +5,7 @@ namespace System.Net
 {
     static partial class UnsafeNclNativeMethods
     {
-        internal unsafe static class SecureStringHelper
+        internal static unsafe class SecureStringHelper
         {
             internal static string CreateString(SecureString secureString)
             {

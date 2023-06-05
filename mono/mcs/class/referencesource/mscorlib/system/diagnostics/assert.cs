@@ -163,7 +163,7 @@ namespace System.Diagnostics
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Process)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int ShowDefaultAssertDialog(
+        internal static extern int ShowDefaultAssertDialog(
             String conditionString,
             String message,
             String stackTrace,

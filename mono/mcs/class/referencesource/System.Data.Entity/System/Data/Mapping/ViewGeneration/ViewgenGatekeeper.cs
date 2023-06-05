@@ -22,7 +22,7 @@ namespace System.Data.Mapping.ViewGeneration
 {
     using CellGroup = Set<Cell>;
 
-    abstract internal class ViewgenGatekeeper : InternalBase
+    internal abstract class ViewgenGatekeeper : InternalBase
     {
         /// <summary>
         /// Entry point for View Generation

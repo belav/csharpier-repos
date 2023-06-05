@@ -92,12 +92,12 @@ namespace Internal.IL
             return CreateFromType(Type);
         }
 
-        static public StackValue CreateUnknown()
+        public static StackValue CreateUnknown()
         {
             return new StackValue(StackValueKind.Unknown);
         }
 
-        static public StackValue CreatePrimitive(StackValueKind kind)
+        public static StackValue CreatePrimitive(StackValueKind kind)
         {
             Debug.Assert(
                 kind == StackValueKind.Int32
@@ -109,17 +109,17 @@ namespace Internal.IL
             return new StackValue(kind);
         }
 
-        static public StackValue CreateObjRef(TypeDesc type)
+        public static StackValue CreateObjRef(TypeDesc type)
         {
             return new StackValue(StackValueKind.ObjRef, type);
         }
 
-        static public StackValue CreateValueType(TypeDesc type)
+        public static StackValue CreateValueType(TypeDesc type)
         {
             return new StackValue(StackValueKind.ValueType, type);
         }
 
-        static public StackValue CreateByRef(
+        public static StackValue CreateByRef(
             TypeDesc type,
             bool readOnly = false,
             bool permanentHome = false
@@ -134,12 +134,12 @@ namespace Internal.IL
             );
         }
 
-        static public StackValue CreateMethod(MethodDesc method)
+        public static StackValue CreateMethod(MethodDesc method)
         {
             return new StackValue(StackValueKind.NativeInt, null, method);
         }
 
-        static public StackValue CreateFromType(TypeDesc type)
+        public static StackValue CreateFromType(TypeDesc type)
         {
             switch (type.Category)
             {

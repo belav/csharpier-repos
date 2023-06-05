@@ -83,7 +83,7 @@ namespace System
 
         // Create instance will create an array
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static Array CreateInstance(Type elementType, int length)
+        public static unsafe Array CreateInstance(Type elementType, int length)
         {
             if ((object)elementType == null)
                 throw new ArgumentNullException("elementType");
@@ -107,7 +107,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static Array CreateInstance(Type elementType, int length1, int length2)
+        public static unsafe Array CreateInstance(Type elementType, int length1, int length2)
         {
             if ((object)elementType == null)
                 throw new ArgumentNullException("elementType");
@@ -134,7 +134,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static Array CreateInstance(
+        public static unsafe Array CreateInstance(
             Type elementType,
             int length1,
             int length2,
@@ -178,7 +178,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static Array CreateInstance(Type elementType, params int[] lengths)
+        public static unsafe Array CreateInstance(Type elementType, params int[] lengths)
         {
             if ((object)elementType == null)
                 throw new ArgumentNullException("elementType");
@@ -241,7 +241,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static Array CreateInstance(
+        public static unsafe Array CreateInstance(
             Type elementType,
             int[] lengths,
             int[] lowerBounds
@@ -292,7 +292,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe static extern Array InternalCreate(
+        private static extern unsafe Array InternalCreate(
             void* elementType,
             int rank,
             int* pLengths,
@@ -757,14 +757,14 @@ namespace System
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         // reference to TypedReference is banned, so have to pass result as pointer
-        private unsafe extern void InternalGetReference(void* elemRef, int rank, int* pIndices);
+        private extern unsafe void InternalGetReference(void* elemRef, int rank, int* pIndices);
 
         // Ideally, we would like to use TypedReference.SetValue instead. Unfortunately, TypedReference.SetValue
         // always throws not-supported exception
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static void InternalSetValue(void* target, Object value);
+        private static extern unsafe void InternalSetValue(void* target, Object value);
 
         public extern int Length
         {
@@ -3641,7 +3641,7 @@ namespace System
         }
 
         // Copy
-        public new static void Copy(Array sourceArray, Array destinationArray, int length)
+        public static new void Copy(Array sourceArray, Array destinationArray, int length)
         {
             Contract.Requires(sourceArray != null);
             Contract.Requires(destinationArray != null);
@@ -3653,7 +3653,7 @@ namespace System
             );
         }
 
-        public new static void Copy(
+        public static new void Copy(
             Array sourceArray,
             int sourceIndex,
             Array destinationArray,
@@ -3676,7 +3676,7 @@ namespace System
             );
         }
 
-        public new static void ConstrainedCopy(
+        public static new void ConstrainedCopy(
             Array sourceArray,
             int sourceIndex,
             Array destinationArray,
@@ -3699,7 +3699,7 @@ namespace System
             );
         }
 
-        public new static void Copy(Array sourceArray, Array destinationArray, long length)
+        public static new void Copy(Array sourceArray, Array destinationArray, long length)
         {
             Contract.Requires(sourceArray != null);
             Contract.Requires(destinationArray != null);
@@ -3711,7 +3711,7 @@ namespace System
             );
         }
 
-        public new static void Copy(
+        public static new void Copy(
             Array sourceArray,
             long sourceIndex,
             Array destinationArray,
@@ -3734,7 +3734,7 @@ namespace System
             );
         }
 
-        public new static void Clear(Array array, int index, int length)
+        public static new void Clear(Array array, int index, int length)
         {
             Contract.Requires(array != null);
             Contract.Requires(index >= array.GetLowerBound(0)); // No precondition on the rank.  But index >= the first dimension's lower bounds.
@@ -3781,7 +3781,7 @@ namespace System
             return default(int);
         }
 
-        public new static void Sort(
+        public static new void Sort(
             Array keys,
             Array items,
             int index,
@@ -3799,7 +3799,7 @@ namespace System
             Contract.Requires(items == null || index + length <= items.Length);
         }
 
-        public new static void Sort(
+        public static new void Sort(
             Array array,
             int index,
             int length,
@@ -3813,7 +3813,7 @@ namespace System
             Contract.Requires(array.GetLowerBound(0) + index + length <= array.Length);
         }
 
-        public new static void Sort(Array keys, Array items, System.Collections.IComparer comparer)
+        public static new void Sort(Array keys, Array items, System.Collections.IComparer comparer)
         {
             Contract.Requires(keys != null);
             Contract.Requires(keys.Rank == 1);
@@ -3821,7 +3821,7 @@ namespace System
             Contract.Requires(items == null || keys.GetLowerBound(0) == items.GetLowerBound(0));
         }
 
-        public new static void Sort(Array array, int index, int length)
+        public static new void Sort(Array array, int index, int length)
         {
             Contract.Requires(array != null);
             Contract.Requires(array.Rank == 1);
@@ -3830,7 +3830,7 @@ namespace System
             Contract.Requires(array.GetLowerBound(0) + index + length <= array.Length);
         }
 
-        public new static void Sort(Array keys, Array items)
+        public static new void Sort(Array keys, Array items)
         {
             Contract.Requires(keys != null);
             Contract.Requires(keys.Rank == 1);

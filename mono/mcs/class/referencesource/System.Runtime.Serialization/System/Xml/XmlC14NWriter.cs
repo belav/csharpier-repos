@@ -991,7 +991,9 @@ namespace System.Xml
         }
 
 #if OLDWRITER
-        unsafe internal void WriteText(char* chars, int charCount)
+        internal
+#if OLDWRITER
+        unsafe void WriteText(char* chars, int charCount)
         {
             ThrowIfClosed();
             if (inStartElement)
@@ -1004,7 +1006,7 @@ namespace System.Xml
             }
         }
 
-        unsafe internal void WriteEscapedText(char* chars, int count)
+        internal unsafe void WriteEscapedText(char* chars, int count)
         {
             ThrowIfClosed();
             // Skip all white spaces before the start of root element.

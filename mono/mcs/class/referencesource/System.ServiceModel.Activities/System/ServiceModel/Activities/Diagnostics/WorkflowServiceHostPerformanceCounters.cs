@@ -211,7 +211,7 @@ namespace System.ServiceModel.Activities.Diagnostics
             }
         }
 
-        static internal string CreateFriendlyInstanceName(ServiceHostBase serviceHost)
+        internal static string CreateFriendlyInstanceName(ServiceHostBase serviceHost)
         {
             // instance name is: serviceName@uri
             ServiceInfo serviceInfo = new ServiceInfo(serviceHost);

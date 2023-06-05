@@ -81,12 +81,12 @@ namespace RabbitMQ.Client
         ///<summary>The default App.config appSettings key used by
         ///FromConfiguration and FromEnvironment. At the time of
         ///writing, "AMQP_PROTOCOL".</summary>
-        public readonly static string DefaultAppSettingsKey = "AMQP_PROTOCOL";
+        public static readonly string DefaultAppSettingsKey = "AMQP_PROTOCOL";
 
         ///<summary>The environment variable read by
         ///FromEnvironmentVariable() and FromEnvironment(). At the
         ///time of writing, "AMQP_PROTOCOL".</summary>
-        public readonly static string EnvironmentVariable = "AMQP_PROTOCOL";
+        public static readonly string EnvironmentVariable = "AMQP_PROTOCOL";
 
         ///<summary>Protocol version 0-8 as standardised.</summary>
         public static IProtocol AMQP_0_8

@@ -859,12 +859,12 @@ namespace System.Text
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [SecurityCritical]
-        internal unsafe extern void ReplaceBufferInternal(char* newBuffer, int newLength);
+        internal extern unsafe void ReplaceBufferInternal(char* newBuffer, int newLength);
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [SecurityCritical]
-        internal unsafe extern void ReplaceBufferAnsiInternal(sbyte* newBuffer, int newLength);
+        internal extern unsafe void ReplaceBufferAnsiInternal(sbyte* newBuffer, int newLength);
 #endif
 
         // Appends a copy of the characters in value from startIndex to startIndex +
@@ -2129,7 +2129,7 @@ namespace System.Text
         /// Inserts 'value' of length 'cou
         /// </summary>
         [SecurityCritical]
-        unsafe private void Insert(int index, char* value, int valueCount)
+        private unsafe void Insert(int index, char* value, int valueCount)
         {
             if ((uint)index > (uint)Length)
             {
@@ -2275,7 +2275,7 @@ namespace System.Text
         /// places by calling this mulitple times.
         /// </summary>
         [SecurityCritical]
-        unsafe private void ReplaceInPlaceAtChunk(
+        private unsafe void ReplaceInPlaceAtChunk(
             ref StringBuilder chunk,
             ref int indexInChunk,
             char* value,
@@ -2313,7 +2313,7 @@ namespace System.Text
         /// bounds check.  This is what we do here.
         /// </summary>
         [SecurityCritical]
-        unsafe private static void ThreadSafeCopy(
+        private static unsafe void ThreadSafeCopy(
             char* sourcePtr,
             char[] destination,
             int destinationIndex,

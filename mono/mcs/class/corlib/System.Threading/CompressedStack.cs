@@ -87,7 +87,7 @@ namespace System.Threading
         // it cannot be "found" with the StrongNameIdentityPermission for ECMA key.
         // But it's there!
         [SecurityCritical]
-        static public CompressedStack GetCompressedStack()
+        public static CompressedStack GetCompressedStack()
         {
 #if !FEATURE_COMPRESSEDSTACK
             throw new NotSupportedException();
@@ -127,7 +127,7 @@ namespace System.Threading
         }
 
         [SecurityCritical]
-        static public void Run(
+        public static void Run(
             CompressedStack compressedStack,
             ContextCallback callback,
             object state

@@ -53,7 +53,7 @@ namespace System.ServiceModel
             set { use = value ? OperationFormatUse.Encoded : OperationFormatUse.Literal; }
         }
 
-        static internal void ValidateOperationFormatStyle(OperationFormatStyle value)
+        internal static void ValidateOperationFormatStyle(OperationFormatStyle value)
         {
             if (!OperationFormatStyleHelper.IsDefined(value))
             {
@@ -63,7 +63,7 @@ namespace System.ServiceModel
             }
         }
 
-        static internal void ValidateOperationFormatUse(OperationFormatUse value)
+        internal static void ValidateOperationFormatUse(OperationFormatUse value)
         {
             if (!OperationFormatUseHelper.IsDefined(value))
             {

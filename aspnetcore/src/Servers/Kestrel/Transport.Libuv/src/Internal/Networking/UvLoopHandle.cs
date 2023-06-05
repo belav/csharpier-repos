@@ -33,7 +33,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             return _uv.now(this);
         }
 
-        unsafe protected override bool ReleaseHandle()
+        protected override unsafe bool ReleaseHandle()
         {
             var memory = handle;
             if (memory != IntPtr.Zero)

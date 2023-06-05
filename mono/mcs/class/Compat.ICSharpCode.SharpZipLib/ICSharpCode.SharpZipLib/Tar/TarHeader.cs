@@ -80,62 +80,62 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// The length of the name field in a header buffer.
         /// </summary>
-        public readonly static int NAMELEN = 100;
+        public static readonly int NAMELEN = 100;
 
         /// <summary>
         /// The length of the mode field in a header buffer.
         /// </summary>
-        public readonly static int MODELEN = 8;
+        public static readonly int MODELEN = 8;
 
         /// <summary>
         /// The length of the user id field in a header buffer.
         /// </summary>
-        public readonly static int UIDLEN = 8;
+        public static readonly int UIDLEN = 8;
 
         /// <summary>
         /// The length of the group id field in a header buffer.
         /// </summary>
-        public readonly static int GIDLEN = 8;
+        public static readonly int GIDLEN = 8;
 
         /// <summary>
         /// The length of the checksum field in a header buffer.
         /// </summary>
-        public readonly static int CHKSUMLEN = 8;
+        public static readonly int CHKSUMLEN = 8;
 
         /// <summary>
         /// The length of the size field in a header buffer.
         /// </summary>
-        public readonly static int SIZELEN = 12;
+        public static readonly int SIZELEN = 12;
 
         /// <summary>
         /// The length of the magic field in a header buffer.
         /// </summary>
-        public readonly static int MAGICLEN = 6;
+        public static readonly int MAGICLEN = 6;
 
         /// <summary>
         /// The length of the version field in a header buffer.
         /// </summary>
-        public readonly static int VERSIONLEN = 2;
+        public static readonly int VERSIONLEN = 2;
 
         /// <summary>
         /// The length of the modification time field in a header buffer.
         /// </summary>
-        public readonly static int MODTIMELEN = 12;
+        public static readonly int MODTIMELEN = 12;
 
         /// <summary>
         /// The length of the user name field in a header buffer.
         /// </summary>
-        public readonly static int UNAMELEN = 32;
+        public static readonly int UNAMELEN = 32;
 
         /// <summary>
         /// The length of the group name field in a header buffer.
         /// </summary>
-        public readonly static int GNAMELEN = 32;
+        public static readonly int GNAMELEN = 32;
 
         /// <summary>
         /// The length of the devices field in a header buffer.
         /// </summary>
-        public readonly static int DEVLEN = 8;
+        public static readonly int DEVLEN = 8;
 
         /// <summary>
         /// LF_ constants represents the "type" of an entry
@@ -196,7 +196,7 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// Posix.1 2001 extended header
         /// </summary>
-        public readonly static byte LF_XHDR = (byte)'x';
+        public static readonly byte LF_XHDR = (byte)'x';
 
         // POSIX allows for upper case ascii type as extensions
 
@@ -234,12 +234,12 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// The magic tag representing a POSIX tar archive.  (includes trailing NULL)
         /// </summary>
-        public readonly static string TMAGIC = "ustar ";
+        public static readonly string TMAGIC = "ustar ";
 
         /// <summary>
         /// The magic tag representing an old GNU tar archive where version is included in magic and overwrites it
         /// </summary>
-        public readonly static string GNU_TMAGIC = "ustar  ";
+        public static readonly string GNU_TMAGIC = "ustar  ";
 
         /// <summary>
         /// The entry's name.
@@ -625,8 +625,8 @@ namespace ICSharpCode.SharpZipLib.Tar
             return sum;
         }
 
-        readonly static long timeConversionFactor = 10000000L; // -jr- 1 tick == 100 nanoseconds
-        readonly static DateTime datetTime1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        static readonly long timeConversionFactor = 10000000L; // -jr- 1 tick == 100 nanoseconds
+        static readonly DateTime datetTime1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0);
 
         //      readonly static DateTime datetTime1970        = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToUniversalTime(); // -jr- Should be UTC?  doesnt match Gnutar if this is so though, why?
 

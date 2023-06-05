@@ -494,7 +494,7 @@ public class Foo_Globİı
 //hide the base class's functions.
 public class DFoo1 : Foo_Globİı
 {
-    new public class NestFoo_Globİı
+    public new class NestFoo_Globİı
     {
         public static void staticMethVoid_Void1() { }
 
@@ -505,9 +505,9 @@ public class DFoo1 : Foo_Globİı
         public virtual void instanceMethVoid_Void2() { }
     }
 
-    public new static void staticMethVoid_Void1() { }
+    public static new void staticMethVoid_Void1() { }
 
-    public new static void staticMethVoid_Void2() { }
+    public static new void staticMethVoid_Void2() { }
 
     public new virtual void instanceMethVoid_Void1() { }
 

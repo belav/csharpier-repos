@@ -57,7 +57,27 @@ namespace System.Data.Common
                     }
                 }
         */
-        static internal NameValueCollection CloneParent(NameValueCollection parentConfig)
+        internal
+        /*
+                static internal void CheckForChildNodes(XmlNode node) {
+                    if (node.HasChildNodes) {
+                        throw ADP.ConfigBaseNoChildNodes(node.FirstChild);
+                    }
+                }
+        
+                static private void CheckForNonElement(XmlNode node) {
+                    if (XmlNodeType.Element != node.NodeType) {
+                        throw ADP.ConfigBaseElementsOnly(node);
+                    }
+                }
+                
+                static internal void CheckForUnrecognizedAttributes(XmlNode node) {
+                    if (0 != node.Attributes.Count) {
+                        throw ADP.ConfigUnrecognizedAttributes(node);
+                    }
+                }
+        */
+        static NameValueCollection CloneParent(NameValueCollection parentConfig)
         {
             if (null == parentConfig)
             {
@@ -70,7 +90,7 @@ namespace System.Data.Common
             return parentConfig;
         }
 
-        virtual public object Create(object parent, object configContext, XmlNode section)
+        public virtual object Create(object parent, object configContext, XmlNode section)
         { // V1.2.3300
 #if DEBUG
             try
@@ -91,7 +111,7 @@ namespace System.Data.Common
 #endif
         }
 
-        static internal object CreateStatic(object parent, object configContext, XmlNode section)
+        internal static object CreateStatic(object parent, object configContext, XmlNode section)
         {
             object config = parent;
             if (null != section)
@@ -141,7 +161,18 @@ namespace System.Data.Common
                     return false;
                 }
           */
-        static internal string RemoveAttribute(XmlNode node, string name)
+        internal
+        /*
+                // skip whitespace and comments, throws if non-element
+                static internal bool IsIgnorableAlsoCheckForNonElement(XmlNode node) {
+                    if ((XmlNodeType.Comment == node.NodeType) || (XmlNodeType.Whitespace == node.NodeType)) {
+                        return true;
+                    }
+                    HandlerBase.CheckForNonElement(node);
+                    return false;
+                }
+          */
+        static string RemoveAttribute(XmlNode node, string name)
         {
             XmlNode attribute = node.Attributes.RemoveNamedItem(name);
             if (null == attribute)
@@ -156,10 +187,11 @@ namespace System.Data.Common
             return value;
         }
 
+        private
         // based off of DictionarySectionHandler
-        sealed private class DbProviderDictionarySectionHandler /* : IConfigurationSectionHandler*/
+        sealed class DbProviderDictionarySectionHandler /* : IConfigurationSectionHandler*/
         {
-            static internal NameValueCollection CreateStatic(
+            internal static NameValueCollection CreateStatic(
                 NameValueCollection config,
                 Object context,
                 XmlNode section
@@ -194,7 +226,7 @@ namespace System.Data.Common
                 return config;
             }
 
-            static private void HandleAdd(XmlNode child, NameValueCollection config)
+            private static void HandleAdd(XmlNode child, NameValueCollection config)
             {
                 // should add vaildate that setting is a known supported setting
                 // (i.e. that the value of the name attribute is is good)
@@ -205,7 +237,7 @@ namespace System.Data.Common
                 config.Add(name, value);
             }
 
-            static private void HandleRemove(XmlNode child, NameValueCollection config)
+            private static void HandleRemove(XmlNode child, NameValueCollection config)
             {
                 HandlerBase.CheckForChildNodes(child);
                 String name = RemoveAttribute(child, "name");
@@ -213,7 +245,7 @@ namespace System.Data.Common
                 config.Remove(name);
             }
 
-            static private void HandleClear(XmlNode child, NameValueCollection config)
+            private static void HandleClear(XmlNode child, NameValueCollection config)
             {
                 HandlerBase.CheckForChildNodes(child);
                 HandlerBase.CheckForUnrecognizedAttributes(child);

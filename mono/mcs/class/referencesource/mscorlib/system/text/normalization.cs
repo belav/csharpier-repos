@@ -77,7 +77,7 @@ namespace System.Text
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        static private unsafe void InitializeForm(NormalizationForm form, String strDataFile)
+        private static unsafe void InitializeForm(NormalizationForm form, String strDataFile)
         {
             byte* pTables = null;
 
@@ -111,7 +111,7 @@ namespace System.Text
         }
 
         [System.Security.SecurityCritical] // auto-generated
-        static private void EnsureInitialized(NormalizationForm form)
+        private static void EnsureInitialized(NormalizationForm form)
         {
             switch ((ExtendedNormalizationForms)form)
             {
@@ -343,7 +343,7 @@ namespace System.Text
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe private static extern int nativeNormalizationNormalizeString(
+        private static extern unsafe int nativeNormalizationNormalizeString(
             NormalizationForm normForm,
             ref int iError,
             String lpSrcString,
@@ -355,7 +355,7 @@ namespace System.Text
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe private static extern bool nativeNormalizationIsNormalizedString(
+        private static extern unsafe bool nativeNormalizationIsNormalizedString(
             NormalizationForm normForm,
             ref int iError,
             String lpString,
@@ -366,7 +366,7 @@ namespace System.Text
         [ResourceExposure(ResourceScope.Process)]
         [SuppressUnmanagedCodeSecurity]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        unsafe private static extern void nativeNormalizationInitNormalization(
+        private static extern unsafe void nativeNormalizationInitNormalization(
             NormalizationForm normForm,
             byte* pTableData
         );

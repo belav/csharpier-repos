@@ -2265,7 +2265,7 @@ typedef struct {
 
     class SDKHelper
     {
-        static protected Microsoft.Win32.RegistryKey GetToolchainRegistrySubKey(string subKey)
+        protected static Microsoft.Win32.RegistryKey GetToolchainRegistrySubKey(string subKey)
         {
             Microsoft.Win32.RegistryKey key = null;
 
@@ -2300,7 +2300,7 @@ typedef struct {
 
         static WindowsSDKHelper singletonInstance = new WindowsSDKHelper();
 
-        static public WindowsSDKHelper GetInstance()
+        public static WindowsSDKHelper GetInstance()
         {
             return singletonInstance;
         }
@@ -2721,7 +2721,7 @@ typedef struct {
 
         static VisualStudioSDKHelper singletonInstance = new VisualStudioSDKHelper();
 
-        static public VisualStudioSDKHelper GetInstance()
+        public static VisualStudioSDKHelper GetInstance()
         {
             return singletonInstance;
         }
@@ -3195,7 +3195,7 @@ typedef struct {
         static VisualStudioSDKToolchainHelper singletonInstance =
             new VisualStudioSDKToolchainHelper();
 
-        static public VisualStudioSDKToolchainHelper GetInstance()
+        public static VisualStudioSDKToolchainHelper GetInstance()
         {
             return singletonInstance;
         }

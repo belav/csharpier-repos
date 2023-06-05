@@ -44,8 +44,8 @@ namespace MonoTests.Mono.Data.Sqlite
     [TestFixture]
     public class SqliteDataReaderTest
     {
-        readonly static string _uri = TestResourceHelper.GetFullPathOfResource("Test/test.db");
-        readonly static string _connectionString = "URI=file://" + _uri + ", version=3";
+        static readonly string _uri = TestResourceHelper.GetFullPathOfResource("Test/test.db");
+        static readonly string _connectionString = "URI=file://" + _uri + ", version=3";
         SqliteConnection _conn = new SqliteConnection();
 
         [TestFixtureSetUp]

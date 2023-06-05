@@ -34,10 +34,12 @@ namespace System.Data.Mapping.Update.Internal
                 EntityUtil.CheckArgumentNull(parent, "parent");
                 m_parent = parent;
             }
+
+            private
             #endregion
 
             #region Fields
-            static private Dictionary<PrimitiveTypeKind, object> s_typeDefaultMap =
+            static Dictionary<PrimitiveTypeKind, object> s_typeDefaultMap =
                 InitializeTypeDefaultMap();
             private UpdateTranslator m_parent;
             #endregion

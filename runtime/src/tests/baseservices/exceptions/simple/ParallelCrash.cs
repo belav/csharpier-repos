@@ -14,7 +14,7 @@ public class ParallelCrash
 {
     private const int ThreadCount = 10;
 
-    private volatile static int s_runningThreads;
+    private static volatile int s_runningThreads;
     private static bool s_crashMainThread;
     private static bool s_crashWorkerThreads;
 

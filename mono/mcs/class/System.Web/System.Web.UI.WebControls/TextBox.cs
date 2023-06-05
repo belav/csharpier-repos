@@ -59,7 +59,7 @@ namespace System.Web.UI.WebControls
     [SupportsEventValidation]
     public class TextBox : WebControl, IPostBackDataHandler, IEditableTextControl, ITextControl
     {
-        readonly static string[] VCardValues = new string[]
+        static readonly string[] VCardValues = new string[]
         {
             null,
             null,
@@ -421,7 +421,7 @@ namespace System.Web.UI.WebControls
         }
 
 #if HAVE_CONTROL_ADAPTERS
-        protected virtual new
+        protected new virtual
 #else
         protected override
 #endif

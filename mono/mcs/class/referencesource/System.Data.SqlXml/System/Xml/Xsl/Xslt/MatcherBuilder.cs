@@ -91,7 +91,7 @@ namespace System.Xml.Xsl.Xslt
 
     internal class TemplateMatch
     {
-        public readonly static TemplateMatchComparer Comparer = new TemplateMatchComparer();
+        public static readonly TemplateMatchComparer Comparer = new TemplateMatchComparer();
 
         private Template template;
         private double priority;

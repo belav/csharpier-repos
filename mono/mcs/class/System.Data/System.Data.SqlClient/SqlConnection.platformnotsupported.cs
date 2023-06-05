@@ -112,16 +112,16 @@ namespace System.Data.SqlClient
         protected override void OnStateChange(StateChangeEventArgs stateChange) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public SqlTransaction BeginTransaction() =>
+        public new SqlTransaction BeginTransaction() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public SqlTransaction BeginTransaction(IsolationLevel iso) =>
+        public new SqlTransaction BeginTransaction(IsolationLevel iso) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         public SqlTransaction BeginTransaction(string transactionName) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override protected DbTransaction BeginDbTransaction(IsolationLevel isolationLevel) =>
+        protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         public SqlTransaction BeginTransaction(IsolationLevel iso, string transactionName) =>
@@ -147,7 +147,7 @@ namespace System.Data.SqlClient
 
         public override void Close() => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public SqlCommand CreateCommand() =>
+        public new SqlCommand CreateCommand() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         public override void Open() => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -255,10 +255,10 @@ namespace System.Data.SqlClient
         internal void AddWeakReference(object value, int tag) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override protected DbCommand CreateDbCommand() =>
+        protected override DbCommand CreateDbCommand() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override protected void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing) { }
 
         public override void EnlistTransaction(Transaction transaction) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);

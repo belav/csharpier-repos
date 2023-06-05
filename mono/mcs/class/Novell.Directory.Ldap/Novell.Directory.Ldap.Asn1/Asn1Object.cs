@@ -58,7 +58,16 @@ namespace Novell.Directory.Ldap.Asn1
         /// <param name="out">The output stream onto which the encoded
         /// Asn1Object will be placed.
         /// </param>
-        abstract public void encode(Asn1Encoder enc, System.IO.Stream out_Renamed);
+        public
+        /// <summary> Abstract method that must be implemented by each child
+        /// class to encode itself ( an Asn1Object) directly intto
+        /// a output stream.
+        ///
+        /// </summary>
+        /// <param name="out">The output stream onto which the encoded
+        /// Asn1Object will be placed.
+        /// </param>
+        abstract void encode(Asn1Encoder enc, System.IO.Stream out_Renamed);
 
         /// <summary> Returns the identifier for this Asn1Object as an Asn1Identifier.
         /// This Asn1Identifier object will include the CLASS, FORM and TAG

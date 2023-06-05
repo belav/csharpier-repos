@@ -32,14 +32,14 @@ namespace Test
 
         // Disable inlining to permit easier identification of the code
         [MethodImpl(MethodImplOptions.NoInlining)]
-        unsafe static void Do1(Point* src, Point* dst)
+        static unsafe void Do1(Point* src, Point* dst)
         {
             *((Point*)dst) = *((Point*)src);
         }
 
         // Disable inlining to permit easier identification of the code
         [MethodImpl(MethodImplOptions.NoInlining)]
-        unsafe static void Do2(Point* src, Point* dst)
+        static unsafe void Do2(Point* src, Point* dst)
         {
             *((long*)dst) = *((long*)src);
         }

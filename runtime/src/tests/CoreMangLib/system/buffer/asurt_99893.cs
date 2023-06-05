@@ -107,7 +107,7 @@ namespace System
             value = o;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             string s = "MyInt32";
             if (value == null)

@@ -183,7 +183,7 @@ namespace System.ServiceModel.Channels
             return (value == null) ? typeof(object) : value.GetType();
         }
 
-        static public Message CreateMessage(MessageVersion version, string action, object body)
+        public static Message CreateMessage(MessageVersion version, string action, object body)
         {
             return CreateMessage(
                 version,
@@ -196,7 +196,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static public Message CreateMessage(
+        public static Message CreateMessage(
             MessageVersion version,
             string action,
             object body,
@@ -218,12 +218,12 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static public Message CreateMessage(MessageVersion version, string action, XmlReader body)
+        public static Message CreateMessage(MessageVersion version, string action, XmlReader body)
         {
             return CreateMessage(version, action, XmlDictionaryReader.CreateDictionaryReader(body));
         }
 
-        static public Message CreateMessage(
+        public static Message CreateMessage(
             MessageVersion version,
             string action,
             XmlDictionaryReader body
@@ -237,7 +237,7 @@ namespace System.ServiceModel.Channels
             return CreateMessage(version, action, new XmlReaderBodyWriter(body, version.Envelope));
         }
 
-        static public Message CreateMessage(MessageVersion version, string action, BodyWriter body)
+        public static Message CreateMessage(MessageVersion version, string action, BodyWriter body)
         {
             if (version == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -250,7 +250,7 @@ namespace System.ServiceModel.Channels
             return new BodyWriterMessage(version, action, body);
         }
 
-        static internal Message CreateMessage(
+        internal static Message CreateMessage(
             MessageVersion version,
             ActionHeader actionHeader,
             BodyWriter body
@@ -267,7 +267,7 @@ namespace System.ServiceModel.Channels
             return new BodyWriterMessage(version, actionHeader, body);
         }
 
-        static public Message CreateMessage(MessageVersion version, string action)
+        public static Message CreateMessage(MessageVersion version, string action)
         {
             if (version == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -276,7 +276,7 @@ namespace System.ServiceModel.Channels
             return new BodyWriterMessage(version, action, EmptyBodyWriter.Value);
         }
 
-        static internal Message CreateMessage(MessageVersion version, ActionHeader actionHeader)
+        internal static Message CreateMessage(MessageVersion version, ActionHeader actionHeader)
         {
             if (version == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -285,7 +285,7 @@ namespace System.ServiceModel.Channels
             return new BodyWriterMessage(version, actionHeader, EmptyBodyWriter.Value);
         }
 
-        static public Message CreateMessage(
+        public static Message CreateMessage(
             XmlReader envelopeReader,
             int maxSizeOfHeaders,
             MessageVersion version
@@ -298,7 +298,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static public Message CreateMessage(
+        public static Message CreateMessage(
             XmlDictionaryReader envelopeReader,
             int maxSizeOfHeaders,
             MessageVersion version
@@ -316,7 +316,7 @@ namespace System.ServiceModel.Channels
             return message;
         }
 
-        static public Message CreateMessage(
+        public static Message CreateMessage(
             MessageVersion version,
             FaultCode faultCode,
             string reason,
@@ -339,7 +339,7 @@ namespace System.ServiceModel.Channels
             return CreateMessage(version, MessageFault.CreateFault(faultCode, reason), action);
         }
 
-        static public Message CreateMessage(
+        public static Message CreateMessage(
             MessageVersion version,
             FaultCode faultCode,
             string reason,
@@ -367,7 +367,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static public Message CreateMessage(
+        public static Message CreateMessage(
             MessageVersion version,
             MessageFault fault,
             string action
@@ -541,7 +541,7 @@ namespace System.ServiceModel.Channels
             Headers.RelatesTo = requestMessageID;
         }
 
-        static internal bool IsFaultStartElement(
+        internal static bool IsFaultStartElement(
             XmlDictionaryReader reader,
             EnvelopeVersion version
         )

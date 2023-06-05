@@ -110,7 +110,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class SqlInternalConnectionTds : SqlInternalConnection, IDisposable
+    internal sealed class SqlInternalConnectionTds : SqlInternalConnection, IDisposable
     {
         // CONNECTION AND STATE VARIABLES
         private readonly SqlConnectionPoolGroupProviderInfo _poolGroupProviderInfo; // will only be null when called for ChangePassword, or creating SSE User Instance
@@ -609,17 +609,17 @@ namespace System.Data.SqlClient
             get { return _routingDestination; }
         }
 
-        override internal SqlInternalTransaction CurrentTransaction
+        internal override SqlInternalTransaction CurrentTransaction
         {
             get { return _parser.CurrentTransaction; }
         }
 
-        override internal SqlInternalTransaction AvailableInternalTransaction
+        internal override SqlInternalTransaction AvailableInternalTransaction
         {
             get { return _parser._fResetConnection ? null : CurrentTransaction; }
         }
 
-        override internal SqlInternalTransaction PendingTransaction
+        internal override SqlInternalTransaction PendingTransaction
         {
             get { return _parser.PendingTransaction; }
         }
@@ -634,27 +634,27 @@ namespace System.Data.SqlClient
             get { return _instanceName; }
         }
 
-        override internal bool IsLockedForBulkCopy
+        internal override bool IsLockedForBulkCopy
         {
             get { return (!Parser.MARSOn && Parser._physicalStateObj.BcpLock); }
         }
 
-        override protected internal bool IsNonPoolableTransactionRoot
+        protected internal override bool IsNonPoolableTransactionRoot
         {
             get { return IsTransactionRoot && (!IsKatmaiOrNewer || null == Pool); }
         }
 
-        override internal bool IsShiloh
+        internal override bool IsShiloh
         {
             get { return _loginAck.isVersion8; }
         }
 
-        override internal bool IsYukonOrNewer
+        internal override bool IsYukonOrNewer
         {
             get { return _parser.IsYukonOrNewer; }
         }
 
-        override internal bool IsKatmaiOrNewer
+        internal override bool IsKatmaiOrNewer
         {
             get { return _parser.IsKatmaiOrNewer; }
         }
@@ -679,7 +679,7 @@ namespace System.Data.SqlClient
             get { return _poolGroupProviderInfo; }
         }
 
-        override protected bool ReadyToPrepareTransaction
+        protected override bool ReadyToPrepareTransaction
         {
             get
             {
@@ -689,7 +689,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override public string ServerVersion
+        public override string ServerVersion
         {
             get
             {
@@ -727,7 +727,7 @@ namespace System.Data.SqlClient
             "Microsoft.Globalization",
             "CA1303:DoNotPassLiteralsAsLocalizedParameters"
         )] // copied from Triaged.cs
-        override protected void ChangeDatabaseInternal(string database)
+        protected override void ChangeDatabaseInternal(string database)
         {
             // MDAC 73598 - add brackets around database
             database = SqlConnection.FixupDatabaseTransactionName(database);
@@ -742,7 +742,7 @@ namespace System.Data.SqlClient
             _parser.Run(RunBehavior.UntilDone, null, null, null, _parser._physicalStateObj);
         }
 
-        override public void Dispose()
+        public override void Dispose()
         {
             if (Bid.AdvancedOn)
             {
@@ -774,7 +774,7 @@ namespace System.Data.SqlClient
             base.Dispose();
         }
 
-        override internal void ValidateConnectionForExecute(SqlCommand command)
+        internal override void ValidateConnectionForExecute(SqlCommand command)
         {
             TdsParser parser = _parser;
             if (
@@ -919,7 +919,12 @@ namespace System.Data.SqlClient
         // POOLING METHODS
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        override protected void Activate(SysTx.Transaction transaction)
+        protected
+        ////////////////////////////////////////////////////////////////////////////////////////
+        // POOLING METHODS
+        ////////////////////////////////////////////////////////////////////////////////////////
+
+        override void Activate(SysTx.Transaction transaction)
         {
             FailoverPermissionDemand(); // Demand for unspecified failover pooled connections
 
@@ -944,7 +949,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected void InternalDeactivate()
+        protected override void InternalDeactivate()
         {
             // When we're deactivated, the user must have called End on all
             // the async commands, or we don't know that we're in a state that
@@ -1070,7 +1075,12 @@ namespace System.Data.SqlClient
         // LOCAL TRANSACTION METHODS
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        override internal void DisconnectTransaction(SqlInternalTransaction internalTransaction)
+        internal
+        ////////////////////////////////////////////////////////////////////////////////////////
+        // LOCAL TRANSACTION METHODS
+        ////////////////////////////////////////////////////////////////////////////////////////
+
+        override void DisconnectTransaction(SqlInternalTransaction internalTransaction)
         {
             TdsParser parser = Parser;
 
@@ -1089,7 +1099,7 @@ namespace System.Data.SqlClient
             ExecuteTransaction(transactionRequest, name, iso, null, false);
         }
 
-        override internal void ExecuteTransaction(
+        internal override void ExecuteTransaction(
             TransactionRequest transactionRequest,
             string name,
             IsolationLevel iso,
@@ -1412,13 +1422,18 @@ namespace System.Data.SqlClient
         // DISTRIBUTED TRANSACTION METHODS
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        override internal void DelegatedTransactionEnded()
+        internal
+        ////////////////////////////////////////////////////////////////////////////////////////
+        // DISTRIBUTED TRANSACTION METHODS
+        ////////////////////////////////////////////////////////////////////////////////////////
+
+        override void DelegatedTransactionEnded()
         {
             //
             base.DelegatedTransactionEnded();
         }
 
-        override protected byte[] GetDTCAddress()
+        protected override byte[] GetDTCAddress()
         {
             byte[] dtcAddress = _parser.GetDTCAddress(
                 ConnectionOptions.ConnectTimeout,
@@ -1428,7 +1443,7 @@ namespace System.Data.SqlClient
             return dtcAddress;
         }
 
-        override protected void PropagateTransactionCookie(byte[] cookie)
+        protected override void PropagateTransactionCookie(byte[] cookie)
         {
             _parser.PropagateDistributedTransaction(
                 cookie,

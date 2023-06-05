@@ -1325,7 +1325,7 @@ namespace System.Data.Entity.Design
             return true;
         }
 
-        static internal bool IsFkPartiallyContainedInPK(
+        internal static bool IsFkPartiallyContainedInPK(
             AssociationType association,
             out string errorMessage
         )

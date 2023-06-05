@@ -38,7 +38,7 @@ namespace System.Security.Permissions
     public sealed class StrongNameIdentityPermission : CodeAccessPermission, IBuiltInPermission
     {
         private const int version = 1;
-        static private Version defaultVersion = new Version(0, 0);
+        private static Version defaultVersion = new Version(0, 0);
 
         private struct SNIP
         {

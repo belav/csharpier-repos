@@ -53,7 +53,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        static public HashAlgorithm Create()
+        public
+        //
+        // public methods
+        //
+
+        static HashAlgorithm Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.SHA1CryptoServiceProvider();
@@ -62,7 +67,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        static public HashAlgorithm Create(String hashName)
+        public static HashAlgorithm Create(String hashName)
         {
             return (HashAlgorithm)CryptoConfig.CreateFromName(hashName);
         }

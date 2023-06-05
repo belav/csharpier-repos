@@ -35,7 +35,7 @@ namespace Mono.Security
     {
         private BitConverterLE() { }
 
-        unsafe private static byte[] GetUShortBytes(byte* bytes)
+        private static unsafe byte[] GetUShortBytes(byte* bytes)
         {
             if (BitConverter.IsLittleEndian)
                 return new byte[] { bytes[0], bytes[1] };
@@ -43,7 +43,7 @@ namespace Mono.Security
                 return new byte[] { bytes[1], bytes[0] };
         }
 
-        unsafe private static byte[] GetUIntBytes(byte* bytes)
+        private static unsafe byte[] GetUIntBytes(byte* bytes)
         {
             if (BitConverter.IsLittleEndian)
                 return new byte[] { bytes[0], bytes[1], bytes[2], bytes[3] };
@@ -51,7 +51,7 @@ namespace Mono.Security
                 return new byte[] { bytes[3], bytes[2], bytes[1], bytes[0] };
         }
 
-        unsafe private static byte[] GetULongBytes(byte* bytes)
+        private static unsafe byte[] GetULongBytes(byte* bytes)
         {
             if (BitConverter.IsLittleEndian)
                 return new byte[]
@@ -79,57 +79,57 @@ namespace Mono.Security
                 };
         }
 
-        unsafe internal static byte[] GetBytes(bool value)
+        internal static unsafe byte[] GetBytes(bool value)
         {
             return new byte[] { value ? (byte)1 : (byte)0 };
         }
 
-        unsafe internal static byte[] GetBytes(char value)
+        internal static unsafe byte[] GetBytes(char value)
         {
             return GetUShortBytes((byte*)&value);
         }
 
-        unsafe internal static byte[] GetBytes(short value)
+        internal static unsafe byte[] GetBytes(short value)
         {
             return GetUShortBytes((byte*)&value);
         }
 
-        unsafe internal static byte[] GetBytes(int value)
+        internal static unsafe byte[] GetBytes(int value)
         {
             return GetUIntBytes((byte*)&value);
         }
 
-        unsafe internal static byte[] GetBytes(long value)
+        internal static unsafe byte[] GetBytes(long value)
         {
             return GetULongBytes((byte*)&value);
         }
 
-        unsafe internal static byte[] GetBytes(ushort value)
+        internal static unsafe byte[] GetBytes(ushort value)
         {
             return GetUShortBytes((byte*)&value);
         }
 
-        unsafe internal static byte[] GetBytes(uint value)
+        internal static unsafe byte[] GetBytes(uint value)
         {
             return GetUIntBytes((byte*)&value);
         }
 
-        unsafe internal static byte[] GetBytes(ulong value)
+        internal static unsafe byte[] GetBytes(ulong value)
         {
             return GetULongBytes((byte*)&value);
         }
 
-        unsafe internal static byte[] GetBytes(float value)
+        internal static unsafe byte[] GetBytes(float value)
         {
             return GetUIntBytes((byte*)&value);
         }
 
-        unsafe internal static byte[] GetBytes(double value)
+        internal static unsafe byte[] GetBytes(double value)
         {
             return GetULongBytes((byte*)&value);
         }
 
-        unsafe private static void UShortFromBytes(byte* dst, byte[] src, int startIndex)
+        private static unsafe void UShortFromBytes(byte* dst, byte[] src, int startIndex)
         {
             if (BitConverter.IsLittleEndian)
             {
@@ -143,7 +143,7 @@ namespace Mono.Security
             }
         }
 
-        unsafe private static void UIntFromBytes(byte* dst, byte[] src, int startIndex)
+        private static unsafe void UIntFromBytes(byte* dst, byte[] src, int startIndex)
         {
             if (BitConverter.IsLittleEndian)
             {
@@ -161,7 +161,7 @@ namespace Mono.Security
             }
         }
 
-        unsafe private static void ULongFromBytes(byte* dst, byte[] src, int startIndex)
+        private static unsafe void ULongFromBytes(byte* dst, byte[] src, int startIndex)
         {
             if (BitConverter.IsLittleEndian)
             {
@@ -175,12 +175,12 @@ namespace Mono.Security
             }
         }
 
-        unsafe internal static bool ToBoolean(byte[] value, int startIndex)
+        internal static unsafe bool ToBoolean(byte[] value, int startIndex)
         {
             return value[startIndex] != 0;
         }
 
-        unsafe internal static char ToChar(byte[] value, int startIndex)
+        internal static unsafe char ToChar(byte[] value, int startIndex)
         {
             char ret;
 
@@ -189,7 +189,7 @@ namespace Mono.Security
             return ret;
         }
 
-        unsafe internal static short ToInt16(byte[] value, int startIndex)
+        internal static unsafe short ToInt16(byte[] value, int startIndex)
         {
             short ret;
 
@@ -198,7 +198,7 @@ namespace Mono.Security
             return ret;
         }
 
-        unsafe internal static int ToInt32(byte[] value, int startIndex)
+        internal static unsafe int ToInt32(byte[] value, int startIndex)
         {
             int ret;
 
@@ -207,7 +207,7 @@ namespace Mono.Security
             return ret;
         }
 
-        unsafe internal static long ToInt64(byte[] value, int startIndex)
+        internal static unsafe long ToInt64(byte[] value, int startIndex)
         {
             long ret;
 
@@ -216,7 +216,7 @@ namespace Mono.Security
             return ret;
         }
 
-        unsafe internal static ushort ToUInt16(byte[] value, int startIndex)
+        internal static unsafe ushort ToUInt16(byte[] value, int startIndex)
         {
             ushort ret;
 
@@ -225,7 +225,7 @@ namespace Mono.Security
             return ret;
         }
 
-        unsafe internal static uint ToUInt32(byte[] value, int startIndex)
+        internal static unsafe uint ToUInt32(byte[] value, int startIndex)
         {
             uint ret;
 
@@ -234,7 +234,7 @@ namespace Mono.Security
             return ret;
         }
 
-        unsafe internal static ulong ToUInt64(byte[] value, int startIndex)
+        internal static unsafe ulong ToUInt64(byte[] value, int startIndex)
         {
             ulong ret;
 
@@ -243,7 +243,7 @@ namespace Mono.Security
             return ret;
         }
 
-        unsafe internal static float ToSingle(byte[] value, int startIndex)
+        internal static unsafe float ToSingle(byte[] value, int startIndex)
         {
             float ret;
 
@@ -252,7 +252,7 @@ namespace Mono.Security
             return ret;
         }
 
-        unsafe internal static double ToDouble(byte[] value, int startIndex)
+        internal static unsafe double ToDouble(byte[] value, int startIndex)
         {
             double ret;
 

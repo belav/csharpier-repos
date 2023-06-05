@@ -492,7 +492,7 @@ namespace System.Security.Cryptography
 #endif
             [DllImport("CRYPT32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             [ResourceExposure(ResourceScope.None)]
-            internal extern static IntPtr CryptFindOIDInfo(
+            internal static extern IntPtr CryptFindOIDInfo(
                 [In] uint dwKeyType,
                 [In] IntPtr pvKey,
                 [In] OidGroup dwGroupId
@@ -503,7 +503,7 @@ namespace System.Security.Cryptography
 #endif
             [DllImport("CRYPT32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             [ResourceExposure(ResourceScope.None)]
-            internal extern static IntPtr CryptFindOIDInfo(
+            internal static extern IntPtr CryptFindOIDInfo(
                 [In] uint dwKeyType,
                 [In] SafeLocalAllocHandle pvKey,
                 [In] OidGroup dwGroupId

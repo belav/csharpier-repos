@@ -44,45 +44,49 @@ namespace Novell.Directory.Ldap
     /// </summary>
     public class LdapDITContentRuleSchema : LdapSchemaElement
     {
+        public
         /// <summary> Returns the list of allowed auxiliary classes.
         ///
         /// </summary>
         /// <returns> The list of allowed auxiliary classes.
         /// </returns>
-        virtual public System.String[] AuxiliaryClasses
+        virtual System.String[] AuxiliaryClasses
         {
             get { return auxiliary; }
         }
 
+        public
         /// <summary> Returns the list of additional required attributes for an entry
         /// controlled by this content rule.
         ///
         /// </summary>
         /// <returns> The list of additional required attributes.
         /// </returns>
-        virtual public System.String[] RequiredAttributes
+        virtual System.String[] RequiredAttributes
         {
             get { return required; }
         }
 
+        public
         /// <summary> Returns the list of additional optional attributes for an entry
         /// controlled by this content rule.
         ///
         /// </summary>
         /// <returns> The list of additional optional attributes.
         /// </returns>
-        virtual public System.String[] OptionalAttributes
+        virtual System.String[] OptionalAttributes
         {
             get { return optional; }
         }
 
+        public
         /// <summary> Returns the list of precluded attributes for an entry controlled by
         /// this content rule.
         ///
         /// </summary>
         /// <returns> The list of precluded attributes.
         /// </returns>
-        virtual public System.String[] PrecludedAttributes
+        virtual System.String[] PrecludedAttributes
         {
             get { return precluded; }
         }

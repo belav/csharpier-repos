@@ -1009,7 +1009,7 @@ namespace System.Web.Configuration
             return result;
         }
 
-        static internal void DestroyByteArray(byte[] buf)
+        internal static void DestroyByteArray(byte[] buf)
         {
             if (buf == null || buf.Length < 1)
                 return;
@@ -1319,7 +1319,7 @@ namespace System.Web.Configuration
         // which can reduce the overall security of the system. But unfortunately, some code is dependent
         // on this broken behavior.
         [Obsolete(OBSOLETE_CRYPTO_API_MESSAGE)]
-        static internal byte[] HexStringToByteArray(String str)
+        internal static byte[] HexStringToByteArray(String str)
         {
             if (((uint)str.Length & 0x1) == 0x1) // must be 2 nibbles per byte
             {

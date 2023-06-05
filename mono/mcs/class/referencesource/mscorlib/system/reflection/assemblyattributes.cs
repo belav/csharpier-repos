@@ -196,7 +196,7 @@ namespace System.Reflection
 
     [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class AssemblyCultureAttribute : Attribute
+    public sealed unsafe class AssemblyCultureAttribute : Attribute
     {
         private String m_culture;
 
@@ -213,7 +213,7 @@ namespace System.Reflection
 
     [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class AssemblyVersionAttribute : Attribute
+    public sealed unsafe class AssemblyVersionAttribute : Attribute
     {
         private String m_version;
 
@@ -264,7 +264,7 @@ namespace System.Reflection
 
     [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class AssemblyAlgorithmIdAttribute : Attribute
+    public sealed unsafe class AssemblyAlgorithmIdAttribute : Attribute
     {
         private uint m_algId;
 
@@ -288,7 +288,7 @@ namespace System.Reflection
 
     [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class AssemblyFlagsAttribute : Attribute
+    public sealed unsafe class AssemblyFlagsAttribute : Attribute
     {
         private AssemblyNameFlags m_flags;
 

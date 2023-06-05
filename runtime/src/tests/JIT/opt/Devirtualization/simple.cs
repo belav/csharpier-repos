@@ -28,7 +28,7 @@ public class B : Iy, Ix, Iz
         return 3;
     }
 
-    virtual public int G()
+    public virtual int G()
     {
         return 5;
     }
@@ -46,12 +46,12 @@ public class B : Iy, Ix, Iz
 
 public class Z : B, Iz
 {
-    new public int F()
+    public new int F()
     {
         return 13;
     }
 
-    override public int G()
+    public override int G()
     {
         return 17;
     }

@@ -61,7 +61,7 @@ namespace System.Diagnostics
         #endregion
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static bool get_frame_info(
+        static extern bool get_frame_info(
             int skip,
             bool needFileInfo,
             out MethodBase method,

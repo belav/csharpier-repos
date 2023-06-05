@@ -1770,7 +1770,7 @@ namespace MonoTests.System
 
             static void Run(C x) { }
 
-            public new static int DoRun(C x)
+            public static new int DoRun(C x)
             {
                 return 107;
             }

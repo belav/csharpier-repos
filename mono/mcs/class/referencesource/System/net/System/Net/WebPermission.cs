@@ -38,7 +38,7 @@ namespace System.Net
         Inherited = false
     )]
     [Serializable()]
-    sealed public class WebPermissionAttribute : CodeAccessSecurityAttribute
+    public sealed class WebPermissionAttribute : CodeAccessSecurityAttribute
     {
         private object m_accept = null;
         private object m_connect = null;

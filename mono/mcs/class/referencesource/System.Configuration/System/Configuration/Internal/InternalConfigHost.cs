@@ -87,7 +87,7 @@ namespace System.Configuration.Internal
             "CA2106:SecureAsserts",
             Justification = "The callers don't leak this information."
         )]
-        static internal string StaticGetStreamNameForConfigSource(
+        internal static string StaticGetStreamNameForConfigSource(
             string streamName,
             string configSource
         )
@@ -139,7 +139,7 @@ namespace System.Configuration.Internal
             return StaticGetStreamNameForConfigSource(streamName, configSource);
         }
 
-        static internal object StaticGetStreamVersion(string streamName)
+        internal static object StaticGetStreamVersion(string streamName)
         {
             bool exists = false;
             long fileSize = 0;
@@ -176,7 +176,10 @@ namespace System.Configuration.Internal
 
         // default impl treats name as a file name
         // null means stream doesn't exist for this name
-        static internal Stream StaticOpenStreamForRead(string streamName)
+        internal
+        // default impl treats name as a file name
+        // null means stream doesn't exist for this name
+        static Stream StaticOpenStreamForRead(string streamName)
         {
             if (string.IsNullOrEmpty(streamName))
             {
@@ -242,7 +245,14 @@ namespace System.Configuration.Internal
         // Parameters:
         //  assertPermissions - If true, then we'll assert all required permissions.  Used by ClientSettingsConfigurationHost.
         //                      to allow low-trust apps to use ClientSettingsStore.
-        static internal Stream StaticOpenStreamForWrite(
+        internal
+        // This method doesn't really open the streamName for write.  Instead, using WriteFileContext
+        // it opens a stream on a temporary file created in the same directory as streamName.
+        //
+        // Parameters:
+        //  assertPermissions - If true, then we'll assert all required permissions.  Used by ClientSettingsConfigurationHost.
+        //                      to allow low-trust apps to use ClientSettingsStore.
+        static Stream StaticOpenStreamForWrite(
             string streamName,
             string templateStreamName,
             ref object writeContext,
@@ -388,7 +398,11 @@ namespace System.Configuration.Internal
         // Parameters:
         //  assertPermissions - If true, then we'll assert all required permissions.  Used by ClientSettingsConfigurationHost.
         //                      to allow low-trust apps to use ClientSettingsStore.
-        static internal void StaticWriteCompleted(
+        internal
+        // Parameters:
+        //  assertPermissions - If true, then we'll assert all required permissions.  Used by ClientSettingsConfigurationHost.
+        //                      to allow low-trust apps to use ClientSettingsStore.
+        static void StaticWriteCompleted(
             string streamName,
             bool success,
             object writeContext,
@@ -451,7 +465,7 @@ namespace System.Configuration.Internal
             StaticWriteCompleted(streamName, success, writeContext, assertPermissions);
         }
 
-        static internal void StaticDeleteStream(string streamName)
+        internal static void StaticDeleteStream(string streamName)
         {
             File.Delete(streamName);
         }
@@ -462,7 +476,9 @@ namespace System.Configuration.Internal
         }
 
         // ConfigurationErrorsException support
-        static internal bool StaticIsFile(string streamName)
+        internal
+        // ConfigurationErrorsException support
+        static bool StaticIsFile(string streamName)
         {
             // We want to avoid loading configuration before machine.config
             // is instantiated. Referencing the Uri class will cause config

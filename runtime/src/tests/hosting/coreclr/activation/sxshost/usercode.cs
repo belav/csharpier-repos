@@ -11,7 +11,7 @@ using System.Reflection;
 
 public class EventSink
 {
-    static public int Click(int x, int y)
+    public static int Click(int x, int y)
     {
         return (x + y);
     }

@@ -82,7 +82,7 @@ namespace Mono.CSharp
             }
         }
 
-        static public string Name(Modifiers i)
+        public static string Name(Modifiers i)
         {
             string s = "";
 

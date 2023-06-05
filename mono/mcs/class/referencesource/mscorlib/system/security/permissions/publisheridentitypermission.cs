@@ -20,7 +20,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class PublisherIdentityPermission : CodeAccessPermission, IBuiltInPermission
+    public sealed class PublisherIdentityPermission : CodeAccessPermission, IBuiltInPermission
     {
         //------------------------------------------------------
         //

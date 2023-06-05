@@ -52,7 +52,7 @@ namespace System.ServiceModel.Activation
 
         [DllImport(ADVAPI32, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern bool AdjustTokenPrivileges(
+        internal static extern unsafe bool AdjustTokenPrivileges(
             SafeCloseHandle tokenHandle,
             bool disableAllPrivileges,
             TOKEN_PRIVILEGES* newState,
@@ -75,7 +75,7 @@ namespace System.ServiceModel.Activation
 
         [DllImport(ADVAPI32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern bool LookupPrivilegeValue(
+        internal static extern unsafe bool LookupPrivilegeValue(
             IntPtr lpSystemName,
             string lpName,
             LUID* lpLuid
@@ -344,7 +344,7 @@ namespace System.ServiceModel.Activation
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CloseHandle(IntPtr handle);
+        static extern bool CloseHandle(IntPtr handle);
     }
 
     [SuppressUnmanagedCodeSecurityAttribute()]
@@ -353,7 +353,7 @@ namespace System.ServiceModel.Activation
         internal SafeServiceHandle()
             : base(true) { }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
 #pragma warning suppress 56523 // Microsoft, should only fail if there is a bug (invalid handle); MDA will be raised
             return ListenerUnsafeNativeMethods.CloseServiceHandle(handle);

@@ -32,7 +32,7 @@ namespace System.Text.Encodings.Web.Tests
             return ref (
                 (delegate* managed<
                     TextEncoderSettings,
-                    ref readonly AllowedBmpCodePointsBitmap>)getBitmapFnPtr
+                    readonly ref AllowedBmpCodePointsBitmap>)getBitmapFnPtr
             )(settings);
         }
 

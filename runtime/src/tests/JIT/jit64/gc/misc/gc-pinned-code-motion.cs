@@ -6,7 +6,7 @@
 internal class TEST
 {
     // prevent induction variable from being optimized away
-    private volatile static int s_numLeft;
+    private static volatile int s_numLeft;
 
     public static unsafe int Main()
     {

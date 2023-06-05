@@ -2,9 +2,9 @@ using System;
 
 namespace MonoBug
 {
-    sealed public class MyTest
+    public sealed class MyTest
     {
-        sealed private class EventHandlers
+        private sealed class EventHandlers
         {
             private EventHandler _handler = DoNothingEventHandler;
 

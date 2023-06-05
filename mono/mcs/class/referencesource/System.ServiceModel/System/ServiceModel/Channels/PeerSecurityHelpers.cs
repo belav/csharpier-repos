@@ -135,12 +135,12 @@ namespace System.ServiceModel.Channels
         const string resourceRight = "peer";
         public const string PeerClaimType = PeerStrings.Namespace + "/peer";
 
-        static internal Claim Claim()
+        internal static Claim Claim()
         {
             return new Claim(PeerClaimType, resourceValue, resourceRight);
         }
 
-        static internal bool IsMatch(EndpointIdentity identity)
+        internal static bool IsMatch(EndpointIdentity identity)
         {
             return identity.IdentityClaim.ClaimType == PeerClaimType;
         }
@@ -612,7 +612,7 @@ namespace System.ServiceModel.Channels
             return new PeerRequestSecurityToken(token);
         }
 
-        internal protected override void OnWriteCustomElements(XmlWriter writer)
+        protected internal override void OnWriteCustomElements(XmlWriter writer)
         {
             if (!(token != null && token.IsValid))
             {
@@ -629,7 +629,7 @@ namespace System.ServiceModel.Channels
             writer.WriteEndElement();
         }
 
-        internal protected override void OnMakeReadOnly() { }
+        protected internal override void OnMakeReadOnly() { }
 
         internal static bool CompareWithNS(
             string first,
@@ -766,7 +766,7 @@ namespace System.ServiceModel.Channels
             return new PeerRequestSecurityTokenResponse(token);
         }
 
-        internal protected override void OnWriteCustomElements(XmlWriter writer)
+        protected internal override void OnWriteCustomElements(XmlWriter writer)
         {
             string wstprefix = writer.LookupPrefix(TrustFeb2005Strings.Namespace);
 
@@ -849,7 +849,7 @@ namespace System.ServiceModel.Channels
             this.timer.Set(Timeout);
         }
 
-        static public void OnNeighborClosed(IPeerNeighbor neighbor)
+        public static void OnNeighborClosed(IPeerNeighbor neighbor)
         {
             Fx.Assert(neighbor != null, "Neighbor must have a value");
             PeerChannelAuthenticatorExtension ext =

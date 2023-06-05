@@ -4,6 +4,7 @@ using System.Text;
 
 namespace System.Collections.Generic
 {
+    internal
     /// <summary>
     /// ABOUT:
     /// Helps with operations that rely on bit marking to indicate whether an item in the
@@ -41,7 +42,7 @@ namespace System.Collections.Generic
 
 
 
-    unsafe internal class BitHelper
+    unsafe class BitHelper
     { // should not be serialized
         private const byte MarkedBitFlag = 1;
         private const byte IntSize = 32;

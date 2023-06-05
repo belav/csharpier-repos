@@ -120,7 +120,7 @@ namespace System.Runtime.InteropServices
         private static extern int GetSystemMaxDBCSCharSize();
 
         [System.Security.SecurityCritical] // auto-generated_required
-        unsafe public static String PtrToStringAnsi(IntPtr ptr)
+        public static unsafe String PtrToStringAnsi(IntPtr ptr)
         {
             if (IntPtr.Zero == ptr)
             {
@@ -145,7 +145,7 @@ namespace System.Runtime.InteropServices
         }
 
         [System.Security.SecurityCritical] // auto-generated_required
-        unsafe public static String PtrToStringAnsi(IntPtr ptr, int len)
+        public static unsafe String PtrToStringAnsi(IntPtr ptr, int len)
         {
             if (ptr == IntPtr.Zero)
                 throw new ArgumentNullException("ptr");
@@ -156,7 +156,7 @@ namespace System.Runtime.InteropServices
         }
 
         [System.Security.SecurityCritical] // auto-generated_required
-        unsafe public static String PtrToStringUni(IntPtr ptr, int len)
+        public static unsafe String PtrToStringUni(IntPtr ptr, int len)
         {
             if (ptr == IntPtr.Zero)
                 throw new ArgumentNullException("ptr");
@@ -174,7 +174,7 @@ namespace System.Runtime.InteropServices
         }
 
         [System.Security.SecurityCritical] // auto-generated_required
-        unsafe public static String PtrToStringUni(IntPtr ptr)
+        public static unsafe String PtrToStringUni(IntPtr ptr)
         {
             if (IntPtr.Zero == ptr)
             {
@@ -1164,7 +1164,7 @@ namespace System.Runtime.InteropServices
         [ResourceExposure(ResourceScope.Machine)]
         [SuppressUnmanagedCodeSecurity]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
-        private extern static IntPtr GetHINSTANCE(RuntimeModule m);
+        private static extern IntPtr GetHINSTANCE(RuntimeModule m);
 
         //====================================================================
         // Throws a CLR exception based on the HRESULT.
@@ -1363,7 +1363,7 @@ namespace System.Runtime.InteropServices
         // String convertions.
         //====================================================================
         [System.Security.SecurityCritical] // auto-generated_required
-        unsafe public static IntPtr StringToHGlobalAnsi(String s)
+        public static unsafe IntPtr StringToHGlobalAnsi(String s)
         {
             if (s == null)
             {
@@ -1394,7 +1394,7 @@ namespace System.Runtime.InteropServices
 #endif // !FEATURE_PAL
 
         [System.Security.SecurityCritical] // auto-generated_required
-        unsafe public static IntPtr StringToHGlobalUni(String s)
+        public static unsafe IntPtr StringToHGlobalUni(String s)
         {
             if (s == null)
             {
@@ -2095,7 +2095,7 @@ namespace System.Runtime.InteropServices
         }
 
         [System.Security.SecurityCritical] // auto-generated_required
-        unsafe public static IntPtr StringToCoTaskMemUni(String s)
+        public static unsafe IntPtr StringToCoTaskMemUni(String s)
         {
             if (s == null)
             {
@@ -2134,7 +2134,7 @@ namespace System.Runtime.InteropServices
         }
 
         [System.Security.SecurityCritical] // auto-generated_required
-        unsafe public static IntPtr StringToCoTaskMemAnsi(String s)
+        public static unsafe IntPtr StringToCoTaskMemAnsi(String s)
         {
             if (s == null)
             {

@@ -1255,7 +1255,7 @@ namespace System.Runtime.InteropServices
         {
             public System.IntPtr Vtable;
 
-            public unsafe static T GetInstance<T>(ComInterfaceDispatch* dispatchPtr)
+            public static unsafe T GetInstance<T>(ComInterfaceDispatch* dispatchPtr)
                 where T : class
             {
                 throw null;
@@ -1270,7 +1270,7 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        protected unsafe abstract ComInterfaceEntry* ComputeVtables(
+        protected abstract unsafe ComInterfaceEntry* ComputeVtables(
             object obj,
             CreateComInterfaceFlags flags,
             out int count

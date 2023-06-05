@@ -297,7 +297,7 @@ namespace System.Data.SqlClient.SqlGen
         #region Statics
 
         const byte defaultDecimalPrecision = 18;
-        static private readonly char[] hexDigits =
+        private static readonly char[] hexDigits =
         {
             '0',
             '1',
@@ -317,8 +317,9 @@ namespace System.Data.SqlClient.SqlGen
             'F'
         };
 
+        private
         // Define lists of functions that take string arugments and return strings.
-        static private readonly Set<string> _canonicalStringFunctionsOneArg = new Set<string>(
+        static readonly Set<string> _canonicalStringFunctionsOneArg = new Set<string>(
             new string[]
             {
                 "Edm.Trim",
@@ -334,17 +335,17 @@ namespace System.Data.SqlClient.SqlGen
             StringComparer.Ordinal
         ).MakeReadOnly();
 
-        static private readonly Set<string> _canonicalStringFunctionsTwoArgs = new Set<string>(
+        private static readonly Set<string> _canonicalStringFunctionsTwoArgs = new Set<string>(
             new string[] { "Edm.Concat" },
             StringComparer.Ordinal
         ).MakeReadOnly();
 
-        static private readonly Set<string> _canonicalStringFunctionsThreeArgs = new Set<string>(
+        private static readonly Set<string> _canonicalStringFunctionsThreeArgs = new Set<string>(
             new string[] { "Edm.Replace" },
             StringComparer.Ordinal
         ).MakeReadOnly();
 
-        static private readonly Set<string> _storeStringFunctionsOneArg = new Set<string>(
+        private static readonly Set<string> _storeStringFunctionsOneArg = new Set<string>(
             new string[]
             {
                 "SqlServer.RTRIM",
@@ -359,7 +360,7 @@ namespace System.Data.SqlClient.SqlGen
             StringComparer.Ordinal
         ).MakeReadOnly();
 
-        static private readonly Set<string> _storeStringFunctionsThreeArgs = new Set<string>(
+        private static readonly Set<string> _storeStringFunctionsThreeArgs = new Set<string>(
             new string[] { "SqlServer.REPLACE" },
             StringComparer.Ordinal
         ).MakeReadOnly();

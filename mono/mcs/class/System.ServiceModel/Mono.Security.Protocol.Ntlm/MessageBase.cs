@@ -56,7 +56,7 @@ namespace Mono.Security.Protocol.Ntlm
             return bytes;
         }
 
-        static private byte[] header = { 0x4e, 0x54, 0x4c, 0x4d, 0x53, 0x53, 0x50, 0x00 };
+        private static byte[] header = { 0x4e, 0x54, 0x4c, 0x4d, 0x53, 0x53, 0x50, 0x00 };
 
         private int _type;
         private NtlmFlags _flags;

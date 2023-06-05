@@ -5,7 +5,7 @@ class TestFinally
 {
     static int counter;
 
-    async static Task Test(bool throwException)
+    static async Task Test(bool throwException)
     {
         try
         {

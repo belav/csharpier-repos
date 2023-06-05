@@ -199,7 +199,7 @@ class UTF8StructMarshalling
         }
     }
 
-    unsafe static void CompareWithUTF8Encoding()
+    static unsafe void CompareWithUTF8Encoding()
     {
         // Compare results with UTF8Encoding
         UnmanagedStruct ums;

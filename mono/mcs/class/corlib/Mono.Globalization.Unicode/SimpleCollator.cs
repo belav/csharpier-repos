@@ -77,6 +77,7 @@ namespace Mono.Globalization.Unicode
 {
     internal class SimpleCollator : ISimpleCollator
     {
+        internal
         /*
                 // this environment variable is for debugging quick check.
         #pragma warning disable 169, 414
@@ -85,7 +86,7 @@ namespace Mono.Globalization.Unicode
                     "MONO_COLLATION_QUICK_CHECK_DISABLED") == "yes";
         #pragma warning restore 169, 414
         */
-        unsafe internal struct Context
+        unsafe struct Context
         {
             public Context(
                 CompareOptions opt,
@@ -155,9 +156,9 @@ namespace Mono.Globalization.Unicode
         // could be used as part of a contraction (whose length > 1).
         readonly byte[] unsafeFlags;
 
-        unsafe readonly byte* cjkCatTable;
-        unsafe readonly byte* cjkLv1Table;
-        unsafe readonly byte* cjkLv2Table;
+        readonly unsafe byte* cjkCatTable;
+        readonly unsafe byte* cjkLv1Table;
+        readonly unsafe byte* cjkLv2Table;
         readonly CodePointIndexer cjkLv2Indexer;
         readonly int lcid;
         readonly bool frenchSort;
@@ -248,7 +249,7 @@ namespace Mono.Globalization.Unicode
             */
         }
 
-        unsafe private void SetCJKTable(
+        private unsafe void SetCJKTable(
             CultureInfo culture,
             ref CodePointIndexer cjkIndexer,
             ref byte* catTable,

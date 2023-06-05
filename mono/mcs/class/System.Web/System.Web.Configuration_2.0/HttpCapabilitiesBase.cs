@@ -86,8 +86,9 @@ namespace System.Web.Configuration
             return bcap;
         }
 
+        internal
         // Used by unit tests to determine whether GetConfigCapabilities was called.
-        static internal bool GetConfigCapabilities_called;
+        static bool GetConfigCapabilities_called;
 
         protected virtual void Init() { }
 

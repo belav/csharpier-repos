@@ -10,7 +10,7 @@ namespace TestCS
         static string expectedExceptionString;
         static string expectedOuterExceptionString = "Foobar";
 
-        static public int Main(String[] args)
+        public static int Main(String[] args)
         {
             Object foo = null;
             try
@@ -45,7 +45,7 @@ namespace TestCS
             return returnCode;
         }
 
-        static public void DoIt()
+        public static void DoIt()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace TestCS
             }
         }
 
-        static private void ThrowException()
+        private static void ThrowException()
         {
             try
             {
@@ -69,7 +69,7 @@ namespace TestCS
             }
         }
 
-        static public void Foobar()
+        public static void Foobar()
         {
             Object foo = null;
 

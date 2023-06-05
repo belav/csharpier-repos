@@ -374,7 +374,7 @@ namespace I18N.Common
         }
 
         // Decode a buffer of bytes into a string.
-        public unsafe override String GetString(byte[] bytes, int index, int count)
+        public override unsafe String GetString(byte[] bytes, int index, int count)
         {
             if (bytes == null)
             {

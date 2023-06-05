@@ -55,7 +55,15 @@ namespace Mono.Security
 
         // Under 1.x this API requires a Local datetime to be provided
         // Under 2.0 it will also accept a Utc datetime
-        static public ASN1 FromDateTime(DateTime dt)
+        public
+        // RFC3280, section 4.2.1.5
+        // CAs conforming to this profile MUST always encode certificate
+        // validity dates through the year 2049 as UTCTime; certificate validity
+        // dates in 2050 or later MUST be encoded as GeneralizedTime.
+
+        // Under 1.x this API requires a Local datetime to be provided
+        // Under 2.0 it will also accept a Utc datetime
+        static ASN1 FromDateTime(DateTime dt)
         {
             if (dt.Year < 2050)
             {
@@ -81,7 +89,7 @@ namespace Mono.Security
             }
         }
 
-        static public ASN1 FromInt32(Int32 value)
+        public static ASN1 FromInt32(Int32 value)
         {
             byte[] integer = BitConverterLE.GetBytes(value);
             Array.Reverse(integer);
@@ -106,7 +114,7 @@ namespace Mono.Security
             return asn1;
         }
 
-        static public ASN1 FromOid(string oid)
+        public static ASN1 FromOid(string oid)
         {
             if (oid == null)
                 throw new ArgumentNullException("oid");
@@ -114,7 +122,7 @@ namespace Mono.Security
             return new ASN1(CryptoConfig.EncodeOID(oid));
         }
 
-        static public ASN1 FromUnsignedBigInteger(byte[] big)
+        public static ASN1 FromUnsignedBigInteger(byte[] big)
         {
             if (big == null)
                 throw new ArgumentNullException("big");
@@ -133,7 +141,7 @@ namespace Mono.Security
             return new ASN1(0x02, big);
         }
 
-        static public int ToInt32(ASN1 asn1)
+        public static int ToInt32(ASN1 asn1)
         {
             if (asn1 == null)
                 throw new ArgumentNullException("asn1");
@@ -148,7 +156,10 @@ namespace Mono.Security
 
         // Convert a binary encoded OID to human readable string representation of
         // an OID (IETF style). Based on DUMPASN1.C from Peter Gutmann.
-        static public string ToOid(ASN1 asn1)
+        public
+        // Convert a binary encoded OID to human readable string representation of
+        // an OID (IETF style). Based on DUMPASN1.C from Peter Gutmann.
+        static string ToOid(ASN1 asn1)
         {
             if (asn1 == null)
                 throw new ArgumentNullException("asn1");
@@ -181,7 +192,7 @@ namespace Mono.Security
             return sb.ToString();
         }
 
-        static public DateTime ToDateTime(ASN1 time)
+        public static DateTime ToDateTime(ASN1 time)
         {
             if (time == null)
                 throw new ArgumentNullException("time");

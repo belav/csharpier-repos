@@ -2486,10 +2486,10 @@ public class AsxEntryInfo
 public class Person
 {
     [DataMember]
-    readonly public string name;
+    public readonly string name;
 
     [DataMember]
-    readonly public Guid Id = Guid.Empty;
+    public readonly Guid Id = Guid.Empty;
 
     public Person(string nameIn, Guid idIn)
     {

@@ -170,7 +170,7 @@ return this._invoke({0}.get_path(), '{1}',{2},{{{3}}},succeededCallback,failedCa
 
         static Hashtable _type_to_logical_type = Hashtable.Synchronized(new Hashtable());
 
-        static internal LogicalTypeInfo GetLogicalTypeInfo(Type t, string filePath)
+        internal static LogicalTypeInfo GetLogicalTypeInfo(Type t, string filePath)
         {
             Hashtable type_to_manager = _type_to_logical_type;
             LogicalTypeInfo tm = (LogicalTypeInfo)type_to_manager[t];

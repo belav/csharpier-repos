@@ -81,7 +81,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal ConnectionManagementSectionInternal GetSection()
+        internal static ConnectionManagementSectionInternal GetSection()
         {
             lock (ConnectionManagementSectionInternal.ClassSyncObject)
             {

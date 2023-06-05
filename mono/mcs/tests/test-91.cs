@@ -13,11 +13,11 @@ class Plain { }
 
 class Test
 {
-    static protected internal void MyProtectedInternal() { }
+    protected internal static void MyProtectedInternal() { }
 
-    static internal void MyInternal() { }
+    internal static void MyInternal() { }
 
-    static public void MyPublic() { }
+    public static void MyPublic() { }
 
     static void MyPrivate() { }
 

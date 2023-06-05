@@ -13,7 +13,7 @@ namespace System.Data.Common
     using System.Data.ProviderBase;
     using System.Diagnostics;
 
-    sealed internal class DbSchemaTable
+    internal sealed class DbSchemaTable
     {
         private enum ColumnEnum
         {
@@ -40,7 +40,7 @@ namespace System.Data.Common
             SchemaMappingUnsortedIndex,
         }
 
-        static readonly private string[] DBCOLUMN_NAME = new string[]
+        private static readonly string[] DBCOLUMN_NAME = new string[]
         {
             SchemaTableColumn.ColumnName,
             SchemaTableColumn.ColumnOrdinal,

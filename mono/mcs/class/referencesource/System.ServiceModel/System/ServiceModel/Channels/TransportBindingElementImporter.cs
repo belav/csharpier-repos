@@ -260,7 +260,7 @@ namespace System.ServiceModel.Channels
 
     internal static class StateHelper
     {
-        readonly static object StateBagKey = new object();
+        static readonly object StateBagKey = new object();
 
         static Dictionary<XmlQualifiedName, XmlQualifiedName> GetGeneratedTransportBindingElements(
             MetadataImporter importer

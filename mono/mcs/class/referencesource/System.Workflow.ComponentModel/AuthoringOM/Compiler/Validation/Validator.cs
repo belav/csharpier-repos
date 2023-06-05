@@ -126,7 +126,7 @@ namespace System.Workflow.ComponentModel.Compiler
             return fullName;
         }
 
-        internal protected ValidationErrorCollection ValidateProperty(
+        protected internal ValidationErrorCollection ValidateProperty(
             PropertyInfo propertyInfo,
             object propertyOwner,
             object propertyValue,

@@ -367,12 +367,12 @@ namespace System.Security.Cryptography
             return VerifyHash(hashVal, null, rgbSignature);
         }
 
-        override public byte[] CreateSignature(byte[] rgbHash)
+        public override byte[] CreateSignature(byte[] rgbHash)
         {
             return SignHash(rgbHash, null);
         }
 
-        override public bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
+        public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
         {
             return VerifyHash(rgbHash, null, rgbSignature);
         }

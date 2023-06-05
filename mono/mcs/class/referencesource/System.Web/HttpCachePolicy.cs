@@ -839,7 +839,7 @@ namespace System.Web
             _useCachedHeaders = false;
         }
 
-        static internal void AppendValueToHeader(StringBuilder s, String value)
+        internal static void AppendValueToHeader(StringBuilder s, String value)
         {
             if (!String.IsNullOrEmpty(value))
             {

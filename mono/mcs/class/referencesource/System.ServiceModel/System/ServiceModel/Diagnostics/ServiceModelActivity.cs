@@ -82,7 +82,7 @@ namespace System.ServiceModel.Diagnostics
             get { return this.previousActivity; }
         }
 
-        static internal Activity BoundOperation(ServiceModelActivity activity)
+        internal static Activity BoundOperation(ServiceModelActivity activity)
         {
             if (!DiagnosticUtility.ShouldUseActivity)
             {
@@ -91,7 +91,7 @@ namespace System.ServiceModel.Diagnostics
             return ServiceModelActivity.BoundOperation(activity, false);
         }
 
-        static internal Activity BoundOperation(ServiceModelActivity activity, bool addTransfer)
+        internal static Activity BoundOperation(ServiceModelActivity activity, bool addTransfer)
         {
             return activity == null
                 ? null
@@ -343,7 +343,7 @@ namespace System.ServiceModel.Diagnostics
             this.Resume();
         }
 
-        static internal void Start(
+        internal static void Start(
             ServiceModelActivity activity,
             string activityName,
             ActivityType activityType
@@ -378,7 +378,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void Stop(ServiceModelActivity activity)
+        internal static void Stop(ServiceModelActivity activity)
         {
             if (activity != null)
             {

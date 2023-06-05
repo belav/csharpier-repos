@@ -280,7 +280,7 @@ namespace Moq
         /// <summary>
         ///   Exposes the mocked object instance.
         /// </summary>
-        public virtual new T Object
+        public new virtual T Object
         {
             get { return (T)base.Object; }
         }

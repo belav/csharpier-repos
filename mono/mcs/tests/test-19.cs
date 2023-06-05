@@ -6,7 +6,7 @@ class I
 {
     public delegate string GetTextFn(string a);
 
-    static public GetTextFn GetText;
+    public static GetTextFn GetText;
 
     static string fn(string s)
     {

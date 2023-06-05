@@ -5,7 +5,7 @@ using System.Security.Permissions;
 
 public class Program
 {
-    static public void Main(string[] args)
+    public static void Main(string[] args)
     {
         SecurityAction a = SecurityAction.Demand;
         switch (a)

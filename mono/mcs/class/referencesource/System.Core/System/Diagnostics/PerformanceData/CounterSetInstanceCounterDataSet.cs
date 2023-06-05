@@ -24,7 +24,7 @@ namespace System.Diagnostics.PerformanceData
     public sealed class CounterData
     {
         [SecurityCritical]
-        unsafe private Int64* m_offset;
+        private unsafe Int64* m_offset;
 
         /// <summary>
         /// CounterData constructor
@@ -32,7 +32,7 @@ namespace System.Diagnostics.PerformanceData
         /// <param name="counterId"> counterId would come from CounterSet::AddCounter() parameter </param>
         /// <param name="pCounterData"> The memory location to store raw counter data </param>
         [System.Security.SecurityCritical]
-        unsafe internal CounterData(Int64* pCounterData)
+        internal unsafe CounterData(Int64* pCounterData)
         {
             m_offset = pCounterData;
             *m_offset = 0;
@@ -126,7 +126,7 @@ namespace System.Diagnostics.PerformanceData
         private Int32 m_disposed;
 
         [SecurityCritical]
-        unsafe internal byte* m_dataBlock;
+        internal unsafe byte* m_dataBlock;
 
         [System.Security.SecurityCritical]
         [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]

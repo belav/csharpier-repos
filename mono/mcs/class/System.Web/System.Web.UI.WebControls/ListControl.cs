@@ -272,7 +272,7 @@ namespace System.Web.UI.WebControls
         }
 
 #if HAVE_CONTROL_ADAPTERS
-        protected virtual new
+        protected new virtual
 #else
         protected override
 #endif

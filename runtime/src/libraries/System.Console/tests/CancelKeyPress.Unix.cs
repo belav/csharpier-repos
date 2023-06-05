@@ -139,7 +139,7 @@ public partial class CancelKeyPressTests
             .Dispose();
     }
 
-    private unsafe static bool IsSignalIgnored(int signal)
+    private static unsafe bool IsSignalIgnored(int signal)
     {
         struct_sigaction current;
         if (sigaction(signal, null, &current) == 0)
@@ -164,7 +164,7 @@ public partial class CancelKeyPressTests
 
     private const int SIGINT = 2;
     private const int SIGQUIT = 3;
-    private unsafe static void* SIG_IGN => (void*)1;
+    private static unsafe void* SIG_IGN => (void*)1;
 
     private unsafe struct struct_sigaction
     {

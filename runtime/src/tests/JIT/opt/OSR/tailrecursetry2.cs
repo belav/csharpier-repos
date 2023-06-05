@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 class TailRecursionCandidateOSREntryInTry
 {
-    public unsafe static int F(int from, int to, int n, int result, int* x)
+    public static unsafe int F(int from, int to, int n, int result, int* x)
     {
         try
         {

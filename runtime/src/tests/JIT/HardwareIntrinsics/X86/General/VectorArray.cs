@@ -27,7 +27,7 @@ public partial class Program
             }
         }
 
-        static public unsafe int Vector128Array()
+        public static unsafe int Vector128Array()
         {
             Vector128<T>[] v = new Vector128<T>[3];
             int elementSize = Unsafe.SizeOf<T>();
@@ -74,7 +74,7 @@ public partial class Program
             }
         }
 
-        static public unsafe int Vector256Array()
+        public static unsafe int Vector256Array()
         {
             Vector256<T>[] v = new Vector256<T>[3];
             int elementSize = Unsafe.SizeOf<T>();
@@ -116,7 +116,7 @@ public partial class Program
         nameof(TestLibrary.PlatformDetection.IsMonoLLVMAOT)
     )]
     [Fact]
-    public unsafe static void VectorArray()
+    public static unsafe void VectorArray()
     {
         int returnVal = Pass;
         try

@@ -5147,7 +5147,7 @@ namespace System.Reflection.Metadata
 
         public void Dispose() { }
 
-        public unsafe static System.Reflection.Metadata.MetadataReaderProvider FromMetadataImage(
+        public static unsafe System.Reflection.Metadata.MetadataReaderProvider FromMetadataImage(
             byte* start,
             int size
         )
@@ -5172,7 +5172,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
 
-        public unsafe static System.Reflection.Metadata.MetadataReaderProvider FromPortablePdbImage(
+        public static unsafe System.Reflection.Metadata.MetadataReaderProvider FromPortablePdbImage(
             byte* start,
             int size
         )
@@ -5293,7 +5293,7 @@ namespace System.Reflection.Metadata
             get { throw null; }
         }
 
-        public unsafe virtual string GetString(byte* bytes, int byteCount)
+        public virtual unsafe string GetString(byte* bytes, int byteCount)
         {
             throw null;
         }

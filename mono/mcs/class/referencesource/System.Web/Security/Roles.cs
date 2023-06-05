@@ -22,13 +22,14 @@ namespace System.Web.Security
     using System.Collections.Specialized;
     using System.Web.Compilation;
 
+    public
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     // This has no hosting permission demands because of DevDiv Bugs 31461: ClientAppSvcs: ASP.net Provider support
-    static public class Roles
+    static class Roles
     {
-        static public RoleProvider Provider
+        public static RoleProvider Provider
         {
             get
             {
@@ -43,7 +44,7 @@ namespace System.Web.Security
             }
         }
 
-        static public RoleProviderCollection Providers
+        public static RoleProviderCollection Providers
         {
             get
             {
@@ -52,7 +53,7 @@ namespace System.Web.Security
             }
         }
 
-        static public string CookieName
+        public static string CookieName
         {
             get
             {
@@ -61,7 +62,7 @@ namespace System.Web.Security
             }
         }
 
-        static public bool CacheRolesInCookie
+        public static bool CacheRolesInCookie
         {
             get
             {
@@ -70,7 +71,7 @@ namespace System.Web.Security
             }
         }
 
-        static public int CookieTimeout
+        public static int CookieTimeout
         {
             get
             {
@@ -79,7 +80,7 @@ namespace System.Web.Security
             }
         }
 
-        static public string CookiePath
+        public static string CookiePath
         {
             get
             {
@@ -88,7 +89,7 @@ namespace System.Web.Security
             }
         }
 
-        static public bool CookieRequireSSL
+        public static bool CookieRequireSSL
         {
             get
             {
@@ -97,7 +98,7 @@ namespace System.Web.Security
             }
         }
 
-        static public bool CookieSlidingExpiration
+        public static bool CookieSlidingExpiration
         {
             get
             {
@@ -106,7 +107,7 @@ namespace System.Web.Security
             }
         }
 
-        static public CookieProtection CookieProtectionValue
+        public static CookieProtection CookieProtectionValue
         {
             get
             {
@@ -115,7 +116,7 @@ namespace System.Web.Security
             }
         }
 
-        static public bool CreatePersistentCookie
+        public static bool CreatePersistentCookie
         {
             get
             {
@@ -124,7 +125,7 @@ namespace System.Web.Security
             }
         }
 
-        static public string Domain
+        public static string Domain
         {
             get
             {
@@ -133,7 +134,7 @@ namespace System.Web.Security
             }
         }
 
-        static public int MaxCachedResults
+        public static int MaxCachedResults
         {
             get
             {
@@ -142,7 +143,7 @@ namespace System.Web.Security
             }
         }
 
-        static public bool Enabled
+        public static bool Enabled
         {
             get
             {
@@ -169,7 +170,7 @@ namespace System.Web.Security
             }
         }
 
-        static public string ApplicationName
+        public static string ApplicationName
         {
             get { return Provider.ApplicationName; }
             set { Provider.ApplicationName = value; }
@@ -177,7 +178,10 @@ namespace System.Web.Security
 
         // authorization
 
-        static public bool IsUserInRole(string username, string roleName)
+        public
+        // authorization
+
+        static bool IsUserInRole(string username, string roleName)
         {
             if (
                 HostingEnvironment.IsHosted
@@ -241,12 +245,12 @@ namespace System.Web.Security
             }
         }
 
-        static public bool IsUserInRole(string roleName)
+        public static bool IsUserInRole(string roleName)
         {
             return IsUserInRole(GetCurrentUserName(), roleName);
         }
 
-        static public string[] GetRolesForUser(string username)
+        public static string[] GetRolesForUser(string username)
         {
             if (
                 HostingEnvironment.IsHosted
@@ -318,7 +322,7 @@ namespace System.Web.Security
             }
         }
 
-        static public string[] GetRolesForUser()
+        public static string[] GetRolesForUser()
         {
             return GetRolesForUser(GetCurrentUserName());
         }
@@ -326,21 +330,25 @@ namespace System.Web.Security
         // role administration
         //
 
-        static public string[] GetUsersInRole(string roleName)
+        public
+        // role administration
+        //
+
+        static string[] GetUsersInRole(string roleName)
         {
             EnsureEnabled();
             SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
             return Provider.GetUsersInRole(roleName);
         }
 
-        static public void CreateRole(string roleName)
+        public static void CreateRole(string roleName)
         {
             EnsureEnabled();
             SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
             Provider.CreateRole(roleName);
         }
 
-        static public bool DeleteRole(string roleName, bool throwOnPopulatedRole)
+        public static bool DeleteRole(string roleName, bool throwOnPopulatedRole)
         {
             EnsureEnabled();
             SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
@@ -363,19 +371,19 @@ namespace System.Web.Security
             return roleDeleted;
         }
 
-        static public bool DeleteRole(string roleName)
+        public static bool DeleteRole(string roleName)
         {
             return DeleteRole(roleName, true);
         }
 
-        static public bool RoleExists(string roleName)
+        public static bool RoleExists(string roleName)
         {
             EnsureEnabled();
             SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
             return Provider.RoleExists(roleName);
         }
 
-        static public void AddUserToRole(string username, string roleName)
+        public static void AddUserToRole(string username, string roleName)
         {
             EnsureEnabled();
             SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
@@ -395,7 +403,7 @@ namespace System.Web.Security
             catch { }
         }
 
-        static public void AddUserToRoles(string username, string[] roleNames)
+        public static void AddUserToRoles(string username, string[] roleNames)
         {
             EnsureEnabled();
 
@@ -418,7 +426,7 @@ namespace System.Web.Security
             catch { }
         }
 
-        static public void AddUsersToRole(string[] usernames, string roleName)
+        public static void AddUsersToRole(string[] usernames, string roleName)
         {
             EnsureEnabled();
 
@@ -441,7 +449,7 @@ namespace System.Web.Security
             catch { }
         }
 
-        static public void AddUsersToRoles(string[] usernames, string[] roleNames)
+        public static void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
             EnsureEnabled();
 
@@ -464,7 +472,7 @@ namespace System.Web.Security
             catch { }
         }
 
-        static public void RemoveUserFromRole(string username, string roleName)
+        public static void RemoveUserFromRole(string username, string roleName)
         {
             EnsureEnabled();
             SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
@@ -484,7 +492,7 @@ namespace System.Web.Security
             catch { }
         }
 
-        static public void RemoveUserFromRoles(string username, string[] roleNames)
+        public static void RemoveUserFromRoles(string username, string[] roleNames)
         {
             EnsureEnabled();
 
@@ -507,7 +515,7 @@ namespace System.Web.Security
             catch { }
         }
 
-        static public void RemoveUsersFromRole(string[] usernames, string roleName)
+        public static void RemoveUsersFromRole(string[] usernames, string roleName)
         {
             EnsureEnabled();
 
@@ -530,7 +538,7 @@ namespace System.Web.Security
             catch { }
         }
 
-        static public void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
+        public static void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
         {
             EnsureEnabled();
 
@@ -581,7 +589,7 @@ namespace System.Web.Security
             context.Response.Cookies.Add(cookie);
         }
 
-        static public string[] FindUsersInRole(string roleName, string usernameToMatch)
+        public static string[] FindUsersInRole(string roleName, string usernameToMatch)
         {
             EnsureEnabled();
 
@@ -592,14 +600,14 @@ namespace System.Web.Security
             return Provider.FindUsersInRole(roleName, usernameToMatch);
         }
 
-        static private void EnsureEnabled()
+        private static void EnsureEnabled()
         {
             Initialize();
             if (!s_Enabled)
                 throw new ProviderException(SR.GetString(SR.Roles_feature_not_enabled));
         }
 
-        static private void Initialize()
+        private static void Initialize()
         {
             if (s_Initialized)
             {
@@ -757,20 +765,20 @@ namespace System.Web.Security
             }
         }
 
-        static private RoleProvider s_Provider;
-        static private bool s_Enabled;
-        static private string s_CookieName;
-        static private bool s_CacheRolesInCookie;
-        static private int s_CookieTimeout;
-        static private string s_CookiePath;
-        static private bool s_CookieRequireSSL;
-        static private bool s_CookieSlidingExpiration;
-        static private CookieProtection s_CookieProtection;
-        static private string s_Domain;
-        static private bool s_Initialized;
-        static private bool s_InitializedDefaultProvider;
-        static private bool s_EnabledSet;
-        static private RoleProviderCollection s_Providers;
+        private static RoleProvider s_Provider;
+        private static bool s_Enabled;
+        private static string s_CookieName;
+        private static bool s_CacheRolesInCookie;
+        private static int s_CookieTimeout;
+        private static string s_CookiePath;
+        private static bool s_CookieRequireSSL;
+        private static bool s_CookieSlidingExpiration;
+        private static CookieProtection s_CookieProtection;
+        private static string s_Domain;
+        private static bool s_Initialized;
+        private static bool s_InitializedDefaultProvider;
+        private static bool s_EnabledSet;
+        private static RoleProviderCollection s_Providers;
         private static Exception s_InitializeException = null;
         private static bool s_CreatePersistentCookie;
         private static object s_lock = new object();
@@ -821,7 +829,7 @@ namespace System.Web.Security
             base.Add(provider);
         }
 
-        new public RoleProvider this[string name]
+        public new RoleProvider this[string name]
         {
             get { return (RoleProvider)base[name]; }
         }

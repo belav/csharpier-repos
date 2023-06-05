@@ -736,7 +736,9 @@ namespace System.Security
         }
 
         // FIXME what's it doing here? There's probably a reason this was added here.
-        static public void RevertAssert()
+        public
+        // FIXME what's it doing here? There's probably a reason this was added here.
+        static void RevertAssert()
         {
             CodeAccessPermission.RevertAssert();
         }

@@ -251,7 +251,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern void GetVersionInfo_icall(char* fileName, int fileName_length);
+        private extern unsafe void GetVersionInfo_icall(char* fileName, int fileName_length);
 
         private unsafe void GetVersionInfo_internal(string fileName)
         {

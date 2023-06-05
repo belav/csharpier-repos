@@ -23,7 +23,7 @@ namespace System.Security.Policy
     [Obsolete(
         "This type is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
     )]
-    sealed public class UnionCodeGroup : CodeGroup, IUnionSemanticCodeGroup
+    public sealed class UnionCodeGroup : CodeGroup, IUnionSemanticCodeGroup
     {
         internal UnionCodeGroup()
             : base() { }

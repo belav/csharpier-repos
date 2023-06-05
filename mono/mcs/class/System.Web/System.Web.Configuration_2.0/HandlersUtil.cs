@@ -40,17 +40,17 @@ namespace System.Web.Configuration
     {
         HandlersUtil() { }
 
-        static public string ExtractAttributeValue(string attKey, XmlNode node)
+        public static string ExtractAttributeValue(string attKey, XmlNode node)
         {
             return ExtractAttributeValue(attKey, node, false);
         }
 
-        static public string ExtractAttributeValue(string attKey, XmlNode node, bool optional)
+        public static string ExtractAttributeValue(string attKey, XmlNode node, bool optional)
         {
             return ExtractAttributeValue(attKey, node, optional, false);
         }
 
-        static public string ExtractAttributeValue(
+        public static string ExtractAttributeValue(
             string attKey,
             XmlNode node,
             bool optional,
@@ -83,7 +83,7 @@ namespace System.Web.Configuration
             return value;
         }
 
-        static public void ThrowException(string msg, XmlNode node)
+        public static void ThrowException(string msg, XmlNode node)
         {
             if (node != null && node.Name != String.Empty)
                 msg = msg + " (node name: " + node.Name + ") ";

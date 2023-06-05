@@ -35,7 +35,7 @@ namespace System.Security
         static SecureString() { }
 
         [System.Security.SecurityCritical] // auto-generated
-        unsafe static bool EncryptionSupported()
+        static unsafe bool EncryptionSupported()
         {
             // check if the enrypt/decrypt function is supported on current OS
             bool supported = true;
@@ -825,7 +825,7 @@ namespace System.Security
         private static extern SafeBSTRHandle SysAllocStringLen(String src, uint len); // BSTR
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             Win32Native.ZeroMemory(handle, (UIntPtr)(Win32Native.SysStringLen(handle) * 2));
             Win32Native.SysFreeString(handle);
@@ -857,7 +857,7 @@ namespace System.Security
             get { return (int)Win32Native.SysStringLen(this); }
         }
 
-        internal unsafe static void Copy(SafeBSTRHandle source, SafeBSTRHandle target)
+        internal static unsafe void Copy(SafeBSTRHandle source, SafeBSTRHandle target)
         {
             byte* sourcePtr = null,
                 targetPtr = null;

@@ -37,7 +37,9 @@ using System.Drawing.Imaging;
 public class SampleDrawingImage
 {
     /*  DrawImageAbort callback method */
-    static private bool DrawImageCallback(IntPtr callBackData)
+    private
+    /*  DrawImageAbort callback method */
+    static bool DrawImageCallback(IntPtr callBackData)
     {
         Console.WriteLine("DrawImageCallback");
         return false;

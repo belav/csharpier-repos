@@ -32,7 +32,7 @@ namespace System.Workflow.Activities
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
     )]
-    sealed public class WorkflowRoleCollection : List<WorkflowRole>
+    public sealed class WorkflowRoleCollection : List<WorkflowRole>
     {
         public WorkflowRoleCollection()
             : base() { }
@@ -59,7 +59,7 @@ namespace System.Workflow.Activities
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
     )]
-    sealed public class ActiveDirectoryRole : WorkflowRole, ISerializable, IDisposable
+    public sealed class ActiveDirectoryRole : WorkflowRole, ISerializable, IDisposable
     {
         private String m_name;
         private DirectoryEntry m_root;

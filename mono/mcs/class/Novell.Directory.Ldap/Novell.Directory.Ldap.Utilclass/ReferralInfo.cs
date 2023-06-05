@@ -40,32 +40,35 @@ namespace Novell.Directory.Ldap.Utilclass
     /// </summary>
     public class ReferralInfo
     {
+        public
         /// <summary>Returns the referral URL
         ///
         /// </summary>
         /// <returns> the Referral URL
         /// </returns>
-        virtual public LdapUrl ReferralUrl
+        virtual LdapUrl ReferralUrl
         {
             get { return referralUrl; }
         }
 
+        public
         /// <summary>Returns the referral Connection
         ///
         /// </summary>
         /// <returns> the Referral Connection
         /// </returns>
-        virtual public LdapConnection ReferralConnection
+        virtual LdapConnection ReferralConnection
         {
             get { return conn; }
         }
 
+        public
         /// <summary>Returns the referral list
         ///
         /// </summary>
         /// <returns> the Referral list
         /// </returns>
-        virtual public System.String[] ReferralList
+        virtual System.String[] ReferralList
         {
             get { return referralList; }
         }

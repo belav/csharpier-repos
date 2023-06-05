@@ -94,7 +94,7 @@ namespace System.Workflow.Activities
             return base.Execute(executionContext);
         }
 
-        protected override sealed void OnSequenceComplete(ActivityExecutionContext executionContext)
+        protected sealed override void OnSequenceComplete(ActivityExecutionContext executionContext)
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");

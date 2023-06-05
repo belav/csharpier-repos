@@ -26,7 +26,7 @@ namespace System.Web.Util
         static readonly DateTime MinValuePlusOneDay = DateTime.MinValue.AddDays(1);
         static readonly DateTime MaxValueMinusOneDay = DateTime.MaxValue.AddDays(-1);
 
-        static internal DateTime FromFileTimeToUtc(long filetime)
+        internal static DateTime FromFileTimeToUtc(long filetime)
         {
             long universalTicks = filetime + FileTimeOffset;
             // Dev10 733288: Caching: behavior change for CacheDependency when using UseMemoryCache=1
@@ -35,7 +35,7 @@ namespace System.Web.Util
             return new DateTime(universalTicks, DateTimeKind.Utc);
         }
 
-        static internal DateTime ConvertToUniversalTime(DateTime localTime)
+        internal static DateTime ConvertToUniversalTime(DateTime localTime)
         {
             if (localTime < MinValuePlusOneDay)
             {
@@ -50,7 +50,7 @@ namespace System.Web.Util
             return localTime.ToUniversalTime();
         }
 
-        static internal DateTime ConvertToLocalTime(DateTime utcTime)
+        internal static DateTime ConvertToLocalTime(DateTime utcTime)
         {
             if (utcTime < MinValuePlusOneDay)
             {
@@ -65,7 +65,7 @@ namespace System.Web.Util
             return utcTime.ToLocalTime();
         }
 
-        static internal TimeSpan GetTimeoutFromTimeUnit(int timeoutValue, TimeUnit timeoutUnit)
+        internal static TimeSpan GetTimeoutFromTimeUnit(int timeoutValue, TimeUnit timeoutUnit)
         {
             switch (timeoutUnit)
             {

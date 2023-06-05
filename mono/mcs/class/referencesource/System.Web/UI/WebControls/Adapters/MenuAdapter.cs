@@ -376,7 +376,7 @@ namespace System.Web.UI.WebControls.Adapters
             }
         }
 
-        protected virtual internal void RenderItem(
+        protected internal virtual void RenderItem(
             HtmlTextWriter writer,
             MenuItem item,
             int position

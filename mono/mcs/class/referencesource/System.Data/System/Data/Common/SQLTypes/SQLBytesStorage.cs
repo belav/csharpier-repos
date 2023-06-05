@@ -26,7 +26,7 @@ namespace System.Data.Common
         public SqlBytesStorage(DataColumn column)
             : base(column, typeof(SqlBytes), SqlBytes.Null, SqlBytes.Null, StorageType.SqlBytes) { }
 
-        override public Object Aggregate(int[] records, AggregateType kind)
+        public override Object Aggregate(int[] records, AggregateType kind)
         {
             try
             {
@@ -56,32 +56,32 @@ namespace System.Data.Common
             throw ExceptionBuilder.AggregateException(kind, DataType);
         }
 
-        override public int Compare(int recordNo1, int recordNo2)
+        public override int Compare(int recordNo1, int recordNo2)
         {
             return 0;
         }
 
-        override public int CompareValueTo(int recordNo, Object value)
+        public override int CompareValueTo(int recordNo, Object value)
         {
             return 0;
         }
 
-        override public void Copy(int recordNo1, int recordNo2)
+        public override void Copy(int recordNo1, int recordNo2)
         {
             values[recordNo2] = values[recordNo1];
         }
 
-        override public Object Get(int record)
+        public override Object Get(int record)
         {
             return values[record];
         }
 
-        override public bool IsNull(int record)
+        public override bool IsNull(int record)
         {
             return (values[record].IsNull);
         }
 
-        override public void Set(int record, Object value)
+        public override void Set(int record, Object value)
         {
             if ((value == DBNull.Value) || (value == null))
             {
@@ -93,7 +93,7 @@ namespace System.Data.Common
             }
         }
 
-        override public void SetCapacity(int capacity)
+        public override void SetCapacity(int capacity)
         {
             SqlBytes[] newValues = new SqlBytes[capacity];
             if (null != values)
@@ -103,7 +103,7 @@ namespace System.Data.Common
             values = newValues;
         }
 
-        override public object ConvertXmlToObject(string s)
+        public override object ConvertXmlToObject(string s)
         {
             SqlBinary newValue = new SqlBinary();
             string tempStr = string.Concat("<col>", s, "</col>"); // this is done since you can give fragmet to reader, bug 98767
@@ -118,7 +118,7 @@ namespace System.Data.Common
             return (new SqlBytes((SqlBinary)tmp));
         }
 
-        override public string ConvertObjectToXml(object value)
+        public override string ConvertObjectToXml(object value)
         {
             Debug.Assert(!DataStorage.IsObjectNull(value), "we shouldn't have null here");
             Debug.Assert((value.GetType() == typeof(SqlBytes)), "wrong input type");
@@ -132,12 +132,12 @@ namespace System.Data.Common
             return (strwriter.ToString());
         }
 
-        override protected object GetEmptyStorage(int recordCount)
+        protected override object GetEmptyStorage(int recordCount)
         {
             return new SqlBytes[recordCount];
         }
 
-        override protected void CopyValue(
+        protected override void CopyValue(
             int record,
             object store,
             BitArray nullbits,
@@ -149,7 +149,7 @@ namespace System.Data.Common
             nullbits.Set(storeIndex, IsNull(record));
         }
 
-        override protected void SetStorage(object store, BitArray nullbits)
+        protected override void SetStorage(object store, BitArray nullbits)
         {
             values = (SqlBytes[])store;
             //SetNullStorage(nullbits);

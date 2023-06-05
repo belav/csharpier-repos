@@ -300,7 +300,7 @@ namespace System.Net.PeerToPeer.Collaboration
         // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(System.Net.PeerToPeer.Collaboration.PEER_ENDPOINT):System.Net.PeerToPeer.Collaboration.PeerEndPoint" Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
-        internal protected void InternalRefreshData(object state)
+        protected internal void InternalRefreshData(object state)
         {
             Logging.P2PTraceSource.TraceEvent(
                 TraceEventType.Information,
@@ -1109,7 +1109,7 @@ namespace System.Net.PeerToPeer.Collaboration
             return false;
         }
 
-        public new static bool Equals(object objA, object objB)
+        public static new bool Equals(object objA, object objB)
         {
             PeerNearMe comparandPeerNearMe1 = objA as PeerNearMe;
             PeerNearMe comparandPeerNearMe2 = objB as PeerNearMe;

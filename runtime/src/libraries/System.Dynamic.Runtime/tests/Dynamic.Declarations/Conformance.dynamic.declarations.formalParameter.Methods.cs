@@ -5,13 +5,13 @@ using Xunit;
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.extensionmethod004.extensionmethod004
 {
-    static // <Title>Extension method that extends dynamic</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass
+    public static // <Title>Extension method that extends dynamic</Title>
+    class MyClass
     {
         public static dynamic Foo(this int x)
         {
@@ -56,13 +56,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.extensionmethod005.extensionmethod005
 {
-    static // <Title>Extension method that extends dynamic</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass
+    public static // <Title>Extension method that extends dynamic</Title>
+    class MyClass
     {
         public static dynamic Foo(this int x, dynamic d)
         {
@@ -101,13 +101,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.extensionmethod006.extensionmethod006
 {
-    static // <Title>Extension method that extends dynamic</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass
+    public static // <Title>Extension method that extends dynamic</Title>
+    class MyClass
     {
         public static string Foo(this object x, dynamic d)
         {

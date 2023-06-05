@@ -23,7 +23,7 @@ namespace System.Data.Common
         public UInt16Storage(DataColumn column)
             : base(column, typeof(UInt16), defaultValue, StorageType.UInt16) { }
 
-        override public Object Aggregate(int[] records, AggregateType kind)
+        public override Object Aggregate(int[] records, AggregateType kind)
         {
             bool hasData = false;
             try
@@ -175,7 +175,7 @@ namespace System.Data.Common
             throw ExceptionBuilder.AggregateException(kind, DataType);
         }
 
-        override public int Compare(int recordNo1, int recordNo2)
+        public override int Compare(int recordNo1, int recordNo2)
         {
             UInt16 valueNo1 = values[recordNo1];
             UInt16 valueNo2 = values[recordNo2];
@@ -227,13 +227,13 @@ namespace System.Data.Common
             return value;
         }
 
-        override public void Copy(int recordNo1, int recordNo2)
+        public override void Copy(int recordNo1, int recordNo2)
         {
             CopyBits(recordNo1, recordNo2);
             values[recordNo2] = values[recordNo1];
         }
 
-        override public Object Get(int record)
+        public override Object Get(int record)
         {
             UInt16 value = values[record];
             if (!value.Equals(defaultValue))
@@ -243,7 +243,7 @@ namespace System.Data.Common
             return GetBits(record);
         }
 
-        override public void Set(int record, Object value)
+        public override void Set(int record, Object value)
         {
             System.Diagnostics.Debug.Assert(null != value, "null value");
             if (NullValue == value)
@@ -258,7 +258,7 @@ namespace System.Data.Common
             }
         }
 
-        override public void SetCapacity(int capacity)
+        public override void SetCapacity(int capacity)
         {
             UInt16[] newValues = new UInt16[capacity];
             if (null != values)
@@ -269,22 +269,22 @@ namespace System.Data.Common
             base.SetCapacity(capacity);
         }
 
-        override public object ConvertXmlToObject(string s)
+        public override object ConvertXmlToObject(string s)
         {
             return XmlConvert.ToUInt16(s);
         }
 
-        override public string ConvertObjectToXml(object value)
+        public override string ConvertObjectToXml(object value)
         {
             return XmlConvert.ToString((UInt16)value);
         }
 
-        override protected object GetEmptyStorage(int recordCount)
+        protected override object GetEmptyStorage(int recordCount)
         {
             return new UInt16[recordCount];
         }
 
-        override protected void CopyValue(
+        protected override void CopyValue(
             int record,
             object store,
             BitArray nullbits,
@@ -296,7 +296,7 @@ namespace System.Data.Common
             nullbits.Set(storeIndex, !HasValue(record));
         }
 
-        override protected void SetStorage(object store, BitArray nullbits)
+        protected override void SetStorage(object store, BitArray nullbits)
         {
             values = (UInt16[])store;
             SetNullStorage(nullbits);

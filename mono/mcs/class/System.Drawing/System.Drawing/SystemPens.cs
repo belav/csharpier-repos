@@ -38,39 +38,39 @@ namespace System.Drawing
 {
     public sealed class SystemPens
     {
-        static private Pen active_caption_text;
-        static private Pen control;
-        static private Pen control_dark;
-        static private Pen control_dark_dark;
-        static private Pen control_light;
-        static private Pen control_light_light;
-        static private Pen control_text;
-        static private Pen gray_text;
-        static private Pen highlight;
-        static private Pen highlight_text;
-        static private Pen inactive_caption_text;
-        static private Pen info_text;
-        static private Pen menu_text;
-        static private Pen window_frame;
-        static private Pen window_text;
-        static private Pen active_border;
-        static private Pen active_caption;
-        static private Pen app_workspace;
-        static private Pen button_face;
-        static private Pen button_highlight;
-        static private Pen button_shadow;
-        static private Pen desktop;
-        static private Pen gradient_activecaption;
-        static private Pen gradient_inactivecaption;
-        static private Pen hot_track;
-        static private Pen inactive_border;
-        static private Pen inactive_caption;
-        static private Pen info;
-        static private Pen menu;
-        static private Pen menu_bar;
-        static private Pen menu_highlight;
-        static private Pen scroll_bar;
-        static private Pen window;
+        private static Pen active_caption_text;
+        private static Pen control;
+        private static Pen control_dark;
+        private static Pen control_dark_dark;
+        private static Pen control_light;
+        private static Pen control_light_light;
+        private static Pen control_text;
+        private static Pen gray_text;
+        private static Pen highlight;
+        private static Pen highlight_text;
+        private static Pen inactive_caption_text;
+        private static Pen info_text;
+        private static Pen menu_text;
+        private static Pen window_frame;
+        private static Pen window_text;
+        private static Pen active_border;
+        private static Pen active_caption;
+        private static Pen app_workspace;
+        private static Pen button_face;
+        private static Pen button_highlight;
+        private static Pen button_shadow;
+        private static Pen desktop;
+        private static Pen gradient_activecaption;
+        private static Pen gradient_inactivecaption;
+        private static Pen hot_track;
+        private static Pen inactive_border;
+        private static Pen inactive_caption;
+        private static Pen info;
+        private static Pen menu;
+        private static Pen menu_bar;
+        private static Pen menu_highlight;
+        private static Pen scroll_bar;
+        private static Pen window;
 
         private SystemPens() { }
 

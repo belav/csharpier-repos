@@ -36,7 +36,7 @@ namespace System.Web.DynamicData
         private static MetaModel s_defaultModel;
         private string _dynamicDataFolderVirtualPath;
         private HttpContextBase _context;
-        private readonly static ConcurrentDictionary<Type, bool> s_registeredMetadataTypes =
+        private static readonly ConcurrentDictionary<Type, bool> s_registeredMetadataTypes =
             new ConcurrentDictionary<Type, bool>();
 
         // Use global registration is true by default

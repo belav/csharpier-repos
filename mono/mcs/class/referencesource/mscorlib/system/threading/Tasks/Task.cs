@@ -157,7 +157,7 @@ namespace System.Threading.Tasks
         private static StackGuard t_stackGuard; // The stack guard object for this thread
 
         internal static int s_taskIdCounter; //static counter used to generate unique task IDs
-        private readonly static TaskFactory s_factory = new TaskFactory();
+        private static readonly TaskFactory s_factory = new TaskFactory();
 
         private volatile int m_taskId; // this task's unique ID. initialized only if it is ever requested
 
@@ -931,7 +931,7 @@ namespace System.Threading.Tasks
 
         // Static delegate to be used as a cancellation callback on unstarted tasks that have a valid cancellation token.
         // This is necessary to transition them into canceled state if their cancellation token is signalled while they are still not queued
-        private readonly static Action<Object> s_taskCancelCallback = new Action<Object>(
+        private static readonly Action<Object> s_taskCancelCallback = new Action<Object>(
             TaskCancelCallback
         );
 
@@ -2655,7 +2655,7 @@ namespace System.Threading.Tasks
         }
 
         // statically allocated delegate for the removeall expression in Finish()
-        private readonly static Predicate<Task> s_IsExceptionObservedByParentPredicate =
+        private static readonly Predicate<Task> s_IsExceptionObservedByParentPredicate =
             new Predicate<Task>(
                 (t) =>
                 {
@@ -5772,7 +5772,7 @@ namespace System.Threading.Tasks
         }
 
         // statically allocated delegate for the RemoveAll expression in RemoveContinuations() and AddContinuationComplex()
-        private readonly static Predicate<object> s_IsTaskContinuationNullPredicate =
+        private static readonly Predicate<object> s_IsTaskContinuationNullPredicate =
             new Predicate<object>(
                 (tc) =>
                 {

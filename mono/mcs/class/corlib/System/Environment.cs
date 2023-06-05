@@ -170,7 +170,7 @@ namespace System
         /// <summary>
         /// Gets or sets the exit code of this process
         /// </summary>
-        public extern static int ExitCode
+        public static extern int ExitCode
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
@@ -178,7 +178,7 @@ namespace System
             set;
         }
 
-        static public extern bool HasShutdownStarted
+        public static extern bool HasShutdownStarted
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
@@ -187,7 +187,7 @@ namespace System
         /// <summary>
         /// Gets the name of the local computer
         /// </summary>
-        public extern static string MachineName
+        public static extern string MachineName
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             [EnvironmentPermission(SecurityAction.Demand, Read = "COMPUTERNAME")]
@@ -196,7 +196,7 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static string GetNewLine();
+        static extern string GetNewLine();
 
         static string nl;
 
@@ -220,7 +220,7 @@ namespace System
         //
         static OperatingSystem os;
 
-        static internal PlatformID Platform
+        internal static PlatformID Platform
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
@@ -348,7 +348,7 @@ namespace System
         /// <summary>
         /// Get the number of milliseconds that have elapsed since the system was booted
         /// </summary>
-        public extern static int TickCount
+        public static extern int TickCount
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
@@ -376,7 +376,7 @@ namespace System
         /// <summary>
         /// Get the user name of current process is running under
         /// </summary>
-        public extern static string UserName
+        public static extern string UserName
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             [EnvironmentPermission(SecurityAction.Demand, Read = "USERNAME;USER")]
@@ -403,7 +403,7 @@ namespace System
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-        public extern static void Exit(int exitCode);
+        public static extern void Exit(int exitCode);
 
         internal static void _Exit(int exitCode)
         {
@@ -486,10 +486,10 @@ namespace System
         /// </summary>
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [EnvironmentPermissionAttribute(SecurityAction.Demand, Read = "PATH")]
-        public extern static string[] GetCommandLineArgs();
+        public static extern string[] GetCommandLineArgs();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static string internalGetEnvironmentVariable_native(IntPtr variable);
+        internal static extern string internalGetEnvironmentVariable_native(IntPtr variable);
 
         internal static string internalGetEnvironmentVariable(string variable)
         {
@@ -587,7 +587,7 @@ namespace System
 
 #if !MONOTOUCH
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static string GetWindowsFolderPath(int folder);
+        private static extern string GetWindowsFolderPath(int folder);
 
         public static string GetFolderPath(SpecialFolder folder, SpecialFolderOption option)
         {
@@ -1017,14 +1017,14 @@ namespace System
 #endif
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal unsafe static extern void InternalSetEnvironmentVariable(
+        internal static extern unsafe void InternalSetEnvironmentVariable(
             char* variable,
             int variable_length,
             char* value,
             int value_length
         );
 
-        internal unsafe static void InternalSetEnvironmentVariable(string variable, string value)
+        internal static unsafe void InternalSetEnvironmentVariable(string variable, string value)
         {
             fixed (char* fixed_variable = variable)
             fixed (char* fixed_value = value)
@@ -1054,14 +1054,14 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void FailFast(
+        internal static extern void FailFast(
             string message,
             Exception exception,
             string errorSource
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static bool GetIs64BitOperatingSystem();
+        static extern bool GetIs64BitOperatingSystem();
 
         public static bool Is64BitOperatingSystem
         {
@@ -1121,33 +1121,33 @@ namespace System
         }
 #pragma warning restore 169
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static string internalGetGacPath();
+        internal static extern string internalGetGacPath();
 #endif
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static string[] GetLogicalDrivesInternal();
+        internal static extern string[] GetLogicalDrivesInternal();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static string[] GetEnvironmentVariableNames();
+        private static extern string[] GetEnvironmentVariableNames();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static string GetMachineConfigPath();
+        internal static extern string GetMachineConfigPath();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static string internalGetHome();
+        internal static extern string internalGetHome();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int GetPageSize();
+        internal static extern int GetPageSize();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private static string get_bundled_machine_config();
+        private static extern string get_bundled_machine_config();
 
         internal static string GetBundledMachineConfig()
         {
             return get_bundled_machine_config();
         }
 
-        static internal bool IsUnix
+        internal static bool IsUnix
         {
             get
             {
@@ -1156,7 +1156,7 @@ namespace System
                 return (platform == 4 || platform == 128 || platform == 6);
             }
         }
-        static internal bool IsMacOS
+        internal static bool IsMacOS
         {
             get { return Environment.Platform == PlatformID.MacOSX; }
         }

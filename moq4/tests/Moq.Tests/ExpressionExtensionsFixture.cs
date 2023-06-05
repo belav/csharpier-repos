@@ -146,7 +146,7 @@ namespace Moq.Tests
 
         public class Derived : Base
         {
-            public override sealed object Property => null;
+            public sealed override object Property => null;
         }
     }
 }

@@ -59,7 +59,7 @@ namespace System.ServiceModel.Syndication
 
         public abstract void WriteTo(XmlWriter writer);
 
-        internal static protected SyndicationCategory CreateCategory(SyndicationFeed feed)
+        protected internal static SyndicationCategory CreateCategory(SyndicationFeed feed)
         {
             if (feed == null)
             {
@@ -71,7 +71,7 @@ namespace System.ServiceModel.Syndication
             );
         }
 
-        internal static protected SyndicationCategory CreateCategory(SyndicationItem item)
+        protected internal static SyndicationCategory CreateCategory(SyndicationItem item)
         {
             if (item == null)
             {
@@ -83,7 +83,7 @@ namespace System.ServiceModel.Syndication
             );
         }
 
-        internal static protected SyndicationItem CreateItem(SyndicationFeed feed)
+        protected internal static SyndicationItem CreateItem(SyndicationFeed feed)
         {
             if (feed == null)
             {
@@ -92,7 +92,7 @@ namespace System.ServiceModel.Syndication
             return GetNonNullValue<SyndicationItem>(feed.CreateItem(), SR.FeedCreatedNullItem);
         }
 
-        internal static protected SyndicationLink CreateLink(SyndicationFeed feed)
+        protected internal static SyndicationLink CreateLink(SyndicationFeed feed)
         {
             if (feed == null)
             {
@@ -101,7 +101,7 @@ namespace System.ServiceModel.Syndication
             return GetNonNullValue<SyndicationLink>(feed.CreateLink(), SR.FeedCreatedNullPerson);
         }
 
-        internal static protected SyndicationLink CreateLink(SyndicationItem item)
+        protected internal static SyndicationLink CreateLink(SyndicationItem item)
         {
             if (item == null)
             {
@@ -110,7 +110,7 @@ namespace System.ServiceModel.Syndication
             return GetNonNullValue<SyndicationLink>(item.CreateLink(), SR.ItemCreatedNullPerson);
         }
 
-        internal static protected SyndicationPerson CreatePerson(SyndicationFeed feed)
+        protected internal static SyndicationPerson CreatePerson(SyndicationFeed feed)
         {
             if (feed == null)
             {
@@ -122,7 +122,7 @@ namespace System.ServiceModel.Syndication
             );
         }
 
-        internal static protected SyndicationPerson CreatePerson(SyndicationItem item)
+        protected internal static SyndicationPerson CreatePerson(SyndicationItem item)
         {
             if (item == null)
             {
@@ -134,7 +134,7 @@ namespace System.ServiceModel.Syndication
             );
         }
 
-        internal static protected void LoadElementExtensions(
+        protected internal static void LoadElementExtensions(
             XmlReader reader,
             SyndicationFeed feed,
             int maxExtensionSize
@@ -147,7 +147,7 @@ namespace System.ServiceModel.Syndication
             feed.LoadElementExtensions(reader, maxExtensionSize);
         }
 
-        internal static protected void LoadElementExtensions(
+        protected internal static void LoadElementExtensions(
             XmlReader reader,
             SyndicationItem item,
             int maxExtensionSize
@@ -160,7 +160,7 @@ namespace System.ServiceModel.Syndication
             item.LoadElementExtensions(reader, maxExtensionSize);
         }
 
-        internal static protected void LoadElementExtensions(
+        protected internal static void LoadElementExtensions(
             XmlReader reader,
             SyndicationCategory category,
             int maxExtensionSize
@@ -173,7 +173,7 @@ namespace System.ServiceModel.Syndication
             category.LoadElementExtensions(reader, maxExtensionSize);
         }
 
-        internal static protected void LoadElementExtensions(
+        protected internal static void LoadElementExtensions(
             XmlReader reader,
             SyndicationLink link,
             int maxExtensionSize
@@ -186,7 +186,7 @@ namespace System.ServiceModel.Syndication
             link.LoadElementExtensions(reader, maxExtensionSize);
         }
 
-        internal static protected void LoadElementExtensions(
+        protected internal static void LoadElementExtensions(
             XmlReader reader,
             SyndicationPerson person,
             int maxExtensionSize
@@ -199,7 +199,7 @@ namespace System.ServiceModel.Syndication
             person.LoadElementExtensions(reader, maxExtensionSize);
         }
 
-        internal static protected bool TryParseAttribute(
+        protected internal static bool TryParseAttribute(
             string name,
             string ns,
             string value,
@@ -218,7 +218,7 @@ namespace System.ServiceModel.Syndication
             return feed.TryParseAttribute(name, ns, value, version);
         }
 
-        internal static protected bool TryParseAttribute(
+        protected internal static bool TryParseAttribute(
             string name,
             string ns,
             string value,
@@ -237,7 +237,7 @@ namespace System.ServiceModel.Syndication
             return item.TryParseAttribute(name, ns, value, version);
         }
 
-        internal static protected bool TryParseAttribute(
+        protected internal static bool TryParseAttribute(
             string name,
             string ns,
             string value,
@@ -256,7 +256,7 @@ namespace System.ServiceModel.Syndication
             return category.TryParseAttribute(name, ns, value, version);
         }
 
-        internal static protected bool TryParseAttribute(
+        protected internal static bool TryParseAttribute(
             string name,
             string ns,
             string value,
@@ -275,7 +275,7 @@ namespace System.ServiceModel.Syndication
             return link.TryParseAttribute(name, ns, value, version);
         }
 
-        internal static protected bool TryParseAttribute(
+        protected internal static bool TryParseAttribute(
             string name,
             string ns,
             string value,
@@ -294,7 +294,7 @@ namespace System.ServiceModel.Syndication
             return person.TryParseAttribute(name, ns, value, version);
         }
 
-        internal static protected bool TryParseContent(
+        protected internal static bool TryParseContent(
             XmlReader reader,
             SyndicationItem item,
             string contentType,
@@ -305,7 +305,7 @@ namespace System.ServiceModel.Syndication
             return item.TryParseContent(reader, contentType, version, out content);
         }
 
-        internal static protected bool TryParseElement(
+        protected internal static bool TryParseElement(
             XmlReader reader,
             SyndicationFeed feed,
             string version
@@ -318,7 +318,7 @@ namespace System.ServiceModel.Syndication
             return feed.TryParseElement(reader, version);
         }
 
-        internal static protected bool TryParseElement(
+        protected internal static bool TryParseElement(
             XmlReader reader,
             SyndicationItem item,
             string version
@@ -331,7 +331,7 @@ namespace System.ServiceModel.Syndication
             return item.TryParseElement(reader, version);
         }
 
-        internal static protected bool TryParseElement(
+        protected internal static bool TryParseElement(
             XmlReader reader,
             SyndicationCategory category,
             string version
@@ -344,7 +344,7 @@ namespace System.ServiceModel.Syndication
             return category.TryParseElement(reader, version);
         }
 
-        internal static protected bool TryParseElement(
+        protected internal static bool TryParseElement(
             XmlReader reader,
             SyndicationLink link,
             string version
@@ -357,7 +357,7 @@ namespace System.ServiceModel.Syndication
             return link.TryParseElement(reader, version);
         }
 
-        internal static protected bool TryParseElement(
+        protected internal static bool TryParseElement(
             XmlReader reader,
             SyndicationPerson person,
             string version
@@ -370,7 +370,7 @@ namespace System.ServiceModel.Syndication
             return person.TryParseElement(reader, version);
         }
 
-        internal static protected void WriteAttributeExtensions(
+        protected internal static void WriteAttributeExtensions(
             XmlWriter writer,
             SyndicationFeed feed,
             string version
@@ -383,7 +383,7 @@ namespace System.ServiceModel.Syndication
             feed.WriteAttributeExtensions(writer, version);
         }
 
-        internal static protected void WriteAttributeExtensions(
+        protected internal static void WriteAttributeExtensions(
             XmlWriter writer,
             SyndicationItem item,
             string version
@@ -396,7 +396,7 @@ namespace System.ServiceModel.Syndication
             item.WriteAttributeExtensions(writer, version);
         }
 
-        internal static protected void WriteAttributeExtensions(
+        protected internal static void WriteAttributeExtensions(
             XmlWriter writer,
             SyndicationCategory category,
             string version
@@ -409,7 +409,7 @@ namespace System.ServiceModel.Syndication
             category.WriteAttributeExtensions(writer, version);
         }
 
-        internal static protected void WriteAttributeExtensions(
+        protected internal static void WriteAttributeExtensions(
             XmlWriter writer,
             SyndicationLink link,
             string version
@@ -422,7 +422,7 @@ namespace System.ServiceModel.Syndication
             link.WriteAttributeExtensions(writer, version);
         }
 
-        internal static protected void WriteAttributeExtensions(
+        protected internal static void WriteAttributeExtensions(
             XmlWriter writer,
             SyndicationPerson person,
             string version
@@ -435,7 +435,7 @@ namespace System.ServiceModel.Syndication
             person.WriteAttributeExtensions(writer, version);
         }
 
-        internal static protected void WriteElementExtensions(
+        protected internal static void WriteElementExtensions(
             XmlWriter writer,
             SyndicationFeed feed,
             string version
@@ -448,7 +448,7 @@ namespace System.ServiceModel.Syndication
             feed.WriteElementExtensions(writer, version);
         }
 
-        internal static protected void WriteElementExtensions(
+        protected internal static void WriteElementExtensions(
             XmlWriter writer,
             SyndicationItem item,
             string version
@@ -461,7 +461,7 @@ namespace System.ServiceModel.Syndication
             item.WriteElementExtensions(writer, version);
         }
 
-        internal static protected void WriteElementExtensions(
+        protected internal static void WriteElementExtensions(
             XmlWriter writer,
             SyndicationCategory category,
             string version
@@ -474,7 +474,7 @@ namespace System.ServiceModel.Syndication
             category.WriteElementExtensions(writer, version);
         }
 
-        internal static protected void WriteElementExtensions(
+        protected internal static void WriteElementExtensions(
             XmlWriter writer,
             SyndicationLink link,
             string version
@@ -487,7 +487,7 @@ namespace System.ServiceModel.Syndication
             link.WriteElementExtensions(writer, version);
         }
 
-        internal static protected void WriteElementExtensions(
+        protected internal static void WriteElementExtensions(
             XmlWriter writer,
             SyndicationPerson person,
             string version
@@ -500,7 +500,7 @@ namespace System.ServiceModel.Syndication
             person.WriteElementExtensions(writer, version);
         }
 
-        internal protected virtual void SetFeed(SyndicationFeed feed)
+        protected internal virtual void SetFeed(SyndicationFeed feed)
         {
             if (feed == null)
             {
@@ -809,7 +809,7 @@ namespace System.ServiceModel.Syndication
                 return SR.GetString(SR.XmlFoundNodeType, reader.NodeType);
             }
 
-            static public void ThrowStartElementExpected(XmlDictionaryReader reader)
+            public static void ThrowStartElementExpected(XmlDictionaryReader reader)
             {
                 ThrowXmlException(reader, SR.XmlStartElementExpected, GetWhatWasFound(reader));
             }

@@ -155,17 +155,17 @@ namespace System.Web.SessionState
             _timeout = timeout;
         }
 
-        virtual public ISessionStateItemCollection Items
+        public virtual ISessionStateItemCollection Items
         {
             get { return _sessionItems; }
         }
 
-        virtual public HttpStaticObjectsCollection StaticObjects
+        public virtual HttpStaticObjectsCollection StaticObjects
         {
             get { return _staticObjects; }
         }
 
-        virtual public int Timeout
+        public virtual int Timeout
         {
             get { return _timeout; }
             set { _timeout = value; }

@@ -104,7 +104,7 @@ namespace Microsoft.Win32
         private static extern int RegDeleteValue(IntPtr keyHandle, string valueName);
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode, EntryPoint = "RegEnumKeyExW")]
-        internal unsafe static extern int RegEnumKeyEx(
+        internal static extern unsafe int RegEnumKeyEx(
             IntPtr keyHandle,
             int dwIndex,
             char* lpName,
@@ -116,7 +116,7 @@ namespace Microsoft.Win32
         );
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode, EntryPoint = "RegEnumValue")]
-        internal unsafe static extern int RegEnumValue(
+        internal static extern unsafe int RegEnumValue(
             IntPtr hKey,
             int dwIndex,
             char* lpValueName,

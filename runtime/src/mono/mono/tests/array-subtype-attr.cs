@@ -5,7 +5,7 @@ namespace MonoBug
 {
     public class Program
     {
-        static private int Main(string[] args)
+        private static int Main(string[] args)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             Type type = assembly.GetType("MonoBug.Program", true);

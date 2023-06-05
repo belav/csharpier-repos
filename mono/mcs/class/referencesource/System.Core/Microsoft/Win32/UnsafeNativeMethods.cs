@@ -165,7 +165,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [SecurityCritical]
-        internal static unsafe extern int WriteFile(
+        internal static extern unsafe int WriteFile(
             SafeFileHandle handle,
             byte* bytes,
             int numBytesToWrite,
@@ -236,7 +236,7 @@ namespace Microsoft.Win32
         [DllImport(KERNEL32, SetLastError = true, EntryPoint = "SetFilePointer")]
         [ResourceExposure(ResourceScope.None)]
         [SecurityCritical]
-        private unsafe static extern int SetFilePointerWin32(
+        private static extern unsafe int SetFilePointerWin32(
             SafeFileHandle handle,
             int lo,
             int* hi,
@@ -245,7 +245,7 @@ namespace Microsoft.Win32
 
         [ResourceExposure(ResourceScope.None)]
         [SecurityCritical]
-        internal unsafe static long SetFilePointer(
+        internal static unsafe long SetFilePointer(
             SafeFileHandle handle,
             long offset,
             System.IO.SeekOrigin origin,
@@ -406,7 +406,7 @@ namespace Microsoft.Win32
         [DllImport(KERNEL32, SetLastError = true)]
         [SecurityCritical]
         [return: MarshalAs(UnmanagedType.Bool)]
-        unsafe internal static extern bool ConnectNamedPipe(
+        internal static extern unsafe bool ConnectNamedPipe(
             SafePipeHandle handle,
             NativeOverlapped* overlapped
         );
@@ -496,7 +496,7 @@ namespace Microsoft.Win32
         [DllImport(KERNEL32, CharSet = CharSet.Auto, SetLastError = true)]
         [SecurityCritical]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe extern bool SetNamedPipeHandleState(
+        internal static extern unsafe bool SetNamedPipeHandleState(
             SafePipeHandle hNamedPipe,
             int* lpMode,
             IntPtr lpMaxCollectionCount,
@@ -548,7 +548,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [SecurityCritical]
-        unsafe internal static extern int ReadFile(
+        internal static extern unsafe int ReadFile(
             SafePipeHandle handle,
             byte* bytes,
             int numBytesToRead,
@@ -558,7 +558,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [SecurityCritical]
-        unsafe internal static extern int ReadFile(
+        internal static extern unsafe int ReadFile(
             SafePipeHandle handle,
             byte* bytes,
             int numBytesToRead,
@@ -576,7 +576,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [SecurityCritical]
-        internal static unsafe extern int WriteFile(
+        internal static extern unsafe int WriteFile(
             SafePipeHandle handle,
             byte* bytes,
             int numBytesToWrite,
@@ -586,7 +586,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [SecurityCritical]
-        internal static unsafe extern int WriteFile(
+        internal static extern unsafe int WriteFile(
             SafePipeHandle handle,
             byte* bytes,
             int numBytesToWrite,
@@ -1736,7 +1736,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [SecurityCritical]
-        unsafe internal static extern IntPtr VirtualQuery(
+        internal static extern unsafe IntPtr VirtualQuery(
             SafeMemoryMappedViewHandle address,
             ref MEMORY_BASIC_INFORMATION buffer,
             IntPtr sizeOfBuffer
@@ -1756,7 +1756,7 @@ namespace Microsoft.Win32
         [DllImport(KERNEL32, ExactSpelling = true, SetLastError = true)]
         [SecurityCritical]
         [return: MarshalAs(UnmanagedType.Bool)]
-        unsafe internal static extern bool FlushViewOfFile(
+        internal static extern unsafe bool FlushViewOfFile(
             byte* lpBaseAddress,
             IntPtr dwNumberOfBytesToFlush
         );
@@ -1781,7 +1781,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [SecurityCritical]
-        unsafe internal static extern IntPtr VirtualAlloc(
+        internal static extern unsafe IntPtr VirtualAlloc(
             SafeMemoryMappedViewHandle address,
             UIntPtr numBytes,
             int commitOrReserve,
@@ -1809,7 +1809,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [SecurityCritical]
-        internal static unsafe extern bool CancelIoEx(
+        internal static extern unsafe bool CancelIoEx(
             SafeHandle handle,
             NativeOverlapped* lpOverlapped
         );

@@ -31,7 +31,7 @@ namespace System.Windows.Forms
 {
     internal class ThemeEngine
     {
-        static private Theme theme = null;
+        private static Theme theme = null;
 
         static ThemeEngine()
         {

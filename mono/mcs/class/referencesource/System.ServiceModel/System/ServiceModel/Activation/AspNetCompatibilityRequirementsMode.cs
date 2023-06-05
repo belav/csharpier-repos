@@ -14,7 +14,7 @@ namespace System.ServiceModel.Activation
 
     static class AspNetCompatibilityRequirementsModeHelper
     {
-        static public bool IsDefined(AspNetCompatibilityRequirementsMode x)
+        public static bool IsDefined(AspNetCompatibilityRequirementsMode x)
         {
             return x == AspNetCompatibilityRequirementsMode.NotAllowed
                 || x == AspNetCompatibilityRequirementsMode.Allowed

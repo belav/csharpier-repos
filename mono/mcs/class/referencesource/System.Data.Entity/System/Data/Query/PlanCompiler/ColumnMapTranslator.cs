@@ -56,12 +56,13 @@ namespace System.Data.Query.PlanCompiler
     internal class ColumnMapTranslator
         : ColumnMapVisitorWithResults<ColumnMap, ColumnMapTranslatorTranslationDelegate>
     {
+        private
         #region Constructors
 
         /// <summary>
         /// Singleton instance for the "public" methods to use;
         /// </summary>
-        static private ColumnMapTranslator Instance = new ColumnMapTranslator();
+        static ColumnMapTranslator Instance = new ColumnMapTranslator();
 
         /// <summary>
         /// Constructor; no one should use this.

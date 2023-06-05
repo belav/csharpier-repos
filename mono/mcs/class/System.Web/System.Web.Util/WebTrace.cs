@@ -44,14 +44,14 @@ namespace System.Web.Util
         }
 
         [Conditional("WEBTRACE")]
-        static public void PushContext(string context)
+        public static void PushContext(string context)
         {
             ctxStack.Push(context);
             Trace.Indent();
         }
 
         [Conditional("WEBTRACE")]
-        static public void PopContext()
+        public static void PopContext()
         {
             if (ctxStack.Count == 0)
                 return;
@@ -60,7 +60,7 @@ namespace System.Web.Util
             ctxStack.Pop();
         }
 
-        static public string Context
+        public static string Context
         {
             get
             {
@@ -71,38 +71,38 @@ namespace System.Web.Util
             }
         }
 
-        static public bool StackTrace
+        public static bool StackTrace
         {
             get { return trace; }
             set { trace = value; }
         }
 
         [Conditional("WEBTRACE")]
-        static public void WriteLine(string msg)
+        public static void WriteLine(string msg)
         {
             Trace.WriteLine(Format(msg));
         }
 
         [Conditional("WEBTRACE")]
-        static public void WriteLine(string msg, object arg)
+        public static void WriteLine(string msg, object arg)
         {
             Trace.WriteLine(Format(String.Format(msg, arg)));
         }
 
         [Conditional("WEBTRACE")]
-        static public void WriteLine(string msg, object arg1, object arg2)
+        public static void WriteLine(string msg, object arg1, object arg2)
         {
             Trace.WriteLine(Format(String.Format(msg, arg1, arg2)));
         }
 
         [Conditional("WEBTRACE")]
-        static public void WriteLine(string msg, object arg1, object arg2, object arg3)
+        public static void WriteLine(string msg, object arg1, object arg2, object arg3)
         {
             Trace.WriteLine(Format(String.Format(msg, arg1, arg2, arg3)));
         }
 
         [Conditional("WEBTRACE")]
-        static public void WriteLine(string msg, params object[] args)
+        public static void WriteLine(string msg, params object[] args)
         {
             Trace.WriteLine(Format(String.Format(msg, args)));
         }

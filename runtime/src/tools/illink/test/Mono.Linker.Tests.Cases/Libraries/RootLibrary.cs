@@ -39,7 +39,7 @@ namespace Mono.Linker.Tests.Cases.Libraries
         [Kept]
         protected internal void UnusedProtectedInternalMethod() { }
 
-        protected private void UnusedProtectedPrivateMethod() { }
+        private protected void UnusedProtectedPrivateMethod() { }
 
         internal void UnusedInternalMethod() { }
 

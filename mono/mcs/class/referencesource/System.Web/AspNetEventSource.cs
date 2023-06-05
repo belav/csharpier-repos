@@ -257,7 +257,7 @@ namespace System.Web
         // prerequisite: str must be pinned and provided as pStr; may be null.
         // we'll convert null strings to empty strings if necessary.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static void FillInEventData(EventData* pEventData, string str, char* pStr)
+        private static unsafe void FillInEventData(EventData* pEventData, string str, char* pStr)
         {
 #if DBG
             fixed (char* pStr2 = str)
@@ -279,7 +279,7 @@ namespace System.Web
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static void FillInEventData(EventData* pEventData, Guid* pGuid)
+        private static unsafe void FillInEventData(EventData* pEventData, Guid* pGuid)
         {
             Debug.Assert(pGuid != null);
             pEventData->DataPointer = (IntPtr)pGuid;

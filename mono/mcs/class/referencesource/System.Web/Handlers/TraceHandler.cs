@@ -369,14 +369,16 @@ namespace System.Web.Handlers
         }
 
         ////// Static methods for creating tables //////////
-        static private TableRow AddRow(Table t)
+        private
+        ////// Static methods for creating tables //////////
+        static TableRow AddRow(Table t)
         {
             TableRow trow = new TableRow();
             t.Rows.Add(trow);
             return trow;
         }
 
-        static private TableCell AddHeaderCell(TableRow trow, string text)
+        private static TableCell AddHeaderCell(TableRow trow, string text)
         {
             TableHeaderCell tcell = new TableHeaderCell();
             tcell.Text = text;
@@ -384,7 +386,7 @@ namespace System.Web.Handlers
             return tcell;
         }
 
-        static private TableCell AddCell(TableRow trow, string text)
+        private static TableCell AddCell(TableRow trow, string text)
         {
             TableCell tcell = new TableCell();
             tcell.Text = text;
@@ -392,12 +394,12 @@ namespace System.Web.Handlers
             return tcell;
         }
 
-        static internal string StyleSheet
+        internal static string StyleSheet
         {
             get { return _style; }
         }
 
-        static internal Table CreateControlTable(DataTable datatable)
+        internal static Table CreateControlTable(DataTable datatable)
         {
             Table table = new Table();
             if (datatable == null)
@@ -499,7 +501,7 @@ namespace System.Web.Handlers
             return table;
         }
 
-        static internal Table CreateTraceTable(DataTable datatable)
+        internal static Table CreateTraceTable(DataTable datatable)
         {
             Table table = new Table();
             table.Width = Unit.Percentage(100);
@@ -594,12 +596,12 @@ namespace System.Web.Handlers
                 : o.ToString();
         }
 
-        static internal Table CreateTable(DataTable datatable)
+        internal static Table CreateTable(DataTable datatable)
         {
             return CreateTable(datatable, false);
         }
 
-        static internal Table CreateTable(DataTable datatable, bool encodeSpaces)
+        internal static Table CreateTable(DataTable datatable, bool encodeSpaces)
         {
             Table table = new Table();
             table.Width = Unit.Percentage(100);
@@ -662,7 +664,7 @@ namespace System.Web.Handlers
             return table;
         }
 
-        static internal Table CreateDetailsTable(DataTable datatable)
+        internal static Table CreateDetailsTable(DataTable datatable)
         {
             Table table = new Table();
             table.Width = Unit.Percentage(100);

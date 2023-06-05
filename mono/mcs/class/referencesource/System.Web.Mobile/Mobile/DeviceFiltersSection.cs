@@ -358,7 +358,7 @@ namespace System.Web.Mobile
             }
         }
 
-        static private void ValidateElement(object value)
+        private static void ValidateElement(object value)
         {
             Debug.Assert((value != null) && (value is DeviceFilterElement));
 

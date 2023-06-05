@@ -45,7 +45,7 @@ namespace Obj
 
     class Test
     {
-        static public int Main()
+        public static int Main()
         {
             int result = 0;
             B b = new B();

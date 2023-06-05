@@ -17,7 +17,7 @@ namespace System.ComponentModel.Composition.Primitives
 #endif
     public abstract class ComposablePartDefinition
     {
-        static internal readonly IEnumerable<
+        internal static readonly IEnumerable<
             Tuple<ComposablePartDefinition, ExportDefinition>
         > _EmptyExports = Enumerable.Empty<Tuple<ComposablePartDefinition, ExportDefinition>>();
 

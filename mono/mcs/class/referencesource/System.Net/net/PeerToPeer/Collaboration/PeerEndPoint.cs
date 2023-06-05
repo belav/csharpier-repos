@@ -509,7 +509,7 @@ namespace System.Net.PeerToPeer.Collaboration
             return false;
         }
 
-        public new static bool Equals(object objA, object objB)
+        public static new bool Equals(object objA, object objB)
         {
             PeerEndPoint comparandPeerEndPoint1 = objA as PeerEndPoint;
             PeerEndPoint comparandPeerEndPoint2 = objB as PeerEndPoint;

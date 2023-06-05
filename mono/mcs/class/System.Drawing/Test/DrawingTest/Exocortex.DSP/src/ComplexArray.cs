@@ -56,7 +56,16 @@ namespace Exocortex.DSP
         /// <param name="array"></param>
         /// <param name="fMinimum"></param>
         /// <param name="fMaximum"></param>
-        static public void ClampLength(Complex[] array, double fMinimum, double fMaximum)
+        public
+        //---------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Clamp length (modulus) of the elements in the complex array
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="fMinimum"></param>
+        /// <param name="fMaximum"></param>
+        static void ClampLength(Complex[] array, double fMinimum, double fMaximum)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -73,7 +82,14 @@ namespace Exocortex.DSP
         /// <param name="array"></param>
         /// <param name="minimum"></param>
         /// <param name="maximum"></param>
-        static public void Clamp(Complex[] array, Complex minimum, Complex maximum)
+        public
+        /// <summary>
+        /// Clamp elements in the complex array to range [minimum,maximum]
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        static void Clamp(Complex[] array, Complex minimum, Complex maximum)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -86,7 +102,12 @@ namespace Exocortex.DSP
         /// Clamp elements in the complex array to real unit range (i.e. [0,1])
         /// </summary>
         /// <param name="array"></param>
-        static public void ClampToRealUnit(Complex[] array)
+        public
+        /// <summary>
+        /// Clamp elements in the complex array to real unit range (i.e. [0,1])
+        /// </summary>
+        /// <param name="array"></param>
+        static void ClampToRealUnit(Complex[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -95,12 +116,13 @@ namespace Exocortex.DSP
             }
         }
 
+        private
         //---------------------------------------------------------------------------------------------
 
-        static private bool _workspaceFLocked = false;
-        static private ComplexF[] _workspaceF = new ComplexF[0];
+        static bool _workspaceFLocked = false;
+        private static ComplexF[] _workspaceF = new ComplexF[0];
 
-        static private void LockWorkspaceF(int length, ref ComplexF[] workspace)
+        private static void LockWorkspaceF(int length, ref ComplexF[] workspace)
         {
             Debug.Assert(_workspaceFLocked == false);
             _workspaceFLocked = true;
@@ -111,7 +133,7 @@ namespace Exocortex.DSP
             workspace = _workspaceF;
         }
 
-        static private void UnlockWorkspaceF(ref ComplexF[] workspace)
+        private static void UnlockWorkspaceF(ref ComplexF[] workspace)
         {
             Debug.Assert(_workspaceF == workspace);
             Debug.Assert(_workspaceFLocked == true);
@@ -126,7 +148,15 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="offset"></param>
-        static public void Shift(Complex[] array, int offset)
+        public
+        //---------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Shift (offset) the elements in the array
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="offset"></param>
+        static void Shift(Complex[] array, int offset)
         {
             Debug.Assert(array != null);
             Debug.Assert(offset >= 0);
@@ -155,7 +185,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="offset"></param>
-        static public void Shift(ComplexF[] array, int offset)
+        public
+        /// <summary>
+        /// Shift (offset) the elements in the array
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="offset"></param>
+        static void Shift(ComplexF[] array, int offset)
         {
             Debug.Assert(array != null);
             Debug.Assert(offset >= 0);
@@ -190,7 +226,16 @@ namespace Exocortex.DSP
         /// <param name="array"></param>
         /// <param name="minimum"></param>
         /// <param name="maximum"></param>
-        static public void GetLengthRange(Complex[] array, ref double minimum, ref double maximum)
+        public
+        //---------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Get the range of element lengths
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        static void GetLengthRange(Complex[] array, ref double minimum, ref double maximum)
         {
             minimum = +double.MaxValue;
             maximum = -double.MaxValue;
@@ -208,7 +253,14 @@ namespace Exocortex.DSP
         /// <param name="array"></param>
         /// <param name="minimum"></param>
         /// <param name="maximum"></param>
-        static public void GetLengthRange(ComplexF[] array, ref float minimum, ref float maximum)
+        public
+        /// <summary>
+        /// Get the range of element lengths
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        static void GetLengthRange(ComplexF[] array, ref float minimum, ref float maximum)
         {
             minimum = +float.MaxValue;
             maximum = -float.MaxValue;
@@ -260,7 +312,48 @@ namespace Exocortex.DSP
         /// <param name="array2"></param>
         /// <param name="tolerance"></param>
         /// <returns></returns>
-        static public bool IsEqual(Complex[] array1, Complex[] array2, double tolerance)
+        public
+        // // <summary>
+        // // Conver the complex array to a double array
+        // // </summary>
+        // // <param name="array"></param>
+        // // <param name="style"></param>
+        // // <returns></returns>
+        /* static public double[]	ConvertToDoubleArray( Complex[] array, ConversionStyle style ) {
+            double[] newArray = new double[ array.Length ];
+            switch( style ) {
+            case ConversionStyle.Length:
+                for( int i = 0; i < array.Length; i ++ ) {
+                    newArray[i] = (double) array[i].GetModulus();
+                }
+                break;
+            case ConversionStyle.Real:
+                for( int i = 0; i < array.Length; i ++ ) {
+                    newArray[i] = (double) array[i].Re;
+                }
+                break;
+            case ConversionStyle.Imaginary:
+                for( int i = 0; i < array.Length; i ++ ) {
+                    newArray[i] = (double) array[i].Im;
+                }
+                break;
+            default:
+                Debug.Assert( false );
+                break;
+            }
+            return	newArray;
+        }	 */
+
+        //---------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Determine whether the elements in the two arrays are the same
+        /// </summary>
+        /// <param name="array1"></param>
+        /// <param name="array2"></param>
+        /// <param name="tolerance"></param>
+        /// <returns></returns>
+        static bool IsEqual(Complex[] array1, Complex[] array2, double tolerance)
         {
             if (array1.Length != array2.Length)
             {
@@ -283,7 +376,15 @@ namespace Exocortex.DSP
         /// <param name="array2"></param>
         /// <param name="tolerance"></param>
         /// <returns></returns>
-        static public bool IsEqual(ComplexF[] array1, ComplexF[] array2, float tolerance)
+        public
+        /// <summary>
+        ///  Determine whether the elements in the two arrays are the same
+        /// </summary>
+        /// <param name="array1"></param>
+        /// <param name="array2"></param>
+        /// <param name="tolerance"></param>
+        /// <returns></returns>
+        static bool IsEqual(ComplexF[] array1, ComplexF[] array2, float tolerance)
         {
             if (array1.Length != array2.Length)
             {
@@ -306,7 +407,15 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="offset"></param>
-        static public void Offset(Complex[] array, double offset)
+        public
+        //---------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Add a specific value to each element in the array
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="offset"></param>
+        static void Offset(Complex[] array, double offset)
         {
             int length = array.Length;
             for (int i = 0; i < length; i++)
@@ -320,7 +429,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="offset"></param>
-        static public void Offset(Complex[] array, Complex offset)
+        public
+        /// <summary>
+        /// Add a specific value to each element in the array
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="offset"></param>
+        static void Offset(Complex[] array, Complex offset)
         {
             int length = array.Length;
             for (int i = 0; i < length; i++)
@@ -334,7 +449,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="offset"></param>
-        static public void Offset(ComplexF[] array, float offset)
+        public
+        /// <summary>
+        /// Add a specific value to each element in the array
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="offset"></param>
+        static void Offset(ComplexF[] array, float offset)
         {
             int length = array.Length;
             for (int i = 0; i < length; i++)
@@ -348,7 +469,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="offset"></param>
-        static public void Offset(ComplexF[] array, ComplexF offset)
+        public
+        /// <summary>
+        /// Add a specific value to each element in the array
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="offset"></param>
+        static void Offset(ComplexF[] array, ComplexF offset)
         {
             int length = array.Length;
             for (int i = 0; i < length; i++)
@@ -364,7 +491,15 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="scale"></param>
-        static public void Scale(Complex[] array, double scale)
+        public
+        //---------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Multiply each element in the array by a specific value
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="scale"></param>
+        static void Scale(Complex[] array, double scale)
         {
             Debug.Assert(array != null);
 
@@ -382,7 +517,15 @@ namespace Exocortex.DSP
         /// <param name="scale"></param>
         /// <param name="start"></param>
         /// <param name="length"></param>
-        static public void Scale(Complex[] array, double scale, int start, int length)
+        public
+        /// <summary>
+        ///  Multiply each element in the array by a specific value
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="scale"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        static void Scale(Complex[] array, double scale, int start, int length)
         {
             Debug.Assert(array != null);
             Debug.Assert(start >= 0);
@@ -400,7 +543,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="scale"></param>
-        static public void Scale(Complex[] array, Complex scale)
+        public
+        /// <summary>
+        /// Multiply each element in the array by a specific value
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="scale"></param>
+        static void Scale(Complex[] array, Complex scale)
         {
             Debug.Assert(array != null);
 
@@ -418,7 +567,15 @@ namespace Exocortex.DSP
         /// <param name="scale"></param>
         /// <param name="start"></param>
         /// <param name="length"></param>
-        static public void Scale(Complex[] array, Complex scale, int start, int length)
+        public
+        /// <summary>
+        /// Multiply each element in the array by a specific value
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="scale"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        static void Scale(Complex[] array, Complex scale, int start, int length)
         {
             Debug.Assert(array != null);
             Debug.Assert(start >= 0);
@@ -436,7 +593,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="scale"></param>
-        static public void Scale(ComplexF[] array, float scale)
+        public
+        /// <summary>
+        /// Multiply each element in the array by a specific value
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="scale"></param>
+        static void Scale(ComplexF[] array, float scale)
         {
             Debug.Assert(array != null);
 
@@ -454,7 +617,15 @@ namespace Exocortex.DSP
         /// <param name="scale"></param>
         /// <param name="start"></param>
         /// <param name="length"></param>
-        static public void Scale(ComplexF[] array, float scale, int start, int length)
+        public
+        /// <summary>
+        /// Multiply each element in the array by a specific value
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="scale"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        static void Scale(ComplexF[] array, float scale, int start, int length)
         {
             Debug.Assert(array != null);
             Debug.Assert(start >= 0);
@@ -472,7 +643,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="array"></param>
         /// <param name="scale"></param>
-        static public void Scale(ComplexF[] array, ComplexF scale)
+        public
+        /// <summary>
+        /// Multiply each element in the array by a specific value
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="scale"></param>
+        static void Scale(ComplexF[] array, ComplexF scale)
         {
             Debug.Assert(array != null);
 
@@ -490,7 +667,15 @@ namespace Exocortex.DSP
         /// <param name="scale"></param>
         /// <param name="start"></param>
         /// <param name="length"></param>
-        static public void Scale(ComplexF[] array, ComplexF scale, int start, int length)
+        public
+        /// <summary>
+        /// Multiply each element in the array by a specific value
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="scale"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        static void Scale(ComplexF[] array, ComplexF scale, int start, int length)
         {
             Debug.Assert(array != null);
             Debug.Assert(start >= 0);
@@ -510,7 +695,15 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="target"></param>
         /// <param name="rhs"></param>
-        static public void Multiply(Complex[] target, Complex[] rhs)
+        public
+        //---------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Multiply each element in target array with corresponding element in rhs array
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="rhs"></param>
+        static void Multiply(Complex[] target, Complex[] rhs)
         {
             ComplexArray.Multiply(target, rhs, target);
         }
@@ -522,7 +715,15 @@ namespace Exocortex.DSP
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
         /// <param name="result"></param>
-        static public void Multiply(Complex[] lhs, Complex[] rhs, Complex[] result)
+        public
+        /// <summary>
+        /// Multiply each element in lhs array with corresponding element in rhs array and
+        /// put product in result array
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <param name="result"></param>
+        static void Multiply(Complex[] lhs, Complex[] rhs, Complex[] result)
         {
             Debug.Assert(lhs != null);
             Debug.Assert(rhs != null);
@@ -542,7 +743,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="target"></param>
         /// <param name="rhs"></param>
-        static public void Multiply(ComplexF[] target, ComplexF[] rhs)
+        public
+        /// <summary>
+        /// Multiply each element in target array with corresponding element in rhs array
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="rhs"></param>
+        static void Multiply(ComplexF[] target, ComplexF[] rhs)
         {
             ComplexArray.Multiply(target, rhs, target);
         }
@@ -554,7 +761,15 @@ namespace Exocortex.DSP
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
         /// <param name="result"></param>
-        static public void Multiply(ComplexF[] lhs, ComplexF[] rhs, ComplexF[] result)
+        public
+        /// <summary>
+        /// Multiply each element in lhs array with corresponding element in rhs array and
+        /// put product in result array
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <param name="result"></param>
+        static void Multiply(ComplexF[] lhs, ComplexF[] rhs, ComplexF[] result)
         {
             Debug.Assert(lhs != null);
             Debug.Assert(rhs != null);
@@ -576,7 +791,15 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="target"></param>
         /// <param name="rhs"></param>
-        static public void Divide(Complex[] target, Complex[] rhs)
+        public
+        //---------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Divide each element in target array with corresponding element in rhs array
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="rhs"></param>
+        static void Divide(Complex[] target, Complex[] rhs)
         {
             ComplexArray.Divide(target, rhs, target);
         }
@@ -588,7 +811,15 @@ namespace Exocortex.DSP
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
         /// <param name="result"></param>
-        static public void Divide(Complex[] lhs, Complex[] rhs, Complex[] result)
+        public
+        /// <summary>
+        /// Divide each element in lhs array with corresponding element in rhs array and
+        /// put product in result array
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <param name="result"></param>
+        static void Divide(Complex[] lhs, Complex[] rhs, Complex[] result)
         {
             Debug.Assert(lhs != null);
             Debug.Assert(rhs != null);
@@ -608,7 +839,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="target"></param>
         /// <param name="rhs"></param>
-        static public void Divide(ComplexF[] target, ComplexF[] rhs)
+        public
+        /// <summary>
+        /// Divide each element in target array with corresponding element in rhs array
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="rhs"></param>
+        static void Divide(ComplexF[] target, ComplexF[] rhs)
         {
             ComplexArray.Divide(target, rhs, target);
         }
@@ -620,7 +857,15 @@ namespace Exocortex.DSP
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
         /// <param name="result"></param>
-        static public void Divide(ComplexF[] lhs, ComplexF[] rhs, ComplexF[] result)
+        public
+        /// <summary>
+        /// Divide each element in lhs array with corresponding element in rhs array and
+        /// put product in result array
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <param name="result"></param>
+        static void Divide(ComplexF[] lhs, ComplexF[] rhs, ComplexF[] result)
         {
             Debug.Assert(lhs != null);
             Debug.Assert(rhs != null);
@@ -674,7 +919,39 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="dest"></param>
         /// <param name="source"></param>
-        static public void Copy(Complex[] dest, Complex[] source)
+        public
+        //---------------------------------------------------------------------------------------------
+
+        /*static public void Flip( ComplexF[] array, Size3 size ) {
+            Debug.Assert( array != null );
+
+            ComplexF[]	workspace	= null;
+            ComplexArray.LockWorkspaceF( size.GetTotalLength(), ref workspace );
+            
+            for( int z = 0; z < size.Depth; z ++ ) {
+                for( int y = 0; y < size.Height; y ++ ) {
+                    int xyzOffset = 0 + y * size.Width + z * size.Width * size.Height;
+                    int abcOffset = size.Width - 1 + ( size.Height - y - 1 ) * size.Width + ( size.Depth - z - 1 ) * size.Width * size.Height;
+                    for( int x = 0; x < size.Width; x ++ ) {
+                        workspace[ xyzOffset ++ ] = array[ abcOffset -- ];
+                    }
+                }
+            }
+
+            for( int i = 0; i < size.GetTotalLength(); i ++ ) {
+                array[ i ] = workspace[ i ];
+            }
+
+            ComplexArray.UnlockWorkspaceF( ref workspace );
+        }  */
+
+
+        /// <summary>
+        /// Copy an array
+        /// </summary>
+        /// <param name="dest"></param>
+        /// <param name="source"></param>
+        static void Copy(Complex[] dest, Complex[] source)
         {
             Debug.Assert(dest != null);
             Debug.Assert(source != null);
@@ -690,7 +967,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="dest"></param>
         /// <param name="source"></param>
-        static public void Copy(ComplexF[] dest, ComplexF[] source)
+        public
+        /// <summary>
+        /// Copy an array
+        /// </summary>
+        /// <param name="dest"></param>
+        /// <param name="source"></param>
+        static void Copy(ComplexF[] dest, ComplexF[] source)
         {
             Debug.Assert(dest != null);
             Debug.Assert(source != null);
@@ -705,7 +988,12 @@ namespace Exocortex.DSP
         /// Reverse the elements in the array
         /// </summary>
         /// <param name="array"></param>
-        static public void Reverse(Complex[] array)
+        public
+        /// <summary>
+        /// Reverse the elements in the array
+        /// </summary>
+        /// <param name="array"></param>
+        static void Reverse(Complex[] array)
         {
             Complex temp;
             int length = array.Length;
@@ -722,7 +1010,13 @@ namespace Exocortex.DSP
         /// overall range is [0, 1]
         /// </summary>
         /// <param name="array"></param>
-        static public void Normalize(Complex[] array)
+        public
+        /// <summary>
+        /// Scale and offset the elements in the array so that the
+        /// overall range is [0, 1]
+        /// </summary>
+        /// <param name="array"></param>
+        static void Normalize(Complex[] array)
         {
             double min = 0,
                 max = 0;
@@ -736,7 +1030,13 @@ namespace Exocortex.DSP
         /// overall range is [0, 1]
         /// </summary>
         /// <param name="array"></param>
-        static public void Normalize(ComplexF[] array)
+        public
+        /// <summary>
+        /// Scale and offset the elements in the array so that the
+        /// overall range is [0, 1]
+        /// </summary>
+        /// <param name="array"></param>
+        static void Normalize(ComplexF[] array)
         {
             float min = 0,
                 max = 0;
@@ -749,7 +1049,12 @@ namespace Exocortex.DSP
         /// Invert each element in the array
         /// </summary>
         /// <param name="array"></param>
-        static public void Invert(Complex[] array)
+        public
+        /// <summary>
+        /// Invert each element in the array
+        /// </summary>
+        /// <param name="array"></param>
+        static void Invert(Complex[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -761,7 +1066,12 @@ namespace Exocortex.DSP
         /// Invert each element in the array
         /// </summary>
         /// <param name="array"></param>
-        static public void Invert(ComplexF[] array)
+        public
+        /// <summary>
+        /// Invert each element in the array
+        /// </summary>
+        /// <param name="array"></param>
+        static void Invert(ComplexF[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {

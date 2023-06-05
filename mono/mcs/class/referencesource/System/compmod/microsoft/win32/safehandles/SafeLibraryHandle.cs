@@ -55,7 +55,7 @@ namespace Microsoft.Win32.SafeHandles
 #endif // !FEATURE_WINDOWSPHONE
         private static extern bool FreeLibrary(IntPtr hModule);
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return FreeLibrary(handle);
         }

@@ -43,14 +43,17 @@ namespace System.Web.UI.MobileControls.Adapters
     )]
     public class HtmlObjectListAdapter : HtmlControlAdapter
     {
+        protected
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.BackToList"]/*' />
-        internal protected static readonly String BackToList = "__back";
+        internal static readonly String BackToList = "__back";
 
+        protected
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.ShowMoreFormat"]/*' />
-        internal protected static readonly String ShowMoreFormat = "__more{0}";
+        internal static readonly String ShowMoreFormat = "__more{0}";
 
+        protected
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.ShowMore"]/*' />
-        internal protected static readonly String ShowMore = "__more";
+        internal static readonly String ShowMore = "__more";
         private const int _modeDetails = 1;
 
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.Control"]/*' />

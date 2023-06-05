@@ -225,7 +225,7 @@ namespace System.ServiceModel.Description
             set { this.metadataExporter = value; }
         }
 
-        static internal ContractDescription MexContract
+        internal static ContractDescription MexContract
         {
             get
             {

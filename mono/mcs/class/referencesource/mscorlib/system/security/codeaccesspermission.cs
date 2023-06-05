@@ -28,7 +28,7 @@ namespace System.Security
     )]
 #endif
     [System.Runtime.InteropServices.ComVisible(true)]
-    abstract public class CodeAccessPermission : IPermission, ISecurityEncodable, IStackWalk
+    public abstract class CodeAccessPermission : IPermission, ISecurityEncodable, IStackWalk
     {
         // Static methods for manipulation of stack
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -118,7 +118,7 @@ namespace System.Security
         [System.Security.SecuritySafeCritical] // auto-generated
         [DynamicSecurityMethodAttribute()]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        static internal void Assert(bool allPossible)
+        internal static void Assert(bool allPossible)
         {
             //    The intent of the method is to be an internal mscorlib helper that easily asserts for all possible permissions
             //    without having to new a PermissionSet.
@@ -180,7 +180,9 @@ namespace System.Security
         }
 
 #if FEATURE_CAS_POLICY
-        static internal SecurityElement CreatePermissionElement(IPermission perm, String permname)
+        internal
+#if FEATURE_CAS_POLICY
+        static SecurityElement CreatePermissionElement(IPermission perm, String permname)
         {
             SecurityElement root = new SecurityElement("IPermission");
             XMLUtil.AddClassAttribute(root, perm.GetType(), permname);
@@ -198,7 +200,7 @@ namespace System.Security
             return root;
         }
 
-        static internal void ValidateElement(SecurityElement elem, IPermission perm)
+        internal static void ValidateElement(SecurityElement elem, IPermission perm)
         {
             if (elem == null)
                 throw new ArgumentNullException("elem");
@@ -217,8 +219,8 @@ namespace System.Security
                 );
         }
 
-        abstract public SecurityElement ToXml();
-        abstract public void FromXml(SecurityElement elem);
+        public abstract SecurityElement ToXml();
+        public abstract void FromXml(SecurityElement elem);
 
         //
         // Unimplemented interface methods

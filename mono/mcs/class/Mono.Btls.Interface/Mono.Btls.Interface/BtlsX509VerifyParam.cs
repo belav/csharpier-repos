@@ -29,7 +29,7 @@ namespace Mono.Btls.Interface
 {
     public class BtlsX509VerifyParam : BtlsObject
     {
-        new internal MonoBtlsX509VerifyParam Instance
+        internal new MonoBtlsX509VerifyParam Instance
         {
             get { return (MonoBtlsX509VerifyParam)base.Instance; }
         }

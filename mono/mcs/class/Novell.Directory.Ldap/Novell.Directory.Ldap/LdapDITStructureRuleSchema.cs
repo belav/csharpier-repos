@@ -45,6 +45,7 @@ namespace Novell.Directory.Ldap
 
     public class LdapDITStructureRuleSchema : LdapSchemaElement
     {
+        public
         /// <summary> Returns the rule ID for this structure rule.
         ///
         /// The getRuleID method returns an integer rather than a dotted
@@ -55,11 +56,12 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> The rule ID for this structure rule.
         /// </returns>
-        virtual public int RuleID
+        virtual int RuleID
         {
             get { return ruleID; }
         }
 
+        public
         /// <summary> Returns the NameForm that this structure rule controls.
         ///
         /// You can get the actual object class that this structure rule controls
@@ -68,11 +70,12 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> The NameForm that this structure rule controls.
         /// </returns>
-        virtual public System.String NameForm
+        virtual System.String NameForm
         {
             get { return nameForm; }
         }
 
+        public
         /// <summary> Returns a list of all structure rules that are superior to this
         /// structure rule.
         ///
@@ -83,7 +86,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> A list of all structure rules that are superior to this structure rule.
         /// </returns>
-        virtual public System.String[] Superiors
+        virtual System.String[] Superiors
         {
             get { return superiorIDs; }
         }

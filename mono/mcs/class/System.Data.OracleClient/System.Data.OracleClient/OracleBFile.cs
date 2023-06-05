@@ -24,7 +24,7 @@ namespace System.Data.OracleClient
     {
         #region Fields
 
-        public static readonly new OracleBFile Null = new OracleBFile();
+        public static new readonly OracleBFile Null = new OracleBFile();
 
         //OracleConnection connection;
         //bool isOpen;

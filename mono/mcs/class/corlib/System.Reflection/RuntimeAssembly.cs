@@ -351,31 +351,31 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static string get_code_base(Assembly a, bool escaped);
+        static extern string get_code_base(Assembly a, bool escaped);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern string get_location();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static string get_fullname(Assembly a);
+        internal static extern string get_fullname(Assembly a);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool GetAotIdInternal(byte[] aotid);
+        internal static extern bool GetAotIdInternal(byte[] aotid);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static string InternalImageRuntimeVersion(Assembly a);
+        internal static extern string InternalImageRuntimeVersion(Assembly a);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern bool get_global_assembly_cache();
 
-        public override extern MethodInfo EntryPoint
+        public extern override MethodInfo EntryPoint
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
 
         [ComVisible(false)]
-        public override extern bool ReflectionOnly
+        public extern override bool ReflectionOnly
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
@@ -467,7 +467,7 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public override extern String[] GetManifestResourceNames();
+        public extern override String[] GetManifestResourceNames();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern IntPtr GetManifestResourceInternal(
@@ -569,7 +569,7 @@ namespace System.Reflection
         internal extern Module GetManifestModuleInternal();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal override extern Module[] GetModulesInternal();
+        internal extern override Module[] GetModulesInternal();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern object GetFilesInternal(String name, bool getResourceModules);
@@ -731,7 +731,7 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern internal static bool LoadPermissions(
+        internal static extern bool LoadPermissions(
             Assembly a,
             ref IntPtr minimum,
             ref int minLength,

@@ -857,8 +857,8 @@ class TestGCInteraction
 {
     class WithFrozenObjects
     {
-        internal readonly static string s_someStringLiteral = "Some string literal";
-        internal readonly static object s_someObject = new object();
+        internal static readonly string s_someStringLiteral = "Some string literal";
+        internal static readonly object s_someObject = new object();
     }
 
     public static void Run()

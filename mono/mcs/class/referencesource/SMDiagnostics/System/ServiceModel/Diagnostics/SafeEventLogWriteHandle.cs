@@ -64,7 +64,7 @@ namespace System.ServiceModel.Diagnostics
             Critical = "Usage of SafeHandleZeroOrMinusOneIsInvalid, which is protected by a LinkDemand and InheritanceDemand"
         )]
         [SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return DeregisterEventSource(this.handle);
         }

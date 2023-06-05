@@ -1173,7 +1173,10 @@ namespace System.Web.Security
 
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        static private void RemoveQSVar(
+        private
+        /////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
+        static void RemoveQSVar(
             ref string strUrl,
             int posQ,
             string token,
@@ -1200,7 +1203,7 @@ namespace System.Web.Security
             }
         }
 
-        static private bool IsPathWithinAppRoot(HttpContext context, string path)
+        private static bool IsPathWithinAppRoot(HttpContext context, string path)
         {
             Uri absUri;
             if (!Uri.TryCreate(path, UriKind.Absolute, out absUri))

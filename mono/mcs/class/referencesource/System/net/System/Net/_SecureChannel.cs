@@ -264,53 +264,7 @@ namespace System.Net.Security
             get { return m_IsRemoteCertificateAvailable; }
         }
 
-#if MONO_NOT_SUPPORTED
-        unsafe static class UnmanagedCertificateContext
-        {
-            [StructLayout(LayoutKind.Sequential)]
-            private struct _CERT_CONTEXT
-            {
-                internal Int32 dwCertEncodingType;
-                internal IntPtr pbCertEncoded;
-                internal Int32 cbCertEncoded;
-                internal IntPtr pCertInfo;
-                internal IntPtr hCertStore;
-            };
-
-            internal static X509Certificate2Collection GetStore(SafeFreeCertContext certContext)
-            {
-                X509Certificate2Collection result = new X509Certificate2Collection();
-
-                if (certContext.IsInvalid)
-                    return result;
-
-                _CERT_CONTEXT context = (_CERT_CONTEXT)
-                    Marshal.PtrToStructure(certContext.DangerousGetHandle(), typeof(_CERT_CONTEXT));
-
-                if (context.hCertStore != IntPtr.Zero)
-                {
-                    X509Store store = null;
-                    try
-                    {
-                        store = new X509Store(context.hCertStore);
-                        result = store.Certificates;
-                    }
-                    finally
-                    {
-                        if (store != null)
-                            store.Close();
-                    }
-                }
-                return result;
-            }
-        }
-#endif
-
-        //
-        //This code extracts a remote certificate upon request.
-        //SECURITY: The scenario is allowed in semitrust
-        //
-        internal X509Certificate2 GetRemoteCertificate(
+        internal static X509Certificate2 GetRemoteCertificate(
             out X509Certificate2Collection remoteCertificateStore
         )
         {

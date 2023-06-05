@@ -16,19 +16,19 @@ namespace System.Data.SqlClient
 
         internal bool _doNotReconnect;
 
-        static internal SqlException CreateException(
+        internal static SqlException CreateException(
             SqlErrorCollection errorCollection,
             string serverVersion
         ) => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        static internal SqlException CreateException(
+        internal static SqlException CreateException(
             SqlErrorCollection errorCollection,
             string serverVersion,
             SqlInternalConnectionTds internalConnection,
             Exception innerException = null
         ) => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        static internal SqlException CreateException(
+        internal static SqlException CreateException(
             SqlErrorCollection errorCollection,
             string serverVersion,
             Guid conId,

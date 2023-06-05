@@ -689,7 +689,7 @@ namespace System.ServiceModel.Channels
 
     class PeerExceptionHelper
     {
-        static internal void ThrowInvalidOperation_InsufficientCryptoSupport(
+        internal static void ThrowInvalidOperation_InsufficientCryptoSupport(
             Exception innerException
         )
         {
@@ -701,14 +701,14 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal void ThrowArgument_InsufficientCredentials(string property)
+        internal static void ThrowArgument_InsufficientCredentials(string property)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new ArgumentException(SR.GetString(SR.InsufficientCredentials, property))
             );
         }
 
-        static internal void ThrowArgumentOutOfRange_InvalidTransportCredentialType(int value)
+        internal static void ThrowArgumentOutOfRange_InvalidTransportCredentialType(int value)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new ArgumentOutOfRangeException(
@@ -723,7 +723,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal void ThrowArgumentOutOfRange_InvalidSecurityMode(int value)
+        internal static void ThrowArgumentOutOfRange_InvalidSecurityMode(int value)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new ArgumentOutOfRangeException(
@@ -738,7 +738,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal void ThrowInvalidOperation_UnexpectedSecurityTokensDuringHandshake()
+        internal static void ThrowInvalidOperation_UnexpectedSecurityTokensDuringHandshake()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidOperationException(
@@ -747,63 +747,63 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal void ThrowArgument_PnrpAddressesExceedLimit()
+        internal static void ThrowArgument_PnrpAddressesExceedLimit()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new ArgumentException(SR.GetString(SR.PnrpAddressesExceedLimit))
             );
         }
 
-        static internal void ThrowInvalidOperation_PnrpNoClouds()
+        internal static void ThrowInvalidOperation_PnrpNoClouds()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidOperationException(SR.GetString(SR.PnrpNoClouds))
             );
         }
 
-        static internal void ThrowInvalidOperation_PnrpAddressesUnsupported()
+        internal static void ThrowInvalidOperation_PnrpAddressesUnsupported()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidOperationException(SR.GetString(SR.PnrpAddressesUnsupported))
             );
         }
 
-        static internal void ThrowArgument_InsufficientResolverSettings()
+        internal static void ThrowArgument_InsufficientResolverSettings()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new ArgumentException(SR.GetString(SR.InsufficientResolverSettings))
             );
         }
 
-        static internal void ThrowArgument_MustOverrideInitialize()
+        internal static void ThrowArgument_MustOverrideInitialize()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new ArgumentException(SR.GetString(SR.MustOverrideInitialize))
             );
         }
 
-        static internal void ThrowArgument_InvalidResolverMode(PeerResolverMode mode)
+        internal static void ThrowArgument_InvalidResolverMode(PeerResolverMode mode)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new ArgumentException(SR.GetString(SR.InvalidResolverMode, mode))
             );
         }
 
-        static internal void ThrowInvalidOperation_NotValidWhenOpen(string operation)
+        internal static void ThrowInvalidOperation_NotValidWhenOpen(string operation)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidOperationException(SR.GetString(SR.NotValidWhenOpen, operation))
             );
         }
 
-        static internal void ThrowInvalidOperation_NotValidWhenClosed(string operation)
+        internal static void ThrowInvalidOperation_NotValidWhenClosed(string operation)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidOperationException(SR.GetString(SR.NotValidWhenClosed, operation))
             );
         }
 
-        static internal void ThrowInvalidOperation_DuplicatePeerRegistration(string servicepath)
+        internal static void ThrowInvalidOperation_DuplicatePeerRegistration(string servicepath)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidOperationException(
@@ -812,12 +812,12 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal void ThrowPnrpError(int errorCode, string cloud)
+        internal static void ThrowPnrpError(int errorCode, string cloud)
         {
             ThrowPnrpError(errorCode, cloud, true);
         }
 
-        static internal void ThrowPnrpError(int errorCode, string cloud, bool trace)
+        internal static void ThrowPnrpError(int errorCode, string cloud, bool trace)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
                 new System.ServiceModel.Channels.PnrpPeerResolver.PnrpException(errorCode, cloud),
@@ -825,7 +825,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal void ThrowInvalidOperation_PeerConflictingPeerNodeSettings(
+        internal static void ThrowInvalidOperation_PeerConflictingPeerNodeSettings(
             string propertyName
         )
         {
@@ -836,14 +836,14 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal void ThrowInvalidOperation_PeerCertGenFailure(Exception innerException)
+        internal static void ThrowInvalidOperation_PeerCertGenFailure(Exception innerException)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidOperationException(SR.GetString(SR.PeerCertGenFailure), innerException)
             );
         }
 
-        static internal void ThrowInvalidOperation_ConflictingHeader(string headerName)
+        internal static void ThrowInvalidOperation_ConflictingHeader(string headerName)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                 new InvalidOperationException(
@@ -1122,7 +1122,7 @@ namespace System.ServiceModel.Channels
             writer.WriteString(this.value);
         }
 
-        static internal PeerDictionaryHeader CreateHopCountHeader(ulong hopcount)
+        internal static PeerDictionaryHeader CreateHopCountHeader(ulong hopcount)
         {
             return new PeerDictionaryHeader(
                 XD.PeerWireStringsDictionary.HopCount,
@@ -1131,7 +1131,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal PeerDictionaryHeader CreateViaHeader(Uri via)
+        internal static PeerDictionaryHeader CreateViaHeader(Uri via)
         {
             return new PeerDictionaryHeader(
                 XD.PeerWireStringsDictionary.PeerVia,
@@ -1140,7 +1140,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal PeerDictionaryHeader CreateFloodRole()
+        internal static PeerDictionaryHeader CreateFloodRole()
         {
             return new PeerDictionaryHeader(
                 XD.PeerWireStringsDictionary.FloodAction,
@@ -1149,7 +1149,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal PeerDictionaryHeader CreateToHeader(Uri to)
+        internal static PeerDictionaryHeader CreateToHeader(Uri to)
         {
             return new PeerDictionaryHeader(
                 XD.PeerWireStringsDictionary.PeerTo,
@@ -1158,7 +1158,7 @@ namespace System.ServiceModel.Channels
             );
         }
 
-        static internal PeerDictionaryHeader CreateMessageIdHeader(System.Xml.UniqueId messageId)
+        internal static PeerDictionaryHeader CreateMessageIdHeader(System.Xml.UniqueId messageId)
         {
             return new PeerDictionaryHeader(
                 XD.AddressingDictionary.MessageId,

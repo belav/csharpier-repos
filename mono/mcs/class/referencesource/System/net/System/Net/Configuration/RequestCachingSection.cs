@@ -328,7 +328,7 @@ namespace System.Net.Configuration
             get { return this.ftpRequestCacheValidator; }
         }
 
-        static internal RequestCachingSectionInternal GetSection()
+        internal static RequestCachingSectionInternal GetSection()
         {
             lock (RequestCachingSectionInternal.ClassSyncObject)
             {

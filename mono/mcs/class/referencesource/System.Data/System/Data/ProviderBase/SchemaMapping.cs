@@ -13,7 +13,7 @@ namespace System.Data.ProviderBase
     using System.Diagnostics;
     using System.Globalization;
 
-    sealed internal class SchemaMapping
+    internal sealed class SchemaMapping
     {
         // DataColumns match in length and name order as the DataReader, no chapters
         private const int MapExactMatch = 0;

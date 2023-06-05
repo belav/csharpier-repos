@@ -12,7 +12,7 @@
     )]
     public abstract class FilterAttribute : Attribute, IMvcFilter
     {
-        private readonly static ConcurrentDictionary<Type, bool> _multiuseAttributeCache =
+        private static readonly ConcurrentDictionary<Type, bool> _multiuseAttributeCache =
             new ConcurrentDictionary<Type, bool>();
         private int _order = Filter.DefaultOrder;
 

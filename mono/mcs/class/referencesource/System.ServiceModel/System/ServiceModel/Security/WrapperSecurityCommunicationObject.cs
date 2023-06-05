@@ -115,7 +115,7 @@ namespace System.ServiceModel.Security
             base.OnOpening();
         }
 
-        new internal void ThrowIfDisposedOrImmutable()
+        internal new void ThrowIfDisposedOrImmutable()
         {
             base.ThrowIfDisposedOrImmutable();
         }

@@ -1987,7 +1987,7 @@ namespace Mono.CSharp
         //
         static ModuleContainer root;
 
-        static public ModuleContainer ToplevelTypes
+        public static ModuleContainer ToplevelTypes
         {
             get { return root; }
             set { root = value; }

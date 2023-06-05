@@ -87,7 +87,14 @@ namespace Exocortex.DSP
         /// <param name="real"></param>
         /// <param name="imaginary"></param>
         /// <returns></returns>
-        static public ComplexF FromRealImaginary(float real, float imaginary)
+        public
+        /// <summary>
+        /// Create a complex number from a real and an imaginary component
+        /// </summary>
+        /// <param name="real"></param>
+        /// <param name="imaginary"></param>
+        /// <returns></returns>
+        static ComplexF FromRealImaginary(float real, float imaginary)
         {
             ComplexF c;
             c.Re = (float)real;
@@ -101,7 +108,14 @@ namespace Exocortex.DSP
         /// <param name="modulus"></param>
         /// <param name="argument"></param>
         /// <returns></returns>
-        static public ComplexF FromModulusArgument(float modulus, float argument)
+        public
+        /// <summary>
+        /// Create a complex number from a modulus (length) and an argument (radian)
+        /// </summary>
+        /// <param name="modulus"></param>
+        /// <param name="argument"></param>
+        /// <returns></returns>
+        static ComplexF FromModulusArgument(float modulus, float argument)
         {
             ComplexF c;
             c.Re = (float)(modulus * System.Math.Cos(argument));
@@ -497,7 +511,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        static public ComplexF Parse(string s)
+        public
+        /// <summary>
+        /// Parse a complex representation in this fashion: "( %f, %f )"
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        static ComplexF Parse(string s)
         {
             throw new NotImplementedException(
                 "ComplexF ComplexF.Parse( string s ) is not implemented."
@@ -523,42 +543,57 @@ namespace Exocortex.DSP
         /// <param name="b"></param>
         /// <param name="tolerance"></param>
         /// <returns></returns>
-        static public bool IsEqual(ComplexF a, ComplexF b, float tolerance)
+        public
+        //-----------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Determine whether two complex numbers are almost (i.e. within the tolerance) equivalent.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="tolerance"></param>
+        /// <returns></returns>
+        static bool IsEqual(ComplexF a, ComplexF b, float tolerance)
         {
             return (Math.Abs(a.Re - b.Re) < tolerance) && (Math.Abs(a.Im - b.Im) < tolerance);
         }
 
+        public
         //----------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------
 
         /// <summary>
         /// Represents zero
         /// </summary>
-        static public ComplexF Zero
+        static ComplexF Zero
         {
             get { return new ComplexF(0, 0); }
         }
 
+        public
         /// <summary>
         /// Represents the result of sqrt( -1 )
         /// </summary>
-        static public ComplexF I
+        static ComplexF I
         {
             get { return new ComplexF(0, 1); }
         }
 
+        public
         /// <summary>
         /// Represents the largest possible value of ComplexF.
         /// </summary>
-        static public ComplexF MaxValue
+        static ComplexF MaxValue
         {
             get { return new ComplexF(float.MaxValue, float.MaxValue); }
         }
 
+        public
         /// <summary>
         /// Represents the smallest possible value of ComplexF.
         /// </summary>
-        static public ComplexF MinValue
+        static ComplexF MinValue
         {
             get { return new ComplexF(float.MinValue, float.MinValue); }
         }

@@ -16,7 +16,7 @@ namespace Mono.Unix.Android
             out bool is64bit
         );
 
-        readonly static DetectCPUAndArchitecture detectCPUAndArchitecture;
+        static readonly DetectCPUAndArchitecture detectCPUAndArchitecture;
 
         static AndroidUtils()
         {

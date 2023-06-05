@@ -6,7 +6,7 @@
 
     internal static class PathHelpers
     {
-        private readonly static UrlRewriterHelper _urlRewriterHelper = new UrlRewriterHelper();
+        private static readonly UrlRewriterHelper _urlRewriterHelper = new UrlRewriterHelper();
 
         // this method can accept an app-relative path or an absolute path for contentPath
         public static string GenerateClientUrl(HttpContextBase httpContext, string contentPath)

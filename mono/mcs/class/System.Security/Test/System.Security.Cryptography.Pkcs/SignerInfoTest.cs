@@ -46,7 +46,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
         static string sha1Oid = "1.3.14.3.2.26";
         static string sha1Name = "sha1";
 
-        static internal byte[] issuerAndSerialNumberSignature =
+        internal static byte[] issuerAndSerialNumberSignature =
         {
             0x30,
             0x82,
@@ -898,7 +898,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0x67
         };
 
-        static internal byte[] subjectKeyIdentifierSignature =
+        internal static byte[] subjectKeyIdentifierSignature =
         {
             0x30,
             0x82,
@@ -1710,7 +1710,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0x67
         };
 
-        static internal SignerInfo GetSignerInfo(byte[] signature)
+        internal static SignerInfo GetSignerInfo(byte[] signature)
         {
             SignedCms sp = new SignedCms();
             sp.Decode(signature);

@@ -64,7 +64,7 @@ namespace System.Net.Mime
 
         // array of all possible date time values
         // if a string matches any one of these it will be parsed correctly
-        internal readonly static string[] validDateTimeFormats = new string[]
+        internal static readonly string[] validDateTimeFormats = new string[]
         {
             dateFormatWithDayOfWeek,
             dateFormatWithoutDayOfWeek,
@@ -72,18 +72,18 @@ namespace System.Net.Mime
             dateFormatWithoutDayOfWeekAndNoSeconds
         };
 
-        internal readonly static char[] allowedWhiteSpaceChars = new char[] { ' ', '\t' };
+        internal static readonly char[] allowedWhiteSpaceChars = new char[] { ' ', '\t' };
 
         internal static readonly IDictionary<string, TimeSpan> timeZoneOffsetLookup =
             SmtpDateTime.InitializeShortHandLookups();
 
         // a TimeSpan must be between these two values in order for it to be within the range allowed
         // by RFC 2822
-        internal readonly static long timeSpanMaxTicks =
+        internal static readonly long timeSpanMaxTicks =
             TimeSpan.TicksPerHour * 99 + TimeSpan.TicksPerMinute * 59;
 
         // allowed max values for each digit.  min value is always 0
-        internal readonly static int offsetMaxValue = 9959;
+        internal static readonly int offsetMaxValue = 9959;
 
         #endregion
 

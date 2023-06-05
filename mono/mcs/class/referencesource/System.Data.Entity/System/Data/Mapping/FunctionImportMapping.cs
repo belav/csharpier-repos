@@ -891,15 +891,15 @@ namespace System.Data.Mapping
         internal const string IsNotNullDescription = "NOT NULL";
         internal const string IsOtherDescription = "OTHER";
 
-        internal readonly static ValueCondition IsNull = new ValueCondition(
+        internal static readonly ValueCondition IsNull = new ValueCondition(
             IsNullDescription,
             true
         );
-        internal readonly static ValueCondition IsNotNull = new ValueCondition(
+        internal static readonly ValueCondition IsNotNull = new ValueCondition(
             IsNotNullDescription,
             true
         );
-        internal readonly static ValueCondition IsOther = new ValueCondition(
+        internal static readonly ValueCondition IsOther = new ValueCondition(
             IsOtherDescription,
             true
         );

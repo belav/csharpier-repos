@@ -165,7 +165,10 @@ namespace Mono.Security.Cryptography
 
         // just so we don't have to add System.Runtime.InteropServices
         // in every file
-        static public int GetLastError()
+        public
+        // just so we don't have to add System.Runtime.InteropServices
+        // in every file
+        static int GetLastError()
         {
             return Marshal.GetLastWin32Error();
         }

@@ -50,12 +50,13 @@ namespace Novell.Directory.Ldap.Rfc2251
     /// </summary>
     public class RfcModifyRequest : Asn1Sequence, RfcRequest
     {
+        public
         /// <summary> Return the Modifications for this request
         ///
         /// </summary>
         /// <returns> the modifications for this request.
         /// </returns>
-        virtual public Asn1SequenceOf Modifications
+        virtual Asn1SequenceOf Modifications
         {
             get { return (Asn1SequenceOf)get_Renamed(1); }
         }

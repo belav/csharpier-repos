@@ -2,8 +2,8 @@
 
 class T
 {
-    unsafe private byte* ptr;
-    unsafe internal byte* Ptr
+    private unsafe byte* ptr;
+    internal unsafe byte* Ptr
     {
         get { return ptr; }
         set { ptr = value; }

@@ -37,7 +37,7 @@ namespace System
         // For comments on these methods please see $\src\vm\COMUtilNative.cpp
         //
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static long StringToLong(System.String s, int radix, int flags)
+        public static unsafe long StringToLong(System.String s, int radix, int flags)
         {
             return StringToLong(s, radix, flags, null);
         }
@@ -45,7 +45,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public unsafe extern static long StringToLong(
+        public static extern unsafe long StringToLong(
             System.String s,
             int radix,
             int flags,
@@ -53,7 +53,7 @@ namespace System
         );
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static long StringToLong(
+        public static unsafe long StringToLong(
             System.String s,
             int radix,
             int flags,
@@ -67,7 +67,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static int StringToInt(System.String s, int radix, int flags)
+        public static unsafe int StringToInt(System.String s, int radix, int flags)
         {
             return StringToInt(s, radix, flags, null);
         }
@@ -75,7 +75,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public unsafe extern static int StringToInt(
+        public static extern unsafe int StringToInt(
             System.String s,
             int radix,
             int flags,
@@ -83,7 +83,7 @@ namespace System
         );
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static int StringToInt(System.String s, int radix, int flags, ref int currPos)
+        public static unsafe int StringToInt(System.String s, int radix, int flags, ref int currPos)
         {
             fixed (int* ppos = &currPos)
             {
@@ -94,7 +94,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static String IntToString(
+        public static extern String IntToString(
             int l,
             int radix,
             int width,
@@ -105,7 +105,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static String LongToString(
+        public static extern String LongToString(
             long l,
             int radix,
             int width,

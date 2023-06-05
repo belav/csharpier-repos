@@ -88,7 +88,7 @@ namespace System.Resources
         // Input is one string to compare with, and a byte[] containing chars in
         // little endian unicode.  Pass in the number of valid chars.
         [System.Security.SecurityCritical] // auto-generated
-        public unsafe static int CompareOrdinal(String a, byte[] bytes, int bCharLength)
+        public static unsafe int CompareOrdinal(String a, byte[] bytes, int bCharLength)
         {
             Contract.Assert(
                 a != null && bytes != null,
@@ -133,7 +133,7 @@ namespace System.Resources
         // This method is to handle potentially misaligned data accesses.
         // The byte* must point to little endian Unicode characters.
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static int CompareOrdinal(byte* a, int byteLen, String b)
+        internal static unsafe int CompareOrdinal(byte* a, int byteLen, String b)
         {
             Contract.Assert(
                 (byteLen & 1) == 0,

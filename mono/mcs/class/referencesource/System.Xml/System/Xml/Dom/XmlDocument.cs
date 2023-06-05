@@ -78,12 +78,12 @@ namespace System.Xml
 
         private XmlAttribute namespaceXml;
 
-        static internal EmptyEnumerator EmptyEnumerator = new EmptyEnumerator();
-        static internal IXmlSchemaInfo NotKnownSchemaInfo = new XmlSchemaInfo(
+        internal static EmptyEnumerator EmptyEnumerator = new EmptyEnumerator();
+        internal static IXmlSchemaInfo NotKnownSchemaInfo = new XmlSchemaInfo(
             XmlSchemaValidity.NotKnown
         );
-        static internal IXmlSchemaInfo ValidSchemaInfo = new XmlSchemaInfo(XmlSchemaValidity.Valid);
-        static internal IXmlSchemaInfo InvalidSchemaInfo = new XmlSchemaInfo(
+        internal static IXmlSchemaInfo ValidSchemaInfo = new XmlSchemaInfo(XmlSchemaValidity.Valid);
+        internal static IXmlSchemaInfo InvalidSchemaInfo = new XmlSchemaInfo(
             XmlSchemaValidity.Invalid
         );
 
@@ -800,7 +800,7 @@ namespace System.Xml
             return CreateNavigator(this);
         }
 
-        internal protected virtual XPathNavigator CreateNavigator(XmlNode node)
+        protected internal virtual XPathNavigator CreateNavigator(XmlNode node)
         {
             XmlNodeType nodeType = node.NodeType;
             XmlNode parent;

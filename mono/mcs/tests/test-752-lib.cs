@@ -7,7 +7,7 @@ public abstract class A
 
 public abstract class B : A
 {
-    public override sealed bool IsNode
+    public sealed override bool IsNode
     {
         get { return true; }
     }

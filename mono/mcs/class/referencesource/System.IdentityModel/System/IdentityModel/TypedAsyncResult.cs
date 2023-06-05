@@ -65,7 +65,7 @@ namespace System.IdentityModel
         /// </summary>
         /// <param name="result">The <see cref="IAsyncResult"/> representing the status of an asynchronous operation.</param>
         /// <returns>The typed result of the asynchronous operation.</returns>
-        public new static T End(IAsyncResult result)
+        public static new T End(IAsyncResult result)
         {
             if (result == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("result");

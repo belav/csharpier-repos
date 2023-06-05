@@ -25,7 +25,12 @@ namespace System.Security.AccessControl
 
         #region Constructors
 
-        internal protected AuthorizationRule(
+        protected
+        #endregion
+
+        #region Constructors
+
+        internal AuthorizationRule(
             IdentityReference identity,
             int accessMask,
             bool isInherited,
@@ -111,7 +116,7 @@ namespace System.Security.AccessControl
             get { return _identity; }
         }
 
-        internal protected int AccessMask
+        protected internal int AccessMask
         {
             get { return _accessMask; }
         }

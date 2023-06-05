@@ -996,41 +996,41 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         [JSImport("echo1", "JavaScriptTestHelper")]
         [return: JSMarshalAs<JSType.Number>]
-        internal unsafe static partial void* echo1_VoidPtr(
+        internal static unsafe partial void* echo1_VoidPtr(
             [JSMarshalAs<JSType.Number>] void* value
         );
 
         [JSImport("store1", "JavaScriptTestHelper")]
-        internal unsafe static partial void store1_VoidPtr(
+        internal static unsafe partial void store1_VoidPtr(
             [JSMarshalAs<JSType.Number>] void* value
         );
 
         [JSImport("retrieve1", "JavaScriptTestHelper")]
         [return: JSMarshalAs<JSType.Number>]
-        internal unsafe static partial void* retrieve1_VoidPtr();
+        internal static unsafe partial void* retrieve1_VoidPtr();
 
         [JSImport("identity1", "JavaScriptTestHelper")]
         [return: JSMarshalAs<JSType.Boolean>]
-        internal unsafe static partial bool identity1_VoidPtr(
+        internal static unsafe partial bool identity1_VoidPtr(
             [JSMarshalAs<JSType.Number>] void* value
         );
 
         [JSImport("throw1fn", "JavaScriptTestHelper")]
         [return: JSMarshalAs<JSType.Number>]
-        internal unsafe static partial void* throw1_VoidPtr(
+        internal static unsafe partial void* throw1_VoidPtr(
             [JSMarshalAs<JSType.Number>] void* value
         );
 
         [JSImport("invoke1", "JavaScriptTestHelper")]
         [return: JSMarshalAs<JSType.Number>]
-        internal unsafe static partial void* invoke1_VoidPtr(
+        internal static unsafe partial void* invoke1_VoidPtr(
             [JSMarshalAs<JSType.Number>] void* value,
             [JSMarshalAs<JSType.String>] string name
         );
 
         [JSExport]
         [return: JSMarshalAs<JSType.Number>]
-        public unsafe static void* EchoVoidPtr([JSMarshalAs<JSType.Number>] void* arg1)
+        public static unsafe void* EchoVoidPtr([JSMarshalAs<JSType.Number>] void* arg1)
         {
             return arg1;
         }

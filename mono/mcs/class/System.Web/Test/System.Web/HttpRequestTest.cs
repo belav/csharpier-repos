@@ -181,7 +181,7 @@ namespace MonoTests.System.Web
             t.Run();
         }
 
-        static public void PhysicalApplicationPathDelegate()
+        public static void PhysicalApplicationPathDelegate()
         {
             HttpRequest r = HttpContext.Current.Request;
             string pap = r.PhysicalApplicationPath;
@@ -197,7 +197,7 @@ namespace MonoTests.System.Web
             t.Run();
         }
 
-        static public void MapPathDelegate()
+        public static void MapPathDelegate()
         {
             HttpRequest r = HttpContext.Current.Request;
             string appBase = r.PhysicalApplicationPath.TrimEnd(Path.DirectorySeparatorChar);
@@ -307,7 +307,7 @@ namespace MonoTests.System.Web
             t.Run();
         }
 
-        static public void MapPathDelegate_InvalidBase_1()
+        public static void MapPathDelegate_InvalidBase_1()
         {
             HttpContext.Current.Request.MapPath("Web.config", "something", true);
         }
@@ -323,7 +323,7 @@ namespace MonoTests.System.Web
             t.Run();
         }
 
-        static public void MapPathDelegate_InvalidBase_2()
+        public static void MapPathDelegate_InvalidBase_2()
         {
             HttpContext.Current.Request.MapPath("Web.config", "something", false);
         }

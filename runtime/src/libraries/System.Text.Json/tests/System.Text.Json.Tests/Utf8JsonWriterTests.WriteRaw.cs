@@ -11,7 +11,7 @@ namespace System.Text.Json.Tests
     public partial class Utf8JsonWriterTests
     {
         private const string TestGuidAsStr = "eb97fadd-3ebf-4781-8722-f4773989160e";
-        private readonly static Guid s_guid = Guid.Parse(TestGuidAsStr);
+        private static readonly Guid s_guid = Guid.Parse(TestGuidAsStr);
 
         private static byte[] s_oneAsJson = new byte[] { (byte)'1' };
 

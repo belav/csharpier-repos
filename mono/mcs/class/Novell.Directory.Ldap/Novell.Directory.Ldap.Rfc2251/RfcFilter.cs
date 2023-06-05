@@ -1404,6 +1404,7 @@ namespace Novell.Directory.Ldap.Rfc2251
 
             private RfcFilter enclosingInstance;
 
+            public
             /// <summary> Reads either an operator, or an attribute, whichever is
             /// next in the filter string.
             ///
@@ -1413,7 +1414,7 @@ namespace Novell.Directory.Ldap.Rfc2251
             /// and a -1 is returned. Otherwise, the int value of the operator read is
             /// returned.
             /// </summary>
-            virtual public int OpOrAttr
+            virtual int OpOrAttr
             {
                 get
                 {
@@ -1534,10 +1535,11 @@ namespace Novell.Directory.Ldap.Rfc2251
                 }
             }
 
+            public
             /// <summary> Reads an RFC 2251 filter type from the filter string and returns its
             /// int value.
             /// </summary>
-            virtual public int FilterType
+            virtual int FilterType
             {
                 get
                 {
@@ -1587,8 +1589,9 @@ namespace Novell.Directory.Ldap.Rfc2251
                 }
             }
 
+            public
             /// <summary> Reads a value from a filter string.</summary>
-            virtual public System.String Value
+            virtual System.String Value
             {
                 get
                 {
@@ -1613,8 +1616,9 @@ namespace Novell.Directory.Ldap.Rfc2251
                 }
             }
 
+            public
             /// <summary> Returns the current attribute identifier.</summary>
-            virtual public System.String Attr
+            virtual System.String Attr
             {
                 get { return attr; }
             }

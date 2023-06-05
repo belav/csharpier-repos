@@ -26,7 +26,7 @@ namespace System.Web
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     [Serializable]
-    sealed public class AspNetHostingPermissionAttribute : CodeAccessSecurityAttribute
+    public sealed class AspNetHostingPermissionAttribute : CodeAccessSecurityAttribute
     {
         AspNetHostingPermissionLevel _level;
 
@@ -68,7 +68,7 @@ namespace System.Web
     {
         AspNetHostingPermissionLevel _level;
 
-        static internal void VerifyAspNetHostingPermissionLevel(
+        internal static void VerifyAspNetHostingPermissionLevel(
             AspNetHostingPermissionLevel level,
             string arg
         )

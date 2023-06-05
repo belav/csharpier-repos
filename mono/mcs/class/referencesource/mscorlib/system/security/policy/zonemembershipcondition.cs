@@ -23,7 +23,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class ZoneMembershipCondition
+    public sealed class ZoneMembershipCondition
         : IMembershipCondition,
             IConstantMembershipCondition,
             IReportMatchMembershipCondition

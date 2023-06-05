@@ -38,12 +38,12 @@ namespace Cairo
 {
     public static class CairoAPI
     {
-        static public int Version
+        public static int Version
         {
             get { return Cairo.NativeMethods.cairo_version(); }
         }
 
-        static public string VersionString
+        public static string VersionString
         {
             get
             {

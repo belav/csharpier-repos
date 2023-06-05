@@ -47,28 +47,28 @@ namespace Mono.Btls
             }
         }
 
-        new internal BoringPkcs12Handle Handle
+        internal new BoringPkcs12Handle Handle
         {
             get { return (BoringPkcs12Handle)base.Handle; }
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_pkcs12_free(IntPtr handle);
+        static extern void mono_btls_pkcs12_free(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_pkcs12_new();
+        static extern IntPtr mono_btls_pkcs12_new();
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_pkcs12_get_count(IntPtr handle);
+        static extern int mono_btls_pkcs12_get_count(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_pkcs12_get_cert(IntPtr Handle, int index);
+        static extern IntPtr mono_btls_pkcs12_get_cert(IntPtr Handle, int index);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_pkcs12_add_cert(IntPtr chain, IntPtr x509);
+        static extern int mono_btls_pkcs12_add_cert(IntPtr chain, IntPtr x509);
 
         [DllImport(BTLS_DYLIB)]
-        extern unsafe static int mono_btls_pkcs12_import(
+        static extern unsafe int mono_btls_pkcs12_import(
             IntPtr chain,
             void* data,
             int len,
@@ -76,10 +76,10 @@ namespace Mono.Btls
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_pkcs12_has_private_key(IntPtr pkcs12);
+        static extern int mono_btls_pkcs12_has_private_key(IntPtr pkcs12);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_pkcs12_get_private_key(IntPtr pkcs12);
+        static extern IntPtr mono_btls_pkcs12_get_private_key(IntPtr pkcs12);
 
         internal MonoBtlsPkcs12()
             : base(new BoringPkcs12Handle(mono_btls_pkcs12_new())) { }

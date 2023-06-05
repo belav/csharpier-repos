@@ -319,7 +319,7 @@ namespace Mono.Simd
         }
 
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static bool operator ==(Vector16b va, Vector16b vb)
+        public static unsafe bool operator ==(Vector16b va, Vector16b vb)
         {
             byte* a = &va.v0;
             byte* b = &vb.v0;
@@ -330,7 +330,7 @@ namespace Mono.Simd
         }
 
         [Acceleration(AccelMode.SSE2)]
-        public unsafe static bool operator !=(Vector16b va, Vector16b vb)
+        public static unsafe bool operator !=(Vector16b va, Vector16b vb)
         {
             byte* a = &va.v0;
             byte* b = &vb.v0;

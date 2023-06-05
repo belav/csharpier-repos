@@ -105,7 +105,7 @@ namespace System
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         // reference to TypedReference is banned, so have to pass result as pointer
-        private unsafe static extern void InternalMakeTypedReference(
+        private static extern unsafe void InternalMakeTypedReference(
             void* result,
             Object target,
             IntPtr[] flds,
@@ -126,7 +126,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe static Object ToObject(TypedReference value)
+        public static unsafe Object ToObject(TypedReference value)
         {
             return InternalToObject(&value);
         }
@@ -136,7 +136,7 @@ namespace System
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal unsafe extern static Object InternalToObject(void* value);
+        internal static extern unsafe Object InternalToObject(void* value);
 
         internal bool IsNull
         {
@@ -156,7 +156,7 @@ namespace System
         //  This may cause the type to be changed.
         [System.Security.SecuritySafeCritical] // auto-generated
         [CLSCompliant(false)]
-        public unsafe static void SetTypedReference(TypedReference target, Object value)
+        public static unsafe void SetTypedReference(TypedReference target, Object value)
         {
 #if MONO
             throw new NotImplementedException("SetTypedReference");
@@ -169,7 +169,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal unsafe extern static void InternalSetTypedReference(void* target, Object value);
+        internal static extern unsafe void InternalSetTypedReference(void* target, Object value);
 #endif
     }
 }

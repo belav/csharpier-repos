@@ -34,19 +34,19 @@ namespace C5
     /// <typeparam name="T"></typeparam>
     public static class EqualityComparer<T>
     {
-        readonly static Type isequenced = typeof(ISequenced<>);
+        static readonly Type isequenced = typeof(ISequenced<>);
 
-        readonly static Type icollection = typeof(ICollection<>);
+        static readonly Type icollection = typeof(ICollection<>);
 
-        readonly static Type orderedcollectionequalityComparer =
+        static readonly Type orderedcollectionequalityComparer =
             typeof(SequencedCollectionEqualityComparer<,>);
 
-        readonly static Type unorderedcollectionequalityComparer =
+        static readonly Type unorderedcollectionequalityComparer =
             typeof(UnsequencedCollectionEqualityComparer<,>);
 
-        readonly static Type equalityequalityComparer = typeof(EquatableEqualityComparer<>);
+        static readonly Type equalityequalityComparer = typeof(EquatableEqualityComparer<>);
 
-        readonly static Type iequalitytype = typeof(IEquatable<T>);
+        static readonly Type iequalitytype = typeof(IEquatable<T>);
 
         static SCG.IEqualityComparer<T> cachedDefault = null;
 

@@ -482,7 +482,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     .ConfigureAwait(false);
             };
 
-            async static Task OpenDocumentAsync(
+            static async Task OpenDocumentAsync(
                 IThreadingContext threadingContext,
                 Workspace workspace,
                 DocumentId documentId,

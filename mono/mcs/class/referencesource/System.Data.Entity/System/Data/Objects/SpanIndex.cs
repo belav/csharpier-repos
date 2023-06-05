@@ -23,12 +23,13 @@ namespace System.Data.Objects.Internal
     /// </summary>
     internal sealed class SpanIndex
     {
+        private
         #region Nested types
 
         /// <summary>
         /// Helper class to compare two RowTypes using EdmEquals instead of reference equality.
         /// </summary>
-        sealed private class RowTypeEqualityComparer : IEqualityComparer<RowType>
+        sealed class RowTypeEqualityComparer : IEqualityComparer<RowType>
         {
             private RowTypeEqualityComparer() { }
 

@@ -11,7 +11,7 @@ public class PrintingTextFile
 {
     private static StreamReader stream;
 
-    static private void PrintPageEvent(object sender, PrintPageEventArgs e)
+    private static void PrintPageEvent(object sender, PrintPageEventArgs e)
     {
         float lines_page,
             y;

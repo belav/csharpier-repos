@@ -2995,7 +2995,7 @@ namespace System.ServiceModel.Security
                     public SendCompletedAsyncResult(AsyncCallback callback, object state)
                         : base(callback, state) { }
 
-                    new public static void End(IAsyncResult result)
+                    public static new void End(IAsyncResult result)
                     {
                         AsyncResult.End<SendCompletedAsyncResult>(result);
                     }

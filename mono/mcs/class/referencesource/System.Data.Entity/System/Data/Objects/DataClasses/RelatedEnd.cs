@@ -1923,7 +1923,7 @@ namespace System.Data.Objects.DataClasses
             return false;
         }
 
-        static internal bool CheckIfAllPropertiesAreKeyProperties(
+        internal static bool CheckIfAllPropertiesAreKeyProperties(
             string[] keyMemberNames,
             ReadOnlyMetadataCollection<EdmProperty> toProperties
         )

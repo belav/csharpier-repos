@@ -48,7 +48,7 @@ namespace ICSharpCode.SharpZipLib.Checksums
     )]
     public class StrangeCRC : IChecksum
     {
-        readonly static uint[] crc32Table =
+        static readonly uint[] crc32Table =
         {
             0x00000000,
             0x04c11db7,

@@ -204,7 +204,7 @@ namespace System.IO
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Process)]
-        private unsafe static int ReadFileNative(
+        private static unsafe int ReadFileNative(
             SafeFileHandle hFile,
             byte[] bytes,
             int offset,

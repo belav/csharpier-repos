@@ -106,7 +106,7 @@ namespace System.Net.Http
             return SerializeToStreamAsync(stream, context);
         }
 
-        protected async virtual Task<Stream> CreateContentReadStreamAsync()
+        protected virtual async Task<Stream> CreateContentReadStreamAsync()
         {
             await LoadIntoBufferAsync().ConfigureAwait(false);
             return buffer;

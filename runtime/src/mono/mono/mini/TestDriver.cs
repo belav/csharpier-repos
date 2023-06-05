@@ -29,7 +29,7 @@ public class TestDriverReporter
 
 public class TestDriver
 {
-    static public int RunTests(Type type, string[] args, TestDriverReporter reporter)
+    public static int RunTests(Type type, string[] args, TestDriverReporter reporter)
     {
         int failed = 0,
             ran = 0;
@@ -207,12 +207,12 @@ public class TestDriver
         return failed;
     }
 
-    static public int RunTests(Type type, string[] args)
+    public static int RunTests(Type type, string[] args)
     {
         return RunTests(type, args, null);
     }
 
-    static public int RunTests(Type type)
+    public static int RunTests(Type type)
     {
         return RunTests(type, null, null);
     }

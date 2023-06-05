@@ -75,7 +75,7 @@ namespace System
         private static readonly unsafe int* DecHexDigits;
 
         [MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.InternalCall)]
-        private unsafe static extern void GetFormatterTables(
+        private static extern unsafe void GetFormatterTables(
             out ulong* MantissaBitsTable,
             out int* TensExponentTable,
             out char* DigitLowerTable,
@@ -84,7 +84,7 @@ namespace System
             out int* DecHexDigits
         );
 
-        unsafe static NumberFormatter()
+        static unsafe NumberFormatter()
         {
             GetFormatterTables(
                 out MantissaBitsTable,
@@ -96,7 +96,7 @@ namespace System
             );
         }
 
-        unsafe static long GetTenPowerOf(int i)
+        static unsafe long GetTenPowerOf(int i)
         {
             return TenPowersList[i];
         }
@@ -215,7 +215,10 @@ namespace System
 
         // Helper to translate an int in the range 0 .. 9999 to its
         // Hexadecimal digits representation.
-        unsafe private static uint FastToDecHex(int val)
+        private static
+        // Helper to translate an int in the range 0 .. 9999 to its
+        // Hexadecimal digits representation.
+        unsafe uint FastToDecHex(int val)
         {
             if (val < 100)
                 return (uint)DecHexDigits[val];
@@ -452,7 +455,7 @@ namespace System
             _decPointPos = _digitsLen = DecHexLen();
         }
 
-        unsafe private void Init(string format, double value, int defPrecision)
+        private unsafe void Init(string format, double value, int defPrecision)
         {
             Init(format);
 
@@ -1152,7 +1155,7 @@ namespace System
             return new string(_cbuf, 0, _ind);
         }
 
-        unsafe private string FormatHexadecimal(int precision)
+        private unsafe string FormatHexadecimal(int precision)
         {
             int size = Math.Max(precision, _decPointPos);
             char* digits = _specifierIsUpper ? DigitUpperTable : DigitLowerTable;

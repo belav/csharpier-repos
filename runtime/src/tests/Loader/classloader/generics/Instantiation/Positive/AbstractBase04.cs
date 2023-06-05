@@ -71,7 +71,7 @@ public class Gen<T, U> : GenBase<T, U>
     public Gen(T fld1, U fld2)
         : base(fld1, fld2) { }
 
-    new public bool InstVerify(System.Type t1, System.Type t2)
+    public new bool InstVerify(System.Type t1, System.Type t2)
     {
         return base.InstVerify(t1, t2);
     }

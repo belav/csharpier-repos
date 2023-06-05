@@ -46,7 +46,7 @@ namespace Mono.Net.Dns
             m_rdata = rr.m_rdata;
         }
 
-        static internal DnsResourceRecord CreateFromBuffer(
+        internal static DnsResourceRecord CreateFromBuffer(
             DnsPacket packet,
             int size,
             ref int offset

@@ -19,7 +19,7 @@ namespace System.Diagnostics
     [ConfigurationCollection(typeof(ListenerElement))]
     internal class ListenerElementsCollection : ConfigurationElementCollection
     {
-        new public ListenerElement this[string name]
+        public new ListenerElement this[string name]
         {
             get { return (ListenerElement)BaseGet(name); }
         }

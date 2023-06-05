@@ -102,6 +102,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             this.defLabelDrawingStyle = BarValueLabelDrawingStyle.Center;
         }
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -109,33 +110,36 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.RangeBar; }
         }
 
+        public
         /// <summary>
         /// If the crossing value is auto Crossing value should be
         /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        override public bool ZeroCrossing
+        override bool ZeroCrossing
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// Number of supported Y value(s) per point
         /// </summary>
-        override public int YValuesPerPoint
+        override int YValuesPerPoint
         {
             get { return 2; }
         }
 
+        public
         /// <summary>
         /// Indicates that extra Y values are connected to the scale of the Y axis
         /// </summary>
-        override public bool ExtraYValuesConnectedToYAxis
+        override bool ExtraYValuesConnectedToYAxis
         {
             get { return true; }
         }
@@ -184,6 +188,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         public BarChart() { }
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -191,7 +196,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        virtual public string Name
+        virtual string Name
         {
             get { return ChartTypeNames.Bar; }
         }
@@ -201,7 +206,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        virtual public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        virtual System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
@@ -215,10 +226,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if stacked chart type supports groups
         /// </summary>
-        virtual public bool SupportStackedGroups
+        virtual bool SupportStackedGroups
         {
             get { return false; }
         }
@@ -272,20 +284,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
+        public
         /// <summary>
         /// True if chart series can be placed side-by-side.
         /// </summary>
-        virtual public bool SideBySideSeries
+        virtual bool SideBySideSeries
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// If the crossing value is auto Crossing value should be
         /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        virtual public bool ZeroCrossing
+        virtual bool ZeroCrossing
         {
             get { return true; }
         }
@@ -298,28 +312,31 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return false; }
         }
 
+        public
         /// <summary>
         /// Indicates that extra Y values are connected to the scale of the Y axis
         /// </summary>
-        virtual public bool ExtraYValuesConnectedToYAxis
+        virtual bool ExtraYValuesConnectedToYAxis
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// Indicates that it's a hundredred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        virtual public bool HundredPercent
+        virtual bool HundredPercent
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// Indicates that it's a hundredred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        virtual public bool HundredPercentSupportNegative
+        virtual bool HundredPercentSupportNegative
         {
             get { return false; }
         }
@@ -344,10 +361,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return LegendImageStyle.Rectangle;
         }
 
+        public
         /// <summary>
         /// Number of supported Y value(s) per point
         /// </summary>
-        virtual public int YValuesPerPoint
+        virtual int YValuesPerPoint
         {
             get { return 1; }
         }
@@ -1396,7 +1414,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointIndex">Index of the point.</param>
         /// <param name="yValueIndex">Index of the Y value to get.</param>
         /// <returns>Y value of the point.</returns>
-        virtual public double GetYValue(
+        public
+        #endregion
+
+        #region Getting Y value methods
+
+        /// <summary>
+        /// Helper function, which returns the Y value of the point.
+        /// </summary>
+        /// <param name="common">Chart common elements.</param>
+        /// <param name="area">Chart area the series belongs to.</param>
+        /// <param name="series">Sereis of the point.</param>
+        /// <param name="point">Point object.</param>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="yValueIndex">Index of the Y value to get.</param>
+        /// <returns>Y value of the point.</returns>
+        virtual double GetYValue(
             CommonElements common,
             ChartArea area,
             Series series,

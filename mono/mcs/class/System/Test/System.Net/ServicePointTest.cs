@@ -21,7 +21,7 @@ namespace MonoTests.System.Net
     [TestFixture]
     public class ServicePointTest
     {
-        static private int max;
+        private static int max;
 
 #if !FEATURE_NO_BSD_SOCKETS
         [SetUp]

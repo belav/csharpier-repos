@@ -411,22 +411,22 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int nativeGetTimeZoneMinuteOffset();
+        internal static extern int nativeGetTimeZoneMinuteOffset();
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static String nativeGetDaylightName();
+        internal static extern String nativeGetDaylightName();
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static String nativeGetStandardName();
+        internal static extern String nativeGetStandardName();
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static short[] nativeGetDaylightChanges(int year);
+        internal static extern short[] nativeGetDaylightChanges(int year);
     } // class CurrentSystemTimeZone
 }
 #endif // FEATURE_CORECLR

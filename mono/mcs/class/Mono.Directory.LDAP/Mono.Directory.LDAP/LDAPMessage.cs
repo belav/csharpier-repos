@@ -127,31 +127,31 @@ namespace Mono.Directory.LDAP
         }
 
         [DllImport("ldap")]
-        extern static string ldap_get_dn(IntPtr ld, IntPtr ldm);
+        static extern string ldap_get_dn(IntPtr ld, IntPtr ldm);
 
         [DllImport("ldap")]
-        extern static IntPtr ldap_first_message(IntPtr ld, IntPtr ldm);
+        static extern IntPtr ldap_first_message(IntPtr ld, IntPtr ldm);
 
         [DllImport("ldap")]
-        extern static IntPtr ldap_next_message(IntPtr ld, IntPtr ldm);
+        static extern IntPtr ldap_next_message(IntPtr ld, IntPtr ldm);
 
         [DllImport("ldap")]
-        extern static int ldap_count_messages(IntPtr ld, IntPtr ldm);
+        static extern int ldap_count_messages(IntPtr ld, IntPtr ldm);
 
         [DllImport("ldap")]
-        extern static IntPtr ldap_first_entry(IntPtr ld, IntPtr ldm);
+        static extern IntPtr ldap_first_entry(IntPtr ld, IntPtr ldm);
 
         [DllImport("ldap")]
-        extern static IntPtr ldap_next_entry(IntPtr ld, IntPtr ldm);
+        static extern IntPtr ldap_next_entry(IntPtr ld, IntPtr ldm);
 
         [DllImport("ldap")]
-        extern static int ldap_count_entries(IntPtr ld, IntPtr ldm);
+        static extern int ldap_count_entries(IntPtr ld, IntPtr ldm);
 
         [DllImport("ldap")]
-        extern static string ldap_first_attribute(IntPtr ld, IntPtr ldm, out IntPtr ber);
+        static extern string ldap_first_attribute(IntPtr ld, IntPtr ldm, out IntPtr ber);
 
         [DllImport("ldap")]
-        extern static string ldap_next_attribute(IntPtr ld, IntPtr ldm, IntPtr ber);
+        static extern string ldap_next_attribute(IntPtr ld, IntPtr ldm, IntPtr ber);
 
         /*
         [DllImport("ldapglue")]

@@ -96,7 +96,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void OnInternalCacheMetadata(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadata(bool createEmptyBindings)
         {
             Activity body = null;
             if (this.Implementation != null)
@@ -264,7 +264,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
         {
             Activity body = null;
             if (this.Implementation != null)

@@ -177,7 +177,7 @@ namespace System.Web.Services.Discovery
             return null;
         }
 
-        private readonly static Regex tagRegex = new Regex(
+        private static readonly Regex tagRegex = new Regex(
             "\\G<"
                 + // leading <
                 "(?<prefix>[\\w:.-]+(?=:)|):?"
@@ -207,12 +207,12 @@ namespace System.Web.Services.Discovery
                 "\\s*(?<empty>/)?>" // optional trailing /, and trailing >
         );
 
-        private readonly static Regex doctypeDirectiveRegex = new Regex(
+        private static readonly Regex doctypeDirectiveRegex = new Regex(
             @"\G<!doctype\b(([\s\w]+)|("".*""))*>",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace
         );
 
-        private readonly static Regex endtagRegex = new Regex(
+        private static readonly Regex endtagRegex = new Regex(
             "\\G</"
                 + // leading </
                 "(?<prefix>[\\w:-]+(?=:)|):?"
@@ -220,7 +220,7 @@ namespace System.Web.Services.Discovery
                 "(?<tagname>[\\w-]+)\\s*>" // tagname
         );
 
-        private readonly static Regex commentRegex = new Regex(
+        private static readonly Regex commentRegex = new Regex(
             "\\G<!--"
                 + // leading <!--
                 "(?>[^-]*-)+?"
@@ -228,13 +228,13 @@ namespace System.Web.Services.Discovery
                 "->" // trailing ->
         );
 
-        private readonly static Regex whitespaceRegex = new Regex(
+        private static readonly Regex whitespaceRegex = new Regex(
             "\\G\\s+"
                 + // at least one char of whitespace
                 "(?=<|\\Z)" // ending with either '<' or the end of the string
         );
 
-        private readonly static Regex textRegex = new Regex(
+        private static readonly Regex textRegex = new Regex(
             "\\G[^<]+" // at least one char on non-'<', maximal
         );
     }

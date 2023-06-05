@@ -1059,7 +1059,7 @@ namespace System.ServiceModel.Security
             return ExtractToken(response, requestState);
         }
 
-        static protected void ThrowIfFault(Message message, EndpointAddress target)
+        protected static void ThrowIfFault(Message message, EndpointAddress target)
         {
             SecurityUtils.ThrowIfNegotiationFault(message, target);
         }

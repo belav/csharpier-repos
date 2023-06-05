@@ -64,7 +64,7 @@ namespace System.IdentityModel.Claims
             }
         }
 
-        static internal bool SupportedRight(string right)
+        internal static bool SupportedRight(string right)
         {
             return right == null
                 || Rights.Identity.Equals(right)

@@ -65,7 +65,7 @@ public class Middle : Base
         return 2;
     }
 
-    public override sealed int method5()
+    public sealed override int method5()
     {
         return 2;
     }
@@ -73,25 +73,25 @@ public class Middle : Base
 
 public class OpenFinal : Middle
 {
-    public override sealed int method4()
+    public sealed override int method4()
     {
         return 3;
     }
 
-    static public int staticMethod()
+    public static int staticMethod()
     {
         return 3;
     }
 }
 
-sealed public class SealedFinal : Middle
+public sealed class SealedFinal : Middle
 {
     public override int method1()
     {
         return 4;
     }
 
-    static public int staticMethod()
+    public static int staticMethod()
     {
         return 4;
     }
@@ -106,7 +106,10 @@ class DevirtualizationTests
     }
 #endif
 
-    static public int test_0_sealed_class_devirt_right_method()
+    public
+#endif
+
+    static int test_0_sealed_class_devirt_right_method()
     {
         SealedFinal x = new SealedFinal();
         if (x.method1() != 4)
@@ -118,7 +121,7 @@ class DevirtualizationTests
         return 0;
     }
 
-    static public int test_0_sealed_method_devirt_right_method()
+    public static int test_0_sealed_method_devirt_right_method()
     {
         OpenFinal x = new OpenFinal();
         if (x.method4() != 3)
@@ -128,7 +131,7 @@ class DevirtualizationTests
         return 0;
     }
 
-    static public int test_0_sealed_class_devirt_right_method_using_delegates()
+    public static int test_0_sealed_class_devirt_right_method_using_delegates()
     {
         SealedFinal x = new SealedFinal();
         IntNoArgs d1 = new IntNoArgs(x.method1);
@@ -144,7 +147,7 @@ class DevirtualizationTests
         return 0;
     }
 
-    static public int test_0_sealed_method_devirt_right_method_using_delegates()
+    public static int test_0_sealed_method_devirt_right_method_using_delegates()
     {
         OpenFinal x = new OpenFinal();
         IntNoArgs d1 = new IntNoArgs(x.method4);
@@ -157,7 +160,7 @@ class DevirtualizationTests
         return 0;
     }
 
-    static public int test_0_delegate_over_static_method_devirtualize_ok()
+    public static int test_0_delegate_over_static_method_devirtualize_ok()
     {
         IntNoArgs d1 = new IntNoArgs(OpenFinal.staticMethod);
         IntNoArgs d2 = new IntNoArgs(SealedFinal.staticMethod);
@@ -170,7 +173,7 @@ class DevirtualizationTests
         return 0;
     }
 
-    static public int test_0_npe_still_happens()
+    public static int test_0_npe_still_happens()
     {
         OpenFinal x = null;
         SealedFinal y = null;

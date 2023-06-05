@@ -373,7 +373,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal DefaultProxySectionInternal GetSection()
+        internal static DefaultProxySectionInternal GetSection()
         {
             lock (DefaultProxySectionInternal.ClassSyncObject)
             {

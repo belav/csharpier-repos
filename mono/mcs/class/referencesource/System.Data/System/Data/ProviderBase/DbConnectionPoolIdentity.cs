@@ -21,7 +21,7 @@ namespace System.Data.ProviderBase
     using System.Runtime.Versioning;
 
     [Serializable] // Serializable so SqlDependencyProcessDispatcher can marshall cross domain to SqlDependency.
-    sealed internal class DbConnectionPoolIdentity
+    internal sealed class DbConnectionPoolIdentity
     {
         private const int E_NotImpersonationToken = unchecked((int)0x8007051D);
         private const int Win32_CheckTokenMembership = 1;
@@ -30,15 +30,15 @@ namespace System.Data.ProviderBase
         private const int Win32_ConvertSidToStringSidW = 4;
         private const int Win32_CreateWellKnownSid = 5;
 
-        static public readonly DbConnectionPoolIdentity NoIdentity = new DbConnectionPoolIdentity(
+        public static readonly DbConnectionPoolIdentity NoIdentity = new DbConnectionPoolIdentity(
             String.Empty,
             false,
             true
         );
-        static private readonly byte[] NetworkSid = (
+        private static readonly byte[] NetworkSid = (
             ADP.IsWindowsNT ? CreateWellKnownSid(WellKnownSidType.NetworkSid) : null
         );
-        static private DbConnectionPoolIdentity _lastIdentity = null;
+        private static DbConnectionPoolIdentity _lastIdentity = null;
 
         private readonly string _sidString;
         private readonly bool _isRestricted;
@@ -63,7 +63,7 @@ namespace System.Data.ProviderBase
             get { return _isNetwork; }
         }
 
-        static private byte[] CreateWellKnownSid(WellKnownSidType sidType)
+        private static byte[] CreateWellKnownSid(WellKnownSidType sidType)
         {
             // Passing an array as big as it can ever be is a small price to pay for
             // not having to P/Invoke twice (once to get the buffer, once to get the data)
@@ -83,7 +83,7 @@ namespace System.Data.ProviderBase
             return resultSid;
         }
 
-        override public bool Equals(object value)
+        public override bool Equals(object value)
         {
             bool result = ((this == NoIdentity) || (this == value));
             if (!result && (null != value))
@@ -99,20 +99,20 @@ namespace System.Data.ProviderBase
         }
 
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.ControlPrincipal)]
-        static internal WindowsIdentity GetCurrentWindowsIdentity()
+        internal static WindowsIdentity GetCurrentWindowsIdentity()
         {
             return WindowsIdentity.GetCurrent();
         }
 
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
-        static private IntPtr GetWindowsIdentityToken(WindowsIdentity identity)
+        private static IntPtr GetWindowsIdentityToken(WindowsIdentity identity)
         {
             return identity.Token;
         }
 
         [ResourceExposure(ResourceScope.None)] // SxS: this method does not create named objects
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        static internal DbConnectionPoolIdentity GetCurrent()
+        internal static DbConnectionPoolIdentity GetCurrent()
         {
             // DEVNOTE: GetTokenInfo and EqualSID do not work on 9x.  WindowsIdentity does not
             //          work either on 9x.  In fact, after checking with native there is no way
@@ -264,12 +264,12 @@ namespace System.Data.ProviderBase
             return current;
         }
 
-        override public int GetHashCode()
+        public override int GetHashCode()
         {
             return _hashCode;
         }
 
-        static private void IntegratedSecurityError(int caller)
+        private static void IntegratedSecurityError(int caller)
         {
 #if !FULL_AOT_RUNTIME
             // passing 1,2,3,4,5 instead of true/false so that with a debugger

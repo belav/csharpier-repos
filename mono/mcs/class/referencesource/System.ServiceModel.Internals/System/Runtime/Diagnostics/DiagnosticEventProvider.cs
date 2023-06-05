@@ -805,7 +805,7 @@ namespace System.Runtime.Diagnostics
             Critical = "Calling Unsafe code; usage of EventDescriptor, which is protected by a LinkDemand"
         )]
         [SecurityCritical]
-        internal protected bool WriteEvent(
+        protected internal bool WriteEvent(
             ref EventDescriptor eventDescriptor,
             EventTraceActivity eventTraceActivity,
             int dataCount,

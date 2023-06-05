@@ -60,7 +60,7 @@ namespace System.ServiceModel.Configuration
             this.TransactionProtocol = source.TransactionProtocol;
         }
 
-        override protected internal BindingElement CreateBindingElement()
+        protected internal override BindingElement CreateBindingElement()
         {
             return new TransactionFlowBindingElement(true, TransactionProtocol)
             {

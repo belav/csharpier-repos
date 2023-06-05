@@ -24,7 +24,7 @@ namespace System.Web.Configuration
     using System.Web.Hosting;
     using System.Web.Compilation;
 
-    static internal class AuthenticationConfig
+    internal static class AuthenticationConfig
     {
         private static AuthenticationMode? s_explicitMode;
 

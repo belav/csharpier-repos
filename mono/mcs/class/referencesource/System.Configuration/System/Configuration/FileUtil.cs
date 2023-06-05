@@ -11,7 +11,7 @@ namespace System.Configuration
     using Microsoft.Win32;
     using System.Runtime.InteropServices;
 
-    static internal class FileUtil
+    internal static class FileUtil
     {
         const int HRESULT_WIN32_FILE_NOT_FOUND = unchecked((int)0x80070002);
         const int HRESULT_WIN32_PATH_NOT_FOUND = unchecked((int)0x80070003);

@@ -921,7 +921,7 @@ namespace System.Reflection.Tests
 
         public class DerivedParameterInfoMetadata : ParameterInfoMetadata
         {
-            override public void VirtualMethodWithCustomAttributes(
+            public override void VirtualMethodWithCustomAttributes(
                 [My(30)] int val1,
                 int val2,
                 [My(50)] int val3

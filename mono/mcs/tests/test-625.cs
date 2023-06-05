@@ -3,7 +3,7 @@
 //
 class Location
 {
-    static public int Null
+    public static int Null
     {
         get { return 1; }
     }

@@ -25,7 +25,7 @@ namespace hello_rangecheckinfinally_interactions_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             int[] a;
             //Start recording

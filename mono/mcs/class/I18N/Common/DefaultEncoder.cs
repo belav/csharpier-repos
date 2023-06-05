@@ -109,7 +109,7 @@ namespace I18N.Common
 
         [System.Security.SecurityCritical] // auto-generated
         [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
-        public unsafe override int GetByteCount(char* chars, int count, bool flush)
+        public override unsafe int GetByteCount(char* chars, int count, bool flush)
         {
             return m_encoding.GetByteCount(chars, count);
         }
@@ -148,7 +148,7 @@ namespace I18N.Common
 
         [System.Security.SecurityCritical] // auto-generated
         [SuppressMessage("Microsoft.Contracts", "CC1055")] // Skip extra error checking to avoid *potential* AppCompat problems.
-        public unsafe override int GetBytes(
+        public override unsafe int GetBytes(
             char* chars,
             int charCount,
             byte* bytes,

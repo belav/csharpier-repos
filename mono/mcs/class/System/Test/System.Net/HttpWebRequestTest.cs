@@ -3067,7 +3067,7 @@ namespace MonoTests.System.Net
 
         class CertData
         {
-            public readonly static byte[] Certificate =
+            public static readonly byte[] Certificate =
             {
                 48,
                 130,
@@ -3522,7 +3522,7 @@ namespace MonoTests.System.Net
                 254,
             };
 
-            public readonly static byte[] PrivateKey =
+            public static readonly byte[] PrivateKey =
             {
                 30,
                 241,

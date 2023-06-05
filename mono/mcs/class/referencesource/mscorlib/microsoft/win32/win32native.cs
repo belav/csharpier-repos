@@ -887,7 +887,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern UIntPtr VirtualQuery(
+        internal static extern unsafe UIntPtr VirtualQuery(
             void* address,
             ref MEMORY_BASIC_INFORMATION buffer,
             UIntPtr sizeOfBuffer
@@ -899,7 +899,7 @@ namespace Microsoft.Win32
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        unsafe internal static extern void* VirtualAlloc(
+        internal static extern unsafe void* VirtualAlloc(
             void* address,
             UIntPtr numBytes,
             int commitOrReserve,
@@ -909,7 +909,7 @@ namespace Microsoft.Win32
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        unsafe internal static extern bool VirtualFree(
+        internal static extern unsafe bool VirtualFree(
             void* address,
             UIntPtr numBytes,
             int pageFreeMode
@@ -1065,7 +1065,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true, CharSet = CharSet.Auto, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal unsafe static extern int GetFullPathName(
+        internal static extern unsafe int GetFullPathName(
             char* path,
             int numBufferChars,
             char* buffer,
@@ -1080,7 +1080,7 @@ namespace Microsoft.Win32
             ExactSpelling = true
         )]
         [ResourceExposure(ResourceScope.Machine)]
-        internal unsafe static extern uint GetFullPathNameW(
+        internal static extern unsafe uint GetFullPathNameW(
             char* path,
             uint numBufferChars,
             SafeHandle buffer,
@@ -1089,7 +1089,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true, CharSet = CharSet.Auto, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal unsafe static extern int GetFullPathName(
+        internal static extern unsafe int GetFullPathName(
             String path,
             int numBufferChars,
             [Out] StringBuilder buffer,
@@ -1098,7 +1098,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true, CharSet = CharSet.Auto, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal unsafe static extern int GetLongPathName(
+        internal static extern unsafe int GetLongPathName(
             char* path,
             char* longPathBuffer,
             int bufferLength
@@ -1271,7 +1271,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true, EntryPoint = "SetFilePointer")]
         [ResourceExposure(ResourceScope.None)]
-        private unsafe static extern int SetFilePointerWin32(
+        private static extern unsafe int SetFilePointerWin32(
             SafeFileHandle handle,
             int lo,
             int* hi,
@@ -1280,7 +1280,7 @@ namespace Microsoft.Win32
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static long SetFilePointer(
+        internal static unsafe long SetFilePointer(
             SafeFileHandle handle,
             long offset,
             System.IO.SeekOrigin origin,
@@ -1307,7 +1307,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int ReadFile(
+        internal static extern unsafe int ReadFile(
             SafeFileHandle handle,
             byte* bytes,
             int numBytesToRead,
@@ -1317,7 +1317,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int ReadFile(
+        internal static extern unsafe int ReadFile(
             SafeFileHandle handle,
             byte* bytes,
             int numBytesToRead,
@@ -1335,7 +1335,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern int WriteFile(
+        internal static extern unsafe int WriteFile(
             SafeFileHandle handle,
             byte* bytes,
             int numBytesToWrite,
@@ -1345,7 +1345,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern int WriteFile(
+        internal static extern unsafe int WriteFile(
             SafeFileHandle handle,
             byte* bytes,
             int numBytesToWrite,
@@ -1356,7 +1356,7 @@ namespace Microsoft.Win32
         // This is only available on Vista or higher
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
-        internal static unsafe extern bool CancelIoEx(
+        internal static extern unsafe bool CancelIoEx(
             SafeFileHandle handle,
             NativeOverlapped* lpOverlapped
         );
@@ -1479,7 +1479,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern bool SetFileTime(
+        internal static extern unsafe bool SetFileTime(
             SafeFileHandle hFile,
             FILE_TIME* creationTime,
             FILE_TIME* lastAccessTime,
@@ -1893,11 +1893,11 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal static unsafe extern char* GetEnvironmentStrings();
+        internal static extern unsafe char* GetEnvironmentStrings();
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal static unsafe extern bool FreeEnvironmentStrings(char* pStrings);
+        internal static extern unsafe bool FreeEnvironmentStrings(char* pStrings);
 
         [DllImport(KERNEL32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
@@ -1909,14 +1909,14 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, CharSet = CharSet.Auto, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int GetComputerName(
+        internal static extern int GetComputerName(
             [Out] StringBuilder nameBuffer,
             ref int bufferSize
         );
 
         [DllImport(OLE32)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int CoCreateGuid(out Guid guid);
+        internal static extern int CoCreateGuid(out Guid guid);
 
         [DllImport(Win32Native.OLE32)]
         [ResourceExposure(ResourceScope.None)]
@@ -2066,7 +2066,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
-        internal static unsafe extern bool SetConsoleWindowInfo(
+        internal static extern unsafe bool SetConsoleWindowInfo(
             IntPtr hConsoleOutput,
             bool absolute,
             SMALL_RECT* consoleWindow
@@ -2124,7 +2124,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
-        internal static unsafe extern bool ReadConsoleOutput(
+        internal static extern unsafe bool ReadConsoleOutput(
             IntPtr hConsoleOutput,
             CHAR_INFO* pBuffer,
             COORD bufferSize,
@@ -2135,7 +2135,7 @@ namespace Microsoft.Win32
         [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe extern bool ReadConsoleW(
+        internal static extern unsafe bool ReadConsoleW(
             SafeFileHandle hConsoleInput,
             Byte* lpBuffer,
             Int32 nNumberOfCharsToRead,
@@ -2145,7 +2145,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
-        internal static unsafe extern bool WriteConsoleOutput(
+        internal static extern unsafe bool WriteConsoleOutput(
             IntPtr hConsoleOutput,
             CHAR_INFO* buffer,
             COORD bufferSize,
@@ -2156,7 +2156,7 @@ namespace Microsoft.Win32
         [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe extern bool WriteConsoleW(
+        internal static extern unsafe bool WriteConsoleW(
             SafeFileHandle hConsoleOutput,
             Byte* lpBuffer,
             Int32 nNumberOfCharsToWrite,
@@ -2229,7 +2229,7 @@ namespace Microsoft.Win32
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern int RegEnumKeyEx(
+        internal static extern unsafe int RegEnumKeyEx(
             SafeRegistryHandle hKey,
             int dwIndex,
             char* lpName,
@@ -2242,7 +2242,7 @@ namespace Microsoft.Win32
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, BestFitMapping = false)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern int RegEnumValue(
+        internal static extern unsafe int RegEnumValue(
             SafeRegistryHandle hKey,
             int dwIndex,
             char* lpValueName,
@@ -3277,7 +3277,7 @@ namespace Microsoft.Win32
 
         [DllImport(OLEAUT32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal extern static bool CryptAcquireContext(
+        internal static extern bool CryptAcquireContext(
             out IntPtr hProv,
             [MarshalAs(UnmanagedType.LPWStr)] string container,
             [MarshalAs(UnmanagedType.LPWStr)] string provider,
@@ -3287,11 +3287,11 @@ namespace Microsoft.Win32
 
         [DllImport(OLEAUT32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool CryptReleaseContext(IntPtr hProv, int flags);
+        internal static extern bool CryptReleaseContext(IntPtr hProv, int flags);
 
         [DllImport(OLEAUT32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool CryptCreateHash(
+        internal static extern bool CryptCreateHash(
             IntPtr hProv,
             int Algid,
             IntPtr hKey,
@@ -3301,11 +3301,11 @@ namespace Microsoft.Win32
 
         [DllImport(OLEAUT32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool CryptDestroyHash(IntPtr hHash);
+        internal static extern bool CryptDestroyHash(IntPtr hHash);
 
         [DllImport(OLEAUT32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool CryptHashData(
+        internal static extern bool CryptHashData(
             IntPtr hHash,
             [In, MarshalAs(UnmanagedType.LPArray)] byte[] data,
             int length,
@@ -3314,7 +3314,7 @@ namespace Microsoft.Win32
 
         [DllImport(OLEAUT32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool CryptGetHashParam(
+        internal static extern bool CryptGetHashParam(
             IntPtr hHash,
             int param,
             [Out, MarshalAs(UnmanagedType.LPArray)] byte[] digest,
@@ -3324,7 +3324,7 @@ namespace Microsoft.Win32
 
         [DllImport(OLEAUT32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool CryptGetHashParam(
+        internal static extern bool CryptGetHashParam(
             IntPtr hHash,
             int param,
             out int data,
@@ -3334,7 +3334,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, EntryPoint = "PAL_Random")]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool Random(
+        internal static extern bool Random(
             bool bStrong,
             [Out, MarshalAs(UnmanagedType.LPArray)] byte[] buffer,
             int length
@@ -3365,7 +3365,7 @@ namespace Microsoft.Win32
 #if FEATURE_CORECLR
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurityAttribute()]
-        internal unsafe static extern int WideCharToMultiByte(
+        internal static extern unsafe int WideCharToMultiByte(
             int CodePage,
             UInt32 dwFlags,
             char* lpWideCharStr,
@@ -3378,7 +3378,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurityAttribute()]
-        internal unsafe static extern int MultiByteToWideChar(
+        internal static extern unsafe int MultiByteToWideChar(
             int CodePage,
             UInt32 dwFlags,
             byte* lpMultiByteStr,
@@ -3390,7 +3390,7 @@ namespace Microsoft.Win32
 
         [DllImport(KERNEL32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal extern static bool QueryUnbiasedInterruptTime(out ulong UnbiasedTime);
+        internal static extern bool QueryUnbiasedInterruptTime(out ulong UnbiasedTime);
 
         // This is needed by the RuntimeInformation feature
         [DllImport(NTDLL)]
@@ -3410,7 +3410,7 @@ namespace Microsoft.Win32
         }
 
         [DllImport(KERNEL32)]
-        internal extern static void GetNativeSystemInfo(out SYSTEM_INFO lpSystemInfo);
+        internal static extern void GetNativeSystemInfo(out SYSTEM_INFO lpSystemInfo);
 
         internal enum ProcessorArchitecture : ushort
         {

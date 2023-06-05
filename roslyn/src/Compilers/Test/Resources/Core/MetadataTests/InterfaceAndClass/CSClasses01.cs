@@ -26,7 +26,7 @@ namespace Metadata
         }
     }
 
-    abstract public class ICSGenImpl<T, V> //: ICSGen<T, V>
+    public abstract class ICSGenImpl<T, V> //: ICSGen<T, V>
     {
         public virtual void M01(T p1, T p2)
         {

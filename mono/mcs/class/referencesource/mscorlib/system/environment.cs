@@ -806,7 +806,7 @@ namespace System
         ==============================================================================*/
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
-        private unsafe static char[] GetEnvironmentCharArray()
+        private static unsafe char[] GetEnvironmentCharArray()
         {
             char[] block = null;
 
@@ -1522,7 +1522,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static String GetResourceFromDefault(String key);
+        internal static extern String GetResourceFromDefault(String key);
 #endif
 
         // Looks up the resource string value for key.

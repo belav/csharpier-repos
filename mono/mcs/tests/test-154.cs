@@ -61,7 +61,9 @@ public class X
     }
 
     // try { ... } catch { ... } finally { ... } block
-    static public int test5(out float f, long d)
+    public
+    // try { ... } catch { ... } finally { ... } block
+    static int test5(out float f, long d)
     {
         int a;
         long b = 8;
@@ -92,13 +94,17 @@ public class X
     }
 
     // Passing out parameter to method invocation
-    static public int test6(out float f)
+    public
+    // Passing out parameter to method invocation
+    static int test6(out float f)
     {
         return test5(out f, 50);
     }
 
     // Loop-variable of foreach() and for() loop.
-    static public long test7(int[] a, int stop)
+    public
+    // Loop-variable of foreach() and for() loop.
+    static long test7(int[] a, int stop)
     {
         long b = 0;
         foreach (int i in a)
@@ -111,7 +117,9 @@ public class X
     }
 
     // Initializing locals in initialize or test of for block
-    static public long test8(int stop)
+    public
+    // Initializing locals in initialize or test of for block
+    static long test8(int stop)
     {
         int i;
         long b;
@@ -124,7 +132,9 @@ public class X
     }
 
     // Initializing locals in test of while block
-    static public long test9(int stop)
+    public
+    // Initializing locals in test of while block
+    static long test9(int stop)
     {
         long b;
         while ((b = stop) > 3)

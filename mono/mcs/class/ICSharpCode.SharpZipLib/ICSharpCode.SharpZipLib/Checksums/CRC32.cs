@@ -68,9 +68,9 @@ namespace ICSharpCode.SharpZipLib.Checksums
     )]
     public sealed class Crc32 : IChecksum
     {
-        readonly static uint CrcSeed = 0xFFFFFFFF;
+        static readonly uint CrcSeed = 0xFFFFFFFF;
 
-        readonly static uint[] CrcTable = new uint[]
+        static readonly uint[] CrcTable = new uint[]
         {
             0x00000000,
             0x77073096,

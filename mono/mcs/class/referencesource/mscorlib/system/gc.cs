@@ -70,23 +70,23 @@ namespace System
     {
 #if MONO
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static int GetCollectionCount(int generation);
+        static extern int GetCollectionCount(int generation);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static int GetMaxGeneration();
+        static extern int GetMaxGeneration();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void InternalCollect(int generation);
+        static extern void InternalCollect(int generation);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void RecordPressure(long bytesAllocated);
+        static extern void RecordPressure(long bytesAllocated);
 
         // TODO: Move following to ConditionalWeakTable
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void register_ephemeron_array(Ephemeron[] array);
+        internal static extern void register_ephemeron_array(Ephemeron[] array);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static object get_ephemeron_tombstone();
+        static extern object get_ephemeron_tombstone();
 
         internal static readonly object EPHEMERON_TOMBSTONE = get_ephemeron_tombstone();
 
@@ -446,7 +446,7 @@ namespace System
 
 #if MONO
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static void WaitForPendingFinalizers();
+        public static extern void WaitForPendingFinalizers();
 #else
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
@@ -507,7 +507,7 @@ namespace System
         //
 #if MONO
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static long GetTotalMemory(bool forceFullCollection);
+        public static extern long GetTotalMemory(bool forceFullCollection);
 
         static bool _RegisterForFullGCNotification(
             int maxGenerationPercentage,

@@ -511,7 +511,7 @@ namespace Mono.Data.Tds.Protocol
             }
         }
 
-        internal protected void InitExec()
+        protected internal void InitExec()
         {
             // clean up
             moreResults = true;

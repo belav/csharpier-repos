@@ -19,9 +19,9 @@ public struct LayerMask
 
 class Test
 {
-    static private LayerMask test;
+    private static LayerMask test;
 
-    static public void Main()
+    public static void Main()
     {
         LayerMask a = ~test;
         if (a != 0xFFFF) // LayerMask is an ushort internally

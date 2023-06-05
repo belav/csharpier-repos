@@ -21,7 +21,7 @@ namespace System.Threading.Tasks
         public static Task WaitAsync(this Task task, CancellationToken cancellationToken) =>
             WaitAsync(task, Timeout.InfiniteTimeSpan, cancellationToken);
 
-        public async static Task WaitAsync(
+        public static async Task WaitAsync(
             this Task task,
             TimeSpan timeout,
             CancellationToken cancellationToken

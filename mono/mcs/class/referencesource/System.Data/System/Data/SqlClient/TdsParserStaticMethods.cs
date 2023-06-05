@@ -36,7 +36,7 @@ namespace System.Data.SqlClient
         // SxS: this method accesses registry to resolve the alias.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        static internal void AliasRegistryLookup(ref string host, ref string protocol)
+        internal static void AliasRegistryLookup(ref string host, ref string protocol)
         {
 #if !MOBILE
             if (!ADP.IsEmpty(host))
@@ -111,7 +111,11 @@ namespace System.Data.SqlClient
         // Encrypt password to be sent to SQL Server
         // Note: The same logic is used in SNIPacketSetData (SniManagedWrapper) to encrypt passwords stored in SecureString
         //       If this logic changed, SNIPacketSetData needs to be changed as well
-        static internal Byte[] EncryptPassword(string password)
+        internal
+        // Encrypt password to be sent to SQL Server
+        // Note: The same logic is used in SNIPacketSetData (SniManagedWrapper) to encrypt passwords stored in SecureString
+        //       If this logic changed, SNIPacketSetData needs to be changed as well
+        static Byte[] EncryptPassword(string password)
         {
             Byte[] bEnc = new Byte[password.Length << 1];
             int s;
@@ -131,7 +135,7 @@ namespace System.Data.SqlClient
 
         [ResourceExposure(ResourceScope.None)] // SxS: we use this method for TDS login only
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        static internal int GetCurrentProcessIdForTdsLoginOnly()
+        internal static int GetCurrentProcessIdForTdsLoginOnly()
         {
 #if MOBILE
             return 0;
@@ -143,7 +147,7 @@ namespace System.Data.SqlClient
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [ResourceExposure(ResourceScope.None)] // SxS: we use this method for TDS login only
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        static internal Int32 GetCurrentThreadIdForTdsLoginOnly()
+        internal static Int32 GetCurrentThreadIdForTdsLoginOnly()
         {
 #pragma warning disable 618
             return AppDomain.GetCurrentThreadId(); // don't need this to be support fibres;
@@ -152,7 +156,7 @@ namespace System.Data.SqlClient
 
         [ResourceExposure(ResourceScope.None)] // SxS: we use MAC address for TDS login only
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        static internal byte[] GetNetworkPhysicalAddressForTdsLoginOnly()
+        internal static byte[] GetNetworkPhysicalAddressForTdsLoginOnly()
         {
             // NIC address is stored in NetworkAddress key.  However, if NetworkAddressLocal key
             // has a value that is not zero, then we cannot use the NetworkAddress key and must
@@ -195,7 +199,9 @@ namespace System.Data.SqlClient
         }
 
         // translates remaining time in stateObj (from user specified timeout) to timout value for SNI
-        static internal Int32 GetTimeoutMilliseconds(long timeoutTime)
+        internal
+        // translates remaining time in stateObj (from user specified timeout) to timout value for SNI
+        static Int32 GetTimeoutMilliseconds(long timeoutTime)
         {
             // User provided timeout t | timeout value for SNI | meaning
             // ------------------------+-----------------------+------------------------------
@@ -221,12 +227,12 @@ namespace System.Data.SqlClient
             return (Int32)msecRemaining;
         }
 
-        static internal long GetTimeoutSeconds(int timeout)
+        internal static long GetTimeoutSeconds(int timeout)
         {
             return GetTimeout((long)timeout * 1000L);
         }
 
-        static internal long GetTimeout(long timeoutMilliseconds)
+        internal static long GetTimeout(long timeoutMilliseconds)
         {
             long result;
             if (timeoutMilliseconds <= 0)
@@ -250,7 +256,7 @@ namespace System.Data.SqlClient
             return result;
         }
 
-        static internal bool TimeoutHasExpired(long timeoutTime)
+        internal static bool TimeoutHasExpired(long timeoutTime)
         {
             bool result = false;
 
@@ -261,7 +267,7 @@ namespace System.Data.SqlClient
             return result;
         }
 
-        static internal int NullAwareStringLength(string str)
+        internal static int NullAwareStringLength(string str)
         {
             if (str == null)
             {
@@ -273,7 +279,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        static internal int GetRemainingTimeout(int timeout, long start)
+        internal static int GetRemainingTimeout(int timeout, long start)
         {
             if (timeout <= 0)
             {

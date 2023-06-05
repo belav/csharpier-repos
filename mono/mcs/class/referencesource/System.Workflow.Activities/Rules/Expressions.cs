@@ -2683,7 +2683,7 @@ namespace System.Workflow.Activities.Rules
             return newType;
         }
 
-        static internal CodeTypeReference CloneType(CodeTypeReference oldType)
+        internal static CodeTypeReference CloneType(CodeTypeReference oldType)
         {
             if (oldType == null)
                 return null;
@@ -2707,7 +2707,7 @@ namespace System.Workflow.Activities.Rules
             return MatchType(typeRefExpr.Type, newType.Type);
         }
 
-        static internal bool MatchType(CodeTypeReference typeRef1, CodeTypeReference typeRef2)
+        internal static bool MatchType(CodeTypeReference typeRef1, CodeTypeReference typeRef2)
         {
             if (typeRef1.BaseType != typeRef2.BaseType)
                 return false;

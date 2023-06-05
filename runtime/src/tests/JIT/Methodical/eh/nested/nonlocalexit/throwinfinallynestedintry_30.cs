@@ -228,7 +228,7 @@ namespace Test_throwinfinallynestedintry_30_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void foo(int i)
+        public static void foo(int i)
         {
             try
             {
@@ -1916,7 +1916,7 @@ namespace Test_throwinfinallynestedintry_30_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();

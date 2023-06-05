@@ -1227,7 +1227,7 @@
         private static class NativeMethods
         {
             [DllImport("kernel32.dll")]
-            internal extern static void DebugBreak();
+            internal static extern void DebugBreak();
         }
     }
 }

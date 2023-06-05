@@ -694,7 +694,7 @@ namespace System
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void GetGUID(Type type, byte[] guid);
+        private static extern void GetGUID(Type type, byte[] guid);
 
         public override Guid GUID
         {
@@ -790,7 +790,7 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static TypeCode GetTypeCodeImplInternal(Type type);
+        static extern TypeCode GetTypeCodeImplInternal(Type type);
 
         internal static Type GetTypeFromProgIDImpl(String progID, String server, bool throwOnError)
         {

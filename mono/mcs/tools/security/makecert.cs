@@ -26,12 +26,12 @@ namespace Mono.Tools
 {
     class MakeCert
     {
-        static private void Header()
+        private static void Header()
         {
             Console.WriteLine(new AssemblyInfo().ToString());
         }
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine("Usage: makecert [options] certificate{0}", Environment.NewLine);
             Console.WriteLine(" -# num{0}\tCertificate serial number", Environment.NewLine);
@@ -57,7 +57,7 @@ namespace Mono.Tools
             Console.WriteLine(" -!{0}\textended help (for advanced options)", Environment.NewLine);
         }
 
-        static private void ExtendedHelp()
+        private static void ExtendedHelp()
         {
             Console.WriteLine("Usage: makecert [options] certificate{0}", Environment.NewLine);
             Console.WriteLine(

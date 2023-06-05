@@ -53,7 +53,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public AnchorStyles Anchor
+        public new AnchorStyles Anchor
         {
             get { return base.Anchor; }
             set { base.Anchor = value; }
@@ -62,7 +62,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public bool AutoSize
+        public new bool AutoSize
         {
             get { return base.AutoSize; }
             set { base.AutoSize = value; }
@@ -81,7 +81,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public BorderStyle BorderStyle
+        public new BorderStyle BorderStyle
         {
             get { return base.BorderStyle; }
             set { base.BorderStyle = value; }
@@ -90,7 +90,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public DockStyle Dock
+        public new DockStyle Dock
         {
             get { return base.Dock; }
             set { base.Dock = value; }
@@ -99,7 +99,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public DockPaddingEdges DockPadding
+        public new DockPaddingEdges DockPadding
         {
             get { return base.DockPadding; }
         }
@@ -107,7 +107,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public int Height
+        public new int Height
         {
             get { return this.Visible ? base.Height : 0; }
             set { throw new NotSupportedException("The height cannot be set"); }
@@ -116,7 +116,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public Point Location
+        public new Point Location
         {
             get { return base.Location; }
             set { base.Location = value; }
@@ -125,7 +125,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public Size MaximumSize
+        public new Size MaximumSize
         {
             get { return base.MaximumSize; }
             set { base.MaximumSize = value; }
@@ -134,7 +134,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public Size MinimumSize
+        public new Size MinimumSize
         {
             get { return base.MinimumSize; }
             set { base.MinimumSize = value; }
@@ -143,7 +143,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public string Name
+        public new string Name
         {
             get { return base.Name; }
             set { base.Name = value; }
@@ -152,7 +152,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public Control Parent
+        public new Control Parent
         {
             get { return base.Parent; }
             set { throw new NotSupportedException("The parent cannot be set"); }
@@ -161,7 +161,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public Size Size
+        public new Size Size
         {
             get { return base.Size; }
             set { base.Size = value; }
@@ -170,7 +170,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public int TabIndex
+        public new int TabIndex
         {
             get { return base.TabIndex; }
             set { base.TabIndex = value; }
@@ -179,7 +179,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public bool TabStop
+        public new bool TabStop
         {
             get { return base.TabStop; }
             set { base.TabStop = value; }
@@ -188,7 +188,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public bool Visible
+        public new bool Visible
         {
             get { return base.Visible; }
             set { base.Visible = value; }
@@ -197,7 +197,7 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public int Width
+        public new int Width
         {
             get { return this.Visible ? base.Width : 0; }
             set { throw new NotSupportedException("The width cannot be set"); }

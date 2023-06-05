@@ -13,11 +13,12 @@ namespace System.Net.Sockets
     using Microsoft.Win32;
     using System.Collections.Generic;
 
+    internal
     //
     //  OverlappedAsyncResult - used to take care of storage for async Socket operation
     //   from the BeginSend, BeginSendTo, BeginReceive, BeginReceiveFrom calls.
     //
-    unsafe internal class ReceiveMessageOverlappedAsyncResult : BaseOverlappedAsyncResult
+    unsafe class ReceiveMessageOverlappedAsyncResult : BaseOverlappedAsyncResult
     {
         //
         // internal class members
@@ -173,7 +174,7 @@ namespace System.Net.Sockets
             SetUnmanagedStructures(buffer, offset, size, socketAddress, socketFlags);
         }
 
-        unsafe private void InitIPPacketInformation()
+        private unsafe void InitIPPacketInformation()
         {
             IPAddress address = null;
 

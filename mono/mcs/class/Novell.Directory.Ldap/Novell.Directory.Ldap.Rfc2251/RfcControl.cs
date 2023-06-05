@@ -45,17 +45,19 @@ namespace Novell.Directory.Ldap.Rfc2251
     /// </summary>
     public class RfcControl : Asn1Sequence
     {
+        public
         /// <summary> </summary>
-        virtual public Asn1OctetString ControlType
+        virtual Asn1OctetString ControlType
         {
             get { return (Asn1OctetString)get_Renamed(0); }
         }
 
+        public
         /// <summary> Returns criticality.
         ///
         /// If no value present, return the default value of FALSE.
         /// </summary>
-        virtual public Asn1Boolean Criticality
+        virtual Asn1Boolean Criticality
         {
             get
             {
@@ -71,6 +73,7 @@ namespace Novell.Directory.Ldap.Rfc2251
             }
         }
 
+        public
         /// <summary> Since controlValue is an OPTIONAL component, we need to check
         /// to see if one is available. Remember that if criticality is of default
         /// value, it will not be present.
@@ -78,7 +81,7 @@ namespace Novell.Directory.Ldap.Rfc2251
         /// <summary> Called to set/replace the ControlValue.  Will normally be called by
         /// the child classes after the parent has been instantiated.
         /// </summary>
-        virtual public Asn1OctetString ControlValue
+        virtual Asn1OctetString ControlValue
         {
             get
             {

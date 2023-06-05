@@ -333,7 +333,7 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
             Input.Complete(ResolveCompleteReceiveException(error));
         }
 
-        async static ValueTask<FlushResult> AwaitCompleteTaskAsync(ValueTask completeTask)
+        static async ValueTask<FlushResult> AwaitCompleteTaskAsync(ValueTask completeTask)
         {
             await completeTask;
             return new FlushResult(isCanceled: false, isCompleted: true);

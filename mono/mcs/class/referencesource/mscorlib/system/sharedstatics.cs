@@ -87,7 +87,7 @@ namespace System
         private StringMaker _maker;
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        static public StringMaker GetSharedStringMaker()
+        public static StringMaker GetSharedStringMaker()
         {
             StringMaker maker = null;
 
@@ -118,7 +118,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        static public void ReleaseSharedStringMaker(ref StringMaker maker)
+        public static void ReleaseSharedStringMaker(ref StringMaker maker)
         {
             // save this stringmaker so someone else can use it
             bool tookLock = false;

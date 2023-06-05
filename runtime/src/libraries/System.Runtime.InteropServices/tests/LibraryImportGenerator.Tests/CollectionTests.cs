@@ -143,7 +143,7 @@ namespace LibraryImportGenerator.IntegrationTests
                     MarshalMode.ManagedToUnmanagedOut,
                     typeof(ListGuaranteedUnmarshal<,>)
                 )]
-                public unsafe static class ListGuaranteedUnmarshal<T, TUnmanagedElement>
+                public static unsafe class ListGuaranteedUnmarshal<T, TUnmanagedElement>
                     where TUnmanagedElement : unmanaged
                 {
                     public static bool AllocateContainerForManagedElementsFinallyCalled = false;
@@ -297,7 +297,7 @@ namespace LibraryImportGenerator.IntegrationTests
                     MarshalMode.ManagedToUnmanagedOut,
                     typeof(ListGuaranteedUnmarshal<,>.Marshaller)
                 )]
-                public unsafe static class ListGuaranteedUnmarshal<T, TUnmanagedElement>
+                public static unsafe class ListGuaranteedUnmarshal<T, TUnmanagedElement>
                     where TUnmanagedElement : unmanaged
                 {
                     public struct Marshaller

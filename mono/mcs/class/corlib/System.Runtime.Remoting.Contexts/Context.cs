@@ -86,10 +86,10 @@ namespace System.Runtime.Remoting.Contexts
         ContextCallbackObject callback_object = null;
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void RegisterContext(Context ctx);
+        static extern void RegisterContext(Context ctx);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern static void ReleaseContext(Context ctx);
+        static extern void ReleaseContext(Context ctx);
 
         public Context()
         {

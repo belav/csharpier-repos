@@ -24,6 +24,7 @@ namespace System.Globalization
     [Serializable]
     public class TaiwanLunisolarCalendar : EastAsianLunisolarCalendar
     {
+        internal
         // Since
         //    Gregorian Year = Era Year + yearOffset
         // When Gregorian Year 1912 is year 1, so that
@@ -32,7 +33,7 @@ namespace System.Globalization
         //m_EraInfo[0] = new EraInfo(1, new DateTime(1912, 1, 1).Ticks, 1911, 1, GregorianCalendar.MaxYear - 1911);
 
         // Initialize our era info.
-        static internal EraInfo[] taiwanLunisolarEraInfo = new EraInfo[]
+        static EraInfo[] taiwanLunisolarEraInfo = new EraInfo[]
         {
             new EraInfo(1, 1912, 1, 1, 1911, 1, GregorianCalendar.MaxYear - 1911) // era #, start year/month/day, yearOffset, minEraYear
         };

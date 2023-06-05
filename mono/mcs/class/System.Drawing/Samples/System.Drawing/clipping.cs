@@ -76,8 +76,8 @@ namespace MyFormProject
             pevent.Graphics.FillRectangle(Brushes.Green, pevent.ClipRectangle);
         }
 
-        static private ourLabelTwoAreas label = new ourLabelTwoAreas();
-        static private ourLabelOverflows label2 = new ourLabelOverflows();
+        private static ourLabelTwoAreas label = new ourLabelTwoAreas();
+        private static ourLabelOverflows label2 = new ourLabelOverflows();
 
         public MainForm()
         {

@@ -16,7 +16,11 @@ namespace System.Net.Configuration
         // This gets called by the configuration system when the app.config file is located at an
         // http:// Uri.  It forces the System.Net config to be loaded based on only the machine.config
         // because the configuration system uses System.Net to download the app.config file.
-        static internal void EnsureConfigLoaded()
+        internal
+        // This gets called by the configuration system when the app.config file is located at an
+        // http:// Uri.  It forces the System.Net config to be loaded based on only the machine.config
+        // because the configuration system uses System.Net to download the app.config file.
+        static void EnsureConfigLoaded()
         {
             try
             {

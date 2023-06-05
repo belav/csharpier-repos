@@ -1462,7 +1462,7 @@ namespace System.Net
                 return myString.Length;
             }
 
-            internal unsafe static void GetBytes(
+            internal static unsafe void GetBytes(
                 string myString,
                 int charIndex,
                 int charCount,
@@ -1485,7 +1485,7 @@ namespace System.Net
                 }
             }
 
-            internal unsafe static byte[] GetBytes(string myString)
+            internal static unsafe byte[] GetBytes(string myString)
             {
                 byte[] bytes = new byte[myString.Length];
                 if (myString.Length != 0)

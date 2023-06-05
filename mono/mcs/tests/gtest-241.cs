@@ -1,4 +1,4 @@
-abstract public class a
+public abstract class a
 {
     public abstract void func<T>(ref T arg);
 }

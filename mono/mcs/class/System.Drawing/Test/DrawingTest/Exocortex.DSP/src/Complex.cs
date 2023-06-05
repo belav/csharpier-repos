@@ -87,7 +87,14 @@ namespace Exocortex.DSP
         /// <param name="real"></param>
         /// <param name="imaginary"></param>
         /// <returns></returns>
-        static public Complex FromRealImaginary(double real, double imaginary)
+        public
+        /// <summary>
+        /// Create a complex number from a real and an imaginary component
+        /// </summary>
+        /// <param name="real"></param>
+        /// <param name="imaginary"></param>
+        /// <returns></returns>
+        static Complex FromRealImaginary(double real, double imaginary)
         {
             Complex c;
             c.Re = (double)real;
@@ -101,7 +108,14 @@ namespace Exocortex.DSP
         /// <param name="modulus"></param>
         /// <param name="argument"></param>
         /// <returns></returns>
-        static public Complex FromModulusArgument(double modulus, double argument)
+        public
+        /// <summary>
+        /// Create a complex number from a modulus (length) and an argument (radian)
+        /// </summary>
+        /// <param name="modulus"></param>
+        /// <param name="argument"></param>
+        /// <returns></returns>
+        static Complex FromModulusArgument(double modulus, double argument)
         {
             Complex c;
             c.Re = (double)(modulus * System.Math.Cos(argument));
@@ -504,7 +518,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        static public Complex Parse(string s)
+        public
+        /// <summary>
+        /// Parse a complex representation in this fashion: "( %f, %f )"
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        static Complex Parse(string s)
         {
             throw new NotImplementedException(
                 "Complex Complex.Parse( string s ) is not implemented."
@@ -530,42 +550,57 @@ namespace Exocortex.DSP
         /// <param name="b"></param>
         /// <param name="tolerance"></param>
         /// <returns></returns>
-        static public bool IsEqual(Complex a, Complex b, double tolerance)
+        public
+        //-----------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Determine whether two complex numbers are almost (i.e. within the tolerance) equivalent.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="tolerance"></param>
+        /// <returns></returns>
+        static bool IsEqual(Complex a, Complex b, double tolerance)
         {
             return (Math.Abs(a.Re - b.Re) < tolerance) && (Math.Abs(a.Im - b.Im) < tolerance);
         }
 
+        public
         //----------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------
 
         /// <summary>
         /// Represents zero
         /// </summary>
-        static public Complex Zero
+        static Complex Zero
         {
             get { return new Complex(0, 0); }
         }
 
+        public
         /// <summary>
         /// Represents the result of sqrt( -1 )
         /// </summary>
-        static public Complex I
+        static Complex I
         {
             get { return new Complex(0, 1); }
         }
 
+        public
         /// <summary>
         /// Represents the largest possible value of Complex.
         /// </summary>
-        static public Complex MaxValue
+        static Complex MaxValue
         {
             get { return new Complex(double.MaxValue, double.MaxValue); }
         }
 
+        public
         /// <summary>
         /// Represents the smallest possible value of Complex.
         /// </summary>
-        static public Complex MinValue
+        static Complex MinValue
         {
             get { return new Complex(double.MinValue, double.MinValue); }
         }

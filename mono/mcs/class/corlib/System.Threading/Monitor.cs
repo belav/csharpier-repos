@@ -42,10 +42,10 @@ namespace System.Threading
     public static partial class Monitor
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static bool Monitor_test_synchronised(object obj);
+        static extern bool Monitor_test_synchronised(object obj);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void Monitor_pulse(object obj);
+        static extern void Monitor_pulse(object obj);
 
         static void ObjPulse(Object obj)
         {
@@ -56,7 +56,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void Monitor_pulse_all(object obj);
+        static extern void Monitor_pulse_all(object obj);
 
         static void ObjPulseAll(Object obj)
         {
@@ -67,7 +67,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static bool Monitor_wait(object obj, int ms);
+        static extern bool Monitor_wait(object obj, int ms);
 
         static bool ObjWait(bool exitContext, int millisecondsTimeout, Object obj)
         {
@@ -95,7 +95,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void try_enter_with_atomic_var(
+        static extern void try_enter_with_atomic_var(
             object obj,
             int millisecondsTimeout,
             ref bool lockTaken
@@ -117,7 +117,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static bool Monitor_test_owner(object obj);
+        static extern bool Monitor_test_owner(object obj);
 
         static bool IsEnteredNative(Object obj)
         {

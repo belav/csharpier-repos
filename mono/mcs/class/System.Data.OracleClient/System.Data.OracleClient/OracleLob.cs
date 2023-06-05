@@ -26,7 +26,7 @@ namespace System.Data.OracleClient
     {
         #region Fields
 
-        public static readonly new OracleLob Null = new OracleLob();
+        public static new readonly OracleLob Null = new OracleLob();
 
         internal OracleConnection connection;
         bool isBatched;

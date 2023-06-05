@@ -692,7 +692,13 @@ namespace System.Web
         // can not be processed (load, no resources, or
         // appdomain unload).
         //
-        static internal void FinishUnavailable(HttpWorkerRequest wr)
+        internal
+        //
+        // This is called from the QueueManager if a request
+        // can not be processed (load, no resources, or
+        // appdomain unload).
+        //
+        static void FinishUnavailable(HttpWorkerRequest wr)
         {
             wr.SendStatus(503, "Service unavailable");
             wr.SendUnknownResponseHeader("Connection", "close");
@@ -716,7 +722,7 @@ namespace System.Web
             return null;
         }
 
-        static internal void WritePreservationFile(Assembly asm, string genericNameBase)
+        internal static void WritePreservationFile(Assembly asm, string genericNameBase)
         {
             if (asm == null)
                 throw new ArgumentNullException("asm");

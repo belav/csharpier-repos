@@ -50,8 +50,8 @@ namespace System.Security.Cryptography
     [ComVisible(true)]
     public partial class CryptoConfig
     {
-        static private Dictionary<string, string> unresolved_algorithms;
-        static private Dictionary<string, string> oids;
+        private static Dictionary<string, string> unresolved_algorithms;
+        private static Dictionary<string, string> oids;
 
         private const string defaultNamespace = "System.Security.Cryptography.";
         static Type defaultSHA1 = typeof(SHA1CryptoServiceProvider);

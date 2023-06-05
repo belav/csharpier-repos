@@ -69,7 +69,7 @@ namespace System
         //           MUST NOT be used unless all input indexes are are verified and trusted.
         //
 
-        internal unsafe static bool IsValid(
+        internal static unsafe bool IsValid(
             char* name,
             ushort pos,
             ref int returnedEnd,
@@ -155,7 +155,7 @@ namespace System
         // There are pretty much no restrictions and we effectively return the end of the
         // domain name.
         //
-        internal unsafe static bool IsValidByIri(
+        internal static unsafe bool IsValidByIri(
             char* name,
             ushort pos,
             ref int returnedEnd,
@@ -277,7 +277,7 @@ namespace System
         //
         // Will convert a host name into its idn equivalent + tell you if it had a valid idn label
         //
-        internal unsafe static string IdnEquivalent(
+        internal static unsafe string IdnEquivalent(
             char* hostname,
             int start,
             int end,
@@ -377,7 +377,7 @@ namespace System
         // Will convert a host name into its idn equivalent
         //
 
-        internal unsafe static string IdnEquivalent(
+        internal static unsafe string IdnEquivalent(
             char* hostname,
             int start,
             int end,
@@ -429,7 +429,7 @@ namespace System
             }
         }
 
-        private unsafe static bool IsIdnAce(string input, int index)
+        private static unsafe bool IsIdnAce(string input, int index)
         {
             if (
                 (input[index] == 'x')
@@ -442,7 +442,7 @@ namespace System
                 return false;
         }
 
-        private unsafe static bool IsIdnAce(char* input, int index)
+        private static unsafe bool IsIdnAce(char* input, int index)
         {
             if (
                 (input[index] == 'x')
@@ -458,7 +458,7 @@ namespace System
         //
         // Will convert a host name into its unicode equivalent expanding any existing idn names present
         //
-        internal unsafe static string UnicodeEquivalent(
+        internal static unsafe string UnicodeEquivalent(
             string idnHost,
             char* hostname,
             int start,
@@ -481,7 +481,7 @@ namespace System
             return UnicodeEquivalent(hostname, start, end, ref dummy, ref dummy);
         }
 
-        internal unsafe static string UnicodeEquivalent(
+        internal static unsafe string UnicodeEquivalent(
             char* hostname,
             int start,
             int end,

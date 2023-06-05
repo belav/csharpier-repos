@@ -65,25 +65,25 @@ namespace System
         internal const uint ERROR_NO_MORE_ITEMS = 259;
 
         [DllImport("api-ms-win-core-timezone-l1-1-0.dll")]
-        internal extern static uint EnumDynamicTimeZoneInformation(
+        internal static extern uint EnumDynamicTimeZoneInformation(
             uint dwIndex,
             out DYNAMIC_TIME_ZONE_INFORMATION lpTimeZoneInformation
         );
 
         [DllImport("api-ms-win-core-timezone-l1-1-0.dll")]
-        internal extern static uint GetDynamicTimeZoneInformation(
+        internal static extern uint GetDynamicTimeZoneInformation(
             out DYNAMIC_TIME_ZONE_INFORMATION pTimeZoneInformation
         );
 
         [DllImport("api-ms-win-core-timezone-l1-1-0.dll")]
-        internal extern static uint GetDynamicTimeZoneInformationEffectiveYears(
+        internal static extern uint GetDynamicTimeZoneInformationEffectiveYears(
             ref DYNAMIC_TIME_ZONE_INFORMATION lpTimeZoneInformation,
             out uint FirstYear,
             out uint LastYear
         );
 
         [DllImport("api-ms-win-core-timezone-l1-1-0.dll")]
-        internal extern static bool GetTimeZoneInformationForYear(
+        internal static extern bool GetTimeZoneInformationForYear(
             ushort wYear,
             ref DYNAMIC_TIME_ZONE_INFORMATION pdtzi,
             out TIME_ZONE_INFORMATION ptzi

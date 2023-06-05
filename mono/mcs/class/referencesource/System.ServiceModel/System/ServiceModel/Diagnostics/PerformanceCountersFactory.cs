@@ -11,7 +11,7 @@ namespace System.ServiceModel.Diagnostics
     {
         private static bool categoriesExist = false;
 
-        static internal ServicePerformanceCountersBase CreateServiceCounters(
+        internal static ServicePerformanceCountersBase CreateServiceCounters(
             ServiceHostBase serviceHost
         )
         {
@@ -57,7 +57,7 @@ namespace System.ServiceModel.Diagnostics
             return new ServicePerformanceCounters(serviceHost);
         }
 
-        static internal EndpointPerformanceCountersBase CreateEndpointCounters(
+        internal static EndpointPerformanceCountersBase CreateEndpointCounters(
             string service,
             string contract,
             string uri
@@ -99,7 +99,7 @@ namespace System.ServiceModel.Diagnostics
             return new EndpointPerformanceCounters(service, contract, uri);
         }
 
-        static internal OperationPerformanceCountersBase CreateOperationCounters(
+        internal static OperationPerformanceCountersBase CreateOperationCounters(
             string service,
             string contract,
             string operationName,

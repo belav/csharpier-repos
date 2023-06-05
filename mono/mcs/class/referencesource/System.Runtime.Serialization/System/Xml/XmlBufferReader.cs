@@ -43,7 +43,7 @@ namespace System.Xml
             this.buffer = buffer;
         }
 
-        static public XmlBufferReader Empty
+        public static XmlBufferReader Empty
         {
             get { return empty; }
         }
@@ -422,7 +422,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public float ReadSingle()
+        public unsafe float ReadSingle()
         {
             int offset;
             byte[] buffer = GetBuffer(ValueHandleLength.Single, out offset);
@@ -442,7 +442,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public double ReadDouble()
+        public unsafe double ReadDouble()
         {
             int offset;
             byte[] buffer = GetBuffer(ValueHandleLength.Double, out offset);
@@ -466,7 +466,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public decimal ReadDecimal()
+        public unsafe decimal ReadDecimal()
         {
             const int SignMask = unchecked((int)0x80000000);
             const int ScaleMask = 0x00FF0000;
@@ -616,7 +616,7 @@ namespace System.Xml
             Critical = "Contains unsafe code. Caller needs to validate arguments."
         )]
         [SecurityCritical]
-        unsafe public void UnsafeReadArray(byte* dst, byte* dstMax)
+        public unsafe void UnsafeReadArray(byte* dst, byte* dstMax)
         {
             UnsafeReadArray(dst, (int)(dstMax - dst));
         }
@@ -1053,7 +1053,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public bool Equals2(int offset1, int length1, string s2)
+        public unsafe bool Equals2(int offset1, int length1, string s2)
         {
             int byteLength = length1;
             int charLength = s2.Length;
@@ -1179,7 +1179,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public float GetSingle(int offset)
+        public unsafe float GetSingle(int offset)
         {
             byte[] buffer = this.buffer;
             float value;
@@ -1197,7 +1197,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public double GetDouble(int offset)
+        public unsafe double GetDouble(int offset)
         {
             byte[] buffer = this.buffer;
             double value;

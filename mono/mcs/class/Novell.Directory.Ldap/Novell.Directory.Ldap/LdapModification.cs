@@ -78,16 +78,18 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     public class LdapModification
     {
+        public
         /// <summary> Returns the attribute to modify, with any existing values.
         ///
         /// </summary>
         /// <returns> The attribute to modify.
         /// </returns>
-        virtual public LdapAttribute Attribute
+        virtual LdapAttribute Attribute
         {
             get { return attr; }
         }
 
+        public
         /// <summary> Returns the type of modification specified by this object.
         ///
         /// The type is one of the following:
@@ -100,7 +102,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> The type of modification specified by this object.
         /// </returns>
-        virtual public int Op
+        virtual int Op
         {
             get { return op; }
         }

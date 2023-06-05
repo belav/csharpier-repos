@@ -221,17 +221,17 @@ namespace System.Reflection.Tests
             set { }
         }
 
-        protected new internal string ProIntprop1
+        protected internal new string ProIntprop1
         {
             get { return ""; }
             set { }
         }
-        protected new internal virtual string ProIntprop2
+        protected internal new virtual string ProIntprop2
         {
             get { return ""; }
             set { }
         }
-        protected new internal static string ProIntprop3
+        protected internal static new string ProIntprop3
         {
             get { return ""; }
             set { }
@@ -329,9 +329,9 @@ namespace System.Reflection.Tests
         public static new string[] InheritedButHiddenPropertyNames = new string[] { };
         public static new string[] PublicPropertyNames = new string[] { "prop1" };
 
-        public override abstract string prop1 { get; set; }
+        public abstract override string prop1 { get; set; }
         internal abstract override string prop2 { get; set; }
         protected abstract override string prop3 { get; set; }
-        protected internal override abstract string prop4 { get; set; }
+        protected internal abstract override string prop4 { get; set; }
     }
 }

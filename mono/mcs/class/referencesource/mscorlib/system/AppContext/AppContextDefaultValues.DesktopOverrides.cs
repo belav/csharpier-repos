@@ -129,7 +129,7 @@ namespace System
             }
         }
 
-        private volatile static bool s_errorReadingRegistry;
+        private static volatile bool s_errorReadingRegistry;
 
         [SecuritySafeCritical]
         private static string GetSwitchValueFromRegistry(string switchName)

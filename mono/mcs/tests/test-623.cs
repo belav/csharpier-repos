@@ -13,7 +13,7 @@ abstract class X : I
 
 class Y : X
 {
-    override public void a()
+    public override void a()
     {
         System.Console.WriteLine("Hello!");
         return;

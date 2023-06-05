@@ -18,7 +18,7 @@ namespace System.Configuration
     [ConfigurationCollection(typeof(ProviderSettings))]
     public sealed class ProviderSettingsCollection : ConfigurationElementCollection
     {
-        static private ConfigurationPropertyCollection _properties;
+        private static ConfigurationPropertyCollection _properties;
 
         static ProviderSettingsCollection()
         {

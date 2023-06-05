@@ -21,28 +21,42 @@ namespace System.Workflow.Runtime.Hosting
     {
         /// <summary> Saves the state of a workflow instance. </summary>
         /// <param name="state"> The workflow instance state to save </param>
-        internal protected abstract void SaveWorkflowInstanceState(
-            Activity rootActivity,
-            bool unlock
-        );
+        protected
+        /// <summary> Saves the state of a workflow instance. </summary>
+        /// <param name="state"> The workflow instance state to save </param>
+        internal abstract void SaveWorkflowInstanceState(Activity rootActivity, bool unlock);
 
         /// <summary></summary>
         /// <param name="state"></param>
-        internal protected abstract void UnlockWorkflowInstanceState(Activity rootActivity);
+        protected
+        /// <summary></summary>
+        /// <param name="state"></param>
+        internal abstract void UnlockWorkflowInstanceState(Activity rootActivity);
 
         /// <summary> Loads the state of a workflow instance. </summary>
         /// <param name="instanceId"> The unique ID of the instance to load </param>
         /// <returns> The workflow instance state</returns>
-        internal protected abstract Activity LoadWorkflowInstanceState(Guid instanceId);
+        protected
+        /// <summary> Loads the state of a workflow instance. </summary>
+        /// <param name="instanceId"> The unique ID of the instance to load </param>
+        /// <returns> The workflow instance state</returns>
+        internal abstract Activity LoadWorkflowInstanceState(Guid instanceId);
 
         /// <summary> Saves the state of a completed scope. </summary>
         /// <param name="completedScopeState"> The completed scope to save </param>
-        internal protected abstract void SaveCompletedContextActivity(Activity activity);
+        protected
+        /// <summary> Saves the state of a completed scope. </summary>
+        /// <param name="completedScopeState"> The completed scope to save </param>
+        internal abstract void SaveCompletedContextActivity(Activity activity);
 
         /// <summary> Loads the state of a completed scope </summary>
         /// <param name="scopeId"> The unique identifier of the completed scope </param>
         /// <returns> The completed scope or null </returns>
-        internal protected abstract Activity LoadCompletedContextActivity(
+        protected
+        /// <summary> Loads the state of a completed scope </summary>
+        /// <param name="scopeId"> The unique identifier of the completed scope </param>
+        /// <returns> The completed scope or null </returns>
+        internal abstract Activity LoadCompletedContextActivity(
             Guid scopeId,
             Activity outerActivity
         );
@@ -50,9 +64,13 @@ namespace System.Workflow.Runtime.Hosting
         /// <summary></summary>
         /// <param name="activity"></param>
         /// <returns>The value of the "UnloadOnIdle" flag</returns>
-        internal protected abstract bool UnloadOnIdle(Activity activity);
+        protected
+        /// <summary></summary>
+        /// <param name="activity"></param>
+        /// <returns>The value of the "UnloadOnIdle" flag</returns>
+        internal abstract bool UnloadOnIdle(Activity activity);
 
-        static protected byte[] GetDefaultSerializedForm(Activity activity)
+        protected static byte[] GetDefaultSerializedForm(Activity activity)
         {
             DateTime startTime = DateTime.Now;
             Byte[] result;
@@ -96,7 +114,7 @@ namespace System.Workflow.Runtime.Hosting
             return result;
         }
 
-        static protected Activity RestoreFromDefaultSerializedForm(
+        protected static Activity RestoreFromDefaultSerializedForm(
             Byte[] activityBytes,
             Activity outerActivity
         )
@@ -125,17 +143,17 @@ namespace System.Workflow.Runtime.Hosting
             return state;
         }
 
-        static protected internal bool GetIsBlocked(Activity rootActivity)
+        protected internal static bool GetIsBlocked(Activity rootActivity)
         {
             return (bool)rootActivity.GetValue(WorkflowExecutor.IsBlockedProperty);
         }
 
-        static protected internal string GetSuspendOrTerminateInfo(Activity rootActivity)
+        protected internal static string GetSuspendOrTerminateInfo(Activity rootActivity)
         {
             return (string)rootActivity.GetValue(WorkflowExecutor.SuspendOrTerminateInfoProperty);
         }
 
-        static protected internal WorkflowStatus GetWorkflowStatus(Activity rootActivity)
+        protected internal static WorkflowStatus GetWorkflowStatus(Activity rootActivity)
         {
             return (WorkflowStatus)rootActivity.GetValue(WorkflowExecutor.WorkflowStatusProperty);
         }

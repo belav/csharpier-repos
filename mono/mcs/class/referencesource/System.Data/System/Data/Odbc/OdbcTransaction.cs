@@ -32,17 +32,17 @@ namespace System.Data.Odbc
             _handle = handle;
         }
 
-        new public OdbcConnection Connection
+        public new OdbcConnection Connection
         { // MDAC 66655
             get { return _connection; }
         }
 
-        override protected DbConnection DbConnection
+        protected override DbConnection DbConnection
         { // MDAC 66655
             get { return Connection; }
         }
 
-        override public IsolationLevel IsolationLevel
+        public override IsolationLevel IsolationLevel
         {
             get
             {
@@ -88,7 +88,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override public void Commit()
+        public override void Commit()
         {
             OdbcConnection.ExecutePermission.Demand(); // MDAC 81476
 
@@ -164,7 +164,7 @@ namespace System.Data.Odbc
             base.Dispose(disposing);
         }
 
-        override public void Rollback()
+        public override void Rollback()
         {
             OdbcConnection connection = _connection;
             if (null == connection)

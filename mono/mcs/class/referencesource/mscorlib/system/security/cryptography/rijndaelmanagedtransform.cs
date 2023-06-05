@@ -1219,7 +1219,7 @@ namespace System.Security.Cryptography
         //
 
         [System.Security.SecurityCritical] // auto-generated
-        unsafe private void Dec(
+        private unsafe void Dec(
             int* decryptindex,
             int* decryptKeyExpansion,
             int* iT,

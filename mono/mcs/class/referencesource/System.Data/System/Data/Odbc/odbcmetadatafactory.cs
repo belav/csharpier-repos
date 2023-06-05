@@ -41,7 +41,7 @@ namespace System.Data.Odbc
 
         private readonly SchemaFunctionName[] _schemaMapping;
 
-        static internal readonly char[] KeywordSeparatorChar = new char[1] { ',' };
+        internal static readonly char[] KeywordSeparatorChar = new char[1] { ',' };
 
         internal OdbcMetaDataFactory(
             Stream XMLStream,

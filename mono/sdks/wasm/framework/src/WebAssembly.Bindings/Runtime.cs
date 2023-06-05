@@ -726,7 +726,7 @@ namespace WebAssembly
         public static void StopProfile() { }
 
         // Called by the AOT profiler to save profile data into Module.aot_profile_data
-        internal unsafe static void DumpAotProfileData(ref byte buf, int len, string s)
+        internal static unsafe void DumpAotProfileData(ref byte buf, int len, string s)
         {
             var arr = new byte[len];
             fixed (void* p = &buf)

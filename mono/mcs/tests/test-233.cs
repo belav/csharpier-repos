@@ -501,7 +501,7 @@ class Tests
 
 public class TestDriver
 {
-    static public int RunTests(Type type, string[] args)
+    public static int RunTests(Type type, string[] args)
     {
         int failed = 0,
             ran = 0;
@@ -588,7 +588,7 @@ public class TestDriver
         return failed;
     }
 
-    static public int RunTests(Type type)
+    public static int RunTests(Type type)
     {
         return RunTests(type, null);
     }

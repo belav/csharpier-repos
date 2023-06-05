@@ -35,7 +35,7 @@ namespace System.Threading
 
         [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        static public void Undo(Object switcherObject)
+        public static void Undo(Object switcherObject)
         {
             if (switcherObject == null)
                 return;
@@ -103,7 +103,7 @@ namespace System.Threading
         }
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             HostExecutionContextManager.ReleaseHostSecurityContext(this.handle);
             return true;
@@ -132,17 +132,17 @@ namespace System.Threading
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private extern bool HostSecurityManagerPresent();
+        private static extern bool HostSecurityManagerPresent();
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern int ReleaseHostSecurityContext(IntPtr context);
+        internal static extern int ReleaseHostSecurityContext(IntPtr context);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern int CloneHostSecurityContext(
+        internal static extern int CloneHostSecurityContext(
             SafeHandle context,
             SafeHandle clonedContext
         );
@@ -150,13 +150,13 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private extern int CaptureHostSecurityContext(SafeHandle capturedContext);
+        private static extern int CaptureHostSecurityContext(SafeHandle capturedContext);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private extern int SetHostSecurityContext(
+        private static extern int SetHostSecurityContext(
             SafeHandle context,
             bool fReturnPrevious,
             SafeHandle prevContext

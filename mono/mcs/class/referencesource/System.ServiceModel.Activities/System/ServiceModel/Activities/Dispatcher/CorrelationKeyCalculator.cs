@@ -396,7 +396,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         abstract class CorrelationCacheKey
         {
-            static internal CorrelationCacheKey CreateKey(Dictionary<string, string> keys)
+            internal static CorrelationCacheKey CreateKey(Dictionary<string, string> keys)
             {
                 if (keys.Count == 1)
                 {

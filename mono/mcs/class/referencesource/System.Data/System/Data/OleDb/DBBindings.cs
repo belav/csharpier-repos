@@ -20,7 +20,7 @@ namespace System.Data.OleDb
     using System.Text;
     using System.Threading;
 
-    sealed internal class Bindings
+    internal sealed class Bindings
     {
         private readonly tagDBPARAMBINDINFO[] _bindInfo;
         private readonly tagDBBINDING[] _dbbindings;

@@ -35,7 +35,7 @@ namespace System.Data.Entity.Design.Common
             return message;
         }
 
-        static internal T CheckArgumentNull<T>(T value, string parameterName)
+        internal static T CheckArgumentNull<T>(T value, string parameterName)
             where T : class
         {
             if (null == value)
@@ -45,7 +45,7 @@ namespace System.Data.Entity.Design.Common
             return value;
         }
 
-        static internal void CheckStringArgument(string value, string parameterName)
+        internal static void CheckStringArgument(string value, string parameterName)
         {
             // Throw ArgumentNullException when string is null
             CheckArgumentNull(value, parameterName);
@@ -57,7 +57,7 @@ namespace System.Data.Entity.Design.Common
             }
         }
 
-        static internal LanguageOption CheckLanguageOptionArgument(
+        internal static LanguageOption CheckLanguageOptionArgument(
             LanguageOption value,
             string paramName
         )
@@ -71,7 +71,7 @@ namespace System.Data.Entity.Design.Common
             throw ArgumentOutOfRange(paramName);
         }
 
-        static internal ArgumentException SingleStoreEntityContainerExpected(string parameterName)
+        internal static ArgumentException SingleStoreEntityContainerExpected(string parameterName)
         {
             ArgumentException e = new ArgumentException(
                 Strings.SingleStoreEntityContainerExpected,
@@ -80,7 +80,7 @@ namespace System.Data.Entity.Design.Common
             return e;
         }
 
-        static internal ArgumentException InvalidStoreEntityContainer(
+        internal static ArgumentException InvalidStoreEntityContainer(
             string entityContainerName,
             string parameterName
         )
@@ -92,7 +92,7 @@ namespace System.Data.Entity.Design.Common
             return e;
         }
 
-        static internal ArgumentException InvalidStringArgument(string parameterName)
+        internal static ArgumentException InvalidStringArgument(string parameterName)
         {
             ArgumentException e = new ArgumentException(
                 Strings.InvalidStringArgument(parameterName)
@@ -100,44 +100,46 @@ namespace System.Data.Entity.Design.Common
             return e;
         }
 
-        static internal ArgumentException EdmReservedNamespace(string namespaceName)
+        internal static ArgumentException EdmReservedNamespace(string namespaceName)
         {
             ArgumentException e = new ArgumentException(Strings.ReservedNamespace(namespaceName));
             return e;
         }
 
-        static internal ArgumentNullException ArgumentNull(string parameter)
+        internal static ArgumentNullException ArgumentNull(string parameter)
         {
             ArgumentNullException e = new ArgumentNullException(parameter);
             return e;
         }
 
-        static internal ArgumentException Argument(string parameter)
+        internal static ArgumentException Argument(string parameter)
         {
             ArgumentException e = new ArgumentException(parameter);
             return e;
         }
 
-        static internal ArgumentException Argument(string message, Exception inner)
+        internal static ArgumentException Argument(string message, Exception inner)
         {
             ArgumentException e = new ArgumentException(message, inner);
             return e;
         }
 
-        static internal InvalidOperationException InvalidOperation(string error)
+        internal static InvalidOperationException InvalidOperation(string error)
         {
             InvalidOperationException e = new InvalidOperationException(error);
             return e;
         }
 
         // SSDL Generator
-        static internal StrongTypingException StrongTyping(string error, Exception innerException)
+        internal
+        // SSDL Generator
+        static StrongTypingException StrongTyping(string error, Exception innerException)
         {
             StrongTypingException e = new StrongTypingException(error, innerException);
             return e;
         }
 
-        static internal StrongTypingException StonglyTypedAccessToNullValue(
+        internal static StrongTypingException StonglyTypedAccessToNullValue(
             string columnName,
             string tableName,
             Exception innerException
@@ -149,34 +151,34 @@ namespace System.Data.Entity.Design.Common
             );
         }
 
-        static internal InvalidOperationException EntityStoreGeneratorSchemaNotLoaded()
+        internal static InvalidOperationException EntityStoreGeneratorSchemaNotLoaded()
         {
             return InvalidOperation(Strings.EntityStoreGeneratorSchemaNotLoaded);
         }
 
-        static internal InvalidOperationException EntityModelGeneratorSchemaNotLoaded()
+        internal static InvalidOperationException EntityModelGeneratorSchemaNotLoaded()
         {
             return InvalidOperation(Strings.EntityModelGeneratorSchemaNotLoaded);
         }
 
-        static internal InvalidOperationException NonSerializableType(BuiltInTypeKind kind)
+        internal static InvalidOperationException NonSerializableType(BuiltInTypeKind kind)
         {
             return InvalidOperation(Strings.Serialization_UnknownGlobalItem(kind));
         }
 
-        static internal InvalidOperationException MissingGenerationPatternForType(
+        internal static InvalidOperationException MissingGenerationPatternForType(
             BuiltInTypeKind kind
         )
         {
             return InvalidOperation(Strings.ModelGeneration_UnGeneratableType(kind));
         }
 
-        static internal ArgumentException InvalidNamespaceNameArgument(string namespaceName)
+        internal static ArgumentException InvalidNamespaceNameArgument(string namespaceName)
         {
             return new ArgumentException(Strings.InvalidNamespaceNameArgument(namespaceName));
         }
 
-        static internal ArgumentException InvalidEntityContainerNameArgument(
+        internal static ArgumentException InvalidEntityContainerNameArgument(
             string entityContainerName
         )
         {
@@ -185,7 +187,7 @@ namespace System.Data.Entity.Design.Common
             );
         }
 
-        static internal ArgumentException DuplicateEntityContainerName(
+        internal static ArgumentException DuplicateEntityContainerName(
             string newModelEntityContainerName,
             string storeEntityContainer
         )
@@ -198,12 +200,12 @@ namespace System.Data.Entity.Design.Common
             );
         }
 
-        static internal ProviderIncompatibleException ProviderIncompatible(string message)
+        internal static ProviderIncompatibleException ProviderIncompatible(string message)
         {
             return new ProviderIncompatibleException(message);
         }
 
-        static internal ProviderIncompatibleException ProviderIncompatible(
+        internal static ProviderIncompatibleException ProviderIncompatible(
             string message,
             Exception inner
         )
@@ -211,7 +213,7 @@ namespace System.Data.Entity.Design.Common
             return new ProviderIncompatibleException(message, inner);
         }
 
-        static internal ArgumentOutOfRangeException ArgumentOutOfRange(string paramName)
+        internal static ArgumentOutOfRangeException ArgumentOutOfRange(string paramName)
         {
             return new ArgumentOutOfRangeException(paramName);
         }

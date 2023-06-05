@@ -12,7 +12,7 @@ namespace System.Runtime.DurableInstancing
     [DataContract]
     public sealed class InstanceValue
     {
-        readonly static InstanceValue deletedValue = new InstanceValue();
+        static readonly InstanceValue deletedValue = new InstanceValue();
 
         public InstanceValue(object value)
             : this(value, InstanceValueOptions.None) { }

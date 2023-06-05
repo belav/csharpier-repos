@@ -23,7 +23,7 @@ namespace System.Web
 
         private StringResourceManager() { }
 
-        internal unsafe static string ResourceToString(IntPtr pv, int offset, int size)
+        internal static unsafe string ResourceToString(IntPtr pv, int offset, int size)
         {
             return new String((sbyte*)pv, offset, size, Encoding.UTF8);
         }

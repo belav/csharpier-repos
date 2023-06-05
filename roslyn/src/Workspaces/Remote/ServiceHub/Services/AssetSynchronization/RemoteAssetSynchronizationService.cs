@@ -120,7 +120,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     return;
 
-                    async static Task<SourceText?> TryGetSourceTextAsync(
+                    static async Task<SourceText?> TryGetSourceTextAsync(
                         RemoteWorkspaceManager workspaceManager,
                         Workspace workspace,
                         DocumentId documentId,

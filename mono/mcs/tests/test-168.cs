@@ -2,7 +2,7 @@ using System;
 
 struct X
 {
-    static public implicit operator string(X x)
+    public static implicit operator string(X x)
     {
         return "x";
     }

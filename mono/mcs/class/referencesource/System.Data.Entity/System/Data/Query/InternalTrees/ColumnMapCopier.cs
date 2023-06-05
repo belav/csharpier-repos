@@ -43,12 +43,13 @@ namespace System.Data.Query.InternalTrees
     /// </summary>
     internal class ColumnMapCopier : ColumnMapVisitorWithResults<ColumnMap, VarMap>
     {
+        private
         #region Constructors
 
         /// <summary>
         /// Singleton instance for the "public" methods to use;
         /// </summary>
-        static private ColumnMapCopier Instance = new ColumnMapCopier();
+        static ColumnMapCopier Instance = new ColumnMapCopier();
 
         /// <summary>
         /// Constructor; no one should use this.

@@ -147,7 +147,7 @@ namespace System.Diagnostics.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        async public Task TestAsyncOutputStream_CancelOutputRead()
+        public async Task TestAsyncOutputStream_CancelOutputRead()
         {
             // This test might have some false negatives due to possible race condition in System.Diagnostics.AsyncStreamReader.ReadBufferAsync
             // There is not way to know if parent process has processed async output from child process
@@ -228,7 +228,7 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        async private Task<int> TestAsyncOutputStream_CancelOutputRead_RemotelyInvokable(
+        private async Task<int> TestAsyncOutputStream_CancelOutputRead_RemotelyInvokable(
             string pipesHandle
         )
         {
@@ -272,7 +272,7 @@ namespace System.Diagnostics.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        async public Task TestAsyncOutputStream_BeginCancelBeginOutputRead()
+        public async Task TestAsyncOutputStream_BeginCancelBeginOutputRead()
         {
             using (
                 AnonymousPipeServerStream pipeWrite = new AnonymousPipeServerStream(
@@ -382,7 +382,7 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        async private Task<int> TestAsyncOutputStream_BeginCancelBeinOutputRead_RemotelyInvokable(
+        private async Task<int> TestAsyncOutputStream_BeginCancelBeinOutputRead_RemotelyInvokable(
             string pipesHandle
         )
         {
@@ -435,7 +435,7 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        async private Task<bool> WaitPipeSignal(PipeStream pipe, int millisecond)
+        private async Task<bool> WaitPipeSignal(PipeStream pipe, int millisecond)
         {
             using (var cts = new CancellationTokenSource(millisecond))
             {

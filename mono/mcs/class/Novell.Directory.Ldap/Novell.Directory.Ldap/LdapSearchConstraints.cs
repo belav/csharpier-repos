@@ -53,6 +53,7 @@ namespace Novell.Directory.Ldap
             dereference = DEREF_NEVER;
         }
 
+        public
         /// <summary> Returns the number of results to block on during receipt of search
         /// results.
         ///
@@ -81,7 +82,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <seealso cref="BatchSize">
         /// </seealso>
-        virtual public int BatchSize
+        virtual int BatchSize
         {
             get { return batchSize; }
             set
@@ -91,6 +92,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Specifies when aliases should be dereferenced.
         ///
         /// Returns one of the following:
@@ -128,7 +130,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <seealso cref="Dereference">
         /// </seealso>
-        virtual public int Dereference
+        virtual int Dereference
         {
             get { return dereference; }
             set
@@ -138,6 +140,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the maximum number of search results to be returned for
         /// a search operation. A value of 0 means no limit.  Default: 1000
         /// The search operation will be terminated with an
@@ -166,7 +169,7 @@ namespace Novell.Directory.Ldap
         /// </seealso>
         /// <seealso cref="LdapException.SIZE_LIMIT_EXCEEDED">
         /// </seealso>
-        virtual public int MaxResults
+        virtual int MaxResults
         {
             get { return maxResults; }
             set
@@ -176,6 +179,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the maximum number of seconds that the server waits when
         /// returning search results.
         /// The search operation will be terminated with an
@@ -207,7 +211,7 @@ namespace Novell.Directory.Ldap
         /// </seealso>
         /// <seealso cref="LdapException.TIME_LIMIT_EXCEEDED">
         /// </seealso>
-        virtual public int ServerTimeLimit
+        virtual int ServerTimeLimit
         {
             get { return serverTimeLimit; }
             set
@@ -221,9 +225,9 @@ namespace Novell.Directory.Ldap
         private int serverTimeLimit = 0;
         private int maxResults = 1000;
         private int batchSize = 1;
-        new private static System.Object nameLock; // protect agentNum
+        private static new System.Object nameLock; // protect agentNum
         private static int lSConsNum = 0; // Debug, LdapConnection number
-        new private System.String name; // String name for debug
+        private new System.String name; // String name for debug
 
         /// <summary> Indicates that aliases are never dereferenced.
         ///

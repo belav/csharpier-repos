@@ -36,7 +36,7 @@ struct Struct2
 
 public class C
 {
-    unsafe static int Test()
+    static unsafe int Test()
     {
         TestNew tt = new TestNew();
         tt.SetTest();

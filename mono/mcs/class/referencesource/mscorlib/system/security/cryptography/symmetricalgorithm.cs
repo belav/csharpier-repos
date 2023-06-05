@@ -283,7 +283,7 @@ namespace System.Security.Cryptography
             return false;
         }
 
-        static public SymmetricAlgorithm Create()
+        public static SymmetricAlgorithm Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.RijndaelManaged();
@@ -294,7 +294,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        static public SymmetricAlgorithm Create(String algName)
+        public static SymmetricAlgorithm Create(String algName)
         {
             return (SymmetricAlgorithm)CryptoConfig.CreateFromName(algName);
         }

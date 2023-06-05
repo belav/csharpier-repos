@@ -252,6 +252,7 @@ namespace System.Data.ProviderBase
             get { return _isInStasis; }
         }
 
+        protected
         /// <summary>
         /// Get boolean that specifies whether an enlisted transaction can be unbound from
         /// the connection when that transaction completes.
@@ -259,13 +260,14 @@ namespace System.Data.ProviderBase
         /// <value>
         /// True if the enlisted transaction can be unbound on transaction completion; otherwise false.
         /// </value>
-        virtual protected bool UnbindOnTransactionCompletion
+        virtual bool UnbindOnTransactionCompletion
         {
             get { return true; }
         }
 
+        protected internal
         // Is this a connection that must be put in stasis (or is already in stasis) pending the end of it's transaction?
-        virtual protected internal bool IsNonPoolableTransactionRoot
+        virtual bool IsNonPoolableTransactionRoot
         {
             get
             {
@@ -273,7 +275,7 @@ namespace System.Data.ProviderBase
             }
         }
 
-        virtual internal bool IsTransactionRoot
+        internal virtual bool IsTransactionRoot
         {
             get
             {
@@ -353,7 +355,7 @@ namespace System.Data.ProviderBase
             get { return _performanceCounters; }
         }
 
-        virtual protected bool ReadyToPrepareTransaction
+        protected virtual bool ReadyToPrepareTransaction
         {
             get { return true; }
         }
@@ -363,10 +365,11 @@ namespace System.Data.ProviderBase
             get { return _referenceCollection; }
         }
 
-        abstract public string ServerVersion { get; }
+        public abstract string ServerVersion { get; }
 
+        public
         // this should be abstract but untill it is added to all the providers virtual will have to do Microsoft
-        virtual public string ServerVersionNormalized
+        virtual string ServerVersionNormalized
         {
             get { throw ADP.NotSupported(); }
         }
@@ -381,7 +384,7 @@ namespace System.Data.ProviderBase
             get { return _state; }
         }
 
-        abstract protected void Activate(SysTx.Transaction transaction);
+        protected abstract void Activate(SysTx.Transaction transaction);
 
         internal void ActivateConnection(SysTx.Transaction transaction)
         {
@@ -419,9 +422,9 @@ namespace System.Data.ProviderBase
             _referenceCollection.Add(value, tag);
         }
 
-        abstract public DbTransaction BeginTransaction(IsolationLevel il);
+        public abstract DbTransaction BeginTransaction(IsolationLevel il);
 
-        virtual public void ChangeDatabase(string value)
+        public virtual void ChangeDatabase(string value)
         {
             throw ADP.MethodNotImplemented("ChangeDatabase");
         }
@@ -563,34 +566,34 @@ namespace System.Data.ProviderBase
             }
         }
 
-        virtual internal void PrepareForReplaceConnection()
+        internal virtual void PrepareForReplaceConnection()
         {
             // By default, there is no preperation required
         }
 
-        virtual protected void PrepareForCloseConnection()
+        protected virtual void PrepareForCloseConnection()
         {
             // By default, there is no preperation required
         }
 
-        virtual protected object ObtainAdditionalLocksForClose()
+        protected virtual object ObtainAdditionalLocksForClose()
         {
             return null; // no additional locks in default implementation
         }
 
-        virtual protected void ReleaseAdditionalLocksForClose(object lockToken)
+        protected virtual void ReleaseAdditionalLocksForClose(object lockToken)
         {
             // no additional locks in default implementation
         }
 
-        virtual protected DbReferenceCollection CreateReferenceCollection()
+        protected virtual DbReferenceCollection CreateReferenceCollection()
         {
             throw ADP.InternalError(
                 ADP.InternalErrorCode.AttemptingToConstructReferenceCollectionOnStaticObject
             );
         }
 
-        abstract protected void Deactivate();
+        protected abstract void Deactivate();
 
         internal void DeactivateConnection()
         {
@@ -627,7 +630,7 @@ namespace System.Data.ProviderBase
             Deactivate();
         }
 
-        virtual internal void DelegatedTransactionEnded()
+        internal virtual void DelegatedTransactionEnded()
         {
             // Called by System.Transactions when the delegated transaction has
             // completed.  We need to make closed connections that are in stasis
@@ -725,9 +728,9 @@ namespace System.Data.ProviderBase
             );
         }
 
-        abstract public void EnlistTransaction(SysTx.Transaction transaction);
+        public abstract void EnlistTransaction(SysTx.Transaction transaction);
 
-        virtual protected internal DataTable GetSchema(
+        protected internal virtual DataTable GetSchema(
             DbConnectionFactory factory,
             DbConnectionPoolGroup poolGroup,
             DbConnection outerConnection,
@@ -963,7 +966,11 @@ namespace System.Data.ProviderBase
         // Cleanup connection's transaction-specific structures (currently used by Delegated transaction).
         //  This is a separate method because cleanup can be triggered in multiple ways for a delegated
         //  transaction.
-        virtual protected void CleanupTransactionOnCompletion(SysTx.Transaction transaction) { }
+        protected
+        // Cleanup connection's transaction-specific structures (currently used by Delegated transaction).
+        //  This is a separate method because cleanup can be triggered in multiple ways for a delegated
+        //  transaction.
+        virtual void CleanupTransactionOnCompletion(SysTx.Transaction transaction) { }
 
         internal void DetachCurrentTransactionIfEnded()
         {

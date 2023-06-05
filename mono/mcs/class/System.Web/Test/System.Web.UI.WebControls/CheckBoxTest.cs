@@ -102,7 +102,7 @@ namespace MonoTests.System.Web.UI.WebControls
             return writer.InnerWriter.ToString();
         }
 
-        override protected void AddAttributesToRender(HtmlTextWriter writer)
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
         {
             Reset();
             base.AddAttributesToRender(writer);

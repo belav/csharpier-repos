@@ -209,7 +209,13 @@ namespace IBM.Data.DB2
         /// </summary>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        static public DB2ConnectionPool FindConnectionPool(string connectionString)
+        public
+        /// <summary>
+        /// Find a specific connection pool
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        static DB2ConnectionPool FindConnectionPool(string connectionString)
         {
             return (DB2ConnectionPool)DB2Environment.Instance.connectionPools[connectionString];
         }
@@ -219,7 +225,13 @@ namespace IBM.Data.DB2
         /// </summary>
         /// <param name="connectionSettings"></param>
         /// <returns></returns>
-        static public DB2ConnectionPool GetConnectionPool(DB2ConnectionSettings connectionSettings)
+        public
+        /// <summary>
+        /// Get a connection pool. If it doesn't exist yet, create it
+        /// </summary>
+        /// <param name="connectionSettings"></param>
+        /// <returns></returns>
+        static DB2ConnectionPool GetConnectionPool(DB2ConnectionSettings connectionSettings)
         {
             DB2Environment environment = DB2Environment.Instance;
 

@@ -46,52 +46,52 @@ namespace Mono.Btls
             }
         }
 
-        new internal BoringX509LookupHandle Handle
+        internal new BoringX509LookupHandle Handle
         {
             get { return (BoringX509LookupHandle)base.Handle; }
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_lookup_new(IntPtr store, MonoBtlsX509LookupType type);
+        static extern IntPtr mono_btls_x509_lookup_new(IntPtr store, MonoBtlsX509LookupType type);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_lookup_load_file(
+        static extern int mono_btls_x509_lookup_load_file(
             IntPtr handle,
             IntPtr file,
             MonoBtlsX509FileType type
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_lookup_add_dir(
+        static extern int mono_btls_x509_lookup_add_dir(
             IntPtr handle,
             IntPtr dir,
             MonoBtlsX509FileType type
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_lookup_add_mono(IntPtr handle, IntPtr monoLookup);
+        static extern int mono_btls_x509_lookup_add_mono(IntPtr handle, IntPtr monoLookup);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_lookup_init(IntPtr handle);
+        static extern int mono_btls_x509_lookup_init(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_lookup_shutdown(IntPtr handle);
+        static extern int mono_btls_x509_lookup_shutdown(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_lookup_by_subject(IntPtr handle, IntPtr name);
+        static extern IntPtr mono_btls_x509_lookup_by_subject(IntPtr handle, IntPtr name);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_lookup_by_fingerprint(
+        static extern IntPtr mono_btls_x509_lookup_by_fingerprint(
             IntPtr handle,
             IntPtr bytes,
             int len
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_x509_lookup_free(IntPtr handle);
+        static extern void mono_btls_x509_lookup_free(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_lookup_peek_lookup(IntPtr handle);
+        static extern IntPtr mono_btls_x509_lookup_peek_lookup(IntPtr handle);
 
         MonoBtlsX509Store store;
         MonoBtlsX509LookupType type;

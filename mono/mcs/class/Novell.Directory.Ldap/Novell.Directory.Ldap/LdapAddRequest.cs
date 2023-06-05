@@ -47,12 +47,13 @@ namespace Novell.Directory.Ldap
      */
     public class LdapAddRequest : LdapMessage
     {
+        public
         /// <summary> Constructs an LdapEntry that represents the add request
         ///
         /// </summary>
         /// <returns> an LdapEntry that represents the add request.
         /// </returns>
-        virtual public LdapEntry Entry
+        virtual LdapEntry Entry
         {
             get
             {

@@ -139,7 +139,7 @@ namespace System.IdentityModel
             return id;
         }
 
-        static public void WriteAttributeStringAsUniqueId(
+        public static void WriteAttributeStringAsUniqueId(
             XmlDictionaryWriter writer,
             string prefix,
             XmlDictionaryString localName,
@@ -152,7 +152,7 @@ namespace System.IdentityModel
             writer.WriteEndAttribute();
         }
 
-        static public Int64 ReadElementContentAsInt64(XmlDictionaryReader reader)
+        public static Int64 ReadElementContentAsInt64(XmlDictionaryReader reader)
         {
             reader.ReadFullStartElement();
             Int64 i = reader.ReadContentAsLong();

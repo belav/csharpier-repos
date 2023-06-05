@@ -46,7 +46,7 @@ namespace System.Windows.Forms.Design
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public virtual bool AutoSize
+        public new virtual bool AutoSize
         {
             get { return base.AutoSize; }
             set { base.AutoSize = value; }

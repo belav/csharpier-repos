@@ -8,7 +8,7 @@ namespace JitTest_throw_SEH_cs
 {
     internal class Exception1 : Exception
     {
-        override public String ToString()
+        public override String ToString()
         {
             return "Exception1";
         }
@@ -16,7 +16,7 @@ namespace JitTest_throw_SEH_cs
 
     internal class Exception2 : Exception
     {
-        override public String ToString()
+        public override String ToString()
         {
             return "Exception2";
         }

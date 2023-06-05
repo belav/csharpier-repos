@@ -1763,7 +1763,7 @@ namespace System.ServiceModel.Description
             const string bindingAttrNamespace = "bindingNamespace";
             static XmlDocument xmlDocument;
 
-            static public void InsertAdHocPolicy(
+            public static void InsertAdHocPolicy(
                 WsdlNS.Binding wsdlBinding,
                 string value,
                 string key
@@ -1777,7 +1777,7 @@ namespace System.ServiceModel.Description
                 InsertPolicy(key, id, wsdlBinding.ServiceDescription, value, wsdlBindingQName);
             }
 
-            static public string FindAdHocTransportPolicy(
+            public static string FindAdHocTransportPolicy(
                 PolicyConversionContext policyContext,
                 out XmlQualifiedName wsdlBindingQName
             )
@@ -1785,7 +1785,7 @@ namespace System.ServiceModel.Description
                 return FindAdHocPolicy(policyContext, soapTransportUriKey, out wsdlBindingQName);
             }
 
-            static public string FindAdHocPolicy(
+            public static string FindAdHocPolicy(
                 PolicyConversionContext policyContext,
                 string key,
                 out XmlQualifiedName wsdlBindingQName

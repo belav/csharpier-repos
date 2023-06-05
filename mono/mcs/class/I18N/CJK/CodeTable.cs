@@ -39,7 +39,7 @@ namespace I18N.CJK
     // consisting of a 32-bit section number and a 32-bit section length.
     // The alignment of the data in the table is not guaranteed.
 
-    internal unsafe sealed class CodeTable : IDisposable
+    internal sealed unsafe class CodeTable : IDisposable
     {
         // Internal state.
         private Stream stream;
@@ -135,7 +135,7 @@ namespace I18N.CJK
         // Back door access into the engine to get the address of
         // an offset within a manifest resource stream.
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern private static byte* GetAddress(Stream stream, long position);
+        private static extern byte* GetAddress(Stream stream, long position);
 #endif
     }; // class CodeTable
 }; // namespace I18N.CJK

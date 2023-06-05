@@ -1514,7 +1514,7 @@ namespace System.Globalization.Tests
             RunSpanSortKeyTest(compareInfo, string1, options, sk1.KeyData);
             RunSpanSortKeyTest(compareInfo, string2, options, sk2.KeyData);
 
-            unsafe static void RunSpanSortKeyTest(
+            static unsafe void RunSpanSortKeyTest(
                 CompareInfo compareInfo,
                 ReadOnlySpan<char> source,
                 CompareOptions options,

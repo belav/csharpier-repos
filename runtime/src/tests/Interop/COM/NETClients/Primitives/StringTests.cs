@@ -59,14 +59,14 @@ namespace NetClient
             this.Marshal_LCID();
         }
 
-        static private string Reverse(string s)
+        private static string Reverse(string s)
         {
             var chars = s.ToCharArray();
             Array.Reverse(chars);
             return new string(chars);
         }
 
-        static private bool AllAscii(string s)
+        private static bool AllAscii(string s)
         {
             const int MaxAscii = 0x7f;
             return s.ToCharArray().All(c => c <= MaxAscii);

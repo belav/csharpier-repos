@@ -77,7 +77,7 @@ internal class Program
         }
     }
 
-    private unsafe static bool CheckNonGCThreadLocalStatic()
+    private static unsafe bool CheckNonGCThreadLocalStatic()
     {
         fixed (int* lineCountPtr = &LineCount)
         {
@@ -1705,7 +1705,7 @@ internal class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private unsafe static bool ExplicitlySizedStructTest()
+    private static unsafe bool ExplicitlySizedStructTest()
     {
         {
             Console.WriteLine(
@@ -1816,7 +1816,7 @@ internal class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private unsafe static bool ExplicitlySizedClassTest()
+    private static unsafe bool ExplicitlySizedClassTest()
     {
         var cls = new MoreDerivedFromExplicitlySizedClass();
         cls.A = 100;

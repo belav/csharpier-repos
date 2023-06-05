@@ -68,7 +68,7 @@ namespace System.Threading
         }
 
         [CLSCompliant(false)]
-        unsafe public static void Free(NativeOverlapped* nativeOverlappedPtr)
+        public static unsafe void Free(NativeOverlapped* nativeOverlappedPtr)
         {
             if ((IntPtr)nativeOverlappedPtr == IntPtr.Zero)
                 throw new ArgumentNullException("nativeOverlappedPtr");
@@ -77,7 +77,7 @@ namespace System.Threading
         }
 
         [CLSCompliant(false)]
-        unsafe public static Overlapped Unpack(NativeOverlapped* nativeOverlappedPtr)
+        public static unsafe Overlapped Unpack(NativeOverlapped* nativeOverlappedPtr)
         {
             if ((IntPtr)nativeOverlappedPtr == IntPtr.Zero)
                 throw new ArgumentNullException("nativeOverlappedPtr");
@@ -92,7 +92,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         [Obsolete("Use Pack(iocb, userData) instead")]
         [MonoTODO("Security - we need to propagate the call stack")]
-        unsafe public NativeOverlapped* Pack(IOCompletionCallback iocb)
+        public unsafe NativeOverlapped* Pack(IOCompletionCallback iocb)
         {
             NativeOverlapped* result = (NativeOverlapped*)
                 Marshal.AllocHGlobal(Marshal.SizeOf(typeof(NativeOverlapped)));
@@ -105,7 +105,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         [ComVisible(false)]
         [MonoTODO("handle userData")]
-        unsafe public NativeOverlapped* Pack(IOCompletionCallback iocb, object userData)
+        public unsafe NativeOverlapped* Pack(IOCompletionCallback iocb, object userData)
         {
             NativeOverlapped* result = (NativeOverlapped*)
                 Marshal.AllocHGlobal(Marshal.SizeOf(typeof(NativeOverlapped)));
@@ -118,7 +118,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         [Obsolete("Use UnsafePack(iocb, userData) instead")]
         [SecurityPermission(SecurityAction.Demand, ControlEvidence = true, ControlPolicy = true)]
-        unsafe public NativeOverlapped* UnsafePack(IOCompletionCallback iocb)
+        public unsafe NativeOverlapped* UnsafePack(IOCompletionCallback iocb)
         {
             // no need to propagate the call stack in the unsafe version
             return Pack(iocb);
@@ -126,7 +126,7 @@ namespace System.Threading
 
         [ComVisible(false)]
         [CLSCompliant(false)]
-        unsafe public NativeOverlapped* UnsafePack(IOCompletionCallback iocb, object userData)
+        public unsafe NativeOverlapped* UnsafePack(IOCompletionCallback iocb, object userData)
         {
             return Pack(iocb, userData);
         }

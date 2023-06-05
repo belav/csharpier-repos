@@ -15,7 +15,7 @@ namespace System.Diagnostics
     [ConfigurationCollection(typeof(SwitchElement))]
     internal class SwitchElementsCollection : ConfigurationElementCollection
     {
-        new public SwitchElement this[string name]
+        public new SwitchElement this[string name]
         {
             get { return (SwitchElement)BaseGet(name); }
         }

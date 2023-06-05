@@ -20,22 +20,22 @@ namespace System.Data.Odbc
 
     internal static class ODBC
     {
-        static internal Exception ConnectionClosed()
+        internal static Exception ConnectionClosed()
         {
             return ADP.InvalidOperation(Res.GetString(Res.Odbc_ConnectionClosed));
         }
 
-        static internal Exception OpenConnectionNoOwner()
+        internal static Exception OpenConnectionNoOwner()
         {
             return ADP.InvalidOperation(Res.GetString(Res.Odbc_OpenConnectionNoOwner));
         }
 
-        static internal Exception UnknownSQLType(ODBC32.SQL_TYPE sqltype)
+        internal static Exception UnknownSQLType(ODBC32.SQL_TYPE sqltype)
         {
             return ADP.Argument(Res.GetString(Res.Odbc_UnknownSQLType, sqltype.ToString()));
         }
 
-        static internal Exception ConnectionStringTooLong()
+        internal static Exception ConnectionStringTooLong()
         {
             return ADP.Argument(
                 Res.GetString(
@@ -45,12 +45,12 @@ namespace System.Data.Odbc
             );
         }
 
-        static internal ArgumentException GetSchemaRestrictionRequired()
+        internal static ArgumentException GetSchemaRestrictionRequired()
         {
             return ADP.Argument(Res.GetString(Res.ODBC_GetSchemaRestrictionRequired));
         }
 
-        static internal ArgumentOutOfRangeException NotSupportedEnumerationValue(
+        internal static ArgumentOutOfRangeException NotSupportedEnumerationValue(
             Type type,
             int value
         )
@@ -65,7 +65,7 @@ namespace System.Data.Odbc
             );
         }
 
-        static internal ArgumentOutOfRangeException NotSupportedCommandType(CommandType value)
+        internal static ArgumentOutOfRangeException NotSupportedCommandType(CommandType value)
         {
 #if DEBUG
             switch (value)
@@ -84,7 +84,7 @@ namespace System.Data.Odbc
             return ODBC.NotSupportedEnumerationValue(typeof(CommandType), (int)value);
         }
 
-        static internal ArgumentOutOfRangeException NotSupportedIsolationLevel(IsolationLevel value)
+        internal static ArgumentOutOfRangeException NotSupportedIsolationLevel(IsolationLevel value)
         {
 #if DEBUG
             switch (value)
@@ -107,7 +107,7 @@ namespace System.Data.Odbc
             return ODBC.NotSupportedEnumerationValue(typeof(IsolationLevel), (int)value);
         }
 
-        static internal InvalidOperationException NoMappingForSqlTransactionLevel(int value)
+        internal static InvalidOperationException NoMappingForSqlTransactionLevel(int value)
         {
             return ADP.DataAdapter(
                 Res.GetString(
@@ -117,24 +117,24 @@ namespace System.Data.Odbc
             );
         }
 
-        static internal Exception NegativeArgument()
+        internal static Exception NegativeArgument()
         {
             return ADP.Argument(Res.GetString(Res.Odbc_NegativeArgument));
         }
 
-        static internal Exception CantSetPropertyOnOpenConnection()
+        internal static Exception CantSetPropertyOnOpenConnection()
         {
             return ADP.InvalidOperation(Res.GetString(Res.Odbc_CantSetPropertyOnOpenConnection));
         }
 
-        static internal Exception CantEnableConnectionpooling(ODBC32.RetCode retcode)
+        internal static Exception CantEnableConnectionpooling(ODBC32.RetCode retcode)
         {
             return ADP.DataAdapter(
                 Res.GetString(Res.Odbc_CantEnableConnectionpooling, ODBC32.RetcodeToString(retcode))
             );
         }
 
-        static internal Exception CantAllocateEnvironmentHandle(ODBC32.RetCode retcode)
+        internal static Exception CantAllocateEnvironmentHandle(ODBC32.RetCode retcode)
         {
             return ADP.DataAdapter(
                 Res.GetString(
@@ -144,26 +144,26 @@ namespace System.Data.Odbc
             );
         }
 
-        static internal Exception FailedToGetDescriptorHandle(ODBC32.RetCode retcode)
+        internal static Exception FailedToGetDescriptorHandle(ODBC32.RetCode retcode)
         {
             return ADP.DataAdapter(
                 Res.GetString(Res.Odbc_FailedToGetDescriptorHandle, ODBC32.RetcodeToString(retcode))
             );
         }
 
-        static internal Exception NotInTransaction()
+        internal static Exception NotInTransaction()
         {
             return ADP.InvalidOperation(Res.GetString(Res.Odbc_NotInTransaction));
         }
 
-        static internal Exception UnknownOdbcType(OdbcType odbctype)
+        internal static Exception UnknownOdbcType(OdbcType odbctype)
         {
             return ADP.InvalidEnumerationValue(typeof(OdbcType), (int)odbctype);
         }
 
         internal const string Pwd = "pwd";
 
-        static internal void TraceODBC(int level, string method, ODBC32.RetCode retcode)
+        internal static void TraceODBC(int level, string method, ODBC32.RetCode retcode)
         {
             Bid.TraceSqlReturn(
                 "<odbc|API|ODBC|RET> %08X{SQLRETURN}, method=%ls\n",
@@ -343,8 +343,8 @@ namespace System.Data.Odbc
         internal const Int16 SQL_COMMIT = 0; //Commit
         internal const Int16 SQL_ROLLBACK = 1; //Abort
 
-        static internal readonly IntPtr SQL_AUTOCOMMIT_OFF = ADP.PtrZero;
-        static internal readonly IntPtr SQL_AUTOCOMMIT_ON = new IntPtr(1);
+        internal static readonly IntPtr SQL_AUTOCOMMIT_OFF = ADP.PtrZero;
+        internal static readonly IntPtr SQL_AUTOCOMMIT_ON = new IntPtr(1);
 
         internal enum SQL_TRANSACTION
         {
@@ -651,7 +651,7 @@ namespace System.Data.Odbc
         }
 
         internal const Int16 SQL_ALL_TYPES = 0;
-        static internal readonly IntPtr SQL_HANDLE_NULL = ADP.PtrZero;
+        internal static readonly IntPtr SQL_HANDLE_NULL = ADP.PtrZero;
         internal const Int32 SQL_NULL_DATA = -1; // sql.h
         internal const Int32 SQL_NO_TOTAL = -4; // sqlext.h
 
@@ -715,13 +715,14 @@ namespace System.Data.Odbc
             SQL_SQL92_RELATIONAL_JOIN_OPERATORS = 161, //SQL_SQL92_RELATIONAL_JOIN_OPERATORS from sqlext.h
         }
 
-        static internal readonly IntPtr SQL_OV_ODBC3 = new IntPtr(3);
+        internal static readonly IntPtr SQL_OV_ODBC3 = new IntPtr(3);
         internal const Int32 SQL_NTS = -3; //flags for null-terminated string
 
+        internal
         //Pooling
-        static internal readonly IntPtr SQL_CP_OFF = new IntPtr(0); //Connection Pooling disabled
-        static internal readonly IntPtr SQL_CP_ONE_PER_DRIVER = new IntPtr(1); //One pool per driver
-        static internal readonly IntPtr SQL_CP_ONE_PER_HENV = new IntPtr(2); //One pool per environment
+        static readonly IntPtr SQL_CP_OFF = new IntPtr(0); //Connection Pooling disabled
+        internal static readonly IntPtr SQL_CP_ONE_PER_DRIVER = new IntPtr(1); //One pool per driver
+        internal static readonly IntPtr SQL_CP_ONE_PER_HENV = new IntPtr(2); //One pool per environment
 
         /* values for SQL_ATTR_CONNECTION_DEAD */
         internal const Int32 SQL_CD_TRUE = 1;
@@ -806,7 +807,9 @@ namespace System.Data.Odbc
         internal const short SQL_RESULT_COL = 3;
 
         // Helpers
-        static internal OdbcErrorCollection GetDiagErrors(
+        internal
+        // Helpers
+        static OdbcErrorCollection GetDiagErrors(
             string source,
             OdbcHandle hrHandle,
             RetCode retcode
@@ -817,7 +820,7 @@ namespace System.Data.Odbc
             return errors;
         }
 
-        static internal void GetDiagErrors(
+        internal static void GetDiagErrors(
             OdbcErrorCollection errors,
             string source,
             OdbcHandle hrHandle,
@@ -879,11 +882,12 @@ namespace System.Data.Odbc
         }
     }
 
-    sealed internal class TypeMap
+    internal sealed class TypeMap
     { // MDAC 68988
+        private
         //      private TypeMap                                           (OdbcType odbcType,         DbType dbType,                Type type,        ODBC32.SQL_TYPE sql_type,       ODBC32.SQL_C sql_c,          ODBC32.SQL_C param_sql_c,   int bsize, int csize, bool signType)
         //      ---------------                                            ------------------         --------------                ----------        -------------------------       -------------------          -------------------------   -----------------------
-        static private readonly TypeMap _BigInt = new TypeMap(
+        static readonly TypeMap _BigInt = new TypeMap(
             OdbcType.BigInt,
             DbType.Int64,
             typeof(Int64),
@@ -894,7 +898,7 @@ namespace System.Data.Odbc
             20,
             true
         );
-        static private readonly TypeMap _Binary = new TypeMap(
+        private static readonly TypeMap _Binary = new TypeMap(
             OdbcType.Binary,
             DbType.Binary,
             typeof(byte[]),
@@ -905,7 +909,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _Bit = new TypeMap(
+        private static readonly TypeMap _Bit = new TypeMap(
             OdbcType.Bit,
             DbType.Boolean,
             typeof(Boolean),
@@ -916,7 +920,7 @@ namespace System.Data.Odbc
             1,
             false
         );
-        static internal readonly TypeMap _Char = new TypeMap(
+        internal static readonly TypeMap _Char = new TypeMap(
             OdbcType.Char,
             DbType.AnsiStringFixedLength,
             typeof(String),
@@ -927,7 +931,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _DateTime = new TypeMap(
+        private static readonly TypeMap _DateTime = new TypeMap(
             OdbcType.DateTime,
             DbType.DateTime,
             typeof(DateTime),
@@ -938,7 +942,7 @@ namespace System.Data.Odbc
             23,
             false
         );
-        static private readonly TypeMap _Date = new TypeMap(
+        private static readonly TypeMap _Date = new TypeMap(
             OdbcType.Date,
             DbType.Date,
             typeof(DateTime),
@@ -949,7 +953,7 @@ namespace System.Data.Odbc
             10,
             false
         );
-        static private readonly TypeMap _Time = new TypeMap(
+        private static readonly TypeMap _Time = new TypeMap(
             OdbcType.Time,
             DbType.Time,
             typeof(TimeSpan),
@@ -960,7 +964,7 @@ namespace System.Data.Odbc
             12,
             false
         );
-        static private readonly TypeMap _Decimal = new TypeMap(
+        private static readonly TypeMap _Decimal = new TypeMap(
             OdbcType.Decimal,
             DbType.Decimal,
             typeof(Decimal),
@@ -972,8 +976,9 @@ namespace System.Data.Odbc
             false
         );
 
+        private
         //        static private  readonly TypeMap _Currency   = new TypeMap(OdbcType.Decimal,          DbType.Currency,              typeof(Decimal),  ODBC32.SQL_TYPE.DECIMAL,        ODBC32.SQL_C.NUMERIC,        ODBC32.SQL_C.NUMERIC,        19, ADP.DecimalMaxPrecision28, false);
-        static private readonly TypeMap _Double = new TypeMap(
+        static readonly TypeMap _Double = new TypeMap(
             OdbcType.Double,
             DbType.Double,
             typeof(Double),
@@ -984,7 +989,7 @@ namespace System.Data.Odbc
             15,
             false
         );
-        static internal readonly TypeMap _Image = new TypeMap(
+        internal static readonly TypeMap _Image = new TypeMap(
             OdbcType.Image,
             DbType.Binary,
             typeof(Byte[]),
@@ -995,7 +1000,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _Int = new TypeMap(
+        private static readonly TypeMap _Int = new TypeMap(
             OdbcType.Int,
             DbType.Int32,
             typeof(Int32),
@@ -1006,7 +1011,7 @@ namespace System.Data.Odbc
             10,
             true
         );
-        static private readonly TypeMap _NChar = new TypeMap(
+        private static readonly TypeMap _NChar = new TypeMap(
             OdbcType.NChar,
             DbType.StringFixedLength,
             typeof(String),
@@ -1017,7 +1022,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static internal readonly TypeMap _NText = new TypeMap(
+        internal static readonly TypeMap _NText = new TypeMap(
             OdbcType.NText,
             DbType.String,
             typeof(String),
@@ -1028,7 +1033,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _Numeric = new TypeMap(
+        private static readonly TypeMap _Numeric = new TypeMap(
             OdbcType.Numeric,
             DbType.Decimal,
             typeof(Decimal),
@@ -1039,7 +1044,7 @@ namespace System.Data.Odbc
             ADP.DecimalMaxPrecision28,
             false
         );
-        static internal readonly TypeMap _NVarChar = new TypeMap(
+        internal static readonly TypeMap _NVarChar = new TypeMap(
             OdbcType.NVarChar,
             DbType.String,
             typeof(String),
@@ -1050,7 +1055,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _Real = new TypeMap(
+        private static readonly TypeMap _Real = new TypeMap(
             OdbcType.Real,
             DbType.Single,
             typeof(Single),
@@ -1061,7 +1066,7 @@ namespace System.Data.Odbc
             7,
             false
         );
-        static private readonly TypeMap _UniqueId = new TypeMap(
+        private static readonly TypeMap _UniqueId = new TypeMap(
             OdbcType.UniqueIdentifier,
             DbType.Guid,
             typeof(Guid),
@@ -1072,7 +1077,7 @@ namespace System.Data.Odbc
             36,
             false
         );
-        static private readonly TypeMap _SmallDT = new TypeMap(
+        private static readonly TypeMap _SmallDT = new TypeMap(
             OdbcType.SmallDateTime,
             DbType.DateTime,
             typeof(DateTime),
@@ -1083,7 +1088,7 @@ namespace System.Data.Odbc
             23,
             false
         );
-        static private readonly TypeMap _SmallInt = new TypeMap(
+        private static readonly TypeMap _SmallInt = new TypeMap(
             OdbcType.SmallInt,
             DbType.Int16,
             typeof(Int16),
@@ -1094,7 +1099,7 @@ namespace System.Data.Odbc
             5,
             true
         );
-        static internal readonly TypeMap _Text = new TypeMap(
+        internal static readonly TypeMap _Text = new TypeMap(
             OdbcType.Text,
             DbType.AnsiString,
             typeof(String),
@@ -1105,7 +1110,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _Timestamp = new TypeMap(
+        private static readonly TypeMap _Timestamp = new TypeMap(
             OdbcType.Timestamp,
             DbType.Binary,
             typeof(Byte[]),
@@ -1116,7 +1121,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _TinyInt = new TypeMap(
+        private static readonly TypeMap _TinyInt = new TypeMap(
             OdbcType.TinyInt,
             DbType.Byte,
             typeof(Byte),
@@ -1127,7 +1132,7 @@ namespace System.Data.Odbc
             3,
             true
         );
-        static private readonly TypeMap _VarBinary = new TypeMap(
+        private static readonly TypeMap _VarBinary = new TypeMap(
             OdbcType.VarBinary,
             DbType.Binary,
             typeof(Byte[]),
@@ -1138,7 +1143,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static internal readonly TypeMap _VarChar = new TypeMap(
+        internal static readonly TypeMap _VarChar = new TypeMap(
             OdbcType.VarChar,
             DbType.AnsiString,
             typeof(String),
@@ -1149,7 +1154,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _Variant = new TypeMap(
+        private static readonly TypeMap _Variant = new TypeMap(
             OdbcType.Binary,
             DbType.Binary,
             typeof(object),
@@ -1160,7 +1165,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _UDT = new TypeMap(
+        private static readonly TypeMap _UDT = new TypeMap(
             OdbcType.Binary,
             DbType.Binary,
             typeof(object),
@@ -1171,7 +1176,7 @@ namespace System.Data.Odbc
             -1,
             false
         );
-        static private readonly TypeMap _XML = new TypeMap(
+        private static readonly TypeMap _XML = new TypeMap(
             OdbcType.Text,
             DbType.AnsiString,
             typeof(String),
@@ -1220,7 +1225,7 @@ namespace System.Data.Odbc
             _signType = signType;
         }
 
-        static internal TypeMap FromOdbcType(OdbcType odbcType)
+        internal static TypeMap FromOdbcType(OdbcType odbcType)
         {
             switch (odbcType)
             {
@@ -1277,7 +1282,7 @@ namespace System.Data.Odbc
             }
         }
 
-        static internal TypeMap FromDbType(DbType dbType)
+        internal static TypeMap FromDbType(DbType dbType)
         {
             switch (dbType)
             {
@@ -1329,7 +1334,7 @@ namespace System.Data.Odbc
             }
         }
 
-        static internal TypeMap FromSystemType(Type dataType)
+        internal static TypeMap FromSystemType(Type dataType)
         {
             switch (Type.GetTypeCode(dataType))
             {
@@ -1395,7 +1400,7 @@ namespace System.Data.Odbc
             }
         }
 
-        static internal TypeMap FromSqlType(ODBC32.SQL_TYPE sqltype)
+        internal static TypeMap FromSqlType(ODBC32.SQL_TYPE sqltype)
         {
             switch (sqltype)
             {
@@ -1464,7 +1469,11 @@ namespace System.Data.Odbc
         // Upgrade integer datatypes to missinterpretaion of the highest bit
         // (e.g. 0xff could be 255 if unsigned but is -1 if signed)
         //
-        static internal TypeMap UpgradeSignedType(TypeMap typeMap, bool unsigned)
+        internal
+        // Upgrade integer datatypes to missinterpretaion of the highest bit
+        // (e.g. 0xff could be 255 if unsigned but is -1 if signed)
+        //
+        static TypeMap UpgradeSignedType(TypeMap typeMap, bool unsigned)
         {
             // upgrade unsigned types to be able to hold data that has the highest bit set
             //

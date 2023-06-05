@@ -301,7 +301,7 @@ namespace System.Windows.Forms
             }
         }
 
-        static public bool TrackPopupMenu(Menu menu, Point pnt)
+        public static bool TrackPopupMenu(Menu menu, Point pnt)
         {
             if (menu.MenuItems.Count <= 0) // No submenus to track
                 return true;
@@ -481,7 +481,7 @@ namespace System.Windows.Forms
                 menu.Tracker.ShowSubPopupEvent(this, new SubPopupEventArgs(item));
         }
 
-        static public void HideSubPopups(Menu menu, Menu topmenu)
+        public static void HideSubPopups(Menu menu, Menu topmenu)
         {
             foreach (MenuItem item in menu.MenuItems)
                 if (item.IsPopup)

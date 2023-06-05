@@ -2719,7 +2719,7 @@ namespace System.Xml
 
     internal class ContentTypeHeader : MimeHeader
     {
-        public readonly static ContentTypeHeader Default = new ContentTypeHeader(
+        public static readonly ContentTypeHeader Default = new ContentTypeHeader(
             "application/octet-stream"
         );
 
@@ -2876,11 +2876,11 @@ namespace System.Xml
         ContentTransferEncoding contentTransferEncoding;
         string contentTransferEncodingValue;
 
-        public readonly static ContentTransferEncodingHeader Binary =
+        public static readonly ContentTransferEncodingHeader Binary =
             new ContentTransferEncodingHeader(ContentTransferEncoding.Binary, "binary");
-        public readonly static ContentTransferEncodingHeader EightBit =
+        public static readonly ContentTransferEncodingHeader EightBit =
             new ContentTransferEncodingHeader(ContentTransferEncoding.EightBit, "8bit");
-        public readonly static ContentTransferEncodingHeader SevenBit =
+        public static readonly ContentTransferEncodingHeader SevenBit =
             new ContentTransferEncodingHeader(ContentTransferEncoding.SevenBit, "7bit");
 
         public ContentTransferEncodingHeader(string value)

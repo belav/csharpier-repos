@@ -1170,7 +1170,7 @@ namespace System.ServiceModel.Channels
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        unsafe public int Read(byte[] buffer, int offset, int size, TimeSpan timeout)
+        public unsafe int Read(byte[] buffer, int offset, int size, TimeSpan timeout)
         {
             ConnectionUtilities.ValidateBufferBounds(buffer, offset, size);
 
@@ -3160,7 +3160,7 @@ namespace System.ServiceModel.Channels
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        public unsafe static bool TryCreate(
+        public static unsafe bool TryCreate(
             List<SecurityIdentifier> allowedSids,
             Uri pipeUri,
             string sharedMemoryName,

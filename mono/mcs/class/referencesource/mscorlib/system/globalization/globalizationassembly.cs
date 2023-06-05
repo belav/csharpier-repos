@@ -37,7 +37,7 @@ namespace System.Globalization
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Process)]
-        internal unsafe static byte* GetGlobalizationResourceBytePtr(
+        internal static unsafe byte* GetGlobalizationResourceBytePtr(
             Assembly assembly,
             String tableName
         )

@@ -39,13 +39,13 @@ namespace System.Data.SqlClient
         public SqlCommand(string cmdText, SqlConnection connection, SqlTransaction transaction)
             : this() { }
 
-        new public SqlConnection Connection
+        public new SqlConnection Connection
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        override protected DbConnection DbConnection
+        protected override DbConnection DbConnection
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -60,25 +60,25 @@ namespace System.Data.SqlClient
         internal SqlStatistics Statistics =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public SqlTransaction Transaction
+        public new SqlTransaction Transaction
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        override protected DbTransaction DbTransaction
+        protected override DbTransaction DbTransaction
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        override public string CommandText
+        public override string CommandText
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        override public int CommandTimeout
+        public override int CommandTimeout
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -87,7 +87,7 @@ namespace System.Data.SqlClient
         public void ResetCommandTimeout() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override public CommandType CommandType
+        public override CommandType CommandType
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -107,13 +107,13 @@ namespace System.Data.SqlClient
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        new public SqlParameterCollection Parameters =>
+        public new SqlParameterCollection Parameters =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override protected DbParameterCollection DbParameterCollection =>
+        protected override DbParameterCollection DbParameterCollection =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override public UpdateRowSource UpdatedRowSource
+        public override UpdateRowSource UpdatedRowSource
         {
             get => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
             set => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
@@ -124,37 +124,37 @@ namespace System.Data.SqlClient
         internal void OnStatementCompleted(int recordCount) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override public void Prepare() =>
+        public override void Prepare() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         internal void Unprepare() => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override public void Cancel() => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        public override void Cancel() => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public SqlParameter CreateParameter() =>
+        public new SqlParameter CreateParameter() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override protected DbParameter CreateDbParameter() =>
+        protected override DbParameter CreateDbParameter() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override protected void Dispose(bool disposing) { }
+        protected override void Dispose(bool disposing) { }
 
-        override public object ExecuteScalar() =>
+        public override object ExecuteScalar() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override public int ExecuteNonQuery() =>
+        public override int ExecuteNonQuery() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         public XmlReader ExecuteXmlReader() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        override protected DbDataReader ExecuteDbDataReader(CommandBehavior behavior) =>
+        protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public SqlDataReader ExecuteReader() =>
+        public new SqlDataReader ExecuteReader() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public SqlDataReader ExecuteReader(CommandBehavior behavior) =>
+        public new SqlDataReader ExecuteReader(CommandBehavior behavior) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
         internal SqlDataReader EndExecuteReader(IAsyncResult asyncResult) =>
@@ -174,16 +174,16 @@ namespace System.Data.SqlClient
             CancellationToken cancellationToken
         ) => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public Task<SqlDataReader> ExecuteReaderAsync() =>
+        public new Task<SqlDataReader> ExecuteReaderAsync() =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public Task<SqlDataReader> ExecuteReaderAsync(CommandBehavior behavior) =>
+        public new Task<SqlDataReader> ExecuteReaderAsync(CommandBehavior behavior) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public Task<SqlDataReader> ExecuteReaderAsync(CancellationToken cancellationToken) =>
+        public new Task<SqlDataReader> ExecuteReaderAsync(CancellationToken cancellationToken) =>
             throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
 
-        new public Task<SqlDataReader> ExecuteReaderAsync(
+        public new Task<SqlDataReader> ExecuteReaderAsync(
             CommandBehavior behavior,
             CancellationToken cancellationToken
         ) => throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);

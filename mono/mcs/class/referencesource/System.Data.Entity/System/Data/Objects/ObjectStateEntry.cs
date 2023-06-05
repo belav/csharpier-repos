@@ -86,27 +86,31 @@ namespace System.Data.Objects
             internal set { _state = value; }
         }
 
+        public
         /// <summary>
         /// Entity property of ObjectStateEntry.
         /// </summary>
         /// <param></param>
         /// <returns> The entity encapsulated by this entry. </returns>
-        abstract public object Entity { get; }
+        abstract object Entity { get; }
 
+        public
         /// <summary>
         /// The EntityKey associated with the ObjectStateEntry
         /// </summary>
-        abstract public EntityKey EntityKey { get; internal set; }
+        abstract EntityKey EntityKey { get; internal set; }
 
+        public
         /// <summary>
         /// Determines if this ObjectStateEntry represents a relationship
         /// </summary>
-        abstract public bool IsRelationship { get; }
+        abstract bool IsRelationship { get; }
 
+        internal
         /// <summary>
         /// Gets bit array indicating which properties are modified.
         /// </summary>
-        abstract internal BitArray ModifiedProperties { get; }
+        abstract BitArray ModifiedProperties { get; }
 
         BitArray IEntityStateEntry.ModifiedProperties
         {
@@ -119,9 +123,9 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns> DbDataRecord </returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
-        abstract public DbDataRecord OriginalValues { get; }
+        public abstract DbDataRecord OriginalValues { get; }
 
-        abstract public OriginalValueRecord GetUpdatableOriginalValues();
+        public abstract OriginalValueRecord GetUpdatableOriginalValues();
 
         /// <summary>
         /// Current values of entity/ DataRow
@@ -129,28 +133,46 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns> DbUpdatableDataRecord </returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
-        abstract public CurrentValueRecord CurrentValues { get; }
+        public abstract CurrentValueRecord CurrentValues { get; }
 
         /// <summary>
         /// API to accept the current values as original values and  mark the entity as Unchanged.
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        abstract public void AcceptChanges();
+        public
+        /// <summary>
+        /// API to accept the current values as original values and  mark the entity as Unchanged.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
+        abstract void AcceptChanges();
 
         /// <summary>
         /// API to mark the entity deleted. if entity is in added state, it will be detached
         /// </summary>
         /// <param></param>
         /// <returns> </returns>
-        abstract public void Delete();
+        public
+        /// <summary>
+        /// API to mark the entity deleted. if entity is in added state, it will be detached
+        /// </summary>
+        /// <param></param>
+        /// <returns> </returns>
+        abstract void Delete();
 
         /// <summary>
         /// API to return properties that are marked modified
         /// </summary>
         /// <param> </param>
         /// <returns> IEnumerable of modified properties names, names are in term of c-space </returns>
-        abstract public IEnumerable<string> GetModifiedProperties();
+        public
+        /// <summary>
+        /// API to return properties that are marked modified
+        /// </summary>
+        /// <param> </param>
+        /// <returns> IEnumerable of modified properties names, names are in term of c-space </returns>
+        abstract IEnumerable<string> GetModifiedProperties();
 
         /// <summary>
         /// set the state to Modified.
@@ -159,7 +181,15 @@ namespace System.Data.Objects
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">If State is not Modified or Unchanged</exception>
         ///
-        abstract public void SetModified();
+        public
+        /// <summary>
+        /// set the state to Modified.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException">If State is not Modified or Unchanged</exception>
+        ///
+        abstract void SetModified();
 
         /// <summary>
         /// Marks specified property as modified.
@@ -167,7 +197,14 @@ namespace System.Data.Objects
         /// <param name="propertyName">This API recognizes the names in terms of OSpace</param>
         /// <exception cref="InvalidOperationException">If State is not Modified or Unchanged</exception>
         ///
-        abstract public void SetModifiedProperty(string propertyName);
+        public
+        /// <summary>
+        /// Marks specified property as modified.
+        /// </summary>
+        /// <param name="propertyName">This API recognizes the names in terms of OSpace</param>
+        /// <exception cref="InvalidOperationException">If State is not Modified or Unchanged</exception>
+        ///
+        abstract void SetModifiedProperty(string propertyName);
 
         /// <summary>
         /// Rejects any changes made to the property with the given name since the property was last loaded,
@@ -184,7 +221,23 @@ namespace System.Data.Objects
         /// is a no-op.
         /// </remarks>
         /// <param name="propertyName">The name of the property to change.</param>
-        abstract public void RejectPropertyChanges(string propertyName);
+        public
+        /// <summary>
+        /// Rejects any changes made to the property with the given name since the property was last loaded,
+        /// attached, saved, or changes were accepted. The orginal value of the property is stored and the
+        /// property will no longer be marked as modified.
+        /// </summary>
+        /// <remarks>
+        /// If the result is that no properties of the entity are marked as modified, then the entity will
+        /// be marked as Unchanged.
+        /// Changes to properties can only rejected for entities that are in the Modified or Unchanged state.
+        /// Calling this method for entities in other states (Added, Deleted, or Detached) will result in
+        /// an exception being thrown.
+        /// Rejecting changes to properties of an Unchanged entity or unchanged properties of a Modifed
+        /// is a no-op.
+        /// </remarks>
+        /// <param name="propertyName">The name of the property to change.</param>
+        abstract void RejectPropertyChanges(string propertyName);
 
         /// <summary>
         /// Uses DetectChanges to determine whether or not the current value of the property with the given
@@ -197,8 +250,21 @@ namespace System.Data.Objects
         /// </remarks>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>True if the property has changed; false otherwise.</returns>
-        abstract public bool IsPropertyChanged(string propertyName);
+        public
+        /// <summary>
+        /// Uses DetectChanges to determine whether or not the current value of the property with the given
+        /// name is different from its original value. Note that this may be different from the property being
+        /// marked as modified since a property which has not changed can still be marked as modified.
+        /// </summary>
+        /// <remarks>
+        /// For complex properties, a new instance of the complex object which has all the same property
+        /// values as the original instance is not considered to be different by this method.
+        /// </remarks>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <returns>True if the property has changed; false otherwise.</returns>
+        abstract bool IsPropertyChanged(string propertyName);
 
+        public
         /// <summary>
         /// Returns the RelationshipManager for the entity represented by this ObjectStateEntry.
         /// Note that a RelationshipManager objects can only be returned if this entry represents a
@@ -206,25 +272,40 @@ namespace System.Data.Objects
         /// have associated RelationshipManagers.
         /// </summary>
         /// <exception cref="InvalidOperationException">The entry is a stub or represents a relationship</exception>
-        abstract public RelationshipManager RelationshipManager { get; }
+        abstract RelationshipManager RelationshipManager { get; }
 
         /// <summary>
         /// Changes state of the entry to the specified <paramref name="state"/>
         /// </summary>
         /// <param name="state">The requested state</param>
-        abstract public void ChangeState(EntityState state);
+        public
+        /// <summary>
+        /// Changes state of the entry to the specified <paramref name="state"/>
+        /// </summary>
+        /// <param name="state">The requested state</param>
+        abstract void ChangeState(EntityState state);
 
         /// <summary>
         /// Apply modified properties to the original object.
         /// </summary>
         /// <param name="current">object with modified properties</param>
-        abstract public void ApplyCurrentValues(object currentEntity);
+        public
+        /// <summary>
+        /// Apply modified properties to the original object.
+        /// </summary>
+        /// <param name="current">object with modified properties</param>
+        abstract void ApplyCurrentValues(object currentEntity);
 
         /// <summary>
         /// Apply original values to the entity.
         /// </summary>
         /// <param name="original">The object with original values</param>
-        abstract public void ApplyOriginalValues(object originalEntity);
+        public
+        /// <summary>
+        /// Apply original values to the entity.
+        /// </summary>
+        /// <param name="original">The object with original values</param>
+        abstract void ApplyOriginalValues(object originalEntity);
 
         #endregion // Public members
 
@@ -314,35 +395,36 @@ namespace System.Data.Objects
             get { return this.State; }
         }
 
+        internal
         #endregion // IEntityChangeTracker
 
         #region Internal members
 
-        abstract internal bool IsKeyEntry { get; }
+        abstract bool IsKeyEntry { get; }
 
-        abstract internal int GetFieldCount(StateManagerTypeMetadata metadata);
+        internal abstract int GetFieldCount(StateManagerTypeMetadata metadata);
 
-        abstract internal Type GetFieldType(int ordinal, StateManagerTypeMetadata metadata);
+        internal abstract Type GetFieldType(int ordinal, StateManagerTypeMetadata metadata);
 
-        abstract internal string GetCLayerName(int ordinal, StateManagerTypeMetadata metadata);
+        internal abstract string GetCLayerName(int ordinal, StateManagerTypeMetadata metadata);
 
-        abstract internal int GetOrdinalforCLayerName(
+        internal abstract int GetOrdinalforCLayerName(
             string name,
             StateManagerTypeMetadata metadata
         );
 
-        abstract internal void RevertDelete();
+        internal abstract void RevertDelete();
 
-        abstract internal void SetModifiedAll();
+        internal abstract void SetModifiedAll();
 
-        abstract internal void EntityMemberChanging(string entityMemberName);
-        abstract internal void EntityMemberChanged(string entityMemberName);
-        abstract internal void EntityComplexMemberChanging(
+        internal abstract void EntityMemberChanging(string entityMemberName);
+        internal abstract void EntityMemberChanged(string entityMemberName);
+        internal abstract void EntityComplexMemberChanging(
             string entityMemberName,
             object complexObject,
             string complexObjectMemberName
         );
-        abstract internal void EntityComplexMemberChanged(
+        internal abstract void EntityComplexMemberChanged(
             string entityMemberName,
             object complexObject,
             string complexObjectMemberName
@@ -351,12 +433,16 @@ namespace System.Data.Objects
         /// <summary>
         /// Reuse or create a new (Entity)DataRecordInfo.
         /// </summary>
-        abstract internal DataRecordInfo GetDataRecordInfo(
+        internal
+        /// <summary>
+        /// Reuse or create a new (Entity)DataRecordInfo.
+        /// </summary>
+        abstract DataRecordInfo GetDataRecordInfo(
             StateManagerTypeMetadata metadata,
             object userObject
         );
 
-        virtual internal void Reset()
+        internal virtual void Reset()
         {
             _cache = null;
             _entitySet = null;

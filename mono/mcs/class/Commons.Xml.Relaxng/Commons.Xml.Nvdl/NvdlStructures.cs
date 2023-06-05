@@ -31,7 +31,7 @@ namespace Commons.Xml.Nvdl
             OnDefaultEvent
         );
 
-        readonly static NvdlConfig defaultConfig;
+        static readonly NvdlConfig defaultConfig;
 
         static Nvdl()
         {

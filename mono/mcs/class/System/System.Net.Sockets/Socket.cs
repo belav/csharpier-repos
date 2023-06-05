@@ -185,7 +185,7 @@ namespace System.Net.Sockets
 
         /* Creates a new system socket, returning the handle */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static IntPtr Socket_icall(
+        static extern IntPtr Socket_icall(
             AddressFamily family,
             SocketType type,
             ProtocolType proto,
@@ -230,7 +230,7 @@ namespace System.Net.Sockets
 
         /* Returns the amount of data waiting to be read on socket */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static int Available_icall(IntPtr socket, out int error);
+        static extern int Available_icall(IntPtr socket, out int error);
 
         // FIXME: import from referencesource
         public bool EnableBroadcast
@@ -381,7 +381,7 @@ namespace System.Net.Sockets
 
         /* Returns the local endpoint details in addr and port */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static SocketAddress LocalEndPoint_icall(IntPtr socket, int family, out int error);
+        static extern SocketAddress LocalEndPoint_icall(IntPtr socket, int family, out int error);
 
         public bool Blocking
         {
@@ -416,7 +416,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void Blocking_icall(IntPtr socket, bool block, out int error);
+        internal static extern void Blocking_icall(IntPtr socket, bool block, out int error);
 
         public bool Connected
         {
@@ -484,7 +484,7 @@ namespace System.Net.Sockets
 
         /* Returns the remote endpoint details in addr and port */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static SocketAddress RemoteEndPoint_icall(IntPtr socket, int family, out int error);
+        static extern SocketAddress RemoteEndPoint_icall(IntPtr socket, int family, out int error);
 
         internal SafeHandle SafeHandle
         {
@@ -591,7 +591,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void Select_icall(ref Socket[] sockets, int microSeconds, out int error);
+        static extern void Select_icall(ref Socket[] sockets, int microSeconds, out int error);
 
         #endregion
 
@@ -646,7 +646,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static bool Poll_icall(IntPtr socket, SelectMode mode, int timeout, out int error);
+        static extern bool Poll_icall(IntPtr socket, SelectMode mode, int timeout, out int error);
 
         #endregion
 
@@ -982,7 +982,7 @@ namespace System.Net.Sockets
 
         /* Creates a new system socket, returning the handle */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static IntPtr Accept_icall(IntPtr sock, out int error, bool blocking);
+        static extern IntPtr Accept_icall(IntPtr sock, out int error, bool blocking);
 
         #endregion
 
@@ -1039,7 +1039,7 @@ namespace System.Net.Sockets
 
         // Creates a new system socket, returning the handle
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void Bind_icall(IntPtr sock, SocketAddress sa, out int error);
+        private static extern void Bind_icall(IntPtr sock, SocketAddress sa, out int error);
 
         #endregion
 
@@ -1077,7 +1077,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void Listen_icall(IntPtr sock, int backlog, out int error);
+        static extern void Listen_icall(IntPtr sock, int backlog, out int error);
 
         #endregion
 
@@ -1592,7 +1592,7 @@ namespace System.Net.Sockets
 
         /* Connects to the remote address */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void Connect_icall(
+        static extern void Connect_icall(
             IntPtr sock,
             SocketAddress sa,
             out int error,
@@ -1782,7 +1782,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void Disconnect_icall(IntPtr sock, bool reuse, out int error);
+        static extern void Disconnect_icall(IntPtr sock, bool reuse, out int error);
 
         #endregion
 
@@ -2245,7 +2245,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static unsafe int Receive_array_icall(
+        static extern unsafe int Receive_array_icall(
             IntPtr sock,
             WSABUF* bufarray,
             int count,
@@ -2282,7 +2282,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static unsafe int Receive_icall(
+        static extern unsafe int Receive_icall(
             IntPtr sock,
             byte* buffer,
             int count,
@@ -2637,7 +2637,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static unsafe int ReceiveFrom_icall(
+        static extern unsafe int ReceiveFrom_icall(
             IntPtr sock,
             byte* buffer,
             int count,
@@ -3163,7 +3163,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static unsafe int Send_array_icall(
+        static extern unsafe int Send_array_icall(
             IntPtr sock,
             WSABUF* bufarray,
             int count,
@@ -3200,7 +3200,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static unsafe int Send_icall(
+        static extern unsafe int Send_icall(
             IntPtr sock,
             byte* buffer,
             int count,
@@ -3499,7 +3499,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static unsafe int SendTo_icall(
+        static extern unsafe int SendTo_icall(
             IntPtr sock,
             byte* buffer,
             int count,
@@ -3623,7 +3623,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static bool SendFile_icall(
+        static extern bool SendFile_icall(
             IntPtr sock,
             string filename,
             byte[] pre_buffer,
@@ -3851,7 +3851,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void GetSocketOption_arr_icall(
+        static extern void GetSocketOption_arr_icall(
             IntPtr socket,
             SocketOptionLevel level,
             SocketOptionName name,
@@ -3887,7 +3887,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void GetSocketOption_obj_icall(
+        static extern void GetSocketOption_obj_icall(
             IntPtr socket,
             SocketOptionLevel level,
             SocketOptionName name,
@@ -4096,7 +4096,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void SetSocketOption_icall(
+        static extern void SetSocketOption_icall(
             IntPtr socket,
             SocketOptionLevel level,
             SocketOptionName name,
@@ -4163,7 +4163,7 @@ namespace System.Net.Sockets
          * and Winsock are FIONREAD, FIONBIO and SIOCATMARK. Anything else will depend on the system
          * except SIO_KEEPALIVE_VALS which is properly handled on both windows and linux. */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static int IOControl_icall(
+        static extern int IOControl_icall(
             IntPtr sock,
             int ioctl_code,
             byte[] input,
@@ -4188,7 +4188,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void Close_icall(IntPtr socket, out int error);
+        internal static extern void Close_icall(IntPtr socket, out int error);
 
         #endregion
 
@@ -4241,7 +4241,7 @@ namespace System.Net.Sockets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void Shutdown_icall(
+        internal static extern void Shutdown_icall(
             IntPtr socket,
             SocketShutdown how,
             out int error

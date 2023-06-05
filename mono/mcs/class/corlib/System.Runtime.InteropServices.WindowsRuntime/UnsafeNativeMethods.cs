@@ -28,7 +28,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-    internal unsafe static class UnsafeNativeMethods
+    internal static unsafe class UnsafeNativeMethods
     {
 #if !DISABLE_COM
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

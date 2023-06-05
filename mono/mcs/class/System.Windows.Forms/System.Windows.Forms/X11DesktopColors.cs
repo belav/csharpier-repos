@@ -93,10 +93,11 @@ namespace System.Windows.Forms
             KDE,
             Unknown
         }
+        private
         #endregion	// Structs & Enums
 
         #region Local Variables
-        static private Desktop desktop;
+        static Desktop desktop;
         #endregion	// Local Variables
 
         #region Constructors
@@ -220,7 +221,11 @@ namespace System.Windows.Forms
         #endregion	// Properties
 
         #region Methods
-        static internal void Initialize()
+        internal
+        #endregion	// Properties
+
+        #region Methods
+        static void Initialize()
         {
             // Do nothing; all is done in our static ctor
         }

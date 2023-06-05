@@ -92,7 +92,7 @@ namespace System.Data
         private DataSetClearEventhandler onClearFunctionCalled; // Internal for XmlDataDocument only
         private System.EventHandler onInitialized;
 
-        internal readonly static DataTable[] zeroTables = new DataTable[0];
+        internal static readonly DataTable[] zeroTables = new DataTable[0];
         internal string mainTableName = "";
 
         //default remoting format is XML

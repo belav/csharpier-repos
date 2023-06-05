@@ -35,7 +35,7 @@ namespace System
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern internal static bool CheckThrowUnobservedTaskExceptions();
+        internal static extern bool CheckThrowUnobservedTaskExceptions();
     } // internal class CLRConfig
 } // namespace System
 

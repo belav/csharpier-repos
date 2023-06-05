@@ -1125,7 +1125,7 @@ namespace System.Globalization
             return GregorianCalendar.GetAbsoluteDate(yg, mg, dg);
         }
 
-        static internal void CheckTicksRange(long ticks)
+        internal static void CheckTicksRange(long ticks)
         {
             if (ticks < minDate.Ticks || ticks > maxDate.Ticks)
             {
@@ -1141,7 +1141,7 @@ namespace System.Globalization
             }
         }
 
-        static internal void CheckEraRange(int era)
+        internal static void CheckEraRange(int era)
         {
             if (era != CurrentEra && era != UmAlQuraEra)
             {
@@ -1152,7 +1152,7 @@ namespace System.Globalization
             }
         }
 
-        static internal void CheckYearRange(int year, int era)
+        internal static void CheckYearRange(int year, int era)
         {
             CheckEraRange(era);
             if (year < MinCalendarYear || year > MaxCalendarYear)
@@ -1169,7 +1169,7 @@ namespace System.Globalization
             }
         }
 
-        static internal void CheckYearMonthRange(int year, int month, int era)
+        internal static void CheckYearMonthRange(int year, int month, int era)
         {
             CheckYearRange(year, era);
             if (month < 1 || month > 12)
@@ -1426,7 +1426,7 @@ namespace System.Globalization
                 return 30;
         }
 
-        static internal int RealGetDaysInYear(int year)
+        internal static int RealGetDaysInYear(int year)
         {
             int days = 0,
                 b;

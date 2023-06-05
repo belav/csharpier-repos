@@ -9,5 +9,5 @@ namespace System.Runtime.CompilerServices
 
     [Serializable]
     [AttributeUsage(AttributeTargets.Struct)]
-    sealed public class UnsafeValueTypeAttribute : Attribute { }
+    public sealed class UnsafeValueTypeAttribute : Attribute { }
 }

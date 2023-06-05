@@ -7,7 +7,7 @@ using System;
 public class CLSClass
 {
     [CLSCompliant(false)]
-    static public implicit operator CLSClass(byte value)
+    public static implicit operator CLSClass(byte value)
     {
         return new CLSClass();
     }

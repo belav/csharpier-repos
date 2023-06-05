@@ -30,7 +30,20 @@ namespace Novell.Directory.Ldap.Utilclass
         /// performed.
         /// </returns>
 
-        static public LdapExtendedResponse convertToExtendedResponse(RfcLdapMessage inResponse)
+        public
+        /// <summary> Used to Convert an RfcLdapMessage object to the appropriate
+        /// LdapExtendedResponse object depending on the operation being performed.
+        ///
+        /// </summary>
+        /// <param name="inResponse">  The LdapExtendedReponse object as returned by the
+        /// extendedOperation method in the LdapConnection object.
+        /// </param>
+        /// <returns> An object of base class LdapExtendedResponse.  The actual child
+        /// class of this returned object depends on the operation being
+        /// performed.
+        /// </returns>
+
+        static LdapExtendedResponse convertToExtendedResponse(RfcLdapMessage inResponse)
         {
             LdapExtendedResponse tempResponse = new LdapExtendedResponse(inResponse);
             // Get the oid stored in the Extended response

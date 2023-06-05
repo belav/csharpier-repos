@@ -88,7 +88,7 @@ namespace System.Runtime.CompilerServices
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern void _PrepareMethod(
+        private static extern unsafe void _PrepareMethod(
             IRuntimeMethodInfo method,
             IntPtr* pInstantiation,
             int cInstantiation
@@ -167,7 +167,7 @@ namespace System.Runtime.CompilerServices
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public new static extern bool Equals(Object o1, Object o2);
+        public static extern new bool Equals(Object o1, Object o2);
 
         public static int OffsetToStringData
         {

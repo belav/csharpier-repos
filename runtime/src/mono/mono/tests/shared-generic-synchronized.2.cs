@@ -46,7 +46,7 @@ class main
 {
     public delegate int Delegate1();
 
-    static public int Main(String[] args)
+    public static int Main(String[] args)
     {
         Test<string> b = new Test<string>();
         int res;

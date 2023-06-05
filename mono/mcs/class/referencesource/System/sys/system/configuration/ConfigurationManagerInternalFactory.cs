@@ -18,9 +18,9 @@ namespace System.Configuration
             "System.Configuration.Internal.ConfigurationManagerInternal, "
             + AssemblyRef.SystemConfiguration;
 
-        static private volatile IConfigurationManagerInternal s_instance;
+        private static volatile IConfigurationManagerInternal s_instance;
 
-        static internal IConfigurationManagerInternal Instance
+        internal static IConfigurationManagerInternal Instance
         {
             get
             {

@@ -12,7 +12,7 @@ namespace System.Collections.Tests
         const int MaxTest = 100;
         const int Seed = 42;
 
-        private readonly static IComparer<string> s_stringComparer = StringComparer.Ordinal;
+        private static readonly IComparer<string> s_stringComparer = StringComparer.Ordinal;
 
         [Theory]
         [MemberData(nameof(GetRandomStringArrays))]

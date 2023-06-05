@@ -21,7 +21,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class AllMembershipCondition
+    public sealed class AllMembershipCondition
         : IMembershipCondition,
             IConstantMembershipCondition,
             IReportMatchMembershipCondition

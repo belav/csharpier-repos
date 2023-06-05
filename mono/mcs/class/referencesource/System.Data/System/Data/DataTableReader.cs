@@ -113,7 +113,7 @@ namespace System.Data
             listener = new DataTableReaderListener(this);
         }
 
-        override public void Close()
+        public override void Close()
         {
             if (!isOpen)
                 return;
@@ -127,7 +127,7 @@ namespace System.Data
             isOpen = false;
         }
 
-        override public DataTable GetSchemaTable()
+        public override DataTable GetSchemaTable()
         {
             ValidateOpen("GetSchemaTable");
             ValidateReader();
@@ -140,7 +140,7 @@ namespace System.Data
             return schemaTable;
         }
 
-        override public bool NextResult()
+        public override bool NextResult()
         {
             // next result set; reset everything
             ValidateOpen("NextResult");
@@ -167,7 +167,7 @@ namespace System.Data
             return true;
         }
 
-        override public bool Read()
+        public override bool Read()
         {
             /*            else if (tableCleared) {
                             return false;
@@ -222,7 +222,7 @@ namespace System.Data
             return true;
         }
 
-        override public int Depth
+        public override int Depth
         {
             get
             {
@@ -232,12 +232,12 @@ namespace System.Data
             }
         }
 
-        override public bool IsClosed
+        public override bool IsClosed
         {
             get { return (!isOpen); }
         }
 
-        override public int RecordsAffected
+        public override int RecordsAffected
         {
             get
             {
@@ -246,7 +246,7 @@ namespace System.Data
             }
         }
 
-        override public bool HasRows
+        public override bool HasRows
         {
             get
             {
@@ -256,7 +256,7 @@ namespace System.Data
             }
         }
 
-        override public object this[int ordinal]
+        public override object this[int ordinal]
         {
             get
             {
@@ -279,7 +279,7 @@ namespace System.Data
             }
         }
 
-        override public object this[string name]
+        public override object this[string name]
         {
             get
             {
@@ -294,7 +294,7 @@ namespace System.Data
             }
         }
 
-        override public Int32 FieldCount
+        public override Int32 FieldCount
         {
             get
             {
@@ -304,28 +304,28 @@ namespace System.Data
             }
         }
 
-        override public Type GetProviderSpecificFieldType(int ordinal)
+        public override Type GetProviderSpecificFieldType(int ordinal)
         {
             ValidateOpen("GetProviderSpecificFieldType");
             ValidateReader();
             return GetFieldType(ordinal);
         }
 
-        override public Object GetProviderSpecificValue(int ordinal)
+        public override Object GetProviderSpecificValue(int ordinal)
         {
             ValidateOpen("GetProviderSpecificValue");
             ValidateReader();
             return GetValue(ordinal);
         }
 
-        override public int GetProviderSpecificValues(object[] values)
+        public override int GetProviderSpecificValues(object[] values)
         {
             ValidateOpen("GetProviderSpecificValues");
             ValidateReader();
             return GetValues(values);
         }
 
-        override public bool GetBoolean(int ordinal)
+        public override bool GetBoolean(int ordinal)
         {
             ValidateState("GetBoolean");
             ValidateReader();
@@ -340,7 +340,7 @@ namespace System.Data
             }
         }
 
-        override public byte GetByte(int ordinal)
+        public override byte GetByte(int ordinal)
         {
             ValidateState("GetByte");
             ValidateReader();
@@ -355,7 +355,7 @@ namespace System.Data
             }
         }
 
-        override public long GetBytes(
+        public override long GetBytes(
             int ordinal,
             long dataIndex,
             byte[] buffer,
@@ -405,7 +405,7 @@ namespace System.Data
             return byteCount;
         }
 
-        override public char GetChar(int ordinal)
+        public override char GetChar(int ordinal)
         {
             ValidateState("GetChar");
             ValidateReader();
@@ -420,7 +420,7 @@ namespace System.Data
             }
         }
 
-        override public long GetChars(
+        public override long GetChars(
             int ordinal,
             long dataIndex,
             char[] buffer,
@@ -472,14 +472,14 @@ namespace System.Data
             return charCount;
         }
 
-        override public String GetDataTypeName(int ordinal)
+        public override String GetDataTypeName(int ordinal)
         {
             ValidateOpen("GetDataTypeName");
             ValidateReader();
             return ((Type)GetFieldType(ordinal)).Name;
         }
 
-        override public DateTime GetDateTime(int ordinal)
+        public override DateTime GetDateTime(int ordinal)
         {
             ValidateState("GetDateTime");
             ValidateReader();
@@ -494,7 +494,7 @@ namespace System.Data
             }
         }
 
-        override public Decimal GetDecimal(int ordinal)
+        public override Decimal GetDecimal(int ordinal)
         {
             ValidateState("GetDecimal");
             ValidateReader();
@@ -509,7 +509,7 @@ namespace System.Data
             }
         }
 
-        override public Double GetDouble(int ordinal)
+        public override Double GetDouble(int ordinal)
         {
             ValidateState("GetDouble");
             ValidateReader();
@@ -524,7 +524,7 @@ namespace System.Data
             }
         }
 
-        override public Type GetFieldType(int ordinal)
+        public override Type GetFieldType(int ordinal)
         {
             ValidateOpen("GetFieldType");
             ValidateReader();
@@ -539,7 +539,7 @@ namespace System.Data
             }
         }
 
-        override public Single GetFloat(int ordinal)
+        public override Single GetFloat(int ordinal)
         {
             ValidateState("GetFloat");
             ValidateReader();
@@ -554,7 +554,7 @@ namespace System.Data
             }
         }
 
-        override public Guid GetGuid(int ordinal)
+        public override Guid GetGuid(int ordinal)
         {
             ValidateState("GetGuid");
             ValidateReader();
@@ -569,7 +569,7 @@ namespace System.Data
             }
         }
 
-        override public Int16 GetInt16(int ordinal)
+        public override Int16 GetInt16(int ordinal)
         {
             ValidateState("GetInt16");
             ValidateReader();
@@ -584,7 +584,7 @@ namespace System.Data
             }
         }
 
-        override public Int32 GetInt32(int ordinal)
+        public override Int32 GetInt32(int ordinal)
         {
             ValidateState("GetInt32");
             ValidateReader();
@@ -599,7 +599,7 @@ namespace System.Data
             }
         }
 
-        override public Int64 GetInt64(int ordinal)
+        public override Int64 GetInt64(int ordinal)
         {
             ValidateState("GetInt64");
             ValidateReader();
@@ -614,7 +614,7 @@ namespace System.Data
             }
         }
 
-        override public String GetName(int ordinal)
+        public override String GetName(int ordinal)
         {
             ValidateOpen("GetName");
             ValidateReader();
@@ -629,7 +629,7 @@ namespace System.Data
             }
         }
 
-        override public Int32 GetOrdinal(string name)
+        public override Int32 GetOrdinal(string name)
         {
             ValidateOpen("GetOrdinal");
             ValidateReader();
@@ -645,7 +645,7 @@ namespace System.Data
             }
         }
 
-        override public string GetString(int ordinal)
+        public override string GetString(int ordinal)
         {
             ValidateState("GetString");
             ValidateReader();
@@ -660,7 +660,7 @@ namespace System.Data
             }
         }
 
-        override public object GetValue(int ordinal)
+        public override object GetValue(int ordinal)
         {
             ValidateState("GetValue");
             ValidateReader();
@@ -675,7 +675,7 @@ namespace System.Data
             }
         }
 
-        override public Int32 GetValues(object[] values)
+        public override Int32 GetValues(object[] values)
         {
             ValidateState("GetValues");
             ValidateReader();
@@ -697,7 +697,7 @@ namespace System.Data
             );
         }
 
-        override public bool IsDBNull(int ordinal)
+        public override bool IsDBNull(int ordinal)
         {
             ValidateState("IsDBNull");
             ValidateReader();
@@ -713,13 +713,15 @@ namespace System.Data
         }
 
         // IEnumerable
-        override public IEnumerator GetEnumerator()
+        public
+        // IEnumerable
+        override IEnumerator GetEnumerator()
         {
             ValidateOpen("GetEnumerator");
             return new DbEnumerator((IDataReader)this);
         }
 
-        static internal DataTable GetSchemaTableFromDataTable(DataTable table)
+        internal static DataTable GetSchemaTableFromDataTable(DataTable table)
         {
             if (table == null)
             {

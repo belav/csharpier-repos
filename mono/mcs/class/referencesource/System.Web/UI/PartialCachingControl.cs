@@ -885,7 +885,17 @@ namespace System.Web.UI
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        static public void BuildCachedControl(
+        public
+        /*
+         * Called by generated code (hence must be public).
+         * Create a StaticPartialCachingControl and add it as a child
+         */
+
+        /// <internalonly/>
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        static void BuildCachedControl(
             Control parent,
             string ctrlID,
             string guid,
@@ -914,7 +924,12 @@ namespace System.Web.UI
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        static public void BuildCachedControl(
+        public
+        /// <internalonly/>
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        static void BuildCachedControl(
             Control parent,
             string ctrlID,
             string guid,
@@ -940,7 +955,7 @@ namespace System.Web.UI
             );
         }
 
-        static public void BuildCachedControl(
+        public static void BuildCachedControl(
             Control parent,
             string ctrlID,
             string guid,

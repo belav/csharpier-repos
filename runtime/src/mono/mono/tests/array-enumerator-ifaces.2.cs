@@ -12,7 +12,7 @@ class Test
         SetRequiredInputTypes(new List<string>[] { in1, in2 });
     }
 
-    static public void SetRequiredInputTypes(IEnumerable<IEnumerable<string>> enum_enum_strings)
+    public static void SetRequiredInputTypes(IEnumerable<IEnumerable<string>> enum_enum_strings)
     {
         foreach (IEnumerable<string> enum_strings in enum_enum_strings)
         {

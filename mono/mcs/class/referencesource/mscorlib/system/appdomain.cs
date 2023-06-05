@@ -3190,7 +3190,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private String GetDynamicDir();
+        private extern String GetDynamicDir();
 
         // Private helpers called from unmanaged code.
 
@@ -3779,7 +3779,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern AppDomain GetDefaultDomain();
+        internal static extern AppDomain GetDefaultDomain();
 #endif
 
 #if FEATURE_IMPERSONATION

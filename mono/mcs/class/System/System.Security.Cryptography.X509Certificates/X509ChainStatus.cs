@@ -59,7 +59,11 @@ namespace System.Security.Cryptography.X509Certificates
         // private stuff
 
         // note: flags isn't a flag (i.e. multiple values) when used here
-        static internal string GetInformation(X509ChainStatusFlags flags)
+        internal
+        // private stuff
+
+        // note: flags isn't a flag (i.e. multiple values) when used here
+        static string GetInformation(X509ChainStatusFlags flags)
         {
             switch (flags)
             {

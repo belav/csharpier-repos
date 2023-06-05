@@ -35,7 +35,7 @@ namespace hello_tryfinallythrow_nonlocalexit_finallyexec_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void Middle(int i)
+        public static void Middle(int i)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace hello_tryfinallythrow_nonlocalexit_finallyexec_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();

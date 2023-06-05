@@ -81,9 +81,11 @@ namespace System.Web
         //
         // Called by HttpRuntime.HostingInit to initialize UrlMetadataSlidingExpiration
         //
-        static internal void InitializeUrlMetadataSlidingExpiration(
-            HostingEnvironmentSection section
-        )
+        internal
+        //
+        // Called by HttpRuntime.HostingInit to initialize UrlMetadataSlidingExpiration
+        //
+        static void InitializeUrlMetadataSlidingExpiration(HostingEnvironmentSection section)
         {
             TimeSpan slidingExp = section.UrlMetadataSlidingExpiration;
             if (slidingExp == TimeSpan.Zero)
@@ -112,7 +114,11 @@ namespace System.Web
         //
         // Get CachedPathData for the machine.config level
         //
-        static internal CachedPathData GetMachinePathData()
+        internal
+        //
+        // Get CachedPathData for the machine.config level
+        //
+        static CachedPathData GetMachinePathData()
         {
             return GetConfigPathData(WebConfigurationHost.MachineConfigPath);
         }
@@ -120,7 +126,11 @@ namespace System.Web
         //
         // Get CachedPathData for the root web.config path
         //
-        static internal CachedPathData GetRootWebPathData()
+        internal
+        //
+        // Get CachedPathData for the root web.config path
+        //
+        static CachedPathData GetRootWebPathData()
         {
             return GetConfigPathData(WebConfigurationHost.RootWebConfigPath);
         }
@@ -128,7 +138,11 @@ namespace System.Web
         //
         // Get CachedPathData for the application.
         //
-        static internal CachedPathData GetApplicationPathData()
+        internal
+        //
+        // Get CachedPathData for the application.
+        //
+        static CachedPathData GetApplicationPathData()
         {
             if (!HostingEnvironment.IsHosted)
             {
@@ -142,7 +156,12 @@ namespace System.Web
         // Get CachedPathData for a virtual path.
         // The path may be supplied by user code, so check that it is valid.
         //
-        static internal CachedPathData GetVirtualPathData(
+        internal
+        //
+        // Get CachedPathData for a virtual path.
+        // The path may be supplied by user code, so check that it is valid.
+        //
+        static CachedPathData GetVirtualPathData(
             VirtualPath virtualPath,
             bool permitPathsOutsideApp
         )
@@ -188,7 +207,9 @@ namespace System.Web
         }
 
         // Dev10 862204: AppDomain does not restart when the application's web.config is touched 2 minutes after the last request
-        static private bool IsCachedPathDataRemovable(string configPath)
+        private
+        // Dev10 862204: AppDomain does not restart when the application's web.config is touched 2 minutes after the last request
+        static bool IsCachedPathDataRemovable(string configPath)
         {
             // have we initialized yet?
             if (s_appConfigPathLength == 0)
@@ -205,7 +226,10 @@ namespace System.Web
 
         // Example of configPath = "machine/webroot/1/fxtest/sub/foo.aspx"
         // The configPath parameter must be lower case.
-        static private CachedPathData GetConfigPathData(string configPath)
+        private
+        // Example of configPath = "machine/webroot/1/fxtest/sub/foo.aspx"
+        // The configPath parameter must be lower case.
+        static CachedPathData GetConfigPathData(string configPath)
         {
             Debug.Assert(
                 ConfigPathUtility.IsValid(configPath),
@@ -509,7 +533,9 @@ namespace System.Web
         }
 
         // Ensure that the physical path does not look suspicious (MSRC 5556).
-        static private string GetPhysicalPath(VirtualPath virtualPath)
+        private
+        // Ensure that the physical path does not look suspicious (MSRC 5556).
+        static string GetPhysicalPath(VirtualPath virtualPath)
         {
             string physicalPath = null;
             try
@@ -547,7 +573,12 @@ namespace System.Web
         // 400 range error. We need to remove all data up the path to account for
         // virtual files.
         // An example of a 400 range error is "path not found".
-        static internal void RemoveBadPathData(CachedPathData pathData)
+        internal
+        // Remove CachedPathData when the first request for the path results in a
+        // 400 range error. We need to remove all data up the path to account for
+        // virtual files.
+        // An example of a 400 range error is "path not found".
+        static void RemoveBadPathData(CachedPathData pathData)
         {
             CacheStoreProvider cacheInternal = HttpRuntime.Cache.InternalCache;
 
@@ -569,7 +600,11 @@ namespace System.Web
         // Mark CachedPathData as completed when the first request for the path results in a
         // status outside the 400 range. We need to mark all data up the path to account for
         // virtual files.
-        static internal void MarkCompleted(CachedPathData pathData)
+        internal
+        // Mark CachedPathData as completed when the first request for the path results in a
+        // status outside the 400 range. We need to mark all data up the path to account for
+        // virtual files.
+        static void MarkCompleted(CachedPathData pathData)
         {
             CacheStoreProvider cacheInternal = HttpRuntime.Cache.InternalCache;
 

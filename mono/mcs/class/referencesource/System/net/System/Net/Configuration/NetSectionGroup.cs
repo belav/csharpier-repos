@@ -56,7 +56,10 @@ namespace System.Net.Configuration
         }
 #endif // !FEATURE_PAL
 
-        static public NetSectionGroup GetSectionGroup(Configuration config)
+        public
+#endif // !FEATURE_PAL
+
+        static NetSectionGroup GetSectionGroup(Configuration config)
         {
             if (config == null)
                 throw new ArgumentNullException("config");

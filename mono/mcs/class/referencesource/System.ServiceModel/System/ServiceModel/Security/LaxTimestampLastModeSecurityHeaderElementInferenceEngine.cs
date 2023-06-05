@@ -12,7 +12,7 @@ namespace System.ServiceModel.Security
 
         LaxTimestampLastModeSecurityHeaderElementInferenceEngine() { }
 
-        internal new static LaxTimestampLastModeSecurityHeaderElementInferenceEngine Instance
+        internal static new LaxTimestampLastModeSecurityHeaderElementInferenceEngine Instance
         {
             get { return instance; }
         }

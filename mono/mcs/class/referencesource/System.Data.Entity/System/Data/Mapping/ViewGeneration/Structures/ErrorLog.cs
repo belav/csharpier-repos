@@ -251,7 +251,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             // effects: Converts the message/debugMessage to a user-readable
             // message using resources (if isInvariant is false) or a test
             // message (if isInvariant is true)
-            static private string InternalToString(
+            private
+            // effects: Converts the message/debugMessage to a user-readable
+            // message using resources (if isInvariant is false) or a test
+            // message (if isInvariant is true)
+            static string InternalToString(
                 string message,
                 string debugMessage,
                 List<Cell> sourceCells,

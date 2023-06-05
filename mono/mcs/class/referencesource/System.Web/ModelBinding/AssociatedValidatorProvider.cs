@@ -13,7 +13,7 @@
             return TypeDescriptorHelper.Get(type);
         }
 
-        public override sealed IEnumerable<ModelValidator> GetValidators(
+        public sealed override IEnumerable<ModelValidator> GetValidators(
             ModelMetadata metadata,
             ModelBindingExecutionContext context
         )

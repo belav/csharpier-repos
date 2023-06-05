@@ -10,18 +10,19 @@ namespace System.Configuration
     using System.Diagnostics.CodeAnalysis;
     using System.Security.Permissions;
 
+    internal
     //
     // class ConfigurationManagerHelperFactory manages access to a
     // single instance of ConfigurationManagerHelper.
     //
-    static internal class ConfigurationManagerHelperFactory
+    static class ConfigurationManagerHelperFactory
     {
         private const string ConfigurationManagerHelperTypeString =
             "System.Configuration.Internal.ConfigurationManagerHelper, " + AssemblyRef.System;
 
-        static private volatile IConfigurationManagerHelper s_instance;
+        private static volatile IConfigurationManagerHelper s_instance;
 
-        static internal IConfigurationManagerHelper Instance
+        internal static IConfigurationManagerHelper Instance
         {
             get
             {

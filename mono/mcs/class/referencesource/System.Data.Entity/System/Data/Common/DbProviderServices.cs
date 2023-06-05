@@ -31,7 +31,7 @@ namespace System.Data.Common
         MessageId = "Db"
     )]
     [CLSCompliant(false)]
-    abstract public class DbProviderServices
+    public abstract class DbProviderServices
     {
         /// <summary>
         /// Create a Command Definition object given a command tree.

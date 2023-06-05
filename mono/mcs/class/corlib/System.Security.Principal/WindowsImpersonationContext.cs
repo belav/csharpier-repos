@@ -89,15 +89,15 @@ namespace System.Security.Principal
         // see mono/mono/metadata/security.c for implementation
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool CloseToken(IntPtr token);
+        private static extern bool CloseToken(IntPtr token);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static IntPtr DuplicateToken(IntPtr token);
+        private static extern IntPtr DuplicateToken(IntPtr token);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool SetCurrentToken(IntPtr token);
+        private static extern bool SetCurrentToken(IntPtr token);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool RevertToSelf();
+        private static extern bool RevertToSelf();
     }
 }

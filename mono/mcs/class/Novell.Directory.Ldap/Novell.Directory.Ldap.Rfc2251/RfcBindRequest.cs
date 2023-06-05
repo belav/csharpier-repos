@@ -45,9 +45,10 @@ namespace Novell.Directory.Ldap.Rfc2251
     /// </summary>
     public class RfcBindRequest : Asn1Sequence, RfcRequest
     {
+        public
         /// <summary> </summary>
         /// <summary> Sets the protocol version</summary>
-        virtual public Asn1Integer Version
+        virtual Asn1Integer Version
         {
             get { return (Asn1Integer)get_Renamed(0); }
             set
@@ -57,9 +58,10 @@ namespace Novell.Directory.Ldap.Rfc2251
             }
         }
 
+        public
         /// <summary> </summary>
         /// <summary> </summary>
-        virtual public RfcLdapDN Name
+        virtual RfcLdapDN Name
         {
             get { return (RfcLdapDN)get_Renamed(1); }
             set
@@ -69,9 +71,10 @@ namespace Novell.Directory.Ldap.Rfc2251
             }
         }
 
+        public
         /// <summary> </summary>
         /// <summary> </summary>
-        virtual public RfcAuthenticationChoice AuthenticationChoice
+        virtual RfcAuthenticationChoice AuthenticationChoice
         {
             get { return (RfcAuthenticationChoice)get_Renamed(2); }
             set
@@ -81,12 +84,13 @@ namespace Novell.Directory.Ldap.Rfc2251
             }
         }
 
+        private static
         /// <summary> ID is added for Optimization.
         ///
         /// ID needs only be one Value for every instance,
         /// thus we create it only once.
         /// </summary>
-        new private static readonly Asn1Identifier ID = new Asn1Identifier(
+        new readonly Asn1Identifier ID = new Asn1Identifier(
             Asn1Identifier.APPLICATION,
             true,
             LdapMessage.BIND_REQUEST

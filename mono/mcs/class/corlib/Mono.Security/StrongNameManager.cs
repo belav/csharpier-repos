@@ -100,12 +100,15 @@ namespace Mono.Security
             }
         }
 
-        static private Hashtable mappings;
-        static private Hashtable tokens;
+        private static Hashtable mappings;
+        private static Hashtable tokens;
 
         // note: more than one configuration file can be loaded at the
         // same time (e.g. user specific and machine specific config).
-        static public void LoadConfig(string filename)
+        public
+        // note: more than one configuration file can be loaded at the
+        // same time (e.g. user specific and machine specific config).
+        static void LoadConfig(string filename)
         {
             if (File.Exists(filename))
             {
@@ -141,7 +144,7 @@ namespace Mono.Security
             }
         }
 
-        static private void LoadMapping(SecurityElement mapping)
+        private static void LoadMapping(SecurityElement mapping)
         {
             if (mappings == null)
             {
@@ -178,7 +181,7 @@ namespace Mono.Security
             }
         }
 
-        static private void LoadVerificationSettings(SecurityElement settings)
+        private static void LoadVerificationSettings(SecurityElement settings)
         {
             if (tokens == null)
             {
@@ -239,7 +242,7 @@ namespace Mono.Security
             }
         }
 
-        static public byte[] GetMappedPublicKey(byte[] token)
+        public static byte[] GetMappedPublicKey(byte[] token)
         {
             if ((mappings == null) || (token == null))
                 return null;
@@ -256,7 +259,12 @@ namespace Mono.Security
         // or a strongname public key using the "sn" tool.
         // note: only the runtime checks if the assembly is loaded
         // from the GAC to skip verification
-        static public bool MustVerify(AssemblyName an)
+        public
+        // it is possible to skip verification for assemblies
+        // or a strongname public key using the "sn" tool.
+        // note: only the runtime checks if the assembly is loaded
+        // from the GAC to skip verification
+        static bool MustVerify(AssemblyName an)
         {
             if ((an == null) || (tokens == null))
                 return true;

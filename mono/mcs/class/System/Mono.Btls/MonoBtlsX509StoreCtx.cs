@@ -62,58 +62,58 @@ namespace Mono.Btls
 
         int? verifyResult;
 
-        new internal BoringX509StoreCtxHandle Handle
+        internal new BoringX509StoreCtxHandle Handle
         {
             get { return (BoringX509StoreCtxHandle)base.Handle; }
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_store_ctx_new();
+        static extern IntPtr mono_btls_x509_store_ctx_new();
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_store_ctx_from_ptr(IntPtr ctx);
+        static extern IntPtr mono_btls_x509_store_ctx_from_ptr(IntPtr ctx);
 
         [DllImport(BTLS_DYLIB)]
-        extern static MonoBtlsX509Error mono_btls_x509_store_ctx_get_error(
+        static extern MonoBtlsX509Error mono_btls_x509_store_ctx_get_error(
             IntPtr handle,
             out IntPtr error_string
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_store_ctx_get_error_depth(IntPtr handle);
+        static extern int mono_btls_x509_store_ctx_get_error_depth(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_store_ctx_get_chain(IntPtr handle);
+        static extern IntPtr mono_btls_x509_store_ctx_get_chain(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_store_ctx_init(IntPtr handle, IntPtr store, IntPtr chain);
+        static extern int mono_btls_x509_store_ctx_init(IntPtr handle, IntPtr store, IntPtr chain);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_store_ctx_set_param(IntPtr handle, IntPtr param);
+        static extern int mono_btls_x509_store_ctx_set_param(IntPtr handle, IntPtr param);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_store_ctx_verify_cert(IntPtr handle);
+        static extern int mono_btls_x509_store_ctx_verify_cert(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_store_ctx_get_by_subject(IntPtr handle, IntPtr name);
+        static extern IntPtr mono_btls_x509_store_ctx_get_by_subject(IntPtr handle, IntPtr name);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_store_ctx_get_current_cert(IntPtr handle);
+        static extern IntPtr mono_btls_x509_store_ctx_get_current_cert(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_store_ctx_get_current_issuer(IntPtr handle);
+        static extern IntPtr mono_btls_x509_store_ctx_get_current_issuer(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_store_ctx_get_verify_param(IntPtr handle);
+        static extern IntPtr mono_btls_x509_store_ctx_get_verify_param(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_store_ctx_get_untrusted(IntPtr handle);
+        static extern IntPtr mono_btls_x509_store_ctx_get_untrusted(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_store_ctx_up_ref(IntPtr handle);
+        static extern IntPtr mono_btls_x509_store_ctx_up_ref(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_x509_store_ctx_free(IntPtr handle);
+        static extern void mono_btls_x509_store_ctx_free(IntPtr handle);
 
         internal MonoBtlsX509StoreCtx()
             : base(new BoringX509StoreCtxHandle(mono_btls_x509_store_ctx_new())) { }

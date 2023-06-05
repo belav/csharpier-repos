@@ -47,7 +47,7 @@ namespace MonoTests.System.Windows.Forms
             CallingConvention = CallingConvention.StdCall,
             EntryPoint = "GetUserDefaultLCID"
         )]
-        private extern static int GetUserDefaultLCID();
+        private static extern int GetUserDefaultLCID();
 
         private static void CheckCulture()
         {

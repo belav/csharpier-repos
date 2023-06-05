@@ -31,7 +31,7 @@ public class Test
         public int flag;
     }
 
-    public unsafe static int Main()
+    public static unsafe int Main()
     {
         string testString = "A small string";
 

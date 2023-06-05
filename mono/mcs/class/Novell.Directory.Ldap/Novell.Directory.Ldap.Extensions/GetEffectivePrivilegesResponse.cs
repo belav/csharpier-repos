@@ -48,6 +48,7 @@ namespace Novell.Directory.Ldap.Extensions
     /// </summary>
     public class GetEffectivePrivilegesResponse : LdapExtendedResponse
     {
+        public
         /// <summary> Returns the effective privileges.
         ///
         /// See the ReplicationConstants class for the privilege flags.
@@ -57,7 +58,7 @@ namespace Novell.Directory.Ldap.Extensions
         /// returned by the server.
         ///
         /// </returns>
-        virtual public int Privileges
+        virtual int Privileges
         {
             get { return privileges; }
         }

@@ -29,7 +29,7 @@ namespace Mono.Btls.Interface
 {
     public class BtlsX509StoreCtx : BtlsObject
     {
-        new internal MonoBtlsX509StoreCtx Instance
+        internal new MonoBtlsX509StoreCtx Instance
         {
             get { return (MonoBtlsX509StoreCtx)base.Instance; }
         }

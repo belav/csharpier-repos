@@ -42,7 +42,7 @@ using System.IO.IsolatedStorage;
 
 namespace System.IO
 {
-    unsafe static class MonoIO
+    static unsafe class MonoIO
     {
         public const int FileAlreadyExistsHResult =
             unchecked((int)0x80070000) | (int)MonoIOError.ERROR_FILE_EXISTS;
@@ -184,7 +184,7 @@ namespace System.IO
         // directory methods
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static bool CreateDirectory(char* path, out MonoIOError error);
+        private static extern unsafe bool CreateDirectory(char* path, out MonoIOError error);
 
         public static bool CreateDirectory(string path, out MonoIOError error)
         {
@@ -198,7 +198,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static bool RemoveDirectory(char* path, out MonoIOError error);
+        private static extern unsafe bool RemoveDirectory(char* path, out MonoIOError error);
 
         public static bool RemoveDirectory(string path, out MonoIOError error)
         {
@@ -212,10 +212,10 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static string GetCurrentDirectory(out MonoIOError error);
+        public static extern string GetCurrentDirectory(out MonoIOError error);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static bool SetCurrentDirectory(char* path, out MonoIOError error);
+        private static extern unsafe bool SetCurrentDirectory(char* path, out MonoIOError error);
 
         public static bool SetCurrentDirectory(string path, out MonoIOError error)
         {
@@ -231,7 +231,7 @@ namespace System.IO
         // file methods
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static bool MoveFile(char* path, char* dest, out MonoIOError error);
+        private static extern unsafe bool MoveFile(char* path, char* dest, out MonoIOError error);
 
         public static bool MoveFile(string path, string dest, out MonoIOError error)
         {
@@ -248,7 +248,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static bool CopyFile(
+        private static extern unsafe bool CopyFile(
             char* path,
             char* dest,
             bool overwrite,
@@ -270,7 +270,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static bool DeleteFile(char* path, out MonoIOError error);
+        private static extern unsafe bool DeleteFile(char* path, out MonoIOError error);
 
         public static bool DeleteFile(string path, out MonoIOError error)
         {
@@ -284,7 +284,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static bool ReplaceFile(
+        private static extern unsafe bool ReplaceFile(
             char* sourceFileName,
             char* destinationFileName,
             char* destinationBackupFileName,
@@ -320,7 +320,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static FileAttributes GetFileAttributes(
+        private static extern unsafe FileAttributes GetFileAttributes(
             char* path,
             out MonoIOError error
         );
@@ -337,7 +337,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool SetFileAttributes(
+        private static extern bool SetFileAttributes(
             char* path,
             FileAttributes attrs,
             out MonoIOError error
@@ -359,7 +359,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static MonoFileType GetFileType(IntPtr handle, out MonoIOError error);
+        private static extern MonoFileType GetFileType(IntPtr handle, out MonoIOError error);
 
         public static MonoFileType GetFileType(SafeHandle safeHandle, out MonoIOError error)
         {
@@ -381,7 +381,7 @@ namespace System.IO
         //
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static IntPtr FindFirstFile(
+        private static extern unsafe IntPtr FindFirstFile(
             char* pathWithPattern,
             out string fileName,
             out int fileAttr,
@@ -410,7 +410,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static bool FindNextFile(
+        public static extern bool FindNextFile(
             IntPtr hnd,
             out string fileName,
             out int fileAttr,
@@ -418,7 +418,7 @@ namespace System.IO
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static bool FindCloseFile(IntPtr hnd);
+        public static extern bool FindCloseFile(IntPtr hnd);
 
         public static bool Exists(string path, out MonoIOError error)
         {
@@ -471,7 +471,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static bool GetFileStat(
+        private static extern unsafe bool GetFileStat(
             char* path,
             out MonoIOStat stat,
             out MonoIOError error
@@ -491,7 +491,7 @@ namespace System.IO
         // handle methods
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe extern static IntPtr Open(
+        private static extern unsafe IntPtr Open(
             char* filename,
             FileMode mode,
             FileAccess access,
@@ -519,7 +519,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool Cancel_internal(IntPtr handle, out MonoIOError error);
+        private static extern bool Cancel_internal(IntPtr handle, out MonoIOError error);
 
         internal static bool Cancel(SafeHandle safeHandle, out MonoIOError error)
         {
@@ -537,10 +537,10 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static bool Close(IntPtr handle, out MonoIOError error);
+        public static extern bool Close(IntPtr handle, out MonoIOError error);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static int Read(
+        private static extern int Read(
             IntPtr handle,
             byte[] dest,
             int dest_offset,
@@ -570,7 +570,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static int Write(
+        private static extern int Write(
             IntPtr handle,
             [In] byte[] src,
             int src_offset,
@@ -600,7 +600,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static long Seek(
+        private static extern long Seek(
             IntPtr handle,
             long offset,
             SeekOrigin origin,
@@ -628,7 +628,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool Flush(IntPtr handle, out MonoIOError error);
+        private static extern bool Flush(IntPtr handle, out MonoIOError error);
 
         public static bool Flush(SafeHandle safeHandle, out MonoIOError error)
         {
@@ -646,7 +646,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static long GetLength(IntPtr handle, out MonoIOError error);
+        private static extern long GetLength(IntPtr handle, out MonoIOError error);
 
         public static long GetLength(SafeHandle safeHandle, out MonoIOError error)
         {
@@ -664,7 +664,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool SetLength(IntPtr handle, long length, out MonoIOError error);
+        private static extern bool SetLength(IntPtr handle, long length, out MonoIOError error);
 
         public static bool SetLength(SafeHandle safeHandle, long length, out MonoIOError error)
         {
@@ -682,7 +682,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool SetFileTime(
+        private static extern bool SetFileTime(
             IntPtr handle,
             long creation_time,
             long last_access_time,
@@ -803,7 +803,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void Lock(
+        private static extern void Lock(
             IntPtr handle,
             long position,
             long length,
@@ -831,7 +831,7 @@ namespace System.IO
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void Unlock(
+        private static extern void Unlock(
             IntPtr handle,
             long position,
             long length,
@@ -860,19 +860,19 @@ namespace System.IO
 
         // console handles
 
-        public extern static IntPtr ConsoleOutput
+        public static extern IntPtr ConsoleOutput
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
 
-        public extern static IntPtr ConsoleInput
+        public static extern IntPtr ConsoleInput
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
 
-        public extern static IntPtr ConsoleError
+        public static extern IntPtr ConsoleError
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
@@ -881,14 +881,14 @@ namespace System.IO
         // pipe handles
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static bool CreatePipe(
+        public static extern bool CreatePipe(
             out IntPtr read_handle,
             out IntPtr write_handle,
             out MonoIOError error
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static bool DuplicateHandle(
+        public static extern bool DuplicateHandle(
             IntPtr source_process_handle,
             IntPtr source_handle,
             IntPtr target_process_handle,
@@ -901,31 +901,31 @@ namespace System.IO
 
         // path characters
 
-        public extern static char VolumeSeparatorChar
+        public static extern char VolumeSeparatorChar
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
 
-        public extern static char DirectorySeparatorChar
+        public static extern char DirectorySeparatorChar
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
 
-        public extern static char AltDirectorySeparatorChar
+        public static extern char AltDirectorySeparatorChar
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
 
-        public extern static char PathSeparator
+        public static extern char PathSeparator
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void DumpHandles();
+        static extern void DumpHandles();
     }
 }

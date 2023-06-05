@@ -1839,7 +1839,7 @@ public unsafe class Tests
      */
 
     [DllImport("libtest")]
-    extern static int marshal_test_ref_bool(
+    static extern int marshal_test_ref_bool(
         int i,
         [MarshalAs(UnmanagedType.I1)] ref bool b1,
         [MarshalAs(UnmanagedType.VariantBool)] ref bool b2,
@@ -1886,7 +1886,7 @@ public unsafe class Tests
     }
 
     [DllImport("libtest")]
-    extern static int marshal_test_bool_struct(ref BoolStruct s);
+    static extern int marshal_test_bool_struct(ref BoolStruct s);
 
     public static int test_0_pass_bool_in_struct()
     {
@@ -1927,7 +1927,7 @@ public unsafe class Tests
     }
 
     [DllImport("libtest")]
-    extern static int mono_test_marshal_long_struct(ref LongStruct s);
+    static extern int mono_test_marshal_long_struct(ref LongStruct s);
 
     public static int test_47_pass_long_struct()
     {
@@ -1976,7 +1976,7 @@ public unsafe class Tests
     public class T2 : T
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public override extern object MyClone();
+        public extern override object MyClone();
     }
 
     public static int test_0_missing_virtual_pinvoke_method()

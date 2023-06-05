@@ -811,16 +811,16 @@ namespace System.IO
         static extern IntPtr realpath(string pathname, StringBuilder sb);
 
         [DllImport("libc", SetLastError = true)]
-        extern static int open(string path, int flags, int mode_t);
+        static extern int open(string path, int flags, int mode_t);
 
         [DllImport("libc")]
-        extern static int close(int fd);
+        static extern int close(int fd);
 
         [DllImport("libc", SetLastError = true)]
-        extern static int kqueue();
+        static extern int kqueue();
 
         [DllImport("libc", SetLastError = true)]
-        extern static int kevent(
+        static extern int kevent(
             int kq,
             [In] kevent[] ev,
             int nchanges,
@@ -830,7 +830,7 @@ namespace System.IO
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static int kevent_notimeout(
+        static extern int kevent_notimeout(
             ref int kq,
             IntPtr ev,
             int nchanges,
@@ -911,9 +911,9 @@ namespace System.IO
         }
 
         [DllImport("libc")]
-        extern static int close(int fd);
+        static extern int close(int fd);
 
         [DllImport("libc")]
-        extern static int kqueue();
+        static extern int kqueue();
     }
 }

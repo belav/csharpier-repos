@@ -35,10 +35,11 @@ namespace System.Security.Policy
     [ComVisible(true)]
     public static class ApplicationSecurityManager
     {
+        private
         //		private const string config = "ApplicationTrust.config";
 
-        static private IApplicationTrustManager _appTrustManager;
-        static private ApplicationTrustCollection _userAppTrusts;
+        static IApplicationTrustManager _appTrustManager;
+        private static ApplicationTrustCollection _userAppTrusts;
 
         // properties
 

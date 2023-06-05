@@ -405,7 +405,7 @@ namespace System.ServiceModel.Description
             FxCop.Category.Security,
             FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods
         )]
-        internal protected virtual SecurityToken GetInfoCardSecurityToken(
+        protected internal virtual SecurityToken GetInfoCardSecurityToken(
             bool requiresInfoCard,
             CardSpacePolicyElement[] chain,
             SecurityTokenSerializer tokenSerializer

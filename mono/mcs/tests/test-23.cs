@@ -79,7 +79,7 @@ struct Z
         val = 4;
     }
 
-    static public int IVal
+    public static int IVal
     {
         get { return val; }
         set { val = value; }

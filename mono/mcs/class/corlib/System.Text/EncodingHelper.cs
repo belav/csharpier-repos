@@ -84,7 +84,7 @@ namespace System.Text
         static readonly object lockobj = new object();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        extern internal static string InternalCodePage(ref int code_page);
+        internal static extern string InternalCodePage(ref int code_page);
 
 #if !MONOTOUCH && !WASM
         internal static Encoding GetDefaultEncoding()

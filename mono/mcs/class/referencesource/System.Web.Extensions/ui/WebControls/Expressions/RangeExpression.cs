@@ -40,7 +40,7 @@
             set { ViewState["MaxType"] = value; }
         }
 
-        internal virtual new IOrderedDictionary GetValues()
+        internal new virtual IOrderedDictionary GetValues()
         {
             return Parameters.GetValues(Context, Owner);
         }

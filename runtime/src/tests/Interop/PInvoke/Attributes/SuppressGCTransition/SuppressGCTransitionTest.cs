@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using TestLibrary;
 
-unsafe static class SuppressGCTransitionNative
+static unsafe class SuppressGCTransitionNative
 {
     [DllImport(
         nameof(SuppressGCTransitionNative),

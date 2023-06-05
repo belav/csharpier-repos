@@ -45,77 +45,77 @@ namespace Mono.Btls
             }
         }
 
-        new internal BoringX509VerifyParamHandle Handle
+        internal new BoringX509VerifyParamHandle Handle
         {
             get { return (BoringX509VerifyParamHandle)base.Handle; }
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_verify_param_new();
+        static extern IntPtr mono_btls_x509_verify_param_new();
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_verify_param_copy(IntPtr handle);
+        static extern IntPtr mono_btls_x509_verify_param_copy(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_verify_param_lookup(IntPtr name);
+        static extern IntPtr mono_btls_x509_verify_param_lookup(IntPtr name);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_can_modify(IntPtr param);
+        static extern int mono_btls_x509_verify_param_can_modify(IntPtr param);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_name(IntPtr handle, IntPtr name);
+        static extern int mono_btls_x509_verify_param_set_name(IntPtr handle, IntPtr name);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_host(
+        static extern int mono_btls_x509_verify_param_set_host(
             IntPtr handle,
             IntPtr name,
             int namelen
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_add_host(
+        static extern int mono_btls_x509_verify_param_add_host(
             IntPtr handle,
             IntPtr name,
             int namelen
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static ulong mono_btls_x509_verify_param_get_flags(IntPtr handle);
+        static extern ulong mono_btls_x509_verify_param_get_flags(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_flags(IntPtr handle, ulong flags);
+        static extern int mono_btls_x509_verify_param_set_flags(IntPtr handle, ulong flags);
 
         [DllImport(BTLS_DYLIB)]
-        extern static MonoBtlsX509VerifyFlags mono_btls_x509_verify_param_get_mono_flags(
+        static extern MonoBtlsX509VerifyFlags mono_btls_x509_verify_param_get_mono_flags(
             IntPtr handle
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_mono_flags(
+        static extern int mono_btls_x509_verify_param_set_mono_flags(
             IntPtr handle,
             MonoBtlsX509VerifyFlags flags
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_purpose(
+        static extern int mono_btls_x509_verify_param_set_purpose(
             IntPtr handle,
             MonoBtlsX509Purpose purpose
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_get_depth(IntPtr handle);
+        static extern int mono_btls_x509_verify_param_get_depth(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_depth(IntPtr handle, int depth);
+        static extern int mono_btls_x509_verify_param_set_depth(IntPtr handle, int depth);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_time(IntPtr handle, long time);
+        static extern int mono_btls_x509_verify_param_set_time(IntPtr handle, long time);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_verify_param_get_peername(IntPtr handle);
+        static extern IntPtr mono_btls_x509_verify_param_get_peername(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_x509_verify_param_free(IntPtr handle);
+        static extern void mono_btls_x509_verify_param_free(IntPtr handle);
 
         internal MonoBtlsX509VerifyParam()
             : base(new BoringX509VerifyParamHandle(mono_btls_x509_verify_param_new())) { }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Program
 {
-    public unsafe static void Main()
+    public static unsafe void Main()
     {
         var list = new List<object>() { "" };
         fixed (char* c = (string)list[0]) { }

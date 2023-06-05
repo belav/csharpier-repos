@@ -641,7 +641,7 @@ internal static partial class Interop
             return true;
         }
 
-        public unsafe static bool WinHttpSetOption(
+        public static unsafe bool WinHttpSetOption(
             SafeWinHttpHandle handle,
             uint option,
             IntPtr optionData,

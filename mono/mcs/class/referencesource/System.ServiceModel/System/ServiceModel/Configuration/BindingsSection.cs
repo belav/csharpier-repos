@@ -39,7 +39,7 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        new public BindingCollectionElement this[string binding]
+        public new BindingCollectionElement this[string binding]
         {
             get { return (BindingCollectionElement)base[binding]; }
         }

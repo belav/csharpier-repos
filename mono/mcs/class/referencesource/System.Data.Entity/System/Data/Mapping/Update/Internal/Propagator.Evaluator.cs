@@ -73,10 +73,11 @@ namespace System.Data.Mapping.Update.Internal
             private PropagatorResult m_row;
             private Propagator m_parent;
             private static readonly string s_visitorName = typeof(Evaluator).FullName;
+            protected
             #endregion
 
             #region Properties
-            override protected string VisitorName
+            override string VisitorName
             {
                 get { return s_visitorName; }
             }
@@ -137,7 +138,15 @@ namespace System.Data.Mapping.Update.Internal
             /// <param name="row">Row to evaluate.</param>
             /// <param name="parent">Propagator context.</param>
             /// <returns>Scalar result.</returns>
-            static internal PropagatorResult Evaluate(
+            internal
+            /// <summary>
+            /// Evaluates scalar node.
+            /// </summary>
+            /// <param name="node">Sub-query returning a scalar value.</param>
+            /// <param name="row">Row to evaluate.</param>
+            /// <param name="parent">Propagator context.</param>
+            /// <returns>Scalar result.</returns>
+            static PropagatorResult Evaluate(
                 DbExpression node,
                 PropagatorResult row,
                 Propagator parent

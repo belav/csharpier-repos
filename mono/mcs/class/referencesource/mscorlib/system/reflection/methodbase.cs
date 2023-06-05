@@ -118,7 +118,7 @@ namespace System.Reflection
 
 #if MONO
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static MethodBase GetCurrentMethod();
+        public static extern MethodBase GetCurrentMethod();
 #else
         [System.Security.DynamicSecurityMethod] // Specify DynamicSecurityMethod attribute to prevent inlining of the caller.
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable

@@ -397,7 +397,7 @@ namespace System.Data.EntityClient
         /// <param name="ordinal"></param>
         /// <returns></returns>
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        override public Type GetProviderSpecificFieldType(int ordinal)
+        public override Type GetProviderSpecificFieldType(int ordinal)
         {
             return _storeDataReader.GetProviderSpecificFieldType(ordinal);
         }

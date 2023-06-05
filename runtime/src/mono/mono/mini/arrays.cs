@@ -82,7 +82,7 @@ class Tests
         return 0;
     }
 
-    public unsafe static int test_0_byte_array()
+    public static unsafe int test_0_byte_array()
     {
         byte[] src = new byte[8];
         double ret;
@@ -923,12 +923,12 @@ class Tests
         return llvm_ldlen_licm(arr);
     }
 
-    private unsafe static void WritePtr(FooStruct* val, out FooStruct* ptr)
+    private static unsafe void WritePtr(FooStruct* val, out FooStruct* ptr)
     {
         ptr = val;
     }
 
-    public unsafe static int test_0_ldelema_ptr()
+    public static unsafe int test_0_ldelema_ptr()
     {
         int i;
         int len = 10;

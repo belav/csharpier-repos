@@ -20,11 +20,11 @@ namespace Mono.Tools
 {
     class SecUtil
     {
-        static private bool hexDisplay;
-        static private bool vbMode;
-        static private string error;
+        private static bool hexDisplay;
+        private static bool vbMode;
+        private static string error;
 
-        static private void WriteArray(byte[] array)
+        private static void WriteArray(byte[] array)
         {
             StringBuilder sb = new StringBuilder();
             if (hexDisplay)
@@ -47,7 +47,7 @@ namespace Mono.Tools
             Console.WriteLine(sb.ToString());
         }
 
-        static private void StrongName(string fileName)
+        private static void StrongName(string fileName)
         {
             AssemblyName an = AssemblyName.GetAssemblyName(fileName);
             byte[] key = an.GetPublicKey();
@@ -67,7 +67,7 @@ namespace Mono.Tools
             }
         }
 
-        static private void Certificate(string fileName)
+        private static void Certificate(string fileName)
         {
             X509Certificate x509 = X509Certificate.CreateFromSignedFile(fileName);
             if (x509 == null)
@@ -79,12 +79,12 @@ namespace Mono.Tools
             }
         }
 
-        static private void Header()
+        private static void Header()
         {
             Console.WriteLine(new AssemblyInfo().ToString());
         }
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine("Usage: secutil [options] [filename]{0}", Environment.NewLine);
             Console.WriteLine("secutil -s assembly");

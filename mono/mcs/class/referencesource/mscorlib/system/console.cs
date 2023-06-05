@@ -967,7 +967,7 @@ namespace System
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Process)]
-        public unsafe static void MoveBufferArea(
+        public static unsafe void MoveBufferArea(
             int sourceLeft,
             int sourceTop,
             int sourceWidth,

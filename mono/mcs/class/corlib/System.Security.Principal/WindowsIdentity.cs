@@ -54,7 +54,7 @@ namespace System.Security.Principal
         private string _name;
         private SerializationInfo _info;
 
-        static private IntPtr invalidWindows = IntPtr.Zero;
+        private static IntPtr invalidWindows = IntPtr.Zero;
 
         [NonSerialized]
         public new const string DefaultIssuer = "AD AUTHORITY";
@@ -213,8 +213,9 @@ namespace System.Security.Principal
             throw new NotImplementedException();
         }
 
+        public
         // properties
-        sealed override public string AuthenticationType
+        sealed override string AuthenticationType
         {
             get { return _type; }
         }
@@ -224,7 +225,7 @@ namespace System.Security.Principal
             get { return (_account == WindowsAccountType.Anonymous); }
         }
 
-        override public bool IsAuthenticated
+        public override bool IsAuthenticated
         {
             get { return _authenticated; }
         }
@@ -239,7 +240,7 @@ namespace System.Security.Principal
             get { return (_account == WindowsAccountType.System); }
         }
 
-        override public string Name
+        public override string Name
         {
             get
             {
@@ -364,15 +365,15 @@ namespace System.Security.Principal
         // so we also implement it in Mono :-/
         // http://www.dotnet247.com/247reference/msgs/39/195403.aspx
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static string[] _GetRoles(IntPtr token);
+        internal static extern string[] _GetRoles(IntPtr token);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static IntPtr GetCurrentToken();
+        internal static extern IntPtr GetCurrentToken();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static string GetTokenName(IntPtr token);
+        private static extern string GetTokenName(IntPtr token);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static IntPtr GetUserToken(string username);
+        private static extern IntPtr GetUserToken(string username);
     }
 }

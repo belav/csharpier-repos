@@ -357,12 +357,12 @@ namespace System.Data.Odbc
             return base.TryGetValue(keyword, out value);
         }
 
-        sealed internal class OdbcConnectionStringBuilderConverter : ExpandableObjectConverter
+        internal sealed class OdbcConnectionStringBuilderConverter : ExpandableObjectConverter
         {
             // converter classes should have public ctor
             public OdbcConnectionStringBuilderConverter() { }
 
-            override public bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
                 if (
                     typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
@@ -374,7 +374,7 @@ namespace System.Data.Odbc
                 return base.CanConvertTo(context, destinationType);
             }
 
-            override public object ConvertTo(
+            public override object ConvertTo(
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value,

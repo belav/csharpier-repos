@@ -37,34 +37,37 @@ namespace Novell.Directory.Ldap.Controls
     /// </summary>
     public class LdapSortKey
     {
+        public
         /// <summary> Returns the attribute to used for sorting.
         ///
         /// </summary>
         /// <returns> The name of the attribute used for sorting.
         /// </returns>
-        virtual public System.String Key
+        virtual System.String Key
         {
             get { return key; }
         }
 
+        public
         /// <summary> Returns the sorting order, ascending or descending.
         ///
         /// </summary>
         /// <returns> True if the sorting is done is descending order; false, if the
         /// sorting is done is ascending order.
         /// </returns>
-        virtual public bool Reverse
+        virtual bool Reverse
         {
             get { return reverse; }
         }
 
+        public
         /// <summary> Returns the OID to be used as a matching rule.
         ///
         /// </summary>
         /// <returns> The OID to be used as matching rule, or null if none is to be
         /// used.
         /// </returns>
-        virtual public System.String MatchRule
+        virtual System.String MatchRule
         {
             get { return matchRule; }
         }

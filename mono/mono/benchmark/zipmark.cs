@@ -3882,10 +3882,11 @@ namespace NZlib.Checksums
     /// <see cref="NZlib.Streams.DeflaterOutputStream"/>
     public sealed class Adler32 : IChecksum
     {
+        static
         /// <summary>
         /// largest prime smaller than 65536
         /// </summary>
-        readonly static uint BASE = 65521;
+        readonly uint BASE = 65521;
 
         uint checksum;
 
@@ -4025,9 +4026,9 @@ namespace NZlib.Checksums
     /// </summary>
     public sealed class Crc32 : IChecksum
     {
-        readonly static uint CrcSeed = 0xFFFFFFFF;
+        static readonly uint CrcSeed = 0xFFFFFFFF;
 
-        readonly static uint[] CrcTable = new uint[]
+        static readonly uint[] CrcTable = new uint[]
         {
             0x00000000,
             0x77073096,

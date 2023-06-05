@@ -1272,7 +1272,7 @@ namespace System.Security.Util
     {
         private bool m_checkForIllegalChars;
 
-        private new static char[] m_separators = { '/' };
+        private static new char[] m_separators = { '/' };
 
         // From KB #Q177506, file/folder illegal characters are \ / : * ? " < > |
         protected static char[] m_illegalDirectoryCharacters =
@@ -1386,7 +1386,7 @@ namespace System.Security.Util
     [Serializable]
     internal class LocalSiteString : SiteString
     {
-        private new static char[] m_separators = { '/' };
+        private static new char[] m_separators = { '/' };
 
         public LocalSiteString(String site)
         {

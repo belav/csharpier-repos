@@ -471,7 +471,7 @@ namespace System.ServiceModel.Description
             return returnValue;
         }
 
-        static internal Type MaybeCreateListener(
+        internal static Type MaybeCreateListener(
             bool actuallyCreate,
             Type[] supportedChannels,
             Binding binding,

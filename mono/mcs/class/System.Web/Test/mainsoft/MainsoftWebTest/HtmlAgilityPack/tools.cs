@@ -26,7 +26,7 @@ namespace HtmlAgilityPack
 
     internal class HtmlCmdLine
     {
-        static internal bool Help;
+        internal static bool Help;
 
         static HtmlCmdLine()
         {

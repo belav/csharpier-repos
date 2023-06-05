@@ -11,11 +11,12 @@ using System.Diagnostics;
 
 namespace System.Data.ProviderBase
 {
+    internal
     /// <summary>
     /// Represents the key of dbConnectionPoolAuthenticationContext.
     /// All data members should be immutable and so, hashCode is pre-computed.
     /// </summary>
-    sealed internal class DbConnectionPoolAuthenticationContextKey
+    sealed class DbConnectionPoolAuthenticationContextKey
     {
         /// <summary>
         /// Security Token Service Authority.

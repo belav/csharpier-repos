@@ -243,7 +243,15 @@ namespace Mono.CSharp
         // Register method implementations are either abstract methods
         // flagged as such on the base class or interface methods
         //
-        static public PendingImplementation GetPendingImplementations(TypeDefinition container)
+        public
+        //
+        // Factory method: if there are pending implementation methods, we return a PendingImplementation
+        // object, otherwise we return null.
+        //
+        // Register method implementations are either abstract methods
+        // flagged as such on the base class or interface methods
+        //
+        static PendingImplementation GetPendingImplementations(TypeDefinition container)
         {
             TypeSpec b = container.BaseType;
 

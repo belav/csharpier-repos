@@ -49,7 +49,7 @@ namespace System.Data
             System.Security.Permissions.SecurityAction.LinkDemand,
             Flags = System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter
         )]
-        override public void GetObjectData(SerializationInfo si, StreamingContext context)
+        public override void GetObjectData(SerializationInfo si, StreamingContext context)
         { // MDAC 72003
             if (null == si)
             {

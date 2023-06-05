@@ -60,7 +60,7 @@ namespace System.ServiceModel.Syndication
 
         public abstract void WriteTo(XmlWriter writer);
 
-        internal protected virtual void SetItem(SyndicationItem item)
+        protected internal virtual void SetItem(SyndicationItem item)
         {
             if (item == null)
             {

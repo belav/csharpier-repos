@@ -38,8 +38,8 @@ public class X
 
 public class Y : X
 {
-    new public long Value = 8;
-    new public static long StaticValue = 9;
+    public new long Value = 8;
+    public static new long StaticValue = 9;
 
     public static new Y Foo()
     {
@@ -61,7 +61,7 @@ public class Y : X
         get { return 4; }
     }
 
-    public new static uint StaticProperty
+    public static new uint StaticProperty
     {
         get { return 21; }
     }

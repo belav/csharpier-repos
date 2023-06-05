@@ -488,7 +488,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="axis">Axis to get the series for.</param>
         /// <returns>A list of series that are attached to the specified axis.</returns>
-        static internal ArrayList GetAxisSeries(Axis axis)
+        internal
+        /// <summary>
+        /// Gets a list of series objects attached to the specified axis.
+        /// </summary>
+        /// <param name="axis">Axis to get the series for.</param>
+        /// <returns>A list of series that are attached to the specified axis.</returns>
+        static ArrayList GetAxisSeries(Axis axis)
         {
             ArrayList seriesList = new ArrayList();
             if (axis != null && axis.ChartArea != null && axis.ChartArea.Common.Chart != null)

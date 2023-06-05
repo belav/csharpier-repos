@@ -62,22 +62,25 @@ namespace Novell.Directory.Ldap.Controls
     /// </summary>
     public class LdapVirtualListControl : LdapControl
     {
+        public
         /// <summary>    Returns the number of entries after the top/center one to return per
         /// page of results.
         /// </summary>
-        virtual public int AfterCount
+        virtual int AfterCount
         {
             get { return m_afterCount; }
         }
 
+        public
         /// <summary>    Returns the number of entries before the top/center one to return per
         /// page of results.
         /// </summary>
-        virtual public int BeforeCount
+        virtual int BeforeCount
         {
             get { return m_beforeCount; }
         }
 
+        public
         /// <summary>    Returns the size of the virtual search results list. For a newly
         /// constructed control - one which is not the result of parseResponse on
         /// a control returned by a server - the method returns -1.
@@ -86,7 +89,7 @@ namespace Novell.Directory.Ldap.Controls
         /// typically be a number returned on a previous virtual list request in
         /// an LdapVirtualListResponse.
         /// </summary>
-        virtual public int ListSize
+        virtual int ListSize
         {
             get { return m_contentCount; }
             set
@@ -106,6 +109,7 @@ namespace Novell.Directory.Ldap.Controls
             }
         }
 
+        public
         /// <summary>   Returns the cookie used by some servers to optimize the processing of
         /// virtual list requests.
         /// </summary>
@@ -113,7 +117,7 @@ namespace Novell.Directory.Ldap.Controls
         /// virtual list requests. It should be the context field returned in a
         /// virtual list response control for the same search.
         /// </summary>
-        virtual public System.String Context
+        virtual System.String Context
         {
             get { return m_context; }
             set

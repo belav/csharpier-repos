@@ -26,8 +26,9 @@ namespace System.Windows.Forms
     using System.Diagnostics;
     using System.Security.Permissions;
 
+    internal
     // Miscellaneous utilities
-    static internal class ClientUtils
+    static class ClientUtils
     {
         // ExecutionEngineException is obsolete and shouldn't be used (to catch, throw or reference) anymore.
         // Pragma added to prevent converting the "type is obsolete" warning into build error.

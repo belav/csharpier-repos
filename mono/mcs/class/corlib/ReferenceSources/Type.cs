@@ -129,9 +129,11 @@ namespace System
         internal virtual RuntimeTypeHandle GetTypeHandleInternal() => TypeHandle;
 
 #if FEATURE_COMINTEROP || MONO_COM
-        virtual internal bool IsWindowsRuntimeObjectImpl() => throw new NotImplementedException();
+        internal
+#if FEATURE_COMINTEROP || MONO_COM
+        virtual bool IsWindowsRuntimeObjectImpl() => throw new NotImplementedException();
 
-        virtual internal bool IsExportedToWindowsRuntimeImpl() =>
+        internal virtual bool IsExportedToWindowsRuntimeImpl() =>
             throw new NotImplementedException();
 
         internal bool IsWindowsRuntimeObject => IsWindowsRuntimeObjectImpl();

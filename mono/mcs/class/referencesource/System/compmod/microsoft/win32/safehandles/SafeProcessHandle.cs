@@ -68,7 +68,7 @@ namespace Microsoft.Win32.SafeHandles
             base.handle = h;
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
 #if !MONO
             return SafeNativeMethods.CloseHandle(handle);

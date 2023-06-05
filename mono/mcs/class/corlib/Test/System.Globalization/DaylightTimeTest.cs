@@ -72,7 +72,7 @@ namespace MonoTests.System.Globalization
             Assert.AreEqual(clone.Delta, dt.Delta, "Delta");
         }
 
-        static private byte[] serialized_daylighttime =
+        private static byte[] serialized_daylighttime =
         {
             0x0,
             0x1,

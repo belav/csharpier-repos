@@ -62,11 +62,12 @@ namespace System.Data.SqlClient
             }
         }
 
+        public
         ////////////////////////////////////////////////////////////////////////////////////////
         // PROPERTIES
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        new public SqlConnection Connection
+        new SqlConnection Connection
         { // MDAC 66655
             get
             {
@@ -81,7 +82,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected DbConnection DbConnection
+        protected override DbConnection DbConnection
         {
             get { return Connection; }
         }
@@ -91,7 +92,7 @@ namespace System.Data.SqlClient
             get { return _internalTransaction; }
         }
 
-        override public IsolationLevel IsolationLevel
+        public override IsolationLevel IsolationLevel
         {
             get
             {
@@ -134,7 +135,12 @@ namespace System.Data.SqlClient
         // PUBLIC METHODS
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        override public void Commit()
+        public
+        ////////////////////////////////////////////////////////////////////////////////////////
+        // PUBLIC METHODS
+        ////////////////////////////////////////////////////////////////////////////////////////
+
+        override void Commit()
         {
             SqlConnection.ExecutePermission.Demand(); // MDAC 81476
 
@@ -259,7 +265,7 @@ namespace System.Data.SqlClient
             base.Dispose(disposing);
         }
 
-        override public void Rollback()
+        public override void Rollback()
         {
             if (IsYukonPartialZombie)
             {

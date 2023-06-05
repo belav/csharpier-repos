@@ -3,7 +3,7 @@ using System.Runtime.ConstrainedExecution;
 
 class P
 {
-    static public int count = 0;
+    public static int count = 0;
 
     /*
     public P () {
@@ -19,9 +19,9 @@ class P
 
 class Q : CriticalFinalizerObject
 {
-    static public int count = 0;
-    static public int first_p_count = -1;
-    static public int last_p_count = 0;
+    public static int count = 0;
+    public static int first_p_count = -1;
+    public static int last_p_count = 0;
 
     ~Q()
     {

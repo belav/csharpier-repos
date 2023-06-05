@@ -19,7 +19,7 @@ namespace System.Data.SqlClient
 
     using Microsoft.SqlServer.Server;
 
-    sealed internal class SqlConnectionFactory : DbConnectionFactory
+    internal sealed class SqlConnectionFactory : DbConnectionFactory
     {
         private SqlConnectionFactory()
             : base(SqlPerformanceCounters.SingletonInstance) { }
@@ -27,12 +27,12 @@ namespace System.Data.SqlClient
         public static readonly SqlConnectionFactory SingletonInstance = new SqlConnectionFactory();
         private const string _metaDataXml = "MetaDataXml";
 
-        override public DbProviderFactory ProviderFactory
+        public override DbProviderFactory ProviderFactory
         {
             get { return SqlClientFactory.Instance; }
         }
 
-        override protected DbConnectionInternal CreateConnection(
+        protected override DbConnectionInternal CreateConnection(
             DbConnectionOptions options,
             DbConnectionPoolKey poolKey,
             object poolGroupProviderInfo,
@@ -50,7 +50,7 @@ namespace System.Data.SqlClient
             );
         }
 
-        override protected DbConnectionInternal CreateConnection(
+        protected override DbConnectionInternal CreateConnection(
             DbConnectionOptions options,
             DbConnectionPoolKey poolKey,
             object poolGroupProviderInfo,
@@ -217,7 +217,7 @@ namespace System.Data.SqlClient
             return result;
         }
 
-        override internal DbConnectionPoolProviderInfo CreateConnectionPoolProviderInfo(
+        internal override DbConnectionPoolProviderInfo CreateConnectionPoolProviderInfo(
             DbConnectionOptions connectionOptions
         )
         {
@@ -231,7 +231,7 @@ namespace System.Data.SqlClient
             return providerInfo;
         }
 
-        override protected DbConnectionPoolGroupOptions CreateConnectionPoolGroupOptions(
+        protected override DbConnectionPoolGroupOptions CreateConnectionPoolGroupOptions(
             DbConnectionOptions connectionOptions
         )
         {
@@ -266,7 +266,7 @@ namespace System.Data.SqlClient
         // under the runtime folder.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        override protected DbMetaDataFactory CreateMetaDataFactory(
+        protected override DbMetaDataFactory CreateMetaDataFactory(
             DbConnectionInternal internalConnection,
             out bool cacheMetaDataFactory
         )
@@ -310,7 +310,7 @@ namespace System.Data.SqlClient
             ); //internalConnection.ServerVersionNormalized);
         }
 
-        override internal DbConnectionPoolGroupProviderInfo CreateConnectionPoolGroupProviderInfo(
+        internal override DbConnectionPoolGroupProviderInfo CreateConnectionPoolGroupProviderInfo(
             DbConnectionOptions connectionOptions
         )
         {
@@ -359,7 +359,7 @@ namespace System.Data.SqlClient
             return result;
         }
 
-        override internal DbConnectionPoolGroup GetConnectionPoolGroup(DbConnection connection)
+        internal override DbConnectionPoolGroup GetConnectionPoolGroup(DbConnection connection)
         {
             SqlConnection c = (connection as SqlConnection);
             if (null != c)
@@ -369,7 +369,7 @@ namespace System.Data.SqlClient
             return null;
         }
 
-        override internal DbConnectionInternal GetInnerConnection(DbConnection connection)
+        internal override DbConnectionInternal GetInnerConnection(DbConnection connection)
         {
             SqlConnection c = (connection as SqlConnection);
             if (null != c)
@@ -379,7 +379,7 @@ namespace System.Data.SqlClient
             return null;
         }
 
-        override protected int GetObjectId(DbConnection connection)
+        protected override int GetObjectId(DbConnection connection)
         {
             SqlConnection c = (connection as SqlConnection);
             if (null != c)
@@ -389,7 +389,7 @@ namespace System.Data.SqlClient
             return 0;
         }
 
-        override internal void PermissionDemand(DbConnection outerConnection)
+        internal override void PermissionDemand(DbConnection outerConnection)
         {
             SqlConnection c = (outerConnection as SqlConnection);
             if (null != c)
@@ -398,7 +398,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override internal void SetConnectionPoolGroup(
+        internal override void SetConnectionPoolGroup(
             DbConnection outerConnection,
             DbConnectionPoolGroup poolGroup
         )
@@ -410,7 +410,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override internal void SetInnerConnectionEvent(
+        internal override void SetInnerConnectionEvent(
             DbConnection owningObject,
             DbConnectionInternal to
         )
@@ -422,7 +422,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override internal bool SetInnerConnectionFrom(
+        internal override bool SetInnerConnectionFrom(
             DbConnection owningObject,
             DbConnectionInternal to,
             DbConnectionInternal from
@@ -436,7 +436,7 @@ namespace System.Data.SqlClient
             return false;
         }
 
-        override internal void SetInnerConnectionTo(
+        internal override void SetInnerConnectionTo(
             DbConnection owningObject,
             DbConnectionInternal to
         )
@@ -449,7 +449,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class SqlPerformanceCounters : DbConnectionPoolCounters
+    internal sealed class SqlPerformanceCounters : DbConnectionPoolCounters
     {
         private const string CategoryName = ".NET Data Provider for SqlServer";
         private const string CategoryHelp = "Counters for System.Data.SqlClient";

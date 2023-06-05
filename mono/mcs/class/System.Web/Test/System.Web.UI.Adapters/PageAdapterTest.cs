@@ -325,12 +325,12 @@ namespace MonoTests.System.Web.UI.Adapters
             internal MyPageAdapter(MyPage p)
                 : base(p) { }
 
-            new internal string ClientState
+            internal new string ClientState
             {
                 get { return base.ClientState; }
             }
 
-            new internal string GetPostBackFormReference(string s)
+            internal new string GetPostBackFormReference(string s)
             {
                 return base.GetPostBackFormReference(s);
             }
@@ -340,7 +340,7 @@ namespace MonoTests.System.Web.UI.Adapters
         {
             NameValueCollection post_back_mode = new NameValueCollection();
 
-            override protected internal NameValueCollection DeterminePostBackMode()
+            protected internal override NameValueCollection DeterminePostBackMode()
             {
                 return post_back_mode;
             }

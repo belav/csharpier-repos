@@ -85,7 +85,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 base.PreprocessNavigate(entry, e);
                 return;
 
-                async static Task ProcessNavigateAsync(
+                static async Task ProcessNavigateAsync(
                     ISupportsNavigation supportsNavigation,
                     TableEntryNavigateEventArgs e,
                     IAsynchronousOperationListener listener,

@@ -60,8 +60,8 @@ namespace Microsoft.VSDesigner.WCFModel
             typeof(XmlSchemaAnnotation),
         };
 
-        private readonly static XmlAttribute[] emptyXmlAttributeCollection = new XmlAttribute[0];
-        private readonly static object[] emptyCollection = new object[0];
+        private static readonly XmlAttribute[] emptyXmlAttributeCollection = new XmlAttribute[0];
+        private static readonly object[] emptyCollection = new object[0];
 
         /// <summary>
         /// Merge and remove duplicated part from the schema list

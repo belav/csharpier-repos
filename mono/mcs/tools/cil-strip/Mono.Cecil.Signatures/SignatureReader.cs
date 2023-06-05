@@ -1121,7 +1121,7 @@ namespace Mono.Cecil.Signatures
             return ms;
         }
 
-        static internal string ReadUTF8String(byte[] data, BinaryReader br)
+        internal static string ReadUTF8String(byte[] data, BinaryReader br)
         {
             int start = (int)br.BaseStream.Position;
             string val = ReadUTF8String(data, start, out start);
@@ -1129,7 +1129,7 @@ namespace Mono.Cecil.Signatures
             return val;
         }
 
-        static internal string ReadUTF8String(byte[] data, int pos, out int start)
+        internal static string ReadUTF8String(byte[] data, int pos, out int start)
         {
             int length = Utilities.ReadCompressedInteger(data, pos, out start);
             pos = start;

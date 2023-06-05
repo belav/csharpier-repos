@@ -79,7 +79,7 @@ namespace System.Threading
     [System.Security.SecurityCritical]
     [CLSCompliant(false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    unsafe public delegate void IOCompletionCallback(
+    public unsafe delegate void IOCompletionCallback(
         uint errorCode,
         uint numBytes,
         NativeOverlapped* pOVERLAP
@@ -834,7 +834,7 @@ namespace System.Threading
         }
 
         [SecurityCritical]
-        static internal bool Dispatch()
+        internal static bool Dispatch()
         {
             var workQueue = ThreadPoolGlobals.workQueue;
             //
@@ -1307,7 +1307,7 @@ namespace System.Threading
 #endif
 
         [System.Security.SecurityCritical]
-        static internal bool PerformWaitCallback()
+        internal static bool PerformWaitCallback()
         {
 #if FEATURE_INTERCEPTABLE_THREADPOOL_CALLBACK
             // store locally first to ensure another thread doesn't clear the field between checking for null and using it.
@@ -1432,10 +1432,10 @@ namespace System.Threading
 #endif
 
         [System.Security.SecurityCritical]
-        static internal ContextCallback ccb = new ContextCallback(WaitCallback_Context);
+        internal static ContextCallback ccb = new ContextCallback(WaitCallback_Context);
 
         [System.Security.SecurityCritical]
-        static private void WaitCallback_Context(Object state)
+        private static void WaitCallback_Context(Object state)
         {
             QueueUserWorkItemCallback obj = (QueueUserWorkItemCallback)state;
             WaitCallback wc = obj.callback as WaitCallback;
@@ -1454,10 +1454,10 @@ namespace System.Threading
         Object _state;
 
         [System.Security.SecurityCritical]
-        static private ContextCallback _ccbt = new ContextCallback(WaitOrTimerCallback_Context_t);
+        private static ContextCallback _ccbt = new ContextCallback(WaitOrTimerCallback_Context_t);
 
         [System.Security.SecurityCritical]
-        static private ContextCallback _ccbf = new ContextCallback(WaitOrTimerCallback_Context_f);
+        private static ContextCallback _ccbf = new ContextCallback(WaitOrTimerCallback_Context_f);
 
         [System.Security.SecurityCritical] // auto-generated
         internal _ThreadPoolWaitOrTimerCallback(
@@ -1484,18 +1484,18 @@ namespace System.Threading
         }
 
         [System.Security.SecurityCritical]
-        static private void WaitOrTimerCallback_Context_t(Object state)
+        private static void WaitOrTimerCallback_Context_t(Object state)
         {
             WaitOrTimerCallback_Context(state, true);
         }
 
         [System.Security.SecurityCritical]
-        static private void WaitOrTimerCallback_Context_f(Object state)
+        private static void WaitOrTimerCallback_Context_f(Object state)
         {
             WaitOrTimerCallback_Context(state, false);
         }
 
-        static private void WaitOrTimerCallback_Context(Object state, bool timedOut)
+        private static void WaitOrTimerCallback_Context(Object state, bool timedOut)
         {
             _ThreadPoolWaitOrTimerCallback helper = (_ThreadPoolWaitOrTimerCallback)state;
             helper._waitOrTimerCallback(helper._state, timedOut);
@@ -1503,7 +1503,7 @@ namespace System.Threading
 
         // call back helper
         [System.Security.SecurityCritical] // auto-generated
-        static internal void PerformWaitOrTimerCallback(Object state, bool timedOut)
+        internal static void PerformWaitOrTimerCallback(Object state, bool timedOut)
         {
             _ThreadPoolWaitOrTimerCallback helper = (_ThreadPoolWaitOrTimerCallback)state;
             Contract.Assert(helper != null, "Null state passed to PerformWaitOrTimerCallback!");
@@ -2149,11 +2149,11 @@ namespace System.Threading
         [System.Security.SecurityCritical] // auto-generated
         //        [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe private static extern bool PostQueuedCompletionStatus(NativeOverlapped* overlapped);
+        private static extern unsafe bool PostQueuedCompletionStatus(NativeOverlapped* overlapped);
 
         [System.Security.SecurityCritical] // auto-generated_required
         [CLSCompliant(false)]
-        unsafe public static bool UnsafeQueueNativeOverlapped(NativeOverlapped* overlapped)
+        public static unsafe bool UnsafeQueueNativeOverlapped(NativeOverlapped* overlapped)
         {
 #if FEATURE_CORECLR && !FEATURE_LEGACYNETCF
             if (Environment.OSVersion.Platform == PlatformID.MacOSX)

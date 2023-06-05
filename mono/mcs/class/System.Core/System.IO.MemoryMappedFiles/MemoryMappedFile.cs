@@ -62,22 +62,22 @@ namespace System.IO.MemoryMappedFiles
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void CloseMapping(IntPtr handle);
+        internal static extern void CloseMapping(IntPtr handle);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void Flush(IntPtr file_handle);
+        internal static extern void Flush(IntPtr file_handle);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void ConfigureHandleInheritability(
+        internal static extern void ConfigureHandleInheritability(
             IntPtr handle,
             HandleInheritability inheritability
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool Unmap(IntPtr mmap_handle);
+        internal static extern bool Unmap(IntPtr mmap_handle);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static int MapInternal(
+        static extern int MapInternal(
             IntPtr handle,
             long offset,
             ref long size,

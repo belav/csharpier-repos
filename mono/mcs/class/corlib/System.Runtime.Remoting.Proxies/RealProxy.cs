@@ -53,7 +53,7 @@ namespace System.Runtime.Remoting.Proxies
         Mono.RuntimeRemoteClassHandle _class;
         bool _custom_type_info;
 
-        unsafe internal RuntimeType GetProxyType()
+        internal unsafe RuntimeType GetProxyType()
         {
             RuntimeTypeHandle h = _class.ProxyClass.GetTypeHandle();
             return (RuntimeType)Type.GetTypeFromHandle(h);
@@ -187,7 +187,7 @@ namespace System.Runtime.Remoting.Proxies
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static Type InternalGetProxyType(object transparentProxy);
+        static extern Type InternalGetProxyType(object transparentProxy);
 
         public Type GetProxiedType()
         {

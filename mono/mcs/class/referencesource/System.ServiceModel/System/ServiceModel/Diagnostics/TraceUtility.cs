@@ -806,7 +806,7 @@ namespace System.ServiceModel.Diagnostics
             return null;
         }
 
-        static internal void AddActivityHeader(Message message)
+        internal static void AddActivityHeader(Message message)
         {
             try
             {
@@ -832,7 +832,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void AddAmbientActivityToMessage(Message message)
+        internal static void AddAmbientActivityToMessage(Message message)
         {
             try
             {
@@ -858,7 +858,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void CopyActivity(Message source, Message destination)
+        internal static void CopyActivity(Message source, Message destination)
         {
             if (DiagnosticUtility.ShouldUseActivity)
             {
@@ -1515,12 +1515,12 @@ namespace System.ServiceModel.Diagnostics
             );
         }
 
-        static public long RetrieveMessageNumber()
+        public static long RetrieveMessageNumber()
         {
             return Interlocked.Increment(ref TraceUtility.messageNumber);
         }
 
-        static public bool PropagateUserActivity
+        public static bool PropagateUserActivity
         {
             get
             {
@@ -1541,7 +1541,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal string GetCallerInfo(OperationContext context)
+        internal static string GetCallerInfo(OperationContext context)
         {
             if (context != null && context.IncomingMessageProperties != null)
             {
@@ -1574,7 +1574,7 @@ namespace System.ServiceModel.Diagnostics
             Safe = "Doesn't leak config section instance, just reads and stores string values for Guid"
         )]
         [SecuritySafeCritical]
-        static internal void SetEtwProviderId()
+        internal static void SetEtwProviderId()
         {
             // Get section should not trace as the ETW provider id is not set yet
             DiagnosticSection diagnostics = DiagnosticSection.UnsafeGetSectionNoTrace();
@@ -1590,7 +1590,7 @@ namespace System.ServiceModel.Diagnostics
             System.Runtime.Diagnostics.EtwDiagnosticTrace.DefaultEtwProviderId = etwProviderId;
         }
 
-        static internal void SetActivityId(MessageProperties properties)
+        internal static void SetActivityId(MessageProperties properties)
         {
             Guid activityId;
             if (
@@ -1602,32 +1602,32 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal bool ShouldPropagateActivity
+        internal static bool ShouldPropagateActivity
         {
             get { return TraceUtility.shouldPropagateActivity; }
         }
 
-        static internal bool ShouldPropagateActivityGlobal
+        internal static bool ShouldPropagateActivityGlobal
         {
             get { return TraceUtility.shouldPropagateActivityGlobal; }
         }
 
-        static internal bool ActivityTracing
+        internal static bool ActivityTracing
         {
             get { return TraceUtility.activityTracing; }
         }
 
-        static internal bool MessageFlowTracing
+        internal static bool MessageFlowTracing
         {
             get { return TraceUtility.messageFlowTracing; }
         }
 
-        static internal bool MessageFlowTracingOnly
+        internal static bool MessageFlowTracingOnly
         {
             get { return TraceUtility.messageFlowTracingOnly; }
         }
 
-        static internal void MessageFlowAtMessageSent(
+        internal static void MessageFlowAtMessageSent(
             Message message,
             EventTraceActivity eventTraceActivity
         )
@@ -1657,7 +1657,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void MessageFlowAtMessageReceived(
+        internal static void MessageFlowAtMessageReceived(
             Message message,
             OperationContext context,
             EventTraceActivity eventTraceActivity,
@@ -1799,7 +1799,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void UpdateAsyncOperationContextWithActivity(object activity)
+        internal static void UpdateAsyncOperationContextWithActivity(object activity)
         {
             if (OperationContext.Current != null && activity != null)
             {
@@ -1809,7 +1809,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal object ExtractAsyncOperationContextActivity()
+        internal static object ExtractAsyncOperationContextActivity()
         {
             object data = null;
             if (
@@ -1827,7 +1827,7 @@ namespace System.ServiceModel.Diagnostics
             return data;
         }
 
-        static internal void UpdateAsyncOperationContextWithStartTime(
+        internal static void UpdateAsyncOperationContextWithStartTime(
             EventTraceActivity eventTraceActivity,
             long startTime
         )
@@ -1840,7 +1840,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void ExtractAsyncOperationStartTime(
+        internal static void ExtractAsyncOperationStartTime(
             out EventTraceActivity eventTraceActivity,
             out long startTime
         )

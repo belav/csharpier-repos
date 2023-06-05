@@ -218,7 +218,7 @@ namespace NAMESPACE
             InnerConnection.AddWeakReference(value, tag);
         }
 
-        override protected DbCommand CreateDbCommand()
+        protected override DbCommand CreateDbCommand()
         {
             DbCommand command = null;
             IntPtr hscp;
@@ -250,7 +250,7 @@ namespace NAMESPACE
             return p;
         }
 
-        override protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -310,7 +310,10 @@ namespace NAMESPACE
         }
 #endif
 
-        override public void EnlistTransaction(SysTx.Transaction transaction)
+        public
+#endif
+
+        override void EnlistTransaction(SysTx.Transaction transaction)
         {
             CONNECTIONOBJECTNAME.ExecutePermission.Demand();
 
@@ -368,17 +371,17 @@ namespace NAMESPACE
             return GetMetaDataFactory(internalConnection);
         }
 
-        override public DataTable GetSchema()
+        public override DataTable GetSchema()
         {
             return this.GetSchema(DbMetaDataCollectionNames.MetaDataCollections, null);
         }
 
-        override public DataTable GetSchema(string collectionName)
+        public override DataTable GetSchema(string collectionName)
         {
             return this.GetSchema(collectionName, null);
         }
 
-        override public DataTable GetSchema(string collectionName, string[] restrictionValues)
+        public override DataTable GetSchema(string collectionName, string[] restrictionValues)
         {
             // NOTE: This is virtual because not all providers may choose to support
             //       returning schema data

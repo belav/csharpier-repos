@@ -35,7 +35,7 @@ public class principal : Form
         this.Close();
     }
 
-    static public void Main()
+    public static void Main()
     {
         principal classdemo = new principal();
         Application.Run(classdemo);

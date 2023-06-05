@@ -46,7 +46,7 @@ namespace System
     [Serializable]
     [CLSCompliant(false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe readonly struct UIntPtr : ISerializable, IEquatable<UIntPtr>
+    public readonly unsafe struct UIntPtr : ISerializable, IEquatable<UIntPtr>
     {
         public static readonly UIntPtr Zero = new UIntPtr(0u);
         private readonly void* _pointer;
@@ -143,13 +143,13 @@ namespace System
         }
 
         [CLSCompliant(false)]
-        public unsafe static explicit operator UIntPtr(void* value)
+        public static unsafe explicit operator UIntPtr(void* value)
         {
             return new UIntPtr(value);
         }
 
         [CLSCompliant(false)]
-        public unsafe static explicit operator void*(UIntPtr value)
+        public static unsafe explicit operator void*(UIntPtr value)
         {
             return value.ToPointer();
         }

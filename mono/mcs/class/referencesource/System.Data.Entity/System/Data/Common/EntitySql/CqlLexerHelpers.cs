@@ -125,7 +125,14 @@ namespace System.Data.Common.EntitySql
         /// <param name="tokenId">tokenid</param>
         /// <param name="tokenvalue">ast node</param>
         /// <returns></returns>
-        static internal Token NewToken(short tokenId, AST.Node tokenvalue)
+        internal
+        /// <summary>
+        /// Creates a new token.
+        /// </summary>
+        /// <param name="tokenId">tokenid</param>
+        /// <param name="tokenvalue">ast node</param>
+        /// <returns></returns>
+        static Token NewToken(short tokenId, AST.Node tokenvalue)
         {
             return new Token(tokenId, tokenvalue);
         }
@@ -136,7 +143,14 @@ namespace System.Data.Common.EntitySql
         /// <param name="tokenId">tokenid</param>
         /// <param name="termToken">lexical value</param>
         /// <returns></returns>
-        static internal Token NewToken(short tokenId, TerminalToken termToken)
+        internal
+        /// <summary>
+        /// Creates a new token representing a terminal.
+        /// </summary>
+        /// <param name="tokenId">tokenid</param>
+        /// <param name="termToken">lexical value</param>
+        /// <returns></returns>
+        static Token NewToken(short tokenId, TerminalToken termToken)
         {
             return new Token(tokenId, termToken);
         }

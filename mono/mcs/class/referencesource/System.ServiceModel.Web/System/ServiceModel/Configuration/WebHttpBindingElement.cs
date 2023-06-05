@@ -348,7 +348,7 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        internal protected override void InitializeFrom(Binding binding)
+        protected internal override void InitializeFrom(Binding binding)
         {
             base.InitializeFrom(binding);
             WebHttpBinding webBinding = (WebHttpBinding)binding;

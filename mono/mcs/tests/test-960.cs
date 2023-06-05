@@ -4,7 +4,7 @@ public class B
 {
     private protected enum E { }
 
-    public int Index { get; protected private set; }
+    public int Index { get; private protected set; }
 
     internal string S1 { get; private protected set; }
 

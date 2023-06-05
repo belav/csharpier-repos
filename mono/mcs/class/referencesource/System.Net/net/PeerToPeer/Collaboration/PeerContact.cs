@@ -2550,7 +2550,7 @@ namespace System.Net.PeerToPeer.Collaboration
             return false;
         }
 
-        public new static bool Equals(object objA, object objB)
+        public static new bool Equals(object objA, object objB)
         {
             PeerContact comparandPeerContact1 = objA as PeerContact;
             PeerContact comparandPeerContact2 = objB as PeerContact;

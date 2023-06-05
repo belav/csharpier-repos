@@ -539,7 +539,7 @@ namespace System.Web.Compilation
             get { return ResultAssembly.GetName().Name; }
         }
 
-        static private string s_codegenDir = null;
+        private static string s_codegenDir = null;
 
         internal static Assembly GetPreservedAssembly(PreservationFileReader pfr)
         {
@@ -1008,7 +1008,7 @@ namespace System.Web.Compilation
             get { return ResultType is DelayLoadType; }
         }
 
-        static internal bool UsesDelayLoadType(BuildResult result)
+        internal static bool UsesDelayLoadType(BuildResult result)
         {
             BuildResultCompiledType buildResultCompiledType = result as BuildResultCompiledType;
             if (buildResultCompiledType != null)

@@ -51,7 +51,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
         static string rsaOid = "1.2.840.113549.1.1.1";
         static string rsaName = "RSA";
 
-        static public byte[] farscape_p12_pfx =
+        public static byte[] farscape_p12_pfx =
         {
             0x30,
             0x82,
@@ -1874,7 +1874,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0xD0
         };
 
-        static public byte[] intca_cer =
+        public static byte[] intca_cer =
         {
             0x30,
             0x82,
@@ -2443,7 +2443,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0xFB
         };
 
-        static public byte[] root_cer =
+        public static byte[] root_cer =
         {
             0x30,
             0x82,

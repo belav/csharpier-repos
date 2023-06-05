@@ -39,7 +39,7 @@ namespace Microsoft.Win32.SafeHandles
 #endif
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
 #if MONO
             return System.IO.MonoIO.FindCloseFile(handle);

@@ -24,10 +24,10 @@ namespace System.Security
     using System.Diagnostics.Contracts;
 
     [Serializable]
-    sealed internal class PermissionSetTriple
+    internal sealed class PermissionSetTriple
     {
-        static private volatile PermissionToken s_zoneToken;
-        static private volatile PermissionToken s_urlToken;
+        private static volatile PermissionToken s_zoneToken;
+        private static volatile PermissionToken s_urlToken;
         internal PermissionSet AssertSet;
         internal PermissionSet GrantSet;
         internal PermissionSet RefusedSet;

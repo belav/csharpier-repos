@@ -4791,7 +4791,7 @@ namespace TypeLayout
 #endif
         }
 
-        public unsafe static void AssertSameGCDesc(Type left, Type right)
+        public static unsafe void AssertSameGCDesc(Type left, Type right)
         {
             RuntimeTypeHandle rthLeft = left.TypeHandle;
             RuntimeTypeHandle rthRight = right.TypeHandle;

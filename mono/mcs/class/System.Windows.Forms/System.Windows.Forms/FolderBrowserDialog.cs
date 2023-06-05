@@ -325,7 +325,7 @@ namespace System.Windows.Forms
         internal class FolderBrowserTreeView : TreeView
         {
             private MWFVFS vfs = new MWFVFS();
-            new private FBTreeNode root_node;
+            private new FBTreeNode root_node;
             private FolderBrowserDialog parentDialog;
             private ImageList imageList = new ImageList();
             private Environment.SpecialFolder rootFolder;

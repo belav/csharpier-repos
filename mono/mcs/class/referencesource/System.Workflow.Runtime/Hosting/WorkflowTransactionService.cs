@@ -21,7 +21,7 @@ namespace System.Workflow.Runtime.Hosting
     {
         public delegate void CommitWorkBatchCallback();
 
-        virtual internal protected void CommitWorkBatch(
+        protected internal virtual void CommitWorkBatch(
             CommitWorkBatchCallback commitWorkBatchCallback
         )
         {

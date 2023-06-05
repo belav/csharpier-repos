@@ -112,20 +112,20 @@ namespace System.ServiceModel.Security
             base.RequireDerivedKeys = false;
         }
 
-        internal protected override bool SupportsClientAuthentication
+        protected internal override bool SupportsClientAuthentication
         {
             get { return false; }
         }
-        internal protected override bool SupportsServerAuthentication
+        protected internal override bool SupportsServerAuthentication
         {
             get { return false; }
         }
-        internal protected override bool SupportsClientWindowsIdentity
+        protected internal override bool SupportsClientWindowsIdentity
         {
             get { return false; }
         }
 
-        internal protected override bool HasAsymmetricKey
+        protected internal override bool HasAsymmetricKey
         {
             get { return false; }
         }
@@ -135,7 +135,7 @@ namespace System.ServiceModel.Security
             return new SessionDerivedKeySecurityTokenParameters(this);
         }
 
-        internal protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+        protected internal override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
             SecurityToken token,
             SecurityTokenReferenceStyle referenceStyle
         )
@@ -150,7 +150,7 @@ namespace System.ServiceModel.Security
             }
         }
 
-        internal protected override bool MatchesKeyIdentifierClause(
+        protected internal override bool MatchesKeyIdentifierClause(
             SecurityToken token,
             SecurityKeyIdentifierClause keyIdentifierClause,
             SecurityTokenReferenceStyle referenceStyle

@@ -15,7 +15,7 @@ namespace System.ServiceModel.Activation.Configuration
         public DiagnosticSection()
             : base() { }
 
-        static internal DiagnosticSection GetSection()
+        internal static DiagnosticSection GetSection()
         {
             DiagnosticSection retval = (DiagnosticSection)
                 ConfigurationManager.GetSection(ConfigurationStrings.DiagnosticSectionPath);

@@ -7,7 +7,7 @@
 
     public static class DataControlExtensions
     {
-        private readonly static ConcurrentDictionary<Type, MetaTable> s_MetaTableCache =
+        private static readonly ConcurrentDictionary<Type, MetaTable> s_MetaTableCache =
             new ConcurrentDictionary<Type, MetaTable>();
 
         public static void EnableDynamicData(

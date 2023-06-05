@@ -20,10 +20,10 @@ namespace NativeExports
         private class @libc
         {
             [DllImport("libc")]
-            internal static unsafe extern int* __errno_location();
+            internal static extern unsafe int* __errno_location();
 
             [DllImport("libc")]
-            internal static unsafe extern int* __error();
+            internal static extern unsafe int* __error();
         }
 
         [UnmanagedCallersOnly(EntryPoint = "set_error")]

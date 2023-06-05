@@ -5,9 +5,9 @@ using System.Diagnostics;
 
 class Z
 {
-    static public void Test2(string message, params object[] args) { }
+    public static void Test2(string message, params object[] args) { }
 
-    static public void Test(string message, params object[] args)
+    public static void Test(string message, params object[] args)
     {
         Test2(message, args);
     }

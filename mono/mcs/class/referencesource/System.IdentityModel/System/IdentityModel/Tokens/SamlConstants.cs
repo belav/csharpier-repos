@@ -8,39 +8,39 @@ namespace System.IdentityModel.Tokens
 
     public static class SamlConstants
     {
-        static public int MajorVersionValue
+        public static int MajorVersionValue
         {
             get { return 1; }
         }
-        static public int MinorVersionValue
+        public static int MinorVersionValue
         {
             get { return 1; }
         }
-        static public string Namespace
+        public static string Namespace
         {
             get { return SamlStrings.Namespace; }
         }
-        static public string HolderOfKey
+        public static string HolderOfKey
         {
             get { return SamlStrings.HolderOfKey; }
         }
-        static public string SenderVouches
+        public static string SenderVouches
         {
             get { return SamlStrings.SenderVouches; }
         }
-        static public string UserName
+        public static string UserName
         {
             get { return SamlStrings.UserName; }
         }
-        static public string UserNameNamespace
+        public static string UserNameNamespace
         {
             get { return SamlStrings.UserNameNamespace; }
         }
-        static public string EmailName
+        public static string EmailName
         {
             get { return SamlStrings.EmailName; }
         }
-        static public string EmailNamespace
+        public static string EmailNamespace
         {
             get { return SamlStrings.EmailNamespace; }
         }

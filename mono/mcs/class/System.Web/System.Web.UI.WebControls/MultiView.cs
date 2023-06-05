@@ -132,7 +132,7 @@ namespace System.Web.UI.WebControls
         }
 
         [Browsable(true)]
-        public virtual new bool EnableTheming
+        public new virtual bool EnableTheming
         {
             get { return base.EnableTheming; }
             set { base.EnableTheming = value; }

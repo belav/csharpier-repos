@@ -132,7 +132,7 @@ namespace System.ServiceModel.Configuration
             this.OnApplyConfiguration(binding);
         }
 
-        protected virtual internal void InitializeFrom(Binding binding)
+        protected internal virtual void InitializeFrom(Binding binding)
         {
             if (null == binding)
             {

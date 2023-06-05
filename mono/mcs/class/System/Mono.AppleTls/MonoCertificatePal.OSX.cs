@@ -65,7 +65,7 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static SecStatusCode SecItemImport(
+        static extern SecStatusCode SecItemImport(
             /* CFDataRef */IntPtr importedData,
             /* CFStringRef */IntPtr fileNameOrExtension, // optional
             /* SecExternalFormat* */ref SecExternalFormat inputFormat, // optional, IN/OUT
@@ -76,7 +76,7 @@ namespace Mono.AppleTls
             /* CFArrayRef* */out IntPtr outItems
         );
 
-        static public CFArray ItemImport(byte[] buffer, string password)
+        public static CFArray ItemImport(byte[] buffer, string password)
         {
             using (var data = CFData.FromData(buffer))
             using (var pwstring = CFString.Create(password))
@@ -144,14 +144,14 @@ namespace Mono.AppleTls
         }
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
-        extern static /* SecIdentityRef */
-        IntPtr SecIdentityCreate(
+        static /* SecIdentityRef */
+        extern IntPtr SecIdentityCreate(
             /* CFAllocatorRef */IntPtr allocator,
             /* SecCertificateRef */IntPtr certificate,
             /* SecKeyRef */IntPtr privateKey
         );
 
-        static public SafeSecIdentityHandle ItemImport(X509Certificate2 certificate)
+        public static SafeSecIdentityHandle ItemImport(X509Certificate2 certificate)
         {
             if (!certificate.HasPrivateKey)
                 throw new NotSupportedException();

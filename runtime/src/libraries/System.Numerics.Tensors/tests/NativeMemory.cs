@@ -42,7 +42,7 @@ namespace System.Numerics.Tensors.Tests
 
         public bool IsDisposed => disposed;
 
-        public unsafe override Span<T> GetSpan() => new Span<T>((void*)memory, length);
+        public override unsafe Span<T> GetSpan() => new Span<T>((void*)memory, length);
 
         protected bool IsRetained => refCount > 0;
 

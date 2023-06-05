@@ -23,7 +23,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class UrlMembershipCondition
+    public sealed class UrlMembershipCondition
         : IMembershipCondition,
             IConstantMembershipCondition,
             IReportMatchMembershipCondition

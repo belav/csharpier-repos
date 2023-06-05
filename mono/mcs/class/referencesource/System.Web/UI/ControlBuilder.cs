@@ -29,22 +29,22 @@ namespace System.Web.UI
     /// </devdoc>
     public class ControlBuilder
     {
-        public readonly static string DesignerFilter = "__designer";
-        private readonly static string ItemTypeProperty = "ItemType";
+        public static readonly string DesignerFilter = "__designer";
+        private static readonly string ItemTypeProperty = "ItemType";
 
 #if DEBUG
         private bool _initCalled;
 #endif
 
         // Parses a databinding expression (e.g. <%# i+1 %>
-        private readonly static Regex databindRegex = new DataBindRegex();
-        internal readonly static Regex expressionBuilderRegex = new ExpressionBuilderRegex();
-        private readonly static Regex bindExpressionRegex = new BindExpressionRegex();
-        private readonly static Regex bindParametersRegex = new BindParametersRegex();
-        private readonly static Regex bindItemExpressionRegex = new BindItemExpressionRegex();
-        private readonly static Regex bindItemParametersRegex = new BindItemParametersRegex();
-        private readonly static Regex evalExpressionRegex = new EvalExpressionRegex();
-        private readonly static Regex formatStringRegex = new FormatStringRegex();
+        private static readonly Regex databindRegex = new DataBindRegex();
+        internal static readonly Regex expressionBuilderRegex = new ExpressionBuilderRegex();
+        private static readonly Regex bindExpressionRegex = new BindExpressionRegex();
+        private static readonly Regex bindParametersRegex = new BindParametersRegex();
+        private static readonly Regex bindItemExpressionRegex = new BindItemExpressionRegex();
+        private static readonly Regex bindItemParametersRegex = new BindItemParametersRegex();
+        private static readonly Regex evalExpressionRegex = new EvalExpressionRegex();
+        private static readonly Regex formatStringRegex = new FormatStringRegex();
 
         private Type _controlType;
         private string _tagName;

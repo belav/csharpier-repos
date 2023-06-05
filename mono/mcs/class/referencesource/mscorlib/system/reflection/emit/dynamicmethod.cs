@@ -294,7 +294,10 @@ namespace System.Reflection.Emit
 
         // helpers for intialization
 
-        static private void CheckConsistency(
+        private
+        // helpers for intialization
+
+        static void CheckConsistency(
             MethodAttributes attributes,
             CallingConventions callingConvention
         )

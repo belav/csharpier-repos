@@ -48,12 +48,13 @@ namespace Novell.Directory.Ldap.Extensions
     /// </summary>
     public class GetBindDNResponse : LdapExtendedResponse
     {
+        public
         /// <summary> Returns the identity of the object.
         ///
         /// </summary>
         /// <returns> A string value specifying the bind dn returned by the server.
         /// </returns>
-        virtual public System.String Identity
+        virtual System.String Identity
         {
             get { return identity; }
         }

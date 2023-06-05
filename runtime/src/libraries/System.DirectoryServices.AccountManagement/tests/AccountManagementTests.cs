@@ -892,7 +892,7 @@ namespace System.DirectoryServices.AccountManagement.Tests
         }
 
         // Method overrides
-        public new static CustomUserPrincipal FindByIdentity(
+        public static new CustomUserPrincipal FindByIdentity(
             PrincipalContext context,
             IdentityType identityType,
             string identityValue

@@ -18,7 +18,7 @@ namespace R2RDump
         /// <summary>
         /// Probing extensions to use when looking up assemblies under reference paths.
         /// </summary>
-        private readonly static string[] ProbeExtensions = new[]
+        private static readonly string[] ProbeExtensions = new[]
         {
             ".ni.exe",
             ".ni.dll",

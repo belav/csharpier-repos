@@ -38,7 +38,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
     public class WebControl_Enabled : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e)
+        protected
+        #region Web Form Designer generated code
+        override void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.

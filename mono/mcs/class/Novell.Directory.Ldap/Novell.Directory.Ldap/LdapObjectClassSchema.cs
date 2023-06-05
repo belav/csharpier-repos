@@ -46,38 +46,42 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     public class LdapObjectClassSchema : LdapSchemaElement
     {
+        public
         /// <summary> Returns the object classes from which this one derives.
         ///
         /// </summary>
         /// <returns> The object classes superior to this class.
         /// </returns>
-        virtual public System.String[] Superiors
+        virtual System.String[] Superiors
         {
             get { return superiors; }
         }
 
+        public
         /// <summary> Returns a list of attributes required for an entry with this object
         /// class.
         ///
         /// </summary>
         /// <returns> The list of required attributes defined for this class.
         /// </returns>
-        virtual public System.String[] RequiredAttributes
+        virtual System.String[] RequiredAttributes
         {
             get { return required; }
         }
 
+        public
         /// <summary> Returns a list of optional attributes but not required of an entry
         /// with this object class.
         ///
         /// </summary>
         /// <returns> The list of optional attributes defined for this class.
         /// </returns>
-        virtual public System.String[] OptionalAttributes
+        virtual System.String[] OptionalAttributes
         {
             get { return optional; }
         }
 
+        public
         /// <summary> Returns the type of object class.
         ///
         /// The getType method returns one of the following constants defined in
@@ -93,7 +97,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> The type of object class.
         /// </returns>
-        virtual public int Type
+        virtual int Type
         {
             get { return type; }
         }

@@ -35,8 +35,8 @@ namespace Mono.XBuild.Utilities
 {
     internal static class MSBuildUtils
     {
-        public readonly static bool RunningOnMac;
-        public readonly static bool RunningOnWindows;
+        public static readonly bool RunningOnMac;
+        public static readonly bool RunningOnWindows;
         static Hashtable charsToEscape;
 
         static MSBuildUtils()

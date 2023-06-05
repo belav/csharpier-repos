@@ -34,7 +34,7 @@ namespace System.Net
         Completed
     }
 
-    unsafe internal class ListenerClientCertAsyncResult : LazyAsyncResult
+    internal unsafe class ListenerClientCertAsyncResult : LazyAsyncResult
     {
         private NativeOverlapped* m_pOverlapped;
         private byte[] m_BackingBuffer;

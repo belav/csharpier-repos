@@ -363,7 +363,7 @@ namespace System.Data.Linq.SqlClient
 
         internal class SqlGatherColumnsProduced
         {
-            static internal List<SqlColumn> GatherColumns(SqlSource source)
+            internal static List<SqlColumn> GatherColumns(SqlSource source)
             {
                 List<SqlColumn> columns = new List<SqlColumn>();
                 new Visitor(columns).Visit(source);

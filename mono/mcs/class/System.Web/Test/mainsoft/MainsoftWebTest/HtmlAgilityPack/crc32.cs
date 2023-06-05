@@ -10,7 +10,7 @@ namespace HtmlAgilityPack
     public class Crc32
     {
         private uint _crc32 = 0;
-        static private uint[] crc_32_tab = // CRC polynomial 0xedb88320
+        private static uint[] crc_32_tab = // CRC polynomial 0xedb88320
         {
             0x00000000,
             0x77073096,
@@ -270,7 +270,7 @@ namespace HtmlAgilityPack
             0x2d02ef8d
         };
 
-        static private uint UPDC32(byte octet, uint crc)
+        private static uint UPDC32(byte octet, uint crc)
         {
             return (crc_32_tab[((crc) ^ ((byte)octet)) & 0xff] ^ ((crc) >> 8));
         }
@@ -302,7 +302,13 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="text">The string to compute the checksum for.</param>
         /// <returns>The computed checksum.</returns>
-        static public uint CRC32String(string text)
+        public
+        /// <summary>
+        /// Compute a checksum for a given string.
+        /// </summary>
+        /// <param name="text">The string to compute the checksum for.</param>
+        /// <returns>The computed checksum.</returns>
+        static uint CRC32String(string text)
         {
             uint oldcrc32;
             oldcrc32 = 0xFFFFFFFF;
@@ -332,7 +338,13 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="bytes">The array of bytes to compute the checksum for.</param>
         /// <returns>The computed checksum.</returns>
-        static public uint CRC32Bytes(byte[] bytes)
+        public
+        /// <summary>
+        /// Compute a checksum for a given array of bytes.
+        /// </summary>
+        /// <param name="bytes">The array of bytes to compute the checksum for.</param>
+        /// <returns>The computed checksum.</returns>
+        static uint CRC32Bytes(byte[] bytes)
         {
             uint oldcrc32;
             oldcrc32 = 0xFFFFFFFF;

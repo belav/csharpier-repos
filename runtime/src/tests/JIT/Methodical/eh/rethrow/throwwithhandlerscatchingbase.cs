@@ -28,12 +28,12 @@ namespace hello_throwwithhandlerscatchingbase_rethrow_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void f2()
+        public static void f2()
         {
             throw new FileNotFoundException("File x not found");
         }
 
-        static public void f1()
+        public static void f1()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace hello_throwwithhandlerscatchingbase_rethrow_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();

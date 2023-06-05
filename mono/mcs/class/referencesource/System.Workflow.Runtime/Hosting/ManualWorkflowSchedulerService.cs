@@ -129,7 +129,7 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        internal protected override void Schedule(WaitCallback callback, Guid workflowInstanceId)
+        protected internal override void Schedule(WaitCallback callback, Guid workflowInstanceId)
         {
             if (callback == null)
                 throw new ArgumentNullException("callback");
@@ -165,7 +165,7 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        internal protected override void Schedule(
+        protected internal override void Schedule(
             WaitCallback callback,
             Guid workflowInstanceId,
             DateTime whenUtc,
@@ -209,7 +209,7 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        internal protected override void Cancel(Guid timerId)
+        protected internal override void Cancel(Guid timerId)
         {
             if (timerId.Equals(Guid.Empty))
                 throw new ArgumentException(
@@ -387,7 +387,7 @@ namespace System.Workflow.Runtime.Hosting
             return new Timer(timerCallback, info.InstanceId, span, infinite);
         }
 
-        override protected void OnStarted()
+        protected override void OnStarted()
         {
             base.OnStarted();
             if (this.timerCallback != null)

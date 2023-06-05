@@ -25,7 +25,7 @@ namespace System.Workflow.Runtime
     /// </remarks>
     internal sealed class WorkflowExecutor : IWorkflowCoreRuntime, IServiceProvider, ISupportInterop
     {
-        internal readonly static DependencyProperty WorkflowExecutorProperty =
+        internal static readonly DependencyProperty WorkflowExecutorProperty =
             DependencyProperty.RegisterAttached(
                 "WorkflowExecutor",
                 typeof(IWorkflowCoreRuntime),
@@ -36,7 +36,7 @@ namespace System.Workflow.Runtime
         // The static method GetTransientBatch is used by this property to retrieve the WorkBatch.
         // GetTransientBatch is defined in this class but if the workflow is running under a V2.0 Interop environment,
         // it forwards the call to the Interop activity.
-        internal readonly static DependencyProperty TransientBatchProperty =
+        internal static readonly DependencyProperty TransientBatchProperty =
             DependencyProperty.RegisterAttached(
                 "TransientBatch",
                 typeof(IWorkBatch),
@@ -48,35 +48,35 @@ namespace System.Workflow.Runtime
                     null
                 )
             );
-        internal readonly static DependencyProperty TransactionalPropertiesProperty =
+        internal static readonly DependencyProperty TransactionalPropertiesProperty =
             DependencyProperty.RegisterAttached(
                 "TransactionalProperties",
                 typeof(TransactionalProperties),
                 typeof(WorkflowExecutor),
                 new PropertyMetadata(DependencyPropertyOptions.NonSerialized)
             );
-        internal readonly static DependencyProperty WorkflowInstanceIdProperty =
+        internal static readonly DependencyProperty WorkflowInstanceIdProperty =
             DependencyProperty.RegisterAttached(
                 "WorkflowInstanceId",
                 typeof(Guid),
                 typeof(WorkflowExecutor),
                 new PropertyMetadata(Guid.NewGuid())
             );
-        internal readonly static DependencyProperty IsBlockedProperty =
+        internal static readonly DependencyProperty IsBlockedProperty =
             DependencyProperty.RegisterAttached(
                 "IsBlocked",
                 typeof(bool),
                 typeof(WorkflowExecutor),
                 new PropertyMetadata(false)
             );
-        internal readonly static DependencyProperty WorkflowStatusProperty =
+        internal static readonly DependencyProperty WorkflowStatusProperty =
             DependencyProperty.RegisterAttached(
                 "WorkflowStatus",
                 typeof(WorkflowStatus),
                 typeof(WorkflowExecutor),
                 new PropertyMetadata(WorkflowStatus.Created)
             );
-        internal readonly static DependencyProperty SuspendOrTerminateInfoProperty =
+        internal static readonly DependencyProperty SuspendOrTerminateInfoProperty =
             DependencyProperty.RegisterAttached(
                 "SuspendOrTerminateInfo",
                 typeof(string),
@@ -4603,7 +4603,7 @@ namespace System.Workflow.Runtime
             scheduleInfo = new ScheduleInfo(executor, suppress);
         }
 
-        static public bool NeedsService
+        public static bool NeedsService
         {
             //           get
             //          {
@@ -4617,7 +4617,7 @@ namespace System.Workflow.Runtime
                 ScheduleWork.scheduleInfo.scheduleWork = value;
             }
         }
-        static public WorkflowExecutor Executor
+        public static WorkflowExecutor Executor
         {
             //           get
             //           {

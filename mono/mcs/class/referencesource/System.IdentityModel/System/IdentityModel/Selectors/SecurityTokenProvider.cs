@@ -209,7 +209,7 @@ namespace System.IdentityModel.Selectors
             SecurityTokenAsyncResult.End(result);
         }
 
-        internal protected class SecurityTokenAsyncResult : IAsyncResult
+        protected internal class SecurityTokenAsyncResult : IAsyncResult
         {
             SecurityToken token;
             object state;

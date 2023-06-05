@@ -31,7 +31,7 @@ class Tests
         return TestDriver.RunTests(typeof(Tests), args);
     }
 
-    static public int test_0_many_nested_loops()
+    public static int test_0_many_nested_loops()
     {
         // we do the loop a few times otherwise it's too fast
         for (int i = 0; i < 5; ++i)
@@ -121,7 +121,7 @@ class Tests
         return 0;
     }
 
-    static public int test_1028_sieve()
+    public static int test_1028_sieve()
     {
         //int NUM = ((argc == 2) ? atoi(argv[1]) : 1);
         int NUM = 2000;

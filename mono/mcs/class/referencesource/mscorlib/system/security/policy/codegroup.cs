@@ -26,7 +26,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    abstract public class CodeGroup
+    public abstract class CodeGroup
     {
         private IMembershipCondition m_membershipCondition;
         private IList m_children;

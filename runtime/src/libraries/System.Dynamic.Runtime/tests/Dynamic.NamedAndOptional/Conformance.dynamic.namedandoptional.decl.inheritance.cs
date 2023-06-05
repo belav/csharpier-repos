@@ -487,7 +487,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
 
     public class Child : Parent
     {
-        public virtual new dynamic Foo(dynamic i = null)
+        public new virtual dynamic Foo(dynamic i = null)
         {
             return 1;
         }
@@ -535,7 +535,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
 
     public class Child : Parent
     {
-        public virtual new int Foo(int? i = 20)
+        public new virtual int Foo(int? i = 20)
         {
             return 1;
         }
@@ -1088,7 +1088,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
 
     public class Child : Parent
     {
-        public virtual new dynamic Foo(int i = 1)
+        public new virtual dynamic Foo(int i = 1)
         {
             return 1;
         }
@@ -1134,7 +1134,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
 
     public class Child : Parent
     {
-        public virtual new int Foo(int? i = 1)
+        public new virtual int Foo(int? i = 1)
         {
             return 1;
         }

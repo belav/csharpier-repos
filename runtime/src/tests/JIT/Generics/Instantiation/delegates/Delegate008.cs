@@ -8,7 +8,7 @@ internal delegate T GenDelegate<T>(T p1, out T p2);
 
 internal class Foo<T>
 {
-    virtual public T Function<U>(U i, out U j)
+    public virtual T Function<U>(U i, out U j)
     {
         j = i;
         return (T)(Object)i;

@@ -245,12 +245,12 @@ namespace Moq.Tests
                 return base.GetDefaultValue(type, mock);
             }
 
-            new public void Deregister(Type factoryKey)
+            public new void Deregister(Type factoryKey)
             {
                 base.Deregister(factoryKey);
             }
 
-            new public void Register(Type factoryKey, Func<Type, Mock, object> factory)
+            public new void Register(Type factoryKey, Func<Type, Mock, object> factory)
             {
                 base.Register(factoryKey, factory);
             }

@@ -527,7 +527,7 @@ namespace System.Text.Json.Serialization.Samples
                     || typeof(JsonDynamicType).IsAssignableFrom(typeToConvert);
             }
 
-            public override sealed object Read(
+            public sealed override object Read(
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options

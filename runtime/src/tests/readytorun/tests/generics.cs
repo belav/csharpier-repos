@@ -1258,7 +1258,7 @@ class Program
 
         public class DerivedClass1<T> : BaseClass<T>, IFace<T>
         {
-            public override sealed string Method1(T t)
+            public sealed override string Method1(T t)
             {
                 return "DerivedClass1.Method1";
             }
@@ -1273,7 +1273,7 @@ class Program
                 return "DerivedClass1.Method3";
             }
 
-            public override sealed string GVMethod1<U>(T t, U u)
+            public sealed override string GVMethod1<U>(T t, U u)
             {
                 return "DerivedClass1.GVMethod1";
             }

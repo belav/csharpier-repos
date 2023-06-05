@@ -42,7 +42,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
     [TestFixture]
     public class KeyTransRecipientInfoTest
     {
-        static private byte[] issuerAndSerialNumber =
+        private static byte[] issuerAndSerialNumber =
         {
             0x30,
             0x82,
@@ -333,7 +333,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0xC5,
             0xB5
         };
-        static private byte[] subjectKeyIdentifier =
+        private static byte[] subjectKeyIdentifier =
         {
             0x30,
             0x81,

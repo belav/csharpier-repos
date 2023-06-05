@@ -8,7 +8,7 @@ namespace JitCrashPOC
 {
     public class Program
     {
-        static public int s_res;
+        public static int s_res;
 
         public static int Main()
         {

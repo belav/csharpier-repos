@@ -1176,7 +1176,7 @@ namespace System.Text.Json.Serialization.Tests
         private sealed class Utf8BomInsertingStream : Stream
         {
             private const int Utf8BomLength = 3;
-            private readonly static byte[] s_utf8Bom = Encoding.UTF8.GetPreamble();
+            private static readonly byte[] s_utf8Bom = Encoding.UTF8.GetPreamble();
 
             private readonly Stream _source;
             private byte[]? _prefixBytes;

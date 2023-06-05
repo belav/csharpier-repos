@@ -97,7 +97,7 @@ namespace System.Reflection
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static extern ParameterInfo[] get_parameter_info(IntPtr handle, MemberInfo member);
 
-        static internal ParameterInfo[] GetParametersInfo(IntPtr handle, MemberInfo member)
+        internal static ParameterInfo[] GetParametersInfo(IntPtr handle, MemberInfo member)
         {
             return get_parameter_info(handle, member);
         }
@@ -105,7 +105,7 @@ namespace System.Reflection
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static extern MarshalAsAttribute get_retval_marshal(IntPtr handle);
 
-        static internal ParameterInfo GetReturnParameterInfo(RuntimeMethodInfo method)
+        internal static ParameterInfo GetReturnParameterInfo(RuntimeMethodInfo method)
         {
             return RuntimeParameterInfo.New(
                 GetReturnType(method.mhandle),
@@ -231,7 +231,7 @@ namespace System.Reflection
             ".ctor(System.Reflection.ExceptionHandlingClause[],System.Reflection.LocalVariableInfo[],System.Byte[],System.Boolean,System.Int32,System.Int32)",
             "System.Reflection.MethodBody"
         )]
-        internal extern static MethodBody GetMethodBodyInternal(IntPtr handle);
+        internal static extern MethodBody GetMethodBodyInternal(IntPtr handle);
 
         internal static MethodBody GetMethodBody(IntPtr handle)
         {
@@ -247,7 +247,7 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static MethodBase GetMethodFromHandleInternalType_native(
+        static extern MethodBase GetMethodFromHandleInternalType_native(
             IntPtr method_handle,
             IntPtr type_handle,
             bool genericCheck
@@ -707,7 +707,7 @@ namespace System.Reflection
         extern MethodInfo MakeGenericMethod_impl(Type[] types);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public override extern Type[] GetGenericArguments();
+        public extern override Type[] GetGenericArguments();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern MethodInfo GetGenericMethodDefinition_impl();
@@ -721,13 +721,13 @@ namespace System.Reflection
             return res;
         }
 
-        public override extern bool IsGenericMethodDefinition
+        public extern override bool IsGenericMethodDefinition
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;
         }
 
-        public override extern bool IsGenericMethod
+        public extern override bool IsGenericMethod
         {
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
             get;

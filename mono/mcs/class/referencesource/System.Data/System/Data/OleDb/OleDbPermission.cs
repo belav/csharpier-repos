@@ -103,7 +103,7 @@ namespace System.Data.OleDb
             }
         }
 
-        override public IPermission Copy()
+        public override IPermission Copy()
         {
             return new OleDbPermission(this);
         }
@@ -143,7 +143,7 @@ namespace System.Data.OleDb
             set { _providers = value; }
         }
 
-        override public IPermission CreatePermission()
+        public override IPermission CreatePermission()
         {
             return new OleDbPermission(this);
         }

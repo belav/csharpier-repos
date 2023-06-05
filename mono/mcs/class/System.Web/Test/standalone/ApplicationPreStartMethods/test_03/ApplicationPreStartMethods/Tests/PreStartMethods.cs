@@ -40,7 +40,7 @@ namespace ApplicationPreStartMethods.Tests
 
         internal void InternalInstanceMethod() { }
 
-        static internal void InternalStaticMethod() { }
+        internal static void InternalStaticMethod() { }
 
         void PrivateInstanceMethod() { }
 

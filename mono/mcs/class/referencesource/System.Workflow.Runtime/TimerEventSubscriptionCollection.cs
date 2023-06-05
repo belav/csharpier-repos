@@ -20,7 +20,7 @@ namespace System.Workflow.Runtime
             "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
             Justification = "Design has been approved.  This is a false positive. DependencyProperty is an immutable type."
         )]
-        public readonly static DependencyProperty TimerCollectionProperty =
+        public static readonly DependencyProperty TimerCollectionProperty =
             DependencyProperty.RegisterAttached(
                 "TimerCollection",
                 typeof(TimerEventSubscriptionCollection),

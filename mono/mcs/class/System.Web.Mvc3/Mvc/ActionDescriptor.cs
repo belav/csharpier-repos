@@ -11,7 +11,7 @@
 
     public abstract class ActionDescriptor : ICustomAttributeProvider, IUniquelyIdentifiable
     {
-        private readonly static ActionMethodDispatcherCache _staticDispatcherCache =
+        private static readonly ActionMethodDispatcherCache _staticDispatcherCache =
             new ActionMethodDispatcherCache();
         private ActionMethodDispatcherCache _instanceDispatcherCache;
         private readonly Lazy<string> _uniqueId;

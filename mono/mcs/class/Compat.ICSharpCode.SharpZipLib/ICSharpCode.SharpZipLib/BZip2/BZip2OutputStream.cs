@@ -130,13 +130,14 @@ namespace ICSharpCode.SharpZipLib.BZip2
             }
         }
 
-        readonly static int SETMASK = (1 << 21);
-        readonly static int CLEARMASK = (~SETMASK);
-        readonly static int GREATER_ICOST = 15;
-        readonly static int LESSER_ICOST = 0;
-        readonly static int SMALL_THRESH = 20;
-        readonly static int DEPTH_THRESH = 10;
+        static readonly int SETMASK = (1 << 21);
+        static readonly int CLEARMASK = (~SETMASK);
+        static readonly int GREATER_ICOST = 15;
+        static readonly int LESSER_ICOST = 0;
+        static readonly int SMALL_THRESH = 20;
+        static readonly int DEPTH_THRESH = 10;
 
+        static
         /*--
         If you are ever unlucky/improbable enough
         to get a stack overflow whilst sorting,
@@ -145,7 +146,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
         stack go above 27 elems, so the following
         limit seems very generous.
         --*/
-        readonly static int QSORT_STACK_SIZE = 1000;
+        readonly int QSORT_STACK_SIZE = 1000;
 
         static void Panic()
         {

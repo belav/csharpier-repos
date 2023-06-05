@@ -415,7 +415,7 @@ static class ExtensionClass
 unsafe delegate byte* GetAndReturnPointerDelegate(void* ptr);
 unsafe delegate void PassPointerByRefDelegate(ref void* ptr);
 
-unsafe static class ClassWithPointers
+static unsafe class ClassWithPointers
 {
     public static byte* GetAndReturnPointer(void* ptr)
     {

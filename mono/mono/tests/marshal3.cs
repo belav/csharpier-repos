@@ -10,7 +10,7 @@ public class Test
         public int b;
     }
 
-    public unsafe static int Main()
+    public static unsafe int Main()
     {
         BlittableStruct ss = new BlittableStruct();
         int size = Marshal.SizeOf(typeof(BlittableStruct));

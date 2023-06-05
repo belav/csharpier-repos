@@ -249,7 +249,18 @@ namespace System.Net.Cache
         // Parses Headers and strings into entry mamabers.
         // Parses the raw output into entry.Info member.
         //
-        unsafe internal static Status LookupInfo(Entry entry)
+        internal static
+        //
+        // Method Definitions
+        //
+
+
+        //
+        // Looks up an entry based on url string key.
+        // Parses Headers and strings into entry mamabers.
+        // Parses the raw output into entry.Info member.
+        //
+        unsafe Status LookupInfo(Entry entry)
         {
             byte[] entryBuffer = new byte[Entry.DefaultBufferSize];
             int size = entryBuffer.Length;
@@ -299,7 +310,12 @@ namespace System.Net.Cache
         // Lookups an entry based on url string key.
         // If exists, locks the entry and hands out a managed handle representing a locked entry.
         //
-        unsafe internal static SafeUnlockUrlCacheEntryFile LookupFile(Entry entry)
+        internal static
+        //
+        // Lookups an entry based on url string key.
+        // If exists, locks the entry and hands out a managed handle representing a locked entry.
+        //
+        unsafe SafeUnlockUrlCacheEntryFile LookupFile(Entry entry)
         {
             byte[] buffer = new byte[Entry.DefaultBufferSize];
             int size = buffer.Length;
@@ -364,7 +380,12 @@ namespace System.Net.Cache
         // Does the fixup of the returned buffer by converting internal pointer to offsets
         // it also does copying of non-string values from unmanaged buffer to Entry.Buffer members
         //
-        unsafe private static Status EntryFixup(Entry entry, EntryBuffer* bufferPtr, byte[] buffer)
+        private static
+        //
+        // Does the fixup of the returned buffer by converting internal pointer to offsets
+        // it also does copying of non-string values from unmanaged buffer to Entry.Buffer members
+        //
+        unsafe Status EntryFixup(Entry entry, EntryBuffer* bufferPtr, byte[] buffer)
         {
             unchecked
             {

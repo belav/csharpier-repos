@@ -102,7 +102,7 @@ namespace System.ServiceModel
             );
         }
 
-        internal new static bool TryCreate(
+        internal static new bool TryCreate(
             SecurityBindingElement sbe,
             TransportBindingElement transport,
             PrivacyNoticeBindingElement privacy,

@@ -17,7 +17,11 @@ namespace Xamarin
 #if !MONOTOUCH && !XAMMAC
         // we do not add anything in MonoTouch, just replacing, so this is not needed
         // however we can avoid a dependency on Mono.Security for Crimson.CommonCrypto.dll by including the base classes
-        static public void GenerateBaseClass(
+        public
+#if !MONOTOUCH && !XAMMAC
+        // we do not add anything in MonoTouch, just replacing, so this is not needed
+        // however we can avoid a dependency on Mono.Security for Crimson.CommonCrypto.dll by including the base classes
+        static void GenerateBaseClass(
             string namespaceName,
             string typeName,
             string baseTypeName,
@@ -76,7 +80,10 @@ namespace %NAMESPACE% {
         }
 #endif
 
-        static public void Generate(
+        public
+#endif
+
+        static void Generate(
             string namespaceName,
             string typeName,
             string baseTypeName,

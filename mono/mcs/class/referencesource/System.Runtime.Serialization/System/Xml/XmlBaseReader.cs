@@ -1145,7 +1145,7 @@ namespace System.Xml
             return node.IsNamespaceUri(namespaceUri);
         }
 
-        public override sealed bool IsStartElement()
+        public sealed override bool IsStartElement()
         {
             XmlNodeType nodeType = node.NodeType;
             if (nodeType == XmlNodeType.Element)
@@ -3259,7 +3259,7 @@ namespace System.Xml
                 lang = string.Empty;
             }
 
-            static public Namespace XmlNamespace
+            public static Namespace XmlNamespace
             {
                 get
                 {
@@ -3316,7 +3316,7 @@ namespace System.Xml
                 }
             }
 
-            static public Namespace EmptyNamespace
+            public static Namespace EmptyNamespace
             {
                 get { return emptyNamespace; }
             }

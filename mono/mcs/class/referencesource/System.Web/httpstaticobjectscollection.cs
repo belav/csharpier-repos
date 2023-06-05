@@ -202,7 +202,7 @@ namespace System.Web
             }
         }
 
-        static public HttpStaticObjectsCollection Deserialize(BinaryReader reader)
+        public static HttpStaticObjectsCollection Deserialize(BinaryReader reader)
         {
             int count;
             string name;

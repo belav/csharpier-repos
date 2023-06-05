@@ -70,7 +70,7 @@ namespace System.Drawing
         }
 
         [DllImport(Interop.Libraries.Oleaut32)]
-        private static unsafe extern int OleCreatePictureIndirect(
+        private static extern unsafe int OleCreatePictureIndirect(
             PICTDESC* pictdesc,
             Guid* refiid,
             int fOwn,

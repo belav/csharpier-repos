@@ -18,7 +18,7 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        public unsafe static void* Add<T>(void* source, int elementOffset)
+        public static unsafe void* Add<T>(void* source, int elementOffset)
         {
             throw null;
         }
@@ -46,12 +46,12 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        public unsafe static void* AsPointer<T>(ref T value)
+        public static unsafe void* AsPointer<T>(ref T value)
         {
             throw null;
         }
 
-        public unsafe static ref T AsRef<T>(void* source)
+        public static unsafe ref T AsRef<T>(void* source)
         {
             throw null;
         }
@@ -83,7 +83,7 @@ namespace System.Runtime.CompilerServices
 
         public static void CopyBlock(ref byte destination, ref byte source, uint byteCount) { }
 
-        public unsafe static void CopyBlock(void* destination, void* source, uint byteCount) { }
+        public static unsafe void CopyBlock(void* destination, void* source, uint byteCount) { }
 
         public static void CopyBlockUnaligned(
             ref byte destination,
@@ -91,23 +91,23 @@ namespace System.Runtime.CompilerServices
             uint byteCount
         ) { }
 
-        public unsafe static void CopyBlockUnaligned(
+        public static unsafe void CopyBlockUnaligned(
             void* destination,
             void* source,
             uint byteCount
         ) { }
 
-        public unsafe static void Copy<T>(void* destination, ref T source) { }
+        public static unsafe void Copy<T>(void* destination, ref T source) { }
 
-        public unsafe static void Copy<T>(ref T destination, void* source) { }
+        public static unsafe void Copy<T>(ref T destination, void* source) { }
 
         public static void InitBlock(ref byte startAddress, byte value, uint byteCount) { }
 
-        public unsafe static void InitBlock(void* startAddress, byte value, uint byteCount) { }
+        public static unsafe void InitBlock(void* startAddress, byte value, uint byteCount) { }
 
         public static void InitBlockUnaligned(ref byte startAddress, byte value, uint byteCount) { }
 
-        public unsafe static void InitBlockUnaligned(
+        public static unsafe void InitBlockUnaligned(
             void* startAddress,
             byte value,
             uint byteCount
@@ -144,12 +144,12 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        public unsafe static T ReadUnaligned<T>(void* source)
+        public static unsafe T ReadUnaligned<T>(void* source)
         {
             throw null;
         }
 
-        public unsafe static T Read<T>(void* source)
+        public static unsafe T Read<T>(void* source)
         {
             throw null;
         }
@@ -174,7 +174,7 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        public unsafe static void* Subtract<T>(void* source, int elementOffset)
+        public static unsafe void* Subtract<T>(void* source, int elementOffset)
         {
             throw null;
         }
@@ -202,8 +202,8 @@ namespace System.Runtime.CompilerServices
 
         public static void WriteUnaligned<T>(ref byte destination, T value) { }
 
-        public unsafe static void WriteUnaligned<T>(void* destination, T value) { }
+        public static unsafe void WriteUnaligned<T>(void* destination, T value) { }
 
-        public unsafe static void Write<T>(void* destination, T value) { }
+        public static unsafe void Write<T>(void* destination, T value) { }
     }
 }

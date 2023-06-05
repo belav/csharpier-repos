@@ -75,30 +75,34 @@ namespace Novell.Directory.Ldap.Rfc2251
     /// </summary>
     public class RfcLdapMessage : Asn1Sequence
     {
+        public
         /// <summary> Returns this RfcLdapMessage's messageID as an int.</summary>
-        virtual public int MessageID
+        virtual int MessageID
         {
             get { return ((Asn1Integer)get_Renamed(0)).intValue(); }
         }
 
+        public
         /// <summary> Returns this RfcLdapMessage's message type</summary>
-        virtual public int Type
+        virtual int Type
         {
             get { return get_Renamed(1).getIdentifier().Tag; }
         }
 
+        public
         /// <summary> Returns the response associated with this RfcLdapMessage.
         /// Can be one of RfcLdapResult, RfcBindResponse, RfcExtendedResponse
         /// all which extend RfcResponse. It can also be
         /// RfcSearchResultEntry, or RfcSearchResultReference
         /// </summary>
-        virtual public Asn1Object Response
+        virtual Asn1Object Response
         {
             get { return get_Renamed(1); }
         }
 
+        public
         /// <summary> Returns the optional Controls for this RfcLdapMessage.</summary>
-        virtual public RfcControls Controls
+        virtual RfcControls Controls
         {
             get
             {
@@ -108,12 +112,14 @@ namespace Novell.Directory.Ldap.Rfc2251
             }
         }
 
+        public
         /// <summary> Returns the dn of the request, may be null</summary>
-        virtual public System.String RequestDN
+        virtual System.String RequestDN
         {
             get { return ((RfcRequest)op).getRequestDN(); }
         }
 
+        public
         /// <summary> returns the original request in this message
         ///
         /// </summary>
@@ -124,7 +130,7 @@ namespace Novell.Directory.Ldap.Rfc2251
         /// </summary>
         /// <param name="msg">the original request for this response
         /// </param>
-        virtual public LdapMessage RequestingMessage
+        virtual LdapMessage RequestingMessage
         {
             get { return requestMessage; }
             set

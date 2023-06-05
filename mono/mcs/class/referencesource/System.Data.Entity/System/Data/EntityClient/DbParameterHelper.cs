@@ -58,7 +58,7 @@ namespace System.Data.EntityClient
             EntityResCategoryAttribute(EntityRes.DataCategory_Data),
             EntityResDescriptionAttribute(EntityRes.DbParameter_Direction),
         ]
-        override public ParameterDirection Direction
+        public override ParameterDirection Direction
         {
             get
             {
@@ -85,7 +85,7 @@ namespace System.Data.EntityClient
             }
         }
 
-        override public bool IsNullable
+        public override bool IsNullable
         {
             get
             {
@@ -104,7 +104,7 @@ namespace System.Data.EntityClient
             EntityResCategoryAttribute(EntityRes.DataCategory_Data),
             EntityResDescriptionAttribute(EntityRes.DbParameter_Size),
         ]
-        override public int Size
+        public override int Size
         {
             get
             {
@@ -154,7 +154,7 @@ namespace System.Data.EntityClient
             EntityResCategoryAttribute(EntityRes.DataCategory_Update),
             EntityResDescriptionAttribute(EntityRes.DbParameter_SourceColumn),
         ]
-        override public string SourceColumn
+        public override string SourceColumn
         {
             get
             {
@@ -174,7 +174,7 @@ namespace System.Data.EntityClient
             EntityResCategoryAttribute(EntityRes.DataCategory_Update),
             EntityResDescriptionAttribute(EntityRes.DbParameter_SourceVersion),
         ]
-        override public DataRowVersion SourceVersion
+        public override DataRowVersion SourceVersion
         {
             get
             {
@@ -231,7 +231,7 @@ namespace System.Data.EntityClient
             _parent = null;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return ParameterName;
         }

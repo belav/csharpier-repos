@@ -52,7 +52,7 @@ namespace Microsoft.Win32.SafeHandles
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         private static extern bool UnmapViewOfFile(IntPtr handle);
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return UnmapViewOfFile(handle);
         }

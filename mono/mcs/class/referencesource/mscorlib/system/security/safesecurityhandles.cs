@@ -66,7 +66,7 @@ namespace Microsoft.Win32.SafeHandles
         }
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             // LsaDeregisterLogonProcess returns an NTSTATUS
             return Win32Native.LsaDeregisterLogonProcess(handle) >= 0;
@@ -92,7 +92,7 @@ namespace Microsoft.Win32.SafeHandles
         }
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return Win32Native.LsaFreeMemory(handle) == 0;
         }
@@ -117,7 +117,7 @@ namespace Microsoft.Win32.SafeHandles
         }
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return Win32Native.LsaClose(handle) == 0;
         }
@@ -142,7 +142,7 @@ namespace Microsoft.Win32.SafeHandles
         }
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             // LsaFreeReturnBuffer returns an NTSTATUS
             return Win32Native.LsaFreeReturnBuffer(handle) >= 0;
@@ -170,7 +170,7 @@ namespace Microsoft.Win32.SafeHandles
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return Win32Native.CloseHandle(handle);
         }
@@ -192,7 +192,7 @@ namespace Microsoft.Win32.SafeHandles
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return Win32Native.CloseHandle(handle);
         }

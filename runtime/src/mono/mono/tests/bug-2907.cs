@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 class Program
 {
-    static public T DeserializeFromString<T>(string xml)
+    public static T DeserializeFromString<T>(string xml)
         where T : class
     {
         if (String.IsNullOrEmpty(xml))

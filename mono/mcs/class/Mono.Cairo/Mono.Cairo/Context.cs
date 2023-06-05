@@ -771,7 +771,7 @@ namespace Cairo
             }
         }
 
-        static internal IntPtr FromGlyphToUnManagedMemory(Glyph[] glyphs)
+        internal static IntPtr FromGlyphToUnManagedMemory(Glyph[] glyphs)
         {
             IntPtr dest = Marshal.AllocHGlobal(native_glyph_size * glyphs.Length);
             long pos = dest.ToInt64();

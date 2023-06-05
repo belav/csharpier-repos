@@ -135,11 +135,12 @@ namespace System.Data.Objects
             SetChangeTrackingFlags();
         }
 
+        public
         #endregion
 
         #region Public members
 
-        override public bool IsRelationship
+        override bool IsRelationship
         {
             get
             {
@@ -148,7 +149,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public object Entity
+        public override object Entity
         {
             get
             {
@@ -157,10 +158,11 @@ namespace System.Data.Objects
             }
         }
 
+        public
         /// <summary>
         /// The EntityKey associated with the ObjectStateEntry
         /// </summary>
-        override public EntityKey EntityKey
+        override EntityKey EntityKey
         {
             get
             {
@@ -216,7 +218,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public IEnumerable<string> GetModifiedProperties()
+        public override IEnumerable<string> GetModifiedProperties()
         {
             ValidateState();
             if (EntityState.Modified == this.State && _modifiedFields != null)
@@ -238,7 +240,14 @@ namespace System.Data.Objects
         /// <param name="propertyName">This API recognizes the names in terms of OSpace</param>
         /// <exception cref="InvalidOperationException">If State is not Modified or Unchanged</exception>
         ///
-        override public void SetModifiedProperty(string propertyName)
+        public
+        /// <summary>
+        /// Marks specified property as modified.
+        /// </summary>
+        /// <param name="propertyName">This API recognizes the names in terms of OSpace</param>
+        /// <exception cref="InvalidOperationException">If State is not Modified or Unchanged</exception>
+        ///
+        override void SetModifiedProperty(string propertyName)
         {
             int ordinal = ValidateAndGetOrdinalForProperty(propertyName, "SetModifiedProperty");
 
@@ -308,7 +317,23 @@ namespace System.Data.Objects
         /// is a no-op.
         /// </remarks>
         /// <param name="propertyName">The name of the property to change.</param>
-        override public void RejectPropertyChanges(string propertyName)
+        public
+        /// <summary>
+        /// Rejects any changes made to the property with the given name since the property was last loaded,
+        /// attached, saved, or changes were accepted. The orginal value of the property is stored and the
+        /// property will no longer be marked as modified.
+        /// </summary>
+        /// <remarks>
+        /// If the result is that no properties of the entity are marked as modified, then the entity will
+        /// be marked as Unchanged.
+        /// Changes to properties can only rejected for entities that are in the Modified or Unchanged state.
+        /// Calling this method for entities in other states (Added, Deleted, or Detached) will result in
+        /// an exception being thrown.
+        /// Rejecting changes to properties of an Unchanged entity or unchanged properties of a Modifed
+        /// is a no-op.
+        /// </remarks>
+        /// <param name="propertyName">The name of the property to change.</param>
+        override void RejectPropertyChanges(string propertyName)
         {
             int ordinal = ValidateAndGetOrdinalForProperty(propertyName, "RejectPropertyChanges");
 
@@ -361,7 +386,7 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns> DbDataRecord </returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
-        override public DbDataRecord OriginalValues
+        public override DbDataRecord OriginalValues
         {
             get
             {
@@ -446,7 +471,7 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns> DbUpdatableDataRecord </returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
-        override public CurrentValueRecord CurrentValues
+        public override CurrentValueRecord CurrentValues
         {
             get
             {
@@ -471,7 +496,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public void Delete()
+        public override void Delete()
         {
             // doFixup flag is used for Cache and Collection & Ref consistency
             // When some entity is deleted if "doFixup" is true then Delete method
@@ -487,7 +512,13 @@ namespace System.Data.Objects
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        override public void AcceptChanges()
+        public
+        /// <summary>
+        /// API to accept the current values as original values and  mark the entity as Unchanged.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
+        override void AcceptChanges()
         {
             ValidateState();
 
@@ -571,7 +602,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public void SetModified()
+        public override void SetModified()
         {
             ValidateState();
 
@@ -593,7 +624,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public RelationshipManager RelationshipManager
+        public override RelationshipManager RelationshipManager
         {
             get
             {
@@ -1023,12 +1054,14 @@ namespace System.Data.Objects
                 Debug.Assert(false, "not implemented");
             }
         }
+
+        internal
         #endregion
         #endregion
 
         #region ObjectStateEntry members
 
-        override internal bool IsKeyEntry
+        override bool IsKeyEntry
         {
             get { return null == _wrappedEntity.Entity; }
         }
@@ -1036,7 +1069,11 @@ namespace System.Data.Objects
         /// <summary>
         /// Reuse or create a new (Entity)DataRecordInfo.
         /// </summary>
-        override internal DataRecordInfo GetDataRecordInfo(
+        internal
+        /// <summary>
+        /// Reuse or create a new (Entity)DataRecordInfo.
+        /// </summary>
+        override DataRecordInfo GetDataRecordInfo(
             StateManagerTypeMetadata metadata,
             object userObject
         )
@@ -1060,7 +1097,7 @@ namespace System.Data.Objects
             }
         }
 
-        override internal void Reset()
+        internal override void Reset()
         {
             Debug.Assert(
                 _cache != null,
@@ -1082,19 +1119,19 @@ namespace System.Data.Objects
             base.Reset();
         }
 
-        override internal Type GetFieldType(int ordinal, StateManagerTypeMetadata metadata)
+        internal override Type GetFieldType(int ordinal, StateManagerTypeMetadata metadata)
         {
             // 'metadata' is used for ComplexTypes
 
             return metadata.GetFieldType(ordinal);
         }
 
-        override internal string GetCLayerName(int ordinal, StateManagerTypeMetadata metadata)
+        internal override string GetCLayerName(int ordinal, StateManagerTypeMetadata metadata)
         {
             return metadata.CLayerMemberName(ordinal);
         }
 
-        override internal int GetOrdinalforCLayerName(
+        internal override int GetOrdinalforCLayerName(
             string name,
             StateManagerTypeMetadata metadata
         )
@@ -1102,14 +1139,14 @@ namespace System.Data.Objects
             return metadata.GetOrdinalforCLayerMemberName(name);
         }
 
-        override internal void RevertDelete()
+        internal override void RevertDelete()
         {
             // just change the state from deleted, to last state.
             State = (_modifiedFields == null) ? EntityState.Unchanged : EntityState.Modified;
             _cache.ChangeState(this, EntityState.Deleted, State);
         }
 
-        override internal int GetFieldCount(StateManagerTypeMetadata metadata)
+        internal override int GetFieldCount(StateManagerTypeMetadata metadata)
         {
             return metadata.FieldCount;
         }
@@ -1129,7 +1166,7 @@ namespace System.Data.Objects
             }
         }
 
-        override internal void SetModifiedAll()
+        internal override void SetModifiedAll()
         {
             Debug.Assert(!this.IsKeyEntry, "SetModifiedAll called on a KeyEntry");
             Debug.Assert(State == EntityState.Modified, "SetModifiedAll called when not modified");
@@ -1147,7 +1184,13 @@ namespace System.Data.Objects
         /// The current value of the specified property is cached when this method is called.
         /// </summary>
         /// <param name="entityMemberName">The name of the entity property that is changing</param>
-        override internal void EntityMemberChanging(string entityMemberName)
+        internal
+        /// <summary>
+        /// Used to report that a scalar entity property is about to change
+        /// The current value of the specified property is cached when this method is called.
+        /// </summary>
+        /// <param name="entityMemberName">The name of the entity property that is changing</param>
+        override void EntityMemberChanging(string entityMemberName)
         {
             if (this.IsKeyEntry)
             {
@@ -1162,7 +1205,14 @@ namespace System.Data.Objects
         /// added to OriginalValues
         /// </summary>
         /// <param name="entityMemberName">The name of the entity property that has changing</param>
-        override internal void EntityMemberChanged(string entityMemberName)
+        internal
+        /// <summary>
+        /// Used to report that a scalar entity property has been changed
+        /// The property value that was cached during EntityMemberChanging is now
+        /// added to OriginalValues
+        /// </summary>
+        /// <param name="entityMemberName">The name of the entity property that has changing</param>
+        override void EntityMemberChanged(string entityMemberName)
         {
             if (this.IsKeyEntry)
             {
@@ -1178,7 +1228,15 @@ namespace System.Data.Objects
         /// <param name="entityMemberName">The name of the top-level entity property that is changing</param>
         /// <param name="complexObject">The complex object that contains the property that is changing</param>
         /// <param name="complexObjectMemberName">The name of the property that is changing on complexObject</param>
-        override internal void EntityComplexMemberChanging(
+        internal
+        /// <summary>
+        /// Used to report that a complex property is about to change
+        /// The current value of the specified property is cached when this method is called.
+        /// </summary>
+        /// <param name="entityMemberName">The name of the top-level entity property that is changing</param>
+        /// <param name="complexObject">The complex object that contains the property that is changing</param>
+        /// <param name="complexObjectMemberName">The name of the property that is changing on complexObject</param>
+        override void EntityComplexMemberChanging(
             string entityMemberName,
             object complexObject,
             string complexObjectMemberName
@@ -1200,7 +1258,15 @@ namespace System.Data.Objects
         /// <param name="entityMemberName">The name of the top-level entity property that has changed</param>
         /// <param name="complexObject">The complex object that contains the property that changed</param>
         /// <param name="complexObjectMemberName">The name of the property that changed on complexObject</param>
-        override internal void EntityComplexMemberChanged(
+        internal
+        /// <summary>
+        /// Used to report that a complex property has been changed
+        /// The property value that was cached during EntityMemberChanging is now added to OriginalValues
+        /// </summary>
+        /// <param name="entityMemberName">The name of the top-level entity property that has changed</param>
+        /// <param name="complexObject">The complex object that contains the property that changed</param>
+        /// <param name="complexObjectMemberName">The name of the property that changed on complexObject</param>
+        override void EntityComplexMemberChanged(
             string entityMemberName,
             object complexObject,
             string complexObjectMemberName

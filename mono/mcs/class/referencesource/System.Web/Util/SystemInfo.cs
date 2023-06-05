@@ -10,7 +10,7 @@ namespace System.Web.Util
     {
         static int _trueNumberOfProcessors;
 
-        static internal int GetNumProcessCPUs()
+        internal static int GetNumProcessCPUs()
         {
             if (_trueNumberOfProcessors == 0)
             {

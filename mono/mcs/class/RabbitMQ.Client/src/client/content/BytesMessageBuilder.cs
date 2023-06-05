@@ -67,7 +67,7 @@ namespace RabbitMQ.Client.Content
     public class BytesMessageBuilder : BasicMessageBuilder, IBytesMessageBuilder
     {
         ///<summary>MIME type associated with QPid BytesMessages.</summary>
-        public readonly static string MimeType = "application/octet-stream";
+        public static readonly string MimeType = "application/octet-stream";
 
         ///<summary>Construct an instance for writing. See superclass.</summary>
         public BytesMessageBuilder(IModel model)

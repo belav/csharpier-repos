@@ -274,8 +274,8 @@ namespace System.Windows.Forms
         internal int crlf_size; // 1 or 2, depending on whether we use \r\n or just \n
 
         internal TextBoxBase owner; // Who's owning us?
-        static internal int caret_width = 1;
-        static internal int caret_shift = 1;
+        internal static int caret_width = 1;
+        internal static int caret_shift = 1;
 
         internal int left_margin = 2; // A left margin for all lines
         internal int top_margin = 2;

@@ -465,7 +465,7 @@ namespace System.Security.Cryptography.X509Certificates
         [SecurityCritical]
 #endif
         [SecuritySafeCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return CertFreeCertificateContext(handle);
         }

@@ -83,7 +83,7 @@ namespace System.Diagnostics
             }
         }
 
-        protected override internal string[] GetSupportedAttributes()
+        protected internal override string[] GetSupportedAttributes()
         {
             return new String[] { "delimiter" };
         }

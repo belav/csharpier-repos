@@ -370,7 +370,7 @@ namespace System.ServiceModel.Description
         }
     }
 
-    static internal class ServiceReflector
+    internal static class ServiceReflector
     {
         internal const BindingFlags ServiceModelBindingFlags =
             BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
@@ -387,7 +387,7 @@ namespace System.ServiceModel.Description
         static readonly Type objectType = typeof(object);
         static readonly Type OperationContractAttributeType = typeof(OperationContractAttribute);
 
-        static internal Type GetOperationContractProviderType(MethodInfo method)
+        internal static Type GetOperationContractProviderType(MethodInfo method)
         {
             if (GetSingleAttribute<OperationContractAttribute>(method) != null)
             {
@@ -403,7 +403,9 @@ namespace System.ServiceModel.Description
         }
 
         // returns the set of root interfaces for the service class (meaning doesn't include callback ifaces)
-        static internal List<Type> GetInterfaces(Type service)
+        internal
+        // returns the set of root interfaces for the service class (meaning doesn't include callback ifaces)
+        static List<Type> GetInterfaces(Type service)
         {
             List<Type> types = new List<Type>();
             bool implicitContract = false;
@@ -476,7 +478,7 @@ namespace System.ServiceModel.Description
             return null;
         }
 
-        static internal List<Type> GetInheritedContractTypes(Type service)
+        internal static List<Type> GetInheritedContractTypes(Type service)
         {
             List<Type> types = new List<Type>();
             foreach (Type t in service.GetInterfaces())
@@ -496,7 +498,7 @@ namespace System.ServiceModel.Description
             return types;
         }
 
-        static internal object[] GetCustomAttributes(
+        internal static object[] GetCustomAttributes(
             ICustomAttributeProvider attrProvider,
             Type attrType
         )
@@ -504,7 +506,7 @@ namespace System.ServiceModel.Description
             return GetCustomAttributes(attrProvider, attrType, false);
         }
 
-        static internal object[] GetCustomAttributes(
+        internal static object[] GetCustomAttributes(
             ICustomAttributeProvider attrProvider,
             Type attrType,
             bool inherit
@@ -587,7 +589,7 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static internal T GetFirstAttribute<T>(ICustomAttributeProvider attrProvider)
+        internal static T GetFirstAttribute<T>(ICustomAttributeProvider attrProvider)
             where T : class
         {
             Type attrType = typeof(T);
@@ -603,7 +605,9 @@ namespace System.ServiceModel.Description
         }
 
 #if !NO_GENERIC
-        static internal T GetSingleAttribute<T>(ICustomAttributeProvider attrProvider)
+        internal
+#if !NO_GENERIC
+        static T GetSingleAttribute<T>(ICustomAttributeProvider attrProvider)
             where T : class
         {
             Type attrType = typeof(T);
@@ -659,7 +663,38 @@ namespace System.ServiceModel.Description
         }
 #endif
 #if !NO_GENERIC
-        static internal T GetRequiredSingleAttribute<T>(ICustomAttributeProvider attrProvider)
+        internal
+#else
+        static internal object GetSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider
+        )
+        {
+            object[] attrs = GetCustomAttributes(attrProvider, attrType);
+            if (attrs.Length == 0)
+            {
+                return null;
+            }
+            else if (attrs.Length > 1)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.tooManyAttributesOfTypeOn2,
+                            attrType,
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            else
+            {
+                return attrs[0];
+            }
+        }
+#endif
+#if !NO_GENERIC
+        static T GetRequiredSingleAttribute<T>(ICustomAttributeProvider attrProvider)
             where T : class
         {
             T result = GetSingleAttribute<T>(attrProvider);
@@ -700,10 +735,31 @@ namespace System.ServiceModel.Description
         }
 #endif
 #if !NO_GENERIC
-        static internal T GetSingleAttribute<T>(
-            ICustomAttributeProvider attrProvider,
-            Type[] attrTypeGroup
+        internal
+#else
+        static internal object GetRequiredSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider
         )
+        {
+            object result = GetSingleAttribute(attrType, attrProvider);
+            if (result == null)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.couldnTFindRequiredAttributeOfTypeOn2,
+                            attrType,
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            return result;
+        }
+#endif
+#if !NO_GENERIC
+        static T GetSingleAttribute<T>(ICustomAttributeProvider attrProvider, Type[] attrTypeGroup)
             where T : class
         {
             T result = GetSingleAttribute<T>(attrProvider);
@@ -770,7 +826,44 @@ namespace System.ServiceModel.Description
         }
 #endif
 #if !NO_GENERIC
-        static internal T GetRequiredSingleAttribute<T>(
+        internal
+#else
+        static internal object GetSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider,
+            Type[] attrTypeGroup
+        )
+        {
+            object result = GetSingleAttribute(attrType, attrProvider);
+            if (result != null)
+            {
+                foreach (Type otherType in attrTypeGroup)
+                {
+                    if (otherType == attrType)
+                    {
+                        continue;
+                    }
+                    object[] attrs = GetCustomAttributes(attrProvider, otherType);
+                    if (attrs != null && attrs.Length > 0)
+                    {
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxDisallowedAttributeCombination,
+                                    attrProvider,
+                                    attrType.FullName,
+                                    otherType.FullName
+                                )
+                            )
+                        );
+                    }
+                }
+            }
+            return result;
+        }
+#endif
+#if !NO_GENERIC
+        static T GetRequiredSingleAttribute<T>(
             ICustomAttributeProvider attrProvider,
             Type[] attrTypeGroup
         )
@@ -815,13 +908,345 @@ namespace System.ServiceModel.Description
         }
 #endif
 
-        static internal Type GetContractType(Type interfaceType)
+        internal
+#else
+        internal
+#if !NO_GENERIC
+        internal
+#if !NO_GENERIC
+        static T GetSingleAttribute<T>(ICustomAttributeProvider attrProvider)
+            where T : class
+        {
+            Type attrType = typeof(T);
+            object[] attrs = GetCustomAttributes(attrProvider, attrType);
+            if (attrs.Length == 0)
+            {
+                return null;
+            }
+            else if (attrs.Length > 1)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.tooManyAttributesOfTypeOn2,
+                            attrType,
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            else
+            {
+                return attrs[0] as T;
+            }
+        }
+#else
+        static internal object GetSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider
+        )
+        {
+            object[] attrs = GetCustomAttributes(attrProvider, attrType);
+            if (attrs.Length == 0)
+            {
+                return null;
+            }
+            else if (attrs.Length > 1)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.tooManyAttributesOfTypeOn2,
+                            attrType,
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            else
+            {
+                return attrs[0];
+            }
+        }
+#endif
+#if !NO_GENERIC
+        internal
+#else
+        static internal object GetSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider
+        )
+        {
+            object[] attrs = GetCustomAttributes(attrProvider, attrType);
+            if (attrs.Length == 0)
+            {
+                return null;
+            }
+            else if (attrs.Length > 1)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.tooManyAttributesOfTypeOn2,
+                            attrType,
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            else
+            {
+                return attrs[0];
+            }
+        }
+#endif
+#if !NO_GENERIC
+        static T GetRequiredSingleAttribute<T>(ICustomAttributeProvider attrProvider)
+            where T : class
+        {
+            T result = GetSingleAttribute<T>(attrProvider);
+            if (result == null)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.couldnTFindRequiredAttributeOfTypeOn2,
+                            typeof(T),
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            return result;
+        }
+#else
+        static internal object GetRequiredSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider
+        )
+        {
+            object result = GetSingleAttribute(attrType, attrProvider);
+            if (result == null)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.couldnTFindRequiredAttributeOfTypeOn2,
+                            attrType,
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            return result;
+        }
+#endif
+#if !NO_GENERIC
+        internal
+#else
+        static internal object GetRequiredSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider
+        )
+        {
+            object result = GetSingleAttribute(attrType, attrProvider);
+            if (result == null)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.couldnTFindRequiredAttributeOfTypeOn2,
+                            attrType,
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            return result;
+        }
+#endif
+#if !NO_GENERIC
+        static T GetSingleAttribute<T>(ICustomAttributeProvider attrProvider, Type[] attrTypeGroup)
+            where T : class
+        {
+            T result = GetSingleAttribute<T>(attrProvider);
+            if (result != null)
+            {
+                Type attrType = typeof(T);
+                foreach (Type otherType in attrTypeGroup)
+                {
+                    if (otherType == attrType)
+                    {
+                        continue;
+                    }
+                    object[] attrs = GetCustomAttributes(attrProvider, otherType);
+                    if (attrs != null && attrs.Length > 0)
+                    {
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxDisallowedAttributeCombination,
+                                    attrProvider,
+                                    attrType.FullName,
+                                    otherType.FullName
+                                )
+                            )
+                        );
+                    }
+                }
+            }
+            return result;
+        }
+#else
+        static internal object GetSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider,
+            Type[] attrTypeGroup
+        )
+        {
+            object result = GetSingleAttribute(attrType, attrProvider);
+            if (result != null)
+            {
+                foreach (Type otherType in attrTypeGroup)
+                {
+                    if (otherType == attrType)
+                    {
+                        continue;
+                    }
+                    object[] attrs = GetCustomAttributes(attrProvider, otherType);
+                    if (attrs != null && attrs.Length > 0)
+                    {
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxDisallowedAttributeCombination,
+                                    attrProvider,
+                                    attrType.FullName,
+                                    otherType.FullName
+                                )
+                            )
+                        );
+                    }
+                }
+            }
+            return result;
+        }
+#endif
+#if !NO_GENERIC
+        internal
+#else
+        static internal object GetSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider,
+            Type[] attrTypeGroup
+        )
+        {
+            object result = GetSingleAttribute(attrType, attrProvider);
+            if (result != null)
+            {
+                foreach (Type otherType in attrTypeGroup)
+                {
+                    if (otherType == attrType)
+                    {
+                        continue;
+                    }
+                    object[] attrs = GetCustomAttributes(attrProvider, otherType);
+                    if (attrs != null && attrs.Length > 0)
+                    {
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxDisallowedAttributeCombination,
+                                    attrProvider,
+                                    attrType.FullName,
+                                    otherType.FullName
+                                )
+                            )
+                        );
+                    }
+                }
+            }
+            return result;
+        }
+#endif
+#if !NO_GENERIC
+        static T GetRequiredSingleAttribute<T>(
+            ICustomAttributeProvider attrProvider,
+            Type[] attrTypeGroup
+        )
+            where T : class
+        {
+            T result = GetSingleAttribute<T>(attrProvider, attrTypeGroup);
+            if (result == null)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.couldnTFindRequiredAttributeOfTypeOn2,
+                            typeof(T),
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            return result;
+        }
+#else
+        static internal object GetRequiredSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider,
+            Type[] attrTypeGroup
+        )
+        {
+            object result = GetSingleAttribute(attrType, attrProvider, attrTypeGroup);
+            if (result == null)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.couldnTFindRequiredAttributeOfTypeOn2,
+                            attrType,
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            return result;
+        }
+#endif
+
+        internal
+#else
+        static object GetRequiredSingleAttribute(
+            Type attrType,
+            ICustomAttributeProvider attrProvider,
+            Type[] attrTypeGroup
+        )
+        {
+            object result = GetSingleAttribute(attrType, attrProvider, attrTypeGroup);
+            if (result == null)
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.couldnTFindRequiredAttributeOfTypeOn2,
+                            attrType,
+                            attrProvider.ToString()
+                        )
+                    )
+                );
+            }
+            return result;
+        }
+#endif
+
+        static Type GetContractType(Type interfaceType)
         {
             ServiceContractAttribute contractAttribute;
             return GetContractTypeAndAttribute(interfaceType, out contractAttribute);
         }
 
-        static internal Type GetContractTypeAndAttribute(
+        internal static Type GetContractTypeAndAttribute(
             Type interfaceType,
             out ServiceContractAttribute contractAttribute
         )
@@ -899,7 +1324,20 @@ namespace System.ServiceModel.Description
         // in/out                    F          F         T
         //
         // out                       F          T         T
-        static internal void ValidateParameterMetadata(MethodInfo methodInfo)
+        internal
+        // The metadata for "in" versus "out" seems to be inconsistent, depending upon what compiler generates it.
+        // The following code assumes this is the truth table that all compilers will obey:
+        //
+        // True Parameter Type     .IsIn      .IsOut    .ParameterType.IsByRef
+        //
+        // in                        F          F         F         ...OR...
+        // in                        T          F         F
+        //
+        // in/out                    T          T         T         ...OR...
+        // in/out                    F          F         T
+        //
+        // out                       F          T         T
+        static void ValidateParameterMetadata(MethodInfo methodInfo)
         {
             ParameterInfo[] parameters = methodInfo.GetParameters();
             foreach (ParameterInfo parameter in parameters)
@@ -937,18 +1375,20 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static internal bool FlowsIn(ParameterInfo paramInfo) // conceptually both "in" and "in/out" params return true
+        internal static bool FlowsIn(ParameterInfo paramInfo) // conceptually both "in" and "in/out" params return true
         {
             return !paramInfo.IsOut || paramInfo.IsIn;
         }
 
-        static internal bool FlowsOut(ParameterInfo paramInfo) // conceptually both "out" and "in/out" params return true
+        internal static bool FlowsOut(ParameterInfo paramInfo) // conceptually both "out" and "in/out" params return true
         {
             return paramInfo.ParameterType.IsByRef;
         }
 
         // for async method is the begin method
-        static internal ParameterInfo[] GetInputParameters(MethodInfo method, bool asyncPattern)
+        internal
+        // for async method is the begin method
+        static ParameterInfo[] GetInputParameters(MethodInfo method, bool asyncPattern)
         {
             int count = 0;
             ParameterInfo[] parameters = method.GetParameters();
@@ -984,7 +1424,9 @@ namespace System.ServiceModel.Description
         }
 
         // for async method is the end method
-        static internal ParameterInfo[] GetOutputParameters(MethodInfo method, bool asyncPattern)
+        internal
+        // for async method is the end method
+        static ParameterInfo[] GetOutputParameters(MethodInfo method, bool asyncPattern)
         {
             int count = 0;
             ParameterInfo[] parameters = method.GetParameters();
@@ -1019,7 +1461,7 @@ namespace System.ServiceModel.Description
             return result;
         }
 
-        static internal bool HasOutputParameters(MethodInfo method, bool asyncPattern)
+        internal static bool HasOutputParameters(MethodInfo method, bool asyncPattern)
         {
             ParameterInfo[] parameters = method.GetParameters();
 
@@ -1079,7 +1521,7 @@ namespace System.ServiceModel.Description
             return (MethodInfo)endMethods[0];
         }
 
-        static internal MethodInfo GetEndMethod(MethodInfo beginMethod)
+        internal static MethodInfo GetEndMethod(MethodInfo beginMethod)
         {
             MethodInfo endMethod = GetEndMethodInternal(beginMethod);
 
@@ -1099,13 +1541,13 @@ namespace System.ServiceModel.Description
             return endMethod;
         }
 
-        static internal XmlName GetOperationName(MethodInfo method)
+        internal static XmlName GetOperationName(MethodInfo method)
         {
             OperationContractAttribute operationAttribute = GetOperationContractAttribute(method);
             return NamingHelper.GetOperationName(GetLogicalName(method), operationAttribute.Name);
         }
 
-        static internal bool HasBeginMethodShape(MethodInfo method)
+        internal static bool HasBeginMethodShape(MethodInfo method)
         {
             ParameterInfo[] parameters = method.GetParameters();
             if (
@@ -1121,7 +1563,7 @@ namespace System.ServiceModel.Description
             return true;
         }
 
-        static internal bool IsBegin(OperationContractAttribute opSettings, MethodInfo method)
+        internal static bool IsBegin(OperationContractAttribute opSettings, MethodInfo method)
         {
             if (opSettings.AsyncPattern)
             {
@@ -1143,7 +1585,7 @@ namespace System.ServiceModel.Description
             return false;
         }
 
-        static internal bool IsTask(MethodInfo method)
+        internal static bool IsTask(MethodInfo method)
         {
             if (method.ReturnType == taskType)
             {
@@ -1159,7 +1601,7 @@ namespace System.ServiceModel.Description
             return false;
         }
 
-        static internal bool IsTask(MethodInfo method, out Type taskTResult)
+        internal static bool IsTask(MethodInfo method, out Type taskTResult)
         {
             taskTResult = null;
             Type methodReturnType = method.ReturnType;
@@ -1181,7 +1623,7 @@ namespace System.ServiceModel.Description
             return false;
         }
 
-        static internal bool HasEndMethodShape(MethodInfo method)
+        internal static bool HasEndMethodShape(MethodInfo method)
         {
             ParameterInfo[] parameters = method.GetParameters();
             if (
@@ -1212,7 +1654,7 @@ namespace System.ServiceModel.Description
             return null;
         }
 
-        static internal bool IsBegin(MethodInfo method)
+        internal static bool IsBegin(MethodInfo method)
         {
             OperationContractAttribute opSettings = GetOperationContractAttribute(method);
             if (opSettings == null)
@@ -1220,14 +1662,14 @@ namespace System.ServiceModel.Description
             return IsBegin(opSettings, method);
         }
 
-        static internal string GetLogicalName(MethodInfo method)
+        internal static string GetLogicalName(MethodInfo method)
         {
             bool isAsync = IsBegin(method);
             bool isTask = isAsync ? false : IsTask(method);
             return GetLogicalName(method, isAsync, isTask);
         }
 
-        static internal string GetLogicalName(MethodInfo method, bool isAsync, bool isTask)
+        internal static string GetLogicalName(MethodInfo method, bool isAsync, bool isTask)
         {
             if (isAsync)
             {
@@ -1245,7 +1687,7 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static internal bool HasNoDisposableParameters(MethodInfo methodInfo)
+        internal static bool HasNoDisposableParameters(MethodInfo methodInfo)
         {
             foreach (ParameterInfo inputInfo in methodInfo.GetParameters())
             {
@@ -1263,7 +1705,7 @@ namespace System.ServiceModel.Description
             return true;
         }
 
-        static internal bool IsParameterDisposable(Type type)
+        internal static bool IsParameterDisposable(Type type)
         {
             return ((!type.IsSealed) || typeof(IDisposable).IsAssignableFrom(type));
         }

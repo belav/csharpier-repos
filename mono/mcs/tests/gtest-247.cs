@@ -21,7 +21,7 @@ public abstract class CollectionValueBase<T> : EnumerableBase<T>
         CircularQueue<T> wasRemoved;
     }
 
-    public override abstract SCG.IEnumerator<T> GetEnumerator();
+    public abstract override SCG.IEnumerator<T> GetEnumerator();
 }
 
 public class CircularQueue<T> : EnumerableBase<T>

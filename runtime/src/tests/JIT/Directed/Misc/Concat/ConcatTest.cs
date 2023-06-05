@@ -19,7 +19,7 @@ internal class ConcatTest
 
     static int iReturn = 100;
 
-    static public int Main()
+    public static int Main()
     {
         iReturn = 100;
         try

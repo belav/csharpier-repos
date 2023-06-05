@@ -69,120 +69,120 @@ namespace System.ServiceModel.Security.Tokens
                 defaultSupportSecurityContextCancellation;
         }
 
-        static public string SecurityAlgorithmSuiteProperty
+        public static string SecurityAlgorithmSuiteProperty
         {
             get { return securityAlgorithmSuiteProperty; }
         }
-        static public string SecurityBindingElementProperty
+        public static string SecurityBindingElementProperty
         {
             get { return securityBindingElementProperty; }
         }
-        static public string IssuerAddressProperty
+        public static string IssuerAddressProperty
         {
             get { return issuerAddressProperty; }
         }
-        static public string IssuerBindingProperty
+        public static string IssuerBindingProperty
         {
             get { return issuerBindingProperty; }
         }
-        static public string SecureConversationSecurityBindingElementProperty
+        public static string SecureConversationSecurityBindingElementProperty
         {
             get { return secureConversationSecurityBindingElementProperty; }
         }
-        static public string SupportSecurityContextCancellationProperty
+        public static string SupportSecurityContextCancellationProperty
         {
             get { return supportSecurityContextCancellationProperty; }
         }
-        static public string MessageSecurityVersionProperty
+        public static string MessageSecurityVersionProperty
         {
             get { return messageSecurityVersionProperty; }
         }
-        static internal string DefaultMessageSecurityVersionProperty
+        internal static string DefaultMessageSecurityVersionProperty
         {
             get { return defaultMessageSecurityVersionProperty; }
         }
-        static public string IssuerBindingContextProperty
+        public static string IssuerBindingContextProperty
         {
             get { return issuerBindingContextProperty; }
         }
-        static public string TransportSchemeProperty
+        public static string TransportSchemeProperty
         {
             get { return transportSchemeProperty; }
         }
-        static public string IsInitiatorProperty
+        public static string IsInitiatorProperty
         {
             get { return isInitiatorProperty; }
         }
-        static public string TargetAddressProperty
+        public static string TargetAddressProperty
         {
             get { return targetAddressProperty; }
         }
-        static public string ViaProperty
+        public static string ViaProperty
         {
             get { return viaProperty; }
         }
-        static public string ListenUriProperty
+        public static string ListenUriProperty
         {
             get { return listenUriProperty; }
         }
-        static public string AuditLogLocationProperty
+        public static string AuditLogLocationProperty
         {
             get { return auditLogLocationProperty; }
         }
-        static public string SuppressAuditFailureProperty
+        public static string SuppressAuditFailureProperty
         {
             get { return suppressAuditFailureProperty; }
         }
-        static public string MessageAuthenticationAuditLevelProperty
+        public static string MessageAuthenticationAuditLevelProperty
         {
             get { return messageAuthenticationAuditLevelProperty; }
         }
-        static public string IsOutOfBandTokenProperty
+        public static string IsOutOfBandTokenProperty
         {
             get { return isOutOfBandTokenProperty; }
         }
-        static public string PreferSslCertificateAuthenticatorProperty
+        public static string PreferSslCertificateAuthenticatorProperty
         {
             get { return preferSslCertificateAuthenticatorProperty; }
         }
 
-        static public string SupportingTokenAttachmentModeProperty
+        public static string SupportingTokenAttachmentModeProperty
         {
             get { return supportingTokenAttachmentModeProperty; }
         }
-        static public string MessageDirectionProperty
+        public static string MessageDirectionProperty
         {
             get { return messageDirectionProperty; }
         }
-        static public string HttpAuthenticationSchemeProperty
+        public static string HttpAuthenticationSchemeProperty
         {
             get { return httpAuthenticationSchemeProperty; }
         }
-        static public string IssuedSecurityTokenParametersProperty
+        public static string IssuedSecurityTokenParametersProperty
         {
             get { return issuedSecurityTokenParametersProperty; }
         }
-        static public string PrivacyNoticeUriProperty
+        public static string PrivacyNoticeUriProperty
         {
             get { return privacyNoticeUriProperty; }
         }
-        static public string PrivacyNoticeVersionProperty
+        public static string PrivacyNoticeVersionProperty
         {
             get { return privacyNoticeVersionProperty; }
         }
-        static public string DuplexClientLocalAddressProperty
+        public static string DuplexClientLocalAddressProperty
         {
             get { return duplexClientLocalAddressProperty; }
         }
-        static public string EndpointFilterTableProperty
+        public static string EndpointFilterTableProperty
         {
             get { return endpointFilterTableProperty; }
         }
-        static public string ChannelParametersCollectionProperty
+        public static string ChannelParametersCollectionProperty
         {
             get { return channelParametersCollectionProperty; }
         }
-        static public string ExtendedProtectionPolicy
+        public static string ExtendedProtectionPolicy
         {
             get { return extendedProtectionPolicy; }
         }

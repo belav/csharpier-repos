@@ -196,7 +196,7 @@ namespace System.Web.SessionState
             s_immutableTypes.Add(t, t);
         }
 
-        static internal bool IsImmutable(Object o)
+        internal static bool IsImmutable(Object o)
         {
             return s_immutableTypes[o.GetType()] != null;
         }

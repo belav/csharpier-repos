@@ -26,7 +26,7 @@ class Program
 
 public interface ILogic
 {
-    abstract static void Run();
+    static abstract void Run();
 }
 
 public class L1 : ILogic

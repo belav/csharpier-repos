@@ -221,35 +221,35 @@ public class DisposeObj : BaseObj
 // This class represents the application itself
 class Application
 {
-    static private int indent = 0;
+    private static int indent = 0;
 
-    static public void Display(String s)
+    public static void Display(String s)
     {
         for (int x = 0; x < indent * 3; x++)
             Console.Write(" ");
         Console.WriteLine(s);
     }
 
-    static public void Display(int preIndent, String s, int postIndent)
+    public static void Display(int preIndent, String s, int postIndent)
     {
         indent += preIndent;
         Display(s);
         indent += postIndent;
     }
 
-    static public void Collect()
+    public static void Collect()
     {
         Display(0, "Forcing a garbage collection", 0);
         GC.Collect();
     }
 
-    static public void Collect(int generation)
+    public static void Collect(int generation)
     {
         Display(0, "Forcing a garbage collection of generation " + generation, 0);
         GC.Collect(generation);
     }
 
-    static public void WaitForFinalizers()
+    public static void WaitForFinalizers()
     {
         Display(0, "Waiting for Finalizers to complete", +1);
         GC.WaitForPendingFinalizers();
@@ -290,9 +290,10 @@ class Application
         Display(-1, "Demo stop: Introduction to Garbage Collection.", 0);
     }
 
+    public
     // This reference is accessed in the ResurrectObj.Finalize method and
     // is used to create a strong reference to an object (resurrecting it).
-    static public ResurrectObj ResObjHolder; // Defaults to null
+    static ResurrectObj ResObjHolder; // Defaults to null
 
     // These methods demonstrate how the GC supports resurrection.
     // NOTE: Resurrection is discouraged.

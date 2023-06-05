@@ -21,7 +21,7 @@ namespace MathCeilingSingleTest
 
         public float[] instanceValueArray = new float[] { 6.6f, 7.7f, 8.8f };
 
-        unsafe static int Main()
+        static unsafe int Main()
         {
             float localValue = 9.9f;
 

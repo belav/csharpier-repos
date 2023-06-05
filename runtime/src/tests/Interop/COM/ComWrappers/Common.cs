@@ -123,7 +123,7 @@ namespace ComWrappersTests.Common
         }
 
         [DllImport(nameof(MockReferenceTrackerRuntime))]
-        extern private static IntPtr CreateTrackerObject_Unsafe(IntPtr outer, out IntPtr inner);
+        private static extern IntPtr CreateTrackerObject_Unsafe(IntPtr outer, out IntPtr inner);
 
         public class AllocationCountResult : IDisposable
         {
@@ -155,28 +155,28 @@ namespace ComWrappersTests.Common
         }
 
         [DllImport(nameof(MockReferenceTrackerRuntime))]
-        extern private static void StartTrackerObjectAllocationCount_Unsafe();
+        private static extern void StartTrackerObjectAllocationCount_Unsafe();
 
         [DllImport(nameof(MockReferenceTrackerRuntime))]
-        extern private static int StopTrackerObjectAllocationCount_Unsafe();
+        private static extern int StopTrackerObjectAllocationCount_Unsafe();
 
         [DllImport(nameof(MockReferenceTrackerRuntime))]
-        extern public static void ReleaseAllTrackerObjects();
+        public static extern void ReleaseAllTrackerObjects();
 
         [DllImport(nameof(MockReferenceTrackerRuntime))]
-        extern public static int Trigger_NotifyEndOfReferenceTrackingOnThread();
+        public static extern int Trigger_NotifyEndOfReferenceTrackingOnThread();
 
         [DllImport(nameof(MockReferenceTrackerRuntime))]
-        extern public static IntPtr TrackerTarget_AddRefFromReferenceTrackerAndReturn(IntPtr ptr);
+        public static extern IntPtr TrackerTarget_AddRefFromReferenceTrackerAndReturn(IntPtr ptr);
 
         [DllImport(nameof(MockReferenceTrackerRuntime))]
-        extern public static int TrackerTarget_ReleaseFromReferenceTracker(IntPtr ptr);
+        public static extern int TrackerTarget_ReleaseFromReferenceTracker(IntPtr ptr);
 
         // Suppressing the GC transition here as we want to make sure we are in-sync
         // with the GC which is setting the connected value.
         [SuppressGCTransition]
         [DllImport(nameof(MockReferenceTrackerRuntime))]
-        extern public static byte IsTrackerObjectConnected(IntPtr instance);
+        public static extern byte IsTrackerObjectConnected(IntPtr instance);
     }
 
     [Guid("42951130-245C-485E-B60B-4ED4254256F8")]
@@ -329,7 +329,7 @@ namespace ComWrappersTests.Common
             public IntPtr ReferenceTracker;
         }
 
-        public unsafe static void Init<T>(
+        public static unsafe void Init<T>(
             ref ClassNative classNative,
             object thisInstance,
             bool aggregateRefTracker,

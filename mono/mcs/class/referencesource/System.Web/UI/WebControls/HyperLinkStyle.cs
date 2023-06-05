@@ -84,7 +84,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-        protected override sealed void FillStyleAttributes(
+        protected sealed override void FillStyleAttributes(
             CssStyleCollection attributes,
             IUrlResolutionService urlResolver
         )

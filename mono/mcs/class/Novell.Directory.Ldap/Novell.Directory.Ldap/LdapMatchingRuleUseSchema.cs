@@ -51,13 +51,14 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     public class LdapMatchingRuleUseSchema : LdapSchemaElement
     {
+        public
         /// <summary> Returns an array of all the attributes which this matching rule
         /// applies to.
         ///
         /// </summary>
         /// <returns> An array of all the attributes which this matching rule applies to.
         /// </returns>
-        virtual public System.String[] Attributes
+        virtual System.String[] Attributes
         {
             get { return attributes; }
         }

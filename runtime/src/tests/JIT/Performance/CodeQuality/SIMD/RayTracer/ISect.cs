@@ -20,5 +20,5 @@ internal class ISect
         return sect == null;
     }
 
-    public readonly static ISect Null = null;
+    public static readonly ISect Null = null;
 }

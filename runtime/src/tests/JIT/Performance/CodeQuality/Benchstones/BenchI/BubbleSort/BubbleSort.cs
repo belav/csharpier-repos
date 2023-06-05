@@ -49,7 +49,7 @@ namespace Benchstone.BenchI
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static public bool Bench()
+        public static bool Bench()
         {
             int[] tab = new int[100];
             int k = 0;

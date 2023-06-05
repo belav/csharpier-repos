@@ -54,19 +54,19 @@ namespace Mono.Tasklets
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static IntPtr alloc();
+        static extern IntPtr alloc();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void free(IntPtr cont);
+        static extern void free(IntPtr cont);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static Exception mark(IntPtr cont);
+        static extern Exception mark(IntPtr cont);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static int store(IntPtr cont, int state, out Exception exception);
+        static extern int store(IntPtr cont, int state, out Exception exception);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static Exception restore(IntPtr cont, int state);
+        static extern Exception restore(IntPtr cont, int state);
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public void Mark()

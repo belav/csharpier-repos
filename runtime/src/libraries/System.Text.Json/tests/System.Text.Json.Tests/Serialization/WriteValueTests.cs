@@ -26,7 +26,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact]
-        public async static void NullInputTypeThrows()
+        public static async void NullInputTypeThrows()
         {
             ArgumentException ex;
             Utf8JsonWriter writer = new Utf8JsonWriter(new MemoryStream());
@@ -59,7 +59,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact]
-        public async static void NullValueWithValueTypeThrows()
+        public static async void NullValueWithValueTypeThrows()
         {
             JsonException ex;
 
@@ -91,7 +91,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact]
-        public async static void NullValueWithNullableSuccess()
+        public static async void NullValueWithNullableSuccess()
         {
             byte[] nullUtf8Literal = "null"u8.ToArray();
 

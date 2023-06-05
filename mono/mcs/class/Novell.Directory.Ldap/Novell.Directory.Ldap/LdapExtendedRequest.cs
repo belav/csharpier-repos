@@ -49,10 +49,11 @@ namespace Novell.Directory.Ldap
      */
     public class LdapExtendedRequest : LdapMessage
     {
+        public
         /// <summary> Retrieves an extended operation from this request</summary>
         /// <returns> extended operation represented in this request.
         /// </returns>
-        virtual public LdapExtendedOperation ExtendedOperation
+        virtual LdapExtendedOperation ExtendedOperation
         {
             get
             {

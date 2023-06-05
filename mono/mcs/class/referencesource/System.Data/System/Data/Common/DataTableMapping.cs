@@ -237,13 +237,13 @@ namespace System.Data.Common
             return SourceTable;
         }
 
-        sealed internal class DataTableMappingConverter
+        internal sealed class DataTableMappingConverter
             : System.ComponentModel.ExpandableObjectConverter
         {
             // converter classes should have public ctor
             public DataTableMappingConverter() { }
 
-            override public bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
                 if (typeof(InstanceDescriptor) == destinationType)
                 {
@@ -252,7 +252,7 @@ namespace System.Data.Common
                 return base.CanConvertTo(context, destinationType);
             }
 
-            override public object ConvertTo(
+            public override object ConvertTo(
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value,

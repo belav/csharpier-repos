@@ -8,7 +8,7 @@ namespace System.ServiceModel
 
     class ServiceModelDictionary : IXmlDictionary
     {
-        static public readonly ServiceModelDictionary Version1 = new ServiceModelDictionary(
+        public static readonly ServiceModelDictionary Version1 = new ServiceModelDictionary(
             new ServiceModelStringsVersion1()
         );
         ServiceModelStrings strings;
@@ -24,7 +24,7 @@ namespace System.ServiceModel
             this.count = strings.Count;
         }
 
-        static public ServiceModelDictionary CurrentVersion
+        public static ServiceModelDictionary CurrentVersion
         {
             get { return Version1; }
         }

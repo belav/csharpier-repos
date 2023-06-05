@@ -26,12 +26,12 @@ namespace Microsoft.Win32
     [System.Security.SecurityCritical(System.Security.SecurityCriticalScope.Everything)]
 #pragma warning restore 618
     [HostProtectionAttribute(MayLeakOnAbort = true)]
-    sealed internal class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
+    internal sealed class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         internal SafeLibraryHandle()
             : base(true) { }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return UnsafeNativeMethods.FreeLibrary(handle);
         }

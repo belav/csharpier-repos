@@ -127,7 +127,7 @@ namespace System.Web.Util
         }
     }
 
-    abstract internal class WildcardPath : Wildcard
+    internal abstract class WildcardPath : Wildcard
     {
 #if NOT_USED
         internal /*public*/

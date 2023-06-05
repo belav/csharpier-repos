@@ -389,7 +389,7 @@ namespace ILCompiler
             );
         }
 
-        private readonly static string s_folderUpPrefix = ".." + Path.DirectorySeparatorChar;
+        private static readonly string s_folderUpPrefix = ".." + Path.DirectorySeparatorChar;
 
         public override void Compile(string outputFile)
         {

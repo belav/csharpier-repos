@@ -16,7 +16,7 @@ namespace System.Web
     public class ProcessModelInfo
     {
         [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
-        static public ProcessInfo GetCurrentProcessInfo()
+        public static ProcessInfo GetCurrentProcessInfo()
         {
             HttpContext context = HttpContext.Current;
             if (
@@ -60,7 +60,7 @@ namespace System.Web
         }
 
         [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
-        static public ProcessInfo[] GetHistory(int numRecords)
+        public static ProcessInfo[] GetHistory(int numRecords)
         {
             HttpContext context = HttpContext.Current;
             if (

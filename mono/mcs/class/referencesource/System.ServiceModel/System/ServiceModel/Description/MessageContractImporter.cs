@@ -49,7 +49,7 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static internal void ImportMessageBinding(
+        internal static void ImportMessageBinding(
             WsdlImporter importer,
             WsdlEndpointConversionContext endpointContext,
             Type schemaImporterType
@@ -136,7 +136,7 @@ namespace System.ServiceModel.Description
             return false;
         }
 
-        static internal void ImportMessageContract(
+        internal static void ImportMessageContract(
             WsdlImporter importer,
             WsdlContractConversionContext contractContext,
             SchemaImporter schemaImporter
@@ -2051,8 +2051,8 @@ namespace System.ServiceModel.Description
 
         internal abstract class SchemaImporter
         {
-            readonly protected XmlSchemaSet schemaSet;
-            readonly protected WsdlImporter importer;
+            protected readonly XmlSchemaSet schemaSet;
+            protected readonly WsdlImporter importer;
 
             internal SchemaImporter(WsdlImporter importer)
             {

@@ -17,7 +17,7 @@ class Z : Y
 
 class test
 {
-    static public int global;
+    public static int global;
 
     static int Main()
     {

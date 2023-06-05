@@ -46,10 +46,11 @@ namespace Novell.Directory.Ldap.Rfc2251
     /// </summary>
     public class RfcBindResponse : Asn1Sequence, RfcResponse
     {
+        public
         /// <summary> Returns the OPTIONAL serverSaslCreds of a BindResponse if it exists
         /// otherwise null.
         /// </summary>
-        virtual public Asn1OctetString ServerSaslCreds
+        virtual Asn1OctetString ServerSaslCreds
         {
             get
             {

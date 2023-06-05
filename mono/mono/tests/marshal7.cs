@@ -146,7 +146,7 @@ public class Test
                     .Invoke(null, null) == 6;
     }
 
-    public unsafe static int Main()
+    public static unsafe int Main()
     {
         ///
         ///	Testing simple struct size

@@ -829,7 +829,9 @@ namespace System.ServiceModel.Description
         internal static class ExtensionsHelper
         {
             // calls the behavior extensions
-            static internal void CallBehaviorExtensions(ServiceContractGenerationContext context)
+            internal
+            // calls the behavior extensions
+            static void CallBehaviorExtensions(ServiceContractGenerationContext context)
             {
                 CallContractExtensions(EnumerateBehaviorExtensions(context.Contract), context);
 
@@ -843,7 +845,9 @@ namespace System.ServiceModel.Description
             }
 
             // calls a specific set of contract-level extensions
-            static internal void CallContractExtensions(
+            internal
+            // calls a specific set of contract-level extensions
+            static void CallContractExtensions(
                 IEnumerable<IServiceContractGenerationExtension> extensions,
                 ServiceContractGenerationContext context
             )
@@ -855,7 +859,9 @@ namespace System.ServiceModel.Description
             }
 
             // calls a specific set of operation-level extensions on each operation in the contract
-            static internal void CallOperationExtensions(
+            internal
+            // calls a specific set of operation-level extensions on each operation in the contract
+            static void CallOperationExtensions(
                 IEnumerable<IOperationContractGenerationExtension> extensions,
                 ServiceContractGenerationContext context
             )
@@ -984,7 +990,7 @@ namespace System.ServiceModel.Description
 
         class MessageDescriptionComparer : IEqualityComparer<MessageDescription>
         {
-            static internal MessageDescriptionComparer Singleton = new MessageDescriptionComparer();
+            internal static MessageDescriptionComparer Singleton = new MessageDescriptionComparer();
 
             MessageDescriptionComparer() { }
 
@@ -1033,7 +1039,7 @@ namespace System.ServiceModel.Description
 
             class MessagePartDescriptionComparer : IComparer<MessagePartDescription>
             {
-                static internal MessagePartDescriptionComparer Singleton =
+                internal static MessagePartDescriptionComparer Singleton =
                     new MessagePartDescriptionComparer();
 
                 MessagePartDescriptionComparer() { }
@@ -1133,7 +1139,7 @@ namespace System.ServiceModel.Description
                 return codeTypeReference.UserData[referenceKey] as CodeTypeDeclaration;
             }
 
-            static internal CodeTypeReference GetCodeTypeReference(
+            internal static CodeTypeReference GetCodeTypeReference(
                 CodeNamespace codeNamespace,
                 CodeTypeDeclaration codeType
             )

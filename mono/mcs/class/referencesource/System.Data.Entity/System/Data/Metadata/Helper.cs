@@ -46,7 +46,24 @@ namespace System.Data.Metadata.Edm
         /// <param name="nav"></param>
         /// <param name="attributeName">name of the attribute</param>
         /// <returns></returns>
-        static internal string GetAttributeValue(XPathNavigator nav, string attributeName)
+        internal
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// The method wraps the GetAttribute method on XPathNavigator.
+        /// The problem with using the method directly is that the
+        /// Get Attribute method does not differentiate the absence of an attribute and
+        /// having an attribute with Empty string value. In both cases the value returned is an empty string.
+        /// So in case of optional attributes, it becomes hard to distinguish the case whether the
+        /// xml contains the attribute with empty string or doesn't contain the attribute
+        /// This method will return null if the attribute is not present and otherwise will return the
+        /// attribute value.
+        /// </summary>
+        /// <param name="nav"></param>
+        /// <param name="attributeName">name of the attribute</param>
+        /// <returns></returns>
+        static string GetAttributeValue(XPathNavigator nav, string attributeName)
         {
             //Clone the navigator so that there wont be any sideeffects on the passed in Navigator
             nav = nav.Clone();

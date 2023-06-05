@@ -1141,7 +1141,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void WriteClaim(XmlWriter xml, Claim claim)
+        internal static void WriteClaim(XmlWriter xml, Claim claim)
         {
             if (xml == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("xml");

@@ -315,6 +315,29 @@ namespace Mono.Security.Cryptography
 
 #if INSIDE_CORLIB
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern unsafe bool _CanSecure(char* root);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern unsafe bool _ProtectUser(char* path);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern unsafe bool _ProtectMachine(char* path);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern unsafe bool _IsUserProtected(char* path);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern unsafe bool _IsMachineProtected(char* path);
+#else
+        // Mono.Security.dll assembly can't use the internal
+        // call (and still run with other runtimes)
+
+        // Note: Class is only available in Mono.Security.dll as
+        // a management helper (e.g. build a GUI app)
+
+        internal static
+#if INSIDE_CORLIB
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         unsafe internal static extern bool _CanSecure(char* root);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -335,27 +358,27 @@ namespace Mono.Security.Cryptography
         // Note: Class is only available in Mono.Security.dll as
         // a management helper (e.g. build a GUI app)
 
-        unsafe internal static bool _CanSecure(char* root)
+        unsafe bool _CanSecure(char* root)
         {
             return true;
         }
 
-        unsafe internal static bool _ProtectUser(char* path)
+        internal static unsafe bool _ProtectUser(char* path)
         {
             return true;
         }
 
-        unsafe internal static bool _ProtectMachine(char* path)
+        internal static unsafe bool _ProtectMachine(char* path)
         {
             return true;
         }
 
-        unsafe internal static bool _IsUserProtected(char* path)
+        internal static unsafe bool _IsUserProtected(char* path)
         {
             return true;
         }
 
-        unsafe internal static bool _IsMachineProtected(char* path)
+        internal static unsafe bool _IsMachineProtected(char* path)
         {
             return true;
         }
@@ -363,7 +386,12 @@ namespace Mono.Security.Cryptography
 
         // private stuff
 
-        unsafe private static bool CanSecure(string path)
+        private static
+#endif
+
+        // private stuff
+
+        unsafe bool CanSecure(string path)
         {
             // we assume POSIX filesystems can always be secured
 
@@ -380,7 +408,7 @@ namespace Mono.Security.Cryptography
             }
         }
 
-        unsafe private static bool ProtectUser(string path)
+        private static unsafe bool ProtectUser(string path)
         {
             // we cannot protect on some filsystem (like FAT)
             if (CanSecure(path))
@@ -394,7 +422,7 @@ namespace Mono.Security.Cryptography
             return true;
         }
 
-        unsafe private static bool ProtectMachine(string path)
+        private static unsafe bool ProtectMachine(string path)
         {
             // we cannot protect on some filsystem (like FAT)
             if (CanSecure(path))
@@ -408,7 +436,7 @@ namespace Mono.Security.Cryptography
             return true;
         }
 
-        unsafe private static bool IsUserProtected(string path)
+        private static unsafe bool IsUserProtected(string path)
         {
             // we cannot protect on some filsystem (like FAT)
             if (CanSecure(path))
@@ -422,7 +450,7 @@ namespace Mono.Security.Cryptography
             return true;
         }
 
-        unsafe private static bool IsMachineProtected(string path)
+        private static unsafe bool IsMachineProtected(string path)
         {
             // we cannot protect on some filsystem (like FAT)
             if (CanSecure(path))

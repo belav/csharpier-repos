@@ -7,7 +7,7 @@ namespace System.Web.Caching
 {
     public sealed class OutputCacheProviderCollection : ProviderCollection
     {
-        new public OutputCacheProvider this[string name]
+        public new OutputCacheProvider this[string name]
         {
             get { return (OutputCacheProvider)base[name]; }
         }

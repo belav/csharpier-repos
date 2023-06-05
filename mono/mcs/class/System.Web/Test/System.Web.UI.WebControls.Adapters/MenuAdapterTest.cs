@@ -192,22 +192,22 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
                 base.OnPreRender(e);
             }
 
-            new internal void RenderBeginTag(HtmlTextWriter w)
+            internal new void RenderBeginTag(HtmlTextWriter w)
             {
                 base.RenderBeginTag(w);
             }
 
-            new internal void RenderContents(HtmlTextWriter w)
+            internal new void RenderContents(HtmlTextWriter w)
             {
                 base.RenderContents(w);
             }
 
-            new internal void RenderEndTag(HtmlTextWriter w)
+            internal new void RenderEndTag(HtmlTextWriter w)
             {
                 base.RenderEndTag(w);
             }
 
-            new internal Menu Control
+            internal new Menu Control
             {
                 get { return base.Control; }
             }

@@ -61,7 +61,7 @@ namespace System.Activities.Debugger
             Safe = "We are not exposing the contents of the file."
         )]
         [SecuritySafeCritical]
-        static internal Dictionary<object, SourceLocation> GetSourceLocations(
+        internal static Dictionary<object, SourceLocation> GetSourceLocations(
             Activity rootActivity,
             out string sourcePath,
             out bool isTemporaryFile,

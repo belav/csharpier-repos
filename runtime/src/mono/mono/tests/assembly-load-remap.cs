@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 public class Tests
 {
     [DllImport("__Internal")]
-    extern static void mono_set_assemblies_path(string path);
+    static extern void mono_set_assemblies_path(string path);
 
     public static void Main(string[] args)
     {

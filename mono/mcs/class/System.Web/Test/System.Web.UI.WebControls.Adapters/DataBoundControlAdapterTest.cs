@@ -86,7 +86,7 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
             internal MyDataBoundControlAdapter(DataBoundControl c)
                 : base(c) { }
 
-            new internal DataBoundControl Control
+            internal new DataBoundControl Control
             {
                 get { return base.Control; }
             }

@@ -9,5 +9,5 @@ namespace System.Runtime.CompilerServices
 
     [Serializable]
     [AttributeUsage(AttributeTargets.Field)]
-    sealed public class FixedAddressValueTypeAttribute : Attribute { }
+    public sealed class FixedAddressValueTypeAttribute : Attribute { }
 }

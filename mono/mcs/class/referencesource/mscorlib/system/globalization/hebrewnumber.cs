@@ -336,10 +336,11 @@ namespace System.Globalization
             END = 100, // A terminial state is reached.
         }
 
+        static
         //
         // The state machine for Hebrew number pasing.
         //
-        readonly static HS[][] NumberPasingState =
+        readonly HS[][] NumberPasingState =
         {
             // 400            300/200         100             90~10           8~1      6,       7,       9,          '           "
             /* 0 */new HS[]

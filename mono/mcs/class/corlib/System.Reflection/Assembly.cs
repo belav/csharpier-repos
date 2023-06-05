@@ -242,7 +242,7 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal virtual extern Type[] GetTypes(bool exportedOnly);
+        internal extern virtual Type[] GetTypes(bool exportedOnly);
 
         public virtual Type[] GetTypes()
         {
@@ -273,7 +273,7 @@ namespace System.Reflection
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern unsafe static void InternalGetAssemblyName(
+        internal static extern unsafe void InternalGetAssemblyName(
             string assemblyFile,
             out Mono.MonoAssemblyName aname,
             out string codebase
@@ -387,14 +387,14 @@ namespace System.Reflection
 #endif
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static Assembly LoadFrom(
+        private static extern Assembly LoadFrom(
             String assemblyFile,
             bool refOnly,
             ref StackCrawlMark stackMark
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static Assembly LoadFile_internal(
+        private static extern Assembly LoadFile_internal(
             String assemblyFile,
             ref StackCrawlMark stackMark
         );
@@ -674,10 +674,10 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static Assembly GetExecutingAssembly();
+        public static extern Assembly GetExecutingAssembly();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static Assembly GetCallingAssembly();
+        public static extern Assembly GetCallingAssembly();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern IntPtr InternalGetReferencedAssemblies(Assembly module);

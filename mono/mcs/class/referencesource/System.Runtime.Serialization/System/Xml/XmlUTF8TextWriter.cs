@@ -313,7 +313,7 @@ namespace System.Xml
             this.inAttribute = false;
         }
 
-        new public void SetOutput(Stream stream, bool ownsStream, Encoding encoding)
+        public new void SetOutput(Stream stream, bool ownsStream, Encoding encoding)
         {
             Encoding utf8Encoding = null;
             if (encoding != null && encoding.CodePage == Encoding.UTF8.CodePage)
@@ -637,7 +637,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteEscapedText(string s)
+        public override unsafe void WriteEscapedText(string s)
         {
             int count = s.Length;
             if (count > 0)
@@ -654,7 +654,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteEscapedText(char[] s, int offset, int count)
+        public override unsafe void WriteEscapedText(char[] s, int offset, int count)
         {
             if (count > 0)
             {
@@ -730,7 +730,7 @@ namespace System.Xml
         }
 
         [SecuritySafeCritical]
-        unsafe public override void WriteText(char[] chars, int offset, int count)
+        public override unsafe void WriteText(char[] chars, int offset, int count)
         {
             if (count > 0)
             {
@@ -1045,7 +1045,7 @@ namespace System.Xml
                 return AsyncCompletionResult.Queued;
             }
 
-            static private void OnTrailBytesComplete(IAsyncEventArgs eventArgs)
+            private static void OnTrailBytesComplete(IAsyncEventArgs eventArgs)
             {
                 InternalWriteBase64TextAsyncWriter thisPtr = (InternalWriteBase64TextAsyncWriter)
                     eventArgs.AsyncState;

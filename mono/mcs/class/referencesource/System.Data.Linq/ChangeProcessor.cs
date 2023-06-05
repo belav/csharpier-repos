@@ -473,7 +473,11 @@ namespace System.Data.Linq
         /// <summary>
         /// Create an ChangeConflictException with the best message
         /// </summary>
-        static private ChangeConflictException CreateChangeConflictException(
+        private
+        /// <summary>
+        /// Create an ChangeConflictException with the best message
+        /// </summary>
+        static ChangeConflictException CreateChangeConflictException(
             int totalUpdatesAttempted,
             int failedUpdates
         )

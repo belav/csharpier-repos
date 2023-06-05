@@ -60,16 +60,18 @@ namespace Novell.Directory.Ldap
      */
     public class LdapSearchRequest : LdapMessage
     {
+        public
         /// <summary> Retrieves the Base DN for a search request.
         ///
         /// </summary>
         /// <returns> the base DN for a search request
         /// </returns>
-        virtual public System.String DN
+        virtual System.String DN
         {
             get { return Asn1Object.RequestDN; }
         }
 
+        public
         /// <summary> Retrieves the scope of a search request.</summary>
         /// <returns> scope of a search request
         ///
@@ -80,7 +82,7 @@ namespace Novell.Directory.Ldap
         /// </seealso>
         /// <seealso cref="Novell.Directory.Ldap.LdapConnection.SCOPE_SUB">
         /// </seealso>
-        virtual public int Scope
+        virtual int Scope
         {
             get
             {
@@ -92,6 +94,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Retrieves the behaviour of dereferencing aliases on a search request.</summary>
         /// <returns> integer representing how to dereference aliases
         ///
@@ -104,7 +107,7 @@ namespace Novell.Directory.Ldap
         /// </seealso>
         /// <seealso cref="Novell.Directory.Ldap.LdapSearchConstraints.DEREF_SEARCHING">
         /// </seealso>
-        virtual public int Dereference
+        virtual int Dereference
         {
             get
             {
@@ -116,12 +119,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Retrieves the maximum number of entries to be returned on a search.
         ///
         /// </summary>
         /// <returns> Maximum number of search entries.
         /// </returns>
-        virtual public int MaxResults
+        virtual int MaxResults
         {
             get
             {
@@ -132,12 +136,13 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Retrieves the server time limit for a search request.
         ///
         /// </summary>
         /// <returns> server time limit in nanoseconds.
         /// </returns>
-        virtual public int ServerTimeLimit
+        virtual int ServerTimeLimit
         {
             get
             {
@@ -148,13 +153,14 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Retrieves whether attribute values or only attribute types(names) should
         /// be returned in a search request.
         /// </summary>
         /// <returns> true if only attribute types (names) are returned, false if
         /// attributes types and values are to be returned.
         /// </returns>
-        virtual public bool TypesOnly
+        virtual bool TypesOnly
         {
             get
             {
@@ -165,10 +171,11 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Retrieves an array of attribute names to request for in a search.</summary>
         /// <returns> Attribute names to be searched
         /// </returns>
-        virtual public System.String[] Attributes
+        virtual System.String[] Attributes
         {
             get
             {
@@ -184,10 +191,11 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Creates a string representation of the filter in this search request.</summary>
         /// <returns> filter string for this search request
         /// </returns>
-        virtual public System.String StringFilter
+        virtual System.String StringFilter
         {
             get { return this.RfcFilter.filterToString(); }
         }
@@ -204,6 +212,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Retrieves an Iterator object representing the parsed filter for
         /// this search request.
         ///
@@ -241,7 +250,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> Iterator representing filter components
         /// </returns>
-        virtual public System.Collections.IEnumerator SearchFilter
+        virtual System.Collections.IEnumerator SearchFilter
         {
             get { return RfcFilter.getFilterIterator(); }
         }

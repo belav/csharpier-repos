@@ -33,10 +33,10 @@ namespace Microsoft.Win32
         private bool async;
         internal const string c_SPARSE_ENTRY_HACK = "~SPARSE_ENTRY:";
 
-        private readonly static DateTime s_MinDateTimeUtcForFileTimeUtc = DateTime.FromFileTimeUtc(
+        private static readonly DateTime s_MinDateTimeUtcForFileTimeUtc = DateTime.FromFileTimeUtc(
             0L
         );
-        internal readonly static TimeSpan s_MaxTimeSpanForInt32 = TimeSpan.FromSeconds(
+        internal static readonly TimeSpan s_MaxTimeSpanForInt32 = TimeSpan.FromSeconds(
             (double)int.MaxValue
         );
 

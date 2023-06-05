@@ -42,11 +42,11 @@ namespace System.Threading
     {
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int CompareExchange(ref int location1, int value, int comparand);
+        public static extern int CompareExchange(ref int location1, int value, int comparand);
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int CompareExchange(
+        internal static extern int CompareExchange(
             ref int location1,
             int value,
             int comparand,
@@ -55,7 +55,7 @@ namespace System.Threading
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void CompareExchange(
+        static extern void CompareExchange(
             ref object location1,
             ref object value,
             ref object comparand,
@@ -83,7 +83,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static float CompareExchange(
+        public static extern float CompareExchange(
             ref float location1,
             float value,
             float comparand
@@ -91,26 +91,26 @@ namespace System.Threading
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int Decrement(ref int location);
+        public static extern int Decrement(ref int location);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static long Decrement(ref long location);
-
-        [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int Increment(ref int location);
+        public static extern long Decrement(ref long location);
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static long Increment(ref long location);
+        public static extern int Increment(ref int location);
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int Exchange(ref int location1, int value);
+        public static extern long Increment(ref long location);
+
+        [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int Exchange(ref int location1, int value);
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static void Exchange(ref object location1, ref object value, ref object result);
+        static extern void Exchange(ref object location1, ref object value, ref object result);
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static object Exchange(ref object location1, object value)
@@ -123,21 +123,21 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static float Exchange(ref float location1, float value);
+        public static extern float Exchange(ref float location1, float value);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static long CompareExchange(ref long location1, long value, long comparand);
+        public static extern long CompareExchange(ref long location1, long value, long comparand);
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static IntPtr CompareExchange(
+        public static extern IntPtr CompareExchange(
             ref IntPtr location1,
             IntPtr value,
             IntPtr comparand
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static double CompareExchange(
+        public static extern double CompareExchange(
             ref double location1,
             double value,
             double comparand
@@ -175,14 +175,14 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static long Exchange(ref long location1, long value);
+        public static extern long Exchange(ref long location1, long value);
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static IntPtr Exchange(ref IntPtr location1, IntPtr value);
+        public static extern IntPtr Exchange(ref IntPtr location1, IntPtr value);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static double Exchange(ref double location1, double value);
+        public static extern double Exchange(ref double location1, double value);
 
         [ComVisible(false)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -210,15 +210,15 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static long Read(ref long location);
+        public static extern long Read(ref long location);
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int Add(ref int location1, int value);
+        public static extern int Add(ref int location1, int value);
 
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static long Add(ref long location1, long value);
+        public static extern long Add(ref long location1, long value);
 
         public static void MemoryBarrier()
         {
@@ -226,6 +226,6 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static void MemoryBarrierProcessWide();
+        public static extern void MemoryBarrierProcessWide();
     }
 }

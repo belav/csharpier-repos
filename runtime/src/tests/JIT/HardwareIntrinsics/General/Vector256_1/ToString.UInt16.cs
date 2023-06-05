@@ -18,7 +18,7 @@ namespace JIT.HardwareIntrinsics.General
 {
     public static partial class Program
     {
-        private unsafe static void ToStringUInt16()
+        private static unsafe void ToStringUInt16()
         {
             int size = Unsafe.SizeOf<Vector256<UInt16>>() / sizeof(UInt16);
             UInt16[] values = new UInt16[size];

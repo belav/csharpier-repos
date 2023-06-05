@@ -205,7 +205,7 @@ namespace System.Security.Cryptography
             return hash;
         }
 
-        private readonly static UInt64[] _K =
+        private static readonly UInt64[] _K =
         {
             0x428a2f98d728ae22,
             0x7137449123ef65cd,

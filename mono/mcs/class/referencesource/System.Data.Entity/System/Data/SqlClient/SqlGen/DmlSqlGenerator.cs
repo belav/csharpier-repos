@@ -584,7 +584,7 @@ namespace System.Data.SqlClient.SqlGen
             private readonly DbModificationCommandTree _commandTree;
             private readonly List<SqlParameter> _parameters;
             private readonly Dictionary<EdmMember, SqlParameter> _memberValues;
-            private readonly static AliasGenerator s_parameterNames = new AliasGenerator("@", 1000);
+            private static readonly AliasGenerator s_parameterNames = new AliasGenerator("@", 1000);
             private readonly SqlVersion _version;
 
             internal List<SqlParameter> Parameters

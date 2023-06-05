@@ -6,7 +6,7 @@ namespace ConsoleApplication1
 {
     class Program
     {
-        unsafe public static void Main(string[] args)
+        public static unsafe void Main(string[] args)
         {
             int[] i = new int[] { 10 };
             fixed (int* p = i)

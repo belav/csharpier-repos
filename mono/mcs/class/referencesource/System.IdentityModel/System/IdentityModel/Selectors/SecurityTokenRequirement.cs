@@ -36,31 +36,31 @@ namespace System.IdentityModel.Selectors
             this.Initialize();
         }
 
-        static public string TokenTypeProperty
+        public static string TokenTypeProperty
         {
             get { return tokenTypeProperty; }
         }
-        static public string KeyUsageProperty
+        public static string KeyUsageProperty
         {
             get { return keyUsageProperty; }
         }
-        static public string KeyTypeProperty
+        public static string KeyTypeProperty
         {
             get { return keyTypeProperty; }
         }
-        static public string KeySizeProperty
+        public static string KeySizeProperty
         {
             get { return keySizeProperty; }
         }
-        static public string RequireCryptographicTokenProperty
+        public static string RequireCryptographicTokenProperty
         {
             get { return requireCryptographicTokenProperty; }
         }
-        static public string PeerAuthenticationMode
+        public static string PeerAuthenticationMode
         {
             get { return peerAuthenticationMode; }
         }
-        static public string IsOptionalTokenProperty
+        public static string IsOptionalTokenProperty
         {
             get { return isOptionalTokenProperty; }
         }

@@ -890,7 +890,7 @@ namespace System.Threading.Tasks
         }
 
         [NonEvent, System.Security.SecuritySafeCritical]
-        unsafe public void RunningContinuation(int TaskID, object Object)
+        public unsafe void RunningContinuation(int TaskID, object Object)
         {
             RunningContinuation(
                 TaskID,
@@ -906,7 +906,7 @@ namespace System.Threading.Tasks
         }
 
         [NonEvent, System.Security.SecuritySafeCritical]
-        unsafe public void RunningContinuationList(int TaskID, int Index, object Object)
+        public unsafe void RunningContinuationList(int TaskID, int Index, object Object)
         {
             RunningContinuationList(
                 TaskID,

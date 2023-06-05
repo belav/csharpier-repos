@@ -85,7 +85,7 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
             internal MyHierarchicalDataBoundControlAdapter(HierarchicalDataBoundControl c)
                 : base(c) { }
 
-            new internal HierarchicalDataBoundControl Control
+            internal new HierarchicalDataBoundControl Control
             {
                 get { return base.Control; }
             }

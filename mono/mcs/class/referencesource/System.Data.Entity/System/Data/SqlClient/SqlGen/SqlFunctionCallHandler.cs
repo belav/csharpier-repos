@@ -33,55 +33,56 @@ namespace System.Data.SqlClient.SqlGen
     /// </summary>
     internal static class SqlFunctionCallHandler
     {
+        private
         #region Static fields, include dictionaries used to dispatch function handling
 
-        static private readonly Dictionary<string, FunctionHandler> _storeFunctionHandlers =
+        static readonly Dictionary<string, FunctionHandler> _storeFunctionHandlers =
             InitializeStoreFunctionHandlers();
-        static private readonly Dictionary<string, FunctionHandler> _canonicalFunctionHandlers =
+        private static readonly Dictionary<string, FunctionHandler> _canonicalFunctionHandlers =
             InitializeCanonicalFunctionHandlers();
-        static private readonly Dictionary<string, string> _functionNameToOperatorDictionary =
+        private static readonly Dictionary<string, string> _functionNameToOperatorDictionary =
             InitializeFunctionNameToOperatorDictionary();
-        static private readonly Dictionary<
+        private static readonly Dictionary<
             string,
             string
         > _dateAddFunctionNameToDatepartDictionary =
             InitializeDateAddFunctionNameToDatepartDictionary();
-        static private readonly Dictionary<
+        private static readonly Dictionary<
             string,
             string
         > _dateDiffFunctionNameToDatepartDictionary =
             InitializeDateDiffFunctionNameToDatepartDictionary();
-        static private readonly Dictionary<
+        private static readonly Dictionary<
             string,
             FunctionHandler
         > _geographyFunctionNameToStaticMethodHandlerDictionary =
             InitializeGeographyStaticMethodFunctionsDictionary();
-        static private readonly Dictionary<
+        private static readonly Dictionary<
             string,
             string
         > _geographyFunctionNameToInstancePropertyNameDictionary =
             InitializeGeographyInstancePropertyFunctionsDictionary();
-        static private readonly Dictionary<
+        private static readonly Dictionary<
             string,
             string
         > _geographyRenamedInstanceMethodFunctionDictionary =
             InitializeRenamedGeographyInstanceMethodFunctions();
-        static private readonly Dictionary<
+        private static readonly Dictionary<
             string,
             FunctionHandler
         > _geometryFunctionNameToStaticMethodHandlerDictionary =
             InitializeGeometryStaticMethodFunctionsDictionary();
-        static private readonly Dictionary<
+        private static readonly Dictionary<
             string,
             string
         > _geometryFunctionNameToInstancePropertyNameDictionary =
             InitializeGeometryInstancePropertyFunctionsDictionary();
-        static private readonly Dictionary<
+        private static readonly Dictionary<
             string,
             string
         > _geometryRenamedInstanceMethodFunctionDictionary =
             InitializeRenamedGeometryInstanceMethodFunctions();
-        static private readonly Set<string> _datepartKeywords = new Set<string>(
+        private static readonly Set<string> _datepartKeywords = new Set<string>(
             new string[]
             {
                 "year",
@@ -127,12 +128,12 @@ namespace System.Data.SqlClient.SqlGen
             },
             StringComparer.OrdinalIgnoreCase
         ).MakeReadOnly();
-        static private readonly Set<string> _functionRequiresReturnTypeCastToInt64 =
+        private static readonly Set<string> _functionRequiresReturnTypeCastToInt64 =
             new Set<string>(
                 new string[] { "SqlServer.CHARINDEX" },
                 StringComparer.Ordinal
             ).MakeReadOnly();
-        static private readonly Set<string> _functionRequiresReturnTypeCastToInt32 =
+        private static readonly Set<string> _functionRequiresReturnTypeCastToInt32 =
             new Set<string>(
                 new string[]
                 {
@@ -145,14 +146,14 @@ namespace System.Data.SqlClient.SqlGen
                 },
                 StringComparer.Ordinal
             ).MakeReadOnly();
-        static private readonly Set<string> _functionRequiresReturnTypeCastToInt16 =
+        private static readonly Set<string> _functionRequiresReturnTypeCastToInt16 =
             new Set<string>(new string[] { "Edm.Abs" }, StringComparer.Ordinal).MakeReadOnly();
-        static private readonly Set<string> _functionRequiresReturnTypeCastToSingle =
+        private static readonly Set<string> _functionRequiresReturnTypeCastToSingle =
             new Set<string>(
                 new string[] { "Edm.Abs", "Edm.Round", "Edm.Floor", "Edm.Ceiling" },
                 StringComparer.Ordinal
             ).MakeReadOnly();
-        static private readonly Set<string> _maxTypeNames = new Set<string>(
+        private static readonly Set<string> _maxTypeNames = new Set<string>(
             new string[]
             {
                 "varchar(max)",

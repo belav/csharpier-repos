@@ -1451,6 +1451,7 @@ namespace System.Web
             return s_responseHeaderNames[index];
         }
 
+        private
         // ************************************************************************
 
 
@@ -1458,21 +1459,22 @@ namespace System.Web
         // Implemenation -- lookup tables for header names
         //
 
-        static private String[] s_serverVarFromRequestHeaderNames = new String[
-            RequestHeaderMaximum
-        ];
-        static private String[] s_requestHeaderNames = new String[RequestHeaderMaximum];
-        static private String[] s_responseHeaderNames = new String[ResponseHeaderMaximum];
-        static private Hashtable s_requestHeadersLoookupTable = new Hashtable(
+        static String[] s_serverVarFromRequestHeaderNames = new String[RequestHeaderMaximum];
+        private static String[] s_requestHeaderNames = new String[RequestHeaderMaximum];
+        private static String[] s_responseHeaderNames = new String[ResponseHeaderMaximum];
+        private static Hashtable s_requestHeadersLoookupTable = new Hashtable(
             StringComparer.OrdinalIgnoreCase
         );
-        static private Hashtable s_responseHeadersLoookupTable = new Hashtable(
+        private static Hashtable s_responseHeadersLoookupTable = new Hashtable(
             StringComparer.OrdinalIgnoreCase
         );
 
         // ************************************************************************
 
-        static private void DefineHeader(
+        private
+        // ************************************************************************
+
+        static void DefineHeader(
             bool isRequest,
             bool isResponse,
             int index,

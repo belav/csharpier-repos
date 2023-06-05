@@ -19,7 +19,7 @@ namespace System.ServiceModel.Activation
     using System.ServiceModel.ComIntegration;
     using System.Text;
 
-    unsafe static class Utility
+    static unsafe class Utility
     {
         const string WindowsServiceAccountFormat = "NT Service\\{0}";
 

@@ -671,7 +671,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteText(string value)
+        public override unsafe void WriteText(string value)
         {
             if (inAttribute)
             {
@@ -698,7 +698,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteText(char[] chars, int offset, int count)
+        public override unsafe void WriteText(char[] chars, int offset, int count)
         {
             if (inAttribute)
             {
@@ -829,7 +829,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteFloatText(float f)
+        public override unsafe void WriteFloatText(float f)
         {
             long l;
             if (f >= long.MinValue && f <= long.MaxValue && (l = (long)f) == f)
@@ -855,7 +855,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteDoubleText(double d)
+        public override unsafe void WriteDoubleText(double d)
         {
             float f;
             if (d >= float.MinValue && d <= float.MaxValue && (f = (float)d) == d)
@@ -885,7 +885,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteDecimalText(decimal d)
+        public override unsafe void WriteDecimalText(decimal d)
         {
             int offset;
             byte[] buffer = GetTextNodeBuffer(1 + sizeof(decimal), out offset);
@@ -965,7 +965,7 @@ namespace System.Xml
             Critical = "Contains unsafe code. Caller needs to validate arguments."
         )]
         [SecurityCritical]
-        unsafe public void UnsafeWriteArray(
+        public unsafe void UnsafeWriteArray(
             XmlBinaryNodeType nodeType,
             int count,
             byte* array,
@@ -1445,7 +1445,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             string localName,
             string namespaceUri,
@@ -1482,7 +1482,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri,
@@ -1520,7 +1520,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             string localName,
             string namespaceUri,
@@ -1557,7 +1557,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri,
@@ -1595,7 +1595,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             string localName,
             string namespaceUri,
@@ -1632,7 +1632,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri,
@@ -1670,7 +1670,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             string localName,
             string namespaceUri,
@@ -1707,7 +1707,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri,
@@ -1745,7 +1745,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             string localName,
             string namespaceUri,
@@ -1782,7 +1782,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri,
@@ -1820,7 +1820,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             string localName,
             string namespaceUri,
@@ -1857,7 +1857,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri,
@@ -1895,7 +1895,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             string localName,
             string namespaceUri,
@@ -1932,7 +1932,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override void WriteArray(
+        public override unsafe void WriteArray(
             string prefix,
             XmlDictionaryString localName,
             XmlDictionaryString namespaceUri,

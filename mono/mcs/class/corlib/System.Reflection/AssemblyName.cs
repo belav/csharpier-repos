@@ -372,7 +372,7 @@ namespace System.Reflection
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern unsafe static void get_public_token(byte* token, byte* pubkey, int len);
+        static extern unsafe void get_public_token(byte* token, byte* pubkey, int len);
 
         private unsafe byte[] ComputePublicKeyToken()
         {

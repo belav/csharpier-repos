@@ -77,7 +77,7 @@ namespace System.Web
             set { filter = value; }
         }
 
-        unsafe sealed class BlockManager
+        sealed unsafe class BlockManager
         {
             const int PreferredLength = 128 * 1024;
             byte* data;

@@ -57,7 +57,7 @@ namespace Microsoft.Win32
         public const int SM_CYSCREEN = 1;
 
 #if !SILVERLIGHT
-        public readonly static HandleRef NullHandleRef = new HandleRef(null, IntPtr.Zero);
+        public static readonly HandleRef NullHandleRef = new HandleRef(null, IntPtr.Zero);
 
         public static readonly IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
 
@@ -298,7 +298,7 @@ namespace Microsoft.Win32
         )]
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
         [ResourceExposure(ResourceScope.Machine)]
-        public extern static bool CreateProcessAsUser(
+        public static extern bool CreateProcessAsUser(
             SafeHandle hToken,
             string lpApplicationName,
             string lpCommandLine,
@@ -2306,7 +2306,7 @@ namespace Microsoft.Win32
 
         [DllImport(ExternDll.Kernel32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern IntPtr VirtualQuery(
+        internal static extern unsafe IntPtr VirtualQuery(
             SafeFileMapViewHandle address,
             ref MEMORY_BASIC_INFORMATION buffer,
             IntPtr sizeOfBuffer

@@ -14,13 +14,13 @@ namespace System.Data.Common
     using System.Diagnostics;
     using System.Globalization;
 
-    sealed internal class DbSchemaRow
+    internal sealed class DbSchemaRow
     {
         internal const string SchemaMappingUnsortedIndex = "SchemaMapping Unsorted Index";
         DbSchemaTable schemaTable;
         DataRow dataRow;
 
-        static internal DbSchemaRow[] GetSortedSchemaRows(
+        internal static DbSchemaRow[] GetSortedSchemaRows(
             DataTable dataTable,
             bool returnProviderSpecificTypes
         )

@@ -54,8 +54,9 @@ namespace System.Security.Principal
             _identity = ntIdentity;
         }
 
+        public
         // properties
-        override public IIdentity Identity
+        override IIdentity Identity
         {
             get { return _identity; }
         }
@@ -107,7 +108,7 @@ namespace System.Security.Principal
             }
         }
 
-        override public bool IsInRole(string role)
+        public override bool IsInRole(string role)
         {
             if (role == null)
                 return false; // ArgumentNullException
@@ -176,10 +177,10 @@ namespace System.Security.Principal
 
         // note: never called by Win32 code (i.e. always return false)
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool IsMemberOfGroupId(IntPtr user, IntPtr group);
+        private static extern bool IsMemberOfGroupId(IntPtr user, IntPtr group);
 
         // note: never called by Win32 code (i.e. always return false)
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool IsMemberOfGroupName(IntPtr user, IntPtr group);
+        private static extern bool IsMemberOfGroupName(IntPtr user, IntPtr group);
     }
 }

@@ -414,7 +414,11 @@ namespace System.Web.Security
         ///////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////
         // Make sure sub-string if of the pattern: A(XXXX)N(XXXXX)P(XXXXX) and so on.
-        static private bool IsValidHeader(string path, int startPos, int endPos)
+        private
+        ///////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////
+        // Make sure sub-string if of the pattern: A(XXXX)N(XXXXX)P(XXXXX) and so on.
+        static bool IsValidHeader(string path, int startPos, int endPos)
         {
             if (endPos - startPos < 3) // Minimum len is "X()"
                 return false;

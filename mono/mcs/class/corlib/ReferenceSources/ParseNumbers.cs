@@ -51,7 +51,7 @@ namespace System
             }
         }
 
-        public unsafe static int StringToInt(string value, int fromBase, int flags, int* parsePos)
+        public static unsafe int StringToInt(string value, int fromBase, int flags, int* parsePos)
         {
             if ((flags & (IsTight | NoSpace)) == 0)
                 throw new NotImplementedException(flags.ToString());
@@ -214,7 +214,7 @@ namespace System
         // As |long.MinValue| > |long.MaxValue| we need to do this to avoid an overflow.
         const ulong longMinValue = ((ulong)long.MaxValue) + (ulong)-(long.MinValue + long.MaxValue);
 
-        public unsafe static long StringToLong(string value, int fromBase, int flags, int* parsePos)
+        public static unsafe long StringToLong(string value, int fromBase, int flags, int* parsePos)
         {
             if ((flags & (IsTight | NoSpace)) == 0)
                 throw new NotImplementedException(flags.ToString());

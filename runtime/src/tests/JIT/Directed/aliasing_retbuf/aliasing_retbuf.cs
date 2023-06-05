@@ -172,7 +172,7 @@ public unsafe class AliasingRetBuf
             CallingConvention = CallingConvention.Cdecl
         )]
         [SuppressGCTransition]
-        public static unsafe extern Foo TransposeRetBufPtr(Foo* fi);
+        public static extern unsafe Foo TransposeRetBufPtr(Foo* fi);
 
         [DllImport(
             nameof(AliasingRetBufNative),
@@ -180,6 +180,6 @@ public unsafe class AliasingRetBuf
             CallingConvention = CallingConvention.Cdecl
         )]
         [SuppressGCTransition]
-        public static unsafe extern Foo TransposeRetBufRef(ref Foo fi);
+        public static extern unsafe Foo TransposeRetBufRef(ref Foo fi);
     }
 }

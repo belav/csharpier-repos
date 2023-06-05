@@ -296,12 +296,13 @@ namespace System.Web.UI
             get { return false; }
         }
 
+        public
         /// <devdoc>
         ///    <para>
         ///       Gets a reference to an ordinal-indexed control in the collection.
         ///    </para>
         /// </devdoc>
-        virtual public Control this[int index]
+        virtual Control this[int index]
         {
             get
             {

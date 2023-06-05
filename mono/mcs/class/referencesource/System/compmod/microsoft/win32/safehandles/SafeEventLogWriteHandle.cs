@@ -52,7 +52,7 @@ namespace Microsoft.Win32.SafeHandles
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         private static extern bool DeregisterEventSource(IntPtr hEventLog);
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return DeregisterEventSource(handle);
         }

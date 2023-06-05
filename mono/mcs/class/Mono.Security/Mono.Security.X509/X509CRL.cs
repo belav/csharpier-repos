@@ -439,7 +439,7 @@ namespace Mono.Security.X509
                 throw new NotSupportedException("Unknown Asymmetric Algorithm " + aa.ToString());
         }
 
-        static public X509Crl CreateFromFile(string filename)
+        public static X509Crl CreateFromFile(string filename)
         {
             byte[] crl = null;
             using (

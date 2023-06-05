@@ -12,10 +12,10 @@ namespace XamMac.CoreFoundation
             "/System/Library/Frameworks/Security.framework/Security";
 
         [DllImport(CoreFoundationLibrary)]
-        internal extern static void CFRelease(IntPtr obj);
+        internal static extern void CFRelease(IntPtr obj);
 
         [DllImport(CoreFoundationLibrary)]
-        internal extern static IntPtr CFRetain(IntPtr obj);
+        internal static extern IntPtr CFRetain(IntPtr obj);
 
         [StructLayout(LayoutKind.Sequential)]
         struct CFRange
@@ -34,20 +34,20 @@ namespace XamMac.CoreFoundation
         }
 
         [DllImport(CoreFoundationLibrary, CharSet = CharSet.Unicode)]
-        extern static IntPtr CFStringCreateWithCharacters(
+        static extern IntPtr CFStringCreateWithCharacters(
             IntPtr allocator,
             string str,
             IntPtr count
         );
 
         [DllImport(CoreFoundationLibrary, CharSet = CharSet.Unicode)]
-        extern static IntPtr CFStringGetLength(IntPtr handle);
+        static extern IntPtr CFStringGetLength(IntPtr handle);
 
         [DllImport(CoreFoundationLibrary, CharSet = CharSet.Unicode)]
-        extern static IntPtr CFStringGetCharactersPtr(IntPtr handle);
+        static extern IntPtr CFStringGetCharactersPtr(IntPtr handle);
 
         [DllImport(CoreFoundationLibrary, CharSet = CharSet.Unicode)]
-        extern static IntPtr CFStringGetCharacters(IntPtr handle, CFRange range, IntPtr buffer);
+        static extern IntPtr CFStringGetCharacters(IntPtr handle, CFRange range, IntPtr buffer);
 
         internal static string FetchString(IntPtr handle)
         {
@@ -78,10 +78,10 @@ namespace XamMac.CoreFoundation
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFDataGetLength(IntPtr handle);
+        static extern IntPtr CFDataGetLength(IntPtr handle);
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFDataGetBytePtr(IntPtr handle);
+        static extern IntPtr CFDataGetBytePtr(IntPtr handle);
 
         internal static byte[] FetchDataBuffer(IntPtr handle)
         {
@@ -93,7 +93,7 @@ namespace XamMac.CoreFoundation
         }
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFDataCreateWithBytesNoCopy(
+        static extern IntPtr CFDataCreateWithBytesNoCopy(
             IntPtr allocator,
             IntPtr bytes,
             IntPtr length,
@@ -101,12 +101,12 @@ namespace XamMac.CoreFoundation
         );
 
         [DllImport(CoreFoundationLibrary)]
-        extern static IntPtr CFDataCreate(IntPtr allocator, IntPtr bytes, IntPtr length);
+        static extern IntPtr CFDataCreate(IntPtr allocator, IntPtr bytes, IntPtr length);
 
         [DllImport(SecurityLibrary)]
-        extern static IntPtr SecCertificateCreateWithData(IntPtr allocator, IntPtr cfData);
+        static extern IntPtr SecCertificateCreateWithData(IntPtr allocator, IntPtr cfData);
 
-        unsafe internal static IntPtr CreateCertificateFromData(byte[] data)
+        internal static unsafe IntPtr CreateCertificateFromData(byte[] data)
         {
             fixed (void* ptr = data)
             {

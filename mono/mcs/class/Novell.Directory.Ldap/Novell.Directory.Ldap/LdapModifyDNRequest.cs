@@ -49,22 +49,24 @@ namespace Novell.Directory.Ldap
      */
     public class LdapModifyDNRequest : LdapMessage
     {
+        public
         /// <summary> Returns the dn of the entry to rename or move in the directory
         ///
         /// </summary>
         /// <returns> the dn of the entry to rename or move
         /// </returns>
-        virtual public System.String DN
+        virtual System.String DN
         {
             get { return Asn1Object.RequestDN; }
         }
 
+        public
         /// <summary> Returns the newRDN of the entry to rename or move in the directory
         ///
         /// </summary>
         /// <returns> the newRDN of the entry to rename or move
         /// </returns>
-        virtual public System.String NewRDN
+        virtual System.String NewRDN
         {
             get
             {
@@ -75,13 +77,14 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the DeleteOldRDN flag that applies to the entry to rename or
         /// move in the directory
         ///
         /// </summary>
         /// <returns> the DeleteOldRDN flag for the entry to rename or move
         /// </returns>
-        virtual public bool DeleteOldRDN
+        virtual bool DeleteOldRDN
         {
             get
             {
@@ -92,13 +95,14 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the ParentDN for the entry move in the directory
         ///
         /// </summary>
         /// <returns> the ParentDN for the entry to move, or <dd>null</dd>
         /// if the request is not a move.
         /// </returns>
-        virtual public System.String ParentDN
+        virtual System.String ParentDN
         {
             get
             {

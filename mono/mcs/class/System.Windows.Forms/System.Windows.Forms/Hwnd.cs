@@ -85,7 +85,7 @@ namespace System.Windows.Forms
         internal WindowStyles initial_style;
         internal FormWindowState cached_window_state = (FormWindowState)(-1); /* X11 only field */
         internal Point previous_child_startup_location = new Point(int.MinValue, int.MinValue);
-        static internal Point previous_main_startup_location = new Point(
+        internal static Point previous_main_startup_location = new Point(
             int.MinValue,
             int.MinValue
         );

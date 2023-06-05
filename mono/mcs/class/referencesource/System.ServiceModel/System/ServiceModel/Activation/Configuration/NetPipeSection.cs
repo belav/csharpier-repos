@@ -29,7 +29,7 @@ namespace System.ServiceModel.Activation.Configuration
             }
         }
 
-        static internal NetPipeSection GetSection()
+        internal static NetPipeSection GetSection()
         {
             NetPipeSection retval = (NetPipeSection)
                 ConfigurationManager.GetSection(ConfigurationStrings.NetPipeSectionPath);

@@ -1334,7 +1334,9 @@ namespace System.ServiceModel
         }
 
         // copy all of reader to writer
-        static internal void Copy(XmlDictionaryWriter writer, XmlDictionaryReader reader)
+        internal
+        // copy all of reader to writer
+        static void Copy(XmlDictionaryWriter writer, XmlDictionaryReader reader)
         {
             while (!Done(reader))
             {

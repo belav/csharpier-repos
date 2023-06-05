@@ -53,22 +53,24 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     public class LdapMatchingRuleSchema : LdapSchemaElement
     {
+        public
         /// <summary> Returns the OIDs of the attributes to which this rule applies.
         ///
         /// </summary>
         /// <returns> The OIDs of the attributes to which this matching rule applies.
         /// </returns>
-        virtual public System.String[] Attributes
+        virtual System.String[] Attributes
         {
             get { return attributes; }
         }
 
+        public
         /// <summary> Returns the OID of the syntax that this matching rule is valid for.
         ///
         /// </summary>
         /// <returns> The OID of the syntax that this matching rule is valid for.
         /// </returns>
-        virtual public System.String SyntaxString
+        virtual System.String SyntaxString
         {
             get { return syntaxString; }
         }

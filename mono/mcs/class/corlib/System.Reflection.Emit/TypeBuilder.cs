@@ -1290,14 +1290,14 @@ namespace System.Reflection.Emit
             }
         }
 
-        static internal void ResolveUserTypes(Type[] types)
+        internal static void ResolveUserTypes(Type[] types)
         {
             if (types != null)
                 for (int i = 0; i < types.Length; ++i)
                     types[i] = ResolveUserType(types[i]);
         }
 
-        static internal Type ResolveUserType(Type t)
+        internal static Type ResolveUserType(Type t)
         {
             if (
                 t != null

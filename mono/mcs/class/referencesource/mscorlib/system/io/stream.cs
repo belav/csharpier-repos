@@ -252,9 +252,9 @@ namespace System.IO
         }
 
 #if MONO
-        virtual
-#endif
-        public void CopyTo(Stream destination, int bufferSize)
+        public
+#if MONO
+        virtual void CopyTo(Stream destination, int bufferSize)
         {
             if (destination == null)
                 throw new ArgumentNullException("destination");

@@ -28,7 +28,7 @@ namespace System.Data.Common.Utils
         private const int CacheSize = 250;
 
         // this caches integer->string so that happens less fequently
-        private readonly static string[] _counterNames = new string[CacheSize];
+        private static readonly string[] _counterNames = new string[CacheSize];
 
         // We are using a copy-on-write instead of lock-on-read because dictionary is not multi-reader/single-writer safe.
         // safe for frequent multi-thread reading by creating new instances (copy of previous instance) for uncommon writes.

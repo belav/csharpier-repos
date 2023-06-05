@@ -178,7 +178,7 @@ namespace System.Net.WebSockets
 
         ~WebSocketStream() => Dispose(false);
 
-        public async override Task<int> ReadAsync(
+        public override async Task<int> ReadAsync(
             byte[] buffer,
             int offset,
             int count,
@@ -206,7 +206,7 @@ namespace System.Net.WebSockets
             }
         }
 
-        public async override ValueTask<int> ReadAsync(
+        public override async ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken
         )
@@ -229,7 +229,7 @@ namespace System.Net.WebSockets
             }
         }
 
-        public async override Task WriteAsync(
+        public override async Task WriteAsync(
             byte[] buffer,
             int offset,
             int count,
@@ -258,7 +258,7 @@ namespace System.Net.WebSockets
             }
         }
 
-        public async override ValueTask WriteAsync(
+        public override async ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
         )

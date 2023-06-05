@@ -5,7 +5,7 @@
 
 class Test
 {
-    static public int Main()
+    public static int Main()
     {
         //int NUM = ((argc == 2) ? atoi(argv[1]) : 1);
         int NUM = 300;

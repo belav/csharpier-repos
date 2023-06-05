@@ -37,7 +37,7 @@ namespace System.Reflection.Emit
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(_MethodRental))]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class MethodRental : _MethodRental
+    public sealed class MethodRental : _MethodRental
     {
         public const int JitOnDemand = 0x0000; // jit the method body when it is necessary
         public const int JitImmediate = 0x0001; // jit the method body now
@@ -126,7 +126,7 @@ namespace System.Reflection.Emit
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void SwapMethodBody(
+        private static extern void SwapMethodBody(
             RuntimeTypeHandle cls, // [in] class containing the method
             int methodtoken, // [in] method token
             IntPtr rgIL, // [in] pointer to bytes

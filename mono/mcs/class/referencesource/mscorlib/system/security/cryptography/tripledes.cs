@@ -79,7 +79,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public TripleDES Create()
+        public static
+        //
+        // public methods
+        //
+
+        new TripleDES Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.TripleDESCryptoServiceProvider();
@@ -88,7 +93,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public TripleDES Create(String str)
+        public static new TripleDES Create(String str)
         {
             return (TripleDES)CryptoConfig.CreateFromName(str);
         }

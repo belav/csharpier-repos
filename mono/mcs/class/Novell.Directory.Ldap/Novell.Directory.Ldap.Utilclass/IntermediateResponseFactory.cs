@@ -66,9 +66,23 @@ namespace Novell.Directory.Ldap.Utilclass
          *                          and an LDAP error code.
          */
 
-        static public LdapIntermediateResponse convertToIntermediateResponse(
-            RfcLdapMessage inResponse
-        )
+        public
+        /**
+         * Used to Convert an RfcLDAPMessage object to the appropriate
+         * LDAPIntermediateResponse object depending on the operation being performed.
+         *
+         * @param inResponse   The LDAPIntermediateResponse object as returned by the
+         *                     extendedOperation method in the LDAPConnection object.
+         * <br><br>
+         * @return An object of base class LDAPIntermediateResponse.  The actual child
+         *         class of this returned object depends on the operation being
+         *         performed.
+         *
+         * @exception LDAPException A general exception which includes an error message
+         *                          and an LDAP error code.
+         */
+
+        static LdapIntermediateResponse convertToIntermediateResponse(RfcLdapMessage inResponse)
         //          throws LDAPException
         {
             LdapIntermediateResponse tempResponse = new LdapIntermediateResponse(inResponse);

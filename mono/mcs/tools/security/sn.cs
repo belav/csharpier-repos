@@ -25,7 +25,7 @@ namespace Mono.Tools
 {
     class SN
     {
-        static private void Header()
+        private static void Header()
         {
             Console.WriteLine(new AssemblyInfo().ToString());
         }

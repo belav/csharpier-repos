@@ -133,7 +133,12 @@ namespace System.IdentityModel.Selectors
         // Summary:
         //  Given a pointer to a native cryptosession this method creates the appropriate CryptoHandle type.
         //
-        static internal CryptoHandle Create(InternalRefCountedHandle nativeHandle)
+        internal
+        //
+        // Summary:
+        //  Given a pointer to a native cryptosession this method creates the appropriate CryptoHandle type.
+        //
+        static CryptoHandle Create(InternalRefCountedHandle nativeHandle)
         {
             CryptoHandle handle = null;
 

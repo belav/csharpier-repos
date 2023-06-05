@@ -17,7 +17,7 @@ namespace SinCalc_try_seh_cs
             mistake = m;
         }
 
-        override public String ToString()
+        public override String ToString()
         {
             return "Mistake is " + mistake.ToString();
         }

@@ -2173,7 +2173,7 @@ namespace System.Xml.Serialization
             return GetDefaultIndexer(type, memberInfo).PropertyType;
         }
 
-        static internal XmlQualifiedName ParseWsdlArrayType(
+        internal static XmlQualifiedName ParseWsdlArrayType(
             string type,
             out string dims,
             XmlSchemaObject parent

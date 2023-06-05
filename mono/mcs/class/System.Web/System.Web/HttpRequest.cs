@@ -110,7 +110,7 @@ namespace System.Web
         Uri cached_url;
         TempFileStream request_file;
 
-        readonly static System.Net.IPAddress[] host_addresses;
+        static readonly System.Net.IPAddress[] host_addresses;
 
         // Validations
         bool validate_cookies,
@@ -120,7 +120,7 @@ namespace System.Web
             checked_query_string,
             checked_form;
         static readonly UrlMappingCollection urlMappings;
-        readonly static char[] queryTrimChars = { '?' };
+        static readonly char[] queryTrimChars = { '?' };
         bool lazyFormValidation;
         bool lazyQueryStringValidation;
         bool inputValidationEnabled;
@@ -386,7 +386,7 @@ namespace System.Web
             }
         }
 
-        static internal string GetParameter(string header, string attr)
+        internal static string GetParameter(string header, string attr)
         {
             int ap = header.IndexOf(attr);
             if (ap == -1)

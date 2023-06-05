@@ -1277,7 +1277,7 @@ namespace System.Runtime
         // This can't derive from Thunk since T would be unsafe.
         [Fx.Tag.SecurityNote(Critical = "unsafe object")]
         [SecurityCritical]
-        unsafe sealed class IOCompletionThunk
+        sealed unsafe class IOCompletionThunk
         {
             [Fx.Tag.SecurityNote(Critical = "Make these safe to use in SecurityCritical contexts.")]
             IOCompletionCallback callback;

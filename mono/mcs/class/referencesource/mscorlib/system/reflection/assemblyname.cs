@@ -196,7 +196,7 @@ namespace System.Reflection
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        static public AssemblyName GetAssemblyName(String assemblyFile)
+        public static AssemblyName GetAssemblyName(String assemblyFile)
         {
             if (assemblyFile == null)
                 throw new ArgumentNullException("assemblyFile");
@@ -413,7 +413,7 @@ namespace System.Reflection
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
-        static public bool ReferenceMatchesDefinition(
+        public static bool ReferenceMatchesDefinition(
             AssemblyName reference,
             AssemblyName definition
         )
@@ -431,7 +431,7 @@ namespace System.Reflection
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern bool ReferenceMatchesDefinitionInternal(
+        internal static extern bool ReferenceMatchesDefinitionInternal(
             AssemblyName reference,
             AssemblyName definition,
             bool parse
@@ -603,7 +603,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern AssemblyName nGetFileInformation(String s);
+        internal static extern AssemblyName nGetFileInformation(String s);
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
@@ -618,6 +618,6 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern String EscapeCodeBase(String codeBase);
+        internal static extern String EscapeCodeBase(String codeBase);
     }
 }

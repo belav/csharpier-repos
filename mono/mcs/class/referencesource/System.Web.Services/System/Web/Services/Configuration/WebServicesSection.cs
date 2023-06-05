@@ -218,7 +218,7 @@ namespace System.Web.Services.Configuration
         }
 
         [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
-        static public WebServicesSection GetSection(Configuration config)
+        public static WebServicesSection GetSection(Configuration config)
         {
             if (config == null)
             {

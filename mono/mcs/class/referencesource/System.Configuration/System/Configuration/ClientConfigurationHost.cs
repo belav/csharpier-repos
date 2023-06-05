@@ -71,7 +71,7 @@ namespace System.Configuration
             }
         }
 
-        static internal string MachineConfigFilePath
+        internal static string MachineConfigFilePath
         {
             [FileIOPermissionAttribute(
                 SecurityAction.Assert,
@@ -682,7 +682,11 @@ namespace System.Configuration
         //
         // Create a Configuration object.
         //
-        static internal Configuration OpenExeConfiguration(
+        internal
+        //
+        // Create a Configuration object.
+        //
+        static Configuration OpenExeConfiguration(
             ConfigurationFileMap fileMap,
             bool isMachine,
             ConfigurationUserLevel userLevel,

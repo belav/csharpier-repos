@@ -381,7 +381,7 @@ namespace System.Activities.Validation
             return exceptionString;
         }
 
-        static internal string GenerateValidationErrorPrefix(
+        internal static string GenerateValidationErrorPrefix(
             Activity toValidate,
             ActivityUtilities.ActivityCallStack parentChain,
             ProcessActivityTreeOptions options,

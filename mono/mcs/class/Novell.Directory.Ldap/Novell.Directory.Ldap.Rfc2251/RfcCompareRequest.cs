@@ -45,7 +45,7 @@ namespace Novell.Directory.Ldap.Rfc2251
     /// </summary>
     public class RfcCompareRequest : Asn1Sequence, RfcRequest
     {
-        virtual public RfcAttributeValueAssertion AttributeValueAssertion
+        public virtual RfcAttributeValueAssertion AttributeValueAssertion
         {
             get { return ((RfcAttributeValueAssertion)get_Renamed(1)); }
         }

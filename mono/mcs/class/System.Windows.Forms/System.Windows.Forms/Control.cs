@@ -194,7 +194,7 @@ namespace System.Windows.Forms
                 this.owner.WindowTarget.OnHandleChange(this.owner.Handle);
             }
 
-            static internal Control ControlFromHandle(IntPtr hWnd)
+            internal static Control ControlFromHandle(IntPtr hWnd)
             {
                 ControlNativeWindow window;
 
@@ -207,7 +207,7 @@ namespace System.Windows.Forms
                 return null;
             }
 
-            static internal Control ControlFromChildHandle(IntPtr handle)
+            internal static Control ControlFromChildHandle(IntPtr handle)
             {
                 ControlNativeWindow window;
 
@@ -491,7 +491,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            new public virtual Control this[int index]
+            public new virtual Control this[int index]
             {
                 get
                 {
@@ -663,7 +663,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            new public virtual void Clear()
+            public new virtual void Clear()
             {
                 all_controls = null;
 
@@ -3908,7 +3908,7 @@ namespace System.Windows.Forms
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        internal virtual protected bool ShowKeyboardCues
+        protected internal virtual bool ShowKeyboardCues
         {
             get { return ShowKeyboardCuesInternal; }
         }

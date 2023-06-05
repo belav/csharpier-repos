@@ -48,12 +48,13 @@ namespace Novell.Directory.Ldap
      */
     public class LdapBindRequest : LdapMessage
     {
+        public
         /// <summary> Retrieves the Authentication DN for a bind request.
         ///
         /// </summary>
         /// <returns> the Authentication DN for a bind request
         /// </returns>
-        virtual public System.String AuthenticationDN
+        virtual System.String AuthenticationDN
         {
             get { return Asn1Object.RequestDN; }
         }

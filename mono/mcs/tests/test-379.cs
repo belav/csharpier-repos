@@ -7,7 +7,7 @@ public class DeadCode
         SomeFunc("...");
     }
 
-    static public string SomeFunc(string str)
+    public static string SomeFunc(string str)
     {
         return str;
         int i = 0,

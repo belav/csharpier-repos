@@ -22,7 +22,7 @@ namespace System.ServiceModel.Activation.Configuration
             );
         }
 
-        static internal string DiagnosticSectionPath
+        internal static string DiagnosticSectionPath
         {
             get
             {
@@ -32,7 +32,7 @@ namespace System.ServiceModel.Activation.Configuration
             }
         }
 
-        static internal string NetTcpSectionPath
+        internal static string NetTcpSectionPath
         {
             get
             {
@@ -40,7 +40,7 @@ namespace System.ServiceModel.Activation.Configuration
             }
         }
 
-        static internal string NetPipeSectionPath
+        internal static string NetPipeSectionPath
         {
             get
             {

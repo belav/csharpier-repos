@@ -25,7 +25,7 @@ namespace IBM.Data.DB2
 {
     internal sealed class DB2Environment : IDisposable
     {
-        volatile static DB2Environment environment;
+        static volatile DB2Environment environment;
         static readonly object lockobj = new object();
         internal Hashtable connectionPools;
         internal IntPtr penvHandle = IntPtr.Zero;

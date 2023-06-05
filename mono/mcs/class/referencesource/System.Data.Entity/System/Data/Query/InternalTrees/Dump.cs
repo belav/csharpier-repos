@@ -63,7 +63,13 @@ namespace System.Data.Query.InternalTrees
         /// </summary>
         /// <param name="itree"></param>
         /// <returns></returns>
-        static internal string ToXml(Command itree)
+        internal
+        /// <summary>
+        /// Driver method to dump the entire tree
+        /// </summary>
+        /// <param name="itree"></param>
+        /// <returns></returns>
+        static string ToXml(Command itree)
         {
             return ToXml(itree, itree.Root);
         }
@@ -74,7 +80,14 @@ namespace System.Data.Query.InternalTrees
         /// <param name="itree"></param>
         /// <param name="subtree"></param>
         /// <returns></returns>
-        static internal string ToXml(Command itree, Node subtree)
+        internal
+        /// <summary>
+        /// Driver method to dump the a subtree of a tree
+        /// </summary>
+        /// <param name="itree"></param>
+        /// <param name="subtree"></param>
+        /// <returns></returns>
+        static string ToXml(Command itree, Node subtree)
         {
             MemoryStream stream = new MemoryStream();
 
@@ -98,7 +111,7 @@ namespace System.Data.Query.InternalTrees
             Scope = "member",
             Target = "System.Data.Query.InternalTrees.Dump.ToXml"
         )]
-        static internal string ToXml(ColumnMap columnMap)
+        internal static string ToXml(ColumnMap columnMap)
         {
             MemoryStream stream = new MemoryStream();
 
@@ -722,7 +735,7 @@ namespace System.Data.Query.InternalTrees
         #region ColumnMap dumper
         internal class ColumnMapDumper : ColumnMapVisitor<Dump>
         {
-            static internal ColumnMapDumper Instance = new ColumnMapDumper();
+            internal static ColumnMapDumper Instance = new ColumnMapDumper();
 
             /// <summary>
             /// Private constructor

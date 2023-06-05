@@ -112,7 +112,7 @@ namespace System.Security.Cryptography
             DESTransform.Permutation(output, output, DESTransform.fpTab, true);
         }
 
-        static internal byte[] GetStrongKey()
+        internal static byte[] GetStrongKey()
         {
             int size = DESTransform.BLOCK_BYTE_SIZE * 3;
             byte[] key = KeyBuilder.Key(size);

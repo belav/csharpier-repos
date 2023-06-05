@@ -39,7 +39,7 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        new public EndpointCollectionElement this[string endpoint]
+        public new EndpointCollectionElement this[string endpoint]
         {
             get { return (EndpointCollectionElement)base[endpoint]; }
         }

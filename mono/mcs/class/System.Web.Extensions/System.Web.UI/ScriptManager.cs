@@ -1677,7 +1677,7 @@ namespace System.Web.UI
             );
         }
 
-        static internal void WriteCallbackRedirect(TextWriter output, string redirectUrl)
+        internal static void WriteCallbackRedirect(TextWriter output, string redirectUrl)
         {
             WriteCallbackOutput(output, pageRedirect, null, redirectUrl);
         }

@@ -114,7 +114,7 @@ namespace System.Text.Encodings.Web
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public unsafe abstract int FindFirstCharacterToEncode(char* text, int textLength);
+        public abstract unsafe int FindFirstCharacterToEncode(char* text, int textLength);
 
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -128,7 +128,7 @@ namespace System.Text.Encodings.Web
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
-        public unsafe abstract bool TryEncodeUnicodeScalar(
+        public abstract unsafe bool TryEncodeUnicodeScalar(
             int unicodeScalar,
             char* buffer,
             int bufferLength,

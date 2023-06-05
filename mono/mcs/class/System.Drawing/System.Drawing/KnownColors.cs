@@ -32,8 +32,9 @@ namespace System.Drawing
 {
     internal static class KnownColors
     {
+        internal
         // FindColorMatch relies on the index + 1 == KnowColor match
-        static internal uint[] ArgbValues = new uint[]
+        static uint[] ArgbValues = new uint[]
         {
             0x00000000, /* 000 - Empty */
             0xFFD4D0C8, /* 001 - ActiveBorder */

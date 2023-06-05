@@ -120,7 +120,7 @@ namespace System.Diagnostics
         private BitVector32 boolFlags = new BitVector32();
 
         private Hashtable messageLibraries;
-        private readonly static Hashtable listenerInfos = new Hashtable(
+        private static readonly Hashtable listenerInfos = new Hashtable(
             StringComparer.OrdinalIgnoreCase
         );
 

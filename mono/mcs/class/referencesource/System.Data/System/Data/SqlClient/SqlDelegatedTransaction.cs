@@ -17,7 +17,7 @@ namespace System.Data.SqlClient
     using System.Threading;
     using SysTx = System.Transactions;
 
-    sealed internal class SqlDelegatedTransaction : SysTx.IPromotableSinglePhaseNotification
+    internal sealed class SqlDelegatedTransaction : SysTx.IPromotableSinglePhaseNotification
     {
         private static int _objectTypeCount;
         private readonly int _objectID = Interlocked.Increment(ref _objectTypeCount);

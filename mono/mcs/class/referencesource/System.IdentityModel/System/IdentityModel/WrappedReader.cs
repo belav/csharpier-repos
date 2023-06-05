@@ -360,7 +360,7 @@ namespace System.IdentityModel
         }
     }
 
-    sealed internal class XmlTokenStream : ISecurityElement
+    internal sealed class XmlTokenStream : ISecurityElement
     {
         int count;
         XmlTokenEntry[] entries;

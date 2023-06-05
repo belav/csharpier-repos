@@ -2835,7 +2835,7 @@ namespace System.Runtime.Remoting
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        private unsafe static RuntimeType LoadClrTypeWithPartialBindFallback(
+        private static unsafe RuntimeType LoadClrTypeWithPartialBindFallback(
             String typeName,
             bool partialFallback
         )

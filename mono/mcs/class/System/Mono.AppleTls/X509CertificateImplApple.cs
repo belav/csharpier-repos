@@ -53,10 +53,10 @@ namespace Mono.AppleTls
         }
 
         [DllImport(CFHelpers.SecurityLibrary)]
-        extern static IntPtr SecCertificateCopySubjectSummary(IntPtr cert);
+        static extern IntPtr SecCertificateCopySubjectSummary(IntPtr cert);
 
         [DllImport(CFHelpers.SecurityLibrary)]
-        extern static IntPtr SecCertificateCopyData(IntPtr cert);
+        static extern IntPtr SecCertificateCopyData(IntPtr cert);
 
         protected override byte[] GetRawCertData()
         {

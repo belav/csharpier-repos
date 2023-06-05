@@ -13,7 +13,7 @@ namespace Microsoft.SqlServer.Server
     using System.Data.SqlClient;
     using System.Diagnostics;
 
-    sealed internal class SmiContextFactory
+    internal sealed class SmiContextFactory
     {
         public static readonly SmiContextFactory Instance = new SmiContextFactory();
 

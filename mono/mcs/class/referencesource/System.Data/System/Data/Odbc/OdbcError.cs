@@ -53,7 +53,7 @@ namespace System.Data.Odbc
             _source = Source;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return Message;
         }

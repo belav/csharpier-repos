@@ -17,7 +17,7 @@ namespace System.Data.Odbc
     using System.IO;
     using System.Runtime.Versioning;
 
-    sealed internal class OdbcConnectionFactory : DbConnectionFactory
+    internal sealed class OdbcConnectionFactory : DbConnectionFactory
     {
         private OdbcConnectionFactory()
             : base() { }
@@ -32,12 +32,12 @@ namespace System.Data.Odbc
         public static readonly OdbcConnectionFactory SingletonInstance =
             new OdbcConnectionFactory();
 
-        override public DbProviderFactory ProviderFactory
+        public override DbProviderFactory ProviderFactory
         {
             get { return OdbcFactory.Instance; }
         }
 
-        override protected DbConnectionInternal CreateConnection(
+        protected override DbConnectionInternal CreateConnection(
             DbConnectionOptions options,
             DbConnectionPoolKey poolKey,
             object poolGroupProviderInfo,
@@ -52,7 +52,7 @@ namespace System.Data.Odbc
             return result;
         }
 
-        override protected DbConnectionOptions CreateConnectionOptions(
+        protected override DbConnectionOptions CreateConnectionOptions(
             string connectionString,
             DbConnectionOptions previous
         )
@@ -65,7 +65,7 @@ namespace System.Data.Odbc
             return result;
         }
 
-        override protected DbConnectionPoolGroupOptions CreateConnectionPoolGroupOptions(
+        protected override DbConnectionPoolGroupOptions CreateConnectionPoolGroupOptions(
             DbConnectionOptions connectionOptions
         )
         {
@@ -74,7 +74,7 @@ namespace System.Data.Odbc
             return null;
         }
 
-        override internal DbConnectionPoolGroupProviderInfo CreateConnectionPoolGroupProviderInfo(
+        internal override DbConnectionPoolGroupProviderInfo CreateConnectionPoolGroupProviderInfo(
             DbConnectionOptions connectionOptions
         )
         {
@@ -86,7 +86,7 @@ namespace System.Data.Odbc
         // under the runtime folder.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        override protected DbMetaDataFactory CreateMetaDataFactory(
+        protected override DbMetaDataFactory CreateMetaDataFactory(
             DbConnectionInternal internalConnection,
             out bool cacheMetaDataFactory
         )
@@ -164,7 +164,7 @@ namespace System.Data.Odbc
             );
         }
 
-        override internal DbConnectionPoolGroup GetConnectionPoolGroup(DbConnection connection)
+        internal override DbConnectionPoolGroup GetConnectionPoolGroup(DbConnection connection)
         {
             OdbcConnection c = (connection as OdbcConnection);
             if (null != c)
@@ -174,7 +174,7 @@ namespace System.Data.Odbc
             return null;
         }
 
-        override internal DbConnectionInternal GetInnerConnection(DbConnection connection)
+        internal override DbConnectionInternal GetInnerConnection(DbConnection connection)
         {
             OdbcConnection c = (connection as OdbcConnection);
             if (null != c)
@@ -184,7 +184,7 @@ namespace System.Data.Odbc
             return null;
         }
 
-        override protected int GetObjectId(DbConnection connection)
+        protected override int GetObjectId(DbConnection connection)
         {
             OdbcConnection c = (connection as OdbcConnection);
             if (null != c)
@@ -194,7 +194,7 @@ namespace System.Data.Odbc
             return 0;
         }
 
-        override internal void PermissionDemand(DbConnection outerConnection)
+        internal override void PermissionDemand(DbConnection outerConnection)
         {
             OdbcConnection c = (outerConnection as OdbcConnection);
             if (null != c)
@@ -203,7 +203,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override internal void SetConnectionPoolGroup(
+        internal override void SetConnectionPoolGroup(
             DbConnection outerConnection,
             DbConnectionPoolGroup poolGroup
         )
@@ -215,7 +215,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override internal void SetInnerConnectionEvent(
+        internal override void SetInnerConnectionEvent(
             DbConnection owningObject,
             DbConnectionInternal to
         )
@@ -227,7 +227,7 @@ namespace System.Data.Odbc
             }
         }
 
-        override internal bool SetInnerConnectionFrom(
+        internal override bool SetInnerConnectionFrom(
             DbConnection owningObject,
             DbConnectionInternal to,
             DbConnectionInternal from
@@ -241,7 +241,7 @@ namespace System.Data.Odbc
             return false;
         }
 
-        override internal void SetInnerConnectionTo(
+        internal override void SetInnerConnectionTo(
             DbConnection owningObject,
             DbConnectionInternal to
         )

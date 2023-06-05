@@ -323,7 +323,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static extern private IRuntimeMethodInfo GetMethodFromStackTrace(Object stackTrace);
+        private static extern IRuntimeMethodInfo GetMethodFromStackTrace(Object stackTrace);
 
         [System.Security.SecuritySafeCritical] // auto-generated
         private MethodBase GetExceptionMethodFromStackTrace()
@@ -1155,7 +1155,7 @@ namespace System
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool nIsTransient(int hr);
+        private static extern bool nIsTransient(int hr);
 #endif
 
         // This piece of infrastructure exists to help avoid deadlocks

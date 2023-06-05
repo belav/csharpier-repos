@@ -18,7 +18,7 @@ namespace System.Data.Common
 
     public class DataAdapter : Component, IDataAdapter
     { // V1.0.3300
-        static private readonly object EventFillError = new object();
+        private static readonly object EventFillError = new object();
 
         private bool _acceptChangesDuringUpdate = true;
         private bool _acceptChangesDuringUpdateAfterInsert = true;
@@ -104,7 +104,7 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        virtual public bool ShouldSerializeAcceptChangesDuringFill()
+        public virtual bool ShouldSerializeAcceptChangesDuringFill()
         {
             return (0 == _fillLoadOption);
         }
@@ -184,7 +184,7 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        virtual public bool ShouldSerializeFillLoadOption()
+        public virtual bool ShouldSerializeFillLoadOption()
         {
             return (0 != _fillLoadOption);
         }
@@ -256,7 +256,7 @@ namespace System.Data.Common
             ResCategoryAttribute(Res.DataCategory_Fill),
             ResDescriptionAttribute(Res.DataAdapter_ReturnProviderSpecificTypes),
         ]
-        virtual public bool ReturnProviderSpecificTypes
+        public virtual bool ReturnProviderSpecificTypes
         {
             get
             {
@@ -299,7 +299,7 @@ namespace System.Data.Common
             get { return TableMappings; }
         }
 
-        virtual protected bool ShouldSerializeTableMappings()
+        protected virtual bool ShouldSerializeTableMappings()
         { // V1.0.3300, MDAC 65548
             return true; /*HasTableMappings();*/ // VS7 300569
         }
@@ -330,7 +330,7 @@ namespace System.Data.Common
             System.Security.Permissions.SecurityAction.Demand,
             Name = "FullTrust"
         )] // MDAC 82936
-        virtual protected DataAdapter CloneInternals()
+        protected virtual DataAdapter CloneInternals()
         { // V1.0.3300
             DataAdapter clone = (DataAdapter)
                 Activator.CreateInstance(
@@ -368,13 +368,13 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected DataTableMappingCollection CreateTableMappings()
+        protected virtual DataTableMappingCollection CreateTableMappings()
         { // V1.0.3300
             Bid.Trace("<comm.DataAdapter.CreateTableMappings|API> %d#\n", ObjectID);
             return new DataTableMappingCollection();
         }
 
-        override protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         { // V1.0.3300, MDAC 65459
             if (disposing)
             { // release mananged objects
@@ -385,12 +385,12 @@ namespace System.Data.Common
             base.Dispose(disposing); // notify base classes
         }
 
-        virtual public DataTable[] FillSchema(DataSet dataSet, SchemaType schemaType)
+        public virtual DataTable[] FillSchema(DataSet dataSet, SchemaType schemaType)
         { // V1.0.3300
             throw ADP.NotSupported();
         }
 
-        virtual protected DataTable[] FillSchema(
+        protected virtual DataTable[] FillSchema(
             DataSet dataSet,
             SchemaType schemaType,
             string srcTable,
@@ -438,7 +438,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected DataTable FillSchema(
+        protected virtual DataTable FillSchema(
             DataTable dataTable,
             SchemaType schemaType,
             IDataReader dataReader
@@ -543,12 +543,12 @@ namespace System.Data.Common
             return value; // null if datatable had no results
         }
 
-        virtual public int Fill(DataSet dataSet)
+        public virtual int Fill(DataSet dataSet)
         { // V1.0.3300
             throw ADP.NotSupported();
         }
 
-        virtual protected int Fill(
+        protected virtual int Fill(
             DataSet dataSet,
             string srcTable,
             IDataReader dataReader,
@@ -610,13 +610,13 @@ namespace System.Data.Common
             }
         }
 
-        virtual protected int Fill(DataTable dataTable, IDataReader dataReader)
+        protected virtual int Fill(DataTable dataTable, IDataReader dataReader)
         { // V1.2.3300, DbDataADapter V1.0.3300
             DataTable[] dataTables = new DataTable[] { dataTable };
             return Fill(dataTables, dataReader, 0, 0);
         }
 
-        virtual protected int Fill(
+        protected virtual int Fill(
             DataTable[] dataTables,
             IDataReader dataReader,
             int startRecord,
@@ -1017,7 +1017,7 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)] // MDAC 69508
-        virtual public IDataParameter[] GetFillParameters()
+        public virtual IDataParameter[] GetFillParameters()
         { // V1.0.3300
             return new IDataParameter[0];
         }
@@ -1045,7 +1045,7 @@ namespace System.Data.Common
             return -1;
         }
 
-        virtual protected void OnFillError(FillErrorEventArgs value)
+        protected virtual void OnFillError(FillErrorEventArgs value)
         { // V1.2.3300, DbDataAdapter V1.0.3300
             FillErrorEventHandler handler = (FillErrorEventHandler)Events[EventFillError];
             if (null != handler)
@@ -1070,13 +1070,15 @@ namespace System.Data.Common
             }
         }
 
-        virtual public int Update(DataSet dataSet)
+        public virtual int Update(DataSet dataSet)
         { // V1.0.3300
             throw ADP.NotSupported();
         }
 
         // used by FillSchema which returns an array of datatables added to the dataset
-        static private DataTable[] AddDataTableToArray(DataTable[] tables, DataTable newTable)
+        private
+        // used by FillSchema which returns an array of datatables added to the dataset
+        static DataTable[] AddDataTableToArray(DataTable[] tables, DataTable newTable)
         {
             for (int i = 0; i < tables.Length; ++i)
             { // search for duplicates
@@ -1095,7 +1097,9 @@ namespace System.Data.Common
         }
 
         // dynamically generate source table names
-        static private string GetSourceTableName(string srcTable, int index)
+        private
+        // dynamically generate source table names
+        static string GetSourceTableName(string srcTable, int index)
         {
             //if ((null != srcTable) && (0 <= index) && (index < srcTable.Length)) {
             if (0 == index)

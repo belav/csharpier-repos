@@ -35,28 +35,33 @@ namespace System.Data.Common
             internal const string Pwd = "pwd";
         };
 
+        private
         // this class is serializable with Everett, so ugly field names can't be changed
-        readonly private string _encryptedUsersConnectionString;
+        readonly string _encryptedUsersConnectionString;
 
+        private
         // hash of unique keys to values
-        readonly private Hashtable _parsetable;
+        readonly Hashtable _parsetable;
 
+        private
         // a linked list of key/value and their length in _encryptedUsersConnectionString
-        readonly private NameValuePair _keychain;
+        readonly NameValuePair _keychain;
 
+        private
         // track the existence of "password" or "pwd" in the connection string
         // not used for anything anymore but must keep it set correct for V1.1 serialization
-        readonly private bool _hasPassword;
+        readonly bool _hasPassword;
 
-        readonly private string[] _restrictionValues;
-        readonly private string _restrictions;
+        private readonly string[] _restrictionValues;
+        private readonly string _restrictions;
 
-        readonly private KeyRestrictionBehavior _behavior;
+        private readonly KeyRestrictionBehavior _behavior;
 
+        private
 #pragma warning disable 169
         // this field is no longer used, hence the warning was disabled
         // however, it can not be removed or it will break serialization with V1.1
-        readonly private string _encryptedActualConnectionString;
+        readonly string _encryptedActualConnectionString;
 #pragma warning restore 169
 
         internal DBConnectionString(
@@ -513,7 +518,7 @@ namespace System.Data.Common
             return true;
         }
 
-        static private string[] NewRestrictionAllowOnly(string[] allowonly, string[] preventusage)
+        private static string[] NewRestrictionAllowOnly(string[] allowonly, string[] preventusage)
         {
             List<string> newlist = null;
             for (int i = 0; i < allowonly.Length; ++i)
@@ -536,7 +541,7 @@ namespace System.Data.Common
             return restrictionValues;
         }
 
-        static private string[] NewRestrictionIntersect(string[] a, string[] b)
+        private static string[] NewRestrictionIntersect(string[] a, string[] b)
         {
             List<string> newlist = null;
             for (int i = 0; i < a.Length; ++i)
@@ -559,7 +564,7 @@ namespace System.Data.Common
             return restrictionValues;
         }
 
-        static private string[] NoDuplicateUnion(string[] a, string[] b)
+        private static string[] NoDuplicateUnion(string[] a, string[] b)
         {
 #if DEBUG
             Debug.Assert(null != a && 0 < a.Length, "empty a");
@@ -631,7 +636,7 @@ namespace System.Data.Common
             return RemoveDuplicates(restrictionValues.ToArray());
         }
 
-        static internal string[] RemoveDuplicates(string[] restrictions)
+        internal static string[] RemoveDuplicates(string[] restrictions)
         {
             int count = restrictions.Length;
             if (0 < count)

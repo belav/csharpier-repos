@@ -670,7 +670,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void GetType(
+        private static extern void GetType(
             RuntimeModule module,
             String className,
             bool ignoreCase,
@@ -688,7 +688,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void GetScopeName(
+        private static extern void GetScopeName(
             RuntimeModule module,
             StringHandleOnStack retString
         );
@@ -697,7 +697,7 @@ namespace System.Reflection
         [ResourceExposure(ResourceScope.Machine)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private extern static void GetFullyQualifiedName(
+        private static extern void GetFullyQualifiedName(
             RuntimeModule module,
             StringHandleOnStack retString
         );
@@ -705,7 +705,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static RuntimeType[] GetTypes(RuntimeModule module);
+        private static extern RuntimeType[] GetTypes(RuntimeModule module);
 
         [System.Security.SecuritySafeCritical] // auto-generated
         internal RuntimeType[] GetDefinedTypes()
@@ -716,14 +716,14 @@ namespace System.Reflection
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool IsResource(RuntimeModule module);
+        private static extern bool IsResource(RuntimeModule module);
 
 #if FEATURE_X509 && FEATURE_CAS_POLICY
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        static private extern void GetSignerCertificate(
+        private static extern void GetSignerCertificate(
             RuntimeModule module,
             ObjectHandleOnStack retData
         );

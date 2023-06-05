@@ -11,7 +11,7 @@ namespace IntrinsicsMisoptimizationTest
 {
     class Program
     {
-        unsafe static void WriteArray(float* ptr, int count)
+        static unsafe void WriteArray(float* ptr, int count)
         {
             Console.Write("[");
             for (int i = 0; i < count; i++)
@@ -24,7 +24,7 @@ namespace IntrinsicsMisoptimizationTest
             Console.WriteLine("]");
         }
 
-        unsafe static bool TestXmm_NoCSE()
+        static unsafe bool TestXmm_NoCSE()
         {
             const int VecLen = 4;
 
@@ -82,7 +82,7 @@ namespace IntrinsicsMisoptimizationTest
             return true;
         }
 
-        unsafe static bool TestXmm_CanCSE()
+        static unsafe bool TestXmm_CanCSE()
         {
             const int VecLen = 4;
 
@@ -152,7 +152,7 @@ namespace IntrinsicsMisoptimizationTest
             return true;
         }
 
-        unsafe static bool TestYmm_NoCSE()
+        static unsafe bool TestYmm_NoCSE()
         {
             const int VecLen = 8;
 
@@ -198,7 +198,7 @@ namespace IntrinsicsMisoptimizationTest
             return true;
         }
 
-        unsafe static bool TestYmm_CanCSE()
+        static unsafe bool TestYmm_CanCSE()
         {
             const int VecLen = 8;
 

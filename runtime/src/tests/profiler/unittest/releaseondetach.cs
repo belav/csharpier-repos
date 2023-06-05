@@ -18,7 +18,7 @@ namespace Profiler.Tests
         [DllImport("Profiler")]
         private static extern void PassCallbackToProfiler(ProfilerCallback callback);
 
-        public unsafe static int RunTest(string[] args)
+        public static unsafe int RunTest(string[] args)
         {
             string profilerName;
             if (TestLibrary.Utilities.IsWindows)

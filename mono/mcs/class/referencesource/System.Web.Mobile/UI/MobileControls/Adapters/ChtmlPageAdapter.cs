@@ -50,7 +50,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\ChtmlPageAdapter.uex' path='docs/doc[@for="ChtmlPageAdapter.DeviceQualifies"]/*' />
-        public new static bool DeviceQualifies(HttpContext context)
+        public static new bool DeviceQualifies(HttpContext context)
         {
             String type = ((MobileCapabilities)context.Request.Browser).PreferredRenderingType;
             bool javascriptSupported = context.Request.Browser.JavaScript;

@@ -186,7 +186,7 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal unsafe static extern int Wait_internal(
+        internal static extern unsafe int Wait_internal(
             IntPtr* handles,
             int numHandles,
             bool waitAll,

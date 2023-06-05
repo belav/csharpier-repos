@@ -76,7 +76,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
@@ -102,11 +108,15 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="series">Point series.</param>
         /// <param name="indexedSeries">Indicate that point index should be used as X value.</param>
         /// <returns>Array of data points position.</returns>
-        override protected PointF[] GetPointsPosition(
-            ChartGraphics graph,
-            Series series,
-            bool indexedSeries
-        )
+        protected
+        /// <summary>
+        /// Fills a PointF array of data points positions.
+        /// </summary>
+        /// <param name="graph">Graphics object.</param>
+        /// <param name="series">Point series.</param>
+        /// <param name="indexedSeries">Indicate that point index should be used as X value.</param>
+        /// <returns>Array of data points position.</returns>
+        override PointF[] GetPointsPosition(ChartGraphics graph, Series series, bool indexedSeries)
         {
             // Check tension attribute in the series
             base.lineTension = GetDefaultTension();
@@ -128,7 +138,12 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// Gets default line tension.
         /// </summary>
         /// <returns>Default line tension.</returns>
-        override protected float GetDefaultTension()
+        protected
+        /// <summary>
+        /// Gets default line tension.
+        /// </summary>
+        /// <returns>Default line tension.</returns>
+        override float GetDefaultTension()
         {
             return 0.5f;
         }
@@ -259,7 +274,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
@@ -297,20 +318,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart series can be placed side-by-side.
         /// </summary>
-        override public bool SideBySideSeries
+        override bool SideBySideSeries
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// If the crossing value is auto Crossing value should be
         /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        override public bool ZeroCrossing
+        override bool ZeroCrossing
         {
             get { return true; }
         }
@@ -338,7 +361,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="series">Legend item series.</param>
         /// <returns>Legend item style.</returns>
-        override public LegendImageStyle GetLegendImageStyle(Series series)
+        public
+        /// <summary>
+        /// How to draw series/points in legend:
+        /// Filled rectangle, Line or Marker
+        /// </summary>
+        /// <param name="series">Legend item series.</param>
+        /// <returns>Legend item style.</returns>
+        override LegendImageStyle GetLegendImageStyle(Series series)
         {
             return LegendImageStyle.Line;
         }
@@ -825,7 +855,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="points">Array of oints coordinates.</param>
         /// <param name="pointIndex">Index of point to draw.</param>
         /// <param name="tension">Line tension.</param>
-        virtual protected void DrawLine(
+        protected
+        /// <summary>
+        /// Calculate position and draw one chart line and/or shadow.
+        /// </summary>
+        /// <param name="graph">Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="point">Point to draw the line for.</param>
+        /// <param name="series">Point series.</param>
+        /// <param name="points">Array of oints coordinates.</param>
+        /// <param name="pointIndex">Index of point to draw.</param>
+        /// <param name="tension">Line tension.</param>
+        virtual void DrawLine(
             ChartGraphics graph,
             CommonElements common,
             DataPoint point,
@@ -1250,7 +1291,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// Gets default line tension.
         /// </summary>
         /// <returns>Default line tension.</returns>
-        virtual protected float GetDefaultTension()
+        protected
+        #endregion
+
+        #region Position helper methods
+
+        /// <summary>
+        /// Gets default line tension.
+        /// </summary>
+        /// <returns>Default line tension.</returns>
+        virtual float GetDefaultTension()
         {
             return 0f;
         }
@@ -1262,7 +1312,15 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="series">Data series.</param>
         /// <param name="pointIndex">Point index.</param>
         /// <returns>Return automaticly detected label position.</returns>
-        override protected LabelAlignmentStyles GetAutoLabelPosition(Series series, int pointIndex)
+        protected
+        /// <summary>
+        /// Gets label position depending on the prev/next point values.
+        /// This method will reduce label overlapping with the chart itself (line).
+        /// </summary>
+        /// <param name="series">Data series.</param>
+        /// <param name="pointIndex">Point index.</param>
+        /// <returns>Return automaticly detected label position.</returns>
+        override LabelAlignmentStyles GetAutoLabelPosition(Series series, int pointIndex)
         {
             int pointsCount = series.Points.Count; // Number of data points
             double previous; // Y Value from the previous data point
@@ -1364,11 +1422,15 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="series">Point series.</param>
         /// <param name="indexedSeries">Indicate that point index should be used as X value.</param>
         /// <returns>Array of data points position.</returns>
-        virtual protected PointF[] GetPointsPosition(
-            ChartGraphics graph,
-            Series series,
-            bool indexedSeries
-        )
+        protected
+        /// <summary>
+        /// Fills a PointF array of data points absolute pixel positions.
+        /// </summary>
+        /// <param name="graph">Graphics object.</param>
+        /// <param name="series">Point series.</param>
+        /// <param name="indexedSeries">Indicate that point index should be used as X value.</param>
+        /// <returns>Array of data points position.</returns>
+        virtual PointF[] GetPointsPosition(ChartGraphics graph, Series series, bool indexedSeries)
         {
             PointF[] pointPos = new PointF[series.Points.Count];
             int index = 0;
@@ -1865,7 +1927,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="selection">Selection indicator.</param>
         /// <param name="pointsArray">Points array list.</param>
         /// <returns>Number of loops (1 or 2).</returns>
-        virtual protected int GetPointLoopNumber(bool selection, ArrayList pointsArray)
+        protected
+        /// <summary>
+        /// Returns how many loops through all data points is required (1 or 2)
+        /// </summary>
+        /// <param name="selection">Selection indicator.</param>
+        /// <param name="pointsArray">Points array list.</param>
+        /// <returns>Number of loops (1 or 2).</returns>
+        virtual int GetPointLoopNumber(bool selection, ArrayList pointsArray)
         {
             return 1;
         }

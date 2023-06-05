@@ -459,7 +459,7 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)] // MDAC 69508
-        static public DataColumn GetDataColumn(
+        public static DataColumn GetDataColumn(
             DataColumnMappingCollection columnMappings,
             string sourceColumn,
             Type dataType,
@@ -531,7 +531,7 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)] // MDAC 69508
-        static public DataColumnMapping GetColumnMappingBySchemaAction(
+        public static DataColumnMapping GetColumnMappingBySchemaAction(
             DataColumnMappingCollection columnMappings,
             string sourceColumn,
             MissingMappingAction mappingAction

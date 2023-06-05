@@ -10,7 +10,7 @@ using System.DirectoryServices;
 namespace System.Workflow.Activities
 {
     [Serializable]
-    sealed internal class DirectoryRootQuery : IDirectoryOperation
+    internal sealed class DirectoryRootQuery : IDirectoryOperation
     {
         private String m_name;
         private String m_value;

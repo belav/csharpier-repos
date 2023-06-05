@@ -75,7 +75,7 @@ namespace Wasm.Build.Tests
             return Task.Run(async () => await ExecuteAsync(args)).Result;
         }
 
-        public async virtual Task<CommandResult> ExecuteAsync(params string[] args)
+        public virtual async Task<CommandResult> ExecuteAsync(params string[] args)
         {
             var resolvedCommand = _command;
             string fullArgs = GetFullArgs(args);

@@ -161,7 +161,7 @@ namespace System.Security.Cryptography.X509Certificates
 #if FEATURE_CORESYSTEM
         [SecuritySafeCritical]
 #endif
-        private unsafe static byte[] Encode(
+        private static unsafe byte[] Encode(
             string distinguishedName,
             X500DistinguishedNameFlags flag
         )

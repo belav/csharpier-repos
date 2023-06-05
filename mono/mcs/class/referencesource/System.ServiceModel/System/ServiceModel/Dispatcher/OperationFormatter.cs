@@ -1351,7 +1351,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal class QNameComparer : IEqualityComparer<QName>
         {
-            static internal QNameComparer Singleton = new QNameComparer();
+            internal static QNameComparer Singleton = new QNameComparer();
 
             QNameComparer() { }
 

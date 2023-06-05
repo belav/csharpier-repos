@@ -50,26 +50,29 @@ namespace Novell.Directory.Ldap
             scope = DEFAULT_SCOPE;
         }
 
+        public
         /// <summary> Returns an array of attribute names specified in the URL.
         ///
         /// </summary>
         /// <returns> An array of attribute names in the URL.
         /// </returns>
-        virtual public System.String[] AttributeArray
+        virtual System.String[] AttributeArray
         {
             get { return attrs; }
         }
 
+        public
         /// <summary> Returns an enumerator for the attribute names specified in the URL.
         ///
         /// </summary>
         /// <returns> An enumeration of attribute names.
         /// </returns>
-        virtual public System.Collections.IEnumerator Attributes
+        virtual System.Collections.IEnumerator Attributes
         {
             get { return new ArrayEnumeration(attrs); }
         }
 
+        public
         /// <summary> Returns any Ldap URL extensions specified, or null if none are
         /// specified. Each extension is a type=value expression. The =value part
         /// MAY be omitted. The expression MAY be prefixed with '!' if it is
@@ -78,37 +81,40 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> string array of extensions.
         /// </returns>
-        virtual public System.String[] Extensions
+        virtual System.String[] Extensions
         {
             get { return extensions; }
         }
 
+        public
         /// <summary> Returns the search filter or <code>null</code> if none was specified.
         ///
         /// </summary>
         /// <returns> The search filter.
         /// </returns>
-        virtual public System.String Filter
+        virtual System.String Filter
         {
             get { return filter; }
         }
 
+        public
         /// <summary> Returns the name of the Ldap server in the URL.
         ///
         /// </summary>
         /// <returns> The host name specified in the URL.
         /// </returns>
-        virtual public System.String Host
+        virtual System.String Host
         {
             get { return host; }
         }
 
+        public
         /// <summary> Returns the port number of the Ldap server in the URL.
         ///
         /// </summary>
         /// <returns> The port number in the URL.
         /// </returns>
-        virtual public int Port
+        virtual int Port
         {
             get
             {
@@ -120,24 +126,26 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns the depth of search. It returns one of the following from
         /// LdapConnection: SCOPE_BASE, SCOPE_ONE, or SCOPE_SUB.
         ///
         /// </summary>
         /// <returns> The search scope.
         /// </returns>
-        virtual public int Scope
+        virtual int Scope
         {
             get { return scope; }
         }
 
+        public
         /// <summary> Returns true if the URL is of the type ldaps (Ldap over SSL, a predecessor
         /// to startTls)
         ///
         /// </summary>
         /// <returns> whether this is a secure Ldap url or not.
         /// </returns>
-        virtual public bool Secure
+        virtual bool Secure
         {
             get { return secure; }
         }

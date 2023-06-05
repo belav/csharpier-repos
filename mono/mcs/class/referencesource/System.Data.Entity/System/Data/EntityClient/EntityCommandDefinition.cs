@@ -22,11 +22,12 @@ namespace System.Data.EntityClient
     using System.Linq;
     using System.Text;
 
+    internal
     /// <summary>
     /// An aggregate Command Definition used by the EntityClient layers.  This is an aggregator
     /// object that represent information from multiple underlying provider commands.
     /// </summary>
-    sealed internal class EntityCommandDefinition : DbCommandDefinition
+    sealed class EntityCommandDefinition : DbCommandDefinition
     {
         #region internal state
 

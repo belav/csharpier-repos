@@ -2645,7 +2645,7 @@ namespace PEAPI
             output.StringsIndex(nameSpaceIx);
         }
 
-        internal override sealed uint TypeDefOrRefToken()
+        internal sealed override uint TypeDefOrRefToken()
         {
             uint cIx = Row;
             cIx = (cIx << 2) | 0x1;
@@ -5613,7 +5613,7 @@ namespace PEAPI
             parent = paren;
         }
 
-        internal override sealed MetaDataElement GetTypeSpec(MetaData md)
+        internal sealed override MetaDataElement GetTypeSpec(MetaData md)
         {
             if (typeSpec == null)
                 typeSpec = (TypeSpec)elemType.GetTypeSpec(md);

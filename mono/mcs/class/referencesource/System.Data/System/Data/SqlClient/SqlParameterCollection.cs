@@ -41,14 +41,14 @@ namespace System.Data.SqlClient
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public SqlParameter this[int index]
+        public new SqlParameter this[int index]
         {
             get { return (SqlParameter)GetParameter(index); }
             set { SetParameter(index, value); }
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        new public SqlParameter this[string parameterName]
+        public new SqlParameter this[string parameterName]
         {
             get { return (SqlParameter)GetParameter(parameterName); }
             set { SetParameter(parameterName, value); }
@@ -100,7 +100,7 @@ namespace System.Data.SqlClient
             AddRange((Array)values);
         }
 
-        override public bool Contains(string value)
+        public override bool Contains(string value)
         { // WebData 97349
             return (-1 != IndexOf(value));
         }

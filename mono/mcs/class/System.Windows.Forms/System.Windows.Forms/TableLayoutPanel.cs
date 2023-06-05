@@ -82,7 +82,7 @@ namespace System.Windows.Forms
         [Localizable(true)]
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        new public BorderStyle BorderStyle
+        public new BorderStyle BorderStyle
         {
             get { return base.BorderStyle; }
             set { base.BorderStyle = value; }
@@ -123,7 +123,7 @@ namespace System.Windows.Forms
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        new public TableLayoutControlCollection Controls
+        public new TableLayoutControlCollection Controls
         {
             get { return (TableLayoutControlCollection)base.Controls; }
         }

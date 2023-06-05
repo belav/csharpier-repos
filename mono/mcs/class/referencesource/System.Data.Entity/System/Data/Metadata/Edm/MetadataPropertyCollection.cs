@@ -29,7 +29,7 @@ namespace System.Data.Metadata.Edm
         internal MetadataPropertyCollection(MetadataItem item)
             : base(GetSystemMetadataProperties(item)) { }
 
-        private readonly static Memoizer<Type, ItemTypeInformation> s_itemTypeMemoizer =
+        private static readonly Memoizer<Type, ItemTypeInformation> s_itemTypeMemoizer =
             new Memoizer<Type, ItemTypeInformation>(
                 clrType => new ItemTypeInformation(clrType),
                 null

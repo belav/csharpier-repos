@@ -563,7 +563,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static String NormalizePath(String path, bool fullCheck)
+        internal static unsafe String NormalizePath(String path, bool fullCheck)
         {
             return NormalizePath(
                 path,
@@ -577,7 +577,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static String NormalizePath(
+        internal static unsafe String NormalizePath(
             String path,
             bool fullCheck,
             bool expandShortPaths
@@ -589,7 +589,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static String NormalizePath(String path, bool fullCheck, int maxPathLength)
+        internal static unsafe String NormalizePath(String path, bool fullCheck, int maxPathLength)
         {
             return NormalizePath(path, fullCheck, maxPathLength, expandShortPaths: true);
         }
@@ -736,7 +736,7 @@ namespace System.IO
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static string LegacyNormalizePath(
+        internal static unsafe string LegacyNormalizePath(
             string path,
             bool fullCheck,
             int maxPathLength,

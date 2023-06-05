@@ -95,7 +95,7 @@ namespace System.Globalization
         volatile CompareInfo compareInfo;
 
         [NonSerialized]
-        private unsafe readonly void* textinfo_data;
+        private readonly unsafe void* textinfo_data;
 
         [StructLayout(LayoutKind.Sequential)]
         struct Data
@@ -752,10 +752,10 @@ namespace System.Globalization
         private extern bool construct_internal_locale_from_name(string name);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static string get_current_locale_name();
+        private static extern string get_current_locale_name();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static CultureInfo[] internal_get_cultures(
+        private static extern CultureInfo[] internal_get_cultures(
             bool neutral,
             bool specific,
             bool installed

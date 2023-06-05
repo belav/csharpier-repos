@@ -31,28 +31,29 @@ namespace System.Data.Common
             RefreshProperties(RefreshProperties.All),
             ResCategoryAttribute(Res.DataCategory_Data),
         ]
-        abstract public string ConnectionString { get; set; }
+        public abstract string ConnectionString { get; set; }
 
         [ResCategoryAttribute(Res.DataCategory_Data),]
-        virtual public int ConnectionTimeout
+        public virtual int ConnectionTimeout
         {
             get { return ADP.DefaultConnectionTimeout; }
         }
 
         [ResCategoryAttribute(Res.DataCategory_Data),]
-        abstract public string Database { get; }
+        public abstract string Database { get; }
 
         [ResCategoryAttribute(Res.DataCategory_Data),]
-        abstract public string DataSource {
+        public abstract string DataSource {
             // NOTE: if you plan on allowing the data source to be changed, you
             //       should implement a ChangeDataSource method, in keeping with
             //       the ChangeDatabase method paradigm.
             get; }
 
+        protected
         /// <summary>
         /// The associated provider factory for derived class.
         /// </summary>
-        virtual protected DbProviderFactory DbProviderFactory
+        virtual DbProviderFactory DbProviderFactory
         {
             get { return null; }
         }
@@ -63,22 +64,22 @@ namespace System.Data.Common
         }
 
         [Browsable(false),]
-        abstract public string ServerVersion { get; }
+        public abstract string ServerVersion { get; }
 
         [Browsable(false), ResDescriptionAttribute(Res.DbConnection_State),]
-        abstract public ConnectionState State { get; }
+        public abstract ConnectionState State { get; }
 
         [
             ResCategoryAttribute(Res.DataCategory_StateChange),
             ResDescriptionAttribute(Res.DbConnection_StateChange),
         ]
-        virtual public event StateChangeEventHandler StateChange
+        public virtual event StateChangeEventHandler StateChange
         {
             add { _stateChangeEventHandler += value; }
             remove { _stateChangeEventHandler -= value; }
         }
 
-        abstract protected DbTransaction BeginDbTransaction(IsolationLevel isolationLevel);
+        protected abstract DbTransaction BeginDbTransaction(IsolationLevel isolationLevel);
 
         public DbTransaction BeginTransaction()
         {
@@ -100,9 +101,9 @@ namespace System.Data.Common
             return BeginDbTransaction(isolationLevel);
         }
 
-        abstract public void Close();
+        public abstract void Close();
 
-        abstract public void ChangeDatabase(string databaseName);
+        public abstract void ChangeDatabase(string databaseName);
 
         public DbCommand CreateCommand()
         {
@@ -114,9 +115,9 @@ namespace System.Data.Common
             return CreateDbCommand();
         }
 
-        abstract protected DbCommand CreateDbCommand();
+        protected abstract DbCommand CreateDbCommand();
 
-        virtual public void EnlistTransaction(System.Transactions.Transaction transaction)
+        public virtual void EnlistTransaction(System.Transactions.Transaction transaction)
         {
             // NOTE: This is virtual because not all providers may choose to support
             //       distributed transactions.
@@ -125,17 +126,20 @@ namespace System.Data.Common
 
         // these need to be here so that GetSchema is visible when programming to a dbConnection object.
         // they are overridden by the real implementations in DbConnectionBase
-        virtual public DataTable GetSchema()
+        public
+        // these need to be here so that GetSchema is visible when programming to a dbConnection object.
+        // they are overridden by the real implementations in DbConnectionBase
+        virtual DataTable GetSchema()
         {
             throw ADP.NotSupported();
         }
 
-        virtual public DataTable GetSchema(string collectionName)
+        public virtual DataTable GetSchema(string collectionName)
         {
             throw ADP.NotSupported();
         }
 
-        virtual public DataTable GetSchema(string collectionName, string[] restrictionValues)
+        public virtual DataTable GetSchema(string collectionName, string[] restrictionValues)
         {
             throw ADP.NotSupported();
         }
@@ -157,7 +161,7 @@ namespace System.Data.Common
 
         internal bool ForceNewConnection { get; set; }
 
-        abstract public void Open();
+        public abstract void Open();
 
         public Task OpenAsync()
         {

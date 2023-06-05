@@ -378,7 +378,7 @@ namespace System.Net
 
 #if USE_WINIET_AUTODETECT_CACHE
 #if !FEATURE_PAL
-        internal unsafe static bool IsValidTimeForLkgScriptLocation(FILETIME ftLastKnownDetectTime)
+        internal static unsafe bool IsValidTimeForLkgScriptLocation(FILETIME ftLastKnownDetectTime)
         {
             // Get Current System Time.
             FILETIME ftCurrentTime = new FILETIME();

@@ -76,7 +76,7 @@ namespace System.Web.Configuration
             get { return (string)base[_propMappedUrl]; }
         }
 
-        static private void ValidateUrl(object value)
+        private static void ValidateUrl(object value)
         {
             // The Url cannot be an empty string. Use the std validator for that
             StdValidatorsAndConverters.NonEmptyStringValidator.Validate(value);

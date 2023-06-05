@@ -18,7 +18,7 @@ namespace JIT.HardwareIntrinsics.General
 {
     public static partial class Program
     {
-        private unsafe static void ToStringDouble()
+        private static unsafe void ToStringDouble()
         {
             int size = Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
             Double[] values = new Double[size];

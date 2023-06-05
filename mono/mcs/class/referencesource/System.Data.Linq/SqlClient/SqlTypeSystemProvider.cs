@@ -184,6 +184,7 @@ namespace System.Data.Linq.SqlClient
                     return typeof(object);
             }
         }
+        private
         #endregion
 
         #region Singleton SqlTypes
@@ -192,43 +193,43 @@ namespace System.Data.Linq.SqlClient
          * This has two advantages: Fewer allocations of SqlType and faster comparison of
          * one type to another.
          */
-        static private readonly SqlType theBigInt = new SqlType(SqlDbType.BigInt);
-        static private readonly SqlType theBit = new SqlType(SqlDbType.Bit);
-        static private readonly SqlType theChar = new SqlType(SqlDbType.Char);
-        static private readonly SqlType theDateTime = new SqlType(SqlDbType.DateTime);
-        static private readonly SqlType theDate = new SqlType(SqlDbType.Date);
-        static private readonly SqlType theTime = new SqlType(SqlDbType.Time);
-        static private readonly SqlType theDateTime2 = new SqlType(SqlDbType.DateTime2);
-        static private readonly SqlType theDateTimeOffset = new SqlType(SqlDbType.DateTimeOffset);
+        static readonly SqlType theBigInt = new SqlType(SqlDbType.BigInt);
+        private static readonly SqlType theBit = new SqlType(SqlDbType.Bit);
+        private static readonly SqlType theChar = new SqlType(SqlDbType.Char);
+        private static readonly SqlType theDateTime = new SqlType(SqlDbType.DateTime);
+        private static readonly SqlType theDate = new SqlType(SqlDbType.Date);
+        private static readonly SqlType theTime = new SqlType(SqlDbType.Time);
+        private static readonly SqlType theDateTime2 = new SqlType(SqlDbType.DateTime2);
+        private static readonly SqlType theDateTimeOffset = new SqlType(SqlDbType.DateTimeOffset);
         const int defaultDecimalPrecision = 29;
         const int defaultDecimalScale = 4;
-        static private readonly SqlType theDefaultDecimal = new SqlType(
+        private static readonly SqlType theDefaultDecimal = new SqlType(
             SqlDbType.Decimal,
             defaultDecimalPrecision,
             defaultDecimalScale
         );
-        static private readonly SqlType theFloat = new SqlType(SqlDbType.Float);
-        static private readonly SqlType theInt = new SqlType(SqlDbType.Int);
-        static private readonly SqlType theMoney = new SqlType(SqlDbType.Money, 19, 4);
-        static private readonly SqlType theReal = new SqlType(SqlDbType.Real);
-        static private readonly SqlType theUniqueIdentifier = new SqlType(
+        private static readonly SqlType theFloat = new SqlType(SqlDbType.Float);
+        private static readonly SqlType theInt = new SqlType(SqlDbType.Int);
+        private static readonly SqlType theMoney = new SqlType(SqlDbType.Money, 19, 4);
+        private static readonly SqlType theReal = new SqlType(SqlDbType.Real);
+        private static readonly SqlType theUniqueIdentifier = new SqlType(
             SqlDbType.UniqueIdentifier
         );
-        static private readonly SqlType theSmallDateTime = new SqlType(SqlDbType.SmallDateTime);
-        static private readonly SqlType theSmallInt = new SqlType(SqlDbType.SmallInt);
-        static private readonly SqlType theSmallMoney = new SqlType(SqlDbType.SmallMoney, 10, 4);
-        static private readonly SqlType theTimestamp = new SqlType(SqlDbType.Timestamp);
-        static private readonly SqlType theTinyInt = new SqlType(SqlDbType.TinyInt);
-        static private readonly SqlType theXml = new SqlType(SqlDbType.Xml, LargeTypeSizeIndicator);
-        static private readonly SqlType theText = new SqlType(
+        private static readonly SqlType theSmallDateTime = new SqlType(SqlDbType.SmallDateTime);
+        private static readonly SqlType theSmallInt = new SqlType(SqlDbType.SmallInt);
+        private static readonly SqlType theSmallMoney = new SqlType(SqlDbType.SmallMoney, 10, 4);
+        private static readonly SqlType theTimestamp = new SqlType(SqlDbType.Timestamp);
+        private static readonly SqlType theTinyInt = new SqlType(SqlDbType.TinyInt);
+        private static readonly SqlType theXml = new SqlType(SqlDbType.Xml, LargeTypeSizeIndicator);
+        private static readonly SqlType theText = new SqlType(
             SqlDbType.Text,
             LargeTypeSizeIndicator
         );
-        static private readonly SqlType theNText = new SqlType(
+        private static readonly SqlType theNText = new SqlType(
             SqlDbType.NText,
             LargeTypeSizeIndicator
         );
-        static private readonly SqlType theImage = new SqlType(
+        private static readonly SqlType theImage = new SqlType(
             SqlDbType.Image,
             LargeTypeSizeIndicator
         );

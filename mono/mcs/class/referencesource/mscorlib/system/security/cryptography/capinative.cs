@@ -689,7 +689,7 @@ namespace System.Security.Cryptography
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
 #endif // FEATURE_CORECLR || FEATURE_CER
         [return: MarshalAs(UnmanagedType.Bool)]
-        private extern static bool CryptReleaseContext(IntPtr hProv, int dwFlags);
+        private static extern bool CryptReleaseContext(IntPtr hProv, int dwFlags);
 
         /// <summary>
         ///     Clean up the safe handle's resources.
@@ -725,7 +725,7 @@ namespace System.Security.Cryptography
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
 #endif // FEATURE_CORECLR || FEATURE_CER
         [return: MarshalAs(UnmanagedType.Bool)]
-        private extern static bool CryptDestroyHash(IntPtr hKey);
+        private static extern bool CryptDestroyHash(IntPtr hKey);
 
         [SecurityCritical]
         protected override bool ReleaseHandle()
@@ -766,7 +766,7 @@ namespace System.Security.Cryptography
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
 #endif // FEATURE_CORECLR || FEATURE_CER
         [return: MarshalAs(UnmanagedType.Bool)]
-        private extern static bool CryptDestroyKey(IntPtr hKey);
+        private static extern bool CryptDestroyKey(IntPtr hKey);
 
         [SecurityCritical]
         protected override bool ReleaseHandle()

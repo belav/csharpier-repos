@@ -32,7 +32,7 @@ namespace System.Runtime.Diagnostics
         const int XmlBracketsLength = 5; // "<></>".Length;
         const int XmlBracketsLengthForNullValue = 4; // "< />".Length; (Empty XML Element)
 
-        static readonly public Guid ImmutableDefaultEtwProviderId = new Guid(
+        public static readonly Guid ImmutableDefaultEtwProviderId = new Guid(
             "{c651f5f6-1c0d-492e-8ae1-b4efd7c9d503}"
         );
 
@@ -144,7 +144,7 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        static public Guid DefaultEtwProviderId
+        public static Guid DefaultEtwProviderId
         {
             [Fx.Tag.SecurityNote(
                 Critical = "reading critical field defaultEtwProviderId",

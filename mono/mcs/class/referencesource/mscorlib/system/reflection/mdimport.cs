@@ -486,7 +486,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe static extern void _Enum(
+        private static extern unsafe void _Enum(
             IntPtr scope,
             int type,
             int parent,
@@ -570,7 +570,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern void _GetUserString(
+        private static extern unsafe void _GetUserString(
             IntPtr scope,
             int mdToken,
             void** name,
@@ -603,7 +603,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern void _GetName(IntPtr scope, int mdToken, void** name);
+        private static extern unsafe void _GetName(IntPtr scope, int mdToken, void** name);
 
         [System.Security.SecurityCritical] // auto-generated
         public unsafe Utf8String GetName(int mdToken)
@@ -617,7 +617,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static unsafe extern void _GetNamespace(IntPtr scope, int mdToken, void** namesp);
+        private static extern unsafe void _GetNamespace(IntPtr scope, int mdToken, void** namesp);
 
         [System.Security.SecurityCritical] // auto-generated
         public unsafe Utf8String GetNamespace(int mdToken)
@@ -631,7 +631,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe static extern void _GetEventProps(
+        private static extern unsafe void _GetEventProps(
             IntPtr scope,
             int mdToken,
             void** name,
@@ -672,7 +672,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe static extern void _GetPropertyProps(
+        private static extern unsafe void _GetPropertyProps(
             IntPtr scope,
             int mdToken,
             void** name,
@@ -933,7 +933,7 @@ namespace System.Reflection
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private unsafe static extern void _GetPInvokeMap(
+        private static extern unsafe void _GetPInvokeMap(
             IntPtr scope,
             int token,
             out int attributes,

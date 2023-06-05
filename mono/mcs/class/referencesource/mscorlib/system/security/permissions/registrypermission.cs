@@ -34,7 +34,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class RegistryPermission
+    public sealed class RegistryPermission
         : CodeAccessPermission,
             IUnrestrictedPermission,
             IBuiltInPermission

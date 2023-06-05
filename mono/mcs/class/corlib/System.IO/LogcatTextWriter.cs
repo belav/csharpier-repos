@@ -114,7 +114,7 @@ namespace System.IO
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        static unsafe extern void Log(byte* appname, int level, byte* message);
+        static extern unsafe void Log(byte* appname, int level, byte* message);
     }
 }
 

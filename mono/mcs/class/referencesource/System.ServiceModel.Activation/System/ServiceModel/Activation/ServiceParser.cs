@@ -45,8 +45,9 @@ namespace System.ServiceModel.Activation
         const string FactoryAttributeName = "Factory";
         const string ServiceAttributeName = "Service";
 
+        static
         // regular exression for the directive
-        readonly static SimpleDirectiveRegex directiveRegex;
+        readonly SimpleDirectiveRegex directiveRegex;
 
         // the build provider we will work with
         ServiceBuildProvider buildProvider;

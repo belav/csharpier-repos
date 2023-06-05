@@ -263,7 +263,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal int PerfCounterInstanceId { get; set; }
 
-        static internal EndpointDispatcher AddEndpointDispatcher(
+        internal static EndpointDispatcher AddEndpointDispatcher(
             EndpointDispatcher baseEndpoint,
             IEnumerable<AddressHeader> headers
         )

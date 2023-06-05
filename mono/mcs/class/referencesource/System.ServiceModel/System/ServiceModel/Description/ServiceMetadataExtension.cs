@@ -321,7 +321,7 @@ namespace System.ServiceModel.Description
             this.owner = null;
         }
 
-        static internal ServiceMetadataExtension EnsureServiceMetadataExtension(
+        internal static ServiceMetadataExtension EnsureServiceMetadataExtension(
             ServiceDescription description,
             ServiceHostBase host
         )

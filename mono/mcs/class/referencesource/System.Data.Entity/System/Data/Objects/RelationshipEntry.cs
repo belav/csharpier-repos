@@ -56,6 +56,7 @@ namespace System.Data.Objects
             base._entitySet = relationshipWrapper.AssociationSet;
             _relationshipWrapper = relationshipWrapper;
         }
+        public
         #endregion
 
         #region Public members
@@ -65,7 +66,7 @@ namespace System.Data.Objects
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        override public bool IsRelationship
+        override bool IsRelationship
         {
             get
             {
@@ -74,7 +75,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public void AcceptChanges()
+        public override void AcceptChanges()
         {
             ValidateState();
 
@@ -100,7 +101,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public void Delete()
+        public override void Delete()
         {
             // doFixup flag is used for Cache and Collection & Ref consistency
             // When some entity is deleted if "doFixup" is true then Delete method
@@ -111,19 +112,19 @@ namespace System.Data.Objects
             );
         }
 
-        override public IEnumerable<string> GetModifiedProperties()
+        public override IEnumerable<string> GetModifiedProperties()
         {
             ValidateState();
             yield break;
         }
 
-        override public void SetModified()
+        public override void SetModified()
         {
             ValidateState();
             throw EntityUtil.CantModifyRelationState();
         }
 
-        override public object Entity
+        public override object Entity
         {
             get
             {
@@ -132,7 +133,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public EntityKey EntityKey
+        public override EntityKey EntityKey
         {
             get
             {
@@ -152,7 +153,14 @@ namespace System.Data.Objects
         /// <param name="propertyName">This API recognizes the names in terms of OSpace</param>
         /// <exception cref="InvalidOperationException">If State is not Modified or Unchanged</exception>
         ///
-        override public void SetModifiedProperty(string propertyName)
+        public
+        /// <summary>
+        /// Marks specified property as modified.
+        /// </summary>
+        /// <param name="propertyName">This API recognizes the names in terms of OSpace</param>
+        /// <exception cref="InvalidOperationException">If State is not Modified or Unchanged</exception>
+        ///
+        override void SetModifiedProperty(string propertyName)
         {
             ValidateState();
 
@@ -162,7 +170,11 @@ namespace System.Data.Objects
         /// <summary>
         /// Throws since the method has no meaning for relationship entries.
         /// </summary>
-        override public void RejectPropertyChanges(string propertyName)
+        public
+        /// <summary>
+        /// Throws since the method has no meaning for relationship entries.
+        /// </summary>
+        override void RejectPropertyChanges(string propertyName)
         {
             ValidateState();
 
@@ -185,7 +197,7 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns> DbDataRecord </returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
-        override public DbDataRecord OriginalValues
+        public override DbDataRecord OriginalValues
         {
             get
             {
@@ -210,7 +222,7 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns> DbUpdatableDataRecord </returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
-        override public CurrentValueRecord CurrentValues
+        public override CurrentValueRecord CurrentValues
         {
             get
             {
@@ -224,7 +236,7 @@ namespace System.Data.Objects
             }
         }
 
-        override public RelationshipManager RelationshipManager
+        public override RelationshipManager RelationshipManager
         {
             get
             {
@@ -282,16 +294,17 @@ namespace System.Data.Objects
             throw EntityUtil.CantModifyRelationValues();
         }
 
+        internal
         #endregion
 
         #region ObjectStateEntry members
 
-        override internal bool IsKeyEntry
+        override bool IsKeyEntry
         {
             get { return false; }
         }
 
-        override internal int GetFieldCount(StateManagerTypeMetadata metadata)
+        internal override int GetFieldCount(StateManagerTypeMetadata metadata)
         {
             return _relationshipWrapper.AssociationEndMembers.Count;
         }
@@ -299,7 +312,11 @@ namespace System.Data.Objects
         /// <summary>
         /// Reuse or create a new (Entity)DataRecordInfo.
         /// </summary>
-        override internal DataRecordInfo GetDataRecordInfo(
+        internal
+        /// <summary>
+        /// Reuse or create a new (Entity)DataRecordInfo.
+        /// </summary>
+        override DataRecordInfo GetDataRecordInfo(
             StateManagerTypeMetadata metadata,
             object userObject
         )
@@ -308,26 +325,26 @@ namespace System.Data.Objects
             return new DataRecordInfo(TypeUsage.Create(((RelationshipSet)EntitySet).ElementType));
         }
 
-        override internal void SetModifiedAll()
+        internal override void SetModifiedAll()
         {
             ValidateState();
             throw EntityUtil.CantModifyRelationState();
         }
 
-        override internal Type GetFieldType(int ordinal, StateManagerTypeMetadata metadata)
+        internal override Type GetFieldType(int ordinal, StateManagerTypeMetadata metadata)
         {
             // 'metadata' is used for ComplexTypes in EntityEntry
 
             return typeof(EntityKey); // this is given By Design
         }
 
-        override internal string GetCLayerName(int ordinal, StateManagerTypeMetadata metadata)
+        internal override string GetCLayerName(int ordinal, StateManagerTypeMetadata metadata)
         {
             ValidateRelationshipRange(ordinal);
             return _relationshipWrapper.AssociationEndMembers[ordinal].Name;
         }
 
-        override internal int GetOrdinalforCLayerName(
+        internal override int GetOrdinalforCLayerName(
             string name,
             StateManagerTypeMetadata metadata
         )
@@ -342,7 +359,7 @@ namespace System.Data.Objects
             return -1;
         }
 
-        override internal void RevertDelete()
+        internal override void RevertDelete()
         {
             State = EntityState.Unchanged;
             _cache.ChangeState(this, EntityState.Deleted, State);
@@ -353,7 +370,13 @@ namespace System.Data.Objects
         /// The current value of the specified property is cached when this method is called.
         /// </summary>
         /// <param name="entityMemberName">The name of the entity property that is changing</param>
-        override internal void EntityMemberChanging(string entityMemberName)
+        internal
+        /// <summary>
+        /// Used to report that a scalar entity property is about to change
+        /// The current value of the specified property is cached when this method is called.
+        /// </summary>
+        /// <param name="entityMemberName">The name of the entity property that is changing</param>
+        override void EntityMemberChanging(string entityMemberName)
         {
             throw EntityUtil.CantModifyRelationValues();
         }
@@ -364,7 +387,14 @@ namespace System.Data.Objects
         /// added to OriginalValues
         /// </summary>
         /// <param name="entityMemberName">The name of the entity property that has changing</param>
-        override internal void EntityMemberChanged(string entityMemberName)
+        internal
+        /// <summary>
+        /// Used to report that a scalar entity property has been changed
+        /// The property value that was cached during EntityMemberChanging is now
+        /// added to OriginalValues
+        /// </summary>
+        /// <param name="entityMemberName">The name of the entity property that has changing</param>
+        override void EntityMemberChanged(string entityMemberName)
         {
             throw EntityUtil.CantModifyRelationValues();
         }
@@ -376,7 +406,15 @@ namespace System.Data.Objects
         /// <param name="entityMemberName">The name of the top-level entity property that is changing</param>
         /// <param name="complexObject">The complex object that contains the property that is changing</param>
         /// <param name="complexObjectMemberName">The name of the property that is changing on complexObject</param>
-        override internal void EntityComplexMemberChanging(
+        internal
+        /// <summary>
+        /// Used to report that a complex property is about to change
+        /// The current value of the specified property is cached when this method is called.
+        /// </summary>
+        /// <param name="entityMemberName">The name of the top-level entity property that is changing</param>
+        /// <param name="complexObject">The complex object that contains the property that is changing</param>
+        /// <param name="complexObjectMemberName">The name of the property that is changing on complexObject</param>
+        override void EntityComplexMemberChanging(
             string entityMemberName,
             object complexObject,
             string complexObjectMemberName
@@ -392,7 +430,15 @@ namespace System.Data.Objects
         /// <param name="entityMemberName">The name of the top-level entity property that has changed</param>
         /// <param name="complexObject">The complex object that contains the property that changed</param>
         /// <param name="complexObjectMemberName">The name of the property that changed on complexObject</param>
-        override internal void EntityComplexMemberChanged(
+        internal
+        /// <summary>
+        /// Used to report that a complex property has been changed
+        /// The property value that was cached during EntityMemberChanging is now added to OriginalValues
+        /// </summary>
+        /// <param name="entityMemberName">The name of the top-level entity property that has changed</param>
+        /// <param name="complexObject">The complex object that contains the property that changed</param>
+        /// <param name="complexObjectMemberName">The name of the property that changed on complexObject</param>
+        override void EntityComplexMemberChanged(
             string entityMemberName,
             object complexObject,
             string complexObjectMemberName
@@ -470,7 +516,7 @@ namespace System.Data.Objects
             }
         }
 
-        override internal void Reset()
+        internal override void Reset()
         {
             _relationshipWrapper = null;
 

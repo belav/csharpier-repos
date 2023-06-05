@@ -43,6 +43,7 @@ namespace Novell.Directory.Ldap.Controls
     /// </summary>
     public class LdapPersistSearchControl : LdapControl
     {
+        public
         /// <summary>  Returns the change types to be monitored as a logical OR of any or
         /// all of these values: ADD, DELETE, MODIFY, and/or MODDN.
         ///
@@ -57,7 +58,7 @@ namespace Novell.Directory.Ldap.Controls
         /// to the value ANY which is defined as the logical OR of all of the
         /// preceding values.
         /// </summary>
-        virtual public int ChangeTypes
+        virtual int ChangeTypes
         {
             get { return m_changeTypes; }
             set
@@ -69,6 +70,7 @@ namespace Novell.Directory.Ldap.Controls
             }
         }
 
+        public
         /// <summary>  Returns true if entry change controls are to be returned with the
         /// search results.
         ///
@@ -82,7 +84,7 @@ namespace Novell.Directory.Ldap.Controls
         /// </summary>
         /// <param name="returnControls">  true to return entry change controls.
         /// </param>
-        virtual public bool ReturnControls
+        virtual bool ReturnControls
         {
             get { return m_returnControls; }
             set
@@ -94,6 +96,7 @@ namespace Novell.Directory.Ldap.Controls
             }
         }
 
+        public
         /// <summary>  getChangesOnly returns true if only changes are to be returned.
         /// Results from the initial search are not returned.
         ///
@@ -105,7 +108,7 @@ namespace Novell.Directory.Ldap.Controls
         /// </summary>
         /// <param name="changesOnly"> true to skip results for the initial search
         /// </param>
-        virtual public bool ChangesOnly
+        virtual bool ChangesOnly
         {
             get { return m_changesOnly; }
             set

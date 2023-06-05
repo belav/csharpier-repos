@@ -24,7 +24,7 @@ class HandleRefTest
     [DllImport(@"HandleRefNative")]
     private static extern HandleRef InvalidMarshalPointer_Return();
 
-    public unsafe static int Main()
+    public static unsafe int Main()
     {
         try
         {

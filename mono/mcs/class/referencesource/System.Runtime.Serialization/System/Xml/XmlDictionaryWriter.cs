@@ -61,12 +61,12 @@ namespace System.Xml
             WriteBase64AsyncResult.End(result);
         }
 
-        static public XmlDictionaryWriter CreateBinaryWriter(Stream stream)
+        public static XmlDictionaryWriter CreateBinaryWriter(Stream stream)
         {
             return CreateBinaryWriter(stream, null);
         }
 
-        static public XmlDictionaryWriter CreateBinaryWriter(
+        public static XmlDictionaryWriter CreateBinaryWriter(
             Stream stream,
             IXmlDictionary dictionary
         )
@@ -74,7 +74,7 @@ namespace System.Xml
             return CreateBinaryWriter(stream, dictionary, null);
         }
 
-        static public XmlDictionaryWriter CreateBinaryWriter(
+        public static XmlDictionaryWriter CreateBinaryWriter(
             Stream stream,
             IXmlDictionary dictionary,
             XmlBinaryWriterSession session
@@ -83,7 +83,7 @@ namespace System.Xml
             return CreateBinaryWriter(stream, dictionary, session, true);
         }
 
-        static public XmlDictionaryWriter CreateBinaryWriter(
+        public static XmlDictionaryWriter CreateBinaryWriter(
             Stream stream,
             IXmlDictionary dictionary,
             XmlBinaryWriterSession session,
@@ -95,17 +95,17 @@ namespace System.Xml
             return writer;
         }
 
-        static public XmlDictionaryWriter CreateTextWriter(Stream stream)
+        public static XmlDictionaryWriter CreateTextWriter(Stream stream)
         {
             return CreateTextWriter(stream, Encoding.UTF8, true);
         }
 
-        static public XmlDictionaryWriter CreateTextWriter(Stream stream, Encoding encoding)
+        public static XmlDictionaryWriter CreateTextWriter(Stream stream, Encoding encoding)
         {
             return CreateTextWriter(stream, encoding, true);
         }
 
-        static public XmlDictionaryWriter CreateTextWriter(
+        public static XmlDictionaryWriter CreateTextWriter(
             Stream stream,
             Encoding encoding,
             bool ownsStream
@@ -116,7 +116,7 @@ namespace System.Xml
             return writer;
         }
 
-        static public XmlDictionaryWriter CreateMtomWriter(
+        public static XmlDictionaryWriter CreateMtomWriter(
             Stream stream,
             Encoding encoding,
             int maxSizeInBytes,
@@ -135,7 +135,7 @@ namespace System.Xml
             );
         }
 
-        static public XmlDictionaryWriter CreateMtomWriter(
+        public static XmlDictionaryWriter CreateMtomWriter(
             Stream stream,
             Encoding encoding,
             int maxSizeInBytes,
@@ -160,7 +160,7 @@ namespace System.Xml
             return writer;
         }
 
-        static public XmlDictionaryWriter CreateDictionaryWriter(XmlWriter writer)
+        public static XmlDictionaryWriter CreateDictionaryWriter(XmlWriter writer)
         {
             if (writer == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(

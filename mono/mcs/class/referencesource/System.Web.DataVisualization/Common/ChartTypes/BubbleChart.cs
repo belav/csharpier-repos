@@ -84,6 +84,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         public BubbleChart()
             : base(true) { }
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -91,23 +92,25 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.Bubble; }
         }
 
+        public
         /// <summary>
         /// Number of supported Y value(s) per point
         /// </summary>
-        override public int YValuesPerPoint
+        override int YValuesPerPoint
         {
             get { return 2; }
         }
 
+        public
         /// <summary>
         /// Chart type with two y values used for scale ( bubble chart type )
         /// </summary>
-        override public bool SecondYScale
+        override bool SecondYScale
         {
             get { return true; }
         }
@@ -117,7 +120,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
@@ -136,7 +145,21 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="common">The Common elements object</param>
         /// <param name="area">Chart area for this chart</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        override protected void ProcessChartType(
+        protected
+        #endregion
+
+        #region Bubble chart methods
+
+        /// <summary>
+        /// This method recalculates size of the bars. This method is used
+        /// from Paint or Select method.
+        /// </summary>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is active</param>
+        /// <param name="graph">The Chart Graphics object</param>
+        /// <param name="common">The Common elements object</param>
+        /// <param name="area">Chart area for this chart</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        override void ProcessChartType(
             bool selection,
             ChartGraphics graph,
             CommonElements common,
@@ -153,7 +176,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="point">Data point.</param>
         /// <returns>Marker border size.</returns>
-        override protected int GetMarkerBorderSize(DataPointCustomProperties point)
+        protected
+        /// <summary>
+        /// Gets marker border size.
+        /// </summary>
+        /// <param name="point">Data point.</param>
+        /// <returns>Marker border size.</returns>
+        override int GetMarkerBorderSize(DataPointCustomProperties point)
         {
             if (point.series != null)
             {
@@ -173,7 +202,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="markerSize">Marker size.</param>
         /// <param name="markerImage">Marker image.</param>
         /// <returns>Marker width and height.</returns>
-        override protected SizeF GetMarkerSize(
+        protected
+        /// <summary>
+        /// Returns marker size.
+        /// </summary>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="point">Data point.</param>
+        /// <param name="markerSize">Marker size.</param>
+        /// <param name="markerImage">Marker image.</param>
+        /// <returns>Marker width and height.</returns>
+        override SizeF GetMarkerSize(
             ChartGraphics graph,
             CommonElements common,
             ChartArea area,
@@ -414,7 +454,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="value">Value to scale.</param>
         /// <param name="yValue">True if Y value is calculated, false if X.</param>
         /// <returns>Scaled values.</returns>
-        static internal double AxisScaleBubbleSize(
+        internal
+        /// <summary>
+        /// Scales the value used to determine the size of the Bubble.
+        /// </summary>
+        /// <param name="common">The Common elements object</param>
+        /// <param name="area">Chart area for this chart</param>
+        /// <param name="value">Value to scale.</param>
+        /// <param name="yValue">True if Y value is calculated, false if X.</param>
+        /// <returns>Scaled values.</returns>
+        static double AxisScaleBubbleSize(
             CommonElements common,
             ChartArea area,
             double value,
@@ -573,7 +622,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="area">Chart Area</param>
         /// <returns>Bubble Max size</returns>
-        static internal double GetBubbleMaxSize(ChartArea area)
+        internal
+        /// <summary>
+        /// Get value from custom attribute BubbleMaxSize
+        /// </summary>
+        /// <param name="area">Chart Area</param>
+        /// <returns>Bubble Max size</returns>
+        static double GetBubbleMaxSize(ChartArea area)
         {
             double maxPossibleBubbleSize = 15;
             // Try to find bubble size scale in the custom series properties

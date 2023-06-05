@@ -57,7 +57,17 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="errors"></param>
         /// <returns></returns>
-        static internal string CombineErrorMessage(
+        internal
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Returns the single error message from the list of errors
+        /// </summary>
+        /// <param name="errors"></param>
+        /// <returns></returns>
+        static string CombineErrorMessage(
             IEnumerable<System.Data.Metadata.Edm.EdmSchemaError> errors
         )
         {
@@ -82,7 +92,13 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="errors"></param>
         /// <returns></returns>
-        static internal string CombineErrorMessage(IEnumerable<EdmItemError> errors)
+        internal
+        /// <summary>
+        /// Returns the single error message from the list of errors
+        /// </summary>
+        /// <param name="errors"></param>
+        /// <returns></returns>
+        static string CombineErrorMessage(IEnumerable<EdmItemError> errors)
         {
             StringBuilder sb = new StringBuilder(System.Environment.NewLine);
             int count = 0;
@@ -127,7 +143,15 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="typeUsage">typeusage</param>
         /// <returns>the respective Model (C-Space) typeusage</returns>
-        static internal TypeUsage GetModelTypeUsage(TypeUsage typeUsage)
+        internal
+        /// <summary>
+        /// Returns a model (C-Space) typeusage for the given typeusage. if the type is already in c-space, it returns
+        /// the given typeusage. The typeUsage returned is created by invoking the provider service to map from provider
+        /// specific type to model type.
+        /// </summary>
+        /// <param name="typeUsage">typeusage</param>
+        /// <returns>the respective Model (C-Space) typeusage</returns>
+        static TypeUsage GetModelTypeUsage(TypeUsage typeUsage)
         {
             return typeUsage.GetModelTypeUsage();
         }
@@ -139,7 +163,15 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="member">EdmMember</param>
         /// <returns>the respective Model (C-Space) typeusage</returns>
-        static internal TypeUsage GetModelTypeUsage(EdmMember member)
+        internal
+        /// <summary>
+        /// Returns a model (C-Space) typeusage for the given member typeusage. if the type is already in c-space, it returns
+        /// the given typeusage. The typeUsage returned is created by invoking the provider service to map from provider
+        /// specific type to model type.
+        /// </summary>
+        /// <param name="member">EdmMember</param>
+        /// <returns>the respective Model (C-Space) typeusage</returns>
+        static TypeUsage GetModelTypeUsage(EdmMember member)
         {
             return GetModelTypeUsage(member.TypeUsage);
         }

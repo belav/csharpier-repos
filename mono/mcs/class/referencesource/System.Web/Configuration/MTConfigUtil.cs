@@ -23,10 +23,11 @@ internal class MTConfigUtil
     private static string s_machineConfigPath;
     private static VirtualPath s_appVirtualPath;
 
+    private
     // We only need to use the root config of 2.0 if we are building (and
     // not during runtime) and targeting 2.0 or 3.5.
-    static private bool? s_useMTConfig;
-    static private bool UseMTConfig
+    static bool? s_useMTConfig;
+    private static bool UseMTConfig
     {
         get
         {
@@ -44,7 +45,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetAppConfig().Profile;
-    static internal ProfileSection GetProfileAppConfig()
+    internal
+    // Counterpart for RuntimeConfig.GetAppConfig().Profile;
+    static ProfileSection GetProfileAppConfig()
     {
         if (!UseMTConfig)
         {
@@ -54,7 +57,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetAppConfig().Pages;
-    static internal PagesSection GetPagesAppConfig()
+    internal
+    // Counterpart for RuntimeConfig.GetAppConfig().Pages;
+    static PagesSection GetPagesAppConfig()
     {
         if (!UseMTConfig)
         {
@@ -64,7 +69,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetConfig().Pages;
-    static internal PagesSection GetPagesConfig()
+    internal
+    // Counterpart for RuntimeConfig.GetConfig().Pages;
+    static PagesSection GetPagesConfig()
     {
         if (!UseMTConfig)
         {
@@ -74,7 +81,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetConfig(string).Pages
-    static internal PagesSection GetPagesConfig(string vpath)
+    internal
+    // Counterpart for RuntimeConfig.GetConfig(string).Pages
+    static PagesSection GetPagesConfig(string vpath)
     {
         if (!UseMTConfig)
         {
@@ -84,7 +93,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetConfig(VirtualPath).Pages
-    static internal PagesSection GetPagesConfig(VirtualPath vpath)
+    internal
+    // Counterpart for RuntimeConfig.GetConfig(VirtualPath).Pages
+    static PagesSection GetPagesConfig(VirtualPath vpath)
     {
         if (!UseMTConfig)
         {
@@ -94,7 +105,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetConfig(HttpContext).Pages
-    static internal PagesSection GetPagesConfig(HttpContext context)
+    internal
+    // Counterpart for RuntimeConfig.GetConfig(HttpContext).Pages
+    static PagesSection GetPagesConfig(HttpContext context)
     {
         if (!UseMTConfig)
         {
@@ -104,7 +117,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetConfig().Compilation
-    static internal CompilationSection GetCompilationConfig()
+    internal
+    // Counterpart for RuntimeConfig.GetConfig().Compilation
+    static CompilationSection GetCompilationConfig()
     {
         if (!UseMTConfig)
         {
@@ -114,7 +129,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetAppConfig().Compilation
-    static internal CompilationSection GetCompilationAppConfig()
+    internal
+    // Counterpart for RuntimeConfig.GetAppConfig().Compilation
+    static CompilationSection GetCompilationAppConfig()
     {
         if (!UseMTConfig)
         {
@@ -124,7 +141,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetConfig(string).Compilation
-    static internal CompilationSection GetCompilationConfig(string vpath)
+    internal
+    // Counterpart for RuntimeConfig.GetConfig(string).Compilation
+    static CompilationSection GetCompilationConfig(string vpath)
     {
         if (!UseMTConfig)
         {
@@ -134,7 +153,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetConfig(VirtualPath).Compilation
-    static internal CompilationSection GetCompilationConfig(VirtualPath vpath)
+    internal
+    // Counterpart for RuntimeConfig.GetConfig(VirtualPath).Compilation
+    static CompilationSection GetCompilationConfig(VirtualPath vpath)
     {
         if (!UseMTConfig)
         {
@@ -144,7 +165,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart for RuntimeConfig.GetConfig(HttpContext).Compilation
-    static internal CompilationSection GetCompilationConfig(HttpContext context)
+    internal
+    // Counterpart for RuntimeConfig.GetConfig(HttpContext).Compilation
+    static CompilationSection GetCompilationConfig(HttpContext context)
     {
         if (!UseMTConfig)
         {
@@ -154,7 +177,9 @@ internal class MTConfigUtil
     }
 
     // Counterpart to RuntimeConfig.GetConfig()
-    static private S GetConfig<S>()
+    private
+    // Counterpart to RuntimeConfig.GetConfig()
+    static S GetConfig<S>()
         where S : ConfigurationSection
     {
         HttpContext context = HttpContext.Current;
@@ -169,28 +194,36 @@ internal class MTConfigUtil
     }
 
     // Counterpart to RuntimeConfig.GetAppConfig()
-    static private S GetAppConfig<S>()
+    private
+    // Counterpart to RuntimeConfig.GetAppConfig()
+    static S GetAppConfig<S>()
         where S : ConfigurationSection
     {
         return GetConfig<S>((VirtualPath)null);
     }
 
     // Counterpart to RuntimeConfig.GetConfig(HttpContext)
-    static private S GetConfig<S>(HttpContext context)
+    private
+    // Counterpart to RuntimeConfig.GetConfig(HttpContext)
+    static S GetConfig<S>(HttpContext context)
         where S : ConfigurationSection
     {
         return GetConfig<S>(context.ConfigurationPath);
     }
 
     // Counterpart to RuntimeConfig.GetConfig(string)
-    static private S GetConfig<S>(string vpath)
+    private
+    // Counterpart to RuntimeConfig.GetConfig(string)
+    static S GetConfig<S>(string vpath)
         where S : ConfigurationSection
     {
         return GetConfig<S>(VirtualPath.CreateNonRelativeAllowNull(vpath));
     }
 
     // Counterpart to RuntimeConfig.GetConfig(VirtualPath)
-    static private S GetConfig<S>(VirtualPath vpath)
+    private
+    // Counterpart to RuntimeConfig.GetConfig(VirtualPath)
+    static S GetConfig<S>(VirtualPath vpath)
         where S : ConfigurationSection
     {
         Tuple<Type, VirtualPath> key = new Tuple<Type, VirtualPath>(typeof(S), vpath);
@@ -204,7 +237,9 @@ internal class MTConfigUtil
     }
 
     // Actual method performing to work to retrieve the required ConfigurationSection.
-    static private S GetConfigHelper<S>(VirtualPath vpath)
+    private
+    // Actual method performing to work to retrieve the required ConfigurationSection.
+    static S GetConfigHelper<S>(VirtualPath vpath)
         where S : ConfigurationSection
     {
         string physicalPath = null;
@@ -245,7 +280,7 @@ internal class MTConfigUtil
         );
     }
 
-    static private string MachineConfigPath
+    private static string MachineConfigPath
     {
         get
         {
@@ -265,7 +300,7 @@ internal class MTConfigUtil
         }
     }
 
-    static private Configuration GetConfiguration(VirtualPath vpath, string physicalPath)
+    private static Configuration GetConfiguration(VirtualPath vpath, string physicalPath)
     {
         Configuration result;
         if (!s_configurations.TryGetValue(vpath, out result))
@@ -276,7 +311,7 @@ internal class MTConfigUtil
         return result;
     }
 
-    static private Configuration GetConfigurationHelper(VirtualPath vpath, string physicalPath)
+    private static Configuration GetConfigurationHelper(VirtualPath vpath, string physicalPath)
     {
         // Set up the configuration file map
         string machineConfigPath = MachineConfigPath;
@@ -307,7 +342,7 @@ internal class MTConfigUtil
         return config;
     }
 
-    static private bool IsAppRoot(VirtualPath path)
+    private static bool IsAppRoot(VirtualPath path)
     {
         if (s_appVirtualPath == null)
         {

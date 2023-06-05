@@ -126,7 +126,7 @@ namespace System.Globalization
             get { return (CAL_JULIAN); }
         }
 
-        static internal void CheckEraRange(int era)
+        internal static void CheckEraRange(int era)
         {
             if (era != CurrentEra && era != JulianEra)
             {
@@ -154,7 +154,7 @@ namespace System.Globalization
             }
         }
 
-        static internal void CheckMonthRange(int month)
+        internal static void CheckMonthRange(int month)
         {
             if (month < 1 || month > 12)
             {
@@ -175,7 +175,18 @@ namespace System.Globalization
         **  sure year/month values are correct.
         ============================================================================*/
 
-        static internal void CheckDayRange(int year, int month, int day)
+        internal
+        /*=================================GetDefaultInstance==========================
+        **Action: Check for if the day value is valid.
+        **Returns:
+        **Arguments:
+        **Exceptions:
+        **Notes:
+        **  Before calling this method, call CheckYearEraRange()/CheckMonthRange() to make
+        **  sure year/month values are correct.
+        ============================================================================*/
+
+        static void CheckDayRange(int year, int month, int day)
         {
             if (year == 1 && month == 1)
             {
@@ -207,7 +218,10 @@ namespace System.Globalization
 
         // Returns a given date part of this DateTime. This method is used
         // to compute the year, day-of-year, month, or day part.
-        static internal int GetDatePart(long ticks, int part)
+        internal
+        // Returns a given date part of this DateTime. This method is used
+        // to compute the year, day-of-year, month, or day part.
+        static int GetDatePart(long ticks, int part)
         {
             // Gregorian 1/1/0001 is Julian 1/3/0001. Remember DateTime(0) is refered to Gregorian 1/1/0001.
             // The following line convert Gregorian ticks to Julian ticks.
@@ -253,7 +267,9 @@ namespace System.Globalization
         }
 
         // Returns the tick count corresponding to the given year, month, and day.
-        static internal long DateToTicks(int year, int month, int day)
+        internal
+        // Returns the tick count corresponding to the given year, month, and day.
+        static long DateToTicks(int year, int month, int day)
         {
             int[] days = (year % 4 == 0) ? DaysToMonth366 : DaysToMonth365;
             int y = year - 1;

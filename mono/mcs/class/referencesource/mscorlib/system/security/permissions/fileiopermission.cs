@@ -40,7 +40,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class FileIOPermission
+    public sealed class FileIOPermission
         : CodeAccessPermission,
             IUnrestrictedPermission,
             IBuiltInPermission
@@ -625,7 +625,7 @@ namespace System.Security.Permissions
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecuritySafeCritical]
-        private unsafe static bool CheckExtraPathCharacters(string path)
+        private static unsafe bool CheckExtraPathCharacters(string path)
         {
             // FileIOPermission doesn't allow for normalizing across various volume names. This means "C:\" and
             // "\\?\C:\" won't be considered correctly. In addition there are many other aliases for the volume

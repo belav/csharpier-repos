@@ -67,7 +67,7 @@ namespace RabbitMQ.Client.Content
     public class MapMessageReader : BasicMessageReader, IMapMessageReader
     {
         ///<summary>MIME type associated with QPid MapMessages.</summary>
-        public readonly static string MimeType = MapMessageBuilder.MimeType;
+        public static readonly string MimeType = MapMessageBuilder.MimeType;
 
         // ^ repeated here for convenience
 

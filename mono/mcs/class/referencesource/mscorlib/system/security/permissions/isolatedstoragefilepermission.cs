@@ -16,7 +16,7 @@ namespace System.Security.Permissions
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class IsolatedStorageFilePermission
+    public sealed class IsolatedStorageFilePermission
         : IsolatedStoragePermission,
             IBuiltInPermission
     {

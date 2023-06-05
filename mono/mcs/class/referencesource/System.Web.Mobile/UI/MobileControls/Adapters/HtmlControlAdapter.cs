@@ -209,7 +209,7 @@ namespace System.Web.UI.MobileControls.Adapters
         // Can be used by adapter that adds custom attributes for
         // multi-media functionalities
 
-        private readonly static String[] _multiMediaAttributes =
+        private static readonly String[] _multiMediaAttributes =
         {
             "src",
             "soundstart",

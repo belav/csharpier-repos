@@ -51,7 +51,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
 
         [Kept]
         [KeptBackingField]
-        static private int StaticProperty
+        private static int StaticProperty
         {
             [Kept]
             get;

@@ -37,7 +37,9 @@ namespace MonoTests.System.Security.Cryptography
     public class AllTests
     {
         // because most crypto stuff works with byte[] buffers
-        static public void AssertEquals(string msg, byte[] array1, byte[] array2)
+        public
+        // because most crypto stuff works with byte[] buffers
+        static void AssertEquals(string msg, byte[] array1, byte[] array2)
         {
             if ((array1 == null) && (array2 == null))
                 return;
@@ -642,7 +644,7 @@ namespace MonoTests.System.Security.Cryptography
             0x9B
         };
 
-        static public DSAParameters GetKey(bool includePrivateKey)
+        public static DSAParameters GetKey(bool includePrivateKey)
         {
             DSAParameters p = new DSAParameters();
             p.Counter = dsaCounter;
@@ -1258,7 +1260,7 @@ namespace MonoTests.System.Security.Cryptography
             0xc1
         };
 
-        static public RSAParameters GetRsaKey(bool includePrivateKey)
+        public static RSAParameters GetRsaKey(bool includePrivateKey)
         {
             RSAParameters p = new RSAParameters();
             if (includePrivateKey)

@@ -9,12 +9,12 @@ namespace System.Runtime
 
     sealed class BackoffTimeoutHelper
     {
-        readonly static int maxSkewMilliseconds = (int)(
+        static readonly int maxSkewMilliseconds = (int)(
             IOThreadTimer.SystemTimeResolutionTicks / TimeSpan.TicksPerMillisecond
         );
-        readonly static long maxDriftTicks = IOThreadTimer.SystemTimeResolutionTicks * 2;
-        readonly static TimeSpan defaultInitialWaitTime = TimeSpan.FromMilliseconds(1);
-        readonly static TimeSpan defaultMaxWaitTime = TimeSpan.FromMinutes(1);
+        static readonly long maxDriftTicks = IOThreadTimer.SystemTimeResolutionTicks * 2;
+        static readonly TimeSpan defaultInitialWaitTime = TimeSpan.FromMilliseconds(1);
+        static readonly TimeSpan defaultMaxWaitTime = TimeSpan.FromMinutes(1);
 
         DateTime deadline;
         TimeSpan maxWaitTime;

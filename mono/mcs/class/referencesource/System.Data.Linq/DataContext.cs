@@ -963,7 +963,15 @@ namespace System.Data.Linq
         /// <param name="methodInfo">The reflection MethodInfo for the method to invoke.</param>
         /// <param name="parameters">The parameters for the method call.</param>
         /// <returns>The result of the method call. Use this type's ReturnValue property to access the actual return value.</returns>
-        internal protected IExecuteResult ExecuteMethodCall(
+        protected
+        /// <summary>
+        /// Executes the equivalent of the specified method call on the database server.
+        /// </summary>
+        /// <param name="instance">The instance the method is being called on.</param>
+        /// <param name="methodInfo">The reflection MethodInfo for the method to invoke.</param>
+        /// <param name="parameters">The parameters for the method call.</param>
+        /// <returns>The result of the method call. Use this type's ReturnValue property to access the actual return value.</returns>
+        internal IExecuteResult ExecuteMethodCall(
             object instance,
             MethodInfo methodInfo,
             params object[] parameters
@@ -998,7 +1006,7 @@ namespace System.Data.Linq
             "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "Microsoft: Generic parameters are required for strong-typing of the return type."
         )]
-        internal protected IQueryable<TResult> CreateMethodCallQuery<TResult>(
+        protected internal IQueryable<TResult> CreateMethodCallQuery<TResult>(
             object instance,
             MethodInfo methodInfo,
             params object[] parameters
@@ -1056,7 +1064,12 @@ namespace System.Data.Linq
         /// Execute a dynamic insert
         /// </summary>
         /// <param name="entity"></param>
-        internal protected void ExecuteDynamicInsert(object entity)
+        protected
+        /// <summary>
+        /// Execute a dynamic insert
+        /// </summary>
+        /// <param name="entity"></param>
+        internal void ExecuteDynamicInsert(object entity)
         {
             CheckDispose();
             if (entity == null)
@@ -1076,7 +1089,12 @@ namespace System.Data.Linq
         /// Execute a dynamic update
         /// </summary>
         /// <param name="entity"></param>
-        internal protected void ExecuteDynamicUpdate(object entity)
+        protected
+        /// <summary>
+        /// Execute a dynamic update
+        /// </summary>
+        /// <param name="entity"></param>
+        internal void ExecuteDynamicUpdate(object entity)
         {
             CheckDispose();
             if (entity == null)
@@ -1100,7 +1118,12 @@ namespace System.Data.Linq
         /// Execute a dynamic delete
         /// </summary>
         /// <param name="entity"></param>
-        internal protected void ExecuteDynamicDelete(object entity)
+        protected
+        /// <summary>
+        /// Execute a dynamic delete
+        /// </summary>
+        /// <param name="entity"></param>
+        internal void ExecuteDynamicDelete(object entity)
         {
             CheckDispose();
             if (entity == null)

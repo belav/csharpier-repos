@@ -2,13 +2,13 @@ class Test
 {
     static int count;
 
-    static public bool operator ==(Test x, Test y)
+    public static bool operator ==(Test x, Test y)
     {
         ++count;
         return false;
     }
 
-    static public bool operator !=(Test x, Test y)
+    public static bool operator !=(Test x, Test y)
     {
         return true;
     }

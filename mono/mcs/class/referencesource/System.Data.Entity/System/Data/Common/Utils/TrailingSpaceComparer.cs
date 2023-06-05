@@ -21,8 +21,8 @@ namespace System.Data.Common.Utils
     {
         private TrailingSpaceComparer() { }
 
-        internal readonly static TrailingSpaceComparer Instance = new TrailingSpaceComparer();
-        private readonly static IEqualityComparer<object> s_template =
+        internal static readonly TrailingSpaceComparer Instance = new TrailingSpaceComparer();
+        private static readonly IEqualityComparer<object> s_template =
             EqualityComparer<object>.Default;
 
         bool IEqualityComparer<object>.Equals(object x, object y)

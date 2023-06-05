@@ -2778,7 +2778,7 @@ namespace System.Net.Cache
             //
             //
             //
-            internal unsafe static bool UnsafeAsciiLettersNoCaseEqual(
+            internal static unsafe bool UnsafeAsciiLettersNoCaseEqual(
                 char* s1,
                 int start,
                 int length,

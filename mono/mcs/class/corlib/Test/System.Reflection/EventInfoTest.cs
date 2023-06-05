@@ -262,7 +262,7 @@ namespace MonoTests.System.Reflection
 
         private class StaticDerived : StaticBase
         {
-            public new static event Action MyEvent
+            public static new event Action MyEvent
             {
                 add { }
                 remove { }

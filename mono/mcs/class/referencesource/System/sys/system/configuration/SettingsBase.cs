@@ -172,19 +172,19 @@ namespace System.Configuration
                 pp.IsDirty = false;
         }
 
-        virtual public SettingsPropertyCollection Properties
+        public virtual SettingsPropertyCollection Properties
         {
             get { return _Properties; }
         }
-        virtual public SettingsProviderCollection Providers
+        public virtual SettingsProviderCollection Providers
         {
             get { return _Providers; }
         }
-        virtual public SettingsPropertyValueCollection PropertyValues
+        public virtual SettingsPropertyValueCollection PropertyValues
         {
             get { return _PropertyValues; }
         }
-        virtual public SettingsContext Context
+        public virtual SettingsContext Context
         {
             get { return _Context; }
         }

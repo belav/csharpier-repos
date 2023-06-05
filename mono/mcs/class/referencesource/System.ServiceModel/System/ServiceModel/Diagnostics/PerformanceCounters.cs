@@ -38,13 +38,13 @@ namespace System.ServiceModel.Diagnostics
             null;
         static List<ServiceModelPerformanceCounters> performanceCountersList = null;
 
-        static internal PerformanceCounterScope Scope
+        internal static PerformanceCounterScope Scope
         {
             get { return PerformanceCounters.scope; }
             set { PerformanceCounters.scope = value; }
         }
 
-        static internal bool PerformanceCountersEnabled
+        internal static bool PerformanceCountersEnabled
         {
             get
             {
@@ -53,7 +53,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal bool MinimalPerformanceCountersEnabled
+        internal static bool MinimalPerformanceCountersEnabled
         {
             get { return (PerformanceCounters.scope == PerformanceCounterScope.Default); }
         }
@@ -109,7 +109,7 @@ namespace System.ServiceModel.Diagnostics
             return DiagnosticSection.UnsafeGetSection().PerformanceCounters;
         }
 
-        static internal PerformanceCounter GetOperationPerformanceCounter(
+        internal static PerformanceCounter GetOperationPerformanceCounter(
             string perfCounterName,
             string instanceName
         )
@@ -122,7 +122,7 @@ namespace System.ServiceModel.Diagnostics
             );
         }
 
-        static internal PerformanceCounter GetEndpointPerformanceCounter(
+        internal static PerformanceCounter GetEndpointPerformanceCounter(
             string perfCounterName,
             string instanceName
         )
@@ -135,7 +135,7 @@ namespace System.ServiceModel.Diagnostics
             );
         }
 
-        static internal PerformanceCounter GetServicePerformanceCounter(
+        internal static PerformanceCounter GetServicePerformanceCounter(
             string perfCounterName,
             string instanceName
         )
@@ -148,7 +148,7 @@ namespace System.ServiceModel.Diagnostics
             );
         }
 
-        static internal PerformanceCounter GetDefaultPerformanceCounter(
+        internal static PerformanceCounter GetDefaultPerformanceCounter(
             string perfCounterName,
             string instanceName
         )
@@ -161,7 +161,7 @@ namespace System.ServiceModel.Diagnostics
             );
         }
 
-        static internal PerformanceCounter GetPerformanceCounter(
+        internal static PerformanceCounter GetPerformanceCounter(
             string categoryName,
             string perfCounterName,
             string instanceName,
@@ -185,7 +185,7 @@ namespace System.ServiceModel.Diagnostics
             return counter;
         }
 
-        static internal PerformanceCounter GetPerformanceCounterInternal(
+        internal static PerformanceCounter GetPerformanceCounterInternal(
             string categoryName,
             string perfCounterName,
             string instanceName,
@@ -895,12 +895,12 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void AuthenticationFailed(Message message, Uri listenUri)
+        internal static void AuthenticationFailed(Message message, Uri listenUri)
         {
             PerformanceCounters.CallOnAllCounters("AuthenticationFailed", message, listenUri, true);
         }
 
-        static internal void AuthorizationFailed(string operationName)
+        internal static void AuthorizationFailed(string operationName)
         {
             EndpointDispatcher el = GetEndpointDispatcher();
             if (null != el)
@@ -1018,7 +1018,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal EndpointDispatcher GetEndpointDispatcher()
+        internal static EndpointDispatcher GetEndpointDispatcher()
         {
             EndpointDispatcher endpointDispatcher = null;
             OperationContext currentContext = OperationContext.Current;
@@ -1093,7 +1093,7 @@ namespace System.ServiceModel.Diagnostics
             return null;
         }
 
-        static internal void TracePerformanceCounterUpdateFailure(
+        internal static void TracePerformanceCounterUpdateFailure(
             string instanceName,
             string perfCounterName
         )

@@ -6634,11 +6634,19 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="endColor">The color from the gradient end.</param>
         /// <param name="relativePosition">The relative position.</param>
         /// <returns>Result color.</returns>
-        static internal Color GetGradientColor(
-            Color beginColor,
-            Color endColor,
-            double relativePosition
-        )
+        internal
+        #endregion
+
+        #region Color manipulation methods
+
+        /// <summary>
+        /// Returns the gradient color from a gradient position.
+        /// </summary>
+        /// <param name="beginColor">The color from the gradient beginning</param>
+        /// <param name="endColor">The color from the gradient end.</param>
+        /// <param name="relativePosition">The relative position.</param>
+        /// <returns>Result color.</returns>
+        static Color GetGradientColor(Color beginColor, Color endColor, double relativePosition)
         {
             // Check if position is valid
             if (relativePosition < 0 || relativePosition > 1 || double.IsNaN(relativePosition))

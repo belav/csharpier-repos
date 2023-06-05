@@ -1012,10 +1012,11 @@ namespace System.Net
         }
     }
 
+    internal
     /// <devdoc>
     ///    <para>Used to Pool streams in a thread safe manner</para>
     /// </devdoc>
-    sealed internal class InterlockedStack
+    sealed class InterlockedStack
     {
         private readonly Stack _stack = new Stack();
 #if !MONO

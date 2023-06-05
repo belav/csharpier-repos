@@ -885,7 +885,7 @@ namespace System.Xml
 #if !SILVERLIGHT
         private static bool? s_enableLegacyXmlSettings = null;
 
-        static internal bool EnableLegacyXmlSettings()
+        internal static bool EnableLegacyXmlSettings()
         {
             if (s_enableLegacyXmlSettings.HasValue)
             {

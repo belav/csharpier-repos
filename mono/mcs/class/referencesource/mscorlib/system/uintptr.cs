@@ -27,7 +27,7 @@ namespace System
     public struct UIntPtr : ISerializable
     {
         [SecurityCritical]
-        unsafe private void* m_value;
+        private unsafe void* m_value;
 
         public static readonly UIntPtr Zero;
 
@@ -86,7 +86,7 @@ namespace System
 #endif
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe override bool Equals(Object obj)
+        public override unsafe bool Equals(Object obj)
         {
             if (obj is UIntPtr)
             {
@@ -96,7 +96,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe override int GetHashCode()
+        public override unsafe int GetHashCode()
         {
             return unchecked((int)((long)m_value)) & 0x7fffffff;
         }
@@ -120,7 +120,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe override String ToString()
+        public override unsafe String ToString()
         {
             Contract.Ensures(Contract.Result<String>() != null);
 
@@ -145,7 +145,7 @@ namespace System
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static explicit operator uint(UIntPtr value)
+        public static unsafe explicit operator uint(UIntPtr value)
         {
 #if WIN32
             return (uint)value.m_value;
@@ -156,7 +156,7 @@ namespace System
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static explicit operator ulong(UIntPtr value)
+        public static unsafe explicit operator ulong(UIntPtr value)
         {
             return (ulong)value.m_value;
         }
@@ -179,14 +179,14 @@ namespace System
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static bool operator ==(UIntPtr value1, UIntPtr value2)
+        public static unsafe bool operator ==(UIntPtr value1, UIntPtr value2)
         {
             return value1.m_value == value2.m_value;
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static bool operator !=(UIntPtr value1, UIntPtr value2)
+        public static unsafe bool operator !=(UIntPtr value1, UIntPtr value2)
         {
             return value1.m_value != value2.m_value;
         }

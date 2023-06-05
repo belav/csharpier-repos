@@ -84,7 +84,7 @@ namespace System.Xml.Tests
             get { return TestModule.StandardPath; }
         }
 
-        public virtual new CGenericTestModule TestModule
+        public new virtual CGenericTestModule TestModule
         {
             get { return (CGenericTestModule)base.TestModule; }
             set { base.TestModule = value; }

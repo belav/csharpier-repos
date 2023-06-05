@@ -301,10 +301,10 @@ namespace System.Windows.Forms.CarbonInternal
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int SetControlDragTrackingEnabled(IntPtr view, bool enabled);
+        static extern int SetControlDragTrackingEnabled(IntPtr view, bool enabled);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int AddDragItemFlavor(
+        static extern int AddDragItemFlavor(
             IntPtr dragref,
             IntPtr itemref,
             IntPtr flavortype,
@@ -314,29 +314,29 @@ namespace System.Windows.Forms.CarbonInternal
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int CountDragItems(IntPtr dragref, ref UInt32 count);
+        static extern int CountDragItems(IntPtr dragref, ref UInt32 count);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int CountDragItemFlavors(IntPtr dragref, IntPtr itemref, ref UInt32 count);
+        static extern int CountDragItemFlavors(IntPtr dragref, IntPtr itemref, ref UInt32 count);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int GetDragItemReferenceNumber(
+        static extern int GetDragItemReferenceNumber(
             IntPtr dragref,
             UInt32 index,
             ref IntPtr itemref
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int NewDrag(ref IntPtr dragref);
+        static extern int NewDrag(ref IntPtr dragref);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int TrackDrag(IntPtr dragref, ref EventRecord eventrecord, IntPtr region);
+        static extern int TrackDrag(IntPtr dragref, ref EventRecord eventrecord, IntPtr region);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int DisposeDrag(IntPtr dragref);
+        static extern int DisposeDrag(IntPtr dragref);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int GetDragAllowableActions(IntPtr dragref, ref UInt32 actions);
+        static extern int GetDragAllowableActions(IntPtr dragref, ref UInt32 actions);
     }
 
     internal struct EventRecord
@@ -489,7 +489,7 @@ namespace System.Windows.Forms.CarbonInternal
         }
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int GetFlavorDataSize(
+        static extern int GetFlavorDataSize(
             IntPtr dragref,
             IntPtr itemref,
             IntPtr flavorref,
@@ -497,7 +497,7 @@ namespace System.Windows.Forms.CarbonInternal
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int GetFlavorData(
+        static extern int GetFlavorData(
             IntPtr dragref,
             IntPtr itemref,
             IntPtr flavorref,
@@ -507,7 +507,7 @@ namespace System.Windows.Forms.CarbonInternal
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int GetFlavorFlags(
+        static extern int GetFlavorFlags(
             IntPtr dragref,
             IntPtr itemref,
             IntPtr flavorref,
@@ -515,7 +515,7 @@ namespace System.Windows.Forms.CarbonInternal
         );
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static int GetFlavorType(
+        static extern int GetFlavorType(
             IntPtr dragref,
             IntPtr itemref,
             UInt32 index,

@@ -173,7 +173,7 @@ namespace System.ServiceModel.Routing.Configuration
             BaseRemove(this.GetElementKey(element));
         }
 
-        new public FilterTableEntryCollection this[string name]
+        public new FilterTableEntryCollection this[string name]
         {
             get { return (FilterTableEntryCollection)BaseGet(name); }
         }
@@ -294,7 +294,7 @@ namespace System.ServiceModel.Routing.Configuration
             BaseRemove(this.GetElementKey(element));
         }
 
-        new public BackupEndpointCollection this[string name]
+        public new BackupEndpointCollection this[string name]
         {
             get { return (BackupEndpointCollection)BaseGet(name); }
         }
@@ -448,7 +448,7 @@ namespace System.ServiceModel.Routing.Configuration
             }
         }
 
-        new public FilterElement this[string name]
+        public new FilterElement this[string name]
         {
             get { return (FilterElement)BaseGet(name); }
         }
@@ -514,7 +514,7 @@ namespace System.ServiceModel.Routing.Configuration
             }
         }
 
-        new public NamespaceElement this[string name]
+        public new NamespaceElement this[string name]
         {
             get { return (NamespaceElement)BaseGet(name); }
         }

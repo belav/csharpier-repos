@@ -15,7 +15,7 @@ namespace JitInliningTest
             arr[4] = 1024;
         }
 
-        static public int Main()
+        public static int Main()
         {
             int retval = -1056;
             int[] myArray = { 1, 2, 3, 4, 5 };

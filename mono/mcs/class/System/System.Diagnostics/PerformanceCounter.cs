@@ -117,7 +117,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static private unsafe extern IntPtr GetImpl_icall(
+        private static extern unsafe IntPtr GetImpl_icall(
             char* category,
             int category_length,
             char* counter,

@@ -13,14 +13,14 @@ namespace System.ServiceModel.Security.Tokens
 {
     static class SecurityContextSecurityTokenHelper
     {
-        static public SessionSecurityToken ConvertSctToSessionToken(
+        public static SessionSecurityToken ConvertSctToSessionToken(
             SecurityContextSecurityToken sct
         )
         {
             return ConvertSctToSessionToken(sct, SecureConversationVersion.Default);
         }
 
-        static public SessionSecurityToken ConvertSctToSessionToken(
+        public static SessionSecurityToken ConvertSctToSessionToken(
             SecurityContextSecurityToken sct,
             SecureConversationVersion version
         )
@@ -105,7 +105,7 @@ namespace System.ServiceModel.Security.Tokens
             );
         }
 
-        static public SecurityContextSecurityToken ConvertSessionTokenToSecurityContextSecurityToken(
+        public static SecurityContextSecurityToken ConvertSessionTokenToSecurityContextSecurityToken(
             SessionSecurityToken token
         )
         {

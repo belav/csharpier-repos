@@ -156,7 +156,7 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern static Type GetGenericTypeDefinition_impl(RuntimeType type);
+        static extern Type GetGenericTypeDefinition_impl(RuntimeType type);
 
         internal static Type GetGenericTypeDefinition(RuntimeType type)
         {
@@ -222,16 +222,16 @@ namespace System
         internal static extern CorElementType GetCorElementType(RuntimeType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool HasInstantiation(RuntimeType type);
+        internal static extern bool HasInstantiation(RuntimeType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool IsComObject(RuntimeType type);
+        internal static extern bool IsComObject(RuntimeType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool IsInstanceOfType(RuntimeType type, Object o);
+        internal static extern bool IsInstanceOfType(RuntimeType type, Object o);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool HasReferences(RuntimeType type);
+        internal static extern bool HasReferences(RuntimeType type);
 
         internal static bool IsComObject(RuntimeType type, bool isGenericCOM)
         {
@@ -256,22 +256,22 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int GetArrayRank(RuntimeType type);
+        internal static extern int GetArrayRank(RuntimeType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static RuntimeAssembly GetAssembly(RuntimeType type);
+        internal static extern RuntimeAssembly GetAssembly(RuntimeType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static RuntimeType GetElementType(RuntimeType type);
+        internal static extern RuntimeType GetElementType(RuntimeType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static RuntimeModule GetModule(RuntimeType type);
+        internal static extern RuntimeModule GetModule(RuntimeType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool IsGenericVariable(RuntimeType type);
+        internal static extern bool IsGenericVariable(RuntimeType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static RuntimeType GetBaseType(RuntimeType type);
+        internal static extern RuntimeType GetBaseType(RuntimeType type);
 
         internal static bool CanCastTo(RuntimeType type, RuntimeType target)
         {
@@ -282,10 +282,10 @@ namespace System
         static extern bool type_is_assignable_from(Type a, Type b);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool IsGenericTypeDefinition(RuntimeType type);
+        internal static extern bool IsGenericTypeDefinition(RuntimeType type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static IntPtr GetGenericParameterInfo(RuntimeType type);
+        internal static extern IntPtr GetGenericParameterInfo(RuntimeType type);
 
         internal static bool IsSubclassOf(RuntimeType childType, RuntimeType baseType)
         {
@@ -293,11 +293,11 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool is_subclass_of(IntPtr childType, IntPtr baseType);
+        internal static extern bool is_subclass_of(IntPtr childType, IntPtr baseType);
 
         [PreserveDependency(".ctor()", "System.Runtime.CompilerServices.IsByRefLikeAttribute")]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool IsByRefLike(RuntimeType type);
+        internal static extern bool IsByRefLike(RuntimeType type);
 
         internal static bool IsTypeDefinition(RuntimeType type)
         {

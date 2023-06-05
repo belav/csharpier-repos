@@ -34,7 +34,7 @@ namespace Samples.Common
 {
     public class Matrices
     {
-        static public object[] GetList()
+        public static object[] GetList()
         {
             return new object[]
             {
@@ -48,7 +48,7 @@ namespace Samples.Common
             };
         }
 
-        static public Matrix GetMatrix(int index)
+        public static Matrix GetMatrix(int index)
         {
             // not defined (-1) or first (0)
             if (index <= 0)

@@ -370,7 +370,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeTitle_Visible"),
             ParenthesizePropertyNameAttribute(true),
         ]
-        virtual public bool Visible
+        public virtual bool Visible
         {
             get { return _visible; }
             set

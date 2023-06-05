@@ -18,7 +18,7 @@ namespace System.Configuration
     using System.Xml;
     using Microsoft.Win32;
 
-    static internal class UrlPath
+    internal static class UrlPath
     {
         internal static string GetDirectoryOrRootName(string path)
         {

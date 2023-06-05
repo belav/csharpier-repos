@@ -309,7 +309,7 @@ namespace System.IO
         }
 
         [System.Security.SecurityCritical]
-        unsafe private int WriteFileNative(
+        private unsafe int WriteFileNative(
             byte[] bytes,
             int offset,
             int count,

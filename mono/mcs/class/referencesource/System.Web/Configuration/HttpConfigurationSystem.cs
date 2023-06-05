@@ -47,24 +47,25 @@ namespace System.Web.Configuration
         internal const string InetsrvDirectoryName = "inetsrv";
         internal const string ApplicationHostConfigFileName = "applicationHost.config";
 
-        static private object s_initLock;
-        static private volatile bool s_inited;
+        private static object s_initLock;
+        private static volatile bool s_inited;
 
+        private
         // Supports IInternalConfigSystem and the file change dependency delegate
-        static private HttpConfigurationSystem s_httpConfigSystem;
-        static private IConfigSystem s_configSystem;
+        static HttpConfigurationSystem s_httpConfigSystem;
+        private static IConfigSystem s_configSystem;
 
-        static private IConfigMapPath s_configMapPath;
-        static private WebConfigurationHost s_configHost;
-        static private FileChangeEventHandler s_fileChangeEventHandler;
-        static private string s_MsCorLibDirectory;
-        static private string s_MachineConfigurationDirectory;
-        static private string s_MachineConfigurationFilePath;
-        static private string s_RootWebConfigurationFilePath;
+        private static IConfigMapPath s_configMapPath;
+        private static WebConfigurationHost s_configHost;
+        private static FileChangeEventHandler s_fileChangeEventHandler;
+        private static string s_MsCorLibDirectory;
+        private static string s_MachineConfigurationDirectory;
+        private static string s_MachineConfigurationFilePath;
+        private static string s_RootWebConfigurationFilePath;
 
-        static private IInternalConfigRoot s_configRoot;
-        static private IInternalConfigSettingsFactory s_configSettingsFactory;
-        static private bool s_initComplete;
+        private static IInternalConfigRoot s_configRoot;
+        private static IInternalConfigSettingsFactory s_configSettingsFactory;
+        private static bool s_initComplete;
 
         static HttpConfigurationSystem()
         {
@@ -76,7 +77,11 @@ namespace System.Web.Configuration
         //
         // Set this configuration system to the default for requests ConfigurationManager.GetSection
         //
-        static internal void EnsureInit(
+        internal
+        //
+        // Set this configuration system to the default for requests ConfigurationManager.GetSection
+        //
+        static void EnsureInit(
             IConfigMapPath configMapPath,
             bool listenToFileChanges,
             bool initComplete
@@ -154,16 +159,17 @@ namespace System.Web.Configuration
             );
         }
 
-        static internal void CompleteInit()
+        internal static void CompleteInit()
         {
             Debug.Assert(!s_initComplete, "!s_initComplete");
             s_configSettingsFactory.CompleteInit();
             s_configSettingsFactory = null;
         }
 
+        internal
         // Return true if the HttpConfigurationSystem is being used
         // by ConfigurationManager.
-        static internal bool UseHttpConfigurationSystem
+        static bool UseHttpConfigurationSystem
         {
             get
             {
@@ -189,9 +195,10 @@ namespace System.Web.Configuration
             }
         }
 
+        internal
         // Return true if the HttpConfigurationSystem is already loaded
         // by ConfigurationManager.
-        static internal bool IsSet
+        static bool IsSet
         {
             get { return s_httpConfigSystem != null; }
         }
@@ -220,7 +227,12 @@ namespace System.Web.Configuration
         //
         // Get the Config for the current context
         //
-        static internal object GetSection(string sectionName)
+        internal
+        // GetSection
+        //
+        // Get the Config for the current context
+        //
+        static object GetSection(string sectionName)
         {
             HttpContext context = HttpContext.Current;
             if (context != null)
@@ -239,7 +251,12 @@ namespace System.Web.Configuration
         //
         // Get the Config for a specific path
         //
-        static internal object GetSection(string sectionName, VirtualPath path)
+        internal
+        // GetSection
+        //
+        // Get the Config for a specific path
+        //
+        static object GetSection(string sectionName, VirtualPath path)
         {
             Debug.Assert(UseHttpConfigurationSystem, "UseHttpConfigurationSystem");
 
@@ -250,7 +267,7 @@ namespace System.Web.Configuration
             return pathData.ConfigRecord.GetSection(sectionName);
         }
 
-        static internal object GetSection(string sectionName, string path)
+        internal static object GetSection(string sectionName, string path)
         {
             return GetSection(sectionName, VirtualPath.CreateNonRelativeAllowNull(path));
         }
@@ -259,7 +276,12 @@ namespace System.Web.Configuration
         //
         // Get the Config for a specific path
         //
-        static internal object GetApplicationSection(string sectionName)
+        internal
+        // GetAppSection
+        //
+        // Get the Config for a specific path
+        //
+        static object GetApplicationSection(string sectionName)
         {
             Debug.Assert(UseHttpConfigurationSystem, "UseHttpConfigurationSystem");
 
@@ -274,7 +296,12 @@ namespace System.Web.Configuration
         // Return the unique configuration record for a config path.
         // Used by CachedPathData to retreive config records.
         //
-        static internal IInternalConfigRecord GetUniqueConfigRecord(string configPath)
+        internal
+        //
+        // Return the unique configuration record for a config path.
+        // Used by CachedPathData to retreive config records.
+        //
+        static IInternalConfigRecord GetUniqueConfigRecord(string configPath)
         {
             if (!UseHttpConfigurationSystem)
                 return null;
@@ -283,7 +310,7 @@ namespace System.Web.Configuration
             return configRecord;
         }
 
-        static internal void AddFileDependency(String file)
+        internal static void AddFileDependency(String file)
         {
             if (String.IsNullOrEmpty(file))
                 return;
@@ -313,7 +340,7 @@ namespace System.Web.Configuration
             HttpRuntime.OnConfigChange(message);
         }
 
-        static internal String MsCorLibDirectory
+        internal static String MsCorLibDirectory
         {
             [FileIOPermissionAttribute(
                 SecurityAction.Assert,
@@ -331,7 +358,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal string MachineConfigurationDirectory
+        internal static string MachineConfigurationDirectory
         {
             get
             {
@@ -367,7 +394,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal string MachineConfigurationFilePath
+        internal static string MachineConfigurationFilePath
         {
             get
             {
@@ -383,7 +410,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal string RootWebConfigurationFilePath
+        internal static string RootWebConfigurationFilePath
         {
             get
             {

@@ -639,7 +639,7 @@ namespace System.Net.Quic.Implementations.MsQuic
             );
         }
 
-        internal unsafe override ValueTask ConnectAsync(
+        internal override unsafe ValueTask ConnectAsync(
             CancellationToken cancellationToken = default
         )
         {

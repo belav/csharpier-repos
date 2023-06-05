@@ -1350,7 +1350,7 @@ namespace System.ServiceModel.Description
 
     static class XmlSerializerHelper
     {
-        static internal XmlReflectionMember GetXmlReflectionMember(
+        internal static XmlReflectionMember GetXmlReflectionMember(
             MessagePartDescription part,
             bool isRpc,
             bool isEncoded,
@@ -1380,7 +1380,7 @@ namespace System.ServiceModel.Description
             );
         }
 
-        static internal XmlReflectionMember GetXmlReflectionMember(
+        internal static XmlReflectionMember GetXmlReflectionMember(
             XmlName memberName,
             XmlName elementName,
             string ns,

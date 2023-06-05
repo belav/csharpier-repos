@@ -51,7 +51,7 @@ namespace System.Web.UI.MobileControls
     )]
     public class StyleSheet : MobileControl
     {
-        private readonly static StyleSheet _default = new StyleSheet();
+        private static readonly StyleSheet _default = new StyleSheet();
         private StyleCollection _styles = new StyleCollection();
         private StyleSheet _externalStyleSheet;
         private ArrayList _duplicateStyles = new ArrayList();

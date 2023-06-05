@@ -1011,7 +1011,7 @@ namespace System.Security.Cryptography
 
         // digits == number of DWORDs
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static void DWORDFromLittleEndian(uint* x, int digits, byte* block)
+        internal static unsafe void DWORDFromLittleEndian(uint* x, int digits, byte* block)
         {
             int i;
             int j;
@@ -1041,7 +1041,7 @@ namespace System.Security.Cryptography
 
         // digits == number of DWORDs
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static void DWORDFromBigEndian(uint* x, int digits, byte* block)
+        internal static unsafe void DWORDFromBigEndian(uint* x, int digits, byte* block)
         {
             int i;
             int j;
@@ -1071,7 +1071,7 @@ namespace System.Security.Cryptography
 #if FEATURE_CRYPTO || FEATURE_LEGACYNETCFCRYPTO
         // digits == number of QWORDs
         [System.Security.SecurityCritical] // auto-generated
-        internal unsafe static void QuadWordFromBigEndian(UInt64* x, int digits, byte* block)
+        internal static unsafe void QuadWordFromBigEndian(UInt64* x, int digits, byte* block)
         {
             int i;
             int j;

@@ -90,10 +90,11 @@ namespace ICSharpCode.SharpZipLib.Checksums
     )]
     public sealed class Adler32 : IChecksum
     {
+        static
         /// <summary>
         /// largest prime smaller than 65536
         /// </summary>
-        readonly static uint BASE = 65521;
+        readonly uint BASE = 65521;
 
         uint checksum;
 

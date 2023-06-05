@@ -37,19 +37,19 @@ namespace System.ServiceModel.Description
             this.metadata = metadata;
         }
 
-        static public string ServiceDescriptionDialect
+        public static string ServiceDescriptionDialect
         {
             get { return System.Web.Services.Description.ServiceDescription.Namespace; }
         }
-        static public string XmlSchemaDialect
+        public static string XmlSchemaDialect
         {
             get { return System.Xml.Schema.XmlSchema.Namespace; }
         }
-        static public string PolicyDialect
+        public static string PolicyDialect
         {
             get { return MetadataStrings.WSPolicy.NamespaceUri; }
         }
-        static public string MetadataExchangeDialect
+        public static string MetadataExchangeDialect
         {
             get { return MetadataStrings.MetadataExchangeStrings.Namespace; }
         }

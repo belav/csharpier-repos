@@ -16,7 +16,13 @@ namespace System.Data.Linq
         /// </summary>
         /// <param name="mi"></param>
         /// <returns></returns>
-        static internal bool IsSupportedTopLevelMethod(MethodInfo mi)
+        internal
+        /// <summary>
+        /// This list of top-level methods that are supported in subqueries.
+        /// </summary>
+        /// <param name="mi"></param>
+        /// <returns></returns>
+        static bool IsSupportedTopLevelMethod(MethodInfo mi)
         {
             if (!IsSequenceOperatorCall(mi))
                 return false;

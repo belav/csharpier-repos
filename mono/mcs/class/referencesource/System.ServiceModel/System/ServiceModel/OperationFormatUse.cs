@@ -12,7 +12,7 @@ namespace System.ServiceModel
 
     static class OperationFormatUseHelper
     {
-        static public bool IsDefined(OperationFormatUse x)
+        public static bool IsDefined(OperationFormatUse x)
         {
             return x == OperationFormatUse.Literal || x == OperationFormatUse.Encoded || false;
         }

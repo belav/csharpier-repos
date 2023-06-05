@@ -54,94 +54,103 @@ namespace Novell.Directory.Ldap
             usage = USER_APPLICATIONS;
         }
 
+        public
         /// <summary> Returns the object identifer of the syntax of the attribute, in
         /// dotted numerical format.
         ///
         /// </summary>
         /// <returns> The object identifer of the attribute's syntax.
         /// </returns>
-        virtual public System.String SyntaxString
+        virtual System.String SyntaxString
         {
             get { return syntaxString; }
         }
 
+        public
         /// <summary> Returns the name of the attribute type which this attribute derives
         /// from, or null if there is no superior attribute.
         ///
         /// </summary>
         /// <returns> The attribute's superior attribute, or null if there is none.
         /// </returns>
-        virtual public System.String Superior
+        virtual System.String Superior
         {
             get { return superior; }
         }
 
+        public
         /// <summary> Returns true if the attribute is single-valued.
         ///
         /// </summary>
         /// <returns> True if the attribute is single-valued; false if the attribute
         /// is multi-valued.
         /// </returns>
-        virtual public bool SingleValued
+        virtual bool SingleValued
         {
             get { return single; }
         }
 
+        public
         /// <summary> Returns the matching rule for this attribute.
         ///
         /// </summary>
         /// <returns> The attribute's equality matching rule; null if it has no equality
         /// matching rule.
         /// </returns>
-        virtual public System.String EqualityMatchingRule
+        virtual System.String EqualityMatchingRule
         {
             get { return equality; }
         }
 
+        public
         /// <summary> Returns the ordering matching rule for this attribute.
         ///
         /// </summary>
         /// <returns> The attribute's ordering matching rule; null if it has no ordering
         /// matching rule.
         /// </returns>
-        virtual public System.String OrderingMatchingRule
+        virtual System.String OrderingMatchingRule
         {
             get { return ordering; }
         }
 
+        public
         /// <summary> Returns the substring matching rule for this attribute.
         ///
         /// </summary>
         /// <returns> The attribute's substring matching rule; null if it has no substring
         /// matching rule.
         /// </returns>
-        virtual public System.String SubstringMatchingRule
+        virtual System.String SubstringMatchingRule
         {
             get { return substring; }
         }
 
+        public
         /// <summary> Returns true if the attribute is a collective attribute.
         ///
         /// </summary>
         /// <returns> True if the attribute is a collective; false if the attribute
         /// is not a collective attribute.
         /// </returns>
-        virtual public bool Collective
+        virtual bool Collective
         {
             get { return collective; }
         }
 
+        public
         /// <summary> Returns false if the attribute is read-only.
         ///
         /// </summary>
         /// <returns> False if the attribute is read-only; true if the attribute
         /// is read-write.
         /// </returns>
-        virtual public bool UserModifiable
+        virtual bool UserModifiable
         {
             get { return userMod; }
         }
 
+        public
         /// <summary> Returns the usage of the attribute.
         ///
         /// </summary>
@@ -149,7 +158,7 @@ namespace Novell.Directory.Ldap
         /// DIRECTORY_OPERATION, DISTRIBUTED_OPERATION or
         /// DSA_OPERATION.
         /// </returns>
-        virtual public int Usage
+        virtual int Usage
         {
             get { return usage; }
         }

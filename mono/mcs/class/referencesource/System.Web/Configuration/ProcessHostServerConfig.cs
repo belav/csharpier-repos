@@ -31,7 +31,7 @@ namespace System.Web.Configuration
 
         string _siteNameForCurrentApplication;
 
-        static internal IServerConfig GetInstance()
+        internal static IServerConfig GetInstance()
         {
             if (s_instance == null)
             {

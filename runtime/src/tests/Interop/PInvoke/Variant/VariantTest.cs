@@ -32,7 +32,7 @@ partial class Test_VariantTest
 
     private static readonly DateTime DateValue = new DateTime(2018, 11, 6);
 
-    private unsafe static void TestByValue(bool hasComSupport)
+    private static unsafe void TestByValue(bool hasComSupport)
     {
         Assert.True(Marshal_ByValue_Byte((byte)NumericValue, NumericValue));
         Assert.True(Marshal_ByValue_SByte((sbyte)NumericValue, (sbyte)NumericValue));
@@ -81,7 +81,7 @@ partial class Test_VariantTest
         );
     }
 
-    private unsafe static void TestByRef(bool hasComSupport)
+    private static unsafe void TestByRef(bool hasComSupport)
     {
         object obj;
 
@@ -179,14 +179,14 @@ partial class Test_VariantTest
         Assert.Equal(NumericValue, (int)obj);
     }
 
-    private unsafe static void TestOut()
+    private static unsafe void TestOut()
     {
         Assert.True(Marshal_Out(out object obj, NumericValue));
         Assert.True(obj is int);
         Assert.Equal(NumericValue, (int)obj);
     }
 
-    private unsafe static void TestFieldByValue(bool hasComSupport)
+    private static unsafe void TestFieldByValue(bool hasComSupport)
     {
         ObjectWrapper wrapper = new ObjectWrapper();
 
@@ -279,7 +279,7 @@ partial class Test_VariantTest
         }
     }
 
-    private unsafe static void TestFieldByRef(bool hasComSupport)
+    private static unsafe void TestFieldByRef(bool hasComSupport)
     {
         ObjectWrapper wrapper = new ObjectWrapper();
 

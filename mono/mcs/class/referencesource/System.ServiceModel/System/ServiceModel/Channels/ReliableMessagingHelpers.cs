@@ -1540,10 +1540,10 @@ namespace System.ServiceModel.Channels
 
     static class ReliableMessagingConstants
     {
-        static public TimeSpan UnknownInitiationTime = TimeSpan.FromSeconds(2);
-        static public TimeSpan RequestorIterationTime = TimeSpan.FromSeconds(10);
-        static public TimeSpan RequestorReceiveTime = TimeSpan.FromSeconds(10);
-        static public int MaxSequenceRanges = 128;
+        public static TimeSpan UnknownInitiationTime = TimeSpan.FromSeconds(2);
+        public static TimeSpan RequestorIterationTime = TimeSpan.FromSeconds(10);
+        public static TimeSpan RequestorReceiveTime = TimeSpan.FromSeconds(10);
+        public static int MaxSequenceRanges = 128;
     }
 
     // This class and its derivates attempt to unify 3 similar request reply patterns.

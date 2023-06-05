@@ -37,7 +37,7 @@ namespace System.ServiceModel.Configuration
             get { return (IdentityElement)base[ConfigurationStrings.Identity]; }
         }
 
-        internal protected void Copy(EndpointAddressElementBase source)
+        protected internal void Copy(EndpointAddressElementBase source)
         {
             if (this.IsReadOnly())
             {

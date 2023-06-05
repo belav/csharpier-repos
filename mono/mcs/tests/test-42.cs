@@ -44,7 +44,7 @@ class Z
         set { }
     }
 
-    static public Z operator ++(Z v)
+    public static Z operator ++(Z v)
     {
         v.v++;
         return v;

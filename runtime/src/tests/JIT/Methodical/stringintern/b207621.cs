@@ -14,7 +14,7 @@ public class Test_b207621
     }
 
     [Fact]
-    static public int TestEntryPoint()
+    public static int TestEntryPoint()
     {
         string a = null;
         string b = null;

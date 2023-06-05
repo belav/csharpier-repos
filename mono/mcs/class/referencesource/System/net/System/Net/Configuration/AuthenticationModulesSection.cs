@@ -155,7 +155,7 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal AuthenticationModulesSectionInternal GetSection()
+        internal static AuthenticationModulesSectionInternal GetSection()
         {
             lock (AuthenticationModulesSectionInternal.ClassSyncObject)
             {

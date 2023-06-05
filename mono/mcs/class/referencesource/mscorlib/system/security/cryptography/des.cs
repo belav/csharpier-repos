@@ -86,7 +86,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public DES Create()
+        public static
+        //
+        // public methods
+        //
+
+        new DES Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.DESCryptoServiceProvider();
@@ -95,7 +100,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public DES Create(String algName)
+        public static new DES Create(String algName)
         {
             return (DES)CryptoConfig.CreateFromName(algName);
         }

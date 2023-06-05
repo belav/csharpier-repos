@@ -1635,27 +1635,27 @@ namespace Tests.Collections
             SearchingThrowsFromInvalidValue = false;
         }
 
-        protected override sealed bool IsResetNotSupported
+        protected sealed override bool IsResetNotSupported
         {
             get { return _isResetNotSupported; }
         }
 
-        protected override sealed bool IsGenericCompatibility
+        protected sealed override bool IsGenericCompatibility
         {
             get { return _isGenericCompatibility; }
         }
 
-        protected override sealed bool ItemsMustBeUnique
+        protected sealed override bool ItemsMustBeUnique
         {
             get { return _itemsMustBeUnique; }
         }
 
-        protected override sealed bool ItemsMustBeNonNull
+        protected sealed override bool ItemsMustBeNonNull
         {
             get { return default(T) != null; }
         }
 
-        protected override sealed object GenerateItem()
+        protected sealed override object GenerateItem()
         {
             return CreateItem();
         }
@@ -1678,7 +1678,7 @@ namespace Tests.Collections
         /// </summary>
         /// <param name="items">The items to initialize the enumerable with.</param>
         /// <returns>An instance of the enumerable under test containing the given items.</returns>
-        protected override sealed IEnumerable GetEnumerable(object[] items)
+        protected sealed override IEnumerable GetEnumerable(object[] items)
         {
             return CreateList(items == null ? Enumerable.Empty<T>() : items.Cast<T>());
         }
@@ -1695,7 +1695,7 @@ namespace Tests.Collections
         /// </summary>
         /// <param name="enumerable">The <see cref="IEnumerable" /> to invalidate enumerators for.</param>
         /// <returns>The new set of items in the <see cref="IEnumerable" /></returns>
-        protected override sealed object[] InvalidateEnumerator(IEnumerable enumerable)
+        protected sealed override object[] InvalidateEnumerator(IEnumerable enumerable)
         {
             return InvalidateEnumerator((TList)enumerable).OfType<object>().ToArray();
         }

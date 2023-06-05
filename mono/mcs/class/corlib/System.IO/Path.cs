@@ -997,7 +997,10 @@ namespace System.IO
 
         // required for FileIOPermission (and most proibably reusable elsewhere too)
         // both path MUST be "full paths"
-        static internal bool IsPathSubsetOf(string subset, string path)
+        internal
+        // required for FileIOPermission (and most proibably reusable elsewhere too)
+        // both path MUST be "full paths"
+        static bool IsPathSubsetOf(string subset, string path)
         {
             if (subset.Length > path.Length)
                 return false;

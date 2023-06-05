@@ -28,7 +28,7 @@ namespace System.Security.Permissions
     // The only difference between this class and System.Security.Policy.StrongName is that this one
     // allows m_name to be null.  We should merge this class with System.Security.Policy.StrongName
     [Serializable]
-    sealed internal class StrongName2
+    internal sealed class StrongName2
     {
         public StrongNamePublicKeyBlob m_publicKeyBlob;
         public String m_name;
@@ -108,7 +108,7 @@ namespace System.Security.Permissions
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class StrongNameIdentityPermission : CodeAccessPermission, IBuiltInPermission
+    public sealed class StrongNameIdentityPermission : CodeAccessPermission, IBuiltInPermission
     {
         //------------------------------------------------------
         //

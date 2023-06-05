@@ -21,28 +21,28 @@ namespace System.Data.Common
         protected DbDataReader()
             : base() { }
 
-        abstract public int Depth { get; }
+        public abstract int Depth { get; }
 
-        abstract public int FieldCount { get; }
+        public abstract int FieldCount { get; }
 
-        abstract public bool HasRows { get; }
+        public abstract bool HasRows { get; }
 
-        abstract public bool IsClosed { get; }
+        public abstract bool IsClosed { get; }
 
-        abstract public int RecordsAffected { get; }
+        public abstract int RecordsAffected { get; }
 
-        virtual public int VisibleFieldCount
+        public virtual int VisibleFieldCount
         {
             // NOTE: This is virtual because not all providers may choose to support
             //       this property, since it was added in Whidbey
             get { return FieldCount; }
         }
 
-        abstract public object this[int ordinal] { get; }
+        public abstract object this[int ordinal] { get; }
 
-        abstract public object this[string name] { get; }
+        public abstract object this[string name] { get; }
 
-        virtual public void Close() { }
+        public virtual void Close() { }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         public void Dispose()
@@ -58,27 +58,27 @@ namespace System.Data.Common
             }
         }
 
-        abstract public string GetDataTypeName(int ordinal);
+        public abstract string GetDataTypeName(int ordinal);
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        abstract public IEnumerator GetEnumerator();
+        public abstract IEnumerator GetEnumerator();
 
-        abstract public Type GetFieldType(int ordinal);
+        public abstract Type GetFieldType(int ordinal);
 
-        abstract public string GetName(int ordinal);
+        public abstract string GetName(int ordinal);
 
-        abstract public int GetOrdinal(string name);
+        public abstract int GetOrdinal(string name);
 
-        virtual public DataTable GetSchemaTable()
+        public virtual DataTable GetSchemaTable()
         {
             throw new NotSupportedException();
         }
 
-        abstract public bool GetBoolean(int ordinal);
+        public abstract bool GetBoolean(int ordinal);
 
-        abstract public byte GetByte(int ordinal);
+        public abstract byte GetByte(int ordinal);
 
-        abstract public long GetBytes(
+        public abstract long GetBytes(
             int ordinal,
             long dataOffset,
             byte[] buffer,
@@ -86,9 +86,9 @@ namespace System.Data.Common
             int length
         );
 
-        abstract public char GetChar(int ordinal);
+        public abstract char GetChar(int ordinal);
 
-        abstract public long GetChars(
+        public abstract long GetChars(
             int ordinal,
             long dataOffset,
             char[] buffer,
@@ -107,7 +107,7 @@ namespace System.Data.Common
             return GetDbDataReader(ordinal);
         }
 
-        virtual protected DbDataReader GetDbDataReader(int ordinal)
+        protected virtual DbDataReader GetDbDataReader(int ordinal)
         {
             // NOTE: This method is virtual because we're required to implement
             //       it however most providers won't support it. Only the OLE DB
@@ -115,24 +115,24 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        abstract public DateTime GetDateTime(int ordinal);
+        public abstract DateTime GetDateTime(int ordinal);
 
-        abstract public Decimal GetDecimal(int ordinal);
+        public abstract Decimal GetDecimal(int ordinal);
 
-        abstract public double GetDouble(int ordinal);
+        public abstract double GetDouble(int ordinal);
 
-        abstract public float GetFloat(int ordinal);
+        public abstract float GetFloat(int ordinal);
 
-        abstract public Guid GetGuid(int ordinal);
+        public abstract Guid GetGuid(int ordinal);
 
-        abstract public Int16 GetInt16(int ordinal);
+        public abstract Int16 GetInt16(int ordinal);
 
-        abstract public Int32 GetInt32(int ordinal);
+        public abstract Int32 GetInt32(int ordinal);
 
-        abstract public Int64 GetInt64(int ordinal);
+        public abstract Int64 GetInt64(int ordinal);
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        virtual public Type GetProviderSpecificFieldType(int ordinal)
+        public virtual Type GetProviderSpecificFieldType(int ordinal)
         {
             // NOTE: This is virtual because not all providers may choose to support
             //       this method, since it was added in Whidbey.
@@ -140,7 +140,7 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        virtual public Object GetProviderSpecificValue(int ordinal)
+        public virtual Object GetProviderSpecificValue(int ordinal)
         {
             // NOTE: This is virtual because not all providers may choose to support
             //       this method, since it was added in Whidbey
@@ -148,16 +148,16 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
-        virtual public int GetProviderSpecificValues(object[] values)
+        public virtual int GetProviderSpecificValues(object[] values)
         {
             // NOTE: This is virtual because not all providers may choose to support
             //       this method, since it was added in Whidbey
             return GetValues(values);
         }
 
-        abstract public String GetString(int ordinal);
+        public abstract String GetString(int ordinal);
 
-        virtual public Stream GetStream(int ordinal)
+        public virtual Stream GetStream(int ordinal)
         {
             using (MemoryStream bufferStream = new MemoryStream())
             {
@@ -175,7 +175,7 @@ namespace System.Data.Common
             }
         }
 
-        virtual public TextReader GetTextReader(int ordinal)
+        public virtual TextReader GetTextReader(int ordinal)
         {
             if (IsDBNull(ordinal))
             {
@@ -187,9 +187,9 @@ namespace System.Data.Common
             }
         }
 
-        abstract public Object GetValue(int ordinal);
+        public abstract Object GetValue(int ordinal);
 
-        virtual public T GetFieldValue<T>(int ordinal)
+        public virtual T GetFieldValue<T>(int ordinal)
         {
             return (T)GetValue(ordinal);
         }
@@ -199,7 +199,7 @@ namespace System.Data.Common
             return GetFieldValueAsync<T>(ordinal, CancellationToken.None);
         }
 
-        virtual public Task<T> GetFieldValueAsync<T>(
+        public virtual Task<T> GetFieldValueAsync<T>(
             int ordinal,
             CancellationToken cancellationToken
         )
@@ -221,16 +221,16 @@ namespace System.Data.Common
             }
         }
 
-        abstract public int GetValues(object[] values);
+        public abstract int GetValues(object[] values);
 
-        abstract public bool IsDBNull(int ordinal);
+        public abstract bool IsDBNull(int ordinal);
 
         public Task<bool> IsDBNullAsync(int ordinal)
         {
             return IsDBNullAsync(ordinal, CancellationToken.None);
         }
 
-        virtual public Task<bool> IsDBNullAsync(int ordinal, CancellationToken cancellationToken)
+        public virtual Task<bool> IsDBNullAsync(int ordinal, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -249,16 +249,16 @@ namespace System.Data.Common
             }
         }
 
-        abstract public bool NextResult();
+        public abstract bool NextResult();
 
-        abstract public bool Read();
+        public abstract bool Read();
 
         public Task<bool> ReadAsync()
         {
             return ReadAsync(CancellationToken.None);
         }
 
-        virtual public Task<bool> ReadAsync(CancellationToken cancellationToken)
+        public virtual Task<bool> ReadAsync(CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -282,7 +282,7 @@ namespace System.Data.Common
             return NextResultAsync(CancellationToken.None);
         }
 
-        virtual public Task<bool> NextResultAsync(CancellationToken cancellationToken)
+        public virtual Task<bool> NextResultAsync(CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
             {

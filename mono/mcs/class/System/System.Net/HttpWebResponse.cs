@@ -209,7 +209,7 @@ namespace System.Net
             }
         }
 
-        virtual public CookieCollection Cookies
+        public virtual CookieCollection Cookies
         {
             get
             {
@@ -258,7 +258,7 @@ namespace System.Net
             }
         }
 
-        virtual public string Method
+        public virtual string Method
         {
             get
             {
@@ -294,12 +294,12 @@ namespace System.Net
             }
         }
 
-        virtual public HttpStatusCode StatusCode
+        public virtual HttpStatusCode StatusCode
         {
             get { return statusCode; }
         }
 
-        virtual public string StatusDescription
+        public virtual string StatusDescription
         {
             get
             {

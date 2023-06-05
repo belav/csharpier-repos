@@ -67,7 +67,7 @@ namespace RabbitMQ.Client.Content
     public class MapMessageBuilder : BasicMessageBuilder, IMapMessageBuilder
     {
         ///<summary>MIME type associated with QPid MapMessages.</summary>
-        public readonly static string MimeType = "jms/map-message";
+        public static readonly string MimeType = "jms/map-message";
 
         protected IDictionary m_table = new Hashtable();
 

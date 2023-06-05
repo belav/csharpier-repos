@@ -33,7 +33,7 @@ namespace System.ServiceModel
             ApplyConfiguration(configurationName);
         }
 
-        static public bool IsPnrpAvailable
+        public static bool IsPnrpAvailable
         {
             get { return PnrpPeerResolver.IsPnrpAvailable; }
         }

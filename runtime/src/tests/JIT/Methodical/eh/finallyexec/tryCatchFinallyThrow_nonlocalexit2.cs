@@ -28,7 +28,7 @@ namespace Test_tryCatchFinallyThrow_nonlocalexit2_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void Middle1(int i)
+        public static void Middle1(int i)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Test_tryCatchFinallyThrow_nonlocalexit2_cs
             Console.WriteLine("middle1 L1");
         }
 
-        static public void Middle2(int i)
+        public static void Middle2(int i)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace Test_tryCatchFinallyThrow_nonlocalexit2_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             // start recording
             testLog.StartRecording();

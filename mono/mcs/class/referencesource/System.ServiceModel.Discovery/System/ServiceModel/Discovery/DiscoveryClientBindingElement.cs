@@ -11,7 +11,7 @@ namespace System.ServiceModel.Discovery
     using System.ServiceModel.Description;
 
     [Fx.Tag.XamlVisible(false)]
-    sealed public class DiscoveryClientBindingElement : BindingElement
+    public sealed class DiscoveryClientBindingElement : BindingElement
     {
         [SuppressMessage(
             FxCop.Category.Security,

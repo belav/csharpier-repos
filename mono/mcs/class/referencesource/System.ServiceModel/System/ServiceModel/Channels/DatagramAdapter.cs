@@ -95,7 +95,7 @@ namespace System.ServiceModel.Channels
                 get { return this.channels; }
             }
 
-            new internal object ThisLock
+            internal new object ThisLock
             {
                 get { return base.ThisLock; }
             }

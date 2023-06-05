@@ -47,14 +47,14 @@ namespace PEAPI
     /// </summary>
     internal class FileImage : BinaryWriter
     {
-        internal readonly static uint[] iByteMask =
+        internal static readonly uint[] iByteMask =
         {
             0x000000FF,
             0x0000FF00,
             0x00FF0000,
             0xFF000000
         };
-        internal readonly static ulong[] lByteMask =
+        internal static readonly ulong[] lByteMask =
         {
             0x00000000000000FF,
             0x000000000000FF00,
@@ -65,8 +65,8 @@ namespace PEAPI
             0x00FF000000000000,
             0xFF00000000000000
         };
-        internal readonly static uint nibble0Mask = 0x0000000F;
-        internal readonly static uint nibble1Mask = 0x000000F0;
+        internal static readonly uint nibble0Mask = 0x0000000F;
+        internal static readonly uint nibble1Mask = 0x000000F0;
 
         private static readonly byte[] DOSHeader =
         {
@@ -1496,7 +1496,7 @@ namespace PEAPI
 
     public class Hex
     {
-        readonly static char[] hexDigit =
+        static readonly char[] hexDigit =
         {
             '0',
             '1',
@@ -1515,8 +1515,8 @@ namespace PEAPI
             'E',
             'F'
         };
-        readonly static uint[] iByteMask = { 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000 };
-        readonly static ulong[] lByteMask =
+        static readonly uint[] iByteMask = { 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000 };
+        static readonly ulong[] lByteMask =
         {
             0x00000000000000FF,
             0x000000000000FF00,
@@ -1527,8 +1527,8 @@ namespace PEAPI
             0x00FF000000000000,
             0xFF00000000000000
         };
-        readonly static uint nibble0Mask = 0x0000000F;
-        readonly static uint nibble1Mask = 0x000000F0;
+        static readonly uint nibble0Mask = 0x0000000F;
+        static readonly uint nibble1Mask = 0x000000F0;
 
         public static String Byte(int b)
         {

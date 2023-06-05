@@ -126,9 +126,9 @@ public class Request
         Console.WriteLine("Fragment <num threads> [random seed]");
     }
 
-    static public int RandomSeed;
+    public static int RandomSeed;
 
-    static public int Main(String[] args)
+    public static int Main(String[] args)
     {
         int numThreads = 0;
 

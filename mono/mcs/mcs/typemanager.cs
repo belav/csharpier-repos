@@ -2089,7 +2089,7 @@ namespace Mono.CSharp
 
     partial class TypeManager
     {
-        static public string CSharpName(IList<TypeSpec> types)
+        public static string CSharpName(IList<TypeSpec> types)
         {
             if (types.Count == 0)
                 return string.Empty;
@@ -2105,12 +2105,12 @@ namespace Mono.CSharp
             return sb.ToString();
         }
 
-        static public string GetFullNameSignature(MemberSpec mi)
+        public static string GetFullNameSignature(MemberSpec mi)
         {
             return mi.GetSignatureForError();
         }
 
-        static public string CSharpSignature(MemberSpec mb)
+        public static string CSharpSignature(MemberSpec mb)
         {
             return mb.GetSignatureForError();
         }

@@ -53,7 +53,7 @@ namespace System.Web.Http.Cors
         /// <returns>
         /// Returns <see cref="T:System.Threading.Tasks.Task`1" />. The task object representing the asynchronous operation.
         /// </returns>
-        protected async override Task<HttpResponseMessage> SendAsync(
+        protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
         )

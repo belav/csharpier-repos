@@ -474,7 +474,7 @@ namespace System.Diagnostics
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static FileVersionInfo GetVersionInfo(string fileName)
+        public static unsafe FileVersionInfo GetVersionInfo(string fileName)
         {
             // Check for the existence of the file. File.Exists returns false
             // if Read permission is denied.

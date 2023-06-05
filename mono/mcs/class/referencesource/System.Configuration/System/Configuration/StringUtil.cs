@@ -18,7 +18,7 @@ namespace System.Configuration
     using System.Xml;
     using Microsoft.Win32;
 
-    static internal class StringUtil
+    internal static class StringUtil
     {
 #if UNUSED_CODE
         /*

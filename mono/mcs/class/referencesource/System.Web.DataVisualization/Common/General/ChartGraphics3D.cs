@@ -2899,7 +2899,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="multiSeries">Indicates that multiple series are painted at the same time (stacked or side-by-side).</param>
         /// <param name="lineSegmentType">Returns line segment type.</param>
         /// <returns>Function retrns 0, 1 or 2. 0 - Do not draw surface, 1 - draw on the back, 2 - draw in front.</returns>
-        static internal int ShouldDrawLineChartSurface(
+        internal
+        /// <summary>
+        /// Helper method, which indicates if area chart surface should be drawn or not.
+        /// </summary>
+        /// <param name="area">Chart area object.</param>
+        /// <param name="reversedSeriesOrder">Series are drawn in reversed order.</param>
+        /// <param name="surfaceName">Surface name.</param>
+        /// <param name="boundaryRectVisibleSurfaces">Visible surfaces of the bounding rectangle.</param>
+        /// <param name="color">Point back color.</param>
+        /// <param name="points">Array of all points.</param>
+        /// <param name="firstPoint">First point.</param>
+        /// <param name="secondPoint">Second point.</param>
+        /// <param name="multiSeries">Indicates that multiple series are painted at the same time (stacked or side-by-side).</param>
+        /// <param name="lineSegmentType">Returns line segment type.</param>
+        /// <returns>Function retrns 0, 1 or 2. 0 - Do not draw surface, 1 - draw on the back, 2 - draw in front.</returns>
+        static int ShouldDrawLineChartSurface(
             ChartArea area,
             bool reversedSeriesOrder,
             SurfaceNames surfaceName,

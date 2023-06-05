@@ -365,9 +365,9 @@ namespace System.Web.ClientServices.Providers
 
     internal static class ClientDataManager
     {
-        static private ClientData _applicationClientData;
-        static private ClientData _userClientData;
-        static private string _curUserName;
+        private static ClientData _applicationClientData;
+        private static ClientData _userClientData;
+        private static string _curUserName;
 
         internal static ClientData GetAppClientData(bool useIsolatedStore)
         {

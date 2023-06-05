@@ -5,10 +5,10 @@ using System.Threading;
 class Driver
 {
     [DllImport("libc")]
-    extern static void pthread_exit(IntPtr value);
+    static extern void pthread_exit(IntPtr value);
 
     [DllImport("kernel32")]
-    extern static void ExitThread(IntPtr value);
+    static extern void ExitThread(IntPtr value);
 
     static Thread GetThread1()
     {

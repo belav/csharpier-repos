@@ -96,7 +96,7 @@ namespace System.ServiceModel
         }
 
         // This is effectively just a copy of WSHttpBinding.TryCreate(), only it news up the 2007 version
-        internal new static bool TryCreate(
+        internal static new bool TryCreate(
             SecurityBindingElement sbe,
             TransportBindingElement transport,
             ReliableSessionBindingElement rsbe,

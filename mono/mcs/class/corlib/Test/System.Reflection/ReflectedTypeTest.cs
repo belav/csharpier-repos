@@ -53,20 +53,20 @@ namespace MonoTests.System.Reflection
 
             public void BaseMethod() { }
 
-            static public int BaseStaticField;
+            public static int BaseStaticField;
 
-            static public int BaseStaticProperty
+            public static int BaseStaticProperty
             {
                 get { return BaseStaticField; }
             }
 
-            static public event EventHandler BaseStaticEvent
+            public static event EventHandler BaseStaticEvent
             {
                 add { }
                 remove { }
             }
 
-            static public void BaseStaticMethod() { }
+            public static void BaseStaticMethod() { }
 
             public class BaseInner { }
         }
@@ -88,20 +88,20 @@ namespace MonoTests.System.Reflection
 
             public void DerivedMethod() { }
 
-            static public int DerivedStaticField;
+            public static int DerivedStaticField;
 
-            static public int DerivedStaticProperty
+            public static int DerivedStaticProperty
             {
                 get { return DerivedStaticField; }
             }
 
-            static public event EventHandler DerivedStaticEvent
+            public static event EventHandler DerivedStaticEvent
             {
                 add { }
                 remove { }
             }
 
-            static public void DerivedStaticMethod() { }
+            public static void DerivedStaticMethod() { }
 
             public class DerivedInner { }
         }

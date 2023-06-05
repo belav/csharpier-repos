@@ -39,12 +39,12 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private int InstanceField;
 
         [Kept]
-        static private int StaticField;
+        private static int StaticField;
 
         [Kept]
         [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-        static private Type StaticWithDAM;
+        private static Type StaticWithDAM;
 
         private int UnusedField;
 

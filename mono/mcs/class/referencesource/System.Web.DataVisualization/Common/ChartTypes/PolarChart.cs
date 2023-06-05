@@ -82,6 +82,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         public PolarChart() { }
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -89,7 +90,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.Polar; }
         }
@@ -197,7 +198,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="ser">Chart series.</param>
         /// <param name="point">Series point.</param>
         /// <returns>Returns polar drawing style.</returns>
-        override protected RadarDrawingStyle GetDrawingStyle(Series ser, DataPoint point)
+        protected
+        #endregion // ICircularChartType interface implementation
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Gets polar chart drawing style.
+        /// </summary>
+        /// <param name="ser">Chart series.</param>
+        /// <param name="point">Series point.</param>
+        /// <returns>Returns polar drawing style.</returns>
+        override RadarDrawingStyle GetDrawingStyle(Series ser, DataPoint point)
         {
             RadarDrawingStyle drawingStyle = RadarDrawingStyle.Line;
             if (
@@ -242,11 +254,15 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="area">Chart area.</param>
         /// <param name="series">Point series.</param>
         /// <returns>Array of data points position.</returns>
-        override protected PointF[] GetPointsPosition(
-            ChartGraphics graph,
-            ChartArea area,
-            Series series
-        )
+        protected
+        /// <summary>
+        /// Fills a PointF array of data points absolute pixel positions.
+        /// </summary>
+        /// <param name="graph">Graphics object.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="series">Point series.</param>
+        /// <returns>Array of data points position.</returns>
+        override PointF[] GetPointsPosition(ChartGraphics graph, ChartArea area, Series series)
         {
             PointF[] pointPos = new PointF[series.Points.Count + 1];
             int index = 0;

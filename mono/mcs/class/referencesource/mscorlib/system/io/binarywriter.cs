@@ -235,7 +235,7 @@ namespace System.IO
         // Note this method cannot handle surrogates properly in UTF-8.
         //
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe virtual void Write(char ch)
+        public virtual unsafe void Write(char ch)
         {
             if (Char.IsSurrogate(ch))
                 throw new ArgumentException(
@@ -285,7 +285,7 @@ namespace System.IO
         // advanced by eight.
         //
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe virtual void Write(double value)
+        public virtual unsafe void Write(double value)
         {
 #if MONO
             OutStream.Write(Mono.Security.BitConverterLE.GetBytes(value), 0, 8);
@@ -392,7 +392,7 @@ namespace System.IO
         // advanced by four.
         //
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe virtual void Write(float value)
+        public virtual unsafe void Write(float value)
         {
 #if MONO
             OutStream.Write(Mono.Security.BitConverterLE.GetBytes(value), 0, 4);
@@ -412,7 +412,7 @@ namespace System.IO
         // to the stream.
         //
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe virtual void Write(String value)
+        public virtual unsafe void Write(String value)
         {
             if (value == null)
                 throw new ArgumentNullException("value");

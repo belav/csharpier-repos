@@ -39,16 +39,16 @@ namespace System.ServiceModel.Security
         static SecurityAlgorithmSuite basic128Sha256Rsa15;
         static SecurityAlgorithmSuite tripleDesSha256Rsa15;
 
-        static internal SecurityAlgorithmSuite KerberosDefault
+        internal static SecurityAlgorithmSuite KerberosDefault
         {
             get { return Basic128; }
         }
-        static public SecurityAlgorithmSuite Default
+        public static SecurityAlgorithmSuite Default
         {
             get { return Basic256; }
         }
 
-        static public SecurityAlgorithmSuite Basic256
+        public static SecurityAlgorithmSuite Basic256
         {
             get
             {
@@ -57,7 +57,7 @@ namespace System.ServiceModel.Security
                 return basic256;
             }
         }
-        static public SecurityAlgorithmSuite Basic192
+        public static SecurityAlgorithmSuite Basic192
         {
             get
             {
@@ -66,7 +66,7 @@ namespace System.ServiceModel.Security
                 return basic192;
             }
         }
-        static public SecurityAlgorithmSuite Basic128
+        public static SecurityAlgorithmSuite Basic128
         {
             get
             {
@@ -75,7 +75,7 @@ namespace System.ServiceModel.Security
                 return basic128;
             }
         }
-        static public SecurityAlgorithmSuite TripleDes
+        public static SecurityAlgorithmSuite TripleDes
         {
             get
             {
@@ -84,7 +84,7 @@ namespace System.ServiceModel.Security
                 return tripleDes;
             }
         }
-        static public SecurityAlgorithmSuite Basic256Rsa15
+        public static SecurityAlgorithmSuite Basic256Rsa15
         {
             get
             {
@@ -93,7 +93,7 @@ namespace System.ServiceModel.Security
                 return basic256Rsa15;
             }
         }
-        static public SecurityAlgorithmSuite Basic192Rsa15
+        public static SecurityAlgorithmSuite Basic192Rsa15
         {
             get
             {
@@ -102,7 +102,7 @@ namespace System.ServiceModel.Security
                 return basic192Rsa15;
             }
         }
-        static public SecurityAlgorithmSuite Basic128Rsa15
+        public static SecurityAlgorithmSuite Basic128Rsa15
         {
             get
             {
@@ -111,7 +111,7 @@ namespace System.ServiceModel.Security
                 return basic128Rsa15;
             }
         }
-        static public SecurityAlgorithmSuite TripleDesRsa15
+        public static SecurityAlgorithmSuite TripleDesRsa15
         {
             get
             {
@@ -121,7 +121,7 @@ namespace System.ServiceModel.Security
             }
         }
 
-        static public SecurityAlgorithmSuite Basic256Sha256
+        public static SecurityAlgorithmSuite Basic256Sha256
         {
             get
             {
@@ -130,7 +130,7 @@ namespace System.ServiceModel.Security
                 return basic256Sha256;
             }
         }
-        static public SecurityAlgorithmSuite Basic192Sha256
+        public static SecurityAlgorithmSuite Basic192Sha256
         {
             get
             {
@@ -139,7 +139,7 @@ namespace System.ServiceModel.Security
                 return basic192Sha256;
             }
         }
-        static public SecurityAlgorithmSuite Basic128Sha256
+        public static SecurityAlgorithmSuite Basic128Sha256
         {
             get
             {
@@ -148,7 +148,7 @@ namespace System.ServiceModel.Security
                 return basic128Sha256;
             }
         }
-        static public SecurityAlgorithmSuite TripleDesSha256
+        public static SecurityAlgorithmSuite TripleDesSha256
         {
             get
             {
@@ -157,7 +157,7 @@ namespace System.ServiceModel.Security
                 return tripleDesSha256;
             }
         }
-        static public SecurityAlgorithmSuite Basic256Sha256Rsa15
+        public static SecurityAlgorithmSuite Basic256Sha256Rsa15
         {
             get
             {
@@ -166,7 +166,7 @@ namespace System.ServiceModel.Security
                 return basic256Sha256Rsa15;
             }
         }
-        static public SecurityAlgorithmSuite Basic192Sha256Rsa15
+        public static SecurityAlgorithmSuite Basic192Sha256Rsa15
         {
             get
             {
@@ -175,7 +175,7 @@ namespace System.ServiceModel.Security
                 return basic192Sha256Rsa15;
             }
         }
-        static public SecurityAlgorithmSuite Basic128Sha256Rsa15
+        public static SecurityAlgorithmSuite Basic128Sha256Rsa15
         {
             get
             {
@@ -184,7 +184,7 @@ namespace System.ServiceModel.Security
                 return basic128Sha256Rsa15;
             }
         }
-        static public SecurityAlgorithmSuite TripleDesSha256Rsa15
+        public static SecurityAlgorithmSuite TripleDesSha256Rsa15
         {
             get
             {

@@ -3199,7 +3199,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="name">Name of the custom property to check.</param>
         /// <returns>True if custom property was set.</returns>
-        virtual public bool IsCustomPropertySet(string name)
+        public
+        #endregion
+
+        #region Custom Properties methods
+
+        /// <summary>
+        /// Checks if custom property with specified name was set.
+        /// </summary>
+        /// <param name="name">Name of the custom property to check.</param>
+        /// <returns>True if custom property was set.</returns>
+        virtual bool IsCustomPropertySet(string name)
         {
             return properties.ContainsKey(name);
         }
@@ -3218,7 +3228,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Delete the data point custom property with the specified name.
         /// </summary>
         /// <param name="name">Name of the property to delete.</param>
-        virtual public void DeleteCustomProperty(string name)
+        public
+        /// <summary>
+        /// Delete the data point custom property with the specified name.
+        /// </summary>
+        /// <param name="name">Name of the property to delete.</param>
+        virtual void DeleteCustomProperty(string name)
         {
             if (name == null)
             {
@@ -3266,7 +3281,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="name">Name of the property to get.</param>
         /// <returns>Returns the data point custom property with the specified name.  If the requested one is not set,
         /// the default custom property of the data series will be returned.</returns>
-        virtual public string GetCustomProperty(string name)
+        public
+        /// <summary>
+        /// Gets the data point custom property with the specified name.
+        /// </summary>
+        /// <param name="name">Name of the property to get.</param>
+        /// <returns>Returns the data point custom property with the specified name.  If the requested one is not set,
+        /// the default custom property of the data series will be returned.</returns>
+        virtual string GetCustomProperty(string name)
         {
             if (!IsCustomPropertySet(name) && this.pointCustomProperties)
             {
@@ -3371,7 +3393,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="name">Property name.</param>
         /// <param name="propertyValue">Property value.</param>
-        virtual public void SetCustomProperty(string name, string propertyValue)
+        public
+        /// <summary>
+        /// Sets a custom property of the data point.
+        /// </summary>
+        /// <param name="name">Property name.</param>
+        /// <param name="propertyValue">Property value.</param>
+        virtual void SetCustomProperty(string name, string propertyValue)
         {
             properties[name] = propertyValue;
         }
@@ -3390,7 +3418,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Set the default properties of the data point.
         /// <param name="clearAll">Indicates that previous properties must be cleared.</param>
         /// </summary>
-        virtual public void SetDefault(bool clearAll)
+        public
+        /// <summary>
+        /// Set the default properties of the data point.
+        /// <param name="clearAll">Indicates that previous properties must be cleared.</param>
+        /// </summary>
+        virtual void SetDefault(bool clearAll)
         {
             // If setting defaults for the data series - clear all properties and initialize common one
             if (!this.pointCustomProperties)
@@ -3596,7 +3629,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Bindable(true),
             SRDescription("DescriptionAttributeLabel"),
         ]
-        virtual public string Label
+        public virtual string Label
         {
             get
             {
@@ -3657,7 +3690,7 @@ namespace System.Web.UI.DataVisualization.Charting
             PersistenceMode(PersistenceMode.Attribute)
 #endif
         ]
-        virtual public string AxisLabel
+        public virtual string AxisLabel
         {
             get
             {

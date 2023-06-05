@@ -23,7 +23,7 @@ namespace System.Web.Configuration
     using System.Xml;
     using System.Web.Compilation;
 
-    static internal class HandlerBase
+    internal static class HandlerBase
     {
         //
         // XML Attribute Helpers

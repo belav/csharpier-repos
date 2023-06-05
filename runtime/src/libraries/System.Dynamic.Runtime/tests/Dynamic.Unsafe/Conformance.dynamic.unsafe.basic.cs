@@ -5,7 +5,6 @@ using Xunit;
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.anonytype01.anonytype01
 {
-    unsafe // <Area> dynamic in unsafe code </Area>
     // <Title> unsafe type </Title>
     // <Description>
     // anonymous type
@@ -13,7 +12,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.anonytype01
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-    public class UC
+    public unsafe // <Area> dynamic in unsafe code </Area>
+    class UC
     {
         public int* p;
     }
@@ -37,7 +37,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.anonytype01
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.array01.array01
 {
-    unsafe // <Area> dynamic in unsafe code </Area>
     // <Title> unsafe type </Title>
     // <Description>
     // array initializer : unsafe array initializer with dynamic
@@ -45,7 +44,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.array01.arr
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-    public class US
+    public unsafe // <Area> dynamic in unsafe code </Area>
+    class US
     {
         public int* p;
     }
@@ -71,7 +71,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.array01.arr
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.array02.array02
 {
-    unsafe // <Area> dynamic in unsafe code </Area>
     // <Title> unsafe type </Title>
     // <Description>
     // array initializer : dynamic array initializer with unsafe
@@ -79,7 +78,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.array02.arr
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-    public class US
+    public unsafe // <Area> dynamic in unsafe code </Area>
+    class US
     {
         public int* p;
     }
@@ -469,7 +469,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.evnt01.evnt
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.explicit01.explicit01
 {
-    unsafe // <Area> dynamic in unsafe code </Area>
     // <Title> unsafe type </Title>
     // <Description>
     // explicit conversion
@@ -477,7 +476,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.explicit01.
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-    public class US
+    public unsafe // <Area> dynamic in unsafe code </Area>
+    class US
     {
         public int* p;
 
@@ -584,7 +584,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.field01.fie
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.fieldinit01.fieldinit01
 {
-    unsafe // <Area> dynamic in unsafe code </Area>
     // <Title>unsafe context</Title>
     // <Description>
     // dynamic in field initializer
@@ -592,7 +591,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.fieldinit01
     // <RelatedBug></RelatedBug>
     //<Expects Status=success></Expects>
     // <Code>
-    public class C
+    public unsafe // <Area> dynamic in unsafe code </Area>
+    class C
     {
         public dynamic field = 10;
     }
@@ -616,7 +616,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.fieldinit01
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.implicit01.implicit01
 {
-    unsafe // <Area> dynamic in unsafe code </Area>
     // <Title> unsafe type </Title>
     // <Description>
     // implicit conversion
@@ -624,7 +623,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.implicit01.
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-    public class US
+    public unsafe // <Area> dynamic in unsafe code </Area>
+    class US
     {
         public int* p;
 
@@ -962,7 +962,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method05.me
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method07.method07
 {
-    unsafe // <Area> dynamic in unsafe code </Area>
     // <Title> unsafe type </Title>
     // <Description>
     // method  - unsafe type as arg : extension method
@@ -970,7 +969,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method07.me
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-    public class US
+    public unsafe // <Area> dynamic in unsafe code </Area>
+    class US
     {
         public int* ptr;
     }

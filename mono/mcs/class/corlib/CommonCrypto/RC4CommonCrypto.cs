@@ -54,12 +54,12 @@ namespace Crimson.Security.Cryptography
             set { ; }
         }
 
-        new static public RC4 Create()
+        public static new RC4 Create()
         {
             return Create("RC4");
         }
 
-        new static public RC4 Create(string algName)
+        public static new RC4 Create(string algName)
         {
             object o = CryptoConfig.CreateFromName(algName);
             return (RC4)o ?? new RC4CommonCrypto();

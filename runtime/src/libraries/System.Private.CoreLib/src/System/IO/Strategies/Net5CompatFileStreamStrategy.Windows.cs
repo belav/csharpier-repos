@@ -161,7 +161,7 @@ namespace System.IO.Strategies
 
         public override bool CanSeek => _canSeek;
 
-        public unsafe override long Length
+        public override unsafe long Length
         {
             get
             {

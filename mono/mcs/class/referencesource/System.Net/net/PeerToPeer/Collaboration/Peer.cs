@@ -287,7 +287,7 @@ namespace System.Net.PeerToPeer.Collaboration
             }
         }
 
-        static internal Guid CurrentApplicationGuid
+        internal static Guid CurrentApplicationGuid
         {
             // <SecurityKernel Critical="True" Ring="0">
             // <SatisfiesLinkDemand Name="Process.GetCurrentProcess():System.Diagnostics.Process" />

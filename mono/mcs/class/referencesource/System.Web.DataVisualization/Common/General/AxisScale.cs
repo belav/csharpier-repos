@@ -270,7 +270,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
             SerializationVisibilityAttribute(SerializationVisibility.Hidden)
         ]
-        virtual internal AxisPosition AxisPosition
+        internal virtual AxisPosition AxisPosition
         {
             get { return this._axisPosition; }
             set
@@ -639,7 +639,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
             TypeConverter(typeof(AxisCrossingValueConverter))
         ]
-        virtual public double Crossing
+        public virtual double Crossing
         {
             get
             {
@@ -796,7 +796,7 @@ namespace System.Web.UI.DataVisualization.Charting
             PersistenceMode(PersistenceMode.InnerProperty),
 #endif
         ]
-        virtual public AxisScaleBreakStyle ScaleBreakStyle
+        public virtual AxisScaleBreakStyle ScaleBreakStyle
         {
             get { return this.axisScaleBreakStyle; }
             set

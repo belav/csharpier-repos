@@ -156,7 +156,7 @@ namespace System.ServiceModel.Configuration
             this.OnApplyConfiguration(endpoint, serviceEndpointElement);
         }
 
-        protected virtual internal void InitializeFrom(ServiceEndpoint endpoint)
+        protected internal virtual void InitializeFrom(ServiceEndpoint endpoint)
         {
             if (null == endpoint)
             {

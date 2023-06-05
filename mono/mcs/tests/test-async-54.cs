@@ -18,7 +18,7 @@ class Test
         return 0;
     }
 
-    async static Task<int> TestMethod(Exception ex)
+    static async Task<int> TestMethod(Exception ex)
     {
         try
         {
@@ -35,7 +35,7 @@ class Test
         return 2;
     }
 
-    async static Task Foo(Exception e)
+    static async Task Foo(Exception e)
     {
         await Task.Delay(1);
         throw e;

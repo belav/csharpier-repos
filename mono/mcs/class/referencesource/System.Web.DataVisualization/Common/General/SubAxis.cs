@@ -155,7 +155,7 @@ namespace System.Web.UI.DataVisualization.Charting
             PersistenceMode(PersistenceMode.InnerProperty),
 #endif
         ]
-        override public AxisScaleBreakStyle ScaleBreakStyle
+        public override AxisScaleBreakStyle ScaleBreakStyle
         {
             get { return base.ScaleBreakStyle; }
             set { base.ScaleBreakStyle = value; }
@@ -220,7 +220,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
             SerializationVisibilityAttribute(SerializationVisibility.Hidden)
         ]
-        override internal AxisPosition AxisPosition
+        internal override AxisPosition AxisPosition
         {
             get
             {
@@ -248,7 +248,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Visible),
             SerializationVisibilityAttribute(SerializationVisibility.Attribute)
         ]
-        override public string Name
+        public override string Name
         {
             get { return base.Name; }
             set { base.Name = value; }
@@ -272,7 +272,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
             SerializationVisibilityAttribute(SerializationVisibility.Hidden)
         ]
-        override public bool IsMarksNextToAxis
+        public override bool IsMarksNextToAxis
         {
             get { return base.IsMarksNextToAxis; }
             set { base.IsMarksNextToAxis = value; }
@@ -296,7 +296,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
             SerializationVisibilityAttribute(SerializationVisibility.Hidden)
         ]
-        override public double Crossing
+        public override double Crossing
         {
             get { return base.Crossing; }
             set { base.Crossing = value; }
@@ -315,23 +315,25 @@ namespace System.Web.UI.DataVisualization.Charting
             DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
             SerializationVisibilityAttribute(SerializationVisibility.Hidden),
         ]
-        override public SubAxisCollection SubAxes
+        public override SubAxisCollection SubAxes
         {
             get { return base.SubAxes; }
         }
 
+        internal
         /// <summary>
         /// Indicates if this axis object present the main or sub axis.
         /// </summary>
-        override internal bool IsSubAxis
+        override bool IsSubAxis
         {
             get { return true; }
         }
 
+        internal
         /// <summary>
         /// Returns sub-axis name.
         /// </summary>
-        override internal string SubAxisName
+        override string SubAxisName
         {
             get { return base.Name; }
         }
@@ -345,7 +347,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="ignoreCrossing">Axis crossing should be ignored.</param>
         /// <returns>Relative position</returns>
-        override internal double GetAxisPosition(bool ignoreCrossing)
+        internal
+        #endregion // Properties
+
+        #region Methods
+
+        /// <summary>
+        /// Find axis position using crossing value.
+        /// </summary>
+        /// <param name="ignoreCrossing">Axis crossing should be ignored.</param>
+        /// <returns>Relative position</returns>
+        override double GetAxisPosition(bool ignoreCrossing)
         {
             // Parent axis must be set
             if (this.parentAxis != null)

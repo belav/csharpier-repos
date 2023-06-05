@@ -3975,7 +3975,7 @@ namespace System.Web
             }
         }
 
-        static internal List<ModuleConfigurationInfo> IntegratedModuleList
+        internal static List<ModuleConfigurationInfo> IntegratedModuleList
         {
             get { return _moduleConfigInfo; }
         }

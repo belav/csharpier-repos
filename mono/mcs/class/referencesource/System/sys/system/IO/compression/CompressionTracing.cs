@@ -15,7 +15,7 @@ namespace System.IO.Compression
         : Switch
 #endif // !FEATURE_NETCORE
     {
-        internal readonly static CompressionTracingSwitch tracingSwitch =
+        internal static readonly CompressionTracingSwitch tracingSwitch =
             new CompressionTracingSwitch("CompressionSwitch", "Compression Library Tracing Switch");
 
         internal CompressionTracingSwitch(string displayName, string description)

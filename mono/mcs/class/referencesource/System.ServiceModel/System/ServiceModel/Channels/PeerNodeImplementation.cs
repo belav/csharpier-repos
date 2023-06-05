@@ -866,8 +866,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
+        internal
         // static Uri -> PeerNode mapping
-        static internal Dictionary<Uri, PeerNodeImplementation> peerNodes =
+        static Dictionary<Uri, PeerNodeImplementation> peerNodes =
             new Dictionary<Uri, PeerNodeImplementation>();
 
         internal static PeerNodeImplementation Get(Uri listenUri)
@@ -884,7 +885,7 @@ namespace System.ServiceModel.Channels
             return node;
         }
 
-        internal protected static bool TryGet(Uri listenUri, out PeerNodeImplementation result)
+        protected internal static bool TryGet(Uri listenUri, out PeerNodeImplementation result)
         {
             if (listenUri == null)
             {

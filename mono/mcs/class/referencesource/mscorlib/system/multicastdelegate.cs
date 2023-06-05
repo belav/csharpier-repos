@@ -130,7 +130,7 @@ namespace System
         // equals returns true IIF the delegate is not null and has the
         //    same target, method and invocation list as this object
         [System.Security.SecuritySafeCritical] // auto-generated
-        public override sealed bool Equals(Object obj)
+        public sealed override bool Equals(Object obj)
         {
             if (obj == null || !InternalEqualTypes(this, obj))
                 return false;
@@ -313,7 +313,7 @@ namespace System
         // This method will combine this delegate with the passed delegate
         //    to form a new delegate.
         [System.Security.SecuritySafeCritical] // auto-generated
-        protected override sealed Delegate CombineImpl(Delegate follow)
+        protected sealed override Delegate CombineImpl(Delegate follow)
         {
             if ((Object)follow == null) // cast to object for a more efficient test
                 return this;
@@ -438,7 +438,7 @@ namespace System
         //    this list and return a new delegate.  If its not found a copy of the
         //    current list is returned.
         [System.Security.SecuritySafeCritical] // auto-generated
-        protected override sealed Delegate RemoveImpl(Delegate value)
+        protected sealed override Delegate RemoveImpl(Delegate value)
         {
             // There is a special case were we are removing using a delegate as
             //    the value we need to check for this case
@@ -534,7 +534,7 @@ namespace System
 
         // This method returns the Invocation list of this multicast delegate.
         [System.Security.SecuritySafeCritical]
-        public override sealed Delegate[] GetInvocationList()
+        public sealed override Delegate[] GetInvocationList()
         {
             Contract.Ensures(Contract.Result<Delegate[]>() != null);
             // @
@@ -577,7 +577,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical]
-        public override sealed int GetHashCode()
+        public sealed override int GetHashCode()
         {
             if (IsUnmanagedFunctionPtr())
                 return ValueType.GetHashCodeOfPtr(_methodPtr)

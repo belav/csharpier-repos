@@ -62,7 +62,7 @@ namespace Crimson.CommonCrypto
         // not using `nint` to be able to resue this outside (if needed)
 
         [DllImport(libSystem)]
-        extern internal static CCCryptorStatus CCCryptorCreate(
+        internal static extern CCCryptorStatus CCCryptorCreate(
             CCOperation op,
             CCAlgorithm alg,
             CCOptions options, /* const void* */
@@ -73,12 +73,12 @@ namespace Crimson.CommonCrypto
         );
 
         [DllImport(libSystem)]
-        extern internal static CCCryptorStatus CCCryptorRelease( /* CCCryptorRef */
+        internal static extern CCCryptorStatus CCCryptorRelease( /* CCCryptorRef */
             IntPtr cryptorRef
         );
 
         [DllImport(libSystem)]
-        extern internal static CCCryptorStatus CCCryptorUpdate( /* CCCryptorRef */
+        internal static extern CCCryptorStatus CCCryptorUpdate( /* CCCryptorRef */
             IntPtr cryptorRef, /* const void* */
             byte[] dataIn, /* size_t */
             IntPtr dataInLength, /* void* */
@@ -88,7 +88,7 @@ namespace Crimson.CommonCrypto
         );
 
         [DllImport(libSystem)]
-        extern internal static CCCryptorStatus CCCryptorUpdate( /* CCCryptorRef */
+        internal static extern CCCryptorStatus CCCryptorUpdate( /* CCCryptorRef */
             IntPtr cryptorRef, /* const void* */
             IntPtr dataIn, /* size_t */
             IntPtr dataInLength, /* void* */
@@ -98,7 +98,7 @@ namespace Crimson.CommonCrypto
         );
 
         [DllImport(libSystem)]
-        extern internal static CCCryptorStatus CCCryptorFinal( /* CCCryptorRef */
+        internal static extern CCCryptorStatus CCCryptorFinal( /* CCCryptorRef */
             IntPtr cryptorRef, /* void* */
             byte[] dataOut, /* size_t */
             IntPtr dataOutAvailable, /* size_t* */
@@ -106,20 +106,22 @@ namespace Crimson.CommonCrypto
         );
 
         [DllImport(libSystem)]
-        extern internal static int CCCryptorGetOutputLength( /* CCCryptorRef */
+        internal static extern int CCCryptorGetOutputLength( /* CCCryptorRef */
             IntPtr cryptorRef, /* size_t */
             IntPtr inputLength,
             bool final
         );
 
         [DllImport(libSystem)]
-        extern internal static CCCryptorStatus CCCryptorReset( /* CCCryptorRef */
+        internal static extern CCCryptorStatus CCCryptorReset( /* CCCryptorRef */
             IntPtr cryptorRef, /* const void* */
             IntPtr iv
         );
 
         // helper method to reduce the amount of generate code for each cipher algorithm
-        static internal IntPtr Create(
+        internal
+        // helper method to reduce the amount of generate code for each cipher algorithm
+        static IntPtr Create(
             CCOperation operation,
             CCAlgorithm algorithm,
             CCOptions options,
@@ -156,14 +158,14 @@ namespace Crimson.CommonCrypto
 
         // size_t was changed to IntPtr for 32/64 bits size difference - even if mono is (moslty) used in 32bits only on OSX today
         [DllImport("/System/Library/Frameworks/Security.framework/Security")]
-        unsafe extern internal static /* int */
-        int SecRandomCopyBytes( /* SecRandomRef */
+        internal static /* int */
+        extern unsafe int SecRandomCopyBytes( /* SecRandomRef */
             IntPtr rnd, /* size_t */
             IntPtr count, /* uint8_t* */
             byte* data
         );
 
-        unsafe static internal void GetRandom(byte[] buffer)
+        internal static unsafe void GetRandom(byte[] buffer)
         {
             fixed (byte* fixed_bytes = buffer)
             {
@@ -172,7 +174,7 @@ namespace Crimson.CommonCrypto
             }
         }
 
-        static internal unsafe void GetRandom(byte* data, IntPtr data_length)
+        internal static unsafe void GetRandom(byte* data, IntPtr data_length)
         {
             if (SecRandomCopyBytes(IntPtr.Zero, data_length, data) != 0)
                 throw new CryptographicException(Marshal.GetLastWin32Error()); // errno
@@ -182,14 +184,14 @@ namespace Crimson.CommonCrypto
 #if !MONOTOUCH && !XAMMAC
     static class KeyBuilder
     {
-        static public byte[] Key(int size)
+        public static byte[] Key(int size)
         {
             byte[] buffer = new byte[size];
             Cryptor.GetRandom(buffer);
             return buffer;
         }
 
-        static public byte[] IV(int size)
+        public static byte[] IV(int size)
         {
             byte[] buffer = new byte[size];
             Cryptor.GetRandom(buffer);

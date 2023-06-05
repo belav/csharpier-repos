@@ -12,7 +12,7 @@ namespace Microsoft.IO.Enumeration
 namespace System.IO.Enumeration
 #endif
 {
-    public unsafe abstract partial class FileSystemEnumerator<TResult>
+    public abstract unsafe partial class FileSystemEnumerator<TResult>
         : CriticalFinalizerObject,
             IEnumerator<TResult>
     {

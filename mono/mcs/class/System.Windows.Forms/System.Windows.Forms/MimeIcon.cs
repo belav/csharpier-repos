@@ -56,7 +56,7 @@ namespace System.Windows.Forms
     {
         static Assembly assembly = typeof(ResourceImageLoader).Assembly;
 
-        static internal Bitmap Get(string name)
+        internal static Bitmap Get(string name)
         {
             Stream stream = assembly.GetManifestResourceStream(name);
 
@@ -69,7 +69,7 @@ namespace System.Windows.Forms
             return new Bitmap(stream);
         }
 
-        static internal Icon GetIcon(string name)
+        internal static Icon GetIcon(string name)
         {
             Stream stream = assembly.GetManifestResourceStream(name);
 

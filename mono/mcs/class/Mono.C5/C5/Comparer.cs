@@ -34,9 +34,9 @@ namespace C5
     /// </summary>
     public static class Comparer<T>
     {
-        readonly static Type naturalComparerO = typeof(NaturalComparerO<>);
+        static readonly Type naturalComparerO = typeof(NaturalComparerO<>);
 
-        readonly static Type naturalComparer = typeof(NaturalComparer<>);
+        static readonly Type naturalComparer = typeof(NaturalComparer<>);
 
         static SCG.IComparer<T> cachedComparer = null;
 

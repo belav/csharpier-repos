@@ -46,9 +46,9 @@ namespace System.Web.UI
     )]
     public class HtmlTextWriter : TextWriter
     {
-        readonly static Hashtable _tagTable;
-        readonly static Hashtable _attributeTable;
-        readonly static Hashtable _styleTable;
+        static readonly Hashtable _tagTable;
+        static readonly Hashtable _attributeTable;
+        static readonly Hashtable _styleTable;
 
         static HtmlTextWriter()
         {
@@ -910,9 +910,9 @@ namespace System.Web.UI
 
         sealed class HtmlTag
         {
-            readonly public HtmlTextWriterTag key;
-            readonly public string name;
-            readonly public TagType tag_type;
+            public readonly HtmlTextWriterTag key;
+            public readonly string name;
+            public readonly TagType tag_type;
 
             public HtmlTag(HtmlTextWriterTag k, string n, TagType tt)
             {
@@ -924,8 +924,8 @@ namespace System.Web.UI
 
         sealed class HtmlStyle
         {
-            readonly public HtmlTextWriterStyle key;
-            readonly public string name;
+            public readonly HtmlTextWriterStyle key;
+            public readonly string name;
 
             public HtmlStyle(HtmlTextWriterStyle k, string n)
             {
@@ -936,8 +936,8 @@ namespace System.Web.UI
 
         sealed class HtmlAttribute
         {
-            readonly public HtmlTextWriterAttribute key;
-            readonly public string name;
+            public readonly HtmlTextWriterAttribute key;
+            public readonly string name;
 
             public HtmlAttribute(HtmlTextWriterAttribute k, string n)
             {

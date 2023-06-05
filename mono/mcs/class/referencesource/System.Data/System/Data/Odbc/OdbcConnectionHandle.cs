@@ -23,7 +23,7 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System.Data.Odbc
 {
-    sealed internal class OdbcConnectionHandle : OdbcHandle
+    internal sealed class OdbcConnectionHandle : OdbcHandle
     {
         private HandleState _handleState;
 
@@ -280,7 +280,7 @@ namespace System.Data.Odbc
             return retcode;
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             // NOTE: The SafeHandle class guarantees this will be called exactly once and is non-interrutible.
             ODBC32.RetCode retcode;

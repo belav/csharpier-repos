@@ -410,7 +410,7 @@ namespace Mono.Unix
             }
         }
 
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             if ((bytes == null && byteCount != 0) || (chars == null && charCount != 0))
                 throw new ArgumentNullException(

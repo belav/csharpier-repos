@@ -13,7 +13,7 @@ namespace System
         static string ns_library;
 
         [DllImport("__Internal")]
-        extern static string xamarin_GetFolderPath(int folder);
+        static extern string xamarin_GetFolderPath(int folder);
 
         static string NSDocumentDirectory
         {

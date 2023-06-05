@@ -340,7 +340,7 @@ namespace System.Globalization
                 return s_RegionNames;
             }
         }
-        private volatile static Dictionary<string, string> s_RegionNames;
+        private static volatile Dictionary<string, string> s_RegionNames;
 #endif
 
         /////////////////////////////////////////////////////////////////////////
@@ -504,7 +504,7 @@ namespace System.Globalization
                 return s_Invariant;
             }
         }
-        private volatile static CultureData s_Invariant;
+        private static volatile CultureData s_Invariant;
 
 #if !FEATURE_CORECLR
         internal static volatile ResourceSet MscorlibResourceSet;
@@ -669,13 +669,13 @@ namespace System.Globalization
 
         static readonly Version s_win7Version = new Version(6, 1);
 
-        static private bool IsOsPriorToWin7()
+        private static bool IsOsPriorToWin7()
         {
             return Environment.OSVersion.Platform == PlatformID.Win32NT
                 && Environment.OSVersion.Version < s_win7Version;
         }
 
-        static private bool IsOsWin7OrPrior()
+        private static bool IsOsWin7OrPrior()
         {
             return Environment.OSVersion.Platform == PlatformID.Win32NT
                 && Environment.OSVersion.Version < new Version(6, 2); // Win7 is 6.1.Build.Revision so we have to check for anything less than 6.2
@@ -2924,7 +2924,31 @@ namespace System.Globalization
         // always build a stringbuilder because we need to remove the ' or \.
         //
         ////////////////////////////////////////////////////////////////////////////
-        static private String UnescapeNlsString(String str, int start, int end)
+        private
+        //////////////////////////////////////
+        // Helper Functions to get derived properties //
+        //////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////////////////
+        //
+        // Unescape a NLS style quote string
+        //
+        // This removes single quotes:
+        //      'fred' -> fred
+        //      'fred -> fred
+        //      fred' -> fred
+        //      fred's -> freds
+        //
+        // This removes the first \ of escaped characters:
+        //      fred\'s -> fred's
+        //      a\\b -> a\b
+        //      a\b -> ab
+        //
+        // We don't build the stringbuilder unless we find a ' or a \.  If we find a ' or a \, we
+        // always build a stringbuilder because we need to remove the ' or \.
+        //
+        ////////////////////////////////////////////////////////////////////////////
+        static String UnescapeNlsString(String str, int start, int end)
         {
             Contract.Requires(str != null);
             Contract.Requires(start >= 0);
@@ -2981,7 +3005,22 @@ namespace System.Globalization
         //
         // We don't build the stringbuilder unless we find something to change
         ////////////////////////////////////////////////////////////////////////////
-        static internal String ReescapeWin32String(String str)
+        internal
+        ////////////////////////////////////////////////////////////////////////////
+        //
+        // Reescape a Win32 style quote string as a NLS+ style quoted string
+        //
+        // This is also the escaping style used by custom culture data files
+        //
+        // NLS+ uses \ to escape the next character, whether in a quoted string or
+        // not, so we always have to change \ to \\.
+        //
+        // NLS+ uses \' to escape a quote inside a quoted string so we have to change
+        // '' to \' (if inside a quoted string)
+        //
+        // We don't build the stringbuilder unless we find something to change
+        ////////////////////////////////////////////////////////////////////////////
+        static String ReescapeWin32String(String str)
         {
             // If we don't have data, then don't try anything
             if (str == null)
@@ -3047,7 +3086,7 @@ namespace System.Globalization
             return result.ToString();
         }
 
-        static internal String[] ReescapeWin32Strings(String[] array)
+        internal static String[] ReescapeWin32Strings(String[] array)
         {
             if (array != null)
             {
@@ -3062,7 +3101,10 @@ namespace System.Globalization
 
         // NOTE: this method is used through reflection by System.Globalization.CultureXmlParser.ReadDateElement()
         // and breaking changes here will not show up at build time, only at run time.
-        static private String GetTimeSeparator(String format)
+        private
+        // NOTE: this method is used through reflection by System.Globalization.CultureXmlParser.ReadDateElement()
+        // and breaking changes here will not show up at build time, only at run time.
+        static String GetTimeSeparator(String format)
         {
             // Time format separator (ie: : in 12:39:00)
             //
@@ -3077,7 +3119,10 @@ namespace System.Globalization
 
         // NOTE: this method is used through reflection by System.Globalization.CultureXmlParser.ReadDateElement()
         // and breaking changes here will not show up at build time, only at run time.
-        static private String GetDateSeparator(String format)
+        private
+        // NOTE: this method is used through reflection by System.Globalization.CultureXmlParser.ReadDateElement()
+        // and breaking changes here will not show up at build time, only at run time.
+        static String GetDateSeparator(String format)
         {
             // Date format separator (ie: / in 9/1/03)
             //
@@ -3370,7 +3415,7 @@ namespace System.Globalization
 #endif // !FEATURE_CORECLR
         }
 
-        static private int ConvertFirstDayOfWeekMonToSun(int iTemp)
+        private static int ConvertFirstDayOfWeekMonToSun(int iTemp)
         {
             // Convert Mon-Sun to Sun-Sat format
             iTemp++;
@@ -3400,7 +3445,11 @@ namespace System.Globalization
         // If we get a group from windows, then its in 3;0 format with the 0 backwards
         // of how NLS+ uses it (ie: if the string has a 0, then the int[] shouldn't and vice versa)
         // EXCEPT in the case where the list only contains 0 in which NLS and NLS+ have the same meaning.
-        static private int[] ConvertWin32GroupString(String win32Str)
+        private
+        // If we get a group from windows, then its in 3;0 format with the 0 backwards
+        // of how NLS+ uses it (ie: if the string has a 0, then the int[] shouldn't and vice versa)
+        // EXCEPT in the case where the list only contains 0 in which NLS and NLS+ have the same meaning.
+        static int[] ConvertWin32GroupString(String win32Str)
         {
             // None of these cases make any sense
             if (win32Str == null || win32Str.Length == 0)

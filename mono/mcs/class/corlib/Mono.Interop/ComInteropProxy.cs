@@ -49,10 +49,10 @@ namespace Mono.Interop
         private string type_name;
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void AddProxy(IntPtr pItf, ref ComInteropProxy proxy);
+        private static extern void AddProxy(IntPtr pItf, ref ComInteropProxy proxy);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void FindProxy(IntPtr pItf, ref ComInteropProxy proxy);
+        internal static extern void FindProxy(IntPtr pItf, ref ComInteropProxy proxy);
 
         // Private. Objects must be created with CreateProxy.
         ComInteropProxy(Type t)

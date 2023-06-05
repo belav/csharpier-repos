@@ -18,7 +18,7 @@ namespace JIT.HardwareIntrinsics.General
 {
     public static partial class Program
     {
-        private unsafe static void ToStringInt64()
+        private static unsafe void ToStringInt64()
         {
             int size = Unsafe.SizeOf<Vector128<Int64>>() / sizeof(Int64);
             Int64[] values = new Int64[size];

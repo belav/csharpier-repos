@@ -489,7 +489,15 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// </summary>
         /// <param name="name">Name to clean</param>
         /// <param name="relativePath">Make names relative if true or absolute if false</param>
-        static public string CleanName(string name, bool relativePath)
+        public
+        /// <summary>
+        /// Cleans a name making it conform to Zip file conventions.
+        /// Devices names ('c:\') and UNC share names ('\\server\share') are removed
+        /// and forward slashes ('\') are converted to back slashes ('/').
+        /// </summary>
+        /// <param name="name">Name to clean</param>
+        /// <param name="relativePath">Make names relative if true or absolute if false</param>
+        static string CleanName(string name, bool relativePath)
         {
             if (name == null)
             {
@@ -540,7 +548,16 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// with Windows-XPs built in Zip file handling.
         /// </summary>
         /// <param name="name">Name to clean</param>
-        static public string CleanName(string name)
+        public
+        /// <summary>
+        /// Cleans a name making it conform to Zip file conventions.
+        /// Devices names ('c:\') and UNC share names ('\\server\share') are removed
+        /// and forward slashes ('\') are converted to back slashes ('/').
+        /// Names are made relative by trimming leading slashes which is compatible
+        /// with Windows-XPs built in Zip file handling.
+        /// </summary>
+        /// <param name="name">Name to clean</param>
+        static string CleanName(string name)
         {
             return CleanName(name, true);
         }

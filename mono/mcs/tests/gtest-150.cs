@@ -28,7 +28,7 @@ static class Test1
         System.Console.WriteLine(op.Func(v));
     }
 
-    static public void Main()
+    public static void Main()
     {
         Foo<ushort, Op>(100);
         Foo<uint, Op>(100);

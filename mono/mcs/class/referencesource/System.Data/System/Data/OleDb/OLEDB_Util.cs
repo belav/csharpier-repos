@@ -21,11 +21,9 @@ namespace System.Data.OleDb
     internal static class ODB
     {
         // OleDbCommand
-        static internal void CommandParameterStatus(
-            StringBuilder builder,
-            int index,
-            DBStatus status
-        )
+        internal
+        // OleDbCommand
+        static void CommandParameterStatus(StringBuilder builder, int index, DBStatus status)
         {
             switch (status)
             {
@@ -133,7 +131,7 @@ namespace System.Data.OleDb
             }
         }
 
-        static internal Exception CommandParameterStatus(string value, Exception inner)
+        internal static Exception CommandParameterStatus(string value, Exception inner)
         {
             if (ADP.IsEmpty(value))
             {
@@ -142,7 +140,7 @@ namespace System.Data.OleDb
             return ADP.InvalidOperation(value, inner);
         }
 
-        static internal Exception UninitializedParameters(int index, OleDbType dbtype)
+        internal static Exception UninitializedParameters(int index, OleDbType dbtype)
         {
             return ADP.InvalidOperation(
                 Res.GetString(
@@ -153,7 +151,7 @@ namespace System.Data.OleDb
             );
         }
 
-        static internal Exception BadStatus_ParamAcc(int index, DBBindStatus status)
+        internal static Exception BadStatus_ParamAcc(int index, DBBindStatus status)
         {
             return ADP.DataAdapter(
                 Res.GetString(
@@ -164,7 +162,7 @@ namespace System.Data.OleDb
             );
         }
 
-        static internal Exception NoProviderSupportForParameters(string provider, Exception inner)
+        internal static Exception NoProviderSupportForParameters(string provider, Exception inner)
         {
             return ADP.DataAdapter(
                 Res.GetString(Res.OleDb_NoProviderSupportForParameters, provider),
@@ -172,7 +170,7 @@ namespace System.Data.OleDb
             );
         }
 
-        static internal Exception NoProviderSupportForSProcResetParameters(string provider)
+        internal static Exception NoProviderSupportForSProcResetParameters(string provider)
         {
             return ADP.DataAdapter(
                 Res.GetString(Res.OleDb_NoProviderSupportForSProcResetParameters, provider)
@@ -180,7 +178,9 @@ namespace System.Data.OleDb
         }
 
         // OleDbProperties
-        static internal void PropsetSetFailure(
+        internal
+        // OleDbProperties
+        static void PropsetSetFailure(
             StringBuilder builder,
             string description,
             OleDbPropertyStatus status
@@ -270,7 +270,7 @@ namespace System.Data.OleDb
             }
         }
 
-        static internal Exception PropsetSetFailure(string value, Exception inner)
+        internal static Exception PropsetSetFailure(string value, Exception inner)
         {
             if (ADP.IsEmpty(value))
             {
@@ -280,14 +280,16 @@ namespace System.Data.OleDb
         }
 
         // OleDbConnection
-        static internal ArgumentException SchemaRowsetsNotSupported(string provider)
+        internal
+        // OleDbConnection
+        static ArgumentException SchemaRowsetsNotSupported(string provider)
         {
             return ADP.Argument(
                 Res.GetString(Res.OleDb_SchemaRowsetsNotSupported, "IDBSchemaRowset", provider)
             );
         }
 
-        static internal OleDbException NoErrorInformation(
+        internal static OleDbException NoErrorInformation(
             string provider,
             OleDbHResult hr,
             Exception inner
@@ -314,17 +316,17 @@ namespace System.Data.OleDb
             return e;
         }
 
-        static internal InvalidOperationException MDACNotAvailable(Exception inner)
+        internal static InvalidOperationException MDACNotAvailable(Exception inner)
         {
             return ADP.DataAdapter(Res.GetString(Res.OleDb_MDACNotAvailable), inner);
         }
 
-        static internal ArgumentException MSDASQLNotSupported()
+        internal static ArgumentException MSDASQLNotSupported()
         {
             return ADP.Argument(Res.GetString(Res.OleDb_MSDASQLNotSupported)); // MDAC 69975
         }
 
-        static internal InvalidOperationException CommandTextNotSupported(
+        internal static InvalidOperationException CommandTextNotSupported(
             string provider,
             Exception inner
         )
@@ -335,12 +337,12 @@ namespace System.Data.OleDb
             ); // 72632
         }
 
-        static internal InvalidOperationException PossiblePromptNotUserInteractive()
+        internal static InvalidOperationException PossiblePromptNotUserInteractive()
         {
             return ADP.DataAdapter(Res.GetString(Res.OleDb_PossiblePromptNotUserInteractive));
         }
 
-        static internal InvalidOperationException ProviderUnavailable(
+        internal static InvalidOperationException ProviderUnavailable(
             string provider,
             Exception inner
         )
@@ -349,7 +351,7 @@ namespace System.Data.OleDb
             return ADP.DataAdapter(Res.GetString(Res.OleDb_ProviderUnavailable, provider), inner);
         }
 
-        static internal InvalidOperationException TransactionsNotSupported(
+        internal static InvalidOperationException TransactionsNotSupported(
             string provider,
             Exception inner
         )
@@ -360,22 +362,22 @@ namespace System.Data.OleDb
             ); // 72632
         }
 
-        static internal ArgumentException AsynchronousNotSupported()
+        internal static ArgumentException AsynchronousNotSupported()
         {
             return ADP.Argument(Res.GetString(Res.OleDb_AsynchronousNotSupported));
         }
 
-        static internal ArgumentException NoProviderSpecified()
+        internal static ArgumentException NoProviderSpecified()
         {
             return ADP.Argument(Res.GetString(Res.OleDb_NoProviderSpecified));
         }
 
-        static internal ArgumentException InvalidProviderSpecified()
+        internal static ArgumentException InvalidProviderSpecified()
         {
             return ADP.Argument(Res.GetString(Res.OleDb_InvalidProviderSpecified));
         }
 
-        static internal ArgumentException InvalidRestrictionsDbInfoKeywords(string parameter)
+        internal static ArgumentException InvalidRestrictionsDbInfoKeywords(string parameter)
         {
             return ADP.Argument(
                 Res.GetString(Res.OleDb_InvalidRestrictionsDbInfoKeywords),
@@ -383,7 +385,7 @@ namespace System.Data.OleDb
             );
         }
 
-        static internal ArgumentException InvalidRestrictionsDbInfoLiteral(string parameter)
+        internal static ArgumentException InvalidRestrictionsDbInfoLiteral(string parameter)
         {
             return ADP.Argument(
                 Res.GetString(Res.OleDb_InvalidRestrictionsDbInfoLiteral),
@@ -391,12 +393,12 @@ namespace System.Data.OleDb
             );
         }
 
-        static internal ArgumentException InvalidRestrictionsSchemaGuids(string parameter)
+        internal static ArgumentException InvalidRestrictionsSchemaGuids(string parameter)
         {
             return ADP.Argument(Res.GetString(Res.OleDb_InvalidRestrictionsSchemaGuids), parameter);
         }
 
-        static internal ArgumentException NotSupportedSchemaTable(
+        internal static ArgumentException NotSupportedSchemaTable(
             Guid schema,
             OleDbConnection connection
         )
@@ -411,55 +413,59 @@ namespace System.Data.OleDb
         }
 
         // OleDbParameter
-        static internal Exception InvalidOleDbType(OleDbType value)
+        internal
+        // OleDbParameter
+        static Exception InvalidOleDbType(OleDbType value)
         {
             return ADP.InvalidEnumerationValue(typeof(OleDbType), (int)value);
         }
 
         // Getting Data
-        static internal InvalidOperationException BadAccessor()
+        internal
+        // Getting Data
+        static InvalidOperationException BadAccessor()
         {
             return ADP.DataAdapter(Res.GetString(Res.OleDb_BadAccessor));
         }
 
-        static internal InvalidCastException ConversionRequired()
+        internal static InvalidCastException ConversionRequired()
         {
             return ADP.InvalidCast();
         }
 
-        static internal InvalidCastException CantConvertValue()
+        internal static InvalidCastException CantConvertValue()
         {
             return ADP.InvalidCast(Res.GetString(Res.OleDb_CantConvertValue));
         }
 
-        static internal InvalidOperationException SignMismatch(Type type)
+        internal static InvalidOperationException SignMismatch(Type type)
         {
             return ADP.DataAdapter(Res.GetString(Res.OleDb_SignMismatch, type.Name));
         }
 
-        static internal InvalidOperationException DataOverflow(Type type)
+        internal static InvalidOperationException DataOverflow(Type type)
         {
             return ADP.DataAdapter(Res.GetString(Res.OleDb_DataOverflow, type.Name));
         }
 
-        static internal InvalidOperationException CantCreate(Type type)
+        internal static InvalidOperationException CantCreate(Type type)
         {
             return ADP.DataAdapter(Res.GetString(Res.OleDb_CantCreate, type.Name));
         }
 
-        static internal InvalidOperationException Unavailable(Type type)
+        internal static InvalidOperationException Unavailable(Type type)
         {
             return ADP.DataAdapter(Res.GetString(Res.OleDb_Unavailable, type.Name));
         }
 
-        static internal InvalidOperationException UnexpectedStatusValue(DBStatus status)
+        internal static InvalidOperationException UnexpectedStatusValue(DBStatus status)
         {
             return ADP.DataAdapter(
                 Res.GetString(Res.OleDb_UnexpectedStatusValue, status.ToString())
             );
         }
 
-        static internal InvalidOperationException GVtUnknown(int wType)
+        internal static InvalidOperationException GVtUnknown(int wType)
         {
             return ADP.DataAdapter(
                 Res.GetString(
@@ -470,7 +476,7 @@ namespace System.Data.OleDb
             );
         }
 
-        static internal InvalidOperationException SVtUnknown(int wType)
+        internal static InvalidOperationException SVtUnknown(int wType)
         {
             return ADP.DataAdapter(
                 Res.GetString(
@@ -482,10 +488,9 @@ namespace System.Data.OleDb
         }
 
         // OleDbDataReader
-        static internal InvalidOperationException BadStatusRowAccessor(
-            int i,
-            DBBindStatus rowStatus
-        )
+        internal
+        // OleDbDataReader
+        static InvalidOperationException BadStatusRowAccessor(int i, DBBindStatus rowStatus)
         {
             return ADP.DataAdapter(
                 Res.GetString(
@@ -496,7 +501,7 @@ namespace System.Data.OleDb
             );
         }
 
-        static internal InvalidOperationException ThreadApartmentState(Exception innerException)
+        internal static InvalidOperationException ThreadApartmentState(Exception innerException)
         {
             return ADP.InvalidOperation(
                 Res.GetString(Res.OleDb_ThreadApartmentState),
@@ -505,12 +510,14 @@ namespace System.Data.OleDb
         }
 
         // OleDbDataAdapter
-        static internal ArgumentException Fill_NotADODB(string parameter)
+        internal
+        // OleDbDataAdapter
+        static ArgumentException Fill_NotADODB(string parameter)
         {
             return ADP.Argument(Res.GetString(Res.OleDb_Fill_NotADODB), parameter);
         }
 
-        static internal ArgumentException Fill_EmptyRecordSet(
+        internal static ArgumentException Fill_EmptyRecordSet(
             string parameter,
             Exception innerException
         )
@@ -522,7 +529,7 @@ namespace System.Data.OleDb
             );
         }
 
-        static internal ArgumentException Fill_EmptyRecord(
+        internal static ArgumentException Fill_EmptyRecord(
             string parameter,
             Exception innerException
         )
@@ -534,27 +541,27 @@ namespace System.Data.OleDb
             );
         }
 
-        static internal string NoErrorMessage(OleDbHResult errorcode)
+        internal static string NoErrorMessage(OleDbHResult errorcode)
         {
             return Res.GetString(Res.OleDb_NoErrorMessage, ODB.ELookup(errorcode));
         }
 
-        static internal string FailedGetDescription(OleDbHResult errorcode)
+        internal static string FailedGetDescription(OleDbHResult errorcode)
         {
             return Res.GetString(Res.OleDb_FailedGetDescription, ODB.ELookup(errorcode));
         }
 
-        static internal string FailedGetSource(OleDbHResult errorcode)
+        internal static string FailedGetSource(OleDbHResult errorcode)
         {
             return Res.GetString(Res.OleDb_FailedGetSource, ODB.ELookup(errorcode));
         }
 
-        static internal InvalidOperationException DBBindingGetVector()
+        internal static InvalidOperationException DBBindingGetVector()
         {
             return ADP.InvalidOperation(Res.GetString(Res.OleDb_DBBindingGetVector));
         }
 
-        static internal OleDbHResult GetErrorDescription(
+        internal static OleDbHResult GetErrorDescription(
             UnsafeNativeMethods.IErrorInfo errorInfo,
             OleDbHResult hresult,
             out string message
@@ -585,7 +592,9 @@ namespace System.Data.OleDb
         }
 
         // OleDbMetaDataFactory
-        static internal InvalidOperationException IDBInfoNotSupported()
+        internal
+        // OleDbMetaDataFactory
+        static InvalidOperationException IDBInfoNotSupported()
         {
             return ADP.InvalidOperation(Res.GetString(Res.OleDb_IDBInfoNotSupported));
         }
@@ -812,55 +821,56 @@ namespace System.Data.OleDb
         internal const uint DB_ALL_EXCEPT_LIKE = 3;
         internal const uint DB_SEARCHABLE = 4;
 
-        static internal readonly IntPtr DB_INVALID_HACCESSOR = ADP.PtrZero;
-        static internal readonly IntPtr DB_NULL_HCHAPTER = ADP.PtrZero;
-        static internal readonly IntPtr DB_NULL_HROW = ADP.PtrZero;
+        internal static readonly IntPtr DB_INVALID_HACCESSOR = ADP.PtrZero;
+        internal static readonly IntPtr DB_NULL_HCHAPTER = ADP.PtrZero;
+        internal static readonly IntPtr DB_NULL_HROW = ADP.PtrZero;
 
+        internal
         /*static internal readonly int SizeOf_tagDBPARAMINFO = Marshal.SizeOf(typeof(tagDBPARAMINFO));*/
-        static internal readonly int SizeOf_tagDBBINDING = Marshal.SizeOf(typeof(tagDBBINDING));
-        static internal readonly int SizeOf_tagDBCOLUMNINFO = Marshal.SizeOf(
+        static readonly int SizeOf_tagDBBINDING = Marshal.SizeOf(typeof(tagDBBINDING));
+        internal static readonly int SizeOf_tagDBCOLUMNINFO = Marshal.SizeOf(
             typeof(tagDBCOLUMNINFO)
         );
-        static internal readonly int SizeOf_tagDBLITERALINFO = Marshal.SizeOf(
+        internal static readonly int SizeOf_tagDBLITERALINFO = Marshal.SizeOf(
             typeof(tagDBLITERALINFO)
         );
-        static internal readonly int SizeOf_tagDBPROPSET = Marshal.SizeOf(typeof(tagDBPROPSET));
-        static internal readonly int SizeOf_tagDBPROP = Marshal.SizeOf(typeof(tagDBPROP));
-        static internal readonly int SizeOf_tagDBPROPINFOSET = Marshal.SizeOf(
+        internal static readonly int SizeOf_tagDBPROPSET = Marshal.SizeOf(typeof(tagDBPROPSET));
+        internal static readonly int SizeOf_tagDBPROP = Marshal.SizeOf(typeof(tagDBPROP));
+        internal static readonly int SizeOf_tagDBPROPINFOSET = Marshal.SizeOf(
             typeof(tagDBPROPINFOSET)
         );
-        static internal readonly int SizeOf_tagDBPROPINFO = Marshal.SizeOf(typeof(tagDBPROPINFO));
-        static internal readonly int SizeOf_tagDBPROPIDSET = Marshal.SizeOf(typeof(tagDBPROPIDSET));
-        static internal readonly int SizeOf_Guid = Marshal.SizeOf(typeof(Guid));
-        static internal readonly int SizeOf_Variant = 8 + (2 * ADP.PtrSize); // 16 on 32bit, 24 on 64bit
+        internal static readonly int SizeOf_tagDBPROPINFO = Marshal.SizeOf(typeof(tagDBPROPINFO));
+        internal static readonly int SizeOf_tagDBPROPIDSET = Marshal.SizeOf(typeof(tagDBPROPIDSET));
+        internal static readonly int SizeOf_Guid = Marshal.SizeOf(typeof(Guid));
+        internal static readonly int SizeOf_Variant = 8 + (2 * ADP.PtrSize); // 16 on 32bit, 24 on 64bit
 
-        static internal readonly int OffsetOf_tagDBPROP_Status = Marshal
+        internal static readonly int OffsetOf_tagDBPROP_Status = Marshal
             .OffsetOf(typeof(tagDBPROP), "dwStatus")
             .ToInt32();
-        static internal readonly int OffsetOf_tagDBPROP_Value = Marshal
+        internal static readonly int OffsetOf_tagDBPROP_Value = Marshal
             .OffsetOf(typeof(tagDBPROP), "vValue")
             .ToInt32();
-        static internal readonly int OffsetOf_tagDBPROPSET_Properties = Marshal
+        internal static readonly int OffsetOf_tagDBPROPSET_Properties = Marshal
             .OffsetOf(typeof(tagDBPROPSET), "rgProperties")
             .ToInt32();
-        static internal readonly int OffsetOf_tagDBPROPINFO_Value = Marshal
+        internal static readonly int OffsetOf_tagDBPROPINFO_Value = Marshal
             .OffsetOf(typeof(tagDBPROPINFO), "vValue")
             .ToInt32();
-        static internal readonly int OffsetOf_tagDBPROPIDSET_PropertySet = Marshal
+        internal static readonly int OffsetOf_tagDBPROPIDSET_PropertySet = Marshal
             .OffsetOf(typeof(tagDBPROPIDSET), "guidPropertySet")
             .ToInt32();
-        static internal readonly int OffsetOf_tagDBLITERALINFO_it = Marshal
+        internal static readonly int OffsetOf_tagDBLITERALINFO_it = Marshal
             .OffsetOf(typeof(tagDBLITERALINFO), "it")
             .ToInt32();
-        static internal readonly int OffsetOf_tagDBBINDING_obValue = Marshal
+        internal static readonly int OffsetOf_tagDBBINDING_obValue = Marshal
             .OffsetOf(typeof(tagDBBINDING), "obValue")
             .ToInt32();
-        static internal readonly int OffsetOf_tagDBBINDING_wType = Marshal
+        internal static readonly int OffsetOf_tagDBBINDING_wType = Marshal
             .OffsetOf(typeof(tagDBBINDING), "wType")
             .ToInt32();
 
-        static internal Guid IID_NULL = Guid.Empty;
-        static internal Guid IID_IUnknown = new Guid(
+        internal static Guid IID_NULL = Guid.Empty;
+        internal static Guid IID_IUnknown = new Guid(
             0x00000000,
             0x0000,
             0x0000,
@@ -873,7 +883,7 @@ namespace System.Data.OleDb
             0x00,
             0x46
         );
-        static internal Guid IID_IDBInitialize = new Guid(
+        internal static Guid IID_IDBInitialize = new Guid(
             0x0C733A8B,
             0x2A1C,
             0x11CE,
@@ -886,7 +896,7 @@ namespace System.Data.OleDb
             0x77,
             0x3D
         );
-        static internal Guid IID_IDBCreateSession = new Guid(
+        internal static Guid IID_IDBCreateSession = new Guid(
             0x0C733A5D,
             0x2A1C,
             0x11CE,
@@ -899,7 +909,7 @@ namespace System.Data.OleDb
             0x77,
             0x3D
         );
-        static internal Guid IID_IDBCreateCommand = new Guid(
+        internal static Guid IID_IDBCreateCommand = new Guid(
             0x0C733A1D,
             0x2A1C,
             0x11CE,
@@ -912,7 +922,7 @@ namespace System.Data.OleDb
             0x77,
             0x3D
         );
-        static internal Guid IID_ICommandText = new Guid(
+        internal static Guid IID_ICommandText = new Guid(
             0x0C733A27,
             0x2A1C,
             0x11CE,
@@ -925,7 +935,7 @@ namespace System.Data.OleDb
             0x77,
             0x3D
         );
-        static internal Guid IID_IMultipleResults = new Guid(
+        internal static Guid IID_IMultipleResults = new Guid(
             0x0C733A90,
             0x2A1C,
             0x11CE,
@@ -938,7 +948,7 @@ namespace System.Data.OleDb
             0x77,
             0x3D
         );
-        static internal Guid IID_IRow = new Guid(
+        internal static Guid IID_IRow = new Guid(
             0x0C733AB4,
             0x2A1C,
             0x11CE,
@@ -951,7 +961,7 @@ namespace System.Data.OleDb
             0x77,
             0x3D
         );
-        static internal Guid IID_IRowset = new Guid(
+        internal static Guid IID_IRowset = new Guid(
             0x0C733A7C,
             0x2A1C,
             0x11CE,
@@ -964,7 +974,7 @@ namespace System.Data.OleDb
             0x77,
             0x3D
         );
-        static internal Guid IID_ISQLErrorInfo = new Guid(
+        internal static Guid IID_ISQLErrorInfo = new Guid(
             0x0C733A74,
             0x2A1C,
             0x11CE,
@@ -978,7 +988,7 @@ namespace System.Data.OleDb
             0x3D
         );
 
-        static internal Guid CLSID_DataLinks = new Guid(
+        internal static Guid CLSID_DataLinks = new Guid(
             0x2206CDB2,
             0x19C1,
             0x11D1,
@@ -992,7 +1002,7 @@ namespace System.Data.OleDb
             0x29
         );
 
-        static internal Guid DBGUID_DEFAULT = new Guid(
+        internal static Guid DBGUID_DEFAULT = new Guid(
             0xc8b521fb,
             0x5cf3,
             0x11ce,
@@ -1005,7 +1015,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal Guid DBGUID_ROWSET = new Guid(
+        internal static Guid DBGUID_ROWSET = new Guid(
             0xc8b522f6,
             0x5cf3,
             0x11ce,
@@ -1018,7 +1028,7 @@ namespace System.Data.OleDb
             0x77,
             0x3d
         );
-        static internal Guid DBGUID_ROW = new Guid(
+        internal static Guid DBGUID_ROW = new Guid(
             0xc8b522f7,
             0x5cf3,
             0x11ce,
@@ -1032,7 +1042,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static internal Guid DBGUID_ROWDEFAULTSTREAM = new Guid(
+        internal static Guid DBGUID_ROWDEFAULTSTREAM = new Guid(
             0x0C733AB7,
             0x2A1C,
             0x11CE,
@@ -1046,7 +1056,7 @@ namespace System.Data.OleDb
             0x3D
         );
 
-        static internal readonly Guid CLSID_MSDASQL = new Guid(
+        internal static readonly Guid CLSID_MSDASQL = new Guid(
             0xc8b522cb,
             0x5cf3,
             0x11ce,
@@ -1060,7 +1070,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static internal readonly object DBCOL_SPECIALCOL = new Guid(
+        internal static readonly object DBCOL_SPECIALCOL = new Guid(
             0xc8b52232,
             0x5cf3,
             0x11ce,
@@ -1074,7 +1084,7 @@ namespace System.Data.OleDb
             0x3d
         );
 
-        static internal readonly char[] ErrorTrimCharacters = new char[] { '\r', '\n', '\0' }; // MDAC 73707
+        internal static readonly char[] ErrorTrimCharacters = new char[] { '\r', '\n', '\0' }; // MDAC 73707
 
         // used by ConnectionString hashtable, must be all lowercase
         internal const string Asynchronous_Processing = "asynchronous processing";
@@ -1162,7 +1172,9 @@ namespace System.Data.OleDb
         internal const string Keyword = "Keyword";
 
         // Debug error string writeline
-        static internal string ELookup(OleDbHResult hr)
+        internal
+        // Debug error string writeline
+        static string ELookup(OleDbHResult hr)
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(hr.ToString());
@@ -1176,10 +1188,11 @@ namespace System.Data.OleDb
             return builder.ToString();
         }
 
+        private
 #if DEBUG
-        static readonly private Hashtable g_wlookpup = new Hashtable();
+        static readonly Hashtable g_wlookpup = new Hashtable();
 
-        static internal string WLookup(short id)
+        internal static string WLookup(short id)
         {
             string value = (string)g_wlookpup[id];
             if (null == value)

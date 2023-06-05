@@ -81,7 +81,7 @@ namespace System.Web.Configuration
             get { return s_elemProperty; }
         }
 
-        static private void ValidateElement(object value)
+        private static void ValidateElement(object value)
         {
             Debug.Assert((value != null) && (value is IgnoreDeviceFilterElement));
             IgnoreDeviceFilterElement elem = (IgnoreDeviceFilterElement)value;

@@ -16,7 +16,7 @@ namespace System.ServiceModel.Activation.Configuration
             }
         }
 
-        static public ServiceModelActivationSectionGroup GetSectionGroup(Configuration config)
+        public static ServiceModelActivationSectionGroup GetSectionGroup(Configuration config)
         {
             if (config == null)
             {

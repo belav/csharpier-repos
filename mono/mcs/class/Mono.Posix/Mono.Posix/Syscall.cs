@@ -191,19 +191,19 @@ namespace Mono.Posix
         public static extern int fork();
 
         [DllImport("libc", SetLastError = true)]
-        public unsafe static extern IntPtr read(int fileDescriptor, void* buf, IntPtr count);
+        public static extern unsafe IntPtr read(int fileDescriptor, void* buf, IntPtr count);
 
         [DllImport("libc", SetLastError = true)]
-        public unsafe static extern IntPtr write(int fileDescriptor, void* buf, IntPtr count);
+        public static extern unsafe IntPtr write(int fileDescriptor, void* buf, IntPtr count);
 
         [DllImport("libc", EntryPoint = "open", SetLastError = true)]
         internal static extern int syscall_open(string pathname, int flags, int mode);
 
         [DllImport("MonoPosixHelper")]
-        internal extern static int map_Mono_Posix_OpenFlags(OpenFlags flags);
+        internal static extern int map_Mono_Posix_OpenFlags(OpenFlags flags);
 
         [DllImport("MonoPosixHelper")]
-        internal extern static int map_Mono_Posix_FileMode(FileMode mode);
+        internal static extern int map_Mono_Posix_FileMode(FileMode mode);
 
         public static int open(string pathname, OpenFlags flags)
         {
@@ -228,10 +228,10 @@ namespace Mono.Posix
         public static extern int close(int fileDescriptor);
 
         [DllImport("libc", EntryPoint = "waitpid", SetLastError = true)]
-        unsafe internal static extern int syscall_waitpid(int pid, int* status, int options);
+        internal static extern unsafe int syscall_waitpid(int pid, int* status, int options);
 
         [DllImport("MonoPosixHelper")]
-        internal extern static int map_Mono_Posix_WaitOptions(WaitOptions wait_options);
+        internal static extern int map_Mono_Posix_WaitOptions(WaitOptions wait_options);
 
         public static int waitpid(int pid, out int status, WaitOptions options)
         {
@@ -337,10 +337,10 @@ namespace Mono.Posix
         // TODO: utime
 
         [DllImport("libc", EntryPoint = "access", SetLastError = true)]
-        internal extern static int syscall_access(string pathname, int mode);
+        internal static extern int syscall_access(string pathname, int mode);
 
         [DllImport("MonoPosixHelper")]
-        internal extern static int map_Mono_Posix_AccessMode(AccessMode mode);
+        internal static extern int map_Mono_Posix_AccessMode(AccessMode mode);
 
         public static int access(string pathname, AccessMode mode)
         {
@@ -362,7 +362,7 @@ namespace Mono.Posix
         public static extern int rename(string oldPath, string newPath);
 
         [DllImport("libc", EntryPoint = "mkdir", SetLastError = true)]
-        internal extern static int syscall_mkdir(string pathname, int mode);
+        internal static extern int syscall_mkdir(string pathname, int mode);
 
         public static int mkdir(string pathname, FileMode mode)
         {
@@ -491,7 +491,7 @@ namespace Mono.Posix
         }
 
         [DllImport("MonoPosixHelper")]
-        internal extern static int helper_Mono_Posix_Stat(
+        internal static extern int helper_Mono_Posix_Stat(
             string filename,
             bool dereference,
             out int device,

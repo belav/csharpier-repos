@@ -131,7 +131,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public HMAC Create()
+        public static
+        //
+        // public methods
+        //
+
+        new HMAC Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.HMACSHA1();
@@ -140,7 +145,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public HMAC Create(string algorithmName)
+        public static new HMAC Create(string algorithmName)
         {
             return (HMAC)CryptoConfig.CreateFromName(algorithmName);
         }

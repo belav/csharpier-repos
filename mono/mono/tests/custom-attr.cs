@@ -62,7 +62,7 @@ namespace Test
     [My3(Prop = new char[] { 'A', 'B', 'C', 'D' }, Prop2 = new char[] { 'A', 'D' })]
     public class Test
     {
-        static public int Main()
+        public static int Main()
         {
             System.Reflection.MemberInfo info = typeof(Test);
             object[] attributes = info.GetCustomAttributes(false);

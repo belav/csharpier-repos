@@ -48,11 +48,12 @@ namespace Mono.Security.Protocol.Ntlm
 {
     public class ChallengeResponse : IDisposable
     {
-        static private byte[] magic = { 0x4B, 0x47, 0x53, 0x21, 0x40, 0x23, 0x24, 0x25 };
+        private static byte[] magic = { 0x4B, 0x47, 0x53, 0x21, 0x40, 0x23, 0x24, 0x25 };
 
+        private
         // This is the pre-encrypted magic value with a null DES key (0xAAD3B435B51404EE)
         // Ref: http://packetstormsecurity.nl/Crackers/NT/l0phtcrack/l0phtcrack2.5-readme.html
-        static private byte[] nullEncMagic = { 0xAA, 0xD3, 0xB4, 0x35, 0xB5, 0x14, 0x04, 0xEE };
+        static byte[] nullEncMagic = { 0xAA, 0xD3, 0xB4, 0x35, 0xB5, 0x14, 0x04, 0xEE };
 
         private bool _disposed;
         private byte[] _challenge;

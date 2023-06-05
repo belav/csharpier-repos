@@ -6,8 +6,8 @@ using System;
 
 internal class Test_xaddmuly
 {
-    static public float x = 0x8000;
-    static public float y = 0xF;
+    public static float x = 0x8000;
+    public static float y = 0xF;
 
     public static int Main()
     {

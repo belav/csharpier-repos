@@ -659,7 +659,7 @@ namespace System.Net.NetworkInformation
         private const string IPHLPAPI = "iphlpapi.dll";
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetAdaptersAddresses(
+        internal static extern uint GetAdaptersAddresses(
             AddressFamily family,
             uint flags,
             IntPtr pReserved,
@@ -673,47 +673,47 @@ namespace System.Net.NetworkInformation
             Justification = "This operation is Read-Only and does not access restricted information"
         )]
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetBestInterfaceEx(byte[] ipAddress, out int index);
+        internal static extern uint GetBestInterfaceEx(byte[] ipAddress, out int index);
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetIfEntry2(ref MibIfRow2 pIfRow);
+        internal static extern uint GetIfEntry2(ref MibIfRow2 pIfRow);
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetIpStatisticsEx(
+        internal static extern uint GetIpStatisticsEx(
             out MibIpStats statistics,
             AddressFamily family
         );
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetTcpStatisticsEx(
+        internal static extern uint GetTcpStatisticsEx(
             out MibTcpStats statistics,
             AddressFamily family
         );
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetUdpStatisticsEx(
+        internal static extern uint GetUdpStatisticsEx(
             out MibUdpStats statistics,
             AddressFamily family
         );
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetIcmpStatistics(out MibIcmpInfo statistics);
+        internal static extern uint GetIcmpStatistics(out MibIcmpInfo statistics);
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetIcmpStatisticsEx(
+        internal static extern uint GetIcmpStatisticsEx(
             out MibIcmpInfoEx statistics,
             AddressFamily family
         );
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetTcpTable(
+        internal static extern uint GetTcpTable(
             SafeLocalFree pTcpTable,
             ref uint dwOutBufLen,
             bool order
         );
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetExtendedTcpTable(
+        internal static extern uint GetExtendedTcpTable(
             SafeLocalFree pTcpTable,
             ref uint dwOutBufLen,
             bool order,
@@ -723,14 +723,14 @@ namespace System.Net.NetworkInformation
         );
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetUdpTable(
+        internal static extern uint GetUdpTable(
             SafeLocalFree pUdpTable,
             ref uint dwOutBufLen,
             bool order
         );
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetExtendedUdpTable(
+        internal static extern uint GetExtendedUdpTable(
             SafeLocalFree pUdpTable,
             ref uint dwOutBufLen,
             bool order,
@@ -740,26 +740,26 @@ namespace System.Net.NetworkInformation
         );
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetNetworkParams(SafeLocalFree pFixedInfo, ref uint pOutBufLen);
+        internal static extern uint GetNetworkParams(SafeLocalFree pFixedInfo, ref uint pOutBufLen);
 
         [DllImport(IPHLPAPI)]
-        internal extern static uint GetPerAdapterInfo(
+        internal static extern uint GetPerAdapterInfo(
             uint IfIndex,
             SafeLocalFree pPerAdapterInfo,
             ref uint pOutBufLen
         );
 
         [DllImport(IPHLPAPI, SetLastError = true)]
-        internal extern static SafeCloseIcmpHandle IcmpCreateFile();
+        internal static extern SafeCloseIcmpHandle IcmpCreateFile();
 
         [DllImport(IPHLPAPI, SetLastError = true)]
-        internal extern static SafeCloseIcmpHandle Icmp6CreateFile();
+        internal static extern SafeCloseIcmpHandle Icmp6CreateFile();
 
         [DllImport(IPHLPAPI, SetLastError = true)]
-        internal extern static bool IcmpCloseHandle(IntPtr handle);
+        internal static extern bool IcmpCloseHandle(IntPtr handle);
 
         [DllImport(IPHLPAPI, SetLastError = true)]
-        internal extern static uint IcmpSendEcho2(
+        internal static extern uint IcmpSendEcho2(
             SafeCloseIcmpHandle icmpHandle,
             SafeWaitHandle Event,
             IntPtr apcRoutine,
@@ -774,7 +774,7 @@ namespace System.Net.NetworkInformation
         );
 
         [DllImport(IPHLPAPI, SetLastError = true)]
-        internal extern static uint IcmpSendEcho2(
+        internal static extern uint IcmpSendEcho2(
             SafeCloseIcmpHandle icmpHandle,
             IntPtr Event,
             IntPtr apcRoutine,
@@ -789,7 +789,7 @@ namespace System.Net.NetworkInformation
         );
 
         [DllImport(IPHLPAPI, SetLastError = true)]
-        internal extern static uint Icmp6SendEcho2(
+        internal static extern uint Icmp6SendEcho2(
             SafeCloseIcmpHandle icmpHandle,
             SafeWaitHandle Event,
             IntPtr apcRoutine,
@@ -805,7 +805,7 @@ namespace System.Net.NetworkInformation
         );
 
         [DllImport(IPHLPAPI, SetLastError = true)]
-        internal extern static uint Icmp6SendEcho2(
+        internal static extern uint Icmp6SendEcho2(
             SafeCloseIcmpHandle icmpHandle,
             IntPtr Event,
             IntPtr apcRoutine,

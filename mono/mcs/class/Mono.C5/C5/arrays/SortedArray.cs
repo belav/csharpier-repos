@@ -846,7 +846,7 @@ namespace C5
         /// Remove all items from this collection, resetting internal array size.
         /// </summary>
         [Tested]
-        override public void Clear()
+        public override void Clear()
         {
             int oldCount = size;
             base.Clear();

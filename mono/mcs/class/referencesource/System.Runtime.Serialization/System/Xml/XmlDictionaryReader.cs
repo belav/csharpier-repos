@@ -20,7 +20,7 @@ namespace System.Xml
     {
         internal const int MaxInitialArrayLength = 65535;
 
-        static public XmlDictionaryReader CreateDictionaryReader(XmlReader reader)
+        public static XmlDictionaryReader CreateDictionaryReader(XmlReader reader)
         {
             if (reader == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
@@ -137,7 +137,7 @@ namespace System.Xml
             return reader;
         }
 
-        static public XmlDictionaryReader CreateTextReader(
+        public static XmlDictionaryReader CreateTextReader(
             byte[] buffer,
             XmlDictionaryReaderQuotas quotas
         )
@@ -149,7 +149,7 @@ namespace System.Xml
             return CreateTextReader(buffer, 0, buffer.Length, quotas);
         }
 
-        static public XmlDictionaryReader CreateTextReader(
+        public static XmlDictionaryReader CreateTextReader(
             byte[] buffer,
             int offset,
             int count,
@@ -159,7 +159,7 @@ namespace System.Xml
             return CreateTextReader(buffer, offset, count, null, quotas, null);
         }
 
-        static public XmlDictionaryReader CreateTextReader(
+        public static XmlDictionaryReader CreateTextReader(
             byte[] buffer,
             int offset,
             int count,
@@ -173,7 +173,7 @@ namespace System.Xml
             return reader;
         }
 
-        static public XmlDictionaryReader CreateTextReader(
+        public static XmlDictionaryReader CreateTextReader(
             Stream stream,
             XmlDictionaryReaderQuotas quotas
         )
@@ -181,7 +181,7 @@ namespace System.Xml
             return CreateTextReader(stream, null, quotas, null);
         }
 
-        static public XmlDictionaryReader CreateTextReader(
+        public static XmlDictionaryReader CreateTextReader(
             Stream stream,
             Encoding encoding,
             XmlDictionaryReaderQuotas quotas,
@@ -193,7 +193,7 @@ namespace System.Xml
             return reader;
         }
 
-        static public XmlDictionaryReader CreateMtomReader(
+        public static XmlDictionaryReader CreateMtomReader(
             Stream stream,
             Encoding encoding,
             XmlDictionaryReaderQuotas quotas
@@ -205,7 +205,7 @@ namespace System.Xml
             return CreateMtomReader(stream, new Encoding[1] { encoding }, quotas);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(
+        public static XmlDictionaryReader CreateMtomReader(
             Stream stream,
             Encoding[] encodings,
             XmlDictionaryReaderQuotas quotas
@@ -214,7 +214,7 @@ namespace System.Xml
             return CreateMtomReader(stream, encodings, null, quotas);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(
+        public static XmlDictionaryReader CreateMtomReader(
             Stream stream,
             Encoding[] encodings,
             string contentType,
@@ -224,7 +224,7 @@ namespace System.Xml
             return CreateMtomReader(stream, encodings, contentType, quotas, int.MaxValue, null);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(
+        public static XmlDictionaryReader CreateMtomReader(
             Stream stream,
             Encoding[] encodings,
             string contentType,
@@ -238,7 +238,7 @@ namespace System.Xml
             return reader;
         }
 
-        static public XmlDictionaryReader CreateMtomReader(
+        public static XmlDictionaryReader CreateMtomReader(
             byte[] buffer,
             int offset,
             int count,
@@ -252,7 +252,7 @@ namespace System.Xml
             return CreateMtomReader(buffer, offset, count, new Encoding[1] { encoding }, quotas);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(
+        public static XmlDictionaryReader CreateMtomReader(
             byte[] buffer,
             int offset,
             int count,
@@ -263,7 +263,7 @@ namespace System.Xml
             return CreateMtomReader(buffer, offset, count, encodings, null, quotas);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(
+        public static XmlDictionaryReader CreateMtomReader(
             byte[] buffer,
             int offset,
             int count,
@@ -284,7 +284,7 @@ namespace System.Xml
             );
         }
 
-        static public XmlDictionaryReader CreateMtomReader(
+        public static XmlDictionaryReader CreateMtomReader(
             byte[] buffer,
             int offset,
             int count,

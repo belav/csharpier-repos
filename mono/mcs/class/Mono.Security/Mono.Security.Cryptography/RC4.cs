@@ -60,7 +60,7 @@ namespace Mono.Security.Cryptography
             set { ; }
         }
 
-        new static public RC4 Create()
+        public static new RC4 Create()
         {
 #if FULL_AOT_RUNTIME
             return new ARC4Managed();
@@ -69,7 +69,7 @@ namespace Mono.Security.Cryptography
 #endif
         }
 
-        new static public RC4 Create(string algName)
+        public static new RC4 Create(string algName)
         {
             object o = CryptoConfig.CreateFromName(algName);
             // in case machine.config isn't configured to use

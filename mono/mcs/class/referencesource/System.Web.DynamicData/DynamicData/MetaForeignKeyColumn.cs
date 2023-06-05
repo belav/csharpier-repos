@@ -25,7 +25,11 @@ namespace System.Web.DynamicData
         /// <summary>
         /// Perform initialization logic for this column
         /// </summary>
-        internal protected override void Initialize()
+        protected
+        /// <summary>
+        /// Perform initialization logic for this column
+        /// </summary>
+        internal override void Initialize()
         {
             base.Initialize();
 

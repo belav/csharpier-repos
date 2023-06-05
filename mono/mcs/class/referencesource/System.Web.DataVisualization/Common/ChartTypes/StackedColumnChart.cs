@@ -74,6 +74,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         // Hashtable will contain arrays of doubles stored by group name key.
         Hashtable _stackedGroupsTotalPerPoint = null;
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -81,25 +82,27 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name
+        override string Name
         {
             get { return ChartTypeNames.OneHundredPercentStackedColumn; }
         }
 
+        public
         /// <summary>
         /// Indicates that it's a hundredred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        override public bool HundredPercent
+        override bool HundredPercent
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// Indicates that it's a hundredred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        override public bool HundredPercentSupportNegative
+        override bool HundredPercentSupportNegative
         {
             get { return true; }
         }
@@ -115,7 +118,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        override public void Paint(
+        public
+        #endregion
+
+        #region Painting and Selection methods
+
+        /// <summary>
+        /// Paint HundredPercentStackedColumnChart Chart.
+        /// </summary>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        override void Paint(
             ChartGraphics graph,
             CommonElements common,
             ChartArea area,
@@ -143,7 +158,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointIndex">Index of the point.</param>
         /// <param name="yValueIndex">Index of the Y value to get.</param>
         /// <returns>Y value of the point.</returns>
-        override public double GetYValue(
+        public
+        #endregion
+
+        #region Y values methods
+
+        /// <summary>
+        /// Helper function, which returns the Y value of the point
+        /// </summary>
+        /// <param name="common">Chart common elements.</param>
+        /// <param name="area">Chart area the series belongs to.</param>
+        /// <param name="series">Sereis of the point.</param>
+        /// <param name="point">Point object.</param>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="yValueIndex">Index of the Y value to get.</param>
+        /// <returns>Y value of the point.</returns>
+        override double GetYValue(
             CommonElements common,
             ChartArea area,
             Series series,
@@ -369,6 +399,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         internal string currentStackGroup = string.Empty;
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -376,7 +407,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        virtual public string Name
+        virtual string Name
         {
             get { return ChartTypeNames.StackedColumn; }
         }
@@ -386,24 +417,32 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        virtual public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        virtual System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
+        public
         /// <summary>
         /// True if chart type is stacked
         /// </summary>
-        virtual public bool Stacked
+        virtual bool Stacked
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// True if stacked chart type supports groups
         /// </summary>
-        virtual public bool SupportStackedGroups
+        virtual bool SupportStackedGroups
         {
             get { return true; }
         }
@@ -417,18 +456,20 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
+        public
         /// <summary>
         /// True if chart type supports axeses
         /// </summary>
-        virtual public bool RequireAxes
+        virtual bool RequireAxes
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// Chart type with two y values used for scale ( bubble chart type )
         /// </summary>
-        virtual public bool SecondYScale
+        virtual bool SecondYScale
         {
             get { return false; }
         }
@@ -441,18 +482,20 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart type supports logarithmic axes
         /// </summary>
-        virtual public bool SupportLogarithmicAxes
+        virtual bool SupportLogarithmicAxes
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// True if chart type requires to switch the value (Y) axes position
         /// </summary>
-        virtual public bool SwitchValueAxes
+        virtual bool SwitchValueAxes
         {
             get { return false; }
         }
@@ -465,45 +508,50 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if each data point of a chart must be represented in the legend
         /// </summary>
-        virtual public bool DataPointsInLegend
+        virtual bool DataPointsInLegend
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// Indicates that extra Y values are connected to the scale of the Y axis
         /// </summary>
-        virtual public bool ExtraYValuesConnectedToYAxis
+        virtual bool ExtraYValuesConnectedToYAxis
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// Indicates that it's a hundredred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        virtual public bool HundredPercent
+        virtual bool HundredPercent
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// Indicates that it's a hundredred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        virtual public bool HundredPercentSupportNegative
+        virtual bool HundredPercentSupportNegative
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if palette colors should be applied for each data paoint.
         /// Otherwise the color is applied to the series.
         /// </summary>
-        virtual public bool ApplyPaletteColorsToPoints
+        virtual bool ApplyPaletteColorsToPoints
         {
             get { return false; }
         }
@@ -514,25 +562,34 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="series">Legend item series.</param>
         /// <returns>Legend item style.</returns>
-        virtual public LegendImageStyle GetLegendImageStyle(Series series)
+        public
+        /// <summary>
+        /// How to draw series/points in legend:
+        /// Filled rectangle, Line or Marker
+        /// </summary>
+        /// <param name="series">Legend item series.</param>
+        /// <returns>Legend item style.</returns>
+        virtual LegendImageStyle GetLegendImageStyle(Series series)
         {
             return LegendImageStyle.Rectangle;
         }
 
+        public
         /// <summary>
         /// Number of supported Y value(s) per point
         /// </summary>
-        virtual public int YValuesPerPoint
+        virtual int YValuesPerPoint
         {
             get { return 1; }
         }
 
+        public
         /// <summary>
         /// If the crossing value is auto Crossing value should be
         /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        virtual public bool ZeroCrossing
+        virtual bool ZeroCrossing
         {
             get { return true; }
         }
@@ -557,7 +614,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="common">The Common elements object</param>
         /// <param name="area">Chart area for this chart</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        virtual public void Paint(
+        public
+        #endregion
+
+        #region Painting and Selection methods
+
+        /// <summary>
+        /// Paint StackedColumnChart Chart
+        /// </summary>
+        /// <param name="graph">The Chart Graphics object</param>
+        /// <param name="common">The Common elements object</param>
+        /// <param name="area">Chart area for this chart</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        virtual void Paint(
             ChartGraphics graph,
             CommonElements common,
             ChartArea area,
@@ -1188,7 +1257,17 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="chartTypeName">Series chart type name to include in the result list.</param>
         /// <param name="chartAreaName">Series chart are name where series should belong to.</param>
         /// <returns>Array of series that belong to the specified group.</returns>
-        static internal Series[] GetSeriesByStackedGroupName(
+        internal
+        /// <summary>
+        /// Helper method that gets an array of series that belong to the specified
+        /// stacked group.
+        /// </summary>
+        /// <param name="common">Chart common elements.</param>
+        /// <param name="groupName">Group name to get the list of series for.</param>
+        /// <param name="chartTypeName">Series chart type name to include in the result list.</param>
+        /// <param name="chartAreaName">Series chart are name where series should belong to.</param>
+        /// <returns>Array of series that belong to the specified group.</returns>
+        static Series[] GetSeriesByStackedGroupName(
             CommonElements common,
             string groupName,
             string chartTypeName,
@@ -1232,7 +1311,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="series">Series to get the group name from.</param>
         /// <returns>Series stacked group name.</returns>
-        static internal string GetSeriesStackGroupName(Series series)
+        internal
+        /// <summary>
+        /// Helper method that gets stacked group name from specified series.
+        /// </summary>
+        /// <param name="series">Series to get the group name from.</param>
+        /// <returns>Series stacked group name.</returns>
+        static string GetSeriesStackGroupName(Series series)
         {
             // Get stack group name from the series
             string stackGroupName = string.Empty;
@@ -1248,7 +1333,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="series">Series to check.</param>
         /// <returns>True if feature supported.</returns>
-        static internal bool IsSeriesStackGroupNameSupported(Series series)
+        internal
+        /// <summary>
+        /// Checks if series supports stacked group names.
+        /// </summary>
+        /// <param name="series">Series to check.</param>
+        /// <returns>True if feature supported.</returns>
+        static bool IsSeriesStackGroupNameSupported(Series series)
         {
             if (
                 series.ChartType == SeriesChartType.StackedColumn
@@ -1482,7 +1573,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointIndex">Index of the point.</param>
         /// <param name="yValueIndex">Index of the Y value to get.  Set to -1 to get the height.</param>
         /// <returns>Y value of the point.</returns>
-        virtual public double GetYValue(
+        public
+        #endregion
+
+        #region Y values methods
+
+        /// <summary>
+        /// Helper function, which returns the Y value of the point.
+        /// </summary>
+        /// <param name="common">Chart common elements.</param>
+        /// <param name="area">Chart area the series belongs to.</param>
+        /// <param name="series">Sereis of the point.</param>
+        /// <param name="point">Point object.</param>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="yValueIndex">Index of the Y value to get.  Set to -1 to get the height.</param>
+        /// <returns>Y value of the point.</returns>
+        virtual double GetYValue(
             CommonElements common,
             ChartArea area,
             Series series,

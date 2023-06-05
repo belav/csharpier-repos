@@ -27,7 +27,7 @@ public class bar
 
 public class bar2
 {
-    static public int x;
+    public static int x;
 
     static bar2()
     {

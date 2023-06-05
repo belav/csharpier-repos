@@ -731,7 +731,7 @@ namespace System.IO.Compression
             internal SafeDeflateStreamHandle(IntPtr handle)
                 : base(handle, true) { }
 
-            override protected bool ReleaseHandle()
+            protected override bool ReleaseHandle()
             {
                 try
                 {

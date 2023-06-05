@@ -40,7 +40,7 @@ namespace System.ServiceModel.Security.Tokens
             // empty
         }
 
-        internal protected abstract bool HasAsymmetricKey { get; }
+        protected internal abstract bool HasAsymmetricKey { get; }
 
         public SecurityTokenInclusionMode InclusionMode
         {
@@ -68,9 +68,9 @@ namespace System.ServiceModel.Security.Tokens
             set { this.requireDerivedKeys = value; }
         }
 
-        internal protected abstract bool SupportsClientAuthentication { get; }
-        internal protected abstract bool SupportsServerAuthentication { get; }
-        internal protected abstract bool SupportsClientWindowsIdentity { get; }
+        protected internal abstract bool SupportsClientAuthentication { get; }
+        protected internal abstract bool SupportsServerAuthentication { get; }
+        protected internal abstract bool SupportsClientWindowsIdentity { get; }
 
         public SecurityTokenParameters Clone()
         {
@@ -91,12 +91,12 @@ namespace System.ServiceModel.Security.Tokens
 
         protected abstract SecurityTokenParameters CloneCore();
 
-        internal protected abstract SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+        protected internal abstract SecurityKeyIdentifierClause CreateKeyIdentifierClause(
             SecurityToken token,
             SecurityTokenReferenceStyle referenceStyle
         );
 
-        internal protected abstract void InitializeSecurityTokenRequirement(
+        protected internal abstract void InitializeSecurityTokenRequirement(
             SecurityTokenRequirement requirement
         );
 
@@ -161,7 +161,7 @@ namespace System.ServiceModel.Security.Tokens
             );
         }
 
-        internal protected virtual bool MatchesKeyIdentifierClause(
+        protected internal virtual bool MatchesKeyIdentifierClause(
             SecurityToken token,
             SecurityKeyIdentifierClause keyIdentifierClause,
             SecurityTokenReferenceStyle referenceStyle

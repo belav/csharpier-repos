@@ -89,7 +89,7 @@ namespace System.Threading.Tasks
     [FriendAccessAllowed]
     internal static class AsyncCausalityTracer
     {
-        static internal void EnableToETW(bool enabled)
+        internal static void EnableToETW(bool enabled)
         {
 #if !MONO
             if (enabled)

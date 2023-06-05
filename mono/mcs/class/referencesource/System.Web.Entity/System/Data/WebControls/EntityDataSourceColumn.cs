@@ -155,12 +155,12 @@ namespace System.Web.UI.WebControls
             get { return this.memberPath.ClrType; }
         }
 
-        override internal object GetValue(EntityDataSourceWrapper entity)
+        internal override object GetValue(EntityDataSourceWrapper entity)
         {
             return this.memberPath.GetValue(entity);
         }
 
-        override internal void SetValue(EntityDataSourceWrapper entity, object value)
+        internal override void SetValue(EntityDataSourceWrapper entity, object value)
         {
             this.memberPath.SetValue(entity, value);
         }

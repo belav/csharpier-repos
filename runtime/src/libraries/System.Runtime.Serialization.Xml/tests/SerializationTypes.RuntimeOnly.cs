@@ -818,7 +818,7 @@ namespace SerializationTypes
 
         public new string Name3 { get; set; }
 
-        new internal string Name4 { get; set; }
+        internal new string Name4 { get; set; }
 
         public new string Name5 { get; set; }
 
@@ -838,11 +838,11 @@ namespace SerializationTypes
 
         public new string Name3 { get; set; }
 
-        new internal string Name4 { get; set; }
+        internal new string Name4 { get; set; }
 
-        new internal string Name5 { get; set; }
+        internal new string Name5 { get; set; }
 
-        new internal string Name6 { get; set; }
+        internal new string Name6 { get; set; }
     }
 
     [DataContract]

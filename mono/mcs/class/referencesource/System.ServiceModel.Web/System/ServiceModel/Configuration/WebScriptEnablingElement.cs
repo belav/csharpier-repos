@@ -21,7 +21,7 @@ namespace System.ServiceModel.Configuration
             get { return typeof(WebScriptEnablingBehavior); }
         }
 
-        internal protected override object CreateBehavior()
+        protected internal override object CreateBehavior()
         {
             return new WebScriptEnablingBehavior();
         }

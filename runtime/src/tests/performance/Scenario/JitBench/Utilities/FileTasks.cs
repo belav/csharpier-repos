@@ -13,7 +13,7 @@ namespace JitBench
 {
     public static class FileTasks
     {
-        public async static Task DownloadAndUnzip(
+        public static async Task DownloadAndUnzip(
             string remotePath,
             string localExpandedDirPath,
             ITestOutputHelper output,
@@ -117,7 +117,7 @@ namespace JitBench
             }
         }
 
-        public async static Task UnGZip(
+        public static async Task UnGZip(
             string gzipPath,
             string expandedFilePath,
             ITestOutputHelper output
@@ -141,7 +141,7 @@ namespace JitBench
             }
         }
 
-        public async static Task UnTar(
+        public static async Task UnTar(
             string tarPath,
             string expandedDirPath,
             ITestOutputHelper output

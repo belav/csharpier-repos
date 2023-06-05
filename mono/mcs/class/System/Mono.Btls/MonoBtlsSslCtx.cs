@@ -45,47 +45,47 @@ namespace Mono.Btls
             }
         }
 
-        new internal BoringSslCtxHandle Handle
+        internal new BoringSslCtxHandle Handle
         {
             get { return (BoringSslCtxHandle)base.Handle; }
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_ssl_ctx_new();
+        static extern IntPtr mono_btls_ssl_ctx_new();
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_ssl_ctx_free(IntPtr handle);
+        static extern int mono_btls_ssl_ctx_free(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static IntPtr mono_btls_ssl_ctx_up_ref(IntPtr handle);
+        static extern IntPtr mono_btls_ssl_ctx_up_ref(IntPtr handle);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_ssl_ctx_initialize(IntPtr handle, IntPtr instance);
+        static extern void mono_btls_ssl_ctx_initialize(IntPtr handle, IntPtr instance);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_ssl_ctx_set_debug_bio(IntPtr handle, IntPtr bio);
+        static extern void mono_btls_ssl_ctx_set_debug_bio(IntPtr handle, IntPtr bio);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_ssl_ctx_set_cert_verify_callback(
+        static extern void mono_btls_ssl_ctx_set_cert_verify_callback(
             IntPtr handle,
             IntPtr func,
             int cert_required
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_ssl_ctx_set_cert_select_callback(IntPtr handle, IntPtr func);
+        static extern void mono_btls_ssl_ctx_set_cert_select_callback(IntPtr handle, IntPtr func);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_ssl_ctx_set_min_version(IntPtr handle, int version);
+        static extern void mono_btls_ssl_ctx_set_min_version(IntPtr handle, int version);
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_ssl_ctx_set_max_version(IntPtr handle, int version);
+        static extern void mono_btls_ssl_ctx_set_max_version(IntPtr handle, int version);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_ssl_ctx_is_cipher_supported(IntPtr handle, short value);
+        static extern int mono_btls_ssl_ctx_is_cipher_supported(IntPtr handle, short value);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_ssl_ctx_set_ciphers(
+        static extern int mono_btls_ssl_ctx_set_ciphers(
             IntPtr handle,
             int count,
             IntPtr data,
@@ -93,10 +93,10 @@ namespace Mono.Btls
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_ssl_ctx_set_verify_param(IntPtr handle, IntPtr param);
+        static extern int mono_btls_ssl_ctx_set_verify_param(IntPtr handle, IntPtr param);
 
         [DllImport(BTLS_DYLIB)]
-        extern static int mono_btls_ssl_ctx_set_client_ca_list(
+        static extern int mono_btls_ssl_ctx_set_client_ca_list(
             IntPtr handle,
             int count,
             IntPtr sizes,
@@ -104,7 +104,7 @@ namespace Mono.Btls
         );
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_ssl_ctx_set_server_name_callback(IntPtr handle, IntPtr func);
+        static extern void mono_btls_ssl_ctx_set_server_name_callback(IntPtr handle, IntPtr func);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         delegate int NativeVerifyFunc(IntPtr instance, int preverify_ok, IntPtr ctx);

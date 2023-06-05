@@ -54,7 +54,7 @@ namespace System.Web.UI
             IScriptManager,
             IScriptManagerInternal
     {
-        private readonly new IPage _page;
+        private new readonly IPage _page;
         private readonly IControl _control;
         private readonly ICompilationSection _appLevelCompilationSection;
         private readonly IDeploymentSection _deploymentSection;

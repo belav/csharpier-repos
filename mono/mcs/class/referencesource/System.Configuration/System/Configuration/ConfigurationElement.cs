@@ -2830,7 +2830,7 @@ namespace System.Configuration
             }
         }
 
-        internal protected virtual ConfigurationElementProperty ElementProperty
+        protected internal virtual ConfigurationElementProperty ElementProperty
         {
             get { return _elementProperty; }
         }

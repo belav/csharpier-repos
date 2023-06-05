@@ -2774,7 +2774,7 @@ namespace System.Data.Query.PlanCompiler
     /// </summary>
     internal class StructuredTypeNullabilityAnalyzer : ColumnMapVisitor<HashSet<string>>
     {
-        static internal StructuredTypeNullabilityAnalyzer Instance =
+        internal static StructuredTypeNullabilityAnalyzer Instance =
             new StructuredTypeNullabilityAnalyzer();
 
         /// <summary>

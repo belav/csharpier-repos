@@ -159,7 +159,7 @@ namespace System.ServiceModel.Configuration
             this.ReaderQuotas.MaxStringContentLength = source.ReaderQuotas.MaxStringContentLength;
         }
 
-        internal protected override BindingElement CreateBindingElement()
+        protected internal override BindingElement CreateBindingElement()
         {
             WebMessageEncodingBindingElement binding = new WebMessageEncodingBindingElement();
             this.ApplyConfiguration(binding);

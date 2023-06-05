@@ -74,7 +74,17 @@ namespace System.Text.RegularExpressions
         ///          the substring that was matched.
         ///       </para>
         ///    </devdoc>
-        override public String ToString()
+        public
+        /*
+         * The capture as a string
+         */
+        /// <devdoc>
+        ///    <para>
+        ///       Returns
+        ///          the substring that was matched.
+        ///       </para>
+        ///    </devdoc>
+        override String ToString()
         {
             return Value;
         }

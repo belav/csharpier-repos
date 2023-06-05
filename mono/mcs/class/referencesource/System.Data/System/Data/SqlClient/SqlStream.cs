@@ -22,7 +22,7 @@ namespace System.Data.SqlClient
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    sealed internal class SqlStream : Stream
+    internal sealed class SqlStream : Stream
     {
         private SqlDataReader _reader; // reader we will stream off
         private int _columnOrdinal;
@@ -52,33 +52,33 @@ namespace System.Data.SqlClient
             _advanceReader = advanceReader;
         }
 
-        override public bool CanRead
+        public override bool CanRead
         {
             get { return true; }
         }
 
-        override public bool CanSeek
+        public override bool CanSeek
         {
             get { return false; }
         }
 
-        override public bool CanWrite
+        public override bool CanWrite
         {
             get { return false; }
         }
 
-        override public long Length
+        public override long Length
         {
             get { throw ADP.NotSupported(); }
         }
 
-        override public long Position
+        public override long Position
         {
             get { throw ADP.NotSupported(); }
             set { throw ADP.NotSupported(); }
         }
 
-        override protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             try
             {
@@ -94,12 +94,12 @@ namespace System.Data.SqlClient
             }
         }
 
-        override public void Flush()
+        public override void Flush()
         {
             throw ADP.NotSupported();
         }
 
-        override public int Read(byte[] buffer, int offset, int count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
             int intCount = 0;
             int cBufferedData = 0;
@@ -304,27 +304,28 @@ namespace System.Data.SqlClient
             );
         }
 
-        override public long Seek(long offset, SeekOrigin origin)
+        public override long Seek(long offset, SeekOrigin origin)
         {
             throw ADP.NotSupported();
         }
 
-        override public void SetLength(long value)
+        public override void SetLength(long value)
         {
             throw ADP.NotSupported();
         }
 
-        override public void Write(byte[] buffer, int offset, int count)
+        public override void Write(byte[] buffer, int offset, int count)
         {
             throw ADP.NotSupported();
         }
     }
 
+    internal
     // XmlTextReader does not read all the bytes off the network buffers, so we have to cache it here in the random access
     // case. This causes double buffering and is a perf hit, but this is not the high perf way for accessing this type of data.
     // In the case of sequential access, we do not have to do any buffering since the XmlTextReader we return can become
     // invalid as soon as we move off the current column.
-    sealed internal class SqlCachedStream : Stream
+    sealed class SqlCachedStream : Stream
     {
         int _currentPosition; // Position within the current array byte
         int _currentArrayIndex; // Index into the _cachedBytes ArrayList
@@ -337,27 +338,27 @@ namespace System.Data.SqlClient
             _cachedBytes = sqlBuf.CachedBytes;
         }
 
-        override public bool CanRead
+        public override bool CanRead
         {
             get { return true; }
         }
 
-        override public bool CanSeek
+        public override bool CanSeek
         {
             get { return true; }
         }
 
-        override public bool CanWrite
+        public override bool CanWrite
         {
             get { return false; }
         }
 
-        override public long Length
+        public override long Length
         {
             get { return TotalLength; }
         }
 
-        override public long Position
+        public override long Position
         {
             get
             {
@@ -382,7 +383,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             try
             {
@@ -399,12 +400,12 @@ namespace System.Data.SqlClient
             }
         }
 
-        override public void Flush()
+        public override void Flush()
         {
             throw ADP.NotSupported();
         }
 
-        override public int Read(byte[] buffer, int offset, int count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
             int cb;
             int intCount = 0;
@@ -465,7 +466,7 @@ namespace System.Data.SqlClient
             return intCount;
         }
 
-        override public long Seek(long offset, SeekOrigin origin)
+        public override long Seek(long offset, SeekOrigin origin)
         {
             long pos = 0;
 
@@ -496,12 +497,12 @@ namespace System.Data.SqlClient
             return pos;
         }
 
-        override public void SetLength(long value)
+        public override void SetLength(long value)
         {
             throw ADP.NotSupported();
         }
 
-        override public void Write(byte[] buffer, int offset, int count)
+        public override void Write(byte[] buffer, int offset, int count)
         {
             throw ADP.NotSupported();
         }
@@ -549,7 +550,7 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class SqlStreamingXml
+    internal sealed class SqlStreamingXml
     {
         int _columnOrdinal;
         SqlDataReader _reader;

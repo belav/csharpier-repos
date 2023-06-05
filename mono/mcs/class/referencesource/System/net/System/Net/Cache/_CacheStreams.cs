@@ -372,7 +372,7 @@ namespace System.Net.Cache
         }
 
         // Subclasses should use Dispose(bool, CloseExState)
-        protected override sealed void Dispose(bool disposing)
+        protected sealed override void Dispose(bool disposing)
         {
             Dispose(disposing, CloseExState.Normal);
         }

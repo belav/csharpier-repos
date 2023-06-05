@@ -79,7 +79,7 @@ namespace System.Web.Configuration
         static Timer saveLocationsTimer;
 
         static ArrayList extra_assemblies = null;
-        static internal ArrayList ExtraAssemblies
+        internal static ArrayList ExtraAssemblies
         {
             get
             {
@@ -783,8 +783,9 @@ namespace System.Web.Configuration
             }
         }
 
+        internal
         #region stuff copied from WebConfigurationSettings
-        static internal IConfigurationSystem oldConfig;
+        static IConfigurationSystem oldConfig;
         static Web20DefaultConfig config;
 
         //static IInternalConfigSystem configSystem;

@@ -22,7 +22,7 @@ namespace System.Workflow.Activities
     [ActivityDesignerTheme(typeof(PolicyDesignerTheme))]
     internal sealed class PolicyDesigner : ActivityDesigner, IServiceProvider
     {
-        new public object GetService(Type type)
+        public new object GetService(Type type)
         {
             return base.GetService(type);
         }

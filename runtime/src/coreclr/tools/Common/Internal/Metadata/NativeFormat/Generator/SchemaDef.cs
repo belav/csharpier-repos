@@ -74,11 +74,11 @@ public class MemberDef
         Comment = comment;
     }
 
-    readonly public string Name;
-    readonly public object TypeName;
-    readonly public MemberDefFlags Flags;
-    readonly public string Value;
-    readonly public string Comment;
+    public readonly string Name;
+    public readonly object TypeName;
+    public readonly MemberDefFlags Flags;
+    public readonly string Value;
+    public readonly string Comment;
 
     public string GetMemberType(MemberTypeKind kind = MemberTypeKind.Accessor)
     {
@@ -153,11 +153,11 @@ public class RecordDef
         Members = members;
     }
 
-    readonly public string Name;
-    readonly public string BaseTypeName;
-    readonly public RecordDefFlags Flags;
-    readonly public string Comment;
-    readonly public MemberDef[] Members;
+    public readonly string Name;
+    public readonly string BaseTypeName;
+    public readonly RecordDefFlags Flags;
+    public readonly string Comment;
+    public readonly MemberDef[] Members;
 }
 
 public class EnumType
@@ -168,8 +168,8 @@ public class EnumType
         UnderlyingType = underlyingType;
     }
 
-    readonly public string Name;
-    readonly public string UnderlyingType;
+    public readonly string Name;
+    public readonly string UnderlyingType;
 }
 
 public class PrimitiveType
@@ -181,9 +181,9 @@ public class PrimitiveType
         CustomCompare = customCompare;
     }
 
-    readonly public string Name;
-    readonly public string TypeName;
-    readonly public bool CustomCompare;
+    public readonly string Name;
+    public readonly string TypeName;
+    public readonly bool CustomCompare;
 }
 
 /// <summary>

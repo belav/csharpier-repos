@@ -26,8 +26,9 @@ namespace System.Globalization
     [Serializable]
     public class ThaiBuddhistCalendar : Calendar
     {
+        internal
         // Initialize our era info.
-        static internal EraInfo[] thaiBuddhistEraInfo = new EraInfo[]
+        static EraInfo[] thaiBuddhistEraInfo = new EraInfo[]
         {
             new EraInfo(1, 1, 1, 1, -543, 544, GregorianCalendar.MaxYear + 543) // era #, start year/month/day, yearOffset, minEraYear
         };

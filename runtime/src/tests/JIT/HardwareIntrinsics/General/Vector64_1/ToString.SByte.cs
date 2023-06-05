@@ -18,7 +18,7 @@ namespace JIT.HardwareIntrinsics.General
 {
     public static partial class Program
     {
-        private unsafe static void ToStringSByte()
+        private static unsafe void ToStringSByte()
         {
             int size = Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
             SByte[] values = new SByte[size];

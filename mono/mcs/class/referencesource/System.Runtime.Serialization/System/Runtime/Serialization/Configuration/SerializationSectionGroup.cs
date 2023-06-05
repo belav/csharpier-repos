@@ -7,7 +7,7 @@ namespace System.Runtime.Serialization.Configuration
 
     public sealed class SerializationSectionGroup : ConfigurationSectionGroup
     {
-        static public SerializationSectionGroup GetSectionGroup(Configuration config)
+        public static SerializationSectionGroup GetSectionGroup(Configuration config)
         {
             if (config == null)
             {

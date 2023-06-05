@@ -358,7 +358,7 @@ namespace Mono.Tools.CertView
             return "V" + x509.Version;
         }
 
-        static public string OneLine(string input)
+        public static string OneLine(string input)
         {
             // remove tabulation
             string oneline = input.Replace("\t", "");
@@ -371,7 +371,7 @@ namespace Mono.Tools.CertView
             return oneline.Replace(Environment.NewLine, ", ");
         }
 
-        static public string Array2Word(byte[] array)
+        public static string Array2Word(byte[] array)
         {
             StringBuilder sb = new StringBuilder();
             int x = 0;
@@ -385,7 +385,7 @@ namespace Mono.Tools.CertView
             return sb.ToString();
         }
 
-        static private void WriteLine(StringBuilder sb, byte[] extnValue, int n, int pos)
+        private static void WriteLine(StringBuilder sb, byte[] extnValue, int n, int pos)
         {
             int p = pos;
             StringBuilder preview = new StringBuilder();
@@ -412,7 +412,7 @@ namespace Mono.Tools.CertView
             sb.Append(Environment.NewLine);
         }
 
-        static public string Extension2String(byte[] extnValue)
+        public static string Extension2String(byte[] extnValue)
         {
             StringBuilder sb = new StringBuilder();
             int div = (extnValue.Length >> 3);

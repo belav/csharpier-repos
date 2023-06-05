@@ -19,20 +19,21 @@ namespace System.Web.Compilation
 {
     internal class MultiTargetingUtil
     {
+        internal
         // Well-known previous versions
-        static internal readonly FrameworkName FrameworkNameV20 = CreateFrameworkName(
+        static readonly FrameworkName FrameworkNameV20 = CreateFrameworkName(
             ".NETFramework,Version=v2.0"
         );
-        static internal readonly FrameworkName FrameworkNameV30 = CreateFrameworkName(
+        internal static readonly FrameworkName FrameworkNameV30 = CreateFrameworkName(
             ".NETFramework,Version=v3.0"
         );
-        static internal readonly FrameworkName FrameworkNameV35 = CreateFrameworkName(
+        internal static readonly FrameworkName FrameworkNameV35 = CreateFrameworkName(
             ".NETFramework,Version=v3.5"
         );
-        static internal readonly FrameworkName FrameworkNameV40 = CreateFrameworkName(
+        internal static readonly FrameworkName FrameworkNameV40 = CreateFrameworkName(
             ".NETFramework,Version=v4.0"
         );
-        static internal readonly FrameworkName FrameworkNameV45 = CreateFrameworkName(
+        internal static readonly FrameworkName FrameworkNameV45 = CreateFrameworkName(
             ".NETFramework,Version=v4.5"
         );
 

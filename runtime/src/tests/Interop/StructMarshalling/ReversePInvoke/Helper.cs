@@ -934,13 +934,18 @@ public class Helper
 
     #region methods for S11 struct
 
-    unsafe public static void PrintS11(S11 str1, string name)
+    public static
+    #endregion
+
+    #region methods for S11 struct
+
+    unsafe void PrintS11(S11 str1, string name)
     {
         Console.WriteLine("\t{0}.i32 = {1}", name, (int)(str1.i32));
         Console.WriteLine("\t{0}.i = {1}", name, str1.i);
     }
 
-    unsafe public static S11 NewS11(int* i32, int i)
+    public static unsafe S11 NewS11(int* i32, int i)
     {
         S11 s11 = new S11();
         s11.i32 = i32;
@@ -948,7 +953,7 @@ public class Helper
         return s11;
     }
 
-    unsafe public static bool ValidateS11(S11 str1, S11 str2, string methodName)
+    public static unsafe bool ValidateS11(S11 str1, S11 str2, string methodName)
     {
         if (str1.i32 != str2.i32 || str1.i != str2.i)
         {

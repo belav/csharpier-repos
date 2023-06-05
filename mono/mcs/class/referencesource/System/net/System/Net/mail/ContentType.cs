@@ -42,7 +42,7 @@ namespace System.Net.Mime
         /// Default content type - can be used if the Content-Type header
         /// is not defined in the message headers.
         /// </summary>
-        internal readonly static string Default = "application/octet-stream";
+        internal static readonly string Default = "application/octet-stream";
 
         public ContentType()
             : this(Default) { }

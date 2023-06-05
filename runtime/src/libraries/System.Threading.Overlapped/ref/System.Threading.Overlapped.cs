@@ -65,7 +65,7 @@ namespace System.Threading
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe static void Free(System.Threading.NativeOverlapped* nativeOverlappedPtr) { }
+        public static unsafe void Free(System.Threading.NativeOverlapped* nativeOverlappedPtr) { }
 
         [System.CLSCompliantAttribute(false)]
         [System.ObsoleteAttribute(
@@ -88,7 +88,7 @@ namespace System.Threading
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe static System.Threading.Overlapped Unpack(
+        public static unsafe System.Threading.Overlapped Unpack(
             System.Threading.NativeOverlapped* nativeOverlappedPtr
         )
         {
@@ -180,7 +180,7 @@ namespace System.Threading
         public unsafe void FreeNativeOverlapped(System.Threading.NativeOverlapped* overlapped) { }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe static object? GetNativeOverlappedState(
+        public static unsafe object? GetNativeOverlappedState(
             System.Threading.NativeOverlapped* overlapped
         )
         {

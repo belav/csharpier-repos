@@ -1646,7 +1646,7 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
             get { return _queue; }
         }
 
-        override public bool Equals(object value)
+        public override bool Equals(object value)
         {
             SqlConnectionContainerHashHelper temp = (SqlConnectionContainerHashHelper)value;
 
@@ -1706,7 +1706,7 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
             return result;
         }
 
-        override public int GetHashCode()
+        public override int GetHashCode()
         {
             int hashValue = 0;
 

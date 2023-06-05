@@ -33,14 +33,17 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlObjectListAdapter : XhtmlControlAdapter
     {
+        protected
         /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.BackToList"]/*' />
-        internal protected static readonly String BackToList = "__back";
+        internal static readonly String BackToList = "__back";
 
+        protected
         /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.ShowMoreFormat"]/*' />
-        internal protected static readonly String ShowMoreFormat = "__more{0}";
+        internal static readonly String ShowMoreFormat = "__more{0}";
 
+        protected
         /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.ShowMore"]/*' />
-        internal protected static readonly String ShowMore = "__more";
+        internal static readonly String ShowMore = "__more";
         private const int _modeDetails = 1;
 
         private BooleanOption _hasItemDetails = BooleanOption.NotSet;

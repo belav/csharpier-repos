@@ -29,7 +29,7 @@ namespace System
     public struct IntPtr : ISerializable
     {
         [SecurityCritical]
-        unsafe private void* m_value; // The compiler treats void* closest to uint hence explicit casts are required to preserve int behavior
+        private unsafe void* m_value; // The compiler treats void* closest to uint hence explicit casts are required to preserve int behavior
 
         public static readonly IntPtr Zero;
 
@@ -108,7 +108,7 @@ namespace System
 #endif
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe override bool Equals(Object obj)
+        public override unsafe bool Equals(Object obj)
         {
             if (obj is IntPtr)
             {
@@ -118,7 +118,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe override int GetHashCode()
+        public override unsafe int GetHashCode()
         {
             return unchecked((int)((long)m_value));
         }
@@ -149,7 +149,7 @@ namespace System
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        public unsafe override String ToString()
+        public override unsafe String ToString()
         {
 #if WIN32
             return ((int)m_value).ToString(CultureInfo.InvariantCulture);
@@ -202,7 +202,7 @@ namespace System
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static explicit operator int(IntPtr value)
+        public static unsafe explicit operator int(IntPtr value)
         {
 #if WIN32
             return (int)value.m_value;
@@ -214,7 +214,7 @@ namespace System
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static explicit operator long(IntPtr value)
+        public static unsafe explicit operator long(IntPtr value)
         {
 #if WIN32
             return (long)(int)value.m_value;
@@ -226,7 +226,7 @@ namespace System
         [System.Security.SecuritySafeCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static bool operator ==(IntPtr value1, IntPtr value2)
+        public static unsafe bool operator ==(IntPtr value1, IntPtr value2)
         {
             return value1.m_value == value2.m_value;
         }
@@ -234,7 +234,7 @@ namespace System
         [System.Security.SecuritySafeCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [System.Runtime.Versioning.NonVersionable]
-        public unsafe static bool operator !=(IntPtr value1, IntPtr value2)
+        public static unsafe bool operator !=(IntPtr value1, IntPtr value2)
         {
             return value1.m_value != value2.m_value;
         }

@@ -13,7 +13,7 @@ namespace System.Data.OleDb
 
     public sealed class OleDbInfoMessageEventArgs : System.EventArgs
     {
-        readonly private OleDbException exception;
+        private readonly OleDbException exception;
 
         internal OleDbInfoMessageEventArgs(OleDbException exception)
         {
@@ -46,7 +46,7 @@ namespace System.Data.OleDb
             get { return this.exception.Source; }
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return Message;
         }

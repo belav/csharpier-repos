@@ -1541,7 +1541,7 @@ namespace System.ServiceModel.Channels
             return ParseInt32(buffer, offset, size);
         }
 
-        public unsafe static UniqueId ParseUniqueID(byte[] buffer, int offset, int size)
+        public static unsafe UniqueId ParseUniqueID(byte[] buffer, int offset, int size)
         {
             return new UniqueId(buffer, offset);
         }

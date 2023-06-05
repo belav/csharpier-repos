@@ -25,7 +25,7 @@ namespace System.Workflow.Activities.Rules
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
     )]
-    sealed public class RuleSetReference : DependencyObject
+    public sealed class RuleSetReference : DependencyObject
     {
         #region members and constructors
 

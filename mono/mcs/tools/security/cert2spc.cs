@@ -24,14 +24,14 @@ namespace Mono.Tools
 {
     class Cert2Spc
     {
-        static private string error;
+        private static string error;
 
-        static private void Header()
+        private static void Header()
         {
             Console.WriteLine(new AssemblyInfo().ToString());
         }
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine(
                 "Usage: cert2spc certificate|crl [certificate|crl] [...] outputfile.spc{0}",

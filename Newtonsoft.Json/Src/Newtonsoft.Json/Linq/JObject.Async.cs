@@ -94,7 +94,7 @@ namespace Newtonsoft.Json.Linq
         /// <returns>
         /// A <see cref="Task{TResult}"/> that represents the asynchronous load. The <see cref="Task{TResult}.Result"/>
         /// property returns a <see cref="JObject"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static Task<JObject> LoadAsync(
+        public static new Task<JObject> LoadAsync(
             JsonReader reader,
             CancellationToken cancellationToken = default
         )
@@ -112,7 +112,7 @@ namespace Newtonsoft.Json.Linq
         /// <returns>
         /// A <see cref="Task{TResult}"/> that represents the asynchronous load. The <see cref="Task{TResult}.Result"/>
         /// property returns a <see cref="JObject"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static async Task<JObject> LoadAsync(
+        public static new async Task<JObject> LoadAsync(
             JsonReader reader,
             JsonLoadSettings? settings,
             CancellationToken cancellationToken = default

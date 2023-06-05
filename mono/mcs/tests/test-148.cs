@@ -31,7 +31,7 @@ public class Y : X
 public class Z : Y
 {
     [IndexerName("Whatever")]
-    new public long this[double a]
+    public new long this[double a]
     {
         get { return 4; }
     }

@@ -26,12 +26,12 @@ namespace System.Data.Mapping.ViewGeneration.Utils
     /// </summary>
     internal static class ExternalCalls
     {
-        static internal bool IsReservedKeyword(string name)
+        internal static bool IsReservedKeyword(string name)
         {
             return CqlLexer.IsReservedKeyword(name);
         }
 
-        static internal DbCommandTree CompileView(
+        internal static DbCommandTree CompileView(
             string viewDef,
             StorageMappingItemCollection mappingItemCollection,
             ParserOptions.CompilationMode compilationMode
@@ -51,7 +51,7 @@ namespace System.Data.Mapping.ViewGeneration.Utils
             return expr;
         }
 
-        static internal DbExpression CompileFunctionView(
+        internal static DbExpression CompileFunctionView(
             string viewDef,
             StorageMappingItemCollection mappingItemCollection,
             ParserOptions.CompilationMode compilationMode,
@@ -87,7 +87,13 @@ namespace System.Data.Mapping.ViewGeneration.Utils
         /// Guarantees type match of lambda variables and <paramref name="functionParameters"/>.
         /// Passes thru all excepions coming from <see cref="CqlQuery"/>.
         /// </summary>
-        static internal DbLambda CompileFunctionDefinition(
+        internal
+        /// <summary>
+        /// Compiles eSQL <paramref name="functionDefinition"/> and returns <see cref="DbLambda"/>.
+        /// Guarantees type match of lambda variables and <paramref name="functionParameters"/>.
+        /// Passes thru all excepions coming from <see cref="CqlQuery"/>.
+        /// </summary>
+        static DbLambda CompileFunctionDefinition(
             string functionFullName,
             string functionDefinition,
             IList<FunctionParameter> functionParameters,

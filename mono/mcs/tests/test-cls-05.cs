@@ -52,12 +52,12 @@ public class CLSClass : BaseClass
 
     public bool setItem;
 
-    static public implicit operator CLSClass(bool value)
+    public static implicit operator CLSClass(bool value)
     {
         return new CLSClass(2);
     }
 
-    static public implicit operator CLSClass(int value)
+    public static implicit operator CLSClass(int value)
     {
         return new CLSClass(2);
     }

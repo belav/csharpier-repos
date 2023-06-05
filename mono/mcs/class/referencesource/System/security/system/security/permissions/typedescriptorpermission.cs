@@ -29,7 +29,7 @@ namespace System.Security.Permissions
     }
 
     [Serializable]
-    sealed public class TypeDescriptorPermission : CodeAccessPermission, IUnrestrictedPermission
+    public sealed class TypeDescriptorPermission : CodeAccessPermission, IUnrestrictedPermission
     {
         private TypeDescriptorPermissionFlags m_flags;
 

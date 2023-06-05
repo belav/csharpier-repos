@@ -19,7 +19,7 @@ namespace PInvokeTest
         }
 
         [DllImport(nameof(PInvokeExampleNative))]
-        private extern static int GetConstantInternal();
+        private static extern int GetConstantInternal();
     }
 
     internal class Test

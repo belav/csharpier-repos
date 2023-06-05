@@ -67,6 +67,7 @@ using System.Diagnostics.Tracing;
 
 namespace System.IO
 {
+    internal sealed
     // This is an internal object implementing IAsyncResult with fields
     // for all of the relevant data necessary to complete the IO operation.
     // This is used by AsyncFSCallback and all of the async methods.
@@ -75,7 +76,7 @@ namespace System.IO
 
     // Ideally we shoult make this type windows only (!FEATURE_PAL). But to make that happen
     // we need to do a lot of untangling in the VM code.
-    unsafe internal sealed class FileStreamAsyncResult : IAsyncResult
+    unsafe class FileStreamAsyncResult : IAsyncResult
     {
         // README:
         // If you modify the order of these fields, make sure to update
@@ -146,7 +147,7 @@ namespace System.IO
 
 #if FEATURE_ASYNC_IO
         [System.Security.SecurityCritical] // auto-generated
-        private unsafe static IOCompletionCallback s_IOCallback;
+        private static unsafe IOCompletionCallback s_IOCallback;
 
         [SecuritySafeCritical]
         internal FileStreamAsyncResult(
@@ -374,7 +375,7 @@ namespace System.IO
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        unsafe private static void AsyncFSCallback(
+        private static unsafe void AsyncFSCallback(
             uint errorCode,
             uint numBytes,
             NativeOverlapped* pOverlapped
@@ -1618,7 +1619,7 @@ namespace System.IO
         // If pinningHandle is not null, caller must free it AFTER the call to
         // CreateFile has returned.
         [System.Security.SecuritySafeCritical] // auto-generated
-        private unsafe static Win32Native.SECURITY_ATTRIBUTES GetSecAttrs(
+        private static unsafe Win32Native.SECURITY_ATTRIBUTES GetSecAttrs(
             FileShare share,
             FileSecurity fileSecurity,
             out Object pinningHandle
@@ -2791,7 +2792,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.AppDomain, ResourceScope.AppDomain)]
-        unsafe private FileStreamAsyncResult BeginReadCore(
+        private unsafe FileStreamAsyncResult BeginReadCore(
             byte[] bytes,
             int offset,
             int numBytes,
@@ -2927,7 +2928,7 @@ namespace System.IO
 #endif //FEATURE_ASYNC_IO
 
         [System.Security.SecuritySafeCritical] // Although the unsafe code is only required in PAL, the block is wide scoped. Leave it here for desktop to ensure it's reviewed.
-        public unsafe override int EndRead(IAsyncResult asyncResult)
+        public override unsafe int EndRead(IAsyncResult asyncResult)
         {
             // There are 3 significantly different IAsyncResults we'll accept
             // here.  One is from Stream::BeginRead.  The other two are variations
@@ -3126,7 +3127,7 @@ namespace System.IO
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.AppDomain, ResourceScope.AppDomain)]
-        unsafe private FileStreamAsyncResult BeginWriteCore(
+        private unsafe FileStreamAsyncResult BeginWriteCore(
             byte[] bytes,
             int offset,
             int numBytes,
@@ -3259,7 +3260,7 @@ namespace System.IO
 #endif //FEATURE_ASYNC_IO
 
         [System.Security.SecuritySafeCritical] // Although the unsafe code is only required in PAL, the block is wide scoped. Leave it here for desktop to ensure it's reviewed.
-        public unsafe override void EndWrite(IAsyncResult asyncResult)
+        public override unsafe void EndWrite(IAsyncResult asyncResult)
         {
             if (asyncResult == null)
                 throw new ArgumentNullException("asyncResult");

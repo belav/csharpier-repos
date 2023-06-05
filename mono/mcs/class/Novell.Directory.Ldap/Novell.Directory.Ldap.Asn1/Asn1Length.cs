@@ -38,14 +38,16 @@ namespace Novell.Directory.Ldap.Asn1
     /// </summary>
     public class Asn1Length
     {
+        public
         /// <summary> Returns the length of this Asn1Length.</summary>
-        virtual public int Length
+        virtual int Length
         {
             get { return length; }
         }
 
+        public
         /// <summary> Returns the encoded length of this Asn1Length.</summary>
-        virtual public int EncodedLength
+        virtual int EncodedLength
         {
             get { return encodedLength; }
         }

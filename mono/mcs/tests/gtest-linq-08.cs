@@ -17,7 +17,7 @@ class TestA
 
 static class TestB
 {
-    static public TestA Where(this TestA a, Func<TestA, bool> predicate)
+    public static TestA Where(this TestA a, Func<TestA, bool> predicate)
     {
         if (predicate(a))
             return new TestA("where used");

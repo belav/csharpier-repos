@@ -3,7 +3,7 @@ using System.Collections;
 
 class Program
 {
-    static public IEnumerable Empty
+    public static IEnumerable Empty
     {
         get
         {

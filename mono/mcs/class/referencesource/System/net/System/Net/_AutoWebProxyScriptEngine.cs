@@ -786,8 +786,8 @@ namespace System.Net
             private static volatile UnsafeNclNativeMethods.RasHelper s_RasHelper;
 
             private static int s_CurrentVersion = 0;
-            private volatile static AutoDetector s_CurrentAutoDetector;
-            private volatile static bool s_Initialized;
+            private static volatile AutoDetector s_CurrentAutoDetector;
+            private static volatile bool s_Initialized;
             private static object s_LockObject;
 
             static AutoDetector()

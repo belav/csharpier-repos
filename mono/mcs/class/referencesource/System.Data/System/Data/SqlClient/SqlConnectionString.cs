@@ -213,8 +213,8 @@ namespace System.Data.SqlClient
             internal const string ExplicitUnbind = "Explicit Unbind";
         }
 
-        static private Hashtable _sqlClientSynonyms;
-        static private Hashtable _netlibMapping;
+        private static Hashtable _sqlClientSynonyms;
+        private static Hashtable _netlibMapping;
 
         private readonly bool _integratedSecurity;
 
@@ -1027,7 +1027,7 @@ namespace System.Data.SqlClient
             return result;
         }
 
-        static internal Hashtable NetlibMapping()
+        internal static Hashtable NetlibMapping()
         {
             const int NetLibCount = 8;
 
@@ -1049,7 +1049,7 @@ namespace System.Data.SqlClient
             return hash;
         }
 
-        static internal bool ValidProtocal(string protocal)
+        internal static bool ValidProtocal(string protocal)
         {
             switch (protocal)
             {

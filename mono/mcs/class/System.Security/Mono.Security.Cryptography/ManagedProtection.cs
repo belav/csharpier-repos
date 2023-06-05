@@ -278,8 +278,8 @@ namespace Mono.Security.Cryptography
 
         private static RSA user;
         private static RSA machine;
-        private readonly static object user_lock = new object();
-        private readonly static object machine_lock = new object();
+        private static readonly object user_lock = new object();
+        private static readonly object machine_lock = new object();
 
         private static RSA GetKey(DataProtectionScope scope)
         {

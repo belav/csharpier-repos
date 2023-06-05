@@ -31,7 +31,7 @@ struct VT
 class P
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    unsafe static int TestMethodInlining(VT* pVT)
+    static unsafe int TestMethodInlining(VT* pVT)
     {
         int v1,
             v2,
@@ -53,7 +53,7 @@ class P
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    unsafe static int TestByPtr(VT* pVT)
+    static unsafe int TestByPtr(VT* pVT)
     {
         int v1,
             v2,
@@ -64,7 +64,7 @@ class P
         return Do(v1, v2);
     }
 
-    unsafe static int Main()
+    static unsafe int Main()
     {
         byte* pDataBytes = stackalloc byte[VT.Size];
         VT* pVT = (VT*)pDataBytes;

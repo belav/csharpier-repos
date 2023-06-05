@@ -51,7 +51,7 @@ namespace Mono.Security.Cryptography
 
         private PKCS8() { }
 
-        static public KeyInfo GetType(byte[] data)
+        public static KeyInfo GetType(byte[] data)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -218,7 +218,10 @@ namespace Mono.Security.Cryptography
 
             // static methods
 
-            static private byte[] RemoveLeadingZero(byte[] bigInt)
+            private
+            // static methods
+
+            static byte[] RemoveLeadingZero(byte[] bigInt)
             {
                 int start = 0;
                 int length = bigInt.Length;
@@ -232,7 +235,7 @@ namespace Mono.Security.Cryptography
                 return bi;
             }
 
-            static private byte[] Normalize(byte[] bigInt, int length)
+            private static byte[] Normalize(byte[] bigInt, int length)
             {
                 if (bigInt.Length == length)
                     return bigInt;
@@ -261,7 +264,22 @@ namespace Mono.Security.Cryptography
              *	otherPrimeInfos   OtherPrimeInfos OPTIONAL
              * }
              */
-            static public RSA DecodeRSA(byte[] keypair)
+            public
+            /*
+             * RSAPrivateKey ::= SEQUENCE {
+             *	version           Version,
+             *	modulus           INTEGER,  -- n
+             *	publicExponent    INTEGER,  -- e
+             *	privateExponent   INTEGER,  -- d
+             *	prime1            INTEGER,  -- p
+             *	prime2            INTEGER,  -- q
+             *	exponent1         INTEGER,  -- d mod (p-1)
+             *	exponent2         INTEGER,  -- d mod (q-1)
+             *	coefficient       INTEGER,  -- (inverse of q) mod p
+             *	otherPrimeInfos   OtherPrimeInfos OPTIONAL
+             * }
+             */
+            static RSA DecodeRSA(byte[] keypair)
             {
                 ASN1 privateKey = new ASN1(keypair);
                 if (privateKey.Tag != 0x30)
@@ -327,7 +345,22 @@ namespace Mono.Security.Cryptography
              *	otherPrimeInfos   OtherPrimeInfos OPTIONAL
              * }
              */
-            static public byte[] Encode(RSA rsa)
+            public
+            /*
+             * RSAPrivateKey ::= SEQUENCE {
+             *	version           Version,
+             *	modulus           INTEGER,  -- n
+             *	publicExponent    INTEGER,  -- e
+             *	privateExponent   INTEGER,  -- d
+             *	prime1            INTEGER,  -- p
+             *	prime2            INTEGER,  -- q
+             *	exponent1         INTEGER,  -- d mod (p-1)
+             *	exponent2         INTEGER,  -- d mod (q-1)
+             *	coefficient       INTEGER,  -- (inverse of q) mod p
+             *	otherPrimeInfos   OtherPrimeInfos OPTIONAL
+             * }
+             */
+            static byte[] Encode(RSA rsa)
             {
                 RSAParameters param = rsa.ExportParameters(true);
 
@@ -350,7 +383,13 @@ namespace Mono.Security.Cryptography
             // can be found (98% of the time) in the X.509 certificate associated
             // with the private key or (2% of the time) the parameters are in it's
             // issuer X.509 certificate (not supported in the .NET framework).
-            static public DSA DecodeDSA(byte[] privateKey, DSAParameters dsaParameters)
+            public
+            // DSA only encode it's X private key inside an ASN.1 INTEGER (Hint: Tag == 0x02)
+            // which isn't enough for rebuilding the keypair. The other parameters
+            // can be found (98% of the time) in the X.509 certificate associated
+            // with the private key or (2% of the time) the parameters are in it's
+            // issuer X.509 certificate (not supported in the .NET framework).
+            static DSA DecodeDSA(byte[] privateKey, DSAParameters dsaParameters)
             {
                 ASN1 pvk = new ASN1(privateKey);
                 if (pvk.Tag != 0x02)
@@ -363,13 +402,13 @@ namespace Mono.Security.Cryptography
                 return dsa;
             }
 
-            static public byte[] Encode(DSA dsa)
+            public static byte[] Encode(DSA dsa)
             {
                 DSAParameters param = dsa.ExportParameters(true);
                 return ASN1Convert.FromUnsignedBigInteger(param.X).GetBytes();
             }
 
-            static public byte[] Encode(AsymmetricAlgorithm aa)
+            public static byte[] Encode(AsymmetricAlgorithm aa)
             {
                 if (aa is RSA)
                     return Encode((RSA)aa);

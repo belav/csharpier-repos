@@ -49,10 +49,11 @@ namespace System.Data.Mapping.Update.Internal
                 private readonly List<DbExpression> m_rightKeySelectors;
                 private static readonly string s_visitorName =
                     typeof(JoinConditionVisitor).FullName;
+                protected
                 #endregion
 
                 #region Properties
-                override protected string VisitorName
+                override string VisitorName
                 {
                     get { return s_visitorName; }
                 }
@@ -76,7 +77,28 @@ namespace System.Data.Mapping.Update.Internal
                 /// </code>
                 /// See Walker class for an explanation of this coding pattern.
                 /// </remarks>
-                static internal void GetKeySelectors(
+                internal
+                #endregion
+
+                #region Methods
+                #region Static helper methods
+                /// <summary>
+                /// Determine properties from the left and right inputs to an equi-join participating
+                /// in predicate.
+                /// </summary>
+                /// <remarks>
+                /// The property definitions returned are 'aligned'. If the join predicate reads:
+                /// <code>
+                /// a = b AND c = d AND e = f
+                /// </code>
+                /// then the output is as follows:
+                /// <code>
+                /// leftProperties = {a, c, e}
+                /// rightProperties = {b, d, f}
+                /// </code>
+                /// See Walker class for an explanation of this coding pattern.
+                /// </remarks>
+                static void GetKeySelectors(
                     DbExpression joinCondition,
                     out ReadOnlyCollection<DbExpression> leftKeySelectors,
                     out ReadOnlyCollection<DbExpression> rightKeySelectors

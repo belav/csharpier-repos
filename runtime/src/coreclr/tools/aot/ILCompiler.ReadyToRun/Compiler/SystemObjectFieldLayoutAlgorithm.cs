@@ -47,7 +47,7 @@ namespace ILCompiler
             };
         }
 
-        public unsafe override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+        public override unsafe ComputedStaticFieldLayout ComputeStaticFieldLayout(
             DefType defType,
             StaticLayoutKind layoutKind
         )

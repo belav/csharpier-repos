@@ -60,7 +60,7 @@ namespace System
         }
 
         [CLSCompliant(false)]
-        unsafe public ArgIterator(RuntimeArgumentHandle arglist, void* ptr)
+        public unsafe ArgIterator(RuntimeArgumentHandle arglist, void* ptr)
         {
             sig = IntPtr.Zero;
             args = IntPtr.Zero;

@@ -143,7 +143,7 @@ namespace System.Security.AccessControl
             }
         }
 
-        protected override sealed void Persist(
+        protected sealed override void Persist(
             SafeHandle handle,
             AccessControlSections includeSections
         )
@@ -151,7 +151,7 @@ namespace System.Security.AccessControl
             Persist(handle, includeSections, null);
         }
 
-        protected override sealed void Persist(string name, AccessControlSections includeSections)
+        protected sealed override void Persist(string name, AccessControlSections includeSections)
         {
             Persist(name, includeSections, null);
         }

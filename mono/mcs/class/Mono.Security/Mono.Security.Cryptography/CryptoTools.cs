@@ -40,7 +40,7 @@ namespace Mono.Security.Cryptography
 #endif
     sealed class KeyBuilder
     {
-        static private RandomNumberGenerator rng;
+        private static RandomNumberGenerator rng;
 
         private KeyBuilder() { }
 
@@ -54,14 +54,14 @@ namespace Mono.Security.Cryptography
             }
         }
 
-        static public byte[] Key(int size)
+        public static byte[] Key(int size)
         {
             byte[] key = new byte[size];
             Rng.GetBytes(key);
             return key;
         }
 
-        static public byte[] IV(int size)
+        public static byte[] IV(int size)
         {
             byte[] iv = new byte[size];
             Rng.GetBytes(iv);

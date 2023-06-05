@@ -43,7 +43,7 @@ class Tests
         return v == expected_v;
     }
 
-    static public int test_0_test()
+    public static int test_0_test()
     {
         SimpleDelegate d1 = new SimpleDelegate(F1);
         SimpleDelegate d2 = new SimpleDelegate(F2);
@@ -169,7 +169,9 @@ class Tests
     }
 
     // Regression test for bug #50366
-    static public int test_0_delegate_equality()
+    public
+    // Regression test for bug #50366
+    static int test_0_delegate_equality()
     {
         if (new SimpleDelegate(F1) == new SimpleDelegate(F1))
             return 0;

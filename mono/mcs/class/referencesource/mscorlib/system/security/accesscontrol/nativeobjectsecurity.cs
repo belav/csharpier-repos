@@ -40,7 +40,7 @@ namespace System.Security.AccessControl
         #region Delegates
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        internal protected delegate System.Exception ExceptionFromErrorCode(
+        protected internal delegate System.Exception ExceptionFromErrorCode(
             int errorCode,
             string name,
             SafeHandle handle,

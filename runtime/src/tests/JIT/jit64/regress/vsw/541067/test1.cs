@@ -31,7 +31,7 @@ namespace AutoGen
 {
     public class Program
     {
-        static public void Test()
+        public static void Test()
         {
             int[] a = new int[1];
             a[0] = 0;

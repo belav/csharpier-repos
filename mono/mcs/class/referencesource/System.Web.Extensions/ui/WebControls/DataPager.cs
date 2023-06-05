@@ -37,7 +37,7 @@ namespace System.Web.UI.WebControls
             INamingContainer,
             ICompositeControlDesignerAccessor
     {
-        private readonly new IPage _page;
+        private new readonly IPage _page;
         private DataPagerFieldCollection _fields;
         private IPageableItemContainer _pageableItemContainer;
         private int _startRowIndex = 0;

@@ -23,11 +23,11 @@ namespace System.Web
 
         [DllImport(ModName.KERNEL32_FULL_NAME)]
         internal /*public*/
-        extern static int GetCurrentProcessId();
+        static extern int GetCurrentProcessId();
 
         [DllImport(ModName.KERNEL32_FULL_NAME)]
         internal /*public*/
-        extern static int GetCurrentThreadId();
+        static extern int GetCurrentThreadId();
 
         [DllImport(ModName.KERNEL32_FULL_NAME)]
         internal static extern bool QueryPerformanceCounter(

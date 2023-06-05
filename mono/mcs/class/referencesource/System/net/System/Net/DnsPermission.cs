@@ -23,7 +23,7 @@ namespace System.Net
         Inherited = false
     )]
     [Serializable()]
-    sealed public class DnsPermissionAttribute : CodeAccessSecurityAttribute
+    public sealed class DnsPermissionAttribute : CodeAccessSecurityAttribute
     {
         public DnsPermissionAttribute(SecurityAction action)
             : base(action) { }

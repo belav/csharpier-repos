@@ -36,9 +36,9 @@ using System.Drawing.Imaging;
 
 public class PrintingMargins
 {
-    static private void QueryPageSettings(object sender, QueryPageSettingsEventArgs e) { }
+    private static void QueryPageSettings(object sender, QueryPageSettingsEventArgs e) { }
 
-    static private void PrintPageEvent(object sender, PrintPageEventArgs e)
+    private static void PrintPageEvent(object sender, PrintPageEventArgs e)
     {
         e.Graphics.DrawRectangle(Pens.Red, e.MarginBounds);
         e.Graphics.DrawRectangle(Pens.Green, e.PageBounds);

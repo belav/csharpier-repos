@@ -20,7 +20,7 @@ using System.Runtime.ConstrainedExecution;
 
 namespace System.Data.OleDb
 {
-    sealed internal class DBPropSet : SafeHandle
+    internal sealed class DBPropSet : SafeHandle
     {
         private readonly Int32 propertySetCount;
 
@@ -164,7 +164,7 @@ namespace System.Data.OleDb
             get { return (IntPtr.Zero == base.handle); }
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             // NOTE: The SafeHandle class guarantees this will be called exactly once and is non-interrutible.
             IntPtr ptr = base.handle;
@@ -339,7 +339,7 @@ namespace System.Data.OleDb
             }
         }
 
-        static internal DBPropSet CreateProperty(
+        internal static DBPropSet CreateProperty(
             Guid propertySet,
             int propertyId,
             bool required,

@@ -49,10 +49,11 @@ namespace Mono.CSharp
         }
     }
 
+    public
     //
     // Abstract class for all fields
     //
-    abstract public class FieldBase : MemberBase
+    abstract class FieldBase : MemberBase
     {
         protected FieldBuilder FieldBuilder;
         protected FieldSpec spec;

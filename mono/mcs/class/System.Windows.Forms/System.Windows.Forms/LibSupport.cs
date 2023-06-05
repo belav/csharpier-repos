@@ -51,6 +51,6 @@ namespace System.Windows.Forms
         delegate IntPtr FindWindowExW(IntPtr hWnd);
 
         [DllImport("MonoSupportW")]
-        extern static void support_register_delegate(string fmt, Delegate d);
+        static extern void support_register_delegate(string fmt, Delegate d);
     }
 }

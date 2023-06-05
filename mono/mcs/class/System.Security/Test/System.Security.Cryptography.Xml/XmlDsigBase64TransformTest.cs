@@ -115,8 +115,8 @@ namespace MonoTests.System.Security.Cryptography.Xml
             return sr.ReadToEnd();
         }
 
-        static private string base64 = "XmlDsigBase64Transform";
-        static private byte[] base64array =
+        private static string base64 = "XmlDsigBase64Transform";
+        private static byte[] base64array =
         {
             0x58,
             0x6D,

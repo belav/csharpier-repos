@@ -21,7 +21,7 @@ internal partial class VectorTest
                 pos[i] += delta;
         }
 
-        static public int VectorArray(T deltaValue)
+        public static int VectorArray(T deltaValue)
         {
             const int Pass = 100;
             const int Fail = -1;
@@ -55,7 +55,7 @@ internal partial class VectorTest
                 pos[i] += delta;
         }
 
-        static public int VectorArray(float deltaValue)
+        public static int VectorArray(float deltaValue)
         {
             const int Pass = 100;
             const int Fail = -1;
@@ -92,7 +92,7 @@ internal partial class VectorTest
                 pos[i] += delta;
         }
 
-        static public int VectorArray(float deltaValue)
+        public static int VectorArray(float deltaValue)
         {
             const int Pass = 100;
             const int Fail = -1;
@@ -127,7 +127,7 @@ internal partial class VectorTest
                 pos[i] += delta;
         }
 
-        static public int VectorArray(float deltaValue)
+        public static int VectorArray(float deltaValue)
         {
             const int Pass = 100;
             const int Fail = -1;

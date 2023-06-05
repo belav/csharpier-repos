@@ -2,12 +2,12 @@ using System;
 
 class Foo
 {
-    static public int i = 0;
+    public static int i = 0;
 }
 
 class Bar
 {
-    static public int j;
+    public static int j;
 
     static Bar()
     {
@@ -17,7 +17,7 @@ class Bar
 
 class Bug
 {
-    static public int Main()
+    public static int Main()
     {
         Foo.i = 5;
         if (Bar.j != 5)

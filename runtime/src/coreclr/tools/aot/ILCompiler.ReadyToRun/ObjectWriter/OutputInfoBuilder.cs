@@ -28,7 +28,7 @@ namespace ILCompiler.PEWriter
     {
         public class Comparer : IComparer<OutputItem>
         {
-            public readonly static Comparer Instance = new Comparer();
+            public static readonly Comparer Instance = new Comparer();
 
             public int Compare([AllowNull] OutputItem x, [AllowNull] OutputItem y)
             {

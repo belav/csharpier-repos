@@ -87,7 +87,7 @@ namespace IntelHardwareIntrinsicTest.General
         }
 
         [Fact]
-        public unsafe static void VectorArgs()
+        public static unsafe void VectorArgs()
         {
             int returnVal = Pass;
 

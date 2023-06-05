@@ -52,7 +52,7 @@ using System.Runtime.Serialization.Formatters;
 namespace System.Runtime.Remoting
 {
     [System.Runtime.InteropServices.ComVisible(true)]
-    static public class RemotingServices
+    public static class RemotingServices
     {
         // Holds the identities of the objects, using uri as index
         static Hashtable uri_hash = new Hashtable();
@@ -104,7 +104,7 @@ namespace System.Runtime.Remoting
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static object InternalExecute(
+        internal static extern object InternalExecute(
             MethodBase method,
             Object obj,
             Object[] parameters,
@@ -113,7 +113,7 @@ namespace System.Runtime.Remoting
 
         // Returns the actual implementation of @method in @type.
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static MethodBase GetVirtualMethod(Type type, MethodBase method);
+        internal static extern MethodBase GetVirtualMethod(Type type, MethodBase method);
 
 #if !FEATURE_REMOTING
         public static bool IsTransparentProxy(object proxy)
@@ -123,7 +123,7 @@ namespace System.Runtime.Remoting
 #else
         [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static bool IsTransparentProxy(object proxy);
+        public static extern bool IsTransparentProxy(object proxy);
 
         internal static bool ProxyCheckCast(RealProxy rp, RuntimeType castType)
         {

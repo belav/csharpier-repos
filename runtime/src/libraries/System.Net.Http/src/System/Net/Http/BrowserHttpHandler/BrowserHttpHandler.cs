@@ -517,7 +517,7 @@ namespace System.Net.Http
                 return response;
             }
 
-            unsafe static Task<int> GetStreamedResponseBytesUnsafe(
+            static unsafe Task<int> GetStreamedResponseBytesUnsafe(
                 WasmFetchResponse _fetchResponse,
                 Memory<byte> buffer,
                 System.Buffers.MemoryHandle handle

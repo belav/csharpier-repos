@@ -68,7 +68,7 @@ namespace Mono.Security
 
         private PKCS7() { }
 
-        static public ASN1 Attribute(string oid, ASN1 value)
+        public static ASN1 Attribute(string oid, ASN1 value)
         {
             ASN1 attr = new ASN1(0x30);
             attr.Add(ASN1Convert.FromOid(oid));
@@ -77,7 +77,7 @@ namespace Mono.Security
             return attr;
         }
 
-        static public ASN1 AlgorithmIdentifier(string oid)
+        public static ASN1 AlgorithmIdentifier(string oid)
         {
             ASN1 ai = new ASN1(0x30);
             ai.Add(ASN1Convert.FromOid(oid));
@@ -85,7 +85,7 @@ namespace Mono.Security
             return ai;
         }
 
-        static public ASN1 AlgorithmIdentifier(string oid, ASN1 parameters)
+        public static ASN1 AlgorithmIdentifier(string oid, ASN1 parameters)
         {
             ASN1 ai = new ASN1(0x30);
             ai.Add(ASN1Convert.FromOid(oid));
@@ -99,7 +99,14 @@ namespace Mono.Security
          *	serialNumber CertificateSerialNumber
          * }
          */
-        static public ASN1 IssuerAndSerialNumber(X509Certificate x509)
+        public
+        /*
+         * IssuerAndSerialNumber ::= SEQUENCE {
+         *	issuer Name,
+         *	serialNumber CertificateSerialNumber
+         * }
+         */
+        static ASN1 IssuerAndSerialNumber(X509Certificate x509)
         {
             ASN1 issuer = null;
             ASN1 serial = null;

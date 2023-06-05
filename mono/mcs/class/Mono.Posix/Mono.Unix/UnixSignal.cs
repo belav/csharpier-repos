@@ -203,7 +203,7 @@ namespace Mono.Unix
 #pragma warning restore 649
 
         #region WaitHandle overrides
-        protected unsafe override void Dispose(bool disposing)
+        protected override unsafe void Dispose(bool disposing)
         {
             base.Dispose(disposing);
             if (signal_info == IntPtr.Zero)

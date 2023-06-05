@@ -43,7 +43,7 @@ namespace System.Security.Permissions
     )]
 #endif
     [System.Runtime.InteropServices.ComVisible(true)]
-    abstract public class IsolatedStoragePermission : CodeAccessPermission, IUnrestrictedPermission
+    public abstract class IsolatedStoragePermission : CodeAccessPermission, IUnrestrictedPermission
     {
         //------------------------------------------------------
         //

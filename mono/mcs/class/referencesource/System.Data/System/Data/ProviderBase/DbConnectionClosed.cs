@@ -18,7 +18,7 @@ namespace System.Data.ProviderBase
     using System.Threading.Tasks;
     using SysTx = System.Transactions;
 
-    abstract internal class DbConnectionClosed : DbConnectionInternal
+    internal abstract class DbConnectionClosed : DbConnectionInternal
     {
         // Construct an "empty" connection
         protected DbConnectionClosed(
@@ -28,22 +28,22 @@ namespace System.Data.ProviderBase
         )
             : base(state, hidePassword, allowSetConnectionString) { }
 
-        override public string ServerVersion
+        public override string ServerVersion
         {
             get { throw ADP.ClosedConnectionError(); }
         }
 
-        override protected void Activate(SysTx.Transaction transaction)
+        protected override void Activate(SysTx.Transaction transaction)
         {
             throw ADP.ClosedConnectionError();
         }
 
-        override public DbTransaction BeginTransaction(IsolationLevel il)
+        public override DbTransaction BeginTransaction(IsolationLevel il)
         {
             throw ADP.ClosedConnectionError();
         }
 
-        override public void ChangeDatabase(string database)
+        public override void ChangeDatabase(string database)
         {
             throw ADP.ClosedConnectionError();
         }
@@ -56,17 +56,17 @@ namespace System.Data.ProviderBase
             // not much to do here...
         }
 
-        override protected void Deactivate()
+        protected override void Deactivate()
         {
             throw ADP.ClosedConnectionError();
         }
 
-        override public void EnlistTransaction(SysTx.Transaction transaction)
+        public override void EnlistTransaction(SysTx.Transaction transaction)
         {
             throw ADP.ClosedConnectionError();
         }
 
-        override protected internal DataTable GetSchema(
+        protected internal override DataTable GetSchema(
             DbConnectionFactory factory,
             DbConnectionPoolGroup poolGroup,
             DbConnection outerConnection,
@@ -98,7 +98,7 @@ namespace System.Data.ProviderBase
         }
     }
 
-    abstract internal class DbConnectionBusy : DbConnectionClosed
+    internal abstract class DbConnectionBusy : DbConnectionClosed
     {
         protected DbConnectionBusy(ConnectionState state)
             : base(state, true, false) { }
@@ -114,7 +114,7 @@ namespace System.Data.ProviderBase
         }
     }
 
-    sealed internal class DbConnectionClosedBusy : DbConnectionBusy
+    internal sealed class DbConnectionClosedBusy : DbConnectionBusy
     {
         // Closed Connection, Currently Busy - changing connection string
         internal static readonly DbConnectionInternal SingletonInstance =
@@ -124,7 +124,7 @@ namespace System.Data.ProviderBase
             : base(ConnectionState.Closed) { }
     }
 
-    sealed internal class DbConnectionOpenBusy : DbConnectionBusy
+    internal sealed class DbConnectionOpenBusy : DbConnectionBusy
     {
         // Open Connection, Currently Busy - closing connection
         internal static readonly DbConnectionInternal SingletonInstance =
@@ -134,7 +134,7 @@ namespace System.Data.ProviderBase
             : base(ConnectionState.Open) { }
     }
 
-    sealed internal class DbConnectionClosedConnecting : DbConnectionBusy
+    internal sealed class DbConnectionClosedConnecting : DbConnectionBusy
     {
         // Closed Connection, Currently Connecting
 
@@ -199,7 +199,7 @@ namespace System.Data.ProviderBase
         }
     }
 
-    sealed internal class DbConnectionClosedNeverOpened : DbConnectionClosed
+    internal sealed class DbConnectionClosedNeverOpened : DbConnectionClosed
     {
         // Closed Connection, Has Never Been Opened
 
@@ -210,7 +210,7 @@ namespace System.Data.ProviderBase
             : base(ConnectionState.Closed, false, true) { }
     }
 
-    sealed internal class DbConnectionClosedPreviouslyOpened : DbConnectionClosed
+    internal sealed class DbConnectionClosedPreviouslyOpened : DbConnectionClosed
     {
         // Closed Connection, Has Previously Been Opened
 

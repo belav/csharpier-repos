@@ -1824,7 +1824,7 @@ namespace System.Threading.Tasks
             where TInstance : class
         {
             /// <summary>A cached delegate used as the callback for the BeginXx method.</summary>
-            internal readonly static AsyncCallback s_completeFromAsyncResult =
+            internal static readonly AsyncCallback s_completeFromAsyncResult =
                 CompleteFromAsyncResult;
 
             /// <summary>A reference to the object on which the begin/end methods are invoked.</summary>

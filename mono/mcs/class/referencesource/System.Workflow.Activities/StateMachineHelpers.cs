@@ -157,7 +157,31 @@ namespace System.Workflow.Activities
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        static internal StateActivity GetCurrentState(ActivityExecutionContext context)
+        internal
+        /*
+        internal static bool IsInInitialStatePath(StateActivity state)
+        {
+            StateActivity rootState = GetRootState(state);
+            string initialStateName = GetInitialStateName(rootState);
+
+            StateActivity initialState = FindStateByName(rootState, initialStateName);
+            CompositeActivity current = initialState;
+            while (current != null)
+            {
+                if (current.QualifiedName == state.QualifiedName)
+                    return true;
+                current = current.Parent;
+            }
+            return false;
+        }
+         */
+
+        /// <summary>
+        /// Returns the State activity that is currently executing
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        static StateActivity GetCurrentState(ActivityExecutionContext context)
         {
             StateActivity state = context.Activity as StateActivity;
             if (state == null)
@@ -178,7 +202,7 @@ namespace System.Workflow.Activities
             return currentState;
         }
 
-        static internal StateActivity FindDynamicStateByName(
+        internal static StateActivity FindDynamicStateByName(
             StateActivity state,
             string stateQualifiedName
         )
@@ -211,7 +235,7 @@ namespace System.Workflow.Activities
                 return null;
         }
 
-        static internal StateActivity FindStateByName(StateActivity state, string qualifiedName)
+        internal static StateActivity FindStateByName(StateActivity state, string qualifiedName)
         {
             Debug.Assert(state != null);
             Debug.Assert(qualifiedName != null);
@@ -219,7 +243,7 @@ namespace System.Workflow.Activities
             return found;
         }
 
-        static internal Activity FindActivityByName(
+        internal static Activity FindActivityByName(
             CompositeActivity parentActivity,
             string qualifiedName
         )
@@ -227,7 +251,7 @@ namespace System.Workflow.Activities
             return parentActivity.GetActivityByName(qualifiedName, true);
         }
 
-        static internal bool ContainsEventActivity(CompositeActivity compositeActivity)
+        internal static bool ContainsEventActivity(CompositeActivity compositeActivity)
         {
             Debug.Assert(compositeActivity != null);
 
@@ -252,7 +276,7 @@ namespace System.Workflow.Activities
             return false;
         }
 
-        static internal IEventActivity GetEventActivity(EventDrivenActivity eventDriven)
+        internal static IEventActivity GetEventActivity(EventDrivenActivity eventDriven)
         {
             CompositeActivity sequenceActivity = eventDriven as CompositeActivity;
             Debug.Assert(eventDriven.EnabledActivities.Count > 0);
@@ -261,7 +285,7 @@ namespace System.Workflow.Activities
             return eventActivity;
         }
 
-        static internal EventDrivenActivity GetParentEventDriven(IEventActivity eventActivity)
+        internal static EventDrivenActivity GetParentEventDriven(IEventActivity eventActivity)
         {
             Activity activity = ((Activity)eventActivity).Parent;
             while (activity != null)
@@ -275,7 +299,7 @@ namespace System.Workflow.Activities
             return null;
         }
 
-        static internal bool ContainsState(StateActivity state, string stateName)
+        internal static bool ContainsState(StateActivity state, string stateName)
         {
             if (state == null)
                 throw new ArgumentNullException("state");

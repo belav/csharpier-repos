@@ -321,7 +321,7 @@ namespace System.ServiceModel.Channels
                 return builder.ToString();
             }
 
-            abstract protected string DirectScheme { get; }
+            protected abstract string DirectScheme { get; }
 
             public Uri CreateUri(string host, string name, bool isPrivate)
             {

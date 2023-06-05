@@ -117,7 +117,7 @@ namespace System.Web.Hosting
         private bool _isBusy;
         private int _busyCount;
 
-        private volatile static bool _stopListeningWasCalled; // static since it's process-wide
+        private static volatile bool _stopListeningWasCalled; // static since it's process-wide
         private bool _removedFromAppManager;
         private bool _appDomainShutdownStarted;
         private bool _shutdownInitiated;

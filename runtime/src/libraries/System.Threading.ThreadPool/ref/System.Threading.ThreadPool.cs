@@ -157,7 +157,7 @@ namespace System.Threading
 
         [System.CLSCompliantAttribute(false)]
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        public unsafe static bool UnsafeQueueNativeOverlapped(
+        public static unsafe bool UnsafeQueueNativeOverlapped(
             System.Threading.NativeOverlapped* overlapped
         )
         {

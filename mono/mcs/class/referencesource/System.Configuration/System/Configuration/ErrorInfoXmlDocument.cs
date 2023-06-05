@@ -92,7 +92,7 @@ namespace System.Configuration
             }
         }
 
-        static internal XmlNode CreateSectionXmlNode(ConfigXmlReader reader)
+        internal static XmlNode CreateSectionXmlNode(ConfigXmlReader reader)
         {
             ErrorInfoXmlDocument doc = new ErrorInfoXmlDocument();
             doc.LoadFromConfigXmlReader(reader);

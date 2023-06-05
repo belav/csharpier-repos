@@ -48,7 +48,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // Creates a ICustomProperty implementation for Jupiter
         // Called from ICustomPropertyProvider_GetProperty from within runtime
         //
-        static internal ICustomProperty CreateProperty(object target, string propertyName)
+        internal
+        //
+        // Creates a ICustomProperty implementation for Jupiter
+        // Called from ICustomPropertyProvider_GetProperty from within runtime
+        //
+        static ICustomProperty CreateProperty(object target, string propertyName)
         {
             Contract.Requires(target != null);
             Contract.Requires(propertyName != null);
@@ -72,7 +77,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // Called from ICustomPropertyProvider_GetIndexedProperty from within runtime
         //
         [System.Security.SecurityCritical]
-        static internal unsafe ICustomProperty CreateIndexedProperty(
+        internal static unsafe ICustomProperty CreateIndexedProperty(
             object target,
             string propertyName,
             TypeNameNative* pIndexedParamType
@@ -87,7 +92,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return CreateIndexedProperty(target, propertyName, indexedParamType);
         }
 
-        static internal ICustomProperty CreateIndexedProperty(
+        internal static ICustomProperty CreateIndexedProperty(
             object target,
             string propertyName,
             Type indexedParamType
@@ -115,7 +120,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         }
 
         [System.Security.SecurityCritical]
-        static internal unsafe void GetType(object target, TypeNameNative* pIndexedParamType)
+        internal static unsafe void GetType(object target, TypeNameNative* pIndexedParamType)
         {
             SystemTypeMarshaler.ConvertToNative(target.GetType(), pIndexedParamType);
         }

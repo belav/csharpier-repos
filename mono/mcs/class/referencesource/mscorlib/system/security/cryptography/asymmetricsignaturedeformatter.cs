@@ -29,8 +29,13 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        abstract public void SetKey(AsymmetricAlgorithm key);
-        abstract public void SetHashAlgorithm(String strName);
+        public
+        //
+        // public methods
+        //
+
+        abstract void SetKey(AsymmetricAlgorithm key);
+        public abstract void SetHashAlgorithm(String strName);
 
         public virtual bool VerifySignature(HashAlgorithm hash, byte[] rgbSignature)
         {
@@ -41,6 +46,6 @@ namespace System.Security.Cryptography
             return VerifySignature(hash.Hash, rgbSignature);
         }
 
-        abstract public bool VerifySignature(byte[] rgbHash, byte[] rgbSignature);
+        public abstract bool VerifySignature(byte[] rgbHash, byte[] rgbSignature);
     }
 }

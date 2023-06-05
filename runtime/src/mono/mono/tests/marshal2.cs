@@ -95,7 +95,7 @@ public class Tests
         public readonly int[,] TwoDimensionalArray;
     }
 
-    public unsafe static int Main(String[] args)
+    public static unsafe int Main(String[] args)
     {
         if (TestDriver.RunTests(typeof(Tests), args) != 0)
             return 34;

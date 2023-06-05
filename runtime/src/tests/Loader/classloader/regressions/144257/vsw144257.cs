@@ -18,7 +18,7 @@ class A
 
 class B : A
 {
-    new private void meth() { }
+    private new void meth() { }
 }
 
 class C : B, I

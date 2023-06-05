@@ -1828,12 +1828,12 @@ namespace System.Data.SqlClient
             }
         }
 
-        sealed internal class SqlConnectionStringBuilderConverter : ExpandableObjectConverter
+        internal sealed class SqlConnectionStringBuilderConverter : ExpandableObjectConverter
         {
             // converter classes should have public ctor
             public SqlConnectionStringBuilderConverter() { }
 
-            override public bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
                 if (
                     typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
@@ -1845,7 +1845,7 @@ namespace System.Data.SqlClient
                 return base.CanConvertTo(context, destinationType);
             }
 
-            override public object ConvertTo(
+            public override object ConvertTo(
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value,

@@ -3,7 +3,7 @@ public class Test
     delegate void D();
     static D d;
 
-    static public void TestFunc()
+    public static void TestFunc()
     {
         return;
 

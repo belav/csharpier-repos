@@ -519,10 +519,10 @@ namespace PInvokeTests
         internal static extern decimal DecimalTest(decimal value);
 
         [UnmanagedCallersOnly]
-        internal unsafe static void UnmanagedMethod(byte* address, byte value) => *address = value;
+        internal static unsafe void UnmanagedMethod(byte* address, byte value) => *address = value;
 
         [UnmanagedCallersOnly(CallConvs = new Type[] { typeof(CallConvStdcall) })]
-        internal unsafe static void StdcallMethod(byte* address, byte value) => *address = value;
+        internal static unsafe void StdcallMethod(byte* address, byte value) => *address = value;
 
         internal enum MagicEnum
         {
@@ -1490,7 +1490,7 @@ namespace PInvokeTests
             );
         }
 
-        private unsafe static void TestDecimal()
+        private static unsafe void TestDecimal()
         {
             Console.WriteLine("Testing Decimals");
             var d = new decimal(100, 101, 102, false, 1);
@@ -1601,7 +1601,7 @@ namespace PInvokeTests
             get { return handle == IntPtr.Zero || handle == _invalidHandleValue; }
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return ReleaseMemory(handle);
         }

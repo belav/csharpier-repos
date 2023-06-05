@@ -36,7 +36,7 @@ namespace System.Runtime.Caching
             Justification = "Grandfathered suppression from original caching code checkin"
         )]
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
-        internal extern static int GetModuleFileName(
+        internal static extern int GetModuleFileName(
             IntPtr module,
             StringBuilder filename,
             int size
@@ -48,7 +48,7 @@ namespace System.Runtime.Caching
             Justification = "Grandfathered suppression from original caching code checkin"
         )]
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
-        internal extern static int GlobalMemoryStatusEx(ref MEMORYSTATUSEX memoryStatusEx);
+        internal static extern int GlobalMemoryStatusEx(ref MEMORYSTATUSEX memoryStatusEx);
 
         /*
          * ADVAPI32.DLL

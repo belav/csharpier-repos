@@ -122,7 +122,7 @@ namespace Mono.Btls
         }
 
         [DllImport(BTLS_DYLIB)]
-        extern static void mono_btls_free(IntPtr data);
+        static extern void mono_btls_free(IntPtr data);
 
         protected void FreeDataPtr(IntPtr data)
         {

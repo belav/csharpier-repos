@@ -254,7 +254,7 @@ namespace System.Text
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override int GetByteCount(char[] chars, int index, int count)
+        public override unsafe int GetByteCount(char[] chars, int index, int count)
         {
             if (chars == null)
                 throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -358,7 +358,7 @@ namespace System.Text
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override int GetBytes(
+        public override unsafe int GetBytes(
             char[] chars,
             int charIndex,
             int charCount,
@@ -510,7 +510,7 @@ namespace System.Text
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public virtual int GetBytes(
+        public virtual unsafe int GetBytes(
             byte[] chars,
             int charIndex,
             int charCount,
@@ -689,7 +689,7 @@ namespace System.Text
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public override int GetChars(
+        public override unsafe int GetChars(
             byte[] bytes,
             int byteIndex,
             int byteCount,
@@ -825,7 +825,7 @@ namespace System.Text
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe public int GetChars(
+        public unsafe int GetChars(
             byte[] bytes,
             int byteIndex,
             int byteCount,

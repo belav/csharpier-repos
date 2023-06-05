@@ -101,7 +101,7 @@ namespace System.Data.Common
         }
 
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)] // MDAC 69508
-        static public DataColumn GetDataColumnBySchemaAction(
+        public static DataColumn GetDataColumnBySchemaAction(
             string sourceColumn,
             string dataSetColumn,
             DataTable dataTable,
@@ -187,7 +187,7 @@ namespace System.Data.Common
             );
         }
 
-        static internal DataColumn CreateDataColumnBySchemaAction(
+        internal static DataColumn CreateDataColumnBySchemaAction(
             string sourceColumn,
             string dataSetColumn,
             DataTable dataTable,
@@ -257,13 +257,13 @@ namespace System.Data.Common
             return SourceColumn;
         }
 
-        sealed internal class DataColumnMappingConverter
+        internal sealed class DataColumnMappingConverter
             : System.ComponentModel.ExpandableObjectConverter
         {
             // converter classes should have public ctor
             public DataColumnMappingConverter() { }
 
-            override public bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
                 if (typeof(InstanceDescriptor) == destinationType)
                 {
@@ -272,7 +272,7 @@ namespace System.Data.Common
                 return base.CanConvertTo(context, destinationType);
             }
 
-            override public object ConvertTo(
+            public override object ConvertTo(
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value,

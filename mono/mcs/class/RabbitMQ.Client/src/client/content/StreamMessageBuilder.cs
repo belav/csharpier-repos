@@ -66,7 +66,7 @@ namespace RabbitMQ.Client.Content
     public class StreamMessageBuilder : BasicMessageBuilder, IStreamMessageBuilder
     {
         ///<summary>MIME type associated with QPid StreamMessages.</summary>
-        public readonly static string MimeType = "jms/stream-message";
+        public static readonly string MimeType = "jms/stream-message";
 
         ///<summary>Construct an instance for writing. See superclass.</summary>
         public StreamMessageBuilder(IModel model)

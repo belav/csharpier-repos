@@ -160,7 +160,7 @@ namespace Mono.XBuild.Utilities
                 return path;
         }
 
-        readonly static char[] separators =
+        static readonly char[] separators =
         {
             Path.DirectorySeparatorChar,
             Path.VolumeSeparatorChar,

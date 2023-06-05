@@ -9,5 +9,5 @@ public class A : Attribute
 [A((object)AttributeTargets.All)]
 public class Test
 {
-    static public void Main() { }
+    public static void Main() { }
 }

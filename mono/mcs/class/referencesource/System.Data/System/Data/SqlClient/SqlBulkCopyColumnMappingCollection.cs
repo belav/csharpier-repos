@@ -119,7 +119,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        new public void Clear()
+        public new void Clear()
         {
             AssertWriteAccess();
             base.Clear();
@@ -160,7 +160,7 @@ namespace System.Data.SqlClient
             InnerList.Remove(value);
         }
 
-        new public void RemoveAt(int index)
+        public new void RemoveAt(int index)
         {
             AssertWriteAccess();
             base.RemoveAt(index);

@@ -318,7 +318,7 @@ namespace Mono.Net.Security
 
 #if MONO_FEATURE_BTLS
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal extern static bool IsBtlsSupported();
+        internal static extern bool IsBtlsSupported();
 #endif
 
         static MobileTlsProvider CreateDefaultProviderImpl()

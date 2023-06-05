@@ -874,7 +874,7 @@ namespace System.Threading.Tasks
         /// of <see cref="System.Threading.Tasks.TaskFactory{TResult}"/>, as would result from using
         /// the default constructor on the factory type.
         /// </remarks>
-        public new static TaskFactory<TResult> Factory
+        public static new TaskFactory<TResult> Factory
         {
             get { return s_Factory; }
         }

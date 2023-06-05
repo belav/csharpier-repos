@@ -274,7 +274,7 @@ namespace System.Windows.Forms.Layout
             return parent.AutoSize;
         }
 
-        static private Size GetPreferredControlSize(IArrangedElement child, Size proposed)
+        private static Size GetPreferredControlSize(IArrangedElement child, Size proposed)
         {
             var preferredsize = child.GetPreferredSize(proposed);
             int width,

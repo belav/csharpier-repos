@@ -94,7 +94,7 @@ namespace System.Web.UI.WebControls
         [Browsable(true)]
         [DefaultValue(true)]
         [Bindable(true)]
-        public virtual new bool Enabled
+        public new virtual bool Enabled
         {
             // Should there be any special code below? Doesn't look so...
             get { return base.Enabled; }

@@ -544,7 +544,7 @@ namespace System.Globalization
         //  31                     20 19   16 15                             0   bit
         private const int LOCALE_SORTID_MASK = 0x000f0000;
 
-        static private bool IsAlternateSortLcid(int lcid)
+        private static bool IsAlternateSortLcid(int lcid)
         {
             if (lcid == LOCALE_TRADITIONAL_SPANISH)
             {

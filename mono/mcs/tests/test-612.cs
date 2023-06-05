@@ -14,7 +14,7 @@
 //
 public class Abcdefghijklmnopqrstuvwxyz
 {
-    static public int Zyxwvutsrqp = 1;
+    public static int Zyxwvutsrqp = 1;
 }
 
 public class OO
@@ -280,7 +280,7 @@ public class OO
 
 public class Zyxwvutsrqp
 {
-    static public int Abcdefghijklmnopqrstuvwxyz = 2;
+    public static int Abcdefghijklmnopqrstuvwxyz = 2;
 }
 
 public class XXX

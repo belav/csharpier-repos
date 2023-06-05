@@ -1384,7 +1384,11 @@ namespace Mono.CSharp
         /// <summary>
         ///  Finds the most specific target Tx according to section 13.4.4
         /// </summary>
-        static public TypeSpec FindMostSpecificTarget(
+        public
+        /// <summary>
+        ///  Finds the most specific target Tx according to section 13.4.4
+        /// </summary>
+        static TypeSpec FindMostSpecificTarget(
             IList<MethodSpec> list,
             TypeSpec target,
             bool apply_explicit_conv_rules
@@ -1444,7 +1448,11 @@ namespace Mono.CSharp
         /// <summary>
         ///  User-defined Implicit conversions
         /// </summary>
-        static public Expression ImplicitUserConversion(
+        public
+        /// <summary>
+        ///  User-defined Implicit conversions
+        /// </summary>
+        static Expression ImplicitUserConversion(
             ResolveContext ec,
             Expression source,
             TypeSpec target,
@@ -1878,7 +1886,13 @@ namespace Mono.CSharp
         ///   `target_type'.  It returns a new expression that can be used
         ///   in a context that expects a `target_type'.
         /// </summary>
-        static public Expression ImplicitConversion(
+        public
+        /// <summary>
+        ///   Converts implicitly the resolved expression `expr' into the
+        ///   `target_type'.  It returns a new expression that can be used
+        ///   in a context that expects a `target_type'.
+        /// </summary>
+        static Expression ImplicitConversion(
             ResolveContext ec,
             Expression expr,
             TypeSpec target_type,
@@ -1911,7 +1925,18 @@ namespace Mono.CSharp
         ///   This is different from `ImplicitConversion' in that the
         ///   user defined implicit conversions are excluded.
         /// </summary>
-        static public Expression ImplicitConversionStandard(
+        public
+        /// <summary>
+        ///   Attempts to apply the `Standard Implicit
+        ///   Conversion' rules to the expression `expr' into
+        ///   the `target_type'.  It returns a new expression
+        ///   that can be used in a context that expects a
+        ///   `target_type'.
+        ///
+        ///   This is different from `ImplicitConversion' in that the
+        ///   user defined implicit conversions are excluded.
+        /// </summary>
+        static Expression ImplicitConversionStandard(
             ResolveContext ec,
             Expression expr,
             TypeSpec target_type,
@@ -2802,7 +2827,12 @@ namespace Mono.CSharp
         ///   Performs an explicit conversion of the expression `expr' whose
         ///   type is expr.Type to `target_type'.
         /// </summary>
-        static public Expression ExplicitConversionCore(
+        public
+        /// <summary>
+        ///   Performs an explicit conversion of the expression `expr' whose
+        ///   type is expr.Type to `target_type'.
+        /// </summary>
+        static Expression ExplicitConversionCore(
             ResolveContext ec,
             Expression expr,
             TypeSpec target_type,
@@ -2981,7 +3011,11 @@ namespace Mono.CSharp
         /// <summary>
         ///   Same as ExplicitConversion, only it doesn't include user defined conversions
         /// </summary>
-        static public Expression ExplicitConversionStandard(
+        public
+        /// <summary>
+        ///   Same as ExplicitConversion, only it doesn't include user defined conversions
+        /// </summary>
+        static Expression ExplicitConversionStandard(
             ResolveContext ec,
             Expression expr,
             TypeSpec target_type,
@@ -3020,7 +3054,12 @@ namespace Mono.CSharp
         ///   Performs an explicit conversion of the expression `expr' whose
         ///   type is expr.Type to `target_type'.
         /// </summary>
-        static public Expression ExplicitConversion(
+        public
+        /// <summary>
+        ///   Performs an explicit conversion of the expression `expr' whose
+        ///   type is expr.Type to `target_type'.
+        /// </summary>
+        static Expression ExplicitConversion(
             ResolveContext ec,
             Expression expr,
             TypeSpec target_type,

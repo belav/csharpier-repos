@@ -131,9 +131,10 @@ namespace System.IO
         }
     }
 
+    internal
     // Abstract Iterator, borrowed from Linq. Used in anticipation of need for similar enumerables
     // in the future
-    abstract internal class Iterator<TSource> : IEnumerable<TSource>, IEnumerator<TSource>
+    abstract class Iterator<TSource> : IEnumerable<TSource>, IEnumerator<TSource>
     {
         int threadId;
         internal int state;

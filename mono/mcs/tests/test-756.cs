@@ -17,7 +17,7 @@ class UnsafeTest
         public Foo foo;
     }
 
-    unsafe public static void Main()
+    public static unsafe void Main()
     {
         Console.WriteLine(sizeof(Foo));
     }

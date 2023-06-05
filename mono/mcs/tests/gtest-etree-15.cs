@@ -2,14 +2,14 @@ using System;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 
-static public class Foo
+public static class Foo
 {
-    static public int Helper(Expression<Predicate<int>> match)
+    public static int Helper(Expression<Predicate<int>> match)
     {
         return 0;
     }
 
-    static public void Main()
+    public static void Main()
     {
         Expression<Action<List<int>>> exp = x => x.Add(Helper(i => true));
         exp.Compile()(new List<int> { 1 });

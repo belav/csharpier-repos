@@ -141,7 +141,7 @@ namespace System.Activities.Tracking
             get { return (this.annotations != null && this.annotations.Count > 0); }
         }
 
-        protected abstract internal TrackingRecord Clone();
+        protected internal abstract TrackingRecord Clone();
 
         public override string ToString()
         {

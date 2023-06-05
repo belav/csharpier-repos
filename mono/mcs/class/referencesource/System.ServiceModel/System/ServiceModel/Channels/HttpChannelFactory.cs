@@ -716,7 +716,7 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static internal void TraceResponseReceived(
+        internal static void TraceResponseReceived(
             HttpWebResponse response,
             Message message,
             object receiver

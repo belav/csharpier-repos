@@ -47,7 +47,7 @@ namespace System.Web.Configuration
         // Cached matched rules based on WebBaseEvent Hashcode, and is for non-system events.
         Hashtable _cachedMatchedRulesForCustomEvents;
 
-        static internal HealthMonitoringSectionHelper GetHelper()
+        internal static HealthMonitoringSectionHelper GetHelper()
         {
             if (s_helper == null)
             {

@@ -21,7 +21,7 @@ namespace System.Workflow.Runtime.Hosting
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
     )]
-    abstract public class WorkflowRuntimeService
+    public abstract class WorkflowRuntimeService
     {
         private WorkflowRuntime _runtime;
         private WorkflowRuntimeServiceState state = WorkflowRuntimeServiceState.Stopped;
@@ -61,7 +61,7 @@ namespace System.Workflow.Runtime.Hosting
             get { return state; }
         }
 
-        virtual internal protected void Start()
+        protected internal virtual void Start()
         {
             if (_runtime == null)
                 throw new InvalidOperationException(
@@ -83,7 +83,7 @@ namespace System.Workflow.Runtime.Hosting
             state = WorkflowRuntimeServiceState.Starting;
         }
 
-        virtual internal protected void Stop()
+        protected internal virtual void Stop()
         {
             if (_runtime == null)
                 throw new InvalidOperationException(
@@ -105,9 +105,9 @@ namespace System.Workflow.Runtime.Hosting
             state = WorkflowRuntimeServiceState.Stopping;
         }
 
-        virtual protected void OnStarted() { }
+        protected virtual void OnStarted() { }
 
-        virtual protected void OnStopped() { }
+        protected virtual void OnStopped() { }
 
         private void HandleStarted(object source, WorkflowRuntimeEventArgs e)
         {

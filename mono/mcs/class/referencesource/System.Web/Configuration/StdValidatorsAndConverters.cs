@@ -13,21 +13,21 @@ namespace System.Web.Configuration
     // Common shared validators and type converter instances
     internal static class StdValidatorsAndConverters
     {
-        static private TypeConverter s_infiniteTimeSpanConverter;
-        static private TypeConverter s_timeSpanMinutesConverter;
-        static private TypeConverter s_timeSpanMinutesOrInfiniteConverter;
-        static private TypeConverter s_timeSpanSecondsConverter;
-        static private TypeConverter s_timeSpanSecondsOrInfiniteConverter;
-        static private TypeConverter s_whiteSpaceTrimStringConverter;
-        static private TypeConverter s_versionConverter;
+        private static TypeConverter s_infiniteTimeSpanConverter;
+        private static TypeConverter s_timeSpanMinutesConverter;
+        private static TypeConverter s_timeSpanMinutesOrInfiniteConverter;
+        private static TypeConverter s_timeSpanSecondsConverter;
+        private static TypeConverter s_timeSpanSecondsOrInfiniteConverter;
+        private static TypeConverter s_whiteSpaceTrimStringConverter;
+        private static TypeConverter s_versionConverter;
 
-        static private ConfigurationValidatorBase s_regexMatchTimeoutValidator;
-        static private ConfigurationValidatorBase s_positiveTimeSpanValidator;
-        static private ConfigurationValidatorBase s_nonEmptyStringValidator;
-        static private ConfigurationValidatorBase s_nonZeroPositiveIntegerValidator;
-        static private ConfigurationValidatorBase s_positiveIntegerValidator;
+        private static ConfigurationValidatorBase s_regexMatchTimeoutValidator;
+        private static ConfigurationValidatorBase s_positiveTimeSpanValidator;
+        private static ConfigurationValidatorBase s_nonEmptyStringValidator;
+        private static ConfigurationValidatorBase s_nonZeroPositiveIntegerValidator;
+        private static ConfigurationValidatorBase s_positiveIntegerValidator;
 
-        static internal TypeConverter InfiniteTimeSpanConverter
+        internal static TypeConverter InfiniteTimeSpanConverter
         {
             get
             {
@@ -40,7 +40,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal TypeConverter TimeSpanMinutesConverter
+        internal static TypeConverter TimeSpanMinutesConverter
         {
             get
             {
@@ -53,7 +53,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal TypeConverter TimeSpanMinutesOrInfiniteConverter
+        internal static TypeConverter TimeSpanMinutesOrInfiniteConverter
         {
             get
             {
@@ -66,7 +66,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal TypeConverter TimeSpanSecondsConverter
+        internal static TypeConverter TimeSpanSecondsConverter
         {
             get
             {
@@ -79,7 +79,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal TypeConverter TimeSpanSecondsOrInfiniteConverter
+        internal static TypeConverter TimeSpanSecondsOrInfiniteConverter
         {
             get
             {
@@ -92,7 +92,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal TypeConverter WhiteSpaceTrimStringConverter
+        internal static TypeConverter WhiteSpaceTrimStringConverter
         {
             get
             {
@@ -105,7 +105,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal TypeConverter VersionConverter
+        internal static TypeConverter VersionConverter
         {
             get
             {
@@ -118,7 +118,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal ConfigurationValidatorBase RegexMatchTimeoutValidator
+        internal static ConfigurationValidatorBase RegexMatchTimeoutValidator
         {
             get
             {
@@ -131,7 +131,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal ConfigurationValidatorBase PositiveTimeSpanValidator
+        internal static ConfigurationValidatorBase PositiveTimeSpanValidator
         {
             get
             {
@@ -144,7 +144,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal ConfigurationValidatorBase NonEmptyStringValidator
+        internal static ConfigurationValidatorBase NonEmptyStringValidator
         {
             get
             {
@@ -157,7 +157,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal ConfigurationValidatorBase NonZeroPositiveIntegerValidator
+        internal static ConfigurationValidatorBase NonZeroPositiveIntegerValidator
         {
             get
             {
@@ -170,7 +170,7 @@ namespace System.Web.Configuration
             }
         }
 
-        static internal ConfigurationValidatorBase PositiveIntegerValidator
+        internal static ConfigurationValidatorBase PositiveIntegerValidator
         {
             get
             {

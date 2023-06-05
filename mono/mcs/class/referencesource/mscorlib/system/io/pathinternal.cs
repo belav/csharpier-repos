@@ -423,7 +423,7 @@ namespace System.IO
         /// Gets the length of the root of the path (drive, share, etc.).
         /// </summary>
         [System.Security.SecuritySafeCritical]
-        internal unsafe static int GetRootLength(string path)
+        internal static unsafe int GetRootLength(string path)
         {
             fixed (char* value = path)
             {
@@ -435,7 +435,7 @@ namespace System.IO
         /// Gets the length of the root of the path (drive, share, etc.).
         /// </summary>
         [System.Security.SecuritySafeCritical]
-        internal unsafe static uint GetRootLength(StringBuffer path)
+        internal static unsafe uint GetRootLength(StringBuffer path)
         {
             if (path.Length == 0)
                 return 0;
@@ -443,7 +443,7 @@ namespace System.IO
         }
 
         [System.Security.SecurityCritical]
-        private unsafe static uint GetRootLength(char* path, ulong pathLength)
+        private static unsafe uint GetRootLength(char* path, ulong pathLength)
         {
             uint i = 0;
             uint volumeSeparatorLength = 2; // Length to the colon "C:"
@@ -503,7 +503,7 @@ namespace System.IO
         }
 
         [System.Security.SecurityCritical]
-        private unsafe static bool StartsWithOrdinal(char* source, ulong sourceLength, string value)
+        private static unsafe bool StartsWithOrdinal(char* source, ulong sourceLength, string value)
         {
             if (sourceLength < (ulong)value.Length)
                 return false;

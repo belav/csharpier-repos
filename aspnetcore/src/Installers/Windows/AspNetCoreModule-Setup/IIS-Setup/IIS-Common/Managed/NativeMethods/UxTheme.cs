@@ -11,7 +11,7 @@ namespace Microsoft.Web.Management.PInvoke.UxTheme
     internal static class NativeMethods
     {
         [DllImport("UxTheme.dll", ExactSpelling = true, CharSet = CharSet.Unicode)]
-        public extern static void SetWindowTheme(
+        public static extern void SetWindowTheme(
             IntPtr hWnd,
             string textSubAppName,
             string textSubIdList

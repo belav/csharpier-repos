@@ -31,7 +31,7 @@ namespace C5
     {
         IDirectedCollectionValue<T> directedcollectionvalue;
 
-        abstract public V Map(T item);
+        public abstract V Map(T item);
 
         public MappedDirectedCollectionValue(IDirectedCollectionValue<T> directedcollectionvalue)
         {
@@ -89,7 +89,7 @@ namespace C5
     {
         ICollectionValue<T> collectionvalue;
 
-        abstract public V Map(T item);
+        public abstract V Map(T item);
 
         public MappedCollectionValue(ICollectionValue<T> collectionvalue)
         {
@@ -149,7 +149,7 @@ namespace C5
     {
         IDirectedEnumerable<T> directedenumerable;
 
-        abstract public V Map(T item);
+        public abstract V Map(T item);
 
         public MappedDirectedEnumerable(IDirectedEnumerable<T> directedenumerable)
         {

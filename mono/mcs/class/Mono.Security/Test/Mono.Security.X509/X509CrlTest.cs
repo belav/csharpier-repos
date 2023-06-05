@@ -17,7 +17,7 @@ namespace MonoTests.Mono.Security.X509
     [TestFixture]
     public class X509CrlTest
     {
-        static public byte[] emptyCrl =
+        public static byte[] emptyCrl =
         {
             0x30,
             0x82,
@@ -555,7 +555,7 @@ namespace MonoTests.Mono.Security.X509
             Assert.AreEqual(3, crl.Extensions.Count, "Extensions.Count");
         }
 
-        static public byte[] bug78901 =
+        public static byte[] bug78901 =
         {
             0x30,
             0x82,
@@ -1087,7 +1087,7 @@ namespace MonoTests.Mono.Security.X509
             Assert.AreEqual(0, crl.Extensions.Count, "Extensions.Count");
         }
 
-        static public byte[] basicConstraintsCriticalcAFalseCACRL_crl =
+        public static byte[] basicConstraintsCriticalcAFalseCACRL_crl =
         {
             0x30,
             0x82,
@@ -1433,7 +1433,7 @@ namespace MonoTests.Mono.Security.X509
             0x28
         };
 
-        static public byte[] basicConstraintsCriticalcAFalseCACert_crt =
+        public static byte[] basicConstraintsCriticalcAFalseCACert_crt =
         {
             0x30,
             0x82,

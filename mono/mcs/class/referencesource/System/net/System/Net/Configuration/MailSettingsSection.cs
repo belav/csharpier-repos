@@ -33,7 +33,7 @@ namespace System.Net.Configuration
             get { return this.smtp; }
         }
 
-        static internal MailSettingsSectionGroupInternal GetSection()
+        internal static MailSettingsSectionGroupInternal GetSection()
         {
             return new MailSettingsSectionGroupInternal();
         }

@@ -18,7 +18,7 @@ namespace JIT.HardwareIntrinsics.General
 {
     public static partial class Program
     {
-        private unsafe static void ToStringSingle()
+        private static unsafe void ToStringSingle()
         {
             int size = Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
             Single[] values = new Single[size];

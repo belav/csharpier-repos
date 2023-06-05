@@ -27,10 +27,11 @@ namespace System.Workflow.Activities.Rules
         /// </summary>
         private delegate Literal LiteralMaker(object literalValue);
 
+        private
         /// <summary>
         /// Collection of literal factory methods indexed by type
         /// </summary>
-        static private Dictionary<Type, LiteralMaker> types = CreateMakersDictionary();
+        static Dictionary<Type, LiteralMaker> types = CreateMakersDictionary();
 
         /// <summary>
         /// The type of the literal

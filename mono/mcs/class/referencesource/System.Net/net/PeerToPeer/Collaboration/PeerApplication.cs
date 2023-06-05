@@ -597,7 +597,7 @@ namespace System.Net.PeerToPeer.Collaboration
             return false;
         }
 
-        public new static bool Equals(object objA, object objB)
+        public static new bool Equals(object objA, object objB)
         {
             PeerApplication comparandPeerApplication1 = objA as PeerApplication;
             PeerApplication comparandPeerApplication2 = objB as PeerApplication;

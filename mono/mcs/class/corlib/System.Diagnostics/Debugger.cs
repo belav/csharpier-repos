@@ -59,7 +59,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool IsAttached_internal();
+        private static extern bool IsAttached_internal();
 
         /// <summary>
         /// Causes a breakpoint to be signaled to an attached debugger.
@@ -110,7 +110,7 @@ namespace System.Diagnostics
 
 #if MONODROID
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static void Mono_UnhandledException_internal(Exception ex);
+        private static extern void Mono_UnhandledException_internal(Exception ex);
 
         internal static void Mono_UnhandledException(Exception ex)
         {

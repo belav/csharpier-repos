@@ -16,7 +16,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -37,7 +37,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -70,7 +70,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -86,7 +86,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }
@@ -156,7 +156,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -172,7 +172,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -200,7 +200,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -211,7 +211,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }
@@ -284,7 +284,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -300,7 +300,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -328,7 +328,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -339,7 +339,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }
@@ -415,7 +415,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -431,7 +431,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -459,7 +459,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -470,7 +470,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }
@@ -538,7 +538,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetByteCount(char* chars, int count)
+        public override unsafe int GetByteCount(char* chars, int count)
         {
             throw null;
         }
@@ -559,7 +559,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
+        public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
             throw null;
         }
@@ -592,7 +592,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetCharCount(byte* bytes, int count)
+        public override unsafe int GetCharCount(byte* bytes, int count)
         {
             throw null;
         }
@@ -608,7 +608,7 @@ namespace System.Text
         }
 
         [System.CLSCompliantAttribute(false)]
-        public unsafe override int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
+        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
             throw null;
         }

@@ -133,7 +133,7 @@ namespace System.Web.Caching
         const string IDENTITY = "identity";
         const string ASTERISK = "*";
 
-        static internal readonly char[] s_fieldSeparators;
+        internal static readonly char[] s_fieldSeparators;
 
         string _key;
         bool _recordedCacheMiss;

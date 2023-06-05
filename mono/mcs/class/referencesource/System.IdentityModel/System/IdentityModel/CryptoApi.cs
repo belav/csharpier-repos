@@ -183,7 +183,7 @@ namespace System.IdentityModel
             internal uint cbData;
             internal IntPtr pbData;
 
-            static internal int Size = Marshal.SizeOf(typeof(CRYPTOAPI_BLOB));
+            internal static int Size = Marshal.SizeOf(typeof(CRYPTOAPI_BLOB));
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -318,7 +318,7 @@ namespace System.IdentityModel
         [DllImport(CRYPT32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool CertAddCertificateLinkToStore(
+        internal static extern bool CertAddCertificateLinkToStore(
             [In] SafeCertStoreHandle hCertStore,
             [In] IntPtr pCertContext,
             [In] uint dwAddDisposition,
@@ -341,7 +341,7 @@ namespace System.IdentityModel
 
         [DllImport(CRYPT32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static bool CertVerifyCertificateChainPolicy(
+        internal static extern bool CertVerifyCertificateChainPolicy(
             [In] IntPtr pszPolicyOID,
             [In] SafeCertChainHandle pChainContext,
             [In] ref CERT_CHAIN_POLICY_PARA pPolicyPara,
@@ -351,7 +351,7 @@ namespace System.IdentityModel
         [DllImport(CRYPT32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern static void CertFreeCertificateChain(IntPtr handle);
+        internal static extern void CertFreeCertificateChain(IntPtr handle);
 
         // On Vista and higher, check the value of the machine FIPS policy
         [DllImport(BCRYPT, SetLastError = true)]

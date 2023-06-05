@@ -1,6 +1,7 @@
+public
 // Compiler options: -t:library
 
-static public class A
+static class A
 {
     public static void Foo(this int i) { }
 }

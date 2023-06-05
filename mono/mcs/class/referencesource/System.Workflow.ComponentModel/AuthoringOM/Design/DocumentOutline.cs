@@ -127,13 +127,13 @@ namespace System.Workflow.ComponentModel.Design
         #region Public Methods
         //completly reloads the document outline tree
         private bool needsExpandAll = true;
-        internal protected bool NeedsExpandAll
+        protected internal bool NeedsExpandAll
         {
             get { return this.needsExpandAll; }
             set { this.needsExpandAll = value; }
         }
 
-        internal protected TreeNode RootNode
+        protected internal TreeNode RootNode
         {
             get
             {

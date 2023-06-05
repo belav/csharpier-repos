@@ -90,7 +90,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
@@ -104,7 +110,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// Gets default line tension.
         /// </summary>
         /// <returns>Default line tension.</returns>
-        override protected float GetDefaultTension()
+        protected
+        #endregion
+
+        #region Default tension method
+
+        /// <summary>
+        /// Gets default line tension.
+        /// </summary>
+        /// <returns>Default line tension.</returns>
+        override float GetDefaultTension()
         {
             return 0.5f;
         }
@@ -198,18 +213,20 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return ChartTypeNames.Range; }
         }
 
+        public
         /// <summary>
         /// Number of supported Y value(s) per point
         /// </summary>
-        override public int YValuesPerPoint
+        override int YValuesPerPoint
         {
             get { return 2; }
         }
 
+        public
         /// <summary>
         /// Indicates that extra Y values are connected to the scale of the Y axis
         /// </summary>
-        override public bool ExtraYValuesConnectedToYAxis
+        override bool ExtraYValuesConnectedToYAxis
         {
             get { return true; }
         }
@@ -220,7 +237,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="series">Legend item series.</param>
         /// <returns>Legend item style.</returns>
-        override public LegendImageStyle GetLegendImageStyle(Series series)
+        public
+        /// <summary>
+        /// How to draw series/points in legend:
+        /// Filled rectangle, Line or Marker
+        /// </summary>
+        /// <param name="series">Legend item series.</param>
+        /// <returns>Legend item style.</returns>
+        override LegendImageStyle GetLegendImageStyle(Series series)
         {
             return LegendImageStyle.Rectangle;
         }
@@ -230,7 +254,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        override System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
@@ -244,7 +274,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// Gets default line tension.
         /// </summary>
         /// <returns>Line tension.</returns>
-        override protected float GetDefaultTension()
+        protected
+        #endregion
+
+        #region Default tension method
+
+        /// <summary>
+        /// Gets default line tension.
+        /// </summary>
+        /// <returns>Line tension.</returns>
+        override float GetDefaultTension()
         {
             return 0.0f;
         }
@@ -366,7 +405,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="points">Array of oints coordinates.</param>
         /// <param name="pointIndex">Index of point to draw.</param>
         /// <param name="tension">Line tension.</param>
-        override protected void DrawLine(
+        protected
+        /// <summary>
+        /// Override line drawing method to fill the range and draw lines.
+        /// </summary>
+        /// <param name="graph">Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="point">Point to draw the line for.</param>
+        /// <param name="series">Point series.</param>
+        /// <param name="points">Array of oints coordinates.</param>
+        /// <param name="pointIndex">Index of point to draw.</param>
+        /// <param name="tension">Line tension.</param>
+        override void DrawLine(
             ChartGraphics graph,
             CommonElements common,
             DataPoint point,

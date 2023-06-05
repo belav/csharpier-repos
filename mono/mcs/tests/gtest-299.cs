@@ -10,7 +10,7 @@ class B<T> { }
 
 class Test
 {
-    static public B<X::A> q;
+    public static B<X::A> q;
 
     public static void Main()
     {

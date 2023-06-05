@@ -28,7 +28,7 @@ namespace System.Data.ProviderBase
     using System.Diagnostics.CodeAnalysis;
     using System.Collections.Concurrent;
 
-    sealed internal class DbConnectionPool
+    internal sealed class DbConnectionPool
     {
         private enum State
         {
@@ -39,10 +39,11 @@ namespace System.Data.ProviderBase
 
         internal const Bid.ApiGroup PoolerTracePoints = Bid.ApiGroup.Pooling;
 
+        private
         // This class is a way to stash our cloned Tx key for later disposal when it's no longer needed.
         // We can't get at the key in the dictionary without enumerating entries, so we stash an extra
         // copy as part of the value.
-        sealed private class TransactedConnectionList : List<DbConnectionInternal>
+        sealed class TransactedConnectionList : List<DbConnectionInternal>
         {
             private SysTx.Transaction _transaction;
 
@@ -81,7 +82,7 @@ namespace System.Data.ProviderBase
             public DbConnectionOptions UserOptions { get; private set; }
         }
 
-        sealed private class TransactedConnectionPool
+        private sealed class TransactedConnectionPool
         {
             Dictionary<SysTx.Transaction, TransactedConnectionList> _transactedCxns;
 

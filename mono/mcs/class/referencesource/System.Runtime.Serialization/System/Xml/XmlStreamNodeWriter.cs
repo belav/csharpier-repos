@@ -528,7 +528,7 @@ namespace System.Xml
             Critical = "Contains unsafe code. Caller needs to validate arguments."
         )]
         [SecurityCritical]
-        unsafe protected void UnsafeWriteBytes(byte* bytes, int byteCount)
+        protected unsafe void UnsafeWriteBytes(byte* bytes, int byteCount)
         {
             FlushBuffer();
             byte[] buffer = this.buffer;
@@ -554,7 +554,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe protected void WriteUTF8Char(int ch)
+        protected unsafe void WriteUTF8Char(int ch)
         {
             if (ch < 0x80)
             {
@@ -597,7 +597,7 @@ namespace System.Xml
             Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
         )]
         [SecuritySafeCritical]
-        unsafe protected void WriteUTF8Chars(string value)
+        protected unsafe void WriteUTF8Chars(string value)
         {
             int count = value.Length;
             if (count > 0)
@@ -613,7 +613,7 @@ namespace System.Xml
             Critical = "Contains unsafe code. Caller needs to validate arguments."
         )]
         [SecurityCritical]
-        unsafe protected void UnsafeWriteUTF8Chars(char* chars, int charCount)
+        protected unsafe void UnsafeWriteUTF8Chars(char* chars, int charCount)
         {
             const int charChunkSize = bufferLength / maxBytesPerChar;
             while (charCount > charChunkSize)
@@ -639,7 +639,7 @@ namespace System.Xml
             Critical = "Contains unsafe code. Caller needs to validate arguments."
         )]
         [SecurityCritical]
-        unsafe protected void UnsafeWriteUnicodeChars(char* chars, int charCount)
+        protected unsafe void UnsafeWriteUnicodeChars(char* chars, int charCount)
         {
             const int charChunkSize = bufferLength / 2;
             while (charCount > charChunkSize)
@@ -665,7 +665,7 @@ namespace System.Xml
             Critical = "Contains unsafe code. Caller needs to validate arguments."
         )]
         [SecurityCritical]
-        unsafe protected int UnsafeGetUnicodeChars(
+        protected unsafe int UnsafeGetUnicodeChars(
             char* chars,
             int charCount,
             byte[] buffer,
@@ -687,7 +687,7 @@ namespace System.Xml
             Critical = "Contains unsafe code. Caller needs to validate arguments."
         )]
         [SecurityCritical]
-        unsafe protected int UnsafeGetUTF8Length(char* chars, int charCount)
+        protected unsafe int UnsafeGetUTF8Length(char* chars, int charCount)
         {
             char* charsMax = chars + charCount;
             while (chars < charsMax)
@@ -709,7 +709,7 @@ namespace System.Xml
             Critical = "Contains unsafe code. Caller needs to validate arguments."
         )]
         [SecurityCritical]
-        unsafe protected int UnsafeGetUTF8Chars(
+        protected unsafe int UnsafeGetUTF8Chars(
             char* chars,
             int charCount,
             byte[] buffer,

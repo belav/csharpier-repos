@@ -242,9 +242,9 @@ namespace System.Diagnostics
 #endif
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        unsafe private extern static void WriteWindowsDebugString(char* message);
+        private static extern unsafe void WriteWindowsDebugString(char* message);
 
-        unsafe private void WriteDebugString(string message)
+        private unsafe void WriteDebugString(string message)
         {
             if (OnWin32)
             {

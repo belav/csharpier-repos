@@ -63,7 +63,7 @@ namespace System.Workflow.Activities.Rules
             base.SetItem(index, item);
         }
 
-        new public void Add(RuleSet item)
+        public new void Add(RuleSet item)
         {
             if (this._runtimeInitialized)
                 throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));

@@ -59,7 +59,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public DSA Create()
+        public static
+        //
+        // public methods
+        //
+
+        new DSA Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.DSACryptoServiceProvider();
@@ -68,16 +73,19 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public DSA Create(String algName)
+        public static new DSA Create(String algName)
         {
             return (DSA)CryptoConfig.CreateFromName(algName);
         }
 
         // DSA does not encode the algorithm identifier into the signature blob, therefore CreateSignature and
         // VerifySignature do not need the HashAlgorithmName value, only SignData and VerifyData do.
-        abstract public byte[] CreateSignature(byte[] rgbHash);
+        public
+        // DSA does not encode the algorithm identifier into the signature blob, therefore CreateSignature and
+        // VerifySignature do not need the HashAlgorithmName value, only SignData and VerifyData do.
+        abstract byte[] CreateSignature(byte[] rgbHash);
 
-        abstract public bool VerifySignature(byte[] rgbHash, byte[] rgbSignature);
+        public abstract bool VerifySignature(byte[] rgbHash, byte[] rgbSignature);
 
         protected virtual byte[] HashData(
             byte[] data,
@@ -374,9 +382,9 @@ namespace System.Security.Cryptography
             return (sb.ToString());
         }
 
-        abstract public DSAParameters ExportParameters(bool includePrivateParameters);
+        public abstract DSAParameters ExportParameters(bool includePrivateParameters);
 
-        abstract public void ImportParameters(DSAParameters parameters);
+        public abstract void ImportParameters(DSAParameters parameters);
 
         private static Exception DerivedClassMustOverride()
         {

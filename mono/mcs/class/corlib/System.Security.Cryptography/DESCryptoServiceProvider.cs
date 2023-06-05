@@ -2116,7 +2116,7 @@ namespace System.Security.Cryptography
             Permutation(byteBuff, output, fpTab, true);
         }
 
-        static internal byte[] GetStrongKey()
+        internal static byte[] GetStrongKey()
         {
             byte[] key = KeyBuilder.Key(DESTransform.KEY_BYTE_SIZE);
             while (DES.IsWeakKey(key) || DES.IsSemiWeakKey(key))

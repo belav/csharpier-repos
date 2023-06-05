@@ -219,7 +219,7 @@ namespace System.Data.Metadata.Edm
 
             private Unbounded() { }
 
-            static internal Unbounded Instance
+            internal static Unbounded Instance
             {
                 get { return _instance; }
             }
@@ -238,7 +238,7 @@ namespace System.Data.Metadata.Edm
 
             private Variable() { }
 
-            static internal Variable Instance
+            internal static Variable Instance
             {
                 get { return _instance; }
             }

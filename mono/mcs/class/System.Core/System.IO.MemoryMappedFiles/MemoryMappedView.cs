@@ -77,7 +77,7 @@ namespace System.IO.MemoryMappedFiles
             get { return m_access; }
         }
 
-        internal unsafe static MemoryMappedView Create(
+        internal static unsafe MemoryMappedView Create(
             IntPtr handle,
             long offset,
             long size,

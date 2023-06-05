@@ -36,13 +36,14 @@ namespace Novell.Directory.Ldap
     /* package */
     public class InterThreadException : LdapException
     {
+        internal
         /// <summary> Returns the message ID of this message request.
         ///
         /// </summary>
         /// <returns> the message ID.  Returns -1 if no message
         /// is associated with this exception.
         /// </returns>
-        virtual internal int MessageID
+        virtual int MessageID
         {
             /* package */
 
@@ -56,6 +57,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        internal
         /// <summary> Returns the message type expected as a reply to
         /// the message associated with this message's request type.
         ///
@@ -63,7 +65,7 @@ namespace Novell.Directory.Ldap
         /// <returns> the message type of the expected reply.  Returns -1
         /// if no reply expected.
         /// </returns>
-        virtual internal int ReplyType
+        virtual int ReplyType
         {
             /* package */
 

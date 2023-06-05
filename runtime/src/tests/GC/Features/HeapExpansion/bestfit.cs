@@ -125,7 +125,7 @@ namespace Fragment
             );
         }
 
-        static public int Main(String[] args)
+        public static int Main(String[] args)
         {
             int numIterations = 0;
             int randomSeed = 0;

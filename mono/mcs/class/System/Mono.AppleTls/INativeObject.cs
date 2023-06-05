@@ -11,7 +11,10 @@ namespace ObjCRuntimeInternal
     {
         // help to avoid the (too common pattern)
         // 	var p = x == null ? IntPtr.Zero : x.Handle;
-        static public IntPtr GetHandle(this INativeObject self)
+        public
+        // help to avoid the (too common pattern)
+        // 	var p = x == null ? IntPtr.Zero : x.Handle;
+        static IntPtr GetHandle(this INativeObject self)
         {
             return self == null ? IntPtr.Zero : self.Handle;
         }

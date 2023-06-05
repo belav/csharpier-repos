@@ -17,7 +17,7 @@ namespace System.Data.ProviderBase
         protected readonly IDataReader _dataReader;
         protected int _fieldCount;
 
-        static internal DataReaderContainer Create(
+        internal static DataReaderContainer Create(
             IDataReader dataReader,
             bool returnProviderSpecificTypes
         )

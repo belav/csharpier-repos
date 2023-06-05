@@ -542,7 +542,7 @@ namespace System.IO.Pipes
         public const int MaxAllowedServerInstances = -1;
 
         [SecurityCritical]
-        private unsafe static readonly IOCompletionCallback WaitForConnectionCallback =
+        private static readonly unsafe IOCompletionCallback WaitForConnectionCallback =
             new IOCompletionCallback(NamedPipeServerStream.AsyncWaitForConnectionCallback);
 
         [System.Security.SecurityCritical]
@@ -1370,7 +1370,7 @@ namespace System.IO.Pipes
 
         // Callback to be called by the OS when completing the async WaitForConnection operation.
         [System.Security.SecurityCritical]
-        unsafe private static void AsyncWaitForConnectionCallback(
+        private static unsafe void AsyncWaitForConnectionCallback(
             uint errorCode,
             uint numBytes,
             NativeOverlapped* pOverlapped
@@ -2132,7 +2132,7 @@ namespace System.IO.Pipes
         // override because named pipe clients can't get/set properties when waiting to connect
         // or broken
         [System.Security.SecurityCritical]
-        protected override internal void CheckPipePropertyOperations()
+        protected internal override void CheckPipePropertyOperations()
         {
             base.CheckPipePropertyOperations();
 
@@ -2167,7 +2167,7 @@ namespace System.IO.Pipes
         }
     }
 
-    unsafe internal sealed class PipeAsyncResult : IAsyncResult
+    internal sealed unsafe class PipeAsyncResult : IAsyncResult
     {
         internal AsyncCallback _userCallback; // User code callback
         internal Object _userStateObject;

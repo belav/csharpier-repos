@@ -137,11 +137,11 @@ namespace System.Workflow.Activities
             return base.GetHashCode();
         }
 
-        internal protected abstract string GetContractFullName(IServiceProvider provider);
-        internal protected abstract Type GetContractType(IServiceProvider provider);
-        internal protected abstract bool GetIsOneWay(IServiceProvider provider);
-        internal protected abstract MethodInfo GetMethodInfo(IServiceProvider provider);
-        internal protected abstract OperationParameterInfoCollection GetParameters(
+        protected internal abstract string GetContractFullName(IServiceProvider provider);
+        protected internal abstract Type GetContractType(IServiceProvider provider);
+        protected internal abstract bool GetIsOneWay(IServiceProvider provider);
+        protected internal abstract MethodInfo GetMethodInfo(IServiceProvider provider);
+        protected internal abstract OperationParameterInfoCollection GetParameters(
             IServiceProvider provider
         );
     }

@@ -276,7 +276,7 @@ namespace System.Net
             }
         }
 
-        internal unsafe override void Dump(byte[] buffer, int offset, int length)
+        internal override unsafe void Dump(byte[] buffer, int offset, int length)
         {
             //if (!GlobalLog.s_DumpWebData) {
             //    return;
@@ -312,7 +312,7 @@ namespace System.Net
             }
         }
 
-        internal unsafe override void Dump(IntPtr pBuffer, int offset, int length)
+        internal override unsafe void Dump(IntPtr pBuffer, int offset, int length)
         {
             //if (!GlobalLog.s_DumpWebData) {
             //    return;

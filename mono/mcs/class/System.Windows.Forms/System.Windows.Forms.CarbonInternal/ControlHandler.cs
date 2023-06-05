@@ -306,6 +306,6 @@ namespace System.Windows.Forms.CarbonInternal
         static extern int HIViewGetFrame(IntPtr handle, ref HIRect rect);
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        extern static bool HIViewIsVisible(IntPtr vHnd);
+        static extern bool HIViewIsVisible(IntPtr vHnd);
     }
 }

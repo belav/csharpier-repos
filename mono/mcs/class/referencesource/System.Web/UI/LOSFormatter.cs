@@ -1064,7 +1064,7 @@ namespace System.Web.UI
             }
         }
 
-        static internal int EstimateSize(object obj)
+        internal static int EstimateSize(object obj)
         {
             if (obj == null)
                 return 0;

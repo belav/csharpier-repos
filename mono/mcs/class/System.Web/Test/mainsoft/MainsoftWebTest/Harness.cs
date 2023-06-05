@@ -68,7 +68,7 @@ namespace MonoTests.stand_alone.WebHarness
 
 #if NUNIT
         [Suite]
-        static public TestSuite Suite
+        public static TestSuite Suite
         {
             get
             {

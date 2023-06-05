@@ -32,6 +32,6 @@ namespace Mono.ObjectServices
     public class ObjectInspector
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int GetMemoryUsage(object x);
+        public static extern int GetMemoryUsage(object x);
     }
 }

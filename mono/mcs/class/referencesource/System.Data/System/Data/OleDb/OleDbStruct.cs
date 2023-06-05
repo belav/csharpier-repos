@@ -262,8 +262,9 @@ namespace System.Data.OleDb
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 2)]
 #else
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 8)]
+    internal
 #endif
-    sealed internal class tagDBLITERALINFO
+    sealed class tagDBLITERALINFO
     {
         [MarshalAs(UnmanagedType.LPWStr)]
         internal String pwszLiteralValue = null;
@@ -294,8 +295,9 @@ namespace System.Data.OleDb
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 2)]
 #else
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 8)]
+    internal
 #endif
-    sealed internal class tagDBPROPSET
+    sealed class tagDBPROPSET
     {
         internal IntPtr rgProperties;
         internal Int32 cProperties;
@@ -323,8 +325,9 @@ namespace System.Data.OleDb
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 2)]
 #else
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 8)]
+    internal
 #endif
-    sealed internal class tagDBPROP
+    sealed class tagDBPROP
     {
         internal Int32 dwPropertyID;
         internal Int32 dwOptions;
@@ -357,8 +360,9 @@ namespace System.Data.OleDb
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 2)]
 #else
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 8)]
+    internal
 #endif
-    sealed internal class tagDBPARAMS
+    sealed class tagDBPARAMS
     {
         internal IntPtr pData;
         internal Int32 cParamSets;
@@ -384,8 +388,9 @@ namespace System.Data.OleDb
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 2)]
 #else
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 8)]
+    internal
 #endif
-    sealed internal class tagDBCOLUMNINFO
+    sealed class tagDBCOLUMNINFO
     {
         [MarshalAs(UnmanagedType.LPWStr)]
         internal String pwszName = null;
@@ -455,8 +460,9 @@ namespace System.Data.OleDb
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 2)]
 #else
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 8)]
+    internal
 #endif
-    sealed internal class tagDBPROPINFOSET
+    sealed class tagDBPROPINFOSET
     {
         internal IntPtr rgPropertyInfos;
         internal Int32 cPropertyInfos;
@@ -478,8 +484,9 @@ namespace System.Data.OleDb
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 2)]
 #else
     [StructLayoutAttribute(LayoutKind.Sequential, Pack = 8)]
+    internal
 #endif
-    sealed internal class tagDBPROPINFO
+    sealed class tagDBPROPINFO
     {
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string pwszDescription;

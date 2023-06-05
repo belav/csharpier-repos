@@ -566,7 +566,7 @@ namespace System.Data.Metadata.Edm
             return Object.ReferenceEquals(this, other);
         }
 
-        static private Dictionary<
+        private static Dictionary<
             string,
             System.Collections.ObjectModel.ReadOnlyCollection<EdmFunction>
         > PopulateFunctionLookUpTable(ItemCollection itemCollection)

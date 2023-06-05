@@ -23,23 +23,23 @@ namespace System.IdentityModel.Tokens
         internal const string OasisWssSaml2TokenProfile11 =
             "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0";
 
-        static public string UserName
+        public static string UserName
         {
             get { return userName; }
         }
-        static public string X509Certificate
+        public static string X509Certificate
         {
             get { return x509Certificate; }
         }
-        static public string Kerberos
+        public static string Kerberos
         {
             get { return kerberos; }
         }
-        static public string Saml
+        public static string Saml
         {
             get { return saml; }
         }
-        static public string Rsa
+        public static string Rsa
         {
             get { return rsa; }
         }

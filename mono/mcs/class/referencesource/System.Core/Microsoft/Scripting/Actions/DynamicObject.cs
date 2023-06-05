@@ -520,7 +520,7 @@ namespace System.Dynamic
 
             private delegate DynamicMetaObject Fallback(DynamicMetaObject errorSuggestion);
 
-            private readonly static Expression[] NoArgs = new Expression[0];
+            private static readonly Expression[] NoArgs = new Expression[0];
 
             private static Expression[] GetConvertedArgs(params Expression[] args)
             {

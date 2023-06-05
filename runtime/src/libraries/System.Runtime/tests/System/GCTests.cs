@@ -1300,7 +1300,7 @@ namespace System.Tests
         }
 
         [Fact]
-        private unsafe static void AllocateArrayCheckPinning()
+        private static unsafe void AllocateArrayCheckPinning()
         {
             var list = new List<long[]>();
 

@@ -433,7 +433,7 @@ namespace System.Diagnostics.Tracing
             set { m_allKeywordMask = unchecked((long)value); }
         }
 
-        static private int FindNull(byte[] buffer, int idx)
+        private static int FindNull(byte[] buffer, int idx)
         {
             while (idx < buffer.Length && buffer[idx] != 0)
                 idx++;
@@ -1262,7 +1262,7 @@ namespace System.Diagnostics.Tracing
             "CA1045:DoNotPassTypesByReference"
         )]
         [System.Security.SecurityCritical]
-        internal unsafe protected bool WriteEvent(
+        protected internal unsafe bool WriteEvent(
             ref EventDescriptor eventDescriptor,
             Guid* activityID,
             Guid* childActivityID,

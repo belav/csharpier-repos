@@ -935,7 +935,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-        protected virtual new HtmlTextWriterTag TagKey
+        protected new virtual HtmlTextWriterTag TagKey
         {
             get { return HtmlTextWriterTag.Table; }
         }
@@ -2021,7 +2021,7 @@ namespace System.Web.UI.WebControls
                 _wizard = wizard;
             }
 
-            public override sealed void PrepareControlHierarchy()
+            public sealed override void PrepareControlHierarchy()
             {
                 if (_isDefault)
                     UpdateState();
@@ -2251,7 +2251,7 @@ namespace System.Web.UI.WebControls
                 _wizard = wizard;
             }
 
-            public override sealed void PrepareControlHierarchy()
+            public sealed override void PrepareControlHierarchy()
             {
                 if (_isDefault)
                     UpdateState();

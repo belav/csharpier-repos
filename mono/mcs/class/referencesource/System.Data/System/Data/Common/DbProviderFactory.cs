@@ -20,7 +20,7 @@ namespace System.Data.Common
     { // V1.2.3300
         protected DbProviderFactory() { }
 
-        virtual public bool CanCreateDataSourceEnumerator
+        public virtual bool CanCreateDataSourceEnumerator
         {
             get { return false; }
         }

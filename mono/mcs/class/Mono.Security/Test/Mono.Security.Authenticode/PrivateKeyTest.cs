@@ -24,7 +24,7 @@ namespace MonoTests.Mono.Security.Authenticode
     {
         private BitConverterLE() { }
 
-        unsafe private static byte[] GetUIntBytes(byte* bytes)
+        private static unsafe byte[] GetUIntBytes(byte* bytes)
         {
             if (BitConverter.IsLittleEndian)
                 return new byte[] { bytes[0], bytes[1], bytes[2], bytes[3] };
@@ -32,12 +32,12 @@ namespace MonoTests.Mono.Security.Authenticode
                 return new byte[] { bytes[3], bytes[2], bytes[1], bytes[0] };
         }
 
-        unsafe internal static byte[] GetBytes(int value)
+        internal static unsafe byte[] GetBytes(int value)
         {
             return GetUIntBytes((byte*)&value);
         }
 
-        unsafe private static void UIntFromBytes(byte* dst, byte[] src, int startIndex)
+        private static unsafe void UIntFromBytes(byte* dst, byte[] src, int startIndex)
         {
             if (BitConverter.IsLittleEndian)
             {
@@ -55,7 +55,7 @@ namespace MonoTests.Mono.Security.Authenticode
             }
         }
 
-        unsafe internal static int ToInt32(byte[] value, int startIndex)
+        internal static unsafe int ToInt32(byte[] value, int startIndex)
         {
             int ret;
 
@@ -72,7 +72,9 @@ namespace MonoTests.Mono.Security.Authenticode
     public class PrivateKeyTest
     {
         // because most crypto stuff works with byte[] buffers
-        static public void AssertEquals(string msg, byte[] array1, byte[] array2)
+        public
+        // because most crypto stuff works with byte[] buffers
+        static void AssertEquals(string msg, byte[] array1, byte[] array2)
         {
             if ((array1 == null) && (array2 == null))
                 return;

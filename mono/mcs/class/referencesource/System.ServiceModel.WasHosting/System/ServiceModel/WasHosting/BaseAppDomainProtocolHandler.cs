@@ -19,7 +19,7 @@ namespace System.ServiceModel.WasHosting
 
     abstract class BaseAppDomainProtocolHandler : AppDomainProtocolHandler
     {
-        public readonly static TimeSpan DefaultStopTimeout = TimeSpan.FromSeconds(30);
+        public static readonly TimeSpan DefaultStopTimeout = TimeSpan.FromSeconds(30);
 
         string protocolId;
         IListenerChannelCallback listenerChannelCallback;

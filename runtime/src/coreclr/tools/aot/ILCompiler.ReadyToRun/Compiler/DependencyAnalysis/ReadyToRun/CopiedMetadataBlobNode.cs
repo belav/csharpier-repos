@@ -124,7 +124,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        public unsafe override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
+        public override unsafe ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             ObjectDataBuilder builder = new ObjectDataBuilder(factory, relocsOnly);
             builder.RequireInitialPointerAlignment();

@@ -27,8 +27,8 @@ namespace System.Data.SqlClient
     ]
     public sealed class SqlDataAdapter : DbDataAdapter, IDbDataAdapter, ICloneable
     {
-        static private readonly object EventRowUpdated = new object();
-        static private readonly object EventRowUpdating = new object();
+        private static readonly object EventRowUpdated = new object();
+        private static readonly object EventRowUpdating = new object();
 
         private SqlCommand _deleteCommand,
             _insertCommand,
@@ -79,7 +79,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbDataAdapter_DeleteCommand),
         ]
-        new public SqlCommand DeleteCommand
+        public new SqlCommand DeleteCommand
         {
             get { return _deleteCommand; }
             set { _deleteCommand = value; }
@@ -101,7 +101,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbDataAdapter_InsertCommand),
         ]
-        new public SqlCommand InsertCommand
+        public new SqlCommand InsertCommand
         {
             get { return _insertCommand; }
             set { _insertCommand = value; }
@@ -123,7 +123,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Fill),
             ResDescriptionAttribute(Res.DbDataAdapter_SelectCommand),
         ]
-        new public SqlCommand SelectCommand
+        public new SqlCommand SelectCommand
         {
             get { return _selectCommand; }
             set { _selectCommand = value; }
@@ -135,7 +135,7 @@ namespace System.Data.SqlClient
             set { _selectCommand = (SqlCommand)value; }
         }
 
-        override public int UpdateBatchSize
+        public override int UpdateBatchSize
         {
             get { return _updateBatchSize; }
             set
@@ -159,7 +159,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbDataAdapter_UpdateCommand),
         ]
-        new public SqlCommand UpdateCommand
+        public new SqlCommand UpdateCommand
         {
             get { return _updateCommand; }
             set { _updateCommand = value; }
@@ -209,14 +209,14 @@ namespace System.Data.SqlClient
             remove { Events.RemoveHandler(EventRowUpdating, value); }
         }
 
-        override protected int AddToBatch(IDbCommand command)
+        protected override int AddToBatch(IDbCommand command)
         {
             int commandIdentifier = _commandSet.CommandCount;
             _commandSet.Append((SqlCommand)command);
             return commandIdentifier;
         }
 
-        override protected void ClearBatch()
+        protected override void ClearBatch()
         {
             _commandSet.Clear();
         }
@@ -226,7 +226,7 @@ namespace System.Data.SqlClient
             return new SqlDataAdapter(this);
         }
 
-        override protected RowUpdatedEventArgs CreateRowUpdatedEvent(
+        protected override RowUpdatedEventArgs CreateRowUpdatedEvent(
             DataRow dataRow,
             IDbCommand command,
             StatementType statementType,
@@ -236,7 +236,7 @@ namespace System.Data.SqlClient
             return new SqlRowUpdatedEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-        override protected RowUpdatingEventArgs CreateRowUpdatingEvent(
+        protected override RowUpdatingEventArgs CreateRowUpdatingEvent(
             DataRow dataRow,
             IDbCommand command,
             StatementType statementType,
@@ -246,7 +246,7 @@ namespace System.Data.SqlClient
             return new SqlRowUpdatingEventArgs(dataRow, command, statementType, tableMapping);
         }
 
-        override protected int ExecuteBatch()
+        protected override int ExecuteBatch()
         {
             Debug.Assert(null != _commandSet && (0 < _commandSet.CommandCount), "no commands");
             Bid.CorrelationTrace(
@@ -256,7 +256,7 @@ namespace System.Data.SqlClient
             return _commandSet.ExecuteNonQuery();
         }
 
-        override protected IDataParameter GetBatchedParameter(
+        protected override IDataParameter GetBatchedParameter(
             int commandIdentifier,
             int parameterIndex
         )
@@ -273,7 +273,7 @@ namespace System.Data.SqlClient
             return parameter;
         }
 
-        override protected bool GetBatchedRecordsAffected(
+        protected override bool GetBatchedRecordsAffected(
             int commandIdentifier,
             out int recordsAffected,
             out Exception error
@@ -290,7 +290,7 @@ namespace System.Data.SqlClient
             );
         }
 
-        override protected void InitializeBatching()
+        protected override void InitializeBatching()
         {
             Bid.Trace("<sc.SqlDataAdapter.InitializeBatching|API> %d#\n", ObjectID);
             _commandSet = new SqlCommandSet();
@@ -315,7 +315,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected void OnRowUpdated(RowUpdatedEventArgs value)
+        protected override void OnRowUpdated(RowUpdatedEventArgs value)
         {
             SqlRowUpdatedEventHandler handler = (SqlRowUpdatedEventHandler)Events[EventRowUpdated];
             if ((null != handler) && (value is SqlRowUpdatedEventArgs))
@@ -325,7 +325,7 @@ namespace System.Data.SqlClient
             base.OnRowUpdated(value);
         }
 
-        override protected void OnRowUpdating(RowUpdatingEventArgs value)
+        protected override void OnRowUpdating(RowUpdatingEventArgs value)
         {
             SqlRowUpdatingEventHandler handler = (SqlRowUpdatingEventHandler)
                 Events[EventRowUpdating];
@@ -336,7 +336,7 @@ namespace System.Data.SqlClient
             base.OnRowUpdating(value);
         }
 
-        override protected void TerminateBatching()
+        protected override void TerminateBatching()
         {
             if (null != _commandSet)
             {

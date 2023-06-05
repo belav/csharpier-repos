@@ -125,8 +125,12 @@ namespace System.Web
         /*
          * To be implemented by a derived class
          */
-        abstract protected Object AllocBuffer();
-        abstract public int BufferSize { get; }
+        protected
+        /*
+         * To be implemented by a derived class
+         */
+        abstract Object AllocBuffer();
+        public abstract int BufferSize { get; }
     }
 
     /*

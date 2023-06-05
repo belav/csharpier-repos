@@ -52,12 +52,13 @@ namespace Novell.Directory.Ldap
     /// </seealso>
     public class LdapControl : System.ICloneable
     {
+        public
         /// <summary> Returns the identifier of the control.
         ///
         /// </summary>
         /// <returns> The object ID of the control.
         /// </returns>
-        virtual public System.String ID
+        virtual System.String ID
         {
             get
             {
@@ -65,6 +66,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
+        public
         /// <summary> Returns whether the control is critical for the operation.
         ///
         /// </summary>
@@ -72,7 +74,7 @@ namespace Novell.Directory.Ldap
         /// operation to be executed, and false if the control is not required for
         /// the operation.
         /// </returns>
-        virtual public bool Critical
+        virtual bool Critical
         {
             get { return control.Criticality.booleanValue(); }
         }
@@ -83,12 +85,13 @@ namespace Novell.Directory.Ldap
             get { return registeredControls; }
         }
 
+        internal
         /// <summary> Returns the RFC 2251 Control object.
         ///
         /// </summary>
         /// <returns> An ASN.1 RFC 2251 Control.
         /// </returns>
-        virtual internal RfcControl Asn1Object
+        virtual RfcControl Asn1Object
         {
             /*package*/
 

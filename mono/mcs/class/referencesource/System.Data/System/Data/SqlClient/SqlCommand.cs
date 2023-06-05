@@ -137,8 +137,9 @@ namespace System.Data.SqlClient
         // Last TaskCompletionSource for reconnect task - use for cancellation only
         TaskCompletionSource<object> _reconnectionCompletionSource = null;
 
+        internal
 #if DEBUG
-        static internal int DebugForceAsyncWriteDelay { get; set; }
+        static int DebugForceAsyncWriteDelay { get; set; }
 #endif
         internal bool InPrepare
         {
@@ -348,10 +349,11 @@ namespace System.Data.SqlClient
         /// </summary>
         internal bool CachingQueryMetadataPostponed { get; set; }
 
+        private
         //
         //  Smi execution-specific stuff
         //
-        sealed private class CommandEventSink : SmiEventSink_Default
+        sealed class CommandEventSink : SmiEventSink_Default
         {
             private SqlCommand _command;
 
@@ -555,7 +557,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_Connection),
         ]
-        new public SqlConnection Connection
+        public new SqlConnection Connection
         {
             get { return _activeConnection; }
             set
@@ -643,7 +645,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected DbConnection DbConnection
+        protected override DbConnection DbConnection
         { // V1.2.3300
             get { return Connection; }
             set { Connection = (SqlConnection)value; }
@@ -718,7 +720,7 @@ namespace System.Data.SqlClient
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             ResDescriptionAttribute(Res.DbCommand_Transaction),
         ]
-        new public SqlTransaction Transaction
+        public new SqlTransaction Transaction
         {
             get
             {
@@ -746,7 +748,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected DbTransaction DbTransaction
+        protected override DbTransaction DbTransaction
         { // V1.2.3300
             get { return Transaction; }
             set { Transaction = (SqlTransaction)value; }
@@ -763,7 +765,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandText),
         ]
-        override public string CommandText
+        public override string CommandText
         { // V1.2.3300, XXXCommand V1.0.5000
             get
             {
@@ -801,7 +803,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandTimeout),
         ]
-        override public int CommandTimeout
+        public override int CommandTimeout
         { // V1.2.3300, XXXCommand V1.0.5000
             get { return _commandTimeout; }
             set
@@ -839,7 +841,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_CommandType),
         ]
-        override public CommandType CommandType
+        public override CommandType CommandType
         { // V1.2.3300, XXXCommand V1.0.5000
             get
             {
@@ -896,7 +898,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Data),
             ResDescriptionAttribute(Res.DbCommand_Parameters),
         ]
-        new public SqlParameterCollection Parameters
+        public new SqlParameterCollection Parameters
         {
             get
             {
@@ -910,7 +912,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        override protected DbParameterCollection DbParameterCollection
+        protected override DbParameterCollection DbParameterCollection
         { // V1.2.3300
             get { return Parameters; }
         }
@@ -920,7 +922,7 @@ namespace System.Data.SqlClient
             ResCategoryAttribute(Res.DataCategory_Update),
             ResDescriptionAttribute(Res.DbCommand_UpdatedRowSource),
         ]
-        override public UpdateRowSource UpdatedRowSource
+        public override UpdateRowSource UpdatedRowSource
         { // V1.2.3300, XXXCommand V1.0.5000
             get { return _updatedRowSource; }
             set
@@ -984,7 +986,7 @@ namespace System.Data.SqlClient
             this.IsDirty = true;
         }
 
-        override public void Prepare()
+        public override void Prepare()
         {
             SqlConnection.ExecutePermission.Demand();
 
@@ -1202,7 +1204,12 @@ namespace System.Data.SqlClient
         // It doesn't make sense to verify the connection exists or that it is open during cancel
         // because immediately after checkin the connection can be closed or removed via another thread.
         //
-        override public void Cancel()
+        public
+        // Cancel is supposed to be multi-thread safe.
+        // It doesn't make sense to verify the connection exists or that it is open during cancel
+        // because immediately after checkin the connection can be closed or removed via another thread.
+        //
+        override void Cancel()
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<sc.SqlCommand.Cancel|API> %d#", ObjectID);
@@ -1340,17 +1347,17 @@ namespace System.Data.SqlClient
             }
         }
 
-        new public SqlParameter CreateParameter()
+        public new SqlParameter CreateParameter()
         {
             return new SqlParameter();
         }
 
-        override protected DbParameter CreateDbParameter()
+        protected override DbParameter CreateDbParameter()
         {
             return CreateParameter();
         }
 
-        override protected void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
             { // release mananged objects
@@ -1365,7 +1372,7 @@ namespace System.Data.SqlClient
             base.Dispose(disposing);
         }
 
-        override public object ExecuteScalar()
+        public override object ExecuteScalar()
         {
             SqlConnection.ExecutePermission.Demand();
 
@@ -1436,7 +1443,7 @@ namespace System.Data.SqlClient
             return retResult;
         }
 
-        override public int ExecuteNonQuery()
+        public override int ExecuteNonQuery()
         {
             SqlConnection.ExecutePermission.Demand();
 
@@ -2625,7 +2632,7 @@ namespace System.Data.SqlClient
             return BeginExecuteReader(callback, stateObject, CommandBehavior.Default);
         }
 
-        override protected DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
+        protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
         {
             Bid.CorrelationTrace(
                 "<sc.SqlCommand.ExecuteDbDataReader|API|Correlation> ObjectID%d#, ActivityID %ls\n",
@@ -2634,7 +2641,7 @@ namespace System.Data.SqlClient
             return ExecuteReader(behavior, ADP.ExecuteReader);
         }
 
-        new public SqlDataReader ExecuteReader()
+        public new SqlDataReader ExecuteReader()
         {
             SqlStatistics statistics = null;
             IntPtr hscp;
@@ -2655,7 +2662,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        new public SqlDataReader ExecuteReader(CommandBehavior behavior)
+        public new SqlDataReader ExecuteReader(CommandBehavior behavior)
         {
             IntPtr hscp;
             Bid.ScopeEnter(
@@ -3389,22 +3396,22 @@ namespace System.Data.SqlClient
                 );
         }
 
-        new public Task<SqlDataReader> ExecuteReaderAsync()
+        public new Task<SqlDataReader> ExecuteReaderAsync()
         {
             return ExecuteReaderAsync(CommandBehavior.Default, CancellationToken.None);
         }
 
-        new public Task<SqlDataReader> ExecuteReaderAsync(CommandBehavior behavior)
+        public new Task<SqlDataReader> ExecuteReaderAsync(CommandBehavior behavior)
         {
             return ExecuteReaderAsync(behavior, CancellationToken.None);
         }
 
-        new public Task<SqlDataReader> ExecuteReaderAsync(CancellationToken cancellationToken)
+        public new Task<SqlDataReader> ExecuteReaderAsync(CancellationToken cancellationToken)
         {
             return ExecuteReaderAsync(CommandBehavior.Default, cancellationToken);
         }
 
-        new public Task<SqlDataReader> ExecuteReaderAsync(
+        public new Task<SqlDataReader> ExecuteReaderAsync(
             CommandBehavior behavior,
             CancellationToken cancellationToken
         )
@@ -3685,8 +3692,9 @@ namespace System.Data.SqlClient
             DateTimeScale // new in Katmai
         };
 
+        internal
         // Yukon- column ordinals (this array indexed by ProcParamsColIndex
-        static readonly internal string[] PreKatmaiProcParamsNames = new string[]
+        static readonly string[] PreKatmaiProcParamsNames = new string[]
         {
             "PARAMETER_NAME", // ParameterName,
             "PARAMETER_TYPE", // ParameterType,
@@ -3705,8 +3713,9 @@ namespace System.Data.SqlClient
             null, // Scale for datetime types with scale, introduced in Katmai
         };
 
+        internal
         // Katmai+ column ordinals (this array indexed by ProcParamsColIndex
-        static readonly internal string[] KatmaiProcParamsNames = new string[]
+        static readonly string[] KatmaiProcParamsNames = new string[]
         {
             "PARAMETER_NAME", // ParameterName,
             "PARAMETER_TYPE", // ParameterType,
@@ -4165,7 +4174,7 @@ namespace System.Data.SqlClient
             SecurityAction.Assert,
             Infrastructure = true
         )]
-        static internal string SqlNotificationContext()
+        internal static string SqlNotificationContext()
         {
             SqlConnection.VerifyExecutePermission();
 

@@ -25,10 +25,10 @@ namespace System.Data.OleDb
     using SysES = System.EnterpriseServices;
     using SysTx = System.Transactions;
 
-    sealed internal class OleDbConnectionInternal : DbConnectionInternal, IDisposable
+    internal sealed class OleDbConnectionInternal : DbConnectionInternal, IDisposable
     {
-        static private volatile OleDbServicesWrapper idataInitialize;
-        static private object dataInitializeLock = new object();
+        private static volatile OleDbServicesWrapper idataInitialize;
+        private static object dataInitializeLock = new object();
 
         internal readonly OleDbConnectionString ConnectionString; // parsed connection string attributes
 
@@ -197,7 +197,7 @@ namespace System.Data.OleDb
             get { return ConnectionString.Provider; }
         }
 
-        override public string ServerVersion
+        public override string ServerVersion
         { // MDAC 55481
             // consider making a method, not a property
             get
@@ -278,12 +278,12 @@ namespace System.Data.OleDb
             return (UnsafeNativeMethods.ICommandText)icommandText;
         }
 
-        override protected void Activate(SysTx.Transaction transaction)
+        protected override void Activate(SysTx.Transaction transaction)
         {
             throw ADP.NotSupported();
         }
 
-        override public DbTransaction BeginTransaction(IsolationLevel isolationLevel)
+        public override DbTransaction BeginTransaction(IsolationLevel isolationLevel)
         {
             OleDbConnection.ExecutePermission.Demand();
 
@@ -326,12 +326,12 @@ namespace System.Data.OleDb
             return transaction;
         }
 
-        override protected DbReferenceCollection CreateReferenceCollection()
+        protected override DbReferenceCollection CreateReferenceCollection()
         {
             return new OleDbReferenceCollection();
         }
 
-        override protected void Deactivate()
+        protected override void Deactivate()
         { // used by both managed and native pooling
             NotifyWeakReference(OleDbReferenceCollection.Closing);
 
@@ -364,7 +364,7 @@ namespace System.Data.OleDb
             base.Dispose();
         }
 
-        override public void EnlistTransaction(SysTx.Transaction transaction)
+        public override void EnlistTransaction(SysTx.Transaction transaction)
         { // MDAC 78997
             OleDbConnection.VerifyExecutePermission();
 
@@ -850,7 +850,7 @@ namespace System.Data.OleDb
         }
 
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
-        static private object CreateInstanceDataLinks()
+        private static object CreateInstanceDataLinks()
         {
             Type datalink = Type.GetTypeFromCLSID(ODB.CLSID_DataLinks, true);
             return Activator.CreateInstance(
@@ -866,7 +866,11 @@ namespace System.Data.OleDb
         // @devnote: should be multithread safe access to OleDbConnection.idataInitialize,
         // though last one wins for setting variable.  It may be different objects, but
         // OLE DB will ensure I'll work with just the single pool
-        static private OleDbServicesWrapper GetObjectPool()
+        private
+        // @devnote: should be multithread safe access to OleDbConnection.idataInitialize,
+        // though last one wins for setting variable.  It may be different objects, but
+        // OLE DB will ensure I'll work with just the single pool
+        static OleDbServicesWrapper GetObjectPool()
         {
             OleDbServicesWrapper wrapper = OleDbConnectionInternal.idataInitialize;
             if (null == wrapper)
@@ -906,7 +910,7 @@ namespace System.Data.OleDb
             return wrapper;
         }
 
-        static private void VersionCheck()
+        private static void VersionCheck()
         {
             // $
 
@@ -921,14 +925,16 @@ namespace System.Data.OleDb
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        static private void SetMTAApartmentState()
+        private static void SetMTAApartmentState()
         {
             // we are defaulting to a multithread apartment state
             Thread.CurrentThread.SetApartmentState(ApartmentState.MTA);
         }
 
         // @devnote: should be multithread safe
-        static public void ReleaseObjectPool()
+        public
+        // @devnote: should be multithread safe
+        static void ReleaseObjectPool()
         {
             OleDbConnectionInternal.idataInitialize = null;
         }

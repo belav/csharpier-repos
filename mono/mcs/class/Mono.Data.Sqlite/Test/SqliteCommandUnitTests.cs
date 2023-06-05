@@ -18,7 +18,7 @@ namespace MonoTests.Mono.Data.Sqlite
         string _uri;
         string _connectionString;
         SqliteConnection _conn;
-        readonly static string stringvalue = "my keyboard is better than yours : äöüß";
+        static readonly string stringvalue = "my keyboard is better than yours : äöüß";
 
         public SqliteCommandUnitTests() { }
 

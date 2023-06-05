@@ -372,10 +372,11 @@ namespace System.Data.Objects
             }
         }
 
+        protected
         /// <summary>
         /// Gets the LINQ query provider associated with this object context.
         /// </summary>
-        internal protected IQueryProvider QueryProvider
+        internal IQueryProvider QueryProvider
         {
             get
             {

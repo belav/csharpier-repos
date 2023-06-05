@@ -17,7 +17,7 @@ namespace IntelHardwareIntrinsicTest._CpuId
         const int Fail = 0;
 
         [Fact]
-        public unsafe static void CpuId()
+        public static unsafe void CpuId()
         {
             int testResult = Pass;
 

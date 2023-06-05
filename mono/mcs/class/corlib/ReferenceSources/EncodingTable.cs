@@ -1074,7 +1074,7 @@ namespace System.Globalization
         // Find the data item by binary searching the table that we have in native.
         // nativeCompareOrdinalWC is an internal-only function.
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe private static int internalGetCodePageFromName(String name)
+        private static unsafe int internalGetCodePageFromName(String name)
         {
             int left = 0;
             int right = lastEncodingItem;
@@ -1205,7 +1205,7 @@ namespace System.Globalization
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
-        unsafe internal static CodePageDataItem GetCodePageDataItem(int codepage)
+        internal static unsafe CodePageDataItem GetCodePageDataItem(int codepage)
         {
             CodePageDataItem dataItem;
 

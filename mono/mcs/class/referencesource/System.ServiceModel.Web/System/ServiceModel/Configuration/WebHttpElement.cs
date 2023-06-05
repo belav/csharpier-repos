@@ -134,7 +134,7 @@ namespace System.ServiceModel.Configuration
             get { return typeof(WebHttpBehavior); }
         }
 
-        internal protected override object CreateBehavior()
+        protected internal override object CreateBehavior()
         {
             return new WebHttpBehavior()
             {

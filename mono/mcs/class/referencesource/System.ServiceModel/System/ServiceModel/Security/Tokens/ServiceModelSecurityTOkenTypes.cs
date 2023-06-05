@@ -17,27 +17,27 @@ namespace System.ServiceModel.Security.Tokens
         const string secureConversation = Namespace + "/SecureConversation";
         const string sspiCredential = Namespace + "/SspiCredential";
 
-        static public string Spnego
+        public static string Spnego
         {
             get { return spnego; }
         }
-        static public string MutualSslnego
+        public static string MutualSslnego
         {
             get { return mutualSslnego; }
         }
-        static public string AnonymousSslnego
+        public static string AnonymousSslnego
         {
             get { return anonymousSslnego; }
         }
-        static public string SecurityContext
+        public static string SecurityContext
         {
             get { return securityContext; }
         }
-        static public string SecureConversation
+        public static string SecureConversation
         {
             get { return secureConversation; }
         }
-        static public string SspiCredential
+        public static string SspiCredential
         {
             get { return sspiCredential; }
         }

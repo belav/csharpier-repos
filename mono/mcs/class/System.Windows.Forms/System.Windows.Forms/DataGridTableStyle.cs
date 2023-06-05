@@ -42,7 +42,7 @@ namespace System.Windows.Forms
     [ToolboxItem(false)]
     public class DataGridTableStyle : Component, IDataGridEditingService
     {
-        readonly public static DataGridTableStyle DefaultTableStyle = new DataGridTableStyle(true);
+        public static readonly DataGridTableStyle DefaultTableStyle = new DataGridTableStyle(true);
 
         #region	Local Variables
         private static readonly Color def_alternating_backcolor = ThemeEngine

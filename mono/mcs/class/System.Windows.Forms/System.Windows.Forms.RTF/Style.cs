@@ -161,7 +161,7 @@ namespace System.Windows.Forms.RTF
             expanding = false;
         }
 
-        static public Style GetStyle(RTF rtf, int style_number)
+        public static Style GetStyle(RTF rtf, int style_number)
         {
             Style s;
 
@@ -172,7 +172,7 @@ namespace System.Windows.Forms.RTF
             return s;
         }
 
-        static public Style GetStyle(Style start, int style_number)
+        public static Style GetStyle(Style start, int style_number)
         {
             Style s;
 

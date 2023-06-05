@@ -3472,7 +3472,7 @@ namespace System.Net
             }
         }
 
-        private unsafe static int GetTokenOffsetFromBlob(IntPtr blob)
+        private static unsafe int GetTokenOffsetFromBlob(IntPtr blob)
         {
             Debug.Assert(blob != IntPtr.Zero);
             IntPtr tokenPointer = Marshal.ReadIntPtr(
@@ -3484,7 +3484,7 @@ namespace System.Net
             return (int)IntPtrHelper.Subtract(tokenPointer, blob);
         }
 
-        private unsafe static int GetTokenSizeFromBlob(IntPtr blob)
+        private static unsafe int GetTokenSizeFromBlob(IntPtr blob)
         {
             Debug.Assert(blob != IntPtr.Zero);
             return Marshal.ReadInt32(

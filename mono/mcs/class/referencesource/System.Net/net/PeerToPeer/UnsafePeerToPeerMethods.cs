@@ -65,21 +65,21 @@ namespace System.Net.PeerToPeer
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern static void PeerFreeData(IntPtr dataToFree);
+        internal static extern void PeerFreeData(IntPtr dataToFree);
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static Int32 PeerPnrpGetCloudInfo(
+        internal static extern Int32 PeerPnrpGetCloudInfo(
             out UInt32 pNumClouds,
             out SafePeerData pArrayOfClouds
         );
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static Int32 PeerPnrpStartup(ushort versionRequired);
+        internal static extern Int32 PeerPnrpStartup(ushort versionRequired);
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static Int32 PeerCreatePeerName(
+        internal static extern Int32 PeerCreatePeerName(
             string identity,
             string classfier,
             out SafePeerData peerName
@@ -90,7 +90,7 @@ namespace System.Net.PeerToPeer
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static Int32 PeerIdentityGetDefault(out SafePeerData defaultIdentity);
+        internal static extern Int32 PeerIdentityGetDefault(out SafePeerData defaultIdentity);
 
         /*
         [DllImport(P2P, CharSet = CharSet.Unicode)]
@@ -98,39 +98,39 @@ namespace System.Net.PeerToPeer
         */
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static Int32 PeerNameToPeerHostName(
+        internal static extern Int32 PeerNameToPeerHostName(
             string peerName,
             out SafePeerData peerHostName
         );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static Int32 PeerHostNameToPeerName(
+        internal static extern Int32 PeerHostNameToPeerName(
             string peerHostName,
             out SafePeerData peerName
         );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        public extern static Int32 PeerPnrpRegister(
+        public static extern Int32 PeerPnrpRegister(
             string pcwzPeerName,
             ref PEER_PNRP_REGISTRATION_INFO registrationInfo,
             out SafePeerNameUnregister handle
         );
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        public extern static Int32 PeerPnrpUnregister(IntPtr handle);
+        public static extern Int32 PeerPnrpUnregister(IntPtr handle);
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        public extern static Int32 PeerPnrpUpdateRegistration(
+        public static extern Int32 PeerPnrpUpdateRegistration(
             SafePeerNameUnregister hRegistration,
             ref PEER_PNRP_REGISTRATION_INFO registrationInfo
         );
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        public extern static Int32 PeerPnrpResolve(
+        public static extern Int32 PeerPnrpResolve(
             string pcwzPeerNAme,
             string pcwzCloudName,
             ref UInt32 pcEndPoints,
@@ -139,7 +139,7 @@ namespace System.Net.PeerToPeer
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        public extern static Int32 PeerPnrpStartResolve(
+        public static extern Int32 PeerPnrpStartResolve(
             string pcwzPeerNAme,
             string pcwzCloudName,
             UInt32 cEndPoints,
@@ -149,10 +149,10 @@ namespace System.Net.PeerToPeer
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        public extern static Int32 PeerPnrpGetEndpoint(IntPtr Handle, out SafePeerData pEndPoint);
+        public static extern Int32 PeerPnrpGetEndpoint(IntPtr Handle, out SafePeerData pEndPoint);
 
         [DllImport(P2P, CharSet = CharSet.Unicode)]
-        public extern static Int32 PeerPnrpEndResolve(IntPtr Handle);
+        public static extern Int32 PeerPnrpEndResolve(IntPtr Handle);
 
         private static object s_InternalSyncObject;
         private static volatile bool s_Initialized;

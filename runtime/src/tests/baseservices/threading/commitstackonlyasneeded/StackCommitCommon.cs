@@ -75,7 +75,7 @@ namespace StackCommitTest
         public const int PAGE_GUARD = 0x100;
     }
 
-    unsafe public static class Utility
+    public static unsafe class Utility
     {
         public static Int64 PageSize { get; private set; }
 
@@ -231,7 +231,7 @@ namespace StackCommitTest
             return result;
         }
 
-        static private bool RunTestItem(
+        private static bool RunTestItem(
             string threadName,
             bool shouldBePreCommitted,
             Int32 expectedThreadSize,
@@ -255,7 +255,7 @@ namespace StackCommitTest
             return result;
         }
 
-        static public bool RunTest(bool shouldBePreCommitted)
+        public static bool RunTest(bool shouldBePreCommitted)
         {
             if (
                 RunTestItem("Main", shouldBePreCommitted, -1, action => action())

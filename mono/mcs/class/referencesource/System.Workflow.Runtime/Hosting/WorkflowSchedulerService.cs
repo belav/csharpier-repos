@@ -8,13 +8,13 @@ namespace System.Workflow.Runtime.Hosting
     )]
     public abstract class WorkflowSchedulerService : WorkflowRuntimeService
     {
-        internal protected abstract void Schedule(WaitCallback callback, Guid workflowInstanceId);
-        internal protected abstract void Schedule(
+        protected internal abstract void Schedule(WaitCallback callback, Guid workflowInstanceId);
+        protected internal abstract void Schedule(
             WaitCallback callback,
             Guid workflowInstanceId,
             DateTime whenUtc,
             Guid timerId
         );
-        internal protected abstract void Cancel(Guid timerId);
+        protected internal abstract void Cancel(Guid timerId);
     }
 }

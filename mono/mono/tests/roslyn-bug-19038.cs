@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-unsafe public class C
+public unsafe class C
 {
     public int Value;
 

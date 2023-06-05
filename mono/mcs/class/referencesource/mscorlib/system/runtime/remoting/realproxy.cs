@@ -70,7 +70,7 @@ namespace System.Runtime.Remoting.Proxies
         Flags = SecurityPermissionFlag.Infrastructure
     )]
     [System.Runtime.InteropServices.ComVisible(true)]
-    abstract public class RealProxy
+    public abstract class RealProxy
     {
         // ************* NOTE ******
         // Object.h has unmanaged structure which maps this layout

@@ -887,7 +887,7 @@ namespace System.Security.Cryptography
             }
             return;
 
-            unsafe static int TransformBlock(
+            static unsafe int TransformBlock(
                 ICryptoTransform transform,
                 ReadOnlyMemory<byte> inputBuffer,
                 byte[] outputBuffer,
@@ -942,7 +942,7 @@ namespace System.Security.Cryptography
         }
 
         /// <inheritdoc/>
-        public unsafe override void CopyTo(Stream destination, int bufferSize)
+        public override unsafe void CopyTo(Stream destination, int bufferSize)
         {
             CheckCopyToArguments(destination, bufferSize);
 

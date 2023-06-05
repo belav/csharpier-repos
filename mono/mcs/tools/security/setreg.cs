@@ -19,12 +19,12 @@ namespace Mono.Tools
 {
     class SetRegistry
     {
-        static private void Header()
+        private static void Header()
         {
             Console.WriteLine(new AssemblyInfo().ToString());
         }
 
-        static private void Help()
+        private static void Help()
         {
             Console.WriteLine(
                 "Usage: setreg [options] [feature] [true|false]{0}",
@@ -41,7 +41,7 @@ namespace Mono.Tools
             Console.WriteLine("\t-?\tDisplay this help message");
         }
 
-        static private void Error(string message)
+        private static void Error(string message)
         {
             Header();
             Console.WriteLine("{0}{1}{0}", Environment.NewLine, message);

@@ -93,7 +93,7 @@ namespace System.Data.Common.Utils.Boolean
         private class NonNegatedDomainConstraintTreeVisitor<T_Variable, T_Element>
             : NonNegatedTreeVisitor<DomainConstraint<T_Variable, T_Element>>
         {
-            internal new static readonly NonNegatedDomainConstraintTreeVisitor<
+            internal static new readonly NonNegatedDomainConstraintTreeVisitor<
                 T_Variable,
                 T_Element
             > Instance = new NonNegatedDomainConstraintTreeVisitor<T_Variable, T_Element>();
@@ -113,7 +113,7 @@ namespace System.Data.Common.Utils.Boolean
         private class NegatedDomainConstraintTreeVisitor<T_Variable, T_Element>
             : NegatedTreeVisitor<DomainConstraint<T_Variable, T_Element>>
         {
-            internal new static readonly NegatedDomainConstraintTreeVisitor<
+            internal static new readonly NegatedDomainConstraintTreeVisitor<
                 T_Variable,
                 T_Element
             > Instance = new NegatedDomainConstraintTreeVisitor<T_Variable, T_Element>();

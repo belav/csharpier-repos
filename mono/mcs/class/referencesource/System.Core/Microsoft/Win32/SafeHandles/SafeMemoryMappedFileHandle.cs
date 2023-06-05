@@ -45,7 +45,7 @@ namespace Microsoft.Win32.SafeHandles
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return UnsafeNativeMethods.CloseHandle(handle);
         }

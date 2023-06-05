@@ -43,7 +43,7 @@ namespace System.Activities
 
         protected abstract void Execute(CodeActivityContext context);
 
-        sealed internal override void InternalExecute(
+        internal sealed override void InternalExecute(
             ActivityInstance instance,
             ActivityExecutor executor,
             BookmarkManager bookmarkManager
@@ -62,7 +62,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void InternalCancel(
+        internal sealed override void InternalCancel(
             ActivityInstance instance,
             ActivityExecutor executor,
             BookmarkManager bookmarkManager
@@ -71,7 +71,7 @@ namespace System.Activities
             Fx.Assert("Cancel should never be called on CodeActivity since it's synchronous");
         }
 
-        sealed internal override void InternalAbort(
+        internal sealed override void InternalAbort(
             ActivityInstance instance,
             ActivityExecutor executor,
             Exception terminationReason
@@ -80,7 +80,7 @@ namespace System.Activities
             // no-op, this is only called if an exception is thrown out of execute
         }
 
-        sealed internal override void OnInternalCacheMetadata(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadata(bool createEmptyBindings)
         {
             CodeActivityMetadata metadata = new CodeActivityMetadata(
                 this,
@@ -158,7 +158,7 @@ namespace System.Activities
 
         protected abstract TResult Execute(CodeActivityContext context);
 
-        sealed internal override void InternalExecute(
+        internal sealed override void InternalExecute(
             ActivityInstance instance,
             ActivityExecutor executor,
             BookmarkManager bookmarkManager
@@ -178,7 +178,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void InternalCancel(
+        internal sealed override void InternalCancel(
             ActivityInstance instance,
             ActivityExecutor executor,
             BookmarkManager bookmarkManager
@@ -187,7 +187,7 @@ namespace System.Activities
             Fx.Assert("Cancel should never be called on CodeActivity<T> since it's synchronous");
         }
 
-        sealed internal override void InternalAbort(
+        internal sealed override void InternalAbort(
             ActivityInstance instance,
             ActivityExecutor executor,
             Exception terminationReason
@@ -196,7 +196,7 @@ namespace System.Activities
             // no-op, this is only called if an exception is thrown out of execute
         }
 
-        sealed internal override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
         {
             CodeActivityMetadata metadata = new CodeActivityMetadata(
                 this,
@@ -221,7 +221,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override TResult InternalExecuteInResolutionContext(
+        internal sealed override TResult InternalExecuteInResolutionContext(
             CodeActivityContext context
         )
         {

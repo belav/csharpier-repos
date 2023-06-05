@@ -70,7 +70,7 @@ namespace System
         }
 
         [MonoTODO("Missing validation")]
-        static public ActivationContext CreatePartialActivationContext(ApplicationIdentity identity)
+        public static ActivationContext CreatePartialActivationContext(ApplicationIdentity identity)
         {
             if (identity == null)
                 throw new ArgumentNullException("identity");
@@ -82,7 +82,7 @@ namespace System
         }
 
         [MonoTODO("Missing validation")]
-        static public ActivationContext CreatePartialActivationContext(
+        public static ActivationContext CreatePartialActivationContext(
             ApplicationIdentity identity,
             string[] manifestPaths
         )

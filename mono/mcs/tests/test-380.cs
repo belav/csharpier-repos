@@ -2,7 +2,7 @@
 
 class T
 {
-    static unsafe public int Main()
+    public static unsafe int Main()
     {
         int* a = null;
         int** b = &a;

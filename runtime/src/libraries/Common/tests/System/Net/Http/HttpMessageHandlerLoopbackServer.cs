@@ -36,7 +36,7 @@ namespace System.Net.Test.Common
                 .ConfigureAwait(false);
         }
 
-        public async override Task<HttpRequestData> HandleRequestAsync(
+        public override async Task<HttpRequestData> HandleRequestAsync(
             HttpStatusCode statusCode = HttpStatusCode.OK,
             IList<HttpHeaderData> headers = null,
             string content = ""

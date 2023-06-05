@@ -29,7 +29,7 @@ namespace System.ServiceModel.ComIntegration
         static Guid clrAssemblyCustomID = new Guid("90883F05-3D28-11D2-8F17-00A0C9A6186D");
         static object instanceLock = new object();
 
-        static public ITypeCacheManager Provider
+        public static ITypeCacheManager Provider
         {
             get
             {
@@ -46,7 +46,7 @@ namespace System.ServiceModel.ComIntegration
                 return instance;
             }
         }
-        static internal ITypeCacheManager instance;
+        internal static ITypeCacheManager instance;
 
         // Convert to typeLibrary ID (GUID)
         private Dictionary<Guid, Assembly> assemblyTable;

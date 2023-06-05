@@ -239,7 +239,7 @@ namespace Tracing.Tests.Common
             return header;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return $"{{ Magic={Magic}; Size={Size}; CommandSet={CommandSet}; CommandId={CommandId}; Reserved={Reserved} }}";
         }
@@ -294,7 +294,7 @@ namespace Tracing.Tests.Common
             }
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append($"{{ Header={Header.ToString()}; ");

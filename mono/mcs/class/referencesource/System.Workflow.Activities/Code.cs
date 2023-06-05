@@ -41,7 +41,7 @@ namespace System.Workflow.Activities
             typeof(CodeActivity)
         );
 
-        protected override sealed ActivityExecutionStatus Execute(
+        protected sealed override ActivityExecutionStatus Execute(
             ActivityExecutionContext executionContext
         )
         {

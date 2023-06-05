@@ -35,7 +35,10 @@ namespace System.Web.Configuration
 
         // called by HostingEnvironment to initiliaze the singleton config
         // instance for the domain
-        static internal IServerConfig GetInstance(string version)
+        internal
+        // called by HostingEnvironment to initiliaze the singleton config
+        // instance for the domain
+        static IServerConfig GetInstance(string version)
         {
             if (s_instance == null)
             {

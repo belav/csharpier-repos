@@ -45,7 +45,7 @@ namespace System.Security.Policy
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class PolicyLevel
+    public sealed class PolicyLevel
     {
         private ArrayList m_fullTrustAssemblies;
         private ArrayList m_namedPermissionSets;

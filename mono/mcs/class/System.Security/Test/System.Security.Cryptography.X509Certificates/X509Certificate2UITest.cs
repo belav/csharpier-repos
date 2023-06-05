@@ -38,7 +38,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
     [TestFixture]
     public class X509Certificate2UITest
     {
-        static public byte[] cert =
+        public static byte[] cert =
         {
             0x30,
             0x82,

@@ -15,7 +15,7 @@ namespace LoadIjwFromModuleHandle
 {
     class LoadIjwFromModuleHandle
     {
-        unsafe static int Main(string[] args)
+        static unsafe int Main(string[] args)
         {
             // Disable running on Windows 7 until IJW activation work is complete.
             if (

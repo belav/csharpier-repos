@@ -47,7 +47,7 @@ namespace System.Net.Http.Functional.Tests
                 }
             }
 
-            public async override ValueTask<int> ReadAsync(
+            public override async ValueTask<int> ReadAsync(
                 Memory<byte> destination,
                 CancellationToken cancellationToken
             )

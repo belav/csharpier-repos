@@ -54,7 +54,7 @@ namespace System.Web.Util
             return (value1.LastWriteTime == value2.LastWriteTime) && (value1.Size == value2.Size);
         }
 
-        public unsafe static bool operator !=(FileTimeInfo value1, FileTimeInfo value2)
+        public static unsafe bool operator !=(FileTimeInfo value1, FileTimeInfo value2)
         {
             return !(value1 == value2);
         }
@@ -181,7 +181,9 @@ namespace System.Web.Util
         }
 
         // Fail if the physical path is not canonical
-        static internal void CheckSuspiciousPhysicalPath(string physicalPath)
+        internal
+        // Fail if the physical path is not canonical
+        static void CheckSuspiciousPhysicalPath(string physicalPath)
         {
             if (IsSuspiciousPhysicalPath(physicalPath))
             {
@@ -192,7 +194,11 @@ namespace System.Web.Util
         // Check whether the physical path is not canonical
         // NOTE: this API throws if we don't have permission to the file.
         // NOTE: The compare needs to be case insensitive (VSWhidbey 444513)
-        static internal bool IsSuspiciousPhysicalPath(string physicalPath)
+        internal
+        // Check whether the physical path is not canonical
+        // NOTE: this API throws if we don't have permission to the file.
+        // NOTE: The compare needs to be case insensitive (VSWhidbey 444513)
+        static bool IsSuspiciousPhysicalPath(string physicalPath)
         {
             bool pathTooLong;
 
@@ -266,7 +272,7 @@ namespace System.Web.Util
             SecurityAction.Assert,
             AllFiles = FileIOPermissionAccess.PathDiscovery
         )]
-        static internal bool IsSuspiciousPhysicalPath(string physicalPath, out bool pathTooLong)
+        internal static bool IsSuspiciousPhysicalPath(string physicalPath, out bool pathTooLong)
         {
             bool isSuspicious;
 
@@ -535,7 +541,9 @@ namespace System.Web.Util
         }
 
         // FindFile - given a file name, gets the file attributes and short form (8.3 format) of a file name.
-        static internal int FindFile(string path, out FindFileData data)
+        internal
+        // FindFile - given a file name, gets the file attributes and short form (8.3 format) of a file name.
+        static int FindFile(string path, out FindFileData data)
         {
             IntPtr hFindFile;
             UnsafeNativeMethods.WIN32_FIND_DATA wfd;
@@ -727,12 +735,12 @@ namespace System.Web.Util
         internal readonly DateTime UtcLastWriteTime;
         internal readonly long FileSize;
 
-        static internal FileAttributesData NonExistantAttributesData
+        internal static FileAttributesData NonExistantAttributesData
         {
             get { return new FileAttributesData(); }
         }
 
-        static internal int GetFileAttributes(string path, out FileAttributesData fad)
+        internal static int GetFileAttributes(string path, out FileAttributesData fad)
         {
             fad = null;
 

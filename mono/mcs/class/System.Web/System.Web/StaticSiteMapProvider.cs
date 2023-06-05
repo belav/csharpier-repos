@@ -52,7 +52,7 @@ namespace System.Web
             );
         }
 
-        internal protected override void AddNode(SiteMapNode node, SiteMapNode parentNode)
+        protected internal override void AddNode(SiteMapNode node, SiteMapNode parentNode)
         {
             if (node == null)
                 throw new ArgumentNullException("node");

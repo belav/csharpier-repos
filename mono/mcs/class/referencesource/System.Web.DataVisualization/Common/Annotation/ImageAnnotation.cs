@@ -185,7 +185,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(typeof(ContentAlignment), "MiddleCenter"),
             SRDescription("DescriptionAttributeImageAnnotation_Alignment"),
         ]
-        override public ContentAlignment Alignment
+        public override ContentAlignment Alignment
         {
             get { return base.Alignment; }
             set
@@ -259,7 +259,7 @@ namespace System.Web.UI.DataVisualization.Charting
             SerializationVisibilityAttribute(SerializationVisibility.Hidden),
             SRDescription("DescriptionAttributeSelectionPointsStyle"),
         ]
-        override internal SelectionPointsStyle SelectionPointsStyle
+        internal override SelectionPointsStyle SelectionPointsStyle
         {
             get { return SelectionPointsStyle.Rectangle; }
         }
@@ -282,7 +282,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(ColorConverter)),
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
-        override public Color ForeColor
+        public override Color ForeColor
         {
             get { return base.ForeColor; }
             set { base.ForeColor = value; }
@@ -299,7 +299,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Browsable(false),
             DefaultValue(typeof(Font), "Microsoft Sans Serif, 8pt"),
         ]
-        override public Font Font
+        public override Font Font
         {
             get { return base.Font; }
             set { base.Font = value; }
@@ -316,7 +316,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(ColorConverter)),
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
-        override public Color BackColor
+        public override Color BackColor
         {
             get { return base.BackColor; }
             set { base.BackColor = value; }
@@ -332,7 +332,7 @@ namespace System.Web.UI.DataVisualization.Charting
             NotifyParentPropertyAttribute(true),
             Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
         ]
-        override public ChartHatchStyle BackHatchStyle
+        public override ChartHatchStyle BackHatchStyle
         {
             get { return base.BackHatchStyle; }
             set { base.BackHatchStyle = value; }
@@ -348,7 +348,7 @@ namespace System.Web.UI.DataVisualization.Charting
             NotifyParentPropertyAttribute(true),
             Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
         ]
-        override public GradientStyle BackGradientStyle
+        public override GradientStyle BackGradientStyle
         {
             get { return base.BackGradientStyle; }
             set { base.BackGradientStyle = value; }
@@ -365,7 +365,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(ColorConverter)),
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
-        override public Color BackSecondaryColor
+        public override Color BackSecondaryColor
         {
             get { return base.BackSecondaryColor; }
             set { base.BackSecondaryColor = value; }
@@ -381,7 +381,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(ColorConverter)),
             Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
-        override public Color LineColor
+        public override Color LineColor
         {
             get { return base.LineColor; }
             set { base.LineColor = value; }
@@ -396,7 +396,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Browsable(false),
             SRDescription("DescriptionAttributeLineWidth"),
         ]
-        override public int LineWidth
+        public override int LineWidth
         {
             get { return base.LineWidth; }
             set { base.LineWidth = value; }
@@ -411,7 +411,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DefaultValue(ChartDashStyle.Solid),
             SRDescription("DescriptionAttributeLineDashStyle"),
         ]
-        override public ChartDashStyle LineDashStyle
+        public override ChartDashStyle LineDashStyle
         {
             get { return base.LineDashStyle; }
             set { base.LineDashStyle = value; }
@@ -434,7 +434,25 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="chart">
         /// Reference to the <see cref="Chart"/> owner control.
         /// </param>
-        override internal void Paint(Chart chart, ChartGraphics graphics)
+        internal
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        #region Painting
+
+        /// <summary>
+        /// Paints the annotation object on the specified graphics.
+        /// </summary>
+        /// <param name="graphics">
+        /// A <see cref="ChartGraphics"/> object, used to paint the annotation object.
+        /// </param>
+        /// <param name="chart">
+        /// Reference to the <see cref="Chart"/> owner control.
+        /// </param>
+        override void Paint(Chart chart, ChartGraphics graphics)
         {
             // Get annotation position in relative coordinates
             PointF firstPoint = PointF.Empty;
@@ -618,7 +636,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets text annotation content size based on the text and font.
         /// </summary>
         /// <returns>Annotation content position.</returns>
-        override internal RectangleF GetContentPosition()
+        internal
+        #endregion // Painting
+
+        #region Content Size
+
+        /// <summary>
+        /// Gets text annotation content size based on the text and font.
+        /// </summary>
+        /// <returns>Annotation content position.</returns>
+        override RectangleF GetContentPosition()
         {
             // Check image size
             if (this.Image.Length > 0)

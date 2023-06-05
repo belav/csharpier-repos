@@ -653,7 +653,7 @@ namespace C5
         /// Create an enumerator for this collection.
         /// </summary>
         /// <returns>The enumerator</returns>
-        public override abstract SCG.IEnumerator<T> GetEnumerator();
+        public abstract override SCG.IEnumerator<T> GetEnumerator();
 
         #region IShowable Members
 
@@ -1095,7 +1095,7 @@ namespace C5
         /// Create an enumerator for this collection.
         /// </summary>
         /// <returns>The enumerator</returns>
-        public override abstract SCG.IEnumerator<T> GetEnumerator();
+        public abstract override SCG.IEnumerator<T> GetEnumerator();
         #endregion
     }
 
@@ -1281,7 +1281,7 @@ namespace C5
         /// Create an enumerator for this collection.
         /// </summary>
         /// <returns>The enumerator</returns>
-        public override abstract SCG.IEnumerator<T> GetEnumerator();
+        public abstract override SCG.IEnumerator<T> GetEnumerator();
 
         /// <summary>
         /// <code>Forwards</code> if same, else <code>Backwards</code>

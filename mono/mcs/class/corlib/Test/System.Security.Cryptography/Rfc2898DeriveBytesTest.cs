@@ -44,7 +44,7 @@ namespace MonoTests.System.Security.Cryptography
     [TestFixture]
     public class Rfc2898DeriveBytesTest
     {
-        static private byte[] salt = { 0x12, 0x34, 0x56, 0x78, 0x78, 0x56, 0x34, 0x12 };
+        private static byte[] salt = { 0x12, 0x34, 0x56, 0x78, 0x78, 0x56, 0x34, 0x12 };
 
         [Test]
         public void ConstructorPasswordSalt()

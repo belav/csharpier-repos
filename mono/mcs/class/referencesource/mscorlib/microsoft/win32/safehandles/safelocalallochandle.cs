@@ -26,7 +26,7 @@ namespace Microsoft.Win32.SafeHandles
         }
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return Win32Native.LocalFree(handle) == IntPtr.Zero;
         }

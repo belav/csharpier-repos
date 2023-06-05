@@ -91,7 +91,7 @@ namespace System.Workflow.Activities.Rules
             get { return this._runtimeInitialized; }
         }
 
-        new public void Add(RuleCondition item)
+        public new void Add(RuleCondition item)
         {
             if (this._runtimeInitialized)
                 throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));

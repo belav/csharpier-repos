@@ -118,7 +118,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static IntPtr MainWindowHandle_icall(int pid);
+        private static extern IntPtr MainWindowHandle_icall(int pid);
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [MonitoringDescription("The handle of the main window of the process.")]
@@ -196,7 +196,7 @@ namespace System.Diagnostics
 
         /* data type is from the MonoProcessData enum in mono-proclib.h in the runtime */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static long GetProcessData(int pid, int data_type, out int error);
+        private static extern long GetProcessData(int pid, int data_type, out int error);
 
         [MonoTODO]
         [Obsolete("Use NonpagedSystemMemorySize64")]
@@ -348,7 +348,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static string ProcessName_icall(IntPtr handle);
+        private static extern string ProcessName_icall(IntPtr handle);
 
         static string ProcessName_internal(SafeProcessHandle handle)
         {
@@ -568,7 +568,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static IntPtr GetProcess_internal(int pid);
+        private static extern IntPtr GetProcess_internal(int pid);
 
         [MonoTODO("There is no support for retrieving process information from a remote machine")]
         public static Process GetProcessById(int processId, string machineName)
@@ -624,7 +624,7 @@ namespace System.Diagnostics
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static int[] GetProcesses_internal();
+        private static extern int[] GetProcesses_internal();
 
         [MonoTODO("There is no support for retrieving process information from a remote machine")]
         public static Process[] GetProcesses(string machineName)
@@ -669,13 +669,13 @@ namespace System.Diagnostics
 
 #if MONO_FEATURE_PROCESS_START
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool ShellExecuteEx_internal(
+        private static extern bool ShellExecuteEx_internal(
             ProcessStartInfo startInfo,
             ref ProcInfo procInfo
         );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool CreateProcess_internal(
+        private static extern bool CreateProcess_internal(
             ProcessStartInfo startInfo,
             IntPtr stdin,
             IntPtr stdout,

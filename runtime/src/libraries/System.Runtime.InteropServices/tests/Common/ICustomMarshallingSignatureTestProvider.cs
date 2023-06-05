@@ -5,60 +5,60 @@ namespace Microsoft.Interop.UnitTests
 {
     public interface ICustomMarshallingSignatureTestProvider
     {
-        public abstract static string BasicParameterByValue(
+        public static abstract string BasicParameterByValue(
             string type,
             string preDeclaration = ""
         );
 
-        public abstract static string BasicParameterWithByRefModifier(
+        public static abstract string BasicParameterWithByRefModifier(
             string byRefModifier,
             string type,
             string preDeclaration = ""
         );
 
-        public abstract static string BasicReturnType(string type, string preDeclaration = "");
+        public static abstract string BasicReturnType(string type, string preDeclaration = "");
 
-        public abstract static string BasicParametersAndModifiers(
+        public static abstract string BasicParametersAndModifiers(
             string typeName,
             string preDeclaration = ""
         );
 
-        public abstract static string BasicParametersAndModifiersNoRef(
+        public static abstract string BasicParametersAndModifiersNoRef(
             string typeName,
             string preDeclaration = ""
         );
 
-        public abstract static string MarshalUsingParametersAndModifiers(
+        public static abstract string MarshalUsingParametersAndModifiers(
             string type,
             string marshallerType,
             string preDeclaration = ""
         );
 
-        public abstract static string MarshalUsingCollectionCountInfoParametersAndModifiers(
+        public static abstract string MarshalUsingCollectionCountInfoParametersAndModifiers(
             string collectionType
         );
 
-        public abstract static string MarshalUsingCollectionParametersAndModifiers(
+        public static abstract string MarshalUsingCollectionParametersAndModifiers(
             string type,
             string marshallerType
         );
 
-        public abstract static string MarshalUsingCollectionOutConstantLength(
+        public static abstract string MarshalUsingCollectionOutConstantLength(
             string type,
             string predeclaration
         );
 
-        public abstract static string MarshalUsingCollectionReturnConstantLength(
+        public static abstract string MarshalUsingCollectionReturnConstantLength(
             string type,
             string predeclaration
         );
 
-        public abstract static string MarshalUsingCollectionReturnValueLength(
+        public static abstract string MarshalUsingCollectionReturnValueLength(
             string type,
             string marshallerType
         );
 
-        public abstract static string CustomElementMarshalling(
+        public static abstract string CustomElementMarshalling(
             string type,
             string marshallerType,
             string preDeclaration = ""

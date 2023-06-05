@@ -34,7 +34,9 @@ namespace System.Web.SessionState
         }
 
         // Called by custom session state module if they want to raise Session_End.
-        static public void RaiseSessionEnd(
+        public
+        // Called by custom session state module if they want to raise Session_End.
+        static void RaiseSessionEnd(
             IHttpSessionState session,
             Object eventSource,
             EventArgs eventArgs
@@ -48,10 +50,9 @@ namespace System.Web.SessionState
         }
 
         // Called by custom session state module
-        static public void AddHttpSessionStateToContext(
-            HttpContext context,
-            IHttpSessionState container
-        )
+        public
+        // Called by custom session state module
+        static void AddHttpSessionStateToContext(HttpContext context, IHttpSessionState container)
         {
             HttpSessionState sessionState = new HttpSessionState(container);
 
@@ -65,7 +66,7 @@ namespace System.Web.SessionState
             }
         }
 
-        static internal void AddHttpSessionStateModuleToContext(
+        internal static void AddHttpSessionStateModuleToContext(
             HttpContext context,
             SessionStateModule module,
             bool delayed
@@ -74,7 +75,7 @@ namespace System.Web.SessionState
             context.AddHttpSessionStateModule(module, delayed);
         }
 
-        static internal void RemoveHttpSessionStateFromContext(HttpContext context, bool delayed)
+        internal static void RemoveHttpSessionStateFromContext(HttpContext context, bool delayed)
         {
             if (!delayed)
             {
@@ -85,18 +86,22 @@ namespace System.Web.SessionState
         }
 
         // Called by custom session state module
-        static public void RemoveHttpSessionStateFromContext(HttpContext context)
+        public
+        // Called by custom session state module
+        static void RemoveHttpSessionStateFromContext(HttpContext context)
         {
             RemoveHttpSessionStateFromContext(context, false);
         }
 
         // Called by custom session state module
-        static public IHttpSessionState GetHttpSessionStateFromContext(HttpContext context)
+        public
+        // Called by custom session state module
+        static IHttpSessionState GetHttpSessionStateFromContext(HttpContext context)
         {
             return context.Session.Container;
         }
 
-        static public HttpStaticObjectsCollection GetSessionStaticObjects(HttpContext context)
+        public static HttpStaticObjectsCollection GetSessionStaticObjects(HttpContext context)
         {
             return context.Application.SessionStaticObjects.Clone();
         }
@@ -106,7 +111,13 @@ namespace System.Web.SessionState
         /// </summary>
         /// <param name="context">The HttpContext.</param>
         /// <returns>A value that indicates whether session state is required by the context.</returns>
-        static public bool IsSessionStateRequired(HttpContext context)
+        public
+        /// <summary>
+        /// Gets a value that indicates whether session state is required by the context.
+        /// </summary>
+        /// <param name="context">The HttpContext.</param>
+        /// <returns>A value that indicates whether session state is required by the context.</returns>
+        static bool IsSessionStateRequired(HttpContext context)
         {
             return context.RequiresSessionState;
         }
@@ -116,7 +127,13 @@ namespace System.Web.SessionState
         /// </summary>
         /// <param name="context">The HttpContext.</param>
         /// <returns>A value that indicates whether session state is read-only in the context.</returns>
-        static public bool IsSessionStateReadOnly(HttpContext context)
+        public
+        /// <summary>
+        /// Gets a value that indicates whether session state is read-only in the context.
+        /// </summary>
+        /// <param name="context">The HttpContext.</param>
+        /// <returns>A value that indicates whether session state is read-only in the context.</returns>
+        static bool IsSessionStateReadOnly(HttpContext context)
         {
             return context.ReadOnlySessionState;
         }
@@ -231,7 +248,7 @@ namespace System.Web.SessionState
             return new SessionStateStoreData(sessionItems, staticObjects, timeout);
         }
 
-        static internal void SerializeStoreData(
+        internal static void SerializeStoreData(
             SessionStateStoreData item,
             int initialStreamSize,
             out byte[] buf,
@@ -268,7 +285,7 @@ namespace System.Web.SessionState
             }
         }
 
-        static internal SessionStateStoreData DeserializeStoreData(
+        internal static SessionStateStoreData DeserializeStoreData(
             HttpContext context,
             Stream stream,
             bool compressionEnabled

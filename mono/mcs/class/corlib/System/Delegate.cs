@@ -808,6 +808,6 @@ namespace System
 
         /* Internal call largely inspired from MS Delegate.InternalAllocLike */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static MulticastDelegate AllocDelegateLike_internal(Delegate d);
+        internal static extern MulticastDelegate AllocDelegateLike_internal(Delegate d);
     }
 }

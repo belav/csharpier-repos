@@ -89,6 +89,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         public BoxPlotChart() { }
 
+        public
         #endregion
 
         #region IChartType interface implementation
@@ -96,23 +97,25 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Chart type name
         /// </summary>
-        virtual public string Name
+        virtual string Name
         {
             get { return ChartTypeNames.BoxPlot; }
         }
 
+        public
         /// <summary>
         /// True if chart type is stacked
         /// </summary>
-        virtual public bool Stacked
+        virtual bool Stacked
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if stacked chart type supports groups
         /// </summary>
-        virtual public bool SupportStackedGroups
+        virtual bool SupportStackedGroups
         {
             get { return false; }
         }
@@ -126,10 +129,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart type supports axes
         /// </summary>
-        virtual public bool RequireAxes
+        virtual bool RequireAxes
         {
             get { return true; }
         }
@@ -150,18 +154,20 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if chart type supports logarithmic axes
         /// </summary>
-        virtual public bool SupportLogarithmicAxes
+        virtual bool SupportLogarithmicAxes
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// True if chart type requires to switch the value (Y) axes position
         /// </summary>
-        virtual public bool SwitchValueAxes
+        virtual bool SwitchValueAxes
         {
             get { return false; }
         }
@@ -174,55 +180,61 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if each data point of a chart must be represented in the legend
         /// </summary>
-        virtual public bool DataPointsInLegend
+        virtual bool DataPointsInLegend
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// If the crossing value is auto Crossing value ZeroCrossing should be
         /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        virtual public bool ZeroCrossing
+        virtual bool ZeroCrossing
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// True if palette colors should be applied for each data point.
         /// Otherwise the color is applied to the series.
         /// </summary>
-        virtual public bool ApplyPaletteColorsToPoints
+        virtual bool ApplyPaletteColorsToPoints
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// Indicates that extra Y values are connected to the scale of the Y axis
         /// </summary>
-        virtual public bool ExtraYValuesConnectedToYAxis
+        virtual bool ExtraYValuesConnectedToYAxis
         {
             get { return true; }
         }
 
+        public
         /// <summary>
         /// Indicates that this is a one hundred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        virtual public bool HundredPercent
+        virtual bool HundredPercent
         {
             get { return false; }
         }
 
+        public
         /// <summary>
         /// Indicates that negative 100% stacked values are shown on
         /// the other side of the X axis
         /// </summary>
-        virtual public bool HundredPercentSupportNegative
+        virtual bool HundredPercentSupportNegative
         {
             get { return false; }
         }
@@ -233,15 +245,23 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="series">Legend item series.</param>
         /// <returns>Legend item style.</returns>
-        virtual public LegendImageStyle GetLegendImageStyle(Series series)
+        public
+        /// <summary>
+        /// How to draw series/points in legend:
+        /// Filled rectangle, Line or Marker
+        /// </summary>
+        /// <param name="series">Legend item series.</param>
+        /// <returns>Legend item style.</returns>
+        virtual LegendImageStyle GetLegendImageStyle(Series series)
         {
             return LegendImageStyle.Rectangle;
         }
 
+        public
         /// <summary>
         /// Number of supported Y value(s) per point
         /// </summary>
-        virtual public int YValuesPerPoint
+        virtual int YValuesPerPoint
         {
             get { return 6; }
         }
@@ -251,7 +271,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="registry">Chart types registry object.</param>
         /// <returns>Chart type image.</returns>
-        virtual public System.Drawing.Image GetImage(ChartTypeRegistry registry)
+        public
+        /// <summary>
+        /// Gets chart type image.
+        /// </summary>
+        /// <param name="registry">Chart types registry object.</param>
+        /// <returns>Chart type image.</returns>
+        virtual System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
@@ -268,7 +294,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        virtual public void Paint(
+        public
+        #endregion
+
+        #region Painting and Selection methods
+
+        /// <summary>
+        /// Paint box plot chart.
+        /// </summary>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        virtual void Paint(
             ChartGraphics graph,
             CommonElements common,
             ChartArea area,
@@ -287,7 +325,17 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        virtual protected void ProcessChartType(
+        protected
+        /// <summary>
+        /// This method recalculates size of the bars. This method is used
+        /// from Paint or Select method.
+        /// </summary>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        virtual void ProcessChartType(
             bool selection,
             ChartGraphics graph,
             CommonElements common,
@@ -871,7 +919,17 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="point">Data point to draw.</param>
         /// <param name="xPosition">X position.</param>
         /// <param name="width">Point width.</param>
-        virtual protected void DrawBoxPlotMarks(
+        protected
+        /// <summary>
+        /// Draws box plot markers.
+        /// </summary>
+        /// <param name="graph">Chart graphics object.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="ser">Data point series.</param>
+        /// <param name="point">Data point to draw.</param>
+        /// <param name="xPosition">X position.</param>
+        /// <param name="width">Point width.</param>
+        virtual void DrawBoxPlotMarks(
             ChartGraphics graph,
             ChartArea area,
             Series ser,
@@ -1060,7 +1118,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="markerSize">Marker size.</param>
         /// <param name="markerImage">Marker image.</param>
         /// <returns>Marker width and height.</returns>
-        virtual protected SizeF GetMarkerSize(
+        protected
+        /// <summary>
+        /// Returns marker size.
+        /// </summary>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="point">Data point.</param>
+        /// <param name="markerSize">Marker size.</param>
+        /// <param name="markerImage">Marker image.</param>
+        /// <returns>Marker width and height.</returns>
+        virtual SizeF GetMarkerSize(
             ChartGraphics graph,
             CommonElements common,
             ChartArea area,
@@ -1093,7 +1162,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="point">Data point to draw.</param>
         /// <param name="position">Label position.</param>
         /// <param name="pointIndex">Data point index.</param>
-        virtual protected void DrawLabel(
+        protected
+        /// <summary>
+        /// Draws box plot chart data point label.
+        /// </summary>
+        /// <param name="common">The Common elements object</param>
+        /// <param name="area">Chart area for this chart</param>
+        /// <param name="graph">Chart graphics object.</param>
+        /// <param name="ser">Data point series.</param>
+        /// <param name="point">Data point to draw.</param>
+        /// <param name="position">Label position.</param>
+        /// <param name="pointIndex">Data point index.</param>
+        virtual void DrawLabel(
             CommonElements common,
             ChartArea area,
             ChartGraphics graph,
@@ -1253,7 +1333,21 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        virtual protected void ProcessChartType3D(
+        protected
+        #endregion
+
+        #region 3D Drawing and Selection methods
+
+        /// <summary>
+        /// This method recalculates size of the bars. This method is used
+        /// from Paint or Select method.
+        /// </summary>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="graph">The Chart Graphics object.</param>
+        /// <param name="common">The Common elements object.</param>
+        /// <param name="area">Chart area for this chart.</param>
+        /// <param name="seriesToDraw">Chart series to draw.</param>
+        virtual void ProcessChartType3D(
             bool selection,
             ChartGraphics graph,
             CommonElements common,
@@ -1885,7 +1979,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="width">Point width.</param>
         /// <param name="zPosition">Series Z position.</param>
         /// <param name="depth">Series depth.</param>
-        virtual protected void DrawBoxPlotMarks3D(
+        protected
+        /// <summary>
+        /// Draws 3D box plot markers.
+        /// </summary>
+        /// <param name="graph">Chart graphics object.</param>
+        /// <param name="area">Chart area.</param>
+        /// <param name="ser">Data point series.</param>
+        /// <param name="point">Data point to draw.</param>
+        /// <param name="xPosition">X position.</param>
+        /// <param name="width">Point width.</param>
+        /// <param name="zPosition">Series Z position.</param>
+        /// <param name="depth">Series depth.</param>
+        virtual void DrawBoxPlotMarks3D(
             ChartGraphics graph,
             ChartArea area,
             Series ser,
@@ -1971,7 +2077,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointIndex">Index of the point.</param>
         /// <param name="yValueIndex">Index of the Y value to get.</param>
         /// <returns>Y value of the point.</returns>
-        virtual public double GetYValue(
+        public
+        #endregion
+
+        #region Y values related methods
+
+        /// <summary>
+        /// Helper function that returns the Y value of the point.
+        /// </summary>
+        /// <param name="common">Chart common elements.</param>
+        /// <param name="area">Chart area the series belongs to.</param>
+        /// <param name="series">Series of the point.</param>
+        /// <param name="point">Point object.</param>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="yValueIndex">Index of the Y value to get.</param>
+        /// <returns>Y value of the point.</returns>
+        virtual double GetYValue(
             CommonElements common,
             ChartArea area,
             Series series,
@@ -2250,7 +2371,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         /// <param name="boxPoint">Data Point.</param>
         /// <param name="yValues">Y values array.</param>
-        static private void BoxPlotAddUnusual(ref DataPoint boxPoint, List<double> yValues)
+        private
+        /// <summary>
+        /// Add unusual data point
+        /// </summary>
+        /// <param name="boxPoint">Data Point.</param>
+        /// <param name="yValues">Y values array.</param>
+        static void BoxPlotAddUnusual(ref DataPoint boxPoint, List<double> yValues)
         {
             // Get unusual values
             ArrayList unusualValuesList = new ArrayList();
@@ -2292,10 +2419,15 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="yValues">Y values array.</param>
         /// <param name="requiredPercentile">Required percentile</param>
         /// <returns>Array of 5 values</returns>
-        static private double[] CalculatePercentileValues(
-            List<double> yValues,
-            double[] requiredPercentile
-        )
+        private
+        /// <summary>
+        /// Calculates required percentile values from the data
+        /// </summary>
+        /// <returns>Array of 5 values</returns>
+        /// <param name="yValues">Y values array.</param>
+        /// <param name="requiredPercentile">Required percentile</param>
+        /// <returns>Array of 5 values</returns>
+        static double[] CalculatePercentileValues(List<double> yValues, double[] requiredPercentile)
         {
             // Create results array
             double[] result = new double[5];

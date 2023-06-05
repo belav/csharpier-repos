@@ -53,7 +53,12 @@ namespace System.Security.Cryptography
         // public methods
         //
 
-        new static public KeyedHashAlgorithm Create()
+        public static
+        //
+        // public methods
+        //
+
+        new KeyedHashAlgorithm Create()
         {
 #if FULL_AOT_RUNTIME
             return new System.Security.Cryptography.HMACSHA1();
@@ -62,7 +67,7 @@ namespace System.Security.Cryptography
 #endif
         }
 
-        new static public KeyedHashAlgorithm Create(String algName)
+        public static new KeyedHashAlgorithm Create(String algName)
         {
             return (KeyedHashAlgorithm)CryptoConfig.CreateFromName(algName);
         }

@@ -69,13 +69,13 @@ namespace System.Data.Services.Client
             this.source = source;
         }
 
-        abstract internal ResourceExpression CreateCloneWithNewType(Type type);
+        internal abstract ResourceExpression CreateCloneWithNewType(Type type);
 
-        abstract internal bool HasQueryOptions { get; }
+        internal abstract bool HasQueryOptions { get; }
 
         internal abstract Type ResourceType { get; }
 
-        abstract internal bool IsSingleton { get; }
+        internal abstract bool IsSingleton { get; }
 
         internal virtual List<string> ExpandPaths
         {

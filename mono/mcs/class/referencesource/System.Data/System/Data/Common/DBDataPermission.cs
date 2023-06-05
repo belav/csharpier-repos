@@ -159,7 +159,10 @@ namespace System.Data.Common
 
         // IPermission interface methods
         // [ObsoleteAttribute("override Copy instead of using default implementation")] // not inherited
-        override public IPermission Copy()
+        public
+        // IPermission interface methods
+        // [ObsoleteAttribute("override Copy instead of using default implementation")] // not inherited
+        override IPermission Copy()
         {
             DBDataPermission copy = CreateInstance();
             copy.CopyFrom(this);
@@ -190,7 +193,7 @@ namespace System.Data.Common
             System.Security.Permissions.SecurityAction.Demand,
             Name = "FullTrust"
         )] // V1.0.5000, MDAC 82936
-        virtual protected DBDataPermission CreateInstance()
+        protected virtual DBDataPermission CreateInstance()
         {
             // derived class should override with a different implementation avoiding reflection to allow semi-trusted scenarios
             return (
@@ -205,7 +208,7 @@ namespace System.Data.Common
             );
         }
 
-        override public IPermission Intersect(IPermission target)
+        public override IPermission Intersect(IPermission target)
         { // used during Deny actions
             if (null == target)
             {
@@ -261,7 +264,7 @@ namespace System.Data.Common
             return flag;
         }
 
-        override public bool IsSubsetOf(IPermission target)
+        public override bool IsSubsetOf(IPermission target)
         {
             if (null == target)
             {
@@ -306,7 +309,7 @@ namespace System.Data.Common
             return _isUnrestricted;
         }
 
-        override public IPermission Union(IPermission target)
+        public override IPermission Union(IPermission target)
         {
             if (null == target)
             {
@@ -368,7 +371,11 @@ namespace System.Data.Common
         // <IPermission class="...Permission" version="1" AllowBlankPassword=false>
         //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="address=;server=" KeyRestrictionBehavior=PreventUsage/>
         // </IPermission>
-        override public void FromXml(SecurityElement securityElement)
+        public
+        // <IPermission class="...Permission" version="1" AllowBlankPassword=false>
+        //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="address=;server=" KeyRestrictionBehavior=PreventUsage/>
+        // </IPermission>
+        override void FromXml(SecurityElement securityElement)
         {
             // code derived from CodeAccessPermission.ValidateElement
             if (null == securityElement)
@@ -437,7 +444,13 @@ namespace System.Data.Common
         //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="user id=;password=;" KeyRestrictionBehavior=AllowOnly/>
         //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="address=;server=" KeyRestrictionBehavior=PreventUsage/>
         // </IPermission>
-        override public SecurityElement ToXml()
+        public
+        // <IPermission class="...Permission" version="1" AllowBlankPassword=false>
+        //     <add ConnectionString="provider=x;data source=y;"/>
+        //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="user id=;password=;" KeyRestrictionBehavior=AllowOnly/>
+        //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="address=;server=" KeyRestrictionBehavior=PreventUsage/>
+        // </IPermission>
+        override SecurityElement ToXml()
         {
             Type type = this.GetType();
             SecurityElement root = new SecurityElement(XmlStr._IPermission);

@@ -53,7 +53,15 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
-        static public void Swap(ref Complex a, ref Complex b)
+        public
+        //---------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Swap two complex numbers
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        static void Swap(ref Complex a, ref Complex b)
         {
             Complex temp = a;
             a = b;
@@ -65,23 +73,36 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
-        static public void Swap(ref ComplexF a, ref ComplexF b)
+        public
+        /// <summary>
+        /// Swap two complex numbers
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        static void Swap(ref ComplexF a, ref ComplexF b)
         {
             ComplexF temp = a;
             a = b;
             b = temp;
         }
 
+        private
         //---------------------------------------------------------------------------------------------------
 
-        static private double _halfOfRoot2 = 0.5 * Math.Sqrt(2);
+        static double _halfOfRoot2 = 0.5 * Math.Sqrt(2);
 
         /// <summary>
         /// Calculate the square root of a complex number
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static public ComplexF Sqrt(ComplexF c)
+        public
+        /// <summary>
+        /// Calculate the square root of a complex number
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        static ComplexF Sqrt(ComplexF c)
         {
             double x = c.Re;
             double y = c.Im;
@@ -100,7 +121,13 @@ namespace Exocortex.DSP
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static public Complex Sqrt(Complex c)
+        public
+        /// <summary>
+        /// Calculate the square root of a complex number
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        static Complex Sqrt(Complex c)
         {
             double x = c.Re;
             double y = c.Im;
@@ -122,7 +149,16 @@ namespace Exocortex.DSP
         /// <param name="c"></param>
         /// <param name="exponent"></param>
         /// <returns></returns>
-        static public ComplexF Pow(ComplexF c, double exponent)
+        public
+        //---------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Calculate the power of a complex number
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="exponent"></param>
+        /// <returns></returns>
+        static ComplexF Pow(ComplexF c, double exponent)
         {
             double x = c.Re;
             double y = c.Im;
@@ -142,7 +178,14 @@ namespace Exocortex.DSP
         /// <param name="c"></param>
         /// <param name="exponent"></param>
         /// <returns></returns>
-        static public Complex Pow(Complex c, double exponent)
+        public
+        /// <summary>
+        /// Calculate the power of a complex number
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="exponent"></param>
+        /// <returns></returns>
+        static Complex Pow(Complex c, double exponent)
         {
             double x = c.Re;
             double y = c.Im;

@@ -106,7 +106,7 @@ namespace System.Reflection.Tests
         {
             private static int _backingField = 42;
 
-            public unsafe static ref MyRefStruct ReturnsRefToRefStruct()
+            public static unsafe ref MyRefStruct ReturnsRefToRefStruct()
             {
                 fixed (int* pInt = &_backingField)
                 {

@@ -762,7 +762,7 @@ namespace Mono.PkgConfig
             get { return customData != null && customData.Count > 0; }
         }
 
-        internal protected virtual bool IsValidPackage
+        protected internal virtual bool IsValidPackage
         {
             get { return HasCustomData; }
         }
